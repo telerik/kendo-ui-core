@@ -46,6 +46,19 @@
 @primary-disabled-background-color: lighten(@accent, 18%);
 @primary-disabled-border-color: lighten(@accent, 18%);
 @primary-disabled-gradient: false;
+// Input
+@input-text: @normal-text-color;
+@input-bg: @background;
+@input-border: darken(@normal-background, 12%);
+@input-shadow: false;
+@input-hovered-text: @input-text;
+@input-hovered-bg: @input-bg;
+@input-hovered-border: @input-border;
+@input-hovered-shadow: false;
+@input-focused-text: @input-text;
+@input-focused-bg: @input-bg;
+@input-focused-border: lighten(@hover-text-color, 8%);
+@input-focused-shadow: false;
 @sprite-image: url('@{image-folder}/sprite.png');
 @inversed-text-color: contrast(@accent);
 @accent-hover-background: multiply(@accent, #e4e4e4);

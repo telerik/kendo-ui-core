@@ -78,9 +78,9 @@ The below example demonstrates how files can be sent directly to the Azure Face 
                 async: {
                     saveUrl: saveUrl,
                     withCredentials: false,
-                    useArrayBuffer: true,
-                    multiple: false
+                    useArrayBuffer: true
                 },
+                multiple: false
                 success: onSuccess,
                 upload: onUpload,
                 showFileList: true,

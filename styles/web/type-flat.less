@@ -46,6 +46,19 @@
 @primary-disabled-background-color: darken(@background, 4%);
 @primary-disabled-border-color: darken(@background, 20%);
 @primary-disabled-gradient: false;
+// Input
+@input-text: @normal-text-color;
+@input-bg: @background;
+@input-border: @drop-down-border-color;
+@input-shadow: false;
+@input-hovered-text: @input-text;
+@input-hovered-bg: @input-bg;
+@input-hovered-border: @drop-down-hover-border-color;
+@input-hovered-shadow: false;
+@input-focused-text: @input-text;
+@input-focused-bg: @input-bg;
+@input-focused-border: @drop-down-focused-border-color;
+@input-focused-shadow: @focused-shadow;
 @sprite-image: url('@{image-folder}/sprite.png');
 @tooltip-texture: none;
 @inverse-text-color: @background;
@@ -102,8 +115,6 @@
 @active-filter-background-color: @accent;
 @cell-border-color: darken(@background, 20%);
 @column-highlight-background-color: darken(@background, 3%);
-@input-background-color: @background;
-@input-text-color: @normal-text-color;
 @shadow-color: rgba(0,0,0,.25);
 @shadow-inset-color: transparent;
 @link-text-color: @background;
@@ -344,15 +355,15 @@ textarea.k-textbox:hover,
 .k-textbox > input,
 .k-multiselect-wrap
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 // Bootstrap readonly input styling has more specificity than ours.
 .k-input[readonly]
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 .k-block,
@@ -966,7 +977,7 @@ div.k-filebrowser-dropzone em
         border-color: @widget-border-color;
 
         > input {
-            background-color: @input-background-color;
+            background-color: @input-bg;
             border-color: @widget-border-color;
         }
 
@@ -2646,8 +2657,8 @@ html .km-pane-wrapper .km-widget,
     .k-list-scroller {
         padding: 3px;
         border-color: @widget-border-color;
-        background-color: @input-background-color;
-        color: @input-text-color;
+        background-color: @input-bg;
+        color: @input-text;
     }
 
     .k-drop-hint {

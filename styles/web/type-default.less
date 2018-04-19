@@ -46,6 +46,19 @@
 @primary-disabled-background-color: lighten(@accent, 8%);
 @primary-disabled-border-color: @primary-disabled-text-color;
 @primary-disabled-gradient: @selected-gradient;
+// Input
+@input-text: @normal-text-color;
+@input-bg: contrast(@normal-text-color, @base, #fff, 0.5);
+@input-border: @drop-down-border-color;
+@input-shadow: false;
+@input-hovered-text: @input-text;
+@input-hovered-bg: @input-bg;
+@input-hovered-border: @drop-down-hover-border-color;
+@input-hovered-shadow: false;
+@input-focused-text: @input-text;
+@input-focused-bg: @input-bg;
+@input-focused-border: @drop-down-focused-border-color;
+@input-focused-shadow: @focused-shadow;
 @tooltip-texture: @texture;
 @sprite-image: url('@{image-folder}/sprite.png');
 @inverse-text-color: contrast(@normal-text-color);
@@ -53,8 +66,6 @@
 @select-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
 @select-hover-background-color: saturate(@hover-background, 1%);
 @select-group-background-color: @base;
-@input-background-color: contrast(@normal-text-color, @base, #fff, 0.5);
-@input-text-color: @normal-text-color;
 @link-text-color: saturate(@normal-text-color, 1%);
 @header-text-color: contrast(@selected-background, lighten(@normal-text-color, 1%), darken(@normal-text-color, 13%), 0.5);
 @header-background-color: saturate(@base, 4%);
@@ -349,15 +360,15 @@ textarea.k-textbox:hover,
 .k-textbox > input,
 .k-multiselect-wrap
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 // Bootstrap readonly input styling has more specificity than ours.
 .k-input[readonly]
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 .k-block,
@@ -2433,7 +2444,7 @@ textarea.k-textbox,
     .k-state-focused
     {
         .k-input {
-            color: @input-text-color;
+            color: @input-text;
         }
     }
 }
@@ -2595,7 +2606,7 @@ textarea.k-textbox,
     .k-list-scroller {
         padding: 2px;
         border-color: @widget-border-color;
-        background-color: @input-background-color;
+        background-color: @input-bg;
     }
 
     .k-item:hover:not(.k-state-disabled) {

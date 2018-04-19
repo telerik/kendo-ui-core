@@ -379,4 +379,19 @@
         equal(timepicker._dateInput.min(), min);
         equal(timepicker._dateInput.max(), max);
     });
+    
+    test("TimeView renders only one option if min is set and no more hours reflect the criteria", function() {
+        var tv = new TimeView({
+            min: new Date(2018, 3, 11, 23, 50, 0),
+            max: new Date(2099, 0, 31, 23, 50, 0),
+            value: new Date(2018, 3, 11, 23, 50, 0),
+            format: "hh:mm tt",
+            interval: 10
+        });
+
+        tv.refresh();
+        equal(tv.ul.children().length, 1);
+        equal(tv.ul.find("li:last").html(), "11:50 PM");
+        tv.destroy();
+    });
 })();

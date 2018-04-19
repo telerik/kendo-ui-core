@@ -46,6 +46,19 @@
 @primary-disabled-background-color: lighten(@accent, 2%);
 @primary-disabled-border-color: lighten(@accent, 2%);
 @primary-disabled-gradient: false;
+// Input
+@input-text: @normal-text-color;
+@input-bg: @base;
+@input-border: @drop-down-border-color;
+@input-shadow: false;
+@input-hovered-text: @input-text;
+@input-hovered-bg: @input-bg;
+@input-hovered-border: @drop-down-hover-border-color;
+@input-hovered-shadow: false;
+@input-focused-text: @input-text;
+@input-focused-bg: @input-bg;
+@input-focused-border: @drop-down-focused-border-color;
+@input-focused-shadow: @focused-shadow;
 @sprite-image: url('@{image-folder}/sprite.png');
 @inverse-text-color: contrast(@normal-text-color);
 @hover-border-color: @hover-background;
@@ -87,7 +100,6 @@
 @event-background-color: @accent;
 @scheduler-nonwork-background-color: contrast(@base, lighten(@base, 17%), darken(@base, 4%), 0.5);
 @resize-background-color: @normal-text-color;
-@input-background-color: @base;
 @shadow-color: fadeout(contrast(@base), 80%);
 @upload-progress-background-color: @info;
 @upload-progress-text-color: contrast(@info, @info, darken(@info, 60%), 0.5);
@@ -130,7 +142,6 @@
 @select-hover-background-color: @hover-background;
 @hover-background-color: @hover-background;
 @shadow-inset-color: transparent;
-@input-text-color: @normal-text-color;
 @link-text-color: @normal-text-color;
 @cell-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
 @scheduler-background-color: @base;
@@ -339,15 +350,15 @@ textarea.k-textbox:hover,
 .k-textbox > input,
 .k-multiselect-wrap
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 // Bootstrap readonly input styling has more specificity than ours.
 .k-input[readonly]
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 .k-block,
@@ -978,7 +989,7 @@ div.k-filebrowser-dropzone em
         border-color: @widget-border-color;
 
         > input {
-            background-color: @input-background-color;
+            background-color: @input-bg;
             border-color: @drop-down-border-color;
         }
 
@@ -2559,7 +2570,7 @@ html .km-pane-wrapper .km-widget,
     .k-list-scroller {
         padding: 2px;
         border-color: @widget-border-color;
-        background-color: @input-background-color;
+        background-color: @input-bg;
     }
 
     .k-item:hover:not(.k-state-disabled) {

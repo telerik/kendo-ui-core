@@ -12,7 +12,7 @@ The example below demonstrates how to include a signing functionality by using j
 ###### Example
 
 ```html
-    <script src="http://willowsystems.github.io/jSignature/js/libs/jSignature.min.js"></script>
+    <script src="https://willowsystems.github.io/jSignature/js/libs/jSignature.min.js"></script>
     <div data-role="view" data-title="Views" data-init="attachToScroller">
       <header data-role="header">
         <div data-role="navbar">
@@ -36,7 +36,7 @@ The example below demonstrates how to include a signing functionality by using j
 
             <li>
 
-              <div class='signature-wrapper'><div id='signature'></div><input type='hidden' id='signature-value' name='signature-value' /></div>    
+              <div class='signature-wrapper'><div id='signature'></div><input type='hidden' id='signature-value' name='signature-value' /></div>
 
             </li>
             <li><a href="#stretchview">Stretched View</a></li>

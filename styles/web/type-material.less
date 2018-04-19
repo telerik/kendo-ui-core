@@ -49,11 +49,22 @@
 @primary-disabled-background-color: @disabled-background-color;
 @primary-disabled-border-color: @disabled-border-color;
 @primary-disabled-gradient: false;
+// Input
+@input-text: @normal-text-color;
+@input-bg: @background;
+@input-border: @drop-down-border-color;
+@input-shadow: false;
+@input-hovered-text: @input-text;
+@input-hovered-bg: @input-bg;
+@input-hovered-border: @drop-down-hover-border-color;
+@input-hovered-shadow: false;
+@input-focused-text: @input-text;
+@input-focused-bg: @input-bg;
+@input-focused-border: @drop-down-focused-border-color;
+@input-focused-shadow: @focused-shadow;
 @sprite-image: url('@{image-folder}/sprite.png');
 @tooltip-texture: none;
 @inverse-text-color: saturate(@background, 29%);
-@input-background-color: @background;
-@input-text-color: @normal-text-color;
 @link-text-color: #428bca;
 @header-text-color: #ffffff;
 @header-background-color: @accent;
@@ -188,6 +199,12 @@
 @secondary-header-background-color: darken(@accent, 10%);
 @input-validation-error: contrast(@error, @error, darken(@error, 30%), 0.5);
 @grid-sort-icon-color: @selected-text-color;
+// Shadows
+@box-shadow-depth-1: 0 1px 3px rgba( 0, 0, 0, .12 ), 0 1px 2px rgba( 0, 0, 0, .20 );
+@box-shadow-depth-2: 0 3px 6px rgba( 0, 0, 0, .14 ), 0 3px 6px rgba( 0, 0, 0, .20 );
+@box-shadow-depth-3: 0 10px 20px rgba( 0, 0, 0, .16 ), 0 6px 6px rgba( 0, 0, 0, .20 );
+@box-shadow-depth-4: 0 14px 28px rgba( 0, 0, 0, .18 ), 0 10px 10px rgba( 0, 0, 0, .20 );
+@box-shadow-depth-5: 0 19px 38px rgba( 0, 0, 0, .20 ), 0 15px 12px rgba( 0, 0, 0, .20 );
 
 /* Kendo skin */
 
@@ -375,15 +392,15 @@ textarea.k-textbox:hover,
 .k-textbox > input,
 .k-multiselect-wrap
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 // Bootstrap readonly input styling has more specificity than ours.
 .k-input[readonly]
 {
-    background-color: @input-background-color;
-    color: @input-text-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 .k-block,
@@ -995,7 +1012,7 @@ div.k-filebrowser-dropzone em
         border-color: @widget-border-color;
 
         > input {
-            background-color: @input-background-color;
+            background-color: @input-bg;
             border-color: @drop-down-border-color;
 
             +.k-i-zoom:before {
