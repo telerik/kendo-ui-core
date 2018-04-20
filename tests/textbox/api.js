@@ -568,5 +568,17 @@
 
         equal(textbox._arrowsWrap.is(":visible"), false);
         equal(textbox._inputWrapper.hasClass("k-expand-padding"), true);
+    });
+    
+    test("floating numbers should be calculated correctly when using spinners", function() {
+		var textbox = new NumericTextBox(input, {
+            value: 0.06, 
+            step: 0.01, 
+            round: false
+        });
+        
+        textbox._upArrow.mousedown(); 
+        
+        equal(textbox.value(), 0.07);
 	});
 })();

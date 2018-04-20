@@ -25,15 +25,12 @@ The below example demonstrates how files can be sent directly to the Azure Face 
       <meta charset="utf-8">
       <title>Kendo UI and Azure Face API Integration</title>
 
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css">
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.rtl.min.css">
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css">
-      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.mobile.all.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/styles/kendo.common.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/styles/kendo.default.min.css">
 
       <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/2018.1.221/js/angular.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/2018.1.221/js/jszip.min.js"></script>
-      <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/jszip.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/kendo.all.min.js"></script>
 
     </head>
     <body>
@@ -202,4 +199,5 @@ The below example demonstrates how files can be sent directly to the Azure Face 
 * [Overview of the Upload widget](https://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
 * [Upload widget API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Consuming Data from Azure Functions]({% slug azure_functions %})
+* [Binding to Azure Cosmos DB]({% slug azure_cosmos_db %})
 * [Consuming Data from Amazon DynamoDB]({% slug aws_dynamodb %})

@@ -53,12 +53,12 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
   <meta charset="utf-8">
   <title>Kendo Grid DynamoDB Integration</title>
 
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/styles/kendo.default.min.css">
 
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.221.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-  <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/{{site.cdnVersion}}/js/kendo.all.min.js"></script>
 
   <script>
     AWS.config.update({

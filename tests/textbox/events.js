@@ -117,4 +117,20 @@
 
         window.setTimeout = origin;
     });
+
+    test("DOM Change event fires when value is changed and TAB is pressed", 1, function() {
+        var textbox = new NumericTextBox(input);
+        var calls = 0;
+
+        input.change(function() {
+            calls++;
+        });
+
+        input.focus().val(1)
+            .trigger($.Event("keydown", {keyCode: 38}))
+            .trigger($.Event("keydown", {keyCode: 9}));
+
+        textbox._blur();
+        equal(calls, 1);
+    });
 })();

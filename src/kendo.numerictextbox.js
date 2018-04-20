@@ -504,7 +504,7 @@ var __meta__ = { // jshint ignore:line
                 that._step(1);
             } else if (key == keys.ENTER) {
                 that._change(that.element.val());
-            } else {
+            } else if (key != keys.TAB) {
                 that._typing = true;
             }
 
@@ -653,6 +653,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 element = that.element,
                 value = that._parse(element.val()) || 0;
+            var precision = that.options.decimals || 2;
 
             if (activeElement() != element[0]) {
                 that._focusin();
@@ -662,8 +663,8 @@ var __meta__ = { // jshint ignore:line
                 value = value/that.options.factor;
             }
 
-            value += that.options.step * step;
-
+            value =  +(value + that.options.step * step).toFixed(precision); 
+            
             that._update(that._adjust(value));
             that._typing = false;
 
