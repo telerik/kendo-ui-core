@@ -4,7 +4,7 @@ title: Script Files for Navigation
 page_title: Script Files for Navigation | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Navigation"
 slug: script_filesfor_navigation_widgets
-position: 12
+position: 13
 ---
 
 # Script Files for Navigation
@@ -23,10 +23,12 @@ Below are listed the script files for the Kendo UI Navigation widgets.&nbsp;&nbs
 | [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
+| | kendo.data.odata.js | |
 | | kendo.panelbar.js | |
 | [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
+| | kendo.fx.js | Animation feature (optional) |
 | | kendo.tabstrip.js | |
 | [ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) | jquery.js | |
 | | kendo.core.js | |
@@ -45,6 +47,7 @@ Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})

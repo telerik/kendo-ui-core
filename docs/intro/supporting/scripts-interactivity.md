@@ -4,7 +4,7 @@ title: Script Files for Interactivity and UX
 page_title: Script Files for Interactivity and UX | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Interactivity and UX"
 slug: script_filesfor_interactivityandux_widgets
-position: 13
+position: 14
 ---
 
 # Script Files for Interactivity and UX
@@ -35,6 +35,7 @@ Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})

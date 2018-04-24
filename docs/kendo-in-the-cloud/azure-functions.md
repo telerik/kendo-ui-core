@@ -10,6 +10,8 @@ position: 1
 
 This article provides a step-by-step tutorial on how to configure [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) to serve data for a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}).
 
+The complete implementation followed in the current article is available on our [Kendo Cloud Integration](https://github.com/telerik/kendo-cloud-integration) repository on GitHub.
+
 ## Prerequisites
 
 Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/).

@@ -4,7 +4,7 @@ title: Script Files for Charts
 page_title: Script Files for Charts | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Charts"
 slug: script_filesfor_charts_widgets
-position: 5
+position: 6
 ---
 
 # Script Files for Charts
@@ -22,7 +22,6 @@ Below are listed the script files for the Kendo UI Charts widgets.&nbsp;&nbsp;
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
-| | kendo.dataviz.chart.js | |
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.dataviz.chart.js | |
 | [Sparkline](http://demos.telerik.com/kendo-ui/sparklines/index) | jquery.js | |
@@ -64,6 +63,7 @@ Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})

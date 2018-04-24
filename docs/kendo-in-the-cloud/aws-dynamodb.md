@@ -10,6 +10,8 @@ position: 3
 
 This article provides a step-by-step tutorial on how to create a table in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) and configure the [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to retrieve, create, update and destroy items in that table.
 
+The complete implementation followed in the current article is available on our [Kendo Cloud Integration](https://github.com/telerik/kendo-cloud-integration) repository on GitHub.
+
 ## Prerequisites
 
 You will need to create an [Amazon AWS account](https://aws.amazon.com/account/). Basic knowledge on how to use the [AWS Console](https://console.aws.amazon.com) would be required.

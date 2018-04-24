@@ -17,29 +17,31 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.columnsorter.js | |
+| | kendo.userevents.js | |
+| | kendo.draganddrop.js | |
+| | kendo.sortable.js | |
+| | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
 | | kendo.popup.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
-| | kendo.userevents.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
 | | kendo.validator.js | Editing feature (optional) |
 | | kendo.binder.js | Editing feature (optional) |
 | | kendo.editable.js | Editing feature (optional) |
-| | kendo.draganddrop.js | Editing feature (optional) |
 | | kendo.window.js | Editing feature (optional) |
+| | kendo.selectable.js | Filtering feature (optional) |
 | | kendo.calendar.js | Filtering feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
 | | kendo.datepicker.js | Filtering feature (optional) |
-| | kendo.userevents.js | Filtering feature (optional) |
 | | kendo.numerictextbox.js | Filtering feature (optional) |
 | | kendo.list.js | Filtering feature (optional) |
 | | kendo.dropdownlist.js | Filtering feature (optional) |
 | | kendo.binder.js | Filtering feature (optional) |
 | | kendo.filtermenu.js | Filtering feature (optional) |
 | | kendo.popup.js | Column menu feature (optional) |
+| | kendo.selectable.js | Column menu feature (optional) |
 | | kendo.calendar.js | Column menu feature (optional) |
 | | kendo.datepicker.js | Column menu feature (optional) |
-| | kendo.userevents.js | Column menu feature (optional) |
 | | kendo.numerictextbox.js | Column menu feature (optional) |
 | | kendo.list.js | Column menu feature (optional) |
 | | kendo.dropdownlist.js | Column menu feature (optional) |
@@ -47,26 +49,17 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.filtermenu.js | Column menu feature (optional) |
 | | kendo.menu.js | Column menu feature (optional) |
 | | kendo.columnmenu.js | Column menu feature (optional) |
-| | kendo.userevents.js | Grouping feature (optional) |
-| | kendo.draganddrop.js | Grouping feature (optional) |
 | | kendo.groupable.js | Grouping feature (optional) |
 | | kendo.popup.js | Row filter feature (optional) |
 | | kendo.list.js | Row filter feature (optional) |
 | | kendo.autocomplete.js | Row filter feature (optional) |
 | | kendo.filtercell.js | Row filter feature (optional) |
 | | kendo.pager.js | Paging feature (optional) |
-| | kendo.userevents.js | Selection feature (optional) |
 | | kendo.selectable.js | Selection feature (optional) |
-| | kendo.userevents.js | Column reordering feature (optional) |
-| | kendo.draganddrop.js | Column reordering feature (optional) |
 | | kendo.reorderable.js | Column reordering feature (optional) |
-| | kendo.userevents.js | Column resizing feature (optional) |
-| | kendo.draganddrop.js | Column resizing feature (optional) |
 | | kendo.resizable.js | Column resizing feature (optional) |
 | | kendo.popup.js | Grid adaptive rendering feature (optional) |
 | | kendo.fx.js | Grid adaptive rendering feature (optional) |
-| | kendo.userevents.js | Grid adaptive rendering feature (optional) |
-| | kendo.draganddrop.js | Grid adaptive rendering feature (optional) |
 | | kendo.mobile.scroller.js | Grid adaptive rendering feature (optional) |
 | | kendo.binder.js | Grid adaptive rendering feature (optional) |
 | | kendo.view.js | Grid adaptive rendering feature (optional) |
@@ -87,10 +80,11 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | [ListView](http://demos.telerik.com/kendo-ui/listview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
+| | kendo.userevents.js | Editing feature (optional) |
+| | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
 | | kendo.popup.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
-| | kendo.userevents.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
 | | kendo.validator.js | Editing feature (optional) |
 | | kendo.binder.js | Editing feature (optional) |
@@ -161,19 +155,21 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.dom.js | |
 | | kendo.data.js | |
 | | kendo.columnsorter.js | Sorting feature (optional) |
+| | kendo.userevents.js | Filtering feature (optional) |
+| | kendo.selectable.js | Filtering feature (optional) |
 | | kendo.calendar.js | Filtering feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
 | | kendo.datepicker.js | Filtering feature (optional) |
-| | kendo.userevents.js | Filtering feature (optional) |
 | | kendo.numerictextbox.js | Filtering feature (optional) |
 | | kendo.list.js | Filtering feature (optional) |
 | | kendo.dropdownlist.js | Filtering feature (optional) |
 | | kendo.binder.js | Filtering feature (optional) |
 | | kendo.filtermenu.js | Filtering feature (optional) |
+| | kendo.userevents.js | Editing feature (optional) |
+| | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
 | | kendo.popup.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
-| | kendo.userevents.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
 | | kendo.validator.js | Editing feature (optional) |
 | | kendo.binder.js | Editing feature (optional) |
@@ -201,6 +197,7 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})

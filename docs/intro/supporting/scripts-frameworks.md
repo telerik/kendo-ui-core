@@ -4,7 +4,7 @@ title: Script Files for Tools, Frameworks and Utilities
 page_title: Script Files for Tools, Frameworks and Utilities | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Tools, Frameworks and Utilities"
 slug: script_filesfor_tools_frameworks_utilities
-position: 15
+position: 16
 ---
 
 # Script Files for Tools, Frameworks and Utilities
@@ -43,6 +43,7 @@ Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})

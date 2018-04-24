@@ -469,10 +469,10 @@ test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert
     });
 
     autocomplete.search("a");
-    equal(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1);
+    QUnit.close(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
     autocomplete.close();
     autocomplete.search("a");
-    equal(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1);
+    QUnit.close(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
 });
 
 asyncTest("update popup height when no items are found", 1, function() {

@@ -4,7 +4,7 @@ title: Script Files for Scheduling
 page_title: Script Files for Scheduling | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Scheduling"
 slug: script_filesfor_scheduling_widgets
-position: 10
+position: 11
 ---
 
 # Script Files for Scheduling
@@ -15,6 +15,8 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | :---   | :---         | :---     |
 | [Calendar](http://demos.telerik.com/kendo-ui/calendar/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | [Gantt](http://demos.telerik.com/kendo-ui/gantt/index) | jquery.js | |
 | | kendo.core.js | |
@@ -27,6 +29,7 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.dom.js | |
 | | kendo.touch.js | |
 | | kendo.columnsorter.js | |
+| | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.datepicker.js | |
 | | kendo.timepicker.js | |
@@ -37,6 +40,7 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.editable.js | |
 | | kendo.gantt.list.js | |
 | | kendo.gantt.timeline.js | |
+| | kendo.sortable.js | |
 | | kendo.grid.js | |
 | | kendo.gantt.js | |
 | [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) | jquery.js | |
@@ -45,9 +49,10 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.dropdownlist.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.datepicker.js | |
-| | kendo.userevents.js | |
 | | kendo.numerictextbox.js | |
 | | kendo.validator.js | |
 | | kendo.binder.js | |
@@ -84,6 +89,7 @@ Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})

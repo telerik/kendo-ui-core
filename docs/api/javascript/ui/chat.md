@@ -77,6 +77,25 @@ Sets the name of the chat user.
 
 ## Methods
 
+### getUser
+
+Gets the user info associated with the chat instance
+
+#### Returns
+
+`Object` the object with the user info. Contains the auto-generated id, name and iconUrl.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+        $("#chat").kendoChat();
+
+        var chat = $("#chat").data("kendoChat");
+
+        console.log(chat.getUser().name);
+    </script>
+
 ### postMessage
 
 Triggers the post event with the message, and also renders it inside the widget.

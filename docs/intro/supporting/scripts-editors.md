@@ -46,11 +46,15 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.combobox.js | |
 | [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.popup.js | |
 | | kendo.datepicker.js | |
 | [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.popup.js | |
 | | kendo.datepicker.js | |
@@ -131,6 +135,7 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})

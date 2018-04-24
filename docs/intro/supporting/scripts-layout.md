@@ -4,7 +4,7 @@ title: Script Files for Layout
 page_title: Script Files for Layout | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Layout"
 slug: script_filesfor_layout_widgets
-position: 11
+position: 12
 ---
 
 # Script Files for Layout
@@ -16,7 +16,6 @@ Below are listed the script files for the Kendo UI Layout widgets.&nbsp;&nbsp;
 | [Dialog](http://demos.telerik.com/kendo-ui/dialog/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
-| | kendo.fx.js | Animation feature (optional) |
 | | kendo.dialog.js | |
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
 | | kendo.core.js | |
@@ -51,6 +50,7 @@ Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})

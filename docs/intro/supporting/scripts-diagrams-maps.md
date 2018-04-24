@@ -4,7 +4,7 @@ title: Script Files for Diagrams and Maps
 page_title: Script Files for Diagrams and Maps | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Diagrams and Maps"
 slug: script_filesfor_diagramsandmaps_widgets
-position: 9
+position: 10
 ---
 
 # Script Files for Diagrams and Maps
@@ -27,6 +27,7 @@ Below are listed the script files for the Kendo UI Diagrams and Maps widgets.&nb
 | | kendo.dataviz.themes.js | |
 | | kendo.toolbar.js | |
 | | kendo.pdf.js | PDF export feature (optional) |
+| | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
@@ -57,6 +58,7 @@ Articles listing the script files for other Kendo UI components:
 
 + [Script Files for Data Management Widgets]({% slug script_filesfor_datamanagement_widgets %})
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
++ [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
