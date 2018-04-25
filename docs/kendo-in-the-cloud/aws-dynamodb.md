@@ -1,54 +1,60 @@
 ---
 title: Consuming Data from Amazon DynamoDB
 page_title: Create and Consume Data from AWS DynamoDB Table | Kendo UI in the Cloud
-description: "Learn how to implement create an Amazone DynamoDB table, retrive, write and edit data in it with the Kendo UI Grid."
+description: "Learn how to create and implement an Amazon DynamoDB table, and retrieve, write, and edit data in it with the Kendo UI Grid."
 slug: aws_dynamodb
 position: 3
 ---
 
 # Consuming Data from Amazon DynamoDB
 
-This article provides a step-by-step tutorial on how to create a table in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) and configure the [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to retrieve, create, update and destroy items in that table.
+This article provides a step-by-step tutorial on how to create a table in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) and configure the [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to retrieve, create, update, and destroy items in that table.
 
-The complete implementation followed in the current article is available on our [Kendo Cloud Integration](https://github.com/telerik/kendo-cloud-integration) repository on GitHub.
+The complete implementation of the sample project is available in the [Kendo UI Cloud Integration](https://github.com/telerik/kendo-cloud-integration) repository on GitHub.
 
 ## Prerequisites
 
-You will need to create an [Amazon AWS account](https://aws.amazon.com/account/). Basic knowledge on how to use the [AWS Console](https://console.aws.amazon.com) would be required.
+* An [Amazon AWS account](https://aws.amazon.com/account/).
+* Basic knowledge on using [AWS Console](https://console.aws.amazon.com).
 
-## Creating a User that Would Access and Manipulate the Amazon DynamoDB Table
+## Creating Users to Access and Manipulate the Amazon DynamoDB Table
+
+The following instructions demonstrate how to create a user identity and use that identity directly on the client to access a DynamoDB table.
 
 > **Important**
 >
-> The below instructions demonstrate how to create a user identity and use that identity directly on the client to access a DynamoDB table. Nevertheless, exposing a user credentials directly on the client is generally not recommended. Therefore, before sharing the client implementation with third parties / users, it is highly recommended to consider switching to [Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html) authentication.
+> Even though the following instructions demonstrates how to create a user identity and use that identity directly on the client to access a DynamoDB table, exposing user credentials directly on the client is not recommended. That is why, before sharing the client implementation with third parties or users, switch to the [Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html) authentication.
 
-1. In the [AWS Console](https://console.aws.amazon.com) search for "iam" (Identity and Access Management);
+1. In the [AWS Console](https://console.aws.amazon.com), search for `"iam"` (Identity and Access Management).
+1. In the IAM console, select **Users** and then **Add User**.
+1. Type a user name and check the **Programmatic access** option&mdash;for example, `kendo_grid_user`. Click **Next: Permissions**.
 
-1. On the IAM console select "Users" and then "Add User";
-
-1. Type a User name (for our example we will name the user `kendo_grid_user`) and check "Programmatic access" option. Click `Next: Permissions`;
-
-	**Figure 1: Add new user**
+	**Figure 1: Adding a new user**
 
 	![Add new user](/kendo-in-the-cloud/images/add-user-initial.png)
 
-1. On the Permissions step select `Attach existing policies directly` then type in the search field `dynamodb` and check the `AmazonDynamoDBFullAccess` option in the table. Click `Next: Review` and then `Create user`;
+1. On the permissions step, select **Attach existing policies directly**. In the search field, type `dynamodb` and check the **AmazonDynamoDBFullAccess** option in the table. Click **Next: Review** > **Create user**.
 
-	**Figure 2: Configure user permissions**
+	**Figure 2: Configuring the user permissions**
 
 	![Configure permissions](/kendo-in-the-cloud/images/add-user-permissions.png)
 
-1. Copy the `Access key ID` and the `Secret access key` from the summary view of the newly created user;
+1. From the summary view of the newly created user, copy the `Access key ID` and the `Secret access key`.
 
-	**Figure 3: Get user credentials**
+	**Figure 3: Getting the user credentials**
 
 	![Get credentials](/kendo-in-the-cloud/images/add-user-credentials.png)
 
-## Configure Kendo UI Grid to Consume and Manipulate Data Available in DynamoDB
+## Configuring the Grid for Consuming and Manipulating Available DynamoDB Data
 
-### Configure the Page to Load AWS SDK, jQuery, Kendo UI and the Authenticate the Proper AWS User
+1. [Configure the page to load AWS SDK, jQuery, and Kendo UI, and authenticate the proper AWS user](#configuring-the-aws-sdk-jquery-and-kendo-ui-loading-and-user-authentication)
+1. [Configure the Kendo UI Grid and the service](#configuring-the-grid-and-the-service)
 
-In the `<head>` of your HTML page, first load the Kendo UI styles and then the scripts (Amazon AWS SDK, jQuery and Kendo). Finally configure the AWS authentication using the already created user:
+### Configuring the AWS SDK, jQuery, and Kendo UI Loading and User Authentication
+
+1. In the `<head>` of your HTML page, load the Kendo UI styles.
+1. Load the Amazon AWS SDK, jQuery, and Kendo UI scripts.
+1. Configure the AWS authentication by using the user that is already created.
 
 ```
 <head>
@@ -73,23 +79,23 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 </head>
 ```
 
-### Configure the Grid Widget and the service
+### Configuring the Grid and the Service
 
-1. In the `<body>` of the page place a `<div>` element to initialize the Grid from. Create also a `<button>` that would allow you to create a Table in DynamoDB on click:
-	
+1. In the `<body>` of the page, place a `<div>` element to initialize the Grid from. Add a `<button>` that will allow you to create a Table in DynamoDB on click.
+
 	```
 	<div id="grid"></div>
 	<button class="k-button" id="btn">Click to create 'Movies' table</button>
 	```
 
-1. Initialize the AWS DynamoDB client:
+1. Initialize the AWS DynamoDB client.
 
 	```JavaScript
 	var dynamodb = new AWS.DynamoDB();
     var docClient = new AWS.DynamoDB.DocumentClient();
 	```
-	
-1. Implement the handler for the Create movies button click:
+
+1. Implement the handler for the **Create** movies button click.
 
 	```JavaScript
 	$('#btn').on('click', function() {
@@ -109,7 +115,7 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 				WriteCapacityUnits: 5
 			}
 		};
-		
+
 		// Send the request for creating new table
 		dynamodb.createTable(params, function(err, data) {
 			if (err) {
@@ -120,15 +126,16 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 		});
 	});
 	```
-	
-1. Implement the Grid that would consume the DynamoDB data:
+
+1. Implement the Grid that will consume the DynamoDB data.
+
 	```
 	$('#grid').kendoGrid({
 	  editable: { mode: "popup" },
 	  toolbar: ["create"],
 	  height: 600,
 	  columns: [
-		{ field: "title", title: "Title", width: "15%" }, 
+		{ field: "title", title: "Title", width: "15%" },
 		{ field: "release_date", title: "Release", template: "#= kendo.toString(release_date, 'd') #", width: "8%"},
 		{ field: "directors", title: "Directors", width: "10%"},
 		{ field: "actors", title: "Actors", width: "17%"},
@@ -157,8 +164,8 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 	  }
 	});
 	```
-	
-1. The `read` function should be implemented to [scan](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html) the DynamoDB table
+
+1. Implement the `read` function to [`scan`](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html) the DynamoDB table.
 
 	```
 	function onRead(options) {
@@ -176,7 +183,7 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 	};
 	```
 
-1. With the `create` function a new item will be added to the table. The [put](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html) action should be used. Also, new `id` for the newly created item should be assigned on the client before it has been sent to the server:
+1. To add a new item to the table, use the `create` function and the [`put`](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html) action. On the client and before the newly created item is sent to the server, assign a new `id` for the item.
 
 	```
 	function onCreate(options) {
@@ -200,13 +207,13 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 	  });
 	}
 	```
-	
-1. The `update` function alters the properties of an item. It uses the [update](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html) action with an UpdateExpression:
+
+1. The `update` function alters the properties of an item and uses the [`update`](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html) action with an `UpdateExpression` string.
 
 	```
 	function onUpdate(options) {
 	  var model = options.data;
-	  // Date should be saved as an ISO string
+	  // The date should be saved as an ISO string
 	  model.release_date = model.release_date.toISOString();
 
 	  var updateArray = [];
@@ -214,14 +221,14 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 
 	  // Get all fields and field values in the item
 	  for (var property in model) {
-		// Skip the id field as it should be immutable identifier
+		// Skip the id field as it should be an immutable identifier
 		if (model.hasOwnProperty(property) && property != "id") {
 		  updateArray.push(property + " = :" + property);
 		  updateArrtibutes[":" + property] = model[property];
 		}
 	  }
 
-	  // Generate the string UpdateExpression
+	  // Generate the UpdateExpression string
 	  var updateExpression = "set " + updateArray.toString();
 
 	  var params = {
@@ -243,8 +250,8 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 	  });
 	}
 	```
-	
-1. The `destroy` function will simply remove an item against its `id` from the DynamoDB table. It uses the [delete](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html) action:
+
+1. The `destroy` function removes an item from the DynamoDB table against its `id` and uses the [`delete`](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html) action.
 
 	```
 	function onDestroy(options) {
@@ -268,7 +275,7 @@ In the `<head>` of your HTML page, first load the Kendo UI styles and then the s
 	}
 	```
 
-The Kendo Grid should be now properly binding its DataSource to the Movies DynamoDB table.
+Now, the Grid has its DataSource properly bound to the **Movies** DynamoDB table.
 
 ## See Also
 

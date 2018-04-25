@@ -32,6 +32,7 @@ var __meta__ = { // jshint ignore:line
         activeElement = kendo._activeElement,
         keys = kendo.keys,
         ns = ".kendoComboBox",
+        nsFocusEvent = ns + "FocusEvent",
         CLICK = "click" + ns,
         MOUSEDOWN = "mousedown" + ns,
         DISABLED = "disabled",
@@ -80,6 +81,8 @@ var __meta__ = { // jshint ignore:line
             that._ignoreCase();
 
             that._enable();
+
+            that._attachFocusEvents();
 
             that._oldIndex = that.selectedIndex = -1;
 
@@ -178,6 +181,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.input.off(ns);
+            that.input.off(nsFocusEvent);
             that.element.off(ns);
             that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
@@ -212,6 +216,12 @@ var __meta__ = { // jshint ignore:line
 
             Select.fn._change.call(that);
             that._toggleCloseVisibility();
+        },
+
+        _attachFocusEvents: function() {
+            var that = this;
+            that.input.on("focus" + nsFocusEvent, proxy(that._inputFocus, that))
+                      .on("focusout" + nsFocusEvent, proxy(that._inputFocusout, that));
         },
 
         _focusHandler: function() {
@@ -289,8 +299,6 @@ var __meta__ = { // jshint ignore:line
 
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("focus" + ns, proxy(that._inputFocus, that))
-                    .on("focusout" + ns, proxy(that._inputFocusout, that))
                     .on("input" + ns, proxy(that._search, that))
                     .on("paste" + ns, proxy(that._inputPaste, that));
 

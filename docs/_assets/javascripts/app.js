@@ -118,18 +118,17 @@ function navigationTemplate(root) {
     return function(data) {
         var item = data.item;
         var text = item.text;
+        var icon = item.isNew === true ? '<span class="new-navigation-item">NEW</span>' : '';
 
         if (item.hasChildren) {
-            return text;
+            return icon + text;
         }
 
         var url = item.path;
-
         if (location.pathname.indexOf(".html") < 0) {
             url = url.replace(".html", "");
         }
 
-        var icon = item.isNew === true ? '<span class="new-navigation-item">NEW</span>' : '';
         if (url.indexOf("#") < 0) {
             while (item = item.parentNode()) {
                 url = item.path + "/" + url;

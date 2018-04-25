@@ -1,5 +1,5 @@
 ---
-title: Configure Server Grouping and Sorting in MultiSelect 
+title: Configure Server Grouping and Sorting in MultiSelect
 description: An example on how to configure the Kendo UI MVC MultiSelect server grouping and sorting.
 type: how-to
 page_title: Enable Server Grouping and Sorting | UI for ASP.NET MVC MultiSelect
@@ -21,11 +21,11 @@ res_type: kb
 
 ## Description
 
-How can I enable the server-side grouping and sorting for Kendo MultiSelect in ASP.NET MVC projects?
+How can I enable the server-side grouping and sorting for the Kendo UI MultiSelect in ASP.NET MVC projects?
 
 ## Solution   
 
-1. The sorting and grouping should be enabled. There should be indicated by which field have to be sorted and grouped. Schema.data needs to be defined. 
+1. Enable sorting and grouping. Indicate by which field the data will be sorted and grouped. Define `schema.data`.
 
     ````C#
     @(Html.Kendo().MultiSelect()
@@ -53,7 +53,7 @@ How can I enable the server-side grouping and sorting for Kendo MultiSelect in A
 	)
     ````
 
-1. In the controller action you need to handle DataSourceRequest
+1. In the controller action, handle the `DataSourceRequest`.
 
     ````C#
     	public JsonResult GetProducts([DataSourceRequest]DataSourceRequest request)
@@ -65,5 +65,5 @@ How can I enable the server-side grouping and sorting for Kendo MultiSelect in A
 
 ## See Also
 
-* [Kendo UI Editor JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Kendo UI Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
 * [Telerik DocumentProcessing Library](https://docs.telerik.com/devtools/document-processing/introduction)

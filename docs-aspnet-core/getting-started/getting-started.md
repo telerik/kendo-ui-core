@@ -117,7 +117,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 8. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-	  > **Important**
+	> **Important**
     >
     > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 

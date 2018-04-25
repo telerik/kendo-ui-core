@@ -30,30 +30,20 @@ For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min
 ###### Example
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1316/styles/kendo.mobile.all.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title">Hello</span>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, {
-        });
+      new kendo.mobile.Application(document.body, {
+      });
     </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with iOS Look on All Devices
@@ -63,36 +53,24 @@ If you are targeting iOS devices only, or you want your application to have the 
 ###### Example
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- both stylesheets may be used here -->
-    <!-- <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.ios.min.css" />  -->
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.ios.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title">Hello</span>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, {
-            platform: {
-                name: "ios",
-                majorVersion: 9 // Major OS version - may be set to 6 or removed for the skeuomorphism look.
-            }
-        });
+      new kendo.mobile.Application(document.body, {
+        platform: {
+          name: "ios",
+          majorVersion: 9 // Major OS version - may be set to 6 or removed for the skeuomorphism look.
+        }
+      });
     </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with Android Look on All Devices
@@ -104,63 +82,22 @@ If you are targeting Android devices only, or you want your application to have 
 ###### Example
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.android.dark.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title"></span>
+          <a data-role="button" data-align="right">About</a>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, {
-            platform: "android"
-        });
+      new kendo.mobile.Application(document.body, {
+        platform: "android"
+      });
     </script>
-</body>
-</html>
-```
-
-#### Mobile Application with Android Halo Light Look
-
-###### Example
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.android.light.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
-    <div data-role="view" data-title="Hello world">
-
-    <div data-role="header">
-        <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
-        </div>
-    </div>
-        <a data-role="button">I am a button</a>
-    </div>
-
-    <script>
-        new kendo.mobile.Application(document.body, {
-            platform: "android"
-        });
-    </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with Windows Phone 8 Look on All Devices
@@ -172,14 +109,6 @@ If you are targeting Windows Phone devices only, or you want your application to
 ###### Example
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.wp8.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
     <div data-role="view" data-title="Hello world">
 
     <div data-role="header">
@@ -195,8 +124,6 @@ If you are targeting Windows Phone devices only, or you want your application to
             platform: "wp"
         });
     </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with Platform Agnostic Skin
@@ -216,29 +143,19 @@ The skin should be activated by including the respective skin CSS file `kendo.mo
 ###### Example
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.nova.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title">Hello</span>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, { skin: "nova" });
+      new kendo.mobile.Application(document.body, { skin: "nova" });
     </script>
-</body>
-</html>
 ```
 
 ### Hybrid Widgets in Web Context without Mobile Application Instance
@@ -279,6 +196,7 @@ The example below demonstrates an application and a View-specific tint.
 
 ###### Example
 
+```html
     <style scoped>
       .km-ios7 .k-list,
       .km-ios7 .k-slider,
@@ -323,6 +241,7 @@ The example below demonstrates an application and a View-specific tint.
     <script>
       new kendo.mobile.Application();
     </script>
+```
 
 ### Change Android Tint Color
 
@@ -377,6 +296,7 @@ The example below demonstrates an application and a View-specific tint.
 
 ###### Example
 
+```html
     <style scoped>
       .km-android .km-shim,
       .km-android .km-popup,
@@ -439,8 +359,9 @@ The example below demonstrates an application and a View-specific tint.
       </footer>
     </div>
     <script>
-      new kendo.mobile.Application();
+      new kendo.mobile.Application(document.body, { platform: "android" });
     </script>
+```
 
 ### Change Flat Skin Active Color
 

@@ -44,6 +44,7 @@ module Jekyll
                             mapping = navigation_entry ? navigation_entry[1] : {}
                             item['text'] = mapping['title'] || segment
                             item['items'] = []
+                            item['isNew'] = mapping['isNew'] if mapping.has_key?('isNew')
                             item['position'] = mapping['position'] if mapping.has_key?('position')
                         end
 

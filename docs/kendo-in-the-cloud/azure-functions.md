@@ -10,7 +10,7 @@ position: 1
 
 This article provides a step-by-step tutorial on how to configure [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) to serve data for a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}).
 
-The complete implementation followed in the current article is available on our [Kendo Cloud Integration](https://github.com/telerik/kendo-cloud-integration) repository on GitHub.
+The complete implementation of the sample project is available in the [Kendo UI Cloud Integration](https://github.com/telerik/kendo-cloud-integration) repository on GitHub.
 
 ## Prerequisites
 
@@ -18,13 +18,13 @@ Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.co
 
 ## Creating Azure Functions Applications
 
-1. Follow the steps from [Create your first function in the Azure portal quickstart](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function) > [Create a function app]( https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function#create-a-function-app).
+1. Follow the steps from the [Create your first function in the Azure portal](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function) > [Create a function app]( https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function#create-a-function-app) quickstart.
 1. Provide the `kendo-grid-functions` name to the application and set the name of the storage account to `kendogridfunctions`.
 1. In [Azure Portal](https://portal.azure.com/), go to the newly created **kendo-grid-functions** application.
 
 ## Creating HTTP-Triggered Functions for CRUD Operations
 
-Apply the following steps to individually set each function (read, create, destroy, and update):
+You have to apply the following steps individually to set each function (read, create, destroy, and update).
 
 1. On the left-side panel and under the application name, click the **+** (plus) symbol which, when the **Functions** section is hovered, appears to the right.
 

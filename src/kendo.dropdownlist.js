@@ -31,6 +31,7 @@ var __meta__ = { // jshint ignore:line
         ObservableObject = kendo.data.ObservableObject,
         keys = kendo.keys,
         ns = ".kendoDropDownList",
+        nsFocusEvent = ns + "FocusEvent",
         DISABLED = "disabled",
         READONLY = "readonly",
         CHANGE = "change",
@@ -94,6 +95,8 @@ var __meta__ = { // jshint ignore:line
             that.wrapper.attr("aria-live", "polite");
 
             that._enable();
+
+            that._attachFocusHandlers();
 
             that._oldIndex = that.selectedIndex = -1;
 
@@ -205,6 +208,7 @@ var __meta__ = { // jshint ignore:line
             Select.fn.destroy.call(that);
 
             that.wrapper.off(ns);
+            that.wrapper.off(nsFocusEvent);
             that.element.off(ns);
             that._inputWrapper.off(ns);
 
@@ -577,6 +581,14 @@ var __meta__ = { // jshint ignore:line
             this._search();
         },
 
+        _attachFocusHandlers: function() {
+            var that = this;
+            var wrapper = that.wrapper;
+
+            wrapper.on("focusin" + nsFocusEvent, proxy(that._focusinHandler, that))
+                   .on("focusout" + nsFocusEvent, proxy(that._focusoutHandler, that));
+        },
+
         _focusHandler: function() {
             this.wrapper.focus();
         },
@@ -638,8 +650,6 @@ var __meta__ = { // jshint ignore:line
                     .attr(TABINDEX, wrapper.data(TABINDEX))
                     .attr(ARIA_DISABLED, false)
                     .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("focusin" + ns, proxy(that._focusinHandler, that))
-                    .on("focusout" + ns, proxy(that._focusoutHandler, that))
                     .on("mousedown" + ns, proxy(that._wrapperMousedown, that))
                     .on("paste" + ns, proxy(that._filterPaste, that));
 
@@ -660,10 +670,6 @@ var __meta__ = { // jshint ignore:line
                 dropDownWrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED);
-
-                wrapper
-                    .on("focusin" + ns, proxy(that._focusinHandler, that))
-                    .on("focusout" + ns, proxy(that._focusoutHandler, that));
             }
 
             element.attr(DISABLED, disable)

@@ -8,7 +8,7 @@ position: 0
 
 # Consuming Data from Azure Cosmos DB
 
-This article provides a step-by-step tutorial on how to add Kendo UI to an existing web application built with Azure Cosmos DB using SQL .NET API and Azure Portal, and how to configure a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to display data from and perform CRUD operations with Cosmos DB.
+This article provides a step-by-step tutorial on how to add Kendo UI to an existing web application that is built with Azure Cosmos DB through SQL .NET API and Azure Portal, and how to configure a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to display Cosmos DB data and perform CRUD operations.
 
 ## Prerequisites
 
@@ -18,13 +18,13 @@ Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.co
 
 1. Follow the steps from the [Build a .NET web app with Azure Cosmos DB using the SQL API and the Azure Portal](https://docs.microsoft.com/en-us/azure/cosmos-db/create-sql-api-dotnet) quickstart.
 
-    This quickstart walks you through creating an Azure Cosmos DB SQL API account, document database, and collection using the Azure portal. You will then build and deploy a sample todo list web application.
+    This quickstart demonstrates how create an Azure Cosmos DB SQL API account, document database, and collection by using the Azure Portal. You will also build and deploy a sample To-Do List web application.
 
-1. After successfully completing the quickstart the next steps would include adding Kendo UI to the todo list sample application, implementing the end points for the CRUD operations and configuring the Grid to use these end points.
+1. After successfully completing the quickstart, add Kendo UI to the To-Do List sample application by implementing the endpoints for the CRUD operations and configuring the Grid to use the endpoints.
 
-## Add CSS and JavaScript References
+## Adding CSS and JavaScript References
 
-To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references](https://docs.telerik.com/kendo-ui/intro/installation/getting-started#add-css-and-javascript-references) in the head tag of the _Layout.cshtml file.
+To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references](https://docs.telerik.com/kendo-ui/intro/installation/getting-started#add-css-and-javascript-references) in the head tag of the `_Layout.cshtml` file.
 
 ```HTML
 <head>
@@ -42,19 +42,19 @@ To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript refe
 </head>
 ```
 
-## Implementing the Create, Read, Update and Destroy Actions
+## Implementing the Create, Read, Update, and Destroy Actions
 
-Add the following `using` statements to the ItemController:
+1. Add the following `using` statements to the `ItemController`.
 
-```C#
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.Linq;
-```
+    ```C#
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+    using System.Linq;
+    ```
 
-Implement the four Actions in the ItemController, which will be called by the Grid on performing CRUD operations. We will name the actions KendoRead, KendoCreate, KendoUpdate and KendoDestroy.
+1. Implement the four actions in the `ItemController` which will be called by the Grid on performing CRUD operations. Name the actions, for example, `KendoRead`, `KendoCreate`, `KendoUpdate`, and `KendoDestroy`.
 
-The following example demonstrates the `Read` action:
+The following example demonstrates the `Read` action.
 
 ```C#
 [ActionName("KendoRead")]
@@ -66,14 +66,14 @@ public async Task<ActionResult> KendoRead()
 }
 ```
 
-The following example demonstrates the `Create` action:
+The following example demonstrates the `Create` action.
 
 ```C#
 [ActionName("KendoCreate")]
 public async Task<ActionResult> KendoCreate(string models)
 {
     var items = JsonConvert.DeserializeObject<IEnumerable<Item>>(models);
-    
+
 
     if (items != null && ModelState.IsValid)
     {
@@ -85,7 +85,7 @@ public async Task<ActionResult> KendoCreate(string models)
 }
 ```
 
-The following example demonstrates the `Update` action:
+The following example demonstrates the `Update` action.
 
 ```C#
 [ActionName("KendoUpdate")]
@@ -103,7 +103,7 @@ public async Task<ActionResult> KendoUpdate(string models)
 }
 ```
 
-The following example demonstrates the `Destroy` action:
+The following example demonstrates the `Destroy` action.
 
 ```C#
 [ActionName("KendoDestroy")]
@@ -123,7 +123,7 @@ public async Task<ActionResult> KendoDestroy(string models)
 
 ## Consuming the Implemented CRUD Endpoints on the Client
 
-In order to consume the data from the end points and display it in the Grid, configure the widget and its data source as demonstrated in the following example:
+To consume the data from the endpoints and display it in the Grid, configure the widget and its data source.
 
 ```HTML
 <div id="grid"></div>
@@ -187,7 +187,7 @@ In order to consume the data from the end points and display it in the Grid, con
 
 ## See Also
 
-* [Kendo UI Grid Overview]({% slug overview_kendoui_grid_widget %})
-* [Consuming Data From Azure Functions]({% slug azure_functions %})
+* [Consuming Data from Azure Functions]({% slug azure_functions %})
 * [Integrating Kendo UI with Azure Face API]({% slug azure_faceapi %})
 * [Consuming Data from Amazon DynamoDB]({% slug aws_dynamodb %})
+* [Kendo UI Grid Overview]({% slug overview_kendoui_grid_widget %})

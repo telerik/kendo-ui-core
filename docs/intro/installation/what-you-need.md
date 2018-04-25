@@ -65,11 +65,8 @@ Users with a commercial license might use the [custom download builder tool](htt
 
 > **Important**
 >
-> Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
-
-> **Important**
->
-> Note, that it is not possible to load packages produced by the Download Builder using RequireJS. The tool will not create the required AMD modules.
+> * Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
+> * It is not possible to load Download Builder packages by using RequireJS because the tool will not create the required AMD modules.
 
 ### Use Gulp
 
