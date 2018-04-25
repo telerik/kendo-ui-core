@@ -135,7 +135,7 @@ To utilize the Upgrade Project Wizard, refer to the articles on:
 
 To manually upgrade to a newer Telerik UI for ASP.NET MVC version:
 
-1. Replace all [scripts, styles, and images](#distribution-contents) related to Telerik UI for ASP.NET MVC with the desired version of the framework. [Download](#download) the desired version from the **Download** section of your account. Load the script and styles locally or from the [Kendo UI CDN Services](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service#cdn-services).
+1. Replace all [scripts, styles, and images](#distribution-contents) related to Telerik UI for ASP.NET MVC with the desired version of the framework. [Download](#download) the desired version from the **Download** section of your account. Load the scripts and styles locally or from the [Kendo UI CDN Services](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service#cdn-services).
 1. Change the reference to the new [Kendo.MVC dll]({% slug aspnetmvc5_aspnetmvc %}#add-kendomvcdll-reference). Verify that the dll refers to the correct ASP.NET MVC version.
 
 ### Upgrade From Trial to Licensed Versions

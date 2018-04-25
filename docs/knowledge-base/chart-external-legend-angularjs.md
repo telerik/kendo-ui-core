@@ -1,16 +1,16 @@
 ---
 title: Render External Chart Legend with AngularJS
-description: How do I render external Chart legend for categorical series in with AngularJS?
+description: An example on how to render an external Chart legend for the categorical series when working with Kendo UI in AngularJS applications.
 type: how-to
-page_title: Show External Legend in a Chart Using AngularJS
+page_title: Show External Legend in AngularJS | Kendo UI Charts
 slug: chart-external-legend-angularjs
-position: 
 tags: chart, angularjs, legend
 ticketid: 1161365
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,15 +24,19 @@ res_type: kb
 
 
 ## Description
-I am trying to render an external legend in the Kendo UI Chart using AngularJS. I saw the [external legend example](https://docs.telerik.com/kendo-ui/controls/charts/how-to/appearance/external-legend)  but this one uses jQuery. How to implement the same functionality using AngularJS?
+
+The [external legend example](https://docs.telerik.com/kendo-ui/controls/charts/how-to/appearance/external-legend) uses jQuery.
+
+How can I render an external legend in the Kendo UI Chart in AngularJS?
 
 ## Solution
-In an AngularJS page, you can use the `ng-repeat` directive to render the external legend. You will also need to add event handlers for:
 
-* `mouseenter`/`mouseleave` events of the external legend items to achieve the series highlight effect.
-* `click` event of the external legend to toggle series visibility.
+In an AngularJS page, use the `ng-repeat` directive to render the external legend and add event handlers for:
 
-The following example shows the full implementation:
+* `mouseenter` and `mouseleave` events of the external legend items to achieve the series highlight effect.
+* `click` event of the external legend to toggle the visibility of the series.
+
+###### Example
 
 ```html
     <style>
@@ -118,5 +122,5 @@ The following example shows the full implementation:
 
 ## See Also
 
-* [ng-repeat directive documentation](https://docs.angularjs.org/api/ng/directive/ngRepeat)
-* [AngularJS event handling](https://www.w3schools.com/angular/angular_events.asp)
+* [ng-repeat AngularJS Directive](https://docs.angularjs.org/api/ng/directive/ngRepeat)
+* [Event Handling in AngularJS](https://www.w3schools.com/angular/angular_events.asp)

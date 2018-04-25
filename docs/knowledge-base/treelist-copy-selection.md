@@ -1,8 +1,8 @@
 ---
-title: How to implement allowCopy in the TreeList
-description: How to enable copying of selected items in the TreeList
+title: Implement allowCopy in TreeList
+description: An example on how to enable the copying of the selected items in the Kendo UI TreeList.
 type: how-to
-page_title: Allow copy of selected items in the Kendo UI TreeList
+page_title: Enable Copy of Selected Items | Kendo UI TreeList
 slug: treelist-copy-selection
 tags: treelist, allowCopy, selection, copy
 ticketid: 1161545
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,21 +25,17 @@ res_type: kb
 
 ## Description
 
-Currently in your API the Grid has [`allowCopy`](/api/javascript/ui/grid/configuration/allowcopy) but the TreeList does not. 
+Unlike the Grid, the TreeList API does not provide the [`allowCopy`](/api/javascript/ui/grid/configuration/allowcopy) option. Depending on the specific data, my project uses both widgets. The lack of the setting confuses the users&mdash;in some places they can copy the data while in other places they cannot copy the data even though the controls look the similar.
 
-We currently use the Grid and Treelist depending on the data the we have, this would confuse the users that in one place they can copy and in another they cannot even though the controls look the same (minus is the items can have children).
+How can I enable the copying of the selected items in a TreeList?
 
 ## Solution
 
-The required functionality is not part of the Kendo UI TreeList at present, however, there is already an item in the Kendo UserVoice portal and if it gains popularity, it would be put on the roadmap for implementation. Here is a link to the one we have at present:
-
-[http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/11317023-enable-multi-selection-in-treelist-a-la-grid-and-s](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/11317023-enable-multi-selection-in-treelist-a-la-grid-and-s)
+This functionality is not part of the built-in TreeList settings but is already submitted as a feature request in the UserVoice forum. Popular requests get prioritized on the team's roadmap. To upvote the feature request, refer to [http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/11317023-enable-multi-selection-in-treelist-a-la-grid-and-s](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/11317023-enable-multi-selection-in-treelist-a-la-grid-and-s).
 
 ## Suggested Workarounds
 
-Add an event handler to the [`change`](/api/javascript/ui/treelist/events/change) event of the TreeList so that you can focus the table and also to the `Ctrl +C` keypress combination.
-
-The suggestion can be further developed with the help of the non-minified `kendo.grid.js` file and the `getTSV` internal function.
+To focus the table, add an event handler to the [`change`](/api/javascript/ui/treelist/events/change) event of the TreeList and to the `Ctrl`+`C` key combination. You can further elaborate on the example with the help of the non-minified `kendo.grid.js` file and the `getTSV` internal function.
 
 ###### Example
 
@@ -61,7 +58,7 @@ The suggestion can be further developed with the help of the non-minified `kendo
           $(".k-selectable")[0].focus();
         }
       }).data("kendoTreeList");
-      
+
        $("#treeList").on("keydown","table.k-selectable", function(event){
             if (event.ctrlKey === true && event.key==="c") {
               var selected = treeList.select();
@@ -77,7 +74,7 @@ The suggestion can be further developed with the help of the non-minified `kendo
                 text += result.join(delimiter) + "\r\n";
                 result = [];
               })
-              
+
               var textarea = $("<textarea>");
               var offset = $(this).offset();
               // Position the textarea on top of the Treelist and make it transparent.
@@ -90,13 +87,13 @@ The suggestion can be further developed with the help of the non-minified `kendo
                 width: $(this).find("table").width(),
                 height: $(this).find(".k-grid-content").height()
               });
-              
+
               textarea
                 .val(text)
                 .appendTo('body')
                 .focus()
                 .select();
-              
+
               setTimeout(function(){
                 textarea.remove();
               });          
