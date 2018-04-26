@@ -1883,14 +1883,17 @@ html .km-pane-wrapper .km-widget,
     border-color: @drop-down-hover-border-color;
 }
 
-.k-multiselect.k-header
+.k-multiselect-wrap
 {
     border-color: @drop-down-border-color;
 }
 
-.k-multiselect.k-header.k-state-hover
+.k-multiselect-wrap.k-state-hover,
+.k-state-hover > .k-multiselect-wrap
 {
     border-color: @drop-down-hover-border-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 .k-autocomplete.k-state-focused,
@@ -1902,6 +1905,13 @@ html .km-pane-wrapper .km-widget,
     background-color: @select-hover-background-color;
     .composite-background(@hover-gradient);
     background-position: 50% 50%;
+    border-color: @drop-down-focused-border-color;
+    .box-shadow(@focused-shadow);
+}
+
+.k-multiselect-wrap.k-state-focused,
+.k-state-focused > .k-multiselect-wrap
+{
     border-color: @drop-down-focused-border-color;
     .box-shadow(@focused-shadow);
 }

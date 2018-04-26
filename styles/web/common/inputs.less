@@ -7,6 +7,7 @@ span.k-colorpicker,
 span.k-numerictextbox,
 span.k-combobox,
 span.k-dropdown,
+span.k-dropdowntree,
 .k-toolbar .k-split-button {
     background-image: none;
 }
@@ -19,7 +20,9 @@ span.k-dropdown,
 .k-colorpicker,
 .k-numerictextbox,
 .k-dropdown,
+.k-dropdowntree,
 .k-selectbox,
+.k-multiselect,
 .k-textbox,
 .k-toolbar .k-split-button,
 .k-listbox {
@@ -32,8 +35,8 @@ span.k-dropdown,
 }
 
 .k-autocomplete > .k-i-close,
-.k-combobox > .k-dropdown-wrap > .k-i-close,
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
+.k-dropdown-wrap > .k-i-close,
+.k-multiselect-wrap > .k-i-close {
     font-size: 100%;
     display: none;
     position: absolute;
@@ -42,21 +45,21 @@ span.k-dropdown,
 }
 
 .k-autocomplete > .k-i-close,
-.k-combobox > .k-dropdown-wrap > .k-i-close {
+.k-dropdown-wrap > .k-i-close {
     top: 50%;
     transform: translateY(-50%);
 }
 
-.k-combobox > .k-dropdown-wrap > .k-i-close {
+.k-dropdown-wrap > .k-i-close {
     right: 2.4em;
 }
 
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
+.k-multiselect-wrap > .k-i-close {
     top: (@grid-size/2 - 2px);
 }
 
 .k-autocomplete,
-.k-combobox > .k-dropdown-wrap {
+.k-dropdown-wrap {
     &.k-state-hover,
     &.k-state-focused {
         > .k-i-close {
@@ -66,10 +69,12 @@ span.k-dropdown,
     }
 }
 
-.k-multiselect {
+.k-multiselect-wrap {
     &.k-state-hover,
-    &.k-state-focused {
-        > .k-multiselect-wrap > .k-i-close {
+    &.k-state-focused,
+    .k-state-hover > &
+    .k-state-focused > & {
+        > .k-i-close {
             display: inline-block;
             outline: none;
         }
@@ -77,8 +82,8 @@ span.k-dropdown,
 }
 
 .k-autocomplete > .k-hidden,
-.k-combobox > .k-dropdown-wrap > .k-hidden,
-.k-multiselect .k-hidden {
+.k-dropdown-wrap .k-hidden,
+.k-multiselect-wrap .k-hidden {
     display: none !important;
 }
 
@@ -101,6 +106,7 @@ span.k-dropdown,
 .k-filter-menu .k-datetimepicker,
 .k-filter-menu .k-numerictextbox,
 .k-filter-menu .k-dropdown,
+.k-filter-menu .k-dropdowntree,
 .k-filter-menu .k-autocomplete,
 .k-filter-menu .k-textbox {
     width: 13.2em;
@@ -124,36 +130,9 @@ span.k-dropdown,
 
 .k-dropdown-wrap,
 .k-picker-wrap,
-.k-numeric-wrap {
+.k-numeric-wrap,
+.k-multiselect-wrap {
     display: block;
-}
-
-.k-block,
-.k-widget,
-.k-grid,
-.k-slider,
-.k-splitter,
-.k-treeview,
-.k-panelbar,
-.k-content,
-.k-header-column-menu {
-    outline: 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.k-block,
-.k-slider,
-.k-splitbar,
-.k-calendar,
-.k-treeview,
-.k-pager-wrap,
-.k-grid-header .k-i-link-horizontal,
-.k-header-column-menu {
-    -webkit-touch-callout: none;
-}
-
-.k-header-column-menu {
-    color: inhert;
 }
 
 .k-list-scroller {
@@ -186,6 +165,7 @@ span.k-dropdown,
 .k-textbox,
 .k-autocomplete,
 .k-dropdown-wrap,
+.k-multiselect-wrap,
 .k-picker-wrap,
 .k-numeric-wrap {
     border-width: 1px;
@@ -246,19 +226,16 @@ span.k-textbox:after {
 }
 
 .k-autocomplete,
-.k-dropdown-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-hover,
-.k-picker-wrap.k-state-focused,
-.k-picker-wrap.k-state-hover,
-.k-numeric-wrap.k-state-focused,
-.k-numeric-wrap.k-state-hover {
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap {
     .transition("box-shadow .15s ease-out");
 }
 
 .k-textbox > input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
-.k-combobox .k-input {
+.k-dropdown-wrap .k-input {
     width: 100%;
     box-sizing: border-box;
 }
@@ -273,6 +250,7 @@ span.k-textbox:after {
 }
 
 .k-dropdown .k-input,
+.k-dropdowntree .k-dropdown-wrap .k-input,
 .k-selectbox .k-input {
     background: transparent;
 }
@@ -308,6 +286,7 @@ span.k-datetimepicker .k-select + .k-select {
 }
 
 .k-dropdown .k-select,
+.k-dropdowntree .k-dropdown-wrap .k-select,
 .k-selectbox .k-select {
     overflow: hidden;
     border: 0;
@@ -317,6 +296,7 @@ span.k-datetimepicker .k-select + .k-select {
 }
 
 .k-dropdown .k-input,
+.k-dropdowntree .k-dropdown-wrap .k-input,
 .k-selectbox .k-input {
     display: block;
     overflow: hidden;
@@ -405,6 +385,7 @@ body .k-datetimepicker .k-select {
 
 .k-combobox .k-select,
 .k-dropdown,
+.k-dropdowntree .k-dropdown-wrap,
 .k-selectbox .k-icon {
     cursor: pointer;
 }
@@ -535,14 +516,12 @@ body .k-datetimepicker .k-select {
 }
 
 /* MultiSelect */
-
+.k-multiselect {
+    display: block;
+    width: auto;
+}
 .k-multiselect-wrap {
-    position: relative;
-    border-width: 0px;
-    border-style: solid;
     border-radius: 4px;
-    border-color: #C5C5C5;
-    background-color: #FFF;
     padding-right: (@grid-size + (@grid-size/4 + 2px));
 }
 
@@ -589,6 +568,7 @@ body .k-datetimepicker .k-select {
 /* Inputs */
 .k-autocomplete-clearable,
 .k-multiselect-clearable,
+.k-dropdowntree-clearable,
 .k-combobox-clearable {
     .k-input {
         overflow: hidden;
@@ -596,11 +576,13 @@ body .k-datetimepicker .k-select {
     }
 }
 
-.k-combobox-clearable .k-input {
+.k-combobox-clearable .k-input,
+.k-dropdowntree-clearable .k-dropdown-wrap .k-input {
     padding-right: calc(@input-height + .35em);
 }
 
-.k-multiselect-clearable .k-multiselect-wrap {
+.k-multiselect-clearable .k-multiselect-wrap,
+.k-dropdowntree-clearable .k-multiselect-wrap {
     padding-right: calc(@input-height + .35em);
 }
 
@@ -916,4 +898,11 @@ span.k-numerictextbox {
         padding-right: 0;
         padding-left: calc(@input-height + .35em);
     }
+}
+
+
+.k-multiple-selection .k-in.k-state-selected {
+    border-color: transparent;
+    color: inherit;
+    background: none;
 }

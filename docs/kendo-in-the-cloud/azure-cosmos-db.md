@@ -10,6 +10,8 @@ position: 0
 
 This article provides a step-by-step tutorial on how to add Kendo UI to an existing web application that is built with Azure Cosmos DB through SQL .NET API and Azure Portal, and how to configure a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to display Cosmos DB data and perform CRUD operations.
 
+The complete implementation of the sample project is available in the [Kendo UI Cloud Integration](https://github.com/telerik/kendo-cloud-integration/tree/master/AzureCosmosDB) repository on GitHub.
+
 ## Prerequisites
 
 Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/).

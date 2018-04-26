@@ -250,6 +250,7 @@ navigation:
     "kendo-in-the-cloud":
         title: "Kendo UI in the Cloud"
         position: 7
+        isNew: true
     "AngularJS":
         title: "AngularJS Directives"
         position: 8

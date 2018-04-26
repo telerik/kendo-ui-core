@@ -1074,10 +1074,10 @@ test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert
     });
 
     combobox.open();
-    equal(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1);
+    QUnit.close(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 0.1);
     combobox.close();
     combobox.open();
-    equal(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1);
+    QUnit.close(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 0.1);
 });
 
 test("keep popup opened on empty search result if noDataTemplate", 2, function(assert) {

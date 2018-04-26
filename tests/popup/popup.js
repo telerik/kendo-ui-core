@@ -378,7 +378,7 @@
 
         popup.open();
 
-        equal(div.parent().offset().left, anchor.offset().left + anchor.outerWidth());
+        QUnit.close(div.parent().offset().left, anchor.offset().left + anchor.outerWidth(), 0.1);
     });
 
     test("origin right and position right", function() {
@@ -392,7 +392,7 @@
 
         popup.open();
 
-        equal(div.parent().offset().left + div.outerWidth(), anchor.offset().left + anchor.outerWidth());
+        QUnit.close(div.parent().offset().left + div.outerWidth(), anchor.offset().left + anchor.outerWidth(), 0.1);
     });
 
     test("origin right and position center", function() {
@@ -406,7 +406,7 @@
 
         popup.open();
 
-        equal(div.parent().offset().left + Math.round(div.outerWidth() / 2), anchor.offset().left + anchor.outerWidth());
+        QUnit.close(div.parent().offset().left + Math.round(div.outerWidth() / 2), anchor.offset().left + anchor.outerWidth(), 0.1);
     });
 
     test("origin center and position left", function() {

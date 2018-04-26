@@ -725,10 +725,10 @@ test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert
     });
 
     dropdownlist.open();
-    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
+    QUnit.close(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1, 0.1);
     dropdownlist.close();
     dropdownlist.open();
-    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
+    QUnit.close(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1, 0.1);
 });
 
     test("removes filtering expression if field matches the dataTextField", 1, function() {

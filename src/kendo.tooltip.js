@@ -68,13 +68,6 @@ var __meta__ = { // jshint ignore:line
                 origin: "center center"
             }
         },
-        REVERSE = {
-            "top": "bottom",
-            "bottom": "top",
-            "left": "right",
-            "right": "left",
-            "center": "center"
-        },
         DIRCLASSES = {
             bottom: "n",
             top: "s",
@@ -357,10 +350,6 @@ var __meta__ = { // jshint ignore:line
                         this.element.attr("id", ariaId + ARIAIDSUFFIX);
                     }
 
-                    if (options.callout) {
-                        that._positionCallout();
-                    }
-
                     this.element.removeAttr("aria-hidden");
 
                     DOCUMENT.on("keydown" + NS, that._documentKeyDownHandler);
@@ -409,25 +398,6 @@ var __meta__ = { // jshint ignore:line
             } else {
                 restoreTitle($(target));
             }
-        },
-
-        _positionCallout: function() {
-            var that = this,
-                position = that.options.position,
-                dimensions = that.dimensions,
-                offset = dimensions.offset,
-                popup = that.popup,
-                anchor = popup.options.anchor,
-                anchorOffset = $(anchor).offset(),
-                arrowBorder = parseInt(that.arrow.css("border-top-width"), 10),
-                elementOffset = $(popup.element).offset(),
-                cssClass = DIRCLASSES[popup.flipped ? REVERSE[position] : position],
-                offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2) - arrowBorder;
-
-           that.arrow
-               .removeClass("k-callout-n k-callout-s k-callout-w k-callout-e")
-               .addClass("k-callout-" + cssClass)
-               .css(offset, offsetAmount);
         },
 
         target: function() {

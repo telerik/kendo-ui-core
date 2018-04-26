@@ -8,13 +8,15 @@ position: 2
 
 # Integrating Kendo UI with Azure Face API
 
-You can seamlessly integrate Kendo UI widgets with a cognitive service such as [Azure Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/).
+This article provides a sep-by-step tutorial on how to configure the Kendo UI Upload to send images directly to [the Azure Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/) and then consume the received data from the service.
 
-The cloud-based Face API provides access to a set of advanced face algorithms which enable the detection and identification of faces in images.
+The complete implementation of the template is available in [the Kendo UI Cloud Integration repository on GitHub](https://github.com/telerik/kendo-cloud-integration/tree/master/AzureFaceAPI).
 
 ## Prerequisites
 
-* [An Azure Account](https://azure.microsoft.com/en-us/services/cognitive-services/face/).
+You can seamlessly integrate Kendo UI widgets with a cognitive service such as [Azure Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/). The cloud-based Face API provides access to a set of advanced face algorithms which enable the detection and identification of faces in images.
+
+* [Create an Azure Account](https://azure.microsoft.com/en-us/services/cognitive-services/face/).
 
 ## Sending Files Directly to Face API with the Upload
 

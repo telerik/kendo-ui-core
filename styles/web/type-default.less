@@ -338,7 +338,8 @@ td.k-group-cell,
 .k-autocomplete.k-state-focused .k-input,
 .k-dropdown-wrap.k-state-focused .k-input,
 .k-picker-wrap.k-state-focused .k-input,
-.k-numeric-wrap.k-state-focused .k-input
+.k-numeric-wrap.k-state-focused .k-input,
+.k-multiselect-wrap
 {
     border-color: @widget-border-color;
 }
@@ -358,8 +359,7 @@ textarea.k-textbox,
 input.k-textbox:hover,
 textarea.k-textbox:hover,
 .k-textbox > input,
-.k-multiselect-wrap
-{
+.k-multiselect-wrap {
     background-color: @input-bg;
     color: @input-text;
 }
@@ -1964,22 +1964,20 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-autocomplete.k-state-hover,
-.k-multiselect.k-header.k-state-hover {
+.k-state-hover > .k-multiselect-wrap,
+.k-multiselect-wrap.k-state-hover {
     border-color: @drop-down-hover-border-color;
+    background-color: @input-bg;
+    color: @input-text;
 }
 
 input.k-textbox,
 textarea.k-textbox,
-.k-multiselect.k-header,
+.k-multiselect-wrap,
 .k-maskedtextbox.k-state-disabled > .k-textbox:hover,
 .k-dateinput.k-state-disabled > .k-textbox:hover
 {
     border-color: @drop-down-border-color;
-}
-
-.k-multiselect.k-header.k-state-hover
-{
-    border-color: @drop-down-hover-border-color;
 }
 
 // Focused state
@@ -1995,7 +1993,8 @@ textarea.k-textbox,
 }
 
 .k-autocomplete.k-state-focused,
-.k-multiselect.k-header.k-state-focused {
+.k-state-focused > .k-multiselect-wrap,
+.k-multiselect-wrap.k-state-focused {
     border-color: @drop-down-focused-border-color;
     .box-shadow(@focused-shadow);
 }

@@ -1365,7 +1365,7 @@ var __meta__ = { // jshint ignore:line
                 tagList = that._innerWrapper.children("ul");
 
             if (!tagList[0]) {
-                tagList = $('<ul role="listbox" deselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
+                tagList = $('<ul role="listbox" unselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
             }
 
             that.tagList = tagList;
@@ -1389,7 +1389,7 @@ var __meta__ = { // jshint ignore:line
             that.tagTextTemplate = tagTemplate = tagTemplate ? kendo.template(tagTemplate) : defaultTemplate;
 
             that.tagTemplate = function(data) {
-                return '<li class="k-button" deselectable="on"><span deselectable="on">' +
+                return '<li class="k-button" unselectable="on"><span unselectable="on">' +
                         tagTemplate(data) +
                         '</span><span unselectable="on" aria-label="' +
                         (isMultiple ? "delete" : "open") +
@@ -1429,11 +1429,11 @@ var __meta__ = { // jshint ignore:line
                 wrapper = element.parent("span.k-multiselect");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap('<div class="k-widget k-multiselect k-header" deselectable="on" />').parent();
+                wrapper = element.wrap('<div class="k-widget k-multiselect" unselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
 
-                $('<div class="k-multiselect-wrap k-floatwrap" deselectable="on" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" />').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).css("display", "");

@@ -10,7 +10,7 @@ position: 1
 
 This article provides a step-by-step tutorial on how to configure [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) to serve data for a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}).
 
-The complete implementation of the sample project is available in the [Kendo UI Cloud Integration](https://github.com/telerik/kendo-cloud-integration) repository on GitHub.
+The complete implementation of the sample project is available in the [Kendo UI Cloud Integration](https://github.com/telerik/kendo-cloud-integration/tree/master/AzureFunctions) repository on GitHub.
 
 ## Prerequisites
 
@@ -214,7 +214,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, CloudT
 
 	return req.CreateResponse(HttpStatusCode.OK, entity, "application/json");
 }
-	```
+```
 
 The following example demonstrates the `Run` method for the `Update` function.
 

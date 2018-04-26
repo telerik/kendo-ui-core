@@ -1,12 +1,12 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.popup" ], f);
+    define([ "./kendo.data", "./kendo.list.interactions" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
     id: "list",
     name: "List",
     category: "framework",
-    depends: [ "data", "popup" ],
+    depends: [ "data", "list.interactions" ],
     hidden: true
 };
 
@@ -14,7 +14,6 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        outerWidth = kendo._outerWidth,
         outerHeight = kendo._outerHeight,
         Widget = ui.Widget,
         keys = kendo.keys,
@@ -27,7 +26,6 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-i-loading",
-        HIDDENCLASS = "k-hidden",
         GROUPHEADER = ".k-group-header",
         LABELIDPART = "_label",
         OPEN = "open",
@@ -37,7 +35,6 @@ var __meta__ = { // jshint ignore:line
         SELECTED = "selected",
         REQUESTSTART = "requestStart",
         REQUESTEND = "requestEnd",
-        WIDTH = "width",
         extend = $.extend,
         proxy = $.proxy,
         isArray = $.isArray,
@@ -86,9 +83,7 @@ var __meta__ = { // jshint ignore:line
                 that.ul.attr(ID, id + "_listbox");
             }
 
-            that._header();
-            that._noData();
-            that._footer();
+            that.interactions = new kendo.ui.listInteractions(that);
             that._accessors();
             that._initValue();
         },
@@ -107,9 +102,9 @@ var __meta__ = { // jshint ignore:line
                 options.enabled = options.enable;
             }
 
-            this._header();
-            this._noData();
-            this._footer();
+            this.interactions._header();
+            this.interactions._noData();
+            this.interactions._footer();
 
             this._renderFooter();
             this._renderNoData();
@@ -120,17 +115,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         readonly: function(readonly) {
-            this._editable({
-                readonly: readonly === undefined ? true : readonly,
-                disable: false
-            });
+            this.interactions.readonly(readonly);
         },
 
         enable: function(enable) {
-            this._editable({
-                readonly: false,
-                disable: !(enable = enable === undefined ? true : enable)
-            });
+            this.interactions.enable(enable);
         },
 
         _listOptions: function(options) {
@@ -211,19 +200,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _hideClear: function() {
-            var that = this;
-
-            if(that._clear) {
-                this._clear.addClass(HIDDENCLASS);
-            }
+            this.interactions._hideClear();
         },
 
         _showClear: function() {
-            var that = this;
-
-            if(that._clear) {
-                this._clear.removeClass(HIDDENCLASS);
-            }
+            this.interactions._showClear();
         },
 
         _clearValue: function() {
@@ -304,33 +285,8 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _noData: function() {
-            var noData = $(this.noData);
-            var template = this.options.noDataTemplate;
-
-            this.angular("cleanup", function() { return { elements: noData }; });
-            kendo.destroy(noData);
-            noData.remove();
-
-            if (!template) {
-                this.noData = null;
-                return;
-            }
-
-            this.noData = $('<div class="k-nodata" style="display:none"><div></div></div>').appendTo(this.list);
-            this.noDataTemplate = typeof template !== "function" ? kendo.template(template) : template;
-        },
-
         _renderNoData: function() {
-            var noData = this.noData;
-
-            if (!noData) {
-                return;
-            }
-
-            this._angularElement(noData, "cleanup");
-            noData.children(":first").html(this.noDataTemplate({ instance: this }));
-            this._angularElement(noData, "compile");
+            this.interactions._renderNoData();
         },
 
         _toggleNoData: function(show) {
@@ -342,55 +298,8 @@ var __meta__ = { // jshint ignore:line
             groupHeader.toggle(show);
         },
 
-        _footer: function() {
-            var footer = $(this.footer);
-            var template = this.options.footerTemplate;
-
-            this._angularElement(footer, "cleanup");
-            kendo.destroy(footer);
-            footer.remove();
-
-            if (!template) {
-                this.footer = null;
-                return;
-            }
-
-            this.footer = $('<div class="k-footer"></div>').appendTo(this.list);
-            this.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
-        },
-
         _renderFooter: function() {
-            var footer = this.footer;
-
-            if (!footer) {
-                return;
-            }
-
-            this._angularElement(footer, "cleanup");
-            footer.html(this.footerTemplate({ instance: this }));
-            this._angularElement(footer, "compile");
-        },
-
-        _header: function() {
-            var header = $(this.header);
-            var template = this.options.headerTemplate;
-
-            this._angularElement(header, "cleanup");
-            kendo.destroy(header);
-            header.remove();
-
-            if (!template) {
-                this.header = null;
-                return;
-            }
-
-            var headerTemplate = typeof template !== "function" ? kendo.template(template) : template;
-            header = $(headerTemplate({}));
-
-            this.header = header[0] ? header : null;
-            this.list.prepend(header);
-
-            this._angularElement(this.header, "compile");
+            this.interactions._renderFooter();
         },
 
         _allowOpening: function() {
@@ -448,16 +357,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            if(!this._clear){
-                this._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
-                    "role": "button",
-                    "tabIndex": -1
-                });
-            }
-
-            if (!this.options.clearButton) {
-                this._clear.remove();
-            }
+            this.interactions._clearButton();
         },
 
         search: function(word) {
@@ -503,9 +403,7 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.destroy();
 
-            if (that._form) {
-                that._form.off("reset", that._resetHandler);
-            }
+            that.interactions._destroy();
         },
 
         dataItem: function(index) {
@@ -730,42 +628,8 @@ var __meta__ = { // jshint ignore:line
             return height;
         },
 
-        _adjustListWidth: function() {
-            var list = this.list,
-                width = list[0].style.width,
-                wrapper = this.wrapper,
-                computedStyle, computedWidth;
-
-            if (!list.data(WIDTH) && width) {
-                return;
-            }
-
-            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-            computedWidth = parseFloat(computedStyle  && computedStyle.width) || outerWidth(wrapper);
-
-            if (computedStyle && browser.msie) { // getComputedStyle returns different box in IE.
-                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
-            }
-
-            if (list.css("box-sizing") !== "border-box") {
-                width = computedWidth - (outerWidth(list) - list.width());
-            } else {
-                width = computedWidth;
-            }
-
-            list.css({
-                fontFamily: wrapper.css("font-family"),
-                width: this.options.autoWidth ? "auto" : width,
-                minWidth: width,
-                whiteSpace: this.options.autoWidth ? "nowrap" : "normal"
-            })
-            .data(WIDTH, width);
-
-            return true;
-        },
-
         _openHandler: function(e) {
-            this._adjustListWidth();
+            this.interactions._adjustListWidth();
 
             if (this.trigger(OPEN)) {
                 e.preventDefault();
@@ -838,16 +702,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _popup: function() {
-            var that = this;
-
-            that.popup = new ui.Popup(that.list, extend({}, that.options.popup, {
-                anchor: that.wrapper,
-                open: proxy(that._openHandler, that),
-                close: proxy(that._closeHandler, that),
-                animation: that.options.animation,
-                isRtl: support.isRtl(that.wrapper),
-                autosize :that.options.autoWidth
-            }));
+            this.interactions._popup();
         },
 
         _makeUnselectable: function() {
@@ -1349,21 +1204,8 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _reset: function() {
-            var that = this,
-                element = that.element,
-                formId = element.attr("form"),
-                form = formId ? $("#" + formId) : element.closest("form");
-
-            if (form[0]) {
-                that._resetHandler = function() {
-                    setTimeout(function() {
-                        that.value(that._initial);
-                    });
-                };
-
-                that._form = form.on("reset", that._resetHandler);
-            }
+        _reset: function(){
+            this.interactions._reset();
         },
 
         _parentWidget: function() {

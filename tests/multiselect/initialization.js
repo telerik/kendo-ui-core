@@ -33,7 +33,6 @@
 
         equal(wrapper[0].nodeName, "DIV");
         ok(wrapper.hasClass("k-widget"));
-        ok(wrapper.hasClass("k-header"));
         ok(wrapper.hasClass("k-multiselect"));
     });
 
@@ -963,9 +962,9 @@
         var multiselect = new MultiSelect(select, {
             clearButton: true
         });
-    
+
         multiselect._hideBusy()
-    
+
         ok(multiselect._clear.hasClass("k-hidden"));
     });
 })();

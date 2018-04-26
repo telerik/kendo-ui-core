@@ -2,18 +2,17 @@
 var pb;
 
 function createPbHtml(){
-    var html = "<div id='test-container'>" +
-        "<div id='progressbar'></div>" +
-        "</div>";
+    var html = "<div id='progressbar'></div>";
 
-    $(html).appendTo(QUnit.fixture);
+    pb = $(html);
+    pb.appendTo(QUnit.fixture);
 }
 
 function createProgressbar(options){
     createPbHtml();
 
-    $("#progressbar").kendoProgressBar(options);
-    return $("#progressbar").data("kendoProgressBar");
+    pb.kendoProgressBar(options);
+    return pb.data("kendoProgressBar");
 }
 
 function moduleSetup() {
@@ -268,7 +267,9 @@ asyncTest("Change event is fired only once per value when trying to set value sm
         change: function(){
             changeFiredCounter++;
         },
-        animation: false
+        animation: {
+            duration: 20
+        }
     });
 
     pb.value(20);
@@ -291,7 +292,9 @@ asyncTest("Change event is fired only once per value when trying to set value sm
         change: function(){
             changeFiredCounter++;
         },
-        animation: false
+        animation: {
+            duration: 20
+        }
     });
 
     pb.value(20);
