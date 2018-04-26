@@ -144,7 +144,7 @@ The duration of the open animation in milliseconds.
 
     <input id="datetimepicker" />
     <script>
-    $("#datetimepicker").DateTimePicker({
+    $("#datetimepicker").kendoDateTimePicker({
         dateInput: true
     });
     </script>

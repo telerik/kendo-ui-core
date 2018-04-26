@@ -247,9 +247,13 @@ navigation:
     "third-party/tutorials/webforms":
         title: "ASP.NET Web Forms"
         position: 1
+    "kendo-in-the-cloud":
+        title: "Kendo UI in the Cloud"
+        position: 7
+        isNew: true
     "AngularJS":
         title: "AngularJS Directives"
-        position: 7
+        position: 8
     "AngularJS/how-to":
         title: "How To"
         position: 6

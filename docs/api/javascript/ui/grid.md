@@ -8420,19 +8420,19 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
           { name: "Jane Doe", age: 30 },
           { name: "John Doe", age: 33 }
-      ],
-      selectable: "multiple, row"
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.select("tr:eq(1), tr:eq(2)");
+        ],
+        selectable: "multiple, row"
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.select("tr:eq(0), tr:eq(1)");
     </script>
 
 ### selectedKeyNames
@@ -10845,31 +10845,31 @@ The widget instance which fired the event.
 
     <div id="grid"></div>
     <script>
-    function grid_saveChanges(e) {
-      if (!confirm("Are you sure you want to save all changes?")) {
-         e.preventDefault();
-      }
-    }
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" },
-        { command: "destroy" }
-      ],
-      dataSource: {
-        data:[
-          { id: 1, name: "Jane Doe", age: 30},
-          { id: 2, name: "John Doe", age: 33}
-        ],
-        schema: {
-          model: { id: "id" }
+      function grid_saveChanges(e) {
+        if (!confirm("Are you sure you want to save all changes?")) {
+          e.preventDefault();
         }
-      },
-      editable: true
-      toolbar: ["save"]
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.bind("saveChanges", grid_saveChanges);
+      }
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" },
+          { command: "destroy" }
+        ],
+        dataSource: {
+          data:[
+            { id: 1, name: "Jane Doe", age: 30},
+            { id: 2, name: "John Doe", age: 33}
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        editable: true,
+        toolbar: ["save"]
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.bind("saveChanges", grid_saveChanges);
     </script>
 
 ### sort

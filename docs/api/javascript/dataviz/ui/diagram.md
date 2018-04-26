@@ -2979,8 +2979,7 @@ Whether the addition should be recorded in the undo-redo stack.
       $("#diagram").kendoDiagram();
       var diagram = $("#diagram").data("kendoDiagram");
 
-      diagram.addShape(new Point(100, 100));
-      var shape = new Shape({x:500, y:100, fill: "red"});
+      var shape = new Shape({x: 500, y: 100, fill: "red"});
       diagram.addShape(shape);
     </script>
 

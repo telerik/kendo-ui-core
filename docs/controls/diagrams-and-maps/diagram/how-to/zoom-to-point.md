@@ -13,34 +13,33 @@ The following example demonstrates how to zoom the Diagram to a predefined point
 
 ```html
 
-<button id="zoomIn">+</button>
-<button id="zoomOut">-</button>
+    <button id="zoomIn">+</button>
+    <button id="zoomOut">-</button>
 
-<div id="diagram"></div>
+    <div id="diagram"></div>
 
-<script>
-    $(document).ready(function () {
+    <script>
+      $(document).ready(function () {
         $("#diagram").kendoDiagram();
 
         var diagram = $("#diagram").data("kendoDiagram");
 
         var diagramNS = kendo.dataviz.diagram;
-        var shape1 = diagram.addShape(new diagramNS.Point(100, 100));
+        var shape1 = diagram.addShape(new diagramNS.Shape({x: 120, y: 120, fill: "red", content: { text: "Test Shape" }}));
 
         $("#zoomIn").on("click", function () {
-            var zoom = $("#diagram").data("kendoDiagram").zoom();
-            $("#diagram").data("kendoDiagram").zoom(zoom + 0.1,
-                    {point: new diagramNS.Point(100, 100)});
+          var zoom = $("#diagram").data("kendoDiagram").zoom();
+          $("#diagram").data("kendoDiagram").zoom(zoom + 0.1,
+                                                  {point: new diagramNS.Point(100, 100)});
         });
 
         $("#zoomOut").on("click", function () {
-            var zoom = $("#diagram").data("kendoDiagram").zoom();
-            $("#diagram").data("kendoDiagram").zoom(zoom - 0.1,
-                    {point: new diagramNS.Point(100, 100)});
+          var zoom = $("#diagram").data("kendoDiagram").zoom();
+          $("#diagram").data("kendoDiagram").zoom(zoom - 0.1,
+                                                  {point: new diagramNS.Point(100, 100)});
         });
-    });
-
-</script>
+      });
+    </script>
 
 ```
 

@@ -10,7 +10,9 @@ slug: howto_implementcustomeditor_scheduleraspnetmvc
 
 To see the example, refer to the project on how to [implement a custom editor similar to the build-in editor of a Kendo UI Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-custom-editor) in ASP.NET MVC applications.
 
-Note, that fields that do not come from the ISchedulerEvent interface preserve their exact names. Therefore, the editor template should be referring to the field using those names instead. Fields from the ISchedulerEvent interface are automatically mapped to camelCase fields.
+> **Important**
+>
+> Fields that do not come from the `ISchedulerEvent` interface preserve their exact names. Therefore, when the editor template refers to such a field, it has to apply those names instead. Fields from the `ISchedulerEvent` interface are automatically mapped to camelCase fields.
 
 ## See Also
 
