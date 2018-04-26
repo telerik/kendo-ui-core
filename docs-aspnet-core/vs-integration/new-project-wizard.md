@@ -42,6 +42,10 @@ You can modify the project settings by configuring the options on the **Create N
 
 * **Project type**&mdash;Choose the desired project type: **Empty**, **Standard**, **Grid and Menu**.
 * **Version**&mdash;Choose the version of Telerik UI for ASP.NET Core you want to use.
+* **ASP.NET Core Version**&mdash;Choose the dotnet runtime version. Determines the version of the packages that will be referenced within the project. Telerik UI for ASP.NET Core **version 2017.2.823** or above is required for ASP.NET Core **2.x**.
+* **Target Framework**&mdash;Determines the TargetFramework property value in the **.csproj** file. The drop down is active in **Visual Studio 2017** instances with the **Microsoft.Net.4.6.2.TargetingPack** component installed, otherwise control is disabled with **.NET Core** pre-selected.
+  * .NET Framework sets the TargetFramework property to ***net462***. If this option is selected the package references are based on the selected ASP.NET Core runtime version
+  * .NET Core sets the TargetFramework property to ***netcoreapp1.0, netcoreapp1.1 or netcoreapp2.x*** based on the selected. ASP.NET Core Version.
 
 ### Creating New ASP.NET Core Applications
 
