@@ -614,7 +614,7 @@ var __meta__ = { // jshint ignore:line
         var result = "<ul class='k-reset k-slider-items'>",
             count = math.floor(round(distance / options.smallStep)) + 1,
             i;
-       
+
         for(i = 0; i < count; i++) {
             result += "<li class='k-tick' role='presentation'>&nbsp;</li>";
         }
@@ -1290,10 +1290,10 @@ var __meta__ = { // jshint ignore:line
 
             if (owner._isHorizontal) {
                 left -= parseInt((width - owner._outerSize(element)) / 2, 10);
-                top -= height + callout.height() + margin;
+                top -= height + margin + (callout.length ? callout.height() : 0);
             } else {
                 top -= parseInt((height - owner._outerSize(element)) / 2, 10);
-                left -= width + callout.width() + margin;
+                left -= width + margin + (callout.length ? callout.width() : 0);
             }
 
             if (owner._isHorizontal) {

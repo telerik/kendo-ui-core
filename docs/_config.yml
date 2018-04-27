@@ -112,19 +112,25 @@ navigation:
     "controls/navigation":
         title: "Navigation"
         position: 9
+    "controls/conversational-ui":
+        title: "Conversational UI"
+        position: 10
+        isNew: true
+    "controls/conversational-ui/chat":
+        title: "Chat"
     "controls/interactivity":
         title: "Interactivity and UX"
-        position: 10
+        position: 11
     "controls/interactivity/fx":
         title: "FX"
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
     "controls/media":
         title: "Media"
-        position: 11
+        position: 12
     "controls/hybrid":
         title: "Hybrid UI"
-        position: 12
+        position: 13
     "controls/hybrid/styles":
         title: "Styles and Appearance"
         position: 5

@@ -32,6 +32,10 @@ For convenience, the same project templates are located under the **Visual C#** 
 
 The wizard detects all installed versions of Telerik UI for ASP.NET Core and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
+Since 2018 R2 release the **Create New Project Wizard** in Visual Studio 2017 allows selection of **Target Framework**. In order to enable the Target Framework dropdown:
+* .Net Framework 4.6.2 should be installed
+* .Net version should be checked in the list of Individual components.  To open Visual Studio Installer go to **Tools** > **Get Tools and Features**. Then in Visual Studio Installer select **Individual components** tab and check .NET Framework 4.6.2 targeting pack and .NET Framework 4.6.2 SDK.
+
 **Figure 1. New Project Wizard**
 
 ![New Project Wizard](images/new-project-wizard-core.png)
@@ -40,7 +44,7 @@ The wizard detects all installed versions of Telerik UI for ASP.NET Core and lis
 
 You can modify the project settings by configuring the options on the **Create New Project** page:
 
-* **Project type**&mdash;Choose the desired project type: **Empty**, **Standard**, **Grid and Menu**.
+* **Project type**&mdash;Choose the desired project type: **Blank**, **Standard**, **Grid and Menu**.
 * **Version**&mdash;Choose the version of Telerik UI for ASP.NET Core you want to use.
 
 ### Creating New ASP.NET Core Applications
@@ -50,8 +54,7 @@ After configuring the project settings, click **Finish** to start creating the n
 As a result, the wizard:
 
 * Creates a new ASP.NET Core application.
-* Copies all Kendo UI scripts.
-* Copies all Kendo UI content files.
+* Adds CDN references for Kendo styles and scripts in the project`s Layout file.
 * Copies all Kendo UI editor templates.
 * Adds a package reference to the `Telerik.UI.for.AspNet.Core` NuGet package.
 

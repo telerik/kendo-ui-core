@@ -6,6 +6,7 @@ var __meta__ = { // jshint ignore:line
     id: "list.interactions",
     name: "List Interactions",
     category: "framework",
+    depends: [ "popup" ],
     hidden: true
 };
 
