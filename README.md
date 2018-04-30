@@ -26,6 +26,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | :white_check_mark: | :white_check_mark: | :white_check_mark:        |
 | [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
+| [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index)  | :x: | :white_check_mark: | :white_check_mark:           |
 | [Editor](http://demos.telerik.com/kendo-ui/editor/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
@@ -35,6 +36,8 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Upload](http://demos.telerik.com/kendo-ui/upload/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Validator](http://demos.telerik.com/kendo-ui/validator/index)        | :white_check_mark:  | :white_check_mark: | :white_check_mark:           |
+| **Conversational UI**                |
+| [Chat](http://demos.telerik.com/kendo-ui/chat/index)    | :x: | :white_check_mark: | :white_check_mark:            |
 | **Charts**                |
 | [Area Charts](http://demos.telerik.com/kendo-ui/area-charts/index)    | :x: | :white_check_mark: | :white_check_mark:            |
 | [Bar Charts](http://demos.telerik.com/kendo-ui/bar-charts/index)      | :x: | :white_check_mark: | :white_check_mark:            |

@@ -1,12 +1,12 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.list.interactions" ], f);
+    define([ "./kendo.data" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
     id: "list",
     name: "List",
     category: "framework",
-    depends: [ "data", "list.interactions" ],
+    depends: [ "data" ],
     hidden: true
 };
 
@@ -20,6 +20,7 @@ var __meta__ = { // jshint ignore:line
         support = kendo.support,
         htmlEncode = kendo.htmlEncode,
         activeElement = kendo._activeElement,
+        outerWidth = kendo._outerWidth,
         ObservableArray = kendo.data.ObservableArray,
         ID = "id",
         CHANGE = "change",
@@ -39,6 +40,8 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy,
         isArray = $.isArray,
         browser = support.browser,
+        HIDDENCLASS = "k-hidden",
+        WIDTH = "width",
         isIE = browser.msie,
         isIE8 = isIE && browser.version < 9,
         quotRegExp = /"/g,
@@ -83,7 +86,9 @@ var __meta__ = { // jshint ignore:line
                 that.ul.attr(ID, id + "_listbox");
             }
 
-            that.interactions = new kendo.ui.listInteractions(that);
+            that._header();
+            that._noData();
+            that._footer();
             that._accessors();
             that._initValue();
         },
@@ -102,9 +107,9 @@ var __meta__ = { // jshint ignore:line
                 options.enabled = options.enable;
             }
 
-            this.interactions._header();
-            this.interactions._noData();
-            this.interactions._footer();
+            this._header();
+            this._noData();
+            this._footer();
 
             this._renderFooter();
             this._renderNoData();
@@ -115,11 +120,76 @@ var __meta__ = { // jshint ignore:line
         },
 
         readonly: function(readonly) {
-            this.interactions.readonly(readonly);
+            this._editable({
+                readonly: readonly === undefined ? true : readonly,
+                disable: false
+            });
         },
 
         enable: function(enable) {
-            this.interactions.enable(enable);
+            this._editable({
+                readonly: false,
+                disable: !(enable = enable === undefined ? true : enable)
+            });
+        },
+
+        _header: function() {
+            var list = this;
+            var header = $(list.header);
+            var template = list.options.headerTemplate;
+
+            this._angularElement(header, "cleanup");
+            kendo.destroy(header);
+            header.remove();
+
+            if (!template) {
+                list.header = null;
+                return;
+            }
+
+            var headerTemplate = typeof template !== "function" ? kendo.template(template) : template;
+            header = $(headerTemplate({}));
+
+            list.header = header[0] ? header : null;
+            list.list.prepend(header);
+
+            this._angularElement(list.header, "compile");
+        },
+
+        _noData: function() {
+            var list = this;
+            var noData = $(list.noData);
+            var template = list.options.noDataTemplate;
+
+            list.angular("cleanup", function() { return { elements: noData }; });
+            kendo.destroy(noData);
+            noData.remove();
+
+            if (!template) {
+                list.noData = null;
+                return;
+            }
+
+            list.noData = $('<div class="k-nodata" style="display:none"><div></div></div>').appendTo(list.list);
+            list.noDataTemplate = typeof template !== "function" ? kendo.template(template) : template;
+        },
+
+        _footer: function() {
+            var list = this;
+            var footer = $(list.footer);
+            var template = list.options.footerTemplate;
+
+            this._angularElement(footer, "cleanup");
+            kendo.destroy(footer);
+            footer.remove();
+
+            if (!template) {
+                list.footer = null;
+                return;
+            }
+
+            list.footer = $('<div class="k-footer"></div>').appendTo(list.list);
+            list.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
         },
 
         _listOptions: function(options) {
@@ -200,11 +270,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _hideClear: function() {
-            this.interactions._hideClear();
+            var list = this;
+
+            if(list._clear) {
+                list._clear.addClass(HIDDENCLASS);
+            }
         },
 
         _showClear: function() {
-            this.interactions._showClear();
+            if(this._clear) {
+                this._clear.removeClass(HIDDENCLASS);
+            }
         },
 
         _clearValue: function() {
@@ -286,7 +362,16 @@ var __meta__ = { // jshint ignore:line
         },
 
         _renderNoData: function() {
-            this.interactions._renderNoData();
+            var list = this;
+            var noData = list.noData;
+
+            if (!noData) {
+                return;
+            }
+
+            this._angularElement(noData, "cleanup");
+            noData.children(":first").html(list.noDataTemplate({ instance: list }));
+            this._angularElement(noData, "compile");
         },
 
         _toggleNoData: function(show) {
@@ -299,7 +384,16 @@ var __meta__ = { // jshint ignore:line
         },
 
         _renderFooter: function() {
-            this.interactions._renderFooter();
+            var list = this;
+            var footer = list.footer;
+
+            if (!footer) {
+                return;
+            }
+
+            this._angularElement(footer, "cleanup");
+            footer.html(list.footerTemplate({ instance: list }));
+            this._angularElement(footer, "compile");
         },
 
         _allowOpening: function() {
@@ -357,7 +451,19 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this.interactions._clearButton();
+            var list = this;
+            var clearTitle = (list.options.messages && list.options.messages.clear) ? list.options.messages.clear: "clear";
+
+            if(!list._clear){
+                list._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="' + clearTitle + '"></span>').attr({
+                    "role": "button",
+                    "tabIndex": -1
+                });
+            }
+
+            if (!list.options.clearButton) {
+                list._clear.remove();
+            }
         },
 
         search: function(word) {
@@ -403,7 +509,9 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.destroy();
 
-            that.interactions._destroy();
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
+            }
         },
 
         dataItem: function(index) {
@@ -629,7 +737,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _openHandler: function(e) {
-            this.interactions._adjustListWidth();
+            this._adjustListWidth();
 
             if (this.trigger(OPEN)) {
                 e.preventDefault();
@@ -637,6 +745,41 @@ var __meta__ = { // jshint ignore:line
                 this._focused.attr("aria-expanded", true);
                 this.ul.attr("aria-hidden", false);
             }
+        },
+
+        _adjustListWidth: function() {
+            var that = this,
+                list = that.list,
+                width = list[0].style.width,
+                wrapper = that.wrapper,
+                computedStyle, computedWidth;
+
+            if (!list.data(WIDTH) && width) {
+                return;
+            }
+
+            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
+            computedWidth = parseFloat(computedStyle  && computedStyle.width) || outerWidth(wrapper);
+
+            if (computedStyle && browser.msie) { // getComputedStyle returns different box in IE.
+                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
+            }
+
+            if (list.css("box-sizing") !== "border-box") {
+                width = computedWidth - (outerWidth(list) - list.width());
+            } else {
+                width = computedWidth;
+            }
+
+            list.css({
+                fontFamily: wrapper.css("font-family"),
+                width: that.options.autoWidth ? "auto" : width,
+                minWidth: width,
+                whiteSpace: that.options.autoWidth ? "nowrap" : "normal"
+            })
+            .data(WIDTH, width);
+
+            return true;
         },
 
         _closeHandler: function(e) {
@@ -702,7 +845,16 @@ var __meta__ = { // jshint ignore:line
         },
 
         _popup: function() {
-            this.interactions._popup();
+            var list = this;
+
+            list.popup = new ui.Popup(list.list, extend({}, list.options.popup, {
+                anchor: list.wrapper,
+                open: proxy(list._openHandler, list),
+                close: proxy(list._closeHandler, list),
+                animation: list.options.animation,
+                isRtl: support.isRtl(list.wrapper),
+                autosize :list.options.autoWidth
+            }));
         },
 
         _makeUnselectable: function() {
@@ -1204,8 +1356,21 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _reset: function(){
-            this.interactions._reset();
+        _reset: function() {
+            var that = this,
+                element = that.element,
+                formId = element.attr("form"),
+                form = formId ? $("#" + formId) : element.closest("form");
+
+            if (form[0]) {
+                that._resetHandler = function() {
+                    setTimeout(function() {
+                        that.value(that._initial);
+                    });
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         },
 
         _parentWidget: function() {

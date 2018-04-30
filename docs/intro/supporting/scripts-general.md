@@ -50,7 +50,6 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.menu.js | Column menu feature (optional) |
 | | kendo.columnmenu.js | Column menu feature (optional) |
 | | kendo.groupable.js | Grouping feature (optional) |
-| | kendo.popup.js | Row filter feature (optional) |
 | | kendo.list.js | Row filter feature (optional) |
 | | kendo.autocomplete.js | Row filter feature (optional) |
 | | kendo.filtercell.js | Row filter feature (optional) |
@@ -100,10 +99,10 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.sortable.js | |
-| | kendo.popup.js | Configurator feature (optional) |
 | | kendo.list.js | Configurator feature (optional) |
 | | kendo.dropdownlist.js | Configurator feature (optional) |
 | | kendo.treeview.js | Configurator feature (optional) |
+| | kendo.popup.js | Configurator feature (optional) |
 | | kendo.menu.js | Configurator feature (optional) |
 | | kendo.window.js | Configurator feature (optional) |
 | | kendo.pivot.fieldmenu.js | Configurator feature (optional) |

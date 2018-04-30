@@ -46,12 +46,12 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.dropdownlist.js | |
 | | kendo.userevents.js | |
 | | kendo.selectable.js | |
 | | kendo.calendar.js | |
+| | kendo.popup.js | |
 | | kendo.datepicker.js | |
 | | kendo.numerictextbox.js | |
 | | kendo.validator.js | |

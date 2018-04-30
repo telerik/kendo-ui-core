@@ -16,7 +16,6 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | [AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.fx.js | Mobile scroller feature (optional) |
 | | kendo.userevents.js | Mobile scroller feature (optional) |
@@ -36,7 +35,6 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.fx.js | Mobile scroller feature (optional) |
 | | kendo.userevents.js | Mobile scroller feature (optional) |
@@ -63,7 +61,6 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.fx.js | Mobile scroller feature (optional) |
 | | kendo.userevents.js | Mobile scroller feature (optional) |
@@ -71,15 +68,21 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.dropdownlist.js | |
+| [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.data.js | |
+| | kendo.treeview.js | |
+| | kendo.popup.js | |
+| | kendo.dropdowntree.js | |
 | [Editor](http://demos.telerik.com/kendo-ui/editor/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.combobox.js | |
 | | kendo.dropdownlist.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
+| | kendo.popup.js | |
 | | kendo.window.js | |
 | | kendo.color.js | |
 | | kendo.slider.js | |
@@ -102,7 +105,6 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
-| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.fx.js | Mobile scroller feature (optional) |
 | | kendo.userevents.js | Mobile scroller feature (optional) |

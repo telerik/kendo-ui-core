@@ -154,7 +154,7 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended to set [loadOnDemand](/api/javascript/ui/dropdowntree/loadOnDemand) to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/loadOnDemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 #### Example - disable the clear button
 
@@ -620,12 +620,10 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
         });
     </script>
 
-### loadOnDemand `Boolean` *(default: true)*
+### loadOnDemand `Boolean` *(default: false)*
 
 Indicates whether the child DataSources should be fetched lazily when parent groups get expanded.
-Setting this to false causes all child DataSources to be loaded at initialization time.
-
-> Note: when initializing the widget from an array (rather than from a HierarchicalDataSource instance), this option defaults to false, rather than true.
+Setting this to true causes loading the child DataSources when expanding the parent node.
 
 #### Example - force lazy loading of sublevels
 
