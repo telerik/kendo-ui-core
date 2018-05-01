@@ -145,73 +145,64 @@ The Chat widget offers the possibility to define custom templates to fit any cus
 
 ### Custom Components
 
-The Chat widget allows the developer to define custom components, which let you use JavaScript to render any content. The below example demonstrates how to place a [Kendo UI Calendar]({% slug overview_kendoui_calendar_widget %}) in a component:
+The Chat widget provides support for custom components, which allow the use of JavaScript to render any content. The below example demonstrates how to place a [Kendo UI Calendar]({% slug overview_kendoui_calendar_widget %}) in a Custom Chat component:
 
 ```html
 <div id="chat"></div>
 
 <script>
   var CalendarComponent = kendo.chat.Component.extend({
-    init: function (options, view) {
-      kendo.chat.Component.fn.init.call(this, options, view);
+	init: function (options, view) {
+	  kendo.chat.Component.fn.init.call(this, options, view);
 
-      // Create a <div> from which the Calendar will be initialized
-      var calendarElement = $('<div>');
-      
-      // Initialize the Calendar widget passing the provided value
-      calendarElement.kendoCalendar({
-        value: options.value,
-        change: function(e) {
-          alert(kendo.toString(e.sender.value(), 'D') + ' selected!');
-        }
-      });
+	  // Create a <div> from which the Calendar will be initialized
+	  var calendarElement = $('<div>');
 
-      // Place the calendar within the Chat Card
-      var bodyElement = $('<div>').addClass("k-card-body").append(calendarElement);
-      this.element.addClass("k-card").append(bodyElement);
-    }
+	  // Initialize the Calendar widget passing the provided value
+	  calendarElement.kendoCalendar({
+		value: options.value,
+		// Implement the logic to be executed
+		// when the user selects a date
+		change: function(e) {
+		  var chat = $('#chat').getKendoChat();
+		  chat.postMessage('You have selected ' + kendo.toString(e.sender.value(), 'D') + '!');
+
+		  var element = e.sender.element.closest('.k-card-container');
+		  
+		  setTimeout(function() {
+			e.sender.destroy();
+			element.remove();
+		  });
+		}
+	  });
+
+	  // Place the calendar within the Chat Card
+	  var bodyElement = $('<div>').addClass("k-card-body").append(calendarElement);
+	  this.element.addClass("k-card").append(bodyElement);
+	}
   });
 
   kendo.chat.registerComponent("CalendarComponent", CalendarComponent);
 
-  $("#chat").kendoChat({
-    sendMessage: function(e) {
-      var dateText = e.text;
-      var date = new Date(dateText);
-      var chat = e.sender;
-
-      if ( Object.prototype.toString.call(date) === "[object Date]" ) {
-        if(isNaN(date)) {
-          chat.postMessage("The date is not valid!");
-        }
-        else {
-          chat.renderAttachments({
-          attachments: [{
-            contentType: "CalendarComponent",
-            content: {
-              value: date
-            }
-          }]
-        }, chat.getUser());
-        }
-      }
-      else {
-        chat.postMessage("The date is not valid!");
-      }
-    }
-  });
-
-  var chat = $("#chat").data("kendoChat");
+  var chat = $("#chat").kendoChat().data("kendoChat");
 
   chat.postMessage("Hello!");
-  chat.postMessage("Please, type a date to display it in a Calendar.");
+  chat.postMessage("Please, select a date from the Calendar.");
 
+  chat.renderAttachments({
+	attachments: [{
+	  contentType: "CalendarComponent",
+	  content: {
+		value: new Date()
+	  }
+	}]
+  }, chat.getUser());
 </script>
 ```
 
 ## See Also
 
-* [Configure Chat Agent]({% slug configure_chat_agent %})
+* [Connect to Chatbot Service]({% slug connect_to_chatbot_service %})
 * [Chat JavaScript API Reference](/api/javascript/ui/chat)
 
 For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).

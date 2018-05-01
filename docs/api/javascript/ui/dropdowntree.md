@@ -422,11 +422,13 @@ If an array, each level uses the field that is at the same index in the array, o
         });
     </script>
 
-### dataTextField `String`*(default: "")*
+### dataTextField `String|Array` *(default: null)*
 
-The field of the data item that provides the text content of the treeview items and the text of the selected items and tokens. The widget will filter the data source based on this field.
+Sets the field of the data item that provides the text content of the nodes.
+If an array, each level uses the field that is at the same index in the array, or the last item in the array.
 
-> **Important** When `dataTextField` is defined, the `dataValueField` option also should be set.
+> **Important** In case when array is used, [filter](/api/javascript/ui/dropdowntree/filter) is not supported because
+ [hierarchical data source](/api/javascript/data/hierarchicaldatasource) does not support filtering by different fields yet.
 
 #### Example - set the dataTextField
 
@@ -461,11 +463,10 @@ Sets the field of the data item that provides the link URL of the nodes.
         });
     </script>
 
-### dataValueField `String`*(default: "")*
+### dataValueField `String|Array` *(default: null)*
 
 The field of the data item that provides the value of the widget.
-
-> **Important** When `dataValueField` is defined, the `dataTextField` option also should be set.
+If an array, each level uses the field that is at the same index in the array, or the last item in the array.
 
 #### Example - set the dataValueField
 
@@ -589,9 +590,9 @@ The widget instance.
         });
     </script>
 
-### height `Number|String`
+### height `Number|String``*(default: 200)*
 
-The height of the suggestion popup in pixels. The default value is 200 pixels.
+The height of the suggestion popup in pixels. The default value is 200 pixels. If set to "Auto" the height of the popup will depend on the height of the treeview.
 
 #### Example - set the height
 
@@ -1508,7 +1509,7 @@ The widget instance which fired the event.
 
 ### dataBound
 
-Fired when the widget is bound to data from its data source.
+Fired when the widget or sub levels of its items are bound to data from the dataSource.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 

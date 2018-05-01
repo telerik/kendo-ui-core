@@ -410,8 +410,9 @@ var __meta__ = { // jshint ignore:line
                 that._createList();
                 if (!action && that._values.length && !filtered && !that.options.skipUpdateOnBind) {
                     that._selectingValue = true;
-                    that.value(that._values, true).done(function() {
-                        that.bound(true);
+
+                    that.bound(true);
+                    that.value(that._values, true).done(function () {
                         that._selectingValue = false;
                         that._triggerListBound();
                     });
@@ -899,7 +900,7 @@ var __meta__ = { // jshint ignore:line
                 that._triggerChange(removed);
 
                 if (that._valueDeferred) {
-                    that._valueDeferred.resolve();
+                    that._valueDeferred.resolve().promise();
                 }
 
                 return that._selectDeferred.resolve().promise();

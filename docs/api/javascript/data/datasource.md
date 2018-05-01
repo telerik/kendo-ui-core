@@ -1262,7 +1262,7 @@ For more information and tips about client and server data operations, refer to 
 
 If set to `true`, the data source will leave the filtering implementation to the remote service. By default, the data source performs filtering client-side.
 
-By default, the [`filter`](/api/javascript/data/datasource#configuration-filter) is sent to the server following jQuery's [conventions](http://api.jquery.com/jQuery.param/).
+By default, the [`filter`](/api/javascript/data/datasource#configuration-filter) is sent to the server following jQuery's [conventions](https://api.jquery.com/jQuery.param/).
 
 For example, the filter `{ logic: "and", filters: [ { field: "name", operator: "startswith", value: "Jane" } ] }` is sent as:
 
@@ -1291,7 +1291,7 @@ For more information and tips about client and server data operations, refer to 
 
 If set to `true`, the data source will leave the grouping implementation to the remote service. By default, the data source performs grouping client-side.
 
-By default, the [`group`](/api/javascript/data/datasource#configuration-group) is sent to the server following jQuery's [conventions](http://api.jquery.com/jQuery.param/).
+By default, the [`group`](/api/javascript/data/datasource#configuration-group) is sent to the server following jQuery's [conventions](https://api.jquery.com/jQuery.param/).
 
 For example, the group `{ field: "category", dir: "desc" }` is sent as:
 
@@ -1349,7 +1349,7 @@ For more information and tips about client and server data operations, refer to 
 
 If set to `true`, the data source will leave the data item sorting implementation to the remote service. By default, the data source performs sorting client-side.
 
-By default, the [`sort`](/api/javascript/data/datasource#configuration-sort) is sent to the server following jQuery's [conventions](http://api.jquery.com/jQuery.param/).
+By default, the [`sort`](/api/javascript/data/datasource#configuration-sort) is sent to the server following jQuery's [conventions](https://api.jquery.com/jQuery.param/).
 
 For example, the sort `{ field: "age", dir: "desc" }` is sent as:
 
@@ -1529,6 +1529,20 @@ Local data sources are bound to a JavaScript array via the [`data`](/api/javascr
     });
     </script>
 
+### transport.batch `Object`
+
+> Configurable for the [`odata-v4 data source type`](/api/javascript/data/datasource/configuration/type) in [`batch`](/api/javascript/data/datasource/configuration/batch) mode.
+
+The object can contain all the available [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) options.  
+
+### transport.batch.url `String|Function`
+
+>This option is configurable for the [`odata-v4 data source type`](/api/javascript/data/datasource/configuration/type) in [`batch`](/api/javascript/data/datasource/configuration/batch) mode.
+
+The [`odata-v4 batch endpoint`](https://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398359) to which the request is sent.
+
+If set to a function, the data source will invoke it and use the result as the URL.
+
 ### transport.cache `Boolean` *(default: false)*
 
 Specifies if the transport caches the result from read requests. The query parameters are used as a cache key and if the key is present in the cache, a new request to the server is not executed. The cache is kept in memory and thus cleared on page refresh.
@@ -1568,9 +1582,9 @@ Specifies if the transport caches the result from read requests. The query param
 
 The configuration used when the data source saves newly created data items. Those are items added to the data source via the [`add`](/api/javascript/data/datasource/methods/add) or [`insert`](/api/javascript/data/datasource/methods/insert) methods.
 
-> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/) to make a HTTP request to the remote service. The value configured via `transport.create` is passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings). This means that you can set all options supported by `jQuery.ajax` via `transport.create` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) to make a HTTP request to the remote service. The value configured via `transport.create` is passed to [`jQuery.ajax`](https://api.jquery.com/jquery.ajax/#jQuery-ajax-settings). This means that you can set all options supported by `jQuery.ajax` via `transport.create` except the `success` and `error` callback functions which are used by the transport.
 
-If the value of `transport.create` is a function, the data source invokes that function instead of `jQuery.ajax`. Check [the jQuery documentation](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings) for more details on the provided argument.
+If the value of `transport.create` is a function, the data source invokes that function instead of `jQuery.ajax`. Check [the jQuery documentation](https://api.jquery.com/jquery.ajax/#jQuery-ajax-settings) for more details on the provided argument.
 
 If the value of `transport.create` is a string, the data source uses this string as the URL of the remote service.
 
@@ -1646,7 +1660,7 @@ If the value of `transport.create` is a string, the data source uses this string
 
 If set to `false`, the request result will not be cached by the browser. Setting `cache` to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further info.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example - enable request caching
 
@@ -1663,7 +1677,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 
 ### transport.create.contentType `String`
 
-The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set a content type
 
@@ -1682,7 +1696,7 @@ The content-type HTTP header sent to the server. The default is `"application/x-
 
 Additional parameters that are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
 
@@ -1722,7 +1736,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 
 The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -1743,7 +1757,7 @@ The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The defa
 
 > The `type` option is ignored if `dataType` is set to `"jsonp"`. JSONP always uses GET requests.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the HTTP verb of the request
 
@@ -1820,7 +1834,7 @@ If set to function, the data source will invoke it and use the result as the URL
 
 The configuration used when the data source destroys data items. Those are items removed from the data source via the [`remove`](/api/javascript/data/datasource/methods/remove) method.
 
-> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) to make an HTTP request to the remote service. The value configured via `transport.destroy` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.destroy` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) to make an HTTP request to the remote service. The value configured via `transport.destroy` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.destroy` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.destroy` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
@@ -1913,7 +1927,7 @@ If the value of `transport.destroy` is a string, the data source uses this strin
 
 If set to `false`, the request result will not be cached by the browser. Setting `cache` to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - enable request caching
 
@@ -1930,7 +1944,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 
 ### transport.destroy.contentType `String`
 
-The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further information.
+The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [jQuery.ajax](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the content type
 
@@ -1949,7 +1963,7 @@ The content-type HTTP header sent to the server. The default is `"application/x-
 
 Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
 
@@ -1989,7 +2003,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 
 The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -2010,7 +2024,7 @@ The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The defa
 
 > The `type` option is ignored if `dataType` is set to `"jsonp"`. JSONP always uses GET requests.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example
 
@@ -2097,7 +2111,7 @@ If set to function, the data source will invoke it and use the result as the URL
 
 ### transport.parameterMap `Function`
 
-The function which converts the request parameters to a format suitable for the remote service. By default, the data source sends the parameters using jQuery's [conventions](http://api.jquery.com/jQuery.param/).
+The function which converts the request parameters to a format suitable for the remote service. By default, the data source sends the parameters using jQuery's [conventions](https://api.jquery.com/jQuery.param/).
 
 > * The `parameterMap` method is often used to encode the parameters in JSON format.
 > * The `parameterMap` function will not be called when using custom functions for the read, update, create, and destroy operations.
@@ -2299,7 +2313,7 @@ which should follow the `schema.data` configuration.
 
 The configuration used when the data source loads data items from a remote service.
 
-> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.read` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.read` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.read` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.read` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.read` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
@@ -2376,7 +2390,7 @@ If the value of `transport.read` is a string, the data source uses this string a
 
 If set to `false`, the request result will not be cached by the browser. Setting cache to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - enable request caching
 
@@ -2393,7 +2407,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 
 ### transport.read.contentType `String`
 
-The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+The content-type HTTP header sent to the server. The default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON. Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set content type
 
@@ -2412,7 +2426,7 @@ The content-type HTTP header sent to the server. The default is `"application/x-
 
 Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
 
@@ -2456,7 +2470,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 
 The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -2477,7 +2491,7 @@ The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The defa
 
 > The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the HTTP verb of the request
 
@@ -2711,7 +2725,7 @@ A callback that should be called in case of failure of any of the operations.
 
 The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.
 
-> The data source uses [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.update` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.update` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.update` is passed to `jQuery.ajax`. This means that you can set all options supported by `jQuery.ajax` via `transport.update` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.update` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
@@ -2788,7 +2802,7 @@ If the value of `transport.update` is a string, the data source uses this string
 
 If set to `false`, the request result will not be cached by the browser. Setting `cache` to `false` will only work correctly with HEAD and GET requests. It works by appending *"_={timestamp}"* to the GET parameters. By default, `"jsonp"` requests are not cached.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - enable request caching
 
@@ -2806,7 +2820,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 ### transport.update.contentType `String`
 
 The content-type HTTP header sent to the server. Default is `"application/x-www-form-urlencoded"`. Use `"application/json"` if the content is JSON.
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set content type
     <script>
@@ -2825,7 +2839,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 Additional parameters which are sent to the remote service. The parameter names must not match reserved words, which are used by the Kendo UI DataSource for
 [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering), [paging](/api/javascript/data/datasource#configuration-serverPaging), and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - send additional parameters as an object
 
@@ -2865,7 +2879,7 @@ Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation fo
 
 The type of result expected from the server. Commonly used values are `"json"` and `"jsonp"`.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the data type to JSON
 
@@ -2886,7 +2900,7 @@ The type of request to make (`"POST"`, `"GET"`, `"PUT"` or `"DELETE"`). The defa
 
 > The `type` option is ignored if `dataType` is set to `"jsonp"`. JSONP always uses GET requests.
 
-Refer to the [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax) documentation for further information.
+Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation for further information.
 
 #### Example - set the HTTP verb of the request
     <script>
@@ -4464,7 +4478,7 @@ String describing the type of the error.
 
 ##### e.xhr `Object`
 
-The current [`jqXHR`](http://api.jquery.com/Types/#jqXHR).
+The current [`jqXHR`](https://api.jquery.com/Types/#jqXHR).
 
 #### Example - subscribe to the error event after initialization
 
