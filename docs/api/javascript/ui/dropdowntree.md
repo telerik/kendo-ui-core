@@ -590,7 +590,7 @@ The widget instance.
         });
     </script>
 
-### height `Number|String``*(default: 200)*
+### height `String|Number`*(default: 200)*
 
 The height of the suggestion popup in pixels. The default value is 200 pixels. If set to "Auto" the height of the popup will depend on the height of the treeview.
 

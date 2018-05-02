@@ -34,23 +34,19 @@ To handle user input the [`post`](/api/javascript/ui/chat/events/post) event han
     }).data("kendoChat");
 
 	// Create a new agent and pass the Chat widget
-    var agent = new DirectLineAgent(chat);
+    var agent = new DirectLineAgent(chat, "Y_ly-If6haE.cwA.PQE.ZwOOsq4MlHcD3_YLFI-t9oW6L6DXMMBoi67LBz9WaWA");
   });
 </script>
 
 <script>
   window.DirectLineAgent = kendo.Class.extend({
-    init: function (chat) {
+    init: function (chat, secret) {
       this.chat = chat;
-      this.userInfo = {
-        id: "botty",
-        iconUrl: "../content/chat/avatar.png",
-        name: "Botty McbotFace"
-      };
+      this.iconUrl = "https://demos.telerik.com/kendo-ui/content/chat/avatar.png";
 
       // Assign here the Bot framework agent
       // The below example uses the Microsoft's Bot Framework
-      this.agent = new DirectLine.DirectLine({ secret: "Y_ly-If6haE.cwA.PQE.ZwOOsq4MlHcD3_YLFI-t9oW6L6DXMMBoi67LBz9WaWA" });
+      this.agent = new DirectLine.DirectLine({ secret: secret });
 
       // The below code would depend on the Bot framework of choice
       // In this case, the agent is subscribed to listen for any activity of the service
@@ -68,7 +64,7 @@ To handle user input the [`post`](/api/javascript/ui/chat/events/post) event han
         return;
       }
 
-      response.from.iconUrl = this.userInfo.iconUrl;
+      response.from.iconUrl = this.iconUrl;
 
       this.renderMessage(response);
       this.renderAttachments(response);

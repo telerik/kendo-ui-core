@@ -328,7 +328,9 @@ var __meta__ = { // jshint ignore:line
                 if ((that.options.minLength !== 1 && !isFiltered) || (isFiltered && that.value() && that.selectedIndex === -1 )) {
                     that.refresh();
                     that._openPopup();
-                    that.listView.bound(false);
+                    if (!this.options.virtual) {
+                        that.listView.bound(false);
+                    }
                 } else {
                     that._filterSource();
                 }
