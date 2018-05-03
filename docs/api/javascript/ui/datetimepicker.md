@@ -290,6 +290,8 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
  Specifies the format, which is used to format the value of the DateTimePicker displayed in the input. The format also will be used to parse the input.
 
+For more information on date and time formats please refer to [Date Formatting](/framework/globalization/dateformatting).
+
 #### Example - specify a custom date format
 
     <input id="datetimepicker" />

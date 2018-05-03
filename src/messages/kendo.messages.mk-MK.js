@@ -23,13 +23,6 @@
 
 */
 
-(function(f){
-    if (typeof define === 'function' && define.amd) {
-        define(["kendo.core"], f);
-    } else {
-        f();
-    }
-}(function(){
 (function ($, undefined) {
 /* FlatColorPicker messages */
 
@@ -1120,4 +1113,3 @@ if (kendo.ui.DateInput) {
 }
 
 })(window.kendo.jQuery);
-}));

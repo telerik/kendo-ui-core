@@ -756,7 +756,7 @@ The noData template receives the widget itself as a part of the data argument. T
 
 > **Important** The popup will open when 'noDataTemplate' is defined
 
-#### Example - specify headerTemplate as a string
+#### Example - specify noDataTemplate as a string
 
     <input id="dropdowntree">
     <script>
@@ -924,23 +924,21 @@ The [template](/api/javascript/kendo/methods/template) used to render the value 
 
 #### Example - specify template as a function
 
- <input id="dropdowntree" style="width: 400px;"/>
+    <input id="dropdowntree" />
     <script id="valueTemplate" type="text/x-kendo-template">
-        <span>
-            <img src="/img/#: id #.png" alt="#: name #" />
-            #: name #
-        </span>
+        <img src="/img/#: id #.png" alt="#: name #" />
+        #: name #
     </script>
     <script>
-        $("#dropdowntree").kendoDropDownTree({
-            dataSource: [
-                { id: 1, name: "Apples" },
-                { id: 2, name: "Oranges" }
-            ],
-            dataTextField: "name",
-            dataValueField: "id",
-            valueTemplate: kendo.template($("#valueTemplate").html())
-        });
+    $("#dropdowntree").kendoDropDownTree({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      valueTemplate: kendo.template($("#valueTemplate").html())
+    });
     </script>
 
 #### Example - specify template as a string
@@ -964,9 +962,9 @@ The mode used to render the selected tags when [checkboxes](/api/javascript/ui/d
 - `multiple` - renders a tag for every selected value
 - `single` - renders only one tag that shows the number of the selected values
 
-> Every tagMode has a specific [singleTag](/api/javascript/ui/dropdowntree/messages.singleTag) message.
+> When tagMode is to `single` its message can be configured by setting [singleTag](/api/javascript/ui/dropdowntree/configuration/messages.singletag) message property.
 
-#### Example - specify template as a string
+#### Example - specify tagMode as a 'single'
 
     <input id="dropdowntree" style="width: 400px;" />
     <script>

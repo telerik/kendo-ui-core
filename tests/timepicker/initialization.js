@@ -174,6 +174,21 @@
         equal(timepicker.timeView.popup.options.appendTo[0], $(appendTo)[0]);
     });
 
+    test("00:00 option is not duplicated when max value is 23:59 on last day of month", function() {
+        var timepicker = input.kendoTimePicker({
+            min: new Date(2017, 11, 31, 0, 0),
+            max: new Date(2017, 11, 31, 23, 59)
+        }).data("kendoTimePicker");
+
+        timepicker._arrow.click();
+
+        var lastItem = timepicker.timeView.list.find("li").last();
+        var lastDateTime = kendo.parseDate(lastItem.text());
+        var time = lastDateTime.getHours() + ":" + lastDateTime.getMinutes();
+
+        equal(time, "23:59");
+    });
+
     test("timepicker strips format from '{0:format}'", function() {
         var timepicker = new kendo.ui.TimePicker(input, {
             format: "{0:hh:mm}"

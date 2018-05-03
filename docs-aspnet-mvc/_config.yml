@@ -47,6 +47,9 @@ navigation:
         title: "Calendar"
      "helpers/chart":
         title: "Chart"
+     "helpers/chat":
+        title: "Chat"
+        isNew: true
      "helpers/colorpalette":
         title: "ColorPalette"
      "helpers/colorpicker":

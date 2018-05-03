@@ -187,7 +187,7 @@ var __meta__ = { // jshint ignore:line
                 toString = kendo.toString,
                 template = that.template,
                 start = new DATE(+min),
-                startDay = start.getDate(),
+                startDate = new DATE(start),
                 msStart, lastIdx,
                 idx = 0, length,
                 html = "";
@@ -215,7 +215,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (msMax && lastIdx == idx) {
                     msStart = getMilliseconds(start);
-                    if (startDay < start.getDate()) {
+                    if (startDate < start) {
                         msStart += MS_PER_DAY;
                     }
 

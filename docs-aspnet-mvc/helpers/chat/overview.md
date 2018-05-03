@@ -1,0 +1,128 @@
+---
+title: Overview
+page_title: Overview | Kendo UI Chat HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI Chat widget for ASP.NET MVC."
+slug: overview_chathelper_aspnetmvc
+position: 1
+---
+
+# Chat HtmlHelper Overview
+
+The Chat HtmlHelper extension is a server-side wrapper for the [Kendo UI Chat](https://demos.telerik.com/kendo-ui/chat/index) widget.
+
+The Chat widget allows for integration with any Bot framework, due to its simplicity, flexible API and customizable templates.
+
+## Getting Started
+
+### Create the Chat
+
+The following HtmlHelper declaration will create a Chat widget with *name* and *id* set to `"chat"`:
+
+###### Example
+
+```tab-Razor
+	@(Html.Kendo().Chat()
+		.Name("chat")
+	)
+```
+```tab-ASPX
+	<%: Html.Kendo().Chat()
+		.Name("chat")
+	%>
+```
+
+## Event Handling
+
+You can subscribe to all Chat [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/chat). Here are the available approaches that would allow you to do so.
+
+### By Handler Name
+
+The following example demonstrates how to subscribe to events by a handler name.
+
+###### Example
+
+```tab-Razor
+	@(Html.Kendo().Chat()
+		.Name("chat")
+		.Events(e => e
+			.Post("onPost")
+			.SendMessage("onSendPessage")
+		)
+	)
+
+	<script>
+	  function onPost() {
+		//Handle the post event.
+	  }
+
+	  function onSendPessage() {
+		//Handle the sendMessage event.
+	  }
+	</script>
+```
+```tab-ASPX
+	<%: Html.Kendo().Chat()
+		.Name("chat")
+		.Events(e => e
+			.Post("onPost")
+			.SendMessage("onSendPessage")
+		)
+	%>
+
+	<script>
+	  function onPost() {
+		//Handle the post event.
+	  }
+	
+	  function onSendPessage() {
+		//Handle the sendMessage event.
+	  }
+	</script>
+```
+
+### By Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+###### Example
+
+```tab-Razor
+	@(Html.Kendo().Chat(Model)
+		.Name("chat")
+		.Events(e => e
+			.Post(@<text>
+				function() {
+				  //Handle the post event inline.
+				}
+			</text>)
+			.SendMessage(@<text>
+				function() {
+				  //Handle the sendMessage event inline.
+				}
+			</text>)
+		)
+	)
+```
+
+## Reference
+
+### Existing Instances
+
+To reference an existing Kendo UI Chat instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method call. Once a reference is established, use the [Chat API](http://docs.telerik.com/kendo-ui/api/javascript/ui/chat#methods) to control its behavior.
+
+###### Example
+
+	//Put this after your Kendo UI Chat for ASP.NET MVC declaration.
+	<script>
+	  $(function() {
+		  //Notice that the Name() of the Chat is used to get its client-side instance.
+		  var chat = $("#chat").data("kendoChat");
+	  });
+	</script>
+
+## See Also
+
+* [Telerik UI for ASP.NET MVC API Reference: ChatBuilder](/api/Kendo.Mvc.UI.Fluent/ChatBuilder)
+* [Overview of the Kendo UI Chat Widget](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -158,6 +158,8 @@ The duration of the open animation in milliseconds.
 
  Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.
 
+ For more information on date and time formats please refer to [Date Formatting](/framework/globalization/dateformatting).
+
 #### Example - specify a custom time format
 
     <input id="timepicker" />
