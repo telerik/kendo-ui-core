@@ -5107,7 +5107,28 @@ Can be set to a JavaScript object which represents the grouping configuration.
 
 ### groupable.enabled `Boolean` *(default: true)*
 
-When set  to false grouping is considered disabled.
+When set to false grouping is considered disabled.
+
+#### Example - enable grouping
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      groupable: {
+        enabled: false
+      }
+    });
+    </script>
 
 ### groupable.showFooter `Boolean` *(default: false)*
 

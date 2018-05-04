@@ -932,11 +932,11 @@ The field from the server response which contains server-side errors. Can be set
         data: "items",
         errors: function(response) {
           console.log("errors as function", response.errors[0])
-          return response.errors; 
+          return response.errors;
         }
       },
       error: function(e) {
-        console.log("error event handler", e.errors[0]); 
+        console.log("error event handler", e.errors[0]);
       }
     });
     dataSource.fetch();
@@ -1533,7 +1533,7 @@ Local data sources are bound to a JavaScript array via the [`data`](/api/javascr
 
 > Configurable for the [`odata-v4 data source type`](/api/javascript/data/datasource/configuration/type) in [`batch`](/api/javascript/data/datasource/configuration/batch) mode.
 
-The object can contain all the available [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) options.  
+The object can contain all the available [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) options.
 
 ### transport.batch.url `String|Function`
 
@@ -2563,6 +2563,14 @@ It is recommended to get familiar with the SignalR [JavaScript API](http://www.a
         var hub = connection.createHubProxy("productHub");
         var hubStart = connection.start({ jsonp: true });
 
+        /* for ASP.NET Core SignalR include the necessary script file
+         * var hubUrl = "url here";
+         * var hub = new signalR.HubConnection(hubUrl, {
+         *    transport: signalR.TransportType.LongPolling
+         * });
+         * var hubStart = hub.start();
+         */
+
         var dataSource = new kendo.data.DataSource({
             type: "signalr",
             schema: {
@@ -2618,7 +2626,7 @@ Specifies the name of the client-side method of the SignalR hub responsible for 
 
 ### transport.signalr.hub `Object`
 
-The SignalR hub object returned by the `createHubProxy` method. The `hub` option is mandatory.
+The SignalR hub object returned by the `createHubProxy` method (or signalR.HubConnection for ASP.NET Core SignalR). The `hub` option is mandatory.
 
 ### transport.signalr.promise `Object`
 

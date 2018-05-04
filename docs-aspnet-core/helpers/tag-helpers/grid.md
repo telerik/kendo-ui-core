@@ -19,56 +19,72 @@ The following example demonstrates how to define the Grid by using the Grid tag 
 
 ## Configuration
 
-The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data. For more details on the Grid configurations, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
+The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data. 
+
+> **Important**
+>
+> With Grid Tag Helper setting a field `type` in the DataSource's schema model is required in order to parse the value to a proper data type.
 
 ###### Example
 
 ```tab-tagHelper
-    <kendo-grid name="grid">
-        <datasource type="DataSourceTagHelperType.Ajax">
-            <transport>
-                <read url="Grid/Orders_Read" />
-            </transport>
-        </datasource>
-        <groupable enabled="true" />
-        <sortable enabled="true" />
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-        </pageable>
-        <filterable enabled="true" />
-        <columns>
-            <column field="ContactName" title="Contact Name" width="240">
-                <filterable multi="true"></filterable>
-            </column>
-            <column field="ContactTitle" title="Contact Title" />
-            <column field="CompanyName" title="Company Name" />
-            <column field="Country" title="Country" width="150" />
-        </columns>
-    </kendo-grid>
+<kendo-grid name="grid" height="550">
+    <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <transport>
+            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+        </transport>
+        <schema>
+            <model>
+                <fields>
+                    <field name="OrderDate" type="Date"></field>
+                </fields>
+            </model>
+        </schema>
+    </datasource>
+    <groupable enabled="true" />
+    <sortable enabled="true" />
+    <filterable enabled="true" />
+    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+    </pageable>
+    <columns>
+        <column field="OrderID" width="120" />
+        <column field="OrderDate" title="Order Date" format="{0:MM/dd/yyyy}" />
+        <column field="ShipName" title="Ship Name" width="300" />
+        <column field="ShipCity" title="Ship City" width="250" />
+    </columns>
+</kendo-grid>
 ```
 ```tab-cshtml
-
-    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
-        .Name("grid")
-        .Columns(columns =>
-        {
-            columns.Bound(c => c.ContactName).Title("Contact Name").Width(240).Filterable(ftb => ftb.Multi(true));
-            columns.Bound(c => c.ContactTitle).Title("Contact Title");
-            columns.Bound(c => c.CompanyName).Title("Company Name");
-            columns.Bound(c => c.Country).Title("Country").Width(150);
-        })
-        .Groupable()
-        .Sortable()
-        .Pageable(pageable => pageable
-            .Refresh(true)
-            .PageSizes(true)
-            .ButtonCount(5))
-        .DataSource(dataSource => dataSource
-            .Ajax()
-            .Read(read => read.Action("Orders_Read", "Grid"))
-            .PageSize(20)
+@(Html.Kendo().Grid<TelerikAspNetCoreApp4.Models.OrderViewModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.OrderID).Width(120);
+        columns.Bound(p => p.OrderDate).Format("{0:MM/dd/yyyy}");
+        columns.Bound(p => p.ShipName).Width(300);
+        columns.Bound(p => p.ShipCity).Width(250);
+    })
+    .Groupable()
+    .Sortable()
+    .Filterable()
+    .Pageable(pageable => pageable
+    .ButtonCount(5)
+    .Refresh(true)
+    .PageSizes(new[] { 5, 10, 20 }))
+    .DataSource(dataSource => dataSource
+        .Custom()
+        .Transport(transport => transport
+        .Read(read => read.Action("Orders_Read", "Grid")))
+        .Schema(schema => schema
+            .Data("Data")
+            .Model(model => {
+                model.Field("OrderDate", typeof(DateTime));
+            })
         )
+    )
 )
 ```
+For more details on the Grid configurations, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
 ## Hierarchy
 

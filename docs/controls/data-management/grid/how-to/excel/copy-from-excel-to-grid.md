@@ -75,6 +75,7 @@ The following example demonstrates how to create a Grid that supports pasting fr
 
 ## See Also
 
+* [How to paste from Excel to the Grid with editing]({% slug grid-paste-data-from-excel-batch-edit %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})

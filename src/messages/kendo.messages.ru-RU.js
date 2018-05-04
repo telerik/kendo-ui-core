@@ -447,4 +447,39 @@ $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
 });
 }
 
+/* PivotGrid messages */
+
+if (kendo.ui.PivotGrid) {
+kendo.ui.PivotGrid.prototype.options.messages =
+$.extend(true, kendo.ui.PivotGrid.prototype.options.messages, {
+  "measureFields": "Перетащите поля с данными сюда",
+  "columnFields": "Перетащите колонки сюда",
+  "rowFields": "Перетащите строки сюда"
+});
+}
+  
+/* PivotFieldMenu messages */
+  
+if (kendo.ui.PivotFieldMenu) {
+kendo.ui.PivotFieldMenu.prototype.options.messages =
+$.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
+  "info": "Показать поля такие, что:",
+  "filterFields": "Фильтр по полям",
+  "filter": "Фильтровать",
+  "include": "Включить поля...",
+  "title": "Включить поля",
+  "clear": "Очистить",
+  "ok": "Ok",
+  "cancel": "Отмена",
+  "operators": {
+    "contains": "Содержит",
+    "doesnotcontain": "Не содержит",
+    "startswith": "Начинается с",
+    "endswith": "Заканчивается на",
+    "eq": "Равно",
+    "neq": "Не равно"
+  }
+});
+}  
+
 })(window.kendo.jQuery);

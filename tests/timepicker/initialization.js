@@ -260,7 +260,7 @@
 
         timepicker.open();
 
-        equal(timepicker.timeView.list.width(), 400);
+        ok(timepicker.timeView.list.attr("style").indexOf("width: 400px") != -1);
     });
 
 

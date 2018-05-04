@@ -11,6 +11,17 @@ var __meta__ = { // jshint ignore:line
 };
 
 (function($) {
+    var kendo = window.kendo;
+    var isFunction = kendo.isFunction;
+
+    function isJQueryPromise(promise) {
+        return promise && isFunction(promise.done) && isFunction(promise.fail);
+    }
+
+    function isNativePromise(promise) {
+        return promise && isFunction(promise.then) && isFunction(promise.catch); // jshint ignore:line
+    }
+
     var transport = kendo.data.RemoteTransport.extend({
         init: function (options) {
             var signalr = options && options.signalr ? options.signalr : {};
@@ -21,7 +32,7 @@ var __meta__ = { // jshint ignore:line
                 throw new Error('The "promise" option must be set.');
             }
 
-            if (typeof promise.done != "function" || typeof promise.fail != "function") {
+            if (!isJQueryPromise(promise) && !isNativePromise(promise)) {
                 throw new Error('The "promise" option must be a Promise.');
             }
 
@@ -60,7 +71,7 @@ var __meta__ = { // jshint ignore:line
 
         _crud: function(options, type) {
             var hub = this.hub;
-
+            var promise = this.promise;
             var server = this.options.signalr.server;
 
             if (!server || !server[type]) {
@@ -75,11 +86,19 @@ var __meta__ = { // jshint ignore:line
                 args.push(data);
             }
 
-            this.promise.done(function() {
-                hub.invoke.apply(hub, args)
-                          .done(options.success)
-                          .fail(options.error);
-            });
+            if (isJQueryPromise(promise)) {
+                promise.done(function() {
+                    hub.invoke.apply(hub, args)
+                              .done(options.success)
+                              .fail(options.error);
+                });
+            } else if (isNativePromise(promise)) {
+                promise.then(function() {
+                    hub.invoke.apply(hub, args)
+                              .then(options.success)
+                              .catch(options.error); // jshint ignore:line
+                });
+            }
         },
 
         read: function(options) {
