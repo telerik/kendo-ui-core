@@ -592,7 +592,7 @@ The widget instance.
 
 ### height `String|Number`*(default: 200)*
 
-The height of the suggestion popup in pixels. The default value is 200 pixels. If set to "Auto" the height of the popup will depend on the height of the treeview.
+Sets max-height of the embedded treeview in pixels. The default value is 200 pixels. If set to "Auto" the height of the popup will depend on the height of the treeview.
 
 #### Example - set the height
 

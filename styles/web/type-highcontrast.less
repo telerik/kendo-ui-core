@@ -179,6 +179,33 @@
 @disabled-gradient: none;
 @input-validation-error: @error;
 
+
+// component
+@component-bg: @widget-background-color;
+@component-text: @widget-text-color;
+@component-border: @widget-border-color;
+
+@card-bg: @component-bg;
+@card-text: @component-text;
+@card-border: @component-border;
+
+@card-header-bg: @header-background-color;
+@card-header-text: @header-text-color;
+@card-header-border: @card-border;
+
+
+@chat-bg: @component-bg;
+@chat-text: @component-text;
+@chat-border: @component-border;
+
+@chat-bubble-bg: @button-background-color;
+@chat-bubble-text: @button-text-color;
+@chat-bubble-border: @chat-bubble-bg;
+
+@chat-alt-bubble-bg: @accent;
+@chat-alt-bubble-text: contrast(@accent);
+@chat-alt-bubble-border: @chat-alt-bubble-bg;
+
 /* Kendo skin */
 
 @theme-name: ~"highcontrast";
@@ -188,6 +215,8 @@
 @import "mixins/border-radius.less";
 @import "themes/type.less";
 @import "themes/button.less";
+@import "default/card/theme.less";
+@import "default/chat/theme.less";
 
 .k-in,
 .k-item,

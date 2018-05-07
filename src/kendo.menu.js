@@ -510,9 +510,9 @@ var __meta__ = { // jshint ignore:line
             element = that.wrapper = that.element;
             options = that.options;
 
-            that._updateClasses();
-
             that._initData(options);
+
+            that._updateClasses();
 
             that._animations(options);
 

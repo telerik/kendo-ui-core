@@ -41,7 +41,7 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
         <script>
             $(document).ready(function () {
                 $("#grid").kendoGrid({
-                    columnMenuInit: function (e) {
+                    columnMenuOpen: function (e) {
                         var mylist = e.container.find(".k-columns-item>ul");
                         var listitems = mylist.children('li').get();                  
 
@@ -51,9 +51,9 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
                              $(".custom-class input")[0].checked = allChecked;
                           }
                         })
-
-                        $("<li class='custom-class'><span class='k-link'><input type='checkbox' checked onclick='checkAll(this)'/>SelectAll</span></li>").insertBefore(e.container.find(".k-columns-item>ul>li").first());
-
+                        e.container.find(".custom-class").remove()
+                      	e.container.find('.k-filter-item').find('[role="menuitemcheckbox"]').remove()
+                        $("<li class='custom-class'><span class='k-link'><input type='checkbox' checked onclick='checkAll(this)'/>SelectAll</span></li>").insertBefore(e.container.find(".k-columns-item ul li").first());
                     },
                     dataSource: {
                         type: "odata",

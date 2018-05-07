@@ -40,8 +40,12 @@ span.k-dropdowntree,
     font-size: 100%;
     display: none;
     position: absolute;
-    right: (@grid-size/4 + 2px);
     cursor: pointer;
+}
+
+.k-autocomplete > .k-i-close,
+.k-multiselect-wrap > .k-i-close {
+    right: (@grid-size/4 + 2px);
 }
 
 .k-autocomplete > .k-i-close,
@@ -59,7 +63,9 @@ span.k-dropdowntree,
 }
 
 .k-autocomplete,
-.k-dropdown-wrap {
+.k-dropdown-wrap,
+// dropdowntree
+.k-multiselect-wrap {
     &.k-state-hover,
     &.k-state-focused {
         > .k-i-close {
@@ -69,12 +75,10 @@ span.k-dropdowntree,
     }
 }
 
-.k-multiselect-wrap {
+.k-multiselect {
     &.k-state-hover,
-    &.k-state-focused,
-    .k-state-hover > &
-    .k-state-focused > & {
-        > .k-i-close {
+    &.k-state-focused {
+        > .k-multiselect-wrap > .k-i-close {
             display: inline-block;
             outline: none;
         }
@@ -95,6 +99,7 @@ span.k-dropdowntree,
 .k-colorpicker,
 .k-numerictextbox,
 .k-dropdown,
+.k-dropdowntree,
 .k-selectbox,
 .k-toolbar .k-split-button {
     white-space: nowrap;
@@ -285,13 +290,11 @@ span.k-datetimepicker .k-select + .k-select {
     width: 100%;
 }
 
-.k-dropdown .k-select,
-.k-dropdowntree .k-dropdown-wrap .k-select,
+.k-dropdown-wrap .k-select,
 .k-selectbox .k-select {
     overflow: hidden;
     border: 0;
     text-decoration: none;
-    font: inherit;
     color: inherit;
 }
 
@@ -325,10 +328,7 @@ span.k-datetimepicker .k-select + .k-select {
 }
 
 .k-ie {
-    .k-autocomplete .k-input,
-    .k-multiselect-wrap .k-input,
-    .k-dropdown-wrap .k-input,
-    .k-selectbox .k-input {
+    .k-autocomplete .k-input {
         height: @input-height;
     }
 
@@ -577,12 +577,9 @@ body .k-datetimepicker .k-select {
 }
 
 .k-combobox-clearable .k-input,
-.k-dropdowntree-clearable .k-dropdown-wrap .k-input {
-    padding-right: calc(@input-height + .35em);
-}
-
 .k-multiselect-clearable .k-multiselect-wrap,
-.k-dropdowntree-clearable .k-multiselect-wrap {
+.k-dropdowntree-clearable .k-multiselect-wrap,
+.k-dropdowntree-clearable .k-dropdown-wrap .k-input {
     padding-right: calc(@input-height + .35em);
 }
 
@@ -894,9 +891,17 @@ span.k-numerictextbox {
     .k-dropdown-wrap,
     .k-picker-wrap,
     .k-numeric-wrap,
-    .k-combobox-clearable .k-input {
+    .k-combobox-clearable .k-input,
+    .k-multiselect-clearable .k-multiselect-wrap,
+    .k-dropdowntree-clearable .k-multiselect-wrap,
+    .k-dropdowntree-clearable .k-dropdown-wrap .k-input {
         padding-right: 0;
         padding-left: calc(@input-height + .35em);
+    }
+
+    .k-dropdown-wrap > .k-i-close {
+        left: 2.4em;
+        right: auto;
     }
 }
 

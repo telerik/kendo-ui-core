@@ -169,3 +169,31 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+
+.border-radius( @border-radius ) {
+    border-radius: @border-radius;
+}
+.border-top-radius( @border-radius ) {
+    border-top-left-radius: @border-radius;
+    border-top-right-radius: @border-radius;
+}
+.border-right-radius( @border-radius ) {
+    border-top-right-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
+}
+.border-bottom-radius( @border-radius ) {
+    border-bottom-right-radius: @border-radius;
+    border-bottom-left-radius: @border-radius;
+}
+.border-left-radius( @border-radius ) {
+    border-bottom-left-radius: @border-radius;
+    border-top-left-radius: @border-radius;
+}
+
+
+.fill(@text, @bg, @border) {
+    border-color: @border;
+    color: @text;
+    background-color: @bg;
+}

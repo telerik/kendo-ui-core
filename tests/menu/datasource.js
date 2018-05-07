@@ -151,4 +151,26 @@
         ok(content.hasClass("k-group"));
         ok(content.hasClass("k-menu-group"));
     });
+
+    test('Expand arrow classes are rendered in subitems', function(){
+        createMenu({
+            dataSource: [
+                {
+                    text: "RootItem",
+                    items: [
+                        {
+                            text: "Sub-item 1.1",
+                            items: [
+                                { text: "Sub-item 1.2" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+
+        var expandArrow = menu.element.find(".k-menu-group .k-icon");
+
+        ok(expandArrow.hasClass("k-menu-expand-arrow"));
+    });
 })();

@@ -502,17 +502,24 @@ If this argument is not supplied, then `"info"` is assumed.
     notificationWidget.show("foo text", "warning");
     </script>
 
-#### Example - Use the show method and return the message from a function
+#### Example - use the show method with a function argument
 
     <span id="notification"></span>
     <script>
     function getNotificationMessage() {
-        return "foo text";
+        return {
+            myMessage: "foo text"
+        }
     }
 
-    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
-
-    notificationWidget.showText(getNotificationMessage());
+    var notificationWidget = $("#notification").kendoNotification({
+		templates: [{
+			type: "myAlert",
+			template: "<div>System alert: #= myMessage #</div>"
+		}]
+	}).data("kendoNotification");
+	
+	notificationWidget.show(getNotificationMessage(), "myAlert");
     </script>
 
 ### showText
@@ -541,24 +548,17 @@ If this argument is not supplied, then `"info"` is assumed.
     notificationWidget.showText("foo text", "warning");
     </script>
 
-#### Example - use the show method with a function argument
+#### Example - Use the show method and return the message from a function
 
     <span id="notification"></span>
     <script>
     function getNotificationMessage() {
-        return {
-            myMessage: "foo text"
-        }
+        return "foo text";
     }
 
-    var notificationWidget = $("#notification").kendoNotification({
-		templates: [{
-			type: "myAlert",
-			template: "<div>System alert: #= myMessage #</div>"
-		}]
-	}).data("kendoNotification");
-	
-	notificationWidget.show(getNotificationMessage(), "myAlert");
+    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
+
+    notificationWidget.showText(getNotificationMessage());
     </script>
 
 ### success
