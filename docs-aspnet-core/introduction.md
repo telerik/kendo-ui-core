@@ -75,7 +75,6 @@ Telerik UI for ASP.NET Core contains the following directories:
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts (as the above).
 * `VSExtensions`&mdash;The extensions for Visual Studio 2015 and 2017.
 * `wrappers\aspnetcore\Binaries\AspNet.Core`&mdash;Containing the .nupkg NuGet package file.
-* `wrappers\aspnetcore\Examples\AspNet.Core\VS2015`&mdash;The ASP.NET Core sample application built with Visual Studio 2015.
 * `wrappers\aspnetcore\Examples\AspNet.Core\VS2017`&mdash;The ASP.NET Core sample application built with Visual Studio 2017.
 * `wrappers\aspnetcore\EditorTemplates\razor`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
 
@@ -83,8 +82,11 @@ Telerik UI for ASP.NET Core contains the following directories:
 
 Telerik UI for ASP.NET Core comes with a sample .NET Core application which is an offline version of the [Telerik UI for ASP.NET Core Demos](http://demos.telerik.com/aspnet-core). The sample application is available in the following versions:
 
-* The .NET Core application built with Visual Studio 2015
 * The .NET Core application built with Visual Studio 2017
+
+> **Important**
+>
+> As of the Kendo UI R2 2018 release, the Visual Studio 2015 version of the sample application is no longer distributed because of its deprecated format and limited tooling support.
 
 ### Running the Sample Application
 
@@ -94,7 +96,6 @@ To run the sample application:
 
 1. Open the sample Visual Studio Project:
 
-  * (For Visual Studio 2015) Open `wrappers\aspnetcore\Examples\AspNet.Core\VS2015\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj`.
   * (For Visual Studio 2017) Open `wrappers\aspnetcore\Examples\AspNet.Core\VS2017\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj`.
 
 1. Press `CTRL+F5` to build and run the application.

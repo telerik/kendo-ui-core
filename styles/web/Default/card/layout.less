@@ -12,8 +12,8 @@
 @card-actions-padding-x: 8px;
 @card-actions-padding-y: 8px;
 @card-actions-border-width: 1px;
-@button-padding-x: 8px;
-@button-padding-y: 4px;
+@card-button-padding-x: 8px;
+@card-button-padding-y: 4px;
 @card-deck-gap: 16px;
 
 // Card
@@ -168,7 +168,7 @@
     }
 
     > .k-button.k-flat:first-child {
-        margin-left: (-@button-padding-x);
+        margin-left: (-@card-button-padding-x);
     }
 }
 .k-card-action {
@@ -180,7 +180,7 @@
 
     > .k-button {
         .border-radius( 0 );
-        padding: (@card-actions-padding-y + @button-padding-y) @card-actions-padding-x;
+        padding: (@card-actions-padding-y + @card-button-padding-y) @card-actions-padding-x;
         flex: 1 1 auto;
     }
 }

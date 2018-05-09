@@ -56,7 +56,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 		Restore complete, 10070ms elapsed
 
-		kendo@kendo-docker:~/Projects/WebApplicationBasic$
+		kendo@kendo-docker:~/Projects$
 
 8. Start the application by running [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run). The following example demonstrates the response you are expected to receive.
 
@@ -74,16 +74,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 ### Add the Telerik.UI.for.AspNet.Core NuGet Package
 
-1. Open the `project.json` file by using a text editor, add the `Telerik.UI.for.AspNet.Core` dependency, and replace `productVersion` with an actual **Telerik UI for ASP.NET Core** version&mdash;for example, `{{site.cdnVersion}}`.
-
-    ###### Example
-
-		"dependencies": {
-			...
-			"Telerik.UI.for.AspNet.Core": "{{site.cdnVersion}}"
-		}
-
-2. Add the private Telerik NuGet feed. You could either:
+1. Add the private Telerik NuGet feed. You could either:
 
 	* Create the following two configuration files containing your `telerik.com` credentials on your machine: `~/.config/NuGet/NuGet.Config` and `~/.nuget/NuGet/NuGet.Config`; or
 	* Create a `NuGet.Config` file in the project folder.
@@ -107,6 +98,12 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
           </packageSourceCredentials>
         </configuration>
         ```
+
+2. Install the `Telerik.UI.for.AspNet.Core` dependency:
+
+    ###### Example
+
+        dotnet add package Telerik.UI.for.AspNet.Core
 
 3. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
 
@@ -146,7 +143,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 5. Copy the Kendo UI client-side resources.
 
-    * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`.
+    * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnet.core` archive to `wwwroot\lib\kendo-ui`.
 
         **Figure 2. Kendo UI resources**
 

@@ -28,15 +28,9 @@ navigation:
      "vs-integration":
         title: "Visual Studio Integration"
         position: 5
-     "migration":
-        title: "Migration"
-        position: 6
-     "tutorials":
-        title: "Tutorials"
+     "backwards-compatibility":
+        title: "Breaking Changes"
         position: 7
-     "troubleshoot":
-        title: "Troubleshooting"
-        position: 8
 
 
 
