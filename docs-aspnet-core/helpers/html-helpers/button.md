@@ -3,6 +3,7 @@ title: Button
 page_title: Button | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Button HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_button_aspnetcore
+position: 3
 ---
 
 # Button HtmlHelper Overview

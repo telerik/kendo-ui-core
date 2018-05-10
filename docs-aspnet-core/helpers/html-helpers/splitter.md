@@ -3,6 +3,7 @@ title: Splitter
 page_title: Splitter | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_splitter_aspnetcore
+position: 55
 ---
 
 # Splitter HtmlHelper Overview

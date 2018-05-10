@@ -3,22 +3,22 @@ var ProgressBar = kendo.ui.ProgressBar,
     container;
 
 function moduleSetup() {
+    kendo.effects.disable();
     container = document.createElement("div");
     $(container).appendTo(QUnit.fixture);
 }
 
 function moduleTeardown() {
+    kendo.effects.enable();
     kendo.destroy(QUnit.fixture);
 }
 
-// -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
-module("Initialization", {
+module("ProgressBar initialization", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
 
-test("kendoProgressBar attaches a progressbar object to target", function() {
+test("attaches a progressbar object to target", function() {
     var dom = $('<div/>');
     dom.appendTo(QUnit.fixture);
 
@@ -481,10 +481,7 @@ test("progressWrapper field is set when value is  not equal to min (type='percen
     ok(pb.hasOwnProperty("progressWrapper"));
 });
 
-
-//-----------------------------------------------------------------------
-//-----------------------------------------------------------------------
-module("Initialization / Regular ProgressBar", {
+module("ProgressBar value initialization", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
@@ -564,10 +561,7 @@ test("Status holder text is set correctly when value is not equal to min and sho
     equal(pb.wrapper.children("span.k-progress-status-wrap").text(), pb.options.value);
 });
 
-
-//-----------------------------------------------------------------------
-//-----------------------------------------------------------------------
-module("Initialization / Chunk ProgressBar", {
+module("ProgessBar chunk initialization", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
@@ -630,9 +624,8 @@ test("Chunk size is calculated correctly according to chunk count", function() {
     });
 
     var chunkCount = pb.options.chunkCount;
-    var chunkWrapperSize = pb.wrapper.find("ul.k-reset").width();
     var expectedChunkSize = parseFloat(pb.wrapper.find("ul.k-reset li.k-item:first")[0].style.width).toFixed(2);
-    var actualChunkSize = (100 / pb.options.chunkCount).toFixed(2);
+    var actualChunkSize = (100 / chunkCount).toFixed(2);
 
     equal(actualChunkSize, expectedChunkSize);
 });

@@ -329,6 +329,10 @@ td.k-group-cell,
     background-color: @select-group-background-color;
 }
 
+.k-list-filter > .k-textbox {
+    border-color: contrast(@input-bg, lighten(@input-bg, 13%), darken(@input-bg, 36%));
+}
+
 .k-content,
 .k-panelbar > li.k-item,
 .k-panel > li.k-item,
@@ -1996,7 +2000,7 @@ html .km-pane-wrapper .km-widget,
 .k-state-hover > .k-multiselect-wrap,
 .k-multiselect-wrap.k-state-hover {
     border-color: @drop-down-hover-border-color;
-    background-color: @input-bg;
+    background: @input-bg;
     color: @input-text;
 }
 

@@ -1,32 +1,24 @@
 (function(){
-var pb;
 
-function createPbHtml(){
-    var html = "<div id='test-container'>" +
-        "<div id='progressbar'></div>" +
-        "</div>";
-
-    $(html).appendTo(QUnit.fixture);
-}
-
-function createProgressbar(options){
-    createPbHtml();
-
-    $("#progressbar").kendoProgressBar(options);
-    return $("#progressbar").data("kendoProgressBar");
-}
+var ProgressBar = kendo.ui.ProgressBar,
+    container,
+    pb;
 
 function moduleSetup() {
-    //pb = createProgressbar();
+    kendo.effects.disable();
+    container = $("<div id='test-container'>" +
+        "<div id='progressbar'></div>" +
+        "</div>");
+
+    container.appendTo(QUnit.fixture);
 }
 
 function moduleTeardown() {
+    kendo.effects.enable();
     kendo.destroy(QUnit.fixture);
 }
 
-// -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
-module("Rendering", {
+module("ProgressBar rendering", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
@@ -34,9 +26,9 @@ module("Rendering", {
 asyncTest("k-complete is added when the progress width is more than 98%", function() {
     var progressCompleted = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
-        complete: function(e){
+        complete: function(){
             progressCompleted = true;
         }
     });
@@ -52,9 +44,9 @@ asyncTest("k-complete is added when the progress width is more than 98%", functi
 asyncTest("k-complete is removed when the progress width becomes less than 98%", function() {
     var progressCompleted = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
-        complete: function(e){
+        complete: function(){
             progressCompleted = true;
         }
     });
@@ -71,9 +63,9 @@ asyncTest("k-complete is removed when the progress width becomes less than 98%",
 asyncTest("k-complete is not added when the progress width is less than or equal to 98%", function() {
     var progressCompleted = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
-        complete: function(e){
+        complete: function(){
             progressCompleted = true;
         }
     });
@@ -89,7 +81,7 @@ asyncTest("k-complete is not added when the progress width is less than or equal
 asyncTest("Complete event has correct value parameter (type='value')", function() {
     var value;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -111,7 +103,7 @@ asyncTest("Complete event has correct value parameter (type='value')", function(
 asyncTest("Complete event has correct value parameter (type='percent')", function() {
     var value;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -133,7 +125,7 @@ asyncTest("Complete event has correct value parameter (type='percent')", functio
 asyncTest("Complete event has correct value parameter (type='chunk')", function() {
     var value;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -156,7 +148,7 @@ asyncTest("Change event has correct value parameter (type='value')", function() 
     var value;
     var expected = 120;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -179,7 +171,7 @@ asyncTest("Change event has correct value parameter (type='percent')", function(
     var value;
     var expected = 120;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -202,7 +194,7 @@ asyncTest("Change event has correct value parameter (type='chunk')", function() 
     var value;
     var expected = 120;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -224,7 +216,7 @@ asyncTest("Change event has correct value parameter (type='chunk')", function() 
 asyncTest("Context is correctly set in complete event (type='value')", function() {
     var context;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -246,7 +238,7 @@ asyncTest("Context is correctly set in complete event (type='value')", function(
 asyncTest("Context is correctly set in complete event (type='percent')", function() {
     var context;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: -50,
@@ -268,7 +260,7 @@ asyncTest("Context is correctly set in complete event (type='percent')", functio
 asyncTest("Context is correctly set in complete event (type='chunk')", function() {
     var context;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: -50,
@@ -290,7 +282,7 @@ asyncTest("Context is correctly set in complete event (type='chunk')", function(
 asyncTest("Context is correctly set in change event (type='value')", function() {
     var context;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -312,7 +304,7 @@ asyncTest("Context is correctly set in change event (type='value')", function() 
 asyncTest("Context is correctly set in change event (type='percent')", function() {
     var context;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -334,7 +326,7 @@ asyncTest("Context is correctly set in change event (type='percent')", function(
 asyncTest("Context is correctly set in change event (type='chunk')", function() {
     var context;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -356,7 +348,7 @@ asyncTest("Context is correctly set in change event (type='chunk')", function() 
 asyncTest("Complete event is fired after change event", 2, function() {
     var events = [];
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 165,
         value: -50,
@@ -378,15 +370,13 @@ asyncTest("Complete event is fired after change event", 2, function() {
     }, 30);
 });
 
-// -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
-module("Rendering / Chunk progressbar", {
+module("Progressbar chunk rendering", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
 
 test("k-progressbar-reverse class is added to progressbar (type='chunk')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         reverse: true
     });
@@ -395,7 +385,7 @@ test("k-progressbar-reverse class is added to progressbar (type='chunk')", funct
 });
 
 test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: false", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "horizontal",
         reverse: false,
@@ -411,7 +401,7 @@ test("Correct chunks are updated when progressbar is orientation:horizontal and 
 });
 
 test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: true", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "horizontal",
         reverse: true,
@@ -427,7 +417,7 @@ test("Correct chunks are updated when progressbar is orientation:horizontal and 
 });
 
 test("Correct chunks are updated when progressbar is orientation:vertical and reverse: false", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "vertical",
         reverse: false,
@@ -443,7 +433,7 @@ test("Correct chunks are updated when progressbar is orientation:vertical and re
 });
 
 test("Correct chunks are updated when progressbar is orientation:vertical and reverse: true", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "vertical",
         reverse: true,
@@ -459,7 +449,7 @@ test("Correct chunks are updated when progressbar is orientation:vertical and re
 });
 
 test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: false and value was decreased", 2, function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "horizontal",
         reverse: false,
@@ -477,7 +467,7 @@ test("Correct chunks are updated when progressbar is orientation:horizontal and 
 });
 
 test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: true and value was decreased", 2, function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "horizontal",
         reverse: true,
@@ -495,7 +485,7 @@ test("Correct chunks are updated when progressbar is orientation:horizontal and 
 });
 
 test("Correct chunks are updated when progressbar is orientation:vertical and reverse: false and value was decreased", 2, function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "vertical",
         reverse: false,
@@ -513,7 +503,7 @@ test("Correct chunks are updated when progressbar is orientation:vertical and re
 });
 
 test("Correct chunks are updated when progressbar is orientation:vertical and reverse: true and value was decreased", 2, function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         type: "chunk",
         orientation: "vertical",
         reverse: true,
@@ -531,7 +521,7 @@ test("Correct chunks are updated when progressbar is orientation:vertical and re
 });
 
 asyncTest("isStarted is set to true when the value is changed for the first time", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 10,
@@ -549,7 +539,7 @@ asyncTest("isStarted is set to true when the value is changed for the first time
 });
 
 asyncTest("isStarted remains true when the value has been changed and then set to the initial value", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 0,
@@ -568,7 +558,7 @@ asyncTest("isStarted remains true when the value has been changed and then set t
 });
 
 asyncTest("Correct chunk count is updated when range is more than chunkCount", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 300,
         value: 0,
@@ -586,7 +576,7 @@ asyncTest("Correct chunk count is updated when range is more than chunkCount", f
 });
 
 asyncTest("Correct chunk count is updated when range is less than chunkCount", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 10,
         value: 0,
@@ -604,7 +594,7 @@ asyncTest("Correct chunk count is updated when range is less than chunkCount", f
 });
 
 asyncTest("The last chunk is not filled until max value is reached", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 10000,
         value: 0,
@@ -622,15 +612,13 @@ asyncTest("The last chunk is not filled until max value is reached", function() 
 });
 
 
-// -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
-module("Rendering / Regular progressbar", {
+module("ProgressBar value/percent rendering", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
 
 asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is true (type: 'value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: 100,
@@ -648,7 +636,7 @@ asyncTest("Progress status wrapper is hidden when value is set to min and showSt
 });
 
 asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is true (type: 'percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: 100,
@@ -666,7 +654,7 @@ asyncTest("Progress status wrapper is hidden when value is set to min and showSt
 });
 
 asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is false (type: 'value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: 100,
@@ -684,7 +672,7 @@ asyncTest("Progress status wrapper is hidden when value is set to min and showSt
 });
 
 asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is false (type: 'percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: 100,
@@ -702,7 +690,7 @@ asyncTest("Progress status wrapper is hidden when value is set to min and showSt
 });
 
 asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is true (type: 'value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: -50,
@@ -720,7 +708,7 @@ asyncTest("Progress status wrapper is appended when initial value is set to min 
 });
 
 asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is true (type: 'percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: -50,
@@ -738,7 +726,7 @@ asyncTest("Progress status wrapper is appended when initial value is set to min 
 });
 
 asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is false (type: 'value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: -50,
@@ -756,7 +744,7 @@ asyncTest("Progress status wrapper is appended when initial value is set to min 
 });
 
 asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is false (type: 'percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: -50,
         max: 130,
         value: -50,
@@ -774,7 +762,7 @@ asyncTest("Progress status wrapper is appended when initial value is set to min 
 });
 
 asyncTest("Progress status wrapper is shown again when hidden once, showStatus is true (type: 'value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 0,
@@ -794,7 +782,7 @@ asyncTest("Progress status wrapper is shown again when hidden once, showStatus i
 });
 
 asyncTest("Progress status wrapper is shown again when hidden once, showStatus is true (type: 'percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 0,
@@ -814,7 +802,7 @@ asyncTest("Progress status wrapper is shown again when hidden once, showStatus i
 });
 
 asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 0,
@@ -834,7 +822,7 @@ asyncTest("Progress status wrapper is shown again when hidden once, showStatus i
 });
 
 asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 0,
@@ -854,7 +842,7 @@ asyncTest("Progress status wrapper is shown again when hidden once, showStatus i
 });
 
 asyncTest("Progress wrapper width stays the same when the ProgressBar wrapper is resized and showStatus is false", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 50,
@@ -874,7 +862,7 @@ asyncTest("Progress wrapper width stays the same when the ProgressBar wrapper is
 });
 
 asyncTest("Progress wrapper width stays the same when the ProgressBar wrapper is resized and showStatus is true", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 50,
@@ -894,7 +882,7 @@ asyncTest("Progress wrapper width stays the same when the ProgressBar wrapper is
 });
 
 test("Progress status text displays 100% even when floating point calculation precision fails", 2, function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 7,
         value: 7,
@@ -909,7 +897,7 @@ test("Progress status text displays 100% even when floating point calculation pr
 });
 
 asyncTest("Progress status holder wrapper width stays the same when the ProgressBar wrapper is resized (type='percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 50,
@@ -929,7 +917,7 @@ asyncTest("Progress status holder wrapper width stays the same when the Progress
 });
 
 asyncTest("Progress status holder wrapper width stays the same when the ProgressBar wrapper is resized (type='value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 50,
@@ -949,7 +937,7 @@ asyncTest("Progress status holder wrapper width stays the same when the Progress
 });
 
 asyncTest("isStarted is set to true when the value is changed for the first time (type='value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 10,
@@ -968,7 +956,7 @@ asyncTest("isStarted is set to true when the value is changed for the first time
 });
 
 asyncTest("isStarted remains true when the value has been changed and then set to the initial value (type='value')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 0,
@@ -988,7 +976,7 @@ asyncTest("isStarted remains true when the value has been changed and then set t
 });
 
 asyncTest("isStarted is set to true when the value is changed for the first time (type='percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 10,
@@ -1007,7 +995,7 @@ asyncTest("isStarted is set to true when the value is changed for the first time
 });
 
 asyncTest("isStarted remains true when the value has been changed and then set to the initial value (type='percent')", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 130,
         value: 0,

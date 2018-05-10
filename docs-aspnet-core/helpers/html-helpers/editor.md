@@ -3,6 +3,7 @@ title: Editor
 page_title: Editor | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_aspnetcore
+position: 23
 ---
 
 # Editor HtmlHelper Overview

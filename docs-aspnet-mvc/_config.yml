@@ -68,6 +68,9 @@ navigation:
         title: "Dialog"
      "helpers/dropdownlist":
         title: "DropDownList"
+     "helpers/dropdowntree":
+        isNew: true
+        title: "DropDownTree"
      "helpers/editor":
         title: "Editor"
      "helpers/flatcolorpicker":

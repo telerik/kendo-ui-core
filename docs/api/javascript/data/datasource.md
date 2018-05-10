@@ -2563,11 +2563,15 @@ It is recommended to get familiar with the SignalR [JavaScript API](http://www.a
         var hub = connection.createHubProxy("productHub");
         var hubStart = connection.start({ jsonp: true });
 
-        /* for ASP.NET Core SignalR include the necessary script file
+        /* configuration for ASP.NET Core SignalR
+         * the initialization code below targets 1.0.0-rc1-final release of SignalR
+         * sample service can be found at https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs
          * var hubUrl = "url here";
-         * var hub = new signalR.HubConnection(hubUrl, {
-         *    transport: signalR.TransportType.LongPolling
-         * });
+         * var hub = new signalR.HubConnectionBuilder()
+         *    .withUrl(hubUrl, {
+         *        transport: signalR.HttpTransportType.LongPolling
+         *    })
+         *    .build();
          * var hubStart = hub.start();
          */
 

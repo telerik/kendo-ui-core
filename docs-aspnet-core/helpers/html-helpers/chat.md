@@ -3,6 +3,7 @@ title: Chat
 page_title: Chat | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Chat HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_chat_aspnetcore
+position: 9
 ---
 
 # Chat HtmlHelper Overview

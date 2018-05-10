@@ -3,6 +3,7 @@ title: TabStrip
 page_title: TabStrip | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the TabStrip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_tabstrip_aspnetcore
+position: 59
 ---
 
 # TabStrip HtmlHelper Overview

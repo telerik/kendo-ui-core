@@ -3,6 +3,7 @@ title: DateTimePicker
 page_title: DateTimePicker | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the DateTimePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_datetimepicker_aspnetcore
+position: 17
 ---
 
 # DateTimePicker HtmlHelper Overview

@@ -3,6 +3,7 @@ title: Sortable
 page_title: Sortable | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI Sortable widget for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_sortable_aspnetcore
+position: 53
 ---
 
 # Sortable HtmlHelper Overview

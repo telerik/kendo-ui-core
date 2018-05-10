@@ -3,6 +3,7 @@ title: DateInput
 page_title: DateInput | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the DateInput HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dateinput_aspnetcore
+position: 13
 ---
 
 # DateInput HtmlHelper Overview

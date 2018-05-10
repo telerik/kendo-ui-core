@@ -1481,6 +1481,7 @@ div.k-filebrowser-dropzone em
 .k-multiselect,
 .k-combobox,
 .k-dropdown,
+.k-dropdowntree,
 .k-dropdown-wrap,
 .k-datepicker,
 .k-timepicker,
@@ -1899,6 +1900,7 @@ html .km-pane-wrapper .km-widget,
 .k-numeric-wrap.k-state-default,
 .k-dropdown-wrap.k-state-default
 {
+    color: @header-text-color;
     .composite-background(@widget-gradient);
     background-position: 50% 50%;
     background-color: @drop-down-background;
@@ -1922,7 +1924,8 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-multiselect-wrap.k-state-hover,
-.k-state-hover > .k-multiselect-wrap
+.k-state-hover > .k-multiselect-wrap,
+.k-multiselect-wrap.k-state-hover
 {
     border-color: @drop-down-hover-border-color;
     background-color: @input-bg;
@@ -1952,11 +1955,15 @@ html .km-pane-wrapper .km-widget,
     color: @drop-down-text-color;
 }
 
+.k-popup-dropdowntree .k-treeview {
+    color: inherit;
+}
+
 .k-nodata {
     color: @disabled-text-color;
 }
 
-.k-dropdown .k-input,
+.k-dropdown-wrap .k-input,
 .k-dropdown .k-state-focused .k-input,
 .k-menu .k-popup
 {
@@ -2134,6 +2141,17 @@ html .km-pane-wrapper .km-widget,
 {
     background-color: @icon-background-color;
     border-radius: @calendar-border-radius;
+}
+
+.k-popup-dropdowntree {
+
+    .k-treeview .k-icon {
+        background: transparent;
+    }
+}
+
+.k-list-filter {
+    color: #4c5356;
 }
 
 .k-scheduler-table .k-state-hover .k-icon

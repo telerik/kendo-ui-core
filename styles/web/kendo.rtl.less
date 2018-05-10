@@ -101,6 +101,19 @@
     text-align: left;
 }
 
+.k-rtl .k-list-filter {
+
+    & > .k-icon {
+        right: auto;
+        left: 6px;
+    }
+
+    & > .k-textbox {
+        padding-left: 20px;
+        padding-right: 0;
+    }
+}
+
 .k-rtl .k-datetimepicker .k-select
 {
 
@@ -988,6 +1001,11 @@
     transform: scaleX(-1);
     margin-right: -16px;
     margin-left: auto;
+}
+
+.k-rtl .k-treeview .k-checkbox-label {
+    padding-left: 0;
+    padding-right: calc(14px + 0.7ex);
 }
 
 /*  TreeList */

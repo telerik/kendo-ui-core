@@ -3,6 +3,7 @@ title: TreeView
 page_title: TreeView | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treeview_aspnetcore
+position: 67
 ---
 
 # TreeView HtmlHelper Overview

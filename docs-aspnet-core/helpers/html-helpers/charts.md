@@ -3,6 +3,7 @@ title: Charts
 page_title: Charts | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Charts HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_charts_aspnetcore
+position: 7
 ---
 
 # Charts HtmlHelper Overview

@@ -1,37 +1,31 @@
 (function(){
-var pb;
 
-function createPbHtml(){
-    var html = "<div id='progressbar'></div>";
-
-    pb = $(html);
-    pb.appendTo(QUnit.fixture);
-}
-
-function createProgressbar(options){
-    createPbHtml();
-
-    pb.kendoProgressBar(options);
-    return pb.data("kendoProgressBar");
-}
+var ProgressBar = kendo.ui.ProgressBar,
+    container,
+    pb;
 
 function moduleSetup() {
-    //pb = createProgressbar();
+    kendo.effects.disable();
+
+    container = $("<div id='progressbar'></div>");
+    container.appendTo(QUnit.fixture);
 }
 
 function moduleTeardown() {
+    kendo.effects.enable();
+    if (pb.data && pb.data("kendoProgressBar")) {
+        pb.destroy();
+    }
     kendo.destroy(QUnit.fixture);
 }
 
-// -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
-module("value", {
+module("ProgressBar value", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
 
 test("value method returns the actual initial value", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50
     });
 
@@ -39,7 +33,7 @@ test("value method returns the actual initial value", function () {
 });
 
 test("value method sets indeterminate state correctly when false is passed", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50
     });
 
@@ -49,7 +43,7 @@ test("value method sets indeterminate state correctly when false is passed", fun
 });
 
 test("value method does not set indeterminate state when true is passed", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50
     });
 
@@ -59,7 +53,7 @@ test("value method does not set indeterminate state when true is passed", functi
 });
 
 test("value method sets value correctly when the value is between min and max", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50,
         min: 20,
         max: 60
@@ -71,7 +65,7 @@ test("value method sets value correctly when the value is between min and max", 
 });
 
 test("value method sets value equal to max value when it is bigger than max", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50,
         min: 20,
         max: 60
@@ -83,7 +77,7 @@ test("value method sets value equal to max value when it is bigger than max", fu
 });
 
 test("value method sets value equal to min value when it is smaller than min", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50,
         min: 20,
         max: 60
@@ -95,7 +89,7 @@ test("value method sets value equal to min value when it is smaller than min", f
 });
 
 test("value method sets the value when it is equal to min", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50,
         min: 20,
         max: 60
@@ -107,7 +101,7 @@ test("value method sets the value when it is equal to min", function () {
 });
 
 test("value method sets the value when it is equal to max", function () {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         value: 50,
         min: 20,
         max: 60
@@ -121,7 +115,7 @@ test("value method sets the value when it is equal to max", function () {
 asyncTest("Change event is fired only once per value (type='chunk')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -144,7 +138,7 @@ asyncTest("Change event is fired only once per value (type='chunk')", function()
 asyncTest("Change event is fired only once per value (type='value')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -167,7 +161,7 @@ asyncTest("Change event is fired only once per value (type='value')", function()
 asyncTest("Change event is fired only once per value (type='percent')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -190,7 +184,7 @@ asyncTest("Change event is fired only once per value (type='percent')", function
 asyncTest("Change event is fired only once per value when trying to set value bigger than max (type='percent')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -213,7 +207,7 @@ asyncTest("Change event is fired only once per value when trying to set value bi
 asyncTest("Change event is fired only once per value when trying to set value bigger than max (type='value')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -236,7 +230,7 @@ asyncTest("Change event is fired only once per value when trying to set value bi
 asyncTest("Change event is fired only once per value when trying to set value bigger than max (type='chunk')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -259,17 +253,19 @@ asyncTest("Change event is fired only once per value when trying to set value bi
 asyncTest("Change event is fired only once per value when trying to set value smaller than min (type='percent')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 30,
         type: "percent",
-        change: function(){
+        change: function(e){
+            //change the fired counter only for the testing values - exclude initial change
+            if (e.value === 30) {
+                return;
+            }
             changeFiredCounter++;
         },
-        animation: {
-            duration: 20
-        }
+        animation: false
     });
 
     pb.value(20);
@@ -284,17 +280,19 @@ asyncTest("Change event is fired only once per value when trying to set value sm
 asyncTest("Change event is fired only once per value when trying to set value smaller than min (type='value')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 30,
         type: "value",
-        change: function(){
+        change: function(e){
+            //change the fired counter only for the testing values - exclude initial change
+            if (e.value === 30) {
+                return;
+            }
             changeFiredCounter++;
         },
-        animation: {
-            duration: 20
-        }
+        animation: false
     });
 
     pb.value(20);
@@ -309,7 +307,7 @@ asyncTest("Change event is fired only once per value when trying to set value sm
 asyncTest("Change event is fired only once per value when trying to set value smaller than min (type='chunk')", function() {
     var changeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 30,
@@ -332,7 +330,7 @@ asyncTest("Change event is fired only once per value when trying to set value sm
 asyncTest("Complete event is not fired before max is reached (type='value')", function(){
     var completeFired = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -356,7 +354,7 @@ asyncTest("Complete event is not fired before max is reached (type='value')", fu
 asyncTest("Complete event is fired when max is reached (type='value')", function(){
     var completeFired = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -380,7 +378,7 @@ asyncTest("Complete event is fired when max is reached (type='value')", function
 asyncTest("Complete event is fired each time when max is reached (type='value')", function(){
     var completeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -404,7 +402,7 @@ asyncTest("Complete event is fired each time when max is reached (type='value')"
 asyncTest("Complete event is not fired before max is reached (type='percent')", function(){
     var completeFired = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -428,7 +426,7 @@ asyncTest("Complete event is not fired before max is reached (type='percent')", 
 asyncTest("Complete event is fired when max is reached (type='percent')", function(){
     var completeFired = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -452,7 +450,7 @@ asyncTest("Complete event is fired when max is reached (type='percent')", functi
 asyncTest("Complete event is fired each time when max is reached (type='percent')", function(){
     var completeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -476,7 +474,7 @@ asyncTest("Complete event is fired each time when max is reached (type='percent'
 asyncTest("Complete event is not fired before max is reached (type='chunk')", function(){
     var completeFired = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -500,7 +498,7 @@ asyncTest("Complete event is not fired before max is reached (type='chunk')", fu
 asyncTest("Complete event is fired when max is reached (type='chunk')", function(){
     var completeFired = false;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -524,7 +522,7 @@ asyncTest("Complete event is fired when max is reached (type='chunk')", function
 asyncTest("Complete event is fired each time when max is reached (type='chunk')", function(){
     var completeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -548,7 +546,7 @@ asyncTest("Complete event is fired each time when max is reached (type='chunk')"
 asyncTest("Complete event is not fired max is set multiple times in a row (type='value')", function(){
     var completeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -571,7 +569,7 @@ asyncTest("Complete event is not fired max is set multiple times in a row (type=
 asyncTest("Complete event is not fired max is set multiple times in a row (type='percent')", function(){
     var completeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -594,7 +592,7 @@ asyncTest("Complete event is not fired max is set multiple times in a row (type=
 asyncTest("Complete event is not fired max is set multiple times in a row (type='chunk')", function(){
     var completeFiredCounter = 0;
 
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -615,7 +613,7 @@ asyncTest("Complete event is not fired max is set multiple times in a row (type=
 });
 
 asyncTest("k-progressbar-indeterminate class is set correctly when passed value is false", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -631,7 +629,7 @@ asyncTest("k-progressbar-indeterminate class is set correctly when passed value 
 });
 
 asyncTest("k-progressbar-indeterminate class is removed when previous value was false", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: 20,
@@ -648,7 +646,7 @@ asyncTest("k-progressbar-indeterminate class is removed when previous value was 
 });
 
 asyncTest("k-progressbar-indeterminate class is removed when initial value was false", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 20,
         max: 60,
         value: false,
@@ -664,7 +662,7 @@ asyncTest("k-progressbar-indeterminate class is removed when initial value was f
 });
 
 asyncTest("One percent is calculated correctly", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         min: 0,
         max: 300,
         value: 0,
@@ -680,15 +678,13 @@ asyncTest("One percent is calculated correctly", function(){
     }, 30);
 });
 
-// -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
-module("enable", {
+module("ProgressBar enable", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
 
 test("enable method renders k-state-disabled class when false is passed", function () {
-    pb = createProgressbar();
+    pb = new ProgressBar(container);
 
     pb.enable(false);
 
@@ -696,7 +692,7 @@ test("enable method renders k-state-disabled class when false is passed", functi
 });
 
 test("enable method removes k-state-disabled class when no parameter is passed", function () {
-    pb = createProgressbar();
+    pb = new ProgressBar(container);
 
     pb.enable(false);
     pb.enable();
@@ -705,7 +701,7 @@ test("enable method removes k-state-disabled class when no parameter is passed",
 });
 
 test("enable method removes k-state-disabled class when true is passed", function () {
-    pb = createProgressbar();
+    pb = new ProgressBar(container);
 
     pb.enable(false);
     pb.enable(true);
@@ -714,7 +710,7 @@ test("enable method removes k-state-disabled class when true is passed", functio
 });
 
 test("enable method does not add k-state-disabled class if not needed", function () {
-    pb = createProgressbar();
+    pb = new ProgressBar(container);
 
     pb.enable();
     pb.enable(true);
@@ -723,7 +719,7 @@ test("enable method does not add k-state-disabled class if not needed", function
 });
 
 test("enable method does not removes k-state-disabled class if not needed", function () {
-    pb = createProgressbar();
+    pb = new ProgressBar(container);
 
     pb.enable(false);
     pb.enable(false);
@@ -732,14 +728,14 @@ test("enable method does not removes k-state-disabled class if not needed", func
 });
 
 test("enable does not disable progressbar", function(){
-    pb = createProgressbar();
+    pb = new ProgressBar(container);
     pb.enable();
 
     ok(!pb.wrapper.hasClass("k-state-disabled"));
 });
 
 test("initially disabled state is applied", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         enable: false
     });
 
@@ -747,7 +743,7 @@ test("initially disabled state is applied", function() {
 });
 
 test("ProgressBar does change value when disabled", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false
     });
     pb.value(30);
@@ -758,7 +754,7 @@ test("ProgressBar does change value when disabled", function(){
 });
 
 test("ProgressBar does change value when initially disabled", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         enable: false,
         value: 0
@@ -769,7 +765,7 @@ test("ProgressBar does change value when initially disabled", function(){
 });
 
 test("ProgressBar does change value when enabled after initially disabled", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         enable: false
     });
@@ -780,7 +776,7 @@ test("ProgressBar does change value when enabled after initially disabled", func
 });
 
 test("ProgressBar does change value when reenabled", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false
     });
 
@@ -793,7 +789,7 @@ test("ProgressBar does change value when reenabled", function(){
 });
 
 test("ProgressBar does not indeterminate state when disabled", 2, function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 30
     });
@@ -806,7 +802,7 @@ test("ProgressBar does not indeterminate state when disabled", 2, function(){
 });
 
 test("ProgressBar is disabled correctly when in indeterminate state", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 30
     });
@@ -817,16 +813,13 @@ test("ProgressBar is disabled correctly when in indeterminate state", function()
     ok(pb.wrapper.hasClass("k-state-disabled"));
 });
 
-
-// -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
 module("setOptions", {
     setup: moduleSetup,
     teardown: moduleTeardown
 });
 
 test("Animation is set to false in options", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: {
             duration: 500
         },
@@ -839,7 +832,7 @@ test("Animation is set to false in options", function(){
 });
 
 test("Private animation object duration is set to 0", function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: {
             duration: 500
         },
@@ -854,7 +847,7 @@ test("Private animation object duration is set to 0", function() {
 });
 
 test("Animation duration is set correctly in options", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 30
     });
@@ -869,7 +862,7 @@ test("Animation duration is set correctly in options", function(){
 });
 
 test("Private animation object duration is set correctly", function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 30
     });
@@ -884,7 +877,7 @@ test("Private animation object duration is set correctly", function(){
 });
 
 test("Type is changed correctly from value to percent", 2, function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 150,
         min: 0,
@@ -899,7 +892,7 @@ test("Type is changed correctly from value to percent", 2, function() {
 });
 
 test("Type is changed correctly from percent to value", 2, function() {
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 150,
         min: 0,
@@ -914,7 +907,7 @@ test("Type is changed correctly from percent to value", 2, function() {
 });
 
 test("Value is changed correctly (type='value')", 3, function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 20,
         min: 0,
@@ -930,7 +923,7 @@ test("Value is changed correctly (type='value')", 3, function(){
 });
 
 test("Value is changed correctly (type='percent')", 3, function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 20,
         min: 0,
@@ -946,7 +939,7 @@ test("Value is changed correctly (type='percent')", 3, function(){
 });
 
 test("Value is changed correctly (type='chunk')", 2, function(){
-    pb = createProgressbar({
+    pb = new ProgressBar(container, {
         animation: false,
         value: 20,
         min: 0,

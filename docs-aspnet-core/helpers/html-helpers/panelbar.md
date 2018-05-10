@@ -3,6 +3,7 @@ title: PanelBar
 page_title: PanelBar | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the PanelBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_panelbar_aspnetcore
+position: 47
 ---
 
 # PanelBar HtmlHelper Overview

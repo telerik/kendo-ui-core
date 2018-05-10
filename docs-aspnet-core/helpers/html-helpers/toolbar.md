@@ -3,6 +3,7 @@ title: ToolBar
 page_title: ToolBar | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_toolbar_aspnetcore
+position: 61
 ---
 
 # ToolBar HtmlHelper Overview

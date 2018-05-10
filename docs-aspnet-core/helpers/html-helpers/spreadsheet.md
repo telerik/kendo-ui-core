@@ -3,6 +3,7 @@ title: Spreadsheet
 page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_aspnetcore
+position: 57
 ---
 
 # Spreadsheet HtmlHelper Overview

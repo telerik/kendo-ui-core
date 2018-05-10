@@ -3,6 +3,7 @@ title: Tooltip
 page_title: Tooltip | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_tooltip_aspnetcore
+position: 63
 ---
 
 # Tooltip HtmlHelper Overview

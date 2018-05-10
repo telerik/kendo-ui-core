@@ -3,6 +3,7 @@ title: Diagram
 page_title: Diagram | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Diagram HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_diagram_aspnetcore
+position: 19
 ---
 
 # Diagram HtmlHelper Overview

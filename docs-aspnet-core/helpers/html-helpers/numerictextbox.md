@@ -3,6 +3,7 @@ title: NumericTextBox
 page_title: NumericTextBox | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the NumericTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_numerictextbox_aspnetcore
+position: 45
 ---
 
 # NumericTextBox HtmlHelper Overview

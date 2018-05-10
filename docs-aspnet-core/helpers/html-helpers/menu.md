@@ -3,6 +3,7 @@ title: Menu
 page_title: Menu | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_menu_aspnetcore
+position: 39
 ---
 
 # Menu HtmlHelper Overview

@@ -1,8 +1,10 @@
 ---
-title: Grid
+title: Overview
 page_title: Grid | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_grid_aspnetcore
+previous_url: htmlhelpers_grid_aspnetcore
+slug: htmlhelpers_grid_aspnetcore_overview
+position: 1
 ---
 
 # Grid HtmlHelper Overview

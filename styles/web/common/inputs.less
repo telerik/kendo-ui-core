@@ -62,6 +62,11 @@ span.k-dropdowntree,
     top: (@grid-size/2 - 2px);
 }
 
+.k-multiselect-wrap .k-readonly,
+.k-dropdown-wrap .k-readonly {
+    opacity: 0.5;
+}
+
 .k-autocomplete,
 .k-dropdown-wrap,
 // dropdowntree
@@ -156,7 +161,6 @@ span.k-dropdowntree,
 
 .k-list-container.k-state-border-down,
 .k-autocomplete.k-state-border-down,
-.k-dropdown-wrap.k-state-border-down,
 .k-picker-wrap.k-state-border-down,
 .k-numeric-wrap.k-state-border-down {
     border-bottom-width: 0;
@@ -165,6 +169,14 @@ span.k-dropdowntree,
 
 .k-list-container .km-scroll-container {
     padding-bottom: 6px;
+}
+
+.k-list-container.k-popup-dropdowntree {
+
+    .k-check-all,
+    .k-treeview {
+        margin: 10px;
+    }
 }
 
 .k-textbox,
@@ -257,6 +269,7 @@ span.k-textbox:after {
 .k-dropdown .k-input,
 .k-dropdowntree .k-dropdown-wrap .k-input,
 .k-selectbox .k-input {
+    color: inherit;
     background: transparent;
 }
 

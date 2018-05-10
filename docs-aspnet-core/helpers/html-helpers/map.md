@@ -3,6 +3,7 @@ title: Map
 page_title: Map | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Map HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_map_aspnetcore
+position: 33
 ---
 
 # Map HtmlHelper Overview

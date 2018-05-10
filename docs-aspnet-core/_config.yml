@@ -32,7 +32,30 @@ navigation:
         title: "Breaking Changes"
         position: 7
 
-
+## List helpers directory names and order here, like this:
+     "*appearance":
+        title: "Appearance"
+     "*binding":
+        title: "Binding"
+     "*troubleshoot":
+        title: "Troubleshooting"
+     "*editing":
+        title: "Editing"
+     "*export":
+        title: "Export"
+     "*filtering":
+        title: "Filtering"
+     "*integration":
+        title: "Integration"
+     "*selection":
+        title: "Selection"
+     "*state":
+        title: "State Management"
+     "*how-to":
+        title: "How To"
+     "helpers/html-helpers/grid":
+        title: "Grid"
+        position: 27
 
 ## The application virtual path
 baseurl: /aspnet-core

@@ -999,6 +999,7 @@ div.k-filebrowser-dropzone em
 .k-dropdown-wrap.k-state-hover,
 .k-dropdown-wrap.k-state-focused
 {
+    color: @hover-text-color;
     background-color: @select-hover-background-color;
     .composite-background(@hover-gradient);
     background-position: 50% 50%;
@@ -1734,13 +1735,6 @@ div.k-filebrowser-dropzone em
     border-radius: 0 @border-radius @border-radius 0;
 }
 
-.k-autocomplete > .k-i-close,
-.k-dropdown-wrap > .k-i-close,
-.k-multiselect-wrap > .k-i-close {
-    border-radius: 50%;
-    background-color: @widget-border-color;
-}
-
 .k-rtl .k-dropdown-wrap .k-select,
 .k-rtl .k-picker-wrap .k-select,
 .k-rtl .k-numeric-wrap .k-select,
@@ -1971,10 +1965,11 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-multiselect-wrap.k-state-hover,
-.k-state-hover > .k-multiselect-wrap
+.k-state-hover > .k-multiselect-wrap,
+.k-multiselect-wrap.k-state-hover
 {
     border-color: @drop-down-hover-border-color;
-    background-color: @input-bg;
+    background: @input-bg;
     color: @input-text;
 }
 
