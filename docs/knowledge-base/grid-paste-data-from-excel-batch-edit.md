@@ -71,7 +71,9 @@ How can I enable the copying of multiple rows from Excel and pasting them in the
      }
     ```
 
-###### Example - The following example demonstrates the full implementation of the approach.
+## Full Implementation  
+
+The following example demonstrates the full implementation of the approach.
 
 ```html
      <div id="example">

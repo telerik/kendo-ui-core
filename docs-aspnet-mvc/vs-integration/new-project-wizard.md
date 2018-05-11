@@ -50,7 +50,7 @@ After configuring the project settings, click **Finish** to start the creation o
 
 As a result, the wizard:  
 * Creates a new ASP.NET MVC application.
-* Adds CDN references in the Layout file of the project for all Kendo UI styles and scripts. This includes the `vsdoc` script that enables the Visual Studio IntelliSense feature. If you prefer to have the scripts locally, you could disable the CDN Support through [Configure Project]({% slug projectwizardconfig_visualstudio_aspnetmvc %})   
+* Adds CDN references in the Layout file of the project for all Kendo UI styles and scripts. This includes the `vsdoc` script that enables the Visual Studio IntelliSense feature. If you prefer to have the scripts locally, disable the CDN Support through the [configure project]({% slug projectwizardconfig_visualstudio_aspnetmvc %}) workflow.  
 * Copies all Kendo UI editor templates.
 * (Optional) Copies the Kendo UI assembly to your solution folder&mdash;it is possible to change this setting in the [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %}).
 * Adds a reference to the `Kendo.Mvc` assembly.

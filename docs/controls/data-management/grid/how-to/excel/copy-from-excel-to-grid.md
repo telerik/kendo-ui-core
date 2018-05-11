@@ -75,7 +75,6 @@ The following example demonstrates how to create a Grid that supports pasting fr
 
 ## See Also
 
-* [How to paste from Excel to the Grid with editing]({% slug grid-paste-data-from-excel-batch-edit %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
@@ -83,6 +82,7 @@ The following example demonstrates how to create a Grid that supports pasting fr
 * [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
 * [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
 * [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
+* [How to Paste Records from Excel to a Grid with Editing]({% slug grid-paste-data-from-excel-batch-edit %})
 * [How to Perform CRUD Operations with Local Storage Data]({% slug howto_perform_crud_operationswith_local_storage_data_grid %})
 * [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
 * [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})

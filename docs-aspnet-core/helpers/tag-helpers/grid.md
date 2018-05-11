@@ -19,11 +19,13 @@ The following example demonstrates how to define the Grid by using the Grid tag 
 
 ## Configuration
 
-The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data. 
+The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data.
 
 > **Important**
 >
-> With Grid Tag Helper setting a field `type` in the DataSource's schema model is required in order to parse the value to a proper data type.
+> To parse the value to a proper data type, set a `type` field in the DataSource schema model of the Grid tag helper.
+
+For more information on the configuration options of the Grid, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
 ###### Example
 
@@ -84,7 +86,6 @@ The Grid tag helper configuration options are passed as attributes of the tag. T
     )
 )
 ```
-For more details on the Grid configurations, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
 ## Hierarchy
 

@@ -7,13 +7,13 @@ slug: taghelpers_chat_aspnetcore
 
 # Chat TagHelper Overview
 
-The Chat tag helper allows you to configure the Kendo UI Chart widget in ASP.NET Core applications. It is a server-side wrapper for the [Kendo UI Chat](https://demos.telerik.com/kendo-ui/chat/index) widget.
+The Chat tag helper is a server-side wrapper for the [Kendo UI Chat for jQuery](https://demos.telerik.com/kendo-ui/chat/index) and allows you to configure the widget in ASP.NET Core applications.
 
-The Kendo UI Chat widget allows for integration with any Bot framework, due to its simplicity, flexible API and customizable templates. The widget supports out-of-the-box default [Cards](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-cards) and [Actions](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-actions). It also allows the configuration of [Custom Templates](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-templates) and [Custom Components](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-components).
+The Chat widget allows the user to participate in chat sessions with other users or with chat bots. The widget provides support for default [cards](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-cards) and [actions](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-actions), and enables the configuration of [custom templates](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-templates) and [custom components](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-components).
 
 ## Basic Usage
 
-The following example demonstrates how to define a Chat by using the Chat tag helper.
+The following example demonstrates how to define the Chat by using the Chat tag helper.
 
 ###### Example
 
@@ -21,7 +21,7 @@ The following example demonstrates how to define a Chat by using the Chat tag he
 
 ## Configuration
 
-The following example demonstrates the configuration options available for the Chat tag helper.
+The following example demonstrates the configuration options that are available for the Chat tag helper.
 
 ###### Example
 

@@ -1,16 +1,16 @@
 ---
 title: Overview
 page_title: Overview | Kendo UI DropDownTree
-description: "Learn how to initialize the Kendo UI DropDownTree widget, configure its options and customize templates."
+description: "Learn how to initialize the Kendo UI DropDownTree widget, configure its options, and customize its content by using templates."
 slug: overview_kendoui_dropdowntree_widget
 position: 1
 ---
 
 # DropDownTree Overview
 
+As of the Kendo UI R2 2018, the [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) is available in the Kendo UI for jQuery suite.
 
-As of **R2 2018**, the [DropDownTree widget](http://demos.telerik.com/kendo-ui/dropdowntree/index) is available in the KendoUI suite. The component is an editor of hierarchical data, rendered in a tree like structure, which allows multiple selection, templated nodes
-
+The DropDownTree widget represents an editor of hierarchical data, rendered in a tree-like structure, which provides multiple selection option and custom nodes.
 
 ## Getting Started
 
@@ -79,13 +79,14 @@ The following example demonstrates how to create a DropDownTree and bind it to a
             dataTextField: "FullName"
         });
     </script>
+
 ## Configuration
 
-### Checkboxes Support
+### Checkbox Support
 
-Once the `checkboxes` option is set to `true`, the DropDownTree widget provides the multiple selection functionality, by rending each checked item as a `tag` in its input. The tags (items) can be removed through their X button and will be automatically unckecked in the dropdown.
+Once the `checkboxes` option is set to `true`, the DropDownTree provides the multiple selection functionality by rending each checked item as a `tag` in its input. You can remove the tags (items) through their **X** button which will automatically uncheck them in the drop-down.
 
-Along with the standard checkbox support, the DropDownTree provides the possibility to manage all nodes checked state. In order to enable this functionality, you should set the `CheckAll` option to `true`.
+Along with the standard checkbox support, the DropDownTree allows you to manage the checked state of all nodes. To enable this functionality, set the `CheckAll` option to `true`.
 
 ###### Example
 
@@ -118,7 +119,15 @@ Along with the standard checkbox support, the DropDownTree provides the possibil
 
 ### Filtering
 
-The widget provides an inbuilt filtering functionality. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the dataTextField option). The supported filter values are `startswith`, `endswith` and `contains`.
+The built-in filtering functionality enables the user to filter the displayed DropDownTree items by their text value.
+
+By default, filtering is disabled and can be performed over `string` values only&mdash;that is, either the widget data has to be an array of strings or configured in the `dataTextField` option over the field.
+
+The DropDownTree supports the following filter values:
+
+* `startswith`
+* `endswith`
+* `contains`
 
 ###### Example
 
@@ -206,7 +215,7 @@ You can let the popup element automatically adjust its width according to the le
 
 ### Item Properties
 
-When binding the DropDownTree through the `dataSource` configuration option, each item can acquire the properties demonstrated in the example below.
+When you bind the DropDownTree through the `dataSource` configuration option, each item can acquire the properties that the following example demnstrates.
 
 ###### Example
 
@@ -226,7 +235,7 @@ When binding the DropDownTree through the `dataSource` configuration option, eac
         // Renders a <span class="k-sprite icon save" />
         spriteCssClass: "icon save",
 
-        // Specifies whether the node text should be encoded, or not
+        // Specifies whether the node text will be encoded, or not
         //(useful when rendering node-specific HTML)
         encoded: false,
 
@@ -247,19 +256,17 @@ When binding the DropDownTree through the `dataSource` configuration option, eac
         ]
     };
 
-You can configure `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`datatextfield`](/api/javascript/ui/dropdowntree#configuration-dataTextField), [`dataimageurlfield`](/api/javascript/ui/dropdowntree#configuration-dataImageUrlField), [`dataspritecssclassfield`](/api/javascript/ui/dropdowntree#configuration-dataSpriteCssClassField), and [`dataurlfield`](/api/javascript/ui/dropdowntree#configuration-dataUrlField) options respectively.
+You can configure the `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`datatextfield`](/api/javascript/ui/dropdowntree#configuration-dataTextField), [`dataimageurlfield`](/api/javascript/ui/dropdowntree#configuration-dataImageUrlField), [`dataspritecssclassfield`](/api/javascript/ui/dropdowntree#configuration-dataSpriteCssClassField), and [`dataurlfield`](/api/javascript/ui/dropdowntree#configuration-dataUrlField) options respectively.
 
 ## Templates
 
-The DropDownTree uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way an item, a selected value, or a pop-up header is rendered.
+The DropDownTree uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way an item, a selected value, or a popup header is rendered.
 
 For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
 
-### Template
+### Node Template
 
 The node template manages the way the items in the dropdown are rendered.
-
-The following example demonstrates how to define a template.
 
 ###### Example
 
@@ -290,11 +297,9 @@ The following example demonstrates how to define a template.
 
 The value template manages the way the selected value of a DropDownTree is rendered.
 
-The following example demonstrates how to define a value template.
-
 > **Important**
 >
-> Value templates must consist of inline HTML elements only.
+> Value templates must consist of `inline` HTML elements only.
 
 ###### Example
 
@@ -329,9 +334,7 @@ The following example demonstrates how to define a value template.
 
 ### Header Template
 
-The header template manages the way the pop-up header of a DropDownTree is rendered.
-
-The following example demonstrates how to define a header template.
+The header template manages the way the popup header of a DropDownTree is rendered.
 
 ###### Example
 
@@ -359,9 +362,7 @@ The following example demonstrates how to define a header template.
 
 ### Footer Template
 
-The footer template manages the way the pop-up footer of a DropDownTree is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
-
-The following example demonstrates how to define a footer template.
+The footer template manages the way the popup footer of a DropDownTree is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
 ###### Example
 
@@ -397,8 +398,6 @@ The following example demonstrates how to define a footer template.
 ### No-Data Template
 
 The DropDownTree widget displays `noDataTemplate` in the popup when the data source is empty.
-
-The following example demonstrates how to define a `noDataTemplate` template.
 
 > **Important**
 >

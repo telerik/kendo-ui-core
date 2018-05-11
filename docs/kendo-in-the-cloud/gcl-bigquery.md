@@ -10,7 +10,7 @@ position: 4
 
 This article provides a step-by-step tutorial on how to create a table in [Google Cloud Big Query](https://aws.amazon.com/dynamodb/) and configure the [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to retrieve, create, update, and destroy items in that table.
 
-The complete implementation of this tutorial is available on our [Kendo Cloud Integration repository on GitHub.](https://github.com/telerik/kendo-cloud-integration/tree/master/GoogleCloudBigQuery)
+The complete implementation of this tutorial is available in the [Kendo UI Cloud Integration repository on GitHub](https://github.com/telerik/kendo-cloud-integration/tree/master/GoogleCloudBigQuery).
 
 * A [Google Cloud account](https://cloud.google.com/).
 * Basic knowledge on using the [Cloud Console](https://cloud.google.com/cloud-console/).
@@ -271,6 +271,6 @@ Now, you have a runnable example which uses the Grid, is capable of `read` and `
 
 * [Kendo UI Grid Overview]({% slug overview_kendoui_grid_widget %})
 * [Consuming Data from Azure Functions]({% slug azure_functions %})
-* [Binding to Azure git Cosmos DB]({% slug azure_cosmos_db %})
+* [Binding to Azure Cosmos DB]({% slug azure_cosmos_db %})
 * [Integrating Kendo UI with Azure Face API]({% slug azure_faceapi %})
 * [Consuming Data from Amazon DynamoDB]({% slug aws_dynamodb %})

@@ -10,13 +10,15 @@ position: 1
 
 The Chat HtmlHelper extension is a server-side wrapper for the [Kendo UI Chat](https://demos.telerik.com/kendo-ui/chat/index) widget.
 
-The Chat widget allows for integration with any Bot framework, due to its simplicity, flexible API and customizable templates.
+The Chat widget allows the user to participate in chat sessions with other users or with chat bots. The widget provides support for default [cards](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-cards) and [actions](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-actions), and enables the configuration of [custom templates](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-templates) and [custom components](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-components).
+
+For more information on new Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
 
 ## Getting Started
 
 ### Create the Chat
 
-The following HtmlHelper declaration will create a Chat widget with *name* and *id* set to `"chat"`:
+The following example demonstrates how to use the HtmlHelper declaration to create a Chat widget with its `name` and `id` set to `"chat"`.
 
 ###### Example
 
@@ -33,7 +35,7 @@ The following HtmlHelper declaration will create a Chat widget with *name* and *
 
 ## Event Handling
 
-You can subscribe to all Chat [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/chat). Here are the available approaches that would allow you to do so.
+You can subscribe to all Chat [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/chat) either by a [handler name](#by-handler-name) or by a [template delegate](#by-template-delegate).
 
 ### By Handler Name
 
@@ -73,7 +75,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 	  function onPost() {
 		//Handle the post event.
 	  }
-	
+
 	  function onSendPessage() {
 		//Handle the sendMessage event.
 	  }

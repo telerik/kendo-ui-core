@@ -8,37 +8,44 @@ position: 1
 
 # Chat Overview
 
-The [Kendo UI Chat](http://demos.telerik.com/kendo-ui/chat/index) widget allows for integration with any Bot framework, due to its simplicity, flexible API and customizable templates.
+The [Kendo UI Chat](http://demos.telerik.com/kendo-ui/chat/index) widget allows the user to participate in chat sessions with other users or with chat bots.
 
-For additional information on new Kendo UI Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
+For additional information on new Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
 
 ## Getting Started
 
 ### Create the Chat
 
-To create a Chat UI, add an empty `div` in the HTML, provide it with an ID, and, optionally, set the width and height of the desired chart inline or via CSS, as demonstrated in the example below.
+To create a Chat:
 
-###### Example
+1. Add an empty `div` to the HTML.
+1. Provide it with an ID.
+1. (Optional) Set the width and height of the desired chat inline or by using CSS &mdash;<div id="chart" style="width: 400px; height: 600px"></div>.
 
-    <div id="chart" style="width: 400px; height: 600px"></div>
-	
 ### Initialize the Chat
 
-The Kendo UI Chat widget is rendered by selecting the `div` with a jQuery selector, calling the `kendoChat()` function and configuring its implementation for the [`post`](/api/javascript/ui/chat/events/post) event:
+To render the Chat:
 
-###### Example
+1. Select the `div` with a jQuery selector.
+1. Call the `kendoChat()` function.
+1. Configure its implementation for the [`post`](/api/javascript/ui/chat/events/post) event.
 
-    var chat = $("#chat").kendoChat({
-		post: function (args) {
-			// react on a user post action
-		}
-	}).data("kendoChat");
+        var chat = $("#chat").kendoChat({
+    		post: function (args) {
+    			// react on a user post action
+    		}
+    	}).data("kendoChat");
 
 ## Features
 
+* [Default cards](#default-cards)
+* [Default actions](#default-actions)
+* [Custom templates](#custom-templates)
+* [Custom components](#custom-components)
+
 ### Default Cards
 
-The Chat widget supports out-of-the-box `heroCards` which can be displayed in the chat flow. To display the `heroCard`, you could manually call the [`renderAttachments`](/api/javascript/ui/chat/methods/renderattachments) method of the widget:
+Out of the box, the Chat supports `heroCards` which can be displayed in the chat flow by manually calling the [`renderAttachments`](/api/javascript/ui/chat/methods/renderattachments) method of the widget.
 
 ```html
 <div id="chat"></div>
@@ -63,7 +70,7 @@ The Chat widget supports out-of-the-box `heroCards` which can be displayed in th
 
 ### Default Actions
 
-The Chat widget supports out-of-the-box `suggested actions`. To display the `suggestedActions` prompt, you could manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the widget: 
+Out of the box, the Chat supports `suggested actions`. To display the `suggestedActions` prompt, manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the widget.
 
 ```html
 <div id="chat"></div>
@@ -84,7 +91,9 @@ The Chat widget supports out-of-the-box `suggested actions`. To display the `sug
 
 ### Custom Templates
 
-The Chat widget offers the possibility to define custom templates to fit any custom payload, returned by the service. The below example demonstrates the implementation of a simple template and how that can be registered for the Kendo Chat:
+The Chat supports the definition of custom templates to fit any custom payload that is returned by the service.
+
+The following example demonstrates how to implement a simple template and to register it for the Chat.
 
 ###### Example
 
@@ -145,7 +154,9 @@ The Chat widget offers the possibility to define custom templates to fit any cus
 
 ### Custom Components
 
-The Chat widget provides support for custom components, which allow the use of JavaScript to render any content. The below example demonstrates how to place a [Kendo UI Calendar]({% slug overview_kendoui_calendar_widget %}) in a Custom Chat component:
+The Chat supports the implementation of custom components which allow you to use JavaScript to render any content.
+
+The following example demonstrates how to place a [Kendo UI Calendar]({% slug overview_kendoui_calendar_widget %}) in a custom Chat component.
 
 ```html
 <div id="chat"></div>
@@ -168,7 +179,7 @@ The Chat widget provides support for custom components, which allow the use of J
 		  chat.postMessage('You have selected ' + kendo.toString(e.sender.value(), 'D') + '!');
 
 		  var element = e.sender.element.closest('.k-card-container');
-		  
+
 		  setTimeout(function() {
 			e.sender.destroy();
 			element.remove();
@@ -202,7 +213,7 @@ The Chat widget provides support for custom components, which allow the use of J
 
 ## See Also
 
-* [Connect to Chatbot Service]({% slug connect_to_chatbot_service %})
+* [Connecting to Chat Bot Services]({% slug connect_to_chatbot_service %})
 * [Chat JavaScript API Reference](/api/javascript/ui/chat)
 
 For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).

@@ -1,24 +1,27 @@
 ---
-title: Bind to Flat Tables
-page_title: Bind to Flat Tables | Kendo UI DropDownTree
+title: Binding to Flat Tables
+page_title: Binding to Flat Tables | Kendo UI DropDownTree
 description: "Learn how to bind the Kendo UI DropDownTree widget to a flat data table that keeps references about the hierarchical structure."
 slug: bindtoflattables_dropdowntree_widget
 position: 2
 ---
 
-# Bind to Flat Tables
+# Binding to Flat Tables
 
 The [Kendo UI DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) expects hierarchical data.
 
-That is why you have to convert all flat structures to hierarchical data before binding the widget to it. This article demonstrates two methods for the conversion of flat data into hierarchical structure, which differ from each other in the amount of time necessary for their completion and the resulting tree.
+That is why, before binding the DropDownTree to data, you have to convert all flat structures to hierarchical data.
 
-## Methods
+## Approaches
 
-### Initial All-Data Pre-processing
+You can use either of the following approaches to convert flat data into a hierarchical structure. These approaches differ from each other in the amount of time necessary for their completion and the resulting tree.
 
-This method pre-processes all available data and converts it into a hierarchy prior to binding the DropDownTree widget. This requires more time and memory, and the resulting tree is fully rendered.
+* [Initial all data pre-processing](#initial-all-data-pre-processing)
+* [Incremental data filtering](#incremental-data-filtering)
 
-The following example demonstrates how to pre-process all data before binding the TreeView to it.
+### Initial All-Data Pre-Processing
+
+Prior to binding the DropDownTree widget, you can pre-process all available data and convert it into a hierarchy. This approach requires more time and memory, and the resulting tree is fully rendered.
 
 ###### Example
 
@@ -66,9 +69,7 @@ The following example demonstrates how to pre-process all data before binding th
 
 ### Incremental Data Filtering
 
-This second method allows nodes to be loaded on demand, but is more computationally intensive as it requires the collection to be filtered each time a node gets expanded.
-
-The following example demonstrates how to filter data incrementally.
+You can also load the nodes on demand. However, this approach is more computationally intensive than the initial all-data pre-processing because it requires the filtering of the collection each time a node gets expanded.
 
 ###### Example
 
@@ -123,5 +124,5 @@ The following example demonstrates how to filter data incrementally.
 
 Other articles on Kendo UI DropDownTree:
 
-* [Overview]({% slug overview_kendoui_dropdowntree_widget %})
+* [Overview of the DropDownTree]({% slug overview_kendoui_dropdowntree_widget %})
 * [DropDownTree JavaScript API Reference](/api/javascript/ui/dropdowntree)

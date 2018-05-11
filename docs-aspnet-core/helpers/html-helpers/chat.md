@@ -10,15 +10,15 @@ position: 9
 
 The Chat HtmlHelper extension is a server-side wrapper for the [Kendo UI Chat](https://demos.telerik.com/kendo-ui/chat/index) widget.
 
-The Kendo UI Chat widget allows for integration with any Bot framework, due to its simplicity, flexible API and customizable templates. The widget supports out-of-the-box default [Cards](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-cards) and [Actions](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-actions). It also allows the configuration of [Custom Templates](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-templates) and [Custom Components](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-components).
+The Chat widget allows the user to participate in chat sessions with other users or with chat bots. The widget provides support for default [cards](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-cards) and [actions](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-actions), and enables the configuration of [custom templates](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-templates) and [custom components](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-components).
 
-For additional information on new Kendo UI Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
+For more information on new Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
 
 For more information on the HtmlHelper, refer to the article on the [Chat HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chat/overview).
 
 ## Basic Usage
 
-The following example demonstrates how to define a Chat by using the Chat HtmlHelper.
+The following example demonstrates how to define the Chat by using the Chat HtmlHelper.
 
 ###### Example
 
@@ -31,7 +31,7 @@ The following example demonstrates how to define a Chat by using the Chat HtmlHe
 
 ## Configuration
 
-The following example demonstrates the configuration options available for the Chat HtmlHelper.
+The following example demonstrates the configuration options that are available for the Chat HtmlHelper.
 
 ###### Example
 

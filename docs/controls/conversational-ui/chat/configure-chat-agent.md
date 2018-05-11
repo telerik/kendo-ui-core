@@ -1,22 +1,21 @@
 ---
-title: Connect to Chatbot service
-page_title: Connect to Chatbot | Kendo UI Chat
-description: "Learn how to configure and connect the Kendo UI Chat widget to an existing Bot framework / service of choice."
+title: Connecting to Chat Bot Services
+page_title: Connecting to Chat Bot Services | Kendo UI Chat
+description: "Configure and connect the Kendo UI Chat widget to an existing Bot framework / service of choice."
 slug: connect_to_chatbot_service
 position: 2
 ---
 
-# Connect to Any Service
+# Connecting to Chat Bot Services
 
-In order to connect the [Kendo UI Chat](http://demos.telerik.com/kendo-ui/chat/index) to any service, one has to utilize the post event of the widget, and its public [API](/api/javascript/ui/chat) to render the responses from the service. To encapsulate the communication with the specific service an `agent` class can be used.
+To connect the [Chat](http://demos.telerik.com/kendo-ui/chat/index) to any service and render the responses from the service, utilize the `post` event of the widget and its public [API](/api/javascript/ui/chat).
+
 
 ## Configure the Chat Agent
 
-The `agent` class handles the communication with the external Chatbot service. Within the `init` method the connection to the service is established, and the appropriate events are bound, so that the agent can receive the responses.
+To encapsulate the communication with the specific service, use an `agent` class. The `agent` class handles the communication with the external Chat Bot service. The establishment of the connection to the service and the binding of the appropriate events are done within the `init` method. In this way, the agent is able to receive the responses.
 
-For the needs of the below example the [Microsoft Bot Framework](https://dev.botframework.com/) is used. You will notice that the `agent` is subscribed to listen for any `activity$` of the remote service. When such is detected, the appropriate method from the Chat public API is invoked to render the data.
-
-To handle user input the [`post`](/api/javascript/ui/chat/events/post) event handler of the Kendo UI Chat widget is implemented, and the arguments are passed to the Chatbot service:
+The following example uses the [Microsoft Bot Framework](https://dev.botframework.com/). The `agent` is subscribed to listen for any `activity$` of the remote service. When an activity is detected, the appropriate method from the Chat public API is invoked to render the data. To handle the user input, the example implements the [`post`](/api/javascript/ui/chat/events/post) event handler of the Chat and the arguments are passed to the Chat Bot service.
 
 ```html
 <div id="chat"></div>
