@@ -566,6 +566,12 @@
     padding: .03em .2em;
 }
 
+.k-rtl .k-autocomplete > .k-i-close,
+.k-rtl .k-multiselect-wrap > .k-i-close {
+    left: 6px;
+    right: auto;
+}
+
 /* Notification */
 
 .k-rtl .k-notification-button .k-notification-wrap,
@@ -1141,5 +1147,12 @@
 
     td .k-checkbox {
         margin-left: 0;
+    }
+}
+
+/* Chat */
+.k-rtl {
+    .k-message-box .k-button svg {
+        transform: rotate(180deg)
     }
 }

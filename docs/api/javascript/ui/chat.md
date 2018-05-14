@@ -119,7 +119,7 @@ The text to send and render.
 
 ### renderAttachments
 
-Renders an attachment inside the chat. The attachments is rendered through a predefined or custom template, registered with the Chat widget.
+Renders an attachment inside the chat. The attachments are rendered through a predefined or custom template, registered with the Chat widget.
 
 #### Parameters
 
