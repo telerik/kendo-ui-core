@@ -498,7 +498,8 @@ var __meta__ = { // jshint ignore:line
         var setter = getter.assign;
         var updating = false;
 
-        var valueIsCollection = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect;
+        var valueIsCollection = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect ||
+                                kendo.ui.RangeSlider && widget instanceof kendo.ui.RangeSlider;
 
         var length = function(value) {
             //length is irrelevant when value is not collection

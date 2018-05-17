@@ -154,7 +154,7 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadOnDemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 #### Example - disable the clear button
 
@@ -185,7 +185,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the checkA
 
 ### checkboxes `Boolean|Object`
 
-If `true` or an object, renders checkboxes beside each node. In this case the widget [value](/api/javascript/ui/dropdowntree/value) should be an array.
+If `true` or an object, renders checkboxes beside each node. In this case the widget [value](/api/javascript/ui/dropdowntree/configuration/value) should be an array.
 
 #### Example - show node checkboxes
 
@@ -209,7 +209,7 @@ If `true` or an object, renders checkboxes beside each node. In this case the wi
 Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked. This
 also enables tri-state checkboxes with an indeterminate state.
 
-> Note: when [filter](/api/javascript/ui/dropdowntree/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario not supported by the widget.
+> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario not supported by the widget.
 
 #### Example - enable tri-state checkboxes and propagate checked state to children
 
@@ -427,7 +427,7 @@ If an array, each level uses the field that is at the same index in the array, o
 Sets the field of the data item that provides the text content of the nodes.
 If an array, each level uses the field that is at the same index in the array, or the last item in the array.
 
-> **Important** In case when array is used, [filter](/api/javascript/ui/dropdowntree/filter) is not supported because
+> **Important** In case when array is used, [filter](/api/javascript/ui/dropdowntree/configuration/filter) is not supported because
  [hierarchical data source](/api/javascript/data/hierarchicaldatasource) does not support filtering by different fields yet.
 
 #### Example - set the dataTextField

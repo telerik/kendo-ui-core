@@ -1046,6 +1046,11 @@ var __meta__ = { // jshint ignore:line
         });
 
         element.click(false);
+
+        // Disable link dragging
+        element.on("dragstart", function(e){
+            e.preventDefault();
+        });
     };
 
     Slider.Drag.prototype = {

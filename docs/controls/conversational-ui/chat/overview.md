@@ -20,7 +20,12 @@ To create a Chat:
 
 1. Add an empty `div` to the HTML.
 1. Provide it with an ID.
-1. (Optional) Set the width and height of the desired chat inline or by using CSS &mdash;<div id="chart" style="width: 400px; height: 600px"></div>.
+1. (Optional) Set the width and height of the desired chat inline or by using CSS.
+
+###### Example
+
+	<div id="chart" style="width: 400px; height: 600px"></div>
+
 
 ### Initialize the Chat
 
