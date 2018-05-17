@@ -84,7 +84,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 			using Newtonsoft.Json.Serialization;
 			...
 
-	* Locate the `Configure` method and add a call to `app.UseKendo` at the end.
+	* Locate the `Configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
 
 		###### Example
 
