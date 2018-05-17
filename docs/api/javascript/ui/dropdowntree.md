@@ -152,9 +152,9 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 ### checkAll `Boolean` *(default: false)*
 
-When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
+When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/loadOnDemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadOnDemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 #### Example - disable the clear button
 
@@ -958,7 +958,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the value 
 
 ### tagMode `String`*(default: "multiple")*
 
-The mode used to render the selected tags when [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) are enabled. The available modes are:
+The mode used to render the selected tags when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled. The available modes are:
 - `multiple` - renders a tag for every selected value
 - `single` - renders only one tag that shows the number of the selected values
 
@@ -1018,7 +1018,7 @@ The text of the widget used when the `autoBind` is set to `false`.
 
 ### value `String|Array`
 
- Define the value of the widget. It accepts 'String' when it is in single selection mode and 'Array' when multiple selection is enabled via [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) property.
+ Define the value of the widget. It accepts 'String' when it is in single selection mode and 'Array' when multiple selection is enabled via [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) property.
 
 #### Example
 
@@ -1113,7 +1113,7 @@ An object, which holds the options of the widget.
     </script>
 
 ### tagList `jQuery`
-A jQuery object of the `ul` element, which holds the selected tags. It is only available when [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) is 'true'.
+A jQuery object of the `ul` element, which holds the selected tags. It is only available when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'true'.
 
 #### Example - get tagList element
 
@@ -1398,7 +1398,7 @@ You can overcome this behavior by triggering the `change` event manually using [
 
 ##### value `Array|String`
 
-The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) is 'false' and an *Array of strings* when `checkboxes` is true. To clear the value, pass an empty array.
+The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false' and an *Array of strings* when `checkboxes` is true. To clear the value, pass an empty array.
 
 #### Returns
 
