@@ -50,5 +50,5 @@ Set the `theme` property of the Kendo UI Charts to `"sass"`.
 
 ## See Also
 
-* [Progress SASS ThemeBuilder](http://themebuilder.telerik.com/aspnet-mvc)
+* [Progress SASS ThemeBuilder](https://themebuilder.telerik.com/aspnet-mvc)
 * [API Reference of the theme Property](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/theme)

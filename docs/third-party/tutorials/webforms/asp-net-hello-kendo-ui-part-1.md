@@ -14,7 +14,7 @@ In this tutorial, you will work with the most complex of the Kendo UI widgets&md
 
 ## Screencast
 
-<iframe height="360" src="http://www.youtube.com/embed/pFOJTlbbpIc?rel=0" frameborder="0" width="640"></iframe>
+<iframe height="360" src="https://www.youtube.com/embed/pFOJTlbbpIc?rel=0" frameborder="0" width="640"></iframe>
 
 ## Written Summary
 
