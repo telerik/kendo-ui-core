@@ -12,7 +12,7 @@ In this tutorial, you will learn how to fully enable the Create, Read, Update, D
 
 ## Screencast
 
-<iframe height="360" src="http://www.youtube.com/embed/BRv7Gvf1w6A?rel=0" frameborder="0" width="640"></iframe>
+<iframe height="360" src="https://www.youtube.com/embed/BRv7Gvf1w6A?rel=0" frameborder="0" width="640"></iframe>
 
 ## Written Summary
 

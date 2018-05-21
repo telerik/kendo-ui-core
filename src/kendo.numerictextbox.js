@@ -652,8 +652,9 @@ var __meta__ = { // jshint ignore:line
         _step: function(step) {
             var that = this,
                 element = that.element,
-                value = that._parse(element.val()) || 0;
-            var precision = that.options.decimals || 2;
+                originalValue = that._value,
+                value = that._parse(element.val()) || 0,
+                precision = that.options.decimals || 2;
 
             if (activeElement() != element[0]) {
                 that._focusin();
@@ -664,11 +665,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             value =  +(value + that.options.step * step).toFixed(precision); 
-            
-            that._update(that._adjust(value));
+            value = that._adjust(value);
+            that._update(value);
             that._typing = false;
 
-            that.trigger(SPIN);
+            if (originalValue !== value) {
+                that.trigger(SPIN);
+            }
         },
 
         _toggleHover: function(e) {

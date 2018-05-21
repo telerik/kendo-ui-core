@@ -21,7 +21,7 @@ All code used in this module can be downloaded from the [GitHub project course](
 
 ## Screencast
 
-<iframe width="640" height="360" src="http://www.youtube.com/embed/6RGS1ReBuPs?rel=0" frameborder="0"></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/6RGS1ReBuPs?rel=0" frameborder="0"></iframe>
 
 ## Written Summary
 

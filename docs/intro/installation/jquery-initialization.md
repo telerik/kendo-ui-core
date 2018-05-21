@@ -17,7 +17,7 @@ The jQuery plug-in method is formed by the widget name in Pascal Case, prefixed 
 
 Some Kendo UI widgets have specific requirements about the element types they must be instantiated on. For more details and working examples, check the source code in the [respective widget demo](http://demos.telerik.com/kendo-ui/) and [API reference](/api/javascript/kendo).
 
-While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element, it might lead to undesired side effects.
+> Avoid initializing several different Kendo UI widgets from the same DOM element because duplicate initialization might lead to undesired side effects.
 
 > **Important**
 >

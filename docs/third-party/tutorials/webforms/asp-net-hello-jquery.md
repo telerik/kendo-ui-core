@@ -18,7 +18,7 @@ This module covers the very basic information that you need to know about [jQuer
 
 ## Screencast
 
-<iframe height="360" src="http://www.youtube.com/embed/6BS-dZMHyKg?rel=0" frameborder="0" width="640"></iframe>
+<iframe height="360" src="https://www.youtube.com/embed/6BS-dZMHyKg?rel=0" frameborder="0" width="640"></iframe>
 
 ## Written Summary
 

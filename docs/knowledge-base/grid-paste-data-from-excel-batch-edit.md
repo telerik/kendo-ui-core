@@ -78,7 +78,6 @@ The following example demonstrates the full implementation of the approach.
 ```html
      <div id="example">
       <p>Click the grid to edit it or right click to paste edit</p>
-      <p>Copy paste from excel with a text column and a number column</p>
       <div id="grid"></div>
 
       <script>
@@ -115,7 +114,7 @@ The following example demonstrates the full implementation of the approach.
                   fields: {
                     ProductID: { editable: false, nullable: true },
                     ProductName: { validation: { required: true } },
-                    UnitPrice: { type: "number", validation: { required: true, min: 1}, defaultValue:0 },
+                    UnitPrice: { type: "number", validation: { required: true, min: 1} },
                     Discontinued: { type: "boolean" },
                     UnitsInStock: { type: "number", validation: { min: 0, required: true } }
                   }
@@ -151,8 +150,8 @@ The following example demonstrates the full implementation of the approach.
             { field: "UnitPrice", title: "Unit Price", width: 150 },
           ]
         }).on('contextmenu', function (e) {
-
-          if($(e.target).hasClass("k-link") || $(e.target).hasClass("k-grid-toolbar")){
+          // avoid the grid pager, headers and toolbar
+          if($(e.target).is(".k-link, .k-grid-toolbar, .k-grid-pager")){
             return;
           }
           // Get the position of the Grid.
@@ -169,8 +168,13 @@ The following example demonstrates the full implementation of the approach.
             width: $(this).find("table").width(),
             height: $(this).find(".k-grid-content").height()
           })
-            .appendTo('body')
-            .on('paste', function (e) {
+          .appendTo('body')
+          .on("click", function(e){
+            // in case user clicks to edit but the context menu is open and the textarea is over the grid's body
+            textarea.remove();
+           $(document.elementFromPoint(e.clientX, e.clientY)).click();
+          })
+          .on('paste', function () {
             setTimeout(function () {
               var value = $.trim(textarea.val());
               var grid = $("[data-role='grid']").data("kendoGrid");
@@ -183,15 +187,12 @@ The following example demonstrates the full implementation of the approach.
                   ProductName: cells[0],
                   UnitPrice: cells[1]
                 }
-
                 grid.dataSource.insert(0,newItem);
               };
               textarea.remove();
-            });
-
-          }).focus();
+            });            
+          }).focus();          
         });
-
       </script>
     </div>
 ```
