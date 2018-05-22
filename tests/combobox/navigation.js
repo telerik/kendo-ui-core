@@ -236,6 +236,18 @@ test("press enter should close popup when no change in selection", 1, function()
     combobox.input.focus().press(keys.ENTER);
 });
 
+test("press Tab should close popup when no change in selection", 1, function() {
+    create();
+    combobox.popup.bind("close", function(){
+        ok(true);
+    });
+
+    combobox.popup.open();
+
+    combobox.select(0);
+    combobox.input.focus().press(keys.TAB);
+});
+
 test("press enter should call preventDefault when popup is visible", 1, function() {
     create();
     combobox.popup.open();
@@ -244,6 +256,20 @@ test("press enter should call preventDefault when popup is visible", 1, function
     combobox.input.focus().trigger({
         type: "keydown",
         keyCode: keys.ENTER,
+        preventDefault: function() {
+            ok(true);
+        }
+    });
+});
+
+test("press Tab should call preventDefault when popup is visible", 1, function() {
+    create();
+    combobox.popup.open();
+
+    combobox.select(0);
+    combobox.input.focus().trigger({
+        type: "keydown",
+        keyCode: keys.TAB,
         preventDefault: function() {
             ok(true);
         }
@@ -298,6 +324,22 @@ test("pressing enter selects an item", 1, function() {
     combobox.input.focus().press(kendo.keys.ENTER);
 });
 
+test("pressing Tab selects an item", 1, function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        change: function() {
+            ok(combobox.current().hasClass("k-state-selected"));
+        }
+    });
+
+    combobox.open();
+
+    combobox.current(combobox.ul.children().first());
+    combobox.input.focus().press(kendo.keys.TAB);
+});
+
 asyncTest("empty input should clear focused item", 1, function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
@@ -326,7 +368,7 @@ test("ComboBox does not set value if autoBind:false and text property", function
 
     combobox.input.focus().trigger({
         type: "keydown",
-        keyCode: kendo.keys.TAB
+        keyCode: kendo.keys.ESC
     });
 
     equal(combobox.value(), "");
