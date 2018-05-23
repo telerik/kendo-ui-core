@@ -145,7 +145,7 @@ The layout to be used in rendering the attachments. Supported values are `list` 
 
 ##### sender `Object`
 
-The configuration object containg information about the sender of the message buggle. This determines where the message is rendered.
+The configuration object containg information about the sender of the message bubble. This determines where the message is rendered.
 
 ##### sender.id `Object`
 
