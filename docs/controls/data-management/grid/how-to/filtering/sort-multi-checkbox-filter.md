@@ -63,7 +63,10 @@ The following example demonstrates how to sort the Kendo UI multiple checkbox fi
                 var filterMultiCheck = this.thead.find("[data-field=" + e.field + "]").data("kendoFilterMultiCheck")
                 filterMultiCheck.container.empty();
                 filterMultiCheck.checkSource.sort({field: e.field, dir: "asc"});
-
+	
+                // uncomment the following line to handle any grouping from the original dataSource:
+	        // filterMultiCheck.checkSource.group(null);
+	
                 filterMultiCheck.checkSource.data(filterMultiCheck.checkSource.view().toJSON());
                 filterMultiCheck.createCheckBoxes();
               }
