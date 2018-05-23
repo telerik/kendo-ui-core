@@ -52,7 +52,7 @@ When working in Opera, the following symptoms, indicating incorrect behavior, oc
 When a server error occurs, the complete server response is logged in the console. The console is accessible in a specific manner for each browser as listed below:
 
 *   Internet Explorer - open the developer tools (`F12`) and choose the **Script** tab. The console is visible on the right.
-*   Firefox - install [Firebug](http://getfirebug.com/downloads) and enable the **Console** tab.
+*   Firefox - install [Firebug](https://getfirebug.com) and enable the **Console** tab.
 *   Chrome - open the JavaScript console (`Ctrl`+`Shift`+`J`).
 *   Safari - enable the **Develop** menu from the **Preferences**/**Advanced** dialog. Open the error console from the **Develop** menu.
 *   Any browser - use a debugging proxy like [Fiddler](http://www.telerik.com/fiddler) or [Charles](http://www.charlesproxy.com/) to obtain the server response.
