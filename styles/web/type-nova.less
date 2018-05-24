@@ -132,7 +132,7 @@
 @import "Default/card/theme.less";
 @import "Default/chat/theme.less";
 
-/* Main colors */
+// Main colors
 .k-splitbar .k-resize-handle {
     background-color: @normal-text-color;
 }
@@ -304,7 +304,7 @@ textarea.k-textbox:hover,
     color: @disabled-border-color;
 }
 
-/* Border radius */
+// Border radius
 .k-block,
 .k-drag-clue,
 .k-touch-scrollbar,
@@ -364,7 +364,7 @@ textarea.k-textbox:hover,
     border-radius: 0 @inputs-border-radius @inputs-border-radius 0;
 }
 
-/* Default icons opacity */
+// Default icons opacity
 .k-button .k-image,
 .k-panelbar > .k-state-active > .k-header > .k-icon,
 .k-panelbar > .k-state-active > .k-header .k-state-default .k-icon
@@ -401,7 +401,7 @@ textarea.k-textbox:hover,
     opacity: 1;
 }
 
-/* Loading indicator */
+// Loading indicator
 .k-i-loading {
     background-image: url('@{image-folder}/loading.gif');
 }
@@ -414,7 +414,7 @@ textarea.k-textbox:hover,
     border-radius: @inputs-border-radius;
 }
 
-/* Bare Button */
+// Bare Button
 .k-button.k-bare {
     position: relative;
 
@@ -460,7 +460,7 @@ textarea.k-textbox:hover,
     margin-left: -25px !important;
 }
 
-/* Menu */
+// Menu
 .k-menu {
     background-color: @base;
     border-color: @base;
@@ -490,7 +490,7 @@ textarea.k-textbox:hover,
     }
 }
 
-/* Inputs */
+// Inputs
 .k-list-container {
     border-color: darken(@normal-background, 12%);
     background-color: @normal-background;
@@ -669,7 +669,7 @@ input.k-textbox:active {
     color: @disabled-text-color;
 }
 
-/* Calendar */
+// Calendar
 .k-calendar {
     th,
     .k-alt {
@@ -767,7 +767,7 @@ input.k-textbox:active {
 // Notification
 @import "themes/notification.less";
 
-/* Tooltip */
+// Tooltip
 .k-widget.k-tooltip,
 .k-chart-crosshair-tooltip,
 .k-chart-shared-tooltip {
@@ -785,13 +785,13 @@ input.k-textbox:active {
     border-radius: 0;
 }
 
-/* Badge */
+// Badge
 .k-badge {
     background-color: @accent;
     color: contrast(@accent, @normal-background, @normal-text-color, 0.5);
 }
 
-/* TreeView */
+// TreeView
 .k-treeview {
     .k-state-hover {
         color: @normal-text-color;
@@ -802,7 +802,7 @@ input.k-textbox:active {
     }
 }
 
-/* Splitter */
+// Splitter
 .k-splitbar {
     background: @widget-background-color;
     border-color: @widget-background-color;
@@ -813,7 +813,7 @@ input.k-textbox:active {
     border-color: @selected-background;
 }
 
-/* Window */
+// Window
 .k-window {
     .box-shadow(@widget-shadow);
 }
@@ -828,7 +828,7 @@ input.k-textbox:active {
     }
 }
 
-/* PanelBar */
+// PanelBar
 .k-panelbar {
     color: @normal-text-color;
     background-color: @widget-background-color;
@@ -853,7 +853,7 @@ input.k-textbox:active {
     }
 }
 
-/* TabStrip */
+// TabStrip
 .k-tabstrip.k-header {
     background-color: @widget-background-color;
 }
@@ -894,7 +894,7 @@ input.k-textbox:active {
     border-top-color: @selected-background;
 }
 
-/* ProgressbBar */
+// ProgressbBar
 .k-progressbar {
     background: darken(@widget-background-color, 20%);
     border-color: darken(@widget-background-color, 20%);
@@ -945,7 +945,7 @@ input.k-textbox:active {
     }
 }
 
-/* Grid */
+// Grid
 .k-grid-header,
 .k-grid-header .k-header,
 .k-pager-wrap,
@@ -1098,7 +1098,7 @@ input.k-textbox:active {
     background-color: desaturate(@info, 8%);
 }
 
-/* PivotGrid */
+// PivotGrid
 .k-alt,
 .k-grid.k-alt,
 .k-fieldselector .k-item.k-header {
@@ -1130,7 +1130,7 @@ input.k-textbox:active {
     background: none;
 }
 
-/* Pager */
+// Pager
 .k-pager-wrap,
 .k-pager-numbers .k-link,
 .k-pager-numbers .k-link:link {
@@ -1152,7 +1152,7 @@ input.k-textbox:active {
     border-radius: 0;
 }
 
-/* Scheduler */
+// Scheduler
 .k-scheduler th,
 .k-scheduler tr,
 .k-scheduler td {
@@ -1253,7 +1253,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     color: @selected-background;
 }
 
-/* Gantt */
+// Gantt
 .k-gantt .k-treelist,
 .k-gantt .k-treelist .k-alt,
 .k-gantt .k-header.k-nonwork-hour,
@@ -1363,7 +1363,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background-color: @widget-background-color;
 }
 
-/* Editor */
+// Editor
 .k-editor.k-header,
 .editorToolbarWindow.k-header,
 .k-filebrowser .k-header {
@@ -1382,7 +1382,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background-color: @hover-background;
 }
 
-/* Toolbar */
+// Toolbar
 .k-toolbar {
     .k-button,
     .k-button-group {
@@ -1472,7 +1472,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         }
     }
 
-/* Upload */
+// Upload
 .k-file,
 .k-upload {
     background-color: @widget-background-color;
@@ -1577,7 +1577,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     }
 }
 
-/* Slider */
+// Slider
 .k-slider-track {
     background-color: darken(@widget-background-color, 12%) ;
 }
@@ -1605,7 +1605,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background-color: @hover-background;
 }
 
-/* ColorPicker */
+// ColorPicker
 .k-flatcolorpicker .k-hue-slider .k-draghandle {
     background-color: @widget-background-color;
     border-color: @widget-background-color;
@@ -1650,13 +1650,13 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     border-color: @radio-border-color;
 }
 
-/* Drag & Drop */
+// Drag & Drop
 .k-drag-clue {
     color: @inversed-text-color;
     .box-shadow(@widget-shadow);
 }
 
-/* Adaptive Grid */
+// Adaptive Grid
 .k-grid-mobile .k-column-active + th.k-header {
     border-left-color: @widget-border-color;
 }
@@ -1742,7 +1742,7 @@ html .km-pane-wrapper .km-widget,
     opacity: .4;
 }
 
-/* IE will ignore the above selectors if these are added too */
+// IE will ignore the above selectors if these are added too
 .k-mobile-list .k-check:checked,
 .k-mobile-list .k-edit-field [type=checkbox]:checked,
 .k-mobile-list .k-edit-field [type=radio]:checked {
@@ -1797,14 +1797,14 @@ html .km-pane-wrapper .km-widget,
     }
 }
 
-/* Responsive styles */
+// Responsive styles
 @media only screen and (max-width: 1450px) {
     .k-webkit,
     .k-ff,
     .k-ie11,
     .k-edge,
     .k-safari {
-        /* Responsive Scheduler */
+        // Responsive Scheduler
         .k-scheduler-toolbar .k-nav-current {
             margin: 0;
         }
@@ -1817,7 +1817,7 @@ html .km-pane-wrapper .km-widget,
     .k-ie11,
     .k-edge,
     .k-safari {
-        /* Responsive Scheduler */
+        // Responsive Scheduler
         .k-nav-current > .k-link .k-lg-date-format {
             max-width: 100px;
             display: inline-block;
@@ -1944,7 +1944,7 @@ html .km-pane-wrapper .km-widget,
             background-image: none;
         }
 
-        /* Responsive Pager */
+        // Responsive Pager
 
         .k-pager-wrap
         {
@@ -2171,7 +2171,7 @@ html .km-pane-wrapper .km-widget,
     }
 }
 
-/* Stock Chart */
+// Stock Chart
 .k-chart .k-mask {
     background-color: @widget-background-color;
     filter: alpha(opacity=68);
@@ -2221,7 +2221,7 @@ html .km-pane-wrapper .km-widget,
     background-image: none;
 }
 
-/* Map */
+// Map
 .k-map .k-header {
     background-color: @widget-background-color;
     border-color: @widget-border-color;
@@ -2316,7 +2316,7 @@ html .km-pane-wrapper .km-widget,
     }
 }
 
-/* Dialog */
+// Dialog
 
 .k-dialog {
 

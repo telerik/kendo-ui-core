@@ -1,4 +1,4 @@
-/* Kendo base CSS */
+// Kendo base CSS
 
 .fake {color:red;}
 
@@ -10,7 +10,7 @@
 .k-floatwrap,.k-slider-items,.k-grid-toolbar {display:inline-block;}
 .k-floatwrap,.k-slider-items,.k-grid-toolbar {display:block;}
 
-/* main gradient */
+// main gradient
 
 .k-block,
 .k-header,
@@ -47,7 +47,7 @@
     color: inherit;
 }
 
-/* widget */
+// widget
 
 .k-textbox > input,
 .k-multiselect .k-input,
@@ -113,14 +113,14 @@
     color: inhert;
 }
 
-/* Block */
+// Block
 
 .k-block
 {
     padding: 2px;
 }
 
-/* button */
+// button
 
 a.k-button-expand
 {
@@ -140,7 +140,7 @@ input[type="reset"].k-button-expand
     padding-right: .8em;
 }
 
-/* link */
+// link
 
 .k-link
 {
@@ -154,7 +154,7 @@ input[type="reset"].k-button-expand
     cursor: default;
 }
 
-/* states */
+// states
 
 .k-state-disabled,
 .k-state-disabled .k-link,
@@ -193,13 +193,13 @@ input[type="reset"].k-button-expand
     font-style: italic;
 }
 
-/* icons */
+// icons
 
 @grid-size: 16px;
 
 .k-icon.k-i-none
 {
-    background-image: none !important; /* should never be a background on these */
+    background-image: none !important; // should never be a background on these
 }
 
 .k-image
@@ -207,7 +207,7 @@ input[type="reset"].k-button-expand
     border: 0;
 }
 
-/* Badges */
+// Badges
 .k-badge {
     max-width: 100%;
     font-size: .7em;
@@ -221,7 +221,7 @@ input[type="reset"].k-button-expand
 }
 
 
-/* Colors */
+// Colors
 
 html .k-success-colored
 {
@@ -249,7 +249,7 @@ html .k-error-colored
     padding: 0 2px;
 }
 
-/* loading */
+// loading
 
 .k-loading,
 .k-loading-image
@@ -301,7 +301,7 @@ html .k-error-colored
 .k-loading-text
 {
     text-indent: -4000px;
-    text-align: center; /*rtl*/
+    text-align: center; // rtl
 }
 
 .k-loading-image,
@@ -336,7 +336,7 @@ html .k-error-colored
     position: absolute;
 }
 
-/* drag n drop */
+// drag n drop
 
 .k-drag-clue
 {
@@ -351,7 +351,7 @@ html .k-error-colored
 }
 
 
-/* ListBox Drag Clue */
+// ListBox Drag Clue
 .k-item.k-drag-clue {
     font-size: inherit;
 }
@@ -381,7 +381,7 @@ html .k-error-colored
 .k-reorder-cue .k-i-arrow-60-down { top: -4px; }
 .k-reorder-cue .k-i-arrow-60-up { bottom: -4px; }
 
-/* virtual scrollbar */
+// virtual scrollbar
 
 .k-scrollbar
 {
@@ -393,7 +393,7 @@ html .k-error-colored
 {
     top: 0;
     right: 0;
-    width: 17px; /* scrollbar width */
+    width: 17px; // scrollbar width
     height: 100%;
     overflow-x: hidden;
 }
@@ -420,10 +420,10 @@ html .k-error-colored
 
 .k-virtual-scrollable-wrap
 {
-    overflow-x:auto; /*needed by IE8*/
+    overflow-x:auto; // needed by IE8
 }
 
-/* current time indicator */
+// current time indicator
 
 .k-current-time
 {
@@ -464,7 +464,7 @@ html .k-error-colored
     border-right: 4px solid transparent;
 }
 
-/* override box sizing for grid layout framework integration (Bootstrap 3, Foundation 4) */
+// override box sizing for grid layout framework integration (Bootstrap 3, Foundation 4)
 
 .k-animation-container,
 .k-widget,
@@ -493,7 +493,7 @@ div.k-window-content
     .box-sizing(border-box);
 }
 
-/* Fix for Bootstrap 3 */
+// Fix for Bootstrap 3
 .input-group .form-control
 {
     .box-sizing(border-box);
@@ -504,7 +504,7 @@ div.k-window-content
     padding: 0;
 }
 
-/* override iOS styles in mobile Kendo */
+// override iOS styles in mobile Kendo
 
 .km-widget,
 .km-widget *
@@ -613,7 +613,7 @@ input.k-checkbox,
    cursor: auto;
 }
 
-/* RTL for checkboxes and radio buttons */
+// RTL for checkboxes and radio buttons
 .k-rtl .k-checkbox-label,
 .k-rtl .k-radio-label {
     padding-left: 0;
@@ -634,7 +634,7 @@ input.k-checkbox + label {
     -webkit-user-select: none;
 }
 
-/* Off-screen container used during export */
+// Off-screen container used during export
 .k-pdf-export-shadow {
     position: absolute;
     overflow: hidden;
@@ -663,7 +663,7 @@ input.k-checkbox + label {
     clear: both;
 }
 
-/* Font Icons */
+// Font Icons
 .k-icon,
 .k-tool-icon {
     .use-font-icon();
@@ -704,7 +704,7 @@ input.k-checkbox + label {
 }
 
 
-/* Sprite icons */
+// Sprite icons
 .k-sprite {
     width: @grid-size;
     height: @grid-size;

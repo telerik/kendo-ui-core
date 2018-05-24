@@ -3288,6 +3288,15 @@ function pad(number, digits, end) {
                 role = "scroller";
             }
 
+            // kendoEditorToolbar is not a public plugin, thus it does not exist in kendo.ui.roles.
+            // Therefore, this is needed in order to be resized when placed in Kendo Window.
+            if (role === "editortoolbar") {
+                var editorToolbar = element.data("kendoEditorToolbar");
+                if (editorToolbar) {
+                    return editorToolbar;
+                }
+            }
+
             if (suites) {
                 if (suites[0]) {
                     for (i = 0, length = suites.length; i < length; i ++) {

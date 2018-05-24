@@ -9,7 +9,7 @@
     line-height: 1.2;
 }
 
-/* General content */
+// General content
 .km-nova h1 {
     font-size: 1.47em;
 }
@@ -54,7 +54,7 @@
     margin-right: 1rem;
 }
 
-/* override transform options for performance */
+// override transform options for performance
 .km-root .km-nova.km-pane,
 .km-root .km-nova .km-view,
 .km-root .km-nova .km-slider,
@@ -72,7 +72,7 @@
     .background-clip(border-box);
 }
 
-/* Revert box/clip for Web widgets */
+// Revert box/clip for Web widgets
 .km-nova [class^=k-] {
     .box-sizing(content-box);
 }
@@ -81,7 +81,7 @@
     background: none;
 }
 
-/* PopUp */
+// PopUp
 .km-nova .km-popup .k-popup {
     font-size: 1em !important;
 }
@@ -138,10 +138,10 @@
 }
 
 
-/* Color Template */
+// Color Template
 @import "template.less";
 
-/* Tablet Styles */
+// Tablet Styles
 .km-tablet .km-nova.km-horizontal .km-navbar .km-button,
 .km-tablet .km-nova.km-horizontal .km-toolbar .km-button {
     margin-top: 0;
@@ -156,7 +156,7 @@
     margin-top: 0;
 }
 
-/* Loader & Pull-to-refresh */
+// Loader & Pull-to-refresh
 .km-nova .km-load-more {
     height: 3.4em;
 }
@@ -333,14 +333,14 @@
     content: "\e012";
 }
 
-/* transitions */
+// transitions
 .km-root .km-nova.k-fx-slide {
     &.k-fx-end .k-fx-current .km-content {
         .transform(translatex(-50%));
         -webkit-filter: brightness(70%);
     }
 
-    /* left reverse */
+    // left reverse
     &.k-fx-reverse {
         &.k-fx-end .k-fx-next {
             box-shadow: none;
@@ -358,13 +358,13 @@
         }
     }
 
-    /* right */
+    // right
     &.k-fx-right {
         &.k-fx-end .k-fx-current .km-content {
             .transform(translatex(50%));
         }
 
-        /* right reverse */
+        // right reverse
         &.k-fx-reverse {
             &.k-fx-end .k-fx-current .km-content {
                 .transform(translatex(-100%));
@@ -378,7 +378,7 @@
     }
 }
 
-/* Loader */
+// Loader
 .km-nova .km-loader {
     top: 0;
     left: 0;
@@ -506,7 +506,7 @@
   -webkit-animation: animate_right 0.8s ease-in infinite;
 }
 
-/* Icons */
+// Icons
 .km-nova .km-icon.km-phone:before, .km-nova .km-icon.km-phone:after, .km-nova .km-state-active .km-phone:after { content: "\e326"; }
 .km-nova .km-detaildisclose:before, .km-nova .km-detaildisclose:after { content: "\e0de"; }
 .km-nova .km-action:before, .km-nova .km-action:after { content: "\e1ff"; }

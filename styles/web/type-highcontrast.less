@@ -208,7 +208,7 @@
 
 @chat-quick-reply-color: @accent;
 
-/* Kendo skin */
+// Kendo skin
 
 @theme-name: ~"highcontrast";
 
@@ -227,7 +227,7 @@
     border-color: transparent;
 }
 
-/* main colors */
+// main colors
 .k-splitbar .k-resize-handle {
     background-color: @normal-text-color;
 }
@@ -485,7 +485,7 @@ html .km-pane-wrapper .k-header
     border-color: @widget-border-color;
 }
 
-/* icons */
+// icons
 .k-icon:hover,
 .k-state-hover .k-icon,
 .k-state-selected .k-icon,
@@ -514,7 +514,7 @@ html .km-pane-wrapper .k-header
     opacity: @default-icon-opacity;
 }
 
-/* Badge */
+// Badge
 .k-badge {
     background-color: @accent;
     color: contrast(@accent, @normal-background, @normal-text-color, 0.5);
@@ -526,7 +526,7 @@ html .km-pane-wrapper .k-header
     border-color: transparent;
 }
 
-/* IE will ignore the above selectors if these are added too */
+// IE will ignore the above selectors if these are added too
 .k-mobile-list .k-check:checked,
 .k-mobile-list .k-edit-field [type=checkbox]:checked,
 .k-mobile-list .k-edit-field [type=radio]:checked
@@ -567,7 +567,7 @@ html .km-pane-wrapper .k-header
     .box-shadow(@draghandle-hover-shadow);
 }
 
-/* Scheduler */
+// Scheduler
 
 .k-scheduler
 {
@@ -685,7 +685,7 @@ html .km-pane-wrapper .k-header
     background-color: @panelbar-content-background;
 }
 
-/* states */
+// states
 .k-state-active,
 .k-state-active:hover,
 .k-active-filter {
@@ -901,7 +901,7 @@ td.k-state-focused.k-state-selected
     border-color: @secondary-border-color;
 }
 
-/* this selector should be used separately, otherwise old IEs ignore the whole rule */
+// this selector should be used separately, otherwise old IEs ignore the whole rule
 .k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2):active
 {
     color: @hover-text-color;
@@ -1047,7 +1047,7 @@ div.k-filebrowser-dropzone em
     color: @normal-text-color;
 }
 
-/* Progressbar */
+// Progressbar
 
 .k-progressbar-indeterminate
 {
@@ -1060,7 +1060,7 @@ div.k-filebrowser-dropzone em
     display: none;
 }
 
-/* Slider */
+// Slider
 .k-slider-track
 {
     background-color: @widget-border-color;
@@ -1081,7 +1081,7 @@ div.k-filebrowser-dropzone em
     background-image:url('@{image-folder}/slider-v.gif');
 }
 
-/* Tooltip */
+// Tooltip
 .k-widget.k-tooltip,
 .k-chart-crosshair-tooltip,
 .k-chart-shared-tooltip
@@ -1098,7 +1098,7 @@ div.k-filebrowser-dropzone em
     color: @validation-text-color;
 }
 
-/* Bootstrap theme fix */
+// Bootstrap theme fix
 .input-prepend .k-tooltip-validation,
 .input-append .k-tooltip-validation
 {
@@ -1147,7 +1147,7 @@ div.k-filebrowser-dropzone em
     border-left-color: @validation-border-color;
 }
 
-/* Splitter */
+// Splitter
 .k-splitbar
 {
     background-color: @splitbar-background-color;
@@ -1159,7 +1159,7 @@ div.k-filebrowser-dropzone em
     background-color: @error-text-color;
 }
 
-/* Upload */
+// Upload
 
 .k-file
 {
@@ -1256,7 +1256,7 @@ div.k-filebrowser-dropzone em
     border-color: @widget-border-color;
 }
 
-/* ImageBrowser */
+// ImageBrowser
 
 .k-tile
 {
@@ -1274,7 +1274,7 @@ div.k-filebrowser-dropzone em
     border-color: @selected-border-color;
 }
 
-/* TreeMap */
+// TreeMap
 
 .k-leaf,
 .k-leaf.k-state-hover:hover
@@ -1288,7 +1288,7 @@ div.k-filebrowser-dropzone em
     color: #000;
 }
 
-/* Shadows */
+// Shadows
 .k-widget
 {
     .box-shadow(@widget-shadow);
@@ -1351,7 +1351,7 @@ div.k-filebrowser-dropzone em
     .box-shadow(inset 0 0 0 3px @widget-border-color);
 }
 
-/* Window */
+// Window
 
 .k-window
 {
@@ -1376,7 +1376,7 @@ div.k-filebrowser-dropzone em
     .box-shadow(inset 0 1px 1px @shadow-color);
 }
 
-/* Selection */
+// Selection
 .k-editor-inline {
     .selection(@selected-border-color);
 }
@@ -1384,7 +1384,7 @@ div.k-filebrowser-dropzone em
 // Notification
 @import "themes/notification.less";
 
-/* Gantt */
+// Gantt
 
 .k-gantt .k-treelist
 {
@@ -1480,7 +1480,7 @@ div.k-filebrowser-dropzone em
     background-color: @widget-background-color;
 }
 
-/* Border radius */
+// Border radius
 .k-block,
 .k-textbox,
 .k-drag-clue,
@@ -1796,7 +1796,7 @@ div.k-filebrowser-dropzone em
     border-radius: (@inner-border-radius - 1);
 }
 
-/* Adaptive Grid */
+// Adaptive Grid
 
 .k-grid-mobile .k-column-active + th.k-header
 {
@@ -1890,7 +1890,7 @@ html .km-pane-wrapper .km-widget,
     background-color: darken(red, 20);
 }
 
-/* /Column Menu */
+// /Column Menu
 
 .k-autocomplete.k-state-default,
 .k-picker-wrap.k-state-default,
@@ -2206,7 +2206,7 @@ html .km-pane-wrapper .km-widget,
     }
 }
 
-/* Responsive styles */
+// Responsive styles
 
 @media only screen and (max-width: 1024px) {
     .k-webkit,
@@ -2388,7 +2388,7 @@ html .km-pane-wrapper .km-widget,
 @spreadsheet-page-orientation-border-color: @button-border-color;
 @spreadsheet-page-orientation-background: @content-background-color;
 
-/* Dialog */
+// Dialog
 
 .k-dialog {
     border-color: @widget-border-color;

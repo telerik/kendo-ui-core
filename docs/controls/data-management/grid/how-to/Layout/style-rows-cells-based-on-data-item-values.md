@@ -181,13 +181,15 @@ The usage of the `dataBound` handler and the iteration of the table rows is suit
             var columns = e.sender.columns;
             var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
 
-            // iterate the data items and apply row styles where necessary
-            var dataItems = e.sender.dataSource.view();
-            for (var j = 0; j < dataItems.length; j++) {
-              var units = dataItems[j].get("UnitsInStock");
-              var discontinued = dataItems[j].get("Discontinued");
+            // iterate the table rows and apply custom row and cell styling
+            var rows = e.sender.tbody.children();
+            for (var j = 0; j < rows.length; j++) {
+              var row = $(rows[j]);
+              var dataItem = e.sender.dataItem(row);
 
-              var row = e.sender.tbody.find("[data-uid='" + dataItems[j].uid + "']");
+              var units = dataItem.get("UnitsInStock");
+              var discontinued = dataItem.get("Discontinued");
+
               if (discontinued) {
                 row.addClass("discontinued");
               }
@@ -227,16 +229,6 @@ The usage of the `dataBound` handler and the iteration of the data items is suit
         { ID: 2, ProductName: "Bar", UnitsInStock: 16, Discontinued: false },
         { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
       ];
-
-      function getUnitsInStockClass(units) {
-        if (units < 5) {
-          return "critical";
-        } else if (units < 10) {
-          return "warning";
-        } else {
-          return "ok";
-        }
-      }
 
       $(document).ready(function () {
         $("#grid-databound-dataitems").kendoGrid({

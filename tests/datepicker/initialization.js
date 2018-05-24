@@ -167,6 +167,12 @@ test("DatePicker wire icon click", function() {
     ok(datepicker.dateView.popup.visible());
 });
 
+test("DatePicker initializes dateInput with initial value", function() {
+    var datepicker = input.kendoDatePicker({ dateInput: true, value: new Date(2000, 10, 10)}).data("kendoDatePicker");
+
+    equal(datepicker.element.val(), "11/10/2000");
+});
+
 asyncTest("form reset support", 2, function() {
     input.attr("value", "12/12/2000");
 

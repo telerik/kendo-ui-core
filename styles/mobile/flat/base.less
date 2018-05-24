@@ -9,7 +9,7 @@
     font: normal 1em "HelveticaNeue Light", "Roboto Light", "Slate Light", "Segoe WP", NokiaPureTextLight, sans-serif;
 }
 
-/* override transform options for performance */
+// override transform options for performance
 .km-root .km-flat.km-pane,
 .km-root .km-flat .km-view,
 .km-root .km-flat .km-slider,
@@ -28,7 +28,7 @@
     .background-clip(border-box);
 }
 
-/* Revert box/clip for Web widgets */
+// Revert box/clip for Web widgets
 .km-flat [class^=k-]
 {
     .box-sizing(content-box);
@@ -40,7 +40,7 @@
     background: none;
 }
 
-/* PopUp */
+// PopUp
 
 .km-flat .km-popup .k-popup
 {
@@ -107,7 +107,7 @@
     border-radius: @flat-border-radius;
 }
 
-/* Loader & Pull-to-refresh */
+// Loader & Pull-to-refresh
 
 .km-flat .km-load-more
 {
@@ -318,12 +318,12 @@
 
 
 
-/* Color Template */
+// Color Template
 @import "template.less";
 
 
 
-/* Tablet Styles */
+// Tablet Styles
 
 .km-tablet .km-flat.km-horizontal .km-navbar .km-button,
 .km-tablet .km-flat.km-horizontal .km-toolbar .km-button
@@ -331,5 +331,3 @@
     margin-top: .2rem;
     margin-bottom: .2rem;
 }
-
-

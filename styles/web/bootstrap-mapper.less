@@ -1,10 +1,9 @@
-/*
-This file maps Bootstrap Less variables to Kendo UI Less variables. Its purpose is to take part in the creation of a Kendo UI Bootstrap theme with a custom color scheme.
+// This file maps Bootstrap Less variables to Kendo UI Less variables. Its purpose is to take part in the creation of a Kendo UI Bootstrap theme with a custom color scheme.
+//
+// More information is available in the Kendo UI documentation:
+//
+// http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 
-More information is available in the Kendo UI documentation:
-
-http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
-*/
 
 @accent: @brand-primary;
 @base: @gray-lighter;
@@ -27,12 +26,12 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @success: @brand-success;
 @info: @brand-info;
 
-/* widgets */
+// widgets
 
 @widget-text-color: @normal-text-color;
 @widget-background-color: @background;
 @inverse-text-color: @background;
-@widget-border-color: @panel-default-border; /*darken(@base, 12%);*/
+@widget-border-color: @panel-default-border; // darken(@base, 12%);
 @widget-gradient: none;
 @default-icon-opacity: 1;
 @icon-background-color: transparent;
@@ -43,7 +42,7 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @secondary-text-color: @normal-text-color;
 @loading-panel-color: @background;
 
-/* shadows */
+// shadows
 
 @widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 @shadow-color: rgba(0, 0, 0, .2);
@@ -51,7 +50,7 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @concave-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
 @window-shadow-style: 1px 1px 7px 1px;
 
-/* textboxes */
+// textboxes
 
 @input-bg: @input-bg;
 @input-text: @input-color;
@@ -61,52 +60,52 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 
 @numeric-selected-background: @base;
 
-/* links */
+// links
 
 @link-text-color: @accent;
 
-/* headers */
+// headers
 
 @header-text-color: @normal-text-color;
 @header-background-color: @table-bg-accent;
 
-/* popups */
+// popups
 
 @group-background-color: @dropdown-bg;
 @group-border-color: @dropdown-border;
 
-/* dropdownlist */
+// dropdownlist
 
 @select-background-color: @base;
 @select-border-color: darken(@base, 24%);
 @select-hover-background-color: @base;
 @select-group-background-color: @background;
 
-/* content containers */
+// content containers
 
 @content-background-color: @panel-bg;
 @filter-menu-content-background: @background;
 
-/* hover state */
+// hover state
 
 @hover-background-color: @dropdown-link-hover-bg;
 @hover-border-color: darken(@base, 24%);
 @hover-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
 
-/* selected state */
+// selected state
 
 @selected-background-color: @accent;
 @selected-border-color: @accent;
 @selected-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 
-/* focused state */
+// focused state
 
 @focused-border-color: lighten(@accent, 13%);
 @focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
 @focused-item-shadow: inset 0 0 7px 0 lighten(@accent, 13%);
 @focused-active-item-shadow: inset 0 0 10px 3px darken(@accent, 8%);
 
-/* active state */
+// active state
 
 @active-text-color: @normal-text-color;
 @active-gradient: none;
@@ -116,20 +115,20 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 
 @active-filter-background-color: @background;
 
-/* error state */
+// error state
 
 @error-text-color: lighten(@normal-text-color, 22%);
 @error-background-color: darken(@base, 3%);
 @error-border-color: darken(@background, 14%);
 
-/* disabled state */
+// disabled state
 
 @disabled-text-color: @btn-link-disabled-color;
 @disabled-background-color: @input-bg-disabled;
 @disabled-border-color: @pagination-disabled-border;
 @disabled-gradient: none;
 
-/* notification */
+// notification
 
 @notification-info-background-color: @info;
 @notification-info-text-color: darken(@info, 50%);
@@ -144,23 +143,23 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @notification-error-text-color: darken(@error, 50%);
 @notification-error-border-color: darken(@error, 10%);
 
-/* tooltips */
+// tooltips
 
 @tooltip-text-color: @tooltip-color;
 @tooltip-background-color: @tooltip-bg;
 @tooltip-border-color: @tooltip-bg;
 
-/* validation */
+// validation
 
 @validation-text-color: @state-danger-text;
 @validation-background-color: @state-danger-bg;
 @validation-border-color: @state-danger-border;
 
-/* splitbars */
+// splitbars
 
 @splitbar-background-color: lighten(@base, 4%);
 
-/* drag handle */
+// drag handle
 
 @draghandle-border-radius: 13px;
 @draghandle-border-color: @background;
@@ -170,14 +169,14 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @draghandle-hover-background-color: @base;
 @draghandle-hover-shadow: none;
 
-/* tables */
+// tables
 
 @alt-background-color: @table-bg-accent;
 @nested-alt-background-color: darken(@alt-background-color, 8%);
 @cell-border-color: @table-border-color;
 @column-highlight-background-color: darken(@base, 1%);
 
-/* Scheduler */
+// Scheduler
 
 @scheduler-background-color: @background;
 @current-time-color: darken(@background, 14%);
@@ -187,7 +186,7 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @scheduler-nonwork-background-color: lighten(@base, 4%);
 @resize-background-color: @background;
 
-/* Upload */
+// Upload
 
 @upload-progress-background-color: @progress-bar-bg;
 @upload-progress-text-color: darken(@accent, 17%);
@@ -197,12 +196,12 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @upload-error-text-color: lighten(@normal-text-color, 4%);
 @upload-status-color: @progress-bar-info-bg;
 
-/* Gantt */
+// Gantt
 
 @task-summary-color: lighten(@widget-text-color, 25%);
 @task-summary-selected-color: lighten(@selected-background-color, 25%);
 
-/* border radius */
+// border radius
 
 @main-border-radius: @border-radius;
 @list-border-radius: (@main-border-radius - 1);
@@ -210,7 +209,7 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @slider-border-radius: 13px;
 @calendar-border-radius: @border-radius;
 
-/* Calendar */
+// Calendar
 
 @calendar-content-text-color: @normal-text-color;
 @calendar-footer-background: lighten(@base, 4%);
@@ -222,14 +221,14 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @calendar-footer-active-background: @background;
 @calendar-group-background-color: lighten(@base, 4%);
 
-/* tabstrip */
+// tabstrip
 
 @tabstrip-items-border: transparent;
 @tabstrip-active-background: @background;
 @tabstrip-tabs-color: @accent;
 @tabstrip-tabs-hover-color: @accent;
 
-/* dropdowns */
+// dropdowns
 
 @drop-down-border-color: @dropdown-border;
 @drop-down-hover-border-color: darken(@base, 24%);
@@ -237,17 +236,17 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @drop-down-background: @dropdown-bg;
 @drop-down-text-color: @dropdown-link-color;
 
-/* panelbar */
+// panelbar
 
 @panelbar-items-border: @panel-default-border;
 @panelbar-content-background: @panel-bg;
 @panelbar-content-color: @panel-default-text;
 
-/* treeview */
+// treeview
 @treeview-text-color: @accent;
 @treeview-hover-text-color: @accent;
 
-/* multiselect */
+// multiselect
 
 @multiselect-buttons-border-color: darken(@accent, 5%);
 @multiselect-buttons-color: @background;
@@ -255,16 +254,16 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @multiselect-buttons-hover-background: darken(@accent, 8%);
 @multiselect-buttons-hover-border-color: darken(@accent, 17%);
 
-/* menu */
+// menu
 
 @menu-border-color: darken(@base, 12%);
 @menu-active-background: darken(@base, 1%);
 
-/* slider */
+// slider
 
 @slider-selection-background-color: @base;
 
-/* buttons */
+// buttons
 
 @button-border-color: @btn-default-border;
 @button-text-color: @btn-default-color;
@@ -309,7 +308,7 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @button-focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
 @button-focused-active-shadow: inset 0 0 5px 3px darken(@base, 9%);
 
-/* checkboxes */
+// checkboxes
 
 @checkbox-border-color-before: transparent;
 @checkbox-border-color-after: darken(@base, 12%);
@@ -334,7 +333,7 @@ http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 @checkbox-disabled-box-shadow: none;
 @checkbox-disabled-border-color-before: darken(@base, 12%);
 
-/* radio buttons */
+// radio buttons
 
 @radio-border-color-before: darken(@base, 12%);
 @radio-background-color: @background;
