@@ -411,7 +411,7 @@ If an array, each level uses the field that is at the same index in the array, o
     <style>
         #panelbar .k-sprite {
             background-image: url("https://demos.telerik.com/kendo-ui/content/shared/styles/flags.png");
-        }    
+        }
     </style>
     <div id="panelbar"></div>
     <script>
@@ -715,7 +715,7 @@ Appends an item(s) to the PanelBar.
 Target item, specified as the JSON representation of an object. You can pass item `text`, `content` or
 `contentUrl` here. Can handle an HTML string or array of such strings or JSON.
 
-##### referenceItem `String|Element|jQuery`
+##### referenceItem `String|Element|jQuery` *(optional)*
 
 A reference item to append the new item in the PanelBar, can be omitted.
 
