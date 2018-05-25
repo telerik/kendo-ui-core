@@ -1218,6 +1218,14 @@
                 singleTag: "項已選擇"
             });
     }
+    
+    /* Chat messages */
+    if (kendo.ui.Chat) {
+        kendo.ui.Chat.prototype.options.messages =
+            $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+                placeholder: "請輸入..."
+            });
+    }
 
     /* Mobile Messages ------------------------------ */
 
