@@ -1208,6 +1208,16 @@
                 "dayperiod": "上午/下午"
             });
     }
+    
+    /* DropDownTree messages */
+    if (kendo.ui.DropDownTree) {
+        kendo.ui.DropDownTree.prototype.options.messages =
+            $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+                clear: "清空",
+                deleteTag: "删除",
+                singleTag: "项已选择"
+            });
+    }
 
     /* Mobile Messages ------------------------------ */
 
