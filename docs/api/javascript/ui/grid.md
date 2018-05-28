@@ -2660,7 +2660,7 @@ Check [Detail Template](http://demos.telerik.com/kendo-ui/grid/detailtemplate) f
     });
     </script>
 
-### editable `Boolean|Object` *(default: false)*
+### editable `Boolean|Object|String` *(default: false)*
 
 If set to `true` the user would be able to edit the data to which the grid is bound. By default editing is disabled.
 
