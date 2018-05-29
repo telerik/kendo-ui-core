@@ -428,7 +428,7 @@ test("changing items to the data source updated option elements without destroyi
     var viewModel = kendo.observable( {
         optionsArray: [
                 { id: 1, name: "option 1" },
-                { id: 2, name: "option 2" },
+                { id: 2, name: "option 2" }
             ]
     });
 
@@ -890,6 +890,34 @@ test("checked binding binds radiobutton to number value", function() {
     ok(dom.is(":checked"));
 });
 
+test("checked binding to null unchecks the radiobutton", function() {
+    var dom = $('<input type="radio" value="foo" data-bind="checked:selectedItem"/>');
+
+    var viewModel = kendo.observable({
+        selectedItem: "foo"
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.set("selectedItem", null);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding to undefined unchecks the radiobutton", function() {
+    var dom = $('<input type="radio" value="foo" data-bind="checked:selectedItem"/>');
+
+    var viewModel = kendo.observable({
+        selectedItem: "foo"
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.set("selectedItem", undefined);
+
+    ok(!dom.is(":checked"));
+});
+
 test("checked binding binds checkbox to boolean", function() {
     dom = $('<input type="checkbox" data-bind="checked:selectedItem"/>');
 
@@ -936,6 +964,34 @@ test("checked binding checkbox is not checked if value does not exists", functio
     });
 
     kendo.bind(dom, viewModel);
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding binding to null unchecks the checkbox", function() {
+    var dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItem"/>');
+
+    var viewModel = kendo.observable({
+        selectedItem: "foo"
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.set("selectedItem", null);
+
+    ok(!dom.is(":checked"));
+});
+
+test("checked binding to undefined unchecks the checkbox", function() {
+    var dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItem"/>');
+
+    var viewModel = kendo.observable({
+        selectedItem: "foo"
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.set("selectedItem", undefined);
+
     ok(!dom.is(":checked"));
 });
 
