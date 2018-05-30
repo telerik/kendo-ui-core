@@ -342,7 +342,7 @@ function ensureCorrectNavigation() {
         var hashIndex = getApiSectionIndex(hash);
         if (hashIndex > -1 && hashIndex < dashIndex) {
             var newPath = hash.replace('#', '/').replace('-', '/').toLowerCase();
-            window.location.replace(window.location.origin + window.location.pathname + newPath);
+            window.location.replace(window.location.origin + window.location.pathname.replace('.html', '') + newPath);
             return true;
         }
     }

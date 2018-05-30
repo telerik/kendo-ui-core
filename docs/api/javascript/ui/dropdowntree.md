@@ -152,9 +152,9 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 ### checkAll `Boolean` *(default: false)*
 
-When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
+When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/loadOnDemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 #### Example - disable the clear button
 
@@ -185,7 +185,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the checkA
 
 ### checkboxes `Boolean|Object`
 
-If `true` or an object, renders checkboxes beside each node. In this case the widget [value](/api/javascript/ui/dropdowntree/value) should be an array.
+If `true` or an object, renders checkboxes beside each node. In this case the widget [value](/api/javascript/ui/dropdowntree/configuration/value) should be an array.
 
 #### Example - show node checkboxes
 
@@ -209,7 +209,7 @@ If `true` or an object, renders checkboxes beside each node. In this case the wi
 Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked. This
 also enables tri-state checkboxes with an indeterminate state.
 
-> Note: when [filter](/api/javascript/ui/dropdowntree/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario not supported by the widget.
+> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario not supported by the widget.
 
 #### Example - enable tri-state checkboxes and propagate checked state to children
 
@@ -427,7 +427,7 @@ If an array, each level uses the field that is at the same index in the array, o
 Sets the field of the data item that provides the text content of the nodes.
 If an array, each level uses the field that is at the same index in the array, or the last item in the array.
 
-> **Important** In case when array is used, [filter](/api/javascript/ui/dropdowntree/filter) is not supported because
+> **Important** In case when array is used, [filter](/api/javascript/ui/dropdowntree/configuration/filter) is not supported because
  [hierarchical data source](/api/javascript/data/hierarchicaldatasource) does not support filtering by different fields yet.
 
 #### Example - set the dataTextField
@@ -958,7 +958,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the value 
 
 ### tagMode `String`*(default: "multiple")*
 
-The mode used to render the selected tags when [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) are enabled. The available modes are:
+The mode used to render the selected tags when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled. The available modes are:
 - `multiple` - renders a tag for every selected value
 - `single` - renders only one tag that shows the number of the selected values
 
@@ -1018,7 +1018,7 @@ The text of the widget used when the `autoBind` is set to `false`.
 
 ### value `String|Array`
 
- Define the value of the widget. It accepts 'String' when it is in single selection mode and 'Array' when multiple selection is enabled via [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) property.
+ Define the value of the widget. It accepts 'String' when it is in single selection mode and 'Array' when multiple selection is enabled via [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) property.
 
 #### Example
 
@@ -1113,7 +1113,7 @@ An object, which holds the options of the widget.
     </script>
 
 ### tagList `jQuery`
-A jQuery object of the `ul` element, which holds the selected tags. It is only available when [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) is 'true'.
+A jQuery object of the `ul` element, which holds the selected tags. It is only available when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'true'.
 
 #### Example - get tagList element
 
@@ -1398,7 +1398,7 @@ You can overcome this behavior by triggering the `change` event manually using [
 
 ##### value `Array|String`
 
-The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdowntree/checkboxes) is 'false' and an *Array of strings* when `checkboxes` is true. To clear the value, pass an empty array.
+The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false' and an *Array of strings* when `checkboxes` is true. To clear the value, pass an empty array.
 
 #### Returns
 
@@ -1465,6 +1465,50 @@ The widget instance which fired the event.
     $("#dropdowntree").kendoDropDownTree();
     var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
     dropdowntree.bind("change", dropdowntree_change);
+    </script>
+
+### clear
+
+Fired when the value of the widget is cleared by the user.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+> **Important:** The event is not fired when the value of widget is cleared programatically.
+
+#### Event Data
+
+##### e.sender `kendo.ui.DropDownTree`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "clear" event during initialization
+
+    <input id="dropdowntree"/>
+
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+      dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }],
+      clear: function(e) {
+        var value = this.value();
+        // Use the value of the widget
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "change" event after initialization
+
+    <input id="dropdowntree" />
+
+    <script>
+        function dropdowntree_clear(e) {
+            var value = this.value();
+            // Use the value of the widget
+        }
+        $("#dropdowntree").kendoDropDownTree({
+            dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }]
+        });
+        var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
+        dropdowntree.bind("clear", dropdowntree_clear);
     </script>
 
 ### close

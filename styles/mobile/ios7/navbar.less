@@ -2,7 +2,7 @@
 @import "../../common/transitions.less";
 @import "base.less";
 
-/* NavBar */
+// NavBar
 
 .km-ios7 .km-view-title,
 .km-ios7 .km-navbar .km-button
@@ -25,7 +25,7 @@
         .transition(all @duration ease-out);
     }
 
-    /* left */
+    // left
     &.k-fx-start .k-fx-next .km-view-title {
         .transform(translatex(100%));
     }
@@ -43,7 +43,7 @@
         .transform(translatex(-100%));
     }
 
-    /* left reverse */
+    // left reverse
     &.k-fx-reverse {
         &.k-fx-start .k-fx-next .km-leftitem {
             .transform(translatex(-100%));
@@ -71,9 +71,9 @@
         }
     }
 
-    /* right */
+    // right
     &.k-fx-right {
-        /* left */
+        // left
         &.k-fx-start .k-fx-next .km-view-title {
             .transform(translatex(-100%));
         }
@@ -90,7 +90,7 @@
             .transform(translatex(100%));
         }
 
-        /* right reverse */
+        // right reverse
         &.k-fx-reverse {
             &.k-fx-start .k-fx-next .km-leftitem {
                 .transform(translatex(100%));
@@ -119,4 +119,3 @@
         }
     }
 }
-

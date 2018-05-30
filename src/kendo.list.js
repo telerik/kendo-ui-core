@@ -1,12 +1,12 @@
 (function(f, define){
-    define([ "./kendo.data" ], f);
+    define([ "./kendo.data", "./kendo.popup" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
     id: "list",
     name: "List",
     category: "framework",
-    depends: [ "data" ],
+    depends: [ "data", "popup" ],
     hidden: true
 };
 
@@ -288,6 +288,9 @@ var __meta__ = { // jshint ignore:line
             this._accessor("");
             this.listView.value([]);
             if(this._isFilterEnabled() && !this.options.enforceMinLength) {
+                if (this._isSelect) {
+                    this._customOption = undefined;
+                }
                 this._filter({word: "", open: false});
             }
             this._change();
@@ -464,6 +467,7 @@ var __meta__ = { // jshint ignore:line
             if (!list.options.clearButton) {
                 list._clear.remove();
             }
+            this._hideClear();
         },
 
         search: function(word) {

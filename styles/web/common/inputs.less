@@ -1,4 +1,4 @@
-/* ComboBox & DropDownList */
+// ComboBox & DropDownList
 
 span.k-datepicker,
 span.k-timepicker,
@@ -59,7 +59,7 @@ span.k-dropdowntree,
 }
 
 .k-multiselect-wrap > .k-i-close {
-    top: (@grid-size/2 - 2px);
+    top: (@grid-size/2);
 }
 
 .k-multiselect-wrap .k-readonly,
@@ -239,7 +239,7 @@ span.k-dropdowntree,
     right: 3px;
 }
 
-/*prevent missing bottom border at some zoom levels*/
+// prevent missing bottom border at some zoom levels
 span.k-textbox:after {
   content: "\a0";
   display: block;
@@ -281,7 +281,7 @@ span.k-textbox:after {
 .k-picker-wrap .k-select,
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select {
-    position: absolute; /* icon positioning */
+    position: absolute; // icon positioning
     top: 0;
     right: 0;
     display: inline-block;
@@ -294,7 +294,7 @@ span.k-textbox:after {
 .k-numeric-wrap .k-select {
     border-style: solid;
     border-width: 0 0 0 1px;
-    border-color: inherit; /* skin-related, inherit does not work in ie7- */
+    border-color: inherit; // skin-related, inherit does not work in ie7-
 }
 
 span.k-datetimepicker .k-select,
@@ -362,14 +362,14 @@ span.k-datetimepicker .k-select + .k-select {
     }
 }
 
-/* fix missing bottom border on browser zoom in Chrome */
+// fix missing bottom border on browser zoom in Chrome
 .k-webkit .k-combobox .k-dropdown-wrap:before,
 .k-webkit .k-picker-wrap:before,
 .k-webkit .k-numeric-wrap:before {
     padding-bottom: 0.38em;
 }
 
-/* above style breaks NumericTextBox layout due display:block style applied to the input */
+// above style breaks NumericTextBox layout due display:block style applied to the input
 .km.root .k-combobox .k-dropdown-wrap:before,
 .km.root .k-picker-wrap:before,
 .km.root .k-numeric-wrap:before {
@@ -533,7 +533,7 @@ body .k-datetimepicker .k-select {
     border-right-width: 0;
 }
 
-/* MultiSelect */
+// MultiSelect
 .k-multiselect {
     display: block;
     width: auto;
@@ -583,7 +583,7 @@ body .k-datetimepicker .k-select {
     padding: .03em .2em;
 }
 
-/* Inputs */
+// Inputs
 .k-autocomplete-clearable,
 .k-multiselect-clearable,
 .k-dropdowntree-clearable,
@@ -601,7 +601,7 @@ body .k-datetimepicker .k-select {
     padding-right: calc(@input-height + .35em);
 }
 
-/* Date/Time Pickers */
+// Date/Time Pickers
 
 .k-datetimepicker .k-picker-wrap {
     padding-right: 4em;
@@ -640,7 +640,7 @@ body .k-datetimepicker .k-select {
     padding: 1px 3px;
 }
 
-/* inputs */
+// inputs
 
 .k-input {
     font-size: inherit;
@@ -676,13 +676,13 @@ textarea.k-textbox {
     height: auto;
 }
 
-/* NumericTextBox */
+// NumericTextBox
 
 span.k-numerictextbox {
     background-color: transparent;
 }
 
-.k-numerictextbox .k-input /* alignment of arrows in WebKit */
+.k-numerictextbox .k-input // alignment of arrows in WebKit
 {
     margin: 0;
 }

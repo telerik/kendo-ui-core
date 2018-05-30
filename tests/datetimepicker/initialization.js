@@ -214,6 +214,12 @@ test("DateTimePicker does not use options.dates if today is not in dates", funct
     ok(datetimepicker.timeView.ul.children().length > 1);
 });
 
+test("DateTimePicker initializes dateInput with initial value", function() {
+    var datetimepicker = input.kendoDateTimePicker({ dateInput: true, value: new Date(2000, 10, 10, 18, 0, 0)}).data("kendoDateTimePicker");
+
+    equal(datetimepicker.element.val(), "11/10/2000 6:00 PM");
+});
+
 test("DateTimePicker rebinds timeView if other day is selected", function() {
     var datetimepicker = input.kendoDateTimePicker({
         dates: [new Date(2000, 10, 10, 18, 0, 0)]

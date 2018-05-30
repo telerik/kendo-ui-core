@@ -1,79 +1,109 @@
 ---
-title: Bind to Telerik Backend Services
-page_title: Bind to Telerik Backend Services | Kendo UI Grid
-description: "Learn how to use AngularJS directives to bind a Kendo UI Grid widget to Telerik Backend Services."
+title: Bind to Kinvey Backend Services
+page_title: Bind to Kinvey Backend Services | Kendo UI Grid
+description: "Learn how to use AngularJS directives to bind a Kendo UI Grid widget to Kinvey Backend Services."
 slug: howto_bindto_telerik_backend_services_grid
 ---
 
 # Bind to Telerik Backend Services
 
-The following example demonstrates how to bind the [Grid](http://www.telerik.com/kendo-ui/grid) to the Telerik Backend Services in an AngularJS application.
+The following example demonstrates how to bind the [Grid](http://www.telerik.com/kendo-ui/grid) to the Kinvey Backend Services in an AngularJS application.
 
 ###### Example
 
 ```html
 <div id="example" ng-app="KendoDemos">
-  <div ng-controller="MyCtrl">
-    <!-- Use grid directive with scope options -->
-    <kendo-grid options="gridOptions"></kendo-grid>
-  </div>
+    <div ng-controller="MyCtrl" data-ng-init="init()">
+        <!-- Use grid directive with scope options -->
+        <kendo-grid options="gridOptions"></kendo-grid>
+    </div>
 </div>
 
-<!-- Include Backend Services script on page -->
-<script src="https://bs-static.cdn.telerik.com/1.2.6/everlive.all.min.js"></script>
+<!-- Kinvey JS SDK (HTML, PhoneGap, etc.) -->
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/kinvey-html5-sdk.min.js"></script>
+
+<!-- Kinvey Kendo UI Data Source -->
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/kendo.data.kinvey.min.js"></script>
 <script>
-  // configure API key
-  var everlive = new Everlive({
-    apiKey: "3q4sHgIqESXbpvOp",
-    scheme: "http"
-  });
-
-  angular.module("KendoDemos", [ "kendo.directives" ])
-	.controller('MyCtrl', ["$scope", MyCtrl]);
-  function MyCtrl($scope) {
-    // declare dataSource bound to backend
-    var dataSource = new kendo.data.DataSource({
-      type: "everlive",
-      transport: {
-        // binding to the Order type in the backend
-        typeName: "Order"
-      },
-      schema: {
-        model: {
-          id: "Id",
-          fields: {
-            // default fields for Backend Services types
-            CreatedBy:  { type: "string" },
-            CreatedAt:  { type: "date" },
-            ModifiedAt: { type: "date" },
-
-            // type fields
-            Freight:    { type: "number" },
-            OrderDate:  { type: "date" },
-            ShipName:   { type: "string" },
-            ShipCity:   { type: "string" }
-          }
-        }
-      },
-      serverPaging: true,
-      pageSize: 20,
-
-      serverSorting: true,
-      sort: { field: 'OrderDate', dir: 'asc' }
+    // configure API key
+    Kinvey.init({
+        appKey: 'kid_SJyRpx96G',
+        appSecret: 'a88466f87e434ca4a1a0194e33d3168d'
     });
 
-    $scope.gridOptions = {
-      dataSource: dataSource,
-      sortable: true,
-      pageable: true,
-      columns: [
-        { field: "Freight", width: 100 },
-        { field: "OrderDate", title: "Order Date", width: 120, format: "{0:MM/dd/yyyy}" },
-        { field: "ShipName", title: "Ship Name" },
-        { field: "ShipCity", title: "Ship City", width: 150 }
-      ]
-    };
-  }
+    angular.module("KendoDemos", ["kendo.directives"])
+        .controller('MyCtrl', ["$scope", MyCtrl]);
+
+    function MyCtrl($scope) {
+        $scope.init = function() {
+            if (!Kinvey.User.getActiveUser()) {
+                var that = this;
+                Kinvey.User.signup()
+                    .then(function() {
+                        that.dataSource.read();
+                    })
+                    .catch(function(error) {
+                        alert(error.message);
+                    });
+            } else {
+                this.dataSource.read();
+            }
+        };
+
+        // declare dataSource bound to backend
+        $scope.dataSource = new kendo.data.DataSource({
+            type: "kinvey",
+            transport: {
+                typeName: "products"
+            },
+            schema: {
+                model: {
+                    id: "_id",
+                    fields: {
+                        UnitPrice: {
+                            type: "number"
+                        },
+                        UnitsInStock: {
+                            type: "number"
+                        },
+                        Discontinued: {
+                            type: "boolean"
+                        }
+                    }
+                }
+            },
+            pageSize: 20,
+            serverSorting: true,
+            serverPaging: true,
+            error: function(err) {
+                alert(JSON.stringify(err));
+            }
+        });
+
+        $scope.gridOptions = {
+            autoBind: false,
+            dataSource: $scope.dataSource,
+            height: 430,
+            sortable: true,
+            pageable: true,
+            columns: [{
+                field: "ProductName",
+                title: "Product Name"
+            }, {
+                field: "UnitPrice",
+                title: "Unit Price",
+                width: 220
+            }, {
+                field: "UnitsInStock",
+                title: "Units In Stock",
+                width: 220
+            }, {
+                field: "Discontinued",
+                title: "Discontinued",
+                width: 220
+            }]
+        };
+    }
 </script>
 ```
 

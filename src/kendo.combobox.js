@@ -543,6 +543,7 @@ var __meta__ = { // jshint ignore:line
                 if (!keepState && that._state === STATE_FILTER) {
                     that._state = STATE_ACCEPT;
                 }
+                that._toggleCloseVisibility();
             });
         },
 
@@ -743,7 +744,6 @@ var __meta__ = { // jshint ignore:line
                 return value === undefined || value === null ? "" : value;
             }
 
-            that._toggleCloseVisibility();
             that.requireValueMapper(that.options, value);
 
             that.trigger("set", { value: value });
@@ -777,6 +777,7 @@ var __meta__ = { // jshint ignore:line
                     if (that._state === STATE_FILTER) {
                         that._state = STATE_ACCEPT;
                     }
+                    that._toggleCloseVisibility();
                 });
         },
 
@@ -954,7 +955,7 @@ var __meta__ = { // jshint ignore:line
                 that._firstItem();
             } else if (key === keys.END) {
                 that._lastItem();
-            } else if (key === keys.ENTER) {
+            } else if (key === keys.ENTER || key === keys.TAB) {
                 var current = that.listView.focus();
                 var dataItem = that.dataItem();
                 var shouldTrigger = true;

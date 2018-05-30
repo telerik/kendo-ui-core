@@ -99,6 +99,13 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.drawing.js | PDF export feature (optional) |
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.editor.js | |
+| [ListBox](http://demos.telerik.com/kendo-ui/listbox/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.data.js | |
+| | kendo.userevents.js | |
+| | kendo.draganddrop.js | |
+| | kendo.selectable.js | |
+| | kendo.listbox.js | |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.maskedtextbox.js | |

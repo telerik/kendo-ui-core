@@ -492,13 +492,14 @@ var __meta__ = { // jshint ignore:line
             return;
         }
 
-        var form  = $(widget.element).parents("form");
+        var form  = $(widget.element).parents("ng-form, form").first();
         var ngForm = kendo.getter(form.attr("name"), true)(scope);
         var getter = $parse(kNgModel);
         var setter = getter.assign;
         var updating = false;
 
-        var valueIsCollection = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect;
+        var valueIsCollection = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect ||
+                                kendo.ui.RangeSlider && widget instanceof kendo.ui.RangeSlider;
 
         var length = function(value) {
             //length is irrelevant when value is not collection

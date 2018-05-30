@@ -28,7 +28,7 @@ In Kendo UI, the Sass-based themes demonstrate the following differences from th
 - Each Sass-based theme is represented by a single CSS file that combines the layout and the themes of the components. As a result, you do not need to match a theme with its common file.
 - Based on the widget you work with, the Sass-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
 - The Sass-based themes are available on NPM. Each theme is stored as an NPM package and can be easily upgraded.
-- Each Sass-based theme is compatible with the [Kendo UI components for Angular](http://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
+- Each Sass-based theme is compatible with the [Kendo UI components for Angular](https://www.telerik.com/kendo-angular-ui/). This enables you to port parts of your application to Angular 2 while maintaining their styling.
 
 ## Browser Limitations
 
@@ -604,7 +604,7 @@ To contribute to the development of the Kendo UI Default Theme, refer to the [te
 
 ## Sass Theme Builder
 
-[**Progress Sass Theme Builder**](http://themebuilder.telerik.com/kendo-ui) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
+[**Progress Sass Theme Builder**](https://themebuilder.telerik.com/kendo-ui) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
 
 The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.
 

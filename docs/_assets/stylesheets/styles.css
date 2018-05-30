@@ -1226,7 +1226,10 @@ footer,
   margin-top: 2px !important; }
 
 #feedback-checkbox-area label {
-  display: block;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   margin: 5px 0 0;
   padding: 5px 0 0; }
 

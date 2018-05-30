@@ -1,4 +1,4 @@
-/* Kendo RTL CSS */
+// Kendo RTL CSS
 
 .k-rtl
 {
@@ -10,7 +10,7 @@
     margin-right: 6px;
 }
 
-/* AutoComplete */
+// AutoComplete
 
 .k-rtl .k-autocomplete .k-i-loading,
 .k-rtl .k-multiselect .k-i-loading
@@ -19,7 +19,7 @@
     left: 3px;
 }
 
-/* Buttons */
+// Buttons
 
 .k-rtl .k-button-icontext .k-icon,
 .k-rtl .k-button-icontext .k-image
@@ -30,7 +30,7 @@
     margin-right: -.125rem;
 }
 
-/* TextBoxes, Pickers, Combos */
+// TextBoxes, Pickers, Combos
 
 .k-rtl .k-numeric-wrap.k-expand-padding
 {
@@ -130,7 +130,7 @@
     }
 }
 
-/* Calendar */
+// Calendar
 
 .k-rtl .k-widget.k-calendar .k-nav-prev { left: auto; right: 1%; }
 .k-rtl .k-widget.k-calendar .k-nav-next { right: auto; left: 1%; }
@@ -141,7 +141,7 @@
     transform: scaleX(-1);
 }
 
-/* Scheduler */
+// Scheduler
 
 .k-rtl .k-scheduler .k-scheduler-navigation .k-i-arrow-60-right,
 .k-rtl .k-scheduler .k-scheduler-navigation .k-i-arrow-60-left
@@ -149,7 +149,7 @@
     transform: scaleX(-1);
 }
 
-/* Editor */
+// Editor
 
 .k-rtl .k-form-text-row input
 {
@@ -228,7 +228,7 @@
     transform: scaleX(-1);
 }
 
-/* Grid */
+// Grid
 
 .k-rtl div.k-grid-header,
 .k-rtl div.k-grid-footer
@@ -330,7 +330,7 @@
     left: 2.5em;
 }
 
-/* Editing */
+// Editing
 
 .k-rtl .k-edit-label,
 .k-rtl .k-edit-form-container .editor-label
@@ -377,7 +377,7 @@
     margin: -0.4em 0.7em 0 0;
 }
 
-/* Pager */
+// Pager
 
 .k-rtl .k-pager-info,
 .k-rtl .k-pager-wrap .k-pager-refresh
@@ -393,7 +393,7 @@
     float: right;
 }
 
-/* Gantt*/
+// Gantt
 .k-rtl {
     .k-gantt .k-grid-header .k-header {
         text-align: center;
@@ -494,7 +494,7 @@
 
 
 
-/* Grid */
+// Grid
 
 .k-rtl .k-grid tbody td:last-child,
 .k-rtl .k-grid thead th:last-child
@@ -507,7 +507,7 @@
     border-left-width: 1px;
 }
 
-/* Menu */
+// Menu
 
 .k-rtl .k-menu .k-item,
 .k-rtl .k-widget.k-menu-horizontal > .k-item
@@ -526,8 +526,8 @@
     margin-left: -8px;
 }
 
-.k-rtl .k-menu-group .k-menu-expand-arrow,
-.k-rtl .k-menu-vertical .k-link > .k-menu-expand-arrow,
+.k-rtl .k-menu-group .k-item > .k-link > .k-menu-expand-arrow,
+.k-rtl .k-menu-vertical .k-item > .k-link > .k-menu-expand-arrow,
 {
     right: auto;
     left: .2rem;
@@ -546,7 +546,7 @@
     margin-right: -4px;
 }
 
-/* Multiselect */
+// Multiselect
 
 .k-rtl .k-multiselect-wrap .k-input
 {
@@ -566,7 +566,13 @@
     padding: .03em .2em;
 }
 
-/* Notification */
+.k-rtl .k-autocomplete > .k-i-close,
+.k-rtl .k-multiselect-wrap > .k-i-close {
+    left: 6px;
+    right: auto;
+}
+
+// Notification
 
 .k-rtl .k-notification-button .k-notification-wrap,
 .k-rtl.k-notification-button .k-notification-wrap
@@ -591,7 +597,7 @@
     left: 4px;
 }
 
-/* PanelBar */
+// PanelBar
 
 .k-rtl .k-panelbar-expand,
 .k-rtl .k-panelbar-collapse
@@ -608,7 +614,7 @@
     margin-left: 5px;
 }
 
-/* Progressbar */
+// Progressbar
 
 .k-rtl .k-progressbar > .k-reset
 {
@@ -621,7 +627,7 @@
     border-left-width: 0;
 }
 
-/* Scheduler */
+// Scheduler
 
 .k-rtl .k-scheduler-toolbar > ul
 {
@@ -866,7 +872,7 @@
     right: .6em;
 }
 
-/* Slider */
+// Slider
 
 .k-rtl .k-slider .k-button-decrease
 {
@@ -893,7 +899,7 @@
     right: 34px;
 }
 
-/* TabStrip */
+// TabStrip
 
 .k-rtl .k-tabstrip-items .k-item,
 .k-rtl .k-panelbar .k-tabstrip-items .k-item
@@ -922,7 +928,7 @@
     left: .4em;
 }
 
-/* ToolBar */
+// ToolBar
 
 
 .k-rtl .k-toolbar {
@@ -954,7 +960,7 @@
     text-align: right;
 }
 
-/* ToolTip */
+// ToolTip
 
 .k-rtl .k-tooltip-button
 {
@@ -967,7 +973,7 @@
     padding-left: 20px;
 }
 
-/* TreeView */
+// TreeView
 
 .k-rtl .k-treeview .k-item
 {
@@ -1008,7 +1014,7 @@
     padding-right: calc(14px + 0.7ex);
 }
 
-/*  TreeList */
+//  TreeList
 .k-rtl .k-treelist .k-i-arrow-60-right,
 .k-rtl .k-treelist .k-i-arrow-45-down-right
 {
@@ -1023,7 +1029,7 @@
     transform: scaleX(-1);
 }
 
-/* Upload */
+// Upload
 
 .k-rtl .k-dropzone em
 {
@@ -1068,7 +1074,7 @@
     margin-left: .2em;
 }
 
-/* Window */
+// Window
 
 .k-rtl .k-window-titlebar .k-window-actions
 {
@@ -1076,7 +1082,7 @@
     left: .5em;
 }
 
-/* Dialog */
+// Dialog
 
 .k-rtl .k-dialog, .k-rtl.k-dialog
 {

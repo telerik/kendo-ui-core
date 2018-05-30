@@ -131,7 +131,7 @@
     margin: 0 0 @card-subtitle-margin-bottom;
 }
 .k-card-title + .k-card-subtitle {
-    margin-top: -( @card-title-margin-bottom * .75 );
+    margin-top: ( -@card-title-margin-bottom * .75 );
 }
 
 
@@ -225,6 +225,7 @@
 // Deck
 .k-card-deck {
     display: flex;
+    margin-top: @card-deck-gap;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: stretch;

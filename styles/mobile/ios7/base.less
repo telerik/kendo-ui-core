@@ -10,7 +10,7 @@
     font: normal 1em "HelveticaNeue Ultra Light", "Roboto Light", "Slate Light", "Segoe WP", NokiaPureTextLight, sans-serif;
 }
 
-/* override transform options for performance */
+// override transform options for performance
 .km-root .km-ios7.km-pane,
 .km-root .km-ios7 .km-view,
 .km-root .km-ios7 .km-slider,
@@ -47,7 +47,7 @@
     .background-clip(content-box);
 }
 
-/* Revert box/clip for Web widgets */
+// Revert box/clip for Web widgets
 .km-ios7 [class^=k-],
 .km-ios7 [class^=k-] *
 {
@@ -83,7 +83,7 @@
     border-radius: 0;
 }
 
-/* PopUp + ActionSheet */
+// PopUp + ActionSheet
 
 .km-ios7 .km-actionsheet,
 .km-ios7 .km-popup .k-popup
@@ -185,7 +185,7 @@
     padding: 2px 0;
 }
 
-/* Loader */
+// Loader
 
 .km-ios7.km-pane > .km-loader,
 .km-ios7 .km-pane > .km-loader
@@ -337,12 +337,12 @@
 
 
 
-/* Color Template */
+// Color Template
 @import "template.less";
 
 
 
-/* Active States */
+// Active States
 
 .km-ios7 .km-tabstrip .km-button,
 .km-ios7 .km-popup .k-item,
@@ -393,14 +393,14 @@
     text-shadow: none;
 }
 
-/* transitions */
+// transitions
 .km-root .km-ios7.k-fx-slide {
     &.k-fx-end .k-fx-current .km-content {
         .transform(translatex(-50%));
         -webkit-filter: brightness(70%);
     }
 
-    /* left reverse */
+    // left reverse
     &.k-fx-reverse {
         &.k-fx-end .k-fx-next {
             box-shadow: none;
@@ -418,13 +418,13 @@
         }
     }
 
-    /* right */
+    // right
     &.k-fx-right {
         &.k-fx-end .k-fx-current .km-content {
             .transform(translatex(50%));
         }
 
-        /* right reverse */
+        // right reverse
         &.k-fx-reverse {
             &.k-fx-end .k-fx-current .km-content {
                 .transform(translatex(-100%));

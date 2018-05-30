@@ -27,6 +27,7 @@ The following table provides a list of the jQuery versions that are compatible w
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [Kendo UI 2018.2.515 (R2 2018)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/progress-kendo-ui-2018-2-515)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
 | [Kendo UI 2018.1.117 (R1 2018)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2018)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2017.3.913 (R3 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2017.2.504 (R2 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|

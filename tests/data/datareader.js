@@ -128,6 +128,24 @@ test("project fields - from has greater priority", function() {
     equal(result[2].bar, "0");
 });
 
+test("project fields works with nested properties which parent is null", function() {
+    var reader = new DataReader({
+        model: {
+            fields: {
+                bar: { from: "foo.baz" }
+            }
+        }
+    });
+
+    var result = reader.parse([{ foo: { baz:"baz"} }, { foo: null }]);
+
+    result = reader.data(result);
+
+    equal(result.length, 2);
+    equal(result[0].bar, "baz");
+    equal(result[1].bar, undefined);
+});
+
 test("project fields to the name specified as string", function() {
     var reader = new DataReader({
         model: {

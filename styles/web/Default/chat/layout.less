@@ -117,6 +117,7 @@
 
     // Message
     .k-message {
+        max-width: 100%;
         margin: @chat-bubble-spacing 0 0;
         position: relative;
         transition: margin .2s ease-in-out;
@@ -154,6 +155,7 @@
         border-width: 1px;
         border-style: solid;
         line-height: @chat-bubble-line-height;
+        word-wrap: break-word;
     }
 
 
@@ -193,10 +195,10 @@
     }
 }
 .k-avatars {
-    .k-message-group:not(.k-alt) {
+    .k-message-group:not(.k-alt):not(.k-no-avatar) {
         padding-left: calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}" );
     }
-    .k-message-group.k-alt {
+    .k-message-group.k-alt:not(.k-no-avatar) {
         padding-right: calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}" );
     }
 }
@@ -225,6 +227,7 @@
 // Quick reply
 .k-quick-replies {
     display: block;
+    max-width: 100%; //IE fix
 }
 .k-quick-reply {
     .border-radius( 100px );
@@ -290,6 +293,8 @@
 }
 
 .k-chat .k-card-deck {
+    max-width: calc( 125% + calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}"));
+    box-sizing: border-box;
     margin-left: -@chat-message-list-padding-y;
     margin-right: -@chat-message-list-padding-y;
     padding-left: @chat-message-list-padding-y;
@@ -302,7 +307,7 @@
     }
 }
 .k-chat .k-card-deck .k-card {
-    flex-basis: 200px;
+    width: 200px;
 }
 
 
@@ -399,14 +404,18 @@
         left: 0;
     }
     .k-avatars {
-        .k-message-group:not(.k-alt) {
+        .k-message-group:not(.k-alt):not(.k-no-avatar) {
             padding-left: 0;
             padding-right: calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}" );
         }
-        .k-message-group.k-alt {
+        .k-message-group.k-alt:not(.k-no-avatar) {
             padding-right: 0;
             padding-left: calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}" );
         }
+    }
+
+    .k-message-box .k-button svg {
+        transform: rotate(180deg)
     }
 
 

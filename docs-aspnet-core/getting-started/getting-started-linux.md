@@ -78,9 +78,9 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 	* Create the following two configuration files containing your `telerik.com` credentials on your machine: `~/.config/NuGet/NuGet.Config` and `~/.nuget/NuGet/NuGet.Config`; or
 	* Create a `NuGet.Config` file in the project folder.
-	
+
 	Each of the above files should contain the following XML:
-	
+
 	###### Example
 
         ```
@@ -127,7 +127,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 				services.AddKendo();
 			}
 
-    * Locate the `Configure` method and add a call to `app.UseKendo` at the end.
+    * Locate the `Configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
 
 		###### Example
 

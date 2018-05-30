@@ -63,7 +63,7 @@ This article demonstrates how to configure an ASP.NET Core project to use Teleri
         using Newtonsoft.Json.Serialization;
         ```
 
-    * Locate the `configure` method and add a call to `app.UseKendo` at the end.
+    * Locate the `configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
 
         ```cs
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

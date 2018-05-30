@@ -101,15 +101,7 @@ var __meta__ = { // jshint ignore:line
                 that.readonly(element.is("[readonly]"));
             }
 
-            if (options.dateInput) {
-                that._dateInput = new ui.DateInput(element, {
-                    culture: options.culture,
-                    format: options.format,
-                    min: options.min,
-                    max: options.max,
-                    value: options.value
-                });
-            }
+            that._createDateInput(options);
 
             that._old = that._update(options.value || that.element.val());
             that._oldText = element.val();
@@ -182,8 +174,13 @@ var __meta__ = { // jshint ignore:line
                 max: max
             }));
 
-            if (value) {
+            that._createDateInput(options);
+
+            if (!that._dateInput) {
                 that.element.val(kendo.toString(value, options.format, options.culture));
+            }
+
+            if (value) {
                 that._updateARIA(value);
             }
         },
@@ -752,6 +749,22 @@ var __meta__ = { // jshint ignore:line
 
         _template: function() {
             this._ariaTemplate = kendo.template(this.options.ARIATemplate);
+        },
+
+        _createDateInput: function(options) {
+            if (this._dateInput) {
+                this._dateInput.destroy();
+                this._dateInput = null;
+            }
+
+            if (options.dateInput ) {
+                this._dateInput = new ui.DateInput(this.element, {
+                    culture: options.culture,
+                    format: options.format,
+                    min: options.min,
+                    max: options.max
+                });
+            }
         },
 
         _calculateMidnight: function(min, max) {

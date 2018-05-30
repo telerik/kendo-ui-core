@@ -6,14 +6,14 @@
 @ios-button-border-radius: (@ios-inline-border-radius - 1px);
 
 
-/* Support for iOS6 */
+// Support for iOS6
 @media only screen and (height : 320px) and (orientation : landscape) {
     .km-ios6 {
         height: 100% !important;
     }
 }
 
-/* CSS */
+// CSS
 
 .km-ios:after
 {
@@ -46,7 +46,7 @@
     border-radius: @ios-button-border-radius;
 }
 
-/* Icons */
+// Icons
 
 .k-ff .km-ios .km-detail .km-icon
 {
@@ -100,7 +100,7 @@
     border-radius: 0;
 }
 
-/* Loader */
+// Loader
 
 .km-ios.km-pane > .km-loader,
 .km-ios .km-pane > .km-loader
@@ -250,7 +250,7 @@
     color: rgba(0,0,0,.7);
 }
 
-/* PopUp */
+// PopUp
 
 .km-ios .km-popup .k-popup
 {
@@ -382,7 +382,7 @@ html .km-ios .km-popup.km-pane .km-tabstrip
     -webkit-margin-collapse: separate;
 }
 
-/* Checkboxes and Radios */
+// Checkboxes and Radios
 
 .km-ios .km-listview-label input[type=radio]:checked,
 .km-ios .km-listview-label input[type=checkbox]:checked
@@ -390,7 +390,7 @@ html .km-ios .km-popup.km-pane .km-tabstrip
     font-size: 1.2em;
 }
 
-/* Tablet Styles */
+// Tablet Styles
 
 .km-tablet .km-ios .km-tabstrip
 {
@@ -451,5 +451,5 @@ html .km-ios .km-popup.km-pane .km-tabstrip
 
 
 
-/* Color Template */
+// Color Template
 @import "template.less";

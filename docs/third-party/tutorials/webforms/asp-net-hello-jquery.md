@@ -18,7 +18,7 @@ This module covers the very basic information that you need to know about [jQuer
 
 ## Screencast
 
-<iframe height="360" src="http://www.youtube.com/embed/6BS-dZMHyKg?rel=0" frameborder="0" width="640"></iframe>
+<iframe height="360" src="https://www.youtube.com/embed/6BS-dZMHyKg?rel=0" frameborder="0" width="640"></iframe>
 
 ## Written Summary
 
@@ -91,9 +91,9 @@ straightforward way.
 
 ### Add jQuery to Project
 
-Visual Studio projects actually come with [jQuery](http://jquery.com/) in the `Scripts` folder by default. However, these [`jQuery`](http://jquery.com/) and `VSDoc` files may be out of date and not connected with a [Nuget](http://msdn.microsoft.com/en-us/library/dd565622) installation. Delete the [jQuery](http://jquery.com/) files in the `Scripts` folder, including the `VSDoc` file.
+Visual Studio projects actually come with [jQuery](http://jquery.com/) in the `Scripts` folder by default. However, these [`jQuery`](http://jquery.com/) and `VSDoc` files may be out of date and not connected with a [Nuget](https://www.nuget.org/) installation. Delete the [jQuery](http://jquery.com/) files in the `Scripts` folder, including the `VSDoc` file.
 
-To install [jQuery](http://jquery.com/) from [Nuget](http://msdn.microsoft.com/en-us/library/dd565622.aspx), right-click the project and select **Add Library Package Reference** > **Online** from the left-hand side and enter `jquery` in the search box. Click the **Install** button on the [`jQuery`](http://jquery.com/) package. This will install the `VSDoc` files as well. There is no need to install them separately.
+To install [jQuery](http://jquery.com/) from [Nuget](https://www.nuget.org/), right-click the project and select **Add Library Package Reference** > **Online** from the left-hand side and enter `jquery` in the search box. Click the **Install** button on the [`jQuery`](http://jquery.com/) package. This will install the `VSDoc` files as well. There is no need to install them separately.
 
 **Figure 7: The NuGet jQuery search**
 
