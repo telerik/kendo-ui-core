@@ -819,7 +819,7 @@ var __meta__ = { // jshint ignore:line
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
                 }
-            } else if (e.ctrlKey && key === keys.A && visible) {
+            } else if (e.ctrlKey && !e.altKey && key === keys.A && visible) {
                 if (this._getSelectedIndices().length === listView.items().length) {
                     that._activeItem = null;
                 }
