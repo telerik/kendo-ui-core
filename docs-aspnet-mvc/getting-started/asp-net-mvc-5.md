@@ -201,6 +201,8 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
                 <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
             </dependentAssembly>
 
+1. For issues with unmatching versions of `System.Web.Mvc` referenced in the application and the one used by Kendo.Mvc.dll see [Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+
 ## Use Kendo UI Widgets
 
 Below are listed the steps for you to follow when using a Kendo UI widget through its MVC server-side wrapper initialization.

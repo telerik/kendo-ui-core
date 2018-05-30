@@ -1,12 +1,12 @@
 (function(f, define){
-    define([ "./kendo.data" ], f);
+    define([ "./kendo.data", "./kendo.popup" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
     id: "list",
     name: "List",
     category: "framework",
-    depends: [ "data" ],
+    depends: [ "data", "popup" ],
     hidden: true
 };
 

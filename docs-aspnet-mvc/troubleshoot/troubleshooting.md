@@ -41,6 +41,26 @@ Make sure jQuery is not included more than once in your page. Remove any duplica
 
 If the application is also using Telerik Extensions for ASP.NET MVC, tell the `ScriptRegistrar` not to include jQuery, as demonstrated in the example below.
 
+### The versions of System.Web.Mvc referenced in the application and the one Kendo.Mvc.dll uses are different
+
+Kendo.Mvc.dll is regularly updated to support the latest ASP.NET MVC 5 version. If you try to use the latest version of Telerik UI for ASP.NET MVC in an ASP.NET MVC 5 application that uses an older version of `System.Web.Mvc`, an exception stating that the versions of the `System.Web.Mvc` do not match will be thrown. 
+
+In case an older version of Kendo.Mvc.dll is referenced and it uses a version of `System.Web.Mvc` older than the one referenced in the application, a warning will be displayed.
+
+**Solution**
+
+Upgrade ASP.NET MVC 5 used in the application to the newest version: [ASP.NET MVC 5 Nuget](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/).
+
+Update the binding redirect for `System.Web.Mvc` in the web.config.
+
+    ###### Example
+
+            <dependentAssembly>
+                <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+                <bindingRedirect oldVersion="0.0.0.0-<latest ASP.NET MVC 5 version>" newVersion="<latest ASP.NET MVC 5 version>" />
+            </dependentAssembly>
+ 
+
 ###### Example
 
     Html.Telerik().ScriptRegistrar().jQuery(false)

@@ -390,6 +390,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 return this._accessor();
             }
+            this._toggleCloseVisibility();
         },
 
         _click: function(e) {
