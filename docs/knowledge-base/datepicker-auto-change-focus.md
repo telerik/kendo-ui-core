@@ -1,6 +1,6 @@
 ---
-title: Auto Change Focus of Date Input
-description:  An example on how to change focus automatically of the date input in the Kendo UI DatePicker.
+title: Auto-Change Focus of Date Input
+description: An example on how to automatically change the focus of the date input in the Kendo UI DatePicker.
 type: how-to
 page_title: Change Focus Automatically | Kendo UI DatePicker
 slug: datepicker-auto-change-focus
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,14 +24,12 @@ res_type: kb
 
 ## Description
 
-How can I make the focus automatically move to the month once the date is entered and focus moves to year, once the month is entered in the Kendo UI DatePicker with DateInput?
+How can I set the focus to move automatically to the month after the date is entered and the focus moves to the year once the month is entered in a DatePicker with a DateInput?
 
 ## Solution
 
-To automatically move the focus:
-
 1. Handle the [`keydown`](https://api.jquery.com/keydown/) event of the DatePickers.
-1. In the `keydown` event handler, based on a condition, manually `trigger` the right arrow `keydown` event.
+1. In the `keydown` event handler, based on a condition, manually trigger the `keydown` event of the right arrow.
 
 ```html
 <input id="datepicker1" />
