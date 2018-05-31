@@ -1,7 +1,7 @@
 ---
 title: Add Clear Button
-description: An example on how to add clear button in the Kendo UI DateTimePicker.
-type: troubleshooting
+description: An example on how to add a Clear button to the Kendo UI DateTimePicker.
+type: how-to
 page_title: Clear Dates with Button | Kendo UI DateTimePicker
 slug: datetimepicker-clear-button
 tags: datetimepicker, clear, button
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,15 +24,13 @@ res_type: kb
 
 ## Description
 
-How can I add a clear button to the Kendo UI DateTimePicker?
+How can I add a **Clear** button to the DateTimePicker?
 
 ## Solution
 
-To add a clear button:
-
 1. Add `span` with a clear icon to the `k-select` element.
-1. Handle the [`click`](https://api.jquery.com/click/) event of the span.
-1. Use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/value) method to set the `value` to `null`.
+1. Handle the [`click`](https://api.jquery.com/click/) event of the `span`.
+1. Use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/value) method to set `value` to `null`.
 
 ```html
 <style>

@@ -513,6 +513,28 @@ test("setOptions method updates format", function() {
     equal(datepicker.element.val(), kendo.toString(datepicker.value(), "dd/MM/yyyy"));
 });
 
+test("setOptions method updates dateInput", function() {
+    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+    datepicker.open();
+
+    datepicker.setOptions({
+        dateInput: true
+    });
+
+    equal(datepicker.element.val(), "month/day/year");
+});
+
+test("setOptions method disables dateInput and clears the input if widget does not have a value", function() {
+    datepicker = input.kendoDatePicker({dateInput: true}).data("kendoDatePicker");
+    datepicker.open();
+
+    datepicker.setOptions({
+        dateInput: false
+    });
+
+    equal(datepicker.element.val(), "");
+});
+
 test("setOptions preserves options.dates", 1, function() {
     var datepicker = new DatePicker(input, {
         dates: [new Date()]

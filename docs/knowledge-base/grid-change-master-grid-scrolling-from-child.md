@@ -1,8 +1,8 @@
 ---
-title: Scroll Parent Grid During Child Grid Navigation
-description: An example on how to scroll the parent Kendo UI Grid during child Grid navigation.
+title: Scroll Parent Grid during Child Grid Navigation
+description: An example on how to scroll the parent Kendo UI Grid while navigating through the child Kendo UI Grid.
 type: how-to
-page_title: Change Master Grid Scrolling Position from Child Grid Navigation | Kendo UI Grid
+page_title: Change Master-Grid Scrolling Position during Child-Grid Navigation | Kendo UI Grid
 slug: grid-change-master-grid-scrolling-from-child
 tags: grid, scrolling, master, child, hierarchy, navigation
 ticketid: 1160388
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,11 +24,9 @@ res_type: kb
 
 ## Description
 
-How can I change the master Kendo UI Grid scrolling position during the non-scrollable child Grid navigation?
+How can I change the scrolling position of the master Grid during the navigation of a non-scrollable child Grid?
 
 ## Solution
-
-To change the master Grid scrolling position:
 
 1. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/navigate) event of the child Grid.
 1. In the `navigate` event handler, based on the `offset` of the element, manually scroll the container of the parent Grid.

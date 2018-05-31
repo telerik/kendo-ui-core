@@ -27,25 +27,44 @@ For more symptoms on that, refer to the [article on JavaScript errors](http://do
 
 **Solution**
 
-Make sure that jQuery is included before the Telerik UI for ASP.NET MVC JavaScript files, and before any Kendo UI widget or MVC wrapper declarations, unless [deferred initialization]({% slug overview_aspnetmvc %}) is used. If using the ASP.NET bundles, move the `Scripts.Render("~/bundles/jquery")` block before the Telerik UI for ASP.NET MVC JavaScript files.
+Make sure that jQuery is included before the Telerik UI for ASP.NET MVC JavaScript files, and before any Kendo UI widget or MVC wrapper declarations, unless [deferred initialization]({% slug overview_aspnetmvc %}) is used. If you use the ASP.NET bundles, move the `Scripts.Render("~/bundles/jquery")` block before the Telerik UI for ASP.NET MVC JavaScript files.
 
 ### Widgets Are Unavailable or Undefined
 
-If jQuery is included more than once in the page, all existing jQuery plugins (including Kendo UI) are wiped out. This symptom also occurs if the [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites) are not included.
+If jQuery is included more than once in the page, all existing jQuery plugins (including Kendo UI) are wiped out. This issue also occurs if the [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites) are not included.
 
-For more symptoms, check the [article on troubleshooting](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues#kendo-ui-widgets-are-unavailable-or-undefined).
+For more similar issues, refer to the [article on troubleshooting in Kendo UI for jQuery](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues#kendo-ui-widgets-are-unavailable-or-undefined).
 
 **Solution**
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites).
+1. Make sure that jQuery is not included more than once in your page.
+1. Remove any duplicate `script` references to jQuery.
+1. Include all [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites).
+1. If the application is using Telerik Extensions for ASP.NET MVC, indicate to the `ScriptRegistrar` not to include jQuery.
 
-If the application is also using Telerik Extensions for ASP.NET MVC, tell the `ScriptRegistrar` not to include jQuery, as demonstrated in the example below.
+    ###### Example
+
+        Html.Telerik().ScriptRegistrar().jQuery(false)
+
+1. If the application is using ASP.NET bundles, make sure that the `Scripts.Render("~/bundles/jquery")` block appears before the Kendo UI JavaScript files. If not, do not include jQuery as a `script` element.
+
+### The System.Web.Mvc Versions Referenced in the Application and Which Kendo.Mvc.dll Uses Differ
+
+`Kendo.Mvc.dll` is regularly updated to support the latest ASP.NET MVC 5 version. If you try to use the latest version of Telerik UI for ASP.NET MVC in an ASP.NET MVC 5 application that uses an older version of `System.Web.Mvc`, an exception is thrown saying that the versions of the `System.Web.Mvc` do not match.
+
+If an older version of `Kendo.Mvc.dll` is referenced and it uses a version of `System.Web.Mvc` older than the one referenced in the application, a warning will be displayed.
+
+**Solution**
+
+1. [Upgrade ASP.NET MVC 5](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/) which is used in the application to the newest version ASP.NET MVC 5 Nuget.
+1. Update the binding redirect for `System.Web.Mvc` in the `web.config` file.
 
 ###### Example
 
-    Html.Telerik().ScriptRegistrar().jQuery(false)
-
-If using ASP.NET bundles, make sure the `Scripts.Render("~/bundles/jquery")` block appears before the Kendo JavaScript files. In this case, you should not include jQuery as a `script` element.
+    <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-<latest ASP.NET MVC 5 version>" newVersion="<latest ASP.NET MVC 5 version>" />
+    </dependentAssembly>
 
 ### Live Method Is Unavailable, Undefined or Unsupported
 

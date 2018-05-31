@@ -1,15 +1,16 @@
 ---
 title: Add Spinner for Dates
-description: An example on how to change dates with a spinner in the Kendo UI DateTimePicker.
+description: An example on how to change the dates in the Kendo UI DateTimePicker through a spinner.
 type: how-to
 page_title: Change Dates with Spinner | Kendo UI DateTimePicker
 slug: datetimepicker-change-dates-with-spinner
-tags: datetimepicker, datepicker, spinner, change 
+tags: datetimepicker, datepicker, spinner, change
 ticketid: 1160455
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,11 +24,9 @@ res_type: kb
 
 ## Description
 
-How can I add spinner buttons and change the date with them in the Kendo UI DateTimePicker?
+How can I add spinner buttons and use them to change the date in the DateTimePicker?
 
 ## Solution
-
-To add spinner buttons:
 
 1. Add `span` with `up` and `down` arrows to the `k-select` element.
 1. Handle the [`click`](https://api.jquery.com/click/) event of the arrows.

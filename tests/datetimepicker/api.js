@@ -831,6 +831,26 @@ test("setOptions updates max option correctly", 1, function() {
     ok(datetimepicker.timeView.ul.children().length > 1);
 });
 
+test("setOptions method updates dateInput", function() {
+    datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+    datetimepicker.setOptions({
+        dateInput: true
+    });
+
+    equal(datetimepicker.element.val(), "month/day/year hours:minutes AM/PM");
+});
+
+test("setOptions method disables dateInput and clears the input if widget does not have a value", function() {
+    datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+    datetimepicker.setOptions({
+        dateInput: false
+    });
+
+    equal(datetimepicker.element.val(), "");
+});
+
 
 test("does not set disabled date as value", 1, function() {
     var datetimepicker = new DateTimePicker(input, {
