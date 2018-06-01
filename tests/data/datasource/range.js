@@ -6,6 +6,7 @@ var timeout;
 
 module("data source ranges", {
     setup: function() {
+        jasmine.clock().install();
         timeout = window.setTimeout;
         window.setTimeout = function(callback) {
             callback();
@@ -13,6 +14,7 @@ module("data source ranges", {
     },
     teardown: function() {
         window.setTimeout = timeout;
+        jasmine.clock().uninstall();
     }
 });
 
@@ -21,11 +23,21 @@ function setup(source) {
 
     var dataSource = new DataSource( {
         data: data
-    } );
+    });
 
     dataSource.read();
 
     return dataSource;
+}
+
+function generateData(startIndex, endIndex) {
+    var data = [];
+
+    for (var i = startIndex; i < endIndex; i++) {
+        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+    }
+
+    return data;
 }
 
 function remoteDataSource(callback, options) {
@@ -37,11 +49,7 @@ function remoteDataSource(callback, options) {
                 read: function(options) {
                     var take = options.data.take;
                     var skip = options.data.skip;
-                    var data = [];
-
-                    for (var i = skip; i < Math.min(skip + take, total); i++) {
-                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
-                    }
+                    var data = generateData(skip, Math.min(skip + take, total));
 
                     callback();
                     options.success(data);
@@ -50,6 +58,13 @@ function remoteDataSource(callback, options) {
             schema: {
                 total:  function () {
                     return total;
+                },
+                model: {
+                    fields: {
+                        OrderID: { type: "number" },
+                        ContactName: { type: "string" },
+                        ShipAddress: { type: "string" }
+                    }
                 }
             },
             pageSize: 16
@@ -1786,8 +1801,12 @@ test("cancelChanges() after adding a new item with schema.model partially update
     equal(dataSource.data().length, total);
 });
 
-test("cancelChanges() after adding a new item updates ranges with remote binding", function() {
-    var dataSource = remoteDataSource($.noop, { pageSize: 10 });
+test("cancelChanges() after adding a new item updates ranges with remote binding when model is not defined", function() {
+    var dataSource = remoteDataSource($.noop, {
+        pageSize: 10,
+        schema: { }
+    });
+    delete dataSource.reader.model;
     dataSource.read();
     dataSource.range(20, 10);
     dataSource.range(30, 10);
@@ -2285,6 +2304,62 @@ test("hasChanges() does not call data.at() when ranges are used", function() {
     dataSource.hasChanges();
 
     equal(atStub.calls("at"), 0);
+});
+
+test("sync returns data according to currentRangeStart instead of skip without server paging", function() {
+    var dataSource = remoteDataSource($.noop, {
+        serverPaging: false
+    });
+    dataSource.options.useRanges = true;
+        stub(dataSource, {
+        created: function() {
+            return [];
+        },
+        skip: function() {
+            return 20;
+        }
+    });
+    dataSource.data(generateData(0, 100));
+    dataSource.range(0, 10);
+    dataSource.range(25, 10);
+    var items = [];
+    dataSource.bind("change", function(e) {
+        items = e.items;
+    });
+
+    dataSource.sync();
+    jasmine.clock().tick();
+
+    equal(items.length, 10);
+    equal(items[0].OrderID, 25);
+});
+
+test("sync returns data according to currentRangeStart instead of skip with server paging", function() {
+    var dataSource = remoteDataSource($.noop, {
+        serverPaging: true
+    });
+    dataSource.options.useRanges = true;
+    stub(dataSource, {
+        created: function() {
+            return [];
+        },
+        skip: function() {
+            return 20;
+        }
+    });
+    dataSource.read();
+    dataSource.range(0, 10);
+    dataSource.range(25, 10);
+    var items = [];
+    dataSource.bind("change", function(e) {
+        items = e.items;
+    });
+
+    dataSource.sync();
+    jasmine.clock().tick();
+
+    equal(items.length, 10);
+    equal(items[0].OrderID, 25);
 });
 
 }());

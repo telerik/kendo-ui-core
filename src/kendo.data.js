@@ -3643,6 +3643,10 @@ var __meta__ = { // jshint ignore:line
                 if(options.skip === undefined && that._page !== undefined && that._pageSize !== undefined) {
                     options.skip = (that._page - 1) * that._pageSize;
                 }
+
+                if (that.options.useRanges) {
+                    options.skip = that.currentRangeStart();
+                }
             }
 
             if (that.options.serverSorting !== true) {

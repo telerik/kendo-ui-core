@@ -98,6 +98,8 @@ var __meta__ = { // jshint ignore:line
 
                 id = id + "_taglist";
                 that.tagList.attr(ID, id);
+
+                that.input.attr("aria-describedby", id);
             }
 
             that._initialOpen = true;
@@ -242,7 +244,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _activateItem: function() {
-            List.fn._activateItem.call(this);
+            if (this.popup.visible()) {
+                List.fn._activateItem.call(this);
+            }
             this.currentTag(null);
         },
 
@@ -416,6 +420,11 @@ var __meta__ = { // jshint ignore:line
             that._search();
             that.trigger(CHANGE);
             that.focus();
+            that._hideClear();
+
+            if (that._state === FILTER) {
+                that._state = ACCEPT;
+            }
         },
 
         _editable: function(options) {
@@ -479,6 +488,7 @@ var __meta__ = { // jshint ignore:line
 
         close: function() {
             this._activeItem = null;
+            this.input.removeAttr("aria-activedescendant");
 
             this.popup.close();
         },
@@ -580,7 +590,6 @@ var __meta__ = { // jshint ignore:line
                 return oldValue;
             }
 
-            that._toggleCloseVisibility();
             that.persistTagList = false;
             that.requireValueMapper(that.options, value);
 
@@ -600,6 +609,7 @@ var __meta__ = { // jshint ignore:line
             if (!clearFilters) {
                 that._fetchData();
             }
+            that._toggleCloseVisibility();
         },
 
         _preselect: function(data, value) {

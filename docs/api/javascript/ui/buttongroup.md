@@ -140,7 +140,7 @@ Specifies if a button is enabled.
 
 ### items.icon `String`
 
-If set, the ButtonGroup will render an icon in the button.
+Defines the name of an existing icon in a Kendo theme.
 
 #### Example
 
@@ -149,9 +149,27 @@ If set, the ButtonGroup will render an icon in the button.
     <script>
     $("#buttonGroup").kendoButtonGroup({
       items: [
-					{ icon: "align-left" },
-					{ icon: "align-center" },
-					{ icon: "align-right" }
+        { icon: "align-left" },
+        { icon: "align-center" },
+        { icon: "align-right" }
+      ]
+    });
+    </script>
+
+### items.iconClass `String`
+
+Allows the usage of custom icons. Defines CSS classes which are to be applied to a span element inside the ButtonGroup item.
+
+#### Example
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+    <div id="buttonGroup"></div>
+
+    <script>
+    $("#buttonGroup").kendoButtonGroup({
+      items: [
+        { iconClass: "fa fa-male" },
+        { icon: "align-center" },
+        { icon: "align-right" }
       ]
     });
     </script>
@@ -204,6 +222,23 @@ Specifies the text of the ButtonGroup item.
             items: [
                 { text: "foo" },
                 { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.encoded `Boolean` *(default: true)*
+
+Specifies is text field of the ButtonGroup item should be encoded.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "<b>foo</b>", encoded: false },
+                { text: "<b>bar</b>", encoded: true }
             ]
         });
     </script>

@@ -1472,7 +1472,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             // Detect if cursor goes outside the viewport of the browser
-            if( (kendo.support.browser.msie && !e.toElement && !e.relatedTarget) ||
+            if( (kendo.support.browser.msie && !e.toElement && !e.relatedTarget && !isPointerTouch(e)) ||
                 e.clientX < 0 || e.clientY < 0 ||
                 e.clientY > $window.height() ||
                 e.clientX > $window.width()){
