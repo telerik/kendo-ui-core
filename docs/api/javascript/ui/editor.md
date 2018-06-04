@@ -2404,7 +2404,7 @@ The code below shows how to use a template and pass variables to it. This allows
       tools: [
         {
           name: "custom",
-          myText: "Button Text"
+          myText: "Button Text",
           template: $("#toolTemplate").html()
         }
       ]
