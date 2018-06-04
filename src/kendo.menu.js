@@ -2277,7 +2277,7 @@ var __meta__ = { // jshint ignore:line
                 if (that.popup.visible()) {
                     if (that._triggerEvent({ item: that.element, type: CLOSE }) === false) {
                         that.popup.close();
-                        DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
+                        DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS + that._marker, that._closeProxy);
                         that.unbind(SELECT, that._closeTimeoutProxy);
                     }
                 }
