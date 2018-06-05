@@ -1478,7 +1478,9 @@ var __meta__ = { // jshint ignore:line
 
                 if ((keyCode === keys.SPACEBAR || keyCode === keys.ENTER) && !target.is("input, checkbox")) {
 
-                    e.preventDefault(); //prevent pspacebar to scroll the page down
+                    if(keyCode === keys.SPACEBAR){
+                        e.preventDefault(); //prevent pspacebar to scroll the page down
+                    }
 
                     if (target.is("." + SPLIT_BUTTON)) {
                         target = target.children().first();
