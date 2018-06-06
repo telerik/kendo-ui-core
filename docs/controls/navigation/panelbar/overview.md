@@ -212,6 +212,41 @@ The following example demonstrates how to load a PanelBar item content asynchron
 
 When the PanelBar loads remote content via AJAX, the server response is cached in-memory so that subsequent expand/collapse actions do not trigger subsequent AJAX requests.
 
+### Expand Mode
+
+The PanelBar can be configured to use `single` or `multiple` expand mode. If the `expandMode` configuration option of the PanelBar is set to:
+
+* `single` - only a single root item or a single child item of a specific parent item can be expanded at a time. Expanding another root item or another child item of the currently expanded item's parent collapses the currently expanded item. This is also the only way to collapse an expanded item in `single` expand mode. 
+* `multiple` - multiple root items or children of the same parent item can be expanded at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them. 
+
+###### Example
+
+	<div id="panelbar"></div>
+	<script>
+		var items = [
+			{ ProductName: "Root1", items: [
+				{ ProductName: "Level2 1", items: [
+					{ ProductName: "Level3 1" },
+					{ ProductName: "Level3 2" }
+				]},
+				{ ProductName: "Level2 2", items: [
+					{ ProductName: "Level3 1" },
+					{ ProductName: "Level3 2" }
+				]}
+			]},
+			{ ProductName: "Root2", items: [
+				{ ProductName: "Level2 1" }
+			]}
+		];
+	  
+		$("#panelbar").kendoPanelBar({
+			dataTextField: "ProductName",
+			dataSource: items,
+			expandMode: "single"
+		});
+	</script>
+
+
 ### PanelBar Animations
 
 By default, a PanelBar uses animations to expand and reveal sub-items when an item header is clicked. These animations can be modified in configuration via the open and close animation properties. A PanelBar can also be configured to only allow one panel be opened at a time.

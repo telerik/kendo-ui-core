@@ -10305,6 +10305,8 @@ Fired when the user collapses a group row.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+Introduced in the Kendo UI 2017 R3 (2017.3.913) release.
+
 #### Event Data
 
 ##### e.element `jQuery`
@@ -10370,6 +10372,8 @@ The widget instance which fired the event.
 Fired when the user expands a group row.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+Introduced in the Kendo UI 2017 R3 (2017.3.913) release.
 
 #### Event Data
 

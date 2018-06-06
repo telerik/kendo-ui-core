@@ -62,6 +62,60 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
             )
     ```
 
+### Expand Mode
+
+The PanelBar can be configured to use `Single` or `Multiple` expand mode. If the `ExpandMode` configuration option of the PanelBar is set to:
+
+* `Single` - only a single root item or a single child item of a specific parent item can be expanded at a time. Expanding another root item or another child item of the currently expanded item's parent collapses the currently expanded item. This is also the only way to collapse an expanded item in `single` expand mode. 
+* `Multiple` - multiple root items or children of the same parent item can be expanded at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them. 	
+
+    ###### Example
+
+    ```tab-Razor
+
+            @(Html.Kendo().PanelBar()
+                .Name("panelbar")
+                .ExpandMode(PanelBarExpandMode.Single)
+                .Items(items =>
+                {
+                    items.Add().Text("Root1")
+                        .Items(subitems =>
+                        {
+                            subitems.Add().Text("Level2 1");
+                            subitems.Add().Text("Level2 2");
+                        });
+                    items.Add().Text("Root2")
+                        .Items(subitems =>
+                        {
+                            subitems.Add().Text("Level2 1");
+                            subitems.Add().Text("Level2 2");
+                        });
+                })
+            )
+    ```
+	```tab-ASPX
+
+            <%: Html.Kendo().PanelBar()
+                .Name("panelbar") 
+                .ExpandMode(PanelBarExpandMode.Single)
+                .Items(items =>
+                {
+                    items.Add().Text("Root1")
+                        .Items(subitems =>
+                        {
+                            subitems.Add().Text("Level2 1");
+                            subitems.Add().Text("Level2 2");
+                        });
+                    items.Add().Text("Root2")
+                        .Items(subitems =>
+                        {
+                            subitems.Add().Text("Level2 1");
+                            subitems.Add().Text("Level2 2");
+                        });
+                })
+            %>
+    ```
+
 ### Sitemap Binding
 
 Below are listed the steps for you to follow when binding a Kendo UI PanelBar to a sitemap.
