@@ -581,9 +581,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         remove: function(pane) {
-            pane = $(pane);
-
             var that = this;
+            pane = that.wrapper.find(pane);
 
             if (pane.length) {
                 kendo.destroy(pane);

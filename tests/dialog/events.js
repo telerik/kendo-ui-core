@@ -219,4 +219,32 @@
         dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ESC);
         ok(!dialog.options.visible);
     });
+
+    test("enter key on action button runs action only once", 1, function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "ok",
+                action: function() {
+                    ok(true);
+                }
+            }]
+        });
+
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ENTER);
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+    });
+
+    test("SPACEBAR key on action button runs action only once", 1, function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "ok",
+                action: function() {
+                    ok(true);
+                }
+            }]
+        });
+
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.SPACEBAR);
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+    });
 })();

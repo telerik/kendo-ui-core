@@ -524,4 +524,19 @@
         ok(args.length == 1 && args[0] === true);
     });
 
+    test("remove() removes a pane element only from the current instance", function() {
+        var splitter = create({
+            panes: [{}, {}, {}]
+        }, 3);
+
+        var splitter2 = create({
+            panes: [{}, {}]
+        }, 2);
+
+        splitter.object.remove(splitter.dom.children(".k-pane:first"));
+
+        equal(splitter.dom.children(".k-pane").length, 2);
+        equal(splitter2.dom.children(".k-pane").length, 2);
+    });
+
 })();
