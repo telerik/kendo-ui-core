@@ -3619,6 +3619,26 @@ Adjusts the diagram size to match the size of the container.
 
 Saves the diagram.
 
+### saveAsPdf
+
+Saves the diagram content as PDF document.
+
+#### Returns
+`Promise` A promise that will be resolved when the export completes.
+
+#### Example - Exporting a diagram to a PDF document
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1"
+        }]
+      });
+      var diagram = $("#diagram").getKendoDiagram();
+      diagram.saveAsPDF();
+    </script>
+
 ### saveEdit
 
 Saves any changes made by the user.

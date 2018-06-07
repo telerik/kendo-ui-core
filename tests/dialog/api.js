@@ -271,7 +271,7 @@
             }]
         });
 
-        dialog.wrapper.find(".k-button").click();
+        dialog.wrapper.find(".k-button-group .k-button").click();
     });
 
     test("clicking on an element in the button triggers action method", function() {
