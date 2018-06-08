@@ -24,7 +24,7 @@ The following example demonstrates how to define the Upload by using the Upload 
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
-        .Save("Save", "Upload")
+        .Save("SaveAsync", "Upload")
         .Remove("Remove", "Upload")
         .AutoUpload(true)
     )
@@ -46,28 +46,31 @@ public class UploadController : Controller
 		return View();
 	}
 
-	public ActionResult Save(IEnumerable<IFormFile> files)
-	{
-		// The Name of the Upload component is "files"
-		if (files != null)
-		{
-			foreach (var file in files)
-			{
-				var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+	public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
+    {
+        // The Name of the Upload component is "files"
+        if (files != null)
+        {
+            foreach (var file in files)
+            {
+                var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
-				// Some browsers send file names with full path.
-				// We are only interested in the file name.
-				var fileName = Path.GetFileName(fileContent.FileName.Trim('"'));
-				var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+                // Some browsers send file names with full path.
+                // We are only interested in the file name.
+                var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
+                var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
-				// The files are not actually saved in this demo
-				//file.SaveAs(physicalPath);
-			}
-		}
+                // The files are not actually saved in this demo
+                using (var fileStream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+            }
+        }
 
-		// Return an empty string to signify success
-		return Content("");
-	}
+        // Return an empty string to signify success
+        return Content("");
+    }
 
 	public ActionResult Remove(string[] fileNames)
 	{

@@ -1479,13 +1479,15 @@ var __meta__ = { // jshint ignore:line
                 if ((keyCode === keys.SPACEBAR || keyCode === keys.ENTER) && !target.is("input, checkbox")) {
 
                     if(keyCode === keys.SPACEBAR){
-                        e.preventDefault(); //prevent pspacebar to scroll the page down
+                        e.preventDefault(); //prevent spacebar to scroll the page down
                     }
 
                     if (target.is("." + SPLIT_BUTTON)) {
                         target = target.children().first();
+                        this.userEvents.trigger("tap", { target: target });
+                    } else if (keyCode === keys.SPACEBAR) {
+                        this.userEvents.trigger("tap", { target: target });
                     }
-                    this.userEvents.trigger("tap", { target: target });
 
                     return;
                 }

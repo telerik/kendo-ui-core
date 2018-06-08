@@ -9,13 +9,13 @@
             kendo.effects.disable();
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
 
-            $.fn.press = function (key, shiftKey, altKey) {
+            $.fn.press = function (key, shiftKey, altKey, target) {
                 $(this).trigger({
                     type: "keydown",
                     keyCode: key,
                     shiftKey: shiftKey,
                     altKey: altKey,
-                    target: this
+                    target: target || this
                 });
             };
 
@@ -36,6 +36,31 @@
                 container.kendoToolBar("destroy");
             }
         }
+    });
+
+    test("select and enter on split button", 1, function() {
+        var flag = 0;
+        var toolbar = container.kendoToolBar({
+            items: [
+                {
+                    type: "splitButton",
+                    id: "mainButton",
+                    text: "Split Button",
+                    menuButtons: [
+                        { text: "Action 1", id: "action1" },
+                        { text: "Action 2", id: "action2" },
+                        { text: "Action 3", id: "action3" }
+                    ]
+                }
+            ],
+            click: function () {
+                flag++
+            }
+        });
+
+        container.focus();
+        container.press(keys.ENTER, null, null, container.find(".k-split-button"));
+        equal(flag, 1)
     });
 
     test("focuses first tool if it is a button", 1, function() {
