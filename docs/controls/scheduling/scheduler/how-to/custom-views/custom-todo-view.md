@@ -4,6 +4,7 @@ page_title: Create Custom To-Do Views | Kendo UI Scheduler
 description: "Learn how to create a custom To-Do view for a Kendo UI Scheduler."
 previous_url: /controls/scheduling/scheduler/how-to/custom-todo-view
 slug: howto_create_custom_todo_view
+position: 4
 ---
 
 # Create Custom To-Do Views

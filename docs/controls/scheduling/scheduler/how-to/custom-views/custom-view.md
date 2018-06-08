@@ -4,6 +4,7 @@ page_title: Create Custom Views by Inheriting Built-In Views | Kendo UI Schedule
 description: "Learn how to inherit some of the built-in views and implement specific custom logic in a Kendo UI Scheduler widget."
 previous_url: /controls/scheduling/scheduler/how-to/custom-view
 slug: howto_create_custom_view_inheriting_builtinview_scheduler
+position: 2
 ---
 
 # Create Custom Views by Inheriting Built-In Views
@@ -15,38 +16,35 @@ The following example demonstrates how to inherit some of the built-in views and
 ```html
     <div id="scheduler"></div>
     <script>
-        var CustomAgenda = kendo.ui.AgendaView.extend({
-            endDate: function() {
-              var date = kendo.ui.AgendaView.fn.endDate.call(this);
-              return kendo.date.addDays(date, 31);
-            }
-        });
+      var CustomAgenda = kendo.ui.AgendaView.extend({
+        endDate: function() {
+          var date = kendo.ui.AgendaView.fn.endDate.call(this);
+          return kendo.date.addDays(date, 31);
+        }
+      });
 
-        var ThreeDayView = kendo.ui.MultiDayView.extend({
-              nextDate: function () {
-                  return kendo.date.nextDay(this.startDate());
-              },
+      var ThreeDayView = kendo.ui.MultiDayView.extend({
+        nextDate: function () {
+          return kendo.date.nextDay(this.startDate());
+        },
+        options: {
+          selectedDateFormat: "{0:D} - {1:D}"
+        },
+        name: "ThreeDayView",
+        calculateDateRange: function () {
+          //create a range of dates to be shown within the view
+          var start = this.options.date,
+            idx, length,
+            dates = [];
 
-              options: {
-                  selectedDateFormat: "{0:D} - {1:D}"
-              },
+          for (idx = 0, length = 3; idx < length; idx++) {
+            dates.push(start);
+            start = kendo.date.nextDay(start);
+          }
 
-              name: "ThreeDayView",
-
-              calculateDateRange: function () {
-                  //create a range of dates to be shown within the view
-                  var start = this.options.date,
-                      idx, length,
-                      dates = [];
-
-                  for (idx = 0, length = 3; idx < length; idx++) {
-                      dates.push(start);
-                      start = kendo.date.nextDay(start);
-                  }
-
-                  this._render(dates);
-              }
-        });
+          this._render(dates);
+        }
+      });
 
       $(function() {
         $("#scheduler").kendoScheduler({
@@ -54,12 +52,12 @@ The following example demonstrates how to inherit some of the built-in views and
           startTime: new Date("2013/6/13 07:00 AM"),
           height: 600,
           views: [
-          "day",
-              { type: "week", selected: true },
-              // "custom week",
-              { type: "ThreeDayView", title: "Three day view" },
-              // "custom agenda",
-              { type: "CustomAgenda", title: "Custom Agenda" }
+            "day",
+            "week",
+            // "custom week",
+            { type: "ThreeDayView", title: "Three day view", selected: true },
+            // "custom agenda",
+            { type: "CustomAgenda", title: "Custom Agenda" }
           ],
           timezone: "Etc/UTC",
           dataSource: {
@@ -105,59 +103,8 @@ The following example demonstrates how to inherit some of the built-in views and
                   isAllDay: { type: "boolean", from: "IsAllDay" }
                 }
               }
-            },
-            filter: {
-              logic: "or",
-              filters: [
-                { field: "ownerId", operator: "eq", value: 1 },
-                { field: "ownerId", operator: "eq", value: 2 }
-              ]
             }
-          },
-          resources: [
-            {
-              field: "ownerId",
-              title: "Owner",
-              dataSource: [
-                { text: "Alex", value: 1, color: "#f8a398" },
-                { text: "Bob", value: 2, color: "#51a0ed" },
-                { text: "Charlie", value: 3, color: "#56ca85" }
-              ]
-            }
-          ],
-          edit: function(e) {
-                var container = e.container;
-
-                /* ACTION: ADD custom button */
-                var newButton = $('<a class="k-button" href="#">New button</a>');
-
-                //wire its click event
-                newButton.click(function(e) { alert("Clicked"); });
-
-                //add the button to the container
-                var buttonsContainer = container.find(".k-edit-buttons");
-                buttonsContainer.append(newButton);
-
-                /* ACTION: Accessing dropdownlist widget */
-                container.find("[data-container-for=ownerId]")
-                .find("[data-role=dropdownlist]")
-                .data("kendoDropDownList")
-                .wrapper.width("400px");
           }
-        });
-
-        $("#people :checkbox").change(function(e) {
-          var checked = $.map($("#people :checked"), function(checkbox) {
-            return parseInt($(checkbox).val());
-          });
-
-          var scheduler = $("#scheduler").data("kendoScheduler");
-
-          scheduler.dataSource.filter({
-            operator: function(task) {
-              return $.inArray(task.ownerId, checked) >= 0;
-            }
-          });
         });
       });
     </script>

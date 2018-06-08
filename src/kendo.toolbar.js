@@ -1484,9 +1484,8 @@ var __meta__ = { // jshint ignore:line
 
                     if (target.is("." + SPLIT_BUTTON)) {
                         target = target.children().first();
-                    }
-
-                    if (keyCode === keys.SPACEBAR) {
+                        this.userEvents.trigger("tap", { target: target });
+                    } else if (keyCode === keys.SPACEBAR) {
                         this.userEvents.trigger("tap", { target: target });
                     }
 

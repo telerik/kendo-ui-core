@@ -4,6 +4,7 @@ page_title: Create Custom Month Views with Event Count in the Show More Button |
 description: "Learn how to inherit some of the built-in views and implement specific custom logic in a Kendo UI Scheduler."
 previous_url: /controls/scheduling/scheduler/how-to/custom-month-view-with-event-count-in-show-more-button
 slug: howto_create_custom_monthview_eventcount_showmore_button_scheduler
+position: 3
 ---
 
 # Create Custom Month Views with Event Count in the Show More Button
@@ -16,12 +17,12 @@ The following example demonstrates how to inherit the built-in Month view and im
     <div id="scheduler"></div>
     <script>
         var MORE_BUTTON_TEMPLATE = kendo.template(
-            '<div style="width:#=width#px;left:#=left#px;top:#=top#px" class="k-more-events k-button"><span style="font-size:8pt; margin-top: 0;"> #=getEventCountForRange(startSlot, endSlot, rowsCount)# more events..</span></div>');
-
+            '<div style="width:#=width#px;left:#=left#px;top:#=top#px"' +
+            'class="k-more-events k-button"><span style="font-size:8pt; margin-top: 0;">' +
+            '#=getEventCountForRange(startSlot, endSlot, rowsCount)# more events..</span></div>');
 
         function getEventCountForRange(startSlot, endSlot, rowsCount) {
             var scheduler = $(startSlot.element).closest("[data-role=scheduler]").getKendoScheduler();
-
             var currentTimezoneOffset = kendo.date.MS_PER_MINUTE * new Date().getTimezoneOffset();
             var rangeStart = new Date(startSlot.start + currentTimezoneOffset);
             var rangeEnd = new Date(endSlot.end + currentTimezoneOffset);
@@ -66,7 +67,6 @@ The following example demonstrates how to inherit the built-in Month view and im
                     }
                 }
 
-
                 if (rows.length > eventCount) {
                     for (var slotIndex = startIndex; slotIndex <= endIndex; slotIndex++) {
                         var collection = slotRange.collection;
@@ -88,7 +88,6 @@ The following example demonstrates how to inherit the built-in Month view and im
                             left: slot.offsetLeft + 2,
                             top: slot.offsetTop + slot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
                         }));
-
 
                         this.content[0].appendChild(slot.more[0]);
                     }
@@ -122,9 +121,8 @@ The following example demonstrates how to inherit the built-in Month view and im
                 date: new Date("2013/6/13"),
                 startTime: new Date("2013/6/13 07:00 AM"),
                 height: 600,
-                views: [{
-                        type: "CustomMonthView"
-                    },
+                views: [
+                    { type: "CustomMonthView", selected: true },
                     "day"
                 ],
                 timezone: "Etc/UTC",
@@ -159,94 +157,23 @@ The following example demonstrates how to inherit the built-in Month view and im
                         model: {
                             id: "taskId",
                             fields: {
-                                taskId: {
-                                    from: "TaskID",
-                                    type: "number"
-                                },
-                                title: {
-                                    from: "Title",
-                                    defaultValue: "No title",
-                                    validation: {
-                                        required: true
-                                    }
-                                },
-                                start: {
-                                    type: "date",
-                                    from: "Start"
-                                },
-                                end: {
-                                    type: "date",
-                                    from: "End"
-                                },
-                                startTimezone: {
-                                    from: "StartTimezone"
-                                },
-                                endTimezone: {
-                                    from: "EndTimezone"
-                                },
-                                description: {
-                                    from: "Description"
-                                },
-                                recurrenceId: {
-                                    from: "RecurrenceID"
-                                },
-                                recurrenceRule: {
-                                    from: "RecurrenceRule"
-                                },
-                                recurrenceException: {
-                                    from: "RecurrenceException"
-                                },
-                                ownerId: {
-                                    from: "OwnerID",
-                                    defaultValue: 1
-                                },
-                                isAllDay: {
-                                    type: "boolean",
-                                    from: "IsAllDay"
-                                }
+                                taskId: { from: "TaskID", type: "number" },
+                                title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                                start: { type: "date", from: "Start" },
+                                end: { type: "date", from: "End" },
+                                startTimezone: { from: "StartTimezone" },
+                                endTimezone: { from: "EndTimezone" },
+                                description: { from: "Description" },
+                                recurrenceId: { from: "RecurrenceID" },
+                                recurrenceRule: { from: "RecurrenceRule" },
+                                recurrenceException: { from: "RecurrenceException" },
+                                ownerId: { from: "OwnerID", defaultValue: 1 },
+                                isAllDay: { type: "boolean", from: "IsAllDay" }
                             }
                         }
-                    },
-                    filter: {
-                        logic: "or",
-                        filters: [{
-                            field: "ownerId",
-                            operator: "eq",
-                            value: 1
-                        }, {
-                            field: "ownerId",
-                            operator: "eq",
-                            value: 2
-                        }]
                     }
-                },
-                resources: [{
-                    field: "ownerId",
-                    title: "Owner",
-                    dataSource: [{
-                        text: "Alex",
-                        value: 1,
-                        color: "#f8a398"
-                    }, {
-                        text: "Bob",
-                        value: 2,
-                        color: "#51a0ed"
-                    }, {
-                        text: "Charlie",
-                        value: 3,
-                        color: "#56ca85"
-                    }]
-                }]
+                }
             }).data("kendoScheduler");
-
-            $("#days").change(function() {
-                //change the number of days option of the view
-                scheduler.setOptions({
-                    numberOfDays: parseInt($(this).val())
-                });
-                //reload the view
-                scheduler.view(scheduler.view().name);
-            });
         });
     </script>
 ```
