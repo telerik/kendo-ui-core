@@ -21,7 +21,7 @@ The following example uses the [Microsoft Bot Framework](https://dev.botframewor
 <div id="chat"></div>
 
 <!-- Load Bot Framework Client API -->
-<script src="http://unpkg.com/botframework-directlinejs/directLine.js"></script>
+<script src="https://unpkg.com/botframework-directlinejs/directLine.js"></script>
 
 <script>
   $(document).ready(function () {

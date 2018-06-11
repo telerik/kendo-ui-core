@@ -509,4 +509,42 @@
         jasmine.clock().uninstall();
     });
 
+
+
+    asyncTest("deselecting item persists scroll position", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            autoClose: false,
+            height: CONTAINER_HEIGHT,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+            multiselect.listView.content.scrollTop(4 * CONTAINER_HEIGHT);
+
+            setTimeout(function() {
+                start();
+                var scrollPosition;
+
+                //selects the item
+                multiselect.ul.children().last().click();
+
+                scrollPosition = multiselect.listView.content.scrollTop();
+
+                //deselects the item
+                multiselect.ul.children().last().click();
+
+                equal(multiselect.listView.content.scrollTop(), scrollPosition);
+            }, 300);
+        });
+
+    });
 })();

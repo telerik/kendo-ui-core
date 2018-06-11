@@ -8355,6 +8355,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
 #### Returns
+
 `Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/grid/events/pdfexport) event arguments.
 
 #### Example - manually initiate PDF export

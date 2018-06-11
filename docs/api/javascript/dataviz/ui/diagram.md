@@ -3302,6 +3302,7 @@ See [crossorigin attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/El
 for more details.
 
 #### Returns
+
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
 
 #### Example - Exporting a diagram to an image
@@ -3341,6 +3342,7 @@ The promise will be resolved with a PDF file encoded as a [Data URI](https://dev
 Parameters for the exported PDF file.
 
 #### Returns
+
 `Promise` A promise that will be resolved with a PDF file encoded as a Data URI.
 
 #### Example - Exporting a diagram to a PDF file
@@ -3624,6 +3626,7 @@ Saves the diagram.
 Saves the diagram content as PDF document.
 
 #### Returns
+
 `Promise` A promise that will be resolved when the export completes.
 
 #### Example - Exporting a diagram to a PDF document

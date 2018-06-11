@@ -4,6 +4,7 @@ page_title: Implement Custom Timeline View with Dynamic Length | Kendo UI Schedu
 description: "Learn how to implement a custom `timeline` view in a Kendo UI Scheduler widget, which allows to change its length dynamically."
 previous_url: /controls/scheduling/scheduler/how-to/timeline-with-dynamic-length
 slug: howto_implementcustomtimeline_withdynamiclength_scheduler
+position: 5
 ---
 
 # Implement Custom Timeline View with Dynamic Length
@@ -13,12 +14,15 @@ The following example demonstrates how to implement a custom Timeline view in a 
 ###### Example
 
 ```html
-    Number of shown days: <select id="days">
-                            <option>6</option>
-                            <option selected>7</option>
-                            <option>8</option>
-                          </select>
+    Number of shown days:
+    <select id="days">
+      <option>6</option>
+      <option selected>7</option>
+      <option>8</option>
+    </select>
+
     <div id="scheduler"></div>
+
     <script>
         var MyCustomTimelistView = kendo.ui.TimelineMonthView.extend({
           options: {
@@ -32,21 +36,20 @@ The following example demonstrates how to implement a custom Timeline view in a 
           name: "MyCustomTimelistView",
           calculateDateRange: function() {
             //create the required number of days
-
             var start = this.options.date,
-                //  start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
-                idx, length,
-                dates = [];
+              //  start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
+              idx, length,
+              dates = [];
 
             for (idx = 0, length = this.options.numberOfDays; idx < length; idx++) {
               dates.push(start);
               start = kendo.date.nextDay(start);
             }
+
             this._render(dates);
           },
           previousDate: function() {
             var date = new Date(this.startDate());
-
             date.setDate(date.getDate() - this.options.numberOfDays);
 
             return date
@@ -59,9 +62,9 @@ The following example demonstrates how to implement a custom Timeline view in a 
           startTime: new Date("2013/6/13 07:00 AM"),
           height: 600,
           views: [{
-             type: "MyCustomTimelistView",
-             selected: true,
-             dateHeaderTemplate: "<span class='k-link k-nav-day'>#=kendo.toString(date, ' dd/M ddd')#</span>"
+            type: "MyCustomTimelistView",
+            selected: true,
+            dateHeaderTemplate: "<span class='k-link k-nav-day'>#=kendo.toString(date, ' dd/M ddd')#</span>"
           }],
           timezone: "Etc/UTC",
           dataSource: {
@@ -107,26 +110,8 @@ The following example demonstrates how to implement a custom Timeline view in a 
                   isAllDay: { type: "boolean", from: "IsAllDay" }
                 }
               }
-            },
-            filter: {
-              logic: "or",
-              filters: [
-                { field: "ownerId", operator: "eq", value: 1 },
-                { field: "ownerId", operator: "eq", value: 2 }
-              ]
             }
-          },
-          resources: [
-            {
-              field: "ownerId",
-              title: "Owner",
-              dataSource: [
-                { text: "Alex", value: 1, color: "#f8a398" },
-                { text: "Bob", value: 2, color: "#51a0ed" },
-                { text: "Charlie", value: 3, color: "#56ca85" }
-              ]
-            }
-          ]
+          }
         }).data("kendoScheduler");
 
         $("#days").change(function() {
