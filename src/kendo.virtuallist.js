@@ -876,6 +876,7 @@ var __meta__ = { // jshint ignore:line
         select: function(candidate) {
             var that = this,
                 indices,
+                initialIndices,
                 singleSelection = that.options.selectable !== "multiple",
                 prefetchStarted = isActivePromise(that._activeDeferred),
                 filtered = this.isFiltered(),
@@ -910,6 +911,7 @@ var __meta__ = { // jshint ignore:line
                 indices = [];
             }
 
+            initialIndices = indices;
             result = that._deselect(indices);
             removed = result.removed;
             indices = result.indices;
@@ -924,7 +926,10 @@ var __meta__ = { // jshint ignore:line
             var done = function() {
                 var added = that._select(indices);
 
-                that.focus(indices);
+                if (initialIndices.length === indices.length || singleSelection) {
+                    that.focus(indices);
+                }
+
                 that._triggerChange(removed, added);
 
                 if (that._valueDeferred) {

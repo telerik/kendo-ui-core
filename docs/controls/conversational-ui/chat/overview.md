@@ -10,8 +10,6 @@ position: 1
 
 The [Kendo UI Chat](http://demos.telerik.com/kendo-ui/chat/index) widget allows the user to participate in chat sessions with other users or with chat bots.
 
-For additional information on new Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
-
 ## Getting Started
 
 ### Create the Chat

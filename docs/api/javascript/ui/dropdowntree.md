@@ -1467,50 +1467,6 @@ The widget instance which fired the event.
     dropdowntree.bind("change", dropdowntree_change);
     </script>
 
-### clear
-
-Fired when the value of the widget is cleared by the user.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-> **Important:** The event is not fired when the value of widget is cleared programatically.
-
-#### Event Data
-
-##### e.sender `kendo.ui.DropDownTree`
-
-The widget instance which fired the event.
-
-#### Example - subscribe to the "clear" event during initialization
-
-    <input id="dropdowntree"/>
-
-    <script>
-    $("#dropdowntree").kendoDropDownTree({
-      dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }],
-      clear: function(e) {
-        var value = this.value();
-        // Use the value of the widget
-      }
-    });
-    </script>
-
-#### Example - subscribe to the "change" event after initialization
-
-    <input id="dropdowntree" />
-
-    <script>
-        function dropdowntree_clear(e) {
-            var value = this.value();
-            // Use the value of the widget
-        }
-        $("#dropdowntree").kendoDropDownTree({
-            dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }]
-        });
-        var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
-        dropdowntree.bind("clear", dropdowntree_clear);
-    </script>
-
 ### close
 
 Fired when the popup of the widget is closed.

@@ -1,5 +1,5 @@
 ---
-title: Overview of How to Create Custom View
+title: Overview
 page_title: Create Custom View Overview | Kendo UI Scheduler
 description: "Learn how to create a custom view for a Kendo UI Scheduler."
 previous_url: /controls/scheduling/scheduler/how-to/howto-scheduler-customview-overview
@@ -9,7 +9,9 @@ position: 1
 
 # Scheduler Custom Views Overview
 
-To implement a Custom Scheduler view you will need to extend (inherit from) one of the existing Scheduler views. In order to understand better the structure and the functionality of each predefined view, you will also have to review the Scheduler views source code. The following are the source files which contain the views implementation:
+With the ability to extend the default Scheduler View classes you can create your own customized view covering your specific requirements.
+
+To implement a Custom Scheduler View you will need to extend (inherit from) one of the existing Scheduler views. In order to understand better the structure and the functionality of each predefined view, you will also have to review the Scheduler views source code. The following are the source files which contain the views implementation:
 
 * `kendo.scheduler.view.js` - contains the basic Scheduler view logic. Each of the other predefined views extends the `kendo.ui.SchedulerView` class;
 * `kendo.scheduler.dayview.js` - contains the logic implementing the `MultiDayView`. The `MultiDayView` class is further extended to create the `DayView`, the `WeekView` and the `WorkWeekView`;
