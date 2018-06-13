@@ -48,7 +48,7 @@ For more similar issues, refer to the [article on troubleshooting in Kendo UI fo
 
 1. If the application is using ASP.NET bundles, make sure that the `Scripts.Render("~/bundles/jquery")` block appears before the Kendo UI JavaScript files. If not, do not include jQuery as a `script` element.
 
-### The System.Web.Mvc Versions Referenced in the Application and Which Kendo.Mvc.dll Uses Differ
+### The System.Web.Mvc Versions Referenced in the Application and Used by Kendo.Mvc.dll Are Different
 
 `Kendo.Mvc.dll` is regularly updated to support the latest ASP.NET MVC 5 version. If you try to use the latest version of Telerik UI for ASP.NET MVC in an ASP.NET MVC 5 application that uses an older version of `System.Web.Mvc`, an exception is thrown saying that the versions of the `System.Web.Mvc` do not match.
 

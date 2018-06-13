@@ -228,7 +228,7 @@ Specifies the text of the ButtonGroup item.
 
 ### items.encoded `Boolean` *(default: true)*
 
-Specifies is text field of the ButtonGroup item should be encoded.
+Specifies if text field of the ButtonGroup item should be encoded.
 
 #### Example
 
