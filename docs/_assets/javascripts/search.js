@@ -116,7 +116,7 @@ function attachToEvents() {
         }
     })
 
-    var oldSearchButton = $('.gsc-search-button input[type="image"].gsc-search-button.gsc-search-button-v2');
+    var oldSearchButton = $('.gsc-search-button button.gsc-search-button.gsc-search-button-v2');
     var newSearchButton = oldSearchButton.clone();
     oldSearchButton.replaceWith(newSearchButton);
     newSearchButton.click(function (e) {
