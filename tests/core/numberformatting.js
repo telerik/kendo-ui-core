@@ -24,6 +24,11 @@ test("if not toString should return number.toString()", function() {
     equal(toString(10.1), "10.1");
 });
 
+test("custom and standard formatting should match", function() {
+    equal(toString(-1.5, '0'), "-1");
+    equal(toString(-1.5, 'n0'), "-1");
+});
+
 //positive custom toString
 test("replace toString with whole part of the number", function() {
     equal(toString(10.9, "$ #"), "$ 11");

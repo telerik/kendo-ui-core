@@ -783,11 +783,6 @@ function pad(number, digits, end) {
         //
         //separate format by sections.
 
-        //make number positive
-        if (negative) {
-            number = -number;
-        }
-
         if (format.indexOf("'") > -1 || format.indexOf("\"") > -1 || format.indexOf("\\") > -1) {
             format = format.replace(literalRegExp, function (match) {
                 var quoteChar = match.charAt(0).replace("\\", ""),
@@ -875,14 +870,10 @@ function pad(number, digits, end) {
                     idx = zeroIndex;
                 }
             }
+        } 
 
-            if (idx > -1) {
-                number = round(number, idx);
-            }
-        } else {
-            number = round(number);
-        }
-
+        number = round(number, idx, negative);
+        
         sharpIndex = format.indexOf(SHARP);
         startZeroIndex = zeroIndex = format.indexOf(ZERO);
 
@@ -1033,11 +1024,15 @@ function pad(number, digits, end) {
         return number;
     };
 
-    var round = function(value, precision) {
+    var round = function(value, precision, negative) {
         precision = precision || 0;
 
         value = value.toString().split('e');
         value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + precision) : precision)));
+
+        if (negative) {
+            value = -value;
+        }
 
         value = value.toString().split('e');
         value = +(value[0] + 'e' + (value[1] ? (+value[1] - precision) : -precision));

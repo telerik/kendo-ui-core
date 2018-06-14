@@ -2046,7 +2046,8 @@ var __meta__ = { // jshint ignore:line
                     serializeGetters = {},
                     fieldNames = {},
                     shouldSerialize = false,
-                    fieldName;
+                    fieldName,
+                    name;
 
                 model = that.model;
 
@@ -2067,8 +2068,8 @@ var __meta__ = { // jshint ignore:line
                         }
 
                         shouldSerialize = shouldSerialize || (fromName && fromName !== field) || fieldName !== field;
-
-                        getters[field] = getter(fromName || fieldName);
+                        name = fromName || fieldName;
+                        getters[field] = name.indexOf(".") !== -1 ? getter(name, true) : getter(name);
                         serializeGetters[field] = getter(field);
                         originalFieldNames[fromName || fieldName] = field;
                         fieldNames[field] = fromName || fieldName;

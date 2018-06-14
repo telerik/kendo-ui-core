@@ -492,7 +492,7 @@ var __meta__ = { // jshint ignore:line
             return;
         }
 
-        var form  = $(widget.element).parents("form");
+        var form  = $(widget.element).parents("ng-form, form").first();
         var ngForm = kendo.getter(form.attr("name"), true)(scope);
         var getter = $parse(kNgModel);
         var setter = getter.assign;

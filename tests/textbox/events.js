@@ -133,4 +133,19 @@
         textbox._blur();
         equal(calls, 1);
     });
+
+    test("Spin event is not fired if value is not altered", 1, function() {
+        var calls = 0;
+        var textbox = new NumericTextBox(input, {
+            value: 50,
+            step: 0,
+            spin: function() {
+                calls++;
+            }
+        });
+
+        textbox._step(1);
+
+        equal(calls, 0);
+    });
 })();
