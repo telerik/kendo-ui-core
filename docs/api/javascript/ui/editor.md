@@ -4294,6 +4294,10 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 Gets the HTML encoded value of the editor.
 
+#### Returns
+
+`String` The value of the Editor as HTML encoded string.
+
 #### Example
 
     <textarea id="editor"></textarea>
