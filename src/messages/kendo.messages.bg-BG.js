@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function ($, undefined) { 
 /* Validator */
 if (kendo.ui.Validator) {
 kendo.ui.Validator.prototype.options.messages =

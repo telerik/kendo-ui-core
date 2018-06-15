@@ -1787,7 +1787,7 @@ var __meta__ = { // jshint ignore:line
 
     function bindElement(element, source, roles, parents) {
 
-        if(!element){
+        if(!element || element.getAttribute("data-" + kendo.ns + "stop")){
             return;
         }
 
