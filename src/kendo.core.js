@@ -2056,7 +2056,7 @@ function pad(number, digits, end) {
             var browser = false, match = [],
                 browserRxs = {
                     edge: /(edge)[ \/]([\w.]+)/i,
-                    webkit: /(chrome)[ \/]([\w.]+)/i,
+                    webkit: /(chrome|crios)[ \/]([\w.]+)/i,
                     safari: /(webkit)[ \/]([\w.]+)/i,
                     opera: /(opera)(?:.*version|)[ \/]([\w.]+)/i,
                     msie: /(msie\s|trident.*? rv:)([\w.]+)/i,

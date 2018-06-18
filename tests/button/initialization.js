@@ -114,6 +114,32 @@
         ok(button.hasClass("k-button-icontext"));
     });
 
+    test("iconClass prepends a span element with corresponding class(es)", function() {
+        getButton().kendoButton({
+            iconClass: "fa fa-test"
+        });
+
+        var icon = button.data("kendoButton").element.children("span");
+
+        equal(icon.attr("class"), "fa fa-test");
+    });
+
+    test("iconClass adds a k-button-icontext class if button has content", function() {
+        getButton().kendoButton({
+            iconClass: "fa fa-test"
+        });
+
+        ok(button.hasClass("k-button-icontext"));
+    });
+
+    test("iconClass adds a k-button-icon class to empty button", function() {
+        getButton("").kendoButton({
+            iconClass: "fa fa-test"
+        });
+
+        ok(button.hasClass("k-button-icon"));
+    });
+
     test("imageUrl prepends an img element with src attribute", function() {
         getButton().kendoButton({
             imageUrl: "foo"

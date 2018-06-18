@@ -48,6 +48,21 @@ For a list of available icon names, please refer to the [Icons demo](http://demo
 	});
 	</script>
 
+
+### iconClass `String`
+
+Defines a CSS class—or multiple classes separated by spaces— which are applied to a `span` element inside the **Button**. Allows the usage of custom icons.
+
+#### Example
+
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+	<button id="button" type="button">Cancel</button>
+	<script>
+	$("#button").kendoButton({
+		iconClass: "fa fa-male"
+	});
+	</script>
+
 ### imageUrl `String`
 
 Defines a URL, which will be used for an `img` element inside the Button. The URL can be relative or absolute. In case it is relative, it will be evaluated with relation to the web page URL.
@@ -156,5 +171,5 @@ The original DOM event.
 	var button = $("#button").data("kendoButton");
 	button.bind("click", function(e) {
 		alert(e.event.target.tagName);
-	});	
+	});
 	</script>

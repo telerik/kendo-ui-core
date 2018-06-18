@@ -1,8 +1,8 @@
 ---
 title: Show DataItem Property as Command Button Text
-description: An example demonstrating how to display the value of a DataItem's property in a Grid's custom command button
+description: An example on how to display the value of a DataItem property in a custom command button of the Kendo UI Grid.
 type: how-to
-page_title: Show DataItem Property as Text in Grid's Custom Command | Kendo UI Grid
+page_title: Show DataItem Property as Text in Custom Command Button | Kendo UI Grid
 slug: grid-command-button-text-dataitem-property
 tags: grid, command, button, custom, text, value, dataitem, property, data, item
 ticketid: 1157637
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -24,11 +25,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid and would like to add a column, displaying custom command buttons, where their text corresponds to a property of the row's DataItem.
+How can I add a column with custom command buttons in which the text corresponds to a property of the row DataItem?
 
 ## Solution
 
-The described functionality can be implemented by adding a custom command column and going through every row during the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event in order to change its custom command text.
+1. Add a custom command column.
+1. Go through every row during the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event to change its custom command text.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
@@ -143,8 +145,6 @@ The described functionality can be implemented by adding a custom command column
 </div>
 ```
 
-
-
 ## See Also
 
-* [Custom Command Column Grid Demo.](https://demos.telerik.com/kendo-ui/grid/custom-command)
+* [Demo on Custom Command Columns in the Grid](https://demos.telerik.com/kendo-ui/grid/custom-command)

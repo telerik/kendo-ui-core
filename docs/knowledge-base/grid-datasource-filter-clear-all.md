@@ -1,8 +1,8 @@
 ---
 title: Clear All Filters
-description: An example which demonstrates how to programmatically clear all applied filters in a Kendo Grid
+description: An example on how to programmatically clear all applied filters in a Kendo UI Grid.
 type: how-to
-page_title: Remove Grid's DataSource Filters | Kendo UI Grid
+page_title: Remove DataSource Filters | Kendo UI Grid
 slug: grid-datasource-filter-clear-all
 tags: grid, datasource, filter, clear, all
 ticketid: 1167921
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,16 +24,17 @@ res_type: kb
 
 ## Description
 
-I have a Kendo Grid where I would like to clear all filters for all columns.      
+How can I clear all filters for all Grid columns?      
 
 ## Solution
 
-To remove all filtering from a Kendo UI Grid, use the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method to set the Grid's dataSource [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter) object as empty. 
+Set the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter) object of the Grid dataSource as empty by using the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method.
+
 ```js
     $("#grid").data("kendoGrid").dataSource.filter({});
 ```
 
-The following demonstrates this using an external Kendo UI Button's [`click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event:
+The following example demonstrates how to use a [`click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of an external Kendo UI Button.
 
 ```html
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -92,5 +94,5 @@ The following demonstrates this using an external Kendo UI Button's [`click`](ht
 
 ## See Also
 
-* [Kendo Grid Demo - Filter Row.](https://demos.telerik.com/kendo-ui/grid/filter-row)
-* [Filterable - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable)
+* [Demo on Filtering Grid Rows](https://demos.telerik.com/kendo-ui/grid/filter-row)
+* [API Reference of the Filterable Functionality](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable)

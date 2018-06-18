@@ -1,8 +1,8 @@
 ---
-title: Exclude Specific Items When Sorting in Grid 
-description: An example demonstrating how to exclude one or more specific items when sorting the Grid
+title: Exclude Specific Items When Sorting Grid Data
+description: An example on how to exclude one or more specific items when the user sorts data in the Kendo UI Grid.
 type: how-to
-page_title: Exclude Specific Items When Sorting in Grid | Kendo UI Grid
+page_title: Exclude Specific Items When Sorting | Kendo UI Grid
 slug: grid-exclude-item-from-sort
 tags: grid, exclude, item, sort, sorting, items, row, record
 ticketid: 1158437
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,11 +24,11 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid with sorting and would like to exclude a particular row from the sort so it always stays on top.
+How can I exclude a particular row from sorting so that it always stays on top?
 
 ## Solution
 
-The described functionality can be implemented by taking advantage of the [`compare` function](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.sortable#columns.sortable.compare) of the [`sortable` property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.sortable#columns.sortable) and overriding the default logic with a custom one. In the sample below, Chai will always be the first row regardless of the sort applied.
+Use the [`compare`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.sortable#columns.sortable.compare) function of the [`sortable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.sortable#columns.sortable) property and use custom logic to override the default behavior. In the following example, Chai will always be the first row regardless of the sorting that the user applies.
 
 ```html
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -81,4 +82,4 @@ The described functionality can be implemented by taking advantage of the [`comp
 
 ## See Also
 
-* [How To Display Frozen Rows in Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-frozen-rows)
+* [Displaying Frozen Rows in the Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-frozen-rows)

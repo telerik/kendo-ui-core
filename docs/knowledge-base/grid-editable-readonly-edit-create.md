@@ -1,8 +1,8 @@
 ---
-title: Allow Editing When Creating New Records but Not for Existing Ones
-description: This example demonstrates how to conditionally configure the Kendo Grid to allow editing during the Create operation only.
+title: Allow Editing When Creating New Records for the New Records Only
+description: An example on how to conditionally configure the Kendo UI Grid to allow editing during the Create operation only.
 type: how-to
-page_title: Modify Specific Fields on Insert & Readonly While Updating | Kendo UI Grid
+page_title: Modify Specific Fields on Insert and Read-Only while Updating | Kendo UI Grid
 slug: grid-editable-readonly-edit-create.md
 tags: grid, editable, readonly, edit, create
 ticketid: 1168477
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,13 +24,13 @@ res_type: kb
 
 ## Description
 
-I have a Kendo Grid where I would like to allow the user to input for a specific field when adding a new row, but not change it for an existing row.  How can I do this? 
+How can I allow user input for a specific field when adding a new row and prevent user input for existing rows?
 
 ## Solution
 
-One approach to take is to conditionally determine if the column is editable based on the [Model id's](https://docs.telerik.com/kendo-ui/api/javascript/data/model/fields/id) value. 
+Based on the [`id`](https://docs.telerik.com/kendo-ui/api/javascript/data/model/fields/id) value of the Model, conditionally determine an editable column.
 
-The column's [editable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editable) property accepts a function to control the editability of a column.  In the code snippet below, a function named `isEditable` returns a Boolean based on ProductID's value.  If the value is null, then a new record is being added because the value will not be added until the Grid has saved its changes.  Otherwise, if a value is not null, then the Grid is updating an existing record.  
+To control the editing capability of the column, the column [`editable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editable) property accepts a function. In the following code snippet, based on the `ProductID` value, an `isEditable` function returns a Boolean value. If the value is `null`, the Grid will add a new record&mdash;the value will not be added until the Grid saves its changes. If a value is not `null`, the Grid will update an existing record.  
 
 ```       
     var dataSource = new kendo.data.DataSource({
@@ -45,7 +46,7 @@ The column's [editable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid
         }
       }
     });
-    
+
     $("#grid").kendoGrid({
         ...
         columns: [
@@ -53,7 +54,7 @@ The column's [editable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid
           ...
         ]
     });
-      
+
     function isEditable(e){
       var dataSource = $("#grid").data("kendoGrid").dataSource;
       //If the id(ProductID) is null, then it is editable.
@@ -61,7 +62,7 @@ The column's [editable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid
     }
 ```
 
-The following demonstrates this. Upon creating a new record, ProductName and UnitPrice will be editable. When updating an existing one, ProductName and UnitPrice will become readonly.
+The following example demonstrates how, upon creating a new record, `ProductName` and `UnitPrice` become editable. When the user updates an existing record, `ProductName` and `UnitPrice` become read-only.
 
 ```html
     <div id="grid"></div>
@@ -116,7 +117,7 @@ The following demonstrates this. Upon creating a new record, ProductName and Uni
           toolbar: ["create"],
           columns: [
             /*
-            ProductName and UnitPrice will be only Editable
+            ProductName and UnitPrice will be only editable
             upon adding a new record.
             */
             { field: "ProductName", editable: isEditable},
@@ -130,7 +131,7 @@ The following demonstrates this. Upon creating a new record, ProductName and Uni
 
       function isEditable(e){
         var dataSource = $("#grid").data("kendoGrid").dataSource;
-        //If the id(ProductID) is null, then it is editable.
+        // If the id(ProductID) is null, then it is editable.
         return e.ProductID == null;
       }
 
@@ -144,4 +145,4 @@ The following demonstrates this. Upon creating a new record, ProductName and Uni
 
 ## See Also
 
-* [Kendo Grid - Editing - Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/grid/editing)
+* [Editing the Kendo UI Grid Widget](https://docs.telerik.com/kendo-ui/controls/data-management/grid/editing)

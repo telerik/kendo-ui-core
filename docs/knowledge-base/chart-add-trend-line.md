@@ -1,8 +1,8 @@
 ---
 title: Add Trend Line or Average Line to Chart
-description: An example demonstrating how to insert a trend line or average line in a chart
+description: An example on how to insert a trend line or an average line in a Kendo UI Chart.
 type: how-to
-page_title: Add Trend or Average Line to Chart | Kendo UI Charts
+page_title: Add Trend Line or Average Line to Chart | Kendo UI Charts
 slug: chart-add-trend-line
 tags: chart, trendline, average, mean, sampling
 ticketid: 1163517
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,14 +24,12 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses a Kendo UI Chart and would like to add a trend line and/or average line to it.
+How can I add a trend line and/or an average line to the Chart?
 
 ## Solution
 
-To add a trend line and/or an average line:
-
-1. Add an additional [`series`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series) to the Chart with the average values.
-2. Remove the [`markers`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers) so it stands out as a line instead of a series by using its [`visible` property](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers.visible).
+1. Add an additional [`series`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series) with the average values to the Chart.
+2. Remove the [`markers`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers) by using the [`visible`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers.visible) property of the `series` so that the average values stand out as a line instead of a series.
 
 ```html
 <div id="example">
@@ -56,8 +55,8 @@ To add a trend line and/or an average line:
         series: [{
           name: "Trend",
           color: "red",
-          markers:{ 
-            size: 0 
+          markers:{
+            size: 0
           },
           dashType: "dash",
           data: [-4, -2, 0, 2, 4, 6, 8, 10, 12]

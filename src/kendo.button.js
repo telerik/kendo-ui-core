@@ -43,7 +43,7 @@ var __meta__ = { // jshint ignore:line
                 that._tabindex();
             }
 
-            that._graphics();
+            that.iconElement();
 
             element
                 .on(CLICK + NS, proxy(that._click, that))
@@ -70,6 +70,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "Button",
             icon: "",
+            iconClass: "",
             spriteCssClass: "",
             imageUrl: "",
             enable: true
@@ -121,16 +122,17 @@ var __meta__ = { // jshint ignore:line
             this.element.removeClass(SELECTEDSTATE);
         },
 
-        _graphics: function() {
+        iconElement: function() {
             var that = this,
                 element = that.element,
                 options = that.options,
                 icon = options.icon,
+                iconClass = options.iconClass,
                 spriteCssClass = options.spriteCssClass,
                 imageUrl = options.imageUrl,
                 span, img, isEmpty;
 
-            if (spriteCssClass || imageUrl || icon) {
+            if (spriteCssClass || imageUrl || icon || iconClass) {
                 isEmpty = true;
 
                 element.contents().filter(function() {
@@ -148,24 +150,24 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (icon) {
+            if (imageUrl) {
+                img = element.children("img.k-image").first();
+                if (!img[0]) {
+                    img = $('<img alt="icon" class="k-image" />').prependTo(element);
+                }
+                img.attr("src", imageUrl);
+            } else if (icon || iconClass) {
                 span = element.children("span.k-icon").first();
                 if (!span[0]) {
-                    span = $('<span class="k-icon"></span>').prependTo(element);
+                    span = $('<span></span>').prependTo(element);
                 }
-                span.addClass("k-i-" + icon);
+                span.attr("class", iconClass ? iconClass : "k-icon k-i-" + icon);
             } else if (spriteCssClass) {
                 span = element.children("span.k-sprite").first();
                 if (!span[0]) {
                     span = $('<span class="k-sprite"></span>').prependTo(element);
                 }
                 span.addClass(spriteCssClass);
-            } else if (imageUrl) {
-                img = element.children("img.k-image").first();
-                if (!img[0]) {
-                    img = $('<img alt="icon" class="k-image" />').prependTo(element);
-                }
-                img.attr("src", imageUrl);
             }
         },
 

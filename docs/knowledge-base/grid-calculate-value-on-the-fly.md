@@ -1,6 +1,6 @@
 ---
 title: Update Calculated Cell Value on the Fly
-description: An example on how to update calculated cell on the fly in a Kendo UI Grid.
+description: An example on how to update the calculated cell on the fly in a Kendo UI Grid.
 type: how-to
 page_title: Update Calculated Cell Value on the Fly | Kendo UI Grid
 slug: grid-calculate-value-on-the-fly
@@ -19,11 +19,12 @@ res_type: kb
 
 ## Description
 
-I have a calculated field in the Grid and would like the value to be refreshed as the users make changes.
+How can I update the value of the calculated field as the users make changes?
 
 ## Solution
 
-Handle the Grid [edit event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) - in the event handler get reference of the editors for the respective fields. In the change event of the editors get the new value and use it to calculate the result.
+1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid. In the event handler, get a reference to the editors for the respective fields.
+1. In the `change` event of the editors, get the new value and use it to calculate the result.
 
 ```html
 <div id="grid"></div>

@@ -1,6 +1,6 @@
 ---
 title: Show Ellipsis for Long Content and Display Tooltip on Hover
-description: An example on how to show ellipsis in a Kendo UI Grid cells where text is long.
+description: An example on how to show ellipsis in the Kendo UI Grid cells which render long content.
 type: how-to
 page_title: Show Ellipsis for Long Content and Display Tooltip on Hover | Kendo UI Grid
 slug: grid-ellipsis-text-show-tooltip
@@ -19,7 +19,7 @@ res_type: kb
 
 ## Description
 
-I would like to show ellipsis in the Grid cells where the text does not fit the specified width. The full content should be displayed in a tooltip when hovering over the cell.
+How can I show ellipsis in the Grid cells where the text does not fit the specified width and display the full content in a tooltip when the user hovers over the cell?
 
 ## Solution
 
