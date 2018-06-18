@@ -1,8 +1,8 @@
 ---
-title: Asynchronously Clone TreeView node and all of its children
-description: An example on how to asynchronously clone a TreeView node with all its children.
+title: Asynchronously Clone TreeView Nodes and All Their Children
+description: An example on how to asynchronously clone a Kendo UI TreeView node together with all its children.
 type: how-to
-page_title: Clone TreeView node and all of its children | Kendo UI TreeView
+page_title: Clone TreeView Nodes and All Their Children | Kendo UI TreeView
 slug: treeview-clone-node-async
 tags: kendo, kendo-ui, treeview, clone, node, all, children
 res_type: kb
@@ -22,11 +22,11 @@ res_type: kb
 
 ## Description
 
-I would like to know if there is a way to deep copy a TreeView node along with all of its children with loadOnDemand set to true?
+How can I copy a TreeView node along with all its children when `loadOnDemand` is set to `true`?
 
 ## Solution
 
-Asynchronously load child nodes in the child data source through [the Node's load() method](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load):
+Asynchronously load the child nodes in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method of the node.
 
 ```html
 <div id="content">

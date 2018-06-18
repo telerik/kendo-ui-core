@@ -1,15 +1,17 @@
 ---
-title: Asynchronous expand of selected node
-page_title: Asynchronous expand of selected node | Kendo UI TreeView
-description: "Learn how to asynchronously expand selected node of the Kendo UI TreeView."
+title: Expand Selected Nodes Asynchronously
+page_title: Expand Selected Nodes Asynchronously | Kendo UI TreeView
+description: "Learn how to asynchronously expand the selected node of the Kendo UI TreeView."
 slug: howto_asynchronous_expand_selected_node
 ---
 
-# Expand Nodes during Drag
+# Expand Selected Nodes Asynchronously
 
-The following example demonstrates how to expand the selected TreeView node with loadOnDemand set to true. To achieve this, child nodes must be loaded asynchronously in the child data source through [the Node's load() method](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load):
+The TreeView enables you to expand the selected node when `loadOnDemand` is set to `true`.
 
-## Example
+Load the child nodes asynchronously in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method of the node.
+
+###### Example
 
 ```html
 <div id="container">

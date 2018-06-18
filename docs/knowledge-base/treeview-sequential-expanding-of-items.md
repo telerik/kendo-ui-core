@@ -1,14 +1,15 @@
 ---
-title: Sequential expanding of TreeView items with loadOnDemand
+title: Expand TreeView Items Sequentially with loadOnDemand
 description: An example on how to sequentially expand TreeView items with loadOnDemand
 type: how-to
-page_title: Sequentially expand items with loadOnDemand | Kendo UI TreeView
+page_title: Sequentially Expand Items with loadOnDemand | Kendo UI TreeView
 slug: treeview-sequentially-expand-items-with-loadondemand
 tags: kendo, kendo-ui, treeview, sequentially, expand, items, loadondemand
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -22,11 +23,11 @@ res_type: kb
 
 ## Description
 
-I would like to know if there is a way to sequentially expand all of the TreeView items with loadOnDemand set to true?
+How can I sequentially expand all TreeView items when `loadOnDemand` is set to `true`?
 
 ## Solution
 
-Subscribe to the TreeView's dataBound event and [expand()](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/expand) all of the currently loaded nodes:
+Subscribe to the `dataBound` event of the TreeView and [`expand()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/expand) all currently loaded nodes.
 
 ```html
 <div id="content">

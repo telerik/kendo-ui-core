@@ -64,10 +64,10 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
 ### Expand Mode
 
-The PanelBar can be configured to use `Single` or `Multiple` expand mode. If the `ExpandMode` configuration option of the PanelBar is set to:
+The PanelBar provides the `Single` or `Multiple` expand mode options.
 
-* `Single` - only a single root item or a single child item of a specific parent item can be expanded at a time. Expanding another root item or another child item of the currently expanded item's parent collapses the currently expanded item. This is also the only way to collapse an expanded item in `single` expand mode. 
-* `Multiple` - multiple root items or children of the same parent item can be expanded at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them. 	
+* If `ExpandMode` is set to `Single`, the user can expand only a single root item or a single child item of a specific parent item. Expanding another root item or another child of the currently expanded item's parent will collapse the currently expanded item. This approach is also the only way to collapse an expanded item in the `single` expand mode.
+* If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them. 	
 
     ###### Example
 
@@ -96,7 +96,7 @@ The PanelBar can be configured to use `Single` or `Multiple` expand mode. If the
 	```tab-ASPX
 
             <%: Html.Kendo().PanelBar()
-                .Name("panelbar") 
+                .Name("panelbar")
                 .ExpandMode(PanelBarExpandMode.Single)
                 .Items(items =>
                 {

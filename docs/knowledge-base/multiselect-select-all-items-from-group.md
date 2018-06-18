@@ -1,8 +1,8 @@
 ---
-title: Select All Items From a Group in the MultiSelect by Clicking the Group
-description: An example on how to programmatically select all items from a group the Kendo UI MultiSelect.
+title: Select All MultiSelect Items by Clicking the Group
+description: An example on how to programmatically select all items from a group in the Kendo UI MultiSelect.
 type: how-to
-page_title: Select All Items From a Group | Kendo UI MultiSelect
+page_title: Select All Items from a Group | Kendo UI MultiSelect
 slug: multiselect-select-all-items-from-group
 tags: multiselect, select, all, items, group
 res_type: kb
@@ -10,6 +10,7 @@ component: multi-select
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -27,7 +28,8 @@ How can I select all items from a group in the MultiSelect by clicking the group
 
 ## Solution
 
-Attach a click handler to the group element. Get all items from the cliked group and pass them to the `value` API method of the MultiSelect to select them.
+1. Attach a click handler to the group element.
+1. Get all items from the clicked group and pass them to the `value` method to select them.
 
 ```html
 <select id="customers"></select>

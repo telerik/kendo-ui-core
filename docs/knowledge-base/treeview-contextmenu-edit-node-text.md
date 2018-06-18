@@ -1,14 +1,15 @@
 ---
 title: Edit TreeView Node Text through Context Menu
-description: An example on how to edit the text of a TreeView node by using a context menu.
+description: An example on how to edit the text of a Kendo UI TreeView node by using a context menu.
 type: how-to
-page_title: Edit node text through context menu | Kendo UI TreeView
+page_title: Edit Node Text through Context Menu | Kendo UI TreeView
 slug: treeview-contextmenu-edit-node-text
 tags: kendo, kendo-ui, treeview, contextmenu, edit, node, text
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -22,11 +23,13 @@ res_type: kb
 
 ## Description
 
-I want to be able to edit the text of a TreeView node through a context menu.
+How can I edit the text of a TreeView node by using a context menu?
 
 ## Solution
 
-Show a ContextMenu on node right-click, then display a textbox in a Window. Set the text entered in the textbox as node text.
+1. On right-clicking the node, show a ContextMenu.
+1. Display a textbox in a Window.
+1. Set the entered text in the textbox as node text.
 
 ```html
 <div id="treeview"></div>
