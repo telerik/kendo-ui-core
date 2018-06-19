@@ -51,7 +51,7 @@ For a list of available icon names, please refer to the [Icons demo](http://demo
 
 ### iconClass `String`
 
-Defines a CSS class—or multiple classes separated by spaces— which are applied to a `span` element inside the **Button**. Allows the usage of custom icons.
+Defines a CSS class - or multiple classes separated by spaced - which are applied to a `span` element inside the **Button**. Allows the usage of custom icons.
 
 #### Example
 

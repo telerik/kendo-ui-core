@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Radial Gauge  
+page_title: Overview | Kendo UI Radial Gauge
 description: "Learn how to initialize and set the Kendo UI Radial Gauge."
 slug: overview_kendoui_radialgaugewidget
 position: 1
@@ -34,6 +34,8 @@ To initialize the Radial Gauge with its default configuration, use the following
 
 ## Configuration
 
+For a detailed list with all configuration options of the Radial Gauge, refer to its [JavaScript API](/api/dataviz/radialgauge).
+
 ### Create Semi- and Quarter-Circle Gauges
 
 The [`startAngle`](/api/dataviz/radialgauge#scale.startAngle) and [`endAngle`](/api/dataviz/radialgauge#scale.endAngle) configuration options enable you to create gauges that align with your design goals.
@@ -49,7 +51,34 @@ The following example demonstrates how to create a quarter-gauge, oriented to th
 
 For a real-world example, refer to the [**Car Dashboard** demo](http://demos.telerik.com/kendo-ui/radial-gauge/car-dashboard).
 
-For a detailed list with all configuration options of the Radial Gauge, refer to its [JavaScript API](/api/dataviz/radialgauge).
+### Multiple Pointers
+
+The Radial Gauge enables you to highlight multiple values by rendering multiple pointers.
+
+You can independently customize each pointer including its current value, color, and length.
+
+###### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 10,
+            color: '#ffd246',
+            length: 0.5
+        }, {
+            value: 20,
+            color: '#28b4c8',
+            length: 0.75
+        }, {
+            value: 30,
+            color: '#78d237',
+
+            // Default length
+            // length: 1
+        }]
+    });
+    </script>
 
 ## See Also
 

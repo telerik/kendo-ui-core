@@ -85,8 +85,8 @@ The margin of the gauge area.
      $("#gauge").kendoRadialGauge({
          pointer: [{
             value: 20
-            gaugeArea:{ 
-                margin:50 
+            gaugeArea:{
+                margin:50
          }
       }]
      });
@@ -156,6 +156,34 @@ The size of the cap in percents. (from 0 to 1)
 
 The color of the pointer.
 Any valid CSS color string will work here, including hex and rgb.
+
+### pointer.length `Number`
+
+The pointer length (in percent) that is based on the distance to the scale.
+The default length of `1` indicates that the pointer exactly reaches the scale.
+Accepts values between `0.1` and `1.5`.
+
+#### Example - specify pointers with different lengths
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoRadialGauge({
+        pointer: [{
+            value: 10,
+            color: '#ffd246',
+            length: 0.5
+        }, {
+            value: 20,
+            color: '#28b4c8',
+            length: 0.75
+        }, {
+            value: 30,
+            color: '#78d237',
+
+            // Default length
+            // length: 1
+        }]
+    });
+    </script>
 
 ### pointer.value `Number`
 
@@ -278,7 +306,7 @@ The format of the labels.
         },
         scale: {
         min: 0,
-        max: 100, 
+        max: 100,
         labels: {
             // set the format to currency
             format: "C"
@@ -359,7 +387,7 @@ Template variables:
         },
         scale: {
         min: 0,
-        max: 100, 
+        max: 100,
         labels: {
             // set the format to currency
             template: "#= value #%"
@@ -447,7 +475,7 @@ The ranges of the scale.
         },
         scale: {
         min: 0,
-        max: 100, 
+        max: 100,
         ranges: [{
             from: 10,
             to: 20,
@@ -568,7 +596,7 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
     setTimeout(function(){
         kendo.destroy($("#gauge"));
         $("#gauge").remove();
-    },1000)     
+    },1000)
     </script>
 
 ### exportImage
@@ -711,7 +739,7 @@ Redraws the gauge.
     setTimeout(function(){
         var gauge = $("#gauge").data("kendoRadialGauge");
         gauge.redraw();
-    },1000)     
+    },1000)
     </script>
 
 ### resize
@@ -840,5 +868,5 @@ Change the value of the gauge.
     });
     setTimeout(function(){
         $("#gauge").data("kendoRadialGauge").value(20);
-    },1000)     
+    },1000)
     </script>
