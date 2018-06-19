@@ -1089,6 +1089,78 @@ test("reset value when _clear is clicked (equal value and text)", 1, function() 
     equal(combobox.value(), "");
 });
 
+
+test("hide clear button on value reset", 1, function() {
+    select = $("<select></select>");
+    var combobox = new ComboBox(select, {
+        filter: "contains",
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: "name1", name: "name1" },
+            { id: "name2", name: "name2" }
+        ],
+        value: "name2"
+    });
+
+    combobox.value("");
+    ok(combobox._clear.is(".k-hidden"));
+});
+
+test("show clear button on value set", 2, function() {
+    select = $("<select></select>");
+    var combobox = new ComboBox(select, {
+        filter: "contains",
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: "name1", name: "name1" },
+            { id: "name2", name: "name2" }
+        ]
+    });
+
+    ok(combobox._clear.is(".k-hidden"));
+
+    combobox.value("name2");
+
+    ok(!combobox._clear.is(".k-hidden"));
+});
+
+test("hide clear button if readonly", 1, function() {
+    select = $("<select></select>");
+    var combobox = new ComboBox(select, {
+        filter: "contains",
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: "name1", name: "name1" },
+            { id: "name2", name: "name2" }
+        ],
+        value: "name2"
+    });
+
+    combobox.readonly();
+
+    ok(combobox._clear.is(".k-hidden"));
+});
+
+test("hide clear button if disabled", 1, function() {
+    select = $("<select></select>");
+    var combobox = new ComboBox(select, {
+        filter: "contains",
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: "name1", name: "name1" },
+            { id: "name2", name: "name2" }
+        ],
+        value: "name2"
+    });
+
+    combobox.enable(false);
+    ok(combobox._clear.is(".k-hidden"));
+});
+
 test("setOptions method updates footer template", 1, function() {
     var combobox = new ComboBox(input, { });
 

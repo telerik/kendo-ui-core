@@ -311,6 +311,8 @@ var __meta__ = { // jshint ignore:line
                      .attr(READONLY, readonly)
                      .attr(ARIA_DISABLED, disable);
             }
+
+            that._toggleCloseVisibility();
         },
 
         open: function() {
@@ -621,7 +623,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _toggleCloseVisibility: function() {
-            if (this.text()) {
+            var preventShow = this.element.is(":disabled") || this.element.is("[readonly]");
+
+            if (this.text() && !preventShow) {
                 this._showClear();
             } else {
                 this._hideClear();
