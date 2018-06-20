@@ -74,6 +74,28 @@
         });
     });
 
+    test("change event is raised once when value is 0 and widget is blurred", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "Black", value: 0 },
+                { text: "Orange", value: 1 },
+                { text: "Grey", value: 2 }
+            ],
+            index: 1,
+            change: function() {
+                ok(true);
+            }
+        });
+
+        dropdownlist.open();
+        dropdownlist.ul.find("li:first").click();
+
+        dropdownlist._change();
+        dropdownlist._change();
+    });
+
     test("_change raises the change event if value has changed", function() {
        var changeWasCalled = false, dropdownlist = new DropDownList(input, {
             dataSource: ["foo", "bar"],

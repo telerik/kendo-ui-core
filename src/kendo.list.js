@@ -645,7 +645,11 @@ var __meta__ = { // jshint ignore:line
                 if (that._old === null || value === "") {
                     that._valueBeforeCascade = that._old = value;
                 } else {
-                    that._valueBeforeCascade = that._old = that.dataItem() ? that.dataItem()[that.options.dataValueField] || that.dataItem() : null;
+                    if (that.dataItem()) {
+                        that._valueBeforeCascade = that._old = that.options.dataValueField ? that.dataItem()[that.options.dataValueField] : that.dataItem();
+                    } else {
+                        that._valueBeforeCascade = that._old = null;
+                    }
                 }
                 that._oldIndex = index;
 
@@ -897,6 +901,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _triggerChange: function() {
+            debugger;
             if (this._valueBeforeCascade !== this.value()) {
                 this.trigger(CHANGE);
             }

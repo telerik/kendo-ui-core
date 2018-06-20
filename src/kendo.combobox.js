@@ -732,6 +732,8 @@ var __meta__ = { // jshint ignore:line
 
                 that._prev = input.value;
             });
+
+            that._toggleCloseVisibility();
         },
 
         toggle: function(toggle) {
