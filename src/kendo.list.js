@@ -901,7 +901,6 @@ var __meta__ = { // jshint ignore:line
         },
 
         _triggerChange: function() {
-            debugger;
             if (this._valueBeforeCascade !== this.value()) {
                 this.trigger(CHANGE);
             }

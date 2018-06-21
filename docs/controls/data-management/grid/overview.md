@@ -123,6 +123,7 @@ If the Grid is created from an HTML table, but the DataSource is configured to u
 
 When the Grid is created from an existing table, you can define the following `column` settings through the HTML attributes:
 
+* The `id` attributes define the id of the columns.
 * The `data-field` attributes define the names of the data fields.
 * The `width` styles when applied to the respective `<col>` elements set the width of the columns.
 * The `data-type` attributes define the data types.
@@ -131,8 +132,13 @@ When the Grid is created from an existing table, you can define the following `c
 * The `data-sortable` attributes enable or disable sorting.
 * The `data-filterable` attributes enable or disable filtering.
 * The `data-groupable` attributes enable or disable grouping.
+* The `data-index` attributes define a zero-based number indicator of the columns.
 
 All attributes have to be applied to the `<th>` elements, except for the column width styles.
+
+> **Important**
+>
+> To associate the `aria-describedby` attribute of the cells to the corresponding column header in a navigatable Kendo UI Grid, define `id` and `data-index` for every `<th>` element.
 
 It is not possible to define other column-related settings through HTML attributes in the `<table>`. If you have to use settings, such as commands, locking, editors, custom rows, cell CSS classes, and others, skip the above attribute configuration and include all settings in the JavaScript initialization statement of the Grid. Note that you have to set the column properties through the `data-columns` attribute when using the declarative widget initialization.
 
