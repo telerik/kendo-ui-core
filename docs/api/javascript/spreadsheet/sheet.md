@@ -436,13 +436,23 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
 
 ##### ref `String`
 
-[A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html) reference of the cells.
+##### rowIndex `Number`
+
+##### columnIndex `Number`
+
+##### rowCount `Number` *optional*
+
+##### columnCount `Number` *optional*
+
+If the parameter is a `string`, it should represent an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html) reference of the cells.
+
+If the parameters are `Numbers`, the first two would represent the row index (the first parameter) and the column index (the second parameter) of the top-left cell of the `range`. If there are only two parameters, only one cell will be included in the `range`. If the other two `Numbers` are also present, they will represent the number of rows (the third parameter) and number of columns (the forth parameter) that would be included in the `range`, starting from the specified top-left cell. If the third or the forth parameter is set to 0 or 1, only one row / column will be included in the `range`.
 
 #### Returns
 
 `kendo.spreadsheet.Range` a range object, which may be used to manipulate the cell state further.
 
-#### Example
+#### Example - Using string parameter
 
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
@@ -457,6 +467,19 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
         sheet.range("A1:B2").values([ [1, 2], [2, 3] ]);
     </script>
 
+#### Example - Using Number parameters
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        // select the B3:C6 range
+        sheet.range(2,1,4,2).select();
+    </script>
 
 ### rowHeight
 

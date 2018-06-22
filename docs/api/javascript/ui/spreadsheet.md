@@ -974,7 +974,7 @@ The template is giving an access to the following variables: from{0}, to{1}, fro
 				sheets: [
 				{
 					name: "Validation Template",
-	
+
 					rows: [
 					{
 						height: 25,
@@ -991,17 +991,17 @@ The template is giving an access to the following variables: from{0}, to{1}, fro
 							titleTemplate: "Number validation error",
 							messageTemplate: "The number have to be between {0} and {1}"
 							}
-	
+
 						},
 						{
 							value: "10",
-	
+
 						},
 						{
 							value: "20",
-	
+
 						},
-	
+
 						]
 					},
 					],
@@ -1486,6 +1486,9 @@ The sheet instance to move.
 
 ##### index `Number`
 The new zero-based index of the sheet.
+
+### refresh
+Re-renders all data in the Spreadsheet. In a DataSource binding scenario uses the current data items to populate the widget.
 
 ### removeSheet
 Removes the specified sheet.

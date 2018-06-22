@@ -650,7 +650,7 @@ var __meta__ = { // jshint ignore:line
                     .attr(TABINDEX, wrapper.data(TABINDEX))
                     .attr(ARIA_DISABLED, false)
                     .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("mousedown" + ns, proxy(that._wrapperMousedown, that))
+                    .on(kendo.support.mousedown + ns, proxy(that._wrapperMousedown, that))
                     .on("paste" + ns, proxy(that._filterPaste, that));
 
                 that.wrapper.on("click" + ns, proxy(that._wrapperClick, that));

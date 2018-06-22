@@ -447,7 +447,7 @@ var __meta__ = { // jshint ignore:line
                     .on("focus" + ns, proxy(that._inputFocus, that))
                     .on("focusout" + ns, proxy(that._inputFocusout, that));
 
-                that._clear.on("click" + ns, proxy(that._clearClick, that));
+                that._clear.on(CLICK + ns + " touchend" + ns, proxy(that._clearClick, that));
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
                      .attr(ARIA_DISABLED, false);

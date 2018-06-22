@@ -294,7 +294,7 @@ var __meta__ = { // jshint ignore:line
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
-                clear.on(CLICK, proxy(that._clearValue, that))
+                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that))
                     .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
                 that.input
