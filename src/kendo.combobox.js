@@ -425,7 +425,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialIndex = null;
-
+           
             var dataItem = listView.selectedDataItems()[0];
 
             if (!dataItem) {
@@ -434,6 +434,8 @@ var __meta__ = { // jshint ignore:line
 
             if (that._value(dataItem) !== that.value()) {
                 that._custom(that._value(dataItem));
+            } else if (that._value(dataItem) !== that.element[0].value){
+                that._accessor(that._value(dataItem));
             }
 
             if (that.text() && that.text() !== that._text(dataItem)) {

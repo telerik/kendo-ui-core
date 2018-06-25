@@ -1287,11 +1287,19 @@ var __meta__ = { // jshint ignore:line
                 item = item ? item.item : null;
             }
 
-            if (!this.isFiltered() && value.length && item) {
-                for (var i = 0; i < value.length; i++) {
-                    match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
+            if (this.options.mapValueTo === "dataItem" && this._selectedDataItems.length && item) {
+                for (var i = 0; i < this._selectedDataItems.length; i++) {
+                    match = valueGetter(this._selectedDataItems[i]) === valueGetter(item);
                     if (match) {
-                        value.splice(i , 1);
+                        selected = true;
+                        break;
+                    }
+                }
+            } else if (!this.isFiltered() && value.length && item) {
+                for (var j = 0; j < value.length; j++) {
+                    match = isPrimitive(item) ? value[j] === item : value[j] === valueGetter(item);
+                    if (match) {
+                        value.splice(j , 1);
                         selected = true;
                         break;
                     }
