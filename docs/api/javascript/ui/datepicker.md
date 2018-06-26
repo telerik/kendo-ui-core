@@ -203,7 +203,7 @@ settings are available for the **depth** value:
 * `"decade"` - Shows the years of the decade.
 * `"century"` - Shows the decades from the century.
 
-> Note the option will not be applied if **start** option is *lower* than **depth**. Always set both and **start** and **depth** options.
+> Note the option will not be applied if **start** option is *lower* than **depth**. Always set both **start** and **depth** options.
 
 #### Example - set navigation depth of the calendar popup
 
