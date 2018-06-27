@@ -5,32 +5,44 @@ if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.operators =
 $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
   "date": {
-    "eq": "Eşittir",
+    "eq": "Eşit",
     "gt": "Sonra",
-    "gte": "Sonra ya da eşit",
+    "gte": "Sonra veya eşit",
     "lt": "Önce",
-    "lte": "Önce ya da eşit",
-    "neq": "Eşit değildir"
+    "lte": "Önce veya eşit",
+    "neq": "Eşit değil",
+    "isnull": "Null",
+    "isnotnull": "Null değil"
   },
   "enums": {
-    "eq": "Eşittir",
-    "neq": "Eşit değildir"
+    "eq": "Eşit",
+    "neq": "Eşit değil",
+    "isnull": "Null",
+    "isnotnull": "Null değil"
   },
   "number": {
-    "eq": "Eşittir",
-    "gt": "Büyüktür",
-    "gte": "Daha büyük veya eşittir",
-    "lt": "Daha küçük",
-    "lte": "Daha küçük veya eşit",
-    "neq": "Eşit değildir"
+    "eq": "Eşit",
+    "gt": "Büyük",
+    "gte": "Büyük veya eşit",
+    "lt": "Küçük",
+    "lte": "Küçük veya eşit",
+    "neq": "Eşit değil",
+    "isnull": "Null",
+    "isnotnull": "Null değil"
   },
   "string": {
     "contains": "İçeriyor",
     "doesnotcontain": "İçermiyor",
     "endswith": "İle biter",
-    "eq": "Eşittir",
-    "neq": "Eşit değildir",
-    "startswith": "İle başlar"
+    "eq": "Eşit",
+    "neq": "Eşit değil",
+    "startswith": "İle başlar",
+    "isnull": "Null",
+    "isnotnull": "Null değil",
+    "isempty": "Boş",
+    "isnotempty": "Boş değil",
+    "isnullorempty": "Değer içermiyor",
+    "isnotnullorempty": "Değer içeriyor"
   }
 });
 }
@@ -41,32 +53,44 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.operators =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
   "date": {
-    "eq": "Eşittir",
+    "eq": "Eşit",
     "gt": "Sonra",
-    "gte": "Sonra ya da eşit",
+    "gte": "Sonra veya eşit",
     "lt": "Önce",
-    "lte": "Önce ya da eşit",
-    "neq": "Eşit değildir"
+    "lte": "Önce veya eşit",
+    "neq": "Eşit değil",
+    "isnull": "Null",
+    "isnotnull": "Null değil"
   },
   "enums": {
-    "eq": "Eşittir",
-    "neq": "Eşit değildir"
+    "eq": "Eşit",
+    "neq": "Eşit değil",
+    "isnull": "Null",
+    "isnotnull": "Null değil"
   },
   "number": {
-    "eq": "Eşittir",
-    "gt": "Büyüktür",
-    "gte": "Daha büyük veya eşittir",
-    "lt": "Daha küçük",
-    "lte": "Daha küçük veya eşit",
-    "neq": "Eşit değildir"
+    "eq": "Eşit",
+    "gt": "Büyük",
+    "gte": "Büyük veya eşit",
+    "lt": "Küçük",
+    "lte": "Küçük veya eşit",
+    "neq": "Eşit değil",
+    "isnull": "Null",
+    "isnotnull": "Null değil"
   },
   "string": {
     "contains": "İçeriyor",
     "doesnotcontain": "İçermiyor",
     "endswith": "İle biter",
-    "eq": "Eşittir",
-    "neq": "Eşit değildir",
-    "startswith": "İle başlar"
+    "eq": "Eşit",
+    "neq": "Eşit değil",
+    "startswith": "İle başlar",
+    "isnull": "Null",
+    "isnotnull": "Null değil",
+    "isempty": "Boş",
+    "isnotempty": "Boş değil",
+    "isnullorempty": "Değer içeriyor",
+    "isnotnullorempty": "Değer içermiyor"
   }
 });
 }
@@ -82,7 +106,8 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "lock": "Kilitle",
   "sortAscending": "Artan Sıralama",
   "sortDescending": "Azalan Sıralama",
-  "unlock": "Kilidini Aç"
+  "unlock": "Kilidini Aç",
+  "filter": "Filtrele"
 });
 }
 
@@ -149,14 +174,14 @@ kendo.ui.Editor.prototype.options.messages =
 $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "addColumnLeft": "Sola kolon ekle",
   "addColumnRight": "Sağa kolon ekle",
-  "addRowAbove": "Yukarıdaki satır ekle",
-  "addRowBelow": "Aşağıdaki satır ekle",
+  "addRowAbove": "Yukarıya satır ekle",
+  "addRowBelow": "Aşağıya satır ekle",
   "backColor": "Arka plan rengi",
   "bold": "Kalın ",
   "createLink": "Köprü ekleme",
   "createTable": "Tablo oluştur",
   "deleteColumn": "Sütun silme",
-  "deleteFile": "Silmek istediğinizden emin misiniz ?",
+  "deleteFile": "Silmek istediğinizden emin misiniz?",
   "deleteRow": "Satır sil",
   "dialogButtonSeparator": "ya da",
   "dialogCancel": "İptal",
@@ -174,12 +199,12 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "formatting": "Biçimlendirme",
   "imageAltText": "Alternatif metin",
   "imageWebAddress": "Web adresi",
-  "indent": "Aatırbaşı",
+  "indent": "Satırbaşı",
   "insertHtml": "HTML ekle",
   "insertImage": "Resim ekle",
-  "insertOrderedList": "Sıralı liste ekleme",
-  "insertUnorderedList": "Sırasız liste ekleme",
-  "invalidFileType": "Seçinizilen dosya \"{0}\" geçerli değil. Desteklenen dosya türleri {1} vardır.",
+  "insertOrderedList": "Sıralı liste ekle",
+  "insertUnorderedList": "Sırasız liste ekle",
+  "invalidFileType": "Seçilen dosya \"{0}\" geçerli değil. Desteklenen dosya türleri: {1}.",
   "italic": "İtalik karakter",
   "justifyCenter": "Merkezi metin",
   "justifyFull": "Doğrulama",
@@ -188,22 +213,22 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkOpenInNewWindow": "Yeni pencerede aç",
   "linkText": "Metin",
   "linkToolTip": "Araç İpucu",
-  "linkWebAddress": "Web address",
+  "linkWebAddress": "Web adresi",
   "orderBy": "Düzenleme ölçütü:",
   "orderByName": "İsim",
   "orderBySize": "Boyut",
   "outdent": "Çıkıntı",
-  "overwriteFile": "İsimde bir dosya \"{0}\" zaten dizinde mevcut. Bunu üzerine yazmak istiyor musunuz?",
+  "overwriteFile": "Dizinde \"{0}\" isimli bir dosya zaten mevcut. Üzerine yazmak istiyor musunuz?",
   "search": "Arama",
   "strikethrough": "Üstü çizili",
   "styles": "Stiller",
   "subscript": "İndis",
   "superscript": "Üstyazı",
-  "underline": "Altını çizmek",
+  "underline": "Altını çiz",
   "unlink": "Köprüyü Kaldır",
   "uploadFile": "Yükle",
   "viewHtml": "HTML Görünümü ",
-  "insertFile": "Insert file"
+  "insertFile": "Dosya Ekle"
 });
 }
 
@@ -215,8 +240,8 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "clear": "Temizle",
   "filter": "Filtre",
   "isFalse": "Yanlış",
-  "isTrue": "Doğru ",
-  "operator": "Operatör(işletmen)"
+  "isTrue": "Doğru",
+  "operator": "Operatör"
 });
 }
 
@@ -228,14 +253,18 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "Ve",
   "cancel": "İptal",
   "clear": "Temizle",
-  "filter": "Filtre",
-  "info": "bu ile bu arasındaki değerleri göster",
+  "filter": "Filtrele",
+  "info": "Tanıma uyan kayıtları göster:",
+  "title": "",
   "isFalse": "Yanlış",
-  "isTrue": "Doğru ",
-  "operator": "Operatör(işletmen)",
-  "or": "ya da",
+  "isTrue": "Doğru",
+  "operator": "Operatör",
+  "additionalOperator": "Ek Operatör",
+  "or": "Veya",
   "selectValue": "Değer Seçiniz",
-  "value": "Değer"
+  "value": "Değer",
+  "additionalValue": "Ek Değer",
+  "logic": "Bağıntı"
 });
 }
 
@@ -244,7 +273,11 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
 if (kendo.ui.FilterMultiCheck) {
 kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
-  "search": "Arama"
+  "search": "Arama",
+  "checkAll": "Tümünü İşaretle",
+  "clear": "Temizle",
+  "filter": "Filtrele",
+  "selectedItemsFormat": "{0} seçenek işaretlendi"
 });
 }
 
@@ -259,10 +292,10 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Yeni Kayıt Ekle",
     "destroy": "Sil",
     "edit": "Düzenle",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Excel Kaydet",
+    "pdf": "PDF Kaydet",
     "save": "Değişiklikleri Kaydet",
-    "select": "Seçiniz",
+    "select": "Seç",
     "update": "Güncelle"
   },
   "editable": {
@@ -287,7 +320,7 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "All",
+  "allPages": "Tümü",
   "display": "{0} - {1} aralığı gösteriliyor. Toplam {2} öğe var",
   "empty": "Görüntülenecek öğe yok",
   "first": "İlk sayfaya git",
@@ -297,7 +330,7 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "next": "Bir sonraki sayfaya git",
   "of": "{0}",
   "page": "Sayfa",
-  "previous": "Sayfaları İncele",
+  "previous": "Bir önceki sayfaya git",
   "refresh": "Güncelle"
 });
 }
@@ -333,11 +366,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "event": "Olay",
   "recurrenceMessages": {
-    "deleteRecurring": "Sadece bu olayı ya da bütün dizini mi silmek istiyor musunuz?",
+    "deleteRecurring": "Sadece bu olayı mı yoksa bütün seriyi mi silmek istiyorsunuz?",
     "deleteWindowOccurrence": "Geçerli yinelemeyi Sil",
     "deleteWindowSeries": "Seriyi Sil",
     "deleteWindowTitle": "Tekrarlanan Öğeyi Sil",
-    "editRecurring": "Sadece bu olay oluşumunu veya tüm dizini düzenlemek istiyor musunuz?",
+    "editRecurring": "Sadece bu olayı mı yoksa bütün seriyi mi düzenlemek istiyorsunuz?",
     "editWindowOccurrence": "Geçerli Olayı Düzenle",
     "editWindowSeries": "Seriyi düzenle",
     "editWindowTitle": "Tekrarlanan Öğeyi Düzenle"
@@ -369,10 +402,10 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "remove": "Kaldır",
   "retry": "Tekrar Dene",
   "select": "Seçiniz",
-  "statusFailed": "Başarız Oldu",
+  "statusFailed": "Başarısız Oldu",
   "statusUploaded": "Yüklendi",
   "statusUploading": "Yükleniyor",
-  "uploadSelectedFiles": "seçilen dosyaları Yükle"
+  "uploadSelectedFiles": "Seçilen dosyaları Yükle"
 });
 }
 
@@ -381,7 +414,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
 if (kendo.ui.Dialog) {
 kendo.ui.Dialog.prototype.options.messages =
 $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
-  "close": "Kapatmak"
+  "close": "Kapat"
 });
 }
 

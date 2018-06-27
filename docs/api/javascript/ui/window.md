@@ -604,7 +604,7 @@ Maximizes a Window to the entire viewing area of the user agent. Triggers the re
 
 ### minimize
 
-Maximizes a Window to its title bar.
+Minimizes a Window to its title bar.
 
 #### Returns
 
@@ -1033,7 +1033,7 @@ The status of the request, as returned from [jQuery.ajax](http://api.jquery.com/
 
 ### maximize
 
-Triggered when the window has been minimized by the user. Introduced in 2016.Q1.SP1
+Triggered when the window has been maximized by the user. Introduced in 2016.Q1.SP1
 
 #### Example - subscribe to the "maximize" event during initialization
 
