@@ -144,7 +144,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 >
 > The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
-## ToDataSourceResult Binding
+### ToDataSourceResult Binding
 
 Below are listed the steps for you to follow when configuring the Kendo UI DropDownList to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
@@ -220,6 +220,342 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                 })
             )
     ```
+
+### Model Binding with Local or Remote data
+
+Local data means that all the data is available on the client when the DropDownList is initialized. In the example below the data is passed to the view through the ViewData.
+
+1. In the example below the data is passed to the view through the ViewData.
+
+    ###### Example
+
+            public ActionResult Index()
+            {
+                ViewData["products"] = GetProducts();
+
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            private static IEnumerable<ProductViewModel> GetProducts()
+            {
+                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return products;
+            }
+
+
+1. Add a DropDownList to the view and bind it to the data saved in the ViewData.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+            @(Html.Kendo().DropDownListFor(m => m.ProductID)
+                .DataValueField("ProductID")
+                .DataTextField("ProductName")
+                .BindTo((System.Collections.IEnumerable)ViewData["products"])
+            )
+
+    ```
+    ```tab-ASPX
+
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+            <%: Html.Kendo().DropDownListFor(m => m.ProductID)
+                    .DataValueField("ProductID")
+                    .DataTextField("ProductName")
+                    .BindTo((System.Collections.IEnumerable)ViewData["products"])
+            %>
+    ```
+
+You can configure the DropDownList to get data from a remote source by making an AJAX request.
+
+1. Create an action that returns the data as JSON result.
+
+    ###### Example
+
+            public ActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            public JsonResult GetProductsAjax()
+            {
+                var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return Json(products, JsonRequestBehavior.AllowGet);
+            }
+
+
+1. Add a DropDownList to the view and configure its DataSource to use remote data.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+
+            @(Html.Kendo().DropDownListFor(m => m.ProductID)
+                .Filter("contains")
+                .DataTextField("ProductName")
+                .DataValueField("ProductID")
+                .OptionLabel("Select product...")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetProductsAjax", "Home");
+                    })
+                    .ServerFiltering(false);
+                })
+            )
+    ```
+    ```tab-ASPX
+
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+            <%: Html.Kendo().DropDownListFor(m => m.ProductID)
+                    .Filter("contains")
+                    .DataTextField("ProductName")
+                    .DataValueField("ProductID")
+                    .OptionLabel("Select product...")
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetProductsAjax", "Home");
+                        })
+                        .ServerFiltering(false);
+                    })
+            %>
+    ```
+
+### Model Binding with Virtualization
+
+You can configure a DropDownList bound to a model field to use [Virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+
+1. Create **Read** and **ValueMapper** actions.
+
+    ###### Example
+
+            public ActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            [HttpPost]
+            public ActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+            {
+                return Json(GetProducts().ToDataSourceResult(request));
+            }
+
+            public ActionResult Products_ValueMapper(int[] values)
+            {
+                var indices = new List<int>();
+
+                if (values != null && values.Any())
+                {
+                    var index = 0;
+
+                    foreach (var product in GetProducts())
+                    {
+                        if (values.Contains(product.ProductID))
+                        {
+                            indices.Add(index);
+                        }
+
+                        index += 1;
+                    }
+                }
+
+                return Json(indices, JsonRequestBehavior.AllowGet);
+            }
+
+            private static IEnumerable<ProductViewModel> GetProducts()
+            {
+                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return products;
+            }
+
+
+1. Add a DropDownList to the view and configure it to use virtualization.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+            @(Html.Kendo().DropDownListFor(m => m.ProductID)
+                .Filter("contains")
+                .DataTextField("ProductName")
+                .DataValueField("ProductID")
+                .OptionLabel("Select product...")
+                .DataSource(source =>
+                {
+                    source.Custom()
+                        .ServerFiltering(true)
+                        .ServerPaging(true)
+                        .PageSize(80)
+                        .Type("aspnetmvc-ajax")
+                        .Transport(transport =>
+                        {
+                            transport.Read("ProductsVirtualization_Read", "Home");
+                        })
+                        .Schema(schema =>
+                        {
+                            schema.Data("Data")
+                                    .Total("Total");
+                        });
+                })
+                .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+            )
+
+            <script>
+                function valueMapper(options) {
+                    $.ajax({
+                        url: "@Url.Action("Products_ValueMapper", "Home")",
+                        data: convertValues(options.value),
+                        success: function (data) {
+                            options.success(data);
+                        }
+                    });
+                }
+
+                function convertValues(value) {
+                    var data = {};
+
+                    value = $.isArray(value) ? value : [value];
+
+                    for (var idx = 0; idx < value.length; idx++) {
+                        data["values[" + idx + "]"] = value[idx];
+                    }
+
+                    return data;
+                }
+            </script>
+
+    ```
+    ```tab-ASPX
+
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+            <%: Html.Kendo().DropDownListFor(m => m.ProductID)
+                    .Filter("contains")
+                    .DataTextField("ProductName")
+                    .DataValueField("ProductID")
+                    .OptionLabel("Select product...")
+                    .DataSource(source =>
+                    {
+                        source.Custom()
+                            .ServerFiltering(true)
+                            .ServerPaging(true)
+                            .PageSize(80)
+                            .Type("aspnetmvc-ajax")
+                            .Transport(transport =>
+                            {
+                                transport.Read("ProductsVirtualization_Read", "Home");
+                            })
+                            .Schema(schema =>
+                            {
+                                schema.Data("Data")
+                                        .Total("Total");
+                            });
+                    })
+                    .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+
+
+                <script>
+                    function valueMapper(options) {
+                        $.ajax({
+                            url: "@Url.Action("Products_ValueMapper", "Home")",
+                            data: convertValues(options.value),
+                            success: function (data) {
+                                options.success(data);
+                            }
+                        });
+                    }
+
+                    function convertValues(value) {
+                        var data = {};
+
+                        value = $.isArray(value) ? value : [value];
+
+                        for (var idx = 0; idx < value.length; idx++) {
+                            data["values[" + idx + "]"] = value[idx];
+                        }
+
+                        return data;
+                    }
+                </script>
+            %>
+    ```
+
+If the **AutoBind** option of the DropDownList is set to **false**, to display the model value as selected the **Text** configuration option of the widget must also be set.
+
+1. Pass the field set as **DataTextField** to the **Text** option.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+
+            @(Html.Kendo().DropDownListFor(m => m.ProductID)
+                .AutoBind(false)
+                .Text(Model.ProductName)
+                .DataTextField("ProductName")
+                //...additional configuration
+            )
+    ```
+    ```tab-ASPX
+
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+            <%: Html.Kendo().DropDownListFor(m => m.ProductID)
+                .AutoBind(false)
+                .Text(Model.ProductName)
+                .DataTextField("ProductName")
+                //...additional configuration
+            %>
+    ```
+
+> **Important**
+>
+> The type of the value the DropDownList can be bound to on the server can only be a primitive type or enum.
 
 ### Parameter Sending to Server
 

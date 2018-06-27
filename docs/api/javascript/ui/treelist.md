@@ -1552,7 +1552,7 @@ Can be set to a JavaScript object which represents the editing configuration.
 
 ### editable.mode `String` *(default: "inline")*
 
-The editing mode to use. The supported editing modes are "inline" and "popup".
+The editing mode to use. The supported editing modes are "inline", "popup" and "incell".
 
 > The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
 
@@ -4128,6 +4128,31 @@ The index of the column, or the [field](/api/javascript/ui/treelist#configuratio
       treeList.autoFitColumn(treeList.columns[1]);
     </script>
 
+### cancelChanges
+
+Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed and updated data items are restored to their initial state.
+
+#### Example - cancel any changes
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell"
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.addRow();
+      treeList.cancelChanges();
+    </script>
+
 ### cancelRow
 
 Cancels editing for the table row which is in edit mode. Reverts any changes made.
@@ -4216,6 +4241,46 @@ Clears the currently selected table rows or cells (depending on the current sele
         var treeList = $("#treeList").data("kendoTreeList");
         treeList.clearSelection();
       });
+    </script>
+
+### closeCell
+
+Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](/api/javascript/ui/treelist/configuration/editable.mode).
+
+> When keyboard navigation is used, the TreeList [`table`](/api/javascript/ui/treelist/fields/table) must be focused programmatically after calling `closeCell`.
+
+#### Parameters
+
+##### isCancel `Boolean` *optional*
+
+A flag specifying whether to fire the `cancel` event. By default the event is not fired.
+
+#### Example - cancel cell editing
+
+    <div id="treeList"></div>
+    <script>
+    $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell",
+        navigatable: true
+    });
+
+    var treeList = $("#treeList").data("kendoTreeList");
+
+    treeList.editCell(treeList.tbody.find("td").first());
+
+    setTimeout(function(){
+        treeList.closeCell();
+        treeList.table.focus();
+    }, 1500);
     </script>
 
 ### collapse
@@ -4316,6 +4381,38 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
         $("#treeList").remove(); // remove all TreeList HTML
       });
+    </script>
+
+### editCell
+
+Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/javascript/ui/treelist/configuration/editable.mode).
+
+Fires the [edit](/api/javascript/ui/grid/events/edit) event.
+
+#### Parameters
+
+##### cell `jQuery`
+
+The jQuery object which represents the table cell.
+
+#### Example - switch the first cell to edit mode
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell"
+    });
+    var treeList = $("#treeList").data("kendoTreeList");
+    treeList.editCell($("#treeList td:eq(0)"));
     </script>
 
 ### editRow
@@ -4649,6 +4746,33 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
             var treeList = $("#treeList").data("kendoTreeList");
             treeList.saveAsPDF();
         });
+    </script>
+
+### saveChanges
+
+Saves any pending changes by calling the [sync](/api/javascript/data/datasource/methods/sync) method.
+
+Fires the [saveChanges](/api/javascript/ui/treelist/events/savechanges) event.
+
+#### Example - save changes
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell"
+    });
+    var treeList = $("#treeList").data("kendoTreeList");
+    treeList.addRow();
+    treeList.saveChanges();
     </script>
 
 ### saveRow
@@ -5047,6 +5171,50 @@ The column whose position should be changed.
 
 ## Events
 
+### beforeEdit
+
+Fired when the user try to edit or create a data item, before the editor is created. Can be used for preventing the editing depending on custom logic.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+The event will be fired only when the TreeList is `selectable`.
+
+#### Event Data
+
+##### e.model `kendo.data.Model`
+
+The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "beforeEdit" event during initialization
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell",
+        toolbar:["create"],
+        beforeEdit: function(e) {
+          console.log("beforeEdit");
+
+          if (!e.model.isNew()) {
+            e.preventDefault();
+          }
+        }
+      });
+    </script>
+
 ### cancel
 
 Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/javascript/ui/treelist#configuration-editable.mode)) or closes the popup window.
@@ -5115,6 +5283,54 @@ The widget instance which fired the event.
         var treeList = $("#treeList").data("kendoTreeList");
         treeList.bind("cancel", cancel);
         treeList.dataSource.fetch();
+    </script>
+
+### cellClose
+
+Fired when "incell" edit mode is used and the cell is going to be closed. The event is triggerd after saving or canceling the changes, but before the cell is closed.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](edit).
+
+##### e.model `kendo.data.Model`
+
+The data item to which the table row is bound.
+
+##### e.type `String`
+
+The type of the cell close action - can be either "save" or "cancel". The "cancel" type is triggered when the treelist keyboard navigation is enabled by "navigateble: true" and Esc key is used for cell close action.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "cancel" event during initialization
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell",
+        toolbar:["create"],
+        cellClose:  function(e) {
+          console.log(e.type);
+        }
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.editCell($("#treeList td:eq(1)"));
     </script>
 
 ### change
@@ -6480,6 +6696,73 @@ The widget instance which fired the event.
 
       var treeList = $("#treeList").data("kendoTreeList");
       treeList.bind("save", save);
+    </script>
+
+### saveChanges
+
+Fired when the user clicks the "save" command button.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.preventDefault `Function`
+
+If invoked the treelist will not call the [sync](/api/javascript/data/datasource/methods/sync) method of the data source.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "saveChanges" event during initialization
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell",
+        toolbar: ["save"],
+        saveChanges: function(e) {
+          if (!confirm("Are you sure you want to save all changes?")) {
+            e.preventDefault();
+          }
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "saveChanges" event after initialization
+
+    <div id="treeList"></div>
+    <script>
+      function treelist_saveChanges(e) {
+        if (!confirm("Are you sure you want to save all changes?")) {
+          e.preventDefault();
+        }
+      }
+
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        editable: "incell",
+        toolbar: ["save"]
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.bind("saveChanges", treelist_saveChanges);
     </script>
 
 ### columnShow
