@@ -1,6 +1,6 @@
 ---
-title: Center Image Within Kendo UI Button
-description: An example showing how to center an image on a Kendo UI Button
+title: Center Image within the Button
+description: An example on how to center an image in a Kendo UI Button.
 type: how-to
 page_title: Center Image with Minimal Space | Kendo UI Button
 slug: button-center-image-style
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,15 +24,16 @@ res_type: kb
 
 ## Description
 
-I want to create a Kendo UI Button that is square in format and has the image centered in the middle of the button. 
-
-The Kendo Button standard CSS displays a change in color around the picture when it is pressed, which is how I want it. The margins around the image should also be set to the smallest amount of space but still show all the default Kendo CSS.
+How can I create a square Kendo UI Button which has a centered image in the middle and which meets the following requirements?
+* The standard CSS of the Button display a change in the color around the picture when it is pressed.
+* The margins around the image are set to the smallest possible space and, yet, show all default Kendo UI CSS.
 
 ## Solution
 
-The image in a Kendo UI Button can be centered with minimal space using CSS.  
+To center the image in a Button with a minimum space, use CSS.  
 
-**For All Image Buttons:**
+The following example demonstrates how to render a centered image for all Buttons.
+
 ```css
   .k-button .k-image{
     margin: auto;
@@ -41,7 +43,8 @@ The image in a Kendo UI Button can be centered with minimal space using CSS.
   }
 ```
 
-**For a Specific Image Button:**
+The following example demonstrates how to render a centered image for a specific Button.
+
 ```css
   #imageButtonID .k-image{
     margin: auto;
@@ -50,7 +53,8 @@ The image in a Kendo UI Button can be centered with minimal space using CSS.
     padding: 0;
   }
 ```
-The following demonstrates a Kendo UI Button showing the image with the implemented CSS:
+
+The following example demonstrates the full implementation of the suggested approach.
 
 ```html
     <style type="text/css">
@@ -76,5 +80,5 @@ The following demonstrates a Kendo UI Button showing the image with the implemen
 
 ## See Also
 
-* [Kendo UI Button Demo - Images](https://demos.telerik.com/kendo-ui/button/images)
-* [Kendo UI Button - Image Icons - Documentation](https://docs.telerik.com/kendo-ui/controls/navigation/button/overview#image-icons)
+* [Demo on Adding Images in the Kendo UI Button](https://demos.telerik.com/kendo-ui/button/images)
+* [Kendo UI Documentation on Image Icons in the Button](https://docs.telerik.com/kendo-ui/controls/navigation/button/overview#image-icons)

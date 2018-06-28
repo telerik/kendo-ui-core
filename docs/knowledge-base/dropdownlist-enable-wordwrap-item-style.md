@@ -1,8 +1,8 @@
 ---
-title: Enable Word-Wrap for DropDownList Items
-description: Wrapping long words while keeping the width of a Kendo UI DropDownList without adding a horizontal scrollbar
+title: Enable Word-Wrapping for DropDownList Items
+description: An example on how to wrap long words in the Kendo UI DropDownList without adding a horizontal scrollbar and while keeping its width.
 type: how-to
-page_title: Prevent Scrolling and Changing Width With Word-Wrap | Kendo UI DropDownList
+page_title: Prevent Scrolling and Changing Width with Word-Wrap | Kendo UI DropDownList
 slug: dropdownlist-enable-wordwrap-item-style
 tags: dropdownlist, enable, wordwrap, item, style
 ticketid: 1160023
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,22 +24,23 @@ res_type: kb
 
 ## Description
 
-How can I enable word-wrap for a drop down control item?  We need to wrap the item text if it is more than certain width.
+How can I enable word-wrapping for a DropDownList item so that I can wrap the item text if it exceeds a certain width?
 
 ## Solution
 
-Adding [word-wrap](https://www.w3schools.com/cssref/css3_pr_word-wrap.asp) can be achieved using CSS.  
+Implement [word-wrapping](https://www.w3schools.com/cssref/css3_pr_word-wrap.asp) by using CSS.  
+
 ```
   #myDropDownList-list.k-popup .k-list .k-item{
     word-wrap: break-word;
   }
 ```
 
-The following will allow word wrapping in the middle of a long word while retaining the width of the Kendo UI DropDownList's dropdown container without adding a horizontal scrollbar:
+The following example demonstrates how to wrap words in the DropDownList while the width of the drop-down container is retained and the implementation of a horizontal scrollbar avoided.
 
 ```html
     <style>
-      /*For a Specific Kendo UI DropDownList*/
+      /*For a specific Kendo UI DropDownList*/
       #myDropDownList-list.k-popup .k-list .k-item{
         word-wrap: break-word;
       }
@@ -66,4 +68,4 @@ The following will allow word wrapping in the middle of a long word while retain
 
 ## See Also
 
-* [Kendo DropDownList Demo](https://demos.telerik.com/kendo-ui/dropdownlist/index)
+* [Demo on Using the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index)

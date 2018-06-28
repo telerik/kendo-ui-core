@@ -1,8 +1,8 @@
 ---
-title: Example of Drag and Drop from TreeView to ListBox
-description: How to drag a node from TreeView to ListBox
+title: Drag and Drop Nodes from TreeView to ListBox
+description: An example on how to drag a node from the Kendo UI TreeView and drop it in the Kendo UI ListBox.
 type: how-to
-page_title: Drag node from TreeView to ListBox | Kendo UI TreeView 
+page_title: Drag Nodes from TreeView and Drop Them in ListBox | Kendo UI TreeView
 slug: treeview-listbox-drag-and-drop
 tags: treeview, listbox
 ticketid: 1163151  
@@ -33,15 +33,15 @@ res_type: kb
 
 ## Description
 
-How to drag a node from TreeView and drop it in ListBox?
+How can I drag a node from the TreeView and drop it in the ListBox?
 
 ## Solution
 
-1. In the TreeView drop event handler get the dropped node and add it to the ListBox.
+In the `drop` event handler of the TreeView, get the dropped node and add it to the ListBox.
 
 ```html
-<div id="treeview-left"></div> 
-<select id="optional" ></select> 
+<div id="treeview-left"></div>
+<select id="optional" ></select>
 
 <script>
 	$("#treeview-left").kendoTreeView({
@@ -60,13 +60,13 @@ How to drag a node from TreeView and drop it in ListBox?
 		] }
 	]
 	});
-	
+
 	$("#optional").kendoListBox({
 	dataTextField: "text",
 	dataValueField: "id",
 	dataSource: [{ id: 8, text: "Other products" }]
 	});
-	
+
 	function onDrop(e){          
 	var item = e.sender.dataItem(e.sourceNode);         
 	var listbox = $('#optional').data('kendoListBox');         

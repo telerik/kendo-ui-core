@@ -1,8 +1,8 @@
 ---
-title: Change Color of Kendo UI CheckBox
-description: Adding a new color style to the Kendo UI CheckBox using CSS
+title: Change CheckBox Color
+description: An example on how to add a new color style to the Kendo UI CheckBox by using CSS.
 type: how-to
-page_title: Implement New Color Scheme With CSS Styling | Kendo UI CheckBox
+page_title: Implement New Color Schemes with CSS Styling | Kendo UI CheckBox
 slug: checkbox-background-color-style
 tags: checkbox, background, color, style
 ticketid: 1140909
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,17 +24,18 @@ res_type: kb
 
 ## Description
 
-How can I change the colors of a Kendo UI CheckBox?   
+How can I change the colors of a CheckBox?   
 
 ## Solution
 
-Setting a different [color](https://www.w3schools.com/cssref/pr_text_color.asp) and [background color](https://www.w3schools.com/css/css_background.asp) can be achieved using CSS.  
+Set a different [`color`](https://www.w3schools.com/cssref/pr_text_color.asp) and [`background`](https://www.w3schools.com/css/css_background.asp) color by using CSS.  
+
 ```
 /*empty checkbox*/
 .k-checkbox-label:before{
     background: black;
 }
- 
+
 /*checked checkbox*/
 .k-checkbox:checked + .k-checkbox-label:before {
     background: black;
@@ -41,7 +43,7 @@ Setting a different [color](https://www.w3schools.com/cssref/pr_text_color.asp) 
 }
 ```
 
-The following demonstrates a list of Kendo UI CheckBoxes with a new color scheme.
+The following example demonstrates how to render a list of CheckBoxes with a new color scheme.
 
 ```html
     <style>
@@ -56,7 +58,7 @@ The following demonstrates a list of Kendo UI CheckBoxes with a new color scheme
         color: white;
       }
 
-      
+
       /*Additional Styling For Example*/
       .fieldlist {
         margin: 0 0 -1em;
@@ -106,4 +108,4 @@ The following demonstrates a list of Kendo UI CheckBoxes with a new color scheme
 
 ## See Also
 
-* [Kendo CheckBoxes Styling Demo](https://demos.telerik.com/kendo-ui/styling/checkboxes)
+* [Demo on Styling CheckBoxes](https://demos.telerik.com/kendo-ui/styling/checkboxes)

@@ -1,8 +1,8 @@
 ---
-title: Hide unselected items in filter popup in Spreadsheet
-description: How to hide unselected items in filter popup in Spreadsheet
+title: Hide Unselected Items in Spreadsheet Filter Popup
+description: An example on how to hide the unselected items in the filter popup of the Kendo UI Spreadsheet.
 type: how-to
-page_title: Hide Unselected Items in Filter | Kendo UI Spreadsheet 
+page_title: Hide Unselected Items in Filter | Kendo UI Spreadsheet
 slug: spreadsheet-hide-unselected-items-filtering
 tags: spreadsheet
 ticketid: 1172549  
@@ -32,12 +32,12 @@ res_type: kb
 
 ## Description
 
-How to hide the unselected items in the filter popup in Kendo Spreadsheet?
+How can I hide the unselected items in the filter popup of the Spreadsheet?
 
 ## Solution
 
-1. Add click handler to the arrow button. 
-1. Find unchecked checkboxes and hide them. 
+1. Add the `click` handler to the **Arrow** button.
+1. Find the unchecked checkboxes and hide them.
 
 ```html
 <div id="spreadsheet" style="width: 100%"></div>
@@ -237,11 +237,11 @@ How to hide the unselected items in the filter popup in Kendo Spreadsheet?
                 ]
             }]
         });
-      
+
 		$('.k-icon.k-i-arrow-60-down').click(function(){		
 			setTimeout(function(){
 				var checkboxes = $('.k-checkbox');
-				
+
 				for(var p=0; p < checkboxes.length; p++){
 						var checked = checkboxes[p].checked;
 					if(!checked){                      
@@ -250,7 +250,7 @@ How to hide the unselected items in the filter popup in Kendo Spreadsheet?
 				}                           
 			}, 0)
 		})
-      
+
     });
 </script>
 ```

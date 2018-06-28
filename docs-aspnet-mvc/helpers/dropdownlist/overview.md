@@ -221,11 +221,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             )
     ```
 
-### Model Binding with Local or Remote data
+### Model Binding
 
-Local data means that all the data is available on the client when the DropDownList is initialized. In the example below the data is passed to the view through the ViewData.
+You can implement model binding both with [local data](#local-data) and [remote data](#remote-data), and in combination with [virtualization](#virtualization).
 
-1. In the example below the data is passed to the view through the ViewData.
+#### Local Data
+
+Local data is the data that is available on the client when the DropDownList is initialized.
+
+1. Pass the data to the view through the `ViewData`.
 
     ###### Example
 
@@ -252,7 +256,7 @@ Local data means that all the data is available on the client when the DropDownL
             }
 
 
-1. Add a DropDownList to the view and bind it to the data saved in the ViewData.
+1. Add a DropDownList to the view and bind it to the data that is saved in the `ViewData`.
 
     ###### Example
 
@@ -279,9 +283,11 @@ Local data means that all the data is available on the client when the DropDownL
             %>
     ```
 
-You can configure the DropDownList to get data from a remote source by making an AJAX request.
+#### Remote Data
 
-1. Create an action that returns the data as JSON result.
+You can configure the DropDownList to get its data from a remote source by making an AJAX request.
+
+1. Create an action that returns the data as a JSON result.
 
     ###### Example
 
@@ -351,11 +357,11 @@ You can configure the DropDownList to get data from a remote source by making an
             %>
     ```
 
-### Model Binding with Virtualization
+#### Virtualization
 
-You can configure a DropDownList bound to a model field to use [Virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+You can configure a DropDownList that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
 
-1. Create **Read** and **ValueMapper** actions.
+1. Create the `Read` and `ValueMapper` actions.
 
     ###### Example
 
@@ -522,9 +528,7 @@ You can configure a DropDownList bound to a model field to use [Virtualization](
             %>
     ```
 
-If the **AutoBind** option of the DropDownList is set to **false**, to display the model value as selected the **Text** configuration option of the widget must also be set.
-
-1. Pass the field set as **DataTextField** to the **Text** option.
+If the `AutoBind` option of the DropDownList is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 
     ###### Example
 
@@ -555,7 +559,7 @@ If the **AutoBind** option of the DropDownList is set to **false**, to display t
 
 > **Important**
 >
-> The type of the value the DropDownList can be bound to on the server can only be a primitive type or enum.
+> The type of the value to which the DropDownList can be bound on the server can only be a primitive type or an enum value.
 
 ### Parameter Sending to Server
 

@@ -396,6 +396,25 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 });
 }
 
+/* Validator messages */
+
+/* Validator messages */
+
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages,{
+	"required": "{0} è richiesto",
+	"pattern": "{0} non è valido",
+	"min": "{0} dovrebbe essere maggiore di o uguale a {1}",
+	"max": "{0} dovrebbe essere minore di o uguale a {1}",
+	"step": "{0} non è valido",
+	"email": "{0} non è un formato email corretto",
+	"url": "{0} non è un URL valido",
+	"date": "{0} non è un formato data valido",
+	"dateCompare": La data di fine dovrebbe essere maggiore o uguale di quella di inizio"
+});
+}
+    
 /* Spreadsheet messages */
 
 if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
