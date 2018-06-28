@@ -1,8 +1,8 @@
 ---
-title: Example of fontName with styles in Editor
-description: How to style the fontNames in Editor
+title: Style the Font Names in Editor
+description: An example on how to style the fontNames drop-down in the Kendo UI Editor.
 type: how-to
-page_title: Style the FontNames | Kendo UI Editor 
+page_title: Style the Font Names | Kendo UI Editor
 slug: editor-style-fontnames-dropdown
 tags: editor
 ticketid: 1171186  
@@ -32,12 +32,12 @@ res_type: kb
 
 ## Description
 
-How to style the names of each font in Editor fontNames dropdown?
+How to style the names of each font in the `fontNames` dropdown of the Editor?
 
 ## Solution
 
-1. Get a reference to the fontNames ComboBox.
-1. Change the styles using a template and setOptions method.
+1. Get a reference to the `fontNames` ComboBox.
+1. Change the styles by using a template and the `setOptions` method.
 
 ```html
 <textarea id="editor" rows="10" cols="30" style="width:100%;height:200px">
@@ -72,10 +72,10 @@ How to style the names of each font in Editor fontNames dropdown?
                 { text: "Wingdings", value: "Wingdings" }
             ]
         }
-            
+
         ]
     });
-  
+
   	var cb = $("select.k-fontName").data("kendoComboBox");      	
   	cb.setOptions({
     	template: "<span style='font-family: #: text #'>#: text #</span>"
