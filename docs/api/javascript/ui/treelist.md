@@ -3932,6 +3932,34 @@ The columns of the TreeList initialized from the [columns](/api/javascript/ui/tr
       });
     </script>
 
+### table `jQuery`
+
+The jQuery object which represents the treelist table element.
+
+### tbody `jQuery`
+
+The jQuery object which represents the table body. Contains all treelist table rows.
+
+### thead `jQuery`
+
+The jQuery object which represents the treelist table header element.
+
+### content `jQuery`
+
+The jQuery object which represents the treelist content element, which holds the scrollable content. Available only in a treelist with locked columns.
+
+### lockedHeader `jQuery`
+
+The jQuery object which represents the treelist locked header element. Available only in a treelist with locked columns.
+
+### lockedTable `jQuery`
+
+The jQuery object which represents the treelist locked table element. Available only in a treelist with locked columns.
+
+### lockedContent `jQuery`
+
+The jQuery object which represents the treelist locked content element. Available only in a treelist with locked columns.
+
 ## Methods
 
 ### addRow
@@ -4387,7 +4415,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/javascript/ui/treelist/configuration/editable.mode).
 
-Fires the [edit](/api/javascript/ui/grid/events/edit) event.
+Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
 
 #### Parameters
 
