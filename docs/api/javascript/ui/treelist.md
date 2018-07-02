@@ -6406,6 +6406,72 @@ The widget instance which fired the event.
       treelist.bind("filterMenuInit", treelist_filterMenuInit);
     </script>
 
+### filterMenuOpen
+
+Fired when the treelist filter menu is opened.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object representing filter menu form element.
+
+##### e.field `String`
+
+The field of the column for which the filter menu is opened.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "filterMenuOpen" event during initialization
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        filterable: true,
+        filterMenuOpen: function(e) {
+          e.container.find(".k-textbox:last").focus();
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "filterMenuOpen" event during initialization and change the default operators
+
+    <div id="treelist"></div>
+    <script>
+      function treelist_filterMenuOpen(e) {
+        e.container.find(".k-textbox:last").focus();
+      }
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22, expanded: true },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ],
+        filterable: true
+      });
+      var treelist = $("#treelist").data("kendoTreeList");
+      treelist.bind("filterMenuOpen", treelist_filterMenuOpen);
+    </script>
+
 ### pdfExport
 
 Fired when the user clicks the "Export to PDF" toolbar button.
@@ -7149,6 +7215,76 @@ The widget instance which fired the event.
 
       var treelist = $("#treeList").data("kendoTreeList");
       treelist.bind("columnMenuInit", treelist_columnMenuInit);
+    </script>
+
+### columnMenuOpen
+
+Fired when the column menu is opened.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.container `jQuery`
+
+The jQuery object representing column menu form element.
+
+##### e.field `String`
+
+The field of the column for which the column menu is initialized.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnMenuOpen" event during initialization
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true,
+        columnMenuOpen: function(e) {
+          var menu = e.container.children().data("kendoMenu");
+          menu.open(menu.element.find("li:first"));
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "columnMenuOpen" event after initialization
+
+    <div id="treeList"></div>
+    <script>
+      function treelist_columnMenuOpen(e) {
+        var menu = e.container.children().data("kendoMenu");
+        menu.open(menu.element.find("li:first"));
+      }
+
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 }
+          ]
+        },
+        columnMenu: true
+      });
+
+      var treelist = $("#treeList").data("kendoTreeList");
+      treelist.bind("columnMenuOpen", treelist_columnMenuOpen);
     </script>
 
 ### columnLock
