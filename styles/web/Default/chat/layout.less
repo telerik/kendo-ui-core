@@ -45,14 +45,24 @@
 
     // Message list
     .k-message-list {
-        padding: @chat-message-list-padding-y @chat-message-list-padding-x;
-        flex: 1 1 auto;
         display: flex;
+        flex: 1 1 auto;
         flex-direction: column;
         align-items: flex-start;
         overflow-x: hidden;
         overflow-y: auto;
         scroll-behavior: smooth;
+    }
+    .k-message-list-content {
+        padding: @chat-message-list-padding-y @chat-message-list-padding-x;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        overflow: hidden;
 
         > * + * {
             margin-top: @chat-message-list-spacing;
@@ -293,21 +303,61 @@
 }
 
 .k-chat .k-card-deck {
-    max-width: calc( 125% + calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}"));
+    max-width: calc( 100% + calc( ~"@{chat-message-list-padding-y} * 2 "));// prevent overflowing in the parent element
     box-sizing: border-box;
+    margin-left: -@chat-message-list-padding-y;
+    margin-right: -@chat-message-list-padding-y;
+    padding: @chat-message-list-padding-y @chat-message-list-padding-y @chat-message-list-padding-x;
+    overflow: hidden;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+
+    .k-card-wrap + .k-card-wrap {
+        margin-left: @card-deck-gap;
+    }
+}
+.k-chat .k-card-deck .k-card,
+.k-chat .k-card-deck .k-card-wrap {
+    width: 200px;
+}
+
+.k-card-deck-scrollwrap {
     margin-left: -@chat-message-list-padding-y;
     margin-right: -@chat-message-list-padding-y;
     padding-left: @chat-message-list-padding-y;
     padding-right: @chat-message-list-padding-y;
     overflow: hidden;
-    overflow-x: auto;
+    flex: 0 0 auto;
+    width: 100%;
+    box-sizing: content-box;
 
-    &::-webkit-scrollbar {
-        display: none;
+    > .k-card-deck {
+        // hide scrollbar
+        @scrollbar-size: 20px;
+        margin-bottom: -@scrollbar-size;
+        padding-bottom: @scrollbar-size;
     }
 }
-.k-chat .k-card-deck .k-card {
-    width: 200px;
+
+
+// Deck
+.k-chat .k-card-deck .k-card-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex: 0 0 auto;
+
+    .k-card {
+        flex: 0 0 auto;
+    }
+    .k-card + .k-card {
+        margin-left: @card-deck-gap;
+    }
+
+    &.k-state-selected {
+        background: none;
+    }
 }
 
 

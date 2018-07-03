@@ -212,6 +212,310 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
         )
     ```
 
+### Model Binding
+
+You can implement model binding both with [local data](#local-data) and [remote data](#remote-data), and in combination with [virtualization](#virtualization).
+
+#### Local Data
+
+Local data is the data that is available on the client when the AutoComplete is initialized.
+
+1. Pass the data to the view through the `ViewData`.
+
+    ###### Example
+
+            public ActionResult Index()
+            {
+                ViewData["products"] = GetProducts();
+
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            private static IEnumerable<ProductViewModel> GetProducts()
+            {
+                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return products;
+            }
+
+
+1. Add a AutoComplete to the view and bind it to the data that is saved in the `ViewData`.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+            @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
+                .DataTextField("ProductName")
+                .BindTo((System.Collections.IEnumerable)ViewData["products"])
+            )
+
+    ```
+    ```tab-ASPX
+
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+            <%: Html.Kendo().AutoCompleteFor(m => m.ProductName)
+                .DataTextField("ProductName")
+                .BindTo((System.Collections.IEnumerable)ViewData["products"])
+            %>
+    ```
+
+#### Remote Data
+
+You can configure the AutoComplete to get its data from a remote source by making an AJAX request.
+
+1. Create an action that returns the data as a JSON result.
+
+    ###### Example
+
+            public ActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            public JsonResult GetProductsAjax()
+            {
+                var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return Json(products, JsonRequestBehavior.AllowGet);
+            }
+
+
+1. Add a AutoComplete to the view and configure its DataSource to use remote data.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+
+            @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
+                .Filter("contains")
+                .DataTextField("ProductName")
+                .Placeholder("Select product...")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetProductsAjax", "Home");
+                    })
+                    .ServerFiltering(false);
+                })
+            )
+    ```
+    ```tab-ASPX
+
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+            <%: Html.Kendo().AutoCompleteFor(m => m.ProductName)
+                    .Filter("contains")
+                    .DataTextField("ProductName")
+                    .Placeholder("Select product...")
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("GetProductsAjax", "Home");
+                        })
+                        .ServerFiltering(false);
+                    })
+            %>
+    ```
+
+#### Virtualization
+
+You can configure a AutoComplete that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+
+1. Create the `Read` and `ValueMapper` actions.
+
+    ###### Example
+
+            public ActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    ProductID = 4,
+                    ProductName = "ProductName4"
+                });
+            }
+
+            [HttpPost]
+            public ActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+            {
+                return Json(GetProducts().ToDataSourceResult(request));
+            }
+
+            public ActionResult Products_ValueMapper(int[] values)
+            {
+                var indices = new List<int>();
+
+                if (values != null && values.Any())
+                {
+                    var index = 0;
+
+                    foreach (var product in GetProducts())
+                    {
+                        if (values.Contains(product.ProductID))
+                        {
+                            indices.Add(index);
+                        }
+
+                        index += 1;
+                    }
+                }
+
+                return Json(indices, JsonRequestBehavior.AllowGet);
+            }
+
+            private static IEnumerable<ProductViewModel> GetProducts()
+            {
+                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
+                {
+                    ProductID = i,
+                    ProductName = "ProductName" + i
+                });
+
+                return products;
+            }
+
+
+1. Add a AutoComplete to the view and configure it to use virtualization.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+            @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
+                .Filter("contains")
+                .DataTextField("ProductName")
+                .DataSource(source =>
+                {
+                    source.Custom()
+                        .ServerFiltering(true)
+                        .ServerPaging(true)
+                        .PageSize(80)
+                        .Type("aspnetmvc-ajax")
+                        .Transport(transport =>
+                        {
+                            transport.Read("ProductsVirtualization_Read", "Home");
+                        })
+                        .Schema(schema =>
+                        {
+                            schema.Data("Data")
+                                    .Total("Total");
+                        });
+                })
+                .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+            )
+
+
+            <script>
+                function valueMapper(options) {
+                    $.ajax({
+                        url: "@Url.Action("Products_ValueMapper", "Home")",
+                        data: convertValues(options.value),
+                        success: function (data) {
+                            options.success(data);
+                        }
+                    });
+                }
+
+                function convertValues(value) {
+                    var data = {};
+
+                    value = $.isArray(value) ? value : [value];
+
+                    for (var idx = 0; idx < value.length; idx++) {
+                        data["values[" + idx + "]"] = value[idx];
+                    }
+
+                    return data;
+                }
+            </script>
+
+    ```
+    ```tab-ASPX
+
+            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+            <%: Html.Kendo().AutoCompleteFor(m => m.ProductName)
+                .Filter("contains")
+                .DataTextField("ProductName")
+                .DataSource(source =>
+                {
+                    source.Custom()
+                        .ServerFiltering(true)
+                        .ServerPaging(true)
+                        .PageSize(80)
+                        .Type("aspnetmvc-ajax")
+                        .Transport(transport =>
+                        {
+                            transport.Read("ProductsVirtualization_Read", "Home");
+                        })
+                        .Schema(schema =>
+                        {
+                            schema.Data("Data")
+                                    .Total("Total");
+                        });
+                })
+                .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+
+
+            <script>
+                function valueMapper(options) {
+                    $.ajax({
+                        url: "@Url.Action("Products_ValueMapper", "Home")",
+                        data: convertValues(options.value),
+                        success: function (data) {
+                            options.success(data);
+                        }
+                    });
+                }
+
+                function convertValues(value) {
+                    var data = {};
+
+                    value = $.isArray(value) ? value : [value];
+
+                    for (var idx = 0; idx < value.length; idx++) {
+                        data["values[" + idx + "]"] = value[idx];
+                    }
+
+                    return data;
+                }
+            </script>
+            %>
+    ```
+
+> **Important**
+>
+> The type of the value to which the AutoComplete can be bound on the server can only be a primitive type or an enum value.
+
 ### Parameter Sending to Server
 
 Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete to send parameters to the server.

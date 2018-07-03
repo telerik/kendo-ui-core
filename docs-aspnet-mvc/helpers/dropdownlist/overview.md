@@ -536,7 +536,6 @@ If the `AutoBind` option of the DropDownList is set to `false` and you need the 
 
             @model MvcApplication1.Models.ProductViewModel
 
-
             @(Html.Kendo().DropDownListFor(m => m.ProductID)
                 .AutoBind(false)
                 .Text(Model.ProductName)

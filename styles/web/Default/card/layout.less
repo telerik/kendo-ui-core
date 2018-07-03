@@ -16,6 +16,10 @@
 @card-button-padding-y: 4px;
 @card-deck-gap: 16px;
 
+
+@card-deck-scroll-button-radius: 0;
+@card-deck-scroll-button-offset: -1px;
+
 // Card
 .k-card {
     .border-radius( @card-border-radius );
@@ -236,6 +240,29 @@
     }
     .k-card + .k-card {
         margin-left: @card-deck-gap;
+    }
+}
+.k-card-deck-scrollwrap {
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    > .k-button {
+        .border-radius( @card-deck-scroll-button-radius );
+        flex: 0 0 auto;
+        position: absolute;
+
+        &:first-child {
+            left: @card-deck-scroll-button-offset;
+        }
+
+        &:last-child {
+            right: @card-deck-scroll-button-offset;
+        }
+    }
+
+    > .k-card-deck {
+        flex: 1 1 auto;
     }
 }
 

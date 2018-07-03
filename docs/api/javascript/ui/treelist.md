@@ -129,6 +129,39 @@ HTML attributes of the table cell (`<td>`) rendered for the column.
 
 The table cells would look like this: `<td class="name-cell" style="text-align: right">...</td>`.
 
+### columns.columns `Array`
+
+The columns which should be rendered as child columns under this group column header.
+
+**Note that group column cannot be data bound and supports limited number of bound column settings - such as title, locked
+
+#### Example - set column group column for displaying multicolumn headers
+
+    <div id="treelist"></div>
+    <script>
+    $("#treelist").kendoTreeList({
+        columns: [
+        {
+            title: "Personal Info",
+            columns: [
+                { field: "lastName" },
+                { field: "age" }
+            ]
+        },
+        {
+            title: "Work info",
+            columns: [
+                { field: "position" }
+            ]
+        }
+      ],
+      dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", age: 25, position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", age: 33, position: "	VP, Engineering" }
+        ]
+    });
+    </script>
+
 ### columns.command `Array`
 
 The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "createChild" or "destroy"):

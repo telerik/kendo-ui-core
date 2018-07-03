@@ -111,6 +111,225 @@ The following example demonstrates the basic configuration of the MultiSelect Ht
     </script>
 ```
 
+## Model Binding
+
+You can implement model binding both with [local data](#local-data) and [remote data](#remote-data), and in combination with [virtualization](#virtualization).
+
+### Local Data
+
+Local data is the data that is available on the client when the MultiSelect is initialized.
+
+1. Pass the data to the view through the view model.
+
+    ###### Example
+
+            public IActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    Orders = GetOrders(),
+                    SelectedOrders = new int[] { 1, 3 }
+                });
+            }
+
+            private static List<Order> GetOrders()
+            {
+                var orders = Enumerable.Range(0, 2000).Select(i => new Order
+                {
+                    OrderID = i,
+                    OrderName = "OrderName" + i
+                });
+
+                return orders.ToList();
+            }
+
+
+1. Add a MultiSelect to the view and bind it to a property of the view model.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+            @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+                .DataValueField("OrderID")
+                .DataTextField("OrderName")
+                .BindTo(Model.Orders)
+            )
+
+    ```
+
+### Remote Data
+
+You can configure the MultiSelect to get its data from a remote source by making an AJAX request.
+
+1. Create an action that returns the data as a JSON result.
+
+    ###### Example
+
+            public IActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    SelectedOrders = new int[] { 1, 3 }
+                });
+            }
+
+            public JsonResult GetOrdersAjax()
+            {
+                var orders = Enumerable.Range(0, 2000).Select(i => new Order
+                {
+                    OrderID = i,
+                    OrderName = "OrderName" + i
+                });
+
+                return Json(orders.ToList());
+            }
+
+
+1. Add a MultiSelect to the view and configure its DataSource to use remote data.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+
+            @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+                .Filter("contains")
+                .DataValueField("OrderID")
+                .DataTextField("OrderName")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("GetOrdersAjax", "Home");
+                    })
+                    .ServerFiltering(false);
+                })
+            )
+    ```
+
+### Virtualization
+
+You can configure a MultiSelect that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+
+1. Create the `Read` and `ValueMapper` actions.
+
+    ###### Example
+
+            public IActionResult Index()
+            {
+                return View(new ProductViewModel
+                {
+                    SelectedOrders = new int[] { 1, 3 }
+                });
+            }
+
+            [HttpPost]
+            public IActionResult OrdersVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+            {
+                return Json(GetOrders().ToDataSourceResult(request));
+            }
+
+            public IActionResult Orders_ValueMapper(int[] values)
+            {
+                var indices = new List<int>();
+
+                if (values != null && values.Any())
+                {
+                    var index = 0;
+
+                    foreach (var order in GetOrders())
+                    {
+                        if (values.Contains(order.OrderID))
+                        {
+                            indices.Add(index);
+                        }
+
+                        index += 1;
+                    }
+                }
+
+                return Json(indices);
+            }
+
+            private static List<Order> GetOrders()
+            {
+                var orders = Enumerable.Range(0, 2000).Select(i => new Order
+                {
+                    OrderID = i,
+                    OrderName = "OrderName" + i
+                });
+
+                return orders.ToList();
+            }
+
+
+1. Add a MultiSelect to the view and configure it to use virtualization.
+
+    ###### Example
+
+    ```tab-Razor
+
+            @model MvcApplication1.Models.ProductViewModel
+
+            @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+                .Filter("contains")
+                .DataValueField("OrderID")
+                .DataTextField("OrderName")
+                .DataSource(source =>
+                {
+                    source.Custom()
+                        .ServerFiltering(true)
+                        .ServerPaging(true)
+                        .PageSize(80)
+                        .Type("aspnetmvc-ajax")
+                        .Transport(transport =>
+                        {
+                            transport.Read("OrdersVirtualization_Read", "Home");
+                        })
+                        .Schema(schema =>
+                        {
+                            schema.Data("Data")
+                                    .Total("Total");
+                        });
+                })
+                .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+            )
+
+            <script>
+                function valueMapper(options) {
+                    $.ajax({
+                        url: "@Url.Action("Orders_ValueMapper", "Home")",
+                        data: convertValues(options.value),
+                        success: function (data) {
+                            options.success(data);
+                        }
+                    });
+                }
+
+                function convertValues(value) {
+                    var data = {};
+
+                    value = $.isArray(value) ? value : [value];
+
+                    for (var idx = 0; idx < value.length; idx++) {
+                        data["values[" + idx + "]"] = value[idx];
+                    }
+
+                    return data;
+                }
+            </script>
+
+    ```
+
+> **Important**
+>
+> If the `AutoBind` option of the MultiSelect is set to `false` it will not be able to display pre-selected items, until it is focused.
+
 ## See Also
 
 * [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
