@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 1. Include an Entity Framework Data Model. Follow the steps described [in this article]({% slug ajaxbinding_treeviewhelper_aspnetmvc %}) to do that.
 
     > **Important**
-    > * If you are using the [Northwind dummy datasource](http://northwinddatabase.codeplex.com/) as is the example on which this article is based, you might need to upgrade it to match a more recent version of your Visual Studio LocalDb definition. In such case, do that  by using the [Server Explorer](https://msdn.microsoft.com/en-us/library/hh873188.aspx). Visual Studio will require you to confirm whether you want to upgrade the database. Upon accepting it, you are ready to go.
+    > * If you are using the [Northwind dummy datasource](https://archive.codeplex.com/?p=northwinddatabase) as is the example on which this article is based, you might need to upgrade it to match a more recent version of your Visual Studio LocalDb definition. In such case, do that  by using the [Server Explorer](https://msdn.microsoft.com/en-us/library/hh873188.aspx). Visual Studio will require you to confirm whether you want to upgrade the database. Upon accepting it, you are ready to go.
     > * You must rebuild your project after adding the Entity Data Model.
 
 1. Right-click the location where the TreeView Controller is to be generated. Select **Add** > **New Scaffolded item...** from the displayed menu. In this example, you generate it in the **Controllers** folder.
