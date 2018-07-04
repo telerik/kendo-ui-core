@@ -16,7 +16,7 @@ This article is an overview of the Kendo UI Music Store sample project. The Kend
 
 ![kendo-music-store-intro-web-screenshot](/tutorials/tutorial-kendo-music-store/images/kendo-music-store-intro-web-screenshot.png)
 
-This sample project is based on the [MVC Music Store from Microsoft](http://mvcmusicstore.codeplex.com/), so much of the server-side processing and the data structure are reused in this project.
+This sample project is based on the [MVC Music Store from Microsoft](https://archive.codeplex.com/?p=mvcmusicstore), so much of the server-side processing and the data structure are reused in this project.
 
 The UI of the Music Store, however, is completely redesigned with Kendo UI. It focuses on [Kendo UI Professional](http://www.telerik.com/kendo-ui), the way it is used and interacts with ASP.NET MVC, WebAPI, and WCF Data Services.
 

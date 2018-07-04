@@ -64,8 +64,6 @@ function search_loaded() {
         popup.toggle();
     });
 
-    var resources = {};
-
     viewModel.updateLabel();
 
     kendo.bind($("#page-search"), viewModel);
@@ -75,7 +73,7 @@ function search_loaded() {
         viewModel.updateLabel();
     });
 
-    attachToEvents();
+    prepareSearch();
     searchInternal();
 }
 
@@ -103,11 +101,14 @@ function closePopup() {
     popup.close();
 }
 
-function attachToEvents() {
+function prepareSearch() {
     var oldInput = $('.gsc-input input[type="text"]');
+    oldInput.off('keydown');
+    oldInput.off('blur');
+    oldInput.off('focus');
     var newInput = oldInput.clone();
     oldInput.replaceWith(newInput);
-    newInput.keydown(function (e) {
+    newInput.on('keydown', function (e) {
         if (e.keyCode == 13) { // Enter
             closePopup();
             search();
@@ -115,11 +116,20 @@ function attachToEvents() {
             return false;
         }
     })
+    .on('blur', function() {
+        $this = $(this);
+        if(!$this.val().length) {
+            $this.removeClass('input-focused');
+        }
+    }).on('focus', function() {
+        $(this).addClass('input-focused');
+    });
 
     var oldSearchButton = $('.gsc-search-button button.gsc-search-button.gsc-search-button-v2');
+    oldSearchButton.off('click');
     var newSearchButton = oldSearchButton.clone();
     oldSearchButton.replaceWith(newSearchButton);
-    newSearchButton.click(function (e) {
+    newSearchButton.on('click', function () {
         closePopup();
         search();
 
