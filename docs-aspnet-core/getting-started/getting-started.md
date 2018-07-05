@@ -113,7 +113,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
         ![Kendo UI resources](images/kendo-ui-wwwroot.png)
 
-    * Bower package installation&mdash;For more information on how to achieve this, refer to the [Kendo UI Professional Bower package installation](../../kendo-ui/intro/installation/bower-install).
+    * Bower package installation&mdash;For more information on how to achieve this, refer to the [Kendo UI Professional Bower package installation](../../kendo-ui/intro/installation/bower-install). As Asp.Net Core 2.1 no longer supports bower, alternative approach for copying kendo scripts is described in [Copy Kendo UI client resources through npm and webpack](#configuration-Copy) section
 
 8. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
@@ -196,6 +196,68 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
     **Figure 3. The end result&mdash;a sample page**
 
     ![Sample page](images/sample-page.png)
+
+### Copy Kendo UI client resources through npm and webpack
+
+1. Create new Telerik ASP.NET Core project and remove `bower.json` file.
+2. Add `package.json` as in the example below 
+	
+    ###### Example
+
+        {
+			"name": "YourAppName",
+			"version": "1.0.0",
+			"description": "",
+			"main": "main.js",
+			"scripts": {
+				"build": "webpack"
+			},
+			"keywords": [],
+			"author": "",
+			"license": "ISC",
+			"dependencies": {				
+				"@progress/kendo-ui": "2018.2.620"
+			},
+			"devDependencies": {
+				"webpack": "^4.12.0",
+				"webpack-cli": "^3.0.8"
+			}
+		}
+
+3. Add the following `webpack.config.js` file
+
+    ###### Example
+	
+		const path = require('path');
+		
+		module.exports = {
+			entry: './main.js',
+			output: {
+				filename: 'bundle.js',
+				path: path.resolve(__dirname, 'wwwroot')
+			}
+		}
+
+4. Next, create `main.js` file with content as in the example below. Note that as both `jQuery` and `$` are used throughout the application, jQuery is assigned to both variables in the global scope. 
+
+    ###### Example
+	
+		jQuery = $ = require("jquery");
+		require("@progress/kendo-ui/js/kendo.all");
+		require("@progress/kendo-ui/js/kendo.aspnetmvc");   
+
+5. Open the Command prompt and navigate to the project`s folder. Run the following commands:
+
+    ```sh
+    npm install
+    npm run build
+    ```
+
+6. In `~/Views/Shared/_Layout.cshtml` replace the kendo CDN scripts with script that reference `bundle.js`
+
+    ###### Example
+
+        <script src="~/bundle.js"></script>
 
 ## See Also
 
