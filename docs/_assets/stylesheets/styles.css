@@ -636,18 +636,15 @@ footer p {
   width: 100%; }
 
 #page-search form {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  box-shadow: 3px 3px 19px rgba(0, 0, 0, 0.1); }
 
 #page-search table {
   margin: 0;
   padding: 0;
   border: none; }
-
-#page-search table td {
-  border: none; }
-
-#page-search form {
-  box-shadow: 3px 3px 19px rgba(0, 0, 0, 0.1); }
+  #page-search table td {
+    border: none; }
 
 #page-search .gsc-input-box {
   box-shadow: none;
@@ -660,10 +657,9 @@ footer p {
 #page-search table.gsc-search-box td {
   background-color: #fff;
   padding: 0; }
-
-#page-search table.gsc-search-box td.gsc-input {
-  background-color: #fff;
-  padding: 0 5px 0 10px; }
+  #page-search table.gsc-search-box td.gsc-input {
+    background-color: #fff;
+    padding: 0 5px 0 10px; }
 
 #page-search .gsc-control-cse {
   background: none;
@@ -671,26 +667,10 @@ footer p {
   padding: 0; }
 
 #page-search .gsc-input {
-  background-image: none !important;
-  padding-right: 2px;
-  text-indent: 0 !important; }
-
-#page-search .gsc-input::placeholder {
-  opacity: 0 !important; }
-
-#page-search .gsc-input::-webkit-input-placeholder {
-  opacity: 0 !important; }
-
-#page-search .gsc-input:-moz-placeholder {
-  /* Firefox 18- */
-  opacity: 0 !important; }
-
-#page-search .gsc-input::-moz-placeholder {
-  /* Firefox 19+ */
-  opacity: 0 !important; }
-
-#page-search .gsc-input:-ms-input-placeholder {
-  opacity: 0 !important; }
+  padding-right: 2px; }
+  #page-search .gsc-input.input-focused {
+    background-image: none !important;
+    text-indent: 0 !important; }
 
 #page-search td.gsc-search-button {
   background: transparent url(../images/search.png) no-repeat 50% 50%;
@@ -705,21 +685,19 @@ footer p {
   opacity: 0;
   padding: 8px 7px 7px; }
 
-#page-search .gcsc-branding {
-  display: none !important;
-}
+#page-search .gcsc-branding img {
+  margin: auto; }
 
 button.gsc-search-button-v2 {
-    border: none;
-    background: none;
-    background-image: none;
-    filter: none;
-    opacity: 0;
-    padding: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 32px;
-}
+  border: none;
+  background: none;
+  background-image: none;
+  filter: none;
+  opacity: 0;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 32px; }
 
 .toggle-nav,
 .show-search {
