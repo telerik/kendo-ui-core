@@ -8321,6 +8321,40 @@ The column whose position should be changed.
     grid.reorderColumn(1, grid.columns[0]);
     </script>
 
+### resizeColumn
+
+Changes the width of the specified column.
+
+Introduced in the Kendo UI 2018 R3 release. 
+
+#### Parameters
+
+##### column `Object`
+
+The column whose width should be changed.
+
+##### value `Number`
+
+The new column width.
+
+#### Example - resize a column
+
+    <div id="grid" style="width:500px;"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name", width: 300 },
+        { field: "age", width: 300 }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.resizeColumn(grid.columns[0], 200);
+    </script>
+
 ### saveAsExcel
 
 Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event.

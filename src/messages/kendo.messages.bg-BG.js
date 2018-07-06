@@ -1,4 +1,4 @@
-(function ($, undefined) { 
+(function ($, undefined) {
 /* Validator */
 if (kendo.ui.Validator) {
 kendo.ui.Validator.prototype.options.messages =
@@ -704,7 +704,7 @@ kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "filter": "Филтрирай",
   "and": "и",
-  "clear": "Премахни филтър",
+  "clear": "Премахни",
   "info": "Покажи записи със стойност, която",
   "selectValue": "-Избери стойност-",
   "isFalse": "не е вярно",
@@ -722,7 +722,7 @@ if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.messages =
 $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "filter": "Филтрирай",
-  "clear": "Премахни филтър",
+  "clear": "Премахни",
   "isFalse": "не е вярно",
   "isTrue": "е вярно",
   "operator": "Оператор"
@@ -735,7 +735,7 @@ if (kendo.ui.FilterMultiCheck) {
 kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Избери всички",
-  "clear": "Премахни филтър",
+  "clear": "Премахни",
   "filter": "Филтрирай",
   "search": "Търси"
 });

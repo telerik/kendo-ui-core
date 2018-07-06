@@ -435,7 +435,7 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
           "update": "Aktualisieren",
           "canceledit": "Abbrechen",
           "create": "Neuen Datensatz hinzufügen",
-          "createchild": "Neuen untergeordneten Datensatz hinzufügen",
+          "createchild": "Kind-Datensatz hinzufügen",
           "destroy": "Löschen",
           "excel": "Exportieren als Excel",
           "pdf": "Exportieren als PDF"

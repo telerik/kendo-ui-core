@@ -76,9 +76,8 @@ The following example demonstrates how to render an input editor in a column tem
           height: 430,
           toolbar: ["create", "save", "cancel"],
           columns: [
-
-            { template: "<input data-bind='value:ProductName' />", title: "Product Name", width: 110 },
-            { template: "<input data-bind='value:UnitsInStock' />", title: "Units In Stock", width: 110 },
+            { template: "<input data-bind='value:ProductName' class='k-textbox' />", title: "Product Name", width: 110 },
+            { template: "<input data-bind='value:UnitsInStock' class='k-textbox'/>", title: "Units In Stock", width: 110 },
             { field: "Discontinued", width: 110 },
             { command: "destroy", title: "&nbsp;", width: 90 }],
           editable: true,
