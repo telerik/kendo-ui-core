@@ -41,14 +41,17 @@ Below are listed the steps for you to follow when using the Kendo UI Validator w
                 [Display(Name = "Customer")]
                 public string CustomerID { get; set; }
 
+				[Required]
                 [StringLength(15)]
                 [Display(Name = "Ship Country")]
                 public string ShipCountry { get; set; }
 
+				[Required]
                 [Range(1, int.MaxValue, ErrorMessage = "Freight should be greater than 1")]
                 [DataType(DataType.Currency)]
                 public decimal? Freight { get; set; }
 
+				[Required]
                 [Display(Name = "Order Date")]
                 public DateTime? OrderDate { get; set; }
             }
@@ -58,8 +61,7 @@ Below are listed the steps for you to follow when using the Kendo UI Validator w
     ###### Example
 
             public ActionResult Create()
-            {
-                ViewData["customers"] = GetCustomers();
+            {                
                 return View(new OrderViewModel());
             }
 
@@ -82,7 +84,6 @@ Below are listed the steps for you to follow when using the Kendo UI Validator w
                         @(
                             Html.Kendo().DropDownListFor(model => model.CustomerID)
                                 .OptionLabel("Select Customer")
-                                .BindTo(ViewData["customers"] as SelectList)
                         )
                         @Html.ValidationMessageFor(model => model.CustomerID)
                     </div>
