@@ -1,8 +1,8 @@
 ---
-title: The setOptions Method Does Not Hide Columns
-description: An example on how to hide columns after the setOptions method in the Kendo UI Grid.
-type: troubleshooting
-page_title: Persist Hidden Columns After setOptions
+title: Persist Hidden Columns after setOptions Is Applied
+description: An example on how to hide columns after the setOptions method is applied to the Kendo UI Grid.
+type: how-to
+page_title: Persist Hidden Columns after setOptions | Kendo UI Grid
 slug: grid-setoptions-hide-columns
 tags: grid, persist, state, columns, hide
 ticketid: 1166018
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,11 +25,9 @@ res_type: kb
 
 ## Description
 
-How can I persist the hidden columns after setting the options of the Kendo UI Grid?
+How can I persist the hidden columns after setting the options of the Grid?
 
 ## Solution
-
-To persist the hidden columns:
 
 1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event.
 1. In the `dataBound` event handler, based on the `columns.hidden` property, use the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method.

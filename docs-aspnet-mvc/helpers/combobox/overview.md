@@ -258,7 +258,7 @@ Local data is the data that is available on the client when the ComboBox is init
             }
 
 
-1. Add a ComboBox to the view and bind it to the data that is saved in the `ViewData`.
+1. Add the ComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
     ###### Example
 
@@ -314,7 +314,7 @@ You can configure the ComboBox to get its data from a remote source by making an
             }
 
 
-1. Add a ComboBox to the view and configure its DataSource to use remote data.
+1. Add the ComboBox to the view and configure its DataSource to use remote data.
 
     ###### Example
 
@@ -362,6 +362,10 @@ You can configure the ComboBox to get its data from a remote source by making an
 #### Virtualization
 
 You can configure a ComboBox that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+
+> **Important**
+>
+> The value type to which the ComboBox can be bound on the server can only be a primitive type or an enum value.
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -416,7 +420,7 @@ You can configure a ComboBox that is bound to a model field to use [virtualizati
             }
 
 
-1. Add a ComboBox to the view and configure it to use virtualization.
+1. Add the ComboBox to the view and configure it to use virtualization.
 
     ###### Example
 
@@ -529,38 +533,34 @@ You can configure a ComboBox that is bound to a model field to use [virtualizati
             %>
     ```
 
-If the `AutoBind` option of the ComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
+1. If the `AutoBind` option of the ComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 
-    ###### Example
+###### Example
 
-    ```tab-Razor
+```tab-Razor
 
-            @model MvcApplication1.Models.ProductViewModel
+        @model MvcApplication1.Models.ProductViewModel
 
 
-            @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-                .AutoBind(false)
-                .Text(Model.ProductName)
-                .DataTextField("ProductName")
-                //...additional configuration
-            )
-    ```
-    ```tab-ASPX
+        @(Html.Kendo().ComboBoxFor(m => m.ProductID)
+            .AutoBind(false)
+            .Text(Model.ProductName)
+            .DataTextField("ProductName")
+            //...additional configuration
+        )
+```
+```tab-ASPX
 
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+        Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
 
-            <%: Html.Kendo().ComboBoxFor(m => m.ProductID)
-                .AutoBind(false)
-                .Text(Model.ProductName)
-                .DataTextField("ProductName")
-                //...additional configuration
-            %>
-    ```
-
-> **Important**
->
-> The type of the value to which the ComboBox can be bound on the server can only be a primitive type or an enum value.
+        <%: Html.Kendo().ComboBoxFor(m => m.ProductID)
+            .AutoBind(false)
+            .Text(Model.ProductName)
+            .DataTextField("ProductName")
+            //...additional configuration
+        %>
+```
 
 ### Parameter Sending to Server
 

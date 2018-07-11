@@ -108,7 +108,7 @@ You can implement model binding both with [local data](#local-data) and [remote 
 
 Local data is the data that is available on the client when the DropDownList is initialized.
 
-1. Pass the data to the view through the `ViewData`.
+1. Pass the data to the view through `ViewData`.
 
     ###### Example
 
@@ -139,8 +139,6 @@ Local data is the data that is available on the client when the DropDownList is 
 
     ###### Example
 
-    ```tab-Razor
-
             @model MvcApplication1.Models.ProductViewModel
 
             @(Html.Kendo().DropDownListFor(m => m.ProductID)
@@ -148,8 +146,6 @@ Local data is the data that is available on the client when the DropDownList is 
                 .DataTextField("ProductName")
                 .BindTo((System.Collections.IEnumerable)ViewData["products"])
             )
-
-    ```
 
 ### Remote Data
 
@@ -180,11 +176,9 @@ You can configure the DropDownList to get its data from a remote source by makin
             }
 
 
-1. Add a DropDownList to the view and configure its DataSource to use remote data.
+1. Add the DropDownList to the view and configure its DataSource to use remote data.
 
     ###### Example
-
-    ```tab-Razor
 
             @model MvcApplication1.Models.ProductViewModel
 
@@ -203,11 +197,14 @@ You can configure the DropDownList to get its data from a remote source by makin
                     .ServerFiltering(false);
                 })
             )
-    ```
 
 ### Virtualization
 
 You can configure a DropDownList that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+
+> **Important**
+>
+> The value type to which the DropDownList can be bound on the server can only be a primitive type or an enum value.
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -266,8 +263,6 @@ You can configure a DropDownList that is bound to a model field to use [virtuali
 
     ###### Example
 
-    ```tab-Razor
-
             @model MvcApplication1.Models.ProductViewModel
 
             @(Html.Kendo().DropDownListFor(m => m.ProductID)
@@ -319,27 +314,20 @@ You can configure a DropDownList that is bound to a model field to use [virtuali
                 }
             </script>
 
-    ```
 
-If the `AutoBind` option of the DropDownList is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
+1. If the `AutoBind` option of the DropDownList is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 
-    ###### Example
+###### Example
 
-    ```tab-Razor
+        @model MvcApplication1.Models.ProductViewModel
 
-            @model MvcApplication1.Models.ProductViewModel
+        @(Html.Kendo().DropDownListFor(m => m.ProductID)
+            .AutoBind(false)
+            .Text(Model.ProductName)
+            .DataTextField("ProductName")
+            //...additional configuration
+        )
 
-            @(Html.Kendo().DropDownListFor(m => m.ProductID)
-                .AutoBind(false)
-                .Text(Model.ProductName)
-                .DataTextField("ProductName")
-                //...additional configuration
-            )
-    ```
-
-> **Important**
->
-> The type of the value to which the DropDownList can be bound on the server can only be a primitive type or an enum value.
 
 ## See Also
 

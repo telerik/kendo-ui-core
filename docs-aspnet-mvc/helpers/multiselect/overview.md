@@ -250,7 +250,7 @@ Local data is the data that is available on the client when the MultiSelect is i
             }
 
 
-1. Add a MultiSelect to the view and bind it to a property of the view model.
+1. Add the MultiSelect to the view and bind it to a property of the view model.
 
     ###### Example
 
@@ -305,7 +305,7 @@ You can configure the MultiSelect to get its data from a remote source by making
             }
 
 
-1. Add a MultiSelect to the view and configure its DataSource to use remote data.
+1. Add the MultiSelect to the view and configure its DataSource to use remote data.
 
     ###### Example
 
@@ -351,6 +351,10 @@ You can configure the MultiSelect to get its data from a remote source by making
 #### Virtualization
 
 You can configure a MultiSelect that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+
+> **Important**
+>
+> If the `AutoBind` option of the MultiSelect is set to `false`, the widget will not be able to display pre-selected items until it is focused.
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -404,7 +408,7 @@ You can configure a MultiSelect that is bound to a model field to use [virtualiz
             }
 
 
-1. Add a MultiSelect to the view and configure it to use virtualization.
+1. Add the MultiSelect to the view and configure it to use virtualization.
 
     ###### Example
 
@@ -515,10 +519,6 @@ You can configure a MultiSelect that is bound to a model field to use [virtualiz
                 </script>
             %>
     ```
-
-> **Important**
->
-> If the `AutoBind` option of the MultiSelect is set to `false` it will not be able to display pre-selected items, until it is focused.
 
 ### Parameter Sending to Server
 
