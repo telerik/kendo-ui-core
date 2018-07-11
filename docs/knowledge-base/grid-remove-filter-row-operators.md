@@ -1,8 +1,8 @@
 ---
-title: Remove Operators from Grid Filter Row 
-description: An example demonstrating how to remove the filter operator dropdown from the filter row.
+title: Remove Operators from the Grid Filter Row
+description: An example on how to remove the drop-down filter operator from the filter row in the Kendo UI Grid.
 type: how-to
-page_title: Remove Filter Operator DropDownList When Using Filter Row| Kendo UI Grid
+page_title: Remove Drop-Down Filter Operators When Using Filter Row | Kendo UI Grid
 slug: grid-remove-filter-row-operators
 tags: grid, remove, filter, filter row, row, operator
 ticketid: 1171789
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,11 +24,11 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses the Kendo UI Grid with row filtering and would like to hide the filter operators DropDownList because I don't need to choose a different one.
+How can I remove or hide the drop-down with the filter operators when the row filtering of the Grid is applied?
 
 ## Solution
 
-Since there is no built in functionality to disable the operators button for all cells in row filtering mode, the recommended approach is to hide the buttons using CSS:
+The Grid provides no built-in functionality for disabling the button with the filter operators for all cells in row filtering mode. However, you can use a workaround to hide the button by applying the following CSS rules:
 
 ```css
 th [role="listbox"]{
@@ -35,7 +36,7 @@ th [role="listbox"]{
 }
 ```
 
-The following sample implements the approach described above:
+The following example demonstrates the complete implementation of the suggested approach.
 
 ```html
 <div id="grid"></div>
@@ -68,7 +69,7 @@ The following sample implements the approach described above:
         mode: "row"
       },
       pageable: true,
-      columns: 
+      columns:
       [{
         field: "OrderID",
         width: 225,

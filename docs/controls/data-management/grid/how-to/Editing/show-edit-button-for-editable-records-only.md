@@ -9,7 +9,7 @@ slug: howto_show_editfor_editable_records_only_grid
 
 The following example demonstrates how to show the **Edit** buttons in the Grid only for records which meet certain criteria.
 
-> For versions after 2017 R1 use the built in grid [`columns.command.visible`](/api/javascript/ui/grid/configuration/columns.command#columns.command.visible) function instead.
+> For Kendo UI releases 2017 R1 or later use the built-in [`columns.command.visible`](/api/javascript/ui/grid/configuration/columns.command#columns.command.visible) function of the Grid instead.
 
 ###### Example
 

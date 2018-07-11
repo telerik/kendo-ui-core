@@ -1,8 +1,8 @@
 ---
-title: Initialize Multiple Instances of Kendo UI Widget
-description: An example demonstrating how to initialize multiple copies of the same Kendo UI Widget without declaring all of its properties repeatedly
+title: Initialize Multiple Instances of Kendo UI Widgets
+description: An example on how to initialize multiple copies of the same Kendo UI widget without repeatedly declaring all of its properties.
 type: how-to
-page_title: Initialize Multiple Instances of the Same Widget Without Repeating Declaration Code | Kendo UI 
+page_title: Initialize Multiple Instances of the Same Widget without Repeating Declaration Code | Kendo UI for jQuery
 slug: initialize-multiple-copies-of-widget
 tags: initialize, multiple, copies, widget, declare, instance, initialization, declaration, copying, control
 ticketid: 1168945
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,11 +24,15 @@ res_type: kb
 
 ## Description
 
-I'm working on an application that uses a Kendo UI Chart named `zScoreChart`; is it possible to create a copy of the first Kendo chart instance, and not have to create another `$('#zScoreChart2').kendoChart({...})`? I want to avoid copying/pasting the kendo chart settings and adding repetitive lines of code. 
+My application uses a Kendo UI Chart that is named `zScoreChart`.
+
+How can I:
+* Create a copy of the first Chart instance without having to create another `$('#zScoreChart2').kendoChart({...})`?
+* Avoid copying and pasting the Chart settings, and adding repetitive lines of code?
 
 ## Solution
 
-Using jQuery's [Contains selector](https://api.jquery.com/attribute-contains-selector/) together with IDs that share a sub-string, it's possible to initialize multiple charts in multiple HTML elements without repeating code: 
+Use the [`Contains`](https://api.jquery.com/attribute-contains-selector/) jQuery selector together with IDs that share a sub-string.
 
 ```
 <div>
@@ -42,7 +47,7 @@ Using jQuery's [Contains selector](https://api.jquery.com/attribute-contains-sel
 </script>
 ```
 
-The following sample implements the approach described above:
+The following example demonstrates the full implementation of the suggested approach.
 
 ```html
 <div class="demo-section k-content wide">
@@ -52,7 +57,7 @@ The following sample implements the approach described above:
 </div>
 <script>
   function createChart() {
-    //Here we use jQuery's Contain Selector to get the three different dvi elements
+    // Use the Contains jQuery selector to get the three different div elements.
     $("div[id*=chart]").kendoChart({
       title: {
         text: "Site Visitors Stats \n /thousands/"
@@ -102,4 +107,4 @@ The following sample implements the approach described above:
 
 ## See Also
 
-* [jQuery Contains selector API Reference.](https://api.jquery.com/attribute-contains-selector/)
+* [API of the Contains jQuery Selector](https://api.jquery.com/attribute-contains-selector/)

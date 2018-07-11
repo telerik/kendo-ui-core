@@ -113,7 +113,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
         ![Kendo UI resources](images/kendo-ui-wwwroot.png)
 
-    * Bower package installation&mdash;For more information on how to achieve this, refer to the [Kendo UI Professional Bower package installation](../../kendo-ui/intro/installation/bower-install). As Asp.Net Core 2.1 no longer supports bower, alternative approach for copying kendo scripts is described in [Copy Kendo UI client resources through npm and webpack](#configuration-Copy) section
+    * Bower package installation&mdash;Refer to the article on [Bower package installation](../../kendo-ui/intro/installation/bower-install). ASP.NET Core v2.1 no longer supports Bower. For more information on the alternative approach for copying Kendo UI scripts, refer to the section on [copying client resources through NPM and Webpack](#configuration-Copy).
 
 8. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
@@ -197,11 +197,12 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
     ![Sample page](images/sample-page.png)
 
-### Copy Kendo UI client resources through npm and webpack
+### Copy Kendo UI Client Resources through NPM and Webpack
 
-1. Create new Telerik ASP.NET Core project and remove `bower.json` file.
-2. Add `package.json` as in the example below 
-	
+1. Create a new Telerik ASP.NET Core project.
+1. Remove the `bower.json` file.
+1. Add `package.json` in the following way:
+
     ###### Example
 
         {
@@ -224,12 +225,12 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 			}
 		}
 
-3. Add the following `webpack.config.js` file
+1. Add `webpack.config.js` in the following way:
 
     ###### Example
-	
+
 		const path = require('path');
-		
+
 		module.exports = {
 			entry: './main.js',
 			output: {
@@ -238,22 +239,25 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 			}
 		}
 
-4. Next, create `main.js` file with content as in the example below. Note that as both `jQuery` and `$` are used throughout the application, jQuery is assigned to both variables in the global scope. 
+1. Create a `main.js` file with the following content:
+
+    > As both `jQuery` and `$` are used throughout the application, in the global scope jQuery is assigned to both variables.
 
     ###### Example
-	
+
 		jQuery = $ = require("jquery");
 		require("@progress/kendo-ui/js/kendo.all");
 		require("@progress/kendo-ui/js/kendo.aspnetmvc");   
 
-5. Open the Command prompt and navigate to the project`s folder. Run the following commands:
+1. Open the Command prompt and navigate to the folder of the project.
+1. Run the following commands:
 
     ```sh
     npm install
     npm run build
     ```
 
-6. In `~/Views/Shared/_Layout.cshtml` replace the kendo CDN scripts with script that reference `bundle.js`
+1. In `~/Views/Shared/_Layout.cshtml`, replace the Kendo UI CDN scripts with the script that references `bundle.js`.
 
     ###### Example
 
