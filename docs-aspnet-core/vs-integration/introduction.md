@@ -12,7 +12,7 @@ The Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio (VS) Extensions
 
 As their major advantage, the VS extensions handle the [creation of projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#configuration-Create).
 
-The Progress&reg; Telerik&reg; UI for ASP.NET Core VS Extensions are distributed with the Progress&reg; Telerik&reg; UI for ASP.NET Core installer. They VS 2017.
+The Progress&reg; Telerik&reg; UI for ASP.NET Core VS Extensions are distributed with the Progress&reg; Telerik&reg; UI for ASP.NET Core installer. They support VS 2017.
 
 > **Important**
 >
