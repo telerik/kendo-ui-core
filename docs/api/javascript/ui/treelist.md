@@ -409,6 +409,34 @@ The text displayed by the command button. If not set the [name](/api/javascript/
       });
     </script>
 
+### columns.editable `Function`
+
+The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
+
+#### Example - conditionally edit a cell
+
+    <div id="treelist"></div>
+    <script>
+        $("#treelist").kendoTreeList({
+            columns: [
+              {
+                  field: "lastName",
+                  title: "Last Name",
+                  editable: function(dataItem) {
+                      return dataItem.lastName !== "Jackson";
+                  }
+              },
+              { field: "position", title: "Position", },
+              { title: "Edit", command: ["edit"], width: 250 }
+            ],
+            editable: true,
+            dataSource: [
+              { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+              { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+            ]
+        });
+    </script>
+
 ### columns.editor `Function`
 
 Provides a way to specify a custom editing UI for the column. Use the `container` parameter to create the editing UI.
