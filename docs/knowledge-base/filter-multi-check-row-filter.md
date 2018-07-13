@@ -36,8 +36,8 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 Move the built-in menu to the filter row and, if not needed, hide the rest of the filter menus from the headers:
 
-1. Set `filterable` to mode `"menu, row"`by using use `column.filterable.multi`.
-1. Add an event handler to the `dataBound` event of the Grid.  
+1. Set `filterable` to mode `"menu, row"` at grid level. Initiate the `FilterMultiCheck` in the grid header by using the [`column.filterable.multi`](/api/javascript/ui/grid/configuration/columns.filterable.multi).
+1. Add an event handler to the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grid.  
 1. Look for the `MultiFilterCheck` in the header.
 1. Find the desired filter row cell and replace its content with `MultiFilterCheck`.
 1. To give it the same look and feel as the neighboring cells, wrap it in a span through `"class='k-button k-button-icon k-dropdown-wrap"`.   
@@ -56,4 +56,61 @@ Move the built-in menu to the filter row and, if not needed, hide the rest of th
     }
     ```
 
-For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/eVOjE).  
+###### Example
+
+```html
+    <style>
+      body .k-button-icon, body .k-split-button-arrow {
+        padding: 0;
+      }
+      
+      .k-button.k-button-icon .k-icon, .k-grid-filter .k-icon, .k-header .k-icon {
+        padding: 0 0.4em;
+      }
+
+      a.k-grid-filter:focus, input[type="checkbox"]{
+        outline:0;
+      }
+    </style>
+        <div id="grid"></div>
+    <script>
+      var grid = $("#grid").kendoGrid({
+        columns: [
+          { 
+            field: "name" , 
+            filterable: {
+              multi:true,
+              cell: {
+                showOperators:false
+              }
+            }
+          },
+          { field: "age" }
+        ],
+        filterable: {
+          mode: "menu, row"
+        },
+        dataSource: { 
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+          ],
+          schema:{
+            model:{
+              fields:{
+                age: { type:"number" }
+              }
+            }
+          }
+        },
+        dataBound: function(e){
+          var multifilter = e.sender.thead.find("th[data-field='name']>a");
+          var ageFilter = e.sender.thead.find("th[data-field='age']>a").hide();
+          if(multifilter){
+            $("span[data-field='name']").first().replaceWith(multifilter);
+            multifilter.wrap("<span class='k-button k-button-icon k-dropdown-wrap'></span>");
+          }
+        }
+      }).data("kendoGrid");
+    </script>
+```

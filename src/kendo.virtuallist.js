@@ -408,7 +408,8 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that._createList();
-                if (!action && that._values.length && !filtered && !that.options.skipUpdateOnBind) {
+                if (!action && that._values.length && !filtered &&
+                     !that.options.skipUpdateOnBind && !that._emptySearch) {
                     that._selectingValue = true;
 
                     that.bound(true);

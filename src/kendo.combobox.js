@@ -395,7 +395,7 @@ var __meta__ = { // jshint ignore:line
             that._customOption = undefined;
             that._options(data, "", that.value());
 
-            if (custom && custom[0].selected) {
+            if (custom && custom[0].selected && !that.listView._emptySearch) {
                 that._custom(custom.val());
             }
         },
