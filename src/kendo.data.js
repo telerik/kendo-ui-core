@@ -2770,10 +2770,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _removeItems: function(items) {
+        _removeItems: function(items, removePristine) {
             if (!isArray(items)) {
                 items = [items];
             }
+
+            var shouldRemovePristine = typeof removePristine !== "undefined" ? removePristine : true;
 
             var destroyed = [];
             var autoSync = this.options.autoSync;
@@ -2796,7 +2798,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     });
 
-                    if (found) {
+                    if (found && shouldRemovePristine) {
                         this._removePristineForModel(model);
                         this._destroyed.pop();
                     }

@@ -718,6 +718,37 @@ test("ComboBox sets value of the select element on rebind", 1, function() {
     equal(combobox.current().index(), 1);
 });
 
+test("ComboBox _clearValue removes _customOption without filtering", 1, function() {
+    kendo.destroy(QUnit.fixture);
+
+    var select = $("<select><option value=1>Item1</option><option value=2>2Item</option></select>").appendTo(QUnit.fixture);
+
+    combobox = select.kendoComboBox({
+        value:2
+    }).data("kendoComboBox");
+
+    combobox._customOption = {text: "sometext"};
+    combobox._clearValue()
+
+    ok(!combobox._customOption);
+});
+
+test("ComboBox _clearValue removes _customOption with filtering", 1, function() {
+    kendo.destroy(QUnit.fixture);
+
+    var select = $("<select><option value=1>Item1</option><option value=2>2Item</option></select>").appendTo(QUnit.fixture);
+
+    combobox = select.kendoComboBox({
+        filter: "contains",
+        value:2
+    }).data("kendoComboBox");
+
+    combobox._customOption = {text: "sometext"};
+    combobox._clearValue()
+
+    ok(!combobox._customOption);
+});
+
 test("ComboBox does not throw exception when try to search empty DS", function() {
     combobox = input.kendoComboBox().data("kendoComboBox");
 

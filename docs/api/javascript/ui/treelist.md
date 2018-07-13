@@ -2856,6 +2856,54 @@ Defines the text of the "Edit" button that shows the editable fields for the row
     });
     </script>
 
+### messages.commands.save `String` *(default: "Save Changes")*
+
+Defines the text of the "Save Changes" button that saves modifed data rows.
+
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+    $("#treeList").kendoTreeList({
+      dataSource: [
+        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+        { id: 2, parentId: 1, name: "John Doe", age: 24 }
+      ],
+      toolbar: [ "create" ],
+      columns: [ "name", "age" ],
+      editable: true,
+      messages: {
+        commands: {
+          save: "Save data"
+        }
+      }
+    });
+    </script>
+
+### messages.commands.cancel `String` *(default: "Cancel Changes")*
+
+Defines the text of the "Cancel Changes" button that cancels all data modifications.
+
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+    $("#treeList").kendoTreeList({
+      dataSource: [
+        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+        { id: 2, parentId: 1, name: "John Doe", age: 24 }
+      ],
+      toolbar: [ "create" ],
+      columns: [ "name", "age" ],
+      editable: true,
+      messages: {
+        commands: {
+          save: "Reject changes"
+        }
+      }
+    });
+    </script>
+
 ### messages.commands.excel `String` *(default: "Export to Excel")*
 
 Defines the text of the "Export to Excel" button that exports the widget data in spreadsheet format.
