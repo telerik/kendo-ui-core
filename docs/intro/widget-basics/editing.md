@@ -59,7 +59,7 @@ For more information on how to set up the editing functionality in Kendo UI widg
 
 ### Building Editor Forms
 
-A Kendo UI widget builds an editor form dynamically based on the [`schema.model`](/api/javascript/data/model/methods/model.define) structure and more specifically the `fields` collection, as demonstrated in the example below.
+A Kendo UI widget builds an editor form dynamically based on the [`schema.model`](/api/javascript/data/model/methods/define) structure and more specifically the `fields` collection, as demonstrated in the example below.
 
 ###### Example
 
