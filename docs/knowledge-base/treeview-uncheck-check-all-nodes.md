@@ -1,8 +1,8 @@
 ---
-title: Toggle CheckBox Selection for All TreeView Nodes 
-description: An example demonstrating how to check/uncheck all Kendo UI TreeView checkbox nodes programmatically
+title: Toggle CheckBox Selection for All TreeView Nodes
+description: An example on how to programmatically check and uncheck all Kendo UI TreeView checkbox nodes.
 type: how-to
-page_title: Check/Uncheck all Node CheckBoxes | Kendo UI TreeView
+page_title: Check or Uncheck All Node CheckBoxes | Kendo UI TreeView
 slug: treeview-uncheck-check-all-nodes
 tags: treeview, uncheck, check, all, nodes
 ticketid: 1083489
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -27,7 +28,8 @@ How can I check and uncheck all checkboxes for all nodes in a Kendo UI TreeView 
 
 ## Solution
 
-Selecting and deselecting all checkboxes can be accomplished using jQuery followed by triggering the [Change event](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/events/change):  
+Use the jQuery library and trigger the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/events/change) event.  
+
 ```
 //Uncheck All Nodes
 $("#treeview .k-checkbox-wrapper input").prop("checked", false).trigger("change");
@@ -36,7 +38,7 @@ $("#treeview .k-checkbox-wrapper input").prop("checked", false).trigger("change"
 $("#treeview .k-checkbox-wrapper input").prop("checked", true).trigger("change");
 ```
 
-The following demonstrates a Kendo UI TreeView with a Toggle Button which will check or uncheck all checkboxes depending on the value of the button.
+The following example demonstrates how to implement a **Toggle** button which, depending on the value of the button, will check or uncheck all checkboxes in the TreeView.
 
 ```html
     <div>
@@ -87,10 +89,10 @@ The following demonstrates a Kendo UI TreeView with a Toggle Button which will c
           $("#treeview .k-checkbox-wrapper input").prop("checked", true).trigger("change");
           $("#checkButton").val("Uncheck");
         }
-      } 
+      }
     </script>
 ```
 
 ## See Also
 
-* [Kendo TreeView - Basic Usage Demo](https://demos.telerik.com/kendo-ui/treeview/checkboxes)
+* [Kendo UI TreeView Demo on Basic Usage](https://demos.telerik.com/kendo-ui/treeview/checkboxes)

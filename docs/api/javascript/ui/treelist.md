@@ -1507,7 +1507,7 @@ If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instan
 
 If set to `true` the user would be able to edit the data to which the TreeList is bound. By default, editing is disabled.
 
-Can be set to a string ("inline" or "popup") to specify the editing mode. The default editing mode is "inline".
+Can be set to a string ("inline", "popup" or "incell") to specify the editing mode. The default editing mode is "inline".
 
 Can be set to a JavaScript object which represents the editing configuration.
 
@@ -5314,7 +5314,7 @@ Fired when the user try to edit or create a data item, before the editor is crea
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-The event will be fired only when the TreeList is `selectable`.
+The event will be fired only when the TreeList is `editable`.
 
 #### Event Data
 

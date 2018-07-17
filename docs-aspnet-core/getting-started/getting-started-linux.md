@@ -36,11 +36,10 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 1. By using the Terminal, navigate to the folder where you want to create the project folder.
 
-    ###### Example
-
-		kendo@kendo-docker:~$ mkdir Projects
-		kendo@kendo-docker:~$ cd Projects/
-		kendo@kendo-docker:~/Projects$
+    ```sh
+    mkdir Projects
+    cd Projects/
+    ```
 
 2. Run [`dotnet new razor`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) to create a .Net Core application using the default web template with Razor Pages.
 
@@ -52,25 +51,20 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
     As a result, the NuGet packages are downloaded. The following example demonstrates a result that is similar to the end of the response you are expected to receive.
 
-    ###### Example
+    ```sh
+    Restore complete, 10070ms elapsed
+    kendo@kendo-docker:~/Projects$
+    ```
 
-		Restore complete, 10070ms elapsed
+4. Start the application by running [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run). The following example demonstrates the response you are expected to receive.
 
-		kendo@kendo-docker:~/Projects$
+    ```sh
+    Hosting environment: Production
+    Now listening on: http://localhost:5000
+    Application started. Press Ctrl+C to shut down.
+    ```
 
-8. Start the application by running [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run). The following example demonstrates the response you are expected to receive.
-
-    ###### Example
-
-		Hosting environment: Production
-		Now listening on: http://localhost:5000
-		Application started. Press Ctrl+C to shut down.
-
-9. Use your favorite browser to navigate to the above location and make sure the application is working in the way shown below. After you check the application in the browser, stop the server.
-
-    **Figure 1. The web application in the browser**
-
-    ![Web application in browser](images/website.png)
+5. Use your favorite browser to navigate to the above location and make sure the application is running properly. After you check the application in the browser, stop the server.
 
 ### Add the Telerik.UI.for.AspNet.Core NuGet Package
 
@@ -81,63 +75,61 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 	Each of the above files should contain the following XML:
 
-	###### Example
-
-        ```
-        <?xml version="1.0" encoding="utf-8"?>
-        <configuration>
-          <packageSources>
-            <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
-            <add key="telerik.com" value="https://nuget.telerik.com/nuget" />
-          </packageSources>
-          <packageSourceCredentials>
-            <telerik.com>
-              <add key="Username" value="[ your.telerik.com@email.login ]" />
-              <add key="ClearTextPassword" value="[ your.telerik.com.password.in.clear.text ]" />
-            </telerik.com>
-          </packageSourceCredentials>
-        </configuration>
-        ```
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <configuration>
+        <packageSources>
+        <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+        <add key="telerik.com" value="https://nuget.telerik.com/nuget" />
+        </packageSources>
+        <packageSourceCredentials>
+        <telerik.com>
+            <add key="Username" value="[ your.telerik.com@email.login ]" />
+            <add key="ClearTextPassword" value="[ your.telerik.com.password.in.clear.text ]" />
+        </telerik.com>
+        </packageSourceCredentials>
+    </configuration>
+    ```
 
 2. Install the `Telerik.UI.for.AspNet.Core` dependency:
 
-    ###### Example
-
-        dotnet add package Telerik.UI.for.AspNet.Core
+    ```sh
+    dotnet add package Telerik.UI.for.AspNet.Core
+    ```
 
 3. Open `Startup.cs` by using a text editor (IDE) and update it in the way demonstrated in the following examples.
 
     * Locate the `ConfigureServices` method and add a call to `services.AddKendo` at the end.
 
-		###### Example
+        ```cs
+        ...
+        using Newtonsoft.Json.Serialization;
+        ...
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ...
+            // Maintain property names during serialization. See:
+            // https://github.com/aspnet/Announcements/issues/194
+            services
+                .AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-			...
-			using Newtonsoft.Json.Serialization;
-			...
-			public void ConfigureServices(IServiceCollection services)
-			{
-				...
-				// Maintain property names during serialization. See:
-				// https://github.com/aspnet/Announcements/issues/194
-				services
-					.AddMvc()
-					.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
-				// Add Kendo UI services to the services container
-				services.AddKendo();
-			}
+            // Add Kendo UI services to the services container
+            services.AddKendo();
+        }
+        ```
 
     * Locate the `Configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
 
-		###### Example
+        ```cs
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            ...
 
-			public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-			{
-				...
-
-				// Configure Kendo UI
-				app.UseKendo(env);
-			}
+            // Configure Kendo UI
+            app.UseKendo(env);
+        }
+        ```
 
 4. Import the `Kendo.Mvc.UI` namespace in `~/Pages/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`.
 
@@ -145,7 +137,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
     * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnet.core` archive to `wwwroot\lib\kendo-ui`.
 
-        **Figure 2. Kendo UI resources**
+        **Figure 1. Kendo UI resources**
 
         ![Kendo UI resources](images/resources.png)
 
@@ -153,88 +145,86 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web s
 
 6. Register the Kendo UI styles and scripts in `~/Pages/Shared/_Layout.cshtml`.
 
-	> **Important**
+    > **Important**
     >
     > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
-    ###### Example
-
-        <head>
+    ```html
+    <head>
+        ...
+        <environment include="Development">
             ...
 
-            <environment include="Development">
-                ...
-
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
-            </environment>
-            <environment exclude="Development">
-                ...
-
-				<link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
-                    asp-fallback-test-class="k-common-test-class"
-                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-
-				<link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
-                    asp-fallback-test-class="k-theme-test-class"
-                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-            </environment>
-
-            <environment include="Development">
-                ...
-
-                <script src="~/lib/jquery/dist/jquery.js"></script>
-
-                @* Place Kendo UI scripts after jQuery *@
-                <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
-                <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
-            </environment>
-            <environment exclude="Development">
-                ...
-
-                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                        asp-fallback-test="window.jQuery"
-                        crossorigin="anonymous"
-                        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-                </script>
-
-                @*  Place Kendo UI scripts after jQuery *@
-                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
-                        asp-fallback-test="window.kendo">
-                </script>
-                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
-                </script>
-            </environment>
-
+            <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
+            <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
+        </environment>
+        <environment exclude="Development">
             ...
-        </head>
+
+            <link rel="stylesheet"
+                href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
+                asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
+                asp-fallback-test-class="k-common-test-class"
+                asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+
+            <link rel="stylesheet"
+                href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
+                asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
+                asp-fallback-test-class="k-theme-test-class"
+                asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+        </environment>
+
+        <environment include="Development">
+            ...
+
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+
+            @* Place Kendo UI scripts after jQuery *@
+            <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+            <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+        </environment>
+        <environment exclude="Development">
+            ...
+
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+
+            @*  Place Kendo UI scripts after jQuery *@
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
+                    asp-fallback-test="window.kendo">
+            </script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
+            </script>
+        </environment>
+        ...
+    </head>
+    ```
 
 7. Use a Kendo UI widget by adding the snippet from the following example to `~/Pages/Home/Index.cshtml`.
 
-    ###### Example
+    ```cs
+    <h2>Kendo UI DatePicker</h2>
 
-		<h2>Kendo UI DatePicker</h2>
+    @(Html.Kendo().DatePicker()
+        .Name("datepicker")
+        .Deferred()
+    )
 
-		@(Html.Kendo().DatePicker()
-			.Name("datepicker")
-			.Deferred()
-		)
-
-		@section scripts {
-			@Html.Kendo().DeferredScripts()
-		}
+    @section scripts {
+        @Html.Kendo().DeferredScripts()
+    }
+    ```
 
 8. Navigate to the project folder by using the Terminal and run it using the `dotnet run` command. Now that all is done, you can see the sample page.
 
-    **Figure 3. The end result&mdash;a sample page**
+    **Figure 2. The end result&mdash;a sample page**
 
     ![Sample page](images/sample-page.png)
 
