@@ -36,7 +36,7 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 Move the built-in menu to the filter row and, if not needed, hide the rest of the filter menus from the headers:
 
-1. Set `filterable` to mode `"menu, row"` at grid level. Initiate the `FilterMultiCheck` in the grid header by using the [`column.filterable.multi`](/api/javascript/ui/grid/configuration/columns.filterable.multi).
+1. At Grid level, set `filterable` to `"menu, row"` mode. Initiate the `FilterMultiCheck` in the header of the Grid by using the [`column.filterable.multi`](/api/javascript/ui/grid/configuration/columns.filterable.multi).
 1. Add an event handler to the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grid.  
 1. Look for the `MultiFilterCheck` in the header.
 1. Find the desired filter row cell and replace its content with `MultiFilterCheck`.
@@ -56,14 +56,14 @@ Move the built-in menu to the filter row and, if not needed, hide the rest of th
     }
     ```
 
-###### Example
+The following example demonstrates the complete implementation of the suggested approach.
 
 ```html
     <style>
       body .k-button-icon, body .k-split-button-arrow {
         padding: 0;
       }
-      
+
       .k-button.k-button-icon .k-icon, .k-grid-filter .k-icon, .k-header .k-icon {
         padding: 0 0.4em;
       }
@@ -76,8 +76,8 @@ Move the built-in menu to the filter row and, if not needed, hide the rest of th
     <script>
       var grid = $("#grid").kendoGrid({
         columns: [
-          { 
-            field: "name" , 
+          {
+            field: "name" ,
             filterable: {
               multi:true,
               cell: {
@@ -90,7 +90,7 @@ Move the built-in menu to the filter row and, if not needed, hide the rest of th
         filterable: {
           mode: "menu, row"
         },
-        dataSource: { 
+        dataSource: {
           data: [
             { name: "Jane Doe", age: 30 },
             { name: "John Doe", age: 33 }
