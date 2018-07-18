@@ -93,6 +93,7 @@ The following example uses the [Microsoft Bot Framework](https://dev.botframewor
 ## See Also
 
 * [Chat Overview]({% slug overview_kendoui_chat_widget %})
+* [Chat Items]({% slug chat_items %})
 * [Chat JavaScript API Reference](/api/javascript/ui/chat)
 
 For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).
