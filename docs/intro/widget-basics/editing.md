@@ -42,8 +42,8 @@ The Kendo UI widgets that support editing have the following common events:
 - `remove`&mdash;Triggered before the model is removed.
 
 > **Important**
-> * Only the Scheduler widget supports prevention of the [`edit`](/api/javascript/ui/scheduler/events/edit), [`save`](/api/javascript/ui/scheduler/events/edit), and [`remove`](/api/javascript/ui/scheduler/events/edit) events.
-> * The widget uses only one editor form. It applies the same editor template for the `create` and `update` actions.
+> * Only the Scheduler and Gantt widgets support prevention of the [`edit`](/api/javascript/ui/scheduler/events/edit), [`save`](/api/javascript/ui/scheduler/events/save), and [`remove`](/api/javascript/ui/scheduler/events/remove) events.
+> * The widgets use only one editor form. It applies the same editor template for the `create` and `update` actions.
 
 ### Setup
 
