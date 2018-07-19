@@ -40,6 +40,33 @@ Out of the box, the Chat supports `heroCards` which can be displayed in the chat
 </script>
 ```
 
+You could also easily add images to the `heroCard` by passing the proper values to the `attachments.content.images` object:
+
+```html
+<div id="chat"></div>
+<script>
+	$("#chat").kendoChat();
+
+	var chat = $("#chat").data("kendoChat");
+
+	chat.renderAttachments({
+		attachments: [{
+			contentType: "heroCard",
+			content: {
+				title: "Ninja Title",
+				subtitle: "The Telerik Ninja",
+				text: "This is an example.",
+				images: [{
+					url: "https://docs.telerik.com/kendo-ui/images/ninja-icon.png",
+					alt: "Ninja"
+				}]
+			}
+		}],
+		attachmentLayout: "carousel"
+	}, chat.getUser());
+</script>
+```
+
 ## Suggested Actions
 
 Out of the box, the Chat supports `suggested actions`. To display the `suggestedActions` prompt, manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the widget.
@@ -74,24 +101,24 @@ The following example demonstrates how to implement a simple template and to reg
   <div class="#=styles.card# #=styles.cardRich#">
 	<div class="#=styles.cardBody#">
 	  <div>
-		<strong>Type:</strong>
-		<span>#:coverage#</span>
+			<strong>Type:</strong>
+			<span>#:coverage#</span>
 	  </div>
 	  <div>
-		<strong>Car model:</strong>
-		<span>#:make#</span></div>
+			<strong>Car model:</strong>
+			<span>#:make#</span></div>
 	  <div>
-		<strong>Car cost:</strong>
-		<span>#:worth#</span>
+			<strong>Car cost:</strong>
+			<span>#:worth#</span>
 	  </div>
 	  <div>
-		<strong>Start date:</strong>
-		<span>#:startDate#</span>
+			<strong>Start date:</strong>
+			<span>#:startDate#</span>
 	  </div>
 	  <hr/>
 	  <div>
-		<strong>Total:</strong>
-		<span>#:premium#</span>
+			<strong>Total:</strong>
+			<span>#:premium#</span>
 	  </div>
 	</div>
   </div>

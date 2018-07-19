@@ -218,9 +218,11 @@
     },
 
     function() {
-        var widget = QUnit.fixture.find("select").getKendoDropDownList();
+        setTimeout(function(){
+            var widget = QUnit.fixture.find("select").getKendoDropDownList();
 
-        equal(widget.value(), 2);
+            equal(widget.value(), 2);
+        }, 10);
     });
 
     ngTest("dropdownlist with autoBind:false skips binding when value is null", 1, function() {
