@@ -1416,6 +1416,93 @@ The text message displayed for the menu item which performs descending sort.
       });
     </script>
 
+### columnMenu.messages.settings `String` *(default: "Column Settings")*
+
+The text message displayed in the menu header.
+
+#### Example - set the sort ascending message
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        columnMenu: {
+          messages: {
+            settings: "Column Options"
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
+    </script>
+
+### columnMenu.messages.lock `String` *(default: "Lock")*
+
+The text message displayed in the column menu for locking a column.
+
+#### Example - set the sort ascending message
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        columnMenu: {
+          messages: {
+            lock: "Pin Column"
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
+    </script>
+
+### columnMenu.messages.unlock `String` *(default: "Unlock")*
+
+The text message displayed in the column menu for unlocking a column.
+
+#### Example - set the sort ascending message
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        sortable: true,
+        columnMenu: {
+          messages: {
+            lock: "Unpin Column"
+          }
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+            { id: 2, parentId: 1, name: "John Doe", age: 24 },
+            { id: 3, parentId: 1, name: "Jenny Doe", age: 14 }
+          ]
+        }
+      });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.TreeListDataSource`
 
 The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource) configuration, a JavaScript array or an existing [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource) instance.

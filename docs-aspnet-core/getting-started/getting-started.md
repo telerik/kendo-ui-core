@@ -216,7 +216,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 			"keywords": [],
 			"author": "",
 			"license": "ISC",
-			"dependencies": {				
+			"dependencies": {
 				"@progress/kendo-ui": "2018.2.620"
 			},
 			"devDependencies": {
@@ -247,7 +247,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 		jQuery = $ = require("jquery");
 		require("@progress/kendo-ui/js/kendo.all");
-		require("@progress/kendo-ui/js/kendo.aspnetmvc");   
+		require("@progress/kendo-ui/js/kendo.aspnetmvc");
 
 1. Open the Command prompt and navigate to the folder of the project.
 1. Run the following commands:
@@ -266,7 +266,6 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 ## See Also
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core and VS Code]({% slug gettingstartedvscode_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core on Linux and MacOS]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

@@ -2,7 +2,7 @@
 title: Splitter
 page_title: Splitter | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Splitter tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /aspnet-core/helpers/splitter
+previous_url: /helpers/splitter
 slug: taghelpers_splitter_aspnetcore
 ---
 
@@ -121,5 +121,5 @@ The Splitter tag helper supports all the configuration options that the HtmlHelp
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

@@ -481,14 +481,13 @@ var __meta__ = { // jshint ignore:line
 
             if ((!options.enforceMinLength && !word.length) || word.length >= options.minLength) {
                 this._state = "filter";
+                if(this.listView){
+                    this.listView._emptySearch = !$.trim(word).length;
+                }
+
                 if (!this._isFilterEnabled()) {
                     this._searchByWord(word);
                 } else {
-                    if ($.trim(word).length && this.listView) {
-                        this.listView._emptySearch = false;
-                    } else {
-                        this.listView._emptySearch = true;
-                    }
                     this._filter({word: word, open: true});
                 }
             }

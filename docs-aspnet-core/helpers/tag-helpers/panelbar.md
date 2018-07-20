@@ -2,7 +2,7 @@
 title: PanelBar
 page_title: PanelBar | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the PanelBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /aspnet-core/helpers/panelbar
+previous_url: /helpers/panelbar
 slug: taghelpers_panelbar_aspnetcore
 ---
 
@@ -100,5 +100,5 @@ The PanelBar tag helper configuration options are passed as attributes of the ta
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

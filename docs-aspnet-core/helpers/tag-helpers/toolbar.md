@@ -2,7 +2,7 @@
 title: ToolBar
 page_title: ToolBar | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the ToolBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /aspnet-core/helpers/toolbar
+previous_url: /helpers/toolbar
 slug: taghelpers_toolbar_aspnetcore
 ---
 
@@ -144,5 +144,5 @@ The following example demonstrates the basic configuration of the ToolBar tag he
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

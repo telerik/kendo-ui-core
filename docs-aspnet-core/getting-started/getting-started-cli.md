@@ -2,9 +2,9 @@
 title: Getting Started with CLI
 page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Command line interface | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and the Command line interface."
-previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /aspnet-core/gettingstartedlinux_aspnetmvc6_aspnetmvc, /aspnet-core/gettingstartedvscode_aspnetmvc6_aspnetmvc
+previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /gettingstartedlinux_aspnetmvc6_aspnetmvc, /gettingstartedvscode_aspnetmvc6_aspnetmvc
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
-position: 0
+position: 4
 ---
 
 # Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and the Command Line Interface
@@ -122,7 +122,11 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
     @using Kendo.Mvc.UI
     ```
 
-5. Copy the Kendo UI client-side resources. Use one of the approaches suggested in the [Reference Client Resources]() documentation article.
+5. Copy the Kendo UI client-side resources. Use either of the following approaches:
+
+    - To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com account](https://www.telerik.com/account/).
+
+    - For more information on how to use the Bower package installation, refer to [the Kendo UI Professional Bower package installation](https://docs.telerik.com/kendo-ui/intro/installation/bower-install).
 
 6. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 

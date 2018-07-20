@@ -771,7 +771,7 @@ var __meta__ = { // jshint ignore:line
             listView
                 .value(value)
                 .done(function() {
-                    if (that.selectedIndex === -1) {
+                    if (that.selectedIndex === -1 && (!listView._selectedDataItems || !listView._selectedDataItems.length)) {
                         that._accessor(value);
                         that.input.val(value);
                         that._placeholder(true);
