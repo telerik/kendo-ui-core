@@ -914,6 +914,18 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
+    var encode = kendo.htmlEncode;
+    var open = /{{/g;
+    var close = /}}/g;
+    var encOpen = '{&#8203;{';
+    var encClose = '}&#8203;}';
+
+    kendo.htmlEncode = function(str) {
+        return encode(str)
+            .replace(open, encOpen)
+            .replace(close, encClose);
+    };
+
     var pendingPatches = [];
 
     // defadvice will patch a class' method with another function.  That

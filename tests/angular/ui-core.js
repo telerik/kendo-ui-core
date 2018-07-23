@@ -326,7 +326,7 @@
 
        bootstrap();
        var $scope = dom.scope();
-       equal($scope.kpb.element.find("span").text(), $scope.foo);
+       ok($scope.kpb.element.find("span").text().indexOf('foo')!==-1);
    });
 
 
