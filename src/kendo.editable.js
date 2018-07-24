@@ -20,6 +20,7 @@ var __meta__ = { // jshint ignore:line
         isFunction = kendo.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
+        POINT = ".",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' +
                     '#=message#<div class="k-callout k-callout-n"></div></div>',
@@ -66,7 +67,17 @@ var __meta__ = { // jshint ignore:line
             if (inArray(ruleName, specialRules) >= 0) {
                 attr[DATATYPE] = ruleName;
             } else if (!isFunction(rule)) {
-                attr[ruleName] = isPlainObject(rule) ? rule.value || ruleName : rule;
+                var culture = kendo.getCulture();
+
+                if (typeof rule === "number" && culture.name.length) {
+                    var numberFormat = culture.numberFormat;
+                    var stringRule = rule.toString()
+                        .replace(POINT, numberFormat[POINT]);
+
+                    attr[ruleName] = stringRule;
+                } else {
+                    attr[ruleName] = isPlainObject(rule) ? rule.value || ruleName : rule;
+                }
             }
 
             attr[kendo.attr(ruleName + "-msg")] = rule.message;

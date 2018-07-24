@@ -244,7 +244,7 @@
         equal(input.data("email-msg"), "email message");
     });
 
-    test("for field of type number min constraint attr is rendered", function() {
+    test("for field of type number min constraint attr is rendered", function () {
         var MyModel = Model.define({
             fields: {
                 foo: {
@@ -256,11 +256,34 @@
                 }
             }
         }),
-        model = new MyModel(),
-        editable = new Editable(div, { fields: "foo", model: model }),
-        input = div.find("input[name=foo]");
+            model = new MyModel(),
+            editable = new Editable(div, { fields: "foo", model: model }),
+            input = div.find("input[name=foo]");
 
         equal(input.attr("min"), 10);
+    });
+
+    test("for field of type number min constraint attr is rendered according to culture", function () {
+        kendo.culture("de-DE");
+
+        var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        field: "foo",
+                        type: "number",
+                        validation: {
+                            min: 10.12
+                        }
+                    }
+                }
+            }),
+            model = new MyModel(),
+            editable = new Editable(div, { fields: "foo", model: model }),
+            input = div.find("input[name=foo]");
+
+        equal(input.attr("min"), 10.12);
+
+        kendo.culture("en-US");
     });
 
     test("for field of type number min constraint and validation message attrs are rendered", function() {
