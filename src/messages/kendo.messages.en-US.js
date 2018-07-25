@@ -575,6 +575,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowTitle": "Delete Recurring Item",
     "deleteWindowOccurrence": "Delete current occurrence",
     "deleteWindowSeries": "Delete the series",
+    "deleteRecurringConfirmation": "Are you sure you want to delete this event occurrence?",
+    "deleteSeriesConfirmation": "Are you sure you want to delete the whole series?",
     "editWindowTitle": "Edit Recurring Item",
     "editWindowOccurrence": "Edit current occurrence",
     "editWindowSeries": "Edit the series",

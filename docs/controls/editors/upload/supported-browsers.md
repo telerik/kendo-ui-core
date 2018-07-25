@@ -14,12 +14,12 @@ The following table lists each Kendo UI feature as supported by the respective b
 
 | Feature                                           | IE  | Firefox  | Chrome | Safari      | Opera   |  Works without JavaScript
 | ---                                               | --- | ---      | ---    | ---         | ---     |  ---
-| Styled **Upload** button                          | ✓   | ✓        | ✓      | ✓           | ✓      |  ✓
-| Asynchronous upload                               | ✓   | ✓        | ✓      | ✓           | ✓      |  ✕
-| Multiple file selection from the **Open** dialog  | 10+ | 3.6+     | ✓      | ✓           | ✕      |  ✓
-| Progress tracking                                 | 10+ | 4+       | ✓      | ✓           | ✕      |  ✕
-| File drag-and-drop                                | 10+ | 4+       | ✓      | Mac OS only | ✕      |  ✕
-| In-progress cancellation of upload                | ✓   | ✓        | ✓      | ✓           | ✓      |  ✕
+| Styled **Upload** button                          | ✓   | ✓        | ✓     | ✓           | ✓      |  ✓
+| Asynchronous upload                               | ✓   | ✓        | ✓     | ✓           | ✓      |  ✕
+| Multiple file selection from the **Open** dialog  | 10+ | 3.6+     | ✓      | ✓           | ✓      |  ✓
+| Progress tracking                                 | 10+ | 4+       | ✓      | ✓           | ✓      |  ✕
+| File drag-and-drop                                | 10+ | 4+       | ✓      | Mac OS only | ✓      |  ✕
+| In-progress cancellation of upload                | ✓   | ✓        | ✓      | ✓          | ✓      |  ✕
 
 ## See Also
 

@@ -1652,3 +1652,39 @@ The widget instance which fired the event.
     dropdowntree.bind("open", dropdowntree_open);
     </script>
 
+### select
+
+Triggered when a node is being selected by the user. Cancellable.
+
+#### Event Data
+
+##### e.node `Element`
+
+The selected node
+
+#### Example - subscribe to the "select" event during initialization
+
+    <input id="dropdowntree"/>
+    <script>
+    $("#dropdowntree").kendoDropDownTree({
+      dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }],
+      select: function(e) {
+        console.log("Select", e.node);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "select" event after initialization
+
+    <input id="dropdowntree"/>
+    <script>
+    function dropdowntree_select(e) {
+      console.log("select", e.node);
+    }
+    $("#dropdowntree").kendoDropDownTree({
+      dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }],
+    });
+    var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
+    dropdowntree.bind("select", dropdowntree_select);
+    </script>
+
