@@ -37,13 +37,19 @@ The following example demonstrates how to define a `shapeTemplate` to display a 
         <div id="diagram" style="height:600px;"></div>
 
         <script id="popup-editor" type="text/x-kendo-template">
-          <h3>Edit Shape Data</h3>
-          <p>
-            <label>Job title: <input name="JobTitle" data-role="dropdownlist" data-bind="value: JobTitle" data-source="titles" data-text-field="JobTitle" data-value-field="JobTitle" /></label>
-          </p>
-          <p>
-            <label>Color: <input name="Color" data-role="colorpicker" data-bind="value: Color" /></label>
-          </p>
+          <h3 class="centre">Edit Shape Data</h3>
+          <div class="k-edit-label">
+            <label >Job title: </label>
+          </div>
+          <div class="k-edit-field">
+            <input name="JobTitle" data-role="dropdownlist" data-bind="value: JobTitle" data-source="titles" data-text-field="JobTitle" data-value-field="JobTitle" />
+          </div>
+          <div class="k-edit-label">
+            <label>Color: </label>
+          </div>
+          <div class="k-edit-field">
+            <input class="k-edit-field" name="Color" data-role="colorpicker" data-bind="value: Color" />
+          </div>
         </script>
         <script>
           function visualTemplate(options) {
@@ -212,4 +218,9 @@ The following example demonstrates how to define a `shapeTemplate` to display a 
                       {JobTitle: "President"},];
           $(document).ready(createDiagram);
         </script>
+        <style>
+         .centre {
+           text-align:center;
+         }
+        </style>
 ```

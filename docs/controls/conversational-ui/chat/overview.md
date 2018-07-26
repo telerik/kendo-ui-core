@@ -10,9 +10,9 @@ position: 1
 
 The [Kendo UI Chat](http://demos.telerik.com/kendo-ui/chat/index) widget allows the user to participate in chat sessions with other users or with chat bots.
 
-This widget provides rich conversational experience that goes beyond the natural language understanding and personality of your chatbot. This allows developers to easily implement conversational UI in their applications by utilizing AI powered framework that works with natural language processing, by following a predefined logical tree, or just for integrating P2P chat capabilities in their applications.
+The Chat provides rich conversational experience that goes beyond the natural language understanding and personality of your chatbot. These features allow you to implement conversational UI in your applications by utilizing AI-powered frameworks that work with natural language processing either by following a predefined logical tree or for integrating P2P chat capabilities in the applications.
 
- **Figure 1: Chat widget structure**
+ **Figure 1: Structure of the Chat widget**
 
 ![Template of the MediaPlayer](images/chat-structure-no-toolbar.png)
 
@@ -55,13 +55,9 @@ To render the Chat:
 
 ## Features
 
-The following are the major features of the Kendo UI Chat widget:
-
-* The Chat facilitates the `integration with all the major conversational UI APIs or services` available today – Microsoft Bot, Google’s API.AI, Amazon LEX, and more.
-
-* The Chat offers a variety of [`Chat Items`]({% slug chat_items %}) for better user experience.
-
-* The Chat can use any of the [`Kendo predefined themes`]({% slug sassbasedthemes_kendoui %}).
+* [Integration with chatbot services]({% slug connect_to_chatbot_service %})&mdash;The Chat facilitates the integration with all major conversational UI APIs or services which are available such as Microsoft Bot, Google’s API.AI, Amazon LEX, and more.
+* [Support for Chat items]({% slug chat_items %})&mdash;To improve user experience, the Chat offers a default variety of items.
+* [Support for Kendo UI predefined themes]({% slug sassbasedthemes_kendoui %})&mdash;The Chat i fully compatible with any of the available Kendo UI themes and styling options. 
 
 ## See Also
 

@@ -25,14 +25,14 @@ The example below demonstrates how to restrict the movement of a Kendo UI Window
               newTop = windowPosition.top,
               newLeft = windowPosition.left;
 
-          if (windowPosition.top > 200) {
+          if (windowPosition.top > 50 || windowPosition.top < 0) {
             shouldOverridePosition = true;
-            newTop = 200;
+            newTop = 50;
           }
 
-          if (windowPosition.left > 200) {
+          if (windowPosition.left > 50 || windowPosition.left < 0) {
             shouldOverridePosition = true;
-            newLeft = 200;
+            newLeft = 50;
           }
 
           if (shouldOverridePosition) {
@@ -47,12 +47,9 @@ The example below demonstrates how to restrict the movement of a Kendo UI Window
             top: 0,
             left: 0
           },
-          title: "Kendo UI Window"
+          title: "Kendo UI Window",
+          dragend: onWindowDrag
         }).data("kendoWindow");
-
-        winObject.dragging._draggable.bind("drag", onWindowDrag);
-        // dragging represents a WindowDragging object, which is a wrapper around a Kendo UI Draggable instance
-        // _draggable represents the Draggable instance that you can bind events to
       });
     </script>
 ```

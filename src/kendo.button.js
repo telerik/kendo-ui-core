@@ -161,7 +161,7 @@ var __meta__ = { // jshint ignore:line
                 if (!span[0]) {
                     span = $('<span></span>').prependTo(element);
                 }
-                span.attr("class", iconClass ? iconClass : "k-icon k-i-" + icon);
+                span.attr("class", icon ? "k-icon k-i-" + icon : iconClass);
             } else if (spriteCssClass) {
                 span = element.children("span.k-sprite").first();
                 if (!span[0]) {

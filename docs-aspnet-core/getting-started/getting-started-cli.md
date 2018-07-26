@@ -1,21 +1,21 @@
 ---
 title: Getting Started with CLI
-page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Command line interface | Telerik UI for ASP.NET Core
-description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and the Command line interface."
+page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Command Line Interface | Telerik UI for ASP.NET Core
+description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and the command line interface."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /gettingstartedlinux_aspnetmvc6_aspnetmvc, /gettingstartedvscode_aspnetmvc6_aspnetmvc
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
-position: 4
+position: 2
 ---
 
 # Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and the Command Line Interface
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core using the Command line interface.
+This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core by using the command line interface.
 
-The below is applicable when working on .Net Core project in [Visual Studio Code](https://code.visualstudio.com/) or any other editor of preference. It is also platform independent, meaning that the same steps could be followed on MacOS, Linux or Windows machine.
+The following approach is applicable when you work on .Net Core projects in [Visual Studio Code](https://code.visualstudio.com/) or any other code editor. It is also platform-agnostic which means that you can follow the same steps on MacOS, Linux, or Windows machines.
 
 ## Prerequisites
 
-* Install the appropriate for your platform [.Net Core SDK 2.0 or later](https://www.microsoft.com/net/download/all)
+* Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/net/download/all) for your platform.
 
 ## Creating the Application
 
@@ -25,22 +25,22 @@ The below is applicable when working on .Net Core project in [Visual Studio Code
 
 Below are listed the steps for you to follow when creating an ASP.NET Core web app.
 
-1. Using the Terminal / cmd, navigate to the folder of your choice. Create a new folder and navigate in it:
+1. Navigate to the folder of your choice by using the Terminal (cmd). Create a new folder and navigate in it.
 
     ```sh
     mkdir MyTelerikApp
     cd MyTelerikApp
     ```
 
-2. Run [`dotnet new mvc`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) to create a .Net Core application using the default web MVC template.
+2. Run [`dotnet new mvc`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) to create a .Net Core application by using the default web MVC template.
 
 3. Run [`dotnet restore`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore) to restore the project template dependencies. As a result, the NuGet packages are downloaded.
 
     > **Important**
     >
-    > For up-to-date commands, refer to the [guide on getting started with .NET Core](https://docs.asp.net/en/latest/getting-started.html).
+    > For a list of current commands, refer to the [guide on getting started with .NET Core](https://docs.asp.net/en/latest/getting-started.html).
 
-4. Start the application by running [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run). The following example demonstrates a sample response that you are expected to receive.
+4. Run [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run) to start the application. The following example demonstrates a sample response that you are expected to receive.
 
     ```sh
     Hosting environment: Production
@@ -48,16 +48,16 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
     Application started. Press Ctrl+C to shut down.
     ```
 
-5. Use your favorite browser to navigate to the above location and make sure the application is running properly. After you check the application in the browser, stop the server.
+5. By using the browser, navigate to the above location and make sure the application is properly running. After you check the application in the browser, stop the server.
 
 ## Integrating Telerik UI for ASP.NET Core
 
-1. Configure the private Telerik NuGet feed. You could either:
+1. Configure the private Telerik NuGet feed and use either of the following approaches:
 
-    * Globally include the `telerik.com` credentials to the NuGet configuration of the user. To do that you should modify (or create) the `NuGet.Config` file for the user. That file could be found in the `%appdata%\NuGet\` folder on Windows machines. Depending on the exact OS distribution, it should be available / created in the `~/.config/NuGet/` or the `~/.nuget/NuGet/` folder on Mac/Linux machines.
+    * Globally include the `telerik.com` credentials to the NuGet configuration of the user. To do that, modify (or create) the `NuGet.Config` file for the user. That file could be found in the `%appdata%\NuGet\` folder on Windows machines. Depending on the exact OS distribution, the file has to be available (created) in the `~/.config/NuGet/` or the `~/.nuget/NuGet/` folder on Mac/Linux machines.
     * Create a local `NuGet.Config` file in the project folder.
 
-    In both cases, the NuGet.Config file should include your `telerik.com` credentials:
+    In both cases, the NuGet.Config file has to include your `telerik.com` credentials.
 
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
@@ -75,15 +75,15 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
     </configuration>
     ```
 
-2. Install Telerik UI for ASP.NET Core through the cli:
+2. Install Telerik UI for ASP.NET Core through the CLI.
 
     ```sh
     dotnet add package Telerik.UI.for.AspNet.Core
     ```
 
-3. Register Kendo UI as a service in `Startup.cs`:
+3. Register Kendo UI as a service in `Startup.cs`.
 
-    * Locate the `ConfigureServices method` and add the `JsonOptions` and the Kendo UI service.
+    3.1. Locate the `ConfigureServices method` and add the `JsonOptions` and the Kendo UI service.
 
         ```cs
         public void ConfigureServices(IServiceCollection services)
@@ -98,13 +98,13 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
         }
         ```
 
-    * Add the required using of `Newtonsoft.Json.Serialization` namespace.
+    3.2. Add the required `using` of the `Newtonsoft.Json.Serialization` namespace.
 
         ```cs
         using Newtonsoft.Json.Serialization;
         ```
 
-    * Locate the `configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
+    3.3. Locate the `configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
 
         ```cs
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -204,7 +204,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
     )
     ```
 
-8. Navigate to the project folder by using the Terminal / cmd and run it using the `dotnet run` command. The Index page should display a [Kendo UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}).
+8. Navigate to the project folder by using the Terminal (cmd) and run it by using the `dotnet run` command. The **Index** page will display a [Kendo UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}).
 
 ## See Also
 

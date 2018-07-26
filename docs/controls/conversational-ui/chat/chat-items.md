@@ -8,7 +8,7 @@ position: 3
 
 # Chat Items
 
-The Kendo UI Chat offers support for some predefined and customizable items, that would provide better user experience.
+To provide better customer experience, the Chat offers support for predefined and customizable items.
 
 * [Default cards](#default-cards)
 * [Suggested actions](#suggested-actions)
@@ -17,7 +17,7 @@ The Kendo UI Chat offers support for some predefined and customizable items, tha
 
 ## Default Cards
 
-Out of the box, the Chat supports `heroCards` which can be displayed in the chat flow by manually calling the [`renderAttachments`](/api/javascript/ui/chat/methods/renderattachments) method of the widget.
+The Chat supports the `heroCards` option which can be displayed in the chat flow by manually calling the [`renderAttachments`](/api/javascript/ui/chat/methods/renderattachments) method of the widget.
 
 ```html
 <div id="chat"></div>
@@ -40,7 +40,7 @@ Out of the box, the Chat supports `heroCards` which can be displayed in the chat
 </script>
 ```
 
-You could also easily add images to the `heroCard` by passing the proper values to the `attachments.content.images` object:
+You can also add images to the `heroCard` setting by passing the proper values to the `attachments.content.images` object.
 
 ```html
 <div id="chat"></div>
@@ -69,7 +69,7 @@ You could also easily add images to the `heroCard` by passing the proper values 
 
 ## Suggested Actions
 
-Out of the box, the Chat supports `suggested actions`. To display the `suggestedActions` prompt, manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the widget.
+The Chat also supports the implementation of suggested actions. To display the `suggestedActions` prompt, manually call the [`renderSuggestedActions`](/api/javascript/ui/chat/methods/rendersuggestedactions) method of the widget.
 
 ```html
 <div id="chat"></div>
@@ -90,9 +90,9 @@ Out of the box, the Chat supports `suggested actions`. To display the `suggested
 
 ## Custom Templates
 
-The Chat supports the definition of custom templates to fit any custom payload that is returned by the service.
+The Chat provides options for defining custom templates to fit custom payload that is returned by the service.
 
-The following example demonstrates how to implement a simple template and to register it for the Chat.
+The following example demonstrates how to implement a simple template and register it for the Chat.
 
 ```html
 <div id="chat"></div>
@@ -151,7 +151,7 @@ The following example demonstrates how to implement a simple template and to reg
 
 ## Custom Components
 
-The Chat supports the implementation of custom components which allows you to use JavaScript to render any content.
+The Chat allows you to implement custom components and use JavaScript to render content.
 
 The following example demonstrates how to place a [Kendo UI Calendar]({% slug overview_kendoui_calendar_widget %}) in a custom Chat component.
 

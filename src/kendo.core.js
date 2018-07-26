@@ -732,7 +732,9 @@ function pad(number, digits, end) {
 
             //return number in exponential format
             if (format === "e") {
-                return customPrecision ? number.toExponential(precision) : number.toExponential(); // toExponential() and toExponential(undefined) differ in FF #653438.
+                var exp = customPrecision ? number.toExponential(precision) : number.toExponential(); // toExponential() and toExponential(undefined) differ in FF #653438.
+
+                return exp.replace(POINT, numberFormat[POINT]);
             }
 
             // multiply if format is percent
@@ -799,9 +801,9 @@ function pad(number, digits, end) {
             //get negative format
             format = format[1];
             hasNegativeFormat = true;
-        } else if (number === 0) {
+        } else if (number === 0 && format[2]) {
             //format for zeros
-            format = format[2] || format[0];
+            format = format[2];
             if (format.indexOf(SHARP) == -1 && format.indexOf(ZERO) == -1) {
                 //return format if it is string constant.
                 return format;
@@ -861,10 +863,20 @@ function pad(number, digits, end) {
                 length = format.length;
                 decimalIndex = -1;
                 idx = 0;
-            } if (hasZero && zeroIndex > sharpIndex) {
+            }
+
+            if (hasZero && zeroIndex > sharpIndex) {
                 idx = zeroIndex;
             } else if (sharpIndex > zeroIndex) {
                 if (hasSharp && idx > sharpIndex) {
+                    var rounded = round(number, sharpIndex, negative);
+
+                    while (rounded.charAt(rounded.length - 1) === ZERO && sharpIndex > 0 && sharpIndex > zeroIndex) {
+                        sharpIndex--;
+
+                        rounded = round(number, sharpIndex, negative);
+                    }
+
                     idx = sharpIndex;
                 } else if (hasZero && idx < zeroIndex) {
                     idx = zeroIndex;
@@ -873,7 +885,7 @@ function pad(number, digits, end) {
         } 
 
         number = round(number, idx, negative);
-        
+
         sharpIndex = format.indexOf(SHARP);
         startZeroIndex = zeroIndex = format.indexOf(ZERO);
 

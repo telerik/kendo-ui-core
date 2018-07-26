@@ -55,7 +55,7 @@ These include tokens used by ASP.NET, Ruby on Rails and others.
 ### bind
 Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on `data-role` attributes, similar to [`kendo.init()`](/api/javascript/kendo/methods/init).
 
-Model View ViewModel ([MVVM](http://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
+Model View ViewModel ([MVVM](https://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
 
 > **Important:** Kendo UI Mobile is not included in the default list of initialized namespaces. You can initialize it explicitly by
@@ -125,7 +125,7 @@ The text to be shown in the Confirm popup.
 
 #### Returns
 
-`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+`Promise` a [jQuery promise instance](https://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](https://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
 
 * `done()` - when user has pressed the "OK" button;
 * `fail()` - when user has pressed the "Cancel" button.
@@ -151,7 +151,7 @@ If no culture is found the default one is used.
 > The culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
 #### Example -  include a culture-specific JavaScript file and set the culture
-    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.en-GB.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.en-GB.min.js"></script>
     <script>
       console.log(kendo.format("{0:c}", 99)); // outputs "$99.00" using the default en-US culture
       kendo.culture("en-GB"); // change the culture
@@ -207,7 +207,8 @@ The format string.
     </script>
 
 #### See Also
-[Supported number formats](http://docs.telerik.com/kendo-ui/framework/globalization/numberformatting)
+
+[Supported number formats](/framework/globalization/numberformatting)
 
 ### guid
 
@@ -357,7 +358,7 @@ Parses a string as a floating point number.
 
 #### Example
 
-    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       console.log(kendo.parseFloat("12.22")); // outputs "12.22"
       kendo.culture("de-DE");
@@ -385,7 +386,7 @@ Parses as a string as an integer.
 
 #### Example
 
-    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       console.log(kendo.parseInt("12.22")); // outputs "12"
       kendo.culture("de-DE");
@@ -461,7 +462,7 @@ The default value that will be shown in the popup's input.
 
 #### Returns
 
-`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+`Promise` a [jQuery promise instance](https://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](https://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
 
 * `done()` - when user has pressed the "OK" button and the `data` passed to the callback is the inputted text;
 * `fail()` - when user has pressed the "Cancel" button and the `data` passed to the callback is the inputted text.
@@ -625,7 +626,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 
 ### stringify
 
-Converts a JavaScript object to [JSON](http://en.wikipedia.org/wiki/JSON). Uses [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) in browsers that support it.
+Converts a JavaScript object to [JSON](https://en.wikipedia.org/wiki/JSON). Uses [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) in browsers that support it.
 
 #### Parameters
 
@@ -784,7 +785,7 @@ The container element to enable scrolling for.
 Formats a `Number` or `Date` using the specified format and the current culture.
 
 #### Example
-    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       // Format a number using standard number formats and default culture (en-US)
       console.log(kendo.toString(10.12, "n"));  // "10.12"
@@ -1064,7 +1065,7 @@ Formats the value as a number with decimal and thousand separators.
 
 #### Example
 
-    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
     console.log(kendo.toString(1234.567, "n")); // outputs "1,234.57"
     kendo.culture("de-DE");
@@ -1077,7 +1078,7 @@ Formats the value by adding the currency symbol.
 
 #### Example
 
-    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
     console.log(kendo.toString(1234.567, "c")); // outputs "$1,234.57"
     kendo.culture("de-DE");
