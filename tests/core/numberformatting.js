@@ -175,6 +175,22 @@ test("toString method removes decimal part if no number placeholder", function()
     equal(toString(3.235555, "0."), "3");
 });
 
+test("toString method rounded removes trailing zeros", function() {
+    equal(toString(3.499, "#.##"), "3.5");
+});
+
+test("toString method rounded removes trailing zeros up to last zero formatter", function() {
+    equal(toString(3.4999, "#.#0#"), "3.50");
+});
+
+test("toString method rounded to whole number removes trailing zeros and decimal", function() {
+    equal(toString(3.999, "#.##"), "4");
+});
+
+test("toString method rounded to whole number removes trailing zeros up to last zero formatter", function() {
+    equal(toString(3.999, "#.0"), "4.0");
+});
+
 test("toString method formats correctly negative number", function() {
     equal(toString(-1, "0##"), "-001");
 });
@@ -185,7 +201,7 @@ test("toString decimal number -0.001 with negative format", function() {
 });
 
 test("toString decimal number -0.001 with negative format rounds number", function() {
-    equal(toString(-0.001, "####;-(#.#)"), "-(0.0)");
+    equal(toString(-0.001, "####;-(#.0)"), "-(0.0)");
 });
 
 test("toString decimal number -1000 with negative format", function() {
@@ -197,7 +213,7 @@ test("toString decimal number -123", function() {
 });
 
 test("toString method clears negative sign if rounded number is positive", function() {
-    equal(toString(-0.00001, "#.##"), "0.00");
+    equal(toString(-0.00001, "#.#0"), "0.00");
 });
 
 //zero custom toString
@@ -207,6 +223,10 @@ test("toString decimal number 0", function() {
 
 test("toString with #.00 zero number", function() {
     equal(toString(0, "####;-(#.00);#.00"), "0.00");
+});
+
+test("toString 0 with unsupported format", function() {
+    equal(toString(0, "ZERO"), "0");
 });
 
 //exponential
@@ -419,6 +439,12 @@ test("globalized number", function() {
     kendo.cultures.current.numberFormat[","] = " ";
     kendo.cultures.current.numberFormat["."] = ",";
     equal(toString(1000010.1, " 0000#0#,#.00 "), " 01 000 010,10 ");
+});
+
+test("globalized exponential number", function() {
+    kendo.cultures.current.numberFormat["."] = ",";
+
+    equal(toString(1234, "e"), "1,234e+3");
 });
 
 test("format number using specific culture", function() {
