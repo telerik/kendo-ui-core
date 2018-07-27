@@ -3021,6 +3021,10 @@ The maximum number of groups (categories) to display when
 [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit" or
 [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
+### categoryAxis.maxDivisions `Number`
+
+The maximum number of ticks and labels to display. Applicable for date category axis.
+
 ### categoryAxis.min `Object`
 
 The first date displayed on the category date axis. By default, the minimum date is the same as the first category.
@@ -11951,6 +11955,14 @@ A function that can be used to create a custom visual for the labels. The availa
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
 * sender - the chart instance (may be undefined).
+* value - The point value.
+* category - The point category.
+* stackValue - The cumulative point value on the stack. Available only for the stackable series.
+* dataItem - The point dataItem.
+* series - The point series.
+* percentage - The point value that is represented as a percentage value. Available only for the Donut, Pie, and 100% stacked charts.
+* runningTotal - The sum of point values from the last runningTotal summary point onwards. Available for the Waterfall series.
+* total - The sum of all previous series values. Available for the Waterfall series.
 
 #### Example - using custom visual for the labels
 
@@ -14471,7 +14483,7 @@ The data item field which indicates whether to show the point category name in t
 
 ### series.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -14490,7 +14502,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * startAngle - the segment start angle. Available for donut and pie series.
 * endAngle - the segment end angle. Available for donut and pie series.
 * center - the segment center point. Available for donut and pie series.
-* points - the segment points. Available for funnel series.
+* points - the segment points. Available for funnel, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -16125,9 +16137,17 @@ A function that can be used to create a custom visual for the labels. The availa
 
 * text - the label text.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
-* sender - the chart instance (may be undefined).
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
+* sender - the chart instance (may be undefined).
+* value - The point value.
+* category - The point category.
+* stackValue - The cumulative point value on the stack. Available only for the stackable series.
+* dataItem - The point dataItem.
+* series - The point series.
+* percentage - The point value that is represented as a percentage value. Available only for the Donut, Pie, and 100% stacked charts.
+* runningTotal - The sum of point values from the last runningTotal summary point onwards. Available for the Waterfall series.
+* total - The sum of all previous series values. Available for the Waterfall series.
 
 #### Example - using custom visual for the labels
 
@@ -17069,7 +17089,7 @@ The verticalRangeArea chart series options. Accepts all values supported by the 
 
 ### seriesDefaults.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar and column series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, line, scatterLine, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -17077,8 +17097,18 @@ A function that can be used to create a custom visual for the points. Applicable
 * category - the point category.
 * dataItem - the point dataItem.
 * value - the point value.
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * sender - the chart instance.
 * series - the point series.
+* percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](/api/javascript/dataviz/ui/chart#configuration-series.summaryField). Available for waterfall series.
+* total - the sum of all previous series values. Available for waterfall series.
+* radius - the segment radius. Available for donut and pie series.
+* innerRadius - the segment inner radius. Available for donut series.
+* startAngle - the segment start angle. Available for donut and pie series.
+* endAngle - the segment end angle. Available for donut and pie series.
+* center - the segment center point. Available for donut and pie series.
+* points - the segment points. Available for funnel, line and scatterLine series.
 
 #### Example - using custom visual
 
@@ -34067,7 +34097,7 @@ The DOM element of the plot area.
         ],
         legendItemClick: function(e){
         	console.log("Clicked an item with text: " + e.text);
-          
+
           //prevent toggling the series visibility on legend item click
           e.preventDefault();
         }
@@ -34089,7 +34119,7 @@ The DOM element of the plot area.
           { data: [1, 5, 2], name: "Task 2" }
         ]
       });
-      var chart = $("#chart").data("kendoChart");      
+      var chart = $("#chart").data("kendoChart");
       chart.bind("legendItemClick", chart_legendClick);
     </script>
 
@@ -34154,6 +34184,67 @@ The name of the series.
       });
       var chart = $("#chart").data("kendoChart");
       chart.bind("legendItemHover", chart_legendHover);
+    </script>
+
+### legendItemLeave
+
+Fires when the cursor leaves a legend item.
+
+#### Event Data
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.pointIndex `Number`
+
+The point index.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series options.
+
+##### e.seriesIndex `Number`
+
+The series index.
+
+##### e.text `String`
+
+The name of the series.
+
+#### Example - subscribe to the "legendItemLeave" event during initialization
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [6, 2, 3], name: "Task 1" },
+          { data: [1, 5, 2], name: "Task 2" }
+        ],
+        legendItemLeave: function(e){
+            console.log("Left an item with text: " + e.text);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "legendItemLeave" event after initialization
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [6, 2, 3], name: "Task 1" },
+          { data: [1, 5, 2], name: "Task 2" }
+        ]
+      });
+      var chart = $("#chart").data("kendoChart");
+      chart.bind("legendItemLeave", function(e) {
+        console.log("Left an item with text: " + e.text);
+      });
     </script>
 
 ### noteClick
@@ -34282,6 +34373,117 @@ The note visual element.
     });
     var chart = $("#chart").data("kendoChart");
     chart.bind("noteHover", chart_noteHover);
+    </script>
+
+### noteLeave
+
+Fired when the cursor leaves a note.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.dataItem `Object`
+
+The data item of the point's note.
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series of the note.
+
+##### e.value `Object`
+
+The data point value.
+
+##### e.visual `Object`
+
+The note visual element.
+
+#### Example - subscribe to the "noteLeave" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        data: [{ value: 1, noteText: "a" }]
+      }],
+      noteLeave: function(e) {
+        console.log(e.text);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "noteLeave" event after initialization
+    <div id="chart"></div>
+    <script>
+    function chart_noteLeave(e) {
+      console.log(e.text);
+    }
+    $("#chart").kendoChart({
+      series: [{
+        data: [{ value: 1, noteText: "a" }]
+      }]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("noteLeave", chart_noteLeave);
+    </script>
+
+### paneRender
+
+Fires when a pane is rendered because the chart is rendered, or the chart performs panning or zooming, or because the chart is exported with different options. The event can be used to render custom visuals in the panes.
+
+#### Event Data
+
+##### pane `kendo.dataviz.ChartPane`
+
+The chart pane that was rendered.
+
+##### name `String`
+
+The pane name.
+
+##### index `Number`
+
+The pane index.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+#### Example - draw on the pane in the paneRender event
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        valueAxis: {
+          name: "value"
+        },
+        categoryAxis: {
+          name: "category"
+        },
+        series: [{ data: [1, 2] }],
+        paneRender: function(e) {
+          var valueAxis = e.pane.findAxisByName("value");
+          var categoryAxis = e.pane.findAxisByName("category");
+          var valueSlot = valueAxis.slot(1, 2);
+          var categorySlot = categoryAxis.slot(0, 1);
+          var geometry = new kendo.geometry.Circle([categorySlot.center().x, valueSlot.center().y], valueSlot.size.height / 2);
+          var circle = new kendo.drawing.Circle(geometry, { fill: { color: "red" }});
+
+          e.pane.chartsVisual.insert(0, circle);
+        }
+      });
     </script>
 
 ### plotAreaClick
@@ -34424,6 +34626,30 @@ The Y axis value or array of values for multi-axis charts.
     });
     var chart = $("#chart").data("kendoChart");
     chart.bind("plotAreaHover", chart_plotAreaHover);
+    </script>
+
+### plotAreaLeave
+
+Fired when the cursor leaves the plotArea.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+#### Example - use plotAreaHover and plotAreaLeave to add hover fill
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [1, 2] }
+        ],
+        plotAreaHover: function(e) {
+          this.plotArea().backgroundVisual.fill('red', 0.5);
+        },
+        plotAreaLeave: function(e) {
+          this.plotArea().backgroundVisual.fill('#fff', 0);
+        }
+      });
     </script>
 
 ### render
@@ -34888,6 +35114,168 @@ The data point value.
     });
     var chart = $("#chart").data("kendoChart");
     chart.bind("seriesHover", chart_seriesHover);
+    </script>
+
+### seriesOver
+
+Fired when the cursor is over the chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
+
+#### Example - subscribe to the "seriesOver" event during initialization
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [1, 2] }
+        ],
+        seriesOver: function(e) {
+          console.log(e.value);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "seriesOver" event after initialization
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [1, 2] }
+        ]
+      });
+      var chart = $("#chart").data("kendoChart");
+      chart.bind("seriesOver", function(e) {
+        console.log(e.value);
+      });
+    </script>
+
+### seriesLeave
+
+Fired when the cursor leaves a chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
+
+#### Example - subscribe to the "seriesLeave" event during initialization
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [1, 2] }
+        ],
+        seriesLeave: function(e) {
+          console.log(e.value);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "seriesLeave" event after initialization
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [1, 2] }
+        ]
+      });
+      var chart = $("#chart").data("kendoChart");
+      chart.bind("seriesLeave", function(e) {
+        console.log(e.value);
+      });
     </script>
 
 ### zoom

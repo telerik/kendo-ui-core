@@ -1,24 +1,66 @@
 ---
-title: RadialGauge
-page_title: Configuration, methods and events of Kendo UI DataViz RadialGauge
-description: Learn the configuration options for Radial Gauge widget, set the color and size of the border, use methods properly.
+title: ArcGauge
+page_title: Configuration, methods and events of Kendo UI DataViz ArcGauge
+description: Learn the configuration options for Arc Gauge widget, use methods properly.
 res_type: api
 component: gauges
 ---
 
-# kendo.dataviz.ui.RadialGauge
+# kendo.dataviz.ui.ArcGauge
 
 ## Configuration
 
+### color `String`
+
+The color of the value pointer. Accepts a valid CSS color string, including hex and rgb.
+
+### colors `Array`
+
+The color ranges of the value pointer. The pointer color will be set to the color from the range that contains the current value.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+     $("#gauge").kendoArcGauge({
+        value: 30,
+        colors: [{
+            to: 25,
+            color: '#0058e9'
+        }, {
+            from: 25,
+            to: 50,
+            color: '#37b400'
+        }, {
+            from: 50,
+            to: 75,
+            color: '#ffc000'
+        }, {
+            from: 75,
+            color: '#f31700'
+        }]
+     });
+    </script>
+
+### colors.color `String`
+
+The color of the pointer in the specified range.
+
+### colors.from `Number`
+
+The lower range value of the applied color.
+
+### colors.to `Number`
+
+The upper range value of the applied color.
+
 ### gaugeArea `Object`
 
-The gauge area configuration options.
-This is the entire visible area of the gauge.
+The gauge area configuration options. This is the entire visible area of the gauge.
 
 ### gaugeArea.background `String`*(default: "white")*
 
- The background of the gauge area.
-Any valid CSS color string will work here, including hex and rgb.
+The background of the gauge area. Any valid CSS color string will work here, including hex and rgb.
 
 ### gaugeArea.border `Object`
 
@@ -31,7 +73,6 @@ The color of the border. Any valid CSS color string will work here, including he
 ### gaugeArea.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
-
 
 #### *"solid"*
 
@@ -82,15 +123,13 @@ The margin of the gauge area.
 
     <div id="gauge"></div>
     <script>
-     $("#gauge").kendoRadialGauge({
-         pointer: [{
-            value: 20
+        $("#gauge").kendoArcGauge({
+            value: 20,
             gaugeArea:{
-                margin:50
-         }
-      }]
-     });
-</script>
+                margin: 50
+            }
+        });
+    </script>
 
 ### gaugeArea.margin.top `Number`
 
@@ -113,81 +152,9 @@ The right margin of the gauge area.
 The width of the gauge area.  By default the vertical gauge is 60px
 and horizontal gauge is 200px.
 
-### pointer `Array`
+### opacity `Number`
 
-The pointer configuration options. It accepts an `Array` of pointers, each with it's own configuration options.
-
-#### Example - specify single pointer
-    <div id="gauge"></div>
-    <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: [{
-        value: 20
-        }]
-    });
-    </script>
-
-#### Example - specify multiple pointers
-	<div id="gauge"></div>
-    <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: [{
-        value: 20
-        }, {
-        value: 40
-        }]
-    });
-    </script>
-
-### pointer.cap `Object`
-
-The cap configuration options.
-
-### pointer.cap.color `String`
-
-The color of the cap.
-Any valid CSS color string will work here, including hex and rgb.
-
-### pointer.cap.size `Number`
-
-The size of the cap in percents. (from 0 to 1)
-
-### pointer.color `String`
-
-The color of the pointer.
-Any valid CSS color string will work here, including hex and rgb.
-
-### pointer.length `Number`
-
-The pointer length (in percent) that is based on the distance to the scale.
-The default length of `1` indicates that the pointer exactly reaches the scale.
-Accepts values between `0.1` and `1.5`.
-
-#### Example - specify pointers with different lengths
-    <div id="gauge"></div>
-    <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: [{
-            value: 10,
-            color: '#ffd246',
-            length: 0.5
-        }, {
-            value: 20,
-            color: '#28b4c8',
-            length: 0.75
-        }, {
-            value: 30,
-            color: '#78d237',
-
-            // Default length
-            // length: 1
-        }]
-    });
-    </script>
-
-### pointer.value `Number`
-
-The value of the gauge.
+The opacity of the value pointer.
 
 ### renderAs `String`
 
@@ -203,25 +170,19 @@ The supported values are:
 
     <div id="gauge"></div>
     <script>
-    $("#gauge").kendoRadialGauge({
-        renderAs: "canvas",
-        pointer: {
+        $("#gauge").kendoArcGauge({
+            renderAs: "canvas",
             value: 50
-        },
-        scale: {
-            min: 0,
-            max: 100
-        }
-    });
+        });
     </script>
 
 ### scale `Object`
 
 Configures the scale.
 
-### scale.endAngle `Number`*(default: 210)*
+### scale.endAngle `Number`*(default: 180)*
 
- The end angle of the gauge.
+The end angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
 ### scale.labels `Object`
@@ -244,7 +205,6 @@ The color of the border. Any valid CSS color string will work here, including he
 ### scale.labels.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
-
 
 #### *"solid"*
 
@@ -299,20 +259,18 @@ The format of the labels.
 
     <div id="gauge"></div>
     <script>
-    $("#gauge").kendoRadialGauge({
-        renderAs: "canvas",
-        pointer: {
-        value: 50
-        },
-        scale: {
-        min: 0,
-        max: 100,
-        labels: {
-            // set the format to currency
-            format: "C"
-        }
-        }
-    });
+        $("#gauge").kendoArcGauge({
+            value: 50,
+            scale: {
+                min: 0,
+                max: 100,
+                labels: {
+                    visible: true,
+                    // set the format to currency
+                    format: "C"
+                }
+            }
+        });
     </script>
 
 ### scale.labels.margin `Number|Object`*(default: 0)*
@@ -359,7 +317,6 @@ The right padding of the labels.
 
 The labels positions.
 
-
 #### *"inside"*
 
 The labels are positioned inside.
@@ -372,31 +329,27 @@ The labels are positioned outside.
 
 The label template.
 Template variables:
-
-
 *   **value** - the value
 
 #### Example
 
     <div id="gauge"></div>
     <script>
-    $("#gauge").kendoRadialGauge({
-        renderAs: "canvas",
-        pointer: {
-        value: 50
-        },
+    $("#gauge").kendoArcGauge({
+        value: 50,
         scale: {
-        min: 0,
-        max: 100,
-        labels: {
-            // set the format to currency
-            template: "#= value #%"
-        }
+            min: 0,
+            max: 100,
+            labels: {
+                visible: true,
+                // set the format to currency
+                template: "#= value #%"
+            }
         }
     });
     </script>
 
-### scale.labels.visible `Boolean`*(default: true)*
+### scale.labels.visible `Boolean`*(default: false)*
 
  The visibility of the labels.
 
@@ -413,7 +366,7 @@ The color of the major ticks.
 The major tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
-### scale.majorTicks.visible `Boolean`*(default: true)*
+### scale.majorTicks.visible `Boolean`*(default: false)*
 
  The visibility of the major ticks.
 Any valid CSS color string will work here, including hex and rgb.
@@ -428,11 +381,11 @@ The interval between major divisions.
 
 ### scale.max `Number`*(default: 100)*
 
- The maximum value of the scale.
+The maximum value of the scale.
 
 ### scale.min `Number`*(default: 0)*
 
- The minimum value of the scale.
+The minimum value of the scale.
 
 ### scale.minorTicks `Object`
 
@@ -448,59 +401,27 @@ Any valid CSS color string will work here, including hex and rgb.
 The minor tick size.
 This is the length of the line in pixels that is drawn to indicate the tick on the scale.
 
-### scale.minorTicks.visible `Boolean`*(default: true)*
+### scale.minorTicks.visible `Boolean`*(default: false)*
 
- The visibility of the minor ticks.
+The visibility of the minor ticks.
 
 ### scale.minorTicks.width `Number`*(default: 0.5)*
 
- The width of the minor ticks.
+The width of the minor ticks.
 
 ### scale.minorUnit `Number`
 
 The interval between minor divisions.
 
-### scale.ranges `Array`
+### scale.rangeLineCap `String`*(default: "round")*
 
-The ranges of the scale.
+The lineCap style of the ranges.
 
-#### Example
+The supported values are:
 
-    <div id="gauge"></div>
-    <script>
-    $("#gauge").kendoRadialGauge({
-        renderAs: "canvas",
-        pointer: {
-        value: 50
-        },
-        scale: {
-        min: 0,
-        max: 100,
-        ranges: [{
-            from: 10,
-            to: 20,
-            color: "green"
-        }]
-        }
-    });
-    </script>
-
-### scale.ranges.from `Number`
-
-The start position of the range in scale units.
-
-### scale.ranges.to `Number`
-
-The end position of the range in scale units.
-
-### scale.ranges.opacity `Number`
-
-The opacity of the range.
-
-### scale.ranges.color `String`
-
-The color of the range.
-Any valid CSS color string will work here, including hex and rgb.
+* `"butt"`
+* `"round"`
+* `"square"`
 
 ### scale.rangePlaceholderColor `String`
 
@@ -518,9 +439,9 @@ The distance from the range indicators to the ticks.
 
 Reverses the scale direction - values are increase anticlockwise.
 
-### scale.startAngle `Number`*(default: -30)*
+### scale.startAngle `Number`*(default: 0)*
 
- The start angle of the gauge.
+The start angle of the gauge.
 The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinate system)
 
 ### theme `String`
@@ -546,52 +467,11 @@ The supported values are:
 
 A value indicating if transition animations should be played.
 
+### value `Number`
+
+The gauge value.
+
 ## Methods
-
-### allValues
-
-Allows setting or getting multiple Gauge values at once.
-
-#### Parameters
-
-##### values `Array` *(optional)*
-An array of values to be set.
-
-#### Returns
-`Array` An array of the Gauge pointer values will be returned if no parameter is passed.
-
-#### Example - setting multiple values
-    <div id="gauge"></div>
-    <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: [{
-        value: 20
-        }, {
-        value: 40
-        }]
-    });
-
-    setTimeout(function(){
-        var gauge = $("#gauge").data("kendoRadialGauge");
-        gauge.allValues([60, 10]);
-    },1000)
-
-    </script>
-
-#### Example - retrieving all values
-    <div id="gauge"></div>
-    <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: [{
-        value: 20
-        }, {
-        value: 40
-        }]
-    });
-
-    var gauge = $("#gauge").data("kendoRadialGauge");
-    var allValues = gauge.allValues();
-    </script>
 
 ### destroy
 
@@ -603,19 +483,13 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 
     <div id="gauge"></div>
     <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: {
-        value: 50
-        },
-        scale: {
-        min: 0,
-        max: 100
-        }
-    });
-    setTimeout(function(){
-        kendo.destroy($("#gauge"));
-        $("#gauge").remove();
-    },1000)
+        $("#gauge").kendoArcGauge({
+            value: 50
+        });
+        setTimeout(function(){
+            kendo.destroy($("#gauge"));
+            $("#gauge").remove();
+        },1000);
     </script>
 
 ### exportImage
@@ -642,17 +516,11 @@ The height of the exported image. Defaults to the Gauge height.
 #### Example - Exporting a Gauge to an image
     <div id="gauge"></div>
     <script>
-        $("#gauge").kendoRadialGauge({
-            pointer: {
-                value: 50
-            },
-            scale: {
-                min: 0,
-                max: 100
-            }
+        $("#gauge").kendoArcGauge({
+            value: 50
         });
 
-        var gauge = $("#gauge").data("kendoRadialGauge");
+        var gauge = $("#gauge").data("kendoArcGauge");
         gauge.exportImage().done(function(data) {
             kendo.saveAs({
                 dataURI: data,
@@ -660,7 +528,6 @@ The height of the exported image. Defaults to the Gauge height.
             });
         });
     </script>
-
 
 ### exportPDF
 Exports the Gauge as a PDF file.
@@ -680,18 +547,12 @@ Parameters for the exported PDF file.
 #### Example - Exporting a chart to a PDF file
     <div id="gauge"></div>
     <script>
-        $("#gauge").kendoRadialGauge({
-            pointer: {
-                value: 50
-            },
-            scale: {
-                min: 0,
-                max: 100
-            }
+        $("#gauge").kendoArcGauge({
+            value: 50
         });
 
-        var gauge = $("#gauge").data("kendoRadialGauge");
-        gauge.exportPDF({ paperSize: "A5", landscape: true }).done(function(data) {
+        var gauge = $("#gauge").data("kendoArcGauge");
+        gauge.exportPDF({ paperSize: "A4", landscape: true }).done(function(data) {
             kendo.saveAs({
                 dataURI: data,
                 fileName: "gauge.pdf"
@@ -720,17 +581,11 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 #### Example - Exporting a chart to an SVG document
     <div id="gauge"></div>
     <script>
-        $("#gauge").kendoRadialGauge({
-            pointer: {
-                value: 50
-            },
-            scale: {
-                min: 0,
-                max: 100
-            }
+        $("#gauge").kendoArcGauge({
+            value: 50
         });
 
-        var gauge = $("#gauge").data("kendoRadialGauge");
+        var gauge = $("#gauge").data("kendoArcGauge");
         gauge.exportSVG().done(function(data) {
             kendo.saveAs({
                 dataURI: data,
@@ -746,17 +601,11 @@ Redraws the gauge.
 #### Example
     <div id="gauge"></div>
     <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: {
+    $("#gauge").kendoArcGauge({
         value: 50
-        },
-        scale: {
-        min: 0,
-        max: 100
-        }
     });
     setTimeout(function(){
-        var gauge = $("#gauge").data("kendoRadialGauge");
+        var gauge = $("#gauge").data("kendoArcGauge");
         gauge.redraw();
     },1000)
     </script>
@@ -768,19 +617,12 @@ Adjusts the widget layout to match the size of the container.
 #### Example
     <div id="gauge" style="width: 100px; height: 100px;"></div>
     <script>
-        $("#gauge").kendoRadialGauge({
-            pointer: {
-                value: 50
-            },
-            scale: {
-                min: 0,
-                max: 100
-            }
+        $("#gauge").kendoArcGauge({
+            value: 50
         });
 
-        $("#gauge")
-        .css({ width: "200px", height: "200px" })
-        .data("kendoRadialGauge").resize();
+        $("#gauge").css({ width: "200px", height: "200px" })
+            .data("kendoArcGauge").resize();
     </script>
 
 #### Parameters
@@ -803,13 +645,11 @@ The gauge settings to update.
 
     <div id="gauge"></div>
     <script>
-        $("#gauge").kendoRadialGauge({
-            pointer: [{
-                value: 50
-            }]
+        $("#gauge").kendoArcGauge({
+            value: 50
         });
 
-        $("#gauge").data("kendoRadialGauge").setOptions({ theme: 'metro' });
+        $("#gauge").data("kendoArcGauge").setOptions({ theme: 'black' });
     </script>
 
 ### svg
@@ -820,31 +660,25 @@ converted to other formats using tools like [Inkscape](https://inkscape.org/en) 
 [ImageMagick](http://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/radialgauge/methods/exportsvg), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/arcgauge/methods/exportsvg), but will remain fully functional.
 
 #### Example
 
     <div id="gauge"></div>
     <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: {
+        $("#gauge").kendoArcGauge({
             value: 50
-        },
-        scale: {
-            min: 0,
-            max: 100
-        }
-    });
-    var gauge = $("#gauge").data("kendoRadialGauge");
-    var svg = gauge.svg();
-    console.log(svg); // displays the SVG string
+        });
+        var gauge = $("#gauge").data("kendoArcGauge");
+        var svg = gauge.svg();
+        console.log(svg); // displays the SVG string
     </script>
 
 ### imageDataURL
 
 Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is obsoleted and replaced by [exportImage](/api/javascript/dataviz/ui/radialgauge/methods/exportimage), but will remain fully functional.
+> This method is obsoleted and replaced by [exportImage](/api/javascript/dataviz/ui/arcgauge/methods/exportimage), but will remain fully functional.
 
 #### Returns
 
@@ -855,60 +689,49 @@ Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozil
     <div id="gauge"></div>
     <a download="export.png" id="export" class="k-button">Export PNG</a>
     <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: {
+        $("#gauge").kendoArcGauge({
             value: 50
-        },
-        scale: {
-            min: 0,
-            max: 100
+        });
+
+        $("#export").on("click", function() {
+            var gauge = $("#gauge").data("kendoArcGauge");
+            var imageDataURL = gauge.imageDataURL();
+
+            if (navigator.msSaveBlob) {
+                var blob = toBlob(imageDataURL, "image/png");
+                navigator.msSaveBlob(blob, this.getAttribute("download"));
+            } else {
+                this.href = imageDataURL;
+            }
+        });
+
+        // See: http://goo.gl/qlg5dd
+        function toBlob(base64, type) {
+            var rawData = base64.substring(base64.indexOf("base64,") + 7);
+            var data = atob(rawData);
+            var arr = new Uint8Array(data.length);
+
+            for (var i = 0; i < data.length; ++i) {
+                arr[i] = data.charCodeAt(i);
+            }
+
+            return new Blob([ arr.buffer ], { type: type });
         }
-    });
-
-    $("#export").on("click", function() {
-    var gauge = $("#gauge").data("kendoRadialGauge");
-    var imageDataURL = gauge.imageDataURL();
-
-    if (navigator.msSaveBlob) {
-        var blob = toBlob(imageDataURL, "image/png");
-        navigator.msSaveBlob(blob, this.getAttribute("download"));
-    } else {
-        this.href = imageDataURL;
-    }
-    });
-
-    // See: http://goo.gl/qlg5dd
-    function toBlob(base64, type) {
-    var rawData = base64.substring(base64.indexOf("base64,") + 7);
-    var data = atob(rawData);
-    var arr = new Uint8Array(data.length);
-
-    for (var i = 0; i < data.length; ++i) {
-        arr[i] = data.charCodeAt(i);
-    }
-
-    return new Blob([ arr.buffer ], { type: type });
-    }
     </script>
 
 ### value
 
-Change the value of the gauge.
+Gets or sets the value of the gauge.
 
 #### Example
 
     <div id="gauge"></div>
     <script>
-    $("#gauge").kendoRadialGauge({
-        pointer: {
-        value: 50
-        },
-        scale: {
-        min: 0,
-        max: 100
-        }
-    });
-    setTimeout(function(){
-        $("#gauge").data("kendoRadialGauge").value(20);
-    },1000)
+        $("#gauge").kendoArcGauge({
+            value: 50
+        });
+
+        setTimeout(function(){
+            $("#gauge").data("kendoArcGauge").value(20);
+        },1000);
     </script>

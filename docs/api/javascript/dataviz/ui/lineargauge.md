@@ -626,6 +626,25 @@ Reverses the axis direction - values increase from right to left and from top to
 
 The position of the gauge.
 
+### theme `String`
+
+The gauge theme. This can be either a built-in theme or "sass".
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+The supported values are:
+
+* "sass" - special value, see notes
+* "black"
+* "blueopal"
+* "bootstrap"
+* "default"
+* "highcontrast"
+* "metro"
+* "metroblack"
+* "moonlight"
+* "silver"
+* "uniform"
+
 ### transitions `Boolean`*(default: true)*
 
 A value indicating if transition animations should be played.
@@ -844,6 +863,29 @@ Adjusts the widget layout to match the size of the container.
 ##### force `Boolean` *optional*
 
 Defines whether the widget should proceed with resizing even if the element dimensions have not changed.
+
+### setOptions
+
+Sets the current gauge options.
+
+#### Parameters
+
+##### options `Object`
+
+The gauge settings to update.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+        $("#gauge").kendoLinearGauge({
+            pointer: [{
+                value: 20
+            }]
+        });
+
+        $("#gauge").data("kendoLinearGauge").setOptions({ theme: 'metro' });
+    </script>
 
 ### svg
 

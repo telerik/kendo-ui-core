@@ -679,6 +679,10 @@ Use the *kendo.days* constants to specify the day by name.
 Specifies the maximum number of groups (categories) to produce when
 either**baseUnit**is set to "fit" or**baseUnitStep**is set to "auto".
 
+### categoryAxis.maxDivisions `Number`
+
+The maximum number of ticks and labels to display. Applicabable for date category axis.
+
 This option is ignored in all other cases.
 
 ### categoryAxis.visible `Boolean`*(default: false)*
@@ -5731,6 +5735,28 @@ The axis name is used as a key.
 
 The original user event that triggered the drag action.
 
+### paneRender
+
+Fires when a pane is rendered because the chart is rendered, or the chart performs panning or zooming, or because the chart is exported with different options. The event can be used to render custom visuals in the panes.
+
+#### Event Data
+
+##### pane `kendo.dataviz.ChartPane`
+
+The chart pane that was rendered.
+
+##### name `String`
+
+The pane name.
+
+##### index `Number`
+
+The pane index.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
 ### plotAreaClick
 
 Fires when plot area is clicked.
@@ -5764,6 +5790,40 @@ The X axis value or array of values for multi-axis charts.
 ##### e.y `Object`
 
 The X axis value or array of values for multi-axis charts.
+
+### plotAreaHover
+
+Fired when the user hovers the plot area.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category.
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
+##### e.value `Object`
+
+The data point value.
+
+### plotAreaLeave
+
+Fired when the cursor leaves the plotArea.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
 
 ### seriesClick
 
@@ -5860,6 +5920,114 @@ The DOM element of the data point.
 ##### e.percentage `Object`
 
 The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+### seriesOver
+
+Fired when the cursor is over the chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
+
+### seriesLeave
+
+Fired when the cursor leaves a chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
 
 ### zoomStart
 

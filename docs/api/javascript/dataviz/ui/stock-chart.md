@@ -3124,6 +3124,10 @@ This option is ignored in all other cases.
 
 The default value is approximately equal to `[widget width, px] / 30`
 
+### categoryAxis.maxDivisions `Number`
+
+The maximum number of ticks and labels to display.
+
 ### categoryAxis.visible `Boolean`*(default: true)*
 
 The visibility of the axis.
@@ -9716,6 +9720,36 @@ The DOM element of the plot area.
 
 The widget instance which fired the event.
 
+### legendItemLeave
+
+Fires when the cursor leaves a legend item.
+
+#### Event Data
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.pointIndex `Number`
+
+The point index.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series options.
+
+##### e.seriesIndex `Number`
+
+The series index.
+
+##### e.text `String`
+
+The name of the series.
+
 ### noteClick
 
 Fired when the user clicks one of the notes.
@@ -9785,6 +9819,64 @@ The series of the note.
 The data item of the point's note.
 
 ##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### noteLeave
+
+Fired when the cursor leaves a note.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.dataItem `Object`
+
+The data item of the point's note.
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series of the note.
+
+##### e.value `Object`
+
+The data point value.
+
+##### e.visual `Object`
+
+The note visual element.
+
+### paneRender
+
+Fires when a pane is rendered because the chart is rendered, or the chart performs panning or zooming, or because the chart is exported with different options. The event can be used to render custom visuals in the panes.
+
+#### Event Data
+
+##### pane `kendo.dataviz.ui.StockChart`
+
+The chart pane that was rendered.
+
+##### name `String`
+
+The pane name.
+
+##### index `Number`
+
+The pane index.
+
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -9863,6 +9955,14 @@ The Y axis value or array of values for multi-axis charts.
 ##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
+
+### plotAreaLeave
+
+Fired when the cursor leaves the plotArea.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.StockChart`
 
 ### render
 
@@ -10059,6 +10159,114 @@ The point value represented as a percentage value. Available only for donut, pie
 ##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
+
+### seriesOver
+
+Fired when the cursor is over the chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
+
+### seriesLeave
+
+Fired when the cursor leaves a chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
 
 ### zoomStart
 
