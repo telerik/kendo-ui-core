@@ -32,6 +32,7 @@
             BODY = "body",
             templates,
             NS = ".kendoWindow",
+            MODAL_NS = ".kendoWindowModal",
             // classNames
             KWINDOW = ".k-window",
             KWINDOWTITLE = ".k-window-title",
@@ -811,7 +812,7 @@
 
                         overlay.show();
 
-                        $(window).on("focus", function() {
+                        $(window).on("focus" + MODAL_NS, function() {
                             if (contentElement.data("isFront") && !$(document.activeElement).closest(contentElement).length) {
                                that.element.focus();
                             }
@@ -910,6 +911,8 @@
                         duration: hideOptions.duration,
                         complete: proxy(this._deactivate, this)
                     });
+
+                    $(window).off(MODAL_NS);
                 }
 
                 if (that.options.isMaximized) {
@@ -1388,6 +1391,7 @@
                     .find(".k-resize-handle,.k-window-titlebar").off(NS);
 
                 $(window).off("resize" + NS + this._marker);
+                $(window).off(MODAL_NS);
                 $(window).off(NS);
 
                 clearTimeout(this._loadingIconTimeout);
