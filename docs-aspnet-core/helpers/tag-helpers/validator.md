@@ -2,7 +2,7 @@
 title: Validator
 page_title: Validator | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Validator tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/validator
+previous_url: /aspnet-core/helpers/validator
 slug: taghelpers_validator_aspnetcore
 ---
 

@@ -2,7 +2,7 @@
 title: ColorPicker 
 page_title: ColorPicker  | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the ColorPicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/colorpicker
+previous_url: /aspnet-core/helpers/colorpicker
 slug: taghelpers_colorpicker_aspnetcore
 ---
 

@@ -2,7 +2,7 @@
 title: Notification
 page_title: Notification | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Notification tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/notification
+previous_url: /aspnet-core/helpers/notification
 slug: taghelpers_notification_aspnetcore
 ---
 

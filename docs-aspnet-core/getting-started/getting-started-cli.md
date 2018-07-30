@@ -1,8 +1,8 @@
 ---
 title: Getting Started with CLI
-page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Command Line Interface | Telerik UI for ASP.NET Core
-description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and the command line interface."
-previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /gettingstartedlinux_aspnetmvc6_aspnetmvc, /gettingstartedvscode_aspnetmvc6_aspnetmvc
+page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Command line interface | Telerik UI for ASP.NET Core
+description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and the Command line interface."
+previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /aspnet-core/getting-started/getting-started-linux, /aspnet-core/getting-started/getting-started-vscode
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
 position: 2
 ---

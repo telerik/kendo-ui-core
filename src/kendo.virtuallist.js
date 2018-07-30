@@ -492,6 +492,17 @@ var __meta__ = { // jshint ignore:line
             return that._valueDeferred;
         },
 
+        _checkValuesOrder: function (value) {
+            if (this._removedAddedIndexes &&
+                this._removedAddedIndexes.length === value.length) {
+                    var newValue = this._removedAddedIndexes.slice();
+                    this._removedAddedIndexes = null;
+                return newValue;
+            }
+
+            return value;
+        },
+
         _prefetchByValue: function(value) {
             var that = this,
                 dataView = that._dataView,
@@ -1659,6 +1670,8 @@ var __meta__ = { // jshint ignore:line
                     dataSource.range(oldSkip, take); //switch back the range
                 });
             });
+
+            that._values = that._checkValuesOrder(that._values);
 
             return added;
         },

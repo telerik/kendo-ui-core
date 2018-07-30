@@ -2,7 +2,7 @@
 title: DropDownTree
 page_title: DropDownTree | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the DropDownTree tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/dropdowntree
+previous_url: /aspnet-core/helpers/dropdowntree
 slug: taghelpers_dropdowntree_aspnetcore
 ---
 

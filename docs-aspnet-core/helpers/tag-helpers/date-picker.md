@@ -2,7 +2,7 @@
 title: DatePicker
 page_title: DatePicker | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the DatePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/date-picker
+previous_url: /aspnet-core/helpers/date-picker
 slug: taghelpers_datepicker_aspnetcore
 ---
 

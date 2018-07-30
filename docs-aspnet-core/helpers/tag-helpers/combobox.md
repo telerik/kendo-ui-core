@@ -2,7 +2,7 @@
 title: ComboBox
 page_title: ComboBox | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the ComboBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/combobox
+previous_url: /aspnet-core/helpers/combobox
 slug: taghelpers_combobox_aspnetcore
 ---
 

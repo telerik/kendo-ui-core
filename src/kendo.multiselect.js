@@ -1183,8 +1183,9 @@ var __meta__ = { // jshint ignore:line
                 this.persistTagList.added.length === removed.length &&
                 this.persistTagList.removed &&
                 this.persistTagList.removed.length === added.length){
-                     this.persistTagList = false;
+                    this.persistTagList = false;
              }else{
+                 this.listView._removedAddedIndexes = this._old.slice();
                  this.persistTagList = {
                      added: added,
                      removed: removed
@@ -1210,7 +1211,7 @@ var __meta__ = { // jshint ignore:line
 
             that._angularTagItems("cleanup");
 
-            if (that.options.tagMode === "multiple") {
+            if (that.options.tagMode === "multiple") { 
                 for (idx = removed.length - 1; idx > -1; idx--) {
                     removedItem = removed[idx];
 

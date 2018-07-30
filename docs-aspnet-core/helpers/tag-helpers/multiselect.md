@@ -2,7 +2,7 @@
 title: MultiSelect
 page_title: MultiSelect | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the MultiSelect tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/multiselect
+previous_url: /aspnet-core/helpers/multiselect
 slug: taghelpers_multiselect_aspnetcore
 ---
 

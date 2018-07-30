@@ -2,7 +2,7 @@
 title: TreeView
 page_title: TreeView | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the TreeView tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/treeview
+previous_url: /aspnet-core/helpers/treeview
 slug: taghelpers_treeview_aspnetcore
 ---
 

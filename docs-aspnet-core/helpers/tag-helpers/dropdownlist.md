@@ -2,7 +2,7 @@
 title: DropDownList
 page_title: DropDownList | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the DropDownList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/dropdownlist
+previous_url: /aspnet-core/helpers/dropdownlist
 slug: taghelpers_dropdownlist_aspnetcore
 ---
 

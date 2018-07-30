@@ -897,17 +897,46 @@
     });
 
     //utilities
-
-    asyncTest("calculates the item count", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            listScreens: 6,
-            itemHeight: 20
-        }));
+    asyncTest("calculates buffer sizes in pixels", 2, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             start();
-            equal(virtualList.itemCount, 60);
+            var bufferSizes = virtualList._bufferSizes();
+
+            equal(bufferSizes.down, 200, "down");
+            equal(bufferSizes.up, 400, "up");
         });
+    });
+
+    test("check value order", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+        }));
+        virtualList._removedAddedIndexes = [2,1,3];
+        var newValue = virtualList._checkValuesOrder([1,2,3]);
+        equal(newValue[0],2);
+        equal(newValue[1],1);
+        equal(newValue[2],3);
+    });
+
+    test("value is not changed if removedAddedIndexes with different size", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+        }));
+        virtualList._removedAddedIndexes = [2,1];
+        var newValue = virtualList._checkValuesOrder([1,2,3]);
+        equal(newValue[0],1);
+        equal(newValue[1],2);
+        equal(newValue[2],3);
+    });
+
+    test("value is not changed if no removedAddedIndexes", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+        }));
+
+        var newValue = virtualList._checkValuesOrder([1,2,3]);
+        equal(newValue[0],1);
+        equal(newValue[1],2);
+        equal(newValue[2],3);
     });
 
     asyncTest("calculates buffer sizes in pixels", 2, function() {

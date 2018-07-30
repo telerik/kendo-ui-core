@@ -2,7 +2,7 @@
 title: ButtonGroup
 page_title: ButtonGroup | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the ButtonGroup tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /helpers/button-group
+previous_url: /aspnet-core/helpers/button-group
 slug: taghelpers_buttongroup_aspnetcore
 ---
 
