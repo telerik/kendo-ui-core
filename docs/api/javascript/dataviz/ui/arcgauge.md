@@ -10,6 +10,22 @@ component: gauges
 
 ## Configuration
 
+### centerTemplate `String|Function`
+
+The label template.
+Template variables:
+*   **value** - the value
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+     $("#gauge").kendoArcGauge({
+        value: 30,
+        centerTemplate: '#: value #%'
+     });
+    </script>
+
 ### color `String`
 
 The color of the value pointer. Accepts a valid CSS color string, including hex and rgb.

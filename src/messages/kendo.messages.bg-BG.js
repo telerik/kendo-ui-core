@@ -712,7 +712,10 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "or": "или",
   "cancel": "Откажи",
   "operator": "Оператор",
-  "value": "Стойност"
+  "additionalOperator": "Допълнителен оператор",
+  "value": "Стойност",
+  "additionalValue": "Допълнителна стойност",
+  "logic": "Логика"
 });
 }
 

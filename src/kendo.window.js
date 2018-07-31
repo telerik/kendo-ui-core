@@ -155,6 +155,7 @@
                     that._createWindow(element, options);
                     wrapper = that.wrapper = element.closest(KWINDOW);
 
+                    that.title(that.options.title);
                     that._dimensions();
                 }
 
@@ -281,8 +282,6 @@
                 var height = options.height;
                 var maxHeight = options.maxHeight;
                 var dimensions = ["minWidth","minHeight","maxWidth","maxHeight"];
-
-                this.title(options.title);
 
                 for (var i = 0; i < dimensions.length; i++) {
                     var value = options[dimensions[i]] || "";
@@ -422,6 +421,9 @@
                 var scrollable = this.options.scrollable !== false;
 
                 this.restore();
+
+                this.title($.isPlainObject(options.title) ? options.title.text : options.title);
+
                 this._dimensions();
                 this._position();
                 this._resizable();
@@ -704,28 +706,38 @@
                 return that;
             },
 
-            title: function (text) {
+            title: function (title) {
                 var that = this,
+                    value,
+                    encoded = true,
                     wrapper = that.wrapper,
-                    options = that.options,
                     titleBar = wrapper.children(KWINDOWTITLEBAR),
-                    title = titleBar.children(KWINDOWTITLE),
+                    titleElement = titleBar.children(KWINDOWTITLE),
                     titleBarHeight;
 
                 if (!arguments.length) {
-                    return title.html();
+                    return titleElement.html();
                 }
 
-                if (text === false) {
+                if ($.isPlainObject(title)) {
+                    value = title.text;
+                    encoded = title.encoded !== false;
+                } else {
+                    value = title;
+                }
+
+                if (value === false) {
                     wrapper.addClass("k-window-titleless");
                     titleBar.remove();
                 } else {
                     if (!titleBar.length) {
-                        wrapper.prepend(templates.titlebar(options));
+                        wrapper.prepend(templates.titlebar({
+                            title: encoded ? kendo.htmlEncode(value) : value
+                        }));
                         that._actions();
                         titleBar = wrapper.children(KWINDOWTITLEBAR);
                     } else {
-                        title.html(kendo.htmlEncode(text));
+                        titleElement.html(encoded ? kendo.htmlEncode(value) : value);
                     }
 
                     titleBarHeight = parseInt(outerHeight(titleBar), 10);
@@ -734,7 +746,7 @@
                     titleBar.css("margin-top", -titleBarHeight);
                 }
 
-                that.options.title = text;
+                that.options.title = value;
 
                 return that;
             },
@@ -1470,7 +1482,7 @@
             ),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
-                "<span class='k-window-title'>#: title #</span>" +
+                "<span class='k-window-title'>#= title #</span>" +
                 "<div class='k-window-actions' />" +
                 "</div>"
             ),

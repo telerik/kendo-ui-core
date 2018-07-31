@@ -401,7 +401,7 @@ Enables (**true**) or disables (**false**) the ability for users to scroll the w
     });
     </script>
 
-### title `String|Boolean` *default: ""*
+### title `Object|String|Boolean` *default: ""*
 
 The text in the window title bar. If `false`, the window will be displayed without a title bar. Note that this will prevent the window from being dragged, and the window titlebar buttons will not be shown.
 
@@ -420,6 +420,37 @@ The text in the window title bar. If `false`, the window will be displayed witho
     <script>
     $("#dialog").kendoWindow({
       title: false
+    });
+    </script>
+
+### title.text `String` *default: ""*
+
+The text in the window title bar.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      title: {
+        text: "Customer details"
+      }
+    });
+    </script>
+
+### title.encoded `Boolean` *default: true*
+
+Specifies whether the title text should be encoded.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      title: {
+        text: "<b>Customer details</b>",
+        encoded: false
+      }
     });
     </script>
 
