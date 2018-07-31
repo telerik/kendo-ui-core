@@ -425,7 +425,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialIndex = null;
-           
             var dataItem = listView.selectedDataItems()[0];
 
             if (!dataItem) {
@@ -1052,7 +1051,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._prev !== value) {
                     that._prev = value;
 
-                    if (that.options.filter === "none" && that.options.virtual) {
+                    if (that.options.filter === "none") {
                         that.listView.select(-1);
                     }
 
