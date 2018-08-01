@@ -217,6 +217,10 @@ var __meta__ = { // jshint ignore:line
             that._arrowIcon = null;
 
             that.optionLabel.off();
+
+            if(that.filterInput){
+                that.filterInput.off(nsFocusEvent);
+            }
         },
 
         open: function() {
@@ -587,6 +591,10 @@ var __meta__ = { // jshint ignore:line
 
             wrapper.on("focusin" + nsFocusEvent, proxy(that._focusinHandler, that))
                    .on("focusout" + nsFocusEvent, proxy(that._focusoutHandler, that));
+            if(that.filterInput) {
+                that.filterInput.on("focusin" + nsFocusEvent, proxy(that._focusinHandler, that))
+                   .on("focusout" + nsFocusEvent, proxy(that._focusoutHandler, that));
+            }
         },
 
         _focusHandler: function() {
