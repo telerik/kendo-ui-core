@@ -255,7 +255,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Temizle",
   "filter": "Filtrele",
   "info": "Tanıma uyan kayıtları göster:",
-  "title": "",
+  "title": "Tanıma uyan kayıtları göster",
   "isFalse": "Yanlış",
   "isTrue": "Doğru",
   "operator": "Operatör",

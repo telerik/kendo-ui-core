@@ -186,6 +186,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Mostrar filas con valor que:",
+  "title": "Mostrar filas con valor que",
   "isTrue": "Sí",
   "isFalse": "No",
   "filter": "Filtrar",

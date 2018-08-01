@@ -255,6 +255,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Прикажи ставки со вредност што:",
+  "title": "Прикажи ставки со вредност што",
   "isTrue": "е точна",
   "isFalse": "не е точна",
   "filter": "Филтер",

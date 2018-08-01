@@ -113,6 +113,7 @@
         "clear": "Löschen",
         "filter": "Filtern",
         "info": "Zeilen mit Wert anzeigen, der",
+        "title": "Zeilen mit Wert anzeigen, der",
         "isFalse": "falsch",
         "isTrue": "richtig",
         "or": "oder",

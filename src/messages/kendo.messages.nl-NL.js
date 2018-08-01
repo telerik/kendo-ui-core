@@ -230,6 +230,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Filter wissen",
   "filter": "Filter",
   "info": "Toon items met waarde:",
+  "title": "Toon items met waarde",
   "isFalse": "is niet waar",
   "isTrue": "is waar",
   "operator": "Operator",

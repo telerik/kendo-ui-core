@@ -176,6 +176,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "次の値がある項目を表示:",
+  "title": "次の値がある項目を表示",
   "isTrue": "真である",
   "isFalse": "偽である",
   "filter": "フィルタ",

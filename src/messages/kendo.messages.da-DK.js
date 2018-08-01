@@ -218,6 +218,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "Og",
   "clear": "Nulstil",
   "info": "Vis rækker som",
+  "title": "Vis rækker som",
   "selectValue": "-Vælg værdi-",
   "isFalse": "er falskt",
   "isTrue": "er sandt",

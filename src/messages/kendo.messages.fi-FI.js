@@ -176,6 +176,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Näytä tulokset, joiden arvo:",
+  "title": "Näytä tulokset, joiden arvo",
   "isTrue": "on",
   "isFalse": "ei ole",
   "filter": "Suodata",

@@ -211,6 +211,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "և",
   "clear": "Մաքրել",
   "info": "Նշված արժեքներով տողերը",
+  "title": "Նշված արժեքներով տողերը",
   "selectValue": "-ընտրել-",
   "isFalse": "սխալ է",
   "isTrue": "ճիշտ է",

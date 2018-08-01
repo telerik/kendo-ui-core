@@ -185,6 +185,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Rimuovi",
   "filter": "Filtro",
   "info": "Mostra elementi il cui valore:",
+  "title": "Mostra elementi il cui valore",
   "isFalse": "è falso",
   "isTrue": "è vero",
   "or": "O",
@@ -413,7 +414,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
       });
   }
 
-    
+
 /* Spreadsheet messages */
 
 if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {

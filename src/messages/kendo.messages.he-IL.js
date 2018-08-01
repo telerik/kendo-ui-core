@@ -342,6 +342,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "וגם",
   "clear": "נקה",
   "info": "הראה פריטים עם ערך ש",
+  "title": "הראה פריטים עם ערך ש",
   "selectValue": "-בחר ערך-",
   "isFalse":"לא",
   "isTrue": "כן",

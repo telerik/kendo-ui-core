@@ -255,6 +255,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Pokažite stavke s vrijednosnim koi imaju:",
+  "title": "Pokažite stavke s vrijednosnim koi imaju",
   "isTrue": "je tačno",
   "isFalse": "nije tačno",
   "filter": "filter",

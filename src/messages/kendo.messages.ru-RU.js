@@ -211,6 +211,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "И",
   "clear": "очистить",
   "info": "Строки со значениями",
+  "title": "Строки со значениями",
   "selectValue": "-выберите-",
   "isFalse": "ложь",
   "isTrue": "истина",
@@ -457,9 +458,9 @@ $.extend(true, kendo.ui.PivotGrid.prototype.options.messages, {
   "rowFields": "Перетащите строки сюда"
 });
 }
-  
+
 /* PivotFieldMenu messages */
-  
+
 if (kendo.ui.PivotFieldMenu) {
 kendo.ui.PivotFieldMenu.prototype.options.messages =
 $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
@@ -480,6 +481,6 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
     "neq": "Не равно"
   }
 });
-}  
+}
 
 })(window.kendo.jQuery);

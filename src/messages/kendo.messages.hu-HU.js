@@ -230,6 +230,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Megjelenítendő elemek értéke:",
+  "title": "Megjelenítendő elemek értéke",
   "isTrue": "igaz",
   "isFalse": "hamis",
   "filter": "Szűrés",

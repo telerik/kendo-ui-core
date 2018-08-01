@@ -232,6 +232,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Zobrazit položky s hodnotou, která:",
+  "title": "Zobrazit položky s hodnotou, která",
   "isTrue": "je pravda",
   "isFalse": "není pravda",
   "filter": "Filtrovat",

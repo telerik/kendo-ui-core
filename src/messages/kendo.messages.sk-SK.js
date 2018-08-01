@@ -188,6 +188,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Zobraziť záznamy s hodnotou, ktorá:",
+  "title": "Zobraziť záznamy s hodnotou, ktorá",
   "isTrue": "je pravda",
   "isFalse": "nie je pravda",
   "filter": "Filtrovať",

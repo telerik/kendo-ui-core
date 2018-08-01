@@ -229,6 +229,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Șterge",
   "filter": "Filtrează",
   "info": "Criterii filtrare:",
+  "title": "Criterii filtrare",
   "isFalse": "este fals",
   "isTrue": "este adevărat",
   "or": "Sau",

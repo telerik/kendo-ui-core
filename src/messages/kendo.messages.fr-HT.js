@@ -230,6 +230,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "Et",
   "clear": "Effacer filtre",
   "info": "Afficher les lignes avec la valeur qui",
+  "title": "Afficher les lignes avec la valeur qui",
   "selectValue": "-Sélectionner-",
   "isFalse": "est fausse",
   "isTrue": "est vrai",

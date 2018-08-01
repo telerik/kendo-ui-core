@@ -303,6 +303,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Löschen",
   "filter": "Filtern",
   "info": "Zeilen mit Werten anzeigen, die",
+  "title": "Zeilen mit Werten anzeigen, die",
   "isFalse": "falsch",
   "isTrue": "richtig",
   "or": "Oder",

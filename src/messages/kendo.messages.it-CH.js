@@ -165,6 +165,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Rimuovi",
   "filter": "Filtro",
   "info": "Mostra elementi il cui valore:",
+  "title": "Mostra elementi il cui valore:",
   "isFalse": "è falso",
   "isTrue": "è vero",
   "or": "O",

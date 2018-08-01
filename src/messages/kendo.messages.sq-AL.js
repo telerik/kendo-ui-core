@@ -255,6 +255,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Trego artikujt me vlerë që:",
+  "title": "Trego artikujt me vlerë që",
   "isTrue": "është e vërtetë",
   "isFalse": "është e pavërtetë",
   "filter": "Filtro",

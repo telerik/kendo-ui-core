@@ -177,6 +177,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Rensa",
   "filter": "Filtrera",
   "info": "Visa poster med värde:",
+  "title": "Visa poster med värde",
   "isFalse": "är falskt",
   "isTrue": "är sant",
   "or": "Eller",

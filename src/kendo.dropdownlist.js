@@ -39,6 +39,7 @@ var __meta__ = { // jshint ignore:line
         DEFAULT = "k-state-default",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        CLICKEVENTS = "click" + ns + " touchend" + ns,
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         TABINDEX = "tabindex",
         STATE_FILTER = "filter",
@@ -217,6 +218,10 @@ var __meta__ = { // jshint ignore:line
             that._arrowIcon = null;
 
             that.optionLabel.off();
+
+            if(that.filterInput){
+                that.filterInput.off(nsFocusEvent);
+            }
         },
 
         open: function() {
@@ -463,7 +468,7 @@ var __meta__ = { // jshint ignore:line
 
             that.optionLabel.html(template(optionLabel))
                             .off()
-                            .click(proxy(that._click, that))
+                            .on(CLICKEVENTS, proxy(that._click, that))
                             .on(HOVEREVENTS, that._toggleHover);
 
             that.angular("compile", function() {
@@ -587,6 +592,10 @@ var __meta__ = { // jshint ignore:line
 
             wrapper.on("focusin" + nsFocusEvent, proxy(that._focusinHandler, that))
                    .on("focusout" + nsFocusEvent, proxy(that._focusoutHandler, that));
+            if(that.filterInput) {
+                that.filterInput.on("focusin" + nsFocusEvent, proxy(that._focusinHandler, that))
+                   .on("focusout" + nsFocusEvent, proxy(that._focusoutHandler, that));
+            }
         },
 
         _focusHandler: function() {

@@ -14,7 +14,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         activeElement = kendo._activeElement,
-        touch = (kendo.support.touch && kendo.support.mobileOS),
+        touch = (kendo.support.touch && kendo.support.mobileOS) || kendo.support.mouseAndTouchPresent,
         MOUSEDOWN = "mousedown",
         CLICK = "click",
         DELAY = 30,
@@ -1328,7 +1328,6 @@ var __meta__ = { // jshint ignore:line
         _toggleHover: function(e) {
             var target = $(kendo.eventTarget(e) || e.target).closest(allItemsSelector),
                 isEnter = e.type == MOUSEENTER || MOUSEDOWN.indexOf(e.type) !== -1;
-
             if (!target.parents("li." + DISABLEDSTATE).length) {
                 target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "click");
             }

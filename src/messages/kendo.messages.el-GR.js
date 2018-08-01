@@ -228,6 +228,7 @@
     kendo.ui.FilterMenu.prototype.options.messages =
       $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
         "info": "Δείξε αντικείμενα με τιμή που:",
+        "title": "Δείξε αντικείμενα με τιμή που",
         "isTrue": "είναι αληθές",
         "isFalse": "είναι ψευδές",
         "filter": "Φίλτρο",

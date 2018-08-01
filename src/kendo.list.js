@@ -1558,7 +1558,7 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.init.call(this, element, options);
 
             this.element.attr("role", "listbox")
-                        .on("click" + STATIC_LIST_NS, "li", proxy(this._click, this))
+                        .on("click" + STATIC_LIST_NS + " touchend" + STATIC_LIST_NS, "li", proxy(this._click, this))
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 

@@ -223,6 +223,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Exibir linhas com valores que",
+  "title": "Exibir linhas com valores que",
   "isTrue": "É verdade",
   "isFalse": "É falso",
   "filter": "Filtrar",

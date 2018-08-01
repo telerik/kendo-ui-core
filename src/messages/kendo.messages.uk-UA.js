@@ -209,6 +209,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "І",
   "clear": "очистити",
   "info": "Рядки із записами",
+  "title": "Рядки із записами",
   "selectValue": "-виберіть-",
   "isFalse": "хиба",
   "isTrue": "істина",

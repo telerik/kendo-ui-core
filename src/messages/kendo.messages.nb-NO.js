@@ -164,6 +164,7 @@ if (kendo.ui.FilterMenu) {
         "clear": "Fjern",
         "filter": "Filtrere",
         "info": "Vis poster med verdi:",
+        "title": "Vis poster med verdi",
         "isFalse": "Er usann",
         "isTrue": "Er sant",
         "or": "Eller",

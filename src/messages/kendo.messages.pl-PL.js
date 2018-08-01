@@ -210,6 +210,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "Oraz",
   "clear": "Wyczyść filtr",
   "info": "Pokaż wiersze o wartościach które",
+  "title": "Pokaż wiersze o wartościach które",
   "selectValue": "-Wybierz wartość-",
   "isFalse": "fałsz",
   "isTrue": "prawda",

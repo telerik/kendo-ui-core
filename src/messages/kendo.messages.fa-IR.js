@@ -176,6 +176,7 @@
         kendo.ui.FilterMenu.prototype.options.messages =
         $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
             "info": "ردیف های را نشان بده که:",
+            "title": "ردیف های را نشان بده که:",
             "isTrue": "درست باشد",
             "isFalse": "درست نباشد",
             "filter": "فیلتر",
