@@ -1624,6 +1624,73 @@ If set to false the column will not be groupable (requires Grid groupable proper
     });
     </script>
 
+### columns.groupHeaderColumnTemplate `String|Function`
+
+Introduced in the Kendo UI 2018 R3 release.
+
+The [template](/api/javascript/kendo/methods/template) which renders the content for specific column in the group header when the grid is grouped by the column [field](columns.field).
+
+> **Note:** The columns.groupHeaderTemplate has a higher priority than columns.groupHeaderColumnTemplate. If columns.groupHeaderTemplate is defined for the current group column it will take precedence over the columns.groupHeaderColumnTemplate setting of the currently first visible column. See [Group Templates](/web/grid/walkthrough#group-templates) for more details on how this can be useful.
+
+The fields which can be used in the template are:
+
+* average - the value of the "average" aggregate (if specified)
+* count - the value of the "count" aggregate (if specified)
+* max - the value of the "max" aggregate (if specified)
+* min - the value of the "min" aggregate (if specified)
+* sum - the value of the "sum" aggregate (if specified)
+* data - provides access to all available aggregates, e.g. `data.fieldName1.sum` or `data.fieldName2.average`
+* group - provides information for the current group. An object with three fields - `field`, `value` and `items`. `items` field contains the data items for current group. Returns groups if the data items are grouped (in case there are child groups)
+
+> **Important**
+>
+> If the template is declared as a function the group field is accessible only through the data field,
+> e.g. `data.fieldName1.group.value`.
+
+#### Example - set the group header column template
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age",
+          groupHeaderColumnTemplate: "Total: #= count #"
+        }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 30 }
+        ],
+        group: { field: "age", aggregates: [ { field: "age", aggregate: "count" }] }
+      }
+    });
+    </script>
+
+#### Example - set the group header column template as function
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age",
+          groupHeaderColumnTemplate: function(e) {
+              return "Total: " + e.age.count;
+          }
+        }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 30 }
+        ],
+        group: { field: "age", aggregates: [ { field: "age", aggregate: "count" }] }
+      }
+    });
+    </script>
+
 ### columns.groupHeaderTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the group header when the grid is grouped by the column [field](columns.field). By default the name of the field
@@ -8325,7 +8392,7 @@ The column whose position should be changed.
 
 Changes the width of the specified column.
 
-Introduced in the Kendo UI 2018 R3 release. 
+Introduced in the Kendo UI 2018 R3 release.
 
 #### Parameters
 

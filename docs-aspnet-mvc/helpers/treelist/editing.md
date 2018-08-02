@@ -134,4 +134,4 @@ Due to the specifics of the TreeList, creating child node for a new record is no
 
 Other articles and how-to examples on the Kendo UI TreeList:
 
-* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
