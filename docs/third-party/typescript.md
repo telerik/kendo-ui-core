@@ -28,6 +28,12 @@ You are able to optionally include the latest jQuery TypeScript definition file 
 
 The Kendo UI TypeScript definitions are available on https://www.nuget.org/ as [`kendo-ui.TypeScript.DefinitelyTyped`](https://www.nuget.org/packages/kendo-ui.TypeScript.DefinitelyTyped/). The package is maintained via the [DefinitelyTyped](http://definitelytyped.org/) project.
 
+### As NPM Package
+
+Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped](http://definitelytyped.org/) project, they are also available as an [npm package](https://www.npmjs.com/package/@types/kendo-ui). To include them in your project you only need to run the following command:
+
+    npm install --save @types/kendo-ui
+
 ## Features
 
 ### Get Instance of Existing Widgets
