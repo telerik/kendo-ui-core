@@ -57,12 +57,14 @@ To render the Chat:
 
 * [Integration with chatbot services]({% slug connect_to_chatbot_service %})&mdash;The Chat facilitates the integration with all major conversational UI APIs or services which are available such as Microsoft Bot, Google’s API.AI, Amazon LEX, and more.
 * [Support for Chat items]({% slug chat_items %})&mdash;To improve user experience, the Chat offers a default variety of items.
-* [Support for Kendo UI predefined themes]({% slug sassbasedthemes_kendoui %})&mdash;The Chat i fully compatible with any of the available Kendo UI themes and styling options. 
+* [Support for Kendo UI predefined themes]({% slug sassbasedthemes_kendoui %})&mdash;The Chat i fully compatible with any of the available Kendo UI themes and styling options.
 
 ## See Also
 
-* [Connecting to Chat Bot Services]({% slug connect_to_chatbot_service %})
 * [Chat Items]({% slug chat_items %})
+* [Connecting to Chat Bot Services]({% slug connect_to_chatbot_service %})
+* [Connecting to Microsoft Bot Framework]({% slug connect_to_ms_bot_framework %})
+* [Connecting to Google DialogFlow]({% slug connect_to_google_dialogflow %})
 * [Chat JavaScript API Reference](/api/javascript/ui/chat)
 
 For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).

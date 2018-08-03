@@ -3,7 +3,7 @@ title: Chat Items
 page_title: Chat Items | Kendo UI Chat
 description: "Learn about the predefined Chat Items and how to configure custom ones."
 slug: chat_items
-position: 3
+position: 2
 ---
 
 # Chat Items
