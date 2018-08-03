@@ -8,11 +8,9 @@ position: 5
 
 # Connecting to Google DialogFlow
 
-Learn how to connect the [Chat](http://demos.telerik.com/kendo-ui/chat/index) widget to the [Google DialogFlow](https://dialogflow.com/).
+The below example demonstrates how to configure a [Chat Agent class]({% slug connect_to_chatbot_service %}) that would handle the communication between the [Chat](http://demos.telerik.com/kendo-ui/chat/index) widget and the [Google DialogFlow](https://dialogflow.com/).
 
-## Configure a Chat Agent to Work with the Google DialogFlow
-
-The below example demonstrates how to configure a Chat Agent class that would handle communication with the [Google DialogFlow](https://dialogflow.com/). In this case, the `postMessage` method of the agent class implements the logic to be executed on user interaction. When the DialogFlowClient `textRequest()` promise is resolved, the `onResponse()` method of the agent will be executed. It will then pass the received data to the `renderMessages()` method, that would render the response in the Chat widget.
+In this case, the `postMessage` method of the agent class implements the logic to be executed on user interaction. When the DialogFlowClient `textRequest()` promise is resolved, the `onResponse()` method of the agent is executed. It then passes the received data to the `renderMessages()` method, that renders the response in the Chat widget.
 
 ```html
 <div id="chat"></div>

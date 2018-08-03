@@ -323,53 +323,6 @@ If the data cells of the Grid contain hyperlinks and you want to activate them t
 
 It is also possible to avoid the described procedure. The custom hyperlinks can be accessed through tabbing and activated through `Enter` by hacking and bypassing the keyboard navigation of the Grid. To achieve this, prevent the event bubbling of the `keydown` event of the custom hyperlinks. In this way, the `Enter` key-presses go unnoticed by the Grid.
 
-## Templates
-
-### Row Templates
-
-It is possible to format any cell within the Grid by using templates within a script tag or within the template option on the column object if the Grid is initialized from a `<div>` element.
-
-The following example demonstrates how to use a template to format the email address as a hyperlink by using a template declared in a script block.
-
-###### Example
-
-    <script id="template" type="text/x-kendo-tmpl">
-        <tr>
-            <td>
-                #= firstName #
-            </td>
-            <td>
-                #= lastName #
-            </td>
-            <td>
-                <a href="mailto:#= email #">#= email #</a>
-            </td>
-        </tr>
-    </script>
-
-Specify this as a template for each row by passing it in to the `rowTemplate` option on the Grid and initializing it with the `kendo.template` function, as demonstrated in the following example.
-
-###### Example
-
-    $("#grid").kendoGrid({
-        rowTemplate: kendo.template($("#template").html()),
-       // other configuration
-    });
-
-In the resulting Grid, the email address is an interactive hyperlink which opens a new email message when clicked.
-
-**Figure 6: Grid with a row template applied**
-
-![Grid with row template](/controls/data-management/grid/grid8_1.png)
-
-For more information on the templating features in Kendo UI, refer to the [introductory article on templates]({% slug overview_kendoui_templatescomponent %}).
-
-### Column Templates
-
-Columns need additional specific templating when they represent complex displays and not single fields.
-
-For more information on configuring columns by using templates in the Grid, refer to the article on [binding the Grid to a remote data source]({% slug remote_data_binding_grid %}#set-the-column-template).
-
 ## Other Options
 
 The Grid provides other configuration options as well. The basic ones deliver the possibility to:

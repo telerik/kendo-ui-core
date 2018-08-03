@@ -1369,6 +1369,8 @@ declare namespace kendo.ui {
         currentTarget: JQuery;
         constructor(element: Element, options?: DraggableOptions);
         options: DraggableOptions;
+
+        cancelHold(): void;
     }
 
     interface DraggableEvent {
@@ -1499,6 +1501,7 @@ declare namespace kendo.mobile {
 
         constructor(element?: any, options?: ApplicationOptions);
         init(element?: any, options?: ApplicationOptions): void;
+        changeLoadingMessage(text: string): void;
         hideLoading(): void;
         navigate(url: string, transition?: string): void;
         replace(url: string, transition?: string): void;
@@ -18282,6 +18285,8 @@ declare namespace kendo {
         function observableHierarchy(array: any): void;
         function parseDate(value: string, formats?: string, culture?: string): Date;
         function parseDate(value: string, formats?: any, culture?: string): Date;
+        function parseExactDate(value: string, formats?: string, culture?: string): Date;
+        function parseExactDate(value: string, formats?: any, culture?: string): Date;
         function parseFloat(value: string, culture?: string): number;
         function parseInt(value: string, culture?: string): number;
         function parseColor(color: string, noerror: boolean): kendo.Color;
@@ -18478,7 +18483,8 @@ declare namespace kendo.spreadsheet {
         hideRow(index: number): void;
         insertColumn(index: number): void;
         insertRow(index: number): void;
-        range(ref: string, rowIndex: number, columnIndex: number, rowCount?: number, columnCount?: number): kendo.spreadsheet.Range;
+        range(ref: string): kendo.spreadsheet.Range;
+        range(rowIndex: number, columnIndex: number, rowCount?: number, columnCount?: number): kendo.spreadsheet.Range;
         rowHeight(): void;
         rowHeight(index: number, width?: number): void;
         selection(): kendo.spreadsheet.Range;

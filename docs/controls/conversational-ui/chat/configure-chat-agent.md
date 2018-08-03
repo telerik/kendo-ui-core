@@ -8,11 +8,13 @@ position: 3
 
 # Connecting to Chat Bot Services
 
-To connect the [Chat](http://demos.telerik.com/kendo-ui/chat/index) to any service and render the responses from the service, utilize the `post` event of the widget and its public [API](/api/javascript/ui/chat).
+The [Chat](http://demos.telerik.com/kendo-ui/chat/index) allows you to connect to any remote service, that would return content to the widget. This article describes the basic set-up of the Chat, that would allow you to handle the service communication.
 
 ## Basic Communication with the Remote Service
 
-As already mentioned, the Chat widget exposes a `post` event, which allows you to react on user interaction. The event arguments object will contain all the information about the message / the user interaction. That would allow you to post the message content (and the information about the user) to the remote Chat Bot service of choice. Then, depending on the service architecture, you will need to listen for its response and display it appropriately in the Chat. The simplest example of such communication would be to send an AJAX request to a server endpoint and display the returned data in the Chat widget:
+To connect the Chat to and render the responses from any service, utilize the `post` event of the widget and its public [API](/api/javascript/ui/chat). The `post` event allows you to react on user interaction. Its event arguments object contains all the information about the message typed, or the action undertaken, and the user data. That allows you to send all that data to the remote Chat Bot service of choice. Then, depending on the service architecture, the implementation should react on the response from the remote and display it appropriately in the Chat.
+
+The simplest example of such communication would be to send an AJAX request to a server endpoint and display the returned data in the Chat widget:
 
 ```html
 <div id="chat"></div>

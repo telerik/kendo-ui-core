@@ -227,13 +227,14 @@ The following client-side events are supported in the server binding mode:
 - `ExcelExport`
 - `FilterMenuInit`
 - `PdfExport`
-- `GroupExpand` - the group object associated with group row will be empty in server binding sceanrio
-- `GroupCollapse` - the group object associated with group row will be empty in server binding sceanrio
+- `GroupExpand` - the group object associated with group row will be empty in server binding scenario
+- `GroupCollapse` - the group object associated with group row will be empty in server binding scenario
 
 > **Important**
 >
 > * The other client-side events, which are related to data-binding and CRUD data operations, will not be raised when the Grid is configured for server binding.
 > * Locked columns are not supported. To support locked columns, use [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}) instead.
+> * Column hiding/showing and reordering with GroupHeaderColumnTemplate in server binding scenario is not supported.This is due to the fact that in server binding scenario the Kendo UI DataSource instance does not have groups and aggregates information. Therefore the templates for the group rows can not be compiled on the client-side. If you have such scenario, use [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}) instead.
 
 ## See Also
 

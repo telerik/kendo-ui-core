@@ -8,11 +8,9 @@ position: 4
 
 # Connecting to Microsoft Bot Framework
 
-Learn how to connect the [Chat](http://demos.telerik.com/kendo-ui/chat/index) widget to the [Microsoft Bot Framework](https://dev.botframework.com/).
+The below example demonstrates how to configure a [Chat Agent class]({% slug connect_to_chatbot_service %}) that would handle the communication between the [Chat](http://demos.telerik.com/kendo-ui/chat/index) widget and the [Microsoft Bot Framework](https://dev.botframework.com/).
 
-## Configure a Chat Agent to Work with the Microsoft Bot Framework
-
-The below example demonstrates how to configure a Chat Agent class that would handle communication with the [Microsoft Bot Framework](https://dev.botframework.com/). In this case, the establishment of the connection to the service and the binding of the appropriate events are done within the `init` method. The `agent` is subscribed to listen for any `activity$` of the remote service. When an activity is detected, the appropriate method from the Chat public API is invoked to render the data. To handle the user input, the example implements the [`post`](/api/javascript/ui/chat/events/post) event handler of the Chat and the arguments are passed to the Chat Bot service.
+In this case, the establishment of a connection to the service and the binding of the appropriate events are done within the `init` method. The `agent` is subscribed to listen for any `activity$` of the remote service. When an activity is detected, the appropriate method from the Chat public API is invoked to render the data. To handle the user input, the example implements the [`post`](/api/javascript/ui/chat/events/post) event handler of the Chat and the arguments are passed to the Chat Bot service.
 
 ```html
 <div id="chat"></div>
