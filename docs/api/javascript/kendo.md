@@ -352,6 +352,41 @@ The culture used to parse the number. The current culture is used by default.
 
 `Date` the parsed date. Returns `null` if the value cannot be parsed as a valid `Date`.
 
+### parseExactDate
+
+Parses a formatted string as a `Date`. The method returns `null` if the string doesn't match the format exactly. Also see [Date Parsing](/framework/globalization/dateparsing)
+
+#### Example
+    <script>
+      console.log(kendo.parseExactDate("2013/3/4 10:00 AM")); // outputs "Mon Mar 04 2013 10:00:00"
+      console.log(kendo.parseExactDate("3/4/2013", "MM/dd/yyyy")); // outputs "Mon Mar 04 2013 00:00:00"
+      // When the format is not matched, null is returned
+      console.log(kendo.parseExactDate("3/4/2013", "MM/dd/yy")); // outputs "null"
+      // Unlike kendo.parseDate, which tries to parse the string even though it's a different format:
+      console.log(kendo.parseDate("3/4/2013", "MM/dd/yy")); // Wed Mar 04 2020 00:00:00 GMT+0200"
+      console.log(kendo.parseExactDate("invalid")); // outputs "null"
+    </script>
+
+#### Parameters
+
+##### value `String`
+
+The string which should be parsed as `Date`.
+
+##### formats `String|Array` *(optional)*
+
+The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the [standard date formats](/framework/globalization/dateformatting#standard) of the current culture will apply. If you state a format, and the date string doesn't match the format exactly, `null` is returned.
+
+For more information on the custom date parsing formats, refer to [this article](/framework/globalization/dateformatting#custom).
+
+##### culture `String` *(optional)*
+
+The culture used to parse the number. The current culture is used by default.
+
+#### Returns
+
+`Date` the parsed date. Returns `null` if the value cannot be parsed as a valid `Date`.
+
 ### parseFloat
 
 Parses a string as a floating point number.
