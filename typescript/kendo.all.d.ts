@@ -287,9 +287,19 @@ declare namespace kendo {
         static extend(prototype: Object): Observable;
 
         init(...args: any[]): void;
+
         bind(eventName: string, handler: Function): Observable;
+        bind(events: string[], handler: Function): Observable;
+        bind(events: string[], handlers: { [eventName: string]: Function}): Observable;
+
         one(eventName: string, handler: Function): Observable;
+        one(events: string[], handler: Function): Observable;
+        one(events: string[], handlers: { [eventName: string]: Function}): Observable;
+
         first(eventName: string, handler: Function): Observable;
+        first(events: string[], handler: Function): Observable;
+        first(events: string[], handlers: { [eventName: string]: Function}): Observable;
+
         trigger(eventName: string, e?: any): boolean;
         unbind(eventName: string, handler?: any): Observable;
     }
@@ -898,6 +908,7 @@ declare namespace kendo.data {
         create?: DataSourceTransportCreate | ((options: DataSourceTransportOptions) => void);
         destroy?: DataSourceTransportDestroy | ((options: DataSourceTransportOptions) => void);
         push?: Function;
+        submit?: Function;
         read?: DataSourceTransportRead | ((options: DataSourceTransportOptions) => void);
         signalr?: DataSourceTransportSignalr | ((options: DataSourceTransportOptions) => void);
         update?: DataSourceTransportUpdate | ((options: DataSourceTransportOptions) => void);
@@ -1879,7 +1890,7 @@ declare namespace kendo.ui {
         dates?: any;
         depth?: string;
         disableDates?: any|Function;
-        footer?: string|Function;
+        footer?: boolean|string|Function;
         format?: string;
         max?: Date;
         messages?: CalendarMessages;
@@ -2528,7 +2539,7 @@ declare namespace kendo.ui {
         dates?: any;
         depth?: string;
         disableDates?: any|Function;
-        footer?: string|Function;
+        footer?: boolean|string|Function;
         format?: string;
         max?: Date;
         min?: Date;
@@ -2621,7 +2632,7 @@ declare namespace kendo.ui {
         dates?: any;
         depth?: string;
         disableDates?: any|Function;
-        footer?: string;
+        footer?: boolean|string|Function;
         format?: string;
         interval?: number;
         max?: Date;
@@ -4096,6 +4107,7 @@ declare namespace kendo.ui {
         footerTemplate?: string|Function;
         format?: string;
         groupable?: boolean;
+        groupHeaderColumnTemplate?: string|Function;
         groupHeaderTemplate?: string|Function;
         groupFooterTemplate?: string|Function;
         headerAttributes?: any;
@@ -7232,6 +7244,8 @@ declare namespace kendo.ui {
         element: JQuery;
         wrapper: JQuery;
 
+        popup: kendo.ui.Popup;
+
         static extend(proto: Object): ToolBar;
 
         constructor(element: Element, options?: ToolBarOptions);
@@ -9902,7 +9916,7 @@ declare namespace kendo.dataviz.ui {
         margin?: ChartAxisDefaultsLabelsMargin;
         mirror?: boolean;
         padding?: ChartAxisDefaultsLabelsPadding;
-        rotation?: string | ChartAxisDefaultsLabelsRotation;
+        rotation?: string | number | ChartAxisDefaultsLabelsRotation;
         skip?: number;
         step?: number;
         template?: string|Function;
@@ -10101,7 +10115,7 @@ declare namespace kendo.dataviz.ui {
         margin?: ChartCategoryAxisItemLabelsMargin;
         mirror?: boolean;
         padding?: ChartCategoryAxisItemLabelsPadding;
-        rotation?: string | ChartCategoryAxisItemLabelsRotation;
+        rotation?: string | number | ChartCategoryAxisItemLabelsRotation;
         skip?: number;
         step?: number;
         template?: string|Function;
@@ -11306,7 +11320,7 @@ declare namespace kendo.dataviz.ui {
         margin?: ChartValueAxisItemLabelsMargin;
         mirror?: boolean;
         padding?: ChartValueAxisItemLabelsPadding;
-        rotation?: string | ChartValueAxisItemLabelsRotation;
+        rotation?: string | number | ChartValueAxisItemLabelsRotation;
         skip?: number;
         step?: number;
         template?: string|Function;
@@ -11595,7 +11609,7 @@ declare namespace kendo.dataviz.ui {
         margin?: ChartXAxisItemLabelsMargin;
         mirror?: boolean;
         padding?: ChartXAxisItemLabelsPadding;
-        rotation?: string | ChartXAxisItemLabelsRotation;
+        rotation?: string | number | ChartXAxisItemLabelsRotation;
         skip?: number;
         step?: number;
         template?: string|Function;
@@ -11885,7 +11899,7 @@ declare namespace kendo.dataviz.ui {
         margin?: ChartYAxisItemLabelsMargin;
         mirror?: boolean;
         padding?: ChartYAxisItemLabelsPadding;
-        rotation?: ChartYAxisItemLabelsRotation;
+        rotation?: number |ChartYAxisItemLabelsRotation;
         skip?: number;
         step?: number;
         template?: string|Function;
@@ -12154,7 +12168,7 @@ declare namespace kendo.dataviz.ui {
         name?: string;
         autoBind?: boolean;
         axisDefaults?: ChartAxisDefaults;
-        categoryAxis?: ChartCategoryAxisItem[];
+        categoryAxis?: ChartCategoryAxisItem | ChartCategoryAxisItem[];
         chartArea?: ChartChartArea;
         dataSource?: any|any|kendo.data.DataSource;
         legend?: ChartLegend;
@@ -12171,9 +12185,9 @@ declare namespace kendo.dataviz.ui {
         title?: string | ChartTitle;
         tooltip?: ChartTooltip;
         transitions?: boolean;
-        valueAxis?: ChartValueAxisItem[];
-        xAxis?: ChartXAxisItem[];
-        yAxis?: ChartYAxisItem[];
+        valueAxis?: ChartValueAxisItem | ChartValueAxisItem[];
+        xAxis?: ChartXAxisItem | ChartXAxisItem[];
+        yAxis?: ChartYAxisItem | ChartYAxisItem[];
         zoomable?: boolean | ChartZoomable;
         axisLabelClick?(e: ChartAxisLabelClickEvent): void;
         dataBound?(e: ChartDataBoundEvent): void;
@@ -14992,7 +15006,7 @@ declare namespace kendo.dataviz.ui {
     interface SparklineOptions {
         name?: string;
         axisDefaults?: any;
-        categoryAxis?: SparklineCategoryAxisItem[];
+        categoryAxis?: SparklineCategoryAxisItem | SparklineCategoryAxisItem[];
         chartArea?: SparklineChartArea;
         data?: any;
         dataSource?: any;
@@ -15007,7 +15021,7 @@ declare namespace kendo.dataviz.ui {
         tooltip?: SparklineTooltip;
         transitions?: boolean;
         type?: string;
-        valueAxis?: SparklineValueAxisItem[];
+        valueAxis?: SparklineValueAxisItem | SparklineValueAxisItem[];
         axisLabelClick?(e: SparklineAxisLabelClickEvent): void;
         dataBound?(e: SparklineEvent): void;
         dragStart?(e: SparklineDragStartEvent): void;
@@ -16619,7 +16633,7 @@ declare namespace kendo.dataviz.ui {
         dateField?: string;
         navigator?: StockChartNavigator;
         axisDefaults?: any;
-        categoryAxis?: StockChartCategoryAxisItem[];
+        categoryAxis?: StockChartCategoryAxisItem | StockChartCategoryAxisItem[];
         chartArea?: StockChartChartArea;
         dataSource?: any;
         autoBind?: boolean;
@@ -16636,7 +16650,7 @@ declare namespace kendo.dataviz.ui {
         title?: StockChartTitle;
         tooltip?: StockChartTooltip;
         transitions?: boolean;
-        valueAxis?: StockChartValueAxisItem[];
+        valueAxis?: StockChartValueAxisItem | StockChartValueAxisItem[];
         axisLabelClick?(e: StockChartAxisLabelClickEvent): void;
         dataBound?(e: StockChartEvent): void;
         dragStart?(e: StockChartDragStartEvent): void;

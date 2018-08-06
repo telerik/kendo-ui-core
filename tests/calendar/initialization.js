@@ -249,6 +249,14 @@ test("_footer(false) should hide the footer", function() {
     ok(!cal.element.find(".k-footer").is("visible"));
 });
 
+test("footer:true should render footer", function() {
+    var cal = new Calendar(div, {
+        footer: true
+    });
+
+    ok(cal.footer);
+});
+
 test("Calendar uses culture settings specified through culture option", function() {
     var cal = new Calendar(div, {
         culture: "bg-BG"

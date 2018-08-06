@@ -32,9 +32,9 @@ Both ClientGroupHeaderColumnTemplate and GroupFooterTemplate works in pretty muc
 
 Due to the fact that ClientGroupHeaderTemplate is displayed next to collapse/expand icon of the group row it takes precedence over the ClientGroupHeaderColumnTemplate of the first visible column. In case that developer wants to show the ClientGroupHeaderColumnTemplate content for the first column of the grid the ClientGroupHeaderTemplate for the group column should not be set. The following grid configuration shows that commenting the ClientGroupHeaderTemplate for the Units In Stock column will show the ClientGroupHeaderColumnTemplate for the Product Name column.
 
-    ###### Example
+###### Example
 
-    ```tab-ASPX
+```tab-ASPX
 
         <%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
             .Name("Grid")
@@ -60,8 +60,8 @@ Due to the fact that ClientGroupHeaderTemplate is displayed next to collapse/exp
                 .Read(read => read.Action("Aggregates_Read", "Grid"))
             )
         %>
-    ```
-    ```tab-Razor
+```
+```tab-Razor
 
         @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
             .Name("Grid")
@@ -87,8 +87,10 @@ Due to the fact that ClientGroupHeaderTemplate is displayed next to collapse/exp
                 .Read(read => read.Action("Aggregates_Read", "Grid"))
             )
         )
-    ```
+```
 
 **Figure 3: Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate**
 
 ![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](/helpers/grid/grid-group-header-column-template-first-column.png)
+
+In a server binding scenario the group templates can be set without the "Client" prefix - GroupHeaderTemplate, GroupHeaderColumnTemplate and GroupFooterTemplate. You can check the [Grid / Server aggregates](https://demos.telerik.com/aspnet-mvc/grid/serveraggregates) demo for reference.

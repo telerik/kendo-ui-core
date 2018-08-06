@@ -99,9 +99,11 @@ Attach an event handler for the **Add New Row** button to the `dataBound` event 
             dataSource: dataSource,
             navigatable: true,
             dataBound:function(e){
-              $('.k-grid-add').click(function(){
+              $('.k-grid-add').unbind("click");
+              
+              $('.k-grid-add').bind("click", function(){
                 console.log("Handle the add button click")
-              })
+              });
             },
             pageable: true,
             height: 550,

@@ -128,8 +128,7 @@ The width of the border.
 
 ### gaugeArea.height `Number`
 
-The height of the gauge area.  By default, the vertical gauge is 200px and
-the horizontal one is 60px.
+The height of the gauge area.
 
 ### gaugeArea.margin `Number|Object`*(default: 5)*
 
@@ -214,7 +213,7 @@ Any valid CSS color string will work here, including hex and rgb
 
 The border of the labels.
 
-### scale.labels.border.color `String`*(default: "black")*
+### scale.labels.border.color `String`
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
@@ -384,8 +383,7 @@ This is the length of the line in pixels that is drawn to indicate the tick on t
 
 ### scale.majorTicks.visible `Boolean`*(default: false)*
 
- The visibility of the major ticks.
-Any valid CSS color string will work here, including hex and rgb.
+The visibility of the major ticks.
 
 ### scale.majorTicks.width `Number`*(default: 0.5)*
 
@@ -463,7 +461,7 @@ The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coord
 ### theme `String`
 
 The gauge theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+When set to "sass" the gauge will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
 
@@ -560,7 +558,7 @@ Parameters for the exported PDF file.
 #### Returns
 `Promise` A promise that will be resolved with a PDF file encoded as a Data URI.
 
-#### Example - Exporting a chart to a PDF file
+#### Example - Exporting a gauge to a PDF file
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoArcGauge({
@@ -594,7 +592,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 #### Returns
 `Promise` A promise that will be resolved with a SVG document encoded as a Data URI.
 
-#### Example - Exporting a chart to an SVG document
+#### Example - Exporting a gauge to an SVG document
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoArcGauge({

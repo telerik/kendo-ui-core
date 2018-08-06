@@ -1235,7 +1235,8 @@ var __meta__ = { // jshint ignore:line
                 month = options.month,
                 content = month.content,
                 weekNumber = month.weekNumber,
-                empty = month.empty;
+                empty = month.empty,
+                footerTemplate = '#= kendo.toString(data,"D","' + options.culture +'") #';
 
             that.month = {
                 content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr(VALUE) + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
@@ -1243,7 +1244,11 @@ var __meta__ = { // jshint ignore:line
                 weekNumber: template('<td class="k-alt">' + (weekNumber || "#= data.weekNumber #") + "</td>", { useWithBlock: !!weekNumber })
             };
 
-            that.footer = footer !== false ? template(footer || '#= kendo.toString(data,"D","' + options.culture +'") #', { useWithBlock: false }) : null;
+            if (footer && footer !== true) {
+                footerTemplate = footer;
+            }
+
+            that.footer = footer !== false ? template(footerTemplate, { useWithBlock: false }) : null;
         }
     });
 
