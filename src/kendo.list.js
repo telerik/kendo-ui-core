@@ -1558,9 +1558,13 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.init.call(this, element, options);
 
             this.element.attr("role", "listbox")
-                        .on("click" + STATIC_LIST_NS + " touchend" + STATIC_LIST_NS, "li", proxy(this._click, this))
+                        .on("click" + STATIC_LIST_NS, "li", proxy(this._click, this))
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
+
+            if (support.touch) {
+                this._touchHandlers();
+            }
 
             if (this.options.selectable === "multiple") {
                 this.element.attr("aria-multiselectable", true);
@@ -1645,6 +1649,32 @@ var __meta__ = { // jshint ignore:line
 
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
             that._fixedHeader();
+        },
+
+        _touchHandlers: function () {
+            var that = this;
+            var startY;
+            var endY;
+            var tapPosition = function (event) {
+                return (event.originalEvent || event).changedTouches[0].pageY;
+            };
+
+            that.element.on("touchstart" + STATIC_LIST_NS, function (e) {
+                startY = tapPosition(e);
+            });
+
+            that.element.on("touchend" + STATIC_LIST_NS, function (e) {
+                if (e.isDefaultPrevented()) {
+                    return;
+                }
+
+                endY = tapPosition(e);
+
+                if (Math.abs(endY - startY) < 10) {
+                    e.preventDefault();
+                    that.trigger("click", { item: $(e.target) });
+                }
+            });
         },
 
         skip: function() {

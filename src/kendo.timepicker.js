@@ -607,7 +607,8 @@ var __meta__ = { // jshint ignore:line
                    .attr({
                         "role": "combobox",
                         "aria-expanded": false,
-                        "aria-owns": timeView._timeViewID
+                        "aria-owns": timeView._timeViewID,
+                        "autocomplete": "off"
                    });
 
             disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');

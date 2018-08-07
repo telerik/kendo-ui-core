@@ -1,5 +1,5 @@
 ---
-title: Copy Client Side Resources
+title: Include Client Side Resources
 page_title: Copy Client Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core project | Telerik UI for ASP.NET Core
 description: "Learn about different ways of copying the client-side resources into Telerik UI for ASP.NET Core project."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-vscode, /mvc-6/getting-started-vscode
@@ -7,21 +7,87 @@ slug: copyclientresources_aspnetmvc6_aspnetmvc
 position: 4
 ---
 
-# Copy Client Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core project
+# Include Client Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core project
 
-This article demonstrates how to copy the client-side resurces in ASP.NET Core project and Visual Studio 2017.
+This article demonstrates how to include the client-side resurces in ASP.NET Core project and Visual Studio 2017.
 
 
-To copy the Kendo UI client-side resources you can use either of the following approaches:
+To include the Kendo UI client-side resources you can use either of the following approaches:
 
 ## Manual installation
 
-To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
+* To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
 
    **Figure 2. Kendo UI resources**
 
    ![Kendo UI resources](images/kendo-ui-wwwroot.png)
+   
+* Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
+	> **Important**
+    >
+    > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
+
+    ###### Example
+
+        <head>
+            ...
+
+            <environment include="Development">
+                ...
+
+                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
+                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
+            </environment>
+            <environment exclude="Development">
+                ...
+
+				<link rel="stylesheet"
+                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
+                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
+                    asp-fallback-test-class="k-common-test-class"
+                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+
+				<link rel="stylesheet"
+                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
+                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
+                    asp-fallback-test-class="k-theme-test-class"
+                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+            </environment>
+
+            <environment include="Development">
+                ...
+
+                <script src="~/lib/jquery/dist/jquery.js"></script>
+
+                @* Place Kendo UI scripts after jQuery *@
+                <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+                <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+            </environment>
+            <environment exclude="Development">
+                ...
+
+                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                        asp-fallback-test="window.jQuery"
+                        crossorigin="anonymous"
+                        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+                </script>
+
+                @*  Place Kendo UI scripts after jQuery *@
+                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
+                        asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
+                        asp-fallback-test="window.kendo">
+                </script>
+                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
+                        asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
+                        asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
+                </script>
+            </environment>
+
+            ...
+        </head>
+		
 ## Bower package installation
 
 Refer to the article on [Bower package installation](../../kendo-ui/intro/installation/bower-install). 
@@ -61,7 +127,6 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 				"webpack-cli": "^3.0.8"
 			}
 		}
-
 
 1. Add `webpack.config.js` in the following way:
 

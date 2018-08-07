@@ -88,7 +88,8 @@ var __meta__ = { // jshint ignore:line
             element.addClass("k-input")
                    .attr({
                        "role": "combobox",
-                       "aria-expanded": false
+                       "aria-expanded": false,
+                       "autocomplete": "off"
                    });
 
 

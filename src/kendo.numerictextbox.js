@@ -71,7 +71,7 @@ var __meta__ = { // jshint ignore:line
              if (options.max === NULL && max !== NULL) {
                  options.max = max;
              }
-             
+
              if (!isStep && step !== NULL) {
                  options.step = step;
              }
@@ -347,9 +347,9 @@ var __meta__ = { // jshint ignore:line
 
         _blur: function() {
             var that = this;
-            
+
             that._toggleText(true);
-            
+
             that._change(that.element.val());
         },
 
@@ -488,7 +488,8 @@ var __meta__ = { // jshint ignore:line
                              .attr({
                                  "role": "spinbutton",
                                  "aria-valuemin": options.min !== NULL ? options.min*options.factor : options.min,
-                                 "aria-valuemax": options.max !== NULL ? options.max*options.factor : options.max
+                                 "aria-valuemax": options.max !== NULL ? options.max*options.factor : options.max,
+                                 "autocomplete": "off"
                              });
         },
 
@@ -664,7 +665,7 @@ var __meta__ = { // jshint ignore:line
                 value = value/that.options.factor;
             }
 
-            value =  +(value + that.options.step * step).toFixed(precision); 
+            value =  +(value + that.options.step * step).toFixed(precision);
             value = that._adjust(value);
             that._update(value);
             that._typing = false;

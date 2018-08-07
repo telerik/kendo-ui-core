@@ -105,83 +105,11 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
             @addTagHelper *, Kendo.Mvc
             @using Kendo.Mvc.UI
 
-7. Copy the Kendo UI client-side resources. You can use either of the following approaches:
+7. Include the Kendo UI `client-side resources`. 
 
-    * Manual installation&mdash;To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
+	For more information about the different approaches for including client-side resources please refer to the [Include Client Side Resources article](https://docs.telerik.com/aspnet-core/getting-started/getting-started-copy-client-resources.html).
 
-        **Figure 2. Kendo UI resources**
-
-        ![Kendo UI resources](images/kendo-ui-wwwroot.png)
-
-    * Bower package installation&mdash;Refer to the article on [Bower package installation](../../kendo-ui/intro/installation/bower-install). ASP.NET Core v2.1 no longer supports Bower. For more information on the alternative approach for copying Kendo UI scripts, refer to the section on [copying client resources through NPM and Webpack](#configuration-Copy).
-
-8. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
-
-	> **Important**
-    >
-    > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
-
-    ###### Example
-
-        <head>
-            ...
-
-            <environment include="Development">
-                ...
-
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
-            </environment>
-            <environment exclude="Development">
-                ...
-
-				<link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
-                    asp-fallback-test-class="k-common-test-class"
-                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-
-				<link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
-                    asp-fallback-test-class="k-theme-test-class"
-                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-            </environment>
-
-            <environment include="Development">
-                ...
-
-                <script src="~/lib/jquery/dist/jquery.js"></script>
-
-                @* Place Kendo UI scripts after jQuery *@
-                <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
-                <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
-            </environment>
-            <environment exclude="Development">
-                ...
-
-                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                        asp-fallback-test="window.jQuery"
-                        crossorigin="anonymous"
-                        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-                </script>
-
-                @*  Place Kendo UI scripts after jQuery *@
-                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
-                        asp-fallback-test="window.kendo">
-                </script>
-                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
-                </script>
-            </environment>
-
-            ...
-        </head>
-
-9. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
+8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
     ###### Example
 
@@ -195,73 +123,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
     **Figure 3. The end result&mdash;a sample page**
 
-    ![Sample page](images/sample-page.png)
-
-### Copy Kendo UI Client Resources through NPM and Webpack
-
-1. Create a new Telerik ASP.NET Core project.
-1. Remove the `bower.json` file.
-1. Add `package.json` in the following way:
-
-    ###### Example
-
-        {
-			"name": "YourAppName",
-			"version": "1.0.0",
-			"description": "",
-			"main": "main.js",
-			"scripts": {
-				"build": "webpack"
-			},
-			"keywords": [],
-			"author": "",
-			"license": "ISC",
-			"dependencies": {
-				"@progress/kendo-ui": "2018.2.620"
-			},
-			"devDependencies": {
-				"webpack": "^4.12.0",
-				"webpack-cli": "^3.0.8"
-			}
-		}
-
-1. Add `webpack.config.js` in the following way:
-
-    ###### Example
-
-		const path = require('path');
-
-		module.exports = {
-			entry: './main.js',
-			output: {
-				filename: 'bundle.js',
-				path: path.resolve(__dirname, 'wwwroot')
-			}
-		}
-
-1. Create a `main.js` file with the following content:
-
-    > As both `jQuery` and `$` are used throughout the application, in the global scope jQuery is assigned to both variables.
-
-    ###### Example
-
-		jQuery = $ = require("jquery");
-		require("@progress/kendo-ui/js/kendo.all");
-		require("@progress/kendo-ui/js/kendo.aspnetmvc");
-
-1. Open the Command prompt and navigate to the folder of the project.
-1. Run the following commands:
-
-    ```sh
-    npm install
-    npm run build
-    ```
-
-1. In `~/Views/Shared/_Layout.cshtml`, replace the Kendo UI CDN scripts with the script that references `bundle.js`.
-
-    ###### Example
-
-        <script src="~/bundle.js"></script>
+    ![Sample page](images/sample-page.png)	
 
 ## See Also
 

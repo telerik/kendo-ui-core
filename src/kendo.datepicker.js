@@ -355,7 +355,8 @@ var __meta__ = { // jshint ignore:line
                 .attr({
                     role: "combobox",
                     "aria-expanded": false,
-                    "aria-owns": that.dateView._dateViewID
+                    "aria-owns": that.dateView._dateViewID,
+                    "autocomplete": "off"
                 });
             that._reset();
             that._template();
