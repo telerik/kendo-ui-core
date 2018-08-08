@@ -107,7 +107,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 7. Include the Kendo UI `client-side resources`. 
 
-	For more information about the different approaches for including client-side resources please refer to the [Include Client Side Resources article](https://docs.telerik.com/aspnet-core/getting-started/getting-started-copy-client-resources.html).
+	For more information about the different approaches for including client-side resources please refer to the [Include Client Side Resources article]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 

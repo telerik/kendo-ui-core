@@ -8,7 +8,6 @@ navigation:
 
 ## List your directory names and order here, like this:
 
-
      "api":
         title: "API Reference"
         position: 0
@@ -20,8 +19,107 @@ navigation:
         position: 3
      "helpers/tag-helpers":
         title: "Tag Helpers"
+     "helpers/tag-helpers/datasource":
+        title: "Data Source"
+        position: 1
+     "helpers/tag-helpers/data-management":
+        title: "Data Management"
+        position: 2
+     "helpers/tag-helpers/data-management/grid":
+        title: "Grid"
+        position: 1
+     "helpers/tag-helpers/data-management/pivotgrid":
+        title: "PivotGrid"
+        position: 2
+     "helpers/tag-helpers/editors":
+        title: "Editors"
+        position: 3
+     "helpers/tag-helpers/charts":
+        title: "Charts"
+        position: 4
+     "helpers/tag-helpers/charts/treemap":
+        title: "TreeMap"
+        position: 2
+     "helpers/tag-helpers/gauges":
+        title: "Gauges"
+        position: 5
+     "helpers/tag-helpers/barcodes":
+        title: "Barcodes"
+        position: 6
+     "helpers/tag-helpers/diagrams-and-maps":
+        title: "Diagrams and Maps"
+        position: 7
+     "helpers/tag-helpers/scheduling":
+        title: "Scheduling"
+        position: 8
+     "helpers/tag-helpers/layout":
+        title: "Layout"
+        position: 9
+     "helpers/tag-helpers/navigation":
+        title: "Navigation"
+        position: 10
+     "helpers/tag-helpers/conversational-ui":
+        title: "Conversational UI"
+        position: 11
+        isNew: true
+     "helpers/tag-helpers/conversational-ui/chat":
+        title: "Chat"
+     "helpers/tag-helpers/interactivity":
+        title: "Interactivity and UX"
+        position: 12
+     "helpers/tag-helpers/media":
+        title: "Media"
+        position: 13
      "helpers/html-helpers":
         title: "Html Helpers"
+     "helpers/html-helpers/data-management":
+        title: "Data Management"
+        position: 1
+     "helpers/html-helpers/data-management/grid":
+        title: "Grid"
+     "helpers/html-helpers/data-management/pivotgrid":
+        title: "PivotGrid"
+     "helpers/html-helpers/editors":
+        title: "Editors"
+        position: 2
+     "helpers/html-helpers/editors/flatcolorpicker":
+        title: "FlatColorPicker"
+     "helpers/html-helpers/charts":
+        title: "Charts"
+        position: 3
+     "helpers/html-helpers/charts/treemap":
+        title: "TreeMap"
+        position: 2
+     "helpers/html-helpers/gauges":
+        title: "Gauges"
+        position: 4
+     "helpers/html-helpers/barcodes":
+        title: "Barcodes"
+        position: 5
+     "helpers/html-helpers/diagrams-and-maps":
+        title: "Diagrams and Maps"
+        position: 6
+     "helpers/html-helpers/scheduling":
+        title: "Scheduling"
+        position: 7
+     "helpers/html-helpers/layout":
+        title: "Layout"
+        position: 8
+     "helpers/html-helpers/navigation":
+        title: "Navigation"
+        position: 9
+     "helpers/html-helpers/conversational-ui":
+        title: "Conversational UI"
+        position: 10
+        isNew: true
+     "helpers/html-helpers/conversational-ui/chat":
+        title: "Chat"
+     "helpers/html-helpers/interactivity":
+        title: "Interactivity and UX"
+        position: 11
+     "helpers/html-helpers/media":
+        title: "Media"
+        position: 12
      "how-to":
         title: "How To"
         position: 4
@@ -53,9 +151,119 @@ navigation:
         title: "State Management"
      "*how-to":
         title: "How To"
-     "helpers/html-helpers/grid":
+     "*grid":
         title: "Grid"
-        position: 27
+     "*listview":
+        title: "ListView"
+     "*treelist":
+        title: "TreeList"
+     "*spreadsheet":
+        title: "Spreadsheet"
+     "*arcgauge":
+        title: "ArcGauge"
+     "*autocomplete":
+        title: "AutoComplete"
+     "*barcode":
+        title: "BarCode"
+     "*button":
+        title: "Button"
+     "*buttongroup":
+        title: "ButtonGroup"
+     "*calendar":
+        title: "Calendar"
+     "*colorpalette":
+        title: "ColorPalette"
+     "*colorpicker":
+        title: "ColorPicker"
+     "*combobox":
+        title: "ComboBox"
+     "*dateinput":
+        title: "DateInput"
+     "*datepicker":
+        title: "DatePicker"
+     "*datetimepicker":
+        title: "DateTimePicker"
+     "*dialog":
+        title: "Dialog"
+     "*draganddrop":
+        title: "DragAndDrop"
+     "*dropdownlist":
+        title: "DropDownList"
+     "*dropdowntree":
+        isNew: true
+        title: "DropDownTree"
+     "*editor":
+        title: "Editor"
+     "*flatcolorpicker":
+        title: "FlatColorPicker" 
+     "*gantt":
+        title: "Gantt"
+     "*lineargauge":
+        title: "LinearGauge"
+     "*listbox":
+        title: "ListBox"
+     "*map":
+        title: "Map"
+     "*maskedtextbox":
+        title: "MaskedTextBox"
+     "*mediaplayer":
+        title: "MediaPlayer"
+     "*menu":
+        title: "Menu"
+     "*multiselect":
+        title: "MultiSelect"
+     "*notification":
+        title: "Notification"
+     "*popup":
+        title: "Popup"
+     "*numerictextbox":
+        title: "NumericTextBox"
+     "*progressbar":
+        title: "ProgressBar"
+     "*qrcode":
+        title: "QRCode"
+     "*radialgauge":
+        title: "RadialGauge"
+     "*rangeslider":
+        title: "RangeSlider"
+     "*responsivepanel":
+        title: "ResponsivePanel"
+     "*panelbar":
+        title: "PanelBar"
+     "*pivotgrid":
+        title: "PivotGrid"
+     "*scheduler":
+        title: "Scheduler"
+     "*slider":
+        title: "Slider"
+     "*sortable":
+        title: "Sortable"
+     "*splitter":
+        title: "Splitter"
+     "*stockchart":
+        title: "StockChart"
+     "*tabstrip":
+        title: "TabStrip"
+     "*timepicker":
+        title: "TimePicker"
+     "*tooltip":
+        title: "Tooltip"
+     "*toolbar":
+        title: "ToolBar"
+     "*treelist":
+        title: "TreeList"
+     "*treeview":
+        title: "TreeView"
+     "*treemap":
+        title: "TreeMap"
+     "*upload":
+        title: "Upload"
+     "*validator":
+        title: "Validator"
+     "*window":
+        title: "Window"
+     "*templates":
+        title: "Templates"
 
 ## The application virtual path
 baseurl: /aspnet-core

@@ -890,12 +890,17 @@ declare namespace kendo.data {
         constructor(options?: PivotDataSourceOptions);
         init(options?: PivotDataSourceOptions): void;
         catalog(val: string): void;
-        columns(val: string[]): string[];
+        catalog(): string;
+        columns(val: string[]): void;
+        columns(): string[];
         cube(val: string): void;
+        cube(): string;
         discover(options: PivotDiscoverRequestOptions): JQueryPromise<any>;
-        measures(val: string[]): string[];
+        measures(val: string[]): void;
+        measures(): string[];
         measuresAxis(): string;
-        rows(val: string[]): string[];
+        rows(val: string[]): void;
+        rows(): string[];
         schemaCatalogs(): JQueryPromise<any>;
         schemaCubes(): JQueryPromise<any>;
         schemaDimensions(): JQueryPromise<any>;
@@ -1639,6 +1644,8 @@ declare namespace kendo.ui {
 
         close(): void;
         dataItem(index: number): any;
+        dataItem(index: Element): any;
+        dataItem(index: JQuery): any;
         destroy(): void;
         enable(enable: boolean): void;
         focus(): void;
@@ -5697,12 +5704,12 @@ declare namespace kendo.ui {
 
     interface PivotGridExpandMemberEvent extends PivotGridEvent {
         axis?: string;
-        path?: string;
+        path?: string[];
     }
 
     interface PivotGridCollapseMemberEvent extends PivotGridEvent {
         axis?: string;
-        path?: string;
+        path?: string[];
     }
 
     interface PivotGridExcelExportEvent extends PivotGridEvent {

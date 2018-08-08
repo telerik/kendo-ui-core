@@ -397,7 +397,7 @@ Bound columns support the following settings:
 
 A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
-> **Important**  
+> **Important**
 >
 > The `ClientTemplate` is used when the Grid is configured for [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}) or when [server binding]({% slug serverbinding_grid_aspnetmvc %}) is combined with client-side data operations^&mdash;when [`ServerOperation` is set to `false`]({% slug ajaxbinding_grid_aspnetmvc %}#enable-client-data-processing-during-ajax-binding).
 
@@ -539,7 +539,7 @@ The following example demonstrates how to disable the sorting.
 
 The `Template` method sets the server template which is used when the bound field is displayed.
 
-> **Important**  
+> **Important**
 >
 > The `Template` is used when the Grid is configured for [server binding]({% slug serverbinding_grid_aspnetmvc %}). If the client-side data operations are enabled&mdash;when [`ServerOperation` is set to `false`]({% slug ajaxbinding_grid_aspnetmvc %}#enable-client-data-processing-during-ajax-binding)), you will also need a [`ClientTemplate`](#clienttemplate).
 
@@ -628,6 +628,34 @@ The following example demonstrates how to set the column width.
             )
         )
 
+### Multicolumn Headers
+
+The multicolumn headers of the Grid represent a tree-like structure where one or more columns can be grouped together by a common header.
+
+That common header in its turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For more information, refer to the [demo on implementing multicolumn headers](https://demos.telerik.com/aspnet-mvc/grid/multicolumnheaders).
+
+###### Example
+
+    columns.Group(group => group
+        .Title("Contact Info")
+        .Columns(info => {
+            info.Bound(x => x.ContactTitle).Width(200);
+            info.Bound(x => x.ContactName).Width(200);
+            info.Group(g => g.Title("Location")
+                .Columns(location =>
+                {
+                    location.Bound(c => c.Country).Width(200);
+                    location.Bound(c => c.City).Width(200);
+                })
+            );
+            info.Bound(x => x.Phone);
+        })
+    );
+
+The above definition will be presented in the following output:
+
+<img src="grid-multicolumn-headers.png">
+
 ## Template Column Settings
 
 A template column is declared through the `Template` method. This is a column that is not bound to a specific field from the data, so it is not sortable, nor filterable. Nevertheless, template columns can still display data item values.
@@ -648,7 +676,7 @@ Template columns have the following settings:
 
 A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
-> **Important**  
+> **Important**
 >
 > The `ClientTemplate` is used when the Grid is configured for [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).
 
@@ -1134,7 +1162,7 @@ The following example demonstrates how to enable the default built-in `No Record
 
 ###### Example
 
-        @(Html.Kendo().Grid<Order>()   
+        @(Html.Kendo().Grid<Order>()
             .Name("Grid")
             .NoRecords()
         )
@@ -1145,7 +1173,7 @@ The following example demonstrates how to define a custom `No Records` message. 
 
 ###### Example
 
-        @(Html.Kendo().Grid<Order>()   
+        @(Html.Kendo().Grid<Order>()
             .Name("Grid")
             .NoRecords("string HTML template, automatically centered")
         )
@@ -1156,12 +1184,12 @@ The following example demonstrates how to define a non-centered custom `No Recor
 
 ###### Example
 
-        @(Html.Kendo().Grid<Order>()   
+        @(Html.Kendo().Grid<Order>()
             .Name("Grid")
             .NoRecords(n => n.Template("string HTML template, not centered"))
         )
 
-### External Template Message  
+### External Template Message
 
 The following example demonstrates how to define a custom `No Records` message with an external Kendo UI template. This case is the same as the above one, but the template is defined outside the Grid declaration.
 
@@ -1171,7 +1199,7 @@ The following example demonstrates how to define a custom `No Records` message w
             external HTML template, not centered
         </script>
 
-        @(Html.Kendo().Grid<Order>()   
+        @(Html.Kendo().Grid<Order>()
             .Name("Grid")
             .NoRecords(n => n.TemplateId("no-records-template-id"))
         )

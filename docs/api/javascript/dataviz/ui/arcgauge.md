@@ -164,8 +164,7 @@ The right margin of the gauge area.
 
 ### gaugeArea.width `Number`
 
-The width of the gauge area.  By default the vertical gauge is 60px
-and horizontal gauge is 200px.
+The width of the gauge area.
 
 ### opacity `Number`
 

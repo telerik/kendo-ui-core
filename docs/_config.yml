@@ -415,6 +415,8 @@ navigation:
         title: "TreeMap"
     "*qrcode":
         title: "QRCode"
+    "*arcgauge":
+        title: "ArcGauge"
     "*radialgauge":
         title: "RadialGauge"
     "*sparkline":

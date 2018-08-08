@@ -192,6 +192,37 @@ More information about TreeList scrolling is available in the [Grid Appearance](
 * [Columns and Column Widths](/controls/data-management/grid/appearance#columns)
 * [Locked Columns](/controls/data-management/grid/appearance#locked-columns)
 
+### Multicolumn Headers
+
+The multicolumn headers of the Kendo UI TreeList for jQuery represent a tree-like structure where one or more columns can be grouped together by a common header.
+
+That common header in its turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For more information, refer to the [demo on implementing multicolumn headers](https://demos.telerik.com/kendo-ui/treelist/multicolumnheaders).
+
+###### Example
+
+    columns: [
+    {
+        title: "Personal Info",
+        columns: [
+            { field: "name" },
+            { field: "birthdate" }
+        ]
+    },
+    {
+        title: "Location",
+        columns: [
+            { field: "city" },
+            { field: "country" }
+        ]
+    },
+    {
+        field: "phone"
+    }]
+
+The above definition will be presented in the following output:
+
+<img src="multicolumn-headers.png">
+
 ## TreeList API
 
 ### Methods and Fields

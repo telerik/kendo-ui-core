@@ -85,34 +85,34 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
     3.1. Locate the `ConfigureServices method` and add the `JsonOptions` and the Kendo UI service.
 
-        ```cs
-        public void ConfigureServices(IServiceCollection services)
-        {
-            ...
-            // Maintain property names during serialization. See:
-            // https://github.com/aspnet/Announcements/issues/19
-            services.AddMvc();
-                    .AddJsonOptions(options =>
-                        options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-            services.AddKendo();
-        }
-        ```
+    ```cs
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        // Maintain property names during serialization. See:
+        // https://github.com/aspnet/Announcements/issues/19
+        services.AddMvc();
+                .AddJsonOptions(options =>
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+        services.AddKendo();
+    }
+    ```
 
     3.2. Add the required `using` of the `Newtonsoft.Json.Serialization` namespace.
 
-        ```cs
-        using Newtonsoft.Json.Serialization;
-        ```
+    ```cs
+    using Newtonsoft.Json.Serialization;
+    ```
 
     3.3. Locate the `configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
 
-        ```cs
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            ...
-            app.UseKendo(env);
-        }
-        ```
+    ```cs
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        ...
+        app.UseKendo(env);
+    }
+    ```
 
 4. Import the `Kendo.Mvc.UI` namespace. Open `~/Views/_ViewImports.cshtml` and add the following references.
 
@@ -122,79 +122,11 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
     @using Kendo.Mvc.UI
     ```
 
-5. Copy the Kendo UI client-side resources. Use either of the following approaches:
+5. Include the Kendo UI `client-side resources`. 
 
-    - To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com account](https://www.telerik.com/account/).
+	For more information about the different approaches for including client-side resources please refer to the [Include Client Side Resources article]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
-    - For more information on how to use the Bower package installation, refer to [the Kendo UI Professional Bower package installation](https://docs.telerik.com/kendo-ui/intro/installation/bower-install).
-
-6. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
-
-    > **Important**
-    >
-    > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after jQuery.
-
-    ```html
-    <head>
-        ...
-
-        <environment include="Development">
-            ...
-
-            <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
-            <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
-        </environment>
-        <environment exclude="Development">
-            ...
-
-            <link rel="stylesheet"
-                href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common-nova.min.css"
-                asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
-                asp-fallback-test-class="k-common-test-class"
-                asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-
-            <link rel="stylesheet"
-                href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.nova.min.css"
-                asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
-                asp-fallback-test-class="k-theme-test-class"
-                asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-        </environment>
-
-        <environment include="Development">
-            ...
-
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-
-            @* Place Kendo UI scripts after jQuery *@
-            <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
-            <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
-        </environment>
-        <environment exclude="Development">
-            ...
-
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-            </script>
-
-            @*  Place Kendo UI scripts after jQuery *@
-            <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"
-                    asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
-                    asp-fallback-test="window.kendo">
-            </script>
-            <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.aspnetmvc.min.js"
-                    asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
-                    asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
-            </script>
-        </environment>
-
-        ...
-    </head>
-    ```
-
-7. Create a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
+6. Create a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
     ```cs
     <h2>Kendo UI DatePicker</h2>

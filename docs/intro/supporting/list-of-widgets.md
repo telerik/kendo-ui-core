@@ -58,6 +58,7 @@ The following table lists all Kendo UI components with regard to their support p
 | [TreeMap](http://demos.telerik.com/kendo-ui/treemap/index)            | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Waterfall Charts](http://demos.telerik.com/kendo-ui/waterfall-charts/index) | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | **Gauges**                |
+| [ArcGauge](http://demos.telerik.com/kendo-ui/arc-gauge/index)         | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [LinearGauge](http://demos.telerik.com/kendo-ui/linear-gauge/index)   | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [RadialGauge](http://demos.telerik.com/kendo-ui/radial-gauge/index)   | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | **Barcodes**              |
