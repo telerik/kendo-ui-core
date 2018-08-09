@@ -28,6 +28,18 @@ navigation:
     "controls/data-management":
         title: "Data Management"
         position: 1
+    "controls/data-management/grid/appearance":
+        title: "Appearance"
+        position: 100
+    "controls/data-management/grid/appearance/columns":
+        title: "Columns"
+        position: 8
+    "controls/data-management/grid/appearance/scrolling":
+        title: "Scrolling"
+        position: 9
+    "controls/data-management/grid/how-to":
+        title: "How To"
+        position: 101
     "controls/data-management/grid/how-to/AngularJS":
         title: "AngularJS"
         position: 1
