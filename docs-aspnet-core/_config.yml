@@ -14,118 +14,117 @@ navigation:
      "getting-started":
         title: "Getting Started"
         position: 2
-     "helpers":
-        title: "Widgets"
+     "html-helpers":
+        title: "Html Helpers"
         position: 3
-     "helpers/tag-helpers":
+     "tag-helpers":
         title: "Tag Helpers"
-     "helpers/tag-helpers/datasource":
+        position: 4
+     "tag-helpers/datasource":
         title: "Data Source"
         position: 1
-     "helpers/tag-helpers/data-management":
+     "tag-helpers/data-management":
         title: "Data Management"
         position: 2
-     "helpers/tag-helpers/data-management/grid":
+     "tag-helpers/data-management/grid":
         title: "Grid"
         position: 1
-     "helpers/tag-helpers/data-management/pivotgrid":
+     "tag-helpers/data-management/pivotgrid":
         title: "PivotGrid"
         position: 2
-     "helpers/tag-helpers/editors":
+     "tag-helpers/editors":
         title: "Editors"
         position: 3
-     "helpers/tag-helpers/charts":
+     "tag-helpers/charts":
         title: "Charts"
         position: 4
-     "helpers/tag-helpers/charts/treemap":
+     "tag-helpers/charts/treemap":
         title: "TreeMap"
         position: 2
-     "helpers/tag-helpers/gauges":
+     "tag-helpers/gauges":
         title: "Gauges"
         position: 5
-     "helpers/tag-helpers/barcodes":
+     "tag-helpers/barcodes":
         title: "Barcodes"
         position: 6
-     "helpers/tag-helpers/diagrams-and-maps":
+     "tag-helpers/diagrams-and-maps":
         title: "Diagrams and Maps"
         position: 7
-     "helpers/tag-helpers/scheduling":
+     "tag-helpers/scheduling":
         title: "Scheduling"
         position: 8
-     "helpers/tag-helpers/layout":
+     "tag-helpers/layout":
         title: "Layout"
         position: 9
-     "helpers/tag-helpers/navigation":
+     "tag-helpers/navigation":
         title: "Navigation"
         position: 10
-     "helpers/tag-helpers/conversational-ui":
+     "tag-helpers/conversational-ui":
         title: "Conversational UI"
         position: 11
         isNew: true
-     "helpers/tag-helpers/conversational-ui/chat":
+     "tag-helpers/conversational-ui/chat":
         title: "Chat"
-     "helpers/tag-helpers/interactivity":
+     "tag-helpers/interactivity":
         title: "Interactivity and UX"
         position: 12
-     "helpers/tag-helpers/media":
+     "tag-helpers/media":
         title: "Media"
         position: 13
-     "helpers/html-helpers":
-        title: "Html Helpers"
-     "helpers/html-helpers/data-management":
+     "html-helpers/data-management":
         title: "Data Management"
         position: 1
-     "helpers/html-helpers/data-management/grid":
+     "html-helpers/data-management/grid":
         title: "Grid"
-     "helpers/html-helpers/data-management/pivotgrid":
+     "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
-     "helpers/html-helpers/editors":
+     "html-helpers/editors":
         title: "Editors"
         position: 2
-     "helpers/html-helpers/editors/flatcolorpicker":
+     "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
-     "helpers/html-helpers/charts":
+     "html-helpers/charts":
         title: "Charts"
         position: 3
-     "helpers/html-helpers/charts/treemap":
+     "html-helpers/charts/treemap":
         title: "TreeMap"
         position: 2
-     "helpers/html-helpers/gauges":
+     "html-helpers/gauges":
         title: "Gauges"
         position: 4
-     "helpers/html-helpers/barcodes":
+     "html-helpers/barcodes":
         title: "Barcodes"
         position: 5
-     "helpers/html-helpers/diagrams-and-maps":
+     "html-helpers/diagrams-and-maps":
         title: "Diagrams and Maps"
         position: 6
-     "helpers/html-helpers/scheduling":
+     "html-helpers/scheduling":
         title: "Scheduling"
         position: 7
-     "helpers/html-helpers/layout":
+     "html-helpers/layout":
         title: "Layout"
         position: 8
-     "helpers/html-helpers/navigation":
+     "html-helpers/navigation":
         title: "Navigation"
         position: 9
-     "helpers/html-helpers/conversational-ui":
+     "html-helpers/conversational-ui":
         title: "Conversational UI"
         position: 10
         isNew: true
-     "helpers/html-helpers/conversational-ui/chat":
+     "html-helpers/conversational-ui/chat":
         title: "Chat"
-     "helpers/html-helpers/interactivity":
+     "html-helpers/interactivity":
         title: "Interactivity and UX"
         position: 11
-     "helpers/html-helpers/media":
+     "html-helpers/media":
         title: "Media"
         position: 12
      "how-to":
         title: "How To"
-        position: 4
+        position: 5
      "vs-integration":
         title: "Visual Studio Integration"
-        position: 5
+        position: 6
      "backwards-compatibility":
         title: "Breaking Changes"
         position: 7

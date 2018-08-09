@@ -67,6 +67,7 @@ The following example demonstrates how to use the MultiSelect as a custom editor
           $('<select data-bind="multiValue:' + options.field + '"/>')
               .appendTo(container)
               .kendoMultiSelect({
+              suggest: true,
               dataSource: options.values,
               valuePrimitive: true
           });

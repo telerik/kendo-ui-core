@@ -17,8 +17,9 @@ data source is fired. By default the widget will bind to the data source specifi
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
 
-#### Example - disable automatic binding
+#### Example - disabling automatic binding
 
+    <button id="btn">Bind Diagram</button>
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -26,15 +27,17 @@ data source is fired. By default the widget will bind to the data source specifi
           "name": "Telerik",
           "items": [
             {"name": "Kendo"},
-            {"name": "Icenium"}
+            {"name": "NativeScript"}
           ]
         }],
         template: "#= item.name #",
+        layout: "layered",
         autoBind: false
       });
 
-      // Fetching data will trigger "change" on the dataSource
-      $("#diagram").getKendoDiagram().dataSource.fetch();
+      $("#btn").on("click", function(){
+        $("#diagram").getKendoDiagram().dataSource.fetch();
+      });
     </script>
 
 ### connectionDefaults `Object`
@@ -45,45 +48,87 @@ Defines the defaults of the connections. Whenever a connection is created, the s
 
     <div id="diagram"></div>
     <script>
-    var Point = kendo.dataviz.diagram.Point;
-    $("#diagram").kendoDiagram({
-       shapes:[
-           {
-               id:"1",
-               content:{
-                   text: "Monday"
-               }
-           },
-           {
-               id:"2",
-               content:"Tuesday"
-           }
-       ],
-       connections:[
-           {
-               from: new Point(100,100),
-               to: new Point(100,300)
-           },
-           {
-               from: "1",
-               to: "2"
-           }
-       ],
-       connectionDefaults: {
-           stroke: {
-               color: "#979797",
-               width: 1
-           },
-           type:"polyline",
-           startCap: "FilledCircle",
-           endCap: "ArrowEnd"
-       }
-    });
+      var Point = kendo.dataviz.diagram.Point;
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          },
+          {
+            id:"3",
+            content: {
+              text: "State 3"
+            },
+            x: 60,
+            y: 160
+          }
+        ],
+        connections:[
+          {
+            from: new Point(100,100),
+            to: new Point(100,200)
+          },
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        connectionDefaults: {
+          stroke: {
+            color: "#979797",
+            width: 1
+          },
+          type:"polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+      });
     </script>
 
 ### connectionDefaults.content `Object`
 
 Defines the label displayed on the connection path.
+
+#### Example - customizing connection content
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: [
+          {id:"one", name:"One"},
+          {id:"two", name:"Two"},
+          {id:"five", name:"Five"},
+        ],
+        connectionsDataSource:[
+          {from:"one", to:"two", label: "plus one"},
+          {from:"one", to:"five", label: "plus three"}
+        ],
+        layout: "layered",
+        connectionDefaults: {
+          content: {
+            color: "green",
+            fontFamily: "Segoe UI",
+            fontSize: 16,
+            fontStyle: "italic",
+            fontWeight: 200,
+            template: "#: dataItem.label #"
+          }
+        }
+      });
+    </script>
 
 ### connectionDefaults.content.color `String`
 
@@ -113,6 +158,81 @@ The fields which can be used in the template are:
 
 * dataItem - the data item, in case a field has been specified
 
+#### Example - showing values from the connectionDataSource in the connection labels
+
+    <div id="diagram"></div>
+    <script>
+      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+
+      var shapesDataSource = {
+        transport: {
+          read: {
+            url: serviceRoot + "/DiagramShapes",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            fields: {
+              id: { from: "Id", type: "number" },
+              JobTitle: { type: "string" },
+              Color: { type: "string" }
+            }
+          }
+        }
+      };
+
+      var connectionsDataSource = {
+        transport: {
+          read: {
+            url: serviceRoot + "/DiagramConnections",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            id: "id",
+            fields: {
+              id: { from: "Id", type: "number" },
+              from: { from: "FromShapeId", type: "number" },
+              to: { from: "ToShapeId", type: "number" },
+              fromX: { from: "FromPointX", type: "number" },
+              fromY: { from: "FromPointY", type: "number" },
+              toX: { from: "ToPointX", type: "number" },
+              toY: { from: "ToPointY", type: "number" }
+            }
+          }
+        }
+      };
+
+      $("#diagram").kendoDiagram({
+        dataSource: shapesDataSource,
+        connectionsDataSource: connectionsDataSource,
+        layout: {
+          type: "layered"
+        },
+        shapeDefaults: {
+          content: {
+            template: "#= dataItem.JobTitle #"
+          },
+          width: 200
+        },
+        connectionDefaults: {
+          content: {
+            template: "#: dataItem.from # - #: dataItem.to #"
+          }
+        },
+        dataBound: onDataBound
+      });
+
+      function onDataBound(e) {
+        var that = this;
+        setTimeout(function () {
+          that.bringIntoView(that.shapes);
+        }, 0);
+      }
+    </script>
+
 ### connectionDefaults.content.text `String`
 
 The static text displayed on the connection.
@@ -121,7 +241,7 @@ The static text displayed on the connection.
 
 A function returning a visual element to render for the content of a connection.
 
-#### Example - Connection content visual
+#### Example - using a content visual for connections
 
     <div id="diagram"></div>
     <script>
@@ -129,8 +249,8 @@ A function returning a visual element to render for the content of a connection.
         dataSource: [{
           "name" : "Telerik",
           "items": [
-            {"name": "Kendo"},
-            {"name": "Icenium"}
+            {"name": "Kendo UI"},
+            {"name": "NativeScript"}
           ]
         }],
         connectionDefaults: {
@@ -139,13 +259,20 @@ A function returning a visual element to render for the content of a connection.
               var g = new kendo.dataviz.diagram.Group({
                 autoSize: true
               });
+              var circle = new kendo.dataviz.diagram.Circle({
+                width: 15,
+                height: 15,
+                fill: {
+                  color: "LimeGreen"
+                }
+              });
               var text = new kendo.dataviz.diagram.TextBlock({
                 text: "Foo",
                 fontSize: 16,
-                x: 10,
-                y: 5
+                x: 30
               });
 
+              g.append(circle);
               g.append(text);
               return g;
             }
@@ -162,6 +289,30 @@ A function returning a visual element to render for the content of a connection.
 
 Defines the editing behavior of the connections.
 
+#### Example - disabling interaction with the Diagram connections
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: [
+          {id:"one", name:"One"},
+          {id:"two", name:"Two"},
+          {id:"five", name:"Five"},
+        ],
+        connectionsDataSource:[
+          {from:"one", to:"two", label: "plus one"},
+          {from:"one", to:"five", label: "plus three"}
+        ],
+        layout: "layered",
+        connectionDefaults: {
+          content: {
+            template: "#: dataItem.label #"
+          },
+          editable: false
+        }
+      });
+    </script>
+
 ### connectionDefaults.editable.drag `Boolean` *(default: true)*
 
 Specifies if the connections can be dragged.
@@ -174,7 +325,7 @@ Specifies if the connections can be removed.
 
 Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). Predefined tools are:
 
-* "edit" - The elected item can be edited
+* "edit" - The selected item can be edited
 * "delete" - The selected items can be deleted
 
 #### Example - using predefined tools
@@ -182,12 +333,22 @@ Specifies the toolbar tools. Supports all options supported for the [toolbar.ite
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
-        connections: [{ from: {x: 100, y: 100}, to: {x: 200, y: 200}}],
+        dataSource: [
+          {id:"one", name:"One"},
+          {id:"two", name:"Two"},
+          {id:"five", name:"Five"},
+        ],
+        connectionsDataSource:[
+          {from:"one", to:"two", label: "plus one"},
+          {from:"one", to:"five", label: "plus three"}
+        ],
+        layout: "layered",
         connectionDefaults: {
+          content: {
+            template: "#: dataItem.label #"
+          },
           editable: {
-            tools: [{
-              name: "delete"
-            }]
+          	tools: ["delete"]
           }
         }
       });
@@ -198,7 +359,16 @@ Specifies the toolbar tools. Supports all options supported for the [toolbar.ite
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
-        connections: [{ from: {x: 100, y: 100}, to: {x: 200, y: 200}}],
+        dataSource: [
+          {id:"one", name:"One"},
+          {id:"two", name:"Two"},
+          {id:"five", name:"Five"},
+        ],
+        connectionsDataSource:[
+          {from:"one", to:"two", label: "plus one"},
+          {from:"one", to:"five", label: "plus three"}
+        ],
+        layout: "layered",
         connectionDefaults: {
           editable: {
             tools: [{
@@ -225,14 +395,37 @@ The name of the tool. The built-in tools are "edit" and "delete".
 
 ### connectionDefaults.endCap `String|Object`
 
-The connection end cap configuration or type name.
+The connections end cap configuration. Can be set to a configuration object or a string that represents the [endCap.type](/api/javascript/dataviz/ui/diagram/configuration/connectiondefaults.endcap#connectionDefaults.endCap.type) value.
 
 #### Example - configuring the connection end cap
 
     <div id="diagram"></div>
     <script>
-      var Point = kendo.dataviz.diagram.Point;
-      var diagram = $("#diagram").kendoDiagram({
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
         connectionDefaults: {
           endCap: {
             type: "FilledCircle",
@@ -245,41 +438,50 @@ The connection end cap configuration or type name.
             }
           }
         }
-      }).getKendoDiagram();
-      diagram.connect(new Point(100,100), new Point(300,100));
+      });
     </script>
 
 ### connectionDefaults.endCap.fill `String|Object`
 
-The connection end cap fill options or color.
+The connections end cap fill options or color.
 
 ### connectionDefaults.endCap.fill.color `String` *(default: "black")*
 
-The connection end cap fill color.
+The connections end cap fill color.
 
 ### connectionDefaults.endCap.fill.opacity
 
-The connection end cap fill opacity.
+The connections end cap fill opacity.
 
 ### connectionDefaults.endCap.stroke `String|Object`
 
-The connection end cap stroke options or color.
+The connections end cap stroke options or color.
 
 ### connectionDefaults.endCap.stroke.color `String`
 
-The connection end cap stroke color.
+The connections end cap stroke color.
 
 ### connectionDefaults.endCap.stroke.dashType `String`
 
-The connection end cap stroke dash type.
+The connections end cap stroke dash type.
+
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
 
 ### connectionDefaults.endCap.stroke.width `Number`
 
-The connection end cap stroke width.
+The connections end cap stroke width.
 
 ### connectionDefaults.endCap.type `String` *(default: "none")*
 
-The connection end cap type.
+The end cap type used in connections.
 
 The supported values are:
 
@@ -289,26 +491,88 @@ The supported values are:
 
 ### connectionDefaults.fromConnector `String` *(default: "Auto")*
 
-Specifies the name of the source shape connector that should be used by default.
+Specifies the name of the source shape connector that should be used by default. Valid values are `"top"`, `"right"`, `"bottom"`, `"left"` and `"auto"`.
+
+#### Example - making all connections originate from the bottom shape connector
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          },
+          {
+            id:"3",
+            content: {
+              text: "State 3"
+            },
+            x: 380,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          },
+          {
+            from: "2",
+            to: "3"
+          }
+        ],
+        connectionDefaults: {
+          fromConnector: "bottom"
+        }
+      });
+    </script>
 
 ### connectionDefaults.hover `Object`
 
-Defines the hover configuration.
-
-### connectionDefaults.hover.stroke `Object`
-
-Defines the hover configuration.
-
-### connectionDefaults.hover.stroke.color `String` *(default: "#70CAFF")*
-
-Defines the highlight color when the pointer is hovering over the connection.
+Defines the default styling that is applied when the user hovers over a connection.
 
 #### Example - turning the connection red on hover
 
     <div id="diagram"></div>
     <script>
-      var Point = kendo.dataviz.diagram.Point;
-      var diagram = $("#diagram").kendoDiagram({
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
         connectionDefaults: {
           hover: {
             stroke: {color: "red"}
@@ -321,75 +585,97 @@ Defines the highlight color when the pointer is hovering over the connection.
           startCap: "FilledCircle",
           endCap: "ArrowEnd"
         }
-
-      }).getKendoDiagram();
-      diagram.connect(new Point(100,100), new Point(300,100));
+      });
     </script>
+
+### connectionDefaults.hover.stroke `Object`
+
+Defines the default hover configuration of the connection lines.
+
+### connectionDefaults.hover.stroke.color `String` *(default: "#70CAFF")*
+
+Defines the highlight color when the mouse pointer hovers over connections.
 
 ### connectionDefaults.selectable `Boolean` *(default: true)*
 
-Specifies if the connection can be selected.
+Specifies if connections can be selected.
 
 ### connectionDefaults.selection `Object`
 
-Defines the connection selection configuration.
+Defines the connections selection configuration.
 
-##### Example - Styling the connection selection
+##### Example - styling the connections selection
 
     <div id="diagram"></div>
     <script>
-      var Point = kendo.dataviz.diagram.Point;
-      var diagram = $("#diagram").kendoDiagram({
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
         connectionDefaults: {
-          hover: {
-            stroke: {color: "red"}
-          },
-          stroke: {
-            color: "#979797",
-            width: 4
-          },
           type: "polyline",
           startCap: "FilledCircle",
           endCap: "ArrowEnd",
           selection: {
             handles: {
               fill: {color: "Yellow"},
-              stroke: {color: "White"}
+              stroke: {color: "White"},
+              height: 20,
+              width: 20
             }
           }
         }
-
-      }).getKendoDiagram();
-      diagram.connect(new Point(100,100), new Point(300,100));
+      });
     </script>
 
 ### connectionDefaults.selection.handles `Object`
 
-Defines the connection selection handles configuration.
+Defines default handles configuration for selected connections.
 
 ### connectionDefaults.selection.handles.fill `String|Object`
 
-Defines the handles fill options.
+Defines the handles fill options when connections are selected.
 
 ### connectionDefaults.selection.handles.fill.color `String`
 
-Defines the handles fill color.
+Defines the handles fill color when connections are selected.
 
 ### connectionDefaults.selection.handles.stroke `Object`
 
-Defines the handles stroke options.
+Defines the handles stroke options when connections are selected.
 
 ### connectionDefaults.selection.handles.stroke.color `String`
 
-Defines the handles stroke color.
+Defines the handles stroke color when connections are selected.
 
 ### connectionDefaults.selection.handles.width `Number`
 
-The width of the handle elements.
+The width of the handle elements when connections are selected.
 
 ### connectionDefaults.selection.handles.height `Number`
 
-The height of the handle elements.
+The height of the handle elements when connections are selected.
 
 ### connectionDefaults.startCap `String|Object`
 
@@ -399,22 +685,44 @@ The connection start cap configuration or type name.
 
     <div id="diagram"></div>
     <script>
-      var Point = kendo.dataviz.diagram.Point;
-      var diagram = $("#diagram").kendoDiagram({
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
         connectionDefaults: {
           startCap: {
             type: "FilledCircle",
             fill: {
-              color: "red"
+              color: "yellow"
             },
             stroke: {
               color: "blue",
-              width: 2
+              width: 3
             }
           }
         }
-      }).getKendoDiagram();
-      diagram.connect(new Point(100,100), new Point(300,100));
+      });
     </script>
 
 ### connectionDefaults.startCap.fill `String|Object`
@@ -441,6 +749,16 @@ The connection start cap stroke color.
 
 The connection start cap stroke dash type.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### connectionDefaults.startCap.stroke.width `Number`
 
 The connection start cap stroke width.
@@ -457,7 +775,45 @@ The supported values are:
 
 ### connectionDefaults.stroke `Object`
 
-Defines the stroke configuration.
+Defines the connection line configuration.
+
+#### Example - customizing the connections stroke (line)
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        connectionDefaults: {
+          stroke: {
+            color: "blue",
+            width: 3
+          }
+        }
+      });
+    </script>
 
 ### connectionDefaults.stroke.color `String`
 
@@ -469,19 +825,184 @@ Defines the stroke width of the connection.
 
 ### connectionDefaults.toConnector `String` *(default: "Auto")*
 
-Specifies the name of the target shape connector that should be used by default.
+Specifies the name of the target shape connector that should be used by default. Valid values are `"top"`, `"right"`, `"bottom"`, `"left"` and `"auto"`.
+
+#### Example - making all connections end in the bottom shape connector
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          },
+          {
+            id:"3",
+            content: {
+              text: "State 3"
+            },
+            x: 380,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          },
+          {
+            from: "2",
+            to: "3"
+          }
+        ],
+        connectionDefaults: {
+          toConnector: "top"
+        }
+      });
+    </script>
 
 ### connectionDefaults.type `String` *(default: "cascading")*
 
-Specifies the connections type. The supported values are `"polyline"` and `"cascading"`.
+Specifies the connections type. The supported values are:
+
+* "Polyline" - connects the defined intermediate points.
+* "Cascading" - discards given points and defines a cascading path between the endpoints.
+
+#### Example - using polyline connections with intermediate points
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 100
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            points: [
+              {x: 150, y: 20},
+              {x: 150, y: 150}
+            ],
+            type: "polyline"
+          }
+        ]
+      });
+    </script>
 
 ### connections `Array`
 
 Defines the connections configuration.
 
+#### Example - configuring the Diagram connections
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            content: {
+            	text: "Step 1"
+            },
+            stroke: {
+            	color: "#33ccff"
+            }
+          }
+        ]
+      });
+    </script>
+
 ### connections.content `Object`
 
 Defines the connection content settings.
+
+#### Example - configuring the connections content (text)
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            content: {
+            	text: "Step 1",
+              color: "purple",
+              fontFamily: "Tahoma",
+              fontSize: 16,
+              fontStyle: "italic",
+              fontWeight: 600
+            }
+          }
+        ]
+      });
+    </script>
 
 ### connections.content.color `String`
 
@@ -507,9 +1028,40 @@ The font weight of the connection content text.
 
 The [template](/api/javascript/kendo/methods/template) which renders the labels.
 
-The fields which can be used in the template are:
+#### Example - using a template for the connection label
 
-* dataItem - the data item, in case a field has been specified
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            content: {
+            	template: "Iteration on #:kendo.toString(new Date(), 'MM/dd/yyyy')#"
+            }
+          }
+        ]
+      });
+    </script>
 
 ### connections.content.text `String`
 
@@ -519,9 +1071,102 @@ The text displayed for the connection.
 
 A function returning a visual element to render for the content of the connection.
 
+#### Example - using a custom visual to render additional content in the connection label
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            content: {
+              visual: function(e) {
+                var g = new kendo.dataviz.diagram.Group({
+                  autoSize: true
+                });
+                var circle = new kendo.dataviz.diagram.Circle({
+                  width: 15,
+                  height: 15,
+                  fill: {
+                    color: "LimeGreen"
+                  }
+                });
+                var text = new kendo.dataviz.diagram.TextBlock({
+                  text: "Valid",
+                  fontSize: 16,
+                  x: 20
+                });
+
+                g.append(circle);
+                g.append(text);
+                return g;
+              }
+            }
+          }
+        ]
+      });
+    </script>
+
 ### connections.editable `Boolean|Object` *(default: true)*
 
 Defines the shape editable options.
+
+#### Example - enabling only deletion for a connection
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            content: {
+              text: "Step 1"
+            },
+            editable: {
+              tools: ["delete"]
+            }
+          }
+        ]
+      });
+    </script>
 
 ### connections.editable.tools `Array`
 
@@ -529,6 +1174,50 @@ Specifies the the toolbar tools. Supports all options supported for the [toolbar
 
 * "edit" - The selected item can be edited
 * "delete" - The selected items can be deleted
+
+#### Example - showing custom tool for connection
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            content: {
+              text: "Step 1"
+            },
+            editable: {
+              tools: [
+                { type: "button", id: "1", text: "Info", icon: "info", click: showMoreInfo },
+              ]
+            }
+          }
+        ]
+      });
+
+      function showMoreInfo(e){
+        console.log("Clicked custom tool with id: " + e.id);
+      }
+    </script>
 
 ### connections.editable.tools.name `String`
 
@@ -551,7 +1240,9 @@ The connection end cap configuration or type name.
         }, {
           id: "2",
           x: 200,
-          content: "Tuesday"
+          content: {
+            text: "Tuesday"
+          }
         }],
         connections: [{
           from: "1",
@@ -594,6 +1285,16 @@ The connection end cap stroke color.
 
 The connection end cap stroke dash type.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### connections.endCap.stroke.width `Number`
 
 The connection end cap stroke width.
@@ -608,11 +1309,48 @@ The supported values are:
 * "ArrowEnd": a filled arrow
 * "FilledCircle": a filled circle
 
-Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.
+You can also use "ArrowStart" for the endCap but its direction will be inversed.
 
 ### connections.from `Object|String|Number`
 
-Defines the source of the connection.
+Defines the source of the connection. You can set this property to a value matching a shape id or to an object with XY-coordinates.
+
+#### Example - configuring connection "from" and "to" settings
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 300,
+          y: 20
+        }],
+        connections: [
+          {
+            from: {
+              x: 20,
+              y: 70
+            },
+            to: "1",
+            startCap: "FilledCircle"
+          },
+          {
+            from: "1",
+            to: "2",
+            endCap: "ArrowEnd"
+          }]
+      });
+    </script>
 
 ### connections.from.x `Number`
 
@@ -624,11 +1362,79 @@ Defines the y-coordinate of the connection source.
 
 ### connections.fromConnector `String` *(default: "Auto")*
 
-Specifies the name of the source shape connector that should be used by default.
+Specifies the name of the source shape connector that should be used by the connection.
+
+#### Example - originating the connection from the shape "bottom" connector
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 300,
+          y: 20
+        }],
+        connections: [
+          {
+            fromConnector: "bottom",
+            from: "1",
+            to: "2",
+            endCap: "ArrowEnd"
+          }]
+      });
+    </script>
 
 ### connections.hover `Object`
 
 Defines the hover configuration.
+
+#### Example - configuring the connection hovered look
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            content: {
+              text: "Step 1"
+            },
+            hover: {
+              stroke: {color: "red"}
+            }
+          }
+        ]
+      });
+    </script>
 
 ### connections.hover.stroke `Object`
 
@@ -640,31 +1446,46 @@ Defines the highlight color when the pointer is hovering over the connection.
 
 ### connections.points `Array`
 
-Sets the intermediate points (in global coordinates) of the connection. It's important to note that currently these points cannot be manipulated in the interface.
+Sets the intermediate points (in global coordinates) of the connection. These points cannot be manipulated by user action.
 
 
 #### Example - setting intermediate connection points
 
-![Intermediate connection points.](/api/javascript/dataviz/diagram/connection_points.png)
-
     <div id="diagram"></div>
     <script>
-    $("#diagram").kendoDiagram({
-        shapes: [{
-            id: "1",
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
             content: {
-                text: "Monday"
-            }
-        }, {
-            id: "2",
-            content: "Tuesday"
-        }],
-        connections: [{
+              text: "State 2"
+            },
+            x: 300,
+            y: 20
+          }
+        ],
+        connections:[
+          {
             from: "1",
             to: "2",
-            points:[new kendo.dataviz.diagram.Point(100,55)]
-        }]
-    });
+            points: [
+              {x: 150, y: 20},
+              {x: 270, y: 20}
+            ]
+          }
+        ],
+        connectionDefaults: {
+          type: "polyline"
+        }
+      });
     </script>
 
 ### connections.points.x `Number`
@@ -678,6 +1499,48 @@ Sets the Y coordinate of the intermediate point.
 ### connections.selection `Object`
 
 Defines the connection selection configuration.
+
+#### Example - customizing the connection selection handles
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 200,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            startCap: "FilledCircle",
+            endCap: "ArrowEnd",
+            selection: {
+              handles: {
+                fill: {color: "Yellow"},
+                stroke: {color: "White"},
+                height: 20,
+                width: 20
+              }
+            }
+          }
+        ]
+      });
+    </script>
 
 ### connections.selection.handles `Object`
 
@@ -724,7 +1587,9 @@ The connection start cap configuration or type name.
         }, {
           id: "2",
           x: 200,
-          content: "Tuesday"
+          content: {
+            text: "Tuesday"
+          }
         }],
         connections: [{
           from: "1",
@@ -767,6 +1632,16 @@ The connection start cap stroke color.
 
 The connection start cap stroke dash type.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### connections.startCap.stroke.width `Number`
 
 The connection start cap stroke width.
@@ -785,6 +1660,34 @@ The supported values are:
 
 Defines the stroke configuration.
 
+#### Example - configuring the connection stroke
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Step 1"
+          }
+        }, {
+          id: "2",
+          x: 200,
+          content: {
+            text: "Step 2"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2",
+          stroke: {
+            color: "#33ccff",
+            width: 3
+          }
+        }]
+      });
+    </script>
+
 ### connections.stroke.color `String`
 
 Defines the stroke or line color of the connection.
@@ -795,7 +1698,42 @@ Defines the stroke width of the connection.
 
 ### connections.to `Object|String|Number`
 
-Defines the connection to.
+Defines the target of the connection. You can set this property to a value matching a shape id or to an object with XY-coordinates.
+
+#### Example - configuring connection "from" and "to" settings
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Step 1"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Step 2"
+          },
+          x: 300,
+          y: 20
+        }],
+        connections: [
+          {
+            from: "1",
+            to: "2",
+            startCap: "FilledCircle",
+            endCap: "ArrowEnd"
+          },
+          {
+            from: "2",
+            to: {x: 450, y: 70},
+            endCap: "FilledCircle"
+          }]
+      });
+    </script>
 
 ### connections.to.x `Number`
 
@@ -807,17 +1745,94 @@ Defines the point y value.
 
 ### connections.toConnector `String` *(default: "Auto")*
 
-Specifies the name of the target shape connector that should be used by default.
+Specifies the name of the target shape connector that should be used by the connection.
 
-### connections.type `String`
+#### Example - ending the connection in the shape "bottom" connector
 
-Specifies the connection type. The supported values are `"polyline"` and `"cascading"`.
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Step 1"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Step 2"
+          },
+          x: 300,
+          y: 20
+        }],
+        connections: [
+          {
+            toConnector: "bottom",
+            from: "1",
+            to: "2",
+            endCap: "ArrowEnd"
+          }]
+      });
+    </script>
+
+### connections.type `String` *(default: "cascading")*
+
+Speifies the connection type, which defines the way it routes.
+
+The routing of a connection is the way intermediate points of a connection define a route. A route is usually defined on the basis of constraints or behaviors. Currently there are two routing mechanisms for Diagram connections:
+
+* polyline route - connects the defined intermediate points, see [connections.points](api/javascript/dataviz/ui/diagram/configuration/connections.points).
+* cascading route - a simple rectangular route that creates a cascading path between the two ends of a connection, ignoring given connection points. The cascading type is useful when using tree layout and hierarchies. The routed connection will in this case enhance the representation of the hierarchy, reproducing a classic organization diagram.
+
+The available values for the `type` property are:
+
+* "polyline" - connects the defined intermediate points. See [connections.points](api/javascript/dataviz/ui/diagram/configuration/connections.points).
+* "cascading" - discards given points and defines a cascading path between the endpoints.
+
+#### Example - using a polyline connection with intermediate points
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 100
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            points: [
+              {x: 150, y: 20},
+              {x: 150, y: 150}
+            ],
+            type: "polyline"
+          }
+        ]
+      });
+    </script>
 
 ### connectionsDataSource `Object|Array|kendo.data.DataSource`
 
 Defines the data source of the connections.
 
-#### Example - settings the connectionsDataSource and dynamic labelling
+#### Example - setting the connectionsDataSource and dynamic labelling
 
 Note that the 'from' and 'to' fields in the connectionsDataSource refer to the 'id' of the dataSource. The label on the connection is set via the [connectionsDefaults.content.template](/api/javascript/dataviz/ui/diagram#configuration-connectionDefaults.content.template).
 
@@ -827,11 +1842,11 @@ Note that the 'from' and 'to' fields in the connectionsDataSource refer to the '
             dataSource: [
                 {id:"one", name:"One"},
                 {id:"two", name:"Two"},
-                {id:"five", name:"Five"},
+                {id:"four", name:"Four"},
             ],
             connectionsDataSource:[
                 {from:"one", to:"two", label: "plus one"},
-                {from:"one", to:"five", label: "plus three"}
+                {from:"one", to:"four", label: "plus three"}
             ],
             layout: {
                 type: "tree",
@@ -859,9 +1874,7 @@ Note that the 'from' and 'to' fields in the connectionsDataSource refer to the '
                 content:{
                     template:"#= label#"
                 }
-            },
-
-            autoBind: true
+            }
         });
     </script>
 
@@ -876,77 +1889,76 @@ See also the connectionsDataSource example for other ways to define a diagram th
 
     <div id="diagram"></div>
     <script>
-     var dataSource = new kendo.data.HierarchicalDataSource({
+      var dataSource = new kendo.data.HierarchicalDataSource({
         data: [{
-            "name": "Telerik",
-            "items": [
-                {"name": "Kendo",
-                    "items":[
-                        {"name": "Tree"},
-                        {"name": "Chart"}
-                    ]
-                },
-                {"name": "Icenium"}
-            ]
+          "name": "Progress",
+          "items": [
+            {"name": "Kendo UI",
+             "items":[
+               {"name": "TreeList"},
+               {"name": "Chart"}
+             ]
+            },
+            {"name": "NativeScript"}
+          ]
         }],
         schema: {
-            model: {
-                children: "items"
-            }
+          model: {
+            children: "items"
+          }
         }
-    });
-    $("#diagram").kendoDiagram({
-        dataSource:dataSource,
+      });
+      $("#diagram").kendoDiagram({
+        dataSource: dataSource,
         layout: {
-            type: "tree",
-            subtype: "radial"
+          type: "tree",
+          subtype: "down"
         },
         shapeDefaults: {
-            type: "circle",
-            content: {
-                template: "#= name #"
-            },
-            width: 70,
-            height: 70,
-            hover: {
-                fill: "Orange"
-            }
+          type: "circle",
+          content: {
+            template: "#= name #"
+          },
+          width: 80,
+          height: 80,
+          hover: {
+            fill: "Orange"
+          }
         },
         connectionDefaults: {
-            stroke: {
-                color: "#979797",
-                width: 1
-            },
-            type: "polyline",
-            startCap: "FilledCircle",
-            endCap: "ArrowEnd"
-        },
-
-        autoBind: true
-    });
+          stroke: {
+            color: "#979797",
+            width: 1
+          },
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+      });
     </script>
 
 ### editable `Boolean|Object` *(default: true)*
 
-Defines how the diagram behaves when the user attempts to edit shape content, create new connections, edit connection labels and so on.
+A set of settings to configure the Diagram behavior when the user attempts to:
+
+* edit, delete or create shapes and connections.
+* drag shapes.
+* resize shapes.
+* rotate shapes.
 
 ### editable.connectionTemplate `String|Function`
 
-Specifies the connection editor template which shows up when editing the connection via a pop-up editor much like 'editable.template' configuration of the Kendo UI Grid widget.
+Specifies the connection editor template which shows up when editing the connection. A template can be used to change the default editors for the connection fields or to prevent some fields from being edited by not rendering an editor input for them.
 
 #### Example - setting the connectionTemplate
 
-Assuming that the diagram is data bound and that the connection data contains properties 'meaning' and 'domain'.
-These can be edited by setting a Kendo template and a diagram configuration as follows.
-
-
     <script id="popup-editor" type="text/x-kendo-template">
-    <h3>Edit Connection Data</h3>
-    <p>
-        <label>Semantic meaning:<input name="meaning" /></label>
+			<h3>Edit Connection Data</h3>
+			<p>
+            <label>From Shape: <input name="from" data-role="dropdownlist" data-bind="value: from" data-source="shapesDataSource" data-text-field="id" data-value-field="id" /></label>
       </p>
-    <p>
-        <label>Domain: <input data-role="domain" name="domain" /></label>
+			<p>
+            <label>To Shape: <input name="to" data-role="dropdownlist" data-bind="value: to" data-source="shapesDataSource" data-text-field="id" data-value-field="id" /></label>
       </p>
     </script>
 
@@ -1040,7 +2052,9 @@ These can be edited by setting a Kendo template and a diagram configuration as f
       }
 
       $("#diagram").kendoDiagram({
-        readOnly: false,
+        layout: {
+          type: "layered"
+        },
         dataSource: shapesDataSource,
         connectionsDataSource: connectionsDataSource,
         editable: {
@@ -1056,76 +2070,271 @@ These can be edited by setting a Kendo template and a diagram configuration as f
       });
     </script>
 
-See also the Kendo data-bound sample for a similar example.
-
 ### editable.drag `Boolean|Object` *(default: true)*
 
 Specifies if the shapes and connections can be dragged.
 
+#### Example - disabling dragging of shapes and connections
+
+    <div id="diagram"></div>
+    <script>
+      var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [{
+          "name": "Progress",
+          "items": [
+            {"name": "Kendo UI",
+             "items":[
+               {"name": "TreeList"},
+               {"name": "Chart"}
+             ]
+            },
+            {"name": "NativeScript"}
+          ]
+        }],
+        schema: {
+          model: {
+            children: "items"
+          }
+        }
+      });
+      $("#diagram").kendoDiagram({
+        dataSource: dataSource,
+        editable: {
+          drag: false
+        },
+        layout: {
+          type: "tree",
+          subtype: "down"
+        },
+        shapeDefaults: {
+          content: {
+            template: "#= name #"
+          },
+          width: 80,
+          height: 80
+        },
+        connectionDefaults: {
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### editable.drag.snap `Boolean|Object` *(default: true)*
 
-Specifies the shapes drag snap options.
+Specifies the shapes drag snap options. By default, during dragging, the shapes move by a given number of pixels at once. You can disable this behavior to make shapes movement smooth or you can specify a different number for the drag snap size to simulate a snap-to-grid functionality.
+
+#### Example - disabling drag snap behavior in Diagram
+
+    <div id="diagram"></div>
+    <script>
+      var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [{
+          "name": "Progress",
+          "items": [
+            {"name": "Kendo UI",
+             "items":[
+               {"name": "TreeList"},
+               {"name": "Chart"}
+             ]
+            },
+            {"name": "NativeScript"}
+          ]
+        }],
+        schema: {
+          model: {
+            children: "items"
+          }
+        }
+      });
+      $("#diagram").kendoDiagram({
+        dataSource: dataSource,
+        editable: {
+          drag: {
+            snap: false
+          }
+        },
+        layout: {
+          type: "tree",
+          subtype: "down"
+        },
+        shapeDefaults: {
+          content: {
+            template: "#= name #"
+          },
+          width: 80,
+          height: 80
+        },
+        connectionDefaults: {
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### editable.drag.snap.size `Number` *(default: 10)*
 
 Specifies the shapes drag snap size.
 
+#### Example - increasing the Diagram drag snap size
+
+    <div id="diagram"></div>
+    <script>
+      var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [{
+          "name": "Progress",
+          "items": [
+            {"name": "Kendo UI",
+             "items":[
+               {"name": "TreeList"},
+               {"name": "Chart"}
+             ]
+            },
+            {"name": "NativeScript"}
+          ]
+        }],
+        schema: {
+          model: {
+            children: "items"
+          }
+        }
+      });
+      $("#diagram").kendoDiagram({
+        dataSource: dataSource,
+        editable: {
+          drag: {
+            snap: {
+                size: 80
+            }
+          }
+        },
+        layout: {
+          type: "tree",
+          subtype: "down"
+        },
+        shapeDefaults: {
+          content: {
+            template: "#= name #"
+          },
+          width: 80,
+          height: 80
+        },
+        connectionDefaults: {
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### editable.remove `Boolean` *(default: true)*
 
 Specifies if the shapes and connections can be removed.
 
-### editable.resize `Boolean|Object` *(default: true)*
-
-Defines the look-and-feel of the resizing handles.
-
-#### Example - styling the resizing handles
-
-The 'editable.resize' configuration below collects pretty much all of the available parameters.
+#### Example - preventing shapes and connections deletion
 
     <div id="diagram"></div>
     <script>
-     $("#diagram").kendoDiagram({
+      var dataSource = new kendo.data.HierarchicalDataSource({
+        data: [{
+          "name": "Progress",
+          "items": [
+            {"name": "Kendo UI",
+             "items":[
+               {"name": "TreeList"},
+               {"name": "Chart"}
+             ]
+            },
+            {"name": "NativeScript"}
+          ]
+        }],
+        schema: {
+          model: {
+            children: "items"
+          }
+        }
+      });
+      $("#diagram").kendoDiagram({
+        dataSource: dataSource,
+        editable: {
+          remove: false
+        },
+        layout: {
+          type: "tree",
+          subtype: "down"
+        },
+        shapeDefaults: {
+          content: {
+            template: "#= name #"
+          },
+          width: 80,
+          height: 80
+        },
+        connectionDefaults: {
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
+### editable.resize `Boolean|Object` *(default: true)*
+
+Defines the look-and-feel of the shape resizing handles.
+
+#### Example - styling the resizing handles
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: {
+          type: "tree"
+        },
         shapes: [{
-            id: "1",
-            content: {
-                text: "Monday"
-            }
+          id: "1",
+          content: {
+            text: "Monday"
+          }
         }, {
-            id: "2",
-            content: "Tuesday"
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
         }],
         connections: [{
-            from: "1",
-            to: "2"
+          from: "1",
+          to: "2"
         }],
         editable: {
-            resize: {
-                handles: {
-                    fill: {
-                        color: "red",
-                        opacity: 0.5
-                    },
-                    height: 10,
-                    width: 10,
-                    stroke: {
-                        color:"blue",
-                        width:1,
-                        dashType:"dot"
-                    },
-                    hover: {
-                        fill: {
-                            color:"green",
-                            opcaity:.8
-                        },
-                        stroke: {
-                            color:"purple",
-                            width:5
-                        }
-                    }
+          resize: {
+            handles: {
+              fill: {
+                color: "red",
+                opacity: 0.5
+              },
+              height: 10,
+              width: 10,
+              stroke: {
+                color:"blue",
+                width:1,
+                dashType:"dot"
+              },
+              hover: {
+                fill: {
+                  color:"green",
+                  opcaity:.8
+                },
+                stroke: {
+                  color:"purple",
+                  width:5
                 }
+              }
             }
+          }
         }
-    });
+      });
     </script>
 
 ### editable.resize.handles `Object`
@@ -1186,6 +2395,15 @@ Specifies the stroke color on hovering over the resizing handles. See the [edita
 
 Specifies the stroke dash type on hovering over the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
 
 ### editable.resize.handles.hover.stroke.width `Number`
 
@@ -1205,6 +2423,16 @@ Specifies the stroke color of the resizing handles. See the [editable.resize](/a
 ### editable.resize.handles.stroke.dashType `String`
 
 Specifies the stroke dash type of the resizing handles. See the [editable.resize](/api/javascript/dataviz/ui/diagram#configuration-editable.resize) configuration for an example.
+
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
 
 
 ### editable.resize.handles.stroke.width `Number`
@@ -1247,11 +2475,147 @@ Specifies the stroke thickness of the rotation thumb.
 
 ### editable.shapeTemplate `String|Function`
 
-Specifies the shape editor template. See the 'editable.connectionTemplate' for an example.
+Specifies the shape editor template. You can use it to customize the editing UI of the shape or to display editor controls only for certain fields of the shape data item.
+
+#### Example - customizing the shape editing UI
+
+    <div id="diagram"></div>
+
+    <script id="popup-editor" type="text/x-kendo-template">
+          <h3>Edit Shape Data</h3>
+          <p>
+            <label>Job title: <input name="JobTitle" data-role="dropdownlist" data-bind="value: JobTitle" data-source="titles" data-text-field="JobTitle" data-value-field="JobTitle" /></label>
+      </p>
+    </script>
+    <script>
+      function onDataBound(e) {
+        var that = this;
+        setTimeout(function () {
+          that.bringIntoView(that.shapes);
+        }, 0);
+      }
+
+      function createDiagram() {
+        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+
+        var shapesDataSource = {
+          batch: false,
+          transport: {
+            read: {
+              url: serviceRoot + "/DiagramShapes",
+              dataType: "jsonp"
+            },
+            update: {
+              url: serviceRoot + "/DiagramShapes/Update",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: serviceRoot + "/DiagramShapes/Destroy",
+              dataType: "jsonp"
+            },
+            create: {
+              url: serviceRoot + "/DiagramShapes/Create",
+              dataType: "jsonp"
+            },
+            parameterMap: function (options, operation) {
+              if (operation !== "read") {
+                return { models: kendo.stringify(options.models || [options]) };
+              }
+            }
+          },
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { from: "Id", type: "number", editable: false },
+                JobTitle: { type: "string" }
+              }
+            }
+          }
+        };
+
+        var connectionsDataSource = {
+          batch: false,
+          transport: {
+            read: {
+              url: serviceRoot + "/DiagramConnections",
+              dataType: "jsonp"
+            },
+            update: {
+              url: serviceRoot + "/DiagramConnections/Update",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: serviceRoot + "/DiagramConnections/Destroy",
+              dataType: "jsonp"
+            },
+            create: {
+              url: serviceRoot + "/DiagramConnections/Create",
+              dataType: "jsonp"
+            },
+            parameterMap: function (options, operation) {
+              if (operation !== "read") {
+                return { models: kendo.stringify(options.models || [options]) };
+              }
+            }
+          },
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { from: "Id", type: "number", editable: false },
+                from: { from: "FromShapeId", type: "number" },
+                to: { from: "ToShapeId", type: "number" },
+                fromX: { from: "FromPointX", type: "number" },
+                fromY: { from: "FromPointY", type: "number" },
+                toX: { from: "ToPointX", type: "number" },
+                toY: { from: "ToPointY", type: "number" }
+              }
+            }
+          }
+        };
+
+        $("#diagram").kendoDiagram({
+          dataSource: shapesDataSource,
+          connectionsDataSource: connectionsDataSource,
+          editable: {
+            shapeTemplate: kendo.template($("#popup-editor").html())
+          },
+          layout: {
+            type: "layered"
+          },
+          shapeDefaults: {
+            content: {
+              template: "#= dataItem.JobTitle #",
+              fontSize: 17
+            },
+            width: 220
+          },
+          connectionDefaults: {
+            stroke: {
+              color: "#586477",
+              width: 2
+            }
+          },
+          dataBound: onDataBound
+        });
+      }
+      var titles = [{JobTitle: "Relations Manager"},
+                    {JobTitle: "Accountant"},
+                    {JobTitle: "Budget Analyst"},
+                    {JobTitle: "Technical Support Manager"},
+                    {JobTitle: "Compensation Manager"},
+                    {JobTitle: "Payrol Specialist"},
+                    {JobTitle: "VP Finance"},
+                    {JobTitle: "VP Human Resources"},
+                    {JobTitle: "VP Customer Relations"},
+                    {JobTitle: "President"},];
+      $(document).ready(createDiagram);
+    </script>
 
 ### editable.tools `Array`
 
-Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported by the [toolbar.items](/api/javascript/ui/toolbar/configuration/items) property. Predefined tools are:
 
 * "edit" - The selected item can be edited.
 * "createShape" - Adds an empty shape data item and a popup window is displayed.
@@ -1268,14 +2632,33 @@ Specifies the the toolbar tools. Supports all options supported for the [toolbar
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
-        shapes: [{}],
+        layout: {
+          type: "tree"
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        }],
         editable: {
           tools: [{
             name: "delete"
           }, {
-            name: "rotateClockwise"
+            name: "rotateClockwise",
+            step: 45
           }, {
-            name: "rotateAnticlockwise"
+            name: "rotateAnticlockwise",
+            step: 45
           }]
         }
       });
@@ -1286,7 +2669,24 @@ Specifies the the toolbar tools. Supports all options supported for the [toolbar
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
-        shapes: [{}],
+        layout: {
+          type: "tree"
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        }],
         editable: {
           tools: [{
             type: "button",
@@ -1520,11 +2920,50 @@ Either the distance between levels if the tree is up/down or between siblings if
 
 ### pannable `Boolean|Object` *(default: true)*
 
-Defines the pannable options.
+Defines the pannable options. Use this setting to disable Diagram pan or change the key that activates the pan behavior.
+
+#### Example - disabling Diagram panning
+
+    <div id="diagram" style="width:800px"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        pannable: false,
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### pannable.key `String` *(default: "ctrl")*
 
-Defines the meta key that will be used while panning the Diagram. To avoid clashed, verify that the `pannable.key` and [`selectable.key`](/api/javascript/dataviz/ui/diagram#configuration-selectable.key) options are different. The available values are:
+Defines the meta key that will be used while panning the Diagram. To avoid clashes, verify that the `pannable.key` and [`selectable.key`](/api/javascript/dataviz/ui/diagram#configuration-selectable.key) options are different. The available values are:
 
 * "none" - No activation key
 * "ctrl" - The activation key will be `Ctrl`
@@ -1533,15 +2972,88 @@ Defines the meta key that will be used while panning the Diagram. To avoid clash
 
 > This option is not applicable for mobile devices.
 
+#### Example - enabling panning using the Shift key
+
+    <div id="diagram" style="width:800px"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        pannable: {
+          key: "shift"
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }, {
+          id: "4",
+          content: {
+            text: "Thursday"
+          }
+        }, {
+          id: "5",
+          content: {
+            text: "Friday"
+          }
+        }, {
+          id: "6",
+          content: {
+            text: "Saturday"
+          }
+        }, {
+          id: "7",
+          content: {
+            text: "Sunday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        },{
+          from: "3",
+          to: "4"
+        },{
+          from: "4",
+          to: "5"
+        },{
+          from: "5",
+          to: "6"
+        },{
+          from: "6",
+          to: "7"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### pdf `Object`
 
 Configures the export settings for the [`saveAsPDF`](/api/javascript/dataviz/ui/diagram/methods/saveaspdf) method.
 
 ### pdf.author `String` *(default: null)*
 
-The author of the PDF document.
+The author of the PDF document that will be visible in the PDF file metadata.
 
-#### Example - set the author
+#### Example - setting the PDF document author
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1563,9 +3075,9 @@ The author of the PDF document.
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
-The creator of the PDF document.
+The creator of the PDF document. 
 
-#### Example - set the creator
+#### Example - setting the PDF document creator
 
     <div id="diagram"></div>
     <script>
@@ -1590,7 +3102,7 @@ The creator of the PDF document.
 
 The date when the PDF document is created. Defaults to `new Date()`.
 
-#### Example - set the date
+#### Example - setting the PDF document create date
 
     <div id="diagram"></div>
     <script>
@@ -1615,7 +3127,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
 
 Specifies the file name of the exported PDF file.
 
-#### Example - set the default PDF file name
+#### Example - setting the default PDF file name
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1637,34 +3149,13 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to `true`, the content is forwarded to [`proxyURL`](/api/javascript/dataviz/ui/diagram#configuration-pdf.proxyURL) even if the browser supports the saving of files locally.
-
-#### Example - use proxy
-    <div id="diagram"></div>
-    <script>
-      $("#diagram").kendoDiagram({
-          pdf: {
-              proxyURL: "/save",
-              forceProxy: true
-          },
-          dataSource: {
-              data: [{ "items": [{ items: [{}] }] }],
-              schema: { model: { children: "items" } }
-          },
-          layout: {
-              type: "tree"
-          }
-      });
-
-      var diagram = $("#diagram").getKendoDiagram();
-      diagram.saveAsPDF();
-    </script>
+If set to `true`, the exported content is forwarded to the endpoint specified using the [`proxyURL`](/api/javascript/dataviz/ui/diagram#configuration-pdf.proxyURL) setting, even if the browser supports saving of files in the user's local file system.
 
 ### pdf.keywords `String` *(default: null)*
 
-Specifies the keywords of the exported PDF file.
+Specifies the keywords that will appear in the metadata of the exported PDF file.
 
-#### Example - set the keywords
+#### Example - setting the PDF document keywords
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1686,9 +3177,9 @@ Specifies the keywords of the exported PDF file.
 
 ### pdf.landscape `Boolean` *(default: false)*
 
-If set to `true`, reverses the paper dimensions if needed to verify that the width corresponds to the longer side.
+If set to `true`, changes the document orientation to landscape. This property takes effect when [pdf.paperSize](/api/javascript/dataviz/ui/diagram/configuration/pdf.papersize) is set.
 
-#### Example - enable landscape mode
+#### Example - enabling landscape mode
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1711,9 +3202,9 @@ If set to `true`, reverses the paper dimensions if needed to verify that the wid
 
 ### pdf.margin `Object`
 
-Specifies the margins of the page (numbers or strings with units). The supported units are `mm`, `cm`, `in`, and `pt` (default).
+Sets the paper margins. The value has to be an object containing `top`, `left`, `right`, and `bottom` numbers which specify the paper margins. If numbers are passed, they are assumed to be in points (pt). By using strings, you can specify the units. The supported units are `mm`, `cm`, `in`, and `pt` (default).
 
-#### Example - set the margins
+#### Example - setting the PDF document margins
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1762,12 +3253,12 @@ Specifies the paper size of the PDF document. The default setting is `auto` and 
 
 The supported values are:
 
-* A predefined size: `A4`, `A3`, and so on.
+* A predefined size:  `A0`-`A10`, `B0`-`B10`, `C0`-`C10`, `Executive`, `Folio`, `Legal`, `Letter`, `Tabloid`.
 * An array of two numbers specifying the width and height in points (1pt = 1/72in)
 * An array of two strings specifying the width and height in units.
   The supported units are `mm`, `cm`, `in`, and `pt`.
 
-#### Example - set custom paper size
+#### Example - setting custom paper size
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1799,7 +3290,9 @@ When the browser is not capable of saving files locally, a proxy will be used. S
 
 The proxy is expected to return the decoded file with a set `Content-Disposition` header.
 
-#### Example - set the server proxy URL
+You can see sample server proxy implementations here: [Server Proxy Implementations](/framework/save-files/introduction#server-proxy-implementations).
+
+#### Example - setting the server proxy URL
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1823,9 +3316,9 @@ The proxy is expected to return the decoded file with a set `Content-Disposition
 
 A name or keyword indicating where to display the document returned from the proxy.
 
-If you want to display the document in a new window or iframe, the proxy has to set the `Content-Disposition` header to `inline; filename="<fileName.pdf>"`.
+If you want to display the document in a new window or an iframe, the proxy method has to set the `Content-Disposition` header of the response to `inline; filename="<fileName.pdf>"`.
 
-#### Example - open the generated document in a new window
+#### Example - opening the generated document in a new window
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1849,14 +3342,14 @@ If you want to display the document in a new window or iframe, the proxy has to 
 
 ### pdf.subject `String` *(default: null)*
 
-Sets the subject of the PDF file.
+Sets the subject of document, which will be shown in the PDF file metadata.
 
-#### Example - set the subject
+#### Example - setting the PDF document subject
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
           pdf: {
-              subject: "Products"
+              subject: "Placement of Products"
           },
           dataSource: {
               data: [{ "items": [{ items: [{}] }] }],
@@ -1873,9 +3366,9 @@ Sets the subject of the PDF file.
 
 ### pdf.title `String` *(default: null)*
 
-Sets the title of the PDF file.
+Sets the title of the document, which will be shown in the PDF file metadata.
 
-#### Example - set the title
+#### Example - setting the PDF document title
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
@@ -1897,34 +3390,176 @@ Sets the title of the PDF file.
 
 ### selectable `Boolean|Object` *(default: true)*
 
-Defines the selectable options.
+Defines the Diagram selection options.
+
+By default, you can select shapes in the Diagram in one of two ways:
+
+* Clicking a single shape to select it and deselect any previously selected shapes.
+* Holding the `Ctrl` key while clicking multiple shapes to select them and any other shapes between them.
+
+Using the `selectable` configuration, you can enable single selection only, enable selection by drawing a rectangular area with the mouse around shapes in the canvas, or disable selection altogether.
 
 ### selectable.key `String` *(default: "none")*
 
 Defines the meta key when doing a visual selection through drawing a rectangular area around shapes in the canvas. This option does not change the way a single shape is selected when using click or tap. To avoid clashes, verify that the `selectable.key` and [`pannable.key`](/api/javascript/dataviz/ui/diagram#configuration-pannable.key) are different. The available values are:
 
-* "none" - No activation key
-* "ctrl" - The activation key will be `Ctrl`
-* "shift" - The activation key will be `Shift`
-* "alt" - The activation key will be `Alt`
+* "none" - No activation key, visual selection is disabled.
+* "ctrl" - The activation key will be `Ctrl`.
+* "shift" - The activation key will be `Shift`.
+* "alt" - The activation key will be `Alt`.
 
 > This option is not applicable for mobile devices.
+
+#### Example - enabling selection through holding the Shift key and drawing a rectangle around shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        selectable: {
+          key: "shift"
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### selectable.multiple `Boolean` *(default: true)*
 
 Specifies if the multiple selection should be enabled.
 
+#### Example - disabling multiple selection
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        selectable: {
+          multiple: false
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### selectable.stroke `Object`
 
-Defines the selection stroke configuration.
+Defines the selection line configuration.
+
+#### Example - customizing the selection stroke
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        selectable: {
+          stroke: {
+            dashType: "longDashDot",
+            color: "blue",
+            width: 2
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### selectable.stroke.color `String`
 
-Defines the selection stroke color.
+Defines the selection stroke color. Accepts valid CSS colors.
 
 ### selectable.stroke.dashType `String`
 
-Defines the selection dash type.
+Defines the selection dash type. The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of long dashes
+* "longDashDot" - a line consisting of a repeating pattern of long dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long dash-dot-dot
+* "solid" - a solid line
 
 ### selectable.stroke.width `Number`
 
@@ -1932,11 +3567,11 @@ Defines the selection stroke width.
 
 ### shapeDefaults `Object`
 
-Defines the shape options.
+Defines the default options that will be applied to all shapes in the Diagram.
 
 ### shapeDefaults.connectors `Array`
 
-Defines the connectors the shape owns.
+Defines the connectors the shape owns. A connector is the point in the shape where a connection between this shape and another one can originate from or end.
 
 * "top" - top connector.
 * "right" - right connector.
@@ -1947,22 +3582,83 @@ Defines the connectors the shape owns.
 
 You can define your own custom connectors or use the predefined types.
 
-#### Example - Include only some connectors
+#### Example - including only some connectors and customize their look
 
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
-        dataSource: [{name: "item1"}],
         shapeDefaults: {
-          connectors: [{ name: "top" }, { name: "left" }]
+          connectors: [
+            {
+              name: "top",
+              width: 15,
+              height: 15,
+              fill: {
+                color: "green",
+                opacity: 0.7
+              },
+              hover: {
+                fill: {
+                  color: "lightblue"
+                },
+                stroke: {
+                  color: "gray",
+                  dashType: "dot"
+                }
+              },
+              stroke: {
+                width: 2,
+                color: "white",
+                dashType: "solid"
+              }
+            }, 
+            {
+              name: "bottom"
+            }]
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2",
+          fromConnector: "top",
+          toConnector: "top"
+        },{
+          from: "2",
+          to: "3",
+          fromConnector: "bottom",
+          toConnector: "top"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
         }
       });
     </script>
 
 
-The following example demonstrates how to define a custom shape with connectors adapted to the shape's outline. To define positions that are relative to the shape, note in particular the various helpful methods such as `right()`, `left()`, and `top()`.
+The following example demonstrates how to define a custom shape with connectors adapted to the outline of the shape. You can see how the shape bounds are accessed and used to determine the position of the connectors.
 
-#### Example - Custom shape with custom connectors
+#### Example - creating a custom shape with custom connectors
 
     <div id="diagram"></div>
     <script>
@@ -1979,7 +3675,7 @@ The following example demonstrates how to define a custom shape with connectors 
             name: "SideLeft",
             position: function(shape) {
               var p = shape.bounds().left();
-              return shape._transformPoint(new kendo.dataviz.diagram.Point(p.x, p.y+17));
+              return shape._transformPoint(new kendo.dataviz.diagram.Point(p.x, p.y + 17));
             }
           }, {
             name: "SideRight",
@@ -1995,7 +3691,7 @@ The following example demonstrates how to define a custom shape with connectors 
 
 ### shapeDefaults.connectors.name `String`
 
-The connector name.
+The connector name. The name is referenced when specifying explicit `fromConnector` and `toConnector` values in a connection.
 
 ### shapeDefaults.connectors.position `Function`
 
@@ -2037,6 +3733,16 @@ Defines the hover stroke color.
 
 The hover stroke dash type.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### shapeDefaults.connectors.hover.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke on hover.
@@ -2063,7 +3769,15 @@ Defines the stroke color.
 
 ### shapeDefaults.connectors.stroke.dashType `String`
 
-The stroke dash type.
+Defines the stroke dash type. The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of long dashes
+* "longDashDot" - a line consisting of a repeating pattern of long dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long dash-dot-dot
+* "solid" - a solid line
 
 ### shapeDefaults.connectors.stroke.width `Number` *(default: 1)*
 
@@ -2072,6 +3786,70 @@ Defines the thickness or width of the shape connectors stroke.
 ### shapeDefaults.connectorDefaults `Object`
 
 Defines the default options for the shape connectors.
+
+#### Example - customizing the Diagram shape connectors
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          connectorDefaults: {
+            width: 10,
+            height: 10,
+            fill: {
+              color: "green",
+              opacity: 0.7
+            },
+            hover: {
+              fill: {
+                color: "lightblue"
+              },
+              stroke: {
+                color: "yellow",
+                dashType: "dot"
+              }
+            },
+            stroke: {
+              width: 2,
+              color: "yellow",
+              dashType: "solid"
+            }
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.connectorDefaults.width `Number` *(default: 8)*
 
@@ -2109,6 +3887,16 @@ Defines the hover stroke color.
 
 The dash type of the hover stroke.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### shapeDefaults.connectorDefaults.hover.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke on hover.
@@ -2135,7 +3923,15 @@ Defines the stroke color.
 
 ### shapeDefaults.connectorDefaults.stroke.dashType `String`
 
-The dash type of the stroke.
+Defines the stroke dash type. The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of long dashes
+* "longDashDot" - a line consisting of a repeating pattern of long dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long dash-dot-dot
+* "solid" - a solid line
 
 ### shapeDefaults.connectorDefaults.stroke.width `Number` *(default: 1)*
 
@@ -2143,11 +3939,61 @@ Defines the thickness or width of the shape connectors stroke.
 
 ### shapeDefaults.content `Object`
 
-Defines the shapes content settings.
+Defines the default shapes content settings.
+
+#### Example - customizing the shapes content appearance
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            align: "top left",
+            color: "yellow",
+            fontFamily: "Tahoma",
+            fontSize: 16,
+            fontStyle: "italic",
+            fontWeight: 200
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.content.align `String`
 
-The alignment of the text inside the shape.
+The alignment of the text inside the shape. You can do combinations between "top", "middle" and "bottom" for vertical align and "right", "center" and "left" for horizontal align. For example, "top right", "middle left", "bottom center", and so on.
 
 ### shapeDefaults.content.color `String`
 
@@ -2177,6 +4023,76 @@ The fields which can be used in the template are:
 
 * dataItem - The data item if a field has been specified
 
+#### Example - using a template for the shapes content
+
+    <div id="diagram"></div>
+    <script>
+      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+
+      var shapesDataSource = {
+        transport: {
+          read: {
+            url: serviceRoot + "/DiagramShapes",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            fields: {
+              id: { from: "Id", type: "number" },
+              JobTitle: { type: "string" },
+              Color: { type: "string" }
+            }
+          }
+        }
+      };
+
+      var connectionsDataSource = {
+        transport: {
+          read: {
+            url: serviceRoot + "/DiagramConnections",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            id: "id",
+            fields: {
+              id: { from: "Id", type: "number" },
+              from: { from: "FromShapeId", type: "number" },
+              to: { from: "ToShapeId", type: "number" },
+              fromX: { from: "FromPointX", type: "number" },
+              fromY: { from: "FromPointY", type: "number" },
+              toX: { from: "ToPointX", type: "number" },
+              toY: { from: "ToPointY", type: "number" }
+            }
+          }
+        }
+      };
+
+      $("#diagram").kendoDiagram({
+        dataSource: shapesDataSource,
+        connectionsDataSource: connectionsDataSource,
+        layout: {
+          type: "layered"
+        },
+        shapeDefaults: {
+          content: {
+            template: "#= dataItem.JobTitle #"
+          },
+          width: 200
+        },
+        dataBound: onDataBound
+      });
+
+      function onDataBound(e) {
+        var that = this;
+        setTimeout(function () {
+          that.bringIntoView(that.shapes);
+        }, 0);
+      }
+    </script>
+
 ### shapeDefaults.content.text `String`
 
 The text that is displayed in the shape.
@@ -2187,15 +4103,150 @@ Defines the shape editable options.
 
 ### shapeDefaults.editable.connect `Boolean` *(default: true)*
 
-Specifies whether the connectors appear on hover.
+Specifies if new connections can be added using the shapes connectors.
+
+#### Example - preventing the user from adding new connections to shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          editable: {
+            connect: false
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.editable.drag `Boolean` *(default: true)*
 
 Specifies if the shapes can be dragged.
 
+#### Example - disabling shapes dragging
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          editable: {
+            drag: false
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapeDefaults.editable.remove `Boolean` *(default: true)*
 
 Specifies if the shapes can be removed.
+
+#### Example - preventing the user from deleting shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          editable: {
+            remove: false
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.editable.tools `Array`
 
@@ -2203,15 +4254,14 @@ Specifies the toolbar tools. Provides all options that are supported for [`toolb
 
 * "edit" - The selected item can be edited.
 * "delete" - The selected items can be deleted.
-* "rotateClockwise" - The selected items can be rotated clockwise. The default rotation value is 90 degree.
-* "rotateAnticlockwise" - The selected items can be rotated anticlockwise. The default rotation value is 90 degree.
+* "rotateClockwise" - The selected items can be rotated clockwise. The default rotation value is 90 degrees.
+* "rotateAnticlockwise" - The selected items can be rotated anticlockwise. The default rotation value is 90 degrees.
 
 #### Example - using predefined tools
 
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({
-        shapes: [{}],
         shapeDefaults: {
           editable: {
             tools: [{
@@ -2222,6 +4272,38 @@ Specifies the toolbar tools. Provides all options that are supported for [`toolb
               name: "rotateAnticlockwise"
             }]
           }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
         }
       });
     </script>
@@ -2258,11 +4340,100 @@ The name of the tool. The built-in tools are `edit`, `delete`, `rotateClockwise`
 
 ### shapeDefaults.editable.tools.step `Number` *(default: 90)*
 
-The step of the `rotateClockwise` and  `rotateAnticlockwise` tools.
+The step of the `rotateClockwise` and  `rotateAnticlockwise` tools. It determines the angle at which a selected shape will be rotated when one of the tools is clicked.
+
+#### Example - changing the shapes rotation step
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          editable: {
+            tools: [{
+              name: "delete"
+            }, {
+              name: "rotateClockwise",
+              step: 45
+            }, {
+              name: "rotateAnticlockwise",
+              step: 45
+            }]
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.fill `String|Object`
 
-Defines the fill options of the shape.
+Defines the fill options of the shape. Use these settings to apply a single-color or a gradient background to all shapes in the Diagram.
+
+#### Example - applying a custom color to all Diagram shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          fill: {
+            color: "red",
+            opacity: 0.5
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.fill.color `String`
 
@@ -2275,6 +4446,61 @@ Defines the fill opacity of the shape.
 ### shapeDefaults.fill.gradient `Object`
 
 Defines the gradient fill of the shape.
+
+#### Example - providing a custom gradient background to Diagram shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          fill: {
+            gradient: {
+              type: "radial",
+              center: [0.5, 0.5],
+              radius: 0.9,
+              stops: [
+                {
+                  offset: 0,
+                  color: "lightblue",
+                  opacity: 0.5
+                }, {
+                  offset: 0.5,
+                  color: "purple",
+                  opacity: 0.8
+                }
+              ]
+            }
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.fill.gradient.type `String` *(default: "linear")*
 The type of the gradient. The supported values are:
@@ -2323,15 +4549,95 @@ Specifying `'none'`, `'transparent'`, or `''` (empty string) clears the fill.
 
 ### shapeDefaults.fill.gradient.stops.opacity `Number`
 The fill opacity.
-Ranges from `0` (completely transparent) to `1` (completely opaque).
+Ranges from `0` (completely transparent) to `1` (opaque).
 
 ### shapeDefaults.height `Number` *(default: 100)*
 
-Defines the height of the shape when added to the Diagram.
+Defines the default height of shapes in the Diagram.
+
+#### Example - changing the default height of Diagram shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          height: 50
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.hover `Object`
 
 Defines the `hover` configuration.
+
+#### Example - changing the shapes default color on hover
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          hover: {
+            fill: {
+              color: "pink"
+            }
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.hover.fill `String|Object`
 
@@ -2347,19 +4653,173 @@ Defines the `hover` fill opacity.
 
 ### shapeDefaults.minHeight `Number` *(default: 20)*
 
-Defines the minimum height the shape should have, that is, it cannot be resized to a value smaller than the given one.
+Defines the minimum height the shape can have. Use this setting to apply a lower limit to the height of shapes when users resize them.
+
+#### Example - applying a minimum height to which shapes can be resized
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          minHeight: 80
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.minWidth `Number` *(default: 20)*
 
-Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one.
+Defines the minimum width the shape can have. Use this setting to apply a lower limit to the width of shapes when users resize them.
+
+#### Example - applying a minimum width to which shapes can be resized
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          minWidth: 80
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.path `String`
 
 The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
 
+#### Example - making all shapes octagons by default
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapeDefaults: {
+          path: "m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapeDefaults.rotation `Object` *(default: null)*
 
 Defines the rotation of the shape.
+
+#### Example - applying a default rotation to Diagram shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "layered",
+        shapeDefaults: {
+          rotation: {
+            angle: 25
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.rotation.angle `Number` *(default: 0)*
 
@@ -2367,15 +4827,137 @@ Sets the rotational angle of the shape.
 
 ### shapeDefaults.selectable `Boolean` *(default: true)*
 
-Specifies if the shape can be selected.
+Specifies if Diagram shapes can be selected.
+
+#### Example - disabling selection for Diagram shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "layered",
+        shapeDefaults: {
+          selectable: false
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.source `String`
 
-The source of the shape image. Applicable when the type is set to `"image"`.
+The path/URL to the shape image. Applicable when the type is set to `"image"`.
+
+#### Example - applying a default image for all shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "layered",
+        shapeDefaults: {
+          type: "image",
+          source: "https://demos.telerik.com/kendo-ui/html5-dashboard-sample-app/Content/Products/4.jpg",
+          content: {
+            color: "#fff"
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.stroke `Object`
 
-Defines the stroke configuration.
+Defines the configuration of the border around Diagram shapes.
+
+#### Example - applying a custom border around shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "layered",
+        shapeDefaults: {
+          stroke: {
+            color: "rgb(92, 229, 0)",
+            dashType: "dashDot",
+            width: 3
+          }
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.stroke.color `String` *(default: "Black")*
 
@@ -2408,6 +4990,44 @@ Specifies the type of the Shape using any of the built-in shape type.
 * "image": an image
 * "text": some text
 
+#### Example - making all Diagram shapes circles by default
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "layered",
+        shapeDefaults: {
+          type: "circle"
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapeDefaults.visual `Function`
 
 A function that returns a visual element to render for a given shape. The following primitives can be used to construct a composite visual:
@@ -2421,9 +5041,9 @@ A function that returns a visual element to render for a given shape. The follow
 * [Image](/api/javascript/dataviz/diagram/image)
 * [Layout](/api/javascript/dataviz/diagram/layout)
 
-> The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path whose coordinates cannot be easily adjusted, then position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
+> The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path which coordinates cannot be easily adjusted, then position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
 
-#### Example - how to use the visual
+#### Example - declaring a custom visual for Diagram shapes
     <div id="diagram"></div>
     <script>
         var diagram = kendo.dataviz.diagram;
@@ -2466,15 +5086,53 @@ A function that returns a visual element to render for a given shape. The follow
 
 ### shapeDefaults.width `Number` *(default: 100)*
 
-Defines the width of the shape when added to the Diagram.
+Defines the default width of shapes in the Diagram.
+
+#### Example - changing the default width of shapes
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "layered",
+        shapeDefaults: {
+          width: 180
+        },
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapeDefaults.x `Number` *(default: 0)*
 
-Defines the x-coordinate of the shape when added to the Diagram.
+Defines the x-coordinate of shapes added to the Diagram.
 
 ### shapeDefaults.y `Number` *(default: 0)*
 
-Defines the y-coordinate of the shape when added to the Diagram.
+Defines the y-coordinate of shapes added to the Diagram.
 
 ### shapes `Array`
 
@@ -2482,7 +5140,48 @@ Defines the shape options.
 
 ### shapes.connectors `Array`
 
-Defines the connectors the shape owns.
+Defines the connectors available in the shape. A connector is the point in the shape where a connection between this shape and another one can originate from or end.
+
+#### Example - limiting the available connectors in a shape
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          x: 20,
+          y: 40,
+          content: {
+            text: "Monday"
+          },
+          connectors: [{name: "top", width: 20, height: 20}, {name: "right", width: 10, height: 10}]
+        }, {
+          id: "2",
+          x: 200,
+          y: 40,
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          x: 380,
+          y: 200,
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2",
+          fromConnector: "top"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.connectors.description `String`
 
@@ -2501,19 +5200,107 @@ The connector name. The predefined names are:
 
 ### shapes.connectors.position `Function`
 
-The function that positions the connector. The function is passed a shape and shhould return `kendo.dataviz.diagram`. As a result, a point that holds the connector position appears.
+The function that positions the connector. The function is passed a shape as parameter and should return a `kendo.dataviz.diagram.Point` indicating where the connector should be placed.
+
+#### Example - placing connectors at a custom position
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          x: 100,
+          y: 100,
+          path: "m1,53.69333l17.5647,-17.56445l0,8.78235l23.15292,0l0,-26.34678l-8.78181,0l17.56417,-17.56444l17.5647,17.56444l-8.78238,0l0,26.34678l23.15297,0l0,-8.78235l17.56473,17.56445l-17.56473,17.56466l0,-8.78231l-63.87057,0l0,8.78231l-17.5647,-17.56466l0,0z",
+          connectors: [{
+            name: "Upstream",
+            position: function(shape) {
+              return shape._transformPoint(shape.bounds().top());
+            }
+          }, {
+            name: "SideLeft",
+            position: function(shape) {
+              var p = shape.bounds().left();
+              return shape._transformPoint(new kendo.dataviz.diagram.Point(p.x, p.y+27));
+            }
+          }, {
+            name: "SideRight",
+            position: function(shape) {
+              var p = shape.bounds().right();
+              return shape._transformPoint(new kendo.dataviz.diagram.Point(p.x, p.y + 27));
+            }
+          }]
+        }]
+      });
+    </script>
 
 ### shapes.connectors.width `Number` *(default: 8)*
 
-Defines the width of the shape connectors.
+Defines the width of the shape connectors.  See [shapes.connectors](/api/javascript/dataviz/ui/diagram/configuration/shapes.connectors) for an example.
 
 ### shapes.connectors.height `Number` *(default: 8)*
 
-Defines the height of the shape connectors.
+Defines the height of the shape connectors. See [shapes.connectors](/api/javascript/dataviz/ui/diagram/configuration/shapes.connectors) for an example.
 
 ### shapes.connectors.hover `Object`
 
 Defines the hover configuration of the shape connectors.
+
+#### Example - applying custom styling to a hovered connector
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          x: 20,
+          y: 40,
+          content: {
+            text: "Monday"
+          },
+          connectors: [
+            {
+              name: "top", 
+              hover: {
+                fill: {
+                  color: "pink"
+                },
+                stroke: {
+                  dashType: "dash",
+                  color: "blue",
+                  width: 2
+                }
+              },
+              width: 15,
+              height: 15
+            }, {name: "right", width: 10, height: 10}]
+        }, {
+          id: "2",
+          x: 200,
+          y: 40,
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          x: 380,
+          y: 200,
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2",
+          fromConnector: "top"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.connectors.hover.fill `String|Object`
 
@@ -2539,6 +5326,16 @@ Defines the hover stroke color.
 
 The dash type of the hover stroke.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### shapes.connectors.hover.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke on hover.
@@ -2546,6 +5343,57 @@ Defines the thickness or width of the shape connectors stroke on hover.
 ### shapes.connectors.fill `String|Object`
 
 Defines the fill options of the shape connectors.
+
+#### Example - applying a custom fill color to a shape connector
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          x: 20,
+          y: 40,
+          content: {
+            text: "Monday"
+          },
+          connectors: [
+            {
+              name: "top", 
+              fill: {
+                color: "red",
+                opacity: 0.5
+              },
+              width: 15,
+              height: 15
+            }, {name: "right", width: 10, height: 10}]
+        }, {
+          id: "2",
+          x: 200,
+          y: 40,
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          x: 380,
+          y: 200,
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2",
+          fromConnector: "top"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.connectors.fill.color `String`
 
@@ -2559,13 +5407,74 @@ Defines the fill opacity of the shape connectors.
 
 Defines the stroke options of the shape connectors.
 
+#### Example - customizing the connectors stroke style
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          x: 20,
+          y: 40,
+          content: {
+            text: "Monday"
+          },
+          connectors: [
+            {
+              name: "top", 
+              stroke: {
+                color: "red",
+                width: 3
+              },
+              width: 15,
+              height: 15
+            }, {name: "right", width: 10, height: 10}]
+        }, {
+          id: "2",
+          x: 200,
+          y: 40,
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          x: 380,
+          y: 200,
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2",
+          fromConnector: "top"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.connectors.stroke.color `String` *(default: "Black")*
 
 Defines the stroke color.
 
 ### shapes.connectors.stroke.dashType `String`
 
-The stroke dash type.
+The connector stroke dash type.
+
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
 
 ### shapes.connectors.stroke.width `Number` *(default: 1)*
 
@@ -2573,7 +5482,67 @@ Defines the thickness or width of the shape connectors stroke.
 
 ### shapes.connectorDefaults `Object`
 
-Defines default options for the shape connectors.
+Defines default options for all connectors belonging to a given shape.
+
+#### Example - customizing the connectors of a Diagram shape
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          x: 20,
+          y: 40,
+          content: {
+            text: "Monday"
+          },
+          connectorDefaults: {
+            width: 10,
+            height: 10,
+            fill: {
+              color: "blue",
+              opacity: 0.5
+            },
+            stroke: {
+              width: 2,
+              color: "lightgreen"
+            },
+            hover: {
+              fill: {
+                color: "yellow"
+              },
+              stroke: {
+                color: "lightgreen"
+              }
+            }
+          }
+        }, {
+          id: "2",
+          x: 200,
+          y: 40,
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          x: 380,
+          y: 200,
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.connectorDefaults.width `Number` *(default: 8)*
 
@@ -2611,6 +5580,16 @@ Defines the hover stroke color.
 
 The dash type of the hover stroke.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### shapes.connectorDefaults.hover.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke on hover.
@@ -2639,6 +5618,16 @@ Defines the stroke color.
 
 The dash type of the stroke.
 
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
 ### shapes.connectorDefaults.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke.
@@ -2647,9 +5636,55 @@ Defines the thickness or width of the shape connectors stroke.
 
 Defines the shapes content settings.
 
+#### Example - customizing the shape content
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday",
+            align: "top left",
+            color: "yellow",
+            fontFamily: "Tahoma",
+            fontSize: 16,
+            fontStyle: "italic",
+            fontWeight: 200
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.content.align `String`
 
-The alignment of the text inside the shape.
+The alignment of the text inside the shape. You can do combinations between "top", "middle" and "bottom" for vertical align and "right", "center" and "left" for horizontal align. For example, "top right", "middle left", "bottom center", and so on.
 
 ### shapes.content.color `String`
 
@@ -2673,15 +5708,92 @@ The font weight of the shape content text.
 
 ### shapes.content.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the labels.
+The template which renders the labels.
 
-The fields which can be used in the template are:
+#### Example - using a template for shape content
 
-* dataItem - The data item if a field is specified
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            template: "Day 1: " + kendo.toString(new Date(), "dd MMM yyyy")
+          },
+          width: 200,
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Day 2"
+          },
+          x: 450,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Day 3"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.content.text `String`
 
 The text displayed in the shape.
+
+#### Example - setting shapes text
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Day 1"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Day 2"
+          },
+          x: 450,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Day 3"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.editable `Boolean|Object` *(default: true)*
 
@@ -2689,7 +5801,50 @@ Defines the shape editable options.
 
 ### shapes.editable.connect `Boolean` *(default: true)*
 
-Specifies whether the connectors should appear on hover.
+Specifies whether the connectors should appear on hover. If set to false, the user will not be able to create new connections from this shape to other shapes. Also, it will not be possible to change the connector of an existing connection between this and another shape.
+
+#### Example - disabling connectors for a shape in the Diagram
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Day 1"
+          },
+          editable: {
+            connect: false
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Day 2"
+          },
+          x: 450,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Day 3"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.editable.tools `Array`
 
@@ -2699,6 +5854,94 @@ Specifies the toolbar tools. Provides all options supported for [`toolbar.items`
 * "delete" - The selected items can be deleted.
 * "rotateClockwise" - The selected items can be rotated clockwise. The default rotation value is 90 degree.
 * "rotateAnticlockwise" - The selected items can be rotated anticlockwise. The default rotation value is 90 degree.
+
+#### Example - customizing the list of tools per shape
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          editable: {
+            tools: [{
+              name: "rotateClockwise"
+            }, {
+              name: "rotateAnticlockwise"
+            }]
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          editable: {
+            tools: [{
+              name: "delete"
+            }, {
+              name: "rotateClockwise"
+            }, {
+              name: "rotateAnticlockwise"
+            }]
+          },
+          x: 250,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
+#### Example - showing a custom tool for a shape
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [
+          {
+            editable: {
+              tools: [{
+                type: "button",
+                text: "Set Content",
+                click: function() {
+                  var selected = $("#diagram").getKendoDiagram().select();
+                  var content = $("#content").val();
+                  for (var idx = 0; idx < selected.length; idx++) {
+                    selected[idx].content(content);
+                  }
+                }
+              }, {
+                template: "<input id='content' class='k-textbox' value='Foo' />"
+              }]
+            },
+            content: {
+              text: "Shape 1"
+            },
+            x: 100,
+            y: 100
+          }
+        ]
+      });
+    </script>
 
 ### shapes.editable.tools.name `String`
 
@@ -2710,7 +5953,52 @@ The step of the `rotateClockwise` and `rotateAnticlockwise` tools.
 
 ### shapes.fill `String|Object`
 
-Defines the fill options of the shape.
+Defines the background fill options of the shape.
+
+#### Example - customizing shapes background
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          fill: {
+            color: "lime"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          fill: {
+            color: "blue",
+            opacity: 0.5
+          }
+        }, {
+          id: "3",
+          fill: {
+            opacity: 0.5
+          },
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.fill.color `String`
 
@@ -2723,6 +6011,59 @@ Defines the fill opacity of the shape.
 ### shapes.fill.gradient `Object`
 
 Defines the gradient fill of the shape.
+
+#### Example - applying a gradient background to a shape
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          fill: {
+            gradient: {
+              type: "radial",
+              center: [0.5, 0.5],
+              radius: 0.9,
+              stops: [
+                {
+                  offset: 0,
+                  color: "lightblue",
+                  opacity: 0.5
+                }, {
+                  offset: 0.5,
+                  color: "purple",
+                  opacity: 0.8
+                }
+              ]
+            }
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.fill.gradient.type `String` *(default: "linear")*
 The type of the gradient. The supported values are:
@@ -2777,9 +6118,85 @@ Ranges from `0` (completely transparent) to `1` (completely opaque).
 
 Defines the height of the shape when added to the Diagram.
 
+#### Example - setting explicit shape height
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          height: 50
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.hover `Object`
 
 Defines the `hover` configuration.
+
+#### Example - applying a custom shape color on hover
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          hover: {
+            fill: {
+              color: "gold"
+            }
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.hover.fill `String|Object`
 
@@ -2795,23 +6212,134 @@ Defines the `hover` fill opacity.
 
 ### shapes.id `String`
 
-The unique identifier for a Shape.
+The unique identifier for a Shape. The `id` value is used to identify shapes in connection configurations. The connection [`to`](/api/javascript/dataviz/ui/diagram/configuration/connections.to) and [`from`](/api/javascript/dataviz/ui/diagram/configuration/connections.from#connections.from) properties usually point to shape id values.
 
 ### shapes.minHeight `Number` *(default: 20)*
 
 Defines the minimum height the shape should have, that is, it cannot be resized to a value smaller than the given one.
 
+#### Example - applying shape minimum and maximum height
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          minHeight: 65,
+          minWidth: 65
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.minWidth `Number` *(default: 20)*
 
-Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one.
+Defines the minimum width the shape should have, that is, it cannot be resized to a value smaller than the given one. See example at [shapes.minHeight](/api/javascript/dataviz/ui/diagram/configuration/shapes.minheight).
 
 ### shapes.path `String`
 
 The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
 
+#### Example - drawing an octagonal shape
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          path: "m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.rotation `Object`
 
-The function that positions the connector.
+Specifies a rotation angle for the shape.
+
+#### Example - rotating a Diagram shape at 45 degrees
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          rotation: {
+            angle: 45
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.rotation.angle `Number` *(default: 0)*
 
@@ -2821,9 +6349,83 @@ The rotation angle.
 
 The source of the shape image. Applicable when the type is set to `"image"`.
 
+#### Example - creating an image shape
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Step 1"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Step 2"
+          }
+        }, {
+          id: "3",
+          type: "image",
+          source: "https://demos.telerik.com/kendo-ui/html5-dashboard-sample-app/Content/Products/4.jpg"
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.stroke `Object`
 
-Defines the stroke configuration.
+Defines the shape border stroke configuration.
+
+#### Example - customizing the shape border
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          stroke: {
+            color: "yellow",
+            width: 3,
+            dashType: "dashDot"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.stroke.color `String`
 
@@ -2855,21 +6457,183 @@ Specifies the type of the Shape using any of the built-in shape type.
 * "circle" - A circle/ellipse
 * "image" - An image
 
+#### Example - customizing shape types
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Step 1"
+          }
+        }, {
+          id: "2",
+          content: {
+            text: "Step 2"
+          },
+          type: "circle"
+        }, {
+          id: "3",
+          type: "image",
+          source: "https://demos.telerik.com/kendo-ui/html5-dashboard-sample-app/Content/Products/4.jpg"
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.visual `Function`
 
 A function returning a visual element to render for this shape. For more information, refer to [`visual`](/api/javascript/dataviz/ui/diagram#configuration-shapeDefaults.visual).
+
+#### Example - applying a custom visual to a single shape
+
+    <div id="diagram"></div>
+    <script>
+      var diagram = kendo.dataviz.diagram;
+      function getVisual(data) {
+        var g = new diagram.Group({
+          autoSize: true
+        });
+        var r = new diagram.Circle({
+          width : 100,
+          height: 60,
+          fill: "LimeGreen"
+        });
+        g.append(r);
+
+        return g;
+      };
+
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          visual: getVisual
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.width `Number` *(default: 100)*
 
 Defines the width of the shape when added to the Diagram.
 
+#### Example - setting explicit shape width
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        layout: "tree",
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          width: 150
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          }
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          }
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
+
 ### shapes.x `Number` *(default: 0)*
 
-Defines the x-coordinate of the shape when added to the Diagram.
+Defines the x-coordinate of the shape when added to the Diagram. Does not take effect if the Diagram is using a pre-defined layout.
+
+#### Example - declaring shapes with custom positions
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 350,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### shapes.y `Number` *(default: 0)*
 
-Defines the y-coordinate of the shape when added to the Diagram.
+Defines the y-coordinate of the shape when added to the Diagram. Does not take effect if the Diagram is using a pre-defined layout. You can see an example at [shapes.x](/api/javascript/dataviz/ui/diagram/configuration/shapes.x)
 
 ### template `String|Function` *(default: "")*
 
@@ -2877,36 +6641,168 @@ The [`template`](/api/javascript/kendo/methods/template) which renders the conte
 
 ### theme `String`
 
-The diagram theme. This can be either a built-in theme or "sass". When set to "sass" the diagram will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+The diagram theme. This can be either a built-in theme or `"sass"`. When set to "sass" the diagram will read the variables from a [Sass-based theme]({% slug sassbasedthemes_kendoui %}).
 
 The supported values are:
-* "sass" - special value, see notes
+* "sass" - works only when a custom Sass theme is loaded in the page
 * "black"
 * "blueopal"
 * "bootstrap"
+* "bootstrap-v4" - works only with the Bootstrap-v4 Sass theme loaded in the page
 * "default"
+* "default-v2" - works only with the Default-v2 Sass theme loaded in the page
+* "fiori"
+* "flat"
 * "highcontrast"
+* "material"
+* "materialBlack"
 * "metro"
 * "metroblack"
 * "moonlight"
+* "nova"
+* "office365"
 * "silver"
 * "uniform"
 
 ### zoom `Number` *(default: 1)*
 
-The zoom level in percentages.
+The default zoom level of the Diagram in percentages.
+
+#### Example - showing the Diagram zoomed in by default
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        zoom: 1.5,
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 350,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### zoomMax `Number` *(default: 2)*
 
-The zoom max level in percentages.
+The maximum zoom level in percentages. The user will not be allowed to zoom in past this level.
+
+#### Example - applying a Diagram zoom level range
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        zoomMax: 1.5,
+        zoomMin: 0.5,
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 350,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ### zoomMin `Number` *(default: 0.1)*
 
-The zoom min level in percentages.
+The minimum zoom level in percentages. The user will not be allowed to zoom out past this level. You can see an example in [zoomMax](/api/javascript/dataviz/ui/diagram/configuration/zoommin).
 
 ### zoomRate `Number` *(default: 0.1)*
 
 The zoom step when using the mouse-wheel to zoom in or out.
+
+#### Example - increasing the Diagram zoom step
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        zoomRate: 0.5,
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 350,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+    </script>
 
 ## Fields
 
@@ -2914,17 +6810,231 @@ The zoom step when using the mouse-wheel to zoom in or out.
 
 An array holding the Diagram connections.
 
+#### Example - using connections field to access a connection by index
+
+    <button id="selectButton">Select Second Connection</button>
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        zoomRate: 0.5,
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 350,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+
+      $("#selectButton").on("click", function(){
+        var diagram = $("#diagram").getKendoDiagram();
+        var secondConnection = diagram.connections[1];
+
+        secondConnection.select(true);
+      });
+    </script>
+
 ### connectionsDataSource `kendo.data.DataSource`
 
-The connections data source, if any.
+Returns the connections DataSource if such is assigned to the Diagram.
+
+#### Example - updating a value of an item in the connections DataSource
+
+    <button id="updateBtn">Update connection</button>
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            {id: 1, name:"One"},
+            {id: 2, name:"Two"},
+            {id: 3, name:"Four"},
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        connectionsDataSource:[
+          {from: 1, to: 2, label: "plus one"},
+          {from: 2, to: 3, label: "plus three"}
+        ],
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        shapeDefaults: {
+          type: "circle",
+          content: {
+            template: "#= name #"
+          },
+          width: 70,
+          height: 70,
+          hover: {
+            fill: "Orange"
+          }
+        },
+        connectionDefaults: {
+          stroke: {
+            color: "#979797",
+            width: 1
+          },
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd",
+          content:{
+            template:"#= label#"
+          }
+        }
+      });
+
+      $("#updateBtn").on("click", function(){
+        var diagram = $("#diagram").getKendoDiagram();
+
+        diagram.connectionsDataSource.at(0).set("label", "+ 1");
+      });
+    </script>
 
 ### dataSource `kendo.data.DataSource`
 
-The shapes data source, if any.
+Returns the shapes DataSource if such is assigned to the Diagram.
+
+#### Example - updating a value of an item in the shapes DataSource
+
+    <button id="updateBtn">Update shape</button>
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            {id: 1, name:"One"},
+            {id: 2, name:"Two"},
+            {id: 3, name:"Four"},
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        connectionsDataSource:[
+          {from: 1, to: 2, label: "plus one"},
+          {from: 2, to: 3, label: "plus three"}
+        ],
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        shapeDefaults: {
+          type: "circle",
+          content: {
+            template: "#= name #"
+          },
+          width: 70,
+          height: 70,
+          hover: {
+            fill: "Orange"
+          }
+        },
+        connectionDefaults: {
+          stroke: {
+            color: "#979797",
+            width: 1
+          },
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd",
+          content:{
+            template:"#= label#"
+          }
+        }
+      });
+
+      $("#updateBtn").on("click", function(){
+        var diagram = $("#diagram").getKendoDiagram();
+
+        diagram.dataSource.at(0).set("name", "ONE");
+      });
+    </script>
 
 ### shapes `Array`
 
-An array holding the diagram shapes.
+An array holding the Diagram shapes.
+
+#### Example - using shapes field to access a shape by index
+
+    <button id="selectButton">Select Second Shape</button>
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        zoomRate: 0.5,
+        shapes: [{
+          id: "1",
+          content: {
+            text: "Monday"
+          },
+          x: 100,
+          y: 20
+        }, {
+          id: "2",
+          content: {
+            text: "Tuesday"
+          },
+          x: 350,
+          y: 20
+        }, {
+          id: "3",
+          content: {
+            text: "Wednesday"
+          },
+          x: 250,
+          y: 200
+        }],
+        connections: [{
+          from: "1",
+          to: "2"
+        },{
+          from: "2",
+          to: "3"
+        }],
+        connectionDefaults: {
+          endCap: "ArrowEnd"
+        }
+      });
+
+      $("#selectButton").on("click", function(){
+        var diagram = $("#diagram").getKendoDiagram();
+        var secondShape = diagram.shapes[1];
+
+        secondShape.select(true);
+      });
+    </script>
 
 ## Methods
 
