@@ -1783,12 +1783,12 @@ Speifies the connection type, which defines the way it routes.
 
 The routing of a connection is the way intermediate points of a connection define a route. A route is usually defined on the basis of constraints or behaviors. Currently there are two routing mechanisms for Diagram connections:
 
-* polyline route - connects the defined intermediate points, see [connections.points](api/javascript/dataviz/ui/diagram/configuration/connections.points).
+* polyline route - connects the defined intermediate points, see [connections.points](/api/javascript/dataviz/ui/diagram/configuration/connections.points).
 * cascading route - a simple rectangular route that creates a cascading path between the two ends of a connection, ignoring given connection points. The cascading type is useful when using tree layout and hierarchies. The routed connection will in this case enhance the representation of the hierarchy, reproducing a classic organization diagram.
 
 The available values for the `type` property are:
 
-* "polyline" - connects the defined intermediate points. See [connections.points](api/javascript/dataviz/ui/diagram/configuration/connections.points).
+* "polyline" - connects the defined intermediate points. See [connections.points](/api/javascript/dataviz/ui/diagram/configuration/connections.points).
 * "cascading" - discards given points and defines a cascading path between the endpoints.
 
 #### Example - using a polyline connection with intermediate points

@@ -9,7 +9,7 @@ position: 4
 
 # Include Client Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core project
 
-This article demonstrates how to include the client-side resurces in ASP.NET Core project and Visual Studio 2017.
+This article demonstrates how to include the client-side resurces in ASP.NET Core project.
 
 
 To include the Kendo UI client-side resources you can use either of the following approaches:

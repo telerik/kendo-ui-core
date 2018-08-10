@@ -289,6 +289,10 @@ defaults:
     values:
         product: "aspnet-core"
 
+    scope:
+        path: "api"
+    values:
+        editable: false
 
 type_links:
     "kendo.Class": "/api/javascript/class"
