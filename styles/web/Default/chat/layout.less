@@ -22,6 +22,10 @@
 @chat-message-box-padding-x: @chat-padding-x;
 @chat-message-box-padding-y: 10px;
 
+@chat-toolbar-padding-x: @chat-padding-x;
+@chat-toolbar-padding-y: 10px;
+@chat-toolbar-spacing: 20px;
+
 @chat-quick-reply-padding-x: 12px;
 @chat-quick-reply-padding-y: 8px;
 @chat-quick-reply-spacing: 8px;
@@ -399,6 +403,58 @@
             opacity: 1;
         }
     }
+
+}
+
+
+
+.k-chat .k-toolbar-box {
+    padding: @chat-toolbar-padding-y @chat-toolbar-padding-x;
+    width: 100%;
+    border-width: 1px 0 0;
+    border-style: solid;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    flex: 0 0 auto;
+
+    .k-button-list {
+        // margin-bottom: -20px;
+        // padding-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        // overflow-x: auto;
+        scroll-behavior: smooth;
+
+        .k-button + .k-button {
+            margin-left: @chat-toolbar-spacing;
+            flex-shrink: 0;
+        }
+    }
+
+
+    .k-scroll-button {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .k-scroll-button-left {
+        left: 0;
+    }
+    .k-scroll-button-right {
+        right: 0;
+    }
+
+    .k-button {
+        border-width: 0;
+        color: inherit;
+        background: none;
+        flex-shrink: 0;
+    }
+
 
 }
 

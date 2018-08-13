@@ -17,7 +17,7 @@
 
     // Bubbles
     .k-bubble {
-        .box-shadow( 0 1px 2px rgba( 0, 0, 0, .08) );
+        // .box-shadow( 0 1px 2px rgba( 0, 0, 0, .08) );
         border-color: @chat-bubble-border;
         color: @chat-bubble-text;
         background-color: @chat-bubble-bg;
@@ -25,10 +25,10 @@
         order: -1;
     }
     .k-bubble:hover {
-        .box-shadow( 0 1px 2px rgba( 0, 0, 0, .16) );
+        // .box-shadow( 0 1px 2px rgba( 0, 0, 0, .16) );
     }
     .k-state-selected .k-bubble {
-        .box-shadow( 0 3px 10px rgba( 0, 0, 0, .16) );
+        // .box-shadow( 0 3px 10px rgba( 0, 0, 0, .16) );
     }
 
     .k-alt .k-bubble {
@@ -66,6 +66,27 @@
     }
     .k-message-box .k-button:hover {
         color: @accent;
+    }
+
+
+    // Toolbar
+    .k-toolbar-box {
+        border-color: inherit;
+        color: @toolbar-text;
+        background-color: @toolbar-bg;
+
+        .k-button:hover {
+            color: @accent;
+            background: none;
+        }
+
+        .k-scroll-button {
+            background-color: @chat-bg;
+            box-shadow: 0 0 20px 5px @chat-bg;
+        }
+        .k-scroll-button:hover {
+            background-color: @chat-bg;
+        }
     }
 
 }

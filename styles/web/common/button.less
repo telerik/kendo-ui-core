@@ -110,46 +110,27 @@ input[type="reset"].k-button-expand {
 
 
 
-// Bare button
+// Flat button and bare
+.k-button.k-flat,
 .k-button.k-bare {
-    border-color: transparent !important;
-    color: inherit !important;
-    background: none !important;
-    box-shadow: none !important;
-    opacity: .7;
+    border-color: transparent !important; // sass-lint:disable-line no-important
+    color: inherit;
+    background: none !important; // sass-lint:disable-line no-important
+    box-shadow: none !important; // sass-lint:disable-line no-important
+    transition: color .2s ease-in-out;
 
     &:hover,
     &.k-state-hover,
     &:active,
     &.k-state-active,
-    &.k-state-active:hover {
+    &:hover:active,
+    &:hover.k-state-active {
         color: inherit;
     }
 
-    &:focus,
-    .k-state-focused {
-        opacity: .8;
+    &::before {
+        display: block;
     }
-
-    &:hover,
-    &.k-state-hover,
-    &:active,
-    &.k-state-active {
-        opacity: 1;
-    }
-
-    // Icon
-    .k-icon {
-        overflow: visible;
-    }
-
-    &:focus,
-    .k-state-focused {
-        .k-icon {
-            text-shadow: 0 0 3px currentColor;
-        }
-    }
-
 }
 
 

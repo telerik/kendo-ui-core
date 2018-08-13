@@ -75,6 +75,354 @@ Sets the name of the chat user.
     }).data("kendoChat");
     </script>
 
+### toolbar `Object`
+
+Configures the Kedno UI Chat toolbar.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.animation `Boolean|Object`
+
+Configures the toolbar toggle animation. If disabled animation will not play.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: false,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: {
+                collapse: {
+                    effects: "expandVertical fadeIn",
+                    duration: 500
+                },
+                expand: {
+                    effects: "expandVertical fadeIn",
+                    duration: 500
+                }
+            },
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.animation.collapse `Object`
+
+Configures the toolbar collapse animation.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: {
+                collapse: {
+                    effects: "expandVertical fadeIn",
+                    duration: 500
+                }
+            },
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.animation.collapse.effects `String`
+
+Configures the effects of the toolbar collapse animation.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: {
+                collapse: {
+                    effects: "expandVertical fadeIn"
+                }
+            },
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.animation.collapse.duration `Number`
+
+Configures the duration (in miliseconds) of the toolbar collapse animation.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: {
+                collapse: {
+                    duration: 500
+                }
+            },
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.animation.expand `Object`
+
+Configures the expand animation of the toolbar;
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: {
+                expand: {
+                    effects: "expandVertical fadeIn",
+                    duration: 500
+                }
+            },
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.animation.expand.effects `String`
+
+Configures the effects of the expand animation.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: {
+                expand: {
+                    effects: "expandVertical fadeIn"
+                }
+            },
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.animation.expand.duration `Number`
+
+Configures the duration of the expand animation.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            animation: {
+                expand: {
+                    duration: 500
+                }
+            },
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+
+### toolbar.buttons `Array`
+
+Defines the collection of buttons to be rendered. When using only an array of strings, the string added will define the **name** option of the button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonB", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            buttons: [ "ButtonA", "ButtonB" ]
+        }
+    });
+    </script>
+
+### toolbar.buttons.name `String`
+
+Defines the name of the button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonB", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.buttons.text `String`
+
+Defines the text to be rendered in the button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            buttons: [
+                { name: "ButtonA", text: "ButtonA" },
+                { name: "ButtonB", text: "ButtonB" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.buttons.iconClass `String`
+
+Defines the icon classes of the span rendered in the button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            buttons: [
+                { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                { name: "ButtonB", iconClass: "k-icon k-i-gear" }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.buttons.attr `Object`
+
+Defines an object that is applied to the button element as attributes.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            buttons: [
+                { name: "ButtonA", attr: { "class": "myClass" } },
+                { name: "ButtonB", attr: { "class": "myClass" } }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.scrollable `Boolean`
+
+Enables or disables the scrollable behavior of the toolbar.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            scrollable: true,
+            buttons: [
+                { name: "ButtonA", attr: { "class": "myClass" } },
+                { name: "ButtonB", attr: { "class": "myClass" } }
+            ]
+        }
+    });
+    </script>
+
+### toolbar.toggleable `Boolean`
+
+Enables or disables the toggleable behavior of the toolbar.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolbar: {
+            toggleable: true,
+            buttons: [
+                { name: "ButtonA", attr: { "class": "myClass" } },
+                { name: "ButtonB", attr: { "class": "myClass" } }
+            ]
+        }
+    });
+    </script>
+
 ## Methods
 
 ### getUser
@@ -294,6 +642,35 @@ The value of the suggested action. This is the value used as input when a sugges
         }]);
     </script>
 
+### toggleToolbar
+
+Toggles the Chat toolbar.
+
+#### Parameters
+
+##### skipEffects `Boolean`
+
+If true, animation will not play.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+        $("#chat").kendoChat({
+            toolbar: {
+                buttons: [
+                    { name: "ButtonA", iconClass: "k-icon k-i-gear" },
+                    { name: "ButtonA", iconClass: "k-icon k-i-gear" }
+                ]
+            }
+        });
+
+        var chat = $("#chat").data("kendoChat");
+
+        chat.toggleToolbar(true);
+        chat.toggleToolbar();
+    </script>
+
 ## Events
 
 ### actionClick
@@ -482,7 +859,7 @@ The text value that was entered in the message box
 
 ### typingEnd
 
-Fired when the user clears the chat message box, signaling that he stopped typing. The event is also triggered when the user submits the currenlty typed in message. 
+Fired when the user clears the chat message box, signaling that he stopped typing. The event is also triggered when the user submits the currenlty typed in message.
 
 #### Event Data
 
@@ -516,7 +893,7 @@ The widget instance which fired the event.
 
 ### typingStart
 
-Fired when the user starts typing in the chat message box. The event is fired only once, and not upon each keystroke. 
+Fired when the user starts typing in the chat message box. The event is fired only once, and not upon each keystroke.
 
 #### Event Data
 
@@ -547,3 +924,52 @@ The widget instance which fired the event.
     var chat = $("#chat").data("kendoChat");
     chat.bind("typingStart", chat_typingStart);
     </script>
+
+### toolClick
+
+Fired when a button from the toolbar is clicked.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Chat`
+
+The widget instance which fired the event.
+
+##### e.name `String`
+
+The name of the button clicked.
+
+##### e.button `Element`
+
+The DOM elemement of the button clicked.
+
+##### e.messageBox `Element`
+
+The input element of the messageBox.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        toolClick: function(ev){
+        switch (ev.name) {
+            case "Hello":
+                ev.sender.postMessage("Hello (sent from button)");
+                break;
+            case "Smile":
+                var input = $(ev.messageBox);
+                input.val(input.val() + " :)");
+                break;
+        }
+        },
+        toolbar: {
+            buttons: [
+                { name: "Hello", text: "Hello" },
+                { name: "Smile", text: "Smile" }
+            ]
+        }
+    });
+    </script>
+
+
