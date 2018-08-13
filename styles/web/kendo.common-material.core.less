@@ -12,6 +12,20 @@
 @grid-header-padding: .429em .2em .429em 1em;
 @icon-positioning: "material";
 
+@window-border-width: 0;
+@window-border-style: solid;
+
+@window-titlebar-padding-x: 16px;
+@window-titlebar-padding-y: 8px;
+@window-titlebar-border-width: 0;
+@window-titlebar-border-style: none;
+
+@window-title-font-size: 1.2em;
+@window-title-line-height: 1.25;
+
+@window-inner-padding-x: @window-titlebar-padding-x;
+@window-inner-padding-y: @window-inner-padding-x;
+
 @import "common/core.less";
 
 @calendar-cell-width: ((38px / 14px) * 1em);
@@ -473,29 +487,6 @@
 span.k-tooltip
 {
     padding: 9px 17px;
-}
-
-.k-block > .k-header,
-.k-window-titlebar {
-    padding: 0.5em 0 0.571em;
-}
-
-.k-window-titlebar .k-window-actions {
-    right: 0.929em;
-    padding-top: .45em;
-}
-
-div.k-window {
-    border-width: 0;
-}
-
-.k-window-title {
-    right: 1.143em;
-    left: 1.143em;
-}
-
-div.k-window-content {
-    padding: 1.333em;
 }
 
 .k-file {

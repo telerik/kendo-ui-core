@@ -45,6 +45,7 @@ var __meta__ = { // jshint ignore:line
         pointers = kendo.support.pointers,
         msPointers = kendo.support.msPointers,
         allPointers = msPointers || pointers,
+        TOUCHSTART = kendo.support.touch ? "touchstart" : "",
         MOUSEENTER = pointers ? "pointerenter" : (msPointers ? "MSPointerEnter" : "mouseenter"),
         MOUSELEAVE = pointers ? "pointerleave" : (msPointers ? "MSPointerLeave" : "mouseleave"),
         MOUSEWHEEL = "DOMMouseScroll" + NS + " mousewheel" + NS,
@@ -596,7 +597,7 @@ var __meta__ = { // jshint ignore:line
                    .on(MOUSEENTER + NS, availableItemsSelector, proxy(that._mouseenter, that))
                    .on(MOUSELEAVE + NS, availableItemsSelector, proxy(that._mouseleave, that))
                    .on(MOUSEDOWN + NS, availableItemsSelector, proxy(that._mousedown, that))
-                   .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS + " " +
+                   .on(TOUCHSTART + NS + " " + MOUSEENTER + NS + " " + MOUSELEAVE + NS + " " +
                        MOUSEDOWN + NS + " " + CLICK + NS, linkSelector, proxy(that._toggleHover, that));
 
             element.on("keydown" + NS, proxy(that._keydown, that))
@@ -1329,7 +1330,7 @@ var __meta__ = { // jshint ignore:line
             var target = $(kendo.eventTarget(e) || e.target).closest(allItemsSelector),
                 isEnter = e.type == MOUSEENTER || MOUSEDOWN.indexOf(e.type) !== -1;
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "click");
+                target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "pointerenter" || e.type == TOUCHSTART);
             }
 
             this._removeHoverItem();

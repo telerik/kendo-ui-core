@@ -1,106 +1,94 @@
 // Window
-
-@window-titlebar-size: 2em;
-
-div.k-window
-{
+.k-window {
+    padding: 0;
+    border-width: @window-border-width;
+    border-style: @window-border-style;
     display: inline-block;
     position: absolute;
     z-index: 10001;
-    border-style: solid;
-    border-width: 1px;
-    padding-top: @window-titlebar-size;
+
+    .k-overlay {
+        position: absolute;
+        opacity: 0;
+    }
 }
 
-.k-block > .k-header,
-.k-window-titlebar
-{
+
+// Title bar
+.k-window-titlebar {
+    padding: @window-titlebar-padding-y @window-titlebar-padding-x;
+    border-width: @window-titlebar-border-width;
+    border-style: @window-titlebar-border-style;
     width: 100%;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    margin-top: (-@window-titlebar-size);
-    padding: .4em 0;
-    font-size: 1.2em;
+    box-sizing: border-box;
     white-space: nowrap;
     min-height: 16px; // icon size
 }
 
-.k-block > .k-header
-{
-    position: relative;
-    margin: -2px 0 10px -2px;
-    padding: .3em 2px;
-}
 
-.k-window-title
-{
-    padding: 0 .44em;
+// Title bar title text
+.k-window-title {
+    margin: -.15em 0;
+    font-size: @window-title-font-size;
+    line-height: @window-title-line-height;
+    text-overflow: ellipsis;
     overflow: hidden;
     cursor: default;
-    text-overflow: ellipsis;
 }
 
-.k-window-title .k-image
-{
-    margin: 0 5px 0 0;
-    vertical-align: middle;
+
+// Title bar actions
+.k-window-titlebar .k-window-actions {
+    // margin: -.25em 0;
+    position: absolute;
+    top: (@window-titlebar-padding-y / 2);
+    right: (@window-titlebar-padding-x / 2);
+}
+.k-window-titlebar .k-window-action {
+    padding: 2px;
+    width: 20px;
+    height: 20px;
+    border-width: 0;
+    box-sizing: content-box;
 }
 
-div.k-window-titleless
-{
-    padding-top: 0;
-}
 
-div.k-window-content
-{
-    position: relative;
+// Content
+.k-window-content,
+.k-prompt-container {
+    padding: @window-inner-padding-y @window-inner-padding-x;
     height: 100%;
-    padding: .58em;
     overflow: auto;
+    position: relative;
     outline: 0;
 }
-
-div.k-window-iframecontent
-{
-    padding: 0;
-    overflow: visible;
+.k-window-content + .k-prompt-container {
+    margin-top: -(@window-inner-padding-y / 2);
 }
 
-.k-window-content > .km-scroll-container
-{
+.k-window-iframecontent {
+    padding: 0;
+    overflow: visible;
+
+    .k-content-frame {
+        vertical-align: top;
+        border: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.k-window-content > .km-scroll-container {
     height: 100%;
 }
 
-.k-window-titlebar .k-window-actions
-{
-    position: absolute;
-    top: 0;
-    right: .2em;
-    top: .2em;
-    white-space: nowrap;
-}
 
-.k-window-titlebar .k-window-action
-{
-    width: 22px; // 16 (icon) + 2 * 2 (padding) + 2 * 1 (border)
-    height: 22px;
-    padding: 2px;
-}
-
-.k-window-action .k-icon
-{
-    margin: 0;
-    vertical-align: top;
-}
-
-.k-window > .k-resize-handle
-{
+.k-window > .k-resize-handle {
     position: absolute;
     z-index: 1;
     background-color: #fff;
     font-size: 0;
     line-height: 6px;
-    filter: alpha(opacity=0);
     opacity: 0;
     zoom: 1;
 }
@@ -114,8 +102,7 @@ div.k-window-iframecontent
 .k-resize-ne { top: -3px; right: -3px; width: 6px; height: 6px; cursor: ne-resize; }
 .k-resize-nw { top: -3px; left: -3px; width: 6px; height: 6px; cursor: nw-resize; }
 
-.k-overlay
-{
+.k-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -123,47 +110,13 @@ div.k-window-iframecontent
     width: 100%;
     height: 100%;
     background-color: #000;
-    filter: alpha(opacity=50);
     opacity: .5;
     -webkit-backface-visibility: hidden;
 }
 
-.k-window .k-overlay
-{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    filter: alpha(opacity=0);
-    opacity: 0;
-}
 
-
-.k-action-buttons {
-    clear: both;
-    text-align: right;
+.k-window > .k-action-buttons,
+.k-window-content > .k-action-buttons {
     border-width: 1px 0 0;
     border-style: solid;
-    position: relative;
-    padding: .6em;
-    margin: 0 -1em -1em;
-
-    .k-button {
-        display: inline-block;
-        margin: 0 6px 0 0;
-        min-width: 75px;
-
-        &:last-child {
-            margin-right: 1em;
-        }
-
-        &.k-left {
-            float: left;
-            margin: 0 0 0 1em;
-
-            & + .k-button {
-                margin-left: 6px;
-            }
-        }
-    }
 }

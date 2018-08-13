@@ -1002,7 +1002,7 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (key != keys.TAB && !that._move(e)) {
                that._search();
-            } else if (key === keys.ESC && !that.popup.visible()) {
+            } else if (key === keys.ESC && !that.popup.visible() && that.text()) {
                 that._clearValue();
             }
         },

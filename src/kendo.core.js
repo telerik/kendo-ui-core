@@ -1498,7 +1498,8 @@ function pad(number, digits, end) {
 
     function getDefaultFormats(culture) {
         var length = math.max(FORMATS_SEQUENCE.length, STANDARD_FORMATS.length);
-        var patterns = culture.calendar.patterns;
+        var calendar = culture.calendar || culture.calendars.standard;
+        var patterns = calendar.patterns;
         var cultureFormats, formatIdx, idx;
         var formats = [];
 
