@@ -94,6 +94,7 @@ To ensure the best performance of your project, make sure that you:
 * As of the Kendo UI 2015 Q3 release, Internet Explorer 7 is no longer supported.
 * Since Internet Explorer 11 was released in October 2013, look up the Kendo UI 2013 Q3 SP2 (2013.3.1324) release or a more recent Kendo UI version if you need support for it.
 * Browsers in beta stage are not supported.
+* Zoomed-in pages are not supported.
 * Zoomed-out pages are not supported. Different browsers handle sub-pixel calculations differently and zooming out the page may lead to unexpected behavior&mdash;for example, missing borders.
 * Exporting a zoomed-in or zoomed-out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.
