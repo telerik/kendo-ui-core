@@ -30,27 +30,25 @@ The Kendo UI TypeScript definitions are available on https://www.nuget.org/ as [
 
 ### As NPM Package
 
-Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped](http://definitelytyped.org/) project, they are also available as an [npm package](https://www.npmjs.com/package/@types/kendo-ui). To include them in your project you only need to run the following command:
-
-    npm install --save @types/kendo-ui
+Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped](http://definitelytyped.org/) project, they are also available as an [npm package](https://www.npmjs.com/package/@types/kendo-ui). To include them in your project, run the `npm install --save @types/kendo-ui` command.
 
 ## Features
 
-### Get Instance of Existing Widgets
+### Getting Instances of Existing Widgets
 
-![Get instance of existing Kendo UI widget](/images/get-instance.png)
+![Getting an instance of an existing Kendo UI widget](/images/get-instance.png)
 
-### Initialize and Configure Widgets
+### Initializing and Configuring Widgets
 
 ![All Kendo UI widgets](/images/init.png)
 
-### Initialize Kendo UI DataSource
+### Initializing the Kendo UI DataSource
 
-![Initialize a Kendo DataSource](/images/datasource.png)
+![Initializing a Kendo UI DataSource](/images/datasource.png)
 
-### Create Widgets via TypeScript Inheritance
+### Creating Widgets through TypeScript Inheritance
 
-The example below demonstrates how to inherit from an existing Kendo UI widget.
+The following example demonstrates how to inherit from an existing Kendo UI widget.
 
 ###### Example
 
@@ -99,7 +97,7 @@ The example below demonstrates how to inherit from an existing Kendo UI widget.
         myDatePicker.open();
     });
 
-### Use Kendo UI MVVM in TypeScript
+### Using Kendo UI MVVM in TypeScript
 
 When inheriting from `kendo.data.ObservableObject` in TypeScript you should call the `super.init` method to properly set up dependency tracking.
 

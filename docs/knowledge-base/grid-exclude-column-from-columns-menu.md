@@ -1,8 +1,8 @@
 ---
-title: Exclude Hidden Column from Columns Menu List
-description: An example demonstrating how to remove an item from the list of columns in the Column Menu
+title: Exclude Hidden Columns from Column Menu List in Grid
+description: An example on how to remove an item from the list of columns in the column menu of the Kendo UI Grid for jQuery.
 type: how-to
-page_title: Exclude Specific Column from List in Column Menu | Kendo UI Grid
+page_title: Exclude Specific Columns from Column List | Kendo UI Grid
 slug: grid-exclude-column-from-columns-menu
 tags: grid, exclude, hidden, column, columns, menu
 ticketid: 1158504
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,13 +24,11 @@ res_type: kb
 
 ## Description
 
-A grid has the ability to allow the user to hide or show columns via the Columns Menu; but what if I want to hide a column and not have it show up in the list to un-hide?
+A Grid allows the user to hide or show columns through its column menu but how can I hide a specific column and avoid showing it in the column menu list?
 
 ## Solution
 
-In order to implement the described functionality, take advantage of the [columnMenuInit event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) of the Kendo UI Grid API and remove the desired element(s) using jQuery.
-
-The following code snippet demonstrates how the event could be configured:
+Use the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the Grid and remove the desired element or elements by using jQuery.
 
 ```
 columnMenuInit(e){
@@ -37,7 +36,7 @@ columnMenuInit(e){
 }
 ```
 
-Sample demonstrating the implementation:
+The following example demonstrates the full implementation of the suggested approach.
 
 ```html
 <div id="grid"></div>
@@ -94,6 +93,6 @@ Sample demonstrating the implementation:
 
 ## See Also
 
-* [columnMenuInit event API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit)
-* [How to Change the Column Names inside the Column Menu of the Grid.](https://docs.telerik.com/kendo-ui/knowledge-base/grid-column-menu-change-text)
-* [How to Include Hidden Columns in PDF Export.](https://docs.telerik.com/kendo-ui/knowledge-base/grid-include-hidden-columns-to-exported-pdf)
+* [API Reference of the columnMenuInit Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit)
+* [How to Change the Column Names inside the Column Menu of the Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-column-menu-change-text)
+* [How to Include Hidden Columns in PDF Export](https://docs.telerik.com/kendo-ui/knowledge-base/grid-include-hidden-columns-to-exported-pdf)

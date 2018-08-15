@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core TimePicker HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI TimePicker widget for ASP.NET Core."
+page_title: TimePicker | UI for ASP.NET Core TimePicker HtmlHelper
+description: "Learn the basics when working with the Kendo UI TimePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_timepickerhelper_aspnetcore
 ---
 
@@ -13,16 +13,16 @@ The TimePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI T
 
 ### Configuration
 
-1. Add a TimePicker.
+Add the TimePicker.
 
-    ###### Example
+###### Example
 
-    ```
-        @(Html.Kendo().TimePicker()
-            .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
-            .Value(DateTime.Now) //Set the value of the TimePicker.
-        )
-    ```
+```
+    @(Html.Kendo().TimePicker()
+        .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
+        .Value(DateTime.Now) //Set the value of the TimePicker.
+    )
+```
 
 ## Event Handling
 
@@ -47,7 +47,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         function timepicker_open(e) {
             //Handle the open event.
         }
-        
+
         function timepicker_close(e) {
             //Handle the close event
         }

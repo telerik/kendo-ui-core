@@ -1,18 +1,22 @@
 ---
 title: Column Templates
 page_title: Column Templates | Kendo UI Grid
-description: "Learn how to customize the cell content in the Kendo UI Grid."
+description: "Learn how to customize the cell content in the Kendo UI Grid for jQuery."
 slug: column_templates_kendoui_grid_widget
 position: 3
 ---
 
 # Column Templates
 
-The Kendo UI Grid renders table rows (<tr>) which represent the data source items. Each table row consists of table cells (<td>) which represent the grid columns. By default the HTML-encoded value of the field is displayed in the column.
+The Kendo UI Grid renders table rows (`tr`) which represent the data source items.
 
-In the examples below is demonstrated how to customize the way the column displays its value.
+Each table row consists of table cells (`td`) which represent the Grid columns. By default, the HTML-encoded value of the field is displayed in the column.
 
-#### Example - set the template as a string (wrap the column value in HTML)
+The following examples demonstrate how to customize the way the column displays its value.
+
+## Setting the Template as a String
+
+The following example demonstrates how to set the template as a string and wrap the column value in HTML.
 
     <div id="grid"></div>
     <script>
@@ -25,7 +29,9 @@ In the examples below is demonstrated how to customize the way the column displa
     });
     </script>
 
-#### Example - set the template as a function returned by kendo.template
+## Setting the Template as a Function
+
+The following example demonstrates how to set the template as a function that is returned by `kendo.template`.
 
     <div id="grid"></div>
     <script id="name-template" type="text/x-kendo-template">
@@ -41,7 +47,7 @@ In the examples below is demonstrated how to customize the way the column displa
     });
     </script>
 
-#### Example - set the template as a function which returns a string
+The following example demonstrates how to set the template as a function which returns a string.  
 
     <div id="grid"></div>
     <script>
@@ -55,3 +61,8 @@ In the examples below is demonstrated how to customize the way the column displa
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
+
+## See Also
+
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})

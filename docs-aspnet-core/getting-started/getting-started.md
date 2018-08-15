@@ -105,9 +105,7 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
             @addTagHelper *, Kendo.Mvc
             @using Kendo.Mvc.UI
 
-7. Include the Kendo UI `client-side resources`. 
-
-	For more information about the different approaches for including client-side resources please refer to the [Include Client Side Resources article]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+7. Include the Kendo UI `client-side resources`. For more information about the different approaches for including client-side resources, refer to the article on [including client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
@@ -119,11 +117,11 @@ Configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 				.Name("datepicker")
 		)
 
-	Now that all is done, you can see the sample page.
+	  Now that all is done, you can see the sample page.
 
     **Figure 3. The end result&mdash;a sample page**
 
-    ![Sample page](images/sample-page.png)	
+    ![Sample page](images/sample-page.png)
 
 ## See Also
 

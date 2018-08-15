@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core LinearGauge HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI LinearGauge widget for ASP.NET Core."
+page_title: LinearGauge | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI LinearGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_lineargaugehelper_aspnetcore
 ---
 
@@ -13,22 +13,22 @@ The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo Lin
 
 ### Configuration
 
-1. Add a LinearGauge.
+Add the LinearGauge.
 
-    ###### Example
+###### Example
 
-    ```        
-        @(Html.Kendo().LinearGauge()
-            .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
-            .Scale(scale => scale
-                .Min(0) //Set the min value of the LinearGauge.
-                .Max(200) //Set the min value of the LinearGauge.
-            )
-            .Pointer(pointer => pointer
-                .Value(10) //Set the value of the LinearGauge.
-            )
+```        
+    @(Html.Kendo().LinearGauge()
+        .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+        .Scale(scale => scale
+            .Min(0) //Set the min value of the LinearGauge.
+            .Max(200) //Set the min value of the LinearGauge.
         )
-    ```
+        .Pointer(pointer => pointer
+            .Value(10) //Set the value of the LinearGauge.
+        )
+    )
+```
 
 ## Reference
 

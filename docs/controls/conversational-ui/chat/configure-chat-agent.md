@@ -8,13 +8,15 @@ position: 3
 
 # Connecting to Chat Bot Services
 
-The [Chat](http://demos.telerik.com/kendo-ui/chat/index) allows you to connect to any remote service, that would return content to the widget. This article describes the basic set-up of the Chat, that would allow you to handle the service communication.
+The [Chat](http://demos.telerik.com/kendo-ui/chat/index) allows you to connect to any remote service, that would return content to the widget.
+
+This article describes the basic set-up of the Chat, that would allow you to handle the service communication.
 
 ## Basic Communication with the Remote Service
 
-To connect the Chat to and render the responses from any service, utilize the `post` event of the widget and its public [API](/api/javascript/ui/chat). The `post` event allows you to react on user interaction. Its event arguments object contains all the information about the message typed, or the action undertaken, and the user data. That allows you to send all that data to the remote Chat Bot service of choice. Then, depending on the service architecture, the implementation should react on the response from the remote and display it appropriately in the Chat.
+To connect the Chat to and render the responses from any service, utilize the `post` event of the widget and its public [API](/api/javascript/ui/chat). The `post` event allows you to react on user interaction. Its event arguments object contains all the information about the typed message or the taken action, and the user data. This allows you to send all the data to the remote Chat Bot service of your choice. Then, depending on the service architecture, the implementation will react on the response from the remote server and display it appropriately in the Chat.
 
-The simplest example of such communication would be to send an AJAX request to a server endpoint and display the returned data in the Chat widget:
+A simple example of such communication is to send an AJAX request to a server endpoint and display the returned data in the Chat widget.
 
 ```html
 <div id="chat"></div>
@@ -68,9 +70,9 @@ The simplest example of such communication would be to send an AJAX request to a
 </script>
 ```
 
-## Encapsulate the Communication Logic in a Chat Agent Class
+## Encapsulating the Communication Logic in a Chat Agent Class
 
-The same could also be achieved by encapsulating the communication logic in an `agent` class. The `agent` class would handle the communication with the external Chat Bot service:
+You can achieve the same result by encapsulating the communication logic in an `agent` class. The `agent` class will handle the communication with the external Chat Bot service.
 
 ```html
 <div id="chat"></div>

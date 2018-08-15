@@ -1,9 +1,8 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Barcode HtmlHelper
-description: "Learn the basics when working with the Charts HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Barcode | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI Barcode HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_barcodehelper_aspnetcore
-position: 1
 ---
 
 # Barcode HtmlHelper Overview
@@ -24,7 +23,7 @@ The Barcode HtmlHelper extension is a server-side wrapper for the [Kendo UI Barc
           .Height(100))
     ```
 
-1. Choose the appropriate symbology (encoding) from the available options listed [here](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode/configuration/type). Specify it through the Encoding method which accepts an `enum` value.
+1. Choose the appropriate symbology (encoding) from the [available options](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode/configuration/type). Specify it through the encoding method which accepts an `enum` value.
 
     ###### Example
 

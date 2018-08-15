@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core FlatColorPicker HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI FlatColorPicker widget for ASP.NET Core."
+page_title: FlatColorPicker | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI FlatColorPicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_flatcolorpickerhelper_aspnetcore
 ---
 
@@ -11,16 +11,16 @@ The FlatColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo
 
 ## Configuration
 
-1. Add a FlatColorPicker.
+Add the FlatColorPicker.
 
-    ###### Example
+###### Example
 
-    ```
-        @(Html.Kendo().FlatColorPicker()
-              .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
-              .Value("#ff0000") //Set the value of the FlatColorPicker.
-        )
-    ```
+```
+    @(Html.Kendo().FlatColorPicker()
+          .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
+          .Value("#ff0000") //Set the value of the FlatColorPicker.
+    )
+```
 
 ## Event Handling
 

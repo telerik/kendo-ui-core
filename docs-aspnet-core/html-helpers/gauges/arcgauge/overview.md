@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ArcGauge HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI ArcGauge widget for ASP.NET Core."
+page_title: ArcGauge | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI ArcGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_arcgaugehelper_aspnetcore
 ---
 
@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ArcGa
                 return View();
             }
 
-1. Add a ArcGauge.
+1. Add the ArcGauge.
 
     ###### Example
 

@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI RadialGauge HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI RadialGauge widget for ASP.NET Core."
+page_title: RadialGauge | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI RadialGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_radialgaugehelper_aspnetcore
 ---
 
@@ -11,22 +11,22 @@ The RadialGauge HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 
 ## Configuration
 
-1. Add a RadialGauge.
+Add the RadialGauge.
 
-    ###### Example
+###### Example
 
-    ```
-        @(Html.Kendo().RadialGauge()
-              .Name("radialGauge") //The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
-              .Scale(scale => scale
-                  .Min(0) // Set the min value of the RadialGauge.
-                  .Max(200) // Set the min value of the RadialGauge.
-              )
-              .Pointer(pointer => pointer
-                  .Value(10) //Set the value of the RadialGauge.
-              )
-        )
-    ```
+```
+    @(Html.Kendo().RadialGauge()
+          .Name("radialGauge") //The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
+          .Scale(scale => scale
+              .Min(0) // Set the min value of the RadialGauge.
+              .Max(200) // Set the min value of the RadialGauge.
+          )
+          .Pointer(pointer => pointer
+              .Value(10) //Set the value of the RadialGauge.
+          )
+    )
+```
 
 ## Reference
 

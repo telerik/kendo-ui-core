@@ -1,34 +1,35 @@
 ---
-title: Include Client Side Resources
-page_title: Copy Client Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core project | Telerik UI for ASP.NET Core
+title: Including Client-Side Resources
+page_title: Copying Client-Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core Projects | Telerik UI for ASP.NET Core
 description: "Learn about different ways of copying the client-side resources into Telerik UI for ASP.NET Core project."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-vscode, /mvc-6/getting-started-vscode
 slug: copyclientresources_aspnetmvc6_aspnetmvc
-position: 4
+position: 3
 ---
 
-# Include Client Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core project
+# Including Client-Side Resources in ASP.NET Core Projects
 
-This article demonstrates how to include the client-side resurces in ASP.NET Core project.
-
+This article demonstrates how to include the client-side resources in an ASP.NET Core project and use Visual Studio 2017.
 
 To include the Kendo UI client-side resources you can use either of the following approaches:
 
-* [Manual Installation](#manual-installation)
-* [Bower Package Installation](#bower-package-installation)
-* [Copy Kendo UI Client Resources through NPM and Webpack](#copy-kendo-ui-client-resources-through-npm-and-webpack)
+* [Manual installation](#manual-installation)
+* [Bower package installation](#bower-package-installation)
+* [Copy Kendo UI client resources through NPM and Webpack](#copying-kendo-ui-client-resources-through-npm-and-webpack)
 
 ## Manual Installation
 
-* To manually install the resources, copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
+To manually install the resources:
+
+1. Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
 
    **Figure 2. Kendo UI resources**
 
    ![Kendo UI resources](images/kendo-ui-wwwroot.png)
-   
-* Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-	> **Important**
+1. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
+
+	  > **Important**
     >
     > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
@@ -91,18 +92,18 @@ To include the Kendo UI client-side resources you can use either of the followin
 
             ...
         </head>
-		
+
 ## Bower Package Installation
 
-Refer to the article on [Bower package installation](../../kendo-ui/intro/installation/bower-install). 
+Refer to the article on [Bower package installation](../../kendo-ui/intro/installation/bower-install).
 
 > **Important**
 >
-> ASP.NET Core v2.1 no longer supports Bower. For more information on the alternative approach for copying Kendo UI scripts, refer to the section on [copying client resources through NPM and Webpack](#copy-kendo-ui-client-resources-through-npm-and-webpack).
+> ASP.NET Core v2.1 no longer supports Bower. For more information on the alternative approach for copying Kendo UI scripts, refer to the section on [copying client resources through NPM and Webpack](#copying-kendo-ui-client-resources-through-npm-and-webpack).
 
-## Copy Kendo UI Client Resources through NPM and Webpack
+## Copying Kendo UI Client Resources through NPM and Webpack
 
-1. In case the project is created through the **Create New Project Wizard** you will need to remove the 'bower.json' file. Otherwise skip this step.
+1. If the project is created through **Create New Project Wizard**, remove the `bower.json` file. Otherwise, skip this step.
 1. Add `package.json` in the following way:
 
     ###### Example
@@ -138,7 +139,7 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 
 		const path = require('path');
 		const webpack = require('webpack');
-		
+
 		module.exports = {
 			entry: './main.js',
 			output: {
@@ -161,8 +162,10 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 			],
 		}
 
-1. Create a `main.js` file with the following content:
+1. Create a `main.js` file with the following content.
 
+    > **Important**
+    >
     > As both `jQuery` and `$` are used throughout the application, in the global scope jQuery is assigned to both variables.
 
     ###### Example
@@ -171,7 +174,7 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 
 		import "@progress/kendo-ui";
 		import "@progress/kendo-ui/js/kendo.aspnetmvc";
-		import "@progress/kendo-theme-default/dist/all.css"; 
+		import "@progress/kendo-theme-default/dist/all.css";
 
 1. Open the Command prompt and navigate to the folder of the project.
 1. Run the following commands:

@@ -34,3 +34,9 @@ That common header in its turn can be a child of another upper `MultiColumn` hea
 The above definition will be presented in the following output:
 
 <img src="/helpers/treelist/images/treelist-multicolumn-headers.png">
+
+## See Also
+
+Other articles and how-to examples on the Kendo UI TreeList:
+
+* [JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)

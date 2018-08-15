@@ -1,8 +1,8 @@
 ---
-title: Initialize DropDownList in the TreeView template
-description: An example on how embed a DropDownList in a TreeView node template
+title: Initialize DropDownList in the TreeView Template
+description: An example on how to embed a Kendo UI DropDownList for jQuery in the node template of a Kendo UI TreeView for jQuery.
 type: how-to
-page_title: DropDownList in Node Template | Kendo UI TreeView
+page_title: Create DropDownList in Node Template | Kendo UI TreeView
 slug: treeview-dropdown-in-template
 tags: kendo, kendo-ui, treeview, dropdownlist, template
 res_type: kb
@@ -20,19 +20,14 @@ ticketid: 1176714
 
 ## Description
 
-In the TreeView template `<script>` I need to place a DropDownList which should be populated from database. Also, each DropDownList needs to have a dynamically assigned Id.
+How can I place DropDownLists in the `<script>` of the TreeView template which will be populated from database and provide each DropDownList with a dynamically assigned `id`?
 
 ## Solution
 
-Depending on the specific scenario in question, there are the following two viable approaches:
+* If you use the Kendo UI MVVM framework, initialize the DropDownLists with the `data-` attribute in the template.
+* Alternatively, initialize the widgets with JavaScript in the `dataBound` event of the TreeView.
 
-- In case the you use the Kendo MVVM framework, the DropDownLists could be initialized with `data-` attribute in the template.
-
-- Alternatively, the widgets could be initialized with JavaScript in the `dataBound` event of the TreeView.
-
-### MVVM scenario
-
-```html
+```tab-MVVM-Scenario
 <div id="example">
   <div class="files"
        data-role="treeview"
@@ -88,10 +83,7 @@ Depending on the specific scenario in question, there are the following two viab
   kendo.bind($("#example"), viewModel);
 </script>
 ```
-
-### JavaScript initialization scenario
-
-```html
+```tab-JavaScript-Scenario
 <div id="treeview" style="height:800px;"></div>
 
 <script id="treeview-template" type="text/kendo-ui-template">

@@ -632,7 +632,7 @@ The following example demonstrates how to set the column width.
 
 The multicolumn headers of the Grid represent a tree-like structure where one or more columns can be grouped together by a common header.
 
-That common header in its turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For more information, refer to the [demo on implementing multicolumn headers](https://demos.telerik.com/aspnet-mvc/grid/multicolumnheaders).
+That common header in turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For more information, refer to the [demo on implementing multicolumn headers](https://demos.telerik.com/aspnet-mvc/grid/multicolumnheaders).
 
 ###### Example
 

@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core Slider HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI Slider widget for ASP.NET Core."
+page_title: Slider | UI for ASP.NET Core Slider HtmlHelper
+description: "Learn the basics when working with the Kendo UI Slider for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_sliderhelper_aspnetcore
 ---
 
@@ -20,27 +20,25 @@ There are two types of Sliders:
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI Slider.
+Add the Slider.
 
-1. Add a Slider.
+###### Example
 
-    ###### Example
+```
+    @(Html.Kendo().Slider()
+        .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+        .Min(0) //Set min value of the Slider.
+        .Max(100) //Set min value of the Slider.
+        .Value(20) //Set the value of the Slider.
+    )
 
-    ```
-        @(Html.Kendo().Slider()
-            .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-            .Min(0) //Set min value of the Slider.
-            .Max(100) //Set min value of the Slider.
-            .Value(20) //Set the value of the Slider.
-        )
-
-        @(Html.Kendo().RangeSlider()
-          .Name("rangeslider")
-          .Min(0)
-          .Max(10)
-          .SmallStep(1)
-          .LargeStep(10))
-    ```
+    @(Html.Kendo().RangeSlider()
+      .Name("rangeslider")
+      .Min(0)
+      .Max(10)
+      .SmallStep(1)
+      .LargeStep(10))
+```
 
 ## Event Handling
 

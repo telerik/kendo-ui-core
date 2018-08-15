@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core ColorPicker HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI ColorPicker widget for ASP.NET Core."
+page_title: ColorPicker | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI ColorPicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_colorpickerhelper_aspnetcore
 ---
 
@@ -11,16 +11,16 @@ The ColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 
 ## Configuration
 
-1. Add a ColorPicker.
+Add the ColorPicker.
 
-    ###### Example
+###### Example
 
-    ```
-        @(Html.Kendo().ColorPicker()
-              .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
-              .Value("#ff0000") //Set the value of the ColorPicker.
-        )
-    ```
+```
+    @(Html.Kendo().ColorPicker()
+          .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+          .Value("#ff0000") //Set the value of the ColorPicker.
+    )
+```
 
 ## Event Handling
 

@@ -1,8 +1,8 @@
 ---
-title: Configure NoRecords Data Attribute for Empty Grid
-description: Adding a noRecords.template to a MVVM Kendo UI Grid
+title: Configure the NoRecords Data Attribute for Empty Grids
+description: An example on how to add a noRecords.template to an MVVM Kendo UI Grid.
 type: how-to
-page_title: Customize No Records Template with MVVM | Kendo UI Grid
+page_title: Customize the NoRecords Template with MVVM | Kendo UI Grid
 slug: grid-mvvm-empty-norecords-template
 tags: grid, mvvm, empty, norecords, template
 ticketid: 1123131
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,18 +24,24 @@ res_type: kb
 
 ## Description
 
-What is the equivalency of noRecords.template using data attributes for a Kendo UI Grid using MVVM?
+How can I determine the equivalency for the `noRecords.template` which uses data attributes for a Kendo UI MVVM Grid?
 
 ## Solution
 
-Using the [data-no-records data attribute](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization), you can easily set the [noRecords.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/norecords) using the following:
+To set the [`noRecords.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/norecords) use the [`data-no-records` data attribute](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization).
+
 ```
 <div data-role="grid"      
       data-no-records="{ template : '<br /><br />Here is my No Records Message!'}">
 </div>
 ```
 
-This example demonstrates a Kendo UI Grid with no bound data and a custom noRecords Template:
+The following example demonstrates how to implement a custom `noRecords` template in a Grid with no bound data.
+
+> **Important**
+>
+> The camelCase `data` attribute options are set by using [dash separators](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options). For example, the `noRecords` configuration of the Kendo UI Grid is set like `data-no-records`.
+
 
 ```html
     <div id="example">
@@ -77,12 +84,7 @@ This example demonstrates a Kendo UI Grid with no bound data and a custom noReco
     </div>
 ```
 
-## Notes
-
-The camelCase data attribute options are set [using dash-separators](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options). For example, the noRecords configuration of the Kendo UI Grid is set like **data-no-records**.
-
 ## See Also
 
 * [Kendo Grid MVVM Demo](https://demos.telerik.com/kendo-ui/grid/mvvm)
-* [Data Attribute Initialization - Documentation](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization)
-
+* [Documentation on the data Attribute Initialization](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization)

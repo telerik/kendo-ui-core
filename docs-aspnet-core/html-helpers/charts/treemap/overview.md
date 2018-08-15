@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeMap HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI TreeMap widget for ASP.NET Core."
+page_title: TreeMap | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI TreeMap HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_treemaphelper_aspnetcore
 ---
 
@@ -11,54 +11,54 @@ The TreeMap HtmlHelper extension is a server-side wrapper for the [Kendo UI Tree
 
 ## Configuration
 
-1. Add a TreeMap.
+Add the TreeMap.
 
-    ###### Example
+###### Example
 
-    ```tab-Razor
-      @(Html.Kendo().TreeMap()
-            .Name("treeMap")
-            .DataSource(dataSource => dataSource
-                .Read(read => read
-                    .Action("Population_Read", "TreeMap")
-                )
-                .Model(m => m.Children("Items"))
+```tab-Razor
+  @(Html.Kendo().TreeMap()
+        .Name("treeMap")
+        .DataSource(dataSource => dataSource
+            .Read(read => read
+                .Action("Population_Read", "TreeMap")
             )
-            .ValueField("Value")
-            .TextField("Name")
-      )
-    ```
-    ```tab-Controler
-        public ActionResult Population_Read()
+            .Model(m => m.Children("Items"))
+        )
+        .ValueField("Value")
+        .TextField("Name")
+  )
+```
+```tab-Controler
+    public ActionResult Population_Read()
+    {
+        var result = new List<Population>();
+
+        var population = new Population("Parent One", 1, new List<Population>());
+
+        population.Items.Add(new Population("Child 1", 2, null));
+        population.Items.Add(new Population("Child 2", 3, null));
+
+        result.Add(population);      
+
+        return Json(result);
+    }
+```
+```tab-Model
+    public class Population
+    {
+        public Population(string name, int value, List<Population> items)
         {
-            var result = new List<Population>();
-
-            var population = new Population("Parent One", 1, new List<Population>());
-
-            population.Items.Add(new Population("Child 1", 2, null));
-            population.Items.Add(new Population("Child 2", 3, null));
-
-            result.Add(population);      
-
-            return Json(result);
+            this.Name = name;
+            this.Value = value;
+            this.Items = items;
         }
-    ```
-    ```tab-Model
-        public class Population
-        {
-            public Population(string name, int value, List<Population> items)
-            {
-                this.Name = name;
-                this.Value = value;
-                this.Items = items;
-            }
-            public string Name { get; set; }
+        public string Name { get; set; }
 
-            public int Value { get; set; }
+        public int Value { get; set; }
 
-            public List<Population> Items { get; set; }
-        }
-    ```
+        public List<Population> Items { get; set; }
+    }
+```
 
 ## Event Handling
 

@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Calendar HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI Calendar widget for ASP.NET Core."
+page_title: Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI Calendar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_calendarhelper_aspnetcore
 ---
 
@@ -11,20 +11,18 @@ The Calendar HtmlHelper extension is a server-side wrapper for the [Kendo UI Cal
 
 ## Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI Calendar.
+Add the Calendar.
 
-1. Add a Calendar.
+###### Example
 
-    ###### Example
-
-    ```
-        @(Html.Kendo().Calendar()
-            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
-            .Max(new DateTime(2020, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
-            .Value(DateTime.Now) //Set the value of the Calendar.
-        )
-    ```
+```
+    @(Html.Kendo().Calendar()
+        .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+        .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
+        .Max(new DateTime(2020, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
+        .Value(DateTime.Now) //Set the value of the Calendar.
+    )
+```
 
 ## Event Handling
 

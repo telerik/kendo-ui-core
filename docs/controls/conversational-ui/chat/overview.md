@@ -18,28 +18,20 @@ The Chat provides rich conversational experience that goes beyond the natural la
 
 ## Getting Started
 
-### Create the Chat
-
-To create a Chat:
+### Creating the Chat
 
 1. Add an empty `div` to the HTML.
-
 1. Provide it with an ID.
-
 1. (Optional) Set the width and height of the desired chat inline or by using CSS.
 
 ```html
 <div id="chart" style="width: 400px; height: 600px"></div>
 ```
 
-### Initialize the Chat
-
-To render the Chat:
+### Initializing the Chat
 
 1. Select the `div` with a jQuery selector.
-
 1. Call the `kendoChat()` function.
-
 1. Configure its implementation for the [`post`](/api/javascript/ui/chat/events/post) event.
 
 ```html
@@ -55,9 +47,10 @@ To render the Chat:
 
 ## Features
 
-* [Integration with chatbot services]({% slug connect_to_chatbot_service %})&mdash;The Chat facilitates the integration with all major conversational UI APIs or services which are available such as Microsoft Bot, Google’s API.AI, Amazon LEX, and more.
-* [Support for Chat items]({% slug chat_items %})&mdash;To improve user experience, the Chat offers a default variety of items.
-* [Support for Kendo UI predefined themes]({% slug sassbasedthemes_kendoui %})&mdash;The Chat i fully compatible with any of the available Kendo UI themes and styling options.
+* [Configuring the items of the Chat]({% slug chat_items %})
+* [Connecting to Chat Bot services]({% slug connect_to_chatbot_service %})
+* [Connecting to Microsoft Bot Framework]({% slug connect_to_ms_bot_framework %})
+* [Connecting to Google DialogFlow]({% slug connect_to_google_dialogflow %})
 
 ## See Also
 

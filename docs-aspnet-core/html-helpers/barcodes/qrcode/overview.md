@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI for ASP.NET Core QR Code HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI QR Code widget for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: QRCode | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI QRCode HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_qrcodehelper_aspnetcore
 ---
 
@@ -14,7 +14,7 @@ The QRCode HtmlHelper extension is a server-side wrapper for the [Kendo UI QRCod
 1. Add a QRCode.
 
     ###### Example
-    
+
     ```
         @(Html.Kendo().QRCode()
             .Name("qrMail") //The name of the QRcode is mandatory. It specifies the "id" attribute of the widget.
@@ -44,7 +44,7 @@ To reference an existing Kendo UI QRCode instance, use the [`jQuery.data()`](htt
 
 ###### Example
 
-      //Put this after your Kendo QRCode for ASP.NET MVC declaration.
+      //Put this after your Kendo UI QRCode for ASP.NET MVC declaration.
       <script>
       $(function() {
           //Notice that the Name() of the QRCode is used to get its client-side instance.

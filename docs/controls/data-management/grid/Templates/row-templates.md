@@ -46,4 +46,9 @@ In the resulting Grid, the email address is an interactive hyperlink which opens
 
 ![Grid with row template](/controls/data-management/grid/grid8_1.png)
 
-For more information on the templating features in Kendo UI, refer to the [introductory article on templates]({% slug overview_kendoui_templatescomponent %}).
+For more information on Kendo UI templates, refer to the [introductory article on templates]({% slug overview_kendoui_templatescomponent %}).
+
+## See Also
+
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})

@@ -1,8 +1,8 @@
 ---
-title: Send DateTime Instead of String to Controller Through POST Request.
-description: An example demonstrating how to send a DateTime type from the DatePicker to a Controller through a POST request
+title: Send DateTime instead of String to Controller through POST Request
+description: An example on how to send a DateTime type from the Kendo UI DatePicker for jQuery to a controller through a POST request.
 type: how-to
-page_title: Send DatePicker Value as a DateTime in POST Request | UI for ASP.NET MVC DatePicker
+page_title: Send DatePicker Value as a DateTime in POST Request | Telerik UI for ASP.NET MVC DatePicker
 slug: datepicker-send-datetime-in-post-request
 tags: datepicker, mvc, asp.net, date, picker, datetime, post, request, not, string
 ticketid: 1160064
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,24 +24,22 @@ res_type: kb
 
 ## Description
 
-At the moment, I'm using a POST request to send the value of the DatePicker to the controller but it is sending a String and I would like to receive a DateTime instead. What's the best approach to implement this functionality?
+In my DatePicker project, I am using a POST request to send the value of the widget to the controller but the widget is sending a string. How can I receive a `DateTime` value instead of a string value and what is the best approach to implement this functionality?
 
 ## Solution
 
-In order for the parameter to be received in the Controller as a DateTime instead of a String, take advantage of JavaScript's [Date.toUTCString method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString) when configuring the POST request.
-
-The following code snippet demonstrates how the post can be configured:
+In order for the parameter to be received in the controller as a `DateTime` value instead of a string value, use the [`Date.toUTCString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString) JavaScript method when you configure the POST request.
 
 ```
-$.post('/MyController/MyMethod', { 
-  start: start.toUTCString(), 
-  end: end.toUTCString() }, 
+$.post('/MyController/MyMethod', {
+  start: start.toUTCString(),
+  end: end.toUTCString() },
   function (result) {
-    callback(result); 
+    callback(result);
 });
 ```
 
-And the method in the controller would look like the following:
+The method in the controller looks similar to the what the following example demonstrates.
 
 ```
 public ActionResult MyMethod(DateTime start, DateTime end){
@@ -50,4 +49,4 @@ public ActionResult MyMethod(DateTime start, DateTime end){
 
 ## See Also
 
-* [toUTCString method Reference.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString)
+* [API Reference of the toUTCString Method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString)

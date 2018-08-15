@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core ColorPalette HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI ColorPalette widget for ASP.NET Core."
+page_title: ColorPalette | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI ColorPalette HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_colorpalettehelper_aspnetcore
 ---
 
@@ -11,16 +11,16 @@ The ColorPalette HtmlHelper extension is a server-side wrapper for the [Kendo UI
 
 ## Configuration
 
-1. Add a ColorPalette.
+Add the ColorPalette.
 
-    ###### Example
+###### Example
 
-    ```
-        @(Html.Kendo().ColorPalette()
-              .Name("colorpalette") //The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
-              .Value("#ff0000") //Set the value of the ColorPalette.
-        )
-    ```
+```
+    @(Html.Kendo().ColorPalette()
+          .Name("colorpalette") //The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
+          .Value("#ff0000") //Set the value of the ColorPalette.
+    )
+```
 
 ## Event Handling
 

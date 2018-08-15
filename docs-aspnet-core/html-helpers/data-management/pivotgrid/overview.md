@@ -1,14 +1,15 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core PivotGrid HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI PivotGrid widget for ASP.NET Core."
+page_title: PivotGrid | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI PivotGrid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_pivotgridhelper_aspnetcore
-position: 1
 ---
 
 # PivotGrid HtmlHelper Overview
 
-The PivotGrid HtmlHelper extension is a server-side wrapper for the [Kendo UI PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index) widget. It allows you to configure the Kendo UI PivotGrid from server-side code and helps you with data binding.
+The PivotGrid HtmlHelper extension is a server-side wrapper for the [Kendo UI PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index) widget.
+
+It allows you to configure the Kendo UI PivotGrid from server-side code and helps you with data binding.
 
 ## Getting Started
 

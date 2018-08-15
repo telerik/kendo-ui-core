@@ -1,9 +1,8 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET Core Dialog HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI Dialog widget for ASP.NET Core."
+page_title: Dialog | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI Dialog HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_dialoghelper_aspnetcore
-position: 1
 ---
 
 # Dialog HtmlHelper Overview
@@ -12,25 +11,25 @@ The Dialog HtmlHelper extension is a server-side wrapper for the [Kendo UI Dialo
 
 ## Configuration
 
-1. Add a Dialog.
+Add the Dialog.
 
-    ###### Example
+###### Example
 
-    ```
-        @(Html.Kendo().Dialog()
-              .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
-              .Title("Software Update")//Set the title of the Dialog.
-              .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
-              .Width(400)  //Set the width of the Dialog.
-              .Modal(false) // Disable the modality of the Dialog.
-              .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
-              .Actions(actions =>
-                {
-                    actions.Add().Text("NO"); //Set text of the first button.
-                    actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
-                })
-        )
-    ```
+```
+    @(Html.Kendo().Dialog()
+          .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
+          .Title("Software Update")//Set the title of the Dialog.
+          .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
+          .Width(400)  //Set the width of the Dialog.
+          .Modal(false) // Disable the modality of the Dialog.
+          .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
+          .Actions(actions =>
+            {
+                actions.Add().Text("NO"); //Set text of the first button.
+                actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
+            })
+    )
+```
 
 ## Event Handling
 
