@@ -949,6 +949,17 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _clearValue: function() {
+            var isCustom = !this.dataItem();
+
+            List.fn._clearValue.call(this);
+
+            //reset list focus only if custom value
+            if (!this.popup.visible() && isCustom) {
+                this.listView.focus(-1);
+            }
+        },
+
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode;

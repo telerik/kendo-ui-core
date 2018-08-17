@@ -1089,6 +1089,28 @@ test("reset value when _clear is clicked (equal value and text)", 1, function() 
     equal(combobox.value(), "");
 });
 
+test("keep focus on first item when _clear is clicked", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ]
+    });
+
+    combobox.text("custom");
+    combobox.search("custom");
+
+    combobox.close();
+
+    combobox._clear.click();
+
+    combobox.open();
+
+    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+});
 
 test("hide clear button on value reset", 1, function() {
     select = $("<select></select>");

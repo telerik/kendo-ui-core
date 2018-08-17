@@ -1329,6 +1329,9 @@ var __meta__ = { // jshint ignore:line
         _toggleHover: function(e) {
             var target = $(kendo.eventTarget(e) || e.target).closest(allItemsSelector),
                 isEnter = e.type == MOUSEENTER || MOUSEDOWN.indexOf(e.type) !== -1;
+
+            target.siblings().removeClass(HOVERSTATE);
+
             if (!target.parents("li." + DISABLEDSTATE).length) {
                 target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "pointerenter" || e.type == TOUCHSTART);
             }
