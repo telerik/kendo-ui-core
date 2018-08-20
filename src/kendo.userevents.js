@@ -20,6 +20,7 @@ var __meta__ = { // jshint ignore:line
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
         DEFAULT_MIN_HOLD = 800,
+        CLICK_DELAY = 300,
         DEFAULT_THRESHOLD = support.browser.msie ? 5 : 0, // WP8 and W8 are very sensitive and always report move.
 
         // UserEvents events
@@ -31,6 +32,7 @@ var __meta__ = { // jshint ignore:line
         END = "end",
         CANCEL = "cancel",
         TAP = "tap",
+        DOUBLETAP = "doubleTap",
         RELEASE = "release",
         GESTURESTART = "gesturestart",
         GESTURECHANGE = "gesturechange",
@@ -174,6 +176,8 @@ var __meta__ = { // jshint ignore:line
                 initialTouch: touchInfo.target,
                 id: touchInfo.id,
                 pressEvent: touchInfo,
+                _clicks: userEvents._clicks,
+                supportDoubleTap: userEvents.supportDoubleTap,
                 _moved: false,
                 _finished: false
             });
@@ -182,6 +186,22 @@ var __meta__ = { // jshint ignore:line
         press: function() {
             this._holdTimeout = setTimeout($.proxy(this, "_hold"), this.userEvents.minHold);
             this._trigger(PRESS, this.pressEvent);
+        },
+
+        _tap: function(touchInfo) {
+            var that = this;
+            that.userEvents._clicks++;
+            if (that.userEvents._clicks == 1) {
+                that._clickTimeout = setTimeout(function() {
+                    if (that.userEvents._clicks == 1) {
+                        that._trigger(TAP, touchInfo);
+                    }
+                    else {
+                        that._trigger(DOUBLETAP, touchInfo);
+                    }
+                    that.userEvents._clicks = 0;
+                }, CLICK_DELAY);
+            }
         },
 
         _hold: function() {
@@ -228,7 +248,12 @@ var __meta__ = { // jshint ignore:line
                 this._trigger(END, touchInfo);
             } else {
                 if (!this.useClickAsTap) {
-                    this._trigger(TAP, touchInfo);
+                    if (this.supportDoubleTap) {
+                        this._tap(touchInfo);
+                    }
+                    else {
+                        this._trigger(TAP, touchInfo);
+                    }
                 }
             }
 
@@ -318,6 +343,8 @@ var __meta__ = { // jshint ignore:line
             that.captureUpIfMoved = options.captureUpIfMoved;
             that.useClickAsTap = !options.fastTap && !support.delayedClick();
             that.eventNS = ns;
+            that._clicks = 0;
+            that.supportDoubleTap = options.supportDoubleTap
 
             element = $(element).handler(that);
             Observable.fn.init.call(that);
@@ -369,6 +396,7 @@ var __meta__ = { // jshint ignore:line
             PRESS,
             HOLD,
             TAP,
+            DOUBLETAP,
             START,
             MOVE,
             END,

@@ -331,6 +331,7 @@ var __meta__ = { // jshint ignore:line
                     preventDragEvent: true,
                     captureUpIfMoved: true,
                     multiTouch: that.options.zoom,
+                    supportDoubleTap: that.options.supportDoubleTap,
                     start: function(e) {
                         dimensions.refresh();
 

@@ -23,7 +23,7 @@ The following example demonstrates how to update the Map shapes by a specified I
             dataSource: {
               type: "geojson",
               transport: {
-                read: "https://output.jsbin.com/zuguhajiye.js"
+                read: "http://output.jsbin.com/zuguhajiye.js"
               }
             },
             style: {

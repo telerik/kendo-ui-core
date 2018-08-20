@@ -319,6 +319,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var state = that._state;
             var isFiltered = that.dataSource.filter() ? that.dataSource.filter().filters.length > 0 : false;
+            var reinitialized = !that.ul.find(that.listView.focus()).length;
 
             if (that.popup.visible()) {
                 return;
@@ -341,8 +342,10 @@ var __meta__ = { // jshint ignore:line
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
                 that._openPopup();
-                if(that.options.virtual){
+                if(that.options.virtual) {
                     that._focusItem();
+                } else if (reinitialized && that.options.highlightFirst) {
+                    that.listView.focus(0);
                 }
             }
         },
@@ -949,16 +952,16 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _clearValue: function() {
-            var isCustom = !this.dataItem();
+        // _clearValue: function() {
+        //     var isCustom = !this.dataItem();
 
-            List.fn._clearValue.call(this);
+        //     List.fn._clearValue.call(this);
 
-            //reset list focus only if custom value
-            if (!this.popup.visible() && isCustom) {
-                this.listView.focus(-1);
-            }
-        },
+        //     //reset list focus only if custom value
+        //     if (!this.popup.visible() && isCustom) {
+        //         this.listView.focus(-1);
+        //     }
+        // },
 
         _keydown: function(e) {
             var that = this,

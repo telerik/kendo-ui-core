@@ -77,7 +77,7 @@ Sets the name of the chat user.
 
 ### toolbar `Object`
 
-Configures the Kedno UI Chat toolbar.
+Configures the Kendo UI Chat toolbar.
 
 #### Example
 

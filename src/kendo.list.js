@@ -294,6 +294,10 @@ var __meta__ = { // jshint ignore:line
 
             if(this._isFilterEnabled() && !this.options.enforceMinLength) {
                 this._filter({word: "", open: false});
+
+                if (this.options.highlightFirst) {
+                    this.listView.focus(0);
+                }
             }
             this._change();
         },

@@ -83,6 +83,8 @@
         }, 1);
     });
 
+
+
     test("passes delta on mousemove", 2, function(){
         userEvents.bind("move", function(e) {
             equal(e.x.delta, 10);
@@ -450,4 +452,61 @@
             element.trigger("mousedown");
         });
     }
+
+    module("doubleTap", {
+        setup: function() {
+            element = $('<div />');
+            userEvents = new UserEvents(element, {  fastTap: true, supportDoubleTap: true });
+        }
+    });
+
+    asyncTest("doubleTap should be fired when doubleTapSupport is enabled", 1, function() {
+        userEvents.bind("doubleTap", function(e) {
+            start();
+            ok(true);
+        });
+
+        press(element, 10, 20, 1);
+        release(element);
+        press(element, 10, 20, 1);
+        release(element);
+    });
+
+    asyncTest("tap should be fired when doubleTapSupport is enabled", 1, function() {
+        userEvents.bind("tap", function(e) {
+            start();
+            ok(true);
+        });
+
+        press(element, 10, 20, 1);
+        release(element);
+    });
+
+    asyncTest("tap should be fired when two subsequent tabs are performed with a delay between them", 2, function() {
+        var countTap = 0;
+        var countDoubleTap = 0;
+
+        userEvents.bind("tap", function(e) {
+            countTap++
+        });
+
+        userEvents.bind("doubleTap", function(e) {
+            countDoubleTap++;
+        });
+
+        press(element, 10, 20);
+        release(element);
+
+        setTimeout(function() {
+            press(element, 10, 20);
+            release(element);
+
+            setTimeout(function() {
+                start();
+                equal(countTap, 2);
+                equal(countDoubleTap, 0);
+            }, 300)
+
+        }, 450);
+    });
 })();
