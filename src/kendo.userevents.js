@@ -344,7 +344,7 @@ var __meta__ = { // jshint ignore:line
             that.useClickAsTap = !options.fastTap && !support.delayedClick();
             that.eventNS = ns;
             that._clicks = 0;
-            that.supportDoubleTap = options.supportDoubleTap
+            that.supportDoubleTap = options.supportDoubleTap;
 
             element = $(element).handler(that);
             Observable.fn.init.call(that);
