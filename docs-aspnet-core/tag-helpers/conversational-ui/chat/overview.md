@@ -4,6 +4,7 @@ page_title: Chat | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Chat TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_chat_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/chat
+position: 1
 ---
 
 # Chat TagHelper Overview
@@ -45,6 +46,7 @@ The following example demonstrates the configuration options that are available 
 ## See Also
 
 * [Overview of the Chat HtmlHelper for .Net Core]({% slug htmlhelpers_chat_aspnetcore %})
+* [Peer-to-Peer Chat with SignalR]({% slug taghelpers_chat_aspnetcore_signalr %})
 * [Overview of the Kendo UI Chat Widget](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)
 * [JavaScript API Reference of the Chat](http://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
 * [Chat HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chat/overview)

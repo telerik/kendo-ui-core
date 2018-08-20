@@ -124,6 +124,7 @@ To reference an existing Kendo UI Chat instance, use the [`jQuery.data()`](http:
 
 ## See Also
 
+* [Peer-to-Peer Chat with SignalR]({% slug signalr_chathelper_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC API Reference: ChatBuilder](/api/Kendo.Mvc.UI.Fluent/ChatBuilder)
 * [Overview of the Kendo UI Chat Widget](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
