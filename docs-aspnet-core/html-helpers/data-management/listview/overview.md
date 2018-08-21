@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: ListView | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the ListView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_listview_aspnetcore
-position: 31
+description: "Learn the basics when working with the Kendo UI ListView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/listview
+slug: htmlhelpers_listview_aspnetcore
+position: 1
 ---
 
 # ListView HtmlHelper Overview

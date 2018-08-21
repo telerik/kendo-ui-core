@@ -1,8 +1,9 @@
 ---
 title: Overview
 page_title: ArcGauge | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the ArcGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI ArcGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_arcgauge_aspnetcore
+position: 1
 ---
 
 # ArcGauge Tag Helper Overview
@@ -31,7 +32,7 @@ The ArcGauge tag helper configuration options are passed as attributes of the ta
 ```
 ```tab-cshtml
     @(Html.Kendo().ArcGauge()
-        .Name("arcGauge") 
+        .Name("arcGauge")
         .Value(65)
         .Scale(x => x.Min(0).Max(100))
         .CenterTemplate("#:value#%")

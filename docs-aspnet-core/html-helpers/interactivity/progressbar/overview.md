@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: ProgressBar | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the ProgressBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_progressbar_aspnetcore
-position: 49
+description: "Learn the basics when working with the Kendo UI ProgressBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/progressbar
+slug: htmlhelpers_progressbar_aspnetcore
+position: 1
 ---
 
 # ProgressBar HtmlHelper Overview

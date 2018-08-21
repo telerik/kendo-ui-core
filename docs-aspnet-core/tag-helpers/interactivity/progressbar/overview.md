@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: ProgressBar | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the ProgressBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI ProgressBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/progressbar, /aspnet-core/helpers/tag-helpers/progressbar
 slug: taghelpers_progressbar_aspnetcore
+position: 1
 ---
 
 # ProgressBar Tag Helper Overview

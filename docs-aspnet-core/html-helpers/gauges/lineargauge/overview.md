@@ -3,6 +3,7 @@ title: Overview
 page_title: LinearGauge | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI LinearGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_lineargaugehelper_aspnetcore
+position: 1
 ---
 
 # LinearGauge HtmlHelper Overview

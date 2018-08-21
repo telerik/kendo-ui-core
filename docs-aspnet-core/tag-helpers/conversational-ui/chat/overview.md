@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Chat | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Chat TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Chat TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_chat_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/chat
 position: 1

@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Menu | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_menu_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/menu
+position: 1
 ---
 
 # Menu Tag Helper Overview

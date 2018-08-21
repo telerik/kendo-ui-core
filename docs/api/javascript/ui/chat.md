@@ -385,7 +385,7 @@ Defines an object that is applied to the button element as attributes.
     });
     </script>
 
-### toolbar.scrollable `Boolean`
+### toolbar.scrollable `Boolean` *(default: true)*
 
 Enables or disables the scrollable behavior of the toolbar.
 
@@ -404,7 +404,7 @@ Enables or disables the scrollable behavior of the toolbar.
     });
     </script>
 
-### toolbar.toggleable `Boolean`
+### toolbar.toggleable `Boolean` *(default: false)*
 
 Enables or disables the toggleable behavior of the toolbar.
 

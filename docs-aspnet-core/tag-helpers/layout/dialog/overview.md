@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Dialog | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Dialog tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Dialog tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/dialog, /aspnet-core/helpers/tag-helpers/dialog
 slug: taghelpers_dialog_aspnetcore
+position: 1
 ---
 
 # Dialog Tag Helper Overview

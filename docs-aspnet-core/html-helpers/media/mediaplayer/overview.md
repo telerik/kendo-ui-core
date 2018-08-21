@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: MediaPlayer | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the MediaPlayer for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_mediaplayer_aspnetcore
-position: 37
+description: "Learn the basics when working with the Kendo UI MediaPlayer for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/mediaplayer
+slug: htmlhelpers_mediaplayer_aspnetcore
+position: 1
 ---
 
 # MediaPlayer Overview

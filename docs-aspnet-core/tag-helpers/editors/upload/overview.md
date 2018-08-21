@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Upload | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Upload tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Upload tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/upload, /aspnet-core/helpers/tag-helpers/upload
 slug: taghelpers_upload_aspnetcore
+position: 1
 ---
 
 # Upload Tag Helper Overview

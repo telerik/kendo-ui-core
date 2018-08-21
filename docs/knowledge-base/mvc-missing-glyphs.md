@@ -24,7 +24,7 @@ The Kendo UI CDN loads the required glyph files automatically after including th
 
 ## Solution
 
-When a new project is created or updated using the Project Configuration Wizard, all of the files should be placed automatically in the correct folders. If the CDN option is disabled, the themes and the font icons will be added to the project. The font icons are requested internally within the theme files and they are loaded from the "fonts/glyph" folder, which should be placed in the same main folder where the theme files are.
+When a new project is created or updated by using the Project Configuration Wizard, all of the files are expected to be automatically placed in the correct folders. If the CDN option is disabled, the themes and the font icons will be added to the project. The font icons are internally requested within the theme files and are loaded from the `fonts/glyph` folder which has to be located in the same main folder where the theme files are.
 
 To make the Web Font Icons available, either:
 

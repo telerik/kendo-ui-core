@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Button | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Button tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Button tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/button, /aspnet-core/helpers/tag-helpers/button
 slug: taghelpers_button_aspnetcore
+position: 1
 ---
 
 # Button Tag Helper Overview

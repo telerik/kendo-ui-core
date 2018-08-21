@@ -3,6 +3,7 @@ title: Overview
 page_title: Slider | UI for ASP.NET Core Slider HtmlHelper
 description: "Learn the basics when working with the Kendo UI Slider for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_sliderhelper_aspnetcore
+position: 1
 ---
 
 # Slider HtmlHelper Overview

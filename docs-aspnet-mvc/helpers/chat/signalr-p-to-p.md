@@ -1,89 +1,86 @@
 ---
 title: Peer-to-Peer Chat with SignalR
 page_title: Peer-to-Peer Chat with SignalR | Telerik UI for ASP.NET MVC
-description: "Learn how to create a peer-to-peer Chat UI with ASP.NET MVC and SignalR 2."
+description: "Learn how to create a peer-to-peer Knedo UI Chat UI with ASP.NET MVC and SignalR 2."
 slug: signalr_chathelper_aspnetmvc
 position: 2
 ---
 
 # Peer-to-Peer Chat with SignalR
 
-The below article explains how to configure a Telerik UI for ASP.NET MVC Chat and a [SignalR 2](https://www.asp.net/signalr) service to create a Peer-to-Peer Chat application.
+This article demonstrates how to configure a Telerik UI for ASP.NET MVC Chat and a [SignalR 2](https://www.asp.net/signalr) service to create a Peer-to-Peer Chat application.
 
-## Implement the SignalR Server Hub
+## Implementing the SignalR Server Hub
 
 This section explains how to implement the SignalR Chat Hub server.
 
-### Create new Application
+### Creating the New Application
 
-Depending on your choice you could either:
+Depending on your preferred editor, use either of the following approaches:
 
-* [Create a new Telerik UI for ASP.NET MVC application form the Standard template]({% slug newprojectwizards_visualstudio_aspnetmvc %});
+* [Create a new Telerik UI for ASP.NET MVC application form the Standard template]({% slug newprojectwizards_visualstudio_aspnetmvc %}), or
+* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC to the project]({% slug aspnetmvc5_aspnetmvc %})
 
-* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC to the project]({% slug aspnetmvc5_aspnetmvc %});
+#### Configuring the SignalR Hub
 
-### Configure the SignalR Hub
+1. Add the `Microsoft.AspNet.SignalR` package to the application.
 
-The below points describe how to configure and implement the SignaR Hub:
+    ```sh
+    install-package Microsoft.AspNet.SignalR
+    ```
 
-* Add the `Microsoft.AspNet.SignalR` package to the application:
+1. Create a `Startup.cs` file to configure the hub connection.
 
-```sh
-install-package Microsoft.AspNet.SignalR
-```
+    ```cs
+    using Microsoft.Owin;
+    using Owin;
 
-* Create a Startup.cs file to configure the hub connection:
+    [assembly: OwinStartup(typeof(SignalR.Startup))]
 
-```cs
-using Microsoft.Owin;
-using Owin;
-
-[assembly: OwinStartup(typeof(SignalR.Startup))]
-
-namespace SignalR
-{
-    public class Startup
+    namespace SignalR
     {
-        public void Configuration(IAppBuilder app)
+        public class Startup
         {
-            // Map the SignalR service
-            app.MapSignalR();
+            public void Configuration(IAppBuilder app)
+            {
+                // Map the SignalR service
+                app.MapSignalR();
+            }
         }
     }
-}
-```
+    ```
 
-* Create a `Hubs` folder and create a `ChatHub` class in it:
+1. Create a `Hubs` folder and create a `ChatHub` class in it.
 
-```cs
-using Microsoft.AspNet.SignalR;
+    ```cs
+    using Microsoft.AspNet.SignalR;
 
-namespace SignalR.Hubs
-{
-    // The Hub class should inherit from the Microsoft.AspNet.SignalR.Hub
-    public class ChatHub : Hub
+    namespace SignalR.Hubs
     {
-        public void Send(object sender, string message)
+        // The Hub class should inherit from the Microsoft.AspNet.SignalR.Hub
+        public class ChatHub : Hub
         {
-            // Broadcast the message to all clients except the sender
-            Clients.Others.broadcastMessage(sender, message);
-        }
-        public void SendTyping(object sender)
-        {
-            // Broadcast the typing notification to all clients except the sender
-            Clients.Others.typing(sender);
+            public void Send(object sender, string message)
+            {
+                // Broadcast the message to all clients except the sender
+                Clients.Others.broadcastMessage(sender, message);
+            }
+            public void SendTyping(object sender)
+            {
+                // Broadcast the typing notification to all clients except the sender
+                Clients.Others.typing(sender);
+            }
         }
     }
-}
-```
+    ```
 
-## Implement the Application Client
+## Implementing the Application Client
 
-This section explains how to implement the the P2P Chat application client.
+This section explains how to implement the P2P Chat application client.
 
-### Initialize the Chat
+### Initializing the Chat
 
-In the `Views\Home\Index.cshtml` initialize the Chat widget and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events:
+In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events.
 
 ```cs
 @{
@@ -94,8 +91,8 @@ In the `Views\Home\Index.cshtml` initialize the Chat widget and implement handle
     .Name("chat")
     .User(user => user
         // Each instance of the app will generate a unique username.
-        // This would allow the SignalR Hub to know who is the user that sends the message
-        // and who are the clients that should receive that message.
+        // In this way, the SignalR Hub "knows" who is the user that sends the message
+        // and who are the clients that have to receive that message.
         .Name(@name)
         .IconUrl("http://demos.telerik.com/kendo-ui/content/chat/avatar.png")
     )
@@ -107,7 +104,7 @@ In the `Views\Home\Index.cshtml` initialize the Chat widget and implement handle
 
 <script>
     // The `typingStart` will notify the SignallR Hub that the current client is typing.
-    // The Hub, on his turn, will notify all the other clients that the user has started typing.
+    // The Hub, in turn, will notify all the other clients that the user has started typing.
     function onTypingStart(e) {
         chatHub.invoke("sendTyping", chat.getUser());
     }
@@ -120,61 +117,59 @@ In the `Views\Home\Index.cshtml` initialize the Chat widget and implement handle
 </script>
 ```
 
-### Configure the SignalR Client Hub Proxy
+### Configuring the SignalR Client Hub Proxy
 
-These are the steps required to configure SignalR on the client:
+1. Include the SignalR 2 script in the page. It is distributed with the SignalR NuGet package.
 
-* Include the SignalR 2 script on the page. It is distributed with the SignalR NuGet package:
+    ```html
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+    ```
 
-```html
-<script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
-```
+1. Reference the auto-generated SignalR hub script for the application.
 
-* Reference the autogenerated SignalR hub script for the application:
+    ```html
+    <script src="~/signalr/hubs"></script>
+    ```
 
-```html
-<script src="~/signalr/hubs"></script>
-```
+1. Implement the initialization logic for the SignalR Hub proxy.
 
-* Implement the initialization logic for the SignalR Hub proxy:
+    ```js
+    function startHub(startCallback) {
+        var hub = $.connection.chatHub;
 
-```js
-function startHub(startCallback) {
-    var hub = $.connection.chatHub;
+        $.connection.hub.start().done(function () {
+            startCallback(hub)
+        });
 
-    $.connection.hub.start().done(function () {
-        startCallback(hub)
+        return hub;
+    }
+    ```
+
+1. In the `$(document).ready()` handler start the Hub proxy and attach event handlers for the respective remote hub actions:
+
+    ```js
+    $(document).ready(function () {
+        window.chat = $('#chat').getKendoChat();
+        window.chatHub = startHub(function (hub) { });
+
+        chatHub.on("broadcastMessage", function (sender, message) {
+            var message = {
+                type: "text",
+                text: message
+            };
+
+            // Render the received message in the Chat
+            chat.renderMessage(message, sender);
+        });
+
+        chatHub.on("typing", function (sender) {
+            // Display the typing notification in the Chat
+            chat.renderMessage({ type: "typing" }, sender);
+        });
     });
+    ```
 
-    return hub;
-}
-```
-
-* In the `$(document).ready()` handler start the Hub proxy and attach event handlers for the respective remote hub actions:
-
-```js
-$(document).ready(function () {
-    window.chat = $('#chat').getKendoChat();
-    window.chatHub = startHub(function (hub) { });
-
-    chatHub.on("broadcastMessage", function (sender, message) {
-        var message = {
-            type: "text",
-            text: message
-        };
-
-        // Render the received message in the Chat
-        chat.renderMessage(message, sender);
-    });
-
-    chatHub.on("typing", function (sender) {
-        // Display typing notification in the Chat
-        chat.renderMessage({ type: "typing" }, sender);
-    });
-});
-```
-
-* Start the Peer-to-Peer Chat Application.
+1. Start the Peer-to-Peer Chat Application.
 
 ## See Also
 

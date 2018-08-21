@@ -1,6 +1,6 @@
 ---
-title: Configuring the Colors of the Radial Gauge Ranges
-description: An example demonstrating how to change the style of the Kendo UI Radial Gauge's Range
+title: Configure the Colors of RadialGauge Ranges
+description: An example on how to change the styles of the Kendo UI RadialGauge range.
 type: how-to
 page_title: Customize the Range Colors | Kendo UI Radial Gauge
 slug: gauge-radial-style-color-range
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,11 +24,13 @@ res_type: kb
 
 ## Description
 
-How can I configure the colors and range of the Kendo UI Radial Gauge?
+How can I configure the colors and range of the Kendo UI RadialGauge?
 
 ## Solution
 
-The Kendo UI Radial Gauge can be styled to your preferences [using the scale.ranges](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges) property.  Once you have determined your ranges, [adjust the colors](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges#scale.ranges.color) for each range.
+1. Determine the ranges by using the [`scale.ranges`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges) property of the RadialGauge.
+1. [Adjust the colors](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges#scale.ranges.color) for each range.
+
 ```
           $("#gauge").kendoRadialGauge({
             scale: {
@@ -51,7 +54,7 @@ The Kendo UI Radial Gauge can be styled to your preferences [using the scale.ran
           });
 ```
 
-The following demonstrates a Kendo UI Radial Gauge which displays a series of ranges with unique colors:
+The following example demonstrates how to set the RadialGauge to display a series of ranges with unique colors.
 
 ```html
     <div id="gauge"></div>
@@ -59,7 +62,7 @@ The following demonstrates a Kendo UI Radial Gauge which displays a series of ra
     <script>
 
       $(document).ready(function() {
-        
+
         $("#gauge").kendoRadialGauge({
 
           pointer: {
@@ -108,6 +111,6 @@ The following demonstrates a Kendo UI Radial Gauge which displays a series of ra
 
 ## See Also
 
-* [Kendo UI Radial Gauge - Scale Options Demo](https://demos.telerik.com/kendo-ui/radial-gauge/scale-options)
-* [scale.ranges - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges)
-* [scale.ranges.color - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges#scale.ranges.color)
+* [Scale Options Demo of the Kendo UI RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/scale-options)
+* [API Reference of scale.ranges](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges)
+* [API Reference of scale.ranges.color](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/scale.ranges#scale.ranges.color)

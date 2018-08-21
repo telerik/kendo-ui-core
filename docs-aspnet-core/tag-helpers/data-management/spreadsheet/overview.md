@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Spreadsheet | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/spreadsheet, /aspnet-core/helpers/tag-helpers/spreadsheet
 slug: taghelpers_spreadsheet_aspnetcore
+position: 1
 ---
 
 # Spreadsheet Tag Helper Overview

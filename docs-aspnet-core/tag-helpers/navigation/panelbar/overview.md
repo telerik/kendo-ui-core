@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: PanelBar | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the PanelBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI PanelBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/panelbar, /aspnet-core/helpers/tag-helpers/panelbar
 slug: taghelpers_panelbar_aspnetcore
+position: 1
 ---
 
 # PanelBar Tag Helper Overview

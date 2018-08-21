@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: TreeMap | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the TreeMap tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI TreeMap tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_treemap_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/treemap
+position: 1
 ---
 
 # TreeMap Tag Helper Overview

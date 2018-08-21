@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Notification | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Notification HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_notification_aspnetcore
-position: 43
+description: "Learn the basics when working with the Kendo UI Notification HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/notification
+slug: htmlhelpers_notification_aspnetcore
+position: 1
 ---
 
 # Notification HtmlHelper Overview

@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: DropDownTree | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the DropDownTree HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_dropdowntree_aspnetcore
-position: 22
+description: "Learn the basics when working with the Kendo UI DropDownTree HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/dropdowntree
+slug: htmlhelpers_dropdowntree_aspnetcore
+position: 1
 ---
 
 # DropDownTree HtmlHelper Overview

@@ -1,15 +1,14 @@
 ---
 title: Overview
-page_title: Charts | UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Charts HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Charts | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Kendo UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_charts_aspnetcore
 position: 1
-previous_url: /aspnet-core/helpers/html-helpers/charts/charts, /aspnet-core/helpers/html-helpers/charts
 ---
 
 # Charts HtmlHelper Overview
 
-The Charts HtmlHelper extension is a server-side wrapper for the [Kendo UI Charts](http://demos.telerik.com/kendo-ui/area-charts/index) widget.
+The Charts HtmlHelper extension is a server-side wrapper for the [Kendo UI Charts](http://demos.telerik.com/kendo-ui/area-charts/index) widgets.
 
 The [Kendo UI Charts](http://demos.telerik.com/aspnet-core/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
 

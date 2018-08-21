@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: AutoComplete | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the AutoComplete tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI AutoComplete tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/autocomplete, /aspnet-core/helpers/tag-helpers/autocomplete
 slug: taghelpers_autocomplete_aspnetcore
+position: 1
 ---
 
 # AutoComplete Tag Helper Overview

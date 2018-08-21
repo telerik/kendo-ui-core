@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Validator | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Validator tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Validator tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/validator, /aspnet-core/helpers/tag-helpers/validator
 slug: taghelpers_validator_aspnetcore
+position: 1
 ---
 
 # Validator Tag Helper Overview
@@ -31,7 +32,7 @@ The following example demonstrates how to define the Validator by using the Vali
                 </li>             
             </ul>
         </form>
-				
+
 ## See Also
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})

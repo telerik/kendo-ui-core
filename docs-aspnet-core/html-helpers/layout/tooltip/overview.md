@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Tooltip | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_tooltip_aspnetcore
-position: 63
+description: "Learn the basics when working with the Kendo UI Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/tooltip
+slug: htmlhelpers_tooltip_aspnetcore
+position: 1
 ---
 
 # Tooltip HtmlHelper Overview

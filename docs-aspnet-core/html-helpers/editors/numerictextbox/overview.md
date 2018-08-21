@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: NumericTextBox | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the NumericTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_numerictextbox_aspnetcore
-position: 45
+description: "Learn the basics when working with the Kendo UI NumericTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/numerictextbox
+slug: htmlhelpers_numerictextbox_aspnetcore
+position: 1
 ---
 
 # NumericTextBox HtmlHelper Overview

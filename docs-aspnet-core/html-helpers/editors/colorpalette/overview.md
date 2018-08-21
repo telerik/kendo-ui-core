@@ -3,6 +3,7 @@ title: Overview
 page_title: ColorPalette | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI ColorPalette HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_colorpalettehelper_aspnetcore
+position: 1
 ---
 
 # ColorPalette HtmlHelper Overview

@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_dropdownlist_aspnetcore
-position: 21
+description: "Learn the basics when working with the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/dropdownlist
+slug: htmlhelpers_dropdownlist_aspnetcore
+position: 1
 ---
 
 # DropDownList HtmlHelper Overview

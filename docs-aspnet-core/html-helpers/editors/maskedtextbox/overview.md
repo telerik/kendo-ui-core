@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: MaskedTextBox | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the MaskedTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_maskedtextbox_aspnetcore
-position: 35
+description: "Learn the basics when working with the Kendo UI MaskedTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/maskedtextbox
+slug: htmlhelpers_maskedtextbox_aspnetcore
+position: 1
 ---
 
 # MaskedTextBox HtmlHelper Overview

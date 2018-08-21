@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Slider | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Slider tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Slider tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/slider, /aspnet-core/helpers/tag-helpers/slider
 slug: taghelpers_slider_aspnetcore
+position: 1
 ---
 
 # Slider Tag Helper Overview

@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: DateInput | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the DateInput HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_dateinput_aspnetcore
-position: 13
+description: "Learn the basics when working with the Kendo UI DateInput HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/dateinput
+slug: htmlhelpers_dateinput_aspnetcore
+position: 1
 ---
 
 # DateInput HtmlHelper Overview

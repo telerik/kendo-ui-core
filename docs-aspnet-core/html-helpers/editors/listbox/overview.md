@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: ListBox | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the ListBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_listbox_aspnetcore
-position: 29
+description: "Learn the basics when working with the Kendo UI ListBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/listbox
+slug: htmlhelpers_listbox_aspnetcore
+position: 1
 ---
 
 # ListBox HtmlHelper Overview

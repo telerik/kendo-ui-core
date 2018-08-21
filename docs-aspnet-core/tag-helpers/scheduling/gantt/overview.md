@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: Gantt | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: taghelpers_gantt_aspnetcore
+description: "Learn the basics when working with the Kendo UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/gantt
+slug: taghelpers_gantt_aspnetcore
+position: 1
 ---
 
 # Gantt Tag Helper Overview

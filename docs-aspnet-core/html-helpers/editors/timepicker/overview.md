@@ -3,6 +3,7 @@ title: Overview
 page_title: TimePicker | UI for ASP.NET Core TimePicker HtmlHelper
 description: "Learn the basics when working with the Kendo UI TimePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_timepickerhelper_aspnetcore
+position: 1
 ---
 
 # TimePicker HtmlHelper Overview

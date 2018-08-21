@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: TreeView | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the TreeView tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI TreeView tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/treeview, /aspnet-core/helpers/tag-helpers/treeview
 slug: taghelpers_treeview_aspnetcore
+position: 1
 ---
 
 # TreeView Tag Helper Overview

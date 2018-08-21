@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: TreeList | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/html-helpers/treelist
 slug: htmlhelpers_treelist_aspnetcore
 position: 1
-previous_url: /aspnet-core/helpers/html-helpers/treelist
 ---
 
 # TreeList HtmlHelper Overview

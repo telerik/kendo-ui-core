@@ -3,6 +3,7 @@ title: Overview
 page_title: TreeMap | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI TreeMap HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_treemaphelper_aspnetcore
+position: 1
 ---
 
 # TreeMap HtmlHelper Overview

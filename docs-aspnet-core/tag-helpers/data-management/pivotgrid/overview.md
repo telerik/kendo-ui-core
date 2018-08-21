@@ -1,9 +1,10 @@
 ---
 title: Overview
 page_title: PivotGrid | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the PivotGrid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI PivotGrid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_pivotgrid_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/pivotgrid
+position: 1
 ---
 
 # PivotGrid Tag Helper Overview

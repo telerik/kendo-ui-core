@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/html-helpers/spreadsheet/
 slug: htmlhelpers_spreadsheet_aspnetcore
-position: 57
-previous_url: /aspnet-core/helpers/html-helpers/spreadsheet
+position: 1
 ---
 
 # Spreadsheet HtmlHelper Overview

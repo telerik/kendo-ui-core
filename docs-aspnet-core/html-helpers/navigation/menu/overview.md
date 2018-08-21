@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Menu | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_menu_aspnetcore
-position: 39
+description: "Learn the basics when working with the Kendo UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/menu
+slug: htmlhelpers_menu_aspnetcore
+position: 1
 ---
 
 # Menu HtmlHelper Overview

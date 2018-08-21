@@ -1,10 +1,10 @@
 ---
 title: Overview
 page_title: Chart | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Chart tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI Chart tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/tag-helpers/chart
 slug: taghelpers_chart_aspnetcore
 position: 1
-previous_url: /aspnet-core/helpers/tag-helpers/chart
 ---
 
 # Chart Tag Helper Overview
@@ -42,8 +42,8 @@ The Chart tag helper configuration options are passed as attributes of the tag. 
 
 ```tab-tagHelper
 <kendo-chart name="chart">
-    <title text="Gross domestic product growth /GDP annual %/"></title>
-    <legend position="ChartLegendPosition.Top"></legend>
+    <chart-title text="Gross domestic product growth /GDP annual %/"></title>
+    <chart-legend position="ChartLegendPosition.Top"></legend>
     <series-defaults type="ChartSeriesType.Column"></series-defaults>
 
     <series>

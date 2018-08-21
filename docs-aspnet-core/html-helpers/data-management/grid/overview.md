@@ -1,11 +1,10 @@
 ---
 title: Overview
 page_title: Grid | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: htmlhelpers_grid_aspnetcore
+description: "Learn the basics when working with the Kendo UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/html-helpers/grid
 slug: htmlhelpers_grid_aspnetcore_overview
 position: 1
-previous_url: /aspnet-core/helpers/html-helpers/grid
 ---
 
 # Grid HtmlHelper Overview
