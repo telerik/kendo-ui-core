@@ -42,8 +42,8 @@ The Chart tag helper configuration options are passed as attributes of the tag. 
 
 ```tab-tagHelper
 <kendo-chart name="chart">
-    <title text="Gross domestic product growth /GDP annual %/"></title>
-    <legend position="ChartLegendPosition.Top"></legend>
+    <chart-title text="Gross domestic product growth /GDP annual %/"></title>
+    <chart-legend position="ChartLegendPosition.Top"></legend>
     <series-defaults type="ChartSeriesType.Column"></series-defaults>
 
     <series>
