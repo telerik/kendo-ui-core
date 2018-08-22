@@ -1065,7 +1065,7 @@ If set to `true` the column will be visible in the treelist column menu. By defa
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/grid/appearance#locked-columns) in the Grid Appearance article.
+If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/treelist/appearance#locked-columns) in the TreeList Appearance article.
 
 #### Example - locked columns
 
@@ -3195,6 +3195,679 @@ If set to `true` the user can navigate the widget using the keyboard. By default
 
 > Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/treelist/keyboard-navigation) for a live demo.
 
+### pageable `Boolean|Object` *(default: false)*
+
+If set to `true` the treelist will display a pager. By default paging is disabled.
+
+Only client-side paging is supported, which means that all data items are expected to be available when the treelist is initialized.
+
+Can be set to a JavaScript object which represents the pager configuration.
+
+> Don't forget to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings.
+
+#### Example - enable paging
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2
+            }
+        });
+    </script>
+
+### pageable.alwaysVisible `Boolean` *(default: true)*
+
+By default the treelist will show the pager even when total amount of items in the DataSource is less than the pageSize.
+
+If set to `false` the treelist will toggle the pager visibility as follows:
+
+* when the total amount of items initially set in the DataSource is less than the pageSize number the pager will be hidden.
+* when the total amount of items initially set in the DataSource is greater than or equal to the pageSize number the pager will be shown.
+* when the total amount of items in the DataSource becomes less than the pageSize number (after delete, filter operation or pageSize change) the pager will be hidden.
+* when the total amount of items in the DataSource becomes greater than or equal to the pageSize number (after an insert, filter operation or pageSize change) the pager will be shown.
+
+Introduced in the Kendo UI 2017 R3 release.
+
+#### Example - hide the pager if total items are less than pageSize
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 10,
+                alwaysVisible: false
+            }
+        });
+    </script>
+
+### pageable.pageSize `Number`
+
+The number of data items which will be displayed in the treelist. **This setting will not work if the TreeList is assigned an already existing Kendo UI DataSource instance.**
+
+#### Example - set page size
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2
+            }
+        });
+    </script>
+
+### pageable.previousNext `Boolean` *(default: true)*
+
+If set to `true` the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.
+
+#### Example - hide the first, previous, next, and last buttons
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                previousNext: false
+            }
+        });
+    </script>
+
+### pageable.numeric `Boolean` *(default: true)*
+
+If set to `true` the pager will display buttons for navigating to specific pages. By default those buttons are displayed.
+
+Using `pageable.numeric` and [`pageable.input`](pageable.input) at the same time is not recommended.
+
+#### Example - hide the numeric pager buttons
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                numeric: false
+            }
+        });
+    </script>
+
+### pageable.buttonCount `Number` *(default: 10)*
+
+The maximum number of buttons displayed in the numeric pager. The pager will display ellipsis (...) if there are more pages than the specified number.
+
+#### Example - set pager button count
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                buttonCount: 1
+            }
+        });
+    </script>
+
+### pageable.input `Boolean` *(default: false)*
+
+If set to `true` the pager will display an input element which allows the user to type a specific page number. By default the page input is not displayed.
+
+Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same time is not recommended.
+
+#### Example - show the pager input
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                input: true
+            }
+        });
+    </script>
+
+### pageable.pageSizes `Boolean|Array` *(default: false)*
+
+If set to `true` the pager will display a drop-down which allows the user to pick a page size.
+By default the page size drop-down is not displayed.
+
+Can be set to an array of predefined page sizes to override the default list.
+A special `all` value is supported. It sets the page size to the total number of records.
+
+If a `pageSize` setting is provided for the data source then this value will be selected initially.
+
+#### Example - show the page size DropDownList
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                pageSizes: true
+            }
+        });
+    </script>
+
+#### Example - specify the page sizes as array
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                pageSizes: [2, 3, 4, "all"],
+                numeric: false
+            }
+        });
+    </script>
+
+### pageable.refresh `Boolean` *(default: false)*
+
+If set to `true` the pager will display the refresh button. Clicking the refresh button will refresh the treelist. By default the refresh button is not displayed.
+
+#### Example - show the refresh button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                refresh: true
+            }
+        });
+    </script>
+
+### pageable.info `Boolean` *(default: true)*
+
+If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.
+
+##### Example - hide the paging information
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                info: false
+            }
+        });
+    </script>
+
+### pageable.messages `Object`
+
+The text messages displayed in pager. Use this option to customize or localize the pager messages.
+
+### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
+
+The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
+
+Contains three placeholders:
+- {0} - the first data item index
+- {1} - the last data item index
+- {2} - the total number of data items
+
+#### Example - set the "display" pager message
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                messages: {
+                    display: "Showing {0}-{1} from {2} data items"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.empty `String` *(default: "No items to display")*,
+
+The text displayed when the treelist is empty.
+
+#### Example - set the "empty" pager message
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                messages: {
+                    empty: "No data"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.page `String` *(default: "Page")*,
+
+The label displayed before the pager input.
+
+#### Example - set the label before the pager input
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                input: true,
+                messages: {
+                    page: "Enter page"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.of `String` *(default: "of {0}")*,
+
+The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
+
+#### Example - set the label after the pager input
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                input: true,
+                messages: {
+                    of: "from {0}"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.itemsPerPage `String` *(default: "items per page")*,
+
+The label displayed after the page size DropDownList.
+
+#### Example - set the label after the page size DropDownList
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                input: true,
+                messages: {
+                    itemsPerPage: "data items per page"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.first `String` *(default: "Go to the first page")*,
+
+The tooltip of the button which goes to the first page.
+
+#### Example - set the Tooltip of the first page button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                messages: {
+                    first: "First page"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.last `String` *(default: "Go to the last page")*,
+
+The tooltip of the button which goes to the last page.
+
+#### Example - set the Tooltip of the last page button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                messages: {
+                    last: "Last page"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.next `String` *(default: "Go to the next page")*,
+
+The Tooltip of the button which goes to the next page.
+
+#### Example - set the Tooltip of the next page button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                messages: {
+                    next: "Next page"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.previous `String` *(default: "Go to the previous page")*,
+
+The Tooltip of the button which goes to the previous page.
+
+#### Example - set the Tooltip of the previous page button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                messages: {
+                    previous: "Previous page"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.refresh `String` *(default: "Refresh")*,
+
+The Tooltip of the refresh button.
+
+#### Example - set the Tooltip of the refresh button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                refresh: true,
+                messages: {
+                    refresh: "Refresh the treelist"
+                }
+            }
+        });
+    </script>
+
+### pageable.messages.morePages `String` *(default: "More pages")*,
+
+The Tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the `buttonCount`.
+
+#### Example - set the Tooltip of the ellipsis button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+              pageSize: 1,
+              buttonCount: 2,
+              refresh: true,
+              messages: {
+                  morePages: "More pages"
+              }
+            }
+        });
+    </script>
+
 ### pdf `Object`
 
 Configures the Kendo UI TreeList PDF export settings.
@@ -5061,7 +5734,7 @@ Fires the [edit](/api/javascript/ui/treelist/events/save) event.
         ]
       });
       $("#save").click(function(){
-        $("#treelist").data("kendoTreeList").saveRow($("treelist .k-grid-edit-row"));
+        $("#treelist").data("kendoTreeList").saveRow($("treelist .k-treelist-edit-row"));
       });
     </script>
 

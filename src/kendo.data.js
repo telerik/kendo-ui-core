@@ -1706,6 +1706,9 @@ var __meta__ = { // jshint ignore:line
         return result;
     }
 
+    Query.normalizeGroup = normalizeGroup;
+    Query.normalizeSort = normalizeSort;
+
     Query.process = function(data, options, inPlace) {
         options = options || {};
 
@@ -2903,6 +2906,8 @@ var __meta__ = { // jshint ignore:line
 
                     that._storeData(true);
 
+                    that._syncEnd();
+
                     that._change({ action: "sync" });
 
                     that.trigger(SYNC);
@@ -2910,11 +2915,15 @@ var __meta__ = { // jshint ignore:line
             } else {
                 that._storeData(true);
 
+                that._syncEnd();
+
                 that._change({ action: "sync" });
             }
 
             return promise;
         },
+
+        _syncEnd: noop,
 
         cancelChanges: function(model) {
             var that = this;
@@ -2932,11 +2941,15 @@ var __meta__ = { // jshint ignore:line
                 that._ranges = [];
                 that._addRange(that._data, 0);
 
+                that._changesCanceled();
+
                 that._change();
 
                 that._markOfflineUpdatesAsDirty();
             }
         },
+
+        _changesCanceled: noop,
 
         _markOfflineUpdatesAsDirty: function() {
             var that = this;
@@ -3101,6 +3114,8 @@ var __meta__ = { // jshint ignore:line
                         }
 
                     } else {
+                        that._modelCanceled();
+
                         items.splice(idx, 1);
 
                         that._removeModelFromRanges(model);
@@ -3108,6 +3123,8 @@ var __meta__ = { // jshint ignore:line
                 }
             });
         },
+
+        _modelCanceled: noop,
 
         _submit: function(promises, data) {
             var that = this;
@@ -3417,7 +3434,7 @@ var __meta__ = { // jshint ignore:line
                 this.offlineData(state.concat(destroyed));
 
                 if (updatePristine) {
-                    this._pristineData = this.reader._wrapDataAccessBase(state);
+                    this._pristineData = this.reader.reader ? this.reader.reader._wrapDataAccessBase(state) : this.reader._wrapDataAccessBase(state);
                 }
             }
         },
@@ -3666,10 +3683,15 @@ var __meta__ = { // jshint ignore:line
 
             if (that.options.serverAggregates !== true) {
                 options.aggregate = that._aggregate;
-                that._aggregateResult = that._calculateAggregates(data, options);
             }
 
             result = that._queryProcess(data, options);
+
+            if (that.options.serverAggregates !== true) {
+                // for performance reasons, calculate aggregates for part of the data only after query process
+                // this is necessary in the TreeList when paging
+                that._aggregateResult = that._calculateAggregates(result.dataToAggregate || data, options);
+            }
 
             that.view(result.data);
 
@@ -3767,7 +3789,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
 
-                this._aggregateResult = this._calculateAggregates(this._data, options);
+                this._aggregateResult = this._calculateAggregates(result.dataToAggregate || this._data, options);
                 this.view(result.data);
                 this.trigger(REQUESTEND, { type: "read" });
                 this.trigger(CHANGE, { items: result.data });
@@ -3847,7 +3869,7 @@ var __meta__ = { // jshint ignore:line
 
             if(val !== undefined) {
                 val = math.max(math.min(math.max(val, 1), that.totalPages()), 1);
-                that._query({ page: val });
+                that._query(that._pageableQueryOptions({ page: val }));
                 return;
             }
             skip = that.skip();
@@ -3941,6 +3963,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             return result;
+        },
+
+        _pageableQueryOptions: function(options) {
+            return options;
         },
 
         _wrapInEmptyGroup: function(model) {

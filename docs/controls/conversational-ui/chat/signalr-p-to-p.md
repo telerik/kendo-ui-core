@@ -16,7 +16,7 @@ This section explains how to implement the SignalR Chat Hub server.
 
 ### Initializing the Chat
 
-Initialize the Chat widget and implement the handlers for its [`post`](/api/javascript/ui/chat/events/post) and [`typingStart`](/api/javascript/ui/chat/events/typingStart) events.
+Initialize the Chat widget and implement the handlers for its [`post`](/api/javascript/ui/chat/events/post) and [`typingStart`](/api/javascript/ui/chat/events/typingstart) events.
 
 ```JavaScript
 var chat = $("#chat").kendoChat({

@@ -78,7 +78,7 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.init.call(that, element, options);
 
             options = that.options;
-            that.dataSource = kendo.data.DataSource.create(options.dataSource);
+            that._createDataSource(options);
             that.linkTemplate = kendo.template(that.options.linkTemplate);
             that.selectTemplate = kendo.template(that.options.selectTemplate);
             that.currentPageTemplate = kendo.template(that.options.currentPageTemplate);
@@ -248,6 +248,10 @@ var __meta__ = { // jshint ignore:line
             if (that.options.autoBind) {
                 dataSource.fetch();
             }
+        },
+
+        _createDataSource: function(options) {
+            this.dataSource = kendo.data.DataSource.create(options.dataSource);
         },
 
         refresh: function(e) {

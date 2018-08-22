@@ -2244,6 +2244,32 @@ The top padding of the labels.
     });
     </script>
 
+### categoryAxis.labels.position `String` *(default: "onAxis")*
+
+The position of the axis labels. By default, labels are positioned next to the axis.
+* When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
+typically, at the top or right end of the Chart unless the crossing axis was reversed.
+* When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
+typically, at the left or bottom end of the Chart unless the crossing axis was reversed.
+
+#### Example - position the category axis labels at the start of the value axis
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: [{
+        labels: {
+          position: 'start'
+        },
+        categories: ["2011", "2012", "2013"]
+      }],
+      series: [{
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+
 ### categoryAxis.labels.rotation `Number|String|Object` *(default: 0)*
 
 The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
@@ -20011,6 +20037,30 @@ The top padding of the labels.
     });
     </script>
 
+### valueAxis.labels.position `String` *(default: "onAxis")*
+
+The position of the axis labels. By default, labels are positioned next to the axis.
+* When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
+typically, at the top or right end of the Chart unless the crossing axis was reversed.
+* When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
+typically, at the left or bottom end of the Chart unless the crossing axis was reversed.
+
+#### Example - position the value axis labels at the end of the category axis
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      valueAxis: [{
+        labels: {
+          position: 'end'
+        }
+      }],
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
 ### valueAxis.labels.rotation `Number|String|Object` *(default: 0)*
 
 The rotation angle (in degrees) of the labels. By default the labels are not rotated. Angles increase clockwise and zero is to the left. Negative values are acceptable. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
@@ -24706,6 +24756,30 @@ The top padding of the labels.
           padding: {
             top: 10
           }
+        }
+      }
+    });
+    </script>
+
+### xAxis.labels.position `String` *(default: "onAxis")*
+
+The position of the axis labels. By default, labels are positioned next to the axis.
+* When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
+typically, at the top or right end of the Chart unless the crossing axis was reversed.
+* When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
+typically, at the left or bottom end of the Chart unless the crossing axis was reversed.
+
+#### Example - position the X axis labels at the start of the Y axis
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { type: "scatter", data: [[1, 2]] }
+      ],
+      xAxis: {
+        labels: {
+          position: 'start'
         }
       }
     });
@@ -29493,6 +29567,30 @@ The top padding of the labels.
           padding: {
             top: 10
           }
+        }
+      }
+    });
+    </script>
+
+### yAxis.labels.position `String` *(default: "onAxis")*
+
+The position of the axis labels. By default, labels are positioned next to the axis.
+* When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
+typically, at the top or right end of the Chart unless the crossing axis was reversed.
+* When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
+typically, at the left or bottom end of the Chart unless the crossing axis was reversed.
+
+#### Example - position the Y axis labels at the end of the X axis
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { type: "scatter", data: [[1, 2]] }
+      ],
+      yAxis: {
+        labels: {
+          position: 'end'
         }
       }
     });

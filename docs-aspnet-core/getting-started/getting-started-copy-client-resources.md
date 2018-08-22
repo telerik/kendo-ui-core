@@ -175,6 +175,7 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 		import "@progress/kendo-ui";
 		import "@progress/kendo-ui/js/kendo.aspnetmvc";
 		import "@progress/kendo-theme-default/dist/all.css";
+		window.jQuery = window.$ = kendo.jQuery;
 
 1. Open the Command prompt and navigate to the folder of the project.
 1. Run the following commands:

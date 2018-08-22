@@ -7791,6 +7791,32 @@ declare namespace kendo.ui {
         requestFailed?: string;
         retry?: string;
     }
+    interface TreeListPageableMessages {
+        display?: string;
+        empty?: string;
+        page?: string;
+        of?: string;
+        itemsPerPage?: string;
+        first?: string;
+        last?: string;
+        next?: string;
+        previous?: string;
+        refresh?: string;
+        morePages?: string;
+    }
+
+    interface TreeListPageable {
+        alwaysVisible?: boolean;
+        pageSize?: number;
+        previousNext?: boolean;
+        numeric?: boolean;
+        buttonCount?: number;
+        input?: boolean;
+        pageSizes?: boolean|any;
+        refresh?: boolean;
+        info?: boolean;
+        messages?: TreeListPageableMessages;
+    }
 
     interface TreeListPdfMargin {
         bottom?: number|string;
@@ -7842,6 +7868,7 @@ declare namespace kendo.ui {
         height?: number|string;
         messages?: TreeListMessages;
         navigatable?: boolean;
+        pageable?: boolean | TreeListPageable;
         pdf?: TreeListPdf;
         scrollable?: boolean|any;
         selectable?: boolean|string;

@@ -100,6 +100,4 @@ For example, you can change the start and end angle, the appearance of the label
 Other articles on the Kendo UI Arc Gauge:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Arc Gauge Widget](/aspnet-mvc/helpers/arcgauge/overview)
-* [Overview of the Arc Gauge JSP Tag]({% slug overview_arcgauge_uiforjsp %})
-* [Overview of the Arc Gauge PHP Class](/php/widgets/arcgauge/overview)
 * [Arc Gauge JavaScript API Reference](/api/javascript/dataviz/ui/arcgauge)
