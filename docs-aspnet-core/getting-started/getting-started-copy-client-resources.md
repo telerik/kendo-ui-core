@@ -9,7 +9,7 @@ position: 4
 
 # Include Client Side Resources in Telerik<sup>®</sup> UI for ASP.NET Core project
 
-This article demonstrates how to include the client-side resurces in ASP.NET Core project.
+This article demonstrates how to include the client-side resources in ASP.NET Core project.
 
 
 To include the Kendo UI client-side resources you can use either of the following approaches:
@@ -25,7 +25,7 @@ To include the Kendo UI client-side resources you can use either of the followin
    **Figure 2. Kendo UI resources**
 
    ![Kendo UI resources](images/kendo-ui-wwwroot.png)
-   
+
 * Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
 	> **Important**
@@ -91,10 +91,10 @@ To include the Kendo UI client-side resources you can use either of the followin
 
             ...
         </head>
-		
+
 ## Bower Package Installation
 
-Refer to the article on [Bower package installation](../../kendo-ui/intro/installation/bower-install). 
+Refer to the article on [Bower package installation](../../kendo-ui/intro/installation/bower-install).
 
 > **Important**
 >
@@ -138,7 +138,7 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 
 		const path = require('path');
 		const webpack = require('webpack');
-		
+
 		module.exports = {
 			entry: './main.js',
 			output: {
@@ -171,7 +171,8 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 
 		import "@progress/kendo-ui";
 		import "@progress/kendo-ui/js/kendo.aspnetmvc";
-		import "@progress/kendo-theme-default/dist/all.css"; 
+		import "@progress/kendo-theme-default/dist/all.css";
+		window.jQuery = window.$ = kendo.jQuery;
 
 1. Open the Command prompt and navigate to the folder of the project.
 1. Run the following commands:
