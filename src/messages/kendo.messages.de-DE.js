@@ -404,6 +404,15 @@
         "noRecords": "Keine Datensätze verfügbar."
       });
   }
+  
+/* ComboBox messages */
+  
+if(kendo.ui.ListBox){
+kendo.ui.ComboBox.prototype.options.messages =
+$.extend(true, kendo.ui.ComboBox.prototype.options.messages,{
+  "noRecords": "Keine Datensätze verfügbar."
+});
+}
 
 /* ListBox messaages */
 
