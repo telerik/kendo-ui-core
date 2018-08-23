@@ -799,7 +799,7 @@ The configuration options to be set.
     });
     </script>
 
-### title
+### title `String|Boolean|Object` *default: ""*
 
 Gets or sets the title of a Window. Supports chaining when used as a setter.
 

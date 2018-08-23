@@ -422,7 +422,9 @@
 
                 this.restore();
 
-                this.title($.isPlainObject(options.title) ? options.title.text : options.title);
+                if (typeof options.title !== "undefined") {
+                    this.title(options.title);
+                }
 
                 this._dimensions();
                 this._position();
@@ -720,7 +722,7 @@
                 }
 
                 if ($.isPlainObject(title)) {
-                    value = title.text;
+                    value = typeof title.text !== "undefined" ? title.text :  "";
                     encoded = title.encoded !== false;
                 } else {
                     value = title;
