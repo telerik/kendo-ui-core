@@ -3114,7 +3114,7 @@ var __meta__ = { // jshint ignore:line
                         }
 
                     } else {
-                        that._modelCanceled();
+                        that._modelCanceled(model);
 
                         items.splice(idx, 1);
 

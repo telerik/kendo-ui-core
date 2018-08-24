@@ -48,7 +48,8 @@ How can I export my Kendo UI Grid with multiple template columns with arbitrary 
                 }
               }
             },
-            pageSize: 20
+            pageSize: 20,
+            serverPaging: true
           },
           height: 550,
           toolbar: ["excel"],
@@ -85,7 +86,7 @@ How can I export my Kendo UI Grid with multiple template columns with arbitrary 
       });
 
       function exportGridWithTemplatesContent(e){
-        var dataSource = e.sender.dataSource;
+        var data = e.data;
         var gridColumns = e.sender.columns;
         var sheet = e.workbook.sheets[0];
         var visibleGridColumns = [];
@@ -114,7 +115,7 @@ How can I export my Kendo UI Grid with multiple template columns with arbitrary 
           // Traverse the column templates and apply them for each row at the stored column position.
 
           // Get the data item corresponding to the current row.
-          var dataItem = dataSource.at(i - 1);
+          var dataItem = data[i - 1];
           for (var j = 0; j < columnTemplates.length; j++) {
             var columnTemplate = columnTemplates[j];
             // Generate the template content for the current cell.

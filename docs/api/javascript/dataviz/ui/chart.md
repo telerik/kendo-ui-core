@@ -2247,6 +2247,7 @@ The top padding of the labels.
 ### categoryAxis.labels.position `String` *(default: "onAxis")*
 
 The position of the axis labels. By default, labels are positioned next to the axis.
+
 * When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
 typically, at the top or right end of the Chart unless the crossing axis was reversed.
 * When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
@@ -20040,6 +20041,7 @@ The top padding of the labels.
 ### valueAxis.labels.position `String` *(default: "onAxis")*
 
 The position of the axis labels. By default, labels are positioned next to the axis.
+
 * When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
 typically, at the top or right end of the Chart unless the crossing axis was reversed.
 * When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
@@ -24764,6 +24766,7 @@ The top padding of the labels.
 ### xAxis.labels.position `String` *(default: "onAxis")*
 
 The position of the axis labels. By default, labels are positioned next to the axis.
+
 * When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
 typically, at the top or right end of the Chart unless the crossing axis was reversed.
 * When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
@@ -29575,6 +29578,7 @@ The top padding of the labels.
 ### yAxis.labels.position `String` *(default: "onAxis")*
 
 The position of the axis labels. By default, labels are positioned next to the axis.
+
 * When `position` is set to `end`, the labels are placed at the end of the crossing axis&mdash;
 typically, at the top or right end of the Chart unless the crossing axis was reversed.
 * When `position` is set to `start`, the labels are placed at the start of the crossing axis&mdash;
