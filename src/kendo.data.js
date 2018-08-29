@@ -3695,9 +3695,7 @@ var __meta__ = { // jshint ignore:line
 
             that.view(result.data);
 
-            if (result.total !== undefined && !that.options.serverFiltering) {
-                that._total = result.total;
-            }
+            that._setFilterTotal(result.total, false);
 
             e = e || {};
 
@@ -3781,13 +3779,7 @@ var __meta__ = { // jshint ignore:line
 
                 result = this._queryProcess(this._data, this._mergeState(options));
 
-                if (!this.options.serverFiltering) {
-                    if (result.total !== undefined) {
-                        this._total = result.total;
-                    } else {
-                        this._total = this._data.length;
-                    }
-                }
+                this._setFilterTotal(result.total, true);
 
                 this._aggregateResult = this._calculateAggregates(result.dataToAggregate || this._data, options);
                 this.view(result.data);
@@ -3796,6 +3788,18 @@ var __meta__ = { // jshint ignore:line
             }
 
             return $.Deferred().resolve(isPrevented).promise();
+        },
+
+        _setFilterTotal: function(filterTotal, setDefaultValue) {
+            var that = this;
+
+            if (!that.options.serverFiltering) {
+                if (filterTotal !== undefined) {
+                    that._total = filterTotal;
+                } else if (setDefaultValue) {
+                    that._total = that._data.length;
+                }
+            }
         },
 
         fetch: function(callback) {

@@ -1065,7 +1065,7 @@ If set to `true` the column will be visible in the treelist column menu. By defa
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked (frozen) in the treelist. Also see the information about [Frozen Columns](/controls/data-management/treelist/appearance#locked-columns) in the TreeList Appearance article.
+If set to `true` the column will be displayed as locked (frozen) in the treelist.
 
 #### Example - locked columns
 

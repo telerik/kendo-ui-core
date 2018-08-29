@@ -36,6 +36,8 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
 <div id="grid"></div>
 
 <script>
+    var preventCloseOnSave = false;
+
     $(document).ready(function () {
         var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
             dataSource = new kendo.data.DataSource({
@@ -92,6 +94,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
             editable: "popup",
             edit: function (e) {
                 var editWindow = this.editable.element.data("kendoWindow");
+                editWindow.unbind("close");
                 editWindow.bind("close", onWindowEditClose);
             },
             save: function (e) {
