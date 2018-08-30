@@ -245,8 +245,7 @@
 @import "Default/chat/theme.less";
 
 .k-in,
-.k-item,
-.k-window-action
+.k-item
 {
     border-color: transparent;
 }
@@ -800,10 +799,6 @@ thead.k-grid-header tr:first-child {
     th {
         background-color: @calendar-group-background-color;
     }
-}
-
-.k-window-titlebar .k-link {
-    border-radius: @calendar-border-radius;
 }
 
  .k-calendar-container.k-group {
@@ -1378,7 +1373,6 @@ div.k-filebrowser-dropzone em
 .k-window
 {
     .window-shadow(@shadow-color);
-    background-color: @widget-background-color;
 }
 
 .k-window.k-window-maximized,
@@ -1503,7 +1497,6 @@ div.k-filebrowser-dropzone em
 .k-touch-scrollbar,
 .k-window,
 .k-window-titleless .k-window-content,
-.k-window-action,
 .k-inline-block,
 .k-grid .k-filter-options,
 .k-grouping-header .k-group-indicator,
@@ -3182,20 +3175,12 @@ td.k-state-focused.k-state-selected,
 
 .k-dialog {
     .k-window-titlebar {
-        padding: 1.1em 1em;
+        background: none;
         border-color: @button-hover-background-color;
-        background: @widget-background-color;
-        .k-dialog-title {
-            font-size: 1.1em;
-        }
     }
     a.k-dialog-action.k-dialog-close {
         cursor: pointer;
         z-index: 10000;
-    }
-    &.k-dialog-titleless a.k-dialog-action.k-dialog-close {
-        right: 0.5em;
-        top: 0.5em;
     }
     .k-content {
         border-bottom-right-radius: @border-radius;

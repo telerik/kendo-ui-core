@@ -3,7 +3,7 @@ title: Connecting to Microsoft Bot Framework
 page_title: Connecting to Microsoft Bot Framework | Kendo UI Chat
 description: "Configure and connect the Kendo UI Chat widget to the Microsoft Bot Framework."
 slug: connect_to_ms_bot_framework
-position: 4
+position: 5
 ---
 
 # Connecting to Microsoft Bot Framework

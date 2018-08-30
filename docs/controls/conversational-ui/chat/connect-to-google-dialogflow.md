@@ -3,7 +3,7 @@ title: Connecting to Google DialogFlow
 page_title: Connecting to Google DialogFlow | Kendo UI Chat
 description: "Configure and connect the Kendo UI Chat widget to the Google DialogFlow."
 slug: connect_to_google_dialogflow
-position: 5
+position: 6
 ---
 
 # Connecting to Google DialogFlow

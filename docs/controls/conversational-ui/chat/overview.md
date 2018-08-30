@@ -25,7 +25,7 @@ The Chat provides rich conversational experience that goes beyond the natural la
 1. (Optional) Set the width and height of the desired chat inline or by using CSS.
 
 ```html
-<div id="chart" style="width: 400px; height: 600px"></div>
+<div id="chat" style="width: 400px; height: 600px"></div>
 ```
 
 ### Initializing the Chat
@@ -35,7 +35,7 @@ The Chat provides rich conversational experience that goes beyond the natural la
 1. Configure its implementation for the [`post`](/api/javascript/ui/chat/events/post) event.
 
 ```html
-<div id="chart" style="width: 400px; height: 600px"></div>
+<div id="chat" style="width: 400px; height: 600px"></div>
 <script>
 	var chat = $("#chat").kendoChat({
 		post: function (args) {

@@ -3,7 +3,7 @@ title: Peer-to-Peer Chat with SignalR
 page_title: Peer-to-Peer Chat with SignalR | Kendo UI Chat
 description: "Learn how to create a peer-to-peer Chat UI with ASP.NET Core SignalR."
 slug: signalr-p-to-p
-position: 6
+position: 7
 ---
 
 # Peer-to-Peer Chat with SignalR

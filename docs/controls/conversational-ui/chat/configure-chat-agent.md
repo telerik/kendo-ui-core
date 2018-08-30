@@ -3,7 +3,7 @@ title: Connecting to Chat Bot Services
 page_title: Connecting to Chat Bot Services | Kendo UI Chat
 description: "Configure and connect the Kendo UI Chat widget to an existing Bot framework / service of choice."
 slug: connect_to_chatbot_service
-position: 3
+position: 4
 ---
 
 # Connecting to Chat Bot Services

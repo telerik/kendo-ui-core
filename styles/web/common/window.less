@@ -28,12 +28,17 @@
 
 // Title bar title text
 .k-window-title {
-    margin: -.15em 0;
     font-size: @window-title-font-size;
     line-height: @window-title-line-height;
+    display: block;
     text-overflow: ellipsis;
     overflow: hidden;
     cursor: default;
+}
+.k-window-title::before {
+    // Empty title height fix
+    content: "";
+    display: inline-block;
 }
 
 
@@ -50,6 +55,9 @@
     height: 20px;
     border-width: 0;
     box-sizing: content-box;
+    opacity: .7;
+
+    &:hover { opacity: 1; }
 }
 
 
@@ -63,7 +71,10 @@
     outline: 0;
 }
 .k-window-content + .k-prompt-container {
-    margin-top: -(@window-inner-padding-y / 2);
+    margin-top: -@window-inner-padding-y;
+}
+.k-prompt-container .k-textbox {
+    width: 100%;
 }
 
 .k-window-iframecontent {
