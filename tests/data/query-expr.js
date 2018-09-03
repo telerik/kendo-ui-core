@@ -371,28 +371,28 @@ test("startswith", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "bar", operator: "startswith" } ]
-    }), "((d.foo || '').toLowerCase().lastIndexOf(\"bar\", 0) == 0)");
+    }), "((d.foo || '').toString().toLowerCase().lastIndexOf(\"bar\", 0) == 0)");
 });
 
 test("endswith", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "bar", operator: "endswith" } ]
-        }), "((d.foo || '').toLowerCase().indexOf(\"bar\", (d.foo || '').toLowerCase().length - 3) >= 0)");
+        }), "((d.foo || '').toString().toLowerCase().indexOf(\"bar\", (d.foo || '').toString().toLowerCase().length - 3) >= 0)");
 });
 
 test("contains", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "bar", operator: "contains" } ]
-    }), "((d.foo || '').toLowerCase().indexOf(\"bar\") >= 0)");
+    }), "((d.foo || '').toString().toLowerCase().indexOf(\"bar\") >= 0)");
 });
 
 test("contains with apostrophe", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", value: "'", operator: "contains" } ]
-    }), "((d.foo || '').toLowerCase().indexOf(\"'\") >= 0)");
+    }), "((d.foo || '').toString().toLowerCase().indexOf(\"'\") >= 0)");
 });
 
 test("using function as field", function() {

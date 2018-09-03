@@ -77,7 +77,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     > **Important**
     > * The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns an empty result. 
-    > * As of the Kendo UI R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
+    > * As of the Kendo UI R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework. 
+    > * If you have impersonation enabled, `ToDataSourceResultAsync` extension method works well when only one thread is used in your ASP.NET application. As soon as you create a new one, impersonation drops off in the newly created child thread because all newly created child threads in ASP.NET by default run under the ASP.NET worker process's identity. To change this behaviour you have to explicitly impersonate current identity within the child thread's code.
 
     The following example demonstrates how to implement the `ToDataSourceResultAsync` extension method in your project.
 

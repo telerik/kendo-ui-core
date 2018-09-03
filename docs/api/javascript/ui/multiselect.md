@@ -516,7 +516,7 @@ The noData template receives the widget itself as a part of the data argument. T
 
 > **Important** The popup will open when 'noDataTemplate' is defined
 
-#### Example - specify headerTemplate as a string
+#### Example - specify noDataTemplate as a string
 
     <select id="multiselect"></select>
     <script>

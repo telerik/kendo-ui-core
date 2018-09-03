@@ -23,7 +23,7 @@ The following instructions demonstrate how to create a user identity and use tha
 
 > **Important**
 >
-> Even though the following instructions demonstrates how to create a user identity and use that identity directly on the client to access a DynamoDB table, exposing user credentials directly on the client is not recommended. That is why, before sharing the client implementation with third parties or users, switch to the [Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html) authentication.
+> Even though the following instructions demonstrates how to create a user identity and use that identity directly on the client to access a DynamoDB table, exposing user credentials directly on the client is not recommended. That is why, before sharing the client implementation with third parties or users, switch to the [Amazon Cognito](https://aws.amazon.com/cognito/getting-started/) authentication.
 
 1. In the [AWS Console](https://console.aws.amazon.com), search for `"iam"` (Identity and Access Management).
 1. In the IAM console, select **Users** and then **Add User**.

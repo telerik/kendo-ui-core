@@ -1219,6 +1219,67 @@ test("setOptions method hides footer template", 1, function() {
     equal(combobox.header, null);
 });
 
+test("setOptions method hides footer template", 1, function() {
+    var combobox = new ComboBox(input, {
+        headerTemplate: "header"
+    });
+
+    combobox.setOptions({ headerTemplate: "" });
+
+    equal(combobox.header, null);
+});
+
+test("each default colums header template is applied", function() {
+    var combobox = new ComboBox(input, {
+        columns: [
+            {field: "name"},
+            {field: "id", title:"Sometitle"}
+        ]
+    });
+
+    equal(combobox.columnsHeader.children().length, 2);
+    equal(combobox.columnsHeader.children().first().text(), "name");
+    equal(combobox.columnsHeader.children().last().text(), "Sometitle");
+});
+
+test("each colums header template is applied", function() {
+    var combobox = new ComboBox(input, {
+        columns: [
+            {field: "name", headerTemplate:"new Header"},
+            {field: "id", title:"Sometitle", headerTemplate:"new Header 2"}
+        ]
+    });
+
+    equal(combobox.columnsHeader.children().length, 2);
+    equal(combobox.columnsHeader.children().first().text(), "new Header");
+    equal(combobox.columnsHeader.children().last().text(), "new Header 2");
+});
+
+test("setOptions re-renders colums header template is applied", function() {
+    var combobox = new ComboBox(input, {
+        columns: [
+            {field: "name", headerTemplate:"new Header"},
+            {field: "id", title:"Sometitle", headerTemplate:"new Header 2"}
+        ]
+    });
+
+    equal(combobox.columnsHeader.children().length, 2);
+    equal(combobox.columnsHeader.children().first().text(), "new Header");
+    equal(combobox.columnsHeader.children().last().text(), "new Header 2");
+
+    combobox.setOptions(
+        {
+            columns: [
+                {field: "name", headerTemplate:"new Header Updated"},
+                {field: "id", title:"Sometitle", headerTemplate:"new Header 2 Updated"}
+            ]
+        }
+    );
+    equal(combobox.columnsHeader.children().length, 2);
+    equal(combobox.columnsHeader.children().first().text(), "new Header Updated");
+    equal(combobox.columnsHeader.children().last().text(), "new Header 2 Updated");
+});
+
 test("setOptions re-renders noDataTemplate", function() {
     var combobox = new ComboBox(input, {
         noDataTemplate: "test"

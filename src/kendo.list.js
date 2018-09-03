@@ -15,6 +15,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         outerHeight = kendo._outerHeight,
+        percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
         Widget = ui.Widget,
         keys = kendo.keys,
         support = kendo.support,
@@ -86,6 +87,11 @@ var __meta__ = { // jshint ignore:line
                 that.ul.attr(ID, id + "_listbox");
             }
 
+            if (options.columns && options.columns.length) {
+                that.ul.removeClass("k-list").addClass("k-grid-list");
+                that._columnsHeader();
+            }
+
             that._header();
             that._noData();
             that._footer();
@@ -105,6 +111,10 @@ var __meta__ = { // jshint ignore:line
 
             if (options && options.enable !== undefined) {
                 options.enabled = options.enable;
+            }
+
+            if (options.columns && options.columns.length) {
+                this._columnsHeader();
             }
 
             this._header();
@@ -154,6 +164,52 @@ var __meta__ = { // jshint ignore:line
             list.list.prepend(header);
 
             this._angularElement(list.header, "compile");
+        },
+
+        _columnsHeader: function() {
+            var list = this;
+            var columnsHeader = $(list.columnsHeader);
+
+            this._angularElement(columnsHeader, "cleanup");
+            kendo.destroy(columnsHeader);
+            columnsHeader.remove();
+
+            var header = "<div class='k-grid-header'><div class='k-grid-header-wrap'><table>";
+            var colGroup = "<colgroup>";
+            var row = "<tr>";
+
+            for (var idx = 0; idx < this.options.columns.length; idx++) {
+                var currentColumn = this.options.columns[idx];
+                var title = currentColumn.title || currentColumn.field || "";
+                var template = currentColumn.headerTemplate || title;
+                var columnsHeaderTemplate = typeof template !== "function" ? kendo.template(template) : template;
+                var currentWidth = currentColumn.width;
+                var currentWidthInt = parseInt(currentWidth, 10);
+                var widthStyle = '';
+
+                if (currentWidth && !isNaN(currentWidthInt)) {
+                    widthStyle += "style='width:";
+                    widthStyle += currentWidthInt;
+                    widthStyle += percentageUnitsRegex.test(currentWidth) ? "%" : "px";
+                    widthStyle += ";'";
+                }
+
+                colGroup += "<col " + widthStyle + "/>";
+
+                row += "<th class='k-header'>";
+                row += columnsHeaderTemplate(currentColumn);
+                row += "</th>";
+            }
+            colGroup += "</colgroup>";
+            row += "</tr>";
+            header += colGroup;
+            header += row;
+            header += "</table></div></div>";
+
+            list.columnsHeader = columnsHeader = $(header);
+            list.list.prepend(columnsHeader);
+
+            this._angularElement(list.columnsHeader, "compile");
         },
 
         _noData: function() {
@@ -207,6 +263,7 @@ var __meta__ = { // jshint ignore:line
                 dataSource: that.dataSource,
                 click: proxy(that._click, that),
                 activate: proxy(that._activateItem, that),
+                columns: currentOptions.columns,
                 deactivate: proxy(that._deactivateItem, that),
                 dataBinding: function() {
                     that.trigger("dataBinding");
@@ -272,13 +329,13 @@ var __meta__ = { // jshint ignore:line
         _hideClear: function() {
             var list = this;
 
-            if(list._clear) {
+            if (list._clear) {
                 list._clear.addClass(HIDDENCLASS);
             }
         },
 
         _showClear: function() {
-            if(this._clear) {
+            if (this._clear) {
                 this._clear.removeClass(HIDDENCLASS);
             }
         },
@@ -292,7 +349,7 @@ var __meta__ = { // jshint ignore:line
                 this._customOption = undefined;
             }
 
-            if(this._isFilterEnabled() && !this.options.enforceMinLength) {
+            if (this._isFilterEnabled() && !this.options.enforceMinLength) {
                 this._filter({word: "", open: false});
 
                 if (this.options.highlightFirst) {
@@ -317,11 +374,14 @@ var __meta__ = { // jshint ignore:line
         _filterSource: function(filter, force) {
             var that = this;
             var options = that.options;
+            var isMultiColumnFiltering = options.filterFields && filter && filter.logic && filter.filters && filter.filters.length;
             var dataSource = that.dataSource;
             var expression = extend({}, dataSource.filter() || {});
             var resetPageSettings = filter || (expression.filters && expression.filters.length && !filter);
 
             var removed = removeFiltersForField(expression, options.dataTextField);
+
+            this._clearFilterExpressions(expression);
 
             if ((filter || removed) && that.trigger("filtering", { filter: filter })) {
                 return;
@@ -332,8 +392,10 @@ var __meta__ = { // jshint ignore:line
                 logic: "and"
             };
 
-            if (isValidFilterExpr(filter) && $.trim(filter.value).length) {
+            if (isMultiColumnFiltering) {
                 newExpression.filters.push(filter);
+            } else {
+                this._pushFilterExpression(newExpression, filter);
             }
 
             if (isValidFilterExpr(expression)) {
@@ -358,6 +420,30 @@ var __meta__ = { // jshint ignore:line
             }, { filter: newExpression });
 
             return dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
+        },
+
+        _pushFilterExpression: function (newExpression, filter) {
+            if (isValidFilterExpr(filter) && $.trim(filter.value).length) {
+                newExpression.filters.push(filter);
+            }
+        },
+
+        _clearFilterExpressions: function (expression) {
+            if (!expression.filters) {
+                return;
+            }
+
+            var filtersToRemove;
+
+            for(var i = 0; i < expression.filters.length; i++) {
+                if ("fromFilter" in expression.filters[i]) {
+                    filtersToRemove = i;
+                }
+            }
+
+            if (!isNaN(filtersToRemove)){
+                expression.filters.splice(filtersToRemove, 1);
+            }
         },
 
         _angularElement: function(element, action) {
@@ -444,26 +530,46 @@ var __meta__ = { // jshint ignore:line
         _filter: function(options) {
             var that = this;
             var widgetOptions = that.options;
-            var ignoreCase = widgetOptions.ignoreCase;
+            var word = options.word;
+            var filterFields = widgetOptions.filterFields;
             var field = widgetOptions.dataTextField;
+            var expression;
 
-            var expression = {
-                value: ignoreCase ? options.word.toLowerCase() : options.word,
+            if (filterFields && filterFields.length) {
+                expression = {
+                    logic: "or",
+                    filters: [],
+                    fromFilter: true
+                };
+                for(var i = 0; i < filterFields.length; i++) {
+                    this._pushFilterExpression(expression, that._buildExpression(word, filterFields[i]));
+                }
+            } else {
+                expression = that._buildExpression(word, field);
+            }
+
+            that._open = options.open;
+            that._filterSource(expression);
+        },
+
+        _buildExpression: function(value, field) {
+            var that = this;
+            var widgetOptions = that.options;
+            var ignoreCase = widgetOptions.ignoreCase;
+
+            return {
+                value: ignoreCase ? value.toLowerCase() : value,
                 field: field,
                 operator: widgetOptions.filter,
                 ignoreCase: ignoreCase
             };
-
-            that._open = options.open;
-            that._filterSource(expression);
-
         },
 
         _clearButton: function() {
             var list = this;
             var clearTitle = (list.options.messages && list.options.messages.clear) ? list.options.messages.clear: "clear";
 
-            if(!list._clear){
+            if (!list._clear){
                 list._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="' + clearTitle + '"></span>').attr({
                     "role": "button",
                     "tabIndex": -1
@@ -485,7 +591,7 @@ var __meta__ = { // jshint ignore:line
 
             if ((!options.enforceMinLength && !word.length) || word.length >= options.minLength) {
                 this._state = "filter";
-                if(this.listView){
+                if (this.listView){
                     this.listView._emptySearch = !$.trim(word).length;
                 }
 
@@ -599,11 +705,11 @@ var __meta__ = { // jshint ignore:line
             var ariaLabel = inputElm.attr("aria-label");
             var ariaLabelledBy = inputElm.attr("aria-labelledby");
 
-            if(focusedElm === inputElm){
+            if (focusedElm === inputElm) {
                 return;
             }
 
-            if(ariaLabel){
+            if (ariaLabel) {
                 focusedElm.attr("aria-label", ariaLabel);
             } else if (ariaLabelledBy){
                 focusedElm.attr("aria-labelledby", ariaLabelledBy);
@@ -839,6 +945,17 @@ var __meta__ = { // jshint ignore:line
         _calculatePopupHeight: function(force) {
             var height = this._height(this.dataSource.flatView().length || force);
             this._calculateGroupPadding(height);
+            this._calculateColumnsHeaderPadding(height);
+        },
+
+        _calculateColumnsHeaderPadding: function(height){
+            if (this.options.columns && this.options.columns.length) {
+                var list = this;
+                var isRtl = support.isRtl(list.wrapper);
+                var scrollbar = kendo.support.scrollbar();
+
+                list.columnsHeader.css((isRtl ? "padding-left" : "padding-right"), height !== "auto" ? scrollbar : 0);
+            }
         },
 
         _resizePopup: function(force) {
@@ -1087,7 +1204,7 @@ var __meta__ = { // jshint ignore:line
         _showBusy: function (e) {
             var that = this;
 
-            if(e.isDefaultPrevented()){
+            if (e.isDefaultPrevented()) {
                 return;
             }
 
@@ -1247,7 +1364,7 @@ var __meta__ = { // jshint ignore:line
                     dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
                     var shouldTrigger = true;
 
-                    if(dataItem){
+                    if (dataItem) {
                         shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
                     }
 
@@ -1257,7 +1374,7 @@ var __meta__ = { // jshint ignore:line
 
                     that._select(current);
                 } else if (that.input) {
-                    if(that._syncValueAndText() || that._isSelect){
+                    if (that._syncValueAndText() || that._isSelect) {
                         that._accessor(that.input.val());
                     }
                     that.listView.value(that.input.val());
@@ -2179,6 +2296,15 @@ var __meta__ = { // jshint ignore:line
                 fixedGroupTemplate: options.fixedGroupTemplate
             };
 
+            if (options.columns) {
+                for (var i = 0; i < options.columns.length; i++) {
+                    var currentColumn = options.columns[i];
+                    var templateText = currentColumn.field ? currentColumn.field.toString(): "text";
+
+                    templates["column"+ i] = currentColumn.template || "#: " + templateText + "#";
+                }
+            }
+
             for (var key in templates) {
                 template = templates[key];
                 if (template && typeof template !== "function") {
@@ -2281,9 +2407,15 @@ var __meta__ = { // jshint ignore:line
             var dataItem = context.item;
             var notFirstItem = context.index !== 0;
             var selected = context.selected;
+            var isGrouped = this.isGrouped();
+            var hasColumns = this.options.columns && this.options.columns.length;
 
             if (notFirstItem && context.newGroup) {
                 item += ' k-first';
+            }
+
+            if (context.isLastGroupedItem && hasColumns) {
+                item += ' k-last';
             }
 
             if (selected) {
@@ -2291,14 +2423,45 @@ var __meta__ = { // jshint ignore:line
             }
 
             item += '" aria-selected="' + (selected ? "true" : "false") + '" data-offset-index="' + context.index + '">';
-
-            item += this.templates.template(dataItem);
+            if (hasColumns) {
+                item += this._renderColumns(dataItem);
+            } else {
+                item += this.templates.template(dataItem);
+            }
 
             if (notFirstItem && context.newGroup) {
-                item += '<div class="k-group">' + this.templates.groupTemplate(context.group) + '</div>';
+                if (hasColumns) {
+                    item += '<div class="k-cell k-group-cell"><span>' + this.templates.groupTemplate(context.group) + '</span></div>';
+                } else {
+                    item += '<div class="k-group">' + this.templates.groupTemplate(context.group) + '</div>';
+                }
+            } else if (isGrouped && hasColumns) {
+                item += "<div class='k-cell k-spacer-cell'></div>";
             }
 
             return item + "</li>";
+        },
+
+        _renderColumns: function(dataItem) {
+            var item = "";
+
+            for (var i = 0; i < this.options.columns.length; i++) {
+                var currentWidth = this.options.columns[i].width;
+                var currentWidthInt = parseInt(currentWidth, 10);
+                var widthStyle = '';
+
+                if (currentWidth && !isNaN(currentWidthInt)) {
+                    widthStyle += "style='width:";
+                    widthStyle += currentWidthInt;
+                    widthStyle += percentageUnitsRegex.test(currentWidth) ? "%" : "px";
+                    widthStyle += ";'";
+                }
+                item += "<span class='k-cell' " + widthStyle + ">";
+                item += this.templates["column"+ i](dataItem);
+                item += "</span>";
+            }
+
+            return item;
         },
 
         _render: function() {
@@ -2325,6 +2488,7 @@ var __meta__ = { // jshint ignore:line
                             item: group.items[j],
                             group: group.value,
                             newGroup: newGroup,
+                            isLastGroupedItem: j === group.items.length - 1,
                             index: idx };
                         dataContext[idx] = context;
                         idx += 1;

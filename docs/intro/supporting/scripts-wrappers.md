@@ -16,6 +16,7 @@ Below are listed the script files for the Kendo UI supplementary scripts for int
 | [ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
+| | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.combobox.js | |
 | | kendo.dropdownlist.js | |

@@ -1055,7 +1055,7 @@ var __meta__ = { // jshint ignore:line
             return function(a, b, ignore) {
                 b += "";
                 if (ignore) {
-                    a = "(" + a + " || '').toLowerCase()";
+                    a = "(" + a + " || '').toString().toLowerCase()";
                     b = b.toLowerCase();
                 }
                 return impl(a, quote(b), ignore);

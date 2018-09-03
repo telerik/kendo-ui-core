@@ -29,6 +29,7 @@ The following table lists all Kendo UI components with regard to their support p
 | [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index)  | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Editor](http://demos.telerik.com/kendo-ui/editor/index)              | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index)    | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)    | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Slider](http://demos.telerik.com/kendo-ui/slider/index)              | <span class="tag-success">Yes</span>| <span class="tag-success">Yes</span> |

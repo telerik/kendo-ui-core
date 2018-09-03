@@ -1203,4 +1203,23 @@ test("concat filters with the same logic operator", function() {
     equal(filters.filters[1].filters.length, 2);
     equal(!filters.filters[1].filters.filters, true);
 });
+
+test("filterFields option should search by multiple columns", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        filterFields: ["text", "value"],
+        dataSource: data,
+        filter: "startswith"
+    });
+
+    combobox.search("Foo");
+
+    equal(combobox.ul.find("li").length, 1);
+
+    combobox.search("1");
+
+    equal(combobox.ul.find("li").length, 1);
+});
+
 })();

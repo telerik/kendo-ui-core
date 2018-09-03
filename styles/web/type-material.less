@@ -243,6 +243,31 @@
 
 @chat-quick-reply-color: @accent;
 
+
+// Grid
+@grid-bg: @component-bg;
+@grid-text: @component-text;
+@grid-border: @component-border;
+
+@grid-header-bg: @secondary-background-color;
+@grid-header-text: @primary-disabled-text-color;
+@grid-header-border: @grid-border;
+@grid-header-gradient: false;
+
+@grid-alt-bg: @alt-background-color;
+@grid-alt-text: @grid-text;
+@grid-alt-border: @grid-border;
+
+@grid-hover-bg: @hover-background-color;
+@grid-hover-text: @grid-text;
+@grid-hover-border: @grid-border;
+@grid-hover-gradient: false;
+
+@grid-selected-bg: @selected-background;
+@grid-selected-text: @base;
+@grid-selected-border: @grid-border;
+@grid-selected-gradient: false;
+
 // Kendo skin
 
 @theme-name: ~"material";
@@ -4223,4 +4248,55 @@ table.k-editor {
     color: @button-active-text-color;
     background-color: @button-active-background;
     border-color: @button-active-border-color;
+}
+
+
+// Dropdowngrid
+.k-dropdowngrid-popup {
+    border-color: @grid-border;
+    color: @grid-text;
+    background-color: @grid-bg;
+}
+.k-dropdowngrid-popup .k-header {
+    .linear-gradient(~"@{grid-header-gradient}");
+    border-color: @grid-header-border;
+    color: @grid-header-text;
+    background-color: @grid-header-bg;
+}
+.k-dropdowngrid-popup .k-group-header {
+    border-color: @grid-header-border;
+    color: @grid-header-text;
+    background-color: @grid-header-bg;
+}
+.k-dropdowngrid-popup .k-cell {
+    border-color: @grid-border;
+}
+.k-dropdowngrid-popup .k-item:nth-child(2n) {
+    background-color: @grid-alt-bg;
+}
+.k-dropdowngrid-popup .k-footer {
+    border-color: @grid-header-border;
+    color: @grid-header-text;
+    background-color: @grid-header-bg;
+}
+.k-dropdowngrid-popup .k-item.k-state-hover {
+    .linear-gradient(~"@{grid-hover-gradient}");
+    border-color: @grid-hover-border;
+    color: @grid-hover-text;
+    background-color: @grid-hover-bg;
+}
+.k-dropdowngrid-popup .k-item.k-state-selected {
+    .linear-gradient(~"@{grid-selected-gradient}");
+    border-color: @grid-selected-border;
+    color: @grid-selected-text;
+    background-color: @grid-selected-bg;
+}
+.k-dropdowngrid-popup .k-group-cell span {
+    background-color: @grid-text;
+    color: @grid-bg;
+}
+.k-grid-list > .k-item.k-last > .k-cell,
+.k-grid-list > .k-item.k-last > .k-group-cell,
+.k-grid-list > .k-item.k-last > .k-spacer-cell {
+    border-bottom-color: @grid-text;
 }

@@ -148,7 +148,7 @@ Defines the open animation duration.
 ### appendTo `Object|String` *(default: document.body)*
 
 The element that the Window will be appended to. Beneficial if the [Window is used together with a form](/web/window/overview#using-kendo-ui-window-with-a-form).
-Note that this *does not* constrain the window dragging within the given element.
+Note that this *does not* constrain the window dragging within the given element. For such scenarios, use the [draggable.containment](/api/javascript/ui/window/configuration/draggable.containment) setting.
 
 > Appending the Window to an element with an `overflow:hidden`, `overflow:auto` or `overflow:scroll` style may result in undesired behavior, because the Window will not be able to be displayed outside the element's boundaries. Unwanted scrollbars may appear as well.
 
@@ -222,7 +222,7 @@ If the URL contains a protocol, set `iframe` to `false`, otherwise the JSON resp
     });
     </script>
 
-### draggable `Boolean` *(default: true)*
+### draggable `Object|Boolean` *(default: true)*
 
 Enables (**true**) or disables (**false**) the ability for users to move/drag the widget.
 
@@ -232,6 +232,78 @@ Enables (**true**) or disables (**false**) the ability for users to move/drag th
     <script>
     $("#dialog").kendoWindow({
       draggable: false
+    });
+    </script>
+
+#### Example - draggable object configuration
+
+    <div id="container">
+      <div id="dialog">
+        <div style="width: 20px; height: 20px; border: 1px solid red;" id="handle"></div>
+      </div>
+    </div>
+    <script>
+    $("#dialog").kendoWindow({
+      draggable: {
+        containment: "#container",
+        axis: "x",
+        dragHandle: "#handle"
+      }
+    });
+    </script>
+
+### draggable.containment `String` *default: ""*
+
+Defines the element in which the window will be able to move. The window is appended to this element, thus, overriding the [`appendTo` setting](/api/javascript/ui/window/configuration/draggable.containment). Accepts either selector or an element.
+
+Note that the containment element should be positioned. In other words, it should have CSS position attribute of `relative`, `absolute`, or `fixed`.
+
+#### Example
+
+    <div id="container">
+      <div id="dialog">
+      </div>
+    </div>
+    <script>
+    $("#dialog").kendoWindow({
+      draggable: {
+        containment: "#container"
+      }
+    });
+    </script>
+
+### draggable.axis `String` *default: ""*
+
+Constrains the dragging to horizontal (x) or vertical (y) axis. Accepts two possible values: "x", "y".
+
+#### Example
+
+    <div id="container">
+      <div id="dialog">
+      </div>
+    </div>
+    <script>
+    $("#dialog").kendoWindow({
+      draggable: {
+        axis: "x"
+      }
+    });
+    </script>
+
+### draggable.dragHandle `String` *default: ".k-window-titlebar"*
+
+Restricts dragging of the window through the specified element which should be part of the window's content. Accepts either selector or element.
+
+#### Example
+
+    <div id="dialog">
+      <div style="width: 20px; height: 20px; border: 1px solid red;" id="handle"></div>
+    </div>
+    <script>
+    $("#dialog").kendoWindow({
+      draggable: {
+        dragHandle: "#handle"
+      }
     });
     </script>
 
@@ -353,7 +425,7 @@ Specifies whether the window should be pinned, i.e. it will not move together wi
 
 ### position `Object`
 
-A collection of one or two members, which define the initial Window's top and/or left position on the page.
+A collection of one or two members, which define the initial Window's top and/or left position on the page or the [`containment` element](/api/javascript/ui/window/configuration/draggable.containment).
 
 #### Example
 
@@ -403,7 +475,7 @@ Enables (**true**) or disables (**false**) the ability for users to scroll the w
 
 ### title `Object|String|Boolean` *default: ""*
 
-The text in the window title bar. If `false`, the window will be displayed without a title bar. Note that this will prevent the window from being dragged, and the window titlebar buttons will not be shown.
+The text in the window title bar. If `false`, the window will be displayed without a title bar. Note that the window titlebar buttons will not be shown and this will prevent the window from being dragged unless [`dragHandle`](/api/javascript/ui/window/configuration/draggable.dragHandle) is configured.
 
 #### Example
 
