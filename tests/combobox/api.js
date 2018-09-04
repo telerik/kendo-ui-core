@@ -3,6 +3,7 @@
 var data = [{text: "Foo", value: 1}, {text:"Bar", value:2}];
 
 var ComboBox = kendo.ui.ComboBox;
+var MultiColumnComboBox = kendo.ui.MultiColumnComboBox;
 
 var SELECTED = "k-state-selected";
 var keys = kendo.keys;
@@ -1230,42 +1231,42 @@ test("setOptions method hides footer template", 1, function() {
 });
 
 test("each default colums header template is applied", function() {
-    var combobox = new ComboBox(input, {
+    var combobox = new MultiColumnComboBox(input, {
         columns: [
             {field: "name"},
             {field: "id", title:"Sometitle"}
         ]
     });
 
-    equal(combobox.columnsHeader.children().length, 2);
-    equal(combobox.columnsHeader.children().first().text(), "name");
-    equal(combobox.columnsHeader.children().last().text(), "Sometitle");
+    equal(combobox.columnsHeader.find(".k-header").length, 2);
+    equal(combobox.columnsHeader.find(".k-header").first().text(), "name");
+    equal(combobox.columnsHeader.find(".k-header").last().text(), "Sometitle");
 });
 
 test("each colums header template is applied", function() {
-    var combobox = new ComboBox(input, {
+    var combobox = new MultiColumnComboBox(input, {
         columns: [
             {field: "name", headerTemplate:"new Header"},
             {field: "id", title:"Sometitle", headerTemplate:"new Header 2"}
         ]
     });
 
-    equal(combobox.columnsHeader.children().length, 2);
-    equal(combobox.columnsHeader.children().first().text(), "new Header");
-    equal(combobox.columnsHeader.children().last().text(), "new Header 2");
+    equal(combobox.columnsHeader.find(".k-header").length, 2);
+    equal(combobox.columnsHeader.find(".k-header").first().text(), "new Header");
+    equal(combobox.columnsHeader.find(".k-header").last().text(), "new Header 2");
 });
 
 test("setOptions re-renders colums header template is applied", function() {
-    var combobox = new ComboBox(input, {
+    var combobox = new MultiColumnComboBox(input, {
         columns: [
             {field: "name", headerTemplate:"new Header"},
             {field: "id", title:"Sometitle", headerTemplate:"new Header 2"}
         ]
     });
 
-    equal(combobox.columnsHeader.children().length, 2);
-    equal(combobox.columnsHeader.children().first().text(), "new Header");
-    equal(combobox.columnsHeader.children().last().text(), "new Header 2");
+    equal(combobox.columnsHeader.find(".k-header").length, 2);
+    equal(combobox.columnsHeader.find(".k-header").first().text(), "new Header");
+    equal(combobox.columnsHeader.find(".k-header").last().text(), "new Header 2");
 
     combobox.setOptions(
         {
@@ -1275,9 +1276,9 @@ test("setOptions re-renders colums header template is applied", function() {
             ]
         }
     );
-    equal(combobox.columnsHeader.children().length, 2);
-    equal(combobox.columnsHeader.children().first().text(), "new Header Updated");
-    equal(combobox.columnsHeader.children().last().text(), "new Header 2 Updated");
+    equal(combobox.columnsHeader.find(".k-header").length, 2);
+    equal(combobox.columnsHeader.find(".k-header").first().text(), "new Header Updated");
+    equal(combobox.columnsHeader.find(".k-header").last().text(), "new Header 2 Updated");
 });
 
 test("setOptions re-renders noDataTemplate", function() {

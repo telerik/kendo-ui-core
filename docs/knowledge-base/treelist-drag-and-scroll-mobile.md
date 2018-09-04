@@ -1,6 +1,6 @@
 ---
-title: Scroll and Drag & Drop on Mobile Devices
-description: An example on how to provide scrolling and the drag and drop functionality at the same time in the Kendo UI TreeList on mobile devices.
+title: Scroll and Drag and Drop on Mobile Devices
+description: An example on how to provide scrolling and the drag-and-drop functionality at the same time in the Kendo UI TreeList on mobile devices.
 type: how-to
 page_title: Drag and Drop on Mobile Devices | Kendo UI TreeList
 slug: treelist-drag-and-scroll-mobile
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -23,16 +24,16 @@ res_type: kb
 
 ## Description
 
-How can I use the Drag & Drop functionality of the Kendo UI TreeList on mobile devices?
+How can I use the Drag-and-Drop functionality of the Kendo UI TreeList on mobile devices?
 
 ## Solution
 
-To overcome the interference of the device scrolling and the Drag & Drop:
+To overcome the interference of the device scrolling and the drag-and-drop:
 
 1. Add an additional column for dragging.
-1. Stop the propagation of the `touchstart` event for all the other cells.
+1. Stop the propagation of the `touchstart` event for all other cells.
 
-> Test the below code on a mobile device.
+> Test the following code on a mobile device.
 
 ```html
 <div id="example">

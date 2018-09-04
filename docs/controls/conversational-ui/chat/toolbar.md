@@ -8,13 +8,13 @@ position: 3
 
 # Chat Toolbar
 
-The Chat Toolbar allows adding different toolbar actions for achieving more user friendly conversational UI.
+The toolbar of the Chat allows you to add toolbar actions for achieving more user-friendly conversational UI.
 
-The Toolbar is placed below the Chat input box and it can be shown/hidden by clicking the toolbar icon placed just to the left from the send button. The Chat Toolbar allows you to include buttons, which the end users can interact with. By handling the [`toolClick`](/api/javascript/ui/chat/events/toolclick) event you can implement functionality based on the command executed in the toolbar.
+The toolbar is located below the input box of the Chat. You can display or hide the toolbar by clicking the toolbar icon which is placed to the left of the **Send** button. The Chat toolbar enables you to add buttons for end-user interaction. Depending on the executed command in the toolbar, you can also implement a specific functionality by handling the [`toolClick`](/api/javascript/ui/chat/events/toolclick) event.
 
-## Configure Toolbar Items
+## Configuring Toolbar Items
 
-In order to configure the Toolbar items, you will need to use the [`toolbar.buttons`](/api/javascript/ui/chat/configuration/toolbar.buttons) configuration option of the Chat widget:
+To configure the Toolbar items, use the [`toolbar.buttons`](/api/javascript/ui/chat/configuration/toolbar.buttons) option of the Chat.
 
 ```html
 <div id="chat"></div>
@@ -33,15 +33,13 @@ In order to configure the Toolbar items, you will need to use the [`toolbar.butt
 </script>
 ```
 
-## Configure Toolbar Behavior
+## Configuring Toolbar Behavior
 
-The Chat configuration object allows you to configure:
+The Chat configuration object allows you to configure the following behavior aspects of the toolbar:
 
-* The [animation](/api/javascript/ui/chat/configuration/toolbar.animation) behavior of its Toolbar.
-
-* Wether the Toolbar will have a [scroll](/api/javascript/ui/chat/configuration/toolbar.scrollable). That is useful in cases when the buttons could not entirely fit within the width of the widget.
-
-* Wether it could be [hidden and shown](/api/javascript/ui/chat/configuration/toolbar.toggleable) upon a button click.
+* The [animation](/api/javascript/ui/chat/configuration/toolbar.animation) behavior of its toolbar.
+* Whether the toolbar will be [scrollable](/api/javascript/ui/chat/configuration/toolbar.scrollable). A scrollbar is useful when the buttons cannot entirely fit within the width of the Chat.
+* Whether the toolbar will be [displayed or hidden](/api/javascript/ui/chat/configuration/toolbar.toggleable) upon a button click.
 
 ```html
 <div id="chat"></div>

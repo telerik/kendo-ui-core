@@ -158,14 +158,14 @@ The category name can also be bound to a field of the data item, as demonstrated
         }
     });
 
-#### Label Position of the Categorical Chart Axes
+#### Label Positioning for the Categorical Chart Axes
 
 The category and value axes provide options for displaying their labels either next to the axis or at the outer edges of the plot area. By default, the labels are positioned next to the axis.
 
-To change the label position, set the [`position`](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.position) option of the axis labels:
+To change the label position, set the [`position`](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.position) option of the axis labels which provides the following available options:
+* (Default) When `position` is set to `"onAxis"` or `undefined`, the labels are positioned next to the axis.
 * When `position` is set to `"end"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
 * When `position` is set to `"start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
-* When `position` is set to `"onAxis"` or `undefined`, the labels are positioned next to the axis. This is the default value.
 
 ###### Example
 
@@ -292,14 +292,14 @@ XY Kendo UI Charts, such as [Scatter](http://demos.telerik.com/kendo-ui/scatter-
         }
     });
 
-### Label Position of the Scatter Chart Axes
+### Label Positioning for the Scatter Chart Axes
 
 The X and Y axes provide options for displaying their labels either next to the axis or at the outer edges of the plot area. By default, the labels are positioned next to the axis.
 
-To change the label position, set the [`position`](/api/javascript/dataviz/ui/chart#configuration-xAxis.labels.position) option of the axis labels:
+To change the label position, set the [`position`](/api/javascript/dataviz/ui/chart#configuration-xAxis.labels.position) option of the axis labels which provides the following available options:
+* (Default) When `position` is set to `"onAxis"` or `undefined`, the labels are positioned next to the axis.
 * When `position` is set to `"end"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
 * When `position` is set to `"start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
-* When `position` is set to `"onAxis"` or `undefined`, the labels are positioned next to the axis. This is the default value.
 
 ###### Example
 

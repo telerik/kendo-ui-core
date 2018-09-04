@@ -47,7 +47,8 @@ The Chat provides rich conversational experience that goes beyond the natural la
 
 ## Features
 
-* [Configuring the items of the Chat]({% slug chat_items %})
+* [Items]({% slug chat_items %})
+* [Toolbar]({% slug toolbar_for_chat %})
 * [Connecting to Chat Bot services]({% slug connect_to_chatbot_service %})
 * [Connecting to Microsoft Bot Framework]({% slug connect_to_ms_bot_framework %})
 * [Connecting to Google DialogFlow]({% slug connect_to_google_dialogflow %})
