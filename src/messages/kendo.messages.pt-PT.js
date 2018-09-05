@@ -363,6 +363,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Tudo",
+  "display": "Registos {0} - {1} de {2}",
+  "empty": "Sem registos para apresentar.",
+  "page": "Página",
+  "of": "de {0}",
+  "itemsPerPage": "itens por página",
+  "first": "Ir para a primeira página",
+  "previous": "Ir para a página anterior",
+  "next": "Ir para a próxima página",
+  "last": "Ir para a última página",
+  "refresh": "Atualizar",
+  "morePages": "Mais páginas"
+});
+}
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {

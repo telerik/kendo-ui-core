@@ -189,6 +189,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Все",
+  "page": "Страница",
+  "display": "Отображены записи {0} - {1} из {2}",
+  "of": "из {0}",
+  "empty": "Нет записей для отображения",
+  "refresh": "Обновить",
+  "first": "Вернуться на первую страницу",
+  "itemsPerPage": "элементов на странице",
+  "last": "К последней странице",
+  "next": "Перейдите на следующую страницу",
+  "previous": "Перейти на предыдущую страницу",
+  "morePages": "Больше страниц"
+});
+}
+
 /* FilterCell messages */
 
 if (kendo.ui.FilterCell) {

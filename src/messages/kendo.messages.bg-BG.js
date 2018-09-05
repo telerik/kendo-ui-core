@@ -697,6 +697,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+      "allPages": "Всички",
+      "page": "Страница",
+      "display": "{0} - {1} от {2} записи",
+      "of": "от {0}",
+      "empty": "Няма записи за показване!",
+      "refresh": "Опресни",
+      "first": "Към първата страница",
+      "itemsPerPage": "записи на страница",
+      "last": "Към последната страница",
+      "next": "Към следващата страница",
+      "previous": "Към предишната страница",
+      "morePages": "Още страници"
+    });
+    }
+
 /* FilterMenu messages */
 
 if (kendo.ui.FilterMenu) {

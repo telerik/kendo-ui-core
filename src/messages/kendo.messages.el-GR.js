@@ -441,6 +441,26 @@
       });
   }
 
+  /* TreeListPager messages */
+
+  if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+      $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
+        "allPages": "Όλα",
+        "display": "{0} - {1} από {2} αντικείμενα",
+        "empty": "Δεν υπάρχουν αντικείμενα",
+        "page": "Σελίδα",
+        "of": "από {0}",
+        "itemsPerPage": "αντικείμενα ανα σελίδα",
+        "first": "Πηγαίντε στην πρώτη σελίδα",
+        "previous": "Πηγαίντε στην προηγούμενη σελίδα",
+        "next": "Πηγαίντε στην επόμενη σελίδα",
+        "last": "Πηγαίντε στην τελευταία σελίδα",
+        "refresh": "Ανανέωση",
+        "morePages": "Περισσότερες Σελίδες"
+      });
+  }
+
   /* PivotGrid messages */
 
   if (kendo.ui.PivotGrid) {

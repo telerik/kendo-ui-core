@@ -469,6 +469,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Sve",
+  "display": "{0} - {1} od {2} stavke",
+  "empty": "Nema stavki za prikaz",
+  "page": "Strana",
+  "of": "od {0}",
+  "itemsPerPage": "Predmeti po stranici",
+  "first": "Idite na prvu stranicu",
+  "previous": "Idite na prethodnu stranicu",
+  "next": "Idite na sledeću stranicu",
+  "last": "Idite na poslednju stranicu",
+  "refresh": "Osvježi",
+  "morePages": "Više stranica"
+});
+}
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {

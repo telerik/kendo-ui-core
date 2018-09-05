@@ -242,6 +242,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Alla",
+  "display": "{0} - {1} av {2} poster",
+  "empty": "Det finns inga poster",
+  "first": "Gå till första sidan",
+  "itemsPerPage": "poster per sida",
+  "last": "Gå till sista sidan",
+  "next": "Gå till nästa sida",
+  "of": "av {0}",
+  "page": "Sida",
+  "previous": "Gå till föregående sida",
+  "refresh": "Uppdatera",
+  "morePages": "Fler sidor"
+});
+}
+
 /* Upload messages */
 
 if (kendo.ui.Upload) {

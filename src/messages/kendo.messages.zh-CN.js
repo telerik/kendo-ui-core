@@ -440,6 +440,25 @@
             });
     }
 
+    /* TreeListPager messages */
+    if (kendo.ui.TreeListPager) {
+        kendo.ui.TreeListPager.prototype.options.messages =
+            $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+                "allPages": "全部",
+                "display": "{0} - {1} 条　共 {2} 条数据",
+                "empty": "无相关数据",
+                "page": "转到第",
+                "of": "页　共 {0} 页",
+                "itemsPerPage": "条每页",
+                "first": "首页",
+                "previous": "上一页",
+                "next": "下一页",
+                "last": "末页",
+                "refresh": "刷新",
+                "morePages": "更多..."
+            });
+    }
+
     /* PivotGrid messages */
     if (kendo.ui.PivotGrid) {
         kendo.ui.PivotGrid.prototype.options.messages =
@@ -1208,7 +1227,7 @@
                 "dayperiod": "上午/下午"
             });
     }
-    
+
     /* DropDownTree messages */
     if (kendo.ui.DropDownTree) {
         kendo.ui.DropDownTree.prototype.options.messages =
@@ -1218,7 +1237,7 @@
                 singleTag: "项已选择"
             });
     }
-    
+
     /* Chat messages */
     if (kendo.ui.Chat) {
         kendo.ui.Chat.prototype.options.messages =

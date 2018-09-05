@@ -342,6 +342,26 @@
         });
     }
 
+    /* TreeListPager messages */
+
+    if (kendo.ui.TreeListPager) {
+        kendo.ui.TreeListPager.prototype.options.messages =
+        $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
+            "allPages": "همه",
+            "display": "ردیف {0} تا {1} از {2} ردیف",
+            "empty": "ردیفی برای نمایش وجود ندارد",
+            "page": "صفحه",
+            "of": "از {0}",
+            "itemsPerPage": "ردیف های هر صفحه",
+            "first": "برو به صفحه اول",
+            "previous": "برو به صفحه قبل",
+            "next": "برو به صفحه بعد",
+            "last": "برو به صفحه آخر",
+            "refresh": "بارگزاری مجدد",
+            "morePages": "صفحات بیشتر"
+        });
+    }
+
     /* PivotGrid messages */
 
     if (kendo.ui.PivotGrid) {

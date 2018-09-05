@@ -444,6 +444,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Összes",
+  "display": "{0}-{1} a(z) {2} elemből",
+  "empty": "Nincsenek megjeleníthető elemek",
+  "page": "Oldal",
+  "of": "a(z) {0}",
+  "itemsPerPage": "elem / oldal",
+  "first": "Ugrás az első oldalra",
+  "previous": "Ugrás az előző oldalra",
+  "next": "Ugrás a következő oldalra",
+  "last": "Ugrás az utolsó oldalra",
+  "refresh": "Frissítés",
+  "morePages": "További oldalak"
+});
+}
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {

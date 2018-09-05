@@ -469,6 +469,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Сите",
+  "display": "{0} - {1} од {2} ставки",
+  "empty": "Нема ставки за прикажување",
+  "page": "Страна",
+  "of": "од {0}",
+  "itemsPerPage": "ставки по страна",
+  "first": "Оди на прва страна",
+  "previous": "Оди на претходна страна",
+  "next": "Оди на следна страна",
+  "last": "Оди на последна страна",
+  "refresh": "Освежи",
+  "morePages": "Повеќе страни"
+});
+}
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {

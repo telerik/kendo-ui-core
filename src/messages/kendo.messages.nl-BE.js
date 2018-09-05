@@ -303,6 +303,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "All",
+  "display": "items {0} - {1} van {2}",
+  "empty": "Geen items om te tonen",
+  "first": "Ga naar eerste pagina",
+  "itemsPerPage": "items per pagina",
+  "last": "Ga naar laatste pagina",
+  "next": "Ga naar volgende pagina",
+  "of": "van {0}",
+  "page": "Pagina",
+  "previous": "Ga naar vorige pagina",
+  "refresh": "Verversen",
+  "morePages": "Meer pagina"
+});
+}
+
 /* Scheduler messages */
 
 if (kendo.ui.Scheduler) {

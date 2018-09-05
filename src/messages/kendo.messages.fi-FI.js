@@ -343,6 +343,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Kaikki",
+  "display": "{0} - {1} yht. {2} tuloksesta",
+  "empty": "Ei tuloksia",
+  "page": "Sivu",
+  "of": "/ {0}",
+  "itemsPerPage": "tulosta sivulla",
+  "first": "Ensimmäinen sivu",
+  "previous": "Edellinen sivu",
+  "next": "Seuraava sivu",
+  "last": "Viimeinen sivu",
+  "refresh": "Päivitä",
+  "morePages": "Lisää sivuja"
+});
+}
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {

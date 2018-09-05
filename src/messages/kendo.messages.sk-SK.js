@@ -367,6 +367,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Všetko",
+  "display": "{0} - {1} z {2} záznamov",
+  "empty": "Žiadny záznam na zobrazenie",
+  "page": "Strana",
+  "of": "z {0}",
+  "itemsPerPage": "záznamov na stranu",
+  "first": "Prejsť na prvú stranu",
+  "previous": "Prejsť na predošlú stranu",
+  "next": "Prejsť na ďalšiu stranu",
+  "last": "Prejsť na poslednú stranu",
+  "refresh": "Obnoviť",
+  "morePages": "Ďalšie strany"
+});
+}
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {

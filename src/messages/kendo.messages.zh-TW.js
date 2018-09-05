@@ -440,6 +440,25 @@
             });
     }
 
+    /* TreeListPager messages */
+    if (kendo.ui.TreeListPager) {
+        kendo.ui.TreeListPager.prototype.options.messages =
+            $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+                "allPages": "全部",
+                "display": "{0} - {1} 條　共 {2} 條數據",
+                "empty": "無相關資料",
+                "page": "轉到第",
+                "of": "頁　共 {0} 頁",
+                "itemsPerPage": "條每頁",
+                "first": "首頁",
+                "previous": "上一頁",
+                "next": "下一頁",
+                "last": "末頁",
+                "refresh": "刷新",
+                "morePages": "更多..."
+            });
+    }
+
     /* PivotGrid messages */
     if (kendo.ui.PivotGrid) {
         kendo.ui.PivotGrid.prototype.options.messages =
@@ -1208,7 +1227,7 @@
                 "dayperiod": "上午/下午"
             });
     }
-    
+
     /* DropDownTree messages */
     if (kendo.ui.DropDownTree) {
         kendo.ui.DropDownTree.prototype.options.messages =
@@ -1218,7 +1237,7 @@
                 singleTag: "項已選擇"
             });
     }
-    
+
     /* Chat messages */
     if (kendo.ui.Chat) {
         kendo.ui.Chat.prototype.options.messages =

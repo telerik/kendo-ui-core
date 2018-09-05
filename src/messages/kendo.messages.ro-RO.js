@@ -303,6 +303,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "All",
+  "display": "{0} - {1} din {2} elemente",
+  "empty": "Nu există elemente pentru afișare",
+  "first": "Prima pagină",
+  "itemsPerPage": "elemente per pagină",
+  "last": "Ultima pagină",
+  "next": "Pagina următoare",
+  "of": "din {0}",
+  "page": "Pagina",
+  "previous": "Pagina precedentă",
+  "refresh": "Actualizează",
+  "morePages": "Mai multe pagini"
+});
+}
+
 /* Scheduler messages */
 
 if (kendo.ui.Scheduler) {

@@ -469,6 +469,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Të gjitha",
+  "display": "{0} - {1} prej {2} artikujve",
+  "empty": "Nuk ka artikuj për të shfaqur",
+  "page": "Faqe",
+  "of": "of {0}",
+  "itemsPerPage": "artikuj për faqe",
+  "first": "Shkoni në faqen e parë",
+  "previous": "Shkoni në faqen e mëparshme",
+  "next": "Shkoni në faqen e ardhshme",
+  "last": "Shkoni në faqen e fundit",
+  "refresh": "Rifresko",
+  "morePages": "Më shumë faqe"
+});
+}
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {

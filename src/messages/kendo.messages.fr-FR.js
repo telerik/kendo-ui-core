@@ -229,6 +229,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Tous",
+  "page": "Page",
+  "display": "Afficher les items {0} - {1} de {2}",
+  "of": "de {0}",
+  "empty": "Aucun enregistrement à afficher.",
+  "refresh": "Actualiser",
+  "first": "Aller à la première page",
+  "itemsPerPage": "articles par page",
+  "last": "Aller à la dernière page",
+  "next": "Aller à la page suivante",
+  "previous": "Aller à la page précédente",
+  "morePages": "Plusieurs pages"
+});
+}
+
 /* FilterCell messages */
 
 if (kendo.ui.FilterCell) {

@@ -1214,7 +1214,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties - `itemHeight` and `valueMapper`.
 
-For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %}).
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
 
 ### virtual.itemHeight `Number`*(default: null)*
 
@@ -1225,7 +1225,7 @@ If the developer does not specify one, the framework will automatically set `ite
 
 The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
 
-For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %}#value-mapping).
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
 
 ### virtual.valueMapper `Function`*(default: null)*
 

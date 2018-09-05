@@ -258,6 +258,25 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "All",
+  "display": "{0} - {1} di {2} elementi",
+  "empty": "Nessun elemento da visualizzare",
+  "first": "Vai alla prima pagina",
+  "itemsPerPage": "elementi per pagina",
+  "last": "Vai all'ultima pagina",
+  "next": "Vai alla prossima pagina",
+  "of": "di {0}",
+  "page": "Pagina",
+  "previous": "Vai alla pagina precedente",
+  "refresh": "Aggiorna"
+});
+}
+
 /* Upload messages */
 
 if (kendo.ui.Upload) {

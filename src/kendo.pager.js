@@ -264,6 +264,7 @@ var __meta__ = { // jshint ignore:line
                 html = "",
                 options = that.options,
                 pageSize = that.pageSize(),
+                collapsedTotal = that._collapsedTotal(),
                 total = that.dataSource.total(),
                 totalPages = that.totalPages(),
                 linkTemplate = that.linkTemplate,
@@ -308,8 +309,8 @@ var __meta__ = { // jshint ignore:line
             if (options.info) {
                 if (total > 0) {
                     html = kendo.format(options.messages.display,
-                        that.dataSource.options.endless ? 1 : Math.min((page - 1) * pageSize + 1, total), // first item in the page
-                        Math.min(page * pageSize, total), // last item in the page
+                        that.dataSource.options.endless ? 1 : Math.min((page - 1) * pageSize + 1, collapsedTotal), // first item in the page
+                        Math.min(page * pageSize, collapsedTotal), // last item in the page
                     total);
                 } else {
                     html = options.messages.empty;
@@ -357,6 +358,10 @@ var __meta__ = { // jshint ignore:line
                     .kendoDropDownList("value", pageSize)
                     .kendoDropDownList("text", text); // handles custom values
             }
+        },
+
+        _collapsedTotal: function() {
+            return this.dataSource.total();
         },
 
         _keydown: function(e) {

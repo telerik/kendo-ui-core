@@ -377,6 +377,26 @@
       });
   }
 
+  /* TreeListPager messages */
+
+  if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+      $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
+        "allPages": "Todas",
+        "display": "Elementos mostrados {0} - {1} de {2}",
+        "empty": "No hay registros.",
+        "page": "Página",
+        "of": "de {0}",
+        "itemsPerPage": "ítems por página",
+        "first": "Ir a la primera página",
+        "previous": "Ir a la página anterior",
+        "next": "Ir a la página siguiente",
+        "last": "Ir a la última página",
+        "refresh": "Actualizar",
+        "morePages": "Más paginas"
+      });
+  }
+
   /* PivotGrid messages */
 
   if (kendo.ui.PivotGrid) {

@@ -238,6 +238,26 @@ if (kendo.ui.Pager) {
     });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
+        "allPages": "Alle",
+        "display": "{0} - {1} av {2} poster",
+        "empty": "Det finnes ingen poster",
+        "first": "Gå til første side",
+        "itemsPerPage": "poster per side",
+        "last": "Gå til siste siden",
+        "next": "Gå til neste side",
+        "of": "av {0}",
+        "page": "Side",
+        "previous": "Gå til forrige side",
+        "refresh": "Oppdatere",
+        "morePages": "Flere sider"
+    });
+}
+
 /* Upload messages */
 
 if (kendo.ui.Upload) {

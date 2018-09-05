@@ -448,6 +448,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+      "allPages": "All",
+      "display": "{0} - {1} z {2} celkem",
+      "empty": "Žádný záznam nenalezen",
+      "page": "Strana",
+      "of": "z {0}",
+      "itemsPerPage": "záznamů na stránku",
+      "first": "Na první stránku",
+      "previous": "Na předchozí stránku",
+      "next": "Na další stránku",
+      "last": "Na poslední stránku",
+      "refresh": "Obnovit",
+      "morePages": "Další stránky"
+    });
+    }
+
 /* PivotGrid messages */
 
 if (kendo.ui.PivotGrid) {
