@@ -150,6 +150,56 @@ Note that the `parentId` is mapped from the `ReportsTo` field by the `parentId: 
 
 ## Features
 
+### Client-side paging
+
+The Kendo UI treelist supports client-side paging for large sets of data. To enable the paging functionality configure the [pageable settings](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/configuration/pageable).
+
+> Don't forget to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize). A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings. If an already existing datasource instance is passed to the treelist, then the `pageSize` option should be set in the dataSource's settings and not in the `pageable` settings.
+
+###### Example
+
+    $(document).ready(function () {
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: service + "/EmployeeDirectory/All",
+                        dataType: "jsonp"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "EmployeeId",
+                        parentId: "ReportsTo",
+                        expanded: true,
+                        fields: {
+                            ReportsTo: { nullable: true },
+                            EmployeeId: { type: "number" },
+                            HireDate: { field: "HireDate", type: "date" }
+                        }
+                    }
+                }
+            },
+            height: 540,
+            filterable: true,
+            sortable: true,
+            columns: [
+                {
+                    field: "FirstName", title: "Name",
+                    template: "#: FirstName # #: LastName #"
+                },
+                { field: "Position" },
+                { field: "HireDate", title: "Hire Date", format: "{0:MMMM d, yyyy}" }
+            ],
+            pageable: {
+                pageSize: 15,
+                pageSizes: true
+            }
+        });
+    });
+
 ### Scrolling
 
 The TreeList scrolling is enabled by default. However, the enabled scrolling functionality does not guarantee the appearance of scrollbars. The reason for this is that scrolling requires you to define some of the widget's dimensions:

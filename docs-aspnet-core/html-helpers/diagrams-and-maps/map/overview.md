@@ -2,7 +2,7 @@
 title: Overview
 page_title: Map | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI Map HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-previous_url: /aspnet-core/helpers/html-helpers/map/
+previous_url: /aspnet-core/helpers/html-helpers/map
 slug: htmlhelpers_map_aspnetcore
 position: 1
 ---

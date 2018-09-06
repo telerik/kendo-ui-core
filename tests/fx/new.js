@@ -171,7 +171,7 @@
         });
     });
 
-    asyncTest("replace replaces one of the elements with the other", 2, function() {
+    skip("replace replaces one of the elements with the other", 2, function() {
         var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
             foo = container.find("#foo"),
             bar = container.find("#bar"),
@@ -187,7 +187,7 @@
         });
     });
 
-    asyncTest("Triggers before/after callbacks", 6, function() {
+    skip("Triggers before/after callbacks", 6, function() {
         var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
             foo = container.find("#foo"),
             bar = container.find("#bar"),

@@ -791,7 +791,7 @@
         element.trigger("scroll");
     }
 
-    asyncTest("widget scrolled to second range sets model to the correct data item", 1, function() {
+    skip("widget scrolled to second range sets model to the correct data item", 1, function() {
         var container_height = 200;
 
         dom = $('<select data-bind="value:value" />').appendTo(QUnit.fixture);

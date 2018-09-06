@@ -372,7 +372,7 @@
 
     module("animationFrame Animation", {});
 
-    asyncTest("executes callbacks", 1, function() {
+    skip("executes callbacks", 1, function() {
         var animation = kendo.effects.Animation.extend({
             counter: 0,
             tick: function() {
@@ -392,7 +392,7 @@
         new animation().start();
     });
 
-    asyncTest("is cancellable", 1, function() {
+    skip("is cancellable", 1, function() {
         var animation = kendo.effects.Animation.extend({
             counter: 0,
             tick: function() {
