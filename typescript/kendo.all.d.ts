@@ -4991,6 +4991,158 @@ declare namespace kendo.ui {
         item?: HTMLElement;
     }
 
+    class MultiColumnComboBox extends kendo.ui.Widget {
+
+        static fn: MultiColumnComboBox;
+
+        options: MultiColumnComboBoxOptions;
+
+        dataSource: kendo.data.DataSource;
+        input: JQuery;
+        list: JQuery;
+        ul: JQuery;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): MultiColumnComboBox;
+
+        constructor(element: Element, options?: MultiColumnComboBoxOptions);
+
+
+        close(): void;
+        dataItem(index?: number): any;
+        destroy(): void;
+        enable(enable: boolean): void;
+        focus(): void;
+        items(): any;
+        open(): void;
+        readonly(readonly: boolean): void;
+        refresh(): void;
+        search(word: string): void;
+        select(): number;
+        select(li: JQuery): void;
+        select(li: number): void;
+        select(li: Function): void;
+        setDataSource(dataSource: kendo.data.DataSource): void;
+        suggest(value: string): void;
+        text(): string;
+        text(text: string): void;
+        toggle(toggle: boolean): void;
+        value(): string;
+        value(value: string): void;
+
+    }
+
+    interface MultiColumnComboBoxAnimationClose {
+        effects?: string;
+        duration?: number;
+    }
+
+    interface MultiColumnComboBoxAnimationOpen {
+        effects?: string;
+        duration?: number;
+    }
+
+    interface MultiColumnComboBoxAnimation {
+        close?: MultiColumnComboBoxAnimationClose;
+        open?: MultiColumnComboBoxAnimationOpen;
+    }
+
+    interface MultiColumnComboBoxColumn {
+        field?: string;
+        title?: string;
+        template?: string|Function;
+        headerTemplate?: string|Function;
+        width?: number|string;
+    }
+
+    interface MultiColumnComboBoxPopup {
+        appendTo?: string;
+        origin?: string;
+        position?: string;
+    }
+
+    interface MultiColumnComboBoxVirtual {
+        itemHeight?: number;
+        mapValueTo?: string;
+        valueMapper?: Function;
+    }
+
+    interface MultiColumnComboBoxOptions {
+        name?: string;
+        animation?: MultiColumnComboBoxAnimation;
+        autoBind?: boolean;
+        autoWidth?: boolean;
+        cascadeFrom?: string;
+        cascadeFromField?: string;
+        columns?: MultiColumnComboBoxColumn[];
+        clearButton?: boolean;
+        dataSource?: any|any|kendo.data.DataSource;
+        dataTextField?: string;
+        dataValueField?: string;
+        delay?: number;
+        dropDownWidth?: string|number;
+        enable?: boolean;
+        enforceMinLength?: boolean;
+        filter?: string;
+        filterFields?: any;
+        fixedGroupTemplate?: string|Function;
+        footerTemplate?: string|Function;
+        groupTemplate?: string|Function;
+        height?: number;
+        highlightFirst?: boolean;
+        ignoreCase?: boolean;
+        index?: number;
+        minLength?: number;
+        noDataTemplate?: string|Function;
+        placeholder?: string;
+        popup?: MultiColumnComboBoxPopup;
+        suggest?: boolean;
+        syncValueAndText?: boolean;
+        headerTemplate?: string|Function;
+        template?: string|Function;
+        text?: string;
+        value?: string;
+        valuePrimitive?: boolean;
+        virtual?: boolean | MultiColumnComboBoxVirtual;
+        change?(e: MultiColumnComboBoxChangeEvent): void;
+        close?(e: MultiColumnComboBoxCloseEvent): void;
+        dataBound?(e: MultiColumnComboBoxDataBoundEvent): void;
+        filtering?(e: MultiColumnComboBoxFilteringEvent): void;
+        open?(e: MultiColumnComboBoxOpenEvent): void;
+        select?(e: MultiColumnComboBoxSelectEvent): void;
+        cascade?(e: MultiColumnComboBoxCascadeEvent): void;
+    }
+    interface MultiColumnComboBoxEvent {
+        sender: MultiColumnComboBox;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface MultiColumnComboBoxChangeEvent extends MultiColumnComboBoxEvent {
+    }
+
+    interface MultiColumnComboBoxCloseEvent extends MultiColumnComboBoxEvent {
+    }
+
+    interface MultiColumnComboBoxDataBoundEvent extends MultiColumnComboBoxEvent {
+    }
+
+    interface MultiColumnComboBoxFilteringEvent extends MultiColumnComboBoxEvent {
+        filter?: any;
+    }
+
+    interface MultiColumnComboBoxOpenEvent extends MultiColumnComboBoxEvent {
+    }
+
+    interface MultiColumnComboBoxSelectEvent extends MultiColumnComboBoxEvent {
+        dataItem?: any;
+        item?: JQuery;
+    }
+
+    interface MultiColumnComboBoxCascadeEvent extends MultiColumnComboBoxEvent {
+    }
 
     class MultiSelect extends kendo.ui.Widget {
 
@@ -20996,6 +21148,10 @@ interface JQuery {
     kendoMobileView(): JQuery;
     kendoMobileView(options: kendo.mobile.ui.ViewOptions): JQuery;
     data(key: "kendoMobileView"): kendo.mobile.ui.View;
+
+    kendoMultiColumnComboBox(): JQuery;
+    kendoMultiColumnComboBox(options: kendo.ui.MultiColumnComboBoxOptions): JQuery;
+    data(key: "kendoMultiColumnComboBox"): kendo.ui.MultiColumnComboBox;
 
     kendoMultiSelect(): JQuery;
     kendoMultiSelect(options: kendo.ui.MultiSelectOptions): JQuery;
