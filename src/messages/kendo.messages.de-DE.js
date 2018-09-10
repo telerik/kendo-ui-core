@@ -443,6 +443,15 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
         }
       });
   }
+  
+  /* ComboBox messages */
+  
+  if(kendo.ui.ComboBox){
+  kendo.ui.ComboBox.prototype.options.messages =
+  $.extend(true, kendo.ui.ComboBox.prototype.options.messages,{
+    "noRecords": "Keine Datensätze verfügbar."
+  });
+  }
 
   /* Groupable messages */
 
