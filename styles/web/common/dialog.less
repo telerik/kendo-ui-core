@@ -55,6 +55,8 @@
     width: 100%;
     border-radius: 0;
     box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
 
     .k-button {
         display: inline-block;
@@ -83,6 +85,13 @@
             border-right-width: 0;
         }
     }
+}
+.k-no-flexbox .k-dialog-buttongroup {
+    display: block;
+    text-align: right;
+}
+.k-no-flexbox .k-rtl .k-dialog-button-group {
+    text-align: left;
 }
 
 

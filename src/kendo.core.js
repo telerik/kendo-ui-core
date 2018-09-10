@@ -882,7 +882,7 @@ function pad(number, digits, end) {
                     idx = zeroIndex;
                 }
             }
-        } 
+        }
 
         number = round(number, idx, negative);
 
@@ -2240,6 +2240,8 @@ function pad(number, digits, end) {
 
               return false;
           };
+
+        support.matchMedia = "matchMedia" in window;
 
         support.pushState = window.history && window.history.pushState;
 
@@ -4328,6 +4330,21 @@ function pad(number, digits, end) {
         scrollableParents.each(function(index, parent) {
             $(parent).scrollTop(scrollTopPositions[index]);
         });
+    };
+
+    kendo.matchesMedia = function(mediaQuery) {
+        var media = kendo._bootstrapToMedia(mediaQuery) || mediaQuery;
+        return support.matchMedia && window.matchMedia(media).matches;
+    };
+
+    kendo._bootstrapToMedia = function(bootstrapMedia) {
+        return {
+            "xs": "(max-width: 576px)",
+            "sm": "(min-width: 576px)",
+            "md": "(min-width: 768px)",
+            "lg": "(min-width: 992px)",
+            "xl": "(min-width: 1200px)"
+        }[bootstrapMedia];
     };
 
     // kendo.saveAs -----------------------------------------------

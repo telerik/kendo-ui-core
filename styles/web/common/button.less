@@ -143,7 +143,6 @@ input[type="reset"].k-button-expand {
     border-width: 0;
     list-style: none;
     white-space: nowrap;
-    display: inline-block;
     display: inline-flex;
     flex-direction: row;
     vertical-align: middle;
@@ -218,7 +217,8 @@ input[type="reset"].k-button-expand {
     }
 
 }
-.k-ie9 .k-button-group {
+.k-no-flexbox .k-button-group {
+    display: inline-block;
 
     &:after {
         content: "";
@@ -227,20 +227,8 @@ input[type="reset"].k-button-expand {
     }
 
     .k-button {
-        float: left;
-    }
-
-    &.k-dialog-buttongroup .k-button {
-        float: right;
-    }
-}
-.k-ie9 .k-rtl .k-button-group {
-    .k-button {
-        float: right;
-    }
-
-    &.k-dialog-buttongroup .k-button {
-        float: left;
+        display: inline-block;
+        vertical-align: top;
     }
 }
 

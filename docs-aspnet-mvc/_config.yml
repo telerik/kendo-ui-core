@@ -54,6 +54,8 @@ navigation:
         title: "ColorPalette"
      "helpers/colorpicker":
         title: "ColorPicker"
+     "helpers/multicolumncombobox":
+        title: "MultiColumnComboBox"
      "helpers/combobox":
         title: "ComboBox"
      "helpers/dateinput":

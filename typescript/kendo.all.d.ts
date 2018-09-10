@@ -4122,6 +4122,7 @@ declare namespace kendo.ui {
         hidden?: boolean;
         locked?: boolean;
         lockable?: boolean;
+        media?: string;
         minResizableWidth?: number;
         minScreenWidth?: number;
         selectable?: boolean;

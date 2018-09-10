@@ -160,34 +160,6 @@ Controls whether to bind the widget to the data source on initialization.
     });
     </script>
 
-### autoWidth `Boolean`
-
-If set to `true`, the widget automatically adjusts the width of the popup element and does not wrap up the item label.
-
-> Note: Virtualized list doesn't support the auto-width functionality.
-> Note: If dropDownWidth is set, the autoWidth setting is disregarded.
-
-#### Example - enable autoWidth
-
-    <input id="multicolumncombobox" style="width: 100px;" />
-    <script>
-    $("#multicolumncombobox").kendoMultiColumnComboBox({
-      autoWidth: true,
-      dataSource: {
-        data: [
-          { text: "Short item", value: "1" },
-          { text: "An item with really, really long text", value: "2" },
-        ]
-      },
-      dataTextField: "text",
-      dataValueField: "value",
-      columns: [
-          { field: "text", title: "Text" },
-          { field: "value", title: "Value" }
-      ]
-    });
-    </script>
-
 ### cascadeFrom `String`
 
 Use it to set the Id of the parent MultiColumnComboBox widget.
@@ -381,7 +353,7 @@ Renders a template for the column header.
         });
     </script>
 
-### columns.width `String|NUmber`
+### columns.width `String|Number`
 
 The width of the column. Numeric values are treated as pixels.
 
@@ -1088,54 +1060,6 @@ Specifies a static HTML content, which will be rendered as a header of the popup
       dataTextField: "name",
       dataValueField: "id",
       headerTemplate: '<div><h2>Fruits</h2></div>',
-      columns: [
-        {field: "name"},
-        {field: "id"}
-      ]
-    });
-    </script>
-
-### template `String|Function`
-
-The [template](/api/javascript/kendo/methods/template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
-
-#### Example - specify template as a function
-
-    <input id="multicolumncombobox" />
-    <script id="template" type="text/x-kendo-template">
-      <span>
-        <img src="/img/#: id #.png" alt="#: name #" />
-        #: name #
-      </span>
-    </script>
-    <script>
-    $("#multicolumncombobox").kendoMultiColumnComboBox({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      template: kendo.template($("#template").html()),
-      columns: [
-        {field: "name"},
-        {field: "id"}
-      ]
-    });
-    </script>
-
-#### Example - specify template as a string
-
-    <input id="multicolumncombobox" />
-    <script>
-    $("#multicolumncombobox").kendoMultiColumnComboBox({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      template: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>',
       columns: [
         {field: "name"},
         {field: "id"}

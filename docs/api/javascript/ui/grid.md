@@ -1936,6 +1936,37 @@ prevent the user from locking or unlocking this column using the user interface.
     });
     </script>
 
+### columns.media `String`
+
+Sets the condition that needs to be satisfied for a column to remain visible. The property accepts valid strings for the [`matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) browser API (assuming it is supported by the browser) and toggles the visibility of the columns based on the media queries.
+
+The [`hidden`](/api/javascript/ui/grid/configuration/columns.hidden) option takes precedence over `media`. This option cannot be used with [`minScreenWidth`](/api/javascript/ui/grid/configuration/columns.minScreenWidth) at the same time.
+
+Also accepts the device identifiers that are [available in Bootstrap 4](https://v4-alpha.getbootstrap.com/layout/grid/#grid-options):
+
+* `xs` is equivalent to `"(max-width: 576px)"`
+* `sm` is equivalent to `"(min-width: 576px)"`
+* `md` is equivalent to `"(min-width: 768px)"`
+* `lg` is equivalent to `"(min-width: 992px)"`
+* `xl` is equivalent to `"(min-width: 1200px)"`
+
+#### Example - set media
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+          { field: "id", width: 250, media: "(min-width: 576px)" }, // column will become hidden if the media query is evaluated to false
+          { field: "name", width: 250 }, // column will always be visible
+          { field: "age", width: 250, media: "sm" } // use a Bootstrap media (equivalent to `"(min-width: 576px)"`)
+      ],
+      dataSource: [
+          { id: 1, name: "Jane Doe", age: 31, city: "Boston" },
+          { id: 2, name: "John Doe", age: 55, city: "New York" }
+      ]
+    });
+    </script>
+
 ### columns.minResizableWidth `Number`
 
 The pixel screen width below which the user will not be able to resize the column via the UI.

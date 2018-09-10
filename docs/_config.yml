@@ -127,7 +127,6 @@ navigation:
     "controls/conversational-ui":
         title: "Conversational UI"
         position: 10
-        isNew: true
     "controls/conversational-ui/chat":
         title: "Chat"
     "controls/interactivity":
@@ -461,6 +460,9 @@ navigation:
         title: "FlatColorPicker"
     "*colorpicker":
         title: "ColorPicker"
+    "*/multicolumncombobox":
+        isNew: true
+        title: "MultiColumnComboBox"
     "*combobox":
         title: "ComboBox"
     "*dateinput":
@@ -474,7 +476,6 @@ navigation:
     "*dropdownlist":
         title: "DropDownList"
     "*dropdowntree":
-        isNew: true
         title: "DropDownTree"
     "*editor":
         title: "Editor"
@@ -1524,8 +1525,8 @@ defaults:
     values:
         component: "dropdownlist"
 
--
-    scope:
+
+        scope:
         path: "controls/editors/editor"
     values:
         component: "editor"
@@ -1613,6 +1614,12 @@ defaults:
         path: "controls/editors/multiselect"
     values:
         component: "multi-select"
+
+-
+    scope:
+        path: "controls/editors/multicolumncombobox"
+    values:
+        component: "multicolumn-combobox"
 
 -
     scope:
