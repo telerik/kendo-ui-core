@@ -76,6 +76,8 @@ navigation:
         position: 1
      "html-helpers/data-management/grid":
         title: "Grid"
+     "html-helpers/data-management/grid/features":
+        title: "Features"
      "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
      "html-helpers/editors":
@@ -86,9 +88,12 @@ navigation:
      "html-helpers/charts":
         title: "Charts"
         position: 3
+     "html-helpers/charts/chart-types":
+        title: "Chart Types"
+        position: 2
      "html-helpers/charts/treemap":
         title: "TreeMap"
-        position: 2
+        position: 3
      "html-helpers/gauges":
         title: "Gauges"
         position: 4

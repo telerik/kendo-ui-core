@@ -8,7 +8,7 @@ slug: howto_reload_configuration_options_pivotgrid
 
 # Reload PivotGrid Configuration Options
 
-The following example demonstrates how to reload the configuration options of the Kendo UI PivotGrid widget on a button `click` event. To set the options, the demo uses the [PivotDataSource API](http://docs.telerik.com/KENDO-UI/api/javascript/data/pivotdatasource#methods).
+The following example demonstrates how to reload the configuration options of the Kendo UI PivotGrid widget on a button `click` event. To set the options, the demo uses the [PivotDataSource API](http://docs.telerik.com/kendo-ui/api/javascript/data/pivotdatasource#methods).
 
 ###### Example
 

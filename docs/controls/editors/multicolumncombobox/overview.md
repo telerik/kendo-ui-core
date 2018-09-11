@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MultiComboComboBox
-description: "Learn how to initialize the Kendo UI MultiComboComboBox widget, configure its options and customize templates."
+page_title: Overview | Kendo UI MultiColumnComboBox
+description: "Learn how to initialize the Kendo UI MultiColumnComboBox widget, configure its options and customize templates."
 slug: overview_kendoui_multicolumncombobox_widget
 position: 1
 ---
@@ -9,7 +9,7 @@ position: 1
 # MultiColumnComboBox Overview
 
 
-As of the Kendo UI R3 2018, the [MultiComboComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) is available in the Kendo UI for jQuery suite.
+As of the Kendo UI R3 2018, the [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) is available in the Kendo UI for jQuery suite.
 The main purpose of the widget is to visualize a big set of data in a grid-like table.
 
 Besides the core functionality that the standard Kendo ComboBox provides such as Virtualization, Templates, Cascading functionality and various data-binding scenarios, the new widget provides a few more. It gives you the ability to define Columns that will be rendered in the dropdown (along with additional options for them) and specify against which Fields from the data source the Filter should work upon.
@@ -178,7 +178,7 @@ The MultiColumnComboBox uses [Kendo UI templates](/framework/templates/overview)
 
 For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
 
-### Column Template
+### Column Templates
 
 You can define [column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.template) and [header column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.headertemplate) in order to customize your layout:
 

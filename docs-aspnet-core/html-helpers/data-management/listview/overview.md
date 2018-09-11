@@ -93,9 +93,9 @@ The following example demonstrates the basic configuration for the ListView with
 
 ## See Also
 
-* [JavaScript API Reference of the ListView](http://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
-* [ListView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview)
-* [ListView Official Demos](http://demos.telerik.com/aspnet-core/listview/index)
+* [JavaScript API Reference of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [ListView HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/listview/overview)
+* [ListView Official Demos](https://demos.telerik.com/aspnet-core/listview/index)
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})

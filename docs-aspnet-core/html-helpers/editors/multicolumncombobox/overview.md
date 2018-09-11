@@ -2,13 +2,14 @@
 title: Overview
 page_title: MultiColumnComboBox | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/html-helpers/multicolumncombobox
 slug: htmlhelpers_multicolumncombobox_aspnetcore
 position: 1
 ---
 
 # MultiColumnComboBox HtmlHelper Overview
 
-As of the Kendo UI R3 2018, the MultiComboComboBox is available in the Telerik UI for ASP.NET Core suite. The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
+As of the Kendo UI R3 2018, the MultiColumnComboBox is available in the Telerik UI for ASP.NET Core suite. The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
 The main purpose of the widget is to visualize a big set of data in a grid-like table.
 
 
@@ -26,6 +27,11 @@ The following example demonstrates how to define the MultiColumnComboBox HtmlHel
         .Placeholder("Select product")
         .DataTextField("ProductName")
         .DataValueField("ProductID")
+        .Columns(columns =>
+        {
+            columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+            columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+        })
         .Filter(FilterType.StartsWith)
         .DataSource(source => {
             source.Read(read =>
@@ -82,6 +88,11 @@ The following example demonstrates the basic configuration of the MultiColumnCom
         .Placeholder("Select product")
         .DataTextField("ProductName")
         .DataValueField("ProductID")
+        .Columns(columns =>
+        {
+            columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+            columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+        })
         .HtmlAttributes(new { style = "width:100%;" })
         .Filter("contains")
         .AutoBind(true)
@@ -209,6 +220,11 @@ Local data is the data that is available on the client when the MultiColumnCombo
             @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
                 .DataValueField("ProductID")
                 .DataTextField("ProductName")
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .BindTo((System.Collections.IEnumerable)ViewData["products"])
             )
 
@@ -253,6 +269,11 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
                 .DataTextField("ProductName")
                 .DataValueField("ProductID")
                 .Placeholder("Select product...")
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -335,6 +356,11 @@ You can configure a MultiColumnComboBox that is bound to a model field to use [v
                 .Filter("contains")
                 .DataTextField("ProductName")
                 .DataValueField("ProductID")
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .Placeholder("Select product...")
                 .DataSource(source =>
                 {

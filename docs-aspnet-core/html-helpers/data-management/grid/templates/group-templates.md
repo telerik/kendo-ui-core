@@ -3,7 +3,7 @@ title: Group Templates
 page_title: Group Templates | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn how to customize the group rows when the data of the Kendo UI Grid for ASP.NET MVC is grouped."
 slug: group_templates_grid_aspnetmvc_widget
-position: 1
+position: 3
 ---
 
 # Group Templates

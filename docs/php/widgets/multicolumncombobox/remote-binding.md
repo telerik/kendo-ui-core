@@ -1,20 +1,20 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | MultiComboComboBox PHP Class
-description: "Bind Kendo UI MultiComboComboBox PHP class to JSON."
+page_title: Remote Binding | MultiColumnComboBox PHP Class
+description: "Bind Kendo UI MultiColumnComboBox PHP class to JSON."
 slug: remotebinding_multicolumncombobox_uiforphp
 position: 3
 ---
 
 # Remote Binding
 
-This article shows how to bind Kendo UI MultiComboComboBox for PHP to a JSON response. Remote binding means that filter operations happen on the server side.
+This article shows how to bind Kendo UI MultiColumnComboBox for PHP to a JSON response. Remote binding means that filter operations happen on the server side.
 
 ## Bind to PDO-Returned Arrays
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultiComboComboBox for PHP for remote binding.
+Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox for PHP for remote binding.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
@@ -54,18 +54,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                    ->schema($schema);
         ?>
 
-**Step 3** Create a MultiComboComboBox, configure its `dataTextField` option and set its data source.
+**Step 3** Create a MultiColumnComboBox, configure its `dataTextField` option and set its data source.
 
 ###### Example
 
         <?php
-        $comboBox = new \Kendo\UI\MultiComboComboBox('MultiComboComboBox');
+        $comboBox = new \Kendo\UI\MultiColumnComboBox('MultiColumnComboBox');
         $comboBox->dataSource($dataSource);
         $comboBox->dataTextField('ProductName');
         $comboBox->dataValueField('ProductID');
         ?>
 
-**Step 4** Output the MultiComboComboBox by echoing the result of the `render` method.
+**Step 4** Output the MultiColumnComboBox by echoing the result of the `render` method.
 
 ###### Example
 
@@ -116,7 +116,7 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 >
 > The following demo is using the sample SQLite database shipped with the Telerik UI for PHP** demos (`/wrappers/php/sample.db`).
 
-First, configure a Kendo UI MultiComboComboBox for PHP binding and then implement the remote service which will return JSON.
+First, configure a Kendo UI MultiColumnComboBox for PHP binding and then implement the remote service which will return JSON.
 
 ### Configuration (DataSourceResult)
 
@@ -171,18 +171,18 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
                    ->serverFiltering(true);
         ?>
 
-**Step 3** Create a MultiComboComboBox, configure its `dataTextField` option and set its `dataSource`.
+**Step 3** Create a MultiColumnComboBox, configure its `dataTextField` option and set its `dataSource`.
 
 ###### Example
 
         <?php
-        $comboBox = new \Kendo\UI\MultiComboComboBox('MultiComboComboBox');
+        $comboBox = new \Kendo\UI\MultiColumnComboBox('MultiColumnComboBox');
         $comboBox->dataSource($dataSource);
         $comboBox->dataTextField('ProductName');
         $comboBox->dataValueField('ProductID');
         ?>
 
-**Step 4** Output the MultiComboComboBox by echoing the result of the `render` method.
+**Step 4** Output the MultiColumnComboBox by echoing the result of the `render` method.
 
 ###### Example
 
@@ -235,10 +235,10 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the MultiComboComboBox:
+Other articles on Telerik UI for PHP and on the MultiColumnComboBox:
 
-* [Overview of the MultiComboComboBox PHP Class]({% slug overview_multicolumncombobox_uiforphp %})
-* [Local Binding of the MultiComboComboBox PHP Class]({% slug localbinding_multicolumncombobox_uiforphp %})
-* [Overview of the Kendo UI MultiComboComboBox Widget]({% slug overview_kendoui_multicolumncombobox_widget %})
+* [Overview of the MultiColumnComboBox PHP Class]({% slug overview_multicolumncombobox_uiforphp %})
+* [Local Binding of the MultiColumnComboBox PHP Class]({% slug localbinding_multicolumncombobox_uiforphp %})
+* [Overview of the Kendo UI MultiColumnComboBox Widget]({% slug overview_kendoui_multicolumncombobox_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

@@ -1,14 +1,14 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MultuColumnComboBox HtmlHelper
-description: "Get started with the server-side wrapper for the Kendo UI MultuColumnComboBox widget for ASP.NET MVC."
+page_title: Overview | Kendo UI MultiColumnComboBox HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI MultiColumnComboBox widget for ASP.NET MVC."
 slug: overview_multicolumncombobox_aspnetmvc
 position: 1
 ---
 
-# MultuColumnComboBox HtmlHelper Overview
+# MultiColumnComboBox HtmlHelper Overview
 
-As of the Kendo UI R3 2018, the MultiComboComboBox is available in the Telerik UI for ASP.NET MVC suite. The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
+As of the Kendo UI R3 2018, the MultiColumnComboBox is available in the Telerik UI for ASP.NET MVC suite. The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
 The main purpose of the widget is to visualize a big set of data in a grid-like table.
 
 ## Configuration
@@ -111,7 +111,7 @@ Same as the ComboBox, the MultiColumnComboBox helper, expose a big variety of da
 
 ### Server Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultuColumnComboBox for server binding to the Northwind **Products** table using Linq to SQL.
+Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox for server binding to the Northwind **Products** table using Linq to SQL.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
@@ -140,34 +140,44 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
                Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
     ```
 
-1.  Add a server-bound MultuColumnComboBox.
+1.  Add a server-bound MultiColumnComboBox.
 
     ###### Example
 
     ```tab-Razor
 
-            @(Html.Kendo().MultuColumnComboBox()
-              .Name("productMultuColumnComboBox") //The name of the MultuColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
-              .BindTo(Model)   //Pass the list of Products to the MultuColumnComboBox.
+            @(Html.Kendo().MultiColumnComboBox()
+              .Name("productMultiColumnComboBox") //The name of the MultiColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
+              .Columns(columns =>
+               {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+               })
+              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
+              .BindTo(Model)   //Pass the list of Products to the MultiColumnComboBox.
               .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
             )
     ```
     ```tab-ASPX
 
-            <%: Html.Kendo().MultuColumnComboBox()
-                .Name("productMultuColumnComboBox") //The name of the MultuColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
-                .BindTo(Model)   //Pass the list of Products to the MultuColumnComboBox.
+            <%: Html.Kendo().MultiColumnComboBox()
+                .Name("productMultiColumnComboBox") //The name of the MultiColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
+                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
+                .BindTo(Model)   //Pass the list of Products to the MultiColumnComboBox.
                 .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
             %>
     ```
 
 ### Ajax Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultuColumnComboBox for Ajax binding to the Northwind **Products** table using Linq to SQL.
+Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox for Ajax binding to the Northwind **Products** table using Linq to SQL.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
@@ -191,17 +201,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
                 return Json(northwind.Products, JsonRequestBehavior.AllowGet);
             }
 
-1. Add an Ajax-bound MultuColumnComboBox.
+1. Add an Ajax-bound MultiColumnComboBox.
 
     ###### Example
 
     ```tab-Razor
 
-            @(Html.Kendo().MultuColumnComboBox()
-                .Name("productMultuColumnComboBox") //The name of the MultuColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
+            @(Html.Kendo().MultiColumnComboBox()
+                .Name("productMultiColumnComboBox") //The name of the MultiColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
+                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
                 .Filter(FilterType.Contains)
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .DataSource(source =>
                 {
                    source.Read(read =>
@@ -216,11 +231,16 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
 
     ```tab-ASPX
 
-            <%: Html.Kendo().MultuColumnComboBox()
-                .Name("productMultuColumnComboBox") //The name of the MultuColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
+            <%: Html.Kendo().MultiColumnComboBox()
+                .Name("productMultiColumnComboBox") //The name of the MultiColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
+                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
                 .Filter(FilterType.Contains)
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -239,7 +259,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
 
 ### ToDataSourceResult Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultuColumnComboBox to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
+Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
@@ -263,17 +283,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
                 return Json(northwind.Products.ToDataSourceResult(request));
             }
 
-1. Add an Ajax-bound MultuColumnComboBox.
+1. Add an Ajax-bound MultiColumnComboBox.
 
     ###### Example
 
 
     ```tab-Razor
 
-            @(Html.Kendo().MultuColumnComboBox()
-                .Name("productMultuColumnComboBox")
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
+            @(Html.Kendo().MultiColumnComboBox()
+                .Name("productMultiColumnComboBox")
+                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .DataSource(source =>
                 {
                     source.Custom()
@@ -293,10 +318,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
     ```
     ```tab-ASPX
 
-            <%: Html.Kendo().MultuColumnComboBox()
-                .Name("productMultuColumnComboBox")
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
+            <%: Html.Kendo().MultiColumnComboBox()
+                .Name("productMultiColumnComboBox")
+                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .DataSource(source =>
                 {
                     source.Custom()
@@ -321,7 +351,7 @@ You can implement model binding both with [local data](#local-data) and [remote 
 
 #### Local Data
 
-Local data is the data that is available on the client when the MultuColumnComboBox is initialized.
+Local data is the data that is available on the client when the MultiColumnComboBox is initialized.
 
 1. Pass the data to the view through the `ViewData`.
 
@@ -350,7 +380,7 @@ Local data is the data that is available on the client when the MultuColumnCombo
             }
 
 
-1. Add the MultuColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
+1. Add the MultiColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
     ###### Example
 
@@ -358,9 +388,14 @@ Local data is the data that is available on the client when the MultuColumnCombo
 
             @model MvcApplication1.Models.ProductViewModel
 
-            @(Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+            @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
                 .DataValueField("ProductID")
                 .DataTextField("ProductName")
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .BindTo((System.Collections.IEnumerable)ViewData["products"])
             )
 
@@ -370,16 +405,21 @@ Local data is the data that is available on the client when the MultuColumnCombo
             <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
 
-            <%: Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+            <%: Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
                     .DataValueField("ProductID")
                     .DataTextField("ProductName")
+                    .Columns(columns =>
+                    {
+                        columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                        columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                    })
                     .BindTo((System.Collections.IEnumerable)ViewData["products"])
             %>
     ```
 
 #### Remote Data
 
-You can configure the MultuColumnComboBox to get its data from a remote source by making an AJAX request.
+You can configure the MultiColumnComboBox to get its data from a remote source by making an AJAX request.
 
 1. Create an action that returns the data as a JSON result.
 
@@ -406,7 +446,7 @@ You can configure the MultuColumnComboBox to get its data from a remote source b
             }
 
 
-1. Add the MultuColumnComboBox to the view and configure its DataSource to use remote data.
+1. Add the MultiColumnComboBox to the view and configure its DataSource to use remote data.
 
     ###### Example
 
@@ -415,10 +455,15 @@ You can configure the MultuColumnComboBox to get its data from a remote source b
             @model MvcApplication1.Models.ProductViewModel
 
 
-            @(Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+            @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
                 .Filter("contains")
                 .DataTextField("ProductName")
                 .DataValueField("ProductID")
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .Placeholder("Select product...")
                 .DataSource(source =>
                 {
@@ -435,10 +480,15 @@ You can configure the MultuColumnComboBox to get its data from a remote source b
             <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
 
-            <%: Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+            <%: Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
                     .Filter("contains")
                     .DataTextField("ProductName")
                     .DataValueField("ProductID")
+                    .Columns(columns =>
+                    {
+                        columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                        columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                    })
                     .Placeholder("Select product...")
                     .DataSource(source =>
                     {
@@ -453,12 +503,12 @@ You can configure the MultuColumnComboBox to get its data from a remote source b
 
 #### Virtualization
 
-You can configure a MultuColumnComboBox that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/virtualization).
+You can configure a MultiColumnComboBox that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/virtualization).
 
 > **Important**
 >
 > All columns width should be set and this must be done in px, in order for the functionality to work properly.
-> The value type to which the MultuColumnComboBox can be bound on the server can only be a primitive type or an enum value.
+> The value type to which the MultiColumnComboBox can be bound on the server can only be a primitive type or an enum value.
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -513,7 +563,7 @@ You can configure a MultuColumnComboBox that is bound to a model field to use [v
             }
 
 
-1. Add the MultuColumnComboBox to the view and configure it to use virtualization.
+1. Add the MultiColumnComboBox to the view and configure it to use virtualization.
 
     ###### Example
 
@@ -521,11 +571,16 @@ You can configure a MultuColumnComboBox that is bound to a model field to use [v
 
             @model MvcApplication1.Models.ProductViewModel
 
-            @(Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+            @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
                 .Filter("contains")
                 .DataTextField("ProductName")
                 .DataValueField("ProductID")
                 .Placeholder("Select product...")
+                .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
                 .DataSource(source =>
                 {
                     source.Custom()
@@ -575,11 +630,16 @@ You can configure a MultuColumnComboBox that is bound to a model field to use [v
             <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
 
-            <%: Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+            <%: Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
                     .Filter("contains")
                     .DataTextField("ProductName")
                     .DataValueField("ProductID")
                     .Placeholder("Select product...")
+                    .Columns(columns =>
+                    {
+                        columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                        columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                    })
                     .DataSource(source =>
                     {
                         source.Custom()
@@ -626,7 +686,7 @@ You can configure a MultuColumnComboBox that is bound to a model field to use [v
             %>
     ```
 
-1. If the `AutoBind` option of the MultuColumnComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
+1. If the `AutoBind` option of the MultiColumnComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 ###### Example
 
 ```tab-Razor
@@ -634,7 +694,7 @@ You can configure a MultuColumnComboBox that is bound to a model field to use [v
         @model MvcApplication1.Models.ProductViewModel
 
 
-        @(Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+        @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
             .AutoBind(false)
             .Text(Model.ProductName)
             .DataTextField("ProductName")
@@ -646,7 +706,7 @@ You can configure a MultuColumnComboBox that is bound to a model field to use [v
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
         Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
 
-        <%: Html.Kendo().MultuColumnComboBoxFor(m => m.ProductID)
+        <%: Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
             .AutoBind(false)
             .Text(Model.ProductName)
             .DataTextField("ProductName")
@@ -656,17 +716,22 @@ You can configure a MultuColumnComboBox that is bound to a model field to use [v
 
 ### Parameter Sending to Server
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultuColumnComboBox to send parameters to the server.
+Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox to send parameters to the server.
 
 ###### Example
 
 ```tab-ASPX
 
-     <%: Html.Kendo().MultuColumnComboBox()
-              .Name("productMultuColumnComboBox") //The name of the MultuColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
+     <%: Html.Kendo().MultiColumnComboBox()
+              .Name("productMultiColumnComboBox") //The name of the MultiColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
+              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
               .Filter(FilterType.Contains)
+              .Columns(columns =>
+                {
+                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                })
               .DataSource(source =>
               {
                       source.Read(read =>
@@ -680,17 +745,17 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
        <script>
           function onAdditionalData() {
               return {
-                  text: $("#productMultuColumnComboBox").data("kendoMultuColumnComboBox").text()
+                  text: $("#productMultiColumnComboBox").data("kendoMultiColumnComboBox").text()
               };
           }
       </script>
 ```
 ```tab-Razor
 
-      @(Html.Kendo().MultuColumnComboBox()
-            .Name("productMultuColumnComboBox") //The name of the MultuColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultuColumnComboBox as a text.
-            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultuColumnComboBox as a value.
+      @(Html.Kendo().MultiColumnComboBox()
+            .Name("productMultiColumnComboBox") //The name of the MultiColumnComboBox is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiColumnComboBox as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiColumnComboBox as a value.
             .Filter(FilterType.Contains)
             .DataSource(source =>
             {
@@ -706,7 +771,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multu
       <script>
           function onAdditionalData() {
               return {
-                  text: $("#productMultuColumnComboBox").data("kendoMultuColumnComboBox").text()
+                  text: $("#productMultiColumnComboBox").data("kendoMultiColumnComboBox").text()
               };
           }
       </script>
@@ -740,14 +805,14 @@ The following example demonstrates how the `GetProducts` method is used.
 
 > **Important**
 >
-> The Kendo UI MultuColumnComboBox has a default event handler for the Data callback of the DataSource. It is used when no event handler is defined.
+> The Kendo UI MultiColumnComboBox has a default event handler for the Data callback of the DataSource. It is used when no event handler is defined.
 
 The following example demonstrates the default event handler for the Data callback of the DataSource.
 
 ###### Example
 
       function requestData(selector) {
-          var multicolumncombobox = $(selector).data("kendoMultuColumnComboBox"),
+          var multicolumncombobox = $(selector).data("kendoMultiColumnComboBox"),
               filters = multicolumncombobox.dataSource.filter(),
               value = multicolumncombobox.input.val();
 
@@ -758,11 +823,11 @@ The following example demonstrates the default event handler for the Data callba
           return { text: value };
       }
 
-As seen from the example above, the MultuColumnComboBox sends the input's value only if the end-user starts to type in it.
+As seen from the example above, the MultiColumnComboBox sends the input's value only if the end-user starts to type in it.
 
 ### Grouping
 
-The MultuColumnComboBox supports binding to a grouped data source. Define a `datasource` group expression to group the data by using the [Custom DataSource configuration]({% slug customdatasource_aspnetmvc %}).
+The MultiColumnComboBox supports binding to a grouped data source. Define a `datasource` group expression to group the data by using the [Custom DataSource configuration]({% slug customdatasource_aspnetmvc %}).
 
 For more information, refer to the [demo on grouping](http://demos.telerik.com/aspnet-mvc/autocomplete/grouping).
 
@@ -772,7 +837,7 @@ For more information, refer to the [demo on grouping](http://demos.telerik.com/a
 
 ## Event Handling
 
-You can subscribe to all MultuColumnComboBox [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox#events).
+You can subscribe to all MultiColumnComboBox [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox#events).
 
 ### By Handler Name
 
@@ -782,7 +847,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ```tab-Razor
 
-    @(Html.Kendo().MultuColumnComboBox()
+    @(Html.Kendo().MultiColumnComboBox()
       .Name("multicolumncombobox")
       .BindTo(new string[] { "Item1", "Item2", "Item3" })
       .Events(e => e
@@ -803,7 +868,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ```tab-ASPX
 
-    <%: Html.Kendo().MultuColumnComboBox()
+    <%: Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .BindTo(new string[] { "Item1", "Item2", "Item3" })
         .Events(e => e
@@ -830,7 +895,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ```tab-Razor
 
-    @(Html.Kendo().MultuColumnComboBox()
+    @(Html.Kendo().MultiColumnComboBox()
       .Name("multicolumncombobox")
       .BindTo(new string[] { "Item1", "Item2", "Item3" })
       .Events(e => e
@@ -852,25 +917,25 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI MultuColumnComboBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultuColumnComboBox API](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
+To reference an existing Kendo UI MultiColumnComboBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiColumnComboBox API](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
 
 ###### Example
 
-    //Put this after your Kendo UI MultuColumnComboBox for ASP.NET MVC declaration.
+    //Put this after your Kendo UI MultiColumnComboBox for ASP.NET MVC declaration.
     <script>
     $(function() {
-    //Note that the Name() of the MultuColumnComboBox is used to get its client-side instance.
-    var multicolumncombobox = $("#productMultuColumnComboBox").data("kendoMultuColumnComboBox");
+    //Note that the Name() of the MultiColumnComboBox is used to get its client-side instance.
+    var multicolumncombobox = $("#productMultiColumnComboBox").data("kendoMultiColumnComboBox");
     });
     </script>
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: MultuColumnComboBoxBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultuColumnComboBoxBuilder)
+* [Telerik UI for ASP.NET MVC API Reference: MultiColumnComboBoxBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiColumnComboBoxBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI MultuColumnComboBox Widget](http://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/overview)
+* [Overview of the Kendo UI MultiColumnComboBox Widget](http://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/overview)
 * [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})

@@ -1,7 +1,7 @@
 ---
 title: Grouping
-page_title: Grouping | Kendo UI MultiComboComboBox
-description: "Learn how to configure grouping in the Kendo UI ComboBox, DropDownList, AutoComplete, MultiComboComboBox and MultiSelect widgets."
+page_title: Grouping | Kendo UI MultiColumnComboBox
+description: "Learn how to configure grouping in the Kendo UI ComboBox, DropDownList, AutoComplete, MultiColumnComboBox and MultiSelect widgets."
 slug: grouping_kendoui_multicolumncombobox_widget
 position: 2
 ---
@@ -12,7 +12,7 @@ The Grouping functionality allows you to display data items categorized by a spe
 
 ## Enabling
 
-To enable the grouping functionality in a MultiComboComboBox, use the remote transport and a grouped data source.
+To enable the grouping functionality in a MultiColumnComboBox, use the remote transport and a grouped data source.
 
 ###### Example
 
@@ -54,11 +54,11 @@ To display grouped items in the widget, group the data source component by using
 
 ## Customization
 
-The widget exposes the [`groupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/grouptemplate) and [`fixedGroupedTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/fixedgrouptemplate) templates. They enable you to configure the rendering of the group titles.
+The widget exposes the [`groupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/grouptemplate) and [`fixedGroupedTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/fixedgrouptemplate) templates. They enable you to configure the rendering of the group titles.
 
 ### Inline Group Title
 
-To customize the inline group title displayed next to the suggestion item in the popup element, use the [`groupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/grouptemplate) option. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
+To customize the inline group title displayed next to the suggestion item in the popup element, use the [`groupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/grouptemplate) option. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
 
 The following example demonstrates how to define a custom group template.
 
@@ -77,6 +77,10 @@ The following example demonstrates how to define a custom group template.
             groupTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
+            columns: [
+                { field: "ContactName", title: "Contact Name" },
+                { field: "CustomerID", title: "Customer ID" }
+            ],
             dataSource: {
                 type: "odata",
                 transport: {
@@ -89,13 +93,11 @@ The following example demonstrates how to define a custom group template.
 </script>
 ```
 
-
-
 ## See Also
 
-Other articles on the Kendo UI MultiComboComboBox:
+Other articles on the Kendo UI MultiColumnComboBox:
 
 * [Overview]({% slug overview_kendoui_multicolumncombobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %})
 * [Cascading MultiColumnComboBoxes]({% slug cascading_kendoui_multicolumncombobox_widget %})
-* [MultiComboComboBox JavaScript API Reference](/api/javascript/ui/multicolumncombobox)
+* [MultiColumnComboBox JavaScript API Reference](/api/javascript/ui/multicolumncombobox)
