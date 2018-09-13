@@ -41,6 +41,30 @@ requireDir('./build/gulp/tasks');
 
 var makeSourceMaps = !argv['skip-source-maps'];
 
+var postcss = require("gulp-postcss");
+var autoprefixer = require("autoprefixer");
+var calc = require("postcss-calc");
+var browsers = [
+    "Explorer >= 8",
+    "last 3 Edge versions",
+    "last 3 Chrome versions",
+    "last 3 Firefox versions",
+    "last 3 Opera versions",
+    "last 3 Safari major versions",
+    "Android >= 2.3",
+    "ExplorerMobile >= 10",
+    "iOS >= 6",
+    "BlackBerry >= 10"
+];
+var postcssPlugins = [
+    calc({
+        precision: 10
+    }),
+    autoprefixer({
+        browsers: browsers
+    })
+];
+
 gulp.task("css-assets", function() {
     return gulp.src("styles/**/*.{less,woff,ttf,eot,png,gif,css,svg,txt}")
         .pipe(gulpIf((file) => file.path.match(/.less$/), license() ))
@@ -69,6 +93,7 @@ gulp.task("build-skin", ["css-assets"], function() {
         ]))
         .pipe(sourcemaps.init())
         .pipe(cssUtils.fromLess())
+        .pipe(postcss(postcssPlugins))
         .pipe(mapLogger)
         .pipe(sourcemaps.write("maps", { sourceRoot: "../../../../styles" }))
         .pipe(gulp.dest('dist/styles'))
@@ -78,7 +103,8 @@ gulp.task("build-skin", ["css-assets"], function() {
 gulp.task("less",function() {
     var css = gulp.src(`styles/${argv.styles || '**/kendo*.less'}`, { base: "styles" })
         .pipe(license())
-        .pipe(cssUtils.fromLess());
+        .pipe(cssUtils.fromLess())
+        .pipe(postcss(postcssPlugins));
 
     var minCss = css.pipe(clone())
         .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
@@ -260,3 +286,7 @@ gulp.task('mdspell', shell.task(
 const taskListing = require('gulp-task-listing');
 gulp.task('tasks', taskListing.withFilters(/:/));
 
+// Exit immediately on Ctrl+C
+process.once('SIGINT', function () {
+    process.exit();
+});

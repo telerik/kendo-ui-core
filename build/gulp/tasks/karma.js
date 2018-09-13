@@ -57,7 +57,7 @@ var defaultOptions = {
     browsers: browsers,
     customLaunchers: {
         ChromiumTravis: {
-            base: 'Chrome',
+            base: 'ChromeHeadless',
             flags: ['--no-sandbox']
         }
     },
