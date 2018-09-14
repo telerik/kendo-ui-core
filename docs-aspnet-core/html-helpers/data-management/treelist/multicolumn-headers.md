@@ -33,7 +33,7 @@ That common header in turn can be a child of another upper `MultiColumn` header 
 
 The above definition will be presented in the following output:
 
-<img src="/helpers/html-helpers/data-management/treelist/images/treelist-multicolumn-headers.png">
+<img src="/html-helpers/data-management/treelist/images/treelist-multicolumn-headers.png">
 
 ## See Also
 

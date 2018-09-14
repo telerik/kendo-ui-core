@@ -118,8 +118,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         )
 
 
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-Core-examples/tree/master/grid/client-detail-template).
-
 ### Client Hierarchy
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET Core to display all **Product** entities available per **Category** entity from the **Northwind** database.

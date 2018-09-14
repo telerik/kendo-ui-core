@@ -12,7 +12,7 @@ This article demonstrates how to create the editing UI of a Kendo UI Grid for AS
 
 ## Configuration
 
-The Kendo UI Grid for ASP.NET Core relies on ASP.NET Core editor templates to create the editing UI. If the Grid is configured for in-line or in-cell editing, the [`Html.EditorFor`](https://msdn.microsoft.com/en-us/library/system.web.Core.html.editorextensions.editorfor.aspx) method is used to get the editor HTML for every property which is editable.
+The Kendo UI Grid for ASP.NET Core relies on ASP.NET Core editor templates to create the editing UI. If the Grid is configured for in-line or in-cell editing, the `Html.EditorFor` method is used to get the editor HTML for every property which is editable.
 
 ### Overview
 
@@ -36,7 +36,7 @@ The following example demonstrates the code that will be used to get the editor 
       Html.EditorFor(o => o.OrderDate);
       Html.EditorFor(o => o.ShipCountry);
 
-If the Grid is configured for pop-up editing, the [`Html.EditorForModel`](https://msdn.microsoft.com/en-us/library/system.web.Core.html.editorextensions.editorformodel.aspx) is used to get the editor HTML for the whole model.
+If the Grid is configured for pop-up editing, the `Html.EditorForModel` is used to get the editor HTML for the whole model.
 
 ### Create Custom Editors for Bound Properties
 
