@@ -64,10 +64,7 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 **Figure 3: Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate**
 
-<<<<<<< d5cda5351971203e82e64f1c9f9585c0d48718f9:docs-aspnet-core/html-helpers/data-management/grid/templates/group-templates.md
 ![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](/html-helpers/data-management/grid/grid-group-header-column-template-first-column.png)
-=======
-![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](/helpers/html-helpers/data-management/grid/grid-group-header-column-template-first-column.png)
 
 ## See Also
 
@@ -75,4 +72,3 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 * [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
 * [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
->>>>>>> docs: review group templates for Grid:docs-aspnet-core/helpers/html-helpers/data-management/grid/templates/group-templates.md
