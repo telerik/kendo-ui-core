@@ -169,7 +169,7 @@ var __meta__ = { // jshint ignore:line
 
         raw: function() {
             var unmasked = this._unmask(this.element.val(), 0);
-            return unmasked.replace(new RegExp(this.options.promptChar, "g"), "");
+            return unmasked.replace(new RegExp(escapeRegExp(this.options.promptChar), "g"), "");
         },
 
         value: function(value) {
@@ -215,7 +215,7 @@ var __meta__ = { // jshint ignore:line
 
             if (this.options.clearPromptChar) {
                 if (!show) {
-                    value = value.replace(new RegExp(this.options.promptChar, "g"), " ");
+                    value = value.replace(new RegExp(escapeRegExp(this.options.promptChar), "g"), " ");
                 } else {
                     value = this._oldValue;
                 }
@@ -638,6 +638,10 @@ var __meta__ = { // jshint ignore:line
             this._maskLength = emptyMask.length;
         }
     });
+
+    function escapeRegExp(text) {
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+    }
 
     ui.plugin(MaskedTextBox);
 

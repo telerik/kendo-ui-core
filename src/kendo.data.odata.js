@@ -29,6 +29,8 @@ var __meta__ = { // jshint ignore:line
             startswith: "startswith",
             isnull: "eq",
             isnotnull: "ne",
+            isnullorempty: "eq",
+            isnotnullorempty: "ne",
             isempty: "eq",
             isnotempty: "ne"
         },
@@ -107,7 +109,11 @@ var __meta__ = { // jshint ignore:line
                     filter = odataFiltersVersionFour[operator];
                 }
 
-                if (operator === "isnull" || operator === "isnotnull") {
+                if (operator === "isnullorempty") {
+                    filter = kendo.format("{0} {1} null or {0} {1} ''", field, filter);
+                } else if(operator === "isnotnullorempty") {
+                    filter = kendo.format("{0} {1} null and {0} {1} ''", field, filter);
+                } else if (operator === "isnull" || operator === "isnotnull") {
                     filter = kendo.format("{0} {1} null", field, filter);
                 } else if (operator === "isempty" || operator === "isnotempty") {
                     filter = kendo.format("{0} {1} ''", field, filter);
