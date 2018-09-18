@@ -232,9 +232,20 @@ test("$filter and isnull operator uses eq", function() {
     equal(result.$filter, "Name eq null");
 });
 
+test("$filter and isnullorempty operator uses eq", function() {
+    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnullorempty" } ]}});
+    equal(result.$filter, "Name eq null or Name eq ''");
+});
+
+
 test("$filter and isnotnull operator uses ne", function() {
     var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnotnull" } ]}});
     equal(result.$filter, "Name ne null");
+});
+
+test("$filter and isnotnullorempty operator uses ne", function() {
+    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnotnullorempty" } ]}});
+    equal(result.$filter, "Name ne null and Name ne ''");
 });
 
 test("$filter with nested field", function() {

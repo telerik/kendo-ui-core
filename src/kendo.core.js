@@ -1960,7 +1960,7 @@ function pad(number, digits, end) {
                 agentRxs = {
                     wp: /(Windows Phone(?: OS)?)\s(\d+)\.(\d+(\.\d+)?)/,
                     fire: /(Silk)\/(\d+)\.(\d+(\.\d+)?)/,
-                    android: /(Android|Android.*(?:Opera|Firefox).*?\/)\s*(\d+)\.(\d+(\.\d+)?)/,
+                    android: /(Android|Android.*(?:Opera|Firefox).*?\/)\s*(\d+)\.?(\d+(\.\d+)?)?/,
                     iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
                     ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
                     meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
@@ -2007,7 +2007,7 @@ function pad(number, digits, end) {
                         os.name = testRx(agent, osRxs);
                         os[os.name] = true;
                         os.majorVersion = match[2];
-                        os.minorVersion = match[3].replace("_", ".");
+                        os.minorVersion = (match[3] || "0").replace("_", ".");
                         minorVersion = os.minorVersion.replace(".", "").substr(0, 2);
                         os.flatVersion = os.majorVersion + minorVersion + (new Array(3 - (minorVersion.length < 3 ? minorVersion.length : 2)).join("0"));
                         os.cordova = typeof window.PhoneGap !== UNDEFINED || typeof window.cordova !== UNDEFINED; // Use file protocol to detect appModes.
