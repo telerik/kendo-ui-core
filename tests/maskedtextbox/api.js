@@ -322,4 +322,15 @@
 
         equal(input.val(), "(199) 023-4567");
     });
+
+    test("MaskedTextBox raw() method does not throw an error", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "999 000-0000",
+            value: "555 123 4567",
+            clearPromptChar: true,
+            promptChar: "*"
+        });
+
+        equal(maskedtextbox.raw(), "5551234567");
+    });
 })();
