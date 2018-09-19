@@ -1,7 +1,7 @@
 (function() {
     module("initialization", {
         setup: function() {
-            kendo.effects.disable();
+
             var Window = kendo.ui.Window;
             $.mockjax({
                 url: "echo",
@@ -22,7 +22,7 @@
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
             $.mockjax.clear();
-            kendo.effects.enable();
+
         }
     });
 

@@ -8,7 +8,7 @@ var DateView = kendo.DateView,
 
 module("kendo.ui.DatePicker API", {
     setup: function() {
-        kendo.effects.disable();
+
 
         kendo.ns = "kendo-";
 
@@ -16,7 +16,7 @@ module("kendo.ui.DatePicker API", {
         anchor = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         if (dateview) {
             dateview.destroy();

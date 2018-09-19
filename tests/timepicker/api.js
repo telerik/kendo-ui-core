@@ -11,12 +11,12 @@
 
     module("kendo.ui.TimePicker API", {
         setup: function() {
-            kendo.effects.disable();
+
             input = $("<input />").appendTo(QUnit.fixture);
         },
 
         teardown: function() {
-            kendo.effects.enable();
+
             var widget = kendo.widgetInstance(input);
             if (widget) {
                 widget.destroy();

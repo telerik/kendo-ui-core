@@ -16,13 +16,13 @@ function destroy(input) {
 
 module("kendo.ui.ComboBox Cascading ComboBoxes", {
     setup: function() {
-        kendo.effects.disable();
+
         parent = $("<input id='parent' />").appendTo(QUnit.fixture);
         child = $("<input id='child' />").appendTo(QUnit.fixture);
         third = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         destroy(parent);
         destroy(child);

@@ -14,11 +14,11 @@ function populateSelect() {
 
 module("kendo.ui.MultiSelect interaction", {
     setup: function() {
-        kendo.effects.disable();
+
         select = $("<select multiple=multiple/>").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
         select.data("kendoMultiSelect").destroy();
     }
 });
@@ -139,11 +139,11 @@ test("MultiSelect shows clicked item on delete", function() {
 
 module("kendo.ui.MultiSelect selection", {
     setup: function() {
-        kendo.effects.disable();
+
         select = $("<select multiple=multiple />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
         select.data("kendoMultiSelect").destroy();
     }
 });

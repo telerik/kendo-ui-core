@@ -15,11 +15,11 @@ function addItems(count) {
 
 module("tabstrip aria", {
     setup: function() {
-        kendo.effects.disable();
+
         div = $('<div id="test">');
     },
     teardown: function() {
-        kendo.effects.enable();
+
         kendo.destroy(div);
     }
 });

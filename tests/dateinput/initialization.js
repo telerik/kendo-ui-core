@@ -8,12 +8,12 @@
     module("kendo.ui.DateInput initialization", {
         setup: function () {
             kendo.ns = "kendo-";
-            kendo.effects.disable();
+
 
             input = $("<input />").appendTo(QUnit.fixture);
         },
         teardown: function () {
-            kendo.effects.enable();
+
 
             kendo.destroy(QUnit.fixture);
 

@@ -5,11 +5,11 @@ var ComboBox = kendo.ui.ComboBox,
 
 module("kendo.ui.ComboBox ARIA", {
     setup: function() {
-        kendo.effects.disable();
+
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
         input.data("kendoComboBox").destroy();
         kendo.destroy(QUnit.fixture);
     }

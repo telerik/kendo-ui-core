@@ -7,7 +7,7 @@ var ComboBox = kendo.ui.ComboBox,
 
 module("kendo.ui.ComboBox events", {
     setup: function() {
-        kendo.effects.disable();
+
         input = $("<input />").appendTo(QUnit.fixture);
 
         $.fn.press = function(key) {
@@ -15,7 +15,7 @@ module("kendo.ui.ComboBox events", {
         }
     },
     teardown: function() {
-        kendo.effects.enable();
+
         combobox.destroy();
         kendo.destroy(QUnit.fixture);
     }

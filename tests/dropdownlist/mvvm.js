@@ -351,13 +351,14 @@
         widget.wrapper.focusout();
     });
 
-    asyncTest("widget does not loose selected value on first bound when autoBind: false is used", 3, function() {
+    test("widget does not loose selected value on first bound when autoBind: false is used", 3, function(assert) {
         dom = $('<input data-role="dropdownlist" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />');
 
         var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
         var observable = kendo.observable({
             items: new kendo.data.DataSource({ data: items })
         });
+        var done = assert.async();
 
         observable.value = items[1];
 
@@ -366,10 +367,10 @@
         var widget = dom.data("kendoDropDownList");
 
         widget.bind("dataBound", function() {
-            start();
             equal(widget.value(), "2");
             equal(widget.text(), "bar");
             equal(widget.select(), 1);
+            done();
         });
 
         widget.dataSource.fetch();
@@ -791,8 +792,9 @@
         element.trigger("scroll");
     }
 
-    skip("widget scrolled to second range sets model to the correct data item", 1, function() {
+    test("widget scrolled to second range sets model to the correct data item", 1, function(assert) {
         var container_height = 200;
+        var done = assert.async();
 
         dom = $('<select data-bind="value:value" />').appendTo(QUnit.fixture);
 
@@ -821,9 +823,9 @@
 
             dropdownlist.one("dataBound", function() {
                 dropdownlist.one("dataBound", function() {
-                    start();
                     dropdownlist.trigger("change");
                     deepEqual(viewModel.value, dropdownlist.dataItem());
+                    done();
                 });
 
                 dropdownlist.value(10);

@@ -74,7 +74,7 @@ var tabstripSetup = function() {
 
 module('tabstrip ajax loading', {
     setup: function() {
-        kendo.effects.disable();
+
 
         $.mockjaxSettings.responseTime = 0;
 
@@ -103,7 +103,7 @@ module('tabstrip ajax loading', {
     },
 
     teardown: function () {
-        kendo.effects.enable();
+
         tabstrip.destroy();
     }
 });
@@ -168,13 +168,13 @@ asyncTest("ajax content with error fires error handler and writes the error mess
 
 module('tabstrip ajax loading using options', {
     setup: function() {
-        kendo.effects.disable();
+
         jasmine.clock().install();
         $.mockjaxSettings.responseTime = 0;
     },
 
     teardown: function () {
-        kendo.effects.enable();
+
         jasmine.clock().uninstall();
         tabstrip.destroy();
     }

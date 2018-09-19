@@ -1,5 +1,6 @@
 (function() {
-    module("new FX API");
+    var container;
+    module("kendo.effects API Initialization");
 
     function getTransform(element) {
         var chunks = $.grep(element.css("transform").split(/[\(, \)]/), function(chunk) {
@@ -14,9 +15,7 @@
     }
 
     test("Creating effects registers API constructor", 1, function() {
-        kendo.effects.createEffect("foo", {
-
-        });
+        kendo.effects.createEffect("foo", {});
 
         var fx = kendo.fx($("<div />"));
 
@@ -34,7 +33,7 @@
         ok($.isFunction(fx.fooRight));
     });
 
-    module("FX integration tests");
+    module("kendo.effects Functionality");
 
     function verifyEffect(effectName, before, after, withEffect) {
         withEffect = withEffect || $.noop;
@@ -57,7 +56,7 @@
 
     asyncTest("slideIn slides the element", 2, function() {
         verifyEffect("slideInLeft",
-            function(element) { ; equal(getTransform(element).translateX, 200); },
+            function(element) { equal(getTransform(element).translateX, 200); },
             function(element) { start(); equal(getTransform(element).translateX, 0); }
         );
     });
@@ -101,7 +100,7 @@
 
     asyncTest("fade out fades the element and hides it", 3, function() {
         verifyEffect("fadeOut",
-            function(element) { equal(element.css("opacity"), "1") },
+            function(element) { equal(element.css("opacity"), "1"); },
             function(element) {
                 start();
                 equal(element.css("opacity"), "0");
@@ -112,104 +111,126 @@
 
     asyncTest("zoom in zooms the element", 2, function() {
         verifyEffect("zoomIn",
-            function(element) { equal(getTransform(element).scale, 0.01) },
-            function(element) { start(); equal(getTransform(element).scale, 1) }
+            function(element) { equal(getTransform(element).scale, 0.01); },
+            function(element) { start(); equal(getTransform(element).scale, 1); }
         );
     });
 
     asyncTest("expanding expands the element", 2, function() {
         verifyEffect("expandVertical",
-            function(element) { equal(element.css("height"), "0px") },
-            function(element) { start(); equal(element.css("height"), "200px") }
+            function(element) { equal(element.css("height"), "0px"); },
+            function(element) { start(); equal(element.css("height"), "200px"); }
         );
     });
 
-    asyncTest("transfer transfers the element", 3, function() {
-        var foo = $("<div style='width: 200px; height: 200px;' />"),
-            bar = $("<div style='width: 100px; height: 100px; margin-left: 300px; margin-right: 300px;' />").prependTo(QUnit.fixture),
-            effect = kendo.fx(foo).transfer(bar);
+    module("kendo.effects Methods Functionality", {
+        teardown: function () {
+            kendo.destroy(container);
+            QUnit.fixture.empty();
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("transfer transfers the element", 3, function(assert) {
+        var bar = $("<div style='width: 100px; height: 100px; margin-left: 300px; margin-right: 300px;' />"),
+            effect,
+            done = assert.async();
+
+        container = $("<div style='width: 200px; height: 200px;' />");
+
+        bar.prependTo(QUnit.fixture);
+        effect = kendo.fx(container).transfer(bar);
 
         effect.duration(0);
 
         effect.run().then(function() {
-            start();
-            equal(foo.css("transform"), "matrix(0.5, 0, 0, 0.5, 0, 0)");
-            var transformOrigin = foo.css("transformOrigin").match(/(\d+)\.?\d+px/g).map(function(px) { return parseInt(px) });
+            equal(container.css("transform"), "matrix(0.5, 0, 0, 0.5, 0, 0)");
+            var transformOrigin = container.css("transformOrigin").match(/(\d+)\.?\d+px/g).map(function(px) { return parseInt(px); });
             equal(transformOrigin[0], 616);
             equal(transformOrigin[1], 16);
-            foo.remove();
+            done();
         });
     });
 
-    asyncTest("page turn turns the two pages, hiding the first one", 2, function() {
-        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
-            foo = container.find("#foo"),
-            bar = container.find("#bar"),
-            effect = kendo.fx(container).pageturn("horizontal", foo, bar);
+    test("page turn turns the two pages, hiding the first one", 2, function(assert) {
+        var foo, bar, effect,
+            done = assert.async();
+
+        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        foo = container.find("#foo");
+        bar = container.find("#bar");
+        effect = kendo.fx(container).pageturn("horizontal", foo, bar);
 
         effect.duration(0);
 
         effect.run().then(function() {
-            start();
             equal(foo.css("display"), "none");
             equal(bar.css("display"), "block");
+            done();
         });
     });
 
-    asyncTest("flip flips the two pages, hiding the first one", 2, function() {
-        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
-            foo = container.find("#foo"),
-            bar = container.find("#bar"),
-            effect = kendo.fx(container).flip("horizontal", foo, bar);
+    test("flip flips the two pages, hiding the first one", 2, function(assert) {
+        var foo, bar, effect,
+            done = assert.async();
+
+        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        foo = container.find("#foo");
+        bar = container.find("#bar");
+        effect = kendo.fx(container).flip("horizontal", foo, bar);
 
         effect.duration(0);
 
         effect.run().then(function() {
-            start();
             equal(foo.css("display"), "none");
             equal(bar.css("display"), "block");
+            done();
         });
     });
 
-    skip("replace replaces one of the elements with the other", 2, function() {
-        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
-            foo = container.find("#foo"),
-            bar = container.find("#bar"),
-            effect = kendo.fx(bar).replace(foo, "zoom");
+    test("replace replaces one of the elements with the other", 2, function(assert) {
+        var foo, bar, effect,
+            done = assert.async();
 
-        QUnit.fixture.append(container);
+        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        foo = container.find("#foo");
+        bar = container.find("#bar");
+        effect = kendo.fx(bar).replace(foo, "zoom");
+
+        container.prependTo(QUnit.fixture);
 
         effect.run().then(function() {
-            start();
             equal(foo.css("display"), "none");
             equal(bar.css("display"), "block");
-            QUnit.fixture.empty();
+            done();
         });
     });
 
-    skip("Triggers before/after callbacks", 6, function() {
-        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
-            foo = container.find("#foo"),
-            bar = container.find("#bar"),
-            effect = kendo.fx(bar).replace(foo, "zoom");
+    test("Triggers before/after callbacks", 6, function(assert) {
+        var foo, bar, effect,
+            done = assert.async();
 
-        QUnit.fixture.append(container);
+        container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        foo = container.find("#foo");
+        bar = container.find("#bar");
+        effect = kendo.fx(bar).replace(foo, "zoom");
+
+        container.prependTo(QUnit.fixture);
 
         effect
-        .beforeTransition(function(previous, next) {
-            equal(previous[0], foo[0]);
-            equal(next[0], bar[0]);
-            ok(container.hasClass("k-fx-start"));
-        })
-        .afterTransition(function(previous, next) {
-            equal(previous[0], foo[0]);
-            equal(next[0], bar[0]);
-            ok(container.hasClass("k-fx-end"));
-        })
-        .run()
-        .then(function() {
-            start();
-            QUnit.fixture.empty();
-        });
+            .beforeTransition(function(previous, next) {
+                equal(previous[0], foo[0]);
+                equal(next[0], bar[0]);
+                ok(container.hasClass("k-fx-start"));
+            })
+            .afterTransition(function(previous, next) {
+                equal(previous[0], foo[0]);
+                equal(next[0], bar[0]);
+                ok(container.hasClass("k-fx-end"));
+            })
+            .run()
+            .then(function() {
+                done();
+            });
     });
 })();

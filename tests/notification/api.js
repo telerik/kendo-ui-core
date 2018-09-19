@@ -1,7 +1,7 @@
 (function() {
     module("api", {
         setup: function() {
-            kendo.effects.disable();
+
         },
         teardown: function() {
             if (notification) {
@@ -16,7 +16,7 @@
                 $(element).remove();
             });
 
-            kendo.effects.enable();
+
         }
     });
 
@@ -289,7 +289,7 @@
     test("new popup ignores old ones that are currently being hidden", 3, function () {
         createNotification();
 
-        kendo.effects.enable();
+
 
         notification.show("foo");
         var popup1 = $(".k-notification").last();
@@ -329,16 +329,18 @@
     });
 
     test("popup notifications receive a k-hiding CSS class while being hidden", function () {
+        kendo.effects.enable();
+
         createNotification({
             autoHideAfter: 0
         });
-
-        kendo.effects.enable();
 
         notification.show("foo");
         notification.hide();
 
         ok($(".k-notification").parent().hasClass("k-hiding"));
+
+        kendo.effects.disable();
     });
 
     test("hide method hides all popup notifications", function() {

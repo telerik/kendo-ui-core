@@ -4,7 +4,7 @@
 
     module("kendo.ui.tooltip", {
         setup: function() {
-            kendo.effects.disable();
+
             $.fn.press = function(key, ctrl, shift, alt) {
                 return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt } );
             }
@@ -13,7 +13,7 @@
         },
 
         teardown: function() {
-            kendo.effects.enable();
+
             kendo.destroy(QUnit.fixture);
         }
     });

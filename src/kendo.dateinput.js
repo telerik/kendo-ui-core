@@ -46,7 +46,7 @@ var __meta__ = { // jshint ignore:line
             options.format = kendo._extractFormat(options.format || kendo.getCulture(options.culture).calendars.standard.patterns.d);
             options.min = kendo.parseDate(element.attr("min")) || kendo.parseDate(options.min);
             options.max = kendo.parseDate(element.attr("max")) || kendo.parseDate(options.max);
-            
+
             var insidePicker = ((element.parent().attr("class") || "").indexOf("k-picker-wrap") >= 0);
             if (insidePicker) {
                 that.wrapper = element.parent();
@@ -387,6 +387,7 @@ var __meta__ = { // jshint ignore:line
                     this._dateTime.modifyPart(symbol, key == 38 ? 1 : -1);
                     this._updateElementValue();
                     this._selectSegment(symbol);
+                    this.element.trigger(CHANGE);
                 }
             }
             if (kendo.support.browser.msie && kendo.support.browser.version < 10) {

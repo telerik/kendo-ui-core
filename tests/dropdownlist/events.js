@@ -5,7 +5,7 @@
 
     module("kendo.ui.DropDownList events", {
         setup: function() {
-            kendo.effects.disable();
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
@@ -22,7 +22,7 @@
             });
 
             input.add($("ul")).parent(".k-widget").remove();
-            kendo.effects.enable();
+
         }
     });
 

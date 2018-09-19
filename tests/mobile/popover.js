@@ -48,7 +48,7 @@
     });
 
     asyncTest("detaches itself to the app container", 1, function(){
-        setup(fixture);    
+        setup(fixture);
         $(function() {
             start();
             equal(root.find("#foo").length, 1);
@@ -57,21 +57,21 @@
     });
 
     asyncTest("is hidden initially", 1, function(){
-        setup(fixture);        
+        setup(fixture);
         $(function(){
             start();
             hidden("#foo");
-        });    
+        });
     });
 
     asyncTest("is visible when open", 1, function(){
-        setup(fixture);        
+        setup(fixture);
         $(function(){
             start();
-            popOver = getPopOver();            
+            popOver = getPopOver();
             popOver.openFor(root.find("#fooAnchor"));
             visible("#foo");
-        });        
+        });
     });
 
     asyncTest("destroy removes the overlay", 1, function(){
@@ -81,7 +81,7 @@
             popOver = getPopOver();
             popOver.destroy();
             ok(!popOver.popup.overlay.parent().length);
-        });    
+        });
 
     });
 
@@ -113,7 +113,7 @@
         setup(fixture);
         $(function(){
             start();
-            kendo.effects.disable();
+
             popOver = getPopOver();
             popOver.openFor(root.find("#fooAnchor"));
 
@@ -123,7 +123,7 @@
 
             popOver.close();
             hidden("#foo");
-            kendo.effects.enable();
+
         });
     });
 
@@ -131,7 +131,7 @@
         setup(fixture);
         $(function(){
             start();
-            kendo.effects.disable();
+
             popOver = getPopOver();
             popOver.openFor(root.find("#fooAnchor"));
 
@@ -142,7 +142,7 @@
 
             popOver.popup.popup._resize({});
 
-            kendo.effects.enable();
+
         });
     });
 })();

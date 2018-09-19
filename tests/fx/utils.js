@@ -1,8 +1,5 @@
 (function() {
-    module("FX utils", {
-        teardown: function() {
-        }
-    });
+    module("kendo.effects utils", {});
 
     var box = kendo.effects.box;
     var transformOrigin = kendo.effects.transformOrigin;

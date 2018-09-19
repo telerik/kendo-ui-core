@@ -6,7 +6,7 @@
 
     module("Toolbar: keyboard navigation: ", {
         setup: function() {
-            kendo.effects.disable();
+
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
 
             $.fn.press = function (key, shiftKey, altKey, target) {

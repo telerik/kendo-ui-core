@@ -3,7 +3,6 @@
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
-/// <reference types="jquery" />
 
 /*
  * Please, submit Pull Requests in the telerik/kendo-ui-core repo at
@@ -1819,7 +1818,7 @@ declare namespace kendo.ui {
         enable(enable: boolean): void;
         select(li: JQuery): void;
         select(li: number): void;
-        selectedIndices?: Array<number>;
+        selectedIndices: Array<number>;
 
     }
 

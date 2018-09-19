@@ -4,12 +4,12 @@
 
     module("kendo.ui.MultiSelect ARIA", {
         setup: function() {
-            kendo.effects.disable();
+
             kendo.ns = "kendo-";
             input = $("<select multiple />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            kendo.effects.enable();
+
             kendo.ns = "";
             if (input.data("kendoMultiSelect")) {
                 input.data("kendoMultiSelect").destroy();

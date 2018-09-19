@@ -3,13 +3,13 @@ var ProgressBar = kendo.ui.ProgressBar,
     container;
 
 function moduleSetup() {
-    kendo.effects.disable();
+
     container = document.createElement("div");
     $(container).appendTo(QUnit.fixture);
 }
 
 function moduleTeardown() {
-    kendo.effects.enable();
+
     kendo.destroy(QUnit.fixture);
 }
 

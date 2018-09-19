@@ -7,7 +7,7 @@
 
     module("kendo.ui.Popup", {
         setup: function() {
-            kendo.effects.disable();
+
             div = $("<div style='background:red'>popup</div>");
             anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo($("#qunit-fixture"));
         },
@@ -16,7 +16,7 @@
                 popup.destroy();
             }
             div.add(anchor).remove();
-            kendo.effects.enable();
+
         }
     });
 
@@ -847,7 +847,7 @@
 
     module("kendo.ui.Popup (multiple bodies)", {
         setup: function() {
-            kendo.effects.disable();
+
             var foreignObjectHtml = '<foreignObject width="100" height="50" requiredExtensions="http://www.w3.org/1999/xhtml"><body xmlns="http://www.w3.org/1999/xhtml"><h1>HTML Foreign Object</h1></body></foreignObject>';
 
             svgWrapper = $('<svg width="400px" height="300px" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"></svg>').appendTo(document.body);
@@ -863,7 +863,7 @@
 
             div.add(anchor).remove();
             svgWrapper.remove();
-            kendo.effects.enable();
+
         }
     });
 

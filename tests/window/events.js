@@ -1,7 +1,7 @@
 (function() {
     module("events", {
         setup: function() {
-            kendo.effects.disable();
+
         },
         teardown: function() {
             QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){

@@ -7,7 +7,7 @@
 
     module("ModalView", {
         setup: function() {
-            kendo.effects.disable();
+
             root = $("<div />").appendTo($('#qunit-fixture'));
             location.hash = '';
             jasmine.clock().install();
@@ -26,7 +26,7 @@
         },
 
         teardown: function() {
-            kendo.effects.enable();
+
             app.destroy();
             kendo.history.stop();
             jasmine.clock().uninstall();

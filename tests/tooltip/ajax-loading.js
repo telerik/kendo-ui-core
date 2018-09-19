@@ -5,7 +5,7 @@
     module("kendo.ui.tooltip.ajax", {
         setup: function() {
             $.mockjaxSettings.responseTime = 0;
-            kendo.effects.disable();
+
             $.fn.press = function(key, ctrl, shift, alt) {
                 return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt } );
             }
@@ -14,7 +14,7 @@
         },
 
         teardown: function() {
-            kendo.effects.enable();
+
             if (container.data("kendoTooltip")) {
                 container.kendoTooltip("destroy");
             }

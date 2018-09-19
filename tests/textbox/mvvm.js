@@ -3,14 +3,14 @@
 
     module("kendo.ui.NumericTextBox MVVM", {
         setup: function() {
-            kendo.effects.disable();
+
 
             window.textBoxChange = function() {
                 ok(true);
             }
         },
         teardown: function() {
-            kendo.effects.enable();
+
             kendo.destroy(dom);
 
             delete window.textBoxChange;

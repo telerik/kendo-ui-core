@@ -5,11 +5,11 @@ var div;
 
 module("kendo.ui.Calendar initialization", {
     setup: function() {
-        kendo.effects.disable();
+
         div = $("<div />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
         kendo.destroy(QUnit.fixture);
     }
 });

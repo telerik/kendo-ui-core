@@ -4,7 +4,7 @@
 
     module("kendo.ui.MultiSelect Single Tag mode", {
         setup: function() {
-            kendo.effects.disable();
+
             kendo.ns = "kendo-";
             select = $("<select multiple />").appendTo(QUnit.fixture);
 
@@ -14,7 +14,7 @@
         },
         teardown: function() {
             kendo.ns = "";
-            kendo.effects.enable();
+
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }

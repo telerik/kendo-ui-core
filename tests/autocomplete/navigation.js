@@ -13,11 +13,11 @@ module("kendo.ui.AutoComplete navigation", {
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
         }
-        kendo.effects.disable();
+
     },
     teardown: function() {
         kendo.destroy(QUnit.fixture);
-        kendo.effects.enable();
+
     }
 });
 
