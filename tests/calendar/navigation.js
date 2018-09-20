@@ -972,4 +972,47 @@ test("range selection with ctrl key and space key", 2, function() {
     equal(+calendar.selectDates()[1], +(new Date(2015, 10, 17)));
 });
 
+module("kendo.ui.Calendar navigation border cases", {
+    setup: function() {
+        div = $("<div />").appendTo(QUnit.fixture);
+    },
+    teardown: function() {
+        div.remove();
+        kendo.destroy(QUnit.fixture);
+    }
+});
+
+test("navigating works correctly when the new current is less tha min value", 1, function() {
+    var calendar = div.kendoCalendar({
+        min: new Date(2017, 4, 31),
+        value: new Date(2017, 4, 31),
+        start: "year"
+    }).getKendoCalendar();
+
+    var downEvent = { keyCode: keys.DOWN, preventDefault: $.noop };
+    var upEvent = { keyCode: keys.UP, preventDefault: $.noop };
+
+    calendar.focus();
+    calendar._move(downEvent);
+    calendar._move(upEvent);
+    equal(+calendar.current(), +(new Date(2017, 4, 31)));
+});
+
+test("navigating and selecting works correctly when the new current is less tha min value", 2, function() {
+    var calendar = div.kendoCalendar({
+        selectable: "multiple",
+        animation: false,
+        min: new Date(2017, 4, 27),
+        value: new Date(2017, 5, 1)
+    }).getKendoCalendar();
+
+    var upEvent = { keyCode: kendo.keys.UP, shiftKey: true, preventDefault: $.noop };
+
+    calendar.element.find(".k-state-selected").trigger("click");
+    calendar._move(upEvent);
+    equal(+calendar.current(), +(new Date(2017, 4, 27)));
+    equal(calendar.selectDates().length, 6);
+
+});
+
 })();

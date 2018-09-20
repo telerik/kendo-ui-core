@@ -728,18 +728,20 @@ var __meta__ = { // jshint ignore:line
                         view.setDate(currentValue, value);
                     }
 
+                    if (!isInRange(currentValue, min, max)) {
+                        currentValue = restrictValue(currentValue, options.min, options.max);
+                    }
+
                     if (isDisabled(currentValue)) {
                         currentValue = that._nextNavigatable(currentValue, value);
                     }
 
                     min = createDate(min.getFullYear(), min.getMonth(), min.getDate());
-                    if (isInRange(currentValue, min, max)) {
-                        if(that._isMultipleSelection()) {
-                            that._keyboardRangeSelection(e, currentValue);
-                        }
-                        else {
-                            that._focus(restrictValue(currentValue, options.min, options.max));
-                        }
+                    if(that._isMultipleSelection()) {
+                        that._keyboardRangeSelection(e, currentValue);
+                    }
+                    else {
+                        that._focus(currentValue);
                     }
                 }
             } else {
@@ -766,25 +768,27 @@ var __meta__ = { // jshint ignore:line
                         view.setDate(currentValue, value);
                     }
 
+                    min = createDate(min.getFullYear(), min.getMonth(), min.getDate());
+
+                    if (!isInRange(currentValue, min, max)) {
+                        currentValue = restrictValue(currentValue, options.min, options.max);
+                    }
+
                     if (isDisabled(currentValue)) {
                         currentValue = that._nextNavigatable(currentValue, value);
                     }
 
-                    min = createDate(min.getFullYear(), min.getMonth(), min.getDate());
-
-                    if (isInRange(currentValue, min, max)) {
-                        if(that._isMultipleSelection()) {
-                            if(!that._dateInView(currentValue)) {
-                                that.navigate(currentValue);
-                            }
-                            else {
-                                that._current = currentValue;
-                                that._class(FOCUSED, currentValue);
-                            }
+                    if(that._isMultipleSelection()) {
+                        if(!that._dateInView(currentValue)) {
+                            that.navigate(currentValue);
                         }
                         else {
-                            that._focus(restrictValue(currentValue, options.min, options.max));
+                            that._current = currentValue;
+                            that._class(FOCUSED, currentValue);
                         }
+                    }
+                    else {
+                        that._focus(currentValue);
                     }
                 }
             }
@@ -1752,7 +1756,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     // creates date with full year
-    function createDate(year, month, date) { 
+    function createDate(year, month, date) {
         var dateObject = new DATE(year, month, date);
         dateObject.setFullYear(year, month, date);
         return dateObject;
