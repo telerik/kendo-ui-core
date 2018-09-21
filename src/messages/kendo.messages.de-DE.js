@@ -512,6 +512,7 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
         "dropFilesHere": "Dateien hierhin ziehen zum Hochladen",
         "remove": "Löschen",
         "retry": "Wiederholen",
+        "clearSelectedFiles": "Zurücksetzen",
         "select": "Wählen Sie...",
         "statusFailed": "nicht erfolgreich",
         "statusWarning": "Warnung",

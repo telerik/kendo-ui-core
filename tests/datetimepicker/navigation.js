@@ -5,11 +5,11 @@ var DateTimePicker = kendo.ui.DateTimePicker,
 
 module("kendo.ui.DateTimePicker navigation", {
     setup: function() {
-        kendo.effects.disable();
+
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
         kendo.destroy(QUnit.fixture);
     }
 });

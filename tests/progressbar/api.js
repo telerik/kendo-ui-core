@@ -5,14 +5,14 @@ var ProgressBar = kendo.ui.ProgressBar,
     pb;
 
 function moduleSetup() {
-    kendo.effects.disable();
+
 
     container = $("<div id='progressbar'></div>");
     container.appendTo(QUnit.fixture);
 }
 
 function moduleTeardown() {
-    kendo.effects.enable();
+
     if (pb.data && pb.data("kendoProgressBar")) {
         pb.destroy();
     }

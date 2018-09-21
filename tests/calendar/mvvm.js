@@ -5,14 +5,14 @@ var dom;
 
 module("kendo.ui.Calendar MVVM", {
     setup: function() {
-        kendo.effects.disable();
+
 
         window.change = function() {
             ok(true);
         };
     },
     teardown: function() {
-        kendo.effects.enable();
+
         delete window.change;
 
         kendo.destroy(dom);

@@ -6,11 +6,11 @@ var DateView = kendo.DateView,
 
 module("kendo.ui.DateView API", {
     setup: function() {
-        kendo.effects.disable();
+
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         dateview.destroy();
 
@@ -102,11 +102,11 @@ var DatePicker = kendo.ui.DatePicker;
 
 module("kendo.ui.DateView API", {
     setup: function() {
-        kendo.effects.disable();
+
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
         datepicker.destroy();
         kendo.destroy(QUnit.fixture);
     }

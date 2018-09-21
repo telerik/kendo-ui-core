@@ -6,7 +6,7 @@
         });
         QUnit.fixture.closest("body").find(".k-overlay").remove();
 
-        kendo.effects.enable();
+
     }
 
     var Widget = kendo.ui.Widget;
@@ -25,7 +25,7 @@
 
     module("interaction", {
         setup: function() {
-            kendo.effects.disable();
+
             kendo.ui.plugin(ResizableWidget);
         },
         teardown: cleanup
@@ -93,7 +93,7 @@
 
     module("resizing", {
         setup: function() {
-            kendo.effects.disable();
+
             dialog = createWindow({
                 width: initialSize,
                 height: initialSize,
@@ -138,7 +138,7 @@
 
     module("integration", {
         setup: function() {
-            kendo.effects.disable();
+
             dialog = createWindow();
         },
         teardown: cleanup

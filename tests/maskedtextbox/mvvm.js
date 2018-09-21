@@ -3,14 +3,14 @@
 
     module("kendo.ui.MaskedTextBox MVVM", {
         setup: function() {
-            kendo.effects.disable();
+
 
             window.maskedtextboxChange = function() {
                 ok(true);
             }
         },
         teardown: function() {
-            kendo.effects.enable();
+
             kendo.destroy(dom);
 
             delete window.maskedtextboxChange;

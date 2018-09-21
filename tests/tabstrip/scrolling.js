@@ -16,7 +16,7 @@ function createNonScrollableTabStrip(options) {
 }
 
 function setupDom() {
-        kendo.effects.disable();
+
 
         QUnit.fixture.append(
             '<div id="tabstrip" style="width:200px;">' +
@@ -63,7 +63,7 @@ module('tabstrip scrolling', {
     },
 
     teardown: function () {
-        kendo.effects.enable();
+
         tabstrip.destroy();
     }
 });
@@ -220,7 +220,7 @@ module('tabstrip mobile scrolling', {
     },
 
     teardown: function () {
-        kendo.effects.enable();
+
         tabstrip.destroy();
         kendo.support.mobileOS = mobileOs;
     }

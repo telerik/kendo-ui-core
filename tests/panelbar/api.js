@@ -29,7 +29,7 @@
 
     module("api", {
         setup: function() {
-            kendo.effects.disable();
+
             ul = $('<ul id="panelbar">' +
                     '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
                     '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
@@ -120,7 +120,7 @@
             });
         },
         teardown: function() {
-            kendo.effects.enable();
+
 
             kendo.destroy(QUnit.fixture);
         }

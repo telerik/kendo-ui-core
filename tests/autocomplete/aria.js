@@ -6,6 +6,7 @@ var input;
 
 module("autocomplete ARIA", {
     setup: function() {
+        kendo.effects.disable();
         input = $("<input>").appendTo(QUnit.fixture);
     },
     teardown: function() {

@@ -6,11 +6,11 @@ var Calendar = kendo.ui.Calendar,
 
 module("kendo.ui.Calendar events", {
     setup: function() {
-        kendo.effects.disable();
+
         div = $("<div />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
         instance.destroy();
         kendo.destroy(QUnit.fixture);
     }

@@ -5,7 +5,7 @@ var div;
 
 module("kendo.ui.Calendar ARIA", {
     setup: function() {
-        kendo.effects.disable();
+
 
         div = $("<div id='test' />").appendTo(QUnit.fixture);
 
@@ -14,7 +14,7 @@ module("kendo.ui.Calendar ARIA", {
     teardown: function() {
         instance.destroy();
 
-        kendo.effects.enable();
+
         kendo.destroy(QUnit.fixture);
     }
 });

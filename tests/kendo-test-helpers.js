@@ -188,6 +188,12 @@ $.mockjaxSettings.logging = false;
         QUnit.fixture.remove();
     });
 
+    QUnit.moduleStart(function (e) {
+        if (!e.name.includes("kendo.effects")) {
+            kendo.effects.disable();
+        }
+    });
+
     var browser = kendo.support.browser;
     if (browser.msie && browser.version < 9) {
         return;
@@ -253,7 +259,7 @@ QUnit.extend( QUnit, {
 });
 
 QUnit.config.testTimeout = 10000;
-QUnit.config.reorder = false;
+QUnit.config.reorder = true;
 
 var close = QUnit.close,
     notClose = QUnit.notClose,

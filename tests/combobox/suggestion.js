@@ -40,7 +40,7 @@ function caret(element, position) {
 
 module("kendo.ui.ComboBox suggestion", {
     setup: function() {
-        kendo.effects.disable();
+
         input = $("<input />").appendTo(QUnit.fixture);
 
         $.fn.press = function(key) {
@@ -64,7 +64,7 @@ module("kendo.ui.ComboBox suggestion", {
         }
     },
     teardown: function() {
-        kendo.effects.enable();
+
         combobox.destroy();
         kendo.destroy(QUnit.fixture);
     }

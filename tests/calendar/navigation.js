@@ -6,7 +6,7 @@ var div, calendar;
 
 module("kendo.ui.Calendar navigation", {
     setup: function() {
-        kendo.effects.disable();
+
 
         div = $("<div />").appendTo(QUnit.fixture).kendoCalendar({
             min: new Date(1800, 0, 1),
@@ -18,7 +18,7 @@ module("kendo.ui.Calendar navigation", {
         calendar.focus();
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         calendar.destroy();
         div.remove();
@@ -507,7 +507,7 @@ test("Calendar persits time portion when select last day of the month", function
 
 module("kendo.ui.Calendar focus persistance", {
     setup: function() {
-        kendo.effects.disable();
+
 
         div = $("<div />").appendTo(QUnit.fixture).kendoCalendar({
             min: new Date(1800, 0, 1),
@@ -519,7 +519,7 @@ module("kendo.ui.Calendar focus persistance", {
         calendar.focus();
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         calendar.destroy();
         div.remove();
@@ -574,7 +574,7 @@ test("_move focuses the table", 1, function() {
 
 module("kendo.ui.Calendar disabled dates navigation", {
     setup: function() {
-        kendo.effects.disable();
+
 
         div = $("<div />").appendTo(QUnit.fixture).kendoCalendar({
             value: new Date(2015,9,22),
@@ -593,7 +593,7 @@ module("kendo.ui.Calendar disabled dates navigation", {
         calendar.focus();
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         calendar.destroy();
         div.remove();
@@ -662,7 +662,7 @@ test("two consecutive selections can be made", 1, function() {
 
 module("kendo.ui.Calendar mouse multiple selection navigation", {
     setup: function() {
-        kendo.effects.disable();
+
 
         div = $("<div />").appendTo(QUnit.fixture).kendoCalendar({
             value: new Date(2015,9,22),
@@ -674,7 +674,7 @@ module("kendo.ui.Calendar mouse multiple selection navigation", {
         calendar.focus();
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         calendar.destroy();
         div.remove();
@@ -747,13 +747,13 @@ test("range selection between different views", 2, function() {
     var currentCell = $(".k-state-selected"),
         event = $.Event("click", { shiftKey: true }),
         nextPeriodButton = $(".k-nav-next");
-    
+
     currentCell.trigger("click");
-    
+
     nextPeriodButton.trigger("click");
 
     var specificDateCell = calendar.element.find("td").has("a[data-value='2015/11/10']");
-    
+
     specificDateCell.trigger(event);
     equal(calendar.selectDates().length, 25);
     equal(calendar.element.find(".k-state-selected").length, 12);
@@ -764,11 +764,11 @@ test("range selection from future month to past month", 2, function() {
     var currentCell = $(".k-state-selected"),
         event = $.Event("click", { shiftKey: true }),
         prevButton = $(".k-nav-prev");
-    
+
     currentCell.trigger("click");
     prevButton.trigger("click");
     var specificDateCell = calendar.element.find("td").has("a[data-value='2015/9/20']");
-    
+
     specificDateCell.trigger(event);
     equal(calendar.selectDates().length, 22);
     equal(calendar.element.find(".k-state-selected").length, 19);
@@ -780,11 +780,11 @@ test("range selection from future month to past month with more than one shiftKe
         event = $.Event("click", { shiftKey: true }),
         prevButton = $(".k-nav-prev"),
         secondEvent = $.Event("click", { shiftKey: true });
-    
+
     currentCell.trigger("click");
     prevButton.trigger("click");
     var specificDateCell = calendar.element.find("td").has("a[data-value='2015/9/20']");
-    
+
     specificDateCell.trigger(event);
 
     var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/9/10']");
@@ -803,7 +803,7 @@ test("range selection from future month to past month with more than one shiftKe
     currentCell.trigger("click");
     prevButton.trigger("click");
     var specificDateCell = calendar.element.find("td").has("a[data-value='2015/9/20']");
-    
+
     specificDateCell.trigger(event);
     var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/9/25']");
     anotherSpecificDateCell.trigger(secondEvent);
@@ -817,13 +817,13 @@ test("range selection with multiple shiftKey selections", 2, function() {
         event = $.Event("click", { shiftKey: true }),
         specificDateCell = calendar.element.find("td").has("a[data-value='2015/10/20']"),
         secondEvent = $.Event("click", { shiftKey: true });
-    
+
     currentCell.trigger("click");
     specificDateCell.trigger(event);
 
     var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/10/25']");
     anotherSpecificDateCell.trigger(secondEvent);
-    
+
     equal(calendar.selectDates().length, 16);
     equal(calendar.element.find(".k-state-selected").length, 16);
 });
@@ -834,20 +834,20 @@ test("range selection with multiple shiftKey selections", 2, function() {
         event = $.Event("click", { shiftKey: true }),
         specificDateCell = calendar.element.find("td").has("a[data-value='2015/10/20']"),
         secondEvent = $.Event("click", { shiftKey: true });
-    
+
     currentCell.trigger("click");
     specificDateCell.trigger(event);
 
     var anotherSpecificDateCell = calendar.element.find("td").has("a[data-value='2015/10/25']");
     anotherSpecificDateCell.trigger(secondEvent);
-    
+
     equal(calendar.selectDates().length, 16);
     equal(calendar.element.find(".k-state-selected").length, 16);
 });
 
 module("kendo.ui.Calendar keyboard multiple selection navigation", {
     setup: function() {
-        kendo.effects.disable();
+
 
         div = $("<div />").appendTo(QUnit.fixture).kendoCalendar({
             value: new Date(2015,9,22),
@@ -859,7 +859,7 @@ module("kendo.ui.Calendar keyboard multiple selection navigation", {
         calendar.focus();
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         calendar.destroy();
         div.remove();
@@ -915,7 +915,7 @@ test("range selection with shiftKey and right arrow key", 2, function() {
         event = { keyCode: keys.RIGHT, shiftKey: true, preventDefault: $.noop };
 
     calendar.value(date);
-   
+
     calendar._move(event);
     equal(+calendar.selectDates()[0], +date);
     equal(+calendar.selectDates()[1], +(new Date(2015, 10, 11)));
@@ -925,7 +925,7 @@ test("range selection with shiftKey and down arrow key", 2, function() {
     var date = new Date(2015, 10, 10),
         event = { keyCode: keys.DOWN, shiftKey: true, preventDefault: $.noop };
     calendar.value(date);
-   
+
     calendar._move(event);
     equal(calendar.selectDates().length, 8);
     equal(+calendar.selectDates()[7], +(new Date(2015, 10, 17)));
@@ -933,11 +933,11 @@ test("range selection with shiftKey and down arrow key", 2, function() {
 
 test("range selection with shiftKey and up arrow key and change view", 3, function() {
     var event = { keyCode: keys.UP, shiftKey: true, preventDefault: $.noop };
-        
+
 
     calendar.navigate(new Date(2015, 10, 10));
-    
-    var cell = div.find("tbody").find("td").eq(1); 
+
+    var cell = div.find("tbody").find("td").eq(1);
     calendar.bind("navigate", function(e) {
         ok(true);
     });

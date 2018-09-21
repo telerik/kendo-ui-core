@@ -1,7 +1,7 @@
 (function() {
     module("MVVM", {
         setup: function() {
-            kendo.effects.disable();
+
 
             window.openHandler = function() {
                 ok(true);
@@ -12,7 +12,7 @@
                 $(element).data("kendoDialog").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            kendo.effects.enable();
+
 
             delete window.openHandler;
         }

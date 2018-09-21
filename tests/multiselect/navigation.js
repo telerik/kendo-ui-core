@@ -24,13 +24,13 @@
             }
 
             kendo.ns = "kendo-";
-            kendo.effects.disable();
+
             select = $("<select multiple=multiple/>").appendTo(QUnit.fixture);
             populateSelect();
         },
         teardown: function() {
             kendo.ns = "";
-            kendo.effects.enable();
+
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }

@@ -4,7 +4,7 @@
 
     module("panelbar ajax loading", {
         setup: function() {
-            kendo.effects.disable();
+
             ul = $('<ul class="k-widget k-panelbar k-reset" id="panelbar" style="width: 300px; float: left; visibility: hidden; position: absolute;">' +
                     '    <li><a>Pure ASP.NET MVC components</a>' +
                     '       <div></div>' +
@@ -58,7 +58,7 @@
             });
         },
         teardown: function() {
-            kendo.effects.enable();
+
             panelbar.destroy();
         }
     });

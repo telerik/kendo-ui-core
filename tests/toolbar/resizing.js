@@ -4,7 +4,7 @@
 
     module("Toolbar: resizing", {
         setup: function() {
-            kendo.effects.disable();
+
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
         },
 
@@ -314,7 +314,7 @@
 
     module("Mobile Toolbar: resizing", {
         setup: function() {
-            kendo.effects.disable();
+
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
         },
 

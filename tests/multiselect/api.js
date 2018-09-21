@@ -15,12 +15,12 @@
     module("kendo.ui.MultiSelect API", {
         setup: function() {
             kendo.ns = "kendo-";
-            kendo.effects.disable();
+
             select = $("<select multiple/>").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.ns = "";
-            kendo.effects.enable();
+
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }

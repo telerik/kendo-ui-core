@@ -8,7 +8,7 @@ var input;
 
 module("kendo.ui.ComboBox searching", {
     setup: function() {
-        kendo.effects.disable();
+
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keypress", keyCode: key } );
@@ -21,7 +21,7 @@ module("kendo.ui.ComboBox searching", {
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         combobox.destroy();
         kendo.destroy(QUnit.fixture);

@@ -7,7 +7,7 @@
 /*
  * Please, submit Pull Requests in the telerik/kendo-ui-core repo at
  * https://github.com/telerik/kendo-ui-core/tree/master/typescript
- * 
+ *
  * See contributor instructions at
  * https://github.com/telerik/kendo-ui-core#how-to-contribute
  */
@@ -1818,6 +1818,7 @@ declare namespace kendo.ui {
         enable(enable: boolean): void;
         select(li: JQuery): void;
         select(li: number): void;
+        selectedIndices: Array<number>;
 
     }
 

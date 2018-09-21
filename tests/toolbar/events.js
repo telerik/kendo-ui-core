@@ -10,7 +10,7 @@
 
     module("Toolbar: Events: ", {
         setup: function() {
-            kendo.effects.disable();
+
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
         },
 

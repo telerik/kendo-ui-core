@@ -5,7 +5,7 @@ var ProgressBar = kendo.ui.ProgressBar,
     pb;
 
 function moduleSetup() {
-    kendo.effects.disable();
+
     container = $("<div id='test-container'>" +
         "<div id='progressbar'></div>" +
         "</div>");
@@ -14,7 +14,7 @@ function moduleSetup() {
 }
 
 function moduleTeardown() {
-    kendo.effects.enable();
+
     kendo.destroy(QUnit.fixture);
 }
 

@@ -5,14 +5,14 @@ var DatePicker = kendo.ui.DatePicker,
 
 module("kendo.ui.DatePicker ARIA", {
     setup: function() {
-        kendo.effects.disable();
+
         input = $("<input id='test' />").appendTo(QUnit.fixture);
         instance = new DatePicker(input, {
             ARIATemplate: "#=kendo.toString(current, 'D')#"
         });
     },
     teardown: function() {
-        kendo.effects.enable();
+
         instance.destroy();
         kendo.destroy(QUnit.fixture);
     }

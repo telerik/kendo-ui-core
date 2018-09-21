@@ -8,13 +8,13 @@ var div;
 module("kendo.ui.DateView initialization", {
     setup: function() {
         kendo.ns = "kendo-";
-        kendo.effects.disable();
+
 
         anchor = $("<input/>").appendTo(QUnit.fixture);
         div = $("<div />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         if (dateview) {
             dateview.destroy();
@@ -70,12 +70,12 @@ var DatePicker = kendo.ui.DatePicker;
 module("kendo.ui.DatePicker initialization", {
     setup: function() {
         kendo.ns = "kendo-";
-        kendo.effects.disable();
+
 
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.effects.enable();
+
 
         kendo.destroy(QUnit.fixture);
 

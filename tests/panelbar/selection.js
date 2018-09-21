@@ -4,7 +4,7 @@
 
     module("panelbar selection", {
         setup: function() {
-            kendo.effects.disable();
+
 
             QUnit.fixture.append(
                 '<ul id="panelbar">' +
@@ -102,7 +102,7 @@
             panelbar = new kendo.ui.PanelBar(ul);
         },
         teardown: function() {
-            kendo.effects.enable();
+
 
             panelbar.destroy();
         }

@@ -21,9 +21,9 @@
     userEvents.end(end.left, end.top);
 };
 
-  module("kendo.ui.wnd constrain-movement", {
+  module("kendo.ui.window constrain-movement", {
       setup: function() {
-          kendo.effects.disable();
+
           containment = $("<div id='container' style='height: 400px; width: 400px; position: absolute;' />").appendTo(QUnit.fixture);
           element = $("<div />").appendTo(QUnit.fixture);
       },
@@ -31,9 +31,9 @@
         if (element.data("kendoWindow")) {
             element.data("kendoWindow").destroy();
         }
+        element = containment = null;
+        kendo.destroy(QUnit.fixture);
 
-        QUnit.fixture.empty();
-        kendo.effects.enable();
       }
   });
 

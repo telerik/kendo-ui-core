@@ -35,10 +35,10 @@
 
         noAnimationModule: {
             setup: function() {
-                kendo.effects.disable();
+
             },
             teardown: function() {
-                kendo.effects.enable();
+
                 PanelBarHelpers.destroy();
             }
         }

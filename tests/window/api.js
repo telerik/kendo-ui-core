@@ -1,7 +1,7 @@
 (function() {
     module("api", {
         setup: function () {
-            kendo.effects.disable();
+
             var Window = kendo.ui.Window;
             QUnit.fixture.html(__html__['tests/window/modals-fixture.html']);
         },
@@ -11,7 +11,7 @@
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
             $.mockjax.clear();
-            kendo.effects.enable();
+
             // Destroy all possible .k-animation-container elements left by previous test suites.
             kendo.destroy($("body"));
         }

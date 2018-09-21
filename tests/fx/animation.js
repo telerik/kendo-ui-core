@@ -39,12 +39,15 @@
         }
     }
 
-    module("animate", {
+    module("kendo.animate", {
         setup: function() {
+            kendo.effects.enable();
+
             span = $("<span style='position: absolute; top: 0; left: 0; visibility: hidden;'>foo</span>").appendTo(document.body);
         },
         teardown: function() {
             span.remove();
+            kendo.effects.disable();
         }
     });
 
@@ -85,9 +88,9 @@
         });
 
         animate(span, "foo bar", function() {
+            start();
             ok(fooFinished);
             ok(barFinished);
-            start();
         });
     });
 
@@ -114,8 +117,8 @@
             effects: { foo: {} },
             reverse: true,
             complete: function() {
-                ok(true);
                 start();
+                ok(true);
             }
         });
     });
@@ -131,8 +134,8 @@
         animate(span, {
             reverse: true,
             complete: function() {
-                ok(true);
                 start();
+                ok(true);
             },
             effects: "foo"
         });
@@ -151,8 +154,8 @@
             },
 
             teardown: function() {
-                ok(this.element.css("overflow") == "visible");
                 start();
+                ok(this.element.css("overflow") == "visible");
             }
         });
 
@@ -172,8 +175,8 @@
             effects: "moo",
             duration: 100,
             complete: function() {
-                called = true;
                 start();
+                called = true;
             }
         });
 
@@ -202,9 +205,9 @@
                 },
 
                 complete: function() {
+                    start();
                     equal(height, 0);
                     equal(span.height(), 20);
-                    start();
                 }
             });
         });
@@ -227,9 +230,9 @@
                     height = span.height();
                 },
                 complete: function() {
+                    start();
                     equal(height, 0);
                     equal(span.height(), 100);
-                    start();
                 }
             });
         });
@@ -246,9 +249,9 @@
                     opacity = span.css("opacity");
                 },
                 complete: function () {
+                    start();
                     ok(opacity === '0');
                     ok(span.css("opacity") == 1);
-                    start();
                 }
             });
         });
@@ -262,8 +265,8 @@
                 effects: "fadeOut",
                 duration: 10,
                 complete: function () {
-                    equal(span.css("opacity"), 0);
                     start();
+                    equal(span.css("opacity"), 0);
                 }
             });
         });
@@ -281,9 +284,9 @@
                         scale = animationProperty(span, "scale");
                     },
                     complete: function () {
+                        start();
                         ok(scale == 0.01);
                         ok(animationProperty(span, "scale") == 1);
-                        start();
                     }
                 });
             });
@@ -304,9 +307,9 @@
                     position = (transforms ? animationProperty(span, "translateX") : span.offset().left);
                 },
                 complete: function () {
+                    start();
                     ok(position == -span.width());
                     ok((transforms ? animationProperty(span, "translateX") : span.offset().left) === 0);
-                    start();
                 }
             });
         });
@@ -326,9 +329,9 @@
                     position = (transforms ? animationProperty(span, "translateY") : span.offset().top);
                 },
                 complete: function () {
+                    start();
                     ok(position == -span.height());
                     ok((transforms ? animationProperty(span, "translateY") : span.offset().top) === 0);
-                    start();
                 }
             });
         });
@@ -344,9 +347,9 @@
                     initialHeight = span.height();
                 },
                 complete: function () {
+                    start();
                     ok(initialHeight === 0);
                     ok(span.height() == 100);
-                    start();
                 }
             });
         });
@@ -362,28 +365,27 @@
                     initialWidth = span.width();
                 },
                 complete: function () {
+                    start();
                     ok(initialWidth === 0);
                     ok(span.width() == 100);
-                    start();
                 }
             });
         });
     }
 
-    module("animationFrame Animation", {});
+    module("kendo.animationFrame Animation", {});
 
-    skip("executes callbacks", 1, function() {
+    test("executes callbacks", 1, function(assert) {
+        var done = assert.async();
         var animation = kendo.effects.Animation.extend({
             counter: 0,
             tick: function() {
                 this.counter ++;
             },
-
             onEnd: function() {
-                start();
                 equal(this.counter, 3);
+                done();
             },
-
             done: function() {
                 return this.counter === 3;
             }
@@ -392,7 +394,8 @@
         new animation().start();
     });
 
-    skip("is cancellable", 1, function() {
+    test("is cancellable", 1, function(assert) {
+        var done = assert.async();
         var animation = kendo.effects.Animation.extend({
             counter: 0,
             tick: function() {
@@ -401,17 +404,14 @@
                     this.cancel();
                 }
             },
-
             onCancel: function() {
-                start();
                 equal(this.counter, 2);
+                done();
             },
-
             onEnd: function() {
                 ok(false);
             },
-
-            done: function() {
+             done: function() {
                 return this.counter === 3;
             }
         });

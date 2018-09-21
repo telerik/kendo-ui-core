@@ -1,7 +1,7 @@
 (function() {
     module("initialization", {
         setup: function() {
-            kendo.effects.disable();
+
             $.mockjax({
                 url: "echo",
                 responseTime: 0,
@@ -22,7 +22,7 @@
                 $(element).data("kendoWindow").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            kendo.effects.enable();
+
             $.mockjax.clear();
         }
     });
@@ -555,7 +555,7 @@
 
     module("appendTo option", {
         setup: function() {
-            kendo.effects.disable();
+
             form = $("<form id='myForm'></form>").appendTo(QUnit.fixture);
         },
         teardown: function() {
@@ -563,7 +563,7 @@
                 $(element).data("kendoWindow").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            kendo.effects.enable();
+
             form.remove();
         }
     });

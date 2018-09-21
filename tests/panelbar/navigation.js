@@ -5,7 +5,7 @@
 
     module("panelbar navigation", {
         setup: function() {
-            kendo.effects.disable();
+
 
             ul = $('<ul />').appendTo(QUnit.fixture);
 
@@ -14,7 +14,7 @@
         teardown: function() {
             kendo.destroy(QUnit.fixture);
 
-            kendo.effects.enable();
+
         }
     });
 

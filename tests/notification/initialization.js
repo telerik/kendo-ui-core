@@ -1,7 +1,7 @@
 (function() {
     module("initialization", {
         setup: function() {
-            kendo.effects.disable();
+
         },
         teardown: function() {
             if (notification) {
@@ -15,7 +15,7 @@
                 $(element).remove();
             });
 
-            kendo.effects.enable();
+
         }
     });
 

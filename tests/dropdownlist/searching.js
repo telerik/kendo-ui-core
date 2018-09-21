@@ -667,6 +667,7 @@
 
 
     test("resize popup on search when autoWidth is enabled", function(assert) {
+        kendo.effects.enable();
         var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
         var dropdownlist = new DropDownList(input, {
             autoWidth: true,
@@ -705,7 +706,7 @@
             dropdownlist.open();
         });
         dropdownlist.open();
-
+        kendo.effects.disable();
     });
 
 test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
