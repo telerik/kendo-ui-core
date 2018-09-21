@@ -152,6 +152,44 @@ The example below demonstrates how to initialize a Window, center, and configure
         win.center().open();
     });
 
+### Containment
+
+The Kendo UI Window provides the [draggable.containment](/api/javascript/ui/window/configuration/draggable.containment) configuration option, that could be used to constrain its movement inside a specific container element. The containment option overrides the appendTo setting and attaches the Window to the specified DOM element. Important to note is that the containment element should be correctly position through CSS(relative, absolute or fixed).
+
+The example below demonstrates how to create a modal Window and constrain its movement inside a DOM element.
+
+###### Example
+
+    <style>
+        #container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 1px solid grey;
+        }
+    </style>
+
+    <div id="container">
+        <div id="window">
+            <p>Alvar Aalto is one of the greatest names in modern architecture and design.
+                Glassblowers at the iittala factory still meticulously handcraft the legendary vases
+                that are variations on one theme, fluid organic shapes that let the end user decide the use.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#window").kendoWindow({
+                width: "300px",
+                height: "200px",
+                draggable: {
+                    containment: "#container"
+                }
+            });
+        });
+    </script>
+
 ### Dimensions
 
 By default, Kendo UI Window does not have any preset dimensions and its size depends on its content.

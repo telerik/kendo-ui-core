@@ -3288,7 +3288,8 @@ var __meta__ = { // jshint ignore:line
 
         success: function(data) {
             var that = this,
-                options = that.options;
+                options = that.options,
+                items;
 
             that.trigger(REQUESTEND, { response: data, type: "read" });
 
@@ -3318,7 +3319,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 data = that._readData(data);
 
-                var items = [];
+                items = [];
                 var itemIds = {};
                 var model = that.reader.model;
                 var idField = model ? model.idField : "id";
@@ -3348,7 +3349,14 @@ var __meta__ = { // jshint ignore:line
 
             that._pristineTotal = that._total;
 
-            that._pristineData = data.slice(0);
+            if (that.options.endless && that._skip === that._data.length) {
+                items = data.slice(0);
+                for (var j = 0; j < items.length; j++) {
+                    that._pristineData.push(items[j]);
+                }
+            } else {
+                that._pristineData = data.slice(0);
+            }
 
             that._detachObservableParents();
 
@@ -3885,7 +3893,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (val !== undefined) {
-                that._query({ pageSize: val, page: 1 });
+                that._query(that._pageableQueryOptions({ pageSize: val, page: 1 }));
                 return;
             }
 

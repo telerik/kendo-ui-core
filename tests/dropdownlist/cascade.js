@@ -447,6 +447,34 @@
         equal(child.data("kendoDropDownList").text(), "Focus");
     });
 
+    test("Support for cascadeFromParentField option", function() {
+         parent.kendoDropDownList({
+            dataTextField: "name",
+            dataValueField: "id",
+            dataSource: [
+                { name: "Parent1", id: 123, cascadeId: 1 },
+                { name: "Parent2", id: 234, cascadeId: 2 }
+            ]
+        });
+         child.kendoDropDownList({
+            cascadeFrom: "parent",
+            cascadeFromField: "parentId",
+            cascadeFromParentField: "cascadeId",
+            dataTextField: "name",
+            dataValueField: "id",
+            dataSource: [
+                { name: "Child1", id: 1, parentId: 1 },
+                { name: "Child2", id: 2, parentId: 2 },
+                { name: "Child3", id: 3, parentId: 1 },
+                { name: "Child4", id: 4, parentId: 2 }
+            ]
+        });
+
+        parent.data("kendoDropDownList").value(123);
+
+        equal(child.data("kendoDropDownList").dataSource.view().length, 2);
+    });
+
     test("Clear selected values of the child widgets on user selection", function() {
         // array of all brands
         var brands = [

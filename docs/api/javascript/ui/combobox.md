@@ -162,7 +162,7 @@ Use it to set the Id of the parent ComboBox widget.
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/combobox/configuration/datavaluefield).
+Defines the field to be used to filter the data source. If not defined, it is set to a field with the same name as the [parent's dataValueField option](/api/javascript/ui/combobox/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/combobox/cascading)
 
 #### Example
@@ -182,6 +182,39 @@ Defines the field to be used to filter the data source. If not defined the [pare
     $("#child").kendoComboBox({
         cascadeFrom: "parent",
         cascadeFromField: "parentId",
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Child1", id: 1, parentId: 1 },
+            { name: "Child2", id: 2, parentId: 2 },
+            { name: "Child3", id: 3, parentId: 1 },
+            { name: "Child4", id: 4, parentId: 2 }
+        ]
+    });
+    </script>
+
+### cascadeFromParentField `String`
+
+Defines the parent field to be used to retain value from. This value will be used further to filter the dataSource. If not defined the value from the [parent's dataValueField will be used](/api/javascript/ui/combobox/configuration/datavaluefield).
+
+#### Example
+
+    <input id="parent" />
+    <input id="child" />
+    <script>
+    $("#parent").kendoComboBox({
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Parent1", id: 123, cascadeId: 1 },
+            { name: "Parent2", id: 234, cascadeId: 2 }
+        ]
+    });
+
+    $("#child").kendoComboBox({
+        cascadeFrom: "parent",
+        cascadeFromField: "parentId",
+        cascadeFromParentField: "cascadeId",
         dataTextField: "name",
         dataValueField: "id",
         dataSource: [

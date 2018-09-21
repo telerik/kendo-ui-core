@@ -252,7 +252,7 @@ Enables (**true**) or disables (**false**) the ability for users to move/drag th
     });
     </script>
 
-### draggable.containment `String` *default: ""*
+### draggable.containment `String|Element|jQuery` *default: ""*
 
 Defines the element in which the window will be able to move. The window is appended to this element, thus, overriding the [`appendTo` setting](/api/javascript/ui/window/configuration/draggable.containment). Accepts either selector or an element.
 
@@ -260,16 +260,34 @@ Note that the containment element should be positioned. In other words, it shoul
 
 #### Example
 
+    <style>
+        #container {
+          position: relative;
+          width: 500px;
+          height: 500px;
+          border: 1px solid grey;
+        }
+    </style>
+
     <div id="container">
-      <div id="dialog">
-      </div>
+        <div id="window">
+            <p>Alvar Aalto is one of the greatest names in modern architecture and design.
+              Glassblowers at the iittala factory still meticulously handcraft the legendary vases
+              that are variations on one theme, fluid organic shapes that let the end user decide the use.
+            </p>
+        </div>
     </div>
+
     <script>
-    $("#dialog").kendoWindow({
-      draggable: {
-        containment: "#container"
-      }
-    });
+        $(document).ready(function() {
+          $("#window").kendoWindow({
+            width: "300px",
+            height: "200px",
+            draggable: {
+                containment: "#container"
+            }
+          });
+        });
     </script>
 
 ### draggable.axis `String` *default: ""*

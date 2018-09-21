@@ -499,6 +499,35 @@ test("Support for cascadeFromField option", function() {
     equal(child.data("kendoComboBox").text(), "Focus");
 });
 
+
+test("Support for cascadeFromParentField option", function() {
+    parent.kendoComboBox({
+       dataTextField: "name",
+       dataValueField: "id",
+       dataSource: [
+           { name: "Parent1", id: 123, cascadeId: 1 },
+           { name: "Parent2", id: 234, cascadeId: 2 }
+       ]
+   });
+    child.kendoComboBox({
+       cascadeFrom: "parent",
+       cascadeFromField: "parentId",
+       cascadeFromParentField: "cascadeId",
+       dataTextField: "name",
+       dataValueField: "id",
+       dataSource: [
+           { name: "Child1", id: 1, parentId: 1 },
+           { name: "Child2", id: 2, parentId: 2 },
+           { name: "Child3", id: 3, parentId: 1 },
+           { name: "Child4", id: 4, parentId: 2 }
+       ]
+   });
+
+   parent.data("kendoComboBox").value(123);
+
+   equal(child.data("kendoComboBox").dataSource.view().length, 2);
+});
+
 test("dataBound event of child is raised after cascading is finished", 2, function() {
     parent.kendoComboBox({
         dataTextField: "parentID",
