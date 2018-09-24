@@ -753,7 +753,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (trigger) {
-                if (that._old === null || value === "") {
+                if (that._old === null || that._old === "" || value === "") {
                     that._valueBeforeCascade = that._old = value;
                 } else {
                     if (that.dataItem()) {

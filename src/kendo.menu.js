@@ -46,8 +46,8 @@ var __meta__ = { // jshint ignore:line
         msPointers = kendo.support.msPointers,
         allPointers = msPointers || pointers,
         TOUCHSTART = kendo.support.touch ? "touchstart" : "",
-        MOUSEENTER = pointers ? "pointerenter" : (msPointers ? "MSPointerEnter" : "mouseenter"),
-        MOUSELEAVE = pointers ? "pointerleave" : (msPointers ? "MSPointerLeave" : "mouseleave"),
+        MOUSEENTER = pointers ? "pointerover" : (msPointers ? "MSPointerOver" : "mouseenter"),
+        MOUSELEAVE = pointers ? "pointerout" : (msPointers ? "MSPointerOut" : "mouseleave"),
         MOUSEWHEEL = "DOMMouseScroll" + NS + " mousewheel" + NS,
         RESIZE = kendo.support.resize + NS,
         SCROLLWIDTH = "scrollWidth",
@@ -1333,7 +1333,7 @@ var __meta__ = { // jshint ignore:line
             target.siblings().removeClass(HOVERSTATE);
 
             if (!target.parents("li." + DISABLEDSTATE).length) {
-                target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "pointerenter" || e.type == TOUCHSTART);
+                target.toggleClass(HOVERSTATE, isEnter || e.type == "mousedown" || e.type == "pointerover" || e.type == TOUCHSTART);
             }
 
             this._removeHoverItem();
