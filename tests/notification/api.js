@@ -1,23 +1,6 @@
 (function() {
-    module("api", {
-        setup: function() {
-
-        },
-        teardown: function() {
-            if (notification) {
-                notification.destroy();
-            }
-
-            $(".k-notification").each(function(idx, element){
-                var popup = $(element).data("kendoPopup");
-                if (popup) {
-                    popup.destroy();
-                }
-                $(element).remove();
-            });
-
-
-        }
+    module("kendo.ui.notification api popup", {
+        teardown: teardown
     });
 
     test("show method adds internal stacking GUID to popup notification", function() {
@@ -28,18 +11,6 @@
         notification.show("foo");
 
         ok($(".k-notification").parent().hasClass(guid));
-    });
-
-    test("show method adds internal stacking GUID to static notification", function() {
-        createNotification({
-            appendTo: QUnit.fixture
-        });
-
-        var guid = notification._guid;
-
-        notification.show("foo");
-
-        ok($(".k-notification").hasClass(guid));
     });
 
     test("show method creates div.k-widget.k-notification element", function() {
@@ -122,19 +93,6 @@
         equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
         equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
         equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-    });
-
-    test("show method does not create a Kendo UI Popup when appendTo is set", function() {
-        createNotification({
-            appendTo: QUnit.fixture
-        });
-
-        notification.show("foo");
-
-        var notificationElement = QUnit.fixture.children(".k-notification");
-
-        equal(notificationElement.length, 1);
-        ok(!notificationElement.data("kendoPopup"));
     });
 
     test("show method ignores empty content", function() {
@@ -261,35 +219,8 @@
         equal($(".k-notification").attr("data-role"), "alert");
     });
 
-    test("show method adds data-role='alert' to static notification", function() {
-        createNotification({
-            appendTo: QUnit.fixture
-        });
-
-        notification.show("foo");
-
-        equal($(".k-notification").attr("data-role"), "alert");
-    });
-
-    test("show and hide methods work for static notifications when animations are disabled", function () {
-        createNotification({
-            appendTo: QUnit.fixture,
-            animation: false
-        });
-
-        notification.show("foo");
-
-        ok($(".k-notification").is(":visible"));
-
-        notification.hide();
-
-        equal($(".k-notification").length, 0);
-    });
-
     test("new popup ignores old ones that are currently being hidden", 3, function () {
         createNotification();
-
-
 
         notification.show("foo");
         var popup1 = $(".k-notification").last();
@@ -357,21 +288,6 @@
         equal($(".k-notification").length, 0);
     });
 
-    test("hide method hides all static notifications", function() {
-        createNotification({
-            autoHideAfter: 0,
-            appendTo: QUnit.fixture
-        });
-
-        notification.show("foo");
-        notification.show("bar");
-        notification.show("baz");
-
-        notification.hide();
-
-        equal($(".k-notification").length, 0);
-    });
-
     test("setOptions updates popup stacking settings", 3, function() {
         createNotification({
             stacking: "left"
@@ -415,18 +331,6 @@
         equal(notification.getNotifications().length, 2);
     });
 
-    test("getNotifications returns open static notifications", function() {
-        createNotification({
-            autoHideAfter: 0,
-            appendTo: QUnit.fixture
-        });
-
-        notification.show("foo");
-        notification.show("bar");
-
-        equal(notification.getNotifications().length, 2);
-    });
-
     test("destroy removes content click handler from popup", function() {
         createNotification({
             autoHideAfter: 0
@@ -455,6 +359,87 @@
         $(".k-notification .k-i-close").click();
 
         equal($(".k-notification").length, 1);
+    });
+
+    module("kendo.ui.notification api static", {
+        teardown: teardown
+    });
+
+    test("show method adds internal stacking GUID to static notification", function() {
+        createNotification({
+            appendTo: QUnit.fixture
+        });
+
+        var guid = notification._guid;
+
+        notification.show("foo");
+
+        ok($(".k-notification").hasClass(guid));
+    });
+
+    test("show method does not create a Kendo UI Popup when appendTo is set", function() {
+        createNotification({
+            appendTo: QUnit.fixture
+        });
+
+        notification.show("foo");
+
+        var notificationElement = QUnit.fixture.children(".k-notification");
+
+        equal(notificationElement.length, 1);
+        ok(!notificationElement.data("kendoPopup"));
+    });
+
+    test("show method adds data-role='alert' to static notification", function() {
+        createNotification({
+            appendTo: QUnit.fixture
+        });
+
+        notification.show("foo");
+
+        equal($(".k-notification").attr("data-role"), "alert");
+    });
+
+    test("show and hide methods work for static notifications when animations are disabled", function () {
+        createNotification({
+            appendTo: QUnit.fixture,
+            animation: false
+        });
+
+        notification.show("foo");
+
+        ok($(".k-notification").is(":visible"));
+
+        notification.hide();
+
+        equal($(".k-notification").length, 0);
+    });
+
+    test("hide method hides all static notifications", function() {
+        createNotification({
+            autoHideAfter: 0,
+            appendTo: QUnit.fixture
+        });
+
+        notification.show("foo");
+        notification.show("bar");
+        notification.show("baz");
+
+        notification.hide();
+
+        equal($(".k-notification").length, 0);
+    });
+
+    test("getNotifications returns open static notifications", function() {
+        createNotification({
+            autoHideAfter: 0,
+            appendTo: QUnit.fixture
+        });
+
+        notification.show("foo");
+        notification.show("bar");
+
+        equal(notification.getNotifications().length, 2);
     });
 
     test("destroy removes content click handler from static", function() {
@@ -488,4 +473,39 @@
 
         equal($(".k-notification").length, 1);
     });
+
+    module("kendo.ui.notification api static multiple containers", {
+        setup: function() {
+            var firstElement = $("<div class='appendto'></div>");
+            var secondElement = $("<div class='appendto'></div>");
+
+            firstElement.appendTo(QUnit.fixture);
+            secondElement.appendTo(QUnit.fixture);
+
+            createNotification({
+                appendTo: '.appendto'
+            });
+        },
+        teardown: function() {
+            QUnit.fixture.empty();
+        }
+    });
+
+    test("show method displays static notifications in multiple containers", function() {
+        notification.show("foo");
+
+        equal($(".k-notification").length, 2);
+    });
+
+    test("hide method hides static notifications opened in multiple containers", function() {
+        notification.show("foo");
+        notification.show("bar");
+        notification.show("baz");
+
+        notification.hide();
+
+        equal($(".k-notification").length, 0);
+    });
 })();
+
+

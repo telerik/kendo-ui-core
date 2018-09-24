@@ -1,4 +1,19 @@
 var notification;
+var teardown;
+
+/* initialization teardown */
+teardown = function() {
+    if (notification) {
+        notification.destroy();
+    }
+    $(".k-notification").each(function(idx, element){
+        var popup = $(element).data("kendoPopup");
+        if (popup) {
+            popup.destroy();
+        }
+        $(element).remove();
+    });
+};
 
 /* exported createNotification */
 function createNotification(options) {
