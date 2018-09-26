@@ -3901,7 +3901,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (val !== undefined) {
-                that._query({ pageSize: val, page: 1 });
+                that._query(that._pageableQueryOptions({ pageSize: val, page: 1 }));
                 return;
             }
 

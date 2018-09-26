@@ -10,7 +10,7 @@ var cache = require('gulp-cached');
 var progeny = require('gulp-progeny');
 
 var cleanCssOptions = {
-    compatibility: 'ie7',
+    compatibility: 'ie9',
     aggressiveMerging: false,
     advanced: false
 };
@@ -18,9 +18,9 @@ var cleanCssOptions = {
 module.exports.fromLess = lazypipe()
     .pipe(logger, { after: 'LESS complete!', extname: '.css', showChange: true })
     .pipe(less, {
-      strictMath: 'on',
-      relativeUrls: true,
-      plugins: []
+        math: 'strict',
+        relativeUrls: true,
+        plugins: []
     })
     .pipe(replace, /\.\.\/mobile\//g, ''); // temp hack for the discrepancy between source and generated "source"
 

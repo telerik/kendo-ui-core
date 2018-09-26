@@ -45,16 +45,15 @@ var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
 var calc = require("postcss-calc");
 var browsers = [
-    "Explorer >= 8",
+    "Explorer >= 9",
     "last 3 Edge versions",
-    "last 3 Chrome versions",
-    "last 3 Firefox versions",
-    "last 3 Opera versions",
-    "last 3 Safari major versions",
-    "Android >= 2.3",
-    "ExplorerMobile >= 10",
-    "iOS >= 6",
-    "BlackBerry >= 10"
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Opera versions",
+    "last 2 Safari major versions",
+    "last 2 iOS major versions",
+    "Android >= 4.4",
+    "ExplorerMobile >= 10"
 ];
 var postcssPlugins = [
     calc({

@@ -274,6 +274,76 @@
         equal(multiselect.tagList.children().eq(1).text().indexOf("Option2"), 0);
     });
 
+    test("MultiSelect selects multiple items on SHIFT+DOWN and enter", 3, function () {
+        var multiselect = new MultiSelect(select);
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN,
+            shiftKey: true
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN,
+            shiftKey: true
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.ENTER,
+        });
+
+        equal(multiselect.tagList.children().length, 2);
+        equal(multiselect.tagList.children().eq(0).text().indexOf("Option1"), 0);
+        equal(multiselect.tagList.children().eq(1).text().indexOf("Option2"), 0);
+    });
+
+    test("MultiSelect selects multiple items on SHIFT+DOWN then and enter", 4, function () {
+        var multiselect = new MultiSelect(select);
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN,
+            shiftKey: true
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN,
+            shiftKey: true
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.ENTER,
+        });
+
+        equal(multiselect.tagList.children().length, 3);
+        equal(multiselect.tagList.children().eq(0).text().indexOf("Option1"), 0);
+        equal(multiselect.tagList.children().eq(1).text().indexOf("Option2"), 0);
+        equal(multiselect.tagList.children().eq(2).text().indexOf("Option3"), 0);
+    });
+
     test("MultiSelect respects maxSelectedItems on SHIFT+DOWN", 2, function () {
         var multiselect = new MultiSelect(select, {
             maxSelectedItems: 1
