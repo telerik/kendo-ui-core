@@ -1398,6 +1398,10 @@ The jQuery object that represents the command element.
 
 The id of the command element.
 
+##### e.item `Object`
+
+The item instance of the clicked item.
+
 ##### e.sender `kendo.ui.ToolBar`
 
 The widget instance which fired the event.
@@ -1569,6 +1573,10 @@ Boolean flag that indicates the button state.
 ##### e.id `String`
 
 The id of the command element.
+
+##### e.item `Object`
+
+The item instance of the toggled item.
 
 ##### e.sender `kendo.ui.ToolBar`
 

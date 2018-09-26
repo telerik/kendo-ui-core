@@ -1025,7 +1025,7 @@ asyncTest("clear selected value if search is started (filter: none)", 1, functio
 
     combobox.bind("open", function() {
         start();
-        equal(combobox.value(), "Ba");
+        equal(combobox.value(), 2);
     });
 
     combobox.input.focus().val("Ba").trigger({ type: "keydown" });

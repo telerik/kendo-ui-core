@@ -76,11 +76,11 @@ test("query should sort the data array when inPlaceSort is enabled and filter is
         inPlaceSort: true
     });
 
-    dataSource.query({ 
-        filter: { field: "id", operator: "eq", value: "1" }, 
-        sort: { field: "id", dir: "desc" 
+    dataSource.query({
+        filter: { field: "id", operator: "eq", value: "1" },
+        sort: { field: "id", dir: "desc"
     }});
-    
+
     equal(dataSource.data()[0].id, 2);
 });
 
@@ -1215,6 +1215,56 @@ test("cancelChanges refresh the total if serverpaging is enabled and grouping is
     dataSource.add({});
     dataSource.cancelChanges();
     equal(dataSource.total(), 10);
+});
+
+test("cancelChanges of a newly inserted item removes the empty group if serverpaging is enabled and grouping is applied", function() {
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+        read: function(options) {
+                options.success( { group: [{ items: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }] }, { items: [{ id:3, bar: "foo" }] }], total: 10 });
+            }
+        },
+        schema: {
+            groups: "group",
+            model: {
+              id: "id"
+            }
+        },
+        group: { field: "id" },
+        serverPaging: true,
+        serverGrouping: true
+    });
+
+    dataSource.read();
+    dataSource.add({ bar: "test"});
+    var model = dataSource.get("");
+    dataSource.cancelChanges(model);
+    equal(dataSource.view().length, 2);
+});
+
+test("delete the last item in group removes the empty group if serverpaging is enabled and grouping is applied", function() {
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+        read: function(options) {
+                options.success( { group: [{ items: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }] }, { items: [{ id:3, bar: "foo" }] }], total: 10 });
+            }
+        },
+        schema: {
+            groups: "group",
+            model: {
+              id: "id"
+            }
+        },
+        group: { field: "id" },
+        serverPaging: true,
+        serverGrouping: true
+    });
+
+    dataSource.read();
+    dataSource.add({ bar: "test"});
+    var model = dataSource.get("");
+    dataSource.remove(model);
+    equal(dataSource.view().length, 2);
 });
 
 test("paging is after filtering", function() {

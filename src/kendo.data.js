@@ -3701,6 +3701,10 @@ var __meta__ = { // jshint ignore:line
                 options.aggregate = that._aggregate;
             }
 
+            if (that.options.serverGrouping) {
+                that._clearEmptyGroups(data);
+            }
+
             result = that._queryProcess(data, options);
 
             if (that.options.serverAggregates !== true) {
@@ -3718,6 +3722,19 @@ var __meta__ = { // jshint ignore:line
             e.items = e.items || that._view;
 
             that.trigger(CHANGE, e);
+        },
+
+        _clearEmptyGroups: function(data) {
+            for (var idx = data.length - 1; idx >=0; idx--) {
+                var group = data[idx];
+                if (group.hasSubgroups) {
+                    this._clearEmptyGroups(group.items);
+                } else {
+                    if (!group.items.length) {
+                        splice.apply(group.parent(), [idx, 1]);
+                    }
+                }
+            }
         },
 
         _queryProcess: function(data, options) {
