@@ -3730,7 +3730,7 @@ var __meta__ = { // jshint ignore:line
                 if (group.hasSubgroups) {
                     this._clearEmptyGroups(group.items);
                 } else {
-                    if (!group.items.length) {
+                    if (group.items && !group.items.length) {
                         splice.apply(group.parent(), [idx, 1]);
                     }
                 }

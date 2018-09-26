@@ -14,7 +14,7 @@ GEM
     extras (0.3.0)
       forwardable-extended (~> 2.5)
     fastimage (2.1.1)
-    ffi (1.9.18-x64-mingw32)
+    ffi (1.9.24-x64-mingw32)
     forwardable-extended (2.6.0)
     github-markdown (0.6.9)
     html-pipeline (1.9.0)
