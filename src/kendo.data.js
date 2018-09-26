@@ -3288,7 +3288,9 @@ var __meta__ = { // jshint ignore:line
 
         success: function(data) {
             var that = this,
-                options = that.options;
+                options = that.options,
+                items,
+                replaceSubset;
 
             that.trigger(REQUESTEND, { response: data, type: "read" });
 
@@ -3318,7 +3320,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 data = that._readData(data);
 
-                var items = [];
+                items = [];
                 var itemIds = {};
                 var model = that.reader.model;
                 var idField = model ? model.idField : "id";
@@ -3347,8 +3349,19 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._pristineTotal = that._total;
+            replaceSubset = that._skip && that._data.length && that._skip < that._data.length;
 
-            that._pristineData = data.slice(0);
+            if (that.options.endless) {
+                if (replaceSubset) {
+                    that._pristineData.splice(that._skip, that._pristineData.length);
+                }
+                items = data.slice(0);
+                for (var j = 0; j < items.length; j++) {
+                    that._pristineData.push(items[j]);
+                }
+            } else {
+                that._pristineData = data.slice(0);
+            }
 
             that._detachObservableParents();
 
@@ -3361,6 +3374,9 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 data = that._observe(data);
+                if (replaceSubset) {
+                    that._data.splice(that._skip, that._data.length);
+                }
                 for (var i = 0; i < data.length; i++) {
                     that._data.push(data[i]);
                 }

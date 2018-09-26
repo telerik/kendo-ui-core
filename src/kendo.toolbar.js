@@ -1352,13 +1352,13 @@ var __meta__ = { // jshint ignore:line
                     handler = isFunction(item.toggleHandler) ? item.toggleHandler : null;
 
                     item.toggle(!item.options.selected, true);
-                    eventData = { target: target, group: item.options.group, checked: item.options.selected, id: item.options.id };
+                    eventData = { target: target, group: item.options.group, checked: item.options.selected, id: item.options.id, item: item };
 
                     if (handler) { handler.call(that, eventData); }
                     that.trigger(TOGGLE, eventData);
                 } else {
                     handler = isFunction(item.clickHandler) ? item.clickHandler : null;
-                    eventData = { sender: that, target: target, id: item.options.id };
+                    eventData = { sender: that, target: target, id: item.options.id, item: item };
 
                     if (handler) { handler.call(that, eventData); }
                     that.trigger(CLICK, eventData);
