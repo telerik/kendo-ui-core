@@ -217,7 +217,7 @@ Here are the actions that are taken during a model update and which create the i
 
 **Solution**
 
-Define a valid `defaulValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/model.define).
+Define a valid `defaulValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/define).
 
 ## See Also
 
