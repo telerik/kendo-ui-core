@@ -106,7 +106,7 @@ var __meta__ = { // jshint ignore:line
              options.format = extractFormat(options.format);
 
              value = options.value;
-             that.value(value !== NULL ? value : element.val());
+             that.value(value !== NULL ? value : parse(element.val()));
 
              disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 

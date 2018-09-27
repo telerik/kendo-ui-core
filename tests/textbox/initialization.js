@@ -128,6 +128,15 @@
         equal(textbox._text.val(), "10,00");
     });
 
+    test("NumericTextBox can parse value in invariant culture", function() {
+        var textbox = new NumericTextBox($("<input type='number' value='1.5' />").appendTo(QUnit.fixture), {
+            format: "n",
+            culture: "de-DE"
+        });
+
+        equal(textbox._text.val(), "1,50");
+    });
+
     test("NumericTextBox hides arrows if spinners is set to false", function() {
         var textbox = new NumericTextBox(input, {
             value: 10,

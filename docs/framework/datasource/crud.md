@@ -100,7 +100,7 @@ The `update` configuration setting of the DataSource should define a function th
 > **Important**
 > * The Kendo UI DataSource uses the ID value to determine whether a data item is new or existing.
 > * If the ID value is `zero`, it is assumed that the data item is new, so the `create` function is executed.
-> * If you need to use zero ID values, then change the [`defaultValue`](/api/javascript/data/model/methods/model.define) of the ID field to -1 in
+> * If you need to use zero ID values, then change the [`defaultValue`](/api/javascript/data/model/methods/define) of the ID field to -1 in
 [`schema.model.fields`](/api/javascript/data/datasource/configuration/schema.model).
 
 ### Create (Local)

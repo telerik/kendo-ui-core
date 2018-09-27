@@ -121,7 +121,7 @@ The column resizing feature on touch screen devices is triggered when the user h
 
 **Figure 1: Grid with resizable columns on a mobile device**
 
-![](/controls/data-management/grid/adaptive-resizing-icon.png)
+![](/controls/data-management/grid/appearance/adaptive-resizing-icon.png)
 
 ## Grid Specifics
 
