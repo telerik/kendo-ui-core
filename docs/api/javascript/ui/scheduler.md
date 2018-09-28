@@ -112,7 +112,7 @@ data source is fired. By default the widget will bind to the data source specifi
     });
     </script>
 
-### currentTimeMarker `Boolean|Object`
+### currentTimeMarker `Boolean|Object` *(default: true)*
 
 If set to `false` the "current time" marker of the scheduler would not be displayed.
 

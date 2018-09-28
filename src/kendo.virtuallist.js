@@ -576,7 +576,12 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
             } else {
-                that.select([-1]);
+                 if (!that.value()[0]) {
+                     that.select([-1]);
+                 } else {
+                    that._selectingValue = false;
+                    that._triggerListBound();
+                 }
             }
         },
 

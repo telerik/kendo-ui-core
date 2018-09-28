@@ -12,7 +12,7 @@ Represents the Kendo UI ProgressBar widget. Inherits from [Widget](/api/javascri
 
 ## Configuration
 
-### animation `Object`
+### animation `Boolean|Object`
 
 Configures the progress animation. Currently only the duration of the animation could be set.
 
@@ -22,9 +22,9 @@ Configures the progress animation. Currently only the duration of the animation 
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    animation: {
-	      duration: 500  
+	      duration: 500
 	    }
-	  });  
+	  });
 	</script>
 
 #### Example - disable the progress animation
@@ -46,10 +46,10 @@ The duration of each progress animation in milliseconds.
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    animation: {
-	      duration: 800  
+	      duration: 800
 	    }
-	  });  
-	</script>	
+	  });
+	</script>
 
 ### chunkCount `Number` *(default: 5)*
 
@@ -64,7 +64,7 @@ Specifies the number of chunks.
 	  $("#progressbar").kendoProgressBar({
 	    type: "chunk",
 		chunkCount: 10
-	  });  
+	  });
 	</script>
 
 ### enable `Boolean` *(default: true)*
@@ -77,7 +77,7 @@ If set to `false` the widget will be disabled. It will still allow changing the 
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    enable: false
-	  });  
+	  });
 	</script>
 
 ### max `Number` *(default: 100)*
@@ -91,7 +91,7 @@ The maximum value of the **ProgressBar**.
 	  $("#progressbar").kendoProgressBar({
 	    max: 10,
 	    value: 5
-	  });  
+	  });
 	</script>
 
 ### min `Number` *(default: 0)*
@@ -103,9 +103,9 @@ The minimum value of the **ProgressBar**.
 	<div id="progressbar"></div>
 	<script>
 	  $("#progressbar").kendoProgressBar({
-	    min: 10,    
+	    min: 10,
 	    max: 50
-	  });  
+	  });
 	</script>
 
 ### orientation `String` *(default: "horizontal")*
@@ -118,7 +118,7 @@ The orientation of the **ProgressBar**. Possible values are **horizontal** and *
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    orientation: "vertical"
-	  });  
+	  });
 	</script>
 
 ### reverse `Boolean` *(default: false)*
@@ -131,7 +131,7 @@ Specifies if the progress direction will be reversed.
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    reverse: true
-	  });  
+	  });
 	</script>
 
 ### showStatus `Boolean` *(default: true)*
@@ -144,7 +144,7 @@ Specifies if the progress status will be shown.
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    showStatus: false
-	  });  
+	  });
 	</script>
 
 ### type `String` *(default: "value")*
@@ -157,8 +157,8 @@ Specifies the type of the **ProgressBar**. The supported types are **value**, **
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    type: "percent"
-	  });  
-	</script>	
+	  });
+	</script>
 
 ### value `Number`
 
@@ -172,7 +172,7 @@ The underlying value of the **ProgressBar**. It should be a number or `false`. S
 	    min: 10,
 	    max: 20,
 	    value: 15
-	  });  
+	  });
 	</script>
 
 ## Fields

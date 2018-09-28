@@ -2215,7 +2215,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function eachGroupItems(data, func) {
-        for (var idx = 0, length = data.length; idx < length; idx++) {
+        for (var idx = 0; idx < data.length; idx++) {
             if (data[idx].hasSubgroups) {
                 if (eachGroupItems(data[idx].items, func)) {
                     return true;

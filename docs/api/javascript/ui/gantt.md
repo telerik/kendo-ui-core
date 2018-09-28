@@ -600,7 +600,7 @@ If set to `true` the user could sort this column by clicking its header cells. B
     });
     </script>
 
-### currentTimeMarker `Boolean|Object`
+### currentTimeMarker `Boolean|Object` *(default: true)*
 
 If set to `false` the "current time" marker of the Gantt would not be displayed.
 

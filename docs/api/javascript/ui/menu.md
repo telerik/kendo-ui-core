@@ -526,7 +526,7 @@ its parent horizontally. You can also switch off the screen boundary detection c
         });
     </script>
 
-### scrollable `Boolean|Object`
+### scrollable `Boolean|Object` *(default: false)*
 
 If enabled, the Menu displays buttons that scroll the items when they cannot fit the width or the popups' height of the Menu. By default, scrolling is disabled.
 

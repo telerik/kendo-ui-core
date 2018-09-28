@@ -407,15 +407,15 @@ of each member of the collection, returned by the `getNotifications()` method. I
 
     <span id="notification"></span>
     <button id="removeMessages" type="button" class="k-button">Remove messages and show new ones</button>
-    
+
     <script>
-    
+
     var notificationWidget = $("#notification").kendoNotification({
         button: false,
         hideOnClick: false,
         autoHideAfter: 0
     }).data("kendoNotification");
-    
+
     var messageCount = 1;
 
     notificationWidget.show("foo " + messageCount);
@@ -425,19 +425,19 @@ of each member of the collection, returned by the `getNotifications()` method. I
         // since there is no way for the user to hide notifications,
         // the following expression will return two elements, no matter when it is executed
         var elements = notificationWidget.getNotifications();
-        
+
         // remove the two messages from the DOM
         elements.each(function(){
             $(this).parent().remove();
         });
-        
+
         messageCount++;
-        
+
         // show two new messages
         notificationWidget.show("foo " + messageCount);
         notificationWidget.show("bar " + messageCount);
     });
-    
+
     </script>
 
 #### Returns
@@ -518,7 +518,7 @@ If this argument is not supplied, then `"info"` is assumed.
 			template: "<div>System alert: #= myMessage #</div>"
 		}]
 	}).data("kendoNotification");
-	
+
 	notificationWidget.show(getNotificationMessage(), "myAlert");
     </script>
 
@@ -605,7 +605,7 @@ The jQuery object, which wraps the element being hidden.
     $("#notification").kendoNotification({
         hide: onHide
     });
-	
+
 	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
@@ -631,6 +631,6 @@ The jQuery object, which wraps the element being displayed.
     $("#notification").kendoNotification({
         show: onShow
     });
-	
+
 	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>

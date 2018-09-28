@@ -281,7 +281,7 @@ Re-positions the popup element
     $("#popup").kendoPopup();
 
     var popup = $("#popup").data("kendoPopup");
-	
+
 	popup.open();
     popup.position();
     </script>
@@ -308,7 +308,7 @@ The new configuration options.
         origin: "top left",
         position: "bottom left"
     });
-	
+
 	popup.open();
     </script>
 
@@ -365,7 +365,7 @@ The widget instance which fired the event.
     popup.bind("activate", function(e) {
         console.log(e.sender.element[0]);
     });
-	
+
 	popup.open();
     </script>
 
@@ -401,7 +401,7 @@ The widget instance which fired the event.
     popup.bind("close", function(e) {
         e.preventDefault(); //prevent popup closing
     });
-	
+
 	popup.open();
     </script>
 
@@ -437,7 +437,7 @@ The widget instance which fired the event.
     popup.bind("deactivate", function(e) {
         console.log(e.sender.element[0]);
     });
-	
+
 	popup.open();
     </script>
 
@@ -473,6 +473,6 @@ The widget instance which fired the event.
     popup.bind("open", function(e) {
         e.preventDefault(); //prevent popup opening
     });
-	
+
 	popup.open();
     </script>

@@ -61,7 +61,7 @@ To initialize a cascading MultiColumnComboBox, use the following example.
     </script>
 
 
-The child MultiColumnComboBox cascades from the parent one if the [`cascadeFrom`](/api/javascript/ui/MultiColumnComboBox#configuration) option is defined. The `cascadeFrom` option has to refer to the parent ID.
+The child MultiColumnComboBox cascades from the parent one if the [`cascadeFrom`](/api/javascript/ui/multicolumncombobox/configuration/cascadefrom) option is defined. The `cascadeFrom` option has to refer to the parent ID.
 
 > **Important**
 >

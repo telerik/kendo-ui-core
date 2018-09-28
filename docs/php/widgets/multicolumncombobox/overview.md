@@ -68,7 +68,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ## Event Handling
 
-You can subscribe to all MultiColumnComboBox [events](/api/javascript/ui/multicolumncombobox/events/).
+You can subscribe to all MultiColumnComboBox [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox#events).
 
 ### Specify Function Names
 

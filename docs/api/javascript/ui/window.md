@@ -493,7 +493,7 @@ Enables (**true**) or disables (**false**) the ability for users to scroll the w
 
 ### title `Object|String|Boolean` *default: ""*
 
-The text in the window title bar. If `false`, the window will be displayed without a title bar. Note that the window titlebar buttons will not be shown and this will prevent the window from being dragged unless [`dragHandle`](/api/javascript/ui/window/configuration/draggable.dragHandle) is configured.
+The text in the window title bar. If `false`, the window will be displayed without a title bar. Note that the window titlebar buttons will not be shown and this will prevent the window from being dragged unless [`dragHandle`](/api/javascript/ui/window/configuration/draggable.draghandle) is configured.
 
 #### Example
 

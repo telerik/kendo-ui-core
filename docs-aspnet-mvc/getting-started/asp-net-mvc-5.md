@@ -128,6 +128,10 @@ Below are listed the steps for you to follow when copying the required JavaScrip
         @Scripts.Render("~/bundles/kendo")
     ```
 
+> **Important**
+>
+> Make sure the jQuery version you are loading is [supported by Kendo UI](https://docs.telerik.com/kendo-ui/intro/installation/prerequisites#supported-jquery-versions).
+
 #### Use CDN Services
 
 Below are listed the steps for you to follow when including the Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN.
@@ -138,7 +142,7 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 1. Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
-1. Include `kendo.common-bootstrap.min.css` and `kendo.bootstrap.min.css`. Add a `link` tag within the `head` tag of the layout.
+1. Include `kendo.common-bootstrap.min.css` and `kendo.bootstrap.min.css`. Add a `link` tag within the `head` tag of the layout. For more information on the different CSS files used by the predefined Kendo UI Less themes, see [Less-Based Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling).
 
     ###### Example
 
@@ -172,6 +176,13 @@ The next step is to add a reference to `Kendo.Mvc.dll` which is the assembly con
 
 1. Select `Kendo.Mvc.dll`. Click **OK**.
 
+Alternatively, you can copy the assembly from the Telerik UI for ASP.NET MVC install location, paste it in the `bin` folder of the application and reference it from there.
+
+> **Important**
+>
+> `Kendo.Mvc.dll` depends on the latest version of `System.Web.Mvc`. If an older version of MVC is used in the application, upgrade it to the latest version: [ASP.NET MVC 5 Nuget](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/).
+
+
 ### Update web.config
 
 The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where the server-side wrappers are. To do this, update the `web.config` file of the web application.
@@ -196,10 +207,16 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
 
     ###### Example
 
-            <dependentAssembly>
-                <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
-                <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
-            </dependentAssembly>
+            <configuration>
+                <runtime>
+                    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+                        <dependentAssembly>
+                            <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+                            <bindingRedirect oldVersion="1.0.0.0-5.2.6.0" newVersion="5.2.6.0" />
+                        </dependentAssembly>
+                    </assemblyBinding>
+                </runtime>
+            </configuration>
 
 1. For issues with unmatching versions of `System.Web.Mvc` referenced in the application and the one used by Kendo.Mvc.dll see [Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
