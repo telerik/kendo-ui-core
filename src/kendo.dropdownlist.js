@@ -160,6 +160,7 @@ var __meta__ = { // jshint ignore:line
             optionLabel: "",
             cascadeFrom: "",
             cascadeFromField: "",
+            cascadeFromParentField: "",
             ignoreCase: true,
             animation: {},
             filter: "none",
