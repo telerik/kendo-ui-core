@@ -1605,7 +1605,7 @@ var __meta__ = { // jshint ignore:line
             if (that._userTriggered) {
                 that._clearSelection(parent, true);
             } else if (value) {
-                if (value !== that.listView.value()[0]) {
+                if (value !==  unifyType(that.listView.value()[0], typeof value)) {
                     that.value(value);
                 }
 

@@ -55,9 +55,9 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 1. Navigate to the install location of Telerik UI for ASP.NET MVC. By default, it is in `C:\Program Files (x86)\Progress\`. For versions prior to R3 2017, the default install location is in `C:\Program Files (x86)\Telerik\`.
 
-1. Copy the `js` directory from the install location and paste it in the `Scripts` folder of the application.
+1. Drag the `js` directory from the install location and drop it in Visual Studio over the `Scripts` folder of the application.
 
-1. Copy the `styles` directory from the install location and paste it in the `Content` folder of the application.
+1. Drag the `styles` directory from the install location and drop it in Visual Studio over the `Content` folder of the application.
 
 1. Rename the `Scripts/js` directory to `Scripts/kendo`. Rename `Content/styles` to `Content/kendo`.
 
