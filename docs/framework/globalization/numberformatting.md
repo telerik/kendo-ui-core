@@ -8,7 +8,7 @@ position: 5
 
 # Number Formatting
 
-The purpose of number formatting is to convert a `Number` object to a human readable string using the culture-specific settings. 
+The purpose of number formatting is to convert a `Number` object to a human readable string using the culture-specific settings.
 
 The [`kendo.format`](/api/javascript/kendo#format) and [`kendo.toString`](/api/javascript/kendo#tostring) methods support standard and custom numeric formats.
 
@@ -70,29 +70,29 @@ The `"0"` is the zero placeholder. It replaces the zero with the corresponding d
 
 ###### Example
 
-    kendo.toString(1234.5678, "00000") -> 01235.
+    kendo.toString(1234.5678, "00000") -> 01235
 
 The `"#"` is the digit placeholder. It replaces the pound sign with the corresponding digit if one is present. Otherwise, no digit appears in the result string.
 
 ###### Example
 
-    kendo.toString(1234.5678, "#####") -> 1235.
+    kendo.toString(1234.5678, "#####") -> 1235
 
 > **Important**
 >
-> The `"#"` specifier cannot be used to format a number as telephone number, i.e. (###)-###-####.
+> The `"#"` specifier cannot be used to format a number as telephone number, i.e. (###)-###-####
 
 The `"."` is the decimal placeholder. It determines the location of the decimal separator in the result string.
 
 ###### Example
 
-    kendo.toString(0.45678, "0.00") -> 0.46 (en-US).
+    kendo.toString(0.45678, "0.00") -> 0.46 (en-US)
 
 The `","` is the group separator placeholder. It inserts a localized group separator between each group.
 
 ###### Example
 
-   kendo.toString(12345678, "##,#") -> 12,345,678(en-US).
+   kendo.toString(12345678, "##,#") -> 12,345,678(en-US)
 
 The `"%"` is the percentage placeholder. It multiplies a number by 100 and inserts a localized percentage symbol in the result string.
 

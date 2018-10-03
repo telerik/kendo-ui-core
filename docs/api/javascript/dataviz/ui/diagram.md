@@ -7246,7 +7246,7 @@ The options of the new connection. See [connections](/api/javascript/dataviz/ui/
       var shape1 = diagram.addShape(new Shape({x:100, y:100, fill: "red"}));
       var shape2 = diagram.addShape(new Shape({x:400, y:100, fill: "red"}));
 
-      var connection = diagram.connect(shape1.getConnector["top"], shape2.getConnector["bottom"]);
+      var connection = diagram.connect(shape1.getConnector("top"), shape2.getConnector("bottom"));
 
     </script>
 
