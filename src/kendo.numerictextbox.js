@@ -51,6 +51,8 @@ var __meta__ = { // jshint ignore:line
              isStep = options && options.step !== undefined,
              min, max, step, value, disabled;
 
+             var inputType = element.type;
+
              Widget.fn.init.call(that, element, options);
 
              options = that.options;
@@ -106,7 +108,16 @@ var __meta__ = { // jshint ignore:line
              options.format = extractFormat(options.format);
 
              value = options.value;
-             that.value(value !== NULL ? value : parse(element.val()));
+
+             if (value == NULL) {
+                 if (inputType == "number") {
+                    value = parseFloat(element.val());
+                 } else {
+                     value = element.val();
+                 }
+             }
+
+             that.value(value);
 
              disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 

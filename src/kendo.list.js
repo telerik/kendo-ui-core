@@ -1793,7 +1793,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (Math.abs(endY - startY) < 10) {
                     e.preventDefault();
-                    that.trigger("click", { item: $(e.target) });
+                    var target = e.target.tagName.toLowerCase() === "li" ? e.target : e.target.parentElement;
+                    that.trigger("click", { item: $(target) });
                 }
             });
         },

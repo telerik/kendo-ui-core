@@ -14,7 +14,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         activeElement = kendo._activeElement,
-        touch = (kendo.support.touch && kendo.support.mobileOS) || kendo.support.mouseAndTouchPresent,
+        touch = (kendo.support.touch && kendo.support.mobileOS),
         MOUSEDOWN = "mousedown",
         CLICK = "click",
         DELAY = 30,
@@ -1117,7 +1117,7 @@ var __meta__ = { // jshint ignore:line
                                             li.parent().siblings(scrollButtonSelector).css({zIndex: ""});
                                         }
 
-                                        if (touch || allPointers) {
+                                        if (touch || allPointers || kendo.support.mouseAndTouchPresent) {
                                             li.removeClass(HOVERSTATE);
                                             that._removeHoverItem();
                                         }
