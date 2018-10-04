@@ -171,6 +171,22 @@
         equal(multiselect.tagList.children().length, 5);
     });
 
+    test("MultiSelect dont selects all on CTRL+A", function() {
+        var multiselect = new MultiSelect(select, {
+            virtual: true
+        });
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: 65,
+            ctrlKey: true
+        });
+
+        equal(multiselect.tagList.children().length, 0);
+    });
+
     test("MultiSelect deselects all on CTRL+A if already selected", function() {
         var multiselect = new MultiSelect(select);
 
@@ -503,6 +519,28 @@
         equal(multiselect.tagList.children().eq(1).text(), "Option2");
     });
 
+    test("MultiSelect don't selects multiple items on CTRL+SHIFT+END when virtual", function () {
+        var multiselect = new MultiSelect(select,{
+            virtual:true
+        });
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.END,
+            ctrlKey: true,
+            shiftKey: true
+        });
+
+        equal(multiselect.tagList.children().length, 0);
+    });
+
     test("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function () {
         var multiselect = new MultiSelect(select);
 
@@ -529,6 +567,36 @@
         });
 
         equal(multiselect.tagList.children().length, 4);
+    });
+
+    test("MultiSelect don't selects multiple items on CTRL+SHIFT+HOME when virtual", function () {
+        var multiselect = new MultiSelect(select, {
+            virtual:true
+        });
+
+        multiselect.open();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.HOME,
+            ctrlKey: true,
+            shiftKey: true
+        });
+
+        equal(multiselect.tagList.children().length, 0);
     });
 
     test("MultiSelect respects maxSelectedItems on CTRL+SHIFT+HOME", 3, function () {

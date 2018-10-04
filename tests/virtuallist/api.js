@@ -763,6 +763,18 @@
         });
     });
 
+    asyncTest("focusLast method focuses last item", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.focusLast();
+            equal(virtualList.focusIndex(), 299);
+        });
+    });
+
     asyncTest("fcusPrev method focuses last item if there is no currently focused item", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true
