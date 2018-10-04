@@ -790,7 +790,7 @@ var __meta__ = { // jshint ignore:line
                         that._activeItem = listView.focus();
                         dir = -1;
                     }
-                    activeItemIdx = listView.getElementIndex(that._getActiveItem()[0]);
+                    activeItemIdx = listView.getElementIndex(that._getActiveItem().first());
 
                     listView.focusNext();
                     if (!listView.focus()) {
@@ -798,7 +798,7 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         if (e.shiftKey) {
                             this._multipleSelection = true;
-                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus()[0]) + dir);
+                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus().first()) + dir);
                         }
                     }
                 } else {
@@ -811,14 +811,14 @@ var __meta__ = { // jshint ignore:line
                         that._activeItem = listView.focus();
                         dir = 1;
                     }
-                    activeItemIdx = listView.getElementIndex(that._getActiveItem()[0]);
+                    activeItemIdx = listView.getElementIndex(that._getActiveItem().first());
                     listView.focusPrev();
                     if (!listView.focus()) {
                         that.close();
                     } else {
                         if (e.shiftKey) {
                             this._multipleSelection = true;
-                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus()[0]) + dir);
+                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus().first()) + dir);
                         }
                     }
                 }
@@ -835,7 +835,7 @@ var __meta__ = { // jshint ignore:line
                     tag = tag.next();
                     that.currentTag(tag[0] ? tag : null);
                 }
-            } else if (e.ctrlKey && !e.altKey && key === keys.A && visible) {
+            } else if (e.ctrlKey && !e.altKey && key === keys.A && visible && !that.options.virtual) {
                 this._multipleSelection = true;
                 if (this._getSelectedIndices().length === listView.items().length) {
                     that._activeItem = null;
@@ -899,7 +899,7 @@ var __meta__ = { // jshint ignore:line
                     if (!listView.focus()) {
                         that.close();
                     } else {
-                        if (e.ctrlKey && e.shiftKey) {
+                        if (e.ctrlKey && e.shiftKey && !that.options.virtual) {
                             that._selectRange(listView.getElementIndex(listView.focus()[0]), 0);
                         }
                         listView.focusFirst();
@@ -916,7 +916,7 @@ var __meta__ = { // jshint ignore:line
                     if (!listView.focus()) {
                         that.close();
                     } else {
-                        if (e.ctrlKey && e.shiftKey) {
+                        if (e.ctrlKey && e.shiftKey && !that.options.virtual) {
                             that._selectRange(
                                 listView.getElementIndex(listView.focus()[0]),
                                 listView.element.children().length - 1
@@ -1356,6 +1356,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
+            that.popup.position();
             that.persistTagList = false;
             return selectIndices(indices);
         },

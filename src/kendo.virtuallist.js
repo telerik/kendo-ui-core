@@ -862,7 +862,7 @@ var __meta__ = { // jshint ignore:line
         focusLast: function() {
             var lastIndex = this.dataSource.total();
             this.scrollTo(this.heightContainer.offsetHeight);
-            this.focus(lastIndex);
+            this.focus(lastIndex - 1);
         },
 
         focusPrev: function() {
