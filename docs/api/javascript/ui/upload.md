@@ -66,7 +66,7 @@ The batch mode applies to multiple files which are selected simultaneously. File
 
 ### async.chunkSize `Number`
 
-When `async.chunkSize` is set, the selected files are uploaded chunk by chunk with the declared size. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, and `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what the next chunk is.
+When `async.chunkSize` is set, the selected files are uploaded chunk by chunk with the declared size. Each request sends a separate file blob and additional string metadata to the server. This metadata is in a stringified JSON format and contains the `fileName`, `relativePath`, `chunkIndex`, `contentType`, `totalFileSize`, `totalChunks`, and `uploadUid` properties. These properties enable the validation and combination of the file on the server side. The response also returns a JSON object with the `uploaded` and `fileUid` properties, which notifies the client what the next chunk is.
 
 > The `async.chunkSize` property is available only when [`async.batch`](/api/javascript/ui/upload#configuration-async.batch) is set to `false`.
 
