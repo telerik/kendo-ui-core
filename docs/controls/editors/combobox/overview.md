@@ -101,6 +101,9 @@ The following example demonstrates how to initialize the ComboBox by using this 
         });
     });
     </script>
+	
+When configuring the ComboBox dataSource either local or remote, note that that enabling paging functionality and setting [pageSize](/api/javascript/data/datasource/configuration/pagesize) in ComboBox is efficient only when it is used with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In other cases it is considered as incorrect configuration. 
+
 
 ## Templates
 

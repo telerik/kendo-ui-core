@@ -20,6 +20,9 @@ To retrieve and display only a subset of the whole dataset, the virtualization f
 
 In the context of the widget, data virtualization is accomplished by using the `DataSource` paging functionality and remote data retrieval. In this way, the widget retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the widgets, you need to configure the `DataSource` paging correctly. For more information, see the [server paging](/api/javascript/data/datasource/configuration/serverpaging) configuration.
 
+
+Note that enabling paging functionality and setting pageSize in ComboBox is efficient only when it is used with virtualization. 
+
 ### UI
 
 The widget uses a specific strategy of reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox/configuration/height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
@@ -106,6 +109,7 @@ The virtualized list container must have a `height` option set in pixels. If you
 ### Set Page Size
 
 To ensure the proper work of the virtualized list, the widget calculates the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4) formula and overrides the custom `pageSize` value.
+Enabling paging functionality and setting pageSize in ComboBox is efficient only when it is used with virtualization. 
 
 Consider the following scenario about a widget:
 - The `height` is `520px`

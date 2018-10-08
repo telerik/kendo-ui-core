@@ -132,6 +132,10 @@ To bind the widget to a JSONP service by using the Data Source component, refer 
       }
      })
     });
+	
+
+When configuring the AutoComplete dataSource either local or remote, note that that enabling paging functionality and setting [pageSize](/api/javascript/data/datasource/configuration/pagesize) in AutoComplete is efficient only when it is used with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In other cases it is considered as incorrect configuration. 
+
 
 ### Change the List Width
 

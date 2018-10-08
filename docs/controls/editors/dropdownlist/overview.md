@@ -95,6 +95,9 @@ The following example demonstrates how to initialize the DropDownList by using t
             });
         });
     </script>
+	
+When configuring the DropDownList dataSource either local or remote, note that that enabling paging functionality and setting [pageSize](/api/javascript/data/datasource/configuration/pagesize) in DropDownList is efficient only when it is used with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In other cases it is considered as incorrect configuration. 
+
 
 ## Templates
 
