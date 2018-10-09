@@ -223,7 +223,7 @@ If set to `true` the widget will auto-scroll the containing element when the mou
       }
     </style>
 
-### checkboxes `Boolean|Object`
+### checkboxes `Boolean|Object` *(default: false)*
 
 If `true` or an object, renders checkboxes beside each node.
 

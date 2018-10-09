@@ -904,7 +904,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper = element.parent("div.k-listbox");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap('<div class="k-widget k-listbox" deselectable="on" />').parent();
+                wrapper = element.wrap('<div class="k-widget k-listbox" unselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
                 $('<div class="k-list-scroller" />').insertBefore(element);

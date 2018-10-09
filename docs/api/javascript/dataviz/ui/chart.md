@@ -32926,7 +32926,7 @@ Specifies if the chart can be zoomed.
       });
     </script>
 
-### zoomable.mousewheel `Boolean|Object`
+### zoomable.mousewheel `Boolean|Object` *(default: true)*
 
 Specifies if the chart can be zoomed using the mouse wheel.
 
@@ -32966,7 +32966,7 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
       });
     </script>
 
-### zoomable.selection `Boolean|Object`
+### zoomable.selection `Boolean|Object` *(default: true)*
 
 Specifies if the chart can be zoomed using selection.
 

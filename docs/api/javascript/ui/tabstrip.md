@@ -427,7 +427,7 @@ Specifies whether the TabStrip should be keyboard navigatable.
         });
     </script>
 
-### scrollable `Boolean|Object`
+### scrollable `Boolean|Object` *(default: true)*
 
 If enabled, the TabStrip will display buttons that will scroll the tabs horizontally, when they cannot fit the TabStrip width. By default scrolling is enabled.
 

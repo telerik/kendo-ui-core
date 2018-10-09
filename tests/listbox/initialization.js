@@ -209,4 +209,10 @@
         equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
         equal(listbox.items().first().html(), "<div>item1</div>");
     });
+
+    test("unselectable attribute is rendered on wrapper", function() {
+        listbox = createListBox();
+
+        equal(listbox.wrapper.attr("unselectable"), "on");
+    });
 })();
