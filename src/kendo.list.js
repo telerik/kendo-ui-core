@@ -29,6 +29,7 @@ var __meta__ = { // jshint ignore:line
         HOVER = "k-state-hover",
         LOADING = "k-i-loading",
         GROUPHEADER = ".k-group-header",
+        ITEMSELECTOR = ".k-item",
         LABELIDPART = "_label",
         OPEN = "open",
         CLOSE = "close",
@@ -1793,8 +1794,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (Math.abs(endY - startY) < 10) {
                     e.preventDefault();
-                    var target = e.target.tagName.toLowerCase() === "li" ? e.target : e.target.parentElement;
-                    that.trigger("click", { item: $(target) });
+                    that.trigger("click", { item: $(e.target.closest(ITEMSELECTOR)) });
                 }
             });
         },
@@ -2069,7 +2069,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         items: function() {
-            return this.element.children(".k-item");
+            return this.element.children(ITEMSELECTOR);
         },
 
         _click: function(e) {
