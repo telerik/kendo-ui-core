@@ -1,16 +1,16 @@
 ---
-title: Progress<sup>®</sup> Kendo UI for React
-page_title: Overview | Progress Kendo UI for React
-description: "Download and install Progress Kendo UI for React, and run a sample application."
+title: KendoReact
+page_title: Overview | KendoReact
+description: "Download and install KendoReact, and run a sample application."
 slug: uiforreact_introduction
 isNew: true
 position: 13
 ---
 
-# Progress<sup>®</sup> Kendo UI for React
+# KendoReact
 
-The Kendo UI for React is part of the Kendo UI suite for jQuery.
+The KendoReact is a separate product which is part of the Kendo UI family.
 
 It provides an easy way to use and configure native components in your React application.
 
-For more information, refer to the [official documentation on Kendo UI for React](https://www.telerik.com/kendo-react-ui/components/).
+For more information, refer to the [official documentation on KendoReact](https://www.telerik.com/kendo-react-ui/components/).
