@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             {
             }
 
-1. Add a new parameter of type `DataSourceRequest` to the action. This parameter will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate that parameter with the `DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data. 
+1. Add a new parameter of type `DataSourceRequest` to the action. This parameter will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate that parameter with the `DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data.
 
     ###### Example
 
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             {
             }
 
-1. Use the `ToDataSourceResult` extension method to convert the Products to a `DataSourceResult` object. That extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. 
+1. Use the `ToDataSourceResult` extension method to convert the Products to a `DataSourceResult` object. That extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object.
 
     ###### Example
 
@@ -79,7 +79,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
               })
               .Pageable()
         )
-		
+
 
 1. Define the client template using the [Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
@@ -251,3 +251,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 ### Nested Client Template Scenarios
 
 Nesting client templates is not an out-of-the-box feature the Kendo UI Core wrappers support. For more information on this issue, check the Grid troubleshooting section in [invalid template errors when nesting client templates](https://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/known-exceptions#invalid-template-error-when-nesting-client-templates).
+
+## See Also
+
+* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
+* [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})

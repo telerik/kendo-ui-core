@@ -8,7 +8,9 @@ position: 2
 
 # Grouping
 
-The Grouping functionality allows you to display data items categorized by a specific model field. For more information on the data source grouping functionality, refer to the [group configuration article](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group).
+The Grouping functionality allows you to display data items that are categorized by a specific model field.
+
+For more information on the grouping functionality of the data source, refer to the [group configuration article](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group).
 
 ## Enabling
 
@@ -46,7 +48,7 @@ To enable the grouping functionality in a MultiColumnComboBox, use the remote tr
 
 ## Configuration
 
-To display grouped items in the widget, group the data source component by using its [group configuration](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group). Once you define the `group` option, the widget automatically displays the suggestion items grouped.
+To display grouped items in the MultiColumnComboBox, group the data source component by using its [group configuration](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group). Once you define the `group` option, the widget automatically displays the suggestion items grouped.
 
 > **Important**
 >

@@ -7,23 +7,25 @@ slug: bubblecharts_aspnetcore_htmlhelper
 
 # Bubble Charts
 
-The [Kendo UI Bubble Chart HtmlHelper](https://demos.telerik.com/aspnet-core/bubble-charts/index) displays data as points with coordinates and sizes defined by the value of their items. It is similar to the [Kendo UI Scatter Charts HtmlHelper](https://demos.telerik.com/aspnet-core/scatter-charts/index), in which the data points are replaced with bubbles. This allows a Bubble Chart to display three-dimensional data&mdash;two values for the items' coordinates and one for their size. A Bubble Chart is useful for visualizing different scientific relationships, e.g. economic or social. The X-axis of the Bubble Charts is numerical and does not require items.
+The [Kendo UI Bubble Chart HtmlHelper](https://demos.telerik.com/aspnet-core/bubble-charts/index) displays data as points with coordinates and sizes defined by the value of their items.
+
+The Bubble Chart HtmlHelper is similar to the [Kendo UI Scatter Charts HtmlHelper](https://demos.telerik.com/aspnet-core/scatter-charts/index) in which the data points are replaced with bubbles. In this way a Bubble Chart displays three-dimensional data&mdash;two values for the coordinates of the items and one value for their size. A Bubble Chart is useful for visualizing different scientific relationships&mdash;fr example, economic or social. The X-axis of the Bubble Charts is numerical and does not require items.
 
 ## Basic Usage
 
 ### Suitability
 
-Kendo UI Bubble Charts are well suited for displaying dozens to hundreds of values. They come in handy especially when you wish to visualize size values, differing by several orders of magnitude. As the size value is represented by a circle area, it is a best practice to plot positive values.
+The Bubble Charts are well suited for displaying dozens to hundreds of values especially when you wish to visualize size values which differ by several orders of magnitude. As the size value is represented by a circle area, it is a best practice to plot positive values.
 
 ### Negative Values
 
-By default, negative values are not displayed. Yet, if you wish to show these, their area is going to be calculated as if their value was positive. The point label displays their actual value and they are also going to have a different color. This behavior is controlled by using the `negativeValues.visible` and `negativeValues.color` options that are applicable to each series.
+By default, negative values are not displayed. However, their area is going to be calculated as if their value was positive. The point label displays their actual value and they will also have a different color. To control this behavior, use the `negativeValues.visible` and `negativeValues.color` options that are applicable to each series.
 
 ## Getting Started
 
 ### Create the Bubble Chart
 
-The example below visualizes several data points.
+The following example visualizes several data points.
 
 ###### Example
 
@@ -40,7 +42,7 @@ The example below visualizes several data points.
               x = 24,
               y =  62000,
               size =  0.25
-            } 
+            }
             }).Name("Sales");
         })
     )

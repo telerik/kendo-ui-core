@@ -1,19 +1,16 @@
 ---
 title: Overview
 page_title: Overview | Kendo UI MultiColumnComboBox
-description: "Learn how to initialize the Kendo UI MultiColumnComboBox widget, configure its options and customize templates."
+description: "Learn how to initialize the Kendo UI MultiColumnComboBox widget, configure its options, and customize its templates."
 slug: overview_kendoui_multicolumncombobox_widget
 position: 1
 ---
 
 # MultiColumnComboBox Overview
 
+As of the Kendo UI R3 2018, the Kendo UI for jQuery suite delivers the [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index).
 
-As of the Kendo UI R3 2018, the [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) is available in the Kendo UI for jQuery suite.
-The main purpose of the widget is to visualize a big set of data in a grid-like table.
-
-Besides the core functionality that the standard Kendo ComboBox provides such as Virtualization, Templates, Cascading functionality and various data-binding scenarios, the new widget provides a few more. It gives you the ability to define Columns that will be rendered in the dropdown (along with additional options for them) and specify against which Fields from the data source the Filter should work upon.
-
+The MultiColumnComboBox visualizes huge sets of data in a grid-like table. Besides the core functionality that the standard Kendo UI ComboBox provides, such as virtualization, templates, cascading functionality, and data-binding scenarios, the MultiColumnComboBox enables you to define columns that will be rendered in the drop-down (along with additional options for them) and specify against which fields from the data source the filter will apply.
 
 ## Getting Started
 
@@ -33,17 +30,19 @@ The MultiColumnComboBox looks and operates consistently regardless of the initia
 
 ## Columns
 
-The MultiColumnComboBox widget provides you with the functionality to predefine the columns that needs to be rendered in the dropdown. You can also set which field from the **dataItem** should be populated, set a title, template, headerTemplate and width. ([see API for Columns configuration in MultiColumnComboBox](/api/javascript/ui/multicolumncombobox/configuration/columns#related-properties))
-
+The MultiColumnComboBox widget provides allows you to predefine the columns that will be rendered in the drop-down. You can also set which field from the `dataItem` will be populated, set a title, template, `headerTemplate`, and width. For more information, refer to the [API for the columns configuration of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox/configuration/columns#related-properties).
 
 ### Columns Width
 
-The widget allows you to set a dropdown width through the [dropDownWidth option](/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth). In addition, the columns allows [setting their width as well](/api/javascript/ui/multicolumncombobox/configuration/columns.width). That being said, the below cases for width configuration exists:
+The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/javascript/ui/multicolumncombobox/configuration/columns.width).
 
-* If all columns width are defined in pixels (through their width option) - the dropDownWidth value (if set) is disregarded.
-* In all other cases (not all of the columns width values are set), the dropDownWidth value is applied to the element.
+> **Important**
+>
+> * If the widths of all columns are defined in pixels through their `width` option, the `dropDownWidth` value (if set) is overridden.
+> * In all other cases when the widths of all columns are not set, the `dropDownWidth` value is applied to the element.
 
-The following example demonstrated how the widget combines its column width values, to set the dropdown width value. (dropdown will be 300px wide)
+The following example demonstrates how to combine the column width values, set the drop-down width value, and ender a drop-down with a width of 300px in the MultiColumnComboBox.
+
 ###### Example
 
     <input id="multicolumncombobox" />
@@ -62,7 +61,8 @@ The following example demonstrated how the widget combines its column width valu
         });
     </script>
 
-The following example demonstrated how the widget sets the specified width for the first column and calculates the rest of the space (the set **dropDownWidth -** column **width**), in order to separate it evenly, between the rest of the columns.
+The following example demonstrated how to set a specific width for the first column and calculate the rest of the space (the set `dropDownWidth` column width) so that the space is evenly split between the rest of the columns.
+
 ###### Example
 
     <input id="multicolumncombobox" />
@@ -86,9 +86,8 @@ The following example demonstrated how the widget sets the specified width for t
 
 ## Filtering
 
-Besides the standard filter options, the widget allows you to set fields, against which the data will be filtered. The option accepts an array of strings:
+Besides the standard filter options, the MultiColumnComboBox allows you to set fields against which the data will be filtered. The option accepts an array of strings.
 
-The following example demonstrated how to set filter fields
 ###### Example
 
     <input id="multicolumncombobox" />
@@ -112,6 +111,8 @@ The following example demonstrated how to set filter fields
     </script>
 
 ## Data Binding
+
+When you configure the local or remote dataSource of the MultiColumnComboBox, enabling paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
 
 ### Bind to Local Data Arrays
 
@@ -180,10 +181,10 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ### Column Templates
 
-You can define [column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.template) and [header column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.headertemplate) in order to customize your layout:
-
+You can define [column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.template) and [header column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.headertemplate) to customize the layout of your project.
 
 ###### Example
+
     <input id="multicolumncombobox" />
     <script>
         $("#multicolumncombobox").kendoMultiColumnComboBox({
@@ -202,9 +203,9 @@ You can define [column templates](/api/javascript/ui/multicolumncombobox/configu
 
 ### Header Templates
 
-The header template manages the way the pop-up header of a MultiColumnComboBox is rendered.
+The header template manages the way the pop-up header of a MultiColumnComboBox is rendered. The MultiColumnComboBox allows you to render a pop-up header.
 
-The MultiColumnComboBox allows you to render a pop-up header. The following example demonstrates how to define a header template.
+The following example demonstrates how to define a header template.
 
 ###### Example
 
@@ -311,6 +312,7 @@ The following example demonstrates how to define a `noDataTemplate` template.
             });
         });
     </script>
+
 ## See Also
 
 Other articles on the Kendo UI MultiColumnComboBox:

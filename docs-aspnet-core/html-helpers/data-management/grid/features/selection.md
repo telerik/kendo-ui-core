@@ -6,36 +6,44 @@ slug: htmlhelpers_grid_aspnetcore_selection
 position: 5
 ---
 
-# Grid Selection
+# Selection
 
 By default, the selection functionality of the Kendo UI Grid for ASP.NET Core is disabled.
 
-The selection functionality of the Grid is controlled by the `Selectable` property:
+To control the selection in the Grid, use the `Selectable` property.
 
 ###### Example
+
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("rowSelection")
         .Selectable(selectable => selectable
             .Mode(GridSelectionMode.Multiple))
-		...	
+		...
 
 
-The Selectable Mode could be set to `Multiple` or `Single`. Additionally, there is `Row` and `Cell` select type, which allows multiple or single selection over the rows or over the cells:
-		
+You can set the selectable mode to `Multiple` or `Single`. Additionally, the Grid provides the `Row` and `Cell` select types which allow multiple or single selection of rows or cells.
+
 ###### Example		
+
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("cellSelection")
         .Selectable(selectable => selectable
             .Mode(GridSelectionMode.Multiple)
             .Type(GridSelectionType.Cell))
         ...
-		
-The Grid also provides built-in functionality for persisting the selection by setting the `PersistSelection` property to `true`. However, in order for the persisting functionality to work, the DataSource of the Grid should have configured `ID` field in the schema:
+
+The Grid also provides built-in functionality for persisting the selection through the `PersistSelection` property and its setting it to `true`. However, in order for the persisting functionality to work, you have to configure the `ID` field in the schema of the DataSource.
 
 ###### Example
+
         .PersistSelection(true)
         .DataSource(dataSource => dataSource
             .Ajax()
             .Model(model => model.Id(p => p.OrderID))
-			
-			
+
+## See Also
+
+* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
+* [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})

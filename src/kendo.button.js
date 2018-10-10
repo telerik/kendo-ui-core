@@ -50,7 +50,9 @@ var __meta__ = { // jshint ignore:line
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
                 .on("keydown" + NS, proxy(that._keydown, that))
-                .on("keyup" + NS, proxy(that._keyup, that));
+                .on("keyup" + NS, proxy(that._removeActive, that))
+                .on("mousedown" + NS, proxy(that._addActive, that))
+                .on("mouseup" + NS, proxy(that._removeActive, that));
 
             kendo.notify(that);
         },
@@ -105,9 +107,7 @@ var __meta__ = { // jshint ignore:line
         _keydown: function(e) {
             var that = this;
             if (e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR) {
-                if (that.options.enable) {
-                    that.element.addClass(SELECTEDSTATE);
-                }
+                that._addActive();
 
                 if (!that._isNativeButton()) {
                     if (e.keyCode == keys.SPACEBAR) {
@@ -118,8 +118,14 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _keyup: function() {
+        _removeActive: function() {
             this.element.removeClass(SELECTEDSTATE);
+        },
+
+        _addActive: function() {
+            if (this.options.enable) {
+                this.element.addClass(SELECTEDSTATE);
+            }
         },
 
         iconElement: function() {

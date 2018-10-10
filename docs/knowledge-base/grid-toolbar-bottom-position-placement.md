@@ -1,8 +1,8 @@
 ---
-title: Displaying Grid Toolbar at Bottom
-description: An example demonstrating how to display the toolbar at the bottom of the Grid 
+title: Display Toolbar at the Bottom of the Grid
+description: An example on how to display a toolbar at the bottom of the Kendo UI Grid.
 type: how-to
-page_title: Positioning the Toolbar Below Grid Body | Kendo UI Grid
+page_title: Position a Toolbar under the Table | Kendo UI Grid
 slug: grid-toolbar-bottom-position-placement
 tags: grid, toolbar, bottom, position, placement
 ticketid: 1120199
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,17 +24,14 @@ res_type: kb
 
 ## Description
 
-How can I change the Kendo UI Grid's toolbar position to the bottom?
+How can I change the position of the toolbar and place it at the bottom of the Grid?
 
 ## Solution
 
-Using jQuery, the toolbar can be placed below the content of the Kendo UI Grid:
+Use the `$("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));` jQuery configuration to place the toolbar under the content of the Grid.
 
-```
-   $("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));
+The following example demonstrates how to display a toolbar above the pager and at the bottom of a Grid which uses batch editing.
 
-```
-The following demonstrates a Kendo UI Grid using batch editing with the toolbar at the bottom above the pager:
 ```html
     <div id="example">
       <div id="grid"></div>
@@ -93,7 +91,7 @@ The following demonstrates a Kendo UI Grid using batch editing with the toolbar 
             editable: "inline"
           });
 
-          //Sets toolbar below Kendo UI Grid body
+          // Sets toolbar under the Grid body
           $("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));
         });
 
@@ -107,5 +105,5 @@ The following demonstrates a Kendo UI Grid using batch editing with the toolbar 
 
 ## See Also
 
-* [.find() - jQuery Documentation](https://api.jquery.com/find/)
-* [.insertAfter() - jQuery Documentation](http://api.jquery.com/insertafter/)
+* [jQuery Documentation: .find()](https://api.jquery.com/find/)
+* [jQuery Documentation: .insertAfter()](http://api.jquery.com/insertafter/)

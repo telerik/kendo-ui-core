@@ -137,7 +137,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 1. In the view, configure the Grid to use the action methods created in the previous steps.
 
     ###### Example
-    
+
           @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
                 .Name("grid")
                 .Columns(columns =>
@@ -168,18 +168,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 .Pageable()
           )		  
 
-
-
-
-		  
-The **Create**, **Update** and **Destroy** action methods must return modified/deleted record, which will allow the DataSource to apply the changes accordingly. The **Create** method should return the created record with the assigned ID field value.
+The **Create**, **Update** and **Destroy** action methods must return the modified or deleted record which will allow the DataSource to apply the changes accordingly. The **Create** method will return the created record with the assigned ID field value.
 
 ### ModelState Errors
 
 Server validation is often needed when performing editing. The section below demonstrates how to use the `AddModelError` method with the Kendo UI Grid for ASP.NET Core.
 
 1. Perform all steps from the previous section.
-
 1. Add some validation code to the `Products_Update` method. For example, check the length of the `ProductName` property.
 
     ###### Example
@@ -272,10 +267,9 @@ Server validation is often needed when performing editing. The section below dem
               }
           }
           </script>
-    
+
 
 ## See Also
-
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)

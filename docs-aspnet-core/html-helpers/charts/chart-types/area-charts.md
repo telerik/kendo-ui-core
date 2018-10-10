@@ -7,15 +7,17 @@ slug: areacharts_aspnetcore_htmlhelper
 
 # Area Charts
 
-The [Kendo UI Area Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/area-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items. The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in values coming from several sets of similar data.
+The [Kendo UI Area Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/area-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
+
+The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in values coming from several sets of similar data.
 
 ## Configuration
 
-Use `Area` and `VerticalArea` to define the Kendo UI Area Charts.
+To define an Area Chart, use `Area` and `VerticalArea`.
 
 ### Axes
 
-Axes are configured through `CategoryAxis` and `ValueAxis`. Multiple value axes are supported.
+To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value axes are also supported.
 
 ###### Example
 
@@ -42,7 +44,7 @@ Axes are configured through `CategoryAxis` and `ValueAxis`. Multiple value axes 
     )
 
 
-This configuration results in the Area Chart below.
+The configuration from the previous example results in the following Area Chart.
 
 **Figure 1: A sample Area Chart**
 
@@ -50,7 +52,9 @@ This configuration results in the Area Chart below.
 
 ### Line Styles
 
-Kendo UI Area Charts support the rendering of lines between the points with different styles. The supported styles can be set via the [`line.style`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.line#series.line.style) option and are:
+The Area Charts support the rendering of lines between points by using different styles. You can set the supported styles through the [`line.style`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.line#series.line.style) option.
+
+The supported styles are:
 
 * Normal&mdash;This is the default style. It produces a straight line between data points.
 * Step&mdash;The style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.

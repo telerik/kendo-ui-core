@@ -1,6 +1,6 @@
 ---
 title: Add a Custom Time Marker in Gantt
-description: An example on how to add a vertical line similar to Current Time Marker in Kendo UI Gantt.
+description: An example on how to add a vertical line similar to the current time marker in the Kendo UI Gantt.
 type: how-to
 page_title: Add Custom Time Marker | Kendo UI Gantt
 slug: gantt-custom-time-marker
@@ -21,13 +21,13 @@ res_type: kb
 
 ## Description
 
-How can I add a custom Time Marker at a specific time similar to the built-in Current Time Marker of my Gantt?
+How can I add a custom time marker to a specific time value, similar to the built-in current time marker of the Gantt?
 
 ## Solution
 
-1. Add the `renderLine` function
-1. In the dataBound event of the Gantt call the function with the desired options.
-1. Add CSS styles using the class for the line or style the line element returned by the function.
+1. Add the `renderLine` function.
+1. In the `dataBound` event of the Gantt, call the function with the desired options.
+1. Add CSS styles by using the class for the line, or style the line element that is returned by the function.
 
 ```html
 <style>

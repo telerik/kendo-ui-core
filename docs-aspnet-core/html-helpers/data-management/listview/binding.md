@@ -30,7 +30,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
             public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
             {
-                // result can be any IEnumerable or IQueriable 
+                // result can be any IEnumerable or IQueriable
                 var result = myService.Orders;
 
                 var dsResult = result.ToDataSourceResult(request);

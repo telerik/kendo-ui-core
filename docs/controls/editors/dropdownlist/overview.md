@@ -10,12 +10,10 @@ position: 1
 
 The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list.
 
-The user input is restricted within the predefined options. 
+The user input is restricted within the predefined options.
 To apply a keyboard input, use the [Kendo UI ComboBox]({% slug overview_kendoui_combobox_widget %}).
 
 ## Getting Started
-
-### Initialize the DropDownList
 
 You can initialize the Kendo UI DropDownList widget in any of the following ways:
 
@@ -28,8 +26,9 @@ The DropDownList looks and operates consistently regardless of the initializatio
 > **Important**
 > * Verify that you create the DropDownList within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 > * The widget copies any styles and CSS classes from the `input` element to the `wrapper` element and visible input.
+> * When you configure the local or remote dataSource of the DropDownList, enabling paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
 
-#### Use option Tags of Existing select Elements
+### Use option Tags of Existing select Elements
 
 The following example demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
 
@@ -47,7 +46,7 @@ The following example demonstrates how to initialize the DropDownList from an ex
         });
     </script>
 
-#### Bind to Local Data Arrays
+### Bind to Local Data Arrays
 
 To initialize the DropDownList by binding the widget to a local data array and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
@@ -70,7 +69,7 @@ The following example demonstrates how to initialize the DropDownList by using t
       });
     </script>
 
-#### Bind to Remote Data Services
+### Bind to Remote Data Services
 
 To initialize the DropDownList by binding the widget to remote data arrays and utilizing the `<input>` or the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
@@ -95,9 +94,6 @@ The following example demonstrates how to initialize the DropDownList by using t
             });
         });
     </script>
-	
-When configuring the DropDownList dataSource either local or remote, note that that enabling paging functionality and setting [pageSize](/api/javascript/data/datasource/configuration/pagesize) in DropDownList is efficient only when it is used with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In other cases it is considered as incorrect configuration. 
-
 
 ## Templates
 

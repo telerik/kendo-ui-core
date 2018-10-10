@@ -8,9 +8,11 @@ position: 3
 
 # Editing
 
+The ListView enables you to edit its records.
+
 ## Configuration
 
-Below are the steps for you to follow when configuring the Kendo UI ListView for ASP.NET Core for editing. The model class which is used in the example:
+Below are the steps for you to follow when configuring the Kendo UI ListView for ASP.NET Core for editing.
 
 	namespace ListViewExample.Models
 	{
@@ -57,7 +59,7 @@ The following example demonstrates how to define the item template for the Kendo
 
 > **Important**
 >
-> Click events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Kendo UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Kendo UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
+> `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Kendo UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Kendo UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
 
 ###### Example
 
@@ -108,16 +110,14 @@ The following example demonstrates how to define the item template for the Kendo
 
 ### Set the Editor Template
 
-The following example demonstrates how to define the `EditorTemplate` for the model.
-
-You need to:
+The following example demonstrates how to define the `EditorTemplate` for the model:
 
 1. Declare the editor template in a file that uses the name of the edited model&mdash;for example `OrderViewModel.cshtml`.
 1. Place this file in the `~Views\Shared\EditorTemplates` directory of your project.
 
 > **Important**
 >
-> Click events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Kendo UI ListView as `save` and `cancel` actions. The editor template should be wrapped in an HTML container, same as the item template.
+> `click` events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Kendo UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
 
 ###### Example
 
@@ -169,7 +169,7 @@ The following example demonstrates how to enable the ListView editing.
 		    .Editable() //<-- Enable editing.
 		)
 
-### Specify the Action Methods and define a Data Source Model Id
+### Specify the Action Methods and Define a Data Source Model ID
 
 > **Important**
 >
@@ -199,7 +199,7 @@ The following example demonstrates how to specify the action methods which will 
 
 ### Implement the Action Methods
 
-For a quick test add a static list and copy/paste it in the controller or use own service or data base which returns an IEnumerable or IQueriable.
+For a quick test add a static list and copy and paste it in the controller, or use own service or data base which returns an `IEnumerable` or `IQueriable`.
 
 ###### Example
 
@@ -249,7 +249,7 @@ The following example demonstrates how to implement the `update` action method.
 
 ###### Example
 
-       
+
         public ActionResult Orders_Update([DataSourceRequest] DataSourceRequest request, OrderViewModel order)
         {
             if (order != null && ModelState.IsValid)

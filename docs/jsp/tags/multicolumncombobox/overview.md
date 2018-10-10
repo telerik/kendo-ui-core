@@ -14,9 +14,9 @@ The MultiColumnComboBox JSP tag is a server-side wrapper for the [Kendo UI Multi
 
 ### The Basics
 
-There are two ways to bind a Kendo UI MultiColumnMultiColumnComboBox:
+To bind a Kendo UI MultiColumnMultiColumnComboBox, use either of the following approaches:
 
-* `server`&mdash;The data is serialized to the client. No Ajax requests are going to be made.
+* `server`&mdash;The data is serialized to the client. No Ajax requests will be made.
 * `ajax`&mdash;The MultiColumnComboBox is going to make Ajax requests to get the data. For more information on this type of binding, refer to the [MultiColumnComboBox API reference article on Ajax binding](/jsp/tags/multicolumncombobox/ajax-binding).
 
 ### Configuration
@@ -73,7 +73,7 @@ You can subscribe to all [events exposed by Kendo UI MultiColumnComboBox](https:
 
 ### Existing Instances
 
-You are able to reference an existing MultiColumnComboBox instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [MultiColumnComboBox API](/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
+You are able to reference an existing MultiColumnComboBox instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, you are able to use the [MultiColumnComboBox API](/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
 
 ###### Example
 

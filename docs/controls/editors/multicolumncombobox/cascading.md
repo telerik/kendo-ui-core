@@ -8,7 +8,7 @@ position: 5
 
 # Cascading MultiColumnComboBoxes
 
-The [cascading MultiColumnComboBoxes](https://demos.telerik.com/kendo-ui/multicolumncombobox/cascadingmulticolumncombobox) is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options, base on the dataValueField, in the previous MultiColumnComboBox.
+The [cascading MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/cascadingmulticolumncombobox) is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the `dataValueField` in the previous MultiColumnComboBox.
 
 ## Initialize the MultiColumnComboBoxes
 
@@ -88,7 +88,6 @@ The following example demonstrates the parameters of this request.
 > **Important**
 >
 > The filter operator is always `"eq"`. To filter the data, the child MultiColumnComboBox uses the `dataValueField` option of the parent MultiColumnComboBox.
-
 
 ## See Also
 

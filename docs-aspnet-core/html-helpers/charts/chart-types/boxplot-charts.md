@@ -7,15 +7,27 @@ slug: boxplotcharts_aspnetcore_htmlhelper
 
 # Box Plot Charts
 
-The [Kendo UI Box Plot Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/box-plot-charts/index) is useful for displaying variation in statistical samples of data. The Box Plot Chart uses seven values—first and third quartile (q1 and q3), median (that is the second quartile), upper and lower value (inner fences), mean and outliers. The advantage of this type of series is that it displays detailed information about a set of data in a small space.
+The [Kendo UI Box Plot Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/box-plot-charts/index) is useful for displaying variation in statistical samples of data.
+
+The Box Plot Chart uses seven values&mdash;first and third quartile (q1 and q3), median (that is the second quartile), upper and lower value (inner fences), mean and outliers. The advantage of this type of series is that it displays detailed information about a set of data in a small space.
 
 If you are not familiar with the usage and terminology of the box plots and want to understand it better, check the [Wikipedia page on box plots](https://en.wikipedia.org/wiki/Box_plot).
 
 ## Configuration
 
-Use the `BoxPlot` series type to create a Kendo UI Box Plot Chart.
+To create a Box Plot Chart, use the `BoxPlot` series type.
 
-When binding the Box Plot Chart, there are seven special properties of the `Series` object that you should set in order to display the chart successfully—`q1` (first quartile), `q3Field` (third quartile), `lower`, `upper`, `median` (second quartile), `mean`, `outliers`. The first five are required, while `mean` and `outliers` are optional. All properties have to point to numeric fields in the DataSource, with the exception of `outliers` which has to point to a field that contains an array of numbers. The example below shows the result of such a configuration
+When you bind the Box Plot Chart, you have to set seven special properties of the `Series` object so that the Chart is successfully displayed:
+
+* (Mandatory) `q1` (first quartile)
+* (Mandatory) `q3Field` (third quartile)
+* (Mandatory) `lower`
+* (Mandatory) `upper`
+* (Mandatory) `median` (second quartile)
+* (Optional) `mean`
+* (Optional) `outliers`
+
+All properties except for `outliers` have to point to numeric fields in the DataSource. `outliers` has to point to a field that contains an array of numbers.
 
 ###### Example
 
@@ -47,7 +59,7 @@ When binding the Box Plot Chart, there are seven special properties of the `Seri
 
 ### Orientation
 
-The Box Plot Chart orientation can be changed by setting the series type to `VerticalBoxPlot`.
+You can change the orientation of the Box Plot Chart by setting the series type to `VerticalBoxPlot`.
 
 ###### Example
 
@@ -79,7 +91,11 @@ The Box Plot Chart orientation can be changed by setting the series type to `Ver
 
 ### Customizing Outliers
 
-Outliers are values that appear outside of the range closed by the lower and upper values (inner fences). There are two types of outliers in a box plot based on their distance from the inner fences—mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme). To let you configure them separately, the Chart has two configuration options—[`series.outliers`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.outliers) for mild outliers and [`series.extremes`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.extremes) for extreme outliers. You can use them to customize the outliers.
+Outliers are values that appear outside the range between lower and upper values (inner fences). Based on their distance from the inner fences, the outliers in a box plot are mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme).
+
+You can configure the outliers separately and customize them by using:
+* [`series.outliers`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.outliers) for mild outliers.
+* [`series.extremes`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.extremes) for extreme outliers.
 
 ## See Also
 

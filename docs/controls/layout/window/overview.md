@@ -152,9 +152,9 @@ The example below demonstrates how to initialize a Window, center, and configure
         win.center().open();
     });
 
-### Containment
+### Constraining Position inside Containers
 
-The Kendo UI Window provides the [draggable.containment](/api/javascript/ui/window/configuration/draggable.containment) configuration option, that could be used to constrain its movement inside a specific container element. The containment option overrides the appendTo setting and attaches the Window to the specified DOM element. Important to note is that the containment element should be correctly position through CSS(relative, absolute or fixed).
+The Window provides the [`draggable.containment`](/api/javascript/ui/window/configuration/draggable.containment) configuration option that you can use to constrain the movement of the widget inside a container element. The `containment` option overrides the `appendTo` setting and attaches the Window to the specified DOM element. You have to correctly position the `containment` element by using the `relative`, `absolute`, or `fixed` CSS rules.
 
 The example below demonstrates how to create a modal Window and constrain its movement inside a DOM element.
 

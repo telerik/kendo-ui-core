@@ -8,6 +8,8 @@ position: 4
 
 # Excel Export
 
+The Grid enables you to export its content to Excel.
+
 ## Configuration
 
 ### Enable Excel Export
@@ -107,7 +109,6 @@ The Kendo UI Grid for ASP.NET Core does not export its `DetailTemplate` for the 
 
 For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example](https://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/Export/multiple-grid-export).
 
-
 ## See Also
 
 * [Create Excel Documents with Kendo UI](http://docs.telerik.com/kendo-ui/framework/excel/introduction)
@@ -118,4 +119,3 @@ Other articles on the Kendo UI Grid for ASP.NET Core:
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-

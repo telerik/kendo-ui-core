@@ -17,15 +17,14 @@ When configured for Ajax binding, the Kendo UI TreeList for ASP.NET Core makes A
 
 The Ajax-bound mode has the following features:
 
- - The TreeList retrieves only the data (in JSON format) representing the current level items.
- - All column templates are executed client-side. They follow the [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
+- The TreeList retrieves only the data (in JSON format) representing the current level items.
+- All column templates are executed client-side. They follow the [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 ### Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI TreeList for ASP.NET Core to do Ajax binding.
 
 1. Create a new ASP.NET Core Web Application. Follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET Core to the application.
-
 1. Open the `HomeController.cs` and add a new action method which will return the items as JSON. The TreeList makes Ajax requests to this action.
 
     ###### Example
@@ -72,11 +71,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-    
+
 1. In the view, configure the TreeList to use the action method created in the previous steps.
 
     ###### Example
-    
+
     ```tab-Razor
 
         @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryRemoteModel>()
@@ -105,7 +104,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
     ```
 
 1. Build and run the application.
-
 
 ## See Also
 

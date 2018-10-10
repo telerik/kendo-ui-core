@@ -7,24 +7,20 @@ previous_url: /aspnet-core/helpers/html-helpers/grid/signalr-binding
 ---
 
 # SignalR Binding
- 
 
-## Getting Started
-
-As of R2 2018 [ASP.NET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.1) support is available for the components. 
+As of the [ASP.NET Core R2 2018 release](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.1), the suite provides SignalR support for its components.
 
 > **Important**
 >
 > The feature is tested with SignalR 1.0.0-rc1-final.
 
-The feature relies on the client-side implementation of SignalR. It can be used with both the MVC and Core wrappers of the Grid since they wrap the [jQuery Grid widget](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview). 
-
+The feature relies on the client-side implementation of SignalR. It can be used with both the MVC and Core wrappers of the Grid since they wrap the [jQuery Grid widget](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
 
 ### Configuration
 
-The example is using Long Polling because [WebSockets](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/websockets?view=aspnetcore-2.1) work only in [some scenarios](https://github.com/aspnet/SignalR/issues/1457#issuecomment-366280873) and [server-sent events](https://caniuse.com/#search=server%20sent%20events) are not supported by IE/Edge. 
+The following example uses Long Polling because [WebSockets](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/websockets?view=aspnetcore-2.1) work only in [some scenarios](https://github.com/aspnet/SignalR/issues/1457#issuecomment-366280873) and [server-sent events](https://caniuse.com/#search=server%20sent%20events) are not supported by IE/Edge.
 
-A sample implementation of a Grid using SignalR is shown in the snippet below. The service that is used is available in our [GitHub repository](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs).
+The following snippet demonstrates a sample implementation of a Grid which uses SignalR. The service that is used is available in [this GitHub repository](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs).
 
 ###### Example
 
@@ -107,7 +103,6 @@ function onPush(e) {
         )
 )
 ```
-
 
 ### See Also
 

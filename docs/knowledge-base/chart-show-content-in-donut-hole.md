@@ -2,7 +2,7 @@
 title: Show Text in the Center of a Donut Chart
 description: An example on how to show custom content centered in the Donut Chart.
 type: how-to
-page_title: Render Content Inside Donut Chart Hole | Kendo UI Charts
+page_title: Render Content Inside the Center of the Donut Chart | Kendo UI Charts
 slug: chart-show-content-in-donut-hole
 tags: chart, donut, drawing
 ticketid: 1338927
@@ -25,20 +25,21 @@ res_type: kb
 
 ## Description
 
-How can I place multiple lines of text inside the hole of a Donut Chart and center them?
+How can I place and center multiple lines of text inside the center of a Kendo UI Donut Chart?
 
 ## Solution
 
-You can show multi-line text and other content in the donut hole if you make a custom drawing on top of the Chart:
+Make a custom drawing on top of the Donut Chart and show the multi-line text and other content in its center.
 
-1. Use the [series.visual](/api/javascript/dataviz/ui/chart/configuration/series.visual) function to store the position and size of the donut hole.
+1. Use the [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) function to store the position and size of the Donut Chart center.
+
     ```
     // global variables
     var center,
     radius;
-    
+
     ........
-    
+
     series: [{
         type: "donut",
         field: "share",
@@ -47,14 +48,16 @@ You can show multi-line text and other content in the donut hole if you make a c
             // Obtain parameters for the segments
             center = e.center;
             radius = e.innerRadius;
-        
+
             // Create default visual
             return e.createVisual();
         }
     }]
-    
+
     ```
-1. In the Chart [render event](/api/javascript/dataviz/ui/chart/events/render), draw your custom content on top of the Chart using the [Kendo UI Drawing API](/framework/drawing/overview).
+
+1. In the [`render`](/api/javascript/dataviz/ui/chart/events/render) event of the Chart, draw your custom content on top of the Chart by using the [Kendo UI Drawing library](/framework/drawing/overview).
+
     ```
             render: function(e){
               var circleGeometry = new kendo.geometry.Circle(center, radius);
@@ -98,9 +101,7 @@ You can show multi-line text and other content in the donut hole if you make a c
             }
     ```
 
-##### Example
-
-The following example renders three differently styled lines of text in the center of the Donut Chart.
+The following example demonstrates how to render three differently styled lines of text in the center of the Donut Chart.
 
 ```html
     <div id="chart"></div>
@@ -207,4 +208,4 @@ The following example renders three differently styled lines of text in the cent
 
 ## See Also
 
-* [Kendo UI Drawing API reference](/api/javascript/drawing/text)
+* [Kendo UI Drawing API Reference](/api/javascript/drawing/text)

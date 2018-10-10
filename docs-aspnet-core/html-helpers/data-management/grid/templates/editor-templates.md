@@ -64,7 +64,6 @@ Often there is need to create a custom editor for a specific property. For examp
 
 1. Create an editor template for the `Employee` property which will display a Kendo UI DropDownList with all available employees. Add a new partial view
 to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`.
-
 1. Add a Kendo UI DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
 
     ###### Example
@@ -74,7 +73,6 @@ to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEdito
                 .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
                 .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
             )
-			
 
 1. In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees.
 
@@ -108,4 +106,9 @@ to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEdito
                 public Employee Employee { get; set; }
             }
 
-			
+## See Also
+
+* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
+* [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})

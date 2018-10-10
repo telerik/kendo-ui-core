@@ -26,11 +26,8 @@ The Ajax-bound mode has the following features:
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET Core to do Ajax binding to the Northwind database, the **Products** table.
 
 1. Create a new ASP.NET Core Web Application. Follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET Core to the application.
-
 1. Install the EntityFrameworkCore NuGet package
-
 1. Install Microsoft.EntityFrameworkCore.SqlServer package
-
 1. Run the following command in the Package Management Console. It will generate models from the tables in a database called 'Sample'. For more information on scaffolding a model from an existing database refer to [this Microsoft article](https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db#reverse-engineer-your-model).
 
     Scaffold-DbContext "Server=.\SQLSERVER;Database=Sample;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
@@ -77,11 +74,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                     return Json(result);
                 }
             }
-    
+
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
     ###### Example
-    
+
     ```tab-Razor
 
         @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Customers>()

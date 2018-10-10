@@ -7,14 +7,17 @@ slug: bulletcharts_aspnetcore_htmlhelper
 
 # Bullet Charts
 
-The [Kendo UI Bullet Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/bullet-charts/index) is a variation of a Bar chart. You can use it to visualize a comparison between an expected (target) and actual (current) value. For example, with a Bullet Chart you can display company profit, employee performance, weather data and so on.
+The [Kendo UI Bullet Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/bullet-charts/index) is a variation of the Bar Chart.
+
+You can use the Bullet Chart HtmlHelper to visualize a comparison between an expected (target) and actual (current) value&mdash;for example, company profit, employee performance, weather data, and so on.
+
 ## Configuration
 
-Use `Bullet` and `VerticalBullet` in the Series configuration to create a Bullet series in the Chart helper.
+To create a Bullet series in the Chart helper, use `Bullet` and `VerticalBullet` in the `Series` configuration.
 
 ### Axes
 
-Axes are configured through the `CategoryAxis` and `ValueAxis` settings. Multiple value axes are supported.
+To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple value axes are also supported.
 
 ###### Example
 
@@ -50,7 +53,7 @@ Axes are configured through the `CategoryAxis` and `ValueAxis` settings. Multipl
       )
 
 
-This configuration results in the Bullet Chart below.
+The configuration from the previous example results in the following Bullet Chart.
 
 **Figure 1: A sample Bullet Chart**
 
@@ -58,7 +61,9 @@ This configuration results in the Bullet Chart below.
 
 ### Target Line Customization
 
-You can customize the line that represents the target value using the series `Target` configuration. It exposes three main settings - `Border`, `Color` and `Line` that control the line appearance. Below, you can see an example that uses all three options to customize the target line:
+You can customize the line that represents the target value through the `Target` series configuration. `Target` exposes the `Border`, `Color`, and `Line` main settings that control the line appearance.
+
+The following example demonstrates how to use all three options to customize the target line.
 
 ```
               .Series(series =>
@@ -80,7 +85,6 @@ You can customize the line that represents the target value using the series `Ta
 **Figure 2: A Bullet Chart with custom target line**
 
 ![Bullet Chart with Custom Line](/html-helpers/charts/chart-types/chart-bullet-target.png)
-
 
 ## See Also
 

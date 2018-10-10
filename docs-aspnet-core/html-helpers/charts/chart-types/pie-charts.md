@@ -15,7 +15,7 @@ The [Kendo UI Donut Chart HTMLHelper for ASP.NET Core](https://demos.telerik.com
 
 ### Create the Pie Chart
 
-To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties, as demonstrated in the example below.
+To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties, as demonstrated in the following example.
 
 ###### Example
 
@@ -49,7 +49,7 @@ To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Addition
 
 ### Effects Overlay
 
-Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable, as demonstrated below.
+Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable, as demonstrated in the following example.
 
 ###### Example
 
@@ -62,11 +62,11 @@ Each segment has a transparent effect overlay that adds depth to the two-dimensi
 
 The following `ChartSeriesGradient` options are available:
 
-* `RoundedBevel`&mdash;This is the default gradient option.
+* (Default) `RoundedBevel`
 * `SharpBevel`
 * `None`
 
-The figure below demonstrate the usage of each of these options.
+The following figure demonstrates the usage of each of these options.
 
 **Figure 2: A Pie Chart with the `RoundedBevel` overlay applied**
 

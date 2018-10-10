@@ -13,7 +13,8 @@ For more information on how to use virtualization in the MultiColumnComboBox wid
 The approaches described in it are applicable for the MultiColumnComboBox.
 
 > **Important**
-> All columns width should be set and this must be done in px, in order for the functionality to work properly.
+>
+> You have to set the widths of all columns in pixels in order for the virtualization to work properly.
 
 ## See Also
 

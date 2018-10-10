@@ -130,7 +130,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 > **Important**
 >
-> Make sure the jQuery version you are loading is [supported by Kendo UI](https://docs.telerik.com/kendo-ui/intro/installation/prerequisites#supported-jquery-versions).
+> Make sure that the jQuery version you load is [supported by Kendo UI](https://docs.telerik.com/kendo-ui/intro/installation/prerequisites#supported-jquery-versions).
 
 #### Use CDN Services
 
@@ -138,11 +138,11 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 > **Important**
 >
-> Make sure you replace the `kendo ui version` from the code snippets below with the current version of the product&mdash;for example, `2013.2.918`.
+> Replace `kendo ui version` from the following code snippets with the current version of the product&mdash;for example, `2013.2.918`.
 
 1. Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
-1. Include `kendo.common-bootstrap.min.css` and `kendo.bootstrap.min.css`. Add a `link` tag within the `head` tag of the layout. For more information on the different CSS files used by the predefined Kendo UI Less themes, see [Less-Based Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling).
+1. Include `kendo.common-bootstrap.min.css` and `kendo.bootstrap.min.css`. Add a `link` tag within the `head` tag of the layout. For more information on the different CSS files which are used by the predefined Kendo UI Less themes, refer to the documentation on the [Less-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling).
 
     ###### Example
 
@@ -166,22 +166,22 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 ### Add Kendo.Mvc.dll Reference
 
-The next step is to add a reference to `Kendo.Mvc.dll` which is the assembly containing the Kendo UI MVC server-side wrappers.
+The next step is to add a reference to `Kendo.Mvc.dll` which is the assembly which contains the Kendo UI MVC server-side wrappers.
 
 1. Right-click the **References** node in Solution Explorer. Click **Add Reference**.
-
 1. Select the **Browse** tab of the **Add Reference** dialog. Navigate to the install location of Telerik UI for ASP.NET MVC.
-
 1. Navigate to `wrappers/aspnetmvc/Binaries/MVC5`. This directory contains the ASP.NET MVC 5 version of Telerik UI for ASP.NET MVC.
-
 1. Select `Kendo.Mvc.dll`. Click **OK**.
 
-Alternatively, you can copy the assembly from the Telerik UI for ASP.NET MVC install location, paste it in the `bin` folder of the application and reference it from there.
+Alternatively:
+
+1. Copy the assembly from the Telerik UI for ASP.NET MVC install location.
+1. Paste the assembly in the `bin` folder of the application.
+1. Reference the assembly from there.
 
 > **Important**
 >
-> `Kendo.Mvc.dll` depends on the latest version of `System.Web.Mvc`. If an older version of MVC is used in the application, upgrade it to the latest version: [ASP.NET MVC 5 Nuget](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/).
-
+> `Kendo.Mvc.dll` depends on the latest version of `System.Web.Mvc`. If the application uses a previous MVC version, [upgrade to the latest version](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/).
 
 ### Update web.config
 

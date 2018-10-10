@@ -150,11 +150,11 @@ Note that the `parentId` is mapped from the `ReportsTo` field by the `parentId: 
 
 ## Features
 
-### Client-side paging
+### Client-Side Paging
 
-The Kendo UI treelist supports client-side paging for large sets of data. To enable the paging functionality configure the [pageable settings](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/configuration/pageable).
+The Kendo UI TreeList supports client-side paging for large sets of data. To enable the paging functionality, configure the [`pageable`](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/configuration/pageable) settings.
 
-> Don't forget to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize). A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings. If an already existing datasource instance is passed to the treelist, then the `pageSize` option should be set in the dataSource's settings and not in the `pageable` settings.
+> Remember to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize). You can define a `pageSize` in the `pageable` or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings. If an already existing dataSource instance is passed to the TreeList, then the `pageSize` option has to be set in the dataSource settings and not in the `pageable` settings.
 
 ###### Example
 
@@ -202,10 +202,10 @@ The Kendo UI treelist supports client-side paging for large sets of data. To ena
 
 ### Scrolling
 
-The TreeList scrolling is enabled by default. However, the enabled scrolling functionality does not guarantee the appearance of scrollbars. The reason for this is that scrolling requires you to define some of the widget's dimensions:
+By default, the scrolling is enabled. However, the enabled scrolling functionality does not guarantee the rendering of scrollbars because scrolling requires you to define some of the widget dimensions:
 
-1. To achieve vertical scrolling, set a height to the TreeList. If the height is not defined, the TreeList is going to expand vertically to show all rows.
-2. To achieve horizontal scrolling, all columns must have explicit widths defined in pixels and their sum must exceed the width of the TreeList.
+1. To achieve vertical scrolling, set a height to the TreeList. If the height is not defined, the TreeList will to expand vertically to show all rows.
+2. To achieve horizontal scrolling, you have to explicitly defined the widths of all columns in pixels and their sum must exceed the width of the TreeList.
 
 You can independently control vertical and horizontal scrolling.
 

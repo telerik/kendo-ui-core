@@ -1,17 +1,20 @@
 ---
-title: Client-side paging
-page_title: Client-side paging | Telerik UI for ASP.NET Core HtmlHelpers
+title: Client-Side Paging
+page_title: Client-Side Paging | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn how to enable the client-side paging feature to the Kendo UI TreeList HtmlHelper for ASP.NET Core."
 slug: client_side_paging_aspnetcore_treelist_helper
 position: 4
 ---
 
-# Client-side paging
+# Client-Side Paging
 
-The TreeList supports client-side paging for large sets of data. To enable the paging functionality configure the `Pageable settings`.
+The TreeList supports client-side paging for large sets of data.
 
-> * Don't forget to set a `PageSize`. A `PageSize` can be defined in the `Pageable` settings, or in the `DataSource` settings. If an already existing datasource instance is passed to the treelist, then the `PageSize` option should be set in the dataSource's settings and not in the `Pageable` settings.
-> * When using the Grid ASP.Net Core wrapper, by default `ServerOperations` are enabled. As this is a client-side paging, it is necessary to disable the server operations by setting the `ServerOperations` to false.
+To enable the paging functionality, configure the `Pageable` settings.
+
+> **Important**
+> * Remember to set a `PageSize`. You can define a `PageSize` in the `Pageable` or in the `DataSource` settings. If an already existing dataSource instance is passed to the TreeList, then the `PageSize` option has to be set in the dataSource settings and not in the `Pageable` settings.
+> * By default, `ServerOperations` are enabled in the Grid ASP.Net Core wrapper. For client-side paging you have to disable the server operations by setting the `ServerOperations` to `false`.
 
 ###### Example
 

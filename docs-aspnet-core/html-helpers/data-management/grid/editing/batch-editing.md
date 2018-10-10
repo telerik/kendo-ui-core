@@ -14,8 +14,7 @@ This article demonstrates how to enable cell editing mode and batch updates in K
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET Core to do cell editing and batch updates.
 
-
-1. Add a new class to the `~/Models` folder. For the following example we will name it `ProductViewModel`.
+1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.
 
     ###### Example
 
@@ -37,7 +36,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
             {
 				//ToDataSourceResult works with IEnumerable and IQueryable
-                using (var northwind = new NorthwindEntities()) 
+                using (var northwind = new NorthwindEntities())
                 {
                     IQueryable<Product> products = northwind.Products;
                     DataSourceResult result = products.ToDataSourceResult(request);
@@ -172,7 +171,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 1. In the view, configure the Grid to use the action methods created in the previous steps.
 
     ###### Example
-	
+
             @(Html.Kendo().Grid<KendoGridBatchEditing.Models.ProductViewModel>()
                   .Name("grid")
                   .Columns(columns =>

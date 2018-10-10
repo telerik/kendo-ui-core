@@ -14,7 +14,7 @@ The Kendo UI MultiColumnComboBox for PHP is a server-side wrapper for the [Kendo
 
 ### The Basics
 
-There are two ways to bind a Kendo UI MultiColumnComboBox for PHP:
+To bind a Kendo UI MultiColumnComboBox for PHP, use either of the following approaches:
 
 * [Locally]({% slug localbinding_multicolumncombobox_uiforphp %})&mdash;Local binding binds the MultiColumnComboBox to a PHP array.
 * [Remotely]({% slug remotebinding_multicolumncombobox_uiforphp %})&mdash;During remote binding the MultiColumnComboBox makes AJAX requests and is bound to the JSON result.
@@ -35,6 +35,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
             array('name' => 'Jane Doe', 'age' => 29)
         );
         ?>
+        
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
 ###### Example

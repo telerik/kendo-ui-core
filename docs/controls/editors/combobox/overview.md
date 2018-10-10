@@ -16,21 +16,19 @@ To restrict the user input, use the [Kendo UI DropDownList](http://demos.telerik
 
 ## Getting Started
 
-### Initialize the ComboBox
-
 To initialize the ComboBox, use any of the following approaches:
 
 1. Use the `<option>` tag of an existing `<select>` element with defined data items.
 2. Bind the widget to a local data array and use the `<input>` element.
 3. Bind the widget to a remote data service and use the `<input>` element.
 
-The ComboBox looks and operates consistently regardless of the initialization type you choose to apply.
-
 > **Important**  
 > * Verify that you create the ComboBox within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
 > * The widget copies any styles and CSS classes from the `input` element to the `wrapper` element and visible input.
+> * When you configure the local or remote dataSource of the ComboBox, enabling paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
 
-#### Use option Tags of Existing select Elements
+
+### Use option Tags of Existing select Elements
 
 To initialize the ComboBox by binding the widget to a local data array and utilizing the `<select>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
@@ -50,7 +48,7 @@ The following example demonstrates how to initialize the ComboBox by using this 
         });
     </script>
 
-#### Bind to Local Data Arrays
+### Bind to Local Data Arrays
 
 To initialize the ComboBox by binding the widget to a local data array and utilizing the `<input>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
@@ -73,7 +71,7 @@ The following example demonstrates how to initialize the ComboBox by using this 
       });
     </script>
 
-#### Bind to Remote Data Services
+### Bind to Remote Data Services
 
 To initialize the ComboBox by binding the widget to remote data arrays and utilizing the `<input>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). It is an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. You can use the DataSource for serving data from a variety of data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
@@ -101,9 +99,6 @@ The following example demonstrates how to initialize the ComboBox by using this 
         });
     });
     </script>
-	
-When configuring the ComboBox dataSource either local or remote, note that that enabling paging functionality and setting [pageSize](/api/javascript/data/datasource/configuration/pagesize) in ComboBox is efficient only when it is used with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In other cases it is considered as incorrect configuration. 
-
 
 ## Templates
 

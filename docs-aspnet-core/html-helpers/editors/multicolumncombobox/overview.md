@@ -9,11 +9,11 @@ position: 1
 
 # MultiColumnComboBox HtmlHelper Overview
 
-As of the Kendo UI R3 2018, the MultiColumnComboBox is available in the Telerik UI for ASP.NET Core suite. The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
-The main purpose of the widget is to visualize a big set of data in a grid-like table.
+As of the Kendo UI R3 2018, the Telerik UI for ASP.NET Core suite delivers the MultiColumnComboBox HtmlHelper.
 
+The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
 
-Besides the core functionality that the standard Kendo ComboBox provides such as Virtualization, Templates, Cascading functionality and various data-binding scenarios, the new widget provides a few more. It gives you the ability to define Columns that will be rendered in the dropdown (along with additional options for them) and specify against which Fields from the data source the Filter should work upon.
+The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
 
 ## Basic Usage
 
@@ -82,6 +82,7 @@ The following example demonstrates how to define the MultiColumnComboBox HtmlHel
 The following example demonstrates the basic configuration of the MultiColumnComboBox HtmlHelper and how to get the MultiColumnComboBox instance.
 
 ###### Example
+
 ```
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
@@ -121,10 +122,9 @@ The following example demonstrates the basic configuration of the MultiColumnCom
     </script>
 ```
 
-
 ### Columns
 
-The MultiColumnComboBox widget provides you with the functionality to predefine the columns that needs to be rendered in the dropdown. You can also set which field from the **dataItem** should be populated, set a title, template, headerTemplate and width.
+The MultiColumnComboBox widget provides allows you to predefine the columns that will be rendered in the drop-down. You can also set which field from the `dataItem` will be populated, set a title, template, `headerTemplate`, and width.
 
 ###### Example
 
@@ -147,7 +147,7 @@ The MultiColumnComboBox widget provides you with the functionality to predefine 
 
 ### Filtering
 
-Besides the standard Filter options, the widget allows you to set fields, against which the data will be filtered. The option accepts an array of strings:
+Besides the standard filter options, the MultiColumnComboBox allows you to set fields against which the data will be filtered. The option accepts an array of strings.
 
 ###### Example
 
@@ -171,10 +171,13 @@ Besides the standard Filter options, the widget allows you to set fields, agains
 ```
 
 ### Columns Width
-The widget allows you to set a dropdown width through the `DropDownWidth` option. In addition, the columns allows setting their width as well. That being said, the below cases for width configuration exists:
 
-* If all columns width are defined in pixels (through their width option) - the dropDownWidth value (if set) is disregarded.
-* In all other cases (not all of the columns width values are set), the dropDownWidth value is applied to the element.
+The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/javascript/ui/multicolumncombobox/configuration/columns.width).
+
+> **Important**
+>
+> * If the widths of all columns are defined in pixels through their `width` option, the `dropDownWidth` value (if set) is overridden.
+> * In all other cases when the widths of all columns are not set, the `dropDownWidth` value is applied to the element.
 
 ## Model Binding
 
@@ -209,7 +212,6 @@ Local data is the data that is available on the client when the MultiColumnCombo
 
                 return products;
             }
-
 
 1. Add the MultiColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
@@ -256,7 +258,6 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
                 return Json(products);
             }
 
-
 1. Add the MultiColumnComboBox to the view and configure its DataSource to use remote data.
 
     ###### Example
@@ -290,8 +291,8 @@ You can configure a MultiColumnComboBox that is bound to a model field to use [v
 
 > **Important**
 >
-> All columns width should be set and this must be done in px, in order for the functionality to work properly.
-> Also, the value type to which the MultiColumnComboBox can be bound on the server can only be a primitive type or an enum value.
+> * You have to define the widths of all columns in pixels in order for the vistualization to work properly.
+> * The value type to which you can bind the MultiColumnComboBox on the server can be a primitive type or an enum value only.
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -344,7 +345,6 @@ You can configure a MultiColumnComboBox that is bound to a model field to use [v
 
                 return products;
             }
-
 
 1. Add the MultiColumnComboBox to the view and configure it to use virtualization.
 

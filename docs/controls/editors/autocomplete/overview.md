@@ -51,6 +51,10 @@ To provide AutoComplete suggestions, you can use either of the 2 primary ways:
 
 Locally defined values are best for small, fixed sets of suggestions. Remote suggestions must be used for larger data sets. When used with the `DataSource` component, the filtering of large remote data services can be pushed to the server as well, which maximizes the client-side performance.
 
+> **Important**
+>
+> When you configure the local or remote dataSource of the AutoComplete, enabling paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
+
 #### Bind to Local Data Arrays
 
 To configure and provide the AutoComplete suggestions locally, either:
@@ -132,10 +136,6 @@ To bind the widget to a JSONP service by using the Data Source component, refer 
       }
      })
     });
-	
-
-When configuring the AutoComplete dataSource either local or remote, note that that enabling paging functionality and setting [pageSize](/api/javascript/data/datasource/configuration/pagesize) in AutoComplete is efficient only when it is used with [virtualization]({% slug virtualization_kendoui_combobox_widget %}). In other cases it is considered as incorrect configuration. 
-
 
 ### Change the List Width
 

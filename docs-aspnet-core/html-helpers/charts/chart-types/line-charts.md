@@ -7,14 +7,17 @@ slug: linecharts_aspnetcore_htmlhelper
 
 # Line Charts
 
-The [Kendo UI Line Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/line-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items. It is useful for rendering a trend over time and comparing several sets of similar data.
+The [Kendo UI Line Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/line-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
+
+You can use the Line Chart HtmlHelper to render a trend over time and compare sets of similar data.
+
 ## Configuration
 
-Use `Line` and `VerticalLine` in the Series configuration to create a Line series in the Chart helper.
+To create a Line series in the Chart helper, use `Line` and `VerticalLine` in the `Series` configuration.
 
 ### Axes
 
-Axes are configured through the `CategoryAxis` and `ValueAxis` settings. Multiple value axes are supported.
+To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple value axes are also supported.
 
 ###### Example
 
@@ -38,8 +41,7 @@ Axes are configured through the `CategoryAxis` and `ValueAxis` settings. Multipl
          )
     )
 
-
-This configuration results in the Line Chart below.
+The configuration from the previous example results in the following Line Chart.
 
 **Figure 1: A sample Line Chart**
 
@@ -47,7 +49,9 @@ This configuration results in the Line Chart below.
 
 ### Line Styles
 
-Kendo UI Line Charts support rendering of the lines between points using different styles. You can set the line style using the `Style` configuration in the `SeriesDefaults` common settings:
+The Line Charts support the rendering of lines between points by using different styles.
+
+You can set the line style through the `Style` configuration in the `SeriesDefaults` common settings.
 
 ```
          .SeriesDefaults(seriesDefaults =>
@@ -55,7 +59,7 @@ Kendo UI Line Charts support rendering of the lines between points using differe
          )
 ```
 
-or for each Line series individually:
+You can also set the line style for each Line series individually.
 
 ```
          .Series(series =>
@@ -81,7 +85,7 @@ The supported styles are:
 
 ### Types of Lines
 
-The Chart draws Line series as a solid line by default. You can configure the line to be drawn using different dash styles using the `DashType` setting:
+By default, the Chart draws its Line series as solid lines. You can configure the line to be drawn through different dash styles by setting `DashType`.
 
 ```
          .Series(series =>
@@ -97,7 +101,7 @@ The Chart draws Line series as a solid line by default. You can configure the li
 
 ### Markers
 
-The series markers are the visuals that represent the point value in the Line series. You can customize or hide them using the `Markers` configuration.
+The series markers are the visuals that represent the point value in the Line series. You can customize or hide them through the `Markers` configuration.
 
 ```
              series.Line(new double[] { 15.7, 16.7, 20, 23.5, 26.6 }).Name("World")
@@ -112,7 +116,7 @@ The series markers are the visuals that represent the point value in the Line se
 
 ![Line Chart with Custom Markers](/html-helpers/charts/chart-types/chart-line-markers.png)
 
-You can also draw completely custom markers for the Line series through the `Visual` setting, as shown in the [Custom Visuals](https://demos.telerik.com/aspnet-core/line-charts/visuals) demo.
+You can also completely draw custom markers for the Line series through the `Visual` setting as shown in the [Custom Visuals](https://demos.telerik.com/aspnet-core/line-charts/visuals) demo.
 
 ## See Also
 

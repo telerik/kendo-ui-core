@@ -8,14 +8,18 @@ position: 1
 
 # MultiColumnComboBox HtmlHelper Overview
 
-As of the Kendo UI R3 2018, the MultiColumnComboBox is available in the Telerik UI for ASP.NET MVC suite. The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
-The main purpose of the widget is to visualize a big set of data in a grid-like table.
+As of the Kendo UI R3 2018, the Telerik UI for ASP.NET MVC suite delivers the MultiColumnComboBox.
+
+The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
+
+The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget.
 
 ## Configuration
 
 The following example demonstrates the basic configuration of the MultiColumnComboBox HtmlHelper and how to get the MultiColumnComboBox instance.
 
 ###### Example
+
 ```
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
@@ -50,10 +54,9 @@ The following example demonstrates the basic configuration of the MultiColumnCom
     </script>
 ```
 
-
 ### Columns
 
-The MultiColumnComboBox widget provides you with the functionality to predefine the columns that needs to be rendered in the dropdown. You can also set which field from the **dataItem** should be populated, set a title, template, headerTemplate and width.
+The MultiColumnComboBox widget provides allows you to predefine the columns that will be rendered in the drop-down. You can also set which field from the `dataItem` will be populated, set a title, template, `headerTemplate`, and width.
 
 ###### Example
 
@@ -76,7 +79,7 @@ The MultiColumnComboBox widget provides you with the functionality to predefine 
 
 ### Filtering
 
-Besides the standard Filter options, the widget allows you to set fields, against which the data will be filtered. The option accepts an array of strings:
+Besides the standard filter options, the MultiColumnComboBox allows you to set fields against which the data will be filtered. The option accepts an array of strings.
 
 ###### Example
 
@@ -100,14 +103,17 @@ Besides the standard Filter options, the widget allows you to set fields, agains
 ```
 
 ### Columns Width
-The widget allows you to set a dropdown width through the `DropDownWidth` option. In addition, the columns allows setting their width as well. That being said, the below cases for width configuration exists:
 
-* If all columns width are defined in pixels (through their width option) - the dropDownWidth value (if set) is disregarded.
-* In all other cases (not all of the columns width values are set), the dropDownWidth value is applied to the element.
+The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/javascript/ui/multicolumncombobox/configuration/columns.width).
 
+> **Important**
+>
+> * If the widths of all columns are defined in pixels through their `width` option, the `dropDownWidth` value (if set) is overridden.
+> * In all other cases when the widths of all columns are not set, the `dropDownWidth` value is applied to the element.
 
 ## Data Binding
-Same as the ComboBox, the MultiColumnComboBox helper, expose a big variety of data binding possibilities
+
+Similar to the ComboBox, the MultiColumnComboBox helper exposes various data-binding options.
 
 ### Server Binding
 
@@ -180,7 +186,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox for Ajax binding to the Northwind **Products** table using Linq to SQL.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create an action method which renders the view.
 
     ###### Example
@@ -262,7 +267,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create an action method which renders the view.
 
     ###### Example
@@ -445,7 +449,6 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
                 return Json(products, JsonRequestBehavior.AllowGet);
             }
 
-
 1. Add the MultiColumnComboBox to the view and configure its DataSource to use remote data.
 
     ###### Example
@@ -507,8 +510,8 @@ You can configure a MultiColumnComboBox that is bound to a model field to use [v
 
 > **Important**
 >
-> All columns width should be set and this must be done in px, in order for the functionality to work properly.
-> The value type to which the MultiColumnComboBox can be bound on the server can only be a primitive type or an enum value.
+> * You have to define the widths of all columns in pixels in order for the vistualization to work properly.
+> * The value type to which you can bind the MultiColumnComboBox on the server can be a primitive type or an enum value only.
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -687,6 +690,7 @@ You can configure a MultiColumnComboBox that is bound to a model field to use [v
     ```
 
 1. If the `AutoBind` option of the MultiColumnComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
+
 ###### Example
 
 ```tab-Razor
@@ -716,7 +720,7 @@ You can configure a MultiColumnComboBox that is bound to a model field to use [v
 
 ### Parameter Sending to Server
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultiColumnComboBox to send parameters to the server.
+The following example demonstrates how to configure the Kendo UI MultiColumnComboBox to send parameters to the server.
 
 ###### Example
 
@@ -805,9 +809,9 @@ The following example demonstrates how the `GetProducts` method is used.
 
 > **Important**
 >
-> The Kendo UI MultiColumnComboBox has a default event handler for the Data callback of the DataSource. It is used when no event handler is defined.
+> The Kendo UI MultiColumnComboBox has a default event handler for the Data callback of the DataSource which is used when no event handler is defined.
 
-The following example demonstrates the default event handler for the Data callback of the DataSource.
+The following example demonstrates the default event handler for the Data callback of the DataSource&mdash;the MultiColumnComboBox sends the value of its input only if the end user starts to type in it the input field.
 
 ###### Example
 
@@ -822,8 +826,6 @@ The following example demonstrates the default event handler for the Data callba
 
           return { text: value };
       }
-
-As seen from the example above, the MultiColumnComboBox sends the input's value only if the end-user starts to type in it.
 
 ### Grouping
 
