@@ -311,7 +311,8 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 autoHideAfter = options.autoHideAfter,
                 animation = options.animation,
-                insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo";
+                insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo",
+                initializedNotifications;
 
             wrapper
                 .removeClass("k-popup")
@@ -320,13 +321,16 @@ var __meta__ = { // jshint ignore:line
                 .hide()
                 .kendoAnimate(animation.open || false);
 
-            that._attachStaticEvents(options, wrapper);
+            initializedNotifications = that.getNotifications();
+            initializedNotifications.each(function(idx, element) {
+                that._attachStaticEvents(options, $(element));
 
-            if (autoHideAfter > 0) {
-                setTimeout(function(){
-                    that._hideStatic(wrapper);
-                }, autoHideAfter);
-            }
+                if (autoHideAfter > 0) {
+                    setTimeout(function(){
+                        that._hideStatic($(element));
+                    }, autoHideAfter);
+                }
+            });
         },
 
         _hideStatic: function(wrapper) {

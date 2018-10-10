@@ -1,25 +1,9 @@
 (function() {
-    module("initialization", {
-        setup: function() {
-
-        },
-        teardown: function() {
-            if (notification) {
-                notification.destroy();
-            }
-            $(".k-notification").each(function(idx, element){
-                var popup = $(element).data("kendoPopup");
-                if (popup) {
-                    popup.destroy();
-                }
-                $(element).remove();
-            });
-
-
-        }
+    module("kendo.ui.notification initialization", {
+        teardown: teardown
     });
 
-    test("initialization creates an internal GUID", 3, function() {
+    test("creates an internal GUID", 3, function() {
         createNotification();
 
         var guid = notification._guid;
@@ -29,7 +13,7 @@
         equal(guid.substr(0, 1), "_");
     });
 
-    test("initialization compiles popup stacking settings", 4, function() {
+    test("compiles popup stacking settings", 4, function() {
         createNotification();
 
         var origin = notification._popupOrigin,
@@ -42,7 +26,7 @@
         equal(regex.exec(position), position);
     });
 
-    test("initialization compiles popup padding settings", 4, function() {
+    test("compiles popup padding settings", 4, function() {
         createNotification();
 
         var paddings = notification._popupPaddings,
@@ -65,47 +49,7 @@
         ok(!paddings.hasOwnProperty("paddingTop"));
     });
 
-    test("up stacking removes top popup padding", function() {
-        createNotification({
-            stacking: "up"
-        });
-
-        var paddings = notification._popupPaddings;
-
-        ok(!paddings.hasOwnProperty("paddingTop"));
-    });
-
-    test("down stacking removes bottom popup padding", function() {
-        createNotification({
-            stacking: "down"
-        });
-
-        var paddings = notification._popupPaddings;
-
-        ok(!paddings.hasOwnProperty("paddingBottom"));
-    });
-
-    test("right stacking removes right popup padding", function() {
-        createNotification({
-            stacking: "right"
-        });
-
-        var paddings = notification._popupPaddings;
-
-        ok(!paddings.hasOwnProperty("paddingRight"));
-    });
-
-    test("left stacking removes right popup padding", function() {
-        createNotification({
-            stacking: "left"
-        });
-
-        var paddings = notification._popupPaddings;
-
-        ok(!paddings.hasOwnProperty("paddingLeft"));
-    });
-
-    test("initialization compiles default template function", 2, function() {
+    test("compiles default template function", 2, function() {
         createNotification();
 
         var defaultFunc = notification._getCompiled();
@@ -116,7 +60,7 @@
         equal(defaultFunc(params), defaultOutput);
     });
 
-    test("initialization compiles custom template function when string template is defined", 2, function() {
+    test("compiles custom template function when string template is defined", 2, function() {
         createNotification({
             templates: [{
                 type: "foo",
@@ -130,9 +74,8 @@
         equal(fooFunc({}), "bar");
     });
 
-    test("initialization compiles custom template function when template ID is defined", 2, function() {
-
-    $("<script id='tid' type='text/x-kendo-template'>bar</script>").appendTo(QUnit.fixture);
+    test("compiles custom template function when template ID is defined", 2, function() {
+        $("<script id='tid' type='text/x-kendo-template'>bar</script>").appendTo(QUnit.fixture);
 
         createNotification({
             templates: [{
@@ -147,92 +90,7 @@
         equal(fooFunc({}), "bar");
     });
 
-    asyncTest("opened popup notifications are hidden after set autoHideAfter", function() {
-        var autoHideAfter = 10;
-
-        createNotification({
-            autoHideAfter: autoHideAfter
-        });
-
-        notification.show("foo");
-
-        setTimeout(function(){
-            start();
-            equal($(".k-notification").length, 0);
-        }, autoHideAfter + 10);
-
-    });
-
-    asyncTest("opened static notifications are hidden after set autoHideAfter", function() {
-        var autoHideAfter = 10;
-
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: autoHideAfter
-        });
-
-        notification.show("foo");
-
-        setTimeout(function(){
-            start();
-            equal($(".k-notification").length, 0);
-        }, autoHideAfter + 10);
-
-    });
-
-    test("clicking on popup notification hides it when hideOnClick is true (default)", function() {
-        createNotification({
-            autoHideAfter: 0
-        });
-
-        notification.show("foo");
-
-        $(".k-notification").click();
-
-        equal($(".k-notification").length, 0);
-    });
-
-    test("clicking on static notification hides it when hideOnClick is true (default)", function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0
-        });
-
-        notification.show("foo");
-
-        $(".k-notification").click();
-
-        equal($(".k-notification").length, 0);
-    });
-
-    test("clicking on notification popup does not hide it when hideOnClick is false", function() {
-        createNotification({
-            autoHideAfter: 0,
-            hideOnClick: false
-        });
-
-        notification.show("foo");
-
-        $(".k-notification").click();
-
-        equal($(".k-notification").length, 1);
-    });
-
-    test("clicking on static notification does not hide it when hideOnClick is false", function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0,
-            hideOnClick: false
-        });
-
-        notification.show("foo");
-
-        $(".k-notification").click();
-
-        equal($(".k-notification").length, 1);
-    });
-
-    test("notification width and height are null by default", 2, function() {
+    test("width and height are null by default", 2, function() {
         createNotification({
             autoHideAfter: 0
         });
@@ -321,6 +179,87 @@
         ok($(".k-notification").find(".k-i-close").is(":visible"));
     });
 
+    test("originating element is hidden if appendTo is not set", function() {
+        createNotification();
+
+        equal(notification.element[0].style.display, "none");
+    });
+
+    test("originating element is hidden if appendTo is set to another element", function() {
+        createNotification({
+            appendTo: QUnit.fixture
+        });
+
+        equal(notification.element[0].style.display, "none");
+    });
+
+    test("originating element is not hidden if appendTo is set to Notification widget element", function() {
+        createNotification({
+            appendTo: "#notification"
+        });
+
+        notEqual(notification.element[0].style.display, "none");
+    });
+
+    test("popup notifications have a k-rtl class in RTL mode", function() {
+        QUnit.fixture.addClass("k-rtl");
+        createNotification();
+
+        notification.show("foo");
+
+        QUnit.fixture.removeClass("k-rtl");
+
+        ok($(".k-notification").hasClass("k-rtl"));
+    });
+
+    module("kendo.ui.notification static", {
+        teardown: teardown
+    });
+
+    asyncTest("opened static notifications are hidden after set autoHideAfter", function() {
+        var autoHideAfter = 10;
+
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: autoHideAfter
+        });
+
+        notification.show("foo");
+
+        setTimeout(function(){
+            start();
+            equal($(".k-notification").length, 0);
+        }, autoHideAfter + 10);
+
+    });
+
+    test("clicking on static notification hides it when hideOnClick is true (default)", function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0
+        });
+
+        notification.show("foo");
+
+        $(".k-notification").click();
+
+        equal($(".k-notification").length, 0);
+    });
+
+    test("clicking on static notification does not hide it when hideOnClick is false", function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0,
+            hideOnClick: false
+        });
+
+        notification.show("foo");
+
+        $(".k-notification").click();
+
+        equal($(".k-notification").length, 1);
+    });
+
     test("clicking on static notification hides it when button is pressed", function() {
         createNotification({
             appendTo: QUnit.fixture,
@@ -334,6 +273,146 @@
         $(".k-notification").find(".k-i-close").click();
 
         equal($(".k-notification").length, 0);
+    });
+
+    test("down static stacking is applied by default", 2, function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0
+        });
+
+        notification.show('<span id="foo">foo</span>');
+        notification.show('<span id="bar">bar</span>');
+
+        equal(QUnit.fixture.children(".k-notification").first().find("#foo").length, 1);
+        equal(QUnit.fixture.children(".k-notification").last().find("#bar").length, 1);
+    });
+
+    test("right static stacking behaves as down stacking", 2, function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0,
+            stacking: "right"
+        });
+
+        notification.show('<span id="foo">foo</span>');
+        notification.show('<span id="bar">bar</span>');
+
+        equal(QUnit.fixture.children(".k-notification").first().find("#foo").length, 1);
+        equal(QUnit.fixture.children(".k-notification").last().find("#bar").length, 1);
+    });
+
+    test("up static stacking is applied", 2, function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0,
+            stacking: "up"
+        });
+
+        notification.show('<span id="foo">foo</span>');
+        notification.show('<span id="bar">bar</span>');
+
+        equal(QUnit.fixture.children(".k-notification").last().find("#foo").length, 1);
+        equal(QUnit.fixture.children(".k-notification").first().find("#bar").length, 1);
+    });
+
+    test("left static stacking behaves as up stacking", 2, function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0,
+            stacking: "left"
+        });
+
+        notification.show('<span id="foo">foo</span>');
+        notification.show('<span id="bar">bar</span>');
+
+        equal(QUnit.fixture.children(".k-notification").last().find("#foo").length, 1);
+        equal(QUnit.fixture.children(".k-notification").first().find("#bar").length, 1);
+    });
+
+    module("kendo.ui.notification popup", {
+        teardown: teardown
+    });
+
+    test("up stacking removes top popup padding", function() {
+        createNotification({
+            stacking: "up"
+        });
+
+        var paddings = notification._popupPaddings;
+
+        ok(!paddings.hasOwnProperty("paddingTop"));
+    });
+
+    test("down stacking removes bottom popup padding", function() {
+        createNotification({
+            stacking: "down"
+        });
+
+        var paddings = notification._popupPaddings;
+
+        ok(!paddings.hasOwnProperty("paddingBottom"));
+    });
+
+    test("right stacking removes right popup padding", function() {
+        createNotification({
+            stacking: "right"
+        });
+
+        var paddings = notification._popupPaddings;
+
+        ok(!paddings.hasOwnProperty("paddingRight"));
+    });
+
+    test("left stacking removes right popup padding", function() {
+        createNotification({
+            stacking: "left"
+        });
+
+        var paddings = notification._popupPaddings;
+
+        ok(!paddings.hasOwnProperty("paddingLeft"));
+    });
+
+    asyncTest("opened popup notifications are hidden after set autoHideAfter", function() {
+        var autoHideAfter = 10;
+
+        createNotification({
+            autoHideAfter: autoHideAfter
+        });
+
+        notification.show("foo");
+
+        setTimeout(function(){
+            start();
+            equal($(".k-notification").length, 0);
+        }, autoHideAfter + 10);
+
+    });
+
+    test("clicking on popup notification hides it when hideOnClick is true (default)", function() {
+        createNotification({
+            autoHideAfter: 0
+        });
+
+        notification.show("foo");
+
+        $(".k-notification").click();
+
+        equal($(".k-notification").length, 0);
+    });
+
+    test("clicking on notification popup does not hide it when hideOnClick is false", function() {
+        createNotification({
+            autoHideAfter: 0,
+            hideOnClick: false
+        });
+
+        notification.show("foo");
+
+        $(".k-notification").click();
+
+        equal($(".k-notification").length, 1);
     });
 
     test("clicking on popup notification hides it when button is pressed", function() {
@@ -512,61 +591,6 @@
         equal(popupContainer.css("left"), "1002px");
     });
 
-    test("down static stacking is applied by default", 2, function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0
-        });
-
-        notification.show('<span id="foo">foo</span>');
-        notification.show('<span id="bar">bar</span>');
-
-        equal(QUnit.fixture.children(".k-notification").first().find("#foo").length, 1);
-        equal(QUnit.fixture.children(".k-notification").last().find("#bar").length, 1);
-    });
-
-    test("right static stacking behaves as down stacking", 2, function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0,
-            stacking: "right"
-        });
-
-        notification.show('<span id="foo">foo</span>');
-        notification.show('<span id="bar">bar</span>');
-
-        equal(QUnit.fixture.children(".k-notification").first().find("#foo").length, 1);
-        equal(QUnit.fixture.children(".k-notification").last().find("#bar").length, 1);
-    });
-
-    test("up static stacking is applied", 2, function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0,
-            stacking: "up"
-        });
-
-        notification.show('<span id="foo">foo</span>');
-        notification.show('<span id="bar">bar</span>');
-
-        equal(QUnit.fixture.children(".k-notification").last().find("#foo").length, 1);
-        equal(QUnit.fixture.children(".k-notification").first().find("#bar").length, 1);
-    });
-
-    test("left static stacking behaves as up stacking", 2, function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0,
-            stacking: "left"
-        });
-
-        notification.show('<span id="foo">foo</span>');
-        notification.show('<span id="bar">bar</span>');
-
-        equal(QUnit.fixture.children(".k-notification").last().find("#foo").length, 1);
-        equal(QUnit.fixture.children(".k-notification").first().find("#bar").length, 1);
-    });
-
     test("up popup stacking is applied by default", 2, function() {
         createNotification({
             autoHideAfter: 0
@@ -716,38 +740,4 @@
 
         }, allowHideAfter + 100);
     });
-
-    test("originating element is hidden if appendTo is not set", function() {
-        createNotification();
-
-        equal(notification.element[0].style.display, "none");
-    });
-
-    test("originating element is hidden if appendTo is set to another element", function() {
-        createNotification({
-            appendTo: QUnit.fixture
-        });
-
-        equal(notification.element[0].style.display, "none");
-    });
-
-    test("originating element is not hidden if appendTo is set to Notification widget element", function() {
-        createNotification({
-            appendTo: "#notification"
-        });
-
-        notEqual(notification.element[0].style.display, "none");
-    });
-
-    test("popup notifications have a k-rtl class in RTL mode", function() {
-        QUnit.fixture.addClass("k-rtl");
-        createNotification();
-
-        notification.show("foo");
-
-        QUnit.fixture.removeClass("k-rtl");
-
-        ok($(".k-notification").hasClass("k-rtl"));
-    });
-
 })();

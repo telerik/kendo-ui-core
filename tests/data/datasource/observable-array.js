@@ -134,4 +134,104 @@ test("parents chain is correct when grouping on multiple fields", function() {
     equal(groupItem.parent().parent(), viewModel);
     equal(nestedGroupItem.parent().parent().parent().parent(), viewModel);
 });
+
+test("change event should trigger when editing an item with server grouping", function () {
+    var onChange = function (e) {
+        if (e.action === 'itemchange') {
+            ok(true);
+        }
+    };
+
+    var response = [
+        {
+            "Aggregates": {
+
+            },
+            "HasSubgroups": false,
+            "Member": "Salary",
+            "Subgroups": [
+
+            ],
+            "items": [
+                {
+                    "Id": 1,
+                    "Name": "John Smith",
+                    "Salary": 2000
+                }
+            ],
+            "Aggregates": {
+                "Salary": {
+                    "sum": 2000
+                }
+            },
+            "Key": 2000
+        },
+        {
+            "Key": 3000,
+            "HasSubgroups": false,
+            "Member": "Salary",
+            "items": [
+                {
+                    "Id": 2,
+                    "Name": "Jane Rottencrotch",
+                    "Salary": 3000
+                }
+            ],
+            "Aggregates": {
+
+            },
+            "Subgroups": [
+
+            ]
+        }
+    ];
+
+    var dataSource = new kendo.data.DataSource({
+        "change": onChange,
+        "transport": {
+            "read": 'someurl'
+        },
+        "serverPaging": true,
+        "serverSorting": true,
+        "serverFiltering": true,
+        "serverGrouping": true,
+        "serverAggregates": true,
+        "group": [
+            {
+                "field": "Salary",
+                "dir": "asc"
+            }
+        ],
+        "filter": [
+
+        ],
+        "aggregate": [{
+            "field": "Salary",
+            "aggregate": "sum"
+        }],
+        "schema": {
+            "data": "Data",
+            "total": "Total",
+            "errors": "Errors",
+            "model": {
+                "id": "Id",
+                "fields": {
+                    "Id": {
+                        "type": "number"
+                    },
+                    "Name": {
+                        "type": "string"
+                    },
+                    "Salary": {
+                        "type": "number"
+                    },
+                }
+            }
+        }
+    });
+
+    dataSource.success(response);
+    dataSource.data()[0].items[0].set('Name', 'test');
+
+});
 }());

@@ -1,23 +1,6 @@
 (function() {
-    module("events", {
-        setup: function() {
-
-        },
-        teardown: function() {
-            if (notification) {
-                notification.destroy();
-            }
-
-            $(".k-notification").each(function(idx, element){
-                var popup = $(element).data("kendoPopup");
-                if (popup) {
-                    popup.destroy();
-                }
-                $(element).remove();
-            });
-
-
-        }
+    module("kendo.ui.notification events popup", {
+        teardown: teardown
     });
 
     test("show method triggers show event with popup element as argument", 2, function() {
@@ -25,24 +8,6 @@
         var args = {};
 
         createNotification({
-            show: function(e) {
-                triggered = true;
-                args = e;
-            }
-        });
-
-        notification.show("foo");
-
-        ok(triggered);
-        ok(args.element && args.element.length && args.element.length == 1);
-    });
-
-    test("show method triggers show event with static element as argument", 2, function() {
-        var triggered = false;
-        var args = {};
-
-        createNotification({
-            appendTo: QUnit.fixture,
             show: function(e) {
                 triggered = true;
                 args = e;
@@ -74,6 +39,28 @@
         ok(args.element && args.element.length && args.element.length == 1);
     });
 
+    module("kendo.ui.notification events static", {
+        teardown: teardown
+    });
+
+    test("show method triggers show event with static element as argument", 2, function() {
+        var triggered = false;
+        var args = {};
+
+        createNotification({
+            appendTo: QUnit.fixture,
+            show: function(e) {
+                triggered = true;
+                args = e;
+            }
+        });
+
+        notification.show("foo");
+
+        ok(triggered);
+        ok(args.element && args.element.length && args.element.length == 1);
+    });
+
     test("notification hide triggers hide event with static element as argument", 2, function() {
         var triggered = false;
         var args = {};
@@ -93,5 +80,4 @@
         ok(triggered);
         ok(args.element && args.element.length && args.element.length == 1);
     });
-
 })();
