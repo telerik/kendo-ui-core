@@ -75,9 +75,9 @@ One (`1`) indicates the day after the current one (default value). Minus one (`-
 
 ### weekInYear
 
-Returns week number of a specific date. According to the ISO-8601 standard, weeks starting on Monday. 
+Returns week number of a specific date. According to the ISO-8601 standard, weeks starting on Monday.
 The first week of the year is the week that contains that year's first Thursday (='First 4-day week').
-The method allows defining diffent start day by using the second parameter. 
+The method allows defining diffent start day by using the second parameter.
 
 #### Parameters
 
@@ -87,7 +87,7 @@ The given date.
 
 ##### weekStart `Number` *(optional)*
 
-The day number (from 0 (Sunday) to 6 (Saturday)) representing what day of week is considered as a starting point. This parameter is optional because by default Monday (1) is considered as a first day of the week.  
+The day number (from 0 (Sunday) to 6 (Saturday)) representing what day of week is considered as a starting point. This parameter is optional because by default Monday (1) is considered as a first day of the week.
 
 #### Returns
 
@@ -96,7 +96,7 @@ The day number (from 0 (Sunday) to 6 (Saturday)) representing what day of week i
 #### Example
     <script>
         //no weekStart is passed so Monday will be considered as starting point for week
-        console.log(kendo.date.weekInYear(new Date(2017, 0, 9))); // 2 
+        console.log(kendo.date.weekInYear(new Date(2017, 0, 9))); // 2
         //Sunday is passed as week start
         console.log(kendo.date.weekInYear(new Date(2017, 0, 9), new Date(2017, 0, 8))); // 3
     </script>
@@ -458,7 +458,7 @@ The date object to get the milliseconds of.
 
 #### Returns
 
-`Date` Returns the milliseconds of a date object.
+`Number` Returns the milliseconds of a date object.
 
 #### Example
 

@@ -18435,6 +18435,10 @@ declare namespace kendo {
 
 
     namespace date {
+        var MS_PER_DAY: number;
+        var MS_PER_HOUR: number;
+        var MS_PER_MINUTE: number;
+
         function setDayOfWeek(targetDate: Date, dayOfWeek: number, direction: number): void;
         function dayOfWeek(targetDate: Date, dayOfWeek: number, direction: number): Date;
         function weekInYear(date: Date, weekStart?: number): number;
@@ -18452,7 +18456,7 @@ declare namespace kendo {
         function toInvariantTime(targetDate: Date): Date;
         function firstDayOfMonth(targetDate: Date): Date;
         function lastDayOfMonth(targetDate: Date): Date;
-        function getMilliseconds(targetDate: Date): Date;
+        function getMilliseconds(targetDate: Date): number;
     }
 
     namespace drawing {
