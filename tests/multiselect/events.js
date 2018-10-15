@@ -68,6 +68,42 @@
         multiselect.ul.children().first().click();
     });
 
+    test("MultiSelect raises 2 change events on click and clear click", 2, function() {
+        var flag = 0;
+        var multiselect = new MultiSelect(select, {
+            animation:false,
+            clearButton: true,
+            change: function() {
+                flag ++;
+            }
+        });
+
+        multiselect.open();
+        multiselect.ul.children().first().click();
+        multiselect._clear.click();
+        equal(flag,2);
+        equal(multiselect.value().length, 0);
+    });
+
+    test("MultiSelect raises 2 change events on click and clear click", 2, function() {
+        var flag = 0;
+        var multiselect = new MultiSelect(select, {
+            animation:false,
+            clearButton: true,
+            change: function() {
+                flag ++;
+            }
+        });
+
+        multiselect.open();
+        multiselect.ul.children().first().click();
+        multiselect._clear.click();
+        multiselect.open();
+        multiselect.ul.children().first().click();
+        equal(flag,3)
+        equal(multiselect.value().length, 1);
+    });
+
     test("MultiSelect raises change event on enter", 1, function() {
         var multiselect = new MultiSelect(select, {
             change: function() {

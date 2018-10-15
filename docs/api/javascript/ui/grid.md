@@ -1601,7 +1601,7 @@ The format that is applied to the value before it is displayed. Takes the form "
     });
     </script>
 
-### columns.groupable `Boolean` *(default: true)*
+### columns.groupable `Boolean|Object` *(default: true)
 
 If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable.
 
@@ -1622,6 +1622,139 @@ If set to false the column will not be groupable (requires Grid groupable proper
         ]
       }
     });
+    </script>
+
+### columns.groupable.sort `Object`
+
+Sets the sort configuration when grouping.
+
+#### Example - set sort settings
+
+   <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: [
+                    { id: 1, name: "Salmon", category: "Seafood" },
+                    { id: 3, name: "Ice cream", category: "Desserts" },
+                    { id: 2, name: "Mackerel", category: "Seafood" },
+                    { id: 4, name: "Cake", category: "Desserts" },
+                    { id: 5, name: "Lemonade", category: "Beverages" },
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
+                ],
+                pageSize: 10
+            },
+            pageable: true,
+            groupable: {
+                sort: {
+                    dir: "desc",
+                    compare: function(a, b) {
+                        if (a.items.length === b.items.length) {
+                            return 0;
+                        } else if (a.items.length > b.items.length) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    }
+                }
+            },
+            height: 550,
+            columns: [
+                { field: "id", title: "Id", width: "120px" },
+                { field: "name", title: "Name", width: "120px" },
+                { field: "category", title: "Category", width: "120px" }
+            ]
+        });
+    </script>>
+
+### columns.groupable.sort.compare `Function`
+
+A JavaScript function which is used to compare the groups (refer to [`sortable.compare`](/api/javascript/ui/grid/configuration/columns.sortable#columns.sortable.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+
+#### Example - use a custom function to compare the groups
+
+   <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: [
+                    { id: 1, name: "Salmon", category: "Seafood" },
+                    { id: 3, name: "Ice cream", category: "Desserts" },
+                    { id: 2, name: "Mackerel", category: "Seafood" },
+                    { id: 4, name: "Cake", category: "Desserts" },
+                    { id: 5, name: "Lemonade", category: "Beverages" },
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
+                ],
+                pageSize: 10
+            },
+            pageable: true,
+            groupable: {
+                sort: {
+                    compare: function(a, b) {
+                        if (a.items.length === b.items.length) {
+                            return 0;
+                        } else if (a.items.length > b.items.length) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    }
+                }
+            },
+            height: 550,
+            columns: [
+                { field: "id", title: "Id", width: "120px" },
+                { field: "name", title: "Name", width: "120px" },
+                { field: "category", title: "Category", width: "120px" }
+            ]
+        });
+    </script>
+
+### columns.groupable.sort.dir `String` *(default: asc)*
+
+The sort order of the groups according to the group field.
+
+The supported values are:
+
+*  `"asc"` (ascending order)
+* `"desc"` (descending order)
+
+#### Example - sort the groups in descending order
+
+    <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: [
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
+                    { id: 1, name: "Salmon", category: "Seafood" },
+                    { id: 3, name: "Ice cream", category: "Desserts" },
+                    { id: 2, name: "Mackerel", category: "Seafood" },
+                    { id: 4, name: "Cake", category: "Desserts" },
+                    { id: 5, name: "Lemonade", category: "Beverages" }
+                ],
+                pageSize: 10
+            },
+            pageable: true,
+            groupable: {
+                sort: {
+                    dir: "desc"
+                }
+            },
+            height: 550,
+            columns: [
+                { field: "id", title: "Id", width: "120px" },
+                { field: "name", title: "Name", width: "120px" },
+                { field: "category", title: "Category", width: "120px" }
+            ]
+        });
     </script>
 
 ### columns.groupHeaderColumnTemplate `String|Function`
@@ -5250,6 +5383,149 @@ When enabled the group footer rows will remain visible when the corresponding gr
         showFooter: true
       }
     });
+    </script>
+
+### groupable.sort `Object`
+
+Sets the sort configuration when grouping.
+
+#### Example - set sort settings
+
+   <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: [
+                    { id: 1, name: "Salmon", category: "Seafood" },
+                    { id: 3, name: "Ice cream", category: "Desserts" },
+                    { id: 2, name: "Mackerel", category: "Seafood" },
+                    { id: 4, name: "Cake", category: "Desserts" },
+                    { id: 5, name: "Lemonade", category: "Beverages" },
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
+                ],
+                pageSize: 10
+            },
+            pageable: true,
+            groupable: {
+                sort: {
+                    dir: "desc",
+                    compare: function(a, b) {
+                        if (a.items.length === b.items.length) {
+                            return 0;
+                        } else if (a.items.length > b.items.length) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    }
+                }
+            },
+            height: 550,
+            columns: [
+                { field: "id", title: "Id", width: "120px" },
+                { field: "name", title: "Name", width: "120px" },
+                { field: "category", title: "Category", width: "120px" }
+            ]
+        });
+    </script>>
+
+### groupable.sort.compare `Function`
+
+A JavaScript function which is used to compare the groups (refer to [`sortable`](/api/javascript/ui/grid/configuration/sortable) for sorting the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+
+#### Example - use a custom function to compare the groups
+
+    <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: [
+                    { id: 1, name: "Salmon", category: "Seafood" },
+                    { id: 3, name: "Ice cream", category: "Desserts" },
+                    { id: 2, name: "Mackerel", category: "Seafood" },
+                    { id: 4, name: "Cake", category: "Desserts" },
+                    { id: 5, name: "Lemonade", category: "Beverages" },
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
+                ],
+                pageSize: 10
+            },
+            pageable: true,
+            height: 550,
+            groupable: true,
+            columns: [
+                { field: "id", title: "Id", width: "120px" },
+                { field: "name", title: "Name", width: "120px" },
+                {
+                    field: "category",
+                    title: "Category",
+                    width: "120px",
+                    groupable: {
+                        sort: {
+                            compare: function(a, b) {
+                                if (a.items.length === b.items.length) {
+                                    return 0;
+                                } else if (a.items.length > b.items.length) {
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        });
+    </script>
+
+### groupable.sort.dir `String` *(default: asc)*
+
+The sort order of the groups according to the group field.
+
+The supported values are:
+
+*  `"asc"` (ascending order)
+* `"desc"` (descending order)
+
+#### Example - sort the groups in descending order
+
+    <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: [
+                    { id: 1, name: "Salmon", category: "Seafood" },
+                    { id: 3, name: "Ice cream", category: "Desserts" },
+                    { id: 2, name: "Mackerel", category: "Seafood" },
+                    { id: 4, name: "Cake", category: "Desserts" },
+                    { id: 5, name: "Lemonade", category: "Beverages" },
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
+                ],
+                pageSize: 10
+            },
+            pageable: true,
+            height: 550,
+            groupable: true,
+            columns: [
+                { field: "id", title: "Id", width: "120px" },
+                { field: "name", title: "Name", width: "120px" },
+                {
+                    field: "category",
+                    title: "Category",
+                    width: "120px",
+                    groupable: {
+                        sort: {
+                            dir: "desc"
+                        }
+                    }
+                }
+            ]
+        });
     </script>
 
 ### groupable.messages `Object`

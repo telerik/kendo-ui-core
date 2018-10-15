@@ -316,11 +316,16 @@
                 var height = options.height;
                 var maxHeight = options.maxHeight;
                 var dimensions = ["minWidth","minHeight","maxWidth","maxHeight"];
+                var contentBoxSizing = wrapper.css("box-sizing") == "content-box";
+
+                var lrBorderWidth = contentBoxSizing ? toInt(wrapper, "border-left-width") + toInt(wrapper, "border-right-width") : 0;
+                var tbBorderWidth = contentBoxSizing ? toInt(wrapper, "border-top-width") + toInt(wrapper, "border-bottom-width") : 0;
+                var paddingTop = contentBoxSizing ? toInt(wrapper, "padding-top") : 0;
 
                 if (this.containment && !this._isPinned) {
                     this._updateBoundaries();
-                    options.maxHeight = Math.min(this.containment.height - toInt(wrapper, "padding-top"), maxHeight);
-                    options.maxWidth = Math.min(this.containment.width, options.maxWidth);
+                    options.maxHeight = Math.min(this.containment.height - (tbBorderWidth + paddingTop), maxHeight);
+                    options.maxWidth = Math.min(this.containment.width - lrBorderWidth, options.maxWidth);
                 }
 
                 for (var i = 0; i < dimensions.length; i++) {
@@ -1266,11 +1271,12 @@
 
                     that._stopDocumentScrolling();
 
-                    wrapper.css({
-                        top: containmentContext ? this.containment.scrollTop() : 0,
-                        left: containmentContext ? this.containment.scrollLeft() : 0,
-                        position: containmentContext ? "absolute" : "fixed"
-                    })
+                    wrapper
+                        .css({
+                            top: containmentContext ? this.containment.scrollTop() : 0,
+                            left: containmentContext ? this.containment.scrollLeft() : 0,
+                            position: containmentContext ? "absolute" : "fixed"
+                        })
                         .addClass(MAXIMIZEDSTATE);
 
                     that.options.isMaximized = true;
@@ -1468,23 +1474,23 @@
                     wrapper = that.wrapper,
                     wnd = $(window),
                     zoomLevel = kendo.support.zoomLevel(),
+                    contentBoxSizing = wrapper.css("box-sizing") == "content-box",
                     w, h;
 
                 if (!that.options.isMaximized) {
                     return;
                 }
 
-                var lrBorderWidth = toInt(wrapper, "border-left-width") +
-                                        toInt(wrapper, "border-right-width");
-                var tbBorderWidth = toInt(wrapper, "border-top-width") +
-                                        toInt(wrapper, "border-bottom-width");
+                var lrBorderWidth = contentBoxSizing ? toInt(wrapper, "border-left-width") + toInt(wrapper, "border-right-width") : 0;
+                var tbBorderWidth = contentBoxSizing ? toInt(wrapper, "border-top-width") + toInt(wrapper, "border-bottom-width") : 0;
+                var paddingTop = contentBoxSizing ? toInt(wrapper, "padding-top") : 0;
 
-                if (this.containment && !this._isPinned) {
-                    w = this.containment.innerWidth();
-                    h = this.containment.innerHeight() - toInt(wrapper, "padding-top");
+                if (that.containment && !that._isPinned) {
+                    w = that.containment.innerWidth() - lrBorderWidth;
+                    h = that.containment.innerHeight() - (tbBorderWidth + paddingTop);
                 } else {
                     w = wnd.width() / zoomLevel - lrBorderWidth;
-                    h = wnd.height() / zoomLevel - toInt(wrapper, "padding-top") - tbBorderWidth;
+                    h = wnd.height() / zoomLevel - (tbBorderWidth + paddingTop);
                 }
 
                 wrapper.css({

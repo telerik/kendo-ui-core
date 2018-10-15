@@ -197,8 +197,8 @@
 
     equal(position.top, 200);
     equal(position.left, 200);
-    equal(wnd.wrapper.width(), 400);
-    equal(wnd.wrapper.height() + parseInt(wnd.wrapper.css("paddingTop"), 10), 400);
+    equal(wnd.wrapper.outerWidth(), 400);
+    equal(wnd.wrapper.outerHeight(), 400);
   });
 
   test("maximize in browser context when pinned", 4, function() {

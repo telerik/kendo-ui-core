@@ -634,7 +634,9 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Сигурни ли сте, че искате да изтриете записа?",
     "confirmDelete": "Изтрий"
   },
-  "noRecords": "Няма налични записи."
+  "noRecords": "Няма налични записи.",
+  "groupHeader": "Натиснете ctrl + space за да групирате",
+  "ungroupHeader": "Натиснете ctrl + space за да разгрупирате"
 });
 }
 

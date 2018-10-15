@@ -2,6 +2,24 @@
 
 var Query = kendo.data.Query;
 
+function compareByTotal(a, b) {
+    if (a.items.length === b.items.length) {
+        return 0;
+    } else if (a.items.length > b.items.length) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+module("query /", {
+    setup: function() {
+
+    },
+    teardown: function() {
+    }
+});
+
 test("take returns the specified number of records", function() {
     var q = new Query([1,2]);
     var result = q.take(1).toArray();
@@ -16,7 +34,7 @@ test("skip returns new array starting after the specified index", function () {
     equal(result.length, 1);
     equal(result[0], 2);
 });
- 
+
 test("skip and take returns a page of records", function () {
     var q = new Query([1, 2, 3]);
 
@@ -1337,6 +1355,78 @@ test("groupby on dates with descending sort should be stable", function() {
     equal(result[0].items[10].foo, 1);
 });
 
+test("custom sort compare is used when grouping", function() {
+    var data = [
+        { id: 1, text: "item1", group: "group1" },
+        { id: 2, text: "item2", group: "group2" },
+        { id: 30, text: "item3", group: "group1" },
+        { id: 4, text: "item4", group: "group1" },
+    ];
+
+    var result = new Query(data).groupBy({
+        field: "group",
+        compare: compareByTotal
+    }).toArray();
+
+    equal(result.length, 2);
+    equal(result[0].items.length, 1);
+    equal(result[0].items[0].id, 2);
+
+    equal(result[1].items.length, 3);
+    equal(result[1].items[0].id, 1);
+    equal(result[1].items[1].id, 30);
+    equal(result[1].items[2].id, 4);
+});
+
+test("sort.dir is taken into account when custom sort.compare is used when grouping", function() {
+    var data = [
+        { id: 1, text: "item1", group: "group1" },
+        { id: 2, text: "item2", group: "group2" },
+        { id: 30, text: "item3", group: "group1" },
+        { id: 4, text: "item4", group: "group1" },
+    ];
+
+    var result = new Query(data).groupBy({
+        field: "group",
+        dir: "desc",
+        compare: compareByTotal
+    }).toArray();
+
+    equal(result.length, 2);
+    equal(result[0].items.length, 3);
+    equal(result[0].items[0].id, 1);
+    equal(result[0].items[1].id, 30);
+    equal(result[0].items[2].id, 4);
+
+    equal(result[1].items.length, 1);
+    equal(result[1].items[0].id, 2)
+});
+
+test("sort.compare is used when processing grouping", function() {
+    var data = [
+        { id: 1, text: "item1", group: "group1" },
+        { id: 2, text: "item2", group: "group2" },
+        { id: 30, text: "item3", group: "group1" },
+        { id: 4, text: "item4", group: "group1" },
+    ];
+
+    var result = Query.process(data, {
+        group: {
+            field: "group",
+            dir: "desc",
+            compare: compareByTotal
+        }
+    }).data;
+
+    equal(result.length, 2);
+    equal(result[0].items.length, 3);
+    equal(result[0].items[0].id, 1);
+    equal(result[0].items[1].id, 30);
+    equal(result[0].items[2].id, 4);
+
+    equal(result[1].items.length, 1);
+    equal(result[1].items[0].id, 2)
+});
 
 test("groupby groups data by date", function() {
     var data = [ {field: new Date(2011, 1, 1)} , {field: new Date(2011, 2, 2) } , {field: new Date(2011, 1, 1) } ];

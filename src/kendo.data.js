@@ -44,6 +44,7 @@ var __meta__ = { // jshint ignore:line
         Class = kendo.Class,
         STRING = "string",
         FUNCTION = "function",
+        ASCENDING = "asc",
         CREATE = "create",
         READ = "read",
         UPDATE = "update",
@@ -1403,11 +1404,28 @@ var __meta__ = { // jshint ignore:line
         return isArray(expressions) ? expressions : [expressions];
     }
 
-    function normalizeGroup(field, dir) {
-        var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
+    function normalizeGroup(field, dir, compare) {
+        var descriptor = typeof field === STRING ? { field: field, dir: dir, compare: compare } : field,
         descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
-        return map(descriptors, function(d) { return { field: d.field, dir: d.dir || "asc", aggregates: d.aggregates }; });
+        return map(descriptors, function(d) {
+            return {
+                field: d.field,
+                dir: d.dir || "asc",
+                aggregates: d.aggregates,
+                compare: d.compare
+            };
+        });
+    }
+
+    function normalizeGroupWithoutCompare(field, dir, compare) {
+        var descriptors = normalizeGroup(field, dir, compare);
+
+        for (var i = 0; i < descriptors.length; i++) {
+            delete descriptors[i].compare;
+        }
+
+        return descriptors;
     }
 
     Query.prototype = {
@@ -1440,6 +1458,7 @@ var __meta__ = { // jshint ignore:line
             if (inPlace) {
                 return new Query(this.data.sort(Comparer.create(sort)));
             }
+
             return new Query(this.data.slice(0).sort(Comparer.create(sort)));
         },
         orderBy: function(selector, inPlace) {
@@ -1534,6 +1553,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         groupBy: function(descriptor) {
+            var that = this;
+
             if (isEmptyObject(descriptor) || !this.data.length) {
                 return new Query([]);
             }
@@ -1567,6 +1588,9 @@ var __meta__ = { // jshint ignore:line
                 }
                 group.items.push(item);
             }
+
+            result = that._sortGroups(result, descriptor);
+
             return new Query(result);
         },
 
@@ -1586,7 +1610,18 @@ var __meta__ = { // jshint ignore:line
                 }
                 return data;
             }
+
             return this.sort(field, dir).toArray();
+        },
+
+        _sortGroups: function(groups, descriptor) {
+            var result = groups;
+
+            if (descriptor && isFunction(descriptor.compare)) {
+                result = new Query(result).order({ compare: descriptor.compare }, descriptor.dir || ASCENDING).toArray();
+            }
+
+            return result;
         },
 
         aggregate: function (aggregates) {
@@ -1718,7 +1753,7 @@ var __meta__ = { // jshint ignore:line
 
         var query = new Query(data),
             group = options.group,
-            sort = normalizeGroup(group || []).concat(normalizeSort(options.sort || [])),
+            sort = normalizeGroupWithoutCompare(group || []).concat(normalizeSort(options.sort || [])),
             total,
             filterCallback = options.filterCallback,
             filter = options.filter,
@@ -4141,7 +4176,7 @@ var __meta__ = { // jshint ignore:line
                                 if (options.inPlaceSort) {
                                     processed = that._queryProcess(range.data, { filter: that.filter() });
                                 } else {
-                                    var sort = normalizeGroup(that.group() || []).concat(normalizeSort(that.sort() || []));
+                                    var sort = normalizeGroupWithoutCompare(that.group() || []).concat(normalizeSort(that.sort() || []));
                                     processed = that._queryProcess(range.data, { sort: sort, filter: that.filter() });
                                 }
                                 flatData = rangeData = processed.data;

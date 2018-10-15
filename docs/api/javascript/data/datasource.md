@@ -600,6 +600,49 @@ The data item field which will be used to calculate the aggregates.
     });
     </script>
 
+### group.compare `Function`
+
+A JavaScript function which is used to compare the groups (refer to [`sort.compare`](/api/javascript/data/datasource#configuration-sort.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+
+#### Example - use a custom function to compare the groups in the DataSource
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { name: "Salmon", category: "Seafood" },
+                { name: "Mackerel", category: "Seafood" },
+                { name: "Ice cream", category: "Desserts" },
+                { name: "Cake", category: "Desserts" },
+                { name: "Lemonade", category: "Beverages" },
+                { name: "Tea", category: "Beverages" },
+                { name: "Coffee", category: "Beverages" }
+            ],
+            group: {
+                field: "category",
+                dir: "desc",
+                compare: function(a, b) {
+                    if (a.items.length === b.items.length) {
+                        return 0;
+                    } else if (a.items.length > b.items.length) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+            }
+        });
+
+        dataSource.fetch(function() {
+            var view = dataSource.view();
+            var beverages = view[0];
+            console.log(kendo.stringify(beverages.items));
+            var seafood = view[1];
+            console.log(kendo.stringify(seafood.items));
+            var desserts = view[2];
+            console.log(kendo.stringify(desserts.items));
+        });
+    </script>>
+
 ### group.dir `String` *(default: "asc")*
 
 The sort order of the group.

@@ -4103,6 +4103,11 @@ declare namespace kendo.ui {
         ui?: string|Function;
     }
 
+    interface GridColumnGroupable {
+        compare?: Function;
+        dir?: string;
+    }
+
     interface GridColumnSortable {
         allowUnsort?: boolean;
         compare?: Function;
@@ -4121,7 +4126,7 @@ declare namespace kendo.ui {
         footerAttributes?: any;
         footerTemplate?: string|Function;
         format?: string;
-        groupable?: boolean;
+        groupable?: boolean | GridColumnGroupable;
         groupHeaderColumnTemplate?: string|Function;
         groupHeaderTemplate?: string|Function;
         groupFooterTemplate?: string|Function;
@@ -4244,6 +4249,8 @@ declare namespace kendo.ui {
         enabled?: boolean;
         showFooter?: boolean;
         messages?: GridGroupableMessages;
+        compare?: Function;
+        dir?: string;
     }
 
     interface GridMessagesCommands {
