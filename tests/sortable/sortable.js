@@ -38,7 +38,7 @@
 
         triggerDraggableEvent(
             "dragstart",
-            { currentTarget: draggedElement, target: draggedElement }, 
+            { currentTarget: draggedElement, target: draggedElement },
             element
         );
 
@@ -167,7 +167,7 @@
 
         triggerDraggableEvent(
             "dragstart",
-            { currentTarget: draggedElement, target: draggedElement }, 
+            { currentTarget: draggedElement, target: draggedElement },
             element
         );
 
@@ -355,10 +355,6 @@
             );
 
             element = $("#sortable");
-            element.kendoSortable({
-                axis: "y",
-                filter: ".item"
-            });
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -366,6 +362,11 @@
     });
 
     test("Placeholder is moved even of the mouse is outside of the sortable container", 1, function() {
+        element.kendoSortable({
+            axis: "y",
+            filter: ".item"
+        });
+
         var draggedElement = element.children().eq(0),
             draggableOffset = kendo.getOffset(draggedElement),
             targetElement = element.children().eq(1),
@@ -375,6 +376,25 @@
         move(draggedElement, 100, targetTopCenter + 1);
 
         equal(targetElement.next()[0], element.getKendoSortable().placeholder[0], "Placeholder is moved");
+    });
+
+    test("Placeholder is not moved over item which does not meet the filter criteria", 4, function() {
+        element.kendoSortable({
+            axis: "y",
+            filter: ">li:not(.filtered)"
+        });
+        var draggedElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1).addClass("filtered"),
+            targetTopCenter = kendo.getOffset(targetElement).top + targetElement.height() / 2;
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, 100, targetTopCenter + 1);
+
+        equal(element.children().eq(0).text(), "foo", "Placeholder is moved");
+        equal(element.children().eq(1).is(":visible"), false);
+        equal(element.children().eq(1).text(), "foo", "Placeholder is moved");
+        equal(element.children().eq(2).text(), "bar", "Placeholder is moved");
     });
 
 })();

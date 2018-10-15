@@ -50,8 +50,7 @@ var __meta__ = { // jshint ignore:line
              var that = this,
              isStep = options && options.step !== undefined,
              min, max, step, value, disabled;
-
-             var inputType = element.type;
+             var inputType;
 
              Widget.fn.init.call(that, element, options);
 
@@ -79,6 +78,8 @@ var __meta__ = { // jshint ignore:line
              }
 
              that._initialOptions = extend({}, options);
+
+             inputType = element.attr("type");
 
              that._reset();
              that._wrapper();

@@ -1,14 +1,14 @@
 ---
-title: Section 508 and WCAG 2.0 Compliance
-page_title: Section 508 and WCAG 2.0 Compliance | Kendo UI Accessibility Support
-description: "Learn more about the Section 508 and WCAG 2.0 Accesibility support provided by Kendo UI controls."
+title: Section 508 and WCAG 2.1 Compliance
+page_title: Section 508 and WCAG 2.1 Compliance | Kendo UI Accessibility Support
+description: "Learn more about the Section 508 and WCAG 2.1 Accesibility support provided by Kendo UI controls."
 slug: section508_wcag20_accessibility_support
 position: 3
 ---
 
-# Section 508 and WCAG 2.0 Compliance
+# Section 508 and WCAG 2.1 Compliance
 
-The Kendo UI widgets follow the [W3C Web Content Accessibility Guidelines 2.0](https://www.w3.org/TR/WCAG/).
+The Kendo UI widgets follow the [W3C Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/).
 
 They set the standards for applications for providing accessible content. Depending on the number of guidelines that is followed when building an application, W3C defines three levels of accessibility conformance&mdash;A, AA, and AAA levels.
 
@@ -16,11 +16,11 @@ The Kendo UI components also conform to the technical standards set out in Secti
 
 Applications built with components that adhere to these guidelines will not only be accessible to people with disabilities, but also to users of all kinds of devices and interfaces such as desktop browser, voice browser, mobile phone, automobile-based personal computer, and so on.
 
-The following table shows the Section 508 and WCAG 2.0 Compliance level of support for the Kendo UI widgets. The report is based on results from tests performed on our **Basic Usage** demos.
+The following table shows the Section 508 and WCAG 2.1 Compliance level of support for the Kendo UI widgets. The report is based on results from tests performed on our **Basic Usage** demos.
 
-**Table 1: 508 and WCAG 2.0 compliance with Kendo UI widgets**
+**Table 1: 508 and WCAG 2.1 compliance with Kendo UI widgets**
 
-|Component |508|WCAG 2.0|Demo
+|Component |508|WCAG 2.1|Demo
 |:---          |:---|:---  |:---
 |AutoComplete  |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/autocomplete/index)
 |BarCode	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/barcode/index)

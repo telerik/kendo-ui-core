@@ -378,10 +378,15 @@ var __meta__ = { // jshint ignore:line
         _movementByAxis: function(axis, cursorOffset, delta, eventData) {
             var cursorPosition = (axis === "x") ? cursorOffset.left : cursorOffset.top,
                 target = (delta < 0) ? this.placeholder.prev() : this.placeholder.next(),
+                items = this.items(),
                 targetCenter;
 
             if (target.length && !target.is(":visible")) {
                 target = (delta <0) ? target.prev() : target.next();
+            }
+
+            if (!items.filter(target).length) {
+                return;
             }
 
             $.extend(eventData, { target: target });

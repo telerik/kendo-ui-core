@@ -418,7 +418,7 @@ var __meta__ = { // jshint ignore:line
 
             that.input.val("");
             that._search();
-            that.trigger(CHANGE);
+            that._change();
             that.focus();
             that._hideClear();
 
@@ -771,7 +771,7 @@ var __meta__ = { // jshint ignore:line
 
             if(key !== keys.ENTER) {
                 this._multipleSelection = false;
-            }    
+            }
 
              if (key === keys.DOWN) {
                 e.preventDefault();
@@ -850,7 +850,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 e.preventDefault();
-          
+
                 if (this._multipleSelection) {
                     this._multipleSelection = false;
                      if (listView.focus().hasClass(SELECTEDCLASS)) {
@@ -858,7 +858,7 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
                 }
-               
+
                 that._select(listView.focus()).done(function() {
                     that._change();
                     that._close();
@@ -1221,7 +1221,7 @@ var __meta__ = { // jshint ignore:line
 
             that._angularTagItems("cleanup");
 
-            if (that.options.tagMode === "multiple") { 
+            if (that.options.tagMode === "multiple") {
                 for (idx = removed.length - 1; idx > -1; idx--) {
                     removedItem = removed[idx];
 
