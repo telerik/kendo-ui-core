@@ -890,7 +890,7 @@ var __meta__ = { // jshint ignore:line
                     that.tagList.children().each(function(index, tag) {
                         that._removeTag($(tag), false);
                     });
-                    that.trigger(CHANGE);
+                    that._change();
                 }
 
                 that.close();

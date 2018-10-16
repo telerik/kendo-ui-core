@@ -720,4 +720,28 @@
         ok(!dataSource._pageSize);
         ok(!dataSource._take);
     });
+
+    test("pager info is correctly calculated when all options is set", function () {
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { productName: "Tea", category: "Beverages" },
+                { productName: "Coffee", category: "Beverages" },
+                { productName: "Ham", category: "Food" },
+                { productName: "Bread", category: "Food" }
+            ],
+            pageSize: 2
+        });
+
+        var pager = $("<div />").appendTo(QUnit.fixture).kendoPager({
+            dataSource: dataSource,
+            pageSizes: true
+        });
+        dataSource.fetch();
+        dataSource.page(2);
+        var dropdownlist = pager.find(".k-pager-sizes select").data("kendoDropDownList");
+        dropdownlist.value("all");
+        dropdownlist.element.trigger("change");
+
+        equal(pager.find(".k-pager-info").html(), '1 - 4 of 4 items');
+    });
 })();
