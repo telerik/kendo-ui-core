@@ -1428,6 +1428,18 @@ var __meta__ = { // jshint ignore:line
         return descriptors;
     }
 
+    function anyGroupDescriptorHasCompare(groupDescriptors) {
+        var descriptors = isArray(groupDescriptors) ? groupDescriptors : [groupDescriptors];
+
+        for (var i = 0; i < descriptors.length; i++) {
+            if (descriptors[i] && isFunction(descriptors[i].compare)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     Query.prototype = {
         toArray: function () {
             return this.data;
@@ -1751,9 +1763,12 @@ var __meta__ = { // jshint ignore:line
     Query.process = function(data, options, inPlace) {
         options = options || {};
 
+        var group = options.group;
+        var customGroupSort = anyGroupDescriptorHasCompare(normalizeGroup(group || []));
         var query = new Query(data),
-            group = options.group,
-            sort = normalizeGroupWithoutCompare(group || []).concat(normalizeSort(options.sort || [])),
+            groupDescriptorsWithoutCompare = normalizeGroupWithoutCompare(group || []),
+            normalizedSort = normalizeSort(options.sort || []),
+            sort = customGroupSort ? normalizedSort : groupDescriptorsWithoutCompare.concat(normalizedSort),
             total,
             filterCallback = options.filterCallback,
             filter = options.filter,
@@ -1782,12 +1797,21 @@ var __meta__ = { // jshint ignore:line
             }
         }
 
-        if (skip !== undefined && take !== undefined) {
-            query = query.range(skip, take);
-        }
-
-        if (group) {
+        if (customGroupSort) {
             query = query.group(group, data);
+
+            if (skip !== undefined && take !== undefined) {
+                query = new Query(flatGroups(query.toArray())).range(skip, take);
+                query = query.group(groupDescriptorsWithoutCompare, query.toArray());
+            }
+        } else {
+            if (skip !== undefined && take !== undefined) {
+                query = query.range(skip, take);
+            }
+
+            if (group) {
+                query = query.group(group, data);
+            }
         }
 
         return {
@@ -2215,6 +2239,31 @@ var __meta__ = { // jshint ignore:line
         if (idx < dest.length) {
             dest.splice(idx, dest.length - idx);
         }
+    }
+
+    function flatGroups(groups, indexFunction) {
+        var result = [];
+        var groupsLength = (groups || []).length;
+        var group;
+        var items;
+        var indexFn = isFunction(indexFunction) ? indexFunction : function(array, index) {
+            return array[index];
+        };
+
+        for (var groupIndex = 0; groupIndex < groupsLength; groupIndex++) {
+            group = indexFn(groups, groupIndex);
+
+            if (group.hasSubgroups) {
+                result = result.concat(flatGroups(group.items));
+            } else {
+                items = group.items;
+
+                for (var itemIndex = 0; itemIndex < items.length; itemIndex++) {
+                    result.push(indexFn(items, itemIndex));
+                }
+            }
+        }
+        return result;
     }
 
     function flattenGroups(data) {

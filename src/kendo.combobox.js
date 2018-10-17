@@ -812,7 +812,7 @@ var __meta__ = { // jshint ignore:line
                 shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
 
                 if(!shouldTrigger){
-                    that.input.val(that._accessor());
+                   that.input.val(that._text(dataItem));
                 }
             }
 
@@ -992,10 +992,6 @@ var __meta__ = { // jshint ignore:line
 
                     if(dataItem){
                         shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
-
-                        if(!shouldTrigger){
-                            that.input.val(that._accessor());
-                        }
                     }
 
                     if (shouldTrigger && that.trigger("select", { dataItem: dataItem, item: current })) {

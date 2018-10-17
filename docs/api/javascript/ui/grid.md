@@ -1628,9 +1628,9 @@ If set to false the column will not be groupable (requires Grid groupable proper
 
 Sets the sort configuration when grouping.
 
-#### Example - set sort settings
+#### Example - use a custom function to compare the groups
 
-   <div id="grid"></div>
+    <div id="grid"></div>
 
     <script>
         $("#grid").kendoGrid({
@@ -1647,36 +1647,41 @@ Sets the sort configuration when grouping.
                 pageSize: 10
             },
             pageable: true,
-            groupable: {
-                sort: {
-                    dir: "desc",
-                    compare: function(a, b) {
-                        if (a.items.length === b.items.length) {
-                            return 0;
-                        } else if (a.items.length > b.items.length) {
-                            return 1;
-                        } else {
-                            return -1;
-                        }
-                    }
-                }
-            },
             height: 550,
+            groupable: true,
             columns: [
                 { field: "id", title: "Id", width: "120px" },
                 { field: "name", title: "Name", width: "120px" },
-                { field: "category", title: "Category", width: "120px" }
+                {
+                    field: "category",
+                    title: "Category",
+                    width: "120px",
+                    groupable: {
+                        sort: {
+                            compare: function(a, b) {
+                                if (a.items.length === b.items.length) {
+                                    return 0;
+                                } else if (a.items.length > b.items.length) {
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            }
+                        }
+                    }
+                }
             ]
         });
-    </script>>
+    </script>
 
 ### columns.groupable.sort.compare `Function`
 
 A JavaScript function which is used to compare the groups (refer to [`sortable.compare`](/api/javascript/ui/grid/configuration/columns.sortable#columns.sortable.compare) for comparing the items of the groups). It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
+
 #### Example - use a custom function to compare the groups
 
-   <div id="grid"></div>
+    <div id="grid"></div>
 
     <script>
         $("#grid").kendoGrid({
@@ -1693,24 +1698,29 @@ A JavaScript function which is used to compare the groups (refer to [`sortable.c
                 pageSize: 10
             },
             pageable: true,
-            groupable: {
-                sort: {
-                    compare: function(a, b) {
-                        if (a.items.length === b.items.length) {
-                            return 0;
-                        } else if (a.items.length > b.items.length) {
-                            return 1;
-                        } else {
-                            return -1;
-                        }
-                    }
-                }
-            },
             height: 550,
+            groupable: true,
             columns: [
                 { field: "id", title: "Id", width: "120px" },
                 { field: "name", title: "Name", width: "120px" },
-                { field: "category", title: "Category", width: "120px" }
+                {
+                    field: "category",
+                    title: "Category",
+                    width: "120px",
+                    groupable: {
+                        sort: {
+                            compare: function(a, b) {
+                                if (a.items.length === b.items.length) {
+                                    return 0;
+                                } else if (a.items.length > b.items.length) {
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            }
+                        }
+                    }
+                }
             ]
         });
     </script>
@@ -1732,27 +1742,32 @@ The supported values are:
         $("#grid").kendoGrid({
             dataSource: {
                 data: [
-                    { id: 6, name: "Tea", category: "Beverages" },
-                    { id: 7, name: "Coffee", category: "Beverages" },
                     { id: 1, name: "Salmon", category: "Seafood" },
                     { id: 3, name: "Ice cream", category: "Desserts" },
                     { id: 2, name: "Mackerel", category: "Seafood" },
                     { id: 4, name: "Cake", category: "Desserts" },
-                    { id: 5, name: "Lemonade", category: "Beverages" }
+                    { id: 5, name: "Lemonade", category: "Beverages" },
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
                 ],
                 pageSize: 10
             },
             pageable: true,
-            groupable: {
-                sort: {
-                    dir: "desc"
-                }
-            },
             height: 550,
+            groupable: true,
             columns: [
                 { field: "id", title: "Id", width: "120px" },
                 { field: "name", title: "Name", width: "120px" },
-                { field: "category", title: "Category", width: "120px" }
+                {
+                    field: "category",
+                    title: "Category",
+                    width: "120px",
+                    groupable: {
+                        sort: {
+                            dir: "desc"
+                        }
+                    }
+                }
             ]
         });
     </script>
@@ -2090,8 +2105,9 @@ Also accepts the device identifiers that are [available in Bootstrap 4](https://
     $("#grid").kendoGrid({
       columns: [
           { field: "id", width: 250, media: "(min-width: 576px)" }, // column will become hidden if the media query is evaluated to false
-          { field: "name", width: 250 }, // column will always be visible
-          { field: "age", width: 250, media: "sm" } // use a Bootstrap media (equivalent to `"(min-width: 576px)"`)
+          { field: "age", width: 250, media: "sm" }, // use a Bootstrap media (equivalent to `"(min-width: 576px)"`)
+          { field: "city", width: 250, media: "(max-width: 576px) and (min-width: 300px)" }, // column will be visible when the width of the screen is less than 576px and more than 300px
+          { field: "name", width: 250 } // column will always be visible
       ],
       dataSource: [
           { id: 1, name: "Jane Doe", age: 31, city: "Boston" },
@@ -5389,9 +5405,9 @@ When enabled the group footer rows will remain visible when the corresponding gr
 
 Sets the sort configuration when grouping.
 
-#### Example - set sort settings
+#### Example - use a custom function to compare the groups
 
-   <div id="grid"></div>
+    <div id="grid"></div>
 
     <script>
         $("#grid").kendoGrid({
@@ -5429,7 +5445,7 @@ Sets the sort configuration when grouping.
                 { field: "category", title: "Category", width: "120px" }
             ]
         });
-    </script>>
+    </script>
 
 ### groupable.sort.compare `Function`
 
@@ -5454,29 +5470,24 @@ A JavaScript function which is used to compare the groups (refer to [`sortable`]
                 pageSize: 10
             },
             pageable: true,
-            height: 550,
-            groupable: true,
-            columns: [
-                { field: "id", title: "Id", width: "120px" },
-                { field: "name", title: "Name", width: "120px" },
-                {
-                    field: "category",
-                    title: "Category",
-                    width: "120px",
-                    groupable: {
-                        sort: {
-                            compare: function(a, b) {
-                                if (a.items.length === b.items.length) {
-                                    return 0;
-                                } else if (a.items.length > b.items.length) {
-                                    return 1;
-                                } else {
-                                    return -1;
-                                }
-                            }
+            groupable: {
+                sort: {
+                    compare: function(a, b) {
+                        if (a.items.length === b.items.length) {
+                            return 0;
+                        } else if (a.items.length > b.items.length) {
+                            return 1;
+                        } else {
+                            return -1;
                         }
                     }
                 }
+            },
+            height: 550,
+            columns: [
+                { field: "id", title: "Id", width: "120px" },
+                { field: "name", title: "Name", width: "120px" },
+                { field: "category", title: "Category", width: "120px" }
             ]
         });
     </script>
@@ -5498,32 +5509,27 @@ The supported values are:
         $("#grid").kendoGrid({
             dataSource: {
                 data: [
+                    { id: 6, name: "Tea", category: "Beverages" },
+                    { id: 7, name: "Coffee", category: "Beverages" },
                     { id: 1, name: "Salmon", category: "Seafood" },
                     { id: 3, name: "Ice cream", category: "Desserts" },
                     { id: 2, name: "Mackerel", category: "Seafood" },
                     { id: 4, name: "Cake", category: "Desserts" },
-                    { id: 5, name: "Lemonade", category: "Beverages" },
-                    { id: 6, name: "Tea", category: "Beverages" },
-                    { id: 7, name: "Coffee", category: "Beverages" },
+                    { id: 5, name: "Lemonade", category: "Beverages" }
                 ],
                 pageSize: 10
             },
             pageable: true,
+            groupable: {
+                sort: {
+                    dir: "desc"
+                }
+            },
             height: 550,
-            groupable: true,
             columns: [
                 { field: "id", title: "Id", width: "120px" },
                 { field: "name", title: "Name", width: "120px" },
-                {
-                    field: "category",
-                    title: "Category",
-                    width: "120px",
-                    groupable: {
-                        sort: {
-                            dir: "desc"
-                        }
-                    }
-                }
+                { field: "category", title: "Category", width: "120px" }
             ]
         });
     </script>

@@ -480,7 +480,7 @@ test("sort using ascending descriptor", function () {
 });
 
 test("sorting nested objects", function() {
-    var  data = [{ foo: { age: 1 } }, { foo : { age: 2 } }]
+    var  data = [{ foo: { age: 1 } }, { foo : { age: 2 } }];
 
     var result = new Query(data).sort({ field: "foo.age", dir: "desc" }).toArray();
 
@@ -1402,7 +1402,7 @@ test("sort.dir is taken into account when custom sort.compare is used when group
     equal(result[1].items[0].id, 2)
 });
 
-test("sort.compare is used when processing grouping", function() {
+test("group compare is used when processing grouping", function() {
     var data = [
         { id: 1, text: "item1", group: "group1" },
         { id: 2, text: "item2", group: "group2" },
@@ -1426,6 +1426,223 @@ test("sort.compare is used when processing grouping", function() {
 
     equal(result[1].items.length, 1);
     equal(result[1].items[0].id, 2)
+});
+
+test("grouping with custom compare function does not sort the items on the first page", function() {
+    var data = [
+         { id: 1,  text: "item1",  group: "group1" },
+
+         { id: 2,  text: "item2",  group: "group2" },
+         { id: 23, text: "item23", group: "group2" },
+         { id: 21, text: "item21", group: "group2" },
+         { id: 22, text: "item22", group: "group2" },
+
+         { id: 30, text: "item3",  group: "group1" },
+         { id: 4,  text: "item4",  group: "group1" },
+
+         { id: 60, text: "item6",  group: "group3" },
+         { id: 5,  text: "item5",  group: "group3" },
+         { id: 90, text: "item9",  group: "group3" },
+         { id: 7,  text: "item7",  group: "group3" },
+         { id: 8,  text: "item8",  group: "group3" }
+    ];
+
+    var result = Query.process(data, {
+        group: {
+            field: "group",
+            dir: "desc",
+            compare: compareByTotal
+        },
+        skip: 0,
+        take: 6
+    }).data;
+
+    deepEqual(result, [{
+        "field": "group",
+        "value": "group3",
+        "items": [
+            { "id": 60, "text": "item6", "group": "group3" },
+            { "id": 5,  "text": "item5", "group": "group3" },
+            { "id": 90, "text": "item9", "group": "group3" },
+            { "id": 7,  "text": "item7", "group": "group3" },
+            { "id": 8,  "text": "item8", "group": "group3" },
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }, {
+        "field": "group",
+        "value": "group2",
+        "items": [
+            { "id": 2, "text": "item2", "group": "group2" }
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }]);
+});
+
+test("grouping with a custom compare function does not sort the items on the second page", function() {
+    var data = [
+         { id: 1,  text: "item1",  group: "group1" },
+
+         { id: 2,  text: "item2",  group: "group2" },
+         { id: 23, text: "item23", group: "group2" },
+         { id: 21, text: "item21", group: "group2" },
+         { id: 22, text: "item22", group: "group2" },
+
+         { id: 30, text: "item3",  group: "group1" },
+         { id: 4,  text: "item4",  group: "group1" },
+
+         { id: 60, text: "item6",  group: "group3" },
+         { id: 5,  text: "item5",  group: "group3" },
+         { id: 90, text: "item9",  group: "group3" },
+         { id: 7,  text: "item7",  group: "group3" },
+         { id: 8,  text: "item8",  group: "group3" }
+    ];
+
+    var result = Query.process(data, {
+        group: {
+            field: "group",
+            dir: "desc",
+            compare: compareByTotal
+        },
+        skip: 6,
+        take: 100
+    }).data;
+
+    deepEqual(result, [{
+        "field": "group",
+        "value": "group2",
+        "items": [
+            { "id": 23, "text": "item23", "group": "group2" },
+            { "id": 21, "text": "item21", "group": "group2" },
+            { "id": 22, "text": "item22", "group": "group2" }
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }, {
+        "field": "group",
+        "value": "group1",
+        "items": [
+            { "id": 1,  "text": "item1", "group": "group1" },
+            { "id": 30, "text": "item3", "group": "group1" },
+            { "id": 4,  "text": "item4", "group": "group1" }
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }]);
+});
+
+test("grouping with a custom compare function applies sorting when sort descriptor is defined on the first page", function() {
+    var data = [
+         { id: 1,  text: "item1",  group: "group1" },
+
+         { id: 23, text: "item23", group: "group2" },
+         { id: 2,  text: "item2",  group: "group2" },
+         { id: 21, text: "item21", group: "group2" },
+         { id: 22, text: "item22", group: "group2" },
+
+         { id: 30, text: "item3",  group: "group1" },
+         { id: 4,  text: "item4",  group: "group1" },
+
+         { id: 60, text: "item6",  group: "group3" },
+         { id: 5,  text: "item5",  group: "group3" },
+         { id: 90, text: "item9",  group: "group3" },
+         { id: 7,  text: "item7",  group: "group3" },
+         { id: 8,  text: "item8",  group: "group3" }
+    ];
+
+    var result = Query.process(data, {
+        group: {
+            field: "group",
+            dir: "desc",
+            compare: compareByTotal
+        },
+        sort: {
+            field: "id",
+            dir: "asc"
+        },
+        skip: 0,
+        take: 7
+    }).data;
+
+    deepEqual(result, [{
+        "field": "group",
+        "value": "group3",
+        "items": [
+            { "id": 5,  "text": "item5", "group": "group3" },
+            { "id": 7,  "text": "item7", "group": "group3" },
+            { "id": 8,  "text": "item8", "group": "group3" },
+            { "id": 60, "text": "item6", "group": "group3" },
+            { "id": 90, "text": "item9", "group": "group3" },
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }, {
+        "field": "group",
+        "value": "group2",
+        "items": [
+            { "id": 2,  "text": "item2",  "group": "group2" },
+            { "id": 21, "text": "item21", "group": "group2" }
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }]);
+});
+
+test("grouping with a custom compare function applies sorting when sort descriptor is defined on the second page", function() {
+    var data = [
+         { id: 1,  text: "item1",  group: "group1" },
+
+         { id: 2,  text: "item2",  group: "group2" },
+         { id: 23, text: "item23", group: "group2" },
+         { id: 21, text: "item21", group: "group2" },
+         { id: 22, text: "item22", group: "group2" },
+
+         { id: 30, text: "item3",  group: "group1" },
+         { id: 4,  text: "item4",  group: "group1" },
+
+         { id: 60, text: "item6",  group: "group3" },
+         { id: 5,  text: "item5",  group: "group3" },
+         { id: 90, text: "item9",  group: "group3" },
+         { id: 7,  text: "item7",  group: "group3" },
+         { id: 8,  text: "item8",  group: "group3" }
+    ];
+
+    var result = Query.process(data, {
+        group: {
+            field: "group",
+            dir: "desc",
+            compare: compareByTotal
+        },
+        sort: {
+            field: "id",
+            dir: "asc"
+        },
+        skip: 6,
+        take: 100
+    }).data;
+
+    deepEqual(result, [{
+        "field": "group",
+        "value": "group2",
+        "items": [
+            { "id": 21, "text": "item21", "group": "group2" },
+            { "id": 22, "text": "item22", "group": "group2" },
+            { "id": 23, "text": "item23", "group": "group2" }
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }, {
+        "field": "group",
+        "value": "group1",
+        "items": [
+            { "id": 1,  "text": "item1", "group": "group1" },
+            { "id": 4,  "text": "item4", "group": "group1" },
+            { "id": 30, "text": "item3", "group": "group1" }
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }]);
 });
 
 test("groupby groups data by date", function() {

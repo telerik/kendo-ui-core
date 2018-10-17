@@ -18,7 +18,44 @@ You can apply any of the following possible approaches to avoid table overflowin
 
 * Enable the scrolling functionality which, by default, is disabled when the Kendo UI Grid MVC wrapper is in use.
 * Set a large-enough width or a min-width style to the Grid wrapper&mdash;the `<div class="k-widget k-grid">` element.
-* (Use this approach only if the previous two are unacceptable.) [Float](https://developer.mozilla.org/en-US/docs/Web/CSS/float) the Grid wrapper and [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear) the float right after the widget. Floated elements expand and shrink automatically to enclose their content when needed. 
+* (Use this approach only if the previous two are unacceptable.) [Float](https://developer.mozilla.org/en-US/docs/Web/CSS/float) the Grid wrapper and [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear) the float right after the widget. Floated elements expand and shrink automatically to enclose their content when needed.
+
+## Frequently Asked Questions
+
+### How can I apply a minimum width to the Grid?
+
+**Solutions:**
+
+1. When the scrolling is disabled, use this CSS:
+
+        #GridID
+        {
+            min-width: 800px;
+        }
+
+1. When the scrolling is enabled, and nested tables (hierarchy) ARE NOT USED, use this CSS:
+
+        #GridID .k-grid-header-wrap > table, /* header table */
+        #GridID .k-grid-content table, /* data table, no virtual scrolling */
+        #GridID .k-virtual-scrollable-wrap table /* data table, with virtual scrolling */
+        {
+            min-width: 800px;
+        }
+
+1. When the scrolling is enabled, and nested tables (hierarchy) ARE USED, use this CSS:
+
+        #GridID .k-grid-header-wrap > table, /* header table */
+        #GridID .k-grid-content table, /* data table, no virtual scrolling */
+        #GridID .k-virtual-scrollable-wrap table /* data table, with virtual scrolling */
+        {
+            min-width: 800px;
+        }
+        #GridID .k-grid-content table table, /* data table, no virtual scrolling */
+        #GridID .k-virtual-scrollable-wrap table table /* data table, with virtual scrolling */
+        {
+            min-width: initial;
+        }
+
 
 ## See Also
 

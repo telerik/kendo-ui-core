@@ -734,6 +734,7 @@ var __meta__ = { // jshint ignore:line
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
+            that.popup.position();
             that._toggleCloseVisibility();
         },
 
@@ -1356,7 +1357,6 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that.popup.position();
             that.persistTagList = false;
             return selectIndices(indices);
         },
