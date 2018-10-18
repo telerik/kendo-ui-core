@@ -2,6 +2,7 @@
 
 var monthsAbbr = kendo.culture().calendar.months.namesAbbr;
 var keys = kendo.keys;
+var toDateObject = kendo.calendar.toDateObject;
 var div, calendar;
 
 module("kendo.ui.Calendar navigation", {
@@ -879,7 +880,7 @@ test("focus other month date does not navigate to other month", 0, function() {
 test("move with keyboard when next selection does not exists on current view navigates", 1, function() {
     var event = { keyCode: keys.LEFT, preventDefault: $.noop },
         cell = calendar.element.find("tbody").find("td.k-other-month").eq(0),
-        date = calendar._toDateObject(cell.find("a"));
+        date = toDateObject(cell.find("a"));
     calendar.bind("navigate", function(e) {
         ok(true);
     });
@@ -891,11 +892,11 @@ test("move with keyboard when next selection does not exists on current view nav
 test("move with keyboard to next view and focses the date in the view", 1, function() {
     var event = { keyCode: keys.LEFT, preventDefault: $.noop },
         cell = calendar.element.find("tbody").find("td.k-other-month").eq(0),
-        date = calendar._toDateObject(cell.find("a"));
+        date = toDateObject(cell.find("a"));
 
     calendar._current = date;
     calendar._move(event);
-    var focusedDate = calendar._toDateObject(div.find("tbody").find("td.k-state-focused").find("a"));
+    var focusedDate = toDateObject(div.find("tbody").find("td.k-state-focused").find("a"));
     equal(focusedDate.getDate() + 1, date.getDate());
 });
 

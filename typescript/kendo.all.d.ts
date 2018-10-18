@@ -5297,6 +5297,88 @@ declare namespace kendo.ui {
         item?: JQuery;
     }
 
+    class MultiViewCalendar extends kendo.ui.Widget {
+
+        static fn: MultiViewCalendar;
+
+        options: MultiViewCalendarOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): MultiViewCalendar;
+
+        constructor(element: Element, options?: MultiViewCalendarOptions);
+
+
+        current(): Date;
+        destroy(): void;
+        max(): Date;
+        max(value: Date): void;
+        max(value: string): void;
+        min(): Date;
+        min(value: Date): void;
+        min(value: string): void;
+        navigate(value: Date, view: string): void;
+        navigateDown(value: Date): void;
+        navigateToFuture(): void;
+        navigateToPast(): void;
+        navigateUp(): void;
+        selectDates(): void;
+        selectDates(): void;
+        selectRange(): void;
+        selectRange(): void;
+        value(): Date;
+        value(value: Date): void;
+        value(value: string): void;
+        view(): any;
+
+    }
+
+    interface MultiViewCalendarMessages {
+        weekColumnHeader?: string;
+    }
+
+    interface MultiViewCalendarMonth {
+        content?: string;
+        weekNumber?: string;
+        empty?: string;
+    }
+
+    interface MultiViewCalendarRange {
+        start?: Date;
+        end?: Date;
+    }
+
+    interface MultiViewCalendarOptions {
+        name?: string;
+        culture?: string;
+        dates?: any;
+        depth?: string;
+        disableDates?: any|Function;
+        footer?: string|Function;
+        format?: string;
+        max?: Date;
+        messages?: MultiViewCalendarMessages;
+        min?: Date;
+        month?: MultiViewCalendarMonth;
+        numberOfViews?: number;
+        range?: MultiViewCalendarRange;
+        selectable?: string;
+        selectDates?: any;
+        weekNumber?: boolean;
+        start?: string;
+        value?: Date;
+        change?(e: MultiViewCalendarEvent): void;
+        navigate?(e: MultiViewCalendarEvent): void;
+    }
+
+    interface MultiViewCalendarEvent {
+        sender: MultiViewCalendar;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
 
     class Notification extends kendo.ui.Widget {
 

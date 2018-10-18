@@ -112,6 +112,8 @@ navigation:
      "html-helpers/navigation":
         title: "Navigation"
         position: 9
+     "html-helpers/navigation/radiobutton":
+        title: "RadioButton"
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         position: 10
@@ -229,6 +231,8 @@ navigation:
         title: "ProgressBar"
      "*qrcode":
         title: "QRCode"
+     "*/radiobutton":
+        title: "RadioButton"
      "*radialgauge":
         title: "RadialGauge"
      "*rangeslider":

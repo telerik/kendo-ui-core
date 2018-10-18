@@ -21,6 +21,7 @@ var __meta__ = { // jshint ignore:line
         SELECTABLE = "k-selectable",
         CHANGE = "change",
         NS = ".kendoSelectable",
+        UNSELECT = "unselect",
         UNSELECTING = "k-state-unselecting",
         INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up",
         msie = kendo.support.browser.msie,
@@ -75,7 +76,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        events: [CHANGE],
+        events: [CHANGE, UNSELECT],
 
         options: {
             name: "Selectable",
@@ -305,6 +306,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         _unselect: function(element) {
+            if (this.trigger(UNSELECT, { element: element})) {
+                return;
+            }
+
             element.removeClass(SELECTED);
 
             if (this.options.aria) {

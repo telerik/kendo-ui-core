@@ -1,0 +1,201 @@
+// Calendar
+.k-calendar {
+    padding: @calendar-padding-y @calendar-padding-x;
+    width: (@calendar-cell-size * 7);
+    border-width: @calendar-border-width;
+    border-style: solid;
+    line-height: @calendar-line-height;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+
+
+    // Common
+    .k-link {
+        color: inherit;
+        text-decoration: none;
+        outline: 0;
+    }
+    .k-action-link {
+        text-decoration: underline;
+    }
+    .k-state-focused {
+        box-shadow: none;
+    }
+
+    table {
+        margin: 0;
+        padding: 0;
+        border-spacing: 0;
+        border-width: 0;
+        outline: 0;
+        table-layout: fixed;
+        float: left;
+    }
+    td,
+    th {
+        border-width: 0;
+        padding: 0;
+        text-align: center;
+        border-style: solid;
+        border-color: inherit;
+        color: inherit;
+        font-weight: normal;
+    }
+    th {
+        font-weight: normal;
+        cursor: default;
+    }
+    td {
+        cursor: pointer;
+    }
+    .k-alt {
+        cursor: default;
+    }
+
+
+    // Header
+    .k-header {
+        padding: @calendar-header-padding-y @calendar-header-padding-x;
+        border-bottom-width: @calendar-header-border-width;
+        border-bottom-style: solid;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+
+        .k-link {
+            padding: @calendar-header-button-padding-y @calendar-header-button-padding-x;
+            border-width: @calendar-header-button-border-width;
+            border-style: solid;
+            border-radius: @calendar-header-button-border-radius;
+            display: inline-block;
+        }
+    }
+
+    .k-nav-prev,
+    .k-nav-next {
+        width: (@calendar-line-height * 1em);
+        height: (@calendar-line-height * 1em);
+        box-sizing: content-box;
+        position: absolute;
+        top: @calendar-header-padding-y;
+
+        .k-icon { vertical-align: text-top; }
+    }
+    .k-nav-prev { left: @calendar-header-padding-x; }
+    .k-nav-next { right: @calendar-header-padding-x; }
+
+    .k-nav-fast {
+        margin: auto;
+        width: 75%;
+        box-sizing: border-box;
+    }
+
+
+    // Footer
+    .k-footer {
+        text-align: center;
+        position: relative;
+        clear: both;
+    }
+    .k-nav-today {
+        padding: .5em;
+        border-width: 0;
+        border-radius: 0;
+        display: block;
+    }
+    .k-nav-today:hover {
+        text-decoration: underline;
+    }
+
+
+    // Content
+    .k-content {
+        width: 100%;
+        height: (@calendar-cell-size * 7);
+        background-color: transparent;
+
+        th {
+            padding: @calendar-header-cell-padding-y @calendar-header-cell-padding-x;
+            border-bottom-width: @calendar-header-cell-border-width;
+            box-sizing: border-box;
+        }
+        td {
+            border-radius: @calendar-cell-border-radius;
+        }
+        td.k-alt {
+            width: @calendar-cell-size;
+            border-radius: 0;
+        }
+        .k-link {
+            padding: @calendar-cell-padding-y @calendar-cell-padding-x;
+            box-sizing: border-box;
+            border-radius: @calendar-cell-border-radius;
+            line-height: @calendar-cell-line-height;
+            display: block;
+        }
+    }
+
+
+    // Month view
+    .k-month {
+        .k-link {
+            width: @calendar-cell-size;
+        }
+
+        th {
+            height: @calendar-header-cell-size;
+        }
+        tbody tr {
+            height: @calendar-cell-size;
+        }
+    }
+
+
+    // Year view
+    .k-year {
+        .k-link {
+            width: auto;
+            height: ( (7 / 3) * @calendar-cell-size);
+            line-height: 4.66667;
+        }
+    }
+
+
+    // Decade view
+    .k-decade {
+        .k-link {
+            width: auto;
+            height: ( (7 / 3) * @calendar-cell-size);
+            line-height: 4.66667;
+        }
+    }
+
+
+    // Century view
+    .k-century {
+        .k-link {
+            width: auto;
+            height: ( (7 / 3) * @calendar-cell-size);
+            text-align: left;
+            line-height: 2.33334;
+            white-space: normal;
+        }
+    }
+
+
+    // Animations
+    .k-animation-container .k-content {
+        height: 100%;
+
+    }
+
+}
+
+
+
+
+// Adjust for week
+.k-week-number {
+    width: (@calendar-cell-size * 8);
+}

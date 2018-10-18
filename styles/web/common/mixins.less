@@ -192,8 +192,17 @@
 }
 
 
-.fill(@text, @bg, @border) {
-    border-color: @border;
+.color(@text) when not (@text = null) {
     color: @text;
+}
+.background-color(@bg) when not (@bg = null) {
     background-color: @bg;
+}
+.border-color(@border) when not (@border = null) {
+    border-color: @border;
+}
+.fill(@text: null, @bg: null, @border: null) {
+    .border-color(@border);
+    .color(@text);
+    .background-color(@bg);
 }

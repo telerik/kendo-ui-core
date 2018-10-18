@@ -177,6 +177,7 @@ test("month view renders days", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
+        otherMonth: true,
         content: template.content,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10),
@@ -243,6 +244,7 @@ test("month view renderer honors firstDayOfWeek property", function() {
     div.html(calendar.views[0].content({
         date: today,
         disableDates: $.noop,
+        otherMonth: true,
         empty: template.empty,
         content: template.content,
         min: today,
@@ -262,6 +264,7 @@ test("month view honors firstVisibleDay", function() {
         date: today,
         empty: template.empty,
         content: template.content,
+        otherMonth: true,
         disableDates: $.noop,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
@@ -277,6 +280,7 @@ test("month view renders anchor in td with title", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
+        otherMonth: true,
         content: template.content,
         disableDates: $.noop,
         min: new Date(2000, 10, 10),
@@ -294,6 +298,7 @@ test("month view renders anchor in td with title depending on the options.cultur
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
+        otherMonth: true,
         content: template.content,
         culture: "bg-BG",
         disableDates: $.noop,
@@ -361,6 +366,7 @@ test("month view should render k-other-month style", function() {
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
+        otherMonth: true,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
         disableDates: $.noop,
@@ -377,6 +383,7 @@ test("month view should not render k-other-month to last day of month", function
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
+        otherMonth: true,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
         disableDates: $.noop,
@@ -397,6 +404,7 @@ test("month view do not apply k-other-month to the first day of the month", func
         date: today,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
+        otherMonth: true,
         empty: template.empty,
         disableDates: $.noop,
         content: template.content
@@ -432,6 +440,7 @@ test("month view renders k-weekend", function() {
         date: today,
         empty: template.empty,
         min: new Date(1900,0,1),
+        otherMonth: true,
         max: new Date(2900,0,1),
         disableDates: $.noop,
         content: template.content
@@ -519,6 +528,7 @@ test("year view renders meta view  4x3 cells", function() {
 
     div.html(calendar.views[1].content({
         date: today,
+        otherMonth: true,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
@@ -599,6 +609,7 @@ test("decade view renders meta view  4x3 cells", function() {
 
     div.html(calendar.views[2].content({
         date: today,
+        otherMonth: true,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
@@ -642,6 +653,7 @@ test("decade renders k-other-month to the first and last cell of the view", func
 
     div.html(calendar.views[2].content({
         date: today,
+        otherMonth: true,
         min: new Date(1900, 1, 1),
         max: new Date(2100, 1, 1)
     }));
@@ -689,6 +701,7 @@ test("century view renders meta view  4x3 cells", function() {
 
     div.html(calendar.views[3].content({
         date: today,
+        otherMonth: true,
         min: new Date(1800, 10, 10),
         max: new Date(2220, 10, 10)
     }));
@@ -743,6 +756,7 @@ test("century renders k-other-month to the first and last cell of the view", fun
 
     div.html(calendar.views[3].content({
         date: today,
+        otherMonth: true,
         min: new Date(1800, 10, 10),
         max: new Date(2220, 10, 10)
     }));
