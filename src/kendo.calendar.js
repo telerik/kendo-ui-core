@@ -149,7 +149,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (that._cell.hasClass(DISABLED)) {
                     var todayString = that._view.toDateString(getToday());
-                    that._cell = cellByDate(that.element, todayString);
+                    that._cell = that._cellByDate(todayString);
                 }
 
                 that._cell.addClass(FOCUSED);
@@ -392,7 +392,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (view === views[options.depth] && that._selectDates.length > 0) {
-                visualizeSelectedDatesInView(that);
+                that._visualizeSelectedDatesInView();
             }
 
             if(that.options.selectable === "single") {
@@ -432,7 +432,7 @@ var __meta__ = { // jshint ignore:line
                 }
             });
             that._selectDates = validSelectedDates.length > 0 ? validSelectedDates : (datesUnique.length === 0 ? datesUnique : that._selectDates);
-            visualizeSelectedDatesInView(that);
+            that._visualizeSelectedDatesInView();
         },
 
         value: function(value) {
@@ -486,6 +486,23 @@ var __meta__ = { // jshint ignore:line
             }
 
             return that._value;
+        },
+
+        _visualizeSelectedDatesInView: function() {
+            var that = this;
+             var selectedDates = {};
+            $.each(that._selectDates, function(index, value) {
+                selectedDates[kendo.calendar.views[0].toDateString(value)] = value;
+            });
+            that.selectable.clear();
+             var cells = that._table
+                .find(CELLSELECTOR)
+                .filter(function(index, element) {
+                    return selectedDates[$(element.firstChild).attr(kendo.attr(VALUE))];
+                });
+            if(cells.length > 0) {
+                that.selectable._selectElement(cells, true);
+            }
         },
 
         _isMultipleSelection: function() {
@@ -548,9 +565,9 @@ var __meta__ = { // jshint ignore:line
                 else {
                     that._cellsBySelector(CELLSELECTORVALID).each(function(index, element){
                         var value = toDateObject($(element).find("a"));
-                        deselect(that, value);
+                        that._deselect(value);
                     });
-                    addSelectedCellsToArray(that);
+                    that._addSelectedCellsToArray();
                 }
             }
             else if (eventArgs.event.shiftKey) {
@@ -561,7 +578,7 @@ var __meta__ = { // jshint ignore:line
             }
             else {
                 that._selectDates = [];
-                addSelectedCellsToArray(that);
+                that._addSelectedCellsToArray();
             }
              that.trigger(CHANGE);
         },
@@ -583,7 +600,7 @@ var __meta__ = { // jshint ignore:line
                     that._selectDates.push(date);
                 }
                 else {
-                    deselect(that, date);
+                    that._deselect(date);
                 }
         },
 
@@ -597,19 +614,37 @@ var __meta__ = { // jshint ignore:line
             if(that.selectable._lastActive || that._value) {
                 fromDate = that.selectable._lastActive? toDateObject(that.selectable._lastActive.find("a")): new Date(+that._value);
             } else {
-                that.selectable._lastActive = startDate? cellByDate(that.element, that._view.toDateString(startDate), CELLSELECTORVALID): that.selectable.value().first();
+                that.selectable._lastActive = startDate? that._cellByDate(that._view.toDateString(startDate), CELLSELECTORVALID): that.selectable.value().first();
             }
 
             that._selectDates = [];
             daysDifference = daysBetweenTwoDates(fromDate, toDate);
             addDaysToArray(that._selectDates, daysDifference, fromDate, that.options.disableDates);
 
-            visualizeSelectedDatesInView(that);
+            that._visualizeSelectedDatesInView();
         },
 
         _cellsBySelector: function(selector) {
             var that = this;
             return that._table.find(selector);
+        },
+
+        _addSelectedCellsToArray: function() {
+            var that = this;
+            that.selectable.value().each(function(index, item) {
+                var date = that._toDateObject($(item.firstChild));
+                if(!that.options.disableDates(date)) {
+                    that._selectDates.push(date);
+                }
+            });
+        },
+
+         _deselect: function(date) {
+            var that = this;
+             var currentDateIndex = that._selectDates.map(Number).indexOf(+date);
+            if(currentDateIndex != -1) {
+                that._selectDates.splice(currentDateIndex, 1);
+            }
         },
 
         _dateInView: function(date) {
@@ -776,7 +811,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.navigate(currentValue);
                 that._current = currentValue;
-                that.selectable._lastActive = that.selectable._lastActive || cellByDate(that.element, that._view.toDateString(currentValue), CELLSELECTORVALID);
+                that.selectable._lastActive = that.selectable._lastActive || that._cellByDate(that._view.toDateString(currentValue), CELLSELECTORVALID);
                 that.trigger(CHANGE);
                 return;
             }
@@ -784,7 +819,7 @@ var __meta__ = { // jshint ignore:line
             that._class(FOCUSED, currentValue);
             that._current = currentValue;
 
-            that._rangeSelection(cellByDate(that.element, that._view.toDateString(currentValue), CELLSELECTORVALID), currentValue);
+            that._rangeSelection(that._cellByDate(that._view.toDateString(currentValue), CELLSELECTORVALID), currentValue);
 
             that.trigger(CHANGE);
 
@@ -911,7 +946,7 @@ var __meta__ = { // jshint ignore:line
                 }).insertBefore(from);
 
                 if (transitionOrigin) {
-                    cell = cellByDate(that.element, that._view.toDateString(that._current));
+                    cell = that._cellByDate(that._view.toDateString(that._current));
                     position = cell.position();
                     position = (position.left + parseInt(cell.width() / 2, 10)) + "px" + " " + (position.top + parseInt(cell.height() / 2, 10) + "px");
                     to.css(transitionOrigin, position);
@@ -938,6 +973,13 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _cellByDate: function(value, selector) {
+            return this._table.find(selector ? selector : "td:not(." + OTHERMONTH + ")")
+            .filter(function() {
+                return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
+            });
+        },
+
         _class: function(className, date) {
             var that = this,
                 id = that._cellID,
@@ -956,7 +998,7 @@ var __meta__ = { // jshint ignore:line
                 disabledDate = that.options.disableDates(date);
             }
             that._cellsBySelector(that._isMultipleSelection() ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")").removeClass(className);
-            cell = cellByDate(that.element, value, that.options.selectable == "multiple" ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")")
+            cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")")
             .attr(ARIA_SELECTED, true);
 
             if (className === FOCUSED && !that._active && that.options.focusOnNav !== false || disabledDate) {
@@ -1834,75 +1876,6 @@ var __meta__ = { // jshint ignore:line
        return oldValue === newValue;
     }
 
-    function visualizeSelectedDatesInView(calendar) {
-        var that = calendar;
-        var selectedDates = {};
-        var cells;
-
-        $.each(that._selectDates, function(index, value) {
-            selectedDates[kendo.calendar.views[0].toDateString(value)] = value;
-        });
-        that.selectable.clear();
-
-        cells = that.element.find("table")
-            .find(CELLSELECTOR)
-            .filter(function(index, element) {
-                return selectedDates[$(element.firstChild).attr(kendo.attr(VALUE))];
-            });
-
-        if (cells.length > 0) {
-            that.selectable._selectElement(cells, true);
-        }
-    }
-
-    function nextNavigatable(options, view, currentValue, value) {
-        var disabled = true;
-        var min = options.min;
-        var max = options.max;
-        var isDisabled = options.disableDates;
-        var navigatableDate = new Date(currentValue.getTime());
-
-        view.setDate(navigatableDate, -value);
-
-        while (disabled) {
-            view.setDate(currentValue, value);
-
-            if (!isInRange(currentValue, min, max)) {
-                currentValue = navigatableDate;
-                break;
-            }
-            disabled = isDisabled(currentValue);
-        }
-        return currentValue;
-    }
-
-    function cellByDate (element, value, selector) {
-        return element.find("table").find(selector ? selector : "td:not(." + OTHERMONTH + ")")
-        .filter(function() {
-            return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
-        });
-    }
-
-    function addSelectedCellsToArray(calendar) {
-        var that = calendar;
-
-        that.selectable.value().each(function(index, item) {
-            var date = toDateObject($(item.firstChild));
-            if (!that.options.disableDates(date)) {
-                that._selectDates.push(date);
-            }
-        });
-    }
-
-    function deselect(calendar, date) {
-        var that = calendar;
-
-        var currentDateIndex = that._selectDates.map(Number).indexOf(+date);
-        if(currentDateIndex != -1) {
-            that._selectDates.splice(currentDateIndex, 1);
-        }
-    }
-
     function toDateObject(link) {
         var value = $(link).attr(kendo.attr(VALUE)).split("/");
         //Safari cannot create correctly date from "1/1/2090"
@@ -1920,14 +1893,7 @@ var __meta__ = { // jshint ignore:line
     calendar.normalize = normalize;
     calendar.viewsEnum = views;
     calendar.disabled = getDisabledExpr;
-    calendar.visualizeSelectedDatesInView = visualizeSelectedDatesInView;
-    calendar.nextNavigatable = nextNavigatable;
-    calendar.cellByDate = cellByDate;
-    calendar.addSelectedCellsToArray = addSelectedCellsToArray;
-    calendar.deselect = deselect;
     calendar.toDateObject = toDateObject;
-    calendar.daysBetweenTwoDates = daysBetweenTwoDates;
-    calendar.addDaysToArray = addDaysToArray;
     calendar.getToday = getToday;
     calendar.createDate = createDate;
 
