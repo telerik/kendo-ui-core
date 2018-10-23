@@ -164,6 +164,8 @@ navigation:
         title: "Menu"
      "helpers/multiselect":
         title: "MultiSelect"
+     "helpers/multiviewcalendar":
+        title: "MultiViewCalendar"
      "helpers/notification":
         title: "Notification"
      "helpers/numerictextbox":
