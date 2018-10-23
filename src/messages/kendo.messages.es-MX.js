@@ -196,7 +196,10 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "selectValue": "-Seleccionar valor -",
   "operator": "Operador",
   "value": "Valor",
-  "cancel": "Cancelar"
+  "cancel": "Cancelar",
+  "logic": "Lógica de filtros", 
+  "additionalOperator": "Operador adicional", 
+  "additionalValue": "Valor adicional"
 });
 }
 
