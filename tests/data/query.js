@@ -1402,6 +1402,61 @@ test("sort.dir is taken into account when custom sort.compare is used when group
     equal(result[1].items[0].id, 2)
 });
 
+test("sort.dir is taken into account when custom sort.compare is used with multiple groups", function() {
+    var data = [
+         { id: 1, text: "item1", group: "group1" },
+         { id: 2, text: "item2", group: "group2" },
+
+         { id: 3, text: "item3", group: "group3" },
+
+         { id: 21, text: "item21", group: "group2" },
+
+         { id: 12, text: "item12", group: "group1" },
+         { id: 11, text: "item11", group: "group1" },
+         { id: 13, text: "item13", group: "group1" },
+    ];
+
+    var result = Query.process(data, {
+        group: {
+            field: "group",
+            dir: "desc",
+            compare: compareByTotal
+        },
+        skip: 0,
+        take: 100
+    }).data;
+
+    deepEqual(result, [{
+        "field": "group",
+        "value": "group1",
+        "items": [
+            { "id": 1, "text": "item1", "group": "group1" },
+            { "id": 12, "text": "item12", "group": "group1" },
+            { "id": 11, "text": "item11", "group": "group1" },
+            { "id": 13, "text": "item13", "group": "group1" },
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }, {
+        "field": "group",
+        "value": "group2",
+        "items": [
+            { "id": 2, "text": "item2", "group": "group2" },
+            { "id": 21, "text": "item21", "group": "group2" },
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }, {
+        "field": "group",
+        "value": "group3",
+        "items": [
+            { "id": 3, "text": "item3", "group": "group3" }
+        ],
+        "hasSubgroups": false,
+        "aggregates": {}
+    }]);
+});
+
 test("group compare is used when processing grouping", function() {
     var data = [
         { id: 1, text: "item1", group: "group1" },

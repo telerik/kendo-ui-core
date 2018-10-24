@@ -16,6 +16,8 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy,
         keys = kendo.keys,
         CLICK = "click",
+        MOUSEDOWN = kendo.support.mousedown,
+        MOUSEUP = kendo.support.mouseup,
         KBUTTON = "k-button",
         KBUTTONICON = "k-button-icon",
         KBUTTONICONTEXT = "k-button-icontext",
@@ -51,8 +53,8 @@ var __meta__ = { // jshint ignore:line
                 .on("blur" + NS, proxy(that._blur, that))
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("keyup" + NS, proxy(that._removeActive, that))
-                .on("mousedown" + NS, proxy(that._addActive, that))
-                .on("mouseup" + NS, proxy(that._removeActive, that));
+                .on(MOUSEDOWN + NS, proxy(that._addActive, that))
+                .on(MOUSEUP + NS, proxy(that._removeActive, that));
 
             kendo.notify(that);
         },
