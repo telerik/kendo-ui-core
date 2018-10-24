@@ -1404,8 +1404,8 @@ var __meta__ = { // jshint ignore:line
         return isArray(expressions) ? expressions : [expressions];
     }
 
-    function normalizeGroup(field, dir, compare) {
-        var descriptor = typeof field === STRING ? { field: field, dir: dir, compare: compare } : field,
+    function normalizeGroup(field, dir, compare, skipItemSorting) {
+        var descriptor = typeof field === STRING ? { field: field, dir: dir, compare: compare, skipItemSorting : skipItemSorting } : field,
         descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
         return map(descriptors, function(d) {
@@ -1413,7 +1413,8 @@ var __meta__ = { // jshint ignore:line
                 field: d.field,
                 dir: d.dir || "asc",
                 aggregates: d.aggregates,
-                compare: d.compare
+                compare: d.compare,
+                skipItemSorting: d.skipItemSorting
             };
         });
     }
@@ -1572,7 +1573,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             var field = descriptor.field,
-                sorted = this._sortForGrouping(field, descriptor.dir || "asc"),
+                sorted = descriptor.skipItemSorting ? this.data : this._sortForGrouping(field, descriptor.dir || "asc"),
                 accessor = kendo.accessor(field),
                 item,
                 groupValue = accessor.get(sorted[0], field),
@@ -1769,6 +1770,7 @@ var __meta__ = { // jshint ignore:line
             groupDescriptorsWithoutCompare = normalizeGroupWithoutCompare(group || []),
             normalizedSort = normalizeSort(options.sort || []),
             sort = customGroupSort ? normalizedSort : groupDescriptorsWithoutCompare.concat(normalizedSort),
+            groupDescriptorsWithoutSort,
             total,
             filterCallback = options.filterCallback,
             filter = options.filter,
@@ -1802,7 +1804,14 @@ var __meta__ = { // jshint ignore:line
 
             if (skip !== undefined && take !== undefined) {
                 query = new Query(flatGroups(query.toArray())).range(skip, take);
-                query = query.group(groupDescriptorsWithoutCompare, query.toArray());
+
+                groupDescriptorsWithoutSort = map(groupDescriptorsWithoutCompare, function(groupDescriptor) {
+                    return extend({}, groupDescriptor, {
+                        skipItemSorting: true
+                    });
+                });
+
+                query = query.group(groupDescriptorsWithoutSort, query.toArray());
             }
         } else {
             if (skip !== undefined && take !== undefined) {
