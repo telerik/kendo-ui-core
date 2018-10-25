@@ -1,8 +1,8 @@
 ---
 title: Disabled dates
-page_title:  Disabled dates| Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Disabled dates | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
-slug: disabled_dates_multiviewcalendar_aspnetmvc
+slug: disabled_dates_multiviewcalendar_htmlhelper_aspnetcore
 position: 6
 ---
 
@@ -22,13 +22,6 @@ When you set an array, list the days that need to be disabled by using the first
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .DisableDates(new[] {"we", "th" })
-        %>
-```
 ```tab-Razor
 
         @(Html.Kendo().MultiViewCalendar()
@@ -43,24 +36,6 @@ When you add a function, determine its return value as `true` for the date that 
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .DisableDates("handler")
-        %>
-
-        <script>
-            function handler(date) {
-                var disabled = [13,14,20,21];
-                if (date && disabled.indexOf(date.getDate()) > -1 ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        </script>
-```
 ```tab-Razor
 
         @(Html.Kendo().MultiViewCalendar()
@@ -84,5 +59,5 @@ When you add a function, determine its return value as `true` for the date that 
 
 Other articles on the Kendo UI MultiViewCalendar:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
+* [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)

@@ -3,7 +3,7 @@ title: Disabled dates MultiViewCalendar
 page_title: Disabled dates | Kendo UI MultiViewCalendar
 description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
 slug: disabled_dates_multiviewcalendar
-position: 2
+position: 6
 ---
 
 # Disabled dates

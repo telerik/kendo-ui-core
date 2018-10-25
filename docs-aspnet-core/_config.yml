@@ -175,8 +175,12 @@ navigation:
         title: "Button"
      "*buttongroup":
         title: "ButtonGroup"
-     "*calendar":
+     "html-helpers/scheduling/calendar":
         title: "Calendar"
+     "html-helpers/scheduling/multiviewcalendar":
+        title: "MultiViewCalendar"
+     "tag-helpers/scheduling/multiviewcalendar":
+        title: "MultiViewCalendar"
      "*colorpalette":
         title: "ColorPalette"
      "*colorpicker":

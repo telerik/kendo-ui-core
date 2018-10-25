@@ -3,7 +3,7 @@ title: Active View
 page_title: Active View | Kendo UI MultiViewCalendar
 description: "Define the first view that the Kendo UI MultiViewCalendar initially renders."
 slug: active_view_multiviewcalendar
-position: 5
+position: 2
 ---
 
 # Active View

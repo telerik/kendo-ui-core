@@ -1,8 +1,8 @@
 ---
 title: Multiple Views
-page_title:  Multiple Views | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Multiple Views | Telerik UI for ASP.NET Core Tag Helpers
 description: "Control the visible date ranges in the Kendo UI MultiViewCalendar and manage the number of its horizontally rendered views."
-slug: multiple_views_multiviewcalendar_aspnetmvc
+slug: multiple_views_multiviewcalendar_taghelper_aspnetcore
 position: 3
 ---
 
@@ -13,38 +13,26 @@ The Kendo UI MultiViewCalendar allows to define the number of views/months to be
 
 ###### Example
 
-```tab-ASPX
+```tab-tagHelper
 
-        <%: Html.Kendo().NumericTextBox()
-            .Name("numberOfViews")
-            .RestrictDecimals(true)
-            .Decimals(0)
-            .Min(2)
-            .Max(10)
-            .Value(2)
-            .Format("{0:n0}")
-        %>
+    <kendo-numerictextbox  name="numberOfViews" restrict-decimals="true" decimals="0" min="2" max="10" format="n0"/>
 
-        <%:
-            Html.Kendo().Button()
-            .Name("numberOfViewsBtn")
-            .Content("Apply Changes")
-            .Events(ev => ev.Click("click"))
-        %>
+    <kendo-button name="numberOfViewsBtn" on-click="click">
+        Apply Changes
+    </kendo-button>
 
-        <%:
-            Html.Kendo().MultiViewCalendar()
-                .Name("multiViewCalendar")
-        %>
+    <kendo-multiviewcalendar name="multiviewcalendar">
+    </kendo-multiviewcalendar>
 
-        <script>
-            function click() {
-                var numberOfViews = $("#numberOfViews").data().kendoNumericTextBox.value();
-                if (numberOfViews > 0) {
-                    $("#multiViewCalendar").data().kendoMultiViewCalendar.setOptions({ numberOfVies: numberOfViews });
-                } 
-            }
-       </script>
+    <script>
+        function click() {
+            var numberOfViews = $("#numberOfViews").data().kendoNumericTextBox.value();
+            if (numberOfViews > 0) {
+                $("#multiViewCalendar").data().kendoMultiViewCalendar.setOptions({ numberOfVies: numberOfViews });
+            } 
+        }
+    </script>
+
 ```
 ```tab-Razor
 
@@ -81,5 +69,7 @@ The Kendo UI MultiViewCalendar allows to define the number of views/months to be
 
 Other articles on the Kendo UI MultiViewCalendar:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

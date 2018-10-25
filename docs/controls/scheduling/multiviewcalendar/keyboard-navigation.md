@@ -3,7 +3,7 @@ title: Keyboard Navigation
 page_title: Keyboard Navigation| Kendo UI MultiViewCalendar
 description: "Use the Kendo UI MultiViewCalendar keyboard navigation."
 slug: keyboard_navigation_multiviewcalendar
-position: 7
+position: 8
 ---
 
 # Keyboard Navigation
