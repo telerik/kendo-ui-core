@@ -3,7 +3,7 @@ title: Week Number Column
 page_title: Week Number Column | Kendo UI MultiViewCalendar
 description: "Render a column displaying the number of the weeks within the current month view when working with the Kendo UI MultiViewCalendar."
 slug: week_column_multiviewcalendar
-position: 3
+position: 7
 ---
 
 # Week Number Column

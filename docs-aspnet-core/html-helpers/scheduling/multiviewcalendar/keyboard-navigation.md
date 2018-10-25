@@ -1,8 +1,8 @@
 ---
 title: Keyboard Navigation
-page_title:  Keyboard Navigation | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Keyboard Navigation | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Use the Kendo UI MultiViewCalendar keyboard navigation."
-slug: keyboard_navigation_multiviewcalendar_aspnetmvc
+slug:  keyboard_navigation_multiviewcalendar_htmlhelper_aspnetcore
 position: 8
 ---
 
@@ -30,13 +30,6 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .Selectable("multiple")
-        %>
-```
 ```tab-Razor
 
         @(Html.Kendo().MultiViewCalendar()
@@ -49,5 +42,5 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 Other articles on the Kendo UI MultiViewCalendar:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
+* [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)

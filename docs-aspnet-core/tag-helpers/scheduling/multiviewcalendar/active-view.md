@@ -1,8 +1,8 @@
 ---
 title: Active View
-page_title: Active View | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Active View | Telerik UI for ASP.NET Core Tag Helpers
 description: "Define the first view that the Kendo UI MultiViewCalendar initially renders."
-slug: active_view_multiviewcalendar_aspnetmvc
+slug: active_view_multiviewcalendar_taghelper_aspnetcore
 position: 2
 ---
 
@@ -23,13 +23,11 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ###### Example
 
-```tab-ASPX
+```tab-tagHelper
 
-        <%: Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .Start(CalendarView.Year)
-            .Depth(CalendarView.Year)
-        %>
+    <kendo-multiviewcalendar name="multiviewcalendar" start="CalendarView.Year" depth="CalendarView.Year">
+    </kendo-multiviewcalendar>
+
 ```
 ```tab-Razor
 
@@ -44,5 +42,7 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 Other articles on the Kendo UI MultiViewCalendar:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

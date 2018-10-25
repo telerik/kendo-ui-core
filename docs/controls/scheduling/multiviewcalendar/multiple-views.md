@@ -3,7 +3,7 @@ title: Multiple Views
 page_title: Multiple Views| Kendo UI MultiViewCalendar
 description: "Control the visible date ranges in the Kendo UI MultiViewCalendar and manage the number of its horizontally rendered views."
 slug: multiple_views_multiviewcalendar
-position: 6
+position: 3
 ---
 
 # Multiple Views

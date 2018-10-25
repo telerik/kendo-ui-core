@@ -3,14 +3,14 @@ title: Day Template
 page_title: Week Number Column | Kendo UI MultiViewCalendar
 description: "Customize the content of each cell by using cell templates when working with the Kendo UI MultiViewCalendar."
 slug: day_template_multiviewcalendar
-position: 8
+position: 5
 ---
 
 # Day Template
 
-The Calendar enables you to customize the rendered day for the `month` view.
+The MultiViewCalendar enables you to customize the rendered day for the `month` view.
 
-The following example demonstrates how to create a Calendar by using a custom template.
+The following example demonstrates how to create a MultiViewCalendar by using a custom template.
 
 ###### Example
 
