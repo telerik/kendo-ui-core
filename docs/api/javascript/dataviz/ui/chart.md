@@ -26866,6 +26866,24 @@ The position of the x axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+#### Example - set the x axis notes icon background
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            position: "bottom",
+            data: [{ value: 1.3 }]
+          }
+        }
+      });
+    </script>
+
 ### xAxis.notes.icon `Object`
 
 The icon of the notes.
@@ -26878,19 +26896,20 @@ The background color of the notes icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          icon: {
-            background: "red"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            icon: {
+              background: "red"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.icon.border `Object`
@@ -26901,22 +26920,23 @@ The border of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          icon: {
-            border: {
-              width: 2,
-              color: "red"
-            }
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            icon: {
+              border: {
+                width: 2,
+                color: "red"
+              }
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.icon.border.color `String`
@@ -26927,22 +26947,22 @@ The border color of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          icon: {
-            border: {
-              width: 2,
-              color: "red"
-            }
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            icon: {
+              border: {
+                color: "red"
+              }
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.icon.border.width `Number`
@@ -26953,22 +26973,22 @@ The border width of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          icon: {
-            border: {
-              width: 2,
-              color: "red"
-            }
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            icon: {
+              border: {
+                width: 2
+              }
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.icon.size `Number`
@@ -26979,19 +26999,20 @@ The size of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          icon: {
-            size: 30
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            icon: {
+              size: 15
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.icon.type `String` *(default: "circle")*
@@ -27008,19 +27029,20 @@ The supported values are:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          icon: {
-            shape: "triangle"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            icon: {
+              type: "triangle"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.icon.visible `Boolean` *(default: "true")*
@@ -27031,19 +27053,20 @@ The icon visibility.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          icon: {
-            visible: false
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            icon: {
+              visible: false
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label `Object`
@@ -27058,19 +27081,20 @@ The background color of the label. Accepts a valid CSS color string, including h
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            background: "red"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              background: "red"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.border `Object`
@@ -27081,23 +27105,25 @@ The border of the label.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            border: {
-              color: "green",
-              dashType: "dashDot",
-              width: 1
-            }
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              border: {
+                color: "green",
+                dashType: "dashDot",
+                width: 1
+              }
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.border.color `String` *(default: "black")*
@@ -27108,21 +27134,23 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            border: {
-              color: "green"
-            }
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              border: {
+                color: "green"
+              }
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.border.dashType `String` *(default: "solid")*
@@ -27143,22 +27171,23 @@ The following dash types are supported:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            border: {
-              dashType: "dashDot",
-              width: 1
-            }
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              border: {
+                dashType: "dashDot"
+              }
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.border.width `Number` *(default: 0)*
@@ -27169,21 +27198,23 @@ The width of the border in pixels. By default the border width is set to zero wh
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            border: {
-              width: 1
-            }
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              border: {
+                width: 2
+              }
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.color `String`
@@ -27194,19 +27225,21 @@ The text color of the label. Accepts a valid CSS color string, including hex and
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            color: "#aa00bb"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              color: "#aa00bb"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
@@ -27217,19 +27250,21 @@ The font style of the label.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            font: "20px sans-serif"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              font: "20px sans-serif"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.template `String|Function`
@@ -27246,19 +27281,20 @@ The fields which can be used in the template are:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            template: "Year: #: value #"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              template: "Avg: #: value #"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.visible `Boolean` *(default: true)*
@@ -27269,19 +27305,21 @@ If set to `true` the chart will display the x axis notes label. By default the x
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            visible: false
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              visible: false
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.rotation `Number` *(default: 0)*
@@ -27292,19 +27330,21 @@ The rotation angle of the label. By default the label are not rotated.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            rotation: 90
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "label",
+              rotation: 90
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.format `String` *(default: "{0}")*
@@ -27315,19 +27355,21 @@ The format used to display the notes label. Uses [kendo.format](/api/javascript/
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          label: {
-            format: "value slot: {0}"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "avg",
+              format: "val: {0}"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.label.position `String` *(default: "inside")*
@@ -27336,6 +27378,27 @@ The position of the labels.
 
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
+
+#### Example - set the x axis notes label format
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            label: {
+              text: "avg",
+              position: "outside"
+            },
+            data: [{ value: 1.3 }]
+          }
+        }
+      });
+    </script>
 
 ### xAxis.notes.line `Object`
 
@@ -27355,6 +27418,27 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+#### Example - set the x axis notes line width
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            line: {
+              dashType: "dot",
+              length: 30
+            },
+            data: [{ value: 1.3 }]
+          }
+        }
+      });
+    </script>
+
 ### xAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -27363,19 +27447,20 @@ The line width of the notes.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          line: {
-            width: 4
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            line: {
+              width: 3
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.line.color `String`
@@ -27386,19 +27471,20 @@ The line color of the notes.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          line: {
-            color: "#aa00bb"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            line: {
+              color: "teal"
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.line.length `Number`
@@ -27409,19 +27495,20 @@ The length of the connecting lines in pixels.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          line: {
-            length: 20
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            line: {
+              length: 30
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data `Array`
@@ -27432,6 +27519,25 @@ The items of the notes.
 
 The value of the note.
 
+#### Example - set the x axis notes color width
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3
+            }]
+          }
+        }
+      });
+    </script>
+
 ### xAxis.notes.data.position `String`
 
 The position of the x axis note.
@@ -27440,6 +27546,26 @@ The position of the x axis note.
 * "bottom" - The note is positioned on the bottom.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
+
+#### Example - set the x axis notes color width
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              position: "bottom"
+            }]
+          }
+        }
+      });
+    </script>
 
 ### xAxis.notes.data.icon `Object`
 
@@ -27453,21 +27579,22 @@ The background color of the note icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              background: "red"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                background: "red"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.icon.border `Object`
@@ -27478,24 +27605,25 @@ The border of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              border: {
-                width: 2,
-                color: "red"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                border: {
+                  width: 2,
+                  color: "red"
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.icon.border.color `String`
@@ -27506,24 +27634,24 @@ The border color of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              border: {
-                width: 2,
-                color: "red"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                border: {
+                  color: "red"
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.icon.border.width `Number`
@@ -27534,24 +27662,24 @@ The border width of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              border: {
-                width: 2,
-                color: "red"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                border: {
+                  width: 2
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.icon.size `Number`
@@ -27562,21 +27690,22 @@ The size of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              size: 30
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                size: 30
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.icon.type `String` *(default: "circle")*
@@ -27593,21 +27722,22 @@ The supported values are:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              shape: "triangle"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                type: "triangle"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.icon.visible `Boolean` *(default: "true")*
@@ -27618,21 +27748,22 @@ The icon visibility.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              visible: false
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                visible: false
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label `Object`
@@ -27647,21 +27778,23 @@ The background color of the label. Accepts a valid CSS color string, including h
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notesdata {
-          data: [{
-            value: 1,
-            label: {
-              background: "red"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                background: "orange"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.border `Object`
@@ -27672,25 +27805,27 @@ The border of the label.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
-                color: "green",
-                dashType: "dashDot",
-                width: 1
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                border: {
+                  color: "green",
+                  dashType: "dashDot",
+                  width: 1
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.border.color `String` *(default: "black")*
@@ -27701,23 +27836,25 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
-                color: "green"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                border: {
+                  color: "green"
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.border.dashType `String` *(default: "solid")*
@@ -27738,24 +27875,25 @@ The following dash types are supported:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
-                dashType: "dashDot",
-                width: 1
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                border: {
+                  dashType: "dashDot"
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.border.width `Number` *(default: 0)*
@@ -27766,23 +27904,25 @@ The width of the border in pixels. By default the border width is set to zero wh
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
-                width: 1
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                border: {
+                  width: 1
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.color `String`
@@ -27793,21 +27933,23 @@ The text color of the note label. Accepts a valid CSS color string, including he
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              color: "#aa00bb"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                color: "#aa00bb"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
@@ -27818,21 +27960,23 @@ The font style of the note label.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              font: "20px sans-serif"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                font: "20px sans-serif"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.template `String|Function`
@@ -27849,21 +27993,22 @@ The fields which can be used in the template are:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              template: "Year: #: value #"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                template: "Avg: #: value #"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.visible `Boolean` *(default: true)*
@@ -27874,21 +28019,23 @@ If set to `true` the chart will display the x axis notes label. By default the x
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              visible: false
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "label",
+                visible: false
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.rotation `Number` *(default: 0)*
@@ -27899,21 +28046,23 @@ The rotation angle of the label. By default the label are not rotated.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              rotation: 90
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "label",
+                rotation: 90
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.format `String` *(default: "{0}")*
@@ -27924,21 +28073,23 @@ The format used to display the note label. Uses [kendo.format](/api/javascript/k
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              format: "value slot: {0}"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                format: "val: {0}"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.text `String`
@@ -27949,21 +28100,22 @@ The label note text.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              text: "A"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.label.position `String` *(default: "inside")*
@@ -27972,6 +28124,29 @@ The position of the x axis note label.
 
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
+
+#### Example - set the x axis note line width
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "avg",
+                position: "outside"
+              }
+            }]
+          }
+        }
+      });
+    </script>
 
 ### xAxis.notes.data.line `Object`
 
@@ -27985,21 +28160,22 @@ The line width of the note.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            line: {
-              width: 4
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              line: {
+                width: 3
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.line.color `String`
@@ -28010,21 +28186,22 @@ The line color of the note.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            line: {
-              color: "#aa00bb"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              line: {
+                color: "red"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.data.line.length `Number`
@@ -28035,21 +28212,22 @@ The length of the connecting lines in pixels.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      xAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            line: {
-              length: 20
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        xAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              line: {
+                length: 30
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### xAxis.notes.visual `Function`
@@ -28069,12 +28247,12 @@ A function that can be used to create a custom visual for the notes. The availab
       $("#chart").kendoChart({
         series: [{
           type: "scatter",
-          data: [[1, 2]]
+          data: [[1, 2], [2, 3]]
         }],
         xAxis: {
           notes: {
             data: [{
-              value: 1
+              value: 1.3
             }],
             visual: function (e) {
               var targetPoint = { x: e.rect.center().x, y: e.rect.origin.y };
@@ -31627,6 +31805,24 @@ The position of the y axis notes.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+#### Example - set the y axis notes icon background
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{ value: 1.3 }],
+            position: "left"
+          }
+        }
+      });
+    </script>
+
 ### yAxis.notes.icon `Object`
 
 The icon of the notes.
@@ -31641,7 +31837,8 @@ The background color of the notes icon.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31664,7 +31861,8 @@ The border of the icon.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31690,14 +31888,14 @@ The border color of the icon.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
           icon: {
             border: {
-              width: 2,
-              color: "red"
+              color: "green"
             }
           },
           data: [{ value: 1 }]
@@ -31716,14 +31914,14 @@ The border width of the icon.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
           icon: {
             border: {
-              width: 2,
-              color: "red"
+              width: 3
             }
           },
           data: [{ value: 1 }]
@@ -31742,7 +31940,8 @@ The size of the icon.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31771,14 +31970,15 @@ The supported values are:
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           },
-          data: [{ value: 1 }]
+          data: [{ value: 1.3 }]
         }
       }
     });
@@ -31786,7 +31986,7 @@ The supported values are:
 
 ### yAxis.notes.icon.visible `Boolean` *(default: "true")*
 
-The icon visibility.
+Sets the icon visibility.
 
 #### Example - set the y axis notes icon visibility
 
@@ -31794,7 +31994,8 @@ The icon visibility.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31809,7 +32010,7 @@ The icon visibility.
 
 ### yAxis.notes.label `Object`
 
-The label of the notes.
+The label configuration of the notes.
 
 ### yAxis.notes.label.background `String`
 
@@ -31821,7 +32022,8 @@ The background color of the label. Accepts a valid CSS color string, including h
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31844,7 +32046,8 @@ The border of the label.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31871,7 +32074,8 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31906,7 +32110,8 @@ The following dash types are supported:
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31932,7 +32137,8 @@ The width of the border in pixels. By default the border width is set to zero wh
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -31957,12 +32163,14 @@ The text color of the label. Accepts a valid CSS color string, including hex and
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
           label: {
-            color: "#aa00bb"
+            color: "#aa00bb",
+            text: "test"
           },
           data: [{ value: 1 }]
         }
@@ -31980,7 +32188,8 @@ The font style of the label.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -32009,7 +32218,8 @@ The fields which can be used in the template are:
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -32024,7 +32234,7 @@ The fields which can be used in the template are:
 
 ### yAxis.notes.label.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the y axis notes label. By default the y axis notes label are visible.
+If set to `true` the chart will display the y axis notes label. By default the y axis notes label is visible.
 
 #### Example - hide the y axis notes label
 
@@ -32032,7 +32242,8 @@ If set to `true` the chart will display the y axis notes label. By default the y
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -32055,12 +32266,14 @@ The rotation angle of the label. By default the label are not rotated.
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
           label: {
-            rotation: 90
+            rotation: 90,
+            text: "test"
           },
           data: [{ value: 1 }]
         }
@@ -32078,7 +32291,8 @@ The format used to display the notes label. Uses [kendo.format](/api/javascript/
     <script>
     $("#chart").kendoChart({
       series: [{
-        data: [1, 2, 3]
+        type: "scatter",
+        data: [[1, 2], [2, 3]]
       }],
       yAxis: {
         notes: {
@@ -32098,6 +32312,27 @@ The position of the labels.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+#### Example - set the y axis notes label format
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            label: {
+              text: "label text",
+              position: "outside"
+            },
+            data: [{ value: 1 }]
+          }
+        }
+      });
+    </script>
+
 ### yAxis.notes.line `Object`
 
 The line of the notes.
@@ -32116,6 +32351,26 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+#### Example - set the y axis notes line width
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            line: {
+              dashType: "dash"
+            },
+            data: [{ value: 1.3 }]
+          }
+        }
+      });
+    </script>
+
 ### yAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -32124,19 +32379,20 @@ The line width of the notes.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          line: {
-            width: 4
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            line: {
+              width: 3
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.line.color `String`
@@ -32147,19 +32403,20 @@ The line color of the notes.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          line: {
-            color: "#aa00bb"
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            line: {
+              color: "#28b716",
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.line.length `Number`
@@ -32170,19 +32427,20 @@ The length of the connecting lines in pixels.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          line: {
-            length: 20
-          },
-          data: [{ value: 1 }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            line: {
+              length: 40
+            },
+            data: [{ value: 1.3 }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data `Array`
@@ -32193,6 +32451,25 @@ The items of the notes.
 
 The value of the note.
 
+#### Example - set the y axis note icon background
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1
+            }]
+          }
+        }
+      });
+    </script>
+
 ### yAxis.notes.data.position `String`
 
 The position of the y axis notes.
@@ -32201,6 +32478,26 @@ The position of the y axis notes.
 * "bottom" - The note is positioned on the bottom.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
+
+#### Example - set the y axis note icon background
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              position: "left"
+            }]
+          }
+        }
+      });
+    </script>
 
 ### yAxis.notes.data.icon `Object`
 
@@ -32214,21 +32511,22 @@ The background color of the note icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              background: "red"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                background: "red"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.icon.border `Object`
@@ -32239,24 +32537,25 @@ The border of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              border: {
-                width: 2,
-                color: "red"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                border: {
+                  width: 2,
+                  color: "red"
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.icon.border.color `String`
@@ -32267,24 +32566,24 @@ The border color of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              border: {
-                width: 2,
-                color: "red"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                border: {
+                  color: "red"
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.icon.border.width `Number`
@@ -32295,24 +32594,24 @@ The border width of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              border: {
-                width: 2,
-                color: "red"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                border: {
+                  width: 2
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.icon.size `Number`
@@ -32323,21 +32622,22 @@ The size of the icon.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              size: 30
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                size: 30
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.icon.type `String` *(default: "circle")*
@@ -32354,21 +32654,22 @@ The supported values are:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              shape: "triangle"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                type: "triangle"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.icon.visible `Boolean` *(default: "true")*
@@ -32379,21 +32680,22 @@ The icon visibility.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            icon: {
-              visible: false
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              icon: {
+                visible: false
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label `Object`
@@ -32408,21 +32710,22 @@ The background color of the label. Accepts a valid CSS color string, including h
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notesdata {
-          data: [{
-            value: 1,
-            label: {
-              background: "red"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                background: "orange"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.border `Object`
@@ -32433,25 +32736,26 @@ The border of the label.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                border: {
                 color: "green",
                 dashType: "dashDot",
-                width: 1
+                width: 8
               }
-            }
-          }]
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.border.color `String` *(default: "black")*
@@ -32462,23 +32766,24 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
-                color: "green"
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                border: {
+                  color: "green"
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.border.dashType `String` *(default: "solid")*
@@ -32499,24 +32804,24 @@ The following dash types are supported:
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
-                dashType: "dashDot",
-                width: 1
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                border: {
+                  dashType: "dashDot",
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.border.width `Number` *(default: 0)*
@@ -32527,23 +32832,24 @@ The width of the border in pixels. By default the border width is set to zero wh
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              border: {
-                width: 1
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                border: {
+                  width: 8
+                }
               }
-            }
-          }]
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.color `String`
@@ -32554,21 +32860,23 @@ The text color of the note label. Accepts a valid CSS color string, including he
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              color: "#aa00bb"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                color: "#aa00bb",
+                text: "label"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
@@ -32579,21 +32887,23 @@ The font style of the note label.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              font: "20px sans-serif"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                font: "20px sans-serif",
+                text: "label"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.template `String|Function`
@@ -32606,25 +32916,26 @@ The fields which can be used in the template are:
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
-#### Example - set the value axis note label template as a string
+#### Example - set the y axis note label template as a string
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              template: "Year: #: value #"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                template: "Value: #: value #"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.visible `Boolean` *(default: true)*
@@ -32635,21 +32946,23 @@ If set to `true` the chart will display the y axis notes label. By default the y
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              visible: false
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "Min",
+                visible: false
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.rotation `Number` *(default: 0)*
@@ -32660,21 +32973,23 @@ The rotation angle of the label. By default the label are not rotated.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              rotation: 90
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "Min",
+                rotation: 90
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.format `String` *(default: "{0}")*
@@ -32685,21 +33000,23 @@ The format used to display the note label. Uses [kendo.format](/api/javascript/k
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              format: "value slot: {0}"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "min",
+                format: "val: {0}"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.text `String`
@@ -32710,21 +33027,22 @@ The label note text.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            label: {
-              text: "A"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "label text"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.label.position `String` *(default: "inside")*
@@ -32733,6 +33051,29 @@ The position of the y axis note label.
 
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
+
+#### Example - set the y axis label note text
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              label: {
+                text: "label text",
+                position: "outside"
+              }
+            }]
+          }
+        }
+      });
+    </script>
 
 ### yAxis.notes.data.line `Object`
 
@@ -32746,21 +33087,22 @@ The line width of the note.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            line: {
-              width: 4
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              line: {
+                width: 3
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.line.color `String`
@@ -32771,21 +33113,22 @@ The line color of the note.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            line: {
-              color: "#aa00bb"
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              line: {
+                color: "teal"
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.data.line.length `Number`
@@ -32796,21 +33139,22 @@ The length of the connecting lines in pixels.
 
     <div id="chart"></div>
     <script>
-    $("#chart").kendoChart({
-      series: [{
-        data: [1, 2, 3]
-      }],
-      yAxis: {
-        notes: {
-          data: [{
-            value: 1,
-            line: {
-              length: 20
-            }
-          }]
+      $("#chart").kendoChart({
+        series: [{
+          type: "scatter",
+          data: [[1, 2], [2, 3]]
+        }],
+        yAxis: {
+          notes: {
+            data: [{
+              value: 1.3,
+              line: {
+                length: 50
+              }
+            }]
+          }
         }
-      }
-    });
+      });
     </script>
 
 ### yAxis.notes.visual `Function`
@@ -32829,26 +33173,26 @@ A function that can be used to create a custom visual for the notes. The availab
       $("#chart").kendoChart({
         series: [{
           type: "scatter",
-          data: [[1, 2]]
+          data: [[1, 2], [2, 3]]
         }],
         yAxis: {
           notes: {
             data: [{
-              value: 2
-            }],
-            visual: function (e) {
-              var targetPoint = { x: e.rect.origin.x, y: e.rect.center().y };
-              var line = new kendo.drawing.Path()
-              .moveTo(targetPoint.x, targetPoint.y)
-              .lineTo(targetPoint.x + 10, targetPoint.y);
-              var circle = new kendo.drawing.Circle(new kendo.geometry.Circle([targetPoint.x + 30, targetPoint.y], 20), {
-                fill: {
-                  color: "red"
-                }
-              });
+              value: 1.3,
+              visual: function (e) {
+                var targetPoint = { x: e.rect.origin.x, y: e.rect.center().y };
+                var line = new kendo.drawing.Path()
+                .moveTo(targetPoint.x, targetPoint.y)
+                .lineTo(targetPoint.x + 10, targetPoint.y);
+                var circle = new kendo.drawing.Circle(new kendo.geometry.Circle([targetPoint.x + 30, targetPoint.y], 20), {
+                  fill: {
+                    color: "red"
+                  }
+                });
 
-              return new kendo.drawing.Group().append(line, circle);
-            }
+                return new kendo.drawing.Group().append(line, circle);
+              }
+            }]
           }
         }
       });
