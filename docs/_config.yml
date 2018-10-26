@@ -452,9 +452,9 @@ navigation:
         title: "Button"
     "*/radiobutton":
         title: "RadioButton"
-     "controls/scheduling/calendar":
+    "controls/scheduling/calendar":
         title: "Calendar"
-     "controls/scheduling/multiviewcalendar":
+    "controls/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
     "*colorpalette":
         title: "ColorPalette"

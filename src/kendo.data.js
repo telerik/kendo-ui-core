@@ -1811,7 +1811,7 @@ var __meta__ = { // jshint ignore:line
                     });
                 });
 
-                query = query.group(groupDescriptorsWithoutSort, query.toArray());
+                query = query.group(groupDescriptorsWithoutSort, data);
             }
         } else {
             if (skip !== undefined && take !== undefined) {
