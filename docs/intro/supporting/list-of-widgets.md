@@ -72,6 +72,7 @@ The following table lists all Kendo UI components with regard to their support p
 | [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)          | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Gantt](http://demos.telerik.com/kendo-ui/gantt/index)                | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
 | [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)        | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
+| [MultiViewCalendar](http://demos.telerik.com/kendo-ui/multiviewcalendar/index) | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
 | **Layout**                |
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index)  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Responsive Panel](http://demos.telerik.com/kendo-ui/responsive-panel/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
