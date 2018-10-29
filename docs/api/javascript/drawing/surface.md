@@ -23,7 +23,7 @@ The implementations for SVG and Canvas inherit from this base class.
         surface.draw(path);
     </script>
 
-## Class methods
+## Class Methods
 
 ### create
 

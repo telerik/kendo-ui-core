@@ -52,7 +52,7 @@ The e (1, 3) member of the matrix.
 The f (2, 3) member of the matrix.
 
 
-## Class methods
+## Class Methods
 
 ### rotate
 

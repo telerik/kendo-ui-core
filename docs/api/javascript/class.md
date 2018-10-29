@@ -39,7 +39,7 @@ An alias to the [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScr
     console.log(birdie.legs); // outputs 2
     </script>
 
-## Class methods
+## Class Methods
 
 ### extend
 

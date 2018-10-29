@@ -45,7 +45,7 @@ The origin (top-left corner) of the rectangle.
 The size of the rectangle.
 
 
-## Class methods
+## Class Methods
 
 ### fromPoints
 
