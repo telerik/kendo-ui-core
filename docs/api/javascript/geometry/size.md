@@ -25,7 +25,7 @@ The horizontal size.
 
 The vertical size.
 
-## Class methods
+## Class Methods
 
 ### create
 

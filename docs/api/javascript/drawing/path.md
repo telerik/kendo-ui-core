@@ -28,7 +28,7 @@ Represents a path consisting of linear or cubic Bézier curve segments.
 ### options `Object`
 The configuration options.
 
-## Class methods
+## Class Methods
 
 ### fromArc
 Create a curve from the given arc.

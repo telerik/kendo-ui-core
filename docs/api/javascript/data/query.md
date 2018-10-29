@@ -131,7 +131,7 @@ The grouping configuration. Accepts the same values as the [group](/api/javascri
 
 `kendo.data.Query` Returns a new instance of kendo.data.Query containing the grouped collection
 
-## Class methods
+## Class Methods
 
 ### process
 

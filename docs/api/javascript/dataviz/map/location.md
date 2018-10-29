@@ -17,7 +17,7 @@ The location latitude in decimal degrees.
 The location longitude in decimal degrees.
 
 
-## Class methods
+## Class Methods
 
 ### create
 Creates a Location instance from various input types.

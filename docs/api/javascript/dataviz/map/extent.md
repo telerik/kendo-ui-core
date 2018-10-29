@@ -17,7 +17,7 @@ The North West extreme location.
 The South East extreme location.
 
 
-## Class methods
+## Class Methods
 
 ### create
 Creates a Location instance.
