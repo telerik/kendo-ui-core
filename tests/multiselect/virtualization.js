@@ -123,7 +123,7 @@
                 start();
                 var options = multiselect.element.children(":selected");
 
-                options = options.sort(function(a, b) { return parseInt(a.value) > parseInt(b.value) });
+                options = options.sort(function(a, b) { return parseInt(a.value) - parseInt(b.value) });
 
                 equal(options.length, 2);
 
