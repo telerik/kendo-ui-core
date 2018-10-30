@@ -145,7 +145,7 @@ The data items collection
 
 ##### options `Object`
 
-Accepts the same values as the [DataSource query](/api/javascript/datasource/methods/query) method.
+Accepts the same values as the [DataSource query](/api/javascript/data/datasource/methods/query) method.
 
 #### Returns
 

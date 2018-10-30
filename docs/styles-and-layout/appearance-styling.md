@@ -142,15 +142,13 @@ Usually, a CSS property defined by a primitive class is used by all widgets whic
 
 ###### Example
 
-    .k-link
-    {
+    .k-link {
         color: blue;
     }
 
 is not going to affect
 
-    .k-panelbar .k-link
-    {
+    .k-panelbar .k-link {
         color: red;
     }
 
@@ -162,8 +160,7 @@ If you want to override the styling for a given widget type, you are able to use
 
 ###### Example
 
-    .k-menu .k-link
-    {
+    .k-menu .k-link {
         color: red;
     }
 
@@ -173,16 +170,15 @@ When you do this, make sure to register the custom rules after the respective th
 
 The following Menu:
 
-	<ul id="menu1" class="k-widget k-menu">
-		<!-- menu items here -->
-	</ul>
+    <ul id="menu1" class="k-widget k-menu">
+        <!-- menu items here -->
+    </ul>
 
 can be styled by using its ID:
 
-	#menu1 .k-link
-	{
-		color: red;
-	}
+    #menu1 .k-link {
+        color: red;
+    }
 
 The above CSS rule is not going to affect any other widget instances, which are outside `#menu1`.
 
@@ -193,12 +189,12 @@ With the 2014 Q3 release Kendo UI provides customized presentation for checkboxe
 ###### Example
 
     <!-- Kendo UI Checkbox -->
-	<input type="checkbox" id="checkbox" class="k-checkbox">
-	<label class="k-checkbox-label" for="checkbox"></label>
+    <input type="checkbox" id="checkbox" class="k-checkbox">
+    <label class="k-checkbox-label" for="checkbox"></label>
 
-	<!-- Kendo UI Radio button -->
-	<input type="radio" id="radiobutton" class="k-radio">
-	<label class="k-radio-label" for="radiobutton"></label>
+    <!-- Kendo UI Radio button -->
+    <input type="radio" id="radiobutton" class="k-radio">
+    <label class="k-radio-label" for="radiobutton"></label>
 
 ## Creating Custom Themes
 
@@ -220,10 +216,12 @@ The list below demonstrates the names of the `.less` files supported by Kendo UI
 | **`kendo.[theme-name].mobile.less`** | Contains styling for all widgets, including hybrid ones. Building it produces a theme file for all widgets. |
 | **`kendo.common.less`**| This a default sizing file for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets.|
 | **`kendo.common-[theme-name].less`** | Contains sizing adjustments for [theme-name] for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets. |
-| **`kendo.common.core.less`** | This is a default sizing file for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets. |
-| **`kendo.common-[theme-name].core.less`** | Contains sizing adjustments for [theme-name] for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets.|
 | **`kendo.rtl.css`** | Contains styles for widgets in RTL mode, CSS only. |
 | **`type-[theme-name].less`** | Contains supporting files that cannot be built. Translates the colors from `kendo.[theme-name].less` to the theme colors to a usable theme. |
+
+> **Important**
+>
+> Starting with Kendo UI versions 2019.1, we distribute a single set of themes for both Kendo UI Professional and Kendo UI Core. Previously, with Kendo UI Core we shipped only a subset of the themes available for Kendo UI Professional.
 
 The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets, can be built using the Less 1.7.5 version.
 

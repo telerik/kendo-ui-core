@@ -930,6 +930,32 @@ span.k-numerictextbox {
     .k-numeric-wrap.k-state-invalid.k-expand-padding .k-i-warning{
         left: 0;
     }
+
+    .k-listbox {
+
+        &.k-listbox-toolbar-left,
+        &.k-listbox-toolbar-right {
+            .k-listbox-toolbar {
+                transform: scaleX(-1);
+            }
+        }
+
+        &.k-listbox-toolbar-left {
+            .k-listbox-toolbar {
+                float: right;
+                margin-right: 0;
+                margin-left: 5px;
+            }
+        }
+
+        &.k-listbox-toolbar-right {
+            .k-listbox-toolbar {
+                float: left;
+                margin-right: 5px;
+                margin-left: 0;
+            }
+        }
+    }
 }
 
 
