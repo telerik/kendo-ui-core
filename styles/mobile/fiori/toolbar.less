@@ -1,0 +1,82 @@
+@import "../common/navbar.less";
+@import "../../common/transitions.less";
+@import "base.less";
+
+// ToolBar
+
+.km-fiori .k-toolbar
+{
+    line-height: 2.1em;
+}
+
+.km-fiori .k-toolbar .km-button,
+.km-fiori .k-toolbar .k-split-button
+{
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: inherit;
+}
+
+.km-fiori .k-toolbar .k-button-icon .km-icon,
+.km-fiori .k-toolbar .k-button-icontext .km-icon,
+.km-fiori .k-split-button .km-arrowdown
+{
+    width: 1em;
+    height: 1em;
+    font-size: 1.2em;
+    margin-top: -7px;
+    margin-bottom: -2px;
+    vertical-align: middle;
+}
+
+.km-fiori .k-split-button .km-arrowdown
+{
+    margin-left: 2px;
+    margin-right: 1px;
+}
+
+.km-fiori .k-split-button .k-button-icontext
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.km-fiori .k-split-button-arrow
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.km-fiori .km-actionsheet.k-split-container > li > .km-button,
+.km-fiori .km-actionsheet.k-overflow-container > li > .km-button
+{
+    min-width: 10em;
+    text-align: center;
+    font-size: 1.1em;
+    border: 0;
+    border-radius: 0;
+}
+
+.km-fiori .km-actionsheet.k-split-container > li > .km-button
+{
+    min-width: 5em;
+}
+
+.km-fiori .k-split-wrapper .km-actionsheet-wrapper,
+.km-fiori .k-overflow-wrapper .km-actionsheet-wrapper
+{
+    padding: 1px;
+}
+
+html .km-fiori .k-split-container.km-actionsheet > li,
+html .km-fiori .k-overflow-container.km-actionsheet > li
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.km-fiori .k-split-container.km-actionsheet,
+.km-fiori .k-overflow-container.km-actionsheet
+{
+    border-top: 0;
+}

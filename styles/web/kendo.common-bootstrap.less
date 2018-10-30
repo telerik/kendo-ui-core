@@ -1,11 +1,11 @@
-@input-height: 1.94em;
+@input-height: 1.93571428em;
 @input-padding-y: 0.17857143em;
 @input-indent: .8em;
 @editor-icon-size: 32px;
 @menu-link-padding: 1.2em 1.2em 1.1em;
 @button-padding-x: 14px;
 @button-padding-y: 4px;
-@button-padding: 4px 14px;
+@button-padding: @button-padding-y @button-padding-x;
 @treeview-inner-padding: 0.4167em 0.6667em 0.3333em 0.5833em;
 @treeview-inner-margin: 1px 0 1px 0.3333em;
 @scheduler-link-padding: .16666em 1.1em;
@@ -38,7 +38,40 @@
 @grid-cell-padding-x: @grid-padding-x;
 @grid-cell-padding-y: @grid-padding-y;
 
-@import "common/core.less";
+
+// Calendar
+@calendar-padding-x: 0;
+@calendar-padding-y: 0;
+@calendar-border-width: 1px;
+@calendar-border-radius: 4px;
+@calendar-font-size: 14px;
+@calendar-line-height: (20 / 14);
+
+@calendar-header-padding-x: 2px;
+@calendar-header-padding-y: 2px;
+@calendar-header-border-width: 0;
+@calendar-header-button-padding-x: 4px;
+@calendar-header-button-padding-y: 4px;
+@calendar-header-button-border-width: 0;
+@calendar-header-button-border-radius: @calendar-border-radius;
+
+@calendar-content-padding-x: 0;
+@calendar-content-padding-y: 0;
+
+@calendar-cell-padding-x: .5em;
+@calendar-cell-padding-y: .5em;
+@calendar-cell-border-radius: @calendar-border-radius;
+@calendar-cell-line-height: (20 / 14);
+@calendar-cell-size: ( (@calendar-cell-padding-y * 2) + (@calendar-cell-line-height * 1em) );
+
+@calendar-header-cell-padding-x: 2px;
+@calendar-header-cell-padding-y: (@calendar-cell-padding-y / 2);
+@calendar-header-cell-border-width: 1px;
+@calendar-header-cell-font-size: 12px;
+@calendar-header-cell-line-height: (20 / 14);
+@calendar-header-cell-size: @calendar-cell-size;
+
+@import "common/all.less";
 
 .k-widget.k-tabstrip
 {
@@ -53,6 +86,23 @@
     padding: 0;
 }
 
+.k-tabstrip-items .k-link {
+    padding: 8px .92em;
+}
+
+.k-tabstrip > .k-button {
+    top: 0;
+
+    &.k-bare {
+        top: 0;
+    }
+}
+
+.k-tabstrip-bottom > .k-button.k-bare
+{
+    top: auto;
+}
+
 .k-tabstrip > .k-content,
 .k-panelbar .k-tabstrip > .k-content
 {
@@ -62,6 +112,17 @@
 .k-slider-track
 {
     border-width: 1px;
+    border-style: solid;
+}
+
+.k-grouping-dropclue
+{
+    margin-top: 10px;
+}
+
+.k-grid tr td
+{
+    border-width: 0 0 1px 1px;
     border-style: solid;
 }
 
@@ -96,7 +157,7 @@ input.k-textbox {
     }
 }
 
-.k-autocomplete > .k-i-close {
+.k-autocomplete > .k-i-close  {
     margin-right: 8px;
 }
 
@@ -122,6 +183,15 @@ input.k-textbox {
 
 .k-numerictextbox .k-link {
     height: 1.167em;
+}
+
+.k-toolbar {
+    padding: 0.57142857em calc(0.57142857em - 0.2em);
+    border-radius: 4px;
+}
+
+.k-toolbar .k-overflow-anchor {
+    width: calc((52/14)*1em);
 }
 
 .k-webkit .k-rtl .k-widget .k-dropdown-wrap .k-input,
@@ -152,6 +222,13 @@ input.k-textbox {
     line-height: 2.3em;
 }
 
+.k-pager-numbers {
+    .k-link,
+    .k-state-selected {
+        height: 2.3em;
+    }
+}
+
 .k-pager-wrap > .k-link,
 .k-pager-numbers .k-link,
 .k-pager-numbers .k-state-selected {
@@ -167,4 +244,81 @@ input.k-textbox {
 .k-radio-label:before,
 .k-radio-label:after {
     box-sizing: content-box;
+}
+
+.k-spreadsheet-sheets-bar .k-spreadsheet-sheets-remove {
+    margin: 0 0 0 -.5em;
+    padding: .65em .92em .65em .32em;
+}
+
+.k-button.k-spreadsheet-sheets-bar-add {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    top: 2px;
+    bottom: 4px;
+}
+
+.k-spreadsheet .k-spreadsheet-sheets-bar .k-tabstrip-items {
+    padding-bottom: 4px;
+}
+
+.k-gantt .k-grid-content tr,
+.k-gantt-rows tr,
+.k-gantt-tasks tr {
+    height: 2.4em;
+}
+
+.k-editor-dialog.k-editor-table-wizard-dialog .k-tabstrip-wrapper .k-content {
+    min-height: 510px;
+    height: 38em;
+}
+
+.k-edit-label,
+.k-edit-form-container .editor-label {
+    padding: 0.65em 0 1em;
+}
+
+.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
+    min-width: 56px;
+}
+
+.k-grid {
+    .k-edit-cell {
+        input[type='checkbox'],
+        input.k-checkbox {
+            margin-left: calc(.3em + 3px);
+
+            + label.k-checkbox-label {
+                margin-left: .3em;
+            }
+        }
+    }
+}
+
+.k-filtercell > span {
+    padding-right: 5.2em;
+}
+
+.k-filtercell > .k-operator-hidden {
+    padding-right: 2.7em;
+}
+
+.k-filter-row .k-dropdown-operator {
+    right: 3.0em;
+}
+
+// RTL
+.k-rtl {
+
+    .k-combobox-clearable {
+        .k-input {
+            padding-left: 1.9em;
+            padding-right: 0.167em;
+        }
+    }
+}
+
+.k-safari.k-mobile .k-picker-wrap .k-input,
+.k-safari.k-mobile .k-numeric-wrap .k-input {
+    height: 1.88em;
 }

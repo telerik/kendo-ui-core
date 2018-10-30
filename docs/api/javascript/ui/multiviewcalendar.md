@@ -1,5 +1,5 @@
 ---
-title: multiViewCalendar
+title: MultiViewCalendar
 page_title: Configuration, methods and events of Kendo UI multiViewCalendar
 description: Find out how to successfully configure multiViewCalendar UI component, how to use methods to get the max value of the multiViewCalendar and navigate easily.
 res_type: api
@@ -353,7 +353,7 @@ This sets the end date of the range selection.
 
 ### selectable `String`  *(default: "single")*
 
-By default user is able to select a single date. The property can also be set to "multiple" or "range". More information about multiple selection can be found in the [Selection]({% slug overview_kendoui_multiViewCalendar_widget %}#selection) article.
+By default user is able to select a single date. The property can also be set to "multiple" or "range". More information about multiple selection can be found in the [Selection]({% slug overview_kendoui_multiviewcalendar_widget %}#selection) article.
 
 #### Example - enable the multiple selection
 
@@ -364,13 +364,13 @@ By default user is able to select a single date. The property can also be set to
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/multiViewCalendar/selection) for a live demo.
+> Check [Selection](http://demos.telerik.com/kendo-ui/multiviewcalendar/selection) for a live demo.
 
 ### selectDates `Array`  *(default: [])*
 
 Specifies which dates to be selected when the multiViewCalendar is initialized.
 
-> **Important:** This configuration option requires the [selectable](/api/javascript/ui/multiViewCalendar/configuration/selectable): "multiple" option to be set.
+> **Important:** This configuration option requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "multiple" option to be set.
 
 #### Example - set two dates to be selected upon multiViewCalendar initialization
 
@@ -382,7 +382,7 @@ Specifies which dates to be selected when the multiViewCalendar is initialized.
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/multiViewCalendar/selection) for a live demo.
+> Check [Selection](http://demos.telerik.com/kendo-ui/multiviewcalendar/selection) for a live demo.
 
 ### weekNumber `Boolean` *(default: false)*
 
@@ -631,7 +631,7 @@ Navigates to the upper view.
 
 Gets/Sets the selected dates for the multiViewCalendar.
 
-> **Important:** This method requires the [selectable](/api/javascript/ui/multiViewCalendar/configuration/selectable): "multiple" option to be set.
+> **Important:** This method requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "multiple" option to be set.
 
 #### Example - gets the selected dates of the widget
 
@@ -665,7 +665,7 @@ Gets/Sets the selected dates for the multiViewCalendar.
 
 Gets/Sets the selected range for the multiViewCalendar.
 
-> **Important:** This method requires the [selectable](/api/javascript/ui/multiViewCalendar/configuration/selectable): "range" option to be set.
+> **Important:** This method requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "range" option to be set.
 
 #### Example - gets the selected range for the widget
 

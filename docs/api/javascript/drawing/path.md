@@ -50,7 +50,7 @@ Create a straight path from the given points.
 #### Parameters
 
 ##### points `Array`
-Array of [kendo.geometry.Point](../geometry/point) objects or [x, y] arrays.
+Array of [kendo.geometry.Point](/api/javascript/geometry/point) objects or [x, y] arrays.
 
 ##### options `Object` *optional*
 The [configuration](/api/javascript/drawing/path#configuration) options for the path.
