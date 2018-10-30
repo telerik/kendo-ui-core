@@ -9349,15 +9349,14 @@ declare namespace kendo.drawing {
 
 
     class Surface extends kendo.Observable {
-
-
         options: SurfaceOptions;
-
 
         constructor(options?: SurfaceOptions);
 
         static create(element: JQuery, options?: any): kendo.drawing.Surface;
         static create(element: Element, options?: any): kendo.drawing.Surface;
+
+        element: JQuery;
 
         clear(): void;
         draw(element: kendo.drawing.Element): void;
@@ -20498,15 +20497,14 @@ declare namespace kendo.dataviz.drawing {
 
 
     class Surface extends kendo.Observable {
-
-
         options: SurfaceOptions;
-
 
         constructor(options?: SurfaceOptions);
 
         static create(element: JQuery, options?: any): kendo.drawing.Surface;
         static create(element: Element, options?: any): kendo.drawing.Surface;
+
+        element: JQuery;
 
         clear(): void;
         draw(element: kendo.drawing.Element): void;
