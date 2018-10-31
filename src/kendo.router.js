@@ -442,7 +442,7 @@ var __meta__ = { // jshint ignore:line
             this.root = options.root;
             this.ignoreCase = options.ignoreCase !== false;
 
-            this.bind([INIT, ROUTE_MISSING, CHANGE, SAME], options);
+            this.bind([INIT, ROUTE_MISSING, CHANGE, SAME, BACK], options);
         },
 
         destroy: function() {

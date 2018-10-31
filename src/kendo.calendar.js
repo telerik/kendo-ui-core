@@ -96,6 +96,8 @@ var __meta__ = { // jshint ignore:line
 
             that._header();
 
+            that._viewWrapper();
+
             that._footer(that.footer);
 
             id = element
@@ -220,6 +222,8 @@ var __meta__ = { // jshint ignore:line
 
             that._selectable();
 
+            that._viewWrapper();
+
             that._footer(that.footer);
             that._index = views[that.options.start];
 
@@ -321,6 +325,7 @@ var __meta__ = { // jshint ignore:line
                 vertical = view !== undefined && view !== that._index,
                 to, currentView, compare,
                 disabled;
+
             if (!value) {
                 value = currentValue;
             }
@@ -445,7 +450,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             value = that._validateValue(value);
-            if(value && that._isMultipleSelection()) {
+            if (value && that._isMultipleSelection()) {
                 var date = new Date(+value);
                 date.setHours(0, 0, 0, 0);
                 that._selectDates = [date];
@@ -865,20 +870,21 @@ var __meta__ = { // jshint ignore:line
         },
 
         _animate: function(options) {
-            var that = this,
-            from = options.from,
-            to = options.to,
-            active = that._active;
+            var that = this;
+            var from = options.from;
+            var to = options.to;
+            var active = that._active;
+            var viewWrapper = that.element.children(".k-calendar-view");
 
             if (!from) {
-                to.insertAfter(that.element[0].firstChild);
+                viewWrapper.append(to);
                 that._bindTable(to);
             } else if (from.parent().data("animating")) {
                 from.off(ns);
                 from.parent().kendoStop(true, true).remove();
                 from.remove();
 
-                to.insertAfter(that.element[0].firstChild);
+                viewWrapper.append(to);
                 that._focusView(active);
             } else if (!from.is(":visible") || that.options.animation === false || options.replace) {
                 to.insertAfter(from);
@@ -1058,6 +1064,16 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _viewWrapper: function() {
+            var that = this;
+            var element = that.element;
+            var viewWrapper = element.children(".k-calendar-view");
+
+            if (!viewWrapper[0]) {
+                viewWrapper = $("<div class='k-calendar-view' />").insertAfter(element.find(".k-header"));
+            }
+        },
+
         _footer: function(template) {
             var that = this,
             today = getToday(),
@@ -1109,7 +1125,7 @@ var __meta__ = { // jshint ignore:line
             index = that._index + 1,
             currentValue = new DATE(+that._current);
 
-            if(that._isMultipleSelection()) {
+            if (that._isMultipleSelection()) {
                 var firstDayCurrentMonth = that._table.find("td:not(.k-other-month)").has(".k-link").first();
                 currentValue = toDateObject(firstDayCurrentMonth.find("a"));
                 that._current = new Date(+currentValue);

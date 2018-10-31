@@ -45,9 +45,14 @@
 
     // Tables
     .k-calendar-view {
+        height: auto;
+        width: auto;
         min-height: (7 * @multiviewcalendar-cell-size );
         text-align: center;
         white-space: nowrap;
+    }
+    &.k-week-number .k-calendar-view {
+        width: auto;
     }
     .k-content {
         padding: 0 @multiviewcalendar-content-padding-x @multiviewcalendar-content-padding-y;
