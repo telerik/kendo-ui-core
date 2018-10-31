@@ -1,7 +1,6 @@
 // Calendar
 .k-calendar {
     padding: @calendar-padding-y @calendar-padding-x;
-    width: (@calendar-cell-size * 7);
     border-width: @calendar-border-width;
     border-style: solid;
     line-height: @calendar-line-height;
@@ -109,10 +108,23 @@
     }
 
 
+    // View wrapper
+    .k-calendar-view {
+        // setting width / height prevents layout changes in meta views
+        width: (7 * @calendar-cell-size);
+        height: (7 * @calendar-cell-size);
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+    }
+    &.k-week-number .k-calendar-view {
+        width: (8 * @calendar-cell-size);
+    }
+
+
     // Content
     .k-content {
         width: 100%;
-        height: (@calendar-cell-size * 7);
         background-color: transparent;
 
         th {

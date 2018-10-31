@@ -581,6 +581,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "save": "Save",
   "cancel": "Cancel",
   "destroy": "Delete",
+  "resetSeries": "Reset Series",
   "deleteWindowTitle": "Delete event",
   "ariaSlotLabel": "Selected from {0:t} to {1:t}",
   "ariaEventLabel": "{0} on {1:D} at {2:t}",
@@ -596,6 +597,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "recurrenceMessages": {
     "deleteWindowTitle": "Delete Recurring Item",
+    "resetSeriesWindowTitle": "Reset Series",
     "deleteWindowOccurrence": "Delete current occurrence",
     "deleteWindowSeries": "Delete the series",
     "deleteRecurringConfirmation": "Are you sure you want to delete this event occurrence?",
