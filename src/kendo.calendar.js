@@ -1343,6 +1343,7 @@ var __meta__ = { // jshint ignore:line
                     max: createDate(max.getFullYear(), max.getMonth(), max.getDate()),
                     otherMonth : otherMonth,
                     content: options.content,
+                    lastDayOfMonth : lastDayOfMonth,
                     empty: options.empty,
                     setter: that.setDate,
                     disableDates: options.disableDates,
@@ -1647,6 +1648,7 @@ var __meta__ = { // jshint ignore:line
             isWeekColumnVisible = options.isWeekColumnVisible,
             cellsPerRow = options.perRow || 4,
             otherMonth = options.otherMonth,
+            lastDayOfMonth = options.lastDayOfMonth,
             weekNumber = options.weekNumber || weekNumberTemplate,
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,
@@ -1659,8 +1661,8 @@ var __meta__ = { // jshint ignore:line
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
                 html += '</tr><tr role="row">';
-                if(isWeekColumnVisible) {
-                    html += weekNumber(weekNumberBuild(start));
+                if (isWeekColumnVisible) {
+                    html += otherMonth || (+start <= +lastDayOfMonth) ? weekNumber(weekNumberBuild(start)) : weekNumber({ weekNumber : "&nbsp;"});
                 }
             }
 
