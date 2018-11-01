@@ -974,7 +974,7 @@ var __meta__ = { // jshint ignore:line
                 that._firstItem();
             } else if (key === keys.END) {
                 that._lastItem();
-            } else if (key === keys.ENTER || key === keys.TAB) {
+            } else if (key === keys.ENTER || (key === keys.TAB && that.popup.visible())) {
                 var current = that.listView.focus();
                 var dataItem = that.dataItem();
                 var shouldTrigger = true;
