@@ -47,6 +47,46 @@ To allow the execution of scripts inside the Editor content:
 * Extract the `script` tags.
 * Place the `script` tags elsewhere on the page where they can be evaluated by the browser.
 
+## Serialization and Deserialization
+
+Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/javascript/ui/editor/configuration/serialization.custom) and [`deserialization.custom`](/api/javascript/ui/editor/configuration/deserialization.custom) options of the Editor, to implement your own sanitizing functionality.
+
+The following example demonstrates how to use the serialization and deserialization custom otpions, to sanitize the value of the Editor and remove `object` tags.
+
+###### Example
+
+```html
+<textarea id="editor"></textarea>
+<script>
+  function sanitizeHtml(html) {
+    var temp = $("<div></div>").html(html);
+    temp.find("object").remove();
+    return temp.html() || "\ufeff";
+  }
+
+  $("#editor").kendoEditor({
+    tools: [
+      "viewHtml"
+    ],
+    deserialization: {
+      custom: function(html) {
+        return sanitizeHtml(html);
+      }
+    },
+    serialization: {
+      custom: function(html) {
+        return sanitizeHtml(html);
+      }
+    }
+  });
+
+  var editor = $("#editor").getKendoEditor();
+
+  editor.value('<object data="data:text/html;base64,PHNjcmlwdD5hbGVydCgic2VjdGVzdCIpPC9zY3JpcHQ+"></object>');
+  console.log(editor.value());
+</script>
+````
+
 ## Whitelist Tags
 
 The following list provides information on the libraries that allow processing HTML with a whitelist depending on your server-side platform:
