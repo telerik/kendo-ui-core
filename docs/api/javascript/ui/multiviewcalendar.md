@@ -384,6 +384,19 @@ Specifies which dates to be selected when the multiViewCalendar is initialized.
 
 > Check [Selection](http://demos.telerik.com/kendo-ui/multiviewcalendar/selection) for a live demo.
 
+### showViewHeader `Boolean` *(default: false)*
+
+If set to true will render a header for every view.
+
+#### Example - set two dates to be selected upon multiViewCalendar initialization
+
+    <div id="multiViewCalendar"></div>
+    <script>
+        $("#multiViewCalendar").kendoMultiViewCalendar({
+            showViewHeader: true
+        });
+    </script>
+
 ### weekNumber `Boolean` *(default: false)*
 
 If set to `true` a week of the year will be shown on the left side of the multiViewCalendar.

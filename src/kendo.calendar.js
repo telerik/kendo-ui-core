@@ -1307,6 +1307,7 @@ var __meta__ = { // jshint ignore:line
                 format = options.format,
                 culture = options.culture,
                 navigateUrl = options.url,
+                showHeader = options.showHeader,
                 otherMonth = options.otherMonth,
                 isWeekColumnVisible = options.isWeekColumnVisible,
                 hasUrl = navigateUrl && dates[0],
@@ -1320,7 +1321,12 @@ var __meta__ = { // jshint ignore:line
                 lastDayOfMonth = that.last(date),
                 toDateString = that.toDateString,
                 today = getToday(),
-                html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
+                html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '">';
+                if (showHeader) {
+                    html += '<caption class="k-month-header">' + this.title(date, min, max, culture) + '</caption><thead><tr role="row">';
+                } else {
+                    html += '<thead><tr role="row">';
+                }
                 if (isWeekColumnVisible) {
                     html += '<th scope="col" class="k-alt">' + options.messages.weekColumnHeader + '</th>';
                 }
@@ -1447,12 +1453,20 @@ var __meta__ = { // jshint ignore:line
                 var namesAbbr = getCalendarInfo(options.culture).months.namesAbbr,
                 toDateString = this.toDateString,
                 min = options.min,
-                max = options.max;
+                max = options.max,
+                html = "";
+
+                if (options.showHeader) {
+                    html += '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><caption class="k-meta-header">';
+                    html += this.title(options.date);
+                    html += '</caption><tbody><tr role="row">';
+                }
 
                 return view({
                     min: createDate(min.getFullYear(), min.getMonth(), 1),
                     max: createDate(max.getFullYear(), max.getMonth(), 1),
                     start: createDate(options.date.getFullYear(), 0, 1),
+                    html: html,
                     setter: this.setDate,
                     build: function(date) {
                         return {
@@ -1512,13 +1526,21 @@ var __meta__ = { // jshint ignore:line
             },
             content: function(options) {
                 var year = options.date.getFullYear(),
-                toDateString = this.toDateString;
+                toDateString = this.toDateString,
+                html = "";
+
+                if (options.showHeader) {
+                    html += '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><caption class="k-meta-header">';
+                    html += this.title(options.date, options.min, options.max);
+                    html += '</caption><tbody><tr role="row">';
+                }
 
                 return view({
                     start: createDate(year - year % 10 - 1, 0, 1),
                     min: createDate(options.min.getFullYear(), 0, 1),
                     max: createDate(options.max.getFullYear(), 0, 1),
                     otherMonth : options.otherMonth,
+                    html : html,
                     setter: this.setDate,
                     build: function(date, idx) {
                         return {
@@ -1559,7 +1581,8 @@ var __meta__ = { // jshint ignore:line
                 max = options.max.getFullYear(),
                 toDateString = this.toDateString,
                 minYear = min,
-                maxYear = max;
+                maxYear = max,
+                html = "";
 
                 minYear = minYear - minYear % 10;
                 maxYear = maxYear - maxYear % 10;
@@ -1568,11 +1591,18 @@ var __meta__ = { // jshint ignore:line
                     maxYear = minYear + 9;
                 }
 
+                if (options.showHeader) {
+                    html += '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><caption class="k-meta-header">';
+                    html += this.title(options.date, options.min, options.max);
+                    html += '</caption><tbody><tr role="row">';
+                }
+
                 return view({
                     start: createDate(year - year % 100 - 10, 0, 1),
                     min: createDate(minYear, 0, 1),
                     max: createDate(maxYear, 0, 1),
                     otherMonth : options.otherMonth,
+                    html : html,
                     setter: this.setDate,
                     build: function(date, idx) {
                         var start = date.getFullYear(),
