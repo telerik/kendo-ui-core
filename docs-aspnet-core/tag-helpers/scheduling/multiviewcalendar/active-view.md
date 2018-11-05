@@ -8,7 +8,9 @@ position: 2
 
 # Active View
 
-To define the first rendered view, use the `Start` option. To control the navigation depth, set the `Depth` option.
+To define the first view which the MultiViewCalendar intially renders, use the `Start` option.
+
+To control the navigation depth, set the `Depth` option.
 
 The following views are predefined:
 
@@ -17,7 +19,7 @@ The following views are predefined:
 * `decade`&mdash;Shows the years of the decade.
 * `century`&mdash;Shows the decades of the century.
 
-### Selectable Month Calendars
+## Selectable Month Calendars
 
 The following example demonstrates how to create a MultiViewCalendar that allows users to select a month.
 

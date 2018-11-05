@@ -1,13 +1,13 @@
 ---
 title: Change Validation Options of Resource Units
 page_title: Change Validation Options of Resource Units | Kendo UI Gantt
-description: "Learn how to change validation options of resource units in Gantt"
+description: "Learn how to change validation options of resource units in the Kendo UI Gantt widget."
 slug: howto_validation_resource_units_gantt
 ---
 
 # Change Validation Options of Resource Units
 
-The example below demonstrates how to configure the validation options of resource units in Gantt.
+The example below demonstrates how to configure the validation options of the resource units in the Kendo UI Gantt.
 
 ###### Example
 

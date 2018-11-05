@@ -41,12 +41,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ## Functionality and Features
 
-The MultiViewCalendar provides configuration options that can be set during initialization. The available properties are:
-
 * [Active view]({% slug active_view_multiviewcalendar_htmlhelper_aspnetcore %})
 * [Multiple views]({% slug multiple_views_multiviewcalendar_htmlhelper_aspnetcore %})
-* [Day template]({% slug day_template_multiviewcalendar_htmlhelper_aspnetcore %})
 * [Selection]({% slug selection_multiviewcalendar_htmlhelper_aspnetcore %})
+* [Day template]({% slug day_template_multiviewcalendar_htmlhelper_aspnetcore %})
 * [Disable dates]({% slug disabled_dates_multiviewcalendar_htmlhelper_aspnetcore %})
 * [Week column]({% slug week_column_multiviewcalendar_htmlhelper_aspnetcore %})
 * [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar_htmlhelper_aspnetcore %})

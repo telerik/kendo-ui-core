@@ -26,14 +26,14 @@ You can apply any of the following possible approaches to avoid table overflowin
 
 **Solutions:**
 
-1. When the scrolling is disabled, use this CSS:
+* If scrolling is disabled, use the following CSS.
 
         #GridID
         {
             min-width: 800px;
         }
 
-1. When the scrolling is enabled, and nested tables (hierarchy) ARE NOT USED, use this CSS:
+* If scrolling is enabled and the Grid does not use nested tables (hierarchy), use the following CSS.
 
         #GridID .k-grid-header-wrap > table, /* header table */
         #GridID .k-grid-content table, /* data table, no virtual scrolling */
@@ -42,7 +42,7 @@ You can apply any of the following possible approaches to avoid table overflowin
             min-width: 800px;
         }
 
-1. When the scrolling is enabled, and nested tables (hierarchy) ARE USED, use this CSS:
+* If scrolling is enabled the Grid uses nested tables (hierarchy), use the following CSS.
 
         #GridID .k-grid-header-wrap > table, /* header table */
         #GridID .k-grid-content table, /* data table, no virtual scrolling */
@@ -55,7 +55,6 @@ You can apply any of the following possible approaches to avoid table overflowin
         {
             min-width: initial;
         }
-
 
 ## See Also
 

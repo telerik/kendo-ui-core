@@ -3,7 +3,7 @@ title: Day Template
 page_title: Week Number Column | Kendo UI MultiViewCalendar
 description: "Customize the content of each cell by using cell templates when working with the Kendo UI MultiViewCalendar."
 slug: day_template_multiviewcalendar
-position: 5
+position: 4
 ---
 
 # Day Template

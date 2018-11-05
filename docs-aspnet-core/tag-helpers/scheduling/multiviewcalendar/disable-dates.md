@@ -1,21 +1,16 @@
 ---
-title: Disabled dates
-page_title: Disabled dates | Telerik UI for ASP.NET Core Tag Helpers
+title: Disabled Dates
+page_title: Disabled Dates | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
 slug: disabled_dates_multiviewcalendar_taghelper_aspnetcore
 position: 6
 ---
 
-
-# Disabled dates
+# Disabled Dates
 
 The MultiViewCalendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
 
-To disable a date set an array of the dates that should be disabled.
-
-### Set an Array
-
-When you set an array, list the days that need to be disabled by using the first letters from their names in English.
+To disable a date set an array of the dates that have to be disabled and list the days that need to be disabled by using the first letters from their names in English.
 
 ###### Example
 

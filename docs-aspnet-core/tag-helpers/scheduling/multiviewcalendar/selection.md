@@ -8,9 +8,7 @@ position: 4
 
 # Selection
 
-The Kendo UI MultiViewCalendar allows the user to select multiple dates or a range of dates using different selection modes offered by the widget.
-
-### Multiple selection
+The Kendo UI MultiViewCalendar allows the user to select multiple dates by using the multiple-view MultiViewCalendar selection mode.
 
 ###### Example
 

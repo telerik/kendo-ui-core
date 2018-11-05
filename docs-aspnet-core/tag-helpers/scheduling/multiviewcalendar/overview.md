@@ -50,8 +50,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ## Functionality and Features
 
-The MultiViewCalendar provides configuration options that can be set during initialization. The available properties are:
-
 * [Active view]({% slug active_view_multiviewcalendar_taghelper_aspnetcore %})
 * [Multiple views]({% slug multiple_views_multiviewcalendar_taghelper_aspnetcore %})
 * [Selection]({% slug selection_multiviewcalendar_taghelper_aspnetcore %})

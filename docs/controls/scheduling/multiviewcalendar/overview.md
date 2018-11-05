@@ -29,13 +29,11 @@ To initialize the MultiViewCalendar, use a jQuery selector.
 
 ## Functionality and Features
 
-The Calendar provides configuration options that can be set during initialization. The available properties are:
-
 * [Active view]({% slug active_view_multiviewcalendar %})
 * [Multiple views]({% slug multiple_views_multiviewcalendar %})
-* [Day template]({% slug day_template_multiviewcalendar %})
 * [Selection]({% slug selection_multiviewcalendar %})
-* [Disable dates]({% slug disabled_dates_multiviewcalendar %})
+* [Day template]({% slug day_template_multiviewcalendar %})
+* [Disabled dates]({% slug disabled_dates_multiviewcalendar %})
 * [Week column]({% slug week_column_multiviewcalendar %})
 * [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar %})
 

@@ -16,7 +16,7 @@ Make sure you are familiar with the fundamental Kendo UI widget concepts and tha
 
 ### The Basics
 
-The Kendo UI RadioButton widget is rendered as an `input type='radio'` element that is immediately followed by a `label` element. The styling comes from the  `k-radio` class being attached to the `input` element and the `k-radio-label` class being attached to the `label` element.
+The Kendo UI RadioButton widget is rendered as an `input type='radio'` element that is immediately followed by a `label` element. The styling comes from the `k-radio` class that is attached to the `input` element and the `k-radio-label` class that is attached to the `label` element.
 
 ### Initialization
 

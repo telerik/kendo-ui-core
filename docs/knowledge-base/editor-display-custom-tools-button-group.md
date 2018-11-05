@@ -1,8 +1,8 @@
 ---
 title: Display Editor Custom Tools as a Button Group
-description: An example on how to display several custom tools as a Button Group.
-type: how-to
-page_title: Display Editor custom tools as a Button Group. | Kendo UI Editor
+description: An example on how to display several custom tools as a button group in the Kendo UI Editor.
+type: how-to 
+page_title: Display Editor Custom Tools as a Button Group | Kendo UI Editor
 slug: editor-display-custom-tools-button-group
 tags: editor, display, appearance, CSS, custom, tools, button, group
 ticketid: 920475
@@ -33,12 +33,12 @@ component: editor
 
 ## Description
 
-How can I display several custom tools as a Button Group in the Editor?
+How can I display several custom tools as a button group in the Editor?
 
 ## Solution
 
-1. Set a template to the custom tool.
-1. The content of the template must use the Html structure and classes demonstrated in the example below.
+1. Set a template to the custom tool. 
+1. Apply the following HTML structure and classes to the content of the template.
 
 ```html
 	<textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">

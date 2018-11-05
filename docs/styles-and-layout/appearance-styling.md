@@ -191,7 +191,7 @@ With the 2014 Q3 release Kendo UI provides customized presentation for checkboxe
     <!-- Kendo UI Checkbox -->
     <input type="checkbox" id="checkbox" class="k-checkbox">
     <label class="k-checkbox-label" for="checkbox"></label>
-
+    
     <!-- Kendo UI Radio button -->
     <input type="radio" id="radiobutton" class="k-radio">
     <label class="k-radio-label" for="radiobutton"></label>
@@ -221,7 +221,7 @@ The list below demonstrates the names of the `.less` files supported by Kendo UI
 
 > **Important**
 >
-> Starting with Kendo UI versions 2019.1, we distribute a single set of themes for both Kendo UI Professional and Kendo UI Core. Previously, with Kendo UI Core we shipped only a subset of the themes available for Kendo UI Professional.
+> As of 2019.1 versions and onwards Kendo UI for jQuery distributes a single and identical set of themes for both Kendo UI Professional and Kendo UI Core. 
 
 The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets, can be built using the Less 1.7.5 version.
 

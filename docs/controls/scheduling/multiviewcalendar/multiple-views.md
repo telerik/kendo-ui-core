@@ -8,7 +8,9 @@ position: 3
 
 # Multiple Views
 
-The Kendo UI MultiViewCalendar allows to define the number of views/months to be displayed at a time. In some scenarios it might be necessary to display more than two months. This is helpful especially in case of range selection among a couple of months.
+The Kendo UI MultiViewCalendar allows you to define the number of views and months that are displayed at a time.
+
+In some scenarios it might be necessary to display more than two months. This is helpful especially in case of range selection among a couple of months.
 
 ###### Example
 
