@@ -1037,7 +1037,7 @@ declare namespace kendo.data {
         max?: any;
         minLength?: any;
         maxLength?: any;
-    	[rule: string]: any;
+        [rule: string]: any;
     }
 
     class ObservableArray extends Observable {
@@ -1300,7 +1300,7 @@ declare namespace kendo.data {
         type?: string;
         change? (e: DataSourceChangeEvent): void;
         error?(e: DataSourceErrorEvent): void;
-		push?(e: DataSourcePushEvent): void;
+        push?(e: DataSourcePushEvent): void;
         sync?(e: DataSourceEvent): void;
         requestStart?(e: DataSourceRequestStartEvent): void;
         requestEnd?(e: DataSourceRequestEndEvent): void;
@@ -1330,9 +1330,9 @@ declare namespace kendo.data {
         node?: any;
     }
 
-	interface DataSourcePushEvent extends DataSourceEvent {
+    interface DataSourcePushEvent extends DataSourceEvent {
         items?: DataSourceItemOrGroup[];
-		type?: string;
+        type?: string;
 
     }
 
@@ -1549,7 +1549,7 @@ declare namespace kendo.mobile {
         statusBarStyle?: string;
         transition?: string;
         useNativeScrolling?: boolean;
-		init?(e: ApplicationEvent): void;
+        init?(e: ApplicationEvent): void;
     }
 
     interface ApplicationEvent {
@@ -4411,6 +4411,7 @@ declare namespace kendo.ui {
         saveChanges?(e: GridSaveChangesEvent): void;
         sort?(e: GridSortEvent): void;
     }
+
     interface GridEvent {
         sender: Grid;
         preventDefault: Function;
