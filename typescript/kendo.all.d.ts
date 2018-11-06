@@ -1037,7 +1037,7 @@ declare namespace kendo.data {
         max?: any;
         minLength?: any;
         maxLength?: any;
-    	[rule: string]: any;
+        [rule: string]: any;
     }
 
     class ObservableArray extends Observable {
@@ -1122,6 +1122,7 @@ declare namespace kendo.data {
         query(options?: any): JQueryPromise<any>;
         read(data?: any): JQueryPromise<any>;
         remove(model: kendo.data.ObservableObject): void;
+        skip(): number;
         sort(sort: DataSourceSortItem): void;
         sort(sort: DataSourceSortItem[]): void;
         sort(): DataSourceSortItem[];
@@ -1299,7 +1300,7 @@ declare namespace kendo.data {
         type?: string;
         change? (e: DataSourceChangeEvent): void;
         error?(e: DataSourceErrorEvent): void;
-		push?(e: DataSourcePushEvent): void;
+        push?(e: DataSourcePushEvent): void;
         sync?(e: DataSourceEvent): void;
         requestStart?(e: DataSourceRequestStartEvent): void;
         requestEnd?(e: DataSourceRequestEndEvent): void;
@@ -1329,9 +1330,9 @@ declare namespace kendo.data {
         node?: any;
     }
 
-	interface DataSourcePushEvent extends DataSourceEvent {
+    interface DataSourcePushEvent extends DataSourceEvent {
         items?: DataSourceItemOrGroup[];
-		type?: string;
+        type?: string;
 
     }
 
@@ -1548,7 +1549,7 @@ declare namespace kendo.mobile {
         statusBarStyle?: string;
         transition?: string;
         useNativeScrolling?: boolean;
-		init?(e: ApplicationEvent): void;
+        init?(e: ApplicationEvent): void;
     }
 
     interface ApplicationEvent {
@@ -4403,6 +4404,7 @@ declare namespace kendo.ui {
         saveChanges?(e: GridSaveChangesEvent): void;
         sort?(e: GridSortEvent): void;
     }
+
     interface GridEvent {
         sender: Grid;
         preventDefault: Function;
@@ -20937,15 +20939,6 @@ interface JQueryPromise<T> {
 
 interface JQuery {
 
-    kendoDraggable(): JQuery;
-    kendoDraggable(options: kendo.ui.DraggableOptions): JQuery;
-
-    kendoDropTarget(): JQuery;
-    kendoDropTarget(options: kendo.ui.DropTargetOptions): JQuery;
-
-    kendoDropTargetArea(): JQuery;
-    kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery;
-
     data(key: any): any;
 
     kendoAlert(): JQuery;
@@ -21024,6 +21017,10 @@ interface JQuery {
     kendoDialog(options: kendo.ui.DialogOptions): JQuery;
     data(key: "kendoDialog"): kendo.ui.Dialog;
 
+    kendoDraggable(): JQuery;
+    kendoDraggable(options: kendo.ui.DraggableOptions): JQuery;
+    data(key: "kendoDraggable"): kendo.ui.Draggable;
+
     kendoDropDownList(): JQuery;
     kendoDropDownList(options: kendo.ui.DropDownListOptions): JQuery;
     data(key: "kendoDropDownList"): kendo.ui.DropDownList;
@@ -21031,6 +21028,14 @@ interface JQuery {
     kendoDropDownTree(): JQuery;
     kendoDropDownTree(options: kendo.ui.DropDownTreeOptions): JQuery;
     data(key: "kendoDropDownTree"): kendo.ui.DropDownTree;
+
+    kendoDropTarget(): JQuery;
+    kendoDropTarget(options: kendo.ui.DropTargetOptions): JQuery;
+    data(key: "kendoDropTarget"): kendo.ui.DropTarget;
+
+    kendoDropTargetArea(): JQuery;
+    kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery;
+    data(key: "kendoDropTargetArea"): kendo.ui.DropTargetArea;
 
     kendoEditor(): JQuery;
     kendoEditor(options: kendo.ui.EditorOptions): JQuery;

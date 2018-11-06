@@ -309,7 +309,7 @@ var __meta__ = { // jshint ignore:line
             if (options.info) {
                 if (total > 0) {
                     html = kendo.format(options.messages.display,
-                        that.dataSource.options.endless ? 1 : Math.min((page - 1) * pageSize + 1, collapsedTotal), // first item in the page
+                        that.dataSource.options.endless ? 1 : Math.min((page - 1) * (that.dataSource.pageSize() || 0) + 1, collapsedTotal), // first item in the page
                         Math.min(page * pageSize, collapsedTotal), // last item in the page
                     total);
                 } else {
