@@ -30,7 +30,6 @@ var __meta__ = { // jshint ignore:line
         weekNumberTemplate = template('<td class="k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9,
-        outerHeight = kendo._outerHeight,
         outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
@@ -945,11 +944,12 @@ var __meta__ = { // jshint ignore:line
                 cell, position;
 
             if (effects && effects.indexOf("zoom") != -1) {
-                to.css({
+                to.insertBefore(from);
+
+                from.css({
                     position: "absolute",
-                    top: outerHeight(from.prev()),
-                    left: 0
-                }).insertBefore(from);
+                    width: to.width()
+                });
 
                 if (transitionOrigin) {
                     cell = that._cellByDate(that._view.toDateString(that._current));
@@ -964,12 +964,6 @@ var __meta__ = { // jshint ignore:line
                     complete: function() {
                         from.off(ns).remove();
                         that._oldTable = null;
-
-                        to.css({
-                            position: "static",
-                            top: 0,
-                            left: 0
-                        });
 
                         that._focusView(active);
                     }

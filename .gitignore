@@ -31,8 +31,3 @@ src/.tern-port
 build/timezone-js
 ci
 playground
-
-# Visual Studio Code
-.settings/launch.json
-.vs
-.vscode
