@@ -932,16 +932,16 @@ The validation rule applied to the cell.
     </script>
 
 ### sheets.rows.cells.validation.type `String`
-Defines the validation type. The acceptable options are *reject* or *warning*
+Defines the validation type. The acceptable options are *reject* or *warning*. Defaults to *warning*.
 
 ### sheets.rows.cells.validation.comparerType `String`
-Defines the comparer type used to validate the cell value, e.g. "greaterThan", "between" and etc.
+Defines the comparer type used to validate the cell value. Can be "greaterThan", "lessThan", "between", "equalTo", "notEqualTo", "greaterThanOrEqualTo", "lessThanOrEqualTo", "notBetween" or "custom".
 
 ### sheets.rows.cells.validation.dataType `String`
-Defines the data type of the cell value.
+Defines the data type of the cell value. Can be "date", "text", "number", "list" or "custom".
 
 ### sheets.rows.cells.validation.from `String`
-Defines a *formula* or *value* used for the comparison process. Used as *only* if comparer type does not require second argument.
+Defines a *formula* or *value* used for the comparison process. Used as the *only* compare value if comparer type does not require second argument. Mandatory for validation to work.
 
 ### sheets.rows.cells.validation.showButton `Boolean` *(default: false)*
 A boolean value indicating if a button for selecting list items (dataType set to `list`) should be displayed.
@@ -1152,7 +1152,8 @@ Those tools which are part of a tool group are defined as array. For example `["
                     {
                         type: "button",
                         text: "Custom",
-                        spriteCssClass: "k-icon k-i-cog",
+                        showText: "both",
+                        icon: "k-icon k-i-cog",
                         click: function() {
                             window.alert("custom tool");
                         }
@@ -1195,7 +1196,7 @@ Those tools which are part of a tool group are defined as array. For example `["
     </script>
 
 ### toolbar.data `Boolean|Array` *(default: true)*
-A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
+A boolean value indicating if the "data" tab should be displayed or a collection of tools that will be shown in the "data" tab.
 
 The available tools are:
 

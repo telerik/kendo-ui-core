@@ -13,8 +13,8 @@ The TreeList supports client-side paging for large sets of data.
 To enable the paging functionality, configure the [`Pageable`](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListPageableSettingsBuilder) settings.
 
 > **Important**
-> * Remember to set a [`PageSize`](http://kendobuild-staging.openstack.progress.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListPageableSettingsBuilder#methods-PageSize(System.Double)). You can define a `PageSize` in the `Pageable` or in the [`DataSource`](http://kendobuild-staging.openstack.progress.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilderBase#methods-PageSize(System.Int32)) settings. If an already existing dataSource instance is passed to the TreeList, then the `PageSize` option has to be set in the dataSource settings and not in the `Pageable` settings.
-> * By default, [`ServerOperations`] (http://kendobuild-staging.openstack.progress.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilderBase#methods-ServerOperation(System.Boolean)) are enabled in the Grid MVC wrapper. For client-side paging you have to disable the server operations by setting the `ServerOperations` to `false`.
+> * Remember to set a [`PageSize`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListPageableSettingsBuilder#methods-PageSize(System.Double)). You can define a `PageSize` in the `Pageable` or in the [`DataSource`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilderBase#methods-PageSize(System.Int32)) settings. If an already existing dataSource instance is passed to the TreeList, then the `PageSize` option has to be set in the dataSource settings and not in the `Pageable` settings.
+> * By default, [`ServerOperations`] (https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AjaxDataSourceBuilderBase#methods-ServerOperation(System.Boolean)) are enabled in the Grid MVC wrapper. For client-side paging you have to disable the server operations by setting the `ServerOperations` to `false`.
 
 ###### Example
 

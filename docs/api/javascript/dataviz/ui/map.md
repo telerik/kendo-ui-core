@@ -1807,7 +1807,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map#configuration-layers-tile-subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map/configuration/layers.subdomains)
 
 #### Example - set default URL template for all tile layers
     <div id="map"></div>
@@ -3306,7 +3306,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map#configuration-layers-tile-subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map/configuration/layers.subdomains)
 
 #### Example - setting URL template for tile layer
     <div id="map"></div>

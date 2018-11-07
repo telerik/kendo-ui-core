@@ -104,7 +104,7 @@ Besides the standard filter options, the MultiColumnComboBox allows you to set f
 
 ### Columns Width
 
-The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](/api/javascript/ui/multicolumncombobox/configuration/columns.width).
+The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth) option. In addition, the columns also allow you to [set their width](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/columns.width).
 
 > **Important**
 >
