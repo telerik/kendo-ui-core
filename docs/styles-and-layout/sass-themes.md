@@ -15,7 +15,7 @@ Currently, Kendo UI delivers two Sass themes:
 
 * **Default v2** - a modern update of the Kendo UI Default theme.
 * **Bootstrap v4** - has linked variables to the famous Bootstrap, in order to achieve similarity in the look and feel. Therefore, customizing the original Bootstrap theme will affect the Kendo UI theme as well.
-
+* **Material** - an update of the Kendo UI Material to closely implement the [Material Design Guidelines](https://material.io/design/).
 
 ## Overview
 
@@ -60,6 +60,7 @@ The Kendo UI Sass-based themes are located on the Progress NPM registry:
 
 * **Kendo UI Default Theme**&mdash;Available as @progress/kendo-theme-default.
 * **Kendo UI Bootstrap v4 Theme**&mdash;Available as @progress/kendo-theme-bootstrap.
+* **Kendo UI Material Theme**&mdash;Available as @progress/kendo-theme-material.
 
 To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional]({% slug kendoui_npm_packages_kendoui_installation %}#kendo-ui-professional).
 
@@ -600,7 +601,7 @@ Outputs a module once, no matter how many times it is included.
 
 ### Contribution
 
-To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-theme-default](https://github.com/telerik/kendo-theme-default) GitHub repository it is stored in.
+To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository it is stored in.
 
 ## Sass Theme Builder
 
