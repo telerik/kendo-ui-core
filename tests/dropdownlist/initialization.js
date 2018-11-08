@@ -51,7 +51,7 @@
 
         ok(wrapper.parent().is("span.test"));
         ok(wrapper.is("span.k-widget"));
-        ok(wrapper.hasClass("k-widget k-dropdown k-header"));
+        ok(wrapper.hasClass("k-widget k-dropdown"));
         ok(!input.is(":visible"));
     });
 
@@ -628,10 +628,12 @@
             equal(select[0].childNodes[0].value, 'item1"');
     });
 
-    test("should not set id to the popup if the input does not have", function() {
+    test("should set id to the popup if the input does not have", function() {
         input.removeAttr("id");
         dropdownlist = new DropDownList(input);
-        ok(!dropdownlist.list.attr("id"));
+
+        // for accessibility reasons the list must be associated to the input
+        ok(dropdownlist.list.attr("id"));
     });
 
     test("binding to primitive types", function() {

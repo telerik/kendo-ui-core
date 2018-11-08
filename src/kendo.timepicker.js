@@ -921,8 +921,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
-            that.wrapper = wrapper.addClass("k-widget k-timepicker k-header")
-                                  .addClass(element[0].className);
+            that.wrapper = wrapper.addClass("k-widget k-timepicker")
+                .addClass(element[0].className);
 
             element.css({
                 width: "100%",

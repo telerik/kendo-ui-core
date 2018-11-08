@@ -18,7 +18,7 @@ test("_wrapper() wraps input element", function() {
     var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
     ok(input.parent().hasClass("k-picker-wrap k-state-default"));
-    equal(datetimepicker.wrapper.attr("class"), "k-widget k-datetimepicker k-header");
+    ok(datetimepicker.wrapper.hasClass("k-widget k-datetimepicker"));
 });
 
 test("DateTimePicker adds k-input class to the element", function() {

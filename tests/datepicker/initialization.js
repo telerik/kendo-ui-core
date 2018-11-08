@@ -105,7 +105,7 @@ test("_wrapper() wraps input element", function() {
     var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
     ok(input.parent().hasClass("k-picker-wrap k-state-default"));
-    equal(datepicker.wrapper.attr("class"), "k-widget k-datepicker k-header");
+    ok(datepicker.wrapper.hasClass("k-widget k-datepicker"));
 });
 
 test("_input should add k-input to the element", function() {

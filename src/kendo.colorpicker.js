@@ -747,7 +747,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: kendo.template(
-            '<span role="textbox" aria-haspopup="true" class="k-widget k-colorpicker k-header">' +
+            '<span role="textbox" aria-haspopup="true" class="k-widget k-colorpicker">' +
                 '<span class="k-picker-wrap k-state-default">' +
                     '# if (toolIcon) { #' +
                         '<span class="k-icon k-tool-icon #= toolIcon #">' +

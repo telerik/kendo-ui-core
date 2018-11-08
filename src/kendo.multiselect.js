@@ -1149,6 +1149,8 @@ var __meta__ = { // jshint ignore:line
         _search: function() {
             var that = this;
 
+            clearTimeout(that._typingTimeout);
+
             that._typingTimeout = setTimeout(function() {
                 var value = that._inputValue();
                 if (that._prev !== value) {

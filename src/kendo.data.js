@@ -3940,7 +3940,7 @@ var __meta__ = { // jshint ignore:line
                 }
             };
 
-            return this._query().then(fn);
+            return this._query().done(fn);
         },
 
         _query: function(options) {

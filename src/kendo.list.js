@@ -83,10 +83,12 @@ var __meta__ = { // jshint ignore:line
 
             id = element.attr(ID);
 
-            if (id) {
-                that.list.attr(ID, id + "-list");
-                that.ul.attr(ID, id + "_listbox");
+            if (!id) {
+                id = kendo.guid();
             }
+
+            that.list.attr(ID, id + "-list");
+            that.ul.attr(ID, id + "_listbox");
 
             if (options.columns && options.columns.length) {
                 that.ul.removeClass("k-list").addClass("k-grid-list");
@@ -715,7 +717,7 @@ var __meta__ = { // jshint ignore:line
             } else if (ariaLabelledBy){
                 focusedElm.attr("aria-labelledby", ariaLabelledBy);
             } else if (labelElm.length){
-                var labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId);
+                var labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || kendo.guid());
                 focusedElm.attr("aria-labelledby", labelId);
             }
         },

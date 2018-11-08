@@ -57,7 +57,7 @@ test("wraps element if no wrapper span.k-widget and hide element", function() {
 
    ok(wrapper.is("span"));
    ok(wrapper.parent().is("span.test"));
-   ok(wrapper.hasClass("k-widget k-combobox k-header"));
+   ok(wrapper.hasClass("k-widget k-combobox"));
    ok(!input.is(":visible"));
 
    input.unwrap();
