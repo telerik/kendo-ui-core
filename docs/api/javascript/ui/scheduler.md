@@ -226,6 +226,7 @@ If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/
          }
       }
     });
+    </script>
 
 #### Example - set dataSource as a JavaScript array
 
