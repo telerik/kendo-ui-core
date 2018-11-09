@@ -8751,6 +8751,12 @@ declare namespace kendo.ui {
         iframe?: boolean;
     }
 
+    interface WindowDraggable {
+        containment?: any|string;
+        dragHandle?: any|string;
+        axis?: string;
+    }
+
     interface WindowOptions {
         name?: string;
         actions?: any;
@@ -8758,7 +8764,7 @@ declare namespace kendo.ui {
         appendTo?: any|string;
         autoFocus?: boolean;
         content?: string | WindowContent;
-        draggable?: boolean;
+        draggable?: boolean | WindowDraggable;
         iframe?: boolean;
         height?: number|string;
         maxHeight?: number;
