@@ -1226,6 +1226,38 @@ The available tools are:
         });
     </script>
 
+### useCultureDecimals `Boolean` *(default: false)*
+
+If set to `true`, the spreadsheet's formula parser will obey the current culture's decimal separator.  When `false` (the default) the decimal separator in formulas will always be the dot.
+
+This flag has implications on how formulas are entered.  When set to `true`, in cultures where the decimal separator is the comma (`,`) there are the following additional changes when entering a formula, similar to how Excel operates:
+
+- The semicolon becomes function argument separator.  Example: `=SUM(A1;A2)` instead of `=SUM(A1,A2)`.
+- The backslash becomes element separator in an array formula.  Example: `={1\2;3\4}` instead of `={1,2;3,4}`.
+
+This flag only affects presentation, that is, the way formulas are entered by the end user, or displayed on screen.  Serialization to JSON or XLSX, as well as the public API functions, will continue to use the dot as decimal separator and the comma as argument separator (canonical form).  For example, in order to apply a formula using the API, even if `useCultureDecimals` is in effect, you still need to use the canonical form:
+
+    sheet.range('B1').formula('SUM(A1, A2, 3.14)');
+    // or:
+    sheet.range('B1').input('=SUM(A1, A2, 3.14)');
+
+    // prints: SUM(A1, A2, 3.14)
+    console.log(sheet.range('B1').formula());
+
+If you would like the API functions to obey `useCultureDecimals`, wrap your code in a call to `sheet.withCultureDecimals`.  Assuming a culture where the comma is used for decimals, contrast the above example to:
+
+    sheet.withCultureDecimals(function(){
+        sheet.range('B1').formula('SUM(A1; A2; 3,14)');
+        // or:
+        sheet.range('B1').input('=SUM(A1; A2; 3,14)');
+
+        // prints: SUM(A1; A2; 3,14)
+        console.log(sheet.range('B1').formula());
+    });
+
+    // back to canonical form; this prints: SUM(A1, A2, 3.14)
+    console.log(sheet.range('B1').formula());
+
 ## Methods
 
 ### activeSheet
