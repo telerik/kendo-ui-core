@@ -696,8 +696,8 @@ var __meta__ = { // jshint ignore:line
                 height: element[0].style.height
             });
 
-            that.wrapper = wrapper.addClass("k-widget k-datepicker k-header")
-                                  .addClass(element[0].className);
+            that.wrapper = wrapper.addClass("k-widget k-datepicker")
+                .addClass(element[0].className);
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },

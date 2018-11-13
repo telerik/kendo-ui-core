@@ -87,7 +87,7 @@ How can I:
 				// populate hidden input with new data
               $("#gridData").val(JSON.stringify(sampleData));
               // on success
-              e.success(e.data.models[i]);
+              e.success(e.data.models);
               // on failure
               //e.error("XHR response", "status code", "error message");
             },

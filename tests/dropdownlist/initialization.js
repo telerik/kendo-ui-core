@@ -51,7 +51,7 @@
 
         ok(wrapper.parent().is("span.test"));
         ok(wrapper.is("span.k-widget"));
-        ok(wrapper.hasClass("k-widget k-dropdown k-header"));
+        ok(wrapper.hasClass("k-widget k-dropdown"));
         ok(!input.is(":visible"));
     });
 

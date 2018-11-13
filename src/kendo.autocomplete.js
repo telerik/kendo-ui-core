@@ -812,8 +812,8 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.element;
             that.wrapper = wrapper
-                              .addClass("k-widget k-autocomplete k-header")
-                              .addClass(DOMelement.className);
+                .addClass("k-widget k-autocomplete")
+                .addClass(DOMelement.className);
         }
     });
 

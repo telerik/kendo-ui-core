@@ -13,7 +13,6 @@ This articles summarizes all known issues related to Telerik UI for ASP.NET Core
 
 ## ASP.NET Core Framework
 
-- Data Tables are not supported. For more information on this limitation, refer to [dotnet/corefx#1039](https://github.com/dotnet/corefx/issues/1039).
 - Localization resources are not supported. For more information on this limitation, refer to [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007).
 
 ## HtmlHelpers

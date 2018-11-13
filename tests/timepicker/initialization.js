@@ -78,7 +78,7 @@
         var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
         ok(input.parent().hasClass("k-picker-wrap k-state-default"));
-        equal(timepicker.wrapper.attr("class"), "k-widget k-timepicker k-header");
+        ok(timepicker.wrapper.hasClass("k-widget k-timepicker"));
     });
 
     test("init() should add k-input to the element", function() {
@@ -394,7 +394,7 @@
         equal(timepicker._dateInput.min(), min);
         equal(timepicker._dateInput.max(), max);
     });
-    
+
     test("TimeView renders only one option if min is set and no more hours reflect the criteria", function() {
         var tv = new TimeView({
             min: new Date(2018, 3, 11, 23, 50, 0),

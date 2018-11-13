@@ -108,7 +108,7 @@ For more information on the Button [`enable` property](/api/javascript/ui/button
 
 The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite). From web standards' point of view, using background images is better, because the icon does not represent structural content, but is simply a decoration.
 
-Kendo UI Button provides three properties for configuring icons&mdash;`icon`, `spriteCssClass` and `imageUrl`. Use only one of them with a particular Button instance. If you defines multiple properties, only one of them will be obeyed and according to the order stated above.
+Kendo UI Button provides three properties for configuring icons&mdash;`icon`, `spriteCssClass` and `imageUrl`. Use only one of them with a particular Button instance. If you define multiple properties, only one of them will be obeyed according to the order stated above.
 
 ### Background Icons
 
