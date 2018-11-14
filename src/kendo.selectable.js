@@ -23,7 +23,7 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoSelectable",
         UNSELECT = "unselect",
         UNSELECTING = "k-state-unselecting",
-        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up",
+        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up,label.k-checkbox-label.k-no-text",
         msie = kendo.support.browser.msie,
         supportEventDelegation = false;
 
