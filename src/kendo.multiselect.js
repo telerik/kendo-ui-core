@@ -409,7 +409,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (that.options.tagMode === "single"){
-                that.value([]);
+                that.listView.value([]);
             } else{
                 that.tagList.children().each(function(index, tag) {
                     that._removeTag($(tag), false);
