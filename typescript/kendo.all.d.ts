@@ -925,7 +925,7 @@ declare namespace kendo.data {
         read?: string | DataSourceTransportRead | ((options: DataSourceTransportOptions) => void);
         signalr?: DataSourceTransportSignalr | ((options: DataSourceTransportOptions) => void);
         update?: string | DataSourceTransportUpdate | ((options: DataSourceTransportOptions) => void);
-        parameterMap?(data: DataSourceTransportParameterMapData, type: string): any;
+        parameterMap?(data: DataSourceTransportParameterMapData, type: "create"|"destroy"|"read"|"update"): any;
     }
 
     interface DataSourceTransportSignalrClient {
