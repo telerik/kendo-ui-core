@@ -34,6 +34,17 @@ The DataSource `schema` has several important roles, with the most notable ones 
 
 You must configure the first two settings no matter whether local or remote CRUD operations are used. The only case when they are not needed is for scenarios when all data fields are of the string type and there is no editing.
 
+The field used as a model ID has default values that are used by the data source component to determine whether there is a new item. If the value of an item in the data set matches the default value, it will be considered a new item. Here is a list of the default values per field type:
+
+```
+"string": "",
+"number": 0,
+"date": new Date(),
+"boolean": false,
+"default": ""
+```
+
+
 For detailed information on the DataSource `schema`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/schema).
 
 ## Local or Custom Transport CRUD Operations
