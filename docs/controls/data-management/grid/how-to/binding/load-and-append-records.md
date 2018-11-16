@@ -8,6 +8,10 @@ slug: howto_loadand_append_morerecords_while_scrollingdown_grid
 
 # Load and Append More Records While Scrolling Down
 
+> **Important**
+>
+> **Deprecated** The functionality is available out of the box. Check [`endless scrolling`]({% slug endless_scrolling_kendoui_grid_widget %})
+
 The following example demonstrates how to load more records when scrolling the Grid rows.
 
 The difference between this scenario and virtual scrolling is that here the number of records constantly increases, while virtual scrolling replaces the existing records with new ones. Note that when you increase the page size, the data requests are slower.

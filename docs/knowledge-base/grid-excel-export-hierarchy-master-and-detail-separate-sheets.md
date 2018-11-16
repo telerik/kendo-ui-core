@@ -23,7 +23,7 @@ component: grid
 
 ## Description
 
-I implemented the Excel export of a master-detail Grid based on the URL by following [this example](http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/detail-grid-export). However, users want me to change the way the data is exported for each summary row and how the details are injected because this behavior prevents them from instantly checking the pivots and making a detailed analysis.
+I implemented the Excel export of a master-detail Grid based on the URL by following [this example](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/detail-grid-export). However, users want me to change the way the data is exported for each summary row and how the details are injected because this behavior prevents them from instantly checking the pivots and making a detailed analysis.
 
 How can I have separate sheets for the rows of the master Grid and for all detailed records of each row?
 
@@ -44,7 +44,7 @@ How can I have separate sheets for the rows of the master Grid and for all detai
       var dataSource = new kendo.data.DataSource({
         type: "odata",
         transport: {
-          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
         }
       });
 
@@ -55,7 +55,7 @@ How can I have separate sheets for the rows of the master Grid and for all detai
         dataSource: {
           type: "odata",
           transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
           },
           pageSize: 6,
           serverPaging: true
@@ -150,7 +150,7 @@ How can I have separate sheets for the rows of the master Grid and for all detai
           dataSource: {
             type: "odata",
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
             },
             serverPaging: true,
             serverSorting: true,
@@ -173,6 +173,6 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 
 ## See Also
 
-* [Exporting All Data](http://docs.telerik.com/kendo-ui/controls/data-management/grid/excel-export#excel-export-of-all-data)
-* [sheets.filter API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.filter)
-* [sheets.columns.width API](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.columns.width)
+* [Exporting All Data](https://docs.telerik.com/kendo-ui/controls/data-management/grid/excel-export#excel-export-of-all-data)
+* [sheets.filter API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.filter)
+* [sheets.columns.width API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.columns.width)

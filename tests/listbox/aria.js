@@ -79,4 +79,20 @@
         equal(toolsButtons.filter('[data-command="transferAllFrom"]').attr(ariaLabelAttr), "Transfer All From");
     });
 
+    test("listbox is not focused when input within template is clicked", function () {
+        var element = $('<select id="list"></select>').appendTo(QUnit.fixture);
+        var listBox = createListBoxWithToolbar({
+            dataSource: [{ name: "Tim", id: 4 }, { name: "Johny", id: 5 }, { name: "Dicky", id: 6 }],
+            template: '<input type="text" value="#:name#" />',
+            selectable: true,
+            navigatable: true
+        }, element);
+        var firstInput = listBox.items().first().find('input');
+
+        firstInput.focus();
+        listBox._click({ currentTarget: firstInput })
+
+        ok($(document.activeElement).is("input"))
+    });
+
 })();

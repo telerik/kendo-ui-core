@@ -90,7 +90,7 @@ The hierarchical name of the column
 
 ### measures `Array|Object`
 
-The configuration of measures. An string array which values are interpreted as the name of the measures to be loaded.
+The configuration of measures. A string array which values are interpreted as the name of the measures to be loaded.
 Measures can be defined as a list of objects with `name` and `type` fields:
 
     [{
@@ -124,7 +124,7 @@ or [kpiTrendTemplate](/api/javascript/ui/pivotgrid/configuration/kpitrendtemplat
 
 ### measures.values `Array`
 
-An string array which values are interpreted as the name of the measures to be loaded.
+A string array which values are interpreted as the name of the measures to be loaded.
 
 #### Example - set the measures
 
@@ -255,7 +255,7 @@ The configuration used to load data items and discover schema information.
 
 The configuration used when the data source discovers schema information about the current cube.
 
-> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.discover` is passed to `jQuery.ajax`. This means that you can set
+> The data source uses [jQuery.ajax](https://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.discover` is passed to `jQuery.ajax`. This means that you can set
 all options supported by `jQuery.ajax` via `transport.read` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.discover` is a function, the data source invokes that function instead of `jQuery.ajax`.
@@ -1263,7 +1263,7 @@ The path that uniquely specifies the tuple member that needs to be expanded.
 
 #### Example - expand second level tuple member
 
-    <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
+    <!-- Real life demo: https://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({

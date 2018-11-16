@@ -291,6 +291,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var target = $(e.currentTarget);
             var oldTarget = that._target;
+            var isInput = isInputElement(target);
 
             if (oldTarget) {
                 oldTarget.removeClass(FOCUSED_CLASS);
@@ -300,7 +301,7 @@ var __meta__ = { // jshint ignore:line
             target.addClass(FOCUSED_CLASS);
             that._getList().attr("aria-activedescendant", target.attr("id"));
 
-            if (that._getList()[0] !== kendo._activeElement()) {
+            if (that._getList()[0] !== kendo._activeElement() && !isInput) {
                 that.focus();
             }
         },
@@ -1541,6 +1542,10 @@ var __meta__ = { // jshint ignore:line
     extend(ListBox, {
         ToolBar: ToolBar
     });
+
+    function isInputElement(element) {
+        return $(element).is(":button,a,:input,a>.k-icon,textarea,span.k-select,span.k-icon,span.k-link,label.k-checkbox-label,.k-input,.k-multiselect-wrap,.k-picker-wrap,.k-picker-wrap>.k-selected-color,.k-tool-icon,.k-dropdown");
+    }
 
 })(window.kendo.jQuery);
 
