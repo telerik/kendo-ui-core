@@ -7,6 +7,7 @@ component: spreadsheet
 ---
 
 # kendo.ui.Spreadsheet
+
 Represents the Kendo UI Spreadsheet widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
