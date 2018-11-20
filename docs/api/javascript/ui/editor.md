@@ -1981,6 +1981,22 @@ Sets the title of the PDF file.
         });
     </script>
 
+### placeholder `String` *(default: "")*
+
+The hint displayed by the widget when it is empty. Not set by default.
+
+> **Important**
+>
+> The options is only available in [Classic Mode](/controls/editors/editor/overview#classic-mode).
+
+#### Example - specify the placeholder option
+    <textarea id="editor"></textarea>
+    <script>
+        $("#editor").kendoEditor({
+            placeholder: "Type here..."
+        });
+    </script>
+
 ### resizable `Boolean|Object` *(default: false)*
 
 If enabled, the editor renders a resize handle to allow users to resize it.

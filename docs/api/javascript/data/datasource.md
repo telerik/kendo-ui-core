@@ -4724,7 +4724,7 @@ Set to:
     dataSource.fetch();
     </script>
 
-> The `requestEvent` does not hold information regarding any errors that occurred during the request. The error information is available as part of the error event.
+> The `requestEnd` event does not hold information regarding any errors that occurred during the request. The error information is available as part of the error event.
 
 ### requestStart
 

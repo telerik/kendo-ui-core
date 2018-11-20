@@ -3429,6 +3429,7 @@ declare namespace kendo.ui {
 
     interface EditorOptions {
         name?: string;
+        placeholder?: string;
         deserialization?: EditorDeserialization;
         domain?: string;
         encoded?: boolean;
