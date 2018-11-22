@@ -824,7 +824,8 @@
                     wrapper = that.wrapper,
                     titleBar = wrapper.children(KWINDOWTITLEBAR),
                     titleElement = titleBar.children(KWINDOWTITLE),
-                    titleBarHeight;
+                    titleBarHeight,
+                    display, visibility;
 
                 if (!arguments.length) {
                     return titleElement.html();
@@ -851,7 +852,18 @@
                         titleElement.html(encoded ? kendo.htmlEncode(value) : value);
                     }
 
-                    titleBarHeight = parseInt(outerHeight(titleBar), 10);
+                    visibility = wrapper.css("visibility");
+                    display = wrapper.css("display");
+
+                    if (visibility === HIDDEN) {
+                        wrapper.css({ display: "" });
+                        titleBarHeight = parseInt(outerHeight(titleBar), 10);
+                        wrapper.css({ display: display });
+                    } else {
+                        wrapper.css({ visibility: HIDDEN, display: "" });
+                        titleBarHeight = parseInt(outerHeight(titleBar), 10);
+                        wrapper.css({ visibility: visibility, display: display });
+                    }
 
                     wrapper.css("padding-top", titleBarHeight);
                     titleBar.css("margin-top", -titleBarHeight);
