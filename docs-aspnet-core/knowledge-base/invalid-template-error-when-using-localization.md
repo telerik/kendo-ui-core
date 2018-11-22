@@ -17,7 +17,6 @@ res_type: kb
 	</tr>
 </table>
 
-
 ## Description
 
 My UI for ASP .NET Core project uses a Kendo UI Grid with templates and localization of the resource files. The Kendo UI HTML helper generates hash tag symbols, such as `&#x418;&#x434;&#x435;&#x43D;`, which cause an error.

@@ -1,8 +1,8 @@
 ---
-title: Remove Spinners from NumericTextBox Editors in Core Grid
-description: An example on how to remove the side arrows of the NumericTextBox editor in the Kendo UI Grid for ASP.NET Core.
+title: Remove Spinners from NumericTextBox Editors in Grid for ASP.NET Core
+description: An example on how to remove the side arrows of the Kendo UI NumericTextBox editor in the Kendo UI Grid for ASP.NET Core.
 type: how-to
-page_title: "Remove Spinner Arrows of NumericTextBox Editor | UI for ASP.NET Core"
+page_title: Remove Spinner Arrows of NumericTextBox Editor | UI for ASP.NET Core
 slug: grid-remove-spinner-numerictextbox-editor
 tags: NumericTextBox, spinners, editor, remove
 ticketid: 1132419, 1134869

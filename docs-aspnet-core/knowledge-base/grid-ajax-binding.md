@@ -1,8 +1,8 @@
 ---
-title: Use an AJAX Binding for Kendo UI Grid for ASP.NET Core
-description: An example on how to use AJAX calls to populate a Grid HTML helper.
+title: Use an AJAX Binding in Kendo UI Grid for ASP.NET Core
+description: An example on how to use AJAX calls to populate the Telerik UI for ASP.NET Core Grid HTML helper.
 type: how-to
-page_title: "Grid AJAX Binding | UI for ASP.NET Core"
+page_title: Bind the Grid with AJAX | UI for ASP.NET Core
 slug: grid-ajax-binding
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, ajax, binding, ajax-binding
 res_type: kb
@@ -21,11 +21,11 @@ component: grid
 
 ## Description
 
-I need an example of how to use AJAX calls to populate a Grid HTML helper.
+How can I use AJAX calls to populate a Grid HTML helper?
 
 ## Solution
 
-[The following project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/ajax-binding) demonstrates how to connect a Kendo UI Grid for ASP.NET Core to its source using an AJAX binding.
+For the complete implementation on how to connect a Kendo UI Grid for ASP.NET Core to its source by using an AJAX binding, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/ajax-binding).
 
 ## See Also
 

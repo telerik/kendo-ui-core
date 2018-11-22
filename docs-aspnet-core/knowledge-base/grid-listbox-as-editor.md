@@ -1,8 +1,8 @@
 ---
 title: Use ListBox as Editor in the Kendo UI Grid
-description: An example on how to use a ListBox as editor in the Grid.
+description: An example on how to use a Kendo UI ListBox as an editor in the Grid.
 type: how-to
-page_title: "ListBox as Editor in Grid | UI for ASP.NET Core"
+page_title: Use the ListBox as an Editor in the Grid | UI for ASP.NET Core
 slug: grid-listbox-as-editor
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, listbox-editor, listbox
 res_type: kb
@@ -18,14 +18,13 @@ component: grid
  </tr>
 </table>
 
-
 ## Description
 
-I need an example of how to use a ListBox as editor in the Kendo UI Grid for ASP.NET Core.
+How can I use a Kendo UI ListBox as an editor in the Kendo UI Grid for ASP.NET Core?
 
 ## Solution
 
-[The following project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/listbox-as-editor) demonstrates how to use a ListBox widget as editor in the Kendo UI Grid for ASP.NET Core.
+For the complete implementation on how to use a Kendo UI ListBox as an editor in the Kendo UI Grid for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/listbox-as-editor).
 
 ## See Also
 

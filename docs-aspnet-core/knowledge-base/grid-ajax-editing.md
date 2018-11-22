@@ -1,8 +1,8 @@
 ---
-title: Edit Kendo UI Grid for ASP.NET Core with Ajax Calls
-description: An example on how to use AJAX calls to edit data in Grid HTML helper.
+title: Edit Kendo UI Grid for ASP.NET Core with AJAX Calls
+description: An example on how to use AJAX calls to edit data in the Telerik UI for ASP.NET Core Grid HTML helper.
 type: how-to
-page_title: "Grid AJAX Editing | UI for ASP.NET Core"
+page_title: Edit Grid with AJAX Calls | UI for ASP.NET Core
 slug: grid-ajax-editing
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, ajax, edit, ajax-editing
 res_type: kb
@@ -18,14 +18,13 @@ component: grid
  </tr>
 </table>
 
-
 ## Description
 
-I need an example of how to use AJAX calls to edit items in a Grid HTML helper.
+How can I use AJAX calls to edit items in a Grid HTML helper?
 
 ## Solution
 
-[The following project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/ajax-editing) demonstrates how to use AJAX calls to edit the data in a Kendo UI Grid for ASP.NET Core.
+For the complete implementation on how to use AJAX calls to edit the data in a Kendo UI Grid for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/ajax-editing).
 
 ## See Also
 

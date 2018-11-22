@@ -2,7 +2,7 @@
 title: Visual Studio Online Continuous Integration Randomly Asks for Login
 description: The Login dialog is randomly displayed during VS Online builds.
 type: troubleshooting
-page_title: "VS Online Continuous Integration has an Authentication Issue | UI for ASP.NET Core"
+page_title: VS Online Continuous Integration Has an Authentication Issue | UI for ASP.NET Core
 slug: vs-online-continuous-integration-login-problem
 tags: vs2017
 ticketid: 1106905
@@ -46,10 +46,10 @@ To apply the described approach, reset the `Nuget.config` file and use the `nuge
 1. Go through the procedure of storing the Telerik credentials once again and decide whether your assumption regarding the NuGet package is correct or the [Telerik.UI.for.AspNet.Core NuGet feed](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#use-the-telerik-private-nuget-feed) is needed.
 1. Use the `nuget restore` instead of `dotnet restore` command.
 
-## Workaround #2
+### Workaround #2
 
 To avoid the issue, [create your own NuGet package](https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package).
 
-## Workaround #3
+### Workaround #3
 
 The reason for this problem might be in the NuGet Server. If so, it will resolve on its own.

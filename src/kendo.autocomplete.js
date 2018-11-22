@@ -599,8 +599,10 @@ var __meta__ = { // jshint ignore:line
                         field: that.options.dataTextField,
                         ignoreCase: that.ignoreCase
                     }).done(function () {
-                        that._resetFocusItem();
-                        that.popup.open();
+                        if (that._allowOpening()) {
+                            that._resetFocusItem();
+                            that.popup.open();
+                        }
                     });
                 }
                 e.preventDefault();

@@ -1,8 +1,8 @@
 ---
 title: DropDownList Cannot Preselect the Drop-Down ID of the Current Grid Row
-description: I cannot get the dropdown to preselect the dropdown ID of the current row and cannot bind it to the column value of the Kendo UI Grid for ASP.NET Core.
+description: I cannot get the DropDownList to preselect the drop-down ID of the current Grid row and cannot bind it to the column value of the Kendo UI Grid for ASP.NET Core.
 type: troubleshooting
-page_title: "Bind a DropDownList Editor in the Grid | UI for ASP.NET Core"
+page_title: Bind a DropDownList Editor in the Grid | UI for ASP.NET Core
 previous_url: /knowledge-base/how-to-bind-a-dropdownlist-editor-aspnet-core-grid
 slug: grid-bind-a-dropdownlist-editor
 tags: aspnet, core, kendo, grid, editor, dropdownlist,custom,editing, inline, incell, howto, bind, model
@@ -25,7 +25,7 @@ component: grid
 
 ## Description 
 
-I cannot get the DropDownList to preselect the dropdown ID of the current row. How can I bind it to the column value when the Grid for ASP.NET Core is in edit mode?
+I cannot get the DropDownList to preselect the drop-down ID of the current row. How can I bind it to the column value when the Grid for ASP.NET Core is in edit mode?
 
 ## Steps to Reproduce
 
