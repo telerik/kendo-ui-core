@@ -328,3 +328,12 @@ h2 a:first-child+a code:before {
   right: 0;
   margin-bottom: 0;
 }
+
+.focused-field {
+    padding: 5px 0;
+    background-color: #eeeeee;
+}
+
+.focused-field:focus {
+    background-color: #dddddd;
+}

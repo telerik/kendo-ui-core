@@ -92,7 +92,7 @@ The `","` is the group separator placeholder. It inserts a localized group separ
 
 ###### Example
 
-   kendo.toString(12345678, "##,#") -> 12,345,678(en-US)
+    kendo.toString(12345678, "##,#") -> 12,345,678(en-US)
 
 The `"%"` is the percentage placeholder. It multiplies a number by 100 and inserts a localized percentage symbol in the result string.
 

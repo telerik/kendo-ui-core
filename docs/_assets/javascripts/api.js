@@ -363,13 +363,73 @@ function updateActiveTocItem(headings) {
     }
 }
 
+function filterControlKeydown(e) {
+    var which = e.which;
+    var target = $(e.target);
+
+    if(which === 13){//Enter
+        if(target.hasClass('focused-field')){
+            target.attr('target', '_blank');
+
+            setTimeout(function(){
+                $(target).removeAttr('target');
+            }, 1);
+        } else {
+            $('.focused-field').focus();
+        }
+    }else if(which === 40){//Arrow Down
+        e.preventDefault();
+        selectNextAnchor(true);
+    }else if(which === 38){//Arrow Up
+        e.preventDefault();
+        selectNextAnchor(false);
+    }
+}
+
+function selectFirstAnchor(ul) {
+    var nextUl = ul;
+    var parent = nextUl.find('li:not(.hide-api-link)').first();
+    var anchor = parent.find('a');
+
+    $('.focused-field').removeClass('focused-field');
+    setTimeout(function(){
+        anchor.addClass('focused-field');
+        anchor.focus();
+    });
+}
+
+function selectNextAnchor(dir) {
+    var links = $("#page-article li:not('.hide-api-link') a");
+    var index = links.index($(".focused-field"));
+
+    if(dir){
+        index++;
+    }else{
+        index--;
+    }
+
+    if(index >= 0 && index < links.length){
+        $('.focused-field').removeClass('focused-field');
+        $(links[index]).addClass('focused-field');
+        $(links[index]).focus();
+    }
+}
+
 function attachToApiPageEvents() {
     filterControl = $('#api-filter input.search');
     if (filterControl.length) {
         filterControl.on('keyup', function () { filter(); });
-        filterControl.focus();
-    }
+        $(window).on('keydown', function (e) { filterControlKeydown(e) });
+        $('#page-article h2').on('click', function(e){
+            var nextUl = $(e.target).parent().next('ul');
 
+            selectFirstAnchor(nextUl);
+        });
+
+        if(location.href.indexOf('#')===-1){
+            filterControl.focus();
+        }
+    }
     breadcrumbDropDown = $('.links-container > a');
     if (breadcrumbDropDown.length) {
         breadcrumbDropDown.mouseenter(function (e) {
