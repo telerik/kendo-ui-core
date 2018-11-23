@@ -1654,7 +1654,7 @@ The widget instance which fired the event.
 
 ### select
 
-Triggered when a node is being selected by the user. Cancellable.
+Triggered when a node is being selected by the user. Cancellable. When checkboxes are enabled, it is also triggered when a node is being deselected.
 
 #### Event Data
 

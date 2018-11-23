@@ -20,7 +20,7 @@ navigation:
         title: "Widget Basics"
         position: 2
     "intro/supporting":
-        title: "Additional Resources"
+        title: "Reference and Support Materials"
         position: 3
     "controls":
         title: "Widgets"

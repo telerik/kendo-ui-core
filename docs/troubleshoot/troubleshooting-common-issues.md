@@ -99,6 +99,41 @@ Use a valid `type` value, or remove the `type` property, or add the correspondin
 
 Note that the [dataSource `type`](/api/javascript/data/datasource/configuration/type) differs from the [`type` of the transport actions](/api/javascript/data/datasource/configuration/transport.read.type).
 
+### Widget Throws the e.slice is not a function Error
+
+The `Uncaught TypeError: e.slice is not a function` error indicates that the response which is received from the remote data source is not an array while the widget expects a simple array for its data source.
+
+Widgets like the TreeView or the MultiSelect need only a simple array while the Grid needs an envelope with additional information such as total, errors, and aggregates. For more information on what information each widget expects, review the demo of the respective control.
+
+The possible causes for the `e.slice is not a function` error can be any or a combination of the following:
+
+**Cause 1**
+
+The server does not return an actual list of objects but empty data, an error response, or a single item. In such cases, you get a single object or HTML instead of a serialized array.
+
+**Solution 1**
+
+Step through the server method that returns data and monitor the response in the browser dev toolbar to see what you get and ensure it is something like `[{"fieldName": 123, "otherField": "someValue"}, {"fieldName": 234, "otherField": "otherValue"}]`.
+
+**Cause 2**
+
+Under MVC, the server method (action) often uses `myData.ToDataSourceResult(request)` unnecessarily and wraps the data in an envelope similar to `{data: [the array from your data goes here], total: <the count goes here> }`. In such cases, the widget is not able to get the array at the root level as it expects.
+
+**Solution 2**
+
+Use either of the following suggestions:
+
+* Apply the same approach as the Kendo UI demos demonstrate&mdash;return the data array only. For example, in an MVC action, use the `return Json(myData, JsonRequestBehavior.AllowGet);` configuration without`.ToDataSourceResul()` as demonstrated in the [MVC TreeView Remote Binding](https://demos.telerik.com/aspnet-mvc/treeview/remote-data-binding) demo.
+* By configuring its data source `Schema`, indicate to the widget which fields you expect it look for.
+
+        // C#
+        .Schema(schema =>
+          {
+              schema.Data("Data")
+                 .Total("Total");
+          }
+
+
 ### Input Widgets Do Not Raise Change Event When API Is Used
 
 The change event of an input widget is triggered only by user action. DOM elements work in the same way. If you need to trigger an event manually use the [trigger method](/api/javascript/ui/widget/methods/trigger).

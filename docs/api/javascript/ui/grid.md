@@ -8895,6 +8895,9 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 Gets an array that holds the id field values of the selected rows.
 
+> **Note:** In order for the method to return the selected IDs you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).
+
+
 #### Returns
 
 `Array` of the id field values of the selected rows.

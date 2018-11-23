@@ -19,6 +19,7 @@ Below are listed the script files for the Kendo UI supplementary scripts for int
 | | kendo.popup.js | |
 | | kendo.list.js | |
 | | kendo.combobox.js | |
+| | kendo.multicolumncombobox.js | |
 | | kendo.dropdownlist.js | |
 | | kendo.multiselect.js | |
 | | kendo.validator.js | |

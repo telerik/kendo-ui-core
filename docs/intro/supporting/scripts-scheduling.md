@@ -82,12 +82,6 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.timezones.js | Timezones feature (optional) |
 | | kendo.scheduler.js | |
-| [MultiViewCalendar](http://demos.telerik.com/kendo-ui/multiviewcalendar/index) | jquery.js | |
-| | kendo.core.js | |
-| | kendo.userevents.js | |
-| | kendo.selectable.js | |
-| | kendo.calendar.js | |
-| | kendo.multiviewcalendar.js | |
 
 ## See Also
 

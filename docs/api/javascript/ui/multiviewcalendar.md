@@ -302,7 +302,7 @@ Allows customization of the week column header text. Set the value to make the w
         });
     </script>
 
-### numberOfViews `Number` *(default: 2)*
+### views `Number` *(default: 2)*
 
 This property controls how many months to be shown at same time. By default it shows two months.
 
@@ -311,7 +311,7 @@ This property controls how many months to be shown at same time. By default it s
     <div id="multiViewCalendar"></div>
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar({
-            numberOfViews: 3
+            views: 3
         });
     </script>
 
@@ -707,7 +707,7 @@ Gets/Sets the selected range for the multiViewCalendar.
 
         var multiViewCalendar = $("#multiViewCalendar").data("kendoMultiViewCalendar");
 
-        multiViewCalendar.selectRange(new Date(2018, 9, 10), new Date(2018, 10, 10));
+        multiViewCalendar.selectRange({ start: new Date(2018, 9, 10), end: new Date(2018, 10, 10) });
     </script>
 
 ### value

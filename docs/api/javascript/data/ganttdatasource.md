@@ -600,5 +600,7 @@ The new values, which will be used to update the task.
 
       var task = dataSource.at(0);
       dataSource.update(task, { title: "New Title" });
+
+      document.write(task.title); // outputs "New Title"
       console.log(task.title); // outputs "New Title"
     </script>
