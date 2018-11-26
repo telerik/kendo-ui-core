@@ -1922,7 +1922,7 @@ The fields which can be used in the template are:
 > If the template is declared as a function the group field is accessible only through the data field,
 > e.g. `data.fieldName1.group.value`.
 
-#### Example - set the group header template
+#### Example - set the group footer template
 
     <div id="grid"></div>
     <script>
@@ -1943,7 +1943,7 @@ The fields which can be used in the template are:
     });
     </script>
 
-#### Example - set the group header template as function
+#### Example - set the group footer template as function
 
     <div id="grid"></div>
     <script>
@@ -3510,6 +3510,73 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
         },
         pageable: true
     });
+    </script>
+
+### excel.collapsible `Boolean` *(default: false)*
+
+Enables or disables collapsible (grouped) rows, for grids with aggregates.
+
+#### Example - enable collapsible rows in the output Excel file
+
+    <div id="grid"></div>
+    <script>
+     $("#grid").kendoGrid({
+       toolbar: ["excel"],
+       excel: {
+         fileName: "excel-collapsible.xlsx",
+         proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+         filterable: true,
+         collapsible: true
+       },
+       dataSource: {
+         type: "odata",
+         transport: {
+           read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+         },
+         schema:{
+           model: {
+             fields: {
+               UnitsInStock: { type: "number" },
+               ProductName: { type: "string" },
+               UnitPrice: { type: "number" },
+               UnitsOnOrder: { type: "number" },
+               UnitsInStock: { type: "number" }
+             }
+           }
+         },
+         pageSize: 50,
+         group: {
+           field: "UnitsInStock", aggregates: [
+             { field: "ProductName", aggregate: "count" },
+             { field: "UnitPrice", aggregate: "sum"},
+             { field: "UnitsOnOrder", aggregate: "average" },
+             { field: "UnitsInStock", aggregate: "count" }
+           ]
+         },
+         aggregate: [
+           { field: "ProductName", aggregate: "count" },
+           { field: "UnitPrice", aggregate: "sum" },
+           { field: "UnitsOnOrder", aggregate: "average" },
+           { field: "UnitsInStock", aggregate: "min" },
+           { field: "UnitsInStock", aggregate: "max" }
+         ]
+       },
+       sortable: true,
+       pageable: true,
+       groupable: true,
+       filterable: true,
+       columnMenu: true,
+       reorderable: true,
+       resizable: true,
+       columns: [
+         { field: "ProductName", title: "Product Name", aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
+         { field: "UnitPrice", title: "Unit Price", aggregates: ["sum"] },
+         { field: "UnitsOnOrder", title: "Units On Order", aggregates: ["average"], footerTemplate: "Average: #=average#",
+           groupFooterTemplate: "Average: #=average#" },
+         { field: "UnitsInStock", title: "Units In Stock", aggregates: ["min", "max", "count"], footerTemplate: "Min: #= min # Max: #= max #",
+           groupHeaderTemplate: "Units In Stock: #= value # (Count: #= count#)" }
+       ]
+     });
     </script>
 
 ### excel.forceProxy `Boolean` *(default: false)*

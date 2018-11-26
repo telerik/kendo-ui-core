@@ -122,7 +122,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
     @using Kendo.Mvc.UI
     ```
 
-5. Include the Kendo UI `client-side resources`. 
+5. Include the Kendo UI `client-side resources`.
 
 	For more information about the different approaches for including client-side resources please refer to the [Include Client Side Resources article]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 

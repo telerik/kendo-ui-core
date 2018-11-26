@@ -837,6 +837,10 @@ var __meta__ = { // jshint ignore:line
             var getter = dir === "next" ? $.fn.first : $.fn.last;
             var candidate = getSibling.call(element);
 
+            if(!candidate.length && element.is("." + OVERFLOW_ANCHOR)){
+                return element;
+            }
+
             if (candidate.is(":kendoFocusable") || !candidate.length) {
                 return candidate;
             }
@@ -1399,7 +1403,9 @@ var __meta__ = { // jshint ignore:line
                             element = findFocusableSibling(element, "next");
                         }
 
-                        element[0].focus();
+                        if(element.length) {
+                            element[0].focus();
+                        }
                     })
                     .on("keydown", proxy(that._keydown, that));
             },
@@ -1413,18 +1419,25 @@ var __meta__ = { // jshint ignore:line
                 if (keyCode === keys.TAB) {
                     var element = target.parentsUntil(this.element).last(),
                         lastHasFocus = false,
-                        firstHasFocus = false;
+                        firstHasFocus = false,
+                        isOnlyOverflowAnchor = false;
+
+                    if(!items.not("." + OVERFLOW_ANCHOR).length){
+                        isOnlyOverflowAnchor = true;
+                    }
 
                     if (!element.length) {
                         element = target;
                     }
 
-                    if (element.is("." + OVERFLOW_ANCHOR)) {
+                    if (element.is("." + OVERFLOW_ANCHOR) && !isOnlyOverflowAnchor) {
+                        var lastItemNotOverflowAnchor = items.last();
+
                         if (e.shiftKey) {
                             e.preventDefault();
                         }
 
-                        if (items.last().is(":kendoFocusable")) {
+                        if (lastItemNotOverflowAnchor.is(":kendoFocusable")) {
                             items.last().focus();
                         } else {
                             items.last().find(":kendoFocusable").last().focus();
@@ -1448,12 +1461,12 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (lastHasFocus && this.overflowAnchor && this.overflowAnchor.css("visibility") !== "hidden") {
+                    if (lastHasFocus && this.overflowAnchor && this.overflowAnchor.css("visibility") !== "hidden" && !isOnlyOverflowAnchor) {
                         e.preventDefault();
                         this.overflowAnchor.focus();
                     }
 
-                    if (firstHasFocus) {
+                    if (firstHasFocus || (isOnlyOverflowAnchor && e.shiftKey)) {
                         e.preventDefault();
                         var prevFocusable = this._getPrevFocusable(this.wrapper);
                         if (prevFocusable) {
