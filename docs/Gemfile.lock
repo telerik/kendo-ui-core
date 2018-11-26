@@ -22,7 +22,7 @@ GEM
       nokogiri (~> 1.4)
     i18n (0.9.3)
       concurrent-ruby (~> 1.0)
-    jekyll (3.4.0)
+    jekyll (3.6.3)
       addressable (~> 2.4)
       colorator (~> 1.0)
       jekyll-sass-converter (~> 1.0)
@@ -88,7 +88,7 @@ PLATFORMS
 DEPENDENCIES
   github-markdown (= 0.6.9)
   html-pipeline (= 1.9.0)
-  jekyll (= 3.4.0)
+  jekyll (= 3.6.3)
   jekyll-assets
   jekyll-sitemap
   uglifier (= 3.0.4)
