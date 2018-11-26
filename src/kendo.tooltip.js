@@ -356,6 +356,7 @@ var __meta__ = { // jshint ignore:line
                 }));
 
             that.popup = new Popup(wrapper, extend({
+                autosize:true,
                 activate: function() {
                     var anchor = this.options.anchor,
                         ariaId = anchor[0].id || that.element[0].id;
