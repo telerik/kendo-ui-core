@@ -33,13 +33,19 @@ The following example demonstrates how to scroll to a given time slot by using J
         var rows = contentDiv.find("tr");
 
         for (var i = 0; i < rows.length; i++) {
-          var slot = scheduler.slotByElement(rows[i]);
+          var element = $(rows[i]);
+          var slot = scheduler.slotByElement(element);
 
           var slotTime = kendo.toString(slot.startDate, "HH:mm");
           var targetTime = kendo.toString(time, "HH:mm");
 
           if (targetTime === slotTime) {
-            scheduler.view()._scrollTo($(rows[i]).find("td:first")[0], contentDiv[0]);
+            contentDiv.scrollTop(0);
+            
+            var elementTop = element.offset().top;
+            var containerTop = contentDiv.offset().top;
+
+            contentDiv.scrollTop( elementTop - containerTop );
           }
         };
       }

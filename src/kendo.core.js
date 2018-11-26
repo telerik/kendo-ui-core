@@ -1673,7 +1673,7 @@ function pad(number, digits, end) {
 
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth && (!autosize || (autosize && width))) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
+            if (!percentWidth && (!autosize || (autosize && width) || element.hasClass("k-tooltip"))) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
             if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
 
             element.wrap(
