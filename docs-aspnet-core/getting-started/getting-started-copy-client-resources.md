@@ -9,7 +9,7 @@ position: 3
 
 # Including Client-Side Resources in ASP.NET Core Projects
 
-This article demonstrates how to include the client-side resources in an ASP.NET Core project and use Visual Studio 2017.
+This article demonstrates how to include the client-side resources required by UI for ASP.NET Core in an ASP.NET Core project and use Visual Studio 2017.
 
 To include the Kendo UI client-side resources you can use either of the following approaches:
 
@@ -17,13 +17,19 @@ To include the Kendo UI client-side resources you can use either of the followin
 * [Bower package installation](#bower-package-installation)
 * [Copy Kendo UI client resources through NPM and Webpack](#copying-kendo-ui-client-resources-through-npm-and-webpack)
 
+The UI for ASP.NET Core suite is a set of [server-side wrappers over the Kendo UI for jQuery client-side widgets](https://docs.telerik.com/aspnet-mvc/getting-started/kendo-ui-vs-mvc-wrappers). This means that the same set of web assets are required in order to run them. You can find more details on the files you will need in the [Getting Started with Progress&reg; Kendo UI&reg;](https://docs.telerik.com/kendo-ui/intro/installation/getting-started) and [Getting Starged with Kendo Themes](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started) articles.
+
+> **Important**
+>
+> The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
+
 ## Manual Installation
 
 To manually install the resources:
 
-1. Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`. The archive is located in **Downloads** > **Telerik UI for ASP.NET Core** of your [www.telerik.com](http://www.telerik.com/) account.
+1. Go to your [www.telerik.com](http://www.telerik.com/) account and navigate to **Downloads** > **Telerik UI for ASP.NET Core**. Download the `telerik.ui.for.aspnetmvc` archive. Copy the `js` and `styles` folders from the archive to your project under `wwwroot\lib\kendo-ui`.
 
-   **Figure 2. Kendo UI resources**
+   **Figure 1. Kendo UI resources**
 
    ![Kendo UI resources](images/kendo-ui-wwwroot.png)
 
@@ -32,6 +38,7 @@ To manually install the resources:
 	  > **Important**
     >
     > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
+    
 
     ###### Example
 
@@ -79,7 +86,7 @@ To manually install the resources:
                         integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
                 </script>
 
-                @*  Place Kendo UI scripts after jQuery *@
+                @* Place Kendo UI scripts after jQuery *@
                 <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
                         asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
                         asp-fallback-test="window.kendo">
@@ -125,7 +132,7 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 				"popper.js": "^1.12.6",
 				"style-loader": "^0.21.0",
 				"@progress/kendo-theme-default": "^2.54.1",
-				"@progress/kendo-ui": "2018.2.620"
+				"@progress/kendo-ui": "{{ site.cdnVersion }}"
 			},
 			"devDependencies": {
 				"webpack": "^4.12.0",
@@ -194,6 +201,8 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 ## See Also
 
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with GUI]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Get Started with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
+
