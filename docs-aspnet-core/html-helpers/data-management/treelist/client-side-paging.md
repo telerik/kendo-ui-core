@@ -19,7 +19,7 @@ The TreeList supports client-side paging for large sets of data. To enable the p
         .Name("treelist")
         .Columns(columns =>
         {
-            columns.Add().Field(e => e.FirstName).Title("Name").Template("#: FirstName # #: LastName #");            
+            columns.Add().Field(e => e.FirstName).Title("Name").Template("#: FirstName # #: LastName #");
             columns.Add().Field(e => e.Position);
             columns.Add().Field(e => e.HireDate).Format("{0:MMMM d, yyyy}");
         })
@@ -30,7 +30,7 @@ The TreeList supports client-side paging for large sets of data. To enable the p
             .Read(read => read.Action("All", "EmployeeDirectory"))
             .Model(m => {
                 m.Id(f => f.EmployeeId);
-                m.ParentId(f => f.ReportsTo);                
+                m.ParentId(f => f.ReportsTo);
                 m.Field(f => f.ReportsTo);
                 m.Expanded(true);
             })
@@ -40,6 +40,32 @@ The TreeList supports client-side paging for large sets of data. To enable the p
                         .PageSizes(true)
         )
     )
+
+> * When client-side paging is used with editing and an item is added, if the "id" field of the model should be nullable (e.g. `int?`), then the model should be configured to have a default "id" field value on the client-side that is **different** from the default "parentId" field value. This is required as root TreeList items have their "parentId" field set to the default value for no parent (by default this is equal to `null`, but can be configured from the `dataSource.schema.model.fields[FIELD_NAME].defaultValue` option). If this is the case, the default value of the "id" field (null) will be equal to the default "parentId" field value (null), which creates a circular dependency. Setting the default "id" field to a different value (e.g. zero) can be done instead.
+
+###### Example
+    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+        .Name("treelist")
+        ...
+        .DataSource(dataSource => dataSource
+            .ServerOperation(false)
+            .Read(read => read.Action("All", "EmployeeDirectory"))
+            .Model(m => {
+                // assuming the "EmployeeId" field is equal to null by default and
+                // the default value of the "ReportsTo" field is also null
+                m.Field(f => f.EmployeeId).DefaultValue(0);
+                m.Id(f => f.EmployeeId);
+                m.ParentId(f => f.ReportsTo);
+                m.Field(f => f.ReportsTo);
+                m.Expanded(true);
+            })
+        )
+        .Height(540)
+        .Pageable(p => p.PageSize(15)
+                        .PageSizes(true)
+        )
+    )
+
 
 ## See Also
 
