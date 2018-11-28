@@ -13,6 +13,10 @@ res_type: kb
 ## Environment
 <table>
 	<tr>
+		<td>Product Version</td>
+		<td>2018.3 1017</td>
+	</tr>
+	<tr>
 		<td>Product</td>
 		<td>Spreadsheet for Progress® Kendo UI®</td>
 	</tr>
@@ -26,7 +30,7 @@ Usually, a grid or a table element should be used for such functionality.
 
 If this is not an option in your case, you can subscribe to the [render event](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/render) of the Kendo UI Spreadsheet and then disable all cells across all sheets.  Here is an example (see the script and style at the end)
 
-```html
+```
 <div id="example">
     <div id="spreadsheet" style="width: 100%;" class="hiddenToolbars"></div>
     <script>
@@ -456,5 +460,4 @@ If this is not an option in your case, you can subscribe to the [render event](h
 
 ## See Also
  * [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
- * [APOI of the Range](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)
  
