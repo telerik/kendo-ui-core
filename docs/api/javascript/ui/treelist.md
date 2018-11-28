@@ -3228,6 +3228,43 @@ Can be set to a JavaScript object which represents the pager configuration.
         });
     </script>
 
+> When client-side paging is used with editing and an item is added, if the "id" field of the model should be nullable, then the model should be configured to have a default "id" field value on the client-side that is **different** from the default "parentId" field value. This is required as root TreeList items have their "parentId" field set to the default value for no parent (by default this is equal to `null`, but can be configured from the `dataSource.schema.model.fields[FIELD_NAME].defaultValue` option). If this is the case, the default value of the "id" field (null) will be equal to the default "parentId" field value (null), which creates a circular dependency. Setting the default "id" field to a different value (e.g. zero) can be done instead.
+
+#### Example - enable paging
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            editable: "incell",
+            toolbar: ["create"],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ],
+                schema: {
+                    model: {
+                        fields: {
+                            id: {
+                                type: "number",
+                                defaultValue: 0
+                            }
+                        }
+                    }
+                }
+            },
+            pageable: {
+                pageSize: 2
+            }
+        });
+    </script>
+
 ### pageable.alwaysVisible `Boolean` *(default: true)*
 
 By default the treelist will show the pager even when total amount of items in the DataSource is less than the pageSize.

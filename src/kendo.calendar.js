@@ -636,7 +636,7 @@ var __meta__ = { // jshint ignore:line
         _addSelectedCellsToArray: function() {
             var that = this;
             that.selectable.value().each(function(index, item) {
-                var date = that._toDateObject($(item.firstChild));
+                var date = toDateObject($(item.firstChild));
                 if(!that.options.disableDates(date)) {
                     that._selectDates.push(date);
                 }

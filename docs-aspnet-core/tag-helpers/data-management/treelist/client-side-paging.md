@@ -84,6 +84,28 @@ To enable the paging functionality, configure the `Pageable` settings.
 
 ```
 
+
+> * When client-side paging is used with editing and an item is added, if the "id" field of the model should be nullable (e.g. `int?`), then the model should be configured to have a default "id" field value on the client-side that is **different** from the default "parentId" field value. This is required as root TreeList items have their "parentId" field set to the default value for no parent (by default this is equal to `null`, but can be configured from the `dataSource.schema.model.fields[FIELD_NAME].defaultValue` option). If this is the case, the default value of the "id" field (null) will be equal to the default "parentId" field value (null), which creates a circular dependency. Setting the default "id" field to a different value (e.g. zero) can be done instead.
+
+###### Example
+```
+    <kendo-treelist name="treelist" height="540">
+        <treelist-datasource>
+            ...
+            <schema type="json">
+                <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
+                    <fields>
+                        <field name="EmployeeId" type="number"  default-value="0"></field>
+                        <field name="ReportsTo" nullable="true"></field>>
+                    </fields>
+                </treelist-model>
+            </schema>
+        </treelist-datasource>
+
+        ...
+    </kendo-treelist>
+```
+
 ## See Also
 
 * [JavaScript API Reference for the Kendo UI jQuery TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)

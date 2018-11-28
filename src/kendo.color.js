@@ -320,7 +320,7 @@ var HSL = BaseColor.extend({
         var r, g, b;
 
         if (s === 0) {
-            r = g = b = l / 100; // achromatic
+            r = g = b = l; // achromatic
         } else {
             h /= 360;
             s /= 100;

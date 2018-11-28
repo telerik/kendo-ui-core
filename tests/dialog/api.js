@@ -184,7 +184,7 @@
         ok(dialog1.wrapper.prev("div").is(".k-overlay"));
     });
 
-    test("closing dialog from close handler", 1, function() {
+    test("closing dialog from close handler", 2, function() {
         var dialog = createDialog({
             close: function(e) {
                 if (e.userTriggered) {
