@@ -133,7 +133,7 @@ The example below demonstrates how to add a new TabStrip tab.
     </div>
 
     <script>
-        var tabstrip = $("#tabstrip").data("kendoTabStrip");
+        var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
         tabstrip.insertAfter(
             { text: "New Tab" },
             tabstrip.tabGroup.children("li:last")

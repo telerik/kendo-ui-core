@@ -1927,12 +1927,15 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-multiselect-wrap.k-state-hover,
-.k-state-hover > .k-multiselect-wrap,
-.k-multiselect-wrap.k-state-hover
+.k-state-hover > .k-multiselect-wrap
 {
     border-color: @drop-down-hover-border-color;
     background-color: @input-bg;
     color: @input-bg;
+
+    .k-clear-value {
+        color: @input-hovered-text;
+    }
 }
 
 .k-autocomplete.k-state-focused,

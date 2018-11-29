@@ -13,6 +13,7 @@
                     '<div id="target" style="width: 100px; height: 100px;">' +
                     '    <div class="filter" style="width: 20px; height: 20px;">1</div>' +
                     '    <div class="filter" style="width: 20px; height: 20px;">2</div>' +
+                    '    <div class="filter exclude" style="width: 20px; height: 20px;"><span class="exclude" style="width:10px; height: 10px;">3</span></div>' +
                     '</div>' +
                     '<ul id="menu">' +
                     '   <li>' +
@@ -76,6 +77,46 @@
         $(".filter").eq(0).trigger("contextmenu");
 
         ok(menu.popup.visible());
+    });
+
+    test('right click on jquery filter selector opens menu', function () {
+        menu.setOptions({
+            filter: ".filter:not('.exclude')"
+        });
+
+        $(".filter").eq(0).trigger("contextmenu");
+
+        ok(menu.popup.visible());
+    });
+
+    test('right click on excluded element from filter selector does not open menu', function () {
+        menu.setOptions({
+            filter: ".filter:not('.exclude')"
+        });
+
+        $(".filter").eq(2).trigger("contextmenu");
+
+        ok(!menu.popup.visible());
+    });
+
+    test('right click on complex jquery filter selector opens menu', function () {
+        menu.setOptions({
+            filter: ".filter:not(div:has(.exclude))"
+        });
+
+        $(".filter").eq(0).trigger("contextmenu");
+
+        ok(menu.popup.visible());
+    });
+
+    test('right click on excluded element from complex filter selector does not open menu', function () {
+        menu.setOptions({
+            filter: ".filter:not(div:has(.exclude))"
+        });
+
+        $(".filter").eq(2).trigger("contextmenu");
+
+        ok(!menu.popup.visible());
     });
 
     test('right click on target with filter doesn\'t open menu', function () {
@@ -320,6 +361,5 @@
 
         removeMocksIn(kendo.ui.ContextMenu.fn);
     });
-
 })();
 

@@ -2290,7 +2290,8 @@ var __meta__ = { // jshint ignore:line
         _showHandler: function (e) {
             var ev = e, offset,
                 that = this,
-                options = that.options;
+                options = that.options,
+                target = $(ev.currentTarget);
 
             if (e.event) {
                 ev = e.event;
@@ -2309,7 +2310,7 @@ var __meta__ = { // jshint ignore:line
 
             that.element.find("." + FOCUSEDSTATE).removeClass(FOCUSEDSTATE);
 
-            if ((options.filter && kendo.support.matchesSelector.call(ev.currentTarget, options.filter)) || !options.filter) {
+            if ((options.filter && target.is(options.filter)) || !options.filter) {
                 if (options.alignToAnchor) {
                     that.popup.options.anchor = ev.currentTarget;
                     that.open(ev.currentTarget);
