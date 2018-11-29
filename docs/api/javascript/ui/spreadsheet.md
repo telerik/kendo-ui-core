@@ -2040,7 +2040,7 @@ The file that is being imported.
 
 If invoked the spreadsheet will not import the file.
 
-##### e.progress `Promise`
+##### e.promise `Promise`
 
 A promise that will be resolved when the import operation completes.
 
