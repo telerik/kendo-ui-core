@@ -28,4 +28,4 @@ For the complete implementation on how to connect a Kendo UI Scheduler for ASP.N
 
 ## See Also
 
-* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)

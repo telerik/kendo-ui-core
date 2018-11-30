@@ -28,4 +28,4 @@ For the complete implementation on how to use a Kendo UI ListBox as an editor in
 
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid).
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

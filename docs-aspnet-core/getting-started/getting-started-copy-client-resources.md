@@ -35,7 +35,7 @@ To manually install the resources:
 
 1. Register the Kendo UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
-	  > **Important**
+    > **Important**
     >
     > In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the Telerik UI for ASP.NET HtmlHelpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
     
@@ -54,13 +54,13 @@ To manually install the resources:
             <environment exclude="Development">
                 ...
 
-				<link rel="stylesheet"
+                <link rel="stylesheet"
                     href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
                     asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
                     asp-fallback-test-class="k-common-test-class"
                     asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
 
-				<link rel="stylesheet"
+                <link rel="stylesheet"
                     href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
                     asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
                     asp-fallback-test-class="k-theme-test-class"
@@ -115,59 +115,59 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 
     ###### Example
 
-		{
-			"name": "ApplicationName",
-			"version": "1.0.0",
-			"description": "",
-			"main": "main.js",
-			"scripts": {
-				"build": "webpack"
-			},
-			"keywords": [],
-			"author": "",
-			"license": "ISC",
-			"dependencies": {
-				"css-loader": "^1.0.0",
-				"jquery": "^3.2.1",
-				"popper.js": "^1.12.6",
-				"style-loader": "^0.21.0",
-				"@progress/kendo-theme-default": "^2.54.1",
-				"@progress/kendo-ui": "{{ site.cdnVersion }}"
-			},
-			"devDependencies": {
-				"webpack": "^4.12.0",
-				"webpack-cli": "^3.0.8"
-			}
-		}
+        {
+            "name": "ApplicationName",
+            "version": "1.0.0",
+            "description": "",
+            "main": "main.js",
+            "scripts": {
+                "build": "webpack"
+            },
+            "keywords": [],
+            "author": "",
+            "license": "ISC",
+            "dependencies": {
+                "css-loader": "^1.0.0",
+                "jquery": "^3.2.1",
+                "popper.js": "^1.12.6",
+                "style-loader": "^0.21.0",
+                "@progress/kendo-theme-default": "^2.54.1",
+                "@progress/kendo-ui": "{{ site.cdnVersion }}"
+            },
+            "devDependencies": {
+                "webpack": "^4.12.0",
+                "webpack-cli": "^3.0.8"
+            }
+        }
 
 1. Add `webpack.config.js` in the following way:
 
     ###### Example
 
-		const path = require('path');
-		const webpack = require('webpack');
+        const path = require('path');
+        const webpack = require('webpack');
 
-		module.exports = {
-			entry: './main.js',
-			output: {
-				filename: 'bundle.js',
-				path: path.resolve(__dirname, 'wwwroot')
-			},
-			module: {
-				rules: [
-					{
-						test: /\.css$/,
-						use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
-					}
-				]
-			},
-			plugins: [
-				new webpack.ProvidePlugin({
-					$: 'jquery',
-					jQuery: 'jquery'
-				}),
-			],
-		}
+        module.exports = {
+            entry: './main.js',
+            output: {
+                filename: 'bundle.js',
+                path: path.resolve(__dirname, 'wwwroot')
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.css$/,
+                        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+                    }
+                ]
+            },
+            plugins: [
+                new webpack.ProvidePlugin({
+                    $: 'jquery',
+                    jQuery: 'jquery'
+                }),
+            ],
+        }
 
 1. Create a `main.js` file with the following content.
 
@@ -177,20 +177,20 @@ Refer to the article on [Bower package installation](../../kendo-ui/intro/instal
 
     ###### Example
 
-		jQuery = $ = require("jquery");
+        jQuery = $ = require("jquery");
 
-		import "@progress/kendo-ui";
-		import "@progress/kendo-ui/js/kendo.aspnetmvc";
-		import "@progress/kendo-theme-default/dist/all.css";
-		window.jQuery = window.$ = kendo.jQuery;
+        import "@progress/kendo-ui";
+        import "@progress/kendo-ui/js/kendo.aspnetmvc";
+        import "@progress/kendo-theme-default/dist/all.css";
+        window.jQuery = window.$ = kendo.jQuery;
 
 1. Open the Command prompt and navigate to the folder of the project.
 1. Run the following commands:
 
-    ```sh
-    npm install
-    npm run build
-    ```
+    ###### Example
+
+        npm install
+        npm run build
 
 1. In `~/Views/Shared/_Layout.cshtml`, replace the Kendo UI CDN scripts with the script that references `bundle.js`.
 

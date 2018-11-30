@@ -49,4 +49,4 @@ Kendo UI does not provide a built-in solution for achieving this behavior. Howev
 
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid).
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

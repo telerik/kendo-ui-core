@@ -34,32 +34,31 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
-            .Name("Grid")
-            .Columns(columns =>
-            {
-                columns.Bound(p => p.ProductName)
-                    .ClientGroupHeaderColumnTemplate("Count: #=count#");
-                columns.Bound(p => p.UnitPrice).Format("{0:C}");
-                columns.Bound(p => p.UnitsOnOrder);
-                columns.Bound(p => p.UnitsInStock);
-                    //.ClientGroupHeaderTemplate("Min: #= min #");
-            })
-            .Pageable()
-            .Sortable()
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .Aggregates(aggregates =>
-                {
-                    aggregates.Add(p => p.UnitsInStock).Min();
-                    aggregates.Add(p => p.ProductName).Count();
-                })
-                .Group(groups => groups.Add(p => p.UnitsInStock))
-                .Read(read => read.Action("Aggregates_Read", "Grid"))
-            )
-        )
+```
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ProductName)
+            .ClientGroupHeaderColumnTemplate("Count: #=count#");
+        columns.Bound(p => p.UnitPrice).Format("{0:C}");
+        columns.Bound(p => p.UnitsOnOrder);
+        columns.Bound(p => p.UnitsInStock);
+            //.ClientGroupHeaderTemplate("Min: #= min #");
+    })
+    .Pageable()
+    .Sortable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Aggregates(aggregates =>
+        {
+            aggregates.Add(p => p.UnitsInStock).Min();
+            aggregates.Add(p => p.ProductName).Count();
+        })
+        .Group(groups => groups.Add(p => p.UnitsInStock))
+        .Read(read => read.Action("Aggregates_Read", "Grid"))
+    )
+)
 ```
 
 **Figure 3: Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate**
