@@ -23,8 +23,6 @@ The following example demonstrates how to define the Tooltip by using the Toolti
 
 The Tooltip tag helper configuration options are passed as attributes of the tag and through nested tags.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().Tooltip()

@@ -77,8 +77,6 @@ The following example demonstrates how to define the Splitter by using the Split
 
 The Splitter tag helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().Splitter()

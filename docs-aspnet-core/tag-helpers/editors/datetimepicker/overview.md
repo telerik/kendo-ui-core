@@ -23,8 +23,6 @@ The following example demonstrates how to define the DateTimePicker by using the
 
 The DateTimePicker tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().DateTimePicker()
@@ -47,11 +45,11 @@ The `ParseFormats` option is of type `string[]` and can be assigned either:
 
     ###### Example
 
-            @{
-                ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
-            }
+        @{
+            ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
+        }
 
-            <kendo-datetimepicker name="datetimepicker" parse-formats="ViewBag.ParseDates"></kendo-datetimepicker>
+        <kendo-datetimepicker name="datetimepicker" parse-formats="ViewBag.ParseDates"></kendo-datetimepicker>
 
 ## See Also
 

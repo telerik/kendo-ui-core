@@ -23,8 +23,6 @@ The following example demonstrates how to define the AutoComplete by using the A
 
 The AutoComplete tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
     @(Html.Kendo().AutoComplete()

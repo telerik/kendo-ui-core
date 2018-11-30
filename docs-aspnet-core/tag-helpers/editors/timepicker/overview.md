@@ -23,8 +23,6 @@ The following example demonstrates how to define the TimePicker by using the Tim
 
 The TimePicker tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().TimePicker()

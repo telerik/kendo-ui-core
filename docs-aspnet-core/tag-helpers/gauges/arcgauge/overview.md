@@ -22,8 +22,6 @@ The following example demonstrates how to define the ArcGauge by using the ArcGa
 
 The ArcGauge tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-tagHelper
     <kendo-arcgauge name="gauge" center-template="#:value#%" value="65">
         <scale min="0" max="100">

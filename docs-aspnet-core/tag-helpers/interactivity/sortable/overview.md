@@ -27,8 +27,6 @@ The Sortable tag helper configuration options are passed as attributes of the ta
 >
 > Initialize the Sortable for already existing DOM elements.
 
-###### Example
-
 ```tab-html
 <ul id="sortable-basic">
     <li class="sortable">Papercut <span>3:04</span></li>

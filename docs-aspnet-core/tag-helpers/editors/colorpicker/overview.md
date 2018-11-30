@@ -25,8 +25,6 @@ The following example demonstrates how to define the ColorPicker by using the Co
 
 The ColorPicker tag helper configuration options are passed as attributes of the tag and through nested tags (`<messages>`).
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().ColorPicker()
@@ -44,8 +42,6 @@ The ColorPicker tag helper configuration options are passed as attributes of the
 ```
 
 The ColorPalette tag helper configuration options are passed as attributes of the tag and through nested tags (`<tile-size>`).
-
-###### Example
 
 ```tab-cshtml
 

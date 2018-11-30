@@ -29,8 +29,6 @@ The following example demonstrates how to define the Window by using the Window 
 
 The Window tag helper configuration options are passed as attributes of the tag. The Window contents is placed between the opening and closing tag.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().Window()

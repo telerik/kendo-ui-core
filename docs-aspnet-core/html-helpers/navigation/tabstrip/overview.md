@@ -19,8 +19,6 @@ For more information on the HtmlHelper, refer to the article on the [TabStrip Ht
 
 The following example demonstrates how to define the TabStrip by using the TabStrip HtmlHelper.
 
-###### Example
-
 ```tab-Razor
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")

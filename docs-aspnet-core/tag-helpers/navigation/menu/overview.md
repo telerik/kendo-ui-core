@@ -29,8 +29,6 @@ To pass the Menu items collection, either:
 * Use the nested `<items>` tag, or
 * Add `<li>` tags. This approach will not include the `menu-item` tag helper attributes.
 
-###### Example
-
 ```tab-tagHelper
 <kendo-menu name="menu">
     <items>
@@ -56,8 +54,6 @@ To pass the Menu items collection, either:
 ```
 
 To further configure the Menu tag helper, use its other options&mdash;`<open-on-click>`, `<popup-animation>`, and `<scrollable>`.
-
-###### Example
 
 ```tab-tagHelper
 <kendo-menu name="menu">
@@ -95,8 +91,6 @@ The Menu items are represented by the `menu-item` tag helper and render `<li>` t
 
 The `menu-item` tag helper inherits the [`AnchorTagHelper`](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper) class which enables you to utilize the native navigation attributes that come with it.
 
-###### Example
-
 ```tab-tagHelper
 <kendo-menu name="menu">
     <items>
@@ -119,7 +113,7 @@ You can also directly set up a URL that navigates to the desired location.
 
 ###### Example
 
-```tab-tagHelper
+```
 <kendo-menu name="menu">
     <items>
         <menu-item text="Home" url="/home/index"></menu-item>
@@ -128,8 +122,6 @@ You can also directly set up a URL that navigates to the desired location.
 ```
 
 To create popup menus, configure the items by using the `<sub-items>` tag of the `menu-item`.
-
-###### Example
 
 ```tab-tagHelper
 <kendo-menu name="menu">
@@ -159,8 +151,6 @@ To create popup menus, configure the items by using the `<sub-items>` tag of the
 ```
 
 Identical to the Kendo UI Menu helper method, you can customize the Menu items by adding images, [icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web), custom CSS classes, and DOM attributes.
-
-###### Example
 
 ```tab-tagHelper
 <kendo-menu name="menu">
@@ -194,8 +184,6 @@ Identical to the Kendo UI Menu helper method, you can customize the Menu items b
 ```
 
 You can also define the popup of each Menu item with HTML syntax by using the `<content>` tag helper.
-
-###### Example
 
 ```tab-tagHelper
 <kendo-menu name="menu">

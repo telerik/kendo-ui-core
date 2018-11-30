@@ -19,8 +19,6 @@ For more information on the HtmlHelper, refer to the article on the [ToolBar Htm
 
 The following example demonstrates how to define the ToolBar by using the ToolBar HtmlHelper.
 
-###### Example
-
 ```tab-Razor
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")

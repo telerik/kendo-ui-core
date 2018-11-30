@@ -23,8 +23,6 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
 
 The Spreadsheet tag helper configuration options are passed as attributes of the tag. For more details on the Scheduler configurations, refer to the overview of the [MVC Spreadsheet HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/spreadsheet) and the [Kendo Spreadsheet for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet).
 
-###### Example
-
 ```tab-cshtml
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")

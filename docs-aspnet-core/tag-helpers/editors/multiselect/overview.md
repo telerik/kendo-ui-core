@@ -23,8 +23,6 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 
 The MultiSelect tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
     @(Html.Kendo().MultiSelect()

@@ -23,8 +23,6 @@ The following example demonstrates how to define the LinearGauge by using the Li
 
 The LinearGauge tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-tagHelper
     <kendo-lineargauge name="gauge">
         <lineargauge-pointers>

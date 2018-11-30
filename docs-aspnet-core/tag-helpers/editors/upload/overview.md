@@ -39,8 +39,6 @@ The following example demonstrates how to define the Upload by using the Upload 
 
 The Upload tag helper configuration options are passed as attributes of the tag or attributes of the nested composite and collection properties.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().Upload()

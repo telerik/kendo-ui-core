@@ -23,8 +23,6 @@ The following example demonstrates how to define the Notification by using the N
 
 The Notification tag helper configuration options are passed as attributes of the tag and through nested tags.
 
-###### Example
-
 ```tab-cshtml
 
 	@(Html.Kendo().Notification()

@@ -24,8 +24,6 @@ The following example demonstrates how to define the PivotGrid by using the Pivo
 
 The PivotGrid tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-tagHelper
     <kendo-pivotdatasource type=@(PivotDataSourceType.Xmla) name="pivotSource">
         <columns>

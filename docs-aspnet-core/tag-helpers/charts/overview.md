@@ -32,13 +32,11 @@ The following example demonstrates how to define the Chart by using the Chart ta
 
 ###### Example
 
-        <kendo-chart name="chart"></kendo-chart>
+    <kendo-chart name="chart"></kendo-chart>
 
 ## Configuration
 
 The Chart tag helper configuration options are passed as attributes of the tag. The following **tagHelper** and **razor** configurations are equivalent.
-
-###### Example
 
 ```tab-tagHelper
 <kendo-chart name="chart">

@@ -23,8 +23,6 @@ For more information on the HtmlHelper, refer to the article on the [Gantt HtmlH
 
 The following example demonstrates how to define the Gantt by using the Gantt HtmlHelper.
 
-###### Example
-
 ```tab-Razor
 @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
     .Name("gantt")
@@ -241,10 +239,10 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
 )
 
 <script type="text/javascript">
-$(function() {
-    //Notice that the Name() of the Gantt is used to get its client-side instance.
-    var gantt = $("#gantt").data("kendoGantt");
-});
+    $(function() {
+        //Notice that the Name() of the Gantt is used to get its client-side instance.
+        var gantt = $("#gantt").data("kendoGantt");
+    });
 </script>
 ```
 

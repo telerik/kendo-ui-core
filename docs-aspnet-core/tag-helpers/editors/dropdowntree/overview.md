@@ -24,8 +24,6 @@ The following example demonstrates how to define the DropDownTree by using the D
 
 The DropDownTree tag helper configuration options are passed as attributes of the tag. You can configure the items by binding the widget to `<hierarchical-datasource>`.
 
-###### Example
-
 ```tab-tagHelper
     <kendo-dropdowntree name="dropdowntree1" datatextfield="FullName">
         <hierarchical-datasource>

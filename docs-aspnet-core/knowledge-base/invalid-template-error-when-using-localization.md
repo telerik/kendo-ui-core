@@ -19,7 +19,7 @@ res_type: kb
 
 ## Description
 
-My UI for ASP .NET Core project uses a Kendo UI Grid with templates and localization of the resource files. The Kendo UI HTML helper generates hash tag symbols, such as `&#x418;&#x434;&#x435;&#x43D;`, which cause an error.
+My UI for ASP .NET Core project uses a Kendo UI Grid with templates and localization of the resource files. The Kendo UI HTML helper generates hash tag symbols, such as `И, д, е, н`, which cause an error.
 
 ## Error Message
 
@@ -27,7 +27,7 @@ My UI for ASP .NET Core project uses a Kendo UI Grid with templates and localiza
 
 ## Cause
 
-ASP.NET Core encodes all Unicode characters except the ones from the `BasicLatin` range. The encoded characters are similar to `&#x6C49;`. The hash sign (`#`) in the encoded character representation [has a special meaning inside the Kendo UI templates](/framework/templates/overview#template-syntax) and breaks their syntax, which results in throwing the `Invalid template` error.
+ASP.NET Core encodes all Unicode characters except the ones from the `BasicLatin` range. The encoded characters are similar to `汉`. The hash sign (`#`) in the encoded character representation [has a special meaning inside the Kendo UI templates](/framework/templates/overview#template-syntax) and breaks their syntax, which results in throwing the `Invalid template` error.
 
 ## Solution
 

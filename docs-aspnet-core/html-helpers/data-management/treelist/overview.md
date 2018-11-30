@@ -19,10 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [TreeList Ht
 
 The following example demonstrates how to define the TreeList by using the TreeList HtmlHelper and bind it to remote data.
 
-###### Example
-
 ```tab-Controller
-
  public JsonResult All([DataSourceRequest] DataSourceRequest request)
     {
         var result = GetDirectory().ToTreeDataSourceResult(request,
@@ -35,7 +32,6 @@ The following example demonstrates how to define the TreeList by using the TreeL
     }
 ```
 ```tab-Razor
-
 @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
     .Name("treelist")
     .Columns(columns =>
@@ -62,10 +58,7 @@ The following example demonstrates how to define the TreeList by using the TreeL
 
 The following example demonstrates the basic configuration for the TreeList with editing.
 
-###### Example
-
 ```tab-Controller
-
 	public JsonResult All([DataSourceRequest] DataSourceRequest request)
 	{
 	    var result = GetDirectory().ToTreeDataSourceResult(request,
@@ -78,7 +71,6 @@ The following example demonstrates the basic configuration for the TreeList with
 	}
 ```
 ```tab-Razor
-
 @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
     .Name("treelist")
     .Toolbar(toolbar => toolbar.Create())

@@ -14,16 +14,19 @@ To control scrolling in the Grid, use the `Scrollable` property.
 
 ###### Example
 
+```
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
-		.Name("grid")
-		.HtmlAttributes(new { style = "height: 380px;" })
-		.Scrollable()
-        ...
+    .Name("grid")
+    .HtmlAttributes(new { style = "height: 380px;" })
+    .Scrollable()
+    ...
+```
 
 Apart from the standard scrolling of the Grid, you can use the additional `Virtual` and `Endless` options. The `Virtual` scrolling always displays a single page of data. Scrolling only changes the data which is currently displayed. The `Endless` scrolling mode appends new pages of data to the already rendered records.
 
 ###### Example
 
+```
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
     .Name("grid")
     .Scrollable(scrollable => scrollable.Virtual(true))
@@ -33,6 +36,7 @@ Apart from the standard scrolling of the Grid, you can use the additional `Virtu
         .PageSize(100)
 		...
 )
+```
 
 The `Endless` scrolling is suitable for limited number of records, because after some point the browser will start to freeze (due to the amount of DOM elements on the page). For huge amount of records it is recommended to use `Virtual` scrolling or standard paging.
 

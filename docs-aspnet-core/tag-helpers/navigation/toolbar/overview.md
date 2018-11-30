@@ -31,8 +31,6 @@ The ToolBar tag helper configuration options are passed as attributes of the tag
 
 The following example demonstrates the basic configuration of the ToolBar tag helper.
 
-###### Example
-
 ```tab-tagHelper
 
     <kendo-toolbar name="ToolBar">

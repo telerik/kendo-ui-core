@@ -19,8 +19,6 @@ For more information on the HtmlHelper, refer to the article on the [Splitter Ht
 
 The following example demonstrates how to define the Splitter by using the Splitter HtmlHelper.
 
-###### Example
-
 ```tab-Razor
     @(Html.Kendo().Splitter()
         .Name("splitter")

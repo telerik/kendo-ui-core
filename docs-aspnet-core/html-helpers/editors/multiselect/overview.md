@@ -19,8 +19,6 @@ For more information on the HtmlHelper, refer to the article on the [MultiSelect
 
 The following example demonstrates how to define the MultiSelect by using the MultiSelect HtmlHelper.
 
-###### Example
-
 ```tab-Razor
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")

@@ -17,13 +17,11 @@ The following example demonstrates how to define the QR Code by using the QR Cod
 
 ###### Example
 
-        <kendo-qrcode name="qrcode"></kendo-qrcode>
+    <kendo-qrcode name="qrcode"></kendo-qrcode>
 
 ## Configuration
 
 The QR Code tag helper configuration options are passed as attributes of the tag.
-
-###### Example
 
 ```tab-tagHelper
     <kendo-qrcode name="qrUrl" value="https://docs.telerik.com/aspnet-core/introduction" error-correction="QRErrorCorrectionLevel.M size=" 150">

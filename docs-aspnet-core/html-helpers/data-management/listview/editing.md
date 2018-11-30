@@ -14,44 +14,46 @@ The ListView enables you to edit its records.
 
 Below are the steps for you to follow when configuring the Kendo UI ListView for ASP.NET Core for editing.
 
-	namespace ListViewExample.Models
-	{
-	    public class OrderViewModel
-	    {
-	        public int OrderID
-	        {
-	            get;
-	            set;
-	        }
+###### Example
 
-	        public decimal? Freight
-	        {
-	            get;
-	            set;
-	        }
+    namespace ListViewExample.Models
+    {
+        public class OrderViewModel
+        {
+            public int OrderID
+            {
+                get;
+                set;
+            }
 
-	        [Required]
-	        public DateTime? OrderDate
-	        {
-	            get;
-	            set;
-	        }
+            public decimal? Freight
+            {
+                get;
+                set;
+            }
 
-	        [Required]
-	        public string ShipCity
-	        {
-	            get;
-	            set;
-	        }
+            [Required]
+            public DateTime? OrderDate
+            {
+                get;
+                set;
+            }
 
-	        [Required]
-	        public string ShipName
-	        {
-	            get;
-	            set;
-	        }
-	    }
-	}
+            [Required]
+            public string ShipCity
+            {
+                get;
+                set;
+            }
+
+            [Required]
+            public string ShipName
+            {
+                get;
+                set;
+            }
+        }
+    }
 
 ### Define the Item Template
 
@@ -254,7 +256,7 @@ The following example demonstrates how to implement the `update` action method.
         {
             if (order != null && ModelState.IsValid)
             {
-				// own create logic or use with sample data to test			
+				// own create logic or use with sample data to test
 				for (int i = 0; i < dbOrders.Count; i++)
             	{
                 	if (order.OrderID == dbOrders[i].OrderID)

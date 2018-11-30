@@ -28,6 +28,8 @@ The QRCode HtmlHelper extension is a server-side wrapper for the [Kendo UI QRCod
 
 1. Choose the appropriate correction level and/or encoding.
 
+    ###### Example
+
     ```
         @(Html.Kendo().QRCode()
                   .Name("qrcode")
@@ -45,13 +47,13 @@ To reference an existing Kendo UI QRCode instance, use the [`jQuery.data()`](htt
 
 ###### Example
 
-      //Put this after your Kendo UI QRCode for ASP.NET MVC declaration.
-      <script>
-      $(function() {
-          //Notice that the Name() of the QRCode is used to get its client-side instance.
-          var qrcode = $("#qrcode").data("kendoQRCode");
-      });
-      </script>
+    //Put this after your Kendo UI QRCode for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the QRCode is used to get its client-side instance.
+            var qrcode = $("#qrcode").data("kendoQRCode");
+        });
+    </script>
 
 ## See Also
 

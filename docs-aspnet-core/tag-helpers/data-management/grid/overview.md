@@ -29,8 +29,6 @@ The Grid tag helper configuration options are passed as attributes of the tag. T
 
 For more information on the configuration options of the Grid, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
-###### Example
-
 ```tab-tagHelper
 <kendo-grid name="grid" height="550">
     <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
@@ -93,8 +91,6 @@ For more information on the configuration options of the Grid, refer to the over
 
 The Grid supports hierarchy and requires a [`DetailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) function which initializes the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
 
-###### Example
-
 ```tab-tagHelper
         <kendo-grid name="grid" height="550" selectable="true" on-detail-init="onDetailInit">
             <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
@@ -154,7 +150,7 @@ The Grid supports hierarchy and requires a [`DetailInit`](https://docs.telerik.c
                     columns.Bound(e => e.City).Width(110);
                     columns.Bound(e => e.Title);
 
-                })               
+                })
                 .Sortable()
                 .Pageable()
                 .Scrollable()
@@ -163,7 +159,7 @@ The Grid supports hierarchy and requires a [`DetailInit`](https://docs.telerik.c
                 .DataSource(dataSource => dataSource
                     .Ajax()
                     .PageSize(6)
-                    .Read(read => read.Action("HierarchyBinding_Employees", "Grid"))            
+                    .Read(read => read.Action("HierarchyBinding_Employees", "Grid"))
                 )
         )
 
@@ -240,9 +236,9 @@ To enable the data editing capabilities:
 </kendo-grid>
 ```
 ```tab-cshtml
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
-    .Name("Grid")    
-    .Columns(columns => {        
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+    .Name("Grid")
+    .Columns(columns => {
         columns.Bound(p => p.ProductName);
         columns.Bound(p => p.UnitPrice).Width(140);
         columns.Bound(p => p.UnitsInStock).Width(140);
@@ -251,18 +247,18 @@ To enable the data editing capabilities:
     })
     .ToolBar(toolbar => {
         toolbar.Create();
-        toolbar.Save();        
+        toolbar.Save();
     })
     .Editable(editable => editable.Mode(GridEditMode.InCell))
     .Pageable()
     .Navigatable()
     .Sortable()
     .Scrollable()
-    .DataSource(dataSource => dataSource        
-        .Ajax()         
+    .DataSource(dataSource => dataSource
+        .Ajax()
         .Batch(true)
         .PageSize(20)
-        .ServerOperation(false)                
+        .ServerOperation(false)
         .Events(events => events.Error("error_handler"))
         .Model(model => model.Id(p => p.ProductID))
         .Create("Editing_Create", "Grid")
@@ -279,7 +275,7 @@ The following example demonstrates how to set a Kendo UI DropDownList as a custo
 
 ###### Example
 
-```tab-tagHelper
+```
 <kendo-grid name="grid" height="550">
     <datasource  page-size="20">
         <transport>
@@ -301,7 +297,7 @@ The following example demonstrates how to set a Kendo UI DropDownList as a custo
     </datasource>
     <groupable enabled="true" />
     <editable mode="inline" enabled="true" />
-    <sortable enabled="true" />    
+    <sortable enabled="true" />
     <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
     </pageable>
     <filterable enabled="true" />
@@ -367,7 +363,7 @@ The following example demonstrates how to specify your own custom layout for the
 
     <script>
         function template(data) {
-            return `<div class='customer-photo'                
+            return `<div class='customer-photo'
                     style= 'background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
                     <div class='customer-name'>${ data.ContactName} </div>
                     `
@@ -422,7 +418,7 @@ The following example demonstrates how to specify your own custom layout for the
 
     <script>
         function template(data) {
-            return `<div class='customer-photo'                
+            return `<div class='customer-photo'
                     style= 'background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
                     <div class='customer-name'>${ data.ContactName} </div>
                     `
@@ -466,7 +462,7 @@ In the following example, the **Contact Info** and **Location** columns have nes
             </transport>
         </datasource>
         <groupable enabled="true" />
-        <sortable enabled="true" />    
+        <sortable enabled="true" />
         <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
         </pageable>
         <filterable enabled="true" />
@@ -530,8 +526,6 @@ In the following example, the **Contact Info** and **Location** columns have nes
 ## Events
 
 You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events).
-
-###### Example
 
 ```tab-tagHelper
         <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">

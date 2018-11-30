@@ -32,5 +32,5 @@ For the complete implementation on how to configure a custom DataSource to prope
 
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid).
-* [API Reference of the DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource).
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [API Reference of the DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)

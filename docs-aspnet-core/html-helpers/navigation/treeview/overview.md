@@ -19,16 +19,14 @@ For more information on the HtmlHelper, refer to the article on the [TreeView Ht
 
 The following example demonstrates how to define the TreeView by using the TreeView HtmlHelper.
 
-###### Example
-
-```tab-Razor  
+```tab-Razor
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .DataTextField("Name")
         .DataSource(dataSource => dataSource
             .Read(read => read
                 .Action("Read_TreeViewData", "TreeView")
-            )            
+            )
         )
     )
 ```
@@ -64,7 +62,7 @@ The following example demonstrates how to define the TreeView by using the TreeV
                     expanded = item.Expanded,
                     imageUrl = item.ImageUrl,
                     hasChildren = item.HasChildren
-                });           
+                });
 
             return Json(result);
         }
@@ -81,7 +79,7 @@ The following example demonstrates the basic configuration of the TreeView HtmlH
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Checkboxes(true)
-        .DragAndDrop(true)        
+        .DragAndDrop(true)
         .DataTextField("Name")
         .DataSource(dataSource => dataSource
             .Read(read => read

@@ -26,7 +26,7 @@ Depending on your preferred editor, use any of the following approaches:
 
 1. Modify `Startup.cs`. The new lines have to be added to the bottom of the `ConfigureServices` and `Configure` methods.
 
-    ```cs
+    ```
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
@@ -55,7 +55,6 @@ Depending on your preferred editor, use any of the following approaches:
             }
         }
     }
-
     ```
 
     > **Important**
@@ -64,7 +63,7 @@ Depending on your preferred editor, use any of the following approaches:
 
 1. Add a `ChatHub` class to the project.
 
-    ```cs
+    ```
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
 
@@ -96,7 +95,7 @@ This section explains how to implement the P2P Chat application client.
 
 In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events.
 
-```cs
+```
 @{
     var name = Guid.NewGuid().ToString();
 }
@@ -135,20 +134,20 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Get the SignalR client script from NPM.
 
-    ```sh
+    ```
     npm install @aspnet/signalr
     ```
 
 1. Copy the `@aspnet/signalr` folder from the `node_modules` directory to the `wwwroot/lib` folder of the Core project.
 1. Include the SignalR script on the HTML page.
 
-    ```html
+    ```
     <script src="lib/signalr/dist/browser/signalr.min.js"></script>
     ```
 
 1. Initialize the SignalR Hub proxy.
 
-    ```js
+    ```
     // Point to the Hub remote endpoint
     window.chatHub = new signalR.HubConnectionBuilder()
         .withUrl('/chat')
@@ -157,7 +156,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Start the Hub proxy and configure it to detect errors.
 
-    ```js
+    ```
     chatHub.start()
         .catch(function(err) {
             console.error(err.toString());
@@ -166,7 +165,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Attach the event handlers for the respective remote hub actions.
 
-    ```js
+    ```
     $(document).ready(function() {
         window.chat = $("#chat").getKendoChat();
 

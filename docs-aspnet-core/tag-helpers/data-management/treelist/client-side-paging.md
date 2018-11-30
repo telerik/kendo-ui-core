@@ -16,10 +16,7 @@ To enable the paging functionality, configure the `Pageable` settings.
 >
 > Remember to set a `PageSize`. You can define a `PageSize` in the `Pageable` or in the `DataSource` settings. If an already existing dataSource instance is passed to the TreeList, then the `PageSize` option has to be set in the dataSource settings and not in the `Pageable` settings.
 
-###### Example
-
 ```tab-tagHelper
-
     <kendo-treelist name="treelist" height="540">
         <treelist-datasource>
             <transport>
@@ -49,7 +46,6 @@ To enable the paging functionality, configure the `Pageable` settings.
 
 ```
 ```tab-cshtml
-
     @(Html.Kendo().TreeList<EmployeeDirectoryModel>()
         .Name("treelist")
         .Columns(columns =>

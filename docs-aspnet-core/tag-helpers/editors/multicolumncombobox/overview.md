@@ -22,8 +22,6 @@ The following example demonstrates how to define the ComboBox by using the Combo
 
 The ComboBox tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-tagHelper
 
     <kendo-multicolumnmulticolumncombobox name="products" filter="FilterType.Contains"
@@ -39,7 +37,6 @@ The ComboBox tag helper configuration options are passed as attributes of the ta
         </datasource>
     </kendo-multicolumnmulticolumncombobox>
 ```
-
 ```tab-cshtml
 
     @(Html.Kendo().ComboBox()

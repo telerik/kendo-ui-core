@@ -37,9 +37,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
     ###### Example
 
-            public IActionResult TreeList_Read([DataSourceRequest]DataSourceRequest request, int? parentId)
-            {
-            }
+        public IActionResult TreeList_Read([DataSourceRequest]DataSourceRequest request, int? parentId)
+        {
+        }
 
 1. Use the `ToTreeDataSourceResult` extension method to convert the items collection to a `Kendo.Mvc.UI.TreeDataSourceResult` object. This extension method will filter, sort, calculate aggregates and find only the current level items of your data using the information provided by the `DataSourceRequest` object. To use the `ToTreeDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
@@ -76,8 +76,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
     ###### Example
 
-    ```tab-Razor
-
         @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryRemoteModel>()
             .Name("treelist")
             .Columns(columns =>
@@ -101,7 +99,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
                 .Aggregates(x=> x.Add(y=> y.BirthDate).Count())
             )
         )
-    ```
 
 1. Build and run the application.
 

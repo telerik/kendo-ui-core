@@ -23,8 +23,6 @@ The following example demonstrates how to define the Map by using the Map tag he
 
 The Map tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-tagHelper
     <kendo-map name="map" center="new double[] { 30.268107, -97.744821 }"              zoom="3">
         <layer-defaults>

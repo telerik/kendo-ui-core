@@ -15,8 +15,6 @@ The ListBox tag helper helps you configure the Kendo UI ListBox widget in ASP.NE
 
 The following example demonstrates how to define the ListBox by using the ListBox tag helper.
 
-###### Example
-
 ```tab-tagHelper
 
         <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.Attendees">
@@ -66,8 +64,6 @@ You can bind the ListBox to:
 When you use complex data objects, apply the `dataTextField` and `dataValueField` properties to notify the widget of your preferred binding behavior.
 
 The following example demonstrates how to initialize the ListBox and bind it to a server-side array.
-
-###### Example
 
 ```tab-tagHelper
 
@@ -119,8 +115,6 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 ### Binding to Client-Side Arrays
 
 The following example demonstrates how to initialize the ListBox and bind it to a client-side array.
-
-###### Example
 
 ```tab-tagHelper
 
@@ -178,8 +172,6 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 
 The following example demonstrates how to bind the Kendo UI ListBox tag helper to a remote service.
 
-###### Example
-
 ```tab-tagHelper
 
     <kendo-listbox name="listbox"  datatextfield="ProductName" datavaluefield="ProductID">
@@ -231,8 +223,6 @@ You can reorder selected items by using any of the following approaches:
 >
 > Currently, the ListBox widget does not support the drag-and-drop feature for multiple selected items.
 
-###### Example
-
 ```tab-tagHelper
 
     <kendo-listbox name="listbox"  datatextfield="ProductName" datavaluefield="ProductID">
@@ -251,7 +241,7 @@ You can reorder selected items by using any of the following approaches:
                     .DataTextField("ProductName")
                     .Selectable(ListBoxSelectable.Multiple)
                     .DataValueField("ProductID")
-                    .Toolbar(x => x.Position(ListBoxToolbarPosition.Right)                    
+                    .Toolbar(x => x.Position(ListBoxToolbarPosition.Right)
                         .Tools(y =>
                         {
                             y.MoveUp();
@@ -272,8 +262,6 @@ You can reorder selected items by using any of the following approaches:
 ### Dragging and Dropping
 
 To enable the drag-and-drop feature of the ListBox, set its `draggable` property to `true`. You can also customize the drag-and-drop behavior of the widget by using its `draggable.placeholder` and `draggable.hint` options.
-
-##### Example
 
 ```tab-tagHelper
 

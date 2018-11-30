@@ -20,25 +20,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI ArcGa
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add the ArcGauge.
 
     ###### Example
 
-    ```tab-Razor
-
-            @(Html.Kendo().ArcGauge()
-                .Name("arcGauge") //The name of the AcrGauge is mandatory. It specifies the "id" attribute of the widget.
-                .Value(65)
-                .Scale(x => x.Min(0).Max(100))
-                .CenterTemplate("#:value#%")
-            )
-
-    ```
+        @(Html.Kendo().ArcGauge()
+            .Name("arcGauge") //The name of the AcrGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Value(65)
+            .Scale(x => x.Min(0).Max(100))
+            .CenterTemplate("#:value#%")
+        )
 
 ## Reference
 
@@ -48,13 +44,13 @@ To reference an existing Kendo UI ArcGauge instance, use the [`jQuery.data()`](h
 
 ###### Example
 
-        //Put this after your Kendo UI ArcGauge for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI ArcGauge for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the ArcGauge is used to get its client-side instance.
             var gauge = $("#arcGauge").data("kendoArcGauge");
         });
-        </script>
+    </script>
 
 ## See Also
 

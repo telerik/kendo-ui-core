@@ -19,8 +19,6 @@ For more information on the HtmlHelper, refer to the article on the [Scheduler H
 
 The following example demonstrates how to define the Scheduler by using the Scheduler HtmlHelper.
 
-###### Example
-
 ```tab-Razor
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
         .Name("scheduler")

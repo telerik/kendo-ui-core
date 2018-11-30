@@ -28,4 +28,4 @@ For the complete implementation on how to use AJAX calls to edit the data in a K
 
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid).
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

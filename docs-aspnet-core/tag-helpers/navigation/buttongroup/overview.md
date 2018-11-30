@@ -27,8 +27,6 @@ The following example demonstrates how to define the ButtonGroup by using the Bu
 
 The Button tag helper configuration options are passed as attributes of the tag. The buttons are specified in the `buttongroup-items` child tag collection.
 
-###### Example
-
 ```tab-tagHelper
 
     <kendo-buttongroup name="player">

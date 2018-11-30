@@ -53,8 +53,6 @@ The following example demonstrates how to define the ResponsivePanel by using th
 
 The configuration options of the ResponsivePanel tag helper are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().ResponsivePanel()

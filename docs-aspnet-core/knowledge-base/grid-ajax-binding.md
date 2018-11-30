@@ -29,4 +29,4 @@ For the complete implementation on how to connect a Kendo UI Grid for ASP.NET Co
 
 ## See Also
 
-* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid).
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

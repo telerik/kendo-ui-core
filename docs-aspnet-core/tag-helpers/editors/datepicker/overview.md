@@ -23,8 +23,6 @@ The following example demonstrates how to define the DatePicker by using the Dat
 
 The DatePicker tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
         @(Html.Kendo().DatePicker()
@@ -49,11 +47,11 @@ The `ParseFormats` option is of type `string[]` and can be assigned either:
 
     ###### Example
 
-            @{
-                ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
-            }
+        @{
+            ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
+        }
 
-            <kendo-datepicker name="datepicker" parse-formats="ViewBag.ParseDates"></kendo-datepicker>
+        <kendo-datepicker name="datepicker" parse-formats="ViewBag.ParseDates"></kendo-datepicker>
 
 ## See Also
 

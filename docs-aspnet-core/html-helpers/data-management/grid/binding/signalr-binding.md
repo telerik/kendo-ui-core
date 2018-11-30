@@ -22,8 +22,6 @@ The following example uses Long Polling because [WebSockets](https://docs.micros
 
 The following snippet demonstrates a sample implementation of a Grid which uses SignalR. The service that is used is available in [this GitHub repository](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs).
 
-###### Example
-
 ```tab-JavaScript
 $(document).ready(function() {
     var hubUrl = "http://domain/signalr-service/products";
@@ -94,7 +92,7 @@ function onPush(e) {
                 {
                     model.Id("ID");
                     model.Field("ID", typeof(string)).Editable(false);
-                    model.Field("ProductName", typeof(string));                    
+                    model.Field("ProductName", typeof(string));
                     model.Field("CreatedAt", typeof(DateTime));
                     model.Field("UnitPrice", typeof(int));
                 }

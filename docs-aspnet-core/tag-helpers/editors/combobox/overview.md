@@ -23,8 +23,6 @@ The following example demonstrates how to define the ComboBox by using the Combo
 
 The ComboBox tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-cshtml
 
     @(Html.Kendo().ComboBox()

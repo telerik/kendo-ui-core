@@ -14,19 +14,19 @@ To control the sorting in the Grid, use the `Sortable` option.
 
 ###### Example
 
-	@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Sortable()
-		...
+        ...
 
 
 The Grid supports single and multiple columns sort modes through its `SortMode` property. You can also specify if the columns can be unsorted by setting the `AllowUnsort` property to `true` or `false`.
 
 With multi-column sorting you can also configure the Grid to display the sort indexes in the header by setting the `ShowIndexes` property to `true`.
 
-###### Example		
+###### Example
 
-	.Sortable(sortable => sortable
+    .Sortable(sortable => sortable
             .AllowUnsort(true)
             .SortMode(GridSortMode.MultipleColumn)
             .ShowIndexes(true))

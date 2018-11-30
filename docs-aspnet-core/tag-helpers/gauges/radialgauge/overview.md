@@ -23,8 +23,6 @@ The following example demonstrates how to define the RadialGauge by using the Ra
 
 The RadialGauge tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
 ```tab-tagHelper
     <kendo-radialgauge name="gauge">
         <radialgauge-pointers>
