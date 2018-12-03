@@ -22,105 +22,146 @@ The following example demonstrates how to define the TabStrip by using the TabSt
 ###### Example
 
 ```tab-Razor
-    @(Html.Kendo().TabStrip()
-        .Name("tabstrip")         
-        .Items(tabstrip =>
-        {
-            tabstrip.Add().Text("Paris")
-                .Selected(true)
-                .Content(@<text>
-                    <div class="weather">           
-                        <p>Rainy weather in Paris.</p>
-                    </div>
-                </text>);
+@(Html.Kendo().TabStrip()
+    .Name("tabstrip")
+    .Items(tabstrip =>
+    {
+        tabstrip.Add().Text("Paris")
+            .Selected(true)
+            .Content(@<text>
+                <div class="weather">
+                    <p>Rainy weather in Paris.</p>
+                </div>
+            </text>);
 
-            tabstrip.Add().Text("Sofia")
-                .Content(@<text>
-                    <div class="weather">         
-                        <p>Sunny weather in Sofia.</p>
-                    </div>            
-                </text>);
+        tabstrip.Add().Text("Sofia")
+            .Content(@<text>
+                <div class="weather">
+                    <p>Sunny weather in Sofia.</p>
+                </div>
+            </text>);
 
-            tabstrip.Add().Text("Moscow")
-                .Content(@<text>
-                    <div class="weather">                   
-                        <p>Cloudy weather in Moscow.</p>
-                    </div>             
-                </text>);
+        tabstrip.Add().Text("Moscow")
+            .Content(@<text>
+                <div class="weather">
+                    <p>Cloudy weather in Moscow.</p>
+                </div>
+            </text>);
 
-            tabstrip.Add().Text("Sydney")
-                .Content(@<text>
-                    <div class="weather">                     
-                        <p>Rainy weather in Sidney.</p>
-                    </div>              
-                </text>);
-        })
-    )
+        tabstrip.Add().Text("Sydney")
+            .Content(@<text>
+                <div class="weather">
+                    <p>Rainy weather in Sidney.</p>
+                </div>
+            </text>);
+    })
+)
 ```
 ```tab-Controller
-    public class TabStripController : Controller
+public class TabStripController : Controller
+{
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
+}
 ```
 
 ## Configuration
 
-The following example demonstrates the basic configuration of the TabStrip HtmlHelper and how to get the TabStrip instance.
+The following example demonstrates the basic configuration of the TabStrip HtmlHelper and how to get the TabStrip widget instance.
+
+###### Example
 
 ```
-    @(Html.Kendo().TabStrip()
-        .Name("tabstrip")
-        .TabPosition(TabStripTabPosition.Bottom)
-        .Animation(animation =>
+@(Html.Kendo().TabStrip()
+    .Name("tabstrip")
+    .TabPosition(TabStripTabPosition.Bottom)
+    .Collapsible(true)
+    .Navigatable(false)
+    .Animation(animation =>
+    {
+        animation.Open(config =>
         {
-            animation.Open(config =>
-            {
-                config.Fade(FadeDirection.In);
-            });
-        })
-        .SelectedIndex(0)
-        .Items(items =>
-        {
-            items.Add().Text("One")
-                .Content(@<text>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </text>);
-
-            items.Add().Text("Two")
-                .Content(@<text>
-                    <p>Mauris pulvinar molestie accumsan.</p>
-                </text>);
-
-            items.Add().Text("Three")
-                .Content(@<text>
-                    <p>In commodo scelerisque enim, eget sodales lorem condimentum rutrum.</p>
-                </text>);
-
-        })
-        .Events(events => events
-            .Show("onShow")
-            .Select("onSelect")
-            .Activate("onActivate")
-            .ContentLoad("onContentLoad")
-            .Error("onError")
-        )
-    )
-
-    <script type="text/javascript">
-        $(function () {
-            //Notice that the Name() of the TabStrip is used to get its client-side instance.
-            var tabstrip = $("#tabstrip").data("kendoTabStrip");
-            console.log(tabstrip);
+            config.Fade(FadeDirection.In);
         });
-    </script>
+    })
+    .Items(items =>
+    {
+        items.Add().Text("One")
+            .Content(@<text>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </text>);
+
+        items.Add().Text("Two")
+            .Content(@<text>
+                <p>Mauris pulvinar molestie accumsan.</p>
+            </text>);
+    })
+)
+
+<script type="text/javascript">
+    $(function () {
+        //Notice that the Name() of the TabStrip is used to get its client-side instance.
+        var tabstrip = $("#tabstrip").data("kendoTabStrip");
+        console.log(tabstrip);
+    });
+</script>
+```
+
+## Events
+
+The following example demonstrates the available TabStrip events and how an event handler could be implemented for each of them.
+
+###### Example
+
+```
+@(Html.Kendo().TabStrip()
+    .Name("tabstrip")
+    .Items(tabstrip =>
+    {
+        tabstrip.Add().Text("Paris")
+            .LoadContentFrom(Url.Action("Paris", "Home"));
+
+        tabstrip.Add().Text("Sofia")
+            .LoadContentFrom(Url.Action("Sofia", "Home"));
+    })
+    .Events(events => events
+        .Show("onShow")
+        .Select("onSelect")
+        .Activate("onActivate")
+        .ContentLoad("onContentLoad")
+        .Error("onError")
+    )
+)
+
+<script type="text/javascript">
+    function onShow(e) {
+        console.log("Shown: " + $(e.item).find("> .k-link").text());
+    }
+
+    function onSelect(e) {
+        console.log("Selected: " + $(e.item).find("> .k-link").text());
+    }
+
+    function onActivate(e) {
+        console.log("Activated: " + $(e.item).find("> .k-link").text());
+    }
+
+    function onContentLoad(e) {
+        console.log("Content loaded in <b>"+ $(e.item).find("> .k-link").text() + "</b>");
+    }
+
+    function onError(e) {
+        console.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
+    }
+</script>
 ```
 
 ## See Also
 
+* [TabStrip Tabs]({% slug htmlhelpers_tabstrip_aspnetcore_tabs %})
+* [TabStrip Tab Content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})
 * [JavaScript API Reference of the TabStrip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
 * [TabStrip HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/tabstrip/overview)
 * [TabStrip Official Demos](http://demos.telerik.com/aspnet-core/tabstrip/index)

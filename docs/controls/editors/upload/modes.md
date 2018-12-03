@@ -98,17 +98,6 @@ The Upload has a fallback mechanism when it is placed inside a `form` and is con
 
 The uploaded files must be handled both in the save handler and in the form submit action, as in synchronous mode.
 
-### Programmatic Trigger of Asynchronous Upload
-
-The Upload widget does not provide a public API method for asynchronous uploading of the already selected files, when `autoUpload` is set to `false`. To achieve the same result, it is possible to trigger the `click` event of the widget's **Upload** button.
-
-###### Example
-
-    var upload = $("UploadID").data("kendoUpload");
-    upload.wrapper.find("button.k-upload-selected").click();
-
-The [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}) property returns the outermost element of the Upload.
-
 ## See Also
 
 Other articles on the Kendo UI Upload:

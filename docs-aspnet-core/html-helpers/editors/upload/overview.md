@@ -17,7 +17,7 @@ For more information on the HtmlHelper, refer to the article on the [Upload Html
 
 ## Basic Usage
 
-The following example demonstrates how to define the Upload by using the Upload HtmlHelper.
+The following example demonstrates how to define the Upload widget by using the Upload HtmlHelper.
 
 ###### Example
 
@@ -32,77 +32,111 @@ The following example demonstrates how to define the Upload by using the Upload 
 )
 ```
 ```tab-Controller
-public class UploadController : Controller
+public IHostingEnvironment HostingEnvironment { get; set; }
+
+public UploadController(IHostingEnvironment hostingEnvironment)
 {
-    public IHostingEnvironment HostingEnvironment { get; set; }
+    HostingEnvironment = hostingEnvironment;
+}
 
-    public UploadController(IHostingEnvironment hostingEnvironment)
+public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
+{
+    // The Name of the Upload component is "files"
+    if (files != null)
     {
-        HostingEnvironment = hostingEnvironment;
-    }
-
-    [Demo]
-    public ActionResult Async()
-	{
-		return View();
-	}
-
-	public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
-    {
-        // The Name of the Upload component is "files"
-        if (files != null)
+        foreach (var file in files)
         {
-            foreach (var file in files)
+            var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+            // Some browsers send file names with full path.
+            // We are only interested in the file name.
+            var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
+            var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+
+            // The files are not actually saved in this demo
+            using (var fileStream = new FileStream(physicalPath, FileMode.Create))
             {
-                var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
-
-                // Some browsers send file names with full path.
-                // We are only interested in the file name.
-                var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-                var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
-
-                // The files are not actually saved in this demo
-                using (var fileStream = new FileStream(physicalPath, FileMode.Create))
-                {
-                    await file.CopyToAsync(fileStream);
-                }
+                await file.CopyToAsync(fileStream);
             }
         }
-
-        // Return an empty string to signify success
-        return Content("");
     }
 
-	public ActionResult Remove(string[] fileNames)
-	{
-		// The parameter of the Remove action must be called "fileNames"
+    // Return an empty string to signify success
+    return Content("");
+}
 
-		if (fileNames != null)
-		{
-			foreach (var fullName in fileNames)
-			{
-				var fileName = Path.GetFileName(fullName);
-				var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+public ActionResult Remove(string[] fileNames)
+{
+    // The parameter of the Remove action must be called "fileNames"
 
-				// TODO: Verify user permissions
+    if (fileNames != null)
+    {
+        foreach (var fullName in fileNames)
+        {
+            var fileName = Path.GetFileName(fullName);
+            var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
-				if (System.IO.File.Exists(physicalPath))
-				{
-					// The files are not actually removed in this demo
-					// System.IO.File.Delete(physicalPath);
-				}
-			}
-		}
+            // TODO: Verify user permissions
 
-		// Return an empty string to signify success
-		return Content("");
-	}
+            if (System.IO.File.Exists(physicalPath))
+            {
+                // The files are not actually removed in this demo
+                // System.IO.File.Delete(physicalPath);
+            }
+        }
+    }
+
+    // Return an empty string to signify success
+    return Content("");
 }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the Upload HtmlHelper and how to get the Upload instance.
+The following example demonstrates the basic configuration of the Upload HtmlHelper and how to get the Upload widget instance.
+
+###### Example
+
+```
+@(Html.Kendo().Upload()
+    .Name("files")
+    .Multiple(true)
+    .Async(a => a
+        .Save("ChunkSave", "Upload")
+        .Remove("Remove", "Upload")
+        .AutoUpload(true)
+        .ChunkSize(1100)
+    )
+)
+
+<script type="text/javascript">
+    $(function() {
+        //Notice that the Name() of the Upload is used to get its client-side instance.
+        var files = $("#files").data("kendoUpload");
+    });
+</script>
+```
+
+An Upload widget configured in such way offers support for multiple file selection, asynchronous removal of uploaded files, progress tracking, in-progress cancellation of upload, file drag-and-drop. Progress tracking, file drag-and-drop, and in-progress cancellation of upload are automatically enabled if supported by the browser.
+
+> **Important**
+>
+> The Upload widget works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
+
+## Functionality
+
+Apart from the above, the Upload widget offers some more advanced options for functionality configuration. The following are described in separate documentation articles:
+
+* [Synchronous (on form submit) and asynchronous (with and AJAX request) mode of operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %});
+* [File drag and drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %});
+* [Chunk upload functionality that enables upload of large files, pause and resume]({% slug htmlhelpers_upload_chunks_aspnetcore %});
+* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %});
+* [Send and receive metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %});
+* [Identify files]({% slug htmlhelpers_upload_identify_files_aspnetcore %});
+
+## Events
+
+The Upload HTML helper exposes several events, which could be handled on the client-side.
 
 ###### Example
 
@@ -110,29 +144,77 @@ The following example demonstrates the basic configuration of the Upload HtmlHel
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
-        .Save("ChunkSave", "Upload")
+        .Save("Save", "Upload")
         .Remove("Remove", "Upload")
         .AutoUpload(true)
-        .ChunkSize(1100)
     )
-    .DropZone(".dropZoneElement")
-    .Validation(validation =>
-    {
-        validation.AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".gif" });
-        validation.MinFileSize(500);
-    })
+    .Events(events => events
+        .Cancel("onCancel")
+        .Complete("onComplete")
+        .Error("onError")
+        .Progress("onProgress")
+        .Remove("onRemove")
+        .Select("onSelect")
+        .Success("onSuccess")
+        .Upload("onUpload")
+    )
 )
 
 <script type="text/javascript">
-$(function() {
-    //Notice that the Name() of the Upload is used to get its client-side instance.
-    var files = $("#files").data("kendoUpload");
-});
+    function onSelect(e) {
+        console.log("Select :: " + getFileInfo(e));
+    }
+
+    function onUpload(e) {
+        console.log("Upload :: " + getFileInfo(e));
+    }
+
+    function onSuccess(e) {
+        console.log("Success (" + e.operation + ") :: " + getFileInfo(e));
+    }
+
+    function onError(e) {
+        console.log("Error (" + e.operation + ") :: " + getFileInfo(e));
+    }
+
+    function onComplete(e) {
+        console.log("Complete");
+    }
+
+    function onCancel(e) {
+        console.log("Cancel :: " + getFileInfo(e));
+    }
+
+    function onRemove(e) {
+        console.log("Remove :: " + getFileInfo(e));
+    }
+
+    function onProgress(e) {
+        console.log("Upload progress :: " + e.percentComplete + "% :: " + getFileInfo(e));
+    }
+
+    function getFileInfo(e) {
+        return $.map(e.files, function(file) {
+            var info = file.name;
+
+            // File size is not available in all browsers
+            if (file.size > 0) {
+                info  += " (" + Math.ceil(file.size / 1024) + " KB)";
+            }
+            return info;
+        }).join(", ");
+    }
 </script>
 ```
 
 ## See Also
 
+* [Upload Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
+* [Drag and Drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
+* [Chunk Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
+* [Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
+* [Send Receive Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
+* [Identify Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
 * [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)
