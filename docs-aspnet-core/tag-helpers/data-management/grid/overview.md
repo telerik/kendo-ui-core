@@ -29,7 +29,7 @@ The Grid tag helper configuration options are passed as attributes of the tag. T
 
 For more information on the configuration options of the Grid, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
-```tab-tagHelper
+```tagHelper
 <kendo-grid name="grid" height="550">
     <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
         <transport>
@@ -56,7 +56,7 @@ For more information on the configuration options of the Grid, refer to the over
     </columns>
 </kendo-grid>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().Grid<TelerikAspNetCoreApp4.Models.OrderViewModel>()
     .Name("grid")
     .Columns(columns =>
@@ -91,7 +91,7 @@ For more information on the configuration options of the Grid, refer to the over
 
 The Grid supports hierarchy and requires a [`DetailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) function which initializes the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
 
-```tab-tagHelper
+```tagHelper
         <kendo-grid name="grid" height="550" selectable="true" on-detail-init="onDetailInit">
             <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
                 <transport>
@@ -139,7 +139,7 @@ The Grid supports hierarchy and requires a [`DetailInit`](https://docs.telerik.c
             }
         </script>
 ```
-```tab-cshtml
+```cshtml
          @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
                 .Name("grid")
                 .Columns(columns =>
@@ -195,7 +195,7 @@ To enable the data editing capabilities:
 * Declare the field definitions through `DataSource schema`.
 * Configure the DataSource for performing CRUD data operations by defining its `transport->create/update/destroy` attributes.
 
-```tab-tagHelper
+```tagHelper
 <kendo-grid name="grid" height="550">
     <datasource  page-size="20" type="DataSourceTagHelperType.Custom" custom-type="odata" batch="true">
         <transport>
@@ -235,7 +235,7 @@ To enable the data editing capabilities:
     </columns>
 </kendo-grid>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("Grid")
     .Columns(columns => {
@@ -340,7 +340,7 @@ The following example demonstrates how to specify your own custom layout for the
 
 ###### Example
 
-```tab-tagHelper
+```tagHelper
     <kendo-grid name="grid" height="550">
         <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
             <transport>
@@ -392,7 +392,7 @@ The following example demonstrates how to specify your own custom layout for the
         }
     </style>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
 		.Name("grid")
 		.Columns(columns =>
@@ -454,7 +454,7 @@ The Grid supports multi-column headers by specifying column groups which incorpo
 
 In the following example, the **Contact Info** and **Location** columns have nested columns that are depicted by a nested column tag helpers. Operations like sorting and filtering are supported on each column level regardless of the selected multi-header pattern.
 
-```tab-tagHelper
+```tagHelper
     <kendo-grid name="grid" reorderable="true"resizable="true" height="550">
         <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
             <transport>
@@ -485,7 +485,7 @@ In the following example, the **Contact Info** and **Location** columns have nes
         </columns>
     </kendo-grid>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -527,7 +527,7 @@ In the following example, the **Contact Info** and **Location** columns have nes
 
 You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events).
 
-```tab-tagHelper
+```tagHelper
         <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">
             <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
                 <transport>
@@ -556,7 +556,7 @@ You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/jav
             }
         </script>
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
         .Name("grid")

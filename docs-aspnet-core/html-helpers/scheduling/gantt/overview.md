@@ -23,7 +23,7 @@ For more information on the HtmlHelper, refer to the article on the [Gantt HtmlH
 
 The following example demonstrates how to define the Gantt by using the Gantt HtmlHelper.
 
-```tab-Razor
+```Razor
 @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>
@@ -68,7 +68,7 @@ The following example demonstrates how to define the Gantt by using the Gantt Ht
     )
 )
 ```
-```tab-Controller
+```Controller
     public partial class GanttController : Controller
     {
         private IGanttTaskService taskService;

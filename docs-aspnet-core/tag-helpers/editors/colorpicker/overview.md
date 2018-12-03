@@ -25,7 +25,7 @@ The following example demonstrates how to define the ColorPicker by using the Co
 
 The ColorPicker tag helper configuration options are passed as attributes of the tag and through nested tags (`<messages>`).
 
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().ColorPicker()
 			.Name("picker")
@@ -34,7 +34,7 @@ The ColorPicker tag helper configuration options are passed as attributes of the
 			.Events(events => events.Select("preview"))
 		)
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-colorpicker name="picker" value="#fff" on-select="preview">
             <messages apply="Change" cancel="Close" />
@@ -43,7 +43,7 @@ The ColorPicker tag helper configuration options are passed as attributes of the
 
 The ColorPalette tag helper configuration options are passed as attributes of the tag and through nested tags (`<tile-size>`).
 
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().ColorPalette()
 			.Name("palette")
@@ -59,7 +59,7 @@ The ColorPalette tag helper configuration options are passed as attributes of th
 			.Events(events => events.Change("preview"))
 		)
 ```
-```tab-tagHelper
+```tagHelper
 
 		@{
 			string[] colorPickerPalette = new string[] {

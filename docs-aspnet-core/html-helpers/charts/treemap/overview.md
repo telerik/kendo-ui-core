@@ -16,7 +16,7 @@ Add the TreeMap.
 
 ###### Example
 
-```tab-Razor
+```Razor
   @(Html.Kendo().TreeMap()
         .Name("treeMap")
         .DataSource(dataSource => dataSource
@@ -29,7 +29,7 @@ Add the TreeMap.
         .TextField("Name")
   )
 ```
-```tab-Controler
+```Controler
     public ActionResult Population_Read()
     {
         var result = new List<Population>();
@@ -44,7 +44,7 @@ Add the TreeMap.
         return Json(result);
     }
 ```
-```tab-Model
+```Model
     public class Population
     {
         public Population(string name, int value, List<Population> items)

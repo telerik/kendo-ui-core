@@ -14,7 +14,7 @@ In some scenarios it might be necessary to display more than two months. This is
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().NumericTextBox()
             .Name("numberOfViews")

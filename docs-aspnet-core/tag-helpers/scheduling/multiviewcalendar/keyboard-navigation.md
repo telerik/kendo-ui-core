@@ -29,13 +29,13 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ###### Example
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar" selectable="multiple">        
     </kendo-multiviewcalendar>
 
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

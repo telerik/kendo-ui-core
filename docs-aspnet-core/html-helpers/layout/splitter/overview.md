@@ -19,7 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [Splitter Ht
 
 The following example demonstrates how to define the Splitter by using the Splitter HtmlHelper.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().Splitter()
         .Name("splitter")
         .Orientation(SplitterOrientation.Vertical)
@@ -69,7 +69,7 @@ The following example demonstrates how to define the Splitter by using the Split
         })
     )
 ```
-```tab-Controller
+```Controller
     public class SplitterController : Controller
     {
         public IActionResult Index()

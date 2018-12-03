@@ -21,7 +21,7 @@ When you set an array, list the days that need to be disabled by using the first
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")
@@ -35,7 +35,7 @@ When you add a function, determine its return value as `true` for the date that 
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

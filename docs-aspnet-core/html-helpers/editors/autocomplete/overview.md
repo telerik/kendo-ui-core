@@ -21,7 +21,7 @@ The following example demonstrates how to define the AutoComplete by using the A
 
 ###### Example
 
-```tab-Razor
+```Razor
     @(Html.Kendo().AutoComplete()
         .Name("autocomplete")
         .DataTextField("ProductName")
@@ -46,7 +46,7 @@ The following example demonstrates how to define the AutoComplete by using the A
     </script>
 
 ```
-```tab-Controller
+```Controller
 
     public class AutoCompleteController : Controller
     {

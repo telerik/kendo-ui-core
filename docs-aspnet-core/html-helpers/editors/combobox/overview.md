@@ -19,7 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [ComboBox Ht
 
 The following example demonstrates how to define the ComboBox by using the ComboBox HtmlHelper.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().ComboBox()
         .Name("combobox")
         .Placeholder("Select product")
@@ -36,7 +36,7 @@ The following example demonstrates how to define the ComboBox by using the Combo
     )
 
 ```
-```tab-Controller
+```Controller
 
     public class ComboBoxController : Controller
     {

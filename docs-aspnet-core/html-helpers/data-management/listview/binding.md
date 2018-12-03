@@ -53,7 +53,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 1. In the view, configure the ListView to use the action method created in the previous steps. You may use the sample model and data from the example below
 
-    ```tab-ListView
+    ```ListView
         @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
            .Name("ListView")
            .TagName("div")
@@ -66,7 +66,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
            .Pageable()
         )
     ```
-    ```tab-Template
+    ```Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order">
                 <h3>#= OrderID #</h3>
@@ -99,7 +99,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
             }
         </style>
     ```
-    ```tab-Model
+    ```Model
             public class OrderViewModel
             {
                  public int OrderID
@@ -130,7 +130,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
                 }
             }
     ```
-    ```tab-Controller
+    ```Controller
         public class ListViewController : Controller
         {
             public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)

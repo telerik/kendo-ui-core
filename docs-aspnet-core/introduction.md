@@ -1,6 +1,6 @@
 ---
-title: Overview
-page_title: Overview | Progress Telerik UI for ASP.NET Core
+title: Introduction
+page_title: Introduction | Progress Telerik UI for ASP.NET Core
 description: "Download and install Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC), and run the sample application."
 previous_url: /aspnetmvc-apps/mvc-6/introduction, /mvc-6/introduction
 slug: overview_aspnetmvc6_aspnetmvc

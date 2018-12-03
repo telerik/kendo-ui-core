@@ -28,7 +28,7 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

@@ -23,7 +23,7 @@ The following example demonstrates how to define the DatePicker by using the Dat
 
 The DatePicker tag helper configuration options are passed as attributes of the tag.
 
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().DatePicker()
                 .Name("monthpicker")
@@ -33,7 +33,7 @@ The DatePicker tag helper configuration options are passed as attributes of the 
                 .Value(DateTime.Now)
         )
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-datepicker name="monthpicker" start="CalendarView.Year" depth="CalendarView.Year"
             format="MMMM yyyy" value="DateTime.Now">

@@ -14,7 +14,7 @@ In some scenarios it might be necessary to display more than two months. This is
 
 ###### Example
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-numerictextbox  name="numberOfViews" restrict-decimals="true" decimals="0" min="2" max="10" format="n0"/>
 
@@ -35,7 +35,7 @@ In some scenarios it might be necessary to display more than two months. This is
     </script>
 
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().NumericTextBox()
             .Name("numberOfViews")

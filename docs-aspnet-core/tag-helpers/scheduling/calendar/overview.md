@@ -15,13 +15,13 @@ The Calendar tag helper helps you configure the Kendo UI Calendar widget in ASP.
 
 The following example demonstrates how to define the Calendar by using the Calendar tag helper.
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-calendar name="calendar" >
     </kendo-calendar>
 
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().Calendar()
         .Name("calendar"))
@@ -47,7 +47,7 @@ The available properties are:
 
 The following example demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates. As a result, the Calendar does not navigate to a date that is earlier than the specified minimum date and also restricts the navigation to the maximum date you specified.
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-calendar name="calendar"
                     value="DateTime.Now"
@@ -56,7 +56,7 @@ The following example demonstrates how to create a Calendar with a selected date
     </kendo-calendar>
 
 ```
-```tab-cshtml
+```cshtml
 
    @(Html.Kendo().Calendar()
             .Name("calendar")
@@ -83,14 +83,14 @@ The Calendar enables you to customize the rendered day for the `month` view.
 
 The following example demonstrates how to create a Calendar by using a custom template.
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-calendar name="calendar">
         <month content="<div class='custom'><#=data.value#></div>"/>
     </kendo-calendar>
 
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().Calendar()
                 .Name("calendar")
@@ -117,13 +117,13 @@ You can configure the Calendar to display the week number and also use the week 
 
 The `weekNumber` option enables the Calendar to display the week number on an annual base to the left side of month view and as a separate column.
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-calendar week-number="true" name="calendar">
     </kendo-calendar>
 
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().Calendar()
                 .Name("calendar")
@@ -142,14 +142,14 @@ The week-number template intends to customize the cells in the **Week** column. 
 
 You can use these properties in the template to make additional calculations.
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-calendar week-number="true" name="calendar">
         <month week-number="<i>#= data.weekNumber #</i>" />
     </kendo-calendar>
 
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().Calendar()
         .Name("calendar")
@@ -177,13 +177,13 @@ To perform the multiple date selection, the user can also use the keyboard:
 * The selection of a date from a specific view without utilizing the `Ctrl` key, deselects all previously selected dates&mdash;including the previously selected dates from other views or months, and selects the date of the clicked cell.
 * The selection of a date that is already selected while holding the `Ctrl` key removes the date from the selection.
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-calendar selectable="multiple" name="calendar">
     </kendo-calendar>
 
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().Calendar()
         .Name("calendar")
@@ -216,13 +216,13 @@ To disable a date, either:
 
 When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-calendar disable-dates="new DateTime[] { DateTime.Now.AddDays(2), DateTime.Now.AddDays(2) }" value="DateTime.Now" name="calendar">
     </kendo-calendar>
 
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().Calendar()
         .Name("calendar")

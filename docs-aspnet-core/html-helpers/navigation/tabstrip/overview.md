@@ -19,7 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [TabStrip Ht
 
 The following example demonstrates how to define the TabStrip by using the TabStrip HtmlHelper.
 
-```tab-Razor
+```Razor
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(tabstrip =>
@@ -55,7 +55,7 @@ The following example demonstrates how to define the TabStrip by using the TabSt
     })
 )
 ```
-```tab-Controller
+```Controller
 public class TabStripController : Controller
 {
     public IActionResult Index()

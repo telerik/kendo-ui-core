@@ -38,7 +38,7 @@ The following example demonstrates how to define the Chart by using the Chart ta
 
 The Chart tag helper configuration options are passed as attributes of the tag. The following **tagHelper** and **razor** configurations are equivalent.
 
-```tab-tagHelper
+```tagHelper
 <kendo-chart name="chart">
     <chart-title text="Gross domestic product growth /GDP annual %/"></title>
     <chart-legend position="ChartLegendPosition.Top"></legend>
@@ -70,7 +70,7 @@ The Chart tag helper configuration options are passed as attributes of the tag. 
     <tooltip visible="true" format="{0}%" template="#= series.name #: #= value #"></tooltip>
 </kendo-chart>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().Chart()
     .Name("chart")
     .Title("Gross domestic product growth /GDP annual %/")

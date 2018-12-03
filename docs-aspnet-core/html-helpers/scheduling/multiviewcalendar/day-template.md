@@ -14,7 +14,7 @@ The following example demonstrates how to create a MultiViewCalendar by using a 
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

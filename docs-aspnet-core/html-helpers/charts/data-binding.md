@@ -131,7 +131,7 @@ You can bind the Chart to a data set in the view model or to items tat are store
 
 The following example demonstrates how to bind the Chart to data in the view model.
 
-```tab-Controller
+```Controller
 
         public IActionResult Local_Data_Binding()
         {
@@ -152,7 +152,7 @@ The following example demonstrates how to bind the Chart to data in the view mod
             return View(internetUsers);
         }
 ```
-```tab-Model
+```Model
 
     public class InternetUsers
     {
@@ -172,7 +172,7 @@ The following example demonstrates how to bind the Chart to data in the view mod
         public string Country { get; set; }
     }
 ```
-```tab-Razor
+```Razor
 
     @model IEnumerable<LocalBindingExample.Models.InternetUsers>
 
@@ -201,7 +201,7 @@ The most flexible form of data binding is to use the DataSource component. It is
 
 1. Add a new action method in your controller that returns the data set.
 
-		```tab-Controller
+		```Controller
 
 		        [HttpPost]
 		        public IActionResult _SpainElectricityProduction()
@@ -221,7 +221,7 @@ The most flexible form of data binding is to use the DataSource component. It is
 		            return Json(result);
 		        }
 		```
-		```tab-Model
+		```Model
 
 		    public class ElectricityProduction
 		    {
@@ -279,14 +279,14 @@ The most flexible form of data binding is to use the DataSource component. It is
 
 		Unlike the Grid, the Chart is configured to read a flat data response by default. If you have custom logic that requires the usage of the `ToDataSourceResult()` extension method when returning data for the Chart, configure a custom DataSource with a schema that can correctly parse the response.
 
-		```tab-Controller
+		```Controller
 
 		        public IActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
 		        {
 		           return Json(productService.Read().ToDataSourceResult(request));
 		        }
 		```
-		```tab-Razor
+		```Razor
 
 		    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ProductViewModel>()
 		        .Name("chart")

@@ -19,7 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [Window Html
 
 The following example demonstrates how to define the Window by using the Window HtmlHelper.
 
-```tab-Razor
+```Razor
  @(Html.Kendo().Window()
     .Name("window")
     .Title("Window title")
@@ -28,7 +28,7 @@ The following example demonstrates how to define the Window by using the Window 
     </text>)
 )
 ```
-```tab-Controller
+```Controller
     public class WindowController  : Controller
     {
         public ActionResult Index()

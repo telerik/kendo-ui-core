@@ -15,7 +15,7 @@ The Treelist tag helper helps you configure the Kendo UI Treelist widget in ASP.
 
 The following example demonstrates how to initialize the TreeList and bind it to a local data array.
 
-```tab-tagHelper
+```tagHelper
     <kendo-treelist datasource-id="dataSource" name="treelist">
         <columns>
             <treelist-column field="Name"></treelist-column>
@@ -34,7 +34,7 @@ The following example demonstrates how to initialize the TreeList and bind it to
         })
     </script>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeList<dynamic>()
         .Name("treelist")
         .Columns(x=> {
@@ -66,7 +66,7 @@ The following example demonstrates how to enable the remote binding for the Tree
 >
 > When you use the `schema.model.fields` configuration, list all fields. Set the field which represents the `id` of the event through the `schema.model.id`. If these are not set, they will still work for displaying the data, but will post incomplete objects on the server when the items are edited.
 
-```tab-tagHelper
+```tagHelper
     <kendo-treelist name="treelist" height="540">
         <treelist-datasource name="dataSource" >
             <transport>
@@ -93,7 +93,7 @@ The following example demonstrates how to enable the remote binding for the Tree
         </columns>
     </kendo-treelist>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryRemoteModel>()
         .Name("treelist")
         .Columns(x=> {
@@ -127,7 +127,7 @@ The following example demonstrates how to enable the remote binding for the Tree
 
 The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) and [fields](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#fields).
 
-```tab-tagHelper
+```tagHelper
     <kendo-treelist datasource-id="dataSource" name="treelist">
         <columns>
             <treelist-column field="Name"></treelist-column>
@@ -155,7 +155,7 @@ The TreeList exposes a set of [methods](https://docs.telerik.com/kendo-ui/api/ja
         })
     </script>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeList<dynamic>()
         .Name("treelist")
         .Columns(x=> {
@@ -199,7 +199,7 @@ The event handler is the JavaScript function which is invoked when the event is 
 
 The following example demonstrates how to subscribe to a TreeList event during the initialization of the widget.
 
-```tab-tagHelper
+```tagHelper
     <kendo-treelist datasource-id="dataSource" name="treelist" on-data-bound="dataBound">
         <columns>
             <treelist-column field="Name"></treelist-column>
@@ -223,7 +223,7 @@ The following example demonstrates how to subscribe to a TreeList event during t
         })
     </script>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeList<dynamic>()
                 .Name("treelist")
                 .Columns(x =>
@@ -253,7 +253,7 @@ The following example demonstrates how to subscribe to a TreeList event during t
 
 The following example demonstrates how to subscribe to a TreeList event by using the `bind` method.
 
-```tab-tagHelper
+```tagHelper
     <kendo-treelist datasource-id="dataSource" name="treelist">
         <columns>
             <treelist-column field="Name"></treelist-column>
@@ -281,7 +281,7 @@ The following example demonstrates how to subscribe to a TreeList event by using
         })
     </script>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeList<dynamic>()
                 .Name("treelist")
                 .Columns(x =>
@@ -321,7 +321,7 @@ To refer to an existing TreeList instance, use the [`jQuery.data()`](http://api.
 
 The following example demonstrates how to access an existing TreeList instance
 
-```tab-tagHelper
+```tagHelper
     <kendo-treelist datasource-id="dataSource" name="treelist">
         <columns>
             <treelist-column field="Name"></treelist-column>
@@ -346,7 +346,7 @@ The following example demonstrates how to access an existing TreeList instance
         })
     </script>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeList<dynamic>()
                 .Name("treelist")
                 .Columns(x =>

@@ -28,7 +28,7 @@ The following example demonstrates how to define the Map by using the Map HtmlHe
 
 ###### Example
 
-```tab-Razor
+```Razor
     @(Html.Kendo().Map()
         .Name("map")
         .Center(35.268107, -95.744821)
@@ -50,7 +50,7 @@ The following example demonstrates how to define the Map by using the Map HtmlHe
         })
     )
 ```
-```tab-Controller
+```Controller
     public partial class MapController : BaseController
     {
         [Demo]

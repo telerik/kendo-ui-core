@@ -23,12 +23,12 @@ The following example demonstrates how to define the QR Code by using the QR Cod
 
 The QR Code tag helper configuration options are passed as attributes of the tag.
 
-```tab-tagHelper
+```tagHelper
     <kendo-qrcode name="qrUrl" value="https://docs.telerik.com/aspnet-core/introduction" error-correction="QRErrorCorrectionLevel.M size=" 150">
         <border color="#AA11AA" width="2" />
     </kendo-qrcode>
 ```
-```tab-cshtml
+```cshtml
     Html.Kendo().QRCode()
         .Name("qrUrl")
         .Value("https://docs.telerik.com/aspnet-core/introduction")

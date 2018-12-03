@@ -12,7 +12,7 @@ The Kendo UI MultiViewCalendar allows the user to select multiple dates by using
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

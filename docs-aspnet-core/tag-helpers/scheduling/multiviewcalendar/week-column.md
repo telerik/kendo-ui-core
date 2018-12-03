@@ -12,13 +12,13 @@ In the MultiViewCalendar, you can render a column which displays the number of t
 
 ###### Example
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar" week-number="true">
     </kendo-multiviewcalendar>
 
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

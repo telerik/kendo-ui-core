@@ -24,7 +24,7 @@ The following example demonstrates how to define the PanelBar by using the Panel
 
 The PanelBar tag helper configuration options are passed as attributes of the tag. You can configure items by using a nested `<items>` tag and bind the widget by using either the `bind-to` option, or the `<hierarchical-datasource>` tag helper.
 
-```tab-tagHelper
+```tagHelper
     <kendo-panelbar name="employees" datatextfield="FullName">
         <hierarchical-datasource>
             <transport>
@@ -37,7 +37,7 @@ The PanelBar tag helper configuration options are passed as attributes of the ta
         </hierarchical-datasource>
     </kendo-panelbar>
 ```
-```tab-tagHelper
+```tagHelper
     <kendo-panelbar name="project">
         <items>
             <panelbar-item text="Storage" expanded="true">
@@ -57,7 +57,7 @@ The PanelBar tag helper configuration options are passed as attributes of the ta
         </items>
     </kendo-panelbar>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().PanelBar()
       .Name("panelbar")
       .ExpandMode(PanelBarExpandMode.Single)

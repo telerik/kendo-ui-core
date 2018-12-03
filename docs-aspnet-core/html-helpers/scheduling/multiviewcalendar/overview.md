@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar") //The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
@@ -59,7 +59,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
           .Name("MultiViewCalendar")
@@ -85,7 +85,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
           .Name("MultiViewCalendar")

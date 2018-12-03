@@ -25,13 +25,13 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ###### Example
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar" start="CalendarView.Year" depth="CalendarView.Year">
     </kendo-multiviewcalendar>
 
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

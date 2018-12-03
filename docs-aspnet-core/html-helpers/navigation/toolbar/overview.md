@@ -19,7 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [ToolBar Htm
 
 The following example demonstrates how to define the ToolBar by using the ToolBar HtmlHelper.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")
         .Items(items => {
@@ -34,7 +34,7 @@ The following example demonstrates how to define the ToolBar by using the ToolBa
         })
     )
 ```
-```tab-Controller
+```Controller
     public class ToolBarController : Controller
     {
         public ActionResult Index()

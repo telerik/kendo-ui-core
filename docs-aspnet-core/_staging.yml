@@ -1,1 +1,2 @@
 baseurl: /docs
+exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb]

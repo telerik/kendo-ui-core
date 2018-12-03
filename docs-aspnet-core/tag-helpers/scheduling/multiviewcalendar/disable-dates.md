@@ -14,13 +14,13 @@ To disable a date set an array of the dates that have to be disabled and list th
 
 ###### Example
 
-```tab-tagHelper
+```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar" disable-dates="new DateTime[] { DateTime.Now }">
     </kendo-multiviewcalendar>
 
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

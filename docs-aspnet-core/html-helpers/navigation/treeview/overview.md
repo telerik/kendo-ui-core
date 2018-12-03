@@ -19,7 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [TreeView Ht
 
 The following example demonstrates how to define the TreeView by using the TreeView HtmlHelper.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .DataTextField("Name")
@@ -30,7 +30,7 @@ The following example demonstrates how to define the TreeView by using the TreeV
         )
     )
 ```
-```tab-Controller
+```Controller
     public class TreeViewController : Controller
     {
         public IActionResult Index()

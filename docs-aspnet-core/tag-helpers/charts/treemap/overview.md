@@ -32,7 +32,7 @@ The following example demonstrates how to define the TreeMap by using the TreeMa
 
 You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo UI TreeMap tag helper to a remote service.
 
-```tab-tagHelper
+```tagHelper
     <kendo-treemap name="treemap" text-field="name" value-field="value">
         <hierarchical-datasource>
             <transport>
@@ -45,7 +45,7 @@ You can also bind the `DataSource` to remote data. The following example demonst
     </kendo-treemap>
 
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeMap()
         .Name("treeMap")
         .DataSource(dataSource => dataSource

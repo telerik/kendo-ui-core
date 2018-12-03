@@ -19,7 +19,7 @@ The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [K
 
 The following example demonstrates how to define the MultiColumnComboBox HtmlHelper.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Placeholder("Select product")
@@ -41,7 +41,7 @@ The following example demonstrates how to define the MultiColumnComboBox HtmlHel
     )
 
 ```
-```tab-Controller
+```Controller
 
     public class MultiColumnComboBoxController : Controller
     {

@@ -24,7 +24,7 @@ res_type: kb
   <td>Visual Studio version</td>
   <td>Visual Studio Online</td>
  </tr>
-</table> 
+</table>
 
 ## Description
 

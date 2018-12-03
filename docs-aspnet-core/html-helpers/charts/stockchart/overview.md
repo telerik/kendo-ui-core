@@ -24,7 +24,7 @@ Below are steps for you to follow when configuring the Kendo UI StockChart for A
 
 Add a new action method which returns data to populate the StockChart.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
         .Title("The Boeing Company (NYSE:BA)")
@@ -34,7 +34,7 @@ Add a new action method which returns data to populate the StockChart.
         .DateField("Date")
     )
 ```
-```tab-Model
+```Model
     public class StockDataPoint
     {
         public DateTime Date { get; set; }
@@ -52,7 +52,7 @@ Add a new action method which returns data to populate the StockChart.
         public string Symbol { get; set; }
     }
 ```
-```tab-HomeController
+```HomeController
     public IActionResult Index()
     {
         return View();

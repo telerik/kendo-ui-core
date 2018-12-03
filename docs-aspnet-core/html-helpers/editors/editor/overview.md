@@ -21,7 +21,7 @@ The following example demonstrates how to define the Editor by using the Editor 
 
 ###### Example
 
-```tab-Razor
+```Razor
 @(Html.Kendo().Editor()
     .Name("editor")
     .HtmlAttributes(new { style = "height:440px" })
@@ -45,7 +45,7 @@ The following example demonstrates how to define the Editor by using the Editor 
     </text>)
 )
 ```
-```tab-Controller
+```Controller
     public class EditorController : Controller
     {
         public ActionResult Index()

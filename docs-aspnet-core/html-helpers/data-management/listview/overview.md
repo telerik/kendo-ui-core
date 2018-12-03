@@ -21,7 +21,7 @@ The following example demonstrates how to define the ListView by using the ListV
 
 ###### Example
 
-```tab-Template
+```Template
 
 		    <script type="text/x-kendo-tmpl" id="template">
     			<div class="product">
@@ -33,7 +33,7 @@ The following example demonstrates how to define the ListView by using the ListV
 		    	</div>
 			  </script>
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
                 .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
@@ -52,7 +52,7 @@ The following example demonstrates the basic configuration for the ListView with
 
 ###### Example
 
-```tab-Template
+```Template
 
 	<script type="text/x-kendo-tmpl" id="template">
 	    <div class="product-view k-widget">
@@ -73,7 +73,7 @@ The following example demonstrates the basic configuration for the ListView with
 	    </div>
 	</script>
 ```
-```tab-Razor
+```Razor
 
 	@(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
 	    .Name("listView")

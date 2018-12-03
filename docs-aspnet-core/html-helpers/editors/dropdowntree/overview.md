@@ -18,7 +18,7 @@ It allows you to configure the Kendo UI DropDownTree widget from server-side cod
 
 The following example demonstrates how to define the DropDownTree by using the DropDownTree HtmlHelper.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree")
         .DataTextField("Name")
@@ -29,7 +29,7 @@ The following example demonstrates how to define the DropDownTree by using the D
         )
     )
 ```
-```tab-Controller
+```Controller
     public class DropDownTreeController : Controller
     {
         public IActionResult Index()
