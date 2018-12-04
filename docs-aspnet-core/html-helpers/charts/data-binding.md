@@ -201,119 +201,119 @@ The most flexible form of data binding is to use the DataSource component. It is
 
 1. Add a new action method in your controller that returns the data set.
 
-		```Controller
+    ```Controller
+            [HttpPost]
+            public IActionResult _SpainElectricityProduction()
+            {
+                // Data is usually read from a data context. Static data is used in this example for clarity.
+                var result = new ElectricityProduction[] {
+                    new ElectricityProduction("2000", 18, 31807, 4727, 62206),
+                    new ElectricityProduction("2001", 24, 43864, 6759, 63708),
+                    new ElectricityProduction("2002", 30, 26270, 9342, 63016),
+                    new ElectricityProduction("2003", 41, 43897, 12075, 61875),
+                    new ElectricityProduction("2004", 56, 34439, 15700, 63606),
+                    new ElectricityProduction("2005", 41, 23025, 21176, 57539),
+                    new ElectricityProduction("2006", 119, 29831, 23297, 60126),
+                    new ElectricityProduction("2007", 508, 30522, 27568, 55103),
+                    new ElectricityProduction("2008", 2578, 26112, 32203, 58973)
+                };
+                return Json(result);
+            }
+    ```
+    ```Model
+        public class ElectricityProduction
+        {
+            public ElectricityProduction()
+            {
+            }
 
-		        [HttpPost]
-		        public IActionResult _SpainElectricityProduction()
-		        {
-		            // Data is usually read from a data context. Static data is used in this example for clarity.
-		            var result = new ElectricityProduction[] {
-		                new ElectricityProduction("2000", 18, 31807, 4727, 62206),
-		                new ElectricityProduction("2001", 24, 43864, 6759, 63708),
-		                new ElectricityProduction("2002", 30, 26270, 9342, 63016),
-		                new ElectricityProduction("2003", 41, 43897, 12075, 61875),
-		                new ElectricityProduction("2004", 56, 34439, 15700, 63606),
-		                new ElectricityProduction("2005", 41, 23025, 21176, 57539),
-		                new ElectricityProduction("2006", 119, 29831, 23297, 60126),
-		                new ElectricityProduction("2007", 508, 30522, 27568, 55103),
-		                new ElectricityProduction("2008", 2578, 26112, 32203, 58973)
-		            };
-		            return Json(result);
-		        }
-		```
-		```Model
+            public ElectricityProduction(string year, int solar, int hydro, int wind, int nuclear)
+            {
+                Year = year;
+                Solar = solar;
+                Hydro = hydro;
+                Wind = wind;
+                Nuclear = nuclear;
+            }
 
-		    public class ElectricityProduction
-		    {
-		        public ElectricityProduction()
-		        {
-		        }
-
-		        public ElectricityProduction(string year, int solar, int hydro, int wind, int nuclear)
-		        {
-		            Year = year;
-		            Solar = solar;
-		            Hydro = hydro;
-		            Wind = wind;
-		            Nuclear = nuclear;
-		        }
-
-		        public string Year { get; set; }
-		        public int Solar { get; set; }
-		        public int Nuclear { get; set; }
-		        public int Hydro { get; set; }
-		        public int Wind { get; set; }
-		    }
-		```
+            public string Year { get; set; }
+            public int Solar { get; set; }
+            public int Nuclear { get; set; }
+            public int Hydro { get; set; }
+            public int Wind { get; set; }
+        }
+    ```
 
 1. In the view, configure the Chart to use the action method that you created.
 
-		    @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
-		        .Name("chart")
-		        .Title("Spain electricity production (GWh)")
-		        .Legend(legend => legend
-		            .Position(ChartLegendPosition.Top)
-		        )
-		        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Line_Charts")))
-		        .Series(series => {
-		            series.Line(model => model.Nuclear).Name("Nuclear").CategoryField("Year");
-		            series.Line(model => model.Hydro).Name("Hydro").CategoryField("Year");
-		            series.Line(model => model.Wind).Name("Wind").CategoryField("Year");
-		        })
-		        .CategoryAxis(axis => axis
-		            .Labels(labels => labels.Rotation(-90))
-		            .Crosshair(c => c.Visible(true))
-		        )
-		        .ValueAxis(axis => axis.Numeric()
-		            .Labels(labels => labels.Format("{0:N0}"))
-		            .MajorUnit(10000)
-		        )
-		        .Tooltip(tooltip => tooltip
-		            .Visible(true)
-		            .Shared(true)
-		            .Format("{0:N0}")
-		        )
-		    )
+    ###### Example
+
+        ```
+        @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
+            .Name("chart")
+            .Title("Spain electricity production (GWh)")
+            .Legend(legend => legend
+                .Position(ChartLegendPosition.Top)
+            )
+            .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Line_Charts")))
+            .Series(series => {
+                series.Line(model => model.Nuclear).Name("Nuclear").CategoryField("Year");
+                series.Line(model => model.Hydro).Name("Hydro").CategoryField("Year");
+                series.Line(model => model.Wind).Name("Wind").CategoryField("Year");
+            })
+            .CategoryAxis(axis => axis
+                .Labels(labels => labels.Rotation(-90))
+                .Crosshair(c => c.Visible(true))
+            )
+            .ValueAxis(axis => axis.Numeric()
+                .Labels(labels => labels.Format("{0:N0}"))
+                .MajorUnit(10000)
+            )
+            .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Shared(true)
+                .Format("{0:N0}")
+            )
+        )
+        ```
 
 1. (Optional) Configure a Custom DataSource.
 
-		Unlike the Grid, the Chart is configured to read a flat data response by default. If you have custom logic that requires the usage of the `ToDataSourceResult()` extension method when returning data for the Chart, configure a custom DataSource with a schema that can correctly parse the response.
+    Unlike the Grid, the Chart is configured to read a flat data response by default. If you have custom logic that requires the usage of the `ToDataSourceResult()` extension method when returning data for the Chart, configure a custom DataSource with a schema that can correctly parse the response.
 
-		```Controller
-
-		        public IActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
-		        {
-		           return Json(productService.Read().ToDataSourceResult(request));
-		        }
-		```
-		```Razor
-
-		    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ProductViewModel>()
-		        .Name("chart")
-		        .Title("Product Prices")
-		        .Legend(legend => legend
-		            .Position(ChartLegendPosition.Top)
-		        )
-		                    .DataSource(source =>
-		                    {
-		                        source.Custom()
-		                              .Type("aspnetmvc-ajax")
-		                              .Transport(transport =>
-		                              {
-		                                  transport.Read("Products_Read", "Chart");
-		                              })
-		                              .Schema(schema =>
-		                              {
-		                                  schema.Data("Data")
-		                                        .Total("Total");
-		                              });
-		                    })
-		        .Series(series =>
-		        {
-		            series.Column(model => model.UnitPrice).Name("Price").CategoryField("ProductName");
-		        })
-		    )
-		```
+    ```Controller
+        public IActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(productService.Read().ToDataSourceResult(request));
+        }
+    ```
+    ```Razor
+        @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ProductViewModel>()
+            .Name("chart")
+            .Title("Product Prices")
+            .Legend(legend => legend
+                .Position(ChartLegendPosition.Top)
+            )
+                        .DataSource(source =>
+                        {
+                            source.Custom()
+                                    .Type("aspnetmvc-ajax")
+                                    .Transport(transport =>
+                                    {
+                                        transport.Read("Products_Read", "Chart");
+                                    })
+                                    .Schema(schema =>
+                                    {
+                                        schema.Data("Data")
+                                            .Total("Total");
+                                    });
+                        })
+            .Series(series =>
+            {
+                series.Column(model => model.UnitPrice).Name("Price").CategoryField("ProductName");
+            })
+        )
+    ```
 
 ## See Also
 

@@ -41,7 +41,7 @@ The [Kendo UI Column Chart for ASP.NET Core](https://demos.telerik.com/aspnet-co
 
 **Figure 1: A sample Column Chart with categories**
 
-![Column Chart with categories](/html-helpers/charts/chart-types/chart-column-categories.png)
+![Column Chart with categories](images/chart-column-categories.png)
 
 ### Bar Chart
 
@@ -66,7 +66,7 @@ Setting the `Series` object to `"Bar"` renders horizontal bars, as demonstrated 
 
 **Figure 2: A sample Bar Chart**
 
-![Bar Chart](/html-helpers/charts/chart-types/chart-bar.png)
+![Bar Chart](images/chart-bar.png)
 
 ## See Also
 

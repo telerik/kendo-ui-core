@@ -14,28 +14,26 @@ The example below demonstrates how to group the data in the DropDownList by Coun
 
 ###### Example
 
-   @(Html.Kendo().DropDownList()
-            .Name("customers")
-            .DataSource(source =>  source
-                .Custom()
-                .Group(g => g.Add("Country", typeof(string)))
-                .Transport(transport => transport
-                    .Read(read =>
-                    {
-                        read.Action("Grouping_GetCustomers", "DropDownList");
-                    }))
-                )
-            .DataTextField("ContactName")
-            .DataValueField("CustomerID")
-
-     )
-
-
+    ```
+    @(Html.Kendo().DropDownList()
+        .Name("customers")
+        .DataSource(source =>  source
+            .Custom()
+            .Group(g => g.Add("Country", typeof(string)))
+            .Transport(transport => transport
+                .Read(read =>
+                {
+                    read.Action("Grouping_GetCustomers", "DropDownList");
+                }))
+            )
+        .DataTextField("ContactName")
+        .DataValueField("CustomerID")
+    )
+    ```
 
 > **Important**
 >
 > The data source sorts the grouped data either in ascending or descending order. If you want to persist a specific group order, use the [server grouping feature](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource `ServerGrouping` method to define the `serverGrouping` option.
-
 
  ## See Also
 

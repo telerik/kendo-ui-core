@@ -11,10 +11,10 @@ res_type: kb
 ## Environment
 
 <table>
-	<tr>
-		<td>Product</td>
-		<td>Progress UI for ASP.NET Core</td>
-	</tr>
+    <tr>
+        <td>Product</td>
+        <td>Progress UI for ASP.NET Core</td>
+    </tr>
 </table>
 
 ## Description
@@ -36,26 +36,24 @@ Widen the character ranges that are treated as safe by the ASP.NET Core encoding
 1. Open `Startup.cs` file and locate the `ConfigureServices` method.
 1. Add the following line:
 
-	```
-     services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin,
-                                                                     UnicodeRanges.Cyrillic }));
-	```
+    ```
+    services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic }));
+    ```
 
-	Inside the code line, replace `UnicodeRanges.Cyrillic` with the ranges which include all Unicode characters that you use in your localization files. For more information, refer to the relevant table in the [Unicode Character Code Charts list](http://www.unicode.org/charts/index.html). The final result should be similar to the following code snippet:
+    Inside the code line, replace `UnicodeRanges.Cyrillic` with the ranges which include all Unicode characters that you use in your localization files. For more information, refer to the relevant table in the [Unicode Character Code Charts list](http://www.unicode.org/charts/index.html). The final result should be similar to the following code snippet:
 
-	```
-	    public void ConfigureServices(IServiceCollection services)
-	    {
-	        // Add framework services.
-	        services
-	            .AddMvc()
-	            .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+    ```
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Add framework services.
+        services
+            .AddMvc()
+            .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-	        services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic }));
-	        services.AddKendo();
-	    }
-
-	```
+        services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic }));
+        services.AddKendo();
+    }
+    ```
 
 ## See Also
 

@@ -53,17 +53,17 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 1. In the view, configure the ListView to use the action method created in the previous steps. You may use the sample model and data from the example below
 
-    ```ListView
+    ```Razor
         @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
-           .Name("ListView")
-           .TagName("div")
-           .ClientTemplateId("template")
-           .DataSource(dataSource => dataSource
-               .Ajax()
-               .PageSize(6)
-               .Read(read => read.Action("Orders_Read", "ListView"))
-           )
-           .Pageable()
+            .Name("ListView")
+            .TagName("div")
+            .ClientTemplateId("template")
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(6)
+                .Read(read => read.Action("Orders_Read", "ListView"))
+            )
+            .Pageable()
         )
     ```
     ```Template
@@ -100,35 +100,35 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
         </style>
     ```
     ```Model
-            public class OrderViewModel
+        public class OrderViewModel
+        {
+            public int OrderID
             {
-                 public int OrderID
-                {
-                    get;
-                    set;
-                }
-
-                public decimal? Freight
-                {
-                    get;
-                    set;
-                }
-                    public DateTime? OrderDate
-                {
-                    get;
-                    set;
-                }
-                    public string ShipCity
-                {
-                    get;
-                    set;
-                }
-                    public string ShipName
-                {
-                    get;
-                    set;
-                }
+                get;
+                set;
             }
+
+            public decimal? Freight
+            {
+                get;
+                set;
+            }
+                public DateTime? OrderDate
+            {
+                get;
+                set;
+            }
+                public string ShipCity
+            {
+                get;
+                set;
+            }
+                public string ShipName
+            {
+                get;
+                set;
+            }
+        }
     ```
     ```Controller
         public class ListViewController : Controller

@@ -37,7 +37,7 @@ The TreeView tag helper configuration options are passed as attributes of the ta
         </hierarchical-datasource>
     </kendo-treeview>
 ```
-```tagHelper
+```tagHelper-items
     <kendo-treeview name="treeView1">
         <items>
             <treeview-item text="Web Site" expanded="true" sprite-css-class="folder">

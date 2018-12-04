@@ -20,7 +20,7 @@ If no template is defined, the name of the field and the current group are displ
 
 **Figure 1: Grid with no group templates**
 
-![Grid with no group templates](/html-helpers/data-management/grid/grid-no-group-header-template.png)
+![Grid with no group templates](../images/grid-no-group-header-template.png)
 
 The only difference in the use of `ClientGroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value.
 
@@ -28,7 +28,7 @@ Both `ClientGroupHeaderColumnTemplate` and `ClientGroupFooterTemplate` work in a
 
 **Figure 2: Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied**
 
-![Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](/html-helpers/data-management/grid/grid-group-header-column-template.png)
+![Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../images/grid-group-header-column-template.png)
 
 Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `ClientGroupHeaderColumnTemplate` of the first visible column. If you want to show the `ClientGroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `ClientGroupHeaderTemplate` for the group column. The following Grid configuration shows that commenting the `ClientGroupHeaderTemplate` for the **Units In Stock** column shows the `ClientGroupHeaderColumnTemplate` for the **Product Name** column.
 
@@ -61,7 +61,7 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 **Figure 3: Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate**
 
-![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](/html-helpers/data-management/grid/grid-group-header-column-template-first-column.png)
+![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../images/grid-group-header-column-template-first-column.png)
 
 ## See Also
 

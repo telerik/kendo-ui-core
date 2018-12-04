@@ -37,7 +37,7 @@ The PanelBar tag helper configuration options are passed as attributes of the ta
         </hierarchical-datasource>
     </kendo-panelbar>
 ```
-```tagHelper
+```tagHelper-items
     <kendo-panelbar name="project">
         <items>
             <panelbar-item text="Storage" expanded="true">

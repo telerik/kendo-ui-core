@@ -83,10 +83,6 @@ To specify a chunk of content in the Editor tag helper, use the `<content>` tag 
 			</content>
 	</kendo-editor>
 ```
-```tagHelper
-	<kendo-editor name="editor" value="<p>Some content</p>">
-	</kendo-editor>
-```
 ```cshtml
 	@(Html.Kendo().Editor()
 			.Name("editor")

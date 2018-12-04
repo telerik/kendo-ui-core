@@ -19,8 +19,6 @@ For more information on the HtmlHelper, refer to the article on the [Upload Html
 
 The following example demonstrates how to define the Upload widget by using the Upload HtmlHelper.
 
-###### Example
-
 ```Razor
 @(Html.Kendo().Upload()
     .Name("files")
@@ -31,7 +29,6 @@ The following example demonstrates how to define the Upload widget by using the 
     )
 )
 ```
-
 ```Controller
 public IHostingEnvironment HostingEnvironment { get; set; }
 

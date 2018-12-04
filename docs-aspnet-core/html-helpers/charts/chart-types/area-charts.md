@@ -48,7 +48,7 @@ The configuration from the previous example results in the following Area Chart.
 
 **Figure 1: A sample Area Chart**
 
-![Area Chart](/html-helpers/charts/chart-types/chart-area.png)
+![Area Chart](images/chart-area.png)
 
 ### Line Styles
 
@@ -62,11 +62,11 @@ The supported styles are:
 
 **Figure 2: A step-line Area Chart**
 
-![Step Line Chart](/html-helpers/charts/chart-types/chart-step-area.png)
+![Step Line Chart](images/chart-step-area.png)
 
 **Figure 3: A smooth-line Area Chart**
 
-![Smooth Line Chart](/html-helpers/charts/chart-types/chart-smooth-area.png)
+![Smooth Line Chart](images/chart-smooth-area.png)
 
 ## See Also
 

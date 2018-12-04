@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Templates
 page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_templates_aspnetcore

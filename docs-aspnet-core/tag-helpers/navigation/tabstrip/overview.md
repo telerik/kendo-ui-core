@@ -41,7 +41,7 @@ To pass the TabStrip items collection, either:
     </items>
 </kendo-tabstrip>
 ```
-```tagHelper
+```tagHelper=li
 <kendo-tabstrip name="tabstrip">
     <li>Tab 1</li>
     <li>Tab 2</li>

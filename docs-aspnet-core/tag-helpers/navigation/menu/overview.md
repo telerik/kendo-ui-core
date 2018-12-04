@@ -37,7 +37,7 @@ To pass the Menu items collection, either:
     </items>
 </kendo-menu>
 ```
-```tagHelper
+```tagHelper-li
 <kendo-menu name="menu">
     <li>Home</li>
     <li>Second Page</li>
