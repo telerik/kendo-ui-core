@@ -23,9 +23,7 @@ The following example demonstrates how to define the MaskedTextBox by using the 
 
 The MaskedTextBox tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().MaskedTextBox()
 			.Name("phone_number")
@@ -33,7 +31,7 @@ The MaskedTextBox tag helper configuration options are passed as attributes of t
 			.Value("555 123 4567")
 		)
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-maskedtextbox name="phone_number" mask="(999) 000-0000" value="555 123 4567"></kendo-maskedtextbox>
 ```

@@ -31,9 +31,7 @@ The ToolBar tag helper configuration options are passed as attributes of the tag
 
 The following example demonstrates the basic configuration of the ToolBar tag helper.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 
     <kendo-toolbar name="ToolBar">
         <toolbar-items>
@@ -84,7 +82,7 @@ The following example demonstrates the basic configuration of the ToolBar tag he
         });
     </script>
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")

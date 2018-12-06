@@ -23,9 +23,7 @@ The following example demonstrates how to define the AutoComplete by using the A
 
 The AutoComplete tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().AutoComplete()
           .Name("products2")
@@ -53,7 +51,7 @@ The AutoComplete tag helper configuration options are passed as attributes of th
         }
     </script>
 ```
-```tab-tagHelper
+```tagHelper
 
     <kendo-autocomplete name="products" filter="FilterType.Contains"
                         datatextfield="ProductName"

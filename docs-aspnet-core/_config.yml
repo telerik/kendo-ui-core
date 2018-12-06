@@ -2,12 +2,15 @@
 url: "https://docs.telerik.com/aspnet-core"
 
 # Exclude files which should not be in the output
-exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
+exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, all-pages.md, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
+exclude_navigation: ["knowledge-base/*"]
 navigation:
-
 
 ## List your directory names and order here, like this:
 
+     "knowledge-base":
+        title: "Knowledge Base"
+        position: 7
      "api":
         title: "API Reference"
         position: 0
@@ -139,6 +142,7 @@ navigation:
         title: "Appearance"
      "*binding":
         title: "Binding"
+        position: 2
      "*troubleshoot":
         title: "Troubleshooting"
      "*editing":
@@ -281,13 +285,17 @@ cdnVersion: "2017.2.621"
 ## The MVC Core version used
 mvcCoreVersion: "2017.2.621"
 
+## Product
+product: "Telerik UI for ASP.NET Core"
+platform: aspnet-core
+
 ## Assign layout and category per different paths
 defaults:
 -
     scope:
         path: ""
     values:
-        layout: "page"
+        layout: "documentation"
         category: "default"
         product: "aspnet-core"
         editable: true
@@ -301,6 +309,8 @@ defaults:
         path: "api"
     values:
         editable: false
+        res_type: api
+        kind: api
 
 type_links:
     "kendo.Class": "/api/javascript/class"
@@ -319,9 +329,47 @@ type_links:
 # Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
 # "foo": "Bar"
 
+nginx_host: true
+
 # The google services configuration
 google_tag_manager: GTM-6X92
-google_custom_search: '001595215763381649090:rfbgc0yrusm'
+gcs_engine: '001595215763381649090:rfbgc0yrusm'
+gcs_api_key: 'AIzaSyCkef2O-98IZGc0Jv16ozv8gqL-r1mL2_0'
+
+skip_tabbed_code: true
+code_lang: true
+has_kb_portal: true
+edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet-core
+download: https://www.telerik.com/download-trial-file/v2/aspnet-core-ui
+nav:
+  "Demos": http://demos.telerik.com/aspnet-core/
+  "Release History": https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history
+  "About": http://www.telerik.com/aspnet-mvc/mvc6-features
+  "Pricing": http://www.telerik.com/purchase/aspnet-core-ui
+
+footer:
+-
+  title: "Getting Started"
+  links:
+    "Getting Started": https://docs.telerik.com/aspnet-core/getting-started/getting-started
+    "Demos": https://demos.telerik.com/aspnet-core/
+    "Sample Applications": https://demos.telerik.com/aspnet-core/
+-
+  title: "Support Resources"
+  links:
+    "Knowledge Base": https://docs.telerik.com/aspnet-core/knowledge-base
+-
+  title: "Community"
+  links:
+    "Forums": https://www.telerik.com/forums/aspnet-core-ui
+    "Blogs": https://www.telerik.com/blogs/.net
+    "Feedback Portal": https://feedback.telerik.com/aspnet-core-ui
+
+footer_social:
+    facebook: https://www.facebook.com/Telerik/
+    youtube: https://www.youtube.com/user/TelerikInc
+    linkedin: https://www.linkedin.com/showcase/telerik/
+    twitter: https://twitter.com/Telerik/
 
 # Assets pipeline configuration
 assets:

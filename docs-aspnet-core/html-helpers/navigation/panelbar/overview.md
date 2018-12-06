@@ -19,10 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [PanelBar Ht
 
 The following example demonstrates how to define the PanelBar by using the PanelBar HtmlHelper.
 
-###### Example
-
-```tab-Razor
-
+```Razor
    @(Html.Kendo().PanelBar()
         .Name("panelbar")
         .DataSource(source =>
@@ -31,7 +28,7 @@ The following example demonstrates how to define the PanelBar by using the Panel
         })
     )
 ```
-```tab-Controller
+```Controller
      public class PanelBarController : Controller
     {
         public IActionResult Index()
@@ -63,7 +60,7 @@ The following example demonstrates how to define the PanelBar by using the Panel
                     expanded = item.Expanded,
                     imageUrl = item.ImageUrl,
                     hasChildren = item.HasChildren
-                });           
+                });
 
             return Json(result);
         }
@@ -74,9 +71,9 @@ The following example demonstrates how to define the PanelBar by using the Panel
 
 The following example demonstrates the basic configuration of the PanelBar HtmlHelper and how to get the PanelBar instance.
 
-```tab-Razor
+```Razor
     @(Html.Kendo().PanelBar()
-        .Name("panelbar")    
+        .Name("panelbar")
         .TemplateId("panelbar-template")
         .ExpandMode(PanelBarExpandMode.Single)
         .Events(events => events
@@ -101,7 +98,7 @@ The following example demonstrates the basic configuration of the PanelBar HtmlH
         });
     </script>
 ```
-```tab-Template
+```Template
     <script id="panelbar-template" type="text/kendo-ui-template">
         #: item.text #
         # if (!item.items) { #

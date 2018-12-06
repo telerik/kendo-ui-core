@@ -23,9 +23,7 @@ The following example demonstrates how to define the Map by using the Map tag he
 
 The Map tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
     <kendo-map name="map" center="new double[] { 30.268107, -97.744821 }"              zoom="3">
         <layer-defaults>
             <map-marker>
@@ -49,7 +47,7 @@ The Map tag helper configuration options are passed as attributes of the tag.
         </layers>
     </kendo-map>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().Map()
         .Name("map")
         .Center(30.268107, -97.744821)

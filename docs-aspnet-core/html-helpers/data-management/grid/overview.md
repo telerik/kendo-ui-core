@@ -21,7 +21,7 @@ The following example demonstrates how to define the Grid by using the Grid Html
 
 ###### Example
 
-```tab-Razor
+```Razor
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
 		.Name("grid")
 		.Columns(columns =>
@@ -37,7 +37,7 @@ The following example demonstrates how to define the Grid by using the Grid Html
 		)
     )
 ```
-```tab-Controller
+```Controller
     namespace Kendo.Mvc.Examples.Controllers
     {
 	    public partial class GridController : BaseController

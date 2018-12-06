@@ -77,9 +77,7 @@ The following example demonstrates how to define the Splitter by using the Split
 
 The Splitter tag helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().Splitter()
             .Name("splitter1")
@@ -103,7 +101,7 @@ The Splitter tag helper supports all the configuration options that the HtmlHelp
             })
         )
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-splitter name="splitter1" orientation="SplitterOrientation.Vertical">
             <pane collapsed="false" collapsed-size="240px" collapsible="true"

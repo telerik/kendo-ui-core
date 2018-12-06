@@ -29,9 +29,7 @@ The following example demonstrates how to define the Window by using the Window 
 
 The Window tag helper configuration options are passed as attributes of the tag. The Window contents is placed between the opening and closing tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().Window()
             .Name("window")
@@ -56,7 +54,7 @@ The Window tag helper configuration options are passed as attributes of the tag.
             .Events(ev => ev.Close("onClose"))
         )
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-window name="window" title="About Alvar Aalto" draggable="true"
             width="400" on-close="onClose">

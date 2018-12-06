@@ -33,9 +33,7 @@ For more information on the HtmlHelper, refer to the article on the [Charts Html
 
 The following example demonstrates how to define a Bar Chart by using the Chart HtmlHelper.
 
-###### Example
-
-```tab-Razor
+```Razor
    @(Html.Kendo().Chart(Model)
       .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
       .Title("Internet Users")
@@ -48,7 +46,7 @@ The following example demonstrates how to define a Bar Chart by using the Chart 
       )
     )
 ```
-```tab-Controller
+```Controller
     public ActionResult Index()
     {
         return View(ChartDataRepository.InternetUsers());

@@ -23,9 +23,7 @@ The following example demonstrates how to define the TimePicker by using the Tim
 
 The TimePicker tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().TimePicker()
                 .Name("end")
@@ -34,7 +32,7 @@ The TimePicker tag helper configuration options are passed as attributes of the 
                 .Max("7:30 AM")
         )
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-timepicker name="end" value="new DateTime(1900, 1, 1, 8, 30, 0)"
             min="new DateTime(1900, 1, 1, 8, 0, 0)" max="new DateTime(1900, 1, 1, 7, 30, 0)">

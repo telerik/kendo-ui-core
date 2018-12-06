@@ -24,9 +24,7 @@ The following example demonstrates how to define the PivotGrid by using the Pivo
 
 The PivotGrid tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
     <kendo-pivotdatasource type=@(PivotDataSourceType.Xmla) name="pivotSource">
         <columns>
             <pivot-datasource-column name="[Date].[Calendar]" expand="true"></pivot-datasource-column>
@@ -47,7 +45,7 @@ The PivotGrid tag helper configuration options are passed as attributes of the t
     <kendo-pivotgrid name="pivotgrid" datasource-id="pivotSource">
     </kendo-pivotgrid>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().PivotConfigurator()
         .Name("configurator")
         .Filterable(true)

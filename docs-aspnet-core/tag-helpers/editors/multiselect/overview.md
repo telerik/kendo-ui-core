@@ -23,9 +23,7 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 
 The MultiSelect tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().MultiSelect()
           .Name("products")
@@ -38,7 +36,7 @@ The MultiSelect tag helper configuration options are passed as attributes of the
           )
     )
 ```
-```tab-tagHelper
+```tagHelper
 
     <kendo-multiselect name="products" filter="FilterType.Contains"
                        placeholder="Select product"

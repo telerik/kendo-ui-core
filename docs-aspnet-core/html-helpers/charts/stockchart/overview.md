@@ -24,9 +24,7 @@ Below are steps for you to follow when configuring the Kendo UI StockChart for A
 
 Add a new action method which returns data to populate the StockChart.
 
-###### Example
-
-```tab-Razor
+```Razor
     @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
         .Title("The Boeing Company (NYSE:BA)")
@@ -36,7 +34,7 @@ Add a new action method which returns data to populate the StockChart.
         .DateField("Date")
     )
 ```
-```tab-Model
+```Model
     public class StockDataPoint
     {
         public DateTime Date { get; set; }
@@ -54,7 +52,7 @@ Add a new action method which returns data to populate the StockChart.
         public string Symbol { get; set; }
     }
 ```
-```tab-HomeController
+```HomeController
     public IActionResult Index()
     {
         return View();
@@ -179,13 +177,13 @@ To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`]
 
 ###### Example
 
-      //Put this after your Kendo UI StockChart for ASP.NET Core declaration.
-      <script>
-          $(function() {
-              // Notice that the Name() of the StockChart is used to get its client-side instance.
-              var chart = $("#stockChart").data("kendoStockChart");
-          });
-      </script>
+    //Put this after your Kendo UI StockChart for ASP.NET Core declaration.
+    <script>
+        $(function() {
+            // Notice that the Name() of the StockChart is used to get its client-side instance.
+            var chart = $("#stockChart").data("kendoStockChart");
+        });
+    </script>
 
 ## See Also
 

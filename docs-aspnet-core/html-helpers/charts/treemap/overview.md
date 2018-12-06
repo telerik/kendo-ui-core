@@ -16,7 +16,7 @@ Add the TreeMap.
 
 ###### Example
 
-```tab-Razor
+```Razor
   @(Html.Kendo().TreeMap()
         .Name("treeMap")
         .DataSource(dataSource => dataSource
@@ -29,7 +29,7 @@ Add the TreeMap.
         .TextField("Name")
   )
 ```
-```tab-Controler
+```Controler
     public ActionResult Population_Read()
     {
         var result = new List<Population>();
@@ -39,12 +39,12 @@ Add the TreeMap.
         population.Items.Add(new Population("Child 1", 2, null));
         population.Items.Add(new Population("Child 2", 3, null));
 
-        result.Add(population);      
+        result.Add(population);
 
         return Json(result);
     }
 ```
-```tab-Model
+```Model
     public class Population
     {
         public Population(string name, int value, List<Population> items)
@@ -71,29 +71,26 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-Razor
+    @(Html.Kendo().TreeMap()
+            .Name("treemap")
+            .Events(events => events
+                .ItemCreated("onItemCreated")
+                .DataBound("onDataBound")
+            )
+    )
 
-        $(Html.Kendo().TreeMap()
-              .Name("treemap")
-              .Events(events => events
-                  .ItemCreated("onItemCreated")
-                  .DataBound("onDataBound")
-              )
-        )
+    <script>
+    function onItemCreated(e) {
+        // the HTML element
+        var element = e.element;
+        // the dataItem to which the element is bound
+        var dataItem = e.sender.dataItem(e.element);
+    }
 
-        <script>
-        function onItemCreated(e) {
-            // the HTML element
-            var element = e.element;
-            // the dataItem to which the element is bound
-            var dataItem = e.sender.dataItem(e.element);
-        }
-
-        function onDataBound(e) {
-            //Handle the dataBound event.
-        }
-        </script>
-```
+    function onDataBound(e) {
+        //Handle the dataBound event.
+    }
+    </script>
 
 ### By Template Delegate
 
@@ -101,27 +98,24 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().TreeMap()
-              .Name("treemap")
-              .Events(e => e
-                  .ItemCreated(@<text>
-                    function(e) {
-                        // the HTML element
-                        var element = e.element;
-                        // the dataItem to which the element is bound
-                        var dataItem = e.sender.dataItem(e.element);
-                    }
-                  </text>)
-                  .DataBound(@<text>
-                    function(e) {
-                        //Handle the dataBound event.
-                    }
-                    </text>)
-              )
-        )
-```
+    @(Html.Kendo().TreeMap()
+            .Name("treemap")
+            .Events(e => e
+                .ItemCreated(@<text>
+                function(e) {
+                    // the HTML element
+                    var element = e.element;
+                    // the dataItem to which the element is bound
+                    var dataItem = e.sender.dataItem(e.element);
+                }
+                </text>)
+                .DataBound(@<text>
+                function(e) {
+                    //Handle the dataBound event.
+                }
+                </text>)
+            )
+    )
 
 ## Reference
 
@@ -131,13 +125,13 @@ To reference an existing Kendo UI TreeMap instance, use the [`jQuery.data()`](ht
 
 ###### Example
 
-        // Put this after your Kendo UI TreeMap for ASP.NET MVC declaration.
-        <script>
+    // Put this after your Kendo UI TreeMap for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the TreeMap is used to get its client-side instance.
             var treemap = $("#treemap").data("kendoTreeMap");
         });
-        </script>
+    </script>
 
 ## See Also
 

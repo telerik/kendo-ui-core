@@ -29,9 +29,7 @@ The following example demonstrates how to define the Dialog by using the Dialog 
 
 The Dialog tag helper configuration options are passed as attributes of the tag. Its content is placed within a `<content>` tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
         @(Html.Kendo().Dialog()
             .Name("dialog")
             .Title("Software Update")
@@ -46,12 +44,12 @@ The Dialog tag helper configuration options are passed as attributes of the tag.
             .Events(ev => ev.Close("dialog_close"))
         )
 ```
-```tab-tagHelper
+```tagHelper
 		<kendo-dialog name="dialog" title="Software Update" modal="false" on-close="dialog_close">
 			<content>
 				<p>A new version of <strong>Kendo UI</strong> is available. Would you like to download and install it now?<p>
 			</content>
-			<actions>            
+			<actions>
 				<action text="Skip this version">
 				</action>
 				<action text="Remind me later">

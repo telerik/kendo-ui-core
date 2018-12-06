@@ -20,56 +20,53 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
     ###### Example
 
-            public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-            {
-            }
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+        }
 
 1. Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a `Kendo.Mvc.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
     ###### Example
 
-            public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-            {
-                // result can be any IEnumerable or IQueriable 
-                var result = myService.Orders;
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            // result can be any IEnumerable or IQueriable
+            var result = myService.Orders;
 
-                var dsResult = result.ToDataSourceResult(request);
-            }
+            var dsResult = result.ToDataSourceResult(request);
+        }
 
 1. Return the `DataSourceResult` as JSON.
 
     ###### Example
 
-            public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-            {
-                // get orders from service
-                var orders = myService.Orders;
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            // get orders from service
+            var orders = myService.Orders;
 
-                // apply requested sort, page, group, filtering with the ToDataSourceResult() extension method
-                var dsResult = orders.ToDataSourceResult(request);
+            // apply requested sort, page, group, filtering with the ToDataSourceResult() extension method
+            var dsResult = orders.ToDataSourceResult(request);
 
-                return Json(dsResult);
-            }
+            return Json(dsResult);
+        }
 
 1. In the view, configure the ListView to use the action method created in the previous steps. You may use the sample model and data from the example below
 
-    ###### Example
-
-
-    ```tab-ListView-Razor-Declaration
+    ```Razor
         @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
-           .Name("ListView")
-           .TagName("div")
-           .ClientTemplateId("template")
-           .DataSource(dataSource => dataSource
-               .Ajax()
-               .PageSize(6)
-               .Read(read => read.Action("Orders_Read", "ListView"))
-           )
-           .Pageable()
+            .Name("ListView")
+            .TagName("div")
+            .ClientTemplateId("template")
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(6)
+                .Read(read => read.Action("Orders_Read", "ListView"))
+            )
+            .Pageable()
         )
     ```
-    ```tab-ClientTemplate
+    ```Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order">
                 <h3>#= OrderID #</h3>
@@ -102,38 +99,38 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
             }
         </style>
     ```
-    ```tab-Model
-            public class OrderViewModel
+    ```Model
+        public class OrderViewModel
+        {
+            public int OrderID
             {
-                 public int OrderID
-                {
-                    get;
-                    set;
-                }
-
-                public decimal? Freight
-                {
-                    get;
-                    set;
-                }
-                    public DateTime? OrderDate
-                {
-                    get;
-                    set;
-                }
-                    public string ShipCity
-                {
-                    get;
-                    set;
-                }
-                    public string ShipName
-                {
-                    get;
-                    set;
-                }
+                get;
+                set;
             }
+
+            public decimal? Freight
+            {
+                get;
+                set;
+            }
+                public DateTime? OrderDate
+            {
+                get;
+                set;
+            }
+                public string ShipCity
+            {
+                get;
+                set;
+            }
+                public string ShipName
+            {
+                get;
+                set;
+            }
+        }
     ```
-    ```tab-Controller
+    ```Controller
         public class ListViewController : Controller
         {
             public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
@@ -174,27 +171,25 @@ The following example demonstrates how to send additional data.
 
 ###### Example
 
-```tab-Razor
-        @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
-           .Name("ListView")
-           .TagName("div")
-           .ClientTemplateId("template")
-           .DataSource(dataSource => dataSource
-               .Ajax()
-               .PageSize(6)
-               .Read(read => read.Action("Orders_Read", "ListView").Data("additionalData"))
-           )
-           .Pageable()
+    @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
+        .Name("ListView")
+        .TagName("div")
+        .ClientTemplateId("template")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(6)
+            .Read(read => read.Action("Orders_Read", "ListView").Data("additionalData"))
         )
-        <script>
-            function additionalData() {
-                return {
-                    firstName: "John",
-                    lastName: "Doe"
-                };
-            }
-        </script>
-```
+        .Pageable()
+    )
+    <script>
+        function additionalData() {
+            return {
+                firstName: "John",
+                lastName: "Doe"
+            };
+        }
+    </script>
 
 ### Client Data Processing
 

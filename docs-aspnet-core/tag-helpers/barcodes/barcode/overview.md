@@ -17,21 +17,18 @@ The following example demonstrates how to define the Barcode by using the Barcod
 
 ###### Example
 
-        <kendo-barcode name="BarCode"></kendo-barcode>
+    <kendo-barcode name="BarCode"></kendo-barcode>
 
 ## Configuration
 
 The Barcode tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
     <kendo-barcode name="barcode" value="10110110" type="BarcodeSymbology.Code128" width="200" height="100">
         <border color="red" width="2"/>
     </kendo-barcode>
 ```
-```tab-cshtml
-
+```cshtml
     @(Html.Kendo().Barcode()
     .Name("gudbrands")
     .Value("10110110")

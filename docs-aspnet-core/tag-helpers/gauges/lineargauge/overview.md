@@ -23,9 +23,7 @@ The following example demonstrates how to define the LinearGauge by using the Li
 
 The LinearGauge tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
     <kendo-lineargauge name="gauge">
         <lineargauge-pointers>
             <pointer value="10"></pointer>
@@ -42,7 +40,7 @@ The LinearGauge tag helper configuration options are passed as attributes of the
         </scale>
     </kendo-lineargauge>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer => pointer.Value(10))

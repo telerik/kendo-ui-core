@@ -1,8 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'uglifier', '3.0.4'
-gem 'jekyll', '3.4.0'
-gem 'jekyll-sitemap'
-gem 'jekyll-assets'
-gem 'github-markdown'
-gem 'html-pipeline', '2.5.0'

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
 1. Navigate to the folder of your choice by using the Terminal (cmd). Create a new folder and navigate in it.
 
-    ```sh
+    ```
     mkdir MyTelerikApp
     cd MyTelerikApp
     ```
@@ -42,7 +42,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
 4. Run [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run) to start the application. The following example demonstrates a sample response that you are expected to receive.
 
-    ```sh
+    ```
     Hosting environment: Production
     Now listening on: http://localhost:5000
     Application started. Press Ctrl+C to shut down.
@@ -59,7 +59,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
     In both cases, the NuGet.Config file has to include your `telerik.com` credentials.
 
-    ```xml
+    ```
     <?xml version="1.0" encoding="utf-8"?>
     <configuration>
         <packageSources>
@@ -77,7 +77,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
 2. Install Telerik UI for ASP.NET Core through the CLI.
 
-    ```sh
+    ```
     dotnet add package Telerik.UI.for.AspNet.Core
     ```
 
@@ -85,7 +85,7 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
     3.1. Locate the `ConfigureServices method` and add the `JsonOptions` and the Kendo UI service.
 
-    ```cs
+    ```
     public void ConfigureServices(IServiceCollection services)
     {
         ...
@@ -100,13 +100,13 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
     3.2. Add the required `using` of the `Newtonsoft.Json.Serialization` namespace.
 
-    ```cs
+    ```
     using Newtonsoft.Json.Serialization;
     ```
 
     3.3. Locate the `configure` method and add a call to `app.UseKendo` at the end (required for versions prior to R2 2018).
 
-    ```cs
+    ```
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
         ...
@@ -116,19 +116,19 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
 4. Import the `Kendo.Mvc.UI` namespace. Open `~/Views/_ViewImports.cshtml` and add the following references.
 
-    ```cs
+    ```
     //...
     @addTagHelper *, Kendo.Mvc
     @using Kendo.Mvc.UI
     ```
 
-5. Include the Kendo UI `client-side resources`. 
+5. Include the Kendo UI `client-side resources`.
 
 	For more information about the different approaches for including client-side resources please refer to the [Include Client Side Resources article]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 6. Create a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
-    ```cs
+    ```
     <h2>Kendo UI DatePicker</h2>
 
     @(Html.Kendo().DatePicker()

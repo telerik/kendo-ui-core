@@ -54,7 +54,7 @@ This configuration results in the Bullet Chart below.
 
 **Figure 1: A sample Bullet Chart**
 
-![Bullet Chart](/html-helpers/charts/chart-types/chart-bullet.png)
+![Bullet Chart](images/chart-bullet.png)
 
 ### Target Line Customization
 

@@ -18,9 +18,7 @@ The available modes are:
 
 A Kendo UI Upload in a synchronous mode behaves like a regular file input. The selected files are uploaded upon form submission. Users benefit from the opportunity to select a variable number of files. This feature does not require that the browser supports a multiple file selection.
 
-###### Example
-
-```tab-Razor
+```Razor
 <form method="post" action='@Url.Action("Submit")'>
     <div class="demo-section k-content">
         @(Html.Kendo().Upload()
@@ -33,7 +31,7 @@ A Kendo UI Upload in a synchronous mode behaves like a regular file input. The s
     </div>
 </form>
 ```
-```tab-Controller
+```Controller
 public IHostingEnvironment HostingEnvironment { get; set; }
 
 public UploadController(IHostingEnvironment hostingEnvironment)
@@ -73,9 +71,7 @@ In this mode, the Kendo UI Upload requires dedicated server handlers to store an
 
 The asynchronous mode is implemented using the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API).
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
@@ -85,7 +81,7 @@ The asynchronous mode is implemented using the [HTML5 File API](https://en.wikip
     )
 )
 ```
-```tab-Controller
+```Controller
 public IHostingEnvironment HostingEnvironment { get; set; }
 
 public UploadController(IHostingEnvironment hostingEnvironment)

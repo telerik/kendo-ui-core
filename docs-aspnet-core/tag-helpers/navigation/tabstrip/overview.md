@@ -29,9 +29,7 @@ To pass the TabStrip items collection, either:
 * Use the nested `<items>` tag, or
 * Add `<li>` tags. This approach will not include the `tabstrip-item` tag helper attributes. And you will need to also include `<div>` tags for the content of the tabs.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 <kendo-tabstrip name="tabstrip">
     <items>
         <tabstrip-item text="Tab 1">
@@ -43,7 +41,7 @@ To pass the TabStrip items collection, either:
     </items>
 </kendo-tabstrip>
 ```
-```tab-tagHelper
+```tagHelper=li
 <kendo-tabstrip name="tabstrip">
     <li>Tab 1</li>
     <li>Tab 2</li>
@@ -55,7 +53,7 @@ To pass the TabStrip items collection, either:
     </div>
 </kendo-tabstrip>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().TabStrip()
 		.Name("tabstrip")
 		.Items(items => {
@@ -71,9 +69,7 @@ To pass the TabStrip items collection, either:
 
 To further configure the TabStrip tag helper, use its other options&mdash;`<popup-animation>`, and `<scrollable>`.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 <kendo-tabstrip name="tabstrip">
     <items>
         <tabstrip-item text="Tab 1">
@@ -90,7 +86,7 @@ To further configure the TabStrip tag helper, use its other options&mdash;`<popu
     <scrollable enabled="false" />
 </kendo-tabstrip>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(items => {
@@ -115,9 +111,7 @@ The TabStrip items are represented by the `tabstrip-item` tag helper and render 
 
 The `tabstrip-item` tag helper inherits the [`AnchorTagHelper`](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper) class which enables you to utilize the native attributes that come with it and thus configure a URL to action or Razor page to load the content from.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 <kendo-tabstrip name="tabstrip">
     <items>
         <tabstrip-item text="Tab 1" asp-action="Content" asp-controller="Home"></tabstrip-item>
@@ -125,7 +119,7 @@ The `tabstrip-item` tag helper inherits the [`AnchorTagHelper`](https://docs.mic
     </items>
 </kendo-tabstrip>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(items => {
@@ -139,7 +133,7 @@ You can also directly set up a URL that loads content from the desired location.
 
 ###### Example
 
-```tab-tagHelper
+```
 <kendo-tabstrip name="tabstrip">
     <items>
         <tabstrip-item text="Tab" content-url="/home/content"></tabstrip-item>
@@ -149,9 +143,7 @@ You can also directly set up a URL that loads content from the desired location.
 
 Identical to the Kendo UI TabStrip helper method, you can customize the TabStrip items by adding images, [icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web), custom CSS classes, and DOM attributes.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 <kendo-tabstrip name="tabstrip">
     <items>
         <tabstrip-item text="Tab 1" my-attr="value" link-html-attributes='new { link_attr="value" }'></tabstrip-item>
@@ -161,7 +153,7 @@ Identical to the Kendo UI TabStrip helper method, you can customize the TabStrip
     </items>
 </kendo-tabstrip>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().TabStrip()
 		.Name("tabstrip")
 		.Items(items =>
@@ -184,9 +176,7 @@ Identical to the Kendo UI TabStrip helper method, you can customize the TabStrip
 
 You can also define the content of each item by using the `<content>` tag helper.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 <kendo-tabstrip name="tabstrip">
     <items>
         <tabstrip-item text="Paris">
@@ -201,7 +191,7 @@ You can also define the content of each item by using the `<content>` tag helper
     </items>
 </kendo-tabstrip>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(items =>

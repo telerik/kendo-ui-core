@@ -24,9 +24,7 @@ The following example demonstrates how to define the TreeView by using the TreeV
 
 The TreeView tag helper configuration options are passed as attributes of the tag. You can configure the items by using a nested `<items>` tag and also bind the widget to `<hierarchical-datasource>`.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
     <kendo-treeview name="treeview2" datatextfield="FullName">
         <hierarchical-datasource>
             <transport>
@@ -39,7 +37,7 @@ The TreeView tag helper configuration options are passed as attributes of the ta
         </hierarchical-datasource>
     </kendo-treeview>
 ```
-```tab-tagHelper
+```tagHelper-items
     <kendo-treeview name="treeView1">
         <items>
             <treeview-item text="Web Site" expanded="true" sprite-css-class="folder">
@@ -64,7 +62,7 @@ The TreeView tag helper configuration options are passed as attributes of the ta
         </items>
     </kendo-treeview>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Items(treeview =>

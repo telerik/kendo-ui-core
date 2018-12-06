@@ -15,9 +15,7 @@ The ListBox tag helper helps you configure the Kendo UI ListBox widget in ASP.NE
 
 The following example demonstrates how to define the ListBox by using the ListBox tag helper.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 
         <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.Attendees">
             <toolbar position="ListBoxToolbarPosition.Right"
@@ -28,7 +26,7 @@ The following example demonstrates how to define the ListBox by using the ListBo
         </kendo-listbox>
 
 ```
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().ListBox().Name("optional")
                 .ConnectWith("selected")
@@ -67,9 +65,7 @@ When you use complex data objects, apply the `dataTextField` and `dataValueField
 
 The following example demonstrates how to initialize the ListBox and bind it to a server-side array.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 
     var data = new string[] {
         "Washington",
@@ -87,7 +83,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
     </kendo-listbox>
 
 ```
-```tab-cshtml
+```cshtml
 
     var data = new string[] {
         "Washington",
@@ -120,9 +116,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 
 The following example demonstrates how to initialize the ListBox and bind it to a client-side array.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 
     <kendo-listbox name="listbox" datasource-id="dataSource">
         <toolbar position="ListBoxToolbarPosition.Right"
@@ -142,7 +136,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
         })
     </script>
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().ListBox().Name("listbox")
                 .Toolbar(x => x.Position(ListBoxToolbarPosition.Right)
@@ -178,9 +172,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 
 The following example demonstrates how to bind the Kendo UI ListBox tag helper to a remote service.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 
     <kendo-listbox name="listbox"  datatextfield="ProductName" datavaluefield="ProductID">
         <datasource>
@@ -192,7 +184,7 @@ The following example demonstrates how to bind the Kendo UI ListBox tag helper t
                     tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
     </kendo-listbox>
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().ListBox().Name("listbox")
                 .DataTextField("ProductName")
@@ -231,9 +223,7 @@ You can reorder selected items by using any of the following approaches:
 >
 > Currently, the ListBox widget does not support the drag-and-drop feature for multiple selected items.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 
     <kendo-listbox name="listbox"  datatextfield="ProductName" datavaluefield="ProductID">
         <datasource>
@@ -245,13 +235,13 @@ You can reorder selected items by using any of the following approaches:
                     tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
     </kendo-listbox>
 ```
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().ListBox().Name("listbox")
                     .DataTextField("ProductName")
                     .Selectable(ListBoxSelectable.Multiple)
                     .DataValueField("ProductID")
-                    .Toolbar(x => x.Position(ListBoxToolbarPosition.Right)                    
+                    .Toolbar(x => x.Position(ListBoxToolbarPosition.Right)
                         .Tools(y =>
                         {
                             y.MoveUp();
@@ -273,9 +263,7 @@ You can reorder selected items by using any of the following approaches:
 
 To enable the drag-and-drop feature of the ListBox, set its `draggable` property to `true`. You can also customize the drag-and-drop behavior of the widget by using its `draggable.placeholder` and `draggable.hint` options.
 
-##### Example
-
-```tab-tagHelper
+```tagHelper
 
     <kendo-listbox name="listbox" template-id="template" selectable="ListBoxSelectable.Multiple"  datatextfield="ProductName" datavaluefield="ProductID">
             <draggable hint="hint" enabled="true" placeholder="placeholder" />
@@ -293,7 +281,7 @@ To enable the drag-and-drop feature of the ListBox, set its `draggable` property
     </script>
 
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().ListBox().Name("listbox")
                         .DataTextField("ProductName")

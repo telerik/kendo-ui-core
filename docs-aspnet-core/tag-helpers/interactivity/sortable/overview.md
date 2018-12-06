@@ -27,20 +27,18 @@ The Sortable tag helper configuration options are passed as attributes of the ta
 >
 > Initialize the Sortable for already existing DOM elements.
 
-###### Example
-
-```tab-html
+```html
 <ul id="sortable-basic">
     <li class="sortable">Papercut <span>3:04</span></li>
     <li class="sortable">One Step Closer <span>2:35</span></li>
     <li class="sortable">With You <span>3:23</span></li>
 </ul>
 ```
-```tab-tagHelper
+```tagHelper
 <kendo-sortable name="sortable-basic" hint="hint"  placeholder="placeholder">
 </kendo-sortable>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().Sortable()
     .For("#sortable-basic")
     .HintHandler("hint")

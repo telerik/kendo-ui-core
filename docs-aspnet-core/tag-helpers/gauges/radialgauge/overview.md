@@ -23,9 +23,7 @@ The following example demonstrates how to define the RadialGauge by using the Ra
 
 The RadialGauge tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
     <kendo-radialgauge name="gauge">
         <radialgauge-pointers>
             <pointer value="65"></pointer>
@@ -34,7 +32,7 @@ The RadialGauge tag helper configuration options are passed as attributes of the
         </scale>
     </kendo-radialgauge>
 ```
-```tab-cshtml
+```cshtml
      @(Html.Kendo().RadialGauge()
         .Name("gauge")
         .Pointer(pointer => pointer.Value(65))

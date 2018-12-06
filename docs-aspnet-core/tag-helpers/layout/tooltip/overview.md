@@ -23,9 +23,7 @@ The following example demonstrates how to define the Tooltip by using the Toolti
 
 The Tooltip tag helper configuration options are passed as attributes of the tag and through nested tags.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().Tooltip()
 			.For("#agglomerations")
@@ -35,7 +33,7 @@ The Tooltip tag helper configuration options are passed as attributes of the tag
 			.Animation(a => a.Open(e => e.Fade(FadeDirection.In).Duration(300)))
 		)
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-tooltip name="agglomerations" filter="span" position="top" width="120">
 			<popup-animation>

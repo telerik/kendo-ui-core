@@ -19,9 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [Upload Html
 
 The following example demonstrates how to define the Upload widget by using the Upload HtmlHelper.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
@@ -31,7 +29,7 @@ The following example demonstrates how to define the Upload widget by using the 
     )
 )
 ```
-```tab-Controller
+```Controller
 public IHostingEnvironment HostingEnvironment { get; set; }
 
 public UploadController(IHostingEnvironment hostingEnvironment)

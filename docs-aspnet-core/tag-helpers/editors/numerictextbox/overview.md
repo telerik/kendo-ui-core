@@ -31,9 +31,7 @@ You can also bind the NumericTextBox to a particular model field by using the `f
 
 The NumericTextBox tag helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().NumericTextBox<decimal>()
             .Name("currency")
@@ -44,7 +42,7 @@ The NumericTextBox tag helper supports all the configuration options that the Ht
             .Value(30)
         )
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-numerictextbox name="currency" format="c" min="0"
             enable="true" max="100" value="30">

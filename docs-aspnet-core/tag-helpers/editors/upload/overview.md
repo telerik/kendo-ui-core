@@ -39,9 +39,7 @@ The following example demonstrates how to define the Upload by using the Upload 
 
 The Upload tag helper configuration options are passed as attributes of the tag or attributes of the nested composite and collection properties.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().Upload()
             .Name("upload1")
@@ -50,7 +48,7 @@ The Upload tag helper configuration options are passed as attributes of the tag 
             .Files(f => f.Add().Name("dummy").Size(1024))
     )
 ```
-```tab-tagHelper
+```tagHelper
         <kendo-upload drop-zone="drop-zone1" name="test">
             <async auto-upload="true" />
             <validation allowed-extensions="@Model.Extensions" />

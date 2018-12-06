@@ -26,9 +26,7 @@ The example is using Long Polling because [WebSockets](https://docs.microsoft.co
 
 A sample implementation of a Grid using SignalR is shown in the snippet below. The service that is used is available in our [GitHub repository](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs).
 
-###### Example
-
-```tab-JavaScript
+```JavaScript
 $(document).ready(function() {
     var hubUrl = "http://domain/signalr-service/products";
     var hub = new signalR.HubConnectionBuilder()
@@ -46,7 +44,7 @@ function onPush(e) {
 }
 
 ```
-```tab-Razor
+```Razor
 @(Html.Kendo().Notification()
         .Name("notification")
         .Width("100%")
@@ -98,7 +96,7 @@ function onPush(e) {
                 {
                     model.Id("ID");
                     model.Field("ID", typeof(string)).Editable(false);
-                    model.Field("ProductName", typeof(string));                    
+                    model.Field("ProductName", typeof(string));
                     model.Field("CreatedAt", typeof(DateTime));
                     model.Field("UnitPrice", typeof(int));
                 }

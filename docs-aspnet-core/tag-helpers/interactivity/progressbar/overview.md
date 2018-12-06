@@ -23,9 +23,7 @@ The following example demonstrates how to define the ProgressBar by using the Pr
 
 The ProgressBar tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().ProgressBar()
                 .Name("fastAndFurious")
@@ -33,7 +31,7 @@ The ProgressBar tag helper configuration options are passed as attributes of the
                 .Animation(a => a.Duration(600))
         )
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-progressbar name="fastAndFurious"
             type="ProgressBarType.Percent" animation-duration="600" />

@@ -23,9 +23,7 @@ The following example demonstrates how to define the Scheduler by using the Sche
 
 The Scheduler tag helper configuration options are passed as attributes of the tag. For more details on the Scheduler configurations, refer to the overview of the [MVC Scheduler HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/scheduler) and the [Kendo Scheduler for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
 
-###### Example
-
-```tab-cshtml
+```cshtml
         @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))
@@ -77,7 +75,7 @@ The Scheduler tag helper configuration options are passed as attributes of the t
         )
         )
 ```
-```tab-tagHelper
+```tagHelper
         @{
             var resources = new[]
             {
@@ -130,14 +128,14 @@ The Scheduler tag helper configuration options are passed as attributes of the t
 
 The Scheduler supports selection of events. The `selectable` option is disabled by default.
 
-```tab-cshtml
+```cshtml
         @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
         .Name("scheduler")
         .Height(600)
         .Selectable(true)
         )
 ```
-```tab-tagHelper
+```tagHelper
         <kendo-scheduler name="scheduler" height="600" selectable="true">
         </kendo-scheduler>
 ```
@@ -146,7 +144,7 @@ The Scheduler supports selection of events. The `selectable` option is disabled 
 
 The Scheduler supports resource grouping. The `group.resources` option is disabled by default.
 
-```tab-cshtml
+```cshtml
         @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
             .Name("scheduler")
             .Date(new DateTime(2013, 6, 13))
@@ -199,7 +197,7 @@ The Scheduler supports resource grouping. The `group.resources` option is disabl
             )
         )
 ```
-```tab-tagHelper
+```tagHelper
         @{
             var resources = new[]
             {

@@ -24,9 +24,7 @@ The following example demonstrates how to define the Editor by using the Editor 
 
 The tools collection of the Editor tag helper is passed through the nest `<tools>` tag.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 		<kendo-editor name="editor">
 			<tools>
         <tool name="bold" />
@@ -36,7 +34,7 @@ The tools collection of the Editor tag helper is passed through the nest `<tools
 			</tools>
 		</kendo-editor>
 ```
-```tab-cshtml
+```cshtml
 		@(Html.Kendo().Editor()
 				.Name("editor")
 				.Tools(tools => tools
@@ -51,9 +49,7 @@ The tools collection of the Editor tag helper is passed through the nest `<tools
 
 You can adjust and set up the tools in the tools collection through the `<tools>` tag. To define their items collection, use the `<tool-items>` and `<tool-item>` tags.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 	<kendo-editor name="editor">
 		<tools>
 			<tool name="fontName">
@@ -65,7 +61,7 @@ You can adjust and set up the tools in the tools collection through the `<tools>
 		</tools>
 	</kendo-editor>
 ```
-```tab-cshtml
+```cshtml
 	@(Html.Kendo().Editor()
 			.Name("editor")
 			.Tools(tools => {
@@ -80,20 +76,14 @@ You can adjust and set up the tools in the tools collection through the `<tools>
 
 To specify a chunk of content in the Editor tag helper, use the `<content>` tag or the `value` attribute.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 	<kendo-editor name="editor">
 			<content>
 					<p>Some content.</p>
 			</content>
 	</kendo-editor>
 ```
-```tab-tagHelper
-	<kendo-editor name="editor" value="<p>Some content</p>">
-	</kendo-editor>
-```
-```tab-cshtml
+```cshtml
 	@(Html.Kendo().Editor()
 			.Name("editor")
 			.Value(@<text>
@@ -104,9 +94,7 @@ To specify a chunk of content in the Editor tag helper, use the `<content>` tag 
 
 The `ImageBrowser` and `FileBrowser` dialogs are configured through the `<image-browser>` and `<file-browser>` tags.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 	<kendo-editor name="editor">
     <image-browser file-types="*.png,*.gif,*.jpg,*.jpeg">
         <transport upload-url="/ImageBrowser/Upload" image-url="/shared/UserFiles/Images/{0}">
@@ -124,7 +112,7 @@ The `ImageBrowser` and `FileBrowser` dialogs are configured through the `<image-
     </file-browser>
 	</kendo-editor>
 ```
-```tab-cshtml
+```cshtml
 	@(Html.Kendo().Editor()
 		.Name("editor")
 		.ImageBrowser(imageBrowser => imageBrowser
@@ -146,16 +134,14 @@ The `ImageBrowser` and `FileBrowser` dialogs are configured through the `<image-
 
 The `serialization`, `deserialization` and `paste-cleanup` settings are configured with the `<serialization>`, `<deserialization>`, and `<paste-cleanup>` tags respectively.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 	<kendo-editor name="editor">
     <deserialization custom="myDeserialization" />
     <serialization custom="mySerialization" entities="false" />
 		<paste-cleanup custom="myPasteCleanup" keep-new-lines="true" />
 	</kendo-editor>
 ```
-```tab-cshtml
+```cshtml
 	@(Html.Kendo().Editor()
 		.Name("editor")
     .Deserialization(deserialization => deserialization.Custom("myDeserialization"))
@@ -166,9 +152,7 @@ The `serialization`, `deserialization` and `paste-cleanup` settings are configur
 
 To configure other Editor options, such as PDF export, immutables, rezisability or messages, use the respective inner tags&mdash;`<pdf>`, `<immutables>`, `<resizable>`, or `<messages>`.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 	<kendo-editor name="editor">
     <immutables enabled="true" />
     <resizable toolbar="true" content="true" />
@@ -176,7 +160,7 @@ To configure other Editor options, such as PDF export, immutables, rezisability 
     <messages bold="Strong" />
 	</kendo-editor>
 ```
-```tab-cshtml
+```cshtml
 	@(Html.Kendo().Editor()
 		.Name("editor")
 		.Immutables(true)

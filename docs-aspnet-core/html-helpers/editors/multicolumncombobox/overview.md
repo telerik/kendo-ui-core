@@ -19,9 +19,7 @@ Besides the core functionality that the standard Kendo ComboBox provides such as
 
 The following example demonstrates how to define the MultiColumnComboBox HtmlHelper.
 
-###### Example
-
-```tab-Razor
+```Razor
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Placeholder("Select product")
@@ -43,7 +41,7 @@ The following example demonstrates how to define the MultiColumnComboBox HtmlHel
     )
 
 ```
-```tab-Controller
+```Controller
 
     public class MultiColumnComboBoxController : Controller
     {
@@ -82,7 +80,7 @@ The following example demonstrates how to define the MultiColumnComboBox HtmlHel
 The following example demonstrates the basic configuration of the MultiColumnComboBox HtmlHelper and how to get the MultiColumnComboBox instance.
 
 ###### Example
-```
+
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Placeholder("Select product")
@@ -119,7 +117,6 @@ The following example demonstrates the basic configuration of the MultiColumnCom
             console.log(multicolumncombobox);
         });
     </script>
-```
 
 
 ### Columns
@@ -128,7 +125,6 @@ The MultiColumnComboBox widget provides you with the functionality to predefine 
 
 ###### Example
 
-```
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Columns(columns =>
@@ -143,7 +139,6 @@ The MultiColumnComboBox widget provides you with the functionality to predefine 
             .ServerFiltering(true)
         )
     )
-```
 
 ### Filtering
 
@@ -151,7 +146,6 @@ Besides the standard Filter options, the widget allows you to set fields, agains
 
 ###### Example
 
-```
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Filter("contains")
@@ -168,7 +162,6 @@ Besides the standard Filter options, the widget allows you to set fields, agains
             .ServerFiltering(true)
         )
     )
-```
 
 ### Columns Width
 The widget allows you to set a dropdown width through the `DropDownWidth` option. In addition, the columns allows setting their width as well. That being said, the below cases for width configuration exists:
@@ -188,45 +181,45 @@ Local data is the data that is available on the client when the MultiColumnCombo
 
     ###### Example
 
-            public IActionResult Index()
+        public IActionResult Index()
+        {
+            ViewData["products"] = GetProducts();
+
+            return View(new ProductViewModel
             {
-                ViewData["products"] = GetProducts();
+                ProductID = 4,
+                ProductName = "ProductName4"
+            });
+        }
 
-                return View(new ProductViewModel
-                {
-                    ProductID = 4,
-                    ProductName = "ProductName4"
-                });
-            }
-
-            private static IEnumerable<ProductViewModel> GetProducts()
+        private static IEnumerable<ProductViewModel> GetProducts()
+        {
+            var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
             {
-                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
-                {
-                    ProductID = i,
-                    ProductName = "ProductName" + i
-                });
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
 
-                return products;
-            }
+            return products;
+        }
 
 
 1. Add the MultiColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
     ###### Example
 
-            @model MvcApplication1.Models.ProductViewModel
+        @model MvcApplication1.Models.ProductViewModel
 
-            @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
-                .DataValueField("ProductID")
-                .DataTextField("ProductName")
-                .Columns(columns =>
-                {
-                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
-                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
-                })
-                .BindTo((System.Collections.IEnumerable)ViewData["products"])
-            )
+        @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
+            .DataValueField("ProductID")
+            .DataTextField("ProductName")
+            .Columns(columns =>
+            {
+                columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+            })
+            .BindTo((System.Collections.IEnumerable)ViewData["products"])
+        )
 
 ### Remote Data
 
@@ -236,53 +229,53 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
 
     ###### Example
 
-            public IActionResult Index()
+        public IActionResult Index()
+        {
+            return View(new ProductViewModel
             {
-                return View(new ProductViewModel
-                {
-                    ProductID = 4,
-                    ProductName = "ProductName4"
-                });
-            }
+                ProductID = 4,
+                ProductName = "ProductName4"
+            });
+        }
 
-            public JsonResult GetProductsAjax()
+        public JsonResult GetProductsAjax()
+        {
+            var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
             {
-                var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
-                {
-                    ProductID = i,
-                    ProductName = "ProductName" + i
-                });
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
 
-                return Json(products);
-            }
+            return Json(products);
+        }
 
 
 1. Add the MultiColumnComboBox to the view and configure its DataSource to use remote data.
 
     ###### Example
 
-            @model MvcApplication1.Models.ProductViewModel
+        @model MvcApplication1.Models.ProductViewModel
 
 
-            @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
-                .Filter("contains")
-                .DataTextField("ProductName")
-                .DataValueField("ProductID")
-                .Placeholder("Select product...")
-                .Columns(columns =>
+        @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
+            .Filter("contains")
+            .DataTextField("ProductName")
+            .DataValueField("ProductID")
+            .Placeholder("Select product...")
+            .Columns(columns =>
+            {
+                columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+            })
+            .DataSource(source =>
+            {
+                source.Read(read =>
                 {
-                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
-                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+                    read.Action("GetProductsAjax", "Home");
                 })
-                .DataSource(source =>
-                {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProductsAjax", "Home");
-                    })
-                    .ServerFiltering(false);
-                })
-            )
+                .ServerFiltering(false);
+            })
+        )
 
 ### Virtualization
 
@@ -297,127 +290,127 @@ You can configure a MultiColumnComboBox that is bound to a model field to use [v
 
     ###### Example
 
-            public IActionResult Index()
+        public IActionResult Index()
+        {
+            return View(new ProductViewModel
             {
-                return View(new ProductViewModel
+                ProductID = 4,
+                ProductName = "ProductName4"
+            });
+        }
+
+        [HttpPost]
+        public IActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(GetProducts().ToDataSourceResult(request));
+        }
+
+        public IActionResult Products_ValueMapper(int[] values)
+        {
+            var indices = new List<int>();
+
+            if (values != null && values.Any())
+            {
+                var index = 0;
+
+                foreach (var product in GetProducts())
                 {
-                    ProductID = 4,
-                    ProductName = "ProductName4"
-                });
-            }
-
-            [HttpPost]
-            public IActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
-            {
-                return Json(GetProducts().ToDataSourceResult(request));
-            }
-
-            public IActionResult Products_ValueMapper(int[] values)
-            {
-                var indices = new List<int>();
-
-                if (values != null && values.Any())
-                {
-                    var index = 0;
-
-                    foreach (var product in GetProducts())
+                    if (values.Contains(product.ProductID))
                     {
-                        if (values.Contains(product.ProductID))
-                        {
-                            indices.Add(index);
-                        }
-
-                        index += 1;
+                        indices.Add(index);
                     }
+
+                    index += 1;
                 }
-
-                return Json(indices);
             }
 
-            private static IEnumerable<ProductViewModel> GetProducts()
+            return Json(indices);
+        }
+
+        private static IEnumerable<ProductViewModel> GetProducts()
+        {
+            var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
             {
-                var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
-                {
-                    ProductID = i,
-                    ProductName = "ProductName" + i
-                });
+                ProductID = i,
+                ProductName = "ProductName" + i
+            });
 
-                return products;
-            }
+            return products;
+        }
 
 
 1. Add the MultiColumnComboBox to the view and configure it to use virtualization.
 
     ###### Example
 
-            @model MvcApplication1.Models.ProductViewModel
+        @model MvcApplication1.Models.ProductViewModel
 
-            @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
-                .Filter("contains")
-                .DataTextField("ProductName")
-                .DataValueField("ProductID")
-                .Columns(columns =>
-                {
-                    columns.Add().Field("ProductName").Title("Product Name").Width("200px")
-                    columns.Add().Field("ProductID").Title("Product ID").Width("200px");
-                })
-                .Placeholder("Select product...")
-                .DataSource(source =>
-                {
-                    source.Custom()
-                        .ServerFiltering(true)
-                        .ServerPaging(true)
-                        .PageSize(80)
-                        .Type("aspnetmvc-ajax")
-                        .Transport(transport =>
-                        {
-                            transport.Read("ProductsVirtualization_Read", "Home");
-                        })
-                        .Schema(schema =>
-                        {
-                            schema.Data("Data")
-                                    .Total("Total");
-                        });
-                })
-                .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
-
-            <script>
-                function valueMapper(options) {
-                    $.ajax({
-                        url: "@Url.Action("Products_ValueMapper", "Home")",
-                        data: convertValues(options.value),
-                        success: function (data) {
-                            options.success(data);
-                        }
+        @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
+            .Filter("contains")
+            .DataTextField("ProductName")
+            .DataValueField("ProductID")
+            .Columns(columns =>
+            {
+                columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                columns.Add().Field("ProductID").Title("Product ID").Width("200px");
+            })
+            .Placeholder("Select product...")
+            .DataSource(source =>
+            {
+                source.Custom()
+                    .ServerFiltering(true)
+                    .ServerPaging(true)
+                    .PageSize(80)
+                    .Type("aspnetmvc-ajax")
+                    .Transport(transport =>
+                    {
+                        transport.Read("ProductsVirtualization_Read", "Home");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data")
+                                .Total("Total");
                     });
-                }
+            })
+            .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
 
-                function convertValues(value) {
-                    var data = {};
-
-                    value = $.isArray(value) ? value : [value];
-
-                    for (var idx = 0; idx < value.length; idx++) {
-                        data["values[" + idx + "]"] = value[idx];
+        <script>
+            function valueMapper(options) {
+                $.ajax({
+                    url: "@Url.Action("Products_ValueMapper", "Home")",
+                    data: convertValues(options.value),
+                    success: function (data) {
+                        options.success(data);
                     }
+                });
+            }
 
-                    return data;
+            function convertValues(value) {
+                var data = {};
+
+                value = $.isArray(value) ? value : [value];
+
+                for (var idx = 0; idx < value.length; idx++) {
+                    data["values[" + idx + "]"] = value[idx];
                 }
-            </script>
+
+                return data;
+            }
+        </script>
 
 If the `AutoBind` option of the MultiColumnComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 
 ###### Example
 
-        @model MvcApplication1.Models.ProductViewModel
+    @model MvcApplication1.Models.ProductViewModel
 
 
-        @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
-            .AutoBind(false)
-            .Text(Model.ProductName)
-            .DataTextField("ProductName")
-            //...additional configuration
-        )
+    @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
+        .AutoBind(false)
+        .Text(Model.ProductName)
+        .DataTextField("ProductName")
+        //...additional configuration
+    )
 
 ## See Also
 

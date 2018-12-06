@@ -53,9 +53,7 @@ The following example demonstrates how to define the ResponsivePanel by using th
 
 The configuration options of the ResponsivePanel tag helper are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().ResponsivePanel()
             .Name("sidebar")
@@ -93,7 +91,7 @@ The configuration options of the ResponsivePanel tag helper are passed as attrib
             </text>)
         )
 ```
-```tab-tagHelper
+```tagHelper
         <kendo-responsivepanel name="slidebar" breakpoint="1000" orientation="left">
             <div id="profile" class="widget">
                 <h3>Profile</h3>

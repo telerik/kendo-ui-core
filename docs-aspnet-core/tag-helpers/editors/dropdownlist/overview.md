@@ -23,9 +23,7 @@ The following example demonstrates how to define the DropDownList by using the D
 
 The DropDownList tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().DropDownList()
           .Name("products")
@@ -38,7 +36,7 @@ The DropDownList tag helper configuration options are passed as attributes of th
           )
     )
 ```
-```tab-tagHelper
+```tagHelper
 
     <kendo-dropdownlist name="products" filter="FilterType.Contains"
                         placeholder="Select product"

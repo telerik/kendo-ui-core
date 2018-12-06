@@ -28,7 +28,7 @@ The example below visualizes several data points.
 ###### Example
 
     @(Html.Kendo().Chart()
-        .Name("chart")    
+        .Name("chart")
         .Series(series =>
         {
             series.Bubble(new dynamic[] {
@@ -47,7 +47,7 @@ The example below visualizes several data points.
 
 **Figure 1: A sample Bubble Chart**
 
- ![Bubble Chart](/html-helpers/charts/chart-types/chart-bubble.png)
+ ![Bubble Chart](images/chart-bubble.png)
 
 ## See Also
 

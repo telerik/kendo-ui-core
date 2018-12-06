@@ -12,10 +12,7 @@ The TreeList supports client-side paging for large sets of data. To enable the p
 
 > * Don't forget to set a `PageSize`. A `PageSize` can be defined in the `Pageable` settings, or in the `DataSource` settings. If an already existing datasource instance is passed to the treelist, then the `PageSize` option should be set in the dataSource's settings and not in the `Pageable` settings.
 
-###### Example
-
-```tab-tagHelper
-
+```tagHelper
     <kendo-treelist name="treelist" height="540">
         <treelist-datasource>
             <transport>
@@ -44,8 +41,7 @@ The TreeList supports client-side paging for large sets of data. To enable the p
     </kendo-treelist>
 
 ```
-```tab-cshtml
-
+```cshtml
     @(Html.Kendo().TreeList<EmployeeDirectoryModel>()
         .Name("treelist")
         .Columns(columns =>

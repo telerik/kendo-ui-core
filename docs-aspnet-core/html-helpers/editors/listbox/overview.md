@@ -19,9 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [ListBox Htm
 
 The following example demonstrates how to define the ListBox by using the ListBox HtmlHelper.
 
-###### Example
-
-```tab-Razor
+```Razor
    @(Html.Kendo().ListBox()
         .Name("optional")
         .Toolbar(toolbar =>
@@ -35,7 +33,7 @@ The following example demonstrates how to define the ListBox by using the ListBo
         .BindTo(ViewBag.Attendees)
     )
 ```
-```tab-Controller
+```Controller
     public ActionResult Index()
     {
         ViewBag.Attendees = new List<string>
@@ -47,7 +45,7 @@ The following example demonstrates how to define the ListBox by using the ListBo
             "Michael Leverling",
             "Andrew Callahan",
             "Michael Suyama"
-        };  
+        };
         return View();
     }
 ```
@@ -58,7 +56,6 @@ The following example demonstrates the basic configuration for the ListBox HtmlH
 
 ###### Example
 
-```
     @(Html.Kendo().ListBox()
         .Name("optional")
         .Toolbar(toolbar =>
@@ -98,7 +95,6 @@ The following example demonstrates the basic configuration for the ListBox HtmlH
             .Reorder("onReorder")
         )
     )
-```
 
 ## See Also
 

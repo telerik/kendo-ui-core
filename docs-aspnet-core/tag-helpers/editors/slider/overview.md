@@ -29,9 +29,7 @@ The following example demonstrates how to define the Slider by using the Slider 
 
 The Slider tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().Slider()
 			.Name("slider")
@@ -44,7 +42,7 @@ The Slider tag helper configuration options are passed as attributes of the tag.
 			.Value(18)
 			.HtmlAttributes(new { @class = "temperature" }))
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-slider name="slider"
                       increase-button-title="Right"

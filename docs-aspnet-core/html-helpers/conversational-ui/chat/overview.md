@@ -23,12 +23,11 @@ The following example demonstrates how to define the Chat by using the Chat Html
 
 ###### Example
 
-```tab-Razor
     @(Html.Kendo().Chat()
-        //The name of the Chat is mandatory. It specifies the "id" and the "name" attributes of the widget.
+        //The name of the Chat is mandatory.
+        //It specifies the "id" and the "name" attributes of the widget.
         .Name("chat")
     )
-```
 
 ## Configuration
 

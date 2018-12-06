@@ -23,9 +23,7 @@ The following example demonstrates how to define the DataSource by using the Dat
 
 The DataSource tag helper configuration options are passed as attributes of the tag. The DataSource is an abstraction for binding the Kendo UI widgets to local and remote data and to handle various data operations with the `databound` Kendo UI TagHelpers.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
     <kendo-datasource name="dataSource" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
         <transport>
             <read url="/DataSource/Products_Read" />
@@ -35,7 +33,7 @@ The DataSource tag helper configuration options are passed as attributes of the 
         </sorts>
     </kendo-datasource>
 ```
-```tab-cshtml
+```cshtml
     @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("dataSource1")
         .Ajax(dataSource => dataSource

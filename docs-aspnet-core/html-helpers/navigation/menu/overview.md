@@ -19,9 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [Menu HtmlHe
 
 The following example demonstrates how to define the Menu by using the Menu HtmlHelper.
 
-###### Example
-
-```tab-Razor
+```Razor
     @(Html.Kendo().Menu()
         .Name("menu")
         .Items(items =>
@@ -77,7 +75,7 @@ The following example demonstrates how to define the Menu by using the Menu Html
         })
     )
 ```
-```tab-Controller
+```Controller
 
     public class MenuController : Controller
     {

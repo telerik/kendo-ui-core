@@ -23,9 +23,7 @@ The following example demonstrates how to define the ComboBox by using the Combo
 
 The ComboBox tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().ComboBox()
           .Name("products")
@@ -41,7 +39,7 @@ The ComboBox tag helper configuration options are passed as attributes of the ta
           )
     )
 ```
-```tab-tagHelper
+```tagHelper
 
     <kendo-combobox name="products" filter="FilterType.Contains"
                         placeholder="Select product"

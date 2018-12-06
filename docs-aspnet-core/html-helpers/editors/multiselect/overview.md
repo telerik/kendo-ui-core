@@ -19,9 +19,7 @@ For more information on the HtmlHelper, refer to the article on the [MultiSelect
 
 The following example demonstrates how to define the MultiSelect by using the MultiSelect HtmlHelper.
 
-###### Example
-
-```tab-Razor
+```Razor
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DataTextField("ProductName")
@@ -37,7 +35,7 @@ The following example demonstrates how to define the MultiSelect by using the Mu
         })
     )
 ```
-```tab-Controller
+```Controller
     public class MultiSelectController : Controller
     {
         public IActionResult Index()

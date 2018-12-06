@@ -27,9 +27,7 @@ The following example demonstrates how to define the ButtonGroup by using the Bu
 
 The Button tag helper configuration options are passed as attributes of the tag. The buttons are specified in the `buttongroup-items` child tag collection.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 
     <kendo-buttongroup name="player">
         <buttongroup-items>
@@ -39,7 +37,7 @@ The Button tag helper configuration options are passed as attributes of the tag.
         </buttongroup-items>
     </kendo-buttongroup>
 ```
-```tab-cshtml
+```cshtml
 
     @(Html.Kendo().ButtonGroup()
        .Name("player")

@@ -21,7 +21,7 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
 
 ###### Example
 
-```tab-Razor
+```Razor
 @(Html.Kendo().Spreadsheet()
     .Name("spreadsheet")
     .Sheets(sheets => {
@@ -85,7 +85,7 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
         })
 )
 ```
-```tab-Controller
+```Controller
     public class SpreadsheetController : Controller
     {
         public ActionResult Index()

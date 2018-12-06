@@ -21,7 +21,7 @@ The following example demonstrates how to define the DropDownList by using the D
 
 ###### Example
 
-```tab-Razor
+```Razor
     @(Html.Kendo().DropDownList()
         .Name("dropdownlist")
         .DataTextField("ProductName")
@@ -34,7 +34,7 @@ The following example demonstrates how to define the DropDownList by using the D
         })
     )
 ```
-```tab-Controller
+```Controller
 
     public class DropDownListController : Controller
     {

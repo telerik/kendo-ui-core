@@ -23,9 +23,7 @@ The following example demonstrates how to define the Button by using the Button 
 
 The Button tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-cshtml
+```cshtml
 
         @(Html.Kendo().Button()
             .Name("imageButton")
@@ -33,7 +31,7 @@ The Button tag helper configuration options are passed as attributes of the tag.
             .ImageUrl(Url.Content("/shared/icons/sports/snowboarding.png"))
             .Content("Image icon"))
 ```
-```tab-tagHelper
+```tagHelper
 
         <kendo-button name="button1" type="button"
             image-url="/shared/icons/sports/snowboarding.png">Image icon</kendo-button>

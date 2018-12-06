@@ -23,17 +23,15 @@ The following example demonstrates how to define the DateInput by using the Date
 
 The DateInput tag helper configuration options are passed as attributes of the tag.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 <kendo-dateinput name="dateinput1" format="MMMM yyyy" value="DateTime.Now">
 </kendo-dateinput>
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().DateInput()
-        .Name("dateinput1")
-        .Format("MMMM yyyy")
-        .Value(DateTime.Now)
+    .Name("dateinput1")
+    .Format("MMMM yyyy")
+    .Value(DateTime.Now)
 )
 ```
 
@@ -44,9 +42,7 @@ You can subscribe to all DateInput [events](http://docs.telerik.com/kendo-ui/api
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-tagHelper
+```tagHelper
 <kendo-dateinput name="dateinput" style='width: 100%;' on-change="onChangeHandler">
 </kendo-dateinput>
 
@@ -56,7 +52,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     }
 </script>
 ```
-```tab-Razor
+```Razor
 @(Html.Kendo().DateInput()
     .Name("dateinput")
     .Events(e => e
