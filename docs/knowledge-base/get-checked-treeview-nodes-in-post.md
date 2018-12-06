@@ -36,7 +36,7 @@ This example shows a template that mimics the default template the treeview uses
 .Checkboxes(checkboxes => checkboxes
     .Name("checkedFiles")
     .CheckChildren(true)
-    .Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true'><span class='k-checkbox-label checkbox-span'></span></span> ")
+    .Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' # /><span class='k-checkbox-label checkbox-span'></span></span>")
 )
 ```
 
@@ -48,19 +48,18 @@ Here are full examples of jQuery and MVC initialization:
 	<div id="treeview"></div>
 </form>
 
-
 <script>
 	$("#treeview").kendoTreeView({
 		checkboxes: {
 			checkChildren: true,
-			template: "<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' aria-label='#=item.text#'><span class='k-checkbox-label checkbox-span'></span></span>"
+			template: "<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' # /><span class='k-checkbox-label checkbox-span'></span></span>"
 		},
 
 		dataSource: [{
 			id: 1, text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
 				{
 					id: 2, text: "Kendo UI Project", expanded: true, spriteCssClass: "folder", items: [
-						{ id: 3, text: "about.html", spriteCssClass: "html" },
+						{ id: 3, text: "about.html", spriteCssClass: "html", checked: true },
 						{ id: 4, text: "index.html", spriteCssClass: "html" },
 						{ id: 5, text: "logo.png", spriteCssClass: "image" }
 					]
@@ -86,17 +85,15 @@ Here are full examples of jQuery and MVC initialization:
 
 ```MVC
 <form>
-    <input type="submit" value="submit form" />
+	<input type="submit" value="submit form" />
 	@(Html.Kendo().TreeView()
 		.Name("treeview")
 		.Checkboxes(checkboxes => checkboxes
 			.Name("checkedFiles")
 			.CheckChildren(true)
-			.Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' aria-label='#=item.text#'><span class='k-checkbox-label checkbox-span'></span></span>")
+			.Template("<span class='k-checkbox-wrapper'><input class='k-checkbox' name='checkedFiles#=item.id#' type='checkbox' value='true' #= item.checked ? 'checked' : '' # /><span class='k-checkbox-label checkbox-span'></span></span>")
 		)
-		 .Events(events => events
-			.Check("onCheck")
-		)
+				
 		.Items(treeview =>
 		{
 			treeview.Add().Text("My Documents").Id("1")
@@ -109,7 +106,7 @@ Here are full examples of jQuery and MVC initialization:
 						.SpriteCssClasses("folder")
 						.Items(project =>
 						{
-							project.Add().Text("about.html").Id("3").SpriteCssClasses("html");
+							project.Add().Text("about.html").Id("3").SpriteCssClasses("html").Checked(true);
 							project.Add().Text("index.html").Id("4").SpriteCssClasses("html");
 							project.Add().Text("logo.png").Id("5").SpriteCssClasses("image");
 						});
