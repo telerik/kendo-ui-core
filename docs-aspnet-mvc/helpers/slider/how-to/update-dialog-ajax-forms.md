@@ -15,14 +15,14 @@ The following example demonstrates a very basic approach for using, consuming, a
 
 ##### Example
 
-```tab-MyModel.cs
+```Model
 public class MyModel
 {
     public int ID { get; set; }
     public double[] values { get; set; }
 }
 ```
-```tab-HomeController.cs
+```Controller
 public ActionResult Index()
 {
     return View(new MyModel { ID = 1, values=new double[] { 1, 2 } });
@@ -34,7 +34,7 @@ public ActionResult UpdateMyModel(MyModel model)
     return View("Index", model);
 }
 ```
-```tab-Razor
+```Razor
 @model TelerikMvcApp.Models.MyModel
 
 @using (Html.BeginForm("UpdateMyModel", "Home"))

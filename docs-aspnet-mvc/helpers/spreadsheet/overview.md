@@ -23,143 +23,140 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
 
 1. Add a Kendo UI Spreadsheet to the `Index` view in `Views/Home/Index.cshtml`.
 
-    ###### Example
+    ```ASPX
+        <%:Html.Kendo().Spreadsheet()
+            .Name("spreadsheet")
+            .Sheets(sheets => {
+                sheets.Add()
+                    .Name("Food Order")
+                    .MergedCells("A1:F1", "C15:E15")
+                    .Columns(columns =>
+                    {
+                        columns.Add().Width(100);
+                        columns.Add().Width(215);
+                        columns.Add().Width(115);
+                        columns.Add().Width(115);
+                        columns.Add().Width(115);
+                        columns.Add().Width(155);
+                    })
+                    .Rows(rows =>
+                    {
+                        rows.Add().Height(50).Cells(cells =>
+                        {
+                            cells.Add()
+                                .Value("My Company")
+                                .FontSize(25)
+                                .Background("rgb(142,196,65)")
+                                .TextAlign(SpreadsheetTextAlign.Center)
+                                .Color("white");
+                        });
 
-    ```tab-ASPX
+                        rows.Add().Height(25).Cells(cells =>
+                        {
+                            cells.Add()
+                                .Value("ID")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-          <%:Html.Kendo().Spreadsheet()
-              .Name("spreadsheet")
-              .Sheets(sheets => {
-                  sheets.Add()
-                      .Name("Food Order")
-                      .MergedCells("A1:F1", "C15:E15")
-                      .Columns(columns =>
-                      {
-                          columns.Add().Width(100);
-                          columns.Add().Width(215);
-                          columns.Add().Width(115);
-                          columns.Add().Width(115);
-                          columns.Add().Width(115);
-                          columns.Add().Width(155);
-                      })
-                      .Rows(rows =>
-                      {
-                          rows.Add().Height(50).Cells(cells =>
-                          {
-                              cells.Add()
-                                  .Value("My Company")
-                                  .FontSize(25)
-                                  .Background("rgb(142,196,65)")
-                                  .TextAlign(SpreadsheetTextAlign.Center)
-                                  .Color("white");
-                          });
+                            cells.Add()
+                                .Value("Product")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                          rows.Add().Height(25).Cells(cells =>
-                          {
-                              cells.Add()
-                                  .Value("ID")
-                                  .Background("rgb(212,223,50)")
-                                  .TextAlign(SpreadsheetTextAlign.Center);
+                            cells.Add()
+                                .Value("Quantity")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                              cells.Add()
-                                  .Value("Product")
-                                  .Background("rgb(212,223,50)")
-                                  .TextAlign(SpreadsheetTextAlign.Center);
+                            cells.Add()
+                                .Value("Price")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                              cells.Add()
-                                  .Value("Quantity")
-                                  .Background("rgb(212,223,50)")
-                                  .TextAlign(SpreadsheetTextAlign.Center);
+                            cells.Add()
+                                .Value("Tax")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                              cells.Add()
-                                  .Value("Price")
-                                  .Background("rgb(212,223,50)")
-                                  .TextAlign(SpreadsheetTextAlign.Center);
-
-                              cells.Add()
-                                  .Value("Tax")
-                                  .Background("rgb(212,223,50)")
-                                  .TextAlign(SpreadsheetTextAlign.Center);
-
-                              cells.Add()
-                                  .Value("Amount")
-                                  .Background("rgb(212,223,50)")
-                                  .TextAlign(SpreadsheetTextAlign.Center);
-                          });
-                      });
-                  })
-          %>
+                            cells.Add()
+                                .Value("Amount")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
+                        });
+                    });
+                })
+        %>
     ```
-    ```tab-Razor
-          @(Html.Kendo().Spreadsheet()
-          .Name("spreadsheet")
-          .Sheets(sheets => {
-              sheets.Add()
-                  .Name("Food Order")
-                  .MergedCells("A1:F1", "C15:E15")
-                  .Columns(columns =>
-                  {
-                      columns.Add().Width(100);
-                      columns.Add().Width(215);
-                      columns.Add().Width(115);
-                      columns.Add().Width(115);
-                      columns.Add().Width(115);
-                      columns.Add().Width(155);
-                  })
-                  .Rows(rows =>
-                  {
-                      rows.Add().Height(50).Cells(cells =>
-                      {
-                          cells.Add()
-                              .Value("My Company")
-                              .FontSize(25)
-                              .Background("rgb(142,196,65)")
-                              .TextAlign(SpreadsheetTextAlign.Center)
-                              .Color("white");
-                      });
+    ```Razor
+        @(Html.Kendo().Spreadsheet()
+            .Name("spreadsheet")
+            .Sheets(sheets => {
+                sheets.Add()
+                    .Name("Food Order")
+                    .MergedCells("A1:F1", "C15:E15")
+                    .Columns(columns =>
+                    {
+                        columns.Add().Width(100);
+                        columns.Add().Width(215);
+                        columns.Add().Width(115);
+                        columns.Add().Width(115);
+                        columns.Add().Width(115);
+                        columns.Add().Width(155);
+                    })
+                    .Rows(rows =>
+                    {
+                        rows.Add().Height(50).Cells(cells =>
+                        {
+                            cells.Add()
+                                .Value("My Company")
+                                .FontSize(25)
+                                .Background("rgb(142,196,65)")
+                                .TextAlign(SpreadsheetTextAlign.Center)
+                                .Color("white");
+                        });
 
-                      rows.Add().Height(25).Cells(cells =>
-                      {
-                          cells.Add()
-                              .Value("ID")
-                              .Background("rgb(212,223,50)")
-                              .TextAlign(SpreadsheetTextAlign.Center);
+                        rows.Add().Height(25).Cells(cells =>
+                        {
+                            cells.Add()
+                                .Value("ID")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                          cells.Add()
-                              .Value("Product")
-                              .Background("rgb(212,223,50)")
-                              .TextAlign(SpreadsheetTextAlign.Center);
+                            cells.Add()
+                                .Value("Product")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                          cells.Add()
-                              .Value("Quantity")
-                              .Background("rgb(212,223,50)")
-                              .TextAlign(SpreadsheetTextAlign.Center);
+                            cells.Add()
+                                .Value("Quantity")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                          cells.Add()
-                              .Value("Price")
-                              .Background("rgb(212,223,50)")
-                              .TextAlign(SpreadsheetTextAlign.Center);
+                            cells.Add()
+                                .Value("Price")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                          cells.Add()
-                              .Value("Tax")
-                              .Background("rgb(212,223,50)")
-                              .TextAlign(SpreadsheetTextAlign.Center);
+                            cells.Add()
+                                .Value("Tax")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
 
-                          cells.Add()
-                              .Value("Amount")
-                              .Background("rgb(212,223,50)")
-                              .TextAlign(SpreadsheetTextAlign.Center);
-                      });
-                  });
-              })
-          )
+                            cells.Add()
+                                .Value("Amount")
+                                .Background("rgb(212,223,50)")
+                                .TextAlign(SpreadsheetTextAlign.Center);
+                        });
+                    });
+            })
+        )
     ```
 
 1. Build and run the application.
 
     **Figure 1. The final result**
 
-    ![Final result](/helpers/spreadsheet/images/spreadsheet-inline.png)
+    ![Final result](images/spreadsheet-inline.png)
 
 ## Event Handling
 
@@ -169,37 +166,33 @@ You can subscribe to all Spreadsheet [events](http://docs.telerik.com/kendo-ui/a
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%:Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .Events(e => e
+            .Render("spreadsheetRender")
+        )
+    %>
 
-```tab-ASPX
-
-      <%:Html.Kendo().Spreadsheet()
-          .Name("spreadsheet")
-          .Events(e => e
-              .Render("spreadsheetRender")
-          )
-      %>
-
-      <script>
-          function spreadsheetRender() {
-              //Handle the render event.
-          }
-      </script>
+    <script>
+        function spreadsheetRender() {
+            //Handle the render event.
+        }
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .Events(e => e
+            .Render("spreadsheetRender")
+        )
+    )
 
-      @(Html.Kendo().Spreadsheet()
-          .Name("spreadsheet")
-          .Events(e => e
-              .Render("spreadsheetRender")
-          )
-      )
-
-      <script>
-          function spreadsheetRender() {
-              //Handle the render event.
-          }
-      </script>
+    <script>
+        function spreadsheetRender() {
+            //Handle the render event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -208,19 +201,16 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-      @(Html.Kendo().Spreadsheet()
-          .Name("spreadsheet")
-          .Events(e => e
-              .Render(@<text>
-                  function() {
-                      //Handle the render event inline.
-                  }
-              </text>)
-          )
-      )
-```
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .Events(e => e
+            .Render(@<text>
+                function() {
+                    //Handle the render event inline.
+                }
+            </text>)
+        )
+    )
 
 ## Reference
 
@@ -230,15 +220,16 @@ To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`
 
 ###### Example
 
-      @(Html.Kendo().Spreadsheet()
-          .Name("spreadsheet")
-      )
-      <script>
-      $(function() {
-          //Notice that the Name() of the Spreadsheet is used to get its client-side instance.
-          var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-      });
-      </script>
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+    )
+
+    <script>
+        $(function() {
+            //Notice that the Name() of the Spreadsheet is used to get its client-side instance.
+            var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        });
+    </script>
 
 ## See Also
 

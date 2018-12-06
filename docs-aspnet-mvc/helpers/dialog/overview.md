@@ -20,47 +20,43 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a Dialog.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().Dialog()
-                  .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
-                  .Title("Software Update")//Set the title of the Dialog.
-                  .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
-                  .Width(400)  //Set the width of the Dialog.
-                  .Modal(false) // Disable the modality of the Dialog.
-                  .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
-                  .Actions(actions =>
-                    {
-                        actions.Add().Text("NO"); //Set text of the first button.
-                        actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
-                    })
-                   .Render(); //Render the Dialog.
-            %>
+    ```ASPX
+        <% Html.Kendo().Dialog()
+            .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
+            .Title("Software Update")//Set the title of the Dialog.
+            .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
+            .Width(400)  //Set the width of the Dialog.
+            .Modal(false) // Disable the modality of the Dialog.
+            .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
+            .Actions(actions =>
+            {
+                actions.Add().Text("NO"); //Set text of the first button.
+                actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
+            })
+            .Render(); //Render the Dialog.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().Dialog()
-                  .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
-                  .Title("Software Update")//Set the title of the Dialog.
-                  .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
-                  .Width(400)  //Set the width of the Dialog.
-                  .Modal(false) // Disable the modality of the Dialog.
-                  .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
-                  .Actions(actions =>
-                    {
-                        actions.Add().Text("NO"); //Set text of the first button.
-                        actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
-                    })
-            )
+    ```Razor
+        @(Html.Kendo().Dialog()
+            .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
+            .Title("Software Update")//Set the title of the Dialog.
+            .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
+            .Width(400)  //Set the width of the Dialog.
+            .Modal(false) // Disable the modality of the Dialog.
+            .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
+            .Actions(actions =>
+            {
+                actions.Add().Text("NO"); //Set text of the first button.
+                actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
+            })
+        )
     ```
 
 ## Event Handling
@@ -73,35 +69,15 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().Dialog()
-                .Name("dialog")
-                .Events(e => e
-                    .Open("dialog_open")
-                    .Close("dialog_close")
-            )
-        %>
-        <script>
-        function dialog_open() {
-            //Handle the open event.
-        }
-
-        function dialog_close() {
-            //Handle the close event.
-        }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().Dialog()
-              .Name("dialog")
-              .Events(e => e
-                    .Open("dialog_open")
-                    .Close("dialog_close")
-              )
+```ASPX
+    <%: Html.Kendo().Dialog()
+            .Name("dialog")
+            .Events(e => e
+                .Open("dialog_open")
+                .Close("dialog_close")
         )
-        <script>
+    %>
+    <script>
         function dialog_open() {
             //Handle the open event.
         }
@@ -109,7 +85,25 @@ The following example demonstrates how to subscribe to events by a handler name.
         function dialog_close() {
             //Handle the close event.
         }
-        </script>
+    </script>
+```
+```Razor
+    @(Html.Kendo().Dialog()
+        .Name("dialog")
+        .Events(e => e
+            .Open("dialog_open")
+            .Close("dialog_close")
+        )
+    )
+    <script>
+        function dialog_open() {
+            //Handle the open event.
+        }
+
+        function dialog_close() {
+            //Handle the close event.
+        }
+    </script>
 ```
 
 ## Reference
@@ -120,13 +114,13 @@ To refer to an existing Kendo UI Dialog instance, use the [`jQuery.data()`](http
 
 ###### Example
 
-        //Put this after your Kendo UI Dialog for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI Dialog for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the Dialog is used to get its client-side instance.
             var dialog = $("#dialog").data("kendoDialog");
         });
-        </script>
+    </script>
 
 ## See Also
 

@@ -9,7 +9,7 @@ position: 2
 
 # Handle Order Details
 
-![kendo-saleshub-order-details-edit-dialog-screenshot](/tutorials/tutorial-saleshub/order-page/images/kendo-saleshub-order-details-edit-dialog-screenshot.png)
+![kendo-saleshub-order-details-edit-dialog-screenshot](images/kendo-saleshub-order-details-edit-dialog-screenshot.png)
 
 ## How to Setup the Custom Order Detail Editor
 
@@ -166,7 +166,7 @@ requires you to at least pass in a `DataSourceRequest`. One of the overloads for
 to pass in the `ModelState` of your controller and it will use this to generate errors that it sends
 back to client (if there are any errors in the `ModelState`).
 
-![kendo-saleshub-order-details-errors](/tutorials/tutorial-saleshub/order-page/images/kendo-saleshub-order-details-errors.png)
+![kendo-saleshub-order-details-errors](images/kendo-saleshub-order-details-errors.png)
 
 Using your browser's developer tools, you can see how `ToDataSourceResult` formats the errors in the
 `ModelState` when it generates the response. The `Errors` property of the response contains the

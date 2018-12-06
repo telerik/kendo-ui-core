@@ -28,47 +28,39 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                NorthwindDataContext northwind = new NorthwindDataContext();
+        public ActionResult Index()
+        {
+            NorthwindDataContext northwind = new NorthwindDataContext();
 
-                return View(northwind.Products);
-            }
+            return View(northwind.Products);
+        }
 
 1. Make your view strongly typed.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-               Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
     ```
-    ```tab-Razor
-
-            @model IEnumerable<MvcApplication1.Models.Product>
+    ```Razor
+        @model IEnumerable<MvcApplication1.Models.Product>
     ```
 1. Add a server bound MultiSelect.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-                .BindTo(Model)   //Pass the list of Products to the MultiSelect.
-            %>
+    ```ASPX
+        <%: Html.Kendo().MultiSelect()
+            .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .BindTo(Model)   //Pass the list of Products to the MultiSelect.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MultiSelect()
-              .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-              .BindTo(Model)   //Pass the list of Products to the MultiSelect.
-            )
+    ```Razor
+        @(Html.Kendo().MultiSelect()
+            .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .BindTo(Model)   //Pass the list of Products to the MultiSelect.
+        )
     ```
 
 ### Ajax Binding
@@ -81,59 +73,55 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Create a new action method and pass the **Products** table as JSON result.
 
     ###### Example
 
-            public JsonResult GetProducts()
-            {
-                NorthwindDataContext northwind = new NorthwindDataContext();
+        public JsonResult GetProducts()
+        {
+            NorthwindDataContext northwind = new NorthwindDataContext();
 
-                return Json(northwind.Products, JsonRequestBehavior.AllowGet);
-            }
+            return Json(northwind.Products, JsonRequestBehavior.AllowGet);
+        }
 
 1. Add an Ajax-bound MultiSelect.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-                .Filter(FilterType.Contains)
-                .DataSource(source =>
+    ```ASPX
+        <%: Html.Kendo().MultiSelect()
+            .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .Filter(FilterType.Contains)
+            .DataSource(source =>
+            {
+                source.Read(read =>
                 {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProducts", "Home"); //Set the Action and Controller names.
-                    })
-                    .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                    read.Action("GetProducts", "Home"); //Set the Action and Controller names.
                 })
-            %>
+                .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+            })
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-                .Filter(FilterType.Contains)
-                .DataSource(source =>
+    ```Razor
+        @(Html.Kendo().MultiSelect()
+            .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .Filter(FilterType.Contains)
+            .DataSource(source =>
+            {
+                source.Read(read =>
                 {
-                   source.Read(read =>
-                   {
-                        read.Action("GetProducts", "Home"); //Set the Action and Controller names.
-                   })
-                   .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                    read.Action("GetProducts", "Home"); //Set the Action and Controller names.
                 })
-            )
+                .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+            })
+        )
     ```
 
 > **Important:**
@@ -150,71 +138,67 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Create a new action method and pass the **Products** table as JSON result.
 
     ###### Example
 
-            public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
-            {
-                NorthwindDataContext northwind = new NorthwindDataContext();
+        public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
+        {
+            NorthwindDataContext northwind = new NorthwindDataContext();
 
-                return Json(northwind.Products.ToDataSourceResult(request));
-            }
+            return Json(northwind.Products.ToDataSourceResult(request));
+        }
 
 1. Add an Ajax-bound MultiSelect.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect")
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-                .DataSource(source =>
-                {
-                    source.Custom()
-                          .ServerFiltering(true)
-                          .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
-                          .Transport(transport =>
-                          {
-                              transport.Read("GetProducts", "Home");
-                          })
-                          .Schema(schema =>
-                          {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
-                          });
-                })
-            %>
+    ```ASPX
+        <%: Html.Kendo().MultiSelect()
+            .Name("productMultiSelect")
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .DataSource(source =>
+            {
+                source.Custom()
+                    .ServerFiltering(true)
+                    .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
+                    .Transport(transport =>
+                    {
+                        transport.Read("GetProducts", "Home");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                            .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                    });
+            })
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MultiSelect()
-                .Name("productMultiSelect")
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-                .DataSource(source =>
-                {
-                    source.Custom()
-                          .ServerFiltering(true)
-                          .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
-                          .Transport(transport =>
-                          {
-                              transport.Read("GetProducts", "Home");
-                          })
-                          .Schema(schema =>
-                          {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
-                          });
-                })
-            )
+    ```Razor
+        @(Html.Kendo().MultiSelect()
+            .Name("productMultiSelect")
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .DataSource(source =>
+            {
+                source.Custom()
+                    .ServerFiltering(true)
+                    .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                    .Transport(transport =>
+                    {
+                        transport.Read("GetProducts", "Home");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                            .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                    });
+            })
+        )
     ```
 
 ### Model Binding
@@ -229,52 +213,47 @@ Local data is the data that is available on the client when the MultiSelect is i
 
     ###### Example
 
-            public ActionResult Index()
+        public ActionResult Index()
+        {
+            return View(new ProductViewModel
             {
-                return View(new ProductViewModel
-                {
-                    Orders = GetOrders(),
-                    SelectedOrders = new int[] { 1, 3 }
-                });
-            }
+                Orders = GetOrders(),
+                SelectedOrders = new int[] { 1, 3 }
+            });
+        }
 
-            private static List<Order> GetOrders()
+        private static List<Order> GetOrders()
+        {
+            var orders = Enumerable.Range(0, 2000).Select(i => new Order
             {
-                var orders = Enumerable.Range(0, 2000).Select(i => new Order
-                {
-                    OrderID = i,
-                    OrderName = "OrderName" + i
-                });
+                OrderID = i,
+                OrderName = "OrderName" + i
+            });
 
-                return orders.ToList();
-            }
+            return orders.ToList();
+        }
 
 
 1. Add the MultiSelect to the view and bind it to a property of the view model.
 
-    ###### Example
+    ```Razor
+        @model MvcApplication1.Models.ProductViewModel
 
-    ```tab-Razor
-
-            @model MvcApplication1.Models.ProductViewModel
-
-            @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
-                .DataValueField("OrderID")
-                .DataTextField("OrderName")
-                .BindTo(Model.Orders)
-            )
-
+        @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+            .DataValueField("OrderID")
+            .DataTextField("OrderName")
+            .BindTo(Model.Orders)
+        )
     ```
-    ```tab-ASPX
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+        Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
 
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
-
-            <%: Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
-                .DataValueField("OrderID")
-                .DataTextField("OrderName")
-                .BindTo(Model.Orders)
-            %>
+        <%: Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+            .DataValueField("OrderID")
+            .DataTextField("OrderName")
+            .BindTo(Model.Orders)
+        %>
     ```
 
 #### Remote Data
@@ -285,67 +264,62 @@ You can configure the MultiSelect to get its data from a remote source by making
 
     ###### Example
 
-            public ActionResult Index()
+        public ActionResult Index()
+        {
+            return View(new ProductViewModel
             {
-                return View(new ProductViewModel
-                {
-                    SelectedOrders = new int[] { 1, 3 }
-                });
-            }
+                SelectedOrders = new int[] { 1, 3 }
+            });
+        }
 
-            public JsonResult GetOrdersAjax()
+        public JsonResult GetOrdersAjax()
+        {
+            var orders = Enumerable.Range(0, 2000).Select(i => new Order
             {
-                var orders = Enumerable.Range(0, 2000).Select(i => new Order
-                {
-                    OrderID = i,
-                    OrderName = "OrderName" + i
-                });
+                OrderID = i,
+                OrderName = "OrderName" + i
+            });
 
-                return Json(orders.ToList(), JsonRequestBehavior.AllowGet);
-            }
-
+            return Json(orders.ToList(), JsonRequestBehavior.AllowGet);
+        }
 
 1. Add the MultiSelect to the view and configure its DataSource to use remote data.
 
-    ###### Example
-
-    ```tab-Razor
-
-            @model MvcApplication1.Models.ProductViewModel
+    ```Razor
+        @model MvcApplication1.Models.ProductViewModel
 
 
-            @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
-                .Filter("contains")
-                .DataValueField("OrderID")
-                .DataTextField("OrderName")
-                .DataSource(source =>
+        @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+            .Filter("contains")
+            .DataValueField("OrderID")
+            .DataTextField("OrderName")
+            .DataSource(source =>
+            {
+                source.Read(read =>
                 {
-                    source.Read(read =>
-                    {
-                        read.Action("GetOrdersAjax", "Home");
-                    })
-                    .ServerFiltering(false);
+                    read.Action("GetOrdersAjax", "Home");
                 })
-            )
+                .ServerFiltering(false);
+            })
+        )
     ```
-    ```tab-ASPX
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+        Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
 
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
-
-            <%: Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
-                    .Filter("contains")
-                    .DataValueField("OrderID")
-                    .DataTextField("OrderName")
-                    .DataSource(source =>
-                    {
-                        source.Read(read =>
-                        {
-                            read.Action("GetOrdersAjax", "Home");
-                        })
-                        .ServerFiltering(false);
-                    })
-            %>
+        <%: Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+            .Filter("contains")
+            .DataValueField("OrderID")
+            .DataTextField("OrderName")
+            .DataSource(source =>
+            {
+                source.Read(read =>
+                {
+                    read.Action("GetOrdersAjax", "Home");
+                })
+                .ServerFiltering(false);
+            })
+        %>
     ```
 
 #### Virtualization
@@ -360,63 +334,111 @@ You can configure a MultiSelect that is bound to a model field to use [virtualiz
 
     ###### Example
 
-            public ActionResult Index()
+        public ActionResult Index()
+        {
+            return View(new ProductViewModel
             {
-                return View(new ProductViewModel
+                SelectedOrders = new int[] { 1, 3 }
+            });
+        }
+
+        [HttpPost]
+        public ActionResult OrdersVirtualization_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(GetOrders().ToDataSourceResult(request));
+        }
+
+        public ActionResult Orders_ValueMapper(int[] values)
+        {
+            var indices = new List<int>();
+
+            if (values != null && values.Any())
+            {
+                var index = 0;
+
+                foreach (var order in GetOrders())
                 {
-                    SelectedOrders = new int[] { 1, 3 }
-                });
-            }
-
-            [HttpPost]
-            public ActionResult OrdersVirtualization_Read([DataSourceRequest] DataSourceRequest request)
-            {
-                return Json(GetOrders().ToDataSourceResult(request));
-            }
-
-            public ActionResult Orders_ValueMapper(int[] values)
-            {
-                var indices = new List<int>();
-
-                if (values != null && values.Any())
-                {
-                    var index = 0;
-
-                    foreach (var order in GetOrders())
+                    if (values.Contains(order.OrderID))
                     {
-                        if (values.Contains(order.OrderID))
-                        {
-                            indices.Add(index);
-                        }
-
-                        index += 1;
+                        indices.Add(index);
                     }
+
+                    index += 1;
                 }
-
-                return Json(indices, JsonRequestBehavior.AllowGet);
             }
 
-            private static List<Order> GetOrders()
+            return Json(indices, JsonRequestBehavior.AllowGet);
+        }
+
+        private static List<Order> GetOrders()
+        {
+            var orders = Enumerable.Range(0, 2000).Select(i => new Order
             {
-                var orders = Enumerable.Range(0, 2000).Select(i => new Order
-                {
-                    OrderID = i,
-                    OrderName = "OrderName" + i
-                });
+                OrderID = i,
+                OrderName = "OrderName" + i
+            });
 
-                return orders.ToList();
-            }
-
+            return orders.ToList();
+        }
 
 1. Add the MultiSelect to the view and configure it to use virtualization.
 
-    ###### Example
+    ```Razor
+        @model MvcApplication1.Models.ProductViewModel
 
-    ```tab-Razor
+        @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+            .Filter("contains")
+            .DataValueField("OrderID")
+            .DataTextField("OrderName")
+            .DataSource(source =>
+            {
+                source.Custom()
+                    .ServerFiltering(true)
+                    .ServerPaging(true)
+                    .PageSize(80)
+                    .Type("aspnetmvc-ajax")
+                    .Transport(transport =>
+                    {
+                        transport.Read("OrdersVirtualization_Read", "Home");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data")
+                                .Total("Total");
+                    });
+            })
+            .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+        )
 
-            @model MvcApplication1.Models.ProductViewModel
+        <script>
+            function valueMapper(options) {
+                $.ajax({
+                    url: "@Url.Action("Orders_ValueMapper", "Home")",
+                    data: convertValues(options.value),
+                    success: function (data) {
+                        options.success(data);
+                    }
+                });
+            }
 
-            @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
+            function convertValues(value) {
+                var data = {};
+
+                value = $.isArray(value) ? value : [value];
+
+                for (var idx = 0; idx < value.length; idx++) {
+                    data["values[" + idx + "]"] = value[idx];
+                }
+
+                return data;
+            }
+        </script>
+    ```
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+        Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
+
+        <%: Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
                 .Filter("contains")
                 .DataValueField("OrderID")
                 .DataTextField("OrderName")
@@ -463,147 +485,89 @@ You can configure a MultiSelect that is bound to a model field to use [virtualiz
                     return data;
                 }
             </script>
-
-    ```
-    ```tab-ASPX
-
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-            Inherits="System.Web.Mvc.ViewPage<MvcApplication1.Models.ProductViewModel>" %>
-
-            <%: Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
-                    .Filter("contains")
-                    .DataValueField("OrderID")
-                    .DataTextField("OrderName")
-                    .DataSource(source =>
-                    {
-                        source.Custom()
-                            .ServerFiltering(true)
-                            .ServerPaging(true)
-                            .PageSize(80)
-                            .Type("aspnetmvc-ajax")
-                            .Transport(transport =>
-                            {
-                                transport.Read("OrdersVirtualization_Read", "Home");
-                            })
-                            .Schema(schema =>
-                            {
-                                schema.Data("Data")
-                                        .Total("Total");
-                            });
-                    })
-                    .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
-                )
-
-                <script>
-                    function valueMapper(options) {
-                        $.ajax({
-                            url: "@Url.Action("Orders_ValueMapper", "Home")",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                options.success(data);
-                            }
-                        });
-                    }
-
-                    function convertValues(value) {
-                        var data = {};
-
-                        value = $.isArray(value) ? value : [value];
-
-                        for (var idx = 0; idx < value.length; idx++) {
-                            data["values[" + idx + "]"] = value[idx];
-                        }
-
-                        return data;
-                    }
-                </script>
-            %>
+        %>
     ```
 
 ### Parameter Sending to Server
 
 Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect to send parameters to the server.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-                .Filter(FilterType.Contains)
-                .DataSource(source =>
+```ASPX
+    <%: Html.Kendo().MultiSelect()
+        .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+        .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+        .Filter(FilterType.Contains)
+        .DataSource(source =>
+        {
+                source.Read(read =>
                 {
-                       source.Read(read =>
-                       {
-                                read.Action("GetProducts", "Home")
-                                    .Data("onAdditionalData");
-                       });
+                        read.Action("GetProducts", "Home")
+                            .Data("onAdditionalData");
+                });
 
-                       source.serverFiltering(true);
-                })
-         %>
-         <script>
-            function onAdditionalData() {
-                return {
-                    text: $("#productMultiSelect").data("kendoMultiSelect").input.val()
-                };
-            }
-        </script>
+                source.serverFiltering(true);
+        })
+    %>
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#productMultiSelect").data("kendoMultiSelect").input.val()
+            };
+        }
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().MultiSelect()
+        .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+        .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+        .Filter(FilterType.Contains)
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("GetProducts", "Home") //Set the Action and Controller names.
+                    .Data("onAdditionalData");
+            });
+            source.ServerFiltering(true);
+        })
+    )
 
-        @(Html.Kendo().MultiSelect()
-              .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-              .Filter(FilterType.Contains)
-              .DataSource(source =>
-              {
-                 source.Read(read =>
-                 {
-                      read.Action("GetProducts", "Home") //Set the Action and Controller names.
-                          .Data("onAdditionalData");
-                 });
-                 source.ServerFiltering(true);
-              })
-        )
-
-        <script>
-            function onAdditionalData() {
-                return {
-                    text: $("#productMultiSelect").data("kendoMultiSelect").input.val()
-                };
-            }
-        </script>
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#productMultiSelect").data("kendoMultiSelect").input.val()
+            };
+        }
+    </script>
 ```
 
 The following example demonstrates how the `GetProducts` method is used.
 
 ###### Example
 
-        public JsonResult GetProducts(string text)
+    public JsonResult GetProducts(string text)
+    {
+        var northwind = new SampleEntities();
+
+        var products = northwind.Products.Select(product => new ProductViewModel
+                {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
+                UnitPrice = product.UnitPrice ?? 0,
+                UnitsInStock = product.UnitsInStock ?? 0,
+                UnitsOnOrder = product.UnitsOnOrder ?? 0,
+                Discontinued = product.Discontinued
+                });
+
+        if (!string.IsNullOrEmpty(text))
         {
-            var northwind = new SampleEntities();
-
-            var products = northwind.Products.Select(product => new ProductViewModel
-                    {
-                    ProductID = product.ProductID,
-                    ProductName = product.ProductName,
-                    UnitPrice = product.UnitPrice ?? 0,
-                    UnitsInStock = product.UnitsInStock ?? 0,
-                    UnitsOnOrder = product.UnitsOnOrder ?? 0,
-                    Discontinued = product.Discontinued
-                    });
-
-            if (!string.IsNullOrEmpty(text))
-            {
-                products = products.Where(p => p.ProductName.Contains(text));
-            }
-
-            return Json(products, JsonRequestBehavior.AllowGet);
+            products = products.Where(p => p.ProductName.Contains(text));
         }
+
+        return Json(products, JsonRequestBehavior.AllowGet);
+    }
 
 > **Important**
 >
@@ -623,51 +587,47 @@ As seen, the MultiSelect sends the value of the input only if the end-user start
 
 When deferred binding&mdash;`AutoBind: false`&mdash;is used, specify a list of data items instead of just a list of strings. This functionality is supported in Kendo UI Q1 SP1 2013 and later versions.
 
-###### Example
-
-```tab-ASPX
-
-        <%= Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the MultiSelect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the MultiSelect as a value.
-                .Filter(FilterType.Contains)
-                .AutoBind(false)
-                .DataSource(source =>
-                {
-                   source.Read(read =>
-                   {
-                        read.Action("GetProducts", "Home") //Set the Action and Controller name
-                            .Data("onAdditionalData");
-                   });
-                })
-                .Value(new List<Product> {
-                  new Product { ProductName = "Chai", ProductID = 1 },
-                  new Product { ProductName = "Chang", ProductID = 2 }
-                })
-        %>
+```ASPX
+    <%= Html.Kendo().MultiSelect()
+        .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") //Specifies which property of the Product to be used by the MultiSelect as a text.
+        .DataValueField("ProductID") //Specifies which property of the Product to be used by the MultiSelect as a value.
+        .Filter(FilterType.Contains)
+        .AutoBind(false)
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("GetProducts", "Home") //Set the Action and Controller name
+                    .Data("onAdditionalData");
+            });
+        })
+        .Value(new List<Product> {
+            new Product { ProductName = "Chai", ProductID = 1 },
+            new Product { ProductName = "Chang", ProductID = 2 }
+        })
+    %>
 ```
-```tab-Razor
-
-        @(Html.Kendo().MultiSelect()
-              .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
-              .Filter(FilterType.Contains)
-              .AutoBind(false)
-              .DataSource(source =>
-              {
-                 source.Read(read =>
-                 {
-                      read.Action("GetProducts", "Home") //Set the Action and Controller name
-                          .Data("onAdditionalData");
-                 });
-              })
-              .Value(new List<Product> {
-                new Product { ProductName = "Chai", ProductID = 1 },
-                new Product { ProductName = "Chang", ProductID = 2 }
-              })
-        )
+```Razor
+    @(Html.Kendo().MultiSelect()
+        .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+        .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+        .Filter(FilterType.Contains)
+        .AutoBind(false)
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("GetProducts", "Home") //Set the Action and Controller name
+                    .Data("onAdditionalData");
+            });
+        })
+        .Value(new List<Product> {
+            new Product { ProductName = "Chai", ProductID = 1 },
+            new Product { ProductName = "Chang", ProductID = 2 }
+        })
+    )
 ```
 
 ### Grouping
@@ -688,39 +648,16 @@ You can subscribe to all MultiSelect [events](http://docs.telerik.com/kendo-ui/a
 
 The examples below demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().MultiSelect()
-            .Name("multiselect")
-            .BindTo(new string[] { "Item1", "Item2", "Item3" })
-            .Events(e => e
-                .Select("multiselect_select")
-                .Change("multiselect_change")
-            )
-        %>
-        <script>
-        function multiselect_select() {
-            //Handle the select event.
-        }
-
-        function multiselect_change() {
-            //Handle the change event.
-        }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().MultiSelect()
-          .Name("multiselect")
-          .BindTo(new string[] { "Item1", "Item2", "Item3" })
-          .Events(e => e
-                .Select("multiselect_select")
-                .Change("multiselect_change")
-          )
+```ASPX
+    <%: Html.Kendo().MultiSelect()
+        .Name("multiselect")
+        .BindTo(new string[] { "Item1", "Item2", "Item3" })
+        .Events(e => e
+            .Select("multiselect_select")
+            .Change("multiselect_change")
         )
-        <script>
+    %>
+    <script>
         function multiselect_select() {
             //Handle the select event.
         }
@@ -728,7 +665,26 @@ The examples below demonstrates how to subscribe to events by a handler name.
         function multiselect_change() {
             //Handle the change event.
         }
-        </script>
+    </script>
+```
+```Razor
+    @(Html.Kendo().MultiSelect()
+        .Name("multiselect")
+        .BindTo(new string[] { "Item1", "Item2", "Item3" })
+        .Events(e => e
+            .Select("multiselect_select")
+            .Change("multiselect_change")
+        )
+    )
+    <script>
+        function multiselect_select() {
+            //Handle the select event.
+        }
+
+        function multiselect_change() {
+            //Handle the change event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -737,25 +693,22 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().MultiSelect()
-          .Name("multiselect")
-          .BindTo(new string[] { "Item1", "Item2", "Item3" })
-          .Events(e => e
-              .Select(@<text>
-                function() {
-                    //Handle the select event inline.
-                }
-              </text>)
-              .Change(@<text>
-                function() {
-                    //Handle the change event inline.
-                }
-                </text>)
-          )
+    @(Html.Kendo().MultiSelect()
+        .Name("multiselect")
+        .BindTo(new string[] { "Item1", "Item2", "Item3" })
+        .Events(e => e
+            .Select(@<text>
+            function() {
+                //Handle the select event inline.
+            }
+            </text>)
+            .Change(@<text>
+            function() {
+                //Handle the change event inline.
+            }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
@@ -765,13 +718,13 @@ To reference an existing Kendo UI MultiSelect instance, use the [`jQuery.data()`
 
 ###### Example
 
-        //Put this after your Kendo UI MultiSelect  for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI MultiSelect  for ASP.NET MVC declaration.
+    <script>
         $(function() {
-        //Notice that the Name() of the MultiSelect is used to get its client-side instance.
-        var multiselect = $("#productMultiSelect").data("kendoMultiSelect");
+            //Notice that the Name() of the MultiSelect is used to get its client-side instance.
+            var multiselect = $("#productMultiSelect").data("kendoMultiSelect");
         });
-        </script>
+    </script>
 
 ## See Also
 

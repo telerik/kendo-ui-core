@@ -20,7 +20,7 @@ The following example demonstrates how to initialize the ButtonGroup.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().ButtonGroup()
             .Name("select-period")
@@ -31,7 +31,7 @@ The following example demonstrates how to initialize the ButtonGroup.
                         t.Add().Text("Year");
                 }))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().ButtonGroup()
             .Name("select-period")
@@ -49,7 +49,7 @@ The ButtonGroup provides the `.Icon()` method for configuring icons.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
          @(Html.Kendo().ButtonGroup()
             .Name("player")
@@ -60,7 +60,7 @@ The ButtonGroup provides the `.Icon()` method for configuring icons.
                     t.Add().Icon("stop");
             }))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().ButtonGroup()
             .Name("player")
@@ -100,7 +100,7 @@ The following example demonstrates how to enable and disable the ButtonGroup ove
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().ButtonGroup()
             .Name("select-period")
@@ -112,7 +112,7 @@ The following example demonstrates how to enable and disable the ButtonGroup ove
                         t.Add().Text("Year");
                 }))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().ButtonGroup()
             .Name("select-period")
@@ -135,7 +135,7 @@ The following example demonstrates how to select a button by its index.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().ButtonGroup()
             .Name("select-period")
@@ -147,7 +147,7 @@ The following example demonstrates how to select a button by its index.
                         t.Add().Text("Year");
                 }))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().ButtonGroup()
             .Name("select-period")
@@ -170,7 +170,7 @@ The following example demonstrates how to use `.Selection()`.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().ButtonGroup()
             .Name("select-period")
@@ -182,7 +182,7 @@ The following example demonstrates how to use `.Selection()`.
                         t.Add().Text("Year");
                 }))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().ButtonGroup()
             .Name("select-period")

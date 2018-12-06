@@ -14,14 +14,14 @@ The following example demonstrates how to create a MultiViewCalendar by using a 
 
 ###### Example
 
-```tab-ASPX
+```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")
             .MonthTemplate("<div class='custom'><#=data.value#></div>")
         %>
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

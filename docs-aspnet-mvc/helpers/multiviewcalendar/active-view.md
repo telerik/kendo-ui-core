@@ -25,7 +25,7 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ###### Example
 
-```tab-ASPX
+```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")
@@ -33,7 +33,7 @@ The following example demonstrates how to create a MultiViewCalendar that allows
             .Depth(CalendarView.Year)
         %>
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

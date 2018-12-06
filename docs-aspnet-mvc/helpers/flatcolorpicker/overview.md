@@ -20,28 +20,24 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a FlatColorPicker.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().FlatColorPicker()
-                    .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
-                    .Value("#ff0000") //Set the value of the FlatColorPicker.
-            %>
+    ```ASPX
+        <%: Html.Kendo().FlatColorPicker()
+            .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
+            .Value("#ff0000") //Set the value of the FlatColorPicker.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().FlatColorPicker()
-                  .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
-                  .Value("#ff0000") //Set the value of the FlatColorPicker.
-            )
+    ```Razor
+        @(Html.Kendo().FlatColorPicker()
+            .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
+            .Value("#ff0000") //Set the value of the FlatColorPicker.
+        )
     ```
 
 ## Event Handling
@@ -52,35 +48,31 @@ You can subscribe to all FlatColorPicker [events](http://docs.telerik.com/kendo-
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().FlatColorPicker()
-              .Name("flatcolorpicker")
-              .Events(e => e
-                  .Change("flatcolorpicker_change")
-              )
-      %>
-      <script>
-          function flatcolorpicker_change() {
-              //Handle the change event.
-          }
-      </script>
+```ASPX
+    <%: Html.Kendo().FlatColorPicker()
+        .Name("flatcolorpicker")
+        .Events(e => e
+            .Change("flatcolorpicker_change")
+        )
+    %>
+    <script>
+        function flatcolorpicker_change() {
+            //Handle the change event.
+        }
+    </script>
 ```
-```tab-Razor
-
-      @(Html.Kendo().FlatColorPicker()
-            .Name("flatcolorpicker")
-            .Events(e => e
-                  .Change("flatcolorpicker_change")
-            )
-      )
-      <script>
-          function flatcolorpicker_change() {
-              //Handle the change event.
-          }
-      </script>
+```Razor
+    @(Html.Kendo().FlatColorPicker()
+        .Name("flatcolorpicker")
+        .Events(e => e
+            .Change("flatcolorpicker_change")
+        )
+    )
+    <script>
+        function flatcolorpicker_change() {
+            //Handle the change event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -89,18 +81,17 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-      @(Html.Kendo().FlatColorPicker()
-            .Name("flatcolorpicker")
-            .Events(e => e
-                .Change(@<text>
-                  function() {
-                      //Handle the change event inline.
-                  }
-                  </text>)
-            )
-      )
+```
+    @(Html.Kendo().FlatColorPicker()
+        .Name("flatcolorpicker")
+        .Events(e => e
+            .Change(@<text>
+                function() {
+                    //Handle the change event inline.
+                }
+            </text>)
+        )
+    )
 ```
 
 ## Reference
@@ -111,13 +102,13 @@ To reference an existing Kendo UI FlatColorPicker instance, use the [`jQuery.dat
 
 ###### Example
 
-      //Put this after your Kendo UI FlatColorPicker for ASP.NET MVC declaration.
-      <script>
-      $(function() {
-          //Notice that the Name() of the FlatColorPicker is used to get its client-side instance.
-          var flatcolorpicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
-      });
-      </script>
+    //Put this after your Kendo UI FlatColorPicker for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the FlatColorPicker is used to get its client-side instance.
+            var flatcolorpicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
+        });
+    </script>
 
 ## See Also
 

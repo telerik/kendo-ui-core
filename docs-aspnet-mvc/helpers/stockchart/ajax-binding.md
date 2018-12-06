@@ -20,12 +20,12 @@ Add a new action method which returns data to populate the StockChart.
 
 ###### Example
 
-	    public partial class HomeController : Controller
-	    {
-	        public ActionResult _BoeingStockData()
-	        {
-	        }
-	    }
+    public partial class HomeController : Controller
+    {
+        public ActionResult _BoeingStockData()
+        {
+        }
+    }
 
 <!--_-->
 ### Return Data
@@ -34,56 +34,48 @@ Return the data as JSON.
 
 ###### Example
 
-        public ActionResult InternetUsers_Read()
-        {
-            return Json(ChartDataRepository.BoeingStockData());
-        }
+    public ActionResult InternetUsers_Read()
+    {
+        return Json(ChartDataRepository.BoeingStockData());
+    }
 
 ### Configure the Chart
 
 In the view, configure the Chart to use the action method created in the previous steps.
 
-###### Example
-
-```tab-WebForms
-
-	     <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-	      .Name("stockChart")
-	      .Title("The Boeing Company (NYSE:BA)")
-	      .DataSource(ds => ds.Read(read => read
-	          .Action("_BoeingStockData", "Home")
-	      ))
-	      .DateField("Date")
-	      %>
-```
-```tab-Razor
-
-        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+```ASPX
+    <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
         .Title("The Boeing Company (NYSE:BA)")
         .DataSource(ds => ds.Read(read => read
             .Action("_BoeingStockData", "Home")
         ))
         .DateField("Date")
-        )
+    %>
+```
+```Razor
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DataSource(ds => ds.Read(read => read
+            .Action("_BoeingStockData", "Home")
+        ))
+        .DateField("Date")
+    )
 ```
 
 ### Create the Data Series
 
 Create the main and navigator data series.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+```ASPX
+    <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
         .Title("The Boeing Company (NYSE:BA)")
         .DataSource(ds => ds.Read(read => read
             .Action("_BoeingStockData", "Home")
         ))
         .DateField("Date")
-
         .Series(series => {
             series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
         })
@@ -92,18 +84,16 @@ Create the main and navigator data series.
                 series.Line(s => s.Volume);
             })
         )
-        %>
+    %>
 ```
-```tab-Razor
-
-        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+```Razor
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
         .Title("The Boeing Company (NYSE:BA)")
         .DataSource(ds => ds.Read(read => read
             .Action("_BoeingStockData", "Home")
         ))
         .DateField("Date")
-
         .Series(series => {
             series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
         })
@@ -112,7 +102,7 @@ Create the main and navigator data series.
                 series.Line(s => s.Volume);
             })
         )
-        )
+    )
 ```
 
 ## See Also

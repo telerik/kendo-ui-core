@@ -35,7 +35,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 5 a
 
     **Figure 1. The new ASP.NET MVC 5 application**
 
-    ![New ASP.NET MVC 5 Application](/images/mvc5-new-app.png)
+    ![New ASP.NET MVC 5 Application](images/mvc5-new-app.png)
 
 ## Add Telerik UI for ASP.NET MVC
 
@@ -63,7 +63,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
     **Figure 2. Kendo UI directories in the Solution Explorer**
 
-    ![Kendo directories in Solution Explorer](/images/mvc5-solution.png)
+    ![Kendo directories in Solution Explorer](images/mvc5-solution.png)
 
     After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -73,10 +73,11 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
     ###### Example
 
-            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
-                        "~/Scripts/kendo/kendo.all.min.js",
-                        // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
-                        "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
+        bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+            "~/Scripts/kendo/kendo.all.min.js",
+            // uncomment below if using the Scheduler
+            // "~/Scripts/kendo/kendo.timezones.min.js",
+            "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
 
 1. Add a style bundle for Telerik UI for ASP.NET MVC.
 
@@ -86,28 +87,24 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
     ###### Example
 
-            bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
-                        "~/Content/kendo/kendo.common-bootstrap.min.css",
-                        "~/Content/kendo/kendo.bootstrap.min.css"));
+        bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
+            "~/Content/kendo/kendo.common-bootstrap.min.css",
+            "~/Content/kendo/kendo.bootstrap.min.css"));
 
 1. Tell the ASP.NET bundles to allow minified files in debug mode.
 
     ###### Example
 
-            bundles.IgnoreList.Clear();
+        bundles.IgnoreList.Clear();
 
 1. Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
 1. Render the Telerik UI for ASP.NET MVC style bundle.
 
-    ###### Example
-
-    ```tab-ASPX
-
+    ```ASPX
         <%: Styles.Render("~/Content/kendo/css") %>
     ```
-    ```tab-Razor
-
+    ```Razor
         @Styles.Render("~/Content/kendo/css")
     ```
 
@@ -115,15 +112,11 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 1. Render the Telerik UI for ASP.NET MVC script bundle after jQuery.
 
-    ###### Example
-
-    ```tab-ASPX
-
+    ```ASPX
         <%: Scripts.Render("~/bundles/jquery") %>
         <%: Scripts.Render("~/bundles/kendo") %>
     ```
-    ```tab-Razor
-
+    ```Razor
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/kendo")
     ```
@@ -146,23 +139,23 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
     ###### Example
 
-            <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common-bootstrap.min.css" />
-            <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.bootstrap.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common-bootstrap.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.bootstrap.min.css" />
 
 1. Include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after jQuery.
 
     ###### Example
 
-            <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
-            <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 1. If using the Telerik MVC Scheduler wrapper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
 
     ###### Example
 
-            <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
-            <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
-            <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 ### Add Kendo.Mvc.dll Reference
 
@@ -195,28 +188,28 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
 
     ###### Example
 
-            <namespaces>
-                <add namespace="System.Web.Mvc" />
-                <add namespace="System.Web.Mvc.Ajax" />
-                <add namespace="System.Web.Mvc.Html" />
-                <add namespace="System.Web.Routing" />
-                <add namespace="Kendo.Mvc.UI" />
-            </namespaces>
+        <namespaces>
+            <add namespace="System.Web.Mvc" />
+            <add namespace="System.Web.Mvc.Ajax" />
+            <add namespace="System.Web.Mvc.Html" />
+            <add namespace="System.Web.Routing" />
+            <add namespace="Kendo.Mvc.UI" />
+        </namespaces>
 
 1. Add a binding redirect to your current `System.Web.Mvc` version.
 
     ###### Example
 
-            <configuration>
-                <runtime>
-                    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-                        <dependentAssembly>
-                            <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
-                            <bindingRedirect oldVersion="1.0.0.0-5.2.6.0" newVersion="5.2.6.0" />
-                        </dependentAssembly>
-                    </assemblyBinding>
-                </runtime>
-            </configuration>
+        <configuration>
+            <runtime>
+                <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+                    <dependentAssembly>
+                        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+                        <bindingRedirect oldVersion="1.0.0.0-5.2.6.0" newVersion="5.2.6.0" />
+                    </dependentAssembly>
+                </assemblyBinding>
+            </runtime>
+        </configuration>
 
 1. For issues with unmatching versions of `System.Web.Mvc` referenced in the application and the one used by Kendo.Mvc.dll see [Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
@@ -230,12 +223,10 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
     ###### Example
 
-    ```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().DatePicker().Name("datepicker") %>
     ```
-    ```tab-Razor
-
+    ```Razor
         @(Html.Kendo().DatePicker().Name("datepicker"))
     ```
 
@@ -243,7 +234,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
     **Figure 3. The final result**
 
-    ![Final result](/images/mvc5-final.png)
+    ![Final result](images/mvc5-final.png)
 
 ## Next Steps
 

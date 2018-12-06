@@ -13,67 +13,67 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI DateP
 
 ### Min Dates
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").MinDate(DateTime.Now)
 ```
-```tab-Current
+```Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Min(DateTime.Now)
 ```
 
 ### Max Dates
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").MaxDate(DateTime.Now)
 ```
-```tab-Current
+```Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Max(DateTime.Now)
 ```
 
 ### Footer
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").TodayButton(“d”)
 ```
-```tab-Current
+```Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
 ```
 
 ### ShowButton
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").ShowButton(false)
 ```
-```tab-Current
+```Current
 
     Not Supported
 ```
 
 ### ButtonTitle
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").ButtonTitle(“choose date”)
 
 ```
-```tab-Current
+```Current
 
     Not Supported
 ```
 
 ### OpenOnFocus
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").OpenOnFocus(true)
 ```
-```tab-Current
+```Current
 
     Not Supported
 ```
@@ -82,11 +82,11 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI DateP
 
 Set the `DateTime.MinValue` and show `nothing`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").Value(DateTime.MinValue)
 ```
-```tab-Current
+```Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Value(value == DateTime.MinValue ? null : value)
 ```
@@ -101,12 +101,12 @@ None of the widgets features the `OnLoad` event anymore. Use the `$(document).re
 
 ### Disable
 
-```tab-Previous
+```Previous
 
     var datePicker = $("#DatePicker").data("tDatePicker");
     datePicker.disable();
 ```
-```tab-Current
+```Current
 
     var datePicker = $("#datepicker").data("kendoDatePicker");
     datePicker.enable(false);

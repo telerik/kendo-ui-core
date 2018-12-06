@@ -20,40 +20,36 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a RadialGauge.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().RadialGauge()
-                    .Name("radialGauge") // The name of the radialGauge is mandatory. It specifies the "id" attribute of the widget.
-                    .Scale(scale => scale
-                        .Min(0) //Set the min value of the RadialGauge.
-                        .Max(200) //Set the min value of the RadialGauge.
-                    )
-                    .Pointer(pointer => pointer
-                        .Value(10) //Set the value of the RadialGauge.
-                    )
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().RadialGauge()
-                  .Name("radialGauge") //The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
-                  .Scale(scale => scale
-                      .Min(0) // Set the min value of the RadialGauge.
-                      .Max(200) // Set the min value of the RadialGauge.
-                  )
-                  .Pointer(pointer => pointer
-                      .Value(10) //Set the value of the RadialGauge.
-                  )
+    ```ASPX
+        <%: Html.Kendo().RadialGauge()
+            .Name("radialGauge") // The name of the radialGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Scale(scale => scale
+                .Min(0) //Set the min value of the RadialGauge.
+                .Max(200) //Set the min value of the RadialGauge.
             )
+            .Pointer(pointer => pointer
+                .Value(10) //Set the value of the RadialGauge.
+            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().RadialGauge()
+            .Name("radialGauge") //The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Scale(scale => scale
+                .Min(0) // Set the min value of the RadialGauge.
+                .Max(200) // Set the min value of the RadialGauge.
+            )
+            .Pointer(pointer => pointer
+                .Value(10) //Set the value of the RadialGauge.
+            )
+        )
     ```
 
 ## Reference
@@ -64,13 +60,13 @@ To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`
 
 ###### Example
 
-        //Put this after your Kendo UI RadialGauge for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI RadialGauge for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the RadialGauge is used to get its client-side instance.
             var gauge = $("#radialGauge").data("kendoRadialGauge");
         });
-        </script>
+    </script>
 
 ## See Also
 

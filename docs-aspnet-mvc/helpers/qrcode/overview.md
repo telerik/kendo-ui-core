@@ -20,51 +20,43 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a QRCode.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().QRCode()
+    ```ASPX
+        <%: Html.Kendo().QRCode()
             .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
             .Value("#ff0000") //Set the value of the QRCode.
-            %>
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().QRCode()
-                  .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
-                  .Value("#ff0000") //Set the value of the QRCode.
-            )
+    ```Razor
+        @(Html.Kendo().QRCode()
+            .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
+            .Value("#ff0000") //Set the value of the QRCode.
+        )
     ```
 
 1. Choose the appropriate correction level and/or encoding.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().QRCode()
-                    .Name("qrcode")
-                    .ErrorCorrection(QRErrorCorrectionLevel.H)
-                    .Encoding(QREncoding.ISO_8859_1)
-                    .Value("foo")
-            %>
+    ```ASPX
+        <%: Html.Kendo().QRCode()
+            .Name("qrcode")
+            .ErrorCorrection(QRErrorCorrectionLevel.H)
+            .Encoding(QREncoding.ISO_8859_1)
+            .Value("foo")
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().QRCode()
-                  .Name("qrcode")
-                  .ErrorCorrection(QRErrorCorrectionLevel.H)
-                  .Encoding(QREncoding.ISO_8859_1)
-                  .Value("foo")
-            )
+    ```Razor
+        @(Html.Kendo().QRCode()
+            .Name("qrcode")
+            .ErrorCorrection(QRErrorCorrectionLevel.H)
+            .Encoding(QREncoding.ISO_8859_1)
+            .Value("foo")
+        )
     ```
 
 ## Reference
@@ -75,13 +67,13 @@ To reference an existing Kendo UI QRCode instance, use the [`jQuery.data()`](htt
 
 ###### Example
 
-      //Put this after your Kendo QRCode for ASP.NET MVC declaration.
-      <script>
-      $(function() {
-          //Notice that the Name() of the QRCode is used to get its client-side instance.
-          var qrcode = $("#qrcode").data("kendoQRCode");
-      });
-      </script>
+    //Put this after your Kendo QRCode for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the QRCode is used to get its client-side instance.
+            var qrcode = $("#qrcode").data("kendoQRCode");
+        });
+    </script>
 
 ## See Also
 

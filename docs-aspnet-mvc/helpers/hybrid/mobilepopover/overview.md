@@ -23,92 +23,84 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                ViewBag.Message = "Welcome to ASP.NET MVC!";
+        public ActionResult Index()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
 
-                return View();
-            }
+            return View();
+        }
 
 1. Add a Kendo UI PopOver to the `Index` view. Like most hybrid Kendo UI widgets, the PopOver must be initialized within the hybrid View content.
 
-    ###### Example
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("popover-view")
+            .Title("Inbox")
+            .Header(() =>
+            {
+                %>
+                <%: Html.Kendo().MobileButton()
+                    .Align(MobileButtonAlign.Right)
+                    .Url("#popover") //the id of the popover
+                    .Text("Select location")
+                    .Rel(MobileButtonRel.PopOver) //rel must be set to open the popover
+                %>
+                <%
+            })
+            .Content(() =>
+            {
+                %>
 
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("popover-view")
-                    .Title("Inbox")
-                    .Header(() =>
-                    {
-                        %>
-                        <%: Html.Kendo().MobileButton()
-                            .Align(MobileButtonAlign.Right)
-                            .Url("#popover") //the id of the popover
-                            .Text("Select location")
-                            .Rel(MobileButtonRel.PopOver) //rel must be set to open the popover
-                        %>
-                        <%
-                    })
-                    .Content(() =>
-                    {
-                        %>
-
-                        <% Html.Kendo().MobilePopOver()
-                            .Name("popover")
-                               .Popup(popup => popup.Width("20em").Height("10.6em"))
-                               .Content(() =>
-                                {
-                                    %>
-                                    PopOver content
-                                    <%
-                                })
-                               .Render();
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
+                <% Html.Kendo().MobilePopOver()
+                    .Name("popover")
+                        .Popup(popup => popup.Width("20em").Height("10.6em"))
+                        .Content(() =>
+                        {
+                            %>
+                            PopOver content
+                            <%
+                        })
+                        .Render();
+                %>
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                    .Name("popover-view")
-                    .Title("Inbox")
-                    .Header(obj =>
-                        Html.Kendo().MobileButton()
-                            .Align(MobileButtonAlign.Right)
-                            .Url("#popover") //the id of the popover
-                            .Text("Select location")
-                            .Rel(MobileButtonRel.PopOver) //rel must be set to open the popover
-                    )
-                    .Content(obj =>
-                        Html.Kendo().MobilePopOver()
-                            .Name("popover")
-                            .Popup(popup => popup.Width("20em").Height("10.6em"))
-                            .Content(
-                                @<text>
-                                    PopOver content
-                                </text>)
-                    )
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("popover-view")
+            .Title("Inbox")
+            .Header(obj =>
+                Html.Kendo().MobileButton()
+                    .Align(MobileButtonAlign.Right)
+                    .Url("#popover") //the id of the popover
+                    .Text("Select location")
+                    .Rel(MobileButtonRel.PopOver) //rel must be set to open the popover
             )
+            .Content(obj =>
+                Html.Kendo().MobilePopOver()
+                    .Name("popover")
+                    .Popup(popup => popup.Width("20em").Height("10.6em"))
+                    .Content(
+                        @<text>
+                            PopOver content
+                        </text>)
+            )
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -121,48 +113,44 @@ You can subscribe to all hybrid PopOver [events](https://docs.telerik.com/kendo-
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <% Html.Kendo().MobilePopOver()
-                .Name("popOver")
-                .Content(() =>
-                {
-                    %>
-                    PopOver content
-                    <%
-                })
-                .Events(events => events
-                    .Close("onClose")
-                )
-                .Render();
-        %>
-
-        <script>
-        function onClose() {
-            //Handle the close event
-        }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().MobilePopOver()
+```ASPX
+    <% Html.Kendo().MobilePopOver()
             .Name("popOver")
-            .Content(
-                @<text>
-                    PopOver content
-                </text>)
-                .Events(events => events
-                    .Close("onClose")
-                )
-        )
+            .Content(() =>
+            {
+                %>
+                PopOver content
+                <%
+            })
+            .Events(events => events
+                .Close("onClose")
+            )
+            .Render();
+    %>
 
-        <script>
+    <script>
         function onClose() {
             //Handle the close event
         }
-        </script>
+    </script>
+```
+```Razor
+    @(Html.Kendo().MobilePopOver()
+        .Name("popOver")
+        .Content(
+            @<text>
+                PopOver content
+            </text>)
+            .Events(events => events
+                .Close("onClose")
+            )
+    )
+
+    <script>
+        function onClose() {
+            //Handle the close event
+        }
+    </script>
 ```
 
 ## Reference
@@ -173,19 +161,19 @@ You can reference a hybrid PopOver instance by using the code from the example b
 
 ###### Example
 
-        @(Html.Kendo().MobilePopOver()
-                .Name("popOver")
-                .Content(
-                @<text>
-                    PopOver content
-                </text>)
-        )
-        <script>
+    @(Html.Kendo().MobilePopOver()
+            .Name("popOver")
+            .Content(
+            @<text>
+                PopOver content
+            </text>)
+    )
+    <script>
         $(function() {
             // Notice that the Name() of the popover is used to get its client-side instance
             var popover = $("#popOver").data("kendoMobilePopOver");
         });
-        </script>
+    </script>
 
 ## See Also
 

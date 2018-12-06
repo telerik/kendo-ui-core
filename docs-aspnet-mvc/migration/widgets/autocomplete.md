@@ -16,11 +16,11 @@ To bind the AutoComplete to any collection, define the `DataTextField`. Note tha
 
 ### Separator
 
-```tab-Previous
+```Previous
 
     Html.Telerik().AutoComplete().Name(“AutoComplete”).Multiple(m => m.Separator(“, “))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().AutoComplete().Name(“AutoComplete”).Separator(“, “)
 ```

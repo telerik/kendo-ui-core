@@ -18,8 +18,6 @@ The chunk upload of files enables the user to send large files, which are upload
 
 To enable the chunk upload, set up the `ChunkSize` helper method ([`async.chunkSize`](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.chunkSize) option) of the Upload.
 
-###### Example
-
 ```razor
 @(Html.Kendo().Upload()
     .Name("files")
@@ -31,7 +29,6 @@ To enable the chunk upload, set up the `ChunkSize` helper method ([`async.chunkS
     )
 )
 ```
-
 ```cs
 [DataContract]
 public class ChunkMetaData
@@ -114,20 +111,18 @@ To modify or fine-tune the chunk upload, use any of the following configuration 
 
 ###### Example
 
-```Razor
-@(Html.Kendo().Upload()
-    .Name("files")
-    .Async(a => a
-        .Save("ChunkSave", "Upload")
-        .Remove("Remove", "Upload")
-        .AutoUpload(true)
-        .ChunkSize(1100) // Will separate the file into chunks of size 1100 bytes.
-        .Concurrent(true) // Will upload all files simultaneously.
-        .AutoRetryAfter(300) // Will attempt a failed chunk upload after 300ms.
-        .MaxAutoRetries(4) // Will attempt the same failed chunk upload 4 times.
+    @(Html.Kendo().Upload()
+        .Name("files")
+        .Async(a => a
+            .Save("ChunkSave", "Upload")
+            .Remove("Remove", "Upload")
+            .AutoUpload(true)
+            .ChunkSize(1100) // Will separate the file into chunks of size 1100 bytes.
+            .Concurrent(true) // Will upload all files simultaneously.
+            .AutoRetryAfter(300) // Will attempt a failed chunk upload after 300ms.
+            .MaxAutoRetries(4) // Will attempt the same failed chunk upload 4 times.
+        )
     )
-)
-```
 
 ## Transfer of Chunks
 

@@ -201,6 +201,7 @@ The most flexible form of data binding is to use the DataSource component. It is
 
 1. Add a new action method in your controller that returns the data set.
 
+
     ```Controller
             [HttpPost]
             public IActionResult _SpainElectricityProduction()

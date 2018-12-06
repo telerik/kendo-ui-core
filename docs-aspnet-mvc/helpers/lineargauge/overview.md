@@ -22,40 +22,36 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a LinearGauge.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().LinearGauge()
-                    .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
-                    .Scale(scale => scale
-                        .Min(0) //Set the min value of the LinearGauge.
-                        .Max(200) //Set the min value of the LinearGauge.
-                    )
-                    .Pointer(pointer => pointer
-                        .Value(10) //Set the value of the LinearGauge.
-                    )
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().LinearGauge()
-                  .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
-                  .Scale(scale => scale
-                      .Min(0) //Set the min value of the LinearGauge.
-                      .Max(200) //Set the min value of the LinearGauge.
-                  )
-                  .Pointer(pointer => pointer
-                      .Value(10) //Set the value of the LinearGauge.
-                  )
+    ```ASPX
+        <%: Html.Kendo().LinearGauge()
+            .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Scale(scale => scale
+                .Min(0) //Set the min value of the LinearGauge.
+                .Max(200) //Set the min value of the LinearGauge.
             )
+            .Pointer(pointer => pointer
+                .Value(10) //Set the value of the LinearGauge.
+            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().LinearGauge()
+            .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Scale(scale => scale
+                .Min(0) //Set the min value of the LinearGauge.
+                .Max(200) //Set the min value of the LinearGauge.
+            )
+            .Pointer(pointer => pointer
+                .Value(10) //Set the value of the LinearGauge.
+            )
+        )
     ```
 
 ## Reference
@@ -66,13 +62,13 @@ To reference an existing Kendo UI LinearGauge instance, use the [`jQuery.data()`
 
 ###### Example
 
-        //Put this after your Kendo UI LinearGauge for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI LinearGauge for ASP.NET MVC declaration.
+    <script>
         $(function() {
-        //Notice that the Name() of the LinearGauge is used to get its client-side instance.
+            //Notice that the Name() of the LinearGauge is used to get its client-side instance.
             var gauge = $("#linearGauge").data("kendoLinearGauge");
         });
-        </script>
+    </script>
 
 ## See Also
 

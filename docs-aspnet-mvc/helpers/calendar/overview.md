@@ -20,32 +20,28 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a Calendar.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().Calendar()
-                .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
-                .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
-                .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
-                .Value(DateTime.Now) //Set the value of the Calendar.
-            %>
+    ```ASPX
+        <%: Html.Kendo().Calendar()
+            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
+            .Value(DateTime.Now) //Set the value of the Calendar.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().Calendar()
-                .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
-                .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
-                .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
-                .Value(DateTime.Now) //Set the value of the Calendar.
-            )
+    ```Razor
+        @(Html.Kendo().Calendar()
+            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
+            .Value(DateTime.Now) //Set the value of the Calendar.
+        )
     ```
 
 ## Event Handling
@@ -58,35 +54,15 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().Calendar()
-            .Name("calendar")
-            .Events(e => e
-                .Change("calendar_change")
-                .Navigate("calendar_navigate")
-            )
-        %>
-        <script>
-        function calendar_navigate() {
-            //Handle the navigate event.
-        }
-
-        function calendar_change() {
-            //Handle the change event.
-        }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().Calendar()
-          .Name("calendar")
-          .Events(e => e
-                .Change("calendar_change")
-                .Navigate("calendar_navigate")
-          )
+```ASPX
+    <%: Html.Kendo().Calendar()
+        .Name("calendar")
+        .Events(e => e
+            .Change("calendar_change")
+            .Navigate("calendar_navigate")
         )
-        <script>
+    %>
+    <script>
         function calendar_navigate() {
             //Handle the navigate event.
         }
@@ -94,7 +70,25 @@ The following example demonstrates how to subscribe to events by a handler name.
         function calendar_change() {
             //Handle the change event.
         }
-        </script>
+    </script>
+```
+```Razor
+    @(Html.Kendo().Calendar()
+        .Name("calendar")
+        .Events(e => e
+            .Change("calendar_change")
+            .Navigate("calendar_navigate")
+        )
+    )
+    <script>
+        function calendar_navigate() {
+            //Handle the navigate event.
+        }
+
+        function calendar_change() {
+            //Handle the change event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -103,23 +97,22 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().Calendar()
-          .Name("calendar")
-          .Events(e => e
-              .Change(@<text>
-                function() {
-                    //Handle the change event inline.
-                }
-              </text>)
-              .Navigate(@<text>
-                function() {
-                    //Handle the navigate event inline.
-                }
-                </text>)
-          )
+```Razor
+    @(Html.Kendo().Calendar()
+        .Name("calendar")
+        .Events(e => e
+            .Change(@<text>
+            function() {
+                //Handle the change event inline.
+            }
+            </text>)
+            .Navigate(@<text>
+            function() {
+                //Handle the navigate event inline.
+            }
+            </text>)
         )
+    )
 ```
 
 ## Reference
@@ -130,13 +123,13 @@ To reference an existing Kendo UI Calendar instance, use the [`jQuery.data()`](h
 
 ###### Example
 
-        //Put this after your Kendo UI Calendar for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI Calendar for ASP.NET MVC declaration.
+    <script>
         $(function() {
-        //Notice that the Name() of the Calendar is used to get its client-side instance.
-        var calendar = $("#calendar").data("kendoCalendar");
+            //Notice that the Name() of the Calendar is used to get its client-side instance.
+            var calendar = $("#calendar").data("kendoCalendar");
         });
-        </script>
+    </script>
 
 ## See Also
 

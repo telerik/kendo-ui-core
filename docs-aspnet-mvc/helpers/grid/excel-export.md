@@ -20,9 +20,7 @@ For more information on this issue, refer to [this online demo](http://demos.tel
 
 The following example demonstrates how to enable the Excel export functionality.
 
-###### Example
-
-```tab-ASPX
+```ASPX
     <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Excel())
@@ -35,7 +33,7 @@ The following example demonstrates how to enable the Excel export functionality.
         )
     %>
 ```
-```tab-Razor
+```Razor
     @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Excel())
@@ -79,9 +77,7 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 
 The following example demonstrates how to export all the data.
 
-###### Example
-
-```tab-ASPX
+```ASPX
     <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Excel())
@@ -95,7 +91,7 @@ The following example demonstrates how to export all the data.
     )
     %>
 ```
-```tab-Razor
+```Razor
     @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Excel())
@@ -141,7 +137,7 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 ### Use Server-Side Processing
 
-To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
 
 TDP handles the data import, export, and processing from the following formats:
 

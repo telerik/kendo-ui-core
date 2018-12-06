@@ -15,13 +15,13 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Grid 
 
 The `DataKeys` configuration option is now moved to the `Datasource` model configuration.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")       
         .DataKeys(dataKeys => dataKeys.Add(o => o.OrderID))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -37,14 +37,14 @@ The `DataKeys` configuration option is now moved to the `Datasource` model confi
 
 The `DataBinding` configuration is now moved to the `Datasource`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")      
         .DataBinding(dataBinding => dataBinding.Ajax().Select("_AjaxBinding", "Grid"))
 
 ```
-```tab-Current    
+```Current    
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")  
@@ -60,13 +60,13 @@ The `DataBinding.WebService` configuration option is now removed.
 
 The `OperationMode` configuration option is now changed to `ServerOperation`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")      
         .DataBinding(dataBinding => dataBinding.Ajax().OperationMode(GridOperationMode.Client))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -91,7 +91,7 @@ The `DataBinding` `URL` methods are now renamed to match the Kendo UI `Datasourc
 
 The `DetailView.Clienttemplate` configuration option is now changed to `ClientDetailTemplateId`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")
@@ -101,7 +101,7 @@ The `DetailView.Clienttemplate` configuration option is now changed to `ClientDe
             .ToHtmlString()
         ))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -116,7 +116,7 @@ The `DetailView.Clienttemplate` configuration option is now changed to `ClientDe
 
 The `DetailView.Template` configuration option is now changed to `DetailTemplate`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid(Model)
         .Name("Employees")  
@@ -127,7 +127,7 @@ The `DetailView.Template` configuration option is now changed to `DetailTemplate
                     .Render();
         }))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid(Model)
         .Name("Employees")   
@@ -183,7 +183,7 @@ Inline edit forms are immediately closed when the update button is clicked. This
 
 The `DefaultDataItem` is now moved to the `DataSource` model configuration.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")                           
@@ -191,7 +191,7 @@ The `DefaultDataItem` is now moved to the `DataSource` model configuration.
             OrderDate = DateTime.Today
         }))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()    
         .Name("Grid")     
@@ -207,7 +207,7 @@ The `Visible` option is now removed. The same functionality can be achieved by s
 
 The `Groups` configuration option is now moved to the `Datasource`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")                        
@@ -215,7 +215,7 @@ The `Groups` configuration option is now moved to the `Datasource`.
             .Groups(groups => groups.Add(o => o.OrderDate))
         )    
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")    
@@ -229,13 +229,13 @@ The `Groups` configuration option is now moved to the `Datasource`.
 
 The `OrderBy` configuration option is now moved to the `DataSource` configuration.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Sortable(sortable => sortable.OrderBy(order => order.Add(o => o.OrderDate).Ascending()))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")    
@@ -249,13 +249,13 @@ The `OrderBy` configuration option is now moved to the `DataSource` configuratio
 
 The `Filters` configuration option is now moved to the `DataSource` configuration.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Filterable(filtarable => filtarable.Filters(filters => filters.Add(o => o.OrderDate).IsEqualTo(DateTime.Today))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")        
@@ -275,13 +275,13 @@ The `Filters` configuration option is now moved to the `DataSource` configuratio
 
 The `PageSize` and `Total` are now moved to the DataSource configuration.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Pageable(pageable => pageable.PageSize(42).Total(100))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()   
     .Name("Grid")        
@@ -296,7 +296,7 @@ The `PageSize` and `Total` are now moved to the DataSource configuration.
 
 The `Aggregates` configuration option is now moved to the DataSource configuration.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
@@ -306,7 +306,7 @@ The `Aggregates` configuration option is now moved to the DataSource configurati
             .Aggregate(agg => agg.Count());          
         })
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid"
@@ -322,7 +322,7 @@ The `Aggregates` configuration option is now moved to the DataSource configurati
 
 The `ReadOnly` configuration option is now moved to the `DataSource` model configuration.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
@@ -331,7 +331,7 @@ The `ReadOnly` configuration option is now moved to the `DataSource` model confi
             columns.Bound(o => o.OrderID).ReadOnly(true);          
         })
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")
@@ -356,13 +356,13 @@ The `ReadOnly` configuration option is now moved to the `DataSource` model confi
 
 The `NoRecordsTemplate` is now renamed to `NoRecords`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")
         .NoRecordsTemplate("foo")
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")

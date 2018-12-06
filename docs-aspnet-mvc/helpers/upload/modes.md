@@ -22,68 +22,54 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 1. Add a `form` declaration and set a `controller` action.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% using (Html.BeginForm("ProcessSubmit", "Home",
-                                     FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
-
-            <% } %>
+    ```ASPX
+        <% using (Html.BeginForm("ProcessSubmit", "Home",
+            FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
+        <% } %>
     ```
-    ```tab-Razor
-
-            @using (Html.BeginForm("ProcessSubmit", "Home",
-                                     FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
-
-            }
+    ```Razor
+        @using (Html.BeginForm("ProcessSubmit", "Home",
+            FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
+        }
     ```
 
 1. Add the Upload inside the form. The only required setting is `name`.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%= Html.Kendo().Upload()
-                    .Name("attachments")
-            %>
+    ```ASPX
+        <%= Html.Kendo().Upload()
+            .Name("attachments")
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().Upload()
-                    .Name("attachments")
-            )
+    ```Razor
+        @(Html.Kendo().Upload()
+            .Name("attachments")
+        )
     ```
 
 1. Add **Submit** and **Reset** buttons to the form.
 
     ###### Example
 
-            <input type="submit" value="Send" class="t-button" />
-            <input type="reset" value="Reset" class="t-button" />
+        <input type="submit" value="Send" class="t-button" />
+        <input type="reset" value="Reset" class="t-button" />
 
 1. The form should look like the one demonstrated in The following example.
 
-    ###### Example
+    ```ASPX
+        <% using (Html.BeginForm("ProcessSubmit", "Home",
+            FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
 
-    ```tab-ASPX
+            <%= Html.Kendo().Upload()
+                    .Name("attachments")
+            %>
 
-            <% using (Html.BeginForm("ProcessSubmit", "Home",
-                                     FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
-
-                <%= Html.Kendo().Upload()
-                        .Name("attachments")
-                %>
-
-                <input type="submit" value="Send" class="t-button" />
-                <input type="reset" value="Reset" class="t-button" />
-            <% } %>
+            <input type="submit" value="Send" class="t-button" />
+            <input type="reset" value="Reset" class="t-button" />
+        <% } %>
     ```
-    ```tab-Razor
-
+    ```Razor
             @using (Html.BeginForm("ProcessSubmit", "Home",
-                                     FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
+                FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
 
                 @(Html.Kendo().Upload()
                         .Name("attachments")
@@ -98,25 +84,25 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
     ###### Example
 
-            [HttpPost]
-            public ActionResult ProcessSubmit(IEnumerable<HttpPostedFileBase> attachments)
+        [HttpPost]
+        public ActionResult ProcessSubmit(IEnumerable<HttpPostedFileBase> attachments)
+        {
+            // The Name of the Upload component is "attachments"
+            if (attachments != null)
             {
-                // The Name of the Upload component is "attachments"
-                if (attachments != null)
+                foreach (var file in attachments)
                 {
-                    foreach (var file in attachments)
-                    {
-                        // Some browsers send file names with full path. We only care about the file name.
-                        var fileName = Path.GetFileName(file.FileName);
-                        var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                    // Some browsers send file names with full path. We only care about the file name.
+                    var fileName = Path.GetFileName(file.FileName);
+                    var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
 
-                        file.SaveAs(destinationPath);
-                    }
+                    file.SaveAs(destinationPath);
                 }
-
-                // Redirect to a view showing the result of the form submission.
-                return RedirectToAction("SubmitSummary");
             }
+
+            // Redirect to a view showing the result of the form submission.
+            return RedirectToAction("SubmitSummary");
+        }
 
 ## Asynchronous Mode
 
@@ -128,25 +114,21 @@ Below are listed the steps for you to follow when configuring the saving of the 
 
 1. Add the Upload to the view.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                    )
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                    )
+    ```ASPX
+        <%: Html.Kendo().Upload()
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
             )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().Upload()
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+            )
+        )
     ```
 
     The `name` attribute is required and must be unique. It is used as a form field name in the requests to the server.
@@ -155,21 +137,21 @@ Below are listed the steps for you to follow when configuring the saving of the 
 
     ###### Example
 
-            public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
+        public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
+        {
+            //The Name of the Upload component is "attachments".
+            foreach (var file in attachments)
             {
-                //The Name of the Upload component is "attachments".
-                foreach (var file in attachments)
-                {
-                    //Some browsers send file names with a full path. You only care about the file name.
-                    var fileName = Path.GetFileName(file.FileName);
-                    var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                //Some browsers send file names with a full path. You only care about the file name.
+                var fileName = Path.GetFileName(file.FileName);
+                var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
 
-                    file.SaveAs(destinationPath);
-                }
-
-                //Return an empty string to signify success.
-                return Content("");
+                file.SaveAs(destinationPath);
             }
+
+            //Return an empty string to signify success.
+            return Content("");
+        }
 
 1. Build and run the application. The uploaded files appear in the `App_Data` folder.
 
@@ -181,51 +163,47 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 1. Specify a `Remove` action.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%= Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                        .Remove("Remove", "Home")
-                    )
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                        .Remove("Remove", "Home")
-                    )
+    ```ASPX
+        <%= Html.Kendo().Upload()
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+                .Remove("Remove", "Home")
             )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().Upload()
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+                .Remove("Remove", "Home")
+            )
+        )
     ```
 
 1. Implement the `Remove` action. It takes a `fileNames` parameter of type `string[]`.
 
     ###### Example
 
-            public ActionResult Remove(string[] fileNames)
+        public ActionResult Remove(string[] fileNames)
+        {
+            foreach (var fullName in fileNames)
             {
-                foreach (var fullName in fileNames)
+                var fileName = Path.GetFileName(fullName);
+                var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+                // TODO: Verify user permissions
+
+                if (System.IO.File.Exists(physicalPath))
                 {
-                    var fileName = Path.GetFileName(fullName);
-                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
-
-                    // TODO: Verify user permissions
-
-                    if (System.IO.File.Exists(physicalPath))
-                    {
-                        System.IO.File.Delete(physicalPath);
-                    }
+                    System.IO.File.Delete(physicalPath);
                 }
-
-                //Return an empty string to signify success
-                return Content("");
             }
+
+            //Return an empty string to signify success
+            return Content("");
+        }
 
 > **Important**
 >
@@ -235,27 +213,23 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 The selected files are uploaded immediately by default. You can change this behavior by setting `AutoUpload` to `false`.
 
-###### Example
-
-```tab-ASPX
-
-        <%= Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                    .AutoUpload(false)
-                )
-        %>
-```
-```tab-Razor
-
-        @(Html.Kendo().Upload()
-                .Name("attachments")
-                .Async(async => async
-                    .Save("Save", "Home")
-                    .AutoUpload(false)
-                )
+```ASPX
+    <%= Html.Kendo().Upload()
+        .Name("attachments")
+        .Async(async => async
+            .Save("Save", "Home")
+            .AutoUpload(false)
         )
+    %>
+```
+```Razor
+    @(Html.Kendo().Upload()
+        .Name("attachments")
+        .Async(async => async
+            .Save("Save", "Home")
+            .AutoUpload(false)
+        )
+    )
 ```
 
 ## See Also

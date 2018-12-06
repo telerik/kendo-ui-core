@@ -34,16 +34,16 @@ Below are listed some of the possible solutions for you to apply when resolving 
 
     ###### Example
 
-            public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-            {
-                var data = GetData();
-                var serializer = new JavaScriptSerializer();
-                var result = new ContentResult();
-                serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
-                result.Content = serializer.Serialize(data.ToDataSourceResult(request));
-                result.ContentType = "application/json";
-                return result;
-            }
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var data = GetData();
+            var serializer = new JavaScriptSerializer();
+            var result = new ContentResult();
+            serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
+            result.Content = serializer.Serialize(data.ToDataSourceResult(request));
+            result.ContentType = "application/json";
+            return result;
+        }
 
 ## Error Messages
 

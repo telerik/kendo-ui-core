@@ -30,36 +30,32 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a PanelBar.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().PanelBar()
-                    .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
-                    .Items(items =>
-                    {
-                        items.Add().Text("Item 1"); //Add item with text "Item1")
-                        items.Add().Text("Item 2"); //Add item with text "Item2")
-                    })
-            %>
+    ```ASPX
+        <%: Html.Kendo().PanelBar()
+            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add item with text "Item1")
+                items.Add().Text("Item 2"); //Add item with text "Item2")
+            })
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().PanelBar()
-                  .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
-                  .Items(items =>
-                  {
-                      items.Add().Text("Item 1"); //Add item with text "Item1")
-                      items.Add().Text("Item 2"); //Add item with text "Item2")
-                  })
-            )
+    ```Razor
+        @(Html.Kendo().PanelBar()
+            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add item with text "Item1")
+                items.Add().Text("Item 2"); //Add item with text "Item2")
+            })
+        )
     ```
 
 ### Expand Mode
@@ -67,54 +63,50 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 The PanelBar provides the `Single` or `Multiple` expand mode options.
 
 * If `ExpandMode` is set to `Single`, the user can expand only a single root item or a single child item of a specific parent item. Expanding another root item or another child of the currently expanded item's parent will collapse the currently expanded item. This approach is also the only way to collapse an expanded item in the `single` expand mode.
-* If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them. 	
+* If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them.
 
-    ###### Example
-
-    ```tab-Razor
-
-            @(Html.Kendo().PanelBar()
-                .Name("panelbar")
-                .ExpandMode(PanelBarExpandMode.Single)
-                .Items(items =>
+```Razor
+    @(Html.Kendo().PanelBar()
+        .Name("panelbar")
+        .ExpandMode(PanelBarExpandMode.Single)
+        .Items(items =>
+        {
+            items.Add().Text("Root1")
+                .Items(subitems =>
                 {
-                    items.Add().Text("Root1")
-                        .Items(subitems =>
-                        {
-                            subitems.Add().Text("Level2 1");
-                            subitems.Add().Text("Level2 2");
-                        });
-                    items.Add().Text("Root2")
-                        .Items(subitems =>
-                        {
-                            subitems.Add().Text("Level2 1");
-                            subitems.Add().Text("Level2 2");
-                        });
-                })
-            )
-    ```
-	```tab-ASPX
-
-            <%: Html.Kendo().PanelBar()
-                .Name("panelbar")
-                .ExpandMode(PanelBarExpandMode.Single)
-                .Items(items =>
+                    subitems.Add().Text("Level2 1");
+                    subitems.Add().Text("Level2 2");
+                });
+            items.Add().Text("Root2")
+                .Items(subitems =>
                 {
-                    items.Add().Text("Root1")
-                        .Items(subitems =>
-                        {
-                            subitems.Add().Text("Level2 1");
-                            subitems.Add().Text("Level2 2");
-                        });
-                    items.Add().Text("Root2")
-                        .Items(subitems =>
-                        {
-                            subitems.Add().Text("Level2 1");
-                            subitems.Add().Text("Level2 2");
-                        });
-                })
-            %>
-    ```
+                    subitems.Add().Text("Level2 1");
+                    subitems.Add().Text("Level2 2");
+                });
+        })
+    )
+```
+```ASPX
+    <%: Html.Kendo().PanelBar()
+        .Name("panelbar")
+        .ExpandMode(PanelBarExpandMode.Single)
+        .Items(items =>
+        {
+            items.Add().Text("Root1")
+                .Items(subitems =>
+                {
+                    subitems.Add().Text("Level2 1");
+                    subitems.Add().Text("Level2 2");
+                });
+            items.Add().Text("Root2")
+                .Items(subitems =>
+                {
+                    subitems.Add().Text("Level2 1");
+                    subitems.Add().Text("Level2 2");
+                });
+        })
+    %>
+```
 
 ### Sitemap Binding
 
@@ -126,50 +118,46 @@ Below are listed the steps for you to follow when binding a Kendo UI PanelBar to
 
     ###### Example
 
-            <?xml version="1.0" encoding="utf-8" ?>
-            <siteMap>
-              <siteMapNode title="Home" controller="Home" action="Overview">
-                <siteMapNode title="Grid">
-                  <siteMapNode controller="grid" action="index" title="First Look (Razor)" area="razor"/>
-                  <siteMapNode controller="grid" action="index" title="First Look (ASPX)" area="aspx"/>
-                </siteMapNode>
-                <siteMapNode title="PanelBar">
-                  <siteMapNode controller="panelbar" action="index" title="First Look (Razor)" area="razor"/>
-                  <siteMapNode controller="panelbar" action="index" title="First Look (ASPX)" area="aspx"/>
-                </siteMapNode>
-              </siteMapNode>
-            </siteMap>
+        <?xml version="1.0" encoding="utf-8" ?>
+        <siteMap>
+            <siteMapNode title="Home" controller="Home" action="Overview">
+            <siteMapNode title="Grid">
+                <siteMapNode controller="grid" action="index" title="First Look (Razor)" area="razor"/>
+                <siteMapNode controller="grid" action="index" title="First Look (ASPX)" area="aspx"/>
+            </siteMapNode>
+            <siteMapNode title="PanelBar">
+                <siteMapNode controller="panelbar" action="index" title="First Look (Razor)" area="razor"/>
+                <siteMapNode controller="panelbar" action="index" title="First Look (ASPX)" area="aspx"/>
+            </siteMapNode>
+            </siteMapNode>
+        </siteMap>
 
 1. Load the sitemap using the `SiteMapManager`.
 
     ###### Example
 
-            public ActionResult Index()
+        public ActionResult Index()
+        {
+            if (!SiteMapManager.SiteMaps.ContainsKey("sample"))
             {
-                if (!SiteMapManager.SiteMaps.ContainsKey("sample"))
-                {
-                    SiteMapManager.SiteMaps.Register<XmlSiteMap>("sample", sitmap => sitmap.LoadFrom("~/sample.sitemap"));
-                }
-                return View();
+                SiteMapManager.SiteMaps.Register<XmlSiteMap>("sample", sitmap => sitmap.LoadFrom("~/sample.sitemap"));
             }
+            return View();
+        }
 
 1. Add a PanelBar.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().PanelBar()
-                    .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
-                    .BindTo("sample") //bind to sitemap with name "sample"
-            %>
+    ```ASPX
+        <%: Html.Kendo().PanelBar()
+            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo("sample") //bind to sitemap with name "sample"
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().PanelBar()
-                  .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
-                  .BindTo("sample") //bind to sitemap with name "sample"
-            )
+    ```Razor
+        @(Html.Kendo().PanelBar()
+            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo("sample") //bind to sitemap with name "sample"
+        )
     ```
 
 ### Model Binding
@@ -182,70 +170,62 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                NorthwindDataContext northwind = new NorthwindDataContext();
+        public ActionResult Index()
+        {
+            NorthwindDataContext northwind = new NorthwindDataContext();
 
-                return View(northwind.Categories);
-            }
+            return View(northwind.Categories);
+        }
 
 1. Make your view strongly typed.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-                Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
     ```
-    ```tab-Razor
-
-            @model IEnumerable<MvcApplication1.Models.Category>
+    ```Razor
+        @model IEnumerable<MvcApplication1.Models.Category>
     ```
 
 1. Add a PanelBar.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().PanelBar()
-                    .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
-                    .BindTo(Model, mappings =>
+    ```ASPX
+        <%: Html.Kendo().PanelBar()
+            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo(Model, mappings =>
+            {
+                mappings.For<category>(binding => binding //define first level of panelbar
+                    .ItemDataBound((item, category) => //define mapping between panelbar item properties and the model properties
                     {
-                        mappings.For<category>(binding => binding //define first level of panelbar
-                            .ItemDataBound((item, category) => //define mapping between panelbar item properties and the model properties
-                            {
-                                item.Text = category.CategoryName;
-                            })
-                            .Children(category => category.Products)); //define which property of the model contains the children
-                        mappings.For<product>(binding => binding
-                            .ItemDataBound((item, product) =>
-                            {
-                                item.Text = product.ProductName;
-                            }));
+                        item.Text = category.CategoryName;
                     })
-                %>
+                    .Children(category => category.Products)); //define which property of the model contains the children
+                mappings.For<product>(binding => binding
+                    .ItemDataBound((item, product) =>
+                    {
+                        item.Text = product.ProductName;
+                    }));
+            })
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().PanelBar()
-                  .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
-                  .BindTo(Model, mappings =>
-                   {
-                       mappings.For<category>(binding => binding //define first level of panelbar
-                           .ItemDataBound((item, category) => //define mapping between panelbar item properties and the model properties
-                               {
-                               item.Text = category.CategoryName;
-                               })
-                           .Children(category => category.Products)); //define which property of the model contains the children
-                       mappings.For<product>(binding => binding
-                           .ItemDataBound((item, product) =>
-                               {
-                               item.Text = product.ProductName;
-                               }));
-                   })
-            )
+    ```Razor
+        @(Html.Kendo().PanelBar()
+            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo(Model, mappings =>
+            {
+                mappings.For<category>(binding => binding //define first level of panelbar
+                    .ItemDataBound((item, category) => //define mapping between panelbar item properties and the model properties
+                        {
+                        item.Text = category.CategoryName;
+                        })
+                    .Children(category => category.Products)); //define which property of the model contains the children
+                mappings.For<product>(binding => binding
+                    .ItemDataBound((item, product) =>
+                        {
+                        item.Text = product.ProductName;
+                        }));
+            })
+        )
     ```
 
 ### Security Trimming
@@ -267,18 +247,15 @@ You can subscribe to all PanelBar [events](http://docs.telerik.com/kendo-ui/api/
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().PanelBar()
-                .Name("panelbar")
-                .Events(e => e
-                    .Expand("panelbar_expand")
-                    .Collapse("panelbar_collapse")
-                )
-        %>
-        <script>
+```ASPX
+    <%: Html.Kendo().PanelBar()
+            .Name("panelbar")
+            .Events(e => e
+                .Expand("panelbar_expand")
+                .Collapse("panelbar_collapse")
+            )
+    %>
+    <script>
         function panelbar_collapse() {
             //Handle the collapse event
         }
@@ -286,18 +263,17 @@ The following example demonstrates how to subscribe to events by a handler name.
         function panelbar_expand() {
             //Handle the expand event
         }
-        </script>
+    </script>
 ```
-```tab-Razor
-
-        @(Html.Kendo().PanelBar()
-              .Name("panelbar")
-              .Events(e => e
-                    .Expand("panelbar_expand")
-                    .Collapse("panelbar_collapse")
-              )
-        )
-        <script>
+```Razor
+    @(Html.Kendo().PanelBar()
+            .Name("panelbar")
+            .Events(e => e
+                .Expand("panelbar_expand")
+                .Collapse("panelbar_collapse")
+            )
+    )
+    <script>
         function panelbar_collapse() {
             //Handle the collapse event
         }
@@ -305,7 +281,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         function panelbar_expand() {
             //Handle the expand event
         }
-        </script>
+    </script>
 ```
 
 ### By Template Delegate
@@ -314,24 +290,21 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().PanelBar()
-              .Name("panelbar")
-              .Events(e => e
-                  .Expand(@<text>
-                    function() {
-                        //Handle the expand event inline
-                    }
-                  </text>)
-                  .Collapse(@<text>
-                    function() {
-                        //Handle the collapse event inline
-                    }
-                    </text>)
-              )
+    @(Html.Kendo().PanelBar()
+        .Name("panelbar")
+        .Events(e => e
+            .Expand(@<text>
+                function() {
+                    //Handle the expand event inline
+                }
+            </text>)
+            .Collapse(@<text>
+                function() {
+                    //Handle the collapse event inline
+                }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
@@ -341,13 +314,13 @@ To reference an existing Kendo UI PanelBar instance, use the [`jQuery.data()`](h
 
 ###### Example
 
-      //Put this after your Kendo PanelBar for ASP.NET MVC declaration
-      <script>
-      $(function() {
-          // Notice that the Name() of the panelbar is used to get its client-side instance
-          var panelbar = $("#panelbar").data("kendoPanelBar");
-      });
-      </script>
+    //Put this after your Kendo PanelBar for ASP.NET MVC declaration
+    <script>
+        $(function() {
+            // Notice that the Name() of the panelbar is used to get its client-side instance
+            var panelbar = $("#panelbar").data("kendoPanelBar");
+        });
+    </script>
 
 ## See Also
 

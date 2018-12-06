@@ -20,32 +20,28 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add the Upload to the view.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                    )
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                    )
+    ```ASPX
+        <%: Html.Kendo().Upload()
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
             )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().Upload()
+            .Name("attachments")
+            .Async(async => async
+                .Save("Save", "Home")
+            )
+        )
     ```
 
     The name attribute is required and must be unique. It is used as a form field name in the requests to the server.
@@ -54,21 +50,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
 
     ###### Example
 
-            public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
+        public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
+        {
+            //The Name of the Upload component is "attachments".
+            foreach (var file in attachments)
             {
-                //The Name of the Upload component is "attachments".
-                foreach (var file in attachments)
-                {
-                    //Some browsers send file names with a full path. You only care about the file name.
-                    var fileName = Path.GetFileName(file.FileName);
-                    var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                //Some browsers send file names with a full path. You only care about the file name.
+                var fileName = Path.GetFileName(file.FileName);
+                var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
 
-                    file.SaveAs(destinationPath);
-                }
-
-                //Return an empty string to signify success.
-                return Content("");
+                file.SaveAs(destinationPath);
             }
+
+            //Return an empty string to signify success.
+            return Content("");
+        }
 
 1. Build and run the application. The uploaded files appear in the `App_Data` folder.
 
@@ -80,37 +76,15 @@ You can subscribe to all Upload [events](http://docs.telerik.com/kendo-ui/api/ja
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().Upload()
-                .Name("attachments")
-                .Events(e => e
-                    .Upload("onUpload")
-                    .Success("onSuccess")
-                )
-        %>
-        <script>
-        function onUpload(e) {
-            //Handle the upload event.
-        }
-
-        function onSuccess() {
-            //Handle the success event.
-        }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().Upload()
-                .Name("attachments")
-                .Events(e => e
-                    .Upload("onUpload")
-                    .Success("onSuccess")
-                )
+```ASPX
+    <%: Html.Kendo().Upload()
+        .Name("attachments")
+        .Events(e => e
+            .Upload("onUpload")
+            .Success("onSuccess")
         )
-        <script>
+    %>
+    <script>
         function onUpload(e) {
             //Handle the upload event.
         }
@@ -118,7 +92,25 @@ The following example demonstrates how to subscribe to events by a handler name.
         function onSuccess() {
             //Handle the success event.
         }
-        </script>
+    </script>
+```
+```Razor
+    @(Html.Kendo().Upload()
+        .Name("attachments")
+        .Events(e => e
+            .Upload("onUpload")
+            .Success("onSuccess")
+        )
+    )
+    <script>
+        function onUpload(e) {
+            //Handle the upload event.
+        }
+
+        function onSuccess() {
+            //Handle the success event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -127,24 +119,21 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().Upload()
-              .Name("attachments")
-              .Events(e => e
-                  .Upload(@<text>
-                    function() {
-                        //Handle the upload event inline.
-                    }
-                  </text>)
-                  .Success(@<text>
-                    function() {
-                        //Handle the success event inline.
-                    }
-                    </text>)
-              )
+    @(Html.Kendo().Upload()
+        .Name("attachments")
+        .Events(e => e
+            .Upload(@<text>
+            function() {
+                //Handle the upload event inline.
+            }
+            </text>)
+            .Success(@<text>
+            function() {
+                //Handle the success event inline.
+            }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
@@ -154,13 +143,13 @@ To reference an existing Kendo UI Upload instance, use the [`jQuery.data()`](htt
 
 ###### Example
 
-        //Put this after your Kendo UI Upload for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI Upload for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the Upload is used to get its client-side instance.
             var upload = $("#attachments").data("kendoUpload");
         });
-        </script>
+    </script>
 
 ## See Also
 

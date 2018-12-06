@@ -33,13 +33,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
     **Figure 1. A new entity model**
 
-    ![New entity data model](/helpers/dropdowntree/images/ddtree-entity-data-model.png)
+    ![New entity data model](images/ddtree-entity-data-model.png)
 
 1. Select the **Employees** table and click **Finish**.
 
     **Figure 2. Choose the Employees table**
 
-    ![Choose the Employees table](/helpers/dropdowntree/images/ddtree-employees-table.png)
+    ![Choose the Employees table](images/ddtree-employees-table.png)
 
 ### Configure the New Action Method
 
@@ -69,11 +69,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 1. Open `Views/Index.cshtml`, or `Views/Index.aspx`, and add a DropDownTree.
 
-    ###### Example
-
-
-    ```tab-Razor
-
+    ```Razor
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree")
         // The property that specifies the text of the node
@@ -93,8 +89,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
         )
     )
     ```
-     ```tab-ASPX
-
+    ```ASPX
     <%: Html.Kendo().DropDownTree()
         .Name("dropdowntree")
         // The property that specifies the text of the node
@@ -119,7 +114,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
     **Figure 3. The final result**
 
-    ![Final result](/helpers/dropdowntree/images/ddtree-employee-output.png)
+    ![Final result](images/ddtree-employee-output.png)
 
 ## See Also
 

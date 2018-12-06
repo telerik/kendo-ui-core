@@ -30,36 +30,32 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a TabStrip.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().TabStrip()
-                    .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
-                    .Items(items =>
-                    {
-                        items.Add().Text("Item 1"); //Add an item with the text "Item1".
-                        items.Add().Text("Item 2"); //Add an item with the text "Item2".
-                    })
-            %>
+    ```ASPX
+        <%: Html.Kendo().TabStrip()
+            .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add an item with the text "Item1".
+                items.Add().Text("Item 2"); //Add an item with the text "Item2".
+            })
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().TabStrip()
-                .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
-                .Items(items =>
-                {
-                    items.Add().Text("Item 1"); //Add item with text "Item1")
-                    items.Add().Text("Item 2"); //Add item with text "Item2")
-                })
-            )
+    ```Razor
+        @(Html.Kendo().TabStrip()
+            .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add item with text "Item1")
+                items.Add().Text("Item 2"); //Add item with text "Item2")
+            })
+        )
     ```
 
 ### Sitemap Binding
@@ -72,44 +68,40 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
 
     ###### Example
 
-            <?xml version="1.0" encoding="utf-8" ?>
-            <siteMap>
-              <siteMapNode title="Home" controller="Home" action="Overview">
-              <siteMapNode controller="grid" action="index" title="Grid" />
-              <siteMapNode controller="tabstrip" action="index" title="TabStrip" />
-              </siteMapNode>
-            </siteMap>
+        <?xml version="1.0" encoding="utf-8" ?>
+        <siteMap>
+            <siteMapNode title="Home" controller="Home" action="Overview">
+            <siteMapNode controller="grid" action="index" title="Grid" />
+            <siteMapNode controller="tabstrip" action="index" title="TabStrip" />
+            </siteMapNode>
+        </siteMap>
 
 1. Load the sitemap using `SiteMapManager`.
 
     ###### Example
 
-            public ActionResult Index()
+        public ActionResult Index()
+        {
+            if (!SiteMapManager.SiteMaps.ContainsKey("sample"))
             {
-                if (!SiteMapManager.SiteMaps.ContainsKey("sample"))
-                {
-                    SiteMapManager.SiteMaps.Register<xmlsitemap>("sample", sitmap => sitmap.LoadFrom("~/sample.sitemap"));
-                }
-                return View();
+                SiteMapManager.SiteMaps.Register<xmlsitemap>("sample", sitmap => sitmap.LoadFrom("~/sample.sitemap"));
             }
+            return View();
+        }
 
 1. Add a TabStrip.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().TabStrip()
-                    .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
-                    .BindTo("sample") //Bind to the sitemap with the name "sample".
-            %>
+    ```ASPX
+        <%: Html.Kendo().TabStrip()
+            .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo("sample") //Bind to the sitemap with the name "sample".
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().TabStrip()
-                .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
-                .BindTo("sample") //Bind to the sitemap with the name "sample".
-            )
+    ```Razor
+        @(Html.Kendo().TabStrip()
+            .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo("sample") //Bind to the sitemap with the name "sample".
+        )
     ```
 
 ### Model Binding
@@ -122,50 +114,42 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                NorthwindDataContext northwind = new NorthwindDataContext();
+        public ActionResult Index()
+        {
+            NorthwindDataContext northwind = new NorthwindDataContext();
 
-                return View(northwind.Categories);
-            }
+            return View(northwind.Categories);
+        }
 
 1. Make your view strongly typed.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-                Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
     ```
-    ```tab-Razor
-
-            @model IEnumerable<MvcApplication1.Models.Category>
+    ```Razor
+        @model IEnumerable<MvcApplication1.Models.Category>
     ```
 
 1. Add a TabStrip.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().TabStrip()
-                .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
-                .BindTo(Model,(item,category)  =>
-                {
-                    item.Text = category.CategoryName;
-                })
-            %>
+    ```ASPX
+        <%: Html.Kendo().TabStrip()
+            .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo(Model,(item,category)  =>
+            {
+                item.Text = category.CategoryName;
+            })
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().TabStrip()
-                .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
-                .BindTo(Model,(item,category)  =>
-                {
-                    item.Text = category.CategoryName;
-                })
-            )
+    ```Razor
+        @(Html.Kendo().TabStrip()
+            .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
+            .BindTo(Model,(item,category)  =>
+            {
+                item.Text = category.CategoryName;
+            })
+        )
     ```
 
 ### Security Trimming
@@ -185,19 +169,19 @@ If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a TabStrip
 
 ###### Example
 
-        @{Html.Kendo().TabStrip()
-            .Name("TabStrip1")
-            .Items(tabstrip =>
-            {
-                tabstrip.Add().Text("Tab 1")
-                    .Content(@<text>
-                        @using (Ajax.BeginForm("...", "..."))
-                        {
-                            ...
-                        }
-                    </text>);
-            }).Render();
-        }
+    @{Html.Kendo().TabStrip()
+        .Name("TabStrip1")
+        .Items(tabstrip =>
+        {
+            tabstrip.Add().Text("Tab 1")
+                .Content(@<text>
+                    @using (Ajax.BeginForm("...", "..."))
+                    {
+                        ...
+                    }
+                </text>);
+        }).Render();
+    }
 
 The above implementation is not required if the form is placed inside a partial view, which is loaded with Ajax via `.LoadContentFrom()`, or if a plain HTML `<form>` tag is used.
 
@@ -209,35 +193,31 @@ You can subscribe to all TabStrip [events](http://docs.telerik.com/kendo-ui/api/
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-      <%: Html.Kendo().TabStrip()
-              .Name("tabstrip")
-              .Events(e => e
-                  .Select("tabstrip_select")
-              )
-      %>
-      <script>
-      function tabstrip_select() {
-          //Handle the Select event.
-      }
-      </script>
-```
-```tab-Razor
-
-      @(Html.Kendo().TabStrip()
+```ASPX
+    <%: Html.Kendo().TabStrip()
             .Name("tabstrip")
             .Events(e => e
-                  .Select("tabstrip_select")
+                .Select("tabstrip_select")
             )
-      )
-      <script>
-      function tabstrip_select() {
-          //Handle the Select event.
-      }
-      </script>
+    %>
+    <script>
+        function tabstrip_select() {
+            //Handle the Select event.
+        }
+    </script>
+```
+```Razor
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip")
+        .Events(e => e
+                .Select("tabstrip_select")
+        )
+    )
+    <script>
+        function tabstrip_select() {
+            //Handle the Select event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -246,19 +226,16 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-      @(Html.Kendo().TabStrip()
-            .Name("tabstrip")
-            .Events(e => e
-                .Select(@<text>
-                  function() {
-                      //Handle the Select event inline.
-                  }
-                </text>)
-            )
-      )
-```
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip")
+        .Events(e => e
+            .Select(@<text>
+                function() {
+                    //Handle the Select event inline.
+                }
+            </text>)
+        )
+    )
 
 ## Reference
 
@@ -268,13 +245,13 @@ To reference an existing Kendo UI TabStrip instance, use the [`jQuery.data()`](h
 
 ###### Example
 
-      //Put this after your Kendo UI TabStrip for ASP.NET MVC declaration.
-      <script>
-      $(function() {
-          //Notice that the Name() of the TabStrip is used to get its client-side instance.
-          var tabstrip = $("#tabstrip").data("kendoTabStrip");
-      });
-      </script>
+    //Put this after your Kendo UI TabStrip for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the TabStrip is used to get its client-side instance.
+            var tabstrip = $("#tabstrip").data("kendoTabStrip");
+        });
+    </script>
 
 ## See Also
 

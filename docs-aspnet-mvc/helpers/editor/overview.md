@@ -22,28 +22,26 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add an Editor.
 
     ###### Example
 
-    ```tab-ASPX
-
-            <%: Html.Kendo().Editor()
-                    .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
-                    .Value("<p>Initial value</p>") //Set the value of the Editor.
-            %>
+    ```ASPX
+        <%: Html.Kendo().Editor()
+                .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+                .Value("<p>Initial value</p>") //Set the value of the Editor.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().Editor()
-                  .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
-                  .Value("<p>Initial value</p>") //Set the value of the Editor.
-            )
+    ```Razor
+        @(Html.Kendo().Editor()
+                .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+                .Value("<p>Initial value</p>") //Set the value of the Editor.
+        )
     ```
 
 ### Server Value Processing
@@ -52,15 +50,15 @@ The Editor value is posted as a string and mapped to a variable with the name of
 
 ###### Example
 
-        [HttpPost]
-        public ActionResult Save(string editor)
-        {
-            string value = HttpUtility.HtmlDecode(editor);
+    [HttpPost]
+    public ActionResult Save(string editor)
+    {
+        string value = HttpUtility.HtmlDecode(editor);
 
-            return View();
-        }
+        return View();
+    }
 
-> **Important**  
+> **Important**
 >
 > You can suppress the Editor encoding by specifying `Encode(false)` via the fluent API and adding the [`AllowHtml` attribute](http://msdn.microsoft.com/en-us/library/system.web.mvc.allowhtmlattribute(v=vs.118).aspx) to the model field that stores the HTML.
 
@@ -74,33 +72,31 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().Editor()
-                .Name("editor")
-                .Events(e => e
-                    .Change("editor_change")
-                )
-        %>
-        <script>
-            function editor_change() {
-                //Handle the change event.
-            }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().Editor()
-              .Name("editor")
-              .Events(e => e
-                    .Change("editor_change")
-              )
+```ASPX
+    <%: Html.Kendo().Editor()
+        .Name("editor")
+        .Events(e => e
+            .Change("editor_change")
         )
-        <script>
-            function editor_change() {
-                //Handle the change event.
-            }
-        </script>
+    %>
+    <script>
+        function editor_change() {
+            //Handle the change event.
+        }
+    </script>
+```
+```Razor
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .Events(e => e
+            .Change("editor_change")
+        )
+    )
+    <script>
+        function editor_change() {
+            //Handle the change event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -109,18 +105,17 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().Editor()
-              .Name("editor")
-              .Events(e => e
-                  .Change(@<text>
-                    function() {
-                        //Handle the change event inline.
-                    }
-                    </text>)
-              )
+```Razor
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .Events(e => e
+            .Change(@<text>
+            function() {
+                //Handle the change event inline.
+            }
+            </text>)
         )
+    )
 ```
 
 ## Reference
@@ -130,14 +125,13 @@ The following example demonstrates how to subscribe to events by a template dele
 To reference an existing Kendo UI Editor instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Editor API](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor#methods) to control its behavior.
 
 ###### Example
-
-        //Put this after your Kendo UI Editor for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI Editor for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the Editor is used to get its client-side instance.
             var editor = $("#editor").data("kendoEditor");
         });
-        </script>
+    </script>
 
 ## See Also
 

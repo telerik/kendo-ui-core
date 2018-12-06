@@ -32,10 +32,7 @@ Set the `ProxyURL` option to specify the server proxy URL.
 
 The example below demonstrates the user server proxy.
 
-###### Example
-
-```tab-Controller
-
+```Controller
     public class ProxyController : Controller
     {
         [HttpPost]
@@ -47,8 +44,7 @@ The example below demonstrates the user server proxy.
         }
     }
 ```
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Excel())
@@ -62,7 +58,7 @@ The example below demonstrates the user server proxy.
         )
     %>
 ```
-```tab-Razor
+```Razor
 
     @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")

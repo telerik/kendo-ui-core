@@ -14,43 +14,43 @@ The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI Tool
 
 ### Initialization
 
-The following example demonstrates how to initialize the ToolBar.  
+The following example demonstrates how to initialize the ToolBar.
 
 ###### Example
 
-      @(Html.Kendo().ToolBar()
-          .Name("ToolBar")
-          .Items(items => {
+    @(Html.Kendo().ToolBar()
+        .Name("ToolBar")
+        .Items(items => {
 
-              //A regular button.
-              items.Add().Type(CommandType.Button).Text("Button").Icon("note");
+            //A regular button.
+            items.Add().Type(CommandType.Button).Text("Button").Icon("note");
 
-              //A toggle button.
-              items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true).Selected(true);
+            //A toggle button.
+            items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true).Selected(true);
 
-              //The Split button.
-              items.Add().Type(CommandType.SplitButton).Text("Split Button").MenuButtons(menuButtons =>
-              {
-                  menuButtons.Add().Text("Option 1").Id("option1");
-                  menuButtons.Add().Text("Option 2").Id("option2");
-                  menuButtons.Add().Text("Option 3").Id("option3");
-              });
+            //The Split button.
+            items.Add().Type(CommandType.SplitButton).Text("Split Button").MenuButtons(menuButtons =>
+            {
+                menuButtons.Add().Text("Option 1").Id("option1");
+                menuButtons.Add().Text("Option 2").Id("option2");
+                menuButtons.Add().Text("Option 3").Id("option3");
+            });
 
-              //The ButtonGroup.
-              items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
-              {
-                  buttons.Add().Text("Left").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyLeft");
-                  buttons.Add().Text("Center").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyCenter");
-                  buttons.Add().Text("Right").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyRight");
-              });
+            //The ButtonGroup.
+            items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
+            {
+                buttons.Add().Text("Left").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyLeft");
+                buttons.Add().Text("Center").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyCenter");
+                buttons.Add().Text("Right").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyRight");
+            });
 
-              //The separator.
-              items.Add().Type(CommandType.Separator);
+            //The separator.
+            items.Add().Type(CommandType.Separator);
 
-              //A custom template.
-              items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
-          })
-      )
+            //A custom template.
+            items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
+        })
+    )
 
 ### Configuration
 
@@ -62,34 +62,30 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
     ###### Example
 
-          public ActionResult Index()
-          {
-              return View();
-          }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a ToolBar.
 
-    ###### Example
+    ```ASPX
+        <%: Html.Kendo().ToolBar()
+            .Resizable(true)   //Enable or disable the resizing feature.
 
-    ```tab-ASPX
-
-           <%: Html.Kendo().ToolBar()
-               .Resizable(true)   //Enable or disable the resizing feature.
-
-               .Items(items => {  //Define the widget commands.
-                  items.Add().Type(CommandType.Button).Text("Button");
-               })
-           %>
+            .Items(items => {  //Define the widget commands.
+                items.Add().Type(CommandType.Button).Text("Button");
+            })
+        %>
     ```
-    ```tab-Razor
+    ```Razor
+        @(Html.Kendo().ToolBar()
+            .Resizable(true)   //Enable or disable the resizing feature.
 
-           @(Html.Kendo().ToolBar()
-               .Resizable(true)   //Enable or disable the resizing feature.
-
-               .Items(items => {  //Define the widget commands.
-                  items.Add().Type(CommandType.Button).Text("Button");
-               })
-           )
+            .Items(items => {  //Define the widget commands.
+                items.Add().Type(CommandType.Button).Text("Button");
+            })
+        )
     ```
 
 For more information, refer to the article on [supported command types](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview#command-types).
@@ -102,53 +98,49 @@ You can subscribe to all ToolBar [events](http://docs.telerik.com/kendo-ui/api/j
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%: Html.Kendo().ToolBar()
+        .Items(items => {  //Define the widget commands
+            items.Add().Type(CommandType.Button).Text("Button");
+        })
+        .Events(e => e
+            .Click("onClick")
+            .Toggle("onToggle")
+            .Open("onOpen")
+            .Close("onClose")
+            .OverflowOpen("onOverflowOpen")
+            .OverflowClose("onOverflowClose")
+        )
+    %>
+    <script>
+        function onClick(e) {
+            //Handle the click event.
+        }
 
-```tab-ASPX
-
-      <%: Html.Kendo().ToolBar()
-           .Items(items => {  //Define the widget commands
-              items.Add().Type(CommandType.Button).Text("Button");
-           })
-           .Events(e => e
-              .Click("onClick")
-              .Toggle("onToggle")
-              .Open("onOpen")
-              .Close("onClose")
-              .OverflowOpen("onOverflowOpen")
-              .OverflowClose("onOverflowClose")
-           )
-      %>
-      <script>
-          function onClick(e) {
-              //Handle the click event.
-          }
-
-          //.....
-      </script>
+        //.....
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().ToolBar()
+        .Items(items => {  //Define the widget commands
+            items.Add().Type(CommandType.Button).Text("Button");
+        })
+        .Events(e => e
+            .Click("onClick")
+            .Toggle("onToggle")
+            .Open("onOpen")
+            .Close("onClose")
+            .OverflowOpen("onOverflowOpen")
+            .OverflowClose("onOverflowClose")
+        )
+    )
+    <script>
+        function onClick(e) {
+            //Handle the click event.
+        }
 
-      @(Html.Kendo().ToolBar()
-           .Items(items => {  //Define the widget commands
-              items.Add().Type(CommandType.Button).Text("Button");
-           })
-           .Events(e => e
-              .Click("onClick")
-              .Toggle("onToggle")
-              .Open("onOpen")
-              .Close("onClose")
-              .OverflowOpen("onOverflowOpen")
-              .OverflowClose("onOverflowClose")
-           )
-      )
-      <script>
-          function onClick(e) {
-              //Handle the click event.
-          }
-
-          //.....
-      </script>
+        //.....
+    </script>
 ```
 
 ## Reference
@@ -159,12 +151,12 @@ To reference an existing Kendo UI ToolBar instance, use the [`jQuery.data()`](ht
 
 ###### Example
 
-      //Put this after your Kendo UI ToolBar for ASP.NET MVC declaration.
-      <script>
-      $(function() {
-          var toolbar = $("#container").data("kendoToolBar");
-      });
-      </script>
+    //Put this after your Kendo UI ToolBar for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            var toolbar = $("#container").data("kendoToolBar");
+        });
+    </script>
 
 ## See Also
 

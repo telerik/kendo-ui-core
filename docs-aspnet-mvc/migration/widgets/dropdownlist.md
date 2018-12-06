@@ -17,11 +17,11 @@ To bind the DropDownList to any collection, define the `DataTextField`. Note tha
 
 ### OptionLabel
 
-```tab-Previous
+```Previous
 
     Html.Telerik().DropDownList().Name(“DropDownList”).Placeholder(“Select…”)
 ```
-```tab-Current
+```Current
 
     Html.Kendo().DropDownList().Name(“DropDownList”).OptionLabel(“Select…”)
 ```

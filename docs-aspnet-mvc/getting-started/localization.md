@@ -57,7 +57,7 @@ Below are listed the steps for you to follow when willing to change the provided
 
     **Figure 1. The `Resources` directory when changing localization messages**
 
-    ![Resources](/images/resources.png)
+    ![Resources](../images/resources.png)
 
 1. Open the resource file which corresponds to the target culture, e.g. `Messages.es-ES.resx`.
 
@@ -75,7 +75,7 @@ Apart from building a custom version of `Kendo.Mvc.dll`, you can specify a new v
 
 ###### Example
 
-```tab-ASPX
+```ASPX
 
     <%:Html.Kendo().Grid<Product>()
            .Toolbar(toolbar =>
@@ -84,7 +84,7 @@ Apart from building a custom version of `Kendo.Mvc.dll`, you can specify a new v
            })
     %>
 ```
-```tab-Razor
+```Razor
 
     @(Html.Kendo().Grid<Product>()
           .Toolbar(toolbar =>
@@ -106,7 +106,7 @@ Below are listed the steps for you to follow when you want to add new localizati
 
     **Figure 2. The `Resources` directory when adding new cultures**
 
-    ![Resources](/images/resources.png)
+    ![Resources](../images/resources.png)
 
 1. Copy `Messages.resx` and paste it. Rename the copy to `Messages.culture-code.resx`, e.g. `Messages.es-MX.resx`.
 

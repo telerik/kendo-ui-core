@@ -27,9 +27,7 @@ To start using the ListBox, you can use either:
 
 The following example demonstrates how to bind the ListBox on the server when you use static data.
 
-###### Example
-
-```tab-Razor
+```Razor
    @(Html.Kendo().ListBox()
         .Name("optional")
         .Toolbar(toolbar =>
@@ -43,7 +41,7 @@ The following example demonstrates how to bind the ListBox on the server when yo
         .BindTo(ViewBag.Attendees)
     )
 ```
-```tab-Controller
+```Controller
     public ActionResult Index()
     {
         ViewBag.Attendees = new List<string>
@@ -55,7 +53,7 @@ The following example demonstrates how to bind the ListBox on the server when yo
             "Michael Leverling",
             "Andrew Callahan",
             "Michael Suyama"
-        };  
+        };
         return View();
     }
 ```
@@ -113,8 +111,6 @@ To enable the drag-and-drop feature of the ListBox, set it as `Draggable()` and 
 
 ###### Example
 
-```tab-Razor
-
     @(Html.Kendo().ListBox()
         .Name("selected")
         .Draggable(draggable => draggable
@@ -138,15 +134,12 @@ To enable the drag-and-drop feature of the ListBox, set it as `Draggable()` and 
                 .addClass("custom-hint");
         }
     </script>
-```
 
 ### Item Templates
 
 The ListBox supports the use of [templates](https://docs.telerik.com/kendo-ui/framework/templates/overview) for its items that are passed as а function or string.
 
 ###### Example
-
-```tab-Razor
 
     <script id="customer-item-template" type="text/x-kendo-template">
         <span class="k-state-default" style="background-image: url('../content/web/Customers/#:data.CustomerID#.jpg')"></span>
@@ -161,39 +154,32 @@ The ListBox supports the use of [templates](https://docs.telerik.com/kendo-ui/fr
         .BindTo(new List<CustomerViewModel>())
     )
 
-```
-
 ### Localization
 
 You can configure the ListBox `Messages()` for each toolbar command button. The messages serve as tooltip text when the user hovers over the buttons.
 
 ###### Example
 
-```tab-Razor
-
     @(Html.Kendo().ListBox()
-    .Name("listbox")
-    .Toolbar(toolbar => toolbar.Tools(
-        tools => tools
-            .MoveUp()
-            .MoveDown()
-            .TransferTo()
-            .TransferFrom()
-            .TransferAllTo()
-            .TransferAllFrom()
-            .Remove()
-     ))
-     .Messages(messages => messages.Tools(tools => {
-         tools.MoveUp("Up");
-         tools.MoveDown("Down");
-         tools.TransferTo("Move To");
-         tools.TransferFrom("Move From");
-         tools.Remove("Delete");
-     }
-     ))
+        .Name("listbox")
+        .Toolbar(toolbar => toolbar.Tools(
+            tools => tools
+                .MoveUp()
+                .MoveDown()
+                .TransferTo()
+                .TransferFrom()
+                .TransferAllTo()
+                .TransferAllFrom()
+                .Remove()
+        ))
+        .Messages(messages => messages.Tools(tools => {
+            tools.MoveUp("Up");
+            tools.MoveDown("Down");
+            tools.TransferTo("Move To");
+            tools.TransferFrom("Move From");
+            tools.Remove("Delete");
+        }))
     )
-
-```   
 
 ## See Also
 

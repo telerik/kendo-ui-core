@@ -14,7 +14,7 @@ The **Genre** listing is going to display all albums according to a selected gen
 
 **Figure 1. A snapshot of the Kendo UI Music Store genre lists**
 
-![kendo-genre-screenshot](/tutorials/tutorial-kendo-music-store/music-store-web/images/kendo-genre-screenshot.png)
+![kendo-genre-screenshot](images/kendo-genre-screenshot.png)
 
 ### Create the HTML
 

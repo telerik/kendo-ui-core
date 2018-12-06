@@ -18,31 +18,27 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 1. Create a new action method which renders the view.
 
-	###### Example
+    ###### Example
 
-				public ActionResult Index()
-		         {
-		           return View();
-		         }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a ProgressBar.
 
-	###### Example
-
-	```tab-ASPX
-
-				<%= Html.Kendo().ProgressBar()
-	                    .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
-	                    .Type(ProgressBarType.Percent)
-	            %>
-	```
-	```tab-Razor
-
-				@(Html.Kendo().ProgressBar()
-	                  .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
-	                  .Type(ProgressBarType.Percent)
-	            )
-	```
+    ```ASPX
+        <%= Html.Kendo().ProgressBar()
+            .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
+            .Type(ProgressBarType.Percent)
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().ProgressBar()
+            .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
+            .Type(ProgressBarType.Percent)
+        )
+    ```
 
 ## Event Handling
 
@@ -52,45 +48,41 @@ You can subscribe to all ProgressBar [events](http://docs.telerik.com/kendo-ui/a
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%= Html.Kendo().ProgressBar()
+            .Name("progressBar")
+            .Events(e => {
+                    e.Change("onChange");
+                    e.Complete("onComplete");
+            })
+    %>
+    <script>
+        function onChange(e) {
+            //Handle the change event.
+        }
 
-```tab-ASPX
-
-			<%= Html.Kendo().ProgressBar()
-		            .Name("progressBar")
-		            .Events(e => {
-		                  e.Change("onChange");
-		                  e.Complete("onComplete");
-		            })
-		    %>
-			<script>
-		        function onChange(e) {
-		            //Handle the change event.
-		        }
-
-		        function onComplete(e) {
-		            //Handle the complete event.
-		        }
-		    </script>
+        function onComplete(e) {
+            //Handle the complete event.
+        }
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().ProgressBar()
+            .Name("progressBar")
+            .Events(e => {
+                    e.Change("onChange");
+                    e.Complete("onComplete");
+            })
+    )
+    <script>
+        function onChange(e) {
+                    //Handle the change event.
+        }
 
-			@(Html.Kendo().ProgressBar()
-		            .Name("progressBar")
-		            .Events(e => {
-		                  e.Change("onChange");
-		                  e.Complete("onComplete");
-		            })
-		    )
-			<script>
-		        function onChange(e) {
-							//Handle the change event.
-		        }
-
-		        function onComplete(e) {
-		            //Handle the complete event.
-		        }
-		    </script>
+        function onComplete(e) {
+            //Handle the complete event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -99,18 +91,15 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-			@(Html.Kendo().ProgressBar()
-		          .Name("progressBar")
-		          .Events(e => e.Change(@<text>
-		                  function() {
-		                      //Handle the change event.
-		                  }
-		              </text>)
-				  )
-		    )
-```
+    @(Html.Kendo().ProgressBar()
+        .Name("progressBar")
+        .Events(e => e.Change(@<text>
+                function() {
+                    //Handle the change event.
+                }
+            </text>)
+        )
+    )
 
 ## Reference
 
@@ -120,13 +109,13 @@ To reference an existing Kendo UI ProgressBar instance, use the [`jQuery.data()`
 
 ###### Example
 
-		//Put this after your Kendo ProgressBar for ASP.NET MVC declaration.
-	    <script>
-	    $(function() {
-	      //Notice that the Name() of the ProgressBar is used to get its client-side instance.
-	      var progressbar = $("#progressBar").data("kendoProgressBar");
-	    });
-	    </script>
+    //Put this after your Kendo ProgressBar for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the ProgressBar is used to get its client-side instance.
+            var progressbar = $("#progressBar").data("kendoProgressBar");
+        });
+    </script>
 
 ## See Also
 

@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 4 a
 
 **Figure 1. The new ASP.NET MVC 4 application**
 
-![New ASP.NET MVC 4 Application](/images/mvc4-new-app.png)
+![New ASP.NET MVC 4 Application](images/mvc4-new-app.png)
 
 ## Add Progress Telerik UI for ASP.NET MVC
 
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in Solution Explorer](/images/mvc4-solution.png)
+![Kendo directories in Solution Explorer](images/mvc4-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -71,10 +71,10 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 ###### Example
 
-        bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
-                    "~/Scripts/kendo/kendo.all.min.js",
-                    // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
-                    "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
+    bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+                "~/Scripts/kendo/kendo.all.min.js",
+                // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
+                "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
 
 **Step 7** Add a style bundle for Progress Telerik UI for ASP.NET MVC.
 
@@ -84,28 +84,24 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 ###### Example
 
-        bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
-                    "~/Content/kendo/kendo.common.min.css",
-                    "~/Content/kendo/kendo.default.min.css"));
+    bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
+                "~/Content/kendo/kendo.common.min.css",
+                "~/Content/kendo/kendo.default.min.css"));
 
 **Step 8** Tell the ASP.NET bundles to allow minified files in debug mode.
 
 ###### Example
 
-        bundles.IgnoreList.Clear();
+    bundles.IgnoreList.Clear();
 
 **Step 9** Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
 **Step 10** Render the Progress Telerik UI for ASP.NET MVC style bundle.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Styles.Render("~/Content/kendo/css") %>
 ```
-```tab-Razor
-
+```Razor
     @Styles.Render("~/Content/kendo/css")
 ```
 
@@ -113,15 +109,11 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 12** Render the Progress Telerik UI for ASP.NET MVC script bundle after jQuery.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Scripts.Render("~/bundles/jquery") %>
     <%: Scripts.Render("~/bundles/kendo") %>
 ```
-```tab-Razor
-
+```Razor
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/kendo")
 ```
@@ -140,8 +132,8 @@ Below are listed the steps for you to follow when including the Progress Telerik
 
 ###### Example
 
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common.min.css" />
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.default.min.css" />
 
 **Step 3** Move the jQuery bundle to the `head` tag of the page. By default, it is at the end of the page.
 
@@ -149,16 +141,16 @@ Below are listed the steps for you to follow when including the Progress Telerik
 
 ###### Example
 
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 **Step 5** If using the Telerik MVC Scheduler wrapper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
 
 ###### Example
 
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 ### Add Kendo.Mvc.dll Reference
 
@@ -184,13 +176,13 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
 
 ###### Example
 
-        <namespaces>
-            <add namespace="System.Web.Mvc" />
-            <add namespace="System.Web.Mvc.Ajax" />
-            <add namespace="System.Web.Mvc.Html" />
-            <add namespace="System.Web.Routing" />
-            <add namespace="Kendo.Mvc.UI" />
-        </namespaces>
+    <namespaces>
+        <add namespace="System.Web.Mvc" />
+        <add namespace="System.Web.Mvc.Ajax" />
+        <add namespace="System.Web.Mvc.Html" />
+        <add namespace="System.Web.Routing" />
+        <add namespace="Kendo.Mvc.UI" />
+    </namespaces>
 
 ## Use Kendo UI Widgets
 
@@ -200,14 +192,10 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 2** Add a Kendo UI DatePicker widget.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().DatePicker().Name("datepicker") %>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo().DatePicker().Name("datepicker"))
 ```
 
@@ -215,7 +203,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Figure 3. The final result**
 
-![Final result](/images/mvc4-final.png)
+![Final result](images/mvc4-final.png)
 
 ## Next Steps
 

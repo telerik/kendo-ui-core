@@ -29,41 +29,36 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 1. Add a DropDownTree.
 
-    ###### Example
-
-    ```tab-Razor
-
+    ```Razor
         @(Html.Kendo().DropDownTree()
-                .Name("dropdowntree") //The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
-                .Items(items =>
-                {
-                    items.Add().Text("Root Item 1")
-                        .Items(childred =>
-                        {
-                            childred.Add().Text("Child Item 1");
-                            childred.Add().Text("Child Item 2");
-                        });
-                    items.Add().Text("Root Item 2"); //Add item with text "Item2")
-                })
+            .Name("dropdowntree") //The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Root Item 1")
+                    .Items(childred =>
+                    {
+                        childred.Add().Text("Child Item 1");
+                        childred.Add().Text("Child Item 2");
+                    });
+                items.Add().Text("Root Item 2"); //Add item with text "Item2")
+            })
         )
     ```
-    ```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().DropDownTree()
-                .Name("dropdowntree") //The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
-                .Items(items =>
-                {
-                    items.Add().Text("Root Item 1")
-                        .Items(childred =>
-                        {
-                            childred.Add().Text("Child Item 1");
-                            childred.Add().Text("Child Item 2");
-                        });
-                    items.Add().Text("Root Item 2"); //Add item with text "Item2")
-                })
+            .Name("dropdowntree") //The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Root Item 1")
+                    .Items(childred =>
+                    {
+                        childred.Add().Text("Child Item 1");
+                        childred.Add().Text("Child Item 2");
+                    });
+                items.Add().Text("Root Item 2"); //Add item with text "Item2")
+            })
         %>
     ```
-
 
 ## Event Handling
 
@@ -73,11 +68,7 @@ You can subscribe to all DropDownTree [events](http://docs.telerik.com/kendo-ui/
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-
-```tab-Razor
-
+```Razor
     @(Html.Kendo().DropDownTree()
             .Name("dropdowntree")
             .Events(e => e
@@ -86,32 +77,31 @@ The following example demonstrates how to subscribe to events by a handler name.
             )
     )
     <script>
-    function onExpand() {
-        //Handle the expand event
-    }
+        function onExpand() {
+            //Handle the expand event
+        }
 
-    function onCollapse() {
-        //Handle the collapse event
-    }
+        function onCollapse() {
+            //Handle the collapse event
+        }
     </script>
 ```
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().DropDownTree()
-            .Name("dropdowntree")
-            .Events(e => e
-                .Expand("onExpand")
-                .Collapse("onCollapse")
-            )
+        .Name("dropdowntree")
+        .Events(e => e
+            .Expand("onExpand")
+            .Collapse("onCollapse")
+        )
     %>
     <script>
-    function onExpand() {
-        //Handle the expand event
-    }
+        function onExpand() {
+            //Handle the expand event
+        }
 
-    function onCollapse() {
-        //Handle the collapse event
-    }
+        function onCollapse() {
+            //Handle the collapse event
+        }
     </script>
 ```
 
@@ -121,24 +111,21 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
     @(Html.Kendo().DropDownTree()
-            .Name("dropdowntree")
-            .Events(e => e
-                .Expand(@<text>
-                function() {
-                    //Handle the expand event inline
-                }
-                </text>)
-                .Collapse(@<text>
-                function() {
-                    //Handle the collapse event inline
-                }
-                </text>)
-            )
+        .Name("dropdowntree")
+        .Events(e => e
+            .Expand(@<text>
+            function() {
+                //Handle the expand event inline
+            }
+            </text>)
+            .Collapse(@<text>
+            function() {
+                //Handle the collapse event inline
+            }
+            </text>)
+        )
     )
-```
 
 ## Reference
 
@@ -150,10 +137,10 @@ To reference an existing Kendo UI DropDownTree instance, use the [`jQuery.data()
 
     //Put this after your Kendo DropDownTree for ASP.NET MVC declaration
     <script>
-    $(function() {
-        // Notice that the Name() of the dropdowntree is used to get its client-side instance
-        var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
-    });
+        $(function() {
+            // Notice that the Name() of the dropdowntree is used to get its client-side instance
+            var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
+        });
     </script>
 
 ## See Also

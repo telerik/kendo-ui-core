@@ -29,9 +29,7 @@ As of the Kendo UI Q3 2012 release, you can:
 
 The **Image Browser** tool automatically appears as a file browser when the `ImageBrowser` method is defined in the code.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().Editor()
     .Name("Editor")
     .ImageBrowser(imageBrowser => imageBrowser
@@ -52,7 +50,7 @@ The **Image Browser** tool automatically appears as a file browser when the `Ima
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%: Html.Kendo().Editor()
     .Name("Editor")
     .ImageBrowser(imageBrowser => imageBrowser
@@ -78,62 +76,60 @@ The `Kendo.Mvc` assembly enables you to use the built-in `EditorImageBrowserCont
 
 ###### Example
 
-```csharp
-public class ImageBrowserController : EditorImageBrowserController
-{
-    private const string contentFolderRoot = "~/Content/";
-    private const string prettyName = "Images/";
-    private static readonly string[] foldersToCopy = new[] { "~/Content/shared/" };
-
-
-    /// <summary>
-    /// Gets the base paths from which the content is served.
-    /// </summary>
-    public override string ContentPath
+    public class ImageBrowserController : EditorImageBrowserController
     {
-        get
-        {
-            return CreateUserFolder();
-        }
-    }
+        private const string contentFolderRoot = "~/Content/";
+        private const string prettyName = "Images/";
+        private static readonly string[] foldersToCopy = new[] { "~/Content/shared/" };
 
-    private string CreateUserFolder()
-    {
-        var virtualPath = Path.Combine(contentFolderRoot, "UserFiles", prettyName);
 
-        var path = Server.MapPath(virtualPath);
-        if (!Directory.Exists(path))
+        /// <summary>
+        /// Gets the base paths from which the content is served.
+        /// </summary>
+        public override string ContentPath
         {
-            Directory.CreateDirectory(path);
-            foreach (var sourceFolder in foldersToCopy)
+            get
             {
-                CopyFolder(Server.MapPath(sourceFolder), path);
+                return CreateUserFolder();
             }
         }
-        return virtualPath;
+
+        private string CreateUserFolder()
+        {
+            var virtualPath = Path.Combine(contentFolderRoot, "UserFiles", prettyName);
+
+            var path = Server.MapPath(virtualPath);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                foreach (var sourceFolder in foldersToCopy)
+                {
+                    CopyFolder(Server.MapPath(sourceFolder), path);
+                }
+            }
+            return virtualPath;
+        }
+
+        private void CopyFolder(string source, string destination)
+        {
+            if (!Directory.Exists(destination))
+            {
+                Directory.CreateDirectory(destination);
+            }
+
+            foreach (var file in Directory.EnumerateFiles(source))
+            {
+                var dest = Path.Combine(destination, Path.GetFileName(file));
+                System.IO.File.Copy(file, dest);
+            }
+
+            foreach (var folder in Directory.EnumerateDirectories(source))
+            {
+                var dest = Path.Combine(destination, Path.GetFileName(folder));
+                CopyFolder(folder, dest);
+            }
+        }
     }
-
-    private void CopyFolder(string source, string destination)
-    {
-        if (!Directory.Exists(destination))
-        {
-            Directory.CreateDirectory(destination);
-        }
-
-        foreach (var file in Directory.EnumerateFiles(source))
-        {
-            var dest = Path.Combine(destination, Path.GetFileName(file));
-            System.IO.File.Copy(file, dest);
-        }
-
-        foreach (var folder in Directory.EnumerateDirectories(source))
-        {
-            var dest = Path.Combine(destination, Path.GetFileName(folder));
-            CopyFolder(folder, dest);
-        }
-    }
-}
-```
 
 Similarly, you can use the `EditorFileBrowserController` class to create a controller for the **File Browser** tool as well.
 
@@ -145,15 +141,19 @@ The following list provides information about the default requests and responses
 
 - `create`&mdash;Makes a `POST` request for the creation of a directory with the following parameters. Does not expect a response.
 
+    ```
         {"Name":"New folder name","Size":0,"EntryType":1}
+    ```
 
 - `read`&mdash;Makes a `POST` request that contains the `Name` parameter to specify the path which is browsed. Expects a file listing in the following format:
 
+    ```
         [
             { "Name": "Folder", "Size": 73289, "EntryType": 1 },
             { "Name": "file.jpg", "Size": 15289, "EntryType": 0 },
             ...
         ]
+    ```
 
     Where `Name` is the file or directory name, `EntryType` is either a **0** (zero) for a file or a **1** (one) for a directory. `Size` is the file size  and is optional.
 

@@ -23,71 +23,63 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                ViewBag.Message = "Welcome to ASP.NET MVC!";
+        public ActionResult Index()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
 
-                return View();
-            }
+            return View();
+        }
 
 1. Add a Kendo UI Switch to the `Index` view. Like most hybrid Kendo UI widgets, the Switch must be initialized within the hybrid View content.
 
-    ###### Example
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("switch-view")
+            .Title("Inbox")
+            .Content(() =>
+            {
+                %>
 
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("switch-view")
-                    .Title("Inbox")
-                    .Content(() =>
-                    {
-                        %>
-
-                        <%: Html.Kendo().MobileSwitch()
-                                .Name("subscription-switch")
-                                .Checked(true)
-                                .OnLabel("YES")
-                                .OffLabel("NO")
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
+                <%: Html.Kendo().MobileSwitch()
+                    .Name("subscription-switch")
+                    .Checked(true)
+                    .OnLabel("YES")
+                    .OffLabel("NO")
+                %>
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("switch-view")
+            .Title("Inbox")
+            .Content(
+                @<text>
 
-            @(Html.Kendo().MobileView()
-                .Name("switch-view")
-                .Title("Inbox")
-                .Content(
-                    @<text>
+                @(Html.Kendo().MobileSwitch()
+                    .Name("subscription-switch")
+                    .Checked(true)
+                    .OnLabel("YES")
+                    .OffLabel("NO")
+                )
 
-                    @(Html.Kendo().MobileSwitch()
-                            .Name("subscription-switch")
-                            .Checked(true)
-                            .OnLabel("YES")
-                            .OffLabel("NO")
-                    )
-
-                </text>)
-            )
+            </text>)
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -100,33 +92,29 @@ You can subscribe to all hybrid Switch [events](https://docs.telerik.com/kendo-u
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%: Html.Kendo().MobileSwitch()
+        .Name("mobile-switch")
+        .Events(events => events.Change("onChange"))
+    %>
 
-```tab-ASPX
-
-        <%: Html.Kendo().MobileSwitch()
-                .Name("mobile-switch")
-                .Events(events => events.Change("onChange"))
-        %>
-
-        <script>
+    <script>
         function onChange() {
             //Handle the change event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().MobileSwitch()
+        .Name("mobile-switch")
+        .Events(events => events.Change("onChange"))
+    )
 
-        @(Html.Kendo().MobileSwitch()
-            .Name("mobile-switch")
-            .Events(events => events.Change("onChange"))
-        )
-
-        <script>
+    <script>
         function onChange() {
             //Handle the change event.
         }
-        </script>
+    </script>
 ```
 
 ## Reference
@@ -137,18 +125,18 @@ You can reference a hybrid Switch instance by using the [jQuery.data()](http://a
 
 ###### Example
 
-        @(Html.Kendo().MobileSwitch()
-                .Name("subscription-switch")
-                .Checked(true)
-                .OnLabel("YES")
-                .OffLabel("NO")
-        )
-        <script>
+    @(Html.Kendo().MobileSwitch()
+        .Name("subscription-switch")
+        .Checked(true)
+        .OnLabel("YES")
+        .OffLabel("NO")
+    )
+    <script>
         $(function() {
             //Notice that the Name() of the Switch is used to get its client-side instance.
             var switch = $("#subscription-switch").data("kendoMobileSwitch");
         });
-        </script>
+    </script>
 
 ## See Also
 

@@ -13,12 +13,12 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI TimeP
 
 ### Min Date
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)
 
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)
 
@@ -26,22 +26,22 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI TimeP
 
 ### Max Date
 
-```tab-Previous
+```Previous
 
       Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)
 ```
-```tab-Current
+```Current
 
       Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)
 ```
 
 ### Footer
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
 ```
@@ -56,12 +56,12 @@ None of the widgets features the `OnLoad` event anymore. Use the `$(document).re
 
 #### Disable
 
-```tab-Previous
+```Previous
 
     var datePicker = $("#DatePicker").data("tTimePicker");
     datePicker.disable();
 ```
-```tab-Current
+```Current
 
     var datePicker = $("#datepicker").data("kendoTimePicker");
     datePicker.enable(false);

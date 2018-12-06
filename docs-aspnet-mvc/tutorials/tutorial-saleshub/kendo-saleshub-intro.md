@@ -13,7 +13,7 @@ This article is an overview of the Kendo UI Sales Hub sample project. The Kendo 
 
 **Figure 1. A screenshot of the Kendo UI Sales Hub Home page**
 
-![kendo-saleshub-intro-home-screenshot](/tutorials/tutorial-saleshub/images/kendo-saleshub-intro-home-screenshot.png)
+![kendo-saleshub-intro-home-screenshot](images/kendo-saleshub-intro-home-screenshot.png)
 
 ## Basic Concepts
 
@@ -62,7 +62,7 @@ The first time the application launches, it creates and seeds its database. Seed
 
 **Figure 2. The Solution Explorer structure**
 
-![kendo-saleshub-intro-project-structure-screenshot](/tutorials/tutorial-saleshub/images/kendo-saleshub-intro-project-structure-screenshot.png)
+![kendo-saleshub-intro-project-structure-screenshot](images/kendo-saleshub-intro-project-structure-screenshot.png)
 
 There are three main projects in the Kendo UI Sales Hub sample application, as listed below.
 

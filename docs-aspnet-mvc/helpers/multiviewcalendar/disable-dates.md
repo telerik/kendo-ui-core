@@ -22,14 +22,14 @@ When you set an array, list the days that need to be disabled by using the first
 
 ###### Example
 
-```tab-ASPX
+```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")
             .DisableDates(new[] {"we", "th" })
         %>
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")
@@ -43,7 +43,7 @@ When you add a function, determine its return value as `true` for the date that 
 
 ###### Example
 
-```tab-ASPX
+```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")
@@ -61,7 +61,7 @@ When you add a function, determine its return value as `true` for the date that 
             }
         </script>
 ```
-```tab-Razor
+```Razor
 
         @(Html.Kendo().MultiViewCalendar()
             .Name("MultiViewCalendar")

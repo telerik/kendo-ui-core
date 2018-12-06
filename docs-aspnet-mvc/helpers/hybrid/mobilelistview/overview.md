@@ -32,88 +32,80 @@ Below are listed the steps for you to follow when defining the items of a hybrid
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a hybrid ListView to the `Index` view. It must be inside the View content.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("listview-home")
-                    .Title("Destinations")
-                    .Content(() =>
-                    {
-                        %>
-                        <% Html.Kendo().MobileListView().Style("inset").Type("group")
-                               .Items(root => {
-                                    //Add the root item.
-                                    root.Add().Text("Africa").Items(items =>
-                                    {
-                                        //Add the nested link item.
-                                        items.AddLink().Text("Nairobi").Icon("toprated");
-                                    });
-
-                                    root.Add().Text("America").Items(items =>
-                                    {
-                                        items.AddLink().Text("Boston").Icon("globe");
-                                        items.AddLink().Text("Ottawa").Icon("globe");
-                                        items.AddLink().Text("San Francisco").Icon("toprated");
-                                    });
-                                })
-                                .Render();
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                    .Name("listview-home")
-                    .Title("Destinations")
-                    .Content(obj =>
-                        Html.Kendo().MobileListView().Style("inset").Type("group")
-                            .Items(root =>
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("listview-home")
+            .Title("Destinations")
+            .Content(() =>
+            {
+                %>
+                <% Html.Kendo().MobileListView().Style("inset").Type("group")
+                        .Items(root => {
+                            //Add the root item.
+                            root.Add().Text("Africa").Items(items =>
                             {
-                                //Add the root item.
-                                root.Add().Text("Africa").Items(items =>
-                                {
-                                    //Add the nested link item.
-                                    items.AddLink().Text("Nairobi").Icon("toprated");
-                                });
+                                //Add the nested link item.
+                                items.AddLink().Text("Nairobi").Icon("toprated");
+                            });
 
-                                root.Add().Text("America").Items(items =>
-                                {
-                                    items.AddLink().Text("Boston").Icon("globe");
-                                    items.AddLink().Text("Ottawa").Icon("globe");
-                                    items.AddLink().Text("San Francisco").Icon("toprated");
-                                });
-                            })
-                    )
+                            root.Add().Text("America").Items(items =>
+                            {
+                                items.AddLink().Text("Boston").Icon("globe");
+                                items.AddLink().Text("Ottawa").Icon("globe");
+                                items.AddLink().Text("San Francisco").Icon("toprated");
+                            });
+                        })
+                        .Render();
+                %>
+                <%
+            })
+            .Render();
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("listview-home")
+            .Title("Destinations")
+            .Content(obj =>
+                Html.Kendo().MobileListView().Style("inset").Type("group")
+                    .Items(root =>
+                    {
+                        //Add the root item.
+                        root.Add().Text("Africa").Items(items =>
+                        {
+                            //Add the nested link item.
+                            items.AddLink().Text("Nairobi").Icon("toprated");
+                        });
+
+                        root.Add().Text("America").Items(items =>
+                        {
+                            items.AddLink().Text("Boston").Icon("globe");
+                            items.AddLink().Text("Ottawa").Icon("globe");
+                            items.AddLink().Text("San Francisco").Icon("toprated");
+                        });
+                    })
             )
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -128,99 +120,92 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a new action method that returns the data populating the ListView.
 
     ###### Example
 
-            [AcceptVerbs(HttpVerbs.Post)]
-            public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-            {
-                var products = new[] {
-                    new { Name = "Sashimi salad", Letter = "S" },
-                    new { Name = "Chirashi sushi", Letter = "C" },
-                    new { Name = "Seaweed salad", Letter = "S" },
-                    new { Name = "Edamame", Letter = "E" },
-                    new { Name = "Miso soup", Letter = "M" },
-                    new { Name = "Maguro", Letter = "M" },
-                    new { Name = "Shake", Letter = "S" },
-                    new { Name = "Shiromi", Letter = "S" },
-                    new { Name = "Tekka maki", Letter = "T" },
-                    new { Name = "Hosomaki Mix", Letter = "H" },
-                    new { Name = "California rolls", Letter = "C" },
-                    new { Name = "Seattle rolls", Letter = "S" },
-                    new { Name = "Spicy Tuna rolls", Letter = "S" },
-                    new { Name = "Ebi rolls", Letter = "E" },
-                    new { Name = "Chicken Teriyaki", Letter = "C" },
-                    new { Name = "Salmon Teriyaki", Letter = "S" },
-                    new { Name = "Gohan", Letter = "G" },
-                    new { Name = "Tori Katsu", Letter = "T" },
-                    new { Name = "Yaki Udon", Letter = "Y" }
-                };
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var products = new[] {
+                new { Name = "Sashimi salad", Letter = "S" },
+                new { Name = "Chirashi sushi", Letter = "C" },
+                new { Name = "Seaweed salad", Letter = "S" },
+                new { Name = "Edamame", Letter = "E" },
+                new { Name = "Miso soup", Letter = "M" },
+                new { Name = "Maguro", Letter = "M" },
+                new { Name = "Shake", Letter = "S" },
+                new { Name = "Shiromi", Letter = "S" },
+                new { Name = "Tekka maki", Letter = "T" },
+                new { Name = "Hosomaki Mix", Letter = "H" },
+                new { Name = "California rolls", Letter = "C" },
+                new { Name = "Seattle rolls", Letter = "S" },
+                new { Name = "Spicy Tuna rolls", Letter = "S" },
+                new { Name = "Ebi rolls", Letter = "E" },
+                new { Name = "Chicken Teriyaki", Letter = "C" },
+                new { Name = "Salmon Teriyaki", Letter = "S" },
+                new { Name = "Gohan", Letter = "G" },
+                new { Name = "Tori Katsu", Letter = "T" },
+                new { Name = "Yaki Udon", Letter = "Y" }
+            };
 
-                //Return the data as JSON.
-                return Json(products.ToDataSourceResult(request));
-            }
+            //Return the data as JSON.
+            return Json(products.ToDataSourceResult(request));
+        }
+
 1.hybrid ListView to the `Index` view. It must be inside the View content.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileView()
-                    .Name("grouped")
-                    .Title("ListView")
-                    .Content(obj =>
-                        Html.Kendo().MobileListView()
-                            .Name("grouped-listview")
-                            .TemplateId("template") //configure the item template
-                            .FixedHeaders(true)
-                            .DataSource(dataSource =>
-                                dataSource
-                                    .Read("Read", "Home") //configure DataSource `Read` action
-                                    .Group(group => group.Add("Letter", typeof(string)))
-                            )
-                    )
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                    .Name("grouped")
-                    .Title("ListView")
-                    .Content(obj =>
-                        Html.Kendo().MobileListView()
-                            .Name("grouped-listview")
-                            .TemplateId("template") //configure the item template
-                            .FixedHeaders(true)
-                            .DataSource(dataSource =>
-                                dataSource
-                                    .Read("Read", "Home") //configure DataSource `Read` action
-                                    .Group(group => group.Add("Letter", typeof(string)))
-                            )
+    ```ASPX
+        <%: Html.Kendo().MobileView()
+            .Name("grouped")
+            .Title("ListView")
+            .Content(obj =>
+                Html.Kendo().MobileListView()
+                    .Name("grouped-listview")
+                    .TemplateId("template") //configure the item template
+                    .FixedHeaders(true)
+                    .DataSource(dataSource =>
+                        dataSource
+                            .Read("Read", "Home") //configure DataSource `Read` action
+                            .Group(group => group.Add("Letter", typeof(string)))
                     )
             )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("grouped")
+            .Title("ListView")
+            .Content(obj =>
+                Html.Kendo().MobileListView()
+                    .Name("grouped-listview")
+                    .TemplateId("template") //configure the item template
+                    .FixedHeaders(true)
+                    .DataSource(dataSource =>
+                        dataSource
+                            .Read("Read", "Home") //configure DataSource `Read` action
+                            .Group(group => group.Add("Letter", typeof(string)))
+                    )
+            )
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -233,15 +218,15 @@ You can reference a hybrid Layout instance by using the [jQuery.data()](http://a
 
 ###### Example
 
-        @(Html.Kendo().MobileListView()
-                .Name("MobileListView")
-        )
-        <script>
+    @(Html.Kendo().MobileListView()
+            .Name("MobileListView")
+    )
+    <script>
         $(function() {
             //Notice that the Name() of the ListView is used to get its client-side instance.
             var listview = $("#MobileListView").data("kendoMobileListView");
         });
-        </script>
+    </script>
 
 ## Event Handling
 
@@ -251,37 +236,33 @@ You can subscribe to all hybrid ListView [events](https://docs.telerik.com/kendo
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%: Html.Kendo().MobileListView()
+            .Name("MobileListView")
+            .Events(events => events
+                .Click("onClick")
+            )
+    %>
 
-```tab-ASPX
-
-        <%: Html.Kendo().MobileListView()
-                .Name("MobileListView")
-                .Events(events => events
-                    .Click("onClick")
-                )
-        %>
-
-        <script>
+    <script>
         function onClick() {
             //Handle the click event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().MobileListView()
+            .Name("MobileListView")
+            .Events(events => events
+                .Click("onClick")
+            )
+    )
 
-        @(Html.Kendo().MobileListView()
-                .Name("MobileListView")
-                .Events(events => events
-                    .Click("onClick")
-                )
-        )
-
-        <script>
+    <script>
         function onClick() {
             //Handle the click event.
         }
-        </script>
+    </script>
 ```
 
 ## See Also

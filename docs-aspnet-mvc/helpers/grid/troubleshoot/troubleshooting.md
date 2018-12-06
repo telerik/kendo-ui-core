@@ -22,10 +22,8 @@ The following example demonstrates the correct order of JavaScript files.
 
 ###### Example
 
-```
-<script src="/Scripts/kendo.all.min.js"></script>
-<script src="/Scripts/kendo.aspnetmvc.min.js"></script>
-```
+    <script src="/Scripts/kendo.all.min.js"></script>
+    <script src="/Scripts/kendo.aspnetmvc.min.js"></script>
 
 ## Binding
 
@@ -121,10 +119,7 @@ The following example demonstrates how to include culture-specific Kendo UI Java
 
 The following example demonstrates how to include JavaScript for the current culture.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
     %>
@@ -133,8 +128,7 @@ The following example demonstrates how to include JavaScript for the current cul
         kendo.culture("<%= culture %>");
     </script>
 ```
-```tab-Razor
-
+```Razor
     @{
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
     }

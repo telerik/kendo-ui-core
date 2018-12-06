@@ -13,11 +13,11 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Panel
 
 ### Animations
 
-```tab-Previous
+```Previous
 
     Html.Telerik().PanelBar().Name("SamplePanelBar").Effects(effects => effects.Slide())
 ```
-```tab-Current
+```Current
 
     Html.Kendo().PanelBar().Name("SamplePanelBar").Animation(animation => animation.Open(open => open.FadeIn(FadeDirection.Down))
 ```
@@ -30,11 +30,11 @@ Kendo UI Complete for ASP.NET MVC does not support action syntax&mdash;that is, 
 
 None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().PanelBar().Name("SamplePanelBar").ClientEvents(events => events.OnChange(“change”))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().PanelBar().Name("SamplePanelBar").Events(events => events.Change(“change”))
 ```
