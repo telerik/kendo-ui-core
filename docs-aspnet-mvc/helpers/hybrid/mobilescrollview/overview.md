@@ -23,95 +23,87 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                ViewBag.Message = "Welcome to ASP.NET MVC!";
+        public ActionResult Index()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
 
-                return View();
-            }
+            return View();
+        }
 
 1. Add a Kendo UI ScrollView to the `Index` view. Like most hybrid Kendo UI widgets, the PopOver must be initialized within the hybrid View content.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("scrollview-home")
-                    .Title("Photo Gallery")
-                    .Content(() =>
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("scrollview-home")
+            .Title("Photo Gallery")
+            .Content(() =>
+            {
+                %>
+                <div id="scrollview-container">
+                <%
+                Html.Kendo().MobileScrollView()
+                    .Page(2)
+                    .Items(items =>
                     {
-                        %>
-                        <div id="scrollview-container">
-                        <%
-                        Html.Kendo().MobileScrollView()
-                            .Page(2)
-                            .Items(items =>
-                            {
-                                items.Add().HtmlAttributes(new { @class = "photo photo1" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo2" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo3" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo4" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo5" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo6" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo7" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo8" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo9" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo10" });
-                            })
-                            .FitItemPerPage(true)
-                            .Render();
-                        %>
-                        </div>
-                        <%
+                        items.Add().HtmlAttributes(new { @class = "photo photo1" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo2" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo3" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo4" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo5" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo6" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo7" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo8" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo9" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo10" });
                     })
+                    .FitItemPerPage(true)
                     .Render();
-            %>
+                %>
+                </div>
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                    .Name("scrollview-home")
-                    .Title("Photo Gallery")
-                    .Content(
-                        @<text>
-                        <div id="scrollview-container">
-                        @(Html.Kendo().MobileScrollView()
-                            .Page(2)
-                            .Items(items =>
-                            {
-                                items.Add().HtmlAttributes(new { @class = "photo photo1" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo2" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo3" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo4" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo5" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo6" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo7" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo8" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo9" });
-                                items.Add().HtmlAttributes(new { @class = "photo photo10" });
-                            })
-                            .FitItemPerPage(true))
-                        </div>
-                    </text>)
-            )
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("scrollview-home")
+            .Title("Photo Gallery")
+            .Content(
+                @<text>
+                <div id="scrollview-container">
+                @(Html.Kendo().MobileScrollView()
+                    .Page(2)
+                    .Items(items =>
+                    {
+                        items.Add().HtmlAttributes(new { @class = "photo photo1" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo2" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo3" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo4" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo5" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo6" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo7" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo8" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo9" });
+                        items.Add().HtmlAttributes(new { @class = "photo photo10" });
+                    })
+                    .FitItemPerPage(true))
+                </div>
+            </text>)
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -124,48 +116,44 @@ You can subscribe to all hybrid ScrollView [events](https://docs.telerik.com/ken
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%: Html.Kendo().MobileScrollView()
+        .Name("scrollView")
+        .Items(items =>
+        {
+            items.Add().HtmlAttributes(new { @class = "photo photo1" });
+            items.Add().HtmlAttributes(new { @class = "photo photo2" });
+        })
+        .Events(events => events
+            .Change("onChange")
+        )
+        .FitItemPerPage(true)
+    %>
 
-```tab-ASPX
-
-         <%: Html.Kendo().MobileScrollView()
-                  .Name("scrollView")
-                  .Items(items =>
-                  {
-                      items.Add().HtmlAttributes(new { @class = "photo photo1" });
-                      items.Add().HtmlAttributes(new { @class = "photo photo2" });
-                  })
-                  .Events(events => events
-                      .Change("onChange")
-                  )
-                  .FitItemPerPage(true)
-          %>
-
-          <script>
-          function onChange() {
-              //Handle the change event
-          }
-          </script>
+    <script>
+        function onChange() {
+            //Handle the change event
+        }
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().MobileScrollView()
+        .Name("scrollView")
+        .Items(items =>
+        {
+            items.Add().HtmlAttributes(new { @class = "photo photo1" });
+            items.Add().HtmlAttributes(new { @class = "photo photo2" });
+        })
+        .Events(events => events
+            .Change("onChange")
+        )
+        .FitItemPerPage(true))
 
-          @(Html.Kendo().MobileScrollView()
-              .Name("scrollView")
-              .Items(items =>
-              {
-                  items.Add().HtmlAttributes(new { @class = "photo photo1" });
-                  items.Add().HtmlAttributes(new { @class = "photo photo2" });
-              })
-              .Events(events => events
-                  .Change("onChange")
-              )
-              .FitItemPerPage(true))
-
-          <script>
-          function onChange() {
-              //Handle the change event
-          }
-          </script>
+    <script>
+        function onChange() {
+            //Handle the change event
+        }
+    </script>
 ```
 
 ## Reference
@@ -176,20 +164,20 @@ You can reference a hybrid ScrollView instance by using the code from the exampl
 
 ###### Example
 
-        @(Html.Kendo().MobileScrollView()
-                .Name("scrollView")
-                .Items(items =>
-                {
-                    items.Add().HtmlAttributes(new { @class = "photo photo1" });
-                    items.Add().HtmlAttributes(new { @class = "photo photo2" });
-                })
-                .FitItemPerPage(true))
-        <script>
+    @(Html.Kendo().MobileScrollView()
+            .Name("scrollView")
+            .Items(items =>
+            {
+                items.Add().HtmlAttributes(new { @class = "photo photo1" });
+                items.Add().HtmlAttributes(new { @class = "photo photo2" });
+            })
+            .FitItemPerPage(true))
+    <script>
         $(function() {
             // Notice that the Name() of the scrollview is used to get its client-side instance
             var scrollview = $("#scrollView").data("kendoMobileScrollView");
         });
-        </script>
+    </script>
 
 ## See Also
 

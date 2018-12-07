@@ -18,16 +18,16 @@ The `ClientTemplateId` is mandatory for the ListView widget. It contains the `id
 
 ###### Example
 
-			<script type="text/x-kendo-tmpl" id="template">
-			    <div class="product">
-			        <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
-			        <h3>${ProductName}</h3>
-			        <dl>
-			            <dt>Price:</dt>
-			            <dd>${kendo.toString(UnitPrice, "c")}</dd>
-			        </dl>
-			    </div>
-			</script>
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="product">
+            <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
+            <h3>${ProductName}</h3>
+            <dl>
+                <dt>Price:</dt>
+                <dd>${kendo.toString(UnitPrice, "c")}</dd>
+            </dl>
+        </div>
+    </script>
 
 ## Common DataSource Settings
 
@@ -41,9 +41,9 @@ Specify the action method which will create the new model.
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Create(create => create.Action(/### action ###/ "Create", /### controller ###/ "Home"))
-	    )
+    .DataSource(dataSource => dataSource
+        .Create(create => create.Action(/### action ###/ "Create", /### controller ###/ "Home"))
+    )
 
 ### Destroy
 
@@ -51,9 +51,9 @@ Specify the action method which will destroy the existing models.
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Destroy(destroy =>  destroy.Destroy(/### action ###/ "Destroy", /### controller ###/ "Home"))
-	    )
+    .DataSource(dataSource => dataSource
+        .Destroy(destroy =>  destroy.Destroy(/### action ###/ "Destroy", /### controller ###/ "Home"))
+    )
 
 ### Events
 
@@ -61,16 +61,16 @@ Handle the [events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasou
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Events(events => events
-	            //Subscribe to the "change" event. The name of the JavaScript function which will be invoked is "changeHandler".
-	            .Change("changeHandler")
-	            //Subscribe to the "error" event. The name of the JavaScript function which will be invoked is "errorHandler".
-	            .Error("errorHandler")
-	            //Subscribe to the "requestStart" event. The name of the JavaScript function which will be invoked is "requestStartHandler".
-	            .RequestStart("requestStartHandler")
-	        )
-	    )
+    .DataSource(dataSource => dataSource
+        .Events(events => events
+            //Subscribe to the "change" event. The name of the JavaScript function which will be invoked is "changeHandler".
+            .Change("changeHandler")
+            //Subscribe to the "error" event. The name of the JavaScript function which will be invoked is "errorHandler".
+            .Error("errorHandler")
+            //Subscribe to the "requestStart" event. The name of the JavaScript function which will be invoked is "requestStartHandler".
+            .RequestStart("requestStartHandler")
+        )
+    )
 
 ### Filter
 
@@ -78,15 +78,15 @@ Set the initial filter.
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Filter(filters =>
-	        {
-	            //Show products whose ProductName property contains "C".
-	            filters.Add(p => p.ProductName).Contains("C");
-	            //And UnitsInStock is greater than 10.
-	            filters.Add(p => p.UnitsInStock).IsGreaterThan(10);
-	        })
-	    )
+    .DataSource(dataSource => dataSource
+        .Filter(filters =>
+        {
+            //Show products whose ProductName property contains "C".
+            filters.Add(p => p.ProductName).Contains("C");
+            //And UnitsInStock is greater than 10.
+            filters.Add(p => p.UnitsInStock).IsGreaterThan(10);
+        })
+    )
 
 ### Model
 
@@ -94,19 +94,19 @@ Configure the model of the data source.
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Model(model =>
-	        {
-	            //The unique identifier (primary key) of the model is the ProductID property.
-	            model.Id(p => p.ProductID);
+    .DataSource(dataSource => dataSource
+        .Model(model =>
+        {
+            //The unique identifier (primary key) of the model is the ProductID property.
+            model.Id(p => p.ProductID);
 
-	            //Declare a model field and optionally specify its default value (used when a new model instance is created).
-	            model.Field(p => p.ProductName).DefaultValue("N/A");
+            //Declare a model field and optionally specify its default value (used when a new model instance is created).
+            model.Field(p => p.ProductName).DefaultValue("N/A");
 
-	            //Declare a model field and make it readonly.
-	            model.Field(p => p.UnitPrice).Editable(false);
-	        })
-	    )
+            //Declare a model field and make it readonly.
+            model.Field(p => p.UnitPrice).Editable(false);
+        })
+    )
 
 ### PageSize
 
@@ -114,9 +114,9 @@ Set the page size used during paging. The default page size is `10`.
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .PageSize(20)
-	    )
+    .DataSource(dataSource => dataSource
+        .PageSize(20)
+    )
 
 ### Read
 
@@ -124,9 +124,9 @@ Specify the action method which will read the existing models and return them as
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Read(read =>  read.Read(/### action ###/ "Read", /### controller ###/ "Home"))
-	    )
+    .DataSource(dataSource => dataSource
+        .Read(read =>  read.Read(/### action ###/ "Read", /### controller ###/ "Home"))
+    )
 
 ### Sort
 
@@ -134,15 +134,15 @@ Set the initial sort.
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Sort(sort =>
-	        {
-	            //Sort by UnitsInStock in descending order.
-	            sort.Add(p => p.UnitsInStock).Descending();
-	            //Then by ProductName in ascending order.
-	            sort.Add(p => p.ProductName);
-	        })
-	    )
+    .DataSource(dataSource => dataSource
+        .Sort(sort =>
+        {
+            //Sort by UnitsInStock in descending order.
+            sort.Add(p => p.UnitsInStock).Descending();
+            //Then by ProductName in ascending order.
+            sort.Add(p => p.ProductName);
+        })
+    )
 
 ### Update
 
@@ -150,9 +150,9 @@ Specify the action method which will update the existing models.
 
 ###### Example
 
-	    .DataSource(dataSource => dataSource
-	        .Update(update =>  update.Update(/### action ###/ "Update", /### controller ###/ "Home"))
-	    )
+    .DataSource(dataSource => dataSource
+        .Update(update =>  update.Update(/### action ###/ "Update", /### controller ###/ "Home"))
+    )
 
 ## See Also
 

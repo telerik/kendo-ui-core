@@ -29,56 +29,48 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View(ChartDataRepository.InternetUsers());
-            }
+        public ActionResult Index()
+        {
+            return View(ChartDataRepository.InternetUsers());
+        }
 
 1. Make your view strongly typed.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-               Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.InternetUsers>>" %>
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.InternetUsers>>" %>
     ```
-    ```tab-Razor
-
-            @model IEnumerable<MvcApplication1.Models.InternetUsers>
+    ```Razor
+        @model IEnumerable<MvcApplication1.Models.InternetUsers>
     ```
 
 1. Add a server-bound Chart.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list.
-                    .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
-                    .Title("Internet Users")
-                    .Series(series => {
-                        series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
-                              .Name("United States");
-                    })
-                    .CategoryAxis(axis => axis
-                        .Categories(model => model.Year)
-                    )
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list
-                  .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
-                  .Title("Internet Users")
-                  .Series(series => {
-                      series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
+    ```ASPX
+        <%: Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list.
+                .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
+                .Title("Internet Users")
+                .Series(series => {
+                    series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
                             .Name("United States");
-                  })
-                  .CategoryAxis(axis => axis
-                      .Categories(model => model.Year)
-                  )
-            )
+                })
+                .CategoryAxis(axis => axis
+                    .Categories(model => model.Year)
+                )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list
+                .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
+                .Title("Internet Users")
+                .Series(series => {
+                    series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
+                        .Name("United States");
+                })
+                .CategoryAxis(axis => axis
+                    .Categories(model => model.Year)
+                )
+        )
     ```
 
 ## Event Handling
@@ -89,47 +81,43 @@ You can subscribe to all Chart [events](http://docs.telerik.com/kendo-ui/api/jav
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-      <%: Html.Kendo().Chart(Model)
-              .Name("internetUsersChart")
-              .Events(e => e
-                  .DataBound("internetUsersChart_dataBound")
-                  .SeriesClick("internetUsersChart_seriesClick")
-              )
-      %>
-
-      <script>
-          function internetUsersChart_dataBound() {
-              //Handle the dataBound event.
-          }
-
-          function internetUsersChart_seriesClick() {
-              //Handle the series click event.
-          }
-      </script>
-```
-```tab-Razor
-
-      @(Html.Kendo().Chart(Model)
+```ASPX
+    <%: Html.Kendo().Chart(Model)
             .Name("internetUsersChart")
             .Events(e => e
                 .DataBound("internetUsersChart_dataBound")
                 .SeriesClick("internetUsersChart_seriesClick")
             )
-      )
+    %>
 
-      <script>
-          function internetUsersChart_dataBound() {
-              //Handle the dataBound event.
-          }
+    <script>
+        function internetUsersChart_dataBound() {
+            //Handle the dataBound event.
+        }
 
-          function internetUsersChart_seriesClick() {
-              //Handle the seriesClick event.
-          }
-      </script>
+        function internetUsersChart_seriesClick() {
+            //Handle the series click event.
+        }
+    </script>
+```
+```Razor
+    @(Html.Kendo().Chart(Model)
+        .Name("internetUsersChart")
+        .Events(e => e
+            .DataBound("internetUsersChart_dataBound")
+            .SeriesClick("internetUsersChart_seriesClick")
+        )
+    )
+
+    <script>
+        function internetUsersChart_dataBound() {
+            //Handle the dataBound event.
+        }
+
+        function internetUsersChart_seriesClick() {
+            //Handle the seriesClick event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -138,23 +126,22 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-      @(Html.Kendo().Chart(Model)
-            .Name("internetUsersChart")
-            .Events(e => e
-                .DataBound(@<text>
-                     function() {
-                         //Handle the dataBound event inline.
-                     }
-                </text>)
-                .SeriesClick(@<text>
-                     function() {
-                         //Handle the seriesClick event inline.
-                     }
-                </text>)
-            )
-      )
+```
+    @(Html.Kendo().Chart(Model)
+        .Name("internetUsersChart")
+        .Events(e => e
+            .DataBound(@<text>
+                    function() {
+                        //Handle the dataBound event inline.
+                    }
+            </text>)
+            .SeriesClick(@<text>
+                    function() {
+                        //Handle the seriesClick event inline.
+                    }
+            </text>)
+        )
+    )
 ```
 
 ## Reference
@@ -165,13 +152,13 @@ To reference an existing Kendo UI Chart instance, use the [`jQuery.data()`](http
 
 ###### Example
 
-      //Put this after your Kendo UI Chart for ASP.NET MVC declaration.
-      <script>
-          $(function() {
-              //Notice that the Name() of the Chart is used to get its client-side instance.
-              var chart = $("#internetUsersChart").data("kendoChart");
-          });
-      </script>
+    //Put this after your Kendo UI Chart for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the Chart is used to get its client-side instance.
+            var chart = $("#internetUsersChart").data("kendoChart");
+        });
+    </script>
 
 ## See Also
 

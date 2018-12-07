@@ -35,23 +35,23 @@ Override these settings in the `web.config` file. Below are listed the steps for
 
     ###### Example
 
-            <system.web>
-                <!-- The request length is in kilobytes, execution timeout is in seconds  -->
-                <httpRuntime maxRequestLength="10240" executionTimeout="120" />
-            </system.web>
+        <system.web>
+            <!-- The request length is in kilobytes, execution timeout is in seconds  -->
+            <httpRuntime maxRequestLength="10240" executionTimeout="120" />
+        </system.web>
 
 1. Increase the allowed request size for IIS 7 in the `requestFiltering` section.
 
     ###### Example
 
-            <system.webServer>
-                    <security>
-                        <requestFiltering>
-                            <!-- The content length is in bytes  -->
-                            <requestLimits maxAllowedContentLength="10485760"/>
-                        </requestFiltering>
-                    </security>
-            </system.webServer>
+        <system.webServer>
+            <security>
+                <requestFiltering>
+                    <!-- The content length is in bytes  -->
+                    <requestLimits maxAllowedContentLength="10485760"/>
+                </requestFiltering>
+            </security>
+        </system.webServer>
 
 ### The Upload Never Ends in Safari on iOS and OSX
 
@@ -79,10 +79,10 @@ Below are listed the steps for you to follow when doing this.
 
     ###### Example
 
-            .Async(async => async
-                .Save("Save", "Home")
-                .Batch(true)
-            )
+        .Async(async => async
+            .Save("Save", "Home")
+            .Batch(true)
+        )
 
 ## See Also
 

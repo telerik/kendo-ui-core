@@ -13,7 +13,7 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI TreeV
 
 ### Remote Data Binding
 
-```tab-Previous
+```Previous
 
     <%= Html.Telerik().TreeView()
          .Name("TreeView")
@@ -22,7 +22,7 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI TreeV
          )
      %>
 ```
-```tab-Current
+```Current
 
     <%= Html.Telerik().TreeView()
          .Name("TreeView")
@@ -64,7 +64,7 @@ All fields are optional&mdash;skipping the text field shows the item with the te
                });
          })
      %>
-<!--_-->
+
 The above code allows the items to be serialized in the form below.
 
 ###### Example

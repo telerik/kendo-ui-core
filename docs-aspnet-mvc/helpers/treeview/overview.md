@@ -22,36 +22,32 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a TtreeView.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().TreeView()
-                    .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
-                    .Items(items =>
-                    {
-                        items.Add().Text("Item 1"); //Add item with text "Item1")
-                        items.Add().Text("Item 2"); //Add item with text "Item2")
-                    })
-            %>
+    ```ASPX
+        <%: Html.Kendo().TreeView()
+            .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add item with text "Item1")
+                items.Add().Text("Item 2"); //Add item with text "Item2")
+            })
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().TreeView()
-                  .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
-                  .Items(items =>
-                  {
-                      items.Add().Text("Item 1"); //Add item with text "Item1")
-                      items.Add().Text("Item 2"); //Add item with text "Item2")
-                  })
-            )
+    ```Razor
+        @(Html.Kendo().TreeView()
+            .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
+            .Items(items =>
+            {
+                items.Add().Text("Item 1"); //Add item with text "Item1")
+                items.Add().Text("Item 2"); //Add item with text "Item2")
+            })
+        )
     ```
 
 ### Security Trimming
@@ -73,18 +69,15 @@ You can subscribe to all TreeView [events](http://docs.telerik.com/kendo-ui/api/
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().TreeView()
-                .Name("treeview")
-                .Events(e => e
-                    .Expand("treeview_expand")
-                    .Collapse("treeview_collapse")
-                )
-        %>
-        <script>
+```ASPX
+    <%: Html.Kendo().TreeView()
+            .Name("treeview")
+            .Events(e => e
+                .Expand("treeview_expand")
+                .Collapse("treeview_collapse")
+            )
+    %>
+    <script>
         function treeview_collapse() {
             //Handle the collapse event
         }
@@ -92,18 +85,17 @@ The following example demonstrates how to subscribe to events by a handler name.
         function treeview_expand() {
             //Handle the expand event
         }
-        </script>
+    </script>
 ```
-```tab-Razor
-
-        @(Html.Kendo().TreeView()
-              .Name("treeview")
-              .Events(e => e
-                    .Expand("treeview_expand")
-                    .Collapse("treeview_collapse")
-              )
-        )
-        <script>
+```Razor
+    @(Html.Kendo().TreeView()
+            .Name("treeview")
+            .Events(e => e
+                .Expand("treeview_expand")
+                .Collapse("treeview_collapse")
+            )
+    )
+    <script>
         function treeview_collapse() {
             //Handle the collapse event
         }
@@ -111,7 +103,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         function treeview_expand() {
             //Handle the expand event
         }
-        </script>
+    </script>
 ```
 
 ### By Template Delegate
@@ -120,24 +112,21 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().TreeView()
-              .Name("treeview")
-              .Events(e => e
-                  .Expand(@<text>
-                    function() {
-                        //Handle the expand event inline
-                    }
-                  </text>)
-                  .Collapse(@<text>
-                    function() {
-                        //Handle the collapse event inline
-                    }
-                    </text>)
-              )
+    @(Html.Kendo().TreeView()
+        .Name("treeview")
+        .Events(e => e
+            .Expand(@<text>
+            function() {
+                //Handle the expand event inline
+            }
+            </text>)
+            .Collapse(@<text>
+            function() {
+                //Handle the collapse event inline
+            }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
@@ -147,13 +136,13 @@ To reference an existing Kendo UI TreeView instance, use the [`jQuery.data()`](h
 
 ###### Example
 
-        //Put this after your Kendo TreeView for ASP.NET MVC declaration
-        <script>
+    //Put this after your Kendo TreeView for ASP.NET MVC declaration
+    <script>
         $(function() {
             // Notice that the Name() of the treeview is used to get its client-side instance
             var treeview = $("#treeview").data("kendoTreeView");
         });
-        </script>
+    </script>
 
 ## See Also
 

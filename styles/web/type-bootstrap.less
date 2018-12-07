@@ -2500,6 +2500,15 @@ thead.k-grid-header th.k-header:last-child
     .box-shadow(@focused-active-item-shadow);
 }
 
+.k-multiselect.k-state-disabled {
+    .k-button {
+        color: @primary-disabled-text-color;
+        background-color: @primary-disabled-background-color;
+        border-color: @primary-disabled-border-color;
+        .box-shadow(none);
+    }
+}
+
 .k-list > .k-state-hover
 {
    border-color: @hover-background-color;

@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 3 a
 
 **Figure 1. The new ASP.NET MVC 3 application**
 
-![New ASP.NET MVC 3 Application](/images/mvc3-new-app.png)
+![New ASP.NET MVC 3 Application](images/mvc3-new-app.png)
 
 ## Add Telerik UI for ASP.NET MVC
 
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in Solution Explorer](/images/mvc3-solution.png)
+![Kendo directories in Solution Explorer](images/mvc3-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -69,15 +69,11 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 6** Include `Content/kendo/kendo.common.min.css` and `Content/kendo/kendo.default.min.css`. Add a `link` tag within the `head` tag of the layout.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <link rel="stylesheet" href="<%: Url.Content("~/Content/kendo/kendo.common.min.css") %>" />
     <link rel="stylesheet" href="<%: Url.Content("~/Content/kendo/kendo.default.min.css") %>" />
 ```
-```tab-Razor
-
+```Razor
     <link rel="stylesheet" href="@Url.Content("~/Content/kendo/kendo.common.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/kendo/kendo.default.min.css")" />
 ```
@@ -86,29 +82,21 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 8** Include the jQuery JavaScript file distributed with Telerik UI for ASP.NET MVC, or a compatible version from other location. Add a `script` tag in within the `head` tag of the layout.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <script src="<%: Url.Content("~/Scripts/kendo/jquery.min.js") %>"></script>
 ```
-```tab-Razor
-
+```Razor
     <script src="@Url.Content("~/Scripts/kendo/jquery.min.js")"></script>
 ```
 
 **Step 9** Include `Scripts/kendo/kendo.all.min.js` and `Scripts/kendo/kendo.aspnetmvc.min.js` after jQuery.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <script src="<%: Url.Content("~/Scripts/kendo/jquery.min.js") %>"></script>
     <script src="<%: Url.Content("~/Scripts/kendo/kendo.all.min.js") %>"></script>
     <script src="<%: Url.Content("~/Scripts/kendo/kendo.aspnetmvc.min.js") %>"></script>
 ```
-```tab-Razor
-
+```Razor
     <script src="@Url.Content("~/Scripts/kendo/jquery.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/kendo.all.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/kendo.aspnetmvc.min.js")"></script>
@@ -116,17 +104,13 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 10** If using the Telerik ASP.NET MVC Scheduler wrapper, include `Scripts/kendo/kendo.timezones.min.js` after `kendo.all.min.js`.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <script src="<%: Url.Content("~/Scripts/kendo/jquery.min.js") %>"></script>
     <script src="<%: Url.Content("~/Scripts/kendo/kendo.all.min.js") %>"></script>
     <script src="<%: Url.Content("~/Scripts/kendo/kendo.timezones.min.js") %>"></script>
     <script src="<%: Url.Content("~/Scripts/kendo/kendo.aspnetmvc.min.js") %>"></script>
 ```
-```tab-Razor
-
+```Razor
     <script src="@Url.Content("~/Scripts/kendo/jquery.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/kendo.all.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/kendo.timezones.min.js")"></script>
@@ -147,8 +131,8 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 ###### Example
 
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common.min.css" />
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.default.min.css" />
 
 **Step 3** Delete any existing `script` tags that include older versions of jQuery.
 
@@ -162,16 +146,16 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 ###### Example
 
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js”></script>
-        <script src=”http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js”></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js”></script>
+    <script src=”http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js”></script>
 
 **Step 6** If using the Telerik MVC Scheduler wrapper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
 
 ###### Example
 
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
-        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 ### Add Kendo.Mvc.dll Reference
 
@@ -197,13 +181,13 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
 
 ###### Example
 
-        <namespaces>
-            <add namespace="System.Web.Mvc" />
-            <add namespace="System.Web.Mvc.Ajax" />
-            <add namespace="System.Web.Mvc.Html" />
-            <add namespace="System.Web.Routing" />
-            <add namespace="Kendo.Mvc.UI" />
-        </namespaces>
+    <namespaces>
+        <add namespace="System.Web.Mvc" />
+        <add namespace="System.Web.Mvc.Ajax" />
+        <add namespace="System.Web.Mvc.Html" />
+        <add namespace="System.Web.Routing" />
+        <add namespace="Kendo.Mvc.UI" />
+    </namespaces>
 
 ## Use Kendo UI Widgets
 
@@ -213,14 +197,10 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 2** Add a Kendo UI DatePicker widget.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().DatePicker().Name("datepicker") %>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo().DatePicker().Name("datepicker"))
 ```
 
@@ -228,7 +208,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Figure 3. The final result**
 
-![Final result](/images/mvc3-final.png)
+![Final result](images/mvc3-final.png)
 
 ## Next Steps
 

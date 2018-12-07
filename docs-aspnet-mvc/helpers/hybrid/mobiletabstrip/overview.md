@@ -23,77 +23,69 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                ViewBag.Message = "Welcome to ASP.NET MVC!";
+        public ActionResult Index()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
 
-                return View();
-            }
+            return View();
+        }
 
 1. Add a Kendo UI TabStrip to the `Index` view. Like most hybrid Kendo UI widgets, the TabStrip must be initialized within the hybrid View content.
 
-    ###### Example
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("tabstrip-view")
+            .Title("Inbox")
+            .Footer(() =>
+            {
+                %>
 
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("tabstrip-view")
-                    .Title("Inbox")
-                    .Footer(() =>
+                <%: Html.Kendo().MobileTabStrip()
+                    .Items(items =>
                     {
-                        %>
-
-                        <%: Html.Kendo().MobileTabStrip()
-                                .Items(items =>
-                                {
-                                    items.Add().Icon("contacts").Text("Profile");
-                                    items.Add().Icon("history").Text("Sales");
-                                    items.Add().Icon("favorites").Text("Rating");
-                                    items.Add().Icon("settings").Text("Settings");
-                                })
-                        %>
-                        <%
+                        items.Add().Icon("contacts").Text("Profile");
+                        items.Add().Icon("history").Text("Sales");
+                        items.Add().Icon("favorites").Text("Rating");
+                        items.Add().Icon("settings").Text("Settings");
                     })
-                    .Render();
-            %>
+                %>
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("tabstrip-view")
+            .Title("Inbox")
+            .Footer(
+                @<text>
 
-            @(Html.Kendo().MobileView()
-                .Name("tabstrip-view")
-                .Title("Inbox")
-                .Footer(
-                    @<text>
+                @(Html.Kendo().MobileTabStrip()
+                    .Items(items =>
+                    {
+                        items.Add().Icon("contacts").Text("Profile");
+                        items.Add().Icon("history").Text("Sales");
+                        items.Add().Icon("favorites").Text("Rating");
+                        items.Add().Icon("settings").Text("Settings");
+                    })
+                )
 
-                    @(Html.Kendo().MobileTabStrip()
-                        .Items(items =>
-                        {
-                            items.Add().Icon("contacts").Text("Profile");
-                            items.Add().Icon("history").Text("Sales");
-                            items.Add().Icon("favorites").Text("Rating");
-                            items.Add().Icon("settings").Text("Settings");
-                        })
-                    )
-
-                </text>)
-            )
+            </text>)
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -106,34 +98,8 @@ You can subscribe to all hybrid TabStrip [events](https://docs.telerik.com/kendo
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().MobileTabStrip()
-                .Name("tabstrip")
-                .Items(items =>
-                {
-                    items.Add().Icon("contacts").Text("Profile");
-                    items.Add().Icon("history").Text("Sales");
-                    items.Add().Icon("favorites").Text("Rating");
-                    items.Add().Icon("settings").Text("Settings");
-                })
-                .Events(events => events
-                    .Select("onSelect")
-                )
-
-        %>
-
-        <script>
-        function onSelect() {
-            //Handle the select event.
-        }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().MobileTabStrip()
+```ASPX
+    <%: Html.Kendo().MobileTabStrip()
             .Name("tabstrip")
             .Items(items =>
             {
@@ -145,13 +111,34 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Events(events => events
                 .Select("onSelect")
             )
-        )
+    %>
 
-        <script>
+    <script>
         function onSelect() {
             //Handle the select event.
         }
-        </script>
+    </script>
+```
+```Razor
+    @(Html.Kendo().MobileTabStrip()
+        .Name("tabstrip")
+        .Items(items =>
+        {
+            items.Add().Icon("contacts").Text("Profile");
+            items.Add().Icon("history").Text("Sales");
+            items.Add().Icon("favorites").Text("Rating");
+            items.Add().Icon("settings").Text("Settings");
+        })
+        .Events(events => events
+            .Select("onSelect")
+        )
+    )
+
+    <script>
+        function onSelect() {
+            //Handle the select event.
+        }
+    </script>
 ```
 
 ## Reference
@@ -162,22 +149,22 @@ You can reference a hybrid TabStrip instance by using the [jQuery.data()](http:/
 
 ###### Example
 
-        @(Html.Kendo().MobileTabStrip()
-            .Name("tabstrip")
-            .Items(items =>
-            {
-                items.Add().Icon("contacts").Text("Profile");
-                items.Add().Icon("history").Text("Sales");
-                items.Add().Icon("favorites").Text("Rating");
-                items.Add().Icon("settings").Text("Settings");
-            })
-        )
-        <script>
+    @(Html.Kendo().MobileTabStrip()
+        .Name("tabstrip")
+        .Items(items =>
+        {
+            items.Add().Icon("contacts").Text("Profile");
+            items.Add().Icon("history").Text("Sales");
+            items.Add().Icon("favorites").Text("Rating");
+            items.Add().Icon("settings").Text("Settings");
+        })
+    )
+    <script>
         $(function() {
             //Notice that the Name() of the TabStrip is used to get its client-side instance.
             var tabstrip = $("#tabstrip").data("kendoMobileTabStrip");
         });
-        </script>
+    </script>
 
 ## See Also
 

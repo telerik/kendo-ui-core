@@ -13,44 +13,44 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Calen
 
 ### Events
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Calendar().Name("Calendar").ClientEvents( events => events.OnChange(“change”))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Calendar().Name("Calendar").Events( events => events.Change(“change”))
 ```
 
 ### Min Date
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)
 ```
-```tab-Current
+```Current
 
     Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)
 ```
 
 ### Max Date
 
-```tab-Previous
+```Previous
 
     Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)
 ```
 
 ### Footer
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)</code></td>
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
 ```

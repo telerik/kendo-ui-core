@@ -29,32 +29,28 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a Slider.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().Slider()
-                    .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-                    .Min(0) //Set min value of the Slider.
-                    .Max(100) //Set min value of the Slider.
-                    .Value(20) //Set the value of the Slider.
-            %>
+    ```ASPX
+        <%: Html.Kendo().Slider()
+            .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+            .Min(0) //Set min value of the Slider.
+            .Max(100) //Set min value of the Slider.
+            .Value(20) //Set the value of the Slider.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().Slider()
-                  .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-                  .Min(0) //Set min value of the Slider.
-                  .Max(100) //Set min value of the Slider.
-                  .Value(20) //Set the value of the Slider.
-            )
+    ```Razor
+        @(Html.Kendo().Slider()
+            .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+            .Min(0) //Set min value of the Slider.
+            .Max(100) //Set min value of the Slider.
+            .Value(20) //Set the value of the Slider.
+        )
     ```
 
 ## Event Handling
@@ -65,18 +61,15 @@ You can subscribe to all Slider [events](http://docs.telerik.com/kendo-ui/api/ja
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().Slider()
-                .Name("slider")
-                .Events(e => e
-                    .Change("change")
-                    .Slide("slide")
-                )
-        %>
-        <script>
+```ASPX
+    <%: Html.Kendo().Slider()
+            .Name("slider")
+            .Events(e => e
+                .Change("change")
+                .Slide("slide")
+            )
+    %>
+    <script>
         function change() {
             //Handle the change event.
         }
@@ -84,18 +77,17 @@ The following example demonstrates how to subscribe to events by a handler name.
         function slide() {
             //Handle the slide event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
-
-        @(Html.Kendo().Slider()
-              .Name("slider")
-              .Events(e => e
-                    .Change("change")
-                    .Slide("slide")
-              )
-        )
-        <script>
+```Razor
+    @(Html.Kendo().Slider()
+            .Name("slider")
+            .Events(e => e
+                .Change("change")
+                .Slide("slide")
+            )
+    )
+    <script>
         function change() {
             //Handle the change event.
         }
@@ -103,7 +95,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         function slide() {
             //Handle the slide event.
         }
-        </script>
+    </script>
 ```
 
 ### By Template Delegate
@@ -112,24 +104,21 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().Slider()
-              .Name("slider")
-              .Events(e => e
-                  .Change(@<text>
-                    function() {
-                        //Handle the change event inline.
-                    }
-                  </text>)
-                  .Slide(@<text>
-                    function() {
-                        //Handle the slide event inline.
-                    }
-                    </text>)
-              )
+    @(Html.Kendo().Slider()
+        .Name("slider")
+        .Events(e => e
+            .Change(@<text>
+                function() {
+                    //Handle the change event inline.
+                }
+            </text>)
+            .Slide(@<text>
+                function() {
+                    //Handle the slide event inline.
+                }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
@@ -139,13 +128,13 @@ To reference an existing Kendo UI Slider instance, use the [`jQuery.data()`](htt
 
 ###### Example
 
-        //Put this after your Kendo UI Slider for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI Slider for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the Slider is used to get its client-side instance.
             var slider = $("#slider").data("kendoSlider");
         });
-        </script>
+    </script>
 
 ## See Also
 

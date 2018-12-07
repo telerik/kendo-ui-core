@@ -21,156 +21,156 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     ###### Example
 
-            public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
-            {
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
-            }
+        public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+        {
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
+        }
 
 1. Assign a default `pageSize`.
 
     ###### Example
 
-            public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+        public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+        {
+            if (request.PageSize == 0)
             {
-                if (request.PageSize == 0)
-                {
-                   request.PageSize = 10;
-                }
-
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
+            request.PageSize = 10;
             }
+
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
+        }
 
 1. Handle the appropriate data operations.
 
     ###### Example
 
-            public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+        public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+        {
+            if (request.PageSize == 0)
             {
-                if (request.PageSize == 0)
-                {
-                    request.PageSize = 10;
-                }
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
+                request.PageSize = 10;
+            }
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
 
-                if (request.Sorts.Any())
+            if (request.Sorts.Any())
+            {
+                foreach (SortDescriptor sortDescriptor in request.Sorts)
                 {
-                    foreach (SortDescriptor sortDescriptor in request.Sorts)
+                    if (sortDescriptor.SortDirection == ListSortDirection.Ascending)
                     {
-                        if (sortDescriptor.SortDirection == ListSortDirection.Ascending)
+                        switch (sortDescriptor.Member)
                         {
-                            switch (sortDescriptor.Member)
-                            {
-                                case "OrderID":
-                                    orders= orders.OrderBy(order => order.OrderID);
-                                    break;
-                                case "ShipAddress":
-                                    orders= orders.OrderBy(order => order.ShipAddress);
-                                    break;
-                            }
+                            case "OrderID":
+                                orders= orders.OrderBy(order => order.OrderID);
+                                break;
+                            case "ShipAddress":
+                                orders= orders.OrderBy(order => order.ShipAddress);
+                                break;
                         }
-                        else
+                    }
+                    else
+                    {
+                        switch (sortDescriptor.Member)
                         {
-                            switch (sortDescriptor.Member)
-                            {
-                                case "OrderID":
-                                    orders= orders.OrderByDescending(order => order.OrderID);
-                                    break;
-                                case "ShipAddress":
-                                    orders= orders.OrderByDescending(order => order.ShipAddress);
-                                    break;
-                            }
+                            case "OrderID":
+                                orders= orders.OrderByDescending(order => order.OrderID);
+                                break;
+                            case "ShipAddress":
+                                orders= orders.OrderByDescending(order => order.ShipAddress);
+                                break;
                         }
                     }
                 }
-                else
-                {
-                    //EF cannot page unsorted data.
-                    orders = orders.OrderBy(o => o.OrderID);
-                }
-
-                //Apply paging.
-                if (request.Page > 0) {
-                    orders = orders.Skip((request.Page - 1) * request.PageSize);
-                }
-                orders = orders.Take(request.PageSize);
             }
+            else
+            {
+                //EF cannot page unsorted data.
+                orders = orders.OrderBy(o => o.OrderID);
+            }
+
+            //Apply paging.
+            if (request.Page > 0) {
+                orders = orders.Skip((request.Page - 1) * request.PageSize);
+            }
+            orders = orders.Take(request.PageSize);
+        }
 
 1. Calculate the total number of records.
 
     ###### Example
 
-            public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+        public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+        {
+            if (request.PageSize == 0)
             {
-                if (request.PageSize == 0)
-                {
-                    request.PageSize = 10;
-                }
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
-
-                //Apply sorting (code omitted).
-
-                //Calculate the total number of records before paging.
-                var total = orders.Count();
-
-                //Apply paging.
-
-                ViewData["total"] = total;
+                request.PageSize = 10;
             }
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
+
+            //Apply sorting (code omitted).
+
+            //Calculate the total number of records before paging.
+            var total = orders.Count();
+
+            //Apply paging.
+
+            ViewData["total"] = total;
+        }
 
 1. Pass the processed data to the View.
 
     ###### Example
 
-            public ActionResult Index([DataSourceRequest]DataSourceRequest request)
-            {
-                //Get the data (code omitted).
-                //Apply sorting (code omitted).
-                //Calculate the total number of records (code omitted).
+        public ActionResult Index([DataSourceRequest]DataSourceRequest request)
+        {
+            //Get the data (code omitted).
+            //Apply sorting (code omitted).
+            //Calculate the total number of records (code omitted).
 
-                //Apply paging (code omitted).
+            //Apply paging (code omitted).
 
-                return View(orders);
-            }
+            return View(orders);
+        }
 
 1. Set `EnableCustomBinding(true)` through the Grid widget declaration.
 
     ###### Example
 
-            @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
+        @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
-            @(Html.Kendo().Grid(Model)
-                .Name("Grid")
-                .EnableCustomBinding(true)
-                .Columns(columns => {
-                    columns.Bound(o => o.OrderID);
-                    columns.Bound(o => o.ShipAddress);
-                })
-                .Pageable()
-                .Sortable()
-                .Scrollable()
-            )
+        @(Html.Kendo().Grid(Model)
+            .Name("Grid")
+            .EnableCustomBinding(true)
+            .Columns(columns => {
+                columns.Bound(o => o.OrderID);
+                columns.Bound(o => o.ShipAddress);
+            })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+        )
 
 1. If paging is enabled, assign the total number of records through the `DataSource`.
 
     ###### Example
 
-            @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
+        @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
-            @(Html.Kendo().Grid(Model)
-                .Name("Grid")
-                .EnableCustomBinding(true)
-                .Columns(columns => {
-                    columns.Bound(o => o.OrderID);
-                    columns.Bound(o => o.ShipAddress);
-                })
-                .Pageable()
-                .Sortable()
-                .Scrollable()
-                .DataSource(dataSource => dataSource
-                    .Server()
-                    .Total((int)ViewData["total"]) // set the total number of records
-                )
+        @(Html.Kendo().Grid(Model)
+            .Name("Grid")
+            .EnableCustomBinding(true)
+            .Columns(columns => {
+                columns.Bound(o => o.OrderID);
+                columns.Bound(o => o.ShipAddress);
+            })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .DataSource(dataSource => dataSource
+                .Server()
+                .Total((int)ViewData["total"]) // set the total number of records
             )
+        )
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-server-binding).
 
@@ -182,131 +182,131 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     ###### Example
 
-            public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-            {
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
-            }
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
+        }
 
 1. Handle the appropriate data operations and calculate the total number of records.
 
     ###### Example
 
-            public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
+
+            //Apply sorting.
+
+            if (request.Sorts.Any())
             {
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
-
-                //Apply sorting.
-
-                if (request.Sorts.Any())
+                foreach (SortDescriptor sortDescriptor in request.Sorts)
                 {
-                    foreach (SortDescriptor sortDescriptor in request.Sorts)
+                    if (sortDescriptor.SortDirection == ListSortDirection.Ascending)
                     {
-                        if (sortDescriptor.SortDirection == ListSortDirection.Ascending)
+                        switch (sortDescriptor.Member)
                         {
-                            switch (sortDescriptor.Member)
-                            {
-                                case "OrderID":
-                                    orders= orders.OrderBy(order => order.OrderID);
-                                    break;
-                                case "ShipAddress":
-                                    orders= orders.OrderBy(order => order.ShipAddress);
-                                    break;
-                            }
+                            case "OrderID":
+                                orders= orders.OrderBy(order => order.OrderID);
+                                break;
+                            case "ShipAddress":
+                                orders= orders.OrderBy(order => order.ShipAddress);
+                                break;
                         }
-                        else
+                    }
+                    else
+                    {
+                        switch (sortDescriptor.Member)
                         {
-                            switch (sortDescriptor.Member)
-                            {
-                                case "OrderID":
-                                    orders= orders.OrderByDescending(order => order.OrderID);
-                                    break;
-                                case "ShipAddress":
-                                    orders= orders.OrderByDescending(order => order.ShipAddress);
-                                    break;
-                            }
+                            case "OrderID":
+                                orders= orders.OrderByDescending(order => order.OrderID);
+                                break;
+                            case "ShipAddress":
+                                orders= orders.OrderByDescending(order => order.ShipAddress);
+                                break;
                         }
                     }
                 }
-                else
-                {
-                    //EF cannot page unsorted data.
-                    orders = orders.OrderBy(o => o.OrderID);
-                }
-
-                var total = orders.Count();
-
-                //Apply paging.
-                if (request.Page > 0) {
-                    orders = orders.Skip((request.Page - 1) * request.PageSize);
-                }
-                orders = orders.Take(request.PageSize);
             }
+            else
+            {
+                //EF cannot page unsorted data.
+                orders = orders.OrderBy(o => o.OrderID);
+            }
+
+            var total = orders.Count();
+
+            //Apply paging.
+            if (request.Page > 0) {
+                orders = orders.Skip((request.Page - 1) * request.PageSize);
+            }
+            orders = orders.Take(request.PageSize);
+        }
 
 1. Create a new instance of `DataSourceResult`. Set the `Data` and `Total` properties to the processed data and to the total number of records.
 
     ###### Example
 
-            public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            //Get the data (code omitted).
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
+
+            //Apply sorting (code omitted).
+
+            //Apply paging (code omitted).
+
+            //Initialize  the DataSourceResult.
+            var result = new DataSourceResult()
             {
-                //Get the data (code omitted).
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
-
-                //Apply sorting (code omitted).
-
-                //Apply paging (code omitted).
-
-                //Initialize  the DataSourceResult.
-                var result = new DataSourceResult()
-                {
-                    Data = orders, // Process data (paging and sorting applied)
-                    Total = total // Total number of records
-                };
-            }
+                Data = orders, // Process data (paging and sorting applied)
+                Total = total // Total number of records
+            };
+        }
 
 1. Return the `DataSourceResult` as JSON.
 
     ###### Example
 
-            public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            //Get the data (code omitted).
+            IQueryable<Order> orders = new NorthwindEntities().Orders;
+
+            //Apply sorting (code omitted).
+
+            //Apply paging (code omitted).
+
+            //Initialize the DataSourceResult (code omitted).
+
+            var result = new DataSourceResult()
             {
-                //Get the data (code omitted).
-                IQueryable<Order> orders = new NorthwindEntities().Orders;
+                Data = orders, // Process data (paging and sorting applied)
+                Total = total // Total number of records
+            };
 
-                //Apply sorting (code omitted).
-
-                //Apply paging (code omitted).
-
-                //Initialize the DataSourceResult (code omitted).
-
-                var result = new DataSourceResult()
-                {
-                    Data = orders, // Process data (paging and sorting applied)
-                    Total = total // Total number of records
-                };
-
-                //Return the result as JSON.
-                return Json(result);
-            }
+            //Return the result as JSON.
+            return Json(result);
+        }
 
 1. Configure the Grid for custom Ajax binding.
 
     ###### Example
 
-            @(Html.Kendo().Grid<KendoGridCustomAjaxBinding.Models.Order>()
-                .Name("Grid")
-                .EnableCustomBinding(true)
-                .Columns(columns => {
-                    columns.Bound(o => o.OrderID);
-                    columns.Bound(o => o.ShipAddress);
-                })
-                .Pageable()
-                .Sortable()
-                .Scrollable()
-                .DataSource(dataSource => dataSource
-                    .Ajax()
-                    .Read("Orders_Read", "Home")
-                )
+        @(Html.Kendo().Grid<KendoGridCustomAjaxBinding.Models.Order>()
+            .Name("Grid")
+            .EnableCustomBinding(true)
+            .Columns(columns => {
+                columns.Bound(o => o.OrderID);
+                columns.Bound(o => o.ShipAddress);
+            })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read("Orders_Read", "Home")
             )
+        )
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-ajax-binding).
 

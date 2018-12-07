@@ -36,77 +36,73 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     **Figure 1. A new entity data model**
 
-    ![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
+    ![New entity data model](images/grid-entity-data-model.png)
 
 1.  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
     **Figure 2. Choose the connection**
 
-    ![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
+    ![Choose the connection](images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
     **Figure 3. Choose the Products table**
 
-    ![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
+    ![Choose the Products table](images/grid-database-objects.png)
 
 1. Open **HomeController.cs** and modify the `Index` action method.
 
     ###### Example
 
-          public ActionResult Index()
-          {
-              ViewBag.Message = "Welcome to ASP.NET MVC!";
-              var northwind = new NorthwindEntities();
-              //Get the Products entities and add them to the ViewBag.
-              ViewBag.Products = northwind.Products;
-              return View();
-          }
+        public ActionResult Index()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            var northwind = new NorthwindEntities();
+            //Get the Products entities and add them to the ViewBag.
+            ViewBag.Products = northwind.Products;
+            return View();
+        }
 
 1. Add a Kendo UI Grid to the `Index` view.
 
-    ###### Example
-
-    ```tab-ASPX
-
-          <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
-                  .Name("grid")
-                  .Columns(columns =>
-                  {
-                      //Create a column bound to the ProductID property.
-                      columns.Bound(product => product.ProductID);
-                      //Create a column bound to the ProductName property.
-                      columns.Bound(product => product.ProductName);
-                      //Create a column bound to the UnitsInStock property.
-                      columns.Bound(product => product.UnitsInStock);
-                  })
-                  .Pageable() //Enable the paging.
-                  .Sortable() //Enable the sorting.
-          %>
+    ```ASPX
+        <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+            .Name("grid")
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductID property.
+                columns.Bound(product => product.ProductID);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() //Enable the paging.
+            .Sortable() //Enable the sorting.
+        %>
     ```
-    ```tab-Razor
-
-          @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
-                .Name("grid")
-                .Columns(columns =>
-                {
-                    //Create a column bound to the ProductID property.
-                    columns.Bound(product => product.ProductID);
-                    //Create a column bound to the ProductName property.
-                    columns.Bound(product => product.ProductName);
-                    //Create a column bound to the UnitsInStock property.
-                    columns.Bound(product => product.UnitsInStock);
-                })
-                .Pageable() //Enable the paging.
-                .Sortable() //Enable the sorting.
-          )
+    ```Razor
+        @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+            .Name("grid")
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductID property.
+                columns.Bound(product => product.ProductID);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() //Enable the paging.
+            .Sortable() //Enable the sorting.
+        )
     ```
 
 1. Build and run the application.
 
     **Figure 4. The final result**
 
-    ![Final result](/helpers/grid/images/grid-bound-grid.png)
+    ![Final result](images/grid-bound-grid.png)
 
 ## Reference
 
@@ -116,21 +112,21 @@ To reference an existing Kendo UI Grid instance, use the [`jQuery.data()`](http:
 
 ###### Example
 
-        @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products)
-              .Name("grid")
-              .Columns(columns =>
-              {
-                  columns.Bound(product => product.ProductID);
-                  columns.Bound(product => product.ProductName);
-                  columns.Bound(product => product.UnitsInStock);
-              })
-        )
-        <script>
+    @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products)
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(product => product.ProductID);
+                columns.Bound(product => product.ProductName);
+                columns.Bound(product => product.UnitsInStock);
+            })
+    )
+    <script>
         $(function() {
             //Notice that the Name() of the Grid is used to get its client-side instance.
             var grid = $("#grid").data("kendoGrid");
         });
-        </script>
+    </script>
 
 ## Event Handling
 
@@ -142,35 +138,15 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().Grid(Model)
-                .Name("grid")
-                .Events(e => e
-                    .DataBound("grid_dataBound")
-                    .Change("grid_change")
-                )
-        %>
-        <script>
-        function grid_dataBound() {
-            //Handle the dataBound event.
-        }
-
-        function grid_change() {
-            //Handle the change event.
-        }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().Grid(Model)
-              .Name("grid")
-              .Events(e => e
-                  .DataBound("grid_dataBound")
-                  .Change("grid_change")
-              )
+```ASPX
+    <%: Html.Kendo().Grid(Model)
+        .Name("grid")
+        .Events(e => e
+            .DataBound("grid_dataBound")
+            .Change("grid_change")
         )
-        <script>
+    %>
+    <script>
         function grid_dataBound() {
             //Handle the dataBound event.
         }
@@ -178,7 +154,25 @@ The following example demonstrates how to subscribe to events by a handler name.
         function grid_change() {
             //Handle the change event.
         }
-        </script>
+    </script>
+```
+```Razor
+    @(Html.Kendo().Grid(Model)
+        .Name("grid")
+        .Events(e => e
+            .DataBound("grid_dataBound")
+            .Change("grid_change")
+        )
+    )
+    <script>
+        function grid_dataBound() {
+            //Handle the dataBound event.
+        }
+
+        function grid_change() {
+            //Handle the change event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -186,8 +180,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 The following example demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
-
-```tab-Razor
 
     @(Html.Kendo().Grid(Model)
           .Name("grid")
@@ -204,7 +196,6 @@ The following example demonstrates how to subscribe to events by a template dele
               </text>)
           )
     )
-```
 
 ## See Also
 

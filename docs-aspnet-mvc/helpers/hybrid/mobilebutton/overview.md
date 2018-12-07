@@ -23,69 +23,61 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                ViewBag.Message = "Welcome to ASP.NET MVC!";
+        public ActionResult Index()
+        {
+            ViewBag.Message = "Welcome to ASP.NET MVC!";
 
-                return View();
-            }
+            return View();
+        }
 
 1. Add a hybrid Kendo UI Button to the `Index` view. Like most hybrid Kendo UI widgets, the Button must be initialized within the hybrid View content.
 
-    ###### Example
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("button-view")
+            .Title("Inbox")
+            .Content(() =>
+            {
+                %>
 
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("button-view")
-                    .Title("Inbox")
-                    .Content(() =>
-                    {
-                        %>
-
-                        <%: Html.Kendo().MobileButton()
-                                .Name("mobile-button2")
-                                .Text("Trigger Event 2")
-                                .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
+                <%: Html.Kendo().MobileButton()
+                        .Name("mobile-button2")
+                        .Text("Trigger Event 2")
+                        .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
+                %>
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("button-view")
+            .Title("Inbox")
+            .Content(
+                @<text>
 
-            @(Html.Kendo().MobileView()
-                .Name("button-view")
-                .Title("Inbox")
-                .Content(
-                    @<text>
+                @(Html.Kendo().MobileButton()
+                        .Name("mobile-button2")
+                        .Text("Trigger Event 2")
+                        .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
+                )
 
-                    @(Html.Kendo().MobileButton()
-                            .Name("mobile-button2")
-                            .Text("Trigger Event 2")
-                            .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
-                    )
-
-                </text>)
-            )
+            </text>)
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -100,37 +92,35 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-ASPX
+```ASPX
+    <%: Html.Kendo().MobileButton()
+            .Name("MobileButton")
+            .Text("Button Text")
+            .Events(events => events
+                .Click("onClick")
+            )
+    %>
 
-        <%: Html.Kendo().MobileButton()
-                .Name("MobileButton")
-                .Text("Button Text")
-                .Events(events => events
-                    .Click("onClick")
-                )
-        %>
-
-        <script>
+    <script>
         function onClick() {
             //Handle the open event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
-
-        @(Html.Kendo().MobileButton()
-                .Name("MobileButton")
-                .Text("Button Text")
-                .Events(events => events
-                    .Click("onClick")
-                )
+```Razor
+    @(Html.Kendo().MobileButton()
+        .Name("MobileButton")
+        .Text("Button Text")
+        .Events(events => events
+            .Click("onClick")
         )
+    )
 
-        <script>
+    <script>
         function onClick() {
             //Handle the click event.
         }
-        </script>
+    </script>
 ```
 
 ## Reference
@@ -141,16 +131,16 @@ You can reference a hybrid Button instance by using the code from the example be
 
 ###### Example
 
-        @(Html.Kendo().MobileButton()
-                .Name("MobileButton")
-                .Text("Button Text")
-        )
-        <script>
+    @(Html.Kendo().MobileButton()
+            .Name("MobileButton")
+            .Text("Button Text")
+    )
+    <script>
         $(function() {
             //Notice that the Name() of the Button is used to get its client-side instance.
             var button = $("#MobileButton").data("kendoMobileButton");
         });
-        </script>
+    </script>
 
 ## See Also
 

@@ -24,8 +24,8 @@ Customize the Tooltip position by using either of the following approaches:
 
     ###### Example
 
-            @Html.Kendo().NumericTextBoxFor(model => model.UnitPrice)
-            @Html.ValidationMessageFor(model => model.UnitPrice)
+        @Html.Kendo().NumericTextBoxFor(model => model.UnitPrice)
+        @Html.ValidationMessageFor(model => model.UnitPrice)
 
 * Use the approach demonstrated [in the introductory article on the Kendo UI Validator](http://docs.telerik.com/kendo-ui/controls/editors/validator/overview) to add a placeholder.
 

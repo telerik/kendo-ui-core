@@ -39,9 +39,7 @@ Below are listed the steps for you to follow when enabling the export capabiliti
 
 1. Add the `ExportAs` tool.
 
-    ###### Example
-
-    ```tab-Razor
+    ```Razor
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -49,20 +47,18 @@ Below are listed the steps for you to follow when enabling the export capabiliti
         )
     )
     ```
-    ```tab-ASPX
+    ```ASPX
     <%: Html.Kendo().Editor()
-            .Name("Editor")
-            .Tools(tools => tools
-                .ExportAs()
-            )
+        .Name("Editor")
+        .Tools(tools => tools
+            .ExportAs()
+        )
     %>
     ```
 
     Alternatively, you can refine the options by configuring the `ExportAs` tool.
 
-    ###### Example
-
-    ```tab-Razor
+    ```Razor
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -76,26 +72,24 @@ Below are listed the steps for you to follow when enabling the export capabiliti
         )
     )
     ```
-    ```tab-ASPX
+    ```ASPX
     <%: Html.Kendo().Editor()
-            .Name("Editor")
-            .Tools(tools => tools
-                .ExportAs(export => export
-                    .Add("DOCX", "docx")
-                    .Add("RTF", "rtf")
-                    .Add("PDF", "pdf")
-                    .Add("HTML", "html")
-                    .Add("TXT", "txt")
-                )
+        .Name("Editor")
+        .Tools(tools => tools
+            .ExportAs(export => export
+                .Add("DOCX", "docx")
+                .Add("RTF", "rtf")
+                .Add("PDF", "pdf")
+                .Add("HTML", "html")
+                .Add("TXT", "txt")
             )
+        )
     %>
     ```
 
 1. To enable the tool to contact the server and export a file, configure the `Proxy` method and, optionally, set up the name of the exported file through the `FileName` method.
 
-    ###### Example
-
-    ```tab-Razor
+    ```Razor
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -107,16 +101,16 @@ Below are listed the steps for you to follow when enabling the export capabiliti
         )
     )
     ```
-    ```tab-ASPX
+    ```ASPX
     <%: Html.Kendo().Editor()
-            .Name("Editor")
-            .Tools(tools => tools
-                .ExportAs()
-            )
-            .ExportAs(exportAs => exportAs
-                .FileName("Export")
-                .Proxy("Export", "Editor")
-            )
+        .Name("Editor")
+        .Tools(tools => tools
+            .ExportAs()
+        )
+        .ExportAs(exportAs => exportAs
+            .FileName("Export")
+            .Proxy("Export", "Editor")
+        )
     %>
     ```
 
@@ -141,9 +135,7 @@ Similar to exporting, below are listed the steps for you to follow when enabling
 
 1. Add the `Import` tool.
 
-    ###### Example
-
-    ```tab-Razor
+    ```Razor
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -151,20 +143,18 @@ Similar to exporting, below are listed the steps for you to follow when enabling
         )
     )
     ```
-    ```tab-ASPX
+    ```ASPX
     <%: Html.Kendo().Editor()
-            .Name("Editor")
-            .Tools(tools => tools
-                .Import()
-            )
+        .Name("Editor")
+        .Tools(tools => tools
+            .Import()
+        )
     %>
     ```
 
 1. Configure the `Import` by using the `Proxy` and `AllowedExtensions` methods.
 
-    ###### Example
-
-    ```tab-Razor
+    ```Razor
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -176,16 +166,16 @@ Similar to exporting, below are listed the steps for you to follow when enabling
         )
     )
     ```
-    ```tab-ASPX
+    ```ASPX
     <%: Html.Kendo().Editor()
-            .Name("Editor")
-            .Tools(tools => tools
-                .Import()
-            )
-            .Import(import => import
-                .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
-                .Proxy("Import","Editor")
-            )
+        .Name("Editor")
+        .Tools(tools => tools
+            .Import()
+        )
+        .Import(import => import
+            .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
+            .Proxy("Import","Editor")
+        )
     %>
     ```
 

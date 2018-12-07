@@ -32,48 +32,48 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     **Figure 1. A new entity data model**
 
-    ![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
+    ![New entity data model](../images/grid-entity-data-model.png)
 
 1.  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
     **Figure 2. Choose the connection**
 
-    ![Choose the connection](/helpers/grid/images/grid-entity-data-model.png)
+    ![Choose the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
     **Figure 3. Choose the Products table**
 
-    ![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
+    ![Choose the Products table](../images/grid-database-objects.png)
 
 1. Open the `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
 
     ###### Example
 
-            public ActionResult Products_Read()
-            {
-            }
+        public ActionResult Products_Read()
+        {
+        }
 
 1. Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data. Now import the `Kendo.Mvc.UI` namespace.
 
     ###### Example
 
-            public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
-            {
-            }
+        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+        }
 
 1. Use the `ToDataSourceResult` extension method to convert the Products to a `Kendo.Mvc.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
     ###### Example
 
-            public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            using (var northwind = new NorthwindEntities())
             {
-                using (var northwind = new NorthwindEntities())
-                {
-                    IQueryable<Product> products = northwind.Products;
-                    DataSourceResult result = products.ToDataSourceResult(request);
-                }
+                IQueryable<Product> products = northwind.Products;
+                DataSourceResult result = products.ToDataSourceResult(request);
             }
+        }
 
     > **Important**
     > * The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns an empty result.
@@ -84,85 +84,83 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     ###### Example
 
-            public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+        public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            using (var northwind = new NorthwindEntities())
             {
-                using (var northwind = new NorthwindEntities())
-                {
-                    IQueryable<Product> products = northwind.Products;
-                    DataSourceResult result = await products.ToDataSourceResultAsync(request);
-                }
+                IQueryable<Product> products = northwind.Products;
+                DataSourceResult result = await products.ToDataSourceResultAsync(request);
             }
+        }
 
 1. Return the `DataSourceResult` as JSON. Configure the Kendo UI Grid for Ajax binding.
 
     ###### Example
 
-            public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            using (var northwind = new NorthwindEntities())
             {
-                using (var northwind = new NorthwindEntities())
-                {
-                    IQueryable<Product> products = northwind.Products;
-                    DataSourceResult result = products.ToDataSourceResult(request);
-                    return Json(result);
-                }
+                IQueryable<Product> products = northwind.Products;
+                DataSourceResult result = products.ToDataSourceResult(request);
+                return Json(result);
             }
+        }
+
     The same thing applies when you use the asynchronous `ToDataSourceResultAsync` counterpart, as demonstrated in the following example.
 
     ###### Example
 
-            public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+        public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            using (var northwind = new NorthwindEntities())
             {
-                using (var northwind = new NorthwindEntities())
-                {
-                    IQueryable<Product> products = northwind.Products;
-                    DataSourceResult result = await products.ToDataSourceResultAsync(request);
-                    return Json(result);
-                }
+                IQueryable<Product> products = northwind.Products;
+                DataSourceResult result = await products.ToDataSourceResultAsync(request);
+                return Json(result);
             }
+        }
+
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
-    ###### Example
-
-    ```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
-              .Name("grid")
-              .DataSource(dataSource => dataSource //Configure the Grid data source.
-                  .Ajax() //Specify that Ajax binding is used.
-                  .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format
-               )
-              .Columns(columns =>
-              {
-                  //Create a column bound to the ProductID property.
-                  columns.Bound(product => product.ProductID);
-                  //Create a column bound to the ProductName property.
-                  columns.Bound(product => product.ProductName);
-                  //Create a column bound to the UnitsInStock property.
-                  columns.Bound(product => product.UnitsInStock);
-              })
-              .Pageable() // Enable paging
-              .Sortable() // Enable sorting
+            .Name("grid")
+            .DataSource(dataSource => dataSource //Configure the Grid data source.
+                .Ajax() //Specify that Ajax binding is used.
+                .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format
+            )
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductID property.
+                columns.Bound(product => product.ProductID);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() // Enable paging
+            .Sortable() // Enable sorting
         %>
     ```
-    ```tab-Razor
-
+    ```Razor
         @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
-              .Name("grid")
-              .DataSource(dataSource => dataSource //Configure the Grid data source.
-                  .Ajax() //Specify that Ajax binding is used.
-                  .Read(read => read.Action("Products_Read", "Home")) //Set the action method which will return the data in JSON format.
-               )
-              .Columns(columns =>
-              {
-                  //Create a column bound to the ProductID property.
-                  columns.Bound(product => product.ProductID);
-                  //Create a column bound to the ProductName property.
-                  columns.Bound(product => product.ProductName);
-                  //Create a column bound to the UnitsInStock property.
-                  columns.Bound(product => product.UnitsInStock);
-              })
-              .Pageable() // Enable paging
-              .Sortable() // Enable sorting
+            .Name("grid")
+            .DataSource(dataSource => dataSource //Configure the Grid data source.
+                .Ajax() //Specify that Ajax binding is used.
+                .Read(read => read.Action("Products_Read", "Home")) //Set the action method which will return the data in JSON format.
+            )
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductID property.
+                columns.Bound(product => product.ProductID);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() // Enable paging
+            .Sortable() // Enable sorting
         )
     ```
 
@@ -170,7 +168,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     **Figure 4. The final result**
 
-    ![Final result](/helpers/grid/images/grid-bound-grid.png)
+    ![Final result](../images/grid-bound-grid.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding).
 
@@ -194,51 +192,47 @@ This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
 
     ###### Example
 
-            public class ProductViewModel
-            {
-                public int ProductID { get; set; }
-                public string ProductName { get; set; }
-                public short? UnitsInStock { get; set; }
-            }
+        public class ProductViewModel
+        {
+            public int ProductID { get; set; }
+            public string ProductName { get; set; }
+            public short? UnitsInStock { get; set; }
+        }
 
 1. Modify the Grid declaration and make it use `ProductViewModel` instead of `Product`.
 
-    ###### Example
-
-    ```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.ProductViewModel>()
-              .Name("grid")
-              .DataSource(dataSource => dataSource
-                  .Ajax()
-                  .Read(read => read.Action("Products_Read", "Home"))
-               )
-              .Columns(columns =>
-              {
-                  columns.Bound(product => product.ProductID);
-                  columns.Bound(product => product.ProductName);
-                  columns.Bound(product => product.UnitsInStock);
-              })
-              .Pageable()
-              .Sortable()
+            .Name("grid")
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read(read => read.Action("Products_Read", "Home"))
+            )
+            .Columns(columns =>
+            {
+                columns.Bound(product => product.ProductID);
+                columns.Bound(product => product.ProductName);
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable()
+            .Sortable()
         %>
     ```
-    ```tab-Razor
-
+    ```Razor
         @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.ProductViewModel>()
-              .Name("grid")
-              .DataSource(dataSource => dataSource
-                  .Ajax()
-                  .Read(read => read.Action("Products_Read", "Home"))
-               )
-              .Columns(columns =>
-              {
-                  columns.Bound(product => product.ProductID);
-                  columns.Bound(product => product.ProductName);
-                  columns.Bound(product => product.UnitsInStock);
-              })
-              .Pageable()
-              .Sortable()
+            .Name("grid")
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read(read => read.Action("Products_Read", "Home"))
+            )
+            .Columns(columns =>
+            {
+                columns.Bound(product => product.ProductID);
+                columns.Bound(product => product.ProductName);
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable()
+            .Sortable()
         )
     ```
 
@@ -246,21 +240,21 @@ This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
 
     ###### Example
 
-                public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
-                {
-                    using (var northwind = new NorthwindEntities())
-                    {
-                        IQueryable<Product> products = northwind.Products;
-                        //Convert the Product entities to ProductViewModel instances.
-                        DataSourceResult result = products.ToDataSourceResult(request, product => new ProductViewModel
-                                {
-                                ProductID = product.ProductID,
-                                ProductName = product.ProductName,
-                                UnitsInStock = product.UnitsInStock
-                                });
-                        return Json(result);
-                    }
-                }
+        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            using (var northwind = new NorthwindEntities())
+            {
+                IQueryable<Product> products = northwind.Products;
+                //Convert the Product entities to ProductViewModel instances.
+                DataSourceResult result = products.ToDataSourceResult(request, product => new ProductViewModel
+                        {
+                        ProductID = product.ProductID,
+                        ProductName = product.ProductName,
+                        UnitsInStock = product.UnitsInStock
+                        });
+                return Json(result);
+            }
+        }
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding).
 
@@ -281,64 +275,60 @@ The following example demonstrates how to add the additional parameters to the a
 
 The following example demonstrates how to specify the JavaScript function which returns additional data.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Read(read => read
-                   .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
-                   .Data("productsReadData") //Specify the JavaScript function which will return the data.
-              )
-          )
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID);
-              columns.Bound(product => product.ProductName);
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable()
-          .Sortable()
+        .Name("grid")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read
+                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
+                .Data("productsReadData") //Specify the JavaScript function which will return the data.
+            )
+        )
+        .Columns(columns =>
+        {
+            columns.Bound(product => product.ProductID);
+            columns.Bound(product => product.ProductName);
+            columns.Bound(product => product.UnitsInStock);
+        })
+        .Pageable()
+        .Sortable()
     %>
     <script>
-    function productsReadData() {
-        return {
-            firstName: "John",
-            lastName: "Doe"
-        };
-    }
+        function productsReadData() {
+            return {
+                firstName: "John",
+                lastName: "Doe"
+            };
+        }
     </script>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Read(read => read
-                   .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
-                   .Data("productsReadData") //Specify the JavaScript function which will return the data.
-              )
-          )
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID);
-              columns.Bound(product => product.ProductName);
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable()
-          .Sortable()
+        .Name("grid")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read
+                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
+                .Data("productsReadData") //Specify the JavaScript function which will return the data.
+            )
+        )
+        .Columns(columns =>
+        {
+            columns.Bound(product => product.ProductID);
+            columns.Bound(product => product.ProductName);
+            columns.Bound(product => product.UnitsInStock);
+        })
+        .Pageable()
+        .Sortable()
     )
     <script>
-    function productsReadData() {
-        return {
-            firstName: "John",
-            lastName: "Doe"
-        };
-    }
+        function productsReadData() {
+            return {
+                firstName: "John",
+                lastName: "Doe"
+            };
+        }
     </script>
 ```
 
@@ -348,50 +338,46 @@ By default, the Kendo UI Grid for ASP.NET MVC makes an Ajax request to the `acti
 
 The following example demonstrates how to enable client data processing.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .ServerOperation(false) //Paging, sorting, filtering, and grouping will be done client-side.
-              .Read(read => read
-                   .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
-                   .Data("productsReadData")
-              )
-          )
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID);
-              columns.Bound(product => product.ProductName);
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable()
-          .Sortable()
+        .Name("grid")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(false) //Paging, sorting, filtering, and grouping will be done client-side.
+            .Read(read => read
+                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
+                .Data("productsReadData")
+            )
+        )
+        .Columns(columns =>
+        {
+            columns.Bound(product => product.ProductID);
+            columns.Bound(product => product.ProductName);
+            columns.Bound(product => product.UnitsInStock);
+        })
+        .Pageable()
+        .Sortable()
     %>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .ServerOperation(false) //Paging, sorting, filtering, and grouping will be done client-side.
-              .Read(read => read
-                   .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
-                   .Data("productsReadData")
-              )
-          )
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID);
-              columns.Bound(product => product.ProductName);
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable()
-          .Sortable()
+        .Name("grid")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(false) //Paging, sorting, filtering, and grouping will be done client-side.
+            .Read(read => read
+                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
+                .Data("productsReadData")
+            )
+        )
+        .Columns(columns =>
+        {
+            columns.Bound(product => product.ProductID);
+            columns.Bound(product => product.ProductName);
+            columns.Bound(product => product.UnitsInStock);
+        })
+        .Pageable()
+        .Sortable()
     )
 ```
 

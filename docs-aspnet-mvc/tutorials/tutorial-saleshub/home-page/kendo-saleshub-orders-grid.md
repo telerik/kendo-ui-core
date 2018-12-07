@@ -13,7 +13,7 @@ After you have created the customer TreeView, you need to set up the Grid of ord
 
 **Figure 1. The Orders list in the Kendo UI Sales Hub**
 
-![kendo-saleshub-orders-grid-screenshot](/tutorials/tutorial-saleshub/home-page/images/kendo-saleshub-orders-grid-screenshot.png)
+![kendo-saleshub-orders-grid-screenshot](images/kendo-saleshub-orders-grid-screenshot.png)
 
 ## Configuration
 

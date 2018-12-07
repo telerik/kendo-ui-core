@@ -20,28 +20,24 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a ColorPicker.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().ColorPicker()
-                    .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
-                    .Value("#ff0000") //Set the value of the ColorPicker.
-            %>
+    ```ASPX
+        <%: Html.Kendo().ColorPicker()
+                .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+                .Value("#ff0000") //Set the value of the ColorPicker.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().ColorPicker()
-                  .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
-                  .Value("#ff0000") //Set the value of the ColorPicker.
-            )
+    ```Razor
+        @(Html.Kendo().ColorPicker()
+                .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+                .Value("#ff0000") //Set the value of the ColorPicker.
+        )
     ```
 
 ## Event Handling
@@ -52,10 +48,7 @@ You can subscribe to all ColorPicker [events](http://docs.telerik.com/kendo-ui/a
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().ColorPicker()
             .Name("colorpicker")
             .Events(e => e
@@ -83,8 +76,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo().ColorPicker()
           .Name("colorpicker")
           .Events(e => e
@@ -119,8 +111,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
     @(Html.Kendo().ColorPicker()
           .Name("colorpicker")
           .Events(e => e
@@ -146,7 +136,6 @@ The following example demonstrates how to subscribe to events by a template dele
                 </text>)
           )
     )
-```
 
 ## Reference
 
@@ -156,13 +145,13 @@ To reference an existing Kendo UI ColorPicker instance, use the [`jQuery.data()`
 
 ###### Example
 
-        //Put this after your Kendo UI ColorPicker for ASP.NET MVC declaration.
-        <script>
+    //Put this after your Kendo UI ColorPicker for ASP.NET MVC declaration.
+    <script>
         $(function() {
             //Notice that the Name() of the ColorPicker is used to get its client-side instance.
             var colorpicker = $("#colorpicker").data("kendoColorPicker");
         });
-        </script>
+    </script>
 
 ## See Also
 

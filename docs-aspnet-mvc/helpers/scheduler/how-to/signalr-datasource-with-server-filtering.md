@@ -13,7 +13,7 @@ The scenario adopted by the project considers the following aspects of the imple
 * You need to set the [`serverFiltering`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering) option of the DataSource in the Scheduler to `true`. This way, the widget automatically sends a `read` call to the local hub (service) upon each navigation which occurs in the Scheduler.
 * The project applies a [`parameterMap`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.parameterMap) function for the transport object of the DataSource. If a `read` action occurs, this function sends the start and end dates of the visible range of the Scheduler. If other actions occur, the function only sends the edited or the new data.
 
-    ```tab-Setting-the-action
+    ```Setting-the-action
         function onMap(data, type) {
             switch (type) {
                 case "read": {
@@ -25,7 +25,7 @@ The scenario adopted by the project considers the following aspects of the imple
             }
         }
     ```
-    ```tab-Setting-the-function
+    ```Setting-the-function
         function forRead(data, type) {
             var scheduler = $("#scheduler").data("kendoScheduler");
 
@@ -51,13 +51,13 @@ The scenario adopted by the project considers the following aspects of the imple
 * The project applies a `FilterRange` model class to ensure the proper parsing of the sent range of data. The setters of the `start` and `end` properties convert the dates to UTC.
 * The SignalR `ProductHub Read` endpoint accepts one parameter of type `FilterRange` and returns the filtered results to the client.
 
-    ```C#
-    public IEnumerable<MeetingViewModel> Read(FilterRange range)
-    {
-        var result = meetingService.GetAll().Where(t => t.Start < range.End && (t.End > range.Start || t.RecurrenceRule != null));
-        return result;
-    }
-    ```
+    ###### Example
+
+        public IEnumerable<MeetingViewModel> Read(FilterRange range)
+        {
+            var result = meetingService.GetAll().Where(t => t.Start < range.End && (t.End > range.Start || t.RecurrenceRule != null));
+            return result;
+        }
 
 ## See Also
 

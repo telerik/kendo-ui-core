@@ -36,19 +36,19 @@ To use the Kendo UI Scaffolder Visual Studio extension, follow the steps below.
 
     **Figure 1. New scaffolded items**
 
-    ![New Scaffolded Item](/images/scaffolding/new_scaffolded_item.png)
+    ![New Scaffolded Item](../images/scaffolding/new_scaffolded_item.png)
 
 1. Select the **Kendo UI Scaffolder** from the next menu.
 
     **Figure 2. Kendo UI Scaffolder**
 
-    ![Kendo UI Scaffolder](/images/scaffolding/kendo_ui_scaffolder.png)
+    ![Kendo UI Scaffolder](../images/scaffolding/kendo_ui_scaffolder.png)
 
 1. This brings up the Kendo UI scaffolding configuration panel to choose between the Kendo UI Grid, Chart, or Scheduler controls.
 
     **Figure 3. Kendo UI Scaffolder widget selection**
 
-    ![Kendo UI Scaffolder Widget Selection](/images/scaffolding/widget_select.png)
+    ![Kendo UI Scaffolder Widget Selection](../images/scaffolding/widget_select.png)
 
 For detailed information on possible configuration options, refer to the following articles:
 

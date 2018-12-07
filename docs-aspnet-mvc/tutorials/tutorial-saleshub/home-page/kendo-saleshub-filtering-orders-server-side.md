@@ -9,7 +9,7 @@ position: 3
 
 # Filter Orders on the Server
 
-![kendo-saleshub-customer-TreeView-and-grid-screenshot](/tutorials/tutorial-saleshub/home-page/images/kendo-saleshub-customer-treeview-and-grid-screenshot.png)
+![kendo-saleshub-customer-TreeView-and-grid-screenshot](images/kendo-saleshub-customer-treeview-and-grid-screenshot.png)
 
 Since **SalesHub** contains a lot of orders for various customers, it would not be very efficient for **all**
 of the orders to be returned when the orders grid renders. To reduce wait times and cut back on the amount of bandwidth

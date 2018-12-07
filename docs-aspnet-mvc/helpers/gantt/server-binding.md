@@ -18,6 +18,8 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ### TaskViewModel
 
+###### Example
+
     public class TaskViewModel : IGanttTask
     {
         public int TaskID { get; set; }
@@ -75,6 +77,8 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ### DependencyViewModel
 
+###### Example
+
     public class DependencyViewModel : IGanttDependency
     {
         public int DependencyID { get; set; }
@@ -97,8 +101,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ## Bind to Items from ViewData
 
-```tab-Action
-
+```Controller
     public ActionResult ServerBinding()
     {
         var sampleEntities = new SampleEntities();
@@ -130,8 +133,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         return View();
     }
 ```
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewData["tasks"], (IEnumerable<DependencyViewModel>)ViewData["dependencies"])
         .Name("gantt")
@@ -164,8 +166,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         )
     %>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewData["tasks"], (IEnumerable<DependencyViewModel>)ViewData["dependencies"])
         .Name("gantt")
@@ -201,10 +202,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ## Bind to Items from ViewBag
 
-###### Example
-
-```tab-Action
-
+```Controller
     public ActionResult ServerBinding()
     {
         var sampleEntities = new SampleEntities();
@@ -236,8 +234,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         return View();
     }
 ```
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewBag.Tasks, (IEnumerable<DependencyViewModel>)ViewBag.Dependencies)
         .Name("gantt")
@@ -270,8 +267,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         )
     %>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewBag.Tasks, (IEnumerable<DependencyViewModel>)ViewBag.Dependencies)
         .Name("gantt")

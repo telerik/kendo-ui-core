@@ -15,13 +15,13 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Chart
 
 The `DataBinding` configuration is moved to the `DataSource`.
 
-```tab-Previous
+```Previous
 
     Html.Telerik().Chart<SalesData>()
     .Name("Chart")
     .DataBinding(dataBinding => dataBinding.Ajax().Select("_AjaxBinding", "Chart"))
 ```
-```tab-Current
+```Current
 
     Html.Kendo().Chart<SalesData>()
     .Name("Chart")
@@ -36,11 +36,11 @@ Kendo UI Complete for ASP.NET MVC does not support action syntax, that is `“()
 
 None of the widgets features the `OnLoad` event anymore. Use `$(document).ready()` instead.
 
-```tab-Previous
+```Previous
 
     .ClientEvents(events => events.OnError("onError"))
 ```
-```tab-Current
+```Current
 
     .DataSource(ds => ds.Events(events => events.Error("error")))
 ```

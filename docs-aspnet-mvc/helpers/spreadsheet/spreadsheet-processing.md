@@ -43,9 +43,7 @@ Below are listed the typical usage scenarios as they would appear in ASP.NET MVC
 
 Load a file from the file system and convert it to a Workbook for serialization. The supported file extensions are `.xlsx`, `.csv`, `.txt`, and `.json`.
 
-###### Example
-
-```tab-cs
+```cs
 public class HomeController : Controller
 {
     public ActionResult Read()
@@ -58,7 +56,7 @@ public class HomeController : Controller
     }
 }
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().Spreadsheet()
     .Name("spreadsheet")
 )
@@ -81,7 +79,6 @@ Load a file from the file system and use it to populate the Spreadsheet widget. 
 
 ###### Example
 
-```tab-cshtml
 @{
     var path = Server.MapPath("~/App_Data/path/to/document.xlsx");
     var workbook = Telerik.Web.Spreadsheet.Workbook.Load(path);
@@ -91,19 +88,16 @@ Load a file from the file system and use it to populate the Spreadsheet widget. 
     .Name("spreadsheet")
     .BindTo(workbook)
 )
-```
 
 ### Load Data Using BindTo Model and Spreadsheet Document Model
 
 Load the data by using the `BindTo` method and the Spreadsheet document model.
 
-###### Example
-
-```tab-cs
+```cs
 	public class HomeController : Controller
-    {   
+    {
         public ActionResult Index()
-        {            
+        {
             var document = new Telerik.Windows.Documents.Spreadsheet.Model.Workbook();
             var worksheet = document.Worksheets.Add();
             worksheet.Cells[0, 0].SetValue("1.23");
@@ -113,7 +107,7 @@ Load the data by using the `BindTo` method and the Spreadsheet document model.
         }
     }
 ```
-```tab-cshtml
+```cshtml
 @model Telerik.Web.Spreadsheet.Workbook
 
 @(Html.Kendo().Spreadsheet()
@@ -130,9 +124,7 @@ Post a Workbook to a controller and save it as a local file. The supported file 
 >
 > Set [`aspnet:MaxJsonDeserializerMembers`](https://msdn.microsoft.com/en-us/library/hh975440%28v=vs.120%29.aspx?f=255&MSPPError=-2147217396) to a higher value than the default one in the `web.config`.
 
-###### Example
-
-```tab-cs
+```cs
 [HttpPost]
 public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
 {
@@ -140,7 +132,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
     return new EmptyResult();
 }
 ```
-```tab-cshtml
+```cshtml
 @(Html.Kendo().Spreadsheet()
     .Name("spreadsheet")
 )
@@ -158,7 +150,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
     });
 </script>
 ```
-```tab-web.config
+```web.config
 <configuration>
   <appSettings>
     <add key="aspnet:MaxJsonDeserializerMembers" value="150000" />
@@ -172,13 +164,11 @@ Telerik Document Processing provides a full-blown model for a Spreadsheet docume
 
 ###### Example
 
-```tab-cs
     var document = new Telerik.Windows.Documents.Spreadsheet.Model.Workbook();
     var worksheet = document.Worksheets.Add();
     worksheet.Cells[0, 0].SetValue("1.23");
 
     return Telerik.Web.Spreadsheet.Workbook.FromDocument(document);
-```
 
 ### Convert Workbook to TDP Document
 
@@ -186,7 +176,6 @@ Conversely, you can start with a Kendo UI Spreadsheet model (`Telerik.Web.Spread
 
 ###### Example
 
-```tab-cs
 [HttpPost]
 public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 {
@@ -201,7 +190,6 @@ public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 
     return new EmptyResult();
 }
-```
 
 ## See Also
 

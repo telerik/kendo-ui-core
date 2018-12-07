@@ -24,79 +24,73 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-           public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a hybrid NavBar to the `Index` view. Like most hybrid Kendo UI widgets, the NavBar must be initialized within the hybrid View content.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("navbar-home")
-                    .Title("Index")
-                    .Header(() =>
-                    {
-                        %>
-                        <% Html.Kendo().MobileNavBar()
-                               .Content(navbar =>
-                                {
-                                    %>
-                                    <%: Html.Kendo().MobileBackButton()
-                                            .Align(MobileButtonAlign.Left)
-                                            .Text("Back")
-                                    %>
-                                    <%: navbar.ViewTitle("") %>
-                                    <%
-                                })
-                               .Render();
-                        %>
-                        <%
-                    })
-                    .Content(() =>
-                    {
-                        %>
-                        View Content
-                        <%
-                    })
-                    .Render();
-            %>
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("navbar-home")
+            .Title("Index")
+            .Header(() =>
+            {
+                %>
+                <% Html.Kendo().MobileNavBar()
+                        .Content(navbar =>
+                        {
+                            %>
+                            <%: Html.Kendo().MobileBackButton()
+                                    .Align(MobileButtonAlign.Left)
+                                    .Text("Back")
+                            %>
+                            <%: navbar.ViewTitle("") %>
+                            <%
+                        })
+                        .Render();
+                %>
+                <%
+            })
+            .Content(() =>
+            {
+                %>
+                View Content
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                .Name("navbar-home")
-                .Title("Index")
-                .Header(obj =>
-                    Html.Kendo().MobileNavBar()
-                           .Content(navbar =>
-                            @<text>
-                                @(Html.Kendo().MobileBackButton()
-                                        .Align(MobileButtonAlign.Left)
-                                        .Text("Back"))
-                                @navbar.ViewTitle("")
-                            </text>)
-                    )
-                .Content(@<text>View Content</text>)
-            )
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("navbar-home")
+            .Title("Index")
+            .Header(obj =>
+                Html.Kendo().MobileNavBar()
+                        .Content(navbar =>
+                        @<text>
+                            @(Html.Kendo().MobileBackButton()
+                                    .Align(MobileButtonAlign.Left)
+                                    .Text("Back"))
+                            @navbar.ViewTitle("")
+                        </text>)
+                )
+            .Content(@<text>View Content</text>)
+        )
     ```
 
 1. Initialize the mobile applic1.###### Example
 
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -109,28 +103,28 @@ You can reference a hybrid NavBar instance by using the code from the example be
 
 ###### Example
 
-        @(Html.Kendo().MobileView()
-                .Name("navbar-home")
-                .Title("Index")
-                .Header(obj =>
-                    Html.Kendo().MobileNavBar()
-                            .Name("MobileNavBar")
-                            .Content(navbar =>
-                                @<text>
-                                    @(Html.Kendo().MobileBackButton()
-                                            .Align(MobileButtonAlign.Left)
-                                            .Text("Back"))
-                                    @navbar.ViewTitle("")
-                                </text>)
-                )
-                .Content(@<text>View Content</text>)
-            )
-        <script>
+    @(Html.Kendo().MobileView()
+        .Name("navbar-home")
+        .Title("Index")
+        .Header(obj =>
+            Html.Kendo().MobileNavBar()
+                .Name("MobileNavBar")
+                .Content(navbar =>
+                    @<text>
+                        @(Html.Kendo().MobileBackButton()
+                                .Align(MobileButtonAlign.Left)
+                                .Text("Back"))
+                        @navbar.ViewTitle("")
+                    </text>)
+        )
+        .Content(@<text>View Content</text>)
+    )
+    <script>
         $(function() {
             //Notice that the Name() of the NavBar is used to get its client-side instance.
             var navbar = $("#MobileNavBar").data("kendoMobileNavBar");
         });
-        </script>
+    </script>
 
 ## See Also
 

@@ -40,7 +40,7 @@ To see the complete implementation of the approach, refer to the GitHub project 
 1. Configure a connection to the Northwind database and click **Next**.
 
     **Figure 1. A new entity model**
-    ![New entity data model](/helpers/treeview/images/tree-entity-data-model.png)
+    ![New entity data model](../images/tree-entity-data-model.png)
 
 1. Select all tables and click **Finish**.
 
@@ -48,7 +48,8 @@ To see the complete implementation of the approach, refer to the GitHub project 
 
 1. Open `Controllers/HomeController.cs` and add a new action method which will return JSON. Each time the user expands a parent node, the TreeView makes an Ajax request to this action method. The action method returns only the child nodes of the expanded parent node. The TreeView provides the unique identifier of the parent node or, when it makes the initial request, `null`.
 
-    ```cs
+    ###### Example
+
         public JsonResult Employees_Read(int? id)
         {
             using (var northwind = new NORTHWNDEntities())
@@ -88,11 +89,11 @@ To see the complete implementation of the approach, refer to the GitHub project 
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
-    ```
 
 1. Open `Views/Index.cshtml` and add a TreeView.
 
-    ```cs
+    ###### Example
+
         @(Html.Kendo().TreeView()
             .Name("treeview")
             .DataTextField("Name")
@@ -102,7 +103,6 @@ To see the complete implementation of the approach, refer to the GitHub project 
                 )
             )
         )
-    ```
 
 1. Add a button which will asynchronously load child nodes with the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method in the child data source and, therefore, asynchronously expand the currently selected node.
 
@@ -113,7 +113,6 @@ To see the complete implementation of the approach, refer to the GitHub project 
         .Events(e => e.Click("onExpandClick"))
     )
     ```
-
     ```js
     <script>
         function onExpandClick(e) {

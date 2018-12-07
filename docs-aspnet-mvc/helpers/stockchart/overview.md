@@ -29,32 +29,25 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View(ChartDataRepository.BoeingStockData());
-            }
+        public ActionResult Index()
+        {
+            return View(ChartDataRepository.BoeingStockData());
+        }
 
 1. Make your view strongly typed.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-               		 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
     ```
-    ```tab-Razor
-
-            @model IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>
+    ```Razor
+        @model IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>
     ```
 
 1. Add a server-bound StockChart.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().StockChart(Model)
+    ```ASPX
+        <%: Html.Kendo().StockChart(Model)
             .Name("stockChart")
             .Title("The Boeing Company (NYSE:BA)")
             .DateField("Date")
@@ -66,11 +59,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
                     series.Line(s => s.Volume);
                 })
             )
-            %>
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().StockChart(Model)
+    ```Razor
+        @(Html.Kendo().StockChart(Model)
             .Name("stockChart")
             .Title("The Boeing Company (NYSE:BA)")
             .DateField("Date")
@@ -82,7 +74,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
                     series.Line(s => s.Volume);
                 })
             )
-            )
+        )
     ```
 
 ## Event Handling
@@ -93,57 +85,53 @@ You can subscribe to all StockChart [events](https://docs.telerik.com/kendo-ui/a
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
-        <%: Html.Kendo().StockChart(Model)
-    	        .Name("stockChart")
-    	        .Title("The Boeing Company (NYSE:BA)")
-    	        .DateField("Date")
-    	        .Series(series => {
-    	            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	        })
-                .Events(e => e
-                    .DataBound("stockChart_dataBound")
-                    .SeriesClick("stockChart_seriesClick")
-                )
-        %>
-
-        <script>
-            function stockChart_dataBound() {
-                //Handle the dataBound event.
-            }
-
-            function stockChart_seriesClick() {
-                //Handle the series click event.
-            }
-        </script>
-```
-```tab-Razor
-
-        @(Html.Kendo().StockChart(Model)
-    		.Name("stockChart")
-    		.Title("The Boeing Company (NYSE:BA)")
-    		.DateField("Date")
-    		.Series(series => {
-    		    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    		})
-    		.Events(e => e
-    		  .DataBound("stockChart_dataBound")
-    		  .SeriesClick("stockChart_seriesClick")
-    		)
+```ASPX
+    <%: Html.Kendo().StockChart(Model)
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DateField("Date")
+        .Series(series => {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Events(e => e
+            .DataBound("stockChart_dataBound")
+            .SeriesClick("stockChart_seriesClick")
         )
+    %>
 
-        <script>
-            function stockChart_dataBound() {
-                //Handle the dataBound event.
-            }
+    <script>
+        function stockChart_dataBound() {
+            //Handle the dataBound event.
+        }
 
-            function stockChart_seriesClick() {
-                //Handle the seriesClick event.
-            }
-        </script>
+        function stockChart_seriesClick() {
+            //Handle the series click event.
+        }
+    </script>
+```
+```Razor
+    @(Html.Kendo().StockChart(Model)
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DateField("Date")
+        .Series(series => {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Events(e => e
+            .DataBound("stockChart_dataBound")
+            .SeriesClick("stockChart_seriesClick")
+        )
+    )
+
+    <script>
+        function stockChart_dataBound() {
+            //Handle the dataBound event.
+        }
+
+        function stockChart_seriesClick() {
+            //Handle the seriesClick event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -152,29 +140,26 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-        @(Html.Kendo().StockChart(Model)
-    		.Name("stockChart")
-    		.Title("The Boeing Company (NYSE:BA)")
-    		.DateField("Date")
-    		.Series(series => {
-    		    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    		})
-    		.Events(e => e
-    		  .DataBound(@<text>
-    		       function() {
-    		           //Handle the dataBound event inline.
-    		       }
-    		  </text>)
-    		  .SeriesClick(@<text>
-    		       function() {
-    		           //Handle the seriesClick event inline.
-    		       }
-    		  </text>)
-    		)
+    @(Html.Kendo().StockChart(Model)
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DateField("Date")
+        .Series(series => {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Events(e => e
+            .DataBound(@<text>
+                function() {
+                    //Handle the dataBound event inline.
+                }
+            </text>)
+            .SeriesClick(@<text>
+                function() {
+                    //Handle the seriesClick event inline.
+                }
+            </text>)
         )
-```
+    )
 
 ## Reference
 
@@ -184,13 +169,13 @@ To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`]
 
 ###### Example
 
-      //Put this after your Kendo UI StockChart for ASP.NET MVC declaration.
-      <script>
-          $(function() {
-              //Notice that the Name() of the StockChart is used to get its client-side instance.
-              var chart = $("#stockChart").data("kendoStockChart");
-          });
-      </script>
+    //Put this after your Kendo UI StockChart for ASP.NET MVC declaration.
+    <script>
+        $(function() {
+            //Notice that the Name() of the StockChart is used to get its client-side instance.
+            var chart = $("#stockChart").data("kendoStockChart");
+        });
+    </script>
 
 ## See Also
 

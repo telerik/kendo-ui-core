@@ -10,7 +10,7 @@ position: 3
 
 This article demonstrates how to scaffold a Kendo UI Scheduler for ASP.NET MVC by using the Kendo UI Scaffolder Visual Studio extension.
 
-> **Important**  
+> **Important**
 >
 > The Kendo UI Scaffolder will not include the required `UI for ASP.NET MVC` files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_aspnetmvc %}). To manually achieve this, refer to [this article]({% slug aspnetmvc5_aspnetmvc %}).
 
@@ -30,7 +30,7 @@ Right-click the location where the `Scheduler Controller` should be generated. S
 
 **Figure 1. Add a new scaffolded item**
 
-![New Scaffolded Item](/helpers/scheduler/images/scaffolding/scheduler_new_scaffolded_item.png)
+![New Scaffolded Item](images/scaffolding/scheduler_new_scaffolded_item.png)
 
 ### Select the Scaffolder
 
@@ -38,7 +38,7 @@ Select **Kendo UI Scaffolder** from the list of available scaffolders. Then choo
 
 **Figure 2. The Kendo UI Scaffolder**
 
-![Kendo UI Scaffolder](/images/scaffolding/kendo_ui_scaffolder.png)  
+![Kendo UI Scaffolder](../../images/scaffolding/kendo_ui_scaffolder.png)
 
 ### Choose Model and Data Options
 
@@ -48,33 +48,33 @@ The next screen displays the `Model` and `Data Context` options.
 
     **Figure 3. The Controller and View names**
 
-    ![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_1.png)
+    ![Scheduler options](images/scaffolding/ui_for_aspnetmvc_scheduler_1.png)
 
 1. The **Model Class** DropDownList contains all model types from the active project. List the products in the Scheduler. In this case, select the **Product** entity.
 
     **Figure 4. The Model Class list**
 
-    ![Model Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
+    ![Model Class](images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
 
 1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this case, select **SampleEntities**. Note that the DataBase used is taken from the [offline examples]({% slug overview_aspnetmvc %}#sample-application).
 
     **Figure 5. The Data Context class**
 
-    ![Data Context Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)  
+    ![Data Context Class](images/scaffolding/ui_for_aspnetmvc_scheduler_2.png)
 
 ### Set the View Model
 
-Select the fields from your original model that match the fields from the required `ISchedulerEvent` interface. The Scaffolder automatically generates a view model that inherits from the `ISchedulerEvent` interface. This view model includes a constructor and a method that map the view model fields to the original model:  
+Select the fields from your original model that match the fields from the required `ISchedulerEvent` interface. The Scaffolder automatically generates a view model that inherits from the `ISchedulerEvent` interface. This view model includes a constructor and a method that map the view model fields to the original model:
 
 **Figure 6. View Model fields selection**
 
-![View Model Fields Selection](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_4.png)  
+![View Model Fields Selection](images/scaffolding/ui_for_aspnetmvc_scheduler_4.png)
 
 **Figure 7. The View Model class**
 
 The newly created class will later be added to the `~/Models` folder.
 
-![View Model Class](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_7.png)
+![View Model Class](images/scaffolding/ui_for_aspnetmvc_scheduler_7.png)
 
 ### Pick the Scheduler Options
 
@@ -82,9 +82,9 @@ The newly created class will later be added to the `~/Models` folder.
 
     **Figure 8. The Scheduler options**
 
-    ![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_5.png)
+    ![Scheduler options](images/scaffolding/ui_for_aspnetmvc_scheduler_5.png)
 
-    This screen contains the Scheduler functionalities that can be configured before scaffolding:  
+    This screen contains the Scheduler functionalities that can be configured before scaffolding:
 
     * **DataSource Type**&mdash;Ajax or WebApi.
     * **Edit operations**&mdash;Configures the operations to be included (**Create**, **Update**, **Destroy**, **Resize**, **Move**).
@@ -96,7 +96,7 @@ The newly created class will later be added to the `~/Models` folder.
 
     **Figure 9. The Scheduler events**
 
-    ![Scheduler options](/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_6.png)  
+    ![Scheduler options](images/scaffolding/ui_for_aspnetmvc_scheduler_6.png)
 
 1. When finished with the Scheduler configuration, click **Add**. The `Scheduler Controller` and the corresponding `View` are now generated.
 

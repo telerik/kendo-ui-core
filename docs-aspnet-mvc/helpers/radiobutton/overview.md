@@ -22,21 +22,17 @@ The Kendo UI RadioButton widget is rendered as an `input type='radio'` element t
 
 The following example demonstrates how to initialize the RadioButton.
 
-###### Example
-
-```tab-Razor
-
-        @(Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true))
+```Razor
+    @(Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true))
 ```
-```tab-ASPX
-
-        <%= Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true) %>
+```ASPX
+    <%= Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true) %>
 ```
 
 ## Features
@@ -47,21 +43,17 @@ The RadioButton can be configured to be initially checked through its `.Checked(
 
 The following example demonstrates how to use the `.Checked()` configuration option.
 
-###### Example
-
-```tab-Razor
-
-        @(Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true))
+```Razor
+    @(Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true))
 ```
-```tab-ASPX
-
-        <%= Html.Kendo().RadioButton()
-                .Name("MyRadioButton")
-                .Label("I agree")
-                .Checked(true) %>
+```ASPX
+    <%= Html.Kendo().RadioButton()
+        .Name("MyRadioButton")
+        .Label("I agree")
+        .Checked(true) %>
 ```
 
 ### Enable and Disable Buttons
@@ -70,23 +62,19 @@ The business logic of an application often requires a certain radio button to be
 
 The following example demonstrates how to use the `.Enable()` configuration option.
 
-###### Example
-
-```tab-Razor
-
-        @(Html.Kendo().RadioButton()
-                .Name("disabledRadioButton")
-                .Enable(false)
-                .Label("Disabled radio button")
-                .Checked(false))
+```Razor
+    @(Html.Kendo().RadioButton()
+        .Name("disabledRadioButton")
+        .Enable(false)
+        .Label("Disabled radio button")
+        .Checked(false))
 ```
-```tab-ASPX
-
-        <%= Html.Kendo().RadioButton()
-                .Name("disabledRadioButton")
-                .Enable(false)
-                .Label("Disabled radio button")
-                .Checked(false) %>
+```ASPX
+    <%= Html.Kendo().RadioButton()
+        .Name("disabledRadioButton")
+        .Enable(false)
+        .Label("Disabled radio button")
+        .Checked(false) %>
 ```
 
 ### Bind to Model
@@ -99,49 +87,41 @@ Below are listed the steps for you to follow when binding a Kendo UI RadioButton
 
   ###### Example
 
-      public class RadioButtonModel
-      {
-          public bool IAgreeProp { get; set; }
-      }
+    public class RadioButtonModel
+    {
+        public bool IAgreeProp { get; set; }
+    }
 
-      public partial class ButtonController : Controller
-      {
-          public ActionResult RadioButton()
-          {
-              RadioButtonModel myModel = new RadioButtonModel() { IAgreeProp = false };
-              return View(myModel);
-          }
-      }
+    public partial class ButtonController : Controller
+    {
+        public ActionResult RadioButton()
+        {
+            RadioButtonModel myModel = new RadioButtonModel() { IAgreeProp = false };
+            return View(myModel);
+        }
+    }
 
 1. Make your view strongly typed.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-                Inherits="System.Web.Mvc.ViewPage<Kendo.Mvc.Examples.Controllers.RadioButtonModel>" %>
+    ```ASPX
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+            Inherits="System.Web.Mvc.ViewPage<Kendo.Mvc.Examples.Controllers.RadioButtonModel>" %>
     ```
-    ```tab-Razor
-
-            @model Kendo.Mvc.Examples.Controllers.RadioButtonModel
+    ```Razor
+        @model Kendo.Mvc.Examples.Controllers.RadioButtonModel
     ```
 
 1. Add two RadioButtons and set the Boolean values for the checked state through the `.Value` setting. The matched Boolean value from model will define the initial checked state.
 
     The following example demonstrates how the radio button with the **I Disagree** label will be checked because its false value matches the model value.
 
-    ###### Example
-
-    ```tab-Razor
-
-            @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true))
-            @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false))
+    ```Razor
+        @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true))
+        @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false))
     ```
-    ```tab-ASPX
-
-            <%= Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true) %>
-            <%= Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false) %>
+    ```ASPX
+        <%= Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true) %>
+        <%= Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false) %>
     ```
 
 ## See Also

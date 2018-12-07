@@ -79,7 +79,7 @@ You can customize the line that represents the target value using the series `Ta
 
 **Figure 2: A Bullet Chart with custom target line**
 
-![Bullet Chart with Custom Line](/html-helpers/charts/chart-types/chart-bullet-target.png)
+![Bullet Chart with Custom Line](images/chart-bullet-target.png)
 
 
 ## See Also

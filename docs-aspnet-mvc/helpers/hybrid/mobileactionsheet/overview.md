@@ -23,91 +23,83 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a hybrid Kendo UI ActionSheet to the `Index` view. Like most hybrid Kendo UI widgets, the ActionSheet must be initialized within the hybrid View content.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("actionsheet-view")
-                    .Title("Inbox")
-                    .Content(() =>
-                    {
-                        %>
-                        <!-- Add button to open the actionsheet widget -->
-                        <%: Html.Kendo().MobileButton()
-                                .Name("button")
-                                .Rel(MobileButtonRel.ActionSheet)
-                                .Text("Reply")
-                                .Url("#inboxActions")
-                        %>
-
-                        <% Html.Kendo().MobileActionSheet()
-                            .Name("inboxActions")
-                            .Popup(popup => popup.Direction(MobilePopupDirection.Left))
-                            .Title("Monday Meeting:")
-                            .Items(items => {
-                                items.Add().Text("Reply");
-                                items.Add().Text("Reply All");
-                                items.Add().Text("Archive");
-                            })
-                            .Render();
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                .Name("actionsheet-view")
-                .Title("Inbox")
-                .Content(
-                    @<text>
-                    <!-- Add button to open the actionsheet widget -->
-                    @(Html.Kendo().MobileButton()
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("actionsheet-view")
+            .Title("Inbox")
+            .Content(() =>
+            {
+                %>
+                <!-- Add button to open the actionsheet widget -->
+                <%: Html.Kendo().MobileButton()
                         .Name("button")
                         .Rel(MobileButtonRel.ActionSheet)
                         .Text("Reply")
                         .Url("#inboxActions")
-                    )
+                %>
 
-                    @(Html.Kendo().MobileActionSheet()
-                        .Name("inboxActions")
-                        .Popup(popup => popup.Direction(MobilePopupDirection.Left))
-                        .Title("Monday Meeting:")
-                        .Items(items => {
-                            items.Add().Text("Reply");
-                            items.Add().Text("Reply All");
-                            items.Add().Text("Archive");
-                        }))
+                <% Html.Kendo().MobileActionSheet()
+                    .Name("inboxActions")
+                    .Popup(popup => popup.Direction(MobilePopupDirection.Left))
+                    .Title("Monday Meeting:")
+                    .Items(items => {
+                        items.Add().Text("Reply");
+                        items.Add().Text("Reply All");
+                        items.Add().Text("Archive");
+                    })
+                    .Render();
+                %>
+                <%
+            })
+            .Render();
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("actionsheet-view")
+            .Title("Inbox")
+            .Content(
+                @<text>
+                <!-- Add button to open the actionsheet widget -->
+                @(Html.Kendo().MobileButton()
+                    .Name("button")
+                    .Rel(MobileButtonRel.ActionSheet)
+                    .Text("Reply")
+                    .Url("#inboxActions")
+                )
 
-                </text>)
-            )
+                @(Html.Kendo().MobileActionSheet()
+                    .Name("inboxActions")
+                    .Popup(popup => popup.Direction(MobilePopupDirection.Left))
+                    .Title("Monday Meeting:")
+                    .Items(items => {
+                        items.Add().Text("Reply");
+                        items.Add().Text("Reply All");
+                        items.Add().Text("Archive");
+                    }))
+
+            </text>)
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -122,19 +114,18 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-ASPX
+```ASPX
+    <%: Html.Kendo().MobileActionSheet()
+            .Name("MobileActionSheet")
+            .Items(items => {
+                items.Add().Text("Reply").Action("replay");
+            }))
+            .Events(events => events
+                .Open("onOpen")
+            )
+    %>
 
-        <%: Html.Kendo().MobileActionSheet()
-                .Name("MobileActionSheet")
-                .Items(items => {
-                    items.Add().Text("Reply").Action("replay");
-                }))
-                .Events(events => events
-                    .Open("onOpen")
-                )
-        %>
-
-        <script>
+    <script>
         function onOpen() {
             //Handle the open event.
         }
@@ -142,21 +133,20 @@ The following example demonstrates how to subscribe to events by a handler name.
         function replay() {
             //Will execute when item with `Reply` title is clicked.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
-
-        @(Html.Kendo().MobileActionSheet()
-                .Name("MobileActionSheet")
-                .Items(items => {
-                    items.Add().Text("Reply").Action("replay");
-                }))
-                .Events(events => events
-                    .Open("onOpen")
-                )
+```Razor
+    @(Html.Kendo().MobileActionSheet()
+        .Name("MobileActionSheet")
+        .Items(items => {
+            items.Add().Text("Reply").Action("replay");
+        }))
+        .Events(events => events
+            .Open("onOpen")
         )
+    )
 
-        <script>
+    <script>
         function onOpen() {
             //Handle the open event.
         }
@@ -164,7 +154,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         function replay() {
             //Will execute when item with `Reply` title is clicked.
         }
-        </script>
+    </script>
 ```
 
 ## Reference
@@ -175,21 +165,21 @@ You can reference a hybrid ActionSheet instance by using the code from the examp
 
 ###### Example
 
-        @(Html.Kendo().MobileActionSheet()
-            .Name("inboxActions")
-            .Popup(popup => popup.Direction(MobilePopupDirection.Left))
-            .Title("Monday Meeting:")
-            .Items(items => {
-                items.Add().Text("Reply");
-                items.Add().Text("Reply All");
-                items.Add().Text("Archive");
-            }))
-        <script>
+    @(Html.Kendo().MobileActionSheet()
+        .Name("inboxActions")
+        .Popup(popup => popup.Direction(MobilePopupDirection.Left))
+        .Title("Monday Meeting:")
+        .Items(items => {
+            items.Add().Text("Reply");
+            items.Add().Text("Reply All");
+            items.Add().Text("Archive");
+        }))
+    <script>
         $(function() {
             //Notice that the Name() of the ActionSheet is used to get its client-side instance.
             var actionsheet = $("#inboxActions").data("kendoMobileActionSheet");
         });
-        </script>
+    </script>
 
 ## See Also
 

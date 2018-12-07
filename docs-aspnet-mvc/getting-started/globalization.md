@@ -21,30 +21,26 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
 
 1. Include the corresponding culture JavaScript file after the other JavaScript product files.
 
-    ###### Example
-
-    ```tab-ASPX
-
-          <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
-          <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
-          <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
-          <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
+    ```ASPX
+        <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
+        <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
+        <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
+        <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
     ```
-    ```tab-Razor
-
-          <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-          <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
-          <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
-          <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
+    ```Razor
+        <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
     ```
 
 1. Set the current culture by calling the [`kendo.culture`](../../kendo-ui/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
     ###### Example
 
-          <script>
-          kendo.culture("es-ES");
-          </script>
+        <script>
+            kendo.culture("es-ES");
+        </script>
 
 After performing these steps, all Kendo UI widgets included in the product will use the `es-ES` culture for parsing and formatting dates and numbers.
 
@@ -62,11 +58,11 @@ To set the server-side culture, update the `web.config` file of your ASP.NET MVC
 
 ###### Example
 
-      <system.web>
-          <!-- snip --!>
-          <globalization uiCulture="es-ES" culture="es-ES"></globalization>
-          <!-- snip --!>
-      </system.web>
+    <system.web>
+        <!-- snip --!>
+        <globalization uiCulture="es-ES" culture="es-ES"></globalization>
+        <!-- snip --!>
+    </system.web>
 
 <!-- -->
 #### Per-Request Setup
@@ -75,14 +71,14 @@ Override the [`Controller.Initialize`](https://msdn.microsoft.com/en-us/library/
 
 ###### Example
 
-      protected override void Initialize(System.Web.Routing.RequestContext requestContext)
-      {
-          Thread.CurrentThread.CurrentCulture =
-              Thread.CurrentThread.CurrentUICulture =
-                  new CultureInfo(requestContext.HttpContext.Request["my-culture"]);
+    protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+    {
+        Thread.CurrentThread.CurrentCulture =
+            Thread.CurrentThread.CurrentUICulture =
+                new CultureInfo(requestContext.HttpContext.Request["my-culture"]);
 
-          base.Initialize(requestContext);
-      }
+        base.Initialize(requestContext);
+    }
 
 ### Set Matching Client-Side Cultures
 
@@ -94,13 +90,12 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 ###### Example
 
-```tab-ASPX
-
+```ASPX
     <%
       var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
     %>
 ```
-```tab-Razor
+```Razor
     @{
         var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
     }
@@ -110,12 +105,10 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 ###### Example
 
-```tab-ASPX
-
+```ASPX
     <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
 ```
-```tab-Razor
-
+```Razor
     <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
 ```
 
@@ -123,14 +116,12 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 ###### Example
 
-```tab-ASPX
-
+```ASPX
     <script>
         kendo.culture("<%= culture %>");
     </script>
 ```
-```tab-Razor
-
+```Razor
     <script>
         kendo.culture("@culture");
     </script>
@@ -150,14 +141,11 @@ The example below demonstrates how to generate the current and specified culture
 
 ###### Example
 
-```tab-Current
-
+```Current
     @Html.Kendo().Culture()
 ```
-```tab-Specified
-
+```Specified
     @Html.Kendo().Culture("bg-BG")
-
 ```
 
 ### Include in Existing Script
@@ -168,14 +156,12 @@ The example below demonstrates how to generate the current and specified culture
 
 ###### Example
 
-```tab-Current
-
+```Current
     <script>
         @Html.Kendo().Culture(false)
     </script>
 ```
-```tab-Specified
-
+```Specified
     <script>
         @Html.Kendo().Culture("bg-BG", false)
     </script>

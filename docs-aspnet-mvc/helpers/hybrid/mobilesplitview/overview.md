@@ -23,92 +23,84 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a Kendo UI SplitView to the `Index` view.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileSplitView()
-                    .Name("MobileSplitView") //SplitView `id`
-                    .Panes(panes =>
+    ```ASPX
+        <% Html.Kendo().MobileSplitView()
+            .Name("MobileSplitView") //SplitView `id`
+            .Panes(panes =>
+            {
+                //Add the side pane.
+                panes.Add().Content(() =>
                     {
-                        //Add the side pane.
-                        panes.Add().Content(() =>
-                            {
-                                %>
-                                <% Html.Kendo().MobileView()
-                                        .Title("Side View")
-                                        .Content("Side View Content")
-                                        .Render();
-                                %>
-                                <%
-                            }
-                        );
-                        //Add the main pane.
-                        panes.Add().Content(() =>
-                            {
-                                %>
-                                <% Html.Kendo().MobileView()
-                                        .Title("Main View")
-                                        .Content("Main View Content")
-                                        .Render();
-                                %>
-                                <%
-                            }
-                        );
-                    })
-                    .Render();
-            %>
+                        %>
+                        <% Html.Kendo().MobileView()
+                                .Title("Side View")
+                                .Content("Side View Content")
+                                .Render();
+                        %>
+                        <%
+                    }
+                );
+                //Add the main pane.
+                panes.Add().Content(() =>
+                    {
+                        %>
+                        <% Html.Kendo().MobileView()
+                                .Title("Main View")
+                                .Content("Main View Content")
+                                .Render();
+                        %>
+                        <%
+                    }
+                );
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileSplitView()
-                    .Name("MobileSplitView") //SplitView `id`
-                    .Panes(panes =>
-                    {
-                        //Add the side pane.
-                        panes.Add().Content(
-                            @<text>
-                                @(Html.Kendo().MobileView()
-                                        .Title("Side View")
-                                        .Content("Side View Content")
-                                )
-                            </text>
-                        );
-                        //Add the main pane.
-                        panes.Add().Content(
-                            @<text>
-                                @(Html.Kendo().MobileView()
-                                        .Title("Main View")
-                                        .Content("Main View Content")
-                                )
-                            </text>
-                        );
-                    })
-            )
+    ```Razor
+        @(Html.Kendo().MobileSplitView()
+            .Name("MobileSplitView") //SplitView `id`
+            .Panes(panes =>
+            {
+                //Add the side pane.
+                panes.Add().Content(
+                    @<text>
+                        @(Html.Kendo().MobileView()
+                                .Title("Side View")
+                                .Content("Side View Content")
+                        )
+                    </text>
+                );
+                //Add the main pane.
+                panes.Add().Content(
+                    @<text>
+                        @(Html.Kendo().MobileView()
+                                .Title("Main View")
+                                .Content("Main View Content")
+                        )
+                    </text>
+                );
+            })
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -121,63 +113,59 @@ You can subscribe to all hybrid SplitView [events](https://docs.telerik.com/kend
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <% Html.Kendo().MobileSplitView()
+            .Name("MobileSplitView")
+            .Panes(panes =>
+            {
+                panes.Add().Content(() =>
+                    {
+                        %>
+                        <% Html.Kendo().MobileView()
+                                .Title("Side View")
+                                .Content("Side View Content")
+                                .Render();
+                        %>
+                        <%
+                    }
+                );
+            })
+            .Events(events => events
+                .Init("onInit")
+            )
+            .Render();
+    %>
 
-```tab-ASPX
-
-        <% Html.Kendo().MobileSplitView()
-                .Name("MobileSplitView")
-                .Panes(panes =>
-                {
-                    panes.Add().Content(() =>
-                        {
-                            %>
-                            <% Html.Kendo().MobileView()
-                                    .Title("Side View")
-                                    .Content("Side View Content")
-                                    .Render();
-                            %>
-                            <%
-                        }
-                    );
-                })
-                .Events(events => events
-                    .Init("onInit")
-                )
-                .Render();
-        %>
-
-        <script>
+    <script>
         function onInit() {
             //Handle the init event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().MobileSplitView()
+            .Name("MobileSplitView")
+            .Panes(panes =>
+            {
+                panes.Add().Content(
+                    @<text>
+                        @(Html.Kendo().MobileView()
+                                .Title("Side View")
+                                .Content("Side View Content")
+                        )
+                    </text>
+                );
+            })
+            .Events(events => events
+                .Init("onInit")
+            )
+    )
 
-        @(Html.Kendo().MobileSplitView()
-                .Name("MobileSplitView")
-                .Panes(panes =>
-                {
-                    panes.Add().Content(
-                        @<text>
-                            @(Html.Kendo().MobileView()
-                                    .Title("Side View")
-                                    .Content("Side View Content")
-                            )
-                        </text>
-                    );
-                })
-                .Events(events => events
-                    .Init("onInit")
-                )
-        )
-
-        <script>
+    <script>
         function onInit() {
             //Handle the init event.
         }
-        </script>
+    </script>
 ```
 
 ## Reference
@@ -188,26 +176,26 @@ You can reference a hybrid SplitView instance by using the [jQuery.data()](http:
 
 ###### Example
 
-        @(Html.Kendo().MobileSplitView()
-                .Name("MobileSplitView") //SplitView `id`
-                .Panes(panes =>
-                {
-                    panes.Add().Content(
-                        @<text>
-                            @(Html.Kendo().MobileView()
-                                    .Title("Side View")
-                                    .Content("Side View Content")
-                            )
-                        </text>
-                    );
-                })
-        )
-        <script>
+    @(Html.Kendo().MobileSplitView()
+            .Name("MobileSplitView") //SplitView `id`
+            .Panes(panes =>
+            {
+                panes.Add().Content(
+                    @<text>
+                        @(Html.Kendo().MobileView()
+                                .Title("Side View")
+                                .Content("Side View Content")
+                        )
+                    </text>
+                );
+            })
+    )
+    <script>
         $(function() {
             //Notice that the Name() of the SplitView is used to get its client-side instance.
             var splitview = $("#MobileSplitView").data("kendoMobileSplitView");
         });
-        </script>
+    </script>
 
 ## See Also
 

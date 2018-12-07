@@ -16,16 +16,15 @@ The following example demonstrates how to define custom Kendo UI validators thro
 
     <form>
         @(Html.Kendo().Editor()
-              .Name("editor")
-              .HtmlAttributes(new { data_maxtextlength="50", data_maxtextlength_msg="Text must be shorter than 50 chars" })
-              .Value("Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.")
+            .Name("editor")
+            .HtmlAttributes(new { data_maxtextlength="50", data_maxtextlength_msg="Text must be shorter than 50 chars" })
+            .Value("Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.")
         )
 
         <button class="k-button k-primary">Submit</button>
     </form>
 
     <script>
-
         // register custom validation rules
         (function ($, kendo) {
             $.extend(true, kendo.ui.validator, {

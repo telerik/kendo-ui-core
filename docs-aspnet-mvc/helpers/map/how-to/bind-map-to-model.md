@@ -11,11 +11,9 @@ MVC enables you to natively bind parts of the page to the Model passed from the 
 
 Also, populate the **Markers** collection to a collection defined in the Model.
 
-###### Example
-
 Models:
 
-```
+```Map
 public class Map
 {
     // Map properties
@@ -33,8 +31,7 @@ public class Map
     public IEnumerable<Marker> Markers { get; set; }
 }
 ```
-
-```
+```Marker
 public class Marker
 {
     public Marker(double latitude, double longitude, string sname)

@@ -32,118 +32,106 @@ There are two ways of navigation:
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add an action method for the `detail` view.
 
     ###### Example
 
-            public ActionResult Details()
-            {
-                return View();
-            }
+        public ActionResult Details()
+        {
+            return View();
+        }
 
 1. Add the default Hybrid UI View for ASP.NET MVC. The mobile application expects that the immediate child of the application element is a `MobileView`.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("Index")
-                    .Title("Index")
-                    .Content(() =>
-                    {
-                        %>
-                            View Content Template
-                            <!--Add button that will `server navigate` the application-->
-                            <%: Html.Kendo().MobileButton()
-                                    .Text("Navigate to Details")
-                                    .Url("Details", "Home")
-                            %>
-                        <%
-                    })
-                    .Render();
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                .Name("Index")
-                .Title("Index")
-                .Content(
-                    @<text>
-                        View Content Template
-
-                        <!--Add button that will `server navigate` the application-->
-                        @(Html.Kendo().MobileButton()
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("Index")
+            .Title("Index")
+            .Content(() =>
+            {
+                %>
+                    View Content Template
+                    <!--Add button that will `server navigate` the application-->
+                    <%: Html.Kendo().MobileButton()
                             .Text("Navigate to Details")
                             .Url("Details", "Home")
-                        )
+                    %>
+                <%
+            })
+            .Render();
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("Index")
+            .Title("Index")
+            .Content(
+                @<text>
+                    View Content Template
 
-                    </text>
-                )
+                    <!--Add button that will `server navigate` the application-->
+                    @(Html.Kendo().MobileButton()
+                        .Text("Navigate to Details")
+                        .Url("Details", "Home")
+                    )
+
+                </text>
             )
+        )
     ```
 
 1. Create a new `Details` ASP.NET MVC View file under the `/Views/Home/` folder.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%Html.Kendo().MobileView()
-                .Title("Details")
-                .Name("Details")
-                .Content(() =>
-                {
-                    %>
-                    View Details Template
-                    <!--Add back button that will `server navigate` the application to `Index`-->
-                    <%: Html.Kendo().MobileButton()
-                            .Text("Go Back")
-                            .Url("./")
-                    %>
-                    <%
-                })
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                .Title("Details")
-                .Name("Details")
-                .Content(
-                    @<text>
-                    View Details Template
-                    <!--Add back button that will `server navigate` the application to `Index`-->
-                    @(Html.Kendo().MobileButton()
+    ```ASPX
+        <%Html.Kendo().MobileView()
+            .Title("Details")
+            .Name("Details")
+            .Content(() =>
+            {
+                %>
+                View Details Template
+                <!--Add back button that will `server navigate` the application to `Index`-->
+                <%: Html.Kendo().MobileButton()
                         .Text("Go Back")
                         .Url("./")
-                    )
-                    </text>
+                %>
+                <%
+            })
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Title("Details")
+            .Name("Details")
+            .Content(
+                @<text>
+                View Details Template
+                <!--Add back button that will `server navigate` the application to `Index`-->
+                @(Html.Kendo().MobileButton()
+                    .Text("Go Back")
+                    .Url("./")
                 )
+                </text>
             )
+        )
     ```
 
 1. Initialize the Application inside the `Master/Layout` page and enable the server navigation.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+                .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-                @(Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-                )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the Application.
@@ -156,19 +144,19 @@ There are two ways of navigation:
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add an action method for the `detail` view.
 
     ###### Example
 
-            public ActionResult Details()
-            {
-                return PartialView();
-            }
+        public ActionResult Details()
+        {
+            return PartialView();
+        }
 
     > **Important**
     >
@@ -176,104 +164,92 @@ There are two ways of navigation:
 
 1. Add the default Hybrid UI View for ASP.NET MVC. The mobile application expects that the immediate child of the application element is a `MobileView`.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("Index")
-                    .Title("Index")
-                    .Content(() =>
-                    {
-                        %>
-                            View Content Template
-                            <!--Add button that will `server navigate` the application-->
-                            <%: Html.Kendo().MobileButton()
-                                    .Text("Navigate to Details")
-                                    .Url("Details", "Home")
-                            %>
-                        <%
-                    })
-                    .Render();
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                .Name("Index")
-                .Title("Index")
-                .Content(
-                    @<text>
-                        View Content Template
-
-                        <!--Add button that will `server navigate` the application-->
-                        @(Html.Kendo().MobileButton()
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("Index")
+            .Title("Index")
+            .Content(() =>
+            {
+                %>
+                    View Content Template
+                    <!--Add button that will `server navigate` the application-->
+                    <%: Html.Kendo().MobileButton()
                             .Text("Navigate to Details")
                             .Url("Details", "Home")
-                        )
+                    %>
+                <%
+            })
+            .Render();
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("Index")
+            .Title("Index")
+            .Content(
+                @<text>
+                    View Content Template
 
-                    </text>
-                )
+                    <!--Add button that will `server navigate` the application-->
+                    @(Html.Kendo().MobileButton()
+                        .Text("Navigate to Details")
+                        .Url("Details", "Home")
+                    )
+
+                </text>
             )
+        )
     ```
 
 1. Create a new `Details` ASP.NET MVC View file under the `/Views/Home/` folder.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%Html.Kendo().MobileView()
-                .Title("Details")
-                .Name("Details")
-                .Content(() =>
-                {
-                    %>
-                    View Details Template
-                    <!--Add back button that will `server navigate` the application to `Index`-->
-                    <%: Html.Kendo().MobileButton()
-                            .Text("Go Back")
-                            .Url("#:back")
-                    %>
-                    <%
-                })
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                .Title("Details")
-                .Name("Details")
-                .Content(
-                    @<text>
-                    View Details Template
-                    <!--Add back button that will `server navigate` the application to `Index`-->
-                    @(Html.Kendo().MobileButton()
+    ```ASPX
+        <%Html.Kendo().MobileView()
+            .Title("Details")
+            .Name("Details")
+            .Content(() =>
+            {
+                %>
+                View Details Template
+                <!--Add back button that will `server navigate` the application to `Index`-->
+                <%: Html.Kendo().MobileButton()
                         .Text("Go Back")
                         .Url("#:back")
-                    )
-                    </text>
+                %>
+                <%
+            })
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Title("Details")
+            .Name("Details")
+            .Content(
+                @<text>
+                View Details Template
+                <!--Add back button that will `server navigate` the application to `Index`-->
+                @(Html.Kendo().MobileButton()
+                    .Text("Go Back")
+                    .Url("#:back")
                 )
+                </text>
             )
+        )
     ```
 
 1. Initialize the mobile application inside the `Master/Layout` page.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .PushState(true)
-                    .ServerNavigation(false)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .PushState(true)
+            .ServerNavigation(false)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .PushState(true)
-                .ServerNavigation(false)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .PushState(true)
+            .ServerNavigation(false)
+        )
     ```
 
 1. Build and run the application.
@@ -286,15 +262,15 @@ You can reference a hybrid Application instance by using the code from the examp
 
 ###### Example
 
-        @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        )
-        <script>
+    @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+    )
+    <script>
         $(function() {
             //Notice that the casing is important.
             var application = kendo.mobile.application;
         });
-        </script>
+    </script>
 
 ## See Also
 

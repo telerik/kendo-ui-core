@@ -113,31 +113,31 @@ Below are listed the steps for you to follow to fix this issue.
 
         ###### Example
 
-                     <namespaces>
-                         <add namespace="System.Web.Mvc" />
-                         <add namespace="System.Web.Mvc.Ajax" />
-                         <add namespace="System.Web.Mvc.Html" />
-                         <add namespace="System.Web.Routing" />
-                         <add namespace="System.Linq" />
-                         <add namespace="System.Collections.Generic" />
-                         <add namespace="Kendo.Mvc.UI" />
-                     </namespaces>
+            <namespaces>
+                <add namespace="System.Web.Mvc" />
+                <add namespace="System.Web.Mvc.Ajax" />
+                <add namespace="System.Web.Mvc.Html" />
+                <add namespace="System.Web.Routing" />
+                <add namespace="System.Linq" />
+                <add namespace="System.Collections.Generic" />
+                <add namespace="Kendo.Mvc.UI" />
+            </namespaces>
 
     * If you are using the Razor view engine, open the `web.config` file which is in the `Views` folder of your application. Add `<add namespace="Kendo.Mvc.UI" />` before the closing `namespaces` tag.
 
         ###### Example
 
-                     <system.web.webPages.razor>
-                         <pages pageBaseType="System.Web.Mvc.WebViewPage">
-                             <namespaces>
-                                 <add namespace="System.Web.Mvc" />
-                                 <add namespace="System.Web.Mvc.Ajax" />
-                                 <add namespace="System.Web.Mvc.Html" />
-                                 <add namespace="System.Web.Routing" />
-                                 <add namespace="Kendo.Mvc.UI" />
-                             </namespaces>
-                         </pages>
-                     </system.web.webPages.razor>
+            <system.web.webPages.razor>
+                <pages pageBaseType="System.Web.Mvc.WebViewPage">
+                    <namespaces>
+                        <add namespace="System.Web.Mvc" />
+                        <add namespace="System.Web.Mvc.Ajax" />
+                        <add namespace="System.Web.Mvc.Html" />
+                        <add namespace="System.Web.Routing" />
+                        <add namespace="Kendo.Mvc.UI" />
+                    </namespaces>
+                </pages>
+            </system.web.webPages.razor>
 
 1. Rebuild your solution.
 
@@ -159,17 +159,17 @@ The following example demonstrates a wrong approach to avoid the issue.
 
 ###### Example
 
-	<%: Html.Kendo().Splitter()
-		.Name("splitter")
-		.Panes(panes =>
-		{
-			panes.Add()
-			.Content(() =>
-			{ %>
-				<%:  Html.Kendo().NumericTextBox().Name("textbox") %>
-			<% });
-		})
-	%>
+    <%: Html.Kendo().Splitter()
+        .Name("splitter")
+        .Panes(panes =>
+        {
+            panes.Add()
+            .Content(() =>
+            { %>
+                <%:  Html.Kendo().NumericTextBox().Name("textbox") %>
+            <% });
+        })
+    %>
 
 **Solution**
 
@@ -177,18 +177,18 @@ The following example demonstrates the proper approach to avoid the issue.
 
 ###### Example
 
-	<% Html.Kendo().Splitter()
-		.Name("splitter")
-		.Panes(panes =>
-		{
-			panes.Add()
-			.Content(() =>
-			{ %>
-				<%:  Html.Kendo().NumericTextBox().Name("textbox") %>
-			<% });
-		})
-		.Render();
-	%>
+    <% Html.Kendo().Splitter()
+        .Name("splitter")
+        .Panes(panes =>
+        {
+            panes.Add()
+            .Content(() =>
+            { %>
+                <%:  Html.Kendo().NumericTextBox().Name("textbox") %>
+            <% });
+        })
+        .Render();
+    %>
 
 ### Nesting MVC Wrappers Produces Server-Side Exceptions When Using Razor View Engine
 
@@ -200,33 +200,33 @@ In such scenarios, the inner widget can be included through a custom helper.
 
 ###### Example
 
-	@helper PanelBarHelper()
-	{
-		@(
-			Html.Kendo().PanelBar()
-				.Name("PanelBar")
-				.Items(items =>
-				{
-					items.Add().Text("Item 1")
-						.Content(@<text>
-							Root Item 1 Inner Content
-						</text>);
-				})
-		)
-	}
+    @helper PanelBarHelper()
+    {
+        @(
+            Html.Kendo().PanelBar()
+                .Name("PanelBar")
+                .Items(items =>
+                {
+                    items.Add().Text("Item 1")
+                        .Content(@<text>
+                            Root Item 1 Inner Content
+                        </text>);
+                })
+        )
+    }
 
-	@(Html.Kendo().TabStrip()
-		.Name("tabstrip")
-		.Items(tabstrip =>
-		{
-			tabstrip.Add().Text("Text")
-				.Content(@<text>
-					<p>some text before</p>
-					@PanelBarHelper()
-					<p>some text after</p>
-				</text>);
-		})
-	)
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip")
+        .Items(tabstrip =>
+        {
+            tabstrip.Add().Text("Text")
+                .Content(@<text>
+                    <p>some text before</p>
+                    @PanelBarHelper()
+                    <p>some text after</p>
+                </text>);
+        })
+    )
 
 ### High Memory Consumption On Server
 
@@ -257,17 +257,15 @@ Below are listed the steps for you to follow while handling this issue.
 
 1. Disable security trimming if not needed or during development. Enable it again when deploying the site.
 
-    ```tab-ASPX
-
-                <%: Html.Kendo().Menu()
-                        .SecurityTrimming(false)
-                %>
+    ```ASPX
+        <%: Html.Kendo().Menu()
+            .SecurityTrimming(false)
+        %>
     ```
-    ```tab-Razor
-
-                @(Html.Kendo().Menu()
-                      .SecurityTrimming(false)
-                )
+    ```Razor
+        @(Html.Kendo().Menu()
+            .SecurityTrimming(false)
+        )
     ```
 
 1. Disable debug mode. Set the `debug` attribute of the `compilation` element in the `web.config` to `false`.
@@ -317,34 +315,30 @@ Apply either of the two options below:
 
     ###### Example
 
-            public JsonResult GetCascadeCategories()
-            {
-                var northwind = new NorthwindDataContext();
+        public JsonResult GetCascadeCategories()
+        {
+            var northwind = new NorthwindDataContext();
 
-                return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
-            }
+            return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
+        }
 
 * Change HTTP verb of the DataSource.
 
-    ###### Example
-
-    ```tab-ASPX
-
-                <%: Html.Kendo().ComboBox()
-                        .Name("ComboBox")
-                        .DataSource(read => {
-                            read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
-                        })
-                %>
+    ```ASPX
+        <%: Html.Kendo().ComboBox()
+            .Name("ComboBox")
+            .DataSource(read => {
+                read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
+            })
+        %>
     ```
-    ```tab-Razor
-
-                @(Html.Kendo().ComboBox()
-                      .Name("ComboBox")
-                      .DataSource(read => {
-                          read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
-                      })
-                )
+    ```Razor
+        @(Html.Kendo().ComboBox()
+            .Name("ComboBox")
+            .DataSource(read => {
+                read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
+            })
+        )
     ```
 
 ### Widgets Do Not Work with Remote Binding and Throw No Errors
@@ -359,25 +353,25 @@ Apply either of the two options below:
 
     ###### Example
 
-            public JsonResult GetCascadeCategories()
-            {
-                var northwind = new NorthwindDataContext();
+        public JsonResult GetCascadeCategories()
+        {
+            var northwind = new NorthwindDataContext();
 
-                //TODO: Do not use northwind.Categories.ToDataSourceResult();
+            //TODO: Do not use northwind.Categories.ToDataSourceResult();
 
-                return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
-            }
+            return Json(northwind.Categories, **JsonRequestBehavior.AllowGet**);
+        }
 
 * Return the `Data` property only.
 
     ###### Example
 
-            public JsonResult GetCascadeCategories([DataSourceRequest] DataSourceRequest request)
-            {
-                var northwind = new NorthwindDataContext();
+        public JsonResult GetCascadeCategories([DataSourceRequest] DataSourceRequest request)
+        {
+            var northwind = new NorthwindDataContext();
 
-                return Json(northwind.Categories.ToDataSourceResult(request).Data, **JsonRequestBehavior.AllowGet**);
-            }
+            return Json(northwind.Categories.ToDataSourceResult(request).Data, **JsonRequestBehavior.AllowGet**);
+        }
 
 More information on how to configure Kendo UI widgets for Ajax binding and return data to the client, refer to the overview article of each widget.
 
@@ -393,13 +387,12 @@ To avoid this default behavior, clear the value of the widget using its `Value` 
 
 ###### Example
 
-        @model int
-        @(Html.Kendo().ComboBoxFor(m)
-              .Value(m == 0 ? "" : m.ToString())
+    @model int
+    @(Html.Kendo().ComboBoxFor(m)
+            .Value(m == 0 ? "" : m.ToString())
 
-        @* other options are omitted for breavity *@
+    @* other options are omitted for breavity *@
 
-<!--*-->
 ### Only One Widget Instance Works on Page
 
 This happens if two or more widgets or MVC server wrappers have the same `Name()`. The value specified via the `Name()` method is used as the `id` HTML attribute of the widget. The latter must be unique in the page.
@@ -426,7 +419,6 @@ Add the line from the example below to the `bundleconfig.cs` file.
 
     bundles.IgnoreList.Ignore("*.unobtrusive-ajax.min.js", OptimizationMode.WhenDisabled)
 
-<!--*-->
 This prevents the unobtrusive Ajax script from loading twice&mdash;the minified and non-minified&mdash;in debug mode, which is what causes the double postback.
 
 Alternatively, just remove the non-minified script from the project. Obviously, this has implications for debugging, if you are inclined to debug the scripts included in the project template.

@@ -22,71 +22,67 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
     ###### Example
 
-            public class Projection : ISchedulerEvent
-            {
-                public string Title { get; set; }
-                public DateTime Start { get; set; }
-                public DateTime End { get; set; }
-                public string Description { get; set; }
-                public bool IsAllDay { get; set; }
-                public string Recurrence { get; set; }
-                public string RecurrenceRule { get; set; }
-                public string RecurrenceException { get; set; }
-            }
+        public class Projection : ISchedulerEvent
+        {
+            public string Title { get; set; }
+            public DateTime Start { get; set; }
+            public DateTime End { get; set; }
+            public string Description { get; set; }
+            public bool IsAllDay { get; set; }
+            public string Recurrence { get; set; }
+            public string RecurrenceRule { get; set; }
+            public string RecurrenceException { get; set; }
+        }
 
 1. Create a new action method which passes the `List` of projections to the view.
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                List<Projection> cinemaSchedule = new List<Projection> {
-                    new Projection {
-                        Title = "Fast and furious 6",
-                        Start = new DateTime(2013,6,13,17,00,00),
-                        End= new DateTime(2013,6,13,18,30,00)
-                    },
-                    new Projection {
-                        Title= "The Internship",
-                        Start= new DateTime(2013,6,13,14,00,00),
-                        End= new DateTime(2013,6,13,15,30,00)
-                    },
-                    new Projection {
-                        Title = "The Perks of Being a Wallflower",
-                        Start =  new DateTime(2013,6,13,16,00,00),
-                        End =  new DateTime(2013,6,13,17,30,00)
-                    }};
+        public ActionResult Index()
+        {
+            List<Projection> cinemaSchedule = new List<Projection> {
+                new Projection {
+                    Title = "Fast and furious 6",
+                    Start = new DateTime(2013,6,13,17,00,00),
+                    End= new DateTime(2013,6,13,18,30,00)
+                },
+                new Projection {
+                    Title= "The Internship",
+                    Start= new DateTime(2013,6,13,14,00,00),
+                    End= new DateTime(2013,6,13,15,30,00)
+                },
+                new Projection {
+                    Title = "The Perks of Being a Wallflower",
+                    Start =  new DateTime(2013,6,13,16,00,00),
+                    End =  new DateTime(2013,6,13,17,30,00)
+                }};
 
-                return View(cinemaSchedule);
-            }
+            return View(cinemaSchedule);
+        }
 
 1. Add a Scheduler.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%= Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
-                    .Name("scheduler")
-                    .Date(new DateTime(2013, 6, 13))
-                    .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
-                    .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
-                    .Editable(false)
-                    .Height(600)
-                    .BindTo(Model)
-             %>
+    ```ASPX
+        <%= Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
+            .Name("scheduler")
+            .Date(new DateTime(2013, 6, 13))
+            .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+            .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+            .Editable(false)
+            .Height(600)
+            .BindTo(Model)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
-                    .Name("scheduler")
-                    .Date(new DateTime(2013, 6, 13))
-                    .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
-                    .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
-                    .Editable(false)
-                    .Height(600)
-                    .BindTo(Model)
-            )
+    ```Razor
+        @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
+            .Name("scheduler")
+            .Date(new DateTime(2013, 6, 13))
+            .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+            .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+            .Editable(false)
+            .Height(600)
+            .BindTo(Model)
+        )
     ```
 
 ## Event Handling
@@ -97,60 +93,56 @@ You can subscribe to all Scheduler [events](http://docs.telerik.com/kendo-ui/api
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%=Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
+        .Name("scheduler")
+        .Date(new DateTime(2013, 6, 13))
+        .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        .Editable(false)
+        .Height(600)
+        .BindTo(Model)
+        .Events(e =>
+        {
+            e.DataBound("scheduler_dataBound");
+            e.DataBinding("scheduler_dataBinding");
+        })
+    %>
 
-```tab-ASPX
+    <script>
+        function scheduler_dataBound(e) {
+            //Handle the dataBound event.
+        }
 
-        <%=Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
-                .Name("scheduler")
-                .Date(new DateTime(2013, 6, 13))
-                .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
-                .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
-                .Editable(false)
-                .Height(600)
-                .BindTo(Model)
-                .Events(e =>
-                {
-                    e.DataBound("scheduler_dataBound");
-                    e.DataBinding("scheduler_dataBinding");
-                })
-         %>
-
-         <script>
-             function scheduler_dataBound(e) {
-                 //Handle the dataBound event.
-             }
-
-             function scheduler_dataBinding(e) {
-                 //Handle the dataBinding event.
-             }
-        </script>
+        function scheduler_dataBinding(e) {
+            //Handle the dataBinding event.
+        }
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
+        .Name("scheduler")
+        .Date(new DateTime(2013, 6, 13))
+        .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        .Editable(false)
+        .Height(600)
+        .BindTo(Model)
+        .Events(e => {
+            e.DataBound("scheduler_dataBound");
+            e.DataBinding("scheduler_dataBinding");
+        })
+    )
 
-       @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
-                .Name("scheduler")
-                .Date(new DateTime(2013, 6, 13))
-                .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
-                .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
-                .Editable(false)
-                .Height(600)
-                .BindTo(Model)
-                .Events(e => {
-                    e.DataBound("scheduler_dataBound");
-                    e.DataBinding("scheduler_dataBinding");
-                })
-        )
+    <script>
+        function scheduler_dataBound(e) {
+            //Handle the dataBound event.
+        }
 
-        <script>
-            function scheduler_dataBound(e) {
-                //Handle the dataBound event.
-            }
-
-            function scheduler_dataBinding(e) {
-                //Handle the dataBinding event.
-            }
-        </script>
+        function scheduler_dataBinding(e) {
+            //Handle the dataBinding event.
+        }
+    </script>
 ```
 
 ### By Template Delegate
@@ -159,30 +151,27 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
-          @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Projection>()
-                  .Name("scheduler")
-                  .Date(new DateTime(2013, 6, 13))
-                  .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
-                  .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
-                  .Editable(false)
-                  .Height(600)
-                  .BindTo(Model)
-                  .Events(e => {
-                      e.DataBound(@<text>
-                          function (e) {
-                              //Handle the dataBound event.
-                          }
-                      </text>);
-                      e.DataBinding(@<text>
-                          function (e) {
-                              //Handle the dataBinding event.
-                          }
-                      </text>);
-                  })
-          )
-```
+    @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Projection>()
+        .Name("scheduler")
+        .Date(new DateTime(2013, 6, 13))
+        .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        .Editable(false)
+        .Height(600)
+        .BindTo(Model)
+        .Events(e => {
+            e.DataBound(@<text>
+                function (e) {
+                    //Handle the dataBound event.
+                }
+            </text>);
+            e.DataBinding(@<text>
+                function (e) {
+                    //Handle the dataBinding event.
+                }
+            </text>);
+        })
+    )
 
 ## Reference
 
@@ -192,13 +181,13 @@ To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](
 
 ###### Example
 
-        //Put this after your Kendo UI Scheduler for ASP.NET MVC declaration.
-        <script>
-            $(function () {
-                //Notice that the Name() of the Scheduler is used to get its client-side instance.
-                var scheduler = $("#scheduler").data("kendoScheduler");
-            });
-        </script>
+    //Put this after your Kendo UI Scheduler for ASP.NET MVC declaration.
+    <script>
+        $(function () {
+            //Notice that the Name() of the Scheduler is used to get its client-side instance.
+            var scheduler = $("#scheduler").data("kendoScheduler");
+        });
+    </script>
 
 ## See Also
 

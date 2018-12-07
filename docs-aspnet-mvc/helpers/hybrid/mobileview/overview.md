@@ -23,55 +23,47 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a Kendo UI View to the `Index` view.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Title("View Title")
-                    .Content(() =>
-                    {
-                        %>
-                            View Content Template
-                        <%
-                    })
-                    .Render();
-            %>
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Title("View Title")
+            .Content(() =>
+            {
+                %>
+                    View Content Template
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                    .Title("View Title")
-                    .Content(
-                        @<text>
-                            View Content Template
-                        </text>
-                    )
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Title("View Title")
+            .Content(
+                @<text>
+                    View Content Template
+                </text>
             )
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-            )
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -84,37 +76,33 @@ You can subscribe to all hybrid View [events](http://docs.telerik.com/kendo-ui/a
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%: Html.Kendo().MobileView()
+            .Name("MobileView")
+            .Events(events => events
+                .AfterShow("onAfterShow")
+            )
+    %>
 
-```tab-ASPX
-
-        <%: Html.Kendo().MobileView()
-                .Name("MobileView")
-                .Events(events => events
-                    .AfterShow("onAfterShow")
-                )
-        %>
-
-        <script>
+    <script>
         function onAfterShow() {
             //Handle the show event.
         }
-        </script>
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().MobileView()
+            .Name("MobileView")
+            .Events(events => events
+                .AfterShow("onAfterShow")
+            )
+    )
 
-        @(Html.Kendo().MobileView()
-                .Name("MobileView")
-                .Events(events => events
-                    .AfterShow("onAfterShow")
-                )
-        )
-
-        <script>
+    <script>
         function onAfterShow() {
             //Handle the show event.
         }
-        </script>
+    </script>
 ```
 
 ## Reference
@@ -125,15 +113,15 @@ You can reference a hybrid View instance by using the [jQuery.data()](http://api
 
 ###### Example
 
-      @(Html.Kendo().MobileView()
-              .Name("MobileView")
-      )
-      <script>
-      $(function() {
-          //Notice that the Name() of the View is used to get its client-side instance.
-          var view = $("#Mobileview").data("kendoMobileView");
-      });
-      </script>
+    @(Html.Kendo().MobileView()
+            .Name("MobileView")
+    )
+    <script>
+        $(function() {
+            //Notice that the Name() of the View is used to get its client-side instance.
+            var view = $("#Mobileview").data("kendoMobileView");
+        });
+    </script>
 
 ## See Also
 

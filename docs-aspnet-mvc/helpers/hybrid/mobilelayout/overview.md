@@ -23,129 +23,117 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
 1. Add a Kendo UI Layout to the `Index` view.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileLayout()
-                    .Name("layout") //Layout `id`
-                    .Platform("ios")
-                    .Header(() =>
+    ```ASPX
+        <% Html.Kendo().MobileLayout()
+            .Name("layout") //Layout `id`
+            .Platform("ios")
+            .Header(() =>
+            {
+                //Layout header template
+                Html.Kendo().MobileNavBar()
+                    .Content(navbar =>
                     {
-                        //Layout header template
-                        Html.Kendo().MobileNavBar()
-                            .Content(navbar =>
-                            {
-                                %>
-                                <%: Html.Kendo().MobileBackButton()
-                                        .Align(MobileButtonAlign.Left)
-                                        .HtmlAttributes(new { @class = "nav-button" })
-                                        .Text("Back")
-                                %>
-                                <%: navbar.ViewTitle("iOS Platform")%>
-                                <%
-                            })
-                            .Render();
+                        %>
+                        <%: Html.Kendo().MobileBackButton()
+                                .Align(MobileButtonAlign.Left)
+                                .HtmlAttributes(new { @class = "nav-button" })
+                                .Text("Back")
+                        %>
+                        <%: navbar.ViewTitle("iOS Platform")%>
+                        <%
                     })
-                    .Footer(() =>
-                    {
-                        //Layout footer template
-                        Html.Kendo().MobileTabStrip()
-                            .Items(items => {
-                                items.Add().Icon("contacts").Text("Profile");
-                                items.Add().Icon("settings").Text("Settings");
-                            })
-                            .Render();
+                    .Render();
+            })
+            .Footer(() =>
+            {
+                //Layout footer template
+                Html.Kendo().MobileTabStrip()
+                    .Items(items => {
+                        items.Add().Icon("contacts").Text("Profile");
+                        items.Add().Icon("settings").Text("Settings");
                     })
-                   .Render();
-            %>
+                    .Render();
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
+    ```Razor
+        @(Html.Kendo().MobileLayout()
+            .Name("layout")
+            .Platform("ios")
+            .Header(obj =>
+                Html.Kendo().MobileNavBar()
+                    .Content(navbar =>
+                        @<text>
+                            @(Html.Kendo().MobileBackButton()
+                                .Align(MobileButtonAlign.Left)
+                                .HtmlAttributes(new { @class = "nav-button" })
+                                .Url(Url.RouteUrl(new { controller = "suite" }))
+                                .Text("Back"))
 
-            @(Html.Kendo().MobileLayout()
-                    .Name("layout")
-                    .Platform("ios")
-                    .Header(obj =>
-                        Html.Kendo().MobileNavBar()
-                            .Content(navbar =>
-                                @<text>
-                                    @(Html.Kendo().MobileBackButton()
-                                        .Align(MobileButtonAlign.Left)
-                                        .HtmlAttributes(new { @class = "nav-button" })
-                                        .Url(Url.RouteUrl(new { controller = "suite" }))
-                                        .Text("Back"))
-
-                                    @navbar.ViewTitle("iOS Platform")
-                                </text>)
-                    )
-                    .Footer(obj =>
-                        Html.Kendo().MobileTabStrip()
-                            .Items(items => {
-                                items.Add().Icon("contacts").Text("Profile");
-                                items.Add().Icon("settings").Text("Settings");
-                            })
-                    )
+                            @navbar.ViewTitle("iOS Platform")
+                        </text>)
             )
+            .Footer(obj =>
+                Html.Kendo().MobileTabStrip()
+                    .Items(items => {
+                        items.Add().Icon("contacts").Text("Profile");
+                        items.Add().Icon("settings").Text("Settings");
+                    })
+            )
+        )
     ```
 
 1. Add the View that will use the Layout.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <% Html.Kendo().MobileView()
-                    .Name("layoutView")
-                    .Layout("layout") // the `Name` of the layout
-                    .Content(() =>
-                    {
-                        %>
-                        <p>
-                            This examples shows the platform specific layouts.
-                            Change the OS to see how the header and footer changes.
-                        </p>
-                        <%
-                    })
-                    .Render();
-            %>
+    ```ASPX
+        <% Html.Kendo().MobileView()
+            .Name("layoutView")
+            .Layout("layout") // the `Name` of the layout
+            .Content(() =>
+            {
+                %>
+                <p>
+                    This examples shows the platform specific layouts.
+                    Change the OS to see how the header and footer changes.
+                </p>
+                <%
+            })
+            .Render();
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileView()
-                    .Name("layoutView")
-                    .Layout("layout") // the `Name` of the layout
-                    .Content(
-                        @<text>
-                            <p>
-                                This examples shows the platform specific layouts.
-                                Change the OS to see how the header and footer changes.
-                            </p>
-                        </text>)
-            )
+    ```Razor
+        @(Html.Kendo().MobileView()
+            .Name("layoutView")
+            .Layout("layout") // the `Name` of the layout
+            .Content(
+                @<text>
+                    <p>
+                        This examples shows the platform specific layouts.
+                        Change the OS to see how the header and footer changes.
+                    </p>
+                </text>)
+        )
     ```
 
 1. Initialize the mobile application.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().MobileApplication()
+    ```ASPX
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
     ```
 
 1. Build and run the application.
@@ -158,37 +146,33 @@ You can subscribe to all hybrid Layout [events](https://docs.telerik.com/kendo-u
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
+```ASPX
+    <%: Html.Kendo().MobileLayout()
+            .Name("MobileLayout")
+            .Events(events => events
+                .Show("onShow")
+            )
+    %>
 
-```tab-ASPX
-
-        <%: Html.Kendo().MobileLayout()
-                .Name("MobileLayout")
-                .Events(events => events
-                    .Show("onShow")
-                )
-        %>
-
-        <script>
+    <script>
         function onShow() {
             //Handle the show event
         }
-        </script>
+    </script>
 ```
-```tab-Razor
+```Razor
+    @(Html.Kendo().MobileLayout()
+            .Name("MobileLayout")
+            .Events(events => events
+                .Show("onShow")
+            )
+    )
 
-        @(Html.Kendo().MobileLayout()
-                .Name("MobileLayout")
-                .Events(events => events
-                    .Show("onShow")
-                )
-        )
-
-        <script>
+    <script>
         function onShow() {
             //Handle the show event
         }
-        </script>
+    </script>
 ```
 
 ## Reference
@@ -199,15 +183,15 @@ You can reference a hybrid Layout instance by using the code from the example be
 
 ###### Example
 
-        @(Html.Kendo().MobileLayout()
-                .Name("MobileLayout")
-        )
-        <script>
+    @(Html.Kendo().MobileLayout()
+            .Name("MobileLayout")
+    )
+    <script>
         $(function() {
             // Notice that the Name() of the layout is used to get its client-side instance
             var layout = $("#MobileLayout").data("kendoMobileLayout");
         });
-        </script>
+    </script>
 
 ## See Also
 

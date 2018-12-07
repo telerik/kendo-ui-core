@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Introduction
 page_title: Overview | Progress Telerik UI for ASP.NET MVC
 description: "Download and install Progress Telerik UI for ASP.NET MVC, and run a sample application."
 slug: overview_aspnetmvc
@@ -102,7 +102,7 @@ To run the sample application:
 
     **Figure 1 The start-up screen of the sample application**
 
-    ![Telerik UI for ASP.NET MVC Sample Application](/images/demos.png)
+    ![Telerik UI for ASP.NET MVC Sample Application](images/demos.png)
 
 ### Distribution Contents
 

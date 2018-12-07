@@ -21,7 +21,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
     **Figure 1. A new entity data model**
 
-    ![New entity data model](/helpers/grid/images/grid-entity-data-model.png)
+    ![New entity data model](../images/grid-entity-data-model.png)
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
     **Figure 2. Choosing the connection**
 
-    ![Choose the Products table](/helpers/grid/images/grid-database-objects.png)
+    ![Choose the Products table](../images/grid-database-objects.png)
 
 1. Right click the `Controllers` folder in Visual Studio solution explorer. Select **Add** > **Controller**.
 
@@ -37,7 +37,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
     **Figure 3. Adding the Controller**
 
-    ![Add Controller](/helpers/grid/images/grid-api-controller.png)
+    ![Add Controller](../images/grid-api-controller.png)
 
 1. Open `Controllers/ProductsController.cs`.
 
@@ -45,103 +45,99 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
     ###### Example
 
-            public DataSourceResult GetProducts([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
-            {
-                return db.Products.ToDataSourceResult(request);
-            }
+        public DataSourceResult GetProducts([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
+        {
+            return db.Products.ToDataSourceResult(request);
+        }
 
 1. Update the `PostProduct` method as demonstrated in The following example.
 
     ###### Example
 
-            public HttpResponseMessage PostProduct(Product product)
+        public HttpResponseMessage PostProduct(Product product)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Products.Add(product);
-                    db.SaveChanges();
+                db.Products.Add(product);
+                db.SaveChanges();
 
-                    DataSourceResult result = new DataSourceResult
-                    {
-                        Data = new[] { product },
-                        Total = 1
-                    };
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, result);
-                    response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = product.ProductID }));
-                    return response;
-                }
-                else
+                DataSourceResult result = new DataSourceResult
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
+                    Data = new[] { product },
+                    Total = 1
+                };
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, result);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = product.ProductID }));
+                return response;
             }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
 
 1. In the view, configure the Grid to use the Products Web API controller.
 
-    ###### Example
-
-    ```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
-              .Name("grid")
-              .Columns(columns =>
-              {
-                  columns.Bound(product => product.ProductID).Width(100);
-                  columns.Bound(product => product.ProductName);
-                  columns.Bound(product => product.UnitsInStock).Width(250);
-                  columns.Command(commands =>
-                  {
-                      commands.Edit(); // The "edit" command will edit and update data items
-                      commands.Destroy(); // The "destroy" command removes data items
-                  }).Title("Commands").Width(200);
-              })
-              .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items
-              .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode
-              .DataSource(dataSource => dataSource
-                    .WebApi()
-                    .Model(model =>
-                    {
-                        model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model
-                        model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable
-                    })
-                    .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the user saves a new data item
-                    .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the grid needs data
-                    .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" })))  // Action invoked when the user saves an updated data item
-                    .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" }))) // Action invoked when the user removes a data item
-              )
-              .Pageable()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(product => product.ProductID).Width(100);
+                columns.Bound(product => product.ProductName);
+                columns.Bound(product => product.UnitsInStock).Width(250);
+                columns.Command(commands =>
+                {
+                    commands.Edit(); // The "edit" command will edit and update data items
+                    commands.Destroy(); // The "destroy" command removes data items
+                }).Title("Commands").Width(200);
+            })
+            .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items
+            .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode
+            .DataSource(dataSource => dataSource
+                .WebApi()
+                .Model(model =>
+                {
+                    model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model
+                    model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable
+                })
+                .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the user saves a new data item
+                .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the grid needs data
+                .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" })))  // Action invoked when the user saves an updated data item
+                .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" }))) // Action invoked when the user removes a data item
+            )
+            .Pageable()
         %>
     ```
-    ```tab-Razor
-
+    ```Razor
         @(Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
-              .Name("grid")
-              .Columns(columns =>
-              {
-                  columns.Bound(product => product.ProductID).Width(100);
-                  columns.Bound(product => product.ProductName);
-                  columns.Bound(product => product.UnitsInStock).Width(250);
-                  columns.Command(commands =>
-                  {
-                      commands.Edit(); // The "edit" command will edit and update data items
-                      commands.Destroy(); // The "destroy" command removes data items
-                  }).Title("Commands").Width(200);
-              })
-              .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items
-              .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode
-              .DataSource(dataSource => dataSource
-                    .WebApi()
-                    .Model(model =>
-                    {
-                        model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model
-                        model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable
-                    })
-                    .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the user saves a new data item
-                    .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the grid needs data
-                    .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" })))  // Action invoked when the user saves an updated data item
-                    .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" }))) // Action invoked when the user removes a data item
-              )
-              .Pageable()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(product => product.ProductID).Width(100);
+                columns.Bound(product => product.ProductName);
+                columns.Bound(product => product.UnitsInStock).Width(250);
+                columns.Command(commands =>
+                {
+                    commands.Edit(); // The "edit" command will edit and update data items
+                    commands.Destroy(); // The "destroy" command removes data items
+                }).Title("Commands").Width(200);
+            })
+            .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items
+            .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode
+            .DataSource(dataSource => dataSource
+                .WebApi()
+                .Model(model =>
+                {
+                    model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model
+                    model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable
+                })
+                .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the user saves a new data item
+                .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the grid needs data
+                .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" })))  // Action invoked when the user saves an updated data item
+                .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" }))) // Action invoked when the user removes a data item
+            )
+            .Pageable()
         )
     ```
 
@@ -149,7 +145,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
     **Figure 4. The final result**
 
-    ![Final result](/helpers/grid/images/grid-inline-grid.png)
+    ![Final result](../images/grid-inline-grid.png)
 
 ## See Also
 

@@ -21,21 +21,21 @@ For the configuration demonstrated in the example below, the configuration shown
 
 ###### Example
 
-      Html.Kendo().Grid<Order>()
-          .Name("Grid")
-          .Columns(columns =>
-          {
-              columns.Bound(o => o.OrderDate);
-              columns.Bound(o => o.ShipCountry);
-          })
-          .Editable(editable => editable.Mode(GridEditMode.InLine))
+    Html.Kendo().Grid<Order>()
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.OrderDate);
+            columns.Bound(o => o.ShipCountry);
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InLine))
 
 The following example demonstrates the code that will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
 ###### Example
 
-      Html.EditorFor(o => o.OrderDate);
-      Html.EditorFor(o => o.ShipCountry);
+    Html.EditorFor(o => o.OrderDate);
+    Html.EditorFor(o => o.ShipCountry);
 
 If the Grid is configured for pop-up editing, the [`Html.EditorForModel`](https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorformodel.aspx) is used to get the editor HTML for the whole model.
 
@@ -51,79 +51,75 @@ Often there is need to create a custom editor for a specific property. For examp
 
     ###### Example
 
-            public class Order
-            {
-                public int OrderID { get; set; }
+        public class Order
+        {
+            public int OrderID { get; set; }
 
-                public string ShipCountry { get; set; }
+            public string ShipCountry { get; set; }
 
-                public Employee Employee { get; set; }
-            }
+            public Employee Employee { get; set; }
+        }
 
-            public class Employee
-            {
-                public int EmployeeID { get; set; }
+        public class Employee
+        {
+            public int EmployeeID { get; set; }
 
-                public string EmployeeName { get; set; }
-            }
+            public string EmployeeName { get; set; }
+        }
 
 1. Create an editor template for the `Employee` property which will display a Kendo UI DropDownList with all available employees. Add a new partial view
 to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.ascx` or `EmployeeEditor.cshtml` (if using the Razor view engine).
 
 1. Add a Kendo UI DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
 
-    ###### Example
-
-    ```tab-ASPX
-
-            <%: Html.Kendo().DropDownList()
-                .Name("Employee") // The name of the widget should be the same as the name of the property.
-                .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
-                .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
-                .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
-            %>
+    ```ASPX
+        <%: Html.Kendo().DropDownList()
+            .Name("Employee") // The name of the widget should be the same as the name of the property.
+            .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
+            .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
+            .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
+        %>
     ```
-    ```tab-Razor
-
-            @(Html.Kendo().DropDownList()
-                .Name("Employee") // The name of the widget should be the same as the name of the property.
-                .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
-                .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
-                .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
-            )
+    ```Razor
+        @(Html.Kendo().DropDownList()
+            .Name("Employee") // The name of the widget should be the same as the name of the property.
+            .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
+            .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
+            .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
+        )
     ```
 
 1. In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees.
 
     ###### Example
 
-            public ActionResult Index()
-            {
-                ViewData["employees"] = new NorthwindDataContext()
-                             .Employees
-                             .Select(e => new Employee
-                             {
-                                  EmployeeID = e.EmployeeID,
-                                  EmployeeName = e.FirstName + " " + e.LastName
-                             })
-                             .OrderBy(e => e.EmployeeName);
+        public ActionResult Index()
+        {
+            ViewData["employees"] = new NorthwindDataContext()
+                            .Employees
+                            .Select(e => new Employee
+                            {
+                                EmployeeID = e.EmployeeID,
+                                EmployeeName = e.FirstName + " " + e.LastName
+                            })
+                            .OrderBy(e => e.EmployeeName);
 
-                return View();
-            }
+            return View();
+        }
 
 1. Decorate the `Employee` property with the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute. It needs the name of the editor template created in **Step 3** without the extension `"EmployeeEditor"`.
 
     ###### Example
 
-            public class Order
-            {
-                public int OrderID { get; set; }
+        public class Order
+        {
+            public int OrderID { get; set; }
 
-                public string ShipCountry { get; set; }
+            public string ShipCountry { get; set; }
 
-                [UIHint("EmployeeEditor")]
-                public Employee Employee { get; set; }
-            }
+            [UIHint("EmployeeEditor")]
+            public Employee Employee { get; set; }
+        }
 
 ## See Also
 

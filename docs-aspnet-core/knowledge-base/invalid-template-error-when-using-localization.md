@@ -27,7 +27,7 @@ My UI for ASP .NET Core project uses a Kendo UI Grid with templates and localiza
 
 ## Cause
 
-ASP.NET Core encodes all Unicode characters except the ones from the `BasicLatin` range. The encoded characters are similar to `汉`. The hash sign (`#`) in the encoded character representation [has a special meaning inside the Kendo UI templates](/framework/templates/overview#template-syntax) and breaks their syntax, which results in throwing the `Invalid template` error.
+ASP.NET Core encodes all Unicode characters except the ones from the `BasicLatin` range. The encoded characters are similar to `汉`. The hash sign (`#`) in the encoded character representation [has a special meaning inside the Kendo UI templates](https://docs.telerik.com/kendo-ui/framework/templates/overview#template-syntax) and breaks their syntax, which results in throwing the `Invalid template` error.
 
 ## Solution
 

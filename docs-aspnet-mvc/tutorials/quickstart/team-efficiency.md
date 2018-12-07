@@ -122,7 +122,7 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 
 > **Tip**
 >
-> Because the **Convert to Telerik application**, **Upgrade Project**, or **Configure Project** wizards modify the `_Layout.cshtml` file, make sure you check the position of the custom CSS declarations afterwards.        
+> Because the **Convert to Telerik application**, **Upgrade Project**, or **Configure Project** wizards modify the `_Layout.cshtml` file, make sure you check the position of the custom CSS declarations afterwards.
 
 Now that your app is ready for development. Let's add some simple input components to create a nice user experience.
 
@@ -139,19 +139,19 @@ Telerik UI for ASP.NET MVC is a set of server-side wrappers. A server-wrapper do
 - Allows the developer to configure a Kendo UI widget via C# or VB.NET code&mdash;set its value, data source, etc.
 - Renders the HTML and JavaScript needed to initialize the Kendo UI widget. The widget options propagate to the client side via the widget initialization script.
 
-![Server-side wrapper outputs HTML and JavaScript](/images/wrapper-output.png)
+![Server-side wrapper outputs HTML and JavaScript](../../images/wrapper-output.png)
 
 #### Configuration
 
 The Kendo UI HtmlHelper exposes all Kendo UI server wrappers.
 
-![Kendo HtmlHelper extension method](/images/kendo-extension.png)
+![Kendo HtmlHelper extension method](../../images/kendo-extension.png)
 
 #### Widget Options
 
 The widget options are exposed via a fluent interface.
 
-![Fluent interface](/images/fluent-interface.png)
+![Fluent interface](../../images/fluent-interface.png)
 
 Below is an example of how a NumericTextBox input is created.
 
@@ -190,14 +190,14 @@ Let's open the `Index.cshtml` page under the folder `views/home/`. The `Index.cs
     	@(Html.Kendo().DatePicker()
                .Name("StatsFrom")
                .Value(new DateTime(1996, 1, 1))
-        )        
+        )
 
 1. Find the `StatsTo` text box helper.
 
     ###### Example
 
     	<!-- Stats To Date Picker -->
-    	@Html.TextBox("StatsTo", new DateTime(1996, 1, 1))    
+    	@Html.TextBox("StatsTo", new DateTime(1996, 1, 1))
 
 1. Replace the text box helper with a Kendo UI DatePicker. Set the `Name` property to `StatsTo` and the `Value` with a new `DateTime` of `1998,8,1`.
 
@@ -886,7 +886,7 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
             return filter;
         }
 
-1. In the `/Views/Invoice/Index.cshtml` view, find the `EmployeeSales` grid.   
+1. In the `/Views/Invoice/Index.cshtml` view, find the `EmployeeSales` grid.
 
     ###### Example
 
@@ -1314,7 +1314,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Also set the `Legend` to `false`.
 
-    ###### Example    
+    ###### Example
 
         .Legend(leg => leg.Visible(false))
 
@@ -1322,9 +1322,9 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Using the `Data` property, set the value to `getEmployeeFilter` sending filter data back to the `Read` action.
 
-1. Add an `Aggregates` on the DataSource to `Average` the `EmployeeSales`.  
+1. Add an `Aggregates` on the DataSource to `Average` the `EmployeeSales`.
 
-    ###### Example    
+    ###### Example
 
         .DataSource(ds => ds
             .Read(read => read.Action("EmployeeAverageSales", "Home")
@@ -1494,7 +1494,7 @@ Charts, like other Kendo UI widgets are easy to interact with on the client side
         @(Html.Kendo().Chart<KendoQsBoilerplate.QuarterToDateSalesViewModel>()
             ...
             .AutoBind(false)
-            .Events(e => e.DataBound("onQuarterSalesDataBound"))       
+            .Events(e => e.DataBound("onQuarterSalesDataBound"))
         )
 
     ![Chart Client API](images/chapter8/chart-client-api.jpg)
@@ -1647,7 +1647,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
     	    z-index: 3;
     	}
 
-1. Run or refresh the application. Expand and contract the browser's width, notice the **Menu** button appear when the browser is small. Click the **Menu** button to open the panel. Click beside the panel to collapse it.   
+1. Run or refresh the application. Expand and contract the browser's width, notice the **Menu** button appear when the browser is small. Click the **Menu** button to open the panel. Click beside the panel to collapse it.
 
 1. For a better user experience, add a **Close** button to the panel so the interaction is discoverable and intuitive.
 

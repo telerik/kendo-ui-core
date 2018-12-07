@@ -42,9 +42,7 @@ When using local sources, consider the video formats supported by the different 
 
 Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will render a `div` element as its wrapper container.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -55,7 +53,7 @@ Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will r
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -81,9 +79,7 @@ The MediaPlayer provides properties, methods, and events to match your specific 
 
 When you add multiple sources for the video, an **HD** button is automatically displayed in the bottom right corner, right next to the **FullScreen** one. This enables you to select your preferred quality.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -97,7 +93,7 @@ When you add multiple sources for the video, an **HD** button is automatically d
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -126,9 +122,7 @@ To access an existing MediaPlayer instance, use the `.data()` jQuery method, exe
 
 The following example demonstrates how to access an existing MediaPlayer instance.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -139,7 +133,7 @@ The following example demonstrates how to access an existing MediaPlayer instanc
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -172,9 +166,7 @@ You can subscribe to all [MediaPlayer events](http://docs.telerik.com/kendo-ui/a
 
 The examples below demonstrates how to subscribe to events using a handler name.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -190,7 +182,7 @@ The examples below demonstrates how to subscribe to events using a handler name.
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -223,29 +215,27 @@ The following example demonstrates how to subscribe to events using a template d
 
 ###### Example
 
-```tab-Razor
-@(Html.Kendo().MediaPlayer()
-    .Name("mediaplayer1")
-    .AutoPlay(true)
-    .HtmlAttributes(new { style = "height:360px; width:640px" })
-    .Events(e =>
-        e.Pause(@<text>
-            function(e) {
-            //Handle the pause event inline.
-            }
-        </text>)
-       .VolumeChange(@<text>
-            function(e) {
-            //Handle the volumeChange event inline.
-            }
-        </text>)
-     )
-     .Media(m => m
-         .Title("Our Company Culture - Lesson 1")
-         .Source("Video/video1.mp4")
-     )
-)
-```
+    @(Html.Kendo().MediaPlayer()
+        .Name("mediaplayer1")
+        .AutoPlay(true)
+        .HtmlAttributes(new { style = "height:360px; width:640px" })
+        .Events(e =>
+            e.Pause(@<text>
+                function(e) {
+                //Handle the pause event inline.
+                }
+            </text>)
+        .VolumeChange(@<text>
+                function(e) {
+                //Handle the volumeChange event inline.
+                }
+            </text>)
+        )
+        .Media(m => m
+            .Title("Our Company Culture - Lesson 1")
+            .Source("Video/video1.mp4")
+        )
+    )
 
 ## Keyboard Navigation
 
@@ -262,9 +252,7 @@ The following list provides the built-in keyboard commands of the MediaPlayer:
 
 To localize the tooltip texts from the interface, use the configuration options of the MediaPlayer.
 
-###### Example
-
-```tab-Razor
+```Razor
 @(Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)
@@ -280,7 +268,7 @@ To localize the tooltip texts from the interface, use the configuration options 
     )
 )
 ```
-```tab-ASPX
+```ASPX
 <%= Html.Kendo().MediaPlayer()
     .Name("mediaplayer1")
     .AutoPlay(true)

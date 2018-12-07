@@ -38,66 +38,62 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 1. Add a Kendo UI PivotGrid to the `Index` view.
 
-    ###### Example
-
-    ```tab-ASPX
-
-          <%: Html.Kendo().PivotGrid()
-                  .Name("pivotgrid")
-                  .DataSource(dataSource => dataSource.
-                      Xmla()
-                      .Columns(columns => {
-                          columns.Add("[Date].[Calendar]").Expand(true);
-                          columns.Add("[Geography].[City]");
-                      })
-                      .Rows(rows => rows.Add("[Product].[Product]"))
-                      .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
-                      .Transport(transport => transport
-                          .Connection(connection => connection
-                              .Catalog("Adventure Works DW 2008R2")
-                              .Cube("Adventure Works"))
-                          .Read(read => read
-                              .Url("http://demos.telerik.com/olap/msmdpump.dll")
-                              .DataType("text")
-                              .ContentType("text/xml")
-                              .Type(HttpVerbs.Post)
-                          )
-                      )
-                  )
-          %>
-    ```
-    ```tab-Razor
-
-          @(Html.Kendo().PivotGrid()
-                .Name("pivotgrid")
-                .DataSource(dataSource => dataSource.
-                    Xmla()
-                    .Columns(columns => {
-                        columns.Add("[Date].[Calendar]").Expand(true);
-                        columns.Add("[Geography].[City]");
-                    })
-                    .Rows(rows => rows.Add("[Product].[Product]"))
-                    .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
-                    .Transport(transport => transport
-                        .Connection(connection => connection
-                            .Catalog("Adventure Works DW 2008R2")
-                            .Cube("Adventure Works"))
-                        .Read(read => read
-                            .Url("http://demos.telerik.com/olap/msmdpump.dll")
-                            .DataType("text")
-                            .ContentType("text/xml")
-                            .Type(HttpVerbs.Post)
-                        )
+    ```ASPX
+        <%: Html.Kendo().PivotGrid()
+            .Name("pivotgrid")
+            .DataSource(dataSource => dataSource.
+                Xmla()
+                .Columns(columns => {
+                    columns.Add("[Date].[Calendar]").Expand(true);
+                    columns.Add("[Geography].[City]");
+                })
+                .Rows(rows => rows.Add("[Product].[Product]"))
+                .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
+                .Transport(transport => transport
+                    .Connection(connection => connection
+                        .Catalog("Adventure Works DW 2008R2")
+                        .Cube("Adventure Works"))
+                    .Read(read => read
+                        .Url("http://demos.telerik.com/olap/msmdpump.dll")
+                        .DataType("text")
+                        .ContentType("text/xml")
+                        .Type(HttpVerbs.Post)
                     )
                 )
-          )
+            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().PivotGrid()
+            .Name("pivotgrid")
+            .DataSource(dataSource => dataSource.
+                Xmla()
+                .Columns(columns => {
+                    columns.Add("[Date].[Calendar]").Expand(true);
+                    columns.Add("[Geography].[City]");
+                })
+                .Rows(rows => rows.Add("[Product].[Product]"))
+                .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
+                .Transport(transport => transport
+                    .Connection(connection => connection
+                        .Catalog("Adventure Works DW 2008R2")
+                        .Cube("Adventure Works"))
+                    .Read(read => read
+                        .Url("http://demos.telerik.com/olap/msmdpump.dll")
+                        .DataType("text")
+                        .ContentType("text/xml")
+                        .Type(HttpVerbs.Post)
+                    )
+                )
+            )
+        )
     ```
 
 1. Build and run the application.
 
   **Figure 1. The finished application**
 
-  ![Final result](/helpers/pivotgrid/images/pivotgrid.png)
+  ![Final result](images/pivotgrid.png)
 
 ## See Also
 

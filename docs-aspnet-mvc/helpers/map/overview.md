@@ -29,10 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Map.
 
 1. Add a Map.
 
-    ###### Example
-
-    ```tab-ASPX
-
+    ```ASPX
         <%: Html.Kendo().Map()
             .Name("map")
             .Layers(layers =>
@@ -44,8 +41,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Map.
             })
         %>
     ```
-    ```tab-Razor
-
+    ```Razor
         @(Html.Kendo().Map()
             .Name("map")
             .Layers(layers =>
@@ -66,10 +62,7 @@ You can subscribe to all Map [events](http://docs.telerik.com/kendo-ui/api/javas
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
-```tab-ASPX
-
+```ASPX
     <%: Html.Kendo().Map()
         .Name("map")
         .Layers(layers =>
@@ -89,8 +82,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
-```tab-Razor
-
+```Razor
     @(Html.Kendo().Map()
         .Name("map")
         .Layers(layers =>
@@ -117,8 +109,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ###### Example
 
-```tab-Razor
-
     @(Html.Kendo().Map()
         .Name("map")
         .Layers(layers =>
@@ -136,7 +126,6 @@ The following example demonstrates how to subscribe to events by a template dele
             </text>)
         )
     )
-```
 
 ## Reference
 
@@ -148,10 +137,10 @@ To reference an existing Kendo UI Map instance, use the [`jQuery.data()`](http:/
 
     //Put this after your Kendo UI Map for ASP.NET MVC declaration.
     <script>
-    $(function() {
-        //Notice that the Name() of the Map is used to get its client-side instance.
-        var map = $("#map").data("kendoMap");
-    });
+        $(function() {
+            //Notice that the Name() of the Map is used to get its client-side instance.
+            var map = $("#map").data("kendoMap");
+        });
     </script>
 
 ## See Also

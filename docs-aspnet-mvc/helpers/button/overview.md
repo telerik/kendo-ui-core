@@ -28,14 +28,14 @@ The following example demonstrates how to initialize the Button by using the def
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("textButton")
             .HtmlAttributes( new {type = "button"} )
             .Content("Text button"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("textButton")
@@ -47,14 +47,14 @@ The following example demonstrates how to initialize the Button by using the `an
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("linkButton")
             .Tag("a")
             .Content("Link button"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("linkButton")
@@ -80,14 +80,14 @@ The following example demonstrates how to add a background icon by using `.Icon(
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("cancelButton")
             .Icon("cancel")
             .Content("Cancel"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("cancelButton")
@@ -105,14 +105,14 @@ The following example demonstrates how to add a background icon by using `.Sprit
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("spriteButton")
             .SpriteCssClass("myIconClass")
             .Content("Sprite button"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("spriteButton")
@@ -132,14 +132,14 @@ The following example demonstrates how to use a button with no text.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("deleteButton")
             .SpriteCssClass("myDeleteClass")
             .Content("<span class='k-sprite'>Delete</span>"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("deleteButton")
@@ -155,14 +155,14 @@ The following example demonstrates how to use `.ImageUrl()`.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("imageButton")
             .ImageUrl("/images/myIcon.gif")
             .Content("Image button"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("imageButton")
@@ -180,14 +180,14 @@ The following example demonstrates how to use `.ImageUrl()` with no text. Note t
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("iconButton")
             .ImageUrl("/images/myIcon.gif")
             .Content("<img class='k-image' alt='my icon' />"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("iconButton")
@@ -205,14 +205,14 @@ The following example demonstrates how to use `.Enable()`.
 
 ###### Example
 
-```tab-Razor
+```Razor
 
         @(Html.Kendo().Button()
             .Name("disabledButton")
             .Enable(false)
             .Content("Disabled button"))
 ```
-```tab-ASPX
+```ASPX
 
         <%= Html.Kendo().Button()
             .Name("disabledButton")
