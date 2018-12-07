@@ -35,7 +35,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 5 a
 
     **Figure 1. The new ASP.NET MVC 5 application**
 
-    ![New ASP.NET MVC 5 Application](images/mvc5-new-app.png)
+    ![New ASP.NET MVC 5 Application](../images/mvc5-new-app.png)
 
 ## Add Telerik UI for ASP.NET MVC
 
@@ -63,7 +63,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
     **Figure 2. Kendo UI directories in the Solution Explorer**
 
-    ![Kendo directories in Solution Explorer](images/mvc5-solution.png)
+    ![Kendo directories in Solution Explorer](../images/mvc5-solution.png)
 
     After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -234,7 +234,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
     **Figure 3. The final result**
 
-    ![Final result](images/mvc5-final.png)
+    ![Final result](../images/mvc5-final.png)
 
 ## Next Steps
 

@@ -38,7 +38,7 @@ Select **Kendo UI Scaffolder** from the list of available scaffolders. Then choo
 
 **Figure 2. The Kendo UI Scaffolder**
 
-![Kendo UI Scaffolder](images/scaffolding/kendo_ui_scaffolder.png)
+![Kendo UI Scaffolder](../../images/scaffolding/kendo_ui_scaffolder.png)
 
 ### Choose Model and Data Options
 

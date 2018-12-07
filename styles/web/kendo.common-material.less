@@ -351,8 +351,9 @@
     bottom: 10px;
 }
 
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    top: (@grid-size/2 + 2px);
+.k-multiselect > .k-multiselect-wrap > .k-i-close,
+.k-dropdowntree > .k-multiselect-wrap > .k-i-close {
+    top: calc((@input-height - @grid-size) / 2 + @input-padding-y + 1px);
 }
 
 .k-autocomplete > .k-i-close,

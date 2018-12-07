@@ -26,13 +26,13 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI Grid.
 
 	**Figure 1. Add a new scaffolded item**
 
-	![New Scaffolded Item](images/scaffolding/new_scaffolded_item.png)
+	![New Scaffolded Item](../../images/scaffolding/new_scaffolded_item.png)
 
 1. Select **Kendo UI Scaffolder** from the list of available scaffolders.
 
 	**Figure 2. Choose the Kendo UI Scaffolder**
 
-	![Kendo UI Scaffolder](images/scaffolding/kendo_ui_scaffolder.png)
+	![Kendo UI Scaffolder](../../images/scaffolding/kendo_ui_scaffolder.png)
 
 1. On the next screen, you are presented with the **Model** and **Data Context** options. Enter the **Controller** and **View** names.
 

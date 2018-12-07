@@ -178,8 +178,9 @@ input.k-textbox {
     right: 2.55em;
 }
 
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    top: (@grid-size/2 - 1px);
+.k-multiselect > .k-multiselect-wrap > .k-i-close,
+.k-dropdowntree > .k-multiselect-wrap > .k-i-close {
+    top: calc((@input-height - @grid-size) / 2 + @input-padding-y + 1px);
 }
 
 .k-numerictextbox .k-link {

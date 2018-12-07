@@ -84,7 +84,7 @@ The following example demonstrates how to use all three options to customize the
 
 **Figure 2: A Bullet Chart with custom target line**
 
-![Bullet Chart with Custom Line](/html-helpers/charts/chart-types/chart-bullet-target.png)
+![Bullet Chart with Custom Line](images/chart-bullet-target.png)
 
 ## See Also
 

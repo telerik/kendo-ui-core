@@ -28,7 +28,7 @@ Right-click the location where the Chart Controller should be generated. Select 
 
 **Figure 1. A new scaffolded item**
 
-![New Scaffolded Item](images/scaffolding/new_scaffolded_item.png)
+![New Scaffolded Item](../../images/scaffolding/new_scaffolded_item.png)
 
 ### Select the Scaffolder
 
@@ -36,7 +36,7 @@ Select **Kendo UI Scaffolder** from the list of available Scaffolders.
 
 **Figure 2. The Kendo UI Scaffolder**
 
-![Kendo UI Scaffolder](images/scaffolding/kendo_ui_scaffolder.png)
+![Kendo UI Scaffolder](../../images/scaffolding/kendo_ui_scaffolder.png)
 
 ### Select the Chart
 
@@ -54,19 +54,19 @@ On the next screen, you are presented with the Model and Data Context options.
 
 	**Figure 4. The Grid options**
 
-	![Grid options](images/scaffolding/kendo_ui_grid1.png)
+	![Grid options](../../helpers/grid/images/scaffolding/kendo_ui_grid1.png)
 
 1. The **Model Class** DropDownList contains all model types from the active project. In this example, you are going to list products in the Chart. Select the **Product** entity.
 
 	**Figure 5. The Model class**
 
-	![Model Class](images/scaffolding/model_class.png)
+	![Model Class](../../helpers/grid/images/scaffolding/model_class.png)
 
 1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this example, it is **NorthwindEntities**.
 
 	**Figure 6. The Data Context class**
 
-	![Data Context Class](images/scaffolding/data_context_class.png)
+	![Data Context Class](../../helpers/grid/images/scaffolding/data_context_class.png)
 
 ### Use View Model Objects
 
