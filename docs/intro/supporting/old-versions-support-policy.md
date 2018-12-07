@@ -39,7 +39,7 @@ New features and widgets are not available for versions which come before the fi
 
 ## Browser Compatibility
 
-Kendo UI versions support only browsers that were available at the time of their release&mdash;for example, a 2012 Kendo UI version does not support IE11 because IE11 was released in 2013. For more information, refer to the article on [web browser and operating system support](wbe_browserand_operating_system_support).
+Kendo UI versions support only browsers that were available at the time of their release&mdash;for example, a 2012 Kendo UI version does not support IE11 because IE11 was released in 2013. For more information, refer to the article on [web browser and operating system support]({% slug wbe_browserand_operating_system_support %}).
 
 ## Implementation Support
 
