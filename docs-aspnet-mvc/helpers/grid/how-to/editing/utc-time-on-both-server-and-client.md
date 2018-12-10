@@ -84,7 +84,7 @@ Below are listed the 2 corresponding steps for you to follow.
                 for (var name in obj) {
                     var prop = obj[name];
                     if (typeof (prop) === "string" && prop.indexOf("/Date(") == 0) {
-                        obj[name] = prop.replace(/\d+/, function (n) {
+                        obj[name] = prop.replace(/-?\d+/, function (n) {
                             var offsetMiliseconds = new Date(parseInt(n)).getTimezoneOffset() * 60000;
                             return parseInt(n) + offsetMiliseconds
                         });

@@ -1774,7 +1774,7 @@ The fields which can be used in the template are:
 > If the template is declared as a function the group field is accessible only through the data field,
 > e.g. `data.fieldName1.group.value`.
 
-#### Example - set the group header template
+#### Example - set the group footer template
 
     <div id="grid"></div>
     <script>
@@ -1795,7 +1795,7 @@ The fields which can be used in the template are:
     });
     </script>
 
-#### Example - set the group header template as function
+#### Example - set the group footer template as function
 
     <div id="grid"></div>
     <script>
