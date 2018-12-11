@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ProgressBar HtmlHelper
+page_title: ProgressBar | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI ProgressBar widget for ASP.NET MVC."
 slug: overview_progressbarhelper_aspnetmvc
 position: 1

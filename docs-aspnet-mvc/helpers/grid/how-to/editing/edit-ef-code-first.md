@@ -1,6 +1,6 @@
 ---
 title: Edit Grids with Entity Framework Code First
-page_title: Edit Grids with Entity Framework Code First | Kendo UI Grid HtmlHelper
+page_title: Edit Grids with Entity Framework Code First | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Implement CRUD data operations with Entity Framework Code First when working with the Kendo UI Grid."
 slug: howto_editwithentityframeworkcodefirst_gridaspnetmvc
 ---

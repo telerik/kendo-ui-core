@@ -1,8 +1,8 @@
 ---
 title: Drag and Drop Sortable ListView Items
-description: An example on how to configure ListView drag-and-drop to perform copy instead of move, while sorting is also enabled
+description: An example on how to configure the drag-and-drop functionality in the ListView to perform a copy instead of a move operation while sorting is enabled.
 type: how-to
-page_title: Copy in Drag-Drop and Sorting | Kendo UI ListView
+page_title: Copy with Drag-and-Drop and Sorting Enabled | Kendo UI ListView
 slug: listview-drag-drop-sortable-items
 tags: kendo, kendo-ui, listview, sortable, drag, drop, drag-drop, droptarget, draggable
 ticketid: 1163175
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tr>
         <td>Product</td>
@@ -21,18 +22,29 @@ res_type: kb
     </tr>
 </table>
 
-
 ## Description
-I have been having some issues creating an interactive list using Drag and Drop in Kendo UI. I am attempting to create a reorganizable list that can be populated by dragging in items from a static master list. I have attempted to do so using the Draggable and DropTarget features, however have come to find that these do not work along side the Sortable feature as it contains the former within itself and creates conflicts.
 
-I have also attempted to use the Sortable feature in combination with the ListView feature, in this case I can sort my newly created list, however I am unable to find a straight forward way to keep my master list maintained, the items want to be transferred to the new list rather than be copied.
+* I need to create a reorganizable list that can be populated by dragging in items from a static master list. I tried to use the `Draggable` and `DropTarget` features but it seems they do not work together with the sortable feature because it contains a draggable functionality within itself which causes conflicts.
+* I also tried to use the sortable feature together with the ListView feature and I am able to sort my newly created list. However, I am unable to find a straightforward way to keep my master list because the items can be transferred to the new list but not copied.
+
+How can I create an interactive list by using the drag-and-drop functionality in a Kendo UI ListView and perform a copy instead of a move operation while sorting is enabled?
 
 ## Solution
-If you have a scenario, in which there are two ListView boxes. One of the boxes contain all the predefined items, while the other is initially empty. You need to allow drag-drop of items from the initial to the target ListView. The source ListView should always display all the initial items, while the user should be able to remove items from the target by dragging them back to the source. Also, the target widget should allow manual sorting of its items.
 
-If this is the case, you will need to handle the [Sortable.change](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable/events/change) event and reset the DataSource of the source ListView under some conditions.
+The suggested approach applies to the following scenario:
 
-Below you will find an example implementing such scenario:
+* Two ListView boxes.
+* One of the boxes contains all the predefined items and the other box is initially empty.
+* You want to allow the dragging and dropping of items from the initial to the target ListView.
+* The source ListView has to always display all the initial items while the user has to be able to remove items from the target by dragging them back to the source.
+* The target ListView has to allow the manual sorting of its items.
+
+To fulfil the scenario, use the following suggested approach:
+
+1. Handle the [`Sortable.change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable/events/change) event.
+1. Reset the DataSource of the source ListView under some conditions.
+
+The following example demonstrates the full implementation of the suggested approach.
 
 ```html
 <div style="padding:30px;">

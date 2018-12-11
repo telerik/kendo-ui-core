@@ -1,6 +1,6 @@
 ---
 title: Integrate with Sharepoint
-page_title: Integrate with Sharepoint | Kendo UI TreeView HtmlHelper
+page_title: Integrate with Sharepoint | Kendo UI TreeView HtmlHelper for ASP.NET MVC
 description: "Use SharePoint Sandbox Visual Web Part to add a Kendo UI TreeView in ASP.NET MVC applications."
 slug: howto_integratewithsharepoint_treeviewaspnetmvc
 ---

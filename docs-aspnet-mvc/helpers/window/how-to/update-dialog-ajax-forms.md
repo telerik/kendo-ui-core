@@ -1,6 +1,6 @@
 ---
 title: Update Kendo UI Windows with AJAX Forms
-page_title: Update Kendo UI Windows with AJAX Forms | Kendo UI Window HtmlHelper
+page_title: Update Kendo UI Windows with AJAX Forms | Kendo UI Window HtmlHelper for ASP.NET MVC
 description: "This article demonstrates how to use AJAX forms and update the Kendo UI Window with the validation fetched from the controller in ASP.NET MVC applications."
 slug: howto_update_ajax_forms_windowaspnetmv
 ---

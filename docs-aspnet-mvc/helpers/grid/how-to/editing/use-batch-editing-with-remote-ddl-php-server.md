@@ -1,6 +1,6 @@
 ---
 title: Use Batch Editing with DropDownList PHP Remote Server
-page_title: Use Batch Editing with DropDownList PHP Remote Server | Kendo UI Grid HtmlHelper
+page_title: Use Batch Editing with DropDownList PHP Remote Server | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Use a Kendo UI Grid in the batch editing mode with a DropDownList PHP remote server in ASP.NET MVC applications."
 slug: howto_usebatcheditingwithddlphpremoteserver_gridaspnetmvc
 ---

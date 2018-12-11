@@ -1,6 +1,6 @@
 ---
 title: Lock Edited Events with SignalR Data Source
-page_title: Lock Edited Events with SignalR Data Source | Kendo UI Scheduler HtmlHelper
+page_title: Lock Edited Events with SignalR Data Source | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Lock edited events in the Kendo UI Scheduler with the SignalR data source using local hub in ASP.NET MVC applications."
 slug: howto_lockeditedevents_signalrdatasource_localhub_scheduleraspnetmvc
 ---

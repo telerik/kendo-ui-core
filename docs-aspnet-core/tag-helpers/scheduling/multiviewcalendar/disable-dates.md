@@ -1,6 +1,6 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Disabled Dates | Kendo UI MultiViewCalendar Tag for ASP.NET Core
 description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
 slug: disabled_dates_multiviewcalendar_taghelper_aspnetcore
 position: 6

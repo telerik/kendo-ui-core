@@ -1,16 +1,16 @@
 ---
-title: Get Checked Nodes in a POST
-description: The treeview checkboxes need unique name attributes when they will be used in a POST query
+title: Get Checked Nodes in a POST Query
+description: The TreeView checkboxes need unique name attributes when they are used in a POST query.
 type: troubleshooting
-page_title: How to get all checked treeview nodes in a POST query
+page_title: Upon selection, all TreeView nodes are checked while in the `POST` query only one entry is visible.
 slug: get-checked-treeview-nodes-in-post
-position: 
 tags: treeview, node, checked, checkbox, name, post, query, unique
 ticketid: 1363907, 1363212, 1364154
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -18,25 +18,23 @@ res_type: kb
 	</tr>
 </table>
 
-
 ## Description
-When you are trying to select a node in a treeview it may appear to check all nodes but in the POST query when you submit the form you only see one entry only, so you cannot tell the checked nodes apart and to list them in a POST query as part of the form data.
 
-The stems from two distinct behaviors:
-* The treeview checks child nodes if you set the [checkboxes.checkChildren](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.checkChildren) property to `true`. If you want only the current node to be checked, set it to `false` or remove it.
-* Checkboxes participate in the POST of a `<form>` through their [name](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.name) - if a checkbox is checked, its name is present in the POST data. 
+When the user tries to select a TreeView node, it seems that all TreeView nodes are checked while in the `POST` query after the form is submitted, only one entry is visible and it is impossible to distinguish the checked nodes and to list them in the `POST` as part of the form data.
 
-One way to resolve this is to use JavaScript to loop through the nodes on the client and collect the checked ones. You can then put them in a hidden field, or otherwise serialize/send to the server. You can find an example of collecting the checked nodes in the [TreeView / Checkboxes](https://demos.telerik.com/kendo-ui/treeview/checkboxes) online demo.
+## Cause
 
-Another approach is to tell checkboxes apart through unique names. To generate such names, use the [checkbox.template](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.template) where you can ensure unique names are provided for each checkbox.
+* If the [`checkboxes.checkChildren`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.checkChildren) property is set to `true`, the TreeView checks all child nodes. To enable the TreeView to check only the current node, set `checkboxes.checkChildren` to `false` or remove it.
+* Checkboxes participate in the `POST` of a `<form>` through their [`name`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.name) property&mdash; if a checkbox is checked, its `name` is present in the `POST` data.
 
-Basic template string:
+## Solution
 
-```
-"<input type='checkbox' name='checkedFiles#=item.id#' #= item.checked ? 'checked' : '' #>"
-```
+Apply either of the following approaches:
 
-This example shows a template that mimics the default template the treeview uses, complete with classes for appearance and an aria-label attribute for accessibility.
+* Use JavaScript to loop through the nodes on the client and collect the checked ones. Then put them in a hidden field, or serialize or send them to the server. For the full implementation of this approach, refer to the [example on collecting the checked TreeView nodes](https://demos.telerik.com/kendo-ui/treeview/checkboxes).
+* Distinguish checkboxes by generating unique names with the [`checkbox.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/checkboxes#checkboxes.template).
+
+The following example demonstrates a template that mimics the default TreeView template with classes for appearance and an `aria-label` attribute for accessibility.
 
 ```MVC
 .Checkboxes(checkboxes => checkboxes
@@ -46,7 +44,7 @@ This example shows a template that mimics the default template the treeview uses
 )
 ```
 
-Here are full examples of jQuery and MVC initialization:
+The following example demonstrates the jQuery and MVC initialization.
 
 ```html
 <form>

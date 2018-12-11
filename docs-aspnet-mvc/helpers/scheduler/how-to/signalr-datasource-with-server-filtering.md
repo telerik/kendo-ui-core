@@ -1,6 +1,6 @@
 ---
 title: Configure SignalR Data Source with Server Filtering
-page_title: Configure SignalR Data Source with Server Filtering | Kendo UI Scheduler HtmlHelper
+page_title: Configure SignalR Data Source with Server Filtering | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Configuring the Kendo UI Scheduler to work with SignalR data source by using local hub and server filtering in ASP.NET MVC applications."
 slug: signalr_datasource_with_server_filtering
 ---

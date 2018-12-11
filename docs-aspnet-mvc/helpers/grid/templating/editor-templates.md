@@ -1,6 +1,6 @@
 ---
 title: Editor Templates
-page_title: Editor Templates | Kendo UI Grid HtmlHelper
+page_title: Editor Templates | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Create the editing UI of a Kendo Grid ASP.NET MVC with the ASP.NET MVC editor templates."
 previous_url: /helpers/grid/editor-templates
 slug: editortemplates_grid_aspnetmvc

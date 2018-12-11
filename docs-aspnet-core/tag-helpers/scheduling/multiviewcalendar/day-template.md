@@ -1,6 +1,6 @@
 ---
 title: Day Template
-page_title: Day Template | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Day Template | Kendo UI MultiViewCalendar Tag for ASP.NET Core
 description: "Customize the content of each cell by using cell templates when working with the Kendo UI MultiViewCalendar Tag Helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: day_template_multiviewcalendar_taghelper_aspnetcore
 position: 5

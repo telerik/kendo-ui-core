@@ -1,6 +1,6 @@
 ---
 title: Use ColorPicker with Grid HtmlHelper
-page_title: Use ColorPicker with Grid HtmlHelper | Kendo UI Grid HtmlHelper
+page_title: Use ColorPicker with Grid HtmlHelper | Kendo UI ColorPicker HtmlHelper for ASP.NET MVC
 description: "Use the Kendo UI Grid with Kendo UI ColorPicker in ASP.NET MVC applications."
 slug: howto_usecolorpickerwithgrid_colorpickeraspnetmv
 ---

@@ -1,6 +1,6 @@
 ---
 title: Configuration
-page_title: Configuration | Kendo UI Grid HtmlHelper
+page_title: Configuration | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Configure the DataSource of the Kendo UI Grid HtmlHelper to use Ajax binding and add Grid columns in ASP.NET MVC applications."
 slug: configuration_gridhelper_aspnetmvc
 position: 2

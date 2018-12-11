@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI StockChart HtmlHelper
+page_title: StockChart | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI StockChart widget for ASP.NET MVC."
 slug: overview_stockcharthelper_aspnetmvc
 position: 1

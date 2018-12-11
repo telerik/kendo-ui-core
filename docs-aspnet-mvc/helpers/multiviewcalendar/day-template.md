@@ -1,6 +1,6 @@
 ---
 title: Day Template
-page_title: Day Template | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Day Template | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
 description: "Customize the content of each cell by using cell templates when working with the Kendo UI MultiViewCalendar."
 slug: day_template_multiviewcalendar_aspnetmvc
 position: 5

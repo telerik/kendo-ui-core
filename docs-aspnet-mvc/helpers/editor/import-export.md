@@ -1,6 +1,6 @@
 ---
 title: Documentation Import and Export
-page_title: Documentation Import and Export | Kendo UI Editor HtmlHelper
+page_title: Documentation Import and Export | Kendo UI Editor HtmlHelper for ASP.NET MVC
 description: "Import and export different types of documents with the Kendo UI Editor widget for ASP.NET MVC."
 slug: overview_importexportdpl_aspnetmvc
 position: 3

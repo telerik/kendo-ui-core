@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI PivotGrid HtmlHelper
+page_title: PivotGrid | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI PivotGrid widget for ASP.NET MVC."
 slug: overview_pivotgridhelper_aspnetmvc
 position: 1

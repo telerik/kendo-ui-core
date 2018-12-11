@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI QRCode HtmlHelper
+page_title: QRCode | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI QRCode widget for ASP.NET MVC."
 slug: overview_qrcodehelper_aspnetmvc
 position: 1

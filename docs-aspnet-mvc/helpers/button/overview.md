@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Button HtmlHelper
+page_title: Button | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Button widget for ASP.NET MVC."
 slug: overview_buttonhelper_aspnetmvc
 position: 1

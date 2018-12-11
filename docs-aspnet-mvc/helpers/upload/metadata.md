@@ -1,6 +1,6 @@
 ---
 title: Handling of Metadata
-page_title: Handling of Metadata | Kendo UI Upload HtmlHelper
+page_title: Handling of Metadata | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Get started with the asynchronous uploading of metadata in Telerik UI for ASP.NET MVC helpers."
 slug: metadata_uploadhelper_aspnetmvc
 position: 4

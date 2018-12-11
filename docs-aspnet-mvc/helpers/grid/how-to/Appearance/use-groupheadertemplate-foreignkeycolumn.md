@@ -1,6 +1,6 @@
 ---
 title: Use GroupHeaderTemplate with ForeignKeyColumn
-page_title: Use GroupHeaderTemplate with ForeignKeyColumn | Kendo UI Grid HtmlHelper
+page_title: Use GroupHeaderTemplate with ForeignKeyColumn | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Use the GropuHeaderTemplate with the ForeignKeyColumn configuration in a Kendo UI Grid in ASP.NET MVC applications."
 slug: howto_usegroupheadertemplate_foreignkeycolumn_gridaspnetmv
 ---

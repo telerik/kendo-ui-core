@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Ajax Binding | Kendo UI TreeList HtmlHelper for ASP.NET Core
 description: "Learn the basics when working with the TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treelist_aspnetcore_ajaxbinding
 ---

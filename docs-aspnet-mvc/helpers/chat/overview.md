@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Chat HtmlHelper
+page_title: Chat | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Chat widget for ASP.NET MVC."
 slug: overview_chathelper_aspnetmvc
 position: 1

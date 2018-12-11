@@ -1,6 +1,6 @@
 ---
 title: Use Custom JsonResult with Ajax-Bound Grids
-page_title: Use Custom JsonResult with Ajax-Bound Grids | Kendo UI Grid HtmlHelper
+page_title: Use Custom JsonResult with Ajax-Bound Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Create a custom JSON result to change the default JSON serializer."
 slug: howto_usecustomjsonresultajaxbound_gridaspnetmvc
 ---

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI FlatColorPicker HtmlHelper
+page_title: FlatColorPicker | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI FlatColorPicker widget for ASP.NET MVC."
 slug: overview_flatcolorpickerhelper_aspnetmvc
 position: 1

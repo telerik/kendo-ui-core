@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Spreadsheet HtmlHelper Troubleshooting
+page_title: Common Troubleshooting Issues | Kendo UI Spreadsheet HtmlHelper for ASP.NET MVC
 description: "Learn about the solutions of common issues that may occur while working with Kendo UI Spreadsheet for ASP.NET MVC."
 slug: troubleshoot_spreadsheethelper_aspnetmvc
 position: 1

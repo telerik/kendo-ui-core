@@ -1,6 +1,6 @@
 ---
 title: Access Current Model in Popup
-page_title: Access Current Model in Popup | Kendo UI Grid HtmlHelper
+page_title: Access Current Model in Popup | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Access a current model in a popup when working with the Kendo UI Grid in ASP.NET MVC applications."
 slug: howto_accesscurrentmodelpopup_gridaspnetmv
 ---

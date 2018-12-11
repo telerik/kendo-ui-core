@@ -1,6 +1,6 @@
 ---
 title: Render Byte and Base64 Images and Preview Using Window
-page_title: Render Byte and Base64 Images and Preview Using Window | Kendo UI Grid HtmlHelper
+page_title: Render Byte and Base64 Images and Preview Using Window | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Render byte and base64 images and show a preview by using a window when working with the Kendo UI Grid in ASP.NET MVC applications."
 slug: howto_renderbyteandbase64images_gridaspnetmv
 ---

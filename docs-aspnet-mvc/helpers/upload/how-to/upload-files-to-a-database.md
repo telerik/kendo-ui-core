@@ -1,6 +1,6 @@
 ---
 title: Upload Files to Databases
-page_title: Upload Files to Databases | Kendo UI Upload HtmlHelper
+page_title: Upload Files to Databases | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Upload files to a database in ASP.NET MVC applications."
 slug: howto_uploadfilesdatabases_uploadaspnetmvc
 ---

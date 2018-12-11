@@ -1,12 +1,12 @@
 ---
-title: Validation
-page_title: Upload File Validation | Telerik UI for ASP.NET Core HtmlHelpers
+title: File Validation
+page_title: File Validation | Kendo UI Upload HtmlHelper for ASP.NET Core
 description: "Learn how to configure file validation on the client before it has been uploaded using the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_validation_aspnetcore
 position: 7
 ---
 
-# Validation
+# File Validation
 
 The Upload supports file validation&mdash;selected files can be validated against their extensions and size.
 
@@ -55,12 +55,12 @@ Internet Explorer versions prior to version 10 provide no information on the fil
 
 ## See Also
 
-* [Overview of Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Upload Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Drag and Drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [Send Receive Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identify Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
+* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
+* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
+* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
+* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
+* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
 * [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

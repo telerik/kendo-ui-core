@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI TreeList
+page_title: Editing | Kendo UI TreeList HtmlHelper for ASP.NET MVC
 description: "Learn how to configure TreeList HtmlHelper for enabling CRUD operations."
 slug: editing_mvc_treelist_helper
 position: 2

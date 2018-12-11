@@ -1,6 +1,6 @@
 ---
 title: Use Inline Editors in Editor Templates
-page_title: Use Inline Editors in Editor Templates | Kendo UI Editor HtmlHelper
+page_title: Use Inline Editors in Editor Templates | Kendo UI Editor HtmlHelper for ASP.NET MVC
 description: "Use an inline Editor in an Editor template in ASP.NET MVC applications."
 slug: howto_useinlineeditorineditortemplate_editoraspnetmvc
 ---

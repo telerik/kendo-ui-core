@@ -1,6 +1,6 @@
 ---
 title: Ajax Editing
-page_title: Ajax Editing | Kendo UI Grid HtmlHelper
+page_title: Ajax Editing | Kendo UI Grid HtmlHelper for ASP.NET Core
 description: "Define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET Core for Ajax editing."
 slug: ajaxediting_grid_aspnetcore
 position: 2

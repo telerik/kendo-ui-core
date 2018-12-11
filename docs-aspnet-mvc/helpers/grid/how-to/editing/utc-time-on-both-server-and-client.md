@@ -1,6 +1,6 @@
 ---
 title: Use UTC on Both Client and Server
-page_title: Use UTC on Both Client and Server | Kendo UI Grid HtmlHelper
+page_title: Use UTC on Both Client and Server | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
 slug: howto_useutctimeonclientandserver_gridaspnetmv
 ---

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Gantt HtmlHelper
+page_title: Gantt | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Gantt widget for ASP.NET MVC."
 slug: overview_gantthelper_aspnetmvc
 position: 1

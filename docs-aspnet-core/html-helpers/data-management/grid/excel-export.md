@@ -1,6 +1,6 @@
 ---
 title: Excel Export
-page_title: Excel Export | Kendo UI Grid HtmlHelper
+page_title: Excel Export | Kendo UI Grid HtmlHelper for ASP.NET Core
 description: "Export the Kendo UI Grid for ASP.NET Core to Excel."
 slug: excelexport_gridhelper_aspnetcore
 position: 4

@@ -1,6 +1,6 @@
 ---
 title: Format Cells during Export to Excel
-page_title: Format Cells during Export to Excel | Kendo UI Grid HtmlHelper
+page_title: Format Cells during Export to Excel | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Format the Excel cell values in the Kendo UI Grid for ASP.NET MVC."
 slug: howto_cellformat_aspnetmvcgrid
 ---

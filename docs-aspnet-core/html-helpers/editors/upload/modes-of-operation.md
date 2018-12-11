@@ -1,22 +1,18 @@
 ---
-title: Upload Modes of Operation
-page_title: Modes of Operation | Telerik UI for ASP.NET Core HtmlHelpers
+title: Modes of Operation
+page_title: Modes of Operation | Kendo UI Upload HtmlHelper for ASP.NET Core
 description: "Learn about the synchronous and the asynchronous modes of operation of the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_modes_of_operation_aspnetcore
 position: 2
 ---
 
-# Upload Modes of Operation
+# Modes of Operation
 
-The Kendo UI Upload supports two modes of operation.
-
-The available modes are:
-* [Synchronous](#synchronous-mode)
-* [Asynchronous](#asynchronous-mode)
+The Upload provides the [synchronous](#synchronous-mode) and [asynchronous](#asynchronous-mode) modes of operation.
 
 ## Synchronous Mode
 
-A Kendo UI Upload in a synchronous mode behaves like a regular file input. The selected files are uploaded upon form submission. Users benefit from the opportunity to select a variable number of files. This feature does not require that the browser supports a multiple file selection.
+An Upload in a synchronous mode behaves like a regular file input&mdash;the selected files are uploaded upon form submission and users can select a set of files. When the Upload is in its synchronous mode, the browser does not have to support multiple file selection.
 
 ```Razor
 <form method="post" action='@Url.Action("Submit")'>
@@ -67,9 +63,9 @@ public ActionResult Submit(IEnumerable<IFormFile> files)
 
 ## Asynchronous Mode
 
-In this mode, the Kendo UI Upload requires dedicated server handlers to store and remove uploaded files. Files are upload immediately or, optionally, after the confirmation from the user. The upload request is executed out-of-band without interrupting the page flow.
+An Upload in the asynchronous mode requires dedicated server handlers to store and remove uploaded files. Files are upload immediately or, optionally, after the confirmation from the user. The upload request is executed out-of-band without interrupting the page flow.
 
-The asynchronous mode is implemented using the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API).
+The asynchronous mode is implemented through the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API).
 
 ```Razor
 @(Html.Kendo().Upload()
@@ -143,7 +139,7 @@ public ActionResult Remove(string[] fileNames)
 
 ### Save Handler
 
-The save handler has to accept POST requests. The requests are going to contain one or more files with the same name as the `input`, in the above Controller example - `"files[]"`. The handler is expected to return any of the following responses:
+The `save` handler has to accept `POST` requests. The requests will contain one or more files with the same name as the `input`&mdash;for example, `"files[]"` in the previous `Controller` example. The handler is expected to return any of the following responses:
 
 * An empty response to signify success.
 * A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) event handler, again to signify success.
@@ -151,7 +147,7 @@ The save handler has to accept POST requests. The requests are going to contain 
 
 ### Remove Handler
 
-The remove handler should accept POST requests. The requests are going to contain one or more text fields with the `"fileNames[]"` name.
+The `remove` handler has to accept `POST` requests. The requests will contain one or more text fields with the `"fileNames[]"` name.
 
 The handler is expected to return any of the following responses:
 
@@ -161,18 +157,18 @@ The handler is expected to return any of the following responses:
 
 ### Asynchronous Mode Fallback
 
-The Upload has a fallback mechanism when it is placed inside a `form` and is configured for asynchronous operation. Files that were not fully uploaded are going to be sent as part of the form upon its submission by the user. This ensures that no files are lost, even if you do not take any special measures to block the **Submit** button during upload.
+When the Upload is placed inside a `form` and is configured for asynchronous operation, it supports a fallback mechanism. Files that were not fully uploaded are sent as part of the `form` upon its submission by the user which ensures that no files are lost even if you do not take any special measures to block the **Submit** button during upload.
 
-The uploaded files must be handled both in the save handler and in the form submit action, as in synchronous mode.
+The uploaded files must be handled both in the `save` handler and in the `form` submit action, as in synchronous mode.
 
 ## See Also
 
-* [Overview of Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Drag and Drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Send Receive Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identify Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
+* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
+* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
+* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
+* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
+* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
 * [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

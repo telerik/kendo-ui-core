@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Barcode HtmlHelper
+page_title: Barcode | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Barcode widget for ASP.NET MVC."
 slug: overview_barcodehelper_aspnetmvc
 position: 1

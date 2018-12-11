@@ -1,6 +1,6 @@
 ---
 title: Add New Values to Records with AutoComplete as Editor
-page_title: Add New Values to Records with AutoComplete as Editor | Kendo UI Grid HtmlHelper
+page_title: Add New Values to Records with AutoComplete as Editor | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Add a new value to the Kendo UI Grid records when the Grid is used with the Kendo UI AutoComplete as an editor in ASP.NET MVC applications."
 slug: howto_addnewvaluestorecordsautoceditor_gridaspnetmv
 ---

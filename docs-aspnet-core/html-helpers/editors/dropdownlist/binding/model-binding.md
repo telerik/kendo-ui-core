@@ -1,15 +1,14 @@
 ---
 title:  Model Binding
-page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Model Binding | Kendo UI DropDownList HtmlHelper for ASP.NET Core
 description: "Learn how to implement Model Binding with Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_modelbinding_aspnetcore
 position: 4
 ---
 
-
 # Model Binding
 
-You can implement model binding both with [local data](#local-data) and [remote data](#remote-data), and in combination with [virtualization](#virtualization).
+You can implement model binding in the DropDownList with both [local data](#local-data) and [remote data](#remote-data), and in combination with [virtualization](#virtualization).
 
 ## Local Data
 
@@ -108,3 +107,9 @@ You can configure the DropDownList to get its data from a remote source by makin
                 .ServerFiltering(false);
             })
         )
+
+## See Also
+
+* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [DropDownList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview)
+* [DropDownList Official Demos](http://demos.telerik.com/aspnet-core/dropdownlist/index)

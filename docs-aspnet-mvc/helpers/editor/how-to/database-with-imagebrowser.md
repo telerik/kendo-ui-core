@@ -1,6 +1,6 @@
 ---
 title: Store Images in Database with ImageBrowser
-page_title: Store Images in Database with ImageBrowser | Kendo UI Editor HtmlHelper
+page_title: Store Images in Database with ImageBrowser | Kendo UI Editor HtmlHelper for ASP.NET MVC
 description: "Set up the Editor ImageBrowser to store the images in an MS SQL database in ASP.NET MVC applications."
 slug: howto_storeimagesindatabases_editoraspnetmvc
 ---

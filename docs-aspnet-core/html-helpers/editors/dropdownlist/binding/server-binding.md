@@ -1,14 +1,14 @@
 ---
 title:  Server Binding
-page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to implement Server Binding with Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Server Binding | Kendo UI DropDownList HtmlHelper for ASP.NET Core
+description: "Learn how to implement server binding in the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_serverbinding_aspnetcore
 position: 2
 ---
 
 # Server Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for server binding to the Northwind **Products** table using Linq to SQL.
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for server binding to the Northwind **Products** table which uses Linq to SQL.
 
 1. Create a new action method and pass the **Products** table as the model.
 
@@ -39,3 +39,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             .BindTo(Model)   //Pass the list of Products to the DropDownList.
             .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         )
+
+## See Also
+
+* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [DropDownList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview)
+* [DropDownList Official Demos](http://demos.telerik.com/aspnet-core/dropdownlist/index)

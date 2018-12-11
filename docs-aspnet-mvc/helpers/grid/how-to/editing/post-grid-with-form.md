@@ -1,6 +1,6 @@
 ---
 title: Post Grid Data with Form
-page_title: Post Grid Data with Form | Kendo UI Grid HtmlHelper
+page_title: Post Grid Data with Form | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
 slug: howto_postgriddatawithform_gridaspnetmv
 ---

@@ -1,6 +1,6 @@
 ---
 title: Introduction
-page_title: Overview | Progress Telerik UI for ASP.NET MVC
+page_title: Introduction | Progress Telerik UI for ASP.NET MVC
 description: "Download and install Progress Telerik UI for ASP.NET MVC, and run a sample application."
 slug: overview_aspnetmvc
 position: 1

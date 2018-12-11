@@ -1,6 +1,6 @@
 ---
 title: Use Hierarchy Binding
-page_title: Use Hierarchy Binding | Kendo UI PanelBar HtmlHelper
+page_title: Use Hierarchy Binding | Kendo UI PanelBar HtmlHelper for ASP.NET MVC
 description: "Use hierarchy binding with the Kendo UI PanelBar in ASP.NET MVC applications."
 slug: howto_usehierarchybinding_panelbaraspnetmvc
 ---

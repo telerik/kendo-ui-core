@@ -1,6 +1,6 @@
 ---
 title: Cascade DropDownLists with Enabled Virtualization
-page_title: Cascade DropDownLists with Enabled Virtualization | Kendo UI DropDownList HtmlHelper
+page_title: Cascade DropDownLists with Enabled Virtualization | Kendo UI DropDownList HtmlHelper for ASP.NET MVC
 description: "Cascade DropDownLists and enable virtualization in ASP.NET MVC applications."
 slug: howto_cascadeddlenabledvirtualization_ddlaspnetmvc
 position: 0

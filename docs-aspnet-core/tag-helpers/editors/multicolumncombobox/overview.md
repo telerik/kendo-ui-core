@@ -1,18 +1,18 @@
 ---
 title: Overview
-page_title: ComboBox | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI ComboBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: MultiColumnComboBox | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Kendo UI MultiColumnComboBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_multicolumncombobox_aspnetcore
 position: 1
 ---
 
-# ComboBox Tag Helper Overview
+# MultiColumnComboBox Tag Helper Overview
 
-The MultiColumnComboBox tag helper helps you configure the Kendo UI ComboBox widget in ASP.NET Core applications.
+The MultiColumnComboBox tag helper helps you configure the Kendo UI MultiColumnComboBox widget in ASP.NET Core applications.
 
 ## Basic Usage
 
-The following example demonstrates how to define the ComboBox by using the ComboBox tag helper.
+The following example demonstrates how to define the MultiColumnComboBox by using the MultiColumnComboBox tag helper.
 
 ###### Example
 
@@ -20,7 +20,7 @@ The following example demonstrates how to define the ComboBox by using the Combo
 
 ## Configuration
 
-The ComboBox tag helper configuration options are passed as attributes of the tag.
+The MultiColumnComboBox tag helper configuration options are passed as attributes of the tag.
 
 ```tagHelper
 

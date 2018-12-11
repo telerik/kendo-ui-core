@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Splitter HtmlHelper
+page_title: Splitter | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Splitter widget for ASP.NET MVC."
 slug: overview_splitterhelper_aspnetmvc
 position: 1

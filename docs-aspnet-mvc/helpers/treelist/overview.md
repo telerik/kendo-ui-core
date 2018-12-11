@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeList HtmlHelper
+page_title: TreeList | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI TreeList widget for ASP.NET MVC."
 slug: overview_treelisthelper_aspnetmvc
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ArcGauge HtmlHelper
+page_title: ArcGauge | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI ArcGauge widget for ASP.NET MVC."
 slug: overview_arcgaugehelper_aspnetmvc
 position: 1

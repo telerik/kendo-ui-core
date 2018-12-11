@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: Selection | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Selection | Kendo UI MultiViewCalendar Tag for ASP.NET Core
 description: "Learn how to select dates in the Kendo UI MultiViewCalendar widget."
 slug: selection_multiviewcalendar_taghelper_aspnetcore
 position: 4

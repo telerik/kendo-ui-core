@@ -124,6 +124,8 @@ navigation:
     "controls/navigation":
         title: "Navigation"
         position: 9
+    "controls/navigation/buttongroup":
+        title: "ButtonGroup"
     "controls/conversational-ui":
         title: "Conversational UI"
         position: 10

@@ -1,6 +1,6 @@
 ---
 title: Edit Grids Using ComboBoxes with Remote Binding and Filtering
-page_title: Edit Grids Using ComboBoxes with Remote Binding and Filtering | Kendo UI Grid HtmlHelper
+page_title: Edit Grids Using ComboBoxes with Remote Binding and Filtering | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Edit the Kendo UI Grid by using a ComboBox with remote binding and filtering."
 slug: howto_editusingcomboboxremotebindfilter_gridaspnetmvc
 ---

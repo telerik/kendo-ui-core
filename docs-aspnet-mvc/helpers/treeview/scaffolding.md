@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Kendo UI TreeView HtmlHelper
+page_title: Scaffolding | Kendo UI TreeView HtmlHelper for ASP.NET MVC
 description: "Scaffold the Kendo UI TreeView for ASP.NET MVC by using the Kendo UI Scaffolder extension for Visual Studio."
 slug: scaffoldingtreeview_aspnetmvc
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Implement Custom Views
-page_title: Implement Custom Views | Kendo UI Scheduler HtmlHelper
+page_title: Implement Custom Views | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Implement a custom view for a Kendo UI Scheduler in ASP.NET MVC applications."
 slug: howto_implementcustomviews_scheduleraspnetmvc
 ---

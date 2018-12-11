@@ -1,6 +1,6 @@
 ---
 title: Peer-to-Peer Chat with SignalR
-page_title: Peer-to-Peer Chat with SignalR | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Peer-to-Peer Chat with SignalR | Kendo UI Chat HtmlHelper for ASP.NET Core
 description: "Learn how to create a peer-to-peer Kendo UI Chat with ASP.NET Core SignalR."
 slug: htmlhelpers_chat_aspnetcore_signalr
 position: 2

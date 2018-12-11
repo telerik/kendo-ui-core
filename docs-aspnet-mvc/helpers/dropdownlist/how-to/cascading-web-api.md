@@ -1,6 +1,6 @@
 ---
 title: Cascade DropDownLists Using Web API Service
-page_title: Cascade DropDownLists Using Web API Service | Kendo UI DropDownList HtmlHelper
+page_title: Cascade DropDownLists Using Web API Service | Kendo UI DropDownList HtmlHelper for ASP.NET MVC
 description: "Cascade DropDownLists by using the WebApi service in ASP.NET MVC applications."
 slug: howto_cascadeddlusingwebapiservice_ddlaspnetmvc
 ---

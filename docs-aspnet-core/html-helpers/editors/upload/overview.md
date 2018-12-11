@@ -93,6 +93,12 @@ public ActionResult Remove(string[] fileNames)
 
 The following example demonstrates the basic configuration of the Upload HtmlHelper and how to get the Upload widget instance.
 
+An Upload widget configured in such way offers support for multiple file selection, asynchronous removal of uploaded files, progress tracking, in-progress cancellation of upload, file drag-and-drop. Progress tracking, file drag-and-drop, and in-progress cancellation of upload are automatically enabled if supported by the browser.
+
+> **Important**
+>
+> The Upload widget works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
+
 ###### Example
 
 ```
@@ -115,26 +121,18 @@ The following example demonstrates the basic configuration of the Upload HtmlHel
 </script>
 ```
 
-An Upload widget configured in such way offers support for multiple file selection, asynchronous removal of uploaded files, progress tracking, in-progress cancellation of upload, file drag-and-drop. Progress tracking, file drag-and-drop, and in-progress cancellation of upload are automatically enabled if supported by the browser.
+## Functionality and Features
 
-> **Important**
->
-> The Upload widget works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
-
-## Functionality
-
-Apart from the above, the Upload widget offers some more advanced options for functionality configuration. The following are described in separate documentation articles:
-
-* [Synchronous (on form submit) and asynchronous (with and AJAX request) mode of operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %});
-* [File drag and drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %});
-* [Chunk upload functionality that enables upload of large files, pause and resume]({% slug htmlhelpers_upload_chunks_aspnetcore %});
-* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %});
-* [Send and receive metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %});
-* [Identify files]({% slug htmlhelpers_upload_identify_files_aspnetcore %});
+* [Modes of operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %});
+* [Dragging and dropping of files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %});
+* [Chunk upload of files]({% slug htmlhelpers_upload_chunks_aspnetcore %});
+* [Validation of files]({% slug htmlhelpers_upload_validation_aspnetcore %});
+* [Identification of files]({% slug htmlhelpers_upload_identify_files_aspnetcore %});
+* [Sending and receiving metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %});
 
 ## Events
 
-The Upload HTML helper exposes several events, which could be handled on the client-side.
+The following example demonstrates Upload HTML helper exposes several events, which could be handled on the client-side.
 
 ###### Example
 
@@ -207,12 +205,12 @@ The Upload HTML helper exposes several events, which could be handled on the cli
 
 ## See Also
 
-* [Upload Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Drag and Drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Send Receive Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identify Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
+* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
+* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
+* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
+* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
+* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
 * [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

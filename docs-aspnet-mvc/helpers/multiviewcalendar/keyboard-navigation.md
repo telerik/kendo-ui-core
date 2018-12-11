@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Keyboard Navigation | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
 description: "Use the Kendo UI MultiViewCalendar keyboard navigation."
 slug: keyboard_navigation_multiviewcalendar_aspnetmvc
 position: 8

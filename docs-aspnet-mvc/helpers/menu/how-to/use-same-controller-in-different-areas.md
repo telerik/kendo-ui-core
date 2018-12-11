@@ -1,6 +1,6 @@
 ---
 title: Use the Same Controllers in Different Areas
-page_title: Use the Same Controllers in Different Areas | Kendo UI Menu HtmlHelper
+page_title: Use the Same Controllers in Different Areas | Kendo UI Menu HtmlHelper for ASP.NET MVC
 description: "Use the same controller in different areas of the Kendo UI Menu in ASP.NET MVC applications."
 slug: howto_usethesamecontrollerdiffareas_menuaspnetmv
 ---

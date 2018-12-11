@@ -1,6 +1,6 @@
 ---
 title: Configure Foreign Key Columns with ComboBox Edit Templates in Grids
-page_title: Configure Foreign Key Columns with ComboBox Edit Templates in Grids | Kendo UI Grid HtmlHelper
+page_title: Configure Foreign Key Columns with ComboBox Edit Templates in Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Edit a Kendo UI Grid with a foreign key column and a Kendo UI ComboBox template in ASP.NET MVC applications."
 slug: howto_confforeignkeycomboboxedittemplates_gridaspnetmvc
 ---

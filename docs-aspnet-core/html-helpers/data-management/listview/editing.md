@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI ListView HtmlHelper
+page_title: Editing | Kendo UI ListView HtmlHelper for ASP.NET Core
 description: "Configure the Kendo UI ListView for ASP.NET Core for editing."
 slug: htmlhelpers_listview_aspnetcore_editing
 position: 3

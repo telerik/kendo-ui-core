@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Scheduler HtmlHelper
+page_title: Scheduler | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Scheduler widget for ASP.NET MVC."
 slug: overview_schedulerhelper_aspnetmvc
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DropDownTree HtmlHelper
+page_title: DropDownTree | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI DropDownTree widget for ASP.NET MVC."
 slug: overview_dropdowntreehelper_aspnetmvc
 position: 1

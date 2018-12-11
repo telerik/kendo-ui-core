@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI Scheduler HtmlHelper
+page_title: Ajax Binding | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Populate the Scheduler with nodes in ASP.NET MVC applications by using Ajax requests."
 slug: ajaxbinding_schedulerhelper_aspnetmvc
 position: 2

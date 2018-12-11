@@ -1,6 +1,6 @@
 ---
 title: Create Charts in Ajax Grid Columns
-page_title: Create Charts in Ajax Grid Columns | Kendo UI Chart HtmlHelper
+page_title: Create Charts in Ajax Grid Columns | Kendo UI Chart HtmlHelper for ASP.NET MVC
 description: "Create a Chart in an Ajax Grid column template in ASP.NET MVC applications."
 slug: howto_createchartinajaxgridcolumn_chartaspnetmvc
 ---

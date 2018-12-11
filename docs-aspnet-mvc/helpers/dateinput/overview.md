@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DateInput HtmlHelper
+page_title: DateInput | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI DateInput widget for ASP.NET MVC."
 slug: overview_dateinputhelper_aspnetmvc
 position: 1

@@ -1,8 +1,8 @@
 ---
-title: Persisting Filters in Spreadsheet
-description: An example of how to persist the selected filters in Spreadsheet | Kendo UI Spreadsheet
+title: Persist Filters in Spreadsheet
+description: An example on how to persist the selected filters in the Kendo UI Spreadsheet.
 type: how-to
-page_title: Persist Selected Filters in Spreadsheet after Reload of Data
+page_title: Persist Selected Filters after Reload of Data | Kendo UI Spreadsheet
 slug: spreadsheet-persist-filters
 tags: kendo, kendo-ui, spreadsheet, filters, persist-filter
 ticketid: 1156588
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -17,43 +18,46 @@ res_type: kb
 	</tr>
 </table>
 
-
 ## Description
-We have some pretty large data-set that we are using with the Spreadsheet widget. There are times when the user wants to refresh the Spreadsheet and persist the already selected filters in the widget. They want me to save the filter for each column and then reapply once the data is reloaded. The changes in the data do not affect the number of columns so it is a one for one.
+
+We have a large dataset that I am using with the Kendo UI Spreadsheet. Sometimes the user wants to refresh the Spreadsheet and persist the already selected filters in the widget.
+
+How can I save the filter for each column and then re-apply the filter once the data is reloaded without having the data changes affect the number of columns?
 
 ## Solution
-As the Spreadsheet widget does not offer support for the described scenario out-of-the-box some advanced use of its API would be needed in this case.
 
-First you could store the current filter state on the Sheet by retrieving it using [the filter() method](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.filter):
+The Spreadsheet does not provide a built-in option for achieving the described scenario. However, you can still work around the issue by using its API.
 
-```js
-var spread = $("#spreadsheet").getKendoSpreadsheet();
-var sheet = spread.activeSheet();
-var currentFilter = sheet.filter();
+1. Store the current filter state on the sheet by retrieving it through the [`filter()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.filter) method.
 
-if (currentFilter && currentFilter.columns && currentFilter.columns.length > 0) {
-    filter = currentFilter;
-}
-```
+	```js
+	var spread = $("#spreadsheet").getKendoSpreadsheet();
+	var sheet = spread.activeSheet();
+	var currentFilter = sheet.filter();
 
-Then, when that would be needed, the filter status can be restored using [the filter() method of the Range object](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/filter):
+	if (currentFilter && currentFilter.columns && currentFilter.columns.length > 0) {
+	    filter = currentFilter;
+	}
+	```
 
-```js
-var spread = $("#spreadsheet").getKendoSpreadsheet();
-var sheet = spread.activeSheet();
-var columns = filter.columns;
-var topLeft = filter.ref.topLeft;
-var bottomRight = filter.ref.bottomRight;
-var range = sheet.range(topLeft.row, topLeft.col, bottomRight.row, bottomRight.col + 1);
+1. When needed, restore the filter status by using the [`filter()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/filter) method of the `Range` object.
 
-for (var i = 0; i < columns.length; i++ ) {
-    columns[i].column = columns[i].index;
-}
+	```js
+	var spread = $("#spreadsheet").getKendoSpreadsheet();
+	var sheet = spread.activeSheet();
+	var columns = filter.columns;
+	var topLeft = filter.ref.topLeft;
+	var bottomRight = filter.ref.bottomRight;
+	var range = sheet.range(topLeft.row, topLeft.col, bottomRight.row, bottomRight.col + 1);
 
-range.filter(columns);
-```
+	for (var i = 0; i < columns.length; i++ ) {
+	    columns[i].column = columns[i].index;
+	}
 
-Here you could find a small sample implementing the above suggestion:
+	range.filter(columns);
+	```
+
+The following example demonstrates the implementation of the suggested approach.
 
 ```html
 <input type="button" value="Save filters" id="save"/>

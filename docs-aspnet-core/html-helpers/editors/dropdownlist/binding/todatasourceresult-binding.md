@@ -1,14 +1,12 @@
 ---
-title:  ToDataSourceResult Binding
-page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to implement ToDataSourceResult Binding with Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+title: Custom Data Binding
+page_title: Custom Data Binding | Kendo UI DropDownList HtmlHelper for ASP.NET Core
+description: "Learn how to implement custom ToDataSourceResult data binding in the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_todatasourceresultbinding_aspnetcore
 position: 3
 ---
 
-
-
-# ToDataSourceResult Binding
+# Custom Data Binding
 
 Below are listed the steps for you to follow when configuring the Kendo UI DropDownList to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
@@ -57,3 +55,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             })
         )
 
+## See Also
+
+* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [DropDownList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview)
+* [DropDownList Official Demos](http://demos.telerik.com/aspnet-core/dropdownlist/index)

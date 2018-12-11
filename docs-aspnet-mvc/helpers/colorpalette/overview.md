@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ColorPalette HtmlHelper
+page_title: ColorPalette | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI ColorPalette widget for ASP.NET MVC."
 slug: overview_colorpalettehelper_aspnetmvc
 position: 1

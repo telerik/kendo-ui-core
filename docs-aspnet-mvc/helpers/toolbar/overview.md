@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ToolBar HtmlHelper
+page_title: ToolBar | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI ToolBar widget for ASP.NET MVC."
 slug: overview_toolbarhelper_aspnetmvc
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Peer-to-Peer Chat with SignalR
-page_title: Peer-to-Peer Chat with SignalR | Telerik UI for ASP.NET MVC
+page_title: Peer-to-Peer Chat with SignalR | Kendo UI Chat HtmlHelper for ASP.NET MVC
 description: "Learn how to create a peer-to-peer Knedo UI Chat UI with ASP.NET MVC and SignalR 2."
 slug: signalr_chathelper_aspnetmvc
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI ListView HtmlHelper
+page_title: Editing | Kendo UI ListView HtmlHelper for ASP.NET MVC
 description: "Configure the Kendo UI ListView for ASP.NET MVC for editing."
 slug: eiditing_listviewhelper_aspnetmvc
 position: 4

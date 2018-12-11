@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Slider HtmlHelper
+page_title: Slider | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Slider widget for ASP.NET MVC."
 slug: overview_sliderhelper_aspnetmvc
 position: 1

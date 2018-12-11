@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Sortable HtmlHelper
+page_title: Sortable | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Sortable widget for ASP.NET MVC."
 slug: overview_sortablehelper_aspnetmvc
 position: 1

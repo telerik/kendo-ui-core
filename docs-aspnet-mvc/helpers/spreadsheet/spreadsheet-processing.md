@@ -1,6 +1,6 @@
 ---
 title: Server-Side Processing
-page_title: Server-Side Processing | Kendo UI Spreadsheet HtmlHelper
+page_title: Server-Side Processing | Kendo UI Spreadsheet HtmlHelper for ASP.NET MVC
 description: "Process Kendo UI Spreadsheet data using the Telerik Document Processing library."
 slug: spreadsheet_processing_spreadsheet_mvc
 position: 2

@@ -1,18 +1,18 @@
 ---
-title: Send and Receive Metadata
-page_title: Metadata | Telerik UI for ASP.NET Core HtmlHelpers
+title: Metadata
+page_title: Metadata | Kendo UI Upload HtmlHelper for ASP.NET Core
 description: "Learn how to send and receive metadata when uploading files with the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_send_meta_aspnetcore
 position: 6
 ---
 
-# Send and Receive Metadata
+# Metadata
 
-Asynchronous uploading usually means that you lose the association between the files and the context they originate from.
+Usually, asynchronous uploading means that you lose the association between the files and the context they originate from.
 
-For example, in an application the save handler must associate the uploaded files with a particular message. The message and the file might be processed on different servers in a load-balancing or cloud-computing scenario.
+For example, in an application, the `save` handler must associate the uploaded files with a particular message. The message and the file might be processed on different servers in a load-balancing or cloud-computing scenario.
 
-## Send Metadata
+## Sending Metadata
 
 To send metadata over to the `Save()` handler:
 
@@ -53,13 +53,17 @@ To send metadata over to the `Save()` handler:
 
 4. Process the file and the associated description.
 
-The description, and any other fields of the `e.data` object, are going to be serialized in the POST request.
+The description, and any other fields of the `e.data` object, will be serialized in the `POST` request.
 
-## Receive Metadata
+## Receiving Metadata
 
-The save handler can sometimes produce a result that needs to be routed back to the page. The Upload requires a response in a JSON format with a `Content-Type` set to `"text/plain"`. Responses that are not empty and in a format other than JSON are going to be treated as a server error.
+The `save` handler can sometimes produce a result that needs to be routed back to the page. The Upload requires a response in a JSON format with a `Content-Type` set to `"text/plain"`. Responses that are not empty and in a format other than JSON are treated as a server error.
 
-To receive metadata from the save handler, follow the steps below:
+> **Important**
+>
+> The same approach of sending and receiving metadata is also applicable for the `remove` endpoint handler.
+
+To receive metadata from the `save` handler:
 
 1. Build the response.
 
@@ -94,18 +98,14 @@ To receive metadata from the save handler, follow the steps below:
     )
     ```
 
-> **Important**
->
-> The same approach of sending and receiving metadata is also applicable for the `remove` endpoint handler.
-
 ## See Also
 
-* [Overview of Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Upload Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Drag and Drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Identify Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
+* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
+* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
+* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
+* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
+* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
 * [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

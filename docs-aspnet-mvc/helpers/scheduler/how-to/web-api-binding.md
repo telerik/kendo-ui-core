@@ -1,6 +1,6 @@
 ---
 title: Bind Scheduler to Web API Controller
-page_title: Bind Scheduler to Web API Controller | Kendo UI Scheduler HtmlHelper
+page_title: Bind Scheduler to Web API Controller | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Perform CRUD operations using Web API and Kendo UI Scheduler in ASP.NET MVC applications."
 slug: howto_bindtowebapicontroller_scheduleraspnetmvc
 ---

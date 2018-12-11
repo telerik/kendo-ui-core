@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Charts Data Binding | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Data Binding | Kendo UI Charts HtmlHelper for ASP.NET Core
 description: "Learn the basics about binding the Kendo UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
 slug: htmlhelpers_charts_databinding_aspnetcore
 position: 2

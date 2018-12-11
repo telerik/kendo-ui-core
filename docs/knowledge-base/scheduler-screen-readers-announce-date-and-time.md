@@ -1,8 +1,8 @@
 ---
-title: How to Get Screen Readers to Read Both Date and Time of Appointment Slots
-description: An example of how to configure the Scheduler widget, so the screen readers announce both date and time of the selected slot
+title: Make Screen Readers Read Date and Time of Appointment Slots
+description: An example on how to configure the Kendo UI Scheduler so that the screen readers announce both the date and time of the selected slot.
 type: how-to
-page_title: Announce Date and Time of Appointment Slot | Kendo UI Scheduler
+page_title: Announce Dates and Times in Appointment Slot | Kendo UI Scheduler
 slug: scheduler-screen-readers-announce-date-and-time
 tags: kendo-ui, kendo, scheduler, screen-reader, slot
 ticketid: 1159317
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tr>
         <td>Product</td>
@@ -17,12 +18,15 @@ res_type: kb
     </tr>
 </table>
 
-
 ## Description
-I'm currently trying to get the Kendo UI Scheduler usable for blind users with screen readers. Currently when selecting an open time slot, the screen reader will read the time frame of the slot (Selected from 8:30AM to 9:00AM).  This is great, but it doesn't let the user know what date they are on. Is there a way to generate the aria-label so that it reads: Selected from 8:30AM to 9:00AM on 3/23/2018?
+
+I am trying to make the Kendo UI Scheduler accessible for blind users with screen readers. Currently, when selecting an open time slot, the screen reader reads the time frame of the slot (`Selected from 8:30AM to 9:00AM`) but does not inform the user about the date.
+
+How can I generate the `aria-label` to make the screen readers announce both the date and time of the appointment slot&mdash;for example, `Selected from 8:30AM to 9:00AM on 3/23/2018?`.
 
 ## Solution
-You could easily modify the `aria-label` attribute of the currently selected Scheduler slot by handling the [change event](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/change) of the widget:
+
+Modify the `aria-label` attribute of the currently selected Scheduler slot by handling the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/change) event of the Scheduler.
 
 ```js
 change: function(e) {
@@ -40,7 +44,7 @@ change: function(e) {
 }
 ```
 
-Here is a small sample implementing the above suggestion:
+The following example demonstrates the implementation of the suggested approach.
 
 ```html
 <div id="scheduler" ></div>

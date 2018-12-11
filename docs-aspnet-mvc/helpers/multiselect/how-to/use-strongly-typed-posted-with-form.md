@@ -1,6 +1,6 @@
 ---
 title: Use Strongly-Typed MultiSelect Posted with Form
-page_title: Use Strongly-Typed MultiSelect Posted with Form | Kendo UI MultiSelect HtmlHelper
+page_title: Use Strongly-Typed MultiSelect Posted with Form | Kendo UI MultiSelect HtmlHelper for ASP.NET MVC
 description: "Use a strongly-typed Kendo UI MultiSelect posted with form in ASP.NET MVC applications."
 slug: howto_usestronglytypespstedwithform_multiselectaspnetmvc
 ---

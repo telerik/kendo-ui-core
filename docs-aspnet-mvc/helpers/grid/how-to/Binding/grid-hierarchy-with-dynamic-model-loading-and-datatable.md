@@ -1,6 +1,6 @@
 ---
 title: Implement Grid Hierarchy with Dynamic Model Loading and DataTable
-page_title: Implement Grid Hierarchy with Dynamic Model Loading and DataTable | Kendo UI Grid HtmlHelper
+page_title: Implement Grid Hierarchy with Dynamic Model Loading and DataTable | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Implement a hierarchical Kendo UI Grid with a dynamic model loading and DataTable in ASP.NET MVC applications."
 slug: howto_usegridhierarchydynamicmodelload_gridaspnetmv
 ---

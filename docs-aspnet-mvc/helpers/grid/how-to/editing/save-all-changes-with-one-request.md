@@ -1,6 +1,6 @@
 ---
 title: Save All Changes with One Request
-page_title: Save All Changes with One Request | Kendo UI Grid HtmlHelper
+page_title: Save All Changes with One Request | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Save all changes in a Kendo UI Grid with one request in ASP.NET MVC applications."
 slug: howto_saveallchangeswithonerequest_gridaspnetmv
 ---

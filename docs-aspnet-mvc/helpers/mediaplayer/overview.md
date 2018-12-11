@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MediaPlayer HtmlHelper
+page_title: MediaPlayer | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI MediaPlayer widget for ASP.NET MVC."
 slug: overview_mediaplayerhelper_aspnetmvc
 position: 1

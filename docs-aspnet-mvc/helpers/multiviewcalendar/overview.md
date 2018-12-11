@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MultiViewCalendar HtmlHelper
+page_title: MultiViewCalendar | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI MultiViewCalendar widget for ASP.NET MVC."
 slug: overview_multiviewcalendar_aspnetmvc
 position: 1

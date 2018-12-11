@@ -1,6 +1,6 @@
 ---
 title: Multiple Views
-page_title:  Multiple Views | Kendo UI MultiViewCalendarr HtmlHelper
+page_title:  Multiple Views | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
 description: "Control the visible date ranges in the Kendo UI MultiViewCalendar and manage the number of its horizontally rendered views."
 slug: multiple_views_multiviewcalendar_aspnetmvc
 position: 3

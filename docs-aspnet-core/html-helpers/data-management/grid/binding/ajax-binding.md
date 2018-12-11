@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Ajax Binding | Kendo UI Grid HtmlHelper for ASP.NET Core
+description: "Learn how to implement Ajax Binding with Kendo UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_grid_aspnetcore_ajaxbinding
 previous_url: /aspnet-core/helpers/html-helpers/grid/ajax-binding
 ---

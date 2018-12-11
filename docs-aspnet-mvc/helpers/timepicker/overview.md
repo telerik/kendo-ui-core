@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TimePicker HtmlHelper
+page_title: TimePicker | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI TimePicker widget for ASP.NET MVC."
 slug: overview_timepickerhelper_aspnetmvc
 position: 1

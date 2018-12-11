@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI DropDownTree HtmlHelper
+page_title: Ajax Binding | Kendo UI DropDownTree HtmlHelper for ASP.NET MVC
 description: "Populate the DropDownTree with nodes in ASP.NET MVC applications by using Ajax requests."
 slug: ajaxbinding_dropdowntreehelper_aspnetmvc
 position: 2

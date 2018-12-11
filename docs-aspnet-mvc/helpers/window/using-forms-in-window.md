@@ -1,6 +1,6 @@
 ---
 title: Using Forms
-page_title: Using Forms | Kendo UI Window HtmlHelper
+page_title: Using Forms | Kendo UI Window HtmlHelper for ASP.NET MVC
 description: "Handle forms in when working with a Kendo UI Window in ASP.NET MVC applications."
 slug: using_formsinwindow_aspnetmvc
 position: 2

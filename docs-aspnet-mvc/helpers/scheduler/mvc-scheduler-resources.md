@@ -1,6 +1,6 @@
 ---
 title: Resources
-page_title: Resources | Kendo UI Scheduler HtmlHelper
+page_title: Resources | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Add Resources to the Scheduler HtmlHelper extension for the Kendo UI Scheduler widget in ASP.NET MVC applications."
 slug: resourcesscheduler_aspnetmvc
 position: 4

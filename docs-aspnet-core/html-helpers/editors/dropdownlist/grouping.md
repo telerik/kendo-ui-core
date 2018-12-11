@@ -1,16 +1,22 @@
 ---
 title: Grouping
-page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how the Grouping functionality for the Kendo UI DropDownList HtmlHelper for ASP.NET Core works."
+page_title: Grouping | Kendo UI DropDownList HtmlHelper for ASP.NET Core
+description: "Learn how to group data in the Kendo UI DropDownList HtmlHelper for ASP.NET Core works."
 slug: htmlhelpers_dropdownlist_grouping_aspnetcore
 position: 6
 ---
 
 # Grouping Overview
 
-The DropDownList supports binding to a grouped data source. Define a `datasource` group expression to group the data by using the Custom DataSource configuration. You need to specify the field that the widget should group by:
+The DropDownList enables you to bind it to a grouped data source.
 
-The example below demonstrates how to group the data in the DropDownList by Country:
+To group the data, define a group `datasource` expression which uses a custom DataSource configuration, and specify the field by which the DropDownList will be grouped.
+
+> **Important**
+>
+> The data source sorts the grouped data either in ascending or descending order. To persist a specific group order, use the [server grouping feature](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). To define the `serverGrouping` option, use the `ServerGrouping` method of the DataSource.
+
+The following example demonstrates how to group the data in the DropDownList by country.
 
 ###### Example
 
@@ -31,11 +37,7 @@ The example below demonstrates how to group the data in the DropDownList by Coun
     )
     ```
 
-> **Important**
->
-> The data source sorts the grouped data either in ascending or descending order. If you want to persist a specific group order, use the [server grouping feature](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource `ServerGrouping` method to define the `serverGrouping` option.
-
- ## See Also
+## See Also
 
 * [Templates for DropDownList]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %})
 * [Bindings for DropDownList]({% slug htmlhelpers_dropdownlist_databinding_aspnetcore %})

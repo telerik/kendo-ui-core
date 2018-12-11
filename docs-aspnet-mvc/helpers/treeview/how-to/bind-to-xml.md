@@ -1,6 +1,6 @@
 ---
 title: Bind TreeViews to XML
-page_title: Bind TreeViews to XML | Kendo UI TreeView HtmlHelper
+page_title: Bind TreeViews to XML | Kendo UI TreeView HtmlHelper for ASP.NET MVC
 description: "Bind a TreeView to XML in ASP.NET MVC applications."
 slug: howto_bindtoaml_treeviewaspnetmvc
 position: 0

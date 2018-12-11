@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Menu HtmlHelper
+page_title: Menu | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Menu widget for ASP.NET MVC."
 slug: overview_menu_aspnetmvc
 position: 1

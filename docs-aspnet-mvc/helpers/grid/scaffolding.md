@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Kendo UI Grid HtmlHelper
+page_title: Scaffolding | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Scaffold the Kendo UI Grid for ASP.NET MVC by using the Kendo UI Scaffolder extension for Visual Studio."
 slug: scaffoldinggrid_aspnetmvc
 position: 3

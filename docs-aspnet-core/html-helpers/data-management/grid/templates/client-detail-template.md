@@ -1,6 +1,6 @@
 ---
 title: Client Detail Templates
-page_title: Client Detail Templates | Kendo UI Grid HtmlHelper
+page_title: Client Detail Templates | Kendo UI Grid HtmlHelper for ASP.NET Core
 description: "Set the detail template used during Ajax binding of the Kendo UI Grid for ASP.NET Core."
 slug: clientdetailtemplate_grid_aspnetcore
 position: 1

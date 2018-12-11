@@ -1,6 +1,6 @@
 ---
 title: Export Multiple TreeLists to Excel
-page_title: Export Multiple TreeLists to Excel | Kendo UI TreeView HtmlHelper
+page_title: Export Multiple TreeLists to Excel | Kendo UI TreeList HtmlHelper for ASP.NET MVC
 description: "Export two or more Kendo UI treeLists to the same Excel document in ASP.NET MVC applications."
 slug: howto_exportmultipletoexcel_treelistaspnetmvc
 ---

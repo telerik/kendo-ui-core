@@ -1,17 +1,20 @@
 ---
 title: Templates
-page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Templates | Kendo UI DropDownList HtmlHelper for ASP.NET Core
+description: "Use templates and customize the rendering of the items, values, and the popup header of the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_templates_aspnetcore
 position: 4
 ---
 
 # Templates
 
-The DropDownList uses Kendo UI templates to provide full control over the way an item, a selected value, or a pop-up header is rendered.
+The DropDownList provides full control over the way an item, a selected value, or a pop-up header is rendered through the Kendo UI templates.
 
- You can either declare the template with an inline string(see Example 1), or reference a script tag by its ID (see Example 2). For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview).
+For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 
+## Basic Usage
+
+The following example demonstrates how to customize the DropDownList by declaring an inline string.
 
 ###### Example
 
@@ -36,9 +39,9 @@ The DropDownList uses Kendo UI templates to provide full control over the way an
                 })
     )
 ```
-<!-- Example 2- Inline declaration of the template.
 
-###### Example -->
+The following example demonstrates how to customize the DropDownList by referencing a script tag by its `id`.
+
 ```tab-Example2
     @(Html.Kendo().DropDownList()
                 .Name("customers")
@@ -55,8 +58,6 @@ The DropDownList uses Kendo UI templates to provide full control over the way an
     )
 ```
 
-
-
 ## Item Template
 
 The item template manages the way the list items of a DropDownList are rendered.
@@ -64,6 +65,7 @@ The item template manages the way the list items of a DropDownList are rendered.
 The following example demonstrates how to define an item template and how to evaluate it against the dataItem.
 
 ###### Example
+
     <!-- Template -->
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
@@ -92,7 +94,7 @@ The following example demonstrates how to define a value template.
 
 > **Important**
 >
-> Value templates must consist of inline HTML elements only.
+> Include only HTML elements in the value templates.
 
 ###### Example
 
@@ -174,13 +176,13 @@ The following example demonstrates how to define a footer template.
 
 ## No-Data Templates
 
-The DropDownList widget displays `noDataTemplate` in the popup when the data source is empty.
+The DropDownList displays `noDataTemplate` in the popup when the data source is empty.
 
 The following example demonstrates how to define a `noDataTemplate` template.
 
 > **Important**
 >
-> When the `noDataTemplate` option is defined, the widget always opens the popup element.
+> When the `noDataTemplate` option is defined, the DropDownList always opens the popup element.
 
 ###### Example
 
@@ -205,9 +207,7 @@ The following example demonstrates how to define a `noDataTemplate` template.
                 })
     )
 
-
-
- ## See Also
+## See Also
 
 * [Templates for DropDownList]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %})
 * [Bindings for DropDownList]({% slug htmlhelpers_dropdownlist_databinding_aspnetcore %})

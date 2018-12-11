@@ -1,6 +1,6 @@
 ---
 title: Validate Timeslot Availability against Existing Recurrence Rules
-page_title: Validate Timeslot Availability against Existing Recurrence Rules | Kendo UI Scheduler HtmlHelper
+page_title: Validate Timeslot Availability against Existing Recurrence Rules | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Validate the timeslot availability against the existing recurrence rules of a Kendo UI Scheduler in ASP.NET MVC applications."
 slug: howto_validatetimeslotagainstexistingrules_scheduleraspnetmvc
 ---

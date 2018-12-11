@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Upload HtmlHelper Troubleshooting
+page_title: Common Troubleshooting Issues | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Learn about the solutions of common issues that may occur while working with Kendo UI Upload for ASP.NET MVC."
 previous_url: /aspnet-mvc/helpers/upload/troubleshooting
 slug: troubleshoot_uploadhelper_aspnetmvc

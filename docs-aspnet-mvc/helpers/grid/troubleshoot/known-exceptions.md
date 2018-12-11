@@ -1,6 +1,6 @@
 ---
 title: Known Exceptions
-page_title: Known Exceptions | Grid HtmlHelper Troubleshooting
+page_title: Known Exceptions Troubleshooting | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Learn about the known exceptions you might come across while working with Kendo UI Grid for ASP.NET MVC."
 slug: knownexceptions_gridhelper_aspnetmvc
 position: 3

@@ -1,20 +1,22 @@
 ---
 title: Chunk Upload
-page_title: Upload Large Files in Chunks | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to upload large files in chunks using the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Chunk Upload | Kendo UI Upload HtmlHelper for ASP.NET Core
+description: "Learn how to upload large files in chunks when using the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_chunks_aspnetcore
 position: 3
 ---
 
 # Chunk Upload
 
-The chunk upload of files enables the user to send large files, which are uploaded asynchronously with multiple requests to the server. It also supports pause and resume of the file upload for the time the application is open in the browser.
+The chunk upload of files enables the user to send large files which are uploaded asynchronously with multiple requests to the server.
+
+It also supports the pausing and resuming of the file upload during the time the application stays open in the browser.
 
 > **Important**
 >
 > The chunk upload functionality is available only in the [asynchronous mode]({%slug htmlhelpers_upload_modes_of_operation_aspnetcore%}#asynchronous-mode) of the Upload.
 
-## General Usage
+## Basic Usage
 
 To enable the chunk upload:
 
@@ -136,13 +138,17 @@ To enable the chunk upload:
     }
     ```
 
-## Fine-Tuning
+## Modification
 
-To modify or fine-tune the chunk upload, use any of the following configuration options:
+To fine-tune the chunk upload, use any of the following configuration options:
 
 * [`Async(a => a.Concurrent())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.concurrent)&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
-* [`Async(a => a.AutoRetryAfter())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoretryafter)&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
-* [`Async(a => a.MaxAutoRetries())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.maxautoretries)&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
+* [`Async(a => a.AutoRetryAfter())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoretryafter)&mdash;Represents the time interval in milliseconds after which the Upload attempts to retry a failed upload.
+* [`Async(a => a.MaxAutoRetries())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.maxautoretries)&mdash;Represents the number of attempts the Upload makes to retry a failed upload before reporting it.
+
+> **Important**
+>
+> As a client-side solution, the Upload does not handle validation. File validation and security requirements have to be handled on the server by using application logic.
 
 ###### Example
 
@@ -161,18 +167,14 @@ To modify or fine-tune the chunk upload, use any of the following configuration 
     )
 ```
 
-> **Important**
->
-> As a client-side solution, the Upload does not handle validation. File validation and security requirements should be handled on the server by using application logic.
-
 ## See Also
 
-* [Overview of Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Upload Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Drag and Drop]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Send Receive Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identify Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
+* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
+* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
+* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
+* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
+* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
 * [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

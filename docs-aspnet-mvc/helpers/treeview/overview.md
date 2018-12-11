@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeView HtmlHelper
+page_title: TreeView | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI TreeView widget for ASP.NET MVC."
 slug: overview_treeviewhelper_aspnetmvc
 position: 1

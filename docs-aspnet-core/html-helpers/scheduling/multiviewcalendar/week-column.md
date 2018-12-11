@@ -1,6 +1,6 @@
 ---
 title: Week Number Column
-page_title: Week Number Column | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Week Number Column | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET Core
 description: "Render a column displaying the number of the weeks within the current month view when working with the Kendo UI MultiViewCalendar."
 slug: week_column_multiviewcalendar_htmlhelper_aspnetcore
 position: 7

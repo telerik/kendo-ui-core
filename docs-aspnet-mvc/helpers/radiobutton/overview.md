@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI RadioButton HtmlHelper
+page_title: RadioButton | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI RadioButton for ASP.NET MVC."
 slug: overview_radiobuttonhelper_aspnetmvc
 position: 1

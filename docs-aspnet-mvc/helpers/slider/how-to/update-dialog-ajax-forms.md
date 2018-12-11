@@ -1,6 +1,6 @@
 ---
 title: Use the RangeSliderFor Method
-page_title: Use the RangeSliderFor Method | Kendo UI RangeSlider HtmlHelper
+page_title: Use the RangeSliderFor Method | Kendo UI Slider HtmlHelper for ASP.NET MVC
 description: "Use the RangeSliderFor method to update a model in ASP.NET MVC applications."
 slug: howto_userangesliderfor_slideraspnetmv
 ---

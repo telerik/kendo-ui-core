@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Kendo UI Scheduler HtmlHelper
+page_title: Scaffolding | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Scaffold the Kendo UI Scheduler for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio."
 slug: scaffoldingscheduler_aspnetmvc
 position: 3

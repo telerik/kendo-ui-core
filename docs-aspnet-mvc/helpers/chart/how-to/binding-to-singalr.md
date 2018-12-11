@@ -1,6 +1,6 @@
 ---
 title: Bind to SignalR Hubs
-page_title: Bind to SignalR Hubs | Kendo UI Chart HtmlHelper
+page_title: Bind to SignalR Hubs | Kendo UI Chart HtmlHelper for ASP.NET MVC
 description: "Bind a Chart to a SignalR hub in ASP.NET MVC applications."
 slug: howto_bindtosignalr_chartaspnetmvc
 position: 0

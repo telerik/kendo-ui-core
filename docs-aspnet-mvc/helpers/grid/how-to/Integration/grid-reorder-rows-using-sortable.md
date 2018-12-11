@@ -1,6 +1,6 @@
 ---
 title: Use the Sortable to Reorder Rows in Grids
-page_title: Use the Sortable to Reorder Rows in Grids | Kendo UI Grid HtmlHelper
+page_title: Use the Sortable to Reorder Rows in Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Use the Kendo UI Sortable widget to reorder the Kendo UI Grid rows."
 slug: howto_usesortabletoreorder_gridaspnetmv
 ---

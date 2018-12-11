@@ -1,6 +1,6 @@
 ---
 title: Bind Map to View Model
-page_title: Bind Map to View Model | Kendo UI Grid HtmlHelper
+page_title: Bind Map to View Model | Kendo UI Map HtmlHelper for ASP.NET MVC
 description: "Binding a Map to Model in ASP.NET MVC applications."
 slug: howto_bindtomodel_map
 ---

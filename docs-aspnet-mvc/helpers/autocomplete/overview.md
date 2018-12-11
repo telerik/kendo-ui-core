@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI AutoComplete HtmlHelper
+page_title: AutoComplete | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI AutoComplete widget for ASP.NET MVC."
 slug: overview_autocompletehelper_aspnetmvc
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Web API Editing
-page_title: Web API Editing | Kendo UI Grid HtmlHelper
+page_title: Web API Editing | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Implement CRUD data operations with a Web API controller for the Kendo UI Grid for ASP.NET MVC."
 previous_url: /helpers/grid/webapi-editing
 slug: webapi_editing_grid_aspnetmvc

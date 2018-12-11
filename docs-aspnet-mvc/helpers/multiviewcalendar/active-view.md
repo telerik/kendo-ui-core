@@ -1,6 +1,6 @@
 ---
 title: Active View
-page_title: Active View | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Active View | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
 description: "Define the first view that the Kendo UI MultiViewCalendar initially renders."
 slug: active_view_multiviewcalendar_aspnetmvc
 position: 2

@@ -1,8 +1,8 @@
 ---
-title: Disable Options in Multiselect
-description: How to disable selection of certain options in a multiselect and prevent the dropdown from closing when the user clicks them.
+title: Disable MultiSelect Options
+description: An example on how to disable a selection of certain options in a MultiSelect and prevent the drop-down from closing when the user clicks them.
 type: how-to
-page_title: Disabled Items | Multiselect
+page_title: Disable Items | Kendo UI MultiSelect
 slug: disabled-items-multiselect
 tags: multiselect, disabled, items, options, prevent, selection
 ticketid: 1363148
@@ -19,14 +19,13 @@ component: multiselect
  </tr>
 </table>
 
-
 ## Description
 
-I have a requirement to disable items in my MultiSelect control, where selecting a disabled option will also not close the dropdown list. 
+How can I disable items in the MultiSelect while the drop-down list remains open?
 
 ## Solution
 
-To prevent selection, cancel the [select event](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/select). To prevent the dropdown from closing, set the [autoClose property](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/autoclose).
+To prevent the selection, cancel the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/select) event. To prevent the drop-down list from closing, set the [`autoClose`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/autoclose) property.
 
 ```html
 <select id="select"></select>
@@ -35,7 +34,7 @@ To prevent selection, cancel the [select event](https://docs.telerik.com/kendo-u
     $(document).ready(function() {
         function onSelect(e) {
               if(e.dataItem.unselectableItem)
-              { 
+              {
                 //prevent selection by cancelling the event
                 e.preventDefault();
                 //prevent closing by setting the autoClose property
@@ -43,7 +42,7 @@ To prevent selection, cancel the [select event](https://docs.telerik.com/kendo-u
                 this.setOptions({autoClose: false});
               }
               else {
-               	this.setOptions({autoClose: true}); 
+               	this.setOptions({autoClose: true});
               }
         };
 
@@ -57,7 +56,7 @@ To prevent selection, cancel the [select event](https://docs.telerik.com/kendo-u
             dataValueField: "value",
             dataSource: data,
             select: onSelect,
-            //set a template to visually distinguish disabled items for the user
+            // Set a template to visually distinguish disabled items for the user.
             template: kendo.template($("#template").html())
         });
     });
@@ -69,4 +68,3 @@ To prevent selection, cancel the [select event](https://docs.telerik.com/kendo-u
 	</span>
 </script>
 ```
-

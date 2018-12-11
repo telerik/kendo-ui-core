@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Kendo UI Chart HtmlHelper
+page_title: Scaffolding | Kendo UI Chart HtmlHelper for ASP.NET MVC
 description: "Scaffold the Kendo UI Chart for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio."
 slug: scaffoldingchart_aspnetmvc
 position: 3

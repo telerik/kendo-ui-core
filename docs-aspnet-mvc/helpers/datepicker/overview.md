@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DatePicker HtmlHelper
+page_title: DatePicker | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI DatePicker widget for ASP.NET MVC."
 slug: overview_datepickerhelper_aspnetmvc
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Bind Grids to DataTable
-page_title: Bind the Grid to DataTable | Kendo UI Grid HtmlHelper
+page_title: Bind the Grid to DataTable | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Bind the Kendo UI Grid to DataTable in ASP.NET MVC applications."
 slug: howto_bindgridtodatatable_gridaspnetmvc
 ---

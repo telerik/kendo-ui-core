@@ -1,6 +1,6 @@
 ---
 title: Multiple Views
-page_title: Multiple Views | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Multiple Views | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET Core
 description: "Control the visible date ranges in the Kendo UI MultiViewCalendar and manage the number of its horizontally rendered views."
 slug: multiple_views_multiviewcalendar_htmlhelper_aspnetcore
 position: 3

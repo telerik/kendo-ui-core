@@ -1,6 +1,6 @@
 ---
 title: Active View
-page_title: Active View | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Active View | Kendo UI MultiViewCalendar Tag for ASP.NET Core
 description: "Define the first view that the Kendo UI MultiViewCalendar initially renders."
 slug: active_view_multiviewcalendar_taghelper_aspnetcore
 position: 2

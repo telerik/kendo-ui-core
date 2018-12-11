@@ -1,6 +1,6 @@
 ---
 title: Server Binding
-page_title: Server Binding | Kendo UI Grid HtmlHelper
+page_title: Server Binding | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Set the data source and render the view to bind Kendo UI Grid for ASP.NET MVC with data by using server binding."
 previous_url: /helpers/grid/server-binding
 slug: serverbinding_grid_aspnetmvc

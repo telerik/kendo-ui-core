@@ -1,15 +1,18 @@
 ---
 title:  Ajax Binding
-page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Ajax Binding | Kendo UI DropDownList HtmlHelper for ASP.NET Core
 description: "Learn how to implement Ajax Binding with Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_ajaxbinding_aspnetcore
 position: 1
 ---
 
-
 # Ajax Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for Ajax binding to the Northwind **Products** table using Linq to SQL.
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
+
+> **Important**
+>
+> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
 1. Create an action method which renders the view.
 
@@ -50,7 +53,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             .SelectedIndex(0) //Select the first item.
         )
 
+## See Also
 
-> **Important**
->
-> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
+* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [DropDownList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview)
+* [DropDownList Official Demos](http://demos.telerik.com/aspnet-core/dropdownlist/index)

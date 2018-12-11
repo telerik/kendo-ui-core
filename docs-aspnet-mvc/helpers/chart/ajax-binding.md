@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI Chart HtmlHelper
+page_title: Ajax Binding | Kendo UI Chart HtmlHelper for ASP.NET MVC
 description: "Configure the Kendo UI Chart for ASP.NET MVC for Ajax binding."
 slug: ajaxbinding_charthelper_aspnetmvc
 position: 2

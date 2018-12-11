@@ -1,6 +1,6 @@
 ---
 title: Server Binding
-page_title: Server Binding | Kendo UI Gantt HtmlHelper
+page_title: Server Binding | Kendo UI Gantt HtmlHelper for ASP.NET MVC
 description: "Configure the Kendo UI Gamtt for ASP.NET MVC for server binding."
 slug: serverbinding_gantthelper_aspnetmvc
 position: 2

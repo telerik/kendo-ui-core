@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Diagram HtmlHelper
+page_title: Diagram | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Diagram widget for ASP.NET MVC."
 slug: overview_diagramhelper_aspnetmvc
 position: 1

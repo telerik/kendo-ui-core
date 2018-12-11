@@ -1,6 +1,6 @@
 ---
 title: Edit Grids with Cascading DropDownLists in Incell Mode
-page_title: Edit Grids with Cascading DropDownLists in Incell Mode | Kendo UI Grid HtmlHelper
+page_title: Edit Grids with Cascading DropDownLists in Incell Mode | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Configure the Kendo UI Grid to handle cascading DropDownListswhen using the incell editing mode."
 slug: howto_editincellmodecasacdeddls_gridaspnetmvc
 ---

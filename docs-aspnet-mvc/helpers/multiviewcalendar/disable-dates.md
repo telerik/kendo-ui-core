@@ -1,6 +1,6 @@
 ---
 title: Disabled Dates
-page_title:  Disabled Dates| Kendo UI MultiViewCalendarr HtmlHelper
+page_title:  Disabled Dates| Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
 description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
 slug: disabled_dates_multiviewcalendar_aspnetmvc
 position: 6

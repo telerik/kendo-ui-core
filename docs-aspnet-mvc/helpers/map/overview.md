@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Map HtmlHelper
+page_title: Map | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Map widget for ASP.NET MVC."
 slug: overview_maphelper_aspnetmvc
 position: 1

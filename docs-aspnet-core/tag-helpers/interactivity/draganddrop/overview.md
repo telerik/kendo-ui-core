@@ -1,15 +1,15 @@
 ---
 title: Overview
-page_title: Drag and Drop  | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Drag-and-Drop  | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Drag-and-Drop tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/dragdrop, /aspnet-core/helpers/tag-helpers/dragdrop
 slug: taghelpers_dragdrop_aspnetcore
 position: 1
 ---
 
-# Drag and Drop Tag Helper Overview
+# Drag-and-Drop Tag Helper Overview
 
-The Drag and Drop tag helper helps you configure the Kendo UI Drag and Drop widget in ASP.NET Core applications.
+The Drag-and-Drop tag helper helps you configure the Kendo UI Drag and Drop widget in ASP.NET Core applications.
 
 ## Basic Usage
 

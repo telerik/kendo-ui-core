@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ListView HtmlHelper
+page_title: ListView | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI ListView widget for ASP.NET MVC."
 slug: overview_listviewhelper_aspnetmvc
 position: 1

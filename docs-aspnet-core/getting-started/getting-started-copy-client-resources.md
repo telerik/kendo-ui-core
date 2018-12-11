@@ -9,7 +9,7 @@ position: 3
 
 # Including Client-Side Resources in ASP.NET Core Projects
 
-This article demonstrates how to include the client-side resources required by UI for ASP.NET Core in an ASP.NET Core project and use Visual Studio 2017.
+This article demonstrates how to include the client-side resources that are required by UI for ASP.NET Core in an ASP.NET Core project and use Visual Studio 2017.
 
 To include the Kendo UI client-side resources you can use either of the following approaches:
 

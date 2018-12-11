@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: Selection  | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Selection  | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
 description: "Learn how to select dates in the Kendo UI MultiViewCalendar widget."
 slug: selection_multiviewcalendar_aspnetmvc
 position: 4

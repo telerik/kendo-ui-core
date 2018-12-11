@@ -1,8 +1,8 @@
 ---
-title: How do I Filer the Scheduler Using a ComBox with AngularJS
-description: An example of how to filter the grouped resources in the Scheduler using a ComboBox in AngularJS scenario
+title: Filer the Scheduler with a ComBox in AngularJS
+description: An example on how to filter the grouped resources in the Kendo UI Scheduler by using a Kendo UI ComboBox in an AngularJS scenario.
 type: how-to
-page_title: Filter Grouped Scheduler in AngularJS with ComboBox | Kendo UI Scheduler
+page_title: Filter Grouped Resources in AngularJS with ComboBox | Kendo UI Scheduler
 slug: scheduler-angularjs-filter-resources-combobox
 tags: kendo, kendo-ui, scheduler, resources, combobox, angularjs
 ticketid: 1158749
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tr>
         <td>Product</td>
@@ -17,41 +18,36 @@ res_type: kb
     </tr>
 </table>
 
-
 ## Description
-I am trying to add filter for the Scheduler in AngularJS. How can I do that?
+
+How can I add a filter to the Kendo UI Scheduler in AngularJS?
 
 ## Solution
-Here are the steps that would allow you to achieve the desired:
 
-* In order to attach the Scheduler (and any other Kendo widget) instance to the controller scope, you will need the following syntax:
+1. Use the `<div kendo-scheduler="$ctrl.scheduler" k-options="$ctrl.schedulerOptions"></div>` syntax to attach the Scheduler and any other Kendo UI widget instance to the `controller` scope.
 
-```
-<div kendo-scheduler="$ctrl.scheduler" k-options="$ctrl.schedulerOptions"></div>
-```
+  Note that instead of the `id` attribute, the name of the Scheduler is attached to the `kendo-scheduler` directive attribute. The name of the `options` field and the Scheduler itself have to differ as they belong to the same scope.
 
-Note that instead of the `id` attribute, the name of the Scheduler is attached to the `kendo-scheduler` directive attribute. Note also, that the name of the `options` field and the Scheduler itself should differ as they belong to the same scope.
+1. If you are using grouping in the Scheduler, you may want to filter the rendered groups. That is why the `change` event handler of the ComboBox needs to filter the resource DataSource instead of the Scheduler DataSource.
 
-* If you are using Grouping in the Scheduler, you may want to filter the rendered groups. That is why the ComboBox `change` event handler needs to filter the resource DataSource instead of the Scheduler DataSource:
+  Note the `$ctrl.scheduler.view($ctrl.scheduler.view().name);` call which redraws the Scheduler so that grouping will be re-applied.
 
-```js
-change: function(e) {
-  var value = this.value();
-  if (value) {
-    $ctrl.scheduler.resources[1].dataSource.filter({
-        field: "value", operator: "eq", value: Number(value)
-    });
+  ```js
+  change: function(e) {
+    var value = this.value();
+    if (value) {
+      $ctrl.scheduler.resources[1].dataSource.filter({
+          field: "value", operator: "eq", value: Number(value)
+      });
 
-    $ctrl.scheduler.view($ctrl.scheduler.view().name);
-  } else
-    $ctrl.scheduler.resources[1].dataSource.filter([]);
       $ctrl.scheduler.view($ctrl.scheduler.view().name);
-}
-```
+    } else
+      $ctrl.scheduler.resources[1].dataSource.filter([]);
+        $ctrl.scheduler.view($ctrl.scheduler.view().name);
+  }
+  ```
 
-Note the `$ctrl.scheduler.view($ctrl.scheduler.view().name);` call, which will redraw the Scheduler, so that the the Grouping will be re-applied.
-
-Here you will find a small sample demonstrating the above approach:
+The following example demonstrates the full implementation of the suggested approach.
 
 ```html
 <div id="example" ng-app="KendoDemos">

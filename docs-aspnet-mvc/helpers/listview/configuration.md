@@ -1,6 +1,6 @@
 ---
 title: Configuration
-page_title: Configuration | Kendo UI ListView HtmlHelper
+page_title: Configuration | Kendo UI ListView HtmlHelper for ASP.NET MVC
 description: "Configure the TagName of a Kendo UI ListView for ASP.NET MVC and set the Client Template ID of the script element."
 slug: configuration_listviewhelper_aspnetmvc
 position: 2

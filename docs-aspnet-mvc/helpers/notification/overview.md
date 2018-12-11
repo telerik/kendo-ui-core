@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Notification HtmlHelper
+page_title: Notification | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Notification widget for ASP.NET MVC."
 slug: overview_notificatiomhelper_aspnetmvc
 position: 1

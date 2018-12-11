@@ -1,6 +1,6 @@
 ---
 title: Use ProgressBar with Kendo UI Grid for CRUD Operations
-page_title: Use ProgressBar with Kendo UI Grid for CRUD Operations | Kendo UI Grid HtmlHelper
+page_title: Use ProgressBar with Kendo UI Grid for CRUD Operations | Kendo UI ProgressBar HtmlHelper for ASP.NET MVC
 description: "Use the Kendo UI Progressbar with the Kendo UI Grid for performing CRUD operations in ASP.NET MVC applications."
 slug: howto_useprogressbarwithgridcrud_progressbaraspnetmv
 ---

@@ -1,6 +1,6 @@
 ---
 title: Chunk Upload
-page_title: Chunk Upload | Kendo UI Upload
+page_title: Chunk Upload | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Upload files in chunks in asynchronous mode in the Kendo UI Upload widget."
 slug: chunkupload_uploadhelper_aspnetmvc
 position: 3

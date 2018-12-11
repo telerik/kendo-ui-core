@@ -1,6 +1,6 @@
 ---
 title: Image Browser
-page_title: Image Browser | Kendo UI Editor HtmlHelper
+page_title: Image Browser | Kendo UI Editor HtmlHelper for ASP.NET MVC
 description: "Import and export different types of documents with the Kendo UI Editor widget for ASP.NET MVC."
 slug: overview_imagebrowser_aspnetmvc
 position: 2

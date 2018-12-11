@@ -1,6 +1,6 @@
 ---
 title: Multicolumn Headers
-page_title: Multicolumn Headers | Kendo UI TreeList HtmlHelper
+page_title: Multicolumn Headers | Kendo UI TreeList HtmlHelper for ASP.NET MVC
 description: "Learn how to apply the multicolumn headers feature to the Kendo UI TreeList for ASP.NET MVC."
 slug: multicolumn_headers_mvc_treelist_helper
 position: 3

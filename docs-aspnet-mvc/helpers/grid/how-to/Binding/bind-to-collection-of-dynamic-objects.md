@@ -1,6 +1,6 @@
 ---
 title: Bind to Collections of Dynamic Objects
-page_title: Bind to Collections of Dynamic Objects | Kendo UI Grid HtmlHelper
+page_title: Bind to Collections of Dynamic Objects | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Bind the Kendo UI Grid to a collection of dynamic objects in ASP.NET MVC applications."
 slug: howto_bindtocollectionsofdynamicobjects_gridaspnetmv
 ---

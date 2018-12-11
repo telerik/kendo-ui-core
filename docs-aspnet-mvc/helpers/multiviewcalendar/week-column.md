@@ -1,6 +1,6 @@
 ---
 title: Week Column
-page_title: Week Column | Kendo UI MultiViewCalendarr HtmlHelper
+page_title: Week Column | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
 description: "Render a column displaying the number of the weeks within the current month view when working with the Kendo UI MultiViewCalendar."
 slug: week_column_multiviewcalendar_aspnetmvc
 position: 7

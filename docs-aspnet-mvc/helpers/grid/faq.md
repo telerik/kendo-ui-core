@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-page_title: Frequently Asked Questions | Kendo UI Grid HtmlHelper
+page_title: Frequently Asked Questions | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Find the most frequently asked questions related to the Kendo UI Grid HtmlHelper and their answers."
 previous_url: /kendo-ui/aspnet-mvc/helpers/grid/faq
 slug: freqaskedquestions_gridhelper_aspnetmvc

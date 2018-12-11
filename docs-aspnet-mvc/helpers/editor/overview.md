@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Editor HtmlHelper
+page_title: Editor | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Editor widget for ASP.NET MVC."
 slug: overview_editorhelper_aspnetmvc
 position: 1

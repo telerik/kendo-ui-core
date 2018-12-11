@@ -1,32 +1,31 @@
 ---
-title: Drag and Drop
-page_title: File Drag and Drop | Telerik UI for ASP.NET Core HtmlHelpers
+title: Dragging and Dropping of Files
+page_title: Dragging and Dropping of Files | Kendo UI Upload HtmlHelper for ASP.NET Core
 description: "Learn about the file drag and drop functionality of the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_drag_drop_aspnetcore
 position: 4
 ---
 
-# Drag and Drop
+# Dragging and Dropping of Files
 
-Users can select files by dropping them over the Kendo UI Upload.
+Users can select files by dragging and dropping them over the Upload.
 
-Custom drop zones can also be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
+You can also initialize custom drop zones depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
 
 > **Important**
 >
 > The drag-and-drop functionality is available only in the [asynchronous mode]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %}#asynchronous-mode).
 
-## Drag Drop on File Upload
+## Dragging and Dropping on File Upload
 
-To use the Kendo UI Upload as a drop zone:
+To use the Upload as a drop zone:
 
-1. Drag a file over the browser window for the drop zone to appear.
-2. When you pass the mouse over the drop zone, it gets highlighted.
-3. Release the file over the drop zone to add it to the upload queue.
+1. Drag a file over the browser window for the drop zone to appear. When you pass the mouse over the drop zone, it gets highlighted.
+1. Release the file over the drop zone to add it to the upload queue.
 
 ## Custom Drop Zones
 
-Custom drop zones can be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
+You can initialize custom drop zones depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
 
 ###### Example
 
@@ -84,12 +83,12 @@ The following example demonstrates how to customize the appearance of the drop z
 
 ## See Also
 
-* [Overview of Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Upload Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Chunk Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Send Receive Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identify Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
+* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
+* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
+* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
+* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
+* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
 * [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

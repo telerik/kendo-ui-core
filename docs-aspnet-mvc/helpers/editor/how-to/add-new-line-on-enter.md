@@ -1,6 +1,6 @@
 ---
 title: Add New Lines instead of New Paragraphs on Enter
-page_title: Add New Lines instead of New Paragraphs on Enter | Kendo UI Editor HtmlHelper
+page_title: Add New Lines instead of New Paragraphs on Enter | Kendo UI Editor HtmlHelper for ASP.NET MVC
 description: "Add a new line instead of a new paragraph on enter in ASP.NET MVC applications."
 slug: howto_addnewlinesinsteadofnewparaonenter_editoraspnetmvc
 ---

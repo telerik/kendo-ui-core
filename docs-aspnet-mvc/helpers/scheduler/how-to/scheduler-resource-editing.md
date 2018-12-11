@@ -1,6 +1,6 @@
 ---
 title: Edit Scheduler Resources
-page_title: Edit Scheduler Resources | Kendo UI Scheduler HtmlHelper
+page_title: Edit Scheduler Resources | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Implement a custom editor which allows the user to edit the resources of the Kendo UI Scheduler by using the Grid in ASP.NET MVC applications."
 slug: howto_editresources_scheduleraspnetmvc
 ---

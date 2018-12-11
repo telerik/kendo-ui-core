@@ -1,6 +1,6 @@
 ---
 title: Multicolumn Headers
-page_title: Multicolumn Headers | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Multicolumn Headers | Kendo UI TreeList HtmlHelper for ASP.NET Core
 description: "Learn how to apply the multicolumn headers feature to the Kendo UI TreeList HtmlHelper for ASP.NET Core."
 slug: multicolumn_aspnetcore_treelist_helper
 position: 3

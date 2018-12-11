@@ -1,18 +1,18 @@
 ---
 title: Tab Content
-page_title: TabStrip Tab Content | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the loading and the configuration options for the Kendo UI TabStrip tab content."
+page_title: Tab Content | Kendo UI TabStrip HtmlHelper for ASP.NET Core
+description: "Use the options for loading and configuring the tab content of the Kendo UI TabStrip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_tabstrip_aspnetcore_content
 position: 3
 ---
 
 # Tab Content
 
-The TabStrip widget offers various ways to load and configure the tab content area.
+The TabStrip provides options for loading and configuring its tab content area.
 
-## Locally Define Tab Content
+## Defining Content Locally
 
-The easiest way to define the tab content is to make it declaratively, using the `tab.Content()` configuration method:
+To define the tab content declaratively, use the `tab.Content()` configuration method.
 
 ###### Example
 
@@ -34,11 +34,11 @@ The easiest way to define the tab content is to make it declaratively, using the
 )
 ```
 
-## Load Content with AJAX
+## Loading Content with AJAX
 
-Telerik UI for ASP.NET Core TabStrip provides built-in support for asynchronously loading content from remote URLs. These URLs return HTML content that can be loaded in the TabStrip item content area.
+Telerik UI for ASP.NET Core TabStrip provides built-in support for asynchronously loading content from remote URLs. These URLs return HTML content that can be loaded in the item content area of the TabStrip.
 
-The example below demonstrates how to load content asynchronously using AJAX:
+The following example demonstrates how to load the tab content asynchronously by using AJAX.
 
 ###### Example
 
@@ -58,10 +58,9 @@ The example below demonstrates how to load content asynchronously using AJAX:
 
 ## Scrollable Content
 
-The TabStrip content containers are scrollable by default. This allows the widget to display scrollbars if it has a fixed height and holds large content that cannot fit. If needed, it is possible to disable TabStrip content scrolling. This can help in scenarios where the TabStrip hosts a widget such as a Menu that needs to overflow outside the TabStrip. To disable scrolling use the [`Scrollable(false)`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/configuration/scrollable#scrollable) configuration method:
+By default, the containers of the TabStrip content are scrollable which enables a TabStrip with a fixed height and large content that cannot fit to display scrollbars. You can also disable the scrolling of the TabStrip content which is useful when the TabStrip hosts a widget (such as a Menu) that needs to overflow the TabStrip. To disable the scrolling of the TabStrip content, use the [`Scrollable(false)`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/configuration/scrollable#scrollable) configuration method.
 
-
-Depending on the browser, the content's scroll position may be reset when changing the active tab. If persisting the scroll position is required, use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/select) event to save the current scroll position, and the [`activate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/activate) event to restore it.
+Depending on the browser, you can reset the scroll position of the content when the active tab is changed. To persist the scroll position, use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/select) event to save the current scroll position and then the [`activate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/activate) event to restore it.
 
 ###### Example
 

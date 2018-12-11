@@ -7,7 +7,7 @@ slug: taghelpers_chart_aspnetcore
 position: 1
 ---
 
-# Chart Tag Helper Overview
+# Charts Tag Helper Overview
 
 The Chart tag helper helps you configure the Kendo UI Chart widget in ASP.NET Core applications.
 

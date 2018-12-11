@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Tooltip HtmlHelper
+page_title: Tooltip | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Tooltip widget for ASP.NET MVC."
 slug: overview_tooltiphelper_aspnetmvc
 position: 1

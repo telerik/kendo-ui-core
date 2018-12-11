@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI RadialGauge HtmlHelper
+page_title: RadialGauge | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI RadialGauge widget for ASP.NET MVC."
 slug: overview_radialgaugehelper_aspnetmvc
 position: 1

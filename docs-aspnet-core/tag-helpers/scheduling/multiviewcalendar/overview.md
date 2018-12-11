@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: MultiViewCalendar | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI MultiViewCalendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_multiviewcalendar_taghelper_aspnetcore
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI TreeView HtmlHelper
+page_title: Ajax Binding | Kendo UI TreeView HtmlHelper for ASP.NET MVC
 description: "Populate the TreeView with nodes in ASP.NET MVC applications by using Ajax requests."
 slug: ajaxbinding_treeviewhelper_aspnetmvc
 position: 2

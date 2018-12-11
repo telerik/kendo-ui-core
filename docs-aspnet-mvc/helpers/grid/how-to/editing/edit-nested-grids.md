@@ -1,6 +1,6 @@
 ---
 title: Edit Nested Grids
-page_title: Edit Nested Grids | Kendo UI Grid HtmlHelper
+page_title: Edit Nested Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Edit nested Grids in ASP.NET MVC applications."
 slug: howto_editnestedgrids_gridaspnetmvc
 ---

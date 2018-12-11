@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MultiSelect HtmlHelper
+page_title: MultiSelect | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI MultiSelect widget for ASP.NET MVC."
 slug: overview_multiselecthelper_aspnetmvc
 position: 1

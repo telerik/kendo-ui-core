@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MultiColumnComboBox HtmlHelper
+page_title: MultiColumnComboBox | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI MultiColumnComboBox widget for ASP.NET MVC."
 slug: overview_multicolumncombobox_aspnetmvc
 position: 1

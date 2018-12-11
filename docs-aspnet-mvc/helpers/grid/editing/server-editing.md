@@ -1,6 +1,6 @@
 ---
 title: Server Editing
-page_title: Server Editing | Kendo UI Grid HtmlHelper
+page_title: Server Editing | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
 description: "Configure server editing of the Kendo UI Grid for ASP.NET MVC."
 previous_url: /helpers/grid/server-editing
 slug: serverediting_grid_aspnetmvc

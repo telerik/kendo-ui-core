@@ -1,16 +1,16 @@
 ---
-title: Read only Spreadsheet widget
-description: hide/remove everything but the cells and put them in view-only mode that just shows the cells where they cannot be edited/modified
+title: Render Read-Only Spreadsheets
+description: An example on how to hide or remove everything but the cells in a Kendo UI Spreadsheet and put them in a read-only mode which only shows the cells but prevents them from being edited or modified.
 type: how-to
-page_title: View-only mode | Kendo UI Spreadsheet
+page_title: Set the Read-Only Mode | Kendo UI Spreadsheet
 slug: view-only-spreadsheet-widget
-position: 
 tags: kendo, spreadsheet, view, view-only, read-only, hide
 ticketid: 1362798, 1356967
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -18,13 +18,16 @@ res_type: kb
 	</tr>
 </table>
 
-
 ## Description
-Sometimes you want to show a spreadsheet in view-only (or read-only) mode so users can't change it, and so they don't see toolbars or buttons.
 
-Usually, a grid or a table element should be used for such functionality.
+How can I show a Kendo UI Spreadsheet in a view-only (read-only) mode so that the user cannot edit the cells and the toolbars or buttons are not rendered.
 
-If this is not an option in your case, you can subscribe to the [render event](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/render) of the Kendo UI Spreadsheet and then disable all cells across all sheets.  Here is an example (see the script and style at the end)
+## Solution
+
+Apply either of the following approaches:
+
+* Use a Kendo UI Grid or a `table` element.
+* Subscribe to the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/render) event of the Spreadsheet and disable all cells across all sheets as demonstrated in the following example.
 
 ```html
 <div id="example">
@@ -446,7 +449,7 @@ If this is not an option in your case, you can subscribe to the [render event](h
     {
         display: none;
     }
-    
+
     .hiddenToolbars {/* hide the border that is usually around the toolbars */
       border: 0;
     }
@@ -455,6 +458,6 @@ If this is not an option in your case, you can subscribe to the [render event](h
 ```
 
 ## See Also
- * [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
- * [APOI of the Range](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)
- 
+
+ * [API Reference of the Kendo UI Spreadsheet for jQuery](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+ * [`Range` API Reference](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)

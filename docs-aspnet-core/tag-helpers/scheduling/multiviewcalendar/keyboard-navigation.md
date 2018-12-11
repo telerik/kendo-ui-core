@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Keyboard Navigation | Kendo UI MultiViewCalendar Tag for ASP.NET Core
 description: "Use the Kendo UI MultiViewCalendar keyboard navigation."
 slug: keyboard_navigation_multiviewcalendar_taghelper_aspnetcore
 position: 8

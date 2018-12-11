@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Grid HtmlHelper Troubleshooting
+page_title: Common Troubleshooting Issues | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Learn about the solutions of common issues that may occur while working with Kendo UI Grid for ASP.NET MVC."
 slug: troubleshoot_gridhelper_aspnetmvc
 position: 1

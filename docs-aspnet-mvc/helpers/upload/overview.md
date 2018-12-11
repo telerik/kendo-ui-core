@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Upload HtmlHelper
+page_title: Upload | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI Upload widget for ASP.NET MVC."
 slug: overview_uploadhelper_aspnetmvc
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI NumericTextBox HtmlHelper
+page_title: NumericTextBox | Telerik UI for ASP.NET MVC HtmlHelpers
 description: "Get started with the server-side wrapper for the Kendo UI NumericTextBox widget for ASP.NET MVC."
 slug: overview_notificationhelper_aspnetmvc
 position: 1

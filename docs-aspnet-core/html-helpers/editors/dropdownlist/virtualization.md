@@ -1,21 +1,20 @@
 ---
 title: Virtualization
-page_title: DropDownList | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Virtualization | Kendo UI DropDownList HtmlHelper for ASP.NET Core
 description: "Learn how to setup the Virtualization feature of the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_virtualization_aspnetcore
 position: 5
 ---
 
-
 # Virtualization
 
-Virtualization is useful for displaying large data sets. The UI virtualization technique uses a fixed amount of list items in the pop-up list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones.
+Virtualization is useful for displaying large data sets.
 
-Detailed information on the feature could be found in [ComboBox virtualization article](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+The UI virtualization technique uses a fixed amount of list items in the popup list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones. For more information, refer to the article on [virtualization in the ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
 
 > **Important**
 >
-> The value type to which the DropDownList can be bound on the server can only be a primitive type or an enum value.
+> As value types to which the DropDownList can be bound, the widget accepts only primitive types or enum values.  
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -68,7 +67,6 @@ Detailed information on the feature could be found in [ComboBox virtualization a
 
                 return products;
             }
-
 
 1. Add a DropDownList to the view and configure it to use virtualization.
 
@@ -139,4 +137,8 @@ Detailed information on the feature could be found in [ComboBox virtualization a
             //...additional configuration
         )
 
+## See Also
 
+* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [DropDownList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview)
+* [DropDownList Official Demos](http://demos.telerik.com/aspnet-core/dropdownlist/index)

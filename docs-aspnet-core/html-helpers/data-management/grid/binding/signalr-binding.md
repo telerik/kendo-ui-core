@@ -1,6 +1,6 @@
 ---
 title: SignalR Binding
-page_title: SignalR Binding | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: SignalR Binding | Kendo UI Grid HtmlHelper for ASP.NET Core
 description: "Learn the basics when working with the Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_grid_aspnetcore_signalrbinding
 previous_url: /aspnet-core/helpers/html-helpers/grid/signalr-binding

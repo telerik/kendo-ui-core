@@ -1,6 +1,6 @@
 ---
 title: Modes of Operation
-page_title: Modes of Operation | Kendo UI Upload HtmlHelper
+page_title: Modes of Operation | Kendo UI Upload HtmlHelper for ASP.NET MVC
 description: "Get started with the synchronous and asynchronous operation modes of Telerik UI for ASP.NET MVC wrappers for the Kendo UI Upload widget."
 slug: modesoperation_uploadhelper_aspnetmvc
 position: 2

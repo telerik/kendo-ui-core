@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Binding | Kendo UI ListView HtmlHelper
+page_title: Binding | Kendo UI ListView HtmlHelper for ASP.NET Core
 description: "Configure the Kendo UI ListView component for AJAX binding and easily enable client-data processing during AJAX binding."
 slug: htmlhelpers_listview_aspnetcore_ajaxbinding
 position: 2

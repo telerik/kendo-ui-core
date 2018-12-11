@@ -1,6 +1,6 @@
 ---
 title: Color Alternating Rows
-page_title: Color Alternating Rows | Kendo UI Grid HtmlHelper
+page_title: Color Alternating Rows | Kendo UI Grid HtmlHelper for ASP.NET MVC
 description: "Customize the Excel document the Grid generates during exporting and color alternating rows in ASP.NET MVC applications."
 slug: howto_alternatingrows_aspnetmvcgrid
 ---
