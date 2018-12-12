@@ -14,7 +14,7 @@ However, you can achieve a similar outcome in a Kendo UI Chart by using the [Dra
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" style="width: 200px;"></div>
     <script>
       var index = 0;

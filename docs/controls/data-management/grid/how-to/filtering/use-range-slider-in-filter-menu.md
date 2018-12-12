@@ -14,7 +14,7 @@ To see how the following example functions, filter the column by using the Kendo
 
 ###### Example
 
-```html
+```dojo
    <div id="grid">
 </div>
 <script>

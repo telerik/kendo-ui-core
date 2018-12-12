@@ -15,7 +15,7 @@ Every new child is bound with distinct values.
 >
 > When applied, the `ng-repeat` directive demonstrates some limitations. For more information on this issue, refer to the [notes on `ng-repeat`](http://docs.telerik.com/kendo-ui/AngularJS/notes-on-ng-repeat).
 
-```html
+```dojo
     <script type="text/javascript">
       function getResource(val){
         return val;

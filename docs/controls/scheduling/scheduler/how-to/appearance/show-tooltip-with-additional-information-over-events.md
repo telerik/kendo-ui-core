@@ -12,7 +12,7 @@ The following example demonstrates how to use the Kendo UI Tooltip to show addit
 
 ###### Example
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
   $(function() {

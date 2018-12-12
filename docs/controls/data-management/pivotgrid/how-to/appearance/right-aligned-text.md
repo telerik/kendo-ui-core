@@ -12,7 +12,7 @@ The following example demonstrates how to right-align the text of data cells in 
 
 ###### Example
 
-```html
+```dojo
 <style>
       .k-pivot-table .k-grid-content td {
           text-align: right;

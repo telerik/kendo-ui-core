@@ -14,7 +14,7 @@ The example below demonstrates how to achieve this behavior.
 
 ###### Example
 
-```html
+```dojo
 <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <div id="example">
       <div class="box wide">

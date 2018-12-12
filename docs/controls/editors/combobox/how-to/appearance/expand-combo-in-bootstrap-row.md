@@ -14,7 +14,7 @@ Basically, the approach is to set the input width to 100%.
 
 ###### Example
 
-```html
+```dojo
   <div class="row">
     <div class="col-md-8"><input id="categories" style="width: 100%" /></div>
     <div class="col-md-4">.col-md-4</div>

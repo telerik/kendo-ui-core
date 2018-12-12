@@ -14,7 +14,7 @@ Upon changing the group fields, the Grid requires a full refresh.
 
 ###### Example
 
-```html
+```dojo
 
     <div id="grid"></div>
     <script>

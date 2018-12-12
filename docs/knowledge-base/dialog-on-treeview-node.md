@@ -40,7 +40,7 @@ How can I display TreeView node data in a Kendo UI Dialog on node selection?
 1. Access the `dataItem` of the selected node.
 1. Pass the data from the `dataItem` to the `content` method of the Dialog.
 
-```html
+```dojo
 	<div id="treeview"></div>
 	<div id="dialog"></div>               
 

@@ -14,7 +14,7 @@ A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       var dataSource = new kendo.data.DataSource({
@@ -49,7 +49,7 @@ The solution for this issue is to add a position field and use it to maintain st
 
 ###### Example - a stable sort function using a position field
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       var dataSource = new kendo.data.DataSource({

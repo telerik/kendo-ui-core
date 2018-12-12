@@ -37,7 +37,7 @@ To filter the hidden column:
 	1. [`Append`](https://api.jquery.com/append/) the button to the `k-group-cell`.
 	1. Use the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) method to hide the column.
 
-		```html
+		```dojo
 		<div id="example">
 			<style>
 				.k-multicheck-wrap {

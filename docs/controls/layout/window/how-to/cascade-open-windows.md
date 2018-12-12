@@ -11,7 +11,7 @@ The example below demonstrates how to cascade open Kendo UI Windows on top of ea
 
 ###### Example
 
-```html
+```dojo
    <script>
       $(document).ready(function() {
         for (var i = 0; i < 6; i++){

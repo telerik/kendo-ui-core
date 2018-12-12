@@ -13,13 +13,13 @@ All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) arrive with a number 
 
 **Figure 1: Kendo UI themes for the Web**
 
-![Kendo UI Web Themes](/styles-and-layout/web-themes.png)
+![Kendo UI Web Themes](web-themes.png)
 
 This is how the same themes are rendered in widgets that visualize data, such as Gauges, Charts, Barcodes, Diagrams, and Maps.
 
 **Figure 2: Kendo UI themes for widgets rendering data visualization**
 
-![Kendo UI DataViz Themes](/styles-and-layout/dataviz-themes.png)
+![Kendo UI DataViz Themes](dataviz-themes.png)
 
 ## Getting Started
 
@@ -191,7 +191,7 @@ With the 2014 Q3 release Kendo UI provides customized presentation for checkboxe
     <!-- Kendo UI Checkbox -->
     <input type="checkbox" id="checkbox" class="k-checkbox">
     <label class="k-checkbox-label" for="checkbox"></label>
-    
+
     <!-- Kendo UI Radio button -->
     <input type="radio" id="radiobutton" class="k-radio">
     <label class="k-radio-label" for="radiobutton"></label>
@@ -221,7 +221,7 @@ The list below demonstrates the names of the `.less` files supported by Kendo UI
 
 > **Important**
 >
-> As of 2019.1 versions and onwards Kendo UI for jQuery distributes a single and identical set of themes for both Kendo UI Professional and Kendo UI Core. 
+> As of 2019.1 versions and onwards Kendo UI for jQuery distributes a single and identical set of themes for both Kendo UI Professional and Kendo UI Core.
 
 The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets, can be built using the Less 1.7.5 version.
 

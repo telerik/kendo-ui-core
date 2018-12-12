@@ -15,7 +15,7 @@ The following example demonstrates how to use the AutoComplete as a custom colum
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <h4>Change = <span id="grid-change"></span></h4>
 <script>

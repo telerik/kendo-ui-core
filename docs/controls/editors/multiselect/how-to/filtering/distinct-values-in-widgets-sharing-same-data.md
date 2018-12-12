@@ -12,7 +12,7 @@ The following example demonstrates how to filter the values of 2 Kendo UI widget
 
 ###### Example
 
-```html
+```dojo
     <select id="multiselect1">
     </select>
     <br />

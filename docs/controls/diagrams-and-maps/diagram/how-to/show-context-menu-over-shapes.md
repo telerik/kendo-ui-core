@@ -17,7 +17,7 @@ To achieve this behavior:
 
 ###### Example
 
-```html
+```dojo
 
 <ul id="menu">
 <li>

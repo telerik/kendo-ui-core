@@ -20,7 +20,7 @@ The example below demonstrates how to freeze the top row in a worksheet.
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [

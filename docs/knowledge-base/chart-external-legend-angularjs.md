@@ -38,7 +38,7 @@ In an AngularJS page, use the `ng-repeat` directive to render the external legen
 
 ###### Example
 
-```html
+```dojo
     <style>
       .chart-legend {
         text-align: center;

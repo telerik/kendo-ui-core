@@ -26,7 +26,7 @@ How can I create a checkbox column for selecting rows in the Grid and render a *
 
 Manually select all records within the `click` event of the checkbox for selecting all records in the header. Note that a Grid with locked (frozen) columns renders two separate tables for its data.
 
-```html
+```dojo
    <div id="grid"></div>
     <button id="showSelection">Show selected IDs</button>
     <script>

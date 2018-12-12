@@ -11,7 +11,7 @@ The following example demonstrates how to render a Kendo UI Scheduler by using a
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content" ng-controller="MyCtrl">
     <h4>Select product</h4>

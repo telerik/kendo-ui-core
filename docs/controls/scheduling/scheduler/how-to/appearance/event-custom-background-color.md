@@ -12,7 +12,7 @@ The following example demonstrates how to use the event template to render event
 
 ###### Example
 
-```html
+```dojo
 <style>
     .k-scheduler-header-wrap div.k-event,
     .k-scheduler-content div.k-event {

@@ -13,7 +13,7 @@ The event coordinates are mapped to the location by using the [`eventToLocation`
 
 ###### Example
 
-```html
+```dojo
 <div id="map"></div>
 <script>
   function createMap() {

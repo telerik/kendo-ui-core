@@ -44,7 +44,7 @@ To update the value of the Grid cells in an inline edit row mode when another fi
 1. When the event is triggered, check if its `action` corresponds to `itemchange` and its `field` to the one you choose.
 1. If both conditions are met, get the `DataItem` of the row that is edited and update it by using the `set` method, which will propagate the changes in the GUI.
 
-```html
+```dojo
 <div id="example">
   <div id="grid"></div>
 

@@ -27,7 +27,7 @@ How can I remove specific columns from the columnMenu of the Grid?
 
 Manipulate the columnMenu within the `columnMenuInit` event of the Grid&mdah;with this approach, the specific elements cannot be found based on the field name that is bound to the column, and removed from the DOM.
 
-````html
+````dojo
         <div id="example">
             <div id="grid"></div>
 

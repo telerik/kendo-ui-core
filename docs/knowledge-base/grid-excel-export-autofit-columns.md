@@ -41,7 +41,7 @@ excelExport: function(e) {
 }
 ```
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({

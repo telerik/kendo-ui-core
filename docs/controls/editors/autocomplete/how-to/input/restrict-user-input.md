@@ -12,7 +12,7 @@ The following example demonstrates how to restrict the user input in the AutoCom
 
 #### Example:
 
-```html
+```dojo
      <div id="example">
       <div id="shipping">
         <label for="countries" class="info">Choose shipping countries:</label>

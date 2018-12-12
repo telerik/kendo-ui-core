@@ -13,7 +13,7 @@ You can drag and drop the markers within the visible area of the Map. The locati
 
 ###### Example
 
-```html
+```dojo
 <div id="map"></div>
 <script>
     var markers = [

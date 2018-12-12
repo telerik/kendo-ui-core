@@ -29,7 +29,7 @@ Apply either of the following approaches:
 * Use a Kendo UI Grid or a `table` element.
 * Subscribe to the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/events/render) event of the Spreadsheet and disable all cells across all sheets as demonstrated in the following example.
 
-```html
+```dojo
 <div id="example">
     <div id="spreadsheet" style="width: 100%;" class="hiddenToolbars"></div>
     <script>

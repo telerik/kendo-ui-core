@@ -54,7 +54,7 @@ The described behavior is expected because when the filter has to be removed, th
 
 In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event to attach an event handler to the **Filter** button and, if the value of the text box is an empty string, to clear the filters with the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method.
 
-```html
+```dojo
 <div id="example">
             <div id="grid"></div>
 

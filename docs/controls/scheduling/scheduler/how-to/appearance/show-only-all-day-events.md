@@ -12,7 +12,7 @@ The following example demonstrates how to show only all-day events in a Kendo UI
 
 ###### Example
 
-```html
+```dojo
     <div id="example" class="k-content">
         <div id="scheduler"></div>
     </div>

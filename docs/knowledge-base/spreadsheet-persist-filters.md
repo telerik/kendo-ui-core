@@ -59,7 +59,7 @@ The Spreadsheet does not provide a built-in option for achieving the described s
 
 The following example demonstrates the implementation of the suggested approach.
 
-```html
+```dojo
 <input type="button" value="Save filters" id="save"/>
 <input type="button" value="Reload filters" id="reload"/>
 <div id="spreadsheet" style="width: 100%"></div>

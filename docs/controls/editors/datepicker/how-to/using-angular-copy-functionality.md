@@ -11,7 +11,7 @@ The following example demonstrates how to use the AngularJS copy functionality i
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content"ng-controller="MyCtrl">
         <div class="box-col">

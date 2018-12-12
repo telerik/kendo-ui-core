@@ -14,7 +14,7 @@ The example below demonstrates how to configure such behavior.
 
 ###### Example
 
-```html
+```dojo
     <base href="https://demos.telerik.com/kendo-ui/donut-charts/index">
 
     <div id="example">

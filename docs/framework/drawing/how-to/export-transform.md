@@ -15,7 +15,7 @@ For more information, refer to the [Transformation API article](/api/javascript/
 
 ###### Example
 
-```html
+```dojo
     <button class='export-img k-button'>Export as Image</button>
     <div class="content">
       <div id="chart"></div>

@@ -32,15 +32,15 @@ Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped]
 
 ### Getting Instances of Existing Widgets
 
-![Getting an instance of an existing Kendo UI widget](/images/get-instance.png)
+![Getting an instance of an existing Kendo UI widget](../images/get-instance.png)
 
 ### Initializing and Configuring Widgets
 
-![All Kendo UI widgets](/images/init.png)
+![All Kendo UI widgets](../images/init.png)
 
 ### Initializing the Kendo UI DataSource
 
-![Initializing a Kendo UI DataSource](/images/datasource.png)
+![Initializing a Kendo UI DataSource](../images/datasource.png)
 
 ### Creating Widgets through TypeScript Inheritance
 

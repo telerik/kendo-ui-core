@@ -11,7 +11,7 @@ The following example demonstrates how to filter the data for a marker layer dep
 
 ###### Example
 
-```html
+```dojo
 <div id="map"></div>
 <script>
 function createMap() {

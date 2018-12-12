@@ -141,7 +141,7 @@ To set a height that is smaller than 200px, use the approach demonstrated in the
 
 ###### Example
 
-```html
+```dojo
 <style>
 
     table.small-editor

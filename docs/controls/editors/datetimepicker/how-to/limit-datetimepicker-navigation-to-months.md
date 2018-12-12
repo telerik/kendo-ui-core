@@ -12,7 +12,7 @@ The following example demonstrates how to limit the calendar navigation of the D
 
 ###### Example
 
-```html
+```dojo
       <input data-role="datetimepicker" />
 
     <script>

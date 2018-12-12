@@ -356,7 +356,7 @@ The demonstration below uses two widgets that are initialized. The first one tak
 
 ###### Example
 
-```html
+```dojo
    <div id="repeater"></div>
 
     <div id="container">
@@ -604,7 +604,7 @@ In the complete example below note that when you add an item to the DataSource, 
 
 ###### Example
 
-```html
+```dojo
         <label for="newItem">Enter A New Item</label>
         <input id="newItem" data-bind="value: newItem" class="k-input" />
         <button class="k-button" data-bind="click: add">Add Item</button>
@@ -714,7 +714,7 @@ The following example combines the snippets and exhibits the full code.
 
 ###### Example
 
-```html
+```dojo
     <script>
       (function ($) {
         var kendo = window.kendo;

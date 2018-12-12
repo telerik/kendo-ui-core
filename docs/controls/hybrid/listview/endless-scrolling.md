@@ -90,7 +90,7 @@ First, decide what the best way to get the additional data is. The possible ways
 
 This is the live example of the representation above:
 
-```html
+```dojo
 <div data-role="view" data-layout="default" data-init="viewInit">
   <ul id="listView"></ul>
 </div>
@@ -175,7 +175,7 @@ This is the live example of the representation above:
 <!--__-->
 This is the live example of the representation above:
 
-```html
+```dojo
 <div data-role="view" data-init="viewInit">
   <header data-role="header">
     <div data-role="navbar">My App</div>

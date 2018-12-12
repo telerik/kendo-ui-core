@@ -39,7 +39,7 @@ I'm using right-to-left languages in my project and when working with negative n
 
 Utilize and modify the number format pattern in the Kendo UI culture which is in use.
 
-```html
+```dojo
 kendo.culture().numberFormat.pattern[0] = "n-";
 ```
 

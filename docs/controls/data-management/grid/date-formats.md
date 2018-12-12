@@ -25,7 +25,7 @@ This scenario represents the default behavior of the Grid. The `date` objects ar
 
 The following example demonstrates how to create different time with an offset depending on the current timezone.
 
-```html
+```dojo
   <p></p>
   <div id="grid"></div>
     <script>
@@ -47,7 +47,7 @@ The application of this scenario intends to display the date in a UTC timezone r
 
 The following example demonstrates how to allow the user to manually select the desired timezone.
 
-```html
+```dojo
     <div id="example">
       <p>Please choose a timezone: </p>
       <input id="timeZone" style="width: 100%;" />

@@ -19,7 +19,7 @@ The example below demonstrates how to resize the Kendo UI Grid together with the
 
 ###### Example
 
-```html
+```dojo
     <style>
       html,
       body,
@@ -92,7 +92,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Win
 
 ###### Example
 
-```html
+```dojo
     <style>
       #grid
       {
@@ -163,7 +163,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Spl
 
 ###### Example
 
-```html
+```dojo
     <style>
       html,
       body,

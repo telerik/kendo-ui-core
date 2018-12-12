@@ -25,7 +25,7 @@ How can I show ellipsis in the Grid cells where the text does not fit the specif
 
 The following example illustrates how to achieve the functionality.
 
-```html
+```dojo
 <div id="grid"></div>
 <style>
   #grid{

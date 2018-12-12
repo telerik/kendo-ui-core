@@ -12,7 +12,7 @@ The following example demonstrates how to hide the header and the footer of the 
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-init="initScheduler">
       <header data-role="header"></header>
       <div id="scheduler"></div>

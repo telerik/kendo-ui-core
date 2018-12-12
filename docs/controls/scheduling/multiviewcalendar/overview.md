@@ -20,7 +20,7 @@ To initialize the MultiViewCalendar, use a jQuery selector.
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar();
@@ -43,7 +43,7 @@ The following example demonstrates basic MultiViewCalendar events.
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar({

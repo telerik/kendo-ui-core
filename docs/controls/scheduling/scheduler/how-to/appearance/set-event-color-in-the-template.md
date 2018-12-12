@@ -12,7 +12,7 @@ The following example demonstrates how to set the event color in the template of
 
 ###### Example
 
-```html
+```dojo
     <div id="example" class="k-content">
       <div id="scheduler"></div>
     </div>

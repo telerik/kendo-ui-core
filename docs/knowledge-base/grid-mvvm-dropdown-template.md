@@ -31,7 +31,7 @@ How can I create a Kendo DropDownList widget in the column template of an MVVM G
 1. Within the model, add a property which returns the template.
 1. In the configuration of the Grid, specify that the template of the column is a property of the model.
 
-```html
+```dojo
     <div id="example">
       <div class="demo-section k-content wide">
         <div>

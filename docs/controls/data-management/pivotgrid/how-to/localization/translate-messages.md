@@ -12,7 +12,7 @@ The following example demonstrates how to translate the messages of a Kendo UI P
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="pivotgrid"></div>
     <script>

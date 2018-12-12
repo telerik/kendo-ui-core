@@ -18,7 +18,7 @@ The example below demonstrates how to disable content scrolling for a specific T
 
 ###### Example
 
-```html
+```dojo
     <div id="tabstrip1">
       <ul>
         <li class="k-state-active">

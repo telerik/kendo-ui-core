@@ -103,7 +103,7 @@ Make a custom drawing on top of the Donut Chart and show the multi-line text and
 
 The following example demonstrates how to render three differently styled lines of text in the center of the Donut Chart.
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       function createChart() {

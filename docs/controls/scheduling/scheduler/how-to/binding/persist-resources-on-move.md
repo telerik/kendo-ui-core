@@ -12,7 +12,7 @@ The following example demonstrates how to persist the event resources on the `mo
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="scheduler"></div>
 </div>

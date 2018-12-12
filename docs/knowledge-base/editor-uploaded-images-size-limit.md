@@ -39,7 +39,7 @@ How can I set a size limit for the images uploaded with the Editor's ImageBrowse
 
 You can check the size of the selected file in the select event handler of the Upload embedded in the ImageBrowser and prevent the upload in case the file size exceeds the specified limit.
 
-```html
+```dojo
 <script>
 	$(document).ready(function () {
 		//attach a click handler to the Editor's ImageBrowser tool

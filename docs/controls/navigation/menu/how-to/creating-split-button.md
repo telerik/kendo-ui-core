@@ -11,7 +11,7 @@ The example below demonstrates how to create a Split button using Kendo UI Menu.
 
 ###### Example
 
-```html
+```dojo
     <ul id="myMenu">
       <li onclick="defaultitemclick();" class="defaultItem" data-action="1">action 1</li>
       <li class="emptyItem"><span class="empty">&nbsp;</span>

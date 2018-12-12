@@ -14,7 +14,7 @@ To achieve this behavior, access the generated [MDX Query](https://en.wikipedia.
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="pivotgrid"></div>
 

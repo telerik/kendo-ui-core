@@ -11,7 +11,7 @@ The following example demonstrates how to bind the [Grid](http://www.telerik.com
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl" data-ng-init="init()">
         <!-- Use grid directive with scope options -->

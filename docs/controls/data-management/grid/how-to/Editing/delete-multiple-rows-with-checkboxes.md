@@ -12,7 +12,7 @@ The following example demonstrates how to delete multiple rows selected with che
 
 ###### Example
 
-```html
+```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
     <div id="example" class="k-content">
       <div id="grid"></div>

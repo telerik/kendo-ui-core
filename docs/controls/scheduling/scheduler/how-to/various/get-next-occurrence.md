@@ -12,7 +12,7 @@ The following example demonstrates how to get `nextOccurrence` of the Kendo UI `
 
 ###### Example
 
-```html
+```dojo
     <script>
     var event = new kendo.data.SchedulerEvent({
       title: "Event1",

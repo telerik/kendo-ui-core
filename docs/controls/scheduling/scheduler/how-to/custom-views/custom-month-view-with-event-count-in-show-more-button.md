@@ -13,7 +13,7 @@ The following example demonstrates how to inherit the built-in Month view and im
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
         var MORE_BUTTON_TEMPLATE = kendo.template(

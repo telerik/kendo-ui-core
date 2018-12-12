@@ -11,7 +11,7 @@ The example below demonstrates how to execute a custom click action based on the
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div class="demo-section k-header">
 

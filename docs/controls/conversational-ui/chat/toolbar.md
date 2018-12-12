@@ -16,7 +16,7 @@ The toolbar is located below the input box of the Chat. You can display or hide 
 
 To configure the Toolbar items, use the [`toolbar.buttons`](/api/javascript/ui/chat/configuration/toolbar.buttons) option of the Chat.
 
-```html
+```dojo
 <div id="chat"></div>
 <script>
     $("#chat").kendoChat({
@@ -41,7 +41,7 @@ The Chat configuration object allows you to configure the following behavior asp
 * Whether the toolbar will be [scrollable](/api/javascript/ui/chat/configuration/toolbar.scrollable). A scrollbar is useful when the buttons cannot entirely fit within the width of the Chat.
 * Whether the toolbar will be [displayed or hidden](/api/javascript/ui/chat/configuration/toolbar.toggleable) upon a button click.
 
-```html
+```dojo
 <div id="chat"></div>
 <script>
     $("#chat").kendoChat({

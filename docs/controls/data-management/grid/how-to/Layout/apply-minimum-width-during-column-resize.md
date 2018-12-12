@@ -15,7 +15,7 @@ The following example demonstrates how to use the API for internal Grid column r
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
         $(function(){

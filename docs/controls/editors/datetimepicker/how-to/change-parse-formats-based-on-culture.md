@@ -13,7 +13,7 @@ The following example demonstrates how to add the default short date format of t
 
 ###### Example
 
-```html
+```dojo
 <script src="http://kendo.cdn.telerik.com/2016.3.1118/js/cultures/kendo.culture.bg-BG.min.js"></script>
 <input id="datetimepicker" />
 <script>

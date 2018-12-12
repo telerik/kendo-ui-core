@@ -22,7 +22,7 @@ The following example demonstrates how to use the `headerAttributes` to prevent 
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions">
@@ -87,7 +87,7 @@ The following example demonstrates how to handle the `change` event in AngularJS
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
   <label>Select mode: <select kendo-dropdownlist ng-model="gridOptions.selectable">
     <option value="row">Row</option>
@@ -140,7 +140,7 @@ The following example demonstrates how to dynamically set the Grid columns in An
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
 </div>
@@ -172,7 +172,7 @@ The following example demonstrates how to set the Grid row template (`rowTemplat
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions">
     <table>
@@ -215,7 +215,7 @@ The following example demonstrates how to use the `sum` aggregate in a `footerTe
 
 ###### Example
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   <div id="example" ng-app="KendoDemos">
@@ -275,7 +275,7 @@ The following example demonstrates how to use `$http` to bind the Grid.
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid k-options="gridOptions"></div>
  </div>

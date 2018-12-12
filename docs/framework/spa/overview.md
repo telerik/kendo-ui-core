@@ -32,7 +32,7 @@ The example below demonstrates how to create a Kendo UI Single-Page Application.
 
 ###### Example
 
-```html
+```dojo
     <div id="app"></div>
 
     <script id="index" type="text/x-kendo-template">

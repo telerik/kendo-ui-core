@@ -33,7 +33,7 @@ How can I flip the axis of the Kendo UI Grid, so that its rows become columns an
 
 Modify the shape of the data.
 
-```html
+```dojo
     <style>
         tbody td:first-child{
         background-color:#d5d5d5;

@@ -11,7 +11,7 @@ The example here demonstrates a way to change the default new-line behavior from
 
 ###### Example
 
-```html
+```dojo
   <textarea id="editor"></textarea>
   <script>
     var defaultTools = kendo.ui.Editor.defaultTools;

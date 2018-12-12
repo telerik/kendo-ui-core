@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this behavior and then show th
 ###### Example
 
 
-```html
+```dojo
   <input class="k-textbox" placeholder="I am looking for..." />
 
   <div id="treeview"></div>

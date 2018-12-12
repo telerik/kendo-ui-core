@@ -12,7 +12,7 @@ The example below demonstrates how to get the UID of a Kendo UI Scheduler event 
 
 ###### Example
 
-```html
+```dojo
    <div id="example">
     <div id="team-schedule">
         <div id="people">

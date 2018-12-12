@@ -49,7 +49,7 @@ How can I add a filter to the Kendo UI Scheduler in AngularJS?
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
   <div ng-controller="MyCtrl as $ctrl">
     <input type="text" kendo-combo-box="$ctrl.comboBox" name="comboBox"  k-options="$ctrl.comboboxOptions"/>

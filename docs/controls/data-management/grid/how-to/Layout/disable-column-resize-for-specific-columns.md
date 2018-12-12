@@ -13,7 +13,7 @@ The following example demonstrates how to prevent resizing for specific columns.
 
 ###### Example
 
-```html
+```dojo
     <p>The <strong>bar</strong> column cannot be resized:</p>
     <div id="grid"></div>
     <script>

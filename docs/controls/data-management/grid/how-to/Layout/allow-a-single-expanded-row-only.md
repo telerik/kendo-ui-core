@@ -17,7 +17,7 @@ The following example demonstrates how to collapse a Grid row that was previousl
 
 ###### Example
 
-```html
+```dojo
 	<div id="grid"></div>
 	<script>
 	  $(document).ready(function() {

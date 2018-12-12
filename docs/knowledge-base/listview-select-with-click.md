@@ -34,7 +34,7 @@ How can I allow the users to select or deselect ListView items only with the mou
 1. Call the [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/select) method with the populated array of items.
 
 
-```html
+```dojo
 <div class="demo-section k-content wide">
     <div id="listView"></div>
     <div id="pager" class="k-pager-wrap"> </div>

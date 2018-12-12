@@ -30,7 +30,7 @@ How can I filter a column with a drop-down editor when the column is bound to a 
 
 Programmatically apply the filters on the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event of the Grid. This approach  also requires you to programmatically clear the filters for that column when the user clicks the **Clear** button.
 
-```html
+```dojo
    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     
     <div id="example">

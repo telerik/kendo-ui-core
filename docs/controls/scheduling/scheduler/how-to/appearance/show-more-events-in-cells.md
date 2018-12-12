@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this by increasing the height 
 
 ###### Example
 
-```html
+```dojo
     <style>
         /*increase the height of the cells in day, work week and week views*/
         .k-scheduler-table td, .k-scheduler-table th

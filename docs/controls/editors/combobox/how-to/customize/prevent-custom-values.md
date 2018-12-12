@@ -12,7 +12,7 @@ The following example demonstrates how to prevent adding custom values to a Kend
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>

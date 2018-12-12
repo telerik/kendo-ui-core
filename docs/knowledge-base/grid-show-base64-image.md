@@ -30,7 +30,7 @@ How can I display a base64-encoded image in the Grid?
 1. When the Grid reads the data, display the image by using [`column.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template).
 
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
 

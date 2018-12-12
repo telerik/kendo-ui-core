@@ -14,7 +14,7 @@ For more information on how to apply batch editing with a bound Boolean column, 
 
 ###### Example
 
-```html
+```dojo
    <div id="grid"></div>
     <script>
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",

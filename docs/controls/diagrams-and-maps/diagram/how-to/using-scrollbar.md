@@ -11,7 +11,7 @@ The following example demonstrates how to use a scrollbar as a Diagram element.
 
 ###### Example
 
-```html
+```dojo
 
     <div style="overflow:auto; width: 1000px; height: 300px;">
       <div id="diagram"></div>

@@ -12,7 +12,7 @@ The following example demonstrates how to declaratively initialize a Kendo UI Co
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
 
     <div class="demo-section k-header">

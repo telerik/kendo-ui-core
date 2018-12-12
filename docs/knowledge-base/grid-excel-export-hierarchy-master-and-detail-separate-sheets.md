@@ -34,7 +34,7 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 1. Obtain only the sheet from the event data of the `excelExpot` event (by default, `e.workbook` is the master Grid workbook) and assign it to a variable.
 1. Create a new workbook and pass the sheets in the `sheet` configuration property as an array with the variables from the two previous steps.
 
-```html
+```dojo
 <div id="grid"></div>
     <script>
       // used to wait for the children to finish async export

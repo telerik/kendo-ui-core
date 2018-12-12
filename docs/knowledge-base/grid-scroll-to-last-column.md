@@ -28,7 +28,7 @@ How can I scroll the last column into view when a Grid with many columns is init
 1. In the handler, get a reference of the last column and its offset.
 1. Call the [`scrollLeft`](https://api.jquery.com/scrollleft/) method with the acquired offset.
 
-```html
+```dojo
 <div id="grid" style="width: 400px;"></div>
 <script>
     $(document).ready(function () {

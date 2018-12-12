@@ -13,7 +13,7 @@ The loading overlay must be displayed over the Window [widget `element`](/framew
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
         <button id="showOverlay" class="k-button">Show overlay</button>
         <p>Click on the Refresh button to remove the overlay.</p>

@@ -56,7 +56,7 @@ How can I configure the colors and range of the Kendo UI RadialGauge?
 
 The following example demonstrates how to set the RadialGauge to display a series of ranges with unique colors.
 
-```html
+```dojo
     <div id="gauge"></div>
 
     <script>

@@ -31,7 +31,7 @@ How can I have a column whose editor depends on the value of the Grid record?
 1. Place a condition within the [`columns.editor`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editor) function.
 1. Based on that condition, add the corresponding editor template.
 
-```html
+```dojo
 
     <div id="grid"></div>
 

@@ -14,7 +14,7 @@ As a result, if the event is not new, the template hides the **Title** field and
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
   <div id="scheduler"></div>
 </div>

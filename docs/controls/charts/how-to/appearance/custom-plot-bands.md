@@ -20,7 +20,7 @@ The example below demonstrates how to render a custom plot band in a Column Kend
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" />
     <script>
       $("#chart").kendoChart({
@@ -90,7 +90,7 @@ The example below demonstrates how to render a custom plot band in a Bar Kendo U
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" />
     <script>
       $("#chart").kendoChart({

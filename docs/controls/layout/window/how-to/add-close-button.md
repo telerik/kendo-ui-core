@@ -11,7 +11,7 @@ The example below demonstrates how to add a **Close** button to a modal Kendo UI
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="window">
         <button class="k-button close-button">Close</button>

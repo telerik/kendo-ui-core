@@ -13,7 +13,7 @@ To achieve this behavior, use the [`change`](/api/javascript/data/observableobje
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
   <div class="demo-section k-content" data-bind="visible: confirmed">
       Thank you for your registration, <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>

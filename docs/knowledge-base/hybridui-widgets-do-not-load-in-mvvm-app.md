@@ -33,7 +33,7 @@ To initialize Hybrid UI widgets in Kendo UI MVVM, use either of the following ap
 * Explicitly add the `kendo.mobile.ui` namespace to the list of namespaces that are initialized by `kendo.bind` by running `kendo.bind(element, viewModel, kendo.mobile.ui);`.
 
 
-    ```html
+    ```dojo
       <div id="example">
         Feature: <span data-bind="text: name"></span></br>
       Confirmed: <input data-role="switch" data-bind="value: switchedOn"/>
@@ -52,7 +52,7 @@ To initialize Hybrid UI widgets in Kendo UI MVVM, use either of the following ap
 
 * If you want to initialize a single Hybrid UI widget or to avoid ambiguity between mobile and web widgets with the same names, use the fully qualified widget name in the `data-role` attribute.
 
-    ```html
+    ```dojo
       <div id="example">
         Feature: <span data-bind="text: name"></span></br>
         Confirmed: <input data-role="kendo.mobile.ui.Switch" data-bind="value: switchedOn"/>

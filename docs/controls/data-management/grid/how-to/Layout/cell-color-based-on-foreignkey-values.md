@@ -12,7 +12,7 @@ The following example demonstrates how to set the color of a text cell based on 
 
 ###### Example
 
-```html
+```dojo
     <style>
     .red{
     	color:red;

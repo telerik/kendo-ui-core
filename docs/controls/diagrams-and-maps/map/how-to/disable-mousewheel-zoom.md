@@ -11,7 +11,7 @@ The following example demonstrates how to disable the mousewheel zoom in the Map
 
 ###### Example
 
-```html
+```dojo
     <div id="map"></div>
     <div style="height: 1000px; color: #fff; background: purple; font-size: 24px; text-align: center;">Very high div</div>
     <script>

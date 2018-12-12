@@ -14,7 +14,7 @@ The example below demonstrates how to create Kendo UI Stock Charts by using Angu
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="MyApp" ng-controller="MyCtrl">
   <div class="demo-section k-content">
     <div kendo-stock-chart k-data-source="dataSource"       

@@ -11,7 +11,7 @@ The following example demonstrates how to edit an event in the Scheduler by usin
 
 ###### Example
 
-```html
+```dojo
      <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-scheduler="scheduler" k-options="schedulerOptions"></div>

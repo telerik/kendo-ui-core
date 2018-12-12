@@ -52,7 +52,7 @@ Currently, the Grid does not support the setting of the checkbox default state t
 
 The following example demonstrates how to implement the suggested scenarios.
 
-```html
+```dojo
 <div id="example">
   <div id="grid"></div>
 

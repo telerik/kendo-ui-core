@@ -12,7 +12,7 @@ The example below demonstrates how to reorder rows in a child Grid using the Ken
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
       <script>

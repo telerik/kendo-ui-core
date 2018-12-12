@@ -11,7 +11,7 @@ The example below demonstrates how to navigate to a child view from a ListView, 
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-model="app.models.survey" data-title="Survey" data-stretch="true" id="survey">
       <form>
         <ul data-role="listview" data-type="group">

@@ -11,7 +11,7 @@ The example below demonstrates how to configure the validation options of the re
 
 ###### Example
 
-```html
+```dojo
      <div id="gantt"></div>
     <script>
       $("#gantt").kendoGantt({

@@ -35,7 +35,7 @@ To overcome the interference of the device scrolling and the drag-and-drop:
 
 > Test the following code on a mobile device.
 
-```html
+```dojo
 <div id="example">
 
 	<div id="treelist"></div>

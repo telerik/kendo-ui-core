@@ -22,7 +22,7 @@ which also explains how to [change the auto-hide timeout on the fly]({% slug ove
 
 ###### Example
 
-```html
+```dojo
 <style>
 
   #appendto {

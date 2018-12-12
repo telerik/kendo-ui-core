@@ -12,7 +12,7 @@ The following example demonstrates how to get a reference to the built-in Kendo 
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
       $(function() {

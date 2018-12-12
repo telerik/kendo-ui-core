@@ -14,7 +14,7 @@ The following example demonstrates how to access the **Internet Sales Amount** b
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="pivotgrid"></div>
 

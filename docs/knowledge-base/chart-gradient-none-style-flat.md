@@ -45,7 +45,7 @@ If the Kendo UI Chart contains more than one series, use the [`seriesDefaults.ov
 
 The following example demonstrates how to render the bars in the Kendo UI Chart in a flat appearance.
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({

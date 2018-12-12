@@ -15,7 +15,7 @@ The example below demonstrates how to position a popup in the center of the brow
 
 ###### Example
 
-```html
+```dojo
     <button>Create and open popup</button>
      <div id="windowForAssign"></div>
      <script>

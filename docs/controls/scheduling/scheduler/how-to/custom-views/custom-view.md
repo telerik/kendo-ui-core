@@ -13,7 +13,7 @@ The following example demonstrates how to inherit some of the built-in views and
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
       var CustomAgenda = kendo.ui.AgendaView.extend({

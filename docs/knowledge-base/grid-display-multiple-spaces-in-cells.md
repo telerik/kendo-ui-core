@@ -30,7 +30,7 @@ When I enter a value with multiple spaces in the Grid, how can I display all spa
 
 The skipping of all spaces but one is due to the default HTML behavior&mdash;in HTML, additional spaces are trimmed. To display the text as is, specify a [`template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) for the Grid cell which will display the value in a [`pre`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) element.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

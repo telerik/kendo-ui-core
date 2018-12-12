@@ -15,7 +15,7 @@ The following example demonstrates how to customize the information displayed in
 
 ###### Example
 
-```html
+```dojo
   <div id="treelist"></div>
   <script>
     $(document).ready(function () {

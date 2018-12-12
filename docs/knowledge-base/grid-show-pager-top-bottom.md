@@ -30,7 +30,7 @@ How can I show the pager in the Grid both above and below the items?
 
 The following example demonstrates how you can duplicate and add the Pager above the Grid items.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     $(document).ready(function () {

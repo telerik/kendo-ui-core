@@ -32,7 +32,7 @@ How can I clear the selection on all Kendo UI Grid pages?
 1. Assign an empty object as the value of the `_selectedIds` property of the Grid.
 1. Invoke the [`clearSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection) method.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
 
 <div id="example">

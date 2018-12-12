@@ -33,7 +33,7 @@ How can I implement the parsing of two-digit dates that are greater than 2029?
 
 This behavior is controlled by the `twoDigitYearMax` property whose default value is 2029. As a result, 2029 is the maximum year that can be parsed. To parse years that are greater than 2029, change the property.
 
-```html
+```dojo
 <div class="demo-section k-content">
 
     <h4>Show e-mails from:</h4>

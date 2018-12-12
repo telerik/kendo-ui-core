@@ -49,7 +49,7 @@ Using CSS, you can add an icon to a [predefined dialog](https://docs.telerik.com
 
 The following contains the CSS implementation to append [FontAwesome icons](https://fontawesome.com/) to a Kendo UI Confirm.
 
-```html
+```dojo
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <style> 

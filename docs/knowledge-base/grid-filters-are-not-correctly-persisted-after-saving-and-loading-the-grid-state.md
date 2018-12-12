@@ -44,7 +44,7 @@ The `JSON.stringify()` method that is internally used by the `kendo.stringify()`
 
 Programmatically apply the time offset before the filter is set again.
 
-```html
+```dojo
  <body>
 
     <div id="example">

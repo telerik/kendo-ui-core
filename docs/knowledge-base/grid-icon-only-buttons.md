@@ -72,7 +72,7 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
     <style>
       .k-grid .k-grid-toolbar .k-grid-add,
       .k-grid tbody .k-grid-edit,

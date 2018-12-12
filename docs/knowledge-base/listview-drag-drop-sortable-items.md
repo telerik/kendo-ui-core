@@ -46,7 +46,7 @@ To fulfil the scenario, use the following suggested approach:
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
 <div style="padding:30px;">
   <table>
     <tr>

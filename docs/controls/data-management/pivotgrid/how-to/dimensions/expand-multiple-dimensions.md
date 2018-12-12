@@ -16,7 +16,7 @@ The following example demonstrates how to expand multiple column dimensions by u
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="configurator"></div>
     <div id="pivotgrid"></div>

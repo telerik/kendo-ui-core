@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior by using a stand
 
 ###### Example
 
-```html
+```dojo
   <!-- TreeView -->
   <div class="box-col" id="tree">
     <h4>Employees</h4>

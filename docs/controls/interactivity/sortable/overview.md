@@ -20,7 +20,7 @@ The example below demonstrates how to initialize Kendo UI Sortable by using jQue
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>Item1</li>
         <li>Item2</li>
@@ -50,7 +50,7 @@ The example below demonstrates how to build the Placeholder from the dragged ele
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -73,7 +73,7 @@ The example below demonstrates how to build a static Placeholder.
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -102,7 +102,7 @@ The example below demonstrates how to build the Hint from the dragged element.
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -124,7 +124,7 @@ The example below demonstrates how to build a static Hint.
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -144,7 +144,7 @@ The example below demonstrates how to disable the Hint.
 
 The Sortable widget can work without a visible hint. To disable the hint, set the `hint` option to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -186,7 +186,7 @@ The example below demonstrates how to grab the cursor on `hover`.
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -220,7 +220,7 @@ The example below demonstrates how to disable all items at runtime.
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -258,7 +258,7 @@ The example below demonstrates how to persist the order of items in local storag
 
 ###### Example
 
-```html
+```dojo
     <div id="sortable"></div>
 
     <button id="reset">Reset</button>
@@ -327,7 +327,7 @@ The `<input>` elements inside Sortable items cannot be focused because the items
 
 ###### Example
 
-```html
+```dojo
     <ul id="sortable">
         <li>ItemA1 <input type="text" /></li>
         <li>ItemA2 <input type="text" /></li>
@@ -347,7 +347,7 @@ A Sortable with radio buttons and a Hint cloned from the Sortable element will l
 
 ###### Example
 
-```html
+```dojo
  <ul id="sortable-basic">
       <li class="sortable"><input type="radio" name="foo" />Papercut <span>3:04</span></li>
       <li class="sortable"><input type="radio" name="foo" />One Step Closer <span>2:35</span></li>

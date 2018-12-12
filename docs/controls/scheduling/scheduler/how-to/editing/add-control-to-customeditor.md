@@ -12,7 +12,7 @@ The following example demonstrates how to add Kendo UI controls to a custom even
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
       $(function() {

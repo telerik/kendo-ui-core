@@ -12,7 +12,7 @@ The following example demonstrates how to include Google Web Fonts to the Kendo 
 
 ###### Example
 
-```html
+```dojo
 <textarea id="editor" rows="10" cols="30" style="width:740px;height:440px">
 		<p>
 			Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br />

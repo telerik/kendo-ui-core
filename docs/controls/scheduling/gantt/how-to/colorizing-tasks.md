@@ -11,7 +11,7 @@ The example below demonstrates how to colorize each task based on a condition in
 
 ###### Example
 
-```html
+```dojo
     <div id="gantt"></div>
 
     <script>

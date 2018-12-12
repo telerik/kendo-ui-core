@@ -39,7 +39,7 @@ To focus the table, add an event handler to the [`change`](/api/javascript/ui/tr
 
 ###### Example
 
-```html
+```dojo
 <div id="treeList"></div>
     <script>
      var treeList = $("#treeList").kendoTreeList({

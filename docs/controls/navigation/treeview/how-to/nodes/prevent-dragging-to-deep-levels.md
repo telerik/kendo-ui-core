@@ -13,7 +13,7 @@ The following example demonstrates how to handle the `drag` event to achieve thi
 
 ###### Example
 
-```html
+```dojo
     <div id="treeview"></div>
     <script>
     $("#treeview").kendoTreeView({

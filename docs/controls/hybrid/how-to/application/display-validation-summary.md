@@ -11,7 +11,7 @@ The example below demonstrates how to display a validation summary if the valida
 
 ###### Example
 
-```html
+```dojo
      <div id="home" data-role="view" data-title="Registration Form" data-init="onInit">
         <header data-role="header">
             <div data-role="navbar">

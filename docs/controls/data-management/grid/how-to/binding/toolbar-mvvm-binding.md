@@ -12,7 +12,7 @@ The following example demonstrates how to create a [custom MVVM binding](/framew
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
       <button data-bind="click: updateToolbar">Update toolbar</button>
       <div data-role="grid"

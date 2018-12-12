@@ -87,7 +87,7 @@ To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as
 
 **Figure 1: An editable Grid**
 
-![grid_is_editable](/images/webforms/grid_is_editable.png)
+![grid_is_editable](../../../images/webforms/grid_is_editable.png)
 
 ### Use Command Columns
 
@@ -154,7 +154,7 @@ Run the application now and notice that when you put the grid into edit mode you
 
 **Figure 2: An editable Grid with a model**
 
-![grid_is_editable_with_model](/images/webforms/grid_is_editable_with_model.png)
+![grid_is_editable_with_model](../../../images/webforms/grid_is_editable_with_model.png)
 
 If you want to tweak this validation message, change the model definition for the **LastName** so it looks like the one demonstrated in the example below.
 
@@ -260,7 +260,7 @@ You are expected to see an error in the Network requests. If you click into the 
 
 **Figure 3: A strange date format appearing in the Grid**
 
-![grid_bad_datetime](/images/webforms/grid_bad_datetime.png)
+![grid_bad_datetime](../../../images/webforms/grid_bad_datetime.png)
 
 This is because Dates are formatted for JavaScript and you need to get the date formatted correctly. To do so, add a `parameterMap` method to the `transport` on the DataSource. The `parameterMap` takes in two parameters: `options` and `operation`. `options` are the parameters as Kendo UI is about to try to send them. `operation` is `read`, `update`, `create`, or `destroy`. You must always return at least `options` out of this function when you specify it. In this case, check for the `update` operation. If the current operation is indeed an update, format the date and reset the parameter value on the options.
 
@@ -366,7 +366,7 @@ The example below demonstrates how to return an `Errors` property on error.
 <!--_-->
 Now modify the `schema` to map the `Errors` property of the response to the `Errors` field. When this field has a value, it will automatically raise the `error` event on the DataSource. Specify an action here for that as well.
 
-This demonstration is made for the sake of showing how to do things differently on the `update` and `delete` for accomplishing the same thing. The example below demonstrates how to map the `errors` field int he `schema`.  
+This demonstration is made for the sake of showing how to do things differently on the `update` and `delete` for accomplishing the same thing. The example below demonstrates how to map the `errors` field int he `schema`.
 
 ###### Example
 
@@ -403,7 +403,7 @@ In the above scenario, the error is thrown out to the screen. If you try to dele
 
 **Figure 4: A sample server error**
 
-![sample_error](/images/webforms/sample_error.png)
+![sample_error](../../../images/webforms/sample_error.png)
 
 > **Important**
 >

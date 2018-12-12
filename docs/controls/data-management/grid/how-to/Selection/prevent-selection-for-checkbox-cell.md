@@ -11,7 +11,7 @@ The following example demonstrates how to prevent the cell-selection functionali
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $(function() {

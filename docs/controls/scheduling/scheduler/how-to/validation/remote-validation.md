@@ -12,7 +12,7 @@ The following example demonstrates how to use remote validation during event edi
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
   <div id="scheduler"></div>
 </div>

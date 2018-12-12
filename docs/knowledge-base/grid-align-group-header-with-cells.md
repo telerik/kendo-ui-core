@@ -49,7 +49,7 @@ To display the different aggregates in separate cells that are aligned with the 
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

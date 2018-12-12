@@ -18,7 +18,7 @@ The example below demonstrates how to display a loading indicator while the data
 
 ###### Example
 
-```html
+```dojo
     <div class="chart-wrap" style="position: relative;">
       <div id="chart"></div>
       <div class="chart-loading"></div>

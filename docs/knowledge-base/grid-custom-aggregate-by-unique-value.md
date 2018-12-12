@@ -28,7 +28,7 @@ How can I display the count of each unique value in the current view of the Grid
 1. Within the `dataBound` event of the Grid, go through the `view` or the `data` collection for the custom calculations.
 1. Manually populate the element in the template.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
     <script>

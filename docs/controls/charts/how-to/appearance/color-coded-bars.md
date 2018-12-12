@@ -15,7 +15,7 @@ This behavior is usually achieved through stacked bar series. However, if you ne
 
 **Figure 1: Color ranges in a Kendo UI Chart**
 
-![Color-coded ranges](/controls/charts/how-to/images/color-coded-bars.png)
+![Color-coded ranges](../images/color-coded-bars.png)
 
 To implement this functionality, define a [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) that draws the ranges dynamically. Note that the visual remains in use until the next [`render` event](/api/javascript/dataviz/ui/chart/events/render). This allows you to update it asynchronously or in real-time.
 
@@ -23,7 +23,7 @@ The example below demonstrates how to implement color-coded ranges (stripes) in 
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" />
     <script>
       var WIDTH = 5;

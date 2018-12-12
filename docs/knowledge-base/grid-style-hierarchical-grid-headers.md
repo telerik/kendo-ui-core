@@ -51,7 +51,7 @@ Use the following CSS rules to style a simple four-level Kendo UI Grid. These r
 </style>
 ```
 
-```html
+```dojo
 <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

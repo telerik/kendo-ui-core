@@ -46,7 +46,7 @@ The following example demonstrates a template that mimics the default TreeView t
 
 The following example demonstrates the jQuery and MVC initialization.
 
-```html
+```dojo
 <form>
 	<input type="submit" value="post me" />
 	<div id="treeview"></div>

@@ -40,7 +40,7 @@ How can I hide the default Upload button and upload the selected file by clickin
 1. Hide the default **Clear** and **Upload** buttons of the Upload by using CSS.
 1. Allow the trigger of the upload by clicking the default button by using jQuery in the click handler of the custom button.  
 
-```html
+```dojo
 	<input type="file" name="files" id="files"/>
 	<input type="button" value="Upload Selected Files" class="k-button" onclick="uploadSelected()"  />
 	<script>

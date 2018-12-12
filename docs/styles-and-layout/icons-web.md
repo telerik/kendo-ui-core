@@ -17,7 +17,7 @@ The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
-```html
+```dojo
     <span class="k-icon k-i-copy"></span>
 ```
 
@@ -25,7 +25,7 @@ The following example demonstrates how to add a font icon to a Kendo UI Button.
 
 ###### Example
 
-```html
+```dojo
     <a class="k-button" href="#">
         <span class="k-icon k-i-copy"></span> Copy
     </a>
@@ -54,7 +54,7 @@ To use the Kendo UI font icons:
  1. [Load]({% slug themesandappearnce_kendoui_desktopwidgets %}) a Kendo UI theme into your project.
  2. Assign a `k-icon` CSS class followed by a predefined class from the [list of font icons](#list-of-font-icons) to an HTML tag. For example, the `<span>` element as demonstrated in the following example.
 
-```html
+```dojo
  <span class="k-icon k-i-calendar"></span>
 ```
 
@@ -62,7 +62,7 @@ To use the Kendo UI font icons:
 
 Though the web icon font comes with a [set of predefined CSS classes](#toc-list-of-font-icons), you might need to use the icons with a custom CSS class name. To achieve this, set a `:before` pseudo content value for the relevant icon.
 
-```html
+```dojo
 <span class="k-icon my-custom-icon-class"></span>
 
 <style>
@@ -86,7 +86,7 @@ The Kendo UI font icons are designed on a 16px grid base. To achieve a pixel-per
 
 You can scale icons by just setting the `font-size` configuration option.
 
-```html
+```dojo
 <span class="k-icon k-i-gear"></span>
 <span class="k-icon k-i-gear k-icon-32"></span>
 <span class="k-icon k-i-gear k-icon-48"></span>
@@ -111,7 +111,7 @@ You can scale icons by just setting the `font-size` configuration option.
 
 To set the icon color, use the `color` CSS property.
 
-```html
+```dojo
 <span class="k-icon k-i-gear" style="color: blue;"></span>
 <span class="k-icon k-i-gear colored-icon"></span>
 
@@ -126,7 +126,7 @@ To set the icon color, use the `color` CSS property.
 
 To better accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
 
-```html
+```dojo
 <span class="k-icon k-i-pencil"></span>
 <span class="k-icon k-i-pencil k-flip-h"></span>
 <span class="k-icon k-i-pencil k-flip-v"></span>

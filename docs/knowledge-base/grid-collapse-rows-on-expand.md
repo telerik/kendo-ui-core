@@ -32,7 +32,7 @@ How can I force the other rows to collapse when I expand a row in the Kendo UI G
 1. Handle the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event of the Grid.
 1. In the event handler, use the [`collapseRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/collapserow) method for every master row.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

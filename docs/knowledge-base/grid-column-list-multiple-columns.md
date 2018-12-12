@@ -30,7 +30,7 @@ How can I split the column menu into multiple columns in a Grid that renders man
 
 Use custom CSS rules.
 
-```html
+```dojo
 <style>
     ul ul {
         width: 400px;

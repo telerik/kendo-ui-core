@@ -12,7 +12,7 @@ The following example demonstrates how to select the whole NumericTextBox input 
 
 ###### Example
 
-```html
+```dojo
 <input id="numeric" type="number" value="17" min="0" max="100" step="1" />
 <script type="text/javascript">
 $(function () {

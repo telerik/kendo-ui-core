@@ -53,7 +53,7 @@ To hide the group footer:
     groupFooterTemplate: "<div #if(count===1){#class='Count1Class'#}#>Count: #=count#</div>"
     ```
 
-    ```html
+    ```dojo
     <div id="example">
         <div id="grid"></div>
         <script>

@@ -16,7 +16,7 @@ The following example demonstrates how to adjust the row heights in a Kendo UI G
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid k-scope-field="grid" options="mainGridOptions"></kendo-grid>

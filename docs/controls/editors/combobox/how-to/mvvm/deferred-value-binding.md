@@ -12,7 +12,7 @@ The following example demonstrates how to configure a deferred value binding in 
 
 ###### Example
 
-```html
+```dojo
   <h2>Combobox Server Side Filter</h2>
 
 	<input id="productID" name="productID"

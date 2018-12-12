@@ -31,7 +31,7 @@ How can I include the hidden columns in the exported PDF file of the Grid?
 1. Show the hidden columns by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) method within the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler.
 1. When the PDF export is done, hide the columns that are not intended to be visible by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method.
 
-```html
+```dojo
       <div id="example">
       <div id="grid"></div>
       <script type="x/kendo-template" id="page-template">

@@ -200,7 +200,7 @@ It is not recommended to use an [`ObservableArray`](/api/javascript/data/observa
 
 ###### Example
 
-```html
+```dojo
     <style>html { font: 12px sans-serif; }</style>
 
     <div id="grid"></div>

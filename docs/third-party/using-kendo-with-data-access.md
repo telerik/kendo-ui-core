@@ -15,7 +15,7 @@ In this article you will learn how to leverage [Telerik Data Access](http://www.
 
 To get started, create a new Telerik MVC Web Application.
 
-![New Web Project](/images/oa1.png)
+![New Web Project](../images/oa1.png)
 
 When asked about the Data Access approach, select **Skip Creating a Telerik Data Access Model Library Project**. This is going to create an empty Telerik UI for an MVC project.
 
@@ -27,19 +27,19 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 >
 > If you do not have Telerik Data Access installed, you are able to get the trial edition on the [Free Trials page](http://www.telerik.com/download-trial-file.aspx?pid=638).
 
-![Build The Model](/images/oa3.png)
+![Build The Model](../images/oa3.png)
 
 **Step 2** On the window that opens next, select **Populate from database**. Click **Next**.
 
-![Populate From Data](/images/oa4.png)
+![Populate From Data](../images/oa4.png)
 
 **Step 3** Set up a connection to NorthwindOA, installed with Data Access, by choosing the option from the drop-down list. Click **Next**.
 
-![Connect To NorthwindOA](/images/oa5.png)
+![Connect To NorthwindOA](../images/oa5.png)
 
 **Step 4** Include all tables from the database in the data model by ticking the **Tables** check box.
 
-![Include All Tables](/images/oa6.png)
+![Include All Tables](../images/oa6.png)
 
 **Step 5** Click **Finish**. The data model is now ready to be used. Next, you need to expose this data model through a service layer.
 
@@ -47,19 +47,19 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 
 **Step 1** Perform a build on the application. Right-click the `.rlinq` file in **Solution Explorer**. Select **Add Telerik Data Access Service** so that the domain service wizard fires up.
 
-![Generate OpenAccess Domain Model](/images/oa7.png)
+![Generate OpenAccess Domain Model](../images/oa7.png)
 
 **Step 2** From the drop-down list of the wizard select **EntitiesModel**. Click **Next**.
 
-![Select Northwind OA](/images/oa9.png)
+![Select Northwind OA](../images/oa9.png)
 
 **Step 3** The screen that loads next allows you to configure the service that is going to be created. Select **WCF Service - OData v3** and click **Next**.
 
-![Configure The Service](/images/oa10.png)
+![Configure The Service](../images/oa10.png)
 
 **Step 4** On the next screen you are able to change the name of the service and select which tables to include. Click **Finish** to create your service.
 
-![Configure The entitites](/images/oa11.png)
+![Configure The entitites](../images/oa11.png)
 
 ## Connect oData to the Grid
 
@@ -134,7 +134,7 @@ The example below demonstrates some sample code you need.
 
 **Step 3** Run the application. You are expected to see the Grid below as a result.
 
-![Grid](/images/oa12.png)
+![Grid](../images/oa12.png)
 
 ## See Also
 

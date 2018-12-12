@@ -34,7 +34,7 @@ The default pop-up contains an HSV (Hue, Saturation, Value) selector (see **Figu
 
 **Figure 1: HSV picker**
 
-![HSV picker](/controls/editors/colorpicker/hsv-dropdown.png)
+![HSV picker](hsv-dropdown.png)
 
 ### Simple Color Picker
 
@@ -52,7 +52,7 @@ The example renders a basic ColorPicker that contains 20 colors.
 
 **Figure 2: Simple color picker with a basic pallette**
 
-![Simple picker with basic palette](/controls/editors/colorpicker/simple-basic.png)
+![Simple picker with basic palette](simple-basic.png)
 
 ### Web-Safe Color Palette
 
@@ -70,7 +70,7 @@ The example renders the 216-color "web-safe" palette (see **Figure 3**).
 
 **Figure 3: Simple color picker with a web-safe pallette**
 
-![Simple picker with web-safe palette](/controls/editors/colorpicker/simple-web.png)
+![Simple picker with web-safe palette](simple-web.png)
 
 ### Custom Colors
 

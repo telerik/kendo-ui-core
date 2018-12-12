@@ -13,7 +13,7 @@ The following example represents the AngularJS version of [this demo](http://dem
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
         <kendo-grid k-scope-field="grid" options="mainGridOptions" k-rebind="language"></kendo-grid>

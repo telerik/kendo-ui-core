@@ -27,7 +27,7 @@ How can I allow the user to draw or sign their name on a Canvas, save it as an S
 
 Allow the user to draw on the screen (Canvas) and export the drawing as an SVG file by using the [Kendo Drawing API](https://docs.telerik.com/kendo-ui/framework/drawing/overview) library.
 
-```html
+```dojo
 <div id="surface-container">
   <div id="surface" style="width: 500px; height: 500px;border: 1px solid black;"></div>
 </div>

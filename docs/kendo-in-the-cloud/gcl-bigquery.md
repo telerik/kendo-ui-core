@@ -25,19 +25,19 @@ To create AOth 2.0 credentials and add authorized JavaScript origin:
 
     **Figure 1: Navigating to the Credentials section**
 
-    ![Add new user](/kendo-in-the-cloud/images/gcl-credentials.png)
+    ![Add new user](images/gcl-credentials.png)
 
 1. Click the **Create Credentials** button and select **OAuth client ID**.
 
     **Figure 2: Creating OAuth client ID**
 
-    ![create OAuth client ID](/kendo-in-the-cloud/images/gcl-auth.png)
+    ![create OAuth client ID](images/gcl-auth.png)
 
 1. Select **Web Application** and add **Authorized JavaScript origins**. For the purposes of this sample project, add `runner.telerik.io` as authorized origin. `runner.telerik.io` is the domain of https://dojo.telerik.com/.
 
     **Figure 3: Adding runner.telerik.io as authorized origin**
 
-    ![create OAuth client ID](/kendo-in-the-cloud/images/gcl-add-telerik.png)
+    ![create OAuth client ID](images/gcl-add-telerik.png)
 
 ## Creating New DataSet and Table in BigQuery
 
@@ -45,11 +45,11 @@ For more information on how to create new DataSets and tables, refer to the arti
 
 **Figure 4: Schema of the Products Table in the KendoDS DataSet**
 
-    ![products table](/kendo-in-the-cloud/images/gcl-table-schema.png)
+    ![products table](images/gcl-table-schema.png)
 
 **Figure 5: Data of the Products Table in the KendoDS DataSet**
 
-    ![products table](/kendo-in-the-cloud/images/gcl-table-data.png)
+    ![products table](images/gcl-table-data.png)
 
 ## Configuring the Grid to Consume and Manipulate Available BigQuery Data
 

@@ -15,7 +15,7 @@ The following example demonstrates how to format cell values of the Grid while e
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     $("#grid").kendoGrid({
@@ -45,7 +45,7 @@ The example below demonstrates how to set a custom format for `date` values.
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
   $("#grid").kendoGrid({

@@ -39,7 +39,7 @@ How to check and uncheck checkboxes in a TreeView on selecting a node?
 
 In the handler of the TreeView `select` event, find the checkbox of the selected node and check or uncheck it accordingly by calling the `jQuery prop()` method.
 
-```html
+```dojo
 	<div id="treeview"></div>
     <script>
         $("#treeview").kendoTreeView({

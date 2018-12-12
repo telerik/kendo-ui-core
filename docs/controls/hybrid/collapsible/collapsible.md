@@ -50,7 +50,7 @@ To create some scrollable collapsible content, wrap the content in a `div` eleme
 
 ###### Example
 
-```html
+```dojo
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible">
             <h2>Header</h2>
@@ -90,7 +90,7 @@ Collapsible widgets can be nested inside each other, as demonstrated in the exam
 
 ###### Example
 
-```html
+```dojo
     <div id="home" data-role="view" data-init="onInit">
         <div id="collapsible" data-role="collapsible" data-animation="false" data-collapsed="false">
             <h2>Header</h2>

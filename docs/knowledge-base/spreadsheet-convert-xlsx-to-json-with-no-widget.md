@@ -27,7 +27,7 @@ How can I convert an XLSX file to JSON without initializing a Spreadsheet widget
 
 Use a `kendo.spreadsheet.Workbook` object.
 
-```html
+```dojo
 <div>
   1. Click to load an .xlsx file
   <input type="file" name="files" id="fileForUpload" accept=".xlsx" />

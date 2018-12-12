@@ -32,7 +32,7 @@ How can I limit the number of columns in the Grid and move the **Edit** and **Up
 1. Define a toolbar template that will hold all custom buttons used for editing.
 1. Handle the click event for the buttons to enter/exit edit mode.
 
-````html
+````dojo
 <style>
     .updateCancelContainer {
         display: none;

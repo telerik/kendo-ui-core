@@ -12,7 +12,7 @@ The following example demonstrates how to configure a [Chat `agent` class]({% sl
 
 In this case, the `postMessage` method of the agent class implements the logic that will be executed on user interaction. When the `textRequest()` promise of the DialogFlowClient is resolved, the `onResponse()` method of the agent is executed. It then passes the received data to the `renderMessages()` method that renders the response in the Chat widget.
 
-```html
+```dojo
 <div id="chat"></div>
 
 <!-- Load Promise Polyfill. Required by the DialogFlow Client API.-->

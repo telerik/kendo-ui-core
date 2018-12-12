@@ -68,7 +68,7 @@ The example below demonstrates how to bind the Scheduler to local dates when the
 
 ###### Example
 
-````html
+````dojo
     <div id="scheduler"></div>
     <script>
     $(function() {
@@ -103,7 +103,7 @@ The example below demonstrates how to bind the Scheduler to UTC dates when the `
 
 ###### Example
 
-````html
+````dojo
     <div id="scheduler"></div>
     <script>
     $(function() {

@@ -11,7 +11,7 @@ The following example demonstrates how to render multiple TreeViews by using HTM
 
 ###### Example
 
-```html
+```dojo
   <div id="customfield">
     <div>
       <table border="1" cellpadding="1" cellspacing="1" style="width: 350px; margin:5px; font-size:12px">

@@ -41,7 +41,7 @@ The example demonstrates how to export additional information to Excel by implem
 1. Insert a new row of cells which contains the custom headers at position `0`.
 1. Style the new headers with a new background color, font size, horizontal alignment, and row height.
 
-```html
+```dojo
 
     <div id="example">
           <div id="grid"></div>

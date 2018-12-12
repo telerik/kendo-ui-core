@@ -11,7 +11,7 @@ The following example demonstrates how to hide the selected files for upload fro
 
 ###### Example
 
-```html
+```dojo
   <style>
      #wrapper {
        display: inline-block;

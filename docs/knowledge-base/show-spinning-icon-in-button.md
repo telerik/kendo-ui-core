@@ -28,7 +28,7 @@ How can I add a spinning icon to the Kendo UI Button?
 1. Define a spinning keyframe.
 1. Apply the animation on the `.k-icon` class.
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-content">
         <button id="primaryTextButton" class="k-primary">Primary Button</button>

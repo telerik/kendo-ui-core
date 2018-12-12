@@ -31,7 +31,7 @@ In order to get a property from the model of a specific node, we take advantage 
 
 The following sample demonstrates the approach described above by displaying an alert with the DataItem's ID on the selection of a node:
 
-```html
+```dojo
 <div class="demo-section k-content">
   <div id="treeview"></div>
 </div>

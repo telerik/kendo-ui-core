@@ -20,7 +20,7 @@ A Kendo UI Upload in a synchronous mode behaves like a regular file input. The s
 
 **Figure 1: An Upload in the synchronous mode**
 
-![](/controls/editors/upload/upload-sync.png)
+![Upload Sync](upload-sync.png)
 
 The Upload initializes from an existing file input that is placed in a form. The array syntax in the input name is used to hint the Upload handler to treat the photos as an array.
 
@@ -46,7 +46,7 @@ In this mode, the Kendo UI Upload requires dedicated server handlers to store an
 
 **Figure 2: An Upload in the asynchronous mode**
 
-![](/controls/editors/upload/upload-async.png)
+![Upload Async](upload-async.png)
 
 The asynchronous mode is implemented using the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API). The upload will gracefully degrade and continue to function in legacy browsers using a hidden `iframe`.
 

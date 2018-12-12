@@ -39,7 +39,7 @@ Add the trailing zeros programmatically both on [`spin`](/api/javascript/ui/nume
 
 ###### Example
 
-```html
+```dojo
 	<input id="numerictextbox" />
 	    <script>
 	      var numeric = $("#numerictextbox").kendoNumericTextBox({

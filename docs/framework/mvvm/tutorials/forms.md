@@ -146,7 +146,7 @@ Here is the finished product. Kendo UI bindings are keeping the UI and the model
 
 ###### Example
 
-```html
+```dojo
 <div class="form">       
   <dl>
     <dt>Type</dt>

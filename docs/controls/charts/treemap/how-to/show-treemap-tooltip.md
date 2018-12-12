@@ -11,7 +11,7 @@ The example below demonstrates how to use the Kendo UI Tooltip for the Kendo UI 
 
 ###### Example
 
-```html
+```dojo
     <div id="treemap">
     </div>
 

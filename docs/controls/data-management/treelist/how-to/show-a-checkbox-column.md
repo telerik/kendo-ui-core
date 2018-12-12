@@ -11,7 +11,7 @@ The following example demonstrates how to show a checkbox column bound to the it
 
 ###### Example
 
-```html
+```dojo
   <div id="treelist"></div>
 
   <script>

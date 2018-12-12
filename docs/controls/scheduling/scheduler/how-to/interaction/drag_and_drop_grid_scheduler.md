@@ -12,7 +12,7 @@ The following example demonstrates how to implement the drag-and-drop functional
 
 ###### Example
 
-```html
+```dojo
 
    <div style="width: 50%; margin-left: auto; margin-right: auto;">
     <div id="scheduler"></div>

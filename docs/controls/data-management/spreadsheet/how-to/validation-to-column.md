@@ -13,7 +13,7 @@ To apply the validation rule to the specific range, it uses the [`range.validati
 
 ###### Example
 
-```html
+```dojo
 <div id="spreadsheet" style="width: 100%;"></div>
 <script>
     $(function() {

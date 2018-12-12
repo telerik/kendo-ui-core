@@ -12,7 +12,7 @@ The following example demonstrates how to implement the drag-and-drop functional
 
 ###### Example
 
-```html
+```dojo
    <div id="scheduler1"></div>
     <div id="scheduler2"></div>
     <div class="dragZone">

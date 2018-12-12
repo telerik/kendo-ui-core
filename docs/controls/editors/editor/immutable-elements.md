@@ -18,7 +18,7 @@ To define the immutable elements in the content area, set the [`contenteditable`
 
 ###### Example
 
-```html
+```dojo
     <textarea id="editor">
         &lt;p&gt;A simple paragraph&lt;/p&gt;
         &lt;p contenteditable=&quot;false&quot;&gt;This paragraph cannot be edited&lt;/p&gt;
@@ -41,7 +41,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
     ###### Example
 
-    ```html
+    ```dojo
         <textarea id="editor">
             &lt;p&gt;A simple paragraph&lt;/p&gt;
             &lt;p contenteditable=&quot;false&quot;&gt;This paragraph cannot be edited&lt;/p&gt;
@@ -64,7 +64,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
     ###### Example
 
-    ```html
+    ```dojo
         <textarea id="editor">
             &lt;p&gt;A simple paragraph&lt;/p&gt;
             &lt;p contenteditable=&quot;false&quot;&gt;This paragraph cannot be edited&lt;/p&gt;
@@ -87,7 +87,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
     ###### Example
 
-    ```html
+    ```dojo
         <textarea id="editor">
             &lt;p&gt;A simple paragraph&lt;/p&gt;
             &lt;p contenteditable=&quot;false&quot;&gt;This paragraph cannot be edited&lt;/p&gt;
@@ -117,7 +117,7 @@ The following example demonstrates how to use the `immutables.serialization` and
 
 ###### Example
 
-```html
+```dojo
     <textarea id="editor">
         &lt;p&gt;A simple paragraph&lt;/p&gt;
         &lt;p contenteditable=&quot;false&quot; style=&quot;text-align:left;&quot; &gt;This paragraph cannot be edited&lt;/p&gt;
@@ -146,7 +146,7 @@ If you use the [inline mode]({% slug overview_kendoui_editor_widget %}#inline-mo
 
 ###### Example
 
-```html
+```dojo
     <style>
     .k-editor [contenteditable='false']{
         opacity: 0.5;

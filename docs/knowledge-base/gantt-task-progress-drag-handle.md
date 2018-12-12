@@ -41,7 +41,7 @@ For the full implementation of the approach, refer to [this Dojo example](http:/
 
 1. Show the task progress by adding a `div` with the `progress` class in the template.  
 
-    ```html
+    ```dojo
     	<script id="task-template" type="text/x-kendo-template">
     		# if (resources[0]) { #
     		<div class="template" style="background-color: #= resources[0].color #;">
@@ -66,7 +66,7 @@ For the full implementation of the approach, refer to [this Dojo example](http:/
 
 2. In the `dataBound` event handler of the Gantt, append a `div` with the `k-task-draghandle` class to the element which wraps the task.
 
-    ```html
+    ```dojo
     	<script>
     		var handleIsAppended = false;
 

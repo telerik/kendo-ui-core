@@ -30,7 +30,7 @@ How can I persist expanded rows after grid refresh?
 
 A possible solution is to save the expanded rows in the [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) of the browser. Within the [detailExpand](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler add the expanded row to the `localStorage` and then remove it within the [detailCollapse](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailcollapse) event handler. Finally, when the [dataBound](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event is fired, expand all rows saved to the `localStorage` using the [expandRow](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandrow) method.
 
-```html
+```dojo
   <div id="example">
       <div id="grid"></div>
       <a class='k-button' id='read'>Read</a>

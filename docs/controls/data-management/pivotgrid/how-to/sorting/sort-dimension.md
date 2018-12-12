@@ -12,7 +12,7 @@ The following example demonstrates how use data source [`sort`](/api/javascript/
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="pivotgrid"></div>
 

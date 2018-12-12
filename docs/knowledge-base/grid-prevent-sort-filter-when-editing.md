@@ -27,7 +27,7 @@ How can I disable sorting and filtering for a Grid with inline editing while the
 
 Handle the `mousedown` event for the Grid header. In the handler, check if an edited Grid row exists and cancel the action if necessary.
 
-````html
+````dojo
 <div id="grid"></div>
 
 <script>

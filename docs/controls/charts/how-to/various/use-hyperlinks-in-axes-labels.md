@@ -14,7 +14,7 @@ The example below demonstrates how to achieve this behavior.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       var data = [ {

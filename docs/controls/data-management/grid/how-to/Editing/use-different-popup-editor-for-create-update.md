@@ -11,7 +11,7 @@ The following example demonstrates how to use different popup editors in a Grid 
 
 ###### Example
 
-```html
+```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="grid"></div>
     <script>

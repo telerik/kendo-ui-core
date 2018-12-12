@@ -12,7 +12,7 @@ The following example demonstrates how to disable a cascading child Kendo UI Com
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>View Order Details</h4>

@@ -33,7 +33,7 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, save the column in a global variable.
 1. In the [`columnReorder`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnreorder) event handler, use the [`reorderColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/reordercolumn) method to position the column in the desired spot.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
 	var nonReordableColumn;

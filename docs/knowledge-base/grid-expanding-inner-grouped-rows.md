@@ -34,7 +34,7 @@ Programmatically [expand](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
 
 The following example demonstrates how to implement the suggested approach&mdash;manually collapse all subgroups and then the main group to see how the subgroups programmatically expand once the main group gets expanded too.
 
-```html
+```dojo
 <div id="example">
       <div id="grid"></div>
       <script>

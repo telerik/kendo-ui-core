@@ -354,7 +354,7 @@ Kendo UI MVVM automatically uses strongly-typed `value` binding based on the `ty
 
 ###### Example
 
-```html
+```dojo
     <div id="view">
         <input type="number" data-bind="value: Quantity"/>
         <input type="date" data-bind="value: ArrivalDate"/>
@@ -377,7 +377,7 @@ Explicitly specifying the `data-type` is also supported via the `data-type` attr
 
 ###### Example
 
-```html
+```dojo
     <div id="view">
         <input type="text" data-type="number" data-bind="value: Quantity"/>
         <input type="date" data-type="text" data-bind="value: ArrivalDate"/>

@@ -40,7 +40,7 @@ How can I close a Kendo UI Dialog by pressing the `Enter` key?
 1. If the Dialog is open, in the handler check attach a `keypress` handler to the document.
 1. Call its `close` method.
 
-```html
+```dojo
 	<script>
 	   $(document).ready(function (e) {
 			$(document).keypress(function (e) {

@@ -33,7 +33,7 @@ How can I implement custom UI for editing the Diagram shapes?
 
 The following example demonstrates how to define a `shapeTemplate` to display a DropDownList and a ColorPicker when editing the shape values of the Diagram.
 
-```html
+```dojo
         <div id="diagram" style="height:600px;"></div>
 
         <script id="popup-editor" type="text/x-kendo-template">

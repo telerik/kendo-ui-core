@@ -201,13 +201,9 @@ var RGB = BaseColor.extend({
                 case b: h = (r - g) / d + 4; break;
                 default: break;
             }
-
-            h *= 60;
-            s *= 100;
-            l *= 100;
         }
 
-        return new HSL(h, s, l, this.a);
+        return new HSL(h * 60, s * 100, l * 100, this.a);
     },
 
     toBytes: function() {
@@ -314,18 +310,14 @@ var HSL = BaseColor.extend({
 
     toRGB: function() {
         var ref = this;
-        var h = ref.h;
-        var s = ref.s;
-        var l = ref.l;
+        var h = ref.h / 360;
+        var s = ref.s / 100;
+        var l = ref.l / 100;
         var r, g, b;
 
         if (s === 0) {
             r = g = b = l; // achromatic
         } else {
-            h /= 360;
-            s /= 100;
-            l /= 100;
-
             var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
             var p = 2 * l - q;
             r = hue2rgb(p, q, h + 1 / 3);

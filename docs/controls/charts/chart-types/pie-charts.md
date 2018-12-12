@@ -53,7 +53,7 @@ To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Addition
 
 **Figure 1: A sample Pie Chart**
 
-![Pie Chart](/controls/charts/chart-types/chart-pie.png)
+![Pie Chart](chart-pie.png)
 
 ## Configuration
 
@@ -83,15 +83,15 @@ The figure below demonstrate the usage of each of these options.
 
 **Figure 2: A Pie Chart with the `roundedBevel` overlay applied**
 
-![Pie Chart with roundedBevel overlay](/controls/charts/chart-types/chart-pie-overlay-roundbevel.png)
+![Pie Chart with roundedBevel overlay](chart-pie-overlay-roundbevel.png)
 
 **Figure 3: A Pie Chart with the `sharpBevel` overlay applied**
 
-![Pie Chart with sharpBevel overlay](/controls/charts/chart-types/chart-pie-overlay-sharpbevel.png)
+![Pie Chart with sharpBevel overlay](chart-pie-overlay-sharpbevel.png)
 
 **Figure 4: A Pie Chart with no overlay**
 
-![Pie Chart with no overlay](/controls/charts/chart-types/chart-pie-overlay-none.png)
+![Pie Chart with no overlay](chart-pie-overlay-none.png)
 
 ## See Also
 

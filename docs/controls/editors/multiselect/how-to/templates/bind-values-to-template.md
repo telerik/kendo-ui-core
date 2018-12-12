@@ -12,7 +12,7 @@ The following example demonstrates how to bind the Kendo UI MultiSelect value to
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div class="demo-section k-header">
         <div class="box-col" data-bind="visible: isPrimitive">

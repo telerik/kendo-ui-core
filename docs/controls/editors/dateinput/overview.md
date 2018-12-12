@@ -18,7 +18,7 @@ The DateInput provides separate sections for days, months, years, hours, and min
 
 To initialize the DateInput, use the following example.
 
-```html
+```dojo
     <input id="dateInput" />
 
     <script>
@@ -42,7 +42,7 @@ The following example demonstrates how to create a non-editable DateInput with a
 
 ###### Example
 
-```html
+```dojo
     <input id="dateInput" />
 
     <script>
@@ -72,7 +72,7 @@ The following example demonstrates how to integrate the DateInput with the DateP
 
 ###### Example
 
-```html
+```dojo
     <input id="datepicker" />
 
     <script>
@@ -88,7 +88,7 @@ The DateInput enables you to modify the text that is displayed in the placeholde
 
 ###### Example
 
-```html
+```dojo
     <input id="dateinput" />
 
     <script>

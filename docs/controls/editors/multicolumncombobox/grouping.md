@@ -18,7 +18,7 @@ To enable the grouping functionality in a MultiColumnComboBox, use the remote tr
 
 ###### Example
 
-```html
+```dojo
 <div class="demo-section k-header">
     <h4>Customers</h4>
     <input id="customers" style="width: 400px" />
@@ -66,7 +66,7 @@ The following example demonstrates how to define a custom group template.
 
 ###### Example
 
-```html
+```dojo
 <div class="demo-section k-header">
     <h4>Customers</h4>
     <input id="customers" style="width: 400px" />

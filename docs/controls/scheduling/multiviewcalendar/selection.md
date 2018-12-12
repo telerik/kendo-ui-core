@@ -16,7 +16,7 @@ The following example demonstrates how to implement the multiple-view selection 
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar({
@@ -31,7 +31,7 @@ The following example demonstrates how to implement the range selection mode in 
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar({

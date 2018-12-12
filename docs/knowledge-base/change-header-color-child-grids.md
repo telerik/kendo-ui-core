@@ -31,7 +31,7 @@ How can I distinguish between the child grids of a master Kendo UI Grid by setti
 
 Conditionally change the background color of the header cells in the `dataBound` event handler of every child grid.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

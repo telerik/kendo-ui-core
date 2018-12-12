@@ -39,7 +39,7 @@ How can I hide the unselected items in the filter popup of the Spreadsheet?
 1. Add the `click` handler to the **Arrow** button.
 1. Find the unchecked checkboxes and hide them.
 
-```html
+```dojo
 <div id="spreadsheet" style="width: 100%"></div>
 <script>
     $(function() {

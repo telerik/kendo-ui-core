@@ -12,7 +12,7 @@ The following example demonstrates how to extract Kendo UI Scheduler events to a
 
 ###### Example
 
-```html
+```dojo
     <script src="https://rawgit.com/nwcell/ics.js/master/ics.js"></script>
     <div id="scheduler"></div>
     <br />

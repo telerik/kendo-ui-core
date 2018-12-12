@@ -12,7 +12,7 @@ The following example demonstrates how to update an MVVM-bound model on load in 
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
 

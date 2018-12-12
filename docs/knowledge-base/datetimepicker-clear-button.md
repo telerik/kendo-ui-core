@@ -32,7 +32,7 @@ How can I add a **Clear** button to the DateTimePicker?
 1. Handle the [`click`](https://api.jquery.com/click/) event of the `span`.
 1. Use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/value) method to set `value` to `null`.
 
-```html
+```dojo
 <style>
     .k-datetimepicker {
         width: 50%;

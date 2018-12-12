@@ -39,7 +39,7 @@ How can I display a table inside a DropDownList?
 
 Use a template for each row of the table and utilize the `headerTemplate` to customize the header of the embedded Grid.
 
-```html
+```dojo
 	<input id="dropdownlist" />
 
 	<script id="template" type="text/x-kendo-template">

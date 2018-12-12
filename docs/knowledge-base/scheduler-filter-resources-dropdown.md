@@ -44,7 +44,7 @@ How can I filter the events by resources in the Scheduler with a Kendo UI ComboB
 
 For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/@nenchef/ipuzUN/2).
 
-```html
+```dojo
 <div id="example">
     <input type="text" id="comboBox" name="comboBox" />
     <br />

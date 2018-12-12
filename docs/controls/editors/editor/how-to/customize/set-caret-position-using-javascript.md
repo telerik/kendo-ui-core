@@ -16,7 +16,7 @@ The following example demonstrates how to use a position index&mdash;that is, it
 
 ###### Example
 
-```html
+```dojo
     <div id="example" style="margin: 2em;">
         <p><button id="setPosition" class="k-button">Click</button></p>
         <div id="editor">Some text to focus and edit.</div>
@@ -49,7 +49,7 @@ The following example demonstrates how to search for a string&mdash;that is, it 
 
 ###### Example
 
-```html
+```dojo
     <div id="example" style="margin: 2em;">
       <p><input id="stringToFocus" class="k-textbox" type="text" value="focus" /> <button id="setPosition" class="k-button">Click</button></p>
       <div id="editor" style="margin: 5em 0 0">

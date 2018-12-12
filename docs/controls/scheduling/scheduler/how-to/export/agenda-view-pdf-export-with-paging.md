@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this.
 
 ###### Example
 
-```html
+```dojo
     <script src="//kendo.cdn.telerik.com/2016.2.504/js/jszip.min.js"></script>
     <!-- Load Pako ZLIB library to enable PDF compression -->
     <script src="//kendo.cdn.telerik.com/2016.2.504/js/pako_deflate.min.js"></script>

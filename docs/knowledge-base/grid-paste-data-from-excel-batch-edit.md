@@ -75,7 +75,7 @@ How can I enable the copying of multiple rows from Excel and pasting them in the
 
 The following example demonstrates the full implementation of the approach.
 
-```html
+```dojo
      <div id="example">
       <p>Click the grid to edit it or right click to paste edit</p>
       <div id="grid"></div>

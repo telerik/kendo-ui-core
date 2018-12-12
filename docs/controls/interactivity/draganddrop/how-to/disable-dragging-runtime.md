@@ -19,7 +19,7 @@ The following example demonstrates how to accomplish this scenario.
 
 ###### Example
 
-```html
+```dojo
   <button id="btn">Enable/Disable</button>
   <div id="parent">
     <div class="draggable">Foo</div>

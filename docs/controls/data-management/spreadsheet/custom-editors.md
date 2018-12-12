@@ -32,7 +32,7 @@ The following example demonstrates how to set up a color-picking custom editor.
 
 ###### Example
 
-```html
+```dojo
   <div id="spreadsheet" style="width: 100%;"></div>
   <script>
     kendo.spreadsheet.registerEditor("color", function(){

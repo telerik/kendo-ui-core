@@ -28,7 +28,7 @@ How can I copy a TreeView node along with all its children when `loadOnDemand` i
 
 Asynchronously load the child nodes in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method of the node.
 
-```html
+```dojo
 <div id="content">
     <button id="cloneNode" class="k-button k-primary">Clone selected node and append it to the TreeView</button>
     <div id="treeview"></div>

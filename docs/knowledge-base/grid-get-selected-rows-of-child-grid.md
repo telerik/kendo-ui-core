@@ -32,7 +32,7 @@ How can I access the selected rows of a nested grid in my hierarchical Grid?
 2. In the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event handler, save the `Id` of the expanded child Grid.
 3. Use the saved `Id` to access the child Grid.
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
       <a class='k-button' onclick="printSelected()">Print in console selected items of child grid</a>

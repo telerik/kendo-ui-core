@@ -11,7 +11,7 @@ slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 
 ###### Example
 
-```html
+```dojo
     <style>
         html {
             font: 13px sans-serif;

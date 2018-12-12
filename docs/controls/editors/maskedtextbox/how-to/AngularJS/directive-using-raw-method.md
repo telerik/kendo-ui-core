@@ -12,7 +12,7 @@ The following example demonstrates how to implement [a custom AngularJS directiv
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div class="demo-section k-content" ng-controller="MyCtrl">
       <form>

@@ -32,7 +32,7 @@ How can I render Kendo UI Grid groups as collapsed by default?
 1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the Grid.
 1. Iterate through each group by calling [`collapseGroup`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/collapsegroup) for it.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

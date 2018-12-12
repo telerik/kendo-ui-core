@@ -11,7 +11,7 @@ The example below demonstrates how to apply source and template binding by using
 
 ###### Example
 
-```html
+```dojo
   <div data-bind="source: data" data-template="tmp"></div>
   <script id="tmp" type="text/x-kendo-template">
     <div>

@@ -13,7 +13,7 @@ To define the area, use a set of markers. You can use any list of locations. The
 
 ###### Example
 
-```html
+```dojo
 <button id="center">Center on markers</button>
 <div id="map"></div>
 <script>

@@ -25,7 +25,7 @@ For detailed information on Chart themes and transitions, refer to the article a
 
 **Figure 1: Chart structure**
 
-![Chart Structure](/controls/charts/chart-structure.png)
+![Chart Structure](../chart-structure.png)
 
 ### Title
 
@@ -48,7 +48,7 @@ Custom positioning is configured through the `offsetX` and `offsetY` options.
 
 **Figure 2: Custom legend position**
 
-![Custom legend position](/controls/charts/chart-legend-custom-position.png)
+![Custom legend position](../chart-legend-custom-position.png)
 
 You are able to exclude series from the legend by setting their `visibleInLegend` option to `false`.
 

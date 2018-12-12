@@ -13,7 +13,7 @@ As an alternative, default values can be defined using the `Observable.fn.set` m
 
 ###### Example
 
-```html
+```dojo
 <div id="form">
     <fieldset>
     <legend>WORKING:</legend>

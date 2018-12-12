@@ -12,7 +12,7 @@ The following example demonstrates how to localize a DatePicker in an AngularJS 
 
 ###### Example
 
-```html
+```dojo
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bower-angular-translate/2.0.1/angular-translate.min.js"></script>
     <script src="http://cdn.kendostatic.com/2014.2.903/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script src="http://cdn.kendostatic.com/2014.2.903/js/cultures/kendo.culture.en-US.min.js"></script>

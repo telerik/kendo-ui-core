@@ -52,7 +52,7 @@ The example below visualizes several data points.
 
 **Figure 1: A sample Bubble Chart**
 
- ![Bubble Chart](/controls/charts/chart-types/chart-bubble.png)
+ ![Bubble Chart](chart-bubble.png)
 
 ## See Also
 

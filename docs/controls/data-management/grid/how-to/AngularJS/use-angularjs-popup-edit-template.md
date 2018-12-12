@@ -13,7 +13,7 @@ The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-cha
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions"></kendo-grid>

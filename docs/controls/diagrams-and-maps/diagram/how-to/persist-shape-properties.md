@@ -15,7 +15,7 @@ The following example demonstrates how to use the session storage of the browser
 
 ###### Example
 
-```html
+```dojo
 
 <div id="diagram"></div>
   <script>

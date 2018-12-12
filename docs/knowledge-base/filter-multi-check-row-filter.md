@@ -58,7 +58,7 @@ Move the built-in menu to the filter row and, if not needed, hide the rest of th
 
 The following example demonstrates the complete implementation of the suggested approach.
 
-```html
+```dojo
     <style>
       body .k-button-icon, body .k-split-button-arrow {
         padding: 0;

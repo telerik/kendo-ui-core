@@ -32,7 +32,7 @@ How can I persist the hidden columns after setting the options of the Grid?
 1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event.
 1. In the `dataBound` event handler, based on the `columns.hidden` property, use the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method.
 
-```html
+```dojo
 <div id="example">
     <div class="box wide">
         <a href="#" class="k-button" id="save">Save State</a>

@@ -11,7 +11,7 @@ The following example demonstrates how to prevent editing for a record based on 
 
 ###### Example
 
-```html
+```dojo
     <h3>You are allowed to edit only products that are not discontinued</h3>
     <div id="grid"></div>
 

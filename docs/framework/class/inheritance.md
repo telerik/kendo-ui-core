@@ -41,7 +41,7 @@ This creates a new Person object. Now add some properties to that person object,
 
 **Figure 1: Create a new object**
 
-![Capture](/images/inheritance/8c23-capture.png)
+![Capture](../../images/inheritance/8c23-capture.png)
 
 ### Add Constructors
 
@@ -69,7 +69,7 @@ You can also add a constructor for this object by including an `init` method. Yo
 
 **Figure 2: Set the name of the new person**
 
-![nh5](/images/inheritance/8c23-nh5.png)
+![nh5](../../images/inheritance/8c23-nh5.png)
 
 ### Instantiate New Parent Object
 
@@ -89,11 +89,11 @@ Now you can instantiate a new person object of type parent that inherits the pro
 
 **Figure 3: Instantiate a parent**
 
-![nh1](/images/inheritance/8c23-nh1_1.png)
+![nh1](../../images/inheritance/8c23-nh1_1.png)
 
 **Figure 4: Toggle on a quality**
 
-![nh2](/images/inheritance/8c23-nh2.png)
+![nh2](../../images/inheritance/8c23-nh2.png)
 
 ### Inherit Parent Properties
 
@@ -109,11 +109,11 @@ A child would inherit some, but not all, properties from their parents. If you i
 
 **Figure 5: Inherit some parent properties**
 
-![nh3](/images/inheritance/8c23-nh3.png)
+![nh3](../../images/inheritance/8c23-nh3.png)
 
 **Figure 6: Try to inherit more parent properties**
 
-![nh4](/images/inheritance/8c23-nh4.png)
+![nh4](../../images/inheritance/8c23-nh4.png)
 
 ### Understand Parent Objects
 
@@ -125,7 +125,7 @@ To experiment with the inheritance concept in Kendo UI, use the following exampl
 
 ###### Example
 
-```html
+```dojo
 <div id="content"></div>
 
 <script>
@@ -152,13 +152,13 @@ var person = new Person("John", "Bristowe");
 // say hello John
 person.sayHello();
 
-// create a parent object of type person    
+// create a parent object of type person
 var Parent = Person.extend({
     firstName: 'Mark',
     lastName: 'Holland'
 });
 
-// create the parent   
+// create the parent
 var myDad = new Parent();
 myDad.isPrettyCoolPerson = true;
 
@@ -167,7 +167,7 @@ myDad.sayHello();
 // expose the parent's coolness factor
     log("Cool? " + myDad.isPrettyCoolPerson);
 
-// create a new child object that inherits from the parent    
+// create a new child object that inherits from the parent
 var Child = Parent.extend({});
 
 // create me

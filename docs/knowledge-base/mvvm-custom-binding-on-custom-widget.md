@@ -29,7 +29,7 @@ How can I provide a second value to another custom property over MVVM?
 
 Define a custom widget and [custom binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom#custom-widget-binding).
 
-````html
+````dojo
 <div data-role="somewidget" data-bind="value: value, bgcolour: bgColour" ></div>
 <input type="button" value="Click to change color" data-bind="events: { click: changeColor }"/>
 

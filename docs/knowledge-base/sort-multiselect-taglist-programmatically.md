@@ -26,7 +26,7 @@ How can I alphabetically sort the selected values in the Kendo UI MultiSelect?
 
 Change the order of the items in the TagList by using the `change` and `dataBound` events of the MultiSelect.
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-content">
         <h4>MultiSelect</h4>

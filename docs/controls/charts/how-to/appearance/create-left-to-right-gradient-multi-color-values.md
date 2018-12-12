@@ -14,7 +14,7 @@ The example below demonstrates how to create such gradients with three-color val
 
 ###### Example
 
-```html
+```dojo
   <div id="chart" />
       <script>
         kendo.dataviz.Gradients.series1Gradient = {

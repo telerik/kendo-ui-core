@@ -11,7 +11,7 @@ The following example demonstrates how to persist row selection during data oper
 
 ###### Example
 
-```html
+```dojo
   <div id="listview"></div>
   <div id="pager"></div>
 

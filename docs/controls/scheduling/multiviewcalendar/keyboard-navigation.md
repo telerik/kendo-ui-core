@@ -28,7 +28,7 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar({

@@ -40,7 +40,7 @@ How can I implement cascading DropDownLists, which are configured with the `tran
 
 Configure the child DropDownList by setting the `k-cascade-from` and `k-cascade-from-field`. As a result, it "becomes aware" of its parent DropDownList from whose fields it will cascade.
 
-```html
+```dojo
 
 <div id="example" ng-app="KendoDemos">
     <div class="demo-section k-content" ng-controller="MyCtrl">

@@ -11,7 +11,7 @@ The example below demonstrates how to save the order of items in `localStorage` 
 
 ###### Example
 
-```html
+```dojo
     <div id="sortable"></div>
 
     <button id="reset">Reset</button>

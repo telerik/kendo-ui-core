@@ -35,7 +35,7 @@ If you only want to display particular rows at the top of the Grid, even after s
 
 The following example demonstrates the full implementation of this approach and uses a value from the model to determine whether or not to add the records to the header.
 
-```html
+```dojo
 	<style>
 		.customHeaderRowStyles td{
 			background: #bde0ed!important;

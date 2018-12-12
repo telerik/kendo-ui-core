@@ -43,7 +43,7 @@ markerActivate: function(e) {
 
 The following example demonstrates the full implementation of the approach.
 
-```html
+```dojo
 <div id="map"></div>
 <script>
     $("#map").kendoMap({

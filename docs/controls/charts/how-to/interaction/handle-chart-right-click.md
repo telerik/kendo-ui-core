@@ -12,7 +12,7 @@ The example below demonstrates how to handle the right click in Kendo UI Charts.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
        $("#chart").kendoChart({

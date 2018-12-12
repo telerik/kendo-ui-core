@@ -17,7 +17,7 @@ The example below demonstrates how to use the mobile view of the Toolbar. It is 
 
 ###### Example
 
-```html
+```dojo
 <div id="toolbar"></div>
 <script>
   $("#toolbar").kendoToolBar({

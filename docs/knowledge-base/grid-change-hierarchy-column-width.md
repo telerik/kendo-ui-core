@@ -43,7 +43,7 @@ To change the column with the hierarchy cell, use the following CSS selector to 
 
 The following example demonstrates how to implement the suggested approach.
 
-```html
+```dojo
 <style>
       .k-grid .k-hierarchy-col {
         width: 120px;

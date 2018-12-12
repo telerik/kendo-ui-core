@@ -39,7 +39,7 @@ How can I show full days without hours in the `TimelineWeek` view of the Schedul
 1. Set the `majorTick` as equal to a full day in minutes and leave only one slot per `majorTick`.
 1. Configure the `DateHeaderTemplate` to show the day of the week and, optionally, hide the hour display of the row.
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
 $(document).ready(function(){

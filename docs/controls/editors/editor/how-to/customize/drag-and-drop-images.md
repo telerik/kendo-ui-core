@@ -14,7 +14,7 @@ As an image source, the demo uses a TreeView. However, you can use any custom HT
 
 ###### Example
 
-```html
+```dojo
   <style>
 
     html

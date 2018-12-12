@@ -39,7 +39,7 @@ How to style the names of each font in the `fontNames` dropdown of the Editor?
 1. Get a reference to the `fontNames` ComboBox.
 1. Change the styles by using a template and the `setOptions` method.
 
-```html
+```dojo
 <textarea id="editor" rows="10" cols="30" style="width:100%;height:200px">
     Sample text
 </textarea>

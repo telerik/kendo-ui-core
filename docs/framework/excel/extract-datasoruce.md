@@ -28,7 +28,7 @@ The example below demonstrates how to create an Excel workbook based on the requ
 
 ###### Example
 
-```html
+```dojo
     <script>
       var ds = new kendo.data.DataSource({
         type: "odata",

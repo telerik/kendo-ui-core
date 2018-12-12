@@ -12,7 +12,7 @@ The following example demonstrates how to prevent POST on an `Enter` key press i
 
 ###### Example
 
-```html
+```dojo
 <div id="example" role="application">
   <form>
       <h4>T-shirt Fabric</h4>

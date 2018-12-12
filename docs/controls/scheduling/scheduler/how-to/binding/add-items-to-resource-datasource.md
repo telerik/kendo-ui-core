@@ -12,7 +12,7 @@ The following example demonstrates how to insert new items into a resource DataS
 
 ###### Example
 
-```html
+```dojo
 <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
     <div id="example" class="k-content">
       <button onclick="insertResources()">Insert new items in the 'rooms' DataSource</button>

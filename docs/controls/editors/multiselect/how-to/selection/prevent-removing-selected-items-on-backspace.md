@@ -12,7 +12,7 @@ The following example demonstrates how to prevent the deletion of selected items
 
 ###### Example
 
-```html
+```dojo
 <select id="multiselect" multiple="multiple"></select>
     <script>
       var data = [

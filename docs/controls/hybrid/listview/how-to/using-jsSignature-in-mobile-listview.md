@@ -11,7 +11,7 @@ The example below demonstrates how to include a signing functionality by using j
 
 ###### Example
 
-```html
+```dojo
     <script src="https://willowsystems.github.io/jSignature/js/libs/jSignature.min.js"></script>
     <div data-role="view" data-title="Views" data-init="attachToScroller">
       <header data-role="header">

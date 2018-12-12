@@ -14,7 +14,7 @@ The example below demonstrates how to work around this issue and fit a PDF-expor
 
 ###### Example
 
-```html
+```dojo
 	 <button class='export-img k-button'>Export as PDF</button>
      <div class="content">
       <div id="chart"></div>

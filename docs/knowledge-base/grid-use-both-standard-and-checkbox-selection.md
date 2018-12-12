@@ -32,7 +32,7 @@ How can I use both standard and checkbox selection in the Grid?
 1. Attach an event handler to the `click` event of the row.
 1. By using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method, select or deselect the rows.
 
-```html
+```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
 
 

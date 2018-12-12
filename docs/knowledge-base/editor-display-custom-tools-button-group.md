@@ -40,7 +40,7 @@ How can I display several custom tools as a button group in the Editor?
 1. Set a template to the custom tool. 
 1. Apply the following HTML structure and classes to the content of the template.
 
-```html
+```dojo
 	<textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
 	</textarea>
 

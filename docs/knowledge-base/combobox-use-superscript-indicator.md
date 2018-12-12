@@ -29,7 +29,7 @@ How can I use subscript indicators in the ComboBox widget?
 1. Check for `<sup>` tags in the input string, parse the group content, and replace it with the corresponding subscript character.
 1. Transform the input in the `change` event of the ComboBox.
 
-```html
+```dojo
 <div id="example">
     <input id="combobox" />
 </div>

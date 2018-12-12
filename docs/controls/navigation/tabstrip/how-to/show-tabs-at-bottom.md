@@ -15,7 +15,7 @@ The example below demonstrates how to display the tab buttons at the bottom of t
 
 ###### Example
 
-```html
+```dojo
     <style>
         html{font:12px sans-serif;}
 

@@ -18,7 +18,7 @@ To style the header and footer elements:
 
 ###### Example
 
-```html
+```dojo
 <script>
     $(document).ready(function () {
         $("#editor").kendoEditor({

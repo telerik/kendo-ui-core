@@ -11,7 +11,7 @@ The example below demonstrates how to add a Splitter that resizes automatically 
 
 ###### Example
 
-```html
+```dojo
     <style>
       html
       {

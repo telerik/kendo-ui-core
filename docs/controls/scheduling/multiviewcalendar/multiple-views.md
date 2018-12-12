@@ -14,7 +14,7 @@ In some scenarios it might be necessary to display more than two months. This is
 
 ###### Example
 
-```html
+```dojo
     <input id="numberOfViews" />
     <button id="numberOfViewsBtn">Apply Changes</button>
     <div id="multiViewCalendar"></div>

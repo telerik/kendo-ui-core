@@ -34,7 +34,7 @@ How can I implement a second vertical scrollbar at the top of the Grid which is 
 
 The following example attaches the event handlers within the `dataBound` event of the Grid.
 
-```html
+```dojo
 	<div id="example">
 		<div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
 			<div id="dummyScroll" style="height: 20px;">

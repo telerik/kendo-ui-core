@@ -17,7 +17,7 @@ For brevity, the following demo does not include the configuration for the Data 
 
 ###### Example
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 <div id="example">
     <div id="grid"></div>

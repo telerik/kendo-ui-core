@@ -54,7 +54,7 @@ Since the 2015 Q2 release, custom formats can be applied by using the `data-form
 
 ###### Example
 
-```html
+```dojo
 <div id="view">
     <span data-format="c2" data-bind="text: price"></span><br/>
     <span data-format="dd-MM-yyyy" data-bind="text: purchaseDate"></span>

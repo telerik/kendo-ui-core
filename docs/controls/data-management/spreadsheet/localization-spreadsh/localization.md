@@ -60,7 +60,7 @@ Each message, depending on its location or function representation within the wi
 
 When you apply JavaScript to update a particular message, indicate it by using its namespace.
 
-```html
+```dojo
 
     <div id="spreadsheet"></div>
 

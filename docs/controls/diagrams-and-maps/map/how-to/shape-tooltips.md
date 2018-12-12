@@ -11,7 +11,7 @@ The following example demonstrates how to display a tooltip for individual shape
 
 ###### Example
 
-```html
+```dojo
     <div id="map"></div>
     <script>
       var geojson = [{

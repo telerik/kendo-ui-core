@@ -46,7 +46,7 @@ How can I show the details of a hierarchical in a Kendo UI Window?
 
 Create a custom command which changes the content of the Window based on the current `dataItem` that is associated with the clicked row.
 
-```html
+```dojo
 <div id="example">
       <div id="grid"></div>
       <div id="details"></div>

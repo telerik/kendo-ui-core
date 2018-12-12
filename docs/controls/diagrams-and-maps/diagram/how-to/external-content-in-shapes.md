@@ -14,7 +14,7 @@ The shape visual templates allow you to override the rendering entirely as demon
 
 ###### Example
 
-```html
+```dojo
     <style>
       .container {
         /* Move rendering container off-screen */

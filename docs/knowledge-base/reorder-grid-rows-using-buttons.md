@@ -33,7 +33,7 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
 
 1. In the click handlers of the buttons, find a reference to the corresponding row and attach the click handlers to the `dataBound` event of the Grid.
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
   <head>

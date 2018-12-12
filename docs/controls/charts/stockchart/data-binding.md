@@ -32,7 +32,7 @@ The example below demonstrates a Stock Chart in a single data-binding mode.
 
 ###### Example
 
-```html
+```dojo
     <div id="stock-chart"></div>
     <script>
         $("#stock-chart").kendoStockChart({
@@ -88,7 +88,7 @@ The example below demonstrates a Stock Chart in the master and navigator data-bi
 
 ##### Example
 
-```html
+```dojo
     <div id="stock-chart"></div>
     <script>
     var stockDataSchema = {

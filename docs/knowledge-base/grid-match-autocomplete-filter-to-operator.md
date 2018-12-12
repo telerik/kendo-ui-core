@@ -26,7 +26,7 @@ How can I match the filter in the AutoComplete with the selected option in the G
 1. Handle the `click` event for the **Filter** button and get a reference to the AutoComplete widget which is used as a filter.
 1. Based on the `clicked` option in the filter menu, change the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete/configuration/filter) setting of the AutoComplete.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
 
 <div id="grid"></div>

@@ -36,7 +36,7 @@ How can I disable timeslots for a specific day and style them?
 1. To style the slots for a specific day, use the `slotTemplate` configuration.
 1. To check the date of the event which is about to be added, handle the `add` event of the Scheduler. If the event you want to add is for the day during which all events will be restricted, cancel the propagation and raise a descriptive alert.
 
-```html
+```dojo
 
  <div id="scheduler"></div>
     <style>

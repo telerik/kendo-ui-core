@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior, create editors 
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <div id="editForm">
     <h2>Edit Form</h2>

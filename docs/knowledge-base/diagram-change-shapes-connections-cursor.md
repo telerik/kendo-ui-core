@@ -41,7 +41,7 @@ To dynamically change the cursor when a series or a connection is hovered:
 1. Add a `mouseEnter` event handler.
 1. Change the cursor of the hovered element.
 
-```html
+```dojo
     <div id="diagram"></div>
     <script>
       var data = [{
@@ -152,7 +152,7 @@ To dynamically change the cursor when a series or a connection is hovered:
 
 Access all shapes and connections in the `dataBound` event of the Diagram and change their cursor.
 
-```html
+```dojo
     <div id="diagram"></div>
     <script>
       var data = [{

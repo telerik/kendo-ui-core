@@ -34,7 +34,7 @@ The dialog confirmation is an asynchronous action. To add it during the drag-and
 1. Show a confirmation dialog.
 1. In the confirmation callback function, change the parent `id` value of the dragged row to the `id` value of the destination row.
 
-```html
+```dojo
     <div id="example">
       <div id="treelist"></div>
 

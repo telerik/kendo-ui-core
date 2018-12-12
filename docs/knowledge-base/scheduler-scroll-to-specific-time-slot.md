@@ -29,7 +29,7 @@ Create a `scrollToHour` method that:
 * Traverses the current scheduler view rows and checks for the desired time slot.
 * Uses the view `_scrollTo` method to navigate to the desired slot.
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
         <button class="k-button" ng-click="scrollToHour(22)">Scroll to 10 PM</button>

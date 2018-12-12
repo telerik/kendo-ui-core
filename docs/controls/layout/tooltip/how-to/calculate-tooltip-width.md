@@ -13,7 +13,7 @@ The example below demonstrates how to calculate the width of a Kendo UI Tooltip 
 
 ###### Example
 
-```html
+```dojo
     <style>
         #table {
             width: 36em;

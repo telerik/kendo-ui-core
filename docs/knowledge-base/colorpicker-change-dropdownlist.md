@@ -40,7 +40,7 @@ How can I add or change the color in the ColorPicker from a DropDownList?
 
 1. Set the color to the reference of the ColorPicker widget.
 
-```html
+```dojo
     <label for="colorpicker">ColorPicker:</label>
 	<input id="colorpicker" value="#1212d3" />
 	<div id="dropdown"></div>

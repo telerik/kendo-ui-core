@@ -26,7 +26,7 @@ How can I display the task title in the **Delete** confirmation dialog of the Ke
 
 Handle the `dataBound` event and attach a `click` event handler to the `k-event-delete` `<a>` element.
 
-```html
+```dojo
 	<div id="scheduler"></div>
 
     <script>

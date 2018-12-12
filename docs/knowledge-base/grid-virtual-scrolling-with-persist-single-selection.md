@@ -31,7 +31,7 @@ How can I persist the single row selection when the virtual scrolling functional
 
 Programmatically handle the collection of item selection on the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid.
 
-````html
+````dojo
 <div id="example">
             <div id="grid"></div>
             <script>

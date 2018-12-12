@@ -12,7 +12,7 @@ To create multiple sheets in an Excel workbook, use the [`sheets`](/api/javascri
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [

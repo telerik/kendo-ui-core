@@ -12,7 +12,7 @@ The following example demonstrates how to dynamically calculate the height of th
 
 ###### Example
 
-```html
+```dojo
 <div data-init="initLoginView" data-role="view" id="login"  data-stretch="true">
 <header data-role="header">
   <div data-role="navbar">

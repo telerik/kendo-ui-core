@@ -36,7 +36,7 @@ The Calendar, DatePicker, and DateTimePicker provide configuration options for h
 
 The following example demonstrates how to hide the year view in a Kendo UI DatePicker.
 
-```html
+```dojo
 <input id="datepicker" />
 <script>
     var openFlag = true;
@@ -96,7 +96,7 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
 
 The following example demonstrates how to hide the year view in a Kendo UI DateTimPicker in MVVM.
 
-```html
+```dojo
 <div id="example">
 <input data-role="datetimepicker"
          data-bind="value: selectedDate,

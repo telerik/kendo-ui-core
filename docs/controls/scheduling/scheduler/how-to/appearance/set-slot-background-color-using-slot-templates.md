@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this behavior by using the `sl
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <style>
       /* Remove the padding of scheduler slots */

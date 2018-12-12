@@ -18,7 +18,7 @@ The milestones of the approach are:
 
 ###### Example
 
-```html
+```dojo
 <style>
 
   .k-tabstrip-items li .k-button {

@@ -27,7 +27,7 @@ The following `transport` configurations are over-simplified and invalid.
 
 ###### Example
 
-```html
+```dojo
     <textarea name="editor" id="editor"></textarea>
 
     <script>

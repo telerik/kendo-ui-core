@@ -31,7 +31,7 @@ How can I select a range of dates in the Kendo Calendar widget?
 
 Once the user chooses both end and start dates, select the dates in the selected range using the [selectDates method](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods/selectdates)
 
-```html
+```dojo
     <label>Start:</label>
 
     <input id='start'/>

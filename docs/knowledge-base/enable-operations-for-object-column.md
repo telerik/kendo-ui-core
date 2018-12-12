@@ -28,7 +28,7 @@ How can I enable sorting, filtering and grouping for a column which is bound to 
 
 To enable sorting, filtering and grouping for a column which is bound to an object, bind to column to a field of the object and the editor to the object itself.
 
-```html
+```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example">
       <div id="grid"></div>

@@ -11,7 +11,7 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
 ###### Example
 
-```html
+```dojo
     <div id="content" style="width: 500px">
       <div id="grid"></div>
     </div>

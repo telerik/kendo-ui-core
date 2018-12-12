@@ -27,6 +27,7 @@ var __meta__ = { // jshint ignore:line
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
+        otherMonthCellTemplate = template('<td role="gridcell">&nbsp;</td>', { useWithBlock: false }),
         weekNumberTemplate = template('<td class="k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9,
@@ -1676,6 +1677,7 @@ var __meta__ = { // jshint ignore:line
             weekNumber = options.weekNumber || weekNumberTemplate,
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,
+            otherMonthTemplate = options.otherMonthCellTemplate || otherMonthCellTemplate,
             html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
             if(isWeekColumnVisible) {
                 html += weekNumber(weekNumberBuild(start));
@@ -1695,7 +1697,7 @@ var __meta__ = { // jshint ignore:line
 
             data = build(start, idx, options.disableDates);
 
-            html += (data.cssClass.indexOf(OTHERMONTH) !== -1 && !otherMonth) ? empty(data) : isInRange(start, min, max) ? content(data) : empty(data);
+            html += (data.cssClass.indexOf(OTHERMONTH) !== -1 && !otherMonth) ? otherMonthTemplate(data) : isInRange(start, min, max) ? content(data) : empty(data);
 
             setter(start, 1);
         }

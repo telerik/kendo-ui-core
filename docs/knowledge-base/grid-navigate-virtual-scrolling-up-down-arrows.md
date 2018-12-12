@@ -32,7 +32,7 @@ How can I navigate the virtual scrolling of the Kendo UI Grid with the **Up** an
 1. Handle the [`click`](https://api.jquery.com/click/) event of the table of the Grid.
 1. In the `click` event handler, [`focus`](https://api.jquery.com/focus/) the child `div` of the `.k-scrollbar-vertical` container.
 
-```html
+```dojo
 <style>
 	.k-scrollbar-vertical div {
 		outline: none;

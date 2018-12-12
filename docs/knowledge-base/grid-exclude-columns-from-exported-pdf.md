@@ -31,7 +31,7 @@ How can I exclude certain columns from the exported PDF file in a Kendo UI Grid?
 1. Hide the columns by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method within the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler.
 1. When the export is done, display the hidden column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) method.
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
       <script type="x/kendo-template" id="page-template">

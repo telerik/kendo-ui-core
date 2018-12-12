@@ -27,7 +27,7 @@ How can I disable items in the MultiSelect while the drop-down list remains open
 
 To prevent the selection, cancel the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/select) event. To prevent the drop-down list from closing, set the [`autoClose`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/autoclose) property.
 
-```html
+```dojo
 <select id="select"></select>
 
 <script>

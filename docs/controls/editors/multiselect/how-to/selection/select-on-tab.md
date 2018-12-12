@@ -12,7 +12,7 @@ The following example demonstrates how to select the first item from the popup o
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <h4>Select Continents</h4>

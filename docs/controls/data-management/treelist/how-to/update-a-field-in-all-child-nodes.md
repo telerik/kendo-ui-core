@@ -11,7 +11,7 @@ The following example demonstrates how to update all child nodes recursively and
 
 ###### Example
 
-```html
+```dojo
   <div id="treelist"></div>
 
   <script>

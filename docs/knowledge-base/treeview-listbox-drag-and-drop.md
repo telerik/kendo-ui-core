@@ -39,7 +39,7 @@ How can I drag a node from the TreeView and drop it in the ListBox?
 
 In the `drop` event handler of the TreeView, get the dropped node and add it to the ListBox.
 
-```html
+```dojo
 <div id="treeview-left"></div>
 <select id="optional" ></select>
 

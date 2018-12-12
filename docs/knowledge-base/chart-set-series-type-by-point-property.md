@@ -38,7 +38,7 @@ How can I dynamically set the Chart series type after the data was bound and dep
 
 Use the grouping capabilities of the Chart while setting the series `type` on the `dataBound` event.
 
-```html
+```dojo
 <div id="example">
   <div class="demo-section k-content wide">
     <div id="chart"></div>

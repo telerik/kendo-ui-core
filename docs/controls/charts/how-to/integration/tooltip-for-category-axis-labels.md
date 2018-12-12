@@ -14,7 +14,7 @@ The example below demonstrates how to achieve this behavior. Note that the toolt
 
 ###### Example
 
-```html
+```dojo
 <div id="chart"></div>
 <script>
   $("#chart").kendoChart({

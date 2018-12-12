@@ -25,7 +25,7 @@ The basic conceptual options of a Kendo UI Funnel Chart are:
 
 **Figure 1: A Funnel Chart with its `neckRatio` set to 10**
 
-![Funnel Chart](/controls/charts/chart-types/funnel-neckratio.png)
+![Funnel Chart](funnel-neckratio.png)
 
 ## Getting Started
 
@@ -63,7 +63,7 @@ The example below demonstrates the way the widths of the bases for each segment 
 
 **Figure 2: A sample Funnel Chart**
 
-![Funnel Chart](/controls/charts/chart-types/funnel-dynamicslope.png)
+![Funnel Chart](funnel-dynamicslope.png)
 
 ## See Also
 

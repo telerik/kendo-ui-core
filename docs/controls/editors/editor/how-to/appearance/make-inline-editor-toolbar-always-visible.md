@@ -16,7 +16,7 @@ The following example demonstrates how to force the toolbar to be always visible
 
 ###### Example
 
-```html
+```dojo
     <p>The Editor toolbar will remain visible after blurring the widget.</p>
     <br /><br /><br />
     <div id="editor">

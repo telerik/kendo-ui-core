@@ -11,7 +11,7 @@ The following example demonstrates how to create Excel documents by exporting on
 
 ###### Example
 
-```html
+```dojo
      <div id="grid"></div>
      <script>
       $("#grid").kendoGrid({

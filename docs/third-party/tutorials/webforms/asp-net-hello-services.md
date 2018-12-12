@@ -39,7 +39,7 @@ Open Visual Studio. Select **File/New Project** and select the **ASP.NET Web App
 
 **Figure 1: Filing a new project**
 
-![File New Project](/images/webforms/hello-services-file-new-project.png)
+![File New Project](../../../images/webforms/hello-services-file-new-project.png)
 
 Open the **Default.aspx** page and delete all the content.
 
@@ -49,7 +49,7 @@ Before proceeding with this project, create some structure for the application t
 
 **Figure 2: Data controllers**
 
-![Data Controllers](/images/webforms/hello-services-data-controllers.png)
+![Data Controllers](../../../images/webforms/hello-services-data-controllers.png)
 
 ### Create Data Access Layer
 
@@ -59,11 +59,11 @@ Right-click the `Data` folder. Select **Add New Item** > **LINQ To SQL Classes**
 
 **Figure 3: Adding LINQ to SQL**
 
-![Add Linq To Sql](/images/webforms/hello-services-add-linq-to-sql.png)
+![Add Linq To Sql](../../../images/webforms/hello-services-add-linq-to-sql.png)
 
 **Figure 4: Added LINQ to the SQL Table**
 
-![Linq To Sql Table Added](/images/webforms/hello-services-linq-to-sql-table-added.png)
+![Linq To Sql Table Added](../../../images/webforms/hello-services-linq-to-sql-table-added.png)
 
 ### Install NuGet Packages
 
@@ -75,7 +75,7 @@ Right-click the project and select **Add Library Package Reference**. When the d
 
 **Figure 5: Nuget ASP.NET Web API**
 
-![Nuget AspNetWebApi](/images/webforms/hello-services-nuget-aspnetwebapi.png)
+![Nuget AspNetWebApi](../../../images/webforms/hello-services-nuget-aspnetwebapi.png)
 
 #### Install jQuery
 
@@ -83,7 +83,7 @@ Enter `jquery` in the **Search** box. Select **jQuery** and then **Install**.
 
 **Figure 6: Installing jQuery**
 
-![Install jQuery](/images/webforms/hello-services-install-jquery.png)
+![Install jQuery](../../../images/webforms/hello-services-install-jquery.png)
 
 Close the **Add Library Package Reference** dialogue.
 
@@ -93,13 +93,13 @@ To create the Web API Service, an empty class is needed. Right-click the `Contro
 
 **Figure 7: Employees Controller**
 
-![Employees Controller](/images/webforms/hello-services-employees-controller.png)
+![Employees Controller](../../../images/webforms/hello-services-employees-controller.png)
 
 To designate the `EmployeesController.cs` class that was just added as a Web API controller that will respond to requests, inherit from the `ApiController` class. If `ApiController` is not recognized for you, hover over the word until you get the context menu. This will give you the option to include `System.Web.Http`. Optionally, you can achieve the same result by pressing `Alt`+`Shift`+`F10`, which brings up the same context menu.
 
 **Figure 8: Employee controller inheriting the API controller class**
 
-![Employee Controller Inherits ApiController Class](/images/webforms/hello-services-employee-controller-class-inherit.png)
+![Employee Controller Inherits ApiController Class](../../../images/webforms/hello-services-employee-controller-class-inherit.png)
 
 This class will contain methods that can be invoked from the web service that is being created. This service represents the **Employees** table in the [Northwind Database](http://www.microsoft.com/en-us/download/details.aspx). This is the table that is going to be used in this tutorial for data.
 
@@ -134,7 +134,7 @@ Since Web API operates on convention over configuration, simply naming this meth
 
 **Figure 9: Returning a LINLINQ to the SQL object**
 
-![Return A LinqToSql Object](/images/webforms/hello-services-return-linq-object.png)
+![Return A LinqToSql Object](../../../images/webforms/hello-services-return-linq-object.png)
 
 You can override this convention by specifying to the verb you want a method to respond to by decorating the method with the correct attribute (i.e. `HttpPut`).
 
@@ -164,7 +164,7 @@ Press `F5` to build and run the application. You will notice that the applicatio
 
 **Figure 10: Serialization error**
 
-![Serialization Error](/images/webforms/hello-services-serialization-error.png)
+![Serialization Error](../../../images/webforms/hello-services-serialization-error.png)
 
 This is because .NET cannot serialize the LINQ To SQL object that is being returned by the `Get()` method in the `EmployeesController.cs` file. LINQ To SQL Objects are rather complex and contain far more information than what is actually needed by the UI, which is the raw data.
 
@@ -190,7 +190,7 @@ The example below demonstrates the `Employee` model object.
 
 **Figure 11: Employee model**
 
-![Employee Model](/images/webforms/hello-services-employee-model.png)
+![Employee Model](../../../images/webforms/hello-services-employee-model.png)
 
 Open up the `EmployeesController.cs` file in the `Controllers` folder. Alter the `Get()` method to return a list of `Model.Employee` objects instead of a list of `Data.Employee` objects. Also alter the LINQ To SQL Query so that it selects a new `Employee` model object for each row returned from the database.
 
@@ -217,7 +217,7 @@ The example below demonstrates how to return a list of `Employee` model objects.
 <!--_-->
 **Figure 12: Web get**
 
-![Web Get](/images/webforms/hello-services-web-get.png)
+![Web Get](../../../images/webforms/hello-services-web-get.png)
 
 #### Test the Application
 
@@ -225,7 +225,7 @@ Press `F5` to run the application again. Navigate to the **api/employees** URL. 
 
 **Figure 13: Employees XML**
 
-![Employees XML](/images/webforms/hello-services-employees-xml.png)
+![Employees XML](../../../images/webforms/hello-services-employees-xml.png)
 
 ### Get JSON Data With AJAX
 
@@ -237,7 +237,7 @@ Open the `Site.Master` file and drag the `jquery.min` file over to the page just
 
 **Figure 14: Adding jQuery to the master page**
 
-![Add jQuery To Master Page](/images/webforms/hello-services-add-jquery-to-master-page.png)
+![Add jQuery To Master Page](../../../images/webforms/hello-services-add-jquery-to-master-page.png)
 
 Open up the `Default.aspx` file. Create an HTML `table` element with an `employees` id, as demonstrated in the example below.
 
@@ -393,13 +393,13 @@ Notice that the application shows the employees in a list. Press `F12` to open t
 
 **Figure 15: F12 content type inspection**
 
-![F12 Content Type Inspection](/images/webforms/hello-services-f12-content-type-json.png)
+![F12 Content Type Inspection](../../../images/webforms/hello-services-f12-content-type-json.png)
 
 Select the **Response body** tab. Inspect the JSON response returned from the server.
 
 **Figure 16: F12 response body**
 
-![F12 Response Body](/images/webforms/hello-services-f12-response-body-json.png)
+![F12 Response Body](../../../images/webforms/hello-services-f12-response-body-json.png)
 
 ### Enable Deletion Of Employees
 
@@ -574,7 +574,7 @@ Press `F5` to run the application. Open the Developer Tools in Internet Explorer
 
 **Figure 17: Deleting not implemented**
 
-![Delete Not Implemented](/images/webforms/hello-services-delete-not-implemented-404.png)
+![Delete Not Implemented](../../../images/webforms/hello-services-delete-not-implemented-404.png)
 
 ### Add `Delete` Method
 
@@ -618,7 +618,7 @@ Press `F5` to run the application. Press `F12` to open the Developer Tools. Swit
 
 **Figure 18: Final result**
 
-![Finally](/images/webforms/hello-services-finally.png)
+![Finally](../../../images/webforms/hello-services-finally.png)
 
 ## Further Reading
 

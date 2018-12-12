@@ -32,7 +32,7 @@ How can I vertically and horizontally scroll and focus an event that is placed o
 
 You can also select the desired event by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method.
 
-````html
+````dojo
 <div id="example" class="k-content">
   <input type="button" value="Click to select the Event with ID 3" id="btn" class="k-button"/>
   <div id="scheduler"></div>

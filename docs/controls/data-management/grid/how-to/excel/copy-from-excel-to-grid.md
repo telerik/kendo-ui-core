@@ -12,7 +12,7 @@ The following example demonstrates how to create a Grid that supports pasting fr
 
 ###### Example
 
-```html
+```dojo
      <div id="grid" tabindex="0"></div>
     <script>
       $("#grid").kendoGrid({

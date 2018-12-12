@@ -14,7 +14,7 @@ For more information, refer to the article on [working offline]({% slug offlines
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
         <div id="team-schedule">
             <label>Online: </label><input id="online" type="checkbox" checked>

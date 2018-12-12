@@ -12,7 +12,7 @@ The following example demonstrates how to validate a group of Kendo UI radio but
 
 ###### Example
 
-```html
+```dojo
 <div id="form">
     <span class="k-invalid-msg" data-for="test"></span><br/>
     Test 1<input type="radio" name="test" required /><br/>

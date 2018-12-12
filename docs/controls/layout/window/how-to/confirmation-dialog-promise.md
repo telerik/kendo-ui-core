@@ -11,7 +11,7 @@ The example below demonstrates how to create a confirmation dialog in a Kendo UI
 
 ###### Example
 
-```html
+```dojo
     <script id="confirmationTemplate" type="text/x-kendo-template">
     <div class="popupMessage"></div>
       </br>

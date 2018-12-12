@@ -15,7 +15,7 @@ The following example demonstrates how to apply a stable sort function by using 
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 
     <script>

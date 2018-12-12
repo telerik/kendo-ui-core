@@ -31,7 +31,7 @@ How can I validate the current tab when the user selects another tab and also pr
 
 To check for validation errors and prevent the selection, use the `select` event of the TabStrip.
 
-```html
+```dojo
 <div id="tabstrip">
     <ul>
         <li class="k-state-active">Tab 1</li>

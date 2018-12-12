@@ -11,7 +11,7 @@ The following example demonstrates how to resize the nested Kendo UI Calendar ba
 
 ###### Example
 
-```html
+```dojo
       <div id="example">
             <div id="email-settings">
                 <div style="margin-top: -6px; margin-left: 180px">

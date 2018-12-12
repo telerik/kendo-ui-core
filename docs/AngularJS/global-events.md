@@ -22,7 +22,7 @@ The following example demonstrates how to listen to the `kendoWidgetCreated` eve
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-tree-view="treeWidget" k-options="treeOptions"></div>
 </div>
@@ -101,7 +101,7 @@ The following example demonstrates how to listen to the `kendoRendered` event.
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
   <input kendo-datepicker="datePicker">
 </div>

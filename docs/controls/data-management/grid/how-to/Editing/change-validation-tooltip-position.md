@@ -18,7 +18,7 @@ The approach relies on the following milestones:
 
 ###### Example
 
-```html
+```dojo
 <style>
 
   /* increase the popup edit form's width to make space for validator messages */

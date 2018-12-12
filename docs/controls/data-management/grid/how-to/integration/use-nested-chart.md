@@ -12,7 +12,7 @@ The following example demonstrates how to nest a Kendo UI Chart inside the Grid 
 
 ###### Example
 
-```html
+```dojo
     <script>
       var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne", "Nige"],
           lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth", "White"],

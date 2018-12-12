@@ -27,7 +27,7 @@ How can I prevent the page scroll when the DropDownList is opened?
 1. Query the `ul` element of the DropDownList and attach a `wheel` event handler to its parent.
 1. Prevent the default action if the scroll is at the beginning or at the end of the DropDownList ListView.
 
-```html
+```dojo
 <div id="example">
     <br/><br/><br/><br/><br/><br/><br/><br/>
     <div id="example" style="min-height: 2000px; padding: 30px;">

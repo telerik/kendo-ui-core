@@ -22,7 +22,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
 
 ###### Example
 
-```html
+```dojo
     <style>
 
         #tabstrip > .k-content

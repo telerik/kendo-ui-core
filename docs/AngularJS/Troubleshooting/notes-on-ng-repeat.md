@@ -29,7 +29,7 @@ The following example demonstrates a Kendo UI TreeView widget with `DataSource` 
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
     <button ng-click="add()">Add new</button>
     <div kendo-tree-view k-data-source="tree"></div>
@@ -58,7 +58,7 @@ The following example demonstrates a Kendo UI PanelBar widget with `DataSource` 
 
 ###### Example
 
-```html
+```dojo
   <div ng-app="foo">
       <div ng-controller="MyCtrl">
         <ul kendo-panel-bar k-data-source="panelBarDataSource"></ul>
@@ -107,7 +107,7 @@ The following example demonstrates a Kendo UI TabStrip widget with `DataSource` 
 
 ###### Example
 
-```html
+```dojo
   <div ng-app="foo">
     <div ng-controller="MyCtrl">
       <div kendo-tab-strip k-data-source="tabStripDataSource" k-data-text-field="'text'" k-data-content-field="'content'"></div>
@@ -137,7 +137,7 @@ The following example demonstrates a Kendo UI Menu widget with `DataSource` in A
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="foo">
         <div ng-controller="MyCtrl">
             <div kendo-menu k-data-source="menuDataSource"></div>
@@ -187,7 +187,7 @@ The following example demonstrates a Kendo UI TabStrip widget in AngularJS with 
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div class="demo-section k-content">
         <div ng-controller="MyCtrl">
@@ -231,7 +231,7 @@ The following example demonstrates how to use a wrapping HTML element to hide/sh
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div class="demo-section k-content">
         <div ng-controller="MyCtrl">

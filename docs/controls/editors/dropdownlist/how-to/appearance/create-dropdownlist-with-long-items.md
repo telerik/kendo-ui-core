@@ -14,7 +14,7 @@ The following example demonstrates how to create a Kendo UI DropDownLists with l
 
 ###### Example
 
-```html
+```dojo
 <div id="div">
     <select id="ddl">
         <option>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</option>

@@ -15,7 +15,7 @@ The example below demonstrates how to add new tabs by using the [`$compile` Angu
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content">
         <div ng-controller="MyCtrl">

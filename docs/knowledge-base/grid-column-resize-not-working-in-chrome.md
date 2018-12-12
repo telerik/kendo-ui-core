@@ -32,7 +32,7 @@ When the scale is not 100% or when I zoom the page, the column resize feature of
 
 1. Test that all enabled features work as expected in your environment.
 
-```html
+```dojo
 <div id="example">
       <div id="grid"></div>
 

@@ -51,7 +51,7 @@ This configuration results in the Area Chart below.
 
 **Figure 1: A sample Area Chart**
 
-![Area Chart](/controls/charts/chart-types/chart-area.png)
+![Area Chart](chart-area.png)
 
 ### Line Styles
 
@@ -63,11 +63,11 @@ Kendo UI Area Charts support the rendering of lines between the points with diff
 
 **Figure 2: A step-line Area Chart**
 
-![Step Line Chart](/controls/charts/chart-types/chart-step-area.png)
+![Step Line Chart](chart-step-area.png)
 
 **Figure 3: A smooth-line Area Chart**
 
-![Smooth Line Chart](/controls/charts/chart-types/chart-smooth-area.png)
+![Smooth Line Chart](chart-smooth-area.png)
 
 ## See Also
 

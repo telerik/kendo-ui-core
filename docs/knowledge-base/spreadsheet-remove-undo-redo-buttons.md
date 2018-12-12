@@ -28,7 +28,7 @@ How can I remove the **Undo** and **Redo** buttons on the Kendo UI Spreadsheet t
 To remove the buttons, apply CSS rules.
 
 
-```html
+```dojo
     <div id="spreadsheet"></div>
 
     <script>

@@ -12,7 +12,7 @@ The following example demonstrates how to adjust the row height of the Grid when
 
 ###### Example
 
-```html
+```dojo
     <div id="grid" style="height: 380px"></div>
     <style>
       .k-virtual-scrollable-wrap td {

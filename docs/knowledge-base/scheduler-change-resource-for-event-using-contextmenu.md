@@ -24,7 +24,7 @@ How to implement a Kendo ContextMenu, which allows the user to change the resour
 
 ## Solution
 
-```html
+```dojo
   <div id="scheduler"></div>
   <ul id="contextMenu">
     <li data-value="1">Set to Alex</li>

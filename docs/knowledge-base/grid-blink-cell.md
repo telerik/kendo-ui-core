@@ -39,7 +39,7 @@ How can I make some of the Grid cells blink by changing their background color i
 1. Use the Kendo UI templates to check if a Boolean property is set to `true` and assign HTML classes to the relevant elements.
 1. Subscribe to the `dataBound` event to manipulate the colors at the desired time intervals.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">

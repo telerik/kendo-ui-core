@@ -11,7 +11,7 @@ The following example demonstrates how to highlight the Map shapes by a specifie
 
 ###### Example
 
-```html
+```dojo
     <div id="map"></div>
     <script>
       function createMap() {

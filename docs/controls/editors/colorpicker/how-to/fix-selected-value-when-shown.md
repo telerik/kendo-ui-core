@@ -15,7 +15,7 @@ To handle such situations, call the `value` method of the Kendo UI FlatColorPick
 
 ###### Example
 
-```html
+```dojo
     <div id="colorPickerFlat"></div>
     <div id="colorPicker"></div>
     <button id="hide">Hide</button>

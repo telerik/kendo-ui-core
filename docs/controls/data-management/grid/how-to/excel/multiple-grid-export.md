@@ -13,7 +13,7 @@ Each Grid is exported in a separate Excel sheet. For additional information abou
 
 ###### Example
 
-```html
+```dojo
 <button id="export" class="k-button"><span class="k-icon k-i-excel"></span>Export to Excel</button>
 <div id="products"></div>
 <div id="orders"></div>

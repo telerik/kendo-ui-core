@@ -15,7 +15,7 @@ The following example demonstrates how to switch to client paging during PDF exp
 
 ###### Example
 
-```html
+```dojo
   <div id="grid"></div>
 
   <style>

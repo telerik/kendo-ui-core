@@ -12,7 +12,7 @@ The following example demonstrates how to create a custom ToolBar template in An
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
   <div ng-controller="MyCtrl">
 

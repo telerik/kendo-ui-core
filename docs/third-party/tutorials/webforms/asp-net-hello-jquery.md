@@ -32,7 +32,7 @@ Select **File/New Project** and select the **ASP.NET Web Application** project t
 
 **Figure 1: The creation of a new project**
 
-![File New Project](/images/webforms/hello-jquery-file-new-project.png)
+![File New Project](../../../images/webforms/hello-jquery-file-new-project.png)
 
 Open the **Default.aspx** page. Switch to a **Design** view and delete all the content. Drag out two **TextBoxes**, a **Button**, and a **Label** control from the toolbox. Against **First Name:** type a name. After the first text box, put a space and type in the field against **Last Name:**. Put a space between the second text box and the Button. Put the label on the following line by pressing **Enter**.
 
@@ -40,7 +40,7 @@ Name the first text box `txtFirstName`, the second one `txtLastName`. Name the B
 
 **Figure 2: The default design view**
 
-![Default Design View](/images/webforms/hello-jquery-default-design-view.png)
+![Default Design View](../../../images/webforms/hello-jquery-default-design-view.png)
 
 Double-click the **Say Hello** button to create a new button `click` event in the `Default.aspx.cs` file. Set the label text equal to the string `Hello` concatenated with the `Text` property of `txtFirstName` and the `Text` property of `txtLastName`.
 
@@ -60,7 +60,7 @@ Press `F5` or the **Run** icon and run the application. Do not enter your name i
 
 **Figure 3: The F12 developer tools**
 
-![F12 Developer Tools](/images/webforms/hello-jquery-developer-tools.png)
+![F12 Developer Tools](../../../images/webforms/hello-jquery-developer-tools.png)
 
 Refresh the page. Notice that the **Network** tab now shows three items. The first one is the **Default.aspx** page that you are looking at. The second is the `CSS` file that is referenced in the head of the **Default.aspx** page. The last one is the **WebResource.axd** file which contains JavaScript and other resources for the page as determined by Web Forms related to the ASP.NET controls that you choose to use.
 
@@ -68,19 +68,19 @@ Note that the method for all three requests is a [GET](http://www.w3.org/Protoco
 
 **Figure 4: The network traffic for a GET**
 
-![Network Traffic For A Get](/images/webforms/hello-jquery-network-traffic-get.png)
+![Network Traffic For A Get](../../../images/webforms/hello-jquery-network-traffic-get.png)
 
 Now fill out the form in the application with your first name and click the **Say Hello** button. The server responds as expected by setting the label text equal to the first name field plus the last name field. Have another look at the network traffic pane. It looks nearly identical, but the **Default.aspx** page was retrieved this time with a [POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). This is because this time the browser sent some data to the server specifically the values of the first name and last name text boxes. When browsers send information to the server and expect a response, this is typically done with a [POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) method.
 
 **Figure 5: The network traffic for a POST**
 
-![Network Traffic For A Post](/images/webforms/hello-jquery-network-traffic-post.png)
+![Network Traffic For A Post](../../../images/webforms/hello-jquery-network-traffic-post.png)
 
 In ASP.NET Web Forms, the page posts back to itself, or to the same URL. To inspect the information that was sent to the server, double-click on the [POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) method and click on the **Request Body** tab.
 
 **Figure 6: The network request body**
 
-![Network Request Body](/images/webforms/hello-jquery-network-request-body.png)
+![Network Request Body](../../../images/webforms/hello-jquery-network-request-body.png)
 
 Here you can see that the [_VIEWSTATE](http://msdn.microsoft.com/en-us/library/ms972976.aspx) object was sent back to the server. If you scroll down far enough, you are going to find the values of the first and last name text boxes in the `viewstate` object. What happened is that the browser did a POST to the server requesting the page, but also passing in the values of the text boxes. The server event was fired, the HTML in the **Default.aspx** page was altered and then sent to the browser.
 
@@ -97,7 +97,7 @@ To install [jQuery](http://jquery.com/) from [Nuget](https://www.nuget.org/), ri
 
 **Figure 7: The NuGet jQuery search**
 
-![Nuget jQuery Search](/images/webforms/hello-jquery-nuget-jquery-search.png)
+![Nuget jQuery Search](../../../images/webforms/hello-jquery-nuget-jquery-search.png)
 
 This is going to put the latest version of [jQuery](http://jquery.com/) in the `Scripts` folder. There are three files there:
 
@@ -109,7 +109,7 @@ Open up the **Site.Master** page. Drag the full [jQuery](http://jquery.com/) sou
 
 **Figure 8: jQuery that is added to the master page**
 
-![jQuery Added To The Master Page](/images/webforms/hello-jquery-jquery-added-to-master.png)
+![jQuery Added To The Master Page](../../../images/webforms/hello-jquery-jquery-added-to-master.png)
 
 ### Use jQuery Directly in Browser
 
@@ -117,7 +117,7 @@ Run the application again. When it comes up, open the developer tools by selecti
 
 **Figure 9: The Hello alert popup**
 
-![Alert Hello](/images/webforms/hello-jquery-alert-hello.png)
+![Alert Hello](../../../images/webforms/hello-jquery-alert-hello.png)
 
 [jQuery](http://jquery.com/) code can be executed either by calling methods off of the `jQuery` object, or simply using the `$`. The `$` is commonly known and recognized as representing [jQuery](http://jquery.com/).
 
@@ -156,13 +156,13 @@ Notice that the command is echoed out into the console, but there is no value. T
 
 **Figure 10: The no-value txtFirstName**
 
-![txtFirstName Has No Value](/images/webforms/hello-jquery-txtfirstname-no-value.png)
+![txtFirstName Has No Value](../../../images/webforms/hello-jquery-txtfirstname-no-value.png)
 
 To figure out why this did not work, click on the white arrow which is the element selector. Then go up into the page and click on the text box that you named `txtFirstName`. The HTML tab opens and the element in the page is highlighted. Notice that its ID is not `txtFirstName`, but rather `MainContent_txtFirstName`. This is because the controls were added to a content container in `Default.aspx`. In ASP.NET Web Forms, controls added to a parent server control are prefixed with the parent name. If parents are nested within parents, they may have multiple values appended onto the front. This is to make sure that IDs do in fact remain unique.
 
 **Figure 11: The prefixed txtFirstName**
 
-![Main Content Prefixed txtFirstName](/images/webforms/hello-jquery-main-content-txt-firstname.png)
+![Main Content Prefixed txtFirstName](../../../images/webforms/hello-jquery-main-content-txt-firstname.png)
 
 Switch back to the **Console** tab and, keeping in mind the actual ID of `txtFirstName` at runtime, get the text of `txtFirstName` by entering the following command in the console.
 
@@ -175,7 +175,7 @@ Notice that the text value of the first name text box is returned.
 
 **Figure 12: The txtFirstName having a value**
 
-![txtFirstName Has A Value](/images/webforms/hello-jquery-txtfirstname-has-value.png)
+![txtFirstName Has A Value](../../../images/webforms/hello-jquery-txtfirstname-has-value.png)
 
 ### Refactor Application to Use jQuery
 
@@ -222,7 +222,7 @@ The example below demonstrates how to replace an ASP button control with standar
 
 To create a new `click` event for the input button, select the button with [jQuery](http://jquery.com/) and then specify its `click` event. When the `click` event is specified, a function is passed in and it is going to be executed when the button click actually occurs. Notice that it is unnecessary to prefix the new button with `MainContent`, because while it is in an ASP.NET Content Area, it is not a server control and consequently its ID is not modified at runtime.
 
-The example below demonstrates how to create a `click` event for the new button.  
+The example below demonstrates how to create a `click` event for the new button.
 
 ###### Example
 

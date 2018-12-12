@@ -11,7 +11,7 @@ The following example demonstrates how to use the MultiSelect as a custom editor
 
 ###### Example
 
-```html
+```dojo
     <div id="main">
       <div id="grid" data-bind="source: dataSource"></div>
     </div>

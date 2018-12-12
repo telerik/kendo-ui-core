@@ -12,7 +12,7 @@ The following example demonstrates how to create a scrollable list of the select
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <style>
       .myClass .k-multiselect-wrap

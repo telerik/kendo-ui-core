@@ -11,7 +11,7 @@ The example below demonstrates how to create a custom view in the Kendo UI Gantt
 
 ###### Example
 
-```html
+```dojo
     <div id="gantt"></div>
     <script type="text/javascript">
       var gantt;

@@ -40,7 +40,7 @@ How can I lock and unlock columns by using checkboxes in the Toolbar instead?
 
 Use the `lockColumn` and `unlockColumn` methods. To make changes through a custom control in the Toolbar of the Grid, use a custom Toolbar template.
 
-```html
+```dojo
 <div id="grid"></div>
 
   <script type="text/x-kendo-template" id="template">

@@ -14,7 +14,7 @@ The example below demonstrates how to use the Linear Gradient as such when worki
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" />
     <script>
       kendo.dataviz.Gradients.series1Gradient = {

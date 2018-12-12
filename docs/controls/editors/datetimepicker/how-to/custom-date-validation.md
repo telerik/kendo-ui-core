@@ -11,7 +11,7 @@ The following example demonstrates how to create a custom date validation in the
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div id="to-do">
       <input id="datetimepicker" name="datetimepicker" style="width:200px;" required />

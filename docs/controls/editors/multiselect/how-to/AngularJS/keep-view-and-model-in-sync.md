@@ -27,7 +27,7 @@ The following example demonstrates how to keep in sync the view and the model of
 
 ###### Example
 
-```html
+```dojo
   <base href="https://demos.telerik.com/kendo-ui/multiselect/angular">
   <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">

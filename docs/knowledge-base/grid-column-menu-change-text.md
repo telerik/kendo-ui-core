@@ -33,7 +33,7 @@ How can I change the names of the columns inside the column menu in the Grid?
 1. For each element, [`find`](https://api.jquery.com/find/) the inner `span`.
 1. Assign the new text value to the [`nodeValue`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue) of the [`lastChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild) element of the `span`.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     $("#grid").kendoGrid({

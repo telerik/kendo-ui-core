@@ -23,7 +23,7 @@ For additional information about the code used in the example, refer to:
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
         &lt;p&gt;

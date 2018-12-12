@@ -51,7 +51,7 @@ var chat = $("#chat").kendoChat({
 
 1. Include the SignalR script on the HTML page.
 
-    ```html
+    ```dojo
     <script src="@aspnet/signalr/dist/browser/signalr.min.js"></script>
     ```
 

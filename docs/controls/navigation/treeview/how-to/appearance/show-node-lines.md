@@ -11,7 +11,7 @@ The following example demonstrates how to show lines between the nodes of the Tr
 
 ###### Example
 
-```html
+```dojo
     <div id="treeview"></div>
 
     <script>

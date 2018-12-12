@@ -11,7 +11,7 @@ The following example demonstrates how to export all Grid pages and their full p
 
 ###### Example
 
-```html
+```dojo
     <button class="k-button">Export Grid</button>
     <div id="header">
 		<h1>Export Grid</h1>

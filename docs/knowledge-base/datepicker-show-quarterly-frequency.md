@@ -31,7 +31,7 @@ How can I show a quarterly frequency (March, June, September, and December) in t
 1. Handle the [`open`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/events/open) event&mdash;in the event handler, override the `click` event of the left and right Calendar arrows.
 1. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/events/navigate) event of the Calendar&mdash;in the event handler and based on the `view`, disable the undesired months.
 
-```html
+```dojo
 <input id="datepicker" />
 <script>
 	$("#datepicker").kendoDatePicker({

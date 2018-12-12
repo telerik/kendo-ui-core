@@ -12,7 +12,7 @@ The following example demonstrates how to blur the input in a Kendo UI ComboBox 
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>ComboBox</h4>

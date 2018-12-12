@@ -19,7 +19,7 @@ The following example demonstrates how to use the AutoComplete for filtering and
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
     function filterAutoCompleteDataSource(e) {

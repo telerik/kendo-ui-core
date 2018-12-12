@@ -12,7 +12,7 @@ The following example demonstrates how to create a recurrence editor in the Sche
 
 ###### Example
 
-```html
+```dojo
      <div class="calendar"></div>
     <div class="adaptive-scheduler-wrapper">
       <div id="scheduler"></div>

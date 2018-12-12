@@ -14,7 +14,7 @@ The example below demonstrates how to store and load the axis range. Changes are
 
 ###### Example
 
-```html
+```dojo
     <button id="rebind">Rebind Chart</button>
     <div id="chart"></div>
     <script>

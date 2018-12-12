@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
         <button class="k-rpanel-toggle"><i class="k-icon k-i-menu"></i></button>

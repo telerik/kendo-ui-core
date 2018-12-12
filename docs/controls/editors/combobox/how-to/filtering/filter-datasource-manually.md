@@ -16,7 +16,7 @@ The following example demonstrates how to manually filter the Data Source instan
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <h4>ComboBox</h4>

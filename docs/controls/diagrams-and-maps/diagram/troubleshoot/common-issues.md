@@ -24,7 +24,7 @@ Select **Internet Options** > **Security** > **Internet** (or **Local intranet**
 
 **Figure 2. Options and settings to apply to render the chart graphics**
 
-![IEscript behaviors](/styles-and-layout/chart-ie-script-behaviors.png)
+![IEscript behaviors](../../../../styles-and-layout/chart-ie-script-behaviors.png)
 
 ## Export
 
@@ -44,7 +44,7 @@ The example below demonstrates how to embed fonts in exported PDF.
 
 ###### Example
 
-```html
+```dojo
 <button class='export-pdf k-button'>Save as PDF</button>
 
 <div id="diagram"></div>

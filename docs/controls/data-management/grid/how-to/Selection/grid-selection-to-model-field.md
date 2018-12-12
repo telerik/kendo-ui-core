@@ -15,7 +15,7 @@ The following example demonstrates how `SelectAll` that is located in the header
 
 ###### Example
 
-```html
+```dojo
 <style>
     html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }
     [role='gridcell']{
@@ -114,7 +114,7 @@ The following example demonstrates how `SelectAll` that is located in the header
 
 ###### Example
 
-```html
+```dojo
 <style>
     html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }
     [role='gridcell']{

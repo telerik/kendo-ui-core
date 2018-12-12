@@ -31,7 +31,7 @@ The following example demonstrates how to load data by using `fromJSON`.
 
 ###### Example
 
-```html
+```dojo
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet();
@@ -60,7 +60,7 @@ The following example demonstrates how to load sheet data by using `fromJSON`.
 
 ###### Example
 
-```html
+```dojo
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({

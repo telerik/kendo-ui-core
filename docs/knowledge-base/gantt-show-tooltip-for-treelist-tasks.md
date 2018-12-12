@@ -42,7 +42,7 @@ How can I show a tooltip with the task data when I hover a task in the treelist 
 
 For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/OmuWaC).
 
-```html
+```dojo
 	<script>
 		$("#target").kendoTooltip({
 			filter: ".k-gantt-treelist .k-grid-content tr",

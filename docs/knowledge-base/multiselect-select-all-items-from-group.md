@@ -31,7 +31,7 @@ How can I select all items from a group in the MultiSelect by clicking the group
 1. Attach a click handler to the group element.
 1. Get all items from the clicked group and pass them to the `value` method to select them.
 
-```html
+```dojo
 <select id="customers"></select>
 
 <script>

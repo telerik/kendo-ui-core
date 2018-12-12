@@ -32,7 +32,7 @@ How can I display the Kendo UI Editor in a Kendo UI Dialog?
 
 Initialize the Kendo UI Editor in the Dialog by displaying the value of the Editor in an external `div` element.
 
-```html
+```dojo
 <div id="editorDialog">
  <textarea id="editor"></textarea>
 </div>

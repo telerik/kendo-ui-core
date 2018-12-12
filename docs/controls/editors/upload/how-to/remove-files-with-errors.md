@@ -11,7 +11,7 @@ The following example demonstrates how to remove files which contain errors and 
 
 ###### Example
 
-```html
+```dojo
 <style>
   html {
 	font-size: 12px;

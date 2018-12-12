@@ -48,7 +48,7 @@ The Kendo UI Grid does not provide a built-in solution for capturing its `add` e
 
 Attach an event handler for the **Add New Row** button to the `dataBound` event of the Grid by using its `k-grid-add` class.
 
-```html
+```dojo
       <div id="example">
       <div id="grid"></div>
 

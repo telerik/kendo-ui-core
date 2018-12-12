@@ -11,7 +11,7 @@ The example below demonstrates how to stack static notifications to the left or 
 
 ###### Example
 
-```html
+```dojo
 <style>
 
     .notification-container

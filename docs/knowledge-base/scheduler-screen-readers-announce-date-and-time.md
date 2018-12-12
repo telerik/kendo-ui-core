@@ -46,7 +46,7 @@ change: function(e) {
 
 The following example demonstrates the implementation of the suggested approach.
 
-```html
+```dojo
 <div id="scheduler" ></div>
 
 <script>

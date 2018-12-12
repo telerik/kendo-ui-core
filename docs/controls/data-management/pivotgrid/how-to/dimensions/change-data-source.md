@@ -12,7 +12,7 @@ The following example demonstrates how to dynamically change the data source of 
 
 ###### Example
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">

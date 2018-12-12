@@ -16,7 +16,7 @@ To prevent the future selection of disabled items, add an event handler to the [
 
 ###### Example
 
-```html
+```dojo
     <input id="dropdownlist" /> <button class="k-button"> Mark Oranges as deleted</button>
     <script id="template" type="text/x-kendo-template">
     <span class="#: isDeleted ? 'k-state-disabled': ''#">

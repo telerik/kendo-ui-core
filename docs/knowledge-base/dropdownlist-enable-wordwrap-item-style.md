@@ -38,7 +38,7 @@ Implement [word-wrapping](https://www.w3schools.com/cssref/css3_pr_word-wrap.asp
 
 The following example demonstrates how to wrap words in the DropDownList while the width of the drop-down container is retained and the implementation of a horizontal scrollbar avoided.
 
-```html
+```dojo
     <style>
       /*For a specific Kendo UI DropDownList*/
       #myDropDownList-list.k-popup .k-list .k-item{

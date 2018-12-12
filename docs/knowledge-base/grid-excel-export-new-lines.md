@@ -37,7 +37,7 @@ I have new lines in the header titles of my Grid. How can I keep the line breaks
 
 The line breaks in the HTML cannot be handled by Excel as new lines. That is why you have to replace the break line tag by using an `\n` within the `excelExport` event of the Grid.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
     <script>

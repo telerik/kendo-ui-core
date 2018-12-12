@@ -11,7 +11,7 @@ The example below demonstrates how to implement a free-form drawing surface whil
 
 ###### Example
 
-```html
+```dojo
     <div id="surface" style="width: 1000px; height: 1000px;border: 1px solid black;cursor: crosshair"></div>
     <script>
       var draw = kendo.drawing;

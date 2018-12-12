@@ -17,7 +17,7 @@ To achieve this behavior:
 
 ###### Example
 
-```html
+```dojo
 
 <select id="panDirection">
   <option value="x">Pan Horizontally</option>

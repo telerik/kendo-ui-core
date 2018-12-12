@@ -40,7 +40,7 @@ How can I filter the DropDownList items by multiple properties?
 1. Prevent the default behavior of the `filter` event.
 1. Use the `dataSource` filter method to apply the custom filtering.
 
-```html
+```dojo
 	<input id="customers" style="width: 100%;"/>            
 
     <script>

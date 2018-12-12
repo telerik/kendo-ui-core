@@ -31,7 +31,7 @@ How can I disable the adding and editing of records in a Grid in inline edit mod
 1. Handle the [`mousedown`](https://api.jquery.com/mousedown/) event of the Grid for all buttons that do not have the `.k-grid-cancel` and `.k-grid-update` classes.
 1. In the `mousedown` event handler, check if a `.k-grid-edit-row` class exists in the Grid. Based on the result, prevent the default behavior.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

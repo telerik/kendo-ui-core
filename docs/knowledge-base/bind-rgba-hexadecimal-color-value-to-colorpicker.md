@@ -26,7 +26,7 @@ How can I make a custom MVVM binding to bind a RGBA hexadecimal color value to t
 
 Create a custom MVVM binding that converts the hexadecimal color value to RGBA and vice versa.
 
-```html
+```dojo
 <div id="example">
     <input id="colorpicker"
          type="color"

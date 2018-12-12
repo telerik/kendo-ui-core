@@ -38,7 +38,7 @@ The following example demonstrates how to copy the HTML content above the Editor
 
 ###### Example
 
-```html
+```dojo
     <p>Copy this is a paragraph that has some <span style="font-family:Impact, Charcoal, sans-serif;">inline </span><span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">styles</span> and paste it in the Editor.</p>
     <hr />
     <textarea id="editor"></textarea>
@@ -63,7 +63,7 @@ The following example demonstrates how to adjust the MS Word specific options. T
 
 ###### Example
 
-```html
+```dojo
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
@@ -84,7 +84,7 @@ The following example demonstrates a simple logic to strip the `<strong>` tags f
 
 ###### Example
 
-```html
+```dojo
     <p>some text with <strong>bold text</strong> inside.</p>
     <hr />
     <textarea id="editor"></textarea>

@@ -44,7 +44,7 @@ The example below demonstrates Kendo UI Templates with `with` blocking disabled.
 
 ###### Example
 
-```html
+```dojo
 <div id="results">
 </div>
 
@@ -104,7 +104,7 @@ Notice the way you are able to directly use the names of the `data` object prope
 
 ###### Example
 
-```html
+```dojo
 <div id="results">
 </div>
 

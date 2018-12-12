@@ -27,7 +27,7 @@ To achieve this behavior:
 
 ###### Example
 
-```html
+```dojo
 
     <div id="grid"></div>
 

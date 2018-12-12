@@ -14,7 +14,7 @@ In this way, the widget drills down on `expand` always starting from the expande
 
 ###### Example
 
-```html
+```dojo
  <script>
     //CUSTOM WIDGET THAT HANDLES THE SLICING!
     var kendo = window.kendo;

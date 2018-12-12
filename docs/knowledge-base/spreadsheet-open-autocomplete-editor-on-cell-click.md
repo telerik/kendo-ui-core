@@ -31,7 +31,7 @@ How can I:
 
 The following example demonstrates how to implement the desired scenario.
 
-```html
+```dojo
 <div id="spreadsheet" style="width: 100%;"></div>
 
 <div data-visible='true' data-role='window' data-modal='true' data-resizable='false' data-title='Select color' id='editWindow' style='display:none'>

@@ -12,7 +12,7 @@ The following example demonstrates how to auto-size the popup height in a Kendo 
 
 ###### Example
 
-```html
+```dojo
 <div id="example" role="application">
 <div id="tshirt-view" class="demo-section k-header">
   <h2>Customize your Kendo T-shirt</h2>

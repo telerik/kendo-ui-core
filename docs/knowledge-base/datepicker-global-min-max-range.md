@@ -37,7 +37,7 @@ In order to globally set the [min](https://docs.telerik.com/kendo-ui/api/javascr
 
 The following sample demonstrates the approach above by setting the max value to December 31, 3999 and the min value to January 1, 1700 for two Kendo UI DatePickers:
 
-```html
+```dojo
     <script>
       kendo.ui.DatePicker.fn.options.max = new Date(3999, 11, 31);
       kendo.ui.DatePicker.fn.options.min = new Date(1700, 0, 1);

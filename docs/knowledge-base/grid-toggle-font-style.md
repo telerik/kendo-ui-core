@@ -38,7 +38,7 @@ How can I toggle between regular fonts and italics by clicking on a radio button
 
 Use the `CSS` jQuery method and the `change` event of the radio button.
 
-```html
+```dojo
 <div id="example">
   <div id="grid"></div>
 

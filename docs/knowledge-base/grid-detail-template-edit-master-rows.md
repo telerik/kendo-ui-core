@@ -38,7 +38,7 @@ To work around the default behavior, fake the editing process in the [`detailIni
 	1. Change the value of the field in the `dataItem`.
 	1. Set the `dirty` property of the `dataItem` to true.
 
-```html
+```dojo
 <script id="detail-template" type="text/x-kendo-template">
     <div>
         productName: <input name="productName" class="k-textbox" value="#: productName #" />

@@ -18,7 +18,7 @@ The example below demonstrates how to customize the appearance of the legend ite
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" />
     <script>
       $("#chart").kendoChart({

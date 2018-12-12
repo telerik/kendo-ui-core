@@ -39,7 +39,7 @@ The Grid does not support a property for setting a tooltip to its command button
 	```
 1. Create a Kendo UI Tooltip whose `filter` property is set to include the `k-grid-commandName` class.
 
-```html
+```dojo
       <div id="grid"></div>
       <script>
         $(document).ready(function() {

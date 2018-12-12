@@ -40,7 +40,7 @@ How can I use `Tab` and `Shift`+`Tab` as shortcuts to indent or outdent an order
 1. Check if the `Shift` key is pressed.
 1. Use the `exec` method to trigger the outdent command. Otherwise, use the same method and trigger the indent command.
 
-```html
+```dojo
 <textarea id="editor"></textarea>
 <script>
 $("#editor").kendoEditor({

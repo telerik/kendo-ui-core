@@ -40,7 +40,7 @@ How can I show just a child Grid on certain elements in the hierarchical Grid?
 1. Subscribe to the `dataBound` event of the Grid.
 1. Loop through the rows to remove the expand arrow on the desired items by using the `remove` jQuery method.
 
-```html
+```dojo
 <div id="grid" /></div>
 
 <script>

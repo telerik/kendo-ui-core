@@ -13,7 +13,7 @@ The Kendo UI Charts can display details about the data point the mouse is curren
 
 **Figure 1: Tooltip in a Kendo UI Chart widget**
 
-![](/controls/charts/chart-tooltip.png)
+![Chart Tooltip](../chart-tooltip.png)
 
 ## Configuration
 

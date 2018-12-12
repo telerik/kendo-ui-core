@@ -31,7 +31,7 @@ How can I expand and collapse the details by clicking the relevant master row in
 1. Attach a [`click`](https://api.jquery.com/click/) handler to the master rows.
 1. In the `click` event handler and based on the `k-i-expand` icon, use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandrow) or the [`collapseRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/collapserow) methods of the Grid.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

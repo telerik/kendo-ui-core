@@ -14,7 +14,7 @@ The example below demonstrates a Router with a root route callback.
 
 ###### Example
 
-```html
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -45,7 +45,7 @@ The example below demonstrates how the parameter parsing is done.
 
 ###### Example
 
-```html
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -69,7 +69,7 @@ The example below demonstrates how to handle the optional segments.
 
 ###### Example
 
-```html
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -98,7 +98,7 @@ The example below demonstrates how to apply the route globbing.
 
 ###### Example
 
-```html
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -131,7 +131,7 @@ The example below demonstrates how to handle route navigation.
 
 ###### Example
 
-```html
+```dojo
     <a href="#/foo">Foo</a>
 
     <script>
@@ -156,7 +156,7 @@ The example below demonstrates how to handle missing routes.
 
 ###### Example
 
-```html
+```dojo
     <script>
     var router = new kendo.Router({ routeMissing: function(e) { console.log(e.url) } });
 
@@ -175,7 +175,7 @@ The example below demonstrates how to intercept the navigation.
 
 ###### Example
 
-```html
+```dojo
     <script>
     var router = new kendo.Router({
         change: function(e) {
@@ -199,7 +199,7 @@ In addition to the route parameters, the route callback will receive a `key:valu
 
 ###### Example
 
-```html
+```dojo
     <script>
     var router = new kendo.Router();
 
@@ -222,7 +222,7 @@ The example below demonstrates how to detect `Back` button press in a route.
 
 ###### Example
 
-```html
+```dojo
     <script>
       var router = new kendo.Router();
 

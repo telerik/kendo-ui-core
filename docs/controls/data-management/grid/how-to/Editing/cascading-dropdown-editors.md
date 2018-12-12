@@ -20,7 +20,7 @@ The following examples demonstrate how to add cascading DropDownList editors to 
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     // array of all brands
@@ -117,7 +117,7 @@ The example below demonstrates the popup editing mode of a Kendo UI Grid with nu
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>    
 
 <script id="popupTemplate" type="text/x-kendo-template">
@@ -255,7 +255,7 @@ The example below demonstrates the popup editing mode of a Kendo UI Grid with no
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>    
 
 <script id="popupTemplate" type="text/x-kendo-template">

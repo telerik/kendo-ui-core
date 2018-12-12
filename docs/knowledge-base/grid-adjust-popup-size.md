@@ -32,7 +32,7 @@ How can I change the width and height of the popup editor window in the Grid?
 1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid and add a custom CSS rule which explicitly specifies the dimensions of the popup wrapper.
 1. Add a custom CSS rule which sets an auto width and height for `.k-edit-form-container`.
 
-```html
+```dojo
 
 <style>
     div.k-edit-form-container {

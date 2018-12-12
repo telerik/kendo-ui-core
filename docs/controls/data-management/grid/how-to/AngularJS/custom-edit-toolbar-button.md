@@ -11,7 +11,7 @@ The following example demonstrates how to create a custom **Edit** button in the
 
 ###### Example
 
-```html
+```dojo
      <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-grid="myGrid" options="mainGridOptions"></div>

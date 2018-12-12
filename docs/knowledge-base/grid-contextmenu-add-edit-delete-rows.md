@@ -34,7 +34,7 @@ How can I use the Kendo UI ContextMenu to add, edit, and delete rows in the Kend
 	1. Get the row of the `target`.
 	1. Based on the selection and in a `switch/case`, invoke the relevant method of the Grid.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
     <ul id="context-menu">

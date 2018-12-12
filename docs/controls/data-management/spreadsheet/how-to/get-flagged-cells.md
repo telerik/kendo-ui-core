@@ -11,7 +11,7 @@ The following example demonstrates how to get all flagged cells in the Spreadshe
 
 ###### Example
 
-```html
+```dojo
 <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
 <div id="example">
   <div id="spreadsheet" style="width: 100%;"></div>

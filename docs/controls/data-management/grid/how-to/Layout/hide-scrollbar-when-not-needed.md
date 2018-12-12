@@ -11,7 +11,7 @@ The example below demonstrates how to conditionally hide the vertical scrollbar 
 
 ###### Example
 
-```html
+```dojo
 <style>
 .no-scrollbar .k-grid-header
 {

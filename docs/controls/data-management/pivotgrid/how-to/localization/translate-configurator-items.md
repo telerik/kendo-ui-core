@@ -12,7 +12,7 @@ The following example demonstrates how to access PivotConfigurator TreeView widg
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="configurator"></div>
 

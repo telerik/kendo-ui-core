@@ -22,7 +22,7 @@ The example below demonstrates how to create a timeline by using range bars.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     var data = [{

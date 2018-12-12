@@ -12,7 +12,7 @@ In the MultiViewCalendar, you can render a column which displays the number of t
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
     <script>
         $("#multiViewCalendar").kendoMultiViewCalendar({

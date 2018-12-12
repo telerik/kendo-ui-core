@@ -11,7 +11,7 @@ The following example demonstrates how to show a ContextMenu with tree-item acti
 
 ###### Example
 
-```html
+```dojo
     <ul id="treeview">
       <li data-expanded="true">
         <span class="k-sprite folder"></span>

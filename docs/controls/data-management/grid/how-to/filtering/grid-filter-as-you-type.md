@@ -21,7 +21,7 @@ The following example demonstrates how to filter the Grid on the fly, as the use
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
 
     <script>

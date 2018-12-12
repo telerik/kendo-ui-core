@@ -38,7 +38,7 @@ How can I add a footer with buttons to a resizable and scrollable Kendo UI Windo
 
 Position the footer with the custom buttons at the bottom of the Window by using the following CSS rules.  
 
-```html
+```dojo
 <div id="window">
   <div class="armchair"> Artek Alvar Aalto - Armchair 402
     <p>Alvar Aalto is one of the greatest names in modern architecture and design. Glassblowers at the iittala factory still meticulously handcraft the legendary vases that are variations on one theme, fluid organic shapes that let the end user decide the use. Interpretations of the shape in new colors and materials add to the growing Alvar Aalto Collection that remains true to his original design.</p>

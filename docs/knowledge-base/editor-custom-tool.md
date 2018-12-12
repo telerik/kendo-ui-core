@@ -31,7 +31,7 @@ How can I add a font-weight tool to the Editor whose value changes based on the 
 
 Register a new tool for the Editor.
 
-```html
+```dojo
 <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
     Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br>
     In this version, the Editor provides the core HTML editing engine, which includes basic text formatting, hyperlinks, lists, and image handling.

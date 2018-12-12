@@ -16,7 +16,7 @@ The following example demonstrates how to use the `schema.parse()` method to tra
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
           $(document).ready(function () {

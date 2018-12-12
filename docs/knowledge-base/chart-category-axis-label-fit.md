@@ -57,7 +57,7 @@ $("#chart").kendoChart({
 
 The following example demonstrates how to rotate the labels of the Kendo UI Column Chart.
 
-```html
+```dojo
     <div id="example">
       <div class="demo-section k-content">
         <div id="chart"></div>
@@ -257,7 +257,7 @@ function labelsTemplate(e) {
 
 The following example demonstrates how to render each label into a new line by using the [`categoryAxis.labels.template`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryAxis.labels.template) property.
 
-```html
+```dojo
     <div id="example">
       <div class="demo-section k-content">
         <div id="chart"></div>

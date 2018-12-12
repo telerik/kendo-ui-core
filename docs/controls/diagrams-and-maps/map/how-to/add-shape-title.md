@@ -13,7 +13,7 @@ In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) elem
 
 ###### Example
 
-```html
+```dojo
   <div id="map"></div>
   <script>
     $("#map").kendoMap({

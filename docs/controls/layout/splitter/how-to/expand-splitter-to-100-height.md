@@ -22,7 +22,7 @@ In the first example below, the outer Splitter has no siblings and has a 100% he
 
 ###### Example
 
-```html
+```dojo
 <style>
     html,
     body
@@ -105,7 +105,7 @@ The example below demonstrates a Kendo UI Splitter with a calculated height.
 
 ###### Example
 
-```html
+```dojo
 <style>
     html,
     body

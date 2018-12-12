@@ -31,7 +31,7 @@ How can I change the default filter operator of the Grid?
 
 Within [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit), change the value of the DropDownList by using its API.
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
       <script>

@@ -44,7 +44,7 @@ To enable the virtualization in a ComboBox, follow the example below. It demonst
 
 ###### Example
 
-```html
+```dojo
     <input id="orders" style="width: 400px" />
     <script>
         $(document).ready(function() {
@@ -109,7 +109,7 @@ The virtualized list container must have a `height` option set in pixels. If you
 
 ### Set Page Size
 
-To ensure the proper work of the virtualized list, the widget calculates the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4) formula and overrides the custom `pageSize` value. Enabling the paging functionality and setting `pageSize` in the ComboBox is efficient only when these configurations are used with virtualization. 
+To ensure the proper work of the virtualized list, the widget calculates the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4) formula and overrides the custom `pageSize` value. Enabling the paging functionality and setting `pageSize` in the ComboBox is efficient only when these configurations are used with virtualization.
 
 Consider the following scenario about a widget:
 - The `height` is `520px`
@@ -192,7 +192,7 @@ On initial load, the widget checks whether the selected value is present in the 
 
 **Figure 1: The virtualization process**
 
-![Virtualization process](/controls/editors/combobox/mapValueTo-index.png)
+![Virtualization process](mapValueTo-index.png)
 
 **Function result**
 
@@ -246,7 +246,7 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the first data page.
 8. The widget list displays the items from the first page no matter if the selected items are part of it or not.
 
-![Virtualization process](/controls/editors/combobox/mapValueTo-dataItem.png)
+![Virtualization process](mapValueTo-dataItem.png)
 
 **Function result**
 

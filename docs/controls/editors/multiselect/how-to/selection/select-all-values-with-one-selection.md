@@ -12,7 +12,7 @@ The following example demonstrates how to create a `dataItem` that holds an `all
 
 ###### Example
 
-```html
+```dojo
     <div id="example" role="application">
     <div class="demo-section k-header">
       <h2>Invite Attendees</h2>
@@ -88,7 +88,7 @@ The example below demonstrates how to select all items by selecting the `ALL` it
 
 ###### Example
 
-```html
+```dojo
     <div id="example" role="application">
       <div class="demo-section k-header">
         <h2>Invite Attendees</h2>

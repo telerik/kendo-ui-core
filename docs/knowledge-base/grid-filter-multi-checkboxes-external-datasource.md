@@ -30,7 +30,7 @@ How can I display only the valid possibilities in the multi-checkbox filter base
 
 Use an external Kendo UI dataSource and assign it both to the [Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/datasource) and the [filters](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.filterable.datasource).
 
-```html
+```dojo
 <div id="example">
     <div id="client"></div>
     <script>

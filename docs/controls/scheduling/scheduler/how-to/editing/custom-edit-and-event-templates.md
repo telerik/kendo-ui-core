@@ -12,7 +12,7 @@ The following example demonstrates how to create and use custom templates for th
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="team-schedule">
         <div id="people">

@@ -11,7 +11,7 @@ The following example demonstrates how to persist the old value of the NumericTe
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <h4>Set value</h4>

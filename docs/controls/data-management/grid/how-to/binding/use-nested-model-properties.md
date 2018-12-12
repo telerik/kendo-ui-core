@@ -27,7 +27,7 @@ The following example demonstrates how to use nested model properties. The CRUD 
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       function getData(length) {

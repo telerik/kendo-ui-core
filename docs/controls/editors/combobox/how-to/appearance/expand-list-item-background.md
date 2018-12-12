@@ -16,7 +16,7 @@ The following example demonstrates how to handle this issue and works for the Ke
 
 ###### Example
 
-```html
+```dojo
 <div id="example" role="application">
     <style>
         /* the first part of the ID matches the ID of the widget */

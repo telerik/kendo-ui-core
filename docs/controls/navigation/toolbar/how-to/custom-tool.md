@@ -15,7 +15,7 @@ The example below demonstrates how to develop and register custom ToolBar tools,
 
 ###### Example
 
-```html
+```dojo
   <div id="toolbar"></div>
   <script>
     //ToolBar tool - inherits from base tool

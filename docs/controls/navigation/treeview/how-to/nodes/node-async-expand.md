@@ -13,7 +13,7 @@ Load the child nodes asynchronously in the child data source by using the [`load
 
 ###### Example
 
-```html
+```dojo
 <div id="container">
     <button id='expandNode' class="k-button k-primary">Expand selected node</button>
     <div id="treeview"></div>

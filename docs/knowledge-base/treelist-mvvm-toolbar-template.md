@@ -30,7 +30,7 @@ How can I set the toolbar template in a Kendo UI MVVM TreeList?
 
 Use a function that will return the desired template.
 
-```html
+```dojo
 <script id="toolbar-template" type="text/x-kendo-template">
 	<div>
 		<button id="myButton">

@@ -12,7 +12,7 @@ The example below demonstrates how to show the tooltip of a Kendo UI Chart upon 
 
 ###### Example
 
-```html
+```dojo
     <div class="wrapper" style="position: relative;">
        <div id="chart"></div>
 

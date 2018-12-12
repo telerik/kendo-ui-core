@@ -66,7 +66,7 @@ The example below demonstrates how to use a bundle script with RequireJS.
 
 ###### Example
 
-```html
+```dojo
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -106,7 +106,7 @@ The example below demonstrates how to load AngularJS and initialize it with [`an
 
 ###### Example
 
-```html
+```dojo
 <!DOCTYPE HTML>
 <html>
   <head>

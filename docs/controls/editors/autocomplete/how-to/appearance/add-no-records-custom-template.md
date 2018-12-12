@@ -12,7 +12,7 @@ The following example demonstrates how to add a customized template when the ent
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="shipping">
         <label for="countries" class="info">Choose shipping countries:</label>

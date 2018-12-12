@@ -26,7 +26,7 @@ How to cancel (or not) the actual selection of an item in the Kendo UI DropDownL
 
 Save the old value and, then, revert back to it. Revert the value if the **Cancel** option was selected.
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content" ng-controller="MyCtrl">
     <h4>Static data</h4>

@@ -13,7 +13,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
 
 ###### Example - detail Grid export to Excel (all pages and details)
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
   // used to wait for the children to finish async export
@@ -208,7 +208,7 @@ To get the workbook of the detail Grids, the demos use the [`excelExport`](/api/
 
 ###### Example - detail Grid export to Excel (current page only)
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
   // used to wait for the children to finish async export

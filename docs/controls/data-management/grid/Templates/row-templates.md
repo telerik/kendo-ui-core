@@ -44,7 +44,7 @@ In the resulting Grid, the email address is an interactive hyperlink which opens
 
 **Figure 6: Grid with a row template applied**
 
-![Grid with row template](/controls/data-management/grid/grid8_1.png)
+![Grid with row template](../grid8_1.png)
 
 For more information on Kendo UI templates, refer to the [introductory article on templates]({% slug overview_kendoui_templatescomponent %}).
 

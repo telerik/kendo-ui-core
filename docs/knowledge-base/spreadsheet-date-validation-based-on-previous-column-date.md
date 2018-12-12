@@ -32,7 +32,7 @@ How can I configure the date validation in the Spreadsheet based on a date value
 
 Configure the [cell validation](https://demos.telerik.com/kendo-ui/spreadsheet/validation) in the following way:
 
-```html
+```dojo
     <div id="spreadsheet" style="width: 100%;"></div>
 
 	<script>

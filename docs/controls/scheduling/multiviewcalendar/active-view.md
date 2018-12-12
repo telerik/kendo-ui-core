@@ -25,7 +25,7 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
 
     <script>

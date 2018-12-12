@@ -51,7 +51,7 @@ However, you can still work around this issue by applying custom logic to the:
 
 The following example demonstrates how to customize the default behavior of the ListView widget and implement a pager at its top and bottom.
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +114,7 @@ To add a pager to an MVC ListView wrapper, apply the same configuration approach
 
 The following example demonstrates how to customize the default behavior of the ListView wrapper and implement a pager at its top and bottom.
 
-```html
+```dojo
 <div id="pager1" class="k-pager-wrap"></div>
 @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("listView")

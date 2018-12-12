@@ -32,7 +32,7 @@ Use the `$("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content
 
 The following example demonstrates how to display a toolbar above the pager and at the bottom of a Grid which uses batch editing.
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
       <script>

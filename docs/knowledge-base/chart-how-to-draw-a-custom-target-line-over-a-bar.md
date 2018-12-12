@@ -46,7 +46,7 @@ Use either of the following approaches:
 
 The following example demonstrates how to use the custom visuals approach.
 
-```html
+```dojo
 <div id="example">
       <div id="chart-mmHg"></div>
     </div>

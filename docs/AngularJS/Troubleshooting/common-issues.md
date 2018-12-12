@@ -20,7 +20,7 @@ For example, a DatePicker with an empty `value` attribute will not initialize.
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-date-picker value="" />
     </div>

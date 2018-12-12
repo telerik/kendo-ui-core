@@ -32,7 +32,7 @@ How can I validate whether the input of the user in the DatePicker is in the cor
 
 Use the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview) and create a custom validation rule which validates the format of the date.
 
-```html
+```dojo
     <h2>Use client-side validation:</h2>
     <form id="form">
       <input data-role="datepicker"

@@ -32,7 +32,7 @@ When you enable selection, the built-in option for deselecting a row is by using
 
 The following example demonstrates how to deselect a row by clicking only, that is, without holding the `Ctrl` key.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
 
 

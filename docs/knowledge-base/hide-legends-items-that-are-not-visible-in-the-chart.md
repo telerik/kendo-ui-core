@@ -43,7 +43,7 @@ How can I hide the specific legend items for which I will not have any data to s
 
 To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend.item.visual) property of the Chart.
 
-```html
+```dojo
   <div id="chart"></div>
     <script>
       $("#chart").kendoChart({

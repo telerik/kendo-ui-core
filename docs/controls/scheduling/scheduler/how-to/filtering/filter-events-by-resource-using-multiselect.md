@@ -12,7 +12,7 @@ The following example demonstrates how to filter Scheduler events by the resourc
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
   <input type="text" id="comboBox" name="comboBox" />
   <br />

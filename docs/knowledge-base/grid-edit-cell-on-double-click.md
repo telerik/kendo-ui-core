@@ -27,7 +27,7 @@ How can I edit cells on double-click in an editable Grid when selection is enabl
 1. Disable the built-in editing mechanism of the Grid.
 1. Use the `editCell` and `closeCell` methods within the `dblclick` event of the `td` elements.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
 
 

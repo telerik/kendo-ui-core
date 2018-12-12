@@ -13,7 +13,7 @@ The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/shee
 
 ###### Example
 
-```html
+```dojo
 <style>
     #spreadsheet, #chart {
         height: 500px;

@@ -124,7 +124,7 @@ The [`weekNumber`](/api/javascript/ui/calendar/configuration/weeknumber) option 
 
 ###### Example
 
-```html
+```dojo
    <div id="calendar"></div>
    <script>
     $("#calendar").kendoCalendar({
@@ -180,7 +180,7 @@ As of the Kendo UI 2017 R3 release, the Calendar allows you to implement the mul
 
 ###### Example
 
-```html
+```dojo
    <div id="calendar"></div>
    <script>
     $("#calendar").kendoCalendar({
@@ -197,7 +197,7 @@ To perform the multiple date selection, the user can also use the keyboard:
 
 **Figure 1: Calendar with multiple date selection**
 
-![Calendar with multiple dates selected](/controls/scheduling/calendar/calendar1_1.png)
+![Calendar with multiple dates selected](calendar1_1.png)
 
 ### Range Date Selection
 
@@ -208,7 +208,7 @@ The Calendar enables the range date selection over the keyboard. The usage of th
 
 **Figure 2: Calendar with range selection**
 
-![Calendar with range selection](/controls/scheduling/calendar/calendar1_2.png)
+![Calendar with range selection](calendar1_2.png)
 
 ### Week Selection
 
@@ -216,7 +216,7 @@ When the user clicks on a specific week number, the Calendar selects the entire 
 
 **Figure 3: Calendar with week selection**
 
-![Calendar with week selection](/controls/scheduling/calendar/calendar1_3.png)
+![Calendar with week selection](calendar1_3.png)
 
 ## Keyboard Navigation
 
@@ -248,7 +248,7 @@ When you set an array, list the days that need to be disabled by using the first
 
 ###### Example
 
-```html
+```dojo
    <div id="calendar"></div>
    <script>
     $("#calendar").kendoCalendar({
@@ -264,7 +264,7 @@ When you add a function, determine its return value as `true` for the date that 
 
 ###### Example
 
-```html
+```dojo
     <div id="calendar"></div>
     <script>
     $("#calendar").kendoCalendar({

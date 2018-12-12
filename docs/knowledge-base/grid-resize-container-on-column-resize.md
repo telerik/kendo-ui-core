@@ -30,7 +30,7 @@ How can I resize the Grid after one of its columns is resized, so that it adjust
 
 Manually change the width of the Grid-wrapping element to match the width of the table element for the data. For resizing the wrapping container, the following example utilizes the `columnResize` event.
 
-```html
+```dojo
         <div id="example">
             <div id="grid"></div>
             <script>

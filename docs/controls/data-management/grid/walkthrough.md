@@ -50,7 +50,7 @@ To bind the Grid to local data, set the `dataSource` option of the `kendoGrid` o
 
 **Figure 1: Grid bound to a local data array**
 
-![Kendo UI Grid bound to a local data array](/controls/data-management/grid/grid2_1.png)
+![Kendo UI Grid bound to a local data array](grid2_1.png)
 
 ### Bind to Remote Data
 
@@ -88,7 +88,7 @@ To enable selection in the Grid set the [`selectable`](/api/javascript/ui/grid/c
 
 **Figure 2: Grid with enabled row selection**
 
-![Grid with enabled row selection](/controls/data-management/grid/grid4_1.png)
+![Grid with enabled row selection](grid4_1.png)
 
 It is also possible to set the `selectable` option to any of the following values:
 * `row`
@@ -213,11 +213,11 @@ To enable the grouping functionality of the Grid, set the `groupable` option to 
 
 **Figure 3: Grid with its grouping functionality enabled**
 
-![Grid With Grouping Enabled](/controls/data-management/grid/grid5_1.png)
+![Grid With Grouping Enabled](grid5_1.png)
 
 **Figure 4: Grid with its data grouped by last name**
 
-![Grid Grouped By Last Name](/controls/data-management/grid/grid6_1.png)
+![Grid Grouped By Last Name](grid6_1.png)
 
 It is also possible to sort the grouped content by clicking on the grouping tab. In the previous example, click on **lastName** to sort the grouped data in descending order. Click it again to toggle to ascending order. Each of the individual groups themselves can be toggled from expanded to collapsed states by clicking on the arrow next to the respective header grouping.
 
@@ -270,7 +270,7 @@ By default, sorting is disabled.
 
 **Figure 5: Grid with its sorting functionality enabled**
 
-![Grid with Sorting Enabled](/controls/data-management/grid/grid7_1.png)
+![Grid with Sorting Enabled](grid7_1.png)
 
 Sorting is also a function that can be pushed to the server for increased performance. This is done through the data source itself and by setting the `serverSorting` option on the data source to `true`. When you delegate the sorting to the server, you will receive the default `orderBy` parameter. This field will contain the field name of the column to sort by in the dataset.
 

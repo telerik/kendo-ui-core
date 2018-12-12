@@ -16,7 +16,7 @@ The example below demonstrates how to sort categories in a grouped Kendo UI Char
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       var data = [{

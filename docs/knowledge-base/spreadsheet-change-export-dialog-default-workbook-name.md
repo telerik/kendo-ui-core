@@ -30,7 +30,7 @@ How can I change the default filename of the workbook which appears in the Expor
 1. Query the DOM and get a reference to the Window widget which contains the export form.
 1. Retrieve the corresponding ViewModel and update the `name` property value.
 
-```html
+```dojo
 <div id="example">
     <div id="spreadsheet"></div>
 </div>

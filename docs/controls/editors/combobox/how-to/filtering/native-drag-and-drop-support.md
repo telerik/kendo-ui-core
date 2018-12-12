@@ -17,7 +17,7 @@ To see how the example works:
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>

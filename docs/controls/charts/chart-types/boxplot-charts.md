@@ -19,7 +19,7 @@ When binding the Box Plot Chart, there are seven special properties of the `seri
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -57,7 +57,7 @@ The Box Plot Chart orientation can be changed by setting the series type to `ver
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -95,7 +95,7 @@ Outliers are values that appear outside of the range closed by the lower and upp
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({

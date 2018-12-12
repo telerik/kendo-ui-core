@@ -11,7 +11,7 @@ The example below demonstrates how to restrict the movement of a Kendo UI Window
 
 ###### Example
 
-```html
+```dojo
     <div id="window">
       Window content
     </div>

@@ -12,7 +12,7 @@ The following example demonstrates how to use an [`errorTemplate`](/api/framewor
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div class="demo-section k-header">
         <form id="tickets">

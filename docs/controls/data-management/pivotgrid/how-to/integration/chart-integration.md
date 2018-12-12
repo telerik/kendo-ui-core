@@ -15,7 +15,7 @@ The following example demonstrates how to integrate a Kendo UI PivotGrid widget 
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="pivotgrid"></div>
     <div id="chart"></div>

@@ -31,7 +31,7 @@ How can I edit the text of a TreeView node by using a context menu?
 1. Display a textbox in a Window.
 1. Set the entered text in the textbox as node text.
 
-```html
+```dojo
 <div id="treeview"></div>
 
 <ul id="menu">

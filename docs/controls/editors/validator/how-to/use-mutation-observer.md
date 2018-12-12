@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this behavior by using a `Muta
 
 ###### Example
 
-```html
+```dojo
     <style scoped>
       /*hide validation message*/
       .k-tooltip-validation {

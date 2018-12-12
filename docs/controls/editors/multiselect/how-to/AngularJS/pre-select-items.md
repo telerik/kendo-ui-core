@@ -17,7 +17,7 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
 
 ###### Example
 
-```html
+```dojo
 <script src="https://cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js"></script>
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content" ng-controller="MyCtrl">

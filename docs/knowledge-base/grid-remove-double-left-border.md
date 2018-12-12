@@ -30,7 +30,7 @@ How can I remove the double left border when hiding the first column in the Kend
 1. Handle the [`columnHide`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) and [`columnShow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow) events of the Grid.
 1. In the event handler of `columnHide` and `columnShow`, find the first visible column and apply a class that will remove its left border.
 
-```html
+```dojo
 <style>
 	.k-filter-row>th.first-visible-column,
 	.k-grid tbody td.first-visible-column,

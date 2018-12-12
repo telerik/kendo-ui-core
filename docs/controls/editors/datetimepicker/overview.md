@@ -153,7 +153,7 @@ When you disable dates by setting an array, list the days that need to be disabl
 
 ###### Example
 
-```html
+```dojo
     <input id="dateTimePicker" />
 
     <script>
@@ -170,7 +170,7 @@ When you disable dates by adding a function, determine its return value as `true
 
 ###### Example
 
-```html
+```dojo
     <input id="dateTimePicker" />
 
     <script>

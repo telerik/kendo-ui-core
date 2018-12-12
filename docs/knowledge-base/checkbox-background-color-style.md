@@ -45,7 +45,7 @@ Set a different [`color`](https://www.w3schools.com/cssref/pr_text_color.asp) an
 
 The following example demonstrates how to render a list of CheckBoxes with a new color scheme.
 
-```html
+```dojo
     <style>
       /*Empty checkbox*/
       .k-checkbox-label:before{

@@ -35,7 +35,7 @@ To get the `dataItem` for each selected row:
 1. Loop through the rows by using the [`each`](https://api.jquery.com/each/) jQuery method.
 1. Get every row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

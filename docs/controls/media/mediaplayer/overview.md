@@ -44,7 +44,7 @@ Once the video files are ready, initialize the MediaPlayer by using the `div` el
 
 ###### Example
 
-```html
+```dojo
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>
 <script>
     $("#mediaplayer1").kendoMediaPlayer({
@@ -73,7 +73,7 @@ When you add multiple sources for the video, an **HD** button is automatically d
 
 ###### Example
 
-```html
+```dojo
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>
 <script>
     $("#mediaplayer1").kendoMediaPlayer({
@@ -104,7 +104,7 @@ The example below demonstrates how to access an existing MediaPlayer instance.
 
 ###### Example
 
-```html
+```dojo
 <button onclick="buttonClick();">Pause Video</button>
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>
 <script>
@@ -157,7 +157,7 @@ To localize the tooltip texts from the interface, use the configuration options 
 
 ###### Example
 
-```html
+```dojo
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>
 <script>
     $("#mediaplayer1").kendoMediaPlayer({

@@ -15,7 +15,7 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
 
 ###### Example
 
-```html
+```dojo
     <div id="map"></div>
     <script>
       var draw = kendo.dataviz.drawing;

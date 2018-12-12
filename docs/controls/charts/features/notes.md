@@ -13,7 +13,7 @@ Kendo UI Charts can display the metadata of a point or a specific part of the ax
 
 **Figure 1: Notes displayed in a chart**
 
-![](/controls/charts/chart-notes.png)
+![](../chart-notes.png)
 
 ## Configuration
 

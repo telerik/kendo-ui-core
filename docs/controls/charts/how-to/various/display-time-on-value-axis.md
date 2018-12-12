@@ -20,7 +20,7 @@ The example below demonstrates how to display time on the value axis of categori
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({

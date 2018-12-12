@@ -32,7 +32,7 @@ How can I provide additional notification that the NumericTextBox value must be 
 1. In the `document ready` event handler, [`append`](https://api.jquery.com/append/) the desired `span` by using the `k-numeric-wrap` class selector.
 1. Display the span when the NumericTextBox has the `k-state-invalid` class by using CSS.
 
-    ```html
+    ```dojo
     <style>
         span.myInvalid {
             position: relative;

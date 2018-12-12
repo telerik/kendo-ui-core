@@ -55,7 +55,7 @@ The following example demonstrates how to use the serialization and deserializat
 
 ###### Example
 
-```html
+```dojo
 <textarea id="editor"></textarea>
 <script>
   function sanitizeHtml(html) {

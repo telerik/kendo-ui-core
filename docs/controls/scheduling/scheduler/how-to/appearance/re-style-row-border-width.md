@@ -12,7 +12,7 @@ The following example demonstrates how to restyle the width of the row border in
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="team-schedule">
         <div id="people">

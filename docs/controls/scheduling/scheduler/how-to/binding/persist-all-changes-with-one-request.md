@@ -12,7 +12,7 @@ The following example demonstrates how to persist all changes with a single requ
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
 
       <div id="scheduler"></div>

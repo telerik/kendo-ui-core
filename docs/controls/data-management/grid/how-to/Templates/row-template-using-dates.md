@@ -11,7 +11,7 @@ The following example demonstrates how to use dates inside a Grid row template.
 
 ###### Example
 
-```html
+```dojo
      <div id="example">
       <table id="grid">
         <colgroup>

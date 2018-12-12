@@ -12,7 +12,7 @@ The following example demonstrates how to use different date formats for the Sch
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({

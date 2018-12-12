@@ -11,7 +11,7 @@ The following example demonstrates how to prevent invalid values in a Kendo UI D
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header" style="width: 400px;">
       <h4>Select date</h4>

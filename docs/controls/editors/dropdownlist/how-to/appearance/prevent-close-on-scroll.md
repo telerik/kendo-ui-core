@@ -18,7 +18,7 @@ The DropDownList enables you to prevent this behavior and to make the popup rema
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <h4>Products</h4>

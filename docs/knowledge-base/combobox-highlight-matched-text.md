@@ -27,7 +27,7 @@ How the matched text in the ComboBox items could be highlighted?
 
 Implement the `dataBound` event handler for the widget.
 
-```html
+```dojo
 <style>
   .highlight {
     background-color: yellow;

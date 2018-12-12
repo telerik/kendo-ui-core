@@ -29,7 +29,7 @@ How can I use a single function that is defined in the `viewModel` to control th
 
 Pass a single string argument as a function parameter. For example, if you need to pass an array, pass it as a string with a certain delimiter.
 
-````html
+````dojo
 <div>
   <label for="selection">Selection: </label>
   <input id="selection"

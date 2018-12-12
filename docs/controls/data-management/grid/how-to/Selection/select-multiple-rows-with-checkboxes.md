@@ -11,7 +11,7 @@ The following example demonstrates how to select multiple rows by using the chec
 
 ###### Example
 
-```html
+```dojo
    <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

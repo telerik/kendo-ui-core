@@ -15,7 +15,7 @@ Because this approach is not related to the functionalities of the Kendo UI suit
 >
 > To achieve a dynamic switching from or to [Sass themes]({% slug sassbasedthemes_kendoui %}), the page has to be fully reloaded (`location.reload()`). The reason for this behavior is that the common resources that are used are different and the browser is not capable of dynamically unloading the resources that are not necessary.
 
-```html
+```dojo
 
 <style>
 

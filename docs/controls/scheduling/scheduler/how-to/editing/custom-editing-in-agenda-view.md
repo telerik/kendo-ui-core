@@ -12,7 +12,7 @@ The following example demonstrates how to implement custom editing in the Agenda
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="team-schedule">
         <div id="people">

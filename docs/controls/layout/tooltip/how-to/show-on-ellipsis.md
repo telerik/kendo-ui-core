@@ -11,7 +11,7 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
 ###### Example
 
-```html
+```dojo
     <style>
       td{
         max-width: 200px;

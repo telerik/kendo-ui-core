@@ -43,7 +43,7 @@ How can I set the `name` attribute to each of the ComboBox items?
 
 1. Use the jQuery `attr` method to set the attribute.
 
-```html
+```dojo
 	<input id="combobox" />
 	<script>
 	  $("#combobox").kendoComboBox({

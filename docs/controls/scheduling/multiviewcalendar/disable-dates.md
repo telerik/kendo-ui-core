@@ -21,7 +21,7 @@ When you set an array, list the days that need to be disabled by using the first
 
 ###### Example
 
-```html
+```dojo
    <div id="multiViewCalendar"></div>
    <script>
     $("#multiViewCalendar").kendoMultiViewCalendar({
@@ -37,7 +37,7 @@ When you add a function, determine its return value as `true` for the date that 
 
 ###### Example
 
-```html
+```dojo
     <div id="multiViewCalendar"></div>
     <script>
     $("#multiViewCalendar").kendoMultiViewCalendar({

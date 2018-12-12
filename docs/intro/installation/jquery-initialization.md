@@ -33,7 +33,7 @@ The following example demonstrates how to instantiate a Kendo UI AutoComplete.
 
 ###### Example
 
-```html
+```dojo
 
 	<p>Animal: <input id="animal" /></p>
 

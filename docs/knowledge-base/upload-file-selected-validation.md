@@ -39,7 +39,7 @@ How can I validate if a file is selected for upload when working with the Upload
 
 Use a custom rule in the Kendo UI Validator to validate on form submission whether a file in the Upload was selected.
 
-```html
+```dojo
     <form id="myForm" action="https://demos.telerik.com/kendo-ui/upload/submit" enctype="multipart/form-data" method="post">
         <input id="files" name="files" type="file"/>
         <input type="submit" />    

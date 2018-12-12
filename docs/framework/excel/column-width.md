@@ -20,7 +20,7 @@ The example below demonstrates how to set the width of a column in a worksheet.
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -51,7 +51,7 @@ Enable the automatic width calculation by setting the [`autoWidth`](/api/javascr
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [

@@ -12,7 +12,7 @@ The following example demonstrates how to access the TreeView with the **Include
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="configurator"></div>
     <div id="pivotgrid"></div>

@@ -35,7 +35,7 @@ How can I add a ProgressBar to a Kendo UI Grid cell?
 
 1. On the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event, initialize the ProgressBars by using the model value.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
 $("#grid").kendoGrid({

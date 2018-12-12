@@ -31,7 +31,7 @@ How can I populate a column aggregate (sum) into a separate `div` element outsid
 
 To retrieve the aggregate of a column, use the [`aggregates`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregates) method of the dataSource.
 
-````html
+````dojo
   <body>
     <div id="example">
       <div id="agg"> </div>

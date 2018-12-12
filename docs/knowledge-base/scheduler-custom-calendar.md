@@ -27,7 +27,7 @@ How can I customize the Calendar that is present in the toolbar of the Scheduler
 1. Handle the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound) event of the Scheduler.
 1. Handle the popup button click of the Calendar so that the embedded widget becomes available for editing.
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
 	$(function() {

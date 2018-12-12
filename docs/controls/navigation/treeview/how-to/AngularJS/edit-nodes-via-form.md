@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior by using a stand
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <!-- TreeView -->

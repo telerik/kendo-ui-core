@@ -11,7 +11,7 @@ The following example demonstrates how to override hours in the popup of the Dat
 
 ###### Example
 
-```html
+```dojo
 <input id="datetimepicker" />
 <script>
   $(function() {
