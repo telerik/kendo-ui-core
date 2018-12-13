@@ -4092,7 +4092,7 @@ The format string for selected items count in filter menu when [search](columns.
 
 ### filterable.messages.operator `String` *(default: "Operator")*
 
-The text of the operator item in filter menu (available in mobile mode only).
+The text displayed in the tooltip of the operator item in filter menu.
 
 #### Example - set the text of operator item
 
@@ -4120,9 +4120,39 @@ The text of the operator item in filter menu (available in mobile mode only).
     });
     </script>
 
+### filterable.messages.additionalOperator `String` *(default: "Additional operator")*
+
+The text displayed in the tooltip of the additional operator item in filter menu.
+
+#### Example - set the text of operator item
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category", values: [
+            { text: "Beverages", value: 1 },
+            { text: "Food", value: 2 },
+          ]
+        }
+      ],
+      dataSource: [
+        { productName: "Tea", category: 1 },
+        { productName: "Ham", category: 2 }
+      ],
+      mobile: "phone",
+      filterable: {
+        messages: {
+          additionalOperator: "Choose operator"
+        }
+      }
+    });
+    </script>
+
 ### filterable.messages.value `String` *(default: "Value")*
 
-The text of the value item in filter menu (available in mobile mode only).
+The text displayed in the tooltip of the value item in filter menu.
 
 #### Example - set the text of value item
 
@@ -4145,6 +4175,66 @@ The text of the value item in filter menu (available in mobile mode only).
       filterable: {
         messages: {
           value: "Choose value"
+        }
+      }
+    });
+    </script>
+
+### filterable.messages.additionalValue `String` *(default: "Additional value")*
+
+The text displayed in the tooltip of the additional value item in filter menu.
+
+#### Example - set the text of value item
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category", values: [
+            { text: "Beverages", value: 1 },
+            { text: "Food", value: 2 },
+          ]
+        }
+      ],
+      dataSource: [
+        { productName: "Tea", category: 1 },
+        { productName: "Ham", category: 2 }
+      ],
+      mobile: "phone",
+      filterable: {
+        messages: {
+          additionalValue: "Choose value"
+        }
+      }
+    });
+    </script>
+
+### filterable.messages.logic `String` *(default: "Logic")*
+
+The text displayed in the tooltip of the logic item in filter menu.
+
+#### Example - set the text of value item
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category", values: [
+            { text: "Beverages", value: 1 },
+            { text: "Food", value: 2 },
+          ]
+        }
+      ],
+      dataSource: [
+        { productName: "Tea", category: 1 },
+        { productName: "Ham", category: 2 }
+      ],
+      mobile: "phone",
+      filterable: {
+        messages: {
+          logic: "Choose logic"
         }
       }
     });
