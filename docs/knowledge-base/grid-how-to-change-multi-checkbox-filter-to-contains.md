@@ -42,7 +42,7 @@ To customize the filter:
 1. Within the `filter` event of the Grid, modify the filter expression and change them to `contains`.
 
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

@@ -12,7 +12,7 @@ The following example demonstrates how to reload the configuration options of th
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <button id="reload">Reload PivotDataSource configuration</button>
     <div id="pivotgrid"></div>

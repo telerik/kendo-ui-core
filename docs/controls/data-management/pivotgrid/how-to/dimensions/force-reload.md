@@ -12,7 +12,7 @@ The following example demonstrates how to reload the data source of the PivotGri
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="forceReadButton">Force DataSource Read</div>
 

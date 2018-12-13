@@ -94,7 +94,7 @@ The example below demonstrates how to use the data-type attribute.
 
 ###### Example
 
-```html
+```dojo
     <div id="view">
         <input type="checkbox" name="items" data-bind="checked: items" value="bike"/>
         <input type="checkbox" name="items" data-bind="checked: items" value="-1" data-type="number"/>

@@ -33,7 +33,7 @@ How can I select or deselect multiple dates only by clicking them and without us
 1. Get the clicked date and add it to a collection of the selected dates.
 1. Set the selected dates for the Calendar by using the [`selectDates`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/configuration/selectdates) method.
 
-```html
+```dojo
 <div id="calendar"></div>
 
 <script>

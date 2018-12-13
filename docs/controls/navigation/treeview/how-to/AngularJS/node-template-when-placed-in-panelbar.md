@@ -13,7 +13,7 @@ If you define a template through the `k-template` directive, it will not be mapp
 
 ###### Example
 
-```html
+```dojo
 
     <script id="treeview-template" type="text/x-kendo-template">
         <span>

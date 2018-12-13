@@ -12,7 +12,7 @@ The following example demonstrates how to initialize a Grid by using data attrib
 
 ###### Example
 
-```html
+```dojo
      <div id="grid"
          data-role="grid"
          data-sortable="true"

@@ -20,7 +20,7 @@ The example below demonstrates how to make a cell occupy three columns.
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -50,7 +50,7 @@ The example below demonstrates how to make a cell occupy two rows.
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -85,7 +85,7 @@ Setting both `colSpan` and `rowSpan` is also supported, as demonstrated in the e
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [

@@ -34,7 +34,7 @@ How can I prevent the sorting of the column which uses a header template and has
 
 To allow the selection and deselection of the checkbox only and prevent the [event propagation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation), handle the `click` event.
 
-```html
+```dojo
 <base href="https://demos.telerik.com/kendo-ui/grid/index">
 
 <div id="example">

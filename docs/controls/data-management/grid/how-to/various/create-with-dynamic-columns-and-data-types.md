@@ -12,7 +12,7 @@ The following example demonstrates how to create a Grid with column and data-fie
 
 ###### Example
 
-```html
+```dojo
 
     <div id="grid" style="width:1000px;"></div>
 

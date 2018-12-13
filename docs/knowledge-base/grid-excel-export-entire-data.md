@@ -58,7 +58,7 @@ Use either of the following approaches:
 
     The following example demonstrates the implementation of the approach.
 
-    ```html
+    ```dojo
     <div id="example">
           <div id="grid"></div>
 
@@ -149,7 +149,7 @@ Use either of the following approaches:
 
     The following example demonstrates the implementation of the approach.
 
-    ```html
+    ```dojo
     <div id="gridOne"></div>
     <div id="gridTwo"></div>
     <script>

@@ -28,7 +28,7 @@ I have a requirement to disable items in my MultiSelect control, where selecting
 
 To prevent selection, cancel the [select event](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/select). To prevent the dropdown from closing, set the [autoClose property](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/autoclose).
 
-```html
+```dojo
 <select id="select"></select>
 
 <script>

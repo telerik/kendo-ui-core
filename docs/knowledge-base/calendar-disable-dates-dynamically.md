@@ -30,7 +30,7 @@ How can I disable dates in the Calendar after the widget was initialized?
 1. Destroy the Calendar by using the [`destroy`](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods/destroy) method.
 1. Initialize the Calendar with the disabled dates.
 
-````html
+````dojo
     <div id="calendar"></div>
     <a class="k-button" onclick="changeDisableDates()">Disable dates</a>
     <script>

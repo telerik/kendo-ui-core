@@ -12,7 +12,7 @@ The following example demonstrates how to remove items from a Kendo UI DropDownL
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div id="cap-view" class="demo-section k-header">
       <h2>Customize your Kendo Cap</h2>

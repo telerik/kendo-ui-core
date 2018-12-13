@@ -12,7 +12,7 @@ The following example demonstrates how to use the [Kendo UI PivotGrid API](http:
 
 ###### Example
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">

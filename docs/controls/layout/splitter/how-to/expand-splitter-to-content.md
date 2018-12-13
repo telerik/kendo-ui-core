@@ -17,7 +17,7 @@ To achieve this, take the following notable steps:
 
 ###### Example
 
-```html
+```dojo
 <style>
     html,
     body,

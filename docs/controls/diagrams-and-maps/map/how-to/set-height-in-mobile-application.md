@@ -11,7 +11,7 @@ The following example demonstrates how to use the Map widget in a Kendo UI Mobil
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-init="createMap" data-stretch="true">
       <div id="map"></div>
     </div>

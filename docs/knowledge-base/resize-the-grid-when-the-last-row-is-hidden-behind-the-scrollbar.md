@@ -49,7 +49,7 @@ The reason for this issue is that the scrollbar is not part of the initial Grid 
 
 To ensure that the row will be visible, programmatically resize the Grid after the [column resizing](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnresize).
 
-```html
+```dojo
 <div id="grid" style="height: 380px;width:400px"></div>
     <style>
       .k-virtual-scrollable-wrap td {

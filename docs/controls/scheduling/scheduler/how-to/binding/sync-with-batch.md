@@ -12,7 +12,7 @@ The following example demonstrates how to create a Kendo UI Scheduler on the cli
 
 ###### Example
 
-```html
+```dojo
   <div id="example" class="k-content">
       <button id="sync">Sync</button>
       <div id="scheduler"></div>

@@ -39,7 +39,7 @@ How can I show a custom icon in the placeholder of the DropDownList?
 1. Use the `optionLabelTemplate` property of the DropDownList.
 1. By using the Kendo UI templates, include an element which displays one of the available Kendo UI web font icons.
 
-```html
+```dojo
 <input id="dropdownlist" />
 
 <script>

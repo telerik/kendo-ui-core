@@ -12,7 +12,7 @@ The following example demonstrates how to allow only existing values in the Auto
 
 ###### Example
 
-```html
+```dojo
      <div id="example">
       <div id="shipping">
         <label for="countries" class="info">Choose shipping countries:</label>

@@ -30,7 +30,7 @@ To demonstrate how the ListView works, define a target HTML element such as a `<
         </div>
     </script>
 
-> **Important**  
+> **Important**
 >
 >  The ListView item template needs to have only one root element. In the previous example, this is the `div.product` element.
 
@@ -54,7 +54,7 @@ To initialize the ListView, refer the template. It displays the result set by th
 
 The following demo shows the case displayed in the previous example.
 
-```html
+```dojo
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
 
 <script type="text/x-kendo-tmpl" id="template">
@@ -128,7 +128,7 @@ When the number of items that are bound to a ListView is larger than expected, a
 
 The following demo represents the same example with a `pager` applied to the ListView.
 
-```html
+```dojo
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
 <div id="pager"></div>
 
@@ -193,7 +193,7 @@ The following example demonstrates how you can update your working project to in
 
 The following demo represents the live example by using a template for alternating items.
 
-```html
+```dojo
 
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
 <div class="k-pager-wrap">
@@ -291,7 +291,7 @@ The template you define for the inline editing of items may include other Kendo 
 
 **Figure 1: ListView item editing**
 
-![ListView Item Editing](/images/listview-item-editing.png)
+![ListView Item Editing](../../../images/listview-item-editing.png)
 
 The new `add` record functionality of ListView items is triggered by a `click` event that is initiated by a user and is wired up through `.click()` in jQuery.
 
@@ -323,7 +323,7 @@ You can also detect when users pick up items through the `change` event, which i
 
 The following demo shows how to enable the item selection functionality.
 
-```html
+```dojo
 <div id="listView" style="max-height:400px;overflow:auto;"></div>
 <div class="k-pager-wrap">
     <div id="pager"></div>

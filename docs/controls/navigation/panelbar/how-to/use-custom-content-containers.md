@@ -11,7 +11,7 @@ The example below demonstrates how to use custom content containers in the Kendo
 
 ###### Example
 
-```html
+```dojo
     <style>
       /* for first panelbar */
       .scrollable,

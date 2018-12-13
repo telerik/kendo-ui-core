@@ -11,7 +11,7 @@ The following example demonstrates how to manually set initial data in the Kendo
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-scheduler="sched" k-options="schedulerOptions"></div>

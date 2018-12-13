@@ -11,7 +11,7 @@ The example below demonstrates how to group data by the first letter of each ite
 
 ###### Example
 
-```html
+```dojo
     <div id="home" data-role="view" data-init="onInit">
       <ul id="listview"></ul>
     </div>

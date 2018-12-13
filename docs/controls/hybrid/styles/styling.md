@@ -29,7 +29,7 @@ For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-title="Hello world">
 
       <div data-role="header">
@@ -52,7 +52,7 @@ If you are targeting iOS devices only, or you want your application to have the 
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-title="Hello world">
 
       <div data-role="header">
@@ -81,7 +81,7 @@ If you are targeting Android devices only, or you want your application to have 
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-title="Hello world">
 
       <div data-role="header">
@@ -108,7 +108,7 @@ If you are targeting Windows Phone devices only, or you want your application to
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-title="Hello world">
 
     <div data-role="header">
@@ -142,7 +142,7 @@ The skin should be activated by including the respective skin CSS file `kendo.mo
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-title="Hello world">
 
       <div data-role="header">
@@ -196,7 +196,7 @@ The example below demonstrates an application and a View-specific tint.
 
 ###### Example
 
-```html
+```dojo
     <style scoped>
       .km-ios7 .k-list,
       .km-ios7 .k-slider,
@@ -296,7 +296,7 @@ The example below demonstrates an application and a View-specific tint.
 
 ###### Example
 
-```html
+```dojo
     <style scoped>
       .km-android .km-shim,
       .km-android .km-popup,

@@ -12,7 +12,7 @@ The following example demonstrates how to format the end date of a recurring eve
 
 ###### Example
 
-```html
+```dojo
   <div id="example" class="k-content">
     <div id="people">
         <input checked type="checkbox" id="alex" value="1">

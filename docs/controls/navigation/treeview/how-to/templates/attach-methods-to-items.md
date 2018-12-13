@@ -12,7 +12,7 @@ The following example demonstrates how to attach TreeView methods to data items 
 ###### Example
 
 
-```html
+```dojo
     <div id="treeview"></div>
 
     <script>

@@ -9,7 +9,7 @@ slug: howto_validate_using_required_attributes_dropdownlist
 
 The following example demonstrates how to validate a DropDownList in AngularJS applications by using a required attribute along with `ng-model`.
 
-```html
+```dojo
 <div ng-app="inputExample">
     <script>
      angular.module('inputExample', [ "kendo.directives" ])

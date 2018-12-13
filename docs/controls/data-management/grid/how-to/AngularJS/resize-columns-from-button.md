@@ -11,7 +11,7 @@ The following example demonstrates how to resize the columns of the Grid by usin
 
 ###### Example
 
-```html
+```dojo
      <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-grid="kg" options="mainGridOptions">

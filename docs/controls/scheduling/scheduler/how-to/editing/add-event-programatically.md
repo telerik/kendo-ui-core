@@ -12,7 +12,7 @@ The following example demonstrates how to programmatically add an event to the K
 
 ###### Example
 
-```html
+```dojo
     <div id="example" class="k-content">
       <button id="create" class="k-button">Create Task</button>
 

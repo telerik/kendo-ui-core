@@ -64,7 +64,7 @@ To control the editing capability of the column, the column [`editable`](https:/
 
 The following example demonstrates how, upon creating a new record, `ProductName` and `UnitPrice` become editable. When the user updates an existing record, `ProductName` and `UnitPrice` become read-only.
 
-```html
+```dojo
     <div id="grid"></div>
 
     <script>

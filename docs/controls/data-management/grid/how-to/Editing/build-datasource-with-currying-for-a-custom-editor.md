@@ -11,7 +11,7 @@ The following example demonstrates how to create a custom data source based on t
 
 ###### Example
 
-```html
+```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example">
         <div id="grid"></div>

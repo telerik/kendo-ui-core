@@ -12,7 +12,7 @@ The following example demonstrates how to show the events of a Kendo UI Schedule
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
 	<div id="scheduler"></div>
 </div>

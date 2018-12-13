@@ -38,7 +38,7 @@ To keep the tab order:
 1. Get the reference of all **Edit** and **Delete** buttons.
 1. Increase the [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) attributes for the buttons.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

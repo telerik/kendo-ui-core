@@ -39,7 +39,7 @@ How can I validate the file selected in the Upload by file type (extension), whe
 
 When the Upload is configured to use synchronous mode the file type validation can be done with the Kendo UI Validator as demonstrated below.  
 
-```html
+```dojo
     <form method="post" action="http://demos.telerik.com/kendo-ui/upload/submit">
         <div class="demo-section k-content">
             <input name="files" id="files" type="file" aria-label="files" />

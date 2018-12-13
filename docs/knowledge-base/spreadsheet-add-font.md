@@ -41,7 +41,7 @@ How can I add a font to the drop-down font list of the Spreadsheet?
 1. Implement the `select` event of the widget.
 1. Check the current selection and apply the selected font.
 
-```html
+```dojo
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({

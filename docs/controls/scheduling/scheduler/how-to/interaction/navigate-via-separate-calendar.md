@@ -12,7 +12,7 @@ The following example demonstrates how to navigate the Kendo UI Scheduler by usi
 
 ###### Example
 
-```html
+```dojo
     <div id="example" class="k-content">
     <div id="calendar"></div>
     <div id="scheduler"></div>

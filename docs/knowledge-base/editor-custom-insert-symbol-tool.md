@@ -41,7 +41,7 @@ How can I add a custom `InsertSymbol` tool to the Editor?
 1. In the `change` event handler of the DropDownList, call the `exec` API method of the Editor and execute the `insertHtml` command.
 1. Pass the selected symbol to the method in the DropDownList.
 
-```html
+```dojo
 	<textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
 	</textarea>
 

@@ -30,7 +30,7 @@ How can I dynamically filter the layer of markers in the Map?
 
 The marker layer is added to the Map when the Map is initialized. To filter the markers, re-initialize the Map with the filtered data.
 
-```html
+```dojo
     <div id="example">
 
     <div id="map"></div>

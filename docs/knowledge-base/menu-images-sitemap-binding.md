@@ -39,13 +39,13 @@ How can I display images, which are set to different URLs, for the items in the 
 
 1. Store the image URL as an attribute value in the `.xml` file where the `image` attribute is used for that purpose.
 
-```html
+```dojo
 	<siteMapNode controller="menu" action="sitemapbinding" title="Baseball" image="/Content/shared/icons/sports/baseball.png" />
 ```
 
 1. Access the attribute in the binding configuration of the Menu and set its value as an `ImageUrl` value.
 
-```html
+```dojo
 	@(Html.Kendo().Menu()
 		.Name("Menu")
 		.BindTo("sample", (item, value) => {

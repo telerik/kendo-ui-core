@@ -31,7 +31,7 @@ How can I expand and collapse a group of columns with a button when I am using m
 1. Use [`headerTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.headertemplate) to add a button to the desired column header.
 1. In the `click` event handler of the button and based on a condition, pass the desired columns as parameters to the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) or the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) methods.
 
-```html
+```dojo
 <div id="example">
 	<div id="grid"></div>
 

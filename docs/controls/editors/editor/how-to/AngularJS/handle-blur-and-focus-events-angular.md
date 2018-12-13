@@ -22,7 +22,7 @@ The following example demonstrates how to handle the `blur` and the `focus` even
 
 ###### Example
 
-```html
+```dojo
     <style>
         #editor{
           position: absolute;
@@ -69,7 +69,7 @@ The following example demonstrates how to handle the `blur` and the `focus` even
 
 ###### Example
 
-```html
+```dojo
     <style>
       #editor{
         position: absolute;

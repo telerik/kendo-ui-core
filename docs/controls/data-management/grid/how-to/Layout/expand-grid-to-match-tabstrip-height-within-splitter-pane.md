@@ -24,7 +24,7 @@ The following example demonstrates how to expand a Grid that is located in a Tab
 
 ###### Example
 
-```html
+```dojo
     <style>
         html,
         body,

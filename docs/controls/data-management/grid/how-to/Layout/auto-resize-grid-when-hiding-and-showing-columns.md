@@ -23,7 +23,7 @@ To access and loop through the columns, the `setGridWidth()` method:
 
 ###### Example
 
-```html
+```dojo
 	<div id="example">
       <div id="grid"></div>
 

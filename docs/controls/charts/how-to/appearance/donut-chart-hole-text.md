@@ -19,7 +19,7 @@ The example below demonstrates how to place some text in the center of a Kendo U
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       function createChart() {
@@ -120,7 +120,7 @@ As an alternative, we can position an overlay using CSS:
 
 #### Example - Overlay Donut Chart
 
-```html
+```dojo
     <div class="donut-wrapper">
       <div id="chart" class="donut-chart"></div>
       <div class="inner-content"></div>

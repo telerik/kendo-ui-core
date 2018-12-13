@@ -13,7 +13,7 @@ While supported by default in modern browsers, this functionality is not provide
 
 ###### Example
 
-```html
+```dojo
     <a href="http://www.telerik.com" alt="navigate">navigate</a>
     <div id="example">
       <div id="cap-view" class="demo-section k-header">

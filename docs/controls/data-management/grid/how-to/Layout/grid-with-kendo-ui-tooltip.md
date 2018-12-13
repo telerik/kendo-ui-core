@@ -12,7 +12,7 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <style>
       #grid{

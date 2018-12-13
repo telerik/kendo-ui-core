@@ -44,7 +44,7 @@ Parse the server response and group the Grid.
 
 To view the expected format, refer to [this demo](https://docs.telerik.com/kendo-ui/framework/datasource/basic-usage#server-grouping).
 
-````html
+````dojo
    <div id="grid"></div>
     <script>
       $(document).ready(function() {

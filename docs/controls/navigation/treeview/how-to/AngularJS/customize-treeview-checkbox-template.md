@@ -43,7 +43,7 @@ The following example demonstrates how to:
 
 ###### Example
 
-```html
+```dojo
   <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css">
 
   <div id="example" ng-app="KendoDemos">

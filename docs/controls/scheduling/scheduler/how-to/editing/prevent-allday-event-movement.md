@@ -12,7 +12,7 @@ The following example demonstrates how to prevent the movement of events if user
 
 ###### Example
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
 $(function() {

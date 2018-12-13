@@ -10,7 +10,7 @@ position: 2
 
 Users can select files by dropping them over the Kendo UI Upload.
 
-As of the Kendo UI 2016 Q3 release, custom drop zones can be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.  
+As of the Kendo UI 2016 Q3 release, custom drop zones can be initialized depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
 
 > **Important**
 >
@@ -26,19 +26,19 @@ To use the Kendo UI Upload as a drop zone:
 
     **Table 1: Dragging files to make the drop zone appear**
 
-    ![Drag files to make the drop zone appear](/controls/editors/upload/upload-dd1.png)
+    ![Drag files to make the drop zone appear](upload-dd1.png)
 
 2. When you pass the mouse over the drop zone, it gets highlighted.
 
     **Table 2: Passing the mouse to highlight the drop zone**
 
-    ![Pass the mouse to highlight the drop zone](/controls/editors/upload/upload-dd2.png)
+    ![Pass the mouse to highlight the drop zone](upload-dd2.png)
 
 3. Release the file over the drop zone to add it to the upload queue.
 
     **Table 3: Releasing the file to the upload queue**
 
-    ![Release the file to the upload queue](/controls/editors/upload/upload-dd3.png)
+    ![Release the file to the upload queue](upload-dd3.png)
 
 ### Custom Drop Zones
 
@@ -47,8 +47,8 @@ As of the Kendo UI 2016 Q3 release, custom drop zones can be initialized dependi
 To customize the appearance of the drop zone during the process of dragging and dropping, note the following:
 
 1. When the user drags the file over the browser window, the custom drop zone element receives the `"k-dropzone-active"` class.
-2. When the user drags the files over the drop zone itself, the element receives an additional `"k-dropzone-hovered"` class and the drop zone is highlighted. ![The file is dragged over the drop zone itself](/controls/editors/upload/upload-dd4.png)
-3. Once the file is released over the drop zone, it is added to the upload queue.   
+2. When the user drags the files over the drop zone itself, the element receives an additional `"k-dropzone-hovered"` class and the drop zone is highlighted. ![The file is dragged over the drop zone itself](upload-dd4.png)
+3. Once the file is released over the drop zone, it is added to the upload queue.
 
 ### Drop Zone Visibility
 

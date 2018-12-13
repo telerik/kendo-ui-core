@@ -21,7 +21,7 @@ The example below demonstrates how to draw freely on the Scatter plot surface.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" />
     <script>
       var draw = kendo.drawing;

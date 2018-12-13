@@ -129,7 +129,7 @@ The example below demonstrates a button revealing a Drawer.
 
 **Figure 1: Nested ListView with different color schemes**
 
-![Nested ListView with different color scheme](/controls/hybrid/drawer/ListView-in-Drawer.png)
+![Nested ListView with different color scheme](ListView-in-Drawer.png)
 
 The ListView has different styling when placed in a Drawer.
 
@@ -137,7 +137,7 @@ The ListView has different styling when placed in a Drawer.
 
 **Figure 2: Nested vertical TabStrip**
 
-![Nested Vertical TabStrip](/controls/hybrid/drawer/TabStrip-in-Drawer.png)
+![Nested Vertical TabStrip](TabStrip-in-Drawer.png)
 
 To activate this feature, set the `km-vertical-tabstrip` class to the TabStrip placed in a Drawer, as demonstrated in the example below.
 

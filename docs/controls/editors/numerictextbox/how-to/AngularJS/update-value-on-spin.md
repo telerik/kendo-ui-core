@@ -11,7 +11,7 @@ The following example demonstrates how to update the value of the NumericTextBox
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="app">
         <div class="demo-section k-content" ng-controller="mainCtrl">
             <div>

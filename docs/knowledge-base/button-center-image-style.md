@@ -56,7 +56,7 @@ The following example demonstrates how to render a centered image for a specific
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
     <style type="text/css">
       #imageButton .k-image{
         margin: auto;

@@ -12,7 +12,7 @@ The following example demonstrates how to clone events in the Scheduler on `Ctrl
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="team-schedule">
         <div id="people">

@@ -19,7 +19,7 @@ The following example demonstrates how to edit records by using a different deta
 
 ###### Example
 
-```html
+```dojo
 <script id="detail-template" type="text/x-kendo-template">
   <div id="text-container">
     #: text #

@@ -21,7 +21,7 @@ To ensure that the Kendo UI TabStrip is properly initialized, choose one of the 
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="foo">
 
        <div ng-controller="mine">

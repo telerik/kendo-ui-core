@@ -12,7 +12,7 @@ The following example demonstrates how to detect the `focus` event of the Kendo 
 
 ###### Example
 
-```html
+```dojo
   <input id="ddl1" class="ddl" />
   <input id="ddl2" class="ddl" />
   <input id="ddl3" class="ddl" />

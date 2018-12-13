@@ -28,7 +28,7 @@ How can I change the displayed groups in a Kendo UI Scheduler to reflect the sel
 1. Alter the `grouping` configuration of the Scheduler according to the selected (checked) values.
 1. Reload the current Scheduler view.
 
-```html
+```dojo
 <div id="example">
   <h3>Check a checkbox to display the respective Group and events</h3>
   <div id="team-schedule">

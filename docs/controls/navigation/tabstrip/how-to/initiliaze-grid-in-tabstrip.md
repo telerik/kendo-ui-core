@@ -15,7 +15,7 @@ The example below demonstrates how to use the `activate` event when initializing
 
 ###### Example
 
-```html
+```dojo
      <body>
       <button id="openBtn">Open</button>
 

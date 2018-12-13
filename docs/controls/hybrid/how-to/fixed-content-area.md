@@ -11,7 +11,7 @@ The example below demonstrates how to create fixed/scrollable areas in the conte
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-title="Flexbox Demo" id="scroller-view" data-init="listViewInit" data-stretch="true">
       <header data-role="header">
         <div data-role="navbar">

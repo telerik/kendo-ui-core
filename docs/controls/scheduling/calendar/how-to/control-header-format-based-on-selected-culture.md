@@ -11,7 +11,7 @@ The following example demonstrates how to control the header format of the Kendo
 
 ###### Example
 
-```html
+```dojo
     <script src="http://kendo.cdn.telerik.com/2014.1.528/js/cultures/kendo.culture.ko-KR.min.js"></script>
     <script>
       kendo.culture("ko-KR");

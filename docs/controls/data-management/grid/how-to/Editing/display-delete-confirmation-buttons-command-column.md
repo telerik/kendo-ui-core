@@ -11,7 +11,7 @@ The following example demonstrates how to render the delete confirmation for a G
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
 

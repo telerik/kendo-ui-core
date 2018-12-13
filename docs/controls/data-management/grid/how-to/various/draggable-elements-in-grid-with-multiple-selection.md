@@ -12,7 +12,7 @@ The following example demonstrates how to use draggable components in a Grid whe
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
 
     <div class="demo-section k-content wide">

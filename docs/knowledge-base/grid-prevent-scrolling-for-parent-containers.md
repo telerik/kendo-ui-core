@@ -32,7 +32,7 @@ I have a scrollable Grid which is placed within a scrollable container. When I r
 
 1. Conditionally prevent the scrolling when the scroll position is either at the top or at the bottom of the Grid.
 
-```html
+```dojo
 <div id="example">
 		<div id="parentScrollableElement" style="overflow: auto; width: 600px; height: 600px;">
 			<div style="height: 1000px">

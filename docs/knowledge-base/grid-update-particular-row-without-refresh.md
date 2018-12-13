@@ -31,7 +31,7 @@ How can I refresh the HTML of Grid record to apply the manual changes but avoid 
 If you apply changes to the `dataItem` without using its `set` method, although the item will contain the new values, these values will not be applied to the HTML. To apply the changes, traverse all cells and manually populate the new content.
 
 
-```html
+```dojo
 <input type='button' value='Change first cell value' onclick='changeFirstCellValue()' />
 <div id="grid"></div>
 <script>

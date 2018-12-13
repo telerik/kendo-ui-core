@@ -11,7 +11,7 @@ The following example demonstrates how to implement [a custom MVVM binding](http
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <div class="box-col" style="width: 300px">

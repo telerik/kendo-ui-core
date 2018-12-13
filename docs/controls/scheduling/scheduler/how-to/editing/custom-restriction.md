@@ -12,7 +12,7 @@ The following example demonstrates how to create a custom restriction for Schedu
 
 ###### Example
 
-```html
+```dojo
      <div id="scheduler"></div>
     <script>
       $(function() {

@@ -14,7 +14,7 @@ The example below demonstrates how to achieve such behavior. Note that the `<div
 
 ###### Example
 
-```html
+```dojo
     <div class="container">
       <div id="chart"></div>
       <div class="overlay"><div>No data available</div></div>

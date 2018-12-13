@@ -44,7 +44,7 @@ Use the following CSS rules:
  }
 ````
 
-```html
+```dojo
 <div id="example">
   <div class="demo-section k-content">
     <h4>Products</h4>

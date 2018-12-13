@@ -39,7 +39,7 @@ My application displays two Kendo UI Schedulers on the same page. How can I bind
 1. Subscribe to the `navigate` event of the Scheduler.
 1. Depending on whether the date or the view type is changed, trigger the `date` or `view` methods of the same API.
 
-```html
+```dojo
 <div id="example">
   <div id="team-schedule">
     <div id="people">

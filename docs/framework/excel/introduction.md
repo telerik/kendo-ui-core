@@ -70,7 +70,7 @@ The example below demonstrates how to create an Excel workbook.
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [

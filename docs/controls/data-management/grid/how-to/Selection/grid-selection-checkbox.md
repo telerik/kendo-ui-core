@@ -14,7 +14,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <button id="showSelection">Show selected IDs</button>
 <script>

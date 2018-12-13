@@ -12,7 +12,7 @@ The example below demonstrates how to set the initial view at runtime prior to t
 
 ###### Example
 
-```html
+```dojo
      <style>
       html, body {
         height: 100%;

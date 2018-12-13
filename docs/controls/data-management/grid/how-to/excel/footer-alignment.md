@@ -15,7 +15,7 @@ For more information on how Excel documents work, refer to the [introductory art
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
   $(function() {

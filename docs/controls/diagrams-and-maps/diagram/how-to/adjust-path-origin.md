@@ -12,7 +12,7 @@ The following example demonstrates how to position any path at the origin of the
 
 ###### Example
 
-```html
+```dojo
 
     <div id="diagram"></div>
 

@@ -21,7 +21,7 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
 
 ###### Example
 
-```html
+```dojo
     <div id="grid">
     </div>
 
@@ -76,7 +76,7 @@ The following example demonstrates how to specify the `field` attribute in the c
 
 ###### Example
 
-```html
+```dojo
 
     <div id="grid">
     </div>
@@ -127,7 +127,7 @@ The following example demonstrates how to indicate to the Grid the way you want 
 
 ###### Example
 
-```html
+```dojo
 
     <div id="grid">
     </div>
@@ -177,7 +177,7 @@ The following example demonstrates how to fully customize the Grid by applying a
 
 ###### Example
 
-```html
+```dojo
 
     <div id="grid">
     </div>

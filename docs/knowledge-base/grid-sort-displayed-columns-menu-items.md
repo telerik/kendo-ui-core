@@ -34,7 +34,7 @@ How can I sort the items of the displayed columns submenu?
 
 A possible solution is to sort the li elements of the column menu within the [columnMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event handler.
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
 

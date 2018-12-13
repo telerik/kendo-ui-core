@@ -296,7 +296,7 @@ The following example demonstrates how to set the list dimensions through an MVV
 
 ###### Example
 
-```html
+```dojo
   <input id="ddl" data-role="dropdownlist" data-bind="source: foo" />
 
   <script>

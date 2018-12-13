@@ -16,7 +16,7 @@ The following example demonstrates how to format the date values of the dimensio
 
 ###### Example
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">

@@ -28,7 +28,7 @@ By default, the Grid internally matches the `values` collection in the column wi
 
 Apply custom filtering and manually handle the matching and the creation of the unique values collection.
 
-```html
+```dojo
        <script src="../content/shared/js/products.js" type="text/javascript"></script>
         <div id="example">
             <div id="grid"></div>

@@ -11,7 +11,7 @@ The following example demonstrates how to set the first day of the week on a Dat
 
 ###### Example
 
-```html
+```dojo
 	<div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div>

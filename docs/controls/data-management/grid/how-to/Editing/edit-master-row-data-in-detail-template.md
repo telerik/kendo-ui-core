@@ -11,7 +11,7 @@ The following example demonstrates how to edit records in a child Grid.
 
 ###### Example
 
-```html
+```dojo
   <div id="grid"></div>
   <script>
     var preventBinding = false,

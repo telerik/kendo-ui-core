@@ -40,7 +40,7 @@ How can I display a filter dialog with three or more fields?
 
 Manually change the content of the filter menu container and its logic by subscribing to the `filterMenuInit` event of the API.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
 
 <div id="example">

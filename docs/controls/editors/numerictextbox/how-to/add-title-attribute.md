@@ -11,7 +11,7 @@ The following example demonstrates how to add a `title` attribute to the input e
 
 ###### Example
 
-```html
+```dojo
 <input id="numerictextbox" value="10" title="this is the numerictextbox title"/>
 <script>
   $(function() {

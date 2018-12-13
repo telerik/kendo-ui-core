@@ -11,7 +11,7 @@ The example below demonstrates how to configure text binding for the Hybrid UI B
 
 ###### Example
 
-```html
+```dojo
 <div data-role="view" id="view" data-model="viewModel">
   <a data-role="button" data-bind="buttonText: value">Button</a>
 </div>

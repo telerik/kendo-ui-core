@@ -11,7 +11,7 @@ The example below demonstrates how to reorder Grid rows using the Kendo UI Sorta
 
 ###### Example
 
-```html
+```dojo
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <script>

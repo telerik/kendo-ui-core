@@ -24,7 +24,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ###### Example
 
-```html
+```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
     <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
@@ -73,7 +73,7 @@ The following example demonstrates how to export all the pages of a Kendo UI Gri
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -120,7 +120,7 @@ The following example demonstrates how to export the Grid with a fixed paper siz
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -164,7 +164,7 @@ The following example demonstrates how to export a Grid by using a page template
 
 ###### Example
 
-```html
+```dojo
     <style>
         body {
             font-family: "DejaVu Serif";
@@ -315,7 +315,7 @@ The following example demonstrates how to handle custom fonts.
 
 ###### Example
 
-```html
+```dojo
     <style>
         /*
             Use the DejaVu Sans font for display and embedding in the PDF file.

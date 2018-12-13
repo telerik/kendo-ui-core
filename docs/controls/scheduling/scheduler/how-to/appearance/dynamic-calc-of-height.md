@@ -12,7 +12,7 @@ The following example demonstrates how to dynamically calculate the height of th
 
 ###### Example
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script type="text/javascript">
 $(function() {

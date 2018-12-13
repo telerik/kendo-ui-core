@@ -35,7 +35,7 @@ In web pages I have the Persistence Manager control to preserve the user options
 
 Retrieve the selected item and keep it in `localStorage` by using the [`select()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/methods/select) method. When necessary, set an item as selected again by using `select()`.
 
-```html
+```dojo
   <div  >
       <a href="#" class="k-button" id="save">Save State</a>
       <a href="#" class="k-button" id="load">Load State</a>

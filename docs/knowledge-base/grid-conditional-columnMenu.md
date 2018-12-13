@@ -32,7 +32,7 @@ Customize the `columnMenu` within the `columnMenuInit` event per column.
 
 The following example demonstrates how to hide the `columnMenu` options for some of the columns and expose the filtering for them directly in the popup.
 
-```html
+```dojo
        <div id="example">
             <div id="grid"></div>
 

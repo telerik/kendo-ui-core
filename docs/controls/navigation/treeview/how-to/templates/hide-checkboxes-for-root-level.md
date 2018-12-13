@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior by using the `ch
 
 ###### Example
 
-```html
+```dojo
     <div id="treeview"></div>
 
     <script>

@@ -12,7 +12,7 @@ The following example demonstrates how to hide the **Edit** button of the Schedu
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
       $("#scheduler").kendoScheduler({

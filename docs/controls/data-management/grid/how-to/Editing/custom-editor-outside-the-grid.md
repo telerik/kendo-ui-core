@@ -11,7 +11,7 @@ The following example demonstrates how to use a custom editor, which uses the cu
 
 ###### Example
 
-```html
+```dojo
     <style>
       label{display:block;width:25em;position:relative;line-height:2.6;}
       label > .k-textbox, label > .k-button, label > .k-widget{position:absolute;right:0;width:15em;}

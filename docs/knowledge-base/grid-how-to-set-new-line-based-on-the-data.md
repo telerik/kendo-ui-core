@@ -34,7 +34,7 @@ To display the text on two lines without implementing the [`column.template`](ht
 1. Send the tag as part of the response.
 1. Set [`encoding`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.encoded) to `false`.
 
-````html
+````dojo
 <div id="grid"></div>
 <script>
 $("#grid").kendoGrid({

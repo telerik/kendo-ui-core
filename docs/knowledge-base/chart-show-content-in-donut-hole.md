@@ -36,9 +36,9 @@ You can show multi-line text and other content in the donut hole if you make a c
     // global variables
     var center,
     radius;
-    
+
     ........
-    
+
     series: [{
         type: "donut",
         field: "share",
@@ -47,12 +47,12 @@ You can show multi-line text and other content in the donut hole if you make a c
             // Obtain parameters for the segments
             center = e.center;
             radius = e.innerRadius;
-        
+
             // Create default visual
             return e.createVisual();
         }
     }]
-    
+
     ```
 1. In the Chart [render event](/api/javascript/dataviz/ui/chart/events/render), draw your custom content on top of the Chart using the [Kendo UI Drawing API](/framework/drawing/overview).
     ```
@@ -102,7 +102,7 @@ You can show multi-line text and other content in the donut hole if you make a c
 
 The following example renders three differently styled lines of text in the center of the Donut Chart.
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       function createChart() {
@@ -207,4 +207,4 @@ The following example renders three differently styled lines of text in the cent
 
 ## See Also
 
-* [Kendo UI Drawing API reference](/api/javascript/drawing/text)
+* [Kendo UI Drawing API Reference](/api/javascript/drawing/text)

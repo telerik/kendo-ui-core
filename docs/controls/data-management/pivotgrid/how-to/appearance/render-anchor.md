@@ -16,7 +16,7 @@ To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/a
 
 ###### Example
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">

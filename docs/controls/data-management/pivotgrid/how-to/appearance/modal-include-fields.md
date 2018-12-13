@@ -12,7 +12,7 @@ The following example demonstrates how to access the **Fields to include** filte
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="pivotgrid"></div>
 

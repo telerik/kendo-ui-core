@@ -31,7 +31,7 @@ How can I set the focus to move automatically to the month after the date is ent
 1. Handle the [`keydown`](https://api.jquery.com/keydown/) event of the DatePickers.
 1. In the `keydown` event handler, based on a condition, manually trigger the `keydown` event of the right arrow.
 
-```html
+```dojo
 <input id="datepicker1" />
 <br /><br /><br />
 <input id="datepicker2" />

@@ -32,7 +32,7 @@ How can I dynamically add hierarchy levels to the Grid?
 1. Use the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method of the Grid.
 1. In the `setOptions` properties, add the [`detailTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/detailtemplate) configuration and the [`detailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) event.
 
-```html
+```dojo
 <div id="example">
     <button id="button">Create Hierarchy</button>
     <div id="grid"></div>

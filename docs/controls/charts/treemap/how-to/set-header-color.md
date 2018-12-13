@@ -11,7 +11,7 @@ The example below demonstrates how to set the Kendo UI TreeMap tiles color from 
 
 ###### Example
 
-```html
+```dojo
 
     <div id="treemap">
     </div>

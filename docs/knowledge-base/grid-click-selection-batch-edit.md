@@ -39,7 +39,7 @@ How can I implement a single-row selection on click and make the Grid enter the 
 
 Use the `closeCell` and `editCell` methods of the Grid on single or double click respectively.
 
-```html
+```dojo
 <div id="example">
   <div id="grid"></div>
 

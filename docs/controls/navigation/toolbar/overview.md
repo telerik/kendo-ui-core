@@ -13,7 +13,7 @@ The [Kendo UI ToolBar widget](http://demos.telerik.com/kendo-ui/toolbar/index) i
 
 The ToolBar consists of three main areas: ToolBar wrapper, overflow anchor, and command overflow popup. The wrapper holds all commands that can be placed within the available container width. The ones for which there is no space to fit in are moved to the command overflow popup.
 
-![ToolBar areas](/controls/navigation/toolbar/toolbar-areas.png)
+![ToolBar areas](toolbar-areas.png)
 
 ## Getting Started
 

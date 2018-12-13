@@ -12,7 +12,7 @@ This article illustrates the process of creating a map from scratch and by using
 
 **Figure 1: The expected outlook of a finished map**
 
-![Finished map](/controls/diagrams-and-maps/map/images/map-au.png)
+![Finished map](images/map-au.png)
 
 ## Steps
 
@@ -34,7 +34,7 @@ Start by [importing the Esri Shapefile](https://docs.qgis.org/testing/en/docs/us
 
 **Figure 2: Identifying of the results**
 
-![Identify results](/controls/diagrams-and-maps/map/images/map-qgis-identify.png)
+![Identify results](images/map-qgis-identify.png)
 
 You are also able to narrow down your interest to features with the "AU" [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
 
@@ -83,7 +83,7 @@ Set up a simple Kendo UI Map and add a single shape layer to it, as demonstrated
     });
     </script>
 
-![Unstyled map](/controls/diagrams-and-maps/map/images/map-au-base.png)
+![Unstyled map](images/map-au-base.png)
 
 ### Add Styles
 

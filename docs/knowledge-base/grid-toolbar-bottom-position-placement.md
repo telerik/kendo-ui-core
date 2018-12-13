@@ -1,6 +1,6 @@
 ---
 title: Displaying Grid Toolbar at Bottom
-description: An example demonstrating how to display the toolbar at the bottom of the Grid 
+description: An example demonstrating how to display the toolbar at the bottom of the Grid
 type: how-to
 page_title: Positioning the Toolbar Below Grid Body | Kendo UI Grid
 slug: grid-toolbar-bottom-position-placement
@@ -33,8 +33,9 @@ Using jQuery, the toolbar can be placed below the content of the Kendo UI Grid:
    $("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));
 
 ```
+
 The following demonstrates a Kendo UI Grid using batch editing with the toolbar at the bottom above the pager:
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
       <script>

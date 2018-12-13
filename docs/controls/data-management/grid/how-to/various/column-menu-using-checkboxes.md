@@ -12,7 +12,7 @@ The following example demonstrates how to use checkboxes inside the column menu 
 
 ###### Example
 
-```html
+```dojo
      <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

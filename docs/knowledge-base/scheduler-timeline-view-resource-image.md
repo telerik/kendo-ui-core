@@ -26,7 +26,7 @@ How can I add an image to the resources on the left-hand side of the week view o
 
 Extend the view and override the functions that are responsible for rendering the title.
 
-```html
+```dojo
 <div id="example" class="k-content">
   <h3>Resource titles are rendered using template with link and image:</h3>
   <div id="scheduler"></div>

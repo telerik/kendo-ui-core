@@ -33,7 +33,7 @@ How can I vertically navigate down through the columns when I use the `Tab` key 
 1. Calculate the next cell based on the current position.
 1. Use the [`editCell`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/editcell) method of the Grid to change the cell.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     $("#grid").kendoGrid({

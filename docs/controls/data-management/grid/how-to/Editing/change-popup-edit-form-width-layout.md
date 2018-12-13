@@ -11,7 +11,7 @@ The following example demonstrates how to increase the width of the popup edit f
 
 ###### Example
 
-```html
+```dojo
 
 <style>
 

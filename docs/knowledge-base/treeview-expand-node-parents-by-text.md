@@ -40,7 +40,7 @@ How can I expand all parent nodes by given child node text?
 1. If the node has a parent, expand the parent.
 1. Repeat the check for a parent node until you cover all existing parent nodes.
 
-```html
+```dojo
 <div class="demo-section k-content">
 	<div id="treeview"></div>             
 </div>

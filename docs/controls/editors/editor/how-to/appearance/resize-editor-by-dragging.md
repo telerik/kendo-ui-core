@@ -12,7 +12,7 @@ The following example demonstrates how to resize the Kendo UI Editor by dragging
 
 ###### Example
 
-```html
+```dojo
 <style>
       .editor-wrap {
         position: relative;

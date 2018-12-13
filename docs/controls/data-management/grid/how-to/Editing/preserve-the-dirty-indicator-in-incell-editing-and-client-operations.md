@@ -17,7 +17,7 @@ The following example demonstrates how to achieve this behavior also in case new
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
         var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",

@@ -11,7 +11,7 @@ The following example demonstrates how to render an input editor in a column tem
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       function onDataBound(e) {

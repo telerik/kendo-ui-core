@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this by using the `databound` 
 
 ###### Example
 
-```html
+```dojo
     <div id="example" class="k-content">
       <div id="scheduler"></div>
     </div>

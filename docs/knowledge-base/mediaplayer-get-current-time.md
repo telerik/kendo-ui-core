@@ -32,7 +32,7 @@ How can I get the current time which is reached when playing a media file?
 1. Split the text and push in an array.
 1. Iterate over the array and convert the time in seconds.
 
-```html
+```dojo
 <div id="mediaplayer" style="height:360px"></div>
 
 <button id="getTimeButton">Get current time</button>

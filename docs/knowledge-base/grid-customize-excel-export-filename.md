@@ -36,7 +36,7 @@ How can I add the current date and time to the Excel export filename of the Gri
     }
     ```
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({

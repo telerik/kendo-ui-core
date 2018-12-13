@@ -12,7 +12,7 @@ The following example demonstrates how to add a custom **Delete** confirmation d
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
 
     <div class="demo-section k-content wide">

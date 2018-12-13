@@ -22,7 +22,7 @@ The following example demonstrates how to try to update the data source.
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
          k-data-source="gridData"
@@ -70,7 +70,7 @@ However, if you click the **UPDATE FROM CODE** button, nothing appears to happen
 
 ###### Example  
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
          k-data-source="gridData"

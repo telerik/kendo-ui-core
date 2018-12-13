@@ -33,7 +33,7 @@ Use a column template to add a button to the cell. Once the user clicks the butt
 
 #### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <div id="window">
     <textarea id="editor" rows="10" cols="30" style="height:440px" aria-label="editor" data-bind="value: text"></textarea>

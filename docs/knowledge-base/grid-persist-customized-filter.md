@@ -32,7 +32,7 @@ The `JSON.stringify()` method is not able to serialize function references. As a
 
 Add the function references back to the de-serialized configuration object before passing it to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
 
 <a href="#" class="k-button" id="save">Save State</a>

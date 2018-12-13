@@ -12,7 +12,7 @@ The following example demonstrates how to create an auto-expanding Kendo UI Edit
 
 ###### Example
 
-```html
+```dojo
   <style>
       html{font:12px sans-serif;overflow:auto;}
 

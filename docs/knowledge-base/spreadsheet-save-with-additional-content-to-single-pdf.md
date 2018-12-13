@@ -28,7 +28,7 @@ How can I merge the content of a Kendo UI Spreadsheet into the same PDF file whi
 
 Use the `Spreadsheet.Sheet.draw()` method which is internally used by the Spreadsheet PDF Export.
 
-```html
+```dojo
 	<input type="button" id="btn" value="Export"/>
 	<div id="Checklist">This is in Checklist</div>
 	<div id="Init">

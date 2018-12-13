@@ -11,7 +11,7 @@ The scroll position of the TabStrip content might be reset when changing the act
 
 ###### Example
 
-```html
+```dojo
     <div id="tabstrip" style="width:600px">
       <ul>
         <li class="k-state-active">

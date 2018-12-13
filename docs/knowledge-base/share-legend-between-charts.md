@@ -33,7 +33,7 @@ Handle the [`legendItemClick`](http://docs.telerik.com/kendo-ui/api/javascript/d
 
 The following example demonstrates the full implementation of the approach.  
 
-```html
+```dojo
     <div id="example">
       <div class="demo-section k-content wide">
         <div id="chart" style="width:400px; height: 250px"></div>

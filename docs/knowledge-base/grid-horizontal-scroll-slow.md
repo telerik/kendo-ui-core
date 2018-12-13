@@ -55,7 +55,7 @@ To change the default behavior:
 
 The following example demonstrates the implementation of the suggested approach.
 
-```html
+```dojo
 <div id="grid" style="width: 600px;"></div>
 <script>
     $(document).ready(function () {

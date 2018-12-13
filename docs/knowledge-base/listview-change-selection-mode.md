@@ -33,7 +33,7 @@ How can I allow the user to change the selection mode in the ListView based on a
 1. Call the `setOptions()` method with settings that configure the new selection mode.
 1. Call the [`refresh()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods-refresh) method for the ListView.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div class="demo-section k-content wide">

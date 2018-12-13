@@ -42,7 +42,7 @@ How can I ignore the time portion of the `datetime` so that grouping happens by 
 1. Generate a new field which contains only the date portion of the `datetime` value by using the `parse` function of a DataSource `schema`.
 1. Bind the column to the newly created field and use the `template` property to display the `datetime` field instead.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

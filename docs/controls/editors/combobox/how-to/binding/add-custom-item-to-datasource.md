@@ -25,7 +25,7 @@ To achieve this:
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
 
   <input id="combobox" style="width: 240px" />

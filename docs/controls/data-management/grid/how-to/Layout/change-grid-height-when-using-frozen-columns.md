@@ -13,7 +13,7 @@ This approach ensures that the Grid is able to calculate and construct its layou
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
   <p>Group by the ShipCountry column and collapse some groups.</p>
   <div id="grid"></div>

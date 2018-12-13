@@ -20,7 +20,7 @@ The following example demonstrates how transform the Kendo UI Editor widget into
 
 ###### Example
 
-```html
+```dojo
 <script src="https://unpkg.com/markdown@0.5.0/lib/markdown.js"></script>
 <script src="https://unpkg.com/html-md@3.0.2/dist/md.min.js"></script>
 

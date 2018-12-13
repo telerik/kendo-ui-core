@@ -12,7 +12,7 @@ The following example demonstrates how to bind the Scheduler to a local `observa
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <button id="update">Update</button>
       <div id="scheduler"></div>

@@ -38,13 +38,13 @@ Use the `addRow` and `removeRow` methods of the Grid.
 
 1. Use the `columns.template` property to add a custom button to the column.
 
-    ````html
+    ````dojo
     { template: "<button class='customEdit'>My Edit</button>", title:"Custom Edit"}
     ````
 
 1. Apply the `editRow` method by passing the row for which the button was clicked as an argument.
 
-    ```html
+    ```dojo
     <div id="grid"></div>
 
         <script>

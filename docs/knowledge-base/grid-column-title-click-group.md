@@ -47,7 +47,7 @@ During the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/e
 
 The following example demonstrates how to display the column name in the [console](https://www.w3schools.com/jsref/met_console_log.asp) when the user clicks a Grid cell.
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

@@ -11,7 +11,7 @@ The following example demonstrates how to globally modify the default options in
 
 ###### Example
 
-```html
+```dojo
     <input id="datepicker" value="10/10/2011" style="width:150px;" />
     <br />
     <br />

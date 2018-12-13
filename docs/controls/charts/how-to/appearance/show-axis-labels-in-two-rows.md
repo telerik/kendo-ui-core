@@ -14,7 +14,7 @@ The example below demonstrates how to insert newline symbols in the Category Axi
 
 ###### Example
 
-```html
+```dojo
 
     <div id="chart"></div>
     <script>

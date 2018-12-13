@@ -30,7 +30,7 @@ How can I set multiple Calendar dates as selected from the `viewModel`?
 
 Use [custom binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom#custom-widget-binding).
 
-````html
+````dojo
 <div data-role="calendar" id="calendar" data-selectable="multiple" data-bind="selectDates: dates"></div>
 
     <script>

@@ -24,7 +24,7 @@ The example below demonstrates how to use FontAwesome icons in series labels wit
 
 ###### Example
 
-```html
+```dojo
     <!-- Include FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
 
@@ -57,7 +57,7 @@ The example below demonstrates how to use FontAwesome icons in series notes with
 
 ###### Example
 
-```html
+```dojo
     <!-- Include FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
 
@@ -106,7 +106,7 @@ The example below demonstrates how to construct a visual that uses two [Text](/a
 
 ###### Example
 
-```html
+```dojo
     <!-- Include FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 

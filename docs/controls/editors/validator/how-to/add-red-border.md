@@ -15,7 +15,7 @@ The following example demonstrates how to achieve this behavior and add a red bo
 
 ###### Example
 
-```html
+```dojo
     <style scoped>
 
       .k-textbox {

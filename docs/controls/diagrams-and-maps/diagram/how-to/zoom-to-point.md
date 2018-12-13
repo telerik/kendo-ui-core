@@ -11,7 +11,7 @@ The following example demonstrates how to zoom the Diagram to a predefined point
 
 ###### Example
 
-```html
+```dojo
 
     <button id="zoomIn">+</button>
     <button id="zoomOut">-</button>

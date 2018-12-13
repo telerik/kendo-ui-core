@@ -11,7 +11,7 @@ The example below demonstrates how to include an Esri(ArcGIS) map when working w
 
 ###### Example
 
-```html
+```dojo
     <style id="jsbin-css"></style>
     <link rel="stylesheet" href="https://js.arcgis.com/3.6/js/esri/css/esri.css" />
     <script src="https://js.arcgis.com/3.6/"></script>

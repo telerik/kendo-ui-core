@@ -11,7 +11,7 @@ The following example demonstrates how to add a new row when the user navigates 
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       var data = [

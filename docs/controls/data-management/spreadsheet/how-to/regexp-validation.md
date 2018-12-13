@@ -13,7 +13,7 @@ To work around this issue, use a `custom` validation type that allows you to pas
 
 ###### Example
 
-```html
+```dojo
 <script>
  // Define a REGEXP_MATCH function that returns true if a string
  // matches a given pattern (regexp).

@@ -11,7 +11,7 @@ The following example demonstrates how to make an input element read-only and pr
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
         <div class="demo-section k-content">
 

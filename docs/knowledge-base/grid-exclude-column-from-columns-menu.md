@@ -38,7 +38,7 @@ columnMenuInit(e){
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
   $(document).ready(function() {

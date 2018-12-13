@@ -32,7 +32,7 @@ How can I hide the expand/collapse icon for the detail template in a Kendo UI Gr
 1. Conditionally hide the icon.
 1. To retrieve the data item, access the `<tr>` element by the `dataItem` method of the Grid.
 
-```html
+```dojo
        <div id="example">
             <div id="grid"></div>
 

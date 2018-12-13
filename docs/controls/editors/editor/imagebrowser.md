@@ -10,13 +10,13 @@ position: 2
 
 By default, the **Insert Image** tool opens a simple dialog that allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
-![Insert Image Dialog](/controls/editors/editor/editor-insert-image.png)
+![Insert Image Dialog](editor-insert-image.png)
 
 ## Overview
 
 As of the Q3 2012 release, the Editor has supported a new way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
 
-![Image Browser Dialog](/controls/editors/editor/editor-image-browser.png)
+![Image Browser Dialog](editor-image-browser.png)
 
 To retrieve and upload the files and directories, the image browser needs a server-side implementation.
 

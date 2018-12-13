@@ -18,7 +18,7 @@ The following example demonstrates how to handle such a scenario by:
 
 ###### Example
 
-```html
+```dojo
 <style>
 
 .zIndexEnforce

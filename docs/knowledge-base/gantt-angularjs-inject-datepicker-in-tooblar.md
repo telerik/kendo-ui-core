@@ -28,7 +28,7 @@ How can I insert a Kendo UI DatePicker widget into the toolbar of the Kendo UI G
 1. Pass a template to the Gantt toolbar with a single input element.
 1. In the `dataBound` event of the Gantt, initialize the DatePicker and assign a handler for its `change` event.
 
-```html
+```dojo
 <div ng-app="KendoDemo" ng-controller="MyCtrl">
   <div kendo-gantt="theGantt" k-options="ganttOptions"></div>    
 </div>

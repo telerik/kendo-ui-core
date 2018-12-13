@@ -16,7 +16,7 @@ The following example demonstrates how to customize the information displayed in
 
 ###### Example
 
-```html
+```dojo
 <input id="dropdownlist" />
 <script>
   var ddl = $("#dropdownlist").kendoDropDownList({

@@ -24,7 +24,7 @@ The Chat provides rich conversational experience that goes beyond the natural la
 1. Provide it with an ID.
 1. (Optional) Set the width and height of the desired chat inline or by using CSS.
 
-```html
+```dojo
 <div id="chat" style="width: 400px; height: 600px"></div>
 ```
 
@@ -34,7 +34,7 @@ The Chat provides rich conversational experience that goes beyond the natural la
 1. Call the `kendoChat()` function.
 1. Configure its implementation for the [`post`](/api/javascript/ui/chat/events/post) event.
 
-```html
+```dojo
 <div id="chat" style="width: 400px; height: 600px"></div>
 <script>
 	var chat = $("#chat").kendoChat({

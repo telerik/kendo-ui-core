@@ -11,7 +11,7 @@ The example below demonstrates how to post to the iframe content of the Kendo UI
 
 ###### Example
 
-```html
+```dojo
     <button id="refresh" class="k-button k-primary">Post content to iframe</button>
 
     <script>

@@ -12,7 +12,7 @@ The following example demonstrates how to set a different start weekday in a Ken
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
 
     <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/cultures/kendo.culture.bg-BG.min.js"></script>

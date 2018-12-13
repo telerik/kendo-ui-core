@@ -28,7 +28,7 @@ How can I pass the message from a validation error to the custom file template o
 1. Assign it to a field in the `file` object.
 1. Display the value for that field in the file template.
 
-```html
+```dojo
 <base href="https://demos.telerik.com/kendo-ui/upload/validation">
 
 <script id="fileTemplate" type="text/x-kendo-template">

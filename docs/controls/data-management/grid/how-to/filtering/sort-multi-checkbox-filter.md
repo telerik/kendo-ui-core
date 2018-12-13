@@ -12,7 +12,7 @@ The following example demonstrates how to sort the Kendo UI multiple checkbox fi
 
 ###### Example
 
-```html
+```dojo
 
 	<div id="client"></div>
       <script>

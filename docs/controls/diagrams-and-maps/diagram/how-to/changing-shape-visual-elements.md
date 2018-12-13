@@ -13,7 +13,7 @@ This means to change the rectangle fill and stroke options on `hover`.
 
 ###### Example
 
-```html
+```dojo
 
     <div id="diagram"></div>
     <script>

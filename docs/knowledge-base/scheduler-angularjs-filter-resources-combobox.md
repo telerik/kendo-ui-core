@@ -53,7 +53,7 @@ Note the `$ctrl.scheduler.view($ctrl.scheduler.view().name);` call, which will r
 
 Here you will find a small sample demonstrating the above approach:
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
   <div ng-controller="MyCtrl as $ctrl">
     <input type="text" kendo-combo-box="$ctrl.comboBox" name="comboBox"  k-options="$ctrl.comboboxOptions"/>

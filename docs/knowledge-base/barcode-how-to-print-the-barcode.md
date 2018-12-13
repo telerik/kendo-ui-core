@@ -43,7 +43,7 @@ How can I print the Kendo UI Barcode?
 
 You can print the Barcode on another page by opening a new window and placing the Barcode DOM elements on the page.
 
-```html
+```dojo
     <button class="k-button">Print</button>
     <div id="toPrint">
       <span id="manchego"></span>

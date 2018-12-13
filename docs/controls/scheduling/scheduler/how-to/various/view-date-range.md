@@ -12,7 +12,7 @@ The following example demonstrates how to retrieve the date range of the current
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="scheduler"></div>
     <div class="box wide">

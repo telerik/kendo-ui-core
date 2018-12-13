@@ -11,7 +11,7 @@ The following example demonstrates how to implement custom binding and use it fo
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       kendo.data.binders.widget.commaseparatedvalue = kendo.data.Binder.extend({

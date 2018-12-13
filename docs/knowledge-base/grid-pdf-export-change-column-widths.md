@@ -51,7 +51,7 @@ You can also target specific columns by using the `:nth-child()` selector.
 }
 ```
 
-```html
+```dojo
  <style>
       .page-template {
         position: absolute;

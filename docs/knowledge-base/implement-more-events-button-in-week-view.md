@@ -29,7 +29,7 @@ The Kendo UI Scheduler does not provide a built-in solution for achieving this b
 
 To simulate the layout of the week view, implement a **More Events** button similar to that in the month view, and link it to the day view, create a custom view by using the following approach:
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
     var MyWeekView = kendo.ui.MultiDayView.extend({

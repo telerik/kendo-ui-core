@@ -12,7 +12,7 @@ The following example demonstrates how to show the validation tooltip in Kendo U
 
 #### Example:
 
-```html
+```dojo
     <style scoped>
       .k-invalid-msg
       {

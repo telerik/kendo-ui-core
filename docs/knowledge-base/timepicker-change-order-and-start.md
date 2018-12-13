@@ -39,7 +39,7 @@ How can I make the options on the TimePicker list start at a specific time while
 1. Subscribe to the `open` event of the TimePicker.
 1. Traverse the items in the list while you use jQuery to reorder them.
 
-```html
+```dojo
 <input id="timepicker" />
 
 <script>

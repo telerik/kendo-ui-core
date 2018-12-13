@@ -18,7 +18,7 @@ To connect the Chat to and render the responses from any service, utilize the `p
 
 A simple example of such communication is to send an AJAX request to a server endpoint and display the returned data in the Chat widget.
 
-```html
+```dojo
 <div id="chat"></div>
 
 <script>
@@ -74,7 +74,7 @@ A simple example of such communication is to send an AJAX request to a server en
 
 You can achieve the same result by encapsulating the communication logic in an `agent` class. The `agent` class will handle the communication with the external Chat Bot service.
 
-```html
+```dojo
 <div id="chat"></div>
 
 <script>

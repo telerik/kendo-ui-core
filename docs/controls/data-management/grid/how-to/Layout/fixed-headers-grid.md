@@ -28,7 +28,7 @@ The `fixed-header` class from the example applies the following CSS rules:
 
 ###### Example
 
-```html
+```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.flat.min.css"/>
     <h1>&darr; SCROLL &darr;</h1>

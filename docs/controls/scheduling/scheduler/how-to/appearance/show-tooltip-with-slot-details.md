@@ -12,7 +12,7 @@ The following example demonstrates how to use the Kendo UI Tooltip to show slot 
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
 
       <div id="scheduler"></div>

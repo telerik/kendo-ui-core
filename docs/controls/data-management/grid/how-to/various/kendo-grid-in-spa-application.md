@@ -12,7 +12,7 @@ The following example demonstrates how to initialize a Grid widget in a Single-P
 
 ###### Example
 
-```html
+```dojo
   <div id="app"></div>
 
     <script id="grid-view" type="text/x-kendo-tmpl">

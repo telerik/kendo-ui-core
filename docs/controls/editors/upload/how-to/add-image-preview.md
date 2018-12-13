@@ -14,7 +14,7 @@ The following example demonstrates how to add an image preview and read the file
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <h3>Add image preview before uploading file</h3>
 		<input type="file" id="files">

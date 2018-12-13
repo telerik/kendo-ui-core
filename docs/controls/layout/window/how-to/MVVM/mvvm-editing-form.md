@@ -12,7 +12,7 @@ The example below demonstrates how to edit data in a Kendo UI Window by using MV
 
 ###### Example
 
-```html
+```dojo
 
     <ul id="data-container"></ul>
 

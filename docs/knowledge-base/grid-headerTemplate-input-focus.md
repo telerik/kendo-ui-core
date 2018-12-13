@@ -30,7 +30,7 @@ How can I allow the user to click on an input in the `headerTemplate` of a colum
 
 To focus the input, prevent the `mousedown` event handler from bubbling to the header.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     $("#grid").kendoGrid({

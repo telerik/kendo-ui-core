@@ -11,7 +11,7 @@ The example below demonstrates how to show the tab text of a Hybrid UI TabStrip 
 
 ###### Example
 
-```html
+```dojo
   <div data-role="view" data-layout="mobile-tabstrip">
   </div>
 

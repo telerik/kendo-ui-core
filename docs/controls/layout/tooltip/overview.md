@@ -55,7 +55,7 @@ The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work.
 
 ###### Example
 
-```html
+```dojo
 <style>
 .parent {
     display: inline-block;

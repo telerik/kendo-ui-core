@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
-```html
+```dojo
 <select id="region" name="" id="region"></select><br />
 <select id="category" name="" id="category"></select><br />
 <select id="manufacturer" name="" id="manufacturer"></select><br />

@@ -65,7 +65,7 @@ For more details, refer to the following articles:
 
 To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
 
-````html
+````dojo
 <div id="example">
       <div id="grid"></div>
 

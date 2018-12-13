@@ -32,7 +32,7 @@ How can I save the changes in the Kendo UI Grid by using an outside button?
 1. Select the Grid.
 1. Use the [`saveChanges`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/savechanges) method.
 
-```html
+```dojo
 <button id="saveChanges">Save Changes</button>
 <br /><br />
 <div id="grid"></div>

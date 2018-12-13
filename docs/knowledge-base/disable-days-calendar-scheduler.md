@@ -30,7 +30,7 @@ How to disable particular days&mdash;for example, Sundays&mdash; in the popup ca
 1. Get a reference to the Kendo UI Calendar.
 1. Use the `setOptions` method to specify the `disabledDates` with a `timeOut`. You need the timeout because at the time of the `click` event, the calendar is not yet initialized.
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
     $("#scheduler").kendoScheduler({

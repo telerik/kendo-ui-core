@@ -14,7 +14,7 @@ The example below demonstrates how to create a custom theme for a Kendo UI Chart
 
 ###### Example
 
-```html
+```dojo
     <div id="chart" />
     <script>
       var themes = kendo.dataviz.ui.themes;

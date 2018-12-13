@@ -11,7 +11,7 @@ The following example demonstrates how to show the dates that are out of the min
 
 ###### Example
 
-```html
+```dojo
     <input id="datepicker" style="width:200px;" />
     <script>
       $(document).ready(function() {

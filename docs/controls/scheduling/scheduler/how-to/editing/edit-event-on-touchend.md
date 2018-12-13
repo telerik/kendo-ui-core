@@ -12,7 +12,7 @@ The following example demonstrates how to edit an Scheduler event by using `touc
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
       $(function() {

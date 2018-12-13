@@ -40,7 +40,7 @@ How can I check if a certain value corresponds to a DataItem property of the sel
 1. Use the `select` method of the Kendo UI ListView API to get a list of all the selected items.
 1. Access its corresponding DataItem and properties by getting their index.
 
-```html
+```dojo
 <div id="example">
 
       <div class="demo-section k-content wide">

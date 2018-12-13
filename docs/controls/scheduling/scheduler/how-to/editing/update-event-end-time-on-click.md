@@ -12,7 +12,7 @@ The following example demonstrates how to update the end time of an event on cli
 
 ###### Example
 
-```html
+```dojo
 <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
 <div id="example">
     <div id="scheduler"></div>

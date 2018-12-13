@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior and display the 
 
 ###### Example
 
-```html
+```dojo
     <div id="rangeslider1" class="slider">
       <input />
       <input />

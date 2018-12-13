@@ -28,7 +28,7 @@ How can I manually export the contents of all sheets in a Kendo UI Spreadsheet i
 
 Use the `Spreadsheet.Sheet.draw()` method which is internally used by the Spreadsheet PDF Export.
 
-```html
+```dojo
 <input type="button" id="btn" value="Export"/>
 <div id="spreadsheet" style="width: 100%;"></div>
 

@@ -12,7 +12,7 @@ The following example demonstrates how to reset the expand/collapse state and fe
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <ol>
         <li>Expand "CY 2005" member</li>

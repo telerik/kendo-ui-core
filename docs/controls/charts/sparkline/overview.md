@@ -202,7 +202,7 @@ This code results in the following Sparklines. Note that values are displayed as
 
 **Figure 1: Sparklines with a date category axis**
 
-![Sparkline with date category axis](/controls/charts/sparkline/sparkline-category-date-axis.png)
+![Sparkline with date category axis](sparkline-category-date-axis.png)
 
 The example below demonstrates the Sparklines with its base unit changed to `"years"`.
 
@@ -223,7 +223,7 @@ Notice below how the Sparklines display the maximum value for each year.
 
 **Figure 2: Sparklines with a grouped date category axis**
 
-![Sparkline with grouped date category axis](/controls/charts/sparkline/sparkline-category-date-axis-grouped.png)
+![Sparkline with grouped date category axis](sparkline-category-date-axis-grouped.png)
 
 The aggregate function can be changed for each series, as demonstrated below.
 

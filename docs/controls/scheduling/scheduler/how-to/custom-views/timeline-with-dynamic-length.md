@@ -13,7 +13,7 @@ The following example demonstrates how to implement a custom Timeline view in a 
 
 ###### Example
 
-```html
+```dojo
     Number of shown days:
     <select id="days">
       <option>6</option>

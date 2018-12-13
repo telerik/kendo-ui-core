@@ -39,7 +39,7 @@ Apply the logic on the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javasc
 
 1. Only on the disabled buttons, remove the `delete` and `edit` specific classes.
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

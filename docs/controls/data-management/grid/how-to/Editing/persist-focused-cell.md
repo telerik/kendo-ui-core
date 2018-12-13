@@ -23,7 +23,7 @@ Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/dataso
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

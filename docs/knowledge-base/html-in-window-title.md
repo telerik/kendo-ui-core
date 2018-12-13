@@ -30,7 +30,7 @@ As of the 2017 R1 SP1 release and to prevent script injection, the Kendo UI Wind
 
 1. Insert the desired HTML with jQuery.
 
-```html
+```dojo
   <div id="example">
     <div id="window">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor gravida odio vel gravida. Donec feugiat metus massa, molestie porttitor risus placerat a. Pellentesque iaculis vitae massa et condimentum. Suspendisse molestie maximus vulputate. Fusce vitae ex ut risus faucibus varius.</p>

@@ -19,7 +19,7 @@ The example below demonstrates how to implement the steps previously described.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         var dataUrl = "https://www.mocky.io/v2/5bfc002c3100006f0039bbff";

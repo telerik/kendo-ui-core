@@ -29,7 +29,7 @@ When the Grid is rendered and you execute the `autoFitColumn` method over all of
 1. If scrolling is enabled, include the scrollbar width.
 1. Manually set that total to the wrapping element of the Grid.
 
-```html
+```dojo
 <div id="example">
             <table id="grid">
                 <colgroup>

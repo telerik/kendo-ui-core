@@ -12,7 +12,7 @@ The following example demonstrates how to cascade Kendo UI ComboBoxes when worki
 
 ###### Example
 
-```html
+```dojo
 category: <select id="category"></select>
 product: <select id="product"></select>
 

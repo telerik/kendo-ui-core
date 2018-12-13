@@ -38,7 +38,7 @@ To instantiate the Spreadsheet, use an empty `<div>` element, as demonstrated in
 
 ###### Example
 
-```html
+```dojo
 
     <div id="spreadsheet">
     </div>

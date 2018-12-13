@@ -23,7 +23,7 @@ The example below demonstrates how to register a one-way binding. As a result, t
 
 ###### Example
 
-```html
+```dojo
     <p><label><input type="checkbox" data-bind="checked: slideValue" />toggle slideValue</label></p>
 
     <div id="target" style="width:200px;height:200px;background:#fc9;" data-bind="slide: slideValue">
@@ -57,7 +57,7 @@ The example below demonstrates how to register a two-way binding. As a result, b
 
 ###### Example
 
-```html
+```dojo
     <input data-bind="numericValue: number" />
     Input value: <span data-bind="text: number" />
 
@@ -103,7 +103,7 @@ The example below demonstrates how to bind the max value of a Kendo UI NumericTe
 
 ###### Example
 
-```html
+```dojo
     <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
 
     <script>

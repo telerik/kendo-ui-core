@@ -26,7 +26,7 @@ How can I replace all specific string occurrences in the Kendo UI Editor content
 
 Use the `deserioalization.custom` option of the Editor to plug a custom callback that will return the modified content.
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-content">
         <textarea id="editor"></textarea>

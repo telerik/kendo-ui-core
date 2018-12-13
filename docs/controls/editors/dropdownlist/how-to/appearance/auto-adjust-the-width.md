@@ -24,7 +24,7 @@ The following example demonstrates how to automatically adjust the width of a Dr
 
 ###### Example
 
-```html
+```dojo
 <style>
 
   .k-list

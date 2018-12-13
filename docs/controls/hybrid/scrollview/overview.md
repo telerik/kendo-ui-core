@@ -299,7 +299,7 @@ If a Kendo UI template is used to generate the pages, the whitespace gaps can be
 
 **Figure 1: ScrollView pager overlay**
 
-![ScrollView pager overlay](/controls/hybrid/scrollview/pager-overlay.png)
+![ScrollView pager overlay](pager-overlay.png)
 
 To activate the feature, add the `km-scrollview-overlay` class to the ScrollView element.
 

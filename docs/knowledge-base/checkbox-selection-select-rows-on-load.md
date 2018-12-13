@@ -34,7 +34,7 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
 1. Get every row data by using the [`dataItem`](/api/javascript/ui/grid/methods/dataitem) method.
 1. Set the current row as selected by using the [`select`](/api/javascript/ui/grid/methods/select) method.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

@@ -16,7 +16,7 @@ The example below demonstrates the two options of how to use custom icons for th
 
 ###### Example
 
-```html
+```dojo
     <style>
 
       /* "foo" matches the custom action name */

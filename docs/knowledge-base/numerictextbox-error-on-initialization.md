@@ -52,7 +52,7 @@ All these scenarios lead to the same result&mdash;the NumericTextBox initializes
 
 The following example demonstrates how to destroy and recreate a NumericTextBox.
 
-```html
+```dojo
     <button id="destroy">Destroy and recreate without spinners</button>
     <div>
       <input id="numeric" />

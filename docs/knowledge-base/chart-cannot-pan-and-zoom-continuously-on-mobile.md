@@ -35,7 +35,7 @@ The Chart re-renders its SVG elements when the pan and zoom actions are executed
 
 Kendo UI does not provide a built-in solution for avoiding this behavior. However, you can still work around the issue by using [canvas rendering](/api/javascript/dataviz/ui/chart/configuration/renderas) which does not re-render the Chart element on refreshing the page.
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       // Generate sample data

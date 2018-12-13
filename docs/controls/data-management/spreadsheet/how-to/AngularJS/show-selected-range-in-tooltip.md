@@ -21,7 +21,7 @@ The following example demonstrates how to display a selected range from the Spre
 
 ###### Example
 
-```html
+```dojo
 
 	<div id="example" ng-app="KendoDemos">
 	  <div ng-controller="MyCtrl">

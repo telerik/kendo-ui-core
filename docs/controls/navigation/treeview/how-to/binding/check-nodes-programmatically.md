@@ -12,7 +12,7 @@ The following example demonstrates how to programmatically select the checkbox o
 
 ###### Example
 
-```html
+```dojo
   <div id="tree"></div>
 
   <script>

@@ -37,7 +37,7 @@ In the handler function of the `dataBound` event:
 1. Disable the expanding button based on the checkbox value.
 1. Expand all master rows from the global array.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script type="text/x-kendo-template" id="template">

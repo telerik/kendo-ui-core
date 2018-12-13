@@ -29,7 +29,7 @@ The Kendo UI Scheduler does not provide a built-in solution for achieving this b
 
 Add a footer by using jQuery in the `dataBound` event handler of the Scheduler. The following example demonstrates how to apply this approach.
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
 $("#scheduler").kendoScheduler({

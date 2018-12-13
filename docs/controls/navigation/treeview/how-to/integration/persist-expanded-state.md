@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior and then restore
 
 ###### Example
 
-```html
+```dojo
   <div id="treeview"></div>
   <button onclick="reloadPage()">Reload Page</button>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.3/js.cookie.min.js"></script>

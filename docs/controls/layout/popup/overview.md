@@ -118,7 +118,7 @@ Every Popup point can be aligned to an anchor point.
 
 **Figure 1: A right-aligned Popup**
 
-![Right-Aligned Kendo UI Popup](/images/right-align.png)
+![Right-Aligned Kendo UI Popup](../../../images/right-align.png)
 
 The position of the Popup can be fine-tuned by specifying both the `position` and the `origin` options.
 

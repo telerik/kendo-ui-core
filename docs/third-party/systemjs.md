@@ -77,7 +77,7 @@ Once the scripts are available and present in your project directory, the System
 
 **Test Project folder structure**
 
-![Folder structure](/images/systemjs020-folder-structure.png)
+![Folder structure](../images/systemjs020-folder-structure.png)
 
 ```tab-index.html
     <body>
@@ -88,11 +88,11 @@ Once the scripts are available and present in your project directory, the System
       <script type="text/javascript">
          //<![CDATA[
 
-       System.config({		
+       System.config({
         map: {
-      		"import": "import.js",    
-      		"import2": "modules/import2.js",    	
-      		"jquery": "lib/jquery/jquery.min.js",             
+      		"import": "import.js",
+      		"import2": "modules/import2.js",
+      		"jquery": "lib/jquery/jquery.min.js",
       		"kendo.culture.en-GB.min": "lib/kendo/cultures/kendo.culture.en-GB.min.js",
       		"kendo.messages.en-GB.min": "lib/kendo/messages/kendo.messages.en-GB.min.js",
       		"kendo.autocomplete.min": "lib/kendo/kendo.autocomplete.min.js",
@@ -228,18 +228,18 @@ Once the scripts are available and present in your project directory, the System
       		"kendogantt": ["kendo.gantt.min"],
       		"kendopdf": ["kendo.pdf.min"],
       		"kendoscheduler": ["kendo.scheduler.min"]
-      		}    
+      		}
        });
 
       System.import("import");
 
     //]]>
-    </script>     
+    </script>
     </body>
 ```
 ```tab-import.ts
     import $ from "jquery"
-    import "kendo.grid.min"   
+    import "kendo.grid.min"
 
     $(".grid").kendoGrid({
         dataSource: {

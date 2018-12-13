@@ -33,7 +33,7 @@ How can I export many Grids in the same PDF file?
 1. In the callback of the promise, export the other Grids.
 1. Append the result to the export of the initially exported Grid.
 
-```html
+```dojo
         <div id="example">
 
 

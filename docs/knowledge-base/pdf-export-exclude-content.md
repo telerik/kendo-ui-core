@@ -39,7 +39,7 @@ How can I exclude elements within the exported content and prevent them from bei
 
 Elements that you do not want to be exported can be hidden just before the export begins by using CSS and then shown again after the export finishes. This is possible by adding the special `k-pdf-export` class to the selector of a CSS rule that hides the specified elements. The special class is automatically added to the elements just before the start of the export process and removed when it finishes. Hiding the elements for the duration of the export excludes them from the exported PDF.
 
-```html
+```dojo
 	<div id="example">
 	  <button class='export-pdf k-button'>Export as PDF</button>
 		<div class="container">

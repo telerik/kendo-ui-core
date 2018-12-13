@@ -14,7 +14,7 @@ The example below demonstrates how to shorten long Chart labels and turn them in
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({

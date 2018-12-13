@@ -48,7 +48,7 @@ The following example demonstrates how to fully implement the suggested workarou
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
       <div id="grid"></div>
 

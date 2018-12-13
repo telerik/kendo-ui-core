@@ -15,7 +15,7 @@ The Kendo UI hybrid framework is designed to help developers build mobile app ex
 
 **Figure 1: Adaptive rendering of Kendo UI hybrid components**
 
-![Illustration of Kendo UI mobile adaptive rendering](/images/mobile/km-adaptive-rending-illustration.png)
+![Illustration of Kendo UI mobile adaptive rendering](../../images/mobile/km-adaptive-rending-illustration.png)
 
 While some mobile HTML frameworks focus on providing a one-size-fits-all experience, the Kendo UI hybrid framework focuses on delivering perfectly tailored experiences for different mobile platforms. Built and packaged correctly, the goal of such an application is to be virtually indistinguishable to end-users from a native SDK app.
 
@@ -188,7 +188,7 @@ The following example demonstrates the full implementation of the described appr
 
 ###### Example
 
-```html
+```dojo
     <div id="home" data-role="view" data-layout="default">
       Hello Mobile World!
     </div>

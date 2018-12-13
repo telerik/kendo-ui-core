@@ -46,7 +46,7 @@ You are requires to place the checkbox first and the `label` tag second, so that
 
 However, you can have more than one label per input. Leave the second `k-checkbox-label` blank, and place the text in a different label tag before the checkbox:
 
-```html
+```dojo
 <div>
   <h4>Choose Extra Equipment</h4>
   <ul class="fieldlist">

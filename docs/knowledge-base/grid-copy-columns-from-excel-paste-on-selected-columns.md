@@ -35,7 +35,7 @@ Handle the [`keydown`](https://api.jquery.com/keydown/) event of the Grid&mdash;
 1. Get the selected cells of the Grid.
 1. For every selected cell, [`shift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) a value from the array.
 
-```html
+```dojo
 <div id="grid"></div>
 <textarea id="ta" style="opacity: 0"></textarea>
 <script>

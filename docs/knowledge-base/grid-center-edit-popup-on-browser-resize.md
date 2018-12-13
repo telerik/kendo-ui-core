@@ -42,7 +42,7 @@ window.onresize = function () {  
 }
 ```
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

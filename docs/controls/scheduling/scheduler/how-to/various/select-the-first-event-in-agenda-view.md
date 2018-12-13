@@ -12,7 +12,7 @@ The following example demonstrates how to select the first event in the Agenda v
 
 ###### Example
 
-```html
+```dojo
     <div id="example" class="k-content">
     <div id="scheduler"></div>
     <script>

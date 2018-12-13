@@ -35,7 +35,7 @@ How can I make the Grid show its last page by default?
 	1. Get the current page size by using the [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) method of the `dataSource`.
 	1. Divide these numbers, parse, and increment the result. Use the final result to set the new `pageSize`.
 
-	    ```html
+	    ```dojo
 	    <div id="example">
 	        <div id="grid"></div>
 	        <script>

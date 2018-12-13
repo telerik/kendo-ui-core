@@ -11,7 +11,7 @@ The following example demonstrates how to implement a range selection between tw
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content"ng-controller="MyCtrl">
     <div class="box-col">

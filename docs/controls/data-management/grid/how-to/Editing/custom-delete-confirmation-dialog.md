@@ -14,7 +14,7 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <div id="window"></div>
 

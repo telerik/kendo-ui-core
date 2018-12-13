@@ -12,7 +12,7 @@ The following example demonstrates how to enable the sort-by-text functionality 
 
 ###### Example
 
-```html
+```dojo
 
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
     <div id="example">

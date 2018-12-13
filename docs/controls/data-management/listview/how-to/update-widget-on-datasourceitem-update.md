@@ -13,7 +13,7 @@ To re-render the widget, manually trigger the `change` event of the dataSource a
 
 ###### Example
 
-```html
+```dojo
     <base href="https://demos.telerik.com/kendo-ui/listview/mvvm">
 
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>

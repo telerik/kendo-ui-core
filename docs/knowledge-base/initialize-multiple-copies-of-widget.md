@@ -49,7 +49,7 @@ Use the [`Contains`](https://api.jquery.com/attribute-contains-selector/) jQuery
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
 <div class="demo-section k-content wide">
   <div id="chart1"></div>
   <div id="chart2"></div>

@@ -11,7 +11,7 @@ The following example demonstrates how to expand the TreeView items that are hov
 
 ###### Example
 
-```html
+```dojo
     <div id="treeview"></div>
 
     <script>

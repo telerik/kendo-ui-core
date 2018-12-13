@@ -17,7 +17,7 @@ The code from the snippet executes the following actions:
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
 
       <span id="notification" style="display:none;"></span>

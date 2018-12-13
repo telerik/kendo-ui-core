@@ -43,7 +43,7 @@ How can I show only the selected resource groups in the Scheduler and use the Ke
 1. Update the resources of the Scheduler, based on the selection on the MultiSelect, by passing the array to the `data` method of the DataSource object in the Scheduler.
 1. Refresh the layout by resetting the selected view of the Scheduler.
 
-```html
+```dojo
 <body>
     <input type="text" id="comboBox" name="comboBox" />
     <div id="example">

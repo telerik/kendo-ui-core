@@ -27,7 +27,7 @@ How to filter the Kendo UI Scheduler resources and show or hide the filtered tas
 1. Use the `change` event of the MultiSelect widget to define which of the loaded Scheduler resources are to be, first, filtered and, then, hidden or shown.
 1. Use the `hideFilteredRows()` method to hide or show the rows from the Scheduler view which correspond to the deselected or selected MultiSelect items.
 
-```html
+```dojo
 <div id="example">
     <input type="text" id="multiselect" name="multiselect" />
     <br />

@@ -11,7 +11,7 @@ The following example demonstrates how to scroll the TreeView viewport to the se
 
 ###### Example
 
-```html
+```dojo
     <div id="tree"></div>
 
     <script>

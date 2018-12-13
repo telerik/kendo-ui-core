@@ -32,7 +32,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
 1. In the `close` handler, the `e.preventDefault()` method will be called to prevent the popup from closing.
 1. To allow the user to close the editor, set the flag when the **Cancel** and **Close** buttons are clicked.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

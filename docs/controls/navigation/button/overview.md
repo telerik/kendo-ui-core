@@ -228,7 +228,7 @@ There are two ways to proceed in this case. One is to override the Kendo UI styl
 
 ###### Example
 
-```html
+```dojo
 <link rel="stylesheet"
     href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
 <style>
@@ -254,7 +254,7 @@ The other option is to include the required HTML markup and CSS classes inside t
 
 ###### Example
 
-```html
+```dojo
 <link rel="stylesheet"
     href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
 

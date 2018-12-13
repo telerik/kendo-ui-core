@@ -39,7 +39,7 @@ To create an editor with radio buttons:
 1. Subscribe to the `click` event of the buttons.
 1. In the `click` event handler, [`set`](http://docs.telerik.com/kendo-ui/api/javascript/data/model/methods/set) the new value of the `dataItem`.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
 <div id="example">
     <div id="grid"></div>

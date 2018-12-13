@@ -39,7 +39,7 @@ How can I count the number of hidden rows after filtering in the Spreadsheet?
 1. Check the total rows count.
 1. For every row, check if it is hidden.
 
-```html
+```dojo
 <div id="spreadsheet" style="width: 100%"></div>
 <script>
     kendo.spreadsheet.Controller.fn.onCommandRequest = function (e) {

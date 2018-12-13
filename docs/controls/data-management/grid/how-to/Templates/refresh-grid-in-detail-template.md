@@ -11,7 +11,7 @@ The following example demonstrates how to refresh a child Grid in a detail templ
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
 

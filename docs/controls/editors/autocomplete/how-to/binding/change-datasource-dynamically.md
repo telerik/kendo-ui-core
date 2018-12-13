@@ -12,7 +12,7 @@ The following example demonstrates how to dynamically change the `DataSource` ba
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
     <div class="demo-section k-content">
        <h4>Choose shipping countries:</h4>

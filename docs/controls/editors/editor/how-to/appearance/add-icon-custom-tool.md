@@ -16,7 +16,7 @@ The following example demonstrates how to decorate your own custom tool with a b
 
 ###### Example
 
-```html
+```dojo
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
   /* Using plain image for background */

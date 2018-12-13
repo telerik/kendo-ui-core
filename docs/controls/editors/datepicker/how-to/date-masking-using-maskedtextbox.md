@@ -19,7 +19,7 @@ To achieve this behavior:
 
 ###### Example
 
-```html
+```dojo
     <input id="datepicker1" />
     <input id="datepicker2" />
     <script>

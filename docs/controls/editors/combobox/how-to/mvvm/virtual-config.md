@@ -11,7 +11,7 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
         <div class="demo-section k-header">
             <h4>Search for shipping name</h4>

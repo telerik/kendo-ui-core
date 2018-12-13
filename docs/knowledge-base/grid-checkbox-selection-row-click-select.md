@@ -33,7 +33,7 @@ How can I select rows with checkboxes by clicking anywhere on the row of the Gri
 1. Handle the [`click`](https://api.jquery.com/click/) event of the row.
 1. In the event handler, programmatically `click` on the checkbox.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

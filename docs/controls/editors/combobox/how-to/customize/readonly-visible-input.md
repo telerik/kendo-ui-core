@@ -12,7 +12,7 @@ The following example demonstrates how to make a visible input of a Kendo UI Com
 
 ###### Example
 
-```html
+```dojo
 <div id="example" role="application">
 <form>
   <h4>T-shirt Fabric</h4>

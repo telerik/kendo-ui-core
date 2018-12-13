@@ -15,7 +15,7 @@ The following example demonstrates how to persist the row selection in a Grid wh
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
 
     <script>

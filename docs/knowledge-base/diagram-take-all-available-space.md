@@ -32,7 +32,7 @@ How can I make the Diagram resize and take all space that is available in the co
 
 When the size of the container changes, call the [`resize()`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram/methods/resize) method to adjust the size of the Diagram.
 
-```html
+```dojo
 <table style="width: 100%">
     <tr>
         <td width=1>

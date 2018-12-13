@@ -12,7 +12,7 @@ The following example demonstrates how to select or deselect all items in the Ke
 
 ###### Example
 
-```html
+```dojo
     <div id="example" role="application">
       <div class="demo-section k-header">
         <h2>Invite Attendees</h2>

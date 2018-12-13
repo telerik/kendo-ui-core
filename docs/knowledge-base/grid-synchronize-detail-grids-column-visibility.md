@@ -33,7 +33,7 @@ Synchronize the visibility of the detail columns in the hierarchical Grid:
 
 The following example demonstrates the full implementation of the suggested approach.
 
-```html
+```dojo
     <div id="grid"></div>
 
     <script>

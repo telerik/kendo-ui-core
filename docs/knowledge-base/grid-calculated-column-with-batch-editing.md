@@ -34,7 +34,7 @@ To change the calculated value dynamically:
 1. Get a reference to the wrapping element which holds the calculated value.
 1. Update the HTML content.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

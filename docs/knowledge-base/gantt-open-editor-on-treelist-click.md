@@ -40,7 +40,7 @@ How can I show the editor of the Gantt when I select tasks in the treelist?
 1. Attach a click handler to the rows in the treelist of the Gantt.
 1. Call the `editTask` method of the Gantt and pass the dataItem of the selected task as a parameter.
 
-```html
+```dojo
 	<script>
 		$(document).ready(function() {
 		  $(".k-gantt").delegate(".k-gantt-treelist .k-grid-content tr", "click", function(e) {

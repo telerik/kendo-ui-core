@@ -31,7 +31,7 @@ How can I enter only the day part of the date and let the rest of the DatePicker
 
 The following example demonstrates how to achieve the desired functionality.
 
-```html
+```dojo
 <input id="datepicker" />
 <script>
     $(document).ready(function () {

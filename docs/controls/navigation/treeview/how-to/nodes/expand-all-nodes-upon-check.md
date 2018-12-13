@@ -11,7 +11,7 @@ The following example demonstrates how to expand all child nodes of a TreeView w
 
 ###### Example
 
-```html
+```dojo
   <div id="tree"></div>
 
   <script>

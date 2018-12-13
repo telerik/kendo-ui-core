@@ -41,7 +41,7 @@ How can I render an auto-resizing Kendo UI Editor in a Kendo UI Grid editor temp
 1. In the `edit` event handler, add a custom class to the Editor.
 1. Add styles to the custom class so that the Editor has a 100% width and height.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     var crudServiceBaseUrl = "http://demos.kendoui.com/service",

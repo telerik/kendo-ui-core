@@ -11,7 +11,7 @@ The following example demonstrates how to create events by using the Kendo UI `O
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-scheduler="scheduler" k-options="schedulerOptions" class=""></div>

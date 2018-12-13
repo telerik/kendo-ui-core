@@ -29,7 +29,7 @@ How can I add a custom Time Marker at a specific time similar to the built-in Cu
 1. In the dataBound event of the Gantt call the function with the desired options.
 1. Add CSS styles using the class for the line or style the line element returned by the function.
 
-```html
+```dojo
 <style>
     .k-gantt .k-status-time {
         background-color: blue;

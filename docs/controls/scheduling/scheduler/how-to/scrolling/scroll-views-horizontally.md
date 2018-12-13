@@ -14,7 +14,7 @@ The following example demonstrates how to expand them and utilize a horizontal s
 
 ###### Example
 
-```html
+```dojo
     <style>
       .k-scheduler-layout:not(.k-scheduler-agendaview) {
         table-layout: fixed;

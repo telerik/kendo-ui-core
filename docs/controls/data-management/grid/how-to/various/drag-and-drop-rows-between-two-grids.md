@@ -12,7 +12,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 
 ###### Example
 
-```html
+```dojo
     <div id="grid1"></div>
     <br /><br /><br />
     <div id="grid2"></div>

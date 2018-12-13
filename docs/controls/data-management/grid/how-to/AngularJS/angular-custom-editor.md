@@ -11,7 +11,7 @@ The following example demonstrates how to create a custom editor in the [Grid](h
 
 ###### Example
 
-```html
+```dojo
   <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
   <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">

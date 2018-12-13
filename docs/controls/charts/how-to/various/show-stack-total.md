@@ -13,7 +13,7 @@ It is possible to use this configuration to display the cumulative point value f
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $(function(){

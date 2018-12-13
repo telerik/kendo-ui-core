@@ -30,7 +30,7 @@ How can I relocate the expand column of the Grid?
 
 Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event, rearrange the columns by using jQuery.
 
-```html
+```dojo
 <div id="example">
       <div id="grid"></div>
 

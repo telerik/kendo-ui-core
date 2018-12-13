@@ -12,7 +12,7 @@ The [Kendo UI Stock Chart widget](http://demos.telerik.com/kendo-ui/financial/in
 
 **Figure 1: A sample Stock Chart**
 
-![Stock Chart](/controls/charts/stockchart/stock-chart.png)
+![Stock Chart](stock-chart.png)
 
 The series types supported by the Stock Charts are:
 

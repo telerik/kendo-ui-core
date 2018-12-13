@@ -26,7 +26,7 @@ The example below demonstrates how to configure Canvas rendering.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         $(function() {
@@ -53,7 +53,7 @@ In this case you can use [inline binding]({% slug databinding_charts_widget %}),
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -77,7 +77,7 @@ The example below demonstrates how to do inline binding with objects.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     var seriesData = [
@@ -115,7 +115,7 @@ The example below demonstrates how to implement this approach.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         $(function() {
@@ -134,7 +134,7 @@ The example below demonstrates how to turn off the initial animation only.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       $(function() {
@@ -171,7 +171,7 @@ The example below demonstrates how to disable gradients.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         $(function() {

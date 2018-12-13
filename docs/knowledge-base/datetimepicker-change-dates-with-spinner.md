@@ -32,7 +32,7 @@ How can I add spinner buttons and use them to change the date in the DateTimePic
 1. Handle the [`click`](https://api.jquery.com/click/) event of the arrows.
 1. Use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/value) method to change the day.
 
-```html
+```dojo
 <style>
 	.k-datetimepicker{
 		width: 60%;

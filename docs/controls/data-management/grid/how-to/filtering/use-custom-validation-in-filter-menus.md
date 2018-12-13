@@ -23,7 +23,7 @@ The following example demonstrates how to use custom validation in the **Filter*
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

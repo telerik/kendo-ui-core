@@ -35,7 +35,7 @@ Override the default animation configuration of the Window.
 $.fn.kendoWindow.widget.prototype.options.animation = false;
 ```
 
-```html
+```dojo
 <script>
     $.fn.kendoWindow.widget.prototype.options.animation = false;
 </script>

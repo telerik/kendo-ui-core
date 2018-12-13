@@ -49,7 +49,7 @@ Use CSS and utilize the `.k-dirty` class.
 
 For the full implementation, open the following example in the Dojo.
 
-```html
+```dojo
 <style>
   .k-dirty{
     display: none;      

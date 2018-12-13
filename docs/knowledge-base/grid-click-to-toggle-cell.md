@@ -38,7 +38,7 @@ How can I toggle the cell content of a Grid between two different properties of 
 
 Use such a Kendo UI template for the cell that it shows different properties depending on the value of a Boolean field. When clicked, the provided value gets changed and the template will update automatically.
 
-```html
+```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
 <div id="example">

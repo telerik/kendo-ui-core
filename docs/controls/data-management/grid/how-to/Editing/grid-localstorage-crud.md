@@ -12,7 +12,7 @@ The following example demonstrates how to perform CRUD operations with local sto
 
 ###### Example
 
-```html
+```dojo
 <button onClick="reset()" class="k-button">Reset test data</button>
 <div id="grid"></div>
 <script>

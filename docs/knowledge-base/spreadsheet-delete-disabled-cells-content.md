@@ -44,7 +44,7 @@ How can I delete a disabled cell in a Spreadsheet row through the **Delete** com
 1. Determine whether the currently selected command is **Delete**.
 1. Enable the current selection (which is the entire row) and clear it.
 
-```html
+```dojo
 <div id="spreadsheet"></div>
 <script>
     $(function() {

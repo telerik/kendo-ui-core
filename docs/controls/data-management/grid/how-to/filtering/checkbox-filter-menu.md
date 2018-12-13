@@ -16,7 +16,7 @@ The following example demonstrates how to create a menu functionality based on a
 
 ###### Example
 
-```html
+```dojo
      <div id="grid"></div>
 
     <script>

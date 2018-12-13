@@ -14,7 +14,7 @@ The following example demonstrates how to move the group label on top of the gro
 
 ###### Example
 
-```html
+```dojo
 <input id="customers" style="width: 400px" />
     <script>
       $(document).ready(function() {

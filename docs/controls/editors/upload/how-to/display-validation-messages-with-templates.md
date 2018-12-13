@@ -13,7 +13,7 @@ The following example demonstrates how to add a `span` element to the template. 
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <input name="files" id="files" type="file" />
     <div class="demo-hint">You can only upload <strong>PDF</strong> files.</div>

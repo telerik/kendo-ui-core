@@ -13,7 +13,7 @@ When the user selects a date from the first DatePicker, the following date is pr
 
 ###### Example
 
-```html
+```dojo
 
   <div id="grid"></div>
 

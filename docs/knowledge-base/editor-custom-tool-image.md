@@ -39,7 +39,7 @@ How can I set an image to the custom tool that I added to the Editor?
 
 When you add a custom tool to the Editor and set its `name` option, a class that is based on the specified name is automatically added to the corresponding HTML element of the custom tool. For example, if you set the tool name to `customButton`, the `k-i-custom-button` class is added to the `span` element of the tool. You can use this class as a selector in a CSS rule, which can set a background-image to the custom tool.
 
-```html
+```dojo
 	<textarea id="editor"></textarea>
 	<script>
 		$("#editor").kendoEditor({

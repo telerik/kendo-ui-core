@@ -11,7 +11,7 @@ The following example demonstrates how to programmatically change the order of a
 
 ###### Example
 
-```html
+```dojo
       <div>
         <div style="float:left;">
           <button id="expand">Expand trees</button>

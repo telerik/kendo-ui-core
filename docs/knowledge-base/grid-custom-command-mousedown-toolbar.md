@@ -34,7 +34,7 @@ How can I create custom buttons which respond to the jQuery `mousedown` event?
 1. Add custom commands that look like the original `create`, `save`, and `cancel` commands.
 1. In the `dataBound` event of the Grid, attach the relevant methods on the `mousedown` event of these commands.
 
-```html
+```dojo
 <div id="gridId"></div>
 
 <style>

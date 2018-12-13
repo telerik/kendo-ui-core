@@ -69,7 +69,7 @@ The previous code results in the following PivotGrid widget.
 
 **Figure 1: The Kendo UI PivotGrid widget**
 
-![Kendo UI PivotGrid](/images/pivotgrid.png)
+![Kendo UI PivotGrid](../../../images/pivotgrid.png)
 
 ## Settings
 

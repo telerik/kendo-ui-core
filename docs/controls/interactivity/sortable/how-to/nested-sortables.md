@@ -11,7 +11,7 @@ The example below demonstrates how to create nested Kendo UI Sortable widgets.
 
 ###### Example
 
-```html
+```dojo
   <ul id="parent">
     <li class="list-item">Apples</li>
     <li class="list-item">Grapefruits</li>

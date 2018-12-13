@@ -11,7 +11,7 @@ The following example demonstrates how to enable the dropping only of new shapes
 
 ###### Example
 
-```html
+```dojo
 
     <script>
       $(function () {

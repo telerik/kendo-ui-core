@@ -15,7 +15,7 @@ The following example demonstrates how to use the [`Layout`](/api/javascript/dat
 
 ###### Example
 
-```html
+```dojo
 
     <div id="diagram"></div>
 

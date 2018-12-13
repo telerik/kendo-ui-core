@@ -17,7 +17,7 @@ When binding the Bullet Chart to a DataSource, use the special `currentField` an
 
 ###### Example
 
-```html
+```dojo
       <div id="chart-sales"></div>
       <script>
         function createChart() {
@@ -62,7 +62,7 @@ The Bullet Chart orientation can be changed by setting the series type to `verti
 
 ###### Example
 
-```html
+```dojo
       <div id="chart-sales"></div>
       <script>
         function createChart() {
@@ -97,7 +97,7 @@ You can customize the line that represents the target value using the `series.ta
 
 ###### Example
 
-```html
+```dojo
       <div id="chart-sales"></div>
       <script>
         function createChart() {

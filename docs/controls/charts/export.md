@@ -27,7 +27,7 @@ The example below demonstrates how to enable the PDF export functionality of a K
 
 ###### Example
 
-```html
+```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
     <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
@@ -104,7 +104,7 @@ The example below demonstrates how to obtain an image from the Chart.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
@@ -284,7 +284,7 @@ The example below demonstrates how to handle custom fonts by embedding a custom 
 
 ###### Example
 
-```html
+```dojo
     <script>
         // Import DejaVu Sans font for embedding.
 

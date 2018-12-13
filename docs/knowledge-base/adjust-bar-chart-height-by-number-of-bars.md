@@ -45,7 +45,7 @@ To adjust the height of the Chart container:
 
 1. Use the jQuery `css` method.
 
-```html
+```dojo
 	<div>
         <div id="chart"></div>
     </div>

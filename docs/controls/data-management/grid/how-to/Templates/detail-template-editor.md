@@ -11,7 +11,7 @@ The following example demonstrates how to create a custom editor in a Grid detai
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
 
     <script type="text/x-kendo-template" id="template">

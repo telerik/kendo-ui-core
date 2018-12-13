@@ -18,7 +18,7 @@ The example below demonstrates how to store and load the axis range. The changes
 
 ###### Example
 
-```html
+```dojo
     <style>
         .k-chart {
             width: 300px;

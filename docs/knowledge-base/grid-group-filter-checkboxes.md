@@ -26,7 +26,7 @@ How to group the checkboxes in the filter menu by a specific field?
 
 Although that sorting the checkboxes dataSource is possible, applying group expression to it will break the built-in functionality of the Grid. However, we can sort the checkboxes dataSource by the field that we want to group by and manually insert group separators. In the example below, the entire logic for grouping the checkboxes is within the __filterMenuOpen__ event of the Grid:
 
-```html
+```dojo
 <style>
   .myGroupClass{
     background: #3bb;

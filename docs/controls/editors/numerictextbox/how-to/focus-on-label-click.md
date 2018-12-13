@@ -11,7 +11,7 @@ The following example demonstrates how to focus the NumericTextBox when the `lab
 
 ###### Example
 
-```html
+```dojo
 <label for="numerictextbox">Number: </label>
 <input id="numerictextbox" />
 <script>

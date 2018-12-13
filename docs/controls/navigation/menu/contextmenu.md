@@ -84,7 +84,7 @@ By default, the ContextMenu is created as a child of the `<body>` element.
 
 ###### Example
 
-```html
+```dojo
     <body>
          <div id="target">Target</div>
          <div id="container1">

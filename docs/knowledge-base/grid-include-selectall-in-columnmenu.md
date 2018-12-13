@@ -28,7 +28,7 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
 
 > You will always need to have at least one visible column in the Grid.
 
-```html
+```dojo
   <style>
     .custom-class{
       padding: 5px 5px 5px 15px;

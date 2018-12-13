@@ -43,7 +43,7 @@ Setting a different [background color](https://www.w3schools.com/css/css_backgro
 
 The following demonstrates two Kendo UI Menus with different styles for hovered items:
 
-```html
+```dojo
     <style>
       /*specific menu*/
       #computerMenu.k-menu .k-state-hover>.k-link{

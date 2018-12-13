@@ -14,7 +14,7 @@ The following example demonstrates how to use the [`series.visual`](/api/javascr
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         var ZERO_BAR_SIZE = 2;

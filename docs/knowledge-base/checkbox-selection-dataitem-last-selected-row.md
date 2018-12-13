@@ -35,7 +35,7 @@ To get the `dataItem` for the last selected row:
 1. In the `click` event handler, get the row by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
 1. Get the row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method of the Grid.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

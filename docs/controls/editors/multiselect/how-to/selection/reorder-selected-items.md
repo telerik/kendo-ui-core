@@ -12,7 +12,7 @@ The following example demonstrates how to use the Kendo UI Sortable to reorder t
 
 ###### Example
 
-```html
+```dojo
      <div id="example" role="application">
       <form method="post" action="http://trykendoui.telerik.com/@ggkrustev/oDEW">
         <h2>Invite Attendees</h2>

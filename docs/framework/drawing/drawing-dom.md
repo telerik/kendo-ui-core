@@ -83,7 +83,7 @@ By default the [`drawDOM`](/api/javascript/drawing/methods/drawdom) method creat
 
 ###### Example
 
-```html
+```dojo
     <div id="content">
         This is <a href="http://www.telerik.com">a non-clickable link</a>.
     </div>
@@ -114,7 +114,7 @@ The example below demonstrates how to draw a multi-page Kendo UI Grid.
 
 ###### Example
 
-```html
+```dojo
     <div id="grid" style="width: 900px;"></div>
 
     <script>
@@ -212,7 +212,7 @@ When multi-page output is requested via `forcePageBreak` or `paperSize`, you can
 
 ###### Example
 
-```html
+```dojo
     <script type="x/kendo-template" id="page-template">
         <div class="page-template">
             <div class="header">

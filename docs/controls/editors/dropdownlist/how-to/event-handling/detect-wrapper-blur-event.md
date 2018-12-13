@@ -12,7 +12,7 @@ The following example demonstrates how to detect the `blur` event of the Kendo U
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
       <h4 class="title">DropDownList</h4>

@@ -31,7 +31,7 @@ How can I sort the events in the Scheduler agenda view in a descending order?
 
 Extend the AgendaView of the Scheduler and implement a custom render function to require the events in a descending order.
 
-```html
+```dojo
 <div id="scheduler"></div>
 
 <script>

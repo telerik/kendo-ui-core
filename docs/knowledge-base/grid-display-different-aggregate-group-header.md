@@ -35,7 +35,7 @@ aggregates.fieldName1.sum
 
 The following sample demonstrates the approach described above by displaying the **UnitsInStock** sum aggregate in the `groupHeaderTemplate`:
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
   $(document).ready(function() {

@@ -14,7 +14,7 @@ The example below demonstrates how to achieve this behavior by using the [dataSo
 
 ###### Example
 
-```html
+```dojo
     <div id="piechart"></div>
     <script>
       var data = [

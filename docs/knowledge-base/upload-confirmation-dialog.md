@@ -29,7 +29,7 @@ Use the [Kendo UI **Confirm** Dialog](https://demos.telerik.com/kendo-ui/dialog/
 
 The following example demonstrates how to open the **Confirm** Dialog within the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/select) event handler and display the name of the file.
 
-````html
+````dojo
   <input name="files" id="files" type="file" />
   <script>
 	$(document).ready(function() {

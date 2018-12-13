@@ -21,7 +21,7 @@ To achieve this behavior:
 
 ###### Example
 
-```html
+```dojo
 	<style>
       .k-grid-content table{
         background-color: aliceblue;

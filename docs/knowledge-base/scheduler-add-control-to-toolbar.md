@@ -38,7 +38,7 @@ How can I add a specific control to the Scheduler toolbar?
 
 To implement the scenario, use jQuery.
 
-```html
+```dojo
 <div id="scheduler"></div>
 
 <script>

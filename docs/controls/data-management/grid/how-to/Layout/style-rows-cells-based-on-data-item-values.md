@@ -23,7 +23,7 @@ The usage of a row template is suitable only if you do not intend to use hierarc
 
 ###### Example
 
-```html
+```dojo
     <style>
       .k-grid {
         width: 500px;
@@ -111,7 +111,7 @@ The usage of the `dataBound` handler and the iteration of the table rows is suit
 
 ###### Example
 
-```html
+```dojo
     <style>
       .k-grid {
         width: 500px;
@@ -209,7 +209,7 @@ The usage of the `dataBound` handler and the iteration of the data items is suit
 
 ###### Example
 
-```html
+```dojo
     <style>
     .k-grid {
         width: 500px;

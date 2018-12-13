@@ -33,7 +33,7 @@ How can I have additional header and footer rows that are not part of the return
 
 > This approach is not applicable if the data is edited and saved by using the other DataSource transport methods (`Update`, `Create`, and `Destroy`). Such scenarios do not support the insertion of a custom header or footer.
 
-````html
+````dojo
 <div id="spreadsheet" style="width: 100%"></div>
 
 <script>

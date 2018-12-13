@@ -11,7 +11,7 @@ The following example demonstrates how to show a context menu for the TreeList r
 
 ###### Example
 
-```html
+```dojo
   <div id="treelist"></div>
 
 

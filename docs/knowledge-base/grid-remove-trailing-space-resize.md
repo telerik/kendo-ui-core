@@ -31,7 +31,7 @@ How can I avoid the rendering of the blank space after the last column when the 
 
 Add an empty column to the Grid. You can manually calculate its width, so that it fills the available space when the columns are resized. If the columns are wider than the Grid, the empty column is hidden.
 
-```html
+```dojo
 <style>
     .k-grid {
         width: 700px;

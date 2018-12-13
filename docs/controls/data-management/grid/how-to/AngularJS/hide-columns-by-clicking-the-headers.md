@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-grid="grid" k-options="gridOptions"></div>

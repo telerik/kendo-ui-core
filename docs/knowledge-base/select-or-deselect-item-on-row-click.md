@@ -30,7 +30,7 @@ How can I select and deselect multiple rows by clicking on a row in a Grid with 
 
 When selection is enabled in the Grid component, the built-in option for deselecting a row or selecting multiple rows is `Ctrl`+ click. To deselect a row or select multiple rows by row clicking and without holding the `Ctrl` key, use the following approach. 
 
-```html
+```dojo
 
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/orders.js"></script>
 

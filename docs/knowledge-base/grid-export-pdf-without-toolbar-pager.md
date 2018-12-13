@@ -50,7 +50,7 @@ Use the following CSS rules.
 
 The following example demonstrates the outcome of the suggested approach.
 
-```html
+```dojo
 <div id="example">
 
   <div id="grid"></div>

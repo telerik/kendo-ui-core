@@ -59,7 +59,7 @@ How can I change the color of shapes in the Diagram when the user performs selec
 
 The following example demonstrates how to change the background of the selected shapes in the Diagram to green.
 
-```html
+```dojo
     <div id="diagram"></div>
     <script>
       $("#diagram").kendoDiagram({

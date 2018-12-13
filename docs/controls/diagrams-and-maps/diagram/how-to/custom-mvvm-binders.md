@@ -16,7 +16,7 @@ By using this approach, you can:
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-content">
         <div>

@@ -12,7 +12,7 @@ The example below demonstrates how to change the Hybrid UI ActionSheet options d
 
 ###### Example
 
-```html
+```dojo
     <div data-role="view" data-title="Inbox" id="actionsheet-view">
       <h3 id="actionResult"></h3>
       <ul data-role="listview" data-source="inbox" data-template="inboxItem" class="inboxList"></ul>

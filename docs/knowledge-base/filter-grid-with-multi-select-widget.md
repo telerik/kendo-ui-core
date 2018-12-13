@@ -33,7 +33,7 @@ How can I apply multiple filters in a Grid for a single field with the Kendo UI 
 1. In that function, create a MultiSelect widget.
 1. When the `change` event is fired, apply the filters to the Grid based on the currently selected items.
 
-```html
+```dojo
     <div id="example">
           <div id="grid"></div>
           <script>

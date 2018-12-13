@@ -39,7 +39,7 @@ How can I prevent the submission of a value that is entered in the input of the 
 
 In the handler of the ComboBox `change` event which fires on blurring the widget, check if the entered text matches an item in the DataSource. If it does not, replace the entered text with an empty string.
 
-```html
+```dojo
 	<input id="combobox"  />
 	<script>
 	   $(document).ready(function() {

@@ -45,7 +45,7 @@ Does the Grid feature a built-in solution to add an **Expand All** and **Collaps
 
 Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/expandrow) and [`collapseRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/closecell) methods of the Grid.
 
-```html
+```dojo
 <div id="example">
       <button class="k-button" id="expand">Expand All</button>
       <button class="k-button" id="collapse">Collapse All</button>

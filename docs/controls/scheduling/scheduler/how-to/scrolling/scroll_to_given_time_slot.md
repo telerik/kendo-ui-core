@@ -12,7 +12,7 @@ The following example demonstrates how to scroll to a given time slot by using J
 
 ###### Example
 
-```html
+```dojo
     <div style="width: 50%; margin-left: auto; margin-right: auto;">
       <div id="scheduler"></div>
       <h3>Scroll the scheduler content to given hour:</h3>

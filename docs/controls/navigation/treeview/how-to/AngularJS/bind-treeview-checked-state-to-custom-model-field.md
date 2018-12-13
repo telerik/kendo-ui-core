@@ -20,7 +20,7 @@ The following example demonstrates how to bind the checked state of a Kendo UI T
 
 ###### Example
 
-```html
+```dojo
   <link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
   <script src="https://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>
 

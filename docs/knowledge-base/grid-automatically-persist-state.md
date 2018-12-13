@@ -30,7 +30,7 @@ The state of the Grid is persisted in the [`beforeunload`](https://developer.moz
 
 The `autoBind` property of the Grid is able to detect any options that are already persisted, which prevents the multiple requests of data.
 
-````html
+````dojo
 <div id="grid"></div>
 
 <script>

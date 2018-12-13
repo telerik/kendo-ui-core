@@ -38,7 +38,7 @@ How can I add a Kendo UI Animation Effect to the opening of a detail row in the 
 
 Use the `detailInit` event and custom CSS rules.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script type="text/x-kendo-template" id="template">

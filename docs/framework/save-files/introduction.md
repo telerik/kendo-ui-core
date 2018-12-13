@@ -20,7 +20,7 @@ The following example demonstrates how to save a text file on the client by usin
 
 ###### Example
 
-```html
+```dojo
 <script>
 	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
 	kendo.saveAs({
@@ -34,7 +34,7 @@ The following example demonstrates how to save a text file on the client by usin
 
 ###### Example
 
-```html
+```dojo
 <script>
 	var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
 	kendo.saveAs({

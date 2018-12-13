@@ -42,7 +42,7 @@ How can I add a button which will expand or collapse all tasks in my Gantt?
 1. Implement a loop to iterate through all tasks.
 1. Use `set("expanded", [true/false])` to manage the expanded state.
 
-```html
+```dojo
 
 <div id="example">
 

@@ -40,7 +40,7 @@ How can I bind a Kendo UI AutoComplete to the WebAPI in an AngularJS scenario?
 
 Set the `dataSource` type to `webapi` and the `transport` `read` URL to the method in your controller.
 
-```html
+```dojo
 <div id="example" ng-app="KendoDemos">
     <div class="demo-section k-content" ng-controller="MyCtrl">
         <h4>Autocomplete</h4>

@@ -36,7 +36,7 @@ Set the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasou
 
 The following example demonstrates how to use a [`click`](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/events/click) event of an external Kendo UI Button.
 
-```html
+```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="example">

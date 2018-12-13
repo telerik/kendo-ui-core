@@ -29,7 +29,7 @@ The following example demonstrates how to initialize the TreeList and bind it to
 
 ###### Example
 
-```html
+```dojo
 <div id="treelist"></div>
 
 <!-- Initialize the TreeList -->
@@ -66,7 +66,7 @@ The following example demonstrates how to enable the remote binding for the Tree
 
 ###### Example
 
-```html
+```dojo
 
     <div id="treelist"></div>
 
@@ -283,7 +283,7 @@ The following example demonstrates how to apply the [API of the TreeList](/api/j
 
 ###### Example
 
-```html
+```dojo
     <div id="treelist"></div>
     <script>
     $("#treelist").kendoTreeList({
@@ -323,7 +323,7 @@ The following example demonstrates how to subscribe to a TreeList event during t
 
 ###### Example
 
-```html
+```dojo
     <div id="treelist"></div>
     <script>
     $("#treelist").kendoTreeList({
@@ -349,7 +349,7 @@ The following example demonstrates how to subscribe to a TreeList event by using
 
 ###### Example
 
-```html
+```dojo
     <div id="treelist"></div>
     <script>
     function treelist_databound(e) {
@@ -383,7 +383,7 @@ The following example demonstrates how to access an existing TreeList instance.
 
 ###### Example
 
-```html
+```dojo
     <div id="treelist"></div>
     <script>
     $("#treelist").kendoTreeList({

@@ -30,7 +30,7 @@ The example below demonstrates the inline binding of a column series.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -55,7 +55,7 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -80,7 +80,7 @@ In addition to binding to arrays, you are also able to supply objects and specif
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     var seriesData = [
@@ -116,7 +116,7 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -143,7 +143,7 @@ The example below demonstrates how to set the DataSource configuration.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         var seriesData = [
@@ -166,7 +166,7 @@ The example below demonstrates how to set the DataSource instance.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
         var seriesData = [
@@ -235,7 +235,7 @@ The example below demonstrates a grouped chart with different number of points i
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     var data =  [
@@ -282,7 +282,7 @@ The example below demonstrates data-bound categorical series.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     var seriesData = [{
@@ -321,7 +321,7 @@ The example below demonstrates how to bind with `categoryField`.
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     var seriesData = [{
@@ -360,7 +360,7 @@ Scatter series are bound to the fields specified as `xField` and `yField`, as de
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
     var xyData = [{

@@ -13,7 +13,7 @@ To set the background color of the alternating rows, the demo uses the [`backgro
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     $("#grid").kendoGrid({

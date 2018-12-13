@@ -69,7 +69,7 @@ However, the option to change the icons is scheduled for the next major Kendo UI
 }
 ```
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

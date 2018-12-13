@@ -11,7 +11,7 @@ The following example demonstrates how to hide the default button of the DatePic
 
 ###### Example
 
-```html
+```dojo
     <input id="datepicker" value="10/10/2011" style="width:150px;" />
     <script>
       $(document).ready(function() {

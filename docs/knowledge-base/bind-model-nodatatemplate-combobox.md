@@ -44,7 +44,7 @@ The `noDataTemplate` is initially hidden which means that the binding of the mod
 
 1. Manually invoke the binding of the `viewModel` by using the client API of the ComboBox.
 
-```html
+```dojo
 
 <div id="example">
     <script type="text/x-kendo-tmpl" id="template">

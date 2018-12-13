@@ -38,7 +38,7 @@ How can I create a client-side virtualization functionality in the DropDownList?
 
 Based on the index of the currently selected value, calculate the indexes of the next items that have to be rendered.
 
-```html
+```dojo
 <input id="orders" style="width: 100%;" />
 <script>
     var data = [];

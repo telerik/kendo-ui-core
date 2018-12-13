@@ -12,7 +12,7 @@ The following example demonstrates how to clear the filter of the Kendo UI Combo
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>

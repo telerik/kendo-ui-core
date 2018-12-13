@@ -11,7 +11,7 @@ The following example demonstrates how to hide editors for different columns on 
 
 ###### Example
 
-```html
+```dojo
     <div id="treelist"></div>
 
     <style>

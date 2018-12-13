@@ -34,7 +34,7 @@ How can I display a subtitle with an empty line and smaller font in the Kendo UI
 	1. Use a jQuery selector and [`hide`](https://api.jquery.com/hide/) the second line.
 	1. Use a jQuery selector and change the `font-size` of the third line.
 
-```html
+```dojo
 <style>
     .topPadding {
         padding-top: 2cm;

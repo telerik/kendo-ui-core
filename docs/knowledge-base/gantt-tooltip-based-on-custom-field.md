@@ -41,7 +41,7 @@ How can I display a different tooltip for Gantt tasks that have different custom
 1. In the template, access the custom field value of the task that the tooltip will depend on.
 1. Based on the custom field value, conditionally load different template content.
 
-```html
+```dojo
 	<div id="gantt"></div>
 
 	<script type="text/x-kendo-template" id="myTemplate">

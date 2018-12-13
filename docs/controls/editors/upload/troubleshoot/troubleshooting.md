@@ -15,11 +15,11 @@ position: 1
 
 The [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/upload/index) uses an opacity filter to overlay the default file input's **Select** button. This filter is implemented as an ActiveX control in Internet Explorer 8 versions and older. As such, it is subject to security settings and can be disabled. Below is the sample image of an affected component:
 
-![](/controls/editors/upload/upload-activex.png)
+![Upload ActiveX](../upload-activex.png)
 
 **Solution** In Internet Explorer set the following option to **Enable**: **Internet Options** > **Security** > **Internet** (or Local intranet) > **Custom Level** > **Binary and script behaviors**.
 
-![](/controls/editors/upload/upload-ie-script-behaviors.png)
+![Upload Behaviors](../upload-ie-script-behaviors.png)
 
 ## Performance Issues
 

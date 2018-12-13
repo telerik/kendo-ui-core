@@ -17,7 +17,7 @@ To achieve this behavior:
 
 ###### Example
 
-```html
+```dojo
 
     <div id="diagram" style="height: 250px"></div>
     <script>

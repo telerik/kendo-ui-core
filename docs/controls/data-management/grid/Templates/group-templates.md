@@ -20,7 +20,7 @@ If no template is defined, the name of the field and the current group are displ
 
 **Figure 1: Grid with no group templates**
 
-![Grid with no group templates](/controls/data-management/grid/grid-no-group-header-template.png)
+![Grid with no group templates](../grid-no-group-header-template.png)
 
 The only difference in the use of `GroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value.
 
@@ -28,7 +28,7 @@ Both `GroupHeaderColumnTemplate` and `GroupFooterTemplate` work in a similar way
 
 **Figure 2: Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied**
 
-![Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](/controls/data-management/grid/grid-group-header-column-template.png)
+![Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../grid-group-header-column-template.png)
 
 Due to the fact that `GroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `GroupHeaderColumnTemplate` of the first visible column. If you want to show the `GroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `GroupHeaderTemplate` for the group column. The following Grid configuration shows that commenting the `GroupHeaderTemplate` for the **Units In Stock** column shows the `GroupHeaderColumnTemplate` for the **Product Name** column.
 
@@ -71,7 +71,7 @@ Due to the fact that `GroupHeaderTemplate` is displayed next to the expanding ic
 
 **Figure 3: Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate**
 
-![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](/controls/data-management/grid/grid-group-header-column-template-first-column.png)
+![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../grid-group-header-column-template-first-column.png)
 
 ## See Also
 

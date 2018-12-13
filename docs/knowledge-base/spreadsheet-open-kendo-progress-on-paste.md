@@ -26,7 +26,7 @@ How can I add a loading animation to the Spreadsheet when I paste huge clipboard
 
 Implement a jQuery `paste` event handler. To attach the event, use the `render` event of the Spreadsheet. Note that you will need to open the Kendo UI Progress Indicator on the `spreadsheet` element and not on the `paste` target.  
 
-````html
+````dojo
 <div id="spreadsheet"></div>
 
 <script>

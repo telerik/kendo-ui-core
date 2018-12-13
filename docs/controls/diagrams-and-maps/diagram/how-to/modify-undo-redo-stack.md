@@ -18,7 +18,7 @@ To achieve this behavior:
 
 ###### Example
 
-```html
+```dojo
 
     <input type="button" value="Undo" onclick="undoChange(); return false;">
     <input type="button" value="Redo" onclick="redoChange(); return false;">

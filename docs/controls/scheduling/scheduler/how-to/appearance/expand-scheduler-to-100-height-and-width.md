@@ -20,7 +20,7 @@ The following example demonstrates how to expand the Scheduler to 100% height an
 
 ###### Example
 
-```html
+```dojo
 
 <style>
 html

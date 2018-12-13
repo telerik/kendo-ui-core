@@ -11,7 +11,7 @@ The example below demonstrates how to reorder multiple items using the Kendo UI 
 
 ###### Example
 
-```html
+```dojo
   <p>Select multiple items with CTRL key</p>
   <div class="list-wrapper">
     <ul id="sortable-listA">

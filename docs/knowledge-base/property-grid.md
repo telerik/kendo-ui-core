@@ -38,7 +38,7 @@ How can I convert a Kendo UI Grid to a property grid for users with narrow scree
 
 Modify the shape of the data.
 
-```html
+```dojo
         <style>
             tbody td:first-child{
             background-color:#d5d5d5;

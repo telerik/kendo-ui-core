@@ -11,7 +11,7 @@ The following example demonstrates how to change the group header position when 
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <div id="grid"></div>
 

@@ -55,7 +55,7 @@ range.filter(columns);
 
 Here you could find a small sample implementing the above suggestion:
 
-```html
+```dojo
 <input type="button" value="Save filters" id="save"/>
 <input type="button" value="Reload filters" id="reload"/>
 <div id="spreadsheet" style="width: 100%"></div>

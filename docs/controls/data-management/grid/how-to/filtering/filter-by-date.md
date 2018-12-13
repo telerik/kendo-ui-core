@@ -25,7 +25,7 @@ To create the helper field:
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
     <script>
       var sampleData = [
@@ -93,7 +93,7 @@ To achieve the filter change:
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

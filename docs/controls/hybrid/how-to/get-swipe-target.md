@@ -11,7 +11,7 @@ The example below demonstrates how to save the reference of the swiped element i
 
 ###### Example
 
-```html
+```dojo
     <title>Kendo UI Snippet</title>
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>

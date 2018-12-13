@@ -13,7 +13,7 @@ You need this functionality because assigning a non-default `id` value for the n
 
 ###### Example
 
-```html
+```dojo
 
     <script>       
 

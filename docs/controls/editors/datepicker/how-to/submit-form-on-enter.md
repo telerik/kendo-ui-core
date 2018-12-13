@@ -11,7 +11,7 @@ The following example demonstrates how to submit a form when the `Enter` key is 
 
 ###### Example
 
-```html
+```dojo
     <form id="form1" style="border: 1px solid red">
    	    <input id="datepicker" />
         <button>Submit</button>

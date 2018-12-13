@@ -155,7 +155,7 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 
 **Figure 1: Adding a new entry**
 
-![Chart in IE](/images/vs2015-external-tools.png)
+![Chart in IE](../../images/vs2015-external-tools.png)
 
 ## See Also
 

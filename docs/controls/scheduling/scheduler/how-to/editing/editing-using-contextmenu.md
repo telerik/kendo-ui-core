@@ -12,7 +12,7 @@ The following example demonstrates how to edit the Scheduler by using the Kendo 
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="scheduler"></div>
     <ul id="contextMenu"></ul>

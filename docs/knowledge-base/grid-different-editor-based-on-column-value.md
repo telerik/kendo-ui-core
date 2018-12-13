@@ -35,7 +35,7 @@ How can I use a different editor based on the column value in a Grid?
 1. Place a condition within the [`editor`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.editor) function.
 1. Based on that condition, return the corresponding editor.
 
-```html
+```dojo
   <div id="example">
     <div id="grid"></div>
 

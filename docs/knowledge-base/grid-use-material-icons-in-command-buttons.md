@@ -32,7 +32,7 @@ To simulate the built-in `"edit"` command button actions (**Edit**, **Update**, 
 
 The following example demonstrates how to implement the suggested approach.
 
-```html
+```dojo
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet" />
     <div id="example">

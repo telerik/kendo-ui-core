@@ -25,7 +25,7 @@ For detailed information on [Chart titles and legends, refer to the article abou
 
 **Figure 1: The structure of a Chart**
 
-![Chart Structure](/controls/charts/chart-structure.png)
+![Chart Structure](chart-structure.png)
 
 ### Themes
 

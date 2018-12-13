@@ -24,7 +24,7 @@ How to manually add exception date for recurring event in the Kendo Scheduler us
 
 ## Solution
 
-```html
+```dojo
   Pick a date to be added to the exception:
   <input id="datepicker" />
   <button type="button" class="k-button" id="btn">Click to add the selected date as exception</button>

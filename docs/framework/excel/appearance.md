@@ -30,7 +30,7 @@ The example below demonstrates how to customize the appearance of the cells.
 
 ###### Example
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [

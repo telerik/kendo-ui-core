@@ -24,7 +24,7 @@ The following example demonstrates how to enable the Excel export functionality 
 
 ###### Example
 
-```html
+```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
     <div id="grid"></div>
@@ -77,7 +77,7 @@ The following example demonstrates how to export all the data from a Kendo UI Gr
 
 ###### Example
 
-```html
+```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
     <div id="grid"></div>
@@ -120,7 +120,7 @@ The [`excelExport`](/api/javascript/ui/grid/events/excelexport) event allows rev
 
 ###### Example
 
-```html
+```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
     <div class="k-rtl">

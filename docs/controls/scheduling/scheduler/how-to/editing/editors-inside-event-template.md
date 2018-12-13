@@ -12,7 +12,7 @@ The following example demonstrates how to nest editors inside the Scheduler even
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <script id="event-template" type="text/x-kendo-template">
         <div>

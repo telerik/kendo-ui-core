@@ -11,7 +11,7 @@ The following example demonstrates how to show a custom placeholder text on `blu
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <h4>Mask Input </h4>

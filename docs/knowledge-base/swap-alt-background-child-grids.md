@@ -33,7 +33,7 @@ I have a multi-level, hierarchy Grid. The headers of the child grids are hidden.
 
 1. In the `dataBound` event handler of every child grid, conditionally swap the background and the alternate colors.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

@@ -32,7 +32,7 @@ How can I export only the selected rows of a Kendo UI Grid to PDF?
 1. In the [`pdfExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler, hide the rows that are not selected by using CSS.
 1. When the export promise is done, show the hidden rows.
 
-```html
+```dojo
 <div id="example">
 
     <div class="box wide">

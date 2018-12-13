@@ -24,7 +24,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ###### Example
 
-```html
+```dojo
 <ul id="menu"></ul>
 
 <script>
@@ -73,7 +73,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ###### Example
 
-```html
+```dojo
 <ul id="menu">
     <li data-command="command1">Command 1</li>
     <li data-command="command2">Command 2</li>

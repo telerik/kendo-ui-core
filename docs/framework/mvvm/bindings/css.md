@@ -17,7 +17,7 @@ The example below demonstrates how to use the CSS binding.
 
 ###### Example
 
-```html
+```dojo
 	<span data-bind="css:{online: isOnline, admin: isAdmin}">John Doe</span>
     <script>
     var viewModel = kendo.observable({
@@ -30,7 +30,7 @@ The example below demonstrates how to use the CSS binding.
 ```
 
 The output will be (the data-bind attribute is omitted for clarity):
-```html
+```dojo
     <span class="online">John Doe</span>
 ```
 

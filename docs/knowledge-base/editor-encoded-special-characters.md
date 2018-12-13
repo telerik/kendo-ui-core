@@ -39,7 +39,7 @@ How can I set the encoded special characters as Editor values and display them d
 
 Prior to passing them as a parameter to the `value` method of the Editor, decode the encoded special characters.
 
-```html
+```dojo
 <textarea id="editor"></textarea>
 <script>
 	$("#editor").kendoEditor();

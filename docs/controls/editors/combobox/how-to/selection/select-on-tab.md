@@ -12,7 +12,7 @@ The following example demonstrates how to select an item in a Kendo UI ComboBox 
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
 
     <div id="shipping">

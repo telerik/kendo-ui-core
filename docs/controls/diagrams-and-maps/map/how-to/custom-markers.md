@@ -11,7 +11,7 @@ The following example demonstrates how to use custom markers on a Kendo UI Map.
 
 ###### Example
 
-```html
+```dojo
     <div id="map"></div>
     <script>
         function createMap() {

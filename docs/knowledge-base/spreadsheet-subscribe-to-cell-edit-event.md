@@ -31,7 +31,7 @@ How can I get informed if an event is due for handling when the user starts edit
 
 Utilize the `select` event of the Spreadsheet to subscribe to the `activate` event of the `_view.editor`.
 
-```html
+```dojo
 <div id="spreadsheet" style="width: 100%"></div>
 
 <script>

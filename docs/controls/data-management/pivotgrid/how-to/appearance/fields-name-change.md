@@ -15,7 +15,7 @@ The following example demonstrates how to change the text displayed by the **[Da
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="configurator"></div>
     <div id="pivotgrid"></div>

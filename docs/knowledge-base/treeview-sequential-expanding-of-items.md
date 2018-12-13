@@ -29,7 +29,7 @@ How can I sequentially expand all TreeView items when `loadOnDemand` is set to `
 
 Subscribe to the `dataBound` event of the TreeView and [`expand()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/expand) all currently loaded nodes.
 
-```html
+```dojo
 <div id="content">
     <div id="treeview"></div>
     <button id="expandItems" class="k-button k-primary">Expand all items</button>

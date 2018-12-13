@@ -38,7 +38,7 @@ th [role="listbox"]{
 
 The following example demonstrates the complete implementation of the suggested approach.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

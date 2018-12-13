@@ -11,7 +11,7 @@ The following example demonstrates how to draw a straight line between a marker 
 
 ###### Example
 
-```html
+```dojo
     <div id="map"></div>
     <script>
       $("#map").kendoMap({

@@ -16,7 +16,7 @@ The following example demonstrates how to manually filter the `dataSource` insta
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <h4>MultiSelect</h4>

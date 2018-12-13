@@ -29,7 +29,7 @@ How can I add this marker to any other time slot other than the current date?
 1. Override the `_renderCurrentTime()` method to allow the rendering of the ruler markup at a specific time slot.
 1. Use the modified `_renderCurrentTime` method in the `dataBound` event of the Gantt to dynamically set the ruler indicators at specific time slots.
 
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-content">
         <div id="gantt"></div>

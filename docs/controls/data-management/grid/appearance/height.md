@@ -33,7 +33,7 @@ In some special scenarios it is possible to set a height style to the scrollable
 
 **Figure 1: Grid with a fixed height and its scrolling functionality enabled**
 
-![Kendo UI Grid for jQuery with Fixed Height and Scrolling](/controls/data-management/grid/grid3_1.png)
+![Kendo UI Grid for jQuery with Fixed Height and Scrolling](../grid3_1.png)
 
 ## Setting Limits to the Height
 

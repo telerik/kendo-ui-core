@@ -59,7 +59,7 @@ filter: {
 
 The following example demonstrates how to implement the suggested approach.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>
@@ -173,7 +173,7 @@ change: function (e) {
 
 The following example demonstrates how to implement the suggested approach.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

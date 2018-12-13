@@ -11,7 +11,7 @@ The following example demonstrates how to use different editors based on a prope
 
 ###### Example
 
-```html
+```dojo
     <div id="example" class="k-content">
       <div id="grid"></div>
 

@@ -2,7 +2,8 @@
 url: "https://docs.telerik.com/kendo-ui"
 
 # Exclude files which should not be in the output
-exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
+exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, all-pages.md, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
+exclude_navigation: ["knowledge-base/*"]
 navigation:
 ## List your directory names and order here, like this:
     "api":
@@ -302,6 +303,7 @@ navigation:
         position: 50
     "knowledge-base":
         title: "Knowledge Base"
+        position: 10
     "copyright":
         title: "Copyright"
         position: 60
@@ -1368,13 +1370,17 @@ api:
       - "content"
       - "position"
 
+product: "Kendo UI for jQuery"
+platform: kendo-ui
+
 ## Assign layout and category per different paths
+
 defaults:
 -
     scope:
         path: ""
     values:
-        layout: "page"
+        layout: "documentation"
         category: "default"
         product: "kendo-ui"
         editable: true
@@ -1389,12 +1395,14 @@ defaults:
     values:
         product: "php-ui"
         editable: false
+        has_api_toc: true
 -
     scope:
         path: "api/jsp"
     values:
         product: "jsp-ui"
         editable: false
+        has_api_toc: true
 -
     scope:
         path: "jsp"
@@ -1404,17 +1412,20 @@ defaults:
     scope:
         path: "api"
     values:
+        editable: false
+        res_type: api
         kind: "api"
 -
     scope:
         path: "api/javascript"
     values:
         editableExample: "true"
+        api_type: "javascript"
 -
     scope:
         path: "knowledge-base"
     values:
-        layout: "kb-page"
+        res_type: "kb"
 
     ## Component Tags
 -
@@ -1803,8 +1814,51 @@ ff-sheet-id: 14zzclhdh7dMLpg0iq4-2hweCdEiuxxqP3tHdr42-_Cs
 
 # The google services configuration
 google_tag_manager: GTM-6X92
-google_custom_search: '001595215763381649090:eblhnfskwrk'
-google_custom_kb_search: '001595215763381649090:3n6bl34et7c'
+gcs_engine: '001595215763381649090:eblhnfskwrk'
+gcs_api_key: 'AIzaSyBVGH-YHfdOHBr67dIYorAPzyndpaRL6bg'
+
+nginx_host: true
+main_theme: "kendo"
+enable_dojo: true
+has_web_api: true
+skip_tabbed_code: true
+code_lang: true
+has_kb_portal: true
+edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs
+download: http://www.telerik.com/download/kendo-ui
+nav:
+  "Demos": https://demos.telerik.com/kendo-ui/
+  "Release History": https://www.telerik.com/support/whats-new/kendo-ui/release-history
+  "About": http://www.telerik.com/kendo-ui
+  "Pricing": http://www.telerik.com/purchase/kendo-ui
+
+footer:
+-
+  title: "Getting Started"
+  links:
+    "Getting Started": https://docs.telerik.com/kendo-ui/intro/installation/getting-started
+    "Demos": https://demos.telerik.com/aspnet-core/
+    "Whats New": "https://www.telerik.com/support/whats-new/kendo-ui"
+    "Roadmap": https://www.telerik.com/support/whats-new/kendo-ui/roadmap
+-
+  title: "Community"
+  links:
+    "Forums": https://www.telerik.com/forums/kendo-ui
+    "Blogs": https://www.telerik.com/blogs/kendo-ui
+    "Feedback Portal": https://feedback.telerik.com/kendo-jquery-ui
+-
+  title: "Frameworks"
+  links:
+    "Kendo UI for jQuery": https://www.telerik.com/kendo-jquery-ui
+    "Kendo UI for Angular": https://www.telerik.com/kendo-angular-ui
+    "Kendo UI for React": https://www.telerik.com/kendo-react-ui
+    "Kendo UI for Vue": https://www.telerik.com/kendo-vue-ui
+
+footer_social:
+    facebook: https://www.facebook.com/KendoUI/
+    youtube: https://www.youtube.com/user/TelerikInc
+    linkedin: https://www.linkedin.com/showcase/telerik/
+    twitter: https://twitter.com/KendoUI/
 
 # Assets pipeline configuration
 assets:

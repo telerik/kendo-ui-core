@@ -12,7 +12,7 @@ The following example demonstrates how to underline a matched input-field search
 
 ###### Example
 
-```html
+```dojo
 <input id="fabric" placeholder="Select fabric..." />
 <script>
   function formatValue(value, text) {

@@ -30,7 +30,7 @@ How van I render the date in a standard format and not like `/DATE/1498798800000
 
 To properly display properly the group headers, configure a [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/grouptemplate) and a [`fixedGroupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/fixedgrouptemplate).
 
-```html
+```dojo
 <input id="customers" style="width: 400px" />
 
 <script>

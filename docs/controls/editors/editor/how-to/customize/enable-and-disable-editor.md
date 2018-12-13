@@ -12,7 +12,7 @@ The following example demonstrates how to enable and disable the Kendo UI Editor
 
 ###### Example
 
-```html
+```dojo
   <style>
       #overlay{
         top:100;

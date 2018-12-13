@@ -13,7 +13,7 @@ The following example demonstrates how to scroll to a particular item of the Tre
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
         <div kendo-tree-view="tree" k-options="treeOptions"></div>

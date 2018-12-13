@@ -26,7 +26,7 @@ How can I persist the order of the panels in the Sortable, so that when the user
 
 Keep the DOM for the panels in the web storage.
 
-````html
+````dojo
 <button id="reset">Reset</button>
 
     <div id="sidebar">

@@ -35,7 +35,7 @@ How can I configure and customize the MultiSelect to behave as a TagBox?
 
 1. Use a CSS rule to force the pop-up to always remain hidden.
 
-````html
+````dojo
 <style>
 	#products-list {
 		display: none !important;

@@ -19,7 +19,7 @@ The example below demonstrates how to sort stacked series values in a grouped Ke
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
 

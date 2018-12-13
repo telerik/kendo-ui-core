@@ -13,7 +13,7 @@ The following example demonstrates how to make the Window behave as a sliding pa
 
 ###### Example
 
-```html
+```dojo
 <div id="dialog">
   <p>Some content</p>
 </div>

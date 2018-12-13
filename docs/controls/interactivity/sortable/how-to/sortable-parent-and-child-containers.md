@@ -11,7 +11,7 @@ The following example demonstrates how to create nested sortable containers.
 
 ###### Example
 
-```html
+```dojo
      <div id="baSurveyGroupTemplateListView">
       <div class="panel panel-default baSurveyGroupPanel">
         <div class="panel-heading">

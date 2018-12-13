@@ -81,7 +81,7 @@ The result is similar to the one below.
 
 **Figure 1: Connected Diagram shapes**
 
-![Two shapes connected.](/controls/diagrams-and-maps/diagram/diagram-connection.png)
+![Two shapes connected.](diagram-connection.png)
 
 ### Set Layout
 

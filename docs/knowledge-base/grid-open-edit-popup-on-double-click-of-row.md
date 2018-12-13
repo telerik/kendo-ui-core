@@ -31,7 +31,7 @@ How can I open the popup editor when I double-click a Grid row?
 1. Within the [`databound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler, attach a handler to the double-click event of the `tr` element.
 1. When the double-click event of the row is fired, edit the clicked row by using the [`editRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/editrow) method.
 
-```html
+```dojo
 
       <div id="grid"></div>
 

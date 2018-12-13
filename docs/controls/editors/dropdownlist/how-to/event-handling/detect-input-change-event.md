@@ -14,7 +14,7 @@ The following example demonstrates how to detect changes in the input of the wid
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4 class="title">DropDownList</h4>

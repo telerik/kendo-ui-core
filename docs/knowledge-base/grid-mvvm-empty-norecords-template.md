@@ -43,7 +43,7 @@ The following example demonstrates how to implement a custom `noRecords` templat
 > The camelCase `data` attribute options are set by using [dash separators](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options). For example, the `noRecords` configuration of the Kendo UI Grid is set like `data-no-records`.
 
 
-```html
+```dojo
     <div id="example">
       <div>
         <h4>Add or update a record</h4>

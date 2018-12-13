@@ -14,7 +14,7 @@ The example below demonstrates how to achieve this behavior by using HTML.
 
 ###### Example
 
-```html
+```dojo
     <style>       
       .legend-item
       {

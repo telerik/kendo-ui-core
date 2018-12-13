@@ -67,7 +67,7 @@ The code from the previous example results in the following widget.
 
 **Figure 1: The PivotConfigurator**
 
-![Kendo UI PivotConfigurator](/images/pivotconfigurator.png)
+![Kendo UI PivotConfigurator](../../../images/pivotconfigurator.png)
 
 ## Reference
 

@@ -21,7 +21,7 @@ The following example demonstrates how to copy the selected node together with i
 
 ###### Example
 
-```html
+```dojo
     <p><button class="k-button" id="cloneNode">Clone selected node</button></p>
 
     <div id="treeview"></div>
@@ -82,7 +82,7 @@ The following example provides a variation of the previous approach and demonstr
 
 ###### Example
 
-```html
+```dojo
 <div id="treeview"></div>
 <ul id="context-menu">
     <li>Clone</li>

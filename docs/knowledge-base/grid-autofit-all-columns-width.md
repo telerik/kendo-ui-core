@@ -41,7 +41,7 @@ How can I have the columns of a Kendo UI Grid automatically fit their width to a
 
 If you have to only set the `checked` property of the columns to `true`, use the `dataBound` event.
 
-```html
+```dojo
   <div id="example">
     <div id="grid"></div>
 

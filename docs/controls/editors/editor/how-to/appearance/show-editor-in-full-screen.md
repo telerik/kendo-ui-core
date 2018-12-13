@@ -14,7 +14,7 @@ The following example demonstrates how to apply this approach.
 
 ###### Example
 
-```html
+```dojo
   <textarea id="editor"></textarea>
 
   <style>

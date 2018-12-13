@@ -28,7 +28,7 @@ How can I highlight work hours in the Kendo UI Scheduler?
 1. Iterate over the cells in the Scheduler content.
 1. Apply custom CSS based on the current time and group.
 
-```html
+```dojo
 <div id="example">
     <div id="scheduler"></div>
 </div>

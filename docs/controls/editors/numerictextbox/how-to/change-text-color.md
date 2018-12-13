@@ -11,7 +11,7 @@ The following example demonstrates how to change the color of a NumericTextBox v
 
 ###### Example
 
-```html
+```dojo
 <input id="numeric" value="10" />
 <script>
 $(function() {

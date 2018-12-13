@@ -34,7 +34,7 @@ If this is the case, you will need to handle the [Sortable.change](https://docs.
 
 Below you will find an example implementing such scenario:
 
-```html
+```dojo
 <div style="padding:30px;">
   <table>
     <tr>

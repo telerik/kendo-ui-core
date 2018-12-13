@@ -15,7 +15,7 @@ The following example demonstrates how to use the [drawing tooltip options](/api
 
 ###### Example
 
-```html
+```dojo
 
     <div id="diagram"></div>
     <script>

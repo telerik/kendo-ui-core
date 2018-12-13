@@ -12,7 +12,7 @@ The following example demonstrates how to configure a [Chat `agent` class]({% sl
 
 In this case, the establishment of a connection to the service and the binding of the appropriate events are done within the `init` method. The `agent` is subscribed to listen for any `activity$` of the remote service. When an activity is detected, the appropriate method from the Chat public API is invoked to render the data. To handle the user input, the example implements the [`post`](/api/javascript/ui/chat/events/post) event handler of the Chat and the arguments are passed to the Chat Bot service.
 
-```html
+```dojo
 <div id="chat"></div>
 
 <!-- Load Bot Framework Client API -->

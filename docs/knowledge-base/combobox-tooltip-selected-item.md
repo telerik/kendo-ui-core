@@ -42,7 +42,7 @@ How can I show a tooltip on a selected item in the ComboBox?
 1. Destroy the Tooltip that was previously created.
 1. Create a Tooltip with the text of the selected item.
 
-```html
+```dojo
 <input id="combobox" />
 <script>      
     $("#combobox").kendoComboBox({

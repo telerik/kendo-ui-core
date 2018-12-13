@@ -50,7 +50,7 @@ columns: [
 
 The following example demonstrates the implementation of the suggested approach.
 
-```html
+```dojo
 <link rel="stylesheet" href="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.css"/>
     <script src="https://rawgit.com/tannerlinsley/nz-toggle/master/dist/nz-toggle.min.js">   </script>
     <div id="example" ng-app="KendoDemos">

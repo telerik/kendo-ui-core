@@ -28,7 +28,7 @@ How can I perform a server check (validation) before a new or edited task or eve
 1. Send an AJAX request to the server.
 1. Depending on the response, manually save the task in the Scheduler.
 
-```html
+```dojo
 	<div id="scheduler"></div>
 
 	<script>

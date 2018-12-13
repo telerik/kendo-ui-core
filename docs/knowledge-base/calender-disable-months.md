@@ -35,7 +35,7 @@ The Kendo UI Calendar has a [`navigate`](https://docs.telerik.com/kendo-ui/api/j
 
 ###### Example:
   
-```html
+```dojo
 <div id="monthpicker"></div>
 <script>
    function disableDates(calendar){

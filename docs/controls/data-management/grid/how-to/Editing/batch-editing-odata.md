@@ -17,7 +17,7 @@ To achieve this behavior, use a third-party library. To submit the actual reques
 
 ###### Example
 
-```html
+```dojo
     <div id="grid"></div>
     <script>
       $(document).ready(function () {

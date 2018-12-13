@@ -12,7 +12,7 @@ The following example demonstrates how to persist the collapsed state of grouped
 
 ###### Example
 
-```html
+```dojo
   <div id="grid"></div>
     <script>
       var groups = [],

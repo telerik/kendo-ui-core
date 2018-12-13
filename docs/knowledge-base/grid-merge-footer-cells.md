@@ -35,7 +35,7 @@ For the current version, it is not possible to merge cells out of the box. Howev
 1. Set the `overflow: visible;` and `white-space: nowrap;` styles for this cell.
 1. Remove the borders from the desired cells by using CSS.
 
-    ```html
+    ```dojo
     <style>
         .k-footer-template td:nth-child(1) {
             overflow: visible;

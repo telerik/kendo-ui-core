@@ -36,11 +36,11 @@ The validation messages are displayed differently depending on whether the [`asy
 
 **Figure 1: Batch mode is disabled**
 
-![Validation message on disabled batch mode](/controls/editors/upload/upload-validation-batch-disabled.png)
+![Validation message on disabled batch mode](upload-validation-batch-disabled.png)
 
 **Figure 2: Batch mode is enabled**
 
-![Validation message on enabled batch mode](/controls/editors/upload/upload-validation-batch-enabled.png)
+![Validation message on enabled batch mode](upload-validation-batch-enabled.png)
 
 ### Maximum File Size
 

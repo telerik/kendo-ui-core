@@ -36,7 +36,7 @@ How can I create a Kendo UI Column or Bar Chart with two values in the same cate
 
 The following example demonstrates how to apply the suggested approach to a Bar Chart series.
 
-````html
+````dojo
     <div id="chart"></div>
     <script>
       function createChart() {
@@ -87,7 +87,7 @@ The following example demonstrates how to apply the suggested approach to a Bar 
 
 The following example demonstrates how to apply the suggested approach to a Column Chart series.
 
-````html
+````dojo
     <div id="chart"></div>
     <script>
       function createChart() {

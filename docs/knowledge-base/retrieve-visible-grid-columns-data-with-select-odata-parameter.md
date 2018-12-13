@@ -29,7 +29,7 @@ How can I retrieve the columns data that is visible only from the remote service
 1. Pass additional parameters to the oData service by using the `transport.read.data` option.
 1. Query the oData service to retrieve only the visible columns data.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 </div>

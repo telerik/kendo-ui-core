@@ -11,7 +11,7 @@ The following example demonstrates how to extend an existing culture script, cre
 
 ###### Example
 
-```html
+```dojo
 <script src="http://kendo.cdn.telerik.com/2014.3.1119/js/cultures/kendo.culture.en-GB.min.js"></script>
 
 <div id="example">

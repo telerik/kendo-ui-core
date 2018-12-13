@@ -13,7 +13,7 @@ The following example demonstrates how to achieve this behavior and request data
 
 ###### Example
 
-```html
+```dojo
   <div id="tree"></div>
 
   <script>

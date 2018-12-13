@@ -13,7 +13,7 @@ The example below demonstrates how to apply border styles to the Kendo UI TreeMa
 
 ###### Example
 
-```html
+```dojo
     <style>
       .k-treemap-tile {
         border-width: 5px;

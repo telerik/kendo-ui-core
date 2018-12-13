@@ -12,7 +12,7 @@ The following example demonstrates how use the [`filter`](/api/javascript/data/d
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="pivotgrid"></div>
 

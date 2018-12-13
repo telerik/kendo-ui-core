@@ -19,7 +19,7 @@ The API reference for the relevant methods and events that are used in the follo
 
 ###### Example
 
-```html
+```dojo
     <div class="clearfix" id="FirstChart"></div>
 
     <script>

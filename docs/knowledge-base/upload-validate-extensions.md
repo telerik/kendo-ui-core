@@ -39,7 +39,7 @@ How can I validate the Kendo UI Upload widget on `form` submit by using the Kend
 
 To validate whether a file is selected and that the selected file has the correct extension, create a custom rule for the Kendo UI Validator.
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
 

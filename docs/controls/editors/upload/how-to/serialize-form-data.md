@@ -13,7 +13,7 @@ The output from the commonly used [`jQuery.serializeArray`](http://api.jquery.co
 
 ###### Example
 
-```html
+```dojo
     <form id="form"/>
       <input type="text" name="name1" value="value1" />
       <input type="text" name="name2" value="value2" />

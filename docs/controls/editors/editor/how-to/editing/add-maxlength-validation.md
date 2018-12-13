@@ -12,7 +12,7 @@ The following example demonstrates how to define custom Kendo UI validators to c
 
 ###### Example
 
-```html
+```dojo
   <form id="employeeForm" novalidate="novalidate">
     <p>Both editors contain 100 characters.</p>
 

@@ -33,7 +33,7 @@ How can I make the Calendar dynamically display the selected dates in another wi
 2. Subscribe for the `change` event of the Calendar.
 3. Update a preferable container by appending the selected values of the Calendar with `span` elements.
 
-```html
+```dojo
 <div class="demo-section k-content" style="text-align: center;">
     <div id="result" style="width:300px; margin:0 auto;"></div>
 

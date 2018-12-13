@@ -71,7 +71,7 @@ The following example demonstrates an important detail&mdash;the `'Increment'` a
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="'Increment'" k-down-arrow-text="'Decrement'">
     </div>
@@ -87,7 +87,7 @@ The following example demonstrates how to specify options from the `controller` 
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-numerictextbox k-min="1" k-max="10" k-up-arrow-text="textUp" k-down-arrow-text="textDown">
     </div>
@@ -105,7 +105,7 @@ The following example demonstrates how to use declarative attributes for the `ar
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
         <textarea kendo-editor
                   k-tools="[
@@ -130,7 +130,7 @@ The following example demonstrates how to store the whole widget configuration i
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
         <input kendo-date-picker k-options="monthPickerConfig">
     </div>
@@ -206,7 +206,7 @@ To bind the value of widgets that provide a `value()` method to the AngularJS sc
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
       <label>Birthday: <input kendo-date-picker ng-model="birthday" /></label>
       <p>
@@ -229,7 +229,7 @@ The following example demonstrates how to get the actual `widget.value()` by usi
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
       <label>Birthday: <input kendo-date-picker k-ng-model="birthday" /></label>
       <p>
@@ -262,7 +262,7 @@ The following example demonstrates that the MultiSelect displays `Chai` as selec
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
         <h4>Select product</h4>
         <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds" k-value-primitive="false"></select>
@@ -294,7 +294,7 @@ In this scenario, when `k-value-primitive` is set to `true`, you can pass an arr
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
         <h4>Select product</h4>
         <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds" k-value-primitive="true"></select>
@@ -330,7 +330,7 @@ If you store the whole configuration in the `controller`, add an event handler i
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
       <input kendo-date-picker k-options="monthPickerConfig" />
       <p ng-show="selected">A month was picked</p>
@@ -360,7 +360,7 @@ You can also specify event handlers by using attributes. They require the `k-on-
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
       <input kendo-date-picker k-on-change="onDateSelected(kendoEvent)" />
       <p ng-show="selected">A month was picked</p>
@@ -395,7 +395,7 @@ The following example demonstrates how to use some of these local variables.
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid options="mainGridOptions" k-on-change="onChange({ selected: selected },data,dataItem,angularDataItem)">
@@ -442,7 +442,7 @@ To create a widget that automatically updates when some of the scope variables c
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
       <ul kendo-menu k-orientation="orientation" k-rebind="orientation">
         <li>Item 1</li>
@@ -483,7 +483,7 @@ The following example demonstrates how to change the disabled state of the DropD
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
         <select id="customers"
@@ -517,7 +517,7 @@ The following example demonstrates how to change the read-only state of the Drop
 
 ###### Example
 
-```html
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
         <select id="customers"
@@ -581,7 +581,7 @@ You can load the widget data with a `$http` call and initialize the widget when 
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
   <select kendo-drop-down-list k-options="customOptions" k-ng-delay="customOptions.dataSource"></select>
 </div>
@@ -609,7 +609,7 @@ To call methods on a widget from your controller, you might sometimes need a ref
 
 ###### Example
 
-```html
+```dojo
 <div ng-app="app" ng-controller="MyCtrl">
   <input kendo-datepicker="datePicker" k-on-change="onChange()">
 </div>
@@ -628,7 +628,7 @@ As of the Kendo UI Q1 2015 release, if you use the tag directive variant, you ca
 
 ###### Example
 
-```html
+```dojo
     <div ng-app="app" ng-controller="MyCtrl">
       <kendo-date-picker k-scope-field="datePicker" k-on-change="onChange()"></kendo-date-picker>
     </div>
@@ -649,7 +649,7 @@ To set the options of a widget as part of the link function of a custom directiv
 
 ###### Example
 
-````html
+````dojo
     <div id="example" ng-app="KendoDemos">
         <div class="demo-section k-header" ng-controller="MyCtrl">
             <my-custom-directive />
@@ -686,7 +686,7 @@ The following example demonstrates the first approach and it shows how to find t
 
 ###### Example
 
-````html
+````dojo
     <div id="example" ng-app="KendoDemos">
         <div class="demo-section k-header" ng-controller="MyCtrl">
             <div kendo-window="wnd" k-append-to="'#example'"></div>
@@ -710,7 +710,7 @@ The following example demonstrates the best solution in this case&mdash;to use a
 
 ###### Example
 
-````html
+````dojo
 	<div id="example" ng-app="KendoDemos">
 		<div ng-controller="Host">
 			<div kendo-window="editPopup"

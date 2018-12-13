@@ -15,7 +15,7 @@ The following example demonstrates a possible way to implement your own methods 
 
 ###### Example
 
-````html
+````dojo
 <button id="alertBtn" class="k-button">myalert</button>
 <button id="confirmBtn" class="k-button">myconfirm</button>
 <button id="promptBtn" class="k-button">myprompt</button>

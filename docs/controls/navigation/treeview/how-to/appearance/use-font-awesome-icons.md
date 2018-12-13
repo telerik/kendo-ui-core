@@ -11,7 +11,7 @@ The following example demonstrates how to use [FontAwesome icons](http://fortawe
 
 ###### Example
 
-```html
+```dojo
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <style>

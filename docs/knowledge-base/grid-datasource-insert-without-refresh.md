@@ -32,7 +32,7 @@ How can I prevent the Kendo UI Grid from refreshing when I insert an item in the
 1. Insert the item.
 1. Bind the `change` event handler of the dataSource to the Grid.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

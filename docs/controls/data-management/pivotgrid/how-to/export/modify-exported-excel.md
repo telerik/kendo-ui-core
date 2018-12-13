@@ -14,7 +14,7 @@ The following example demonstrates how to achieve this behavior.
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
 
     <button id="export">Export</button>

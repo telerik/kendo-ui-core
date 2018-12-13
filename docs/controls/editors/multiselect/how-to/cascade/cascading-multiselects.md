@@ -12,7 +12,7 @@ The following example demonstrates how to cascade multiple Kendo UI MultiSelect 
 
 ###### Example
 
-```html
+```dojo
     supplier: <select id="suppliers"></select>
     product: <select id="products"></select>
     <script>

@@ -11,7 +11,7 @@ The following example demonstrates how to display a custom confirmation dialog b
 
 ###### Example
 
-```html
+```dojo
     <input name="files" id="files" type="file" />
 
     <script>

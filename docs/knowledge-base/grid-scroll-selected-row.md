@@ -34,7 +34,7 @@ To programmatically scroll the Grid:
 1. Calculate the distance.
 1. In an [`animate`](https://api.jquery.com/animate/) effect, use the [`scrollTop`](https://api.jquery.com/scrollTop/) of the `.k-grid-content` element.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     var dataSource = [];

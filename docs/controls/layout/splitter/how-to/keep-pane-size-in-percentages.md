@@ -11,7 +11,7 @@ The example below demonstrates how to keep the Kendo UI Splitter pane sizes in p
 
 ###### Example
 
-```html
+```dojo
     <div id="splitter" style="height: 400px">
       <div>
         Left pane

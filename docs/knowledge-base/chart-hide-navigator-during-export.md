@@ -35,7 +35,7 @@ To maintain the navigator settings after it was zoomed in or out:
 1. Use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/navigator/methods/select) method of the navigator to get the [`from`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/configuration/navigator.select#navigator.select.from) and [`to`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/configuration/navigator.select#navigator.select.to) values when the export starts.
 1. Include the `from` and `to` values in the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/configuration/navigator.select) property of the navigator by using the `setOptions` method.
 
-```html
+```dojo
 <div id="example">
   <div class="box wide">
     <h4>Export Stock Chart</h4>

@@ -14,7 +14,7 @@ The example below demonstrates how to use the [`series.visual`](/api/javascript/
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <script>
       var BAR_SIZE = 10;

@@ -15,7 +15,7 @@ If the Grid is in edit mode and you do not make any changes, the page navigation
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
       <div id="grid"></div>
 
@@ -106,7 +106,7 @@ If the Grid is in edit mode, paging and sorting are prevented.
 
 ###### Example
 
-```html
+```dojo
   <div id="example">
       <div id="grid"></div>
 

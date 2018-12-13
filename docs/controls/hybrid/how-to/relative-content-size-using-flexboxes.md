@@ -13,7 +13,7 @@ The example below demonstrates how to create a relative content size by using CS
 
 ###### Example
 
-```html
+```dojo
      <div data-role="view" data-title="Percents" data-stretch="true">
       <div data-role="header">
         <div data-role="navbar">

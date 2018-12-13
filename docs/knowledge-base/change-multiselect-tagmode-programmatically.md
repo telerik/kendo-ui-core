@@ -41,7 +41,7 @@ How can I set the `multiple` tag mode of the MultiSelect for the first X number 
 
 1. If the current count exceeds the predefined number, change the tag mode through the `setOptions` method of the MultiSelect.
 
-```html
+```dojo
 <select id="multiselect">
 </select>
 <script>

@@ -33,7 +33,7 @@ The Kendo UI Map does not provide a built-in solution for achieving this behavio
 
 The Map accepts a `[Latitude, Longitude]` format for its locations field. When you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to update the array.
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
 <head>

@@ -13,7 +13,7 @@ You can also select multiple rows by using the checkboxes and apply custom styli
 
 ###### Example
 
-```html
+```dojo
 <div id="grid"></div>
 <button id="showSelection">Show selected IDs</button>
 <script>

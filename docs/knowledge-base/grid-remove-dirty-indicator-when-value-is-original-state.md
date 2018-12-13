@@ -34,7 +34,7 @@ To remove the dirty indicators, handle the [`save`](https://docs.telerik.com/ken
 1. If the changed value is equal to the original value, `delete` the field from the `dirtyFields` object of the `model`.
 1. If the `dirtyFields` object is empty, set the `dirty` property of the `model` to `false`.
 
-```html
+```dojo
 <div id="example">
 	<div id="grid"></div>
 

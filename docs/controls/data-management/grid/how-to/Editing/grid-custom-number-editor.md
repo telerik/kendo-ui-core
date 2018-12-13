@@ -11,7 +11,7 @@ The following example demonstrates how to create a Grid with a custom number edi
 
 ###### Example
 
-```html
+```dojo
   <div>I want to change 11.11% discount to 22.22% via editing. But 22.00% is thrown back at input of 0.2222</div>
   <div id="grid"/>
   <script>

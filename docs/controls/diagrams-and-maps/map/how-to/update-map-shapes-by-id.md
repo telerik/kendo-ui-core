@@ -11,7 +11,7 @@ The following example demonstrates how to update the Map shapes by a specified I
 
 ###### Example
 
-```html
+```dojo
     <div id="map"></div>
     <script>
       function createMap() {

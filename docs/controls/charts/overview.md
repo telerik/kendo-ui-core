@@ -47,7 +47,7 @@ This results in the chart below.
 
 **Figure 1: An empty chart**
 
-![Empty Chart](/controls/charts/chart-empty.png)</img>
+![Empty Chart](chart-empty.png)
 
 ## Configuration
 
@@ -86,7 +86,7 @@ This results in the chart below.
 
 **Figure 2: A chart without categories**
 
-![Column Chart without categories](/controls/charts/chart-column-no-categories.png)</img>
+![Column Chart without categories](chart-column-no-categories.png)
 
 Notice that the columns have no label across the category axis. Specify the labeling for the series in the [`categoryAxis` property](/api/dataviz/chart#categoryAxis), as demonstrated in the example below.
 
@@ -109,7 +109,7 @@ This results in the chart below.
 
 **Figure 3: A chart with categories**
 
-![Column Chart with categories](/controls/charts/chart-column-categories.png)</img>
+![Column Chart with categories](chart-column-categories.png)
 
 ## Categorical Charts
 
@@ -250,7 +250,7 @@ This results in the chart below.
 
 **Figure 4: A chart with multiple axes**
 
-![Chart with multiple axes](/controls/charts/chart-multiple-axes.png)
+![Chart with multiple axes](chart-multiple-axes.png)
 
 ### Arrangement of Value Axes
 
@@ -268,7 +268,7 @@ The first value axis crosses the category axis at the first category (leftmost).
 
 **Figure 5: A chart with customized axis-crossing values**
 
-![Bar chart with customized axis crossing values](/controls/charts/chart-axis-crossing-values.png)
+![Bar chart with customized axis crossing values](chart-axis-crossing-values.png)
 
 ## Scatter Charts
 
@@ -362,7 +362,7 @@ The first series is associated with the default Y axis, as no axis name is speci
 
 **Figure 6: A Scatter chart with multiple axes**
 
-![Scatter chart with multiple axes](/controls/charts/chart-scatter-line-multiple-axes.png)
+![Scatter chart with multiple axes](chart-scatter-line-multiple-axes.png)
 
 ### Arrangement of X/Y Axes
 
@@ -380,7 +380,7 @@ The primary Y axis crosses the X axis at 0 (leftmost). The second, `torque` Y ax
 
 **Figure 7: A Scatter chart with customized axis-crossing values**
 
-![Scatter line chart with customized axis crossing value](/controls/charts/chart-scatter-line-axis-crossing-value.png)
+![Scatter line chart with customized axis crossing value](chart-scatter-line-axis-crossing-value.png)
 
 ## Axis Features
 
@@ -425,7 +425,7 @@ You can add a title to clearly indicate the role of the axis, as demonstrated be
 
 **Figure 8: A chart with axis titles**
 
-![Chart with axis titles](/controls/charts/chart-axis-titles.png)
+![Chart with axis titles](chart-axis-titles.png)
 
 ### Plot Bands
 
@@ -453,7 +453,7 @@ Each axis can be configured to display bands with different colors for predefine
 
 **Figure 9: A chart with axis plot bands**
 
-![Chart with axis plot bands](/controls/charts/chart-plot-bands.png)
+![Chart with axis plot bands](chart-plot-bands.png)
 
 ### Global Settings
 

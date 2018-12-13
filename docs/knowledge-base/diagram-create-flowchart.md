@@ -37,7 +37,7 @@ For more information on how to create custom shapes in the Diagram, refer to the
 
 The following example demonstrates how to implement a simple flowchart by using a common function to generate all shapes.
 
-```html
+```dojo
     <div id="diagram"></div>
 
     <script>

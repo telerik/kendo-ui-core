@@ -36,7 +36,7 @@ Memory-leak reports are not unique to Kendo UI directives. The [Angular JS repos
 
     ###### Example
 
-    ```html
+    ```dojo
     <!DOCTYPE html>
     <html>
     <head>
@@ -102,7 +102,7 @@ Replace the `repeat` directive above with a Kendo UI Grid.
 
 ###### Example
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
   <head>

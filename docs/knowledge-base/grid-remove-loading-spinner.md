@@ -31,7 +31,7 @@ How can I remove the loading spinner from the Kendo UI Grid?
 1. Use a jQuery selector to get the `div` with the `k-loading-image` class.
 1. Use the [`hide`](https://api.jquery.com/hide/) jQuery method.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
     <script>

@@ -34,7 +34,7 @@ I want to remove the master checkbox of the built-in checkbox column in the Kend
 1. In the `click` event handler, get the row and the row classes by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
 1. Based on the row classes, use the [`clearSelection`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection) method of the Grid.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 

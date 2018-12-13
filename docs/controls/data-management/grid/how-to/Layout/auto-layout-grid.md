@@ -13,7 +13,7 @@ The auto layout requires you to disable the scrolling functionality of the Grid.
 
 ###### Example
 
-```html
+```dojo
     <style>
       html
       {

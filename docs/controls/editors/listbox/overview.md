@@ -38,7 +38,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 
 ###### Example
 
-```html
+```dojo
     <select id="listbox"></select>
 
     <!-- Initialize the ListBox -->
@@ -66,7 +66,7 @@ You can also bind the `DataSource` to remote data. The following example demonst
 
 ###### Example
 
-```html
+```dojo
 
      <select id="listbox"></select>
 
@@ -118,7 +118,7 @@ Selected items can be reordered by using any of the following approaches:
 
 ###### Example
 
-```html
+```dojo
 
     <select id="listbox"></select>
     <script>
@@ -146,7 +146,7 @@ To enable the drag-and-drop feature of the ListBox, set its [`draggable`](/api/j
 
 ##### Example
 
-```html
+```dojo
 
     <select id="listbox"></select>
     <script>
@@ -183,7 +183,7 @@ The ListBox supports the use of [templates]({% slug overview_kendoui_templatesco
 
 ##### Example
 
-```html
+```dojo
 
     <script type="text/kendo-x-tmpl" id="template">
         <h5 style="color:#=data.color#">#=name#</h5>
@@ -211,7 +211,7 @@ You can configure the ListBox messages for each toolbar command button. The mess
 
 ##### Example
 
-```html
+```dojo
 
     <select id="listbox">
         <option>Steven White</option>

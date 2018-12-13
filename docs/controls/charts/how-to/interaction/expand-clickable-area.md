@@ -16,7 +16,7 @@ The example below demonstrates how to achieve this behavior in a Bar Charts seri
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <div id="log">Click on the area next to a point...</div>
     <script>
@@ -60,7 +60,7 @@ The example below demonstrates how to expand the clickable or touchable area of 
 
 ###### Example
 
-```html
+```dojo
     <div id="chart"></div>
     <div id="log">Click on the area next to a point...</div>
     <script>

@@ -32,7 +32,7 @@ How can I generate the DataSource Model based on the dynamic data I have in the 
 If you omit the [`columns`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns) setting of the Grid, a column is generated for each field in the model.
 
 
-````html
+````dojo
 <div id="grid"></div>
 
 <script>

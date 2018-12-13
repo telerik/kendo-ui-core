@@ -20,7 +20,7 @@ The following example demonstrates how to hide the time headers of a grouped Ken
 
 ###### Example
 
-```html
+```dojo
 <body>
     <div id="example" class="k-content">
     <div id="scheduler"></div>
@@ -134,7 +134,7 @@ The following example demonstrates how to hide the time headers of an ungrouped 
 
 ###### Example
 
-```html
+```dojo
 <body>
     <div id="example" class="k-content">
     <div id="scheduler"></div>

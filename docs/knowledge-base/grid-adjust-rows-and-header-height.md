@@ -38,7 +38,7 @@ How can I set the heights of the Grid rows, including the header, to a minimum o
 
 To adjust the size of the rows in both the body and the header, use CSS and specify the `height` and `padding` properties for the `th` elements inside the `thead` and `tr`, and the `td` elements inside the `tbody` of the Grid.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
     <script>

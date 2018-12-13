@@ -10,7 +10,7 @@ position: 1
 
 The [Kendo UI PanelBar widget](http://demos.telerik.com/kendo-ui/panelbar/index) displays hierarchical data as a multi-level, expandable widget.
 
-Regarding its structure, you can apply either of the approaches:  
+Regarding its structure, you can apply either of the approaches:
 * Define it in HTML.
 * Dynamically configure it through the API of the PanelBar.
 
@@ -217,7 +217,7 @@ When the PanelBar loads remote content via AJAX, the server response is cached i
 The PanelBar provides the `Single` or `Multiple` expand mode options.
 
 * If `ExpandMode` is set to `Single`, the user can expand only a single root item or a single child item of a specific parent item. Expanding another root item or another child of the currently expanded item's parent will collapse the currently expanded item. This approach is also the only way to collapse an expanded item in the `single` expand mode.
-* If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them. 	
+* If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them.
 
 ###### Example
 
@@ -301,7 +301,7 @@ The following example demonstrates how to use the `disable`, `expand`, and `sele
 ###### Example
 
     <div id="panelBar"></div>
-    <button id="btn1" class="k-button">Update Data Item</button>   
+    <button id="btn1" class="k-button">Update Data Item</button>
     <script>
      $(document).ready(function() {
             $("#panelBar").kendoPanelBar({
@@ -318,12 +318,12 @@ The following example demonstrates how to use the `disable`, `expand`, and `sele
                 ]
             })
         $("#btn1").on('click', function(){
-            var panelBar = $("#panelBar").data("kendoPanelBar");  
+            var panelBar = $("#panelBar").data("kendoPanelBar");
             var dataItem = panelBar.dataItem(".k-item:first"); // get reference to the first item
             dataItem.set("expanded", true); //set the item as expanded
             dataItem.set("enabled", false); //set the item as enabled
             //dataItem.set("selected", true);  set the item as selected
-     })        
+     })
     });
     </script>
 
@@ -333,7 +333,7 @@ As of the R1 2017 release, the PanelBar has provided an built-in functionality o
 
 **Figure 1: The Retry button of the PanelBar prompting you to re-initiate the data binding**
 
-![PanelBar areas](/controls/navigation/panelbar/retry-request-failed.png)
+![PanelBar areas](retry-request-failed.png)
 
 ## See Also
 

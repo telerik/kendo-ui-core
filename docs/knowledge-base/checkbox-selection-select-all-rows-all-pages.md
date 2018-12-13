@@ -40,7 +40,7 @@ How can I select all rows on all Kendo UI Grid pages?
 	1. Select all the rows by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method of the Kendo UI Grid.
 	1. Bring back the old page size by using the `pageSize` method.
 
-```html
+```dojo
 <link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>
 

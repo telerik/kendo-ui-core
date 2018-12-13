@@ -27,7 +27,7 @@ I want to show the editor to the side of the selected Spreadsheet cell and make 
 
 The following example demonstrates how to implement this scenario.
 
-```html
+```dojo
     <!DOCTYPE html>
     <html>
         <head>

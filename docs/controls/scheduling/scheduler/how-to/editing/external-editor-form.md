@@ -12,7 +12,7 @@ The following example demonstrates how create an external editor form in the Sch
 
 ###### Example
 
-```html
+```dojo
     <div id="scheduler"></div>
     <div id="editor"></div>
 

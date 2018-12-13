@@ -12,7 +12,7 @@ The following example demonstrates how to customize the content of days with no 
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
     <div id="team-schedule">
         <div id="people">

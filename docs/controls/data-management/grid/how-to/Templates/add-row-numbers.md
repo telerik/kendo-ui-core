@@ -11,7 +11,7 @@ The following example demonstrates how to implement row numbers in a Grid by usi
 
 ###### Example
 
-```html
+```dojo
   <div id="grid"></div>
     <script>
       var record = 0;

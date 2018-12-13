@@ -31,7 +31,7 @@ How can I achieve the following behavior?
 
 Handle the `select` event of the widget and execute the `insertUnorderedList` command.
 
-````html
+````dojo
 	<textarea id="editor"></textarea>
 
 	<script>

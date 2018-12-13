@@ -23,7 +23,7 @@ The following example demonstrates how to skip all cells from a given column.
 
 ###### Example
 
-```html
+```dojo
   <p>The "gender" column is not editable and is skipped during tabbing:</p>
   <div id="grid"></div>
   <script>
@@ -100,7 +100,7 @@ The following example demonstrates how to skip cells from different columns and 
 
 ###### Example
 
-```html
+```dojo
     <style>
       .noneditable {
         border: 1px solid red !important;

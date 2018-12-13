@@ -12,7 +12,7 @@ The following example demonstrates how to update the opposite start/end picker v
 
 ###### Example
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
     var proxy;

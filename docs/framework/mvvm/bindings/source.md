@@ -175,7 +175,7 @@ The `source` binding does not work for plain HTML elements that are not meant to
 
 ###### Example
 
-```html
+```dojo
     <div id="example">
       <p>Kendo UI DropDownList</p>
       <select data-role="dropdownlist"

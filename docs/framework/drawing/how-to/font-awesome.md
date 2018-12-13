@@ -13,7 +13,7 @@ The example below demonstrates how to embed custom fonts while working with the 
 
 ###### Example
 
-```html
+```dojo
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 
     <script>

@@ -33,7 +33,7 @@ How can I save the dirty content of the Grid in the `localStorage` and restore i
 1. In the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) event handler of the Grid, save the fields data in an object in the `localStorage`.
 1. In the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event handler of the Grid, set the saved values.
 
-```html
+```dojo
 <div id="grid"></div>
 <script>
     $(document).ready(function() {

@@ -39,7 +39,7 @@ To control the generated table, use any of the following options:
 
 ###### Example
 
-```html
+```dojo
 <button onclick="saveTabularData()">Export PDF</button>
 <div id="grid"></div>
 <script>

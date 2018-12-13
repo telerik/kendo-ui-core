@@ -12,7 +12,7 @@ The following example demonstrates how to persist the expanded rows in a Grid af
 
 ###### Example
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
     <button id="refresh">Refresh</button>

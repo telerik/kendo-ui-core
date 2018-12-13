@@ -33,7 +33,7 @@ How can I transfer items between ListBoxes by double-clicking the Kendo UI ListB
 1. Handle the [`dblclick`](https://api.jquery.com/dblclick/) event on the items in both ListBoxes.
 1. In the event handler, based on the ListBox, manually execute the `transferTo` or `transferFrom` command.
 
-```html
+```dojo
 <select id="listBoxA">
       <option>ItemA1</option>
       <option>ItemA2</option>

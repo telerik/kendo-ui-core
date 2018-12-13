@@ -19,7 +19,7 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
 
 ###### Example
 
-```html
+```dojo
     <style>
 
     html,
