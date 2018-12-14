@@ -245,30 +245,11 @@ span.k-sparkline,
 
 .k-map .k-marker {
     position: absolute;
-    width: 28px;
-    height: 40px;
-    margin: -40px 0 0 -14px;
+    width: 1em;
+    height: 1em;
+    transform: translate(-50%, -100%);
     cursor: pointer;
-}
-
-.k-map .k-marker-pin {
-    background-position: 0px 40px;
-}
-
-.k-map .k-marker-pin-target {
-    background-position: 0px 0px;
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
-    .k-map .k-marker {
-        width: 56px;
-        height: 80px;
-        margin: -80px 0 0 -28px;
-    }
-
-    .k-map .k-marker-pin {
-        background-position: 0px 80px;
-    }
+    overflow: visible;
 }
 
 // Control positions
