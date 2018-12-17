@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Alert : kendo.ui.Dialog
 
-Represents the Kendo UI Alert.
+Represents the Kendo UI Alert. Inherits from [Dialog](/api/javascript/ui/dialog).
 
 ## Configuration
 
