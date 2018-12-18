@@ -1,6 +1,8 @@
 # The public documentation URL, used for sitemap.xml
 url: "https://docs.telerik.com/kendo-ui"
 
+all_pages_domain: "https://docs.telerik.com"
+
 # Exclude files which should not be in the output
 exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, all-pages.md, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
 exclude_navigation: ["knowledge-base/*"]
