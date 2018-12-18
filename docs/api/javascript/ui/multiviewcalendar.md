@@ -644,6 +644,16 @@ Navigates to the upper view.
 
 Gets/Sets the selected dates for the multiViewCalendar.
 
+#### Parameters
+
+##### dates `Array`
+
+A list of the dates to be selected.
+
+#### Returns
+
+`Array` The currently selected dates.
+
 > **Important:** This method requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "multiple" option to be set.
 
 #### Example - gets the selected dates of the widget
@@ -677,6 +687,16 @@ Gets/Sets the selected dates for the multiViewCalendar.
 ### selectRange
 
 Gets/Sets the selected range for the multiViewCalendar.
+
+#### Parameters
+
+##### range `Object`
+
+The range to set. It should have a start and end properties with the respective dates.
+
+#### Returns
+
+`Object` The selected range of the multiViewCalendar. The object has a start and end properties.
 
 > **Important:** This method requires the [selectable](/api/javascript/ui/multiviewcalendar/configuration/selectable): "range" option to be set.
 

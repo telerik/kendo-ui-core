@@ -44,6 +44,11 @@
             SHOW = "show",
             HIDE = "hide",
             WIDTH = "width",
+            SIZE = {
+                narrow: "k-window-narrow",
+                normal: "k-window-normal",
+                wide: "k-window-wide"
+            },
             HUNDREDPERCENT = 100,
             messages = {
                 okText  : "OK",
@@ -110,6 +115,8 @@
 
             setOptions: function(options) {
                 var that = this;
+                var sizeClass = that.options.size;
+
                 options = $.extend(that.options, options);
 
                 Widget.fn.setOptions.call(that, options);
@@ -130,6 +137,8 @@
 
                 that.wrapper.show();
                 that._closable(that.wrapper);
+
+                that.wrapper.removeClass(SIZE[sizeClass]);
                 that._dimensions();
 
                 if (!options.visible) {
@@ -145,6 +154,7 @@
                     options = that.options,
                     width = options.width,
                     height = options.height,
+                    sizeClass = options.size,
                     dimensions = ["minWidth", "minHeight", "maxWidth", "maxHeight"];
 
                 for (var i = 0; i < dimensions.length; i++) {
@@ -172,6 +182,10 @@
                     }
 
                     this._setElementHeight();
+                }
+
+                if (sizeClass && SIZE[sizeClass]) {
+                    wrapper.addClass(SIZE[sizeClass]);
                 }
             },
 
@@ -827,6 +841,7 @@
                 buttonLayout: "stretched",
                 actions: [],
                 modal: true,
+                size: "auto",
                 width: null,
                 height: null,
                 minWidth: 0,

@@ -442,6 +442,27 @@ Specifies width of the dialog.
     });
     </script>
 
+
+### size `String` *(default: "auto")*
+
+Set predefined size to the dialog. The `width` and `height` configuration options override the predefined `size`.
+
+Possible values are:
+
+* auto
+* normal
+* narrow
+* wide
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+      size: "wide"
+    });
+    </script>
+
 ## Methods
 
 ### close

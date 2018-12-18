@@ -582,6 +582,27 @@ Specifies width of the window.
     });
     </script>
 
+
+### size `String` *(default: "auto")*
+
+Set predefined size to the window. The `width` and `height` configuration options override the predefined `size`.
+
+Possible values are:
+
+* auto
+* normal
+* narrow
+* wide
+
+#### Example
+
+    <div id="window"></div>
+    <script>
+    $("#window").kendoWindow({
+      size: "wide"
+    });
+    </script>
+
 ## Methods
 
 ### center

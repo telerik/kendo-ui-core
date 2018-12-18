@@ -75,7 +75,12 @@
             REFRESHICON = ".k-window-titlebar .k-i-refresh",
             WINDOWEVENTSHANDLED = "WindowEventsHandled",
             zero = /^0[a-z]*$/i,
-            isLocalUrl = kendo.isLocalUrl;
+            isLocalUrl = kendo.isLocalUrl,
+            SIZE = {
+                narrow: "k-window-narrow",
+                normal: "k-window-normal",
+                wide: "k-window-wide"
+            };
 
         function defined(x) {
             return (typeof x != "undefined");
@@ -315,6 +320,7 @@
                 var width = options.width;
                 var height = options.height;
                 var maxHeight = options.maxHeight;
+                var sizeClass = options.size;
                 var dimensions = ["minWidth","minHeight","maxWidth","maxHeight"];
                 var contentBoxSizing = wrapper.css("box-sizing") == "content-box";
 
@@ -363,6 +369,10 @@
 
                 if (!options.visible) {
                     wrapper.hide();
+                }
+
+                if (sizeClass && SIZE[sizeClass]) {
+                    wrapper.addClass(SIZE[sizeClass]);
                 }
             },
 
@@ -495,32 +505,36 @@
             },
 
             setOptions: function(options) {
+                var that = this;
+                var sizeClass = that.options.size;
                 // make a deep extend over options.position telerik/kendo-ui-core#844
                 var cachedOptions = JSON.parse(JSON.stringify(options));
-                extend(options.position, this.options.position);
+                extend(options.position, that.options.position);
                 extend(options.position, cachedOptions.position);
 
-                Widget.fn.setOptions.call(this, options);
-                var scrollable = this.options.scrollable !== false;
+                Widget.fn.setOptions.call(that, options);
+                var scrollable = that.options.scrollable !== false;
 
-                this.restore();
+                that.restore();
 
                 if (typeof options.title !== "undefined") {
-                    this.title(options.title);
+                    that.title(options.title);
                 }
 
-                this._dimensions();
-                this._position();
-                this._resizable();
-                this._draggable();
-                this._actions();
+                that.wrapper.removeClass(SIZE[sizeClass]);
+                that._dimensions();
+
+                that._position();
+                that._resizable();
+                that._draggable();
+                that._actions();
                 if (typeof options.modal !== "undefined") {
-                    var visible = this.options.visible !== false;
+                    var visible = that.options.visible !== false;
 
-                    this._overlay(options.modal && visible);
+                    that._overlay(options.modal && visible);
                 }
 
-                this.element.css(OVERFLOW, scrollable ? "" : "hidden");
+                that.element.css(OVERFLOW, scrollable ? "" : "hidden");
             },
 
             events:[
@@ -556,6 +570,7 @@
                 actions: ["Close"],
                 autoFocus: true,
                 modal: false,
+                size: "auto",
                 resizable: true,
                 draggable: true,
                 minWidth: 90,
