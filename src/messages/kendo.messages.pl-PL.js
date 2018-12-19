@@ -10,7 +10,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gt": "są późniejsze niż",
     "lte": "są wcześniejsze lub równe",
     "lt": "są wcześniejsze niż",
-    "neq": "są inne niż"
+    "neq": "są inne niż",
+    "isnull": "brak daty",
+    "isnotnull": "mają datę"
   },
   "number": {
     "eq": "są równe",
@@ -18,7 +20,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gt": "są większe niż",
     "lte": "są mniejsze lub równe",
     "lt": "są mniejsze niż",
-    "neq": "są inne niż"
+    "neq": "są inne niż",
+    "isnull": "pusta wartość",
+    "isnotnull": "niepusta wartość"
   },
   "string": {
     "endswith": "kończą się na",
