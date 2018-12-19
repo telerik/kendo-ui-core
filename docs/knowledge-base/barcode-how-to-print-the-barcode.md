@@ -65,7 +65,7 @@ You can print the Barcode on another page by opening a new window and placing th
 
           newWin.document.open();
 
-          newWin.document.write('<html><head> <link href="http://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+          newWin.document.write('<html><head> <link href="https://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
 
           newWin.document.close();
 
