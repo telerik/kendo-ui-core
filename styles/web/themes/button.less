@@ -225,3 +225,22 @@
     border-color: @widget-border-color;
     background: @header-background-color;
 }
+
+
+
+
+// Flat button and bare
+.k-button.k-flat,
+.k-button.k-bare {
+    &.k-primary {
+        &,
+        &:hover,
+        &.k-state-hover,
+        &:active,
+        &.k-state-active,
+        &:hover:active,
+        &:hover.k-state-active {
+            color: @accent;
+        }
+    }
+}

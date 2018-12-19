@@ -20,6 +20,7 @@
     cursor: pointer;
     outline: none;
     -webkit-appearance: none;
+    position: relative;
 
     // No flexbox
     .k-no-flexbox & {
@@ -130,6 +131,124 @@ input[type="reset"].k-button-expand {
 
     &::before {
         display: block;
+    }
+
+    &::after {
+        display: block;
+    }
+
+    &:focus,
+    &.k-state-focused {
+
+        &::after {
+            box-shadow: inset 0 0 0 2px currentColor;
+            opacity: .12;
+        }
+    }
+
+    &[disabled],
+    .k-state-disabled &,
+    &.k-state-disabled {
+        pointer-events: none;
+    }
+}
+
+
+
+
+// Thin background
+@flat-button-hover-opacity: .08;
+@flat-button-focused-opacity: null;
+@flat-button-active-opacity: .16;
+@flat-button-selected-opacity: .2;
+.k-button {
+
+    &::before {
+        .border-radius(inherit);
+        content: "";
+        background: currentColor;
+        opacity: 0;
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        // left: -@button-border-width;
+        // right: -@button-border-width;
+        // top: -@button-border-width;
+        // bottom: -@button-border-width;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 0;
+        transition: opacity .2s ease-in-out;
+    }
+
+    // Hovered state
+    &:hover,
+    &.k-state-hover {
+        &::before {
+            // .opacity( @flat-button-hover-opacity );
+            opacity: @flat-button-hover-opacity;
+        }
+    }
+
+    // Focused state
+    &:focus,
+    &.k-state-focused {
+        &::before {
+            // .opacity( @flat-button-focused-opacity );
+            // opacity: @flat-button-focused-opacity;
+        }
+    }
+    &.k-no-focus:not(:hover),
+    &.k-no-focus:not(.k-state-hover) {
+        &::before {
+            // .opacity( 0 );
+            opacity: 0;
+        }
+    }
+
+    // Pressed state
+    &:active,
+    &.k-state-active {
+        &::before {
+            // opacity( @flat-button-active-opacity );
+            opacity: @flat-button-active-opacity;
+        }
+    }
+
+    // Selected state
+    &.k-state-selected {
+        &::before {
+            // .opacity( @flat-button-selected-opacity );
+            opacity: @flat-button-selected-opacity;
+        }
+    }
+}
+
+
+
+
+// Focus ring
+.k-button {
+
+    &::after {
+        .border-radius(inherit);
+        content: "";
+        opacity: 0;
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        // left: -@button-border-width;
+        // right: -@button-border-width;
+        // top: -@button-border-width;
+        // bottom: -@button-border-width;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 0;
+        transition: opacity .2s ease-in-out;
     }
 }
 
