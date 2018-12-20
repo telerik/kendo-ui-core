@@ -1819,7 +1819,6 @@ google_tag_manager: GTM-6X92
 gcs_engine: '001595215763381649090:eblhnfskwrk'
 gcs_api_key: 'AIzaSyBVGH-YHfdOHBr67dIYorAPzyndpaRL6bg'
 
-nginx_host: true
 main_theme: "kendo"
 enable_dojo: true
 has_web_api: true

@@ -333,8 +333,6 @@ type_links:
 # Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
 # "foo": "Bar"
 
-nginx_host: true
-
 # The google services configuration
 google_tag_manager: GTM-6X92
 gcs_engine: '001595215763381649090:rfbgc0yrusm'
