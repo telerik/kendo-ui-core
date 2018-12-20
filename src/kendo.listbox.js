@@ -291,7 +291,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var target = $(e.currentTarget);
             var oldTarget = that._target;
-            var isInput = isInputElement(target);
+            var isInput = isInputElement(e.target);
 
             if (oldTarget) {
                 oldTarget.removeClass(FOCUSED_CLASS);

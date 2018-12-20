@@ -530,7 +530,7 @@
                 that._actions();
                 if (typeof options.modal !== "undefined") {
                     var visible = that.options.visible !== false;
-
+                    that._enableDocumentScrolling();
                     that._overlay(options.modal && visible);
                 }
 
@@ -731,6 +731,10 @@
                     .insertBefore(wrapper[0])
                     .toggle(visible)
                     .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
+
+                if (this.options.modal.preventScroll) {
+                    this._stopDocumentScrolling();
+                }
 
                 return overlay;
             },
@@ -1021,8 +1025,15 @@
                     } else {
                         this._overlay(false).remove();
                     }
+                    if (options.modal.preventScroll) {
+                        this._enableDocumentScrolling();
+                    }
                 } else if (modals.length) {
                     this._object(modals.last())._overlay(true);
+
+                    if (options.modal.preventScroll) {
+                        this._stopDocumentScrolling();
+                    }
                 }
             },
 

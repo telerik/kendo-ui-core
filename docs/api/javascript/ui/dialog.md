@@ -369,7 +369,7 @@ The minimum width (in pixels) that may be achieved by resizing the dialog.
     });
     </script>
 
-### modal `Boolean` *(default: true)*
+### modal `Boolean|Object` *(default: true)*
 
 Specifies whether the dialog should show a modal overlay over the page.
 
@@ -379,6 +379,21 @@ Specifies whether the dialog should show a modal overlay over the page.
     <script>
     $("#dialog").kendoDialog({
       modal: true
+    });
+    </script>
+
+### modal.preventScroll `Boolean` *(default: false)*
+
+Specifies whether the document should stop scrolling when modal dialog is opened. Closing it should restore the initial document overflow. Note that it's not supported to have multiple dialogs with different `preventScroll` setting.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+      modal: {
+          preventScroll: true
+      }
     });
     </script>
 

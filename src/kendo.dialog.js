@@ -49,6 +49,9 @@
                 normal: "k-window-normal",
                 wide: "k-window-wide"
             },
+            HIDDEN = "hidden",
+            OVERFLOW = "overflow",
+            DATADOCOVERFLOWRULE = "original-overflow-rule",
             HUNDREDPERCENT = 100,
             messages = {
                 okText  : "OK",
@@ -145,6 +148,12 @@
                     that.wrapper.hide();
                 } else {
                     that._triggerOpen();
+                }
+
+                if (typeof options.modal !== "undefined") {
+                    var visible = that.options.visible !== false;
+                    that._enableDocumentScrolling();
+                    that._overlay(options.modal && visible);
                 }
             },
 
@@ -279,6 +288,10 @@
                 }
                 else {
                     this._removeWaiAriaOverlay();
+                }
+
+                if (this.options.modal.preventScroll) {
+                    this._stopDocumentScrolling();
                 }
 
                 return overlay;
@@ -686,8 +699,62 @@
 
                 if (hideOverlay) {
                     this._overlay(false).remove();
+
+                    if (options.modal.preventScroll) {
+                        this._enableDocumentScrolling();
+                    }
                 } else if (modals.length) {
                     this._object(modals.last())._overlay(true);
+
+                    if (options.modal.preventScroll) {
+                        this._stopDocumentScrolling();
+                    }
+                }
+            },
+
+            _stopDocumentScrolling: function(){
+                var that = this;
+
+                var $body = $("body");
+                that._storeOverflowRule($body);
+                $body.css(OVERFLOW, HIDDEN);
+
+                var $html = $("html");
+                that._storeOverflowRule($html);
+                $html.css(OVERFLOW, HIDDEN);
+            },
+
+            _enableDocumentScrolling: function(){
+                var that = this;
+
+                that._restoreOverflowRule($(document.body));
+                that._restoreOverflowRule($("html"));
+            },
+
+            _storeOverflowRule: function($element){
+                if(this._isOverflowStored($element)){
+                    return;
+                }
+
+                var overflowRule = $element.get(0).style.overflow;
+
+                if(typeof overflowRule === "string"){
+                    $element.data(DATADOCOVERFLOWRULE, overflowRule);
+                }
+            },
+
+            _isOverflowStored: function ($element){
+                return typeof $element.data(DATADOCOVERFLOWRULE) === "string";
+            },
+
+            _restoreOverflowRule: function($element){
+                var overflowRule = $element.data(DATADOCOVERFLOWRULE);
+
+                if(overflowRule !== null && overflowRule !== undefined){
+                    $element.css(OVERFLOW, overflowRule);
+                    $element.removeData(DATADOCOVERFLOWRULE);
+                } else {
+                    $element.css(OVERFLOW, "");
                 }
             },
 

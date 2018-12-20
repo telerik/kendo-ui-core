@@ -2,7 +2,7 @@
 title: Sort Displayed Columns Menu Items
 description: An example on how to sort displayed columns menu items in the Kendo UI Grid header.
 type: how-to
-page_title: Implement Sort Cisplayed Columns Menu Items | Kendo UI Grid
+page_title: Implement Sort Displayed Columns Menu Items | Kendo UI Grid
 slug: grid-sort-displayed-columns-menu-items
 tags: grid, visible, columnmenu, menu, column, displayed, list, header, checkbox, sort, order
 ticketid: 1146769 

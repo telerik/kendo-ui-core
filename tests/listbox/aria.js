@@ -90,7 +90,7 @@
         var firstInput = listBox.items().first().find('input');
 
         firstInput.focus();
-        listBox._click({ currentTarget: firstInput })
+        listBox._click({ target: firstInput })
 
         ok($(document.activeElement).is("input"))
     });
