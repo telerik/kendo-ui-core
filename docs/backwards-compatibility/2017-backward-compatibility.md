@@ -162,8 +162,6 @@ fonts in fonts/
 
 ## See Also
 
-Other articles on Kendo UI breaking changes and backwards compatibility:
-
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})
 * [2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})

@@ -98,7 +98,7 @@ The `id` of the parent task. Required for child tasks.
 
 ### percentComplete `String|Number|Object` *(default: 0)*
 
-The completion percentage of the task. A value between 0 and 1, representing how much of a task is completed.
+The completion percentage of the task. A value between 0 and 1 representing how much of a task is completed.
 
 #### Example - set the percentComplete of a task
 
@@ -332,7 +332,7 @@ Describes the configuration options of the new Gantt task class.
 
 ##### options.id `String`
 
-The name of the field which acts as an identifier of the Gantt task. The identifier is used to determine if a model instance is new or existing one. If the value of the field specified is equal to the default value (specified through the `fields` configuration), the model is considered as new.
+The name of the field which acts as an identifier of the Gantt task. The identifier is used to determine if a model instance is new or existing. If the value of the field specified is equal to the default value (specified through the `fields` configuration), the model is considered as new.
 
 ##### options.fields `Object`
 
@@ -340,7 +340,7 @@ A set of key/value pairs the configure the model fields. The key specifies the n
 
 ##### options.fields.fieldName.defaultValue
 
-Specifies the which will be used for the field when a new model instance is created. The default settings depend on the type of the field.
+Specifies the value which will be used for the field when a new model instance is created. The default settings depend on the type of the field.
 
 The default for:
 
@@ -350,11 +350,11 @@ The default for:
 
 ##### options.fields.fieldName.editable `Boolean`
 
-Specifies if the field is editable or not. The default value is `true`.
+Specifies if the field is editable or not. Defaults to `true`.
 
 ##### options.fields.fieldName.nullable `Boolean`
 
-Specifies if the `defaultValue` setting should be used. The default is `false`.
+Specifies if the `defaultValue` setting should be used. Defaults to `false`.
 
 ##### options.fields.fieldName.parse `Function`
 
@@ -366,12 +366,10 @@ Specifies the type of the field.
 
 The available options are:
 
-* `"string"`
+* (Default) `"string"`
 * `"number"`
 * `"boolean"`
 * `"date`"
-
-The default is `"string"`.
 
 ##### options.fields.fieldName.validation `Object`
 
@@ -400,9 +398,9 @@ Returns the Gantt task length in milliseconds.
 
 #### Returns
 
-`Number` the length of the task.
+`Number`&mdash;The length of the task.
 
-#### Example - get length of the task
+#### Example - get the length of the task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -421,7 +419,7 @@ Checks whether the event has zero duration.
 
 #### Returns
 
-`Boolean` return `true` if the task start is equal to the task end.
+`Boolean`&mdash;Returns `true` if the task start is equal to the task end.
 
 #### Example - check whether the task is a milestone
 

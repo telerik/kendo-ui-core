@@ -605,9 +605,9 @@ Set predefined size to the window. The `width` and `height` configuration option
 Possible values are:
 
 * auto
-* normal
-* narrow
-* wide
+* small
+* medium
+* large
 
 #### Example
 

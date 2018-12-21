@@ -77,9 +77,9 @@
             zero = /^0[a-z]*$/i,
             isLocalUrl = kendo.isLocalUrl,
             SIZE = {
-                narrow: "k-window-narrow",
-                normal: "k-window-normal",
-                wide: "k-window-wide"
+                small: "k-window-sm",
+                medium: "k-window-m",
+                large: "k-window-lg"
             };
 
         function defined(x) {

@@ -146,5 +146,5 @@ Other articles on the Kendo UI PivotGrid:
 * [Overview of the JSP Tag]({% slug overview_pivotgrid_uiforjsp %})
 * [Overview of the PHP Class](/php/widgets/pivotgrid/overview)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-
-For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).
+* [How-To Examples]({% slug howto_change_pivotgrid_fields_names_pivotgrid %})
+* [Knowledge Base Section](/knowledge-base)

@@ -135,5 +135,5 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 * [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})
 * [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
 * [Export of the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
-
-For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).
+* [How-To Examples]({% slug howto_bindto_telerik_backend_services_grid %})
+* [Knowledge Base Section](/knowledge-base)

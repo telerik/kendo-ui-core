@@ -104,5 +104,5 @@ Other articles and how-to examples on the Kendo UI Upload:
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
 * [How to Serialize Form Data during Async Upload]({% slug howto_serialize_form_data_upload %})
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
-
-For how-to examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).
+* [How-To Examples]({% slug howto_remove_files_with_errors %})
+* [Knowledge Base Section](/knowledge-base)

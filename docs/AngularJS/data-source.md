@@ -119,8 +119,6 @@ The reason behind this is the fact that when grid columns do not declare a templ
 
 ## See Also
 
-Other articles on AngularJS directives and integration with Kendo UI:
-
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})

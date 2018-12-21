@@ -266,8 +266,6 @@ The argument of the `add` and `remove` events now contains the `Shape` or `Conne
 
 ## See Also
 
-Other articles on Kendo UI breaking changes and backwards compatibility:
-
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})

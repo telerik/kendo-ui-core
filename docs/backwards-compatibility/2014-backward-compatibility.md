@@ -183,8 +183,6 @@ The new skins for the mobile widgets in Kendo UI Web are **not compatible** with
 
 ## See Also
 
-Other articles on Kendo UI breaking changes and backwards compatibility:
-
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})

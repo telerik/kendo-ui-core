@@ -305,8 +305,6 @@ The following example demonstrates how to use `$http` to bind the Grid.
 
 ## See Also
 
-Other articles on AngularJS directives and integration with Kendo UI:
-
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})

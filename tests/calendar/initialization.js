@@ -401,7 +401,7 @@ test("Century view support dates less then 200 year", function () {
     prevButton.click();
 
     // first decade should be 100 - 1009
-    var firstDecade = cal.element.find(".k-content .k-link:first");
+    var firstDecade = cal.element.find(".k-content td:has(.k-link:not(.k-state-disabled)):not(.k-out-of-range) .k-link");
     equal(firstDecade.html(), "100 - 109");
 });
 

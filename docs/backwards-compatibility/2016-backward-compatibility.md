@@ -141,8 +141,6 @@ The  **Grid**, **Gantt**, **TreeList**, **Scheduler**, **Toolbar**, and **Spread
 
 ## See Also
 
-Other articles on Kendo UI breaking changes and backwards compatibility:
-
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})
 * [2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})

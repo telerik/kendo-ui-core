@@ -69,11 +69,11 @@ Returns a list of all dependencies for a certain task.
 
 ##### id `String|Number|Object`
 
-The id of the Gantt task, based on which the dependencies are filtered.
+The id of the Gantt task based on which the dependencies are filtered.
 
 #### Returns
 
-`Array` the list of all task dependencies.
+`Array`&mdash;The list of all task dependencies.
 
 #### Example - get all dependencies of a task
 
@@ -115,11 +115,11 @@ Returns a list of all predecessor dependencies for a certain task.
 
 ##### id `String|Number|Object`
 
-The id of the Gantt task, based on which the dependencies are filtered.
+The id of the Gantt task based on which the dependencies are filtered.
 
 #### Returns
 
-`Array` the list of all task predecessors.
+`Array`&mdash;The list of all task predecessors.
 
 #### Example - get all task predecessors
 
@@ -165,7 +165,7 @@ The id of the Gantt task, based on which the dependencies are filtered.
 
 #### Returns
 
-`Array` the list of all task successors.
+`Array`&mdash;The list of all task successors.
 
 #### Example - get all task successors
 

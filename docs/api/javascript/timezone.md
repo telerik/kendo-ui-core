@@ -6,7 +6,7 @@ res_type: api
 
 # kendo.timezone
 
-Collection of timezone related utilities.
+Collection of timezone related utilities. List of all time zones is available [here](https://runner.telerik.io/fullscreen/unOWiyIG).
 
 ## Methods
 

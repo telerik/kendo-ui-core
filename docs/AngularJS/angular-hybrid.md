@@ -139,8 +139,6 @@ The hybrid mobile widgets may be configured via the `k-` prefixed attributes. Fo
 
 ## See also
 
-Other articles on the integration of Kendo UI hybrid components:
-
 * [Integration with Kendo UI for the Web]({% slug integrationkendouiweb_hybridkendoui %})
 * [MVVM Integration]({% slug mvvmintegration_hybridkendoui %})
 * [Build Applications with AngularJS and the Hybrid UI]({% slug buildappswithangular_tutorial_hybridkendoui %})

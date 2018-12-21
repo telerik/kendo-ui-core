@@ -144,5 +144,5 @@ Other article on the Kendo UI PivotGrid:
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
-
-For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_change_pivotgrid_fields_names_pivotgrid %}).
+* [How-To Examples]({% slug howto_change_pivotgrid_fields_names_pivotgrid %})
+* [Knowledge Base Section](/knowledge-base)

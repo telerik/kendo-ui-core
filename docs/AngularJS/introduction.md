@@ -756,8 +756,6 @@ As of the Kendo UI 2015 Q2 release, if the widget's `k-options` is bound to a no
 
 ## See Also
 
-Other articles on AngularJS directives and integration with Kendo UI:
-
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})

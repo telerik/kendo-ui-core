@@ -769,8 +769,6 @@ If something goes wrong:
 
 ## See also
 
-Other articles on the integration of Kendo UI hybrid components:
-
 * [Integration with Kendo UI for the Web]({% slug integrationkendouiweb_hybridkendoui %})
 * [MVVM Integration]({% slug mvvmintegration_hybridkendoui %})
 * [AngularJS Support for the Hybrid UI]({% slug angularjssupport_hybridkendoui %})

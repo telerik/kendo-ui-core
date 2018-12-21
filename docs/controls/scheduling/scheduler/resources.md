@@ -188,5 +188,5 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
 * [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
 * [How to Persist Resource Values on `move`]({% slug howto_persistresourcevalues_onamoveevent_scheduler %})
-
-For how-to examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+* [How-To Examples]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
+* [Knowledge Base Section](/knowledge-base)

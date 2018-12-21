@@ -569,9 +569,9 @@ test("year view renders does not render months not in range", function() {
     }));
 
     equal(div.find("tbody").find("td").length, 12);
-    equal(div.find("tbody").find("a").length, 1);
-    equal(div.find("tbody").find("a").html(), monthName);
-    equal(div.find("tbody").find("a:first").html(), monthName);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) a").length, 1);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), monthName);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) a:first").html(), monthName);
 });
 
 test("year view renders cells with data-val", function() {
@@ -585,7 +585,7 @@ test("year view renders cells with data-val", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("a").attr("data-kendo-value"), value);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) a").attr("data-kendo-value"), value);
 });
 
 test("decade title renders decade range title", function() {
@@ -630,8 +630,8 @@ test("decade view renders only years in range", function() {
     }));
 
     equal(div.find("tbody").find("tr:first").find("td").length, 4);
-    equal(div.find("tbody").find("td > a").length, 1);
-    equal(div.find("tbody").find("a").html(), "2011");
+    equal(div.find("tbody").find("td:not(.k-out-of-range) > a").length, 1);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), "2011");
 });
 
 test("decade view renders cells with data-val", function() {
@@ -644,7 +644,7 @@ test("decade view renders cells with data-val", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("td > a").attr("data-kendo-value"), value);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) > a").attr("data-kendo-value"), value);
 });
 
 test("decade renders k-other-month to the first and last cell of the view", function() {
@@ -721,8 +721,8 @@ test("century view renders only years in range", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("td > a").length, 1);
-    equal(div.find("tbody").find("a").html(), "2011 - 2011");
+    equal(div.find("tbody").find("td:not(.k-out-of-range) > a").length, 1);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), "2011 - 2011");
 });
 
 test("century view does not render decades less then min", function() {
@@ -747,7 +747,7 @@ test("century view renders cells with data-val", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("a").attr("data-kendo-value"), value);
+    equal(div.find("tbody").find("td:not(.k-out-of-range) a").attr("data-kendo-value"), value);
 });
 
 test("century renders k-other-month to the first and last cell of the view", function() {

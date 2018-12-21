@@ -344,5 +344,5 @@ The Grid provides other configuration options as well. The basic ones deliver th
 * [Client Detail Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/client-detail-template)
 * [Server Detail Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/server-detail-template)
 * [Editor Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/editor-templates)
-
-For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).
+* [How-To Examples]({% slug howto_bindto_telerik_backend_services_grid %})
+* [Knowledge Base Section](/knowledge-base)

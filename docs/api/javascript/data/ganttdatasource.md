@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.GanttDataSource
 
-The data source used by the [`kendo.ui.Gantt`](/api/javascript/ui/gantt) widget. Inherits from [kendo.data.DataSource](/api/framework/datasource). The GanttDataSource contains instances of the [`kendo.data.GanttTask`](/api/framework/gantttask) class.
+The data source used by the [`kendo.ui.Gantt`](/api/javascript/ui/gantt) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource). The GanttDataSource contains instances of the [`kendo.data.GanttTask`](/api/framework/gantttask) class.
 
 
 ## Configuration
@@ -20,7 +20,7 @@ The schema configuration of the GanttDataSource.
 
 ### schema.model `Object`
 
-The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework/gantttask#configuration) for more info.
+The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework/gantttask#configuration) for more information.
 
 #### Example - configure the data source model schema
 
@@ -83,7 +83,7 @@ The parent task. If this parameter is not specified, all Gantt tasks will be ret
 
 #### Returns
 
-`Array` the list of all child tasks.
+`Array`&mdash;The list of all child tasks.
 
 #### Example - get all children of a task
 
@@ -173,11 +173,11 @@ Returns a list of all direct child tasks.
 
 ##### task `kendo.data.GanttTask` *(optional)*
 
-The parent task. If this parameter is not specified, all root level tasks will be returned.
+The parent task. If this parameter is not specified, all root-level tasks will be returned.
 
 #### Returns
 
-`Array` the list of all direct child tasks.
+`Array`&mdash;The list of all direct child tasks.
 
 #### Example - get direct children of a task
 
@@ -219,7 +219,7 @@ The parent task. If this parameter is not specified, all root level tasks will b
       var childTasks = dataSource.taskChildren(dataSource.at(0));
     </script>
 
-#### Example - get root level tasks
+#### Example - get root-level tasks
 
     <script>
       var dataSource = new kendo.data.GanttDataSource({
@@ -246,13 +246,13 @@ The parent task. If this parameter is not specified, all root level tasks will b
 
       dataSource.fetch();
 
-      // returns a list with all root level tasks.
+      // returns a list with all root-level tasks.
       var childTasks = dataSource.taskChildren();
     </script>
 
 ### taskLevel
 
-Returns the level of the task in the hierarchy. 0 for root level tasks.
+Returns the level of the task in the hierarchy. `0` for root-level tasks.
 
 #### Parameters
 
@@ -262,7 +262,7 @@ The reference task.
 
 #### Returns
 
-`Number` the level of the task in the hierarchy.
+`Number`&mdash;The level of the task in the hierarchy.
 
 #### Example - get the level of a task
 
@@ -306,7 +306,7 @@ The reference task.
 
 #### Returns
 
-`kendo.data.GanttTask` the parent task.
+`kendo.data.GanttTask`&mdash;The parent task.
 
 #### Example - get the parent of a task
 
@@ -338,7 +338,7 @@ The reference task.
       console.log(dataSource.taskParent(dataSource.at(1)).title) // outputs "Task1"
     </script>
 
-#### Example - get the parent of a root level task
+#### Example - get the parent of a root-level task
 
     <script>
       var dataSource = new kendo.data.GanttDataSource({
@@ -380,7 +380,7 @@ The reference task.
 
 #### Returns
 
-`Array` the list of all tasks with the same parent as the parameter task. If the parameter task is a root level task, all root level tasks are returned.
+`Array`&mdash;The list of all tasks with the same parent as the parameter task. If the parameter task is a root-level task, all root-level tasks are returned.
 
 #### Example - get the siblings of a task
 
@@ -433,7 +433,7 @@ The reference task. If this parameter is specified, the result will be all child
 
 #### Returns
 
-`Array` the list of all child Gantt tasks, ordered by their hierarchical index (Depth-First).
+`Array`&mdash;The list of all child Gantt tasks, ordered by their hierarchical index (Depth-First).
 
 #### Example - get all Gantt tasks
 
@@ -475,7 +475,7 @@ The reference task. If this parameter is specified, the result will be all child
       var childTasks = dataSource.taskTree();
     </script>
 
-#### Example - get all Gantt tasks, when parent is collapsed
+#### Example - get all Gantt tasks when the parent is collapsed
 
     <script>
       var dataSource = new kendo.data.GanttDataSource({
@@ -515,7 +515,7 @@ The reference task. If this parameter is specified, the result will be all child
       var childTasks = dataSource.taskTree();
     </script>
 
-#### Example - get all child tasks of the first task, ordered by their hierarchical index
+#### Example - get all child tasks of the first task ordered by their hierarchical index
 
     <script>
       var dataSource = new kendo.data.GanttDataSource({
@@ -577,7 +577,7 @@ The task to be updated.
 
 ##### taskInfo `Object`
 
-The new values, which will be used to update the task.
+The new values which will be used to update the task.
 
 #### Example - update the title of a task
 

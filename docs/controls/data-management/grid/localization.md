@@ -165,5 +165,5 @@ Find more information in the [`messages`](/api/javascript/ui/pager#messages-obje
 * [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
 * [Export of the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
-
-For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).
+* [How-To Examples]({% slug howto_bindto_telerik_backend_services_grid %})
+* [Knowledge Base Section](/knowledge-base)

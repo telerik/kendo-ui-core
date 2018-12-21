@@ -116,8 +116,6 @@ angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($sco
 
 ## See Also
 
-Other articles on AngularJS directives and integration with Kendo UI:
-
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
