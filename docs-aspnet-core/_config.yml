@@ -3,6 +3,8 @@ url: "https://docs.telerik.com/aspnet-core"
 
 all_pages_domain: "https://docs.telerik.com"
 
+capital_casing_redirects: true
+
 # Exclude files which should not be in the output
 exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
 exclude_navigation: ["knowledge-base/*"]
