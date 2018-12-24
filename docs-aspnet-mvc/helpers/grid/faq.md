@@ -553,6 +553,73 @@ The following example demonstrates the Read-only property through the `Editable`
 
 Use custom editor templates. ASP.NET MVC looks for a partial view, named after the type&mdash;for example, `DateTime.cshtml`. Telerik UI for ASP.NET MVC ships with a few ready-to-use editor templates. They are located in the `\wrappers\aspnetmvc\EditorTemplates` folder. The editor templates are available in two flavors&mdash;the `ascx` folder contains the `WebForms` view engine version, whereas the `razor` folder contains the `Razor` view engine version. To use these editor templates in your application, copy all files from the corresponding folder (`ascx` or `razor`) to `~/Views/Shared/EditorTemplates` (you may need to create this folder if it does not exist yet).
 
+The following steps demonstate how to use a Kendo UI DateTimePicker to validate a date.
+
+1. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder—for example, KendoDateEditor.ascx or KendoDateEditor.cshtml (if using the Razor view engine).
+
+1. Add a Kendo UI DropDownList to that partial view.
+
+
+   ```ASPX
+        <%: Html.Kendo().DateTimePicker()
+            .Value(DateTime.Now)
+            .DateInput()
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().DateTimePicker()
+            .Value(DateTime.Now)
+            .DateInput()
+        )
+    ```
+
+1. Decorate the Date property in the model using the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute.
+
+
+        public class Order
+        {
+            public int OrderID { get; set; }
+
+            public string ShipCountry { get; set; }
+
+            [UIHint("KendoDateEditor")]
+            public Date OrderDate { get; set; }
+        }
+
+The following steps demonstate how to use a Kendo UI NumericTextBox to validate a number.
+
+1. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder—for example, KendoNumberEditor.ascx or KendoNumberEditor.cshtml (if using the Razor view engine).
+
+1. Add a Kendo UI DropDownList to that partial view.
+
+
+   ```ASPX
+        <%: Html.Kendo().NumericTextBox()
+            .Round(false)
+            .Spinners(false)
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().NumericTextBox()
+            .Round(false)
+            .Spinners(false)
+        )       
+    ```
+
+1. Decorate the number property in the model using the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute.
+
+
+        public class Order
+        {
+            public int OrderID { get; set; }
+
+            public string ShipCountry { get; set; }
+
+            [UIHint("KendoNumberEditor")]
+            public decimal Price { get; set; }
+        }
+
+
 ## See Also
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:

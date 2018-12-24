@@ -23,6 +23,7 @@
             KWINDOW = ".k-window",
             KICONCLOSE = ".k-dialog-close",
             KCONTENTCLASS = "k-content k-window-content k-dialog-content",
+            KCONTENTSELECTOR = ".k-window-content",
             KCONTENT = ".k-content",
             KSCROLL = "k-scroll",
             KTITLELESS = "k-dialog-titleless",
@@ -39,6 +40,8 @@
             ZINDEX = "zIndex",
             BODY = "body",
             INITOPEN = "initOpen",
+            TOUCHSTART = "touchstart",
+            TOUCHMOVE = "touchmove",
             OPEN = "open",
             CLOSE = "close",
             SHOW = "show",
@@ -52,6 +55,7 @@
             HIDDEN = "hidden",
             OVERFLOW = "overflow",
             DATADOCOVERFLOWRULE = "original-overflow-rule",
+            DATAHTMLTAPYRULE = "tap-y",
             HUNDREDPERCENT = 100,
             messages = {
                 okText  : "OK",
@@ -720,15 +724,47 @@
                 $body.css(OVERFLOW, HIDDEN);
 
                 var $html = $("html");
+                var html = $html[0];
                 that._storeOverflowRule($html);
                 $html.css(OVERFLOW, HIDDEN);
+
+                // prevent touch due to bug in ios
+                if (kendo.support.mobileOS.ios) {
+                    html.addEventListener(TOUCHSTART, that._touchStart, { passive: false });
+                    html.addEventListener(TOUCHMOVE, that._touchMove, { passive: false });
+                }
+            },
+
+            _touchStart: function (e) {
+                $(this).data(DATAHTMLTAPYRULE, e.changedTouches[0].pageY);
+            },
+
+            _touchMove: function (e) {
+                var target = e.target;
+                var $target = $(e.target);
+                var upScroll = e.changedTouches[0].pageY - $(this).data(DATAHTMLTAPYRULE) > 0;
+                var preventYScroll = $target.is(KCONTENTSELECTOR) &&
+                    (upScroll && $target.scrollTop() === 0) ||
+                    (!upScroll && $target.scrollTop() === target.scrollHeight - target.clientHeight);
+                if (!$target.is(KCONTENTSELECTOR) || preventYScroll) {
+                    e.preventDefault();
+                }
             },
 
             _enableDocumentScrolling: function(){
                 var that = this;
+                var $body = $(document.body);
+                var $html = $("html");
+                var html = $html[0];
 
-                that._restoreOverflowRule($(document.body));
-                that._restoreOverflowRule($("html"));
+                that._restoreOverflowRule($body);
+                that._restoreOverflowRule($html);
+
+                if (kendo.support.mobileOS.ios) {
+                    $html.removeData(DATAHTMLTAPYRULE);
+                    html.removeEventListener(TOUCHSTART, that._touchStart, { passive: false });
+                    html.removeEventListener(TOUCHMOVE, that._touchMove, { passive: false });
+                }
             },
 
             _storeOverflowRule: function($element){
