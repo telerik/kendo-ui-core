@@ -1793,7 +1793,6 @@ var __meta__ = { // jshint ignore:line
                 endY = tapPosition(e);
 
                 if (Math.abs(endY - startY) < 10) {
-                    e.preventDefault();
                     that.trigger("click", { item: $(e.target.closest(ITEMSELECTOR)) });
                 }
             });
