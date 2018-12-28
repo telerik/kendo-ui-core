@@ -7989,6 +7989,25 @@ The [Pager widget](/api/javascript/ui/pager) attached to the Grid.
 
 The jQuery object which represents the grid table element.
 
+#### Example - get the Grid alternating rows
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30},
+          { name: "John Doe", age: 33},
+        ]
+      });
+      var grid = $("#grid").data("kendoGrid");
+      var altRows = grid.table.find("tr.k-alt");
+      altRows.css("background", "#afeeee");
+    </script>
+
 ### tbody `jQuery`
 
 The jQuery object which represents the table body. Contains all grid table rows.
@@ -8735,6 +8754,31 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 #### Returns
 
 `Array` The currently rendered data table rows (`<tr>` elements).
+
+#### Example - use items method to access all Grid rows
+
+    <button id="selectAll">Select All Rows</button>
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        selectable: "multiple, row"
+      });
+
+      $("#selectAll").on("click", function(){
+        var grid = $("#grid").data("kendoGrid");
+        var allRows = grid.items();
+
+        grid.select(allRows);
+      });
+    </script>
 
 ### lockColumn
 

@@ -8035,6 +8035,43 @@ The removed items (shapes or connections).
 
 The widget instance which fired the event.
 
+#### Example - get added and removed items
+
+    <div id="diagram"></div>
+    <script>
+      function onChange(e){
+        console.log("Added items: " + e.added.length + "; Removed items: " + e.removed.length);
+      }
+
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        change: onChange
+      });
+    </script>
+
 ### click
 
 Fired when the user clicks on a shape or a connection.
@@ -8355,6 +8392,46 @@ The rest of the items (shapes and connections).
 ##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
+
+#### Example - get shape info from selection
+
+    <div id="diagram"></div>
+    <script>
+      function onSelect(e){
+        var selectedItem = e.selected[0]; // first element in selection
+        if(selectedItem instanceof kendo.dataviz.diagram.Shape){
+          console.log("Selected shape with text: " + selectedItem.options.content.text);
+        }
+      }
+
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        select: onSelect
+      });
+    </script>
 
 ### toolBarClick
 

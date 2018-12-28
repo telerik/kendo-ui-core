@@ -27,8 +27,48 @@ Draws a rectangle with set geometry, fill and stroke.
 ### geometry `kendo.geometry.Rect`
 The geometric object that defines the rectangle origin and size.
 
+#### Example - creating a rect
+
+    <div id="surface"></div>
+    <script>
+      // Import the Drawing API namespaces
+      var geom = kendo.geometry;
+      var draw = kendo.drawing;
+
+      var rectGeom = new geom.Rect([5, 5], [200, 100]);
+
+      var rectangle = new draw.Rect(rectGeom, {
+        fill: {
+          color: "#33ccff"
+        }
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(rectangle);
+    </script>
+
 ### options `Object`
 The configuration options.
+
+#### Example - creating a rect
+
+    <div id="surface"></div>
+    <script>
+      // Import the Drawing API namespaces
+      var geom = kendo.geometry;
+      var draw = kendo.drawing;
+
+      var rectGeom = new geom.Rect([5, 5], [200, 100]);
+
+      var rectangle = new draw.Rect(rectGeom, {
+        fill: {
+          color: "#33ccff"
+        }
+      });
+
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(rectangle);
+    </script>
 
 ## Configuration
 

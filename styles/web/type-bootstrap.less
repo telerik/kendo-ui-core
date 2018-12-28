@@ -289,6 +289,12 @@
 
 @calendar-cell-focused-shadow: @focused-item-shadow;
 
+
+// Dialog
+@dialog-button-stretched-padding-x: 12px;
+@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
+
+
 // Kendo skin
 
 @theme-name: ~"bootstrap";
@@ -492,7 +498,6 @@ textarea.k-textbox:hover,
     color: @header-text-color;
 }
 
-.k-link,
 .k-link,
 .k-nav-current.k-state-hover .k-link
 {
@@ -3168,7 +3173,7 @@ td.k-state-focused.k-state-selected,
     .k-dialog-buttongroup {
         &.k-dialog-button-layout-stretched {
             .k-button {
-                padding: 12px;
+                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
                 border-color: @button-hover-background-color;
             }
         }
@@ -3176,6 +3181,28 @@ td.k-state-focused.k-state-selected,
             border-top: 1px solid @button-hover-background-color;
             border-radius: @border-radius;
             // border-top: 1px solid @widget-border-color;
+        }
+    }
+    &.k-window-sm {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+                flex-direction: column;
+
+                .k-button {
+                    flex: 0 0 auto;
+                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
+                }
+            }
+        }
+    }
+    &.k-window-md {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+
+                .k-button {
+                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
+                }
+            }
         }
     }
 }

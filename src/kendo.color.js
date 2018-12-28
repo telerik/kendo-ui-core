@@ -1,3 +1,9 @@
+/***********************************************************************
+ * WARNING: this file is auto-generated.  If you change it directly,
+ * your modifications will eventually be lost.  The source code is in
+ * `kendo-drawing` repository, you should make your changes there and
+ * run `src-modules/sync.sh` in this repository.
+ */
 (function(f, define){
     define([ "./kendo.core" ], f);
 })(function(){
@@ -309,10 +315,9 @@ var HSL = BaseColor.extend({
     },
 
     toRGB: function() {
-        var ref = this;
-        var h = ref.h / 360;
-        var s = ref.s / 100;
-        var l = ref.l / 100;
+        var h = this.h / 360;
+        var s = this.s / 100;
+        var l = this.l / 100;
         var r, g, b;
 
         if (s === 0) {

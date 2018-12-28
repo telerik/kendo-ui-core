@@ -2523,7 +2523,7 @@ The configuration of the axis lines. Also affects the major and minor ticks, but
           width: 3
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -33893,6 +33893,33 @@ Defines whether the widget should proceed with resizing even if the element dime
 Saves the Chart as a PDF file using the options specified in [options.pdf](/api/javascript/dataviz/ui/chart#configuration-pdf).
 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that always call it as a response to end-user action e.g. button click.
+
+#### Example - export the Chart to PDF
+    <!-- Load Pako ZLIB library to enable PDF compression -->
+    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/pako_deflate.min.js"></script>
+    <button id="exportBtn">Export to PDF</button>
+    <div id="chart" style="width: 600px; height: 400px;"></div>
+    <script>
+      $("#chart").kendoChart({
+        pdf: {
+          paperSize: "A4",
+          landscape: true,
+          margin: "2cm"
+        },
+        legend: {
+          position: "bottom"
+        },
+        series: [
+          { name: "Series 1", data: [1, 2, 3] },
+          { name: "Series 2", data: [3, 4, 5] }
+        ]
+      });
+
+      $("#exportBtn").on("click", function(){
+        var chart = $("#chart").getKendoChart();
+        chart.saveAsPDF();
+      });
+    </script>
 
 ### setDataSource
 

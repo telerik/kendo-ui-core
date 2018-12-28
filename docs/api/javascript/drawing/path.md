@@ -28,6 +28,35 @@ Represents a path consisting of linear or cubic Bézier curve segments.
 ### options `Object`
 The configuration options.
 
+#### Example - create and draw a path
+
+    <div id="surface" style="width: 250px; height: 165px;"></div>
+    <script>
+      var draw = kendo.drawing;
+
+      // Initialize a path using an options object
+      var path = new draw.Path({
+        stroke: {
+          color: "#9999b6",
+          width: 2
+        },
+        fill: {
+          color: "#33ccff"
+        },
+        opacity: 0.5,
+        cursor: "pointer"
+      });
+
+      // Describe the path
+      path.moveTo(0, 0)
+        .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
+        .close();
+
+      // Draw the path on a drawing surface
+      var surface = draw.Surface.create($("#surface"));
+      surface.draw(path);
+    </script>
+
 ## Class Methods
 
 ### fromArc

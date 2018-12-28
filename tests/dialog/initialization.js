@@ -267,7 +267,7 @@
         var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
         ok(actionbar.hasClass("k-dialog-button-layout-stretched"));
-        equal(actionbar.find(".k-button").get(0).style.width, "50%");
+        equal(actionbar.find(".k-button").eq(0).width, actionbar.find(".k-button").eq(1).width);
     });
 
     test("buttonLayout normal", function() {

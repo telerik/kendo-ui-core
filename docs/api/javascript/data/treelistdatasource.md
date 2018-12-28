@@ -127,3 +127,31 @@ The model whose level must be calculated.
 #### Returns
 
 `Number` the hierarchy level of the node.
+
+#### Example - get the level of an item in the TreeListDataSource
+    <script>
+      var dataSource = new kendo.data.TreeListDataSource({
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            id: "EmployeeID",
+            parentId: "ReportsTo",
+            fields: {
+              ReportsTo: { field: "ReportsTo",  nullable: true },
+              EmployeeID: { field: "EmployeeId", type: "number" }
+            },
+            expanded: true
+          }
+        },
+        change: function(e){
+          var item = dataSource.get(9);
+          console.log("Employee with name " + item.FirstName + "is at level: " + dataSource.level(item));
+        }
+      });
+      dataSource.read();
+    </script>

@@ -92,7 +92,7 @@ The example below demonstrates how to auto-resize a chart with a 100% width.
 
 Each Kendo UI widget has a `resize()` method which can be used to trigger a layout readjustment instead of using [`kendo.resize`](/api/javascript/kendo/methods/resize). The `resize` method of the widget accepts a single Boolean parameter, which defines whether the control should execute its layout adjustment algorithm even if the widget dimensions have not changed (`"force"` mode).
 
-### Apply `resize()` Method
+### Apply resize() Method
 
 The example below demonstrates how to use the `resize()` method.
 
@@ -137,7 +137,10 @@ Responsive UI enhancements utilize media queries and include built-in UI enhance
 
 ### Responsive UI Features in Kendo UI Widgets
 
-* **Kendo UI Grid** Integrates a responsive pager, which automatically adjusts to different screen widths and provides the ability to define which columns to be hidden on small view ports. This makes them more flexible for mobile web usage.
+* **Kendo UI Grid** Provides the ability to define which columns to be hidden on small view ports.
+* **Kendo UI Pager**
+    - [Less-Based Themes]({% slug themesandappearnce_kendoui_desktopwidgets %}) - utilize media queries to automatically adjusts to different screen widths.
+    - [Sass-Based Themes]({% slug sassbasedthemes_kendoui %}) - utilize classes that are assigned based on the current width of the Pager. The classes are changed automatically when the `window` resizes or when the Pager is placed in a Layout Kendo UI widget. In all other cases, manually [apply `resize()` method](#apply-resize-method).
 * **Kendo UI Scheduler** Provides a mechanism to overflow its `view` selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios.
 * **Kendo UI Responsive Panel** This is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its hamburger icon button is clicked.
 

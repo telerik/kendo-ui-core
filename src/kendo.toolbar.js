@@ -906,7 +906,7 @@ var __meta__ = { // jshint ignore:line
                     ICON = "km-icon";
                     ICON_PREFIX = "km-";
                     BUTTON = "km-button";
-                    BUTTON_GROUP = "km-buttongroup km-widget";
+                    BUTTON_GROUP = "km-buttongroup";
                     STATE_ACTIVE = "km-state-active";
                     STATE_DISABLED = "km-state-disabled";
                 }
@@ -1139,11 +1139,17 @@ var __meta__ = { // jshint ignore:line
 
             hide: function(candidate) {
                 var item = this._getItem(candidate);
+                var buttonGroupInstance;
 
                 if (item.toolbar) {
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        buttonGroupInstance = item.toolbar.getParentGroup();
+
                         item.toolbar.hide();
-                        item.toolbar.getParentGroup().refresh();
+
+                        if(buttonGroupInstance) {
+                            buttonGroupInstance.refresh();
+                        }
                     } else if(!item.toolbar.options.hidden) {
                         item.toolbar.hide();
                     }
@@ -1151,8 +1157,13 @@ var __meta__ = { // jshint ignore:line
 
                 if (item.overflow) {
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        buttonGroupInstance = item.overflow.getParentGroup();
+
                         item.overflow.hide();
-                        item.overflow.getParentGroup().refresh();
+
+                        if(buttonGroupInstance) {
+                            buttonGroupInstance.refresh();
+                        }
                     } else if(!item.overflow.options.hidden) {
                         item.overflow.hide();
                     }

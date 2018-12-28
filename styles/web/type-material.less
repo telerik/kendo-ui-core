@@ -300,6 +300,12 @@
 
 @calendar-cell-focused-shadow: @focused-item-shadow;
 
+
+// Dialog
+@dialog-button-stretched-padding-x: 15px;
+@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
+
+
 // Kendo skin
 
 @theme-name: ~"material";
@@ -3819,7 +3825,7 @@ div.k-scheduler-marquee:after {
         }
         &.k-dialog-button-layout-stretched {
             .k-button {
-                padding: 15px;
+                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
             }
         }
         &.k-dialog-button-layout-normal {
@@ -3832,6 +3838,28 @@ div.k-scheduler-marquee:after {
                 margin: 0;
                 &.k-primary {
                     color: @selected-background;
+                }
+            }
+        }
+    }
+    &.k-window-sm {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+                flex-direction: column;
+
+                .k-button {
+                    flex: 0 0 auto;
+                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
+                }
+            }
+        }
+    }
+    &.k-window-md {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+
+                .k-button {
+                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
                 }
             }
         }

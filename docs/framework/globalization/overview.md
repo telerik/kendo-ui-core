@@ -49,6 +49,8 @@ The default culture, which Kendo UI widgets uses is "en-US".
 
 > The culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
+> If you include the generic culture file, you can omit the country/region code. For example, `kendo.culture.en.min.js` can be used with `kendo.culture("en");`) instead of `kendo.culture.en-GB.min.js` with `kendo.culture("en-GB");`. The generic files do not carry country/region specifics, however, and can only serve as a more generic representation.
+
 ## Configuration
 
 ### Format Number or Date Objects

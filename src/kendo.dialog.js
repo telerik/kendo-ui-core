@@ -57,6 +57,7 @@
             DATADOCOVERFLOWRULE = "original-overflow-rule",
             DATAHTMLTAPYRULE = "tap-y",
             HUNDREDPERCENT = 100,
+            CSSFLEXBOX = kendo.support.cssFlexbox,
             messages = {
                 okText  : "OK",
                 cancel : "Cancel",
@@ -414,8 +415,9 @@
                 var isStretchedLayout = (this.options.buttonLayout === "stretched");
                 var buttonLayout = isStretchedLayout ? "stretched" : "normal";
                 var actionbar = $(templates.actionbar({ buttonLayout: buttonLayout }));
+
                 this._addButtons(actionbar);
-                if(isStretchedLayout) {
+                if(isStretchedLayout && !CSSFLEXBOX) {
                     this._normalizeButtonSize(actionbar);
                 }
                 wrapper.append(actionbar);
@@ -442,8 +444,9 @@
                         .data("action", action.action)
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
-                    if(o.buttonLayout === "stretched") {
-                        if(i == length - 1){
+
+                    if (o.buttonLayout === "stretched" && !CSSFLEXBOX) {
+                        if (i == length - 1) {
                              buttonSize = HUNDREDPERCENT - i*buttonSize;
                         }
                         btn.css(WIDTH, buttonSize + "%");

@@ -197,6 +197,12 @@
 
 @calendar-cell-focused-shadow: inset 0 0 0 1px lighten(@hover-text-color, 8%);
 
+
+// Dialog
+@dialog-button-stretched-padding-x: 1em;
+@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
+
+
 @theme-name: ~"nova";
 
 @import "common/mixins.less";
@@ -2328,7 +2334,7 @@ html .km-pane-wrapper .km-widget,
     .k-dialog-buttongroup {
         &.k-dialog-button-layout-stretched {
             .k-button {
-                padding: 1em;
+                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
             }
         }
         &.k-dialog-button-layout-normal {
@@ -2336,6 +2342,28 @@ html .km-pane-wrapper .km-widget,
 
             .k-button {
                 border-radius: @border-radius;
+            }
+        }
+    }
+    &.k-window-sm {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+                flex-direction: column;
+
+                .k-button {
+                    flex: 0 0 auto;
+                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
+                }
+            }
+        }
+    }
+    &.k-window-md {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+
+                .k-button {
+                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
+                }
             }
         }
     }

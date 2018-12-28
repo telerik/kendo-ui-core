@@ -289,6 +289,12 @@
 
 @calendar-cell-focused-shadow: inset 0 0 0px 1px @base;
 
+
+// Dialog
+@dialog-button-stretched-padding-x: 12px;
+@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
+
+
 // Kendo skin
 
 @theme-name: ~"office365";
@@ -3245,7 +3251,7 @@ input.k-textbox:focus {
     .k-dialog-buttongroup {
         &.k-dialog-button-layout-stretched {
             .k-button {
-                padding: 12px;
+                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
             }
             .k-button:first-child {
             border-bottom-left-radius: @border-radius;
@@ -3267,6 +3273,28 @@ input.k-textbox:focus {
                 border-radius: @border-radius;
                 &:first-child {
                     margin-left: 0;
+                }
+            }
+        }
+    }
+    &.k-window-sm {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+                flex-direction: column;
+
+                .k-button {
+                    flex: 0 0 auto;
+                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
+                }
+            }
+        }
+    }
+    &.k-window-md {
+        .k-dialog-buttongroup {
+            &.k-dialog-button-layout-stretched {
+
+                .k-button {
+                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
                 }
             }
         }
