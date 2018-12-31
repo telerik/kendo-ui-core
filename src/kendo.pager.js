@@ -19,6 +19,7 @@ var __meta__ = { // jshint ignore:line
         LAST = ".k-i-arrow-end-right",
         PREV = ".k-i-arrow-60-left",
         NEXT = ".k-i-arrow-60-right",
+        SIZE = "k-pager-lg k-pager-md k-pager-sm",
         CHANGE = "change",
         NS = ".kendoPager",
         CLICK = "click",
@@ -74,6 +75,7 @@ var __meta__ = { // jshint ignore:line
     var Pager = Widget.extend( {
         init: function(element, options) {
             var that = this, page, totalPages;
+            var sizeClassName = null;
 
             Widget.fn.init.call(that, element, options);
 
@@ -189,6 +191,14 @@ var __meta__ = { // jshint ignore:line
                 that.refresh();
             }
 
+            that._resizeHandler = proxy(that.resize, that, true);
+            $(window).on("resize" + NS, that._resizeHandler);
+
+            sizeClassName = that._getWidthSizeClass(that.element.width());
+            if (sizeClassName) {
+                that.element.addClass(sizeClassName);
+            }
+
             kendo.notify(that);
         },
 
@@ -200,6 +210,7 @@ var __meta__ = { // jshint ignore:line
             that.element.off(NS);
             that.dataSource.unbind(CHANGE, that._refreshHandler);
             that._refreshHandler = null;
+            $(window).off("resize" + NS, this._resizeHandler);
 
             kendo.destroy(that.element);
             that.element = that.list = null;
@@ -247,6 +258,20 @@ var __meta__ = { // jshint ignore:line
 
             if (that.options.autoBind) {
                 dataSource.fetch();
+            }
+        },
+
+        _resize: function(size) {
+            if (size.width) {
+                var sizeClassName = this._getWidthSizeClass(size.width);
+                var el = this.element;
+
+                if (!sizeClassName) {
+                    el.removeClass(SIZE);
+                } else if (!el.hasClass(sizeClassName)) {
+                    el.removeClass(SIZE);
+                    el.addClass(sizeClassName);
+                }
             }
         },
 
@@ -454,6 +479,19 @@ var __meta__ = { // jshint ignore:line
                     return 0;
                 }
             }
+        },
+
+        _getWidthSizeClass: function(width) {
+            var sizes = SIZE.split(" ");
+
+            if (width <= 480) {
+                return sizes[2];
+            } else if (width <= 640) {
+                return sizes[1];
+            } else if (width <= 1024) {
+                return sizes[0];
+            }
+            return null;
         }
     });
 

@@ -1,6 +1,14 @@
 @input-height: 1.65em;
 @input-padding-y: 0.17857143em;
 @input-indent: .571em;
+@input-offset: (@input-height + .35em);
+
+@combobox-padding-x: @input-offset;
+
+@input-clear-icon-offset: ~"( (@{input-offset} - @{grid-size})/2 )";
+@combobox-clear-icon-offset: ~"( @{input-offset} + ((@{input-offset} - @{grid-size})/2) )";
+@multiselect-clear-icon-top-offset: ~"( (@{input-height} - @{grid-size}) / 2 + @{input-padding-y} + 1px )";
+
 @editor-icon-size: 2em;
 @menu-link-padding: .5em 1.1em .4em;
 @button-padding-x: 7px;
@@ -129,7 +137,7 @@
 }
 
 .k-combobox > .k-dropdown-wrap > .k-i-close {
-    right: 2.3em;
+    right: calc(@combobox-clear-icon-offset);
 }
 
 .k-autocomplete,
@@ -316,11 +324,11 @@ span.k-tooltip {
     margin: 0.429em 0 0;
 }
 
-.k-filter-menu .k-button {
+.k-filter-menu .k-action-buttons .k-button {
     margin: .5em 0 0;
 }
 
-.k-filter-menu .k-primary {
+.k-filter-menu .k-action-buttons .k-primary {
     float: right;
 }
 
@@ -706,14 +714,12 @@ table.k-editor {
 
 .k-rtl .k-widget.k-autocomplete > .k-i-close,
 .k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    left: 0;
     right: initial;
-    margin-left: 6px;
     margin-right: 0;
 }
 
 .k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: 2.3em;
+    left: calc(@combobox-clear-icon-offset);
     right: initial;
 }
 

@@ -43,9 +43,12 @@ span.k-dropdowntree,
     cursor: pointer;
 }
 
-.k-autocomplete > .k-i-close,
+.k-autocomplete > .k-i-close {
+    right: calc(@input-clear-icon-offset);
+}
+
 .k-multiselect-wrap > .k-i-close {
-    right: (@grid-size/4 + 2px);
+    right: calc(@input-clear-icon-offset + 1px);
 }
 
 .k-autocomplete > .k-i-close,
@@ -55,11 +58,12 @@ span.k-dropdowntree,
 }
 
 .k-dropdown-wrap > .k-i-close {
-    right: 2.4em;
+    right: calc(@combobox-clear-icon-offset);
 }
 
-.k-multiselect-wrap > .k-i-close {
-    top: (@grid-size/2);
+.k-multiselect-wrap > .k-i-close,
+.k-dropdowntree > .k-multiselect-wrap > .k-i-close  {
+    top: calc(@multiselect-clear-icon-top-offset);
 }
 
 .k-multiselect-wrap .k-readonly,
@@ -201,7 +205,7 @@ span.k-dropdowntree,
 .k-dropdown-wrap,
 .k-numeric-wrap,
 .k-picker-wrap {
-    padding-right: calc(@input-height + .35em);
+    padding-right: calc(@input-offset);
 }
 
 .k-numeric-wrap.k-expand-padding {
@@ -603,7 +607,7 @@ body .k-datetimepicker .k-select {
 .k-multiselect-clearable .k-multiselect-wrap,
 .k-dropdowntree-clearable .k-multiselect-wrap,
 .k-dropdowntree-clearable .k-dropdown-wrap .k-input {
-    padding-right: calc(@input-height + .35em);
+    padding-right: calc(@input-offset);
 }
 
 // Date/Time Pickers
@@ -923,12 +927,19 @@ span.k-numerictextbox {
     .k-dropdowntree-clearable .k-multiselect-wrap,
     .k-dropdowntree-clearable .k-dropdown-wrap .k-input {
         padding-right: 0;
-        padding-left: calc(@input-height + .35em);
+        padding-left: calc(@input-offset);
     }
 
     .k-dropdown-wrap > .k-i-close {
-        left: 2.4em;
-        right: auto;
+        left: calc(@combobox-clear-icon-offset);
+    }
+
+    .k-autocomplete > .k-i-close {
+        left: calc(@input-clear-icon-offset);
+    }
+
+    .k-multiselect-wrap > .k-i-close {
+        left: calc(@input-clear-icon-offset + 1px);
     }
 
     .k-numeric-wrap.k-state-invalid.k-expand-padding .k-i-warning{

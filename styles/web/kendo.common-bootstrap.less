@@ -1,6 +1,14 @@
 @input-height: 1.93571428em;
 @input-padding-y: 0.17857143em;
 @input-indent: .8em;
+@input-offset: (@input-height + .35em);
+
+@combobox-padding-x: 1.9em;
+
+@input-clear-icon-offset: ~"( (@{input-offset} - @{grid-size})/2 )";
+@combobox-clear-icon-offset: ~"( @{input-offset} + ((@{combobox-padding-x} - @{grid-size})/2) )";
+@multiselect-clear-icon-top-offset: ~"( (@{input-height} - @{grid-size}) / 2 + @{input-padding-y} + 1px )";
+
 @editor-icon-size: 32px;
 @menu-link-padding: 1.2em 1.2em 1.1em;
 @button-padding-x: 14px;
@@ -160,12 +168,8 @@ input.k-textbox {
 
 .k-combobox-clearable {
     .k-input {
-        padding-right: 1.9em;
+        padding-right: @combobox-padding-x;
     }
-}
-
-.k-autocomplete > .k-i-close  {
-    margin-right: 8px;
 }
 
 .k-colorpicker {
@@ -181,12 +185,7 @@ input.k-textbox {
 }
 
 .k-combobox > .k-dropdown-wrap > .k-i-close {
-    right: 2.55em;
-}
-
-.k-multiselect > .k-multiselect-wrap > .k-i-close,
-.k-dropdowntree > .k-multiselect-wrap > .k-i-close {
-    top: calc((@input-height - @grid-size) / 2 + @input-padding-y + 1px);
+    right: calc(@combobox-clear-icon-offset);
 }
 
 .k-numerictextbox .k-link {
@@ -209,14 +208,12 @@ input.k-textbox {
 
 .k-rtl .k-widget.k-autocomplete > .k-i-close,
 .k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    left: 0;
     right: initial;
-    margin-left: 8px;
     margin-right: 0;
 }
 
 .k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: 2.55em;
+    left: calc(@combobox-clear-icon-offset);
     right: initial;
 }
 
@@ -320,7 +317,7 @@ input.k-textbox {
 
     .k-combobox-clearable {
         .k-input {
-            padding-left: 1.9em;
+            padding-left: @combobox-padding-x;
             padding-right: 0.167em;
         }
     }

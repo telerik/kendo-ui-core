@@ -1,6 +1,14 @@
 @input-height: 1.65em;
 @input-padding-y: 0.532142857em;
 @input-indent: .8em;
+@input-offset: (@input-height + .35em);
+
+@combobox-padding-x: 2.71428571em;
+
+@input-clear-icon-offset: ~"((@{input-offset} - @{grid-size})/2)";
+@combobox-clear-icon-offset: ~"( @{combobox-padding-x} + ((@{combobox-padding-x} - @{grid-size})/2) )";
+@multiselect-clear-icon-top-offset: ~"( (@{input-height} - @{grid-size}) / 2 + @{input-padding-y} + 1px )";
+
 @editor-icon-size: 36px;
 @menu-link-padding: 1.071em;
 @button-padding-x: 14px;
@@ -360,7 +368,7 @@ input.k-textbox,
 }
 
 .k-combobox-clearable .k-input {
-    padding-right: 2.71428571em;
+    padding-right: @combobox-padding-x;
     width: calc(100% - 2.71428571em);
 }
 
@@ -414,17 +422,7 @@ input.k-textbox,
 }
 
 .k-combobox > .k-dropdown-wrap > .k-i-close {
-    right: 3.4em;
-}
-
-.k-multiselect > .k-multiselect-wrap > .k-i-close,
-.k-dropdowntree > .k-multiselect-wrap > .k-i-close {
-    top: calc((@input-height - @grid-size) / 2 + @input-padding-y + 1px);
-}
-
-.k-autocomplete > .k-i-close,
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    margin-right: 10px;
+    right: calc(@combobox-clear-icon-offset);
 }
 
 .k-multiselect-wrap li {
@@ -893,14 +891,12 @@ span.k-tooltip
 
 .k-rtl .k-widget.k-autocomplete > .k-i-close,
 .k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    left: 0;
     right: initial;
-    margin-left: 10px;
     margin-right: 0;
 }
 
 .k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: 3.4em;
+    left: calc(@combobox-clear-icon-offset);
     right: initial;
 }
 
@@ -1053,7 +1049,7 @@ div.k-spreadsheet-window {
 // RTL
 .k-rtl {
     span.k-combobox-clearable .k-input {
-        padding-left: 2.71428571em;
+        padding-left: @combobox-padding-x;
         padding-right: 0;
     }
 

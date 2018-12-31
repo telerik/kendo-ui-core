@@ -1,6 +1,14 @@
 @input-height: 2.07142857em;
 @input-padding-y: 0.17857143em;
 @input-indent: .8em;
+@input-offset: (@input-height + .35em);
+
+@combobox-padding-x: 2.5em;
+
+@input-clear-icon-offset: ~"( (@{input-offset} - @{grid-size})/2 )";
+@combobox-clear-icon-offset: ~"( @{input-offset} + ((@{combobox-padding-x} - @{grid-size})/2) )";
+@multiselect-clear-icon-top-offset: ~"( (@{input-height} - @{grid-size}) / 2 + @{input-padding-y} + 1px )";
+
 @editor-icon-size: 36px;
 @menu-link-padding: 1.071em;
 @button-padding-x: 14px;
@@ -210,7 +218,7 @@
     padding: .5em .5em 0;
 }
 
-.k-filter-menu .k-button {
+.k-filter-menu .k-action-buttons .k-button {
     margin: 0;
     width: 50%;
     border-radius: 0;
@@ -338,33 +346,19 @@
 }
 
 .k-combobox > .k-dropdown-wrap > .k-i-close {
-    right: 3.3em;
+    right: calc(@combobox-clear-icon-offset);
 }
 
 .k-combobox-clearable {
     .k-input {
-        padding-right: 2.5em;
+        padding-right: @combobox-padding-x;
     }
-}
-
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    top: (@grid-size/2 - 1px);
 }
 
 .k-autocomplete .k-i-loading,
 .k-multiselect .k-i-loading
 {
     bottom: 10px;
-}
-
-.k-multiselect > .k-multiselect-wrap > .k-i-close,
-.k-dropdowntree > .k-multiselect-wrap > .k-i-close {
-    top: calc((@input-height - @grid-size) / 2 + @input-padding-y + 1px);
-}
-
-.k-autocomplete > .k-i-close,
-.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    right: 10px;
 }
 
 .k-dropdown-wrap,
@@ -1006,14 +1000,12 @@ form.k-filter-menu .k-textbox {
 
 .k-rtl .k-widget.k-autocomplete > .k-i-close,
 .k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    left: 0;
     right: initial;
-    margin-left: 10px;
     margin-right: 0;
 }
 
 .k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: 3.3em;
+    left: calc(@combobox-clear-icon-offset);
     right: initial;
 }
 
@@ -1159,7 +1151,7 @@ div.k-spreadsheet-window {
     .k-combobox-clearable {
 
         .k-input {
-            padding-left: 2.5em;
+            padding-left: @combobox-padding-x;
         }
     }
 

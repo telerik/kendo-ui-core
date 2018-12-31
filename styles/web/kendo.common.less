@@ -1,6 +1,14 @@
 @input-height: 1.65em;
 @input-padding-y: 0.17857143em;
 @input-indent: .571em;
+@input-offset: (@input-height + .35em);
+
+@combobox-padding-x: @input-offset;
+
+@input-clear-icon-offset: ~"( (@{input-offset} - @{grid-size})/2 )";
+@combobox-clear-icon-offset: ~"( @{input-clear-icon-offset} + @{input-offset} )";
+@multiselect-clear-icon-top-offset: ~"( (@{input-height} - @{grid-size}) / 2 + @{input-padding-y} + 1px )";
+
 @editor-icon-size: 2em;
 @menu-link-padding: .5em 1.1em .4em;
 @button-padding-x: 7px;
