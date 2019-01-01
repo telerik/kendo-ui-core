@@ -495,7 +495,7 @@ If an array, each level uses the field that is at the same index in the array, o
         $("#dropdowntree").kendoDropDownTree({
             dataSource: [{ text: "aitem1", value: 1 }, { text: "bitem2", value: 2 }],
             filter: "startsWith",
-            delay: 1000 // wait 1 second before clearing the user input
+            delay: 1000 // wait 1 second before filtering
         });
     </script>
 

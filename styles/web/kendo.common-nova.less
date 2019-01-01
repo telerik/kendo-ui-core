@@ -56,9 +56,6 @@
 @grid-cell-padding-x: @grid-padding-x;
 @grid-cell-padding-y: @grid-padding-y;
 
-@import "common/all.less";
-
-
 // Calendar
 @calendar-padding-x: 0;
 @calendar-padding-y: 0;
@@ -93,6 +90,18 @@
 
 @spreadsheet-popup-button-padding: .6em 1.2em .6em 1em;
 @calendar-cell-width: ((38px / 14px) * 1em);
+
+// ScrollView
+@scrollview-pagebutton-size: 8px;
+@scrollview-navigation-size: 4.5em;
+
+@scrollview-pager-offset: 20px;
+@scrollview-pager-item-spacing: 20px;
+@scrollview-pager-item-border-width: 0;
+@scrollview-pager-height: calc(@scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (@scrollview-pager-item-spacing / 2 ));
+
+
+@import "common/all.less";
 
 .k-button {
     line-height: @line-height;

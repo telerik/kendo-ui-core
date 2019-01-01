@@ -283,7 +283,7 @@ The field of the data item that provides the value of the widget.
     </select>
     <script>
     $("#multiselect").kendoMultiSelect({
-        delay: 1000 // wait 1 second before clearing the user input
+        delay: 1000 // wait 1 second before filtering
     });
     </script>
 

@@ -324,14 +324,15 @@ The field of the data item that provides the value of the widget.
 
 ### delay `Number`*(default: 500)*
 
- Specifies the delay in milliseconds before the search-text typed by the end user is cleared.
+ Specifies the delay in milliseconds before the search-text typed by the end user is sent for filtering.
 
 #### Example - set the delay
 
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
-        delay: 1000 // wait 1 second before clearing the user input
+        filter: true,
+        delay: 1000 // wait 1 second before filtering with the user input
     });
     </script>
 

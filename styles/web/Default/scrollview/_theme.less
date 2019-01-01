@@ -1,0 +1,35 @@
+.k-scrollview-nav > li.k-link {
+    border-color: @scrollview-pagebutton-border;
+    background-color: @scrollview-pagebutton-bg;
+
+    &.k-primary {
+        border-color: @scrollview-pagebutton-primary-border;
+        background-color: @scrollview-pagebutton-primary-bg;
+    }
+
+    .box-shadow(@scrollview-pagebutton-shadow);
+    background-clip: padding-box;
+}
+
+.k-scrollview-elements {
+    color: @scrollview-navigation-color;
+}
+
+.k-scrollview-next,
+.k-scrollview-prev {
+    color: inherit;
+    background: @scrollview-navigation-background;
+    text-shadow: @scrollview-navigation-icon-shadow;
+    opacity: @scrollview-navigation-default-opacity;
+    outline-width: 0;
+    -webkit-tap-highlight-color: @scrollview-navigation-background;
+
+    &:hover {
+        color: @scrollview-navigation-color;
+        opacity: @scrollview-navigation-hover-opacity;
+
+        span::before {
+            background-color: @scrollview-navigation-hover-span-bg;
+        }
+    }
+}

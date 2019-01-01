@@ -86,6 +86,16 @@
 @calendar-header-cell-line-height: (20 / 14);
 @calendar-header-cell-size: @calendar-cell-size;
 
+// ScrollView
+@scrollview-pagebutton-size: 8px;
+@scrollview-navigation-size: 4.5em;
+
+@scrollview-pager-offset: 20px;
+@scrollview-pager-item-spacing: 20px;
+@scrollview-pager-item-border-width: 0;
+@scrollview-pager-height: calc(@scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (@scrollview-pager-item-spacing / 2 ));
+
+
 @import "common/all.less";
 
 .k-widget.k-tabstrip

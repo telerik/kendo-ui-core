@@ -2546,7 +2546,7 @@ The color of the lines. Accepts a valid CSS color string, including hex and rgb.
           color: "#aa00bb"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2563,7 +2563,7 @@ The color of the lines. Accepts a valid CSS color string, including hex and rgb.
           color: "rgb(128, 0, 255)"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2580,7 +2580,7 @@ The color of the lines. Accepts a valid CSS color string, including hex and rgb.
           color: "green"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2606,12 +2606,12 @@ The following dash types are supported:
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      categoryAxis: [{
+      categoryAxis: {
         line: {
           dashType: "dashDot"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2627,12 +2627,12 @@ If set to `true` the chart will display the category axis lines. By default the 
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      categoryAxis: [{
+      categoryAxis: {
         line: {
           visible: false
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2648,12 +2648,12 @@ The width of the line in pixels. Also affects the major and minor ticks, but not
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      categoryAxis: [{
+      categoryAxis: {
         line: {
           width: 3
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
