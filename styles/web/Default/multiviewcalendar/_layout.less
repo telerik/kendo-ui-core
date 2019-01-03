@@ -1,21 +1,3 @@
-@multiviewcalendar-font-size: 14px;
-@multiviewcalendar-line-height: (20 / 14);
-
-@multiviewcalendar-header-padding-x: 16px;
-@multiviewcalendar-header-padding-y: 8px;
-
-@multiviewcalendar-content-padding-x: 16px;
-@multiviewcalendar-content-padding-y: 8px;
-
-@multiviewcalendar-cell-padding-x: .5em;
-@multiviewcalendar-cell-padding-y: .5em;
-@multiviewcalendar-cell-border-radius: 4px;
-@multiviewcalendar-cell-line-height: (20 / 14);
-@multiviewcalendar-cell-size: ( (@multiviewcalendar-cell-padding-y * 2) + (@multiviewcalendar-cell-line-height * 1em) );
-
-@multiviewcalendar-header-cell-font-size: 12px;
-
-
 // Multiview calendar
 .k-calendar-range {
     width: auto;
@@ -78,22 +60,38 @@
             vertical-align: middle;
         }
         th {
+            padding: .5em 0;
             font-size: @multiviewcalendar-header-cell-font-size;
-            line-height: 2;
-            text-transform: lowercase;
-            font-variant: small-caps;
+            line-height: 1.5;
+            text-transform: uppercase;
             opacity: .5;
         }
         td {
             border-radius: @multiviewcalendar-cell-border-radius;
         }
 
+        td.k-alt {
+            opacity: .5;
+        }
         .k-link {
             padding: @multiviewcalendar-cell-padding-y @multiviewcalendar-cell-padding-x;
             min-height: 0;
             box-sizing: border-box;
             border-radius: @multiviewcalendar-cell-border-radius;
             line-height: inherit;
+        }
+
+
+        // Month / meta header
+        .k-meta-header,
+        .k-month-header {
+            margin: 0 @multiviewcalendar-content-padding-x;
+            padding: .5em @button-padding-x;
+            font-size: @multiviewcalendar-header-cell-font-size;
+            line-height: 1.5;
+            text-transform: uppercase;
+            text-align: left;
+            opacity: .5;
         }
 
 
@@ -189,8 +187,8 @@
         margin: 0 -1px;
 
         .k-link {
-            width: ( (7 / 4) * @multiviewcalendar-cell-size);
-            height: ( (7 / 4) * @multiviewcalendar-cell-size);
+            width: @calendar-meta-cell-size;
+            height: @calendar-meta-cell-size;
             line-height: 3.25;
         }
     }
@@ -203,8 +201,8 @@
         margin: 0 -1px;
 
         .k-link {
-            width: ( (7 / 4) * @multiviewcalendar-cell-size);
-            height: ( (7 / 4) * @multiviewcalendar-cell-size);
+            width: @calendar-meta-cell-size;
+            height: @calendar-meta-cell-size;
             line-height: 3.25;
         }
     }
@@ -217,8 +215,8 @@
         margin: 0 -1px;
 
         .k-link {
-            width: ( (7 / 4) * @multiviewcalendar-cell-size);
-            height: ( (7 / 4) * @multiviewcalendar-cell-size);
+            width: @calendar-meta-cell-size;
+            height: @calendar-meta-cell-size;
             text-align: left;
             line-height: 1.625;
             white-space: normal;

@@ -19,7 +19,7 @@ The Kendo UI Menu widget can be initialized in two ways:
 * Through HTML markup
 * Through a JSON data object
 
-> **Important**  
+> **Important**
 >
 > As Menu should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 
@@ -93,7 +93,7 @@ By initializing the Menu using JSON, you can use assign a select handler for eac
                 select: function (e) {                        // Item select event handler, optional
                     // e.sender - returns reference to the Kendo Menu widget
                     // e.target - returns the clicked element. Typically, the span.k-link element.
-    
+
                     // handle event
                 }
             })

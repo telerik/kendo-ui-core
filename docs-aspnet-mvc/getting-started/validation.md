@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: Validation | Progress Telerik UI for ASP.NET MVC
+page_title: Validation - Getting Started
 description: "Use client-side validation with Progress Telerik UI for ASP.NET MVC."
 slug: validation_aspnetmvc
 previous_url: /validation

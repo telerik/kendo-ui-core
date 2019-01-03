@@ -1,6 +1,6 @@
 ---
 title: NuGet Packages
-page_title: NuGet Packages | Progress Telerik UI for ASP.NET MVC
+page_title: NuGet Packages - Getting Started
 description: "Download and install Progress Telerik UI for ASP.NET MVC from our NuGet feed."
 slug: aspnetmvc_nuget
 previous_url: /nuget-install

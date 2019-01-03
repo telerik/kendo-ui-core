@@ -77,7 +77,7 @@
 @calendar-cell-padding-y: .5em;
 @calendar-cell-border-radius: @calendar-border-radius;
 @calendar-cell-line-height: (20 / 14);
-@calendar-cell-size: ( (@calendar-cell-padding-y * 2) + (@calendar-cell-line-height * 1em) );
+@calendar-cell-size: ( (34px / 14px ) * 1em );
 
 @calendar-header-cell-padding-x: 2px;
 @calendar-header-cell-padding-y: (@calendar-cell-padding-y / 2);
@@ -85,6 +85,26 @@
 @calendar-header-cell-font-size: 12px;
 @calendar-header-cell-line-height: (20 / 14);
 @calendar-header-cell-size: @calendar-cell-size;
+
+@calendar-meta-cell-size: ( (60px / @calendar-font-size) * 1em );
+
+// Multiviewcalendar
+@multiviewcalendar-font-size: @calendar-font-size;
+@multiviewcalendar-line-height: @calendar-line-height;
+
+@multiviewcalendar-header-padding-x: 16px;
+@multiviewcalendar-header-padding-y: 8px;
+
+@multiviewcalendar-content-padding-x: 16px;
+@multiviewcalendar-content-padding-y: 8px;
+
+@multiviewcalendar-cell-padding-x: @calendar-cell-padding-x;
+@multiviewcalendar-cell-padding-y: @calendar-cell-padding-y;
+@multiviewcalendar-cell-border-radius: @calendar-border-radius;
+@multiviewcalendar-cell-line-height: @calendar-cell-line-height;
+@multiviewcalendar-cell-size: @calendar-cell-size;
+
+@multiviewcalendar-header-cell-font-size: 12px;
 
 // ScrollView
 @scrollview-pagebutton-size: 8px;
@@ -94,7 +114,6 @@
 @scrollview-pager-item-spacing: 20px;
 @scrollview-pager-item-border-width: 0;
 @scrollview-pager-height: calc(@scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (@scrollview-pager-item-spacing / 2 ));
-
 
 @import "common/all.less";
 

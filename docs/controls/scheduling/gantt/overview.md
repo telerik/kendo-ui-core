@@ -277,7 +277,7 @@ The columns in the TreeList section of the Kendo UI Gantt can be individually co
 - `width` - the width of the column.
 - `format` - the format in which the data in the column is represented.
 
-To configure individual columns use the [views](/api/web/gantt#configuration-columns) option.
+To configure individual columns use the [columns](/api/web/gantt#configuration-columns) option.
 
 The example below demonstrates how to configure Gantt columns.
 

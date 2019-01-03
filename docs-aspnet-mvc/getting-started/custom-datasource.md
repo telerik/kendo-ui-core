@@ -1,6 +1,6 @@
 ---
 title: Custom DataSource
-page_title: Custom DataSource | Progress Telerik UI for ASP.NET MVC
+page_title: Custom DataSource - Getting Started
 description: "Use the CustomDataSource builder available for the Progress Telerik UI for ASP.NET MVC HtmlHelpers."
 slug: customdatasource_aspnetmvc
 previous_url: /custom-datasource

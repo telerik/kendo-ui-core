@@ -78,7 +78,7 @@
             isLocalUrl = kendo.isLocalUrl,
             SIZE = {
                 small: "k-window-sm",
-                medium: "k-window-m",
+                medium: "k-window-md",
                 large: "k-window-lg"
             };
 

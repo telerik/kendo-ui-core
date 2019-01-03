@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: Localization | Progress Telerik UI for ASP.NET MVC
+page_title: Localization - Getting Started
 description: "Localize the content of a Progress Telerik UI for ASP.NET MVC application."
 slug: localization_aspnetmvc
 previous_url: /localization

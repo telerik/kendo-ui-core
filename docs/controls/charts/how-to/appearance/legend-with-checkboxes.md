@@ -27,9 +27,11 @@ The example below demonstrates how to customize the appearance of the legend ite
             visual: function (e) {
               var color = e.options.markers.background;
               var labelColor = e.options.labels.color;
-
+              // This will give us the default box + text
+              var defaultVisual = e.createVisual();
+              var defaultSize = defaultVisual.bbox().size;
               // Define the target dimensions for the legend item
-              var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+              var rect = new kendo.geometry.Rect([0, 0], [defaultSize.width + 30, defaultSize.height]);
 
               // A layout will hold the checkbox and the default visual
               //
@@ -50,8 +52,6 @@ The example below demonstrates how to customize the appearance of the legend ite
                 font: "14px sans-serif"
               });
 
-              // This will give us the default box + text
-              var defaultVisual = e.createVisual();
 
               // Reflow them together
               layout.append(cb, defaultVisual);
@@ -62,7 +62,7 @@ The example below demonstrates how to customize the appearance of the legend ite
           }
         },
         series: [
-          { name: "Series 1", data: [1, 2, 3] },
+          { name: "Series 1 with longer name", data: [1, 2, 3] },
           { name: "Series 2", data: [3, 4, 5] }
         ]
       });

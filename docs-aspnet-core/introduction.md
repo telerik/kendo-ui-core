@@ -7,7 +7,7 @@ slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Overview of Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
+# Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
 [Telerik UI for ASP.NET Core](http://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](../kendo-ui/introduction) in .NET Core.
 

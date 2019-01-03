@@ -11,7 +11,7 @@ The following example demonstrates how to add a mask to the Kendo UI DatePicker 
 
 > **Important**
 >
-> This approach is not officially supported and might lead to undesired side-effects. As of the Kendo UI R2 2017 release, the DatePicker supports the [`dateInput`](/api/javascript/ui/datepicker/configuration/dateinput) property which provides a built-in mask.
+> The DatePicker does not officially support the suggested approach and its implementation might lead to undesired side-effects. As of the Kendo UI R2 2017 release, the DatePicker supports the [`dateInput`](/api/javascript/ui/datepicker/configuration/dateinput) property which provides a built-in mask.
 
 ###### Example
 

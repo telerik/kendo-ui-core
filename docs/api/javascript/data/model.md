@@ -7,18 +7,18 @@ res_type: api
 
 # kendo.data.Model
 
-The `Model` inherits from the [ObservableObject](/api/javascript/data/observableobject) and extends it with the ability to define schema - fields and methods. The
-[DataSource](/api/javascript/data/datasource) contains instances of the `Model` when the [schema.model](/api/javascript/data/datasource/configuration/schema.model) setting is specified.
+`Model` inherits from the [`ObservableObject`](/api/javascript/data/observableobject) and extends it with fields and methods which enable it to define a schema. The
+[DataSource](/api/javascript/data/datasource) contains instances of the `Model` when the [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) setting is specified.
 
 ## Fields
 
 ### id
 
-The value of the Model's ID. This field is available **only** if the `id` is defined in the Model configuration. See the example below.
+The value of the ID of the `Model`. This field is available only if the `id` is defined in the Model configuration. See the following example.
 
 ### idField `String`
 
-The name of the Model's ID field. This field is available **only** if the `id` is defined in the Model configuration.
+The name of the `Model` ID field. This field is available only if the `id` is defined in the Model configuration.
 
     <script>
     var Person = kendo.data.Model.define({
@@ -45,16 +45,15 @@ The name of the Model's ID field. This field is available **only** if the `id` i
 
 ### uid
 
-The unique identifier of the `Model`. Inherited from `ObservableObject`. More info can be found in the [uid](/api/javascript/data/observableobject#fields-uid) section of the
-ObservableObject API reference.
+The unique identifier of the `Model`. Inherited from `ObservableObject`. For more information, refer to the [`uid`](/api/javascript/data/observableobject#fields-uid) API reference.
 
-The main benefit of uid's is to represent a link between data items (that may not have an ID of their own) and the corresponding rendered DOM elements (list items, table rows, etc). The uid's are generated randomly and they are not persisted across data or web page reloads.
+The main benefit of the `uid` identifiers is to represent a link between data items (that may not have an ID of their own) and the corresponding rendered DOM elements (list items, table rows, and so on). The `uid` identifiers are generated randomly and are not persisted on reloading of data or web pages.
 
 ### dirty `Boolean`
 
 Indicates whether the model is modified.
 
-#### Example - using the dirty field
+#### Example - use the dirty field
 
     <script>
     var model = new kendo.data.Model({
@@ -70,13 +69,13 @@ Indicates whether the model is modified.
 
 ### bind
 
-Attaches a handler to an event. Examples and more info can be found in the [bind](/api/javascript/observable/methods/bind) section of the `kendo.Observable` API reference.
+Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable/methods/bind) API reference.
 
 ### define
 
-Defines a new `Model` type using the provided options. The returned value inherits from the `kendo.data.Model` class.
+Defines a new `Model` type by using the provided options. The returned value inherits from the `kendo.data.Model` class.
 
-#### Example - Define a model
+#### Example - define a model
 
     <script>
     var Person = kendo.data.Model.define({
@@ -108,45 +107,50 @@ Describes the configuration options of the new model type.
 
 ##### options.id `String`
 
-The name of the field which acts as the identifier of the model. The identifier is used to determine if a model instance is new or existing one.
-If the value of the field specified is equal to the default value (specified through the `fields` configuration) the model is considered as new.
+The name of the field which acts as the identifier of the model. The identifier is used to determine if a model instance is new or existing. If the value of the specified field is equal to the default value that is specified through the `fields` configuration, the model is considered new.
 
 ##### options.fields `Object|Array`
 
-A set of key/value pairs the configure the model fields. The key specifies the name of the field.
-Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
+A set of key/value pairs that configure the model fields. The key specifies the name of the field. Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
 
-> A field configuration cannot contain nested fields' configurations.
+> A field configuration cannot contain configurations for nested fields.
 
 ##### options.fields.fieldName.defaultValue
 
-Specifies the default value which will be used for the field when a new model instance is created. The default settings depend on the type of the field. The default value for "string" is `""`, for "number" is `0`, and for "date" is `new Date()` (today).
+Specifies the default value which will be used for the field when a new model instance is created. The default settings depend on the type of the field. The default value for a string is `""`, for a number is `0`, and for a date is `new Date()` (today).
 
 The parameter can also be set to a function that returns the dynamic default values of the fields. For a live demo, refer to [this how-to example]({% slug howto_gridfiltering_dynamicdefaultvalues_grid %}).
 
 ##### options.fields.fieldName.editable `Boolean`
 
-Specifies if the field is editable or not. The default value is `true`.
+Specifies if the field is editable or not. Defaults to `true`.
 
 ##### options.fields.fieldName.nullable `Boolean`
 
-Specifies if the `defaultValue` setting should be used. The default is `false`.
+Specifies if the `defaultValue` setting should be used. Defaults to `false`.
 
 ##### options.fields.fieldName.parse `Function`
 
-Specifies the function which will parse the field value. If not set default parsers will be used.
+Specifies the function which will parse the field value. If not set, the default parsers will be used.
 
 ##### options.fields.fieldName.type `String`
 
-Specifies the type of the field. The available options are `"string"`, `"number"`, `"boolean"`, `"date`" and `"object`". The default is `"string"`.
+Specifies the type of the field.
+
+The available options are:
+* (Default) `"string"`
+* `"number"`
+* `"boolean"`
+* `"date`"
+* `"object`"
 
 ##### options.fields.fieldName.from `String`
 
-Specifies the field of the original record whose value is used to populate the Model field. When CRUD operations (specifically adding new items) are enabled, the original field name should be defined with a `defaultValue` as well, because during updates and creates the Kendo UI DataSource will try to construct a data item object, which matches the original (server-side) data item structure. For more information and an example, please refer to [How to Use Nested Model Properties]({% slug howto_use_nested_model_properties_grid %}).
+Specifies the field of the original record whose value is used to populate the Model field. When CRUD operations (specifically, adding new items) are enabled, the original field name should be defined with a `defaultValue` as well. The reason for this is that during updates and creates, the Kendo UI DataSource will try to construct a data item object which matches the original (server-side) data item structure. For more information and examples, refer to the article on [how to use nested model properties]({% slug howto_use_nested_model_properties_grid %}).
 
 ##### options.fields.fieldName.validation `Object`
 
-Specifies the validation options which will be used by [Kendo Validator](/api/javascript/ui/validator).
+Specifies the validation options which will be used by the [Kendo UI Validator](/api/javascript/ui/validator).
 
 #### Example - define the fields of a model
 
@@ -187,13 +191,13 @@ Determines if the specified field is editable or not.
 
 #### Returns
 
-`Boolean` `true` if the field is editable; `false` otherwise.
+`Boolean`&mdash;Returns `true` if the field is editable. Otherwise, returns `false`.
 
 #### Parameters
 
 ##### field `String`
 
-The field to check.
+The field that will be checked.
 
 #### Example - check if a field is editable or not
 
@@ -215,17 +219,15 @@ The field to check.
 
 ### get
 
-Gets the value of the specified field. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [get](/api/javascript/data/observableobject/methods/get) section of the
-ObservableObject API reference.
+Gets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/methods/get) API reference.
 
 ### isNew
 
-Checks if the `Model` is new or not. The `id` field is used to determine if a model instance is new or existing one.
-If the value of the field specified is equal to the default value (specified through the `fields` configuration) the model is considered as new.
+Checks if the `Model` is new or not. The `id` field is used to determine if a model instance is new or existing. If the value of the specified field is equal to the default value that is specified through the `fields` configuration, the model is considered new.
 
 #### Returns
 
-`Boolean` `true` if the model is new; `false` otherwise.
+`Boolean`&mdash;Returns `true` if the field is editable. Otherwise, returns `false`.
 
 #### Example - check if a model is new
     <script>
@@ -245,27 +247,22 @@ If the value of the field specified is equal to the default value (specified thr
 
 ### set
 
-Sets the value of the specified field. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [set](/api/javascript/data/observableobject/methods/set) section of the
-ObservableObject API reference.
+Sets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/methods/set) API reference.
 
 ### toJSON
 
-Creates a plain JavaScript object which contains all fields of the `Model`. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [toJSON](/api/javascript/data/observableobject/methods/tojson) section of the
-ObservableObject API reference.
+Creates a plain JavaScript object which contains all fields of the `Model`. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`toJSON`](/api/javascript/data/observableobject/methods/tojson) API reference.
 
 ## Events
 
 ### change event
 
-Raised when a field value is updated via the `set` method. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [change](/api/javascript/data/observableobject/events/change) section of the
-ObservableObject API reference.
+Fires when a field value is updated through the `set` method. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`change`](/api/javascript/data/observableobject/events/change) API reference.
 
 ### get event
 
-Raised when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [get](/api/javascript/data/observableobject/events/get event) section of the
-ObservableObject API reference.
+Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/events/get event) API reference.
 
 ### set event
 
-Raised when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. Examples and more info can be found in the [set](/api/javascript/data/observableobject/events/set event) section of the
-ObservableObject API reference.
+Fires when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/events/set event) API reference.

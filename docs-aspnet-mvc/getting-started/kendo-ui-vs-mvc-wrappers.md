@@ -1,6 +1,6 @@
 ---
 title: Wrappers vs Widgets
-page_title: Wrappers vs Widgets | Progress Telerik UI for ASP.NET MVC
+page_title: Wrappers vs Widgets - Getting Started
 description: "Compare the HTML- and JavaScript-based Kendo UI widgets and their ASP.NET MVC wrappers."
 slug: wrappersvswidgets_aspnetmvc
 previous_url: /kendo-ui-vs-mvc-wrappers

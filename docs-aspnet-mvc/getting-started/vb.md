@@ -1,6 +1,6 @@
 ---
 title: Visual Basic Syntax
-page_title: Visual Basic Syntax | Progress Telerik UI for ASP.NET MVC
+page_title: Visual Basic Syntax - Getting Started
 description: "Apply a proper Visual Basic syntax when using lamba expressions and anonymous types inside Kendo UI MVC wrapper declarations."
 slug: visualbasic_aspnetmvc
 previous_url: /vb

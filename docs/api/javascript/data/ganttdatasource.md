@@ -179,7 +179,7 @@ The parent task. If this parameter is not specified, all root-level tasks will b
 
 `Array`&mdash;The list of all direct child tasks.
 
-#### Example - get direct children of a task
+#### Example - get the direct children of a task
 
     <script>
       var dataSource = new kendo.data.GanttDataSource({
@@ -219,7 +219,7 @@ The parent task. If this parameter is not specified, all root-level tasks will b
       var childTasks = dataSource.taskChildren(dataSource.at(0));
     </script>
 
-#### Example - get root-level tasks
+#### Example - get the root-level tasks
 
     <script>
       var dataSource = new kendo.data.GanttDataSource({

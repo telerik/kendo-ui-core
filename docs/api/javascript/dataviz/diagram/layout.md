@@ -23,13 +23,31 @@ The configuration options of the layout.
 
 Specifies the alignment of the content.
 
+Possible values are:
+
+* "start"
+* "center"
+* "end"
+
 ### alignItems `String` *(default: "start")*
 
 Specifies the alignment of the items based on each other.
 
+Possible values are:
+
+* "start"
+* "center"
+* "end"
+
 ### justifyContent `String` *(default: "start")*
 
 Specifies how should the content be justified.
+
+Possible values are:
+
+* "start"
+* "center"
+* "end"
 
 ### lineSpacing `Number` *(default: 0)*
 

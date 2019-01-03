@@ -60,7 +60,7 @@ The supported aggregates are:
 * `"min"`
 * `"sum"`
 
-#### Example - specify aggregate function
+#### Example - specify an aggregate function
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -82,7 +82,7 @@ The supported aggregates are:
 
 The data item field which will be used to calculate the aggregates.
 
-#### Example - specify aggregate field
+#### Example - specify an aggregate field
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -308,7 +308,7 @@ The data item field to which the filter operator is applied.
 
 The nested filter expressions. Supports the same options as [`filter`](/api/javascript/data/datasource#configuration-filter). Filters can be nested indefinitely.
 
-#### Example - nested filters
+#### Example - set nested filters
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -508,7 +508,7 @@ The supported aggregates are:
 * `"min"`
 * `"sum"`
 
-#### Example - set group aggregates
+#### Example - set the group aggregates
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -874,7 +874,7 @@ The aggregate results should have the following format:
     }
 ```
 
-#### Example - set aggregates as a string
+#### Example - set the aggregates as a string
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -888,7 +888,7 @@ The aggregate results should have the following format:
     });
     </script>
 
-#### Example - set aggregates as a function
+#### Example - set the aggregates as a function
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1047,7 +1047,7 @@ The result should have the following format:
     } /* other groups */
     ]
 
-#### Example - set groups as a string
+#### Example - set the groups as a string
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1062,7 +1062,7 @@ The result should have the following format:
     });
     </script>
 
-#### Example - set groups as a function
+#### Example - set the groups as a function
 
     <script>
     var dataSource = new kendo.data.DataSource({
@@ -1164,7 +1164,7 @@ The initially parsed server response that may need additional modifications.
 
 `Array`&mdash;The data items from the response.
 
-#### Example - data projection
+#### Example - set the data projection
 
     <script>
     var dataSource = new kendo.data.DataSource({

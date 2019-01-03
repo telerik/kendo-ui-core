@@ -1,7 +1,7 @@
 ---
 title: Binder
 page_title: Configuration of the Binder component | Kendo UI API
-description: API documentation and examples for configuring the Kendo UI Binder component. 
+description: API documentation and examples for configuring the Kendo UI Binder component.
 res_type: api
 ---
 
@@ -15,7 +15,7 @@ The base class of the Kendo UI MVVM-style bindings. Creates custom MVVM bindings
 
 Represents all bindings applied to the current HTML [element](/api/javascript/data/binder#fields-element). Gets or sets the current view-model field value.
 
-#### Example - getting the view model field
+#### Example - get the view model field
 
     <div data-bind="slide: slideChecked" style="background: orange; width: 100px; height: 100px"></div>
     <label>Check to slide<input type="checkbox" data-bind="checked: slideChecked"></label>
@@ -42,7 +42,7 @@ Represents all bindings applied to the current HTML [element](/api/javascript/da
 
 The bound HTML element.
 
-#### Example - using the HTML element of the Binder
+#### Example - use the HTML element of the Binder
 
     <div data-bind="slide: slideChecked" style="background: orange; width: 100px; height: 100px"></div>
     <label>Check to slide<input type="checkbox" data-bind="checked: slideChecked"></label>
@@ -80,7 +80,7 @@ Creates a new binding which inherits from the `kendo.data.Binder` class.
 
 A key/value pair of all methods that the new class will have.
 
-#### Example - creating a custom HTML element binding
+#### Example - create a custom HTML element binding
 
     <div data-bind="slide: slideChecked" style="background: orange; width: 100px; height: 100px"></div>
     <label>Check to slide<input type="checkbox" data-bind="checked: slideChecked"></label>
@@ -102,7 +102,7 @@ A key/value pair of all methods that the new class will have.
     kendo.bind(document.body, viewModel);
     </script>
 
-#### Example - creating a custom Kendo UI widget binding
+#### Example - create a custom Kendo UI widget binding
 
     <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />
     <script>
@@ -130,7 +130,7 @@ A key/value pair of all methods that the new class will have.
 
 Invoked by the Kendo UI MVVM framework when the bound view-model value is changed. The Binder should update the UI (the HTML element or the Kendo UI widget) to reflect the view-model change.
 
-#### Example - sliding up or down the element when the bound value changes
+#### Example - slide up or down the element when the bound value changes
 
     <div data-bind="slide: slideChecked" style="background: orange; width: 100px; height: 100px"></div>
     <label>Check to slide<input type="checkbox" data-bind="checked: slideChecked"></label>

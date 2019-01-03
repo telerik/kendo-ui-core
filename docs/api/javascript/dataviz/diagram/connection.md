@@ -427,3 +427,49 @@ The new options for the connection. This object should follow the configuration 
         });
     </script>
 
+### visible
+
+Gets or sets the connection visible state.
+
+#### Parameters
+
+##### visible `Boolean` *optional*
+Indicates whether the connection should be visible in the Diagram. If skipped, the method will return the current visible state of the connection.
+
+#### Example
+
+    <button id="hideBtn">Hide Connection</button>
+    <div id="diagram"></div>
+    <script>
+      $("#hideBtn").on("click", function(e){
+        var diagram = $("#diagram").getKendoDiagram();
+        var connection = diagram.connections[0];
+        connection.visible(false);
+      });
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ]
+      });
+    </script>

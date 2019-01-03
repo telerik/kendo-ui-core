@@ -14,7 +14,7 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 ### filter `Array|Object`
 
-The filters which are applied over the data items. It applies the filter to all loaded nodes and creates views from the nodes that match the filter and their parent nodes up to the root of the hierarchy. Currently not loaded nodes are not filtered. By default, no filter is applied.
+The filters which are applied over the data items. It applies the filter to all loaded nodes and creates views from the nodes that match the filter and their parent nodes up to the root of the hierarchy. Currently, nodes that are not loaded are not filtered. By default, no filter is applied.
 
 > The data source filters the data items client-side unless the [`serverFiltering`](/api/framework/datasource#configuration-serverFiltering) option is set to `true`.
 
@@ -46,7 +46,7 @@ The filters which are applied over the data items. It applies the filter to all 
         console.log(view[0].children.view()[0].name); // displays "John Doe"
     </script>
 
-#### Example - set filter as conjunction (and)
+#### Example - set the filter as a conjunction (and)
 
     <script>
         var dataSource = new kendo.data.HierarchicalDataSource({
@@ -76,7 +76,7 @@ The filters which are applied over the data items. It applies the filter to all 
         console.log(view[0].children.view()[0].name); // displays "John Snow"
     </script>
 
-#### Example - set filter as disjunction (or)
+#### Example - set the filter as a disjunction (or)
 
     <script>
         var dataSource = new kendo.data.HierarchicalDataSource({
@@ -113,13 +113,13 @@ The filters which are applied over the data items. It applies the filter to all 
 
 ### schema `Object`
 
-The schema configuration. See the [DataSource.schema configuration](/api/framework/datasource#configuration-schema) for all available options.
+The schema configuration. See the [`DataSource.schema` configuration](/api/framework/datasource#configuration-schema) for all available options.
 
 ### schema.model `Object|kendo.data.Node`
 
-The data item (model) configuration. See the [DataSource.schema.model configuration](/api/framework/datasource#configuration-schema.model) for all available options.
+The data item (model) configuration. See the [`DataSource.schema.model` configuration](/api/framework/datasource#configuration-schema.model) for all available options.
 
-> The model **must** inherit from [kendo.data.Node](/api/framework/node).
+> The model must inherit from [`kendo.data.Node`](/api/framework/node).
 
 #### Example - use a custom model
 
@@ -160,8 +160,7 @@ The data item (model) configuration. See the [DataSource.schema.model configurat
 
 ### schema.model.hasChildren `Boolean|String|Function` *(default: false)*
 
-Specifies whether the model might have children and might be loaded. Applicable when the rendering of a
-widget needs to have different states for items that have no children (e.g. the toggle button of the TreeView).
+Specifies whether the model might have children and might be loaded. Applicable when the rendering of a widget needs to have different states for items that have no children&mdash;for example, the **Toggle** button of the TreeView.
 
 #### Example - map the hasChildren field to another field
 
@@ -184,7 +183,7 @@ widget needs to have different states for items that have no children (e.g. the 
     console.log(datasource.data()[1].hasChildren); // logs true
     </script>
 
-#### Example - compute if an item has children with a function
+#### Example - compute with a function if an item has children
 
     <script>
     var datasource = new kendo.data.HierarchicalDataSource({
@@ -229,15 +228,13 @@ widget needs to have different states for items that have no children (e.g. the 
 
 ### schema.model.children `String|Object` *(default: "items")*
 
-DataSource object or configuration for fetching child nodes.
-Detailed explanation of how children are fetched is found in the [HierarchicalDataSource overview help topic](http://docs.telerik.com/kendo-ui/framework/hierarchicaldatasource/overview).
+The DataSource object or configuration for fetching the child nodes. Detailed explanation of how children are fetched is available in the [HierarchicalDataSource overview help topic](http://docs.telerik.com/kendo-ui/framework/hierarchicaldatasource/overview).
 
-> Note that "children" cannot be used as a field name. The model already has a children property - the child data source.
+> You cannot use "children" as a field name&mdash;the model has already a `children` property (the child data source).
 
-For static HierarchicalDataSource (local data), this field may be a `String`,
-indicating which field holds the nested data.
+For static HierarchicalDataSource (local data), this field may be a `String` and will indicate which field holds the nested data.
 
-#### Example - specify children field
+#### Example - specify a children field
 
     <script>
     var datasource = new kendo.data.HierarchicalDataSource({
@@ -273,7 +270,7 @@ indicating which field holds the nested data.
     console.log(scifi.children.data().length); // logs 3
     </script>
 
-#### Example - 
+#### Example
 
     <script>
     var datasource = new kendo.data.HierarchicalDataSource({
@@ -320,24 +317,23 @@ indicating which field holds the nested data.
 
 ## Methods
 
-See the [DataSource methods](/api/framework/datasource#methods) for all inherited methods.
+The `filter`, `remove`, and `getByUid` methods are overridden and work with the hierarchical data&mdash;they will act on all child data sources that have been read.
 
-The **filter**, **remove** and **getByUid** methods are overridden and work with the hierarchical data
-(they will act on all child datasources that have been read).
+See the [DataSource methods](/api/framework/datasource#methods) for all inherited methods.
 
 ### filter
 
-Gets or sets the filter configuration. It applies the filter to all loaded nodes and creates views from the nodes that match the filter and their parent nodes up to the root of the hierarchy. Currently not loaded nodes are not filtered.
+Gets or sets the filter configuration. It applies the filter to all loaded nodes and creates views from the nodes that match the filter and their parent nodes up to the root of the hierarchy. Currently, nodes that are not loaded are not filtered.
 
 #### Parameters
 
 ##### value `Object` *(optional)*
 
-The filter configuration. Accepts the same values as the [`filter`](/api/javascript/data/hierarchicaldatasource#configuration-filter) option (**check there for more examples**).
+The filter configuration. Accepts the same values as the [`filter`](/api/javascript/data/hierarchicaldatasource#configuration-filter) option.
 
 #### Returns
 
-`Object` the current filter configuration. Returns `undefined` if the DataSource instance has not performed filtering so far.
+`Object`&mdash;The current filter configuration. Returns `undefined` if the DataSource instance has not performed filtering so far.
 
 #### Example - set the data source filter
 
@@ -385,7 +381,7 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
             { name: "John Doe" }
             ]
         });
-         
+
         dataSource.fetch();
         var filter = dataSource.filter();
 
@@ -396,13 +392,11 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
 
 See the [DataSource events](/api/framework/datasource#events) for all inherited events.
 
-> Disclaimer: The [push](/api/framework/datasource#events-push) event is not currently supported by the `HierarchicalDataSource`.
+> Currently, the HierarchicalDataSource does not support the [`push`](/api/framework/datasource#events-push) event.
 
 ### change
 
-Fires when data is changed. In addition to the [standard change event](/api/framework/datasource#change),
-the HierarchicalDataSource includes additional data when the event has been triggered from a child
-DataSource.
+Fires when data is changed. In addition to the [standard `change` event](/api/framework/datasource#change), the HierarchicalDataSource includes additional data when the event has been triggered from a child DataSource.
 
 #### Event Data
 

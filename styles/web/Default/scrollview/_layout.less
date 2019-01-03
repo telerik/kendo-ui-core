@@ -5,7 +5,7 @@
     display: block;
 }
 
-.k-scrollview-wrap {
+ul.k-scrollview-wrap {
     list-style-type: none;
     position: absolute;
     margin: 0;
@@ -27,11 +27,21 @@
     }
 }
 
+div.k-scrollview-wrap {
+    white-space: nowrap;
+
+    & > [data-role=page] {
+        vertical-align: top;
+        display: inline-block;
+        min-height: 1px;
+    }
+}
+
 .k-scrollview-nav-wrap {
     position: absolute;
     bottom: (@scrollview-pager-offset - (@scrollview-pager-item-spacing / 4));
     left: (@scrollview-pager-item-spacing / 2);
-    right: (@scrollview-pager-item-spacing / 2);;
+    right: (@scrollview-pager-item-spacing / 2);
     height: @scrollview-pager-height;
     overflow: hidden;
 }

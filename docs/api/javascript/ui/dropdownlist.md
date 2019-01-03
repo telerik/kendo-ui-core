@@ -720,8 +720,8 @@ The [template](/api/javascript/kendo/methods/template) used to render the option
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.
 
-> * The header content **should be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
-> * Widget does not pass a model data to the header template. Use this option only with static HTML.
+> * The header content **must be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
+> * Widget does not pass model data to the header template. Use the header template only with static HTML (only presentation elements and not functionality like data bound inputs or fields).
 
 #### Example - specify headerTemplate as a string
 

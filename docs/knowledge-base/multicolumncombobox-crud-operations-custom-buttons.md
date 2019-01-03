@@ -1,16 +1,15 @@
 ---
-title: Insert, add, delete records in MulticolumnComboBox
-description: How to add, update, delete records with Kendo MulticolumnComboBox
+title: Insert, Add, and Delete MulticolumnComboBox Records
+description: An example on how to add, update, and delete records in the Kendo UI MulticolumnComboBox.
 type: how-to
-page_title: CRUD operations with MulticolumnComboBox
+page_title: Perform CRUD Operations | Kendo UI MulticolumnComboBox
 slug: multicolumncombobox-crud-operations-custom-buttons
-position: 
-tags: 
 ticketid: 1364943
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -18,13 +17,17 @@ res_type: kb
 	</tr>
 </table>
 
-
 ## Description
-How to insert, update, remove records with the Kendo MulticolumnComboBox.
 
-The MulticolumnComboBox widget is view-only by design, as it is, essentially, a dropdown list that shows more data than usual. Thus, it does not provide full CRUD operations like a grid does.
+How can I insert, update, and remove records in the MulticolumnComboBox?
 
 ## Solution
-You can use its [templates](https://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/overview#templates) to add the CRUD operations buttons, and then handle their events to fire your own requests for those operations. For example, load partial views for Create and Edit in a Kendo Window, and do a POST to the controller in order to delete a record.
 
-You can find an example of this in the [CRUD operations with MultiColumnComboBox](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/MultiColumnComboBox/CRUD) sample project.
+By design, the MulticolumnComboBox is a view-only widget which represents a drop-down list that shows more data than the regular ComboBox, and does not provide full CRUD operation support.
+
+To work around this issue:
+
+1. Use the [templates of the MulticolumnComboBox](https://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/overview#templates) to add the buttons for the CRUD operations.
+1. Handle the events of the buttons to fire the necessary requests for those operations. For example, you can load partial views for the `Create` and `Edit` operations in a Kendo UI Window, and do a `POST` request to the controller to delete a record.
+
+For a runnable example, refer to the sample project on [CRUD operations with MultiColumnComboBox](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/MultiColumnComboBox/CRUD).

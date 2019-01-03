@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Progress Telerik UI for ASP.NET Core
+page_title: Scaffolding | Telerik UI for ASP.NET Core
 description: "Learn how to use the Kendo UI Scaffolder extensions."
 slug: scaffolding_aspnetcore
 position: 4
@@ -10,50 +10,42 @@ position: 4
 
 As of the R1 2019 release, Telerik UI for ASP.NET Core provides Scaffolding templates.
 
-They allow you to use the standard scaffolding to generate MVC-helper declarations for editors that use the Telerik UI for ASP.NET Core components instead of standard inputs. 
-
-You can use them in both MVC views and Razor Pages. 
+These templates allow you to apply standard scaffolding to generate MVC-helper declarations for editors which use the Telerik UI for ASP.NET Core components instead of applying standard inputs. You can use the Scaffolding extensions both in MVC views and in Razor Pages.
 
 Depending on the type of field, the following editors will be generated:
 
-* `String`: `input` element with Kendo styles
-* `String` (multiline): `textarea` element with Kendo styles
-* `Number`: `kendo-numerictextbox` tag helper
-* `DateTime`: `kendo-datetimepicker` tag helper
-* `Boolean`: `Html.Kendo().CheckBoxFor` helper
+* `String`&mdash;An `input` element with Kendo UI styles.
+* `String` (multiline)&mdash;A `textarea` element with Kendo UI styles.
+* `Number`&mdash;A `kendo-numerictextbox` tag helper.
+* `DateTime`&mdash;A `kendo-datetimepicker` tag helper.
+* `Boolean`&mdash;An `Html.Kendo().CheckBoxFor` helper.
 
-The scaffolding logic and tools are the same as with the ordinary .NET Core web applications. The main repository and logic for the scaffolding provided by Microsoft is  [https://github.com/aspnet/Scaffolding](https://github.com/aspnet/Scaffolding). The original template files are located in its: [https://github.com/aspnet/Scaffolding/tree/master/src/VS.Web.CG.Mvc/Templates](https://github.com/aspnet/Scaffolding/tree/master/src/VS.Web.CG.Mvc/Templates) folder.
+The scaffolding logic and tools are the same as in the ordinary .NET Core web applications. The main repository and logic for the scaffolding that is provided by Microsoft is located in [https://github.com/aspnet/Scaffolding](https://github.com/aspnet/Scaffolding). The original template files are located in its [https://github.com/aspnet/Scaffolding/tree/master/src/VS.Web.CG.Mvc/Templates](https://github.com/aspnet/Scaffolding/tree/master/src/VS.Web.CG.Mvc/Templates) folder.
 
-In order to use the scaffolding provided by Microsoft you can follow these resources:
-
+For more information on using the scaffolding by Microsoft, refer to the following resources:
 - [Add a model to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-2.1)
 - [Add a model to a Razor Pages app in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model?view=aspnetcore-2.1)
 
+> **Important**
+>
+> The Scaffolding features allow you to generate templates based on classes. They are different from the editor templates that are used for editing by widgets such as the Grid, for example. The editor templates are located in your installation folder at `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <your version>\wrappers\aspnetcore\EditorTemplates`.
 
->tip The Scaffolding features allow you to generate templates based on classes and are different than the editor templates used by widgets like the grid for editing records. If you are looking for the editor templates, you can find them in your installation folder under `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <your version>\wrappers\aspnetcore\EditorTemplates`.
+## Prerequisites
 
-## Getting Started
+Install and set up Telerik UI for ASP.NET Core in your project by either of the following ways:
+* [Use Visual Studio](https://docs.telerik.com/aspnet-core/getting-started/getting-started)
+* [Use the CLI](https://docs.telerik.com/aspnet-core/getting-started/getting-started-cli)
 
-
-### Requirements
-
-Make sure that Telerik UI for ASP.NET Core is installed and set up in your project. There are two ways to do that:
-
- * [Use Visual Studio](https://docs.telerik.com/aspnet-core/getting-started/getting-started)
- * [Use the CLI](https://docs.telerik.com/aspnet-core/getting-started/getting-started-cli)
-
-### Installation
+## Installation
 
 To install the UI for ASP.NET Core Scaffolding templates and extensions in your project:
 
-1. Clone or Download the [https://github.com/telerik/scaffold-templates-core](https://github.com/telerik/scaffold-templates-core) repository.
+1. Clone or download the [https://github.com/telerik/scaffold-templates-core](https://github.com/telerik/scaffold-templates-core) repository.
+1. Copy the `Templates` folder from the `scaffold-templates-core` repository to the root of your project.
+1. Exclude the `scaffold-templates-core` repository from the project to avoid its compilation when you build the application. To exclude the repository, use either of the following approaches:
 
-1. Copy the `Templates` folder from the repo above to the **root** of your project.
+    * Add the following lines directly to the project file.
 
-1. Exclude it from the project to make sure it will not be compiled when building. There are two ways to do that:
-
-    * add the following to the project file directly:
-    
         ```.csproj
           <ItemGroup>
             <Compile Remove="Templates\**" />
@@ -62,21 +54,18 @@ To install the UI for ASP.NET Core Scaffolding templates and extensions in your 
             <None Remove="Templates\**" />
           </ItemGroup>
         ```
-    
-    * OR, use the GUI in Visual Studio:
-    
+
+    * Use the Visual Studio interface.
+
         **Figure 1. Exclude the Templates folder from compilation**
-    
+
         ![Exclude Templatse folder](images/exclude-templates-from-project-GUI.png)
 
+## Using Scaffolding Templates with Visual Studio
 
-### Use With Visual Studio
+The Kendo UI Scaffolding Templates pertain to `cshtml` generation. That is why, first you have to create the appropriate model and controller as per your application requirements. You can either use the standard Scaffolding or the code you already have. If you do not already have a model and controller, use the sample set below the list to follow the example.
 
-The Kendo UI Scaffolding Templates pertain to cshtml generation, so you must  first create the appropriate model and controller as per your applicaiton needs. You can use the standard Scaffolding, or code you already have. 
-
-If you don't have a model and controller already, below the list you can find a sample set so you can follow this example.
-
-To add a View that will use a Kendo scaffolded template:
+To add a View that will use a Kendo UI Scaffolding template:
 
 1. Select **Add** > **New Scaffolded Item...** from the context menu of the desired location.
 
@@ -84,19 +73,19 @@ To add a View that will use a Kendo scaffolded template:
 
     ![Add Scaffolded Item](images/add-scaffolded-item.png)
 
-1. Choose item type (for example, **MVC View**) and click **Add**
+1. Choose item type (for example, **MVC View**) and click **Add**.
 
      **Figure 3. Add Scaffolded View**
 
     ![Add Scaffolded View](images/add-scaffolded-view.png)
 
-1. Set the View properties (name, template and model to match the code you already have) and click **Add**. For example, an `Edit` view for the `SampleScaffoldingData` model.
+1. Set the View properties (name, template, and model to match the code you already have) and click **Add**. For example, an `Edit` view for the `SampleScaffoldingData` model.
 
      **Figure 3. Set View Properties**
 
     ![Set View Properties](images/set-scaffolded-view-properties.png)
-    
-After following the steps, you should have something similar to the following in your project. You can also use the sample class and controller to test the behavior with dummy data instead of actual models.
+
+As a result, in your project you have an output that is similar to the following code. You can also use the sample class and controller to test the behavior with dummy data instead of actual models.
 
 ```Model
 using System;
@@ -201,11 +190,10 @@ namespace SampleCoreApp.Controllers
 }
 ```
 
-
 ## See Also
 
-* [Add the Kendo components to Your Project with VS 2017](https://docs.telerik.com/aspnet-core/getting-started/getting-started)
-* [Add the Kendo components to Your Project with the CLI](https://docs.telerik.com/aspnet-core/getting-started/getting-started-cli)
+* [Adding Kendo UI Components to Projects with VS 2017](https://docs.telerik.com/aspnet-core/getting-started/getting-started)
+* [Adding Kendo UI Components to Projects with the CLI](https://docs.telerik.com/aspnet-core/getting-started/getting-started-cli)
 * [ASP.NET Scaffolding](https://github.com/aspnet/Scaffolding)
 * [Default ASP.NET Scaffolding Templates](https://github.com/aspnet/Scaffolding/tree/master/src/VS.Web.CG.Mvc/Templates)
 * [UI for ASP.NET Core Scaffolding Templates](https://github.com/telerik/scaffold-templates-core)

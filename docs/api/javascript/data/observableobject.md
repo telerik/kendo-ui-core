@@ -7,35 +7,33 @@ res_type: api
 
 # kendo.data.ObservableObject
 
-The `kendo.data.ObservableObject` is the building block of [Kendo MVVM](/framework/mvvm/overview). In addition
-the items of the [kendo.data.DataSource](/framework/datasource/overview) are `kendo.data.ObservableObject` instances.
+The `kendo.data.ObservableObject` is the building block of the [Kendo UI MVVM](/framework/mvvm/overview) design pattern. In addition, the items of the [`kendo.data.DataSource`](/framework/datasource/overview) are `kendo.data.ObservableObject` instances.
 
-Inherits from [kendo.Observable](/api/javascript/observable).
+Inherits from [`kendo.Observable`](/api/javascript/observable).
 
 ## Configuration
 
-To create a new `ObservableObject` use its constructor or the `kendo.observable` method.
+To create a new `ObservableObject`, use its constructor or the `kendo.observable` method.
 
-#### Example - creating a new ObservableObject via its constructor
+#### Example - create a new ObservableObject through its constructor
 
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     console.log(observable.name); // outputs "John Doe"
     </script>
 
-#### Example - using the kendo.observable method
+#### Example - use the kendo.observable method
 
     <script>
     var observable = kendo.observable({ name: "John Doe" });
     console.log(observable.name); // outputs "John Doe"
     </script>
 
-> **Important:** Complex fields are automatically wrapped in nested `ObservableObject` instances.
-> Array fields are wrapped as `kendo.data.ObservableArray` objects.
-> The `change` event of the child objects will bubble to the parent `ObservableObject`.
-> Fields with names that are prefixed with an underscore will not be wrapped.
+> * Complex fields are automatically wrapped in nested `ObservableObject` instances. Array fields are wrapped as `kendo.data.ObservableArray` objects.
+> * The `change` event of the child objects will bubble to the parent `ObservableObject`.
+> * Fields with names that are prefixed with an underscore will not be wrapped.
 
-#### Example - creating ObservableObject with complex and array fields
+#### Example - create ObservableObject with complex and array fields
 
     <script>
     var observable = kendo.observable({
@@ -57,7 +55,8 @@ To create a new `ObservableObject` use its constructor or the `kendo.observable`
 
 The unique identifier of the `ObservableObject`.
 
-#### Example - using the uid field
+#### Example - use the uid field
+
     <script>
     var observable = new kendo.data.ObservableObject({ name: "John Doe" });
     console.log(observable.uid); // outputs "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" where "x" is a number or letter
@@ -67,8 +66,7 @@ The unique identifier of the `ObservableObject`.
 
 ### bind
 
-Attaches a handler to an event. Examples and more info can be found in the [bind](/api/javascript/observable#bind) section of the
-kendo.Observable API reference.
+Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable#bind) API reference.
 
 #### Example - subscribe to an event
 
@@ -86,13 +84,13 @@ Gets the value of the specified field.
 
 #### Returns
 
-`Object` the value of the specified field.
+`Object`&mdash;The value of the specified field.
 
 #### Parameters
 
 ##### name `String`
 
-The name of the field whose value is going to be returned.
+The name of the field whose value will be returned.
 
 #### Example - get the value of a field
 
@@ -112,11 +110,11 @@ The name of the field whose value is going to be returned.
 
 ### parent
 
-Gets the parent of the object if such parent exists.
+Gets the parent of the object if such a parent exists.
 
 #### Returns
 
-`kendo.data.ObservableObject` the parent of the object; `undefined` if the object is not nested and doesn't have a parent.
+`kendo.data.ObservableObject`&mdash;The parent of the object. Returns `undefined` if the object is not nested and does not have a parent.
 
 #### Example - get the parent object
 
@@ -135,7 +133,7 @@ Sets the value of the specified field.
 
 ##### name `String`
 
-The name of the field whose value is going to be returned.
+The name of the field whose value will be returned.
 
 ##### value `Number|String|Date|Object`
 
@@ -163,7 +161,7 @@ Creates a plain JavaScript object which contains all fields of the `ObservableOb
 
 #### Returns
 
-`Object` which contains only the fields of the `ObservableObject`.
+`Object`&mdash;Contains only the fields of the `ObservableObject`.
 
 #### Example
 
@@ -177,15 +175,15 @@ Creates a plain JavaScript object which contains all fields of the `ObservableOb
 
 ### change
 
-Fired when a field value is updated via the `set` method.
+Fires when a field value is updated through the `set` method.
 
-> The `change` event is raised **after** the field value is updated. Calling the `get` method from the event handler will return the new value.
+> The `change` event is raised after the field value is updated. Calling the `get` method from the event handler will return the new value.
 
 #### Event Data
 
 ##### e.field `String`
 
-The name of the field which has changed.
+The name of the field which changed.
 
 #### Example - subscribe to the change event
 
@@ -219,10 +217,9 @@ The name of the field which is retrieved.
 
 ### set event
 
-Fired when the `set` method is invoked.
+Fires when the `set` method is invoked.
 
-> The `set` event is raised **before** the field value is updated. Calling the `get` method from the event handler will return the old value. Calling
-`e.preventDefault` will prevent the update of the field and the `change` event will not be raised.
+> The `set` event is raised before the field value is updated. Calling the `get` method from the event handler will return the old value. Calling `e.preventDefault` will prevent the update of the field and the `change` event will not be triggered.
 
 #### Event Data
 

@@ -7,8 +7,7 @@ res_type: api
 
 # kendo.data.ObservableArray
 
-The `ObservableArray` wraps an existing Array object with change tracking capabilities. It is used by [Kendo MVVM](/framework/mvvm/overview) and
-the [kendo.data.DataSource](/framework/datasource/overview). Inherits from [kendo.Observable](/api/javascript/observable).
+The `ObservableArray` wraps an existing `Array` object with change-tracking capabilities. It is used by [Kendo UI MVVM](/framework/mvvm/overview) design pattern and the [`kendo.data.DataSource`](/framework/datasource/overview). Inherits from [`kendo.Observable`](/api/javascript/observable).
 
 ## Configuration
 
@@ -37,9 +36,10 @@ To create a new `ObservableArray`, use its constructor or the `kendo.observable`
     console.log(observable.people instanceof kendo.data.ObservableArray); // outputs "true"
     </script>
 
-> **Important**: The `kendo.data.ObservableArray` wraps its items [kendo.data.ObservableObject](/api/javascript/data/observableobject) instances (unless the items are of primitive type).
+> The `kendo.data.ObservableArray` wraps its items as [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) instances unless the items are of the primitive type.
 
-#### Example - array of complex and primitive Type
+#### Example - an array of complex and primitive type
+
     <script>
     var complex = new kendo.data.ObservableArray([
         { name: "John Doe" },
@@ -58,7 +58,8 @@ To create a new `ObservableArray`, use its constructor or the `kendo.observable`
 
 An unsigned, 32-bit integer that specifies the number of items in an `ObservableArray`.
 
-#### Example - iterating over ObservableArray
+#### Example - iterate over an ObservableArray
+
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
     for (var i = 0; i < array.length; i++) {
@@ -79,7 +80,7 @@ Attaches an event handler for the specified event.
     array.bind("change", function(e) {
         console.log("changed");
     });
-    array.push(3); // raises the "change" event and the handler outputs "changed"
+    array.push(3); // triggers the "change" event and the handler outputs "changed"
     </script>
 
 #### Parameters
@@ -90,21 +91,20 @@ The name of the event.
 
 ##### handler `Function`
 
-The function which will be invoked when the event is raised.
+The function which will be invoked when the event is fired.
 
 ### join
 
-Joins all items of an `ObservableArray` into a string. Equivalent of
-[Array.prototype.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join).
+Joins all items of an `ObservableArray` into a string. An equivalent of [`Array.prototype.join`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join).
 
 #### Parameters
 
 ##### separator `String`
 
-Specifies the string to separate each item of the array. If omitted the array items are
-separated with a comma (`,`)
+Specifies the string to separate each item of the array. If omitted, the array items are separated with a comma (`,`).
 
 #### Example
+
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
     console.log(array.join("-")); // outputs "1-2-3"
@@ -112,11 +112,11 @@ separated with a comma (`,`)
 
 ### parent
 
-Gets the parent of the array if such parent exists.
+Gets the parent of the array if such a parent exists.
 
 #### Returns
 
-`kendo.data.ObservableObject` the parent of the array; `undefined` if the array is not nested and doesn't have a parent.
+`kendo.data.ObservableObject`&mdash;The parent of the array. Returns `undefined` if the array is not nested and does not have a parent.
 
 #### Example - get the parent
 
@@ -130,16 +130,15 @@ Gets the parent of the array if such parent exists.
 
 ### pop
 
-Removes the last item from an array and returns that item. Equivalent of [Array.prototype.pop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop).
+Removes the last item from an array and returns that item. An equivalent of [`Array.prototype.pop`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop).
 
-> **Important**: The `pop` method raises the [change](/api/javascript/data/observablearray/events/change) event. The `action` field of the
-event argument is set to `"remove"`. The `items` field of the event argument is the array that contains the removed item.
+> The `pop` method raises the [`change`](/api/javascript/data/observablearray/events/change) event. The `action` field of the event argument is set to `"remove"`. The `items` field of the event argument is the array that contains the removed item.
 
 #### Returns
 
-`Object` the item which was removed.
+`Object`&mdash;The item which was removed.
 
-#### Example - remove the last item from an `ObservableArray`
+#### Example - remove the last item from an ObservableArray
 
     <script>
     var array = new kendo.data.ObservableArray([{ name: "John Doe" }]);
@@ -150,23 +149,22 @@ event argument is set to `"remove"`. The `items` field of the event argument is 
 
 ### push
 
-Appends the given items to the array and returns the new length of the array. Equivalent of [Array.prototype.push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push).
-The new items are wrapped as `ObservableObject` if they are complex objects.
+Appends the given items to the array and returns the new length of the array. An equivalent of [`Array.prototype.push`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). The new items are wrapped as an `ObservableObject` if they are complex objects.
 
-> **Important**: The `push` method raises the [change](/api/javascript/data/observablearray/events/change) event. The `action` field of the
-event argument is set to `"add"`. The `items` field of the event argument is the array that contains the appended items.
+> The `push` method raises the [`change`](/api/javascript/data/observablearray/events/change) event. The `action` field of the event argument is set to `"add"`. The `items` field of the event argument is the array that contains the appended items.
 
 #### Returns
 
-`Number` the new length of the array.
+`Number`&mdash;The new length of the array.
 
 #### Parameters
 
 ##### item1, ..., itemN
 
-The item(s) to append to the array.
+The item or items that will be appended to the array.
 
-#### Example - append an item to an `ObservableArray`
+#### Example - append an item to an ObservableArray
+
     <script>
     var array = new kendo.data.ObservableArray([{ name: "John Doe" }]);
     var length = array.push({ name: "Jane Doe" });
@@ -175,7 +173,7 @@ The item(s) to append to the array.
     console.log(array[1].get("name")); // outputs "Jane Doe"
     </script>
 
-#### Example - append more than one item to an `ObservableArray`
+#### Example - append more than one item to an ObservableArray
 
     <script>
     var array = new kendo.data.ObservableArray([ 1 ]);
@@ -186,24 +184,21 @@ The item(s) to append to the array.
 
 ### slice
 
-Returns a one-level deep copy of a portion of an array. Equivalent of
-[Array.prototype.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice).
-The result of the `slice` method is **not** an instance of `ObvservableArray`. It is a regular JavaScript Array object.
+Returns a single-level deep copy of a portion of an array. An equivalent of [`Array.prototype.slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice). The result of the `slice` method is not an instance of `ObvservableArray`&mdash;it is a regular JavaScript `Array` object.
 
-> **Important:** The `slice` method does not modify the original `ObservableArray`.
+> The `slice` method does not modify the original `ObservableArray`.
 
 #### Parameters
 
 ##### begin `Number`
 
-Zero-based index at which to begin extraction.
+A zero-based index at which the extraction will start.
 
 ##### end `Number`
 
-Zero-based index at which to end extraction. If `end` is omitted, `slice` extracts to the
-end of the sequence.
+A zero-based index at which the extraction will end. If `end` is omitted, `slice` extracts to the end of the sequence.
 
-#### Example - slice items from an `ObservableArray`
+#### Example - slice items from an ObservableArray
 
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
@@ -213,32 +208,27 @@ end of the sequence.
 
 ### splice
 
-Changes an `ObservableArray`, by adding new items while removing old items. Equivalent of
-[Array.prototype.splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+Changes an `ObservableArray` by adding new items while removing old items. An equivalent of [`Array.prototype.splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice).
 
-> **Important**: The `splice` method raises the [change](/api/javascript/data/observablearray/events/change) event once or twice depending on the change. The `action` field of the
-event argument is set to `"add"` (if items are added) or `"remove` (if items are removed). The `items` field of the event argument is the array that
-contains the appended items or removed items. In the above example the `change` event will be raised two times - first because "baseball" is removed and
-second because "tennis" and "hockey" are added.
+> The `splice` method raises the [`change`](/api/javascript/data/observablearray/events/change) event once or twice depending on the change. The `action` field of the event argument is set to `"add"` (if items are added) or `"remove` (if items are removed). The `items` field of the event argument is the array that contains the appended items or removed items. In the previous example, the `change` event will be triggered two times&mdash;the first one, because `baseball` is removed and, the second one, because `tennis` and `hockey` are added.
 
 #### Returns
 
-`Array` containing the removed items. The result of the `splice` method is **not** an instance of `ObvservableArray`.
+`Array`&mdash;Contains the removed items. The result of the `splice` method is not an instance of `ObvservableArray`.
 
 #### Parameters
 
 ##### index `Number`
 
-Index at which to start changing the array. If negative, will begin that many elements from the end.
+An index at which the changing of the array will start.
 
 ##### howMany `Number`
 
-An integer indicating the number of items to remove. If set to 0, no items are removed. In this case, you should specify at least one new item.
+An integer which indicates the number of the items for removal. If set to `0`, no items will be removed. In this case, you have to specify at least one new item.
 
 ##### item1, ..., itemN *(optional)*
 
-The items to add to the array. If you don't specify any items, `splice` simply removes items from the array.
-
+The items that will be added to the array. If you do not specify any items, `splice` removes the items from the array.
 
 #### Example - splice array items
 
@@ -251,15 +241,13 @@ The items to add to the array. If you don't specify any items, `splice` simply r
 
 ### shift
 
-Removes the first item from an `ObvservableArray` and returns that item. Equivalent of [Array.prototype.shift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift).
+Removes the first item from an `ObvservableArray` and returns that item. An equivalent of [`Array.prototype.shift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift).
 
-> **Important**: The `shift` method raises the `change` event. The `action` field of the
-event argument is set to `"remove"`. The `items` field of the event argument is an array that
-contains the removed item.
+> The `shift` method raises the `change` event. The `action` field of the event argument is set to `"remove"`. The `items` field of the event argument is an array that contains the removed item.
 
 #### Returns
 
-`Object` the item which was removed.
+`Object`&mdash;The item which was removed.
 
 #### Example - remove the first item
 
@@ -272,9 +260,10 @@ contains the removed item.
 
 ### toJSON
 
-Returns a JavaScript Array which represents the contents of the `ObservableArray`.
+Returns a JavaScript `Array` object which represents the contents of the `ObservableArray`.
 
 #### Example - return the raw array representation
+
     <script>
     var people = new kendo.data.ObservableArray([
         { name: "John Doe" },
@@ -286,23 +275,22 @@ Returns a JavaScript Array which represents the contents of the `ObservableArray
 
 ### unshift
 
-Adds one or more items to the beginning of an `ObservableArray` and returns the new length.  Equivalent of [Array.prototype.unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift).
+Adds one or more items to the beginning of an `ObservableArray` and returns the new length. An equivalent of [`Array.prototype.unshift`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift).
 
-> **Important**: The `unshift` method raises the [change](/api/javascript/data/observablearray/events/change) event. The `action` field of the
-event argument is set to `"add"`. The `items` field of the event argument is an array that
-contains the new items.
+> The `unshift` method raises the [`change`](/api/javascript/data/observablearray/events/change) event. The `action` field of the event argument is set to `"add"`. The `items` field of the event argument is an array that contains the new items.
 
 #### Returns
 
-`Number` the new length of the array.
+`Number`&mdash;The new length of the array.
 
 #### Parameters
 
 ##### item1, ..., itemN
 
-The items to add to the beginning of the `ObservableArray`.
+The items that will be added to the beginning of the `ObservableArray`.
 
-#### Example - add items to the beginning of an `ObservableArray`
+#### Example - add items to the beginning of an ObservableArray
+
     <script>
     var array = new kendo.data.ObservableArray([2, 3]);
     var result = array.unshift(0, 1);
@@ -314,13 +302,19 @@ The items to add to the beginning of the `ObservableArray`.
 
 ### change
 
-Fired when the items of the `ObservableArray` change in some way.
+Fires when the items of the `ObservableArray` change.
 
 #### Event Data
 
 ##### e.action `String`
 
-Specifies the type of change. Possible values are: `"add"`- items are added to the `ObservableArray`, `"itemchange"` - a field of an item changed, `"remove"` - items are removed from the `ObservableArray`.
+Specifies the type of change.
+
+The possible values are:
+
+* `"add"`- Items are added to the `ObservableArray`.
+* `"itemchange"` - A field of an item changed.
+* `"remove"` - Items are removed from the `ObservableArray`.
 
 ##### e.index `Number`
 
@@ -332,9 +326,10 @@ The items which were changed.
 
 ##### e.field `String`
 
-The name of the field of an item that changed. Available only when `e.action` is `"itemchange"`.
+The field name of an item that changed. Available only when `e.action` is `"itemchange"`.
 
 #### Example - subscribe to the change event
+
     <script>
     var array = new kendo.data.ObservableArray([1, 2, 3]);
     array.bind("change", function(e) {

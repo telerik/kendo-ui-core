@@ -131,7 +131,7 @@ The date at which the Gantt task starts. The `start` date is mandatory.
 
 If set to `true`, the task has child tasks.
 
-#### Example - create summary task
+#### Example - create a summary task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -180,7 +180,7 @@ The date at which the Gantt task ends.
 
 If set to `true`, the task is expanded and the tasks of its child are visible.
 
-#### Example - get the task expanded field
+#### Example - get the expanded field of a task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -197,7 +197,7 @@ If set to `true`, the task is expanded and the tasks of its child are visible.
 
 The unique identifier of the task.
 
-#### Example - get the task id
+#### Example - get the id of a task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -213,7 +213,7 @@ The unique identifier of the task.
 
 The position of the task relative to its sibling tasks.
 
-#### Example - get the task orderId field
+#### Example - get the orderId field of a task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -230,7 +230,7 @@ The position of the task relative to its sibling tasks.
 
 The `id` of the parent task.
 
-#### Example - get the task parentId field
+#### Example - get the parentId field of a task
 
     <script>
     var parent = new kendo.data.GanttTask({
@@ -254,7 +254,7 @@ The `id` of the parent task.
 
 The completion percentage of the task.
 
-#### Example - get the task percentComplete field
+#### Example - get the percentComplete field of a task
 
     <script>
     var parent = new kendo.data.GanttTask({
@@ -375,7 +375,7 @@ The available options are:
 
 Specifies the validation options which will be used by the [Kendo Validator](/api/framework/validator).
 
-#### Example - define custom Gantt task
+#### Example - define a custom Gantt task
 
     var Task = kendo.data.GanttTask.define({
         id: "id",

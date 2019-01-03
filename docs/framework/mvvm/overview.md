@@ -6,7 +6,7 @@ slug: overview_mvvmpattern_kendoui
 position: 1
 ---
 
-# Kendo MVVM Overview
+# Kendo UI MVVM Overview
 
 [Model View ViewModel (MVVM)](http://en.wikipedia.org/wiki/Model_View_ViewModel) is a design pattern which helps developers separate the Model, which is the data, from the View, which is the user interface (UI). The View-Model part of the MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
 

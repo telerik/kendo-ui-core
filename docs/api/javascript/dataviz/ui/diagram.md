@@ -321,9 +321,11 @@ Specifies if the connections can be dragged.
 
 Specifies if the connections can be removed.
 
-### connectionDefaults.editable.tools `Array`
+### connectionDefaults.editable.tools `Array`|`Boolean`
 
-Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). Predefined tools are:
+Specifies the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar/configuration/items). If set to `false`, no edit tools will be displayed.
+
+Predefined tools are:
 
 * "edit" - The selected item can be edited
 * "delete" - The selected items can be deleted
@@ -4248,9 +4250,11 @@ Specifies if the shapes can be removed.
       });
     </script>
 
-### shapeDefaults.editable.tools `Array`
+### shapeDefaults.editable.tools `Array`|`Boolean`
 
-Specifies the toolbar tools. Provides all options that are supported for [`toolbar.items`](/api/javascript/ui/toolbar/configuration/items). The predefined tools are:
+Specifies the toolbar tools. Provides all options that are supported for [`toolbar.items`](/api/javascript/ui/toolbar/configuration/items). If set to `false`, no edit tools will be displayed.
+
+The predefined tools are:
 
 * "edit" - The selected item can be edited.
 * "delete" - The selected items can be deleted.
@@ -10316,28 +10320,40 @@ The widget instance which fired the event.
 
 #### Example - handling the add event
 
-    <script>
-      var diagramElement = $('<div id="diagram" />').kendoDiagram({
-        shapes: [{
-          id: "id1",
-          type: "Rectangle",
-          x: 0,
-          y: 0,
-          width: 100,
-          height: 100
-        }],
-        add: function(e) {
-          var addedShape = e.shape;
-          // 'this' refers to the widget here
+      <div id="diagram" style="height:600px;"></div>
+      <script>
+        $("#diagram").kendoDiagram({
+          dataSource: {
+            data: [
+              { id: 1, jobTitle: "President" },
+              { id: 2, jobTitle: "VP Finance" }
+            ],
+            schema: {
+              model: {
+                id: "id",
+                fields: {
+                  jobTitle: { type: "string" }
+                }
+              }
+            }
+          },
+          connectionsDataSource: {
+            data: [
+              { id: 1, from: 1, to: 2 }
+            ]
+          },
+          layout: {
+            type: "tree",
+            subtype: "tipover",
+            underneathHorizontalOffset: 140
+          },
+          add: onAdd
+        });
+
+        function onAdd(e){
+          console.log(e.shape.id);
         }
-      });
-
-      $('body').append(diagramElement);
-
-      var diagram = diagramElement.data('kendoDiagram');
-
-      diagram.addShape(new kendo.dataviz.diagram.Shape({x:100, y:100, fill: "red"}))
-    </script>
+      </script>
 
 ### cancel
 
@@ -10360,6 +10376,43 @@ The dataItem to which shape is bound.
 ##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
+
+#### Example - handling the cancel event
+
+      <div id="diagram" style="height:600px;"></div>
+      <script>
+        $("#diagram").kendoDiagram({
+          dataSource: {
+            data: [
+              { id: 1, jobTitle: "President" },
+              { id: 2, jobTitle: "VP Finance" }
+            ],
+            schema: {
+              model: {
+                id: "id",
+                fields: {
+                  jobTitle: { type: "string" }
+                }
+              }
+            }
+          },
+          connectionsDataSource: {
+            data: [
+              { id: 1, from: 1, to: 2 }
+            ]
+          },
+          layout: {
+            type: "tree",
+            subtype: "tipover",
+            underneathHorizontalOffset: 140
+          },
+          cancel: onCancel
+        });
+
+        function onCancel(e){
+          console.log(e.shape.id);
+        }
+      </script>
 
 ### change
 
@@ -10420,6 +10473,24 @@ The widget instance which fired the event.
 
 Fired when the user clicks on a shape or a connection.
 
+#### Event Data
+
+##### e.item `kendo.dataviz.diagram.Shape` | `kendo.dataviz.diagram.Connection`
+
+The clicked shape or connection.
+
+##### meta `Object`
+
+An object with fields indicating which keys(altKey, ctrlKey, shiftKey, metaKey) were pressed.
+
+##### e.point `kendo.dataviz.diagram.Point`
+
+The clicked location.
+
+##### e.sender `kendo.dataviz.ui.Diagram`
+
+The widget instance which fired the event.
+
 #### Example - handling the click event
 
     <div id='diagram'></div>
@@ -10469,24 +10540,6 @@ Fired when the user clicks on a shape or a connection.
       })
     </script>
 
-#### Event Data
-
-##### e.item `kendo.dataviz.diagram.Shape` | `kendo.dataviz.diagram.Connection`
-
-The clicked shape or connection.
-
-##### meta `Object`
-
-An object with fields indicating which keys(altKey, ctrlKey, shiftKey, metaKey) were pressed.
-
-##### e.point `kendo.dataviz.diagram.Point`
-
-The clicked location.
-
-##### e.sender `kendo.dataviz.ui.Diagram`
-
-The widget instance which fired the event.
-
 ### dataBound
 
 Fired when the widget is bound to data from dataDource and connectionsDataSource.
@@ -10496,6 +10549,43 @@ The event handler function context (available via the `this` keyword) will be se
 #### Event Data
 
 ##### e.sender `kendo.dataviz.ui.Diagram`
+
+#### Example - handling the dataBound event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            { id: 1, jobTitle: "President" },
+            { id: 2, jobTitle: "VP Finance" }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                jobTitle: { type: "string" }
+              }
+            }
+          }
+        },
+        connectionsDataSource: {
+          data: [
+            { id: 1, from: 1, to: 2 }
+          ]
+        },
+        layout: {
+          type: "tree",
+          subtype: "tipover",
+          underneathHorizontalOffset: 140
+        },
+        dataBound: onDataBound
+      });
+
+      function onDataBound(e){
+        console.log("Bound a Diagram with " + this.shapes.length + " shapes.");
+      }
+    </script>
 
 ### drag
 
@@ -10518,6 +10608,48 @@ An array with the dragged shapes.
 ##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
+
+#### Example - handling the drag event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        drag: onDrag
+      });
+
+      function onDrag(e){
+        if(e.connections.length > 0){
+          console.log("Dragging connection(s)");
+        }
+        if(e.shapes.length > 0){
+          console.log("Dragging shape(s)");
+        }
+      }
+    </script>
 
 ### dragEnd
 
@@ -10545,6 +10677,48 @@ The widget instance which fired the event.
 
 A function that can be used prevent the default action. If invoked, the dragged elements will be returned to their original state.
 
+#### Example - handling the dragEnd event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        dragEnd: onDragEnd
+      });
+
+      function onDragEnd(e){
+        if(e.connections.length > 0){
+          console.log("Finished dragging " + e.connections.length + " connections");
+        }
+        if(e.shapes.length > 0){
+          console.log("Finished dragging " + e.shapes.length + " shapes");
+        }
+      }
+    </script>
+
 ### dragStart
 
 Fired before starting dragging shapes or connection.
@@ -10571,6 +10745,48 @@ The widget instance which fired the event.
 
 A function that can be used prevent the default action. If invoked, the element(s) will not be dragged.
 
+#### Example - handling the dragStart event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        dragStart: onDragStart
+      });
+
+      function onDragStart(e){
+        if(e.connections.length > 0){
+          console.log("Started dragging " + e.connections.length + " connections");
+        }
+        if(e.shapes.length > 0){
+          console.log("Started dragging " + e.shapes.length + " shapes");
+        }
+      }
+    </script>
+
 ### edit
 
 Fired when the user edits a shape or connection.
@@ -10593,6 +10809,43 @@ The dataItem to which shape is bound.
 
 The widget instance which fired the event.
 
+#### Example - handling the edit event
+
+    <div id="diagram" style="height:600px;"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            { id: 1, jobTitle: "President" },
+            { id: 2, jobTitle: "VP Finance" }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                jobTitle: { type: "string" }
+              }
+            }
+          }
+        },
+        connectionsDataSource: {
+          data: [
+            { id: 1, from: 1, to: 2 }
+          ]
+        },
+        layout: {
+          type: "tree",
+          subtype: "tipover",
+          underneathHorizontalOffset: 140
+        },
+        edit: onEdit
+      });
+
+      function onEdit(e){
+        console.log("Editing shape with model id: " + e.shape.id);
+      }
+    </script>
+
 ### itemBoundsChange
 
 Fired when the location or size of a shape are changed.
@@ -10611,6 +10864,43 @@ The affected shape.
 
 The widget instance which fired the event.
 
+#### Example - handling itemBoundsChange event
+
+    <div id="diagram" style="height:600px;"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            { id: 1, jobTitle: "President" },
+            { id: 2, jobTitle: "VP Finance" }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                jobTitle: { type: "string" }
+              }
+            }
+          }
+        },
+        connectionsDataSource: {
+          data: [
+            { id: 1, from: 1, to: 2 }
+          ]
+        },
+        layout: {
+          type: "tree",
+          subtype: "tipover",
+          underneathHorizontalOffset: 140
+        },
+        itemBoundsChange: onItemBoundsChange
+      });
+
+      function onItemBoundsChange(e){
+        console.log("New item bounds (x, y, width, height): " + e.bounds);
+      }
+    </script>
+
 ### itemRotate
 
 Fired when a shape is rotated.
@@ -10624,6 +10914,48 @@ The rotated shape.
 ##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
+
+#### Example - handling the itemRotate event
+
+    <div id="diagram" style="height:600px;"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            { id: 1, jobTitle: "President" },
+            { id: 2, jobTitle: "VP Finance" }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                jobTitle: { type: "string" }
+              }
+            }
+          }
+        },
+        connectionsDataSource: {
+          data: [
+            { id: 1, from: 1, to: 2 }
+          ]
+        },
+        layout: {
+          type: "tree",
+          subtype: "tipover",
+          underneathHorizontalOffset: 140
+        },
+        shapeDefaults: {
+          content: {
+            template: "#: jobTitle #"
+          }
+        },
+        itemRotate: onItemRotate
+      });
+
+      function onItemRotate(e){
+        console.log("Rotated item: " + e.item + "at angle: " + e.item.options.rotation.angle);
+      }
+    </script>
 
 ### mouseEnter
 
@@ -10643,6 +10975,48 @@ The target shape or connection.
 
 The diagram instance which fired the event.
 
+#### Example - handling the mouseEnter event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        mouseEnter: onMouseEnter
+      });
+
+      function onMouseEnter(e){
+        if(e.item instanceof kendo.dataviz.diagram.Shape){
+          console.log("Hovered shape: " + e.item);
+        }
+        else {
+          console.log("Hovered connection: " + e.item);
+        }
+      }
+    </script>
+
 ### mouseLeave
 
 Fired when the mouse leaves a shape or a connection.
@@ -10661,6 +11035,48 @@ The target shape or connection.
 
 The diagram instance which fired the event.
 
+#### Example - handling the mouseLeave event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        mouseLeave: onMouseLeave
+      });
+
+      function onMouseLeave(e){
+        if(e.item instanceof kendo.dataviz.diagram.Shape){
+          console.log("Mouse left shape: " + e.item);
+        }
+        else {
+          console.log("Mouse left connection: " + e.item);
+        }
+      }
+    </script>
+
 ### pan
 
 Fired when the user pans the diagram.
@@ -10674,6 +11090,43 @@ A point representing the pan distance.
 ##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
+
+#### Example - handling the pan event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        pan: onPan
+      });
+
+      function onPan(e){
+        console.log("Pan distance: " + e.pan);
+      }
+    </script>
 
 ### remove
 
@@ -10697,9 +11150,53 @@ Prevents the remove action. If called, the element will not be removed to the di
 
 The widget instance which fired the event.
 
+#### Example - handling the remove event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        remove: onRemove
+      });
+
+      function onRemove(e){
+        if(e.shape){
+          debugger
+          console.log("Removing shape with text: " + e.shape.options.content.text);
+        }
+
+        if(e.connection){
+          console.log("Removing connection with id: " + e.connection.id);
+        }
+      }
+    </script>
+
 ### save
 
-Fired when the user saved a shape or a connection.
+Fired when the user saves a shape or a connection.
 
 #### Event Data
 
@@ -10718,6 +11215,62 @@ The dataItem to which shape is bound.
 ##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
+
+#### Example - handling the save event
+
+    <div id="diagram" style="height:600px;"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            { id: 1, jobTitle: "President" },
+            { id: 2, jobTitle: "VP Finance" }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                jobTitle: { type: "string" }
+              }
+            }
+          }
+        },
+        connectionsDataSource: {
+          data: [
+            { id: 1, from: 1, to: 2 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                from: { type: "number" },
+                to: { type: "number" }
+              }
+            }
+          }
+        },
+        layout: {
+          type: "tree",
+          subtype: "tipover",
+          underneathHorizontalOffset: 140
+        },
+        shapeDefaults: {
+          content: {
+            template: "#: jobTitle #"
+          }
+        },
+        save: onSave
+      });
+
+      function onSave(e){
+        if(e.shape){
+          console.log("Saved shape with id: " + e.shape.id);
+        }
+        if(e.connection){
+          console.log("Saved connection with id: " + e.connection.id);
+        }
+      }
+    </script>
 
 ### select
 
@@ -10803,6 +11356,57 @@ The jQuery object that represents the clicked toolbar element.
 
 The widget instance which fired the event.
 
+#### Example - handling the toolBarClick event
+
+    <div id="diagram" style="height:600px;"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            { id: 1, jobTitle: "President" },
+            { id: 2, jobTitle: "VP Finance" }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                jobTitle: { type: "string" }
+              }
+            }
+          }
+        },
+        connectionsDataSource: {
+          data: [
+            { id: 1, from: 1, to: 2 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                from: { type: "number" },
+                to: { type: "number" }
+              }
+            }
+          }
+        },
+        layout: {
+          type: "tree",
+          subtype: "tipover",
+          underneathHorizontalOffset: 140
+        },
+        shapeDefaults: {
+          content: {
+            template: "#: jobTitle #"
+          }
+        },
+        toolBarClick: onToolBarClick
+      });
+
+      function onToolBarClick(e){
+        console.log("Selected action '" + e.action + "' for shapes: " + e.shapes);
+      }
+    </script>
+
 ### zoomEnd
 
 Fired when the user changes the diagram zoom level.
@@ -10821,6 +11425,43 @@ The widget instance which fired the event.
 
 The current zoom level.
 
+#### Example - handling the zoomEnd event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        zoomEnd: onZoomEnd
+      });
+
+      function onZoomEnd(e){
+        console.log("Zoom level changed to: " + e.zoom);
+      }
+    </script>
+
 ### zoomStart
 
 Fired when the user starts changing the diagram zoom level.
@@ -10838,3 +11479,40 @@ The widget instance which fired the event.
 ##### e.zoom `Number`
 
 The current zoom level.
+
+#### Example - handling the zoomStart event
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 160,
+            y: 20
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2"
+          }
+        ],
+        zoomStart: onZoomStart
+      });
+
+      function onZoomStart(e){
+        console.log("Zoom level changed to: " + e.zoom);
+      }
+    </script>

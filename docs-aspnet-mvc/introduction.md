@@ -6,7 +6,7 @@ slug: overview_aspnetmvc
 position: 1
 ---
 
-# Progress<sup>®</sup>Telerik<sup>®</sup> UI for ASP.NET MVC
+# Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC
 
 [Telerik UI for ASP.NET MVC](http://www.telerik.com/aspnet-mvc) is a set of server-side wrappers that allows using the [Kendo UI widgets](../kendo-ui/introduction) from C# or VB.NET code.
 

@@ -1,6 +1,6 @@
 ---
 title: Fundamentals
-page_title: Fundamentals | Progress Telerik UI for ASP.NET MVC
+page_title: Fundamentals - Getting Started
 description: "Download, install, and configure Progress Telerik UI for ASP.NET MVC."
 slug: fundamentals_aspnetmvc
 previous_url: /fundamentals

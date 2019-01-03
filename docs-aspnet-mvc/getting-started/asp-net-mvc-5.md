@@ -1,6 +1,6 @@
 ---
 title: Creating Applications
-page_title: Creating Applications | Progress Telerik UI for ASP.NET MVC
+page_title: Creating Applications - Getting Started 
 description: "Use Progress Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
 previous_url: /aspnetmvc-apps/asp-net-mvc-5, /asp-net-mvc-5
 slug: aspnetmvc5_aspnetmvc

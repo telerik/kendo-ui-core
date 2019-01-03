@@ -23,15 +23,6 @@ Kendo UI is a comprehensive framework which comes with a library of 70+ UI widge
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
 * [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui)
 
-#### Progress<sup>®</sup> Kendo UI Wrappers for React
-
-[Kendo UI Wrappers for React](http://docs.telerik.com/kendo-ui-wrappers-react/introduction) are part of the Kendo UI suite. They provide an easy way to use and configure Kendo UI widgets in your React application.
-
-* [Browser Support]({% slug wbe_browserand_operating_system_support %})
-* [Get a License](http://www.telerik.com/purchase/kendo-ui)
-* [License Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui)
-* [Documentation](http://docs.telerik.com/kendo-ui-wrappers-react/introduction)
-
 #### Progress<sup>®</sup> Kendo UI Wrappers for Vue
 
 [Kendo UI Wrappers for Vue](http://docs.telerik.com/kendo-ui-wrappers-vue/introduction) are part of the Kendo UI suite. They provide an easy way to use and configure Kendo UI widgets in your Vue.js application.

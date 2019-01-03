@@ -34,6 +34,14 @@ JSZip is part of the Kendo UI distribution and is also available via the Kendo U
 > * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.
 > * As of the Kendo UI R3 2017 release, the Excel Export feature supports JSZip 2.* and 3.* versions. Kendo UI releases prior to R2 2017 SP1 provided Excel export of JSZip 2.* versions only.
 
+When using JSZip in scenario where packages are loaded from `npm`, the JSZip object should be explicitly assigned to a field in the `window` object. The following are the steps to properly load JSZip in the application:
+
+1. run `npm install jszip --save` to install the library and save it to the package.json file;
+
+1. import the library in the module, where it should be used with `import JSZip from 'jszip'`
+
+1. assign the library object to a field of the `window`: `window.JSZip = JSZip`
+
 ### Compatibility with Other Libraries
 
 #### GlobalizeJS

@@ -1,8 +1,8 @@
 ---
-title: Add Scroll Shadow in Scrollable Kendo UI Grid
-description: An example on how to add top and bottom shadow on scroll of the Kendo UI Grid.
+title: Add Scroll Shadow in Scrollable Grid
+description: An example on how to add top and bottom shadows on scroll to a Kendo UI Grid.
 type: how-to
-page_title: Add Top and Bottom Scroll Shadow | Kendo UI Grid
+page_title: Add Top and Bottom Scroll Shadows | Kendo UI Grid
 slug: grid-add-scroll-shadow
 tags: grid, shadow
 ticketid: 1365055
@@ -24,27 +24,25 @@ res_type: kb
 
 ## Description
 
-How can I add top and bottom scroll shadow which disappears when scrolled to top or bottom in Kendo UI Grid?
+How can I add top and bottom scroll shadows which disappear when the Grid is scrolled to top or bottom?
 
 ## Solution
 
-1. Handle the  [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event - in the event handler [`wrap`](https://api.jquery.com/wrap/) the `.k-grid-element` in a div and add classes to the div depending on the scroll position and the height of the scrollable element in the following way:
-	1. If the height of the scrollable element is bigger than the fixed height of the table - add bottom shadow.
-	1. When the element is scrolled down - add top shadow.
-	1. When the element is scrolled to the very bottom - remove bottom shadow.
-	1. When the element is scrolled to the very top - remove top shadow.
-
-1. Add inline CSS for the top and botton shadows styling.
-	* Color can be changed by modifying the `rgba` value.
-	* Height of the shadows can be changed by editing the height CSS property.
-
+1. Handle the  [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event&mdash;in the event handler, [`wrap`](https://api.jquery.com/wrap/) the `.k-grid-element` in a `div` element and, depending on the scroll position and the height of the scrollable element, add classes to the `div`:
+	1. If the height of the scrollable element is bigger than the fixed height of the table, add a bottom shadow.
+	1. When the element is scrolled down, add a top shadow.
+	1. When the element is scrolled to the very bottom, remove the bottom shadow.
+	1. When the element is scrolled to the very top, remove the top shadow.
+1. Add inline CSS for styling the top and bottom shadows.
+	* To change the color, modify the `rgba` value.
+	* To change the height of the shadows, edit the `height` CSS property.
 
 ```dojo
   <style>
     .box-shadow-wrapper {
         position: relative;
     }
-    
+
     .box-shadow-wrapper table {
         position: static;
     }
@@ -145,4 +143,3 @@ How can I add top and bottom scroll shadow which disappears when scrolled to top
   </div>
 
 ```
-

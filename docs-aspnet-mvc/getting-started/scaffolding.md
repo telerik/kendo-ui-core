@@ -1,6 +1,6 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Progress Telerik UI for ASP.NET MVC
+page_title: Scaffolding - Getting Started
 description: "Learn how to use the Kendo UI Scaffolder extension."
 slug: scaffolding_aspnetmvc
 previous_url: /scaffolding

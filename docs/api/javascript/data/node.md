@@ -7,16 +7,15 @@ res_type: api
 
 # kendo.data.Node
 
-The `Node` is an extended type of [Model](/api/framework/model) that works with hierarchical data. The [HierarchicalDataSource](/api/framework/hierarchicaldatasource) contains instances of the `Node` type.
+The `Node` is an extended type of a [`Model`](/api/framework/model) that works with hierarchical data. The [HierarchicalDataSource](/api/framework/hierarchicaldatasource) contains instances of the `Node` type.
 
 ## Fields
 
-See the [Model fields](/api/framework/model#fields) for all inherited fields.
+See the [`Model` fields](/api/framework/model#fields) for all inherited fields.
 
 ### children
 
-The child `kendo.data.HierarchicalDataSource` of the node. This field is initialized lazily, if the `hasChildren` field is set,
-or when the [load](/api/javascript/data/node/methods/load) or [append](/api/javascript/data/node/methods/append) methods have been called.
+The child `kendo.data.HierarchicalDataSource` of the node. This field is initialized lazily if the `hasChildren` field is set or when the [`load`](/api/javascript/data/node/methods/load) or [`append`](/api/javascript/data/node/methods/append) methods were called.
 
 #### Example - get the child nodes
 
@@ -38,17 +37,17 @@ or when the [load](/api/javascript/data/node/methods/load) or [append](/api/java
 
 ## Methods
 
-See the [Model methods](/api/framework/model#methods) for all inherited methods.
+See the [`Model` methods](/api/framework/model#methods) for all inherited methods.
 
 ### append
 
-Appends a new item to the children data source, and initializes it if necessary.
+Appends a new item to the children data source and initializes it if necessary.
 
 #### Parameters
 
 ##### model `Object|kendo.data.Node`
 
-The data for the new item
+The data for the new item.
 
 #### Example - append child nodes
 
@@ -66,7 +65,7 @@ Gets the current nesting level of the node within the data source.
 
 #### Returns
 
-`Number` the zero based level of the node.
+`Number`&mdash;The zero-based level of the node.
 
 #### Example - get the level of the node
 
@@ -92,7 +91,7 @@ Gets the current nesting level of the node within the data source.
 
 ### load
 
-Loads the child nodes in the child data source, supplying the `id` of the Node to the request.
+Loads the child nodes in the child data source and supplies the `id` of the `Node` to the request.
 
 #### Example - load the child nodes
 
@@ -119,9 +118,9 @@ Loads the child nodes in the child data source, supplying the `id` of the Node t
 
 ### loaded
 
-Gets or sets the loaded flag of the Node. Setting the loaded flag to `false` allows reloading of child items.
+Gets or sets the loaded flag of the `Node`. Setting the loaded flag to `false` allows the reloading of child items.
 
-#### Example - reloading child nodes
+#### Example - reload child nodes
 
     <script>
     var dataSource = new kendo.data.HierarchicalDataSource({
@@ -153,7 +152,7 @@ Gets the parent node.
 
 #### Returns
 
-`kendo.data.Node` the parent of the node; `null` if the node is a root node or doesn't have a parent.
+`kendo.data.Node`&mdash;The parent of the node. Returns `null` if the node is a root node or does not have a parent.
 
 #### Example - get the parent node
 
@@ -179,4 +178,4 @@ Gets the parent node.
 
 ## Events
 
-See the [Model events](/api/framework/model#events) for all inherited events.
+See the [`Model` events](/api/framework/model#events) for all inherited events.
