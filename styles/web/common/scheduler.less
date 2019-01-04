@@ -1,4 +1,11 @@
 // Scheduler
+.k-scheduler {
+
+    .k-link {
+        color: inherit;
+    }
+
+}
 
 .k-scheduler-toolbar,
 .k-scheduler-footer
@@ -235,7 +242,7 @@
 
 
 
-.k-scheduler-dayview div:not(.k-scheduler-header) .k-today:not(.k-nonwork-hour),
+.k-scheduler-dayview div:not(.k-scheduler-header) .k-today:not(.k-nonwork-hour):not(.k-state-selected),
 .k-scheduler-timelineview .k-today:not(.k-nonwork-hour) {
     background-color: transparent;
 }

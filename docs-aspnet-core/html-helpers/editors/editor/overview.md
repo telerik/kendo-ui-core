@@ -21,41 +21,18 @@ The following example demonstrates how to define the Editor by using the Editor 
 
 ###### Example
 
-```Razor
+```
 @(Html.Kendo().Editor()
     .Name("editor")
-    .HtmlAttributes(new { style = "height:440px" })
-    .Resizable(resizable => resizable.Content(true).Toolbar(true))
     .Value(@<text>
         <p>
-            Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br />
-            In this version, the Editor provides the core HTML editing engine, which includes basic text formatting, hyperlinks, lists,
-            and image handling. The widget <strong>outputs identical HTML</strong> across all major browsers, follows
-            accessibility standards and provides API for content manipulation.
+            Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.
         </p>
-        <p>Features include:</p>
-        <ul>
-            <li>Text formatting &amp; alignment</li>
-            <li>Bulleted and numbered lists</li>
-            <li>Hyperlink and image dialogs</li>
-            <li>Cross-browser support</li>
-            <li>Identical HTML output across browsers</li>
-            <li>Gracefully degrades to a <code>textarea</code> when JavaScript is turned off</li>
-        </ul>
     </text>)
 )
 ```
-```Controller
-    public class EditorController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
-    }
-```
 
-## Configuration
+## Basic Configuration
 
 The following example demonstrates the basic configuration of the Editor HtmlHelper and how to get the Editor instance.
 
@@ -64,53 +41,8 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
 ```
 @(Html.Kendo().Editor()
     .Name("editor")
+    .Encoded(true)
     .HtmlAttributes(new { style = "width: 100%;height:440px" })
-    .ImageBrowser(imageBrowser => imageBrowser
-        .Image("~/Content/UserFiles/Images/{0}")
-        .Read("Read", "ImageBrowser")
-        .Create("Create", "ImageBrowser")
-        .Destroy("Destroy", "ImageBrowser")
-        .Upload("Upload", "ImageBrowser")
-        .Thumbnail("Thumbnail", "ImageBrowser")
-    )
-    .FileBrowser(fileBrowser => fileBrowser
-        .File("~/Content/UserFiles/Images/{0}")
-        .Read("Read", "FileBrowser")
-        .Create("Create", "FileBrowser")
-        .Destroy("Destroy", "FileBrowser")
-        .Upload("Upload", "FileBrowser")
-    )
-    .Pdf(pdf => pdf
-        .Margin(20, 20, 20, 20)
-        .PaperSize("A4")
-        .ProxyURL(Url.Action("Pdf_Export_Save", "Editor"))
-    )
-    .Tools(tools => tools
-        .Clear()
-        .Bold().Italic().Underline().Strikethrough()
-        .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
-        .InsertUnorderedList().InsertOrderedList()
-        .Outdent().Indent()
-        .CreateLink().Unlink()
-        .InsertImage()
-        .InsertFile()
-        .SubScript()
-        .SuperScript()
-        .TableEditing()
-        .ViewHtml()
-        .Formatting()
-        .CleanFormatting()
-        .FontName()
-        .FontSize()
-        .ForeColor()
-        .BackColor()
-        .Pdf()
-        .Print()
-        .Snippets(snippets => snippets
-            .Add("Signature", "<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>")
-            .Add("Kendo online demos", " <a href='http://demos.telerik.com/kendo-ui'>Kendo online demos</a> ")
-        )
-    )
     .Value(@<text>
         <p>
             Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.
@@ -118,12 +50,73 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
     </text>)
 )
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $(function() {
         //Notice that the Name() of the Editor is used to get its client-side instance.
         var editor = $("#editor").data("kendoEditor");
     });
-    </script>
+</script>
+```
+
+## Functionality and Features
+
+* [Modes of operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
+* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
+* [Pasting content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
+* [Serialize / deserialize content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
+* [Image browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
+* [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
+* [Styling content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+
+## Events
+
+The following example demonstrates Editor HTML helper events, which could be handled on the client-side.
+
+###### Example
+
+```
+@(Html.Kendo().Editor()
+    .Name("editor")
+    .Events(e => e
+        .Change("onChange")
+        .Execute("onExecute")
+        .Keydown("onKeydown")
+        .Keyup("onKeyup")
+        .Paste("onPaste")
+        .PdfExport("onPdfExport")
+        .Select("onSelect")
+    )
+)
+
+<script>
+    function onChange(e) {
+        kendoConsole.log("value change");
+    }
+
+    function onExecute(e) {
+        kendoConsole.log("command :: " + e.name);
+    }
+
+    function onKeydown(e) {
+        kendoConsole.log("key down");
+    }
+
+    function onKeyup(e) {
+        kendoConsole.log("key up");
+    }
+
+    function onPaste(e) {
+        kendoConsole.log("paste :: " + kendo.htmlEncode(e.html));
+    }
+
+    function onPdfExport(e) {
+        kendoConsole.log("PDF export");
+    }
+
+    function onSelect(e) {
+        kendoConsole.log("selection  change");
+    }
+</script>
 ```
 
 ## See Also
