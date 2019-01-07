@@ -428,7 +428,9 @@ Specifies whether the window should show a modal overlay over the page.
 
 ### modal.preventScroll `Boolean` *(default: false)*
 
-Specifies whether the document should stop scrolling when modal dialog is window. Closing it should restore the initial document overflow. Note that it's not supported to have multiple windows with different `preventScroll` setting.
+Specifies whether the document should stop scrolling when modal dialog is opened. Closing it should restore the initial document overflow. This setting will modify the overflow rule of the document, and thus cannot be used together with the [`containment` setting](/api/javascript/ui/window/configuration/draggable.containment).
+
+Note that it's not supported to have multiple windows with different `preventScroll` setting.
 
 #### Example
 

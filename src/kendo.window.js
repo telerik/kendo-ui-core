@@ -732,7 +732,7 @@
                     .toggle(visible)
                     .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
 
-                if (this.options.modal.preventScroll) {
+                if (this.options.modal.preventScroll && !this.containment) {
                     this._stopDocumentScrolling();
                 }
 
@@ -1241,19 +1241,21 @@
                 that.options.width = restoreOptions.width;
                 that.options.height = restoreOptions.height;
 
-                that._enableDocumentScrolling();
-
-                if (this._containerScrollTop && this._containerScrollTop > 0) {
-                    container.scrollTop(this._containerScrollTop);
+                if (!that.options.modal.preventScroll) {
+                    that._enableDocumentScrolling();
                 }
-                if (this._containerScrollLeft && this._containerScrollLeft > 0) {
-                    container.scrollLeft(this._containerScrollLeft);
+
+                if (that._containerScrollTop && that._containerScrollTop > 0) {
+                    container.scrollTop(that._containerScrollTop);
+                }
+                if (that._containerScrollLeft && that._containerScrollLeft > 0) {
+                    container.scrollLeft(that._containerScrollLeft);
                 }
 
                 options.isMaximized = options.isMinimized = false;
 
-                this.wrapper.removeAttr("tabindex");
-                this.wrapper.removeAttr("aria-labelled-by");
+                that.wrapper.removeAttr("tabindex");
+                that.wrapper.removeAttr("aria-labelled-by");
 
                 that.resize();
 

@@ -11,41 +11,41 @@
 @button-gradient: @widget-gradient;
 @button-shadow: false;
 @button-hover-text-color: @normal-text-color;
-@button-hover-background-color: @hover-background;
+@button-hover-background-color: lighten(@hover-background, 5%);
 @button-hover-border-color: @hover-background;
-@button-hover-gradient: @hover-gradient;
+@button-hover-gradient: none;
 @button-hover-shadow: false;
 @button-active-background: @accent;
 @button-active-text-color: @selected-text-color;
-@button-active-border-color: @accent;
-@button-active-gradient: @selected-gradient;
+@button-active-border-color: @hover-background;
+@button-active-gradient: none;
 @button-active-shadow: false;
-@button-focused-border-color: lighten(@background, 26%);
-@button-focused-shadow: inset 0 0 3px 1px #fff;
-@button-focused-active-shadow: inset 0 0 3px 1px #fff;
+@button-focused-border-color: @normal-text-color;
+@button-focused-shadow: 0 0 3px 1px #fff;
+@button-focused-active-shadow: 0 0 3px 1px #fff;
 // Primary button
 @primary-text-color: @normal-text-color;
-@primary-background-color: darken(@hover-background, 6%);
-@primary-border-color: desaturate(@hover-background, 2%);
-@primary-gradient: @selected-gradient;
+@primary-background-color: @hover-background;
+@primary-border-color: @hover-background;
+@primary-gradient: none;
 @primary-shadow: false;
 @primary-hover-text-color: @normal-text-color;
-@primary-hover-background-color: desaturate(@hover-background, 2%);
-@primary-hover-border-color: desaturate(@hover-background, 2%);
-@primary-hover-gradient: @hover-gradient;
+@primary-hover-background-color: lighten(@hover-background, 5%);
+@primary-hover-border-color: @hover-background;
+@primary-hover-gradient: none;
 @primary-hover-shadow: false;
 @primary-active-text-color: @normal-text-color;
 @primary-active-background-color: darken(@hover-background, 6%);
-@primary-active-border-color: desaturate(@hover-background, 2%);
-@primary-active-gradient: @selected-gradient;
+@primary-active-border-color: @hover-background;
+@primary-active-gradient: none;
 @primary-active-shadow: false;
 @primary-focused-border-color: @normal-text-color;
 @primary-focused-shadow: 0 0 3px 0 #fff;
 @primary-focused-active-shadow: @primary-focused-shadow;
 @primary-disabled-text-color: darken(@normal-text-color, 29%);
-@primary-disabled-background-color: darken(@hover-background, 6%);
-@primary-disabled-border-color: desaturate(@hover-background, 2%);
-@primary-disabled-gradient: @selected-gradient;
+@primary-disabled-background-color: @primary-background-color;
+@primary-disabled-border-color: @primary-border-color;
+@primary-disabled-gradient: none;
 // Input
 @input-text: @normal-text-color;
 @input-bg: @background;
@@ -1021,9 +1021,8 @@ div.k-filebrowser-dropzone em
     color: @error-text-color;
 }
 
-.k-state-disabled
-{
-    opacity:.7;
+.k-state-disabled {
+    opacity: .6;
 }
 
 .k-tile-empty.k-state-selected,

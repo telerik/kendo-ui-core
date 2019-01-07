@@ -2734,6 +2734,10 @@ declare namespace kendo.ui {
         promptInput?: string;
     }
 
+    interface DialogModal {
+        preventScroll?: string;
+    }
+
     interface DialogOptions {
         name?: string;
         actions?: DialogAction[];
@@ -2747,10 +2751,11 @@ declare namespace kendo.ui {
         messages?: DialogMessages;
         minHeight?: number;
         minWidth?: number;
-        modal?: boolean;
+        modal?: boolean | DialogModal;
         title?: string|boolean;
         visible?: boolean;
         width?: number|string;
+        size?: string;
         close?(e: DialogCloseEvent): void;
         hide?(e: DialogEvent): void;
         initOpen?(e: DialogEvent): void;
@@ -7272,6 +7277,52 @@ declare namespace kendo.ui {
     }
 
 
+    class Switch extends kendo.ui.Widget {
+
+        static fn: Switch;
+
+        options: SwitchOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Switch;
+
+        constructor(element: Element, options?: SwitchOptions);
+
+        check(): boolean;
+        check(check: boolean): void;
+        destroy(): void;
+        enable(enable: boolean): void;
+        toggle(): void;
+        setOptions(options: any): void;
+    }
+
+    interface SwitchOptions {
+        name?: string;
+        checked?: boolean;
+        enabled?: boolean;
+        readonly?: boolean;
+        width?: number|string;
+        change?(e: SwitchChangeEvent): void;
+    }
+
+    interface SwitchMessages {
+        checked?: string;
+        unchecked?: string;
+    }
+
+    interface SwitchEvent {
+        sender: Switch;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface SwitchChangeEvent extends SwitchEvent {
+        checked?: any;
+    }
+
     class TabStrip extends kendo.ui.Widget {
 
         static fn: TabStrip;
@@ -8744,6 +8795,10 @@ declare namespace kendo.ui {
         left?: number|string;
     }
 
+    interface WindowModal {
+        preventScroll?: boolean;
+    }
+
     interface WindowRefreshOptions {
         url?: string;
         cache?: boolean;
@@ -8773,7 +8828,7 @@ declare namespace kendo.ui {
         maxWidth?: number;
         minHeight?: number;
         minWidth?: number;
-        modal?: boolean;
+        modal?: boolean | WindowModal;
         pinned?: boolean;
         position?: WindowPosition;
         resizable?: boolean;
@@ -8781,6 +8836,7 @@ declare namespace kendo.ui {
         title?: string|boolean;
         visible?: boolean;
         width?: number|string;
+        size?: string;
         activate?(e: WindowEvent): void;
         close?(e: WindowCloseEvent): void;
         deactivate?(e: WindowEvent): void;

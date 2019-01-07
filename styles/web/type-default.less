@@ -7,45 +7,47 @@
 //Button
 @button-text-color: @normal-text-color;
 @button-background-color: saturate(@base, 1%);
-@button-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
+@button-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 18%), 0.5);
 @button-gradient: @widget-gradient;
 @button-shadow: false;
 @button-hover-text-color: @hover-text-color;
-@button-hover-background-color: @hover-background;
+@button-hover-background-color: contrast(@background, lighten(@hover-background, 5%), darken(@hover-background, 8%), 0.5);
 @button-hover-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
 @button-hover-gradient: @hover-gradient;
 @button-hover-shadow: false;
-@button-active-background: @accent;
-@button-active-text-color: @selected-text-color;
-@button-active-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 13%), 0.5);
+@button-active-background: contrast(@background, darken(@accent, 2%), darken(@selected-background, 2%), 0.5);
+@button-active-text-color: contrast(@button-active-background, @normal-text-color, @background, 0.4);
+@button-active-border-color: @button-active-background;
 @button-active-gradient: @selected-gradient;
 @button-active-shadow: false;
-@button-focused-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
-@button-focused-shadow: inset 0 0 3px 1px contrast(@base, @hover-border-color, lighten(@hover-border-color, 20%), 0.5);
-@button-focused-active-shadow: inset 0 0 3px 1px darken(@selected-border-color, 10%);
+@button-focused-border-color: contrast(@accent, lighten(@accent, 1%), darken(@accent, 4%), 0.5);
+@button-focused-shadow: 0 0 2px 1px contrast(@base, @accent, lighten(@accent, 20%), 0.5);
+@button-focused-active-shadow:  @button-focused-shadow;
+
 // Primary button
-@primary-text-color: lighten(@selected-text-color, 12%);
-@primary-background-color: lighten(@accent, 7%);
-@primary-border-color: contrast(@base, lighten(@accent, 3%), darken(@accent, 3%), 0.5);
-@primary-gradient: @selected-gradient;
+@primary-color-desatured: desaturate(@accent, 13%);
+@primary-text-color: contrast(@accent, @normal-text-color, @background, 0.4);
+@primary-background-color: @accent;
+@primary-border-color: contrast(@base, lighten(@primary-color-desatured, 3%), darken(@primary-color-desatured, 3%), 0.5);
+@primary-gradient: @widget-gradient;
 @primary-shadow: false;
-@primary-hover-text-color: lighten(@selected-text-color, 12%);
-@primary-hover-background-color: lighten(@accent, 3%);
-@primary-hover-border-color: contrast(@base, lighten(@hover-background, 1%), darken(@hover-background, 20%), 0.5);
+@primary-hover-text-color: @primary-text-color;
+@primary-hover-background-color: contrast(@background, lighten(@accent, 5%), darken(@accent, 5%), 0.5);
+@primary-hover-border-color: @primary-border-color;
 @primary-hover-gradient: @hover-gradient;
 @primary-hover-shadow: false;
-@primary-active-text-color: desaturate(@selected-text-color, 9%);
-@primary-active-background-color: desaturate(@accent, 1%);
-@primary-active-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 13%), 0.5);
+@primary-active-text-color: contrast(@primary-active-background-color, @normal-text-color, @background, 0.4);
+@primary-active-background-color: contrast(@background, darken(@accent, 2%), darken(@selected-background, 2%), 0.5);
+@primary-active-border-color: @primary-active-background-color;
 @primary-active-gradient: @selected-gradient;
 @primary-active-shadow: false;
-@primary-focused-border-color: darken(@primary-background-color, 10%);
-@primary-focused-shadow: 0 0 3px 0 @accent;
+@primary-focused-border-color: darken(@primary-hover-background-color, 2%);
+@primary-focused-shadow: 0 0 2px 1px contrast(@background, @accent, @selected-background, 0.5);
 @primary-focused-active-shadow: @primary-focused-shadow;
 @primary-disabled-text-color: darken(@selected-text-color, 10%);
-@primary-disabled-background-color: lighten(@accent, 8%);
-@primary-disabled-border-color: @primary-disabled-text-color;
-@primary-disabled-gradient: @selected-gradient;
+@primary-disabled-background-color: @primary-background-color;
+@primary-disabled-border-color: @primary-border-color;
+@primary-disabled-gradient: @widget-gradient;
 // Input
 @input-text: @normal-text-color;
 @input-bg: contrast(@normal-text-color, @base, #fff, 0.5);
@@ -1036,9 +1038,8 @@ div.k-filebrowser-dropzone em
     color: @error-text-color;
 }
 
-.k-state-disabled
-{
-    opacity:.7;
+.k-state-disabled {
+    opacity: .6;
 }
 
 .k-tile-empty.k-state-selected,

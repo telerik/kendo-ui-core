@@ -8,7 +8,7 @@
     background-repeat: repeat-x;
     background-position: 0 center;
     font: inherit;
-    line-height: 1.72em;
+    line-height: @button-line-height;
     text-align: center;
     text-decoration: none;
     display: inline-flex;
@@ -94,14 +94,14 @@ input[type="reset"].k-button-expand {
 
 // TODO improve elastic behavior
 .k-button-icon {
-    height: ~"calc(1.72em + (2*@{button-padding-y}) + 2px)"; // proper vertical alignment for elastic behavior
+    height: ~"calc(@{button-line-height}em + (2*@{button-padding-y}) + 2px)"; // proper vertical alignment for elastic behavior
 }
 .k-split-button-arrow {
     display: inline-block; // fix height
 }
 .k-button-icon,
 .k-split-button-arrow {
-    width: ~"calc(1.72em + (2*@{button-padding-y}) + 2px)";
+    width: ~"calc(@{button-line-height}em + (2*@{button-padding-y}) + 2px)";
     padding: @button-padding-y calc(@button-padding-x/2);
 }
 .k-overflow-group .k-button-icon {

@@ -8,6 +8,10 @@
     .composite-background(@button-gradient);
     .box-shadow(@button-shadow);
 
+    &.k-state-default {
+        border-color: @button-border-color;
+    }
+
     // Hover state
     &:hover,
     &.k-state-hover {
@@ -24,10 +28,8 @@
         color: @button-active-text-color;
         background-color: @button-active-background;
         border-color: @button-active-border-color;
-        box-shadow: none;
         .composite-background(@button-active-gradient);
         .box-shadow(@button-active-shadow);
-        .box-shadow(none);
     }
     &.k-state-active {
         &:hover {
@@ -48,9 +50,9 @@
     .k-state-disabled &:hover,
     &.k-state-disabled,
     &.k-state-disabled:hover {
-        color: @disabled-text-color;
-        border-color: @disabled-border-color;
-        background-color: @disabled-background-color;
+        color: @button-text-color;
+        border-color: @button-border-color;
+        background-color: @button-background-color;
         .composite-background(@disabled-gradient);
     }
     &[disabled],
@@ -80,6 +82,10 @@
     background-color: @primary-background-color;
     .composite-background(@primary-gradient);
     .box-shadow(@primary-shadow);
+
+    &.k-state-default {
+        border-color: @primary-border-color;
+    }
 
     // Hover state
     &:hover,
@@ -112,11 +118,11 @@
     .k-state-disabled &:hover,
     &.k-state-disabled,
     &.k-state-disabled:hover {
-        color: @primary-disabled-text-color;
-        border-color: @primary-disabled-border-color;
-        background-color: @primary-disabled-background-color;
+        color: @primary-text-color;
+        border-color: @primary-border-color;
+        background-color: @primary-background-color;
         box-shadow: none;
-        .composite-background(@primary-disabled-gradient);
+        .composite-background(@primary-gradient);
     }
     &[disabled],
     &.k-state-disabled {
@@ -125,7 +131,10 @@
 
     // Focused state
     &:focus,
-    &.k-state-focused {
+    &:focus:hover,
+    &.k-state-focused,
+    &.k-state-focused.k-state-disabled,
+    .k-state-disabled &.k-state-focused {
         border-color: @primary-focused-border-color;
         .box-shadow(@primary-focused-shadow);
     }

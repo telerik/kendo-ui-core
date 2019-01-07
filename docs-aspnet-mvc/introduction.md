@@ -29,12 +29,12 @@ Telerik UI for ASP.NET MVC supports:
 
 * [.NET Framework 3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later
 * [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later
-* Visual Studio 2010 and later
+* Visual Studio 2012 and later
 * [IIS 5](https://www.microsoft.com/en-us/download/details.aspx?id=24843) and later
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx) / [VB.NET](http://www.tutorialspoint.com/vb.net/)
 * [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later
 
-Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2010 and later.
+Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2012 and later.
 
 ## Download
 
@@ -66,7 +66,8 @@ Telerik UI for ASP.NET MVC contains the following directories:
 
 * `js`&mdash;These are the minified JavaScript files.
 * `styles`&mdash;The minified CSS files and images used by the themes.
-* `src`&mdash;The complete JavaScript, CSS, and C# source code. Note that this directory is not available in the trial version.
+* `src`&mdash;README file which states that as of R2 2016 the source code is distributed in separate *.source.zip packages located in your account.
+* `Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables generating the Kendo UI MVC wrapper widgets declarations inside Visual Studio projects and is added in the Kendo UI Q1 2015 release.
 * `spreadsheet`&mdash;[`Telerik.Web.Spreadsheet`](../kendo-ui/controls/data-management/spreadsheet/import-and-export-data/server-side-processing) assembly and its dependencies from Telerik Document Processing library.
 * `wrappers\aspnetmvc\Binaries\MVC3`&mdash;The assemblies for the ASP.NET MVC 3 applications.
 * `wrappers\aspnetmvc\Binaries\MVC4`&mdash;The assemblies for the ASP.NET MVC 4 applications.
@@ -74,16 +75,18 @@ Telerik UI for ASP.NET MVC contains the following directories:
 * `wrappers\aspnetmvc\Examples\VS2012`&mdash;The ASP.NET MVC 4 sample application built with Visual Studio 2012.
 * `wrappers\aspnetmvc\Examples\VS2013`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2013.
 * `wrappers\aspnetmvc\Examples\VS2015`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2015.
-* `wrappers\aspnetmvc\Examples\AspNet.Core`&mdash;The ASP.NET Core sample application built with Visual Studio 2015.
+* `wrappers\aspnetmvc\Examples\VS2017`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2017.
 * `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
-* `wrappers\aspnetmvc\Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables generating the Kendo UI MVC wrapper widgets declarations inside Visual Studio projects and is added in the Kendo UI Q1 2015 release.
+
 
 ## Sample Application
 
-Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application available in 2 versions:
+Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application available in 4 versions:
 
 * The ASP.NET MVC 4 application built with Visual Studio 2012.
 * The ASP.NET MVC 5 application built with Visual Studio 2013.
+* The ASP.NET MVC 5 application built with Visual Studio 2015.
+* The ASP.NET MVC 5 application built with Visual Studio 2017.
 
 ### Running the Sample Application
 
@@ -94,22 +97,17 @@ To run the sample application:
 1. Open the sample Visual Studio Solution:
 
 * To run the ASP.NET MVC 4 version, open `wrappers\aspnetmvc\Examples\VS2012\Kendo.Mvc.Examples.sln` with Visual Studio 2012.
-* To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\VS2013\Kendo.Mvc.Examples.sln` with Visual Studio 2013.
+* To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\VS2013\Kendo.Mvc.Examples.sln` with Visual Studio 2013, 2015, 2017.
 
 1. Press `CTRL+F5` to build and run the application.
 
-1. A browser loads the start page of the sample application. Use the links to explore the available demos.
+1. A browser loads the start page of the sample application. 
 
-    **Figure 1 The start-up screen of the sample application**
-
-    ![Telerik UI for ASP.NET MVC Sample Application](images/demos.png)
-
-### Distribution Contents
+### Sample Application Contents
 
 The sample application Visual Studio solution contains the following items:
 
-* `Areas/aspx/Views`&mdash;WebForm views.
-* `Areas/razor/Views`&mdash;Razor views.
+* `Views`&mdash;Razor views.
 * `Controllers`&mdash;Controller classes.
 * `Models`&mdash;Model classes.
 * `App_Data`&mdash;LocalDB sample database.

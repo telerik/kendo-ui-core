@@ -6,8 +6,8 @@
 @widget-shadow: none;
 // Button
 @button-text-color: @normal-text-color;
-@button-background-color: darken(@background, 5%);
-@button-border-color: darken(@background, 25%);
+@button-background-color: lighten(@base, 2%);
+@button-border-color: darken(@base, 20%);
 @button-gradient: false;
 @button-shadow: false;
 @button-hover-text-color: @normal-text-color;
@@ -23,9 +23,9 @@
 @button-focused-border-color: @accent;
 @button-focused-shadow: false;
 @button-focused-active-shadow: false;
-// Primaryu button
+// Primary button
 @primary-text-color: @background;
-@primary-background-color: lighten(@accent, 9%);
+@primary-background-color: lighten(@accent, 10%);
 @primary-border-color: lighten(@accent, 4%);
 @primary-gradient: false;
 @primary-shadow: false;
@@ -1112,9 +1112,8 @@ div.k-filebrowser-dropzone em
     color: @error-text-color;
 }
 
-.k-state-disabled
-{
-    opacity:.7;
+.k-state-disabled {
+    opacity: .6;
 }
 
 .k-tile-empty.k-state-selected,

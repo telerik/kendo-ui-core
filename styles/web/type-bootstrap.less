@@ -20,7 +20,7 @@
 @button-active-border-color: @hover-border-color;
 @button-active-gradient: false;
 @button-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-@button-focused-border-color: lighten(@accent, 13%);
+@button-focused-border-color: saturate(lighten(@accent, 13%), 15%);
 @button-focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
 @button-focused-active-shadow: @button-focused-shadow, @button-active-shadow;
 // Primary button
@@ -38,13 +38,13 @@
 @primary-active-background-color: darken(@accent, 8%);
 @primary-active-border-color: darken(@accent, 17%);
 @primary-active-gradient: false;
-@primary-active-shadow: null;
+@primary-active-shadow:  inset 0 3px 5px rgba(0, 0, 0, 0.125);
 @primary-focused-border-color: lighten(@info, 2%);
-@primary-focused-shadow: 0 0 8px 0 darken(@info, 6%);
+@primary-focused-shadow: 0 0 3px 0 saturate(lighten(@accent, 4%), 40%);
 @primary-focused-active-shadow: @primary-focused-shadow, @button-active-shadow;
 @primary-disabled-text-color: @background;
-@primary-disabled-background-color: lighten(@accent, 16%);
-@primary-disabled-border-color: lighten(@accent, 14%);
+@primary-disabled-background-color: @accent;
+@primary-disabled-border-color: @accent;
 @primary-disabled-gradient: false;
 // Input
 @input-text: @normal-text-color;
@@ -1006,6 +1006,10 @@ div.k-filebrowser-dropzone em
 .k-dropdown .k-state-hover .k-input
 {
     color: @hover-text-color;
+}
+
+.k-button.k-state-disabled {
+    opacity: .6;
 }
 
 .k-state-error

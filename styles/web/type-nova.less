@@ -15,7 +15,7 @@
 @button-hover-border-color: @button-border-color;
 @button-hover-gradient: false;
 @button-hover-shadow: false;
-@button-active-background: @selected-background;
+@button-active-background: @accent-hover-background;
 @button-active-text-color: @inversed-text-color;
 @button-active-border-color: @selected-background;
 @button-active-gradient: false;
@@ -30,8 +30,8 @@
 @primary-gradient: false;
 @primary-shadow: false;
 @primary-hover-text-color: @primary-text-color;
-@primary-hover-background-color: @accent-hover-background;
-@primary-hover-border-color: @accent-hover-background;
+@primary-hover-background-color: lighten(@accent, 4%);
+@primary-hover-border-color: @primary-hover-background-color;
 @primary-hover-gradient: false;
 @primary-hover-shadow: false;
 @primary-active-text-color: @primary-text-color;
@@ -39,12 +39,12 @@
 @primary-active-border-color: @accent-hover-background;
 @primary-active-gradient: false;
 @primary-active-shadow: false;
-@primary-focused-border-color: @accent-hover-background;
+@primary-focused-border-color: multiply(@accent, #dbdbdb);
 @primary-focused-shadow: false;
 @primary-focused-active-shadow: false;
 @primary-disabled-text-color: @selected-text-color;
-@primary-disabled-background-color: lighten(@accent, 18%);
-@primary-disabled-border-color: lighten(@accent, 18%);
+@primary-disabled-background-color: @accent;
+@primary-disabled-border-color: @accent;
 @primary-disabled-gradient: false;
 // Input
 @input-text: @normal-text-color;
@@ -61,7 +61,7 @@
 @input-focused-shadow: false;
 @sprite-image: url('@{image-folder}/sprite.png');
 @inversed-text-color: contrast(@accent);
-@accent-hover-background: multiply(@accent, #e4e4e4);
+@accent-hover-background: multiply(@accent, #e5e5e5);
 @link-text-color: #00acc1;
 @popups-shadow: 0 0px 6px 1px rgba(0, 0, 0, 0.2);
 @tabs-normal-bg: #081421;
@@ -394,6 +394,10 @@ textarea.k-textbox:hover,
 .k-tile-empty strong,
 .k-slider .k-draghandle {
     color: @disabled-border-color;
+}
+
+.k-button.k-state-disabled {
+    opacity: .6;
 }
 
 // Border radius

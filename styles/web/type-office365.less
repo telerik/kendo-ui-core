@@ -11,7 +11,7 @@
 @button-gradient: false;
 @button-shadow: false;
 @button-hover-text-color: contrast(@button-hover-background-color);
-@button-hover-background-color: darken(@hover-background, 4%);
+@button-hover-background-color: darken(@hover-background, 7%);
 @button-hover-border-color: @button-hover-background-color;
 @button-hover-gradient: false;
 @button-hover-shadow: false;
@@ -36,15 +36,15 @@
 @primary-hover-shadow: false;
 @primary-active-text-color: contrast(@primary-active-background-color);
 @primary-active-background-color: darken(@primary-background-color, 13%);
-@primary-active-border-color: @primary-active-background-color;
+@primary-active-border-color: darken(@primary-active-background-color, 2%);
 @primary-active-gradient: false;
 @primary-active-shadow: false;
-@primary-focused-border-color: darken(@primary-active-background-color, 15%);
+@primary-focused-border-color: darken(@primary-active-background-color, 2%);
 @primary-focused-shadow: false;
 @primary-focused-active-shadow: false;
 @primary-disabled-text-color: lighten(@normal-text-color, 29%);
-@primary-disabled-background-color: darken(@hover-background, 6%);
-@primary-disabled-border-color: darken(@hover-background, 6%);
+@primary-disabled-background-color: @primary-background-color;
+@primary-disabled-border-color: @primary-border-color;
 @primary-disabled-gradient: false;
 // Input
 @input-text: @normal-text-color;
@@ -1058,9 +1058,8 @@ div.k-filebrowser-dropzone em
     color: @error-text-color;
 }
 
-.k-state-disabled
-{
-    opacity:.7;
+.k-state-disabled {
+    opacity: .6;
 }
 
 .k-tile-empty.k-state-selected,

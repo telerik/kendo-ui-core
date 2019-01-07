@@ -6,8 +6,8 @@
 @widget-shadow: false;
 // Button
 @button-background-color: @base;
-@button-text-color: @normal-text-color;
-@button-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
+@button-text-color: contrast(@base);
+@button-border-color: contrast(@base, lighten(@base, 28%), darken(@base, 14%), 0.5);
 @button-gradient: false;
 @button-shadow: false;
 @button-hover-text-color: #ffffff;
@@ -15,12 +15,12 @@
 @button-hover-border-color: @hover-background;
 @button-hover-gradient: false;
 @button-hover-shadow: false;
-@button-active-background: @accent;
+@button-active-background: darken(@accent, 3%);
 @button-active-text-color: @selected-text-color;
-@button-active-border-color: @accent;
+@button-active-border-color: @button-active-background;
 @button-active-gradient: false;
 @button-active-shadow: false;
-@button-focused-border-color: contrast(@base, lighten(@accent, 14%), darken(@accent, 14%), 0.5);
+@button-focused-border-color: contrast(@base, lighten(@accent, 4%), lighten(@accent, 7%), 0.5);
 @button-focused-shadow: none;
 @button-focused-active-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
 // Primary button
@@ -35,11 +35,11 @@
 @primary-hover-gradient: false;
 @primary-hover-shadow: false;
 @primary-active-text-color: #ffffff;
-@primary-active-background-color: @accent;
-@primary-active-border-color: @accent;
+@primary-active-background-color: darken(@accent, 3%);;
+@primary-active-border-color: @primary-active-background-color;
 @primary-active-gradient: false;
 @primary-active-shadow: false;
-@primary-focused-border-color: contrast(@base, lighten(@accent, 16%), darken(@accent, 29%), 0.5);
+@primary-focused-border-color: contrast(@base, lighten(@accent, 14%), darken(@accent, 7%), 0.5);
 @primary-focused-shadow: none;
 @primary-focused-active-shadow: none;
 @primary-disabled-text-color: contrast(@base, lighten(@base, 1%), darken(@base, 17%), 0.5);
@@ -1042,9 +1042,8 @@ div.k-filebrowser-dropzone em
     color: @error-text-color;
 }
 
-.k-state-disabled
-{
-    opacity:.7;
+.k-state-disabled {
+    opacity: .6;
 }
 
 .k-tile-empty.k-state-selected,
