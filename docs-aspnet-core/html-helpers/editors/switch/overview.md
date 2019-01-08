@@ -41,10 +41,10 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ```
     @(Html.Kendo().Switch()
-          .Name("switch")
-          .Events(e => e
-                .Change("change")
-          )
+        .Name("switch")
+        .Events(e => e
+            .Change("change")
+        )
     )
     <script>
         function change(e) {

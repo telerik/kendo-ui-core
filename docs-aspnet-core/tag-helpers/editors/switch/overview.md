@@ -16,9 +16,8 @@ The Switch tag helper helps you configure the Kendo UI Switch widget in ASP.NET 
 The following example demonstrates how to define the Switch by using the Switch tag helper. It is used to display two exclusive choices.
 
 ###### Example
-
-        <kendo-switch name="switch"
-                      checked="true"></kendo-switch>
+    <kendo-switch name="switch"
+            checked="true"></kendo-switch>
 
 ## Configuration
 
@@ -26,18 +25,16 @@ The Switch tag helper configuration options are passed as attributes of the tag.
 
 ###### Example
 
-```tab-cshtml
-
-        @(Html.Kendo().Switch()
-              .Name("switch")
-              .Checked(true)
-              .Enabled(true))
-```
 ```tab-tagHelper
-
-        <kendo-switch name="switch"
-                      checked="true"
-                      enabled="true"></kendo-switch>
+    <kendo-switch name="switch"
+            checked="true"
+            enabled="true"></kendo-switch>
+```
+```tab-cshtml
+    @(Html.Kendo().Switch()
+        .Name("switch")
+        .Checked(true)
+        .Enabled(true))
 ```
 
 ## See Also

@@ -197,6 +197,12 @@ When binding to a remote service, it is advisable, while not mandatory, to do th
         }
 3. Store the Scheduler event date fields (start and end) in UTC format as well. This allows for the easier migration of your data between servers in different timezones.
 
+## Reset Series
+
+As of the R1 2017 release, exceptions are no longer automatically removed when editing a series. Changes made to specific occurrences are persisted when editing the series. 
+
+If a series contains an exception, a `Reset Series` button is rendered within the series edit dialog, which allows you to reset the series by removing any existing exceptions.
+
 ## Configuration
 
 ### Views

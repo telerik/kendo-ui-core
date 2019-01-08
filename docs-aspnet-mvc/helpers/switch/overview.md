@@ -24,31 +24,29 @@ Below are listed the steps for you to follow when configuring the Kendo UI Switc
 
 1. Create a new action method which renders the view.
 
-    ###### Example
+###### Example
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+    public ActionResult Index()
+    {
+        return View();
+    }
 
 1. Add a Switch.
 
-    ###### Example
+###### Example
 
-    ```tab-ASPX
-
-            <%: Html.Kendo().Switch()
-                    .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
-                    .Checked(true)
-            %>
-    ```
-    ```tab-Razor
-
-            @(Html.Kendo().Switch()
-                  .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
-                  .Checked(true)
-            )
-    ```
+```tab-Razor
+    @(Html.Kendo().Switch()
+        .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
+        .Checked(true)
+    )
+```
+```tab-ASPX
+    <%: Html.Kendo().Switch()
+        .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
+        .Checked(true)
+    %>
+```
 
 ## Event Handling
 
@@ -60,33 +58,31 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-ASPX
-
-        <%: Html.Kendo().Switch()
-                .Name("switch")
-                .Events(e => e
-                    .Change("change")
-                )
-        %>
-        <script>
-          function change() {
-              //Handle the change event.
-          }
-        </script>
-```
 ```tab-Razor
-
-        @(Html.Kendo().Switch()
-              .Name("switch")
-              .Events(e => e
-                    .Change("change")
-              )
-        )
-        <script>
+    @(Html.Kendo().Switch()
+            .Name("switch")
+            .Events(e => e
+                .Change("change")
+            )
+    )
+    <script>
+    function change() {
+        //Handle the change event.
+    }
+    </script>
+```
+```tab-ASPX
+    <%: Html.Kendo().Switch()
+            .Name("switch")
+            .Events(e => e
+                .Change("change")
+            )
+    %>
+    <script>
         function change() {
             //Handle the change event.
         }
-        </script>
+    </script>
 ```
 
 ### By Template Delegate
@@ -96,17 +92,16 @@ The following example demonstrates how to subscribe to events by a template dele
 ###### Example
 
 ```tab-Razor
-
-        @(Html.Kendo().Switch()
-              .Name("switch")
-              .Events(e => e
-                  .Change(@<text>
-                    function() {
-                        //Handle the change event inline.
-                    }
-                  </text>)
-              )
-        )
+    @(Html.Kendo().Switch()
+            .Name("switch")
+            .Events(e => e
+                .Change(@<text>
+                function() {
+                    //Handle the change event inline.
+                }
+                </text>)
+            )
+    )
 ```
 
 ## Reference
@@ -116,14 +111,13 @@ The following example demonstrates how to subscribe to events by a template dele
 To reference an existing Kendo UI Switch instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](http://docs.telerik.com/kendo-ui/api/javascript/ui/switch) to control its behavior.
 
 ###### Example
-
-        //Put this after your Kendo UI Switch for ASP.NET MVC declaration.
-        <script>
-        $(function() {
-            //Notice that the Name() of the Switch is used to get its client-side instance.
-            var switch = $("#switch").data("kendoSwitch");
-        });
-        </script>
+    //Put this after your Kendo UI Switch for ASP.NET MVC declaration.
+    <script>
+    $(function() {
+        //Notice that the Name() of the Switch is used to get its client-side instance.
+        var switch = $("#switch").data("kendoSwitch");
+    });
+    </script>
 
 ## See Also
 

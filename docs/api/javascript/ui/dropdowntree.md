@@ -1656,6 +1656,8 @@ The widget instance which fired the event.
 
 Triggered when a node is being selected by the user. Cancellable. When checkboxes are enabled, it is also triggered when a node is being deselected.
 
+> Note: We don't recommend using the 'select' event when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled because it is not triggered when the state of the checkbox is changed.
+
 #### Event Data
 
 ##### e.node `Element`

@@ -546,6 +546,8 @@ navigation:
         title: "Scheduler"
     "*slider":
         title: "Slider"
+    "*switch":
+        title: "Switch"
     "*sortable":
         title: "Sortable"
     "*splitter":
@@ -1740,6 +1742,11 @@ defaults:
         component: "spreadsheet"
 
 -
+    scope:
+        path: "controls/editors/switch"
+    values:
+        component: "switch"
+
     scope:
         path: "controls/navigation/tabstrip"
     values:

@@ -287,6 +287,8 @@ navigation:
         title: "Window"
      "*templates":
         title: "Templates"
+     "*switch":
+        title: "Switch"
 
 ## The application virtual path
 baseurl: /aspnet-core

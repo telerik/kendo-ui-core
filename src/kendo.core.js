@@ -2593,7 +2593,6 @@ function pad(number, digits, end) {
         wrap: wrap,
         deepExtend: deepExtend,
         getComputedStyles: getComputedStyles,
-        webComponents: kendo.webComponents || [],
         isScrollable: isScrollable,
         scrollLeft: scrollLeft,
         size: size,

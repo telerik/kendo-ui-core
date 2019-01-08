@@ -173,6 +173,13 @@ The following example demonstrates how to subscribe to events by a template dele
         })
     )
 
+
+## Reset Series
+
+As of the R1 2017 release, exceptions are no longer automatically removed when editing a series. Changes made to specific occurrences are persisted when editing the series. 
+
+If a series contains an exception, a `Reset Series` button is rendered within the series edit dialog, which allows you to reset the series by removing any existing exceptions.
+
 ## Reference
 
 ### Existing Instances

@@ -201,6 +201,8 @@ navigation:
         title: "SpreadSheet"
      "helpers/stockchart":
         title: "StockChart"
+     "helpers/switch":
+        title: "Switch"
      "helpers/tabstrip":
         title: "TabStrip"
      "helpers/timepicker":

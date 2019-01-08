@@ -71,7 +71,7 @@ Defines the text of the `checked` and `unchecked` labels that are shown within t
         });
     </script>
 
-### messages.checked `String`*(default: "ON")*
+### messages.checked `String`*(default: "On")*
 
 The label when Kendo UI Switch is checked.
 
@@ -87,7 +87,7 @@ The label when Kendo UI Switch is checked.
         });
     </script>
 
-### messages.unchecked `String`*(default: "OFF")*
+### messages.unchecked `String`*(default: "Off")*
 
 The label when Kendo UI Switch is unchecked.
 
