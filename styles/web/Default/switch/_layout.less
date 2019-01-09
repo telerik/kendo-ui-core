@@ -1,0 +1,125 @@
+// Switch
+
+.k-switch {
+    border-radius: @switch-border-radius;
+    cursor: pointer;
+    width: @switch-size;
+    background: none;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    display: inline-flex;
+    overflow: hidden;
+    vertical-align: middle;
+    font-size: @switch-font-size;
+    user-select: none;
+    text-align: left;
+
+    [type='checkbox'] {
+        display: none;
+    }
+}
+
+.k-switch,
+.k-switch-container,
+.k-switch-handle {
+    box-sizing: border-box;
+}
+
+.k-switch-container {
+    border-radius: @switch-border-radius;
+    padding: @switch-container-padding-y @switch-container-padding-x;
+    border-width: @switch-container-border-width;
+    border-style: solid;
+    flex: 1 0 auto;
+    position: relative;
+    outline: 0;
+    transition: background-color 200ms ease-out 0s;
+}
+
+.k-switch-handle {
+    border-radius: @switch-handle-border-radius;
+    width: @switch-handle-size;
+    height: @switch-handle-size;
+    border-width: @switch-handle-border-width;
+    border-style: solid;
+    background-position: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    left: 0;
+    transition: left 200ms ease-out 0s;
+
+    .k-ie11 & {
+        display: block;
+    }
+}
+
+.k-switch-on .k-switch-handle {
+    left: @switch-on-left-x;
+
+    .k-ie &,
+    .k-edge & {
+        left: 100%;
+        margin-left: -@switch-handle-size;
+    }
+}
+
+.k-switch-off .k-switch-handle {
+    left: 0;
+}
+
+.k-switch-label-on,
+.k-switch-label-off {
+    display: @switch-label-display;
+    width: @switch-label-width;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-shadow: none;
+    line-height: @switch-handle-size;
+    overflow: hidden;
+}
+
+.k-switch-label-on {
+    text-align: left;
+    left: @switch-label-position;
+}
+
+.k-switch-label-off {
+    text-align: right;
+    right: @switch-label-position;
+}
+
+.k-switch when not (@switch-track-size = null) {
+    overflow: visible;
+
+    .k-switch-container {
+        height: @switch-track-size;
+    }
+
+    .k-switch-handle {
+        top: calc((@switch-track-size - @switch-handle-size - @switch-container-border-width * 2) * .5);
+    }
+}
+
+.k-rtl .k-switch,
+.k-switch[dir = "rtl"] {
+    &.k-switch-on .k-switch-handle {
+        left: 0;
+    }
+
+    &.k-switch-off .k-switch-handle {
+        left: @switch-on-left-x;
+    }
+    .k-switch-label-on {
+        text-align: right;
+        left: initial;
+        right: @switch-label-position;
+    }
+    .k-switch-label-off {
+        text-align: left;
+        left: @switch-label-position;
+        right: initial;
+    }
+}

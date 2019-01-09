@@ -124,6 +124,32 @@
 
 @import "common/all.less";
 
+// Switch
+
+@switch-size: 5em;
+@switch-border-radius: 0;
+@switch-font-size: 14px;
+
+@switch-track-size: null;
+@switch-container-border-width: 1px;
+@switch-container-padding-x: 2px;
+@switch-container-padding-y: @switch-container-padding-x;
+
+@switch-handle-size: (.4 * @switch-size);
+@switch-handle-border-radius: 0;
+@switch-handle-border-width: 1px;
+
+@switch-label-display: inline;
+@switch-label-outer-spacing: 12px;
+@switch-label-inner-spacing: 2px;
+@switch-label-spacing: calc(@switch-label-outer-spacing + @switch-label-inner-spacing);
+
+@switch-label-position: calc(@switch-label-outer-spacing - @switch-container-border-width);
+@switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
+@switch-on-left-x: calc(100% - @switch-handle-size);
+
+@import "common/all.less";
+
 .k-button {
     line-height: @line-height;
 }

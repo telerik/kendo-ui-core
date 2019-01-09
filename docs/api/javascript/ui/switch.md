@@ -194,6 +194,25 @@ Whether to enable or disable the widget.
         switchInstance.enable(false);
     </script>
 
+### readonly
+
+Changes the readonly state of the widget.
+
+#### Parameters
+
+##### readonly `Boolean`
+
+Whether to make the widget readonly.
+
+#### Example
+
+    <input id="switch" />
+
+    <script>
+        var switchInstance = $("#switch").kendoSwitch().data("kendoSwitch");
+        switchInstance.readonly(true);
+    </script>
+
 ## Events
 
 ### change

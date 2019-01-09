@@ -73,7 +73,6 @@ The example below demonstrates how to subscribe to events by providing inline Ja
     echo $switchButton->render();
     ?>
 
-<!--*-->
 ## Reference
 
 ### Client-Side Instances

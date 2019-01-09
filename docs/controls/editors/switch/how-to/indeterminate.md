@@ -11,7 +11,7 @@ The following example demonstrates how to set an indeterminate state of the Kend
 
 ###### Example
 
-```html
+```dojo
   <style>
       .k-indeterminate .k-switch-container {
           background-color: #dfdfdf !important;

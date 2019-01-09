@@ -144,6 +144,9 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| [Switch](http://demos.telerik.com/kendo-ui/switch/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.switch.js | |
 | [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |

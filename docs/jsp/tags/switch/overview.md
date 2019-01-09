@@ -40,8 +40,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Switc
 
 ###### Example
 
-      <kendo:switch name="switch">
-	    </kendo:switch>
+    <kendo:switchButton name="switch">
+    </kendo:switchButton>
 
 ## Event Handling
 
@@ -51,14 +51,14 @@ You can subscribe to all [events exposed by Kendo UI Switch](/api/javascript/ui/
 
 ###### Example
 
-      <kendo:switch name="switch" change="switchOnChange">
-      </kendo:switch>
+    <kendo:switchButton name="switch" change="switchOnChange">
+    </kendo:switchButton>
 
-      <script>
-        function switchOnChange(e) {
-            kendoConsole.log("Change :: checked: " + e.checked);
-        }
-      </script>
+    <script>
+    function switchOnChange(e) {
+        kendoConsole.log("Change :: checked: " + e.checked);
+    }
+    </script>
 
 ## Reference
 

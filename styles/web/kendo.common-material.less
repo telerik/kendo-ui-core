@@ -117,6 +117,29 @@
 @scrollview-pager-item-border-width: 0;
 @scrollview-pager-height: calc(@scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (@scrollview-pager-item-spacing / 2 ));
 
+// Switch
+@switch-size: 5.4em;
+@switch-border-radius: @switch-size;
+@switch-font-size: 10px;
+
+@switch-track-size: 1.6em;
+@switch-container-border-width: 0;
+@switch-container-padding-x: 0;
+@switch-container-padding-y: @switch-container-padding-x;
+
+@switch-handle-size: 3em;
+@switch-handle-border-radius: @switch-size;
+@switch-handle-border-width: 0;
+
+@switch-label-display: none;
+@switch-label-outer-spacing: 8px;
+@switch-label-inner-spacing: 2px;
+@switch-label-spacing: calc(@switch-label-outer-spacing + @switch-label-inner-spacing);
+
+@switch-label-position: calc(@switch-label-outer-spacing - @switch-container-border-width);
+@switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
+@switch-on-left-x: calc(100% - @switch-handle-size);
+
 @import "common/all.less";
 
 @spreadsheet-first-tool-offset: 0;

@@ -11,7 +11,7 @@ The following example demonstrates how to enable dragging of the drag handle. Th
 
 ###### Example
 
-```html
+```dojo
   <input type="checkbox" id="switch" />
 
   <script>

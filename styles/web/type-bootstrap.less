@@ -43,8 +43,8 @@
 @primary-focused-shadow: 0 0 3px 0 saturate(lighten(@accent, 4%), 40%);
 @primary-focused-active-shadow: @primary-focused-shadow, @button-active-shadow;
 @primary-disabled-text-color: @background;
-@primary-disabled-background-color: @accent;
-@primary-disabled-border-color: @accent;
+@primary-disabled-background-color: lighten(@accent, 16%);
+@primary-disabled-border-color: lighten(@accent, 14%);
 @primary-disabled-gradient: false;
 // Input
 @input-text: @normal-text-color;
@@ -308,6 +308,78 @@
 @scrollview-navigation-default-opacity: .7;
 @scrollview-navigation-hover-opacity: 1;
 @scrollview-navigation-hover-span-bg: transparent;
+
+
+// Switch
+@switch-container-shadow: inset 0 0 0 1px @button-border-color;
+@switch-container-hovered-shadow: inset 0 0 0 1px @button-hover-border-color;
+@switch-container-focused-shadow: inset 0 0 0 1px @button-focused-border-color;
+
+@switch-on-bg: @primary-background-color;
+@switch-on-text: @primary-text-color;
+@switch-on-border: @button-border-color;
+@switch-on-gradient: false;
+@switch-on-shadow: false;
+@switch-on-focused-shadow: @focused-shadow;
+
+@switch-on-focused-bg: @primary-hover-background-color;
+@switch-on-focused-text: @switch-on-text;
+@switch-on-focused-border: @switch-on-border;
+@switch-on-focused-gradient: @switch-on-gradient;
+
+@switch-on-hovered-bg: @primary-hover-background-color;
+@switch-on-hovered-text: @switch-on-text;
+@switch-on-hovered-border: @button-hover-border-color;
+@switch-on-hovered-gradient: false;
+
+@switch-on-handle-bg: @background;
+@switch-on-handle-text: @switch-on-text;
+@switch-on-handle-border: @switch-on-border;
+@switch-on-handle-gradient: false;
+@switch-on-handle-shadow: false;
+
+@switch-on-handle-focused-bg: @switch-on-handle-bg;
+@switch-on-handle-focused-text: @switch-on-handle-text;
+@switch-on-handle-focused-border: @button-focused-border-color;
+@switch-on-handle-focused-gradient: @switch-on-handle-gradient;
+
+@switch-on-handle-hovered-bg: @switch-on-handle-bg;
+@switch-on-handle-hovered-text: @switch-on-handle-text;
+@switch-on-handle-hovered-border: @switch-on-hovered-border;
+@switch-on-handle-hovered-gradient: @switch-on-handle-gradient;
+
+@switch-off-bg: @background;
+@switch-off-text: @normal-text-color;
+@switch-off-border: @switch-on-border;
+@switch-off-gradient: false;
+@switch-off-shadow: @switch-on-shadow;
+@switch-off-focused-shadow: @switch-on-focused-shadow;
+
+@switch-off-focused-bg: @switch-off-bg;
+@switch-off-focused-text: @switch-off-text;
+@switch-off-focused-border: @switch-off-border;
+@switch-off-focused-gradient: @switch-off-gradient;
+
+@switch-off-hovered-bg: @switch-off-bg;
+@switch-off-hovered-text: @switch-off-text;
+@switch-off-hovered-border: @switch-on-hovered-border;
+@switch-off-hovered-gradient: false;
+
+@switch-off-handle-bg: @switch-on-handle-bg;
+@switch-off-handle-text: @switch-off-text;
+@switch-off-handle-border: @switch-on-handle-border;
+@switch-off-handle-gradient: @switch-on-handle-gradient;
+@switch-off-handle-shadow: false;
+
+@switch-off-handle-focused-bg: @switch-off-handle-bg;
+@switch-off-handle-focused-text: @switch-off-handle-text;
+@switch-off-handle-focused-border: @switch-on-handle-focused-border;
+@switch-off-handle-focused-gradient: @switch-off-handle-gradient;
+
+@switch-off-handle-hovered-bg: @switch-off-handle-bg;
+@switch-off-handle-hovered-text: @switch-off-handle-text;
+@switch-off-handle-hovered-border: @switch-on-handle-hovered-border;
+@switch-off-handle-hovered-gradient: @switch-off-handle-gradient;
 
 
 // Kendo skin
@@ -3458,3 +3530,4 @@ td.k-state-focused.k-state-selected,
 @import "Default/calendar/_theme.less";
 @import "Default/multiviewcalendar/_theme.less";
 @import "Default/scrollview/_theme.less";
+@import "Default/switch/_theme.less";
