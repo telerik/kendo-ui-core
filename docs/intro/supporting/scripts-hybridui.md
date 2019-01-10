@@ -4,7 +4,7 @@ title: Script Files for Hybrid UI
 page_title: Script Files for Hybrid UI | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Hybrid UI"
 slug: script_filesfor_hybridui_widgets
-position: 15
+position: 16
 ---
 
 # Script Files for Hybrid UI

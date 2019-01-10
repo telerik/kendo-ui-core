@@ -4,7 +4,7 @@ title: Script Files for Navigation
 page_title: Script Files for Navigation | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Navigation"
 slug: script_filesfor_navigation_widgets
-position: 13
+position: 14
 ---
 
 # Script Files for Navigation

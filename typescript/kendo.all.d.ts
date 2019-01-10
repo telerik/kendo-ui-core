@@ -2583,6 +2583,89 @@ declare namespace kendo.ui {
     interface DatePickerOpenEvent extends DatePickerEvent {
     }
 
+    class DateRangePicker extends kendo.ui.Widget {
+
+        static fn: DateRangePicker;
+
+        options: DateRangePickerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): DateRangePicker;
+
+        constructor(element: Element, options?: DateRangePickerOptions);
+
+
+        close(): void;
+        destroy(): void;
+        enable(enable: boolean): void;
+        readonly(readonly: boolean): void;
+        max(): Date;
+        max(value: Date): void;
+        max(value: string): void;
+        min(): Date;
+        min(value: Date): void;
+        min(value: string): void;
+        open(): void;
+        range(): any;
+        range(range: DateRangePickerRange): void;
+        setOptions(options: any): void;
+
+    }
+
+    interface DateRangePickerMessages {
+        startLabel?: string;
+        endLabel?: string;
+    }
+
+    interface DateRangePickerMonth {
+        content?: string;
+        weekNumber?: string;
+        empty?: string;
+    }
+
+    interface DateRangePickerRange {
+        start?: Date;
+        end?: Date;
+    }
+
+    interface DateRangePickerOptions {
+        name?: string;
+        ARIATemplate?: string;
+        culture?: string;
+        dates?: any;
+        depth?: string;
+        disableDates?: any|Function;
+        footer?: string|Function;
+        format?: string;
+        max?: Date;
+        messages?: DateRangePickerMessages;
+        min?: Date;
+        month?: DateRangePickerMonth;
+        labels?: boolean;
+        weekNumber?: boolean;
+        range?: DateRangePickerRange;
+        start?: string;
+        change?(e: DateRangePickerChangeEvent): void;
+        close?(e: DateRangePickerCloseEvent): void;
+        open?(e: DateRangePickerOpenEvent): void;
+    }
+    interface DateRangePickerEvent {
+        sender: DateRangePicker;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface DateRangePickerChangeEvent extends DateRangePickerEvent {
+    }
+
+    interface DateRangePickerCloseEvent extends DateRangePickerEvent {
+    }
+
+    interface DateRangePickerOpenEvent extends DateRangePickerEvent {
+    }
 
     class DateTimePicker extends kendo.ui.Widget {
 
@@ -6678,6 +6761,65 @@ declare namespace kendo.ui {
         event?: kendo.data.SchedulerEvent;
     }
 
+    class ScrollView extends kendo.ui.Widget {
+
+        static fn: ScrollView;
+
+        options: ScrollViewOptions;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ScrollView;
+
+        constructor(element: Element, options?: ScrollViewOptions);
+
+
+        content(content: string): void;
+        content(content: JQuery): void;
+        destroy(): void;
+        next(): void;
+        prev(): void;
+        refresh(): void;
+        scrollTo(page: number, instant: boolean): void;
+        setDataSource(dataSource: kendo.data.DataSource): void;
+
+    }
+
+    interface ScrollViewOptions {
+        name?: string;
+        autoBind?: boolean;
+        bounceVelocityThreshold?: number;
+        contentHeight?: number|string;
+        dataSource?: kendo.data.DataSource|any;
+        duration?: number;
+        emptyTemplate?: string;
+        enablePager?: boolean;
+        page?: number;
+        template?: string;
+        velocityThreshold?: number;
+        change?(e: ScrollViewChangeEvent): void;
+        refresh?(e: ScrollViewRefreshEvent): void;
+    }
+    interface ScrollViewEvent {
+        sender: ScrollView;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ScrollViewChangeEvent extends ScrollViewEvent {
+        currentPage?: number;
+        nextPage?: number;
+        element?: JQuery;
+        data?: any;
+    }
+
+    interface ScrollViewRefreshEvent extends ScrollViewEvent {
+        pageCount?: number;
+        page?: number;
+    }
 
     class Slider extends kendo.ui.Widget {
 
@@ -21157,6 +21299,10 @@ interface JQuery {
     kendoDatePicker(): JQuery;
     kendoDatePicker(options: kendo.ui.DatePickerOptions): JQuery;
     data(key: "kendoDatePicker"): kendo.ui.DatePicker;
+
+    kendoDateRangePicker(): JQuery;
+    kendoDateRangePicker(options: kendo.ui.DateRangePickerOptions): JQuery;
+    data(key: "kendoDateRangePicker"): kendo.ui.DateRangePicker;
 
     kendoDateTimePicker(): JQuery;
     kendoDateTimePicker(options: kendo.ui.DateTimePickerOptions): JQuery;

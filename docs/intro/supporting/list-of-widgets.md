@@ -24,6 +24,7 @@ The following table lists all Kendo UI components with regard to their support p
 | [Color Picker](http://demos.telerik.com/kendo-ui/colorpicker/index)   | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index)          | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)      | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| [DateRangePicker](http://demos.telerik.com/kendo-ui/daterangepicker/index)      | <span class="tag-success">No</span> | <span class="tag-success">Yes</span> |
 | [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index)  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index)  | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
@@ -96,6 +97,7 @@ The following table lists all Kendo UI components with regard to their support p
 | [Styling](http://demos.telerik.com/kendo-ui/styling/index)            | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | **Media**  |
 | [Media Player](http://demos.telerik.com/kendo-ui/mediaplayer/index)   | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
+| [ScrollView](http://demos.telerik.com/kendo-ui/scrollview/index)      | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | **Hybrid UI**     |
 | [Widgets](http://demos.telerik.com/kendo-ui/m/index)                  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Mobile Application](http://demos.telerik.com/kendo-ui/m/index)       | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |

@@ -28,7 +28,7 @@ span.k-dropdowntree,
 .k-listbox {
     position: relative;
     display: inline-block;
-    width: 12.4em;
+    width: @input-default-width;
     overflow: visible;
     border-width: 0;
     vertical-align: middle;
@@ -194,7 +194,7 @@ span.k-dropdowntree,
 .k-multiselect-wrap,
 .k-picker-wrap,
 .k-numeric-wrap {
-    border-width: 1px;
+    border-width: @input-border-width;
     border-style: solid;
 }
 
@@ -340,7 +340,7 @@ span.k-datetimepicker .k-select + .k-select {
 .k-dropdown-wrap .k-input,
 .k-selectbox .k-input {
     line-height: @input-height;
-    padding: 0.17857143em 0;
+    padding: @input-padding-y @input-padding-x;
     text-indent: @input-indent;
     border: 0;
     margin: 0;
@@ -555,7 +555,7 @@ body .k-datetimepicker .k-select {
 .k-multiselect-wrap .k-input {
     min-width: 25px;
     min-height: @input-height;
-    padding: 0.17857143em;
+    padding: @input-padding-y;
     text-indent: @input-indent;
     background-color: transparent;
     border: 0;
@@ -671,7 +671,7 @@ body .k-datetimepicker .k-select {
 
 input.k-textbox,
 textarea.k-textbox {
-    padding: 0.17857143em 0;
+    padding: @input-padding-y @input-padding-x;
 }
 
 input.k-textbox {
@@ -1112,5 +1112,87 @@ div.k-dropdowngrid-popup .k-group-header {
     .k-grid-list > .k-item > .k-group-cell > span {
         right: auto;
         left: 0;
+    }
+}
+
+
+// input container / floating label
+@floating-label-transition: .2s ease-out;
+@floating-label-scale: .75;
+@floating-label-height: calc(@input-height * @floating-label-scale);
+
+.k-textbox-container {
+    position: relative;
+    padding-top: @floating-label-height;
+    display: inline-flex;
+    width: @input-default-width;
+    flex-direction: column;
+    justify-content: stretch;
+
+    > .k-label {
+        pointer-events: none;
+        position: absolute;
+        line-height: @input-height;
+        cursor: text;
+        top: calc(@floating-label-height + @input-border-width + @input-padding-y);
+        left: calc(@input-padding-x + @input-border-width);
+        transition: transform @floating-label-transition, color @floating-label-transition;
+    }
+
+    > .k-textbox,
+    > .k-textarea,
+    > .k-widget {
+        flex: 1 1 auto;
+        width: auto;
+    }
+
+    &.k-state-empty {
+        > .k-label {
+            transform: translate( 0, 0 ) scale( 1 );
+        }
+    }
+
+    &.k-state-focused {
+        box-shadow: none;
+    }
+
+    > .k-label,
+    &.k-state-focused > .k-label {
+        // persist alignment after scaling
+        @half-scale-percent: ((1 - @floating-label-scale) * 100% / 2);
+
+        // transform position to top-left corner of the textbox-container
+        // do not use single translate + calc() because of IE10/11
+        @fls: -@floating-label-scale;
+        transform: translate(-@input-padding-x, calc(@fls * @input-padding-y))
+                translate(-@input-border-width, calc(@fls * @input-height))
+                translate(-@half-scale-percent, calc(@fls * @half-scale-percent))
+                scale(@floating-label-scale);
+    }
+
+    .k-rtl &,
+    &[dir='rtl'] {
+
+        > .k-label {
+            left: auto;
+            right: calc(@input-padding-x + @input-border-width);
+        }
+
+        &.k-state-empty {
+            > .k-label {
+                transform: translate( 0, 0 ) scale( 1 );
+            }
+        }
+
+        > .k-label,
+        &.k-state-focused > .k-label {
+            @half-scale-percent: ((1 - @floating-label-scale) * 100% / 2);
+
+            @fls: -@floating-label-scale;
+            transform: translate(@input-padding-x, calc(@fls * @input-padding-y))
+                    translate(@input-border-width, calc(@fls * @input-height))
+                    translate(@half-scale-percent, calc(@fls * @half-scale-percent))
+                    scale(@floating-label-scale);
+        }
     }
 }

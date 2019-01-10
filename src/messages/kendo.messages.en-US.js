@@ -39,6 +39,16 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 });
 }
 
+/* DateRangePicker messages */
+
+if (kendo.ui.DateRangePicker) {
+kendo.ui.DateRangePicker.prototype.options.messages =
+$.extend(true, kendo.ui.DateRangePicker.prototype.options.messages,{
+  "startLabel": "Start",
+  "endLabel": "End"
+});
+}
+
 /* Editor messages */
 
 if (kendo.ui.Editor) {

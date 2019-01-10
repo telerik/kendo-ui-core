@@ -1,33 +1,27 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
-title: Script Files for Interactivity and UX
-page_title: Script Files for Interactivity and UX | Kendo UI Getting Started
-description: "Listing of required script files for the Kendo UI Interactivity and UX"
-slug: script_filesfor_interactivityandux_widgets
-position: 15
+title: Script Files for Media
+page_title: Script Files for Media | Kendo UI Getting Started
+description: "Listing of required script files for the Kendo UI Media"
+slug: script_filesfor_media_widgets
+position: 13
 ---
 
-# Script Files for Interactivity and UX
+# Script Files for Media
 
-Below are listed the script files for the Kendo UI Interactivity and UX widgets.&nbsp;&nbsp;
+Below are listed the script files for the Kendo UI Media widgets.&nbsp;&nbsp;
 
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
-| [Drag & drop](http://demos.telerik.com/kendo-ui/dragdrop/index) | jquery.js | |
-| | kendo.core.js | |
-| | kendo.userevents.js | |
-| | kendo.draganddrop.js | |
-| [Effects](http://demos.telerik.com/kendo-ui/fx/expand) | jquery.js | |
-| | kendo.core.js | |
+| [Media Player](http://demos.telerik.com/kendo-ui/mediaplayer/index) | jquery.js | |
+| | kendo.slider.js | |
+| | kendo.toolbar.js | |
+| | kendo.dropdownlist.js | |
+| | kendo.tooltip.js | |
+| [ScrollView](http://demos.telerik.com/kendo-ui/scrollview/index) | jquery.js | |
 | | kendo.fx.js | |
-| [ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index) | jquery.js | |
-| | kendo.core.js | |
-| | kendo.progressbar.js | |
-| [Sortable](http://demos.telerik.com/kendo-ui/sortable/index) | jquery.js | |
-| | kendo.core.js | |
-| | kendo.userevents.js | |
+| | kendo.data.js | |
 | | kendo.draganddrop.js | |
-| | kendo.sortable.js | |
 
 ## See Also
 
@@ -42,7 +36,7 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
 + [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
++ [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})

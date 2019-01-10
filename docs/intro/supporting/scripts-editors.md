@@ -51,6 +51,15 @@ Below are listed the script files for the Kendo UI Editors widgets.&nbsp;&nbsp;
 | | kendo.calendar.js | |
 | | kendo.popup.js | |
 | | kendo.datepicker.js | |
+| [DateRangePicker](http://demos.telerik.com/kendo-ui/daterangepicker/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
+| | kendo.calendar.js | |
+| | kendo.multiviewcalendar.js | |
+| | kendo.popup.js | |
+| | kendo.datepicker.js | |
+| | kendo.daterangepicker.js | |
 | [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |

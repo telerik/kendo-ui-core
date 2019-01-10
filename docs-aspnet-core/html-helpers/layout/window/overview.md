@@ -31,7 +31,7 @@ The following example demonstrates how to define the Window by using the Window 
 ```Controller
     public class WindowController  : Controller
     {
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -40,41 +40,97 @@ The following example demonstrates how to define the Window by using the Window 
 
 ## Configuration
 
+The Window provides default configuration options that can be set during initialization. Some of the options include:
+
+* [Minimum and maximum height and width during resizing]({% slug htmlhelpers_window_dimensions_aspnetcore %}).
+* Available user actions&mdash;close, refresh, maximize, minimize, or pin&mdash;and the option to define custom ones.
+* Title.
+* [Draggable]({% slug htmlhelpers_window_constrain_aspnetcore %}) and resizable behaviors.
+* Initial position in pixels with regard to the page top-left corner.
+* Pinned state&mdash;whether the Window moves together with the rest of the page content during scrolling.
+
+
 The following example demonstrates the basic configuration of the Window HtmlHelper and how to get the Window instance.
 
 ###### Example
 
-```
-@(Html.Kendo().Window()
+    @(Html.Kendo().Window()
         .Name("window")
-        .Width(630)
+        .Width(500)
         .Height(300)
         .Title("Window title")
+        .Visible(true)
         .Actions(actions => actions.Refresh().Minimize().Maximize().Close())
-        .LoadContentFrom("ajaxcontent1", "window")
-        .Draggable()
-		.Resizable()
-        .Events(events => events
-            .Open("onOpen")
-            .Activate("onActivate")
-            .Close("onClose")
-            .Refresh("onRefresh")
-            .Resize("onResize")
-            .DragStart("onDragStart")
-            .DragEnd("onDragEnd")
-            .Deactivate("onDeactivate")
-            .Minimize("onMinimize")
-            .Maximize("onMaximize")
-        )
-)
+        .LoadContentFrom("AjaxContent", "Window")
+        .Draggable(false)
+        .Resizable(false)
+    )
 
-<script type="text/javascript">
-    $(function() {
-        //Notice that the Name() of the Window is used to get its client-side instance.
-        var dialog = $("#window").data("kendoWindow");
-    });
-</script>
-```
+    <script type="text/javascript">
+        $(function() {
+            //Notice that the Name() of the Window is used to get its client-side instance.
+            var dialog = $("#window").data("kendoWindow");
+        });
+    </script>
+
+## Functionality and Features
+
+* [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})
+* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})
+* [Constraining Position]({% slug htmlhelpers_window_constrain_aspnetcore %})
+* [Loading Content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
+* [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
+* [Integration with Forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+
+## Event Handling
+
+You can subscribe to all Window [events](/api/Kendo.Mvc.UI.Fluent/WindowEventBuilder).
+
+### By Handler Name
+
+The following example demonstrates how to subscribe to events by handler name.
+
+###### Example
+
+    @(Html.Kendo().Window()
+        .Name("window")
+        .Events(e => e
+            .Open("window_open")
+            .Close("window_close")
+        )
+    )
+    <script>
+        function window_open() {
+            //Handle the open event.
+        }
+
+        function window_close() {
+            //Handle the close event.
+        }
+    </script>
+
+
+### By Template Delegate
+
+The following example demonstrates how to subscribe to events by using a template delegate.
+
+###### Example
+
+    @(Html.Kendo().Window()
+        .Name("window")
+        .Events(e => e
+            .Open(@<text>
+                function() {
+                    //Handle the open event inline.
+                }
+            </text>)
+            .Close(@<text>
+                function() {
+                    //Handle the close event inline.
+                }
+            </text>)
+        )
+    )
 
 ## See Also
 
