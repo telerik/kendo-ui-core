@@ -50,9 +50,9 @@
         }
     });
 
-    module("VirtualList: ", {
-        setup: function() {
-            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+    describe("VirtualList: ", function () {
+        beforeEach(function() {
+            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -77,16 +77,15 @@
                 height: CONTAINER_HEIGHT,
                 template: "#:text#"
             };
-        },
+        });
 
-        teardown: function() {
+        afterEach(function() {
             if (container.data("kendoVirtualList")) {
                 container.data("kendoVirtualList").destroy();
             }
 
-            QUnit.fixture.empty();
-        }
-    });
+            Mocha.fixture.empty();
+        });
 
     function createAsyncDataSource(options) {
         return new kendo.data.DataSource($.extend({
@@ -106,7 +105,7 @@
         }, options));
     }
 
-    test("each column template shows text field if there is not field defined", function() {
+    it("each column template shows text field if there is not field defined", function() {
         var list = new VirtualList(container, {
             columns: [
                 {},
@@ -117,10 +116,10 @@
             { id: 3, text: "item3" }]
         });
 
-        equal(list.templates.column0({ id: 1, text: "item1" }), "item1");
+        assert.equal(list.templates.column0({ id: 1, text: "item1" }), "item1");
     });
 
-     test("each column sets a new template", function() {
+     it("each column sets a new template", function() {
         var list = new VirtualList(container, {
             columns: [
                 {field: "name"},
@@ -132,11 +131,11 @@
             { id: 3, name: "item3" }]
         });
 
-        equal(list.templates.column0({ id: 1, name: "item1" }), "item1");
-        equal(list.templates.column1({ id: 2, name: "item2" }), "2");
+        assert.equal(list.templates.column0({ id: 1, name: "item1" }), "item1");
+        assert.equal(list.templates.column1({ id: 2, name: "item2" }), "2");
     });
 
-    test("each custom template is applied", function() {
+    it("each custom template is applied", function() {
         var list = new VirtualList(container, {
             columns: [
                 {field: "name", template: "new #: name #"},
@@ -148,7 +147,8 @@
             { id: 3, name: "item3" }]
         });
 
-        equal(list.templates.column0({ id: 1, name: "item1" }), "new item1");
+        assert.equal(list.templates.column0({ id: 1, name: "item1" }), "new item1");
     });
 
-})();
+    });
+}());

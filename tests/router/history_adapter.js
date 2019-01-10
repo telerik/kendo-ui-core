@@ -1,26 +1,26 @@
 (function () {
     var Adapter = kendo.History.HistoryAdapter;
 
-    module("History adapter");
+    describe("History adapter", function () {
 
     function onHash(callback) {
         $(window).one("hashchange", callback);
     }
 
-    asyncTest("back goes to previous location", 1, function() {
+    it("back goes to previous location", function(done) {
         var adapter = new Adapter(),
             initial = location.hash;
         onHash(function() {
             adapter.back();
             onHash(function() {
-                start();
-                equal(location.hash, initial);
+                assert.equal(location.hash, initial);
+                done();
             });
         });
         location.hash = "a";
     });
 
-    asyncTest("forward goes to next location", 1, function() {
+    it("forward goes to next location", function(done) {
         var adapter = new Adapter();
 
         onHash(function() {
@@ -28,8 +28,8 @@
             onHash(function() {
                 adapter.forward();
                 onHash(function() {
-                    start();
-                    equal(location.hash, "#b");
+                    assert.equal(location.hash, "#b");
+                    done();
                 });
             });
         });
@@ -37,13 +37,13 @@
         location.hash = "b";
     });
 
-    asyncTest("length tracks the history length", 1, function() {
+    it("length tracks the history length", function(done) {
         var length = history.length;
 
         if (length === 50) {
-            start();
             window.console.log("skipping history length tests, max length reached");
-            ok(true);
+            assert.isOk(true);
+            done();
             return;
         }
 
@@ -51,10 +51,11 @@
             initial = adapter.length();
 
         onHash(function() {
-            start();
-            equal(adapter.length(), initial + 1);
+            assert.equal(adapter.length(), initial + 1);
+            done();
         });
 
         location.hash = "c";
     });
-})();
+    });
+}());

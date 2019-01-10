@@ -1,13 +1,13 @@
 (function() {
     var keys = window.kendo.keys;
 
-    module("navigation", {
-        setup: function() {
+    describe("navigation", function () {
+        beforeEach(function() {
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key, preventDefault: $.noop });
             };
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             if (button) {
                 if (button.data("kendoButton")) {
                     button.data("kendoButton").destroy();
@@ -15,26 +15,25 @@
                 button.remove();
                 button = null;
             }
-        }
-    });
+        });
 
-    test("focusing adds a focused class", function() {
+    it("focusing adds a focused class", function() {
         var buttonObject = getButton().kendoButton();
 
         button.focus();
 
-        ok(button.hasClass("k-state-focused"));
+        assert.isOk(button.hasClass("k-state-focused"));
     });
 
-    test("blurring removes a focused class", function() {
+    it("blurring removes a focused class", function() {
         var buttonObject = getButton().addClass("k-state-focused").kendoButton();
 
         button.blur();
 
-        ok(!button.hasClass("k-state-focused"));
+        assert.isOk(!button.hasClass("k-state-focused"));
     });
 
-    test("Enter key triggers click event for non-button elements", function() {
+    it("Enter key triggers click event for non-button elements", function() {
         var fired = false;
 
         function clickHandler(e) {
@@ -47,10 +46,10 @@
 
         button.press(keys.ENTER);
 
-        ok(fired);
+        assert.isOk(fired);
     });
 
-    test("Spacebar triggers click event for non-button elements", function() {
+    it("Spacebar triggers click event for non-button elements", function() {
         var fired = false;
 
         function clickHandler(e) {
@@ -63,6 +62,7 @@
 
         button.press(keys.SPACEBAR);
 
-        ok(fired);
+        assert.isOk(fired);
     });
-})();
+    });
+}());

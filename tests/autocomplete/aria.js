@@ -4,96 +4,95 @@ var AutoComplete = kendo.ui.AutoComplete;
 
 var input;
 
-module("autocomplete ARIA", {
-    setup: function() {
+describe("autocomplete ARIA", function () {
+    beforeEach(function() {
         kendo.effects.disable();
-        input = $("<input>").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
-    }
-});
+        input = $("<input>").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("AutoComplete adds ARIA role='textbox'", function() {
+it("AutoComplete adds ARIA role='textbox'", function() {
     var autocomplete = new AutoComplete(input, {
         placeholder: "Select..."
     });
 
-    equal(autocomplete.element.attr("role"), "textbox");
+    assert.equal(autocomplete.element.attr("role"), "textbox");
 });
 
-test("AutoComplete adds aria-haspopup", function() {
+it("AutoComplete adds aria-haspopup", function() {
     var autocomplete = new AutoComplete(input, {
         placeholder: "Select..."
     });
 
-    equal(autocomplete.element.attr("aria-haspopup"), "true");
+    assert.equal(autocomplete.element.attr("aria-haspopup"), "true");
 });
 
-test("AutoComplete adds aria-owns", function() {
+it("AutoComplete adds aria-owns", function() {
     var autocomplete = new AutoComplete(input.attr("id", "test"), {
         placeholder: "Select..."
     });
 
-    equal(autocomplete.element.attr("aria-owns"), autocomplete.ul.attr("id"));
+    assert.equal(autocomplete.element.attr("aria-owns"), autocomplete.ul.attr("id"));
 });
 
-test("AutoComplete adds aria-autocomplete='both'", function() {
+it("AutoComplete adds aria-autocomplete='both'", function() {
     var autocomplete = new AutoComplete(input.attr("id", "test"), {
         placeholder: "Select...",
         suggest: true
     });
 
-    equal(autocomplete.element.attr("aria-autocomplete"), "both");
+    assert.equal(autocomplete.element.attr("aria-autocomplete"), "both");
 });
 
-test("AutoComplete adds aria-autocomplete='list' if no suggest", function() {
+it("AutoComplete adds aria-autocomplete='list' if no suggest", function() {
     var autocomplete = new AutoComplete(input.attr("id", "test"), {
         placeholder: "Select...",
         suggest: false
     });
 
-    equal(autocomplete.element.attr("aria-autocomplete"), "list");
+    assert.equal(autocomplete.element.attr("aria-autocomplete"), "list");
 });
 
-test("Autocomplete sets tabindex", function() {
+it("Autocomplete sets tabindex", function() {
     var autocomplete = new AutoComplete(input.attr("id", "test"), {
         placeholder: "Select...",
         suggest: false
     });
 
-    equal(autocomplete.element.prop("tabIndex"), "0");
+    assert.equal(autocomplete.element.prop("tabIndex"), "0");
 });
 
-test("Autocomplete preserves tab order", function() {
+it("Autocomplete preserves tab order", function() {
     var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
         placeholder: "Select...",
         suggest: false
     });
 
-    equal(autocomplete.element.attr("tabIndex"), "2");
+    assert.equal(autocomplete.element.attr("tabIndex"), "2");
 });
 
-test("Autocomplete adds aria-disabled=false", function() {
+it("Autocomplete adds aria-disabled=false", function() {
     var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
         placeholder: "Select...",
         suggest: false
     });
 
-    equal(autocomplete.element.attr("aria-disabled"), "false");
+    assert.equal(autocomplete.element.attr("aria-disabled"), "false");
 });
 
-test("Autocomplete adds aria-disabled=true", function() {
+it("Autocomplete adds aria-disabled=true", function() {
     var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
         placeholder: "Select...",
         suggest: false,
         enable: false
     });
 
-    equal(autocomplete.element.attr("aria-disabled"), "true");
+    assert.equal(autocomplete.element.attr("aria-disabled"), "true");
 });
 
-test("Autocomplete adds aria-expanded", function() {
+it("Autocomplete adds aria-expanded", function() {
     var autocomplete = new AutoComplete(input, {
         placeholder: "Select...",
         dataSource: ["Item"],
@@ -102,7 +101,8 @@ test("Autocomplete adds aria-expanded", function() {
 
     autocomplete.search("I");
 
-    equal(autocomplete.element.attr("aria-expanded"), "true");
+    assert.equal(autocomplete.element.attr("aria-expanded"), "true");
 });
 
+    });
 }());

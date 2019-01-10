@@ -1,511 +1,489 @@
 (function() {
-    module("kendo.ui.notification api popup", {
-        teardown: teardown
-    });
+    describe("api", function() {
+        beforeEach(function() {
 
-    test("show method adds internal stacking GUID to popup notification", function() {
-        createNotification();
+        });
+        afterEach(function() {
+            if (notification) {
+                notification.destroy();
+            }
 
-        var guid = notification._guid;
-
-        notification.show("foo");
-
-        ok($(".k-notification").parent().hasClass(guid));
-    });
-
-    test("show method creates div.k-widget.k-notification element", function() {
-        createNotification();
-
-        notification.show("foo");
-
-        equal($(document.body).find("div.k-widget.k-notification").length, 1);
-    });
-
-    test("show method creates a Kendo UI Popup when appendTo is not set", function() {
-        createNotification();
-
-        notification.show("foo");
-
-        ok($(document.body).find(".k-notification").data("kendoPopup"));
-    });
-
-    test("show method creates a Kendo UI Popup with zero margin", function() {
-        createNotification();
-
-        notification.show("foo");
-
-        equal($(document.body).find(".k-notification").parent()[0].style.margin, "0px"); // using .css("margin") will fail in Firefox
-    });
-
-    test("show method creates a Kendo UI Popup with three zero paddings, except top by default", 3, function() {
-        createNotification();
-
-        notification.show("foo");
-
-        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
-    });
-
-    test("show method creates a Kendo UI Popup with three zero paddings, except top", 3, function() {
-        createNotification({
-            stacking: "up"
+            $(".k-notification").each(function(idx, element) {
+                var popup = $(element).data("kendoPopup");
+                if (popup) {
+                    popup.destroy();
+                }
+                $(element).remove();
+            });
         });
 
-        notification.show("foo");
+        it("show method adds internal stacking GUID to popup notification", function() {
+            createNotification();
 
-        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
-    });
+            var guid = notification._guid;
 
-    test("show method creates a Kendo UI Popup with three zero paddings, except bottom", 3, function() {
-        createNotification({
-            stacking: "down"
+            notification.show("foo");
+
+            assert.isOk($(".k-notification").parent().hasClass(guid));
         });
 
-        notification.show("foo");
+        it("show method adds internal stacking GUID to static notification", function() {
+            createNotification({
+                appendTo: Mocha.fixture
+            });
 
-        equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
-    });
+            var guid = notification._guid;
 
-    test("show method creates a Kendo UI Popup with three zero paddings, except left", 3, function() {
-        createNotification({
-            stacking: "left"
+            notification.show("foo");
+
+            assert.isOk($(".k-notification").hasClass(guid));
         });
 
-        notification.show("foo");
+        it("show method creates div.k-widget.k-notification element", function() {
+            createNotification();
 
-        equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
-    });
+            notification.show("foo");
 
-    test("show method creates a Kendo UI Popup with three zero paddings, except right", 3, function() {
-        createNotification({
-            stacking: "right"
+            assert.equal($(document.body).find("div.k-widget.k-notification").length, 1);
         });
 
-        notification.show("foo");
+        it("show method creates a Kendo UI Popup when appendTo is not set", function() {
+            createNotification();
 
-        equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
-        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
-    });
+            notification.show("foo");
 
-    test("show method ignores empty content", function() {
-        createNotification();
-
-        notification.show("");
-        notification.show();
-        notification.show(null);
-
-        equal($(document.body).find("div.k-widget.k-notification").length, 0);
-    });
-
-    test("show method supports empty object as content", function() {
-        createNotification();
-
-        notification.show({});
-
-        equal($(document.body).find("div.k-widget.k-notification").length, 1);
-    });
-
-    test("show method renders passed string content", function() {
-        createNotification();
-
-        notification.show("<span id='foo'></span>");
-
-        equal($(document.body).find("div.k-widget.k-notification").find("#foo").length, 1);
-    });
-
-    test("showText method escapes passed markup content", function() {
-        createNotification();
-
-        notification.showText("<span>Foo</span>");
-
-        contains(
-            $(document.body).find("div.k-widget.k-notification").html(),
-            "&lt;span&gt;Foo&lt;/span&gt;"
-        );
-    });
-
-    test("show method renders passed object content", function() {
-        createNotification({
-            templates: [{
-                type: "info",
-                template: "<div id='#= foo #'></div>"
-            }]
+            assert.isOk($(document.body).find(".k-notification").data("kendoPopup"));
         });
 
-        notification.show({foo: "bar"});
+        it("show method creates a Kendo UI Popup with zero margin", function() {
+            createNotification();
 
-        equal($(document.body).find("div.k-widget.k-notification").find("#bar").length, 1);
-    });
+            notification.show("foo");
 
-    test("show method renders passed function content", function() {
-        createNotification();
-
-        var html = '<div id="foo"></div>';
-
-        notification.show(function(){
-            return html;
+            assert.equal($(document.body).find(".k-notification").parent()[0].style.margin, "0px"); // using .css("margin") will fail in Firefox
         });
 
-        ok($(document.body).find("div.k-widget.k-notification").html().indexOf(html) > -1);
-    });
+        it("show method creates a Kendo UI Popup with three zero paddings, except top by default", function() {
+            createNotification();
 
-    test("showText method escapes passed function content", function() {
-        createNotification();
+            notification.show("foo");
 
-        var html = '<div id="foo"></div>';
-
-        notification.showText(function(){
-            return html;
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
         });
 
-        contains(
-            $(document.body).find("div.k-widget.k-notification").html(),
-            "&lt;div id=\"foo\"&gt;&lt;/div&gt;"
-        );
-    });
+        it("show method creates a Kendo UI Popup with three zero paddings, except top", function() {
+            createNotification({
+                stacking: "up"
+            });
 
-    test("show method renders passed function object content", function() {
-        createNotification({
-            templates: [{
-                type: "info",
-                template: "<div id='#= foo #'></div>"
-            }]
+            notification.show("foo");
+
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
         });
 
-        notification.show(function(){
-            return {foo: "bar"};
+        it("show method creates a Kendo UI Popup with three zero paddings, except bottom", function() {
+            createNotification({
+                stacking: "down"
+            });
+
+            notification.show("foo");
+
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
         });
 
-        equal($(document.body).find("div.k-widget.k-notification").find("#bar").length, 1);
-    });
+        it("show method creates a Kendo UI Popup with three zero paddings, except left", function() {
+            createNotification({
+                stacking: "left"
+            });
 
-    test("show method adds notification type CSS class to popup and text to note icon", 2, function() {
-        createNotification();
+            notification.show("foo");
 
-        notification.show("foo", "bar");
-
-        var notificationPopup = $(".k-notification.k-notification-bar");
-
-        equal(notificationPopup.length, 1);
-        equal(notificationPopup.find(".k-i-bar").text(), "");
-    });
-
-    test("show method adds notification type CSS class to static element and text to note icon", 2, function() {
-        createNotification({
-            appendTo: QUnit.fixture
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
         });
 
-        notification.show("foo", "bar");
+        it("show method creates a Kendo UI Popup with three zero paddings, except right", function() {
+            createNotification({
+                stacking: "right"
+            });
 
-        var notificationElement = $(".k-notification.k-notification-bar");
+            notification.show("foo");
 
-        equal(notificationElement.length, 1);
-        equal(notificationElement.find(".k-i-bar").text(), "");
-    });
-
-    test("show method adds data-role='alert' to popup notification", function() {
-        createNotification();
-
-        notification.show("foo");
-
-        equal($(".k-notification").attr("data-role"), "alert");
-    });
-
-    test("new popup ignores old ones that are currently being hidden", 3, function () {
-        createNotification();
-
-        notification.show("foo");
-        var popup1 = $(".k-notification").last();
-        var offset1 = popup1.offset();
-        var text1 = popup1.text();
-
-        notification.hide();
-
-        notification.show("bar");
-        var popup2 = $(".k-notification").last();
-        var offset2 = popup2.offset();
-        var text2 = popup2.text();
-
-        ok(text1.indexOf("foo") >= 0);
-        ok(text2.indexOf("bar") >= 0);
-        equal(offset2.top, offset1.top);
-    });
-
-    test("shortcut show methods call show method with appropriate arguments", 8, function () {
-        var defaultArgs = [null, null],
-            methods = ["info", "success", "warning", "error"],
-            args, j;
-
-        createNotification();
-
-        notification.show = function() {
-            args = arguments;
-        };
-
-        for (j = 0; j < methods.length; j++) {
-            args = defaultArgs;
-            notification[methods[j]]("foo");
-
-            equal(args[0], "foo");
-            equal(args[1], methods[j]);
-        }
-    });
-
-    test("popup notifications receive a k-hiding CSS class while being hidden", function () {
-        kendo.effects.enable();
-
-        createNotification({
-            autoHideAfter: 0
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+            assert.equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
         });
 
-        notification.show("foo");
-        notification.hide();
+        it("show method does not create a Kendo UI Popup when appendTo is set", function() {
+            createNotification({
+                appendTo: Mocha.fixture
+            });
 
-        ok($(".k-notification").parent().hasClass("k-hiding"));
+            notification.show("foo");
 
-        kendo.effects.disable();
-    });
+            var notificationElement = Mocha.fixture.children(".k-notification");
 
-    test("hide method hides all popup notifications", function() {
-        createNotification({
-            autoHideAfter: 0
+            assert.equal(notificationElement.length, 1);
+            assert.isOk(!notificationElement.data("kendoPopup"));
         });
 
-        notification.show("foo");
-        notification.show("bar");
-        notification.show("baz");
+        it("show method ignores empty content", function() {
+            createNotification();
 
-        notification.hide();
+            notification.show("");
+            notification.show();
+            notification.show(null);
 
-        equal($(".k-notification").length, 0);
-    });
-
-    test("setOptions updates popup stacking settings", 3, function() {
-        createNotification({
-            stacking: "left"
+            assert.equal($(document.body).find("div.k-widget.k-notification").length, 0);
         });
 
-        notification.setOptions({
-            stacking: "right"
+        it("show method supports empty object as content", function() {
+            createNotification();
+
+            notification.show({});
+
+            assert.equal($(document.body).find("div.k-widget.k-notification").length, 1);
         });
 
-        equal(notification._popupOrigin, "top right");
-        equal(notification._popupPosition, "top left");
-        equal(typeof notification._popupPaddings.paddingRight, "undefined");
-    });
+        it("show method renders passed string content", function() {
+            createNotification();
 
-    test("setOptions recompiles templates", function() {
-        createNotification({
-            templates: [{
-                type: "info",
-                template: "foo"
-            }]
+            notification.show("<span id='foo'></span>");
+
+            assert.equal($(document.body).find("div.k-widget.k-notification").find("#foo").length, 1);
         });
 
-        notification.setOptions({
-            templates: [{
-                type: "info",
-                template: "bar"
-            }]
+        it("showText method escapes passed markup content", function() {
+            createNotification();
+
+            notification.showText("<span>Foo</span>");
+
+            assert.include(
+                $(document.body).find("div.k-widget.k-notification").html(),
+                "&lt;span&gt;Foo&lt;/span&gt;"
+            );
         });
 
-        equal(notification._compiled.info({}), "bar");
-    });
+        it("show method renders passed object content", function() {
+            createNotification({
+                templates: [{
+                    type: "info",
+                    template: "<div id='#= foo #'></div>"
+                }]
+            });
 
-    test("getNotifications returns open popup notifications", function() {
-        createNotification({
-            autoHideAfter: 0
+            notification.show({ foo: "bar" });
+
+            assert.equal($(document.body).find("div.k-widget.k-notification").find("#bar").length, 1);
         });
 
-        notification.show("foo");
-        notification.show("bar");
+        it("show method renders passed function content", function() {
+            createNotification();
 
-        equal(notification.getNotifications().length, 2);
-    });
+            var html = '<div id="foo"></div>';
 
-    test("destroy removes content click handler from popup", function() {
-        createNotification({
-            autoHideAfter: 0
+            notification.show(function() {
+                return html;
+            });
+
+            assert.isOk($(document.body).find("div.k-widget.k-notification").html().indexOf(html) > -1);
         });
 
-        notification.show("foo");
+        it("showText method escapes passed function content", function() {
+            createNotification();
 
-        notification.destroy();
+            var html = '<div id="foo"></div>';
 
-        $(".k-notification").click();
+            notification.showText(function() {
+                return html;
+            });
 
-        equal($(".k-notification").length, 1);
-    });
-
-    test("destroy removes button click handler from popup", function() {
-        createNotification({
-            autoHideAfter: 0,
-            hideOnClick: false,
-            button: true
+            assert.include(
+                $(document.body).find("div.k-widget.k-notification").html(),
+                "&lt;div id=\"foo\"&gt;&lt;/div&gt;"
+            );
         });
 
-        notification.show("foo");
+        it("show method renders passed function object content", function() {
+            createNotification({
+                templates: [{
+                    type: "info",
+                    template: "<div id='#= foo #'></div>"
+                }]
+            });
 
-        notification.destroy();
+            notification.show(function() {
+                return { foo: "bar" };
+            });
 
-        $(".k-notification .k-i-close").click();
-
-        equal($(".k-notification").length, 1);
-    });
-
-    module("kendo.ui.notification api static", {
-        teardown: teardown
-    });
-
-    test("show method adds internal stacking GUID to static notification", function() {
-        createNotification({
-            appendTo: QUnit.fixture
+            assert.equal($(document.body).find("div.k-widget.k-notification").find("#bar").length, 1);
         });
 
-        var guid = notification._guid;
+        it("show method adds notification type CSS class to popup and text to note icon", function() {
+            createNotification();
 
-        notification.show("foo");
+            notification.show("foo", "bar");
 
-        ok($(".k-notification").hasClass(guid));
-    });
+            var notificationPopup = $(".k-notification.k-notification-bar");
 
-    test("show method does not create a Kendo UI Popup when appendTo is set", function() {
-        createNotification({
-            appendTo: QUnit.fixture
+            assert.equal(notificationPopup.length, 1);
+            assert.equal(notificationPopup.find(".k-i-bar").text(), "");
         });
 
-        notification.show("foo");
+        it("show method adds notification type CSS class to static element and text to note icon", function() {
+            createNotification({
+                appendTo: Mocha.fixture
+            });
 
-        var notificationElement = QUnit.fixture.children(".k-notification");
+            notification.show("foo", "bar");
 
-        equal(notificationElement.length, 1);
-        ok(!notificationElement.data("kendoPopup"));
-    });
+            var notificationElement = $(".k-notification.k-notification-bar");
 
-    test("show method adds data-role='alert' to static notification", function() {
-        createNotification({
-            appendTo: QUnit.fixture
+            assert.equal(notificationElement.length, 1);
+            assert.equal(notificationElement.find(".k-i-bar").text(), "");
         });
 
-        notification.show("foo");
+        it("show method adds data-role='alert' to popup notification", function() {
+            createNotification();
 
-        equal($(".k-notification").attr("data-role"), "alert");
-    });
+            notification.show("foo");
 
-    test("show and hide methods work for static notifications when animations are disabled", function () {
-        createNotification({
-            appendTo: QUnit.fixture,
-            animation: false
+            assert.equal($(".k-notification").attr("data-role"), "alert");
         });
 
-        notification.show("foo");
+        it("show method adds data-role='alert' to static notification", function() {
+            createNotification({
+                appendTo: Mocha.fixture
+            });
 
-        ok($(".k-notification").is(":visible"));
+            notification.show("foo");
 
-        notification.hide();
-
-        equal($(".k-notification").length, 0);
-    });
-
-    test("hide method hides all static notifications", function() {
-        createNotification({
-            autoHideAfter: 0,
-            appendTo: QUnit.fixture
+            assert.equal($(".k-notification").attr("data-role"), "alert");
         });
 
-        notification.show("foo");
-        notification.show("bar");
-        notification.show("baz");
+        it("show and hide methods work for static notifications when animations are disabled", function() {
+            createNotification({
+                appendTo: Mocha.fixture,
+                animation: false
+            });
 
-        notification.hide();
+            notification.show("foo");
 
-        equal($(".k-notification").length, 0);
-    });
+            assert.isOk($(".k-notification").is(":visible"));
 
-    test("getNotifications returns open static notifications", function() {
-        createNotification({
-            autoHideAfter: 0,
-            appendTo: QUnit.fixture
+            notification.hide();
+
+            assert.equal($(".k-notification").length, 0);
         });
 
-        notification.show("foo");
-        notification.show("bar");
+        it("new popup ignores old ones that are currently being hidden", function() {
+            createNotification();
 
-        equal(notification.getNotifications().length, 2);
-    });
 
-    test("destroy removes content click handler from static", function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0
+
+            notification.show("foo");
+            var popup1 = $(".k-notification").last();
+            var offset1 = popup1.offset();
+            var text1 = popup1.text();
+
+            notification.hide();
+
+            notification.show("bar");
+            var popup2 = $(".k-notification").last();
+            var offset2 = popup2.offset();
+            var text2 = popup2.text();
+
+            assert.isOk(text1.indexOf("foo") >= 0);
+            assert.isOk(text2.indexOf("bar") >= 0);
+            assert.equal(offset2.top, offset1.top);
         });
 
-        notification.show("foo");
+        it("shortcut show methods call show method with appropriate arguments", function() {
+            var defaultArgs = [null, null],
+                methods = ["info", "success", "warning", "error"],
+                args, j;
 
-        notification.destroy();
+            createNotification();
 
-        $(".k-notification").click();
+            notification.show = function() {
+                args = arguments;
+            };
 
-        equal($(".k-notification").length, 1);
-    });
+            for (j = 0; j < methods.length; j++) {
+                args = defaultArgs;
+                notification[methods[j]]("foo");
 
-    test("destroy removes button click handler from static", function() {
-        createNotification({
-            appendTo: QUnit.fixture,
-            autoHideAfter: 0,
-            hideOnClick: false,
-            button: true
+                assert.equal(args[0], "foo");
+                assert.equal(args[1], methods[j]);
+            }
         });
 
-        notification.show("foo");
-
-        notification.destroy();
-
-        $(".k-notification .k-i-close").click();
-
-        equal($(".k-notification").length, 1);
-    });
-
-    module("kendo.ui.notification api static multiple containers", {
-        setup: function() {
-            var firstElement = $("<div class='appendto'></div>");
-            var secondElement = $("<div class='appendto'></div>");
-
-            firstElement.appendTo(QUnit.fixture);
-            secondElement.appendTo(QUnit.fixture);
+        it("popup notifications receive a k-hiding CSS class while being hidden", function() {
+            kendo.effects.enable();
 
             createNotification({
-                appendTo: '.appendto'
+                autoHideAfter: 0
             });
-        },
-        teardown: function() {
-            QUnit.fixture.empty();
-        }
+
+            notification.show("foo");
+            notification.hide();
+
+            assert.isOk($(".k-notification").parent().hasClass("k-hiding"));
+
+            kendo.effects.disable();
+        });
+
+        it("hide method hides all popup notifications", function() {
+            createNotification({
+                autoHideAfter: 0
+            });
+
+            notification.show("foo");
+            notification.show("bar");
+            notification.show("baz");
+
+            notification.hide();
+
+            assert.equal($(".k-notification").length, 0);
+        });
+
+        it("hide method hides all static notifications", function() {
+            createNotification({
+                autoHideAfter: 0,
+                appendTo: Mocha.fixture
+            });
+
+            notification.show("foo");
+            notification.show("bar");
+            notification.show("baz");
+
+            notification.hide();
+
+            assert.equal($(".k-notification").length, 0);
+        });
+
+        it("setOptions updates popup stacking settings", function() {
+            createNotification({
+                stacking: "left"
+            });
+
+            notification.setOptions({
+                stacking: "right"
+            });
+
+            assert.equal(notification._popupOrigin, "top right");
+            assert.equal(notification._popupPosition, "top left");
+            assert.equal(typeof notification._popupPaddings.paddingRight, "undefined");
+        });
+
+        it("setOptions recompiles templates", function() {
+            createNotification({
+                templates: [{
+                    type: "info",
+                    template: "foo"
+                }]
+            });
+
+            notification.setOptions({
+                templates: [{
+                    type: "info",
+                    template: "bar"
+                }]
+            });
+
+            assert.equal(notification._compiled.info({}), "bar");
+        });
+
+        it("getNotifications returns open popup notifications", function() {
+            createNotification({
+                autoHideAfter: 0
+            });
+
+            notification.show("foo");
+            notification.show("bar");
+
+            assert.equal(notification.getNotifications().length, 2);
+        });
+
+        it("getNotifications returns open static notifications", function() {
+            createNotification({
+                autoHideAfter: 0,
+                appendTo: Mocha.fixture
+            });
+
+            notification.show("foo");
+            notification.show("bar");
+
+            assert.equal(notification.getNotifications().length, 2);
+        });
+
+        it("destroy removes content click handler from popup", function() {
+            createNotification({
+                autoHideAfter: 0
+            });
+
+            notification.show("foo");
+
+            notification.destroy();
+
+            $(".k-notification").click();
+
+            assert.equal($(".k-notification").length, 1);
+        });
+
+        it("destroy removes button click handler from popup", function() {
+            createNotification({
+                autoHideAfter: 0,
+                hideOnClick: false,
+                button: true
+            });
+
+            notification.show("foo");
+
+            notification.destroy();
+
+            $(".k-notification .k-i-close").click();
+
+            assert.equal($(".k-notification").length, 1);
+        });
+
+        it("destroy removes content click handler from static", function() {
+            createNotification({
+                appendTo: Mocha.fixture,
+                autoHideAfter: 0
+            });
+
+            notification.show("foo");
+
+            notification.destroy();
+
+            $(".k-notification").click();
+
+            assert.equal($(".k-notification").length, 1);
+        });
+
+        it("destroy removes button click handler from static", function() {
+            createNotification({
+                appendTo: Mocha.fixture,
+                autoHideAfter: 0,
+                hideOnClick: false,
+                button: true
+            });
+
+            notification.show("foo");
+
+            notification.destroy();
+
+            $(".k-notification .k-i-close").click();
+
+            assert.equal($(".k-notification").length, 1);
+        });
     });
-
-    test("show method displays static notifications in multiple containers", function() {
-        notification.show("foo");
-
-        equal($(".k-notification").length, 2);
-    });
-
-    test("hide method hides static notifications opened in multiple containers", function() {
-        notification.show("foo");
-        notification.show("bar");
-        notification.show("baz");
-
-        notification.hide();
-
-        equal($(".k-notification").length, 0);
-    });
-})();
-
-
+}());

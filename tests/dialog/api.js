@@ -1,392 +1,392 @@
 (function() {
-    module("api", {
-        setup: function() {
+    describe("api", function() {
+        beforeEach(function() {
             //
-        },
-        teardown: function() {
-            QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element) {
+        });
+        afterEach(function() {
+            Mocha.fixture.closest("body").find(".k-window-content").each(function(idx, element) {
                 kendo.widgetInstance($(element)).destroy();
             });
-            QUnit.fixture.closest("body").find(".k-overlay").remove();
+            Mocha.fixture.closest("body").find(".k-overlay").remove();
+        });
+
+        var KDIALOGTITLE = ".k-dialog-title",
+            KDIALOGTITLEBAR = ".k-window-titlebar",
+            KTITLELESS = "k-dialog-titleless";
+
+        function createDialog(options, element) {
+            element = element || $("<div class='dialog'>dialog content</div>").appendTo(Mocha.fixture);
+            return element.kendoDialog(options).data("kendoDialog");
         }
-    });
 
-    var KDIALOGTITLE = ".k-dialog-title",
-        KDIALOGTITLEBAR = ".k-window-titlebar",
-        KTITLELESS = "k-dialog-titleless";
+        function createWindow(options) {
+            return $("<div />").appendTo(Mocha.fixture).kendoWindow(options).data("kendoWindow");
+        }
 
-    function createDialog(options, element) {
-        element = element || $("<div class='dialog'>dialog content</div>").appendTo(QUnit.fixture);
-        return element.kendoDialog(options).data("kendoDialog");
-    }
+        it("title gets title", function() {
+            assert.equal(createDialog({ title: "Title" }).title(), "Title");
+        });
 
-    function createWindow(options) {
-        return $("<div />").appendTo(QUnit.fixture).kendoWindow(options).data("kendoWindow");
-    }
+        it("title sets title", function() {
+            var dialog = createDialog({ title: "Title" }),
+                oldTitle = dialog.title(),
+                titleElement = $(KDIALOGTITLE, dialog.wrapper);
 
-    test("title gets title", function() {
-        equal(createDialog({ title: "Title" }).title(), "Title");
-    });
+            dialog.title("Title is the new title!");
 
-    test("title sets title", function() {
-        var dialog = createDialog({ title: "Title"}),
-            oldTitle = dialog.title(),
+            assert.equal(titleElement.text(), "Title is the new title!");
+
+            dialog.title(oldTitle);
+
+            assert.equal(titleElement.text(), oldTitle);
+        });
+
+        it("title sets options.title", function() {
+            var options = { title: "Title" },
+                dialog = createDialog(options),
+                newTitle = "Title is the new title!";
+
+            dialog.title(newTitle);
+
+            assert.equal(dialog.options.title, newTitle);
+        });
+
+        it("title sets title, when window was created with titile false", function() {
+            var dialog = createDialog({ title: false });
+            var titleElement = $(KDIALOGTITLE, dialog.wrapper);
+            var titleText = "Title is the new title!";
+
+            assert.equal(titleElement.length, 0);
+
+            dialog.title(titleText);
+
             titleElement = $(KDIALOGTITLE, dialog.wrapper);
+            assert.equal(titleElement.text(), titleText);
+        });
 
-        dialog.title("Title is the new title!");
+        it("title sets title, when window was created with titile false, removes k-dialog-titleless class from wrapper", function() {
+            var dialog = createDialog({ title: false });
+            var titleText = "Title is the new title!";
 
-        equal(titleElement.text(), "Title is the new title!");
+            dialog.title(titleText);
 
-        dialog.title(oldTitle);
+            assert.isOk(!dialog.wrapper.hasClass(KTITLELESS));
+        });
 
-        equal(titleElement.text(), oldTitle);
-    });
+        it("title method gets and sets the title consistently", function() {
+            var title = "foo",
+                dialog = createDialog({ title: title });
 
-    test("title sets options.title", function() {
-        var options = { title: "Title" },
-            dialog = createDialog(options),
-            newTitle = "Title is the new title!";
+            assert.equal(dialog.title(), title);
+            dialog.title(dialog.title());
+            assert.equal(dialog.title(), title);
+        });
 
-        dialog.title(newTitle);
+        it("title method and title property encode the title", function() {
+            var stringValue = "<script>var foo1 = 1;<\/script>",
+                dialog = createDialog({ title: stringValue }),
+                titleElement = $(KDIALOGTITLE, dialog.wrapper);
 
-        equal(dialog.options.title, newTitle);
-    });
+            assert.equal(titleElement.html(), kendo.htmlEncode(stringValue));
 
-    test("title sets title, when window was created with titile false", function() {
-        var dialog = createDialog({ title: false});
-        var titleElement = $(KDIALOGTITLE, dialog.wrapper);
-        var titleText = "Title is the new title!";
+            dialog.title(stringValue);
 
-        equal(titleElement.length, 0);
+            assert.equal(titleElement.html(), kendo.htmlEncode(stringValue));
+        });
 
-        dialog.title(titleText);
+        it("set title to false removes the titlebar element", function() {
+            var dialog = createDialog({ title: "Title" });
 
-        titleElement = $(KDIALOGTITLE, dialog.wrapper);
-        equal(titleElement.text(), titleText);
-    });
+            dialog.title(false);
 
-    test("title sets title, when window was created with titile false, removes k-dialog-titleless class from wrapper", function() {
-        var dialog = createDialog({ title: false});
-        var titleText = "Title is the new title!";
+            assert.equal(dialog.wrapper.children(KDIALOGTITLEBAR).length, 0);
+        });
 
-        dialog.title(titleText);
+        it("set title to false adds k-dialog-titleles class to wrapper", function() {
+            var dialog = createDialog({ title: "Title" });
 
-        ok(!dialog.wrapper.hasClass(KTITLELESS));
-    });
+            dialog.title(false);
 
-    test("title method gets and sets the title consistently", 2, function () {
-        var title = "foo",
-            dialog = createDialog({ title: title });
+            assert.isOk(dialog.wrapper.hasClass(KTITLELESS));
+        });
 
-        equal(dialog.title(), title);
-        dialog.title(dialog.title());
-        equal(dialog.title(), title);
-    });
+        it("content gets content", function() {
+            assert.equal(createDialog().content(), "dialog content");
+        });
 
-    test("title method and title property encode the title", 2, function () {
-        var stringValue = "<script>var foo1 = 1;<\/script>",
-            dialog = createDialog({ title: stringValue }),
-            titleElement = $(KDIALOGTITLE, dialog.wrapper);
+        it("content sets content", function() {
+            var dialog = createDialog(),
+                oldContent = dialog.content(),
+                contentElement = $(".k-content", dialog.wrapper);
 
-        equal(titleElement.html(), kendo.htmlEncode(stringValue));
+            dialog.content("Content is the new content!");
 
-        dialog.title(stringValue);
+            assert.equal(contentElement.html(), "Content is the new content!");
 
-        equal(titleElement.html(), kendo.htmlEncode(stringValue));
-    });
+            dialog.content(oldContent);
 
-    test("set title to false removes the titlebar element", function() {
-        var dialog = createDialog({ title: "Title" });
+            assert.equal(contentElement.html(), oldContent);
+        });
 
-        dialog.title(false);
+        it("title sets options.title", function() {
+            var dialog = createDialog({ content: "" }),
+                newContent = "Content is the new content!";
 
-        equal(dialog.wrapper.children(KDIALOGTITLEBAR).length, 0);
-    });
+            dialog.content(newContent);
 
-    test("set title to false adds k-dialog-titleles class to wrapper", function() {
-        var dialog = createDialog({ title: "Title" });
+            assert.equal(dialog.options.content, newContent);
+        });
 
-        dialog.title(false);
+        it("close sets options.visible to false", function() {
+            var dialog = createDialog();
 
-        ok(dialog.wrapper.hasClass(KTITLELESS));
-    });
+            dialog.close();
 
-    test("content gets content", function() {
-        equal(createDialog().content(), "dialog content");
-    });
+            assert.equal(dialog.options.visible, false);
+        });
 
-    test("content sets content", function() {
-        var dialog = createDialog(),
-            oldContent = dialog.content(),
-            contentElement = $(".k-content", dialog.wrapper);
+        it("close removes the modal wrapper", function() {
+            var dialog = createDialog({});
 
-        dialog.content("Content is the new content!");
+            dialog.close();
 
-        equal(contentElement.html(), "Content is the new content!");
+            assert.equal($(".k-overlay").length, 0);
+        });
 
-        dialog.content(oldContent);
+        it("close does not destroy other dialog overlay", function() {
+            createDialog();
+            var dialog2 = createDialog();
 
-        equal(contentElement.html(), oldContent);
-    });
+            dialog2.close();
 
-    test("title sets options.title", function() {
-        var dialog = createDialog({ content: "" }),
-            newContent = "Content is the new content!";
+            assert.equal($(".k-overlay").length, 1);
+            assert.isOk($(".k-overlay").is(":visible"));
+        });
 
-        dialog.content(newContent);
+        it("closing dialog moves overlay before previous modal dialog", function() {
+            var dialog1 = createDialog();
+            var dialog2 = createDialog();
 
-        equal(dialog.options.content, newContent);
-    });
+            dialog2.close();
 
-    test("close sets options.visible to false", function() {
-        var dialog = createDialog();
+            assert.equal($(".k-overlay").length, 1);
+            assert.isOk(dialog1.wrapper.prev("div").is(".k-overlay"));
+        });
 
-        dialog.close();
+        it("closing dialog moves overlay before previous modal dialog", function() {
+            var dialog1 = createWindow({ modal: true });
+            var dialog2 = createDialog();
 
-        equal(dialog.options.visible, false);
-    });
+            dialog2.close();
 
-    test("close removes the modal wrapper", function() {
-        var dialog = createDialog({ });
+            assert.equal($(".k-overlay").length, 1);
+            assert.isOk(dialog1.wrapper.prev("div").is(".k-overlay"));
+        });
 
-        dialog.close();
-
-        equal($(".k-overlay").length, 0);
-    });
-
-    test("close does not destroy other dialog overlay", function() {
-        createDialog();
-        var dialog2 = createDialog();
-
-        dialog2.close();
-
-        equal($(".k-overlay").length, 1);
-        ok($(".k-overlay").is(":visible"));
-    });
-
-    test("closing dialog moves overlay before previous modal dialog", function() {
-        var dialog1 = createDialog();
-        var dialog2 = createDialog();
-
-        dialog2.close();
-
-        equal($(".k-overlay").length, 1);
-        ok(dialog1.wrapper.prev("div").is(".k-overlay"));
-    });
-
-    test("closing dialog moves overlay before previous modal dialog", function() {
-        var dialog1 = createWindow({modal: true});
-        var dialog2 = createDialog();
-
-        dialog2.close();
-
-        equal($(".k-overlay").length, 1);
-        ok(dialog1.wrapper.prev("div").is(".k-overlay"));
-    });
-
-    test("closing dialog from close handler", 2, function() {
-        var dialog = createDialog({
-            close: function(e) {
-                if (e.userTriggered) {
-                    this.close();
+        it("closing dialog from close handler", function() {
+            var dialog = createDialog({
+                close: function(e) {
+                    if (e.userTriggered) {
+                        this.close();
+                    }
+                    assert.isOk(true);
                 }
-                ok(true);
-            }
+            });
+
+            dialog.wrapper.find(".k-dialog-close").click();
         });
 
-        dialog.wrapper.find(".k-dialog-close").click();
-    });
+        it("closing dialog from close handler prevents link default behavior", function() {
+            var dialog = createDialog();
+            var closeElemenet = dialog.wrapper.find(".k-dialog-close");
+            closeElemenet.on("click", function(e) {
+                assert.isOk(e.isDefaultPrevented());
+            });
 
-    test("closing dialog from close handler prevents link default behavior", 1, function() {
-        var dialog = createDialog();
-        var closeElemenet = dialog.wrapper.find(".k-dialog-close");
-        closeElemenet.on("click", function(e){
-            ok(e.isDefaultPrevented());
+            closeElemenet.click();
         });
 
-        closeElemenet.click();
-    });
+        it("open sets options.visible to true", function() {
+            var dialog = createDialog({ visible: false });
 
-    test("open sets options.visible to true", function() {
-        var dialog = createDialog({ visible: false });
+            dialog.open();
 
-        dialog.open();
-
-        equal(dialog.options.visible, true);
-    });
-
-    test("open shows the dialog wrapper ", function() {
-        var dialog = createDialog({ visible: false });
-
-        dialog.open();
-
-        ok(dialog.wrapper.is(":visible"));
-    });
-
-    test("open adds only one modal overlay", function() {
-        var dialog = createDialog({ modal: true,  visible: false });
-        var dialog1 = createDialog({ modal: true,  visible: false });
-
-        dialog.open();
-        dialog1.open();
-
-        ok($(".k-overlay").length === 1);
-    });
-
-    test("open adds only is added after the last opened dialog", function() {
-        var dialog = createDialog({ modal: true,  visible: false });
-        var dialog1 = createDialog({ modal: true,  visible: false });
-
-        dialog1.open();
-        dialog.open();
-
-        ok(dialog.wrapper.prev("div").is(".k-overlay"));
-    });
-
-    test("open sets zIndex larger then the other's dialogs", function() {
-        var ZINDEX = "z-index";
-        var dialog = createDialog({ modal: true,  visible: false });
-        var dialog1 = createDialog({ modal: true,  visible: false });
-
-        dialog1.open();
-        dialog.open();
-
-        ok(dialog1.wrapper.css(ZINDEX) > 0);
-        ok(dialog.wrapper.css(ZINDEX) > dialog1.wrapper.css(ZINDEX));
-    });
-
-    test("open dialog focuses the content", function() {
-        var dialog = createDialog({ visible: false });
-        mockFunc(dialog, "_focus", function(node) {
-            equal(node, dialog.element[0]);
-        });
-        dialog.open();
-    });
-
-    test("clicking on a button triggers action method", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "OK",
-                action: function() { ok(true); }
-            }]
+            assert.equal(dialog.options.visible, true);
         });
 
-        dialog.wrapper.find(".k-button-group .k-button").click();
-    });
+        it("open shows the dialog wrapper ", function() {
+            var dialog = createDialog({ visible: false });
 
-    test("clicking on an element in the button triggers action method", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "<span class='button-span'>OK</span>",
-                action: function() { ok(true); }
-            }]
+            dialog.open();
+
+            assert.isOk(dialog.wrapper.is(":visible"));
         });
 
-        dialog.wrapper.find(".button-span").click();
-    });
+        it("open adds only one modal overlay", function() {
+            var dialog = createDialog({ modal: true, visible: false });
+            var dialog1 = createDialog({ modal: true, visible: false });
 
-    test("executing action closes the dialog", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "OK"
-            }]
+            dialog.open();
+            dialog1.open();
+
+            assert.isOk($(".k-overlay").length === 1);
         });
 
-        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
-        ok(!dialog.options.visible);
-        ok(!dialog.wrapper.is(":visible"));
-    });
+        it("open adds only is added after the last opened dialog", function() {
+            var dialog = createDialog({ modal: true, visible: false });
+            var dialog1 = createDialog({ modal: true, visible: false });
 
-    test("executing action returning false does't closes the dialog", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "OK",
-                action: function() {
-                    return false;
-                }
-            }]
+            dialog1.open();
+            dialog.open();
+
+            assert.isOk(dialog.wrapper.prev("div").is(".k-overlay"));
         });
 
-        dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
-        ok(dialog.options.visible);
-        ok(dialog.wrapper.is(":visible"));
-    });
+        it("open sets zIndex larger then the other's dialogs", function() {
+            var ZINDEX = "z-index";
+            var dialog = createDialog({ modal: true, visible: false });
+            var dialog1 = createDialog({ modal: true, visible: false });
 
-    test("setOptions modifies actions", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "OK"
-            }]
+            dialog1.open();
+            dialog.open();
+
+            assert.isOk(dialog1.wrapper.css(ZINDEX) > 0);
+            assert.isOk(dialog.wrapper.css(ZINDEX) > dialog1.wrapper.css(ZINDEX));
         });
 
-        dialog.setOptions({
-            actions:[
-                { text: "OK" },
-                { text: "Cancel" }
-            ]
+        it("open dialog focuses the content", function() {
+            var dialog = createDialog({ visible: false });
+            mockFunc(dialog, "_focus", function(node) {
+                assert.equal(node, dialog.element[0]);
+            });
+            dialog.open();
         });
 
-        equal(dialog.wrapper.find(".k-dialog-buttongroup .k-button").length, 2);
-    });
+        it("clicking on a button triggers action method", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "OK",
+                    action: function() { assert.isOk(true); }
+                }]
+            });
 
-    test("setOptions modifies title", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "OK"
-            }]
+            dialog.wrapper.find(".k-button-group .k-button").click();
         });
 
-        dialog.setOptions({
-            title: "Test"
+        it("clicking on an element in the button triggers action method", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "<span class='button-span'>OK</span>",
+                    action: function() { assert.isOk(true); }
+                }]
+            });
+
+            dialog.wrapper.find(".button-span").click();
         });
 
-        equal(dialog.title(), "Test");
-    });
+        it("executing action closes the dialog", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "OK"
+                }]
+            });
 
-    test("setOptions modifies modality", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "OK"
-            }],
-            modal: true
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            assert.isOk(!dialog.options.visible);
+            assert.isOk(!dialog.wrapper.is(":visible"));
         });
 
-        dialog.setOptions({
-            modal: false
+        it("executing action returning false does't closes the dialog", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "OK",
+                    action: function() {
+                        return false;
+                    }
+                }]
+            });
+
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+            assert.isOk(dialog.options.visible);
+            assert.isOk(dialog.wrapper.is(":visible"));
         });
 
-        equal(dialog.options.modal, false);
-    });
+        it("setOptions modifies actions", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "OK"
+                }]
+            });
 
-    test("setOptions modifies modality", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "OK"
-            }],
-            modal: true
+            dialog.setOptions({
+                actions: [
+                    { text: "OK" },
+                    { text: "Cancel" }
+                ]
+            });
+
+            assert.equal(dialog.wrapper.find(".k-dialog-buttongroup .k-button").length, 2);
         });
 
-        dialog.setOptions({
-            content: "test"
+        it("setOptions modifies title", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "OK"
+                }]
+            });
+
+            dialog.setOptions({
+                title: "Test"
+            });
+
+            assert.equal(dialog.title(), "Test");
         });
 
-        equal(dialog.element.html(), "test");
-    });
+        it("setOptions modifies modality", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "OK"
+                }],
+                modal: true
+            });
 
-    test("center should track for resize", function() {
-        var dialog = createDialog({ visible: false });
-        trackMethodCall(dialog, "_centerOnResize");
-        dialog.center();
+            dialog.setOptions({
+                modal: false
+            });
 
-        ok(dialog._centerOnResize.called);
-    });
+            assert.equal(dialog.options.modal, false);
+        });
 
-    test("remove resize tracking on close", function() {
-        var dialog = createDialog({ visible: true });
-        trackMethodCall(dialog, "_stopCenterOnResize");
+        it("setOptions modifies modality", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "OK"
+                }],
+                modal: true
+            });
 
-        dialog.close();
+            dialog.setOptions({
+                content: "test"
+            });
 
-        ok(dialog._stopCenterOnResize.called);
+            assert.equal(dialog.element.html(), "test");
+        });
+
+        it("center should track for resize", function() {
+            var dialog = createDialog({ visible: false });
+            trackMethodCall(dialog, "_centerOnResize");
+            dialog.center();
+
+            assert.isOk(dialog._centerOnResize.called);
+        });
+
+        it("remove resize tracking on close", function() {
+            var dialog = createDialog({ visible: true });
+            trackMethodCall(dialog, "_stopCenterOnResize");
+
+            dialog.close();
+
+            assert.isOk(dialog._stopCenterOnResize.called);
+        });
     });
 }());

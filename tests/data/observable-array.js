@@ -1,204 +1,212 @@
-(function(){
+(function() {
     "use strict";
 
-module("ObservableArray reduce");
+    describe("ObservableArray reduce", function() {
 
-test("reduce visits each element from the low index to high index", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = "123abc",
-        actual;
+        it("reduce visits each element from the low index to high index", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = "123abc",
+                actual;
 
-    actual = array.reduce(function (previous, current) {
-        return previous + current;
-    });
+            actual = array.reduce(function(previous, current) {
+                return previous + current;
+            });
 
-    equal(actual, expected);
-});
-
-test("reduce starts with initial value when provided", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        initialValue = "z",
-        expected = "z123abc",
-        actual;
-
-    actual = array.reduce(function (previous, current) {
-        return previous + current;
-    }, initialValue);
-
-    equal(actual, expected);
-});
-
-test("reduce on an empty array returns undefined", function () {
-    var source = [],
-        array = new kendo.data.ObservableArray(source),
-        expected = undefined,
-        actual;
-
-    actual = array.reduce(function (previous, current) {
-        return previous + current;
-    });
-
-    equal(actual, expected);
-});
-
-test("reduce passes index of collection to callback for each element", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = "112345",
-        actual;
-
-    actual = array.reduce(function (previous, current, index) {
-        return previous.toString() + index.toString();
-    });
-
-    equal(actual, expected);
-});
-
-module("ObservableArray reduceRight");
-
-test("reduceRight visits each element from the high index to low index", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = "cba321",
-        actual;
-
-    actual = array.reduceRight(function (previous, current) {
-        return previous + current;
-    });
-
-    equal(actual, expected);
-});
-
-test("reduceRight starts with initial value when provided", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        initialValue = "z",
-        expected = "zcba321",
-        actual;
-
-    actual = array.reduceRight(function (previous, current) {
-        return previous + current;
-    }, initialValue);
-
-    equal(actual, expected);
-});
-
-test("reduceRight on an empty array returns undefined", function () {
-    var source = [],
-        array = new kendo.data.ObservableArray(source),
-        expected = undefined,
-        actual;
-
-    actual = array.reduceRight(function (previous, current) {
-        return previous + current;
-    });
-
-    equal(actual, expected);
-});
-
-test("reduceRight passes index of collection to callback for each element", function () {
-        var source = ["1", "2", "3", "a", "b", "c"],
-            array = new kendo.data.ObservableArray(source),
-            expected = "c43210",
-            actual;
-
-        actual = array.reduceRight(function (previous, current, index) {
-            return previous.toString() + index.toString();
+            assert.equal(actual, expected);
         });
 
-        equal(actual, expected);
+        it("reduce starts with initial value when provided", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                initialValue = "z",
+                expected = "z123abc",
+                actual;
+
+            actual = array.reduce(function(previous, current) {
+                return previous + current;
+            }, initialValue);
+
+            assert.equal(actual, expected);
+        });
+
+        it("reduce on an empty array returns undefined", function() {
+            var source = [],
+                array = new kendo.data.ObservableArray(source),
+                expected = undefined,
+                actual;
+
+            actual = array.reduce(function(previous, current) {
+                return previous + current;
+            });
+
+            assert.equal(actual, expected);
+        });
+
+        it("reduce passes index of collection to callback for each element", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = "112345",
+                actual;
+
+            actual = array.reduce(function(previous, current, index) {
+                return previous.toString() + index.toString();
+            });
+
+            assert.equal(actual, expected);
+        });
     });
 
-module("ObservableArray forEach");
+    describe("ObservableArray reduceRight", function() {
 
-test("setting thisArg sets the context inside the callback", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = new Object(),
-        actual;
+        it("reduceRight visits each element from the high index to low index", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = "cba321",
+                actual;
 
-    array.forEach(function (item, index, array) {
-        actual = this;
-    }, expected);
+            actual = array.reduceRight(function(previous, current) {
+                return previous + current;
+            });
 
-    equal(actual, expected);
-});
+            assert.equal(actual, expected);
+        });
 
-module("ObservableArray map");
+        it("reduceRight starts with initial value when provided", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                initialValue = "z",
+                expected = "zcba321",
+                actual;
 
-test("setting thisArg sets the context inside the callback", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = new Object(),
-        actual;
+            actual = array.reduceRight(function(previous, current) {
+                return previous + current;
+            }, initialValue);
 
-    array.map(function (item, index, array) {
-        actual = this;
-    }, expected);
+            assert.equal(actual, expected);
+        });
 
-    equal(actual, expected);
-});
+        it("reduceRight on an empty array returns undefined", function() {
+            var source = [],
+                array = new kendo.data.ObservableArray(source),
+                expected = undefined,
+                actual;
 
-module("ObservableArray filter");
+            actual = array.reduceRight(function(previous, current) {
+                return previous + current;
+            });
 
-test("setting thisArg sets the context inside the callback", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = new Object(),
-        actual;
+            assert.equal(actual, expected);
+        });
 
-    array.filter(function (item, index, array) {
-        actual = this;
-    }, expected);
+        it("reduceRight passes index of collection to callback for each element", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = "c43210",
+                actual;
 
-    equal(actual, expected);
-});
+            actual = array.reduceRight(function(previous, current, index) {
+                return previous.toString() + index.toString();
+            });
 
-module("ObservableArray find");
+            assert.equal(actual, expected);
+        });
 
-test("setting thisArg sets the context inside the callback", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = new Object(),
-        actual;
+    });
+    describe("ObservableArray forEach", function() {
 
-    array.find(function (item, index, array) {
-        actual = this;
-    }, expected);
+        it("setting thisArg sets the context inside the callback", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = new Object(),
+                actual;
 
-    equal(actual, expected);
-});
+            array.forEach(function(item, index, array) {
+                actual = this;
+            }, expected);
 
-module("ObservableArray every");
+            assert.equal(actual, expected);
+        });
+    });
 
-test("setting thisArg sets the context inside the callback", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = new Object(),
-        actual;
+    describe("ObservableArray map", function() {
 
-    array.every(function (item, index, array) {
-        actual = this;
-    }, expected);
+        it("setting thisArg sets the context inside the callback", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = new Object(),
+                actual;
 
-    equal(actual, expected);
-});
+            array.map(function(item, index, array) {
+                actual = this;
+            }, expected);
 
-module("ObservableArray some");
+            assert.equal(actual, expected);
+        });
+    });
 
-test("setting thisArg sets the context inside the callback", function () {
-    var source = ["1", "2", "3", "a", "b", "c"],
-        array = new kendo.data.ObservableArray(source),
-        expected = new Object(),
-        actual;
+    describe("ObservableArray filter", function() {
 
-    array.some(function (item, index, array) {
-        actual = this;
-    }, expected);
+        it("setting thisArg sets the context inside the callback", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = new Object(),
+                actual;
 
-    equal(actual, expected);
-});
+            array.filter(function(item, index, array) {
+                actual = this;
+            }, expected);
 
+            assert.equal(actual, expected);
+        });
+    });
+
+    describe("ObservableArray find", function() {
+
+        it("setting thisArg sets the context inside the callback", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = new Object(),
+                actual;
+
+            array.find(function(item, index, array) {
+                actual = this;
+            }, expected);
+
+            assert.equal(actual, expected);
+        });
+    });
+
+    describe("ObservableArray every", function() {
+
+        it("setting thisArg sets the context inside the callback", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = new Object(),
+                actual;
+
+            array.every(function(item, index, array) {
+                actual = this;
+            }, expected);
+
+            assert.equal(actual, expected);
+        });
+    });
+
+    describe("ObservableArray some", function() {
+
+        it("setting thisArg sets the context inside the callback", function() {
+            var source = ["1", "2", "3", "a", "b", "c"],
+                array = new kendo.data.ObservableArray(source),
+                expected = new Object(),
+                actual;
+
+            array.some(function(item, index, array) {
+                actual = this;
+            }, expected);
+
+            assert.equal(actual, expected);
+        });
+
+    });
 }());

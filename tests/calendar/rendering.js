@@ -4,36 +4,35 @@ var calendar = kendo.calendar,
     template,
     div;
 
-module("kendo.ui.Calendar rendering", {
-    setup: function() {
+describe("kendo.ui.Calendar rendering", function () {
+    beforeEach(function() {
         var cal = new kendo.ui.Calendar($("<div/>"));
         template = cal.month;
         cal.destroy();
 
         kendo.ns = "kendo-";
-        div = $("<div />").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
+        div = $("<div />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
         kendo.ns = "";
-    }
-});
+    });
 
-test("firstDayOfMonth returns correct date", function() {
+it("firstDayOfMonth returns correct date", function() {
     var date = new Date(2011, 7, 31);
     var correct = new Date(2011, 7, 1);
 
-    deepEqual(calendar.firstDayOfMonth(date), correct);
+    assert.deepEqual(calendar.firstDayOfMonth(date), correct);
 });
 
-test("firstVisibleDay returns correct date", function() {
+it("firstVisibleDay returns correct date", function() {
     var date = new Date(2011, 7, 31, 10, 10, 5555);
     var correct = new Date(2011, 6, 31, 10, 10, 5555);
 
-    deepEqual(calendar.firstVisibleDay(date), correct);
+    assert.deepEqual(calendar.firstVisibleDay(date), correct);
 });
 
-test("month.setDate modify day", function() {
+it("month.setDate modify day", function() {
     var date = new Date(2011, 7, 31, 10, 10, 555),
         modified = new Date(date);
 
@@ -41,26 +40,26 @@ test("month.setDate modify day", function() {
 
     calendar.views[0].setDate(modified, -10);
 
-    deepEqual(modified, date);
+    assert.deepEqual(modified, date);
 });
 
-test("month.setDate updates even the second param is date", function() {
+it("month.setDate updates even the second param is date", function() {
     var value = new Date(2011, 7, 31, 10, 10, 33, 111),
         origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
     calendar.views[0].setDate(origin, value);
 
-    equal(origin.getFullYear(), value.getFullYear());
-    equal(origin.getMonth(), value.getMonth());
-    equal(origin.getDate(), value.getDate());
-    equal(origin.getHours(), 20);
-    equal(origin.getMinutes(), 11);
-    equal(origin.getSeconds(), 44);
-    equal(origin.getMilliseconds(), 666);
+    assert.equal(origin.getFullYear(), value.getFullYear());
+    assert.equal(origin.getMonth(), value.getMonth());
+    assert.equal(origin.getDate(), value.getDate());
+    assert.equal(origin.getHours(), 20);
+    assert.equal(origin.getMinutes(), 11);
+    assert.equal(origin.getSeconds(), 44);
+    assert.equal(origin.getMilliseconds(), 666);
 
 });
 
-test("year.setDate modify month", function() {
+it("year.setDate modify month", function() {
     var date = new Date(2011, 7, 31, 10, 10, 5555),
         modified = new Date(date);
 
@@ -68,43 +67,43 @@ test("year.setDate modify month", function() {
 
     calendar.views[1].setDate(modified, 4);
 
-    deepEqual(modified, date);
+    assert.deepEqual(modified, date);
 });
 
-test("year.setDate should honer end day of month", function() {
+it("year.setDate should honer end day of month", function() {
     var date = new Date(2011, 3, 30, 10, 10, 5555),
         modified = new Date(2011, 7, 31, 10, 10, 5555);
 
     calendar.views[1].setDate(modified, -4);
 
-    deepEqual(modified, date);
+    assert.deepEqual(modified, date);
 });
 
-test("year.setDate should work correctly when date is Jan and value is -1 ", function() {
+it("year.setDate should work correctly when date is Jan and value is -1 ", function() {
     var date = new Date(2011, 11, 5),
         modified = new Date(2012, 0, 5);
 
     calendar.views[1].setDate(modified, -1);
 
-    deepEqual(modified, date);
+    assert.deepEqual(modified, date);
 });
 
-test("year.setDate updates even the second param is date", function() {
+it("year.setDate updates even the second param is date", function() {
     var value = new Date(2011, 7, 31, 10, 10, 33, 111),
         origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
     calendar.views[1].setDate(origin, value);
 
-    equal(origin.getFullYear(), value.getFullYear());
-    equal(origin.getMonth(), value.getMonth());
-    equal(origin.getDate(), 22);
-    equal(origin.getHours(), 20);
-    equal(origin.getMinutes(), 11);
-    equal(origin.getSeconds(), 44);
-    equal(origin.getMilliseconds(), 666);
+    assert.equal(origin.getFullYear(), value.getFullYear());
+    assert.equal(origin.getMonth(), value.getMonth());
+    assert.equal(origin.getDate(), 22);
+    assert.equal(origin.getHours(), 20);
+    assert.equal(origin.getMinutes(), 11);
+    assert.equal(origin.getSeconds(), 44);
+    assert.equal(origin.getMilliseconds(), 666);
 });
 
-test("decade.setDate modify year", function() {
+it("decade.setDate modify year", function() {
     var date = new Date(2011, 7, 31, 10, 10, 5555),
         modified = new Date(date);
 
@@ -112,25 +111,25 @@ test("decade.setDate modify year", function() {
 
     calendar.views[2].setDate(modified, -6);
 
-    deepEqual(modified, date);
+    assert.deepEqual(modified, date);
 });
 
-test("decade.setDate updates even the second param is date", function() {
+it("decade.setDate updates even the second param is date", function() {
     var value = new Date(2011, 7, 31, 10, 10, 33, 111),
         origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
     calendar.views[2].setDate(origin, value);
 
-    equal(origin.getFullYear(), value.getFullYear());
-    equal(origin.getMonth(), 7);
-    equal(origin.getDate(), 22);
-    equal(origin.getHours(), 20);
-    equal(origin.getMinutes(), 11);
-    equal(origin.getSeconds(), 44);
-    equal(origin.getMilliseconds(), 666);
+    assert.equal(origin.getFullYear(), value.getFullYear());
+    assert.equal(origin.getMonth(), 7);
+    assert.equal(origin.getDate(), 22);
+    assert.equal(origin.getHours(), 20);
+    assert.equal(origin.getMinutes(), 11);
+    assert.equal(origin.getSeconds(), 44);
+    assert.equal(origin.getMilliseconds(), 666);
 });
 
-test("century.setDate modify decade", function() {
+it("century.setDate modify decade", function() {
     var date = new Date(2011, 7, 31, 10, 10, 5555),
         modified = new Date(date);
 
@@ -138,39 +137,39 @@ test("century.setDate modify decade", function() {
 
     calendar.views[3].setDate(modified, -1);
 
-    deepEqual(modified, date);
+    assert.deepEqual(modified, date);
 });
 
-test("decade.setDate updates even the second param is date", function() {
+it("decade.setDate updates even the second param is date", function() {
     var value = new Date(2000, 7, 31, 10, 10, 33, 111),
         origin = new Date(2010, 7, 22, 20, 11, 44, 666);
 
     calendar.views[3].setDate(origin, value);
 
-    equal(origin.getFullYear(), value.getFullYear());
-    equal(origin.getMonth(), 7);
-    equal(origin.getDate(), 22);
-    equal(origin.getHours(), 20);
-    equal(origin.getMinutes(), 11);
-    equal(origin.getSeconds(), 44);
-    equal(origin.getMilliseconds(), 666);
+    assert.equal(origin.getFullYear(), value.getFullYear());
+    assert.equal(origin.getMonth(), 7);
+    assert.equal(origin.getDate(), 22);
+    assert.equal(origin.getHours(), 20);
+    assert.equal(origin.getMinutes(), 11);
+    assert.equal(origin.getSeconds(), 44);
+    assert.equal(origin.getMilliseconds(), 666);
 });
 
-test("Month view return title", function() {
+it("Month view return title", function() {
     var date = new Date(),
         text = kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
 
-        equal(calendar.views[0].title(date), text);
+        assert.equal(calendar.views[0].title(date), text);
 });
 
-test("Month view title honors options.culture", function() {
+it("Month view title honors options.culture", function() {
     var date = new Date(),
         text = kendo.getCulture("bg-BG").calendars.standard.months.names[date.getMonth()] + " " + date.getFullYear();
 
-        equal(calendar.views[0].title(date, null, null, "bg-BG"), text);
+        assert.equal(calendar.views[0].title(date, null, null, "bg-BG"), text);
 });
 
-test("month view renders days", function() {
+it("month view renders days", function() {
     var today = new Date(),
         days = kendo.culture().calendar.days;
 
@@ -184,16 +183,88 @@ test("month view renders days", function() {
         disableDates: $.noop
     }));
 
-    equal(div.find("thead").find("th").length, 7);
-    equal(div.find("thead").find("th").eq(0).html(), days.namesShort[0]);
-    equal(div.find("thead").find("th").eq(0).attr("title"), days.names[0]);
+    assert.equal(div.find("thead").find("th").length, 7);
+    assert.equal(div.find("thead").find("th").eq(0).html(), days.namesShort[0]);
+    assert.equal(div.find("thead").find("th").eq(0).attr("title"), days.names[0]);
 
-    equal(div.find("tbody").find("tr").length, 6);
-    equal(div.find("tbody").find("td").length, 42);
-    equal(div.find("tbody").find("a").length, 42);
+    assert.equal(div.find("tbody").find("tr").length, 6);
+    assert.equal(div.find("tbody").find("td").length, 42);
+    assert.equal(div.find("tbody").find("a").length, 42);
 });
 
-test("month view renders week number column when enabled", function() {
+it("header is correctly rendered for month view", function() {
+    var day = new Date(2018, 1, 1);
+
+    div.html(calendar.views[0].content({
+        date: day,
+        empty: template.empty,
+        content: template.content,
+        otherMonth: true,
+        showHeader: true,
+        min: new Date(2000, 10, 10),
+        max: new Date(2020, 10, 10),
+        disableDates: $.noop
+    }));
+
+    assert.equal(div.find("caption").text(),"February 2018");
+    assert.isOk(div.find("caption").hasClass("k-month-header"));
+});
+
+it("header is correctly rendered for year view", function() {
+    var day = new Date(2018, 1, 1);
+
+    div.html(calendar.views[1].content({
+        date: day,
+        empty: template.empty,
+        content: template.content,
+        otherMonth: true,
+        showHeader: true,
+        min: new Date(2000, 10, 10),
+        max: new Date(2020, 10, 10),
+        disableDates: $.noop
+    }));
+
+    assert.isOk(div.find("caption").hasClass("k-meta-header"));
+    assert.equal(div.find("caption").text(), "2018");
+});
+
+it("header is correctly rendered for decade view", function() {
+    var day = new Date(2018, 1, 1);
+
+    div.html(calendar.views[2].content({
+        date: day,
+        empty: template.empty,
+        content: template.content,
+        otherMonth: true,
+        showHeader: true,
+        min: new Date(2000, 10, 10),
+        max: new Date(2020, 10, 10),
+        disableDates: $.noop
+    }));
+
+    assert.equal(div.find("caption").text(), "2010-2019");
+    assert.isOk(div.find("caption").hasClass("k-meta-header"));
+});
+
+it("header is correctly rendered for century view", function() {
+    var day = new Date(2018, 1, 1);
+
+    div.html(calendar.views[3].content({
+        date: day,
+        empty: template.empty,
+        content: template.content,
+        otherMonth: true,
+        showHeader: true,
+        min: new Date(2000, 10, 10),
+        max: new Date(2099, 10, 10),
+        disableDates: $.noop
+    }));
+
+    assert.equal(div.find("caption").text(), "2000-2099");
+    assert.isOk(div.find("caption").hasClass("k-meta-header"));
+});
+
+it("month view renders week number column when enabled", function() {
     var today = new Date(),
         days = kendo.culture().calendar.days,
         cells;
@@ -211,14 +282,14 @@ test("month view renders week number column when enabled", function() {
 
     cells = div.find("tbody").find("td");
 
-    equal(div.find("thead").find("th").length, 8);
-    ok(cells.eq(0).hasClass("k-alt"));
+    assert.equal(div.find("thead").find("th").length, 8);
+    assert.isOk(cells.eq(0).hasClass("k-alt"));
 
-    equal(div.find("tbody").find("tr").length, 6);
-    equal(div.find("tbody").find("td").length, 48);
+    assert.equal(div.find("tbody").find("tr").length, 6);
+    assert.equal(div.find("tbody").find("td").length, 48);
 });
 
-test("month view's content method honors culture", function() {
+it("month view's content method honors culture", function() {
     var today = new Date(),
         days = kendo.getCulture("bg-BG").calendars.standard.days;
 
@@ -232,11 +303,11 @@ test("month view's content method honors culture", function() {
             culture: "bg-BG"
         }));
 
-    equal(div.find("thead").find("th").eq(0).html(), days.namesShort[1]);
-    equal(div.find("thead").find("th").eq(0).attr("title"), days.names[1]);
+    assert.equal(div.find("thead").find("th").eq(0).html(), days.namesShort[1]);
+    assert.equal(div.find("thead").find("th").eq(0).attr("title"), days.names[1]);
 });
 
-test("month view renderer honors firstDayOfWeek property", function() {
+it("month view renderer honors firstDayOfWeek property", function() {
     var today = new Date(2011, 9, 10);
 
     kendo.culture().calendar.firstDay = 1;
@@ -251,29 +322,29 @@ test("month view renderer honors firstDayOfWeek property", function() {
         max: today
     }));
 
-    equal(div.find("thead").find("th").eq(0).html(), kendo.culture().calendar.days.namesShort[1]);
-    equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[1]);
+    assert.equal(div.find("thead").find("th").eq(0).html(), kendo.culture().calendar.days.namesShort[1]);
+    assert.equal(div.find("thead").find("th").eq(0).attr("title"), kendo.culture().calendar.days.names[1]);
 
     kendo.culture().calendar.firstDay = 0;
 });
 
-test("month view honors firstVisibleDay", function() {
+it("month view honors firstVisibleDay", function() {
     var today = new Date(2011, 9, 10);
 
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        content: template.content,
         otherMonth: true,
+        content: template.content,
         disableDates: $.noop,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
 
-    equal(div.find("tbody").find("a").html(), "25");
+    assert.equal(div.find("tbody").find("a").html(), "25");
 });
 
-test("month view renders anchor in td with title", function() {
+it("month view renders anchor in td with title", function() {
     var today = new Date(2011, 9, 10),
         firstVisibleDay = calendar.firstVisibleDay(today);
 
@@ -287,11 +358,11 @@ test("month view renders anchor in td with title", function() {
         max: new Date(2020, 10, 10)
     }));
 
-    equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D"));
-    equal(div.find("tbody").find("a").attr("class"), "k-link");
+    assert.equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D"));
+    assert.equal(div.find("tbody").find("a").attr("class"), "k-link");
 });
 
-test("month view renders anchor in td with title depending on the options.culture", function() {
+it("month view renders anchor in td with title depending on the options.culture", function() {
     var today = new Date(2011, 9, 10),
         firstVisibleDay = calendar.firstVisibleDay(today, kendo.getCulture("bg-BG").calendars.standard);
 
@@ -306,7 +377,7 @@ test("month view renders anchor in td with title depending on the options.cultur
         max: new Date(2020, 10, 10)
     }));
 
-    equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D", "bg-BG"));
+    assert.equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D", "bg-BG"));
 });
 
 tzTest("Sofia", "month view renders empty string if date is not in range", function() {
@@ -322,9 +393,9 @@ tzTest("Sofia", "month view renders empty string if date is not in range", funct
         content: template.content
     }));
 
-    equal(div.find("tbody").find("td").html(), "&nbsp;");
-    equal(div.find("tbody").find("a:first").html(), today.getDate() + "");
-    equal(div.find("tbody").find("a:last").html(), max.getDate() + "");
+    assert.equal(div.find("tbody").find("td").html(), "&nbsp;");
+    assert.equal(div.find("tbody").find("a:first").html(), today.getDate() + "");
+    assert.equal(div.find("tbody").find("a:last").html(), max.getDate() + "");
 });
 
 tzTest("Brazil", "last day of March is rendered as part of the current month", function() {
@@ -339,10 +410,10 @@ tzTest("Brazil", "last day of March is rendered as part of the current month", f
         disableDates: $.noop,
         content: template.content
     }));
-    equal($("[data-value='2015/2/31']").parent().hasClass("k-other-month"), false);
+    assert.equal($("[data-value='2015/2/31']").parent().hasClass("k-other-month"), false);
 });
 
-test("month view should render data-val attribute", function() {
+it("month view should render data-val attribute", function() {
     var max = new Date(2011, 9, 19),
         today = new Date(2011, 9, 10),
         value = today.getFullYear() + "/" + today.getMonth() + "/" + today.getDate();
@@ -356,10 +427,10 @@ test("month view should render data-val attribute", function() {
         content: template.content
     }));
 
-    equal(div.find("tbody").find("a:first").attr("data-value"), value);
+    assert.equal(div.find("tbody").find("a:first").attr("data-value"), value);
 });
 
-test("month view should render k-other-month style", function() {
+it("month view should render k-other-month style", function() {
     var today = new Date(2011, 9, 10),
         firstDay = kendo.calendar.firstVisibleDay(today);
 
@@ -373,11 +444,29 @@ test("month view should render k-other-month style", function() {
         content: template.content
     }));
 
-    equal(div.find("tbody tr:first").find("td.k-other-month").length, 6);
-    equal(div.find("tbody tr:last").find("td.k-other-month").length, 5);
+    assert.equal(div.find("tbody tr:first").find("td.k-other-month").length, 6);
+    assert.equal(div.find("tbody tr:last").find("td.k-other-month").length, 5);
 });
 
-test("month view should not render k-other-month to last day of month", function() {
+it("month view should not render weekNumber if otherMonth is false and the week is empty", function() {
+    var today = new Date(2020, 6, 10);
+
+    div.html(calendar.views[0].content({
+        date: today,
+        empty: template.empty,
+        messages: { weekColumnHeader: "" },
+        otherMonth: false,
+        isWeekColumnVisible: true,
+        min: new Date(1900,0,1),
+        max: new Date(2900,0,1),
+        disableDates: $.noop,
+        content: template.content
+    }));
+
+    assert.equal(div.find("tbody tr:last").find("td.k-alt")[0].innerHTML, "&nbsp;");
+});
+
+it("month view should not render k-other-month to last day of month", function() {
     var today = new Date(2011, 8, 12, 10, 10, 10);
 
     div.html(calendar.views[0].content({
@@ -393,11 +482,11 @@ test("month view should not render k-other-month to last day of month", function
     var row = div.find("tbody tr:last").prev(),
         td = row.find("td.k-other-month:first");
 
-    equal(td.text(), "1");
-    ok(!td.prev().hasClass("k-other-month"));
+    assert.equal(td.text(), "1");
+    assert.isOk(!td.prev().hasClass("k-other-month"));
 });
 
-test("month view do not apply k-other-month to the first day of the month", function() {
+it("month view do not apply k-other-month to the first day of the month", function() {
     var today = new Date(2011, 8, 20, 14, 40, 0);
 
     div.html(calendar.views[0].content({
@@ -412,10 +501,10 @@ test("month view do not apply k-other-month to the first day of the month", func
 
     var cell = div.find("tbody").find("tr:first").find(".k-other-month:last").next();
 
-    equal(cell.children().attr("data-value"), "2011/8/1");
+    assert.equal(cell.children().attr("data-value"), "2011/8/1");
 });
 
-test("month view renders k-today if today is in the current view", function() {
+it("month view renders k-today if today is in the current view", function() {
     var today = new Date();
 
     div.html(calendar.views[0].content({
@@ -429,18 +518,18 @@ test("month view renders k-today if today is in the current view", function() {
 
     var cell = div.find("tbody").find("td.k-today");
 
-    equal(cell.length, 1);
-    equal(cell.children().text(), today.getDate());
+    assert.equal(cell.length, 1);
+    assert.equal(cell.children().text(), today.getDate());
 });
 
-test("month view renders k-weekend", function() {
+it("month view renders k-weekend", function() {
     var today = new Date(2011, 9, 10);
 
     div.html(calendar.views[0].content({
         date: today,
         empty: template.empty,
-        min: new Date(1900,0,1),
         otherMonth: true,
+        min: new Date(1900,0,1),
         max: new Date(2900,0,1),
         disableDates: $.noop,
         content: template.content
@@ -448,10 +537,10 @@ test("month view renders k-weekend", function() {
 
     var cell = div.find("tbody").find("td.k-weekend");
 
-    equal(cell.length, 12);
+    assert.equal(cell.length, 12);
 });
 
-test("month view passes dates array", function() {
+it("month view passes dates array", function() {
     var today = new Date(2011, 9, 10),
         dates = [today];
 
@@ -463,12 +552,12 @@ test("month view passes dates array", function() {
         max: new Date(2900,0,1),
         disableDates: $.noop,
         content: function(data) {
-            equal(data.dates, dates);
+            assert.equal(data.dates, dates);
         }
     }));
 });
 
-test("month view renders URL if current date is in dates", function() {
+it("month view renders URL if current date is in dates", function() {
     var today = new Date(2011, 9, 10),
         dates = [today];
 
@@ -486,11 +575,11 @@ test("month view renders URL if current date is in dates", function() {
 
     var a = div.find("a[href*=home]");
 
-    ok(a[0]);
-    equal(a.attr("href"), "/home/index?url=10/10/2011");
+    assert.isOk(a[0]);
+    assert.equal(a.attr("href"), "/home/index?url=10/10/2011");
 });
 
-test("month view honors culture when renders URL", function() {
+it("month view honors culture when renders URL", function() {
     var today = new Date(2011, 9, 10),
         culture = kendo.getCulture("bg-BG"),
         format = culture.calendars.standard.patterns["D"],
@@ -511,17 +600,17 @@ test("month view honors culture when renders URL", function() {
 
     var a = div.find("a[href*=home]");
 
-    ok(a[0]);
-    equal(a.attr("href"), "/home/index?url=" + kendo.toString(today, format, culture));
+    assert.isOk(a[0]);
+    assert.equal(a.attr("href"), "/home/index?url=" + kendo.toString(today, format, culture));
 });
 
-test("year view renders title", function() {
+it("year view renders title", function() {
     var today = new Date(2011, 9, 10);
 
-    equal(calendar.views[1].title(today) + "", today.getFullYear() + "");
+    assert.equal(calendar.views[1].title(today) + "", today.getFullYear() + "");
 });
 
-test("year view renders meta view  4x3 cells", function() {
+it("year view renders meta view  4x3 cells", function() {
     var today = new Date(2011, 9, 10),
         firstMonth = kendo.culture().calendar.months.namesAbbr[0],
         lastMonth = kendo.culture().calendar.months.namesAbbr[11];
@@ -533,13 +622,13 @@ test("year view renders meta view  4x3 cells", function() {
         max: new Date(2020, 10, 10)
     }));
 
-    equal(div.find("tbody").find("tr:first").find("td").length, 4);
-    equal(div.find("tbody").find("td > a").length, 12);
-    equal(div.find("tbody").find("a:first").eq(0).html(), firstMonth);
-    equal(div.find("tbody").find("a:last").eq(0).html(), lastMonth);
+    assert.equal(div.find("tbody").find("tr:first").find("td").length, 4);
+    assert.equal(div.find("tbody").find("td > a").length, 12);
+    assert.equal(div.find("tbody").find("a:first").eq(0).html(), firstMonth);
+    assert.equal(div.find("tbody").find("a:last").eq(0).html(), lastMonth);
 });
 
-test("year view's content method honors culture", function() {
+it("year view's content method honors culture", function() {
     var today = new Date(2011, 9, 10),
         calendarInfo = kendo.getCulture("bg-BG").calendars.standard,
         firstMonth = calendarInfo.months.namesAbbr[0],
@@ -552,13 +641,13 @@ test("year view's content method honors culture", function() {
         culture: "bg-BG"
     }));
 
-    equal(div.find("tbody").find("tr:first").find("td").length, 4);
-    equal(div.find("tbody").find("td > a").length, 12);
-    equal(div.find("tbody").find("a:first").eq(0).html(), firstMonth);
-    equal(div.find("tbody").find("a:last").eq(0).html(), lastMonth);
+    assert.equal(div.find("tbody").find("tr:first").find("td").length, 4);
+    assert.equal(div.find("tbody").find("td > a").length, 12);
+    assert.equal(div.find("tbody").find("a:first").eq(0).html(), firstMonth);
+    assert.equal(div.find("tbody").find("a:last").eq(0).html(), lastMonth);
 });
 
-test("year view renders does not render months not in range", function() {
+it("year view renders does not render months not in range", function() {
     var today = new Date(2011, 9, 10),
         monthName = kendo.culture().calendar.months.namesAbbr[9];
 
@@ -568,13 +657,13 @@ test("year view renders does not render months not in range", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("td").length, 12);
-    equal(div.find("tbody").find("td:not(.k-out-of-range) a").length, 1);
-    equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), monthName);
-    equal(div.find("tbody").find("td:not(.k-out-of-range) a:first").html(), monthName);
+    assert.equal(div.find("tbody").find("td").length, 12);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) a").length, 1);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), monthName);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) a:first").html(), monthName);
 });
 
-test("year view renders cells with data-val", function() {
+it("year view renders cells with data-val", function() {
     var today = new Date(2011, 9, 10),
         value = today.getFullYear() + "/" + today.getMonth() + "/1",
         monthName = kendo.culture().calendar.months.namesAbbr[9];
@@ -585,26 +674,26 @@ test("year view renders cells with data-val", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("td:not(.k-out-of-range) a").attr("data-kendo-value"), value);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) a").attr("data-kendo-value"), value);
 });
 
-test("decade title renders decade range title", function() {
+it("decade title renders decade range title", function() {
     var today = new Date(2011, 9, 10);
     var min = new Date(2000, 9, 10);
     var max = new Date(2020, 9, 10);
 
-    equal(calendar.views[2].title(today, min, max), "2010-2019");
+    assert.equal(calendar.views[2].title(today, min, max), "2010-2019");
 });
 
-test("decade title renders decade range within min/max values", function() {
+it("decade title renders decade range within min/max values", function() {
     var today = new Date(2015, 9, 10);
     var min = new Date(2013, 9, 10);
     var max = new Date(2018, 9, 10);
 
-    equal(calendar.views[2].title(today, min, max), "2013-2018");
+    assert.equal(calendar.views[2].title(today, min, max), "2013-2018");
 });
 
-test("decade view renders meta view  4x3 cells", function() {
+it("decade view renders meta view  4x3 cells", function() {
     var today = new Date(2011, 9, 10);
 
     div.html(calendar.views[2].content({
@@ -614,13 +703,13 @@ test("decade view renders meta view  4x3 cells", function() {
         max: new Date(2020, 10, 10)
     }));
 
-    equal(div.find("tbody").find("tr:first").find("td").length, 4);
-    equal(div.find("tbody").find("td > a").length, 12);
-    equal(div.find("tbody").find("a:first").html() + "", 2009 + "");
-    equal(div.find("tbody").find("a:last").html() + "", 2020 + "");
+    assert.equal(div.find("tbody").find("tr:first").find("td").length, 4);
+    assert.equal(div.find("tbody").find("td > a").length, 12);
+    assert.equal(div.find("tbody").find("a:first").html() + "", 2009 + "");
+    assert.equal(div.find("tbody").find("a:last").html() + "", 2020 + "");
 });
 
-test("decade view renders only years in range", function() {
+it("decade view renders only years in range", function() {
     var today = new Date(2011, 9, 10);
 
     div.html(calendar.views[2].content({
@@ -629,12 +718,12 @@ test("decade view renders only years in range", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("tr:first").find("td").length, 4);
-    equal(div.find("tbody").find("td:not(.k-out-of-range) > a").length, 1);
-    equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), "2011");
+    assert.equal(div.find("tbody").find("tr:first").find("td").length, 4);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) > a").length, 1);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), "2011");
 });
 
-test("decade view renders cells with data-val", function() {
+it("decade view renders cells with data-val", function() {
     var today = new Date(2011, 9, 10),
         value = "2011/0/1";
 
@@ -644,10 +733,10 @@ test("decade view renders cells with data-val", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("td:not(.k-out-of-range) > a").attr("data-kendo-value"), value);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) > a").attr("data-kendo-value"), value);
 });
 
-test("decade renders k-other-month to the first and last cell of the view", function() {
+it("decade renders k-other-month to the first and last cell of the view", function() {
     var today = new Date(2011, 9, 10),
         cells;
 
@@ -660,21 +749,21 @@ test("decade renders k-other-month to the first and last cell of the view", func
 
     cells = div.find("tbody").find("td");
 
-    ok(cells.eq(0).hasClass("k-other-month"));
-    ok(cells.eq(11).hasClass("k-other-month"));
+    assert.isOk(cells.eq(0).hasClass("k-other-month"));
+    assert.isOk(cells.eq(11).hasClass("k-other-month"));
 
-    ok(!cells.eq(1).hasClass("k-other-month"));
+    assert.isOk(!cells.eq(1).hasClass("k-other-month"));
 });
 
-test("century title renders century title", function() {
+it("century title renders century title", function() {
     var today = new Date(2011, 9, 10);
     var min = new Date(1900, 9, 10);
     var max = new Date(2100, 9, 10);
 
-    equal(calendar.views[3].title(today, min, max), "2000-2099");
+    assert.equal(calendar.views[3].title(today, min, max), "2000-2099");
 });
 
-test("century view renders century class", function() {
+it("century view renders century class", function() {
     var today = new Date(2011, 9, 10);
 
     div.html(calendar.views[3].content({
@@ -685,18 +774,18 @@ test("century view renders century class", function() {
 
     calendar.addClassToViewContainer(div.find("table"), calendar.views[3].name);
 
-    ok(div.find("table.k-content").hasClass("k-century"));
+    assert.isOk(div.find("table.k-content").hasClass("k-century"));
 });
 
-test("century title renders century title within min/max values", function() {
+it("century title renders century title within min/max values", function() {
     var today = new Date(2011, 9, 10);
     var min = new Date(2010, 9, 10);
     var max = new Date(2050, 9, 10);
 
-    equal(calendar.views[3].title(today, min, max), "2010-2050");
+    assert.equal(calendar.views[3].title(today, min, max), "2010-2050");
 });
 
-test("century view renders meta view  4x3 cells", function() {
+it("century view renders meta view  4x3 cells", function() {
     var today = new Date(2011, 9, 10);
 
     div.html(calendar.views[3].content({
@@ -706,13 +795,13 @@ test("century view renders meta view  4x3 cells", function() {
         max: new Date(2220, 10, 10)
     }));
 
-    equal(div.find("tbody").find("tr:first").find("td").length, 4);
-    equal(div.find("tbody").find("td > a").length, 12);
-    equal(div.find("tbody").find("a:first").html(), "1990 - 1999");
-    equal(div.find("tbody").find("a:last").html(), "2100 - 2109");
+    assert.equal(div.find("tbody").find("tr:first").find("td").length, 4);
+    assert.equal(div.find("tbody").find("td > a").length, 12);
+    assert.equal(div.find("tbody").find("a:first").html(), "1990 - 1999");
+    assert.equal(div.find("tbody").find("a:last").html(), "2100 - 2109");
 });
 
-test("century view renders only years in range", function() {
+it("century view renders only years in range", function() {
     var today = new Date(2011, 9, 10);
 
     div.html(calendar.views[3].content({
@@ -721,11 +810,11 @@ test("century view renders only years in range", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("td:not(.k-out-of-range) > a").length, 1);
-    equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), "2011 - 2011");
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) > a").length, 1);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) a").html(), "2011 - 2011");
 });
 
-test("century view does not render decades less then min", function() {
+it("century view does not render decades less then min", function() {
     var today = new Date(1910, 9, 10);
 
     div.html(calendar.views[3].content({
@@ -734,10 +823,10 @@ test("century view does not render decades less then min", function() {
         max: new Date(1950, 0, 1)
     }));
 
-    equal(div.find("tbody").find("td:first").children().length, 0);
+    assert.equal(div.find("tbody").find("td:first").children().length, 0);
 });
 
-test("century view renders cells with data-val", function() {
+it("century view renders cells with data-val", function() {
     var today = new Date(2011, 9, 10),
         value = "2010/0/1";
 
@@ -747,10 +836,10 @@ test("century view renders cells with data-val", function() {
         max: today
     }));
 
-    equal(div.find("tbody").find("td:not(.k-out-of-range) a").attr("data-kendo-value"), value);
+    assert.equal(div.find("tbody").find("td:not(.k-out-of-range) a").attr("data-kendo-value"), value);
 });
 
-test("century renders k-other-month to the first and last cell of the view", function() {
+it("century renders k-other-month to the first and last cell of the view", function() {
     var today = new Date(2011, 9, 10),
         cells;
 
@@ -763,35 +852,35 @@ test("century renders k-other-month to the first and last cell of the view", fun
 
     cells = div.find("tbody").find("td");
 
-    ok(cells.eq(0).hasClass("k-other-month"));
-    ok(cells.eq(11).hasClass("k-other-month"));
+    assert.isOk(cells.eq(0).hasClass("k-other-month"));
+    assert.isOk(cells.eq(11).hasClass("k-other-month"));
 
-    ok(!cells.eq(1).hasClass("k-other-month"));
+    assert.isOk(!cells.eq(1).hasClass("k-other-month"));
 });
 
-test("_footer should render footer link", function() {
+it("_footer should render footer link", function() {
     var container = new kendo.ui.Calendar(div).element;
 
-    ok(container.find(".k-footer")[0]);
-    ok(container.find(".k-footer").children().length, 1);
-    ok(container.find(".k-footer").children()[0].nodeName, "a");
-    ok(container.find(".k-footer").children().html(),kendo.toString(new Date(), "D"));
-    ok(container.find(".k-footer").children().attr("title"),kendo.toString(new Date(), "D"));
+    assert.isOk(container.find(".k-footer")[0]);
+    assert.isOk(container.find(".k-footer").children().length, 1);
+    assert.isOk(container.find(".k-footer").children()[0].nodeName, "a");
+    assert.isOk(container.find(".k-footer").children().html(),kendo.toString(new Date(), "D"));
+    assert.isOk(container.find(".k-footer").children().attr("title"),kendo.toString(new Date(), "D"));
 });
 
-test("if no options.month then build template without WITH block", function() {
+it("if no options.month then build template without WITH block", function() {
     var cal = new kendo.ui.Calendar(div);
 
-    ok(cal.month.content.toString().indexOf("with") == -1);
+    assert.isOk(cal.month.content.toString().indexOf("with") == -1);
 });
 
-test("set options.month build template with WITH block", function() {
+it("set options.month build template with WITH block", function() {
     var cal = new kendo.ui.Calendar(div, {month: {content: "#=value#" }});
 
-    ok(cal.month.content.toString().indexOf("with") != -1);
+    assert.isOk(cal.month.content.toString().indexOf("with") != -1);
 });
 
-test("set options.month should be used as template", function() {
+it("set options.month should be used as template", function() {
     var cal = new kendo.ui.Calendar(div, {month: {content: "#=value#" }}),
         oldView = kendo.calendar.views[0].content, options;
 
@@ -800,9 +889,10 @@ test("set options.month should be used as template", function() {
     }
     cal.navigate();
 
-    equal(options.content, cal.month.content);
+    assert.equal(options.content, cal.month.content);
 
     kendo.calendar.views[0].content = oldView;
 });
 
-})();
+    });
+}());

@@ -3,86 +3,86 @@
     var splitter;
     var create = SplitterHelpers.create;
 
-    module("splitter load on demand", {
-        setup: function() {
+    describe("splitter load on demand", function() {
+        beforeEach(function() {
             $.mockjaxSettings.responseTime = 0;
             $.mockjaxSettings.contentType = "text/html";
             $.mockjax({ url: url, responseText: "foobar" });
-        },
-        teardown: function() {
-            QUnit.fixture.closest("body").find(".k-splitter").each(function(idx, element){
+        });
+        afterEach(function() {
+            Mocha.fixture.closest("body").find(".k-splitter").each(function(idx, element) {
                 $(element).data("kendoSplitter").destroy();
             });
             $.mockjax.clear();
             $(document).off();
-        }
-    });
-
-    test("ajaxRequest loads custom urls", 1, function() {
-        var customUrl = 'customUrl';
-
-        splitter = create();
-
-        $(document).on("ajaxSend", function(e, request, settings) {
-            e.preventDefault();
-            equal(settings.url, customUrl);
         });
 
-        $.mockjax({ url: customUrl, responseText: "foobar" });
+        it("ajaxRequest loads custom urls", function() {
+            var customUrl = 'customUrl';
 
-        splitter.object.ajaxRequest(".k-pane:first", customUrl);
+            splitter = create();
 
-    });
+            $(document).on("ajaxSend", function(e, request, settings) {
+                e.preventDefault();
+                assert.equal(settings.url, customUrl);
+            });
 
-    asyncTest("ajaxRequest places loaded data in target pane", 1, function() {
-        splitter = create();
+            $.mockjax({ url: customUrl, responseText: "foobar" });
 
-        $(document).on("ajaxComplete", function(e, request, settings) {
-            if (settings.url === url) {
-                start();
-                equal(splitter.dom.find(".k-pane:first")[0].innerHTML, "foobar");
-            }
+            splitter.object.ajaxRequest(".k-pane:first", customUrl);
+
         });
 
-        splitter.object.ajaxRequest(".k-pane:first", url);
-    });
+        it("ajaxRequest places loaded data in target pane", function(done) {
+            splitter = create();
 
-    test("loads content for loadable panes when initializing", 1, function() {
-        $(document).on("ajaxSend", function(e, request, settings) {
-            e.preventDefault();
-            requestedUrl = settings.url;
-            equal(requestedUrl, url);
+            $(document).on("ajaxComplete", function(e, request, settings) {
+                if (settings.url === url) {
+                    assert.equal(splitter.dom.find(".k-pane:first")[0].innerHTML, "foobar");
+                    done();
+                }
+            });
+
+            splitter.object.ajaxRequest(".k-pane:first", url);
         });
 
-        splitter = create({
-            panes: [ {}, { contentUrl: url } ]
-        });
-    });
+        it("loads content for loadable panes when initializing", function() {
+            $(document).on("ajaxSend", function(e, request, settings) {
+                e.preventDefault();
+                requestedUrl = settings.url;
+                assert.equal(requestedUrl, url);
+            });
 
-    test("ajaxRequest places loading icon in pane", 2, function() {
-        splitter = create();
-
-        $(document).on("ajaxSend", function(e, request, settings) {
-            request.abort();
-            var loading = splitter.dom.find(".k-pane-loading.k-i-loading");
-            equal(loading.length, 1);
-            ok(loading.parent().is(".k-pane:first"));
+            splitter = create({
+                panes: [{}, { contentUrl: url }]
+            });
         });
 
-        splitter.object.ajaxRequest(".k-pane:first", url);
-    });
+        it("ajaxRequest places loading icon in pane", function() {
+            splitter = create();
 
-    test("ajaxRequest sends data to server", 1, function() {
-        var data = { id: 1 };
+            $(document).on("ajaxSend", function(e, request, settings) {
+                request.abort();
+                var loading = splitter.dom.find(".k-pane-loading.k-i-loading");
+                assert.equal(loading.length, 1);
+                assert.isOk(loading.parent().is(".k-pane:first"));
+            });
 
-        splitter = create();
-
-        $.mockjax.clear();
-        $.mockjax(function(settings) {
-            deepEqual(settings.data, data);
-            return {};
+            splitter.object.ajaxRequest(".k-pane:first", url);
         });
 
-        splitter.object.ajaxRequest(".k-pane:first", url, data);
+        it("ajaxRequest sends data to server", function() {
+            var data = { id: 1 };
+
+            splitter = create();
+
+            $.mockjax.clear();
+            $.mockjax(function(settings) {
+                assert.deepEqual(settings.data, data);
+                return {};
+            });
+
+            splitter.object.ajaxRequest(".k-pane:first", url, data);
+        });
     });
-})();
+}());

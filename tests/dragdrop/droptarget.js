@@ -1,19 +1,18 @@
 (function() {
-        var DropTarget = kendo.ui.DropTarget,
-            Draggable = kendo.ui.Draggable,
-            span,
-            targetElement,
-            target,
-            draggable;
+    var DropTarget = kendo.ui.DropTarget,
+        Draggable = kendo.ui.Draggable,
+        span,
+        targetElement,
+        target,
+        draggable;
 
-        module("kendo.ui.DropTarget", {
-            setup: function() {
-                span = $("<span/>").appendTo(QUnit.fixture);
-                targetElement = $("<div>foo</div>").appendTo(QUnit.fixture);
-            },
-            teardown: function() {
-                kendo.destroy(QUnit.fixture);
-            }
+    describe("kendo.ui.DropTarget", function() {
+        beforeEach(function() {
+            span = $("<span/>").appendTo(Mocha.fixture);
+            targetElement = $("<div>foo</div>").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
         function trigger(type, e, el) {
@@ -38,22 +37,22 @@
             startDrag();
         }
 
-        test("dragenter is raised, passing the draggable", 1, function() {
+        it("dragenter is raised, passing the draggable", function() {
             setup({
-                    dragenter: function(e) {
-                        ok(e.draggable === draggable);
-                    }
-                });
+                dragenter: function(e) {
+                    assert.isOk(e.draggable === draggable);
+                }
+            });
         });
 
-        test("drag is raised, passing the droptarget", 3, function() {
+        it("drag is raised, passing the droptarget", function() {
             setup({
-                    dragenter: function(e) {
-                        equal(e.draggable, draggable);
-                    }
-                }, {
+                dragenter: function(e) {
+                    assert.equal(e.draggable, draggable);
+                }
+            }, {
                     drag: function(e) {
-                        equal(e.dropTarget, target);
+                        assert.equal(e.dropTarget, target);
                     }
                 });
 
@@ -61,96 +60,97 @@
             trigger("mousemove", { pageX: offset.left + 1, pageY: offset.top + 1, clientX: offset.left + 1, clientY: offset.top + 1 });
         });
 
-        test("dragleave is raised, passing the draggable", 1, function() {
+        it("dragleave is raised, passing the draggable", function() {
             setup({
-                    dragleave: function(e) {
-                        ok(e.draggable === draggable);
-                    }
-                });
+                dragleave: function(e) {
+                    assert.isOk(e.draggable === draggable);
+                }
+            });
 
             trigger("mousemove", { pageX: 1, pageY: 1, clientX: 1, clientY: 1 });
         });
 
-        test("drop is raised", 1, function() {
+        it("drop is raised", function() {
             setup({
-                    drop: function(e) {
-                        ok(e.draggable === draggable);
-                    }
-                });
+                drop: function(e) {
+                    assert.isOk(e.draggable === draggable);
+                }
+            });
 
             var offset = kendo.getOffset(targetElement);
             trigger("mouseup", { pageX: offset.left, pageY: offset.top });
         });
 
-        test("dragenter is not raised for draggable from a different group", 0, function() {
+        it("dragenter is not raised for draggable from a different group", function() {
             setup({
-                    dragenter: function() {
-                        ok(false);
-                    }
-                }, {
+                dragenter: function() {
+                    assert.isOk(false);
+                }
+            }, {
                     group: "foo"
                 });
         });
 
-        test("dom event argument is passed to the drop event", 1, function() {
+        it("dom event argument is passed to the drop event", function() {
             setup({
-                    drop: function(e) {
-                        ok(e.pageX);
-                    }
-                });
+                drop: function(e) {
+                    assert.isOk(e.pageX);
+                }
+            });
 
             var offset = kendo.getOffset(targetElement);
             trigger("mouseup", { pageX: offset.left, pageY: offset.top });
         });
 
-        test("droptarget marks the draggable as dropped", function() {
+        it("droptarget marks the draggable as dropped", function() {
             var e, dropTarget = setup();
 
             var offset = kendo.getOffset(targetElement);
             trigger("mouseup", { pageX: offset.left, pageY: offset.top });
 
-            ok(draggable.dropped);
+            assert.isOk(draggable.dropped);
         });
 
-        test("destroy removes droptarget from droptargets object", function() {
+        it("destroy removes droptarget from droptargets object", function() {
             target = new DropTarget(targetElement, {
                 group: "foobarbaz"
             });
 
             target.destroy();
 
-            ok(!DropTarget._cache["foobarbaz"]);
+            assert.isOk(!DropTarget._cache["foobarbaz"]);
         });
 
-        test("destroy removes only destroyed object from cache", function() {
+        it("destroy removes only destroyed object from cache", function() {
             target = new DropTarget(targetElement, { group: "qux" });
 
-            var quxElement = $("<div />").appendTo(QUnit.fixture);
+            var quxElement = $("<div />").appendTo(Mocha.fixture);
             var quxTarget = new DropTarget(quxElement, { group: "qux" });
 
             target.destroy();
 
-            ok(DropTarget._cache["qux"]);
-            equal(DropTarget._cache["qux"].length, 1);
+            assert.isOk(DropTarget._cache["qux"]);
+            assert.equal(DropTarget._cache["qux"].length, 1);
         });
 
-        test("destroyGroup removes complete group from cache", function() {
+        it("destroyGroup removes complete group from cache", function() {
             target = new DropTarget(targetElement, { group: "qux" });
 
-            var quxElement = $("<div />").appendTo(QUnit.fixture);
+            var quxElement = $("<div />").appendTo(Mocha.fixture);
             var quxTarget = new DropTarget(quxElement, { group: "qux" });
 
             DropTarget.destroyGroup("qux");
 
-            ok(!DropTarget._cache["qux"]);
+            assert.isOk(!DropTarget._cache["qux"]);
         });
 
-        test("DropTarget destroy destroys the Target", function() {
+        it("DropTarget destroy destroys the Target", function() {
             var target = new DropTarget(targetElement),
                 element = target.element;
 
             target.destroy();
 
-            ok(!element.data("kendoDropTarget"));
+            assert.isOk(!element.data("kendoDropTarget"));
         });
-})();
+    });
+}());

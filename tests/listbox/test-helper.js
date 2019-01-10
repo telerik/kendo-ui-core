@@ -1,11 +1,11 @@
 /* exported createListBoxFromHtml */
 function createListBoxFromHtml(html, options, container) {
-    return $(html || "<select />").appendTo(container || QUnit.fixture[0]).kendoListBox(options).data("kendoListBox");
+    return $(html || "<select />").appendTo(container || Mocha.fixture[0]).kendoListBox(options).data("kendoListBox");
 }
 
 /* exported createListBoxFromOptions */
 function createListBoxFromOptions(widgetOptions, options) {
-    var container = QUnit.fixture;
+    var container = Mocha.fixture;
 
     options = options || {};
 
@@ -72,12 +72,12 @@ function createListBoxWithToolbar(options, html) {
 
 /* exported equalListItems */
 function equalListItems(item1, item2) {
-    equal($(item1).data("uid"), $(item2).data("uid"));
+    assert.equal($(item1).data("uid"), $(item2).data("uid"));
 }
 
 /* exported equalListItemArrays  */
 function equalListItemArrays(array1, array2) {
-    equal(array1.length, array2.length);
+    assert.equal(array1.length, array2.length);
 
     for (var i = 0; i < array1.length; i++) {
         equalListItems(array1.eq(i), array2.eq(i));
@@ -86,10 +86,10 @@ function equalListItemArrays(array1, array2) {
 
 /* exported equalDataArrays */
 function equalDataArrays(array1, array2) {
-    equal(array1.length, array2.length);
+    assert.equal(array1.length, array2.length);
 
     for (var i = 0; i < array1.length; i++) {
-        deepEqual(array1[i], array2[i]);
+        assert.deepEqual(array1[i], array2[i]);
     }
 }
 

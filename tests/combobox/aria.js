@@ -3,84 +3,89 @@
 var ComboBox = kendo.ui.ComboBox,
     input;
 
-module("kendo.ui.ComboBox ARIA", {
-    setup: function() {
+describe("kendo.ui.ComboBox ARIA", function () {
+    beforeEach(function() {
 
-        input = $("<input />").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
+        input = $("<input />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
 
         input.data("kendoComboBox").destroy();
-        kendo.destroy(QUnit.fixture);
-    }
-});
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("ComboBox adds role to the input", function() {
+it("ComboBox adds role to the input", function() {
     var combobox = new ComboBox(input);
 
-    equal(combobox.input[0].getAttribute("role"), "combobox");
+    assert.equal(combobox.input[0].getAttribute("role"), "combobox");
 });
 
-test("ComboBox adds aria-autocomplete='list'", function() {
+it("ComboBox adds aria-autocomplete='list'", function() {
     var combobox = new ComboBox(input);
 
-    equal(combobox.input.attr("aria-autocomplete"), "list");
+    assert.equal(combobox.input.attr("aria-autocomplete"), "list");
 });
 
-test("ComboBox adds aria-autocomplete='both' if suggestion is enabled", function() {
+it("ComboBox adds aria-autocomplete='both' if suggestion is enabled", function() {
     var combobox = new ComboBox(input, {
         suggest: true
     });
 
-    equal(combobox.input.attr("aria-autocomplete"), "both");
+    assert.equal(combobox.input.attr("aria-autocomplete"), "both");
 });
 
-test("ComboBox adds aria-owns", function() {
+it("ComboBox adds aria-owns", function() {
     var combobox = new ComboBox(input.attr("id", "test"));
 
-    equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
+    assert.equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
 });
 
-test("ComboBox adds aria-activedescentant", function() {
+it("ComboBox adds aria-owns without input id", function() {
+    var combobox = new ComboBox(input);
+
+    assert.equal(combobox.input.attr("aria-owns"), combobox.ul.attr("id"));
+});
+
+it("ComboBox adds aria-activedescentant", function() {
     var combobox = new ComboBox(input.attr("id", "test"), {
         dataSource: ["Item1", "Item2"],
         value: "Item2"
     });
 
-    equal(combobox.selectedIndex, 1);
-    equal(combobox.ul.children().eq(0).attr("id"), undefined);
-    equal(combobox.input.attr("aria-activedescendant"), combobox.ul.children().eq(1).attr("id"));
+    assert.equal(combobox.selectedIndex, 1);
+    assert.equal(combobox.ul.children().eq(0).attr("id"), undefined);
+    assert.equal(combobox.input.attr("aria-activedescendant"), combobox.ul.children().eq(1).attr("id"));
 });
 
-test("ComboBox adds aria-disabled='true'", function() {
+it("ComboBox adds aria-disabled='true'", function() {
     var combobox = new ComboBox(input.attr("disabled", "disabled"));
 
-    equal(combobox.input.attr("aria-disabled"), "true");
+    assert.equal(combobox.input.attr("aria-disabled"), "true");
 });
 
-test("ComboBox adds aria-disabled='false'", function() {
+it("ComboBox adds aria-disabled='false'", function() {
     var combobox = new ComboBox(input);
 
-    equal(combobox.input.attr("aria-disabled"), "false");
+    assert.equal(combobox.input.attr("aria-disabled"), "false");
 });
 
-test("ComboBox adds aria-expanded='false'", function() {
+it("ComboBox adds aria-expanded='false'", function() {
     var combobox = new ComboBox(input);
 
-    equal(combobox.input.attr("aria-expanded"), "false");
+    assert.equal(combobox.input.attr("aria-expanded"), "false");
 });
 
-test("ComboBox adds aria-expanded='true'", function() {
+it("ComboBox adds aria-expanded='true'", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"]
     });
 
     combobox.open();
 
-    equal(combobox.input.attr("aria-expanded"), "true");
+    assert.equal(combobox.input.attr("aria-expanded"), "true");
 });
 
-test("ComboBox sets aria-expanded to false on close", function() {
+it("ComboBox sets aria-expanded to false on close", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"]
     });
@@ -88,64 +93,64 @@ test("ComboBox sets aria-expanded to false on close", function() {
     combobox.open();
     combobox.close();
 
-    ok(!combobox.popup.visible());
-    equal(combobox.input.attr("aria-expanded"), "false");
+    assert.isOk(!combobox.popup.visible());
+    assert.equal(combobox.input.attr("aria-expanded"), "false");
 });
 
-test("ComboBox makes down arrow ARIA accessible", function() {
+it("ComboBox makes down arrow ARIA accessible", function() {
     var combobox = new ComboBox(input);
 
-    equal(combobox._arrow.attr("role"), "button");
-    // equal(combobox._arrow.attr("tabindex"), "-1");
-    equal(combobox._arrow.attr("aria-controls"), undefined);
+    assert.equal(combobox._arrow.attr("role"), "button");
+    // assert.equal(combobox._arrow.attr("tabindex"), "-1");
+    assert.equal(combobox._arrow.attr("aria-controls"), undefined);
 });
 
-test("ComboBox adds role='listbox' to list element", function() {
+it("ComboBox adds role='listbox' to list element", function() {
     var combobox = new ComboBox(input);
 
-    equal(combobox.ul.attr("role"), "listbox");
+    assert.equal(combobox.ul.attr("role"), "listbox");
 });
 
-test("ComboBox adds role to the popup element", function() {
+it("ComboBox adds role to the popup element", function() {
     var combobox = new ComboBox(input);
 
-    equal(combobox.ul.attr("role"), "listbox");
+    assert.equal(combobox.ul.attr("role"), "listbox");
 });
 
-test("ComboBox adds aria-hidden to the popup element", 3, function() {
+it("ComboBox adds aria-hidden to the popup element", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"]
     });
 
-    equal(combobox.ul.attr("aria-hidden"), "true");
+    assert.equal(combobox.ul.attr("aria-hidden"), "true");
 
     combobox.open();
 
-    equal(combobox.ul.attr("aria-hidden"), "false");
+    assert.equal(combobox.ul.attr("aria-hidden"), "false");
 
     combobox.close();
 
-    equal(combobox.ul.attr("aria-hidden"), "true");
+    assert.equal(combobox.ul.attr("aria-hidden"), "true");
 });
 
-test("ComboBox adds aria-live=off if no filter", function() {
+it("ComboBox adds aria-live=off if no filter", function() {
      var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"]
     });
 
-    equal(combobox.ul.attr("aria-live"), "off");
+    assert.equal(combobox.ul.attr("aria-live"), "off");
 });
 
-test("ComboBox adds aria-live=polite if filter is set", function() {
+it("ComboBox adds aria-live=polite if filter is set", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"],
         filter: "startswith"
     });
 
-    equal(combobox.ul.attr("aria-live"), "polite");
+    assert.equal(combobox.ul.attr("aria-live"), "polite");
 });
 
-asyncTest("ComboBox adds aria-busy=true when loader is shown", 1, function() {
+it("ComboBox adds aria-busy=true when loader is shown", function(done) {
     var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"],
         filter: "startswith"
@@ -160,12 +165,12 @@ asyncTest("ComboBox adds aria-busy=true when loader is shown", 1, function() {
     combobox._showBusy(e);
 
     setTimeout(function() {
-        start();
-        equal(combobox.input.attr("aria-busy"), "true");
+        assert.equal(combobox.input.attr("aria-busy"), "true");
+        done();
     }, 150);
 });
 
-asyncTest("ComboBox does not adds aria-busy=true when loader is prevented", 1, function() {
+it("ComboBox does not adds aria-busy=true when loader is prevented", function(done) {
     var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"],
         filter: "startswith"
@@ -179,33 +184,33 @@ asyncTest("ComboBox does not adds aria-busy=true when loader is prevented", 1, f
     combobox._showBusy(e);
 
     setTimeout(function() {
-        start();
-        equal(combobox.input.attr("aria-busy"), "false");
+        assert.equal(combobox.input.attr("aria-busy"), "false");
+        done();
     }, 150);
 });
 
-test("ComboBox adds aria-busy=false when loader is hidden", 1, function() {
+it("ComboBox adds aria-busy=false when loader is hidden", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2"],
         filter: "startswith"
     });
 
     combobox._hideBusy();
-    equal(combobox.input.attr("aria-busy"), "false");
+    assert.equal(combobox.input.attr("aria-busy"), "false");
 });
 
-test("ComboBox does not have aria-activedescendant if no item is selected on load", function() {
+it("ComboBox does not have aria-activedescendant if no item is selected on load", function() {
     var combobox = new ComboBox(input.attr("id", "test"), {
         highlightFirst: false,
         dataSource: ["item1", "item2"],
         filter: "startswith"
     });
 
-    equal(combobox.selectedIndex, -1);
-    equal(combobox.input.attr("aria-activedescendant"), undefined);
+    assert.equal(combobox.selectedIndex, -1);
+    assert.equal(combobox.input.attr("aria-activedescendant"), undefined);
 });
 
-test("ComboBox remove aria-activedescendant if no item is selected", function() {
+it("ComboBox remove aria-activedescendant if no item is selected", function() {
     var combobox = new ComboBox(input.attr("id", "test"), {
         highlightFirst: true,
         dataSource: ["item1", "item2"],
@@ -214,11 +219,11 @@ test("ComboBox remove aria-activedescendant if no item is selected", function() 
     });
 
     combobox.value("");
-    equal(combobox.selectedIndex, -1);
-    equal(combobox.input.attr("aria-activedescendant"), undefined);
+    assert.equal(combobox.selectedIndex, -1);
+    assert.equal(combobox.input.attr("aria-activedescendant"), undefined);
 });
 
-test("ComboBox adds aria-selected to the selected item", function() {
+it("ComboBox adds aria-selected to the selected item", function() {
     var combobox = new ComboBox(input.attr("id", "test"), {
         highlightFirst: true,
         dataSource: ["item1", "item2"],
@@ -226,10 +231,10 @@ test("ComboBox adds aria-selected to the selected item", function() {
         value: "item1"
     });
 
-    equal(combobox.current().attr("aria-selected"), "true");
+    assert.equal(combobox.current().attr("aria-selected"), "true");
 });
 
-test("ComboBox removes aria-selected from unselected item", function() {
+it("ComboBox removes aria-selected from unselected item", function() {
     var combobox = new ComboBox(input.attr("id", "test"), {
         highlightFirst: true,
         dataSource: ["item1", "item2"],
@@ -239,39 +244,40 @@ test("ComboBox removes aria-selected from unselected item", function() {
 
     combobox.value("");
 
-    ok(!combobox.ul.children("[aria-selected=true]")[0]);
+    assert.isOk(!combobox.ul.children("[aria-selected=true]")[0]);
 });
 
-test("widget takes aria-label attribute", 1, function() {
+it("widget takes aria-label attribute", function() {
     var combobox = new ComboBox(input.attr("aria-label", "labeltext"));
 
-    equal(combobox.input.attr("aria-label"), "labeltext");
+    assert.equal(combobox.input.attr("aria-label"), "labeltext");
 });
 
-test("widget takes aria-labelledby attribute", 1, function() {
+it("widget takes aria-labelledby attribute", function() {
     var combobox = new ComboBox(input.attr("aria-labelledby", "labelID"));
 
-    equal(combobox.input.attr("aria-labelledby"), "labelID");
+    assert.equal(combobox.input.attr("aria-labelledby"), "labelID");
 });
 
-test("widget sets aria-labelledby attribute to label's  id", 2, function() {
+it("widget sets aria-labelledby attribute to label's  id", function() {
     var label = input.before("<label id='labelID' for='comboInput'>labeltext</label>").prev("label");
     var combobox = new ComboBox(input.attr("id", "comboInput"));
 
-    ok(combobox.input.attr("aria-labelledby"));
-    equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
+    assert.isOk(combobox.input.attr("aria-labelledby"));
+    assert.equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
 
     label.remove();
 });
 
-test("widget sets aria-labelledby attribute to label's generated id", 2, function() {
+it("widget sets aria-labelledby attribute to label's generated id", function() {
     var label = input.before("<label for='comboInput'>labeltext</label>").prev("label");
     var combobox = new ComboBox(input.attr("id", "comboInput"));
 
-    ok(combobox.input.attr("aria-labelledby"));
-    equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
+    assert.isOk(combobox.input.attr("aria-labelledby"));
+    assert.equal(combobox.input.attr("aria-labelledby"), label.attr("id"));
 
     label.remove();
 });
 
-})();
+    });
+}());

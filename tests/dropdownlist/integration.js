@@ -1,9 +1,9 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
-    viewModel, select;
+        viewModel, select;
 
-    module("kendo.ui.DropDownList integration", {
-        setup: function() {
+    describe("kendo.ui.DropDownList integration", function() {
+        beforeEach(function() {
             viewModel = {
                 tickets: [
                     { name: "Economy", price: 199.95 },
@@ -13,35 +13,35 @@
                 chosenTicket: ko.observable()
             }
 
-            select = $('<select id="ticket" data-bind="options: tickets, optionsCaption: \'Choose...\', optionsText: \'name\', value: chosenTicket"></select>').appendTo(QUnit.fixture);
+            select = $('<select id="ticket" data-bind="options: tickets, optionsCaption: \'Choose...\', optionsText: \'name\', value: chosenTicket"></select>').appendTo(Mocha.fixture);
 
             ko.applyBindings(viewModel);
 
             select.kendoDropDownList().trigger("change"); //notify ko to re-init options of the select
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             select.data("kendoDropDownList").destroy();
             select.closest(".k-widget").remove();
-        }
+        });
+
+        it("DropDownList triggers change event on click", function() {
+            var ddl = select.data("kendoDropDownList");
+
+            ddl.open();
+            ddl.ul.find("li:first").click();
+            ddl.ul.find("li:last").click();
+
+            assert.isOk(viewModel.chosenTicket())
+        });
+
+        it("DropDownList triggers change event on click of optionLabel", function() {
+            var ddl = select.data("kendoDropDownList");
+
+            ddl.open();
+            ddl.ul.find("li:last").click();
+            ddl.ul.find("li:first").click();
+
+            assert.equal(viewModel.chosenTicket(), null)
+        });
     });
-
-    test("DropDownList triggers change event on click", function() {
-        var ddl = select.data("kendoDropDownList");
-
-        ddl.open();
-        ddl.ul.find("li:first").click();
-        ddl.ul.find("li:last").click();
-
-        ok(viewModel.chosenTicket())
-    });
-
-    test("DropDownList triggers change event on click of optionLabel", function() {
-        var ddl = select.data("kendoDropDownList");
-
-        ddl.open();
-        ddl.ul.find("li:last").click();
-        ddl.ul.find("li:first").click();
-
-        equal(viewModel.chosenTicket(), null)
-    });
-})();
+}());

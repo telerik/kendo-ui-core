@@ -2,11 +2,11 @@
     var panelbar;
     var ul;
 
-    module('panelbar expand collapse', {
-        setup: function() {
+    describe('panelbar expand collapse', function() {
+        beforeEach(function() {
 
 
-            QUnit.fixture.append(
+            Mocha.fixture.append(
                 '<ul id="panelbar">' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
                 '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
@@ -100,77 +100,75 @@
             ul = $("#panelbar");
 
             panelbar = new kendo.ui.PanelBar(ul);
-        },
-        teardown: function() {
-
-
+        });
+        afterEach(function() {
             panelbar.destroy();
+        });
+
+        function getRootItem(index) {
+            return ul.children().eq(index)
         }
-    });
 
-    function getRootItem(index) {
-        return ul.children().eq(index)
-    }
+        it("clicking collapsed item not expand if it is disabled", function() {
+            var item = getRootItem(1);
 
-    test("clicking collapsed item not expand if it is disabled", function() {
-        var item = getRootItem(1);
-
-        item
+            item
                 .toggleClass("k-state-default", false)
                 .toggleClass("k-state-disabled", true);
 
-        item.find("> .k-link").trigger("click");
+            item.find("> .k-link").trigger("click");
 
-        equal(item.find(".k-group").css("display"), "none");
+            assert.equal(item.find(".k-group").css("display"), "none");
+        });
+
+        it("clicking expanded items should toggle arrow", function() {
+            var item = getRootItem(3);
+
+            item.find("> .k-link").trigger("click");
+
+            assert.isOk(item.find(".k-icon").hasClass("k-i-arrow-60-down"));
+        });
+
+        it("clicking collapsed items should expand them", function() {
+            var item = getRootItem(2);
+
+            item.find("> .k-link").trigger("click");
+
+            assert.equal(item.find(".k-group").css("display"), "block");
+        });
+
+        it("clicking collapsed items should toggle arrow", function() {
+            var item = getRootItem(0);
+
+            item.find("> .k-link").trigger("click");
+
+            assert.isOk(item.find(".k-icon").hasClass("k-i-arrow-60-up"));
+        });
+
+        it("clicking collapsed items should not expand child groups", function() {
+            var item = getRootItem(4);
+
+            item.find("> .k-link").trigger("click");
+
+            assert.equal(item.find(".k-group .k-group").css("display"), "none");
+        });
+
+        it("clicking child group items should not collapse root group", function() {
+            var item = getRootItem(4);
+
+            panelbar.expand(item);
+
+            item.find(".k-item > .k-link").trigger("click");
+
+            assert.equal(item.find(".k-group").css("display"), "block");
+        });
+
+        it("clicking arrows toggles child groups", function() {
+            var item = getRootItem(3);
+
+            item.find("> .k-link > .k-icon").trigger("click");
+
+            assert.equal(item.find(".k-group").css("display"), "none");
+        });
     });
-
-    test("clicking expanded items should toggle arrow", function() {
-        var item = getRootItem(3);
-
-        item.find("> .k-link").trigger("click");
-
-        ok(item.find(".k-icon").hasClass("k-i-arrow-60-down"));
-    });
-
-    test("clicking collapsed items should expand them", function() {
-        var item = getRootItem(2);
-
-        item.find("> .k-link").trigger("click");
-
-        equal(item.find(".k-group").css("display"), "block");
-    });
-
-    test("clicking collapsed items should toggle arrow", function() {
-        var item = getRootItem(0);
-
-        item.find("> .k-link").trigger("click");
-
-        ok(item.find(".k-icon").hasClass("k-i-arrow-60-up"));
-    });
-
-    test("clicking collapsed items should not expand child groups", function() {
-        var item = getRootItem(4);
-
-        item.find("> .k-link").trigger("click");
-
-        equal(item.find(".k-group .k-group").css("display"), "none");
-    });
-
-    test("clicking child group items should not collapse root group", function() {
-        var item = getRootItem(4);
-
-        panelbar.expand(item);
-
-        item.find(".k-item > .k-link").trigger("click");
-
-        equal(item.find(".k-group").css("display"), "block");
-    });
-
-    test("clicking arrows toggles child groups", function() {
-        var item = getRootItem(3);
-
-        item.find("> .k-link > .k-icon").trigger("click");
-
-        equal(item.find(".k-group").css("display"), "none");
-    });
-})();
+}());

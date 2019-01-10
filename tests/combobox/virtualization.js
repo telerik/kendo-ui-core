@@ -40,19 +40,18 @@
         });
     }
 
-    module("kendo.ui.ComboBox Virtualization", {
-        setup: function() {
+    describe("kendo.ui.ComboBox Virtualization", function () {
+        beforeEach(function() {
             kendo.ns = "";
-            select = $("<select />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
+            select = $("<select />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
             if (select.data("kendoComboBox")) {
                 select.data("kendoComboBox").destroy();
             }
-        }
-    });
+        });
 
-    asyncTest("ComboBox does not revert scroll position on dataBound", 1, function() {
+    it("ComboBox does not revert scroll position on dataBound", function(done) {
         var combobox = new ComboBox(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -72,9 +71,9 @@
             scroll(combobox.listView.content, 4 * CONTAINER_HEIGHT);
 
             setTimeout(function() {
-                start();
 
-                notEqual(combobox.listView.content.scrollTop(), 0);
+                assert.notEqual(combobox.listView.content.scrollTop(), 0);
+                done();
             }, 100);
 
         });
@@ -82,7 +81,7 @@
         combobox.value("0");
     });
 
-    asyncTest("widget dropdown is opened after filtering", 1, function() {
+    it("widget dropdown is opened after filtering", function(done) {
         var combobox = new ComboBox(select, {
             height: CONTAINER_HEIGHT,
             animation: false,
@@ -102,13 +101,13 @@
             combobox.open();
 
             setTimeout(function() {
-                start();
-                ok(combobox.list.is(":visible"));
+                assert.isOk(combobox.list.is(":visible"));
+                done();
             }, 100);
         });
     });
 
-    asyncTest("after filtering widget's list selects item that was selected from filtered data set and is part of the first DataSource page ", 2, function() {
+    it("after filtering widget's list selects item that was selected from filtered data set and is part of the first DataSource page ", function(done) {
         var combobox = new ComboBox(select, {
             height: CONTAINER_HEIGHT,
             animation: false,
@@ -124,20 +123,20 @@
         combobox.one("dataBound", function() {
             combobox.search("0");
             combobox.select(0).done(function() {
-                ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+                assert.isOk(combobox.listView.items().eq(0).hasClass("k-state-selected"));
 
                 combobox.close();
                 combobox.open();
             });
 
             setTimeout(function() {
-                start();
-                ok(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+                assert.isOk(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+                done();
             }, 200);
         });
     });
 
-    asyncTest("Widget's list selects item from filtered data set after filter is cleared", 4, function() {
+    it("Widget's list selects item from filtered data set after filter is cleared", function(done) {
         var combobox = new ComboBox(select, {
             height: CONTAINER_HEIGHT,
             animation: false,
@@ -188,11 +187,11 @@
                 combobox.one("dataBound", function() {
                     combobox.bind("dataBound", function() {
                         if (combobox.dataSource.page() > 1) { //wait until the binding is done
-                            start();
-                            equal(combobox.select(), 111);
-                            equal(combobox.dataItem().value, 111);
-                            ok($("[data-offset-index=111]").hasClass("k-state-focused"));
-                            ok($("[data-offset-index=111]").hasClass("k-state-selected"));
+                            assert.equal(combobox.select(), 111);
+                            assert.equal(combobox.dataItem().value, 111);
+                            assert.isOk($("[data-offset-index=111]").hasClass("k-state-focused"));
+                            assert.isOk($("[data-offset-index=111]").hasClass("k-state-selected"));
+                            done();
                         }
                     });
 
@@ -207,7 +206,7 @@
         });
     });
 
-    asyncTest("widget keeps the selected item after filter is cleared", 4, function() {
+    it("widget keeps the selected item after filter is cleared", function(done) {
         var combobox = new ComboBox(select, {
             autoBind: false,
             height: CONTAINER_HEIGHT,
@@ -259,11 +258,11 @@
                 combobox.close();
 
                 combobox.one("dataBound", function() {
-                    start();
-                    equal(combobox.select(), 11);
-                    equal(combobox.dataItem().value, 11);
-                    ok($("[data-offset-index=11]").hasClass("k-state-focused"));
-                    ok($("[data-offset-index=11]").hasClass("k-state-selected"));
+                    assert.equal(combobox.select(), 11);
+                    assert.equal(combobox.dataItem().value, 11);
+                    assert.isOk($("[data-offset-index=11]").hasClass("k-state-focused"));
+                    assert.isOk($("[data-offset-index=11]").hasClass("k-state-selected"));
+                    done();
                 });
 
                 combobox.open();
@@ -273,7 +272,7 @@
         combobox.search("1");
     });
 
-    asyncTest("widget keeps selected value when filter is cleared (select)", 1, function() {
+    it("widget keeps selected value when filter is cleared (select)", function(done) {
         var data = generateData({ skip: 0, take: 40 });
         var combobox = new ComboBox(select, {
             autoBind: false,
@@ -297,8 +296,8 @@
                 combobox.close();
 
                 combobox.one("dataBound", function() {
-                    start();
-                    equal(combobox.value(), "11");
+                    assert.equal(combobox.value(), "11");
+                    done();
                 });
 
                 combobox.open();
@@ -310,7 +309,7 @@
         combobox.search("11");
     });
 
-    asyncTest("dataItem returns correct object based on LI element", 2, function() {
+    it("dataItem returns correct object based on LI element", function(done) {
         var combobox = new ComboBox(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -342,21 +341,21 @@
         combobox.open();
         combobox.one("dataBound", function() {
             combobox.one("dataBound", function() {
-                start();
                 var item49 = combobox.listView.content.find("li")
                                      .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
 
                 var dataItem = combobox.dataItem(item49);
 
-                equal(dataItem.value, 49);
-                equal(dataItem.text, item49.text());
+                assert.equal(dataItem.value, 49);
+                assert.equal(dataItem.text, item49.text());
+                done();
             });
 
             scroll(combobox.listView.content, 5 * CONTAINER_HEIGHT);
         });
     });
 
-    asyncTest("widget focuses the item found during text search", 1, function() {
+    it("widget focuses the item found during text search", function(done) {
         var combobox = new ComboBox(select, {
             delay: 0,
             close: function(e) { e.preventDefault(); },
@@ -376,13 +375,13 @@
             combobox.input.trigger({ type: "keydown" });
 
             setTimeout(function() {
-                start();
-                ok($("[data-offset-index=1]").hasClass("k-state-focused"));
+                assert.isOk($("[data-offset-index=1]").hasClass("k-state-focused"));
+                done();
             }, 100);
         });
     });
 
-    asyncTest("keep selected value when list is scrolled", 1, function() {
+    it("keep selected value when list is scrolled", function(done) {
         var combobox = new ComboBox(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -401,8 +400,8 @@
             combobox.open();
 
             combobox.one("dataBound", function() {
-                start();
-                equal(select.val(), 10);
+                assert.equal(select.val(), 10);
+                done();
             });
 
             scroll(combobox.listView.content, 5 * CONTAINER_HEIGHT);
@@ -411,7 +410,7 @@
         combobox.value(10);
     });
 
-    asyncTest("clear filter when set new value", 1, function() {
+    it("clear filter when set new value", function(done) {
         var combobox = new ComboBox(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -436,18 +435,18 @@
             });
 
             combobox.one("dataBound", function() {
-                start();
 
                 combobox.value("");
 
-                equal(combobox.dataSource.filter().filters.length, 0);
+                assert.equal(combobox.dataSource.filter().filters.length, 0);
+                done();
             });
         });
 
         combobox.value(10);
     });
 
-    test("use DataSource that was already read", 1, function() {
+    it("use DataSource that was already read", function() {
         var noErrors = true;
         var dataSource = new kendo.data.DataSource({
             transport: {
@@ -474,6 +473,7 @@
         } catch(err) {
             noErrors = false;
         }
-        ok(noErrors);
+        assert.isOk(noErrors);
     });
-})();
+    });
+}());

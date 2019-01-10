@@ -7,7 +7,7 @@
         create: function(options, paneCount, initCss) {
             var splitter = $(window.SplitterHelpers.generateHtml(paneCount || 2))
                     .css(initCss || {})
-                    .appendTo(QUnit.fixture)
+                    .appendTo(Mocha.fixture)
                     .kendoSplitter(options);
 
             return {
@@ -32,7 +32,7 @@
             },
 
             teardown: function() {
-                kendo.destroy(QUnit.fixture);
+                kendo.destroy(Mocha.fixture);
             }
         }
     };

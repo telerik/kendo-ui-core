@@ -1,6 +1,6 @@
 (function() {
-    module("events", {
-        teardown: function() {
+    describe("events", function () {
+        afterEach(function() {
             if (button) {
                 if (button.data("kendoButton")) {
                     button.data("kendoButton").destroy();
@@ -8,10 +8,9 @@
                 button.remove();
                 button = null;
             }
-        }
-    });
+        });
 
-    test("click event is fired", function() {
+    it("click event is fired", function() {
         var fired = false;
 
         function clickHandler(e) {
@@ -24,10 +23,10 @@
 
         button.click();
 
-        ok(fired);
+        assert.isOk(fired);
     });
 
-    test("click event passes event object as an argument", function() {
+    it("click event passes event object as an argument", function() {
         var arg;
 
         function clickHandler(e) {
@@ -40,11 +39,11 @@
 
         button.click();
 
-        ok(typeof arg.event == "object");
-        ok(arg.event && arg.event.target == button[0]);
+        assert.isOk(typeof arg.event == "object");
+        assert.isOk(arg.event && arg.event.target == button[0]);
     });
 
-    test("disabled button does not fire click event", function() {
+    it("disabled button does not fire click event", function() {
         var notFired = true;
 
         function clickHandler(e) {
@@ -58,26 +57,26 @@
 
         button.click();
 
-        ok(notFired);
+        assert.isOk(notFired);
     });
 
-    test("focus adds focused class", function() {
+    it("focus adds focused class", function() {
         getButton().kendoButton();
 
         button.focus();
 
-        ok(button.hasClass("k-state-focused"));
+        assert.isOk(button.hasClass("k-state-focused"));
     });
 
-    test("blur removes focused class", function() {
+    it("blur removes focused class", function() {
         getButton().addClass("k-state-focused").kendoButton();
 
         button.blur();
 
-        ok(!button.hasClass("k-state-focused"));
+        assert.isOk(!button.hasClass("k-state-focused"));
     });
 
-    test("click event should be preventable", function () {
+    it("click event should be preventable", function () {
         var isClickPrevented = false;
         var fakeEvent = {
             preventDefault: function () {
@@ -95,6 +94,7 @@
 
         button.data("kendoButton")._click(fakeEvent);
 
-        ok(isClickPrevented);
+        assert.isOk(isClickPrevented);
     });
-})();
+    });
+}());

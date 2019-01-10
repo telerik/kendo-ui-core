@@ -4,215 +4,209 @@
     var listbox;
     var REMOVE = "remove";
 
-    module("ListBox initialization", {
-        setup: function() {
-            div = $("<select />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
+    describe("ListBox initialization", function() {
+        beforeEach(function() {
+            div = $("<select />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("ListBox attaches a listbox object to a target", function() {
-        listbox = new ListBox(div);
-        ok(div.data("kendoListBox") instanceof ListBox);
-    });
-
-    test("should add k-listbox class to wrapper", function() {
-        listbox = new ListBox(div);
-
-        equal(listbox.wrapper.hasClass("k-listbox"), true);
-    });
-
-    test("Has selectedable on", function() {
-        listbox = new ListBox(div, {
-            selectable: true
+            kendo.destroy(Mocha.fixture);
         });
 
-        ok(listbox.selectable instanceof kendo.ui.Selectable);
-    });
-
-    test("Selectable is always on", function() {
-        listbox = new ListBox(div, {
-            selectable: false
+        it("ListBox attaches a listbox object to a target", function() {
+            listbox = new ListBox(div);
+            assert.isOk(div.data("kendoListBox") instanceof ListBox);
         });
 
-        ok(listbox.selectable instanceof kendo.ui.Selectable);
+        it("should add k-listbox class to wrapper", function() {
+            listbox = new ListBox(div);
+
+            assert.equal(listbox.wrapper.hasClass("k-listbox"), true);
+        });
+
+        it("Has selectedable on", function() {
+            listbox = new ListBox(div, {
+                selectable: true
+            });
+
+            assert.isOk(listbox.selectable instanceof kendo.ui.Selectable);
+        });
+
+        it("Selectable is always on", function() {
+            listbox = new ListBox(div, {
+                selectable: false
+            });
+
+            assert.isOk(listbox.selectable instanceof kendo.ui.Selectable);
+        });
+
+        it("selectable should be destroyed on widget destroy", function() {
+            listbox = new ListBox(div);
+            var destroySpy = spy(listbox.selectable, "destroy");
+
+            listbox.destroy();
+
+            assert.equal(destroySpy.calls("destroy"), 1);
+            assert.equal(listbox.selectable, null);
+        });
     });
 
-    test("selectable should be destroyed on widget destroy", function() {
-        listbox = new ListBox(div);
-        var destroySpy = spy(listbox.selectable, "destroy");
-
-        listbox.destroy();
-
-        equal(destroySpy.calls("destroy"), 1);
-        equal(listbox.selectable, null);
-    });
-
-    module("ListBox initialization", {
-        setup: function() {
-        },
-        teardown: function() {
+    describe("ListBox initialization", function() {
+        beforeEach(function() {
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("toolbar is destroyed on widget destroy", function() {
-        listbox = createListBoxWithToolbar();
-        var destroySpy = spy(listbox.toolbar, "destroy");
-
-        listbox.destroy();
-
-        equal(destroySpy.calls("destroy"), 1);
-        equal(listbox.toolbar, null);
-    });
-
-    test("toolbar cannot be initialized without tools", function() {
-        listbox = createListBox();
-
-        equal(listbox.toolbar, undefined);
-    });
-
-    test("toolbar cannot be initialized with empty list of tools", function() {
-        listbox = createListBox({
-            toolbar: {
-                tools: []
-            }
+            kendo.destroy(Mocha.fixture);
         });
 
-        equal(listbox.toolbar, undefined);
-    });
+        it("toolbar is destroyed on widget destroy", function() {
+            listbox = createListBoxWithToolbar();
+            var destroySpy = spy(listbox.toolbar, "destroy");
 
-    test("toolbar is configured with default settings", function() {
-        listbox = createListBox();
+            listbox.destroy();
 
-        deepEqual(listbox.options.toolbar, { position: "right", tools: [] });
-    });
-
-    test("tollbar should render tool elements", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "left",
-                tools: [REMOVE]
-            }
+            assert.equal(destroySpy.calls("destroy"), 1);
+            assert.equal(listbox.toolbar, null);
         });
 
-        equal(listbox.toolbar.element.find("li>a.k-button").length, 1);
-        equal(listbox.toolbar.element.find("li>a.k-button").data("command"), REMOVE);
-    });
+        it("toolbar cannot be initialized without tools", function() {
+            listbox = createListBox();
 
-    test("tollbar with position left should add k-listbox-toolbar-left class", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "left",
-                tools: [REMOVE]
-            }
+            assert.equal(listbox.toolbar, undefined);
         });
 
-        equal(listbox.wrapper.hasClass("k-listbox-toolbar-left"), true);
-    });
+        it("toolbar cannot be initialized with empty list of tools", function() {
+            listbox = createListBox({
+                toolbar: {
+                    tools: []
+                }
+            });
 
-    test("tollbar with position right should add k-listbox-toolbar-right class", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "right",
-                tools: [REMOVE]
-            }
+            assert.equal(listbox.toolbar, undefined);
         });
 
-        equal(listbox.wrapper.hasClass("k-listbox-toolbar-right"), true);
-    });
+        it("toolbar is configured with default settings", function() {
+            listbox = createListBox();
 
-    test("tollbar with position top should add k-listbox-toolbar-top class", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "top",
-                tools: [REMOVE]
-            }
+            assert.deepEqual(listbox.options.toolbar, { position: "right", tools: [] });
         });
 
-        equal(listbox.wrapper.hasClass("k-listbox-toolbar-top"), true);
-    });
+        it("tollbar should render tool elements", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "left",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("tollbar with position bottom should add k-listbox-toolbar-bottom class", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "bottom",
-                tools: [REMOVE]
-            }
+            assert.equal(listbox.toolbar.element.find("li>a.k-button").length, 1);
+            assert.equal(listbox.toolbar.element.find("li>a.k-button").data("command"), REMOVE);
         });
 
-        equal(listbox.wrapper.hasClass("k-listbox-toolbar-bottom"), true);
-    });
+        it("tollbar with position left should add k-listbox-toolbar-left class", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "left",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("tollbar element is inserted before list when position is left", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "left",
-                tools: [REMOVE]
-            }
+            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-left"), true);
         });
 
-        equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
-    });
+        it("tollbar with position right should add k-listbox-toolbar-right class", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "right",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("tollbar element is inserted before list when position is right", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "right",
-                tools: [REMOVE]
-            }
+            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-right"), true);
         });
 
-        equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
-    });
+        it("tollbar with position top should add k-listbox-toolbar-top class", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "top",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("tollbar element is inserted before list when position is top", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "top",
-                tools: [REMOVE]
-            }
+            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-top"), true);
         });
 
-        equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
-    });
+        it("tollbar with position bottom should add k-listbox-toolbar-bottom class", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "bottom",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("tollbar element is inserted after list when position is bottom", function() {
-        listbox = createListBoxWithToolbar({
-            toolbar: {
-                position: "bottom",
-                tools: [REMOVE]
-            }
+            assert.equal(listbox.wrapper.hasClass("k-listbox-toolbar-bottom"), true);
         });
 
-        equal(listbox.wrapper.find(".k-list-scroller").next()[0], listbox.toolbar.element[0]);
-    });
+        it("tollbar element is inserted before list when position is left", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "left",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("when providing a template function the rendered content is wrapped in a li element", function() {
-        listbox = createListBox({
-            template: kendo.template("<div>#:text#</div>")
+            assert.equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
         });
 
-        equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
-        equal(listbox.items().first().html(), "<div>item1</div>");
-    });
+        it("tollbar element is inserted before list when position is right", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "right",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("when providing a template string the rendered content is wrapped in a li element", function() {
-        listbox = createListBox({
-            template: "<div>#:text#</div>"
+            assert.equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
         });
 
-        equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
-        equal(listbox.items().first().html(), "<div>item1</div>");
-    });
+        it("tollbar element is inserted before list when position is top", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "top",
+                    tools: [REMOVE]
+                }
+            });
 
-    test("unselectable attribute is rendered on wrapper", function() {
-        listbox = createListBox();
+            assert.equal(listbox.wrapper.find(".k-list-scroller").prev()[0], listbox.toolbar.element[0]);
+        });
 
-        equal(listbox.wrapper.attr("unselectable"), "on");
+        it("tollbar element is inserted after list when position is bottom", function() {
+            listbox = createListBoxWithToolbar({
+                toolbar: {
+                    position: "bottom",
+                    tools: [REMOVE]
+                }
+            });
+
+            assert.equal(listbox.wrapper.find(".k-list-scroller").next()[0], listbox.toolbar.element[0]);
+        });
+
+        it("when providing a template function the rendered content is wrapped in a li element", function() {
+            listbox = createListBox({
+                template: kendo.template("<div>#:text#</div>")
+            });
+
+            assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
+            assert.equal(listbox.items().first().html(), "<div>item1</div>");
+        });
+
+        it("when providing a template string the rendered content is wrapped in a li element", function() {
+            listbox = createListBox({
+                template: "<div>#:text#</div>"
+            });
+
+            assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
+            assert.equal(listbox.items().first().html(), "<div>item1</div>");
+        });
     });
-})();
+}());

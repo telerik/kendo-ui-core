@@ -1,137 +1,137 @@
 (function() {
-    module("FlatColorPicker", {
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        },
-    });
-
-    test("input: false does not show input", function() {
-        var dom = $("<div />").appendTo(QUnit.fixture).kendoFlatColorPicker({ input: false });
-
-        var input = dom.find(".k-color-value");
-
-        equal(input.css("visibility"), "hidden");
-    });
-
-    test("initialization from input nests it into wrapper", function() {
-        var dom = $("<input name='foo' />").appendTo(QUnit.fixture).kendoColorPicker();
-
-        equal($(".k-colorpicker [name=foo]").length, 1);
-    });
-
-    test("maintains tabIndex after disable/enable", function(){
-        var dom = $("<div tabindex='5' />").appendTo(QUnit.fixture).kendoFlatColorPicker();
-        var cp = dom.data("kendoFlatColorPicker");
-        cp.enable(false);
-        cp.enable(true);
-        equal(cp.wrapper.attr("tabIndex"), 5);
-    });
-
-})();
-
-
-(function(){
-    module("ColorPicker", {
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        },
-    });
-
-    test("maintains tabIndex after disable/enable", function(){
-        var dom = $("<input tabindex='5' />").appendTo(QUnit.fixture).kendoColorPicker();
-        var cp = dom.data("kendoColorPicker");
-        cp.enable(false);
-        cp.enable(true);
-        equal(cp.wrapper.attr("tabIndex"), 5);
-    });
-
-    test("opens on click on an associated <label>", function(){
-        expect(2);
-
-        // embedded in <label>
-        $("<label>ColorPicker: <input /></label>")
-            .appendTo(QUnit.fixture)
-            .find("input").kendoColorPicker({
-                open: function() {
-                    ok(true);
-                }
-            }).end()
-            .click();
-
-        // <label for="...">
-        $("<div><label for='colorpicker'>ColorPicker:</label><input id='colorpicker' /></div>")
-            .appendTo(QUnit.fixture)
-            .find("input").kendoColorPicker({
-                open: function() {
-                    ok(true)
-                }
-            }).end()
-            .find("label").click();
-    });
-
-    test("clicking on an associated label does not open a disabled ColorPicker", function () {
-        expect(0);
-
-        // embedded in <label>
-        $("<label>ColorPicker: <input /></label>")
-            .appendTo(QUnit.fixture)
-            .find("input").prop("disabled", true).kendoColorPicker({
-                open: function () {
-                    ok(true);
-                }
-            }).end()
-            .click();
-
-        // <label for="...">
-        $("<div><label for='colorpicker'>ColorPicker:</label><input id='colorpicker' /></div>")
-            .appendTo(QUnit.fixture)
-            .find("input").prop("disabled", true).kendoColorPicker({
-                open: function () {
-                    ok(true)
-                }
-            }).end()
-            .find("label").click();
-    });
-
-    test("open() method does not open a disabled ColorPicker", function () {
-        expect(0);
-
-        var dom = $("<input disabled='disabled' />").appendTo(QUnit.fixture).kendoColorPicker({
-            open: function () {
-                ok(true);
-            }
+    describe("FlatColorPicker", function() {
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
-        var cp = dom.data("kendoColorPicker");
 
-        cp.open();
-    });
+        it("input: false does not show input", function() {
+            var dom = $("<div />").appendTo(Mocha.fixture).kendoFlatColorPicker({ input: false });
 
-    test("toggle() method does not open a disabled ColorPicker", function () {
-        expect(0);
+            var input = dom.find(".k-color-value");
 
-        var dom = $("<input disabled='disabled' />").appendTo(QUnit.fixture).kendoColorPicker({
-            open: function () {
-                ok(true);
-            }
+            assert.equal(input.css("visibility"), "hidden");
         });
-        var cp = dom.data("kendoColorPicker");
 
-        cp.toggle();
-    });
-})();
+        it("initialization from input nests it into wrapper", function() {
+            var dom = $("<input name='foo' />").appendTo(Mocha.fixture).kendoColorPicker();
 
-(function(){
-    module("ColorPalette", {
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        },
-    });
+            assert.equal($(".k-colorpicker [name=foo]").length, 1);
+        });
 
-    test("maintains tabIndex after disable/enable", function(){
-        var dom = $("<div tabindex='5' />").appendTo(QUnit.fixture).kendoColorPalette();
-        var cp = dom.data("kendoColorPalette");
-        cp.enable(false);
-        cp.enable(true);
-        equal(cp.wrapper.attr("tabIndex"), 5);
+        it("maintains tabIndex after disable/enable", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
+            var cp = dom.data("kendoFlatColorPicker");
+            cp.enable(false);
+            cp.enable(true);
+            assert.equal(cp.wrapper.attr("tabIndex"), 5);
+        });
+
     });
-})();
+}());
+
+
+(function() {
+    describe("ColorPicker", function() {
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("maintains tabIndex after disable/enable", function() {
+            var dom = $("<input tabindex='5' />").appendTo(Mocha.fixture).kendoColorPicker();
+            var cp = dom.data("kendoColorPicker");
+            cp.enable(false);
+            cp.enable(true);
+            assert.equal(cp.wrapper.attr("tabIndex"), 5);
+        });
+
+        it("opens on click on an associated <label>", function() {
+            expect(2);
+
+            // embedded in <label>
+            $("<label>ColorPicker: <input /></label>")
+                .appendTo(Mocha.fixture)
+                .find("input").kendoColorPicker({
+                    open: function() {
+                        assert.isOk(true);
+                    }
+                }).end()
+                .click();
+
+            // <label for="...">
+            $("<div><label for='colorpicker'>ColorPicker:</label><input id='colorpicker' /></div>")
+                .appendTo(Mocha.fixture)
+                .find("input").kendoColorPicker({
+                    open: function() {
+                        assert.isOk(true)
+                    }
+                }).end()
+                .find("label").click();
+        });
+
+        it("clicking on an associated label does not open a disabled ColorPicker", function() {
+            expect(0);
+
+            // embedded in <label>
+            $("<label>ColorPicker: <input /></label>")
+                .appendTo(Mocha.fixture)
+                .find("input").prop("disabled", true).kendoColorPicker({
+                    open: function() {
+                        assert.isOk(true);
+                    }
+                }).end()
+                .click();
+
+            // <label for="...">
+            $("<div><label for='colorpicker'>ColorPicker:</label><input id='colorpicker' /></div>")
+                .appendTo(Mocha.fixture)
+                .find("input").prop("disabled", true).kendoColorPicker({
+                    open: function() {
+                        assert.isOk(true)
+                    }
+                }).end()
+                .find("label").click();
+        });
+
+        it("open() method does not open a disabled ColorPicker", function() {
+            expect(0);
+
+            var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker({
+                open: function() {
+                    assert.isOk(true);
+                }
+            });
+            var cp = dom.data("kendoColorPicker");
+
+            cp.open();
+        });
+
+        it("toggle() method does not open a disabled ColorPicker", function() {
+            expect(0);
+
+            var dom = $("<input disabled='disabled' />").appendTo(Mocha.fixture).kendoColorPicker({
+                open: function() {
+                    assert.isOk(true);
+                }
+            });
+            var cp = dom.data("kendoColorPicker");
+
+            cp.toggle();
+        });
+    });
+}());
+
+(function() {
+    describe("ColorPalette", function() {
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("maintains tabIndex after disable/enable", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorPalette();
+            var cp = dom.data("kendoColorPalette");
+            cp.enable(false);
+            cp.enable(true);
+            assert.equal(cp.wrapper.attr("tabIndex"), 5);
+        });
+    });
+}());

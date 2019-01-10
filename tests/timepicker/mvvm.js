@@ -1,384 +1,384 @@
 (function() {
     var dom;
-    module('timepicker MVVM', {
-        setup: function() {
+    describe('timepicker MVVM', function() {
+        beforeEach(function() {
 
             window.timePickerChange = function() {
-                ok(true);
+                assert.isOk(true);
             }
 
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             kendo.destroy(dom);
-        }
-    });
-    test("initializes a timepicker when data role is timepicker", function() {
-        dom = $('<input data-role="timepicker"/>');
+        });
+        it("initializes a timepicker when data role is timepicker", function() {
+            dom = $('<input data-role="timepicker"/>');
 
-        kendo.bind(dom);
+            kendo.bind(dom);
 
-        ok(dom.data("kendoTimePicker") instanceof kendo.ui.TimePicker);
-    });
-
-    test("initializes a options from data attributes", function() {
-        dom = $('<input data-role="timepicker" data-interval="15" />');
-
-        kendo.bind(dom);
-
-        var timepicker = dom.data("kendoTimePicker");
-
-        equal(timepicker.options.interval, "15");
-        equal(timepicker.timeView.options.interval, "15");
-    });
-
-    test("initializes value from view model", function() {
-        dom = $('<input data-role="timepicker" data-bind="value:value" />');
-        var value = new Date();
-
-        kendo.bind(dom, { value: value } );
-
-        equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
-    });
-
-    test("initializes a options from data attributes after init of the widget", function() {
-        dom = $('<input data-role="timepicker" data-format="{0:hh:mm}" />');
-        dom.kendoTimePicker();
-
-        kendo.bind(dom);
-
-        var timepicker = dom.data("kendoTimePicker");
-
-        equal(timepicker.options.format, "hh:mm");
-        equal(timepicker.timeView.options.format, "hh:mm");
-    });
-
-    test("initializes min and max options from data attributes", function() {
-        dom = $('<input data-role="timepicker" data-min="09:00" data-max="21:30" />');
-        dom.appendTo(QUnit.fixture);
-
-        kendo.bind(dom);
-
-        var timepicker = dom.data("kendoTimePicker");
-        var min = kendo.date.today();
-        var max = kendo.date.today();
-
-        min.setHours(9, 0, 0);
-        max.setHours(21, 30, 0);
-
-        deepEqual(timepicker.min(), min);
-        deepEqual(timepicker.max(), max);
-    });
-
-    test("initializes min and max options from data attributes after init of the widget", function() {
-        dom = $('<input data-role="timepicker" data-min="09:00" data-max="21:30" />');
-        dom.appendTo(QUnit.fixture);
-        dom.kendoTimePicker();
-
-        kendo.bind(dom);
-
-        var timepicker = dom.data("kendoTimePicker");
-        var min = kendo.date.today();
-        var max = kendo.date.today();
-
-        min.setHours(9, 0, 0);
-        max.setHours(21, 30, 0);
-
-        deepEqual(timepicker.min(), min);
-        deepEqual(timepicker.max(), max);
-    });
-
-    test("Preserve options after widget init", function() {
-        dom = $('<input data-role="timepicker" />');
-        dom.kendoTimePicker({
-            format: "HH:mm"
+            assert.isOk(dom.data("kendoTimePicker") instanceof kendo.ui.TimePicker);
         });
 
-        kendo.bind(dom);
+        it("initializes a options from data attributes", function() {
+            dom = $('<input data-role="timepicker" data-interval="15" />');
 
-        var timepicker = dom.data("kendoTimePicker");
+            kendo.bind(dom);
 
-        equal(timepicker.options.format, "HH:mm");
-        equal(timepicker.timeView.options.format, "HH:mm");
-    });
+            var timepicker = dom.data("kendoTimePicker");
 
-    test("initializes a parseFormats option from data attributes", function() {
-        dom = $('<input data-role="timepicker" data-format="MM yyyy" data-parse-formats="MM/dd/yyyy" />');
-
-        dom.kendoTimePicker();
-
-        kendo.bind(dom);
-
-        var timepicker = dom.data("kendoTimePicker");
-
-        equal(timepicker.options.parseFormats[0], "MM yyyy");
-        equal(timepicker.options.parseFormats[1], "MM/dd/yyyy");
-    });
-
-    test("initializes a parseFormats option from data attribute with array value", function() {
-        dom = $('<input data-role="timepicker" data-format="MM yyyy" data-parse-formats=\'["MM/dd/yyyy", "dd/MM/yyyy"]\' />');
-
-        dom.kendoTimePicker();
-
-        kendo.bind(dom);
-
-        var timepicker = dom.data("kendoTimePicker");
-
-        equal(timepicker.options.parseFormats[0], "MM yyyy");
-        equal(timepicker.options.parseFormats[1], "MM/dd/yyyy");
-        equal(timepicker.options.parseFormats[2], "dd/MM/yyyy");
-    });
-
-    test("changing a value updates the view model", function() {
-        dom = $('<input data-role="timepicker" data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: null });
-
-        kendo.bind(dom, observable);
-        var value = new Date(2011, 1, 2);
-
-        dom.data("kendoTimePicker").value(value);
-        dom.data("kendoTimePicker").trigger("change");
-
-        equal(observable.value.getTime(), value.getTime());
-    });
-
-    test("binding timepicker initialized before binding", function() {
-        dom = $('<input data-bind="value:value" />');
-
-        var value = new Date(2011, 1, 2);
-        var observable = kendo.observable({ value: null });
-        observable.value = value;
-
-        dom.kendoTimePicker();
-
-        kendo.bind(dom, observable);
-
-        equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
-    });
-
-    test("binding timepicker initialized after binding", function() {
-        dom = $('<input data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: null });
-        var value = new Date(2011, 1, 2);
-        observable.value = value;
-
-        kendo.bind(dom, observable);
-
-        dom.kendoTimePicker();
-
-        equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
-    });
-
-    test("updating model value updates the UI", function() {
-        dom = $('<input data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: value });
-
-        kendo.bind(dom, observable);
-
-        dom.kendoTimePicker();
-
-        var value = new Date(2011, 1, 2);
-        observable.set("value", value)
-        equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
-    });
-
-    test("bindings are removed if element is rebind", 1, function() {
-        dom = $('<input data-role="timepicker" data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: new Date(2011, 1, 2) });
-
-        kendo.bind(dom, observable);
-
-        var destroy = stub(dom[0].kendoBindingTarget, "destroy");
-
-        kendo.bind(dom, observable);
-
-        equal(destroy.calls("destroy"), 1);
-    });
-
-    test("change event is raised if attached as option", 1, function() {
-        dom = $('<input data-role="timepicker" data-change="timePickerChange" />');
-
-        var observable = kendo.observable();
-
-        kendo.bind(dom, observable);
-        dom.data("kendoTimePicker").trigger("change");
-    });
-
-    test("change event is raised if attached as option to a already initialized timepicker", 1, function() {
-        dom = $('<input data-change="timePickerChange" />').kendoTimePicker();
-
-        var observable = kendo.observable();
-
-        kendo.bind(dom, observable);
-        dom.data("kendoTimePicker").trigger("change");
-    });
-
-    test("binding enabled to false disables the widget", function() {
-        dom = $('<input data-bind="enabled:enabled" data-role="timepicker"/>');
-
-        var observable = kendo.observable({
-            enabled: false
+            assert.equal(timepicker.options.interval, "15");
+            assert.equal(timepicker.timeView.options.interval, "15");
         });
 
-        kendo.bind(dom, observable);
+        it("initializes value from view model", function() {
+            dom = $('<input data-role="timepicker" data-bind="value:value" />');
+            var value = new Date();
 
-        ok(dom.is(":disabled"));
-    });
+            kendo.bind(dom, { value: value });
 
-    test("binding enabled to true enables the widget", function() {
-        dom = $('<input data-bind="enabled:enabled" disabled="disabled" data-role="timepicker" />');
-
-        var observable = kendo.observable({
-            enabled: true
+            assert.equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
         });
 
-        kendo.bind(dom, observable);
+        it("initializes a options from data attributes after init of the widget", function() {
+            dom = $('<input data-role="timepicker" data-format="{0:hh:mm}" />');
+            dom.kendoTimePicker();
 
-        ok(!dom.is(":disabled"));
-    });
+            kendo.bind(dom);
 
-    test("binding disable to true disables the widget", function() {
-        dom = $('<input data-bind="disabled:disabled" disabled="disabled" data-role="timepicker" />');
+            var timepicker = dom.data("kendoTimePicker");
 
-        var observable = kendo.observable({
-            disabled: false
+            assert.equal(timepicker.options.format, "hh:mm");
+            assert.equal(timepicker.timeView.options.format, "hh:mm");
         });
 
-        kendo.bind(dom, observable);
+        it("initializes min and max options from data attributes", function() {
+            dom = $('<input data-role="timepicker" data-min="09:00" data-max="21:30" />');
+            dom.appendTo(Mocha.fixture);
 
-        ok(!dom.is(":disabled"));
-    });
+            kendo.bind(dom);
 
-    test("binding disabled to false enables the widget", function() {
-        dom = $('<input data-bind="disabled:disabled" data-role="timepicker" />');
+            var timepicker = dom.data("kendoTimePicker");
+            var min = kendo.date.today();
+            var max = kendo.date.today();
 
-        var observable = kendo.observable({
-            disabled: true
+            min.setHours(9, 0, 0);
+            max.setHours(21, 30, 0);
+
+            assert.deepEqual(timepicker.min(), min);
+            assert.deepEqual(timepicker.max(), max);
         });
 
-        kendo.bind(dom, observable);
+        it("initializes min and max options from data attributes after init of the widget", function() {
+            dom = $('<input data-role="timepicker" data-min="09:00" data-max="21:30" />');
+            dom.appendTo(Mocha.fixture);
+            dom.kendoTimePicker();
 
-        ok(dom.is(":disabled"));
-    });
+            kendo.bind(dom);
 
-    test("binding visible to false hides the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="timepicker"/>');
+            var timepicker = dom.data("kendoTimePicker");
+            var min = kendo.date.today();
+            var max = kendo.date.today();
 
-        var observable = kendo.observable({
-            visible: false
+            min.setHours(9, 0, 0);
+            max.setHours(21, 30, 0);
+
+            assert.deepEqual(timepicker.min(), min);
+            assert.deepEqual(timepicker.max(), max);
         });
 
-        kendo.bind(dom, observable);
+        it("Preserve options after widget init", function() {
+            dom = $('<input data-role="timepicker" />');
+            dom.kendoTimePicker({
+                format: "HH:mm"
+            });
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") == "none", "Display is 'none'");
-    });
+            kendo.bind(dom);
 
-    test("binding visible to true shows the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="timepicker" style="display:none"/>');
+            var timepicker = dom.data("kendoTimePicker");
 
-        var observable = kendo.observable({
-            visible: true
+            assert.equal(timepicker.options.format, "HH:mm");
+            assert.equal(timepicker.timeView.options.format, "HH:mm");
         });
 
-        kendo.bind(dom, observable);
+        it("initializes a parseFormats option from data attributes", function() {
+            dom = $('<input data-role="timepicker" data-format="MM yyyy" data-parse-formats="MM/dd/yyyy" />');
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") != "none", "Display is not 'none'");
-    });
+            dom.kendoTimePicker();
 
-    test("changing visible to false hides the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="timepicker"/>');
+            kendo.bind(dom);
 
-        var observable = kendo.observable({
-            visible: true
+            var timepicker = dom.data("kendoTimePicker");
+
+            assert.equal(timepicker.options.parseFormats[0], "MM yyyy");
+            assert.equal(timepicker.options.parseFormats[1], "MM/dd/yyyy");
         });
 
-        kendo.bind(dom, observable);
-        observable.set("visible", false);
+        it("initializes a parseFormats option from data attribute with array value", function() {
+            dom = $('<input data-role="timepicker" data-format="MM yyyy" data-parse-formats=\'["MM/dd/yyyy", "dd/MM/yyyy"]\' />');
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") == "none", "Display is 'none'");
-    });
+            dom.kendoTimePicker();
 
-    test("changing visible to true shows the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="timepicker"/>');
+            kendo.bind(dom);
 
-        var observable = kendo.observable({
-            visible: false
+            var timepicker = dom.data("kendoTimePicker");
+
+            assert.equal(timepicker.options.parseFormats[0], "MM yyyy");
+            assert.equal(timepicker.options.parseFormats[1], "MM/dd/yyyy");
+            assert.equal(timepicker.options.parseFormats[2], "dd/MM/yyyy");
         });
 
-        kendo.bind(dom, observable);
-        observable.set("visible", true);
+        it("changing a value updates the view model", function() {
+            dom = $('<input data-role="timepicker" data-bind="value:value" />');
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") != "none", "Display is not 'none'");
-    });
+            var observable = kendo.observable({ value: null });
 
-    test("binding invisible to true hides the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="timepicker"/>');
+            kendo.bind(dom, observable);
+            var value = new Date(2011, 1, 2);
 
-        var observable = kendo.observable({
-            invisible: true
+            dom.data("kendoTimePicker").value(value);
+            dom.data("kendoTimePicker").trigger("change");
+
+            assert.equal(observable.value.getTime(), value.getTime());
         });
 
-        kendo.bind(dom, observable);
+        it("binding timepicker initialized before binding", function() {
+            dom = $('<input data-bind="value:value" />');
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") == "none", "display is 'none'");
-    });
+            var value = new Date(2011, 1, 2);
+            var observable = kendo.observable({ value: null });
+            observable.value = value;
 
-    test("binding invisible to false shows the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="timepicker" style="display:none"/>');
+            dom.kendoTimePicker();
 
-        var observable = kendo.observable({
-            invisible: false
+            kendo.bind(dom, observable);
+
+            assert.equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
         });
 
-        kendo.bind(dom, observable);
+        it("binding timepicker initialized after binding", function() {
+            dom = $('<input data-bind="value:value" />');
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") != "none", "display is not 'none'");
-    });
+            var observable = kendo.observable({ value: null });
+            var value = new Date(2011, 1, 2);
+            observable.value = value;
 
-    test("changing invisible to true hides the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="timepicker"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            invisible: false
+            dom.kendoTimePicker();
+
+            assert.equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
         });
 
-        kendo.bind(dom, observable);
-        observable.set("invisible", true);
+        it("updating model value updates the UI", function() {
+            dom = $('<input data-bind="value:value" />');
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") == "none", "display is 'none'");
-    });
+            var observable = kendo.observable({ value: value });
 
-    test("changing invisible to false shows the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="timepicker"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            invisible: true
+            dom.kendoTimePicker();
+
+            var value = new Date(2011, 1, 2);
+            observable.set("value", value)
+            assert.equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
         });
 
-        kendo.bind(dom, observable);
-        observable.set("invisible", false);
+        it("bindings are removed if element is rebind", function() {
+            dom = $('<input data-role="timepicker" data-bind="value:value" />');
 
-        ok(dom.data("kendoTimePicker").wrapper.css("display") != "none", "display is not 'none'");
-    });
+            var observable = kendo.observable({ value: new Date(2011, 1, 2) });
 
-    test("binding timepicker initialized before binding does not override change event handler of timeView", 1, function() {
-        dom = $('<input data-bind="value: value" />');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({ value: null });
+            var destroy = stub(dom[0].kendoBindingTarget, "destroy");
 
-        kendo.bind(dom, observable);
+            kendo.bind(dom, observable);
 
-        dom.kendoTimePicker({
-            change: function() {
-                equal(this, dom.data("kendoTimePicker"));
-            }
+            assert.equal(destroy.calls("destroy"), 1);
         });
 
-        dom.data("kendoTimePicker").open();
-        dom.data("kendoTimePicker").timeView.options.change("2:00 AM", true);
-    });
+        it("change event is raised if attached as option", function() {
+            dom = $('<input data-role="timepicker" data-change="timePickerChange" />');
 
-})();
+            var observable = kendo.observable();
+
+            kendo.bind(dom, observable);
+            dom.data("kendoTimePicker").trigger("change");
+        });
+
+        it("change event is raised if attached as option to a already initialized timepicker", function() {
+            dom = $('<input data-change="timePickerChange" />').kendoTimePicker();
+
+            var observable = kendo.observable();
+
+            kendo.bind(dom, observable);
+            dom.data("kendoTimePicker").trigger("change");
+        });
+
+        it("binding enabled to false disables the widget", function() {
+            dom = $('<input data-bind="enabled:enabled" data-role="timepicker"/>');
+
+            var observable = kendo.observable({
+                enabled: false
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.is(":disabled"));
+        });
+
+        it("binding enabled to true enables the widget", function() {
+            dom = $('<input data-bind="enabled:enabled" disabled="disabled" data-role="timepicker" />');
+
+            var observable = kendo.observable({
+                enabled: true
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(!dom.is(":disabled"));
+        });
+
+        it("binding disable to true disables the widget", function() {
+            dom = $('<input data-bind="disabled:disabled" disabled="disabled" data-role="timepicker" />');
+
+            var observable = kendo.observable({
+                disabled: false
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(!dom.is(":disabled"));
+        });
+
+        it("binding disabled to false enables the widget", function() {
+            dom = $('<input data-bind="disabled:disabled" data-role="timepicker" />');
+
+            var observable = kendo.observable({
+                disabled: true
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.is(":disabled"));
+        });
+
+        it("binding visible to false hides the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="timepicker"/>');
+
+            var observable = kendo.observable({
+                visible: false
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") == "none", "Display is 'none'");
+        });
+
+        it("binding visible to true shows the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="timepicker" style="display:none"/>');
+
+            var observable = kendo.observable({
+                visible: true
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") != "none", "Display is not 'none'");
+        });
+
+        it("changing visible to false hides the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="timepicker"/>');
+
+            var observable = kendo.observable({
+                visible: true
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("visible", false);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") == "none", "Display is 'none'");
+        });
+
+        it("changing visible to true shows the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="timepicker"/>');
+
+            var observable = kendo.observable({
+                visible: false
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("visible", true);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") != "none", "Display is not 'none'");
+        });
+
+        it("binding invisible to true hides the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="timepicker"/>');
+
+            var observable = kendo.observable({
+                invisible: true
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") == "none", "display is 'none'");
+        });
+
+        it("binding invisible to false shows the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="timepicker" style="display:none"/>');
+
+            var observable = kendo.observable({
+                invisible: false
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") != "none", "display is not 'none'");
+        });
+
+        it("changing invisible to true hides the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="timepicker"/>');
+
+            var observable = kendo.observable({
+                invisible: false
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("invisible", true);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") == "none", "display is 'none'");
+        });
+
+        it("changing invisible to false shows the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="timepicker"/>');
+
+            var observable = kendo.observable({
+                invisible: true
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("invisible", false);
+
+            assert.isOk(dom.data("kendoTimePicker").wrapper.css("display") != "none", "display is not 'none'");
+        });
+
+        it("binding timepicker initialized before binding does not override change event handler of timeView", function() {
+            dom = $('<input data-bind="value: value" />');
+
+            var observable = kendo.observable({ value: null });
+
+            kendo.bind(dom, observable);
+
+            dom.kendoTimePicker({
+                change: function() {
+                    assert.equal(this, dom.data("kendoTimePicker"));
+                }
+            });
+
+            dom.data("kendoTimePicker").open();
+            dom.data("kendoTimePicker").timeView.options.change("2:00 AM", true);
+        });
+
+    });
+}());

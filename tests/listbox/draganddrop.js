@@ -5,14 +5,14 @@
         listC,
         listD;
 
-    module("ListBox - dragdrop", {
-        setup: function() {
-            $(document.body).append(QUnit.fixture);
+    describe("ListBox - dragdrop", function () {
+        beforeEach(function() {
+            $(document.body).append(Mocha.fixture);
 
-            var elementA = $('<select id="listA"></select>').appendTo(QUnit.fixture);
-            var elementB = $('<select id="listB"></select>').appendTo(QUnit.fixture);
-            var elementC = $('<select id="listC"></select>').appendTo(QUnit.fixture);
-            var elementD = $('<select id="listD"></select>').appendTo(QUnit.fixture);
+            var elementA = $('<select id="listA"></select>').appendTo(Mocha.fixture);
+            var elementB = $('<select id="listB"></select>').appendTo(Mocha.fixture);
+            var elementC = $('<select id="listC"></select>').appendTo(Mocha.fixture);
+            var elementD = $('<select id="listD"></select>').appendTo(Mocha.fixture);
             
             listA  = elementA.kendoListBox({
                     dataSource: [ {name: "Tim", id:4 }, {name: "Johny", id:5 }, {name: "Dicky", id:6 }],
@@ -43,8 +43,8 @@
                     dataSource: [],
                     dropSources: ["listA"]
             }).getKendoListBox();
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             if(listA) {
               listA.destroy();
             }
@@ -57,15 +57,14 @@
             if(listD) {
               listD.destroy();
             }
-            kendo.destroy(QUnit.fixture);
-        }
+            kendo.destroy(Mocha.fixture);
+        });
+
+    it("Draggable is not enabled by default", function() {
+        assert.isOk(kendo.ui.ListBox.prototype.options.draggable === null);
     });
 
-    test("Draggable is not enabled by default", 1, function() {
-        ok(kendo.ui.ListBox.prototype.options.draggable === null);
-    });
-
-    test("Placeholder moves across connected listboxes", 1, function() {
+    it("Placeholder moves across connected listboxes", function() {
         var draggedElement = listB.items().first();
         var draggableOffset = kendo.getOffset(draggedElement);
         var targetElement = listA.items().first(),
@@ -74,10 +73,10 @@
         press(draggedElement, draggableOffset.left, draggableOffset.top);
         move(draggedElement, targetOffset.left, targetOffset.top);
 
-        ok(listA._getList().children().length === 4, "Placeholder is moved to the ListA");
+        assert.isOk(listA._getList().children().length === 4, "Placeholder is moved to the ListA");
     });
 
-    test("Item can be dragged from one listbox to another", 3, function() {
+    it("Item can be dragged from one listbox to another", function() {
         var draggedElement = listB.items().first();
         var draggableOffset = kendo.getOffset(draggedElement);
         var targetElement = listA.items().first(),
@@ -87,12 +86,12 @@
         move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
 
-        ok(listB.items().length == 2, "Item is removed from ListB");
-        ok(listA.items().length == 4, "Item is added to ListA");
-        ok(listA.items().first().html() === "Tom");
+        assert.isOk(listB.items().length == 2, "Item is removed from ListB");
+        assert.isOk(listA.items().length == 4, "Item is added to ListA");
+        assert.isOk(listA.items().first().html() === "Tom");
     });
 
-    test("Item is correctly reordered in listbox using drag", 1, function () {
+    it("Item is correctly reordered in listbox using drag", function () {
         var draggedElement = listB.items().last();
         var draggableOffset = kendo.getOffset(draggedElement);
         var targetElement = listB.items().first(),
@@ -101,10 +100,10 @@
         move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
         //this should not depend on default line hight, since moving up to exact location
-        ok(listB.items().filter(":eq(0)").html() === "Donald");
+        assert.isOk(listB.items().filter(":eq(0)").html() === "Donald");
     });
 
-    test("Item is not dropped if dropSources is not set", 1, function() {
+    it("Item is not dropped if dropSources is not set", function() {
         var draggedElement = listA.items().first();
         var draggableOffset = kendo.getOffset(draggedElement);
         var targetElement = listC.items().last(),
@@ -114,10 +113,10 @@
         move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
 
-        ok(listC.dataSource.view().length === 3);
+        assert.isOk(listC.dataSource.view().length === 3);
     });
 
-    test("Item is not dropped if dropSources is empty", 1, function() {
+    it("Item is not dropped if dropSources is empty", function() {
         var draggedElement = listA.items().first();
         var draggableOffset = kendo.getOffset(draggedElement);
         var targetElement = listD._getList();
@@ -128,10 +127,10 @@
         move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
 
-        ok(listD.dataSource.view().length === 1);
+        assert.isOk(listD.dataSource.view().length === 1);
     });
 
-    test("Drag and drop classes are set and removed correctly", 2, function() {
+    it("Drag and drop classes are set and removed correctly", function() {
         var draggedElement = listA.items().first();
         var draggableOffset = kendo.getOffset(draggedElement);
         var targetElement = listD._getList();
@@ -139,15 +138,16 @@
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
         move(draggedElement, targetOffset.left, targetOffset.top + 100);
-        ok($("body").find(".k-item.k-state-selected.k-reset.k-drag-clue").length === 1);
+        assert.isOk($("body").find(".k-item.k-state-selected.k-reset.k-drag-clue").length === 1);
         release(draggedElement, targetOffset.left, targetOffset.top + 100);
-        ok(listA.items().find(".k-ghost").length === 0);
+        assert.isOk(listA.items().find(".k-ghost").length === 0);
     });
 
-     test("Drag and drop hint should not have .k-state-focused class when dragged element is focused", 1, function(){
+     it("Drag and drop hint should not have .k-state-focused class when dragged element is focused", function(){
         var mockedElement = $('<li class="k-item k-state-focused k-state-selected"/>');
         var hint = listA._draggable.options.hint(mockedElement)
 
-        ok(!hint.hasClass("k-state-focused"));                
+        assert.isOk(!hint.hasClass("k-state-focused"));                
     });
-})();
+    });
+}());

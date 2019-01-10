@@ -2,18 +2,18 @@
     var container,
         Tooltip = kendo.ui.Tooltip;
 
-    module("kendo.ui.tooltip.ajax", {
-        setup: function() {
+    describe("kendo.ui.tooltip.ajax", function() {
+        beforeEach(function() {
             $.mockjaxSettings.responseTime = 0;
 
             $.fn.press = function(key, ctrl, shift, alt) {
-                return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt } );
+                return this.trigger({ type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift, altKey: alt });
             }
 
-            container = $("<div style='margin:50px'/>").appendTo(QUnit.fixture);
-        },
+            container = $("<div style='margin:50px'/>").appendTo(Mocha.fixture);
+        });
 
-        teardown: function() {
+        afterEach(function() {
 
             if (container.data("kendoTooltip")) {
                 container.kendoTooltip("destroy");
@@ -21,242 +21,235 @@
 
             container.remove();
             $.mockjax.clear();
-        }
-    });
-
-    function triggerEvent(element, type, info) {
-        element.trigger($.Event(type, info));
-
-        return element;
-    };
-
-    test("ajax request is made when popup is shown", 1, function() {
-        $.mockjax({
-            url: "foo/baz",
-            response: function(request) {
-                ok(true);
-                start();
-            }
         });
 
-        var tooltip = new Tooltip(container, {
-            content: {
-                url: "foo/baz"
-            }
-        });
-        stop();
-        tooltip.show(container);
-    });
+        function triggerEvent(element, type, info) {
+            element.trigger($.Event(type, info));
 
-    test("response is added to the content", 1, function() {
-        $.mockjax({
-            url: "foo/baz",
-            response: function() {
-                this.responseText = "foo";
-            }
-        });
+            return element;
+        };
 
-        var tooltip = new Tooltip(container, {
-            content: {
-                url: "foo/baz"
-            },
-            contentLoad: function() {
-                equal(tooltip.content.text(), "foo");
-                start();
-            }
-        });
-
-        stop();
-        tooltip.show(container);
-    });
-
-    test("error event is raised if request fails", 1, function() {
-        $.mockjax({
-            url: "foo/baz",
-            status: 500
-        });
-
-        var tooltip = new Tooltip(container, {
-            content: {
-                url: "foo/baz"
-            },
-            error: function() {
-                ok(true);
-                start();
-            }
-        });
-
-        stop();
-        tooltip.show(container);
-    });
-
-    test("local url does not create iframe", function() {
-        $.mockjax({
-            url: "foo/baz",
-            status: 500
-        });
-
-        var tooltip = new Tooltip(container, {
-            content: { url: "foo/baz" }
-        });
-
-        tooltip.show(container);
-
-        ok(!tooltip.content.find("iframe").length);
-    });
-
-    test("a remote `content` creates iframe", function() {
-        var tooltip = new Tooltip(container, {
-            content: { url:  "http://www.telerik.com/" }
-        });
-
-        tooltip.show(container);
-
-        var iframe = tooltip.content.find("iframe");
-
-        equal(iframe.length, 1);
-        equal(iframe.attr("src"), "http://www.telerik.com/");
-    });
-
-    test("iframe is created if showIframe is set", function() {
-        var tooltip = new Tooltip(container, {
-            content: { url:  "/foo/" },
-            iframe: true
-        });
-
-        tooltip.show(container);
-
-        ok(tooltip.content.find("iframe").length);
-    });
-
-    test("requestStart is triggered", 1, function() {
-        $.mockjax({
-            url: "foo/baz"
-        });
-
-        var tooltip = new Tooltip(container, {
-            content: {
-                url: "foo/baz"
-            },
-            requestStart: function() {
-                ok(true);
-                start();
-            }
-        });
-
-        stop();
-        tooltip.show(container);
-    });
-
-    test("requestStart add request data if such does not exist", 1, function() {
-        $.mockjax({
-            url: "foo/baz",
-            response: function(settings) {
-                equal(settings.data.bar, "foo");
-                start();
-            }
-        });
-
-        var tooltip = new Tooltip(container, {
-            content: {
-                url: "foo/baz"
-            },
-            requestStart: function(e) {
-                e.options.data = {
-                    bar: "foo"
-                }
-            }
-        });
-
-        stop();
-        tooltip.show(container);
-    });
-
-    test("requestStart updates request data", 1, function() {
-        $.mockjax({
-            url: "foo/baz",
-            response: function(settings) {
-                equal(settings.data.bar, "foo");
-                start();
-            }
-        });
-
-        var tooltip = new Tooltip(container, {
-            content: {
+        it("ajax request is made when popup is shown", function(done) {
+            $.mockjax({
                 url: "foo/baz",
-                data: {
-                    bar: "boo"
+                response: function(request) {
+                    assert.isOk(true);
+                    done();
                 }
-            },
-            requestStart: function(e) {
-                e.options.data.bar = "foo"
-            }
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                }
+            });
+            
+            tooltip.show(container);
         });
 
-        stop();
-        tooltip.show(container);
-    });
+        it("response is added to the content", function(done) {
+            $.mockjax({
+                url: "foo/baz",
+                response: function() {
+                    this.responseText = "foo";
+                }
+            });
 
-    test("target is passed to the requestStart", 1, function() {
-        $.mockjax({
-            url: "foo/baz"
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                },
+                contentLoad: function() {
+                    assert.equal(tooltip.content.text(), "foo");
+                    done();
+                }
+            });
+
+            tooltip.show(container);
         });
 
-        var tooltip = new Tooltip(container, {
-            content: {
+        it("error event is raised if request fails", function(done) {
+            $.mockjax({
+                url: "foo/baz",
+                status: 500
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                },
+                error: function() {
+                    assert.isOk(true);
+                    done();
+                }
+            });
+
+            tooltip.show(container);
+        });
+
+        it("local url does not create iframe", function() {
+            $.mockjax({
+                url: "foo/baz",
+                status: 500
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: { url: "foo/baz" }
+            });
+
+            tooltip.show(container);
+
+            assert.isOk(!tooltip.content.find("iframe").length);
+        });
+
+        it("a remote `content` creates iframe", function() {
+            var tooltip = new Tooltip(container, {
+                content: { url: "http://www.telerik.com/" }
+            });
+
+            tooltip.show(container);
+
+            var iframe = tooltip.content.find("iframe");
+
+            assert.equal(iframe.length, 1);
+            assert.equal(iframe.attr("src"), "http://www.telerik.com/");
+        });
+
+        it("iframe is created if showIframe is set", function() {
+            var tooltip = new Tooltip(container, {
+                content: { url: "/foo/" },
+                iframe: true
+            });
+
+            tooltip.show(container);
+
+            assert.isOk(tooltip.content.find("iframe").length);
+        });
+
+        it("requestStart is triggered", function(done) {
+            $.mockjax({
                 url: "foo/baz"
-            },
-            requestStart: function(e) {
-                equal(e.target, container);
-                start();
-            }
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                },
+                requestStart: function() {
+                    assert.isOk(true);
+                    done();
+                }
+            });
+
+            tooltip.show(container);
         });
 
-        stop();
-        tooltip.show(container);
-    });
+        it("requestStart add request data if such does not exist", function(done) {
+            $.mockjax({
+                url: "foo/baz",
+                response: function(settings) {
+                    assert.equal(settings.data.bar, "foo");
+                    done();
+                }
+            });
 
-    test("refresh issue an ajax request", 1, function() {
-        $.mockjax({
-            url: "foo/baz"
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                },
+                requestStart: function(e) {
+                    e.options.data = {
+                        bar: "foo"
+                    }
+                }
+            });
+
+            tooltip.show(container);
         });
 
-        var tooltip = new Tooltip(container, {
-            content: {
+        it("requestStart updates request data", function(done) {
+            $.mockjax({
+                url: "foo/baz",
+                response: function(settings) {
+                    assert.equal(settings.data.bar, "foo");
+                    done();
+                }
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz",
+                    data: {
+                        bar: "boo"
+                    }
+                },
+                requestStart: function(e) {
+                    e.options.data.bar = "foo"
+                }
+            });
+
+            tooltip.show(container);
+        });
+
+        it("target is passed to the requestStart", function(done) {
+            $.mockjax({
                 url: "foo/baz"
-            }
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                },
+                requestStart: function(e) {
+                    assert.equal(e.target, container);
+                    done();
+                }
+            });
+
+            tooltip.show(container);
         });
 
-        tooltip.show(container);
+        it("refresh issue an ajax request", function(done) {
+            $.mockjax({
+                url: "foo/baz"
+            });
 
-        tooltip.bind("requestStart", function() {
-            ok(true);
-            start();
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                }
+            });
+
+            tooltip.show(container);
+
+            tooltip.bind("requestStart", function() {
+                assert.isOk(true);
+                done();
+            });
+
+            tooltip.refresh();
         });
 
-        stop();
-        tooltip.refresh();
+        it("refresh the content", function() {
+            var tooltip = new Tooltip(container, {
+                content: function() {
+                    assert.isOk(true);
+                }
+            });
+
+            tooltip.show(container);
+
+            tooltip.refresh();
+        });
+
+        it("refresh does not refresh the content if popup is not created", function() {
+            var tooltip = new Tooltip(container, {
+                content: function() {
+                    assert.isOk(true);
+                }
+            });
+
+            tooltip.refresh();
+        });
     });
-
-    test("refresh the content", 2, function() {
-        var tooltip = new Tooltip(container, {
-            content: function() {
-                ok(true);
-            }
-        });
-
-        tooltip.show(container);
-
-        tooltip.refresh();
-    });
-
-    test("refresh does not refresh the content if popup is not created", 0, function() {
-        var tooltip = new Tooltip(container, {
-            content: function() {
-                ok(true);
-            }
-        });
-
-        tooltip.refresh();
-    });
-})();
+}());

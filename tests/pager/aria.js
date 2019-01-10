@@ -3,7 +3,7 @@
         pager,
         dataSource;
 
-    function setup(dataOptions, options){
+    function setup(dataOptions, options) {
         dataOptions = $.extend({
             data: [1, 2, 3, 4, 5],
             page: 1,
@@ -14,33 +14,33 @@
         options = $.extend({
             dataSource: dataSource
         }, options);
-        var element = $("<div />").appendTo(QUnit.fixture).kendoPager(options);
+        var element = $("<div />").appendTo(Mocha.fixture).kendoPager(options);
         pager = element.data("kendoPager");
         return element;
     }
 
-    module('pager aria', {
-        setup: function() {
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
+    describe('pager aria', function() {
+        beforeEach(function() {
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
 
-    test("page size select should have aria label", function() {
-        var element = setup(null, { pageSizes: [1, 2] });
-        equal(element.find("select").attr("aria-label"), "1");
-    });
+        it("page size select should have aria label", function() {
+            var element = setup(null, { pageSizes: [1, 2] });
+            assert.equal(element.find("select").attr("aria-label"), "1");
+        });
 
-    test("refresh button should have aria label", function() {
-        var element = setup(null, { refresh: true });
-        equal(element.find(".k-pager-refresh").attr("aria-label"), "Refresh");
-    });
+        it("refresh button should have aria label", function() {
+            var element = setup(null, { refresh: true });
+            assert.equal(element.find(".k-pager-refresh").attr("aria-label"), "Refresh");
+        });
 
-    test("input should have aria label", function() {
-        var element = setup(null, { input: true });
-        pager.page(1);
+        it("input should have aria label", function() {
+            var element = setup(null, { input: true });
+            pager.page(1);
 
-        equal(element.find("input").attr("aria-label"), "1");
+            assert.equal(element.find("input").attr("aria-label"), "1");
+        });
     });
-})();
+}());

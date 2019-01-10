@@ -48,327 +48,327 @@
         return listbox.wrapper.find(".k-listBox");
     }
 
-    module("ListBox api", {
-        setup: function() {
+    describe("ListBox api", function() {
+        beforeEach(function() {
             listbox = createListBox();
             item1 = listbox.items().eq(0);
             dataItem1 = { id: 5, text: "item5" };
             dataItem2 = { id: 6, text: "item6" };
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("add() should add a single data item", function() {
+            var dataItemsLength = listbox.dataItems().length;
+
+            listbox.add(dataItem1);
+
+            assert.equal(listbox.dataSource.data().length, dataItemsLength + 1);
+        });
+
+        it("add() should append a single list item", function() {
+            var itemsLength = listbox.items().length;
+
+            listbox.add(dataItem1);
+
+            assert.equal(listbox.items().length, itemsLength + 1);
+            assert.equal(listbox.items().last().html(), dataItem1.text);
+        });
+
+        it("add() should add multiple data item", function() {
+            var dataItemsLength = listbox.dataItems().length;
+
+            listbox.add([dataItem1, dataItem2]);
+
+            assert.equal(listbox.dataSource.data().length, dataItemsLength + 2);
+        });
+
+        it("add() should append multiple list items", function() {
+            var itemsLength = listbox.items().length;
+
+            listbox.add([dataItem1, dataItem2]);
+
+            assert.equal(listbox.items().length, itemsLength + 2);
+            assert.equal(listbox.items().last().prev().html(), dataItem1.text);
+            assert.equal(listbox.items().last().html(), dataItem2.text);
+        });
     });
 
-    test("add() should add a single data item", function() {
-        var dataItemsLength = listbox.dataItems().length;
-
-        listbox.add(dataItem1);
-
-        equal(listbox.dataSource.data().length, dataItemsLength + 1);
-    });
-
-    test("add() should append a single list item", function() {
-        var itemsLength = listbox.items().length;
-
-        listbox.add(dataItem1);
-
-        equal(listbox.items().length, itemsLength + 1);
-        equal(listbox.items().last().html(), dataItem1.text);
-    });
-
-    test("add() should add multiple data item", function() {
-        var dataItemsLength = listbox.dataItems().length;
-
-        listbox.add([dataItem1, dataItem2]);
-
-        equal(listbox.dataSource.data().length, dataItemsLength + 2);
-    });
-
-    test("add() should append multiple list items", function() {
-        var itemsLength = listbox.items().length;
-
-        listbox.add([dataItem1, dataItem2]);
-
-        equal(listbox.items().length, itemsLength + 2);
-        equal(listbox.items().last().prev().html(), dataItem1.text);
-        equal(listbox.items().last().html(), dataItem2.text);
-    });
-
-    module("ListBox api", {
-        setup: function() {
+    describe("ListBox api", function() {
+        beforeEach(function() {
             listbox = createListBox();
             item1 = listbox.items().eq(0);
-        },
-        teardown: function() {
-            destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("remove() should remove the item from the dataSource", function() {
-        listbox.remove(item1);
-
-        equal(listbox.dataSource.data().length, 3);
-        equal(getDataItem(listbox, item1), undefined);
-    });
-
-    test("remove() should remove the html element of the item", function() {
-        listbox.remove(item1);
-
-        equal(listbox.items().length, 3);
-        equal(listbox.items().eq(0).html(), dataItems[1].text);
-        equal(listbox.items().eq(1).html(), dataItems[2].text);
-    });
-
-    test("remove() should not remove an item that shouldn't exist", function() {
-        listbox.remove(null);
-
-        equal(listbox.dataSource.data().length, 4);
-    });
-
-    test("remove() should remove multiple items from the dataSource", function() {
-        listbox.remove(listbox.items());
-
-        equal(listbox.dataSource.data().length, 0);
-    });
-
-    test("remove() should remove multiple html elements of the items", function() {
-        listbox.remove(listbox.items());
-
-        equal(listbox.items().length, 0);
-    });
-
-    test("remove() should work with selector", function() {
-        listbox.remove(FIRST_ITEM_SELECTOR);
-
-        equal(listbox.dataSource.data().length, 3);
-        equal(listbox.items().length, 3);
-    });
-
-    module("ListBox api", {
-        setup: function() {
-            listbox = createListBox();
-        },
-        teardown: function() {
-            destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("dataItem() should return data item for element", function() {
-        var dataItem = listbox.dataItem(listbox.items().eq(0));
-
-        equal(dataItem.id, dataItems[0].id);
-    });
-
-    test("dataItem() should not return dataItem for non-existing element", function() {
-        var dataItem = listbox.dataItem(null);
-
-        equal(dataItem, undefined);
-    });
-
-    test("setOptions changes correctly the dataTextField and renders the changed items", function() {
-        listbox.setOptions({
-            dataSource: {
-                data: [{
-                    id: 1,
-                    newText: "newText1"
-                }]
-            },
-            dataTextField: "newText"
         });
-        var items = listbox.items();
+        afterEach(function() {
+            destroyListBox(listbox);
+            kendo.destroy(Mocha.fixture);
+        });
 
-        equal(items.length, 1);
-        equal(items.first().text(), "newText1");
+        it("remove() should remove the item from the dataSource", function() {
+            listbox.remove(item1);
+
+            assert.equal(listbox.dataSource.data().length, 3);
+            assert.equal(getDataItem(listbox, item1), undefined);
+        });
+
+        it("remove() should remove the html element of the item", function() {
+            listbox.remove(item1);
+
+            assert.equal(listbox.items().length, 3);
+            assert.equal(listbox.items().eq(0).html(), dataItems[1].text);
+            assert.equal(listbox.items().eq(1).html(), dataItems[2].text);
+        });
+
+        it("remove() should not remove an item that shouldn't exist", function() {
+            listbox.remove(null);
+
+            assert.equal(listbox.dataSource.data().length, 4);
+        });
+
+        it("remove() should remove multiple items from the dataSource", function() {
+            listbox.remove(listbox.items());
+
+            assert.equal(listbox.dataSource.data().length, 0);
+        });
+
+        it("remove() should remove multiple html elements of the items", function() {
+            listbox.remove(listbox.items());
+
+            assert.equal(listbox.items().length, 0);
+        });
+
+        it("remove() should work with selector", function() {
+            listbox.remove(FIRST_ITEM_SELECTOR);
+
+            assert.equal(listbox.dataSource.data().length, 3);
+            assert.equal(listbox.items().length, 3);
+        });
     });
 
-    module("ListBox api", {
-        setup: function() {
+    describe("ListBox api", function() {
+        beforeEach(function() {
+            listbox = createListBox();
+        });
+        afterEach(function() {
+            destroyListBox(listbox);
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("dataItem() should return data item for element", function() {
+            var dataItem = listbox.dataItem(listbox.items().eq(0));
+
+            assert.equal(dataItem.id, dataItems[0].id);
+        });
+
+        it("dataItem() should not return dataItem for non-existing element", function() {
+            var dataItem = listbox.dataItem(null);
+
+            assert.equal(dataItem, undefined);
+        });
+
+        it("setOptions changes correctly the dataTextField and renders the changed items", function() {
+            listbox.setOptions({
+                dataSource: {
+                    data: [{
+                        id: 1,
+                        newText: "newText1"
+                    }]
+                },
+                dataTextField: "newText"
+            });
+            var items = listbox.items();
+
+            assert.equal(items.length, 1);
+            assert.equal(items.first().text(), "newText1");
+        });
+    });
+
+    describe("ListBox api", function() {
+        beforeEach(function() {
             listbox = createListBox();
             item1 = listbox.items().eq(0);
             item2 = listbox.items().eq(1);
             item3 = listbox.items().eq(2);
             item4 = listbox.items().eq(3);
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("reorder() should move the html element of a list item", function() {
+            listbox.reorder(item1, 1);
+
+            equalListItems(listbox.items().eq(0), item2);
+            equalListItems(listbox.items().eq(1), item1);
+        });
+
+        it("reorder() should not move the data item of a list item in the dataSource", function() {
+            listbox.reorder(item1, 1);
+
+            assert.equal(listbox.dataSource.at(0).uid, getId(item1));
+            assert.equal(listbox.dataSource.at(1).uid, getId(item2));
+        });
+
+        it("reorder() should not reorder at invalid index", function() {
+            listbox.reorder(item1, -1);
+
+            equalListItems(listbox.items().eq(0), item1);
+        });
+
+        it("reorder() should not reorder with invalid item", function() {
+            listbox.reorder($(), 0);
+
+            equalListItems(listbox.items().eq(0), item1);
+        });
+
+        it("reorder() should keep item selection", function() {
+            item1.addClass(SELECTED_STATE_CLASS);
+
+            listbox.reorder(item1, 1);
+
+            assert.equal(listbox.items().eq(1).hasClass(SELECTED_STATE_CLASS), true);
+        });
+
+        it("reorder() should keep item disabled state", function() {
+            item1.addClass(DISABLED_STATE_CLASS);
+
+            listbox.reorder(item1, 1);
+
+            assert.equal(listbox.items().eq(1).hasClass(DISABLED_STATE_CLASS), true);
+        });
     });
 
-    test("reorder() should move the html element of a list item", function() {
-        listbox.reorder(item1, 1);
-
-        equalListItems(listbox.items().eq(0), item2);
-        equalListItems(listbox.items().eq(1), item1);
-    });
-
-    test("reorder() should not move the data item of a list item in the dataSource", function() {
-        listbox.reorder(item1, 1);
-
-        equal(listbox.dataSource.at(0).uid, getId(item1));
-        equal(listbox.dataSource.at(1).uid, getId(item2));
-    });
-
-    test("reorder() should not reorder at invalid index", function() {
-        listbox.reorder(item1, -1);
-
-        equalListItems(listbox.items().eq(0), item1);
-    });
-
-    test("reorder() should not reorder with invalid item", function() {
-        listbox.reorder($(), 0);
-
-        equalListItems(listbox.items().eq(0), item1);
-    });
-
-    test("reorder() should keep item selection", function() {
-        item1.addClass(SELECTED_STATE_CLASS);
-
-        listbox.reorder(item1, 1);
-
-        equal(listbox.items().eq(1).hasClass(SELECTED_STATE_CLASS), true);
-    });
-
-    test("reorder() should keep item disabled state", function() {
-        item1.addClass(DISABLED_STATE_CLASS);
-
-        listbox.reorder(item1, 1);
-
-        equal(listbox.items().eq(1).hasClass(DISABLED_STATE_CLASS), true);
-    });
-
-    module("ListBox api", {
-        setup: function() {
+    describe("ListBox api", function() {
+        beforeEach(function() {
             dataSource = new kendo.data.DataSource({
                 data: [{ value: 1 }]
             });
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
-    });
+            kendo.destroy(Mocha.fixture);
+        });
 
-    test("setDataSource() should set options.dataSource", function() {
-        listbox = createListBox();
-        var dataSource = [1, 2, 3];
-
-        listbox.setDataSource(dataSource);
-
-        equal(listbox.options.dataSource, dataSource);
-    });
-
-    test("setDataSource() should change dataSource items", function() {
-        listbox = createListBox();
-
-        listbox.setDataSource(dataSource);
-
-        equal(listbox.dataSource.data()[0].uid, dataSource.data()[0].uid);
-    });
-
-    test("setDataSource() should call fetch if autoBind is true", function() {
-        listbox = createListBox({ autoBind: true });
-        var fetchSpy = spy(dataSource, "fetch");
-
-        listbox.setDataSource(dataSource);
-
-        equal(fetchSpy.calls("fetch"), 1);
-    });
-
-    test("setDataSource() should not call fetch if autoBind is false", function() {
-        listbox = createListBox({ autoBind: false });
-        var fetchSpy = spy(dataSource, "fetch");
-
-        listbox.setDataSource(dataSource);
-
-        equal(fetchSpy.calls("fetch"), 0);
-    });
-
-    module("ListBox api", {
-        setup: function() {
+        it("setDataSource() should set options.dataSource", function() {
             listbox = createListBox();
-        },
-        teardown: function() {
+            var dataSource = [1, 2, 3];
+
+            listbox.setDataSource(dataSource);
+
+            assert.equal(listbox.options.dataSource, dataSource);
+        });
+
+        it("setDataSource() should change dataSource items", function() {
+            listbox = createListBox();
+
+            listbox.setDataSource(dataSource);
+
+            assert.equal(listbox.dataSource.data()[0].uid, dataSource.data()[0].uid);
+        });
+
+        it("setDataSource() should call fetch if autoBind is true", function() {
+            listbox = createListBox({ autoBind: true });
+            var fetchSpy = spy(dataSource, "fetch");
+
+            listbox.setDataSource(dataSource);
+
+            assert.equal(fetchSpy.calls("fetch"), 1);
+        });
+
+        it("setDataSource() should not call fetch if autoBind is false", function() {
+            listbox = createListBox({ autoBind: false });
+            var fetchSpy = spy(dataSource, "fetch");
+
+            listbox.setDataSource(dataSource);
+
+            assert.equal(fetchSpy.calls("fetch"), 0);
+        });
+    });
+
+    describe("ListBox api", function() {
+        beforeEach(function() {
+            listbox = createListBox();
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("refresh() should render list items", function() {
+            listbox.element.find(".k-item").remove();
+
+            listbox.refresh();
+
+            assert.deepEqual(listbox.items().length, listbox.dataSource.data().length);
+        });
     });
 
-    test("refresh() should render list items", function() {
-        listbox.element.find(".k-item").remove();
-
-        listbox.refresh();
-
-        deepEqual(listbox.items().length, listbox.dataSource.data().length);
-    });
-
-    module("ListBox api", {
-        setup: function() {
+    describe("ListBox api", function() {
+        beforeEach(function() {
             listbox = createListBox();
             item1 = listbox.items().eq(0);
             item2 = listbox.items().eq(1);
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("enable() should enable single item", function() {
+            listbox.enable(item1);
+
+            assert.equal(item1.hasClass(DISABLED_STATE_CLASS), false);
+        });
+
+        it("enable() should enable multiple items", function() {
+            listbox.enable(item1.add(item2));
+
+            assert.equal(item1.hasClass(DISABLED_STATE_CLASS), false);
+            assert.equal(item2.hasClass(DISABLED_STATE_CLASS), false);
+        });
+
+        it("enable(true) should enable single item", function() {
+            listbox.enable(item1, true);
+
+            assert.equal(item1.hasClass(DISABLED_STATE_CLASS), false);
+        });
+
+        it("enable(true) should enable multiple items", function() {
+            listbox.enable(item1.add(item2), true);
+
+            assert.equal(item1.hasClass(DISABLED_STATE_CLASS), false);
+            assert.equal(item2.hasClass(DISABLED_STATE_CLASS), false);
+        });
+
+        it("enable() should disable single item", function() {
+            listbox.enable(item1, false);
+
+            assert.equal(item1.hasClass(DISABLED_STATE_CLASS), true);
+        });
+
+        it("enable() should disable multiple items", function() {
+            listbox.enable(item1.add(item2), false);
+
+            assert.equal(item1.hasClass(DISABLED_STATE_CLASS), true);
+            assert.equal(item2.hasClass(DISABLED_STATE_CLASS), true);
+        });
+
+        it("enable() should remove selection", function() {
+            listbox.select(item1);
+
+            listbox.enable(item1, false);
+
+            assert.equal(item1.hasClass(SELECTED_STATE_CLASS), false);
+            assert.equal(item1.hasClass(DISABLED_STATE_CLASS), true);
+        });
+
+        it("enable() should work with selector", function() {
+            listbox.enable(FIRST_ITEM_SELECTOR, false);
+
+            assert.equal(listbox.items().eq(0).hasClass(DISABLED_STATE_CLASS), true);
+        });
     });
-
-    test("enable() should enable single item", function() {
-        listbox.enable(item1);
-
-        equal(item1.hasClass(DISABLED_STATE_CLASS), false);
-    });
-
-    test("enable() should enable multiple items", function() {
-        listbox.enable(item1.add(item2));
-
-        equal(item1.hasClass(DISABLED_STATE_CLASS), false);
-        equal(item2.hasClass(DISABLED_STATE_CLASS), false);
-    });
-
-    test("enable(true) should enable single item", function() {
-        listbox.enable(item1, true);
-
-        equal(item1.hasClass(DISABLED_STATE_CLASS), false);
-    });
-
-    test("enable(true) should enable multiple items", function() {
-        listbox.enable(item1.add(item2), true);
-
-        equal(item1.hasClass(DISABLED_STATE_CLASS), false);
-        equal(item2.hasClass(DISABLED_STATE_CLASS), false);
-    });
-
-    test("enable() should disable single item", function() {
-        listbox.enable(item1, false);
-
-        equal(item1.hasClass(DISABLED_STATE_CLASS), true);
-    });
-
-    test("enable() should disable multiple items", function() {
-        listbox.enable(item1.add(item2), false);
-
-        equal(item1.hasClass(DISABLED_STATE_CLASS), true);
-        equal(item2.hasClass(DISABLED_STATE_CLASS), true);
-    });
-
-    test("enable() should remove selection", function() {
-        listbox.select(item1);
-
-        listbox.enable(item1, false);
-
-        equal(item1.hasClass(SELECTED_STATE_CLASS), false);
-        equal(item1.hasClass(DISABLED_STATE_CLASS), true);
-    });
-
-    test("enable() should work with selector", function() {
-        listbox.enable(FIRST_ITEM_SELECTOR, false);
-
-        equal(listbox.items().eq(0).hasClass(DISABLED_STATE_CLASS), true);
-    });
-})();
+}());

@@ -5,24 +5,24 @@
     var originalBrowser = $.extend(kendo.support.browser);
 
     function assertChange() {
-        equal(masked.calls("inputChange"), 1);
+        assert.equal(masked.calls("inputChange"), 1);
     }
 
     function asyncTestEvent(name) {
-        return function() {
+        return function(done) {
             input.trigger(name);
 
             input.val("12-334");
 
             setTimeout(function() {
-                start();
                 assertChange();
+                done();
             });
         };
     }
 
-    module("IE9 changes input in", {
-        setup: function() {
+    describe("IE9 changes input in", function() {
+        beforeEach(function() {
             input = createInput();
             kendo.support.browser = {
                 msie: true,
@@ -37,52 +37,52 @@
             stub(masked, {
                 inputChange: masked.inputChange
             });
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
             kendo.support.browser = originalBrowser;
-        }
-    });
-
-    asyncTest("paste event", asyncTestEvent("paste"));
-    asyncTest("drag and drop of text", asyncTestEvent("drop"));
-    asyncTest("built-in clear button is clicked (mouseup event is triggered)", asyncTestEvent("mouseup"));
-    asyncTest("delete content with DEL/BACKSPACE", asyncTestEvent("keydown"));
-
-    asyncTest("delete with BACKSPACE respects direction", function() {
-        window.__flag = true;
-        input.trigger({
-            type: "keydown",
-            keyCode: kendo.keys.BACKSPACE
         });
 
-        input.val("12-334");
+        it("paste event", asyncTestEvent("paste"));
+        it("drag and drop of text", asyncTestEvent("drop"));
+        it("built-in clear button is clicked (mouseup event is triggered)", asyncTestEvent("mouseup"));
+        it("delete content with DEL/BACKSPACE", asyncTestEvent("keydown"));
 
-        setTimeout(function() {
-            start();
-            ok(masked.args("inputChange")[0]);
+        it("delete with BACKSPACE respects direction", function(done) {
+            window.__flag = true;
+            input.trigger({
+                type: "keydown",
+                keyCode: kendo.keys.BACKSPACE
+            });
+
+            input.val("12-334");
+
+            setTimeout(function() {
+                assert.isOk(masked.args("inputChange")[0]);
+                done();
+            });
         });
-    });
 
-    asyncTest("no change is value is same", function() {
-        input.trigger(name);
+        it("no change is value is same", function(done) {
+            input.trigger(name);
 
-        setTimeout(function() {
-            start();
-            equal(masked.calls("inputChange"), 0);
+            setTimeout(function() {
+                assert.equal(masked.calls("inputChange"), 0);
+                done();
+            });
         });
-    });
 
-    asyncTest("paste event from context menu (mouseup is triggered as well)", function() {
-        input.trigger("mouseup");
-        input.trigger("paste");
+        it("paste event from context menu (mouseup is triggered as well)", function(done) {
+            input.trigger("mouseup");
+            input.trigger("paste");
 
-        input.val("12-334");
+            input.val("12-334");
 
-        setTimeout(function() {
-            start();
-            assertChange();
+            setTimeout(function() {
+                assertChange();
+                done();
+            });
         });
-    });
 
-})();
+    });
+}());

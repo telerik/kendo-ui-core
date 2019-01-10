@@ -38,10 +38,10 @@ function caret(element, position) {
     return position;
 }
 
-module("kendo.ui.ComboBox suggestion", {
-    setup: function() {
+describe("kendo.ui.ComboBox suggestion", function () {
+    beforeEach(function() {
 
-        input = $("<input />").appendTo(QUnit.fixture);
+        input = $("<input />").appendTo(Mocha.fixture);
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
@@ -62,15 +62,14 @@ module("kendo.ui.ComboBox suggestion", {
                 caret(this, this.value.length);
             });
         }
-    },
-    teardown: function() {
+    });
+    afterEach(function() {
 
         combobox.destroy();
-        kendo.destroy(QUnit.fixture);
-    }
-});
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("current popup item completes the value of the input if suggest is enabled", function() {
+it("current popup item completes the value of the input if suggest is enabled", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -81,10 +80,10 @@ test("current popup item completes the value of the input if suggest is enabled"
     combobox.input.type("b");
     combobox.search("b");
 
-    equal(combobox.input.val(), "bar");
+    assert.equal(combobox.input.val(), "bar");
 });
 
-test("suggestion selects the remainder of the word", function() {
+it("suggestion selects the remainder of the word", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -94,10 +93,10 @@ test("suggestion selects the remainder of the word", function() {
 
     combobox.input.type("b");
     combobox.suggest("Bar");
-    equal(combobox.input.selectedText(), "ar");
+    assert.equal(combobox.input.selectedText(), "ar");
 });
 
-test("suggest with empty string clears selection", function() {
+it("suggest with empty string clears selection", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -108,12 +107,12 @@ test("suggest with empty string clears selection", function() {
 
     combobox.input.type("b");
     combobox.suggest("bar");
-    equal(combobox.input.selectedText(), "ar");
+    assert.equal(combobox.input.selectedText(), "ar");
     combobox.suggest("");
-    equal(combobox.input.val(), "b");
+    assert.equal(combobox.input.val(), "b");
 });
 
-test("suggest(text) should add text if input is empty", function() {
+it("suggest(text) should add text if input is empty", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -122,10 +121,10 @@ test("suggest(text) should add text if input is empty", function() {
 
     combobox.suggest("Foo");
 
-    equal(combobox.text(), "Foo");
+    assert.equal(combobox.text(), "Foo");
 });
 
-test("suggest(text) does not suggest on backspace", function() {
+it("suggest(text) does not suggest on backspace", function() {
     combobox = input.val("f").kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -134,10 +133,10 @@ test("suggest(text) does not suggest on backspace", function() {
 
     combobox._last = kendo.keys.BACKSPACE; //backspace is clicked
     combobox.suggest("Foo");
-    equal(combobox.text(), "f");
+    assert.equal(combobox.text(), "f");
 });
 
-test("suggest(text) does not suggest on delete", function() {
+it("suggest(text) does not suggest on delete", function() {
     combobox = input.val("f").kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -146,10 +145,10 @@ test("suggest(text) does not suggest on delete", function() {
 
     combobox._last = kendo.keys.DELETE; //delete is clicked
     combobox.suggest("Foo");
-    equal(combobox.text(), "f");
+    assert.equal(combobox.text(), "f");
 });
 
-test("suggest(text) should use dataItem.text instead of li.text()", function() {
+it("suggest(text) should use dataItem.text instead of li.text()", function() {
     var data = [{text: "Item1", value: "1"}, {text: "Item2", value: "2"}];
 
     combobox = input.val("i").kendoComboBox({
@@ -160,10 +159,10 @@ test("suggest(text) should use dataItem.text instead of li.text()", function() {
     }).data("kendoComboBox");
 
     combobox.suggest(combobox.ul.children(":first"));
-    equal(combobox.text(), "item1");
+    assert.equal(combobox.text(), "item1");
 });
 
-test("suggest() should suggest correctly", function() {
+it("suggest() should suggest correctly", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -174,11 +173,11 @@ test("suggest() should suggest correctly", function() {
     combobox.input.type("Co");
     combobox.suggest("Cotton");
 
-    equal(combobox.text(), "Cotton");
-    equal(combobox.input.selectedText(), "tton");
+    assert.equal(combobox.text(), "Cotton");
+    assert.equal(combobox.input.selectedText(), "tton");
 });
 
-test("suggest() suggest correctly after typing multiple times", function() {
+it("suggest() suggest correctly after typing multiple times", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -191,10 +190,10 @@ test("suggest() suggest correctly after typing multiple times", function() {
         combobox.suggest("cotton");
     }
 
-    equal(combobox.text(), "cotton");
+    assert.equal(combobox.text(), "cotton");
 });
 
-test("suggest method appends text only", function() {
+it("suggest method appends text only", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -206,12 +205,12 @@ test("suggest method appends text only", function() {
     combobox.input.type("co");
     combobox.suggest("Cotton");
 
-    equal(combobox.current(), null);
-    equal(combobox.text(), "cotton");
-    equal(combobox.input.selectedText(), "tton");
+    assert.equal(combobox.current(), null);
+    assert.equal(combobox.text(), "cotton");
+    assert.equal(combobox.input.selectedText(), "tton");
 });
 
-test("suggest method modifes text and appends suggestion", function() {
+it("suggest method modifes text and appends suggestion", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -223,12 +222,12 @@ test("suggest method modifes text and appends suggestion", function() {
     combobox.input.type("co");
     combobox.suggest("Cotton");
 
-    equal(combobox.current().index(), 0);
-    equal(combobox.text(), "cotton");
-    equal(combobox.input.selectedText(), "tton");
+    assert.equal(combobox.current().index(), 0);
+    assert.equal(combobox.text(), "cotton");
+    assert.equal(combobox.input.selectedText(), "tton");
 });
 
-test("suggest(text) should only append the rest of the text (filter:contains)", 1, function() {
+it("suggest(text) should only append the rest of the text (filter:contains)", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -242,12 +241,12 @@ test("suggest(text) should only append the rest of the text (filter:contains)", 
 
     combobox.input.focus().val("o").keydown();
 
-    equal(combobox.text(), "oo");
+    assert.equal(combobox.text(), "oo");
 
     window.setTimeout = origin;
 });
 
-test("refresh method suggests if no item is highlighted", 2, function() {
+it("refresh method suggests if no item is highlighted", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -265,13 +264,13 @@ test("refresh method suggests if no item is highlighted", 2, function() {
     combobox.input.val("f");
     combobox.search("f");
 
-    equal(combobox.text(), "foo");
-    equal(combobox.current(), null);
+    assert.equal(combobox.text(), "foo");
+    assert.equal(combobox.current(), null);
 
     window.setTimeout = origin;
 });
 
-test("widget does not suggest when input is empty", 1, function() {
+it("widget does not suggest when input is empty", function() {
     combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
@@ -285,10 +284,10 @@ test("widget does not suggest when input is empty", 1, function() {
     combobox.input.val("");
     combobox.refresh();
 
-    equal(combobox.text(), "");
+    assert.equal(combobox.text(), "");
 });
 
-test("suggest int values on search", function() {
+it("suggest int values on search", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -299,7 +298,8 @@ test("suggest int values on search", function() {
     combobox.input.type("1");
     combobox.search("1");
 
-    equal(combobox.input.val(), "1");
+    assert.equal(combobox.input.val(), "1");
 });
 
-})();
+    });
+}());

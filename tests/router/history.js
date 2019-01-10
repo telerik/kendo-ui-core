@@ -31,15 +31,15 @@
 
         navigate: function(url) {
             this.url = url;
-            this._length ++;
+            this._length++;
         }
     });
 
     var history,
         adapter;
 
-    module("History", {
-        setup: function() {
+    describe("History", function() {
+        beforeEach(function() {
             history = new kendo.History();
             adapter = new MockAdapter();
             stub(history, {
@@ -47,269 +47,279 @@
                     return adapter;
                 }
             });
-        }
-    });
-
-    test("creates adapter with / root by default", 1, function() {
-        stub(history, {
-            createAdapter: function(options) {
-                equal(options.root, "/");
-                return adapter;
-            }
         });
 
-        history.start();
-    });
+        it("creates adapter with / root by default", function() {
+            stub(history, {
+                createAdapter: function(options) {
+                    assert.equal(options.root, "/");
+                    return adapter;
+                }
+            });
 
-    test("passes the root to the adapter", 1, function() {
-        stub(history, {
-            createAdapter: function(options) {
-                equal(options.root, "foo");
-                return adapter;
-            }
+            history.start();
         });
 
-        history.start({ root: "foo"});
-    });
+        it("passes the root to the adapter", function() {
+            stub(history, {
+                createAdapter: function(options) {
+                    assert.equal(options.root, "foo");
+                    return adapter;
+                }
+            });
 
-    test("requests pushstate adapter if given pushState", 1, function() {
-        stub(history, {
-            createAdapter: function(options) {
-                equal(options.pushState, true);
-                return adapter;
-            }
+            history.start({ root: "foo" });
         });
 
-        history.start({ pushState: true });
-    });
+        it("requests pushstate adapter if given pushState", function() {
+            stub(history, {
+                createAdapter: function(options) {
+                    assert.equal(options.pushState, true);
+                    return adapter;
+                }
+            });
 
-    test("requests hashbang adapter if given hashbang", 1, function() {
-        stub(history, {
-            createAdapter: function(options) {
-                equal(options.hashBang, true);
-                return adapter;
-            }
+            history.start({ pushState: true });
         });
 
-        history.start({ hashBang: true });
-    });
+        it("requests hashbang adapter if given hashbang", function() {
+            stub(history, {
+                createAdapter: function(options) {
+                    assert.equal(options.hashBang, true);
+                    return adapter;
+                }
+            });
 
-    test("requests normalization of the state on start", 1, function() {
-        stub(adapter, { normalizeCurrent: function(options) {
-            equal(options.pushState, true);
-        }});
-
-        history.start({ pushState: true });
-    });
-
-
-    test("keeps track of locations", 2, function() {
-        history.start();
-        equal(history.locations.length, 1);
-        equal(history.locations[0], "");
-    });
-
-    test("navigate calls the adapter navigate method", 1, function() {
-        stub(adapter, { navigate: function(url) {
-            equal(url, "foo");
-        }});
-
-        history.start();
-        history.navigate("foo");
-    });
-
-    test("navigate works with hash bang", 1, function() {
-        stub(adapter, { normalize: function(url) {
-            return url.split("#!")[1];
-        }});
-
-        history.bind("change", function(e) {
-            equal(e.url, "foo");
+            history.start({ hashBang: true });
         });
 
-        history.start({ hashBang: true });
-        history.navigate("#!foo");
-    });
+        it("requests normalization of the state on start", function() {
+            stub(adapter, {
+                normalizeCurrent: function(options) {
+                    assert.equal(options.pushState, true);
+                }
+            });
 
-    test("does not pushState if identical", 1, function() {
-        var loc;
-
-        stub(adapter, {
-            navigate: function(url) {
-                loc = url;
-            },
-
-            current: function() {
-                return loc;
-            }
+            history.start({ pushState: true });
         });
 
-        history.start();
-        history.navigate("/new-location");
-        history.navigate("/new-location");
-        equal(adapter.calls("navigate"), 1);
-    });
 
-    test("triggers events when history changed", 1, function() {
-        history.start();
-
-        history.change(function(e) {
-            equal(e.url, "/new-location");
+        it("keeps track of locations", function() {
+            history.start();
+            assert.equal(history.locations.length, 1);
+            assert.equal(history.locations[0], "");
         });
 
-        history.navigate("/new-location");
-    });
+        it("navigate calls the adapter navigate method", function() {
+            stub(adapter, {
+                navigate: function(url) {
+                    assert.equal(url, "foo");
+                }
+            });
 
-    test("Allows prevention of url if preventDefault called", 1, function() {
-        history.start();
-
-        history.navigate("foo");
-
-        history.change(function(e) {
-            e.preventDefault();
+            history.start();
+            history.navigate("foo");
         });
 
-        history.navigate("bar");
+        it("navigate works with hash bang", function() {
+            stub(adapter, {
+                normalize: function(url) {
+                    return url.split("#!")[1];
+                }
+            });
 
-        equal(history.current, "foo");
-    });
+            history.bind("change", function(e) {
+                assert.equal(e.url, "foo");
+            });
 
-    test("Triggers back", 2, function() {
-        history.start();
-
-        history.navigate("/initial-location");
-        history.navigate("/new-location");
-
-        history.bind("back", function(e) {
-            equal(e.url, "/new-location");
-            equal(e.to, "/initial-location");
+            history.start({ hashBang: true });
+            history.navigate("#!foo");
         });
 
-        adapter.url = "/initial-location";
-        adapter.callback();
-    });
+        it("does not pushState if identical", function() {
+            var loc;
 
-    test("Allows prevention of back if preventDefault called", 1, function() {
-        history.start();
+            stub(adapter, {
+                navigate: function(url) {
+                    loc = url;
+                },
 
-        history.navigate("/initial-location");
-        history.navigate("/new-location");
+                current: function() {
+                    return loc;
+                }
+            });
 
-        history.change(function(e) {
-            e.preventDefault();
+            history.start();
+            history.navigate("/new-location");
+            history.navigate("/new-location");
+            assert.equal(adapter.calls("navigate"), 1);
         });
 
-        adapter.url = "/initial-location";
-        adapter.callback();
+        it("triggers events when history changed", function() {
+            history.start();
 
-        equal(history.current, "/new-location");
-    });
+            history.change(function(e) {
+                assert.equal(e.url, "/new-location");
+            });
 
-    test("allows prevention of back if preventDefault in back event called", 1, function() {
-        history.start();
-
-        history.navigate("/initial-location");
-        history.navigate("/new-location");
-
-        history.bind("back", function(e) {
-            e.preventDefault();
+            history.navigate("/new-location");
         });
 
-        adapter.url = "/initial-location";
-        adapter.callback();
+        it("Allows prevention of url if preventDefault called", function() {
+            history.start();
 
-        equal(history.current, "/new-location");
-    });
+            history.navigate("foo");
 
-    test("accepts event handlers passed as options", 1, function() {
-        history.start({
-            change: function(e) {
-                equal(e.url, "/new-location");
-            }
+            history.change(function(e) {
+                e.preventDefault();
+            });
+
+            history.navigate("bar");
+
+            assert.equal(history.current, "foo");
         });
 
-        history.navigate("/new-location");
-    });
+        it("Triggers back", function() {
+            history.start();
 
-    test("triggers ready with the initial location", 1, function() {
-        adapter.current = function() {
-            return "/initial-location";
-        };
-        history.start();
-        equal(history.current, "/initial-location");
-    });
+            history.navigate("/initial-location");
+            history.navigate("/new-location");
 
-    test("listens for adapter changes", 1, function() {
-        history.start();
+            history.bind("back", function(e) {
+                assert.equal(e.url, "/new-location");
+                assert.equal(e.to, "/initial-location");
+            });
 
-        history.change(function(e) {
-            equal(e.url, "/outside-location");
+            adapter.url = "/initial-location";
+            adapter.callback();
         });
 
-        adapter.url = "/outside-location";
-        adapter.callback();
-    });
+        it("Allows prevention of back if preventDefault called", function() {
+            history.start();
 
-    test("passes parameters if any present", 1, function() {
-        history.start();
+            history.navigate("/initial-location");
+            history.navigate("/new-location");
 
-        history.change(function(e) {
-            equal(e.url, "/new-location?foo=bar");
+            history.change(function(e) {
+                e.preventDefault();
+            });
+
+            adapter.url = "/initial-location";
+            adapter.callback();
+
+            assert.equal(history.current, "/new-location");
         });
 
-        history.navigate("/new-location?foo=bar");
-    });
+        it("allows prevention of back if preventDefault in back event called", function() {
+            history.start();
 
-    test("supports #:back pseudo url for going back", 1, function() {
-        stub(adapter, { back: function() {
-            ok(true);
-        }});
+            history.navigate("/initial-location");
+            history.navigate("/new-location");
 
-        history.start();
-        history.navigate("/new-location");
-        history.navigate("#:back");
-    });
+            history.bind("back", function(e) {
+                e.preventDefault();
+            });
 
-    test("stays in sync after back is called", 2, function() {
-        history.start();
-        history.navigate("/initial-location");
-        history.navigate("/new-location");
+            adapter.url = "/initial-location";
+            adapter.callback();
 
-        adapter.url = "/initial-location";
-        adapter.callback();
-
-        equal(history.locations.length, 2);
-        equal(history.locations[0], "");
-    });
-
-    test("replace calls the adapter replace method", 1, function() {
-        stub(adapter, { replace: function(url) {
-            equal(url, "foo");
-        }});
-        history.start();
-        history.replace("foo");
-    });
-
-    test("replace does NOT create items with NaN index in the locations array", 1, function() {
-        stub(adapter, { replace: $.noop });
-        history.start();
-
-        history.replace("foo");
-        ok(!history.locations[NaN]);
-    });
-
-    test("ignores null results", 1, function() {
-        history.start();
-        var called = false;
-
-        history.change(function() {
-            called = true;
+            assert.equal(history.current, "/new-location");
         });
 
-        adapter.url = null;
-        adapter.callback();
-        ok(!called);
-    });
+        it("accepts event handlers passed as options", function() {
+            history.start({
+                change: function(e) {
+                    assert.equal(e.url, "/new-location");
+                }
+            });
 
-})();
+            history.navigate("/new-location");
+        });
+
+        it("triggers ready with the initial location", function() {
+            adapter.current = function() {
+                return "/initial-location";
+            };
+            history.start();
+            assert.equal(history.current, "/initial-location");
+        });
+
+        it("listens for adapter changes", function() {
+            history.start();
+
+            history.change(function(e) {
+                assert.equal(e.url, "/outside-location");
+            });
+
+            adapter.url = "/outside-location";
+            adapter.callback();
+        });
+
+        it("passes parameters if any present", function() {
+            history.start();
+
+            history.change(function(e) {
+                assert.equal(e.url, "/new-location?foo=bar");
+            });
+
+            history.navigate("/new-location?foo=bar");
+        });
+
+        it("supports #:back pseudo url for going back", function() {
+            stub(adapter, {
+                back: function() {
+                    assert.isOk(true);
+                }
+            });
+
+            history.start();
+            history.navigate("/new-location");
+            history.navigate("#:back");
+        });
+
+        it("stays in sync after back is called", function() {
+            history.start();
+            history.navigate("/initial-location");
+            history.navigate("/new-location");
+
+            adapter.url = "/initial-location";
+            adapter.callback();
+
+            assert.equal(history.locations.length, 2);
+            assert.equal(history.locations[0], "");
+        });
+
+        it("replace calls the adapter replace method", function() {
+            stub(adapter, {
+                replace: function(url) {
+                    assert.equal(url, "foo");
+                }
+            });
+            history.start();
+            history.replace("foo");
+        });
+
+        it("replace does NOT create items with NaN index in the locations array", function() {
+            stub(adapter, { replace: $.noop });
+            history.start();
+
+            history.replace("foo");
+            assert.isOk(!history.locations[NaN]);
+        });
+
+        it("ignores null results", function() {
+            history.start();
+            var called = false;
+
+            history.change(function() {
+                called = true;
+            });
+
+            adapter.url = null;
+            adapter.callback();
+            assert.isOk(!called);
+        });
+
+    });
+}());
 

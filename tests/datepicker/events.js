@@ -5,21 +5,20 @@ var DateView = kendo.DateView,
     datepicker,
     div, input;
 
-module("kendo.ui.DatePicker Events", {
-    setup: function() {
-        div = $("<div />").appendTo(QUnit.fixture);
-        input = $("<input />").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
+describe("kendo.ui.DatePicker Events", function () {
+    beforeEach(function() {
+        div = $("<div />").appendTo(Mocha.fixture);
+        input = $("<input />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
         datepicker.destroy();
-        kendo.destroy(QUnit.fixture);
-    }
-});
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("blur should call _change event", function() {
+it("blur should call _change event", function() {
     datepicker = input.kendoDatePicker({
                                 change: function() {
-                                    ok(true);
+                                    assert.isOk(true);
                                 }
                            })
                           .data("kendoDatePicker");
@@ -28,10 +27,10 @@ test("blur should call _change event", function() {
     input[0].blur();
 });
 
-test("raise change event", 1, function() {
+it("raise change event", function() {
     datepicker = input.kendoDatePicker({
                                 change: function() {
-                                    ok(true);
+                                    assert.isOk(true);
                                 }
                            })
                           .data("kendoDatePicker");
@@ -39,23 +38,23 @@ test("raise change event", 1, function() {
     datepicker._change("10/10/2000");
 });
 
-test("raise DOM change event", function() {
+it("raise DOM change event", function() {
     datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
     input.bind("change", function() {
-        ok(true);
+        assert.isOk(true);
     });
 
     datepicker._change("10/10/2000");
 });
 
-test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
+it("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", function() {
     input.kendoDatePicker({
         value: new Date(2000, 10, 10, 10, 0, 0)
     });
 
     input.bind("change", function() {
-        ok(false);
+        assert.isOk(false);
     });
 
     input.focus()
@@ -64,10 +63,10 @@ test("does not force element's DOM change event when the user manually edits the
         .trigger($.Event("keydown", {keyCode: 13}));
 });
 
-test("do not raise change event when use API", 1, function() {
+it("do not raise change event when use API", function() {
     datepicker = input.kendoDatePicker({
                                 change: function() {
-                                    ok(false);
+                                    assert.isOk(false);
                                 }
                            })
                           .data("kendoDatePicker");
@@ -76,14 +75,14 @@ test("do not raise change event when use API", 1, function() {
 
     input.focus().blur();
 
-    ok(true);
+    assert.isOk(true);
 });
 
-test("raise open event", function() {
+it("raise open event", function() {
     datepicker = input.kendoDatePicker({
                                 open: function() {
-                                    ok(true);
-                                    ok(this === datepicker);
+                                    assert.isOk(true);
+                                    assert.isOk(this === datepicker);
                                 }
                            })
                           .data("kendoDatePicker");
@@ -91,10 +90,10 @@ test("raise open event", function() {
     input.next().click();
 });
 
-test("raise close event", function() {
+it("raise close event", function() {
     datepicker = input.kendoDatePicker({
                                 close: function() {
-                                    ok(true);
+                                    assert.isOk(true);
                                 }
                            })
                           .data("kendoDatePicker");
@@ -103,11 +102,11 @@ test("raise close event", function() {
     datepicker._dateIcon.click();
 });
 
-test ("raise close event document click", function() {
+it("raise close event document click", function() {
     datepicker = input.kendoDatePicker({
                                 close: function() {
-                                    ok(true);
-                                    ok(this === datepicker);
+                                    assert.isOk(true);
+                                    assert.isOk(this === datepicker);
                                 }
                            })
                           .data("kendoDatePicker");
@@ -117,4 +116,5 @@ test ("raise close event document click", function() {
     $(document.documentElement).mousedown();
 });
 
-})();
+    });
+}());

@@ -2,151 +2,151 @@
     var ResponsivePanel = kendo.ui.ResponsivePanel;
     var dom;
 
-    module("responsive panel", {
-        setup: function() {
-            dom = $("<div/>").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("applies css classes", function() {
-        new ResponsivePanel(dom);
-
-        ok(dom.hasClass("k-rpanel"), "generic panel class is applied");
-        ok(dom.hasClass("k-rpanel-left"), "alignment class is applied");
-    });
-
-    test("applies only orientation css class", function() {
-        new ResponsivePanel(dom, { orientation: "right" });
-
-        ok(dom.hasClass("k-rpanel-right"));
-        ok(!dom.hasClass("k-rpanel-left"));
-    });
-
-    test("toggles expanded class when toggle element is clicked", function() {
-        new ResponsivePanel(dom);
-
-        var button = $("<button class='k-rpanel-toggle' />").appendTo(QUnit.fixture);
-
-        button.trigger("click");
-
-        ok(dom.hasClass("k-rpanel-expanded"));
-
-        button.trigger("click");
-
-        ok(!dom.hasClass("k-rpanel-expanded"));
-    });
-
-    test("removes expanded class when document is touched", function() {
-        var panel = new ResponsivePanel(dom);
-
-        panel.open();
-
-        QUnit.fixture.trigger("click");
-
-        ok(!dom.hasClass("k-rpanel-expanded"));
-    });
-
-    test("adds animation class after opening", function() {
-        var panel = new ResponsivePanel(dom);
-
-        ok(!dom.hasClass("k-rpanel-animate"));
-
-        panel.open();
-
-        ok(dom.hasClass("k-rpanel-animate"));
-    });
-
-    test("suppresses animation upon widget resize", function() {
-        var panel = new ResponsivePanel(dom);
-
-        panel.open();
-
-        panel.resize();
-
-        ok(!dom.hasClass("k-rpanel-animate"));
-    });
-
-    test("suppresses animation upon window resize", function() {
-        var panel = new ResponsivePanel(dom);
-
-        panel.open();
-
-        $(window).trigger("resize");
-
-        ok(!dom.hasClass("k-rpanel-animate"));
-    });
-
-    test("open method triggers open event", function() {
-        var handler = spy();
-
-        var panel = new ResponsivePanel(dom, {
-            open: handler
+    describe("responsive panel", function() {
+        beforeEach(function() {
+            dom = $("<div/>").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
-        panel.open();
+        it("applies css classes", function() {
+            new ResponsivePanel(dom);
 
-        equal(handler.calls, 1);
-    });
-
-    test("open event can be prevented", function() {
-        var panel = new ResponsivePanel(dom, {
-            open: function(e) {
-                e.preventDefault();
-            }
+            assert.isOk(dom.hasClass("k-rpanel"), "generic panel class is applied");
+            assert.isOk(dom.hasClass("k-rpanel-left"), "alignment class is applied");
         });
 
-        panel.open();
+        it("applies only orientation css class", function() {
+            new ResponsivePanel(dom, { orientation: "right" });
 
-        ok(!dom.hasClass("k-rpanel-expanded"));
-    });
-
-    test("close method triggers close event", function() {
-        var handler = spy();
-
-        var panel = new ResponsivePanel(dom, {
-            close: handler
+            assert.isOk(dom.hasClass("k-rpanel-right"));
+            assert.isOk(!dom.hasClass("k-rpanel-left"));
         });
 
-        panel.close();
+        it("toggles expanded class when toggle element is clicked", function() {
+            new ResponsivePanel(dom);
 
-        equal(handler.calls, 1);
-    });
+            var button = $("<button class='k-rpanel-toggle' />").appendTo(Mocha.fixture);
 
-    test("close event can be prevented", function() {
-        var panel = new ResponsivePanel(dom, {
-            close: function(e) {
-                e.preventDefault();
-            }
+            button.trigger("click");
+
+            assert.isOk(dom.hasClass("k-rpanel-expanded"));
+
+            button.trigger("click");
+
+            assert.isOk(!dom.hasClass("k-rpanel-expanded"));
         });
 
-        panel.open();
-        panel.close();
+        it("removes expanded class when document is touched", function() {
+            var panel = new ResponsivePanel(dom);
 
-        ok(dom.hasClass("k-rpanel-expanded"));
-    });
+            panel.open();
 
-    test("autoClose: false does not close panel on clicks", function() {
-        var panel = new ResponsivePanel(dom, { autoClose: false });
+            Mocha.fixture.trigger("click");
 
-        panel.open();
-
-        QUnit.fixture.trigger("click");
-
-        ok(dom.hasClass("k-rpanel-expanded"));
-    });
-
-    test("does not close panel if closing event is prevented", function() {
-        var panel = new ResponsivePanel(dom);
-
-        panel.open();
-        panel._close({
-            target: document.body,
-            isDefaultPrevented: function() { return true }
+            assert.isOk(!dom.hasClass("k-rpanel-expanded"));
         });
 
-        ok(dom.hasClass("k-rpanel-expanded"));
+        it("adds animation class after opening", function() {
+            var panel = new ResponsivePanel(dom);
+
+            assert.isOk(!dom.hasClass("k-rpanel-animate"));
+
+            panel.open();
+
+            assert.isOk(dom.hasClass("k-rpanel-animate"));
+        });
+
+        it("suppresses animation upon widget resize", function() {
+            var panel = new ResponsivePanel(dom);
+
+            panel.open();
+
+            panel.resize();
+
+            assert.isOk(!dom.hasClass("k-rpanel-animate"));
+        });
+
+        it("suppresses animation upon window resize", function() {
+            var panel = new ResponsivePanel(dom);
+
+            panel.open();
+
+            $(window).trigger("resize");
+
+            assert.isOk(!dom.hasClass("k-rpanel-animate"));
+        });
+
+        it("open method triggers open event", function() {
+            var handler = spy();
+
+            var panel = new ResponsivePanel(dom, {
+                open: handler
+            });
+
+            panel.open();
+
+            assert.equal(handler.calls, 1);
+        });
+
+        it("open event can be prevented", function() {
+            var panel = new ResponsivePanel(dom, {
+                open: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            panel.open();
+
+            assert.isOk(!dom.hasClass("k-rpanel-expanded"));
+        });
+
+        it("close method triggers close event", function() {
+            var handler = spy();
+
+            var panel = new ResponsivePanel(dom, {
+                close: handler
+            });
+
+            panel.close();
+
+            assert.equal(handler.calls, 1);
+        });
+
+        it("close event can be prevented", function() {
+            var panel = new ResponsivePanel(dom, {
+                close: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            panel.open();
+            panel.close();
+
+            assert.isOk(dom.hasClass("k-rpanel-expanded"));
+        });
+
+        it("autoClose: false does not close panel on clicks", function() {
+            var panel = new ResponsivePanel(dom, { autoClose: false });
+
+            panel.open();
+
+            Mocha.fixture.trigger("click");
+
+            assert.isOk(dom.hasClass("k-rpanel-expanded"));
+        });
+
+        it("does not close panel if closing event is prevented", function() {
+            var panel = new ResponsivePanel(dom);
+
+            panel.open();
+            panel._close({
+                target: document.body,
+                isDefaultPrevented: function() { return true }
+            });
+
+            assert.isOk(dom.hasClass("k-rpanel-expanded"));
+        });
     });
-})();
+}());

@@ -1,21 +1,25 @@
 (function() {
-    test("replace < with &lt;", function() {
-        equal(kendo.htmlEncode("<<"), "&lt;&lt;");
-    });
 
-    test("replace > with &gt;", function() {
-        equal(kendo.htmlEncode(">>"), "&gt;&gt;");
-    });
+    describe("html encode", function() {
 
-    test("replace & with &amp;", function() {
-        equal(kendo.htmlEncode("&&"), "&amp;&amp;");
-    });
+        it("replace < with &lt;", function() {
+            assert.equal(kendo.htmlEncode("<<"), "&lt;&lt;");
+        });
 
-    test('replace " with &quot;', function() {
-        equal(kendo.htmlEncode('""'), "&quot;&quot;");
-    });
+        it("replace > with &gt;", function() {
+            assert.equal(kendo.htmlEncode(">>"), "&gt;&gt;");
+        });
 
-    test("replace ' with &#39;", function() {
-        equal(kendo.htmlEncode("''"), "&#39;&#39;");
+        it("replace & with &amp;", function() {
+            assert.equal(kendo.htmlEncode("&&"), "&amp;&amp;");
+        });
+
+        it('replace " with &quot;', function() {
+            assert.equal(kendo.htmlEncode('""'), "&quot;&quot;");
+        });
+
+        it("replace ' with &#39;", function() {
+            assert.equal(kendo.htmlEncode("''"), "&#39;&#39;");
+        });
     });
 }());

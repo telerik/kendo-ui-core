@@ -1,7 +1,11 @@
 (function() {
-    module("initialization", {
-        setup: function() {
+    function createWindow(options, element) {
+        element = element || $("<div class='wnd' />").appendTo(Mocha.fixture);
+        return element.kendoWindow(options).data("kendoWindow");
+    }
 
+    describe("initialization", function() {
+        beforeEach(function() {
             var Window = kendo.ui.Window;
             $.mockjax({
                 url: "echo",
@@ -13,44 +17,67 @@
             });
             $.mockjax({
                 url: /foo|telerik\.com/i,
-                responseText: "foo bar baz",
+                responseText: "foo bar baz"
             });
-        },
-        teardown: function() {
-            QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
-                $(element).data("kendoWindow").destroy();
-            });
-            QUnit.fixture.closest("body").find(".k-overlay").remove();
+        });
+        afterEach(function() {
+            Mocha.fixture
+                .closest("body")
+                .find(".k-window-content")
+                .each(function(idx, element) {
+                    $(element)
+                        .data("kendoWindow")
+                        .destroy();
+                });
+            Mocha.fixture
+                .closest("body")
+                .find(".k-overlay")
+                .remove();
             $.mockjax.clear();
+        });
 
-        }
-    });
+        it("Window adds role to the element", function() {
+            var window = createWindow(
+                { title: "Test" },
+                $("<div id='window' />")
+            );
 
-    function createWindow(options, element) {
-        element = element || $("<div class='wnd' />").appendTo(QUnit.fixture);
-        return element.kendoWindow(options).data("kendoWindow");
-    }
+            assert.equal(window.element.attr("role"), "dialog");
+        });
 
-    test("Window adds role to the element", function() {
-        var window = createWindow({ title: "Test" }, $("<div id='window' />"));
+        it("Window sets id to the title", function() {
+            var window = createWindow(
+                { title: "Test" },
+                $("<div id='window' />")
+            );
 
-        equal(window.element.attr("role"), "dialog");
-    });
+            assert.equal(
+                window.wrapper.find("#window_wnd_title").html(),
+                "Test"
+            );
+        });
 
-    test("Window sets id to the title", function() {
-        var window = createWindow({ title: "Test" }, $("<div id='window' />"));
+        it("Window adds aria-labelledby", function() {
+            var window = createWindow(
+                { title: "Test" },
+                $("<div id='window' />")
+            );
 
-        equal(window.wrapper.find("#window_wnd_title").html(), "Test");
-    });
+            assert.equal(
+                window.element.attr("aria-labelledby"),
+                "window_wnd_title"
+            );
+        });
 
-    test("Window adds aria-labelledby", function() {
-        var window = createWindow({ title: "Test" }, $("<div id='window' />"));
-
-        equal(window.element.attr("aria-labelledby"), "window_wnd_title");
-    });
-
-    test("Window adds role button to the titlebar buttons", function() {
-        var window = createWindow({ title: "Test", visible:true  }, $("<div id='window'>Content</div>"));
-        equal(window.wrapper.find(".k-window-action").attr("role"), "button");
+        it("Window adds role button to the titlebar buttons", function() {
+            var window = createWindow(
+                { title: "Test", visible: true },
+                $("<div id='window'>Content</div>")
+            );
+            assert.equal(
+                window.wrapper.find(".k-window-action").attr("role"),
+                "button"
+            );
+        });
     });
 })();

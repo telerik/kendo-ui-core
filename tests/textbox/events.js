@@ -2,99 +2,98 @@
     var NumericTextBox = kendo.ui.NumericTextBox,
         input;
 
-    module("kendo.ui.NumericTextBox Events", {
-        setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("_change should call value() method", 2, function() {
-        var textbox = new NumericTextBox(input, {
-            change: function() {
-                ok(true);
-                equal(textbox.value(), 22);
-            }
+    describe("kendo.ui.NumericTextBox Events", function() {
+        beforeEach(function() {
+            input = $("<input />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
-        textbox._change("22");
-    });
-
-    test("raise DOM change", 2, function() {
-        var textbox = new NumericTextBox(input);
-
-        input.bind("change", function() {
-            ok(true);
-            equal(textbox.value(), 22);
-        });
-
-        textbox._change("22");
-    });
-
-    test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
-        var textbox = new NumericTextBox(input);
-
-        input.bind("change", function() {
-            ok(false);
-        });
-
-        input.focus().val(1)
-            .trigger($.Event("keydown", {keyCode: 49}))
-            .trigger($.Event("keydown", {keyCode: 13}));
-    });
-
-    test("raise change on enter", 2, function() {
-        var textbox = new NumericTextBox(input);
-
-        input.bind("change", function() {
-            ok(true);
-            equal(textbox.value(), 22);
-        });
-
-        input.focus().val("22").trigger({type:"keydown", keyCode: 13});
-    });
-
-    test("click arrow should focus input", function() {
-        var textbox = new NumericTextBox(input);
-
-        textbox._upArrow.mousedown();
-
-        equal(input[0], document.activeElement);
-    });
-
-    test("value() should not raise change event", 0, function() {
-        var textbox = new NumericTextBox(input, {
-            change: function() {
-                ok(false);
-            }
-        });
-
-        textbox.value("22");
-        textbox._blur();
-    });
-
-    asyncTest("raise spin event", 2, function() {
-        var textbox = new NumericTextBox(input, {
-                value: 10,
-                spin: function() {
-                    start();
-                    ok(true);
-                    equal(textbox.value(), 11);
+        it("_change should call value() method", function() {
+            var textbox = new NumericTextBox(input, {
+                change: function() {
+                    assert.isOk(true);
+                    assert.equal(textbox.value(), 22);
                 }
             });
 
-        textbox._step(1);
-    });
+            textbox._change("22");
+        });
 
-    asyncTest("raise spin event on up arrrow", 2, function() {
-        var textbox = new NumericTextBox(input, {
+        it("raise DOM change", function() {
+            var textbox = new NumericTextBox(input);
+
+            input.bind("change", function() {
+                assert.isOk(true);
+                assert.equal(textbox.value(), 22);
+            });
+
+            textbox._change("22");
+        });
+
+        it("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", function() {
+            var textbox = new NumericTextBox(input);
+
+            input.bind("change", function() {
+                assert.isOk(false);
+            });
+
+            input.focus().val(1)
+                .trigger($.Event("keydown", { keyCode: 49 }))
+                .trigger($.Event("keydown", { keyCode: 13 }));
+        });
+
+        it("raise change on enter", function() {
+            var textbox = new NumericTextBox(input);
+
+            input.bind("change", function() {
+                assert.isOk(true);
+                assert.equal(textbox.value(), 22);
+            });
+
+            input.focus().val("22").trigger({ type: "keydown", keyCode: 13 });
+        });
+
+        it("click arrow should focus input", function() {
+            var textbox = new NumericTextBox(input);
+
+            textbox._upArrow.mousedown();
+
+            assert.equal(input[0], document.activeElement);
+        });
+
+        it("value() should not raise change event", function() {
+            var textbox = new NumericTextBox(input, {
+                change: function() {
+                    assert.isOk(false);
+                }
+            });
+
+            textbox.value("22");
+            textbox._blur();
+        });
+
+        it("raise spin event", function(done) {
+            var textbox = new NumericTextBox(input, {
                 value: 10,
                 spin: function() {
-                    start();
-                    ok(true);
-                    equal(textbox.value(), 11);
+                    assert.isOk(true);
+                    assert.equal(textbox.value(), 11);
+                    done();
+                }
+            });
+
+            textbox._step(1);
+        });
+
+        it("raise spin event on up arrrow", function(done) {
+            var textbox = new NumericTextBox(input, {
+                value: 10,
+                spin: function() {
+                    assert.isOk(true);
+                    assert.equal(textbox.value(), 11);
+                    done();
                 }
             });
 
@@ -102,50 +101,51 @@
                 type: "keydown",
                 keyCode: kendo.keys.UP
             });
-    });
-
-    test("focus should hide the _text and show the input value", 2, function() {
-        var textbox = new NumericTextBox(input);
-
-        var origin = window.setTimeout;
-        window.setTimeout = function(func) { func() };
-
-        textbox._text.focus();
-
-        ok(!textbox._text.is(":visible"));
-        equal(input[0], document.activeElement);
-
-        window.setTimeout = origin;
-    });
-
-    test("DOM Change event fires when value is changed and TAB is pressed", 1, function() {
-        var textbox = new NumericTextBox(input);
-        var calls = 0;
-
-        input.change(function() {
-            calls++;
         });
 
-        input.focus().val(1)
-            .trigger($.Event("keydown", {keyCode: 38}))
-            .trigger($.Event("keydown", {keyCode: 9}));
+        it("focus should hide the _text and show the input value", function() {
+            var textbox = new NumericTextBox(input);
 
-        textbox._blur();
-        equal(calls, 1);
-    });
+            var origin = window.setTimeout;
+            window.setTimeout = function(func) { func() };
 
-    test("Spin event is not fired if value is not altered", 1, function() {
-        var calls = 0;
-        var textbox = new NumericTextBox(input, {
-            value: 50,
-            step: 0,
-            spin: function() {
+            textbox._text.focus();
+
+            assert.isOk(!textbox._text.is(":visible"));
+            assert.equal(input[0], document.activeElement);
+
+            window.setTimeout = origin;
+        });
+
+        it("DOM Change event fires when value is changed and TAB is pressed", function() {
+            var textbox = new NumericTextBox(input);
+            var calls = 0;
+
+            input.change(function() {
                 calls++;
-            }
+            });
+
+            input.focus().val(1)
+                .trigger($.Event("keydown", { keyCode: 38 }))
+                .trigger($.Event("keydown", { keyCode: 9 }));
+
+            textbox._blur();
+            assert.equal(calls, 1);
         });
 
-        textbox._step(1);
+        it("Spin event is not fired if value is not altered", function() {
+            var calls = 0;
+            var textbox = new NumericTextBox(input, {
+                value: 50,
+                step: 0,
+                spin: function() {
+                    calls++;
+                }
+            });
 
-        equal(calls, 0);
+            textbox._step(1);
+
+            assert.equal(calls, 0);
+        });
     });
-})();
+}());

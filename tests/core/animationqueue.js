@@ -1,24 +1,26 @@
-(function(){
+(function() {
 
-asyncTest('executes provided command', 1, function() {
-    kendo.queueAnimation(function() {
-        start();
-        ok(true);
+    describe("animation queue", function() {
+        it('executes provided command', function(done) {
+            kendo.queueAnimation(function() {
+                assert.isOk(true);
+                done();
+            });
+        });
+
+        it('keeps commands in order', function(done) {
+            var i = 0;
+
+            kendo.queueAnimation(function() {
+                i++;
+                assert.isOk(true);
+            });
+
+            kendo.queueAnimation(function() {
+                assert.equal(i, 1);
+                done();
+            });
+        });
+
     });
-});
-
-asyncTest('keeps commands in order', 2, function() {
-    var i = 0;
-
-    kendo.queueAnimation(function() {
-        i ++;
-        ok(true);
-    });
-
-    kendo.queueAnimation(function() {
-        start();
-        equal(i, 1);
-    });
-});
-
 }());

@@ -1,23 +1,23 @@
-(function(){
+(function() {
 
-module("kendo attr", {
-    teardown: function(){
-        kendo.ns = "";
-    }
-});
+    describe("kendo attr", function() {
+        afterEach(function() {
+            kendo.ns = "";
+        });
 
-test("default ns is empty", function() {
-    equal(kendo.ns, "");
-});
+        it("default ns is empty", function() {
+            assert.equal(kendo.ns, "");
+        });
 
-test("attr returns a data attribute", function() {
-    kendo.ns = "kendo-";
-    equal(kendo.attr("role"), "data-kendo-role");
-});
+        it("attr returns a data attribute", function() {
+            kendo.ns = "kendo-";
+            assert.equal(kendo.attr("role"), "data-kendo-role");
+        });
 
-test("attr handles empty ns", function() {
-    kendo.ns = "";
-    equal(kendo.attr("role"), "data-role");
-});
+        it("attr handles empty ns", function() {
+            kendo.ns = "";
+            assert.equal(kendo.attr("role"), "data-role");
+        });
 
+    });
 }());

@@ -27,15 +27,15 @@
         return items;
     }
 
-    module("VirtualList MVVM: ", {
-        setup: function() {
+    describe("VirtualList MVVM: ", function () {
+        beforeEach(function() {
             container = $("<div id='container' data-role='virtuallist' data-bind='source: asyncDataSource' data-template='tmp' data-value-field='value' data-item-height='20' data-height='200'></div>")
-                .appendTo(QUnit.fixture);
+                .appendTo(Mocha.fixture);
 
             template = $("<script id='tmp' type='text/x-kendo-template'>" +
                             "<div data-bind='text: text'></div>" +
                          "</script>")
-                .appendTo(QUnit.fixture);
+                .appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -57,52 +57,52 @@
                 asyncDataSource: asyncDataSource
             });
 
-            kendo.bind(QUnit.fixture, viewModel);
-        },
+            kendo.bind(Mocha.fixture, viewModel);
+        });
 
-        teardown: function() {
+        afterEach(function() {
             if (container.data("kendoVirtualList")) {
                 container.data("kendoVirtualList").destroy();
             }
 
-            QUnit.fixture.empty();
-        }
+            Mocha.fixture.empty();
     });
 
     //rendering
 
-    test("widget is initialized via data attributes", 1, function() {
+    it("widget is initialized via data attributes", function() {
         virtualList = container.getKendoVirtualList();
-        ok(virtualList, "widget is initialized");
+        assert.isOk(virtualList, "widget is initialized");
     });
 
-    asyncTest("dataSource is set", 1, function() {
+    it("dataSource is set", function(done) {
         virtualList = $("#container").getKendoVirtualList();
         setTimeout(function() {
-            start();
-            ok(virtualList.dataSource.data().length > 0);
+            assert.isOk(virtualList.dataSource.data().length > 0);
+            done();
         }, 100);
     });
 
-    asyncTest("items are rendered", 2, function() {
+    it("items are rendered", function(done) {
         virtualList = container.getKendoVirtualList();
         setTimeout(function() {
-            start();
-            equal(virtualList.items().eq(0).text(), "Item 0");
-            equal(virtualList.items().last().text(), "Item 39");
+            assert.equal(virtualList.items().eq(0).text(), "Item 0");
+            assert.equal(virtualList.items().last().text(), "Item 39");
+            done();
         }, 100);
     });
 
-    asyncTest("items are rebound after re-rendering (list scroll)", 2, function() {
+    it("items are rebound after re-rendering (list scroll)", function(done) {
         virtualList = container.getKendoVirtualList();
         setTimeout(function() {
             scroll(virtualList.content, 620);
             setTimeout(function() {
-                start();
-                equal(virtualList.items().eq(0).text(), "Item 11");
-                equal(virtualList.items().last().text(), "Item 50");
+                assert.equal(virtualList.items().eq(0).text(), "Item 11");
+                assert.equal(virtualList.items().last().text(), "Item 50");
+                done();
             }, 300)
         }, 100);
     });
 
-})();
+    });
+}());

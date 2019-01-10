@@ -3,59 +3,58 @@
 var AutoComplete = kendo.ui.AutoComplete;
 var input;
 
-module("kendo.ui.AutoComplete filtering", {
-    setup: function() {
-        input = $("<input>").appendTo(QUnit.fixture);
+describe("kendo.ui.AutoComplete filtering", function () {
+    beforeEach(function() {
+        input = $("<input>").appendTo(Mocha.fixture);
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
         };
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
-    }
-});
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
+    });
 
-asyncTest("typing minLenght number of characters filters the datasource", 2, function() {
+it("typing minLenght number of characters filters the datasource", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"]
     });
 
     autocomplete.dataSource.bind("change", function() {
-        equal(this.view().length, 1);
-        equal(this.view()[0], "foo");
-        start();
+        assert.equal(this.view().length, 1);
+        assert.equal(this.view()[0], "foo");
+        done();
     });
 
     input.val("f").press("f".charCodeAt(0));
 });
 
-asyncTest("popup is opened if there are results returned from the filter", 1, function() {
+it("popup is opened if there are results returned from the filter", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"]
     });
 
     autocomplete.dataSource.bind("change", function() {
-        ok(autocomplete.ul.is(":visible"));
-        start();
+        assert.isOk(autocomplete.ul.is(":visible"));
+        done();
     });
 
     input.focus().val("f").press("f".charCodeAt(0));
 });
 
-asyncTest("popup should close if input is empty", 1, function() {
+it("popup should close if input is empty", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"]
     });
     autocomplete.popup.open();
     autocomplete.popup.bind("close", function(){
-        ok(true);
-        start();
+        assert.isOk(true);
+        done();
     });
     input.val("").press(8/*backspace*/);
 });
 
-test("popup is opened if noDataTemplate is defined", 1, function() {
+it("popup is opened if noDataTemplate is defined", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,
         dataTextField: "name",
@@ -65,26 +64,26 @@ test("popup is opened if noDataTemplate is defined", 1, function() {
 
     autocomplete.search("fake");
 
-    ok(autocomplete.popup.visible());
+    assert.isOk(autocomplete.popup.visible());
 });
 
-test("search method supports case sensitive filtering", function() {
+it("search method supports case sensitive filtering", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["FOO", "foo", "bar"],
         ignoreCase: false
     });
 
     autocomplete.search("f");
-    equal(autocomplete.dataSource.view()[0], "foo");
+    assert.equal(autocomplete.dataSource.view()[0], "foo");
 });
 
-test("search method lowers case of the filter value when ignoreCase true", 1, function() {
+it("search method lowers case of the filter value when ignoreCase true", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: {
             transport: {
                 read: "fake url",
                 parameterMap: function(options) {
-                    equal(options.filter.filters[0].value, "f");
+                    assert.equal(options.filter.filters[0].value, "f");
                 }
             },
             serverFiltering: true
@@ -95,7 +94,7 @@ test("search method lowers case of the filter value when ignoreCase true", 1, fu
     autocomplete.search("F");
 });
 
-test("refresh suggests on every dataSource change", 2, function() {
+it("refresh suggests on every dataSource change", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["text", "Text", "3text"],
         filter: "startswith",
@@ -111,11 +110,11 @@ test("refresh suggests on every dataSource change", 2, function() {
     input.val("3");
     autocomplete.search("3");
 
-    equal(autocomplete.value(), "3text");
-    equal(autocomplete.current(), null);
+    assert.equal(autocomplete.value(), "3text");
+    assert.equal(autocomplete.current(), null);
 });
 
-test("refresh does not suggest if input is not active", 1, function() {
+it("refresh does not suggest if input is not active", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["text", "Text", "3text"],
         filter: "startswith",
@@ -126,10 +125,10 @@ test("refresh does not suggest if input is not active", 1, function() {
 
     autocomplete.dataSource.fetch();
 
-    equal(autocomplete.value(), "");
+    assert.equal(autocomplete.value(), "");
 });
 
-asyncTest("AutoComplete does not open popup if not active element", 1, function() {
+it("AutoComplete does not open popup if not active element", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         suggest: true,
@@ -141,12 +140,12 @@ asyncTest("AutoComplete does not open popup if not active element", 1, function(
     input.blur();
 
     setTimeout(function() {
-        start();
-        ok(!autocomplete.popup.visible());
+        assert.isOk(!autocomplete.popup.visible());
+        done();
     }, 100);
 });
 
-test("do not remove default filter expression", function() {
+it("do not remove default filter expression", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -167,11 +166,11 @@ test("do not remove default filter expression", function() {
         filter: "contains"
     });
 
-    ok(autocomplete.dataSource.filter());
-    equal(autocomplete.dataSource.filter().filters.length, 1);
+    assert.isOk(autocomplete.dataSource.filter());
+    assert.equal(autocomplete.dataSource.filter().filters.length, 1);
 });
 
-test("append autocomplete filter expression ot the default one", function() {
+it("append autocomplete filter expression ot the default one", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -194,11 +193,11 @@ test("append autocomplete filter expression ot the default one", function() {
 
     autocomplete.search("foo1");
 
-    ok(autocomplete.dataSource.filter());
-    equal(autocomplete.dataSource.filter().filters.length, 2);
+    assert.isOk(autocomplete.dataSource.filter());
+    assert.equal(autocomplete.dataSource.filter().filters.length, 2);
 });
 
-test("do not append autocomplete filter twice", function() {
+it("do not append autocomplete filter twice", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -222,10 +221,10 @@ test("do not append autocomplete filter twice", function() {
     autocomplete.search("foo1");
     autocomplete.search("foo2");
 
-    equal(autocomplete.dataSource.filter().filters.length, 2);
+    assert.equal(autocomplete.dataSource.filter().filters.length, 2);
 });
 
-asyncTest("Prevent filtration after item is selected", 0, function() {
+it("Prevent filtration after item is selected", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         delay: 0
@@ -238,17 +237,17 @@ asyncTest("Prevent filtration after item is selected", 0, function() {
     autocomplete.ul.find("li:first").click();
 
     autocomplete.dataSource.bind("change", function() {
-        ok(false);
+        assert.isOk(false);
     });
 
     input.trigger("keydown");
 
     setTimeout(function() {
-        start();
+        done();
     }, 100);
 });
 
-asyncTest("remove input value clears filter even with minLength option", 2, function() {
+it("remove input value clears filter even with minLength option", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         minLenght: 2
@@ -257,15 +256,15 @@ asyncTest("remove input value clears filter even with minLength option", 2, func
     input.val("ba").press("a".charCodeAt(0));
 
     autocomplete.dataSource.bind("change", function() {
-        equal(this.view().length, 2);
-        equal(this.view()[0], "foo");
-        start();
+        assert.equal(this.view().length, 2);
+        assert.equal(this.view()[0], "foo");
+        done();
     });
 
     input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
 });
 
-asyncTest("remove input value does not clear filter if minLength and enforceMinLength", 0, function() {
+it("remove input value does not clear filter if minLength and enforceMinLength", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         minLenght: 2,
@@ -275,17 +274,17 @@ asyncTest("remove input value does not clear filter if minLength and enforceMinL
     input.val("ba").press("a".charCodeAt(0));
 
     autocomplete.dataSource.bind("change", function() {
-        ok(false, "list should not rebind");
+        assert.isOk(false, "list should not rebind");
     });
 
     input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
 
     setTimeout(function() {
-        start();
+        done();
     }, 0);
 });
 
-asyncTest("clicking on clear button does not clear filter if minLength and enforceMinLength", 0, function() {
+it("clicking on clear button does not clear filter if minLength and enforceMinLength", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         minLenght: 2,
@@ -295,17 +294,17 @@ asyncTest("clicking on clear button does not clear filter if minLength and enfor
     input.val("ba").press("a".charCodeAt(0));
 
     autocomplete.dataSource.bind("change", function() {
-        ok(false, "list should not rebind");
+        assert.isOk(false, "list should not rebind");
     });
 
     autocomplete._clear.click();
 
     setTimeout(function() {
-        start();
+        done();
     }, 0);
 });
 
-test("select item after filtering", function() {
+it("select item after filtering", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -330,10 +329,10 @@ test("select item after filtering", function() {
     autocomplete.search("foo2");
     autocomplete.ul.children(":first").click();
 
-    equal(autocomplete.value(), "foo2");
+    assert.equal(autocomplete.value(), "foo2");
 });
 
-test("AutoComplete does not revert input value on search", function() {
+it("AutoComplete does not revert input value on search", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -355,10 +354,10 @@ test("AutoComplete does not revert input value on search", function() {
     autocomplete.element.val("fo");
     autocomplete.search("fo");
 
-    equal(autocomplete.value(), "fo");
+    assert.equal(autocomplete.value(), "fo");
 });
 
-test("AutoComplete resets list value on refresh", function() {
+it("AutoComplete resets list value on refresh", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -380,10 +379,10 @@ test("AutoComplete resets list value on refresh", function() {
     autocomplete.element.val("fo");
     autocomplete.search("fo");
 
-    equal(autocomplete.listView.value().length, 0);
+    assert.equal(autocomplete.listView.value().length, 0);
 });
 
-test("AutoComplete keeps value when shared source is modified", function() {
+it("AutoComplete keeps value when shared source is modified", function() {
     var source = new kendo.data.DataSource({
         data: [
             {text: "foo", value: "1", parent: 1},
@@ -409,10 +408,10 @@ test("AutoComplete keeps value when shared source is modified", function() {
         value: "foo3"
     });
 
-    equal(autocomplete.value(), "foo1");
+    assert.equal(autocomplete.value(), "foo1");
 });
 
-test("resize popup on search when autoWidth is enabled", function(assert) {
+it("resize popup on search when autoWidth is enabled", function(done) {
     var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
     var autocomplete = new AutoComplete(input, {
         autoWidth: true,
@@ -434,17 +433,15 @@ test("resize popup on search when autoWidth is enabled", function(assert) {
                 }
             }
         }
-    });
+        });
 
-    var done1 = assert.async();
-    var done2 = assert.async();
     autocomplete.one("open", function() {
-        assert.ok(autocomplete.wrapper.width() < autocomplete.popup.element.width());
+        assert.isOk(autocomplete.wrapper.width() < autocomplete.popup.element.width());
         autocomplete.close();
-        done1();
+        
         autocomplete.one("open", function() {
-            assert.ok(autocomplete.wrapper.width() >= autocomplete.popup.element.width());
-            done2();
+            assert.isOk(autocomplete.wrapper.width() >= autocomplete.popup.element.width());
+            done();
         });
         autocomplete.search("Tof");
     });
@@ -452,7 +449,7 @@ test("resize popup on search when autoWidth is enabled", function(assert) {
 
 });
 
-test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
     var autocomplete = new AutoComplete(input, {
         autoWidth: true,
         animation:{
@@ -465,17 +462,18 @@ test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert
         },
         dataSource: {
             data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+        
         }
     });
 
     autocomplete.search("a");
-    QUnit.close(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
+    assert.closeTo(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
     autocomplete.close();
     autocomplete.search("a");
-    QUnit.close(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
+    assert.closeTo(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
 });
 
-asyncTest("update popup height when no items are found", 1, function() {
+it("update popup height when no items are found", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() })
     });
@@ -485,14 +483,14 @@ asyncTest("update popup height when no items are found", 1, function() {
     var oldHeight = autocomplete.list.height();
 
     autocomplete.one("dataBound", function() {
-        start();
-        ok(autocomplete.list.height() < oldHeight);
+        assert.isOk(autocomplete.list.height() < oldHeight);
+        done();
     });
 
     autocomplete.element.focus().val("test").keydown();
 });
 
-test("removes filtering expression if field matches the dataTextField", 1, function() {
+it("removes filtering expression if field matches the dataTextField", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -505,14 +503,14 @@ test("removes filtering expression if field matches the dataTextField", 1, funct
                 ]
             }
         }
-    });
+        });
 
     autocomplete.search("to");
 
-    equal(autocomplete.dataSource.filter().filters.length, 1);
+    assert.equal(autocomplete.dataSource.filter().filters.length, 1);
 });
 
-test("keeps custom filter expresssion", 5, function() {
+it("keeps custom filter expresssion", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -525,20 +523,20 @@ test("keeps custom filter expresssion", 5, function() {
                 ]
             }
         }
-    });
+        });
 
     autocomplete.search("to");
 
     var filters = autocomplete.dataSource.filter();
 
-    equal(filters.logic, "and");
-    equal(filters.filters.length, 2);
-    equal(filters.filters[0].field, "text");
-    equal(filters.filters[1].logic, "or");
-    equal(filters.filters[1].filters.length, 2);
+    assert.equal(filters.logic, "and");
+    assert.equal(filters.filters.length, 2);
+    assert.equal(filters.filters[0].field, "text");
+    assert.equal(filters.filters[1].logic, "or");
+    assert.equal(filters.filters[1].filters.length, 2);
 });
 
-test("concat filters with the same logic operator", 2, function() {
+it("concat filters with the same logic operator", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource: {
@@ -551,14 +549,15 @@ test("concat filters with the same logic operator", 2, function() {
                 ]
             }
         }
-    });
+        });
 
     autocomplete.search("to");
     autocomplete.search("too");
 
     var filters = autocomplete.dataSource.filter();
 
-    equal(filters.filters[1].filters.length, 2);
-    equal(!filters.filters[1].filters.filters, true);
+    assert.equal(filters.filters[1].filters.length, 2);
+    assert.equal(!filters.filters[1].filters.filters, true);
 });
+    });
 }());

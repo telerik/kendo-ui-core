@@ -1,12 +1,11 @@
 (function() {
-    module("events", {
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
+    describe("events", function () {
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
 
     function createPicker(options) {
-        return $("<input name='foo' />").appendTo(QUnit.fixture).kendoColorPicker(options);
+        return $("<input name='foo' />").appendTo(Mocha.fixture).kendoColorPicker(options);
     }
 
     function selectColor(colorpicker) {
@@ -17,7 +16,7 @@
             .trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
     }
 
-    test("triggers change on input element when selecting color", function() {
+    it("triggers change on input element when selecting color", function() {
         var dom = createPicker();
 
         var callback = spy();
@@ -26,10 +25,10 @@
 
         selectColor(dom.data("kendoColorPicker"));
 
-        equal(callback.calls, 1);
+        assert.equal(callback.calls, 1);
     });
 
-    test("does not trigger change when color is not changed", function() {
+    it("does not trigger change when color is not changed", function() {
         var dom = createPicker({ value: "#f11f11" });
 
         var callback = spy();
@@ -38,6 +37,7 @@
 
         selectColor(dom.data("kendoColorPicker"));
 
-        ok(!callback.calls);
+        assert.isOk(!callback.calls);
     });
-})();
+    });
+}());

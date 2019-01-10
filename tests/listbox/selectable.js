@@ -4,26 +4,25 @@
     var container;
     var listbox;
 
-    module("Selectable API",  {
-        setup: function() {
-            container = $("<select />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
+    describe("Selectable API", function () {
+        beforeEach(function() {
+            container = $("<select />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
-    });
+            kendo.destroy(Mocha.fixture);
+        });
 
-    test("get all items from the listbox", function() {
+    it("get all items from the listbox", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3]
         });
 
         var items = listbox.items();
-        equal(items.length, 3);
+        assert.equal(items.length, 3);
     });
 
-    test("select HTML item", function() {
+    it("select HTML item", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3]
         });
@@ -33,11 +32,11 @@
 
         var selected = listbox.select();
 
-        equal(selected.length, 1);
-        equal(selected[0], items[0]);
+        assert.equal(selected.length, 1);
+        assert.equal(selected[0], items[0]);
     });
 
-    test("select another deselects the first", function() {
+    it("select another deselects the first", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3]
         });
@@ -47,11 +46,11 @@
         listbox.select(items[1]);
 
         var selected = listbox.select();
-        equal(selected.length, 1);
-        equal(selected[0], items[1]);
+        assert.equal(selected.length, 1);
+        assert.equal(selected[0], items[1]);
     });
 
-    test("single selection chooses first from list", function() {
+    it("single selection chooses first from list", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3]
         });
@@ -60,11 +59,11 @@
         listbox.select(items.filter(":gt(0)"));
 
         var selected = listbox.select();
-        equal(selected.length, 1);
-        equal(selected[0], items[1]);
+        assert.equal(selected.length, 1);
+        assert.equal(selected[0], items[1]);
     });
 
-    test("select all items when multi select", function() {
+    it("select all items when multi select", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3],
             selectable: "multiple"
@@ -74,11 +73,11 @@
         listbox.select(items);
 
         var selected = listbox.select();
-        equal(selected.length, 3);
-        deepEqual(selected.toArray(), items.toArray());
+        assert.equal(selected.length, 3);
+        assert.deepEqual(selected.toArray(), items.toArray());
     });
 
-    test("non-sequential select", function() {
+    it("non-sequential select", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3],
             selectable: "multiple"
@@ -88,11 +87,11 @@
         listbox.select(items);
 
         var selected = listbox.select();
-        equal(selected.length, 2);
-        deepEqual(selected.toArray(), items.toArray());
+        assert.equal(selected.length, 2);
+        assert.deepEqual(selected.toArray(), items.toArray());
     });
 
-    test("clear selection removes selection on all items", function() {
+    it("clear selection removes selection on all items", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3]
         });
@@ -101,10 +100,10 @@
 
         listbox.clearSelection();
 
-        equal(listbox.select().length, 0);
+        assert.equal(listbox.select().length, 0);
     });
 
-    test("select triggers change event", function() {
+    it("select triggers change event", function() {
         var changeStub = stub({}, "change");
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3],
@@ -113,10 +112,10 @@
 
         listbox.select(listbox.items()[0]);
 
-        equal(changeStub.calls("change"), 1);
+        assert.equal(changeStub.calls("change"), 1);
     });
 
-    test("clearSelection removes selection", function() {
+    it("clearSelection removes selection", function() {
         listbox = new ListBox(container, {
             dataSource: [1, 2, 3]
         });
@@ -124,35 +123,36 @@
         listbox.select(listbox.items()[0]);
         listbox.clearSelection();
 
-        equal(listbox.select().length, 0);
+        assert.equal(listbox.select().length, 0);
     });
+});
 
-    module("Selectable API", {
-        setup: function() {
-            container = $("<select />").appendTo(QUnit.fixture);
+    describe("Selectable API", function () {
+        beforeEach(function() {
+            container = $("<select />").appendTo(Mocha.fixture);
             listbox = new ListBox(container, {
                 dataSource: [1, 2, 3]
             });
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             destroyListBox(listbox);
-            kendo.destroy(QUnit.fixture);
-        }
-    });
+            kendo.destroy(Mocha.fixture);
+        });
 
-    test("should not select disabled items", function() {
+    it("should not select disabled items", function() {
         listbox.items().addClass("k-state-disabled");
 
         listbox.select(listbox.items());
 
-        equal(listbox.select().length, 0);
+        assert.equal(listbox.select().length, 0);
     });
 
-    test("destroying the selectable and then the listbox does not throw error", function() {
+    it("destroying the selectable and then the listbox does not throw error", function() {
         listbox.selectable.destroy();
 
         listbox.destroy();
 
-        ok(true);
+        assert.isOk(true);
     });
-})();
+    });
+}());

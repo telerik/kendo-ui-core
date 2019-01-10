@@ -6,20 +6,19 @@ var FOCUSED = ".k-state-focused";
 var keys = kendo.keys;
 var input;
 
-module("kendo.ui.AutoComplete navigation", {
-    setup: function() {
-        input = $("<input>").appendTo(QUnit.fixture);
+describe("kendo.ui.AutoComplete navigation", function () {
+    beforeEach(function() {
+        input = $("<input>").appendTo(Mocha.fixture);
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
         }
 
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
 
-    }
-});
+    });
 
 var getData = function(length) {
     var result = [];
@@ -29,7 +28,7 @@ var getData = function(length) {
     return result;
 };
 
-test("pressing down focuses the first item in the popup", function() {
+it("pressing down focuses the first item in the popup", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"]
     });
@@ -38,10 +37,10 @@ test("pressing down focuses the first item in the popup", function() {
     autocomplete.search();
 
     input.press(keys.DOWN);
-    ok(autocomplete.ul.children().first().is(FOCUSED));
+    assert.isOk(autocomplete.ul.children().first().is(FOCUSED));
 });
 
-test("pressing up focuses the last item in the popup", function() {
+it("pressing up focuses the last item in the popup", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -50,10 +49,10 @@ test("pressing up focuses the last item in the popup", function() {
     autocomplete.search();
 
     input.press(keys.UP);
-    ok(autocomplete.ul.children().last().is(FOCUSED));
+    assert.isOk(autocomplete.ul.children().last().is(FOCUSED));
 });
 
-test("pressing END focuses the last item in the popup", 1, function() {
+it("pressing END focuses the last item in the popup", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,
         dataSource: getData(100)
@@ -64,10 +63,10 @@ test("pressing END focuses the last item in the popup", 1, function() {
         type: "keydown",
         keyCode: keys.END
     });
-    ok(autocomplete.ul.children().last().is(FOCUSED));
+    assert.isOk(autocomplete.ul.children().last().is(FOCUSED));
 });
 
-test("pressing HOME focuses the first item in the popup", 1, function() {
+it("pressing HOME focuses the first item in the popup", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,
         dataSource: getData(100)
@@ -78,10 +77,10 @@ test("pressing HOME focuses the first item in the popup", 1, function() {
         type: "keydown",
         keyCode: keys.HOME
     });
-    ok(autocomplete.ul.children().first().is(FOCUSED));
+    assert.isOk(autocomplete.ul.children().first().is(FOCUSED));
 });
 
-test("pressing up clears the focused state from the previous item", function() {
+it("pressing up clears the focused state from the previous item", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -91,10 +90,10 @@ test("pressing up clears the focused state from the previous item", function() {
 
     autocomplete.current(autocomplete.ul.children().last());
     input.press(keys.UP);
-    ok(!autocomplete.ul.children().last().is(FOCUSED));
+    assert.isOk(!autocomplete.ul.children().last().is(FOCUSED));
 });
 
-test("pressing down clears the focused state from the previous item", function() {
+it("pressing down clears the focused state from the previous item", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -104,14 +103,14 @@ test("pressing down clears the focused state from the previous item", function()
 
     autocomplete.current(autocomplete.ul.children().first());
     input.press(keys.DOWN);
-    ok(!autocomplete.ul.children().first().is(FOCUSED));
+    assert.isOk(!autocomplete.ul.children().first().is(FOCUSED));
 });
 
-test("clicking an item applies selected style", 1, function() {
+it("clicking an item applies selected style", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         change: function() {
-            ok(autocomplete.ul.children().eq(0).is(".k-state-selected"));
+            assert.isOk(autocomplete.ul.children().eq(0).is(".k-state-selected"));
         }
     });
 
@@ -120,7 +119,7 @@ test("clicking an item applies selected style", 1, function() {
     autocomplete.ul.children().eq(0).trigger(CLICK);
 });
 
-test("changing the current popup item does not update the input value", function() {
+it("changing the current popup item does not update the input value", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -129,10 +128,10 @@ test("changing the current popup item does not update the input value", function
     autocomplete.search();
 
     input.press(keys.DOWN);
-    equal(input.val(), "b");
+    assert.equal(input.val(), "b");
 });
 
-test("pressing enter closes the dropdown", 1, function() {
+it("pressing enter closes the dropdown", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -142,10 +141,10 @@ test("pressing enter closes the dropdown", 1, function() {
     input.press(keys.DOWN);
     input.press(keys.ENTER);
 
-    ok(!autocomplete.popup.visible());
+    assert.isOk(!autocomplete.popup.visible());
 });
 
-test("press enter should call preventDefault when popup is visible", 1, function() {
+it("press enter should call preventDefault when popup is visible", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -157,12 +156,12 @@ test("press enter should call preventDefault when popup is visible", 1, function
         type: "keydown",
         keyCode: keys.ENTER,
         preventDefault: function() {
-            ok(true);
+            assert.isOk(true);
         }
-    });
+        });
 });
 
-test("pressing enter closes updates the value of the autocomplete", 1, function() {
+it("pressing enter closes updates the value of the autocomplete", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -173,10 +172,10 @@ test("pressing enter closes updates the value of the autocomplete", 1, function(
     input.press(keys.DOWN);
     input.press(keys.ENTER);
 
-    equal(input.val(), "baz");
+    assert.equal(input.val(), "baz");
 });
 
-test("pressing tab closes updates the value of the autocomplete", 1, function() {
+it("pressing tab closes updates the value of the autocomplete", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -187,10 +186,10 @@ test("pressing tab closes updates the value of the autocomplete", 1, function() 
     input.press(keys.DOWN);
     input.press(keys.TAB);
 
-    equal(input.val(), "baz");
+    assert.equal(input.val(), "baz");
 });
 
-test("select applies selected style", function() {
+it("select applies selected style", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -198,10 +197,10 @@ test("select applies selected style", function() {
     input.val("b");
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first());
-    ok(autocomplete.ul.children().first().is(".k-state-selected"));
+    assert.isOk(autocomplete.ul.children().first().is(".k-state-selected"));
 });
 
-test("select sets input value", function() {
+it("select sets input value", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -210,10 +209,10 @@ test("select sets input value", function() {
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first());
 
-    equal(input.val(), "baz");
+    assert.equal(input.val(), "baz");
 });
 
-test("select should accepts DOM element", function() {
+it("select should accepts DOM element", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -221,10 +220,10 @@ test("select should accepts DOM element", function() {
     input.focus().val("b");
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first()[0]);
-    ok(autocomplete.ul.children().first().is(".k-state-selected"));
+    assert.isOk(autocomplete.ul.children().first().is(".k-state-selected"));
 });
 
-test("moving up when there the current item is first", function() {
+it("moving up when there the current item is first", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -233,10 +232,10 @@ test("moving up when there the current item is first", function() {
     autocomplete.search();
     autocomplete.current(autocomplete.ul.children().first());
     input.press(keys.UP);
-    equal(autocomplete.current(), null);
+    assert.equal(autocomplete.current(), null);
 });
 
-test("moving twice up when there the current item is first makes the last item current", function() {
+it("moving twice up when there the current item is first makes the last item current", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -246,10 +245,10 @@ test("moving twice up when there the current item is first makes the last item c
     autocomplete.current(autocomplete.ul.children().first());
     input.press(keys.UP);
     input.press(keys.UP);
-    equal(autocomplete.current()[0], autocomplete.ul.children().last()[0]);
+    assert.equal(autocomplete.current()[0], autocomplete.ul.children().last()[0]);
 });
 
-test("moving down when there the current item is last", function() {
+it("moving down when there the current item is last", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -258,9 +257,9 @@ test("moving down when there the current item is last", function() {
     autocomplete.search();
     autocomplete.current(autocomplete.ul.children().last());
     input.press(keys.DOWN);
-    equal(autocomplete.current(), null);
+    assert.equal(autocomplete.current(), null);
 });
-test("moving twice down when there the current item is first makes the last item current", function() {
+it("moving twice down when there the current item is first makes the last item current", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -270,20 +269,20 @@ test("moving twice down when there the current item is first makes the last item
     autocomplete.current(autocomplete.ul.children().last());
     input.press(keys.DOWN);
     input.press(keys.DOWN);
-    equal(autocomplete.current()[0], autocomplete.ul.children().first()[0]);
+    assert.equal(autocomplete.current()[0], autocomplete.ul.children().first()[0]);
 });
 
-test("down opens the dropdown", function() {
+it("down opens the dropdown", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
 
     input.focus().val("b");
     input.press(keys.DOWN);
-    ok(autocomplete.ul.is(":visible"));
+    assert.isOk(autocomplete.ul.is(":visible"));
 });
 
-test("esc closes the dropdown", function() {
+it("esc closes the dropdown", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -291,10 +290,10 @@ test("esc closes the dropdown", function() {
     input.focus().val("b");
     autocomplete.search();
     input.press(keys.ESC);
-    ok(!autocomplete.ul.is(":visible"));
+    assert.isOk(!autocomplete.ul.is(":visible"));
 });
 
-test("esc calls prevent default if popup is opened", 1, function() {
+it("esc calls prevent default if popup is opened", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -305,12 +304,12 @@ test("esc calls prevent default if popup is opened", 1, function() {
         type: "keydown",
         keyCode: keys.ESC,
         preventDefault: function() {
-            ok(true);
+            assert.isOk(true);
         }
-    });
+        });
 });
 
-test("pressing the down arrows when the popup is not visible does not change value", function() {
+it("pressing the down arrows when the popup is not visible does not change value", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -320,10 +319,10 @@ test("pressing the down arrows when the popup is not visible does not change val
     autocomplete.close();
     input.press(keys.DOWN);
     input.press(keys.ENTER);
-    equal(input.val(), "b");
+    assert.equal(input.val(), "b");
 });
 
-test("pressing the up arrows when the popup is not visible does not change value", function() {
+it("pressing the up arrows when the popup is not visible does not change value", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -333,10 +332,10 @@ test("pressing the up arrows when the popup is not visible does not change value
     autocomplete.close();
     input.press(keys.UP);
     input.press(keys.ENTER);
-    equal(input.val(), "b");
+    assert.equal(input.val(), "b");
 });
 
-test("select with item click when source is filtered by API", 1, function() {
+it("select with item click when source is filtered by API", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["Baz", "Bar"]
     });
@@ -344,10 +343,10 @@ test("select with item click when source is filtered by API", 1, function() {
     autocomplete.search("bar");
     autocomplete.ul.children().eq(0).trigger(CLICK);
 
-    equal(autocomplete.value(), "Bar");
+    assert.equal(autocomplete.value(), "Bar");
 });
 
-test("AutoComplete scrolls content down", 2, function() {
+it("AutoComplete scrolls content down", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,
         dataSource: getData(100)
@@ -360,11 +359,11 @@ test("AutoComplete scrolls content down", 2, function() {
     autocomplete.search("item");
     autocomplete.element.focus().press(keys.PAGEDOWN);
 
-    equal(autocomplete.listView.calls("scrollWith"), 1);
-    equal(autocomplete.listView.args("scrollWith")[0], autocomplete.listView.screenHeight());
+    assert.equal(autocomplete.listView.calls("scrollWith"), 1);
+    assert.equal(autocomplete.listView.args("scrollWith")[0], autocomplete.listView.screenHeight());
 });
 
-test("AutoComplete scrolls content up", 2, function() {
+it("AutoComplete scrolls content up", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,
         dataSource: getData(100)
@@ -377,11 +376,11 @@ test("AutoComplete scrolls content up", 2, function() {
     autocomplete.search("item");
     autocomplete.element.focus().press(keys.PAGEUP);
 
-    equal(autocomplete.listView.calls("scrollWith"), 1);
-    equal(autocomplete.listView.args("scrollWith")[0], -1 * autocomplete.listView.screenHeight());
+    assert.equal(autocomplete.listView.calls("scrollWith"), 1);
+    assert.equal(autocomplete.listView.args("scrollWith")[0], -1 * autocomplete.listView.screenHeight());
 });
 
-test("AutoComplete prevents default on PAGEDOWN", 1, function() {
+it("AutoComplete prevents default on PAGEDOWN", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,
         dataSource: getData(100)
@@ -392,9 +391,10 @@ test("AutoComplete prevents default on PAGEDOWN", 1, function() {
         type: "keydown",
         keyCode: keys.PAGEDOWN,
         preventDefault: function() {
-            ok(true);
+            assert.isOk(true);
         }
-    });
+        });
 });
 
+    });
 }());

@@ -4,23 +4,22 @@
     function createMenu(options) {
         removeHTML();
 
-        QUnit.fixture.append("<ul id='menu'></ul>");
+        Mocha.fixture.append("<ul id='menu'></ul>");
 
         menu = new kendo.ui.Menu("#menu", options);
     }
 
     function removeHTML() {
-        kendo.destroy(QUnit.fixture);
-        QUnit.fixture.empty();
+        kendo.destroy(Mocha.fixture);
+        Mocha.fixture.empty();
     }
 
-    module("Client side rendering", {
-        teardown: function () {
+    describe("Client side rendering", function () {
+        afterEach(function () {
             removeHTML();
-        }
-    });
+        });
 
-    test('Custom attribute is rendered in item', function(){
+    it('Custom attribute is rendered in item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -31,10 +30,10 @@
             }]
         });
 
-        equal(menu.element.find("li:first").attr("data-myCustomAttribute"), "myCustomAttribute");
+        assert.equal(menu.element.find("li:first").attr("data-myCustomAttribute"), "myCustomAttribute");
     });
 
-    test('Class added via attr is added to other classes', function(){
+    it('Class added via attr is added to other classes', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -50,10 +49,10 @@
         var listItemContents = menu.element.html();
         var classAttributesCount = (listItemContents.match(/class/g) || []).length;
 
-        equal(classAttributesCount, 1);
+        assert.equal(classAttributesCount, 1);
     });
 
-    test('Multiple attributes are rendered in item', function(){
+    it('Multiple attributes are rendered in item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -67,11 +66,11 @@
 
         var firstItem = menu.element.find("li:first");
 
-        equal(firstItem.attr("data-myCustomAttribute"), "myCustomAttribute");
-        equal(firstItem.attr("id"), "myId");
+        assert.equal(firstItem.attr("data-myCustomAttribute"), "myCustomAttribute");
+        assert.equal(firstItem.attr("id"), "myId");
     });
 
-    test('Attributes are rendered in sub item', function(){
+    it('Attributes are rendered in sub item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -86,10 +85,10 @@
 
         var subItem = menu.element.find(".myClass");
 
-        equal(subItem.length, 1);
+        assert.equal(subItem.length, 1);
     });
 
-    test('Image attributes are rendered in a item', 2, function(){
+    it('Image attributes are rendered in a item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -106,11 +105,11 @@
 
         var img = menu.element.find("img");
 
-        equal(img.attr("test"), "myAttribute");
-        ok(img.hasClass("customClass"));
+        assert.equal(img.attr("test"), "myAttribute");
+        assert.isOk(img.hasClass("customClass"));
     });
 
-    test('Content attributes are rendered in a item', 2, function(){
+    it('Content attributes are rendered in a item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -127,11 +126,11 @@
 
         var content = menu.element.find(".customClass");
 
-        equal(content.length, 1);
-        equal(content.attr("test"), "myAttribute");
+        assert.equal(content.length, 1);
+        assert.equal(content.attr("test"), "myAttribute");
     });
 
-    test('Default classes are rendered in a item', 3, function(){
+    it('Default classes are rendered in a item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -147,12 +146,12 @@
 
         var content = menu.element.find(".customClass");
 
-        ok(content.hasClass("k-content"));
-        ok(content.hasClass("k-group"));
-        ok(content.hasClass("k-menu-group"));
+        assert.isOk(content.hasClass("k-content"));
+        assert.isOk(content.hasClass("k-group"));
+        assert.isOk(content.hasClass("k-menu-group"));
     });
 
-    test('Expand arrow classes are rendered in subitems', function(){
+    it('Expand arrow classes are rendered in subitems', function(){
         createMenu({
             dataSource: [
                 {
@@ -171,6 +170,7 @@
 
         var expandArrow = menu.element.find(".k-menu-group .k-icon");
 
-        ok(expandArrow.hasClass("k-menu-expand-arrow"));
+        assert.isOk(expandArrow.hasClass("k-menu-expand-arrow"));
     });
-})();
+    });
+}());

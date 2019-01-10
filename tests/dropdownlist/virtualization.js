@@ -40,19 +40,18 @@
         });
     }
 
-    module("kendo.ui.DropDownList Virtualization", {
-        setup: function() {
+    describe("kendo.ui.DropDownList Virtualization", function () {
+        beforeEach(function() {
             kendo.ns = "";
-            select = $("<select multiple />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
+            select = $("<select multiple />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
             if (select.data("kendoDropDownList")) {
                 select.data("kendoDropDownList").destroy();
             }
-        }
-    });
+        });
 
-    asyncTest("DropDownList does not revert scroll position on dataBound", 1, function() {
+    it("DropDownList does not revert scroll position on dataBound", function(done) {
         var dropdownlist = new DropDownList(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -72,9 +71,9 @@
             scroll(dropdownlist.listView.content, 4 * CONTAINER_HEIGHT);
 
             setTimeout(function() {
-                start();
 
-                notEqual(dropdownlist.listView.content.scrollTop(), 0);
+                assert.notEqual(dropdownlist.listView.content.scrollTop(), 0);
+                done();
             }, 100);
 
         });
@@ -82,7 +81,7 @@
         dropdownlist.value("0");
     });
 
-    asyncTest("DropDownList selects correct item when optionLabel is defined", 1, function() {
+    it("DropDownList selects correct item when optionLabel is defined", function(done) {
         var dropdownlist = new DropDownList(select, {
             optionLabel: "test",
             height: CONTAINER_HEIGHT,
@@ -98,14 +97,14 @@
         });
 
         dropdownlist.one("dataBound", function() {
-            start();
-            equal(dropdownlist.value(), 100);
+            assert.equal(dropdownlist.value(), 100);
+            done();
         });
 
         dropdownlist.value("100");
     });
 
-    asyncTest("dataItem returns correct object based on LI element", 2, function() {
+    it("dataItem returns correct object based on LI element", function(done) {
         var dropdownlist = new DropDownList(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -137,21 +136,21 @@
         dropdownlist.open();
         dropdownlist.one("dataBound", function() {
             dropdownlist.one("dataBound", function() {
-                start();
                 var item49 = dropdownlist.listView.content.find("li")
                                      .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
 
                 var dataItem = dropdownlist.dataItem(item49);
 
-                equal(dataItem.value, 49);
-                equal(dataItem.text, item49.text());
+                assert.equal(dataItem.value, 49);
+                assert.equal(dataItem.text, item49.text());
+                done();
             });
 
             scroll(dropdownlist.listView.content, 5 * CONTAINER_HEIGHT);
         });
     });
 
-    asyncTest("keep selected value when list is scrolled", 3, function() {
+    it("keep selected value when list is scrolled", function(done) {
         var dropdownlist = new DropDownList(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -168,12 +167,12 @@
         dropdownlist.one("dataBound", function() {
             dropdownlist.open();
             dropdownlist.one("dataBound", function() {
-                start();
                 var selectedOption = select[0].children[select[0].selectedIndex];
 
-                equal(select.val(), 10);
-                ok(selectedOption.selected);
-                ok(!selectedOption.getAttribute("selected"));
+                assert.equal(select.val(), 10);
+                assert.isOk(selectedOption.selected);
+                assert.isOk(!selectedOption.getAttribute("selected"));
+                done();
             });
 
             scroll(dropdownlist.listView.content, 5 * CONTAINER_HEIGHT);
@@ -182,7 +181,7 @@
         dropdownlist.value(10);
     });
 
-    asyncTest("clear filter when set new value", 1, function() {
+    it("clear filter when set new value", function(done) {
         var dropdownlist = new DropDownList(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -207,18 +206,18 @@
             });
 
             dropdownlist.one("dataBound", function() {
-                start();
 
                 dropdownlist.value("");
 
-                equal(dropdownlist.dataSource.filter().filters.length, 0);
+                assert.equal(dropdownlist.dataSource.filter().filters.length, 0);
+                done();
             });
         });
 
         dropdownlist.value(10);
     });
 
-    asyncTest("clear filter when set new value", 2, function() {
+    it("clear filter when set new value", function(done) {
         var mappedDataItem = { value: 300, text: "Item300" };
         var dropdownlist = new DropDownList(select, {
             height: CONTAINER_HEIGHT,
@@ -236,9 +235,10 @@
         });
 
         dropdownlist.one("dataBound", function() {
-            start();
-            equal(dropdownlist.value(), mappedDataItem.value);
-            equal(dropdownlist.text(), mappedDataItem.text);
+            assert.equal(dropdownlist.value(), mappedDataItem.value);
+            assert.equal(dropdownlist.text(), mappedDataItem.text);
+            done();
         });
     });
-})();
+    });
+}());

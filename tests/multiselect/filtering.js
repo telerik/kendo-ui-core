@@ -14,8 +14,8 @@
         select.html(options);
     }
 
-    module("kendo.ui.MultiSelect filtering", {
-        setup: function() {
+    describe("kendo.ui.MultiSelect filtering", function () {
+        beforeEach(function() {
             $.fn.press = function(character) {
                 var keyCode = character.charCodeAt(0);
                 $(this).trigger({
@@ -25,19 +25,18 @@
             }
 
             kendo.ns = "kendo-";
-            select = $("<select multiple=multiple/>").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
+            select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
             kendo.ns = "";
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }
 
             select.parents(".k-widget").remove();
-        }
-    });
+        });
 
-    asyncTest("MultiSelect filters items on keydown", 1, function() {
+    it("MultiSelect filters items on keydown", function(done) {
         popuplateSelect();
         var multiselect = new MultiSelect(select, {
             delay: 0
@@ -46,12 +45,12 @@
         multiselect.input.val("Option1").press("1");
 
         setTimeout(function() {
-            start();
-            equal(multiselect.ul.children().length, 1);
+            assert.equal(multiselect.ul.children().length, 1);
+            done();
         });
     });
 
-    test("MultiSelect filters data on rebind depending on the selected items", function() {
+    it("MultiSelect filters data on rebind depending on the selected items", function() {
         popuplateSelect();
 
         var multiselect = new MultiSelect(select, {
@@ -63,10 +62,10 @@
 
         multiselect.open();
 
-        equal(multiselect.dataSource.filter().filters.length, 0);
+        assert.equal(multiselect.dataSource.filter().filters.length, 0);
     });
 
-    test("MultiSelect filters data using selected items too", function() {
+    it("MultiSelect filters data using selected items too", function() {
         popuplateSelect();
 
         var multiselect = new MultiSelect(select, {
@@ -79,11 +78,11 @@
 
         multiselect.input.click();
 
-        ok(select[0].children[0].selected);
-        ok(select[0].children[1].selected);
+        assert.isOk(select[0].children[0].selected);
+        assert.isOk(select[0].children[1].selected);
     });
 
-    test("MultiSelect filters data renders all datasource view data", function() {
+    it("MultiSelect filters data renders all datasource view data", function() {
         popuplateSelect();
 
         var multiselect = new MultiSelect(select, {
@@ -95,10 +94,10 @@
 
         var children = multiselect.ul.children();
 
-        equal(children.length, multiselect.dataSource.view().length);
+        assert.equal(children.length, multiselect.dataSource.view().length);
     });
 
-    test("MultiSelect does not append tags on list rebind after filter", function() {
+    it("MultiSelect does not append tags on list rebind after filter", function() {
         popuplateSelect();
 
         var multiselect = new MultiSelect(select, {
@@ -110,10 +109,10 @@
 
         multiselect.open();
 
-        equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children().length, 1);
     });
 
-    test("MultiSelect allows selection after filter rebind", function() {
+    it("MultiSelect allows selection after filter rebind", function() {
         popuplateSelect();
 
         var multiselect = new MultiSelect(select, {
@@ -126,10 +125,10 @@
 
         multiselect.ul.children().first().click();
 
-        equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children().length, 1);
     });
 
-    test("MultiSelect hides popup if no data", function() {
+    it("MultiSelect hides popup if no data", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select, {
             noDataTemplate: ""
@@ -138,10 +137,10 @@
         multiselect.wrapper.click();
         multiselect.search("no such item");
 
-        ok(!multiselect.popup.visible());
+        assert.isOk(!multiselect.popup.visible());
     });
 
-    test("keeps popup opened on empty search result if noDataTemplate", 2, function(assert) {
+    it("keeps popup opened on empty search result if noDataTemplate", function() {
         var multiselect = new MultiSelect(select, {
             animation: false,
             dataTextField: "text",
@@ -151,14 +150,14 @@
 
         multiselect.search("Foo");
 
-        ok(multiselect.popup.visible());
+        assert.isOk(multiselect.popup.visible());
 
         multiselect.search("None");
 
-        ok(multiselect.popup.visible());
+        assert.isOk(multiselect.popup.visible());
     });
 
-    test("MultiSelect do not show initial values on rebind", function() {
+    it("MultiSelect do not show initial values on rebind", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select, { delay: 0, value: ["1", "2"] });
 
@@ -170,11 +169,11 @@
 
         var selectValue = multiselect.element.val() || [];
 
-        equal(multiselect.value().length, 0);
-        equal(selectValue.length, 0);
+        assert.equal(multiselect.value().length, 0);
+        assert.equal(selectValue.length, 0);
     });
 
-    test("MultiSelect with autoBind:false binds only once datasource when filter", 1, function() {
+    it("MultiSelect with autoBind:false binds only once datasource when filter", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: false,
             dataTextField: "text",
@@ -197,13 +196,13 @@
         });
 
         multiselect.dataSource.bind("change", function() {
-            ok(true);
+            assert.isOk(true);
         });
 
         multiselect.search("te");
     });
 
-    test("MultiSelect updates datasource filter state when force rebind", 1, function() {
+    it("MultiSelect updates datasource filter state when force rebind", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: false,
             dataTextField: "text",
@@ -228,13 +227,13 @@
         multiselect.dataSource.bind("change", function() {
             var filter = multiselect.dataSource.filter();
 
-            ok(filter);
+            assert.isOk(filter);
         });
 
         multiselect.search("te");
     });
 
-    asyncTest("MultiSelect filters on empty input", 1, function() {
+    it("MultiSelect filters on empty input", function(done) {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             minLength: 3,
@@ -244,8 +243,8 @@
 
         multiselect.dataSource.one("change", function() {
             multiselect.one("filtering", function(e) {
-                start();
-                equal(e.filter.value, "");
+                assert.equal(e.filter.value, "");
+                done();
             });
 
             multiselect.input.val("").keydown();
@@ -254,7 +253,7 @@
         multiselect.input.focus().val("baz").keydown();
     });
 
-    asyncTest("MultiSelect does not trigger filter on empty input if minLength & enforceMinLength", 0, function() {
+    it("MultiSelect does not trigger filter on empty input if minLength & enforceMinLength", function(done) {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             minLength: 3,
@@ -265,20 +264,20 @@
 
         multiselect.dataSource.one("change", function() {
             multiselect.one("filtering", function(e) {
-                ok(false, "should not filter on empty input and enforceMinLength");
+                assert.isOk(false, "should not filter on empty input and enforceMinLength");
             });
 
             multiselect.input.val("").keydown();
 
             setTimeout(function() {
-                start();
+                done();
             }, 0);
         });
 
         multiselect.input.focus().val("baz").keydown();
     });
 
-    asyncTest("clicking on clear button does not clear filter if minLength and enforceMinLength", 0, function() {
+    it("clicking on clear button does not clear filter if minLength and enforceMinLength", function(done) {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             minLength: 3,
@@ -289,20 +288,20 @@
 
         multiselect.dataSource.one("change", function() {
             multiselect.one("filtering", function(e) {
-                ok(false, "should not filter on empty input and enforceMinLength");
+                assert.isOk(false, "should not filter on empty input and enforceMinLength");
             });
 
             multiselect._clear.click();
 
             setTimeout(function() {
-                start();
+                done();
             }, 0);
         });
 
         multiselect.input.focus().val("baz").keydown();
     });
 
-    test("MultiSelect renders value of the custom options on filter", 3, function() {
+    it("MultiSelect renders value of the custom options on filter", function() {
         var multiselect = new MultiSelect(select, {
             dataTextField: "text",
             dataValueField: "value",
@@ -319,12 +318,12 @@
 
         var options = select.children();
 
-        equal(options.length, 2);
-        equal(options[0].value, "2");
-        equal(options[1].value, "1");
+        assert.equal(options.length, 2);
+        assert.equal(options[0].value, "2");
+        assert.equal(options[1].value, "1");
     });
 
-    test("MultiSelect keep selected values if less items are returned on rebind", 3, function() {
+    it("MultiSelect keep selected values if less items are returned on rebind", function() {
         var values = [
             [{ text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }],
@@ -355,12 +354,12 @@
 
         var values = multiselect.value();
 
-        equal(values.length, 2);
-        equal(values[0], "1");
-        equal(values[1], "4");
+        assert.equal(values.length, 2);
+        assert.equal(values[0], "1");
+        assert.equal(values[1], "4");
     });
 
-    test("MultiSelect keeps the selected tags on rebind when returned data is less", 3, function() {
+    it("MultiSelect keeps the selected tags on rebind when returned data is less", function() {
         var values = [
             [{ text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }],
@@ -391,12 +390,12 @@
 
         var tags = multiselect.tagList.children();
 
-        equal(tags.length, 2);
-        equal(tags.eq(0).children(":first").text(), "text1");
-        equal(tags.eq(1).children(":first").text(), "text4");
+        assert.equal(tags.length, 2);
+        assert.equal(tags.eq(0).children(":first").text(), "text1");
+        assert.equal(tags.eq(1).children(":first").text(), "text4");
     });
 
-    test("MultiSelect removes tag that does not exist in datasource after rebind", 4, function() {
+    it("MultiSelect removes tag that does not exist in datasource after rebind", function() {
         var values = [
             [{ text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }],
@@ -430,14 +429,14 @@
         var tags = multiselect.tagList.children();
         var values = multiselect.value();
 
-        equal(tags.length, 1);
-        equal(tags.eq(0).children(":first").text(), "text1");
+        assert.equal(tags.length, 1);
+        assert.equal(tags.eq(0).children(":first").text(), "text1");
 
-        equal(values.length, 1);
-        equal(values[0], "1");
+        assert.equal(values.length, 1);
+        assert.equal(values[0], "1");
     });
 
-    test("MultiSelect removes tag that does exist in datasource after rebind", 4, function() {
+    it("MultiSelect removes tag that does exist in datasource after rebind", function() {
         var values = [
             [{ text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }],
@@ -471,14 +470,14 @@
         var tags = multiselect.tagList.children();
         var values = multiselect.value();
 
-        equal(tags.length, 1);
-        equal(tags.eq(0).children(":first").text(), "text4");
+        assert.equal(tags.length, 1);
+        assert.equal(tags.eq(0).children(":first").text(), "text4");
 
-        equal(values.length, 1);
-        equal(values[0], "4");
+        assert.equal(values.length, 1);
+        assert.equal(values[0], "4");
     });
 
-    test("MultiSelect removes all tags when less data is returned on rebind", 2, function() {
+    it("MultiSelect removes all tags when less data is returned on rebind", function() {
         var values = [
             [{ text: "text1", value: "2" }, { text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }],
@@ -513,11 +512,11 @@
         var tags = multiselect.tagList.children();
         var values = multiselect.value();
 
-        equal(tags.length, 0);
-        equal(values.length, 0);
+        assert.equal(tags.length, 0);
+        assert.equal(values.length, 0);
     });
 
-    test("MultiSelect de-selects item after rebind when data is less", 4, function() {
+    it("MultiSelect de-selects item after rebind when data is less", function() {
         var values = [
             [{ text: "text1", value: "2" }, { text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }],
@@ -552,14 +551,14 @@
         var tags = multiselect.tagList.children();
         var values = multiselect.value();
 
-        equal(tags.length, 1);
-        equal(values.length, 1);
+        assert.equal(tags.length, 1);
+        assert.equal(values.length, 1);
 
-        equal(tags.eq(0).children(":first").text(), "text4");
-        equal(values[0], "4");
+        assert.equal(tags.eq(0).children(":first").text(), "text4");
+        assert.equal(values[0], "4");
     });
 
-    test("MultiSelect keeps selected dataitems on de-select after rebind ", 3, function() {
+    it("MultiSelect keeps selected dataitems on de-select after rebind ", function() {
         var values = [
             [{ text: "text1", value: "2" }, { text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }],
@@ -597,12 +596,12 @@
 
         var dataItems = multiselect.dataItems();
 
-        equal(dataItems.length, 2);
-        equal(dataItems[0].value, "4");
-        equal(dataItems[1].value, "3");
+        assert.equal(dataItems.length, 2);
+        assert.equal(dataItems[0].value, "4");
+        assert.equal(dataItems[1].value, "3");
     });
 
-    test("MultiSelect render the option text and value of the custom values", 5, function() {
+    it("MultiSelect render the option text and value of the custom values", function() {
         var values = [
             [{ text: "text1", value: "2" }, { text: "text1", value: "1" }],
             [{ text: "text4", value: "4" }]
@@ -631,16 +630,16 @@
 
         var options = select.children();
 
-        equal(options.length, 2);
+        assert.equal(options.length, 2);
 
-        equal(options[0].text, "text4");
-        equal(options[0].value, "4");
+        assert.equal(options[0].text, "text4");
+        assert.equal(options[0].value, "4");
 
-        equal(options[1].text, "text1");
-        equal(options[1].value, "1");
+        assert.equal(options[1].text, "text1");
+        assert.equal(options[1].value, "1");
     });
 
-    test("MultiSelect calls read with normalized filters collection", 1, function() {
+    it("MultiSelect calls read with normalized filters collection", function() {
         var values = [{ text: "text1", value: "2" }, { text: "text1", value: "1" }];
 
         var multiselect = new MultiSelect(select, {
@@ -654,7 +653,7 @@
                 transport: {
                     read: "fake.url",
                     parameterMap: function(options) {
-                        equal(options.filter.filters.length, 0);
+                        assert.equal(options.filter.filters.length, 0);
                     }
                 }
             }
@@ -662,7 +661,7 @@
 
         multiselect.open();
     });
-    test("resize popup on search when autoWidth is enabled", function(assert) {
+    it("resize popup on search when autoWidth is enabled", function(done) {
         var data = [{text: "Foooooooooooooooooooooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
         $(select).width(100);
         var multiselect = new MultiSelect(select, {
@@ -674,16 +673,13 @@
             }
         });
 
-        var done1 = assert.async();
-        var done2 = assert.async();
         multiselect.one("open", function() {
-            assert.ok(multiselect.wrapper.width() < multiselect.popup.element.width());
+            assert.isOk(multiselect.wrapper.width() < multiselect.popup.element.width());
             multiselect.popup.close();
             multiselect.dataSource.filter({field: "text", value: "a", operator: "contains"});
-            done1();
             multiselect.one("open", function() {
-                assert.ok(multiselect.wrapper.width() >= multiselect.popup.element.width());
-                done2();
+                assert.isOk(multiselect.wrapper.width() >= multiselect.popup.element.width());
+                done();
             });
             multiselect.open();
         });
@@ -691,7 +687,7 @@
 
     });
 
-    test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
+    it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
         var multiselect = new MultiSelect(select, {
             autoWidth: true,
             animation:{
@@ -708,13 +704,13 @@
         });
 
         multiselect.open();
-        equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
+        assert.equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
         multiselect.close();
         multiselect.open();
-        equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
+        assert.equal(multiselect.popup.element.parent(".k-animation-container").width(), multiselect.popup.element.outerWidth(true) + 1);
     });
 
-    asyncTest("update popup height when no items are found", 1, function() {
+    it("update popup height when no items are found", function(done) {
         popuplateSelect(30);
 
         var multiselect = new MultiSelect(select);
@@ -724,10 +720,11 @@
         var oldHeight = multiselect.list.height();
 
         multiselect.one("dataBound", function() {
-            start();
-            ok(multiselect.list.height() < oldHeight);
+            assert.isOk(multiselect.list.height() < oldHeight);
+            done();
         });
 
         multiselect.input.focus().val("test").keydown();
     });
-})();
+    });
+}());

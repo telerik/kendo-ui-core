@@ -1,378 +1,379 @@
 (function() {
 
-var DataSource = kendo.data.DataSource;
-var ObservableObject = kendo.data.ObservableObject;
-var Model = kendo.data.Model.define({ id: "foo" });
-var dataSource;
+    var DataSource = kendo.data.DataSource;
+    var ObservableObject = kendo.data.ObservableObject;
+    var Model = kendo.data.Model.define({ id: "foo" });
+    var dataSource;
 
-function setup(options) {
-    dataSource = new DataSource(options);
-}
+    function setup(options) {
+        dataSource = new DataSource(options);
+    }
 
-module("data source lazy observable object");
+    describe("data source lazy observable object", function() {
 
-test("at returns observable object", function() {
-    setup({
-        data: [ { foo: "foo" }]
-    });
+        it("at returns observable object", function() {
+            setup({
+                data: [{ foo: "foo" }]
+            });
 
-    dataSource.read();
-    ok(dataSource.at(0) instanceof ObservableObject);
-});
+            dataSource.read();
+            assert.isOk(dataSource.at(0) instanceof ObservableObject);
+        });
 
-test("at returns observable object not from the current page", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1
-    });
+        it("at returns observable object not from the current page", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1
+            });
 
-    dataSource.read();
-    ok(dataSource.at(1) instanceof ObservableObject);
-});
+            dataSource.read();
+            assert.isOk(dataSource.at(1) instanceof ObservableObject);
+        });
 
-test("at returns instance of the data source model", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1,
-        schema: {
-            model: Model
-        }
-    });
+        it("at returns instance of the data source model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1,
+                schema: {
+                    model: Model
+                }
+            });
 
-    dataSource.read();
-    ok(dataSource.at(1) instanceof Model);
-});
+            dataSource.read();
+            assert.isOk(dataSource.at(1) instanceof Model);
+        });
 
-test("doesn't create observable objects that are not in the current page", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1
-    });
+        it("doesn't create observable objects that are not in the current page", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1
+            });
 
-    dataSource.read();
+            dataSource.read();
 
-    ok(!(dataSource._data[1] instanceof ObservableObject));
-});
+            assert.isOk(!(dataSource._data[1] instanceof ObservableObject));
+        });
 
-test("observes data item when it gets in the current page", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1
-    });
+        it("observes data item when it gets in the current page", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1
+            });
 
-    dataSource.read();
+            dataSource.read();
 
-    ok(!(dataSource._data[1] instanceof ObservableObject));
+            assert.isOk(!(dataSource._data[1] instanceof ObservableObject));
 
-    dataSource.page(2);
+            dataSource.page(2);
 
-    ok(dataSource._data[1] instanceof ObservableObject);
-});
+            assert.isOk(dataSource._data[1] instanceof ObservableObject);
+        });
 
-test("data returns observable objects", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1
-    });
+        it("data returns observable objects", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1
+            });
 
-    dataSource.read();
+            dataSource.read();
 
-    ok(dataSource.data()[1] instanceof ObservableObject);
-});
+            assert.isOk(dataSource.data()[1] instanceof ObservableObject);
+        });
 
-test("data returns instances of the model", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1,
-        schema: {
-            model: Model
-        }
-    });
+        it("data returns instances of the model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1,
+                schema: {
+                    model: Model
+                }
+            });
 
-    dataSource.read();
+            dataSource.read();
 
-    ok(dataSource.data()[1] instanceof Model);
-});
+            assert.isOk(dataSource.data()[1] instanceof Model);
+        });
 
-test("view returns observable objects", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1
-    });
+        it("view returns observable objects", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1
+            });
 
-    dataSource.read();
+            dataSource.read();
 
-    ok(dataSource.view()[0] instanceof ObservableObject);
-});
+            assert.isOk(dataSource.view()[0] instanceof ObservableObject);
+        });
 
-test("view returns instances of the model", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        pageSize: 1,
-        schema: {
-            model: Model
-        }
-    });
+        it("view returns instances of the model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                pageSize: 1,
+                schema: {
+                    model: Model
+                }
+            });
 
-    dataSource.read();
+            dataSource.read();
 
-    ok(dataSource.view()[0] instanceof Model);
-});
+            assert.isOk(dataSource.view()[0] instanceof Model);
+        });
 
-test("the items event argument of the change event contains observables", 2, function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        change: function(e) {
-            ok(e.items[0] instanceof ObservableObject);
-            ok(e.items[1] instanceof ObservableObject);
-        }
-    });
+        it("the items event argument of the change event contains observables", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                change: function(e) {
+                    assert.isOk(e.items[0] instanceof ObservableObject);
+                    assert.isOk(e.items[1] instanceof ObservableObject);
+                }
+            });
 
-    dataSource.read();
-});
+            dataSource.read();
+        });
 
-test("the items event argument of the change event contains instances of the model", 2, function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        change: function(e) {
-            ok(e.items[0] instanceof Model);
-            ok(e.items[1] instanceof Model);
-        },
-        schema: {
-            model: Model
-        }
-    });
+        it("the items event argument of the change event contains instances of the model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                change: function(e) {
+                    assert.isOk(e.items[0] instanceof Model);
+                    assert.isOk(e.items[1] instanceof Model);
+                },
+                schema: {
+                    model: Model
+                }
+            });
 
-    dataSource.read();
-});
+            dataSource.read();
+        });
 
-test("the items event argument of the change event contains instances of the model", 2, function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        schema: {
-            model: Model
-        },
-        change: function(e) {
-            ok(e.items[0] instanceof Model);
-            ok(e.items[1] instanceof Model);
-        }
-    });
+        it("the items event argument of the change event contains instances of the model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                schema: {
+                    model: Model
+                },
+                change: function(e) {
+                    assert.isOk(e.items[0] instanceof Model);
+                    assert.isOk(e.items[1] instanceof Model);
+                }
+            });
 
-    dataSource.read();
-});
+            dataSource.read();
+        });
 
-test("get returns observable", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        schema: {
-            model: {
-                id: "foo"
-            }
-        }
-    });
-
-    dataSource.read();
-
-    ok(dataSource.get("foo") instanceof ObservableObject);
-});
-
-test("get returns instance of the model", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        schema: {
-            model: Model
-        }
-    });
-
-    dataSource.read();
-
-    ok(dataSource.get("foo") instanceof Model);
-});
-
-test("getByUid returns observable", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }]
-    });
-
-    dataSource.read();
-
-    ok(dataSource.getByUid(dataSource.at(0).uid) instanceof ObservableObject);
-});
-
-test("getByUid returns instances of the model", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        schema: {
-            model: Model
-        }
-    });
-
-    dataSource.read();
-
-    ok(dataSource.getByUid(dataSource.at(0).uid) instanceof Model);
-});
-
-test("group returns items that are observable", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        group: { field: "foo" }
-    });
-
-    dataSource.read();
-
-    ok(dataSource.view()[0].items[0] instanceof ObservableObject);
-});
-
-test("group items are not observable", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        group: { field: "foo" }
-    });
-
-    dataSource.read();
-
-    ok(!(dataSource.view()[0] instanceof ObservableObject));
-});
-
-test("group returns items that are instances of the model", function() {
-    setup({
-        data: [ { foo: "foo" }, { foo: "bar" }],
-        schema: {
-            model: Model
-        },
-        group: { field: "foo" }
-    });
-
-    dataSource.read();
-
-    ok(dataSource.view()[0].items[0] instanceof Model);
-});
-
-test("group return items that are observable when serverGrouping is enabled", function() {
-    setup({
-        transport: {
-            read: function(options) {
-                options.success([
-                    {
-                        value: "foo",
-                        items: [ { foo: "foo" }]
-                    },
-                    {
-                        value: "bar",
-                        items: [ { foo: "bar" }]
+        it("get returns observable", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                schema: {
+                    model: {
+                        id: "foo"
                     }
-                ]);
-            }
-        },
-        group: { field: "foo" },
-        serverGrouping: true
-    });
+                }
+            });
 
-    dataSource.read();
-    ok(dataSource.data()[1].items[0] instanceof ObservableObject);
-});
+            dataSource.read();
 
-test("group return items that are instances of the model when serverGrouping is enabled", function() {
-    setup({
-        transport: {
-            read: function(options) {
-                options.success([
-                    {
-                        value: "foo",
-                        items: [ { foo: "foo" }]
-                    },
-                    {
-                        value: "bar",
-                        items: [ { foo: "bar" }]
+            assert.isOk(dataSource.get("foo") instanceof ObservableObject);
+        });
+
+        it("get returns instance of the model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                schema: {
+                    model: Model
+                }
+            });
+
+            dataSource.read();
+
+            assert.isOk(dataSource.get("foo") instanceof Model);
+        });
+
+        it("getByUid returns observable", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }]
+            });
+
+            dataSource.read();
+
+            assert.isOk(dataSource.getByUid(dataSource.at(0).uid) instanceof ObservableObject);
+        });
+
+        it("getByUid returns instances of the model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                schema: {
+                    model: Model
+                }
+            });
+
+            dataSource.read();
+
+            assert.isOk(dataSource.getByUid(dataSource.at(0).uid) instanceof Model);
+        });
+
+        it("group returns items that are observable", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                group: { field: "foo" }
+            });
+
+            dataSource.read();
+
+            assert.isOk(dataSource.view()[0].items[0] instanceof ObservableObject);
+        });
+
+        it("group items are not observable", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                group: { field: "foo" }
+            });
+
+            dataSource.read();
+
+            assert.isOk(!(dataSource.view()[0] instanceof ObservableObject));
+        });
+
+        it("group returns items that are instances of the model", function() {
+            setup({
+                data: [{ foo: "foo" }, { foo: "bar" }],
+                schema: {
+                    model: Model
+                },
+                group: { field: "foo" }
+            });
+
+            dataSource.read();
+
+            assert.isOk(dataSource.view()[0].items[0] instanceof Model);
+        });
+
+        it("group return items that are observable when serverGrouping is enabled", function() {
+            setup({
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            {
+                                value: "foo",
+                                items: [{ foo: "foo" }]
+                            },
+                            {
+                                value: "bar",
+                                items: [{ foo: "bar" }]
+                            }
+                        ]);
                     }
-                ]);
-            }
-        },
-        group: { field: "foo" },
-        schema: {
-            model: Model
-        },
-        serverGrouping: true
-    });
+                },
+                group: { field: "foo" },
+                serverGrouping: true
+            });
 
-    dataSource.read();
-    ok(dataSource.data()[1].items[0] instanceof Model);
-});
+            dataSource.read();
+            assert.isOk(dataSource.data()[1].items[0] instanceof ObservableObject);
+        });
 
-test("get with server grouping", function() {
-    setup({
-        transport: {
-            read: function(options) {
-                options.success([
-                    {
-                        value: "foo",
-                        items: [ { foo: "foo" }]
-                    },
-                    {
-                        value: "bar",
-                        items: [ { foo: "bar" }]
+        it("group return items that are instances of the model when serverGrouping is enabled", function() {
+            setup({
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            {
+                                value: "foo",
+                                items: [{ foo: "foo" }]
+                            },
+                            {
+                                value: "bar",
+                                items: [{ foo: "bar" }]
+                            }
+                        ]);
                     }
-                ]);
-            }
-        },
-        schema: {
-            model: {
-                id: "foo"
-            }
-        },
-        group: { field: "foo" },
-        serverGrouping: true
-    });
+                },
+                group: { field: "foo" },
+                schema: {
+                    model: Model
+                },
+                serverGrouping: true
+            });
 
-    dataSource.read();
-    ok(dataSource.get("foo") instanceof ObservableObject);
-});
+            dataSource.read();
+            assert.isOk(dataSource.data()[1].items[0] instanceof Model);
+        });
 
-test("get with server grouping returns instance of the model", function() {
-    setup({
-        transport: {
-            read: function(options) {
-                options.success([
-                    {
-                        value: "foo",
-                        items: [ { foo: "foo" }]
-                    },
-                    {
-                        value: "bar",
-                        items: [ { foo: "bar" }]
+        it("get with server grouping", function() {
+            setup({
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            {
+                                value: "foo",
+                                items: [{ foo: "foo" }]
+                            },
+                            {
+                                value: "bar",
+                                items: [{ foo: "bar" }]
+                            }
+                        ]);
                     }
-                ]);
-            }
-        },
-        schema: {
-            model: Model
-        },
-        group: { field: "foo" },
-        serverGrouping: true
+                },
+                schema: {
+                    model: {
+                        id: "foo"
+                    }
+                },
+                group: { field: "foo" },
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            assert.isOk(dataSource.get("foo") instanceof ObservableObject);
+        });
+
+        it("get with server grouping returns instance of the model", function() {
+            setup({
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            {
+                                value: "foo",
+                                items: [{ foo: "foo" }]
+                            },
+                            {
+                                value: "bar",
+                                items: [{ foo: "bar" }]
+                            }
+                        ]);
+                    }
+                },
+                schema: {
+                    model: Model
+                },
+                group: { field: "foo" },
+                serverGrouping: true
+            });
+
+            dataSource.read();
+            assert.isOk(dataSource.get("foo") instanceof Model);
+        });
+
+        it("view returns items that are observable when server paging is enabled", function() {
+            setup({
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { foo: "foo" }, { foo: "bar" }
+                        ]);
+                    }
+                },
+                schema: {
+                    model: Model
+                },
+                pageSize: 1,
+                serverPaging: true
+            });
+
+            dataSource.read();
+            assert.isOk(dataSource.view()[0] instanceof Model);
+        });
+
     });
-
-    dataSource.read();
-    ok(dataSource.get("foo") instanceof Model);
-});
-
-test("view returns items that are observable when server paging is enabled", function() {
-    setup({
-        transport: {
-            read: function(options) {
-                options.success([
-                    { foo: "foo" }, { foo: "bar" }
-                ]);
-            }
-        },
-        schema: {
-            model: Model
-        },
-        pageSize: 1,
-        serverPaging: true
-    });
-
-    dataSource.read();
-    ok(dataSource.view()[0] instanceof Model);
-});
-
-})();
+}());

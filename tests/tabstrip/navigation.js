@@ -15,45 +15,44 @@ function addItems(count) {
     }
 }
 
-module("tabstrip keyboard navigation", {
-    setup: function() {
-        div = $('<div id="test" />').appendTo(QUnit.fixture);
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
-    }
-});
+describe("tabstrip keyboard navigation", function () {
+    beforeEach(function() {
+        div = $('<div id="test" />').appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("adds tabindex", function() {
+it("adds tabindex", function() {
     div.kendoTabStrip();
-    equal(div.attr("tabindex"), 0);
+    assert.equal(div.attr("tabindex"), 0);
 });
 
-test("persists tabindex", function() {
+it("persists tabindex", function() {
     div.attr("tabindex", 1).kendoTabStrip();
-    equal(div.attr("tabindex"), 1);
+    assert.equal(div.attr("tabindex"), 1);
 });
 
-test("does not select anything if no items", function() {
+it("does not select anything if no items", function() {
     div.kendoTabStrip();
 
     div.focus();
 
-    equal(div.data("kendoTabStrip")._current(), null);
+    assert.equal(div.data("kendoTabStrip")._current(), null);
 });
 
 
-test("selects first item on focus", function() {
+it("selects first item on focus", function() {
     div.kendoTabStrip();
     addItems(2);
 
     div.focus();
 
     var first = div.find(".k-item:first");
-    ok(first.hasClass("k-state-focused"));
+    assert.isOk(first.hasClass("k-state-focused"));
 });
 
-test("clears focused item on blur", function() {
+it("clears focused item on blur", function() {
     div.kendoTabStrip();
     addItems(2);
 
@@ -61,10 +60,10 @@ test("clears focused item on blur", function() {
     div.blur();
 
     var first = div.find(".k-item:first");
-    ok(!first.hasClass("k-state-focused"));
+    assert.isOk(!first.hasClass("k-state-focused"));
 });
 
-test("selects next item on key DOWN", function() {
+it("selects next item on key DOWN", function() {
     div.kendoTabStrip({tabPosition: "left"});
     addItems(2);
 
@@ -75,11 +74,11 @@ test("selects next item on key DOWN", function() {
     });
 
     var item = div.find(".k-item").eq(1);
-    ok(!item.hasClass("k-state-focused"));
-    ok(item.hasClass("k-state-active"));
+    assert.isOk(!item.hasClass("k-state-focused"));
+    assert.isOk(item.hasClass("k-state-active"));
 });
 
-test("focuses next item if disabled", function() {
+it("focuses next item if disabled", function() {
     div.kendoTabStrip({tabPosition: "left"});
     addItems(3);
 
@@ -95,11 +94,11 @@ test("focuses next item if disabled", function() {
 
     var item = div.find(".k-item").eq(1);
     var lastItem = div.find(".k-item:last");
-    ok($(item).hasClass("k-state-focused"));
-    ok(!lastItem.hasClass("k-state-active"));
+    assert.isOk($(item).hasClass("k-state-focused"));
+    assert.isOk(!lastItem.hasClass("k-state-active"));
 });
 
-test("selects first if last is selected", function() {
+it("selects first if last is selected", function() {
     div.kendoTabStrip();
     addItems(2);
 
@@ -113,10 +112,10 @@ test("selects first if last is selected", function() {
         keyCode: keys.RIGHT
     });
 
-    ok(div.find(".k-item:first").hasClass("k-state-active"));
+    assert.isOk(div.find(".k-item:first").hasClass("k-state-active"));
 });
 
-test("remove activedescendant id when passing through disabled item", function() {
+it("remove activedescendant id when passing through disabled item", function() {
     div.kendoTabStrip({animation: false});
     addItems(3);
     var tabstrip = div.data("kendoTabStrip");
@@ -130,10 +129,10 @@ test("remove activedescendant id when passing through disabled item", function()
         });
     }
 
-    equal(tabstrip.tabGroup.children("#" + tabstrip._ariaId).length, 1);
+    assert.equal(tabstrip.tabGroup.children("#" + tabstrip._ariaId).length, 1);
 });
 
-test("add activedescendant id on disabled item when navigating on it", function() {
+it("add activedescendant id on disabled item when navigating on it", function() {
     div.kendoTabStrip({animation: false});
     addItems(3);
     var tabstrip = div.data("kendoTabStrip");
@@ -146,10 +145,10 @@ test("add activedescendant id on disabled item when navigating on it", function(
         keyCode: keys.RIGHT
     });
 
-    ok(tabstrip.tabGroup.children("#" + tabstrip._ariaId).hasClass("k-state-disabled"));
+    assert.isOk(tabstrip.tabGroup.children("#" + tabstrip._ariaId).hasClass("k-state-disabled"));
 });
 
-test("add activedescendant id when navigation from disabled item to active item", function() {
+it("add activedescendant id when navigation from disabled item to active item", function() {
     div.kendoTabStrip({animation: false});
     addItems(3);
     var tabstrip = div.data("kendoTabStrip");
@@ -167,10 +166,10 @@ test("add activedescendant id when navigation from disabled item to active item"
         keyCode: keys.LEFT
     });
 
-    ok(div.find(".k-item:first").is("#" +  tabstrip._ariaId));
+    assert.isOk(div.find(".k-item:first").is("#" +  tabstrip._ariaId));
 });
 
-test("selects prev item on key UP", function() {
+it("selects prev item on key UP", function() {
     div.kendoTabStrip({tabPosition: "left"});
     addItems(2);
 
@@ -184,11 +183,11 @@ test("selects prev item on key UP", function() {
         keyCode: keys.UP
     });
 
-    ok(div.find(".k-item:first").hasClass("k-state-active"));
-    equal(div.attr("aria-activedescendant"), "test_ts_active");
+    assert.isOk(div.find(".k-item:first").hasClass("k-state-active"));
+    assert.equal(div.attr("aria-activedescendant"), "test_ts_active");
 });
 
-test("selects last if current is first", function() {
+it("selects last if current is first", function() {
     div.kendoTabStrip();
     addItems(2);
 
@@ -200,11 +199,11 @@ test("selects last if current is first", function() {
         keyCode: keys.LEFT
     });
 
-    ok(div.find(".k-item:last").hasClass("k-state-active"));
+    assert.isOk(div.find(".k-item:last").hasClass("k-state-active"));
 
 });
 
-test("in rtl and horizontal layout does not change selection on DOWN", function() {
+it("in rtl and horizontal layout does not change selection on DOWN", function() {
     div.addClass("k-rtl").kendoTabStrip({animation: false});
     addItems(3);
 
@@ -217,10 +216,10 @@ test("in rtl and horizontal layout does not change selection on DOWN", function(
         keyCode: keys.DOWN
     });
 
-    equal(div.find(".k-state-active").index(), 0);
+    assert.equal(div.find(".k-state-active").index(), 0);
 });
 
-test("in rtl and horizontal layout selects next on RIGHT", function() {
+it("in rtl and horizontal layout selects next on RIGHT", function() {
     div.addClass("k-rtl").kendoTabStrip({animation: false});
     addItems(3);
 
@@ -233,10 +232,10 @@ test("in rtl and horizontal layout selects next on RIGHT", function() {
         keyCode: keys.RIGHT
     });
 
-    equal(div.find(".k-state-active").index(), 2);
+    assert.equal(div.find(".k-state-active").index(), 2);
 });
 
-test("in rtl and horizontal layout selects prev on LEFT", function() {
+it("in rtl and horizontal layout selects prev on LEFT", function() {
     div.addClass("k-rtl").kendoTabStrip({animation: false});
     addItems(3);
 
@@ -249,10 +248,10 @@ test("in rtl and horizontal layout selects prev on LEFT", function() {
         keyCode: keys.LEFT
     });
 
-    equal(div.find(".k-state-active").index(), 1);
+    assert.equal(div.find(".k-state-active").index(), 1);
 });
 
-test("in rtl and horizontal layout does not change selection on UP", function() {
+it("in rtl and horizontal layout does not change selection on UP", function() {
     div.addClass("k-rtl").kendoTabStrip({animation: false});
     addItems(3);
 
@@ -265,10 +264,10 @@ test("in rtl and horizontal layout does not change selection on UP", function() 
         keyCode: keys.UP
     });
 
-    equal(div.find(".k-state-active").index(), 0);
+    assert.equal(div.find(".k-state-active").index(), 0);
 });
 
-test("in rtl and vertical layout selects prev on UP", function() {
+it("in rtl and vertical layout selects prev on UP", function() {
     div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
     addItems(3);
 
@@ -281,10 +280,10 @@ test("in rtl and vertical layout selects prev on UP", function() {
         keyCode: keys.UP
     });
 
-    equal(div.find(".k-state-active").index(), 2);
+    assert.equal(div.find(".k-state-active").index(), 2);
 });
 
-test("in rtl and vertical layout does not change selection on LEFT", function() {
+it("in rtl and vertical layout does not change selection on LEFT", function() {
     div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
     addItems(3);
 
@@ -297,10 +296,10 @@ test("in rtl and vertical layout does not change selection on LEFT", function() 
         keyCode: keys.LEFT
     });
 
-    equal(div.find(".k-state-active").index(), 0);
+    assert.equal(div.find(".k-state-active").index(), 0);
 });
 
-test("in rtl and vertical layout selects next on DOWN", function() {
+it("in rtl and vertical layout selects next on DOWN", function() {
     div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
     addItems(3);
 
@@ -313,10 +312,10 @@ test("in rtl and vertical layout selects next on DOWN", function() {
         keyCode: keys.DOWN
     });
 
-    equal(div.find(".k-state-active").index(), 1);
+    assert.equal(div.find(".k-state-active").index(), 1);
 });
 
-test("in rtl and vertical layout does not change selection on RIGHT", function() {
+it("in rtl and vertical layout does not change selection on RIGHT", function() {
     div.addClass("k-rtl").kendoTabStrip({tabPosition: "left", animation: false});
     addItems(3);
 
@@ -329,10 +328,10 @@ test("in rtl and vertical layout does not change selection on RIGHT", function()
         keyCode: keys.RIGHT
     });
 
-    equal(div.find(".k-state-active").index(), 0);
+    assert.equal(div.find(".k-state-active").index(), 0);
 });
 
-test("focuses prev item if disabled", function() {
+it("focuses prev item if disabled", function() {
     div.kendoTabStrip({tabPosition: "left"});
     addItems(3);
 
@@ -349,11 +348,11 @@ test("focuses prev item if disabled", function() {
 
     var firstItem = div.find(".k-item:first");
     var item = div.find(".k-item").eq(1);
-    ok(item.hasClass("k-state-focused"));
-    ok(!firstItem.hasClass("k-state-active"));
+    assert.isOk(item.hasClass("k-state-focused"));
+    assert.isOk(!firstItem.hasClass("k-state-active"));
 });
 
-test("selects focused item on ENTER", function() {
+it("selects focused item on ENTER", function() {
     div.kendoTabStrip();
     addItems(3);
 
@@ -368,10 +367,10 @@ test("selects focused item on ENTER", function() {
         keyCode: keys.ENTER
     });
 
-    equal(tabstrip.select()[0], item[0]);
+    assert.equal(tabstrip.select()[0], item[0]);
 });
 
-test("selects focused item on SPACEBAR", function() {
+it("selects focused item on SPACEBAR", function() {
     div.kendoTabStrip();
     addItems(3);
 
@@ -386,10 +385,10 @@ test("selects focused item on SPACEBAR", function() {
         keyCode: keys.SPACEBAR
     });
 
-    equal(tabstrip.select()[0], item[0]);
+    assert.equal(tabstrip.select()[0], item[0]);
 });
 
-test("makes clicked element focused", function() {
+it("makes clicked element focused", function() {
     div.kendoTabStrip();
     addItems(3);
 
@@ -398,20 +397,20 @@ test("makes clicked element focused", function() {
 
     div.focus();
     tabstrip._click(item);
-    equal(tabstrip._focused[0], item[0]);
+    assert.equal(tabstrip._focused[0], item[0]);
 });
 
-test("prevents default action event", function() {
-    div = $('<div class="k-widget k-tabstrip k-header" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-state-default k-state-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item k-state-default"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-state-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(QUnit.fixture);
+it("prevents default action event", function() {
+    div = $('<div class="k-widget k-tabstrip k-header" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-state-default k-state-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item k-state-default"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-state-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(Mocha.fixture);
     var tabstrip = new kendo.ui.TabStrip(div)
     div.focus();
     tabstrip.tabGroup.children().eq(1).attr("data-animating", true);
 
-    equal(tabstrip._click(div.find(".k-item").eq(1)), true);
+    assert.equal(tabstrip._click(div.find(".k-item").eq(1)), true);
 });
 
-test("focuses wrapper on item click", function() {
-    var tabStripHtml = $('<div><ul></ul></div>').appendTo(QUnit.fixture);
+it("focuses wrapper on item click", function() {
+    var tabStripHtml = $('<div><ul></ul></div>').appendTo(Mocha.fixture);
     var ts = tabStripHtml.kendoTabStrip().data("kendoTabStrip");
 
     ts.append({
@@ -428,14 +427,14 @@ test("focuses wrapper on item click", function() {
 
     tabStripHtml.find(".k-item:first").click();
 
-    equal(ts.wrapper[0], document.activeElement);
+    assert.equal(ts.wrapper[0], document.activeElement);
 
     ts.destroy();
     tabStripHtml.remove();
 });
 
-test("does not focus wrapper when click input element", function() {
-    var tabStripHtml = $('<div><ul></ul></div>').appendTo(QUnit.fixture);
+it("does not focus wrapper when click input element", function() {
+    var tabStripHtml = $('<div><ul></ul></div>').appendTo(Mocha.fixture);
     var ts = tabStripHtml.kendoTabStrip().data("kendoTabStrip");
 
     ts.append({
@@ -454,9 +453,10 @@ test("does not focus wrapper when click input element", function() {
 
     $("#input1").click();
 
-    notEqual(ts.wrapper[0], document.activeElement);
+    assert.notEqual(ts.wrapper[0], document.activeElement);
 
     ts.destroy();
     tabStripHtml.remove();
 });
-})();
+    });
+}());

@@ -46,12 +46,12 @@ TESTS.beforeTestFiles.push('tests/jasmine-boot.js');
 var defaultOptions = {
     reportSlowerThan: 500,
     basePath: '',
-    frameworks: ['qunit'],
+    frameworks: ['mocha', 'chai'],
     preprocessors: {
         'tests/**/.html': [],
         'tests/**/*-fixture.html': ['html2js']
     },
-    reporters: ['progress'],
+    reporters: ['spec'],
     colors: true,
     autoWatch: true,
     browsers: browsers,
@@ -61,7 +61,11 @@ var defaultOptions = {
             flags: ['--no-sandbox']
         }
     },
-
+    client: {
+        mocha: {
+            timeout: 10000
+        }
+    },
     junitReporter: {
       outputDir: '.',
       outputFile: argv['junit-results']
@@ -98,26 +102,13 @@ var flavours = {
         )
     },
 
-    unit: {
+    mocha: {
         files: [].concat(
             TESTS.beforeTestFiles,
             allKendoFiles,
             TESTS.afterTestFiles,
             tests
         )
-    },
-
-    legacyUnit: {
-        browsers: browserOption ? [ browserOption ] : [],
-
-        files: [].concat(
-            TESTS.beforeTestFiles,
-            allKendoFiles,
-            TESTS.afterTestFiles,
-            tests
-        ).filter(function(x) {
-            return !/(themeuilder|less)\.js|angular/i.test(x);
-        })
     }
 };
 

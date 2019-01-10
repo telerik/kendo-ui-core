@@ -57,59 +57,58 @@ $.fn.type = function(value) {
             textRange.collapse(false);
             textRange.select();
         }
-    });
+        });
 };
 
-module("kendo.ui.AutoComplete suggestion", {
-    setup: function() {
-        input = $("<input>").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
-    }
-});
+describe("kendo.ui.AutoComplete suggestion", function () {
+    beforeEach(function() {
+        input = $("<input>").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("pressing enter calls triggers change", 1, function() {
+it("pressing enter calls triggers change", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         suggest: true,
         change: function() {
-            ok(true);
+            assert.isOk(true);
         }
-    });
+        });
 
     autocomplete.search("b");
     input.focus().press(kendo.keys.DOWN);
     input.press(kendo.keys.ENTER);
 });
 
-test("pressing enter triggers change when custom value is entered", 1, function() {
+it("pressing enter triggers change when custom value is entered", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         suggest: true,
         change: function() {
-            ok(true);
+            assert.isOk(true);
         }
-    });
+        });
 
     input.focus().val("test").press(kendo.keys.ENTER);
 });
 
-test("pressing tab calls _blur", 1, function() {
+it("pressing tab calls _blur", function() {
     var blurWasCalled, autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         suggest: true
     });
 
     autocomplete._blur = function(li) {
-        ok(true);
+        assert.isOk(true);
     };
 
     autocomplete.current = autocomplete.ul.children().first();
     input.focus().press(kendo.keys.TAB);
 });
 
-test("current popup item completes the value of the input if suggest is enabled", function() {
+it("current popup item completes the value of the input if suggest is enabled", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         suggest: true
@@ -119,11 +118,11 @@ test("current popup item completes the value of the input if suggest is enabled"
     input.type("b");
     autocomplete.search();
 
-    equal(input.val(), "baz");
-    equal(input.selectedText(), "az");
+    assert.equal(input.val(), "baz");
+    assert.equal(input.selectedText(), "az");
 });
 
-test("current highlighted item completes the value of the input if suggest is enabled", function() {
+it("current highlighted item completes the value of the input if suggest is enabled", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         highlightFirst: true,
@@ -135,11 +134,11 @@ test("current highlighted item completes the value of the input if suggest is en
     autocomplete.search();
     input.press(kendo.keys.DOWN);
 
-    equal(input.val(), "bar");
-    equal(input.selectedText(), "ar");
+    assert.equal(input.val(), "bar");
+    assert.equal(input.selectedText(), "ar");
 });
 
-test("suggestion does not suggest on backspace", function() {
+it("suggestion does not suggest on backspace", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -148,10 +147,10 @@ test("suggestion does not suggest on backspace", function() {
     input.type("b");
     autocomplete._last = kendo.keys.BACKSPACE; //backspace is clicked
     autocomplete.suggest("baz");
-    equal(input.val(), "b");
+    assert.equal(input.val(), "b");
 });
 
-test("suggestion does not suggest on delete", function() {
+it("suggestion does not suggest on delete", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -160,11 +159,11 @@ test("suggestion does not suggest on delete", function() {
     input.type("b");
     autocomplete._last = kendo.keys.DELETE; //delete is clicked
     autocomplete.suggest("baz");
-    equal(input.val(), "b");
+    assert.equal(input.val(), "b");
 });
 
 
-test("suggestion selects the remainder of the word", function() {
+it("suggestion selects the remainder of the word", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -172,10 +171,10 @@ test("suggestion selects the remainder of the word", function() {
     input.focus();
     input.type("b");
     autocomplete.suggest("baz");
-    equal(input.selectedText(), "az");
+    assert.equal(input.selectedText(), "az");
 });
 
-test("suggestion selects the remainder of the second word", function() {
+it("suggestion selects the remainder of the second word", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
@@ -184,10 +183,10 @@ test("suggestion selects the remainder of the second word", function() {
     input.type("b");
     autocomplete.suggest("baz");
     autocomplete.suggest("bar");
-    equal(input.selectedText(), "ar");
+    assert.equal(input.selectedText(), "ar");
 });
 
-test("separator", function() {
+it("separator", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         separator: ", "
@@ -199,10 +198,10 @@ test("separator", function() {
     input.press(kendo.keys.DOWN);
     input.press(kendo.keys.ENTER);
 
-    equal(input.val(), "baz, ");
+    assert.equal(input.val(), "baz, ");
 });
 
-test("suggestion should suggest correctly", function() {
+it("suggestion should suggest correctly", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["Cotton", "bar"]
     });
@@ -211,11 +210,11 @@ test("suggestion should suggest correctly", function() {
     input.type("Co");
     autocomplete.suggest("Cotton");
 
-    equal(input.val(), "Cotton");
-    equal(input.selectedText(), "tton");
+    assert.equal(input.val(), "Cotton");
+    assert.equal(input.selectedText(), "tton");
 });
 
-asyncTest("suggestion appends only the rest of the text (filter:contains)", 1, function() {
+it("suggestion appends only the rest of the text (filter:contains)", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         filter: "contains",
@@ -229,12 +228,12 @@ asyncTest("suggestion appends only the rest of the text (filter:contains)", 1, f
     autocomplete.search();
 
     setTimeout(function() {
-        start();
-        equal(input.val(), "oo");
+        assert.equal(input.val(), "oo");
+        done();
     }, 200);
 });
 
-test("suggestion should use dataItem.text instead of li.text()", function() {
+it("suggestion should use dataItem.text instead of li.text()", function() {
     var autocomplete = new AutoComplete(input, {
             dataSource: ["foo", "bar"],
             template: "#=data#<span>List:</span>#=data#"
@@ -245,10 +244,10 @@ test("suggestion should use dataItem.text instead of li.text()", function() {
     autocomplete.search();
 
     autocomplete.suggest(autocomplete.ul.children(":first"));
-    equal(input.val(), "foo");
+    assert.equal(input.val(), "foo");
 });
 
-test("separator and suggestion", function() {
+it("separator and suggestion", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         suggest: true,
@@ -260,11 +259,11 @@ test("separator and suggestion", function() {
     autocomplete.search();
     autocomplete.suggest("baz");
 
-    equal(input.selectedText(), "az");
-    equal(input.val(), "baz, ");
+    assert.equal(input.selectedText(), "az");
+    assert.equal(input.val(), "baz, ");
 });
 
-test("separator and suggesting second word", function() {
+it("separator and suggesting second word", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         suggest: true,
@@ -276,11 +275,11 @@ test("separator and suggesting second word", function() {
     autocomplete.search();
     autocomplete.suggest("bar");
 
-    equal(input.selectedText(), "ar");
-    equal(input.val(), "baz, bar, ");
+    assert.equal(input.selectedText(), "ar");
+    assert.equal(input.val(), "baz, bar, ");
 });
 
-test("separator and selecting a word", function() {
+it("separator and selecting a word", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         suggest: true,
@@ -291,10 +290,10 @@ test("separator and selecting a word", function() {
 
     input.focus();
     autocomplete.select(autocomplete.ul.children().eq(0));
-    equal(input.val(), "foo, ");
+    assert.equal(input.val(), "foo, ");
 });
 
-test("suggest with empty string clears selection", function() {
+it("suggest with empty string clears selection", function() {
     var autocomplete = new AutoComplete(input, {
         suggest: true
     });
@@ -302,12 +301,12 @@ test("suggest with empty string clears selection", function() {
     input.focus();
     input.type("b");
     autocomplete.suggest("bar");
-    equal(input.selectedText(), "ar");
+    assert.equal(input.selectedText(), "ar");
     autocomplete.suggest("");
-    equal(input.val(), "b");
+    assert.equal(input.val(), "b");
 });
 
-test("suggest with empty string clears selection and adheres to separators", function() {
+it("suggest with empty string clears selection and adheres to separators", function() {
     var autocomplete = new AutoComplete(input, {
         suggest: true,
         separator: ", "
@@ -316,25 +315,25 @@ test("suggest with empty string clears selection and adheres to separators", fun
     input.focus();
     input.type("foo, b");
     autocomplete.suggest("bar");
-    equal(input.selectedText(), "ar");
+    assert.equal(input.selectedText(), "ar");
     autocomplete.suggest("");
-    equal(input.val(), "foo, b, ");
+    assert.equal(input.val(), "foo, b, ");
 });
 
-test("suggest with null does not throw exception", function() {
+it("suggest with null does not throw exception", function() {
     var autocomplete = new AutoComplete(input, {
         suggest: true
     });
 
     try {
         autocomplete.suggest(null);
-        ok(true);
+        assert.isOk(true);
     } catch(e) {
-        ok(false);
+        assert.isOk(false);
     }
-});
+    });
 
-asyncTest("search should filter items using filter property", 1, function() {
+it("search should filter items using filter property", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar", "bafoo"],
         filter: "contains"
@@ -342,31 +341,31 @@ asyncTest("search should filter items using filter property", 1, function() {
 
 
     autocomplete.dataSource.bind("change", function() {
-        equal(autocomplete.dataSource.view().length, 2);
-        start();
+        assert.equal(autocomplete.dataSource.view().length, 2);
+        done();
     });
 
     input.focus();
     autocomplete.search("foo");
 });
 
-asyncTest("filtering honors dataTextField", 2, function() {
+it("filtering honors dataTextField", function(done) {
     var data = [{text: "foo"}, {text: "2"}], autocomplete = new AutoComplete(input, {
         dataSource: data,
         dataTextField: "text"
     });
 
     autocomplete.dataSource.bind("change", function() {
-        equal(autocomplete.dataSource.view().length, 1);
-        equal(autocomplete.dataSource.view()[0].text, "foo");
-        start();
+        assert.equal(autocomplete.dataSource.view().length, 1);
+        assert.equal(autocomplete.dataSource.view()[0].text, "foo");
+        done();
     });
 
     input.focus();
     autocomplete.search("f");
 });
 
-test("refresh method suggests if no item is highlighted", 2, function() {
+it("refresh method suggests if no item is highlighted", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         filter: "startswith",
@@ -379,11 +378,11 @@ test("refresh method suggests if no item is highlighted", 2, function() {
     input.val("f");
     autocomplete.search("f");
 
-    equal(autocomplete.value(), "foo");
-    equal(autocomplete.current(), null);
+    assert.equal(autocomplete.value(), "foo");
+    assert.equal(autocomplete.current(), null);
 });
 
-test("suggest method append text without modifying the user input", 1, function() {
+it("suggest method append text without modifying the user input", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["Foo", "Bar"],
         filter: "contains",
@@ -396,10 +395,10 @@ test("suggest method append text without modifying the user input", 1, function(
     caret(input[0], 1);
     autocomplete.search("f");
 
-    equal(autocomplete.value(), "foo");
+    assert.equal(autocomplete.value(), "foo");
 });
 
-test("suggest method accepts an object", 1, function() {
+it("suggest method accepts an object", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: [{ name: "Foo" }, { name: "Bar" }],
         dataTextField: "name",
@@ -410,7 +409,8 @@ test("suggest method accepts an object", 1, function() {
 
     autocomplete.suggest(autocomplete.dataSource.view()[0]);
 
-    equal(autocomplete.value(), "Foo");
+    assert.equal(autocomplete.value(), "Foo");
 });
 
+    });
 }());

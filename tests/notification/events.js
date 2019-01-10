@@ -1,9 +1,25 @@
 (function() {
-    module("kendo.ui.notification events popup", {
-        teardown: teardown
-    });
+    describe("events", function () {
+        beforeEach(function() {
 
-    test("show method triggers show event with popup element as argument", 2, function() {
+        });
+        afterEach(function() {
+            if (notification) {
+                notification.destroy();
+            }
+
+            $(".k-notification").each(function(idx, element){
+                var popup = $(element).data("kendoPopup");
+                if (popup) {
+                    popup.destroy();
+                }
+                $(element).remove();
+            });
+
+
+        });
+
+    it("show method triggers show event with popup element as argument", function() {
         var triggered = false;
         var args = {};
 
@@ -16,11 +32,29 @@
 
         notification.show("foo");
 
-        ok(triggered);
-        ok(args.element && args.element.length && args.element.length == 1);
+        assert.isOk(triggered);
+        assert.isOk(args.element && args.element.length && args.element.length == 1);
     });
 
-    test("notification hide triggers hide event with popup element as argument", 2, function() {
+    it("show method triggers show event with static element as argument", function() {
+        var triggered = false;
+        var args = {};
+
+        createNotification({
+            appendTo: Mocha.fixture,
+            show: function(e) {
+                triggered = true;
+                args = e;
+            }
+        });
+
+        notification.show("foo");
+
+        assert.isOk(triggered);
+        assert.isOk(args.element && args.element.length && args.element.length == 1);
+    });
+
+    it("notification hide triggers hide event with popup element as argument", function() {
         var triggered = false;
         var args = {};
 
@@ -35,38 +69,16 @@
 
         notification.hide();
 
-        ok(triggered);
-        ok(args.element && args.element.length && args.element.length == 1);
+        assert.isOk(triggered);
+        assert.isOk(args.element && args.element.length && args.element.length == 1);
     });
 
-    module("kendo.ui.notification events static", {
-        teardown: teardown
-    });
-
-    test("show method triggers show event with static element as argument", 2, function() {
+    it("notification hide triggers hide event with static element as argument", function() {
         var triggered = false;
         var args = {};
 
         createNotification({
-            appendTo: QUnit.fixture,
-            show: function(e) {
-                triggered = true;
-                args = e;
-            }
-        });
-
-        notification.show("foo");
-
-        ok(triggered);
-        ok(args.element && args.element.length && args.element.length == 1);
-    });
-
-    test("notification hide triggers hide event with static element as argument", 2, function() {
-        var triggered = false;
-        var args = {};
-
-        createNotification({
-            appendTo: QUnit.fixture,
+            appendTo: Mocha.fixture,
             hide: function(e) {
                 triggered = true;
                 args = e;
@@ -77,7 +89,9 @@
 
         notification.hide();
 
-        ok(triggered);
-        ok(args.element && args.element.length && args.element.length == 1);
+        assert.isOk(triggered);
+        assert.isOk(args.element && args.element.length && args.element.length == 1);
     });
-})();
+
+    });
+}());

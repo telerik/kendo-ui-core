@@ -1,62 +1,62 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input,
-        STATE_INVALID ="k-state-invalid",
+        STATE_INVALID = "k-state-invalid",
         keyPressA = $.Event("keypress", { keyCode: 65 });
 
-    module("kendo.ui.MaskedTextBox validation", {
-        setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("input has hidden decoration by default.", function () {
-         var maskedtextbox = new MaskedTextBox(input);
-
-         ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
-    });
-
-    test("the keypress event adds invalid decoration for invalid value.", function () {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0"
+    describe("kendo.ui.MaskedTextBox validation", function() {
+        beforeEach(function() {
+            input = $("<input />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
-        maskedtextbox.value("a");
+        it("input has hidden decoration by default.", function() {
+            var maskedtextbox = new MaskedTextBox(input);
 
-        ok(maskedtextbox.wrapper.hasClass(STATE_INVALID));
-    });
-
-    test("the keypress event does not add invalid decoration for valid value.", function () {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0"
+            assert.isOk(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
         });
 
-        maskedtextbox.value("1");
+        it("the keypress event adds invalid decoration for invalid value.", function() {
+            var maskedtextbox = new MaskedTextBox(input, {
+                mask: "0"
+            });
 
-        ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
-    });
+            maskedtextbox.value("a");
 
-    asyncTest("invalid decoration is removed after some time.", 1, function () {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0"
+            assert.isOk(maskedtextbox.wrapper.hasClass(STATE_INVALID));
         });
 
-        maskedtextbox.value("a");
-        setTimeout(function () {
-            start();
-            ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
-        }, 120);
-    });
+        it("the keypress event does not add invalid decoration for valid value.", function() {
+            var maskedtextbox = new MaskedTextBox(input, {
+                mask: "0"
+            });
 
-    test("on init control must be in valid state.", function () {
-        input.val("555 123 4567");
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "(999) 000-0000"
+            maskedtextbox.value("1");
+
+            assert.isOk(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
         });
 
-        ok(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
+        it("invalid decoration is removed after some time.", function(done) {
+            var maskedtextbox = new MaskedTextBox(input, {
+                mask: "0"
+            });
+
+            maskedtextbox.value("a");
+            setTimeout(function() {
+                assert.isOk(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
+                done();
+            }, 120);
+        });
+
+        it("on init control must be in valid state.", function() {
+            input.val("555 123 4567");
+            var maskedtextbox = new MaskedTextBox(input, {
+                mask: "(999) 000-0000"
+            });
+
+            assert.isOk(!maskedtextbox.wrapper.hasClass(STATE_INVALID));
+        });
     });
-})();
+}());

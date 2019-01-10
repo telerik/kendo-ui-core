@@ -1,325 +1,325 @@
 (function() {
     var dom;
 
-    module("kendo.ui.NumericTextBox MVVM", {
-        setup: function() {
+    describe("kendo.ui.NumericTextBox MVVM", function() {
+        beforeEach(function() {
 
 
             window.textBoxChange = function() {
-                ok(true);
+                assert.isOk(true);
             }
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
 
             kendo.destroy(dom);
 
             delete window.textBoxChange;
-        }
-    });
-
-    test("initializes a numerictextbox when data role is numerictextbox", function() {
-        dom = $('<input data-role="numerictextbox"/>');
-
-        kendo.bind(dom);
-
-        ok(dom.data("kendoNumericTextBox") instanceof kendo.ui.NumericTextBox);
-    });
-
-    test("initializes a options from data attributes", function() {
-        dom = $('<input data-role="numerictextbox" data-format="p0" />');
-
-        kendo.bind(dom);
-
-        var numerictextbox = dom.data("kendoNumericTextBox");
-
-        equal(numerictextbox.options.format, "p0");
-    });
-
-    test("initializes value from view model", function() {
-        dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
-
-        kendo.bind(dom, { value: 42 } );
-
-        equal(dom.data("kendoNumericTextBox").value(), 42);
-    });
-
-    test("changing a value updates the view model", function() {
-        dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: null });
-
-        kendo.bind(dom, observable);
-
-        dom.data("kendoNumericTextBox").value(42);
-        dom.data("kendoNumericTextBox").trigger("change");
-
-        equal(observable.value, 42);
-    });
-
-    test("binding numerictextbox initialized before binding", function() {
-        dom = $('<input data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: null });
-        observable.value = 42;
-
-        dom.kendoNumericTextBox();
-
-        kendo.bind(dom, observable);
-
-        equal(dom.data("kendoNumericTextBox").value(), 42);
-    });
-
-    test("binding numerictextbox initialized after binding", function() {
-        dom = $('<input data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: null });
-        observable.value = 42;
-
-        kendo.bind(dom, observable);
-
-        dom.kendoNumericTextBox();
-
-        equal(dom.data("kendoNumericTextBox").value(), 42);
-    });
-
-    test("updating model value updates the UI", function() {
-        dom = $('<input data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: null });
-
-        kendo.bind(dom, observable);
-
-        dom.kendoNumericTextBox();
-
-        observable.set("value", 42)
-        equal(dom.data("kendoNumericTextBox").value(), 42);
-    });
-
-    test("binding to unexisting field clears widget value", function() {
-        dom = $('<input data-bind="value:test" />');
-
-        var observable = kendo.observable({ value: null });
-
-        dom.kendoNumericTextBox({
-            value: 10
         });
 
-        kendo.bind(dom, observable);
+        it("initializes a numerictextbox when data role is numerictextbox", function() {
+            dom = $('<input data-role="numerictextbox"/>');
 
-        equal(dom.data("kendoNumericTextBox").value(), null);
-    });
+            kendo.bind(dom);
 
-    test("bindings are removed if element is rebind", 1, function() {
-        dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
-
-        var observable = kendo.observable({ value: 42 });
-
-        kendo.bind(dom, observable);
-
-        destroy = stub(dom[0].kendoBindingTarget, "destroy");
-
-        kendo.bind(dom, observable);
-
-        equal(destroy.calls("destroy"), 1);
-    });
-
-    test("binding target is destroyed", 1, function() {
-        dom = $('<input data-role="numerictextbox" data-bind="value:value"/>');
-
-        var observable = kendo.observable({ value: null });
-
-        kendo.bind(dom, observable);
-
-        destroy = stub(dom[0].kendoBindingTarget, "destroy");
-
-        kendo.bind(dom, observable);
-
-        equal(destroy.calls("destroy"), 1);
-    });
-
-    test("dataBound event is raised if attached as option", 1, function() {
-        dom = $('<input data-role="numerictextbox" data-change="textBoxChange" />');
-
-        var observable = kendo.observable({
-            items: [{text:"foo"}, {text:"bar"}]
+            assert.isOk(dom.data("kendoNumericTextBox") instanceof kendo.ui.NumericTextBox);
         });
 
-        kendo.bind(dom, observable);
-        dom.data("kendoNumericTextBox").trigger("change");
-    });
+        it("initializes a options from data attributes", function() {
+            dom = $('<input data-role="numerictextbox" data-format="p0" />');
 
-    test("dataBound event is raised if attached as option to a already initialized numerictextbox", 1, function() {
-        dom = $('<input data-change="textBoxChange" />').kendoNumericTextBox();
+            kendo.bind(dom);
 
-        var observable = kendo.observable({
-            items: [{text:"foo"}, {text:"bar"}]
+            var numerictextbox = dom.data("kendoNumericTextBox");
+
+            assert.equal(numerictextbox.options.format, "p0");
         });
 
-        kendo.bind(dom, observable);
-        dom.data("kendoNumericTextBox").trigger("change");
-    });
+        it("initializes value from view model", function() {
+            dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
 
-    test("binding enabled to false disables the widget", function() {
-        dom = $('<input data-bind="enabled:enabled" />').kendoNumericTextBox();
+            kendo.bind(dom, { value: 42 });
 
-        var observable = kendo.observable({
-            enabled: false
+            assert.equal(dom.data("kendoNumericTextBox").value(), 42);
         });
 
-        kendo.bind(dom, observable);
+        it("changing a value updates the view model", function() {
+            dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
 
-        ok(dom.is(":disabled"));
-    });
+            var observable = kendo.observable({ value: null });
 
-    test("binding enabled to true enables the widget", function() {
-        dom = $('<input data-bind="enabled:enabled" disabled="disabled" />').kendoNumericTextBox();
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            enabled: true
+            dom.data("kendoNumericTextBox").value(42);
+            dom.data("kendoNumericTextBox").trigger("change");
+
+            assert.equal(observable.value, 42);
         });
 
-        kendo.bind(dom, observable);
+        it("binding numerictextbox initialized before binding", function() {
+            dom = $('<input data-bind="value:value" />');
 
-        ok(!dom.is(":disabled"));
-    });
+            var observable = kendo.observable({ value: null });
+            observable.value = 42;
 
-    test("binding disable to true disables the widget", function() {
-        dom = $('<input data-bind="disabled:disabled" disabled="disabled"  data-role="numerictextbox" />');
+            dom.kendoNumericTextBox();
 
-        var observable = kendo.observable({
-            disabled: false
+            kendo.bind(dom, observable);
+
+            assert.equal(dom.data("kendoNumericTextBox").value(), 42);
         });
 
-        kendo.bind(dom, observable);
+        it("binding numerictextbox initialized after binding", function() {
+            dom = $('<input data-bind="value:value" />');
 
-        ok(!dom.is(":disabled"));
-    });
+            var observable = kendo.observable({ value: null });
+            observable.value = 42;
 
-    test("binding disabled to false enables the widget", function() {
-        dom = $('<input data-bind="disabled:disabled" data-role="numerictextbox" />');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            disabled: true
+            dom.kendoNumericTextBox();
+
+            assert.equal(dom.data("kendoNumericTextBox").value(), 42);
         });
 
-        kendo.bind(dom, observable);
+        it("updating model value updates the UI", function() {
+            dom = $('<input data-bind="value:value" />');
 
-        ok(dom.is(":disabled"));
-    });
+            var observable = kendo.observable({ value: null });
 
-    test("binding visible to false hides the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="numerictextbox"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            visible: false
+            dom.kendoNumericTextBox();
+
+            observable.set("value", 42)
+            assert.equal(dom.data("kendoNumericTextBox").value(), 42);
         });
 
-        kendo.bind(dom, observable);
+        it("binding to unexisting field clears widget value", function() {
+            dom = $('<input data-bind="value:test" />');
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "Display is 'none'");
-    });
+            var observable = kendo.observable({ value: null });
 
-    test("binding visible to true shows the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="numerictextbox" style="display:none"/>');
+            dom.kendoNumericTextBox({
+                value: 10
+            });
 
-        var observable = kendo.observable({
-            visible: true
+            kendo.bind(dom, observable);
+
+            assert.equal(dom.data("kendoNumericTextBox").value(), null);
         });
 
-        kendo.bind(dom, observable);
+        it("bindings are removed if element is rebind", function() {
+            dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "Display is not 'none'");
-    });
+            var observable = kendo.observable({ value: 42 });
 
-    test("changing visible to false hides the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="numerictextbox"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            visible: true
+            destroy = stub(dom[0].kendoBindingTarget, "destroy");
+
+            kendo.bind(dom, observable);
+
+            assert.equal(destroy.calls("destroy"), 1);
         });
 
-        kendo.bind(dom, observable);
-        observable.set("visible", false);
+        it("binding target is destroyed", function() {
+            dom = $('<input data-role="numerictextbox" data-bind="value:value"/>');
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "Display is 'none'");
-    });
+            var observable = kendo.observable({ value: null });
 
-    test("changing visible to true shows the widget", function() {
-        dom = $('<input data-bind="visible:visible" data-role="numerictextbox"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            visible: false
+            destroy = stub(dom[0].kendoBindingTarget, "destroy");
+
+            kendo.bind(dom, observable);
+
+            assert.equal(destroy.calls("destroy"), 1);
         });
 
-        kendo.bind(dom, observable);
-        observable.set("visible", true);
+        it("dataBound event is raised if attached as option", function() {
+            dom = $('<input data-role="numerictextbox" data-change="textBoxChange" />');
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "Display is not 'none'");
-    });
+            var observable = kendo.observable({
+                items: [{ text: "foo" }, { text: "bar" }]
+            });
 
-    test("binding invisible to true hides the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox"/>');
-
-        var observable = kendo.observable({
-            invisible: true
+            kendo.bind(dom, observable);
+            dom.data("kendoNumericTextBox").trigger("change");
         });
 
-        kendo.bind(dom, observable);
+        it("dataBound event is raised if attached as option to a already initialized numerictextbox", function() {
+            dom = $('<input data-change="textBoxChange" />').kendoNumericTextBox();
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "display is 'none'");
-    });
+            var observable = kendo.observable({
+                items: [{ text: "foo" }, { text: "bar" }]
+            });
 
-    test("binding invisible to false shows the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox" style="display:none"/>');
-
-        var observable = kendo.observable({
-            invisible: false
+            kendo.bind(dom, observable);
+            dom.data("kendoNumericTextBox").trigger("change");
         });
 
-        kendo.bind(dom, observable);
+        it("binding enabled to false disables the widget", function() {
+            dom = $('<input data-bind="enabled:enabled" />').kendoNumericTextBox();
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "display is not 'none'");
-    });
+            var observable = kendo.observable({
+                enabled: false
+            });
 
-    test("changing invisible to true hides the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            invisible: false
+            assert.isOk(dom.is(":disabled"));
         });
 
-        kendo.bind(dom, observable);
-        observable.set("invisible", true);
+        it("binding enabled to true enables the widget", function() {
+            dom = $('<input data-bind="enabled:enabled" disabled="disabled" />').kendoNumericTextBox();
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "display is 'none'");
-    });
+            var observable = kendo.observable({
+                enabled: true
+            });
 
-    test("changing invisible to false shows the widget", function() {
-        dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            invisible: true
+            assert.isOk(!dom.is(":disabled"));
         });
 
-        kendo.bind(dom, observable);
-        observable.set("invisible", false);
+        it("binding disable to true disables the widget", function() {
+            dom = $('<input data-bind="disabled:disabled" disabled="disabled"  data-role="numerictextbox" />');
 
-        ok(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "display is not 'none'");
-    });
+            var observable = kendo.observable({
+                disabled: false
+            });
 
-    test("change event reflects value modifications", 1, function() {
-        dom = $('<input data-bind="value:value, events:{change: changeEvent}" data-role="numerictextbox"/>');
+            kendo.bind(dom, observable);
 
-        var observable = kendo.observable({
-            value: 0,
-            changeEvent: function() {
-                equal(this.get("value"), 42);
-            }
+            assert.isOk(!dom.is(":disabled"));
         });
 
-        kendo.bind(dom, observable);
+        it("binding disabled to false enables the widget", function() {
+            dom = $('<input data-bind="disabled:disabled" data-role="numerictextbox" />');
 
-        dom.data("kendoNumericTextBox").value(42);
-        dom.data("kendoNumericTextBox").trigger("change");
+            var observable = kendo.observable({
+                disabled: true
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.is(":disabled"));
+        });
+
+        it("binding visible to false hides the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="numerictextbox"/>');
+
+            var observable = kendo.observable({
+                visible: false
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "Display is 'none'");
+        });
+
+        it("binding visible to true shows the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="numerictextbox" style="display:none"/>');
+
+            var observable = kendo.observable({
+                visible: true
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "Display is not 'none'");
+        });
+
+        it("changing visible to false hides the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="numerictextbox"/>');
+
+            var observable = kendo.observable({
+                visible: true
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("visible", false);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "Display is 'none'");
+        });
+
+        it("changing visible to true shows the widget", function() {
+            dom = $('<input data-bind="visible:visible" data-role="numerictextbox"/>');
+
+            var observable = kendo.observable({
+                visible: false
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("visible", true);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "Display is not 'none'");
+        });
+
+        it("binding invisible to true hides the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox"/>');
+
+            var observable = kendo.observable({
+                invisible: true
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "display is 'none'");
+        });
+
+        it("binding invisible to false shows the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox" style="display:none"/>');
+
+            var observable = kendo.observable({
+                invisible: false
+            });
+
+            kendo.bind(dom, observable);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "display is not 'none'");
+        });
+
+        it("changing invisible to true hides the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox"/>');
+
+            var observable = kendo.observable({
+                invisible: false
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("invisible", true);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") == "none", "display is 'none'");
+        });
+
+        it("changing invisible to false shows the widget", function() {
+            dom = $('<input data-bind="invisible:invisible" data-role="numerictextbox"/>');
+
+            var observable = kendo.observable({
+                invisible: true
+            });
+
+            kendo.bind(dom, observable);
+            observable.set("invisible", false);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "display is not 'none'");
+        });
+
+        it("change event reflects value modifications", function() {
+            dom = $('<input data-bind="value:value, events:{change: changeEvent}" data-role="numerictextbox"/>');
+
+            var observable = kendo.observable({
+                value: 0,
+                changeEvent: function() {
+                    assert.equal(this.get("value"), 42);
+                }
+            });
+
+            kendo.bind(dom, observable);
+
+            dom.data("kendoNumericTextBox").value(42);
+            dom.data("kendoNumericTextBox").trigger("change");
+        });
     });
-})();
+}());

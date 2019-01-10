@@ -2,101 +2,101 @@
     var TimePicker = kendo.ui.TimePicker,
         input, instance;
 
-    module("kendo.ui.TimePicker ARIA", {
-        setup: function() {
-            input = $("<input id='test' />").appendTo(QUnit.fixture);
+    describe("kendo.ui.TimePicker ARIA", function() {
+        beforeEach(function() {
+            input = $("<input id='test' />").appendTo(Mocha.fixture);
             instance = new TimePicker(input);
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             input.data("kendoTimePicker").destroy();
             input.parents(".k-widget").remove();
-        }
+        });
+
+        it("TimePicker adds role to the input element", function() {
+            assert.equal(input.attr("role"), "combobox");
+        });
+
+        it("TimePicker adds aria-expanded", function() {
+            assert.equal(input.attr("aria-expanded"), "false");
+        });
+
+        it("TimePicker adds aria-owns", function() {
+            assert.equal(input.attr("aria-owns"), instance.timeView.ul.attr("id"));
+        });
+
+        it("TimePicker sets aria-expanded=true", function() {
+            instance.open();
+            assert.equal(input.attr("aria-expanded"), "true");
+        });
+
+        it("TimePicker sets aria-expanded=false", function() {
+            instance.open();
+            instance.close();
+            assert.equal(input.attr("aria-expanded"), "false");
+        });
+
+        it("TimePicker adds role to the toggle button", function() {
+            assert.equal(instance._arrow.attr("role"), "button");
+        });
+
+        it("TimePicker adds aria-controls to the toggle button", function() {
+            assert.equal(instance._arrow.attr("aria-controls"), instance.timeView.ul.attr("id"));
+        });
+
+        it("TimePicker sets id to the ul element", function() {
+            assert.equal(instance.timeView.ul.attr("id"), "test_timeview");
+        });
+
+        it("TimePicker adds role to the popup", function() {
+            assert.equal(instance.timeView.ul.attr("role"), "listbox");
+        });
+
+        it("TimePicker adds aria-hidden to the popup", function() {
+            assert.equal(instance.timeView.ul.attr("aria-hidden"), "true");
+        });
+
+        it("TimePicker sets aria-hidden=false to the popup", function() {
+            instance.open();
+            assert.equal(instance.timeView.ul.attr("aria-hidden"), "false");
+        });
+
+        it("TimePicker sets aria-hidden=true to the popup", function() {
+            instance.open();
+            instance.close();
+            assert.equal(instance.timeView.ul.attr("aria-hidden"), "true");
+        });
+
+        it("TimePicker renders li elements with role attr", function() {
+            instance.open();
+            assert.equal(instance.timeView.ul.children(":first").attr("role"), "option");
+        });
+
+        it("TimePicker sets aria-selected to the selected option", function() {
+            instance.open();
+            instance.value("12:00 AM");
+            assert.equal(instance.timeView.current().attr("aria-selected"), "true");
+        });
+
+        it("TimePicker allows only one selected option", function() {
+            instance.open();
+            instance.value("12:00 AM");
+            instance.value("2:00 AM");
+            assert.equal(instance.timeView.ul.children("[aria-selected=true]").length, 1);
+        });
+
+        it("TimePicker sets aria-activedescendant", function() {
+            instance.open();
+            instance.value("12:00 AM");
+            assert.equal(instance.element.attr("aria-activedescendant"), instance.timeView._optionID);
+        });
+
+        it("TimePicker removes aria-activedescendant", function() {
+            instance.open();
+            instance.value("12:00 AM");
+            instance.value("12:10 AM");
+            assert.equal(instance.element.attr("aria-activedescendant"), undefined);
+        });
+
+
     });
-
-    test("TimePicker adds role to the input element", function() {
-        equal(input.attr("role"), "combobox");
-    });
-
-    test("TimePicker adds aria-expanded", function() {
-        equal(input.attr("aria-expanded"), "false");
-    });
-
-    test("TimePicker adds aria-owns", function() {
-        equal(input.attr("aria-owns"), instance.timeView.ul.attr("id"));
-    });
-
-    test("TimePicker sets aria-expanded=true", function() {
-        instance.open();
-        equal(input.attr("aria-expanded"), "true");
-    });
-
-    test("TimePicker sets aria-expanded=false", function() {
-        instance.open();
-        instance.close();
-        equal(input.attr("aria-expanded"), "false");
-    });
-
-    test("TimePicker adds role to the toggle button", function() {
-        equal(instance._arrow.attr("role"), "button");
-    });
-
-    test("TimePicker adds aria-controls to the toggle button", function() {
-        equal(instance._arrow.attr("aria-controls"), instance.timeView.ul.attr("id"));
-    });
-
-    test("TimePicker sets id to the ul element", function() {
-        equal(instance.timeView.ul.attr("id"), "test_timeview");
-    });
-
-    test("TimePicker adds role to the popup", function() {
-        equal(instance.timeView.ul.attr("role"), "listbox");
-    });
-
-    test("TimePicker adds aria-hidden to the popup", function() {
-        equal(instance.timeView.ul.attr("aria-hidden"), "true");
-    });
-
-    test("TimePicker sets aria-hidden=false to the popup", function() {
-        instance.open();
-        equal(instance.timeView.ul.attr("aria-hidden"), "false");
-    });
-
-    test("TimePicker sets aria-hidden=true to the popup", function() {
-        instance.open();
-        instance.close();
-        equal(instance.timeView.ul.attr("aria-hidden"), "true");
-    });
-
-    test("TimePicker renders li elements with role attr", function() {
-        instance.open();
-        equal(instance.timeView.ul.children(":first").attr("role"), "option");
-    });
-
-    test("TimePicker sets aria-selected to the selected option", function() {
-        instance.open();
-        instance.value("12:00 AM");
-        equal(instance.timeView.current().attr("aria-selected"), "true");
-    });
-
-    test("TimePicker allows only one selected option", function() {
-        instance.open();
-        instance.value("12:00 AM");
-        instance.value("2:00 AM");
-        equal(instance.timeView.ul.children("[aria-selected=true]").length, 1);
-    });
-
-    test("TimePicker sets aria-activedescendant", function() {
-        instance.open();
-        instance.value("12:00 AM");
-        equal(instance.element.attr("aria-activedescendant"), instance.timeView._optionID);
-    });
-
-    test("TimePicker removes aria-activedescendant", function() {
-        instance.open();
-        instance.value("12:00 AM");
-        instance.value("12:10 AM");
-        equal(instance.element.attr("aria-activedescendant"), undefined);
-    });
-
-
-})();
+}());

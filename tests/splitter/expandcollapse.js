@@ -2,405 +2,411 @@
     var splitter;
     var create = SplitterHelpers.create;
 
-    module("splitter collapse", SplitterHelpers.basicModule);
+    describe("splitter collapse", function() {
+        beforeEach(SplitterHelpers.basicModule.setup);
+        afterEach(SplitterHelpers.basicModule.teardown);
 
-    test("clicking collapse arrow triggers collapse event", function() {
-        var triggered = false;
+        it("clicking collapse arrow triggers collapse event", function() {
+            var triggered = false;
 
-        splitter = create({
-            panes: [ { collapsible: true }, {} ],
-            collapse: function(e) {
-                triggered = e;
+            splitter = create({
+                panes: [{ collapsible: true }, {}],
+                collapse: function(e) {
+                    triggered = e;
+                }
+            });
+
+            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+
+            assert.isOk(triggered);
+            assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
+        });
+
+        it("collapse event can be prevented", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, {}],
+                collapse: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+
+            assert.isOk(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
+        });
+
+        it("clicking collapse arrow calls splitter.collapse", function() {
+            var called;
+
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            splitter.object.collapse = function(pane) {
+                called = pane;
+            };
+
+            splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+
+            assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
+        });
+
+        it("double-clicking splitbar next to an expanded collapsible pane should call splitter.collapse", function() {
+            var called;
+
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            splitter.object.collapse = function(pane) {
+                called = pane;
+            };
+
+            splitter.dom.find(".k-splitbar").trigger("dblclick");
+
+            assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
+        });
+
+        it("double-clicking splitbar prev to an expanded collapsible pane should call splitter.collapse", function() {
+            var called;
+
+            splitter = create({
+                panes: [{}, { collapsible: true }]
+            });
+
+            splitter.object.collapse = function(pane) {
+                called = pane;
+            };
+
+            splitter.dom.find(".k-splitbar").trigger("dblclick");
+
+            assert.equal(called, splitter.dom.find(".k-pane:last")[0]);
+        });
+    });
+
+
+    describe("splitter expand", function() {
+        beforeEach(SplitterHelpers.basicModule.setup);
+        afterEach(SplitterHelpers.basicModule.teardown);
+
+        it("clicking expand arrow triggers expand event", function() {
+            var triggered = false;
+
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}],
+                expand: function(e) {
+                    triggered = e;
+                }
+            });
+
+            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+
+            assert.isOk(triggered);
+            assert.equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
+        });
+
+        it("expand event can be prevented", function() {
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}],
+                expand: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+
+            assert.isOk(splitter.dom.find(".k-pane:first").data("pane").collapsed);
+        });
+
+        it("clicking expand arrow calls splitter.expand", function() {
+            var called;
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}]
+            });
+
+            splitter.object.expand = function(pane) {
+                called = pane;
+            };
+
+            splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+
+            assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
+        });
+
+        it("double-clicking splitbar next to an collapsed collapsible pane should call splitter.collapse", function() {
+            var called;
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}]
+            });
+
+            splitter.object.expand = function(pane) {
+                called = pane;
+            };
+
+            splitter.dom.find(".k-splitbar").trigger("dblclick");
+
+            assert.equal(called, splitter.dom.find(".k-pane:first")[0]);
+        });
+
+        it("double-clicking splitbar prev to an collapsed collapsible pane should call splitter.collapse", function() {
+            var called;
+
+            splitter = create({
+                panes: [{}, { collapsible: true, collapsed: true }]
+            });
+
+            splitter.object.expand = function(pane) {
+                called = pane;
+            };
+
+            splitter.dom.find(".k-splitbar").trigger("dblclick");
+
+            assert.equal(called, splitter.dom.find(".k-pane:last")[0]);
+        });
+
+        it("double-clicking splitbar between two collapsible panes does not trigger collapse", function() {
+            var called;
+            splitter = create({
+                panes: [{ collapsible: true }, { collapsible: true }]
+            });
+
+            splitter.object.collapse = function(pane) {
+                called = pane;
             }
+
+            splitter.dom.find(".k-splitbar").trigger("dblclick");
+
+            assert.isOk(!called);
         });
 
-        splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+        it("expanding a non-resizable pane does not make it resizable", function() {
+            splitter = create({
+                panes: [
+                    { resizable: false, collapsible: true, collapsed: true },
+                    { collapsible: false }
+                ]
+            });
 
-        ok(triggered);
-        equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
-    });
+            splitter.object.expand(".k-pane:first");
 
-    test("collapse event can be prevented", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, {} ],
-            collapse: function(e) {
-                e.preventDefault();
-            }
+            assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"))
         });
 
-        splitter.dom.find(".k-i-arrow-60-left").trigger("click");
+        it("expanding a non-resizable pane does not modify more splitbars than necessary", function() {
+            splitter = create({
+                panes: [
+                    { resizable: false, collapsible: true, collapsed: true },
+                    { collapsible: false },
+                    { collapsible: false }
+                ]
+            }, 3);
 
-        ok(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
-    });
+            splitter.object.expand(".k-pane:first");
 
-    test("clicking collapse arrow calls splitter.collapse", function() {
-        var called;
-
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
+            assert.isOk(splitter.dom.find(".k-splitbar:first").is(":not(.k-splitbar-draggable-horizontal)"));
+            assert.isOk(splitter.dom.find(".k-splitbar:last").is(".k-splitbar-draggable-horizontal"));
         });
 
-        splitter.object.collapse = function(pane) {
-            called = pane;
-        };
+        it("initially collapsed pane has an overflow:hidden style", function() {
+            splitter = create({
+                panes: [
+                    { collapsed: true },
+                    { collapsed: false },
+                    { collapsed: false }
+                ]
+            }, 3);
 
-        splitter.dom.find(".k-i-arrow-60-left").trigger("click");
-
-        equal(called, splitter.dom.find(".k-pane:first")[0]);
-    });
-
-    test("double-clicking splitbar next to an expanded collapsible pane should call splitter.collapse", function() {
-        var called;
-
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
+            assert.equal(splitter.dom.find(".k-pane:first").css("overflow"), "hidden");
         });
 
-        splitter.object.collapse = function(pane) {
-            called = pane;
-        };
+        it("expanding a previously collapsed pane removes its overflow:hidden style", function() {
+            splitter = create({
+                panes: [
+                    { collapsed: false },
+                    { collapsed: false },
+                    { collapsed: false }
+                ]
+            }, 3);
 
-        splitter.dom.find(".k-splitbar").trigger("dblclick");
+            splitter.object.collapse(".k-pane:first");
+            splitter.object.expand(".k-pane:first");
 
-        equal(called, splitter.dom.find(".k-pane:first")[0]);
-    });
-
-    test("double-clicking splitbar prev to an expanded collapsible pane should call splitter.collapse", function() {
-        var called;
-
-        splitter = create({
-            panes: [ {}, { collapsible: true } ]
+            assert.equal(splitter.dom.find(".k-pane:first").css("overflow"), "auto");
         });
 
-        splitter.object.collapse = function(pane) {
-            called = pane;
-        };
+        it("collapsing pane disables collapsing of next pane", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, { collapsible: true }]
+            });
 
-        splitter.dom.find(".k-splitbar").trigger("dblclick");
+            splitter.object.collapse(".k-pane:first");
 
-        equal(called, splitter.dom.find(".k-pane:last")[0]);
-    });
-
-
-    module("splitter expand", SplitterHelpers.basicModule);
-
-    test("clicking expand arrow triggers expand event", function() {
-        var triggered = false;
-
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ],
-            expand: function(e) {
-                triggered = e;
-            }
+            assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
+            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-arrow-60-left").length);
         });
 
-        splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+        it("collapsing pane disables collapsing of previous pane", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, { collapsible: true }]
+            });
 
-        ok(triggered);
-        equal(triggered.pane, splitter.dom.find(".k-pane:first")[0]);
-    });
+            splitter.object.collapse(".k-pane:last");
 
-    test("expand event can be prevented", function() {
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ],
-            expand: function(e) {
-                e.preventDefault();
-            }
+            assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
+            assert.isOk(!splitter.dom.find(".k-splitbar .k-i-arrow-60-right").length);
         });
 
-        splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+        it("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
+            splitter = create({
+                panes: [
+                    { collapsible: true, size: "50px" },
+                    { collapsible: true }
+                ]
+            });
 
-        ok(splitter.dom.find(".k-pane:first").data("pane").collapsed);
-    });
+            splitter.object.collapse(".k-pane:last");
 
-    test("clicking expand arrow calls splitter.expand", function() {
-        var called;
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ]
+            assert.equal(splitter.dom.find(".k-pane:first").width(), splitter.dom.width() - 7);
+            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetLeft, splitter.dom.width() - 7);
         });
 
-        splitter.object.expand = function(pane) {
-            called = pane;
-        };
+        it("collapsing the last fluid pane in vertical splitter distributes remaining size to neighbour pane", function() {
+            splitter = create({
+                orientation: "vertical",
+                panes: [
+                    { collapsible: true, size: "50px" },
+                    { collapsible: true }
+                ]
+            });
 
-        splitter.dom.find(".k-i-arrow-60-right").trigger("click");
+            splitter.object.collapse(".k-pane:last");
 
-        equal(called, splitter.dom.find(".k-pane:first")[0]);
-    });
-
-    test("double-clicking splitbar next to an collapsed collapsible pane should call splitter.collapse", function() {
-        var called;
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ]
+            assert.equal(splitter.dom.find(".k-pane:first").height(), splitter.dom.height() - 7);
+            assert.equal(splitter.dom.find(".k-splitbar:first")[0].offsetTop, splitter.dom.height() - 7);
         });
 
-        splitter.object.expand = function(pane) {
-            called = pane;
-        };
+        it("collapsing a pane adds an overflow:hidden style to it", function() {
+            splitter = create({
+                panes: [
+                    { collapsible: true },
+                    { collapsible: true }
+                ]
+            });
 
-        splitter.dom.find(".k-splitbar").trigger("dblclick");
+            splitter.object.collapse(".k-pane:first");
 
-        equal(called, splitter.dom.find(".k-pane:first")[0]);
-    });
-
-    test("double-clicking splitbar prev to an collapsed collapsible pane should call splitter.collapse", function() {
-        var called;
-
-        splitter = create({
-            panes: [ { }, { collapsible: true, collapsed: true } ]
+            assert.equal(splitter.dom.find(".k-pane:first").css("overflow"), "hidden");
         });
 
-        splitter.object.expand = function(pane) {
-            called = pane;
-        };
+        it("collapsing pane does not add overlay to frames", function() {
+            $.mockjax({
+                url: "http://foo",
+                responseText: "foo"
+            });
 
-        splitter.dom.find(".k-splitbar").trigger("dblclick");
+            splitter = create({
+                panes: [
+                    { collapsible: true },
+                    { contentUrl: "http://foo" }
+                ]
+            });
 
-        equal(called, splitter.dom.find(".k-pane:last")[0]);
-    });
+            splitter.dom.find(".k-i-arrow-60-left")
+                .trigger("mousedown")
+                .trigger("mouseup")
+                .trigger("click");
 
-    test("double-clicking splitbar between two collapsible panes does not trigger collapse", function() {
-        var called;
-        splitter = create({
-            panes: [ { collapsible: true }, { collapsible: true } ]
+            assert.equal(splitter.dom.find(".k-overlay").length, 0);
         });
 
-        splitter.object.collapse = function(pane) {
-            called = pane;
-        }
+        it("test name", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
 
-        splitter.dom.find(".k-splitbar").trigger("dblclick");
+            splitter.dom.find(".k-i-arrow-60-left")
+                .trigger("mousedown")
 
-        ok(!called);
-    });
+            splitter.dom.find(".k-overlay:first")
+                .trigger("mouseup")
+                .trigger("click");
 
-    test("expanding a non-resizable pane does not make it resizable", function() {
-        splitter = create({
-            panes: [
-                { resizable: false, collapsible: true, collapsed: true },
-                { collapsible: false }
-            ]
+            assert.equal(splitter.dom.find(".k-overlay").length, 0);
         });
 
-        splitter.object.expand(".k-pane:first");
+        it("collapsed panes can be expanded again", function() {
+            splitter = create({
+                panes: [
+                    { collapsible: true },
+                    {}
+                ]
+            });
 
-        ok(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"))
-    });
+            splitter.dom.find(".k-i-arrow-60-up").click();
 
-    test("expanding a non-resizable pane does not modify more splitbars than necessary", function() {
-        splitter = create({
-            panes: [
-                { resizable: false, collapsible: true, collapsed: true },
-                { collapsible: false },
-                { collapsible: false }
-            ]
-        }, 3);
+            splitter.dom.find(".k-i-arrow-60-down").click();
 
-        splitter.object.expand(".k-pane:first");
-
-        ok(splitter.dom.find(".k-splitbar:first").is(":not(.k-splitbar-draggable-horizontal)"));
-        ok(splitter.dom.find(".k-splitbar:last").is(".k-splitbar-draggable-horizontal"));
-    });
-
-    test("initially collapsed pane has an overflow:hidden style", function() {
-        splitter = create({
-            panes: [
-                { collapsed: true },
-                { collapsed: false },
-                { collapsed: false }
-            ]
-        }, 3);
-
-        equal(splitter.dom.find(".k-pane:first").css("overflow"), "hidden");
-    });
-
-    test("expanding a previously collapsed pane removes its overflow:hidden style", function() {
-        splitter = create({
-            panes: [
-                { collapsed: false },
-                { collapsed: false },
-                { collapsed: false }
-            ]
-        }, 3);
-
-        splitter.object.collapse(".k-pane:first");
-        splitter.object.expand(".k-pane:first");
-
-        equal(splitter.dom.find(".k-pane:first").css("overflow"), "auto");
-    });
-
-    test("collapsing pane disables collapsing of next pane", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, { collapsible: true } ]
+            assert.equal(splitter.dom.find(".k-pane:first").width(), 100);
         });
 
-        splitter.object.collapse(".k-pane:first");
+        it("panes can be collapsed after resizing", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
 
-        ok(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-        ok(!splitter.dom.find(".k-splitbar .k-i-arrow-60-left").length);
+            var keys = kendo.keys,
+                splitbar = splitter.dom.find(".k-splitbar"),
+                initialLeft = splitbar.position().left;
+
+            splitbar.focus().press({
+                keyCode: keys.LEFT
+            });
+
+            splitbar.focus().press({
+                keyCode: keys.ENTER
+            });
+
+            splitbar.find(".k-i-arrow-60-left").click();
+
+            assert.equal(splitter.dom.find(".k-pane:first").width(), 0);
+        });
+
+        it("collapsible pane with collapsedSize collapses to this size", function() {
+            splitter = create({
+                panes: [
+                    { collapsible: true, collapsedSize: "20px" },
+                    {}
+                ]
+            });
+
+            splitter.dom.find(".k-i-arrow-60-left").click();
+
+            assert.equal(splitter.dom.find(".k-pane:first").width(), 20);
+        });
+
+        it("collapsed pane with collapsedSize is rendered with this size", function() {
+            splitter = create({
+                panes: [
+                    { collapsible: true, collapsed: true, collapsedSize: "20px" },
+                    {}
+                ]
+            });
+
+            assert.equal(splitter.dom.find(".k-pane:first").width(), 20);
+        });
+
+        it("collapsible pane adds k-state-collapsed class when collapsed", function() {
+            splitter = create({
+                panes: [
+                    { collapsible: true },
+                    {}
+                ]
+            });
+
+            splitter.dom.find(".k-i-arrow-60-left").click();
+
+            assert.isOk(splitter.dom.find(".k-pane:first").hasClass("k-state-collapsed"));
+        });
+
     });
-
-    test("collapsing pane disables collapsing of previous pane", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, { collapsible: true } ]
-        });
-
-        splitter.object.collapse(".k-pane:last");
-
-        ok(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-        ok(!splitter.dom.find(".k-splitbar .k-i-arrow-60-right").length);
-    });
-
-    test("collapsing the last fluid pane distributes remaining size to neighbour pane", function() {
-        splitter = create({
-            panes: [
-                { collapsible: true, size: "50px" },
-                { collapsible: true }
-            ]
-        });
-
-        splitter.object.collapse(".k-pane:last");
-
-        equal(splitter.dom.find(".k-pane:first").width(), splitter.dom.width() - 7);
-        equal(splitter.dom.find(".k-splitbar:first")[0].offsetLeft, splitter.dom.width() - 7);
-    });
-
-    test("collapsing the last fluid pane in vertical splitter distributes remaining size to neighbour pane", function() {
-        splitter = create({
-            orientation: "vertical",
-            panes: [
-                { collapsible: true, size: "50px" },
-                { collapsible: true }
-            ]
-        });
-
-        splitter.object.collapse(".k-pane:last");
-
-        equal(splitter.dom.find(".k-pane:first").height(), splitter.dom.height() - 7);
-        equal(splitter.dom.find(".k-splitbar:first")[0].offsetTop, splitter.dom.height() - 7);
-    });
-
-    test("collapsing a pane adds an overflow:hidden style to it", function() {
-        splitter = create({
-            panes: [
-                { collapsible: true },
-                { collapsible: true }
-            ]
-        });
-
-        splitter.object.collapse(".k-pane:first");
-
-        equal(splitter.dom.find(".k-pane:first").css("overflow"), "hidden");
-    });
-
-    test("collapsing pane does not add overlay to frames", function() {
-        $.mockjax({
-            url: "http://foo",
-            responseText: "foo"
-        });
-
-        splitter = create({
-            panes: [
-                { collapsible: true },
-                { contentUrl: "http://foo" }
-            ]
-        });
-
-        splitter.dom.find(".k-i-arrow-60-left")
-            .trigger("mousedown")
-            .trigger("mouseup")
-            .trigger("click");
-
-        equal(splitter.dom.find(".k-overlay").length, 0);
-    });
-
-    test("test name", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
-        });
-
-        splitter.dom.find(".k-i-arrow-60-left")
-            .trigger("mousedown")
-
-        splitter.dom.find(".k-overlay:first")
-            .trigger("mouseup")
-            .trigger("click");
-
-        equal(splitter.dom.find(".k-overlay").length, 0);
-    });
-
-    test("collapsed panes can be expanded again", function() {
-        splitter = create({
-            panes: [
-                { collapsible: true },
-                {}
-            ]
-        });
-
-        splitter.dom.find(".k-i-arrow-60-up").click();
-
-        splitter.dom.find(".k-i-arrow-60-down").click();
-
-        equal(splitter.dom.find(".k-pane:first").width(), 100);
-    });
-
-    test("panes can be collapsed after resizing", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
-        });
-
-        var keys = kendo.keys,
-            splitbar = splitter.dom.find(".k-splitbar"),
-            initialLeft = splitbar.position().left;
-
-        splitbar.focus().press({
-            keyCode: keys.LEFT
-        });
-
-        splitbar.focus().press({
-            keyCode: keys.ENTER
-        });
-
-        splitbar.find(".k-i-arrow-60-left").click();
-
-        equal(splitter.dom.find(".k-pane:first").width(), 0);
-    });
-
-    test("collapsible pane with collapsedSize collapses to this size", function() {
-        splitter = create({
-            panes: [
-                { collapsible: true, collapsedSize: "20px" },
-                {}
-            ]
-        });
-
-        splitter.dom.find(".k-i-arrow-60-left").click();
-
-        equal(splitter.dom.find(".k-pane:first").width(), 20);
-    });
-
-    test("collapsed pane with collapsedSize is rendered with this size", function() {
-        splitter = create({
-            panes: [
-                { collapsible: true, collapsed: true, collapsedSize: "20px" },
-                {}
-            ]
-        });
-
-        equal(splitter.dom.find(".k-pane:first").width(), 20);
-    });
-
-    test("collapsible pane adds k-state-collapsed class when collapsed", function() {
-        splitter = create({
-            panes: [
-                { collapsible: true },
-                {}
-            ]
-        });
-
-        splitter.dom.find(".k-i-arrow-60-left").click();
-
-        ok(splitter.dom.find(".k-pane:first").hasClass("k-state-collapsed"));
-    });
-
-})();
+}());

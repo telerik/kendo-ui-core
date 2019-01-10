@@ -31,9 +31,9 @@
         return groups;
     }
 
-    module("Grouped VirtualList: ", {
-        setup: function() {
-            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+    describe("Grouped VirtualList: ", function () {
+        beforeEach(function() {
+            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -60,52 +60,51 @@
                 template: "#:text#",
                 dataValueField: "value"
             };
-        },
+        });
 
-        teardown: function() {
+        afterEach(function() {
             if (container.data("kendoVirtualList")) {
                 container.data("kendoVirtualList").destroy();
             }
 
-            QUnit.fixture.empty();
-        }
+            Mocha.fixture.empty();
     });
 
     //rendering
 
-    test("creates list header", 1, function() {
+    it("creates list header", function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read();
-        equal(virtualList.wrapper.find(".k-group-header").length, 1);
+        assert.equal(virtualList.wrapper.find(".k-group-header").length, 1);
     });
 
-    asyncTest("does not render item level group label for the first item (offset index 0)", 1, function() {
+    it("does not render item level group label for the first item (offset index 0)", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
-            start();
-            equal(virtualList.items().first().find(".k-group").length, 0);
+            assert.equal(virtualList.items().first().find(".k-group").length, 0);
+            done();
         });
     });
 
     //dataBinding
 
-    asyncTest("detects that the dataSource is grouped", 1, function() {
+    it("detects that the dataSource is grouped", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
-            start();
-            equal(virtualList.options.type, "group");
+            assert.equal(virtualList.options.type, "group");
+            done();
         });
     });
 
-    asyncTest("fixed header displays current visible group", 1, function() {
+    it("fixed header displays current visible group", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
-            start();
-            equal($(virtualList.header).text(), virtualList.dataSource.view()[0].value);
+            assert.equal($(virtualList.header).text(), virtualList.dataSource.view()[0].value);
+            done();
         });
     });
 
@@ -115,7 +114,7 @@
 
     //utilities
 
-    asyncTest("prefetches value in grouped dataSource", 1, function() {
+    it("prefetches value in grouped dataSource", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             value: 89,
@@ -128,12 +127,12 @@
 
         asyncDataSource.read();
         virtualList.bind("change", function() {
-            start();
-            equal(virtualList.selectedDataItems()[0].value, 89);
+            assert.equal(virtualList.selectedDataItems()[0].value, 89);
+            done();
         });
     });
 
-    asyncTest("prefetches values in grouped dataSource (multiple selection)", 2, function() {
+    it("prefetches values in grouped dataSource (multiple selection)", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             value: [88, 143],
@@ -146,13 +145,13 @@
 
         asyncDataSource.read();
         virtualList.bind("change", function() {
-            start();
-            equal(virtualList.selectedDataItems()[0].value, 88);
-            equal(virtualList.selectedDataItems()[1].value, 143);
+            assert.equal(virtualList.selectedDataItems()[0].value, 88);
+            assert.equal(virtualList.selectedDataItems()[1].value, 143);
+            done();
         });
     });
 
-    asyncTest("can select item when value resolves to an index equal to the length of the first group", 2, function() {
+    it("can select item when value resolves to an index equal to the length of the first group", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             height: 400,
             itemHeight: 20,
@@ -167,10 +166,11 @@
         asyncDataSource.pageSize(80);
         virtualList.value(30);
         virtualList.bind("listBound", function() {
-            start();
-            ok(this.selectedDataItems().length);
-            equal(this.value()[0], 30);
+            assert.isOk(this.selectedDataItems().length);
+            assert.equal(this.value()[0], 30);
+            done();
         });
     });
 
-})();
+    });
+}());

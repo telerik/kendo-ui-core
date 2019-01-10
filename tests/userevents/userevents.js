@@ -3,245 +3,245 @@
         UserEvents = kendo.UserEvents,
         element;
 
-    module("UserEvents", {
-        setup: function() {
+    describe("UserEvents", function() {
+        beforeEach(function() {
             element = $('<div />');
             userEvents = new UserEvents(element, { fastTap: true });
-        }
-    });
-
-    test("raises press on touchstart", 2, function(){
-        userEvents.bind("press", function(e) {
-            equal(e.x.location, 10);
-            equal(e.y.location, 20);
         });
 
-        press(element, 10, 20);
-    });
+        it("raises press on touchstart", function() {
+            userEvents.bind("press", function(e) {
+                assert.equal(e.x.location, 10);
+                assert.equal(e.y.location, 20);
+            });
 
-    test("includes event type in event data", 1, function(){
-        userEvents.bind("press", function(e) {
-            equal(e.type, "press");
+            press(element, 10, 20);
         });
 
-        press(element, 10, 20);
-    });
+        it("includes event type in event data", function() {
+            userEvents.bind("press", function(e) {
+                assert.equal(e.type, "press");
+            });
 
-    test("raises start on first mouse move", 2, function(){
-        userEvents.bind("start", function(e) {
-            equal(e.x.location, 15);
-            equal(e.y.location, 25);
+            press(element, 10, 20);
         });
 
-        press(element, 10, 20);
-        move(element, 15, 25);
-    });
+        it("raises start on first mouse move", function() {
+            userEvents.bind("start", function(e) {
+                assert.equal(e.x.location, 15);
+                assert.equal(e.y.location, 25);
+            });
 
-    test("raises tap on tap", 1, function(){
-        userEvents.bind("tap", function(e) {
-            ok(true);
+            press(element, 10, 20);
+            move(element, 15, 25);
         });
 
-        press(element, 10, 20);
-        release(element);
-    });
+        it("raises tap on tap", function() {
+            userEvents.bind("tap", function(e) {
+                assert.isOk(true);
+            });
 
-    test("fires release, then tap", 1, function(){
-        var releaseFired = false;
-
-        userEvents.bind("release", function(e) {
-            releaseFired = true;
+            press(element, 10, 20);
+            release(element);
         });
 
-        userEvents.bind("tap", function(e) {
-            ok(releaseFired);
+        it("fires release, then tap", function() {
+            var releaseFired = false;
+
+            userEvents.bind("release", function(e) {
+                releaseFired = true;
+            });
+
+            userEvents.bind("tap", function(e) {
+                assert.isOk(releaseFired);
+            });
+
+            press(element, 10, 20);
+            release(element);
         });
 
-        press(element, 10, 20);
-        release(element);
-    });
+        it("resets velocity on direction change", function(done) {
+            userEvents.bind("end", function(e) {
+                assert.isOk(e.x.velocity > 0);
+                assert.isOk(e.y.velocity < 0);
+                done();
+            });
 
-    asyncTest("resets velocity on direction change", 2, function(){
-        userEvents.bind("end", function(e) {
-            start();
-            ok(e.x.velocity > 0);
-            ok(e.y.velocity < 0);
+            press(element, 10, 20)
+
+            setTimeout(function() {
+                move(element, 1, 30);
+            }, 1);
+
+            setTimeout(function() {
+                move(element, 10, 20);
+            }, 1);
+
+            setTimeout(function() {
+                release(element, 10, 20);
+            }, 1);
         });
 
-        press(element, 10, 20)
-
-        setTimeout(function() {
-            move(element, 1, 30);
-        }, 1);
-
-        setTimeout(function() {
-            move(element, 10, 20);
-        }, 1);
-
-        setTimeout(function() {
-            release(element, 10, 20);
-        }, 1);
-    });
 
 
+        it("passes delta on mousemove", function() {
+            userEvents.bind("move", function(e) {
+                assert.equal(e.x.delta, 10);
+                assert.equal(e.y.delta, 20);
+            });
 
-    test("passes delta on mousemove", 2, function(){
-        userEvents.bind("move", function(e) {
-            equal(e.x.delta, 10);
-            equal(e.y.delta, 20);
+            press(element, 10, 20);
+            move(element, 20, 40);
         });
 
-        press(element, 10, 20);
-        move(element, 20, 40);
-    });
+        it("does not track unpressed mousemove", function() {
+            userEvents.bind("move", function(e) {
+                assert.isOk(false);
+            });
 
-    test("does not track unpressed mousemove", 0, function(){
-        userEvents.bind("move", function(e) {
-            ok(false);
+            move(element, 20, 40);
         });
 
-        move(element, 20, 40);
-    });
+        it("calculates velocity on mouseup", function(done) {
+            userEvents.bind("end", function(e) {
+                assert.isOk(e.x.velocity > 0);
+                assert.isOk(e.y.velocity < 0);
+                done();
+            });
 
-    asyncTest("calculates velocity on mouseup", 2, function(){
-        userEvents.bind("end", function(e) {
-            start();
-            ok(e.x.velocity > 0);
-            ok(e.y.velocity < 0);
+            press(element, 10, 20);
+
+            setTimeout(function() {
+                move(element, 20, 10);
+            }, 1);
+
+            setTimeout(function() {
+                release(element, 20, 0);
+            }, 1);
         });
-
-        press(element, 10, 20);
-
-        setTimeout(function() {
-            move(element, 20, 10);
-        }, 1);
-
-        setTimeout(function() {
-            release(element, 20, 0);
-        }, 1);
     });
 
-    module("filter option", {
-        setup: function() {
+    describe("filter option", function() {
+        beforeEach(function() {
             element = $('<div><div id="foo" /><div id="bar" /></div>');
             userEvents = new UserEvents(element, {
                 filter: "#foo"
             });
-        }
-    });
-
-    test("binds to drag performed on elements matching filter", 1, function(){
-        userEvents.bind("start", function(e) {
-            ok(true);
         });
 
-        element = element.find("#foo");
+        it("binds to drag performed on elements matching filter", function() {
+            userEvents.bind("start", function(e) {
+                assert.isOk(true);
+            });
 
-        press(element, 10, 20);
-        move(element, 15, 25);
-    });
+            element = element.find("#foo");
 
-    test("ignores drag performed on elements not matching filter", 0, function(){
-        userEvents.bind("start", function(e) {
-            ok(false);
+            press(element, 10, 20);
+            move(element, 15, 25);
         });
-        element = element.find("#bar");
 
-        press(element, 10, 20);
-        move(element, 15, 25);
+        it("ignores drag performed on elements not matching filter", function() {
+            userEvents.bind("start", function(e) {
+                assert.isOk(false);
+            });
+            element = element.find("#bar");
+
+            press(element, 10, 20);
+            move(element, 15, 25);
+        });
     });
 
-    module("threshold option", {
-        setup: function() {
+    describe("threshold option", function() {
+        beforeEach(function() {
             element = $('<div />');
             $("#qunit-fixture").empty().append(element);
             userEvents = new UserEvents(element, {
                 threshold: 5
             });
-        }
-    });
-
-    test("ignores drag if less than threshold option", 0, function(){
-        userEvents.bind("start", function(e) {
-            ok(false);
         });
 
-        press(element, 10, 20);
-        move(element, 11, 21);
-    });
+        it("ignores drag if less than threshold option", function() {
+            userEvents.bind("start", function(e) {
+                assert.isOk(false);
+            });
 
-    test("raises start if distance is more than threshold option", 1, function(){
-        userEvents.bind("start", function(e) {
-            ok(true);
+            press(element, 10, 20);
+            move(element, 11, 21);
         });
 
-        press(element, 10, 20);
-        move(element, 14, 24);
+        it("raises start if distance is more than threshold option", function() {
+            userEvents.bind("start", function(e) {
+                assert.isOk(true);
+            });
+
+            press(element, 10, 20);
+            move(element, 14, 24);
+        });
     });
 
-    module("hold", {
-        setup: function() {
+    describe("hold", function() {
+        beforeEach(function() {
             kendo.UserEvents.minHold(100);
-            element = $('<div />').appendTo(QUnit.fixture);
+            element = $('<div />').appendTo(Mocha.fixture);
             userEvents = new UserEvents(element, {
                 threshold: 5
             });
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             kendo.UserEvents.minHold(800);
-        }
-    });
-
-    asyncTest("triggers hold after a while", 1, function(){
-        userEvents.bind("hold", function(e) {
-            ok(true);
         });
 
-        press(element, 10, 20);
+        it("triggers hold after a while", function(done) {
+            userEvents.bind("hold", function(e) {
+                assert.isOk(true);
+            });
 
-        setTimeout(function() {
-            start();
-            release(element, 10, 20);
-        }, 200);
-    });
+            press(element, 10, 20);
 
-    /*
-    asyncTest("does not trigger hold if released before that", 0, function(){
-        userEvents.bind("hold", function(e) {
-            ok(false, "hold was triggered by release");
+            setTimeout(function() {
+                release(element, 10, 20);
+                done();
+            }, 200);
         });
 
-        press(element, 10, 20);
-
-        setTimeout(function() {
-            release(element, 10, 20);
-        }, 10);
-
-        setTimeout(function() {
-            start();
-        }, 101);
-    });
-
-    asyncTest("does not trigger hold if moved before that", 0, function(){
-        userEvents.bind("hold", function(e) {
-            ok(false, "hold was triggered by move");
+        /*
+        it("does not trigger hold if released before that", function(done){
+            userEvents.bind("hold", function(e) {
+                assert.isOk(false, "hold was triggered by release");
+            });
+    
+            press(element, 10, 20);
+    
+            setTimeout(function() {
+                release(element, 10, 20);
+            }, 10);
+    
+            setTimeout(function() {
+                done();
+            }, 101);
         });
-
-        press(element, 10, 20);
-
-        setTimeout(function() {
-            move(element, 15, 25);
-        }, 50);
-
-        setTimeout(function() {
-            start();
-            release(element, 15, 25);
-        }, 101);
+    
+        it("does not trigger hold if moved before that", function(done){
+            userEvents.bind("hold", function(e) {
+                assert.isOk(false, "hold was triggered by move");
+            });
+    
+            press(element, 10, 20);
+    
+            setTimeout(function() {
+                move(element, 15, 25);
+            }, 50);
+    
+            setTimeout(function() {
+                done();
+                release(element, 15, 25);
+            }, 101);
+        });
+        */
     });
-    */
 
-    module("nested elements", {
-        setup: function() {
+    describe("nested elements", function() {
+        beforeEach(function() {
             element = $('<div id="parent"><div class="foo" /><div id="child"><div class="foo" /></div></div>');
             parentEvents = new UserEvents(element, {
                 filter: ">.foo"
@@ -252,261 +252,261 @@
             childEvents = new UserEvents(childElement, {
                 filter: ">.foo"
             });
-        }
-    });
-
-    test("ignores drag if filter does not match elements", 1, function() {
-        parentEvents.bind("start", function() {
-            ok(false);
         });
 
-        childEvents.bind("start", function() {
-            ok(true);
+        it("ignores drag if filter does not match elements", function() {
+            parentEvents.bind("start", function() {
+                assert.isOk(false);
+            });
+
+            childEvents.bind("start", function() {
+                assert.isOk(true);
+            });
+
+            element = childElement.children(".foo");
+
+            press(element, 10, 20);
+            move(element, 24, 54);
         });
-
-        element = childElement.children(".foo");
-
-        press(element, 10, 20);
-        move(element, 24, 54);
     });
 
-    module("gestures", {
-        setup: function() {
+    describe("gestures", function() {
+        beforeEach(function() {
             element = $('<div />');
-            userEvents = new UserEvents(element, {multiTouch: true});
+            userEvents = new UserEvents(element, { multiTouch: true });
 
             press(element, 10, 20);
             move(element, 15, 25);
-        }
-    });
-
-    test("gesture start passes the center of the two touches", 2, function(){
-        userEvents.bind("gesturestart", function(e) {
-            equal(e.center.x, 10);
-            equal(e.center.y, 20);
         });
 
-        press(element, 5, 15, 2);
-    });
+        it("gesture start passes the center of the two touches", function() {
+            userEvents.bind("gesturestart", function(e) {
+                assert.equal(e.center.x, 10);
+                assert.equal(e.center.y, 20);
+            });
 
-    test("gesture start passes the distance of the two touches", 1, function(){
-        userEvents.bind("gesturestart", function(e) {
-            QUnit.close(e.distance, 14.1, 0.1);
+            press(element, 5, 15, 2);
         });
 
-        press(element, 5, 15, 2);
-    });
+        it("gesture start passes the distance of the two touches", function() {
+            userEvents.bind("gesturestart", function(e) {
+                assert.closeTo(e.distance, 14.1, 0.1);
+            });
 
-    test("triggers gesturestart on second touch move", 1, function(){
-        userEvents.bind("gesturestart", function(e) {
-            ok(true);
+            press(element, 5, 15, 2);
         });
 
-        press(element, 10, 20, 2);
-        move(element, 15, 25, 2);
-    });
+        it("triggers gesturestart on second touch move", function() {
+            userEvents.bind("gesturestart", function(e) {
+                assert.isOk(true);
+            });
 
-    test("accepts maximum 2 fingers", 1, function(){
-        userEvents.bind("gesturestart", function(e) {
-            ok(true);
+            press(element, 10, 20, 2);
+            move(element, 15, 25, 2);
         });
 
-        press(element, 10, 20, 2);
-        press(element, 10, 20, 3);
-    });
+        it("accepts maximum 2 fingers", function() {
+            userEvents.bind("gesturestart", function(e) {
+                assert.isOk(true);
+            });
 
-
-    test("does not trigger move on second touch move", 0, function(){
-        userEvents.bind("move", function(e) {
-            ok(false);
+            press(element, 10, 20, 2);
+            press(element, 10, 20, 3);
         });
 
-        press(element, 10, 20, 2);
-        move(element, 15, 25, 2);
-    });
 
-    test("triggers gesturechange", 1, function(){
-        userEvents.bind("gesturechange", function(e) {
-            ok(true);
+        it("does not trigger move on second touch move", function() {
+            userEvents.bind("move", function(e) {
+                assert.isOk(false);
+            });
+
+            press(element, 10, 20, 2);
+            move(element, 15, 25, 2);
         });
 
-        press(element, 10, 20, 2);
-        move(element, 15, 25, 2);
-    });
+        it("triggers gesturechange", function() {
+            userEvents.bind("gesturechange", function(e) {
+                assert.isOk(true);
+            });
 
-    test("triggers gestureend", 1, function(){
-        userEvents.bind("gestureend", function(e) {
-            ok(true);
+            press(element, 10, 20, 2);
+            move(element, 15, 25, 2);
         });
 
-        press(element, 10, 20, 2);
-        move(element, 15, 25, 2);
-        release(element, 15, 25, 2);
-    });
+        it("triggers gestureend", function() {
+            userEvents.bind("gestureend", function(e) {
+                assert.isOk(true);
+            });
 
-    test("triggers end after the first touch is over", 1, function(){
-        userEvents.bind("end", function(e) {
-            ok(true);
+            press(element, 10, 20, 2);
+            move(element, 15, 25, 2);
+            release(element, 15, 25, 2);
         });
 
-        press(element, 10, 20, 2);
-        move(element, 15, 25, 2);
-        release(element, 15, 25, 2);
-        release(element, 15, 25, 1);
-    });
+        it("triggers end after the first touch is over", function() {
+            userEvents.bind("end", function(e) {
+                assert.isOk(true);
+            });
 
-    test("triggers gesturestart before first touch move", 1, function(){
-        var gestureStarted = false;
-        userEvents.bind("gesturestart", function(e) {
-            gestureStarted = true;
+            press(element, 10, 20, 2);
+            move(element, 15, 25, 2);
+            release(element, 15, 25, 2);
+            release(element, 15, 25, 1);
         });
 
-        userEvents.bind("gesturechange", function() {
-            ok(gestureStarted);
-        });
+        it("triggers gesturestart before first touch move", function() {
+            var gestureStarted = false;
+            userEvents.bind("gesturestart", function(e) {
+                gestureStarted = true;
+            });
 
-        press(element, 10, 20, 2);
-        move(element, 15, 25, 1);
+            userEvents.bind("gesturechange", function() {
+                assert.isOk(gestureStarted);
+            });
+
+            press(element, 10, 20, 2);
+            move(element, 15, 25, 1);
+        });
     });
 
-    module("UserEvents API", {
-        setup: function() {
+    describe("UserEvents API", function() {
+        beforeEach(function() {
             element = $('<div />');
             userEvents = new UserEvents(element);
-        }
-    });
-
-    test("raises press on press", 2, function(){
-        userEvents.bind("press", function(e) {
-            equal(e.x.location, 10);
-            equal(e.y.location, 20);
         });
 
-        userEvents.press(10, 20);
-    });
+        it("raises press on press", function() {
+            userEvents.bind("press", function(e) {
+                assert.equal(e.x.location, 10);
+                assert.equal(e.y.location, 20);
+            });
 
-    test("raises start on first move", 2, function(){
-        userEvents.bind("start", function(e) {
-            equal(e.x.location, 15);
-            equal(e.y.location, 25);
+            userEvents.press(10, 20);
         });
 
-        userEvents.press(10, 20);
-        userEvents.move(15, 25);
-    });
+        it("raises start on first move", function() {
+            userEvents.bind("start", function(e) {
+                assert.equal(e.x.location, 15);
+                assert.equal(e.y.location, 25);
+            });
 
-    test("raises end on end call", 1, function(){
-        userEvents.bind("end", function(e) {
-            ok(true);
+            userEvents.press(10, 20);
+            userEvents.move(15, 25);
         });
 
-        userEvents.press(10, 20);
-        userEvents.move(15, 25);
-        userEvents.end(15, 25);
+        it("raises end on end call", function() {
+            userEvents.bind("end", function(e) {
+                assert.isOk(true);
+            });
+
+            userEvents.press(10, 20);
+            userEvents.move(15, 25);
+            userEvents.end(15, 25);
+        });
+
+        it("cancel clears active touches", function() {
+            press(element, 5, 15, 2);
+            userEvents.cancel();
+            assert.equal(userEvents.touches.length, 0);
+        });
     });
 
-    test("cancel clears active touches", function(){
-        press(element, 5, 15, 2);
-        userEvents.cancel();
-        equal(userEvents.touches.length, 0);
-    });
-
-    module("userEvents", {
-        teardown: function() {
+    describe("userEvents", function() {
+        afterEach(function() {
             $("#qunit-fixture").find("iframe").remove();
-        }
+        });
+
+        it("sets its element owner document as surface", function() {
+            var iframe = $("<iframe />")
+                .appendTo("#qunit-fixture")
+                .contents().find('body').append("<div id='element'></div>");
+            var element = $(iframe).find("#element")[0];
+
+            userEvents = new UserEvents(element, { global: true });
+
+            assert.equal(userEvents.surface[0], element.ownerDocument.documentElement);
+        });
     });
 
-    test("sets its element owner document as surface", function() {
-        var iframe = $("<iframe />")
-            .appendTo("#qunit-fixture")
-            .contents().find('body').append("<div id='element'></div>");
-        var element = $(iframe).find("#element")[0];
-
-        userEvents = new UserEvents(element, { global: true });
-
-        equal(userEvents.surface[0], element.ownerDocument.documentElement);
-    });
-
-    module("selection", {
-        setup: function() {
+    describe("selection", function() {
+        beforeEach(function() {
             element = $('<div />');
             userEvents = new UserEvents(element, { allowSelection: true });
+        });
+
+        if ("onselectstart" in document.body && kendo.support.browser.msie) {
+            it("raises select on selectstart", function() {
+                userEvents.bind("select", function(e) {
+                    assert.isOk(true);
+                });
+
+                element.trigger("selectstart");
+            });
+        } else {
+            it("raises select on mousedown", function() {
+                userEvents.bind("select", function(e) {
+                    assert.isOk(true);
+                });
+
+                element.trigger("mousedown");
+            });
         }
     });
 
-    if ("onselectstart" in document.body && kendo.support.browser.msie) {
-        test("raises select on selectstart", 1, function(){
-            userEvents.bind("select", function(e) {
-                ok(true);
-            });
-
-            element.trigger("selectstart");
-        });
-    } else {
-        test("raises select on mousedown", 1, function(){
-            userEvents.bind("select", function(e) {
-                ok(true);
-            });
-
-            element.trigger("mousedown");
-        });
-    }
-
-    module("doubleTap", {
-        setup: function() {
+    describe("doubleTap", function() {
+        beforeEach(function() {
             element = $('<div />');
-            userEvents = new UserEvents(element, {  fastTap: true, supportDoubleTap: true });
-        }
-    });
-
-    asyncTest("doubleTap should be fired when doubleTapSupport is enabled", 1, function() {
-        userEvents.bind("doubleTap", function(e) {
-            start();
-            ok(true);
+            userEvents = new UserEvents(element, { fastTap: true, supportDoubleTap: true });
         });
 
-        press(element, 10, 20, 1);
-        release(element);
-        press(element, 10, 20, 1);
-        release(element);
-    });
+        it("doubleTap should be fired when doubleTapSupport is enabled", function(done) {
+            userEvents.bind("doubleTap", function(e) {
+                assert.isOk(true);
+                done();
+            });
 
-    asyncTest("tap should be fired when doubleTapSupport is enabled", 1, function() {
-        userEvents.bind("tap", function(e) {
-            start();
-            ok(true);
+            press(element, 10, 20, 1);
+            release(element);
+            press(element, 10, 20, 1);
+            release(element);
         });
 
-        press(element, 10, 20, 1);
-        release(element);
-    });
+        it("tap should be fired when doubleTapSupport is enabled", function(done) {
+            userEvents.bind("tap", function(e) {
+                assert.isOk(true);
+                done();
+            });
 
-    asyncTest("tap should be fired when two subsequent tabs are performed with a delay between them", 2, function() {
-        var countTap = 0;
-        var countDoubleTap = 0;
-
-        userEvents.bind("tap", function(e) {
-            countTap++
+            press(element, 10, 20, 1);
+            release(element);
         });
 
-        userEvents.bind("doubleTap", function(e) {
-            countDoubleTap++;
-        });
+        it("tap should be fired when two subsequent tabs are performed with a delay between them", function(done) {
+            var countTap = 0;
+            var countDoubleTap = 0;
 
-        press(element, 10, 20);
-        release(element);
+            userEvents.bind("tap", function(e) {
+                countTap++
+            });
 
-        setTimeout(function() {
+            userEvents.bind("doubleTap", function(e) {
+                countDoubleTap++;
+            });
+
             press(element, 10, 20);
             release(element);
 
             setTimeout(function() {
-                start();
-                equal(countTap, 2);
-                equal(countDoubleTap, 0);
-            }, 300)
+                press(element, 10, 20);
+                release(element);
 
-        }, 450);
+                setTimeout(function() {
+                    assert.equal(countTap, 2);
+                    assert.equal(countDoubleTap, 0);
+                    done();
+                }, 300)
+
+            }, 450);
+        });
     });
-})();
+}());

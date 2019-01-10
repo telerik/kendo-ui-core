@@ -1,12 +1,22 @@
 (function() {
-
     function cleanup() {
-        QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
-            $(element).data("kendoWindow").destroy();
-        });
-        QUnit.fixture.closest("body").find(".k-overlay").remove();
+        Mocha.fixture
+            .closest("body")
+            .find(".k-window-content")
+            .each(function(idx, element) {
+                $(element)
+                    .data("kendoWindow")
+                    .destroy();
+            });
+        Mocha.fixture
+            .closest("body")
+            .find(".k-overlay")
+            .remove();
+    }
 
-
+    function createWindow(options, element) {
+        element = element || $("<div class='wnd' />").appendTo(Mocha.fixture);
+        return element.kendoWindow(options).data("kendoWindow");
     }
 
     var Widget = kendo.ui.Widget;
@@ -22,57 +32,6 @@
     });
 
     var dialog;
-
-    module("interaction", {
-        setup: function() {
-
-            kendo.ui.plugin(ResizableWidget);
-        },
-        teardown: cleanup
-    });
-
-    function createWindow(options, element) {
-        element = element || $("<div class='wnd' />").appendTo(QUnit.fixture);
-        return element.kendoWindow(options).data("kendoWindow");
-    }
-
-    test("double-clicking refresh does not maximize window", function() {
-        dialog = createWindow({
-            actions: [ "refresh" ]
-        });
-
-        dialog.wrapper.find(".k-i-reload").trigger("dblclick");
-
-        ok(!dialog.options.isMaximized);
-    });
-
-    test("resizing window resizes inner widgets", 1, function() {
-        dialog = createWindow({});
-        var widgetElement = $("<div />").appendTo(dialog.element).kendoResizableWidget();
-        widgetElement.data("kendoResizableWidget").bind("resize", function() { ok(true) });
-
-        dialog.resize();
-    });
-
-    test("closing a non-modal Window does not execute toFront() of the other modal instance", function () {
-        var executed = false;
-
-        modalDialog = createWindow({
-            modal: true
-        });
-        nonModalDialog = createWindow({
-            modal: false
-        });
-
-        modalDialog.toFront = function () {
-            executed = true;
-        }
-
-        nonModalDialog.close();
-
-        ok(!executed);
-    });
-
     var initialSize = 200;
     var resizeChange = 20;
 
@@ -82,8 +41,8 @@
         var userEvents = dialog.resizing._draggable.userEvents;
 
         var end = {
-            left: absolute ? left : (start.left + left),
-            top: absolute ? top : (start.top + top)
+            left: absolute ? left : start.left + left,
+            top: absolute ? top : start.top + top
         };
 
         userEvents.press(start.left, start.top, handle[0]);
@@ -91,9 +50,62 @@
         userEvents.end(end.left, end.top);
     }
 
-    module("resizing", {
-        setup: function() {
+    describe("interaction", function() {
+        beforeEach(function() { });
+        afterEach(function() {
+            cleanup();
+        });
 
+        it("double-clicking refresh does not maximize window", function() {
+            dialog = createWindow({
+                actions: ["refresh"]
+            });
+
+            dialog.wrapper.find(".k-i-reload").trigger("dblclick");
+
+            assert.isOk(!dialog.options.isMaximized);
+        });
+
+        it("resizing window resizes inner widgets", function(done) {
+            kendo.ui.plugin(ResizableWidget);
+
+            dialog = createWindow({});
+            var widgetElement = $("<div />").kendoResizableWidget();
+
+            widgetElement.appendTo(dialog.element);
+
+            widgetElement
+                .data("kendoResizableWidget")
+                .bind("resize", function() {
+                    assert.isOk(true);
+                    done();
+                });
+
+            dialog.resize();
+        });
+
+        it("closing a non-modal Window does not execute toFront() of the other modal instance", function() {
+            var executed = false;
+
+            modalDialog = createWindow({
+                modal: true
+            });
+            nonModalDialog = createWindow({
+                modal: false
+            });
+
+            modalDialog.toFront = function() {
+                executed = true;
+            };
+
+            nonModalDialog.close();
+
+            assert.isOk(!executed);
+        });
+    });
+
+    describe("resizing", function() {
+        beforeEach(function() {
             dialog = createWindow({
                 width: initialSize,
                 height: initialSize,
@@ -102,59 +114,64 @@
                     left: "0"
                 }
             });
-        },
-        teardown: cleanup
+        });
+        afterEach(function() {
+            cleanup();
+        });
+
+        it("resizing window out of viewport", function() {
+            resize("nw", -10, -10, true);
+
+            assert.equal(parseInt(dialog.wrapper.css("top"), 10), 0);
+            assert.equal(parseInt(dialog.wrapper.css("left"), 10), 0);
+        });
+
+        it("resizing window updates widget options", function() {
+            resize("se", 100, 100);
+
+            assert.equal(dialog.options.width, dialog.wrapper.width() + "px");
+            assert.equal(dialog.options.height, dialog.wrapper.height() + "px");
+        });
+
+        it("resizing window horizontally does not update vertical positioning", function() {
+            var initialWidth = dialog.wrapper.width();
+
+            resize("w", 0, 100);
+
+            assert.equal(dialog.wrapper.width(), initialWidth);
+        });
+
+        it("resizing window vertically does not update horizontal positioning", function() {
+            var initialHeight = dialog.wrapper.height();
+
+            resize("n", 100, 0);
+
+            assert.equal(dialog.wrapper.height(), initialHeight);
+        });
     });
 
-    test("resizing window out of viewport", function() {
-        resize("nw", -10, -10, true);
-
-        equal(parseInt(dialog.wrapper.css("top"), 10), 0);
-        equal(parseInt(dialog.wrapper.css("left"), 10), 0);
-    });
-
-    test("resizing window updates widget options", function() {
-        resize("se", 100, 100);
-
-        equal(dialog.options.width, dialog.wrapper.width() + "px");
-        equal(dialog.options.height, dialog.wrapper.height() + "px");
-    });
-
-    test("resizing window horizontally does not update vertical positioning", function() {
-        var initialWidth = dialog.wrapper.width();
-
-        resize("w", 0, 100);
-
-        equal(dialog.wrapper.width(), initialWidth);
-    });
-
-    test("resizing window vertically does not update horizontal positioning", function() {
-        var initialHeight = dialog.wrapper.height();
-
-        resize("n", 100, 0);
-
-        equal(dialog.wrapper.height(), initialHeight);
-    });
-
-    module("integration", {
-        setup: function() {
-
+    describe("integration", function() {
+        beforeEach(function() {
             dialog = createWindow();
-        },
-        teardown: cleanup
-    });
+        });
+        afterEach(function() {
+            cleanup();
+        });
 
-    test("popups are closed when closing window", function() {
-        var ddl = $("<input id='ddl' />").appendTo(dialog.element)
-            .kendoDropDownList({
-                dataSource: [ "foo", "bar" ],
-                animation: false
-            }).data("kendoDropDownList");
+        it("popups are closed when closing window", function() {
+            var ddl = $("<input id='ddl' />")
+                .appendTo(dialog.element)
+                .kendoDropDownList({
+                    dataSource: ["foo", "bar"],
+                    animation: false
+                })
+                .data("kendoDropDownList");
 
-        ddl.open();
+            ddl.open();
 
-        dialog.wrapper.find(".k-window-titlebar").trigger("mousedown");
+            dialog.wrapper.find(".k-window-titlebar").trigger("mousedown");
 
-        ok($("#ddl-list").is(":hidden"));
+            assert.isOk($("#ddl-list").is(":hidden"));
+        });
     });
 })();
