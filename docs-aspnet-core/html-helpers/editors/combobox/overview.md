@@ -4,14 +4,14 @@ page_title: ComboBox | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/combobox
 slug: htmlhelpers_combobox_aspnetcore
-position: 1
+position: 0
 ---
 
 # ComboBox HtmlHelper Overview
 
-The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget.
+The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget.
 
-It enables you to configure the Kendo UI ComboBox widget from server-side code. The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) enables the user to enter custom values through the keyboard. It represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
+It allows you to configure the Kendo UI ComboBox widget from server-side code. The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
 
 For more information on the HtmlHelper, refer to the article on the [ComboBox HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/combobox/overview).
 
@@ -22,19 +22,15 @@ The following example demonstrates how to define the ComboBox by using the Combo
 ```Razor
     @(Html.Kendo().ComboBox()
         .Name("combobox")
-        .Placeholder("Select product")
         .DataTextField("ProductName")
         .DataValueField("ProductID")
-        .Filter(FilterType.StartsWith)
         .DataSource(source => {
             source.Read(read =>
             {
                 read.Action("Products_Read", "ComboBox");
-            })
-            .ServerFiltering(true);
+            });
         })
     )
-
 ```
 ```Controller
 
@@ -45,19 +41,7 @@ The following example demonstrates how to define the ComboBox by using the Combo
             return View();
         }
 
-        public JsonResult Products_Read(string text)
-        {
-            var result = GetProducts();
-
-            if (!string.IsNullOrEmpty(text))
-            {
-                result = result.Where(p => p.ProductName.Contains(text)).ToList();
-            }
-
-            return Json(result);
-        }
-
-        private static IEnumerable<ProductViewModel> GetProducts()
+        public JsonResult Products_Read()
         {
             var result = Enumerable.Range(0, 50).Select(i => new ProductViewModel
             {
@@ -65,7 +49,7 @@ The following example demonstrates how to define the ComboBox by using the Combo
                 ProductName = "Product " + i
             });
 
-            return result;
+            return Json(result);
         }
     }
 ```
@@ -74,23 +58,29 @@ The following example demonstrates how to define the ComboBox by using the Combo
 
 The following example demonstrates the basic configuration of the ComboBox HtmlHelper and how to get the ComboBox instance.
 
-###### Example
-
+```
     @(Html.Kendo().ComboBox()
         .Name("combobox")
-        .Placeholder("Select product")
         .DataTextField("ProductName")
         .DataValueField("ProductID")
-        .HtmlAttributes(new { style = "width:100%;" })
+        .HtmlAttributes(new { style = "width:100%" })
         .Filter("contains")
-        .AutoBind(true)
         .MinLength(3)
-        .Height(400)
-        .DataSource(source => source
-            .Read(read => read.Action("Products_Read", "ComboBox"))
-            .ServerFiltering(true)
-        )
-        .Events(events => events
+        .Height(290)
+        .HeaderTemplate(
+            "<div class=\"dropdown-header k-widget k-header\">" +
+                "<span>Products</span>" +
+            "</div>")
+        .FooterTemplate("Total <strong>#: instance.dataSource.total() #</strong> items found")
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("Products_Read2", "DropDownList");
+            })
+            .ServerFiltering(false);
+        })
+        .Events(e => e
             .Change("onChange")
             .Select("onSelect")
             .Open("onOpen")
@@ -107,233 +97,58 @@ The following example demonstrates the basic configuration of the ComboBox HtmlH
             console.log(combobox);
         });
     </script>
+```
 
-## Model Binding
+## Event Handling
 
-You can implement model binding both with [local data](#local-data) and [remote data](#remote-data), and in combination with [virtualization](#virtualization).
+You can subscribe to all ComboBox [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#events).
 
-### Local Data
+### By Handler Name
 
-Local data is the data that is available on the client when the ComboBox is initialized.
-
-1. Pass the data to the view through `ViewData`.
-
-    ###### Example
-
-        public IActionResult Index()
-        {
-            ViewData["products"] = GetProducts();
-
-            return View(new ProductViewModel
-            {
-                ProductID = 4,
-                ProductName = "ProductName4"
-            });
-        }
-
-        private static IEnumerable<ProductViewModel> GetProducts()
-        {
-            var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
-            {
-                ProductID = i,
-                ProductName = "ProductName" + i
-            });
-
-            return products;
-        }
-
-
-1. Add the ComboBox to the view and bind it to the data that is saved in the `ViewData`.
-
-    ###### Example
-
-        @model MvcApplication1.Models.ProductViewModel
-
-        @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-            .DataValueField("ProductID")
-            .DataTextField("ProductName")
-            .BindTo((System.Collections.IEnumerable)ViewData["products"])
-        )
-
-### Remote Data
-
-You can configure the ComboBox to get its data from a remote source by making an AJAX request.
-
-1. Create an action that returns the data as a JSON result.
-
-    ###### Example
-
-        public IActionResult Index()
-        {
-            return View(new ProductViewModel
-            {
-                ProductID = 4,
-                ProductName = "ProductName4"
-            });
-        }
-
-        public JsonResult GetProductsAjax()
-        {
-            var products = Enumerable.Range(0, 500).Select(i => new ProductViewModel
-            {
-                ProductID = i,
-                ProductName = "ProductName" + i
-            });
-
-            return Json(products);
-        }
-
-
-1. Add the ComboBox to the view and configure its DataSource to use remote data.
-
-    ###### Example
-
-        @model MvcApplication1.Models.ProductViewModel
-
-
-        @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-            .Filter("contains")
-            .DataTextField("ProductName")
-            .DataValueField("ProductID")
-            .Placeholder("Select product...")
-            .DataSource(source =>
-            {
-                source.Read(read =>
-                {
-                    read.Action("GetProductsAjax", "Home");
-                })
-                .ServerFiltering(false);
-            })
-        )
-
-### Virtualization
-
-You can configure a ComboBox that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
-
-> **Important**
->
-> The value type to which the ComboBox can be bound on the server can only be a primitive type or an enum value.
-
-1. Create the `Read` and `ValueMapper` actions.
-
-    ###### Example
-
-        public IActionResult Index()
-        {
-            return View(new ProductViewModel
-            {
-                ProductID = 4,
-                ProductName = "ProductName4"
-            });
-        }
-
-        [HttpPost]
-        public IActionResult ProductsVirtualization_Read([DataSourceRequest] DataSourceRequest request)
-        {
-            return Json(GetProducts().ToDataSourceResult(request));
-        }
-
-        public IActionResult Products_ValueMapper(int[] values)
-        {
-            var indices = new List<int>();
-
-            if (values != null && values.Any())
-            {
-                var index = 0;
-
-                foreach (var product in GetProducts())
-                {
-                    if (values.Contains(product.ProductID))
-                    {
-                        indices.Add(index);
-                    }
-
-                    index += 1;
-                }
-            }
-
-            return Json(indices);
-        }
-
-        private static IEnumerable<ProductViewModel> GetProducts()
-        {
-            var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
-            {
-                ProductID = i,
-                ProductName = "ProductName" + i
-            });
-
-            return products;
-        }
-
-
-1. Add the ComboBox to the view and configure it to use virtualization.
-
-    ###### Example
-
-        @model MvcApplication1.Models.ProductViewModel
-
-        @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-            .Filter("contains")
-            .DataTextField("ProductName")
-            .DataValueField("ProductID")
-            .Placeholder("Select product...")
-            .DataSource(source =>
-            {
-                source.Custom()
-                    .ServerFiltering(true)
-                    .ServerPaging(true)
-                    .PageSize(80)
-                    .Type("aspnetmvc-ajax")
-                    .Transport(transport =>
-                    {
-                        transport.Read("ProductsVirtualization_Read", "Home");
-                    })
-                    .Schema(schema =>
-                    {
-                        schema.Data("Data")
-                                .Total("Total");
-                    });
-            })
-            .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
-
-        <script>
-            function valueMapper(options) {
-                $.ajax({
-                    url: "@Url.Action("Products_ValueMapper", "Home")",
-                    data: convertValues(options.value),
-                    success: function (data) {
-                        options.success(data);
-                    }
-                });
-            }
-
-            function convertValues(value) {
-                var data = {};
-
-                value = $.isArray(value) ? value : [value];
-
-                for (var idx = 0; idx < value.length; idx++) {
-                    data["values[" + idx + "]"] = value[idx];
-                }
-
-                return data;
-            }
-        </script>
-
-If the `AutoBind` option of the ComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-    @model MvcApplication1.Models.ProductViewModel
+        @(Html.Kendo().ComboBox()
+          .Name("combobox")
+          .BindTo(new string[] { "Item1", "Item2", "Item3" })
+          .Events(e => e
+                .Select("combobox_select")
+                .Change("combobox_change")
+          )
+        )
+        <script>
+        function combobox_select() {
+            //Handle the select event.
+        }
 
+        function combobox_change() {
+            //Handle the change event.
+        }
+        </script>
 
-    @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-        .AutoBind(false)
-        .Text(Model.ProductName)
-        .DataTextField("ProductName")
-        //...additional configuration
-    )
+### By Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+###### Example
+
+        @(Html.Kendo().ComboBox()
+          .Name("combobox")
+          .BindTo(new string[] { "Item1", "Item2", "Item3" })
+          .Events(e => e
+              .Select(@<text>
+                function() {
+                    //Handle the select event inline.
+                }
+              </text>)
+              .Change(@<text>
+                function() {
+                    //Handle the change event inline.
+                }
+                </text>)
+          )
+        )
 
 ## See Also
 
