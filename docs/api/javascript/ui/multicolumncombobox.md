@@ -252,7 +252,7 @@ Defines the parent field to be used to retain value from. This value will be use
     <input id="parent" />
     <input id="child" />
     <script>
-    $("#parent").kendoMultiColumnBox({
+    $("#parent").kendoMultiColumnComboBox({
         dataTextField: "name",
         dataValueField: "id",
         dataSource: [
@@ -261,7 +261,7 @@ Defines the parent field to be used to retain value from. This value will be use
         ]
     });
 
-    $("#child").kendoMultiColumnBox({
+    $("#child").kendoMultiColumnComboBox({
         cascadeFrom: "parent",
         cascadeFromField: "parentId",
         cascadeFromParentField: "cascadeId",
