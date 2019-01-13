@@ -486,7 +486,7 @@ $.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
 if (kendo.ui.PivotFieldMenu) {
 kendo.ui.PivotFieldMenu.prototype.options.messages =
 $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
-  "info": "Rādīt vienības ar vērtību, kas:"
+  "info": "Rādīt vienības ar vērtību, kas:",
   "filterFields": "Lauku filtrs",
   "filter": "Filtrēt",
   "include": "Iekļaut laukus...",
