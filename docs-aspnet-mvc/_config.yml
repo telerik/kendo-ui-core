@@ -67,6 +67,8 @@ navigation:
         title: "DateInput"
      "helpers/datepicker":
         title: "DatePicker"
+     "helpers/daterangepicker":
+        title: "DateRangePicker"		
      "helpers/datetimepicker":
         title: "DateTimePicker"
      "helpers/diagram":
@@ -191,6 +193,8 @@ navigation:
         title: "RadioButton"
      "helpers/scheduler":
         title: "Scheduler"
+     "helpers/scrollview":
+        title: "ScrollView"
      "helpers/slider":
         title: "Slider"
      "helpers/sortable":

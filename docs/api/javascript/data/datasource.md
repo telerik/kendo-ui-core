@@ -2314,7 +2314,7 @@ which should follow the `schema.data` configuration.
 
 #### Example
 
-    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
     <script>
     var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
     var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
@@ -2592,13 +2592,13 @@ If set to a function, the data source will invoke it and use the result as the U
 
 The configuration used when [`type`](/api/javascript/data/datasource#configuration-type) is set to `"signalr"`. Configures the SignalR settings - hub, connection promise, server, and client hub methods.
 
-A live demo is available at [demos.telerik.com/kendo-ui](http://demos.telerik.com/kendo-ui/grid/signalr).
+A live demo is available at [demos.telerik.com/kendo-ui](https://demos.telerik.com/kendo-ui/grid/signalr).
 
-It is recommended to get familiar with the SignalR [JavaScript API](http://www.asp.net/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
+It is recommended to get familiar with the SignalR [JavaScript API](https://www.asp.net/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
 
 #### Example
 
-    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
     <script>
         var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
         var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
@@ -3069,7 +3069,7 @@ If set, the data source will use a predefined [`transport`](/api/javascript/data
 
 The supported values are:
 
-* `"odata"` which supports the [OData](http://www.odata.org) v.2 protocol
+* `"odata"` which supports the [OData](https://www.odata.org) v.2 protocol
 * `"odata-v4"` which [partially supports](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding)
 odata version 4
 * `"signalr"`

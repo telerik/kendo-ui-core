@@ -31,7 +31,7 @@ The following example demonstrates the ScrollView in action.
 
 ###### Example
 
-```html
+```dojo
     <div style="width:900px;">
         <div id="scrollView" style="height:400px;">
             <div class="white" data-role="page">
@@ -77,7 +77,7 @@ The following example demonstrates the ScrollView in action.
 
 ###### Example
 
-```html
+```dojo
     <div style="margin:auto; width:60%">
         <div id="scrollView" style="height: 500px; width:890px;"></div>
     </div>

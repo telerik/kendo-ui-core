@@ -9528,7 +9528,7 @@ The data item to which the table row is bound.
 
 ##### e.type `String`
 
-The type of the cell close action - can be either "save" or "cancel". The "cancel" type is triggered when the grid keyboard navigation is enabled by "navigateble: true" and Esc key is used for cell close action.
+The type of the cell close action - can be either "save" or "cancel". The "cancel" type is triggered when the grid keyboard navigation is enabled by "navigatable: true" and Esc key is used for cell close action.
 
 ##### e.sender `kendo.ui.Grid`
 

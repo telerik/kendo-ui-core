@@ -202,6 +202,8 @@ navigation:
         title: "DateInput"
      "*datepicker":
         title: "DatePicker"
+     "*daterangepicker":
+        title: "DateRangePicker"		
      "*datetimepicker":
         title: "DateTimePicker"
      "*dialog":
@@ -257,6 +259,8 @@ navigation:
         title: "PivotGrid"
      "*scheduler":
         title: "Scheduler"
+     "*scrollview":
+        title: "ScrollView"
      "*slider":
         title: "Slider"
      "*sortable":
