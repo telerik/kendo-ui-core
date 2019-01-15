@@ -21532,6 +21532,10 @@ interface JQuery {
     kendoScheduler(options: kendo.ui.SchedulerOptions): JQuery;
     data(key: "kendoScheduler"): kendo.ui.Scheduler;
 
+    kendoScrollView(): JQuery;
+    kendoScrollView(options: kendo.ui.ScrollViewOptions): JQuery;
+    data(key: "kendoScrollView"): kendo.ui.ScrollView;
+
     kendoSlider(): JQuery;
     kendoSlider(options: kendo.ui.SliderOptions): JQuery;
     data(key: "kendoSlider"): kendo.ui.Slider;
@@ -21555,6 +21559,10 @@ interface JQuery {
     kendoStockChart(): JQuery;
     kendoStockChart(options: kendo.dataviz.ui.StockChartOptions): JQuery;
     data(key: "kendoStockChart"): kendo.dataviz.ui.StockChart;
+
+    kendoSwitch(): JQuery;
+    kendoSwitch(options: kendo.ui.SwitchOptions): JQuery;
+    data(key: "kendoSwitch"): kendo.ui.Switch;
 
     kendoTabStrip(): JQuery;
     kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery;
