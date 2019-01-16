@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.3.911
+// Type definitions for Kendo UI Professional v2019.1.115
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -9213,7 +9213,7 @@ declare namespace kendo.drawing {
         constructor(options?: GroupOptions);
 
 
-        append(element: kendo.drawing.Element): void;
+        append(...elements: kendo.drawing.Element[]): void;
         clear(): void;
         clip(): kendo.drawing.Path;
         clip(clip: kendo.drawing.Path): void;
