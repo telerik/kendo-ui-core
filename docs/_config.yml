@@ -484,7 +484,7 @@ navigation:
     "*datepicker":
         title: "DatePicker"
     "*daterangepicker":
-        title: "DateRangePicker"		
+        title: "DateRangePicker"
     "*datetimepicker":
         title: "DateTimePicker"
     "*dialog":
@@ -596,10 +596,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2018.3.911"
+cdnVersion: "2019.1.115"
 
 ## The MVC Core version used
-mvcCoreVersion: "2018.3.911"
+mvcCoreVersion: "2019.1.115"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
