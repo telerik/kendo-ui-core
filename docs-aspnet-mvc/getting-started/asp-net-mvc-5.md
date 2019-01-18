@@ -1,6 +1,6 @@
 ---
 title: Creating Applications
-page_title: Creating Applications - Getting Started 
+page_title: Creating Applications - Getting Started
 description: "Use Progress Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
 previous_url: /aspnetmvc-apps/asp-net-mvc-5, /asp-net-mvc-5
 slug: aspnetmvc5_aspnetmvc
@@ -205,7 +205,7 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
                 <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
                     <dependentAssembly>
                         <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
-                        <bindingRedirect oldVersion="1.0.0.0-5.2.6.0" newVersion="5.2.6.0" />
+                        <bindingRedirect oldVersion="1.0.0.0-5.2.7.0" newVersion="5.2.7.0" />
                     </dependentAssembly>
                 </assemblyBinding>
             </runtime>
