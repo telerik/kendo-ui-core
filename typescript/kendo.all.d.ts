@@ -9213,7 +9213,7 @@ declare namespace kendo.drawing {
         constructor(options?: GroupOptions);
 
 
-        append(element: kendo.drawing.Element): void;
+        append(...elements: kendo.drawing.Element[]): void;
         clear(): void;
         clip(): kendo.drawing.Path;
         clip(clip: kendo.drawing.Path): void;
