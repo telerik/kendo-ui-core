@@ -25,7 +25,7 @@ The distribution files contain the following:
 
 ### Meet the Requirements
 
-* [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html), version 1.8 or 1.7
+* [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html), latest recommended version
 * [Eclipse for Enterprise Developers (J2EE support)&mdash;Luna, Kepler, or later](https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr2)
 * [Maven support for Eclipse (M2E)](http://www.eclipse.org/m2e/)
 * Configured server, tested with [Tomcat 7](http://tomcat.apache.org/tomcat-7.0-doc/)

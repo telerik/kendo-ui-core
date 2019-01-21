@@ -2,7 +2,7 @@
 title: Set an indeterminate state of the Kendo UI Switch
 page_title: Set an indeterminate state | Kendo UI Switch
 description: "Learn how to set an indeterminate state of the Kendo UI Switch."
-slug: howto_enable_dragging_switch
+slug: howto_set_indeterminate_state_switch
 ---
 
 # Indeterminate state
