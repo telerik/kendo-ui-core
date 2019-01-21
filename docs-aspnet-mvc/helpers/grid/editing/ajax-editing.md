@@ -180,7 +180,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                     model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
                 })
                 .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item
-                .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Гrid needs data.
+                .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the grid needs data.
                 .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
                 .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
             )
