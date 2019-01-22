@@ -24,10 +24,12 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Color Picker](http://demos.telerik.com/kendo-ui/colorpicker/index)   | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
+| [DateRangePicker](http://demos.telerik.com/kendo-ui/daterangepicker/index)      | :x: | :white_check_mark: | :white_check_mark:           |
 | [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | :white_check_mark: | :white_check_mark: | :white_check_mark:        |
 | [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index)  | :x: | :white_check_mark: | :white_check_mark:           |
 | [Editor](http://demos.telerik.com/kendo-ui/editor/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
+| [ListBox](http://demos.telerik.com/kendo-ui/listbox/index)              | :white_check_mark:  | :white_check_mark: | :white_check_mark:           |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index) | :white_check_mark: | :white_check_mark: | :white_check_mark:        |
@@ -69,6 +71,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | **Scheduling**            |
 | [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Gantt](http://demos.telerik.com/kendo-ui/gantt/index)                | :x:  | :white_check_mark: | :white_check_mark:           |
+| [MultiViewCalendar](http://demos.telerik.com/kendo-ui/multiviewcalendar/index)                | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
 | **Layout**                |
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
@@ -76,6 +79,9 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Splitter](http://demos.telerik.com/kendo-ui/splitter/index)          | :white_check_mark:| :white_check_mark: | :white_check_mark:            |
 | [Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index)            | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Window](http://demos.telerik.com/kendo-ui/window/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
+| **Media**            |
+| [MediaPlayer](http://demos.telerik.com/kendo-ui/mediaplayer/index)              | :x: | :white_check_mark: | :white_check_mark:           |
+| [ScrollView](http://demos.telerik.com/kendo-ui/scrollview/index)    | :x: | :white_check_mark: | :white_check_mark:           |
 | **Navigation**            |
 | [Button](http://demos.telerik.com/kendo-ui/button/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ButtonGroup](http://demos.telerik.com/kendo-ui/buttongroup/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
