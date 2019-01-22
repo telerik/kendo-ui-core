@@ -128,6 +128,12 @@ var __meta__ = { // jshint ignore:line
                  that.readonly(element.is("[readonly]"));
              }
 
+             that.angular("compile", function(){
+                 return {
+                     elements: that._text.get()
+                 };
+             });
+
              kendo.notify(that);
          },
 
@@ -484,7 +490,6 @@ var __meta__ = { // jshint ignore:line
                 element.type = "text";
             }
 
-            that._initialTitle = element.title;
             text[0].title = element.title;
             text[0].tabIndex = element.tabIndex;
             text[0].style.cssText = element.style.cssText;
@@ -758,7 +763,7 @@ var __meta__ = { // jshint ignore:line
                 input.val(this.options.placeholder);
             }
 
-            input.attr("title", this._initialTitle || input.val());
+            input.attr("title", this.element.attr("title") || input.val());
         },
 
         _wrapper: function() {

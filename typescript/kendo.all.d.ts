@@ -6164,7 +6164,7 @@ declare namespace kendo.ui {
 
     interface ProgressBarOptions {
         name?: string;
-        animation?: ProgressBarAnimation;
+        animation?: boolean | ProgressBarAnimation;
         chunkCount?: number;
         enable?: boolean;
         max?: number;
@@ -6310,6 +6310,14 @@ declare namespace kendo.ui {
 
     }
 
+    interface SchedulerSelectOptions {
+        events?: SchedulerEvent[] | any[];
+        resources? : any[];
+        start?: Date;
+        end?: Date;
+        isAllDay?: boolean;
+    }
+
     interface ResponsivePanelOptions {
         name?: string;
         autoClose?: boolean;
@@ -6362,7 +6370,7 @@ declare namespace kendo.ui {
         saveAsPDF(): JQueryPromise<any>;
         saveEvent(): void;
         select(): void;
-        select(events: any, options: any): void;
+        select(options: SchedulerEvent[] | SchedulerSelectOptions): void;
         setDataSource(dataSource: kendo.data.SchedulerDataSource): void;
         slotByPosition(xPosition: number, yPosition: number): any;
         slotByElement(element: Element): any;

@@ -628,6 +628,71 @@ The example below demonstrates a custom error.
 <!--*-->
 When an `error` event is fired, the DataSource does not process any data items, which may also be part of the server response. For example, if an update action fails due to conflicting edits, and the data needs to be refreshed from the server, you need to call the [`read`](/api/javascript/data/datasource/methods/read) method of the DataSource in the error handler. Sending the new data together with the error response is not going to populate the DataSource with the new values.
 
+## Submit all Created / Updated / Destroyed Items with a Single Request
+
+The [`transport.submit`](/api/javascript/data/datasource/configuration/transport.submit) function will handle create, update and delete operations in a single batch when custom transport is used. Also, in this case the `transport.read` should also be defined as a function.
+
+The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.
+
+> This function will only be invoked when the DataSource is in its [batch mode](/api/javascript/data/datasource#configuration-batch).
+
+###### Example
+
+```dojo
+<script>
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            read:  function(options){
+                $.ajax({
+                    url: "https://demos.telerik.com/kendo-ui/service/products",
+                    dataType: "jsonp",
+                    success: function(result) {
+                        options.success(result);
+                    },
+                    error: function(result) {
+                        options.error(result);
+                    }
+                });
+            },
+            submit: function(e) {
+                var data = e.data;
+                console.log(data);
+
+                // send batch update to desired URL, then notify success/error
+
+                e.success(data.updated,"update");
+                e.success(data.created,"create");
+                e.success(data.destroyed,"destroy");
+                e.error(null, "customerror", "custom error");
+            }
+        },
+        batch: true,
+        pageSize: 20,
+        schema: {
+            model: {
+            id: "ProductID",
+            fields: {
+                ProductID: { editable: false, nullable: true },
+                ProductName: { validation: { required: true } },
+                UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                Discontinued: { type: "boolean" },
+                UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+            }
+        }
+    }
+});
+
+dataSource.read().then(function(){
+    var productOne = dataSource.at(1),
+        productTwo = dataSource.at(2);
+
+    productOne.set("UnitPrice",42);
+    productTwo.set("UnitPrice",42);
+    dataSource.sync();
+});
+</script>
+```
+
 ## Sample Apps and Examples
 
 ### Remote CRUD Operations with the Grid
