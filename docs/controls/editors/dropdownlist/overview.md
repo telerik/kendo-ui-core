@@ -103,7 +103,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ### Item Templates
 
-The item template manages the way the list items of a DropDownList are rendered.  
+The item template manages the way the list items of a DropDownList are rendered.
 
 The following example demonstrates how to define an item template.
 
@@ -136,7 +136,7 @@ The following example demonstrates how to define an item template.
 
 ### Value Templates
 
-The value template manages the way the selected value of a DropDownList is rendered.  
+The value template manages the way the selected value of a DropDownList is rendered.
 
 The following example demonstrates how to define a value template.
 
@@ -355,8 +355,6 @@ The ID can be used to style the element or to access a specific element inside t
 Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
 ## See Also
-
-Other articles on the Kendo UI DropDownList:
 
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})

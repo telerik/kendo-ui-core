@@ -27,7 +27,7 @@ To get a bug fix, you have to upgrade your project to the same release as the re
 
 * [Upgrading your Kendo UI for jQuery project (new script or style referral)](https://docs.telerik.com/kendo-ui/intro/supporting/scripts-general)
 * [Upgrading your Telerik&reg; UI for ASP.NET MVC project](https://docs.telerik.com/aspnet-mvc/introduction#upgrade)
-* [Upgrading your Telerik&reg; UI for ASP.NET Core project](https://docs.telerik.com/aspnet-core/introduction#upgradee)
+* [Upgrading your Telerik&reg; UI for ASP.NET Core project](https://docs.telerik.com/aspnet-core/introduction#upgrade)
 
 If a workaround for an earlier version is technically feasible, you may be provided with such in the ticketing system. However, Progress Software Corporation cannot guarantee that bug fixes in earlier versions will be available and cannot give warranty for any workarounds that are provided.
 

@@ -14,7 +14,7 @@ This page provides solutions for common issues you may encounter while working w
 
 ### Selected Item Is Lost When Bound to Shared DataSource
 
-> **Important**  
+> **Important**
 >
 > This issue can also be observed in [Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}) and [Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
 
@@ -38,7 +38,7 @@ The example below demonstrates a sample issue.
         dataSource: ds
     });
 
-The example below demonstrates the solution to the above issue.   
+The example below demonstrates the solution to the above issue.
 
 ###### Example
 
@@ -58,8 +58,6 @@ The example below demonstrates the solution to the above issue.
 For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
 
 ## See Also
-
-Other articles on the Kendo UI ComboBox:
 
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})

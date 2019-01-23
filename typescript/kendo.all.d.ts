@@ -6620,14 +6620,6 @@ declare namespace kendo.ui {
         workWeekEnd?: number;
     }
 
-    interface SchedulerSelectOptions {
-        events?: any;
-        resources?: any;
-        start?: Date;
-        end?: Date;
-        isAllDay?: boolean;
-    }
-
     interface SchedulerOptions {
         name?: string;
         allDayEventTemplate?: string|Function;

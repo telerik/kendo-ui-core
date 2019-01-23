@@ -374,7 +374,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
 if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
-  "allDay": "all day",
+  "allDay": "cały dzień",
   "cancel": "Anuluj",
   "editable": {
     "confirmation": "Are you sure you want to delete this event?"
@@ -418,9 +418,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "week": "Week",
     "workWeek": "Work Week"
   },
-  "deleteWindowTitle": "Delete event",
-  "showFullDay": "Show full day",
-  "showWorkDay": "Show business hours"
+  "deleteWindowTitle": "Usuń wydarzenie",
+  "showFullDay": "Pokaż cały dzień",
+  "showWorkDay": "Pokaż godziny robocze"
 });
 }
 
