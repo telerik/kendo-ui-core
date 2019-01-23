@@ -9,7 +9,7 @@ position: 1
 
 # Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-[Telerik UI for ASP.NET Core](http://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](../kendo-ui/introduction) in .NET Core.
+[Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](../kendo-ui/introduction) in .NET Core.
 
 This article demonstrates how to use Telerik UI for ASP.NET Core in ASP.NET Core applications.
 
@@ -19,14 +19,13 @@ Telerik UI for ASP.NET Core targets the stable releases of the ASP.NET Core fram
 
 ## Resources
 
-To get started, refer to the [ASP.NET Core Documentation](http://docs.asp.net/en/latest/index.html).
+To get started, refer to the [ASP.NET Core Documentation](https://docs.asp.net/en/latest/index.html).
 
 To facilitate the process of tracking down particular issues or behaviors, use the following repositories which contain source code, instructions, and issue trackers for the ASP.NET project.
 
-- [ASP.NET Home](https://github.com/aspnet/home) (on GitHub)
-- [ASP.NET MVC](https://github.com/aspnet/Mvc) (main repository)
-- [ASP.NET MVC Announcements](https://github.com/aspnet/announcements/) (for important changes)
-- [Telerik UI for ASP.NET Core Demos and Sample Applications](http://demos.telerik.com/aspnet-core)
+- [ASP.NET Core](https://github.com/aspnet/AspNetCore) (on GitHub)
+- [ASP.NET Core Announcements](https://github.com/aspnet/announcements/) (for important changes)
+- [Telerik UI for ASP.NET Core Demos and Sample Applications](https://demos.telerik.com/aspnet-core)
 
 ## Setup
 
@@ -73,16 +72,14 @@ Telerik UI for ASP.NET Core contains the following directories:
 * `src`&mdash;The complete JavaScript, CSS, and C# source code. Note that this directory is not available in the trial version.
 * `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (*kendo.all*, *kendo.dataviz*, *kendo.web* and *kendo.mobile*).
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts (as the above).
-* `VSExtensions`&mdash;The extensions for Visual Studio 2015 and 2017.
+* `VSExtensions`&mdash;The extensions for Visual Studio 2017.
 * `wrappers\aspnetcore\Binaries\AspNet.Core`&mdash;Containing the .nupkg NuGet package file.
 * `wrappers\aspnetcore\Examples\AspNet.Core\VS2017`&mdash;The ASP.NET Core sample application built with Visual Studio 2017.
 * `wrappers\aspnetcore\EditorTemplates\razor`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
 
 ## Sample Application
 
-Telerik UI for ASP.NET Core comes with a sample .NET Core application which is an offline version of the [Telerik UI for ASP.NET Core Demos](http://demos.telerik.com/aspnet-core). The sample application is available in the following versions:
-
-* The .NET Core application built with Visual Studio 2017
+Telerik UI for ASP.NET Core comes with a sample .NET Core application, built with Visual Studio 2017, which is an offline version of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core).
 
 > **Important**
 >
@@ -94,9 +91,7 @@ To run the sample application:
 
 1. Navigate to the installation directory of Telerik UI for ASP.NET Core.
 
-1. Open the sample Visual Studio Project:
-
-  * (For Visual Studio 2017) Open `wrappers\aspnetcore\Examples\AspNet.Core\VS2017\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj`.
+1. Open the Visual Studio 2017 sample project `wrappers\aspnetcore\Examples\AspNet.Core\VS2017\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
 
 1. Press `CTRL+F5` to build and run the application.
 
@@ -115,7 +110,7 @@ You can upgrade the version of the Telerik UI for ASP.NET Core wrappers and also
 
 ### Upgrade to Newer Versions
 
-To update Telerik UI for ASP.NET MVC to a new version, either:
+To update Telerik UI for ASP.NET Core to a new version, either:
 
 * Upgrade with NuGet and Bower, or
 * Manually replace the references and files.

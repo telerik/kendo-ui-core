@@ -378,8 +378,6 @@ The MultiSelect enables you to remove the values from the input area of the widg
 
 ## See Also
 
-Other articles on the Kendo UI MultiSelect:
-
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
 * [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})

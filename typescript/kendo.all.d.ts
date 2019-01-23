@@ -1906,7 +1906,7 @@ declare namespace kendo.ui {
         dates?: any;
         depth?: string;
         disableDates?: any|Function;
-        footer?: false | string | Function;
+        footer?: boolean | string | Function;
         format?: string;
         max?: Date;
         messages?: CalendarMessages;
@@ -6618,14 +6618,6 @@ declare namespace kendo.ui {
         type?: string;
         workWeekStart?: number;
         workWeekEnd?: number;
-    }
-
-    interface SchedulerSelectOptions {
-        events?: any;
-        resources?: any;
-        start?: Date;
-        end?: Date;
-        isAllDay?: boolean;
     }
 
     interface SchedulerOptions {

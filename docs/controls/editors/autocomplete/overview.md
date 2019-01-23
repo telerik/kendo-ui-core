@@ -207,7 +207,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 ### Item Templates
 
-The item template manages the way the list items of an AutoComplete are rendered.  
+The item template manages the way the list items of an AutoComplete are rendered.
 
 The following example demonstrates how to define an item template.
 
@@ -338,8 +338,6 @@ The following example demonstrates how to define a `noDataTemplate` template.
     </script>
 
 ## See Also
-
-Other articles on the Kendo UI AutoComplete:
 
 * [Grouping Functionality]({% slug grouping_kendoui_autocomplete_widget %})
 * [Virtualization]({% slug virtualization_kendoui_autocomplete_widget %})
