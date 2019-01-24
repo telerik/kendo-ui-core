@@ -1,13 +1,14 @@
 ---
 title: Use Different Popup Editors for Create and Update Operations
-page_title: Use Different Popup Editors for Create and Update Operations | Kendo UI Grid
-description: "Learn how to use different popup editors for create and update operations in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Use Different Popup Editors | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use different popup editors for create and update operations in the widget."
 slug: howto_use_different_poup_editors_for_create_update_operations
 ---
 
 # Use Different Popup Editors for Create and Update Operations
 
 The following example demonstrates how to use different popup editors in a Grid for the Create and Update data operations.
+Get started with the jQuery Grid by Kendo UI and learn how to use different popup editors for create and update operations in the widget.
 
 ###### Example
 

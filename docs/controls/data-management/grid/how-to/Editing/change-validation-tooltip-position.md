@@ -1,7 +1,7 @@
 ---
 title: Change Validation Message Position
-page_title: Change Validation Message Position | Kendo UI Grid
-description: "Learn how to change the validation message position in a popup edit form when working with the Kendo UI Grid."
+page_title: jQuery Grid Documentation | Change Validation Message Position | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to change the validation message position in a popup edit form when working with the Grid."
 slug: howto_change_validation_message_position_grid
 ---
 

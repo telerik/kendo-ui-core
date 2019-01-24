@@ -1,7 +1,7 @@
 ---
 title: Display Grid as Triangular Matrix
-page_title:  Display Grid as Triangular Matrix | Kendo UI Grid
-description: "Learn how to access an editor control in the edit event handler of the Kendo UI Grid widget."
+page_title:  jQuery Grid Documentation | Display Grid as Triangular Matrix | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to change its default data layout to a Triangular matrix."
 slug: howto_display_grid_as_triangular_matrix_grid
 ---
 

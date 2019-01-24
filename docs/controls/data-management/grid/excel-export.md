@@ -1,7 +1,7 @@
 ---
 title: Excel Export
-page_title: Excel Export | Kendo UI Grid
-description: "Learn how to set the Excel export functionality of the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Excel Export | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to set the Excel export functionality."
 slug: exporting_excel_kendoui_grid_widget
 position: 10
 ---

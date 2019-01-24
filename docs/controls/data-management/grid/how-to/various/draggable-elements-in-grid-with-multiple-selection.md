@@ -1,7 +1,7 @@
 ---
 title: Use Draggable Elements with Multiselection Enabled
-page_title: Use Draggable Elements with Multiselection Enabled | Kendo UI Grid
-description: "Learn how to use draggable components in a Kendo UI Grid widget with enabled multi-selection."
+page_title: jQuery Grid Documentation | Draggable Elements via Multi|Selection | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use draggable components with enabled multi-selection."
 previous_url: /controls/data-management/grid/how-to/draggable-elements-in-grid-with-multiple-selection
 slug: howto_use_draggable_elements_multiselection_enabled_grid
 ---

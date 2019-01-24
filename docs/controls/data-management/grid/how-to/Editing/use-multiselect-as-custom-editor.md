@@ -1,7 +1,7 @@
 ---
 title: Use MultiSelect as Custom Editor in Grid
-page_title: Use MultiSelect as Custom Editor in Grid | Kendo UI Grid
-description: "Learn how to use the Kendo UI MultiSelect as a custom editor in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Use MultiSelect as CSV Editor | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use MultiSelect as an editor for comma-separated string fields."
 slug: howto_usemultiselectascustomeditor_grid
 ---
 

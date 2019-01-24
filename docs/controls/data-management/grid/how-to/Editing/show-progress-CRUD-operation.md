@@ -1,7 +1,7 @@
 ---
 title: Show Progress for Grid CRUD Operations
-page_title: Show Progress for Grid CRUD Operations | Kendo UI Grid
-description: "Learn how to show the current progress of each CRUD operation for a Kendo UI Grid."
+page_title: jQuery Grid Documentation | Progress for CRUD Operations | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to show the current progress of each CRUD operation."
 previous_url: /controls/data-management/grid/how-to/show-progress-CRUD-operation, /aspnet-mvc/helpers/grid/how-to/use-grid-with-progressbar-crud-operations
 slug: howto_show_progress_CRUD_operation
 ---

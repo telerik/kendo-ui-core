@@ -1,7 +1,7 @@
 ---
 title: Persist Collapsed State of Grouped Records
-page_title: Persist Collapsed State of Grouped Records | Kendo UI Grid
-description: "Learn how to persist the collapsed state of grouped records in a Kendo UI Grid."
+page_title: jQuery Grid Documentation | Persist Collapsed State | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to create persist the collapsed state of grouped records."
 previous_url: /controls/data-management/grid/how-to/persist-grouped-grid-collapsed-details-state
 slug: howto_persist_collapsed_stateof_grouped_records_grid
 ---

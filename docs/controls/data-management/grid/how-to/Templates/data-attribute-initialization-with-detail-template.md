@@ -1,7 +1,7 @@
 ---
 title: Initialize Data Attribute with Detail Template
-page_title: Initialize Data Attribute with Detail Template | Kendo UI Grid
-description: "Learn how to initialize a Kendo UI Grid widget by using data attributes and including a detail template."
+page_title: jQuery Grid Documentation | Data Attribute Initialization | Kendo UI
+description: "Learn how to initialize a Kendo UI jQuery Grid widget by using data attributes and including a detail template."
 previous_url: /controls/data-management/grid/how-to/data-attribute-initialization-with-detail-template, /web/grid/how-to/data-attribute-initialization-with-detail-template
 slug: howto_initialize_data_attributewith_detail_template_grid
 ---

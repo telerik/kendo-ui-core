@@ -1,7 +1,7 @@
 ---
 title: Customize Page Layout
-page_title: Customize Page Layout | Kendo UI Grid
-description: "Learn how to customize the page layout of a Kendo UI Grid in PDF."
+page_title: jQuery Grid Documentation | Customize Page Layout | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to customize the page layout in PDF."
 previous_url: /framework/drawing/how-to/custom-page-layout, /kendo-mvc/controls/data-management/grid/how-to/pdf-export/custom-page-layout
 slug: howto_customize_page_layout_pdf_grid
 ---

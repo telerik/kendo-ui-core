@@ -1,7 +1,7 @@
 ---
 title: PDF Export
-page_title: PDF Export | Kendo UI Grid
-description: "Learn how to set the PDF export functionality of the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | PDF Export | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to set the PDF export functionality."
 slug: exporting_pdf_kendoui_grid_widget
 position: 11
 ---

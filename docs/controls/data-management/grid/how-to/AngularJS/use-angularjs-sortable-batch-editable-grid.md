@@ -1,7 +1,7 @@
 ---
 title: Use Grid with Sortable in AngularJS
-page_title: Use Grid with Sortable in AngularJS | Kendo UI Grid
-description: "Learn how to reorder AngularJS Grid rows by using the Kendo UI Sortable widget."
+page_title: jQuery Grid Documentation | Grid with Sortable in AngularJS | Kendo UI
+description: "Learn how to use the jQuery Grid by Kendo UI in both editable and non-editable modes together with a Kendo UI Sortable in AngularJS projects."
 slug: howto_usegridwithsortableagularjs_grid
 ---
 

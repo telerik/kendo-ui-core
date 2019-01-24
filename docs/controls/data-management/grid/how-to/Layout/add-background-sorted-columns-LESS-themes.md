@@ -1,7 +1,7 @@
 ---
 title: Add Background Color to Sorted Columns by Using LESS Themes
-page_title: Add Background Color to Sorted Columns by Using LESS Themes | Kendo UI Grid
-description: "Learn how to add a background color to the sorted columns in a Kendo UI Grid by using the LESS themes."
+page_title: jQuery Grid Documentation | Background Color with LESS Themes | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to add a background color to the sorted columns using the LESS themes."
 slug: howto_add_background_sorted_columns_LESS_themes_grid
 ---
 

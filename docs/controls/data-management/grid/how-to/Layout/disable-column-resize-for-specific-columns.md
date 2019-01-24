@@ -1,7 +1,7 @@
 ---
 title: Disable Resizing for Specific Columns
-page_title: Disable Resizing for Specific Columns | Kendo UI Grid
-description: "Learn how to disable column resizing for specific columns when working with the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Disable Resize of Specific Columns | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to disable column resizing for specific columns."
 slug: howto_disable_column_resizing_grid
 ---
 

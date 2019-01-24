@@ -1,7 +1,7 @@
 ---
 title: Increase Popup Edit Form and Textbox Width
-page_title: Increase Popup Edit Form and Textbox Width | Kendo UI Grid
-description: "Learn how to increase the width of the popup edit form and the textbox in the kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Popup Edit Form and Textbox Width | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to increase the width of the popup edit form and the textbox."
 slug: howto_increase_popup_edit_formand_textbox_grid
 ---
 

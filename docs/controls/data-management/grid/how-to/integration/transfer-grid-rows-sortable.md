@@ -1,7 +1,7 @@
 ---
 title: Transfer Rows in Grids Using Sortable
-page_title: Transfer Rows in Grids Using Sortable | Kendo UI Sortable
-description: "Learn how to move a row from one Kendo UI Grid to another using the Kendo UI Sortable widget."
+page_title: jQuery Grid Documentation | Transfer Rows via Sortable | Kendo UI
+description: "Learn how to move a row from one Kendo UI jQuery Grid to another using the Sortable widget."
 previous_url: /controls/data-management/grid/how-to/transfer-grid-rows-sortable
 slug: howto_transferrowsingridsortable_grid
 ---

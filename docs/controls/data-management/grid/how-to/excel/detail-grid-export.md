@@ -1,7 +1,7 @@
 ---
 title: Export Detail Grids
-page_title:  Export Detail Grids | Kendo UI Grid
-description: "Learn how to export to Excel master and detail Kendo UI Grids."
+page_title:  jQuery Grid Documentation | Export Detail Grids | Kendo UI
+description: "Get started with Kendo UI for jQuery enabling you to export to Excel master and detail Grids."
 slug: howto_exportto_excel_masterand_detail_grid
 ---
 

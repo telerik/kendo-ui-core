@@ -1,7 +1,7 @@
 ---
 title: Edit Records in Child Grids
-page_title: Edit Records in Child Grids | Kendo UI Grid
-description: "Learn how to edit records in hierarchical Kendo UI Grids."
+page_title: jQuery Grid Documentation | Edit Records in Child Grids | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to edit records in hierarchical Grids."
 slug: howto_edit_recordsin_children_grid
 ---
 

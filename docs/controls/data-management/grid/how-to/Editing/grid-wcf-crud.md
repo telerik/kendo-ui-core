@@ -1,7 +1,7 @@
 ---
 title: Use WCF with CRUD Operations
-page_title: Use WCF with CRUD Operations | Kendo UI Grid
-description: "Learn how to use WCF service with remote CRUD (Create, Read, Update, Destroy) operations for the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Use WCF with CRUD Operations | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use WCF service with remote CRUD operations."
 slug: howto_use_wcf_service_crud_operations_grid
 ---
 

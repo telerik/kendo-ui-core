@@ -1,7 +1,7 @@
 ---
 title: Multicolumn Headers
-page_title: Multicolumn Headers | Kendo UI Grid
-description: "Learn how to apply the multicolumn headers feature to the Kendo UI Grid for jQuery."
+page_title: jQuery Grid Documentation | Multicolumn Headers | Kendo UI
+description: "Get started with the multicolumn headers feature of the jQuery Grid by Kendo UI allowing you to group together one or more columns by a common header."
 slug: multicolumn_headers_kendoui_grid_widget
 position: 4
 ---

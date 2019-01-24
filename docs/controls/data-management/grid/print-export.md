@@ -1,7 +1,7 @@
 ---
 title: Printing
-page_title: Printing | Kendo UI Grid
-description: "Learn how to print the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Printing | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI allowing you to select only the Grid content on a page for printing."
 slug: printing_kendoui_grid
 position: 12
 ---

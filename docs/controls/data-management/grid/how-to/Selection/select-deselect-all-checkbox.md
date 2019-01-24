@@ -1,7 +1,7 @@
 ---
 title: Select or Deselect All Rows with Select All Header Checkbox
-page_title: Select or Deselect All Rows with Select All Header Checkbox | Kendo UI Grid
-description: "Select or deselect all rows with a **Select All** header checkbox in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Select or Deselect All Checkboxes | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to select or deselect all rows with a Select All header checkbox."
 slug: howto_select_deselect_all_rowswith_checkboxes_grid
 ---
 

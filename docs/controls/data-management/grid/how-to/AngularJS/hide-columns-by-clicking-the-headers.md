@@ -1,7 +1,7 @@
 ---
 title: Hide Columns on Clicking the Headers and Restore Them on Clicking a Button
-page_title: Hide Columns on Clicking the Headers and Restore Them on Clicking a Button | Kendo UI Grid
-description: "Learn how to hide columns and sub-columns in a Kendo UI Grid when working in AngularJS applications by clicking the column headers. Show them back later when you click on a button."
+page_title: jQuery Grid Documentation | Hide Columns on Clicking Headers | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to hide columns and show them back later when working in AngularJS applications."
 slug: howto_hide_columns_and_subcolumns_grid
 ---
 

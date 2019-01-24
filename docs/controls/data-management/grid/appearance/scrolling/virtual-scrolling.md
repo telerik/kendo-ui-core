@@ -1,7 +1,7 @@
 ---
 title: Virtual Scrolling
-page_title: Virtual Scrolling | Kendo UI Grid
-description: "Learn how to apply virtual scrolling to the Kendo UI Grid for jQuery."
+page_title: jQuery Grid Documentation | Virtual Scrolling | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to enable virtual scrolling as an alternative to paging."
 slug: virtual_scrolling_kendoui_grid_widget
 position: 2
 ---

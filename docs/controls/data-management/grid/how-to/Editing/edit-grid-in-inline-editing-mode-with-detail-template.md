@@ -1,7 +1,7 @@
 ---
 title: Use Detail Template Editors in Inline Editing Modes
-page_title: Use Detail Template Editors in Inline Editing Modes | Kendo UI Grid
-description: "Learn how to edit records by using a different detail template in the editing mode of the Kendo UI Grid."
+page_title: jQuery Grid Documentation | Inline Editing Detail Template | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to edit records by using a detail template along with the inline editing mode of the Grid."
 slug: howto_edit_records_via_detail_template_editor_in_inline_mode
 ---
 

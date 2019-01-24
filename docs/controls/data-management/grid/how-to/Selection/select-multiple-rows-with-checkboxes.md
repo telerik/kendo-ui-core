@@ -1,7 +1,7 @@
 ---
 title: Select Multiple Rows with Checkboxes
-page_title:  Select Multiple Rows with Checkboxes | Kendo UI Grid
-description: "Learn how to select multiple rows with checkboxes in the Kendo UI Grid widget."
+page_title:  jQuery Grid Documentation | Multiple Rows with Checkboxes | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to select multiple rows with checkboxes."
 slug: howto_select_multiple_rowswith_checkboxes_grid
 ---
 

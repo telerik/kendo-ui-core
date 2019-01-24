@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Appearance Overview | Kendo UI Grid
-description: "Learn how to control the layout and appearance of the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Appearance Overview | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI supporting various options for setting its layout and handling the appearance of its elements."
 previous_url: /controls/data-management/grid/appearance
 slug: appearance_kendoui_grid_widget
 position: 1

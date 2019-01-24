@@ -1,7 +1,7 @@
 ---
 title: Use Checkboxes inside Column Menus
-page_title: Use Checkboxes inside Column Menus | Kendo UI Grid
-description: "Learn how to use checkboxes inside a Kendo UI Grid column menu."
+page_title: jQuery Grid Documentation | Checkboxes Inside Column Menus | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use checkboxes inside a column menu."
 previous_url: /controls/data-management/grid/how-to/column-menu-using-checkboxes
 slug: howto_use_checkboxes_inside_column_menu_grid
 ---

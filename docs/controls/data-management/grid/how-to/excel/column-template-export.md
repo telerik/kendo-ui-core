@@ -1,7 +1,7 @@
 ---
 title: Use Column Template
-page_title:  Use Column Template | Kendo UI Grid
-description: "Learn how to use the column template as the value of a corresponding cell in the Excel document while exporting Kendo UI Grid."
+page_title:  jQuery Grid Documentation | Column Template Export | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use column template as the value of a corresponding cell in the Excel document while exporting."
 previous_url: /mvc/controls/data-management/grid/how-to/excel/column-template-export
 slug: howto_use_column_template_grid
 ---

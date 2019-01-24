@@ -1,7 +1,7 @@
 ---
 title: Hover Effect on Table Rows
-page_title: Hover Effect on Table Rows | Kendo UI Grid
-description: "Learn how to modify the hover effect on the rows of the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Hover Effect on Table Rows | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to modify the hover effect on the rows of the widget."
 slug: rows_hover_kendoui_grid_widget
 position: 6
 ---
