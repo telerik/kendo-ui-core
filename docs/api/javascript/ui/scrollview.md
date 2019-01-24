@@ -261,15 +261,14 @@ The template which is used to render the content of pages. By default the Scroll
 #### Example: multiple items template (data is accessed via `data[index].fieldName`)
 
     <script id="scrollview-template" type="text/x-kendo-template">
+        # for (var i = 0; i < data.length; i++) { #
         <div>
-            <p>#= data[0].ProductName #</p>
+            <p>#= data[i].ProductName #</p>
         </div>
-        <div>
-            <p>#= data[1].ProductName #</p>
-        </div>
+         # } #
     </script>
 
-    <div id="scrollview"></div>
+    <div id="scrollview" style="height: 120px;"></div>
 
     <script>
 
