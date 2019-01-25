@@ -1,7 +1,7 @@
 ---
 title: Create Custom Number Editor Using NumericTextBox
-page_title: Create Custom Number Editor Using NumericTextBox | Kendo UI Grid
-description: "Learn how to create a custom number editor in a Kendo UI Grid widget using the Kendo UI NumericTextBox."
+page_title: jQuery Grid Documentation | Create Custom Number Editor | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to create a custom number editor using the Kendo UI NumericTextBox."
 slug: howto_create_custom_number_editor_numerictextbox_grid
 ---
 

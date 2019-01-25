@@ -1,7 +1,7 @@
 ---
-title: Configuration
-page_title: Configuration | Kendo UI Grid
-description: "Learn how to configure the scrolling functionality of the Kendo UI Grid for jQuery."
+title: Scrolling Configuration
+page_title: jQuery Grid Documentation | Scrolling Configuration | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to configure the scrolling functionality of the widget."
 slug: scrolling_kendoui_grid_widget
 position: 1
 ---

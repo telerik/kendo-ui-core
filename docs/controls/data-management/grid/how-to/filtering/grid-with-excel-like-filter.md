@@ -1,7 +1,7 @@
 ---
 title: Implement Excel-Like Filter Menus
-page_title: Implement Excel-Like Filter Menus | Kendo UI Grid
-description: "Learn how to implement an Excel-like filter menu in a Kendo UI Grid."
+page_title: jQuery Grid Documentation | AutoComplete for Current Filter | Kendo UI
+description: "Learn how to filter the jQuery Grid by Kendo UI by using AutoComplete and by showing results from the current Grid filter."
 slug: howto_gridfiltering_excellike_grid
 ---
 

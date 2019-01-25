@@ -1,7 +1,7 @@
 ---
 title: Use Grid in Kendo UI SPA Application
-page_title: Use Grid in Kendo UI SPA Application | Kendo UI Grid
-description: "Learn how to initialize a Kendo UI Grid widget in a Kendo UI SPA application."
+page_title: jQuery Grid Documentation | Use in SPA Application | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to initialize it in a SPA application."
 previous_url: /controls/data-management/grid/how-to/kendo-grid-in-spa-application
 slug: howto_use_gridin_kendouispa_app_grid
 ---

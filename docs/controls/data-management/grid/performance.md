@@ -1,7 +1,7 @@
 ---
 title: Performance
-page_title: Performance | Kendo UI Grid
-description: "Learn how to use the Kendo UI Grid in the most efficient way and optimize its behavior."
+page_title: jQuery Grid Documentation | Performance | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to achieve the best performance based on insights on the most common performance issues."
 slug: performance_kendoui_grid_widget
 position: 5
 ---

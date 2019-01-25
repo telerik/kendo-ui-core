@@ -1,7 +1,7 @@
 ---
 title: Use Custom Validation in Filter Menus
-page_title: Use Custom Validation in Filter Menus | Kendo UI Grid
-description: "Learn how to use custom validation in the Filter menu of the Kendo UI Grid when the filtering functionality is applied."
+page_title: jQuery Grid Documentation | Custom Validation in Filter Menus | Kendo UI
+description: "Learn how to use custom validation in the Filter menu of the jQuery Grid by Kendo when the filtering functionality is applied."
 slug: howto_gridfiltering_custom_validation_filter_menu_grid
 ---
 

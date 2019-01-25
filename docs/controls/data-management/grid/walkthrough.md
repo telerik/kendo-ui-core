@@ -1,7 +1,7 @@
 ---
 title: Walkthrough
-page_title: Walkthrough | Kendo UI Grid
-description: "Learn how to create a grid, add an HTML table and control the features of the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Walkthrough | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: walkthrough_kendoui_grid_widget
 position: 2
 ---

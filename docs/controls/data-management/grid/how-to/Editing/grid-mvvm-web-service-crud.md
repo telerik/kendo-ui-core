@@ -1,7 +1,7 @@
 ---
 title: Use CRUD Operations when Grid Is Bound through MVVM
-page_title: Use CRUD Operations when Grid Is Bound through MVVM | Kendo UI Grid
-description: "Learn how to use CRUD operations in Kendo UI Grid that is bound through MVVM."
+page_title: jQuery Grid Documentation | CRUD Operations Through MVVM | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use CRUD operations when the Grid is bound through MVVM."
 slug: howto_use_crud_operationswith_mvvmbound_grid
 ---
 

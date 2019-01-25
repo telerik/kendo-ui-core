@@ -1,7 +1,7 @@
 ---
 title: Allow Single Row in Master Grid to be Expanded
-page_title: Allow Single Row in Master Grid to be Expanded | Kendo UI Grid
-description: "Learn how to allow only one of the rows in a master Kendo UI Grid to be expanded at any time."
+page_title: jQuery Grid Documentation | Single Row Expansion | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to collapse a row that was previously expanded when the user expands a new one."
 slug: howto_allowonlyasingleexpandedrow_grid
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Refresh Grid in Detail Template
-page_title: Refresh Grid in Detail Template | Kendo UI Grid
-description: "Learn how to refresh a child grid in a detail template by using an external button in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Refresh Grid in Detail Template | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to refresh a child grid in a detail template by using external button."
 slug: howto_refresh_gridin_detail_template_grid
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Grid
-description: "Learn how to create, initialize, and enable the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Grid Overview | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to create, initialize, and enable the widget."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
 position: 1

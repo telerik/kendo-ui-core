@@ -1,7 +1,7 @@
 ---
 title: Use CRUD Operations When Grid Is Bound to ASP.NET MVC Action Methods
-page_title: Use CRUD Operations When Grid Is Bound to ASP.NET MVC Action Methods | Kendo UI Grid
-description: "Learn how to use CRUD operations in Kendo UI Grid that is bound to ASP.NET MVC action methods."
+page_title: jQuery Grid Documentation | CRUD via ASP.NET MVC Methods | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use CRUD operations when the Grid is bound to ASP.NET MVC action methods."
 slug: howto_use_crud_operationswith_apsnet_action_methods_bound_grid
 ---
 

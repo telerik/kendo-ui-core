@@ -1,7 +1,7 @@
 ---
 title: Change Languages Dynamically
-page_title: Change Languages Dynamically | Kendo UI Grid
-description: "Learn how to dynamically change the language of a Kendo UI Grid widget in an AngularJS application."
+page_title: jQuery Grid Documentation | Change Languages Dynamically | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to dynamically change the language of the widget in an AngularJS application."
 slug: howto_dynamic_language_change
 ---
 

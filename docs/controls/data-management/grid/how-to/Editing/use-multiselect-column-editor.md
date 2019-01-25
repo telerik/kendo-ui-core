@@ -1,7 +1,7 @@
 ---
 title: Use MultiSelect for Column Editor
-page_title: Use MultiSelect for Column Editor | Kendo UI Grid
-description: "Learn how to use a Kendo UI MultiSelect for a column editor in the Kendo UI Grid."
+page_title: jQuery Grid Documentation | MultiSelect for Column Editor | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use MultiSelect for a column editor in the widget."
 slug: howto_use_multiselect_column_editor
 ---
 

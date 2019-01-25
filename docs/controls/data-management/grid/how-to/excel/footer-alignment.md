@@ -1,7 +1,7 @@
 ---
 title: Align Footer Cells
-page_title: Align Footer Cells | Kendo UI Grid
-description: "Learn how to export to Excel more than one Kendo UI Grid."
+page_title: jQuery Grid Documentation | Align Footer Cells | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to align the footer cells during Excel export."
 slug: howto_alignfootercells_grid
 ---
 

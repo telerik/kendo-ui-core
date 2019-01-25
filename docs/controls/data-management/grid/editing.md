@@ -1,7 +1,7 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI Grid
-description: "Learn how to enable the editing support for the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Editing | Kendo UI
+description: "Get started with the editing functionality of the jQuery Grid by Kendo UI allowing you to manipulate the way the data is presented."
 slug: editing_kendoui_grid_widget
 position: 4
 ---

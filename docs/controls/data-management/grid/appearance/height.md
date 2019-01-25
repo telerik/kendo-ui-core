@@ -1,7 +1,7 @@
 ---
 title: Height
-page_title: Height | Kendo UI Grid
-description: "Learn how to apply different heights to the Kendo UI Grid for jQuery."
+page_title: jQuery Grid Documentation | Height | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to apply different heights to the widget."
 slug: height_kendoui_grid_widget
 position: 2
 ---

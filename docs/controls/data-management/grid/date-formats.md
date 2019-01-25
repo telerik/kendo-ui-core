@@ -1,7 +1,7 @@
 ---
 title: Date Formats
-page_title: Date Formats | Kendo UI Grid
-description: "The most common scenarios for using dates in the Kendo UI Grid on the client and on the server."
+page_title: jQuery Grid Documentation | Date Formats | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to ensure that the dates are rendered properly and saved in the database in the expected format."
 previous_url: /controls/data-management/grid/date-formats-on-the-client-and-on-the-server
 slug: dateformats_kendoui_grid_widget
 position: 9

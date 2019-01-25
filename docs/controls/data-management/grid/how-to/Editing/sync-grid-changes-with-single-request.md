@@ -1,7 +1,7 @@
 ---
 title: Sync Grid Changes with a Single Request
-page_title: Sync Grid Changes with a Single Request | Kendo UI Grid
-description: "Learn how to send all updated, deleted, or new records to the server with a single request in a Kendo UI Grid."
+page_title: jQuery Grid Documentation | Sync Changes with Single Request | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to send all updated, deleted, or new records to the server with a single request."
 slug: howto_sync_all_updated_items_with_single_request
 ---
 

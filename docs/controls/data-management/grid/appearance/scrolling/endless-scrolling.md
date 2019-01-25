@@ -1,7 +1,7 @@
 ---
 title: Endless Scrolling
-page_title: Endless Scrolling | Kendo UI Grid
-description: "Learn how to apply endless scrolling to the Kendo UI Grid for jQuery."
+page_title: jQuery Grid Documentation | Endless Scrolling | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI supporting endless scrolling mode suitable for displaying large number of items."
 slug: endless_scrolling_kendoui_grid_widget
 position: 3
 ---

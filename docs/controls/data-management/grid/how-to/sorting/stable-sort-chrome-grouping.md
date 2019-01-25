@@ -1,7 +1,7 @@
 ---
 title: Implement Stable Sorting for Grouped Data in Chrome
-page_title: Implement Stable Sorting for Grouped Data in Chrome | Kendo UI Grid
-description: "Learn how to implement a stable sort for grouped data in Google Chrome when using the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Stable Sorting for Grouped Data | Kendo UI
+description: "Learn how to implement stable sorting for grouped data in Google Chrome when using the Kendo UI jQuery Grid widget."
 slug: howto_implement_stable_sortwithgroupingin_chrome_grid
 ---
 

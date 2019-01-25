@@ -1,7 +1,7 @@
 ---
 title: Implement Batch Editing with OData
-page_title: Implement Batch Editing with OData | Kendo UI Grid
-description: "Learn how to implement batch editing with the Kendo UI Grid when binding to OData service."
+page_title: jQuery Grid Documentation | Batch Editing with OData | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to implement batch editing when binding to OData service."
 slug: howto_batch_editing_odata_grid
 ---
 

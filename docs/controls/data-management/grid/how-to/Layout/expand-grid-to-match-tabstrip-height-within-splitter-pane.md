@@ -1,7 +1,7 @@
 ---
 title: Expand Grids to Match the Height of TabStrip Containers within Splitter Panes
-page_title: Expand Grids to Match the Height of TabStrip Containers within Splitter Panes | Kendo UI Grid
-description: "Learn how to expand Kendo UI Grids that are located in Kendo UI TabStrip containers within a Kendo UI Splitter pane."
+page_title: jQuery Grid Documentation | Match TabStrip Container Height | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to expand it when it is located in a TabStrip container within a Splitter pane."
 slug: howto_expandtomatchtabstripinsplitter_grid
 ---
 

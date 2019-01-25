@@ -1,7 +1,7 @@
 ---
 title: Localization
-page_title: Localization | Kendo UI Grid
-description: "Learn how to localize the content of the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Grid Localization | Kendo UI
+description: "Get started with the localization functionality of the jQuery Grid by Kendo UI allowing you to adapt text messages to local markets."
 slug: localization_kendoui_grid_widget
 position: 8
 ---

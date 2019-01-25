@@ -1,7 +1,7 @@
 ---
 title: Locked Columns
-page_title: Locked Columns | Kendo UI Grid
-description: "Learn how to lock the columns of the Kendo UI Grid for jQuery."
+page_title: jQuery Grid Documentation | Locked Columns | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI supporting locked columns that are visible at all times while the user scrolls the Grid horizontally."
 slug: locked_columns_kendoui_grid_widget
 position: 3
 ---

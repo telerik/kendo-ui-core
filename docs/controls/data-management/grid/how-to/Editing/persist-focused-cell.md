@@ -1,7 +1,7 @@
 ---
 title: Persist Focused Grid Cells After Rebind
-page_title: Persist Focused Grid Cells After Rebind | Kendo UI Grid
-description: "Learn how to persist a focused Kendo UI Grid cell after rebind."
+page_title: jQuery Grid Documentation | Persist Focused Cells | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to persist a focused cell after rebind."
 slug: howto_persist_focused_grid_cell_grid
 ---
 

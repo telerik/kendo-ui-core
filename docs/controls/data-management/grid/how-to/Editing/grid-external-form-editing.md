@@ -1,7 +1,7 @@
 ---
 title: Edit Records Using External Forms
-page_title: Edit Records Using External Forms | Kendo UI Grid
-description: "Learn how to edit records in Kendo UI Grid by using an external form."
+page_title: jQuery Grid Documentation | Editing Records via External Forms | Kendo UI
+description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and learn how to edit records via external form."
 slug: howto_edit_records_using_external_forms_grid
 ---
 

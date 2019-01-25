@@ -1,7 +1,7 @@
 ---
 title: Resize the Grid by Dragging and Apply the New Size
-page_title: Resize the Grid by Dragging and Apply the New Size | Kendo UI Grid
-description: "Learn how to resize the Kendo UI Grid widget and to apply the new size."
+page_title: jQuery Grid Documentation | Resize via Drag Handle | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to resize the widget via drag handle and apply the new size."
 slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 ---
 

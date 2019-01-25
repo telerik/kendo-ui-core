@@ -1,7 +1,7 @@
 ---
 title: Show Edit Buttons for Editable Records Only
-page_title: Show Edit Buttons for Editable Records Only | Kendo UI Grid
-description: "Learn how to show edit buttons for editable records only in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Buttons for Editable Records | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to show edit buttons for editable records only."
 slug: howto_show_editfor_editable_records_only_grid
 ---
 

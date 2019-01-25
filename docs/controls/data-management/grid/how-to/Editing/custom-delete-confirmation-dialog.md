@@ -1,7 +1,7 @@
 ---
 title: Customize Confirmation Window
-page_title: Customize Confirmation Window | Kendo UI Grid
-description: "Learn how to customize a confirmation dialog in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Customize Confirmation Window | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to customize a confirmation dialog in the widget."
 previous_url: /web/grid/how-to/Editing/grid-custom-delete-confirmation-window
 slug: howto_customize_delete_confirmation_dialog_grid
 ---

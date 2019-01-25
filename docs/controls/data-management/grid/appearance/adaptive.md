@@ -1,7 +1,7 @@
 ---
 title: Adaptive Rendering
-page_title: Adaptive Rendering | Kendo UI Grid
-description: "Learn how to apply the adaptive rendering feature of the Kendo UI Grid for jQuery."
+page_title: jQuery Grid Documentation | Adaptive Rendering | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI which provides consistency to the customer experience on any device by supporting adaptive rendering."
 previous_url: /controls/data-management/grid/adaptive
 slug: adaptive_rendering_kendoui_grid_widget
 position: 7

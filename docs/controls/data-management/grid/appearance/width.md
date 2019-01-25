@@ -1,7 +1,7 @@
 ---
 title: Width
-page_title: Width | Kendo UI Grid
-description: "Learn how to apply different widths to the Kendo UI Grid for jQuery."
+page_title: Get started with the jQuery Grid by Kendo UI and learn how to apply different widths to the widget.
+description: "jQuery Grid Documentation | Width | Kendo UI"
 slug: width_kendoui_grid_widget
 position: 3
 ---

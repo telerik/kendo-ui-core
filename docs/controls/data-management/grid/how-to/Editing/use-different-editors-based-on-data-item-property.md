@@ -1,7 +1,7 @@
 ---
 title: Use Editors Based on Data Item Property
-page_title: Use Editors Based on Data Item Property | Kendo UI Grid
-description: "Learn how to use different editors based on the data item property in the Kendo UI Grid widget."
+page_title: jQuery Grid Documentation | Data Item Property Editors | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to use different editors based on the data item property."
 slug: howto_use_editors_basedon_dataitem_property_grid
 ---
 
