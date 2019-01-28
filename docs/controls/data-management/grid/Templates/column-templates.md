@@ -1,7 +1,7 @@
 ---
 title: Column Templates
-page_title: Column Templates | Kendo UI Grid
-description: "Learn how to customize the cell content in the Kendo UI Grid for jQuery."
+page_title: jQuery Grid Documentation | Column Templates | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to customize the way the column displays its value."
 slug: column_templates_kendoui_grid_widget
 position: 3
 ---

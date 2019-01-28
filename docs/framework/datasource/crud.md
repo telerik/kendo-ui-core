@@ -29,7 +29,7 @@ For detailed information on the DataSource `transport`, refer to the [DataSource
 The DataSource `schema` has several important roles, with the most notable ones being:
 
 * Define the `data` field types in `schema.model.fields`. This ensures the correct sorting and filtering, and corrects the usage of default field editors, such as a numeric textbox for numeric data.
-* Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items.
+* Define the `id` field of the data items in `schema.model.id`. This ensures the correct adding, editing, and deleting of items. This field must be present in the data.
 * Define the `key`, which points to the data items array in `schema.data`. This is required when the data does not represent a plain array of objects or JSON.
 
 You must configure the first two settings no matter whether local or remote CRUD operations are used. The only case when they are not needed is for scenarios when all data fields are of the string type and there is no editing.

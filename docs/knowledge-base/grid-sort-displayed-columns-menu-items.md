@@ -4,8 +4,8 @@ description: An example on how to sort displayed columns menu items in the Kendo
 type: how-to
 page_title: Implement Sort Displayed Columns Menu Items | Kendo UI Grid
 slug: grid-sort-displayed-columns-menu-items
-tags: grid, visible, columnmenu, menu, column, displayed, list, header, checkbox, sort, order
-ticketid: 1146769 
+tags: grid, columnmenu, menu, column, list, header, checkbox, sort
+ticketid: 1146769, 1384397
 res_type: kb
 component: grid
 ---
@@ -19,7 +19,7 @@ component: grid
  </tr>
  <tr>
   <td>Created with version</td>
-  <td>2018.1.117</td>
+  <td>2019.1.115</td>
  </tr>
 </table>
 
@@ -32,7 +32,7 @@ How can I sort the items of the displayed columns submenu?
 
 ## Solution
 
-A possible solution is to sort the li elements of the column menu within the [columnMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event handler.
+A possible solution is to sort the li elements of the column menu within the [open](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/open) event of the Menu widget.
 
 ```dojo
     <div id="example">
@@ -82,34 +82,41 @@ A possible solution is to sort the li elements of the column menu within the [co
             }
                      ],
             columnMenuInit:function(e){
-              var list= e.container.find('.k-columns-item ul')
-              var items = list.find('li');
+              var container = e.container;
+              var menu = container.find(".k-menu").data("kendoMenu");
+              menu.bind("open", function(e){
+                debugger
+                if($(e.item).hasClass("k-columns-item")){
+                  var list= container.find('.k-columns-item ul');
+                  var items = list.find('li');
 
-              //list.html('');
+                  list.empty();
 
-              items.each(function(x,y){
-                $(y).removeClass('k-first k-last')
-              }) 
+                  items.each(function(x,y){
+                    $(y).removeClass('k-first k-last')
+                  });
 
-              items.sort(function(a,b){
-                a = $(a);
-                b = $(b);
+                  items.sort(function(a,b){
+                    a = $(a);
+                    b = $(b);
 
-                var firstText = a.find('input[data-field]').attr('data-field');
-                var secondText = b.find('input[data-field]').attr('data-field');
-
-
-                return ((firstText < secondText) ? -1 : ((firstText > secondText) ? 1 : 0));
-
-              })
-
-              items.first().addClass('k-first');
-              items.last().addClass('k-last');
+                    var firstText = a.find('input[data-field]').attr('data-field');
+                    var secondText = b.find('input[data-field]').attr('data-field');
 
 
-              items.each(function(y,x){
-                list.append($(x));
-              })
+                    return ((firstText < secondText) ? -1 : ((firstText > secondText) ? 1 : 0));
+
+                  })
+
+                  items.first().addClass('k-first');
+                  items.last().addClass('k-last');
+
+
+                  items.each(function(y,x){
+                    list.append($(x));
+                  })
+                }
+              });
             }
           });
         });

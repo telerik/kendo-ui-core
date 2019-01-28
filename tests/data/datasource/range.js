@@ -1506,6 +1506,37 @@
             assert.equal(range.data.length, 20);
         });
 
+        it("calling range and deleting an item does not mark it twice for deleting", function() {
+            var totalCount = 1000,
+                dataSource = new DataSource({
+                    pageSize: 100,
+                    serverPaging: true,
+                    transport: {
+                        read: function(options) {
+                            var take = options.data.take,
+                                skip = options.data.skip;
+
+                            var data = [];
+
+                            for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                                data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                            }
+                            options.success({ data: data, total: totalCount });
+                        }
+                    },
+                    schema: {
+                        data: "data",
+                        total: "total"
+                    }
+                });
+
+            dataSource.read();
+            dataSource.range(100, 100, $.noop);
+            dataSource.remove(dataSource.view()[0]);
+
+            assert.equal(dataSource._destroyed.length, 1);
+        });
+
         it("fetched ranges start is updated if item is removed - with range holes", function() {
             var totalCount = 47,
                 dataSource = new DataSource({
@@ -1858,10 +1889,10 @@
             dataSource.range(10, 10);
             dataSource.range(30, 10);
             dataSource.range(50, 10);
+            var model = dataSource._createNewModel({ OrderID: 333, ContactName: "Contact " + 333, ShipAddress: "Ship Address " + 333 });
 
-            var item = dataSource.insert(30, dataSource.get(50));
+            var item = dataSource.insert(30, model);
             dataSource.cancelChanges(item);
-
             equalRanges(dataSource._ranges, [
                 { start: 0, end: 10, dataLength: 10 },
                 { start: 10, end: 20, dataLength: 10 },

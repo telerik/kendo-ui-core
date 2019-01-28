@@ -1,7 +1,7 @@
 ---
 title: Row Templates
-page_title: Row Templates | Kendo UI Grid
-description: "Learn how to customize the row templates."
+page_title: jQuery Grid Documentation | Row Templates | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to place custom content into a grid row with the help of row templates."
 previous_url: /controls/data-management/grid/walkthrough#templates
 slug: row_templates_kendoui_grid_widget
 position: 1
