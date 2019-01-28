@@ -4593,6 +4593,31 @@ The text of the "starts with" filter operator.
     });
     </script>
 
+### filterable.operators.string.doesnotstartwith `String` *(default: "Does not start with")*
+
+The text of the "does not start with" filter operator.
+
+#### Example - set the string "does not start with" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            doesnotstartwith: "Does not start"
+          }
+        }
+      }
+    });
+    </script>
 
 ### filterable.operators.string.contains `String` *(default: "Contains")*
 
@@ -4667,6 +4692,32 @@ The text of the "ends with" filter operator.
         operators: {
           string: {
             endswith: "Ends"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.string.doesnotendwith `String` *(default: "Does not end with")*
+
+The text of the "does not end with" filter operator.
+
+#### Example - set the string "does not end with" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            doesnotendwith: "Does not end"
           }
         }
       }

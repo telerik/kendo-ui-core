@@ -1,7 +1,7 @@
 ---
 title: Group Templates
-page_title: Group Templates | Kendo UI Grid
-description: "Learn how to customize the group rows when the data of the Kendo UI Grid for jQuery is grouped."
+page_title: jQuery Grid Documentation | Group Templates | Kendo UI
+description: "Get started with the jQuery Grid by Kendo UI and learn how to customize the group rows when data is grouped."
 slug: group_templates_kendoui_grid_widget
 position: 2
 ---

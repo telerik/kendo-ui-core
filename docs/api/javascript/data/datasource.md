@@ -385,7 +385,9 @@ The supported operators are:
 * `"gt"` (greater than)
 * `"gte"` (greater than or equal to)
 * `"startswith"`
+* `"doesnotstartwith"`
 * `"endswith"`
+* `"doesnotendwith"`
 * `"contains"`
 * `"doesnotcontain"`
 * `"isempty"`
