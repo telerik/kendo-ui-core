@@ -296,6 +296,18 @@
             });
         });
 
+        it("change is not triggered on blur after value()", function() {
+            popuplateSelect();
+            var multiselect = new MultiSelect(select, {
+                change: function () {
+                    assert.isOk(false);
+                }
+            });
+
+            multiselect.value(["0", "1"]);
+            multiselect._blur();
+        });
+
         it("MultiSelect opens popup", function() {
             popuplateSelect();
             var multiselect = new MultiSelect(select);
