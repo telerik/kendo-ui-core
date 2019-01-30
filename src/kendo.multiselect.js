@@ -604,7 +604,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             listView.value(value);
-            that._old = listView.value(); //get a new array reference
+            that._old = that._valueBeforeCascade = listView.value(); //get a new array reference
 
             if (!clearFilters) {
                 that._fetchData();

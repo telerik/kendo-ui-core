@@ -789,7 +789,8 @@ var __meta__ = { // jshint ignore:line
         TreeView       : "ul",
         Menu           : "ul",
         ContextMenu    : "ul",
-        ActionSheet    : "ul"
+        ActionSheet    : "ul",
+        Switch    : "input"
     };
 
     var SKIP_SHORTCUTS = [

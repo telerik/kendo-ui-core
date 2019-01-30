@@ -1795,8 +1795,8 @@ var __meta__ = { // jshint ignore:line
                 endY = tapPosition(e);
 
                 if (Math.abs(endY - startY) < 10) {
-                    e.preventDefault();
-                    that.trigger("click", { item: $(e.target.closest(ITEMSELECTOR)) });
+                    that._touchTriggered = true;
+                    that._triggerClick($(e.target).closest(ITEMSELECTOR).get(0));
                 }
             });
         },
@@ -2075,10 +2075,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         _click: function(e) {
+            if (this._touchTriggered)
+            {
+                this._touchTriggered = false;
+                return;
+            }
+
             if (!e.isDefaultPrevented()) {
-                if (!this.trigger("click", { item: $(e.currentTarget) })) {
-                    this.select(e.currentTarget);
-                }
+                this._triggerClick(e.currentTarget);
+            }
+        },
+
+        _triggerClick: function (item) {
+            if (!this.trigger("click", { item: $(item) })) {
+                this.select(item);
             }
         },
 

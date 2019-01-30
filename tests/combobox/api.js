@@ -108,6 +108,17 @@
             assert.equal(combobox._old, "2");
         });
 
+        it("change is not triggered on blur after value()", function() {
+            var combobox = new ComboBox(input, {
+                change: function () {
+                    assert.isOk(false);
+                }
+            });
+            combobox.value("2");
+
+            combobox._blur();
+        });
+
         it("value('') clear selection", function() {
             var combobox = new ComboBox(input, {
                 dataTextField: "text",

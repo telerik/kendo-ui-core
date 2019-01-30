@@ -42,6 +42,17 @@
             assert.equal(dropdownlist.text(), 2);
         });
 
+        it("change is not triggered on blur after value()", function() {
+            dropdownlist = createDropDownList({
+                change: function () {
+                    assert.isOk(false);
+                }
+            });
+            dropdownlist.value("2");
+
+            dropdownlist._blur();
+        });
+
         it("value method should select optionLabel if it does not exist", function() {
             dropdownlist = new DropDownList(input, {
                 optionLabel: "select",
@@ -1019,7 +1030,7 @@
                     done();
                 }
             });
-            
+
             dropdownlist.value("item2");
         });
 

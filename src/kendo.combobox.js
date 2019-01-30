@@ -780,7 +780,7 @@ var __meta__ = { // jshint ignore:line
                         that._placeholder(true);
                     }
 
-                    that._old = that._accessor();
+                    that._old = that._valueBeforeCascade = that._accessor();
                     that._oldIndex = that.selectedIndex;
 
                     that._prev = that.input.val();
