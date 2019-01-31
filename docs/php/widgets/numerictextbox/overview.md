@@ -98,7 +98,6 @@ You are able to reference an existing NumericTextBox instance via the [`jQuery.d
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the NumericTextBox:
 
 * [Overview of the Kendo UI NumericTextBox Widget]({% slug overview_kendoui_numerictextbox_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)

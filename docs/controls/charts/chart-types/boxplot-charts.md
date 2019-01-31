@@ -142,8 +142,6 @@ Outliers are values that appear outside of the range closed by the lower and upp
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
-
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})

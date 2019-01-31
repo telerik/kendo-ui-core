@@ -235,8 +235,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the DropDownList:
-
 * [Overview of the DropDownList PHP Class]({% slug overview_dropdownlist_uiforphp %})
 * [Local Binding of the DropDownList PHP Class]({% slug localbinding_dropdownlist_uiforphp %})
 * [Overview of the Kendo UI DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})

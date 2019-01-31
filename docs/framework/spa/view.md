@@ -126,8 +126,6 @@ In certain scenarios, a view may be destroyed to free browser resources. When de
 
 ## See Also
 
-Other articles on Kendo UI Single-Page Application:
-
 * [Single-Page Application Overview]({% slug overview_kendoui_singlepageapplication %})
 * [SPA Router]({% slug router_kendoui_singlepageapplication %})
 * [SPA Layout]({% slug layout_kendoui_singlepageapplication %})

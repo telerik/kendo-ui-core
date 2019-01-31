@@ -42,7 +42,5 @@ The following example demonstrates how to implement the range selection mode in 
 
 ## See Also
 
-Other articles on the Kendo UI MultiViewCalendar:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
 * [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)

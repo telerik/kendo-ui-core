@@ -73,8 +73,6 @@ Use an NPM ^3.0.0 version.
 
 ## See Also
 
-Other articles on getting started with Kendo UI:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})

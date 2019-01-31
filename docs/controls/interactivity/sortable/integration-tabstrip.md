@@ -80,7 +80,5 @@ For additional information on the Sortable events, refer to the [JavaScript API 
 
 ## See Also
 
-Other articles on Kendo UI Sortable:
-
 * [Integration with Grid and ListView]({% slug integrationwith_gridandlistview_sortable_widget %})
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)

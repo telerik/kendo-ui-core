@@ -83,8 +83,6 @@ For more information, refer to the [Transformation API article](/api/javascript/
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Drawing API:
-
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
 * [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)

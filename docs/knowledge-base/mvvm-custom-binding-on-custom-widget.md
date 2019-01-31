@@ -102,4 +102,4 @@ Define a custom widget and [custom binding](https://docs.telerik.com/kendo-ui/fr
 
 ## See Also
 
-* [kendo UI MVVM Pattern](https://docs.telerik.com/kendo-ui/framework/mvvm/overview)
+* [Kendo UI MVVM Pattern](https://docs.telerik.com/kendo-ui/framework/mvvm/overview)

@@ -228,8 +228,6 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Grid:
-
 * [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Batch Editing of the Grid]({% slug batchediting_grid_uiforjsp %})
 * [Ajax Binding of the Grid]({% slug ajaxbinding_grid_uiforjsp %})

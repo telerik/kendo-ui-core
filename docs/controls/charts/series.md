@@ -99,8 +99,6 @@ Series of different types can be displayed in a single chart.
 
 ## See Also
 
-Other articles on Kendo UI Charts:
-
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Binding]({% slug databinding_charts_widget %})
 * [Date Series]({% slug dateseries_charts_widget %})

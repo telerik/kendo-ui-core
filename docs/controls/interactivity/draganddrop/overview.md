@@ -444,8 +444,6 @@ The Drag-and-Drop components do not automatically change the data-bound widget d
 <!--*-->
 ## See Also
 
-Other articles on the Kendo UI Drag-and-Drop functionality:
-
 * [Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/dragdrop/index)
 * [Draggable API Reference](/api/javascript/ui/draggable)
 * [DropTarget API Reference](/api/javascript/ui/droptarget)

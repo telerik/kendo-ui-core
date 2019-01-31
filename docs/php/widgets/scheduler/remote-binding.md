@@ -610,8 +610,6 @@ Below are listed the steps for you to follow when creating a PHP file which perf
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Scheduler:
-
 * [Overview of the Scheduler PHP Class]({% slug overview_scheduler_uiforphp %})
 * [Local Binding of the Scheduler PHP Class]({% slug localbinding_scheduler_uiforphp %})
 * [Overview of the Kendo UI Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})

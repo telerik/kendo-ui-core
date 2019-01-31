@@ -1,22 +1,22 @@
 ---
 title: Tools
-page_title: Editor Tools | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Tools | Kendo UI Editor HtmlHelper for ASP.NET Core
 description: "Learn which tools are available in the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_tools_aspnetcore
 position: 3
 ---
 
-# Editor Tools
+# Tools
 
 The Editor provides a predefined collection of tools that are used to interact with the widget.
 
-Any tool can be switched on (enabled) by using the `Tools()` HTML helper method and configure it with the specific tool method.
-
-Custom tools and tools that require configuration are defined using inner methods for the tool.
+You can enable any of these tools by using the `Tools()` HtmlHelper method and configure it with the specific tool method. Custom tools and tools that require configuration are defined using inner methods for the tool.
 
 ## Default Tools
 
-The default tools in the Editor will be included in the widget toolbar, when the respective tool method is used. Below example demonstrates the available default tool methods.
+The default tools in the Editor are included in the toolbar of the Editor upon setting the respective tool method.
+
+The following example demonstrates the default tool methods of the Editor.
 
 ###### Example
 
@@ -63,9 +63,9 @@ The default tools in the Editor will be included in the widget toolbar, when the
 
 ## Custom Tools
 
-The custom tools in the Editor widget could be defined using two methods in the HTML helper: `CustomButton()` and `CustomTemplate()`. The custom button is appropriate for simple scenarios in which only a single action should be executed upon button click. The custom template allows the developer to define a more complicated tool and also embed another widgets within the Editor toolbar.
+To define the custom tools of the Editor, use the `CustomButton()` and `CustomTemplate()` methods. You can use `CustomButton()` for scenarios where only a single action has to be executed upon a button click. The custom template allows you to define a more complicated tool and also embed other widgets within the Editor toolbar. You can use `CustomTemplate()` for creating a Kendo UI DropDownList which changes the background color for the editable area of the Editor.
 
-The below example demonstrates the above two scenarios:
+The following example demonstrates these scenarios. Note the `Name()` method that is used for the `CustomButton()` configuration. The passed string value will be later used to populate the class for the `<span>` element for whose tool icon the `:before` pseudo element is used. In this case, the final result for that class will be `k-i-custom`. As the `k-i-custom` class is used by one of the Kendo UI icons, the respective icon will be displayed for the tool button. Note that the `undo` and `redo` tool names are reserved (forbidden).
 
 ###### Example
 
@@ -105,10 +105,6 @@ The below example demonstrates the above two scenarios:
     });
 </script>
 ```
-
-Note the `Name()` method used for the `CustomButton()` configuration. The string value passed there will be later used to populate the class for the `<span>` element, which `:before` pseudo element is used for the tool icon. In the above case, the final result for that class would be `k-i-custom`. As the `k-i-custom` class is used by one of the Kendo icons, the respective icon will be displayed for the tool button. Note that the `undo` and `redo` tool names are reserved (forbidden).
-
-As per the `CustomTemplate()`, it is used to create a Kendo DropDownList widget, which changes the background color for the Editor editable area.
 
 ## See Also
 

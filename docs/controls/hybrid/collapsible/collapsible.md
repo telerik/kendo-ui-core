@@ -145,8 +145,6 @@ Collapsible widgets can be nested inside each other, as demonstrated in the exam
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the Collapsible:
-
 * [Hybrid UI Collapsible JavaScript API Reference](/api/javascript/mobile/ui/collapsible)
 * [How to Use DataSource to Render Content]({% slug howto_usedatasourcetorebdercontent_hybridcollapsible %})
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})

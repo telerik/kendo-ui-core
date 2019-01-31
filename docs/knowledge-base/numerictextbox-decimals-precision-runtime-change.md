@@ -1,6 +1,6 @@
 ---
-title: Define Decimals Property at Runtime
-description: An example demonstrating how to configure the precision of the NumericTextBox during runtime
+title: Define Decimals Property at Runtime in NumericTextBox
+description: An example on how to configure the precision of the Kendo UI NumericTextBox during runtime.
 type: how-to
 page_title: Change Decimal Placement at Runtime | Kendo UI NumericTextBox
 slug: numerictextbox-decimals-precision-runtime-change
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,14 +24,14 @@ res_type: kb
 
 ## Description
 
-How can I change the decimals property of Kendo UI NumericTextBox from two decimals places to three during runtime?
+How can I change the `decimals` property of the Kendo UI NumericTextBox at runtime from two decimal places to three?
 
 ## Solution
 
-1. [Set the format](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format) of the NumericTextBox initially to "n2".
+1. [Set the format](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format) of the NumericTextBox initially to `n2`.
 1. When an event has occurred, such as a button click, get a reference to the NumericTextBox.
 1. [Get the value](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/methods/value) of the NumericTextBox.
-1. Using [the setOptions method](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions), configure the value, format, and [decimals](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals) properties.
+1. By using [the `setOptions` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions), configure the `value`, `format`, and [`decimals`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals) properties.
 
 ```dojo
     <input id="numericTextBox1" />
@@ -54,7 +55,7 @@ How can I change the decimals property of Kendo UI NumericTextBox from two decim
 
 ## See Also
 
-* [format - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format)
-* [value - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/methods/value)
-* [setOptions - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions)
-* [decimals - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals)
+* [API Reference of `format`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format)
+* [API Reference of `value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/methods/value)
+* [API Reference of `setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions)
+* [API Reference of `decimals`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals)

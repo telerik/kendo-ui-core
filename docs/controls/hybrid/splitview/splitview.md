@@ -238,8 +238,6 @@ The example below demonstrates how to make the SplitView stack vertically.
 <!--_-->
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the SplitView:
-
 * [Hybrid UI SplitView JavaScript API Reference](/api/javascript/mobile/ui/splitview)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

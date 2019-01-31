@@ -1,18 +1,20 @@
 ---
-title: Styling Content
-page_title: Styling Editor Content | Telerik UI for ASP.NET Core HtmlHelpers
+title: Styling of Content
+page_title: Styling of Content | Kendo UI Editor HtmlHelper for ASP.NET Core
 description: "Learn how to apply styles to the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_styling_aspnetcore
 position: 8
 ---
 
-# Styling Editor Content
+# Styling of Content
 
-The Editor HTML helper provides a default styling for its content which could be easily altered.
+The Editor HtmlHelper provides default and custom options for styling its content.
 
-## Default Content Styling
+## Default Options
 
-When the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#classic-mode) is enabled, the Editor uses an `iframe` and applies some default CSS styles to its content. This behavior overrides the default browser styling. It is shown in the following example and it targets mainly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class, which is not included in the value of the widget.
+When the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#classic-mode) is enabled, the Editor uses an `iframe` and applies some default CSS styles to its content. This behavior overrides the default browser styling.
+
+The following example targets mainly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class which is not included in the value of the widget.
 
 ###### Example
 
@@ -98,7 +100,7 @@ code {
 }
 ```
 
-To avoid the default content styles demonstrated in the previous example, remove or override them after the Editor is initialized by executing the following code.
+To avoid the default content styles from the previous example, remove or override them after the Editor is initialized by executing the following code.
 
 ###### Example
 
@@ -121,7 +123,7 @@ To avoid the default content styles demonstrated in the previous example, remove
 </script>
 ```
 
-## Loading External Stylesheets
+## Custom Styles
 
 You can also use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and inject those custom styles in an [Editor stylesheet](https://demos.telerik.com/aspnet-core/editor/styles). In such cases, you do not have to customize the Formatting tool of the Editor.
 

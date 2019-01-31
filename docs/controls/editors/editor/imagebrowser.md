@@ -76,8 +76,6 @@ You can update all of these requests and responses through the [`imagebrowser`](
 
 ## See Also
 
-Other articles on the Kendo UI Editor:
-
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})

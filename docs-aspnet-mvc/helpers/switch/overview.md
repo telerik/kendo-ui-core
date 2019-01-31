@@ -14,39 +14,38 @@ The Switch HtmlHelper extension is a server-side wrapper for the [Kendo UI Switc
 
 ### The Basics
 
-Kendo UI Switch is used to display two exclusive choices.
+The Kendo UI Switch displays two exclusive choices.
 
 ### Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI Switch.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
 
-###### Example
+  ###### Example
 
     public ActionResult Index()
     {
         return View();
     }
 
-1. Add a Switch.
+1. Add the Switch.
 
-###### Example
+  ###### Example
 
-```tab-Razor
-    @(Html.Kendo().Switch()
-        .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
-        .Checked(true)
-    )
-```
-```tab-ASPX
-    <%: Html.Kendo().Switch()
-        .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
-        .Checked(true)
-    %>
-```
+    ```tab-Razor
+        @(Html.Kendo().Switch()
+            .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
+            .Checked(true)
+        )
+    ```
+    ```tab-ASPX
+        <%: Html.Kendo().Switch()
+            .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
+            .Checked(true)
+        %>
+    ```
 
 ## Event Handling
 
@@ -111,10 +110,11 @@ The following example demonstrates how to subscribe to events by a template dele
 To reference an existing Kendo UI Switch instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](http://docs.telerik.com/kendo-ui/api/javascript/ui/switch) to control its behavior.
 
 ###### Example
-    //Put this after your Kendo UI Switch for ASP.NET MVC declaration.
+
+    // Place this after your Kendo UI Switch for ASP.NET MVC declaration.
     <script>
     $(function() {
-        //Notice that the Name() of the Switch is used to get its client-side instance.
+        // Notice that the Name() of the Switch is used to get its client-side instance.
         var switch = $("#switch").data("kendoSwitch");
     });
     </script>

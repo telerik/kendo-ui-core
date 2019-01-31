@@ -77,7 +77,7 @@ The example below demonstrates how to use a bundle script with RequireJS.
   <body>
     <div id="grid"></div>
     <script>
-      
+
       require.config({
         paths: {
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",          
@@ -154,8 +154,6 @@ The example below demonstrates how to load AngularJS and initialize it with [`an
 ```
 
 ## See Also
-
-Other articles on Kendo UI integration with third-party tools and frameworks:
 
 * [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})

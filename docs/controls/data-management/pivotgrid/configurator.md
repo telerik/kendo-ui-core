@@ -83,8 +83,6 @@ The following example demonstrates how to access an existing PivotConfigurator i
 
 ## See Also
 
-Other articles on the Kendo UI PivotGrid:
-
 * [Overview]({% slug overview_kendoui_pivotgrid_widget %})
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})

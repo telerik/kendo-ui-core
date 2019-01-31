@@ -78,8 +78,6 @@ The example below demonstrates how to display the tab buttons at the bottom of t
 
 ## See Also
 
-Other articles on the Kendo UI TabStrip:
-
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})

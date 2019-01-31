@@ -115,8 +115,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Sparkline:
-
 * [Overview of the Sparkline PHP Class]({% slug overview_sparkline_uiforphp %})
 * [Local Binding of the Sparkline PHP Class]({% slug localbinding_sparkline_uiforphp %})
 * [Overview of the Kendo UI Sparkline Widget]({% slug overview_kendoui_sparklinescharts %})

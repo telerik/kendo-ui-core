@@ -13,7 +13,5 @@ To see the example on how to achieve this behavior, refer to the [how-to article
 
 ## See Also
 
-Other articles on the Kendo UI Slider:
-
 * [Slider JavaScript API Reference](/api/javascript/ui/slider)
 * [Overview of the Slider]({% slug overview_kendoui_slider_widget %})

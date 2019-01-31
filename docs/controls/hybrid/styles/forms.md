@@ -230,8 +230,6 @@ The example below demonstrates how to show a standalone radio button in the Nova
 
 ## See Also
 
-Other articles related to the appearance and styling of Kendo UI hybrid distribution:
-
 * [Apply CSS]({% slug styling_hybridkendoui %})
 * [Define the Layout]({% slug layout_hybridkendoui %})
 * [Touch Events]({% slug touchevents_hybridkendoui %})

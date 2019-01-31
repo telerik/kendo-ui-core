@@ -340,8 +340,6 @@ The widget loads data, but the application hangs or crashes. The possible reason
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the ScrollView:
-
 * [Hybrid UI ScrollView JavaScript API Reference](/api/javascript/mobile/ui/scrollview)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

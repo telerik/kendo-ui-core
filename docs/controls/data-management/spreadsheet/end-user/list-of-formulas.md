@@ -275,7 +275,5 @@ Similar to Excel, the Kendo UI Spreadsheet supports [array formulas](https://sup
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
 * [List of Keyboard Shortcuts]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %})
 * [User Guide]({% slug user_guide_spreadsheet_widget %})

@@ -164,8 +164,6 @@ Even though the implementation of Kendo UI Templates is fast, you may prefer you
 
 ## See Also
 
-Other articles on Kendo UI Templates:
-
 * [Templates Overview]({% slug overview_kendoui_templatescomponent %})
 * [Load Templates from External Files]({% slug externalteplateloading_templatescomponent %})
 * [JavaScript API Reference: template](/api/javascript/kendo/methods/template)

@@ -142,9 +142,6 @@ The following table lists the operating systems and their versions that are comp
 
 ## See Also
 
-
-Other articles on getting started with Kendo UI:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})

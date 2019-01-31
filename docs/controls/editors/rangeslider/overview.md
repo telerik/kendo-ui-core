@@ -75,6 +75,4 @@ To reference to an existing RangeSlider instance, use the [`jQuery.data()`](http
 
 ## See Also
 
-Other articles on the Kendo UI RangeSlider:
-
 * [RangeSlider JavaScript API Reference](/api/javascript/ui/rangeslider)

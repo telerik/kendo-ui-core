@@ -135,8 +135,6 @@ You can reference the client-side Kendo UI Scheduler instance via [`jQuery.data(
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Scheduler:
-
 * [Local Binding of the Scheduler PHP Class]({% slug localbinding_scheduler_uiforphp %})
 * [Remote Binding of the Scheduler PHP Class]({% slug remotebinding_scheduler_uiforphp %})
 * [Overview of the Kendo UI Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})

@@ -60,8 +60,6 @@ The following example demonstrates how to add a basic tile layer to the Map that
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Map:
-
 * [Map Layers]({% slug maplayers_mapwidget %})
 * [Map Authoring]({% slug mapauthoring_mapwidget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Map Widget](/aspnet-mvc/helpers/map/overview)

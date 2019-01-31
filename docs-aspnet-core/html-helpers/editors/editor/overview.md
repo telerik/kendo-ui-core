@@ -63,10 +63,10 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
 * [Modes of operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
 * [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
 * [Pasting content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Serialize / deserialize content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
+* [Serializing and deserializing content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
 * [Image browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
 * [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
-* [Styling content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+* [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})
 
 ## Events
 

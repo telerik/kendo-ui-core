@@ -112,8 +112,6 @@ The following example demonstrates how to handle double-clicking on events condi
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
 * [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
@@ -123,9 +121,6 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
 * [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 

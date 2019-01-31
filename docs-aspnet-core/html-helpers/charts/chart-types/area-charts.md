@@ -70,8 +70,6 @@ The supported styles are:
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
-
 * [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
 * [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})
 * [BoxPlot Charts]({% slug boxplotcharts_aspnetcore_htmlhelper %})

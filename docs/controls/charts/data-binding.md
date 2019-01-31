@@ -385,8 +385,6 @@ Scatter series are bound to the fields specified as `xField` and `yField`, as de
 
 ## See Also
 
-Other articles on Kendo UI Charts:
-
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Date Series]({% slug dateseries_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})

@@ -287,8 +287,6 @@ Alternatively, do not destroy the existing Dialog instance&mdash;[open](/api/jav
 
 ## See Also
 
-Other articles on Kendo UI Upload:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Dialog Widget](/aspnet-mvc/helpers/dialog/overview)
 * [Overview of the Dialog JSP Tag]({% slug overview_dialog_uiforjsp %})
 * [Overview of the Dialog PHP Class](/php/widgets/dialog/overview)

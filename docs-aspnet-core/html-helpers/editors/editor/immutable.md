@@ -1,6 +1,6 @@
 ---
 title: Immutable Elements
-page_title: Immutable Elements | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Immutable Elements | Kendo UI Editor HtmlHelper for ASP.NET Core
 description: "Learn how to use immutable elements in the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_immutable_aspnetcore
 position: 7
@@ -12,7 +12,7 @@ The immutable feature enables you to add HTML elements that cannot be edited by 
 
 ## Enable and Add Immutable Elements
 
-To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To make the Editor prevent the user from editing this element, you also need to enable the [`Immutables()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#immutablessystemactionkendomvcuifluenteditorimmutablessettingsbuilder) configuration method.
+To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To prevent the user interaction with that element, you also need to enable the [`Immutables()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#immutablessystemactionkendomvcuifluenteditorimmutablessettingsbuilder) configuration method.
 
 ###### Example
 
@@ -28,9 +28,9 @@ To define the immutable elements in the content area, set the [`contenteditable`
 
 The [`Serialization()`](/api/Kendo.Mvc.UI.Fluent/EditorImmutablesSettingsBuilder#serializationsystemstring) method enables you to control the HTML representation of the immutable elements in the `viewHtml` dialog.
 
-The immutables.serialization configuration method accepts the following parameters:
+The `immutables.serialization` configuration method accepts the following parameters:
 
-* `String`&mdash;This plain string implements an opening and a closing tag of the representation you want to display in the `ViewHtml` dialog.
+* `String`&mdash;A plain string. Implements an opening and a closing tag of the display representation in the `ViewHtml` dialog.
 
     ###### Example
 
@@ -44,7 +44,7 @@ The immutables.serialization configuration method accepts the following paramete
     )
     ```
 
-* [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview)&mdash;In it, the immutable DOM element is `data`.
+* [Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/overview)&mdash;Contains the immutable `data` DOM element.
 
     ###### Example
 
@@ -58,7 +58,7 @@ The immutables.serialization configuration method accepts the following paramete
     )
     ```
 
-* `Function`&mdash;This callback function exposes the immutable DOM element in the overload and is expected to return a string.
+* `Function`&mdash;A callback function. Exposes the immutable DOM element in the overload and is expected to return a string.
 
     ###### Example
 
@@ -82,7 +82,7 @@ The immutables.serialization configuration method accepts the following paramete
 
 ## Deserialize Immutables
 
-The [`Deserialization()`](/api/Kendo.Mvc.UI.Fluent/EditorImmutablesSettingsBuilder#deserializationsystemfuncsystemobjectsystemobject) does the opposite of the `Serialization()` one&mdash;it takes the HTML representation from the `ViewHtml` dialog and alters the immutable DOM element based on the logic implemented in the callback function.
+The [`Deserialization()`](/api/Kendo.Mvc.UI.Fluent/EditorImmutablesSettingsBuilder#deserializationsystemfuncsystemobjectsystemobject) method does the opposite of the `Serialization()` one. `Deserialization()` takes the HTML representation from the `ViewHtml` dialog and alters the immutable DOM element based on the implemented logic in the callback function.
 
 The following example demonstrates how to use the `Serialization()` and `Deserialization()` options to expose the CSS `text-align` property in the `ViewHtml` dialog so that the user is able to change it from the HTML code.
 
@@ -108,7 +108,7 @@ The following example demonstrates how to use the `Serialization()` and `Deseria
 
 To decorate all `contenteditable="false"` elements and improve user experience (UX), use a CSS rule.
 
-If you use the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#classic-mode), add the CSS rule to an external CSS file adjoined to the [stylesheet collection]({% slug htmlhelpers_editor_styling_aspnetcore %}) of the Editor.
+If you use the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#classic-mode), add the CSS rule to an external CSS file that is adjoined to the [stylesheet collection]({% slug htmlhelpers_editor_styling_aspnetcore %}) of the Editor.
 
 If you use the [inline mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#inline-mode), place the CSS rule on the page as demonstrated in the following example.
 

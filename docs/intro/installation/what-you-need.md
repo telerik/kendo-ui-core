@@ -85,11 +85,7 @@ As of the Kendo UI 2014 Q3 release, the necessary build scripts are shipped in t
 
 List the components you want to be included in the custom build and separate them with a comma (`,`). The example above builds a custom minified script which includes the AutoComplete and the DropDownList widgets.
 
-To build the entire Kendo UI library, run:
-
-```sh
-    gulp custom -c all
-```
+To build the entire Kendo UI library, run `gulp custom -c all`.
 
 > **Important**
 >
@@ -104,8 +100,6 @@ To compile a custom script version that is not minified, remove or comment out t
 ```
 
 ## See Also
-
-Other articles on getting started with Kendo UI:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})

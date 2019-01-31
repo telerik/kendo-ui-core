@@ -103,8 +103,6 @@ You can reference the client-side Kendo UI TreeView instance via [`jQuery.data()
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the TreeView:
-
 * [Local Binding of the TreeView PHP Class]({% slug localbinding_treeview_uiforphp %})
 * [Remote Binding of the TreeView PHP Class]({% slug remotebinding_treeview_uiforphp %})
 * [Overview of the Kendo UI TreeView Widget]({% slug overview_kendoui_treeview_widget %})

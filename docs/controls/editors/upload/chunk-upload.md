@@ -111,8 +111,6 @@ The server-side implementation entirely depends on the application requirements 
 
 ## See Also
 
-Other articles on the Kendo UI Upload:
-
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})

@@ -180,8 +180,6 @@ The following example demonstrates how to set the [`height`](/api/javascript/ui/
 
 ## See Also
 
-Other articles on getting started with Kendo UI:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})

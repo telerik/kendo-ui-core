@@ -174,7 +174,5 @@ The example below demonstrates how to change the Hybrid UI ActionSheet options d
 
 ## See Also
 
-Other articles on the Hybrid UI ActionSheet:
-
 * [Hybrid UI ActionSheet JavaScript API Reference](/api/javascript/mobile/ui/actionsheet)
 * [Overview of the ActionSheet]({% slug overview_hybridactionsheet %})

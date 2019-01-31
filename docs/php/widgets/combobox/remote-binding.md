@@ -235,8 +235,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the ComboBox:
-
 * [Overview of the ComboBox PHP Class]({% slug overview_combobox_uiforphp %})
 * [Local Binding of the ComboBox PHP Class]({% slug localbinding_combobox_uiforphp %})
 * [Overview of the Kendo UI ComboBox Widget]({% slug overview_kendoui_combobox_widget %})

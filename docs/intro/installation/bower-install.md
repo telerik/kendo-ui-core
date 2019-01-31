@@ -159,8 +159,6 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 
 ## See Also
 
-Other articles on getting started with Kendo UI:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Kendo UI NPM Packages]({% slug kendoui_npm_packages_kendoui_installation %})

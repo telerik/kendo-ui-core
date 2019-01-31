@@ -114,8 +114,6 @@ The easiest way to avoid the JavaScript error is to:
 
 ## See Also
 
-Other articles on the Kendo UI Grid for ASP.NET MVC:
-
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
 * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
@@ -126,9 +124,6 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-
-Articles on Telerik UI for ASP.NET MVC:
-
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
@@ -136,9 +131,6 @@ Articles on Telerik UI for ASP.NET MVC:
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues)
 * [JavaScript Errors](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
 * [Performance Issues](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)

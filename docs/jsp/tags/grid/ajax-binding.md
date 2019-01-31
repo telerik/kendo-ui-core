@@ -120,8 +120,6 @@ In the configuration that enables client data processing during Ajax binding, Ke
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Grid:
-
 * [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Batch Editing of the Grid]({% slug batchediting_grid_uiforjsp %})
 * [Ajax Editing of the Grid]({% slug ajaxediting_grid_uiforjsp %})

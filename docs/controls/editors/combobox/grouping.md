@@ -122,8 +122,6 @@ The following example demonstrates how to define a custom fixed group template.
 
 ## See Also
 
-Other articles on the Kendo UI ComboBox:
-
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [How to Clear Filter on Open]({% slug howto_clear_filter_open_combobox %})
 * [How to Declaratively Initialize ComboBox with Templates]({% slug howto_declaratively_initialize_with_templates_combobox %})

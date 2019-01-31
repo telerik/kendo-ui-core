@@ -1,17 +1,18 @@
 ---
 title:  Model Binding
 page_title: Model Binding | Kendo UI Menu HtmlHelper for ASP.NET Core
-description: "Learn how to implement Model Binding with Kendo UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn how to implement model binding with Kendo UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_menu_modelbinding_aspnetcore
 position: 2
 ---
 
 # Model Binding
 
-To bind a Kendo UI Menu to a hierarchical model:
+The Kendo UI Menu enables you to bind it to a hierarchical model.
+
+To perform model binding:
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}).
-
 1. Create a new action method and pass the **Categories** table as the model. Note that the **Categories** must be associated to the **Products** table.
 
     ```Razor

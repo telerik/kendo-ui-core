@@ -211,8 +211,6 @@ The filter you add to the DataSource indicates that the DataSource has to contai
 
 ## See Also
 
-Other articles on the Kendo UI Sales Hub project and its **Home** and **Order** pages:
-
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_saleshubtutorial_aspnetmvc %})
 * [Create the Customer TreeView]({% slug createcustomtreeview_saleshubtutorial_aspnetmvc %})
 * [Create the Orders Grid]({% slug createordersgrid_saleshubtutorial_aspnetmvc %})

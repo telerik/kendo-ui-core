@@ -216,8 +216,6 @@ The key takeaways from this convention that are specific to templates include:
 
 ## See Also
 
-Other articles on Kendo UI Templates:
-
 * [Templates Overview]({% slug overview_kendoui_templatescomponent %})
 * [Performance]({% slug performance_kendoui_templatescomponent %})
 * [JavaScript API Reference: template](/api/javascript/kendo/methods/template)

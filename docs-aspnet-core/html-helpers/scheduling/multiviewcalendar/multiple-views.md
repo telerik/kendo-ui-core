@@ -47,7 +47,5 @@ In some scenarios it might be necessary to display more than two months. This is
 
 ## See Also
 
-Other articles on the Kendo UI MultiViewCalendar:
-
 * [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
 * [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)

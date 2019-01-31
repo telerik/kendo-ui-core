@@ -279,8 +279,6 @@ The following example demonstrates how to access an existing TreeView instance.
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI TreeView:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the TreeView](/aspnet-mvc/helpers/treeview/overview)
 * [Overview of the TreeView JSP Tag]({% slug overview_treeview_uiforjsp %})
 * [Overview of the TreeView PHP Class](/php/widgets/treeview/overview)
@@ -302,9 +300,6 @@ Other articles and how-to examples on Kendo UI TreeView:
 * [How to Sort Child Nodes]({% slug howto_sortchildnodes_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-
-How-to examples on Kendo UI TreeView in AngularJS:
-
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_angularjs_treeview %})
 * [How to Scroll to Item]({% slug howto_scrolltoitem_angularjs_treeview %})
 * [How to Toggle Nodes with Single Click]({% slug howto_togglenodeswithsingleclick_angularjs_treeview %})

@@ -209,8 +209,6 @@ The default output is an SVG with a fallback to Canvas.
 
 ## See Also
 
-Other articles on Kendo UI Drawing API:
-
 * [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Export a Drawing in PDF]({% slug pdfderawingexport_drawingapi %})
 * [Drawing of HTML Elements]({% slug drawingofhtmlelements_drawingapi %})

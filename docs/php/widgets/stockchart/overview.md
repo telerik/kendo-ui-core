@@ -118,7 +118,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing StockChart instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+You are able to reference an existing StockChart instance through the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
 ###### Example
 
@@ -131,8 +131,6 @@ You are able to reference an existing StockChart instance via the [`jQuery.data(
           </script>
 
 ## See Also
-
-Other articles on Telerik UI for PHP and on the StockChart:
 
 * [Overview of the Kendo UI StockChart Widget]({% slug overview_kendoui_stockcharts %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)

@@ -100,8 +100,6 @@ The uploaded files must be handled both in the save handler and in the form subm
 
 ## See Also
 
-Other articles on the Kendo UI Upload:
-
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Chunk Upload]({% slug chunkupload_upload_widget %})

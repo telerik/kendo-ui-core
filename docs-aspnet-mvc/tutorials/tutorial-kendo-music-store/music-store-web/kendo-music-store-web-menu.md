@@ -116,8 +116,6 @@ This creates the `<div>` content displayed in a drop-down menu item, as shown in
 
 ## See Also
 
-Other articles on the Kendo UI Music Store Web Application sample project:
-
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Set Up the Kendo UI Music Store Web App]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
 * [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})

@@ -146,13 +146,8 @@ The following example demonstrates how to manually set initial data in the Kendo
 
 ## See Also
 
-Other how-to examples on the Kendo UI Scheduler in AngularJS:
-
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
-
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
 * [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})

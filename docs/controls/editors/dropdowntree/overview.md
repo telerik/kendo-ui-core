@@ -438,7 +438,5 @@ The DropDownTree widget displays `noDataTemplate` in the popup when the data sou
 
 ## See Also
 
-Other articles on the Kendo UI DropDownTree:
-
 * [DropDownTree JavaScript API Reference](/api/javascript/ui/dropdowntree)
 * [Binding To Flat Data]({% slug bindtoflattables_dropdowntree_widget %})

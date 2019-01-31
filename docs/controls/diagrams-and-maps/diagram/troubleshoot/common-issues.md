@@ -189,13 +189,8 @@ The example below demonstrates how to embed fonts in exported PDF.
 
 ## See Also
 
-Other articles on styling, appearance, and rendering of Kendo UI widgets:
-
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

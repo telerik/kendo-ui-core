@@ -672,8 +672,6 @@ When you complete the modifications and the theme is ready to be used:
 
 ## See Also
 
-Other articles on styling, appearance, and rendering of Kendo UI widgets:
-
 * [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})

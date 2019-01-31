@@ -69,8 +69,6 @@ Kendo UI ships with several ready to use icons. The full list of predefined icon
 
 ## See Also
 
-Other articles on the Hybrid UI TabStrip:
-
 * [Hybrid UI TabStrip JavaScript API Reference](/api/javascript/mobile/ui/tabstrip)
 * [How to Show Tab Text in Android Skin]({% slug howto_showtabtextandroidskin_hybridtabstrip %})
 

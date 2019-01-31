@@ -124,8 +124,6 @@ The following example demonstrates how to extract Kendo UI Scheduler events to a
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
 * [How to Hide Header and Footer in Adaptive Rendering]({% slug howto_hideheaderandfooter_inadaptiverebdering_scheduler %})

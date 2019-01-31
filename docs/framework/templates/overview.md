@@ -260,8 +260,6 @@ The example below demonstrates a summarized sample case.
 
 ## See Also
 
-Other articles on Kendo UI Templates:
-
 * [Template Performance]({% slug performance_kendoui_templatescomponent %})
 * [Load Templates from External Files]({% slug externalteplateloading_templatescomponent %})
 * [JavaScript API Reference: template](/api/javascript/kendo/methods/template)

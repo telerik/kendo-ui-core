@@ -88,8 +88,6 @@ The user can focus the drag-handles of the Slider through tabbing. When focused 
 
 ## See Also
 
-Other articles on the Kendo UI Slider:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Slider Widget](/aspnet-mvc/helpers/slider/overview)
 * [Overview of the Slider JSP Tag]({% slug overview_slider_uiforjsp %})
 * [Overview of the Slider PHP Class](/php/widgets/slider/overview)

@@ -1,6 +1,6 @@
 ---
 title: Loading Content
-page_title: Loading Content in Window | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Loading Content | Kendo UI Window HtmlHelper for ASP.NET Core
 description: "Learn about the different ways of loading content in Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_loadingcontent_aspnetcore
 position: 5
@@ -8,11 +8,11 @@ position: 5
 
 # Loading Content
 
-The content of the Window HTML helper could be hardcoded or loaded dynamically at a later stage.
+You can hardcode or dynamically load the content of the Window HtmlHelper at a later stage.
 
 ## Displaying Static Content
 
-The Window exposes a `Content()` configuration method, which allows a predefined HTML content to be loaded:
+The Window exposes a `Content()` configuration method which allows you to load predefined HTML content.
 
 ###### Example
 
@@ -26,9 +26,9 @@ The Window exposes a `Content()` configuration method, which allows a predefined
 
 ## Load-on-Demand Content
 
-To configure the Window with a load-on-demand content, follow the steps listed below.
+To configure the Window with load-on-demand content:
 
-1. Create a new action method, which renders the view.
+1. Create a new action method which renders the view.
 
     ###### Example
 

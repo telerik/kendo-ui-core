@@ -50,8 +50,6 @@ The example below demonstrates how to instantiate a hybrid mobile Switch widget.
 
 ## See also
 
-Other articles on the integration of Kendo UI hybrid components:
-
 * [MVVM Integration]({% slug mvvmintegration_hybridkendoui %})
 * [AngularJS Support for the Hybrid UI]({% slug angularjssupport_hybridkendoui %})
 * [Build Applications with AngularJS and the Hybrid UI]({% slug buildappswithangular_tutorial_hybridkendoui %})

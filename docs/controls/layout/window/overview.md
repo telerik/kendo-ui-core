@@ -377,8 +377,6 @@ Alternatively, do not destroy the existing Window instance&mdash;[open](/api/jav
 
 ## See Also
 
-Other articles on Kendo UI Upload:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/window/overview)
 * [Overview of the Upload JSP Tag]({% slug overview_window_uiforjsp %})
 * [Overview of the Upload PHP Class](/php/widgets/window/overview)

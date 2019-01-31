@@ -151,7 +151,6 @@ You can reference the client-side Kendo UI MultiSelect instance via [`jQuery.dat
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the MultiSelect:
 
 * [Local Binding of the MultiSelect PHP Class]({% slug localbinding_multiselect_uiforphp %})
 * [Remote Binding of the MultiSelect PHP Class]({% slug remotebinding_multiselect_uiforphp %})

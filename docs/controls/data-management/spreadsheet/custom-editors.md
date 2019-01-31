@@ -128,8 +128,6 @@ The `edit` method provides a complete flexibility. As an example, you can use a 
 
 ## See Also
 
-Other articles on the Kendo UI Spreadsheet:
-
 * [Overview]({% slug overview_spreadsheet_widget %})
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})

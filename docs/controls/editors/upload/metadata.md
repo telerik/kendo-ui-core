@@ -97,8 +97,6 @@ To receive metadata from the save handler, follow the steps below:
 
 ## See Also
 
-Other articles on the Kendo UI Upload:
-
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Chunk Upload]({% slug chunkupload_upload_widget %})

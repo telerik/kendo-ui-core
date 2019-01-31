@@ -147,8 +147,6 @@ Add to your project only what it requires by picking the right combined scripts,
 
 ## See Also
 
-Other articles on getting started with Kendo UI:
-
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})

@@ -120,8 +120,6 @@ You are able to reference an existing MultiSelect instance via the [`jQuery.data
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the MultiSelect:
-
 * [Ajax Binding of the MultiSelect]({% slug ajaxbinding_multiselect_uiforjsp %})
 * [Overview of the Kendo UI MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

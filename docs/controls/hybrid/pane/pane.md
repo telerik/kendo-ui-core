@@ -47,8 +47,6 @@ The example below demonstrates how to implement navigation between Hybrid UI Pan
 <!--_-->
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the Pane:
-
 * [Hybrid UI Pane JavaScript API Reference](/api/javascript/mobile/ui/pane)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

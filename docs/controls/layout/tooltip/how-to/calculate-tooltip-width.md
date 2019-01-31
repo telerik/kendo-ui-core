@@ -56,8 +56,6 @@ The example below demonstrates how to calculate the width of a Kendo UI Tooltip 
 
 ## See Also
 
-Other articles on the Kendo UI Tooltip:
-
 * [Content Property of the Tooltip](/api/javascript/ui/tooltip/configuration/content)
 * [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
 * [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})

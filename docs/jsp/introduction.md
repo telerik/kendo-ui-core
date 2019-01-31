@@ -156,7 +156,5 @@ For more examples on how to use Kendo UI with JSP wrappers, visit the [GitHub re
 
 ## See Also
 
-Other articles on Progress Telerik UI for JSP:
-
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

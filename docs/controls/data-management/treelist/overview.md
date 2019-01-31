@@ -406,8 +406,6 @@ The following example demonstrates how to access an existing TreeList instance.
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI TreeList:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/treelist/overview)
 * [Overview of the JSP Tag]({% slug overview_treelist_uiforjsp %})
 * [Overview of the PHP Class](/php/widgets/treelist/overview)

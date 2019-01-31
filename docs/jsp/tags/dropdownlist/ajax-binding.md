@@ -54,8 +54,6 @@ To configure the Kendo UI DropDownList for Ajax binding, follow the steps below 
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the DropDownList:
-
 * [Overview of the DropDownList JSP Tag]({% slug overview_dropdownlist_uiforjsp %})
 * [Overview of the DropDownList Widget]({% slug ajaxbinding_dropdownlist_uiforjsp %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

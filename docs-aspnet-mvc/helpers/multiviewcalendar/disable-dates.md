@@ -82,7 +82,5 @@ When you add a function, determine its return value as `true` for the date that 
 
 ## See Also
 
-Other articles on the Kendo UI MultiViewCalendar:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/helpers/multiviewcalendar/overview)
 * [MultiViewCalendar JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)

@@ -94,8 +94,6 @@ If you call the `showIn` method with an additional third parameter, the new view
 <!--*-->
 ## See Also
 
-Other articles on Kendo UI Single-Page Application:
-
 * [Single-Page Application Overview]({% slug overview_kendoui_singlepageapplication %})
 * [SPA Router]({% slug router_kendoui_singlepageapplication %})
 * [SPA View]({% slug viewclass_kendoui_singlepageapplication %})

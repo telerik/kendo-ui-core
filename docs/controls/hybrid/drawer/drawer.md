@@ -151,8 +151,6 @@ To activate this feature, set the `km-vertical-tabstrip` class to the TabStrip p
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the Drawer:
-
 * [Hybrid UI Drawer JavaScript API Reference](/api/javascript/mobile/ui/drawer)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

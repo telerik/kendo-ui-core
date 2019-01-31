@@ -122,7 +122,7 @@ This is the live example of the representation above:
     $("#listView").kendoMobileListView({
       dataSource: dataSource,
       template: "#: name #",
-      endlessScroll: true, 
+      endlessScroll: true,
       virtualViewSize: 50
     });
   }
@@ -217,8 +217,6 @@ This is the live example of the representation above:
 ```
 
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI ListView:
 
 * [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
 * [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})

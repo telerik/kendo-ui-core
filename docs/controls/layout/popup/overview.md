@@ -145,6 +145,4 @@ For detailed information, refer to the article on [getting a reference to a Kend
 
 ## See Also
 
-Other articles on Kendo UI Popup:
-
 * [Popup JavaScript API Reference](/api/javascript/ui/popup)

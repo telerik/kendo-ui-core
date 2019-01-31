@@ -44,8 +44,6 @@ The example below demonstrates how to post to the iframe content of the Kendo UI
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Window:
-
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})

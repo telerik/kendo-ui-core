@@ -14,8 +14,6 @@ The approaches described in it are applicable for the MultiSelect.
 
 ## See Also
 
-Other articles on the Kendo UI MultiSelect:
-
 * [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})

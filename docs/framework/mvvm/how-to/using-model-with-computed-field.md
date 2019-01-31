@@ -47,8 +47,6 @@ The example below demonstrates how to apply source and template binding by using
 
 ## See Also
 
-Other articles on Kendo UI MVVM:
-
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [ObservableObject Overview]({% slug overview_observabeobject_kendoui %})
 * [Tutorial on How to Build MVVM Bound Forms]({% slug mvvmboundforms_mvvmpattern_kendoui %})

@@ -104,8 +104,6 @@ The example below demonstrates how to include a signing functionality by using j
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI ListView:
-
 * [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
 * [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
 * [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})

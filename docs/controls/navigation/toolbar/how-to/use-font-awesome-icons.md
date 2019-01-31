@@ -36,8 +36,6 @@ The example below demonstrates how to use [FontAwesome icons](http://fortawesome
 
 ## See Also
 
-Other articles on the Kendo UI ToolBar:
-
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
 * [How to Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})

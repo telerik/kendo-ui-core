@@ -97,8 +97,6 @@ You are able to reference an existing FlatColorPicker instance via the [`jQuery.
 
 ## See Also
 
-Other articles on Telerik UI for PHP and related to the FlatColorPicker:
-
 * [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

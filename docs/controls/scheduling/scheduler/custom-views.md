@@ -23,8 +23,6 @@ You can override each method and property that are defined in the list by extend
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Create Custom Month Views with Event Count in the Show More Button]({% slug howto_create_custom_monthview_eventcount_showmore_button_scheduler %})
 * [How to Create Custom To-Do Views]({% slug howto_create_custom_todo_view %})

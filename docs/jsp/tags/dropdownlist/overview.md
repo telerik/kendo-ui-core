@@ -87,8 +87,6 @@ You are able to reference an existing DropDownList instance via the [`jQuery.dat
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the DropDownList:
-
 * [Ajax Binding of the DropDownList]({% slug ajaxbinding_autocomplete_uiforjsp %})
 * [Overview of the Kendo UI DropDownList Widget]({% slug ajaxbinding_dropdownlist_uiforjsp %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

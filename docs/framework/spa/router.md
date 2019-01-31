@@ -250,8 +250,6 @@ The example below demonstrates how to detect `Back` button press in a route.
 
 ## See Also
 
-Other articles on Kendo UI Single-Page Application:
-
 * [Single-Page Application Overview]({% slug overview_kendoui_singlepageapplication %})
 * [SPA Layout]({% slug layout_kendoui_singlepageapplication %})
 * [SPA View]({% slug viewclass_kendoui_singlepageapplication %})

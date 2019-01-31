@@ -93,8 +93,6 @@ The example below demonstrates how to prevent the default actions of DOM events.
 
 ## See Also
 
-Other articles on the Kendo UI MVVM component and bindings:
-
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})
 * [Overview of the Checked Binding]({% slug checkedbinding_mvvm_kendoui %})

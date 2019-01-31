@@ -180,8 +180,6 @@ The following example demonstrates how to inherit the built-in Month view and im
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
 * [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
@@ -194,9 +192,6 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
 * [How to Edit Records on touchend]({% slug howto_edit_records_using_touchendonmobile_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 

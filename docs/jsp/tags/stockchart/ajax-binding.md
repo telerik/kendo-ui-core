@@ -65,8 +65,6 @@ To configure the Kendo UI StockChart for Ajax binding, follow the steps below (u
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the StockChart:
-
 * [Overview of the StockChart JSP Tag]({% slug overview_stockchart_uiforjsp %})
 * [Overview of the StockChart Widget]({% slug overview_kendoui_stockcharts %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

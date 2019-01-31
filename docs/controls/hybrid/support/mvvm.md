@@ -69,8 +69,6 @@ As of the Kendo UI Q2 2014 release, the mobile view events may be bound to the v
 
 ## See also
 
-Other articles on the integration of Kendo UI hybrid components:
-
 * [Integration with Kendo UI for the Web]({% slug integrationkendouiweb_hybridkendoui %})
 * [AngularJS Support for the Hybrid UI]({% slug angularjssupport_hybridkendoui %})
 * [Build Applications with AngularJS and the Hybrid UI]({% slug buildappswithangular_tutorial_hybridkendoui %})

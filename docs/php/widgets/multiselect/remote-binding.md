@@ -231,8 +231,6 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the MultiSelect:
-
 * [Overview of the MultiSelect PHP Class]({% slug overview_multiselect_uiforphp %})
 * [Local Binding of the MultiSelect PHP Class]({% slug localbinding_multiselect_uiforphp %})
 * [Overview of the Kendo UI MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})

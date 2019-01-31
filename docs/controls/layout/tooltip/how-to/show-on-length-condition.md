@@ -74,8 +74,6 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Tooltip:
-
 * [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
 * [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})
 * [How to Show Tooltip for Chart Notes]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})

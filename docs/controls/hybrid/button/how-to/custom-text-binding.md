@@ -39,7 +39,5 @@ The example below demonstrates how to configure text binding for the Hybrid UI B
 
 ## See Also
 
-Other articles on the Hybrid UI Button:
-
 * [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
 * [Overview of the Hybrid UI Button]({% slug overview_hybridbutton %})

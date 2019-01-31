@@ -20,8 +20,6 @@ The application functions normally with the substituted files as well. Once you 
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

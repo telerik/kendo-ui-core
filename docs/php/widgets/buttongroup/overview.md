@@ -80,8 +80,6 @@ To reference an existing ButtonGroup instance, refer to the [introductory articl
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the ButtonGroup:
-
 * [Overview of the Kendo UI ButtonGroup Widget]({% slug overview_kendoui_buttongroup_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

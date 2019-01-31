@@ -1,6 +1,6 @@
 ---
 title: Using iframe
-page_title: Use Window with iframe | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Using iframe | Kendo UI Window HtmlHelper for ASP.NET Core
 description: "Learn how to use the Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) with an iframe element."
 slug: htmlhelpers_window_iframe_aspnetcore
 position: 6
@@ -8,13 +8,13 @@ position: 6
 
 # Using iframe
 
-The Window could be forced to display its content in an `<iframe>` element using the `Iframe(true)` configuration method.
+You can force the Window to display its content in an `<iframe>` element by using the `Iframe(true)` configuration method.
 
 > **Important**
-> * Loading HTML fragments (partial content) inside an iframe is an incorrect approach. Iframe pages have to include a `DOCTYPE`, `html`, `head`, and `body` tags, just like a standard web page does.
-> * It is not recommended to use an iframe on iOS devices. Iframes on these devices are not scrollable and always expand to match the content.
+> * Loading HTML fragments (partial content) inside an `iframe` is not correct. iframe pages have to include a `DOCTYPE`, `html`, `head`, and `body` tags, just like a standard web page does.
+> * Avoid using iframes on iOS devices because they are not scrollable and always expand to match the content.
 
-The example below demonstrates how to access the `window` and `document` objects inside the `iframe`. To achieve this, the nested page has to belong to the same domain as the main page. The `iframe` is accessed through the [`element`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/fields/element) of the Window widget.
+The following example demonstrates how to access the `window` and `document` objects inside the `iframe`. To achieve this, the nested page has to belong to the same domain as the main page. The `iframe` is accessed through the [`element`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/fields/element) of the Window.
 
 ###### Example
 

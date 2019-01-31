@@ -129,8 +129,6 @@ You can reference the client-side Kendo UI DropDownList instance via [`jQuery.da
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the DropDownList:
-
 * [Local Binding of the DropDownList PHP Class]({% slug localbinding_dropdownlist_uiforphp %})
 * [Remote Binding of the DropDownList PHP Class]({% slug remotebinding_dropdownlist_uiforphp %})
 * [Overview of the Kendo UI DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})

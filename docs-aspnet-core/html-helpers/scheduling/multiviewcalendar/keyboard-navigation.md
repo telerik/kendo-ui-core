@@ -38,7 +38,5 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ## See Also
 
-Other articles on the Kendo UI MultiViewCalendar:
-
 * [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
 * [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)

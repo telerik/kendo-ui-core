@@ -551,8 +551,6 @@ First, configure a Kendo UI Grid for PHP binding and then implement the remote s
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Grid:
-
 * [Overview of the Grid PHP Class]({% slug overview_grid_uiforphp %})
 * [Local Binding of the Grid PHP Class]({% slug localbinding_grid_uiforphp %})
 * [Remote Binding of the Grid PHP Class]({% slug remotebinding_grid_uiforphp %})

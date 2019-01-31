@@ -12,6 +12,10 @@ Virtualization is useful for displaying large data sets.
 
 The UI virtualization technique uses a fixed amount of list items in the popup list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones. For more information, refer to the article on [virtualization in the ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
 
+> **Important**
+>
+> If the `AutoBind` option of the MultiSelect is set to `false`, the widget will be able to display pre-selected items only after it is focused.
+
 1. Create the `Read` and `ValueMapper` actions.
 
     ###### Example
@@ -117,10 +121,6 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             }
         </script>
 
-
-> **Important**
->
-> If the AutoBind option of the MultiSelect is set to false, the widget will not be able to display pre-selected items until it is focused.
 
 ## See Also
 

@@ -114,8 +114,5 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 * [Create Excel Documents with Kendo UI](http://docs.telerik.com/kendo-ui/framework/excel/introduction)
 * [Save Files with Kendo UI](http://docs.telerik.com/kendo-ui/framework/save-files/introduction)
 * [API Reference: kendo.ooxml.Workbook](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
-
-Other articles on the Kendo UI Grid for ASP.NET Core:
-
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)

@@ -70,8 +70,6 @@ Setting the `Series` object to `"Bar"` renders horizontal bars, as demonstrated 
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
-
 * [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
 * [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %})
 * [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})

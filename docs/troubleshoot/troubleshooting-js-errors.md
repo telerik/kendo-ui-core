@@ -31,8 +31,6 @@ For a solution, see the [Application Does Not Function at All](#application-does
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})

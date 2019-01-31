@@ -97,8 +97,6 @@ You are able to reference an existing StockChart instance via the [`jQuery.data(
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the StockChart:
-
 * [Ajax Binding of the StockChart]({% slug ajaxbinding_stockchart_uiforjsp %})
 * [Overview of the Kendo UI StockChart Widget]({% slug overview_kendoui_stockcharts %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

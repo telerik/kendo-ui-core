@@ -204,8 +204,6 @@ To simulate a different calendar type, such as Lunar, use the JavaScript `Date` 
 
 ## See Also
 
-Other articles on the Kendo UI DateTimePicker:
-
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
 * [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})

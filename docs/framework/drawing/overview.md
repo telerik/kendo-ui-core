@@ -30,8 +30,6 @@ The Drawing API is also a stand-alone component suitable for building custom vis
 
 ## See Also
 
-Other articles on Kendo UI Drawing API:
-
 * [Drawing of Basic Shapes]({% slug basicshapes_drawingapi %})
 * [Export a Drawing in PDF]({% slug pdfderawingexport_drawingapi %})
 * [Drawing of HTML Elements]({% slug drawingofhtmlelements_drawingapi %})

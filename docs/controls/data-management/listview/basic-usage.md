@@ -369,8 +369,6 @@ $("#listView").kendoListView({
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI ListView:
-
 * [JavaScript API Reference](/api/javascript/ui/listview)
 * [Overview]({% slug overview_kendoui_listview_widget %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})

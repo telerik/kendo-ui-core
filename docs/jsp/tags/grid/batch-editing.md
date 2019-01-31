@@ -240,8 +240,6 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Grid:
-
 * [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Ajax Binding of the Grid]({% slug ajaxbinding_grid_uiforjsp %})
 * [Ajax Editing of the Grid]({% slug ajaxediting_grid_uiforjsp %})

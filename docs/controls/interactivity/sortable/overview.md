@@ -16,7 +16,7 @@ The [Kendo UI Sortable widget](http://demos.telerik.com/kendo-ui/sortable/index)
 
 The Sortable is initialized on an existing HTML element and enables the reordering of the element's children.
 
-The example below demonstrates how to initialize Kendo UI Sortable by using jQuery plug-in syntax.
+The following example demonstrates how to initialize Kendo UI Sortable by using jQuery plug-in syntax.
 
 ###### Example
 
@@ -373,9 +373,9 @@ A Sortable with radio buttons and a Hint cloned from the Sortable element will l
     </script>
 ```
 
-## Known Limitations 
+## Known Limitations
 
-Kendo UI does not support integration between the Kendo UI Sortable and the Kendo UI TreeList widgets. 
+Kendo UI does not support integration between the Kendo UI Sortable and the Kendo UI TreeList widgets.
 
 ## Further Reading
 
@@ -383,8 +383,6 @@ Kendo UI does not support integration between the Kendo UI Sortable and the Kend
 * [Kendo UI DataSource](/framework/datasource/overview)
 
 ## See Also
-
-Other articles on Kendo UI Sortable:
 
 * [Integration with TabStrip]({% slug integrationwith_tabstrip_sortable_widget %})
 * [Integration with Grid and ListView]({% slug integrationwith_gridandlistview_sortable_widget %})

@@ -56,8 +56,6 @@ Internet Explorer versions prior to version 10 provide no information on the fil
 
 ## See Also
 
-Other articles on the Kendo UI Upload:
-
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})

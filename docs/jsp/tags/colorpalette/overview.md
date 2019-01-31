@@ -75,8 +75,6 @@ You are able to reference an existing ColorPalette instance via the [`jQuery.dat
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the ColorPalette:
-
 * [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
 * [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

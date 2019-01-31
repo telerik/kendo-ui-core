@@ -23,8 +23,6 @@ The following table lists each Kendo UI feature as supported by the respective b
 
 ## See Also
 
-Other articles on the Kendo UI Upload:
-
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Chunk Upload]({% slug chunkupload_upload_widget %})

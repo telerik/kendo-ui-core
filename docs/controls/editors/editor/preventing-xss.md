@@ -98,8 +98,6 @@ The following list provides information on the libraries that allow processing H
 
 ## See Also
 
-Other articles on the Kendo UI Editor:
-
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})

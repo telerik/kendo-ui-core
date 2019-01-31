@@ -77,8 +77,6 @@ The example below demonstrates how to customize the on/off labels of a Hybrid UI
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the Switch:
-
 * [Hybrid UI Switch JavaScript API Reference](/api/javascript/mobile/ui/switch)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

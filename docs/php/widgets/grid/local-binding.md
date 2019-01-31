@@ -204,8 +204,6 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Grid:
-
 * [Overview of the Grid PHP Class]({% slug overview_grid_uiforphp %})
 * [Remote Binding of the Grid PHP Class]({% slug remotebinding_grid_uiforphp %})
 * [Editing of the Grid PHP Class]({% slug editing_grid_uiforphp %})

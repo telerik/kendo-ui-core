@@ -107,8 +107,6 @@ In the configuration that enables client data processing during Ajax binding, Ke
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the MultiSelect:
-
 * [Overview of the MultiSelect JSP Tag]({% slug overview_multiselect_uiforjsp %})
 * [Overview of the Kendo UI MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

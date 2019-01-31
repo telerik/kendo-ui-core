@@ -13,23 +13,26 @@ It displays a horizontal collection of content or image views with built-in navi
 
 ## Key Features
 
-The Kendo UI ScrollView widget:
+The Kendo UI ScrollView:
 
 * Can be initialized with HTML only.
-* Features data source binding.
+* Features data-source binding.
 * Has a customizable template.
 * Provides a built-in pager.
-* Allows you to scroll to a specific page programmatically via its API methods.
+* Allows you to programmatically scroll to a specific page through its API methods.
 * Has adjustable bounce effects and scroll velocity.
 * Allows you to capture user interactions by handling the events that are triggered by the widget.
 
 ## Getting Started
 
-There are two types of initialization that the Kendo UI ScrollView features - from HTML and via data source with a template. To initialize the Kendo UI ScrollView from HTML use its `items` tag and define the content for each page.
+You can initialize the ScrollView either from HTML or from a data source with a template.
 
 ### Initialize the ScrollView from HTML
 
-The following example demonstrates how to define the Kendo UI ScrollView by using a tag helper.
+To initialize the Kendo UI ScrollView from HTML:
+
+1. Use its `items` tag.
+1. Define the content for each page.
 
 ###### Example
 
@@ -57,9 +60,12 @@ The following example demonstrates how to define the Kendo UI ScrollView by usin
 
 ### Initialize the ScrollView with a Data Source and a Template
 
-To initialize the Kendo UI ScrollView with a Data Source and a template, create a [`Kendo UI Template`](https://docs.telerik.com/kendo-ui/framework/templates/overview) and  use the `template-id` property to pass itand provide a DataSource. Ensure that the template caters for the `pageSize` of the data source. If `serverPaging` is enabled, the Kendo UI ScrollView will request the data in advance so it becomes available before it is required, thus improving user experience. The Kendo UI ScrollView uses virtualization when it is bound to a data source and it only has three pages at all times - the current, the previous and the next.
+To initialize the Kendo UI ScrollView with a Data Source and a template:
 
-The following example demonstrates the Kendo UI ScrollView with a Data Source.
+1. Create a [Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/overview).
+1. Use the `template-id` property to pass it and provide a DataSource.
+
+Make sure that the template provides the `pageSize` of the data source. If `serverPaging` is enabled, the ScrollView will request the data in advance so it becomes available before it is required, thus improving user experience. The Kendo UI ScrollView uses virtualization when it is bound to a data source and it only has three pages at all times&mdash;the current, the previous, and the next.
 
 ###### Example
 

@@ -298,8 +298,6 @@ To provide for the backward compatibility of any custom icons you add to your pr
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})

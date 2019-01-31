@@ -547,8 +547,6 @@ In other words, if you use this raw form, you are responsible for type-checking 
 
 ## See Also
 
-Other articles on the Kendo UI Spreadsheet:
-
 * [Overview]({% slug overview_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
 * [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})

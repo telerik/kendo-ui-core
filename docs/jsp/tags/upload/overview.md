@@ -91,8 +91,6 @@ You are able to reference an existing Upload instance via the [`jQuery.data()`](
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Upload:
-
 * [Modes of Operation of the Upload JSP Tag]({% slug modesofoperation_upload_uiforjsp %})
 * [Sending and Receiving Metadata with the Upload JSP Tag]({% slug metadata_upload_uiforjsp %})
 * [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})

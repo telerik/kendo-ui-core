@@ -311,8 +311,6 @@ Note that no click event handler is defined for this element in the widget. The 
 
 ## See Also
 
-Other articles on the Kendo UI Music Store Web Application sample project:
-
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Set Up the Kendo UI Music Store Web App]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
 * [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})

@@ -64,16 +64,16 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-To reference an existing Kendo UI DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.  Once a reference has been established, use the [DateRangePicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker#methods) to control its behavior.
+To reference an existing Kendo UI DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [DateRangePicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker#methods) to control its behavior.
 
 The following example demonstrates how to access an existing DateRangePicker instance.
 
 ###### Example
 
-        //Place this after your Kendo UI DateRangePicker for ASP.NET Core declaration.
+        // Place this after your Kendo UI DateRangePicker for ASP.NET Core declaration.
         <script>
         $(function() {
-        //Notice that the Name() of the DateRangePicker is used to get its client-side instance.
+        // Notice that the Name() of the DateRangePicker is used to get its client-side instance.
             var daterangepicker = $("#daterangepicker").data("kendoDateRangePicker");
         });
         </script>

@@ -94,8 +94,6 @@ You are able to reference an existing Chart instance via the [`jQuery.data()`](h
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Chart:
-
 * [Ajax Binding of the Chart]({% slug ajaxbinding_chart_uiforjsp %})
 * [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

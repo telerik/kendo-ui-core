@@ -325,8 +325,6 @@ The [`labels.format` property](/api/dataviz/chart#xAxis.labels.format) takes pri
 
 ## See Also
 
-Other articles on Kendo UI Charts:
-
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Binding]({% slug databinding_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})

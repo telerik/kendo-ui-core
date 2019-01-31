@@ -199,8 +199,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-Other articles on the Kendo UI Grid for ASP.NET MVC:
-
 * [Telerik UI for ASP.NET MVC API Reference: GridBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
@@ -213,9 +211,6 @@ Other articles on the Kendo UI Grid for ASP.NET MVC:
 * [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
 * [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-
-Articles on Telerik UI for ASP.NET MVC:
-
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

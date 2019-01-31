@@ -97,8 +97,6 @@ The following example demonstrates how to define a custom group template.
 
 ## See Also
 
-Other articles on the Kendo UI MultiColumnComboBox:
-
 * [Overview]({% slug overview_kendoui_multicolumncombobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %})
 * [Cascading MultiColumnComboBoxes]({% slug cascading_kendoui_multicolumncombobox_widget %})

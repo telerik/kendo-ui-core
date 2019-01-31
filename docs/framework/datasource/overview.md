@@ -174,8 +174,6 @@ You can also create a shared DataSource to allow multiple Kendo UI widgets to bi
 
 ## See Also
 
-Other articles on the Kendo UI DataSource component:
-
 * [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})
 * [CORS Data Fetching from Another Domain]({% slug corsdatafetching_anotherdomain_datasourcecomponent %})

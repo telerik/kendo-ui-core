@@ -87,8 +87,6 @@ You are able to reference an existing MultiColumnComboBox instance via the [`jQu
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the MultiColumnComboBox:
-
 * [Ajax Binding of the MultiColumnComboBox]({% slug ajaxbinding_multicolumncombobox_uiforjsp %})
 * [Overview of the Kendo UI MultiColumnComboBox Widget]({% slug overview_kendoui_multicolumncombobox_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

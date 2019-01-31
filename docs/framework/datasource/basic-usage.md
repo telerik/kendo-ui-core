@@ -325,8 +325,6 @@ The example below features local data but the data returned by a `transport` is 
 
 ## See Also
 
-Other articles on the Kendo UI DataSource component:
-
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})
 * [CORS Data Fetching from Another Domain]({% slug corsdatafetching_anotherdomain_datasourcecomponent %})

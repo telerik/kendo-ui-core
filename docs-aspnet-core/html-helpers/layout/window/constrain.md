@@ -1,12 +1,12 @@
 ---
-title: Constraining Position
-page_title: Constraining Position | Telerik UI for ASP.NET Core HtmlHelpers
+title: Constraining the Position
+page_title: Constraining the Position | Kendo UI Window HtmlHelper for ASP.NET Core
 description: "Learn how to configure the containment limits for the Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_constrain_aspnetcore
 position: 4
 ---
 
-# Constraining Position inside Containers
+# Constraining the Position
 
 The Window provides the [`Draggable(d => d.Containment())`](/api/Kendo.Mvc.UI.Fluent/WindowDraggableSettingsBuilder#containmentsystemstring) configuration option that you can use to constrain the movement of the widget inside a container element.
 
@@ -14,7 +14,7 @@ The Window provides the [`Draggable(d => d.Containment())`](/api/Kendo.Mvc.UI.Fl
 
 The `Containment()` option overrides the `appendTo` setting and attaches the Window to the specified DOM element. You have to correctly position the `containment` element by using the `relative`, `absolute`, or `fixed` CSS rules.
 
-The example below demonstrates how to create a modal Window and constrain its movement inside a DOM element.
+The following example demonstrates how to create a modal Window and constrain its movement inside a DOM element.
 
 ###### Example
 

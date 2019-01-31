@@ -184,8 +184,6 @@ log("Cool? " + me.isPrettyCoolPerson);
 
 ## See Also
 
-Other articles on Kendo UI generic implementation:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Widget Wrapper and Element References]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Data Attributes Configuration]({% slug dataattributes_configuration_installation %})

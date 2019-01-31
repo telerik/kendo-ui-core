@@ -23,7 +23,7 @@ res_type: kb
 
 ## Description
 
-How can I change the background color of a Kendo UI Menu item when a user hovers over it? 
+How can I change the background color of a Kendo UI Menu item when a user hovers over it?
 
 ## Solution
 
@@ -33,7 +33,7 @@ Setting a different [background color](https://www.w3schools.com/css/css_backgro
   #specificMenu.k-menu .k-state-hover>.k-link{
     background-color: lightgray;
   }
- 
+
   /*all menus*/
   .k-menu .k-state-hover>.k-link{
     color: forestgreen;
@@ -54,7 +54,7 @@ The following demonstrates two Kendo UI Menus with different styles for hovered 
       .k-menu .k-state-hover>.k-link{
         color: forestgreen;
         background-color: khaki;
-      } 
+      }
     </style>
 
     <div id="example">
@@ -137,5 +137,5 @@ The following demonstrates two Kendo UI Menus with different styles for hovered 
 
 ## See Also
 
-* [Kendo Menu - Basic Usage Demo](https://demos.telerik.com/kendo-ui/menu/index)
-* [W3Schools - Background Color](https://www.w3schools.com/css/css_background.asp)
+* [Demo on Basic Usage of the Kendo UI Menu](https://demos.telerik.com/kendo-ui/menu/index)
+* [Background Color on W3Schools](https://www.w3schools.com/css/css_background.asp)

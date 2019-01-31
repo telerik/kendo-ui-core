@@ -8,10 +8,11 @@ position: 3
 
 # Sitemap Binding
 
-To bind a Kendo UI Menu to a sitemap:
+The Kendo UI Menu enables you to bind it to a sitemap.
+
+To perform sitemap binding:
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}).
-
 1. Create a simple sitemap with the `sample.sitemap` file name at the root of the project.
 
     ```Razor
@@ -28,7 +29,7 @@ To bind a Kendo UI Menu to a sitemap:
     </siteMap>
     ```
 
-1. Load the sitemap using `SiteMapManager`.
+1. Load the sitemap by using `SiteMapManager`.
 
     ```Razor
     public ActionResult Index()

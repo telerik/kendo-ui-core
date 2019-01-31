@@ -82,8 +82,6 @@ Each Layout instance exposes the following fields:
 
 ## See Also
 
-Other articles related to the appearance and styling of Kendo UI hybrid distribution:
-
 * [Style the Hybrid UI Form Elements]({% slug forms_hybridkendoui %})
 * [Apply CSS]({% slug styling_hybridkendoui %})
 * [Touch Events]({% slug touchevents_hybridkendoui %})

@@ -93,8 +93,6 @@ In a server-binding scenario, you can set the group templates without the `Clien
 
 ## See Also
 
-Other articles on the Kendo UI Grid for ASP.NET MVC:
-
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
 * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})

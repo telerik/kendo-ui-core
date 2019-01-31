@@ -11,8 +11,6 @@ To see the example on how to show Kendo UI Tooltips for Kendo UI Grid columns, r
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Tooltip:
-
 * [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
 * [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
 * [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})

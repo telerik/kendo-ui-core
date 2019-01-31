@@ -105,8 +105,6 @@ The DateInput enables you to modify the text that is displayed in the placeholde
 
 ## See Also
 
-Other articles on the Kendo UI DateInput:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DateInput Widget](/aspnet-mvc/helpers/dateinput/overview)
 * [Overview of the DateInput JSP Tag]({% slug overview_dateinput_uiforjsp %})
 * [Overview of the DateInput PHP Class](/php/widgets/dateinput/overview)

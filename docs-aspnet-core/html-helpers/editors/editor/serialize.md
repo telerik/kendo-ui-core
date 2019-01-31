@@ -1,18 +1,25 @@
 ---
-title: Serialize and Deserialize
-page_title: Serialize and Deserialize Content | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to control the serialize / deserialize behavior of the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+title: Serialization and Deserialization
+page_title: Serialization and Deserialization | Kendo UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to control the serializing and deserializing behavior of the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_serialize_aspnetcore
 position: 5
 ---
 
 # Serialize and Deserialize Content
 
-The Editor HTML helper allows configuration and custom definition for both serialization and deserialization of its content.
+The Editor HtmlHelper allows you to configure and apply custom definitions for serializing and deserializing its content.
 
 ## Serialize Content
 
-The serialization options in the Editor could be configured in the following manner:
+The Editor provides the following configuration options:
+
+* `Entities()`&mdash;Indicates whether the characters outside the ASCII range will be encoded as HTML entities. By default, they are encoded (`true`).
+* `Scripts()`&mdash;Indicates whether inline scripts will be serialized and posted to the server. By default, scripts will be removed (`false`).
+* `Semantic()`&mdash;Indicates whether the font styles will be saved as semantic tags (`strong`, `em`, `span`) or as presentational tags (`b`, `i`, `u`, `font`). By default, the Editor uses semantic tags (`true`).
+* `Custom()`&mdash;Allows you to define custom serialization for the editable content. The JavaScript handler will receive the Editor content and will return its serialized version.
+
+The following example demonstrates a sample configuration of the serialization Editor options.
 
 ###### Example
 
@@ -34,16 +41,9 @@ The serialization options in the Editor could be configured in the following man
 </script>
 ```
 
-The available configuration options allow the following:
-
-* `Entities()` - Indicates whether the characters outside the ASCII range will be encoded as HTML entities. By default, they are encoded (`true`).
-* `Scripts()` - Indicates whether inline scripts will be serialized and posted to the server. By default scripts will be removed (`false`).
-* `Semantic()` - Indicates whether the font styles will be saved as semantic (strong / em / span) tags, or as presentational (b / i / u / font) tags. By default semantic tags are used (`true`).
-* `Custom()` - Allows you to define custom serialization for the editable content. The JavaScript handler will receive the Editor content and should return its serialized version.
-
 ## Deserialize Content
 
-Deserialization is the process of parsing the HTML string input from the value() method or from the viewHtml dialog into editable content. The deserialization configuration method allows the use of a custom JavaScript handler. Such scenario is demonstrated on the example below:
+Deserialization is the process of parsing the HTML string input from the `value()` method or from the `viewHtml` dialog into editable content. The `deserialization` configuration method allows you to use a custom JavaScript handler, as demonstrated in the following example.
 
 ###### Example
 

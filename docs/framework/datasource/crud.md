@@ -44,7 +44,6 @@ The field used as a model ID has default values that are used by the data source
 "default": ""
 ```
 
-
 For detailed information on the DataSource `schema`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/schema).
 
 ## Local or Custom Transport CRUD Operations
@@ -628,9 +627,9 @@ The example below demonstrates a custom error.
 <!--*-->
 When an `error` event is fired, the DataSource does not process any data items, which may also be part of the server response. For example, if an update action fails due to conflicting edits, and the data needs to be refreshed from the server, you need to call the [`read`](/api/javascript/data/datasource/methods/read) method of the DataSource in the error handler. Sending the new data together with the error response is not going to populate the DataSource with the new values.
 
-## Submit all Created / Updated / Destroyed Items with a Single Request
+## Submit All Created, Updated, or Destroyed Items with a Single Request
 
-The [`transport.submit`](/api/javascript/data/datasource/configuration/transport.submit) function will handle create, update and delete operations in a single batch when custom transport is used. Also, in this case the `transport.read` should also be defined as a function.
+When custom transport is used, the create, update, and delete operations will be handled by the [`transport.submit`](/api/javascript/data/datasource/configuration/transport.submit) function in a single batch. Make sure that `transport.read` is also defined as a function.
 
 The `transport.create`, `transport.update`, and `transport.delete` operations will not be executed in this case.
 
@@ -708,8 +707,6 @@ To see the example on remote CRUD operations in ASP.NET MVC, refer to [this GitH
 To run a sample mobile application, which uses the Kendo UI DataSource component to list and update records from an employee table, refer to [this GitHub page](https://github.com/CloudDataObject/sample-crud-app).
 
 ## See Also
-
-Other articles on the Kendo UI DataSource component:
 
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
 * [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})

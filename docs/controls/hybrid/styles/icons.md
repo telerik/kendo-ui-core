@@ -1203,8 +1203,6 @@ Keep in mind that icons with Unicode codes from `\e0ca` to `\e0f0` are the origi
 
 ## See Also
 
-Other articles related to the appearance and styling of Kendo UI hybrid distribution:
-
 * [Style the Hybrid UI Form Elements]({% slug forms_hybridkendoui %})
 * [Apply CSS]({% slug styling_hybridkendoui %})
 * [Define the Layout]({% slug layout_hybridkendoui %})

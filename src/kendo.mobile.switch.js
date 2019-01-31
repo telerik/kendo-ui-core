@@ -29,7 +29,7 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy;
 
     function className(name) {
-        return "k-" + name + " km-" + name;
+        return "km-" + name;
     }
 
     function limitValue(value, minLimit, maxLimit) {

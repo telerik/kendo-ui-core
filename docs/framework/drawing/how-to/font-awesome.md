@@ -72,8 +72,6 @@ The example below demonstrates how to embed custom fonts while working with the 
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Drawing API:
-
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
 * [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)

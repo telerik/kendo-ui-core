@@ -49,8 +49,6 @@ Raster maps are divided into images (tiles) for serving over the web. Tiles are 
 
 ## See Also
 
-Other articles on the Kendo UI Map:
-
 * [Overview of the Map Widget]({% slug overview_kendoui_mapwidget %})
 * [Map Authoring]({% slug mapauthoring_mapwidget %})
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)

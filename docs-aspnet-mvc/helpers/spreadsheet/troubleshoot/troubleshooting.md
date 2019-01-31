@@ -22,8 +22,6 @@ Reset all cells outside the used range to the default borders, formatting and co
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
-
 * [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})
 * [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
 * [Overview of the Spreadsheet HtmlHelper]({% slug overview_spreadsheethelper_aspnetmvc %})
@@ -33,9 +31,6 @@ Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
 * [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})

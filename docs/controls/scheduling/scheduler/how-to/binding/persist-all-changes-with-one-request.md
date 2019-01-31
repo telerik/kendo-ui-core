@@ -218,8 +218,6 @@ The following example demonstrates how to persist all changes with a single requ
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
 * [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
@@ -232,9 +230,6 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})

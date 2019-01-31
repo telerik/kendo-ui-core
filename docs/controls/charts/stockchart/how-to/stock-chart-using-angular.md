@@ -136,8 +136,6 @@ The example below demonstrates how to create Kendo UI Stock Charts by using Angu
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Charts:
-
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Create Dynamic Plot Bands]({% slug howto_createdynamicplotbands_charts %})

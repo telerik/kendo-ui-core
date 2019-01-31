@@ -75,8 +75,6 @@ You are able to reference an existing TimePicker instance via the [`jQuery.data(
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the TimePicker:
-
 * [Overview of the Kendo UI TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

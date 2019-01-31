@@ -568,8 +568,6 @@ The Spreadsheet does not support the following options that are otherwise availa
 
 ## See Also
 
-Other articles on the Kendo UI Spreadsheet:
-
 * [Overview]({% slug overview_spreadsheet_widget %})
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})

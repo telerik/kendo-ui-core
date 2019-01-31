@@ -87,8 +87,6 @@ You are able to reference an existing AutoComplete instance via the [`jQuery.dat
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the AutoComplete:
-
 * [Ajax Binding of the AutoComplete]({% slug ajaxbinding_autocomplete_uiforjsp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

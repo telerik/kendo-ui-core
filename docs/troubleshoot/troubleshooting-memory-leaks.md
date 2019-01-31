@@ -35,8 +35,6 @@ Try disabling extensions as [suggested above](#browser-extensions). If that does
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})

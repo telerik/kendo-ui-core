@@ -161,8 +161,6 @@ Another way to handle the issue is to pass the ID of the parent ComboBox manuall
 
 ## See Also
 
-Other articles on the Kendo UI ComboBox:
-
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Search for Items by Dragging to Input]({% slug howto_search_items_dragging_toinput_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})

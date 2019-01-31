@@ -1,7 +1,7 @@
 ---
-title: Required-If Validation
-description: How to implement conditional required field validation based on the value of another input on the form
-page_title: Required-If Rule | Kendo UI Validator
+title: Validate Required Conditional Fields
+description: An example on how to implement required conditional field validation based on the value of another input on the form when working with the Kendo UI Validator.
+page_title: Validate Required Conditional Fields | Kendo UI Validator
 slug: validator-required-if-rule
 tags: validator, required, required if, required-if, validation, conditional
 ticketid: 1384728
@@ -31,17 +31,17 @@ res_type: kb
 
 ## Description
 
-How can I create "required if" validation that only requires an input if another input is filled in?
+How can I create a "required if" validation that only demands an input if another input is filled in?
 
 ## Solution
 
-Denote the desired input in an attribute on the validated element and implement a [custom validator rule](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview#custom-rules-for-validation).
+Denote the desired input in an attribute on the validated element and implement a [custom validation rule](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview#custom-rules-for-validation).
 
-Some tips are available in code comments and here are a few key points:
+The code comments contain tips for the suggested implementation. For more information, refer to the following key points:
 
-* The form elements must have a `name` attribute so the Kendo Validator can attach to them properly.
-* There are many ways to implement conditional validation, this is just one of them.
-* This approach can also apply to other technologies like MVC as it only requires setting an attribute on the DOM element. For example, for Kendo UI for MVC MultiSelect Html Helper, adding the following setting is equivalent to the markup from the example below `.HtmlAttributes(new { requiredIf = "input1" })`
+* The `form` elements must have a `name` attribute so that the Kendo UI Validator can properly attach to them.
+* The suggested approach is only one out of many ways to implement conditional validation.
+* The suggested approach can also apply to other technologies, such as MVC, as it requires only the setting of an attribute on the DOM element. For example, for the Kendo UI for MVC MultiSelect Html Helper, adding the `.HtmlAttributes(new { requiredIf = "input1" })` setting is equivalent to the markup from the following example.
 
 ```dojo
 <form id="myform">
@@ -144,7 +144,5 @@ Some tips are available in code comments and here are a few key points:
 ## See Also
 
 * [Custom Validator Rules](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview#custom-rules-for-validation)
-
-* [Live Demo: Custom Validation Rules](https://demos.telerik.com/kendo-ui/validator/custom-validation)
-
-* [The kendo.widgetInstance() Method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/widgetinstance)
+* [Demo on Custom Validation Rules](https://demos.telerik.com/kendo-ui/validator/custom-validation)
+* [API Reference of the kendo.widgetInstance() Method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/widgetinstance)

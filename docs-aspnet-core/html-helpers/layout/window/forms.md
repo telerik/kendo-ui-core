@@ -1,20 +1,18 @@
 ---
-title: Integrate with Forms
-page_title: Use Forms | Telerik UI for ASP.NET Core HtmlHelpers
+title: Forms Integration
+page_title: Forms Integration | Kendo UI Window HtmlHelper for ASP.NET Core
 description: "Learn how to use forms in the Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_forms_aspnetcore
 position: 7
 ---
 
-# Integrate with Forms
+# Forms Integration
 
-The Window HTML helper provides different approaches to load a `<form>` element as its content.
+The Window HtmlHelper provides various approaches to load a `<form>` element as its content.
 
 ## Html.BeginForm inside Window
 
-When a complete form should be inserted inside a Window, end the Window declaration with `.Render();` and wrap it in a non-rendering code block. This requirement does not apply if the form is defined through plain HTML tags (`&lt;form&gt;...&lt;/form&gt;`).
-
-For more information on this topic, refer to the [article on using the Kendo UI Window with a form](http://docs.telerik.com/kendo-ui/controls/layout/window/overview#using-kendo-ui-window-with-a-form).
+To insert a complete form inside a Window, end the Window declaration with `.Render();` and wrap it in a non-rendering code block. This requirement does not apply if the form is defined through plain HTML tags (`&lt;form&gt;...&lt;/form&gt;`). For more information, refer to the [article on using the Kendo UI Window with a form](http://docs.telerik.com/kendo-ui/controls/layout/window/overview#using-kendo-ui-window-with-a-form).
 
 The following example demonstrates how to insert a complete form inside the Window.
 
@@ -33,11 +31,11 @@ The following example demonstrates how to insert a complete form inside the Wind
 
 ## Loading External Form
 
-The Kendo UI Window widget for ASP.NET MVC enables you to use the `LoadContentFrom()` method to load content from a view into the popup content ([Load-on-Demand Content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %}#load-on-demand-content)).
+The Kendo UI Window for ASP.NET MVC enables you to use the `LoadContentFrom()` method to load content from a view into the popup content. For more information, refer to the article on [loading content on demand]({% slug htmlhelpers_window_loadingcontent_aspnetcore %}#load-on-demand-content)).
 
 Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view into a Kendo UI Window, it does not act as a separate browser window. This means that any returned data from the form submit action loads into the main page and eventually might lead to unexpected results.
 
-To handle this behavior, render the content in an iframe.
+To handle this behavior, render the content in an `iframe`.
 
 ```Index.cshtml
 @(Html.Kendo().Window()
@@ -59,12 +57,12 @@ To handle this behavior, render the content in an iframe.
 ```HomeController.cs
 public IActionResult GetForm()
 {
-    // Return the view with the form
+    // Return the view with the form.
     return View("Form");
 }
 ```
 ```Form.cshtml
-@* As this is loaded in an iframe, the view should have a layout in order to load an entire HTML page. *@
+@* As this is loaded in an iframe, the view will have a layout to load an entire HTML page. *@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -101,12 +99,12 @@ public IActionResult MyModel_Create(MyModel model)
 {
     if (!ModelState.IsValid)
     {
-        /* If model is invalid, as expected, return the same
+        /* If the model is invalid, as expected, return the same
         view and send the invalid model to update validation. */
         return View("Form", model);
     }
 
-    // Return a script that runs the parent's window close method.
+    // Return a script that runs the close method of the parent window.
     return Content("<script>window.parent.closeFormPopup()</script>");
 }
 ```

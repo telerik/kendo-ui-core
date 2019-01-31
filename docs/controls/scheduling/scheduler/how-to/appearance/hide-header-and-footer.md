@@ -108,8 +108,6 @@ The following example demonstrates how to hide the header and the footer of the 
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
 * [How to Export to iCal]({% slug howto_exportto_ical_scheduler %})
@@ -119,9 +117,6 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Persist Resource Values on move]({% slug howto_persistresourcevalues_onamoveevent_scheduler %})
 * [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
 * [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})

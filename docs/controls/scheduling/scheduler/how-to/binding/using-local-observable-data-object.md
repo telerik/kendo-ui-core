@@ -46,8 +46,6 @@ The following example demonstrates how to bind the Scheduler to a local `observa
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
 * [How to Set Event Color in the Template]({% slug howto_seteventcolorinthetemplate_scheduler %})
@@ -57,9 +55,6 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Use Different Date Formats]({% slug howto_usedifferentdateformats_scheduler %})
 * [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
 * [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})

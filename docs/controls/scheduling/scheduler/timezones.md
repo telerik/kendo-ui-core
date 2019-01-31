@@ -130,8 +130,6 @@ The example below demonstrates how to bind the Scheduler to UTC dates when the `
 
 ## See Also
 
-Other articles on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [Overview of the Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})
 * [Resources]({% slug resources_kendoui_scheduler_widget %})

@@ -131,8 +131,6 @@ You can reference the client-side Kendo UI Chart instance via [`jQuery.data()`](
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Chart:
-
 * [Local Binding of the Chart PHP Class]({% slug localbinding_chart_uiforphp %})
 * [Remote Binding of the Chart PHP Class]({% slug remotebinding_chart_uiforphp %})
 * [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})

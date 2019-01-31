@@ -82,8 +82,6 @@ You can independently customize each pointer including its current value, color,
 
 ## See Also
 
-Other articles on the Kendo UI Radial Gauge:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Radial Gauge Widget](/aspnet-mvc/helpers/radialgauge/overview)
 * [Overview of the Radial Gauge JSP Tag]({% slug overview_radialgauge_uiforjsp %})
 * [Overview of the Radial Gauge PHP Class](/php/widgets/radialgauge/overview)

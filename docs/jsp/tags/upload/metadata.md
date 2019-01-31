@@ -96,8 +96,6 @@ The same approach is applicable for the `remove` handler as well.
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Upload:
-
 * [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
 * [Modes of Operation of the Upload JSP Tag]({% slug modesofoperation_upload_uiforjsp %})
 * [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})

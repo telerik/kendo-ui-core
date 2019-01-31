@@ -153,8 +153,6 @@ To render a numeric software keyboard, use either of the following workarounds:
 <!--*-->
 ## See Also
 
-Other articles and how-to examples on the Kendo UI NumericTextBox:
-
 * [How to Add Title Attribute]({% slug howto_add_title_attribute_numerictextbox %})
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
 * [How to Focus Widget on Label Click]({% slug howto_focus_widgeton_label_click_numerictextbox %})

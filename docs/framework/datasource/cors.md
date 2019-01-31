@@ -163,8 +163,6 @@ Hopefully this post helps highlight the value of CORS and how it can be used wit
 
 ## See Also
 
-Other articles on the Kendo UI DataSource component:
-
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
 * [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})

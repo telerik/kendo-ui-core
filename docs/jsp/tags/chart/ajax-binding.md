@@ -62,8 +62,6 @@ To configure the Kendo Chart for Ajax binding, follow the steps below (using the
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the AutoComplete:
-
 * [Overview of the Chart JSP Tag]({% slug overview_chart_uiforjsp %})
 * [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

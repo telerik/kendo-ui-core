@@ -279,8 +279,6 @@ You can also use custom styles with [higher specificity](https://developer.mozil
 
 ## See Also
 
-Other articles on the Kendo UI Editor:
-
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})

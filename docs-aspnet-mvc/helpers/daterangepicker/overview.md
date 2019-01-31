@@ -15,7 +15,6 @@ The DateRangePicker HtmlHelper extension is a server-side wrapper for the [Kendo
 Below are listed the steps for you to follow when configuring the Kendo UI DateRangePicker.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
 
     ###### Example
@@ -25,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateR
             return View();
         }
 
-1. Add a DateRangePicker.
+1. Add the DateRangePicker.
 
     ```ASPX
         <%: Html.Kendo().DateRangePicker()
@@ -133,7 +132,7 @@ To reference an existing Kendo UI DateRangePicker instance, use the [`jQuery.dat
 
 ###### Example
 
-    // Put this after your Kendo UIDateRangePicker for ASP.NET MVC declaration.
+    // Place this after your Kendo UIDateRangePicker for ASP.NET MVC declaration.
     <script>
         $(function() {
             // Notice that the Name() of the DateRangePicker is used to get its client-side instance.

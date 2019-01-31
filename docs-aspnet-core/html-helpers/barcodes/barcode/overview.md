@@ -56,7 +56,5 @@ To reference an existing Kendo UI Barcode instance, use the [`jQuery.data()`](ht
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the Barcode:
-
 * [Overview of the Kendo UI Barcode Widget](https://docs.telerik.com/kendo-ui/controls/barcodes/barcode/overview)
 * [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core/barcode/index)

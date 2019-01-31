@@ -122,7 +122,5 @@ You can also load the nodes on demand. However, this approach is more computatio
 
 ## See Also
 
-Other articles on Kendo UI DropDownTree:
-
 * [Overview of the DropDownTree]({% slug overview_kendoui_dropdowntree_widget %})
 * [DropDownTree JavaScript API Reference](/api/javascript/ui/dropdowntree)

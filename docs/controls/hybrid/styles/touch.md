@@ -111,8 +111,6 @@ For a detailed description of each event, see the [`touch` API reference section
 
 ## See Also
 
-Other articles related to the appearance and styling of Kendo UI hybrid distribution:
-
 * [Style the Hybrid UI Form Elements]({% slug forms_hybridkendoui %})
 * [Apply CSS]({% slug styling_hybridkendoui %})
 * [Define the Layout]({% slug layout_hybridkendoui %})

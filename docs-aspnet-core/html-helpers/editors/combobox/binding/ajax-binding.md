@@ -1,5 +1,5 @@
 ---
-title:  Ajax Binding
+title: Ajax Binding
 page_title: Ajax Binding | Kendo UI ComboBox HtmlHelper for ASP.NET Core
 description: "Learn how to implement Ajax Binding with Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_combobox_ajaxbinding_aspnetcore

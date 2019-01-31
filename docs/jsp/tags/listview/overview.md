@@ -98,8 +98,6 @@ You are able to reference an existing ListView instance via the [`jQuery.data()`
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the ListView:
-
 * [Editing of the ListView]({% slug editing_listview_uiforjsp %})
 * [Ajax Binding of the ListView]({% slug ajaxbinding_listview_uiforjsp %})
 * [Overview of the Kendo UI ListView Widget]({% slug overview_kendoui_listview_widget %})

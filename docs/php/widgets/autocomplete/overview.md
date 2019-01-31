@@ -127,8 +127,6 @@ You can reference the client-side Kendo UI AutoComplete instance via [`jQuery.da
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the AutoComplete:
-
 * [Local Binding of the AutoComplete PHP Class]({% slug localbinding_autocomplete_uiforphp %})
 * [Remote Binding of the AutoComplete PHP Class]({% slug remotebinding_autocomplete_uiforphp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})

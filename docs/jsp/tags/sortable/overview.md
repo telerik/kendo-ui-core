@@ -122,8 +122,6 @@ You are able to reference an existing Sortable instance via [`jQuery.data()`](ht
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Sortable:
-
 * [Overview of the Kendo UI Sortable Widget]({% slug overview_kendoui_sortable_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

@@ -235,8 +235,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the MultiColumnComboBox:
-
 * [Overview of the MultiColumnComboBox PHP Class]({% slug overview_multicolumncombobox_uiforphp %})
 * [Local Binding of the MultiColumnComboBox PHP Class]({% slug localbinding_multicolumncombobox_uiforphp %})
 * [Overview of the Kendo UI MultiColumnComboBox Widget]({% slug overview_kendoui_multicolumncombobox_widget %})

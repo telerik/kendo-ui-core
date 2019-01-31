@@ -118,8 +118,6 @@ You are able to reference an existing Menu instance via the [`jQuery.data()`](ht
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Menu:
-
 * [Overview of the Kendo UI Menu Widget]({% slug overview_kendoui_menu_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

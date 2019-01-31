@@ -93,8 +93,6 @@ To remove the connecting lines, specify `"scatter"` instead of `"scatterLine"`, 
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
-
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})

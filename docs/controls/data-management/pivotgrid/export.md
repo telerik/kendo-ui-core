@@ -90,8 +90,6 @@ Internet Explorer 10 or older versions and Safari do not support the option of f
 
 ## See Also
 
-Other articles on the Kendo UI PivotGrid:
-
 * [Overview]({% slug overview_kendoui_pivotgrid_widget %})
 * [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})

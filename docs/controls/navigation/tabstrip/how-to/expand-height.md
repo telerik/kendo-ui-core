@@ -95,8 +95,6 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
 
 ## See Also
 
-Other articles on the Kendo UI TabStrip:
-
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})

@@ -654,8 +654,6 @@ fonts in fonts/
 
 ## See Also
 
-Other articles on styling, appearance, and rendering of Kendo UI widgets:
-
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})

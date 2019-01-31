@@ -84,8 +84,6 @@ The following example demonstrates how to customize the appearance of the drop z
 
 ## See Also
 
-Other articles on the Kendo UI Upload:
-
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})

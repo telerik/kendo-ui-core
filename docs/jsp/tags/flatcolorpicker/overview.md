@@ -75,8 +75,6 @@ You are able to reference an existing FlatColorPicker instance via the [`jQuery.
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the FlatColorPicker:
-
 * [FlatColorPicker JavaScript API](/api/javascript/ui/flatcolorpicker)
 * [FlatColorPicker JSP API](/api/jsp/flatcolorpicker/messages)
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

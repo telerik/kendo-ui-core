@@ -125,8 +125,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Chart:
-
 * [Overview of the Chart PHP Class]({% slug overview_chart_uiforphp %})
 * [Local Binding of the Chart PHP Class]({% slug localbinding_chart_uiforphp %})
 * [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})

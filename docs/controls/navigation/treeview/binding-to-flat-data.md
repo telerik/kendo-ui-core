@@ -122,7 +122,5 @@ The following example demonstrates how to filter data incrementally.
 
 ## See Also
 
-Other articles on Kendo UI TreeView:
-
 * [Overview of the TreeView Widget]({% slug overview_kendoui_treeview_widget %})
 * [TreeView JavaScript API Reference](/api/javascript/ui/treeview)

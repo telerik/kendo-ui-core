@@ -337,8 +337,6 @@ As of the R1 2017 release, the PanelBar has provided an built-in functionality o
 
 ## See Also
 
-Other articles on the Kendo UI PanelBar:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the PanelBar Widget](/aspnet-mvc/helpers/panelbar/overview)
 * [Overview of the PanelBar JSP Tag]({% slug overview_panelbar_uiforjsp %})
 * [Overview of the PanelBar PHP Class](/php/widgets/panelbar/overview)

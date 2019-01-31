@@ -59,16 +59,11 @@ When a server error occurs, the complete server response is logged in the consol
 
 ## See Also
 
-Other articles on Kendo UI Upload:
-
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

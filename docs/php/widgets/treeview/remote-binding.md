@@ -140,8 +140,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the TreeView:
-
 * [Overview of the TreeView PHP Class]({% slug overview_treeview_uiforphp %})
 * [Local Binding of the TreeView PHP Class]({% slug localbinding_treeview_uiforphp %})
 * [Overview of the Kendo UI TreeView Widget]({% slug overview_kendoui_treeview_widget %})

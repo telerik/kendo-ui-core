@@ -107,8 +107,6 @@ In the configuration that enables client data processing during Ajax binding, Ke
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the AutoComplete:
-
 * [Overview of the AutoComplete JSP Tag]({% slug overview_autocomplete_uiforjsp %})
 * [Overview of the AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

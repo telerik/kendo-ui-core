@@ -55,8 +55,6 @@ You are able to reference an existing Radial Gauge instance via [`jQuery.data()`
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Radial Gauge:
-
 * [Overview of the Kendo UI Radial Gauge Widget]({% slug overview_kendoui_radialgaugewidget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

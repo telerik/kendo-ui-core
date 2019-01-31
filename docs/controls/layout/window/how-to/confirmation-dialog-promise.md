@@ -77,8 +77,6 @@ The example below demonstrates how to create a confirmation dialog in a Kendo UI
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Window:
-
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})

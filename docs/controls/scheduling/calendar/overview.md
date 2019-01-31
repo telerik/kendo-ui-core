@@ -282,8 +282,6 @@ When you add a function, determine its return value as `true` for the date that 
 
 ## See Also
 
-Other articles on the Kendo UI Calendar:
-
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Calendar Widget](/aspnet-mvc/helpers/calendar/overview)
 * [Overview of the Calendar JSP Tag]({% slug overview_calendar_uiforjsp %})

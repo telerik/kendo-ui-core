@@ -14,7 +14,7 @@ Represents the Kendo UI Switch. Inherits from [Widget](/api/javascript/ui/widget
 
 ### checked `Boolean`*(default: false)*
 
-The checked state of the widget.
+The checked state of the Switch.
 
 #### Example
 
@@ -28,7 +28,7 @@ The checked state of the widget.
 
 ### enabled `Boolean`*(default: true)*
 
-If set to `false` the widget will be disabled and will not allow the user to change its checked state.
+If set to `false`, the Switch will be disabled and will not allow the user to change its checked state.
 
 #### Example
 
@@ -42,7 +42,7 @@ If set to `false` the widget will be disabled and will not allow the user to cha
 
 ### readonly `Boolean`*(default: false)*
 
-If set to `true` the Kendo UI Switch will render into its read-only state.
+If set to `true`, the Switch will render into its read-only state.
 
 #### Example
 
@@ -56,7 +56,7 @@ If set to `true` the Kendo UI Switch will render into its read-only state.
 
 ### messages `Object`
 
-Defines the text of the `checked` and `unchecked` labels that are shown within the Switch. All labels could be localized.
+Defines the text of the `checked` and `unchecked` labels that are displayed within the Switch. All labels support localization.
 
 #### Example
 
@@ -73,7 +73,7 @@ Defines the text of the `checked` and `unchecked` labels that are shown within t
 
 ### messages.checked `String`*(default: "On")*
 
-The label when Kendo UI Switch is checked.
+The label for the checked state of the Switch.
 
 #### Example
 
@@ -89,7 +89,7 @@ The label when Kendo UI Switch is checked.
 
 ### messages.unchecked `String`*(default: "Off")*
 
-The label when Kendo UI Switch is unchecked.
+The label for the unchecked state of the Switch.
 
 #### Example
 
@@ -105,7 +105,7 @@ The label when Kendo UI Switch is unchecked.
 
 ### width `Number|String`*(default: "6em")*
 
-The width of the Kendo UI Switch.
+The width of the Switch.
 
 #### Example
 
@@ -121,17 +121,17 @@ The width of the Kendo UI Switch.
 
 ### check
 
-Get/Set the checked state of the widget.
+Gets or sets the checked state of the Switch.
 
 #### Parameters
 
 ##### check `Boolean`
 
-Whether to check or uncheck the Kendo UI Switch.
+Checks or unchecks the Switch.
 
 #### Returns
 
-`Boolean` The checked state of the widget.
+`Boolean` - The checked state of the Switch.
 
 #### Example
 
@@ -144,7 +144,7 @@ Whether to check or uncheck the Kendo UI Switch.
 
 ### toggle
 
-Toggle the checked state of the widget.
+Toggles the checked state of the Switch.
 
 #### Example
 
@@ -162,9 +162,10 @@ Toggle the checked state of the widget.
     </script>
 
 ### destroy
-Prepares the **Switch** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the Switch element from DOM.
+Prepares the Switch for safe removal from DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls the `destroy` method of any child Kendo UI widgets.
+
+> The `destroy` method does not remove the Switch element from DOM.
 
 #### Example
 
@@ -177,13 +178,13 @@ Prepares the **Switch** for safe removal from DOM. Detaches all event handlers a
 
 ### enable
 
-Changes the enabled state of the widget.
+Changes the enabled state of the Switch.
 
 #### Parameters
 
 ##### enable `Boolean`
 
-Whether to enable or disable the widget.
+Enables or disables the Switch.
 
 #### Example
 
@@ -196,13 +197,13 @@ Whether to enable or disable the widget.
 
 ### readonly
 
-Changes the readonly state of the widget.
+Changes the read-only state of the Switch.
 
 #### Parameters
 
 ##### readonly `Boolean`
 
-Whether to make the widget readonly.
+Defines whether the Switch will render in its read-only state.
 
 #### Example
 
@@ -217,15 +218,15 @@ Whether to make the widget readonly.
 
 ### change
 
-Fires when the checked state of the Kendo UI Switch changes by user interaction.
+Fires when the checked state of the Switch is changed through user interaction.
 
 #### Event Data
 
 ##### e.checked `Object`
 
-The checked state of the widget.
+The checked state of the Switch.
 
-#### Handle Switch change event
+#### Example - handling the change event
 
     <input id="switch" />
 

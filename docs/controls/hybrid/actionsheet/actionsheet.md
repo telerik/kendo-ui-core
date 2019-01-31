@@ -86,8 +86,6 @@ The example below demonstrates ActionSheet actions and context.
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the ActionSheet:
-
 * [Hybrid UI ActionSheet JavaScript API Reference](/api/javascript/mobile/ui/actionsheet)
 * [How to Change Options Dynamically in the ActionSheet]({% slug howto_changeoptiojnsdynamically_hybridactionsheet %})
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})

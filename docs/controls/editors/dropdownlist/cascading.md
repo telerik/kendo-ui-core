@@ -14,8 +14,6 @@ The approaches described in it are applicable for the DropDownList.
 
 ## See Also
 
-Other articles on the Kendo UI DropDownList:
-
 * [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})

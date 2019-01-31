@@ -11,8 +11,6 @@ To see the example on how to expand Kendo UI Grids that are located in Kendo UI 
 
 ## See Also
 
-Other articles on the Kendo UI Splitter:
-
 * [Splitter JavaScript API Reference](/api/javascript/ui/splitter)
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100heightandautoresize_splitter %})
 

@@ -168,8 +168,6 @@ To run the Kendo UI Music Store Dashboard demo, make sure your system meets thes
 
 ## See Also
 
-Other articles on the Kendo UI Music Store Web Application sample project:
-
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
 * [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})

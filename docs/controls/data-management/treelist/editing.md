@@ -20,15 +20,15 @@ All CRUD operations of the Kendo UI TreeList require a model with "id" and "pare
 
 	var dataSource = new kendo.data.TreeListDataSource({
         schema: {
-            model: {	
-                id: "IdField",	
+            model: {
+                id: "IdField",
                 parentId: "ParentIdField",
-                ... 
+                ...
 
 
 ### Transport configuration
 
-Once the schema is configured, you need to configure the "transport" actions for "update", "destroy" and "create". 
+Once the schema is configured, you need to configure the "transport" actions for "update", "destroy" and "create".
 
 ###### Example
 
@@ -105,7 +105,7 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
 		},
 		...
 		columns: [
-			... 
+			...
 			{ command: [{name: "createchild", text: "Add child"},"destroy" ], width: 240 }
 		]
 	});
@@ -113,10 +113,8 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
 With "incell" (Batch) edit mode you do not need to use the command buttons for update, because the editing is initiated on cell click. Another difference with the other two edit modes are the commands in the toolbar, which include the "Save changes" and "Cancel changes" buttons for saving or canceling all changes with a single click.
 
 Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have assigned "id". However, since the "id" is assigned within the service on "create" action, when the new record is not saved, it will not have "id". The code within the "dataBound" event ensures that the "createChild" button is removed for all new records.
-	
+
 
 ## See Also
-
-Other articles and how-to examples on the Kendo UI TreeList:
 
 * [JavaScript API Reference](/api/javascript/ui/treelist)

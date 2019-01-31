@@ -126,8 +126,6 @@ The following table lists all Kendo UI components with regard to their support p
 
 ## See Also
 
-Other articles on getting started with Kendo UI:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})

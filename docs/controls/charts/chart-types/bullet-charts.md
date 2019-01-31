@@ -138,8 +138,6 @@ You can customize the line that represents the target value using the `series.ta
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
-
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})

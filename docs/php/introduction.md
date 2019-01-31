@@ -118,7 +118,5 @@ For more examples on how to use Kendo UI with PHP server-side wrappers, visit th
 
 ## See Also
 
-Other articles on Telerik UI for PHP:
-
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})

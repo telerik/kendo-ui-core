@@ -144,8 +144,6 @@ You can reference the client-side Kendo UI ListView instance via [`jQuery.data()
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the ListView:
-
 * [Local Binding of the ListView PHP Class]({% slug localbinding_listview_uiforphp %})
 * [Remote Binding of the ListView PHP Class]({% slug remotebinding_listview_uiforphp %})
 * [Editing of the ListView PHP Class]({% slug editing_listview_uiforphp %})

@@ -98,8 +98,6 @@ The example below demonstrates how to create a Kendo UI Single-Page Application.
 
 ## See Also
 
-Other articles on Kendo UI Single-Page Application:
-
 * [Single-Page Application Router]({% slug router_kendoui_singlepageapplication %})
 * [SPA Layout]({% slug layout_kendoui_singlepageapplication %})
 * [SPA View]({% slug viewclass_kendoui_singlepageapplication %})

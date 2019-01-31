@@ -14,9 +14,9 @@ To declare the fonts, you need to:
 - Host the CSS file on the same domain as the page.
 - Keep the font files on the same domain too. Otherwise, you need to make sure that the server, which hosts the fonts, sends the proper [HTTP access control (CORS) headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
 
-Also, when declaring the fonts, it is not possible to serve the page over the `file:///` URLs when needed&mdash;for example in mobile applications. 
+Also, when declaring the fonts, it is not possible to serve the page over the `file:///` URLs when needed&mdash;for example in mobile applications.
 
-Thе [`@telerik/kendo-pack-fonts`](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) module packs one or more fonts into JavaScript code. In this way, you can load that code by using a `<script>` tag. 
+Thе [`@telerik/kendo-pack-fonts`](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) module packs one or more fonts into JavaScript code. In this way, you can load that code by using a `<script>` tag.
 
 The packed code works:  
 * Regardless of the location you store it&mdash;this means that you do not need CORS headers.   
@@ -25,8 +25,6 @@ The packed code works:
 For more information, refer to [the project on GitHub](https://github.com/telerik/kendo-pack-fonts).
 
 ## See Also
-
-Other articles and how-to examples on Kendo UI Drawing API:
 
 * [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
 * [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})

@@ -1,13 +1,17 @@
 ---
-title: Set an indeterminate state of the Kendo UI Switch
-page_title: Set an indeterminate state | Kendo UI Switch
-description: "Learn how to set an indeterminate state of the Kendo UI Switch."
+title: Set the Switch in Indeterminate State
+page_title: Set the Switch in Indeterminate State | Kendo UI Switch
+description: "Learn how to set the indeterminate state of the Kendo UI Switch."
 slug: howto_set_indeterminate_state_switch
 ---
 
-# Indeterminate state
+# Set the Switch in Indeterminate State
 
-The following example demonstrates how to set an indeterminate state of the Kendo UI Switch. The switch component behaves as a checkbox element. The `indeterminate state` is used only for visual representation, and thus the component will remain either `checked`, or `unchecked`.
+The Switch behaves as a checkbox element.
+
+The indeterminate state of the Switch is used only for visual representation and, in this way, the Switch remains either in its checked or unchecked state.
+
+The following example demonstrates how to set the Switch in an indeterminate state.
 
 ###### Example
 

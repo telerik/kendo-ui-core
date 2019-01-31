@@ -39,8 +39,6 @@ The NuGet Feed provides the following packages related to the UI for ASP.NET MVC
 
 ## See Also
 
-Other articles on getting started with Kendo UI:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})

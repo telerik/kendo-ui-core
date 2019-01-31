@@ -16,7 +16,7 @@ Represents the Kendo UI ScrollView widget. Inherits from [kendo.ui.Widget](/api/
 
 If set to `false` the widget will not bind to the DataSource during initialization.
 
-**Applicable only in data bound mode.**
+> Applicable only in the data-bound mode.
 
 #### Example
 
@@ -28,7 +28,6 @@ If set to `false` the widget will not bind to the DataSource during initializati
     </script>
 
     <script>
-
 
     var dataSource = new kendo.data.DataSource({
       type: "odata",
@@ -55,9 +54,9 @@ If set to `false` the widget will not bind to the DataSource during initializati
 
 ### bounceVelocityThreshold `Number`*(default: 1.6)*
 
-The intensity of the swipe after which the swipe will result in a bounce effect when user scrolls to next page. Higher values will require more accelerative swipe to notice the bounce effect when a page is changed.
+The intensity of the swipe after which the swipe will result in a bounce effect when the user scrolls to the next page. Higher values require more accelerative swipe to notice the bounce effect when a page is changed.
 
-#### Example - increase bounce velocity threshold
+#### Example - increasing the bounce velocity threshold
 
     <div id="scrollView">
       <div data-role="page"><div style="height: 200px;">Foo</div></div>
@@ -74,9 +73,14 @@ The intensity of the swipe after which the swipe will result in a bounce effect 
 
 ### contentHeight `Number|String`*(default: "auto")*
 
-The height of the ScrollView content. For string values it accepts `100%` and `auto`. Please use `100%` if the ScrollView container element does have set height. In this case each page will be streched to fill the container height.
+The height of the ScrollView content.
 
-#### Stretched ScrollView
+The supported string values are:
+
+* `100%` - Used if the ScrollView container element does not have a set height. In this case, each page will be stretched to fill the height of the container.
+* `auto`
+
+#### Example - stretching the ScrollView
 
     <div id="scrollView" style="height: 500px;>
       <div data-role="page">This page will stretch to fit the entire view height</div>
@@ -92,9 +96,11 @@ The height of the ScrollView content. For string values it accepts `100%` and `a
 
 ### dataSource `kendo.data.DataSource | Object`
 
-Instance of DataSource that the ScrollView will be bound to. *If DataSource is set, the widget will operate in data bound mode.*
+An instance of a DataSource to which the ScrollView will be bound.
 
-#### Example - ScrollView bound to remote DataSource
+> If `dataSource` is set, the widget will operate in the data-bound mode.
+
+#### Example - binding the ScrollView to a remote DataSource
 
     <div id="scrollView" style="height: 500px; width:600px;"></div>
 
@@ -104,7 +110,6 @@ Instance of DataSource that the ScrollView will be bound to. *If DataSource is s
     </script>
 
     <script>
-
 
     var dataSource = new kendo.data.DataSource({
       type: "odata",
@@ -131,9 +136,9 @@ Instance of DataSource that the ScrollView will be bound to. *If DataSource is s
 
 ### duration `Number`*(default: 400)*
 
-The milliseconds that take the ScrollView to snap to the current page after released.
+The duration (in milliseconds) for the ScrollView to snap to the current page after the user releases it.
 
-#### Example - increase the duration of snap transition
+#### Example - increasing the duration of the snap transition
 
     <div id="scrollView" style="height: 500px;>
       <div data-role="page">This page will stretch to fit the entire view height</div>
@@ -150,9 +155,9 @@ The milliseconds that take the ScrollView to snap to the current page after rele
 
 ### emptyTemplate `String`*(default: "")*
 
-The template which is used to render the pages without content. By default the ScrollView renders a blank page.
+The template for rendering the pages without content. By default, the ScrollView renders a blank page.
 
-**Applicable only in data bound mode.**
+> Applicable only in the data-bound mode.
 
 #### Example
 
@@ -194,10 +199,9 @@ The template which is used to render the pages without content. By default the S
 
 ### enablePager `Boolean`*(default: true)*
 
-If set to `true` the ScrollView will display a pager. By default pager is enabled.
+If set to `true`, the ScrollView will display a pager. By default, the pager is enabled.
 
-#### Example - turn off pager (ScrollView in data bound mode)
-
+#### Example - turning off the pager in a ScrollView in the data-bound mode
 
     <div id="scrollview"></div>
 
@@ -231,7 +235,7 @@ If set to `true` the ScrollView will display a pager. By default pager is enable
 
 ### page `Number`*(default: 0)*
 
-The initial page to display.
+The initial page that will be displayed.
 
 #### Example
 
@@ -248,17 +252,17 @@ The initial page to display.
 
 ### template `String`*(default: "#:data#")*
 
-The template which is used to render the content of pages. By default the ScrollView renders a div element for every page.
+The template for rendering the content of the pages. By default, the ScrollView renders a `div` element for every page.
 
-**Applicable only in data bound mode.**
+> Applicable only in the data-bound mode.
 
-#### Example: single item template
+#### Example - using a single-item template
 
     <script id="scrollview-template" type="text/x-kendo-template">
       <p>#= ProductName #</p>
     </script>
 
-#### Example: multiple items template (data is accessed via `data[index].fieldName`)
+#### Example - using a multiple-item template with data being accessed through data[index].fieldName
 
     <script id="scrollview-template" type="text/x-kendo-template">
         # for (var i = 0; i < data.length; i++) { #
@@ -292,10 +296,9 @@ The template which is used to render the content of pages. By default the Scroll
 
 ### velocityThreshold `Number`*(default: 0.8)*
 
-The length of horizotal swipe after which a swipe will navigate to the next page (as opposed to snapping back to the current page). Higher values will require long area swipe in order to navigate to the next page.
+The length of the horizontal swipe after which a swipe will navigate to the next page - as opposed to snapping back to the current page. Higher values require long area swipes to navigate to the next page.
 
 #### Example
-
 
     <div id="scrollView" data-velocity-threshold="2">
       <div data-role="page">Foo</div>
@@ -314,9 +317,9 @@ The length of horizotal swipe after which a swipe will navigate to the next page
 
 ### content
 
-Update the ScrollView HTML content.
+Updates the HTML content of the scrollView.
 
-> **Important:** This method is **not** supported in data bound mode.
+> The `content` method is not supported in the data-bound mode.
 
 #### Parameters
 
@@ -324,7 +327,7 @@ Update the ScrollView HTML content.
 
 The new ScrollView content.
 
-#### Example - change widget's content after initialization
+#### Example - changing the content after initialization
 
     <div id="scrollView">
       <div data-role="page">Foo</div>
@@ -344,9 +347,10 @@ The new ScrollView content.
     </script>
 
 ### destroy
-Prepares the **ScrollView** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the ScrollView element from DOM.
+Prepares the ScrollView for safe removal from the DOM. Detaches all event handlers and removes the `jQuery.data` attributes to avoid memory leaks. Calls the `destroy` method of any child Kendo UI widgets.
+
+> The `destroy` method does not remove the `ScrollView` element from the DOM.
 
 #### Example
 
@@ -367,7 +371,7 @@ Prepares the **ScrollView** for safe removal from DOM. Detaches all event handle
 
 ### next
 
-Switches to the next page with animation.
+Switches to the next page with an animation.
 
 #### Example
 
@@ -384,7 +388,7 @@ Switches to the next page with animation.
 
 ### prev
 
-Switches to the previous page with animation.
+Switches to the previous page with an animation.
 
 #### Example
 
@@ -401,10 +405,9 @@ Switches to the previous page with animation.
 
 ### refresh
 
-Redraw the ScrollView pager.
+Redraws the ScrollView pager.
 
 #### Example
-
 
 	<div id="scrollView" style="height: 150px">
 		<div data-role="page">Foo</div>
@@ -418,19 +421,19 @@ Redraw the ScrollView pager.
 
 ### scrollTo
 
-Scroll to the given page. Pages are zero-based indexed.
+Scrolls to the specified page. Page indices are zero-based.
 
 #### Parameters
 
 ##### page `Number`
 
-The page to scroll to.
+The page to which will be scrolled.
 
 ##### instant `Boolean` *(default: false)*
 
-If set to true, the ScrollView will jump instantly to the given page without any animation effects.
+If set to `true`, the ScrollView will instantly jump to the specified page without any animation effects.
 
-#### Example - scroll instantly (without animation)
+#### Example - scrolling instantly and without animation
 
 	<div id="scrollView">
 		<div data-role="page">Foo</div>
@@ -480,32 +483,35 @@ Sets the DataSource of an existing ScrollView and rebinds it.
 
 ### change
 
-Fires when the widget page is changed.
+Fires when the ScrollView page is changed.
 
 #### Event Data
 
 ##### e.currentPage `Number`
 
-The current page (zero based index)
+The current page (zero-based index).
 
 ##### e.nextPage `Number`
 
-The next page (zero based index)
+The next page (zero-based index).
 
 ##### e.element `jQuery`
 
-The page element. **Available only in data bound mode.** Parameter will be undefined in standard mode.
+The page element. In the standard mode, the parameter will be undefined.
+
+> Available only in the data-bound mode.
 
 ##### e.data `Array`
 
-The data collection. **Available only in data bound mode.** Parameter will be undefined in standard mode.
+The data collection. In the standard mode, the parameter will be undefined.
+
+> Available only in the data-bound mode.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the change action.
+If invoked, prevents the change action.
 
-#### Example - hook up to the change event
-
+#### Example - hooking up to the change event
 
     <div id="scrollview"></div>
 
@@ -546,21 +552,21 @@ If invoked prevents the change action.
 
 ### refresh
 
-Fires when widget refreshes
+Fires when the ScrollView refreshes.
 
 #### Event Data
 
 ##### e.pageCount `Number`
 
-The number of pages
+The number of pages.
 
 ##### e.page `Number`
 
-The current page number (zero based index)
+The current page number (zero-based index).
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the change event. The widget stays on the current page.
+If invoked, prevents the `change` event. The ScrollView stays on the current page.
 
 #### Example
 

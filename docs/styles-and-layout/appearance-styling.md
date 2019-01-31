@@ -280,8 +280,6 @@ The Theme Builder generates CSS, Less, and JS code which is compatible with the 
 
 ## See Also
 
-Other articles on styling, appearance, and rendering of Kendo UI widgets:
-
 * [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})

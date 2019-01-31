@@ -180,8 +180,6 @@ Define the main and the Navigator series.
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
-
 * [Stock Chart Data Binding]({% slug databinding_kendoui_stockcharts %})
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})

@@ -18,8 +18,6 @@ The approaches described in it are applicable for the MultiColumnComboBox.
 
 ## See Also
 
-Other articles on the Kendo UI MultiColumnComboBox:
-
 * [Overview]({% slug overview_kendoui_multicolumncombobox_widget %})
 * [Grouping]({% slug grouping_kendoui_multicolumncombobox_widget %})
 * [Cascading MultiColumnComboBoxes]({% slug cascading_kendoui_multicolumncombobox_widget %})

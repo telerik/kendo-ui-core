@@ -70,8 +70,6 @@ Each mobile View instance exposes the following fields:
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the View:
-
 * [Hybrid UI View JavaScript API Reference](/api/javascript/mobile/ui/view)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

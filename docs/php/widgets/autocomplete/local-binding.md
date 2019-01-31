@@ -164,8 +164,6 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the AutoComplete:
-
 * [Overview of the AutoComplete PHP Class]({% slug overview_autocomplete_uiforphp %})
 * [Remote Binding of the AutoComplete PHP Class]({% slug remotebinding_autocomplete_uiforphp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})

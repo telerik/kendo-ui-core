@@ -120,8 +120,6 @@ The `provnum_ne` field goes from 1 to 9 denoting each mainland state and territo
 
 ## See Also
 
-Other articles on the Kendo UI Map:
-
 * [Overview of the Map Widget]({% slug overview_kendoui_mapwidget %})
 * [Map Layers]({% slug maplayers_mapwidget %})
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)

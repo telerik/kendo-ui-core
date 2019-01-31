@@ -25,8 +25,6 @@ For more information on the provided [browser support]({% slug wbe_browserand_op
 
 ## See Also
 
-Other articles on Kendo UI Drawing API:
-
 * [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Drawing of Basic Shapes]({% slug basicshapes_drawingapi %})
 * [Export a Drawing in PDF]({% slug pdfderawingexport_drawingapi %})

@@ -198,7 +198,5 @@ The Sortable widget uses the index of the DOM elements. When the Grid displays g
 
 ## See Also
 
-Other articles on Kendo UI Sortable:
-
 * [Integration with TabStrip]({% slug integrationwith_tabstrip_sortable_widget %})
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)

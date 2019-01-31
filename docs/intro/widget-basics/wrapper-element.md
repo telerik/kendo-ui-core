@@ -57,8 +57,6 @@ Obtaining a reference to the `element` of the widget from the widget object is a
 
 ## See Also
 
-Other articles on Kendo UI widget basics:
-
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})

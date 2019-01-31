@@ -60,8 +60,6 @@ The example below demonstrates the two options of how to use custom icons for th
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Window:
-
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})

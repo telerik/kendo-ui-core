@@ -141,8 +141,6 @@ To submit the value of the Editor along with the `form`, use the approach demons
 
 ## See Also
 
-Other articles on Kendo UI Editor:
-
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
@@ -155,9 +153,6 @@ Other articles on Kendo UI Editor:
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

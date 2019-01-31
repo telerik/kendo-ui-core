@@ -630,8 +630,6 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the ListView:
-
 * [Overview of the ListView PHP Class]({% slug overview_listview_uiforphp %})
 * [Local Binding of the ListView PHP Class]({% slug localbinding_listview_uiforphp %})
 * [Remote Binding of the ListView PHP Class]({% slug remotebinding_listview_uiforphp %})

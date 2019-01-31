@@ -136,8 +136,6 @@ The selected files are uploaded immediately by default. You can change this beha
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Upload:
-
 * [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
 * [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_upload_uiforjsp %})
 * [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})

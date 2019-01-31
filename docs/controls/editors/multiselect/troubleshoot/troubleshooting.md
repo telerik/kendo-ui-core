@@ -59,8 +59,6 @@ For more information on handling repetitive requests performed while filtering i
 
 ## See Also
 
-Other articles on the Kendo UI MultiSelect:
-
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
 * [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})
@@ -78,9 +76,6 @@ Other articles on the Kendo UI MultiSelect:
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
 * [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

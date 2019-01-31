@@ -130,8 +130,6 @@ You are able to reference an existing Menu instance via the [`jQuery.data()`](ht
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Menu:
-
 * [Overview of the Kendo UI Menu Widget]({% slug overview_kendoui_menu_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

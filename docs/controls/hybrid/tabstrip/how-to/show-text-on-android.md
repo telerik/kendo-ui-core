@@ -51,7 +51,5 @@ The example below demonstrates how to show the tab text of a Hybrid UI TabStrip 
 
 ## See Also
 
-Other articles on the Hybrid UI TabStrip:
-
 * [Hybrid UI TabStrip JavaScript API Reference](/api/javascript/mobile/ui/tabstrip)
 * [Overview of the Hybrid UI TabStrip]({% slug overview_hybridtabstrip %})

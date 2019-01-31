@@ -266,8 +266,6 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 ##  See Also
 
-Other articles on Telerik UI for PHP and on the ListView:
-
 * [Overview of the ListView PHP Class]({% slug overview_listview_uiforphp %})
 * [Local Binding of the ListView PHP Class]({% slug localbinding_listview_uiforphp %})
 * [Editing of the ListView PHP Class]({% slug editing_listview_uiforphp %})

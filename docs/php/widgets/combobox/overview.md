@@ -127,8 +127,6 @@ You can reference the client-side Kendo UI ComboBox instance via [`jQuery.data()
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the ComboBox:
-
 * [Local Binding of the ComboBox PHP Class]({% slug localbinding_combobox_uiforphp %})
 * [Remote Binding of the ComboBox PHP Class]({% slug remotebinding_combobox_uiforphp %})
 * [Overview of the Kendo UI ComboBox Widget]({% slug overview_kendoui_combobox_widget %})

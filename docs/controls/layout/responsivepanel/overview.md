@@ -93,6 +93,4 @@ The example below demonstrates how to collapse the menu on the left of small scr
 
 ## See Also
 
-Other articles on Kendo UI ResponsivePanel:
-
 * [ResponsivePanel JavaScript API Reference](/api/javascript/ui/responsivepanel)

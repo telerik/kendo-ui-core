@@ -14,7 +14,7 @@ The Switch HtmlHelper extension is a server-side wrapper for the [Kendo UI Switc
 
 ### The Basics
 
-Kendo UI Switch is used to display two exclusive choices.
+The Kendo UI Switch displays two exclusive choices.
 
 ### Configuration
 
@@ -24,7 +24,7 @@ Add the Switch.
 
 ```
     @(Html.Kendo().Switch()
-        .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
+        .Name("switch") // The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
         .Checked(true)
     )
 ```

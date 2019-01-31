@@ -74,9 +74,6 @@ For more information on handling repetitive requests performed while filtering i
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [Overview of the ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

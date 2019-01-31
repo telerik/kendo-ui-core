@@ -21,7 +21,7 @@ The Kendo UI Menu widget can be initialized in two ways:
 
 > **Important**
 >
-> As Menu should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> As the Menu has to be initialized after the DOM is fully loaded, make sure you create the widget within a `$(document).ready()` statement.
 
 #### Using HTML Markup
 

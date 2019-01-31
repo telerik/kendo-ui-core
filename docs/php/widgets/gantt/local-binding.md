@@ -379,8 +379,6 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Gantt:
-
 * [Overview of the Gantt PHP Class]({% slug overview_gantt_uiforphp %})
 * [Remote Binding of the Gantt PHP Class]({% slug remotebinding_gantt_uiforphp %})
 * [Overview of the Kendo UI Gantt Widget]({% slug overview_kendoui_gantt_widget %})

@@ -20,8 +20,6 @@ If CSP mode is enabled for a Kendo UI application, the `unsafe-eval` keyword sho
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

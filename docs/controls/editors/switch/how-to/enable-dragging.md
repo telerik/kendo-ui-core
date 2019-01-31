@@ -1,13 +1,15 @@
 ---
-title: Enable Dragging For Drag Handle of Kendo UI Switch
-page_title: Enable Dragging For Drag Handle | Kendo UI Switch
-description: "Learn how to enable dragging of the handle of the Kendo UI Switch."
+title: Enable Dragging for the Drag Handle
+page_title: Enable Dragging for the Drag Handle | Kendo UI Switch
+description: "Learn how to enable the dragging of the handle of the Kendo UI Switch."
 slug: howto_enable_dragging_switch
 ---
 
-# Enable Dragging For Drag Handle
+# Enable Dragging for the Drag Handle
 
-The following example demonstrates how to enable dragging of the drag handle. The users will be able to slide the control to reveal the second value.
+You can enable the users to slide the Switch to reveal its second value.
+
+The following example demonstrates how to enable the dragging of the Switch drag handle.
 
 ###### Example
 

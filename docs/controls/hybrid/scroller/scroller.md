@@ -65,8 +65,6 @@ The Hybrid UI Scroller widget exposes the following fields:
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the Scroller:
-
 * [Hybrid UI Scroller JavaScript API Reference](/api/javascript/mobile/ui/scroller)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

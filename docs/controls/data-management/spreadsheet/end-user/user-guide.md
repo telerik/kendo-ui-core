@@ -158,7 +158,5 @@ Use `SUM` when your case is similar to the second example of the nested formulas
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
 * [List of Keyboard Shortcuts]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %})
 * [List of Formulas and Functions]({% slug list_offormulas_andfunctions_spreadsheet_widget %})

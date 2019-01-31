@@ -122,8 +122,6 @@ You are able to reference an existing Upload instance via the [`jQuery.data()`](
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Upload:
-
 * [Modes of Operation of the Upload PHP Class]({% slug modesofoperation_upload_uiforphp %})
 * [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)

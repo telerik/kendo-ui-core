@@ -12,11 +12,11 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
 
 ## Scaffolding Templates
 
-You can scaffold a Razor Pages sample which contains an ASP.NET Core Grid with enabled CRUD operations using our **Create New Project Wizard**. To get started with the **Create New Project Wizard**, refer to the [Creating Projects]({% slug newprojectwizards_visualstudio_aspnetcore %}) article.
+You can scaffold a Razor Pages sample which contains an ASP.NET Core Grid with enabled CRUD operations by using the Telerik UI Create New Project Wizard. To get started with the Wizard, refer to the article on [creating projects]({% slug newprojectwizards_visualstudio_aspnetcore %}).
 
 ## Sample Applications
 
-More Razor Pages samples which demonstrate Telerik UI for ASP.NET Core components usage can be found in our [ASP.NET Core Examples](https://github.com/telerik/ui-for-aspnet-core-examples) repository.
+The sample Razor Pages samples which demonstrate the usage of the Telerik UI for ASP.NET Core components are located in the [ASP.NET Core Examples](https://github.com/telerik/ui-for-aspnet-core-examples) repository on GitHub.
 
 ## See Also
 

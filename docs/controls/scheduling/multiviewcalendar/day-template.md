@@ -37,7 +37,5 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
 
 ## See Also
 
-Other articles on the Kendo UI MultiViewCalendar:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
 * [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)

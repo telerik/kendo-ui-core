@@ -108,8 +108,6 @@ In the configuration that enables client data processing during Ajax binding, Ke
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the MultiColumnComboBox:
-
 * [Overview of the MultiColumnComboBox JSP Tag]({% slug overview_multicolumncombobox_uiforjsp %})
 * [Overview of the MultiColumnComboBox Widget]({% slug overview_kendoui_multicolumncombobox_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

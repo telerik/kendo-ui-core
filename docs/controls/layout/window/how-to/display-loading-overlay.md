@@ -52,8 +52,6 @@ The loading overlay must be displayed over the Window [widget `element`](/framew
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Window:
-
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})

@@ -121,8 +121,6 @@ The example below demonstrates how to use the data-type attribute.
 
 ## See Also
 
-Other articles on the Kendo UI MVVM component and bindings:
-
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})
 * [Overview of the Click Binding]({% slug clickbinding_mvvm_kendoui %})

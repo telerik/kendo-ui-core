@@ -37,6 +37,4 @@ The above definition will be presented in the following output:
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI TreeList:
-
 * [JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)

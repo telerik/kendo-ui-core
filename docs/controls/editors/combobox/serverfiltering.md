@@ -41,8 +41,6 @@ The server filtering feature (as its name indicates) filters only the source. To
 
 ## See Also
 
-Other articles on the Kendo UI ComboBox:
-
 * [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})

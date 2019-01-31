@@ -1,6 +1,6 @@
 ---
-title: Use MultiSelect as Editor in the Kendo UI Grid
-description: An example on how to use a MultiSelect as editor in the Grid.
+title: Use MultiSelect as Editor in the Grid
+description: An example on how to use a Kendo UI MultiSelect as an editor in the Kendo UI Grid.
 type: how-to
 page_title: MultiSelect as Editor in Grid | UI for ASP.NET Core
 slug: grid-multiselect-as-editor
@@ -20,7 +20,7 @@ component: grid
 
 ## Description
 
-how can I use a Kendo UI MultiSelect as an editor in the Kendo UI Grid for ASP.NET Core?
+How can I use a Kendo UI MultiSelect as an editor in the Kendo UI Grid for ASP.NET Core?
 
 ## Solution
 

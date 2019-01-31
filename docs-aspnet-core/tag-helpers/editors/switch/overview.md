@@ -11,17 +11,20 @@ position: 1
 
 The Switch tag helper helps you configure the Kendo UI Switch widget in ASP.NET Core applications.
 
+The Switch displays two exclusive choices.
+
 ## Basic Usage
 
-The following example demonstrates how to define the Switch by using the Switch tag helper. It is used to display two exclusive choices.
+The following example demonstrates how to define the Switch by using the Switch tag helper.
 
 ###### Example
+
     <kendo-switch name="switch"
             checked="true"></kendo-switch>
 
 ## Configuration
 
-The Switch tag helper configuration options are passed as attributes of the tag.
+The configuration options of the Switch tag helper are passed as attributes of the tag.
 
 ###### Example
 

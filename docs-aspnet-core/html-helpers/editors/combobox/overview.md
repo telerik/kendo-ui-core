@@ -9,7 +9,7 @@ position: 0
 
 # ComboBox HtmlHelper Overview
 
-The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget.
+The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget.
 
 It allows you to configure the Kendo UI ComboBox widget from server-side code. The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
 

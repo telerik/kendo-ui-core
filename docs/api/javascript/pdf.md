@@ -69,8 +69,6 @@ A map for font names, variants and the location of its .ttf file.
 
 ## See Also
 
-Other articles on Kendo UI Drawing API:
-
 * [Drawing of HTML Elements]({% slug drawingofhtmlelements_drawingapi %})
 * [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
 * [Drawing of Basic Shapes]({% slug basicshapes_drawingapi %})

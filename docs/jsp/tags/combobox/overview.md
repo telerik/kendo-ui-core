@@ -87,8 +87,6 @@ You are able to reference an existing ComboBox instance via the [`jQuery.data()`
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the ComboBox:
-
 * [Ajax Binding of the ComboBox]({% slug ajaxbinding_combobox_uiforjsp %})
 * [Overview of the Kendo UI ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

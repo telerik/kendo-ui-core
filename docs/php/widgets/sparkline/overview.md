@@ -111,8 +111,6 @@ You can reference the client-side Kendo UI Sparkline instance via [`jQuery.data(
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Sparkline:
-
 * [Local Binding of the Sparkline PHP Class]({% slug localbinding_sparkline_uiforphp %})
 * [Remote Binding of the Sparkline PHP Class]({% slug remotebinding_sparkline_uiforphp %})
 * [Overview of the Kendo UI Sparkline Widget]({% slug overview_kendoui_sparklinescharts %})

@@ -160,8 +160,6 @@ The example below demonstrates how to use templates when configuring the Notific
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Notification:
-
 * [Overview of the Kendo UI Notification Widget]({% slug overview_kendoui_notification_widget %})
 * [Notification JSP Tag API Reference](/api/jsp/notification/position)
 * [Notification JavaScript API Reference](/api/javascript/ui/notification)

@@ -79,8 +79,6 @@ The example below demonstrates how to change the service accordingly.
 
 ## See Also
 
-Other articles on the Kendo UI DropDownList:
-
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
@@ -99,9 +97,6 @@ Other articles on the Kendo UI DropDownList:
 * [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
 * [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
-
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

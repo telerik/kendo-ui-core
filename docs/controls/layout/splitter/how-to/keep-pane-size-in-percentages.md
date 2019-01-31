@@ -53,8 +53,6 @@ The example below demonstrates how to keep the Kendo UI Splitter pane sizes in p
 
 ## See Also
 
-Other articles on the Kendo UI Splitter:
-
 * [Splitter JavaScript API Reference](/api/javascript/ui/splitter)
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100heightandautoresize_splitter %})
 

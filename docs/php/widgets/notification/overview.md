@@ -199,8 +199,6 @@ The example below demonstrates how to use templates when configuring the Notific
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Notification:
-
 * [Overview of the Kendo UI Notification Widget]({% slug overview_kendoui_notification_widget %})
 * [Notification PHP Class API Reference](/api/php/Kendo/UI/Notification)
 * [Notification JavaScript API Reference](/api/javascript/ui/notification)

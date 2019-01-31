@@ -144,8 +144,6 @@ The example below demonstrates how to access an existing Tooltip instance.
 
 ## See Also
 
-Other articles on Kendo UI Tooltip:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Tooltip Widget](/aspnet-mvc/helpers/tooltip/overview)
 * [Overview of the Tooltip JSP Tag]({% slug overview_tooltip_uiforjsp %})
 * [Overview of the Tooltip PHP Class](/php/widgets/tooltip/overview)

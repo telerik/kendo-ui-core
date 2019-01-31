@@ -39,8 +39,6 @@ The dimensions and direction of the Popover can be configured from the `popup` c
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the PopOver:
-
 * [Hybrid UI PopOver JavaScript API Reference](/api/javascript/mobile/ui/popover)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})

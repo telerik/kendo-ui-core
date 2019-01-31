@@ -201,8 +201,6 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the ListView:
-
 * [Overview of the ListView PHP Class]({% slug overview_listview_uiforphp %})
 * [Remote Binding of the ListView PHP Class]({% slug remotebinding_listview_uiforphp %})
 * [Editing of the ListView PHP Class]({% slug editing_listview_uiforphp %})

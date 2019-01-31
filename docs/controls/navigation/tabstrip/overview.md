@@ -218,8 +218,6 @@ The example below demonstrates how to initialize a TabStrip and select the first
 
 ## See Also
 
-Other articles on Kendo UI TabStrip:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the TabStrip Widget](/aspnet-mvc/helpers/tabstrip/overview)
 * [Overview of the TabStrip JSP Tag]({% slug overview_tabstrip_uiforjsp %})
 * [Overview of the TabStrip PHP Class](/php/widgets/tabstrip/overview)

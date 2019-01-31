@@ -121,8 +121,6 @@ To refer to an existing Dialog instance, use [`jQuery.data()`](http://api.jquery
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the dialog:
-
 * [Overview of the Kendo UI Dialog Widget]({% slug overview_kendoui_dialog_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

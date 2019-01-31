@@ -210,7 +210,5 @@ The **Create**, **Update** and **Destroy** action methods must return a collecti
 
 ## See Also
 
-Other articles on the Kendo UI Grid for ASP.NET Core:
-
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
 * [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)

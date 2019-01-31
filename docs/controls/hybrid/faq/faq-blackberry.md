@@ -23,8 +23,6 @@ does not support content dragging. This limitation is listed in the requirement 
 
 ## See Also
 
-Other articles on frequently asked questions about the Hybrid UI components:
-
 * [All Platforms FAQ]({% slug all_platforms_faq %})
 * [iOS-Specific FAQ]({% slug ios_specific_faq %})
 * [Android-Specific FAQ]({% slug android_specific_faq %})

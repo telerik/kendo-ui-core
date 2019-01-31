@@ -91,8 +91,6 @@ The following example demonstrates how to access an existing Upload instance.
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Upload:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/upload/overview)
 * [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
 * [Overview of the Upload PHP Class](/php/widgets/upload/overview)

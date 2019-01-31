@@ -153,8 +153,6 @@ This function is set to only update the data if a different set of data is selec
 
 ## See Also
 
-Other articles on the Kendo UI Music Store Dashboard sample project:
-
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Set Up the Kendo UI Music Store Dashboard Project]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
 * [Create the Single-Page App]({% slug createthespa_muscistoredashboard_aspnetmvc %})

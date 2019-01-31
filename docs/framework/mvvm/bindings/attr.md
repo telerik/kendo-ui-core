@@ -70,8 +70,6 @@ The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) do not support the `a
 
 ## See Also
 
-Other articles on the Kendo UI MVVM component and bindings:
-
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Checked Binding]({% slug checkedbinding_mvvm_kendoui %})
 * [Overview of the Click Binding]({% slug clickbinding_mvvm_kendoui %})

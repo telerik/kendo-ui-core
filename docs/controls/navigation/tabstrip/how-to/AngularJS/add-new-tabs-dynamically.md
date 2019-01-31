@@ -86,8 +86,6 @@ The example below demonstrates how to add new tabs by using the [`$compile` Angu
 
 ## See Also
 
-Other articles on the Kendo UI TabStrip:
-
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})

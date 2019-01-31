@@ -49,7 +49,5 @@ The following table provides a list of the keyboard shortcuts the Spreadsheet su
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
 * [List of Formulas and Functions]({% slug list_offormulas_andfunctions_spreadsheet_widget %})
 * [User Guide]({% slug user_guide_spreadsheet_widget %})

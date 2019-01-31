@@ -228,8 +228,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the AutoComplete:
-
 * [Overview of the AutoComplete PHP Class]({% slug overview_autocomplete_uiforphp %})
 * [Local Binding of the AutoComplete PHP Class]({% slug localbinding_autocomplete_uiforphp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})

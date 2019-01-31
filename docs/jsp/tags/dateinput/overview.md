@@ -75,7 +75,5 @@ You are able to reference an existing DateInput instance via the [`jQuery.data()
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the DateInput:
-
 * [Overview of the Kendo UI DatePicker Widget]({% slug overview_kendoui_datepicker_widget %})
 * [Overview of the Kendo UI DateTimePicker Widget]({% slug overview_kendoui_datetimepicker_widget %})

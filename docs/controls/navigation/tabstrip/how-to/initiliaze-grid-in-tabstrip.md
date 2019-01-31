@@ -61,8 +61,6 @@ The example below demonstrates how to use the `activate` event when initializing
 
 ## See Also
 
-Other articles and how-to examples related to the Kendo UI TabStrip:
-
 * [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)
 * [JavaScript API Reference: Configure TabStrip Animations](/api/javascript/ui/tabstrip/configuration/animation)
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})

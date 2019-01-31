@@ -101,8 +101,6 @@ The Spreadsheet is primarily targeted at desktop users. Its performance and func
 
 ## See Also
 
-Other articles on the Kendo UI Spreadsheet:
-
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})

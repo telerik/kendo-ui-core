@@ -150,8 +150,6 @@ To achieve this outcome do not set text to the ButtonGroup.
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the ButtonGroup:
-
 * [Hybrid UI ButtonGroup JavaScript API Reference](/api/javascript/mobile/ui/buttongroup)
 * [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
 * [How to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})

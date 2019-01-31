@@ -292,8 +292,6 @@ For further reading on Kendo UI Notification settings, refer to [Kendo UI Notifi
 
 ## See Also
 
-Other articles on Kendo UI Notification:
-
 * [Notification JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
 * [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})

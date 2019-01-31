@@ -47,8 +47,6 @@ As an alternative, default values can be defined using the `Observable.fn.set` m
 
 ## See Also
 
-Other articles on Kendo UI MVVM:
-
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [ObservableObject Overview]({% slug overview_observabeobject_kendoui %})
 * [Tutorial on How to Build MVVM Bound Forms]({% slug mvvmboundforms_mvvmpattern_kendoui %})

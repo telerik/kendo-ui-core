@@ -134,8 +134,6 @@ You are able to reference an existing Window instance via the [`jQuery.data()`](
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Window:
-
 * [Overview of the Kendo UI Window Widget]({% slug overview_kendoui_window_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

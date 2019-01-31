@@ -13,7 +13,8 @@ The Switch JSP tag is a server-side wrapper for the [Kendo UI Switch](/api/javas
 ## Getting Started
 
 ### The Basics
-Kendo UI Switch is used to display two exclusive choices.
+
+The Switch displays two exclusive choices.
 
 ### Configuration
 
@@ -64,23 +65,20 @@ You can subscribe to all [events exposed by Kendo UI Switch](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Switch instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Switch API](/api/javascript/ui/switch) to control its behavior.
+You are able to reference an existing Switch instance through [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Switch API](/api/javascript/ui/switch) to control its behavior.
 
 ###### Example
 
-    // Put this after your Kendo Switch tag declaration
+    // Place this after your Kendo UI Switch tag declaration.
     <script>
         $(function() {
-            // Notice that the name attribute of the switch is used to get its client-side instance
+            // Notice that the name attribute of the Switch is used to get its client-side instance.
             var switch = $("#switch").data("kendoSwitch");
         });
     </script>
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Switch:
-
 * [Overview of the Kendo UI Switch Widget]({% slug overview_kendoui_switch_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
-

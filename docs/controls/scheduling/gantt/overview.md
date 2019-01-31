@@ -470,8 +470,6 @@ The example below demonstrates how to subscribe to a Gantt event using the `bind
 
 ## See Also
 
-Other articles on Kendo UI Gantt:
-
 * [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
 * [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})
 * [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})

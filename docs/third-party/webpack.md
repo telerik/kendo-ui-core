@@ -106,8 +106,6 @@ You might test the configuration from the previous example by running the `webpa
 
 ## See Also
 
-Other articles on Kendo UI integration with third-party tools and frameworks:
-
 * [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})

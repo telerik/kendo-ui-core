@@ -181,8 +181,6 @@ To build a better understanding of resources, see the [online demo](http://demos
 
 ## See  Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [Overview of the Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})

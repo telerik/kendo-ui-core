@@ -1006,8 +1006,6 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Gantt:
-
 * [Overview of the Gantt PHP Class]({% slug overview_gantt_uiforphp %})
 * [Local Binding of the Gantt PHP Class]({% slug localbinding_gantt_uiforphp %})
 * [Overview of the Kendo UI Gantt Widget]({% slug overview_kendoui_gantt_widget %})

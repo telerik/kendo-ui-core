@@ -38,7 +38,7 @@ With Telerik Extensions for ASP.NET MVC, the import statement found within the `
 
 **Change** Telerik UI for ASP.NET MVC supports ASP.NET MVC 3, 4 and 5.
 
-Previously, Telerik Extensions offered support for ASP.NET 1, 2, and 3. With Telerik UI for ASP.NET MVC, the supported ASP.NET MVC versions are 3, 4 and 5. The decision about which ASP.NET MVC versions should be supported was based on an investigation and discussions about the Kendo UI client-base and the industry adaptation of more recent ASP.NET MVC versions. Additionally, the support for the latest two ASP.NET MVC versions only offer additional opportunities to implement features otherwise impossible to implement in older ASP.NET MVC releases. To make use of Telerik UI for ASP.NET MVC, all the projects which use ASP.NET MVC 1 or 2 need to be upgraded to ASP.NET MVC 3, 4 or 5.
+Previously, Telerik Extensions offered support for ASP.NET 1, 2, and 3. With Telerik UI for ASP.NET MVC, the supported ASP.NET MVC versions are 3, 4 and 5. The decision about which ASP.NET MVC versions should be supported was based on an investigation and discussions about the Kendo UI client-base and the industry adaptation of more recent ASP.NET MVC versions. Additionally, the support for the latest two ASP.NET MVC versions only offer additional opportunities to implement features otherwise impossible to implement in older ASP.NET MVC releases. To make use of Telerik UI for ASP.NET MVC, all the projects which use ASP.NET MVC 1 or 2 need to be upgraded to ASP.NET MVC 3, 4, or 5.
 
 ### ScriptRegistrar and StyleSheetRegistrar
 
@@ -221,7 +221,7 @@ With the usage of Kendo UI events, this no longer works with Telerik UI for ASP.
 
 By default, Telerik UI for ASP.NET MVC uses the Kendo UI stylesheets. Similar to Telerik Extensions for ASP.NET MVC, the Kendo UI widgets use a base stylesheet&mdash;`kendo.common.css`&mdash;and a theme-specific stylesheet&mdash;`kendo.[theme_name].css`. Register both of them manually on the page. Make sure you list the base stylesheet before the theme stylesheet, because the theme might need to override some of the base styles.
 
-The Kendo UI widgets are shipped with Less-Based themes and Sass-Based themes. Full lists of the themes are available at:
+The Kendo UI widgets are shipped with Less- and Sass-based themes. The full lists of the themes are available in:
 
 * [Less-Based Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling)
 * [Sass-Based Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes)
@@ -243,7 +243,7 @@ Generally, it is recommended that you use the Kendo UI themes and not the legacy
 
 > **Important**
 >
-> Legacy themes are not shipped since R3 2015.
+> As of the R3 2015 release, legacy themes are not shipped.
 
 ## See Also
 

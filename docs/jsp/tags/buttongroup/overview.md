@@ -82,8 +82,6 @@ To reference an existing ButtonGroup instance, refer to the [introductory articl
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the ButtonGroup:
-
 * [Overview of the Kendo UI ButtonGroup Widget]({% slug overview_kendoui_buttongroup_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

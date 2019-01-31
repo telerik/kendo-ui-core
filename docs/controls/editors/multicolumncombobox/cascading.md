@@ -91,8 +91,6 @@ The following example demonstrates the parameters of this request.
 
 ## See Also
 
-Other articles on the Kendo UI MultiColumnComboBox:
-
 * [Overview]({% slug overview_kendoui_multicolumncombobox_widget %})
 * [Grouping]({% slug grouping_kendoui_multicolumncombobox_widget %})
 * [Cascading MultiColumnComboBoxes]({% slug virtualization_kendoui_multicolumncombobox_widget %})

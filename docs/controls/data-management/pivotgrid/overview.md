@@ -135,8 +135,6 @@ Use a dedicated [OLAP](https://en.wikipedia.org/wiki/Online_analytical_processin
 
 ## See Also
 
-Other articles on the Kendo UI PivotGrid:
-
 * [PivotConfigurator Overview]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})

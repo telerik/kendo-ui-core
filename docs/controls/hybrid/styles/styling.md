@@ -510,8 +510,6 @@ The example below demonstrates Nova theme font weights.
 
 ## See Also
 
-Other articles related to the appearance and styling of Kendo UI hybrid distribution:
-
 * [Style the Hybrid UI Form Elements]({% slug forms_hybridkendoui %})
 * [Define the Layout]({% slug layout_hybridkendoui %})
 * [Touch Events]({% slug touchevents_hybridkendoui %})

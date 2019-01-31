@@ -60,13 +60,8 @@ The following example demonstrates how to render a Kendo UI Scheduler by using a
 
 ## See Also
 
-Other how-to examples on the Kendo UI Scheduler in AngularJS:
-
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
-
-Other articles and how-to examples on the Kendo UI Scheduler:
-
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
 * [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})

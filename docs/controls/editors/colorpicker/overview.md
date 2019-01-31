@@ -96,8 +96,6 @@ For more options, refer to the [API documentation](/api/javascript/color).
 
 ## See Also
 
-Other articles on the Kendo UI ColorPicker:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPicker Widget](http://docs.telerik.com/aspnet-mvc/helpers/colorpicker/overview)
 * [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})
 * [Overview of the ColorPicker PHP Class](/php/widgets/colorpicker/overview)

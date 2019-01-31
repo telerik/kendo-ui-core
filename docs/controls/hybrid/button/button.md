@@ -125,8 +125,6 @@ To achieve this outcome do not set text to the button.
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the Button:
-
 * [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
 * [Hybrid UI ButtonGroup JavaScript API Reference](/api/javascript/mobile/ui/buttongroup)
 * [How to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})

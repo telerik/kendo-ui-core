@@ -174,8 +174,6 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the MultiSelect:
-
 * [Overview of the MultiSelect PHP Class]({% slug overview_multiselect_uiforphp %})
 * [Remote Binding of the MultiSelect PHP Class]({% slug remotebinding_multiselect_uiforphp %})
 * [Overview of the Kendo UI MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})

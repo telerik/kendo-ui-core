@@ -193,8 +193,6 @@ You can use the [DateInput]({% slug overview_kendoui_dateinput_widget %}) as the
 
 ## See Also
 
-Other articles on the Kendo UI DatePicker:
-
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DatePicker Widget](/aspnet-mvc/helpers/datepicker/overview)
 * [Overview of the DatePicker JSP Tag]({% slug overview_datepicker_uiforjsp %})
 * [Overview of the DatePicker PHP Class](/php/widgets/datepicker/overview)

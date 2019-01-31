@@ -164,8 +164,6 @@ The selected files are uploaded immediately by default. You can change this beha
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Upload:
-
 * [Overview of the Upload PHP Class]({% slug overview_upload_uiforphp %})
 * [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)

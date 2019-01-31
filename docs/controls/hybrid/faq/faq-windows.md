@@ -32,8 +32,6 @@ The Hybrid UI framework adapts to the current theme in WP8 and changes the backg
 
 ## See Also
 
-Other articles on frequently asked questions about the Hybrid UI components:
-
 * [All Platforms FAQ]({% slug all_platforms_faq %})
 * [iOS-Specific FAQ]({% slug ios_specific_faq %})
 * [Android-Specific FAQ]({% slug android_specific_faq %})

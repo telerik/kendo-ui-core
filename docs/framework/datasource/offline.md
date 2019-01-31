@@ -269,8 +269,6 @@ The data saving fails and the browser triggers an unhandled exception. If you wa
 
 ## See Also
 
-Other articles on the Kendo UI DataSource component:
-
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
 * [Basic Usage]({% slug basicusage_kendoui_datasourcecomponent %})
 * [CORS Data Fetching from Another Domain]({% slug corsdatafetching_anotherdomain_datasourcecomponent %})

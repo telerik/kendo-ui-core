@@ -164,8 +164,6 @@ You can reference the client-side Kendo UI Gantt instance via [`jQuery.data()`](
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Gantt:
-
 * [Local Binding of the Gantt PHP Class]({% slug localbinding_gantt_uiforphp %})
 * [Remote Binding of the Gantt PHP Class]({% slug remotebinding_gantt_uiforphp %})
 * [Overview of the Kendo UI Gantt Widget]({% slug overview_kendoui_gantt_widget %})

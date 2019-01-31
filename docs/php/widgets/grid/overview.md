@@ -130,8 +130,6 @@ You can reference the client-side Kendo UI Grid instance via [`jQuery.data()`](h
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Grid:
-
 * [Local Binding of the Grid PHP Class]({% slug localbinding_grid_uiforphp %})
 * [Remote Binding of the Grid PHP Class]({% slug remotebinding_grid_uiforphp %})
 * [Editing of the Grid PHP Class]({% slug editing_grid_uiforphp %})

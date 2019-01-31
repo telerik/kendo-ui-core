@@ -275,8 +275,6 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Grid:
-
 * [Overview of the Grid PHP Class]({% slug overview_grid_uiforphp %})
 * [Local Binding of the Grid PHP Class]({% slug localbinding_grid_uiforphp %})
 * [Editing of the Grid PHP Class]({% slug editing_grid_uiforphp %})

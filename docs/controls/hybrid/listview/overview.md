@@ -371,8 +371,6 @@ Thumbnails shift the whole ListView to the right. The grouping headers are also 
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI ListView:
-
 * [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
 * [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
 * [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})

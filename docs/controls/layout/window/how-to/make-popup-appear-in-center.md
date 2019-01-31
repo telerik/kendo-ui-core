@@ -45,8 +45,6 @@ The example below demonstrates how to position a popup in the center of the brow
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Window:
-
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Post to Iframe]({% slug howto_posttoiframe_window %})
 * [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})

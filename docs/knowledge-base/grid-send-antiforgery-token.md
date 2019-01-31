@@ -1,21 +1,36 @@
 ---
-title: Send an antiforgery token with the requests of a Grid in ASP.NET Core and ASP.NET MVC projects
-description: An example on how to Send an antiforgery token with the requests of a Grid in ASP.NET Core and ASP.NET MVC projects.
+title: Send Anti-Forgery Token with Grid Requests in ASP.NET Core and ASP.NET MVC Projects
+description: An example on how to send an anti-forgery token with the requests of a Grid in ASP.NET Core and ASP.NET MVC projects.
 type: how-to
-page_title: Send an antiforgery token with the requests of a Grid in ASP.NET Core and ASP.NET MVC projects | Kendo UI Grid
+page_title: Send Anti-Forgery Token with Grid Requests in ASP.NET Core and ASP.NET MVC Projects | Kendo UI Grid
 slug: grid-send-antiforgery-token
 tags: kendoui, kendo, grid, core, mvc, anti, forgery, token, antiforgery, send, antiforgerytoken
 res_type: kb
 component: grid
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Progress Kendo UI version</td>
+  <td>Created with the 2017.3.1026 version</td>
+ </tr>
+</table>
+
 ## Description
 
-How can I send an antiforgery token with the requests of a Grid in ASP.NET Core and ASP.NET MVC projects?
+How can I send an anti-forgery token with the requests of a Kendo UI Grid in ASP.NET Core and ASP.NET MVC projects?
 
 ## Solution
 
-To include an antiforgery token within the requests of the grid is necessary to add an antyforgery token to the page which contains the grid and using the Transport.Data handler send the token as a parameter.
+To include an anti-forgery token within the requests of the Grid, add an anti-forgery token to the page which contains the Grid and send the token as a parameter by using the `Transport.Data` handler.
+
+The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens which are found on the page.
 
 ```
     @Html.AntiForgeryToken()
@@ -60,7 +75,3 @@ To include an antiforgery token within the requests of the grid is necessary to 
         }
     </script>
 ```
-
-## Notes
-
-The [kendo.antiforgerytokens](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens found on the page.

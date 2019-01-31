@@ -289,8 +289,6 @@ Custom bindings are set via `data-bind` attribute, as demonstrated in the exampl
 
 ## See Also
 
-Other articles on the Kendo UI MVVM component and bindings:
-
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})
 * [Overview of the Checked Binding]({% slug checkedbinding_mvvm_kendoui %})

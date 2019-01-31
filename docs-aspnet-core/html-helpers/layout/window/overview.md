@@ -49,7 +49,6 @@ The Window provides default configuration options that can be set during initial
 * Initial position in pixels with regard to the page top-left corner.
 * Pinned state&mdash;whether the Window moves together with the rest of the page content during scrolling.
 
-
 The following example demonstrates the basic configuration of the Window HtmlHelper and how to get the Window instance.
 
 ###### Example
@@ -77,10 +76,10 @@ The following example demonstrates the basic configuration of the Window HtmlHel
 
 * [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})
 * [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})
-* [Constraining Position]({% slug htmlhelpers_window_constrain_aspnetcore %})
-* [Loading Content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
+* [Constraining the position]({% slug htmlhelpers_window_constrain_aspnetcore %})
+* [Loading content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
 * [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
-* [Integration with Forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+* [Integration with forms]({% slug htmlhelpers_window_forms_aspnetcore %})
 
 ## Event Handling
 

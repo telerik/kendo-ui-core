@@ -85,8 +85,6 @@ To refer to an existing Dialog instance, use [`jQuery.data()`](http://api.jquery
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Dialog:
-
 * [Overview of the Kendo UI Dialog Widget]({% slug overview_kendoui_dialog_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

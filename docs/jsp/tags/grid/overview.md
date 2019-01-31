@@ -89,8 +89,6 @@ You are able to reference an existing Grid instance via the [`jQuery.data()`](ht
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the Grid:
-
 * [Batch Editing of the Grid]({% slug batchediting_grid_uiforjsp %})
 * [Ajax Binding of the Grid]({% slug ajaxbinding_grid_uiforjsp %})
 * [Ajax Editing of the Grid]({% slug ajaxediting_grid_uiforjsp %})

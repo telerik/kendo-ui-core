@@ -100,8 +100,6 @@ You are able to reference an existing Editor instance via the [`jQuery.data()`](
 
 ## See Also
 
-Other articles on Telerik UI for PHP and on the Editor:
-
 * [Overview of the Kendo UI Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

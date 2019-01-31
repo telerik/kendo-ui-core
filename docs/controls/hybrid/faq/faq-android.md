@@ -28,8 +28,6 @@ By default, the Hybrid UI framework does not have integrated date/time pickers a
 
 ## See Also
 
-Other articles on frequently asked questions about the Hybrid UI components:
-
 * [All Platforms FAQ]({% slug all_platforms_faq %})
 * [iOS-Specific FAQ]({% slug ios_specific_faq %})
 * [Blackberry-Specific FAQ]({% slug blackberry_specific_faq %})

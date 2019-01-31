@@ -114,8 +114,6 @@ In the configuration that enables client data processing during Ajax binding, Ke
 
 ## See Also
 
-Other articles on Telerik UI for JSP and on the ListView:
-
 * [Overview of the ListView JSP Tag]({% slug overview_listview_uiforjsp %})
 * [Editing of the ListView]({% slug editing_listview_uiforjsp %})
 * [Overview of the Kendo UI ListView Widget]({% slug overview_kendoui_listview_widget %})

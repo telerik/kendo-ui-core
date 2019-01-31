@@ -56,8 +56,6 @@ The following example demonstrates how to make the Window behave as a sliding pa
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Window:
-
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})

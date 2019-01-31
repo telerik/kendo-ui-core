@@ -1,16 +1,15 @@
 ---
-title: Prevent extra whitespace on enter
-description: When you press enter some extra space appears around the text. How to remove it.
-type: troubleshooting
-page_title: Prevent extra whitespace on enter
+title: Remove Extra Whitespace on Enter
+description: An example on how to remove extra whitespace around the text in the Kendo UI Editor when the user presses Enter.
+type: how-to
+page_title: Prevent the Appearance of Extra Whitespace on Enter | Kendo UI Editor
 slug: editor-remove-extra-whitespace-on-enter
-position: 
-tags: 
 ticketid: 1381664
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -21,11 +20,15 @@ res_type: kb
 
 ## Problem
 
-When I'm using the editor in the browser and hit the enter button, it create an extra blank row before the next sentence.  To prevent the extra blank row, I have to hit SHIFT+ENTER to get new row right after previous row.  How can I change the default behaviour to not include an extra blank row on Enter button click?
+When the Editor is opened in the browser I press the `Enter` key, an extra blank row appears before the next sentence. To remove the extra blank row, I have to press `Shift`+`Enter` to get a new row right after the previous row.
+
+How can I change the default behavior and prevent the appearance of the extra blank row on `Enter`?
 
 ## Solution
 
-The editor inserts a paragraph when enter is pressed, and paragraphs have default margin set by the browsers. Thus, you can remove it by [adding a stylesheet to the editor content area](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/configuration/stylesheets) that will remove it. Something like this:
+On `Enter`, the Editor inserts a paragraph and paragraphs have a default margin set by the browsers. Therefore, to remove the extra row, [add a stylesheet to the content area of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/configuration/stylesheets).
+
+You can also set a similar paragraph rule to the whole content to provide a what-you-see-is-what-you-get styling.
 
 ```MVC
 @(Html.Kendo().Editor()
@@ -39,5 +42,3 @@ p {
     margin: 0;
 }
 ```
-
-The place where the content will be used may also benefit from having a similar paragraph rule to provide WYSIWYG styling.
