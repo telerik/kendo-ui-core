@@ -57,8 +57,7 @@ How can I select or deselect multiple dates only by clicking them and without us
 
             if (clickedItem.length > 0) {
                 var calendar = $("#calendar").getKendoCalendar();
-                var clickedDateString = clickedItem.children("a")[0].title;
-                var clickedDate = new Date(clickedDateString);
+                var clickedDate = kendo.calendar.toDateObject(clickedItem.children("a"));
 
                 var selectedDates = calendar.selectDates();
 
