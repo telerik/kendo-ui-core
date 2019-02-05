@@ -14,7 +14,7 @@ position: 10
 
 The [Aurelia-KendoUI Bridge](http://aurelia-ui-toolkits.github.io/demo-kendo/#/about/about) creates native Aurelia components for the Kendo UI suite, so that developers are able to build Aurelia applications by using the Kendo UI toolkit. This interface is a structured and configurable collection of JavaScript classes. It wraps native Kendo UI controls and presents them as Aurelia components.
 
-The skeleton of the Bridge is the standard Aurelia plugin setup and the [KendoUI Components Catalog index](http://aurelia-ui-toolkits.github.io/demo-kendo/#/project-status) is the resulting output of its implementation and development.
+The skeleton of the Bridge is the standard Aurelia plugin setup and the [KendoUI Components Catalog index](http://aurelia-ui-toolkits.github.io/demo-kendo/#/catalog-index) is the resulting output of its implementation and development.
 
 This Catalogue is an Aurelia application that serves two main purposes:
 
