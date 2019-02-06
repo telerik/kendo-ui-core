@@ -1,8 +1,8 @@
 ---
-title: Persist Row Selection on Virtual Scrolling in Grid
+title: Persist Single Row Selection on Virtual Scrolling in Grid
 description: An example on how to persist the single selection functionality of the Kendo UI Grid when you use it together with virtualization.
-type: troubleshooting
-page_title: Persist Single Row Selection When Virtual Scrolling Occurs | Kendo UI Grid
+type: how-to
+page_title: Persist Single Row Selection with Virtual Scrolling | Kendo UI Grid
 slug: grid-virtual-scrolling-with-persist-single-selection
 tags: grid, selection, virtual
 ticketid: 1139830
@@ -26,13 +26,15 @@ res_type: kb
 ## Description
 
 How can I persist the single row selection when the virtual scrolling functionality of the Grid is used?
+When the user selects a row on the 1st page, then scrolls enough to go to the 2nd and selects a row, the grid now has two items selected.
+How can I ensure I always have only one selected row when using the virtually scrollable grid?
 
 ## Solution
 
 Programmatically handle the collection of item selection on the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid.
 
 ````dojo
-<div id="example">
+    <div id="example">
             <div id="grid"></div>
             <script>
                 $(document).ready(function() {
@@ -47,20 +49,20 @@ Programmatically handle the collection of item selection on the [`change`](https
                             },
                           	schema: {
                                model: {
-                                 id:"OrderID"
-                               }
-                        		}
+                                  id:"OrderID"
+                                }
+                        	}
                         },
                         height: 543,
                         scrollable: {
                             virtual: true
                         },
-                      change: function(e) {
-    										var selectedRows = this.select();
-    										var dataItem = this.dataItem(selectedRows[0]);
-   											e.sender._selectedIds= {};
-                        e.sender._selectedIds[ dataItem.OrderID ]= true;
-  										},
+                        change: function(e) {
+    					  var selectedRows = this.select();
+    					  var dataItem = this.dataItem(selectedRows[0]);
+   						  e.sender._selectedIds= {};
+                          e.sender._selectedIds[ dataItem.OrderID ]= true;
+  						},
                         selectable:true,
                       	persistSelection:true,
                         sortable: true,
@@ -84,59 +86,5 @@ Programmatically handle the collection of item selection on the [`change`](https
                 }
 
             </style>
-        </div>
-<div id="example">
-            <div id="grid"></div>
-            <script>
-                $(document).ready(function() {
-                    $("#grid").kendoGrid({
-                        dataSource: {
-                            type: "odata",
-                            serverPaging: true,
-                            serverSorting: true,
-                            pageSize: 100,
-                            transport: {
-                                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                            },
-                          	schema: {
-                               model: {
-                                 id:"OrderID"
-                               }
-                        		}
-                        },
-                        height: 543,
-                        scrollable: {
-                            virtual: true
-                        },
-                      change: function(e) {
-    										var selectedRows = this.select();
-    										var dataItem = this.dataItem(selectedRows[0]);
-   											e.sender._selectedIds= {};
-                        e.sender._selectedIds[ dataItem.OrderID ]= true;
-  										},
-                        selectable:true,
-                      	persistSelection:true,
-                        sortable: true,
-                        columns: [
-                            { field: "OrderID", title: "Order ID", width: 110 },
-                            { field: "CustomerID", title: "Customer ID", width: 130},
-                            { field: "ShipName", title: "Ship Name", width: 280 },
-                            { field: "ShipAddress", title: "Ship Address" },
-                            { field: "ShipCity", title: "Ship City", width: 160 },
-                            { field: "ShipCountry", title: "Ship Country", width: 160 }
-                        ]
-                    });
-                });
-            </script>
-            <style>
-
-                /*A horizontal Grid scrollbar appears if the browser window is shrunk too much.*/
-                #grid table
-                {
-                    min-width: 1190px;
-                }
-
-            </style>
-        </div>
-
-````
+    </div>
+```

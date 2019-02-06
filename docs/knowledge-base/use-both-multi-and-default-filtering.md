@@ -31,7 +31,7 @@ How can I modify the Kendo UI Grid to use both multi-checkbox and default filter
 
 When the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event fires, append a Kendo UI ListView, which contains the checkboxes, to the filtering menu.
 
-```       
+```dojo       
         <div id="grid"></div>
 
         <script>

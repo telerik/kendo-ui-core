@@ -4,7 +4,7 @@ page_title: 2013 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2013."
 previous_url: /backwards-compatibility/2013/2013-backward-compatibility
 slug: breakingchanges2013_kendoui
-position: 5
+position: 7
 ---
 
 # 2013 Releases
@@ -31,17 +31,17 @@ The `"ISchedulerEvent"` interface now includes two additional fields&mdash;`Star
 
 **Scheduler**
 
-Changes in the `recurrenceEditor` messages:  
+Changes in the `recurrenceEditor` messages:
 
- -  `daily.days` becomes `daily.interval`.  
- -  `weekly.weeks` becomes `weekly.interval`.  
- -  `monthly.months` becomes `monthly.interval`.  
- -  `yearly.years` becomes `yearly.interval`.  
- -  `end.endLabel` becomes `end.label`.  
- -  `end.endNever` becomes `end.never`.  
- -  `end.endCountAfter` becomes `end.after`.  
- -  `end.endCountOccurrence` becomes `end.occurrence`.  
- -  `end.endUntilOn` becomes `end.on`.  
+ -  `daily.days` becomes `daily.interval`.
+ -  `weekly.weeks` becomes `weekly.interval`.
+ -  `monthly.months` becomes `monthly.interval`.
+ -  `yearly.years` becomes `yearly.interval`.
+ -  `end.endLabel` becomes `end.label`.
+ -  `end.endNever` becomes `end.never`.
+ -  `end.endCountAfter` becomes `end.after`.
+ -  `end.endCountOccurrence` becomes `end.occurrence`.
+ -  `end.endUntilOn` becomes `end.on`.
 
 **MVC DataSource**
 
@@ -161,6 +161,8 @@ Some ASP.NET MVC applications may be broken if using other libraries incompatibl
 
 ## See Also
 
+* [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
+* [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})

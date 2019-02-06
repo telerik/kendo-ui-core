@@ -4,7 +4,7 @@ page_title: 2015 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2015."
 previous_url: /backwards-compatibility/2015/2015-backward-compatibility
 slug: breakingchanges2015_kendoui
-position: 3
+position: 5
 ---
 
 # 2015 Releases
@@ -266,6 +266,8 @@ The argument of the `add` and `remove` events now contains the `Shape` or `Conne
 
 ## See Also
 
+* [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
+* [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})

@@ -61,6 +61,28 @@ The date when the workbook is created. The default value is `new Date()`.
     });
     </script>
 
+### rtl `Boolean` *(default: false)*
+
+Sets the direction of the workbook. By default the direction is left-to-right.
+
+#### Example - set the date
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      rtl: true,
+      sheets: [
+          {
+              rows: [
+                  { cells: [ { value: "foo" } ] }
+              ]
+          }
+      ]
+    });
+    kendo.saveAs({
+      dataURI: workbook.toDataURL(),
+      fileName: "Test.xlsx"
+    });
+    </script>
+
 ### sheets `Array`
 
 The sheets of the workbook. Every sheet represents a page from the final Excel file.
