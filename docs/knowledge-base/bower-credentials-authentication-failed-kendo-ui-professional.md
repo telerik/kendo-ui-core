@@ -36,19 +36,21 @@ I use Git Credential Manager. After it prompts for my username and password, Bow
 
 ## Solution
 
+Use a bower.json file with the credentials as part of the URL. Both the pasword and credentials should be encoded.
+
 The following example demonstrates how to apply the necessary approach.
 
 ```
 /*
-username: jdoe@missingpersons.com
-encoded: jdoe%40missingpersons.com 
+Actual Username: jdoe@missingpersons.com
+Encoded Username: jdoe%40missingpersons.com 
 
-password: $password!
-encoded: %24password%21
+Actual Password: $password!
+Encoded Password: %24password%21
 */ 
 ```
 
-As a result, the `bower.json` file reads:
+As a result, the `bower.json` file reads: `https://[EncodedUsername]:[EncodedPassword]@bower.telerik.com/bower-kendo-ui.git#~2017.1.118`
 
 ```
 "dependencies": {

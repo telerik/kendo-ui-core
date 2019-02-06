@@ -3689,7 +3689,8 @@ var __meta__ = { // jshint ignore:line
                 wrapGroupItems(data, model);
             }
 
-            if (that._changeHandler && that._data && that._data instanceof ObservableArray) {
+            if (that._changeHandler && that._data && that._data instanceof ObservableArray &&
+                !(that.options.useRanges && that.options.serverPaging)) {
                 that._data.unbind(CHANGE, that._changeHandler);
             } else {
                 that._changeHandler = proxy(that._change, that);
@@ -4489,22 +4490,28 @@ var __meta__ = { // jshint ignore:line
 
         _removeModelFromRanges: function(model) {
             var that = this;
-            var result,
-                range;
+            var range;
 
             for (var idx = 0, length = this._ranges.length; idx < length; idx++) {
                 range = this._ranges[idx];
 
-                this._eachItem(range.data, function(items) {
-                    result = removeModel(items, model);
-                });
-
-                if (result) {
-                    break;
-                }
+                that._removeModelFromRange(range, model);
             }
 
             that._updateRangesLength();
+        },
+
+        _removeModelFromRange: function(range, model) {
+            this._eachItem(range.data, function(data) {
+                for (var idx = 0; idx < data.length; idx++) {
+                    var dataItem = data[idx];
+
+                    if (dataItem.uid && dataItem.uid == model.uid) {
+                        [].splice.call(data, idx, 1);
+                        break;
+                    }
+                }
+            });
         },
 
         _insertModelInRange: function(index, model) {
