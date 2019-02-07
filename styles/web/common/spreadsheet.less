@@ -189,6 +189,11 @@
     > .k-spreadsheet-view {
         position: relative;
         .force-font();
+
+        // disabled cells in the Spreadsheet should allow navigation if link is used
+        .k-state-disabled {
+            pointer-events: auto;
+        }
     }
 
     .k-tabstrip-wrapper {

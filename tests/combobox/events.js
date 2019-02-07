@@ -173,6 +173,27 @@ it("change should not be raised on tab after already changed value", function() 
     combobox.input.focusout();
 });
 
+it("change should not be raised twice on tab after edits of arbitrary text", function() {
+    var counter = 0;
+
+    combobox = new ComboBox(input, {
+        dataSource: [],
+        change: function() {
+            counter++;
+        }
+    });
+
+    for (var i = 0; i < 2; i++) {
+        combobox.input.focus();
+        combobox.input.val(i);
+        combobox.input.press(kendo.keys.ENTER);
+        combobox.input.press(kendo.keys.TAB);
+        combobox.input.focusout();
+    }
+
+    assert.equal(counter, 2);
+});
+
 it("_change raises change event if selectedIndex has changed", function() {
     var select = $("<select/>");
 
