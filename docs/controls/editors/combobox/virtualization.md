@@ -120,6 +120,23 @@ In this case, the `pageSize` will be set to `80`, because ((520 / 26) * 4) is eq
 >
 > To prevent the DataSource from making multiple requests for the same data, set the correct `pageSize` value using the aforementioned formula.
 
+### Return Appropriate Data
+
+The response for each virtualization request must contain exactly the following two fields:
+
+* an array with the specified page of data
+* the total count of all items that are present in the dataset in the `Total` field
+
+You can specify the fields that contain the array of [data](/api/javascript/data/datasource/configuration/schema#schemadata) and the [total](/api/javascript/data/datasource/configuration/schema#schematotal) in the data source schema configuration of the widget.
+
+Once a page of data has been received on the client, it will be cached and if the use scrolls up through the list no new requests will be made for earlier pages of data, the virtualization will hapen on the client only.
+
+> **Important**
+>
+> To prevent infinite requests for the last page of data, ensure that the `Total` count is reached. If it is not, the widget will make requests until it receives the denoted total amount of unique items.
+
+
+
 ## Value Mapping
 
 > **Important**

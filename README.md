@@ -31,7 +31,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Editor](http://demos.telerik.com/kendo-ui/editor/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
 | [ListBox](http://demos.telerik.com/kendo-ui/listbox/index)              | :white_check_mark:  | :white_check_mark: | :white_check_mark:           |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index)| :x: | :white_check_mark: | :white_check_mark:           |
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index) | :white_check_mark: | :white_check_mark: | :white_check_mark:        |
 | [Slider](http://demos.telerik.com/kendo-ui/slider/index)              | :white_check_mark:| :white_check_mark: | :white_check_mark:            |
@@ -61,7 +60,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [TreeMap](http://demos.telerik.com/kendo-ui/treemap/index)            | :x: | :white_check_mark: | :white_check_mark:            |
 | [Waterfall Charts](http://demos.telerik.com/kendo-ui/waterfall-charts/index) | :x: | :white_check_mark: | :white_check_mark:     |
 | **Gauges**                |
-| [ArcGauge](http://demos.telerik.com/kendo-ui/arc-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | [LinearGauge](http://demos.telerik.com/kendo-ui/linear-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | [RadialGauge](http://demos.telerik.com/kendo-ui/radial-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | **Barcodes**              |
@@ -76,7 +74,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [MultiViewCalendar](http://demos.telerik.com/kendo-ui/multiviewcalendar/index)                | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
 | **Layout**                |
-| [Dialog](http://demos.telerik.com/kendo-ui/dialog/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Responsive Panel](http://demos.telerik.com/kendo-ui/responsive-panel/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:     |
 | [Splitter](http://demos.telerik.com/kendo-ui/splitter/index)          | :white_check_mark:| :white_check_mark: | :white_check_mark:            |
