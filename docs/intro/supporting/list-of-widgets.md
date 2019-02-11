@@ -29,6 +29,7 @@ The following table lists all Kendo UI components with regard to their support p
 | [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index)  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index)  | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Editor](http://demos.telerik.com/kendo-ui/editor/index)              | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
+| [ListBox](http://demos.telerik.com/kendo-ui/listbox/index)            | <span class="tag-neutral">Yes</span>  | <span class="tag-success">Yes</span> |
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index)    | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)    | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
@@ -72,15 +73,15 @@ The following table lists all Kendo UI components with regard to their support p
 | **Scheduling**            |
 | [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)          | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Gantt](http://demos.telerik.com/kendo-ui/gantt/index)                | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
-| [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)        | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
 | [MultiViewCalendar](http://demos.telerik.com/kendo-ui/multiviewcalendar/index) | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
+| [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)        | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
 | **Layout**                |
+| [Dialog](http://demos.telerik.com/kendo-ui/dialog/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index)  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Responsive Panel](http://demos.telerik.com/kendo-ui/responsive-panel/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Splitter](http://demos.telerik.com/kendo-ui/splitter/index)          | <span class="tag-success">Yes</span>| <span class="tag-success">Yes</span> |
 | [Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index)            | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Window](http://demos.telerik.com/kendo-ui/window/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
-| [Dialog](http://demos.telerik.com/kendo-ui/dialog/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | **Navigation**            |
 | [Button](http://demos.telerik.com/kendo-ui/button/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [ButtonGroup](http://demos.telerik.com/kendo-ui/buttongroup/index)    | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
@@ -110,15 +111,15 @@ The following table lists all Kendo UI components with regard to their support p
 | **Tools, Frameworks and Utilities**   |
 | [Chrome Inspector](https://chrome.google.com/webstore/category/apps)  | <span class="tag-success">Yes</span>   | <span class="tag-success">Yes</span> |
 | [DataSource](http://demos.telerik.com/kendo-ui/datasource/index)      | <span class="tag-success">Yes</span>   | <span class="tag-success">Yes</span> |
-| [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index)        | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
-| [Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/introduction) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index)        | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
+| [Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/introduction) | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Globalization](http://demos.telerik.com/kendo-ui/globalization/index)| <span class="tag-success">Yes</span>   | <span class="tag-success">Yes</span> |
 | [HierarchicalDataSource](http://docs.telerik.com/kendo-ui/framework/hierarchicaldatasource/overview) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [AngularJS Integration](http://demos.telerik.com/kendo-ui/integration/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Bootstrap Friendly](http://demos.telerik.com/kendo-ui/integration/bootstrap)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Localization](http://docs.telerik.com/kendo-ui/framework/localization/overview) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [MVVM Integration](http://demos.telerik.com/kendo-ui/mvvm/index)      | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
-| [PDF Export](http://demos.telerik.com/kendo-ui/pdf-export/index)      | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| [PDF Export](http://demos.telerik.com/kendo-ui/pdf-export/index)      | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | [Single-Page Application](http://demos.telerik.com/kendo-ui/spa/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Templates](http://demos.telerik.com/kendo-ui/templates/index)        | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder)        | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |

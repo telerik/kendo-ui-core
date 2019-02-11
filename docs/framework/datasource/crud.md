@@ -44,6 +44,7 @@ The field used as a model ID has default values that are used by the data source
 "default": ""
 ```
 
+The value of the field denoted in `schema.model.id` will also be set to the field with name `id` in the actual data object. The field with name `id` is a reserved field for the data source widget and will always be populated with the default value for its type, or with the data from the actual data supplied by the developer.
 
 For detailed information on the DataSource `schema`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/schema).
 
