@@ -59,6 +59,8 @@ As a result, the wizard:
 * Copies all Kendo UI editor templates.
 * Adds a package reference to the `Telerik.UI.for.AspNet.Core` NuGet package.
 
+As of the 2019 R1 release, the wizard creates a `Templates` folder in the root of the application. By default this folder is not visible and is not included in the project. To make it visible click the `Show All Files` button in the Solution Explorer of Visual Studio.  
+
 ## See Also
 
 * [VS Integration Overview]({% slug overview_visualstudio_aspnetcore %})
