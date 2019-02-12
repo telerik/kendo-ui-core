@@ -28,16 +28,16 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
         wraparound: false,
         layers: [{
           type: "tile",
-          urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           subdomains: ["a", "b", "c"],
-          attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+          attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
         }, {
           type: "bubble",
           attribution: "Population data from Nordpil and UN Population Division.",
           dataSource: {
             transport: {
               read: {
-                url: "http://runner.telerik.io/fullscreen/EsuDU.json",
+                url: "https://runner.telerik.io/fullscreen/EsuDU.json",
                 dataType: "json"
               }
             }
@@ -52,7 +52,7 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
 
             // Find locations 100km west and east of center
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/map/location/methods/destination
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/map/location/methods/destination
             //
             // Actual distance can be bound to e.dataItem fields
             var l1 = location.destination(100000, 270);
@@ -60,13 +60,13 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
 
             // View (screen) coordinates for the locations
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/locationToView
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/locationToView
             var p1 = map.locationToView(l1);
             var p2 = map.locationToView(l2);
 
             // Draw the lines
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/circle
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/circle
             var path = new draw.Path({
               stroke: {
                 width: 2,
