@@ -118,8 +118,6 @@
 
                     .k-select {
                         border-radius: 0;
-                        margin: -1px -1px -1px 0;
-                        padding: 1px 1px 1px 0;
                     }
                 }
             }
@@ -189,6 +187,11 @@
     > .k-spreadsheet-view {
         position: relative;
         .force-font();
+
+        // disabled cells in the Spreadsheet should allow navigation if link is used
+        .k-state-disabled {
+            pointer-events: auto;
+        }
     }
 
     .k-tabstrip-wrapper {
