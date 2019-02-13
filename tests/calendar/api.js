@@ -907,5 +907,17 @@ it("selectDates selects empty array", function() {
     assert.deepEqual(calendar.selectDates(), []);
 });
 
+it("calling navigateToFuture does not throw error", function() {
+    var calendar = new Calendar(div, {
+        start: "century",
+        selectable: "multiple"
+    });
+
+    calendar.navigateToPast();
+    calendar.navigateToFuture();
+
+    assert.isOk(calendar._current);
+});
+
     });
 }());

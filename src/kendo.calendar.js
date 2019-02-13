@@ -1122,7 +1122,7 @@ var __meta__ = { // jshint ignore:line
             currentValue = new DATE(+that._current);
 
             if (that._isMultipleSelection()) {
-                var firstDayCurrentMonth = that._table.find("td:not(.k-other-month)").has(".k-link").first();
+                var firstDayCurrentMonth = that._table.find("td:not(.k-other-month):not(.k-out-of-range)").has(".k-link").first();
                 currentValue = toDateObject(firstDayCurrentMonth.find("a"));
                 that._current = new Date(+currentValue);
             }

@@ -592,6 +592,7 @@ The field to which the column is bound. The value of this field is displayed by 
 
 #### Example - specify the column field
 
+    <div id="treelist"></div>
     <script>
       $("#treelist").kendoTreeList({
         columns: [
@@ -616,6 +617,7 @@ Can be set to a JavaScript object which represents the filter menu configuration
 
 #### Example - disable filtering
 
+    <div id="treelist"></div>
     <script>
       $("#treelist").kendoTreeList({
         columns: [
@@ -1604,6 +1606,7 @@ Can be set to a JavaScript object which represents the editing configuration.
 
 #### Example - enable editing
 
+      <div id="treelist"></div>
       <script>
           var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 
@@ -1652,6 +1655,7 @@ Can be set to a JavaScript object which represents the editing configuration.
 
 #### Example - enable popup editing
 
+      <div id="treelist"></div>
       <script>
           var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 
@@ -1706,6 +1710,7 @@ The editing mode to use. The supported editing modes are "inline", "popup" and "
 
 #### Example - specify inline editing mode
 
+      <div id="treelist"></div>
       <script>
           var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 
@@ -1760,6 +1765,8 @@ Enables drag&drop UI of rows between parents.
 
 #### Example - use drag&drop for editing row parent node
 
+      <div id="treelist"></div>
+      <script>
         var service = "https://demos.telerik.com/kendo-ui/service";
 
         $("#treelist").kendoTreeList({
@@ -4882,6 +4889,7 @@ A string, DOM element or jQuery object which represents the parent table row. A 
 
 #### Example - add a new root data item
 
+      <div id="treelist"></div>
       <script>
           var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 

@@ -3222,11 +3222,6 @@ td.k-state-focused.k-state-selected,
     color: @accent;
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 1.2), only screen and (min-device-pixel-ratio: 1.2) {
-    .k-map .k-marker {
-        background-image: url("@{image-folder}/markers_2x.png");
-    }
-}
 @import "themes/spreadsheet.less";
 
 .k-spreadsheet {
@@ -3235,6 +3230,9 @@ td.k-state-focused.k-state-selected,
         &[data-property='format'] { width: 100px; }
         &[data-property='fontFamily'] { width: 130px; }
     }
+}
+.k-spreadsheet-name-editor .k-select {
+    background-color: @button-hover-background-color;
 }
 
 .k-window .k-popup-edit-form .k-edit-field {
