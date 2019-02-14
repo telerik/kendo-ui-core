@@ -304,7 +304,6 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogInsert": "Wstaw",
   "imageAltText": "Opis",
   "imageWebAddress": "URL",
-  "imageAltText": "Opis",
   "imageWidth": "Szerokość (px)",
   "imageHeight": "Wysokość (px)",
   "linkWebAddress": "URL",
