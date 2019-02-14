@@ -1669,11 +1669,12 @@ function pad(number, digits, end) {
             var width = element[0].style.width,
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
-                percentHeight = percentRegExp.test(height);
+                percentHeight = percentRegExp.test(height),
+                forceWidth = element.hasClass("k-tooltip") || element.is(".k-menu-horizontal.k-context-menu");
 
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth && (!autosize || (autosize && width) || element.hasClass("k-tooltip"))) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
+            if (!percentWidth && (!autosize || (autosize && width) || forceWidth)) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
             if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
 
             element.wrap(
