@@ -688,6 +688,23 @@ it("click on selected date should close the dateView", function() {
       .click();
 });
 
+it("click on selected date should populate input if empty", function() {
+    datepicker = input.kendoDatePicker({
+        value: new Date(2019, 1, 1)
+    }).data("kendoDatePicker");
+
+    datepicker.open();
+
+    input.val("");
+
+    datepicker.dateView.calendar
+      .element
+      .find(".k-state-selected")
+      .click();
+
+    assert.isOk(input.val());
+});
+
 it("Spacebar should not select a date and close the popup", function() {
     var event = { keyCode: keys.SPACEBAR, preventDefault: $.noop };
 
