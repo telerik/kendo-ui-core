@@ -691,6 +691,46 @@
             assert.equal(result.length, 1);
         });
 
+        it("filter with language special characters and accentFoldingFiltering enabled", function() {
+            var data = [{ name: "KIZILTOPRAK" }];
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "k\u0131z" }], accentFoldingFiltering: "tr-TR", logic: "and"}).toArray();
+            assert.equal(result.length, 1);
+        });
+
+        it("filter with standart characters and accentFoldingFiltering enabled should not match language special characters", function() {
+            var data = [{ name: "KIZILTOPRAK" }];
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "kiz" }], accentFoldingFiltering: "tr-TR", logic: "and"}).toArray();
+            assert.equal(result.length, 0);
+        });
+
+        it("filter with language special characters and accentFoldingFiltering disabled", function() {
+            var data = [{ name: "KIZILTOPRAK" }];
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "contains", value: "k\u0131z" }], logic: "and"}).toArray();
+            assert.equal(result.length, 0);
+        });
+
+        it("filter with language special characters, with equal operator", function() {
+            var  data = [
+                {  name: "KIZILTOPRAK" },
+                {  name: "KARŞIYAKA" },
+                {  name: "İSTANBUL" }
+            ];
+
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "eq", value: "k\u0131z\u0131ltoprak" }], logic: "and", accentFoldingFiltering: "tr-TR"}).toArray();
+            assert.equal(result.length, 1);
+        });
+
+        it("filter with language special characters, with not equal operator", function() {
+            var  data = [
+                {  name: "KIZILTOPRAK" },
+                {  name: "KARŞIYAKA" },
+                {  name: "İSTANBUL" }
+            ];
+
+            var result = new Query(data).filter({ filters: [{ field: "name", operator: "neq", value: "k\u0131z\u0131ltoprak" }], logic: "and", accentFoldingFiltering: "tr-TR"}).toArray();
+            assert.equal(result.length, 2);
+        });
+
         it("filter with empty filters", function() {
             var data = [{ name: "foo" }, { name: "bar" }, { name: "foo" }];
 

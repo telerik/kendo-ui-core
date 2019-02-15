@@ -34,7 +34,7 @@ var __meta__ = { // jshint ignore:line
                     supportEventDelegation = true;
                 })
                 .find("span")
-                .click()
+                .trigger("click")
                 .end()
                 .off();
             })();

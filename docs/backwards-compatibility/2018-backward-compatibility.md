@@ -16,7 +16,7 @@ position: 2
 
 **ComboBox**
 
-* In the [ComboBox]({% slug overview_kendoui_combobox_widget %}) the `Tab` key now acts as `Enter`. Upon press, it select the item and close the popup when the list popup is open. As a result, the highlighted item will be selected and subsequent Tab key will accurately focus the next focusable element (no matter if it is a cascading ComboBox or different element). That way it also keeps the focusing order.
+In the [ComboBox]({% slug overview_kendoui_combobox_widget %}), the `Tab` key now acts as `Enter`. Upon pressing `Tab`, the ComboBox selects the item and, if the list popup is open, closes the popup. As a result, the highlighted item will be selected and a subsequent pressing of the `Tab` key, both in a cascading ComboBox or a different element, will accurately focus the next focusable element. In this way, the focusing order is also kept.
 
 ## See Also
 

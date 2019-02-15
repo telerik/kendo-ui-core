@@ -16,15 +16,15 @@ position: 1
 
 **AutoComplete**, **ColorPicker**, **ComboBox**, **DatePicker**, **DateTimePicker**, **DropDownList**, **TimePicker**, **MultiColumnComboBox**
 
-* The redundant `k-header` class has been removed from the wrapper element rendering of the above widgets. It has been causing styling issues, even if it was not used by the Kendo implementation.
+The redundant `k-header` class is now removed from the wrapper element that renders these widgets because, even if it was not used by the Kendo UI implementation, it caused styling issues.
 
 **Spreadsheet**
 
-* The [Spreadsheet widget]({% slug overview_spreadsheet_widget %}) introduces automatic conversion of font size (where it has been defined) upon Excel files import / export. That is required because the font size in the Spreadsheet is in pixels (`px`), while the font size in MS Excel is in points (`pt`). Upon export / import xlsx file, the Spreadsheet now recalculates the value set for the font size, in such manner, so the text will appear with equal hight both in Excel and in the Spreadsheet. In previous versions of Kendo, there was no such conversion. The numeric value for the font size was the same in both xlsx and Spreadsheet. That resulted in visually larger font in Excel, than it is in the Spreadsheet.
+The [Spreadsheet widget]({% slug overview_spreadsheet_widget %}) introduces an automatic conversion of the font size (when defined) during the import or export of files to Excel. The conversion is required because the font size in the Spreadsheet is set in pixels (`px`) while the font size in an MS Excel file is defined in points (`pt`). Upon importing or exporting `xlsx` files, the Spreadsheet now recalculates the set value for the font size in such a way so that the text will appear with an equal height both in Excel and in the Spreadsheet. In previous Kendo UI versions, such conversion does not exist. The numeric value for the font size used to be the same in both `xlsx` and Spreadsheet files which resulted in visually larger font in Excel than the font in the Spreadsheet.
 
 **Switch**
 
-* As of Kendo UI 2019 R1 the [MobileSwitch widget]({% slug overview_hybridswitch %}), which is part of the [Hybrid UI components in Kendo UI]({% slug overview_hybridkendoui %}) should no longer be used with the [Sass-based themes]({% slug sassbasedthemes_kendoui %}). The new [KendoSwitch widget]({% slug overview_kendoui_switch_widget %}) should be used instead.
+As of the Kendo UI 2019 R1 release, the [MobileSwitch widget]({% slug overview_hybridswitch %}), which is part of the [Hybrid UI components in Kendo UI]({% slug overview_hybridkendoui %}), is no longer used with the [SASS-based themes]({% slug sassbasedthemes_kendoui %}). Instead, use the new [Kendo UI Switch widget]({% slug overview_kendoui_switch_widget %}) with SASS-based themes.
 
 ## See Also
 

@@ -59,6 +59,9 @@ var __meta__ = { // jshint ignore:line
                     height: element[0].style.height
                 });
             }
+
+            that._inputWrapper = $(that.wrapper[0]);
+
             $("<span class='k-icon k-i-warning'></span>").insertAfter(element);
 
             that._form();

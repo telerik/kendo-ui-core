@@ -61,7 +61,7 @@ To install the UI for ASP.NET Core Scaffolding templates and extensions in your 
 
         ![Exclude Templatse folder](images/exclude-templates-from-project-GUI.png)
 
-As of the 2019 R1 release, the `Create New Porject Wizard`, which comes with the Telerik UI for ASP.NET Core [Visual Studio Extensions](https://docs.telerik.com/aspnet-core/vs-integration/introduction), automatically creates the `Templates` folder in the root of the application. For more information on the wizard, refer to the [Creating Projects](https://docs.telerik.com/aspnet-core/vs-integration/new-project-wizard) article. 
+As of the 2019 R1 release, the **Create New Project Wizard**, which comes with the Telerik UI for ASP.NET Core [Visual Studio Extensions](https://docs.telerik.com/aspnet-core/vs-integration/introduction), automatically creates the `Templates` folder in the root of the application. For more information on the wizard, refer to the article on [creating projects](https://docs.telerik.com/aspnet-core/vs-integration/new-project-wizard). 
 
 ## Using Scaffolding Templates with Visual Studio
 

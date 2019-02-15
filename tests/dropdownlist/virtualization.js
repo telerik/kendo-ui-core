@@ -240,5 +240,63 @@
             done();
         });
     });
+
+
+    it("value is changed on Enter", function(done) {
+        var dropdownlist = new DropDownList(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "startswith",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            change: function (e) {
+                assert.equal(e.sender.value(), "5");
+                done();
+            },
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.filterInput.focus().val("Item 5");
+            dropdownlist.filterInput.trigger({ type: "keydown" });
+
+            dropdownlist.one("dataBound", function (){
+                dropdownlist.filterInput.trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
+            });
+        });
+        dropdownlist.open();
+    });
+
+    it("item is selected on DOWN", function(done) {
+        var dropdownlist = new DropDownList(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            select: function (e) {
+                assert.equal(e.dataItem.value, "1");
+                done();
+            },
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            },
+            value: 0
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+        });
+
+        dropdownlist.open();
+    });
+
     });
 }());

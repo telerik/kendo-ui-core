@@ -1,6 +1,6 @@
 ---
-title: Persist Single Row Selection on Virtual Scrolling in Grid
-description: An example on how to persist the single selection functionality of the Kendo UI Grid when you use it together with virtualization.
+title: Persist Single-Row Selection on Virtual Scrolling in Grid
+description: An example on how to persist the single-row selection functionality of the Kendo UI Grid when you use it together with virtualization.
 type: how-to
 page_title: Persist Single Row Selection with Virtual Scrolling | Kendo UI Grid
 slug: grid-virtual-scrolling-with-persist-single-selection
@@ -22,12 +22,12 @@ res_type: kb
 	</tr>
 </table>
 
-
 ## Description
 
-How can I persist the single row selection when the virtual scrolling functionality of the Grid is used?
-When the user selects a row on the 1st page, then scrolls enough to go to the 2nd and selects a row, the grid now has two items selected.
-How can I ensure I always have only one selected row when using the virtually scrollable grid?
+When the user selects a row on the first page, scrolls to the second page, and selects a row, the Grid has two selected items.
+
+* How can I persist the single-row selection when the virtual scrolling functionality of the Grid is used?
+* How can I ensure I always have only one selected row when using the virtually scrollable Grid?
 
 ## Solution
 

@@ -1,8 +1,8 @@
 ---
-title: Restrict drag zone for the TreeView
-description: An example on how to restrict the drag zone for the Kendo UI TreeView widget.
+title: Restrict a Drag Zone in the TreeView
+description: An example on how to restrict a drag zone in the Kendo UI TreeView widget.
 type: how-to
-page_title: Restrict drag zone for the TreeView | Kendo UI TreeView
+page_title: Restrict Drag Zones | Kendo UI TreeView
 slug: treeview-restrict-drag-zone
 tags: treeview, restrict, drag, zone
 res_type: kb
@@ -24,11 +24,11 @@ component: treeview
 
 ## Description
 
-Presently, the drag zone of the TreeView is on the entire node. It would be nice to have the possibility to specify a dragging element in the node instead.
+The drag zone of the TreeView is on the entire node. How can I specify a dragging element in the node instead?
 
 ## Solution
 
-Add a dragFilter option to the TreeView by overriding the implementation of the `_draggable` method.
+Add a `dragFilter` option to the TreeView by overriding the implementation of the `_draggable` method.
 
 ```dojo
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/solid.css">

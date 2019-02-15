@@ -122,20 +122,18 @@ In this case, the `pageSize` will be set to `80`, because ((520 / 26) * 4) is eq
 
 ### Return Appropriate Data
 
-The response for each virtualization request must contain exactly the following two fields:
+The response for each virtualization request must contain the following fields:
 
-* an array with the specified page of data
-* the total count of all items that are present in the dataset in the `Total` field
+* An array with the specified page of data.
+* The total count of all items that are present in the dataset of the `Total` field.
 
-You can specify the fields that contain the array of [data](/api/javascript/data/datasource/configuration/schema#schemadata) and the [total](/api/javascript/data/datasource/configuration/schema#schematotal) in the data source schema configuration of the widget.
+You can specify the fields that contain the array of [data](/api/javascript/data/datasource/configuration/schema#schemadata) and the [total](/api/javascript/data/datasource/configuration/schema#schematotal) in the configuration of the data source schema of the ComboBox.
 
-Once a page of data has been received on the client, it will be cached and if the use scrolls up through the list no new requests will be made for earlier pages of data, the virtualization will hapen on the client only.
+Once a page of data is received on the client, it will be cached, and if the user scrolls up through the list, no new requests will be made for earlier pages of data and the virtualization will happen on the client only.
 
 > **Important**
 >
 > To prevent infinite requests for the last page of data, ensure that the `Total` count is reached. If it is not, the widget will make requests until it receives the denoted total amount of unique items.
-
-
 
 ## Value Mapping
 
@@ -147,7 +145,7 @@ Unlike simple Data and UI virtualization, the `valueMapper` was introduced becau
 
 ### Mapping index Values
 
-The widget calls the `valueMapper` function when it receives a value which is not fetched from the remote server yet. The widget then passes the selected values in the `valueMapper` function. If the `mapValueTo` is not explicitly set to `dataItem`, the `valueMapper` implementation is expected to return the respective data item index. From this index the widget calculates the page number and in this way pre-fetches only that particular page by sending an additional Ajax request. If the value does not exist, the `valueMapper` is expected to return `null`, `[]`, or `-1` and the widget deselects the currently selected items.
+When the widget receives a value which is not fetched from the remote server yet, it calls the `valueMapper` function and passes the selected values in that function. If the `mapValueTo` is not explicitly set to `dataItem`, the `valueMapper` implementation is expected to return the respective data item index. From this index the widget calculates the page number and in this way pre-fetches only that particular page by sending an additional Ajax request. If the value does not exist, the `valueMapper` is expected to return `null`, `[]`, or `-1` and the widget will deselect the currently selected items.
 
 ###### Example
 
@@ -166,7 +164,7 @@ The widget calls the `valueMapper` function when it receives a value which is no
 
 ### Mapping dataItem Values
 
-The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values&mdash;`"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a value to an `index` or a value to a `dataItem`. This is configured through the `mapValueTo` option that accepts two possible values&mdash;`"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
 
 If you implement the `mapValueTo: "dataItem"` configuration, the `valueMapper` is expected to return the `dataItems` that corresponds to the selected values. The widget will use the returned `dataItems` to render the selected values but will not scroll the list to the selected values. When the user opens the list, the widget will display the options from the first data page instead, no matter whether the selected value is a part of the first page or not. This is the main limitation of the `mapValueTo: dataItem` configuration.
 

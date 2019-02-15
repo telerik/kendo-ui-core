@@ -368,6 +368,15 @@ var __meta__ = { // jshint ignore:line
             input.toggleClass(INVALIDINPUT, !valid);
             input.toggleClass(VALIDINPUT, valid);
 
+            if(kendo.widgetInstance(input)) {
+                var inputWrap = kendo.widgetInstance(input)._inputWrapper;
+
+                if (inputWrap) {
+                    inputWrap.toggleClass(INVALIDINPUT, !valid);
+                    inputWrap.toggleClass(INVALIDINPUT, !valid);
+                }
+            }
+
             return valid;
         },
 

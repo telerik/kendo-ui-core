@@ -1,6 +1,6 @@
 ---
 title: Persist Row Selection during Data Operations
-page_title: Persist Row Selection While Paging | Kendo UI
+page_title: Persist Row Selection while Paging, Sorting, or Filtering | Kendo UI Grid
 description: Get started with the jQuery Grid by Kendo UI and learn how to persist row selection while performing the paging, sorting, and filtering data operations.
 type: how-to
 tags: kendo, ui, grid, selection, paging, sorting, grouping, filtering
@@ -10,15 +10,12 @@ slug: howto_persist_row_selection_paging_sorting_filtering_grid
 previous_url: /controls/data-management/grid/how-to/Selection/persist-row-selection-while-paging
 ---
 
-> **Important**
->
-> Selection persistence is available out of the box as of 2017 R2. For more information check the [`persistSelection`](/api/javascript/ui/grid/configuration/persistselection) property.
->
-> The implemented technique requires you to define an `ID` field in `schema.model`.
-
 ## Description
 
-The following example demonstrates how to persist the row selection in a Grid while performing the paging, sorting, and filtering data operations with Kendo UI versions ***before*** 2017.2.504.
+> * As of the 2017 R2 release, persisting the selection in the Grid is available out of the box. For more information, refer to the [`persistSelection`](/api/javascript/ui/grid/configuration/persistselection) property.
+> * The suggested approach in this article requires you to define an `ID` field in `schema.model`.
+
+(Applicable to Kendo UI 2017.2.504 version and earlier) The following example demonstrates how to persist the row selection in a Grid while performing the paging, sorting, and filtering data operations.
 
 ###### Example
 

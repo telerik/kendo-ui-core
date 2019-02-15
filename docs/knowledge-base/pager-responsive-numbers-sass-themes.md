@@ -26,11 +26,11 @@ How can I make the Pager show a drop-down list with the pages when the Grid is s
 
 > **Important**
 >
-> This functionality is available out of the box since R1 2019
+> As of the R1 2019 release, the responsive page number for SASS themes feature is available out of the box.
 
 Unlike the functionality in the LESS themes, in the SASS themes the Pager does not change to a drop-down list automatically. To work around this issue, use either the Kendo UI Default (v2) or the Kendo UI Bootstrap (v4) theme. Depending on your project and scenario, you may need to adjust the CSS.
 
-### Using Default (v2) Theme
+### Using the Default (v2) Theme
 
 For the full implementation of this approach, refer to [this runnable example](https://dojo.telerik.com/ewoFoxaB/2).
 
@@ -104,7 +104,7 @@ For the full implementation of this approach, refer to [this runnable example](h
 </style>
 ```
 
-### Using Bootstrap (v4) Theme
+### Using the Bootstrap (v4) Theme
 
 For the full implementation of this approach, refer to [this runnable example](https://dojo.telerik.com/UkovECEy/3).
 

@@ -14,6 +14,33 @@ See the [DataSource Overview](/framework/datasource/overview) and [Basic Usage](
 
 ## Configuration
 
+### accentFoldingFiltering `String`
+
+It allows the filtering operation to be performed considering the diacritic characters for specific language.
+
+> Since these characters are strictly specific for a given language setting the appropriate culture should be set as a value. For example "tr-TR" for Turkish, "es-ES for Spanish or "fr-FR" for French language.
+
+Introduced in the Kendo UI 2019 R1 SP1 (2019.1.220) release.
+
+#### Example - use the accentFoldingFiltering
+
+    <script>
+      var dataSource = new kendo.data.DataSource({
+        data: [
+    					{  name: "KIZILTOPRAK" },
+    					{  name: "KARŞIYAKA" },
+              {  name: "İSTANBUL" }
+        ],
+        filter: { field: "name", operator: "contains", value: "k\u0131z" },
+        accentFoldingFiltering: "tr-TR"
+      });
+      dataSource.fetch(function(){
+        var view = dataSource.view();
+        console.log(view.length); // displays "1"
+        console.log(view[0].name); // displays "KIZILTOPRAK"
+      });
+    </script>
+
 ### aggregate `Array`
 
 The aggregates which are calculated when the data source populates with data.

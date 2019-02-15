@@ -116,7 +116,7 @@ For more information on how to use the `background` option to set the background
 
 ### Right-to-Left Support
 
-The [`excelExport`](/api/javascript/ui/grid/events/excelexport) event allows reversing the cells and setting the text alignment to support right-to-left (RTL) languages. Enable the workbook [`rtl`](/api/javascript/ooxml/workbook/configuration/rtl) option and Excel will show the document in right-to-left flow.
+The [`excelExport`](/api/javascript/ui/grid/events/excelexport) event allows you to reverse the cells and set the text alignment to support right-to-left (RTL) languages. To render the document in the right-to-left flow in Excel, enable the [`rtl`](/api/javascript/ooxml/workbook/configuration/rtl) option of the workbook.
 
 ###### Example
 

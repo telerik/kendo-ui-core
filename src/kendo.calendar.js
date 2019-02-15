@@ -229,6 +229,10 @@ var __meta__ = { // jshint ignore:line
             that._index = views[that.options.start];
 
             that.navigate();
+
+            if(options.weekNumber) {
+                that.element.addClass('k-week-number');
+            }
         },
 
         destroy: function() {

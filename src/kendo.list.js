@@ -936,15 +936,19 @@ var __meta__ = { // jshint ignore:line
             var li = this.ul.children(".k-first:first");
             var groupHeader = this.listView.content.prev(GROUPHEADER);
             var padding = 0;
+            var direction = 'right';
 
             if (groupHeader[0] && groupHeader[0].style.display !== "none") {
                 if (height !== "auto") {
                     padding = kendo.support.scrollbar();
                 }
 
-                padding += parseFloat(li.css("border-right-width"), 10) + parseFloat(li.children(".k-group").css("padding-right"), 10);
+                if(this.element.parents('.k-rtl').length) {
+                    direction = 'left';
+                }
 
-                groupHeader.css("padding-right", padding);
+                padding += parseFloat(li.css("border-" + direction + "-width"), 10) + parseFloat(li.children(".k-group").css("padding-" + direction), 10);
+                groupHeader.css("padding-" + direction, padding);
             }
         },
 
@@ -1365,6 +1369,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
+                var selection;
 
                 if (current) {
                     dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
@@ -1378,7 +1383,7 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    that._select(current);
+                    selection = that._select(current);
                 } else if (that.input) {
                     if (that._syncValueAndText() || that._isSelect) {
                         that._accessor(that.input.val());
@@ -1393,7 +1398,13 @@ var __meta__ = { // jshint ignore:line
                 if (activeFilter && key === keys.TAB) {
                     that.wrapper.focusout();
                 } else {
-                    that._blur();
+                    if (selection && typeof selection.done === "function") {
+                        selection.done(function () {
+                            that._blur();
+                        });
+                    } else {
+                        that._blur();
+                    }
                 }
 
                 that.close();
