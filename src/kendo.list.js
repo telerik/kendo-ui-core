@@ -1365,6 +1365,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
+                var selection;
 
                 if (current) {
                     dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
@@ -1378,7 +1379,7 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    that._select(current);
+                    selection = that._select(current);
                 } else if (that.input) {
                     if (that._syncValueAndText() || that._isSelect) {
                         that._accessor(that.input.val());
@@ -1393,7 +1394,13 @@ var __meta__ = { // jshint ignore:line
                 if (activeFilter && key === keys.TAB) {
                     that.wrapper.focusout();
                 } else {
-                    that._blur();
+                    if (selection && typeof selection.done === "function") {
+                        selection.done(function () {
+                            that._blur();
+                        });
+                    } else {
+                        that._blur();
+                    }
                 }
 
                 that.close();

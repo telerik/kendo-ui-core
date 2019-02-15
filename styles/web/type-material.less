@@ -2493,16 +2493,14 @@ span.k-colorpicker {
 .k-datepicker,
 .k-timepicker,
 .k-datetimepicker {
-    background-color: @drop-down-background;
+    &,
+    .k-input {
+        background-color: @drop-down-background;
+    }
 }
 
 .k-picker-wrap.k-state-default > .k-select {
     border-color: @drop-down-background;
-}
-
-.k-datepicker .k-input,
-.k-timepicker .k-input {
-    background-color: @drop-down-background;
 }
 
 .k-autocomplete.k-state-active .k-input,
