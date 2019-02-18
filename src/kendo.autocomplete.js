@@ -816,6 +816,8 @@ var __meta__ = { // jshint ignore:line
             that.wrapper = wrapper
                 .addClass("k-widget k-autocomplete")
                 .addClass(DOMelement.className);
+
+            that._inputWrapper = $(wrapper[0]);
         }
     });
 
