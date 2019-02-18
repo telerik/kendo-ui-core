@@ -426,7 +426,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _pushFilterExpression: function (newExpression, filter) {
-            if (isValidFilterExpr(filter) && $.trim(filter.value).length) {
+            if (isValidFilterExpr(filter) && filter.value !== "") {
                 newExpression.filters.push(filter);
             }
         },

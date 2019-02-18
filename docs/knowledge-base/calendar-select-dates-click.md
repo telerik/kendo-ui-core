@@ -45,12 +45,15 @@ How can I select or deselect multiple dates only by clicking them and without us
 
 
         $("#calendar").on("mousedown", "td", function (e) {
+        // use "touchstart" for touch devices: $("#calendar").on("touchstart", "td", function (e) {
 
             // get item if the user clicked on an item template
             var clickedItem = $(e.target).closest("td[role='gridcell']");
 
             // prevent click event for item elements
             clickedItem.on("click", function (e) {
+            //use "touchend" for touch devices: clickedItem.on("touchend", function (e) {
+
                 e.stopPropagation();
                 e.preventDefault();
             });
