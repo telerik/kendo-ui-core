@@ -69,10 +69,7 @@ If the browser does not implement an API for saving files, then `kendo.saveAs` c
 
 You are also able to make `kendo.saveAs` always use the server proxy by setting the `forceProxy` option to `true`, as shown below.
 
-> **Important**
->
-> Using a server proxy is highly recommended for files over 1MB or more.
-> You may get a "Unknown network error" if the file is too large to be saved without a proxy.
+> Using a server proxy is highly recommended for files over 1MB or more. You may get a "Unknown network error" if the file is too large to be saved without a proxy.
 
 ###### Example
 

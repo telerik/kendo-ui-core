@@ -8,27 +8,23 @@ position: 3
 
 # Offline Support
 
-Offline support allows data-bound Kendo UI widgets to function without active server connection. Users can continue working with the available data until network connectivity resumes. The DataSource syncs all changes with the remote service when a connection becomes available.
+Offline support enables data-bound Kendo UI widgets to function without an active server connection.
 
-> **Important**
->
-> Offline storage support has been available ever since the Kendo UI 2014 Q2 SP1 when it was introduced for the first time.
+Users can continue to work with the available data until the network connectivity resumes. When the connection becomes available, the DataSource synchronizes all changes with the remote service.
+
+> The offline storage support feature was introduced with and has been available since the Kendo UI 2014 Q2 SP1 release.
 
 **Figure 1: Offline storage mechanism**
 
 ![Offline Storage](/framework/datasource/OfflineStorage.gif)
 
-## Configuration
+## Enabling Offline Storage
 
-### Set Offline Storage
+To enable the offline storage feature, set the [`offlineStorage`](/api/javascript/data/datasource/configuration/offlinestorage) option. The DataSource uses this value as a key when it saves and loads its state. By default, to persist its offline state, the DataSource uses the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) option.
 
-Set the [`offlineStorage`](/api/javascript/data/datasource/configuration/offlinestorage) option to enable offline storage. The DataSource uses this value as a key when saving and loading its state. By default, the Kendo UI DataSource uses the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) option to persist its offline state.
+> To use offline storage, provide the model with a designated `ID` field.
 
-> **Important**
->
-> To use offline storage, you must provide the model with a designated ID field.
-
-The example below demonstrates how to set the offline storage key.
+The following example demonstrates how to set the offline storage key.
 
 ###### Example
 
@@ -47,19 +43,14 @@ The example below demonstrates how to set the offline storage key.
         }
     });
 
-## Offline and Online Switching
+## Switching between Offline and Online Mode
 
-### Go Online
+By default, the DataSource is online. All data item changes, such as create, update, and destroy, are included in the remote service that is configured through the [`transport`](/api/javascript/data/datasource/configuration/transport) option.
 
-By default, the DataSource is online. All data item changes, such as create, update, and destroy, go to the remote service configured via the [`transport`](/api/javascript/data/datasource/configuration/transport) option.
+* To go back to online mode, call the [`online`](/api/javascript/data/datasource/methods/online) method with `true` as an argument. As a result, the DataSource calls the [`sync`](/api/javascript/data/datasource/methods/sync) method to send all offline changes to the remote service.
+* To switch to offline mode, call the [`online`](/api/javascript/data/datasource/methods/online) method  with `false` as an argument. As a result, the DataSource starts to persist all data item changes in the offline storage.
 
-To go back to online mode, call the `online` method with `true` as an argument. The DataSource immediately calls the [`sync`](/api/javascript/data/datasource/methods/sync) method to send all offline changes to the remote service.
-
-### Go Offline
-
-To switch to offline mode call the [`online`](/api/javascript/data/datasource/methods/online) method  with `false` as an argument. From now on the DataSource is going to persist all data item changes in offline storage.
-
-The example below demonstrates how to go in offline mode.
+The following example demonstrates how to go in offline mode.
 
 ###### Example
 
@@ -98,13 +89,11 @@ The example below demonstrates how to go in offline mode.
         dataSource.online(true);
     });
 
-## Offline State
+## Getting the Current Offline State
 
-### Get Current Offline State
+The [`offlineData`](/api/javascript/data/datasource/methods/offlinedata) method returns the current offline state of the DataSource. The state is an array of JavaScript objects that represent the data items. Changed data items have an attached `__state__` field which indicates the type of change&mdash;`"create"`, `"update"`, or `"destroy"`. Unmodified data items do not have a `__state__` field.
 
-The [`offlineData`](/api/javascript/data/datasource/methods/offlinedata) method returns the current offline state of the DataSource. The state is an array of JavaScript objects that represent the data items. Changed data items have a `__state__` field attached. That field indicates the type of change: `"create"`, `"update"` or `"destroy"`. Unmodified data items do not have a `__state__` field.
-
-The example below demonstrates how to get the offline state.
+> If the [`serverGrouping`](/api/javascript/data/datasource/configuration/servergrouping) option is set to `true` the `offlineData` returns an array of groups in the following way `{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }`.
 
 ###### Example
 
@@ -144,15 +133,9 @@ The example below demonstrates how to get the offline state.
         console.log(offlineData[0].__state__); // displays "update"
     });
 
-> **Important**
->
-> If the [`serverGrouping`](/api/javascript/data/datasource/configuration/servergrouping) option is set to `true` the `offlineData` returns an array of groups in the following way `{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }`.
+## Using Custom Offline Storage
 
-## Customization
-
-### Use Custom Offline Storage
-
-To use custom offline storage set the `offlineStorage` option to a JavaScript object that has two methods&mdash;`getItem` and `setItem`. The `setItem` method saves the date and `getItem` returns it.
+To use custom offline storage, set the `offlineStorage` option to a JavaScript object that has the `getItem` method, which returns the data, and the `setItem` method, which saves the data.
 
 ###### Example
 
@@ -176,15 +159,13 @@ To use custom offline storage set the `offlineStorage` option to a JavaScript ob
 
 ## Browser Internet Connection
 
-At the time of this writing there is not a cross-browser way to determine whether a web application has Internet access or not. Also, some browsers treat online mode differently than others. That is why the Kendo UI DataSource component does not attempt to automatically detect offline mode. You are able to implement this by either handling the [`online` and `offline`](https://developer.mozilla.org/en-US/docs/Online_and_offline_events) events or via Ajax polling.
+At the time of this writing, no cross-browser way for determining whether a web application has Internet access or not is available. Also, the way browsers treat the online mode differs and this is the reason for the DataSource not to attempt to automatically detect offline mode. For more information on browser online mode, refer to [this MDN article](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine/onLine).
 
-For more information on browser online mode, refer to [this MDN article](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine/onLine).
+To configure the DataSource to automatically detect offline mode, use either handle the [`online` and `offline`](https://developer.mozilla.org/en-US/docs/Online_and_offline_events) events or use AJAX polling.
 
-### Use online and offline Events
+### Handling the online and offline Events
 
-The `online` and `offline` events behave differently among the browsers. Firefox and Internet Explorer fire those events when the user switches between offline and online mode. However, the `online` and `offline` events work as expected in mobile devices and PhoneGap applications.
-
-The example below demonstrates how to detect the offline mode via the `online` and `offline` events.
+The `online` and `offline` events behave differently across the browsers. Firefox and Internet Explorer fire those events when the user switches between offline and online mode. However, the `online` and `offline` events work as expected in mobile devices and PhoneGap applications.
 
 ###### Example
 
@@ -205,11 +186,9 @@ The example below demonstrates how to detect the offline mode via the `online` a
        dataSource.online(true);
     });
 
-### Use Ajax Polling
+### Using AJAX Polling
 
-Ajax polling is more robust than using the `online` and `offline` events, but leads to constant HTTP requests (CPU and bandwidth usage). Note that Ajax requests could fail for reasons other than not having Internet connection, such as server error, timeout. The Ajax polling approach works best for desktop browsers.
-
-The example below demonstrates how to detect the offline mode via Ajax polling.
+AJAX polling is more robust than using the `online` and `offline` events, works best for desktop browsers but leads to constant HTTP requests (CPU and bandwidth usage). AJAX requests may fail not only because of Internet disconnection but also due to server errors and timeout.
 
 ###### Example
 
@@ -242,30 +221,30 @@ The example below demonstrates how to detect the offline mode via Ajax polling.
 
 This is a collection of the most frequently asked questions (FAQ) related to the offline data storage when working with the Kendo UI DataSource component.
 
-### What Is the Available Offline Storage Space?
+### What is the available offline storage space?
 
-The default localStorage space is normally around 5MB per origin, i.e. specific domain, port, and protocol. However, do not fully rely on it as it can depend on the browser and the browser settings, controlled by the user. Theoretically, it is possible to measure the maximum available storage space by trying to save large chunks of data via the localStorage API, but this may cause the browser to become temporarily irresponsive and, therefore, is not recommended.
+The default local storage space is around 5MB per origin, that is, specific domain, port, and protocol. However, it can depend on the browser and the browser settings which are controlled by the user. Theoretically, it is possible to measure the maximum available storage space by trying to save large chunks of data through the `localStorage` API. This approach may temporary disrupt the browser responsiveness and is therefore not recommended.
 
-### Can Web Apps Request Allocation for More Offline Storage Space by the Browser?
+### Can Web applications request allocation for more offline storage space by the browser?
 
 No.
 
-### Do Several DataSource Instances Share the Same Offline Storage Space?
+### Do several DataSource instances share the same offline storage space?
 
-Yes. Moreover, different Kendo UI DataSource instances must use different `offlineStorage` keys, otherwise they overwrite each other's saved data.
+Yes. Moreover, different Kendo UI DataSource instances must use different `offlineStorage` keys. Otherwise, they overwrite each other's saved data.
 
-### How Do I Check the Currently Used Local Storage Space?
+### How do I check the currently used local storage space?
 
-There are different ways to do this, depending on how you store your data and what exactly you want to check. A possible option to measure the amount of data stored by a Kendo UI DataSource instance is:
+Depending on the way you store data and what the desired implementation is, the available approaches vary. To measure the amount of the data stored by a DataSource instance, use the following example.
 
         // check amount of used offline storage space for a specific key
         JSON.stringify(localStorage.getItem("your-offlineStorage-key-here")).length
         // check overall used offline storage space
         JSON.stringify(localStorage).length
 
-### What Happens When the Offline Storage Quota Is Exceeded?
+### What happens when the offline storage quota is exceeded?
 
-The data saving fails and the browser triggers an unhandled exception. If you want to handle these, it is possible to use a [customized offlineStorage](#use-custom-offline-storage) implementation with `try ... catch` blocks.
+The data saving fails and the browser throws an exception. To handle the error, use a [customized `offlineStorage`](#use-custom-offline-storage) implementation with `try ... catch` blocks.
 
 ## See Also
 

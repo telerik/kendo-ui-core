@@ -13,11 +13,11 @@ In addition to providing WAI-ARIA and keyboard support, Kendo UI ships with a hi
 
 ## Overview
 
-The high contrast theme is a full Kendo UI theme that you can use in place of an existing theme like BlueOpal or Metro. Assuming Kendo UI stylesheets are in a `stylesheets` directory, add a reference to the stylesheet in your application to use the high-contrast theme:
+The high contrast theme is a full Kendo UI theme that you can use in place of an existing theme like BlueOpal or Metro. Assuming Kendo UI stylesheets are in a `stylesheets` directory, add a reference to the stylesheet in your application to use the high-contrast theme.
 
-	<link rel='stylesheet' href='/stylesheets/kendo.highcontrast.min.css' />
+		<link rel='stylesheet' href='/stylesheets/kendo.highcontrast.min.css' />
 
-Once you add this reference, all Kendo UI widgets and visual elements with a Kendo UI class, such as `k-textbox`, will receive high-contrast styles. This may cause the rest of your site, for example the background and other visual elements, to look out of sync with the new theme.
+Once you add this reference, all Kendo UI widgets and visual elements with a Kendo UI class, such as `k-textbox`, will receive high-contrast styles. This may cause the rest of your site, for example, the background and other visual elements, to look out of sync with the new theme.
 
 To address this issue, apply the high-contrast styles to all or part of a page by applying the `k-content` class to a container element. For example, to apply the high-contrast theme to your entire page, and not only to Kendo UI elements, apply this class to the `body` element:
 
@@ -25,15 +25,15 @@ To address this issue, apply the high-contrast styles to all or part of a page b
 		<!-- your app here -->
 	</body>
 
-## WCAG 2.0
+## WCAG 2.1
 
-Sections [1.4.3](http://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast) and [1.4.6](http://www.w3.org/TR/WCAG20/#visual-audio-contrast7) of the W3C [Web Content Accessibility Guidelines](http://www.w3.org/TR/WCAG20) state that text and images in a web page must adhere to minimum contrast ratios (with respect to their background elements) in order to be compliant. Kendo UI high contrast theme was tested using an [online color contrast checker](http://www.snook.ca/technical/colour_contrast/colour.html), which yielded the following results:
+The [Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21) sections [1.4.3 Contrast (Minimum)](hhttps://www.w3.org/TR/WCAG21/#contrast-minimum) and [1.4.6 Contrast (Enhanced)](https://www.w3.org/TR/WCAG21/#contrast-enhanced) state that to be compliant, text and images in a web page must adhere to minimum contrast ratios (with respect to their background elements). The Kendo UI High Contrast theme was tested by using an [online color contrast checker](http://www.snook.ca/technical/colour_contrast/colour.html) which yielded the following results:
 
 1. Normal Text Color / Background = 15.9
 2. Selected Text Color / Background = 8.59
 3. Hover Text Color (Large Text) / Background = 5.94
 
-Items 1 and 2 well-exceed the enhanced minimum ratio of 7 specified in WCAG 2.0, while 3 exceeds the enhanced minimum ratio of 4.5 for large-scale text. As such, Kendo UI high-contrast theme is WCAG 2.0 AAA compliant.
+The first two results exceed the enhanced minimum ratio of seven that is specified in WCAG 2.1 while the third result exceeds the enhanced minimum ratio of 4.5 for large-scale text. As such, the Kendo UI High Contrast theme is WCAG 2.1 AAA compliant.
 
 ## See Also
 

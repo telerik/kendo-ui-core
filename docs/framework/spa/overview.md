@@ -28,7 +28,7 @@ The `View` and `Layout` classes are used for the UI rendering. UI event handling
 
 ### Create the SPA
 
-The example below demonstrates how to create a Kendo UI Single-Page Application.
+The following example demonstrates how to create a Kendo UI Single-Page Application.
 
 ###### Example
 

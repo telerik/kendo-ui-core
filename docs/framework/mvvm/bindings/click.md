@@ -13,7 +13,7 @@ The Kendo UI Click (`click`) binding attaches a method of the View-Model to the 
 
 ### Setup
 
-The example below demonstrates how to use the `click` binding.
+The following example demonstrates how to use the `click` binding.
 
 ###### Example
 
@@ -55,7 +55,7 @@ Kendo UI MVVM supplies the DOM event argument wrapped in a jQuery [`Event` objec
 
 To stop the event from bubbling up the DOM tree, use the [`stopPropagation`](http://api.jquery.com/event.stopPropagation/) method.
 
-The example below demonstrates how to stop DOM event bubbling.
+The following example demonstrates how to stop DOM event bubbling.
 
 ###### Example
 
@@ -75,7 +75,7 @@ The example below demonstrates how to stop DOM event bubbling.
 For some DOM elements the `click` event has a default action - for example navigate to another page or submit a form. To prevent the default action use the
 [preventDefault](http://api.jquery.com/event.preventDefault/) method.
 
-The example below demonstrates how to prevent the default actions of DOM events.
+The following example demonstrates how to prevent the default actions of DOM events.
 
 ###### Example
 

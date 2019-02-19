@@ -1,24 +1,20 @@
 ---
-title: Grid Settings and Usage
-page_title: Grid Settings and Usage | AngularJS Directives
+title: Settings and Usage of the Grid
+page_title: Settings and Usage of the Grid | AngularJS Directives
 description: "Learn the tips and tricks about how to use Kendo UI Grid widget in AngularJS."
 slug: grid_settings_angularjs_directives
 position: 4
 ---
 
-# Grid Settings and Usage
+# Settings and Usage of the Grid
 
 The [Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets.
 
-This article outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
+This article outlines some of the specifics for setting and using the Grid with AngularJS.
 
-## Escaping Execution of Title Expression
+## Avoiding the Evaluation of Title Expressions
 
-> **Important**
->
-> AngularJS evaluates a template expression placed as [`column.title`](/api/javascript/ui/grid/configuration/columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid/configuration/columns.headerattributes) so that AngularJS skips the expression evaluation.
-
-The following example demonstrates how to use the `headerAttributes` to prevent the execution of expressions inside the title content.
+AngularJS evaluates a template expression which is placed as [`column.title`](/api/javascript/ui/grid/configuration/columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid/configuration/columns.headerattributes) so that AngularJS skips the expression evaluation.
 
 ###### Example
 
@@ -61,7 +57,7 @@ The following example demonstrates how to use the `headerAttributes` to prevent 
 </script>
 ```
 
-## Attributes
+## Handling the change Event
 
 If you assign a `k-on-change` event handler, it is evaluated in a scope, which contains additional local variables:
 
@@ -69,21 +65,9 @@ If you assign a `k-on-change` event handler, it is evaluated in a scope, which c
 - `selected`&mdash;The selected elements (a jQuery object).
 - `data`&mdash;The selected data items (an array of models).
 
-> **Important**
->
-> The `selected` object is a jQuery object which references DOM elements. As of the AngularJS 1.2.24 release, this is not allowed to use in template expressions "[for security reasons](https://docs.angularjs.org/error/$parse/isecdom)". As a result, the following snippet will not work with Angular 1.2.24:
->
->     k-on-change="myChangeHandler(selected)"
->
-> The workaround is to pass it in an object or in an array. For example:
->
->     k-on-change="myChangeHandler({ selected: selected })"
->
-> Obviously, the handler function needs to take that into account.
+> The `selected` object is a jQuery object which references DOM elements. As of the AngularJS 1.2.24 release, it is not allowed to use this in template expressions "[for security reasons](https://docs.angularjs.org/error/$parse/isecdom)". As a result, the `k-on-change="myChangeHandler(selected)"` snippet will not work with Angular 1.2.24. To work around this issue, pass it in an object or in an array. For example, `k-on-change="myChangeHandler({ selected: selected })"`. The handler function has to take that into account.
 
-When the Grid is not in a multiple selection mode, the `data` above will not be an array, but a single data item, and that item is also accessible as `dataItem`. When the cell selection is allowed, an additional `columns` variable is present. This variable is an array containing the indexes of the columns where cells are selected. To see what variables are available, choose the selection mode of the Grid and select items from it.
-
-The following example demonstrates how to handle the `change` event in AngularJS.
+When the Grid is not in a multiple selection mode, the `data` will be a single data item and not an array and that item will also be accessible as a `dataItem`. When the cell selection is allowed, an additional `columns` variable is present. This variable is an array which contains the indexes of the columns with selected cells. To see what variables are available, choose the selection mode of the Grid and select items from it.
 
 ###### Example
 
@@ -130,9 +114,7 @@ The following example demonstrates how to handle the `change` event in AngularJS
 </script>
 ```
 
-## Features
-
-### Dynamic Columns
+## Setting Columns Dynamically
 
 If your project requires you to load a column definition from the server, you need to postpone the widget initialization until the data is available because the Grid does not support the definition of columns once the widget is created. To achieve this behavior, use the `k-ng-delay` attribute. To emulate networking as the data is asynchronously set in scope, use `$timeout`.
 
@@ -164,7 +146,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-### Templates
+## Customizing Templates
 
 The Grid supports templates that can be customized by the user. To completely customize the way each row is displayed, define the `rowTemplate`. To define individual cell templates, add a `template` property to your column definitions. The difference from applying plain Kendo UI is that when the Grid is created with the AngularJS directive, the templates can contain live `\{\{angular\}\}` bits. The `rowTemplate`, `columns.template`, and `columns.groupFooterTemplate` are compiled with AngularJS in a scope that contains a `dataItem` variable, which points to the data model of the current item. The `dataItem` in a `groupFooterTemplate` is an object with fields and their corresponding aggregates.
 
@@ -210,6 +192,8 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 ```
 
 When you use aggregates, the `column` and `aggregate` information becomes available in the `footerTemplate` of the Grid through `{% raw %}{{ column }}{% endraw %}` and `{% raw %}{{ aggregate }}{% endraw %}` respectively. To access the aggregates of the columns in the `groupFooterTemplate`, use the `dataItem` variable with the `dataItem.field.aggregate` syntax.
+
+> When you use `rowTemplate`, include the `data-uid="#: uid #"` attribute in the top-level row element as described in the [Grid documentation]({% slug howto_use_dates_inside_row_template_grid %}). Avoid using an AngularJS template, such as `data-uid="{% raw %}{{dataItem.uid}}{% endraw %}"`, because it is compiled after the Grid is displayed and the widget is not able to discriminate between the different rows and the data items to which they belong.
 
 The following example demonstrates how to use the `sum` aggregate in a `footerTemplate` and a `groupFooterTemplate`, and apply an Angular currency pipe to it.
 
@@ -263,11 +247,7 @@ The following example demonstrates how to use the `sum` aggregate in a `footerTe
   </script>
 ```
 
-> **Important**
->
-> When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the top-level row element as described in the [Grid documentation]({% slug howto_use_dates_inside_row_template_grid %}). You must not use an AngularJS template, such as `data-uid="{% raw %}{{dataItem.uid}}{% endraw %}"`, because it is compiled after the Grid is displayed and the widget is not able to discriminate between the different rows and the data items they belong to.
-
-## Server Requests
+## Controlling Server Requests
 
 To take full control on the logic that performs the request to the server, define the different transport operations as functions. Inside the function, you can use the `$http` or the `$.ajax` methods to perform what is needed. When done (inside the success callback), pass the result to the `success` function part of the events arguments object.
 

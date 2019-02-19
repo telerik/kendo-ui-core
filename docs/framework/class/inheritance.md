@@ -4,26 +4,26 @@ page_title: Overview | Kendo UI Class
 description: "Learn how to use the Kendo UI class category and get the basics of doing JavaScript inheritance with Kendo UI."
 previous_url: /kendo-ui/framework/inheritance, /tutorials/inheritance-with-kendoui
 slug: inheritance_kendoui_gettingstarted
-position: 5
+position: 1
 ---
 
 # Class Overview
 
-Kendo UI is an extremely powerful tool in any JavaScript development arsenal.
+If you as developer come from Object-Oriented backgrounds, you may find the JavaScript Object Model challenging because of its counter-intuitiveness.
 
-Developers coming from Object-Oriented backgrounds may get frustrated with the quirkiness of JavaScript’s Object Model as it is somewhat counter-intuitive. However, you can take some of the structure and [Don't Repeat Yourself (DRY) principles](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) from Object-Oriented languages, and use them in JavaScript development.
+However, you can use part of the structure and the [Don't Repeat Yourself (DRY) principles](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) from Object-Oriented languages, and use them in JavaScript development.
 
 ## Getting Started
 
-### Create New Objects
+1. [Creating new objects](#creating-new-objects)
+1. [Adding constructors](#adding-contructors)
+1. [Instantiating new parent objects](#instantiating-new-parent-objects)
+1. [Inheriting parent properties](#inheriting-parent-properties)
+1. [Understanding parent objects](#understanding-parent-objects)
 
-To create a new object with Kendo UI, define it by calling `kendo.Class.extend`.
+### Creating New Objects
 
-###### Example
-
-    var person = kendo.Class.extend({});
-
-This creates a new Person object. Now add some properties to that person object, as well as any functions that you want to create. Object literal notation is used here, so variables are declared with a semi-colon (`:`) separating them from their value instead of an equal sign (`=`). Also, the example uses the `this` keyword to reference local variables inside the object. Failure to specify the context results in the variable not being found.
+To create a new object with Kendo UI, define it by calling `kendo.Class.extend`&mdash;for example, `var person = kendo.Class.extend({});`. This approach creates a new `person` object to which you can add properties and functions. The approach uses an object literal notation so to separate them from their value, you have to declare variables with a semi-colon (`:`) instead of an equal sign (`=`). Also, the example uses the `this` keyword to reference local variables inside the object. If the context results are not specified, the variable will not be found.
 
 ###### Example
 
@@ -39,13 +39,13 @@ This creates a new Person object. Now add some properties to that person object,
     var person = new Person();
     person.sayHello();
 
-**Figure 1: Create a new object**
+**Figure 1: Creating a new object**
 
 ![Capture](../../images/inheritance/8c23-capture.png)
 
-### Add Constructors
+### Adding Constructors
 
-You can also add a constructor for this object by including an `init` method. You can create a new person by building up a new `Person` object, such as a new [John Bristowe](http://twitter.com/johnbristowe)). Then, set his `isAPrettyCoolPerson` to true.
+You can also add a constructor for this object by including an `init` method. To create a new person, build up a new `person` object, such as a new [John Bristowe](http://twitter.com/johnbristowe)), and set `isAPrettyCoolPerson` to `true`.
 
 ###### Example
 
@@ -67,13 +67,13 @@ You can also add a constructor for this object by including an `init` method. Yo
     person.isAPrettyCoolPerson = true;
     person.sayHello();
 
-**Figure 2: Set the name of the new person**
+**Figure 2: Setting the name of the new person**
 
 ![nh5](../../images/inheritance/8c23-nh5.png)
 
-### Instantiate New Parent Object
+### Instantiating New Parent Objects
 
-Now you can instantiate a new person object of type parent that inherits the properties of `Person` by extending the base person object. Then toggle on the fact that this person is cool.
+You can instantiate a new `person` object of type parent that inherits the properties of `person` by extending the base person object and toggle the quality (cool).
 
 ###### Example
 
@@ -87,17 +87,17 @@ Now you can instantiate a new person object of type parent that inherits the pro
     myDad.sayHello();
     alert(myDad.isAPrettyCoolPerson);
 
-**Figure 3: Instantiate a parent**
+**Figure 3: Instantiating a parent**
 
 ![nh1](../../images/inheritance/8c23-nh1_1.png)
 
-**Figure 4: Toggle on a quality**
+**Figure 4: Toggling a quality**
 
 ![nh2](../../images/inheritance/8c23-nh2.png)
 
-### Inherit Parent Properties
+### Inheriting Parent Properties
 
-A child would inherit some, but not all, properties from their parents. If you inherit your father's last name, you can override the first name since you have your own. Also, if your dad is a cool person, you might inherit from him that too.
+A child inherits some, but not all, properties from their parents. If you inherit your father's last name, you can override the first name since you have your own. Also, if your dad is a cool person, you might inherit from him that too.
 
 ###### Example
 
@@ -107,17 +107,17 @@ A child would inherit some, but not all, properties from their parents. If you i
     me.sayHello();
     alert(me.isPrettyCoolPerson);
 
-**Figure 5: Inherit some parent properties**
+**Figure 5: Inheriting some parent properties**
 
 ![nh3](../../images/inheritance/8c23-nh3.png)
 
-**Figure 6: Try to inherit more parent properties**
+**Figure 6: Trying to inherit more parent properties**
 
 ![nh4](../../images/inheritance/8c23-nh4.png)
 
-### Understand Parent Objects
+### Understanding Parent Objects
 
-It seems the child does not inherit being cool from their parent. Actually, it inherits the trait, which the parent inherited from the `person` object. Because `isACoolPerson` was set after the dad was created, it is specific to his object instance of `Parent`. And, by default, parents are not cool people.
+It seems the child does not inherit being cool from their parent. Actually, it inherits the trait, which the parent inherited from the `person` object. Because `isACoolPerson` was set after the dad was created, it is specific to his object instance of `parent`. And, by default, parents are not cool people.
 
 ## Sample Case
 
@@ -179,7 +179,6 @@ me.sayHello();
 // expose my coolness
 log("Cool? " + me.isPrettyCoolPerson);
 </script>
-
 ```
 
 ## See Also

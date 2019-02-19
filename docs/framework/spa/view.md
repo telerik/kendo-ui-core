@@ -21,7 +21,7 @@ By default, the view wraps its content in a `div` element. The element type can 
 
 ### Create View from HTML String
 
-The example below demonstrates how to create a view from an HTML string.
+The following example demonstrates how to create a view from an HTML string.
 
 ###### Example
 
@@ -31,7 +31,7 @@ The example below demonstrates how to create a view from an HTML string.
 
 ### Create View as Script Template
 
-The example below demonstrates how to create a view by passing the id of the script element containing the HTML markup.
+The following example demonstrates how to create a view by passing the id of the script element containing the HTML markup.
 
 ###### Example
 
@@ -49,7 +49,7 @@ The view renders its contents using the `render` method, which accepts a jQuery 
 
 ### Render View in Container
 
-The example below demonstrates how to render a view in a container.
+The following example demonstrates how to render a view in a container.
 
 ###### Example
 
@@ -95,8 +95,6 @@ If an `observable` object is passed as a `model` configuration option to the `vi
 
 Note that if the view `evalTemplate` configuration option is set to `true`, the template is treated as a [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) and evaluated against the passed model instance when the view is rendered initially.
 
-> **Important**
->
 > Changing the `viewModel` fields does not re-render the view template. If you want to display dynamic data, use the `data-bind` syntax.
 
 ### MVVM-Bound View with Evaluated Template
@@ -120,8 +118,6 @@ Note that if the view `evalTemplate` configuration option is set to `true`, the 
 
 In certain scenarios, a view may be destroyed to free browser resources. When destroyed, its element will be removed from the DOM and its MVVM bindings will be removed.
 
-> **Important**
->
 > If a certain view is used to display different data in the same format, such as item details from a list, it is recommended to reuse a view instance and change its contents through MVVM bindings instead of re-creating a new instance each time such a detail is displayed.
 
 ## See Also

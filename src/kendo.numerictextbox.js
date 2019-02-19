@@ -386,7 +386,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (group) {
                     groupRegExp = new RegExp("\\" + group, "g");
-                    extractRegExp = new RegExp("([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?");
+                    extractRegExp = new RegExp("(^(-)$)|(^(-)?([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?)");
                 }
 
                 if (extractRegExp) {

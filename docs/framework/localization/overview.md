@@ -16,11 +16,9 @@ position: 1
 
 By default, all Kendo UI widgets display their messages in US English. Include a language specific `kendo.messages.<language>.js` file in the document to replace the default text messages.
 
-> **Important**
->
 > The localization script must be included before the widgets are initialized. The best place to include it is right after the Kendo UI JavaScript files.
 
-The example below demonstrates how to add the localization script to a document.
+The following example demonstrates how to add the localization script to a document.
 
 ###### Example
 
@@ -28,7 +26,7 @@ The example below demonstrates how to add the localization script to a document.
     <script src="kendo.all.min.js"></script>
     <script src="kendo.messages.bg-BG.js"></script>
 
-The example below demonstrates how to add the localization script to a document from the CDN.    
+The following example demonstrates how to add the localization script to a document from the CDN.    
 
 ###### Example
 
@@ -36,15 +34,13 @@ The example below demonstrates how to add the localization script to a document 
     <script src="http://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.bg-BG.min.js"></script>
 
-> **Important**
->
 > Currently, translations are not available for every language and some of the localization files may be incomplete. For more information on where to find the full list of available translations, refer to the [section on contributing]({% slug overview_localization_kendoui%}#contribution).
 
 ### Create New Localization File
 
 The localization script replaces default messages in the widget prototype with their equivalent translations. The file should be named `kendo.messages.<language>.js`. A [language code identifier list](http://msdn.microsoft.com/en-us/library/cc233965.aspx) is freely available for download from the Microsoft developer network website.
 
-The example below demonstrates how to create a new localization file.
+The following example demonstrates how to create a new localization file.
 
 ###### Example
 
@@ -59,8 +55,7 @@ The example below demonstrates how to create a new localization file.
     }
 
 <!--*-->
-> **Important**
->
+
 > The `kendo.messages.en-US.js` contains all widget messages and may be used as a reference when creating a new localization file. The easiest way to get started is to copy the file, rename it, and translate the messages.
 
 ## Common Scenarios

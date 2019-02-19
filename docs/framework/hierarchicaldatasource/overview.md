@@ -16,7 +16,7 @@ The [Kendo UI HierarchicalDataSource component](/api/javascript/data/hierarchica
 
 #### Create the HierarchicalDataSource and bind to local data
 
-The example below demonstrates how to create a `HierarchicalDataSource` component bound to local data.
+The following example demonstrates how to create a `HierarchicalDataSource` component bound to local data.
 
 ###### Example
 
@@ -41,7 +41,7 @@ The example below demonstrates how to create a `HierarchicalDataSource` componen
 
 #### Create the HierarchicalDataSource and bind to heterogeneous local data
 
-The example below demonstrates how to create a `HierarchicalDataSource` component and bind it to heterogeneous local data by configuring it to bind the children when the fields holding the children items have different names.
+The following example demonstrates how to create a `HierarchicalDataSource` component and bind it to heterogeneous local data by configuring it to bind the children when the fields holding the children items have different names.
 
 ###### Example
 
@@ -83,7 +83,7 @@ The example below demonstrates how to create a `HierarchicalDataSource` componen
 
 #### Create the HierarchicalDataSource and bind to homogeneous remote service
 
-The example below demonstrates how to create a `HierarchicalDataSource` component that is bound to a homogeneous remote data service.
+The following example demonstrates how to create a `HierarchicalDataSource` component that is bound to a homogeneous remote data service.
 
 ###### Example
 
@@ -156,7 +156,7 @@ The `hasChildren` Boolean property indicates whether a data item contains childr
 
 #### Bind HierarchicalDataSource to remote data with multiple service end-points
 
-The example below demonstrates how to create the HierarchicalDataSource component and bind it to remote data with multiple service end-points.
+The following example demonstrates how to create the HierarchicalDataSource component and bind it to remote data with multiple service end-points.
 
 ###### Example
 
@@ -209,7 +209,7 @@ Currently, the Kendo UI widgets that are aware of the datasource hierarchy are t
 
 ### Share HierarchicalDataSource between Widgets
 
-The example below demonstrates how to share HierarchicalDataSource component between a Kendo UI TreeView and a Kendo UI Grid.
+The following example demonstrates how to share HierarchicalDataSource component between a Kendo UI TreeView and a Kendo UI Grid.
 
 ###### Example
 

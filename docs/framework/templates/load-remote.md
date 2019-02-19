@@ -28,7 +28,7 @@ There are pros and cons to both approaches, which are elaborated on in the follo
 
 This is the most common and simplest approach to defining templates. With this pattern, template definitions are simply defined alongside markup in HTML files.
 
-The example below demonstrates a basic HTML file with a local template.
+The following example demonstrates a basic HTML file with a local template.
 
 ###### Example
 
@@ -70,8 +70,6 @@ For more detailed information on Kendo UI Templates, refer to the [introductory 
 
 The biggest drawback to embedded local templates is that they cannot be reused or shared between pages that may require the same template definition. That tends to promote some `copy/paste` template development with multiple copies of the same template living in an application. This is clearly not a best practice and can become very difficult to maintain over time.
 
-> **Important**
->
 > Kendo UI Templates can also be defined in JavaScript using simple strings. Use this technique only for very small templates with minimal markup. Templates embedded in JavaScript effectively put user interface HTML in JavaScript, which makes it difficult for designers to improve templates, and makes an application more difficult to maintain.
 
 ## Remote Templates
@@ -106,7 +104,7 @@ To begin refactoring local templates to external templates, the template definit
 
 In addition to removing the template definition, a new JavaScript block has been added with a call to `templateLoader.loadExtTemplate` that accepts a path to a file. Note that Kendo UI does not provide a remote template loader, so each application must define its own approach for loading external templates.
 
-There are many ways to create a template loader. The example below demonstrates one of the options.
+There are many ways to create a template loader. The following example demonstrates one of the options.
 
 ###### Example
 
@@ -146,7 +144,7 @@ By putting this in a reusable `templateLoader`, it can be used by any page in an
 
 Finally, the template definition needs to be stored in an external file that can be loaded by the template loader.
 
-The example below demonstrates what the `feedItemTemplate.tmpl.htm` file contents are.
+The following example demonstrates what the `feedItemTemplate.tmpl.htm` file contents are.
 
 ###### Example
 
@@ -159,15 +157,13 @@ The example below demonstrates what the `feedItemTemplate.tmpl.htm` file content
 			<# } #>
 		</script>
 
-> **Important**
->
 > The template loader shown in the example appends all contents from a template file to a document, making it is possible to store multiple templates in a single template file. It becomes a matter of optimization and template organization to determine the way to store templates in the external files in the best way.
 
 ### Asynchronous Template Loading
 
 Since Ajax is asynchronous, loading templates is now asynchronous. Code that consumes templates in an application must wait until the template is loaded before executing. To ensure that the code does not run before the necessary template is loaded, the template loader in this example publishes a custom `TEMPLATE_LOADED` event along with the path that was loaded. Application code can subscribe to this event and initialize templates with data after it fires, thus guaranteeing that the templates are loaded before they are used.
 
-The example below demonstrates how by using the template loader previously defined, the application code can initialize templates after they are loaded by binding to the `TEMPLATE_LOADED`.
+The following example demonstrates how by using the template loader previously defined, the application code can initialize templates after they are loaded by binding to the `TEMPLATE_LOADED`.
 
 ###### Example
 
@@ -194,7 +190,7 @@ The template is now ready to go. The page markup lives in the HTML files of the 
 
 Once remote templates are used, it is a good practice to adopt a consistent project folder and a naming convention, so it is easy to locate and update templates. A file naming convention also helps you to avoid any confusion about which files are application HTML and which files contain template definitions.
 
-Any consistent convention will work. The example below demonstrates a sample case.
+Any consistent convention will work. The following example demonstrates a sample case.
 
 ###### Example
 

@@ -10,7 +10,7 @@ position: 2
 
 The `Router` class is responsible for tracking the application state and navigating between the application states. The router integrates into the browser history using the fragment part of the URL (`#page`), making the application states book-markable and linkable. It is also used for programmatic navigation to a given state. A change event is exposed, suitable for authorization hooks.
 
-The example below demonstrates a Router with a root route callback.
+The following example demonstrates a Router with a root route callback.
 
 ###### Example
 
@@ -41,7 +41,7 @@ The parsed parts of the URL are passed as parameters to the route callback.
 
 ### Parameter Parsing
 
-The example below demonstrates how the parameter parsing is done.
+The following example demonstrates how the parameter parsing is done.
 
 ###### Example
 
@@ -65,7 +65,7 @@ The example below demonstrates how the parameter parsing is done.
 
 ### Optional Segments
 
-The example below demonstrates how to handle the optional segments.
+The following example demonstrates how to handle the optional segments.
 
 ###### Example
 
@@ -94,7 +94,7 @@ The example below demonstrates how to handle the optional segments.
 
 ### Route Globbing
 
-The example below demonstrates how to apply the route globbing.
+The following example demonstrates how to apply the route globbing.
 
 ###### Example
 
@@ -127,7 +127,7 @@ The `navigate` method can be used to navigate to another application. The respec
 
 ### Route Navigation
 
-The example below demonstrates how to handle route navigation.
+The following example demonstrates how to handle route navigation.
 
 ###### Example
 
@@ -152,7 +152,7 @@ The example below demonstrates how to handle route navigation.
 
 If no route match is found, the router triggers a `routeMissing` event, passing the URL in the event handler.
 
-The example below demonstrates how to handle missing routes.
+The following example demonstrates how to handle missing routes.
 
 ###### Example
 
@@ -171,7 +171,7 @@ The example below demonstrates how to handle missing routes.
 
 Each time the URL fragment changes, the router triggers a `change` event. Calling the `preventDefault` method on the event object reverts the URL to its previous state.
 
-The example below demonstrates how to intercept the navigation.
+The following example demonstrates how to intercept the navigation.
 
 ###### Example
 
@@ -218,7 +218,7 @@ In addition to the route parameters, the route callback will receive a `key:valu
 
 If the `Back` key button is pressed, the query string parameter's object includes a `_back: true` field to indicate the back action.
 
-The example below demonstrates how to detect `Back` button press in a route.
+The following example demonstrates how to detect `Back` button press in a route.
 
 ###### Example
 

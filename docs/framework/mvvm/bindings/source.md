@@ -11,8 +11,6 @@ The [Kendo UI Source (`source`) binding](http://demos.telerik.com/kendo-ui/mvvm/
 
 The template is specified by the `data-template` attribute of the element. The value of that attribute should be the value of the `id` of an existing `script` element which defines the Kendo UI template. If a template is not specified, a default template is used depending on the element tag name.
 
-> **Important**
->
 > The `source` binding does not support nesting widgets with source binding such as `treeview` with source binding to the view model. The nested widgets trigger a source change, which forces the root source binging to re-render its content, leading to infinitive loops. The proper way to nest widgets with source is to use the `data-source` attribute [demo]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %}).
 
 ## Source Binding to Array
@@ -23,11 +21,9 @@ When the View-Model value is an array, the `source` binding iterates all array i
 
 Adding or removing items from the array updates the HTML contents of the target element.
 
-> **Important**
->
 > A single root element should be used in the template when binding to an array. Having two first-level DOM elements is going to result in an erratic behavior.
 
-The example below is a correct instance of a template with a single root element.
+The following example is a correct instance of a template with a single root element.
 
 ###### Example
 
@@ -43,7 +39,7 @@ The example below is a correct instance of a template with a single root element
         kendo.bind($("ul"), viewModel);
     </script>
 
-The example below is an unsupported instance of a template with multiple first-level DOM elements.
+The following example is an unsupported instance of a template with multiple first-level DOM elements.
 
 ###### Example
 
@@ -62,8 +58,6 @@ The example below is an unsupported instance of a template with multiple first-l
 
 ### Source Binding to Array of Objects
 
-> **Important**
->
 > Source binding requires the result set to be either an [`ObservableArray`](/api/javascript/data/observablearray) or a list of [`ObservableObject`](/api/javascript/data/observableobject) instances.
 
 ###### Example
@@ -90,7 +84,7 @@ The example below is an unsupported instance of a template with multiple first-l
 
 This example will output three `li` elements&mdash;one for every item in the `products` array.
 
-The example below demonstrates the final output. Note that all `data` attributes are removed for clarity.
+The following example demonstrates the final output. Note that all `data` attributes are removed for clarity.
 
 ###### Example
 
@@ -128,7 +122,7 @@ If the array contains primitive objects, such as `Number`, `String`, and `Date`,
     kendo.bind($("ul"), viewModel);
     </script>
 
-The example below demonstrates the final output. Note that all `data` attributes are removed for clarity.
+The following example demonstrates the final output. Note that all `data` attributes are removed for clarity.
 
 ###### Example
 
@@ -286,7 +280,7 @@ The `this` reserved keyword should:
 
 * Be specified in the `source` binding if and only if the entire View-Model object is used as a value.
 * Be used inside a template only when the `source` binding is using an array of primitive objects.
-* Always be used on its own. The example below is not supported.
+* Always be used on its own. The following example is not supported.
 
 ###### Example
 
@@ -302,7 +296,7 @@ When applied to a `select` element, the `source` binding creates `option` elemen
 
 ### Select Source Binding to Primitive Values
 
-The example below demonstrates source binding of a `select` element to an array of primitive objects.
+The following example demonstrates source binding of a `select` element to an array of primitive objects.
 
 ###### Example
 
@@ -330,7 +324,7 @@ The `source` binding creates an `option` element for every item in the `colors` 
 
 The `source` binding could also populate a `select` element from an array of non-primitive objects. The `data-text-field` and `data-value-field` attributes are used to specify how the value and content of the `option` elements are going to be bound.
 
-The example below demonstrates source binding of a `select` element to an array of non-primitive values.
+The following example demonstrates source binding of a `select` element to an array of non-primitive values.
 
 ###### Example
 

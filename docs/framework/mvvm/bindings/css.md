@@ -13,7 +13,7 @@ The [Kendo UI CSS (`css`) binding](http://demos.telerik.com/kendo-ui/mvvm/css) s
 
 ### Setup
 
-The example below demonstrates how to use the CSS binding.
+The following example demonstrates how to use the CSS binding.
 
 ###### Example
 

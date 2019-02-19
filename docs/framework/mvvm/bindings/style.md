@@ -9,7 +9,7 @@ slug: stylebinding_mvvm_kendoui
 
 The `style` binding sets the style (CSS) attributes of the target DOM element.
 
-The example below demonstrates how to use the `style` binding.
+The following example demonstrates how to use the `style` binding.
 
 ###### Example
 

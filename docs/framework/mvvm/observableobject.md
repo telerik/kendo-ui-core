@@ -136,7 +136,7 @@ Setting a nested field value is also supported, as shown in the example below.
 
 Often there is need to convert a View-Model field value to a format more suitable for display in the View. In such cases, extending the View-Model with a dependent method is essential.
 
-The example below demonstrates how to create dependent methods, also known as calculated fields.
+The following example demonstrates how to create dependent methods, also known as calculated fields.
 
 ###### Example
 
@@ -157,7 +157,7 @@ In the example, `fullName` is a dependent method because it depends on `firstNam
 
 ### Set Values of Dependent Properties
 
-The example below demonstrates how to set values of dependent properties.
+The following example demonstrates how to set values of dependent properties.
 
 ###### Example
 

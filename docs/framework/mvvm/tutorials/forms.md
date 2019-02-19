@@ -14,7 +14,7 @@ This article provides an in-depth look on collecting data from HTML forms using 
 
 ### Create the Initial Form
 
-The example below demonstrates the markup that is to be used as a starting point for the implementation of the sample case in this tutorial.
+The following example demonstrates the markup that is to be used as a starting point for the implementation of the sample case in this tutorial.
 
 ###### Example
 
@@ -47,7 +47,7 @@ To start using the MVVM pattern, you need to create a View-Model. A View-Model i
 
 #### Declare the ViewModel
 
-The example below demonstrates what the `ViewModel` looks like.
+The following example demonstrates what the `ViewModel` looks like.
 
 ###### Example
 

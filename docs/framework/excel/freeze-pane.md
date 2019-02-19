@@ -16,7 +16,7 @@ Freezing the first row of an Excel sheet is a common requirement. It allows you 
 
 Kendo UI enables row freezing via the [`rowSplit`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane.rowsplit) option. Set that option to the number of rows you want to freeze.
 
-The example below demonstrates how to freeze the top row in a worksheet.
+The following example demonstrates how to freeze the top row in a worksheet.
 
 ###### Example
 
@@ -63,7 +63,7 @@ kendo.saveAs({
 
 Kendo UI enables column freezing via the [`colSplit`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane.colsplit) option. Set that option to the number of columns you want to freeze.
 
-The example below demonstrates how to freeze the first two columns and the top row in a worksheet.
+The following example demonstrates how to freeze the first two columns and the top row in a worksheet.
 
 ###### Example
 

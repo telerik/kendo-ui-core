@@ -57,7 +57,7 @@ For more information on the `proxyURL`, refer to [`kendo.saveAs`](/api/javascrip
 
 ### Use Blob Object
 
-The example below demonstrates how to get the PDF as a `Blob` object in browsers that support it, such as all but Internet Explorer 9 or older.
+The following example demonstrates how to get the PDF as a `Blob` object in browsers that support it, such as all but Internet Explorer 9 or older.
 
 ###### Example
 
@@ -153,8 +153,6 @@ The PDF generator supports compression via the JavaScript [Pako library](https:/
 
 Compression can make a big difference in the output file size when you are using custom TTF fonts or images with alpha channel, such as PNGs with transparency.
 
-> **Important**
->
 > Besides drastically reducing the output size, Pako enables the browser to use less memory while rendering the PDF. Chrome is known to crash on generating very large PDF files and simply including this library will mitigate the problem. It is bundled with Kendo UI as `pako_deflate.min.js`.
 
 ## Supported Browsers

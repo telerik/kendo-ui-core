@@ -9,7 +9,7 @@ slug: howto_embedfontawesome_inexportedpdf_drawingapi
 
 Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/), must be [available for embedding]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) during PDF Export. Otherwise, the generated document will use a standard set of fonts as defined by the PDF Standard. These fonts normally cover only the [ASCII](https://en.wikipedia.org/wiki/ASCII) range.
 
-The example below demonstrates how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF.
+The following example demonstrates how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF.
 
 ###### Example
 

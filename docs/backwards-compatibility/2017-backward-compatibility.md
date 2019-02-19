@@ -28,7 +28,7 @@ position: 3
 
 **All icons are now font icons.** Raster images and images sprites are no longer used. The implications are as follows:
 
-* To be unified around the semantic meaning, **icon classes are changed**. If your code depends on them, for example, for DOM traversal, you might need to update it according to **Table 1** below. For the full list of available icons and classes in the latest release, refer to the article on [web font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
+* To be unified around the semantic meaning, **icon classes are changed**. If your code depends on them, for example, for DOM traversal, you might need to update it according to the following **Table 1**. For the full list of available icons and classes in the latest release, refer to the article on [web font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
 
 * The `font-size: 0;` rule is **no longer applied** to elements using Kendo UI icons. In this way, if they have **text**, it will now show up and obscure the icon. You should move it to a **title** attribute.
 

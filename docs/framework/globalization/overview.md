@@ -10,8 +10,6 @@ position: 1
 
 Globalization is the process of designing and developing an application that works in multiple cultures. The culture defines specific information for the number formats, week and month names, date and time formats, etc.
 
-> **Important**
->
 > The Kendo UI culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design. To customize the culture in your application, refer to the article on [culture definition]({% slug culture_definition_kendoui_globalization %}#customization).
 
 ## Getting Started
@@ -47,7 +45,6 @@ Now, set the culture script, which Kendo UI should use, as shown below.
 
 The default culture, which Kendo UI widgets uses is "en-US".
 
-> **Important**
 > * You have to set the culture before the initialization of any Kendo UI widgets which rely on it.
 > * If you include the generic culture file, you can omit the country or region code. For example, you can use `kendo.culture.en.min.js` with `kendo.culture("en");` instead of `kendo.culture.en-GB.min.js` with `kendo.culture("en-GB");`. The generic files do not carry country or region specifics, however, and can only serve as a more generic representation.
 
@@ -78,8 +75,6 @@ For detailed information, refer to [this article]({% slug dateparsing_kendoui_gl
 
 If you load GlobalizeJS, the default globalization features in Kendo UI are overridden. Some features might not work. For example, custom number formats are unsupported in this case.
 
-> **Important**
->
 > The Globalization 0.1 library is no longer supported. It is advisable not to use it. For more details, refer to the [#1354 issue](https://github.com/telerik/kendo-ui-core/issues/1354).
 
 ## Widgets Depending on Culture Information

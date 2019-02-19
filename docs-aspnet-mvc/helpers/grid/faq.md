@@ -299,6 +299,10 @@ The following example demonstrates how to send additional data in an Ajax-bound 
         }
     </script>
 
+> **Important**
+>
+> The property names of the object passed as additional data must not match property names in the ViewModel. Otherwise, the MVC binder cannot recognize which property corresponds to the ViewModel and which to the additional data object.
+
 ### How to reload data in Ajax-bound Grids?
 
 Use the [`read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#read) method of the DataSource.
@@ -598,7 +602,7 @@ To validate a number by using the Kendo UI NumericTextBox:
         @(Html.Kendo().NumericTextBox()
             .Round(false)
             .Spinners(false)
-        )       
+        )
     ```
 
 1. Decorate the `number` property in the model by using the [`UIHint`](https://msdn.microsoft.com/en-us/library/cc679268) attribute.

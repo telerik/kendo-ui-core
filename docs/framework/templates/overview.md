@@ -26,7 +26,6 @@ There are three ways to use the hash syntax:
 
 ## Hash Literals
 
-> **Important**
 > * If your template includes a literal `#` character, which is not part of a binding expression and is not a script code marker, then you must escape that character or it causes a template compilation error. For example, this can happen if a `#` is used inside a hyperlink URL or a CSS color value. Literal `#` in JavaScript strings are escaped via `\\\\#`, while literal `#` in external HTML script templates are escaped via `\\#`.
 > * If your template includes a `#` character, which is part of a binding expression of a nested template, then this character must be escaped as well. In this way the character is ignored by the outer template, but is handled correctly by the inner template.
 
@@ -42,7 +41,7 @@ One of the most basic templating tasks is rendering a value as-is in a template.
 
 This approach creates a compiled in-line template that is ready for rendering with data.
 
-The example below demonstrates what consuming the template in an application looks like.
+The following example demonstrates what consuming the template in an application looks like.
 
 ###### Example  
 
@@ -60,7 +59,7 @@ If you want to render an encoded HTML value in a template, Kendo UI templates ca
 
         var template = kendo.template("<div id='box'>#: firstName #</div>");
 
-The example below demonstrates the produced output when the template is consumed and assuming there are HTML characters in the data.
+The following example demonstrates the produced output when the template is consumed and assuming there are HTML characters in the data.
 
 ###### Example
 
@@ -84,15 +83,13 @@ If the HTML encoding is not used, the output is as demonstrated below.
             $("#example").html(result); //display "Todd" in a bold font weight
         </script>
 
-> **Important**
->
 > HTML encoding is useful when you want to avoid rendering HTML tags in your templates. It escapes the HTML tags in your data and renders the tags as a string. When working with data from unknown sources, such as user-submitted values, use HTML encoding in case users have included HTML markup in the content that could break the layout of your page.
 
 ### Handle External Templates and Expressions
 
 It is common for templates to include expressions. Some templating frameworks invent their own re-implementation of JavaScript to provide expression sugar at the cost of performance, but Kendo UI templates opt to allow the execution of normal JavaScript inside templates, again favoring performance over expensive syntax sugar.
 
-The example below demonstrates how to display a list of items using JavaScript and Kendo UI templates.
+The following example demonstrates how to display a list of items using JavaScript and Kendo UI templates.
 
 ###### Example
 
@@ -200,8 +197,6 @@ External templates do not live in JavaScript, but instead in special blocks in H
             <!--Template content here-->
         </script>
 
-> **Important**
->
 > The type of `text/x-kendo-template` is not specifically required. When using Visual Studio, you can maintain Syntax Highlighting by setting the type to `text/html`. You may use virtually any value as the type, except for `text/javascript`, to prevent the browser from rendering the block at runtime, except where used as a template.
 
 External templates should always have an ID, too, so that you can select the template content when initializing in JavaScript.
@@ -225,7 +220,7 @@ Within an external template you can add any HTML and JavaScript as long as the J
             #}#
         </script>
 
-The example below demonstrates a summarized sample case.
+The following example demonstrates a summarized sample case.
 
 ###### Example
 
@@ -254,8 +249,6 @@ The example below demonstrates a summarized sample case.
             $("#users").html(result); //append the result to the page
         </script>
 
-> **Important**
->
 > Kendo UI does not provide helper syntax for things like loops. While other templating libraries include shorthand like `{ each }`, Kendo UI opts to use normal JavaScript instead of custom syntax sugar. The reason for this is that it is much faster and it is also easy for anyone familiar with JavaScript to use. If you know JavaScript, then you know Kendo UI templates.
 
 ## See Also

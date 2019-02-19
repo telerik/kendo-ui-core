@@ -35,8 +35,6 @@ In the previous example, the widget checks the `tag` element attributes and find
 
 The described behavior is part of the core initialization logic of the Kendo UI directives. To handle this issue, avoid the rendering of empty attributes which match the options of the widget.
 
-> **Important**
->
 > The issue is observable as of the Kendo UI Q2 2015 release where widgets are initialized synchronously abiding by the priority of the Angular JS directives.
 
 ### AngularJS Templates Are Not Evaluated before Widget Initialization

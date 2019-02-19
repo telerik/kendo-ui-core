@@ -16,7 +16,7 @@ By default, a cell is displayed in a single row and column. However, you are abl
 
 Set the [`colSpan`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.colspan) option to make a cell occupy more than one column. When done, all cells that follow shift to the right with the same number of columns as defined by the `colSpan`.
 
-The example below demonstrates how to make a cell occupy three columns.
+The following example demonstrates how to make a cell occupy three columns.
 
 ###### Example
 
@@ -46,7 +46,7 @@ kendo.saveAs({
 
 Set the [`rowSpan`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.rowspan) option to make a cell occupy more than one row.
 
-The example below demonstrates how to make a cell occupy two rows.
+The following example demonstrates how to make a cell occupy two rows.
 
 ###### Example
 

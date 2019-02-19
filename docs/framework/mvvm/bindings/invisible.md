@@ -13,7 +13,7 @@ The Kendo UI Invisible (`invisible`) binding hides or shows the target DOM eleme
 
 ### Setup
 
-The example below demonstrates how to use the `invisible` binding.
+The following example demonstrates how to use the `invisible` binding.
 
 ###### Example
 

@@ -8,17 +8,11 @@ position: 3
 
 # Directives with DataSource
 
-Most Kendo UI widgets work with a DataSource object.
+Though not always necessary to create a `DataSource` object, most Kendo UI widgets require it.
 
-Kendo UI strives hard to keep simple cases simple so that you do not always have to create the DataSource object.
+## Updating the Data Source
 
-## Actions
-
-### Updating the DataSource
-
-Below is an example with static, local data. When you select an item in the Grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the Grid updates.
-
-The following example demonstrates how to try to update the data source.
+The following example contains static local data and demonstrates how to try to update the data source. When you select an item in the Grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the Grid updates.
 
 ###### Example
 
@@ -62,11 +56,13 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-### Updating the DataSource Object
+## Updating the DataSource Object
 
-However, if you click the **UPDATE FROM CODE** button, nothing appears to happen. The reason why this is so is because the grid's data source is actually a different object from `$scope.gridData`. When the widget initializes, it creates a `DataSource` object as a copy of the original object. Changing the original object has no effect on the grid.
+However, if you click the **UPDATE FROM CODE** button, nothing appears to happen. The reason is that the data source of the Grid is a different object from `$scope.gridData`. When the widget initializes, it creates a `DataSource` object as a copy of the original object. Changing the original object has no effect on the Grid.
 
-**Solution** Create and place in scope the data source object yourself. Only the `controller` changes while the markup is the same. Use `kendo.data.ObservableArray` to update the data source.
+**Solution**
+
+Create and place in a scope the data source object yourself. Only the `controller` changes while the markup is the same. Use `kendo.data.ObservableArray` to update the data source.
 
 ###### Example  
 
@@ -109,13 +105,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-Note that the recommended way to update the object is to use the `set` method of the [ObservableObject](/api/javascript/data/observableobject). However, in this particular case the following approach works too.
-
-###### Example
-
-    $scope.gridData[0].track = "Hey you";
-
-The reason behind this is the fact that when grid columns do not declare a template property, Angular-Kendo bindings automatically initialize it with a template, which uses `{% raw %}{{angular}}{% endraw %}` expressions. So, if you just set the property in the object, the display will update, but it is Angular, not Kendo, that manages the update. The grid itself would not be notified about a change in the data. In general, try to use methods of the Observable objects to manage the data as this is the only guaranteed way that widgets will properly update.
+The recommended way to update the object is to use the `set` method of the [`ObservableObject`](/api/javascript/data/observableobject). However, in this case, the `$scope.gridData[0].track = "Hey you";` configuration approach works too. The reason is that when the Grid columns do not declare a template property, AngularJS-Kendo UI bindings automatically initialize it with a template which uses `{% raw %}{{angular}}{% endraw %}` expressions. Therefore, if you only set the property in the object, AngularJS (which manages the display state) will render the update. The Grid itself will not be notified about a change in the data. In general, try to use methods of the `Observable` objects to manage the data as this is the only guaranteed way that widgets will properly update.
 
 ## See Also
 

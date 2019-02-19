@@ -152,8 +152,6 @@ Popup-based widgets nested in other Popup-based widgets create their Popup conta
 
 #### Breaking Changes
 
-> **Important**
->
 > The combined `kendo.all.js` JavaScript file is available only in the Kendo UI Complete package. The corresponding file in Kendo UI Web is called `kendo.web.js`. Use it instead of `kendo.all.js`.
 
 **Data**

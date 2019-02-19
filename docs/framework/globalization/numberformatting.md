@@ -78,8 +78,6 @@ The `"#"` is the digit placeholder. It replaces the pound sign with the correspo
 
     kendo.toString(1234.5678, "#####") -> 1235
 
-> **Important**
->
 > The `"#"` specifier cannot be used to format a number as telephone number, i.e. (###)-###-####
 
 The `"."` is the decimal placeholder. It determines the location of the decimal separator in the result string.
@@ -96,14 +94,10 @@ The `","` is the group separator placeholder. It inserts a localized group separ
 
 The `"%"` is the percentage placeholder. It multiplies a number by 100 and inserts a localized percentage symbol in the result string.
 
-> **Important**
->
 > The `%` symbol is interpreted as a format specifier in the format string. If you need to prevent this, precede the `%` symbol with a double backslash - `kendo.toString(12, "# \\\%")` -> 12 % (en-US).
 
 The `"$"` is the currency placeholder. It specifies that the number should be formatted using the currency culture settings. The `$` symbol is replaced with the localized currency symbol.
 
-> **Important**
->
 > The `$` symbol is interpreted as a format specifier in the format string. If you need to prevent this, precede the `$` symbol with a double backslash - `kendo.toString(12, "# \\\$")` -> 12 $ (en-US).
 
 The `"e"` is the exponential notation.

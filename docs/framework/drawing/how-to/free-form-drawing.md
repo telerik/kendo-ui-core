@@ -7,7 +7,7 @@ slug: howto_freeformdrawing_drawingapi
 
 # Implement Free-Form Drawing
 
-The example below demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
+The following example demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
 
 ###### Example
 

@@ -9,8 +9,6 @@ slug: custombinding_mvvm_kendoui
 
 The [Kendo UI MVVM component](http://demos.telerik.com/kendo-ui/mvvm/index) allows for the [custom bindings](http://demos.telerik.com/kendo-ui/mvvm/custom).
 
-> **Important**
->
 > The custom binding should be registered before the `kendo.bind` method is called.
 
 ## Getting Started
@@ -19,7 +17,7 @@ A custom binding is registered by extending the [`kendo.data.Binder`](/api/javas
 
 ### One-Way Custom Bindings
 
-The example below demonstrates how to register a one-way binding. As a result, the HTML element is updated when the view-model changes.  
+The following example demonstrates how to register a one-way binding. As a result, the HTML element is updated when the view-model changes.  
 
 ###### Example
 
@@ -53,7 +51,7 @@ The example below demonstrates how to register a one-way binding. As a result, t
 
 ### Two-Way Custom Bindings
 
-The example below demonstrates how to register a two-way binding. As a result, both the HTML element and the View-Model are updated.
+The following example demonstrates how to register a two-way binding. As a result, both the HTML element and the View-Model are updated.
 
 ###### Example
 
@@ -99,7 +97,7 @@ The example below demonstrates how to register a two-way binding. As a result, b
 
 ### Custom Widget Binding
 
-The example below demonstrates how to bind the max value of a Kendo UI NumericTextBox widget. As a result, the widget is updated when the View-Model changes.
+The following example demonstrates how to bind the max value of a Kendo UI NumericTextBox widget. As a result, the widget is updated when the View-Model changes.
 
 ###### Example
 

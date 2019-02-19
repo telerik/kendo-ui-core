@@ -9,8 +9,6 @@ slug: checkedbinding_mvvm_kendoui
 
 The Kendo UI Checked (`checked`) binding checks or unchecks a checkbox (`<input type="checkbox" />`) or a radio button (`<input type="radio" />`) based on a value from the View-Model.
 
-> **Important**
->
 > The `checked` binding supports only checkable DOM elements and widgets.
 
 To set the value of other `input` elements use the `value` binding.
@@ -21,7 +19,7 @@ The [Kendo UI MVVM](http://demos.telerik.com/kendo-ui/mvvm/index) displays a bou
 
 ### Use with Checkboxes
 
-The example below demonstrates how to use the `checked` binding with a checkbox.
+The following example demonstrates how to use the `checked` binding with a checkbox.
 
 ###### Example
 
@@ -40,7 +38,7 @@ In the example, the checkbox is initially displayed as unchecked because the val
 
 The `checked` binding also supports binding a list of checkboxes to a View-Model value of an array type. Checking a checkbox from the list appends its `value` attribute to the array specified by the `checked` binding. Unchecking a checkbox removes its `value` attribute from the array.
 
-The example below demonstrates how to use the `checked` binding with a list of checkboxes.
+The following example demonstrates how to use the `checked` binding with a list of checkboxes.
 
 ###### Example
 
@@ -63,7 +61,7 @@ The [Kendo UI MVVM](http://demos.telerik.com/kendo-ui/mvvm/index) displays a rad
 
 ### Use with Radio Buttons
 
-The example below demonstrates how to use the `checked` binding with a group of radio buttons.
+The following example demonstrates how to use the `checked` binding with a group of radio buttons.
 
 ###### Example
 
@@ -80,8 +78,6 @@ The example below demonstrates how to use the `checked` binding with a group of 
 
 In the example, the second radio button is checked after calling `kendo.bind` because its `value` attribute (`"Green"`) is equal to the value of `selectedColor`. Checking another radio button, i.e. `"Blue"`, updates `selectedColor` (to "Blue"). Note that the `name` attribute of all radio buttons is the same.
 
-> **Important**
->
 > All radio buttons acting as a group should have the same `name` attribute. Only then checking a radio button from the group unchecks the previously checked one.
 
 ## Strongly-Typed checked Binding
@@ -90,7 +86,7 @@ Checkbox inputs bound to an array and radio buttons also support [strong typing]
 
 ### Use with Data-Type Attributes
 
-The example below demonstrates how to use the data-type attribute.
+The following example demonstrates how to use the data-type attribute.
 
 ###### Example
 

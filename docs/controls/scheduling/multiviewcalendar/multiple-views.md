@@ -39,7 +39,7 @@ In some scenarios it might be necessary to display more than two months. This is
     function click() {
         var numberOfViews = $("#numberOfViews").data().kendoNumericTextBox.value();
         if (numberOfViews > 0) {
-            $("#multiViewCalendar").data().kendoMultiViewCalendar.setOptions({ numberOfVies: numberOfViews });
+            $("#multiViewCalendar").data().kendoMultiViewCalendar.setOptions({ views: numberOfViews });
         }
     }
 </script>

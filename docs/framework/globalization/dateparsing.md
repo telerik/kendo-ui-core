@@ -57,7 +57,6 @@ The [`kendo.parseDate(string, format, cultureName)`](/api/javascript/kendo/metho
     kendo.parseDate("2012.07.16", "yyyy/MM/dd", "de-DE");
   	kendo.parseDate("2012.07.16", ["MM/dd/yyyy", "yyyy/MM/dd"], "de-DE");
 
-> **Important**
 > * The `kendo.parseDate()` parses strings by incrementally matching an increasing portion of the date string, until it satisfies the current corresponding format part. This may lead to unexpected results when parsing ambiguous date strings with no delimiters. For example, the parsing of `222015` with a `dMyyyy` format fails, because `"22"` is matched as `d` and there is no suitable string part left for the month.
 > * In addition, parsing is permissive and ignores invalid strings which occur after the year.
 

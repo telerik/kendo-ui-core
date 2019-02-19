@@ -16,7 +16,7 @@ By default, all columns in Excel have the same width set (64px). If the cell val
 
 The [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns.width) configuration option specifies the column width in pixels.
 
-The example below demonstrates how to set the width of a column in a worksheet.
+The following example demonstrates how to set the width of a column in a worksheet.
 
 ###### Example
 

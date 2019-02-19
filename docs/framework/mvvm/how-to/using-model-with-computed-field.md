@@ -7,7 +7,7 @@ slug: howto_applysourceandtemplatebinding_usingmodelcomputedfield_mvvm
 
 # Apply Source and Template Binding Using Model with Computed Field
 
-The example below demonstrates how to apply source and template binding by using a Model with a computed field in Kendo UI MVVM.
+The following example demonstrates how to apply source and template binding by using a Model with a computed field in Kendo UI MVVM.
 
 ###### Example
 

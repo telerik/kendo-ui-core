@@ -26,8 +26,6 @@ Kendo UI achieves high performance templates through the use of several techniqu
 
 Performance claims are never set in stone as libraries are evolving all the time. You can see where Kendo UI Templates stands in comparison to some of the common options like Handlebars, Mustache, jQuery Templates (now deprecated), Underscore JS, and John's original micro-templating implementation by using the [JavaScript templating engine shootout](http://jsperf.com/dom-vs-innerhtml-based-templating/509) JSPerf test.
 
-> **Important**
->
 > JSPerf is a great tool to use for quick, relative performance tests between JavaScript libraries and snippets. Anyone can create or modify a JSPerf test to test and compare the performance of JavaScript code across many different browsers and machines.
 
 ## Optimization
@@ -40,7 +38,7 @@ By default, Kendo UI Templates use `with` blocking. This makes it more convenien
 
 Setting `useWithBlock` to `false` makes Kendo UI templates run at maximum speed. Use this option if you are looking for ways to make your apps run faster, especially on mobile devices.
 
-The example below demonstrates Kendo UI Templates with `with` blocking disabled.
+The following example demonstrates Kendo UI Templates with `with` blocking disabled.
 
 ###### Example
 
@@ -74,7 +72,7 @@ Learn more about `with` and its pros and cons on the [Mozilla Developer Network]
 
 For Kendo UI Templates, disabling `with` can impact the way you reference the data used in your template.
 
-The example below assumes that the data displayed in it is the data you want to use with a template.
+The following example assumes that the data displayed in it is the data you want to use with a template.
 
 ###### Example
 
@@ -140,7 +138,7 @@ Disable the `with` blocking when you initialize your template in JavaScript by u
 
 When you take this step, you can no longer refer to the properties of your data directly. If you leave your template unchanged, the following JavaScript error occurs: `Uncaught ReferenceError: header is not defined`.
 
-To fix this problem, you must manually include the `data` scope in your template. The example below demonstrates what the updated template is going to look like.
+To fix this problem, you must manually include the `data` scope in your template. The following example demonstrates what the updated template is going to look like.
 
 ###### Example
 

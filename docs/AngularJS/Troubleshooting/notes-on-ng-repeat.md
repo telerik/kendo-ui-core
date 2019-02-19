@@ -179,8 +179,6 @@ The following example demonstrates a Kendo UI Menu widget with `DataSource` in A
 
 If you need to avoid the generation of content with `DataSource`, you can implement a possible workaround by using the `k-ng-delay` configuration option.
 
-> **Important**
->
 > The approach is not recommended and results in side effects, such as FOUC (flash of unstyled content) and decreased performance.
 
 The following example demonstrates a Kendo UI TabStrip widget in AngularJS with delayed initialization.
@@ -223,8 +221,6 @@ The following example demonstrates a Kendo UI TabStrip widget in AngularJS with 
 
 The `ng-if` directive, which is applicable to most `ng-\*` directives, operates directly on the origin HTML that is bound to and not on the widget itself. When the Kendo UI widget has a more complex rendering, such as the NumericTextBox, then the directive shows or hides the original `input` element and not the widget. This is expected due to the previously mentioned specifics of the `ng-\*` directives.
 
-> **Important**
->
 > The general solution is to use a specific **k-ng-\** directive where available&mdash;for example, `k-ng-disabled`.
 
 The following example demonstrates how to use a wrapping HTML element to hide/show Kendo UI Widget.

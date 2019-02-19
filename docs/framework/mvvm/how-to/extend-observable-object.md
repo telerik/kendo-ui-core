@@ -7,7 +7,7 @@ slug: howto_bindacontainertoanextended_observableobjectwithdefaultvalues_mvvm
 
 # Bind Container to Extended ObservableObject with Default Values
 
-The example below demonstrates how to bind a container to an extended ObservableObject with default values in Kendo UI MVVM. The model passes the default values to the `Observable.fn.init` method.
+The following example demonstrates how to bind a container to an extended ObservableObject with default values in Kendo UI MVVM. The model passes the default values to the `Observable.fn.init` method.
 
 As an alternative, default values can be defined using the `Observable.fn.set` method.
 

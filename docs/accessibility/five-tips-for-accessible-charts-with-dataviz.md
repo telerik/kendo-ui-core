@@ -10,26 +10,26 @@ position: 8
 
 This article provides practical tips, code samples, and illustrative videos for making Kendo UI charts and graphs more accessible so that disabled users can seamlessly interact with the content.
 
-## Accessibility Case
+## Accessibility Standards
 
 The basic accessibility standards are:
 
-* WAI_ARIA
-* Section 508
-* W3C Web Content Accessibility Guidelines (WCAG) 2.0
+* [Section 508 (Latest Amendment)](https://www.access-board.gov/the-board/laws/rehabilitation-act-of-1973#508)
+* [WCAG 2 Quick Reference Guide](https://www.w3.org/WAI/WCAG21/quickref/)
+* [Accessible Rich Internet Applications (WAI-ARIA) 1.1](https://www.w3.org/TR/wai-aria-1.1/)
 
 Section 508 specifies the law which governs the creation of accessible software for government entities in the United States. WCAG and WAI-ARIA contain a comprehensive set of guidelines for creating accessible web sites and applications.
 
 The fundamental requirement that refers to and is fulfilled by the Kendo UI data visualization components is:
 
-* (Section 508) "(a) A text equivalent for every non-text element shall be provided (e.g., via `alt`, `longdesc`, or in-element content)."
-* (WCAG 2.0) "Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
+* Section 508&mdash;"(a) A text equivalent for every non-text element shall be provided (e.g., via `alt`, `longdesc`, or in-element content)."
+* WCAG 2.1&mdash;"Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
 
 Providing text equivalents for non-text content is a key tenant of accessibility. Visual content, such as images, animations, video, and audio, is a valuable asset for each web application and web site. However, these visual elements are impossible to parse by screen readers and other assistive technologies and cannot be enjoyed by disabled users. That is why, both Section 508 and WCAG require that all non-decorative and non-text content has to be made accessible to assistive technologies.
 
 ## Data Visualization
 
-The Kendo UI charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right?
+The Kendo UI Charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right?
 
 Actually, they can be. And with a little bit of work as you add charts and graphs to your applications, they can be made even more accessible.
 
@@ -45,23 +45,33 @@ In the next section look at five steps you can take to improve the accessibility
 
 ## Tips for Accessible Charts
 
-### 1. Provide Text Description
+SVG&mdash;the technology that powers the Kendo UI charts&mdash;is accessible out of the box. However, the following suggested approaches and tips help make the charts and graphs more consumable and accessible to disabled users.
 
-The simplest thing you can do is add a pure-text description of your chart to the page. Here is an example of the markup for such a chart:
+The following guidelines enable you to enhance the accessibility of the Kendo UI Charts:
+
+* [Providing text descriptions](#providing-text-descriptions)  
+* [Adding `role` and `title` attributes to Chart elements](#adding-role-and-title-to-chart-elements)
+* [Adding title and desc to the root of svg elements](#adding-title-and-desc-to-the-root-of-svg-elements)  
+* [Generating accessible data tables from data sources](#generating-accessible-data-tables-from-datasources)  
+* [Creating off-screen tables and swapped on-screen tables and charts](#creating-off-screen-tables-and-swapped-on-screen-tables-and-charts)  
+
+### Providing Text Descriptions
+
+Add a pure-text description of your Chart to the page. The following example demonstrates the markup for such a Chart. In the HTML, the `div` chart is wrapped in a `figure` element. For the complete example, refer to [jsbin.com/odowud/9](http://jsbin.com/odowud/9/edit).
 
     <figure>
         <div id="chart" role="img" title="Sources of Electricity Produced in Spain, 2008"></div>
         <figcaption>
             In 2008, Spain produced electricity for its residents in four ways.
-            Chief among these was Nuclear power, which accounted for approximately 49% of production.
-            Next were Wind and Hydro-electric power, which produced
+            Chief among these was Nuclear power which accounted for approximately 49% of production.
+            Next were Wind and Hydro-electric power which produced
             27% and 22% of the nation's electricity, respectively.
-            In a distant fourth was solor power,
+            In a distant fourth was Solar power,
             which accounted for only 2% of all electricity produced by the country.
         </figcaption>
     </figure>
 
-Create the chart with the following JavaScript:
+The following example demonstrates the JavaScript for creating the Chart and adds a `figcaption` that explains the chart in detail. The example provides a detailed description which might not always be the case. Your goal is to provide disabled users with the key information they can find in your chart and which can vary depending on the data.
 
     function createChart() {
         $("#chart").kendoChart({
@@ -106,34 +116,31 @@ Create the chart with the following JavaScript:
 
     createChart();
 
-If you take a look at the above HTML, you will see that the `div` chart is wrapped in a `figure` element and then a `figcaption` that explains the chart in detail is added. You can also visit [jsbin.com/odowud/9](http://jsbin.com/odowud/9/edit) for a complete working example.
-
-Here is a [brief video](http://www.youtube.com/watch?v=QyB3sTVRd3E&feature=youtu.be) of VoiceOver interacting with the `figcaption` element:
+For more information, refer to the [brief video](http://www.youtube.com/watch?v=QyB3sTVRd3E&feature=youtu.be) of VoiceOver which interacts with the `figcaption` element.
 
     <iframe width="853" height="480" src="http://www.youtube.com/embed/QyB3sTVRd3E" frameborder="0" allowfullscreen></iframe>
 
-In this example the description is detailed, but it might as well not be. The goal is to provide disabled users with the key information found in your chart, which will vary depending on the data.
+### Adding role and title to Chart Elements
 
-### 2. Add `role` and `title` to Chart Element
+To enhance the accessibility of your Chart, you can also add WAI-ARIA `role` and `title` attributes to the `div` element that contains the chart by using the `<div id="chart" role="img" title="Sources of Electricity Produced in Spain, 2008"></div>` configuration.
 
-Another simple step you can take is to add a WAI-ARIA role and a title to the `div` that contains your chart. This can be as simple as doing the following:
+In the [previous video](http://www.youtube.com/watch?v=QyB3sTVRd3E&feature=youtu.be), even though VoiceOver reads the title and title legend of the Chart, it is not able to select the container or tell that the user is interacting with an HTML element. By adding a role of `img` and a title, VoiceOver can do both, which is demonstrated in the first 15 seconds of the video for step one.
 
-        <div id="chart" role="img" title="Sources of Electricity Produced in Spain, 2008"></div>
+### Adding title and desc to the Root of svg Elements
 
-In the first video, even though VoiceOver could read the chart title and legend to it, it could not select the container, or even tell you were interacting with an HTML element. By adding a role of `img` and a title, VoiceOver can do both, which you can see in the first 15 seconds of the video for step 1.
+Another available approach is to manually add the `title` and `description` elements to the `SVG` element that Kendo UI creates. Screen readers are able to leverage these elements as fallback content that will be read to disabled users. For the complete example, refer to [jsbin.com/odowud/19](http://jsbin.com/odowud/19/edit).
 
-### 3. Add `title` and `desc` to the Root of the `svg` Element
+> At the time of this writing, VoiceOver and possibly the other major screen readers do not reflect the `title` and `desc` elements. However, the suggested technique is explicitly stated in the W3C [guidelines for accessible SVG](http://www.w3.org/TR/SVG-access/) and this approach is recommended.
 
-The next step we can take is to manually add title and description elements to the SVG element created by Kendo UI. These elements can be leveraged by screen readers as fallback content to be read to disabled users.
-
-First, create a template script block for the `<title>` and `<desc>` fields:
+1. Create a template script block for the `<title>` and `<desc>` fields.
 
         <script id="chartTmpl" type="text/x-kendo-tmpl">
             <title>#= title #</title>
             <desc>#= description #</desc>
         </script>
 
-Then, load the `html` for that block to a `kendo.template` and render the template using a `chartDetails` object. Finally, use jQuery to select the `svg` element inside of your chart `div` and prepend the title and description to the beginning of that element.
+1. Load the HTML for that block to `kendo.template` and render the template by using a `chartDetails` object.
+1. Use jQuery to select the `svg` element inside the `div` of the Chart and prepend the `title` and `description` to the beginning of that element.
 
         var chartDetails = {
           title: "Sources of Electricity Produced in Spain, 2008",
@@ -151,15 +158,11 @@ Then, load the `html` for that block to a `kendo.template` and render the templa
         createChart();
         makeChartAccessible();
 
-For a complete working sample, check out [jsbin.com/odowud/19](http://jsbin.com/odowud/19/edit).
+### Generating Accessible Data Tables from Data Sources
 
-At the time of this writing, VoiceOver (as well as probably all other major screen readers) does not do anything with the `title` and `desc` elements, but since this technique is explicitly called out in the W3C [guidelines for accessible SVG](http://www.w3.org/TR/SVG-access/), this step is recommended even if for a future-proofing technique.
+This approach and the following one deal with creating a data table to serve as an alternative or a supplement to the Chart or graph. Assuming you are using a DataSource to populate your Chart, you can use the same DataSource and the Kendo UI templates to create a tabular representation of the same data. For the complete example, refer to [http://jsbin.com/odowud/15](http://jsbin.com/odowud/15/edit).
 
-### 4. Generate Accessible Data Tables from DataSource
-
-The last two steps deal with creating a data table to serve as an alternative or supplement to the chart or graph. Assuming you are using a DataSource to populate your chart, you can use the same DataSource and Kendo UI templates to create a tabular representation of the same data.
-
-First, create a template script block for your table.
+1. Create a template script block for your table.
 
         <script id="tableScript" type="text/x-kendo-tmpl">
             <table id="chartTable">
@@ -177,7 +180,7 @@ First, create a template script block for your table.
             </table>
         </script>
 
-Next, declare a `createTable` function, where you will pass the template script into a Kendo UI template, render it with the DataSource, and then add the table to the page.
+1. Declare a `createTable` function where you will pass the template script into a Kendo UI template, render it with the DataSource, and add the table to the page.
 
     var chartData = new kendo.data.DataSource({
       data: [{
@@ -200,67 +203,60 @@ Next, declare a `createTable` function, where you will pass the template script 
        $("body").prepend(template(chartData.data()));
     }
 
-The result is a simple, accessible table based on the same data as the chart itself. Here is a [quick video](http://www.youtube.com/watch?v=0xdrBjwiFVA&feature=plcp) of how VoiceOver allows you to interact with the table:
+As a result, you create a simple and accessible table that is based on the same data as the chart itself. For more information on the way VoiceOver allows you to interact with the table, refer to the [quick video](http://www.youtube.com/watch?v=0xdrBjwiFVA&feature=plcp).
 
     <iframe width="853" height="480" src="http://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
 
-For a complete working sample of this example, see [http://jsbin.com/odowud/15](http://jsbin.com/odowud/15/edit).
+### Creating Off-Screen Tables and Swapped On-Screen Tables and Charts
 
-### 5. Create Off-Screen Tables and Swapped On-Screen Tables and Charts
+If you do not want to display the raw data with the Chart for all users on-screen, use either of the following options:
 
-Generating a data table is nice, but you may not want to display the raw data on-screen with the chart for all users. In that case, you have two options. You can either 1) place the table off-screen, invisible to sighted users, but available to screen readers, or 2) provide all users with the ability to switch between the chart and the table.
+* Place the table off-screen to make it invisible to sighted users but available to screen readers. For the complete example, refer to [http://jsbin.com/odowud/20](http://jsbin.com/odowud/20/edit).
 
-To make the first option work, start by creating a CSS class called `hidden`, which positions any element 10,000px to the left and off-screen.
+    To make the table invisible to sighted users but available to screen readers, create a CSS class called `hidden` which will position any element at 10,000px to the left and off-screen.
 
-    .hidden {
-      position:absolute;
-      left:-10000px;
-      top:auto;
-      width:1px;
-      height:1px;
-      overflow:hidden;
-    }
+        .hidden {
+          position:absolute;
+          left:-10000px;
+          top:auto;
+          width:1px;
+          height:1px;
+          overflow:hidden;
+        }
 
-Now, your data table is no longer on the screen, but it is accessible to screen readers as shown in the [following video](http://www.youtube.com/watch?v=0xdrBjwiFVA&feature=youtu.be):
+    As a result, your data table is no longer on the screen but is accessible to screen readers as demonstrated in the [following video](http://www.youtube.com/watch?v=0xdrBjwiFVA&feature=youtu.be).
 
-    <iframe width="853" height="480" src="http://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
+        <iframe width="853" height="480" src="http://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
 
-For a complete working sample of this example, see [http://jsbin.com/odowud/20](http://jsbin.com/odowud/20/edit).
+* Provide all users with the ability to switch between the Chart and the table.
 
-For an alternative approach, place a link or button on the screen that allows the user to swap between the table and the chart. The advantage of this approach is that it enhances the experience for all users by giving them a choice as to which presentation of the data they prefer.
+    Place a link or button on the screen that allows the user to swap between the table and the chart. This approach enhances the experience for all users by letting them choose which presentation of the data they prefer. For the complete example, refer to [http://jsbin.com/odowud/21](http://jsbin.com/odowud/21/edit).
 
-In this case, place a **Show Table** link on the screen. When the user clicks this link, the chart is hidden, the table is displayed, and the link text changes to **Show Chart**.
+    Place a **Show Table** link on the screen. When the user clicks this link, the Chart is hidden, the table is displayed, and the link text changes to **Show Chart**.
 
-    var toggle = $('#toggle'); // HTML Link Element ID
-    toggle.on('click', function() {
-      if (chartTable.hasClass('hidden')) {
-        chart.addClass('hidden');
-        chartTable.removeClass('hidden');
-        toggle.text("Show Chart");
-      } else {
-        chartTable.addClass('hidden');
-        chart.removeClass('hidden');
-        toggle.text("Show Table");
-      }
-    });
+        var toggle = $('#toggle'); // HTML Link Element ID
+        toggle.on('click', function() {
+          if (chartTable.hasClass('hidden')) {
+            chart.addClass('hidden');
+            chartTable.removeClass('hidden');
+            toggle.text("Show Chart");
+          } else {
+            chartTable.addClass('hidden');
+            chart.removeClass('hidden');
+            toggle.text("Show Table");
+          }
+        });
 
-VoiceOver users can now choose which representation they wish to interact with as displayed in the [following video](http://www.youtube.com/watch?v=kZNz1H2Zp3U&feature=relmfu):
+    As a result, VoiceOver users can choose with which representation they wish to interact as demonstrated in the [following video](http://www.youtube.com/watch?v=kZNz1H2Zp3U&feature=relmfu).
 
-    <iframe width="853" height="480" src="http://www.youtube.com/embed/kZNz1H2Zp3U" frameborder="0" allowfullscreen></iframe>
-
-For a complete working sample of this example, see [http://jsbin.com/odowud/21](http://jsbin.com/odowud/21/edit).
-
-SVG (the technology used to power Kendo UI charts) is pretty accessible out of the box, but the tips above can help you make your charts and graphs even more consumable, and thus more accessible, to disabled users. Better still, following these tips and having an accessible mindset as you build your websites and applications can help you create content that is more accessible to all your users.
-
-## Resources
-
-- [Section 508](http://section508.gov/)
-- [WCAG 2.0](http://www.w3.org/TR/WCAG20/)
-- [W3C SVG Accessibility Guidelines](http://www.w3.org/TR/SVG-access/)
-- [HTML5 Accessibility: SVG Text (Paciello Group Blog Post)](http://www.paciellogroup.com/blog/2011/08/html5-accessibility-chops-interactive-image-example/)
+        <iframe width="853" height="480" src="http://www.youtube.com/embed/kZNz1H2Zp3U" frameborder="0" allowfullscreen></iframe>
 
 ## See Also
 
+* [Section 508](http://section508.gov/)
+* [WCAG 2.1 (Quick Reference)](https://www.w3.org/WAI/WCAG21/quickref/)
+* [W3C SVG Accessibility Guidelines](http://www.w3.org/TR/SVG-access/)
+* [HTML5 Accessibility: SVG Text (Paciello Group Blog Post)](http://www.paciellogroup.com/blog/2011/08/html5-accessibility-chops-interactive-image-example/)
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
 * [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})

@@ -16,7 +16,7 @@ Below are a couple of ways to bind the Kendo UI HierarchicalDataSource component
 
 If you have a way of fetching data that cannot be achieved through the default [dataSource transport configuration](/api/framework/hierarchicaldatasource#configuration-transport), you can provide a [custom `read` function](/api/framework/datasource#configuration-transport.read) that fetches the data and delivers it to the datasource, which is the so-called custom transport. This enables you to query different URLs conditionally, or provide generated authentication tokens for each request.
 
-The example below demonstrates how to bind the HierarchicalDataSource component through a custom transport.
+The following example demonstrates how to bind the HierarchicalDataSource component through a custom transport.
 
 ###### Example
 
@@ -59,7 +59,7 @@ The example below demonstrates how to bind the HierarchicalDataSource component 
 
 Because the HierarchicalDataSource component loads data on demand, loading all available data can result in multiple requests to the server. To prevent this, make a single AJAX request to get all the data, and then provide it to the dataSource.
 
-The example below demonstrates how to fetch a complete hierarchy through a single request.
+The following example demonstrates how to fetch a complete hierarchy through a single request.
 
 ###### Example
 

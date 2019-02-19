@@ -24,7 +24,7 @@ To extract the DataSource to an Excel document (workbook), follow these steps:
 
 ### Create Excel Workbook
 
-The example below demonstrates how to create an Excel workbook based on the requirements from the previous section.
+The following example demonstrates how to create an Excel workbook based on the requirements from the previous section.
 
 ###### Example
 

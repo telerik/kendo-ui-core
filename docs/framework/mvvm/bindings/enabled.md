@@ -16,7 +16,7 @@ When an input element is disabled the end user cannot change its value (type in 
 
 ### Setup
 
-The example below demonstrates how to use the `enabeled` binding.
+The following example demonstrates how to use the `enabeled` binding.
 
 ###### Example
 

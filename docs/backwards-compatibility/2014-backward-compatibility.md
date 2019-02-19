@@ -147,7 +147,7 @@ The deprecated `checkboxTemplate` configuration option has been removed. If you 
 
 **Editor**
 
-The deprecated `formatBlock` and `style` tools have been removed. See the 2013 Q2 release notes below on how to migrate to the `formatting` tool.
+The deprecated `formatBlock` and `style` tools have been removed. See the following 2013 Q2 release notes on how to migrate to the `formatting` tool.
 
 **Editor for ASP.NET MVC**
 

@@ -12,8 +12,6 @@ position: 1
 
 The [Kendo UI MVVM component](http://demos.telerik.com/kendo-ui/mvvm/index) is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo UI framework&mdash;Kendo UI widgets and Kendo UI DataSource.
 
-> **Important**
->
 > Kendo UI MVVM initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plugin syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). If you want to create Kendo UI widget instances via the MVVM pattern, then do not use server wrappers for these instances.
 
 ## Getting Started
@@ -57,8 +55,6 @@ Please check the naming convention for setting the configuration options of the 
 
     kendo.bind($("#view"), viewModel);
 
-> **Important**
->
 > The hybrid widgets and frameworks in Kendo UI are not included in the default list of initialized namespaces. You can initialize them explicitly by running `kendo.bind(element, viewModel, kendo.mobile.ui);`.
 
 ## Bindings
@@ -67,7 +63,6 @@ A binding pairs a DOM element (or widget) property to a field or method of the V
 
 The Kendo UI MVVM supports binding to other properties as well: `source`, `html`, `attr`, `visible`, `enabled`, etc. The `data-bind` may contain a comma-separated list of bindings e.g. `data-bind="value: name, visible: isNameVisible"`.
 
-> **Important**
 > * Bindings cannot include hard-coded values, but only references to properties of the `viewModel`. For example, the following is incorrect:
 >
 >           data-bind="visible: false, source: [{ foo: 'bar'}]"

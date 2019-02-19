@@ -45,7 +45,7 @@ The `drawing.drawDOM` takes a jQuery selector or object, or a plain DOM node, an
 
 If you need PDF output, your document should declare the fonts it applies by using the [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for optimal layout and Unicode support. As of the Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig such declarations directly from the CSS and you do not need to manually call the [`pdf.defineFont`](/api/javascript/pdf/methods/definefont) method.
 
-The example below demonstrates a sample CSS declaration.
+The following example demonstrates a sample CSS declaration.
 
 ###### Example
 
@@ -56,7 +56,7 @@ The example below demonstrates a sample CSS declaration.
 
 Next, to make sure the elements that you are trying to export are using this font, specify `font-family: "DejaVu Sans"` in their styles.
 
-The example below demonstrates how to make all Kendo widgets use this font.
+The following example demonstrates how to make all Kendo widgets use this font.
 
 ###### Example
 
@@ -64,7 +64,6 @@ The example below demonstrates how to make all Kendo widgets use this font.
       font-family: "DejaVu Sans";
     }
 
-> **Important**
 > * The PDF generator supports only TrueType fonts with Unicode mappings.
 > * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
@@ -110,7 +109,7 @@ By default the [`drawDOM`](/api/javascript/drawing/methods/drawdom) method creat
 
 The `drawing.drawDOM` allows you to create a [multi-page PDF](/framework/drawing/pdf-output.html#multiple-pages-output) by specifying manual page breaks. A page break occurs before each element that matches the `forcePageBreak` CSS selector.
 
-The example below demonstrates how to draw a multi-page Kendo UI Grid.
+The following example demonstrates how to draw a multi-page Kendo UI Grid.
 
 ###### Example
 
@@ -349,7 +348,7 @@ If you want to change the appearance of the PDF output as it appears in the brow
 
 This CSS class is applied to each individual page just before the drawing starts, and is removed shortly afterwards. For multipage exports, it is better to use the [`kendo-pdf-document`](#the-kendo-pdf-document-element) element because styles are applied to the whole export at once.
 
-The example below demonstrates how to define a style that places a border around all paragraphs in the PDF output.
+The following example demonstrates how to define a style that places a border around all paragraphs in the PDF output.
 
 ###### Example
 
@@ -396,7 +395,7 @@ To produce different content for export, or keep it hidden from the user, positi
 
 The container has to be fully rendered. For more information, see the section on [getting started](#getting-started).
 
-The example below uses an absolute positioning to move the container off the screen.
+The following example uses an absolute positioning to move the container off the screen.
 
 ###### Example
 

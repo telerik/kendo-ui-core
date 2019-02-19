@@ -19,7 +19,7 @@ The `attr` binding is set in the way shown below.
 
 In the example, `attribute1` and `attribute2` are the names of the attributes that are going to be set, and `field1` and `field2` are the names of the View-Model fields to which those attributes are going to be bound.
 
-The example below demonstrates an Attribute binding.
+The following example demonstrates an Attribute binding.
 
 ###### Example
 

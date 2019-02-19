@@ -55,16 +55,12 @@ Create a new empty HTML file and include jQuery, AngularJS, and Kendo UI. In thi
     </body>
     </html>
 
-> **Important**
->
 > In order for the AngularJS bindings to be activated, you must load `angular.js` before Kendo UI.
 
 ### Initializing the Application
 
 To initialize the hybrid mobile application, add a `kendo-mobile-application` attribute to the `body` element together with the `ng-app` attribute. The `kendo-mobile-application` attribute represents an AngularJS directive which is used to flag the html element that Kendo UI should consider to be the root element of our mobile application. This gives developers the freedom to specify if the entire html page or only a portion of it should be treated as Kendo UI Mobile application container.
 
-> **Important**
->
 > In order for the Kendo AngularJS directives to be evaluated, you must declare dependency on `kendo.directives` when creating the AngularJS application.
 
 ###### Example
@@ -252,9 +248,7 @@ The content inside the `<kendo-mobile-header>` tag will be used as a header for 
         </kendo-mobile-list-view>
     </kendo-mobile-view>
 
-> **Important**
->
-> Notice an important detail in the example above&mdash;the `default` string is quoted inside the attribute value. Without the single inside, it would be interpreted as a variable name and AngularJS-Kendo UI would look for the `$scope.default` variable. Since omitting the quotes (`'`) is a common error, AngularJS-Kendo UI is going to emit a warning in the JavaScript console when such variables are not found.
+> The previous example features an important detail&mdash;the `default` string is quoted inside the attribute value. Without the single inside, it would be interpreted as a variable name and AngularJS-Kendo UI would look for the `$scope.default` variable. Since omitting the quotes (`'`) is a common error, AngularJS-Kendo UI is going to emit a warning in the JavaScript console when such variables are not found.
 
 Reload the application and see the new look. Have in mind that at present the **Our menu**, **Cart**, **Account** and **About** views do not exists yet, which is why clicking on any of the links results in a JavaScript error.
 
@@ -348,9 +342,7 @@ Now you are going to customize the ListView item template&mdash;add the image of
 
 Inside the template use the AngularJS directives and the double curly brace notation `{{'{{'}} }}` to bind expressions to elements.
 
-> **Important**
->
-> It is important to note that this is still a Kendo UI Template, so you [must escape the `#` symbols]({% slug overview_kendoui_templatescomponent %}#template-syntax).
+> This is still a Kendo UI Template, so you [must escape the `#` symbols]({% slug overview_kendoui_templatescomponent %}#template-syntax).
 
 Before you are able to pass the template to the widgets, assign it to the View controller's scope. Create a service that is going to hold a reference to the template.
 
@@ -441,8 +433,6 @@ In the `show` event handler set the cart's `currentItem` and the framework is go
         }
     }])
 
-> **Important**
->
 > The ID of the last clicked item is passed through the query string parameters of the navigate URL&mdash;`href="\#!details?id={{dataItem.id}}"`.
 
 Implement the `setCurrentItem` method in the `sushiCart` service.
@@ -567,9 +557,7 @@ The `addToCart` method is called when the buttons located in **Home** ListView, 
         kendoEvent.preventDefault();
     };
 
-> **Important**
->
->  In the event handler a reference to the `dataItem` is passed directly through the `k-on-click="sushiCart.addToCart(kendoEvent, dataItem)"` markup.
+>  In the event handler, a reference to the `dataItem` is passed directly through the `k-on-click="sushiCart.addToCart(kendoEvent, dataItem)"` markup.
 
 ###### Example
 
@@ -599,9 +587,7 @@ The `removeItem` method is called when the **Delete** button in the **Cart** Lis
         kendoEvent.preventDefault();
     };
 
-> **Important**
->
-> In the event handler a reference to the `dataItem` is passed directly through the `k-on-click="sushiCart.removeItem(kendoEvent, dataItem)"` markup.
+> In the event handler, a reference to the `dataItem` is passed directly through the `k-on-click="sushiCart.removeItem(kendoEvent, dataItem)"` markup.
 
 ###### Example
 
@@ -767,7 +753,7 @@ If something goes wrong:
 - Check if the issue you encounter is not already described in the [troubleshooting article on common issues]({% slug troubleshooting_common_issues_kendoui %}).
 - Check [this screen cast](http://blogs.telerik.com/kendoui/posts/13-01-02/screencast_debugging_kendo_ui_applications) as it provides a brief overview of how to easily debug Kendo UI Applications.
 
-## See also
+## See Also
 
 * [Integration with Kendo UI for the Web]({% slug integrationkendouiweb_hybridkendoui %})
 * [MVVM Integration]({% slug mvvmintegration_hybridkendoui %})

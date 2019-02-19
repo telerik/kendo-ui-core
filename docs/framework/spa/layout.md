@@ -14,7 +14,7 @@ The Layout class inherits from the `View` one and provides the additional functi
 
 ### Show Views
 
-The example below demonstrates a layout showing a view.
+The following example demonstrates a layout showing a view.
 
 ###### Example
 
@@ -36,7 +36,7 @@ When a view is rendered in a location already used for the rendering of a view, 
 
 ### Switch Views
 
-The example below demonstrates a layout switching views.
+The following example demonstrates a layout switching views.
 
 ###### Example
 

@@ -76,7 +76,7 @@ This section demonstrates how to replicate the static scene from above and add a
 
 ### Import Namespaces
 
-The example below demonstrates how to import the two namespaces.
+The following example demonstrates how to import the two namespaces.
 
 ###### Example
 
@@ -152,8 +152,6 @@ This statement can be shortened to the code shown below.
 
     var imageRect = new geom.Rect([5, 5], [50, 50]);
 
-> **Important**
->
 > Any method that expects `Point` and `Size` also accepts `[x, y]` and `[width, height]` arrays.
 
 Now create the image in the way demonstrated in the example below.

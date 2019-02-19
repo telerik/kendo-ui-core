@@ -167,8 +167,6 @@ The previous example performs in the same way. Nodes are retained, but collectin
 
 Based on this research, you can consider that the memory usage of the Kendo UI directives, although not perfect, is unavoidable given the AngularJS context.
 
-> **Important**
->  
 > The majority of Kendo UI widgets do not exhibit such leaks outside the AngularJS context.
 
 ## Cleaning Up

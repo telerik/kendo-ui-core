@@ -13,7 +13,7 @@ The `text` binding sets the text content of the target DOM element to a View-Mod
 
 To set the value displayed by an `input`, `textarea` or `select` use the [value](value) binding instead.
 
-The example below demonstrates how to use the `text` binding.
+The following example demonstrates how to use the `text` binding.
 
 ###### Example
 

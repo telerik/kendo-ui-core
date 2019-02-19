@@ -15,7 +15,7 @@ The `disabled` binding supports only input HTML elements: `input`, `select` and 
 
 ### Setup
 
-The example below demonstrates how to use the `disabled` binding.
+The following example demonstrates how to use the `disabled` binding.
 
 ###### Example
 

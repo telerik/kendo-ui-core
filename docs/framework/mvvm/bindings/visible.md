@@ -11,7 +11,7 @@ The `visible` binding shows or hides the target DOM element or widget depending 
 
 ## Getting Started
 
-The example below demonstrates how to use the `visible` binding.
+The following example demonstrates how to use the `visible` binding.
 
 ###### Example
 

@@ -26,7 +26,7 @@ Kendo UI allows you to change the appearance of the cells via the following conf
 * [`underline`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.underline)&mdash;Displays the cell value as underlined.
 * [`vAlign`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.valign)&mdash;Sets the vertical text alignment.
 
-The example below demonstrates how to customize the appearance of the cells.
+The following example demonstrates how to customize the appearance of the cells.
 
 ###### Example
 

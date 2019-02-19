@@ -13,7 +13,7 @@ The [Kendo UI Events (`events`) binding](http://demos.telerik.com/kendo-ui/mvvm/
 
 ### Setup
 
-The example below demonstrates how to use the `events` binding.
+The following example demonstrates how to use the `events` binding.
 
 ###### Example  
 
@@ -48,7 +48,7 @@ Kendo UI MVVM supplies the DOM event argument wrapped in a jQuery [`Event` objec
 
 To stop the event from bubbling up the DOM tree use the [`stopPropagation`](http://api.jquery.com/event.stopPropagation/) method.
 
-The example below demonstrates how to stop DOM event bubbling.
+The following example demonstrates how to stop DOM event bubbling.
 
 ###### Example
 
@@ -67,7 +67,7 @@ The example below demonstrates how to stop DOM event bubbling.
 
 Some DOM events have a default action. For example, the `click` event may navigate to another page or submit a form. To prevent the default action, use the [`preventDefault`](http://api.jquery.com/event.preventDefault/) method.
 
-The example below demonstrates how to prevent default actions of DOM events.
+The following example demonstrates how to prevent default actions of DOM events.
 
 ###### Example
 
