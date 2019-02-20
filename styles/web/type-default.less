@@ -992,10 +992,14 @@ td.k-state-focused.k-state-selected
 
 .k-state-selected>.k-link,
 .k-panelbar > li > .k-state-selected,
-.k-panelbar>li.k-state-default>.k-link.k-state-selected
-{
+.k-panelbar .k-item .k-link.k-state-selected,
+.k-panelbar>li.k-state-default>.k-link.k-state-selected {
     color: @selected-text-color;
 }
+
+ .k-panelbar .k-group .k-link.k-state-hover {
+    color: @hover-text-color;
+ }
 
 .k-state-hover,
 .k-splitbar-horizontal-hover,

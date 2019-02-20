@@ -2888,17 +2888,18 @@ input.k-textbox:focus {
     background-color: @widget-background-color;
 }
 
-.k-panelbar .k-state-selected.k-state-hover {
-    background-color: @selected-background-color;
-}
-
 .k-panelbar > li > .k-state-selected,
-.k-panelbar > li > .k-state-selected.k-state-hover,
-.k-panelbar > li.k-state-default > .k-link.k-state-selected,
-.k-panelbar > li > .k-state-focused.k-state-hover {
+.k-panelbar > .k-item > .k-link.k-state-selected,
+.k-panelbar > li.k-state-default > .k-link.k-state-selected {
     color: @inverse-text-color;
     background-color: @select-background-color;
 }
+
+.k-panelbar .k-state-selected.k-state-hover {
+    background-color: @selected-background-color;
+    color: @hover-text-color;
+}
+
 
 .k-panelbar.k-header,
 .k-panelbar .k-content,
