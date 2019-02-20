@@ -20,53 +20,45 @@ For more information on the HtmlHelper, refer to the article on the [TreeView Ht
 The following example demonstrates how to define the TreeView by using the TreeView HtmlHelper.
 
 ```Razor
-    @(Html.Kendo().TreeView()
-        .Name("treeview")
-        .DataTextField("Name")
-        .DataSource(dataSource => dataSource
-            .Read(read => read
-                .Action("Read_TreeViewData", "TreeView")
-            )
+@(Html.Kendo().TreeView()
+    .Name("treeview")
+    .DataTextField("Name")
+    .DataSource(dataSource => dataSource
+        .Read(read => read
+            .Action("Read_TreeViewData", "TreeView")
         )
     )
+)
 ```
 ```Controller
-    public class TreeViewController : Controller
+public static IList<HierarchicalViewModel> GetHierarchicalData()
+{
+    var result = new List<HierarchicalViewModel>()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
+    };
 
-        public static IList<HierarchicalViewModel> GetHierarchicalData()
-        {
-            var result = new List<HierarchicalViewModel>()
-            {
-                new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-                new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
-                new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
-                new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
-                new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
-            };
+    return result;
+}
 
-            return result;
-        }
+public IActionResult Read_TreeViewData(int? id)
+{
+    var result = GetHierarchicalData()
+        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Select(item => new {
+            id = item.ID,
+            Name = item.Name,
+            expanded = item.Expanded,
+            imageUrl = item.ImageUrl,
+            hasChildren = item.HasChildren
+        });
 
-        public IActionResult Read_TreeViewData(int? id)
-        {
-            var result = GetHierarchicalData()
-                .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
-                .Select(item => new {
-                    id = item.ID,
-                    Name = item.Name,
-                    expanded = item.Expanded,
-                    imageUrl = item.ImageUrl,
-                    hasChildren = item.HasChildren
-                });
-
-            return Json(result);
-        }
-    }
+    return Json(result);
+}
 ```
 
 ## Configuration
@@ -75,12 +67,39 @@ The following example demonstrates the basic configuration of the TreeView HtmlH
 
 ###### Example
 
-```
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Checkboxes(true)
         .DragAndDrop(true)
         .DataTextField("Name")
+        .DataSource(dataSource => dataSource
+            .Read(read => read
+                .Action("Employees", "TreeView")
+            )
+        )
+    )
+
+    <script type="text/javascript">
+        $(function () {
+            //Notice that the Name() of the TreeView is used to get its client-side instance.
+            var treeview = $("#treeview").data("kendoTreeView");
+            console.log(treeview);
+        });
+    </script>
+
+As you can see, the TreeView offers [Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %}) and [Drag-and-Drop]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %}) support.
+
+## Events
+
+The following example demonstrates the available TreeView events and how an event handler could be implemented for each of them.
+
+###### Example
+
+    @(Html.Kendo().TreeView()
+        .Name("treeview")
+        .DataTextField("Name")
+        .Checkboxes(true)
+        .DragAndDrop(true)
         .DataSource(dataSource => dataSource
             .Read(read => read
                 .Action("Employees", "TreeView")
@@ -94,19 +113,48 @@ The following example demonstrates the basic configuration of the TreeView HtmlH
             .Expand("onExpand")
             .DragStart("onDragStart")
             .Drag("onDrag")
-            .Drop("onDrop")
             .DragEnd("onDragEnd")
+            .Drop("onDrop")
         )
     )
 
     <script type="text/javascript">
-        $(function () {
-            //Notice that the Name() of the TreeView is used to get its client-side instance.
-            var treeview = $("#treeview").data("kendoTreeView");
-            console.log(treeview);
-        });
+        function onChange(e) {
+            console.log('Selected node changed to:', e.sender.select());
+        }
+
+        function onSelect(e) {
+            console.log('Selected node:', e.node);
+        }
+
+        function onCheck(e) {
+            console.log('Checked node:', e.node);
+        }
+
+        function onCollapse(e) {
+            console.log('Collapsed node:', e.node);
+        }
+
+        function onExpand(e) {
+            console.log('Expanded node:', e.node);
+        }
+
+        function onDragStart(e) {
+            console.log('Started dragging:', e.sourceNode);
+        }
+
+        function onDrag(e) {
+            console.log("Dragging:", e.sourceNode);
+        }
+
+        function onDragEnd(e) {
+            console.log("Finished dragging:", e.sourceNode);
+        }
+
+        function onDrop(e) {
+            console.log("Dropped:", e.sourceNode);
+        }
     </script>
-```
 
 ## See Also
 
