@@ -52,6 +52,16 @@ NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" 
       -StorePasswordInClearText
 ```
 
+If you have already stored a token instead of storing the credentials as clear text, you could update the definition in the `%AppData%\NuGet\NuGet.config` file using the following command:
+
+###### Example
+
+```
+NNuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
+      -UserName "your login email" -Password "your password" ^
+      -StorePasswordInClearText
+```
+
 ### Install NuGet Packages
 
 With the setup done, you can install packages either through the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console) or through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog).
