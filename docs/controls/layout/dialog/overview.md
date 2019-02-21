@@ -82,7 +82,7 @@ Some of the properties that can be overridden and controlled are:
 * Custom action buttons and their layout.
 * Title and **Close** buttons.
 * Animation effects and duration.
-*	Modality.
+* Modality.
 * Predefined dialogs.
 
 The example below demonstrates how to create a non-modal Dialog that contains two action buttons and no **Close** button.

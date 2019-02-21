@@ -10,35 +10,65 @@ position: 1
 
 The Dialog HtmlHelper extension is a server-side wrapper for the [Kendo UI Dialog](https://demos.telerik.com/kendo-ui/dialog/index) widget.
 
-## Configuration
+The Dialog is a modal popup that brings information to the user. It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog widget is a subset of the [Kendo UI Window widget]({% slug htmlhelpers_window_aspnetcore %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
 
-Add the Dialog.
+## Basic Usage
+
+The following example demonstrates how to define the Dialog by using the Dialog HtmlHelper.
 
 ###### Example
 
-```
     @(Html.Kendo().Dialog()
-          .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
-          .Title("Software Update")//Set the title of the Dialog.
-          .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
-          .Width(400)  //Set the width of the Dialog.
-          .Modal(false) // Disable the modality of the Dialog.
-          .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
-          .Actions(actions =>
-            {
-                actions.Add().Text("NO"); //Set text of the first button.
-                actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
-            })
+        .Name("dialog") //The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
+        .Title("Software Update")//Set the title of the Dialog.
+        .Content("Do you agree terms and conditions?") //Define the content of the Dialog.
+        .Visible(false) //The widget will be initialized as invisible
     )
-```
+
+Usually, a Dialog is opened as a result of a user action rather than of the `load` event of the page. The [Dialog JavaScript API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog) provides methods for handling such scenarios. Basically, the widget can be initialized as non-visible and can opened when needed.
+
+## Configuration
+
+The Dialog provides default configuration options that can be set during initialization.
+
+Some of the properties that can be overridden and controlled are:
+
+* [Dialog dimensions - height and width]({% slug dimensions_dialoghelper_aspnetcore %}).
+* [Custom action buttons and their layout]({% slug action_buttons_dialoghelper_aspnetcore %}).
+* Title and **Close** buttons.
+* Animation effects and duration.
+* Modality.
+* Predefined dialogs.
+* Content.
+
+The following example demonstrates a basic configuration of the Dialog HtmlHelper and how to get the Dialog instance.
+
+###### Example
+
+    @(Html.Kendo().Dialog()
+        .Name("dialog")
+        .Title("Software Update")
+        .Content("Do you agree terms and conditions?")
+        .Width(400)  //Set the width of the Dialog.
+        .Modal(false) // Disable the modality of the Dialog.
+        .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
+        .Actions(actions =>
+        {
+            actions.Add().Text("NO"); //Set text of the first button.
+            actions.Add().Text("YES").Primary(true); //Set text of the second button and define it as primary.
+        })
+    )
+
+    <script type="text/javascript">
+        $(function() {
+            //Notice that the Name() of the Dialog is used to get its client-side instance.
+            var dialog = $("#dialog").data("kendoDialog");
+        });
+    </script>
 
 ## Event Handling
 
-You can subscribe to all Dialog [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog#events).
-
-### By Handler Name
-
-The following example demonstrates how to subscribe to events by a handler name.
+You can subscribe to all Dialog [events](/api/Kendo.Mvc.UI.Fluent/DialogEventBuilder). The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
@@ -46,36 +76,33 @@ The following example demonstrates how to subscribe to events by a handler name.
     @(Html.Kendo().Dialog()
         .Name("dialog")
         .Events(e => e
-              .Open("dialog_open")
-              .Close("dialog_close")
+            .InitOpen("onInitOpen")
+            .Open("dialog_open")
+            .Close("dialog_close")
+            .Show("onShow")
+            .Hide("onHide")
         )
     )
     <script>
-        function dialog_open(e) {
+        function onInitOpen(e) {
+            //Handle the InitOpen event.
+        }
+
+        function onOpen(e) {
             //Handle the open event.
         }
 
-        function dialog_close(e) {
+        function onClose(e) {
             //Handle the close event.
         }
-    </script>
-```
 
-## Reference
+        function onShow(e) {
+            //Handle the show event.
+        }
 
-### Existing Instances
-
-To refer to an existing Kendo UI Dialog instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Dialog API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog#methods) to control its behavior.
-
-###### Example
-
-```
-    // Put this after your Kendo UI Dialog for ASP.NET Core declaration.
-    <script>
-        $(function() {
-            // Notice that the Name() of the Dialog is used to get its client-side instance.
-            var dialog = $("#dialog").data("kendoDialog");
-        });
+        function onHide(e) {
+            //Handle the hide event.
+        }
     </script>
 ```
 

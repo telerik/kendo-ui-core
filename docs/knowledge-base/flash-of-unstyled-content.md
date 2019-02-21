@@ -44,11 +44,11 @@ With the Kendo widgets, you are more likely to experience such issues with ones 
 
 Kendo widgets are [instantiated only after the document has been loaded and parsed](https://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview#initialization).  At this point the necessary classes are added and the browser can style them according to the stylesheets that are present (in this case - the Kendo stylesheets are most relevant as they are the targetted appearance).
 
-Example symptoms pertainint to the Kendo widgets:
+Example symptoms pertaining to the Kendo widgets:
 
 * I have a combobox that shows as a normal text box and shows the model data until the datasource is loaded.
 * I am using dropdownlist for and when the page first loads if that dropdownlist has a value it briefly shows the value of the selected option instead of text.
-* Using a panelBar causes flashes of unstyled content.
+* Using a panelbar causes flashes of unstyled content.
 
 ## Workaround
 
