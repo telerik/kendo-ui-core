@@ -9,7 +9,7 @@ position: 0
 
 # Tag Helpers Overview
 
-The Kendo UI tag helper help you configure the Kendo UI widgets by using the tag helper feature in ASP.NET Core.
+The Kendo UI tag helper helps you configure the Kendo UI widgets by using the tag helper feature in ASP.NET Core.
 
 ## Getting Started
 
