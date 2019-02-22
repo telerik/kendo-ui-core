@@ -14,7 +14,7 @@ The more the functionalities of your project that users can handle through the k
 
 ## Overview
 
-To indicate to the browser that a specific property can be activated with the keyboard, place the `accesskey` attribute in HTML elements. For example, you have the `<input type='text' id='name' accesskey='n' />` input field on a page. By implementing `accesskey`, you instruct the browser to enable a user to set the focus on that field through an access key combination and the `n` key. Access key combinations are [unique for OS and browsers](http://en.wikipedia.org/wiki/Access_key). For example, if a user browses your website with Chrome on a Mac, they will have to type `control` and `option` and `n` to set focus on the `name` field.
+To indicate to the browser that a specific property can be activated with the keyboard, place the `accesskey` attribute in HTML elements. For example, you have the `<input type='text' id='name' accesskey='n' />` input field on a page. By implementing `accesskey`, you instruct the browser to enable a user to set the focus on that field through an access key combination and the `n` key. Access key combinations are [unique for OS and browsers](https://en.wikipedia.org/wiki/Access_key). For example, if a user browses your website with Chrome on a Mac, they will have to type `control` and `option` and `n` to set focus on the `name` field.
 
 Kendo UI recognizes `accesskey` attributes and automatically preserves them when creating widgets. This approach is especially helpful when Kendo UI creates multiple DOM elements to construct more complex widgets such as the NumericTextBox or DatePicker.
 
@@ -24,37 +24,41 @@ Keyboard support in Kendo UI maps access-key combinations and ensures that users
 
 In addition to the `accesskey` attribute support, most Kendo UI widgets also offer a series of keyboard controls for interacting with them. The specific keyboard shortcuts supported by each widget are provided in the following keyboard examples.
 
-- [AutoComplete](http://demos.telerik.com/kendo-ui/web/autocomplete/navigation.html)
+- [AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/keyboard-navigation)
 - [Button](https://demos.telerik.com/kendo-ui/button/keyboard-navigation)
 - [ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/keyboard-navigation)
-- [Calendar](http://demos.telerik.com/kendo-ui/web/calendar/navigation.html)
+- [Calendar](https://demos.telerik.com/kendo-ui/calendar/keyboard-navigation)
 - [ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/keyboard-navigation)
-- [ComboBox](http://demos.telerik.com/kendo-ui/web/combobox/navigation.html)
+- [ComboBox](https://demos.telerik.com/kendo-ui/combobox/keyboard-navigation)
 - [DateInput](https://demos.telerik.com/kendo-ui/dateinput/keyboard-navigation)
-- [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker/navigation.html)
-- [DateTimePicker](http://demos.telerik.com/kendo-ui/web/datetimepicker/navigation.html)
+- [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
+- [DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/keyboard-navigation)
+- [DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/keyboard-navigation)
 - [Dialog](https://demos.telerik.com/kendo-ui/dialog/keyboard-navigation)
-- [DropDownList](http://demos.telerik.com/kendo-ui/web/dropdownlist/navigation.html)
-- [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/keyboard-navigation)
-- [Editor](http://demos.telerik.com/kendo-ui/web/editor/navigation.html)
-- [Gantt](http://demos.telerik.com/kendo-ui/gantt/keyboard-navigation)
-- [Grid](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
-- [ListBox](http://demos.telerik.com/kendo-ui/listview/keyboard-navigation)
-- [ListView](http://demos.telerik.com/kendo-ui/web/listview/navigation.html)
-- [MediaPlayer](http://demos.telerik.com/kendo-ui/web/mediaplayer/navigation.html)
-- [Menu](http://demos.telerik.com/kendo-ui/web/menu/navigation.html)
+- [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/keyboard-navigation)
+- [DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/keyboard-navigation)
+- [Editor](https://demos.telerik.com/kendo-ui/editor/keyboard-navigation)
+- [Gantt](https://demos.telerik.com/kendo-ui/gantt/keyboard-navigation)
+- [Grid](https://demos.telerik.com/kendo-ui/grid/keyboard-navigation)
+- [ListBox](https://demos.telerik.com/kendo-ui/listview/keyboard-navigation)
+- [ListView](https://demos.telerik.com/kendo-ui/listview/keyboard-navigation)
+- [MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/keyboard-navigation)
+- [Menu](https://demos.telerik.com/kendo-ui/menu/keyboard-navigation)
+- [MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/keyboard-navigation)
 - [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/keyboard-navigation)
-- [NumericTextBox](http://demos.telerik.com/kendo-ui/web/numerictextbox/navigation.html)
-- [PanelBar](http://demos.telerik.com/kendo-ui/web/panelbar/navigation.html)
+- [MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/keyboard-navigation)
+- [NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/keyboard-navigation)
+- [PanelBar](https://demos.telerik.com/kendo-ui/panelbar/keyboard-navigation)
 - [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/selection)
-- [Slider](http://demos.telerik.com/kendo-ui/web/slider/navigation.html)
-- [Splitter](http://demos.telerik.com/kendo-ui/web/splitter/navigation.html)
-- [TabStrip](http://demos.telerik.com/kendo-ui/web/tabstrip/navigation.html)
-- [TimePicker](http://demos.telerik.com/kendo-ui/web/timepicker/navigation.html)
+- [Slider](https://demos.telerik.com/kendo-ui/slider/keyboard-navigation)
+- [Splitter](https://demos.telerik.com/kendo-ui/splitter/keyboard-navigation)
+- [Switch](https://demos.telerik.com/kendo-ui/switch/keyboard-navigation)
+- [TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/keyboard-navigation)
+- [TimePicker](https://demos.telerik.com/kendo-ui/timepicker/keyboard-navigation)
 - [ToolBar](https://demos.telerik.com/kendo-ui/toolbar/keyboard-navigation)
 - [TreeList](https://demos.telerik.com/kendo-ui/treelist/keyboard-navigation)
-- [TreeView](http://demos.telerik.com/kendo-ui/web/treeview/navigation.html)
-- [Window](http://demos.telerik.com/kendo-ui/web/window/navigation.html)
+- [TreeView](https://demos.telerik.com/kendo-ui/treeview/keyboard-navigation)
+- [Window](https://demos.telerik.com/kendo-ui/window/keyboard-navigation)
 
 ## In-Widget Keyboard Navigation
 

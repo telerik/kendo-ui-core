@@ -466,6 +466,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: readonly === undefined ? true : readonly,
+                    disable: false
+                });
+            }
         },
 
         enable: function(enable) {
@@ -473,6 +479,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: false,
+                    disable: !(enable = enable === undefined ? true : enable)
+                });
+            }
         },
 
         destroy: function() {

@@ -44,13 +44,13 @@ To initiate the Excel export through code, call the [`saveAsExcel`](http://docs.
 
 Through its default configuration, the Kendo UI Grid for ASP.NET Core exports the current page of the data with sorting, filtering, grouping, and aggregates applied. To export all pages, refer to [this section](#export-all-data).
 
-The Grid uses the current column order, visibility, and dimensions to generate the Excel file. It does not export the current CSS theme in the Excel file. For more information on changing the visual appearance of the Excel document, refer to [this section](#customize-the-excel-document).
+The Grid uses the current column order, visibility, and dimensions to generate the Excel file. It does not export the current CSS theme in the Excel file. For more information on changing the visual appearance of the Excel document, refer to [this section](#customize-excel-documents).
 
 > **Important**
 > * The Grid exports only data-bound columns. Template and command columns are ignored.
-> * The `Format` option is not used during export. For more information on this, refer to [this section](#column-format).
-> * The `ClientTemplate` option is not used during export. For more information on this, refer to [this section](#column-template).
-> * The `DetailTemplate` option is not used during export. For more information on this, refer to [this section](#detail-template).
+> * The `Format` option is not used during export. For more information on this, refer to [this section](#define-the-column-format).
+> * The `ClientTemplate` option is not used during export. For more information on this, refer to [this section](#set-the-column-templates).
+> * The `DetailTemplate` option is not used during export. For more information on this, refer to [this section](#use-the-detail-template).
 
 ## Common Scenarios
 

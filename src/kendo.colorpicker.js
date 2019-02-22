@@ -209,9 +209,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
         focus: function(){
-            if (this.wrapper && !this.wrapper.is("[unselectable='on']")) {
-                this.wrapper.focus();
-            }
+            this.wrapper.focus();
         },
         options: {
             name: "ColorPalette",

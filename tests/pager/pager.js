@@ -643,6 +643,17 @@
             assert.isOk(!dataSource.pageSize());
         });
 
+        it("selecting all pages from the select changes the skip in the data source", function() {
+            var pager = setup({}, { pageSizes: ["all", 1, 2]});
+            dataSource.read();
+
+            var select = pager.find(".k-pager-sizes select");
+            pager.data("kendoPager").page(2);
+            select.val("all").trigger("change");
+
+            assert.equal(dataSource.page(), 1);
+        });
+
         it("displays refresh button", function() {
             var pager = setup({}, { refresh: true });
 
