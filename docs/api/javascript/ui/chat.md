@@ -283,7 +283,6 @@ Configures the duration of the expand animation.
     });
     </script>
 
-
 ### toolbar.buttons `Array`
 
 Defines the collection of buttons to be rendered. When using only an array of strings, the string added will define the **name** option of the button.
@@ -640,6 +639,78 @@ The value of the suggested action. This is the value used as input when a sugges
             title: "Option 2",
             value: "Value 2"
         }]);
+    </script>
+
+### renderUserTypingIndicator
+
+Renders typing indicator for the specified user inside the chat. If a chat indicator is already rendered, this will add the user to the typing list.
+
+#### Parameters
+
+##### sender `Object`
+
+The configuration object containing information about the sender of the typing indicator bubble.
+
+##### sender.id `Object`
+
+The unique identifier, used to distinguish between different users for the typing indicator bubble.
+
+##### sender.name `String`
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+        $("#chat").kendoChat();
+
+        var chat = $("#chat").data("kendoChat");
+
+        chat.renderUserTypingIndicator(chat.getUser())
+    </script>
+
+### clearUserTypingIndicator
+
+Clears typing indicator for the specified user inside the chat. If a typing indicator is rendered for multiple users, this will remove the name of the specified user from the typing list.
+
+#### Parameters
+
+##### sender `Object`
+
+The configuration object containing information about the sender of the typing indicator bubble.
+
+##### sender.id `Object`
+
+The unique identifier, used to distinguish between different users for the typing indicator bubble.
+
+##### sender.name `String`
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+        $("#chat").kendoChat();
+
+        var chat = $("#chat").data("kendoChat");
+
+        chat.renderUserTypingIndicator(chat.getUser())
+        chat.clearUserTypingIndicator(chat.getUser())
+    </script>
+
+### removeTypingIndicator
+
+Removes typing indicator bubble from the chat. If a typing indicator is rendered for multiple users, this will remove the entire bubble.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+        $("#chat").kendoChat();
+
+        var chat = $("#chat").data("kendoChat");
+
+        chat.renderUserTypingIndicator({ id: "user-1", name: "User 1" });
+        chat.renderUserTypingIndicator({ id: "user-2", name: "User 2" });
+        chat.removeTypingIndicator(chat.getUser());
     </script>
 
 ### toggleToolbar

@@ -110,10 +110,11 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
 		]
 	});
 
-With "incell" (Batch) edit mode you do not need to use the command buttons for update, because the editing is initiated on cell click. Another difference with the other two edit modes are the commands in the toolbar, which include the "Save changes" and "Cancel changes" buttons for saving or canceling all changes with a single click.
+With "incell" (Batch) edit mode you do not need to use the command buttons for update, because editing is initiated on cell click. Another difference from the other two edit modes are the commands in the toolbar, which include the "Save changes" and "Cancel changes" buttons for saving or canceling all changes with a single click.
 
-Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have assigned "id". However, since the "id" is assigned within the service on "create" action, when the new record is not saved, it will not have "id". The code within the "dataBound" event ensures that the "createChild" button is removed for all new records.
-	
+Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have an assigned "id". However, since the "id" is assigned within the service on "create" action, when the new record is not saved, it will not have "id". The code within the "dataBound" event ensures that the "createChild" button is removed for all new records.
+
+> Currently, items drag and drop (`editable.move = true`) is not supported with "incell" editing in the TreeList. This is so because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. A workaround for this scenario is suggested in this [GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
 
 ## See Also
 
