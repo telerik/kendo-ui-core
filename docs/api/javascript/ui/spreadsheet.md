@@ -1322,12 +1322,62 @@ Gets the row header contextMenu instance.
 
 `kendo.ui.ContextMenu` The menu instance.
 
+#### Example - remove the Hide command for the first row in the rowHeaderContextMenu
+
+    <div id="spreadsheet"></div>
+
+    <script>
+    $(function() {
+        var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet"),
+            rowContextMenu = spreadsheet.rowHeaderContextMenu();
+
+        rowContextMenu.bind("open", function(e) {
+            var menu = e.sender;
+            var spread = $(e.target).getKendoSpreadsheet();
+            var sheet = $(e.target).getKendoSpreadsheet().activeSheet();
+            var selected = sheet.select();
+            var rowNumber = selected.topLeft.row;
+
+            if (rowNumber === 0) {
+                $('li[data-action="hide-row"]').hide();
+            } else {
+                $('li[data-action="hide-row"]').show();
+            }
+        });
+    });
+    </script>
+
 ### colHeaderContextMenu
 Gets the column header contextMenu instance.
 
 #### Returns
 
 `kendo.ui.ContextMenu` The menu instance.
+
+#### Example - remove the Hide command for the first column in the colHeaderContextMenu
+
+    <div id="spreadsheet"></div>
+
+    <script>
+    $(function() {
+        var spreadsheet = $("#spreadsheet").kendoSpreadsheet().data("kendoSpreadsheet"),
+            colContextMenu = spreadsheet.colHeaderContextMenu();
+
+        colContextMenu.bind("open", function(e) {
+            var menu = e.sender;
+            var spread = $(e.target).getKendoSpreadsheet();
+            var sheet = $(e.target).getKendoSpreadsheet().activeSheet();
+            var selected = sheet.select();
+            var colNumber = selected.topLeft.col;
+
+            if (colNumber === 0) {
+                $('li[data-action="hide-column"]').hide();
+            } else {
+                $('li[data-action="hide-column"]').show();
+            }
+        });
+    });
+    </script>
 
 ### sheets
 Returns an array with the sheets in the workbook.
