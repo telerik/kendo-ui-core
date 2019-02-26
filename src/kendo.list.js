@@ -936,15 +936,19 @@ var __meta__ = { // jshint ignore:line
             var li = this.ul.children(".k-first:first");
             var groupHeader = this.listView.content.prev(GROUPHEADER);
             var padding = 0;
+            var direction = 'right';
 
             if (groupHeader[0] && groupHeader[0].style.display !== "none") {
                 if (height !== "auto") {
                     padding = kendo.support.scrollbar();
                 }
 
-                padding += parseFloat(li.css("border-right-width"), 10) + parseFloat(li.children(".k-group").css("padding-right"), 10);
+                if(this.element.parents('.k-rtl').length) {
+                    direction = 'left';
+                }
 
-                groupHeader.css("padding-right", padding);
+                padding += parseFloat(li.css("border-" + direction + "-width"), 10) + parseFloat(li.children(".k-group").css("padding-" + direction), 10);
+                groupHeader.css("padding-" + direction, padding);
             }
         },
 
