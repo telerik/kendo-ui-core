@@ -6561,6 +6561,32 @@ If set to `true` the pager will display the refresh button. Clicking the refresh
     });
     </script>
 
+### pageable.responsive `Boolean` *(default: true)*
+
+If set to `false` the pager will not be responsive. By default the pager is responsive.
+
+#### Example - show the responsive button
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        responsive: false
+      }
+    });
+    </script>
+
 ### pageable.info `Boolean` *(default: true)*
 
 If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.

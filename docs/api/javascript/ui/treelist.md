@@ -3539,6 +3539,34 @@ If set to `true` the pager will display the refresh button. Clicking the refresh
         });
     </script>
 
+### pageable.responsive `Boolean` *(default: false)*
+
+If set to `false` the pager will not be responsive. By default the pager is responsive.
+
+#### Example - show the responsive button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                responsive: false
+            }
+        });
+    </script>
+
 ### pageable.info `Boolean` *(default: true)*
 
 If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.

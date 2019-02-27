@@ -730,5 +730,70 @@
             assert.isOk(!dataSource._pageSize);
             assert.isOk(!dataSource._take);
         });
+
+        it("no k-pager-lg/md/sm classes", function() {
+            var pager = setup();
+
+            pager.css("width", "1100px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-lg"));
+            assert.isOk(!pager.hasClass("k-pager-md"));
+            assert.isOk(!pager.hasClass("k-pager-sm"));
+        });
+
+        it("add k-pager-lg class", function() {
+            var pager = setup();
+
+            pager.css("width", "1000px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(pager.hasClass("k-pager-lg"));
+        });
+
+        it("add k-pager-md class", function() {
+            var pager = setup();
+
+            pager.css("width", "600px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(pager.hasClass("k-pager-md"));
+        });
+
+        it("add k-pager-sm class", function() {
+            var pager = setup();
+
+            pager.css("width", "450px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(pager.hasClass("k-pager-sm"));
+        });
+
+        it("no k-pager-lg class when responsive is false", function() {
+            var pager = setup({}, { responsive: false });
+
+            pager.css("width", "1000px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-lg"));
+        });
+
+        it("no k-pager-md class when responsive is false", function() {
+            var pager = setup({}, { responsive: false });
+
+            pager.css("width", "600px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-md"));
+        });
+
+        it("no k-pager-sm class when responsive is false", function() {
+            var pager = setup({}, { responsive: false });
+
+            pager.css("width", "450px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-sm"));
+        });
     });
 }());

@@ -233,6 +233,7 @@ var __meta__ = { // jshint ignore:line
             previousNext: true,
             pageSizes: false,
             refresh: false,
+            responsive: true,
             messages: {
                 allPages: "All",
                 display: "{0} - {1} of {2} items",
@@ -483,9 +484,12 @@ var __meta__ = { // jshint ignore:line
         },
 
         _getWidthSizeClass: function(width) {
-            var sizes = SIZE.split(" ");
+            var that = this,
+                sizes = SIZE.split(" ");
 
-            if (width <= 480) {
+            if (!that.options.responsive) {
+                return null;
+            } else if (width <= 480) {
                 return sizes[2];
             } else if (width <= 640) {
                 return sizes[1];

@@ -361,7 +361,7 @@ To download the Visual Studio Project, refer to [this GitHub repository]((https:
 
 ### Nested Client Template Scenarios
 
-Nesting client templates is not an out-of-the-box feature the Kendo UI MVC wrappers support. For more information on this issue, check the Grid troubleshooting section in [invalid template errors when nesting client templates]({% slug troubleshoot_gridhelper_aspnetmvc %}#invalid-template-error-when-nesting-client-templates).
+Nesting client templates is not an out-of-the-box feature the Kendo UI MVC wrappers support. For more information on this issue, check the Grid troubleshooting section in [invalid template errors when nesting client templates]({% slug knownexceptions_gridhelper_aspnetmvc %}#invalid-template-error-when-nesting-client-templates).
 
 ## See Also
 
