@@ -8,9 +8,9 @@ position: 2
 
 # HTML Structure and DOM Placement
 
-Independent from where it has been initialized (defined), the Dialog widget HTML will be appended as a child of the document `<body>` element.
+Independent from where it is initialized (defined), the HTML of the Dialog will be appended as a child of the document `<body>` element.
 
-The example below demonstrates the possible markup and a possible placement of the Dialog HTML helper:
+The following example demonstrates the possible markup and a possible placement of the Dialog HTML helper.
 
 ###### Example
 
@@ -27,7 +27,7 @@ The example below demonstrates the possible markup and a possible placement of t
         </div>
     </body>
 
-The following example demonstrates how the page markup from the previous example changes after the initialization of the Dialog, when the widget is moved to become a child of the `<body>` and its additional markup&mdash;the wrapper and the title bar&mdash;is generated.
+The following example demonstrates how the markup of the page from the previous example changes after the initialization of the Dialog when the widget is moved to become a child of the `<body>` and its additional markup (the wrapper and the title bar) is generated.
 
 ###### Example
 

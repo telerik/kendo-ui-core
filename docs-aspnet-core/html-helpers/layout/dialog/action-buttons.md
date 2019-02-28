@@ -10,11 +10,9 @@ position: 3
 
 The Dialog action buttons allow you to provide specific interaction to users.
 
-Each button has a text and an action handler attached to it. Generally, each button closes the Dialog as its last action, but you can cancel this from the custom action handler.
+Each button has a text and an action handler attached to it. Generally, each button closes the Dialog as its last action but you can cancel this from the custom action handler. The order of the values in the `Actions()` configuration method determines the order in which the action buttons are rendered in the Dialog. You can also define a button as `Primary(true)`.
 
-The order of the values in the `Actions()` configuration method determines the order in which the action buttons are rendered in the Dialog. You can also define a button as `Primary(true)`.
-
-The example below demonstrates how to set three action buttons in a Dialog with a `stretched` layout. The last button has an `Action()` event handler attached and is set as `Primary(true)`.
+The following example demonstrates how to set three action buttons in a Dialog with a `stretched` layout. The last button has an `Action()` event handler attached and is set as `Primary(true)`.
 
 ###### Example
 

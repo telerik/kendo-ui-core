@@ -8,9 +8,9 @@ position: 3
 
 # Item Properties
 
-When binding the TreeView through the `DataSource()` configuration option, each item can acquire several properties.
+When you bind the TreeView through the `DataSource()` configuration option, each item can acquire specific properties.
 
-The below JSON demonstrates the item properties that could be passed to TreeView widget:
+The following JSON example demonstrates how to pass item properties to the TreeView. You can configure the `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`DataTextField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#datatextfieldsystemstring), [`DataImageUrlField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#dataimageurlfieldsystemstring), [`DataSpriteCssClassField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#dataspritecssclassfieldsystemstring), and [`DataUrlField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#dataurlfieldsystemstring) options respectively.
 
 ###### Example
 
@@ -46,8 +46,6 @@ The below JSON demonstrates the item properties that could be passed to TreeView
             "text":"Subitem text"
         }]
     }
-
-You can configure `text`, `imageUrl`, `spriteCssClass`, and `url` fields through the [`DataTextField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#datatextfieldsystemstring), [`DataImageUrlField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#dataimageurlfieldsystemstring), [`DataSpriteCssClassField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#dataspritecssclassfieldsystemstring), and [`DataUrlField`](/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder#dataurlfieldsystemstring) options respectively.
 
 ## See Also
 

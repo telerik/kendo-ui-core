@@ -8,13 +8,13 @@ position: 2
 
 # TreeList Editing
 
-The [Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) provides build-in editing functionality in three different edit modes: PopUp, InLine and InCell(Batch).
+The [Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) provides the built-in popup, inline, and in-cell (batch) edit modes.
 
 ## Prerequisite
 
 ### Model
 
-All CRUD operations of the Kendo UI TreeList require a model with "id" and "parentId" fields and those models must be configured in the DataSource of the TreeList.
+All CRUD operations of the Kendo UI TreeList require a model with `id` and `parentId` fields and those models must be configured in the DataSource of the TreeList.
 
 ###### Example
 
@@ -28,7 +28,7 @@ All CRUD operations of the Kendo UI TreeList require a model with "id" and "pare
 
 ### Transport configuration
 
-Once the schema is configured, you need to configure the "transport" actions for "update", "destroy" and "create".
+Once the schema is configured, you need to configure the `transport` actions for `update`, `destroy`, and `create`.
 
 ###### Example
 
@@ -57,11 +57,11 @@ Once the schema is configured, you need to configure the "transport" actions for
             }
         },
 
-Important part of the CRUD operations is the response from the service, which needs to return the manipulated records, so that the TreeList could apply the changes to the DataSource accordingly. The new records should also contain the newly assigned within the service "id" value.
+An important part of the CRUD operations is the response from the service, which needs to return the manipulated records, so that the TreeList can apply the changes to the DataSource accordingly. The new records should also contain the newly assigned within the service `id` value.
 
-### PopUp and InLine Editing
+### Popup and Inline Editing
 
-To enable the PopUp and InLine edit modes you need to configure the "toolbar", so it could display "Add new record" button and you will also have to define a command column for the "Update", "Delete" and "Add child" buttons:
+To enable the popup and inline edit modes you need to configure the "toolbar", so it could display "Add new record" button and you will also have to define a command column for the "Update", "Delete" and **Add child** buttons:
 
 ###### Example
 
@@ -79,11 +79,11 @@ To enable the PopUp and InLine edit modes you need to configure the "toolbar", s
       ...
     });
 
-The only difference between the "inline" and "popup" edit modes is the position of the rendered editors. With the "popup" editing, the editors are rendered in a modal window and with the "inline" edit mode, the editors are rendered in the TR element of the edited record.
+The only difference between the inline and popup edit modes is the position of the rendered editors. With the popup editing, the editors are rendered in a modal window and with the inline edit mode, the editors are rendered in the TR element of the edited record.
 
-### InCell (Batch) Editing
+### In-Cell Editing
 
-The "incell" edit mode renders editor per field when the user clicks on a particular cell of the record. It allows multiple edits before the "Save changes" button is clicked, which could then send all changes to the service.
+The in-cell edit mode renders editor per field when the user clicks on a particular cell of the record. It allows multiple edits before the **Save changes** button is clicked, which can then send all changes to the service.
 
 ###### Example
 
@@ -110,11 +110,11 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
 		]
 	});
 
-With "incell" (Batch) edit mode you do not need to use the command buttons for update, because editing is initiated on cell click. Another difference from the other two edit modes are the commands in the toolbar, which include the "Save changes" and "Cancel changes" buttons for saving or canceling all changes with a single click.
+With in-cell (Batch) edit mode you do not need to use the command buttons for update, because editing is initiated on cell click. Another difference from the other two edit modes are the commands in the toolbar, which include the "Save changes" and "Cancel changes" buttons for saving or canceling all changes with a single click.
 
-Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have an assigned "id". However, since the "id" is assigned within the service on "create" action, when the new record is not saved, it will not have "id". The code within the "dataBound" event ensures that the "createChild" button is removed for all new records.
+Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have an assigned `id`. However, since the `id` is assigned within the service on the `create` action, when the new record is not saved, it will not have `id`. The code within the `dataBound` event ensures that the **Create child** button is removed for all new records.
 
-> Currently, items drag and drop (`editable.move = true`) is not supported with "incell" editing in the TreeList. This is so because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. A workaround for this scenario is suggested in this [GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
+> Currently, the dragging and dropping of otems (`editable.move = true`) is not supported with the in-cell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
 
 
 ## See Also

@@ -8,11 +8,11 @@ position: 2
 
 # TreeView Binding
 
-The TreeView HTML helper provides support for declarative definition of its items, local (on the server) and remote (using a DataSource configuration object) binding.
+The TreeView HTML helper provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
 
-## Declare TreeView Items
+## Declaring TreeView Items
 
-The TreeView widget allows you to declare all its items within the HTML helper declaration. Here you will find a small sample configuring a TreeView widget with three levels of hierarchy:
+The TreeView allows you to declare all its items within the HTML helper declaration.The following example demonstrates how to configure a TreeView with three levels of hierarchy.
 
 ###### Example
 
@@ -35,9 +35,9 @@ The TreeView widget allows you to declare all its items within the HTML helper d
         })
     )
 
-## TreeView Local Binding
+## Local Data Binding
 
-The TreeView could be bound locally (on the server) by passing appropriate collection to the HTML helper `BindTo()` method:
+You can bind the TreeView locally on the server by passing the appropriate collection to the HTML helper `BindTo()` method.
 
 ```Razor
 @(Html.Kendo().TreeView()
@@ -101,9 +101,9 @@ private IEnumerable<TreeViewItemModel> GetData()
 }
 ```
 
-## TreeView Remote Binding
+## Remote Data Binding
 
-The TheeView also provides support for remote binding using a `DataSource` configuration object:
+The TheeView provides support for remote data binding by using a `DataSource` configuration object.
 
 ```Razor
 @(Html.Kendo().TreeView()

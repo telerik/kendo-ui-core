@@ -28,7 +28,7 @@ Allows localization of the strings that are used in the widget.
 
 ### messages.placeholder `String` *(default: "Type a message...")*
 
-The hint displayed in the input textbox of the widget.
+The hint that is displayed in the input textbox of the widget.
 
 #### Example
 
@@ -43,11 +43,11 @@ The hint displayed in the input textbox of the widget.
 
 ### user `Object`
 
-Configures the Kendo UI Chat user information.
+Configures the user information of the Chat.
 
 ### user.iconUrl `String` *(default: "")*
 
-If set, sets the image url to be used for the user avatar icon.
+If set, sets the image URL that will be used for the user avatar icon.
 
 #### Example
 
@@ -62,7 +62,7 @@ If set, sets the image url to be used for the user avatar icon.
 
 ### user.name `String` *(default: "User")*
 
-Sets the name of the chat user.
+Sets the name of the Chat user.
 
 #### Example
 
@@ -77,7 +77,7 @@ Sets the name of the chat user.
 
 ### toolbar `Object`
 
-Configures the Kendo UI Chat toolbar.
+Configures the toolbar of the Chat.
 
 #### Example
 
@@ -95,7 +95,7 @@ Configures the Kendo UI Chat toolbar.
 
 ### toolbar.animation `Boolean|Object`
 
-Configures the toolbar toggle animation. If disabled animation will not play.
+Configures the toggle animation of the toolbar. If disabled, an animation will not be played.
 
 #### Example
 
@@ -139,7 +139,7 @@ Configures the toolbar toggle animation. If disabled animation will not play.
 
 ### toolbar.animation.collapse `Object`
 
-Configures the toolbar collapse animation.
+Configures the collapse animation of the toolbar.
 
 #### Example
 
@@ -164,7 +164,7 @@ Configures the toolbar collapse animation.
 
 ### toolbar.animation.collapse.effects `String`
 
-Configures the effects of the toolbar collapse animation.
+Configures the effects for the collapse animation of the toolbar.
 
 #### Example
 
@@ -188,7 +188,7 @@ Configures the effects of the toolbar collapse animation.
 
 ### toolbar.animation.collapse.duration `Number`
 
-Configures the duration (in miliseconds) of the toolbar collapse animation.
+Configures the duration (in milliseconds) for the collapse animation of the toolbar.
 
 #### Example
 
@@ -212,7 +212,7 @@ Configures the duration (in miliseconds) of the toolbar collapse animation.
 
 ### toolbar.animation.expand `Object`
 
-Configures the expand animation of the toolbar;
+Configures the expand animation of the toolbar.
 
 #### Example
 
@@ -285,7 +285,7 @@ Configures the duration of the expand animation.
 
 ### toolbar.buttons `Array`
 
-Defines the collection of buttons to be rendered. When using only an array of strings, the string added will define the **name** option of the button.
+Defines the collection of buttons that will be rendered. When using only an array of strings, the added string will define the `name` option of the button.
 
 #### Example
 
@@ -332,7 +332,7 @@ Defines the name of the button.
 
 ### toolbar.buttons.text `String`
 
-Defines the text to be rendered in the button.
+Defines the text that will be rendered in the button.
 
 #### Example
 
@@ -350,7 +350,7 @@ Defines the text to be rendered in the button.
 
 ### toolbar.buttons.iconClass `String`
 
-Defines the icon classes of the span rendered in the button.
+Defines the icon classes of the span that is rendered in the button.
 
 #### Example
 
@@ -426,11 +426,11 @@ Enables or disables the toggleable behavior of the toolbar.
 
 ### getUser
 
-Gets the user info associated with the chat instance
+Gets the user information that is associated with the Chat instance.
 
 #### Returns
 
-`Object` the object with the user info. Contains the auto-generated id, name and iconUrl.
+`Object` - The object with the user information. Contains the auto-generated `id`, `name`, and `iconUrl`.
 
 #### Example
 
@@ -445,13 +445,13 @@ Gets the user info associated with the chat instance
 
 ### postMessage
 
-Triggers the post event with the message, and also renders it inside the widget.
+Triggers the `post` event with the message and renders it inside the widget.
 
 #### Parameters
 
 ##### message `String`
 
-The text to send and render.
+The text that will be sent and rendered.
 
 #### Example
 
@@ -466,7 +466,7 @@ The text to send and render.
 
 ### renderAttachments
 
-Renders an attachment inside the chat. The attachments are rendered through a predefined or custom template, registered with the Chat widget.
+Renders an attachment inside the Chat. The attachments are rendered through a predefined or custom template that is registered with the Chat.
 
 #### Parameters
 
@@ -476,37 +476,42 @@ The configuration options for the attachment.
 
 ##### options.attachments `Object`
 
-An array of attachment objects.
+An array of `attachment` objects.
 
 ##### options.attachments.content `Object`
 
-The attachment properties, passed to the template to be rendered inside the chat bubble.
+The `attachment` properties that are passed to the template which will be rendered inside the Chat bubble.
 
 ##### options.attachments.contentType `String`
 
-The attachment type. This is used to determine which template is used when rendering the attachment inside the chat.
+The `attachment` type. Used to determine which template is used when rendering the attachment inside the Chat.
 
 ##### options.attachmentLayout `String`
 
-The layout to be used in rendering the attachments. Supported values are `list` and `carousel`.
+The layout that will be applied for rendering the attachments.
+
+The supported values are:
+
+* `list`
+* `carousel`
 
 ##### sender `Object`
 
-The configuration object containg information about the sender of the message bubble. This determines where the message is rendered.
+The configuration object which contains information about the sender of the message bubble. Determines where the message will be rendered.
 
 ##### sender.id `Object`
 
-The unique identifier, used to distinguish between different users in the chat.
+The unique identifier which is used to distinguish between different users in the Chat.
 
 ##### sender.name `String`
 
-The string representing the name of the sender, which is rendered before the message bubble.
+The string which represents the name of the sender and which is rendered before the message bubble.
 
 ##### sender.iconUrl `String`
 
-The url used to show the sender avatar.
+The URL that is used to show the sender avatar.
 
-#### Example - Render attachment
+#### Example - rendering an attachment
 
     <div id="chat"></div>
     <script>
@@ -529,7 +534,7 @@ The url used to show the sender avatar.
 
 ### renderMessage
 
-Renders a message bubble inside the chat.
+Renders a message bubble inside the Chat.
 
 #### Parameters
 
@@ -539,29 +544,29 @@ The configuration options for the message.
 
 ##### message.type `String`
 
-The type of the message bubble to render. Can be either `text` or `typing`.
+The type of the message bubble that will be rendered. Can be either `text` or `typing`.
 
 ##### message.text `String`
 
-The text of the message bubble. When the type is set to `typing`, this is ignored.
+The text of the message bubble. Ignored when the type is set to `typing`.
 
 ##### sender `Object`
 
-The configuration object containg information about the sender of the message buggle. This determines where the message is rendered.
+The configuration object which contains information about the sender of the message bubble. Determines where the message will be rendered.
 
 ##### sender.id `Object`
 
-The unique identifier, used to distinguish between different users in the chat.
+The unique identifier which is used to distinguish between different users in the chat.
 
 ##### sender.name `String`
 
-The string representing the name of the sender, which is rendered before the message bubble.
+The string which represents the name of the sender that is rendered before the message bubble.
 
 ##### sender.iconUrl `String`
 
-The url used to show the sender avatar.
+The URL that is used to show the sender avatar.
 
-#### Example - Render message
+#### Example - rendering a message
 
     <div id="chat"></div>
     <script>
@@ -579,7 +584,7 @@ The url used to show the sender avatar.
         });
     </script>
 
-#### Example - Render message from chat user
+#### Example - rendering a message from a chat user
 
     <div id="chat"></div>
     <script>
@@ -593,7 +598,7 @@ The url used to show the sender avatar.
         }, chat.getUser());
     </script>
 
-#### Example - Render typing indicator
+#### Example - rendering the typing indicator
 
     <div id="chat"></div>
     <script>
@@ -614,7 +619,7 @@ Renders an array of suggested actions inside the chat.
 
 ##### suggestedActions `Object`
 
-An array of suggestedAction objects.
+An array of `suggestedAction` objects.
 
 ##### suggestedActions.title `String`
 
@@ -622,7 +627,7 @@ The text which is rendered inside the suggested action bubble.
 
 ##### suggestedActions.value `String`
 
-The value of the suggested action. This is the value used as input when a suggested action is clicked.
+The value of the suggested action - the value that is used as an input when a suggested action is clicked.
 
 #### Example
 
@@ -643,17 +648,17 @@ The value of the suggested action. This is the value used as input when a sugges
 
 ### renderUserTypingIndicator
 
-Renders typing indicator for the specified user inside the chat. If a chat indicator is already rendered, this will add the user to the typing list.
+Renders the typing indicator for the specified user inside the chat. If a Chat indicator is already rendered, `renderUserTypingIndicator` will add the user to the typing list.
 
 #### Parameters
 
 ##### sender `Object`
 
-The configuration object containing information about the sender of the typing indicator bubble.
+The configuration object which contains information about the sender of the typing indicator bubble.
 
 ##### sender.id `Object`
 
-The unique identifier, used to distinguish between different users for the typing indicator bubble.
+The unique identifier which is used to distinguish between different users for the typing indicator bubble.
 
 ##### sender.name `String`
 
@@ -670,17 +675,17 @@ The unique identifier, used to distinguish between different users for the typin
 
 ### clearUserTypingIndicator
 
-Clears typing indicator for the specified user inside the chat. If a typing indicator is rendered for multiple users, this will remove the name of the specified user from the typing list.
+Clears the typing indicator for the specified user inside the chat. If a typing indicator is rendered for multiple users, `clearUserTypingIndicator` will remove the name of the specified user from the typing list.
 
 #### Parameters
 
 ##### sender `Object`
 
-The configuration object containing information about the sender of the typing indicator bubble.
+The configuration object which contains information about the sender of the typing indicator bubble.
 
 ##### sender.id `Object`
 
-The unique identifier, used to distinguish between different users for the typing indicator bubble.
+The unique identifier which is used to distinguish between different users for the typing indicator bubble.
 
 ##### sender.name `String`
 
@@ -698,7 +703,7 @@ The unique identifier, used to distinguish between different users for the typin
 
 ### removeTypingIndicator
 
-Removes typing indicator bubble from the chat. If a typing indicator is rendered for multiple users, this will remove the entire bubble.
+Removes the typing indicator bubble from the chat. If a typing indicator is rendered for multiple users, `removeTypingIndicator` will remove the entire bubble.
 
 #### Example
 
@@ -721,7 +726,7 @@ Toggles the Chat toolbar.
 
 ##### skipEffects `Boolean`
 
-If true, animation will not play.
+If set to `true`, an animation will not play.
 
 #### Example
 
@@ -746,7 +751,7 @@ If true, animation will not play.
 
 ### actionClick
 
-Fired when an action button is clicked inside an attachment template, or when a suggestedAction is clicked.
+Fired when an action button is clicked inside an attachment template or when a `suggestedAction` is clicked.
 
 #### Event Data
 
@@ -756,9 +761,9 @@ The widget instance which fired the event.
 
 ##### e.text `String`
 
-The text value of the clicked action button
+The text value of the clicked action button.
 
-#### Example - subscribe to the "actionClick" event during initialization
+#### Example - subscribing to the actionClick event during initialization
 
     <p>Click on one of the buttons to see the value</p>
     <div id="chat"></div>
@@ -790,7 +795,7 @@ The text value of the clicked action button
     }, chat.getUser());
     </script>
 
-#### Example - subscribe to the "actionClick" event after initialization
+#### Example - subscribing to the actionClick event after initialization
 
     <p>Click on one of the buttons to see the value</p>
     <div id="chat"></div>
@@ -822,7 +827,7 @@ The text value of the clicked action button
     }, chat.getUser());
     </script>
 
-#### Example - "actionClick" event triggered by suggestedAction click
+#### Example - displaying the actionClick event triggered by the suggestedAction click
 
     <p>Click on one of the buttons to see the value</p>
     <div id="chat"></div>
@@ -846,27 +851,27 @@ The text value of the clicked action button
 
 ### post
 
-Fired when a message is posted to the chat widget. This can be either through the message box, or an action button click.
+Fires when a message is posted to the Chat. Can be either through the message box, or through an action button click.
 
 #### Event Data
 
 ##### e.sender `kendo.ui.Chat`
 
-The widget instance which fired the event
+The widget instance which fired the event.
 
 ##### e.text `String`
 
-The text value that was posted
+The text value that was posted.
 
 ##### e.timestamp `Date`
 
-The current time of posting the message
+The current time of posting the message.
 
 ##### e.from `Object`
 
-The current chat user info. This contains the `id`, `name` and `iconUrl` set to the chat instance.
+The user information for the current chat. Contains the `id`, `name`, and `iconUrl` that are set to the Chat instance.
 
-#### Example - subscribe to the "post" event during initialization
+#### Example - subscribing to the post event during initialization
 
     <div id="chat"></div>
     <script>
@@ -877,7 +882,7 @@ The current chat user info. This contains the `id`, `name` and `iconUrl` set to 
     });
     </script>
 
-#### Example - subscribe to the "post" event after initialization
+#### Example - subscribing to the post event after initialization
 
     <div id="chat"></div>
     <script>
@@ -892,19 +897,19 @@ The current chat user info. This contains the `id`, `name` and `iconUrl` set to 
 
 ### sendMessage
 
-Fired when a message is posted through the chat message box.
+Fires when a message is posted through the Chat message box.
 
 #### Event Data
 
 ##### e.sender `kendo.ui.Chat`
 
-The widget instance which fired the event
+The widget instance which fired the event.
 
 ##### e.text `String`
 
-The text value that was entered in the message box
+The text value that was entered in the message box.
 
-#### Example - subscribe to the "sendMessage" event during initialization
+#### Example - subscribing to the sendMessage event during initialization
 
     <div id="chat"></div>
     <script>
@@ -915,7 +920,7 @@ The text value that was entered in the message box
     });
     </script>
 
-#### Example - subscribe to the "sendMessage" event after initialization
+#### Example - subscribing to the sendMessage event after initialization
 
     <div id="chat"></div>
     <script>
@@ -930,7 +935,7 @@ The text value that was entered in the message box
 
 ### typingEnd
 
-Fired when the user clears the chat message box, signaling that he stopped typing. The event is also triggered when the user submits the currenlty typed in message.
+Fires when the user clears the chat message box which signals that the user has stopped typing. The event is also triggered when the user submits the currently typed in message.
 
 #### Event Data
 
@@ -938,7 +943,7 @@ Fired when the user clears the chat message box, signaling that he stopped typin
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "typingEnd" event during initialization
+#### Example - subscribing to the typingEnd event during initialization
 
     <div id="chat"></div>
     <script>
@@ -949,7 +954,7 @@ The widget instance which fired the event.
     });
     </script>
 
-#### Example - subscribe to the "typingEnd" event after initialization
+#### Example - subscribing to the typingEnd event after initialization
 
     <div id="chat"></div>
     <script>
@@ -964,7 +969,7 @@ The widget instance which fired the event.
 
 ### typingStart
 
-Fired when the user starts typing in the chat message box. The event is fired only once, and not upon each keystroke.
+Fires when the user starts typing in the Chat message box. The event is fired only once and not upon each keystroke.
 
 #### Event Data
 
@@ -972,7 +977,7 @@ Fired when the user starts typing in the chat message box. The event is fired on
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "typingStart" event during initialization
+#### Example - subscribing to the typingStart event during initialization
 
     <div id="chat"></div>
     <script>
@@ -983,7 +988,7 @@ The widget instance which fired the event.
     });
     </script>
 
-#### Example - subscribe to the "typingStart" event after initialization
+#### Example - subscribing to the typingStart event after initialization
 
     <div id="chat"></div>
     <script>
@@ -998,7 +1003,7 @@ The widget instance which fired the event.
 
 ### toolClick
 
-Fired when a button from the toolbar is clicked.
+Fires when a button from the toolbar is clicked.
 
 #### Event Data
 
@@ -1012,11 +1017,11 @@ The name of the button clicked.
 
 ##### e.button `Element`
 
-The DOM elemement of the button clicked.
+The DOM element of the clicked button.
 
 ##### e.messageBox `Element`
 
-The input element of the messageBox.
+The input element of the message box.
 
 #### Example
 
@@ -1042,5 +1047,3 @@ The input element of the messageBox.
         }
     });
     </script>
-
-

@@ -10,9 +10,11 @@ position: 1
 
 The Dialog HtmlHelper extension is a server-side wrapper for the [Kendo UI Dialog](https://demos.telerik.com/kendo-ui/dialog/index) widget.
 
-The Dialog is a modal popup that brings information to the user. It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog widget is a subset of the [Kendo UI Window widget]({% slug htmlhelpers_window_aspnetcore %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
+The Dialog is a modal popup that brings information to the user. It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI Window widget]({% slug htmlhelpers_window_aspnetcore %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
 
 ## Basic Usage
+
+Usually, a Dialog is opened as a result of a user action rather than of the `load` event of the page. The [Dialog JavaScript API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog) provides methods for handling such scenarios. Basically, the widget can be initialized as non-visible and can be opened when needed.
 
 The following example demonstrates how to define the Dialog by using the Dialog HtmlHelper.
 
@@ -25,21 +27,19 @@ The following example demonstrates how to define the Dialog by using the Dialog 
         .Visible(false) //The widget will be initialized as invisible
     )
 
-Usually, a Dialog is opened as a result of a user action rather than of the `load` event of the page. The [Dialog JavaScript API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dialog) provides methods for handling such scenarios. Basically, the widget can be initialized as non-visible and can opened when needed.
-
 ## Configuration
 
 The Dialog provides default configuration options that can be set during initialization.
 
 Some of the properties that can be overridden and controlled are:
 
-* [Dialog dimensions - height and width]({% slug dimensions_dialoghelper_aspnetcore %}).
-* [Custom action buttons and their layout]({% slug action_buttons_dialoghelper_aspnetcore %}).
-* Title and **Close** buttons.
-* Animation effects and duration.
-* Modality.
-* Predefined dialogs.
-* Content.
+* [Dimensions (height and width)]({% slug dimensions_dialoghelper_aspnetcore %})
+* [Custom action buttons and button layout]({% slug action_buttons_dialoghelper_aspnetcore %})
+* Title and **Close** buttons
+* Animation effects and duration
+* Modality
+* Predefined dialogs
+* Content
 
 The following example demonstrates a basic configuration of the Dialog HtmlHelper and how to get the Dialog instance.
 
@@ -68,7 +68,9 @@ The following example demonstrates a basic configuration of the Dialog HtmlHelpe
 
 ## Event Handling
 
-You can subscribe to all Dialog [events](/api/Kendo.Mvc.UI.Fluent/DialogEventBuilder). The following example demonstrates how to subscribe to events by a handler name.
+You can subscribe to all Dialog [events](/api/Kendo.Mvc.UI.Fluent/DialogEventBuilder).
+
+The following example demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 

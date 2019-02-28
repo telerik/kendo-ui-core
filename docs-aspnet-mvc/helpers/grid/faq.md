@@ -301,7 +301,7 @@ The following example demonstrates how to send additional data in an Ajax-bound 
 
 > **Important**
 >
-> The property names of the object passed as additional data must not match property names in the ViewModel. Otherwise, the MVC binder cannot recognize which property corresponds to the ViewModel and which to the additional data object.
+> The property names of the object that are passed as additional data must not match the property names in the `ViewModel`. Otherwise, the MVC binder will not recognize which property corresponds to the `ViewModel` and which to the additional `data` object.
 
 ### How to reload data in Ajax-bound Grids?
 
