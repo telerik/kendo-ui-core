@@ -841,6 +841,29 @@
 
             body.css("margin", defaultMargin);
         });
+
+        it("Add k-animation-container-sm class to the animation container", function() {
+            popup = new Popup(div, { anchor: anchor });
+            popup.element.css("width", "110vw");
+            popup.open();
+
+            var animationContainer = popup.wrapper;
+
+            assert.isOk(animationContainer.hasClass("k-animation-container-sm"));
+        });
+
+        it("Remove k-animation-container-sm class from the animation container", function() {
+            popup = new Popup(div, { anchor: anchor });
+            popup.element.css("width", "110vw");
+            popup.open();
+            popup.close();
+            popup.element.css("width", "10vw");
+            popup.open();
+
+            var animationContainer = popup.wrapper;
+
+            assert.isOk(!animationContainer.hasClass("k-animation-container-sm"));
+        });
     });
 
     var svgWrapper;

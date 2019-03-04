@@ -44,23 +44,6 @@
         .box-shadow(@button-focused-active-shadow);
     }
 
-    // Disabled state
-    &[disabled],
-    .k-state-disabled &,
-    .k-state-disabled &:hover,
-    &.k-state-disabled,
-    &.k-state-disabled:hover {
-        color: @button-text-color;
-        border-color: @button-border-color;
-        background-color: @button-background-color;
-        .composite-background(@disabled-gradient);
-    }
-    &[disabled],
-    &.k-state-disabled,
-    &.k-state-disabled:active {
-        box-shadow: none;
-    }
-
     // Focused state
     &:focus,
     &:focus:hover,
@@ -71,6 +54,22 @@
         .box-shadow(@button-focused-shadow);
     }
 
+    // Disabled state
+    &[disabled],
+    .k-state-disabled &,
+    &.k-state-disabled {
+
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+            color: @button-text-color;
+            border-color: @button-border-color;
+            background-color: @button-background-color;
+            box-shadow: none;
+            .composite-background(@disabled-gradient);
+        }
+    }
 }
 
 
@@ -112,23 +111,6 @@
         .box-shadow(@primary-focused-active-shadow);
     }
 
-    // Disabled
-    &[disabled],
-    .k-state-disabled &,
-    .k-state-disabled &:hover,
-    &.k-state-disabled,
-    &.k-state-disabled:hover {
-        color: @primary-text-color;
-        border-color: @primary-border-color;
-        background-color: @primary-background-color;
-        box-shadow: none;
-        .composite-background(@primary-gradient);
-    }
-    &[disabled],
-    &.k-state-disabled {
-        box-shadow: none;
-    }
-
     // Focused state
     &:focus,
     &:focus:hover,
@@ -139,6 +121,21 @@
         .box-shadow(@primary-focused-shadow);
     }
 
+
+    // Disabled
+    &[disabled],
+    .k-state-disabled &,
+    &.k-state-disabled {
+
+        &,
+        &:hover {
+            color: @primary-text-color;
+            border-color: @primary-border-color;
+            background-color: @primary-background-color;
+            box-shadow: none;
+            .composite-background(@primary-gradient);
+        }
+    }
 }
 
 

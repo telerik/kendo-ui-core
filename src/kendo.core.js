@@ -1663,9 +1663,13 @@ function pad(number, digits, end) {
         var browser = support.browser,
             percentage,
             outerWidth = kendo._outerWidth,
-            outerHeight = kendo._outerHeight;
+            outerHeight = kendo._outerHeight,
+            parent = element.parent(),
+            windowOuterWidth = outerWidth(window);
 
-        if (!element.parent().hasClass("k-animation-container")) {
+        parent.removeClass("k-animation-container-sm");
+
+        if (!parent.hasClass("k-animation-container")) {
             var width = element[0].style.width,
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
@@ -1684,6 +1688,7 @@ function pad(number, digits, end) {
                              width: width,
                              height: height
                          }));
+            parent = element.parent();
 
             if (percentage) {
                 element.css({
@@ -1695,27 +1700,13 @@ function pad(number, digits, end) {
                 });
             }
         } else {
-            var wrapper = element.parent(".k-animation-container"),
-                wrapperStyle = wrapper[0].style;
+            wrapResize(element, autosize);
+        }
 
-            if (wrapper.is(":hidden")) {
-                wrapper.css({
-                    display: "",
-                    position: ""
-                });
-            }
+        if(windowOuterWidth < outerWidth(parent)){
+            parent.addClass("k-animation-container-sm");
 
-            percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
-
-            if (!percentage) {
-                wrapper.css({
-                    width: autosize ? outerWidth(element) + 1 : outerWidth(element),
-                    height: outerHeight(element),
-                    boxSizing: "content-box",
-                    mozBoxSizing: "content-box",
-                    webkitBoxSizing: "content-box"
-                });
-            }
+            wrapResize(element, autosize);
         }
 
         if (browser.msie && math.floor(browser.version) <= 7) {
@@ -1723,7 +1714,34 @@ function pad(number, digits, end) {
             element.children(".k-menu").width(element.width());
         }
 
-        return element.parent();
+        return parent;
+    }
+
+    function wrapResize(element, autosize) {
+        var percentage,
+            outerWidth = kendo._outerWidth,
+            outerHeight = kendo._outerHeight,
+            wrapper = element.parent(".k-animation-container"),
+            wrapperStyle = wrapper[0].style;
+
+        if (wrapper.is(":hidden")) {
+            wrapper.css({
+                display: "",
+                position: ""
+            });
+        }
+
+        percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
+
+        if (!percentage) {
+            wrapper.css({
+                width: autosize ? outerWidth(element) + 1 : outerWidth(element),
+                height: outerHeight(element),
+                boxSizing: "content-box",
+                mozBoxSizing: "content-box",
+                webkitBoxSizing: "content-box"
+            });
+        }
     }
 
     function deepExtend(destination) {
