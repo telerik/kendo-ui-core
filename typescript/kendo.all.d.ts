@@ -1061,6 +1061,7 @@ declare namespace kendo.data {
         shift(): any;
         slice(begin: number, end?: number): any[];
         some(callback: (item: Object, index: number, source: ObservableArray) => boolean): boolean;
+        sort(compareFn?: (a: any, b: any) => number): any[];
         splice(start: number): any[];
         splice(start: number, deleteCount: number, ...items: any[]): any[];
         toJSON(): any[];
