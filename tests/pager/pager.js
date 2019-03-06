@@ -795,5 +795,33 @@
 
             assert.isOk(!pager.hasClass("k-pager-sm"));
         });
+
+        it("currentPage li element is present when AutoBind is false", function() {
+            var dataSource = new DataSource({
+                pageSize: 1,
+                data: [1, 2, 3]
+            });
+
+            var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                dataSource: dataSource,
+                autoBind: false
+            });
+
+            assert.equal(pager.find(".k-pager-numbers .k-current-page").length, 1);
+        });
+
+        it("select li is present when AutoBind is false", function() {
+            var dataSource = new DataSource({
+                pageSize: 1,
+                data: [1, 2, 3]
+            });
+
+            var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                dataSource: dataSource,
+                autoBind: false
+            });
+
+            assert.equal(pager.find(".k-pager-numbers .k-state-selected").length, 1);
+        });
     });
 }());
