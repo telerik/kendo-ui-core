@@ -264,7 +264,7 @@ var __meta__ = { // jshint ignore:line
         focus: function(table) {
             table = table || this._table;
             this._bindTable(table);
-            table.focus();
+            table.trigger("focus");
         },
 
         min: function(value) {
@@ -993,10 +993,10 @@ var __meta__ = { // jshint ignore:line
                 value = that._view.toDateString(date),
                 disabledDate;
 
-            if (cell) {
-                cell.removeAttr(ARIA_SELECTED)
-                .removeAttr(ARIA_LABEL)
-                .removeAttr(ID);
+            if (cell && cell.length) {
+                cell[0].removeAttribute(ARIA_SELECTED);
+                cell[0].removeAttribute(ARIA_LABEL);
+                cell[0].removeAttribute(ID);
                 //.removeClass(className);
             }
 
@@ -1019,7 +1019,8 @@ var __meta__ = { // jshint ignore:line
 
             if (id) {
                 cell.attr(ID, id);
-                that._table.removeAttr("aria-activedescendant").attr("aria-activedescendant", id);
+                that._table[0].removeAttribute("aria-activedescendant");
+                that._table.attr("aria-activedescendant", id);
             }
         },
 
@@ -1113,7 +1114,7 @@ var __meta__ = { // jshint ignore:line
 
             links = element.find(".k-link")
             .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
-            .click(false);
+            .on("click", function() { return false; });
 
             that._title = links.eq(1).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateUp(); });
             that[PREVARROW] = links.eq(0).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToPast(); });

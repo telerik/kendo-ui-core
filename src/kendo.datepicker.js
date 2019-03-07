@@ -438,10 +438,11 @@ var __meta__ = { // jshint ignore:line
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
-
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
-                       .attr(ARIA_DISABLED, false)
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY);
+                }
+                element.attr(ARIA_DISABLED, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
@@ -466,6 +467,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: readonly === undefined ? true : readonly,
+                    disable: false
+                });
+            }
         },
 
         enable: function(enable) {
@@ -473,6 +480,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: false,
+                    disable: !(enable = enable === undefined ? true : enable)
+                });
+            }
         },
 
         destroy: function() {
@@ -550,7 +563,7 @@ var __meta__ = { // jshint ignore:line
             var element = this.element;
 
             if ((!support.touch || (support.mouseAndTouchPresent && !(eventType || "").match(/touch/i))) && element[0] !== activeElement()) {
-                element.focus();
+                element.trigger("focus");
             }
         },
 
@@ -744,9 +757,9 @@ var __meta__ = { // jshint ignore:line
             var cell;
             var that = this;
             var calendar = that.dateView.calendar;
-
-            that.element.removeAttr("aria-activedescendant");
-
+            if(that.element && that.element.length) {
+                that.element[0].removeAttribute("aria-activedescendant");
+            }
             if (calendar) {
                 cell = calendar._cell;
                 cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));

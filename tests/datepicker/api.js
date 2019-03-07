@@ -610,5 +610,25 @@ it("clicking on disabled date does not close the popup", function() {
     assert.equal($(".k-animation-container").css("display"), "block");
 });
 
+it("readonly calls dateinput _editable method", function() {
+    var datepicker = new DatePicker(input, {
+        dateInput: true
+    });
+    var atStub = stub(datepicker._dateInput, "_editable");
+
+    datepicker.readonly();
+    assert.equal(atStub.calls("_editable"), 1);
+});
+
+it("enable calls dateinput _editable method", function() {
+    var datepicker = new DatePicker(input, {
+        dateInput: true
+    });
+    stub(datepicker._dateInput, "_editable");
+
+    datepicker.enable();
+    assert.equal(datepicker._dateInput.calls("_editable"), 1);
+});
+
     });
 }());
