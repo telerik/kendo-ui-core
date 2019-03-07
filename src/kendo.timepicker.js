@@ -90,9 +90,11 @@ var __meta__ = { // jshint ignore:line
             if (candidate !== undefined) {
                 if (that._current) {
                     that._current
-                        .removeClass(SELECTED)
-                        .removeAttr(ARIA_SELECTED)
-                        .removeAttr(ID);
+                        .removeClass(SELECTED);
+                        if(that._current && that._current.length) {
+                            that._current[0].removeAttribute(ID);
+                            that._current[0].removeAttribute(ARIA_SELECTED);
+                        }
                 }
 
                 if (candidate) {
@@ -586,7 +588,9 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
                 active: function(current) {
-                    element.removeAttr(ARIA_ACTIVEDESCENDANT);
+                    if(element && element.length) {
+                        element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
+                    }
                     if (current) {
                         element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
@@ -696,9 +700,11 @@ var __meta__ = { // jshint ignore:line
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
-                       .attr(ARIA_DISABLED, false)
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY);
+                }
+                element.attr(ARIA_DISABLED, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
@@ -798,7 +804,7 @@ var __meta__ = { // jshint ignore:line
             that.timeView.toggle();
 
             if (!support.touch && element[0] !== activeElement()) {
-                element.focus();
+                element.trigger("focus");
             }
         },
 

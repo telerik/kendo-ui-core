@@ -288,7 +288,8 @@ var __meta__ = { // jshint ignore:line
             options = that.options,
             ignoreCase = options.ignoreCase,
             separator = that._separator(),
-            length;
+            length,
+            accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
 
             word = word || that._accessor();
 
@@ -308,7 +309,7 @@ var __meta__ = { // jshint ignore:line
                 });
 
                 that._filterSource({
-                    value: ignoreCase ? word.toLowerCase() : word,
+                    value: ignoreCase ? (accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) : word,
                     operator: options.filter,
                     field: options.dataTextField,
                     ignoreCase: ignoreCase
@@ -329,7 +330,8 @@ var __meta__ = { // jshint ignore:line
                 words = value.split(separator),
                 wordIndex = indexOfWordAtCaret(caretIdx, value, separator),
                 selectionEnd = caretIdx,
-                idx;
+                idx,
+                accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
 
             if (key == keys.BACKSPACE || key == keys.DELETE) {
                 that._last = undefined;
@@ -347,7 +349,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (caretIdx <= 0) {
-                caretIdx = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+                caretIdx = (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()).indexOf(accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) + 1;
             }
 
             idx = value.substring(0, caretIdx).lastIndexOf(separator);
@@ -356,7 +358,7 @@ var __meta__ = { // jshint ignore:line
 
             if (word) {
                 word = word.toString();
-                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                idx = (accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()).indexOf(accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase());
                 if (idx > -1) {
                     word = word.substring(idx + value.length);
 

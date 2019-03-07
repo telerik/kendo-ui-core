@@ -200,11 +200,12 @@ var __meta__ = { // jshint ignore:line
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
-
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
-                       .attr(ARIA_DISABLED, false)
-                       .on("keydown" + ns, $.proxy(that._keydown, that))
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY, false);
+                    element[0].removeAttribute(ARIA_DISABLED, false);
+                }
+                element.on("keydown" + ns, $.proxy(that._keydown, that))
                        .on("focus" + ns, function() {
                            that._inputWrapper.addClass(FOCUSED);
                        })
@@ -244,7 +245,7 @@ var __meta__ = { // jshint ignore:line
             var element = this.element;
 
             if ((!support.touch || (support.mouseAndTouchPresent && !(eventType || "").match(/touch/i))) && element[0] !== activeElement()) {
-                element.focus();
+                element.trigger("focus");
             }
         },
 
@@ -585,7 +586,9 @@ var __meta__ = { // jshint ignore:line
                         div.attr(ARIA_HIDDEN, true);
 
                         if (!timeView.popup.visible()) {
-                            element.removeAttr(ARIA_OWNS);
+                            if(element && element.length) {
+                                element[0].removeAttribute(ARIA_OWNS);
+                            }
                         }
                     }
                 },
@@ -652,7 +655,9 @@ var __meta__ = { // jshint ignore:line
                         element.attr(ARIA_EXPANDED, false);
 
                         if (!dateView.popup.visible()) {
-                            element.removeAttr(ARIA_OWNS);
+                            if(element && element.length) {
+                                element[0].removeAttribute(ARIA_OWNS);
+                            }
                         }
                     }
                 },
@@ -675,7 +680,9 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
                 active: function(current) {
-                    element.removeAttr(ARIA_ACTIVEDESCENDANT);
+                    if(element && element.length) {
+                        element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
+                    }
                     if (current) {
                         element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
@@ -776,7 +783,9 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var calendar = that.dateView.calendar;
 
-            that.element.removeAttr(ARIA_ACTIVEDESCENDANT);
+            if(that.element && that.element.length) {
+                that.element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
+            }
 
             if (calendar) {
                 cell = calendar._cell;

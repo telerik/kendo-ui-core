@@ -559,9 +559,10 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var widgetOptions = that.options;
             var ignoreCase = widgetOptions.ignoreCase;
+            var accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
 
             return {
-                value: ignoreCase ? value.toLowerCase() : value,
+                value: ignoreCase ? (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()) : value,
                 field: field,
                 operator: widgetOptions.filter,
                 ignoreCase: ignoreCase

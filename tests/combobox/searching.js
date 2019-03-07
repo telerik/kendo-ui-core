@@ -533,6 +533,26 @@ it("search method lowers case of the filter value when ignoreCase true", functio
     combobox.search("F");
 });
 
+it("search method lowers case of the filter value when ignoreCase true and correct culture set", function() {
+    combobox = new ComboBox(input, {
+        autoBind: false,
+        dataSource: {
+            transport: {
+                read: "fake url",
+                parameterMap: function(options) {
+                    assert.equal(options.filter.filters[0].value, "kı");
+                }
+            },
+            serverFiltering: true,
+            accentFoldingFiltering: "tr-TR"
+        },
+        filter: "startswith",
+        ignoreCase: true
+    });
+
+    combobox.search("KI");
+});
+
 it("do not remove default filter expression", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
@@ -1070,7 +1090,7 @@ it("resize popup on search when autoWidth is enabled", function(done) {
             }
         }
     });
-    
+
     combobox.one("open", function() {
         assert.isOk(combobox.wrapper.width() < combobox.popup.element.width());
         combobox.close();

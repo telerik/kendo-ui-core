@@ -122,6 +122,24 @@ it("current popup item completes the value of the input if suggest is enabled", 
     assert.equal(input.selectedText(), "az");
 });
 
+it("current popup item completes the value of the input if suggest is enabled and correct culture is used", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: {
+            data: ["KIZ"],
+            accentFoldingFiltering: "tr-TR"
+        },
+        suggest: true,
+        ignoreCase: true
+    });
+
+    input.focus();
+    input.type("kı");
+    autocomplete.search();
+
+    assert.equal(input.val(), "kıZ");
+    assert.equal(input.selectedText(), "Z");
+});
+
 it("current highlighted item completes the value of the input if suggest is enabled", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],

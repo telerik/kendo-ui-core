@@ -3872,7 +3872,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (options.filter) {
-                    that._filter = options.filter = that.options.accentFoldingFiltering ? $.extend({}, normalizeFilter(options.filter), { accentFoldingFiltering: that.options.accentFoldingFiltering}) : normalizeFilter(options.filter);
+                    that._filter = options.filter = (that.options.accentFoldingFiltering && !$.isEmptyObject(options.filter)) ? $.extend({}, normalizeFilter(options.filter), { accentFoldingFiltering: that.options.accentFoldingFiltering}) : normalizeFilter(options.filter);
                 }
 
                 if (options.group) {
@@ -5029,8 +5029,9 @@ var __meta__ = { // jshint ignore:line
             var fields;
             var operators;
             var filter;
+            var accentFoldingFiltering = this.options.accentFoldingFiltering;
 
-            expressions = normalizeFilter(expressions);
+            expressions = accentFoldingFiltering ? $.extend({}, normalizeFilter(expressions), { accentFoldingFiltering: accentFoldingFiltering}) : normalizeFilter(expressions);
 
             if (!expressions || expressions.filters.length === 0) {
                 this._updateHierarchicalFilter(function(){return true;});

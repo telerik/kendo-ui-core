@@ -87,6 +87,20 @@
             assert.equal(dropdownlist.selectedIndex, 1);
         });
 
+        it("search method supports a case insensitive search", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: {
+                    data: ["KIN", "KAŞ"],
+                    accentFoldingFiltering: "tr-TR"
+                },
+                ignoreCase: true
+            });
+            input.press("k");
+            input.press("ı");
+
+            assert.equal(dropdownlist.selectedIndex, 1);
+        });
+
         it("selects next item if starts with same character", function() {
             var dropdownlist = new DropDownList(input, {
                 dataSource: ["text1", "text2", "text3"]
@@ -694,7 +708,7 @@
             dropdownlist.popup.one("open", function() {
                 assert.isOk(dropdownlist.wrapper.width() < dropdownlist.popup.element.width());
                 dropdownlist.close();
-                
+
                 dropdownlist.popup.one("activate", function() {
                     assert.isOk(dropdownlist.wrapper.width() >= dropdownlist.popup.element.width());
                     done();

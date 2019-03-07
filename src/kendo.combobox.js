@@ -644,6 +644,7 @@ var __meta__ = { // jshint ignore:line
             var caretIdx = caret(element)[0];
             var key = that._last;
             var idx;
+            var accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
 
             if (key == keys.BACKSPACE || key == keys.DELETE) {
                 that._last = undefined;
@@ -661,12 +662,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (caretIdx <= 0) {
-                caretIdx = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+                caretIdx = (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()).indexOf(accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) + 1;
             }
 
             if (word) {
                 word = word.toString();
-                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                idx = (accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()).indexOf(accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase());
                 if (idx > -1) {
                     value += word.substring(idx + value.length);
                 }

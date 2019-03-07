@@ -309,7 +309,7 @@ var __meta__ = { // jshint ignore:line
 
                 $.merge(oldKeys, keys(css));
                 element
-                    .data("keys", $.unique(oldKeys))
+                    .data("keys", $.uniqueSort(oldKeys))
                     .height();
 
                 element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease).css(TRANSITION);
