@@ -2397,7 +2397,7 @@ var __meta__ = { // jshint ignore:line
             that.popup = that.element
                             .addClass("k-context-menu")
                             .kendoPopup({
-                                autosize: true,
+                                autosize: that.options.orientation === "horizontal",
                                 anchor: that.target || "body",
                                 copyAnchorStyles: that.options.copyAnchorStyles,
                                 collision: that.options.popupCollision || "fit",
