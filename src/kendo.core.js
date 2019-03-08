@@ -1753,7 +1753,7 @@ function pad(number, digits, end) {
             percentage = percentWidth || percentHeight;
 
             if (!percentWidth && (!autosize || (autosize && width) || forceWidth)) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
-            if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
+            if (!percentHeight && (!autosize || (autosize && height)) || element.is(".k-menu-horizontal.k-context-menu")) { height = outerHeight(element); }
 
             element.wrap(
                          $("<div/>")

@@ -639,6 +639,47 @@
             spacerDiv.remove();
         });
 
+        it("pin() itself should not subtract scroll without center or unpin where called", function(){
+            var spacerDiv = $(
+                "<div style='width:6000px;height:3000px'>&nbsp;</div>"
+            ).appendTo(Mocha.fixture);
+
+            $(window).scrollLeft(2000);
+            $(window).scrollTop(1000);
+
+            var initialTop,
+                initialLeft,
+                dialog = createWindow({
+                    visible: true,
+                    animation: false
+                });
+
+            initialTop = parseInt(dialog.wrapper.css("top"), 10);
+            initialLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+            dialog.pin();
+
+            finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+            assert.equal(finalTop, initialTop);
+            assert.equal(finalLeft, initialLeft);
+
+            dialog.unpin();
+            dialog.center();
+
+            initialTop = parseInt(dialog.wrapper.css("top"), 10);
+            initialLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+            dialog.pin();
+
+            finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+
+            assert.equal(finalTop, initialTop - $(window).scrollTop());
+            assert.equal(finalLeft, initialLeft - $(window).scrollLeft());
+        });
+
         it("unpin() does not affect draggable", function() {
             var dialog = createWindow({
                 visible: true,

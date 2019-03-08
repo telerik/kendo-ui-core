@@ -821,6 +821,7 @@
                     newTop = this.minTop + (this.maxTop - this.minTop) / 2;
                     newLeft = this.minLeft + (this.maxLeft - this.minLeft) / 2;
                 } else {
+                    that._scrollIsAppended = true;
                     newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.width()) / 2);
                     newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.height() - toInt(wrapper, "paddingTop")) / 2);
                 }
@@ -990,8 +991,8 @@
                     that._stopDocumentScrolling();
                 }
 
-                if(options.pinned && !that._isPinned){
-                    that.pin();
+                if(this.options.pinned && !this._isPinned){
+                    this.pin();
                 }
 
                 return that;
@@ -1006,6 +1007,7 @@
 
                 this.element.css(OVERFLOW, scrollable ? "" : "hidden");
                 kendo.resize(this.element.children());
+
                 this.trigger(ACTIVATE);
             },
 
@@ -1437,9 +1439,10 @@
                     position.top = top;
                     position.left = left;
 
-                    if (!this.containment || this.containment.css("position") !== "fixed") {
+                    if (that._scrollIsAppended && (!this.containment || this.containment.css("position") !== "fixed")) {
                         position.top -= win.scrollTop();
                         position.left -= win.scrollLeft();
+                        that._scrollIsAppended = false;
                     }
 
                     wrapper.css(extend(position, {position: "fixed"}));
@@ -1470,6 +1473,7 @@
 
                 if (!that.options.isMaximized) {
                     that._isPinned = false;
+                    that._scrollIsAppended = true;
                     that.options.pinned = false;
 
                     if (containment) {
