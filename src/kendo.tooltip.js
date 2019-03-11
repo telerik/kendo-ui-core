@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.popup" ], f);
+    define([ "./kendo.core", "./kendo.popup", "./kendo.fx" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -159,7 +159,9 @@ var __meta__ = { // jshint ignore:line
             filter: "",
             content: DEFAULTCONTENT,
             showAfter: 100,
+            hideAfter: 100,
             callout: true,
+            offset: 0,
             position: "bottom",
             showOn: "mouseenter",
             autoHide: true,
@@ -368,6 +370,8 @@ var __meta__ = { // jshint ignore:line
 
                     if (options.callout) {
                         that._positionCallout();
+                    } else {
+                        that._offset(that.options.position, that.options.offset);
                     }
 
                     this.element.removeAttr("aria-hidden");
@@ -404,8 +408,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _mouseleave: function(e) {
-            this._closePopup(e.currentTarget);
-            clearTimeout(this.timeout);
+            var that = this;
+
+            clearTimeout(that.timeout);
+
+            that.timeout = setTimeout(function() {
+                that._closePopup(e.currentTarget);
+            }, that.options.hideAfter);
         },
 
         _blur: function(e){
@@ -413,7 +422,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _closePopup: function(target){
-            if (this.popup) {
+            if (this.popup && !this.popup._hovered) {
                 this.popup.close();
             } else {
                 restoreTitle($(target));
@@ -439,17 +448,7 @@ var __meta__ = { // jshint ignore:line
                 cssClass = DIRCLASSES[popup.flipped ? REVERSE[position] : position],
                 offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2);
 
-            this.popup.element
-                .css("margin-top", "")
-                .css("margin-right", "")
-                .css("margin-bottom", "")
-                .css("margin-left", "");
-
-            if (position == "top" || position == "left") {
-                this.popup.element.css("margin-" + position, (- this.arrow.outerWidth() / 2) + "px" );
-            } else {
-                this.popup.element.css("margin-" + REVERSE[position], (this.arrow.outerWidth() / 2) + "px" );
-            }
+            that._offset(position, that.options.offset);
 
             that.arrow
                .removeClass("k-callout-n k-callout-s k-callout-w k-callout-e")
@@ -472,7 +471,19 @@ var __meta__ = { // jshint ignore:line
             DOCUMENT.off("keydown" + NS, this._documentKeyDownHandler);
 
             Widget.fn.destroy.call(this);
+        },
+
+        _offset: function(position, offsetAmount) {
+            var that = this,
+                isTopLeft = position == "top" || position == "left",
+                isFlipped = that.popup.flipped,
+                direction = (isTopLeft && isFlipped) || (!isTopLeft && !isFlipped) ? 1 : -1,
+                marginRule = isTopLeft ? "margin-" + position : "margin-" + REVERSE[position],
+                offset = (that.arrow.outerWidth() / 2) + offsetAmount;
+
+            that.popup.wrapper.css(marginRule, offset * direction + "px");
         }
+
     });
 
     kendo.ui.plugin(Tooltip);

@@ -395,6 +395,42 @@ The event on which the Tooltip will be shown. Predefined values are "mouseenter"
       });
     </script>
 
+### hideAfter `Number`*(default: 100)*
+
+Specifies the delay in milliseconds before the Tooltip is hidden.
+
+#### Example - set hide delay
+
+    <span id="target" title="Tooltip long content">
+      Some content
+    </span>
+
+    <script>
+      $(document).ready(function() {
+        $("#target").kendoTooltip({
+          hideAfter: 500
+        });
+      });
+    </script>
+
+### offset `Number`*(default: 0)*
+
+Specifies the offset in pixels between the Tooltip and the anchor. If the `callout` property is set to `true`, the offset is rendered from the callout arrow. If the `callout` property is set to `false`, the offset is rendered from the content of the Tooltip.
+
+#### Example - set the tooltip offset
+
+    <span id="target" title="Tooltip long content">
+      Some content
+    </span>
+
+    <script>
+      $(document).ready(function() {
+        $("#target").kendoTooltip({
+          offset: 10
+        });
+      });
+    </script>
+
 ## Fields
 
 ### popup `kendo.ui.Popup`

@@ -901,31 +901,29 @@
 
 // TabStrip
 
-.k-rtl .k-tabstrip-items .k-item,
-.k-rtl .k-panelbar .k-tabstrip-items .k-item
-{
-    margin-left: -1px;
-    margin-right: 0;
-}
+.k-rtl {
+    .k-tabstrip-items .k-item,
+    .k-panelbar .k-tabstrip-items .k-item {
+        margin-left: -1px;
+        margin-right: 0;
 
-.k-rtl .k-tabstrip-items .k-item .k-image,
-.k-rtl .k-tabstrip-items .k-item .k-sprite,
-.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-image,
-.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-sprite
-{
-    margin: -3px -6px 0 3px;
-}
+        .k-image,
+        .k-sprite {
+            margin: -3px -6px 0 3px;
+        }
+    }
 
-.k-rtl .k-tabstrip-prev
-{
-    left: auto;
-    right: .4em;
-}
+    .k-tabstrip-prev {
+        left: auto;
+        right: .4em;
+        transform: scaleX(-1);
+    }
 
-.k-rtl .k-tabstrip-next
-{
-    right: auto;
-    left: .4em;
+    .k-tabstrip-next {
+        right: auto;
+        left: .4em;
+        transform: scaleX(-1);
+    }
 }
 
 // ToolBar

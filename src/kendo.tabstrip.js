@@ -1099,6 +1099,8 @@ var __meta__ = { // jshint ignore:line
                     that._isRtl = kendo.support.isRtl(that.element);
                     var mouseDown = kendo.support.mobileOS ? "touchstart" : "mousedown";
                     var mouseUp = kendo.support.mobileOS ? "touchend" : "mouseup";
+                    var browser = kendo.support.browser;
+                    var isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
 
                     that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-60-left") + scrollButtonHtml("next", "k-i-arrow-60-right"));
 
@@ -1109,12 +1111,12 @@ var __meta__ = { // jshint ignore:line
 
                     scrollPrevButton.on(mouseDown + NS, function () {
                         that._nowScrollingTabs = true;
-                        that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? 1 : -1));
+                        that._scrollTabsByDelta(options.scrollable.distance * (isRtlScrollDirection ? 1 : -1));
                     });
 
                     scrollNextButton.on(mouseDown + NS, function () {
                         that._nowScrollingTabs = true;
-                        that._scrollTabsByDelta(options.scrollable.distance * (that._isRtl ? -1 : 1));
+                        that._scrollTabsByDelta(options.scrollable.distance * (isRtlScrollDirection ? -1 : 1));
                     });
 
                     scrollPrevButton.add(scrollNextButton).on(mouseUp + NS, function () {
@@ -1196,10 +1198,10 @@ var __meta__ = { // jshint ignore:line
         _toggleScrollButtons: function () {
             var that = this,
                 ul = that.tabGroup,
-                scrollLeft = ul.scrollLeft();
+                scrollLeft = kendo.scrollLeft(ul);
 
-            that._scrollPrevButton.toggle(that._isRtl ? scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1 : scrollLeft !== 0);
-            that._scrollNextButton.toggle(that._isRtl ? scrollLeft !== 0 : scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
+                that._scrollPrevButton.toggle(scrollLeft !== 0);
+                that._scrollNextButton.toggle(scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
         },
 
         deactivateTab: function (item) {

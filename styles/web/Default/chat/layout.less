@@ -409,7 +409,6 @@
 
 
 .k-chat .k-toolbar-box {
-    padding: @chat-toolbar-padding-y @chat-toolbar-padding-x;
     width: 100%;
     border-width: 1px 0 0;
     border-style: solid;
@@ -427,6 +426,13 @@
         overflow: hidden;
         // overflow-x: auto;
         scroll-behavior: smooth;
+        padding: @chat-toolbar-padding-y @chat-toolbar-padding-x;
+
+        // fix for flex container disregarding the right padding
+        &:after {
+            content: '';
+            padding-right: @chat-toolbar-padding-x;
+        }
 
         .k-button + .k-button {
             margin-left: @chat-toolbar-spacing;
