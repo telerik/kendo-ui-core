@@ -137,12 +137,13 @@ Specifies the function which will parse the field value. If not set, the default
 
 Specifies the type of the field.
 
-The available options are:
-* (Default) `"string"`
+The available dataType options are:
+* `"string"`
 * `"number"`
 * `"boolean"`
-* `"date`"
-* `"object`"
+* `"date"`
+* `"object"`
+* (Default) `"default"`
 
 ##### options.fields.fieldName.from `String`
 

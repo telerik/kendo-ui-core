@@ -1856,25 +1856,36 @@ The fields which can be used in the template are:
 * aggregates - provides access to all available aggregates, e.g. `aggregates.fieldName1.sum` or `aggregates.fieldName2.average`
 * items - the data items for current group. Returns groups if the data items are grouped (in case there are child groups)
 
+> **Important**
+>
+> To use aggregates from other fields in the `column.groupHeaderTemplate` add them to the **other** [`columns.aggregates`](#columns.aggregates).
+
 #### Example - set the group header template
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age",
-          groupHeaderTemplate: "Age: #= value # total: #= count #"
-        }
-      ],
-      dataSource: {
-        data: [
-          { name: "Jane Doe", age: 30 },
-          { name: "John Doe", age: 30 }
+     var grid = $("#grid").kendoGrid({
+        groupable: true,
+        columns: [
+            { field: "name" },
+            {
+                field: "age",
+                groupHeaderTemplate: "Age:#= value # total: #= count # Max Year: #= aggregates.year.max #",
+                aggregates: ["count"]
+            },
+            { field: "year", aggregates: ["max"] }
         ],
-        group: { field: "age", aggregates: [ { field: "age", aggregate: "count" }] }
-      }
-    });
+        dataSource: {
+            data: [
+                { name: "Jane Doe", age: 30, year: 1978 },
+                { name: "John Doe", age: 30, year: 1980 }
+            ],
+            group: {
+                field: "age", aggregates: [{ field: "age", aggregate: "count" },
+                { field: "age", aggregate: "max" }, { field: "year", aggregate: "max" }]
+            }
+        }
+    }).data("kendoGrid");
     </script>
 
 #### Example - use items field inside the group header template
