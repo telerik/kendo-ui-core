@@ -1,8 +1,8 @@
 ---
-title: Configure Background Color of Tab and Content
-description: An example demonstrating how to set the background color of the tab to the content
+title: Set Background Color of the Tab to the Content
+description: An example on how to set the background color of the tab to the content.
 type: how-to
-page_title: Same Background Color for Tab and Content  | Kendo UI TabStrip
+page_title: Set the Same Background Color for Tabs and Content  | Kendo UI TabStrip
 slug: tabstrip-color-content-background-same-tab
 tags: tabstrip, color, content, background, same, tab
 ticketid: 1364933
@@ -10,12 +10,12 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
   <td>TabStrip for Progress® Kendo UI®</td>
  </tr>
-
   <td>Product Version</td>
   <td>2019.1.115</td>
  </tr>
@@ -27,7 +27,10 @@ How can I set the background color of the content to the same color as the tab?
 
 ## Solution
 
-During the [document.ready event](http://learn.jquery.com/using-jquery-core/document-ready/), use jQuery to make a reference to the selected tab's background color.  Then, set the background color of the content.  This approach can be used in the [show event](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/show) so when a user clicks a tab, the content will match the tab's background color.
+1. During the [`document.ready` event](http://learn.jquery.com/using-jquery-core/document-ready/), use jQuery to make a reference to the background color of the selected tab.  
+1. Set the background color of the content.
+
+You can use the suggested approach in the [`show` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/show) so that when the user clicks a tab, the content will match the background color of the tab.
 
 ```dojo
     <div id="example">
@@ -61,7 +64,7 @@ During the [document.ready event](http://learn.jquery.com/using-jquery-core/docu
           var tabBackGroundColor = $(".k-tabstrip-items .k-state-active").css("background-color");
           $(".k-tabstrip .k-content.k-state-active").css("background-color", tabBackGroundColor);
         }
-        
+
         //for the initial load
         var tabBackGroundColor = $(".k-tabstrip-items .k-state-active").css("background-color");
         $(".k-tabstrip .k-content.k-state-active").css("background-color", tabBackGroundColor);
@@ -71,4 +74,4 @@ During the [document.ready event](http://learn.jquery.com/using-jquery-core/docu
 
 ## See Also
 
-* [show- Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/show)
+* [`show` API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/show)

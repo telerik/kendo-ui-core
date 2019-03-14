@@ -103,6 +103,14 @@ The following example demonstrates how to subscribe to events by a template dele
     )
 ```
 
+## Customization
+
+### Custom Switch Layout
+
+With the new Switch variables introduced in R1 2019 release, the default styling of the Switch component for each of the [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout.
+
+For more information and examples, refer to the [Custom Switch Component Layout](https://github.com/telerik/kendo-themes/wiki/Change-the-Switch-Layout) article, which demonstrates how to override the default Sass values in order to achieve any of the predefined custom layouts.
+
 ## Reference
 
 ### Existing Instances

@@ -7278,9 +7278,17 @@ Available template variables include:
 
 Set this to `true` to repeat the grid headers on each page.
 
+> **Important**
+>
+> Using a repeatHeaders requires setting [paper size](pdf.papersize)
+
 ### pdf.scale `Number` *(default: 1)*
 
 A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Scaling).
+
+> **Important**
+>
+> Using scale requires setting [paper size](pdf.papersize)
 
 ### pdf.proxyURL `String` *(default: null)*
 

@@ -18,9 +18,8 @@ See the [DataSource Overview](/framework/datasource/overview) and [Basic Usage](
 
 It allows the filtering operation to be performed considering the diacritic characters for specific language.
 
-> Since these characters are strictly specific for a given language setting the appropriate culture should be set as a value. For example "tr-TR" for Turkish, "es-ES for Spanish or "fr-FR" for French language.
-
-> Due to specifics of the case insensitive search only one language can be used to filter your data. For example if you mix English and Turkish in the data some unexpected behavior can be observed.
+> * Since these characters are strictly specific for a specific language, setting the appropriate culture has to be set as a value. For example, `tr-TR` for Turkish, `es-ES` for Spanish, or `fr-FR` for French.
+> * Due to the specifics of the case-insensitive search, only one language can be used to filter your data. For example, if you mix English and Turkish in the data, you may observe unexpected behavior.
 
 Introduced in the Kendo UI 2019 R1 SP1 (2019.1.220) release.
 

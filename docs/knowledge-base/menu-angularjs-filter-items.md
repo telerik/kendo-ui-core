@@ -24,11 +24,11 @@ component: menu
 
 ## Description
 
-I have an application that needs to have an angular filter function for menu items.
+How can I have an Angular filter function for the Menu items?
 
 ## Solution
 
-Use the text property of the menu item in the dataSource.
+In the `dataSource`, use the `text` property of the Menu item.
 
 ```
     <div class="demo-section k-content" ng-controller="MyCtrl">

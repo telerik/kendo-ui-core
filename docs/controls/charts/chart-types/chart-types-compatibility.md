@@ -1,16 +1,22 @@
 ---
 title: Series Compatibility
-page_title: Series Compatibility Table | Kendo UI Charts
-description: A list of Chart series and the compatibility between them
+page_title: Series Compatibility | Kendo UI Charts
+description: Refer to the list of the Chart series that are compatible between each other.
 slug: chart_types_compatibility
 position: 10
 ---
 
 # Series Compatibility
 
-In most cases, you can put multiple series in a single Chart. However, not all series types can be combined in a single Chart plot area. The main indicator of series compatibility is the type of axes they use to display their values. There are categorical series that rely on one category and one value axis (Line, Bar, Area), XY-series that use x-axis and y-axis (Scatter, Scatter Line, Bubble) and so on. Another indicator of series compatibility is their direction&mdash;you cannot combine Column and Bar series, or Column and Vertical Line series, and so on. Some series have a specific layout that cannot be combined with any other series type.
+Your project might require you to use multiple series in a single Kendo UI Chart.
 
-The following table lists the series types supported by the Chart and what other series types they can be combined with.
+However, not all Chart series types can be combined in a single Chart plot area.
+
+The main indicator for series compatibility is the type of axes the series use to display their values. For example, specific categorical series rely on a single category and a single value axis (Line, Bar, Area), XY series use x and y axes (Scatter, Scatter Line, Bubble), and so on.
+
+Another indicator of series compatibility is the direction of the series&mdash;for example, you cannot combine Column and Bar series, or Column and Vertical Line series. Some series have a specific layout that cannot be combined with any other series type.
+
+The following table lists the series types supported by the Chart and demonstrates their compatibility with each other.
 
 | Series             | Compatible Series Types |
 | :---                  | :---              |
@@ -44,4 +50,3 @@ The following table lists the series types supported by the Chart and what other
 | [Vertical Line](https://demos.telerik.com/kendo-ui/line-charts/index)          | Bar, Bullet, Horizontal Waterfall, Range Bar, Vertical Area, Vertical Box Plot, Vertical Line, Vertical Range Area |
 | [Vertical Range Area](https://demos.telerik.com/kendo-ui/range-area-charts/index)          | Bar, Bullet, Horizontal Waterfall, Range Bar, Vertical Area, Vertical Box Plot, Vertical Range Area |
 | [Waterfall](https://demos.telerik.com/kendo-ui/waterfall-charts/index)          | Area, Line, Waterfall |
-

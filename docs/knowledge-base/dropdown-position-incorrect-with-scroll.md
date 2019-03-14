@@ -1,16 +1,15 @@
 ---
-title: Incorrect Drop Down Position with jQuery 2
-description: When the page is scrolled, the dropdown position is incorrect and is detached from the element. This is how to fix it.
+title: Incorrect Drop-Down Position with jQuery 2
+description: When the page is scrolled, the position of the drop-down is incorrect and is detached from the element.
 type: troubleshooting
-page_title: Incorrect dropdown position with scrolled page
+page_title: Incorrect Drop-Down Position with Scrolled Pages | Kendo UI for jQuery
 slug: dropdown-position-incorrect-with-scroll
-position: 
-tags: 
 ticketid: 1398729, 1387564
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -18,22 +17,20 @@ res_type: kb
 	</tr>
 </table>
 
-
 ## Description
-When the page is scrolled down, the dropdown position is incorrect - it does not consider the page scroll position and is offset (detached) from its element by roughly the scroll distance.
 
-This issue affects various widgets that have dropdowns - combo box, date picker, dropdownlist, multiselect, etc.
+When the page is scrolled down, the drop-down position is incorrect&mdash;it does not consider the page scroll position and is detached from its element by roughly the scroll distance. This issue affects widgets that contain dropdowns such as the Kendo UI ComboBox, DatePicker, DropDownList, Multiselect, and so on.
 
-Example of the problem:
+**Table 1: A demonstration of the issue**
 
 ![](images/dropdown-position-problem-jquery-2.png)
 
-## Cause\Possible Cause(s)
-The problem stems from jQuery v2 which has a positioning bug in this scenario. While it was logged initially for IE, it seems to also affect Chrome. You can read more about it in the following GitHub issues:
+## Cause
 
+The cause of the issue is jQuery version 2 which has a positioning bug in this scenario. While it was logged initially for IE, it seems to also affect Chrome. For more information, refer to the following GitHub issues:
 * [https://github.com/jquery/jquery/issues/2897](https://github.com/jquery/jquery/issues/2897)
 * [https://github.com/KidSysco/jquery-ui-month-picker/issues/40](https://github.com/jquery/jquery/issues/2897)
 
-
 ## Solution
-The solution is to upgrade to jQuery 3.3.1 where the bug is fixed.
+
+Upgrade to jQuery 3.3.1 where the bug is fixed.

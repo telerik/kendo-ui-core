@@ -126,7 +126,7 @@ When the Grid is created from an existing table, you can define the following `c
 * The `id` attributes define the id of the columns.
 * The `data-field` attributes define the names of the data fields.
 * The `width` styles when applied to the respective `<col>` elements set the width of the columns.
-* The `data-type` attributes defines the data types. See all data types [`here`](/controls/data-management/grid/editing#datatypes).
+* The `data-type` attributes define the data types. For a list of all available data types, refer to the [article on editing](/controls/data-management/grid/editing#datatypes).
 * The `data-template` attributes set the column templates.
 * The `data-menu` attributes enable or disable the column menu.
 * The `data-sortable` attributes enable or disable sorting.

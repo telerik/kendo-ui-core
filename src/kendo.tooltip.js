@@ -479,7 +479,7 @@ var __meta__ = { // jshint ignore:line
                 isFlipped = that.popup.flipped,
                 direction = (isTopLeft && isFlipped) || (!isTopLeft && !isFlipped) ? 1 : -1,
                 marginRule = isTopLeft ? "margin-" + position : "margin-" + REVERSE[position],
-                offset = (that.arrow.outerWidth() / 2) + offsetAmount;
+                offset = (kendo._outerWidth(that.arrow) / 2) + offsetAmount;
 
             that.popup.wrapper.css(marginRule, offset * direction + "px");
         }
