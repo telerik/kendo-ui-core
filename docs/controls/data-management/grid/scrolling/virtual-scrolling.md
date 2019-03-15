@@ -10,6 +10,10 @@ position: 2
 
 Virtual scrolling is an alternative to paging.
 
+For runnable examples, refer to:
+* [Demo on virtualization of local data by the Grid](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data)
+* [Demo on virtualization of remote data by the Grid](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data)
+
 ## Getting Started
 
 When virtual scrolling is enabled, the Grid loads data from its remote data source while the user scrolls vertically.
@@ -20,10 +24,10 @@ When virtual scrolling is enabled, the Grid loads data from its remote data sour
         scrollable: {
             virtual: true
         },
-        // other configuration
+        // Other configuration.
     });
 
-When virtual scrolling is applied, the HTML output is different from the standard scrolling functionality.
+In virtual scrolling, the HTML output is different from the standard scrolling functionality&mdash;the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` which affects scenarios when the data rows have to be manually scrolled to a particular position.
 
 ###### Example
 
@@ -43,14 +47,19 @@ When virtual scrolling is applied, the HTML output is different from the standar
         </div>
     </div>
 
-When using virtual scrolling, the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows have to be manually scrolled to a particular position.
+When the user scrolls a Grid in its virtual-scrolling mode, the Grid renders the table rows for the reached scroll position on the fly. If the Gris uses local data or if its remote data has already been loaded and cached, the rendering rate and performance of the widget depend on:
+* The page size.
+* The Grid height.
+* The scrolling speed.
+* The total number of data items.
 
-Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
+If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, reduce the page size and increase the Grid height to improve the scrolling performance.
 
-To ensure that all table rows have the same heights, use either of the following options:
+## Setting the Scrollbar
 
-* Disable text wrapping.
-* Set an explicit row height that is large enough (as demonstrated in the following example).
+Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior such as an inability to scroll to the last rows on the last page. To ensure that all table rows have the same heights, use either of the following options:
+* Disable text wrapping, or
+* Set an explicit, large-enough row height as demonstrated in the following example.
 
 ###### Example
 
@@ -59,26 +68,20 @@ To ensure that all table rows have the same heights, use either of the following
         height: 3em;
     }
 
-    /* or */
+    // or
 
     .k-virtual-scrollable-wrap td
     {
         white-space: nowrap;
     }
 
-<!--*-->
-On mobile, where a scrollbar that can be grabbed and dragged is not visible, virtual scrolling of a large number of data items (for example thousands) might hinder the easy access to all table rows, because the large number of data items will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items (for example, less than 200) does not make much sense either. Virtual scrolling on touch devices relies on drag-and-drop events, which are slower than native scrolling. This might lead to performance issues.
+## Using on Mobile
 
-When a virtualized Grid is scrolled, it renders the table rows for the reached scroll position on the fly. If local data is used or if the remote data has already been loaded and cached, the rendering rate and performance depend on:
+On mobile devices where a scrollbar that can be grabbed and dragged is not visible, virtual scrolling of a large number of data items (for example thousands) might hinder the easy access to all table rows because the large number of data items will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items (for example, less than 200) does not make much sense. Virtual scrolling on touch devices relies on drag-and-drop events, which are slower than native scrolling. This might lead to performance issues.
 
-* The page size.
-* The Grid height.
-* The scrolling speed.
-* The total number of data items.
+## Known Limitations
 
-If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, consider reducing the page size and increasing the Grid height to improve the scrolling performance.
-
-## Limitations
+> When virtual scrolling is not supported or recommended and depending on the number of data items, either revert to standard paging or to non-virtual scrolling without paging.
 
 * Horizontal scrolling is not virtualized.
 * Either enable virtual scrolling or paging. Do not apply both features at the same time.
@@ -94,9 +97,9 @@ If the total number of items is large and the scrolling is fast, the table of th
 * When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.
 * The new [`persistSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) can work with the single selection functionality by using the following [example]({% slug grid-virtual-scrolling-with-persist-single-selection %}). The multiple selection functionality is not recommended as the old page is removed from the DOM when scrolling occurs. This can break the selection as the DOM elements do not exist after the scrolling reaches the new page.
 
-When virtual scrolling is not supported or recommended, depending on the number of data items either revert to standard paging or to non-virtual scrolling without paging.
-
 ## See Also
 
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [Virtualization of Local Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data)
+* [Virtualization of Remote Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data)
 * [Kendo UI Knowledge Base](/knowledge-base)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

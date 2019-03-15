@@ -1,23 +1,56 @@
 ---
-title: Remote Data Binding
-page_title: jQuery Grid Documentation | Remote Data Binding | Kendo UI
+title: Remote Data
+page_title: jQuery Grid Documentation | Remote Data | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI featuring a built-in DataSource which allows you to bind the Grid to remote data."
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid
 position: 3
 ---
 
-# Remote Data Binding
+# Remote Data
 
-The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) features a rapid templating engine and a built-in DataSource, which allow you to set up the widget very quickly and use it in your project.
+The Kendo UI Grid provides a templating engine and a built-in DataSource which allow you to quickly set up and implement the data-binding functionality.
 
-## The Procedure
+## Getting Started
 
-To bind the Grid to remote data, provide the data source configuration. For the sake of demonstrating the approach, the examples in this article use the popular Flickr public feed.
+To bind the Grid to remote data, specify the `dataSource` option. You can either create the data source outside the widget, or pass it in it. If multiple widgets are bound to the same data set, you have to create the data source as an object that you can refer to in different widgets. If the Grid is the only item that is bound to the data, create it inline.
 
-### Supply the Remote Endpoint
+###### Example
 
-Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid. To do that, define the `dataSource` of the widget and supply the remote endpoint.
+    $("#grid").kendoGrid({
+         dataSource: {
+             transport: {
+                 read: "/Home/People.json"
+             },
+             schema: {
+                 data: "data"
+             }
+         }
+    });
+
+## Configuring the Data Source
+
+To configure the data source of the Grid:
+
+1. [Supply the remote endpoint](#supplying-the-remote-endpoint)
+1. [Adding the data](#adding-the-data)
+1. [Handling visualization](#handling-visualization)
+1. [Setting the row template](#setting-the-row-template)
+
+### Supplying the Remote Endpoint
+
+Kendo UI provides a [data-binding framework](http://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid by defining the `dataSource` of the widget and supplying the remote endpoint.
+
+The following example demonstrates how to implement the suggested approach. In the example:
+
+* The `dataSource` creates a new Kendo UI DataSource and assigns it as the data source for the Grid.
+* The `transport` defines the way you will communicate with the remote data source.
+* The `url` points to the location of the data to which you want to bind the widget.
+* The `data` lists additional URL parameters that need to be sent to the remote endpoint.
+* The `dataType` indicates the format of the response in which the data source is expected to be (JSONP in the example). JSONP is a way of returning JSON from a cross-browser request without getting blocked. It wraps the JSON response in a callback to intentionally mislead the browser&mdash;however, it is not recommended to do so unless you are fully aware of the containing data.
+* The `schema` indicates to the Grid what the schema of the response is.
+* The `data` functions as the JSON element that will be repeated&mdash;based on this element, Kendo UI binds each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
+* The `model` describes the structure of the data. By using it, you can specify the data type of each field in the data for proper handling as well as, when needed, explicitly state which is the unique id field.
 
 ###### Example
 
@@ -57,22 +90,11 @@ Kendo UI provides a powerful [data binding framework](http://demos.telerik.com/k
     </script>   
 ```
 
-**Explanation of the previous example**
+### Adding the Data
 
-* The `dataSource` creates a new Kendo UI DataSource and assigns it as the data source for the Grid.
-* The `transport` defines the way you will communicate with the remote data source.
-* The `url` points the location of the data you want to bind the widget to.
-* The `data` lists additional url parameters that need to be sent to the remote point.
-* The `dataType` indicates the format of the response in which the data source is expected to be&mdash;JSONP in the example. JSONP is a way of returning JSON from a cross-browser request without getting blocked. It basically wraps the JSON response in a callback to intentionally mislead the browser. It is not recommended to do so unless you fully trust your data.
-* The `schema` indicates to the Grid what the schema of the response is.
-* The `data` functions as the JSON element to repeat on&mdash;Kendo UI looks for this element to bind each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
-* The `model` describes the structure of the data. Using it, you can specify the data type of each field in the data for proper handling, as well as explicitly state which is the unique id field when needed.
+The previous example renders a Grid with auto-generated columns with a column for each field in the data items. To display only the needed fields in the Grid, provide a `columns` list and specify which element of the `items` array in the server response has to be shown in each particular column.
 
-### Add the Data
-
-The previous example renders a Grid with auto-generated columns&mdash;a column for each field in the data items. To display only the needed fields in the Grid widget, provide a `columns` list and specify which element of the `items` array in the server response has to be shown in each particular column.
-
-The following example demonstrates how to specify the `field` attribute in the column array in such a way that the Grid displays the required data from the response. The columns also have a `title` property, which is used to provide more user-friendly header titles for the columns.
+The following example demonstrates how to specify the `field` attribute in the column array so that the Grid displays the required data from the response. The columns also have a `title` property which provides more user-friendly header titles for the columns.
 
 ###### Example
 
@@ -119,11 +141,11 @@ The following example demonstrates how to specify the `field` attribute in the c
 
 ```
 
-### Handle Visualization
+### Handling Visualization
 
-Instead of showing an image in Image column, the Grid renders the string output of a JavaScript object. Also, the date does not appear in a user-friendly format.
+Instead of showing an image in the **Image** column, the Grid renders the string output of a JavaScript object and, also, the date does not appear in a user-friendly format.
 
-The following example demonstrates how to indicate to the Grid the way you want the widget to display the Image column by using an inline `template` for the image. The date is properly formatted using the column `format` option.
+The following example demonstrates how to indicate to the Grid the way you want the widget to display the **Image** column by using an inline `template` for the image. The date is properly formatted by using the `format` option of the column.
 
 ###### Example
 
@@ -169,11 +191,13 @@ The following example demonstrates how to indicate to the Grid the way you want 
     </script>
 ```
 
-### Set the Row Template
+### Setting the Row Template
 
-You may want to display more complex templates for the columns in the Grid&mdash;for example, multiple field values in a single column&mdash;while the content of the other columns may need to be iterated to generate the template output. In such scenarios, you can use `rowTemplate` to describe the structure of the entire row inside a single template.
+You can display more complex templates for the columns in the Grid (for example, multiple field values in a single column) while the content of the other columns is iterated to generate the template output. In such scenarios, use `rowTemplate` to describe the structure of the entire row inside a single template.
 
-The following example demonstrates how to fully customize the Grid by applying additional styles to it. Note that the number of `td` elements in the template matches the number of columns in the Grid definition.
+The following example demonstrates how to fully customize the Grid by applying additional styles to it. The number of the `td` elements in the template matches the number of columns in the Grid definition.
+
+> The `html` code in the following example displays special script blocks which contain the templating syntax for the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}). The JavaScript that is used is also mixed with the HTML content and the syntax of the templates is similar to the syntax that is applied in the creation of a PHP, Razor, or other server-side templating engine.
 
 ###### Example
 
@@ -273,20 +297,14 @@ The following example demonstrates how to fully customize the Grid by applying a
     </style>
 ```
 
-> **Important**  
->
-> The `html` code in the last example displays special script blocks which contain the templating syntax for the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}). The JavaScript that is used is also mixed with the `html` content and the syntax of the templates is similar to the syntax that is applied in the creation of a PHP, Razor, or other server-side templating engine.
-
 ## See Also
 
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
-* [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
-* [Localization of Messages in the Grid]({% slug localization_kendoui_grid_widget %})
-* [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Export of the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
-* [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
-* [How-To Examples]({% slug howto_bindto_telerik_backend_services_grid %})
+* [Remote Data Binding of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/remote-data-binding)
+* [Binding the Grid to Kinvey Backend Services (Demo)](https://demos.telerik.com/kendo-ui/grid/kinvey)
+* [Binding the Grid to GraphQL Services (Demo)](https://demos.telerik.com/kendo-ui/grid/graphql)
+* [Binding the Grid to SignalR (Demo)](https://demos.telerik.com/kendo-ui/grid/signalr)
+* [Binding the Grid to Web Socket (Demo)](https://demos.telerik.com/kendo-ui/grid/web-socket)
+* [Binding the Grid over MVVM (Demo)](https://demos.telerik.com/kendo-ui/grid/mvvm)
+* [Working with the Grid Offline (Demo)](https://demos.telerik.com/kendo-ui/grid/offline)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

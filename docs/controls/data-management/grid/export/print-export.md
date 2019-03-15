@@ -2,31 +2,30 @@
 title: Printing
 page_title: jQuery Grid Documentation | Printing | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI allowing you to select only the Grid content on a page for printing."
+previous_url: /print-export
 slug: printing_kendoui_grid
-position: 12
+position: 3
 ---
 
 # Printing
 
-In most cases, the Grid is not the only content on a page. Yet, you might want to print only the Grid.
+Even though the content of the Grid might not be the only content on a page, the Grid provides options to ignore the rest of the page and print only its contents.
 
-To achieve that, use either of these options:
-
+To print only the Grid from a page, use either of the following approaches:
 * Print the existing page and hide the irrelevant content with print CSS.
 * Print a separate web page with only the Grid on it.
 
-### Print Existing Web Pages
+### Printing Existing Web Pages
 
-To print only the Grid as part of an existing web page, use a print stylesheet to hide the parts of the page that you do not need. The exact print CSS code will depend on the existing page content.
+To print only the Grid as part of an existing web page, use a print stylesheet to hide the parts of the page that you do not need. The exact CSS for printing will depend on the existing page content.
 
-### Print New Web Pages
+### Printing New Web Pages
 
-The following example demonstrates how to retrieve the HTML of the Grid, inject it in a new browser window, and print the new page. This approach also addresses some other important things you need to consider:
-
-* If the Grid is scrollable, some rows or columns may not be visible on the printed paper. So, the Grid height and scrollability are disabled on the print-friendly page.
-* Depending on the column width, some of the cell content may be clipped and not fully visible. This issue is resolved by forcing an automatic `table-layout` to the Grid table, which disables the ellipsis (`...`).
-* If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug appearance_kendoui_grid_widget %}#scrolling). Because the browser is not able to understand the relationship between the two Grid tables, it will not repeat the header row on top of every printed page. The following example shows how to address this issue by cloning the header table row into the data table.
-* On a side note, when printing a Grid with locked (frozen) columns, it is possible for the resulting columns or rows to get misaligned, or for the overall layout to get broken. In such cases, it is advisable to use a separate print-friendly Grid instance with no frozen columns.
+The following example demonstrates how to retrieve the HTML of the Grid, inject it in a new browser window, and print the new page. This approach also addresses the following important issues:
+* If the Grid is scrollable, some rows or columns may not be visible on the printed paper. Therefore, the Grid height and scrollability are disabled on the print-friendly page.
+* Depending on the column width, some of the cell content may be clipped and not fully visible. This issue is resolved by forcing an automatic `table-layout` to the Grid table which disables the ellipsis (`...`).
+* If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug scrolling_kendoui_grid_widget %}). Because the browser does not relate the two Grid tables, it will not repeat the header row on top of every printed page. The following example demonstrates how to address this issue by cloning the header table row into the data table.
+* When you print a Grid with locked (frozen) columns, it is possible that the resulting columns or rows get misaligned or that the overall layout gets broken. In such cases, use a separate print-friendly Grid instance with no frozen columns.
 
 ###### Example
 
@@ -126,14 +125,12 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 
 ## See Also
 
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Editing Functionality of the Grid]({% slug editing_kendoui_grid_widget %})
 * [Remote Data Binding of the Grid]({% slug remote_data_binding_grid %})
-* [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
+* [Rendering and Dimensions of the Grid]({% slug width_kendoui_grid_widget %})
 * [Localization of Messages in the Grid]({% slug localization_kendoui_grid_widget %})
 * [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})
 * [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
 * [Export of the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
-* [How-To Examples]({% slug howto_bindto_telerik_backend_services_grid %})
 * [Knowledge Base Section](/knowledge-base)

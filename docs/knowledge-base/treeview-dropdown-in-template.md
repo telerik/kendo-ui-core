@@ -65,7 +65,7 @@ How can I place DropDownLists in the `<script>` of the TreeView template which w
       }
     }),
     files: kendo.observableHierarchy([
-      { name: "My Web Site", id: "one", expanded: true, items: [
+      { name: "My Website", id: "one", expanded: true, items: [
         { name: "images", id: "two", expanded: true, items: [
           { name: "logo.png", id: "three" },
           { name: "my-photo.jpg", id: "four" }

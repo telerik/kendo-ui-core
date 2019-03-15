@@ -534,7 +534,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 1** Create a new PHP file called `products.php`. This file will perform CRUD data operations.
 
-**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your web site root and include it.
+**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
 ###### Example
 

@@ -13,7 +13,7 @@ slug: howto_export_all_pagesto_pdf_grid
 
 ## See Also
 
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
 * [How to Export All Pages and Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})
 * [How to Export Multiple Pages with Variable Row Height]({% slug howto_export_multiple_pageswith_variable_rowheight_pdf_grid %})

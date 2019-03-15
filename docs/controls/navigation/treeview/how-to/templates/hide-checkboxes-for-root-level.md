@@ -34,7 +34,7 @@ The following example demonstrates how to achieve this behavior by using the `ch
               { id: 5, text: "logo.png", spriteCssClass: "image" }
             ]
             },
-            { id: 6, text: "New Web Site", expanded: true, spriteCssClass: "folder", items: [
+            { id: 6, text: "New Website", expanded: true, spriteCssClass: "folder", items: [
               { id: 7, text: "mockup.jpg", spriteCssClass: "image" },
               { id: 8, text: "Research.pdf", spriteCssClass: "pdf" },
             ] }

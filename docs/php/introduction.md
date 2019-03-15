@@ -9,7 +9,7 @@ position: 1
 
 # Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP
 
-[Progress Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP web sites.
+[Progress Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP websites.
 
 ## Getting Started
 
@@ -27,21 +27,21 @@ You can download Progress Telerik UI for PHP from the [official download page](h
 * `/styles`&mdash;The minified CSS files and background images used by the themes.
 * `/src`&mdash;The JavaScript and CSS source files. Not available in the trial version.
 * `/wrappers/php/lib/Kendo/`&mdash;The PHP files required to use Progress Telerik UI for PHP.
-* `/wrappers/php/`&mdash;The sample PHP web site.
+* `/wrappers/php/`&mdash;The sample PHP website.
 
 ## Sample Application Setup
 
 ### Prerequisites
 
-You can find a sample PHP web site in the `/wrappers/php/` directory of the Progress Telerik UI for PHP distribution. To run the web site, copy this directory to your web root. Then navigate to `index.php`.
+You can find a sample PHP website in the `/wrappers/php/` directory of the Progress Telerik UI for PHP distribution. To run the website, copy this directory to your web root. Then navigate to `index.php`.
 
 ### Configuration
 
-To use Progress Telerik UI for PHP in your PHP web site, follow the steps below:
+To use Progress Telerik UI for PHP in your PHP website, follow the steps below:
 
-**Step 1** Copy `/wrappers/php/lib/Kendo` to your web site root, e.g. to your `lib` directory.
+**Step 1** Copy `/wrappers/php/lib/Kendo` to your website root, e.g. to your `lib` directory.
 
-**Step 2** Copy the Kendo UI JavaScript and CSS files from `/js` and `/styles` to your web site root. If you prefer to use [Kendo UI CDN Service]({% slug kendoui_cdn_services_installation %}), skip this step and the following ones, and check the [article on the JavaScript dependencies]({% slug javascript_prerequisites_kendoui_installation %}).
+**Step 2** Copy the Kendo UI JavaScript and CSS files from `/js` and `/styles` to your website root. If you prefer to use [Kendo UI CDN Service]({% slug kendoui_cdn_services_installation %}), skip this step and the following ones, and check the [article on the JavaScript dependencies]({% slug javascript_prerequisites_kendoui_installation %}).
 
 **Step 3** Include the Kendo UI JavaScript and CSS files in your PHP page.
 

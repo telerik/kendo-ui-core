@@ -51,7 +51,7 @@ There are two ways you can contribute to the public Kendo UI documentation: eith
 
 ## Local Generation
 
-You can generate a static web site from the Kendo UI the documentation and browse it locally.
+You can generate a static website from the Kendo UI the documentation and browse it locally.
 
 1. Clone the repository `git clone git@github.com:telerik/kendo-ui-core.git`
 2. Run `bundle install` (you must have ruby and bundler installed beforehand)

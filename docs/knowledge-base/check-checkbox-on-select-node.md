@@ -55,7 +55,7 @@ In the handler of the TreeView `select` event, find the checkbox of the selected
                         ]
                     },
                     {
-                        id: 6, text: "New Web Site", expanded: true, items: [
+                        id: 6, text: "New Website", expanded: true, items: [
                             { id: 7, text: "mockup.jpg" },
                             { id: 8, text: "Research.pdf"},
                         ]

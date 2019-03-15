@@ -69,7 +69,7 @@ The following example demonstrates the jQuery and MVC initialization.
 					]
 				},
 				{
-					id: 6, text: "New Web Site", expanded: true, spriteCssClass: "folder", items: [
+					id: 6, text: "New Website", expanded: true, spriteCssClass: "folder", items: [
 						{ id: 7, text: "mockup.jpg", spriteCssClass: "image" },
 						{ id: 8, text: "Research.pdf", spriteCssClass: "pdf" },
 					]
@@ -114,7 +114,7 @@ The following example demonstrates the jQuery and MVC initialization.
 							project.Add().Text("logo.png").Id("5").SpriteCssClasses("image");
 						});
 
-					root.Add().Text("New Web Site").Id("6")
+					root.Add().Text("New Website").Id("6")
 						.Expanded(true)
 						.SpriteCssClasses("folder")
 						.Items(item =>

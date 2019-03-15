@@ -13,7 +13,7 @@ As of the Kendo UI Q1 2014 release, the [Kendo UI hybrid for mobile devices](htt
 
 ## Basic Usage
 
-This approach is suitable if you use Kendo UI hybrid UI with third-party Single-Page Application (SPA) frameworks like Angular or Backbone, or if you develop a mobile version of a web site which does not need native mobile app look. The Kendo UI Web CSS files contain the necessary rules, so that a unified look can be achieved.
+This approach is suitable if you use Kendo UI hybrid UI with third-party Single-Page Application (SPA) frameworks like Angular or Backbone, or if you develop a mobile version of a website which does not need native mobile app look. The Kendo UI Web CSS files contain the necessary rules, so that a unified look can be achieved.
 
 > **Important**
 >
@@ -44,7 +44,7 @@ The example below demonstrates how to instantiate a hybrid mobile Switch widget.
 ## Known Limitations
 
 - As a mobile application instance is missing, its features&mdash;declarative widget initialization, view transitions, and browser history binding among others&mdash;do not work.
-- Unlike the application mode, this mode primarily targets mobile web sites. Thus the mobile OS skins&mdash;Android/iOS&mdash;are not supported.
+- Unlike the application mode, this mode primarily targets mobile websites. Thus the mobile OS skins&mdash;Android/iOS&mdash;are not supported.
 - Certain ListView features&mdash;pull to refresh, endless scrolling, press to load more, fixed headers&mdash;rely on the mobile Scroller. The ListView widget should be instantiated in a mobile Scroller widget element.
 - The mobile Drawer widget should have its [`container` configuration option](/api/javascript/mobile/ui/drawer/configuration/container) set. The Drawer is not going to close automatically when navigation is performed.
 

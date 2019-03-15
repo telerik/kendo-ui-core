@@ -8,7 +8,11 @@ position: 3
 
 # Endless Scrolling
 
-The endless scroll mode is suitable for displaying large number of items while advanced features such as editing, grouping, filtering, sorting, and hierarchy can also be applied.
+Endless scrolling is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
+
+For runnable examples, refer to:
+* [Demo on endless scrolling of local data by the Grid](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
+* [Demo on endless scrolling of remote data by the Grid](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote)
 
 ## Getting Started
 
@@ -24,13 +28,13 @@ The Grid supports endless scrolling both when it is bound to local and remote da
         scrollable: {
             endless: true
         },
-        // other configuration
+        // Other configuration.
     });
 
 
 ## Using with Editing
 
-Endless scrolling works with editing in a similar way as it works with regular paging. However, when endless scrolling is used together with editing and an item is opened to be edited, that item will remain opened even after a new page is requested.
+Endless scrolling works with editing in a similar way as it works with regular paging. However, when you use endless scrolling together with editing and an item is opened for editing, that item will remain opened even after a new page is requested.
 
 ## Using with Grouping
 
@@ -46,11 +50,11 @@ If the Grid is bound to remote data, enable `serverGrouping` to apply grouping t
 
 If the Grid displays hierarchical data and an item gets expanded, it will not be collapsed when the items are scrolled and a new page will be requested.
 
-> **Important**
->
-> Operations, such as filtering, sorting, and grouping, reset the scroll position.
+> The filtering, sorting, and grouping operations reset the scroll position.
 
 ## See Also
 
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [Endless Scrolling of Local Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
+* [Endless Scrolling of Remote Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote)
 * [Kendo UI Knowledge Base](/knowledge-base)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
