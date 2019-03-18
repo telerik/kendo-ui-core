@@ -8,40 +8,36 @@ position: 8
 
 # Charts
 
-This article provides practical tips, code samples, and illustrative videos for making Kendo UI charts and graphs more accessible so that disabled users can seamlessly interact with the content.
+This article provides practical tips, code samples, and illustrative videos for making disabled users interact more easily with Kendo UI charts and graphs.
 
 ## Accessibility Case
 
 The basic accessibility standards are:
 
-* WAI_ARIA
-* Section 508
-* W3C Web Content Accessibility Guidelines (WCAG) 2.0
+* [Section 508 (Latest Amendment)](https://www.access-board.gov/the-board/laws/rehabilitation-act-of-1973#508)
+* [WCAG 2 Quick Reference Guide](https://www.w3.org/WAI/WCAG21/quickref/)
+* [Accessible Rich Internet Applications (WAI-ARIA) 1.1](https://www.w3.org/TR/wai-aria-1.1/)
 
-Section 508 specifies the law which governs the creation of accessible software for government entities in the United States. WCAG and WAI-ARIA contain a comprehensive set of guidelines for creating accessible web sites and applications.
+Section 508 specifies the law which governs the creation of accessible software for government entities in the United States. WCAG and WAI-ARIA contain a comprehensive set of guidelines for creating accessible websites and applications.
 
 The fundamental requirement that refers to and is fulfilled by the Kendo UI data visualization components is:
 
-* (Section 508) "(a) A text equivalent for every non-text element shall be provided (e.g., via `alt`, `longdesc`, or in-element content)."
-* (WCAG 2.0) "Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
+* Section 508&mdash;"(a) A text equivalent for every non-text element shall be provided (e.g., via `alt`, `longdesc`, or in-element content)."
+* WCAG 2.1&mdash;"Guideline 1.1 Text Alternatives: Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language."
 
-Providing text equivalents for non-text content is a key tenant of accessibility. Visual content, such as images, animations, video, and audio, is a valuable asset for each web application and web site. However, these visual elements are impossible to parse by screen readers and other assistive technologies and cannot be enjoyed by disabled users. That is why, both Section 508 and WCAG require that all non-decorative and non-text content has to be made accessible to assistive technologies.
+Providing text equivalents for non-text content is a key tenant of accessibility. Visual content, such as images, animations, video, and audio resources, is a valuable asset for each web application and website. However, these visual elements are impossible to parse by screen readers and other assistive technologies and cannot be enjoyed by disabled users. That is why, both Section 508 and WCAG require that all non-decorative and non-text content has to be made accessible to assistive technologies.
 
 ## Data Visualization
 
-The Kendo UI charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right?
+While Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data, the Charts and graphs fall into the "non-text content" category. Even though they are not accessible out of the box, you can include specific settings in them and make them accessible.
 
-Actually, they can be. And with a little bit of work as you add charts and graphs to your applications, they can be made even more accessible.
-
-First, take a look at the out-of-the-box experience with Kendo UI. The [video below](http://www.youtube.com/watch?v=lymGnquNxBg&feature=youtu.be), uses the popular VoiceOver screen reader on Apple OS X to navigate a Donut chart.
+The [following video](http://www.youtube.com/watch?v=lymGnquNxBg&feature=youtu.be) uses the popular VoiceOver screen reader on Apple OS X to navigate a Donut chart.
 
 <iframe width="853" height="480" src="http://www.youtube.com/embed/lymGnquNxBg" frameborder="0" allowfullscreen></iframe>
 
-As you can see from the video, you are able to use a screen reader to hear both the title of the chart, as well as the values in the legend. Because Kendo UI creates charts using inline SVG elements, and SVG is just markup, VoiceOver is able to drill into the chart and piece together a reasonable representation of the content. Had we instead used a Canvas element to create the chart, we would be out of luck. Score one for SVG!
+In the video, you can use a screen reader to hear both the title of the chart and the values in the legend. Because Kendo UI creates charts by using inline SVG elements, and SVG is markup, VoiceOver is able to drill into the chart and piece together a reasonable representation of the content which would not have been possible if the Charts needed a `canvas` element to create them.
 
-Of course, if you watched the video, you may have also noticed that the screen reader did not select the chart exactly, it just started reading the title. What is more, while it is great that the reader can access and read legend values, much more can be done to make this chart even more consumable and accessible for disabled users.
-
-In the next section look at five steps you can take to improve the accessibility of your charts. Each takes only minutes to add to your apps, and you can adopt any or all of these as long as they make sense. You might as well find that not only do these steps make your charts more accessible to disabled users, but also that the improvements enhance the value of your content for all of your users regardless of their abilities.
+Also, the screen reader in the video does not select the chart exactly but rather starts reading the title. Even though the reader can access and read legend values, the Chart can be made more accessible for disabled users.
 
 ## Tips for Accessible Charts
 

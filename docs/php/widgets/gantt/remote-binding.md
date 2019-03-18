@@ -918,7 +918,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 1** Create a new PHP file called `dependencies.php`. This file will perform CRUD operations.
 
-**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your web site root and include it.
+**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
 ###### Example
 

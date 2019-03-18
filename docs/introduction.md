@@ -111,5 +111,6 @@ Kendo UI is also incorporated into products such as [Telerik Platform](http://ww
 ## Learning Resources
 
 * [Kendo UI Dojo Interactive Learning Platform](http://dojo.telerik.com/)
-* [Kendo UI Support and Learning Resources](http://www.telerik.com/support/kendo-ui)
+* [Kendo UI for jQuery Virtual Classroom](https://progress.exceedlms.com/student/path/366724-kendo-ui-jquery)
 * [Kendo UI YouTube Channel](https://www.youtube.com/user/kendouiTV)
+* [Other Kendo UI Support and Learning Resources](http://www.telerik.com/support/kendo-ui)

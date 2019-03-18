@@ -63,7 +63,7 @@ The following example demonstrates how to implement a **Toggle** button which, d
               ]
             },
             {
-              id: 6, text: "New Web Site", expanded: true, spriteCssClass: "folder", items: [
+              id: 6, text: "New Website", expanded: true, spriteCssClass: "folder", items: [
                 { id: 7, text: "mockup.jpg", spriteCssClass: "image" },
                 { id: 8, text: "Research.pdf", spriteCssClass: "pdf" },
               ]

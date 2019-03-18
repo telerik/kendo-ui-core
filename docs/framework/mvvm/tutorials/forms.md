@@ -133,7 +133,7 @@ The `Add` button has only one new change. It now has a `data-bind="click: create
 
 	<button id="create" data-bind="click: create" class="k-button">Add</button>
 
-This last one is the line that creates the [Kendo UI Grid widget]({% slug walkthrough_kendoui_grid_widget %}).
+This last one is the line that creates the [Kendo UI Grid widget]({% slug overview_kendoui_grid_widget %}).
 
 ###### Example
 

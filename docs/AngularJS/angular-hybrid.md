@@ -51,7 +51,7 @@ event.
 
 ## Hybrid UI Widget Directives
 
-All directives may be used as elements or as attributes. If a directive is used as an element name, it is replaced with a standard HTML element once the directive is compiled. Each mobile widget features AngularJS on the [Kendo UI demos web site](http://demos.telerik.com/kendo-ui/).
+All directives may be used as elements or as attributes. If a directive is used as an element name, it is replaced with a standard HTML element once the directive is compiled. Each mobile widget features AngularJS on the [Kendo UI demos website](http://demos.telerik.com/kendo-ui/).
 
 ### ActionSheet
 

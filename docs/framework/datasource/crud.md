@@ -89,7 +89,7 @@ The `update` configuration setting of the DataSource should define a function th
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are ommitted for brevity */
+            /* the other CRUD settings are omitted for brevity */
             update: function (e) {
                 // batch is enabled
                 //var updateItems = e.data.models;
@@ -129,7 +129,7 @@ The `create` function should perform a similar routine as the `update` one with 
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are ommitted for brevity */
+            /* the other CRUD settings are omitted for brevity */
             create: function (e) {
                 // batch is disabled
                 // generate appropriate data item ID and save the new items to the original datasource
@@ -159,7 +159,7 @@ The `destroy` function receives the items to be deleted in `e.data`, similar to 
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are ommitted for brevity */
+            /* the other CRUD settings are omitted for brevity */
             destroy: function (e) {
                 // remove items from the original datasource by using e.data
 
@@ -550,7 +550,7 @@ The `destroy` action submits the data items that should be deleted, or just its 
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are ommitted for brevity */
+            /* the other CRUD settings are omitted for brevity */
             destroy: {
                 url: "service/products/destroy/",
                 type: "post"
@@ -581,7 +581,7 @@ The example below demonstrates a standard error.
 
     */
     var dataSource = new kendo.data.DataSource({
-        /* the other CRUD settings are ommitted for brevity */
+        /* the other CRUD settings are omitted for brevity */
         error: function (e) {
             /* the e event argument will represent the following object:
 
@@ -609,7 +609,7 @@ The example below demonstrates a custom error.
 
     */
     var dataSource = new kendo.data.DataSource({
-        /* the other CRUD settings are ommitted for brevity */
+        /* the other CRUD settings are omitted for brevity */
         error: function (e) {
             /* the e event argument will represent the following object:
 

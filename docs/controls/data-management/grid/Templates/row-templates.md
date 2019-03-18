@@ -9,11 +9,16 @@ position: 1
 
 # Row Templates
 
-The Kendo UI Grid supports row templates that allow you to place custom content into a grid row.
+The Kendo UI Grid supports row templates which enable you to place custom content into a Grid row.
 
-It is possible to format any cell within the Grid by using templates within a script tag or within the template option on the column object if the Grid is initialized from a `<div>` element.
+For runnable examples, refer to:
+* [Demo on using the row template of the Grid](https://demos.telerik.com/kendo-ui/grid/rowtemplate)
+* [Demo on using the detail-row template of the Grid](https://demos.telerik.com/kendo-ui/grid/detailtemplate)
+* [Demo on using the toolbar template of the Grid](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
 
-The following example demonstrates how to use a template to format the email address as a hyperlink by using a template declared in a script block.
+If you initialize the Grid from a `<div>` element, you can format any cell within the Grid by using templates within a `script` tag or within the `template` option on the column object.
+
+The following example demonstrates how to use a template for formatting the email address as a hyperlink through a template declared in a `script` block.
 
 ###### Example
 
@@ -31,7 +36,7 @@ The following example demonstrates how to use a template to format the email add
         </tr>
     </script>
 
-Specify this as a template for each row by passing it in to the `rowTemplate` option on the Grid and initializing it with the `kendo.template` function, as demonstrated in the following example.
+The following example demonstrates how to specify the previous approach as a template for each row by passing it in to the `rowTemplate` option and by initializing it with the `kendo.template` function. As a result, the email address is an interactive hyperlink which opens a new email message when the user clicks it.
 
 ###### Example
 
@@ -40,15 +45,14 @@ Specify this as a template for each row by passing it in to the `rowTemplate` op
        // other configuration
     });
 
-In the resulting Grid, the email address is an interactive hyperlink which opens a new email message when clicked.
-
-**Figure 6: Grid with a row template applied**
+**Figure 1: A Grid with an applied row template**
 
 ![Grid with row template](../grid8_1.png)
 
-For more information on Kendo UI templates, refer to the [introductory article on templates]({% slug overview_kendoui_templatescomponent %}).
-
 ## See Also
 
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
+* [Using Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/rowtemplate)
+* [Using Detail-Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/detailtemplate)
+* [Using Toolbar Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
+* [Introduction on Templates]({% slug overview_kendoui_templatescomponent %})
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

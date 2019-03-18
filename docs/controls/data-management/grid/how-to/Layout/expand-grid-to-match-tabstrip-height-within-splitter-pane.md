@@ -14,7 +14,7 @@ To achieve this behavior:
 * Expand the height of the TabStrip containers by using the approach in the [how-to example]({% slug howto_expandto100percentheightautoresize_tabstrip %}), which relies on the `window.resize` event. In this case, however, the [`resize` event has to be of the closest Splitter instance](http://docs.telerik.com/kendo-ui/api/javascript/ui/splitter/events/resize).
 * Assuming that its `<div>` is 100% high and automatically expands vertically, call the `resize()` method of the Grid.   
 For more information on how to resize individual Kendo UI widgets, refer to [this article]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing).   
-For more information on how to set the Grid to 100% height and auto-resize it, refer to [this this article]({% slug appearance_kendoui_grid_widget %}#set-a-100-height-and-auto-resize).
+For more information on how to set the Grid to 100% height and auto-resize it, refer to [this this article]({% slug height_kendoui_grid_widget %}).
 
 > **Important**
 >

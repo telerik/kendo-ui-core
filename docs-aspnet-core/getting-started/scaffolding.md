@@ -63,6 +63,8 @@ To install the UI for ASP.NET Core Scaffolding templates and extensions in your 
 
 As of the 2019 R1 release, the `Create New Porject Wizard`, which comes with the Telerik UI for ASP.NET Core [Visual Studio Extensions](https://docs.telerik.com/aspnet-core/vs-integration/introduction), automatically creates the `Templates` folder in the root of the application. For more information on the wizard, refer to the [Creating Projects](https://docs.telerik.com/aspnet-core/vs-integration/new-project-wizard) article. 
 
+> As of .NET Core 2.2, when using Bootstrap 3, the views folder used is `ViewGenerator_Versioned\Bootstrap3\`. If you are upgrading your project make sure to update the folder's name.
+
 ## Using Scaffolding Templates with Visual Studio
 
 The Kendo UI Scaffolding Templates pertain to `cshtml` generation. That is why, first you have to create the appropriate model and controller as per your application requirements. You can either use the standard Scaffolding or the code you already have. If you do not already have a model and controller, use the sample set below the list to follow the example.

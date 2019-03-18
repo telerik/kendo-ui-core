@@ -64,4 +64,4 @@ To fix the horizontal overflowing of the Grid, use any of the following approach
 
 ## See Also
 
-* [Appearance of the Kendo UI Grid]({% slug appearance_kendoui_grid_widget %})
+* [Appearance of the Kendo UI Grid]({% slug hidden_containers_kendoui_grid_widget %})

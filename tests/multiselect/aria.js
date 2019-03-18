@@ -202,5 +202,44 @@
 
         label.remove();
     });
+
+    it("MultiSelect adds aria-haspopup that takes value equal to the role", function() {
+        var multiselect = new MultiSelect(input.attr("id", "test"));
+        var role = multiselect.input.attr("role");
+
+        assert.equal(multiselect.input.attr("role"), "listbox");
+        assert.equal(multiselect.input.attr("aria-haspopup"), role);
+    });
+
+    it("MultiSelect adds aria-autocomplete", function() {
+        var multiselect = new MultiSelect(input.attr("id", "test"));
+
+        assert.equal(multiselect.input.attr("aria-autocomplete"), "list");
+    });
+
+    it("MultiSelect adds role to the popup items", function() {
+        var multiselect = new MultiSelect(input, {
+            dataSource: ["item1", "item2"]
+        });
+
+        assert.equal(multiselect.ul.children().first().attr("role"), "option");
+
+        multiselect.open();
+
+        assert.equal(multiselect.ul.children().last().attr("role"), "option");
+
+        multiselect.close();
+
+        assert.equal(multiselect.ul.children().first().attr("role"), "option");
+    });
+
+    it("MultiSelect adds aria-setsize to the tag list items", function() {
+        var multiselect = new MultiSelect(input, {
+            dataSource: ["item1", "item2"],
+            value: "item1"
+        });
+
+        assert.equal(multiselect.tagList.children().first().attr("aria-setsize"), 1);
+    });
     });
 }());

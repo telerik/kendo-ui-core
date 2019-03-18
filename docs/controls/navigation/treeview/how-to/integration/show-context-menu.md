@@ -15,7 +15,7 @@ The following example demonstrates how to show a ContextMenu with tree-item acti
     <ul id="treeview">
       <li data-expanded="true">
         <span class="k-sprite folder"></span>
-        My Web Site
+        My Website
         <ul>
           <li><span class="k-sprite html"></span>index.html</li>
           <li><span class="k-sprite image"></span>body-back.png</li>

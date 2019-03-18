@@ -162,7 +162,7 @@ The following example demonstrates how to switch to client paging during PDF exp
 
 * [JavaScript API Reference: kendo.drawing](/api/javascript/drawing)
 * [JavaScript API Reference: kendo.geometry](/api/javascript/geometry)
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
 * [How to Export All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
 * [How to Export All Pages and Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})

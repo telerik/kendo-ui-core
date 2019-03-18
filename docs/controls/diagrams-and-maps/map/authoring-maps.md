@@ -24,7 +24,7 @@ The data used in this article is from the [Natural Earth project](http://www.nat
 
 For the purpose of this project, the [Admin 1 – States, provinces](http://www.naturalearthdata.com/downloads/50m-cultural-vectors) data set is going to be used. A scale of 1:50 000 000 provides good detail/size balance on a country level. The dataset is available for download in [Esri Shapefile format](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_1_states_provinces_lakes.zip).
 
-For more information, refer to the web site on [global administrative areas](http://www.gadm.org/country).
+For more information, refer to the website on [global administrative areas](http://www.gadm.org/country).
 
 ### Explore Data
 

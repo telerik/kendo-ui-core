@@ -509,7 +509,7 @@ Below are listed the steps for you to follow when creating a PHP file which perf
 
 **Step 1** Create a new PHP file called `tasks.php`. This file will perform CRUD data operations.
 
-**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your web site root and include it.
+**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
 ###### Example
 
