@@ -381,6 +381,7 @@ The MultiSelect enables you to remove the values from the input area of the widg
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
 * [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})
+* [Accessibility]({% slug accessibility_kendoui_multiselect_widget %})
 * [Troubleshooting]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [How to Preselect Items on Load in AngularJS]({% slug howto_preselect_itemson_load_angular_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})

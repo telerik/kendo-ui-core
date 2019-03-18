@@ -18,4 +18,5 @@ The approaches described in it are applicable for the MultiSelect.
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping]({% slug grouping_kendoui_multiselect_widget %})
 * [Server Filtering]({% slug server_filtering_kendoui_multiselect_widget %})
+* [Accessibility]({% slug accessibility_kendoui_multiselect_widget %})
 * [Troubleshooting]({% slug troubleshooting_common_issues_multiselect_kendoui %})
