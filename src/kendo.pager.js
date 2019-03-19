@@ -110,7 +110,10 @@ var __meta__ = { // jshint ignore:line
                 that.list = that.element.find(".k-pager-numbers");
 
                 if (!that.list.length) {
-                   that.list = $('<ul class="k-pager-numbers k-reset" />').appendTo(that.element);
+                   that.list = $('<ul class="k-pager-numbers k-reset" />')
+                        .append(that.currentPageTemplate({ text: 0}))
+                        .append(that.selectTemplate({ text: 0}))
+                        .appendTo(that.element);
                 }
             }
 
