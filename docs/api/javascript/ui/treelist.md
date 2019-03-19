@@ -352,7 +352,7 @@ The JavaScript function that is executed when the user clicks the command button
 
 ### columns.command.name `String`
 
-The name of the command. Commands can be built-in or custom. When set to a custom value, the `name` is rendered as a `data-command` attribute. For more information, refer to the [`columns.command`](/api/javascript/ui/treelist#configuration-columns.command) section.
+The name of the command. Commands can be built-in ("edit", "createChild" and "destroy") or custom. When set to a custom value, the `name` is rendered as a `data-command` attribute. For more information, refer to the [`columns.command`](/api/javascript/ui/treelist#configuration-columns.command) section.
 
 #### Example - setting the command name
 
@@ -4748,7 +4748,7 @@ A class name that will be rendered inside the toolbar button. When you set this 
 
 ### toolbar.name `String`
 
-The name of the toolbar command. Can be either a built-in (`create`, `excel`, or `pdf`) or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
+The name of the toolbar command. Can be either a built-in ("create", "excel", or "pdf") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
 
 #### Example - specifying the name of the command
 

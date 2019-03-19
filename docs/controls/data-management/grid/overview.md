@@ -168,7 +168,6 @@ To refer to an existing Grid instance:
 * More settings
     * [Scroll modes]({% slug scrolling_kendoui_grid_widget %})
     * [Selection]({% slug selection_kendoui_grid_widget %})
-    * [Date formats]({% slug dateformats_kendoui_grid_widget %})
     * [Rendering and dimensions]({% slug width_kendoui_grid_widget %})
     * [Performance tips]({% slug performance_kendoui_grid_widget %})
     * [Globalization]({% slug globalization_kendoui_grid_widget %})
