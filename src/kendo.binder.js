@@ -933,7 +933,6 @@ var __meta__ = { // jshint ignore:line
                 var idx,
                     length,
                     widget = this.widget,
-                    //grid = kendo.ui.Grid && widget instanceof kendo.ui.Grid,
                     items = e.addedItems || widget.items(),
                     dataSource = widget[fieldName],
                     view,
@@ -948,7 +947,6 @@ var __meta__ = { // jshint ignore:line
 
                 if (items.length) {
                     view = e.addedDataItems || dataSource.flatView();
-                    //view = e.addedDataItems || grid ? widget.dataItems() : dataSource.flatView();
                     parents = this.bindings[bindingName]._parents();
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
