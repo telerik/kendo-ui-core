@@ -40,6 +40,15 @@
             });
     }
 
+    /* DateRangePicker messages */
+    if (kendo.ui.DateRangePicker) {
+        kendo.ui.DateRangePicker.prototype.options.messages =
+            $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages,{
+                "startLabel": "开始",
+                "endLabel": "结束"
+            });
+    }
+
     /* Editor messages */
     if (kendo.ui.Editor) {
         kendo.ui.Editor.prototype.options.messages =
@@ -387,7 +396,9 @@
                     "confirmDelete": "确定删除"
                 },
                 "noRecords": "无相关数据",
-                "expandCollapseColumnHeader": ""
+                "expandCollapseColumnHeader": "",
+                "groupHeader": "按 Ctrl + 空格 进行分组",
+                "ungroupHeader": "按 Ctrl + 空格 取消分组"
             });
     }
 
@@ -642,6 +653,7 @@
                 "save": "保存",
                 "cancel": "取消",
                 "destroy": "删除",
+                "resetSeries": "重置周期事件",
                 "deleteWindowTitle": "删除事件",
                 "next": "往后",
                 "previous": "往前",
@@ -663,8 +675,11 @@
                 },
                 "recurrenceMessages": {
                     "deleteWindowTitle": "删除周期类型事件",
+                    "resetSeriesWindowTitle": "重置周期事件",
                     "deleteWindowOccurrence": "删除当前事件",
                     "deleteWindowSeries": "删除整个周期事件",
+                    "deleteRecurringConfirmation": "你确定要删除当前事件？",
+                    "deleteSeriesConfirmation": "你确定要删除整个周期事件？",
                     "editWindowTitle": "编辑周期类型事件",
                     "editWindowOccurrence": "编辑当前事件",
                     "editWindowSeries": "编辑整个周期事件",
@@ -1243,6 +1258,15 @@
         kendo.ui.Chat.prototype.options.messages =
             $.extend(true, kendo.ui.Chat.prototype.options.messages, {
                 placeholder: "请输入..."
+            });
+    }
+
+    /* Switch messages */
+    if (kendo.ui.Switch) {
+        kendo.ui.Switch.prototype.options.messages =
+            $.extend(true, kendo.ui.Switch.prototype.options.messages,{
+                "checked": "开",
+                "unchecked": "关"
             });
     }
 
