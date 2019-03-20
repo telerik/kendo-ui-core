@@ -158,88 +158,30 @@ The following example features local data but the data returned by the [`transpo
 
 ## Accent Folding
 
-The DataSource does not support `accent folding` out of the box. However, it can be easily implemented by using either local or server filtering.
+Starting from R2 2019 release there is a built-in functionality in the Kendo UI DataSource to handle cases when user needs to filter on diacritic characters for specific language. The [accentFoldingFiltering](/api/javascript/data/datasource/configuration/accentFoldingFiltering) option allows user to define a specific culture to be used when applying the filter. Since these characters are unique for a specific language, setting the appropriate culture has to be set as a value. For example, `tr-TR` for Turkish, `es-ES` for Spanish, or `fr-FR` for French.
 
-### Using Local Filtering
+> * Due to the specifics of the case-insensitive search, only one language can be used to filter your data. For example, if you mix Spanish and Turkish in the data, you may observe unexpected behavior.
 
-The following example demonstrates accent folding with local filtering.
+Please refer to the example below to check the filtering in action
 
 ###### Example
 
-    <h5>DataSource will display all matching to 'Lo' search value items</h5>
-    <div id="result"></div>
     <script>
-    var template = kendo.template("<div>#: name #</div>");
-
-    var accentMap = {
-      'ó':'o',
-      'ø':'o',
-      'ö':'o'
-    };
-
-    var accentRegExp = new RegExp(Object.keys(accentMap).join("|"), "ig");
-
-    var replace = function(value) {
-      return value.replace(accentRegExp, function(match) {
-        return accentMap[match] || match;
+      var dataSource = new kendo.data.DataSource({
+        data: [
+            {  name: "KIZILTOPRAK" },
+            {  name: "KARŞIYAKA" },
+            {  name: "İSTANBUL" }
+        ],
+        filter: { field: "name", operator: "contains", value: "k\u0131z" },
+        accentFoldingFiltering: "tr-TR"
       });
-    };
-
-    var dataSource = new kendo.data.DataSource({
-      change: function() {
-				$("#result").html(kendo.render(template, this.view()));
-      },
-      data: [
-        { name: "Fulanito López", age: 30 },
-        { name: "Erik Lørgensen", age: 33 },
-        { name: "Lorena Smith", age: 20 },
-        { name: "James Lö", age: 32 }
-      ],
-      filter: {
-       	field: "name",
-        operator: function(value, search) {
-          return replace(value).indexOf(search) !== -1;
-        },
-        value: "Lo"
-      }
-    });
-
-    dataSource.fetch();
+      dataSource.fetch(function() {
+        var view = dataSource.view();
+        console.log(view.length); // displays "1"
+        console.log(view[0].name); // displays "KIZILTOPRAK"
+      });
     </script>
-
-### Using Server Filtering
-
-The following example demonstrates accent folding with server filtering.
-
-###### Example
-
-```tab-Data
-        //the 'accent folding' is done on the server
-        {
-            result: [
-                { name: "Fulanito López", age: 30 },
-                { name: "Erik Lørgensen", age: 33 },
-                { name: "Lorena Smith", age: 20 },
-                { name: "James Lö", age: 32 }
-            ]
-        }
-```
-```tab-DataSource
-
-        var wordsDataSource = new kendo.data.DataSource({
-            serverFiltering: true,
-            transport: {
-                read: {
-                    url: "{remote service}"
-                }
-            },
-            schema: {
-                data: "result"
-            },
-
-            filter: { field: "name", operator: "contains", value: "Lo" }
-        });
-```
 
 ## Local Grouping
 
