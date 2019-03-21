@@ -2291,7 +2291,7 @@ var __meta__ = { // jshint ignore:line
             var ev = e, offset,
                 that = this,
                 options = that.options,
-                target = $(ev.currentTarget);
+                target = kendo.support.mobileOS ? $(ev.target) : $(ev.currentTarget);
 
             if (e.event) {
                 ev = e.event;

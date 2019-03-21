@@ -22,13 +22,14 @@ The following example demonstrates how transform the Kendo UI Editor widget into
 
 ```dojo
 <script src="https://unpkg.com/markdown@0.5.0/lib/markdown.js"></script>
-<script src="https://unpkg.com/html-md@3.0.2/dist/md.min.js"></script>
+<script src="https://unpkg.com/turndown@5.0.3/dist/turndown.js"></script>
 
 <textarea name="editor" id="editor" cols="30" rows="10">
     You can add here some **Makrdown** content.
 </textarea>
 
 <script>
+    var turndownService = new TurndownService();
     $("#editor").kendoEditor({
         deserialization: {
             custom: function(html) {
@@ -37,7 +38,7 @@ The following example demonstrates how transform the Kendo UI Editor widget into
         },
         serialization: {
             custom: function(html) {
-                return md(html);
+                return turndownService.turndown(html);
             }
         },
         tools: [

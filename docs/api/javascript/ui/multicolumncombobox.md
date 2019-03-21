@@ -212,34 +212,34 @@ Defines the field to be used to filter the data source. If not defined the [pare
     <input id="child" />
     <script>
     $("#parent").kendoMultiColumnComboBox({
-        dataTextField: "name",
-        dataValueField: "id",
-        dataSource: [
-            { name: "Parent1", id: 1 },
-            { name: "Parent2", id: 2 }
-        ],
-        columns: [
-          { field: "parentName" },
-          { field: "parentId" }
-        ]
+      dataTextField: "name",
+      dataValueField: "id",
+      dataSource: [
+        { name: "Parent1", id: 1 },
+        { name: "Parent2", id: 2 }
+      ],
+      columns: [
+        { field: "name" },
+        { field: "id" }
+      ]
     });
 
     $("#child").kendoMultiColumnComboBox({
-        cascadeFrom: "parent",
-        cascadeFromField: "parentId",
-        dataTextField: "name",
-        dataValueField: "id",
-        dataSource: [
-            { name: "Child1", id: 1, parentId: 1 },
-            { name: "Child2", id: 2, parentId: 2 },
-            { name: "Child3", id: 3, parentId: 1 },
-            { name: "Child4", id: 4, parentId: 2 }
-        ],
-        columns: [
-          { field: "childName" },
-          { field: "childId" },
-          { field: "parentId" }
-        ]
+      cascadeFrom: "parent",
+      cascadeFromField: "parentId",
+      dataTextField: "name",
+      dataValueField: "id",
+      dataSource: [
+        { name: "Child1", id: 1, parentId: 1 },
+        { name: "Child2", id: 2, parentId: 2 },
+        { name: "Child3", id: 3, parentId: 1 },
+        { name: "Child4", id: 4, parentId: 2 }
+      ],
+      columns: [
+        { field: "id" },
+        { field: "name" },
+        { field: "parentId" }
+      ]
     });
     </script>
 
@@ -252,7 +252,7 @@ Defines the parent field to be used to retain value from. This value will be use
     <input id="parent" />
     <input id="child" />
     <script>
-    $("#parent").kendoMultiColumnBox({
+    $("#parent").kendoMultiColumnComboBox({
         dataTextField: "name",
         dataValueField: "id",
         dataSource: [
@@ -261,7 +261,7 @@ Defines the parent field to be used to retain value from. This value will be use
         ]
     });
 
-    $("#child").kendoMultiColumnBox({
+    $("#child").kendoMultiColumnComboBox({
         cascadeFrom: "parent",
         cascadeFromField: "parentId",
         cascadeFromParentField: "cascadeId",
