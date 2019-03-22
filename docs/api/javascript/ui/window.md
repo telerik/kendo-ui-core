@@ -22,6 +22,7 @@ The predefined array values are:
 * `Refresh`
 * `Minimize`
 * `Maximize`
+* `Pin`
 
 #### Example
 
