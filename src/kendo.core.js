@@ -3399,6 +3399,11 @@ function pad(number, digits, end) {
                 }
             }
 
+            // kendo.View is not a ui plugin
+            if (role === "view") {
+                return element.data("kendoView");
+            }
+
             if (suites) {
                 if (suites[0]) {
                     for (i = 0, length = suites.length; i < length; i ++) {

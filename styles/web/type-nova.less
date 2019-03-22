@@ -93,6 +93,11 @@
 @notification-error-text-color: darken(@error, 25%);
 @notification-error-border-color: @error;
 @notification-gradient: false;
+@cell-border-color: transparent;
+@focused-shadow: none;
+@default-icon-opacity: 1;
+@hover-background-color: @hover-background;
+@hover-border-color: @hover-background;
 
 
 // Link
@@ -290,6 +295,24 @@
 @switch-off-handle-hovered-gradient: @button-hover-gradient;
 
 
+// Adaptive Common
+@adaptive-content-bg: darken(@background, 2%);
+@adaptive-content-text: @accent;
+
+@adaptive-menu-bg: @accent;
+@adaptive-menu-text: @selected-text-color;
+
+@adaptive-menu-clear-text: @accent;
+
+@adaptive-menu-item-border: darken(@background, 12%);
+
+@adaptive-menu-title-text: @normal-text-color;
+
+
+// Adaptive Grid
+@adaptive-grid-sort-text: @accent;
+
+
 @theme-name: ~"nova";
 
 @import "common/mixins.less";
@@ -303,6 +326,7 @@
 @import "Default/multiviewcalendar/_theme.less";
 @import "Default/scrollview/_theme.less";
 @import "Default/switch/_theme.less";
+@import "common/adaptive/_theme.less";
 
 
 // Main colors
@@ -1031,8 +1055,7 @@ input.k-textbox:active {
 .k-pager-numbers .k-state-selected,
 .k-grid-footer,
 .k-grid-footer td,
-.k-scheduler-agenda .k-scheduler-header,
-.km-pane-wrapper .k-grid-header .k-header {
+.k-scheduler-agenda .k-scheduler-header {
     background-color: @secondary-widget-background-color;
     border-color: @widget-border-color;
 }
@@ -1233,6 +1256,40 @@ input.k-textbox:active {
     color: @selected-background;
     border-color: @selected-background transparent transparent;
     border-radius: 0;
+}
+
+.k-pager-lg,
+.k-pager-md,
+.k-pager-sm {
+
+    .k-pager-numbers {
+        color: @link-text-color;
+        background-color: @normal-background;
+
+        &.k-state-expanded {
+
+            li:nth-child(2) {
+                padding-bottom: 11px;
+            }
+
+            li:last-child {
+                padding-top: 11px;
+            }
+
+            .k-link:hover {
+                color: @hover-text-color;
+                background-color: @hover-background;
+                border-color: @hover-background;
+            }
+
+            .k-state-selected,
+            .k-current-page .k-link {
+                color: @primary-text-color;
+                background-color: @primary-background-color;
+                border-color: @primary-border-color;
+            }
+        }
+    }
 }
 
 // Scheduler
@@ -1739,147 +1796,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     .box-shadow(@widget-shadow);
 }
 
-// Adaptive Grid
-.k-grid-mobile .k-column-active + th.k-header {
-    border-left-color: @widget-border-color;
-}
-
-.km-header {
-    color: @accent;
-    background-color: @widget-background-color;
-    border-color: @widget-background-color;
-    .box-shadow(@popups-shadow);
-}
-
-.km-pane-wrapper > .km-pane > .km-view > .km-content {
-    background-color: @secondary-widget-background-color;
-}
-
-.km-header .k-button,
-.km-header .k-button:hover {
-    color: @accent;
-    border-color: @widget-background-color;
-    background-color: @widget-background-color;
-}
-
-html .km-pane-wrapper .km-widget,
-.k-ie .km-pane-wrapper .k-widget,
-.k-ie .km-pane-wrapper .k-group,
-.k-ie .km-pane-wrapper .k-content,
-.k-ie .km-pane-wrapper .k-header,
-.k-ie .km-pane-wrapper .k-popup-edit-form .k-edit-field .k-button,
-.km-pane-wrapper .k-mobile-list .k-item,
-.km-pane-wrapper .k-mobile-list .k-edit-label,
-.km-pane-wrapper .k-mobile-list .k-edit-field {
-    color: @normal-text-color;
-}
-
-@media screen and (-ms-high-contrast: active)
-              and (-ms-high-contrast: none) {
-    div.km-pane-wrapper a     {
-        color: @normal-text-color;
-    }
-}
-
-.km-pane-wrapper .k-mobile-list .k-check,
-.km-pane-wrapper .k-mobile-list .k-edit-field textarea {
-    outline: none;
-}
-
-.km-pane-wrapper .k-mobile-list .k-item.k-state-selected {
-    color: @selected-text-color;
-    background-color: @selected-background;
-    border-top-color: @selected-background;
-}
-
-.km-pane-wrapper .k-mobile-list > ul > li > .k-link,
-.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3),
-.km-pane-wrapper #recurrence .km-scroll-container > .k-edit-label:first-child {
-    color: normal-text-color;
-}
-
-.km-pane-wrapper .k-mobile-list .k-item:last-child,
-.km-pane-wrapper .k-mobile-list > ul > li > .k-link {
-    border-bottom: 1px solid @widget-border-color;
-}
-
-.km-actionsheet .k-grid-delete,
-.km-actionsheet .k-scheduler-delete,
-.km-pane-wrapper .k-scheduler-delete,
-.km-pane-wrapper .k-filter-menu .k-button[type=reset] {
-    color: #fff;
-    border-color: red;
-    background-color: red;
-}
-
-.km-actionsheet .k-grid-delete:active,
-.km-actionsheet .k-scheduler-delete:active,
-.km-pane-wrapper .k-scheduler-delete:active,
-.km-pane-wrapper .k-filter-menu .k-button[type=reset]:active {
-    background-color: darken(red, 20);
-}
-
-.k-mobile-list .k-check:checked,
-.k-mobile-list .k-edit-field [type=checkbox]:checked,
-.k-mobile-list .k-edit-field [type=radio]:checked {
-    opacity: .4;
-}
-
-// IE will ignore the above selectors if these are added too
-.k-mobile-list .k-check:checked,
-.k-mobile-list .k-edit-field [type=checkbox]:checked,
-.k-mobile-list .k-edit-field [type=radio]:checked {
-    background-image: @sprite-image;
-    border-color: transparent;
-}
-
-.k-mobile-list .k-check:checked,
-.k-mobile-list .k-edit-field [type=checkbox]:checked {
-  font-family: 'WebComponentsIcons';
-  background-image: none;
-}
-
-.k-mobile-list .k-check:checked:before,
-.k-mobile-list .k-edit-field [type=checkbox]:checked:before {
-  content: "\e118";
-}
-
-.k-mobile-list .k-item > .k-link:active,
-.k-mobile-list .k-item > .k-label:active,
-.k-mobile-list .k-edit-label.k-check:active,
-.k-mobile-list .k-recur-view .k-check:active {
-    color: @hover-text-color;
-    background-color: @hover-background;
-    border-color: @hover-text-color;
-}
-
-.km-pane-wrapper .k-mobile-list .k-item,
-.km-pane-wrapper .k-mobile-list .k-edit-field,
-.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check {
-    background-color: @widget-background-color;
-    border-top: 1px solid @widget-border-color;
-}
-
-.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check:first-child {
-    border-top-color: transparent;
-}
-
-.km-pane-wrapper .km-pane .k-mobile-list.k-filter-menu {
-    .k-space-right {
-        background: @base;
-        border-color: @widget-border-color;
-
-        > input {
-            background-color: @background;
-            border-color: @widget-border-color;
-        }
-
-        > input:focus {
-            border-color: lighten(@hover-text-color, 8%);
-        }
-    }
-}
-
 // Responsive styles
 @media only screen and (max-width: 1450px) {
     .k-webkit,
@@ -2027,230 +1943,10 @@ html .km-pane-wrapper .km-widget,
             background-image: none;
         }
 
-        // Responsive Pager
-
-        .k-pager-wrap
-        {
-            min-height: 2.7em;
-        }
-
-        .k-pager-wrap .k-pager-nav,
-        .k-pager-input {
-            display: inline-block;
-            vertical-align: top;
-        }
-
-        .k-pager-numbers,
-        .k-grid .k-pager-numbers {
-            position: absolute;
-            left: 5.6em;
-            display: -moz-inline-flex;
-            display: -webkit-inline-flex;
-            display: inline-flex;
-            -webkit-flex-direction: column-reverse;
-            flex-direction: column-reverse;
-            overflow: visible;
-            height: auto;
-            background-color: @normal-background;
-            border: 1px solid darken(@normal-background, 12%);
-            border-radius: 3px;
-        }
-
-        .k-pager-numbers:first-child,
-        .k-grid .k-pager-numbers:first-child { // move left when previousNext: false
-            left: .3em;
-        }
-
-        .k-pager-numbers:hover,
-        .k-pager-wrap .k-pager-numbers li:hover {
-            background-color: @hover-background;
-        }
-
-        .k-pager-numbers.k-state-expanded,
-        .k-grid .k-pager-numbers.k-state-expanded {
-            -webkit-transform: translatey(-100%);
-            -moz-transform: translatey(-100%);
-            transform: translatey(-100%);
-        }
-
-        .km-pane-wrapper .k-pager-numbers,
-        .km-pane-wrapper .k-grid .k-pager-numbers {
-            position: relative;
-            left: 50%;
-            transform: translate(-50%, 0%);
-            -webkit-transform: translate(-50%, 0%);
-        }
-        .km-pane-wrapper .k-pager-numbers.k-state-expanded,
-        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
-            -webkit-transform: translate(-50%, -100%);
-            transform: translate(-50%, -100%);
-        }
-
-        .km-pane-wrapper .k-pager-numbers .k-link,
-        .km-pane-wrapper .k-pager-numbers .k-state-selected,
-        .km-pane-wrapper .k-pager-wrap > .k-link,
-        .km-pane-wrapper .k-pager-wrap > .k-pager-info {
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-
-        .k-rtl .k-pager-numbers,
-        .k-rtl .k-grid .k-pager-numbers {
-            right: 5.6em;
-            width: 5.15em;
-        }
-
-        .k-rtl .k-pager-numbers:first-child,
-        .k-rtl .k-grid .k-pager-numbers:first-child { // move right when previousNext: false
-            left: auto;
-            right: .3em;
-        }
-
-        .k-pager-numbers .k-current-page,
-        .k-grid .k-pager-numbers .k-current-page {
-            display: block;
-            border-left: 0;
-        }
-
-        .k-pager-numbers li:not(.k-current-page) {
-            display: none;
-        }
-
-        .k-pager-numbers .k-current-page .k-link {
-            width: 3.8em;
-            line-height: 2.564em;
-            padding: 0 .429em 0 0.8em;
-            border-radius: 3px;
-            background-position: 50% 50%;
-            background-color: @normal-background;
-            border: 1px solid transparent;
-        }
-
-        .k-pager-numbers .k-current-page .k-link:hover {
-            background-color: @hover-background;
-        }
-
-        .k-pager-numbers .k-current-page:hover .k-link {
-            border-top: 0;
-        }
-
-        .k-pager-numbers .k-current-page .k-link:after {
-            display: block;
-            content: "";
-            position: absolute;
-            top: 50%;
-            margin-top: -0.6em;
-            right: 0.6em;
-            width: 1.333em;
-            height: 1.333em;
-            opacity: .45;
-        }
-
-        .k-pager-numbers.k-state-expanded .k-current-page .k-link:after {
-            background-position: -15px 0;
-            opacity: 1;
-        }
-
-        .k-pager-numbers + .k-link {
-            margin-left: 5.4em;
-        }
-
-        .k-rtl .k-pager-numbers + .k-link {
-            margin-right: 5.4em;
-            margin-left: 0;
-        }
-
-        .k-pager-wrap .k-pager-numbers .k-state-selected,
-        .k-pager-wrap .k-pager-numbers .k-link {
-            color: @link-text-color;
-            display: block;
-            margin-top: 0;
-            margin-right: 0;
-            padding: 1px 5px 1px .8em;
-            text-align: left;
-            border-top: 0;
-        }
-
-        .k-pager-wrap .k-pager-numbers .k-pager-nav{
-            color: @normal-text-color;
-        }
-
-        .k-pager-wrap .k-pager-numbers .k-state-selected {
-            color: @selected-text-color;
-            background-color: @selected-background;
-            border-color: @selected-background;
-        }
-
-        .k-pager-numbers.k-state-expanded {
-            box-sizing: border-box;
-            padding: 2px 0 0;
-            border-width: 1px 1px 0 1px;
-            border-style: solid;
-            border-color: @widget-border-color;
-            background-color: @widget-background-color;
-            .box-shadow(@popups-shadow);
-        }
-
-        .k-pager-numbers.k-state-expanded .k-current-page {
-            margin: -2.2em -1px 0;
-            padding: 0;
-        }
-
-        .k-pager-numbers.k-state-expanded .k-current-page .k-link {
-            border-radius: 0 0 3px 3px;
-            border-top: 0;
-            color: @selected-text-color;
-            background-color: @selected-background;
-            border-color: @selected-background;
-        }
-
-        .k-pager-numbers.k-state-expanded li {
-            display: inline-block;
-        }
-
         .k-gantt-toolbar > ul.k-gantt-views {
             top: 0;
         }
 
-        .k-widget.k-grid .k-pager-nav + .k-pager-numbers {
-            position: absolute;
-        }
-    }
-}
-
-@media only screen and (max-width: 678px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        .k-pager-info {
-            display: none;
-        }
-    }
-}
-
-@media only screen and (max-width: 530px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        .k-pager-sizes {
-            display: none;
-        }
-    }
-}
-
-@media only screen and (max-width: 350px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        .k-pager-refresh {
-            display: none;
-        }
     }
 }
 

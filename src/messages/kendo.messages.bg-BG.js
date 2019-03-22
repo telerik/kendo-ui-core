@@ -558,7 +558,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortAscending": "Сортирай възходящо",
   "sortDescending": "Сортирай низходящо",
   "filter": "Филтрирай",
+  "column": "Колона",
   "columns": "Колони",
+  "clear": "Премахни",
+  "cancel": "Откажи",
   "done": "Готово",
   "settings": "Настройки на колоната",
   "lock": "Заключи",
@@ -748,7 +751,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "additionalOperator": "Допълнителен оператор",
   "value": "Стойност",
   "additionalValue": "Допълнителна стойност",
-  "logic": "Логика"
+  "logic": "Логика",
+  "done": "Готово",
+  "into": "в"
 });
 }
 
@@ -773,7 +778,11 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Избери всички",
   "clear": "Премахни",
   "filter": "Филтрирай",
-  "search": "Търси"
+  "search": "Търси",
+  "cancel": "Откажи",
+  "selectedItemsFormat": "{0} селектирани записи",
+  "done": "Готово",
+  "into": "в"
 });
 }
 
