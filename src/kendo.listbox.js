@@ -1288,13 +1288,18 @@ var __meta__ = { // jshint ignore:line
 
         getUpdatedSelection: function(items) {
             var that = this;
+
+            if ($(items).length !== 1) {
+                return null;
+            }
+
             var itemFilter = that.options.filter;
             var sourceListBox = that.getSourceListBox();
             var lastEnabledItem = sourceListBox ? sourceListBox.items().filter(itemFilter).last() : null;
             var containsLastItem = $(items).filter(lastEnabledItem).length > 0;
             var itemToSelect = containsLastItem ? $(items).prevAll(itemFilter)[0] : $(items).nextAll(itemFilter)[0];
 
-            if ($(items).length === 1 && itemToSelect) {
+            if (itemToSelect) {
                 return itemToSelect;
             } else {
                 return null;
