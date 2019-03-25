@@ -18,7 +18,7 @@ The Kendo UI Grid for ASP.NET Core enables you to show additional info for a dat
 
 ### Client Details
 
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET Core to display additional details of the **Product** entity from the **Northwind** database.
+Listed below are the steps for you to follow when configuring the Kendo UI Grid for ASP.NET Core to display additional details of the **Product** entity from the **Northwind** database.
 
 1. Open `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
 
