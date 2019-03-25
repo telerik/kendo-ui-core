@@ -8,9 +8,15 @@ position: 2
 
 # Grouping
 
-As of the Kendo UI Q1 2015 (2015.1.318) release, the [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support binding to a grouped [DataSource]({% slug overview_kendoui_datasourcecomponent %}).
+As of the Kendo UI Q1 2015 (2015.1.318) release, the [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support binding to a grouped [DataSource]({% slug overview_kendoui_datasourcecomponent %}) and you can apply the demonstrated approaches in this article to any of those widgets.
 
-This functionality allows you to display data items categorized by a specific model field. For more information on the data source grouping functionality, refer to the [group configuration article](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group).
+For more information, refer to:
+* [Grouping in the ComboBox (demo)](https://demos.telerik.com/kendo-ui/combobox/grouping)
+* [Grouping in the AutoComplete (demo)](https://demos.telerik.com/kendo-ui/autocomplete/grouping)
+* [Grouping in the DropDownList (demo)](https://demos.telerik.com/kendo-ui/dropdownlist/grouping)
+* [Grouping in the MultiSelect (demo)](https://demos.telerik.com/kendo-ui/multiselect/grouping)
+
+The grouping functionality allows you to display data items categorized by a specific model field. For more information on the data source grouping functionality, refer to the [group configuration article](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group).
 
 ## Enabling
 
@@ -122,10 +128,8 @@ The following example demonstrates how to define a custom fixed group template.
 
 ## See Also
 
-* [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
-* [How to Clear Filter on Open]({% slug howto_clear_filter_open_combobox %})
-* [How to Declaratively Initialize ComboBox with Templates]({% slug howto_declaratively_initialize_with_templates_combobox %})
-* [How to Detect When All Widgets Are Bound]({% slug howto_detect_when_widgets_bound_combobox %})
-* [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
-* [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
+* [Grouping in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/grouping)
+* [Grouping in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/grouping)
+* [Grouping in the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/grouping)
+* [Grouping in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/grouping)
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)

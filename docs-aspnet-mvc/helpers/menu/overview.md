@@ -178,6 +178,58 @@ To bind a Kendo UI Menu to a hierarchical model:
         )
     ```
 
+### Binding to Remote Data
+
+Remote data binding is available as of the R2 2019 release.
+
+This feature enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
+
+###### Example
+
+    ```
+    public JsonResult GetCategories()
+    {
+        SampleEntities northwind = new SampleEntities();
+
+        var result = northwind.Categories.Select((category) =>
+            new
+            {
+                Name = category.CategoryName,
+                Products = northwind.Products
+                    .Where((product) => product.CategoryID == category.CategoryID)
+                    .Select((product)=> new { Name = product.ProductName })
+            }
+        );
+
+        return Json(result, JsonRequestBehavior.AllowGet);
+    }
+    ```
+
+    ```ASPX
+        <%: Html.Kendo().Menu()
+            .Name("menu")
+            .DataTextField("Name")
+            .DataSource(dataSource => dataSource
+                .Model(model => model.Children("Products"))
+                .Read(read => read
+                    .Action("GetCategories", "Menu")
+                )
+            )
+        %>
+    ```
+    ```Razor
+        @(Html.Kendo().Menu()
+            .Name("menu")
+            .DataTextField("Name")
+            .DataSource(dataSource => dataSource
+                .Model(model => model.Children("Products"))
+                .Read(read => read
+                    .Action("GetCategories", "Menu")
+                )
+            )
+        )
+    ```
+
 ### Security Trimming
 
 The Kendo UI Menu widget has a built-in security trimming functionality, which is enabled by default. If the URL, which the Menu item points to, is not authorized, then it is hidden. Security trimming depends on the [ASP.NET MVC Authorization](http://www.asp.net/mvc/tutorials/mvc-music-store/mvc-music-store-part-7). Every `action` method decorated with [`AuthorizeAttribute`](http://msdn.microsoft.com/en-us/library/system.web.mvc.authorizeattribute.aspx) checks whether the user is authorized and allows or forbids the request.

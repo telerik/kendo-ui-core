@@ -377,12 +377,12 @@ The DOM element to which the ContextMenu will be appended. The element needs to 
       });
     </script>
 
-### dataSource `Object|Array`
+### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
-The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+The data source of the widget which is used to render its items. Can be a JSON object/Array/[kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
 Refer to the example below for a list of the supported properties.
 
-#### Example
+#### Example - using a local array
 
     <div id="target">Target</div>
     <ul id="context-menu">
@@ -431,6 +431,173 @@ Refer to the example below for a list of the supported properties.
                         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
                     }]
             })
+        });
+    </script>
+
+#### Example - using kendo.data.HierarchicalDataSource
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+        $("#context-menu").kendoContextMenu({
+            target: "#target",
+            dataTextField: "FullName",
+            dataSource: dataSource
+        })
+    </script>
+
+### dataTextField `String`
+
+Sets the field of the data item that provides the text of the ContextMenu items.
+
+#### Example
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        $("#context-menu").kendoMenu({
+            target: "#target",
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataUrlField `String`
+
+Sets the field of the data item that provides the url of the ContextMenu items.
+
+#### Example
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        $("#context-menu").kendoMenu({
+            target: "#target",
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataSpriteCssClassField `String`
+
+Sets the field of the data item that provides the sprite css class of the ContextMenu items.
+
+#### Example
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        $("#context-menu").kendoMenu({
+            target: "#target",
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataImageUrlField `String`
+
+Sets the field of the data item that provides the image url of the ContextMenu items.
+
+#### Example
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        $("#context-menu").kendoMenu({
+            target: "#target",
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataContentField `String`
+
+Sets the field of the data item that provides the content of the ContextMenu items.
+
+#### Example
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        $("#context-menu").kendoMenu({
+            target: "#target",
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
         });
     </script>
 
@@ -841,6 +1008,56 @@ Desired state
 
 `kendo.ui.ContextMenu` Returns the ContextMenu object to support chaining.
 
+
+### findByUid
+
+Returns the ContextMenu item by the dataItem's uid.
+
+#### Example
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+        var contextMenu = $("#context-menu").kendoContextMenu({
+            target: "#target",
+            dataTextField: "FullName",
+            dataSource: dataSource
+        }).data("kendoContextMenu");
+
+
+        contextMenu.one("dataBound", function (ev) {
+            contextMenu.open();
+            var firstItemUid = contextMenu.dataSource.at(0).uid;
+            var item = contextMenu.findByUid(firstItemUid);
+            contextMenu.open(item);
+        });
+    </script>
+
+#### Parameters
+
+##### uid `String`
+
+The uid of the data item.
+
+#### Returns
+
+`jQuery` the item found.
+
 ### insertAfter
 
 Inserts an item into a **ContextMenu** after the specified referenceItem.
@@ -1161,6 +1378,80 @@ The jQuery event that triggered this one - only available for the close event of
          contextMenu.bind("close", function(e) {
              // handle event
          });
+    </script>
+
+### dataBound
+
+Fires when the ContextMenu is bound to the set DataSource.
+
+#### Event Data
+
+##### e.item `HTMLElement`
+
+The loaded item (at initial bound this will be the Menu root element).
+
+##### e.dataItem `Object`
+
+The dataItem that is being loaded or bound (at initial bound this should be undefined).
+
+#### Example
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+         $("#context-menu").kendoContextMenu({
+            target: "#target",
+            dataTextField: "FullName",
+            dataSource: dataSource,
+            dataBound: function(){
+                console.log("dataBound");
+            }
+        })
+    </script>
+
+#### To set after initialization
+
+    <div id="target">Target</div>
+    <ul id="context-menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+        var contextMenu = $("#context-menu").kendoContextMenu({
+            target: "#target",
+            dataTextField: "FullName",
+            dataSource: dataSource
+        }).data("kendoContextMenu");
+
+        contextMenu.bind("dataBound", function() {
+            console.log("dataBound");
+        });
     </script>
 
 ### open

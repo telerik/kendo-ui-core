@@ -19,7 +19,7 @@ Kendo UI ContextMenu can be initialized in two ways:
 * Through HTML markup
 * Through JSON data object
 
-> **Important**  
+> **Important**
 >
 > Make sure you create the ContextMenu within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 
@@ -78,9 +78,71 @@ The example below demonstrates how to initialize the ContextMenu by using a JSON
         });
     </script>
 
+### Data Binding
+
+Using [`Kendo HierarchicalDataSource`](/api/framework/hierarchicaldatasource) is available as of the R2 2019 release.
+
+#### To Local Arrays
+
+The following example demonstrates how to create a ContextMenu and bind it to a local data source.
+
+###### Example
+    <div id="target">target</div>
+    <ul id="contextmenu"></ul>
+
+    <script>
+    $(document).ready(function() {
+        $("#contextmenu").kendoContextMenu({
+            target: "#target",
+            dataSource: [
+                {
+                    text: "Item 1",
+                    expanded: true,
+                    items: [
+                        { text: "Item 1.1" },
+                        { text: "Item 1.2" }
+                    ]
+                },
+                { text: "Item 2" }
+            ]
+        })
+    });
+    </script>
+
+#### To Remote Services
+
+The following example demonstrates how to create a Menu and bind it to a remote HierarchicalDataSource.
+
+###### Example
+    <div id="target">target</div>
+    <ul id="contextmenu"></ul>
+
+    <script>
+    $(document).ready(function() {
+        $("#contextmenu").kendoContextMenu({
+            target: "#target",
+            dataTextField: "FullName",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                        dataType: "jsonp"
+                    }
+                },
+                 schema: {
+                    model: {
+                        id: "EmployeeId",
+                        hasChildren: "HasEmployees"
+                    }
+                }
+            }
+        })
+    });
+    </script>
+
 ### HTML Structure and DOM Placement
 
-By default, the ContextMenu is created as a child of the `<body>` element.  
+By default, the ContextMenu is created as a child of the `<body>` element.
 
 ###### Example
 

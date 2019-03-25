@@ -8,7 +8,13 @@ position: 3
 
 # Virtualization
 
-The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization.
+The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization and you can apply the demonstrated approaches in this article to any of those widgets.
+
+For more information, refer to:
+* [Virtualization in the ComboBox (demo)](https://demos.telerik.com/kendo-ui/combobox/virtualization)
+* [Virtualization in the AutoComplete (demo)](https://demos.telerik.com/kendo-ui/autocomplete/virtualization)
+* [Virtualization in the DropDownList (demo)](https://demos.telerik.com/kendo-ui/dropdownlist/virtualization)
+* [Virtualization in the MultiSelect (demo)](https://demos.telerik.com/kendo-ui/multiselect/virtualization)
 
 Virtualization is useful for displaying large data sets. The UI virtualization technique uses a fixed amount of list items in the pop-up list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones.
 
@@ -275,14 +281,9 @@ The `valueMapper` is expected to return a data item or a list of data items when
 
 ## See Also
 
-* [Virtual Setup](/api/javascript/ui/combobox/configuration/virtual)
-* [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
-* [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
-* [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
-* [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
-* [JavaScript API Reference](/api/javascript/ui/combobox)
-
-Articles on the Kendo UI DataSource:
-
-* [DataSource Overview](/framework/datasource/overview)
-* [JavaScript DataSource API Reference](/api/javascript/data/datasource)
+* [Virtualization in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/virtualization)
+* [Virtualization in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/virtualization)
+* [Virtualization in the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/virtualization)
+* [Virtualization in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/virtualization)
+* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)

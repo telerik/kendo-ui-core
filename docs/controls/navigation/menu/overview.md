@@ -100,6 +100,68 @@ By initializing the Menu using JSON, you can use assign a select handler for eac
         });
     </script>
 
+### Data Binding
+
+Using [`Kendo HierarchicalDataSource`](/api/framework/hierarchicaldatasource) is available as of the R2 2019 release.
+
+#### To Local Arrays
+
+The following example demonstrates how to create a Menu and bind it to a local data source.
+
+###### Example
+
+    <ul id="menu"></ul>
+
+    <script>
+    $(document).ready(function() {
+        $("#menu").kendoMenu({
+            dataSource: [
+                {
+                    text: "Item 1",
+                    expanded: true,
+                    items: [
+                        { text: "Item 1.1" },
+                        { text: "Item 1.2" }
+                    ]
+                },
+                { text: "Item 2" }
+            ]
+        })
+    });
+    </script>
+
+#### To Remote Services
+
+The following example demonstrates how to create a Menu and bind it to a remote HierarchicalDataSource.
+
+###### Example
+
+    <ul id="menu"></ul>
+
+    <script>
+    $(document).ready(function() {
+        $("#menu").kendoMenu({
+            dataTextField: "FullName",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                        dataType: "jsonp"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "EmployeeId",
+                        hasChildren: "HasEmployees"
+                    }
+                }
+            }
+        })
+    });
+    </script>
+
+For a complete reference on how to bind the PanelBar to different service end-points, refer to the API documentation on [`HierarchicalDataSource`](/api/framework/hierarchicaldatasource).
+
 ### Sample Case
 
 The example below demonstrates the basic approach to build a Menu by using HTML markup.

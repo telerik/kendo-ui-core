@@ -181,7 +181,13 @@ it("item select is triggered when items are loaded via dataSource", function() {
             }
         ]
     });
+
+
+
     var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");
+
+    dataBoundMenu.dataSource.view()[0].load();
+    dataBoundMenu.dataSource.view()[0].items[0].load();
 
     var items = $('.k-item', dataBoundMenu.element);
     items.each(function() {
@@ -259,6 +265,43 @@ it("item select is triggered when item content is clicked", function() {
     $('.k-item', menu.element).last().find("b").trigger(CLICK);
 
     assert.equal(selectCount, 1);
+});
+
+it("dataBound event", function() {
+    var menuDiv = $("<div id='dataBoundMenu'></div>").appendTo(Mocha.fixture);
+    var selectCount = 0;
+    var raiseCount = function () {
+        selectCount++;
+    };
+    $("#dataBoundMenu").kendoMenu({
+        dataSource: [
+            {
+                text: "Item 1",
+                items: [
+                    {
+                        text: "Item 2",
+                        items: [
+                            {
+                                text: "Item 3",
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        dataBound: raiseCount
+    });
+
+
+
+    var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");
+
+    dataBoundMenu.dataSource.view()[0].load();
+    dataBoundMenu.dataSource.view()[0].items[0].load();
+
+    assert.equal(selectCount, 3);
+    dataBoundMenu.destroy();
+    menuDiv.remove();
 });
 
     });
