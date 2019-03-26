@@ -29,7 +29,7 @@ $(function(){
         rules: {
             radio: function(input) {
                 if (input.filter("[type=radio]") && input.attr("required")) {
-                    return $("#form").find("[type=radio]").is(":checked");
+                    return $("#form").find("[type=radio][name=" + input.attr("name") + "]").is(":checked");
                 }
                 return true;
             }
