@@ -4083,6 +4083,7 @@ declare namespace kendo.ui {
         dataItem(row: string): kendo.data.ObservableObject;
         dataItem(row: Element): kendo.data.ObservableObject;
         dataItem(row: JQuery): kendo.data.ObservableObject;
+        dataItems(): kendo.data.ObservableArray;
         destroy(): void;
         editCell(cell: JQuery): void;
         editRow(row: JQuery): void;
