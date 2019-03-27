@@ -33,16 +33,16 @@
         .flex-align-content(stretch);
         vertical-align: top;
     }
-}
 
-.k-content {
-    min-height: 1px;
-    .flex(1);
-    .flex-align(stretch);
-    display: block;
-    width: auto;
-    overflow: hidden;
-    position: relative;
+    .k-content {
+        min-height: 1px;
+        .flex(1);
+        .flex-align-items(stretch);
+        display: block;
+        width: auto;
+        overflow: hidden;
+        position: relative;
+    }
 }
 
 // /common mobile css
@@ -152,6 +152,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
         padding: .2em;
+    }
+
+    .k-edit-cell > input,
+    .k-edit-cell > select,
+    .k-grid-edit-row > td > input,
+    .k-grid-edit-row > td > select {
+        width: 100%;
+        box-sizing: border-box;
     }
 }
 

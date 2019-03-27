@@ -480,7 +480,14 @@ var __meta__ = { // jshint ignore:line
                 eventNames += " " + SCROLL;
             }
 
-            this._scrollableParents()[method](SCROLL, this._resizeProxy);
+            if (toggle && !this.scrollableParents) {
+                this.scrollableParents = this._scrollableParents();
+            }
+
+            if (this.scrollableParents && this.scrollableParents.length) {
+                this.scrollableParents[method](SCROLL, this._resizeProxy);
+            }
+
             WINDOW[method](eventNames, this._resizeProxy);
         },
 
