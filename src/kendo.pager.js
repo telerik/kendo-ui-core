@@ -110,12 +110,12 @@ var __meta__ = { // jshint ignore:line
                 that.list = that.element.find(".k-pager-numbers");
 
                 if (!that.list.length) {
-                   that.list = $('<ul class="k-pager-numbers k-reset" />')
-                        .append(that.currentPageTemplate({ text: 0}))
-                        .append(that.selectTemplate({ text: 0}))
-                        .appendTo(that.element);
-                   that.list.wrap('<div class="k-pager-numbers-wrap"></div>');
+                   that.list = $('<ul class="k-pager-numbers k-reset" />').appendTo(that.element);
                 }
+                if (!options.dataSource.total()) {
+                    that.list.empty().append(that.currentPageTemplate({ text: 0 })).append(that.selectTemplate({ text: 0 }));
+                }
+                that.list.wrap('<div class="k-pager-numbers-wrap"></div>');
             }
 
             if (options.input) {

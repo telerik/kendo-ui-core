@@ -776,6 +776,7 @@ if (kendo.ui.FilterMultiCheck) {
 kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Избери всички",
+  "clearAll": "Премахни всички",
   "clear": "Премахни",
   "filter": "Филтрирай",
   "search": "Търси",

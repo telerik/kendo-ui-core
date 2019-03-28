@@ -316,6 +316,7 @@ if (kendo.ui.FilterMultiCheck) {
 kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Select All",
+  "clearAll": "Clear All",
   "clear": "Clear",
   "filter": "Filter",
   "search": "Search",

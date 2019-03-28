@@ -307,7 +307,7 @@
 
             .k-space-right {
                 border: 0;
-                padding: 10px;
+                padding: 0 10px;
                 background: 0;
 
                 > input {
@@ -324,6 +324,12 @@
                     right: 15px;
                     z-index: 2;
                 }
+            }
+
+            .k-filter-tools {
+                margin: 1em;
+                display: flex;
+                justify-content: space-between;
             }
         }
 
@@ -352,6 +358,8 @@
 
         .k-multicheck-wrap,
         .k-multicheck-bool-wrap {
+            // Overriding the Web multicheck-wrap max-height
+            max-height: none;
 
             .k-item {
 
