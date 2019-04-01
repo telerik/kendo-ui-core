@@ -703,7 +703,7 @@ The following example demonstrates how to enable the scrolling functionality.
 
 ### scrollable.distance `Number` *(default: 50)*
 
-Sets the scroll amount (in pixels) that the Menu scrolls when the scroll buttons are hovered. Each such distance is animated and then another animation starts with the same distance. If clicking a scroll button, the Menu scrolls with 2x the distance.
+Sets the scroll amount (in pixels) that the Menu scrolls when the scroll buttons are hovered. Each such distance is animated and then another animation starts with the same distance. If clicking a scroll button, the Menu scrolls by doubling the distance.
 
 #### Example
 

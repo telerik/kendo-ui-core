@@ -1,14 +1,16 @@
 ---
-title: Context Menu
-page_title: Context Menu | Kendo UI Menu
+title: ContextMenu
+page_title: ContextMenu | Kendo UI Menu
 description: "Learn how to initialize Kendo UI ContextMenu, configure its behaviors and customize animations."
 slug: overview_kendoui_contextmenu_widget
 position: 2
 ---
 
-# Context Menu
+# ContextMenu
 
-[Kendo UI Context Menu](http://demos.telerik.com/kendo-ui/menu/context-menu) displays hierarchical data as a multi-level menu in a popup. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands. Items can be defined and initialized from HTML, or the API can be used to add and remove items. A ContextMenu target can be specified along with a filter for multiple targets and an event to which the ContextMenu will listen to so it pops up.
+The [Kendo UI ContextMenu](http://demos.telerik.com/kendo-ui/menu/context-menu) displays hierarchical data as a multi-level menu in a popup.
+
+It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands. Items can be defined and initialized from HTML, or the API can be used to add and remove items. A ContextMenu target can be specified along with a filter for multiple targets and an event to which the ContextMenu will listen to so it pops up.
 
 ## Getting Started
 
@@ -233,6 +235,104 @@ The example below demonstrates how to add a new root ContextMenu item.
             contextMenu.element.children("li:last")
         );
     </script>
+
+### Scrolling
+
+By default, the items inside the ContextMenu do not scroll. However, you can enable scrolling by setting the [`scrollable` property](/kendo-ui/api/javascript/ui/contextmenu/configuration/scrollable) of the ContextMenu to `true`. Once enabled, the ContextMenu displays buttons which scroll the items if they cannot fit the viewport height.
+
+The following example demonstrates how to enable scrolling within the ContextMenu.
+
+###### Example
+
+    <div id="target">Right Click to Open ContextMenu</div>
+    <ul id="context-menu">
+        <li>Item 1
+        <ul>
+            <li>Sub Item 1
+            <ul>
+                <li>Sub sub Item 1</li>
+                <li>Sub sub Item 2</li>
+                <li>Sub sub Item 3</li>
+            </ul>
+            </li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+        </ul>
+        </li>
+        <li>Item 2
+        <ul>
+            <li>Sub Item 1</li>
+            <li>Sub Item 2</li>
+            <li>Sub Item 3</li>
+        </ul>
+        </li>
+    </ul>
+
+    <script>
+        $("#context-menu").kendoContextMenu({
+            target: "#target",
+            scrollable: true
+        });
+    </script>
+
+
+You can also customize the scrollable amount by setting a value (in pixels) to the [`distance` property](kendo-ui/api/javascript/ui/contextmenu/configuration/scrollable#scrollabledistance). `distance` defaults to `50`.
+
+###### Example
+
+    <div id="target">Right Click to open the ContextMenu</div>
+    <ul id="context-menu">
+        <li>Item 1
+        <ul>
+            <li>Sub Item 1
+            <ul>
+                <li>Sub sub Item 1</li>
+                <li>Sub sub Item 2</li>
+                <li>Sub sub Item 3</li>
+            </ul>
+            </li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+            <li>Sub Item 1</li><li>Sub Item 2</li><li>Sub Item 3</li>
+        </ul>
+        </li>
+        <li>Item 2
+        <ul>
+            <li>Sub Item 1</li>
+            <li>Sub Item 2</li>
+            <li>Sub Item 3</li>
+        </ul>
+        </li>
+    </ul>
+
+    <script>
+        $("#context-menu").kendoContextMenu({
+            target: "#target",
+            scrollable: {
+                distance: 10
+            }
+        });
+    </script>
+
 
 ## See Also
 

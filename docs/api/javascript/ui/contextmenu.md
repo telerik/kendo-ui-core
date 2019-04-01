@@ -758,6 +758,66 @@ its parent horizontally. You can also switch off the screen boundary detection c
         });
     </script>
 
+### scrollable `Boolean|Object` *(default: false)*
+
+If enabled, the ContextMenu displays buttons that scroll the items when they cannot fit the viewport height. By default, scrolling is disabled.
+
+#### Example - enabling the scrolling functionality
+
+    <div id="target">Target</div>
+    <ul id="context-menu">
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+    </ul>
+
+    <script>
+        $("#context-menu").kendoContextMenu({
+            target: "#target",
+            scrollable: true
+        });
+    </script>
+
+### scrollable.distance `Number` *(default: 50)*
+
+Sets the scroll amount (in pixels) that the ContextMenu scrolls when the scroll buttons are hovered. Each such distance is animated and then another animation starts with the same distance. If clicking a scroll button, the ContextMenu scrolls by doubling the distance.
+
+#### Example - applying the scroll buttons of the ContextMenu
+
+    <div id="target">Target</div>
+    <ul id="context-menu">
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+        <li>Item 1</li><li>Item 2</li><li>Item 3</li>
+    </ul>
+
+    <script>
+        $("#context-menu").kendoContextMenu({
+            scrollable: {
+                distance: 20
+            }
+        });
+    </script>
+
+
 ### showOn `String`
 
 Specifies the event or events on which ContextMenu should open. By default ContextMenu will show on *contextmenu* event on desktop and *hold* event on touch devices.
@@ -822,7 +882,7 @@ Specifies the element on which ContextMenu should open. The default element is t
 
 ### append
 
-Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (or the root context menu if not specified).
+Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (or the root ContextMenu if not specified).
 
 #### Example
 

@@ -2372,6 +2372,10 @@ declare namespace kendo.ui {
         open?: ContextMenuAnimationOpen;
     }
 
+    interface ContextMenuScrollable {
+        distance?: number;
+    }
+
     interface ContextMenuOptions {
         name?: string;
         alignToAnchor?: boolean;
@@ -2385,6 +2389,7 @@ declare namespace kendo.ui {
         hoverDelay?: number;
         orientation?: string;
         popupCollision?: string;
+        scrollable?: boolean | ContextMenuScrollable;
         showOn?: string;
         target?: string|JQuery;
         close?(e: ContextMenuCloseEvent): void;

@@ -2323,7 +2323,7 @@ A promise that will be resolved when the export completes.
 
 ### copy
 
-Triggered when a range of a sheet is about to be copied.
+Fired when a range of a sheet is about to be copied.
 
 #### Event Data
 
@@ -2341,7 +2341,7 @@ If invoked the range data will not be retained in the clipboard.
 
 ### cut
 
-Triggered when a range of a sheet is about to be cut.
+Fired when a range of a sheet is about to be cut.
 
 #### Event Data
 
@@ -2359,7 +2359,7 @@ If invoked the range will not be cut and it will not be passed to the clipboard.
 
 ### paste
 
-Triggered when a data is about to be pasted in a sheet.
+Fired when a data is about to be pasted in a sheet.
 
 #### Event Data
 
@@ -2374,3 +2374,35 @@ The [Range](/api/javascript/spreadsheet/range) that is currently selected in the
 ##### e.preventDefault `Function`
 
 If invoked the paste will not be performed and no new data / formatting will be populate on the sheet.
+
+### dataBinding
+
+Fired when the data retrieved from a DataSource is about to be bound to a sheet. Available only if DataSource has been defined for at least one sheet.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet that is about to be populated with the DataSource data.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not be populated with the data from its DataSource.
+
+### dataBound
+
+Fired when the data from a DataSource is already populated in a sheet. Available only if DataSource has been defined for at least one sheet.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.sheet `kendo.spreadsheet.Sheet`
+
+The sheet that has been populated with the DataSource data.
