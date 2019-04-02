@@ -447,9 +447,9 @@
     kendo.ui.TreeListPager.prototype.options.messages =
       $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
         "allPages": "Όλα",
+        "page": "Σελίδα",
         "display": "{0} - {1} από {2} αντικείμενα",
         "empty": "Δεν υπάρχουν αντικείμενα",
-        "page": "Σελίδα",
         "of": "από {0}",
         "itemsPerPage": "αντικείμενα ανα σελίδα",
         "first": "Πηγαίντε στην πρώτη σελίδα",

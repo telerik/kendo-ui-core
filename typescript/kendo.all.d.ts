@@ -2342,6 +2342,7 @@ declare namespace kendo.ui {
         enable(element: string, enable: boolean): kendo.ui.ContextMenu;
         enable(element: Element, enable: boolean): kendo.ui.ContextMenu;
         enable(element: JQuery, enable: boolean): kendo.ui.ContextMenu;
+        findByUid(uid: string): JQuery;
         insertAfter(item: any, referenceItem: string): kendo.ui.ContextMenu;
         insertAfter(item: any, referenceItem: Element): kendo.ui.ContextMenu;
         insertAfter(item: any, referenceItem: JQuery): kendo.ui.ContextMenu;
@@ -2383,7 +2384,12 @@ declare namespace kendo.ui {
         appendTo?: string|JQuery;
         closeOnClick?: boolean;
         copyAnchorStyles?: boolean;
-        dataSource?: any|any;
+        dataSource?: any|any|kendo.data.HierarchicalDataSource;
+        dataTextField?: string;
+        dataUrlField?: string;
+        dataSpriteCssClassField?: string;
+        dataImageUrlField?: string;
+        dataContentField?: string;
         direction?: string;
         filter?: string;
         hoverDelay?: number;
@@ -5023,6 +5029,7 @@ declare namespace kendo.ui {
         enable(element: string, enable: boolean): kendo.ui.Menu;
         enable(element: Element, enable: boolean): kendo.ui.Menu;
         enable(element: JQuery, enable: boolean): kendo.ui.Menu;
+        findByUid(uid: string): JQuery;
         insertAfter(item: any, referenceItem: string): kendo.ui.Menu;
         insertAfter(item: any, referenceItem: Element): kendo.ui.Menu;
         insertAfter(item: any, referenceItem: JQuery): kendo.ui.Menu;
@@ -5066,7 +5073,12 @@ declare namespace kendo.ui {
         name?: string;
         animation?: boolean | MenuAnimation;
         closeOnClick?: boolean;
-        dataSource?: any|any;
+        dataSource?: any|any|kendo.data.HierarchicalDataSource;
+        dataTextField?: string;
+        dataUrlField?: string;
+        dataSpriteCssClassField?: string;
+        dataImageUrlField?: string;
+        dataContentField?: string;
         direction?: string;
         hoverDelay?: number;
         openOnClick?: boolean | MenuOpenOnClick;

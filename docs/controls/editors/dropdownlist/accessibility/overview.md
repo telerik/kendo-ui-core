@@ -6,7 +6,7 @@ slug: accessibility_kendoui_ddl_widget
 position: 1
 ---
 
-# Grid Accessibility
+# DropDownList Accessibility
 
 The DropDownList is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
