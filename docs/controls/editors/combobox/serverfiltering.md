@@ -8,7 +8,13 @@ position: 4
 
 # Server Filtering
 
-The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support server filtering.
+The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support server filtering and you can apply the demonstrated approaches in this article to any of those widgets.
+
+For more information, refer to:
+* [Server Filtering in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/serverfiltering)
+* [server Filtering in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/serverfiltering)
+* [Server Filtering in the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/serverfiltering)
+* [Server Filtering in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/serverfiltering)
 
 You can use server filtering for displaying only a subset of data. Basically, the widget displays just the data returned from the server. You can use server filtering to display a subset of data, a reduced portion of the whole dataset. This functionality is convenient for you to apply when the end user cannot or does not want to see the whole dataset in the popup element.
 
@@ -41,10 +47,8 @@ The server filtering feature (as its name indicates) filters only the source. To
 
 ## See Also
 
-Other articles on the Kendo UI ComboBox:
-
-* [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
-* [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
-* [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
-* [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [Server Filtering in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/serverfiltering)
+* [server Filtering in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/serverfiltering)
+* [Server Filtering in the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/serverfiltering)
+* [Server Filtering in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/serverfiltering)
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)

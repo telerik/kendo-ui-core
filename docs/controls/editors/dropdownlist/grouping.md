@@ -1,22 +1,116 @@
 ---
 title: Grouping
-page_title: Grouping | Kendo UI DropDownList
-description: "Learn how to configure grouping in the Kendo UI DropDownList, ComboBox, AutoComplete and MultiSelect widgets."
-slug: grouping_kendoui_dropdownlist_widget
-position: 2
+page_title: jQuery DropDownList Documentation | Grouping | Kendo UI
+description: "Get started with the jQuery DropDownList by Kendo UI and learn how to configure its grouping functionality."
+slug: grouping_kendoui_ddl_widget
+position: 3
 ---
 
 # Grouping
 
-For more information on how to use grouping in a Kendo UI DropDownList widget, refer to the article on [grouping the Kendo UI ComboBox]({% slug grouping_kendoui_combobox_widget %}).
+As of the Kendo UI Q1 2015 (2015.1.318) release, the Kendo UI DropDownList provides options for binding it to a grouped [Kendo UI DataSource component]({% slug overview_kendoui_datasourcecomponent %}).
 
-The approaches described in it are applicable for the DropDownList.
+The grouping functionality allows you to display data items that are categorized by a specific model field. For more information, refer to the article on the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration.
+
+## Getting Started
+
+To enable grouping, use the remote `transport` configuration and a grouped DataSource. To display grouped items in the widget, group the DataSource component by using its [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) configuration option. Once you define the `group` option, the DropDownList will automatically display the grouped suggestion items.
+
+> The grouped data will be sorted either in ascending or descending order which is expected behavior and cannot be modified. To group the data in a specific order, use [server grouping](/api/javascript/data/datasource/configuration/servergrouping).
+
+###### Example
+
+```dojo
+<div class="demo-section k-header">
+    <h4>Customers</h4>
+    <input id="customers" style="width: 400px" />
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#customers").kendoComboBox({
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            height: 200,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                },
+                group: { field: "Country" } //group the data by 'Country' field
+            }
+        });
+    });
+</script>
+```
+
+## Customizing the Inline Group Title
+
+To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/grouptemplate) configuration. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
+
+The following example demonstrates how to define a custom group template.
+
+###### Example
+
+```dojo
+<div class="demo-section k-header">
+    <h4>Customers</h4>
+    <input id="customers" style="width: 400px" />
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#customers").kendoComboBox({
+            height: 200,
+            groupTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                },
+                group: { field: "Country" } //group the data by 'Country' field
+            }
+        });
+    });
+</script>
+```
+
+## Customizing the Fixed Group Header
+
+To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/fixedgrouptemplate) option. It displays the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
+
+The following example demonstrates how to define a custom fixed group template.
+
+###### Example
+
+```dojo
+<div class="demo-section k-header">
+    <h4>Customers</h4>
+    <input id="customers" style="width: 400px" />
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#customers").kendoComboBox({
+            height: 200,
+            fixedGroupedTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                },
+                group: { field: "Country" } //group the data by 'Country' field
+            }
+        });
+    });
+</script>
+```
 
 ## See Also
 
-Other articles on the Kendo UI DropDownList:
-
-* [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
-* [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
-* [Server Filtering]({% slug server_filtering_kendoui_ddl_widget %})
-* [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
+* [Grouping by the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/grouping)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)

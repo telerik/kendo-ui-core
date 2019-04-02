@@ -102,6 +102,15 @@ navigation:
     "controls/editors":
         title: "Editors"
         position: 2
+    "controls/editors/dropdownlist/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/editors/dropdownlist/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/editors/dropdownlist/how-to":
+        title: "How To"
+        position: 70
     "controls/charts":
         title: "Charts"
         position: 3
