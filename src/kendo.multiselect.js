@@ -103,7 +103,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialOpen = true;
-            that._aria(id);
+            that._ariaLabel();
+            that._ariaSetLive();
             that._dataSource();
             that._ignoreCase();
             that._popup();
@@ -128,7 +129,7 @@ var __meta__ = { // jshint ignore:line
                 that.enable(false);
             }
 
-            this._ariaSetSize(this.value().length);
+            that._ariaSetSize(that.value().length);
 
             kendo.notify(that);
             that._toggleCloseVisibility();
@@ -210,14 +211,17 @@ var __meta__ = { // jshint ignore:line
                         .removeClass(FOCUSEDCLASS)
                         .removeAttr(ID);
 
+                    that._currentTag.find(".k-select").attr("aria-hidden", true);
+
                     that.input.removeAttr("aria-activedescendant");
                 }
 
                 if (candidate) {
                     candidate.addClass(FOCUSEDCLASS).attr(ID, that._tagID);
 
-                    that.input
-                        .attr("aria-activedescendant", that._tagID);
+                    candidate.find(".k-select").removeAttr("aria-hidden");
+
+                    that.input.attr("aria-activedescendant", that._tagID);
                 }
 
                 that._currentTag = candidate;
@@ -612,7 +616,7 @@ var __meta__ = { // jshint ignore:line
                 that._fetchData();
             }
 
-            this._ariaSetSize(this.value().length);
+            that._ariaSetSize(that.value().length);
 
             that._toggleCloseVisibility();
         },
@@ -1399,8 +1403,7 @@ var __meta__ = { // jshint ignore:line
                 "title": element[0].title,
                 "aria-expanded": false,
                 "aria-haspopup": "listbox",
-                "aria-autocomplete": "list",
-                "aria-live": "polite"
+                "aria-autocomplete": "list"
             });
         },
 
@@ -1409,7 +1412,7 @@ var __meta__ = { // jshint ignore:line
                 tagList = that._innerWrapper.children("ul");
 
             if (!tagList[0]) {
-                tagList = $('<ul role="listbox" unselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
+                tagList = $('<ul unselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
             }
 
             that.tagList = tagList;
@@ -1435,7 +1438,7 @@ var __meta__ = { // jshint ignore:line
             that.tagTemplate = function(data) {
                 return '<li role="option" aria-selected="true" class="k-button" unselectable="on"><span unselectable="on">' +
                         tagTemplate(data) +
-                        '</span><span unselectable="on" aria-label="' +
+                        '</span><span aria-hidden="true" unselectable="on" aria-label="' +
                         (isMultiple ? "delete" : "open") +
                         '" class="k-select"><span class="k-icon ' +
                         (isMultiple ? "k-i-close" : "k-i-arrow-60-down") + '">' +
@@ -1477,7 +1480,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
 
-                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" role="listbox" unselectable="on" />').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).css("display", "");
@@ -1491,6 +1494,12 @@ var __meta__ = { // jshint ignore:line
             if(value && selectedItems.length) {
                 selectedItems.attr("aria-setsize", value);
             }
+        },
+
+        _ariaSetLive: function() {
+            var that = this;
+
+            that.ul.attr("aria-live", !that._isFilterEnabled() ? "off" : "polite");
         }
     });
 

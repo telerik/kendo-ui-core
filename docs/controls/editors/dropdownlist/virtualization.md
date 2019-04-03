@@ -27,9 +27,9 @@ To retrieve and display only a subset of the whole dataset, the virtualization f
 
 The data virtualization of the DropDownList uses the `DataSource` paging functionality and a remote data retrieval. In this way, the widget retrieves only a specified data page instead of requesting the whole dataset at once. To ensure the proper functioning of the widgets, configure the `DataSource` paging correctly. For more information, refer to the [server paging](/api/javascript/data/datasource/configuration/serverpaging) configuration.
 
-The UI virtualization of the DropDownList uses a specific strategy for reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox/configuration/height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
+The UI virtualization of the DropDownList uses a specific strategy for reusing a list of DOM elements for displaying the corresponding data chunk. The number of these elements is determined based on the [`height`](/api/javascript/ui/dropdownlist/configuration/height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
 
-The combined data and UI virtualization uses the calculated `pageSize` value based on the ([`height`](/api/javascript/ui/combobox/configuration/height) / [`itemHeight`](#itemheight)) * 4 formula. That calculation is automatically done by the DropDownList and if the defined `pageSize` value does not match the calculated `pageSize` value, the calculated value takes precedence. For example, if the `height` of the DropDownList is `520px` and `itemHeight` is `26`, the `pageSize` will be set to `80`, because (520 / 26) * 4 equals `80`.
+The combined data and UI virtualization uses the calculated `pageSize` value based on the ([`height`](/api/javascript/ui/dropdownlist/configuration/height) / [`itemHeight`](#itemheight)) * 4 formula. That calculation is automatically done by the DropDownList and if the defined `pageSize` value does not match the calculated `pageSize` value, the calculated value takes precedence. For example, if the `height` of the DropDownList is `520px` and `itemHeight` is `26`, the `pageSize` will be set to `80`, because (520 / 26) * 4 equals `80`.
 
 > * Enabling the paging and setting the `pageSize` of the DropDownList is efficient only when these features are used with virtualization.
 > * Defining incorrect `pageSize` values triggers multiple initial requests. To avoid that, use the formula to calculate the `pageSize` value.
@@ -64,7 +64,7 @@ The following example demonstrates how to enable virtualization in the DropDownL
     <input id="orders" style="width: 400px" />
     <script>
         $(document).ready(function() {
-            $("#orders").kendoComboBox({
+            $("#orders").kendoDropDownList({
                 template: '#= OrderID # | #= ShipName #',
                 dataTextField: "ShipName",
                 dataValueField: "OrderID",
@@ -180,7 +180,7 @@ On initial load, the widget checks whether the selected value is present in the 
 
 ![Virtualization process](mapValueTo-index.png)
 
-The `valueMapper` is expected to return a row index or a list of indices when a multiple selection is available. That being said, the service is expected to return either an index (number) or a list of indices. If the value does not exist, the `valueMapper` returns `null`, `[]`, or `-1`, and the widget deselects the currently selected items. For a runnable  example, refer to the result of [the test service](https://demos.telerik.com/kendo-ui/combobox/virtualization) that is used in the online demos.
+The `valueMapper` is expected to return a row index or a list of indices when a multiple selection is available. That being said, the service is expected to return either an index (number) or a list of indices. If the value does not exist, the `valueMapper` returns `null`, `[]`, or `-1`, and the widget deselects the currently selected items. For a runnable  example, refer to the result of [the test service](https://demos.telerik.com/kendo-ui/dropdownlist/virtualization) that is used in the online demos.
 
 ###### Example
 

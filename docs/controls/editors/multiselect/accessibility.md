@@ -38,9 +38,7 @@ The MultiSelect implements the following ARIA, states and properties for its sea
 |          | [aria-expanded](https://www.w3.org/TR/wai-aria-1.1/#aria-expanded)         | Indicates the state of the popup with items - expanded or collapsed. |
 |          | [aria-haspopup](https://www.w3.org/TR/wai-aria-1.1/#aria-haspopup)         | Indicates that the widget has a popup. |
 |          | [aria-autocomplete](https://www.w3.org/TR/wai-aria-1.1/#aria-autocomplete)     | Indicates that the provided user input will display a popup that contains a list of values that could complete the provided input. |
-|          | [aria-live](https://www.w3.org/TR/wai-aria-1.1/#aria-live)             | Ensures that changes like selecting and deselecting of values from the list will be correctly announced by assistive technologies .|
 |          | [aria-describedby](https://www.w3.org/TR/wai-aria-1.1/#aria-describedby)  | Identifies the tag list as the description object and allows screen readers to announce the selected options upon focusing them. |
-|          | [aria-owns](https://www.w3.org/TR/wai-aria-1.1/#aria-owns)             | Creates a parent/child contextual relationship between the search input, the tag list and the popup with items. |
 |          | [aria-busy](https://www.w3.org/TR/wai-aria-1.1/#aria-busy)             | Indicates if the widget is in the process of loading data. |
 |          | [aria-disabled](https://www.w3.org/TR/wai-aria-1.1/#aria-disabled)         | Indicates if the widget is disabled. |
 |          | [aria-activedescendant](https://www.w3.org/TR/wai-aria-1.1/#aria-activedescendant) | Indicates the active element when navigating through the list of selected options. |

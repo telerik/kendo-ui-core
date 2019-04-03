@@ -1,5 +1,6 @@
 (function() {
     var MultiSelect = kendo.ui.MultiSelect,
+        keys = kendo.keys,
         input;
 
     describe("kendo.ui.MultiSelect ARIA", function () {
@@ -20,13 +21,6 @@
         var multiselect = new MultiSelect(input);
 
         assert.equal(multiselect.input[0].getAttribute("role"), "listbox");
-    });
-
-    it("MultiSelect adds aria-owns", function() {
-        var multiselect = new MultiSelect(input.attr("id", "test"));
-        var id = multiselect.tagList.attr("id") + " " + multiselect.ul.attr("id");
-
-        assert.equal(multiselect.input.attr("aria-owns"), id);
     });
 
     it("MultiSelect adds aria-disabled='true'", function() {
@@ -240,6 +234,25 @@
         });
 
         assert.equal(multiselect.tagList.children().first().attr("aria-setsize"), 1);
+    });
+
+    it("MultiSelect toggles aria-hidden of the tag list items", function() {
+        var multiselect = new MultiSelect(input, {
+            dataSource: ["item1", "item2"],
+            value: "item1"
+        });
+        var tag = multiselect.tagList.children().first().find(".k-select");
+
+        assert.equal(tag.attr("aria-hidden"), "true");
+
+        multiselect.input.focus();
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.LEFT
+        });
+
+        assert.isOk(!tag.attr("aria-hidden"));
     });
     });
 }());
