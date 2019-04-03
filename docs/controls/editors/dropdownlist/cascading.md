@@ -8,7 +8,7 @@ position: 8
 
 # Cascading DropDownLists
 
-The [cascading DropDownList](http://demos.telerik.com/kendo-ui/combobox/cascadingcombobox) is a series of two or more DropDownLists in which each DropDownList is filtered according to the selected options in the previous DropDownList.
+The [cascading DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/cascadingdropdownlist) is a series of two or more DropDownLists in which each DropDownList is filtered according to the selected options in the previous DropDownList.
 
 ## Basic Concepts and Requirements
 
@@ -45,13 +45,13 @@ The following example demonstrates how to initialize a cascading DropDownList.
 
     <script type="text/javascript">
          $(function() {
-             $("#parent").kendoComboBox({
+             $("#parent").kendoDropDownList({
                 dataTextField: "parentName",
                 dataValueField: "parentID"
                 // Define the settings for the DropDownList.
              });
 
-             $("#child").kendoComboBox({
+             $("#child").kendoDropDownList({
                 cascadeFrom: "parent"
                 // Define other settings.
              });

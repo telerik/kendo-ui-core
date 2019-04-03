@@ -28,7 +28,7 @@ To enable grouping, use the remote `transport` configuration and a grouped DataS
 
 <script>
     $(document).ready(function() {
-        $("#customers").kendoComboBox({
+        $("#customers").kendoDropDownList({
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             height: 200,
@@ -46,7 +46,7 @@ To enable grouping, use the remote `transport` configuration and a grouped DataS
 
 ## Customizing the Inline Group Title
 
-To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/grouptemplate) configuration. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
+To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/grouptemplate) configuration. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
 
 The following example demonstrates how to define a custom group template.
 
@@ -60,7 +60,7 @@ The following example demonstrates how to define a custom group template.
 
 <script>
     $(document).ready(function() {
-        $("#customers").kendoComboBox({
+        $("#customers").kendoDropDownList({
             height: 200,
             groupTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
             dataTextField: "ContactName",
@@ -79,7 +79,7 @@ The following example demonstrates how to define a custom group template.
 
 ## Customizing the Fixed Group Header
 
-To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/configuration/fixedgrouptemplate) option. It displays the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
+To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/fixedgrouptemplate) option. It displays the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
 
 The following example demonstrates how to define a custom fixed group template.
 
@@ -93,7 +93,7 @@ The following example demonstrates how to define a custom fixed group template.
 
 <script>
     $(document).ready(function() {
-        $("#customers").kendoComboBox({
+        $("#customers").kendoDropDownList({
             height: 200,
             fixedGroupedTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
             dataTextField: "ContactName",
