@@ -16,7 +16,7 @@ To use any jQuery component in a React application, you’ll need a trial of the
 ## KendoReact Suite
 
 If you are looking for native React components (no jQuery dependency), please visit [KendoReact](https://www.telerik.com/kendo-react-ui/).
-KendoReact a separate suite of 50+ native React components, from Grid and Charts to TimePicker, DatePicker and Menus.
+KendoReact a separate suite of 55+ native React components, from Grid and Charts to TimePicker, DatePicker and Menus.
 
 To access the native components, you need to sign up for a [KendoReact trial](https://www.telerik.com/kendo-react-ui/) or purchase a [KendoReact license](https://www.telerik.com/kendo-react-ui/#pricing).
 
@@ -32,43 +32,43 @@ The Kendo UI for jQuery widgets can be used inside a React application by follow
 
 1. Import the Kendo UI files or a single file if only one or two widgets will be used in order to reduce the bundle size:
 
-```
-    import '@progress/kendo-ui' // import the entire Kendo UI
-    //or
-    import '@progress/kendo-ui/js/kendo.scheduler.js'
-```
+    ```
+        import '@progress/kendo-ui' // import the entire Kendo UI
+        //or
+        import '@progress/kendo-ui/js/kendo.scheduler.js'
+    ```
 
-2. Add the DOM element that will be used to render the Kendo UI for jQuery widget.
+1. Add the DOM element that will be used to render the Kendo UI for jQuery widget.
 
-```
-    <div id="scheduler"></div>
-```
+    ```
+        <div id="scheduler"></div>
+    ```
 
-3. On the `ComponentDidMount` event initialize the widget with its options.
+1. On the `ComponentDidMount` event initialize the widget with its options.
 
-```html
-    componentDidMount(){
-        this.kendoSchedulerInstance = $('#scheduler').kendoScheduler({
-            ...Add options
-        }).data('kendoScheduler')
-    }
-```
+    ```html
+        componentDidMount(){
+            this.kendoSchedulerInstance = $('#scheduler').kendoScheduler({
+                ...Add options
+            }).data('kendoScheduler')
+        }
+    ```
 
-4. The jQuery widgets are not automatically controlled by the changes in the state or the props. If the component has to be changed, the public API methods of the component can be utilized on the `componentDidUpdate` lifecycle method.
+1. The jQuery widgets are not automatically controlled by the changes in the state or the props. If the component has to be changed, the public API methods of the component can be utilized on the `componentDidUpdate` lifecycle method.
 
-```
-    componentDidUpdate(){
-        let event = this.kendoSchedulerInstance.data()[0];
-        this.kendoSchedulerInstance.select([event.uid]);
-    }
-```
+    ```
+        componentDidUpdate(){
+            let event = this.kendoSchedulerInstance.data()[0];
+            this.kendoSchedulerInstance.select([event.uid]);
+        }
+    ```
 
-5. To prevent performance issues and memory leaks, destroy the widget on the `componentWillUnmount` lifecycle method.
+1. To prevent performance issues and memory leaks, destroy the widget on the `componentWillUnmount` lifecycle method.
 
-```
-    this.kendoSchedulerInstance.destroy()
-    $('#scheduler').empty()
-```
+    ```
+        this.kendoSchedulerInstance.destroy()
+        $('#scheduler').empty()
+    ```
 
 ## React Wrappers
 
