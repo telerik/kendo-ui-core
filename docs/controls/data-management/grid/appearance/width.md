@@ -27,33 +27,33 @@ Depending on the specific scenarios, you can use any of the following approaches
 
 * If scrolling is disabled, use the following CSS.
 
-    #GridID
-    {
-        min-width: 800px;
-    }
+        #GridID
+        {
+            min-width: 800px;
+        }
 
 * If scrolling is enabled and the Grid is not hierarchical (with no nested tables), use the following CSS. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).
 
-    #GridID .k-grid-header-wrap > table, // header table
-    #GridID .k-grid-content table, // data table, no virtual scrolling
-    #GridID .k-virtual-scrollable-wrap table // data table, with virtual scrolling
-    {
-        min-width: 800px;
-    }
+        #GridID .k-grid-header-wrap > table, // header table
+        #GridID .k-grid-content table, // data table, no virtual scrolling
+        #GridID .k-virtual-scrollable-wrap table // data table, with virtual scrolling
+        {
+            min-width: 800px;
+        }
 
 * If scrolling is enabled and the Grid is hierarchical (with nested tables), use the following CSS. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).
 
-    #GridID .k-grid-header-wrap > table, // header table
-    #GridID .k-grid-content table, // data table, no virtual scrolling
-    #GridID .k-virtual-scrollable-wrap table // data table, with virtual scrolling
-    {
-        min-width: 800px;
-    }
-    #GridID .k-grid-content table table, // data table, no virtual scrolling
-    #GridID .k-virtual-scrollable-wrap table table // data table, with virtual scrolling
-    {
-        min-width: initial;
-    }
+        #GridID .k-grid-header-wrap > table, // header table
+        #GridID .k-grid-content table, // data table, no virtual scrolling
+        #GridID .k-virtual-scrollable-wrap table // data table, with virtual scrolling
+        {
+            min-width: 800px;
+        }
+        #GridID .k-grid-content table table, // data table, no virtual scrolling
+        #GridID .k-virtual-scrollable-wrap table table // data table, with virtual scrolling
+        {
+            min-width: initial;
+        }
 
 ## See Also
 
