@@ -877,6 +877,10 @@ The width of the border in pixels.
 
 The font color of the cell. Many standard CSS formats are supported. However, the canonical form is `#ccff00`.
 
+### sheets.rows.cells.comment `String`
+
+The comment of the cell — a tooltip that appears when the cell is hovered.
+
 ### sheets.rows.cells.fontFamily `String`
 
 The font family of the cell.
@@ -2370,6 +2374,75 @@ The widget instance which fired the event.
 ##### e.range `kendo.spreadsheet.Range`
 
 The [Range](/api/javascript/spreadsheet/range) that is currently selected in the spreadsheet. The actual selection will change according to the pasted range / values.
+
+##### e.clipboardContent `object`
+
+The content that has been passed from the clipboard to the paste command. This data allows you to prevent the default execution of the paste functionality, manipulate the data and paste it properly in the widget content area.
+
+#### Example - paste only values in the Spreadsheet
+
+    <div id="example">
+        <div id="spreadsheet"></div>
+    </div>
+
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets:[{
+                name: 'test',
+                rows: [{
+                    cells: [{
+                        value: 12.39,
+                        format: "$#,##0.00",
+                        background: "rgb(255,255,255)",
+                        color: "rgb(0,62,117)"
+                    }]
+                }]
+            }],
+            paste: function(e) {
+                e.preventDefault()
+
+                var currentRange = e.range;
+                var fullData = e.clipboardContent.data;
+                var mergedCells = e.clipboardContent.mergedCells;
+                var valuesOnly = [];
+                var topLeft = currentRange.topLeft();
+                var initialRow = topLeft.row;
+                var initialCol = topLeft.col;
+                var origRef = e.clipboardContent.origRef;
+                var numberOfRows = origRef.bottomRight.row - origRef.topLeft.row + 1;
+                var numberOfCols = origRef.bottomRight.col - origRef.topLeft.col + 1;
+
+                for(var i = 0; i < fullData.length; i += 1) {
+                    var currentFull = fullData[i];
+                    var row = [];
+
+                    for(var j = 0; j < currentFull.length; j += 1 ) {
+                        row.push(currentFull[j].value);
+                    }
+
+                    valuesOnly.push(row);
+                }
+
+                var spread = e.sender;
+                var sheet = spread.activeSheet();
+                var rangeToPaste =  sheet.range(initialRow, initialCol, numberOfRows, numberOfCols);
+
+                rangeToPaste.values(valuesOnly);
+                sheet.select(rangeToPaste);
+
+                for(var i = 0; i < mergedCells.length; i += 1) {
+                    var initialMergedRange = sheet.range(mergedCells[i]);
+                    var mergeTopLeft = initialMergedRange.topLeft();
+                    var mergeInitialRow = mergeTopLeft.row + initialRow;
+                    var mergedInitialCol = mergeTopLeft.col + initialCol;
+                    var mergedNumberOfRows = initialMergedRange.values.length;
+                    var mergedNumberOfCols = initialMergedRange.values()[0].length;
+
+                    sheet.range(mergeInitialRow, mergedInitialCol, mergedNumberOfRows, mergedNumberOfCols).merge();
+                }
+            }
+        });
+    </script>
 
 ##### e.preventDefault `Function`
 

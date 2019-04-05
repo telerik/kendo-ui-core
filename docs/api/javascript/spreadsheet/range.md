@@ -227,6 +227,34 @@ Any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_val
 </script>
 ```
 
+### comment
+
+Gets or sets the comment for the cells.  The comment is a text tooltip that appears when the cell is hovered.
+
+#### Parameters
+
+##### value `String` *optional*
+
+Text comment.  Pass `null` to remove the comment.
+
+#### Returns
+
+`String` the current comment of the top-left cell in the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").comment("Test");
+    sheet.range("A1").comment(null); // remove it
+    sheet.range("B2").comment("This is a comment");
+</script>
+```
+
 ### clear
 
 Clears the contents of the range cells.

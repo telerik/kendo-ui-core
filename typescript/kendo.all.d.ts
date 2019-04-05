@@ -2325,7 +2325,7 @@ declare namespace kendo.ui {
 
         options: ContextMenuOptions;
 
-
+        dataSource: kendo.data.DataSource;
         element: JQuery;
         wrapper: JQuery;
 
@@ -5011,7 +5011,7 @@ declare namespace kendo.ui {
 
         options: MenuOptions;
 
-
+        dataSource: kendo.data.DataSource;
         element: JQuery;
         wrapper: JQuery;
 
@@ -7245,6 +7245,7 @@ declare namespace kendo.ui {
         borderTop?: SpreadsheetSheetRowCellBorderTop;
         borderRight?: SpreadsheetSheetRowCellBorderRight;
         color?: string;
+        comment?: string;
         fontFamily?: string;
         fontSize?: number;
         italic?: boolean;
@@ -18924,6 +18925,8 @@ declare namespace kendo.spreadsheet {
         borderTop(value?: any): void;
         color(): string;
         color(value?: string): void;
+        comment(): string;
+        comment(value?: string): void;
         clear(options?: any): void;
         clearFilter(indices: any): void;
         clearFilter(indices: number): void;

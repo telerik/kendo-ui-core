@@ -42,6 +42,25 @@
             overflow: hidden;
             padding: 1px 3px;
             background-clip: padding-box;
+
+            &.k-spreadsheet-has-comment:after {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                top: 0px;
+                right: 0px;
+                background: red;
+            }
+        }
+
+        .k-spreadsheet-cell-comment {
+            position: "absolute";
+            white-space: pre-wrap;
+            text-align: left;
+            background: #fe9;
+            border: 1px solid #000;
         }
     }
 

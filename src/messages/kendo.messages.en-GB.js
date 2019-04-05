@@ -788,6 +788,13 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   },
   "unsupportedSelectionDialog": {
     "errorMessage": "That action cannot be performed on multiple selection."
+  },
+  "insertCommentDialog": {
+    "title": "Insert comment",
+    "labels": {
+      "comment": "Comment",
+      "removeComment": "Remove comment"
+    }
   }
 });
 }
@@ -896,6 +903,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "freezeColumns": "Freeze columns",
     "unfreeze": "Unfreeze panes"
   },
+  "insertComment": "Insert comment",
   "italic": "Italic",
   "merge": "Merge cells",
   "mergeButtons": {
