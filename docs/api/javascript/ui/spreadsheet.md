@@ -2375,7 +2375,7 @@ The widget instance which fired the event.
 
 The [Range](/api/javascript/spreadsheet/range) that is currently selected in the spreadsheet. The actual selection will change according to the pasted range / values.
 
-##### e.clipboardContent `object`
+##### e.clipboardContent `Object`
 
 The content that has been passed from the clipboard to the paste command. This data allows you to prevent the default execution of the paste functionality, manipulate the data and paste it properly in the widget content area.
 
