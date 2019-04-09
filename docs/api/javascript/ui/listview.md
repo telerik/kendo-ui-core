@@ -146,6 +146,80 @@ Specifies the template for ListView items during edit mode.
       });
     </script>
 
+### height `Number|String`
+
+The height of the listview. Numeric values are treated as pixels.
+
+#### Example - set the height as a number
+
+    <div id ="listView"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+    });
+    $("#listView").kendoListView({
+        dataSource: dataSource,
+        template: "<div>#:name#</div>",
+        height: 50
+    });
+    </script>
+
+#### Example - set the height as a string
+
+    <div id ="listView"></div>
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      data: [ { name: "Jane Doe" }, { name: "John Doe" }]
+    });
+    $("#listView").kendoListView({
+        dataSource: dataSource,
+        template: "<div>#:name#</div>",
+        height: "1em"
+    });
+    </script>
+
+### scrollable `Boolean|String` *(default: false)*
+
+If set to `true` the listview will display a scrollbar when the content exceeds the listview [height](/api/javascript/ui/listview/configuration/height) value. By default scrolling is disabled.
+
+It could be also set to `endless` in order to enable the endless scrolling functionality. In endless scrolling mode the [height](/api/javascript/ui/listview/configuration/height) should be configured to display a scrollbar. Scrolling to the end of the scrollbar will load more items (equal to the pageSize number) and append them to the listview DOM element utill all items are loaded and displayed.
+
+#### Example - set the scrollable to endless
+
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <div>
+        <div id="listView"></div>
+    </div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="k-widget">
+            <div>Product Name</div>
+            <div>#:ProductName#</div>
+            <div>Unit Price</div>
+            <div>#:kendo.toString(UnitPrice, "c")#</div>
+            <div>Units In Stock</div>
+            <div>#:UnitsInStock#</div>
+            <div>Discontinued</div>
+            <div>#:Discontinued#</div>
+        </div>
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var dataSource = new kendo.data.DataSource({
+                data: products,
+                pageSize: 6
+            });
+
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                height: 400,
+                scrollable: "endless",
+                template: kendo.template($("#template").html()),
+            });
+        });
+    </script>
+
 ### navigatable `Boolean` *(default: false)*
 
  Indicates whether keyboard navigation is enabled/disabled.
@@ -1099,7 +1173,7 @@ The event handler function context (available via the `this` keyword) will be se
 #### Example
 
     <script type="text/x-kendo-tmpl" id="template">
-    <div> #:name# 
+    <div> #:name#
       	<div>
            <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
       </div>
@@ -1146,7 +1220,7 @@ The event handler function context (available via the `this` keyword) will be se
 #### To set after initialization
 
     <script type="text/x-kendo-tmpl" id="template">
-    <div> #:name# 
+    <div> #:name#
       	<div>
            <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
       	</div>

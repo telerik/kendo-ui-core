@@ -243,6 +243,17 @@
                 flex: 1 1 auto;
                 max-width: 100%;
             }
+
+            .k-item-title,
+            .k-filter-input-text,
+            .k-filter-operator-text,
+            .k-filter-logic-and-text,
+            .k-filter-logic-or-text {
+                width: 40%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
 
         &.k-column-menu {
@@ -290,10 +301,9 @@
 
                     > input,
                     > select {
-                        flex: 0 1 @input-default-width;
+                        min-width: 50%;
+                        max-width: 50%;
                         font-size: 100%;
-                        margin-left: 20px;
-                        min-width: (@input-default-width/3);
                     }
 
                     .k-check,
@@ -352,15 +362,17 @@
                     justify-content: space-between;
 
                     > div {
-                        flex: 0 1 @input-default-width;
+                        width: 50%;
+                        display: flex;
+                        justify-content: flex-end;
                         font-size: 100%;
-                        margin-left: 20px;
-                        min-width: (@input-default-width/3);
                         text-align: end;
 
                         > select,
                         > input:not([type="checkbox"]) {
+                            flex: 1 1 auto;
                             min-width: 100%;
+                            max-width: 100%;
                         }
                     }
                 }

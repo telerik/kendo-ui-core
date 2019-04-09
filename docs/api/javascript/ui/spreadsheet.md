@@ -2404,30 +2404,32 @@ The content that has been passed from the clipboard to the paste command. This d
                 var currentRange = e.range;
                 var fullData = e.clipboardContent.data;
                 var mergedCells = e.clipboardContent.mergedCells;
-                var valuesOnly = [];
                 var topLeft = currentRange.topLeft();
                 var initialRow = topLeft.row;
                 var initialCol = topLeft.col;
                 var origRef = e.clipboardContent.origRef;
                 var numberOfRows = origRef.bottomRight.row - origRef.topLeft.row + 1;
                 var numberOfCols = origRef.bottomRight.col - origRef.topLeft.col + 1;
-
-                for(var i = 0; i < fullData.length; i += 1) {
-                    var currentFull = fullData[i];
-                    var row = [];
-
-                    for(var j = 0; j < currentFull.length; j += 1 ) {
-                        row.push(currentFull[j].value);
-                    }
-
-                    valuesOnly.push(row);
-                }
-
                 var spread = e.sender;
                 var sheet = spread.activeSheet();
                 var rangeToPaste =  sheet.range(initialRow, initialCol, numberOfRows, numberOfCols);
 
-                rangeToPaste.values(valuesOnly);
+                sheet.batch(function() {
+                    for(var i = 0; i < fullData.length; i += 1) {
+                        var currentFullData = fullData[i];
+
+                        for(var j = 0; j < currentFullData.length; j += 1 ) {
+                            var range = sheet.range(initialRow + i, initialCol + j);
+                            var value = currentFullData[j].value;
+
+                            if (value !== null) {
+                                range.input(value);
+                                range.format(null);
+                            }
+                        }
+                    }
+                });
+
                 sheet.select(rangeToPaste);
 
                 for(var i = 0; i < mergedCells.length; i += 1) {

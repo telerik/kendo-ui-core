@@ -4848,6 +4848,8 @@ declare namespace kendo.ui {
         autoBind?: boolean;
         dataSource?: any|any|kendo.data.DataSource;
         editTemplate?: Function;
+        height?: number|string;
+        scrollable?: boolean|string;
         navigatable?: boolean;
         selectable?: boolean|string;
         template?: Function;
