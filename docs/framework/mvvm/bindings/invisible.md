@@ -1,21 +1,19 @@
 ---
 title: Invisible
-page_title: Invisible | Kendo UI MVVM
+page_title: Invisible Binding | Kendo UI MVVM
 description: "Learn how to hide or show the target DOM element depending on the View-Model value by using the invisible binding in Kendo UI MVVM."
 slug: invisiblebinding_mvvm_kendoui
 ---
 
-## Invisible Binding
+# Invisible Binding
 
-The Kendo UI Invisible (`invisible`) binding hides or shows the target DOM element or widget depending on the View-Model value. If the value is `true`, the target DOM element is hidden&mdash;its `display` CSS attribute is set to `none`. If the value is `false`, the target DOM element is shown.
+The Kendo UI Invisible (`invisible`) binding hides or shows the target DOM element or widget depending on the View-Model value.
 
-## Getting Started
+If the value is `true`, the target DOM element is hidden&mdash;its `display` CSS attribute is set to `none`. If the value is `false`, the target DOM element is shown.
 
-### Setup
+Non-Boolean values, such as `0`, `null`, `undefined`, and `""`, are treated as `false` by the `invisible` binding. All other values are treated as `true`.
 
-The following example demonstrates how to use the `invisible` binding.
-
-###### Example
+The following example demonstrates how to use the `invisible` binding. The `div` element is initially hidden because the value of the `isInvisible` field is `true`. When the user clicks the button, the `div` is shown because the value of the `isInvisible` field is set to `false`.
 
     <div id="view">
         <div data-bind="invisible: isInvisible">some content
@@ -32,12 +30,6 @@ The following example demonstrates how to use the `invisible` binding.
 
     kendo.bind($("#view"), viewModel);
     </script>
-
-In the example, the `div` element is initially hidden because the value of the `isInvisible` field is `true`. When the user clicks the button, the `div` is shown because the value of the `isInvisible` field is set to `false`.
-
-### Non-Boolean Values
-
-Non-boolean values, such as `0`, `null`, `undefined` and `""`, are treated as `false` by the `invisible` binding. All other values are treated as `true`.
 
 ## See Also
 

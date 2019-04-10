@@ -8,11 +8,9 @@ position: 2
 
 # 2018 Releases
 
+This article lists the breaking changes in the Kendo UI 2018 releases. 
+
 ## Kendo UI 2018 R2 SP1
-
-### Changes from 2018 R2
-
-#### Breaking Changes
 
 **ComboBox**
 

@@ -4,14 +4,13 @@ page_title: React | Kendo UI Third-Party Tools
 description: "Learn how to use Kendo UI widgets in React applications."
 previous_url: /React2
 slug: reactsupport_integration_kendoui
-position: 9
 ---
 
 # React
 
 Kendo UI provides integration support for React.
 
-To use any jQuery component in a React application, you’ll need a trial of the [Kendo UI for jQuery](https://www.telerik.com/kendo-ui#jquery) library or a valid [Kendo UI license](https://www.telerik.com/purchase/kendo-ui).
+To use any jQuery component in a React application, you need a trial of the [Kendo UI for jQuery](https://www.telerik.com/kendo-ui#jquery) library or a valid [Kendo UI license](https://www.telerik.com/purchase/kendo-ui).
 
 ## KendoReact Suite
 
@@ -24,11 +23,9 @@ At this time, most of the components in Kendo UI for jQuery can be found as nati
 
 The [KendoReact Roadmap](https://www.telerik.com/kendo-react-ui/roadmap/) page provides information about the development plans of the team with regard to new components and features.
 
-## Kendo UI for jQuery Suite In React Applications
+## Kendo UI for jQuery in React Applications
 
-The KendoReact suite is still growing and some of the components will be available in a later state of the product life cycle.
-
-The Kendo UI for jQuery widgets can be used inside a React application by following these steps:
+The KendoReact suite is still growing and some of the components will be available in a later state of the product life cycle. The Kendo UI for jQuery widgets can be used inside a React application.
 
 1. Import the Kendo UI files or a single file if only one or two widgets will be used in order to reduce the bundle size:
 
@@ -70,11 +67,9 @@ The Kendo UI for jQuery widgets can be used inside a React application by follow
         $('#scheduler').empty()
     ```
 
-## React Wrappers
+## Kendo UI Wrappers for React
 
-For convenience, we created example wrapper packages of some of the components that can be used while we are developing a native React equivalent.
-
-These packages will handle the creation, updating and destroying of the widgets and will provide a declarative approach of creating the components:
+For convenience, we created example wrapper packages of some of the components that can be used while we are developing a native React equivalent. These packages will handle the creation, updating and destroying of the widgets and will provide a declarative approach of creating the components:
 
 1. [Scheduler](#scheduler)
 1. [Spreadsheet](#spreadsheet)
@@ -83,25 +78,25 @@ These packages will handle the creation, updating and destroying of the widgets 
 
 ### Scheduler
 
-This is an example using the Scheduler wrapper.
+The following example demonstrates how to use the Scheduler wrapper.
 
 <iframe src="https://stackblitz.com/edit/kendo-react-scheduler?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 
 ### Spreadsheet
 
-This is an example using the Spreadsheet wrapper.
+The following example demonstrates how to use the Spreadsheet wrapper.
 
 <iframe src="https://stackblitz.com/edit/kendo-react-spreadsheet?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 
 ### TreeList
 
-This is an example using the TreeList wrapper.
+The following example demonstrates how to use the TreeList wrapper.
 
 <iframe src="https://stackblitz.com/edit/kendo-react-treelist?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 
 ### PivotGrid
 
-This is an example using the PivotGrid wrapper.
+The following example demonstrates how to use the PivotGrid wrapper.
 
 <iframe src="https://stackblitz.com/edit/kendo-react-pivot-grid?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 

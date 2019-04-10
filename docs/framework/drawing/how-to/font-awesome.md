@@ -11,8 +11,6 @@ Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.gi
 
 The following example demonstrates how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF.
 
-###### Example
-
 ```dojo
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 

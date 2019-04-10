@@ -1,12 +1,12 @@
 ---
-title: Section 508
-page_title: Section 508 | Kendo UI Accessibility Support
+title: Section 508 Support
+page_title: Section 508 Support | Kendo UI Accessibility Support
 description: "Learn more about the Section 508 Accesibility support provided by Kendo UI controls."
 slug: section508_accessibility_support
 position: 2
 ---
 
-# Section 508
+# Section 508 Support
 
 [Section 508](https://www.section508.gov/) is a set of standards ensuring that all users, regardless of their disability status, are able to access technology.
 

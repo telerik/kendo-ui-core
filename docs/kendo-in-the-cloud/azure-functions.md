@@ -1,12 +1,12 @@
 ---
-title: Consuming Data from Azure Functions
-page_title: Azure Functions with Table Storage to Populate Kendo Grid with CRUD | Kendo UI in the Cloud
+title: Azure Functions
+page_title: Azure Functions | Kendo UI in the Cloud
 description: "Learn how to implement Azure Functions to execute remote CRUD operations for the Kendo UI Grid."
 slug: azure_functions
 position: 1
 ---
 
-# Consuming Data from Azure Functions
+# Azure Functions
 
 This article provides a step-by-step tutorial on how to configure [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) to serve data for a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}).
 

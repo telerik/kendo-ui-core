@@ -8,13 +8,11 @@ position: 2
 
 # Performance
 
-The [Kendo UI Templates](http://demos.telerik.com/kendo-ui/templates/index) are a prime example of the commitment of Kendo UI to focus its engineering approach on performance over features. With JavaScript applications running on a myriad of low-power devices, such as phones and tablets, it is essential that applications squeeze every last bit of performance out of their code. Code that may look fine on a desktop browser like Chrome can crawl on a tablet if not carefully engineered.
+The [Kendo UI Templates](http://demos.telerik.com/kendo-ui/templates/index) enable you to improve immensely the performance of your project.  
 
-Kendo UI Templates do not offer as many features as other JavaScript templating libraries, but they do so intentionally to deliver better performance. Depending on the browser and computer (templates run on the client machine, so naturally there are variances), Kendo UI Templates are up to 60 times (6000%) faster than jQuery templates.
+With JavaScript applications running on a myriad of low-power devices, such as phones and tablets, it is essential that applications squeeze every last bit of performance out of their code. Code that may look fine on a desktop browser like Chrome can crawl on a tablet if not carefully engineered. While the Kendo UI Templates do not offer as many features as other JavaScript templating libraries, they do so intentionally to deliver better performance. Depending on the browser and computer (templates run on the client machine, so naturally there are variances), Kendo UI Templates are up to 60 times (6000%) faster than jQuery templates. To compare performance results directly, [refer to the live JSPerf test](http://jsperf.com/dom-vs-innerhtml-based-templating/509).
 
-To compare performance results directly, [refer to the live JSPerf test](http://jsperf.com/dom-vs-innerhtml-based-templating/509).
-
-## Techniques
+## Basic Techniques
 
 Kendo UI achieves high performance templates through the use of several techniques, as listed below, in addition to limiting features:
 
@@ -22,25 +20,17 @@ Kendo UI achieves high performance templates through the use of several techniqu
 2. While John uses `array` Push and Join functions to build his templates, Kendo UI discovered that simple string concatenation (`+=`) performs even faster in many browsers, especially Chrome.
 3. The biggest speed booster is that eliminating the [JavaScript `with` block](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) inside the template builder delivers a huge performance improvement. Some templates prefer the scope-helping `with` block, so Kendo UI templates use `with` blocking by default, but it can be easily disabled. When you do not need it, you can realize the full speed gains in your template rendering.
 
-## Comparison
+## Comparing Performance
 
 Performance claims are never set in stone as libraries are evolving all the time. You can see where Kendo UI Templates stands in comparison to some of the common options like Handlebars, Mustache, jQuery Templates (now deprecated), Underscore JS, and John's original micro-templating implementation by using the [JavaScript templating engine shootout](http://jsperf.com/dom-vs-innerhtml-based-templating/509) JSPerf test.
 
 > JSPerf is a great tool to use for quick, relative performance tests between JavaScript libraries and snippets. Anyone can create or modify a JSPerf test to test and compare the performance of JavaScript code across many different browsers and machines.
 
-## Optimization
+## Disabling with Blocking
 
-### Disabling with Blocking
-
-By default, Kendo UI Templates use `with` blocking. This makes it more convenient to configure templates, but has a big impact on template performance. To enhance template performance, disable `with` blocking in Kendo UI by using the overriding code below:
-
-		var template = kendo.template(templateString,{useWithBlock:false});
-
-Setting `useWithBlock` to `false` makes Kendo UI templates run at maximum speed. Use this option if you are looking for ways to make your apps run faster, especially on mobile devices.
+By default, Kendo UI Templates use `with` blocking. This makes it more convenient to configure templates, but has a big impact on template performance. To enhance template performance, disable `with` blocking by implementing the `var template = kendo.template(templateString,{useWithBlock:false});` configuration.  Setting `useWithBlock` to `false` makes Kendo UI templates run at maximum speed. Use this option if you are looking for ways to make your apps run faster, especially on mobile devices.
 
 The following example demonstrates Kendo UI Templates with `with` blocking disabled.
-
-###### Example
 
 ```dojo
 <div id="results">
@@ -64,17 +54,9 @@ $("#results").html(window.kendouiTemplate(sharedVariables));
 
 ```
 
-### Disabling with Blocking: Impact
-
-`with` JavaScript keyword is used to extend the scope chain for a statement. Anything inside a `with` block will use the context defined by `with`, thus saving repetitive scope code. It is generally considered to be a feature of JavaScript that should be avoided.
-
-Learn more about `with` and its pros and cons on the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with).
-
-For Kendo UI Templates, disabling `with` can impact the way you reference the data used in your template.
+`with` JavaScript keyword is used to extend the scope chain for a statement. Anything inside a `with` block will use the context defined by `with`, thus saving repetitive scope code. It is generally considered to be a feature of JavaScript that should be avoided. For more information on `with` and its pros and cons, refer to the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with). For Kendo UI Templates, disabling `with` can impact the way you reference the data used in your template.
 
 The following example assumes that the data displayed in it is the data you want to use with a template.
-
-###### Example
 
 		var myDemoData = {
 		   header: "Header",
@@ -83,8 +65,6 @@ The following example assumes that the data displayed in it is the data you want
 		};
 
 By default, you might create a Kendo UI template, as demonstrated below.
-
-###### Example
 
 		<script type="text/x-kendo-template" id="temp">
 		    <div>
@@ -98,9 +78,7 @@ By default, you might create a Kendo UI template, as demonstrated below.
 		    </div>
 		</script>
 
-Notice the way you are able to directly use the names of the `data` object properties&mdash;`header`, `header2`, `list`&mdash;demonstrated below.
-
-###### Example
+Notice the way you can directly use the names of the `data` object properties&mdash;`header`, `header2`, `list`&mdash;demonstrated below.
 
 ```dojo
 <div id="results">
@@ -132,15 +110,7 @@ $("#results").html(window.kendouiTemplate(sharedVariables));
 
 ```
 
-Disable the `with` blocking when you initialize your template in JavaScript by using the code below.
-
-		var template = kendo.template($("#temp").html(), {useWithBlock:false});
-
-When you take this step, you can no longer refer to the properties of your data directly. If you leave your template unchanged, the following JavaScript error occurs: `Uncaught ReferenceError: header is not defined`.
-
-To fix this problem, you must manually include the `data` scope in your template. The following example demonstrates what the updated template is going to look like.
-
-###### Example
+Disable the `with` blocking when you initialize your template in JavaScript by using the `var template = kendo.template($("#temp").html(), {useWithBlock:false});` configuration. When you take this step, you can no longer refer to the properties of your data directly. If you leave your template unchanged, the following JavaScript error occurs: `Uncaught ReferenceError: header is not defined`. To fix this problem, you must manually include the `data` scope in your template. The following example demonstrates what the updated template is going to look like.
 
 		<script type="text/x-kendo-template" id="temp">
 		    <div>

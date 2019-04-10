@@ -175,30 +175,30 @@ This approach and the following one deal with creating a data table to serve as 
 
 1. Declare a `createTable` function where you will pass the template script into a Kendo UI template, render it with the DataSource, and add the table to the page.
 
-    var chartData = new kendo.data.DataSource({
-      data: [{
-        category: "Hydro",
-        value: 22
-      }, {
-        category: "Solar",
-        value: 2
-      }, {
-        category: "Nuclear",
-        value: 49
-      }, {
-        category: "Wind",
-        value: 27
-      }]
-    });
+        var chartData = new kendo.data.DataSource({
+          data: [{
+            category: "Hydro",
+            value: 22
+          }, {
+            category: "Solar",
+            value: 2
+          }, {
+            category: "Nuclear",
+            value: 49
+          }, {
+            category: "Wind",
+            value: 27
+          }]
+        });
 
-    function createTable() {
-      var template = kendo.template($("#tableScript").html());
-       $("body").prepend(template(chartData.data()));
-    }
+        function createTable() {
+          var template = kendo.template($("#tableScript").html());
+           $("body").prepend(template(chartData.data()));
+        }
 
-As a result, you create a simple and accessible table that is based on the same data as the chart itself. For more information on the way VoiceOver allows you to interact with the table, refer to the [quick video](http://www.youtube.com/watch?v=0xdrBjwiFVA&feature=plcp).
+    As a result, you create a simple and accessible table that is based on the same data as the chart itself. For more information on the way VoiceOver allows you to interact with the table, refer to the [quick video](http://www.youtube.com/watch?v=0xdrBjwiFVA&feature=plcp).
 
-    <iframe width="853" height="480" src="http://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
+        <iframe width="853" height="480" src="http://www.youtube.com/embed/0xdrBjwiFVA" frameborder="0" allowfullscreen></iframe>
 
 ### Creating Off-Screen Tables and Swapped On-Screen Tables and Charts
 

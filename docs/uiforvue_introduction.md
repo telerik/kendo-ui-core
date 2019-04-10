@@ -4,7 +4,7 @@ page_title: Overview | Progress Kendo UI for Vue
 description: "Download and install Progress Kendo UI for Vue, and run a sample application."
 slug: uiforvue_introduction
 isNew: true
-position: 12
+position: 15
 ---
 
 # Progress<sup>®</sup> Kendo UI for Vue

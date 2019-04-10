@@ -4,7 +4,6 @@ page_title: Visual Studio IntelliSense | Kendo UI Third-Party Tools
 description: "Learn how to reference the Kendo UI Visual Studio IntelliSense by using an additional vsdoc or IntelliSense JavaScript file."
 previous_url: /vs-intellisense
 slug: visualstudiointellisense_integration_kendoui
-position: 6
 ---
 
 # Visual Studio IntelliSense
@@ -56,17 +55,17 @@ Make sure the naming prefix of the IntelliSense file matches the `kendoui` bundl
 
 ## Features
 
-### Options for Widget Initialization
+* Options for widget initialization
 
-![jquery plugin](../images/vsdoc/jquery-plugin.png)
+    ![jquery plugin](../images/vsdoc/jquery-plugin.png)
 
-### Widget Accessors
+* Widget accessors
 
-![jquery plugin](../images/vsdoc/jquery-accessor.png)
+    ![jquery plugin](../images/vsdoc/jquery-accessor.png)
 
-### Widget Methods
+* Widget methods
 
-![jquery plugin](../images/vsdoc/widget-method.png)
+    ![jquery plugin](../images/vsdoc/widget-method.png)
 
 ## Reference
 
@@ -79,9 +78,7 @@ To reference the IntelliSense, use either of the following approaches:
 
 ## JSDoc Syntax for TypeScript-Based Intellisense
 
-With the TypeScript-based IntelliSense in Visual Studio 2017, you can use TypeScript definitions to get IntelliSense with the default TypeScript-based IntelliSense mode. In this way, you will not have to disable the new language service and affect other parts of your workflow.
-
-This approach and the `vsdoc`-based IntelliSense may not work and you might have to prune the code before executing it.
+With the TypeScript-based IntelliSense in Visual Studio 2017, you can use TypeScript definitions to get IntelliSense with the default TypeScript-based IntelliSense mode. In this way, you will not have to disable the new language service and affect other parts of your workflow. This approach and the `vsdoc`-based IntelliSense may not work and you might have to prune the code before executing it.
 
 The following screenshot demonstrates how to add TypeScript references to a JavaScript code block.
 

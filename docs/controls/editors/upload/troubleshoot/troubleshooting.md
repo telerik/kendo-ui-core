@@ -77,7 +77,6 @@ When a server error occurs, the complete server response is logged in the consol
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
 * [Validation Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)

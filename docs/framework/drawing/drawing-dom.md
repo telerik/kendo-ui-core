@@ -1,18 +1,20 @@
 ---
-title: Drawing of HTML Elements
-page_title: Drawing of HTML Elements | Kendo UI Drawing API
+title: Drawing DOM Elements
+page_title: Drawing DOM Elements | Kendo UI Drawing Library
 description: "Learn how to draw a piece of HTML that is available in the DOM using the Kendo UI Drawing API."
 slug: drawingofhtmlelements_drawingapi
 position: 4
 ---
 
-# Drawing of HTML Elements
+# Drawing DOM Elements
 
-The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) supports the conversion of an existing page, or part of it, to drawing primitives. This allows you to further process the content and export it in various formats such as Portable Document Format (PDF), Scalable Vector Graphics (SVG), and Portable Network Graphics (PNG) ones.
+The [Kendo UI Drawing library](http://demos.telerik.com/kendo-ui/drawing/index) supports the conversion of an existing page, or part of it, to drawing primitives.
+
+This approach allows you to further process the content and export it in various formats such as Portable Document Format (PDF), Scalable Vector Graphics (SVG), and Portable Network Graphics (PNG) ones.
 
 ## Getting Started
 
-Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, or HTML5 `<canvas>` format.
+By using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, or HTML5 `<canvas>` format.
 
 The DOM element must be appended to the document and fully rendered, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
 
@@ -20,67 +22,49 @@ The DOM element must be appended to the document and fully rendered, meaning tha
       ... more HTML code here...
     </div>
 
-Then you are able to draw it from JavaScript with the call demonstrated in the example below.
-
-###### Example
+Then you are able to draw it from JavaScript with the call from the following example. The `drawing.drawDOM` takes a jQuery selector or object, or a plain DOM node, and returns a promise which delivers a `drawing.Group` object.
 
     drawing.drawDOM("#drawMe").then(function(group){
-        // here group is a drawing.Group object
+        // Here group is a drawing.Group object.
 
-        // you can now draw it to SVG for example:
+        // You can now draw it to SVG for example:
         var svg = drawing.Surface.create($("#container"), { type: "svg" });
         svg.draw(group);
 
         // or you can save it as PDF.
-        // optionally:
+        // Optionally:
         group.options.set("pdf", {...pdf options...});
         drawing.pdf.saveAs(group, "filename.pdf", proxyUrl);
     });
 
-The `drawing.drawDOM` takes a jQuery selector or object, or a plain DOM node, and returns a promise which delivers a `drawing.Group` object.
-
-## Configuration
-
-### Custom Fonts in PDF
-
-If you need PDF output, your document should declare the fonts it applies by using the [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for optimal layout and Unicode support. As of the Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig such declarations directly from the CSS and you do not need to manually call the [`pdf.defineFont`](/api/javascript/pdf/methods/definefont) method.
-
-The following example demonstrates a sample CSS declaration.
-
-###### Example
-
-    @font-face {
-      font-family: "DejaVu Sans";
-      src: url("fonts/DejaVu/DejaVuSans.ttf") format("truetype");
-    }
-
-Next, to make sure the elements that you are trying to export are using this font, specify `font-family: "DejaVu Sans"` in their styles.
-
-The following example demonstrates how to make all Kendo widgets use this font.
-
-###### Example
-
-    .k-widget {
-      font-family: "DejaVu Sans";
-    }
+## Custom Fonts
 
 > * The PDF generator supports only TrueType fonts with Unicode mappings.
-> * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
+> * In order for the automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
 
-It is possible to use fonts without the necessity to host them on the same domain. For more information on this alternative approach which also works when the page is loaded over the `file://` URLs, refer to the article on how to [pack fonts for PDF export]({% slug howto_packfontsforpdfexport_drawingapi %}).
+1. If you need PDF output, your document has to declare the fonts it applies by using the [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) for optimal layout and Unicode support. As of the Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig such declarations directly from the CSS and you do not need to manually call the [`pdf.defineFont`](/api/javascript/pdf/methods/definefont) method. The following example demonstrates a sample CSS declaration.
 
-### Images in PDF
+        @font-face {
+          font-family: "DejaVu Sans";
+          src: url("fonts/DejaVu/DejaVuSans.ttf") format("truetype");
+        }
 
-Images are exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they might not show up in the exported PDF, or might cause exceptions in the PDF reader.
+1. To make sure the elements that you are trying to export are using this font, specify `font-family: "DejaVu Sans"` in their styles. The following example demonstrates how to make all Kendo widgets use this font.
 
-To check for possible notes on loading images from different domains, refer to the [section on known limitations](#known-limitations).
+        .k-widget {
+          font-family: "DejaVu Sans";
+        }
 
-### Hyperlinks in PDF
+You can also use fonts without having to host them on the same domain. For more information on this alternative approach which also works when the page is loaded over the `file://` URLs, refer to the article on how to [pack fonts for PDF export]({% slug howto_packfontsforpdfexport_drawingapi %}).
 
-By default the [`drawDOM`](/api/javascript/drawing/methods/drawdom) method creates clickable hyperlinks in the generated PDF document. You can disable this behavior with the `avoidLinks` option, as demonstrated in the example below.
+## Images
 
-###### Example
+Images are exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they might not show up in the exported PDF, or might cause exceptions in the PDF reader. For more information on loading images from different domains, refer to the [section on known limitations](#known-limitations).
+
+## Hyperlinks
+
+By default, the [`drawDOM`](/api/javascript/drawing/methods/drawdom) method creates clickable hyperlinks in the generated PDF document. You can disable this behavior with the `avoidLinks` option.
 
 ```dojo
     <div id="content">
@@ -105,13 +89,9 @@ By default the [`drawDOM`](/api/javascript/drawing/methods/drawdom) method creat
     </script>
 ```
 
-### Multi-Page PDF Output
+## Multi-Page Content
 
-The `drawing.drawDOM` allows you to create a [multi-page PDF](/framework/drawing/pdf-output.html#multiple-pages-output) by specifying manual page breaks. A page break occurs before each element that matches the `forcePageBreak` CSS selector.
-
-The following example demonstrates how to draw a multi-page Kendo UI Grid.
-
-###### Example
+The `drawing.drawDOM` allows you to create a [multi-page PDF](/framework/drawing/pdf-output.html#multiple-pages-output) by specifying manual page breaks. A page break occurs before each element that matches the `forcePageBreak` CSS selector. The following example demonstrates how to draw a multi-page Kendo UI Grid.
 
 ```dojo
     <div id="grid" style="width: 900px;"></div>
@@ -137,7 +117,7 @@ The following example demonstrates how to draw a multi-page Kendo UI Grid.
     </script>
 
     <script id="rowTemplate" type="x/kendo-template">
-      <!-- to every tenth row we add the "page-break" class -->
+      <!-- to every tenth row, add the "page-break" class -->
       <tr data-uid="#= uid #" class="#= (id%10 == 0 ? 'page-break' : '') #">
         <td>#: title #</td>
         <td>#: id #</td>
@@ -145,11 +125,9 @@ The following example demonstrates how to draw a multi-page Kendo UI Grid.
     </script>
 ```
 
-### Automatic Page Breaking
+## Automatic Page Breaking
 
 Since Kendo UI 2015 Q1 Kendo UI supports automatic page breaking. When your target is the output in PDF format, you can solicit automatic page breaking by informing the `drawDOM` what the desired page size and margins are. Note that the automatic page breaking is subject to a few limitations detailed below. The options are `paperSize` and `margin`, the same as documented in the [section on the PDF options]({% slug pdfderawingexport_drawingapi %}#configuration-PDF). You are still able to use the `forcePageBreak` in this case to manually specify break points.
-
-###### Example
 
     <div id="grid"></div>
     <script>
@@ -168,48 +146,9 @@ Since Kendo UI 2015 Q1 Kendo UI supports automatic page breaking. When your targ
       });
     </script>
 
-### Page Break Limitations
+## Header and Footer Templates
 
-Page breaking happens only inside text nodes. Therefore, if an element has no text content, it cannot be split across pages. For example, an `<img>` or a `<div>`, which has perhaps a border or background image, but otherwise no content, is not split. If such elements fall on a page boundary, they are moved to the next page along with all the following DOM nodes. If they do not fit on a single page, they are truncated.
-
-The current list of nodes that will not be split includes:
-
-* `<img>`
-* `<tr>`
-* `<iframe>`
-* `<svg>`
-* `<object>`
-* `<canvas>`
-* `<input>`
-* `<textarea>`
-* `<select>`
-* `<video>`
-
-Automatic page breaking cannot occur inside a positioned element (`position: absolute`). Moreover, elements with `position: fixed` are not supported at all and, most likely, they will not show up in the output. Such elements will simply be skipped over by the algorithm. For example, for the input demonstrated below on an A4 page, the output will just display the Foo and Baz paragraphs. The positioned `<div>` would appear on the first page at height 1000, but since this is beyond the page boundary, it will be clipped.
-
-###### Example
-
-    <p>Foo</p>
-    <div style="position: absolute; top: 1000px">Bar</div>
-    <p>Baz</p>
-
-If the algorithm decides to move a node to the next page, all the DOM nodes which follow it, will be moved as well, even if there might be potentially room for some of them on the current page. This is demonstrated with floating elements in the example below.
-
-###### Example
-
-    <p>
-      some text before
-      <img style="float: left" ... />
-      some text after
-    </p>
-
-It can happen that this element ends up in a position where all the text fits on the current page, but the image is higher and would fall on the boundary. In this case, the image and some text after will move to the next page.
-
-### Template: Headers and Footers
-
-When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page (`pageNum`) and the total number of pages (`totalPages`).
-
-###### Example
+When multi-page output is requested through `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page with CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page (`pageNum`) and the total number of pages (`totalPages`).
 
 ```dojo
     <script type="x/kendo-template" id="page-template">
@@ -302,11 +241,9 @@ When multi-page output is requested via `forcePageBreak` or `paperSize`, you can
     </script>
 ```
 
-### Scaling
+## Scaling of Content
 
 By using the `scale` option you can obtain a drawing that is bigger or smaller than the original elements. This is useful when you are generating a multi-page PDF output using the automatic page breaking feature. In most cases, the original dimensions look too big in PDF, so you can specify, for example, a scale factor of 0.8 to get a more suitable output for print.
-
-###### Example
 
     drawing.drawDOM("#content", {
       paperSize: "A4",
@@ -320,11 +257,9 @@ Note that `scale` affects only the content, so in the case above the output pape
 
 If you need different horizontal or vertical scale factors, pass either an array&mdash;`[ xScale, yScale ]`&mdash;or an object&mdash;`{ x: xScale, y: yScale }`.
 
-### Split Page Content
+## Splitting Page Content
 
-To prevent elements from being split across pages, use the `keepTogether` option. It should be a CSS selector, passable to jQuery.
-
-###### Example
+To prevent elements from being split across pages, use the `keepTogether` option. It has to be a CSS selector that can be passed to jQuery.
 
     drawing.drawDOM("#content", {
       paperSize: "A4",
@@ -336,21 +271,19 @@ To prevent elements from being split across pages, use the `keepTogether` option
 
 Now all elements having the CSS class `"prevent-split"` are kept within the boundaries of pages and their content is not split. If they fall on a margin, they are altogether moved to the next page instead.
 
-### Recurrent Table Headers
+## Recurrent Table Headers
 
 If you want the `<thead>` elements, or the headers of Kendo UI Grid widgets, to be repeated on each page, pass the `repeatHeaders: true` option.
 
-## Customize Appearance
+## Customizing the Appearance
 
 If you want to change the appearance of the PDF output as it appears in the browser, you have several options to write CSS rules that apply only to the PDF output.
 
-### The `.k-pdf-export` Class
+### Using the `.k-pdf-export` Class
 
 This CSS class is applied to each individual page just before the drawing starts, and is removed shortly afterwards. For multipage exports, it is better to use the [`kendo-pdf-document`](#the-kendo-pdf-document-element) element because styles are applied to the whole export at once.
 
 The following example demonstrates how to define a style that places a border around all paragraphs in the PDF output.
-
-###### Example
 
     <style>
       .k-pdf-export p {
@@ -362,8 +295,6 @@ Since drawing is essentially synchronous and there is no timeout between the mom
 
 One drawback of this approach is that you cannot add background images. The code in the example below is likely to fail.
 
-###### Example
-
     <style>
       .k-pdf-export p {
         background: url("image.jpg");
@@ -372,13 +303,11 @@ One drawback of this approach is that you cannot add background images. The code
 
 The reason is that images are cached upfront, and this one will miss. If you want to add any background images, use the next option.
 
-### The `<kendo-pdf-document>` Element
+### Using the `<kendo-pdf-document>` Element
 
 The `<kendo-pdf-document>` approach only works when multi-page documents are requested, that is, only when either of `forcePageBreak` or `paperSize` is given. To make it work in the cases when you need only a single page, pass some dummy value to the `forcePageBreak` such as `forcePageBreak: "-"`.
 
 In this case, the DOM renderer will create a clone of the element so that it is able to do the page-breaking without destroying the original content, and it will place it inside a custom `<kendo-pdf-document>` element, which is hidden from the view. Therefore, you can apply custom styles under `kendo-pdf-document` by restricting the rules to elements.
-
-###### Example
 
     <style>
       kendo-pdf-document p {
@@ -389,15 +318,11 @@ In this case, the DOM renderer will create a clone of the element so that it is 
 
 Images are safe to add here.
 
-### Off-Screen Content
+### Rendering Off-Screen Content
 
-To produce different content for export, or keep it hidden from the user, position the container outside the screen.
-
-The container has to be fully rendered. For more information, see the section on [getting started](#getting-started).
+To produce different content for export, or keep it hidden from the user, position the container outside the screen. The container has to be fully rendered. For more information, see the section on [getting started](#getting-started).
 
 The following example uses an absolute positioning to move the container off the screen.
-
-###### Example
 
     <style>
       #export-container {
@@ -421,12 +346,9 @@ The following example uses an absolute positioning to move the container off the
         });
     </script>
 
-
 The `<kendo-pdf-document>` approach only works when multi-page documents are requested, that is, only when either of `forcePageBreak` or `paperSize` is given. To make it work in the cases when you need only a single page, pass some dummy value to the `forcePageBreak` such as `forcePageBreak: "-"`.
 
 In this case, the DOM renderer will create a clone of the element so that it is able to do the page-breaking without destroying the original content, and it will place it inside a custom `<kendo-pdf-document>` element, which is hidden from the view. Therefore, you can apply custom styles under `kendo-pdf-document` by restricting the rules to elements.
-
-###### Example
 
     <style>
       kendo-pdf-document p {
@@ -441,7 +363,7 @@ Images are safe to add here.
 
 If you target PDF output, the only unit which is safe to use in CSS is `px`. Using `cm`, `in`, `mm`, `pt`, or any other than `px` will have unpredictable results. This section explains this counter-intuitive fact.
 
-To draw the DOM, you inspect the computed styles of the elements and at that stage all dimensions are converted to pixels. For example, look at a `<div style='width: 1cm'>`. Assuming a correct display of the dots-per-inch (DPI) setting, this element should be rendered by the browser on screen as being `1cm` wide. When you query the width in its computed style, however, you get back `37.78125px`. Note that this may vary depending on the display.
+To draw the DOM, you inspect the computed styles of the elements and at that stage all dimensions are converted to pixels. For example, look at a `<div style='width: 1cm'>`. Assuming a correct display of the dots-per-inch (DPI) setting, this element has to be rendered by the browser on screen as being `1cm` wide. When you query the width in its computed style, however, you get back `37.78125px`. Note that this may vary depending on the display.
 
 For simplicity, and since the computed style yields back pixels, the PDF generator keeps a 1:1 mapping between the screen pixels and the default PDF unit, which is the [typographic point](http://en.wikipedia.org/wiki/Point_%28typography%29) (`pt`). This means that the same element will be rendered to PDF with a length of `37.78125pt`. Here are the conversion rules for these units:
 
@@ -471,6 +393,10 @@ For more information on the provided [browser support]({% slug wbe_browserand_op
 
 ## Known Limitations
 
+The following limitations refer to [general issues](#general) that may occur while drawing DOM elements and when [implementing page breaking](#limitations-on-page-breaking).
+
+### General
+
 - Right-to-left text is not supported.
 - Images hosted on different domains will not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
 - Images will not be exported in IE if their source is an SVG document. These are considered to be tainted.
@@ -488,9 +414,42 @@ For more information on the provided [browser support]({% slug wbe_browserand_op
 - Rendering of the `<select>` elements is imperfect. Some minor issues can be noticed, like wrong padding or missing the drop down arrow. It is recommended to use a Kendo UI DropDown or ListView widget instead of a plain `<select>`.
 - Complex letters (ligatures) are not supported and some of them are not rendered.
 
+### Limitations on Page Breaking
+
+Page breaking happens only inside text nodes. Therefore, if an element has no text content, it cannot be split across pages. For example, an `<img>` or a `<div>`, which has perhaps a border or background image, but otherwise no content, is not split. If such elements fall on a page boundary, they are moved to the next page along with all the following DOM nodes. If they do not fit on a single page, they are truncated.
+
+The current list of nodes that will not be split includes:
+
+* `<img>`
+* `<tr>`
+* `<iframe>`
+* `<svg>`
+* `<object>`
+* `<canvas>`
+* `<input>`
+* `<textarea>`
+* `<select>`
+* `<video>`
+
+Automatic page breaking cannot occur inside a positioned element (`position: absolute`). Moreover, elements with `position: fixed` are not supported at all and, most likely, they will not show up in the output. Such elements will simply be skipped over by the algorithm. For example, for the input demonstrated below on an A4 page, the output will just display the Foo and Baz paragraphs. The positioned `<div>` would appear on the first page at height 1000, but since this is beyond the page boundary, it will be clipped.
+
+    <p>Foo</p>
+    <div style="position: absolute; top: 1000px">Bar</div>
+    <p>Baz</p>
+
+If the algorithm decides to move a node to the next page, all the DOM nodes which follow it, will be moved as well, even if there might be potentially room for some of them on the current page. This is demonstrated with floating elements in the example below.
+
+    <p>
+      some text before
+      <img style="float: left" ... />
+      some text after
+    </p>
+
+It can happen that this element ends up in a position where all the text fits on the current page, but the image is higher and would fall on the boundary. In this case, the image and some text after will move to the next page.
+
 ## See Also
 
-* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
-* [Drawing of Basic Shapes]({% slug basicshapes_drawingapi %})
-* [Export a Drawing in PDF]({% slug pdfderawingexport_drawingapi %})
+* [Overview of the Drawing Library]({% slug overview_kendoui_drawingapi %})
+* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
 * [Supported Browsers for Kendo UI Drawing API]({% slug drawingofhtmlelements_drawingapi %})

@@ -4,26 +4,20 @@ page_title: RequireJS | Kendo UI Third-Party Tools
 description: "Learn how to work with Kendo UI and RequireJS compatible loader."
 previous_url: /using-kendo-with-requirejs
 slug: requirejs_integration_kendoui
-position: 4
 ---
 
 # RequireJS
 
->**Important**
-> * As of 2016, the RequireJS project is mostly superseded by solutions like [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
+The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders, such as [RequireJS](http://requirejs.org/), which load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
+
+> * As of 2016, the RequireJS project is mostly superseded by solutions such as [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
 > * You may check the help articles on their integration too&mdash;[Webpack support]({% slug webpacksupport_integration_kendoui %}) and [SystemJS support]({% slug systemjs_integration_kendoui %}).
 > * Due to a bug, the examples below do not work with the official Kendo UI Q1 2016 release. They should work as expected with the versions 2016.1.118 and later.
 > * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder) using RequireJS.
 
-The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders such as [RequireJS](http://requirejs.org/). You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
+## Loading from Local Directories
 
-## Load Kendo UI Using RequireJS
-
-### Load from Local Directory
-
-The code snippet below demonstrates how to load the Kendo UI JavaScript files from a local directory&mdash;for example, `js/my-kendo-scripts`. It is assumed that all Kendo UI scripts files are available there.
-
-###### Example
+The following example demonstrates how to load the Kendo UI JavaScript files from a local directory&mdash;for example, `js/my-kendo-scripts`. It is assumed that all Kendo UI scripts files are available there.
 
 ```pseudo
 <!DOCTYPE HTML>
@@ -60,11 +54,9 @@ The code snippet below demonstrates how to load the Kendo UI JavaScript files fr
 </html>
 ```
 
-### Use Bundle Scripts with RequireJS
+## Using Bundle Scripts
 
-The example below demonstrates how to use a bundle script with RequireJS.
-
-###### Example
+The following example demonstrates how to use a bundle script with RequireJS.
 
 ```dojo
 <!DOCTYPE HTML>
@@ -100,11 +92,9 @@ The example below demonstrates how to use a bundle script with RequireJS.
 </html>
 ```
 
-### Use AngularJS and Kendo UI with RequireJS
+## Using AngularJS and Kendo UI
 
-The example below demonstrates how to load AngularJS and initialize it with [`angular.bootsrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap) when all `.js` files are loaded.
-
-###### Example
+The following example demonstrates how to load AngularJS and initialize it with [`angular.bootsrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap) when all `.js` files are loaded.
 
 ```dojo
 <!DOCTYPE HTML>

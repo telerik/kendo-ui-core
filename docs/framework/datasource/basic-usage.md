@@ -13,11 +13,9 @@ The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource
 
 The DataSource is an abstraction for using local data (arrays of JavaScript objects) or remote data (web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML). This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.
 
-## Creating Data Sources for Local Data
+## Creating Local Data Sources
 
 The following example demonstrates how to create a DataSource for local data.
-
-###### Example
 
         var movies = [
                 { title: "Star Wars: A New Hope", year: 1977 },
@@ -33,7 +31,7 @@ The `localDataSource` variable in the example is a DataSource that is initialize
 
 When the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. The default configuration of the widgets is set to automatically bind to an associated DataSource. However, this may be overridden, i.e. `autoBind`.
 
-## Creating Data Sources for Remote Services
+## Creating Remote Data Sources
 
 The process of creating a DataSource for remote data differs in several ways from creating a DataSource for a local data:
 
@@ -42,8 +40,6 @@ The process of creating a DataSource for remote data differs in several ways fro
 * It is optionally configured to use server operations for calculating aggregates, defining filters, and supporting features like grouping, paging, and sorting.
 
 The following example demonstrates how to create a DataSource for data from a remote endpoint.
-
-###### Example
 
         var remoteDataSource = new kendo.data.DataSource({
             type: "odata",
@@ -61,8 +57,6 @@ As is the case with creating a DataSource for local data, the data provided by t
 When the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. The default configuration of the widgets is set to automatically bind to an associated DataSource. However, this may be overridden, i.e. `autoBind`.
 
 The following example demonstrates how to create a DataSource for data from another remote endpoint.
-
-###### Example
 
         var remoteDataSource = new kendo.data.DataSource({
             transport: {
@@ -84,13 +78,7 @@ Operations conducted by the DataSource against this remote endpoint are performe
 
 ## Local Filtering
 
-Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource/configuration/filter) configuration option.
-
-Local filtering is convenient for small datasets.
-
-Avoid it when working with large datasets because it might lead to performance issues.
-
-###### Example
+Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource/configuration/filter) configuration option. Local filtering is convenient for small datasets. Avoid it when working with large datasets because it might lead to performance issues.
 
 ```tab-Data
 
@@ -117,13 +105,9 @@ Avoid it when working with large datasets because it might lead to performance i
 
 ## Server Filtering
 
-Server filtering is convenient for large datasets.
-
-Be sure to set the [`schema`](/api/javascript/data/datasource/configuration/schema) and the [`filter`](/api/javascript/data/datasource/configuration/filter) properties as necessary.
+Server filtering is convenient for large datasets. Make sure that you set the [`schema`](/api/javascript/data/datasource/configuration/schema) and the [`filter`](/api/javascript/data/datasource/configuration/filter) properties as necessary.
 
 The following example features local data but the data returned by the [`transport`](/api/javascript/data/datasource/configuration/transport) is going to be evaluated the same way.
-
-###### Example
 
 ```tab-Data
         //the JSON result from "{remote service}"
@@ -160,11 +144,9 @@ The following example features local data but the data returned by the [`transpo
 
 Starting from R2 2019 release there is a built-in functionality in the Kendo UI DataSource to handle cases when user needs to filter on diacritic characters for specific language. The [accentFoldingFiltering](/api/javascript/data/datasource/configuration/accentFoldingFiltering) option allows user to define a specific culture to be used when applying the filter. Since these characters are unique for a specific language, setting the appropriate culture has to be set as a value. For example, `tr-TR` for Turkish, `es-ES` for Spanish, or `fr-FR` for French.
 
-> * Due to the specifics of the case-insensitive search, only one language can be used to filter your data. For example, if you mix Spanish and Turkish in the data, you may observe unexpected behavior.
+> Due to the specifics of the case-insensitive search, only one language can be used to filter your data. For example, if you mix Spanish and Turkish in the data, you may observe unexpected behavior.
 
-Please refer to the example below to check the filtering in action
-
-###### Example
+The following example demonstrates how to check the filtering.
 
     <script>
       var dataSource = new kendo.data.DataSource({
@@ -185,11 +167,7 @@ Please refer to the example below to check the filtering in action
 
 ## Local Grouping
 
-Grouping local data is mostly trivial&mdash;you can continue to use the same DataSource you are already familiar with. However, generating grouped data on the server can be difficult when you are unsure of the format the DataSource is expecting.
-
-Local grouping is convenient for small datasets. However, avoid it is working with large datasets for performance reasons.
-
-###### Example
+When you group local data, you can continue to use the same DataSource you are already familiar with. However, generating grouped data on the server can be difficult when you are unsure of the format the DataSource is expecting. Local grouping is convenient for small datasets. However, for performance concerns, avoid it when you work with large datasets.
 
 ```tab-Data
 
@@ -218,8 +196,6 @@ Local grouping is convenient for small datasets. However, avoid it is working wi
 Server grouping is an excellent option when working with large datasets. Be sure to set the `schema` and `group` properties as necessary.
 
 The following example features local data but the data returned by a `transport` is going to be evaluated the same way.
-
-###### Example
 
 ```tab-Data
 

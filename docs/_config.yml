@@ -15,9 +15,12 @@ navigation:
         position: 0
     "api/javascript/dataviz":
         title: "dataviz"
+    "knowledge-base":
+        title: "Knowledge Base"
+        position: 1
     "intro":
         title: "Getting Started"
-        position: 2
+        position: 3
     "intro/installation":
         title: "Prerequisites and Installation"
         position: 1
@@ -25,11 +28,11 @@ navigation:
         title: "Widget Basics"
         position: 2
     "intro/supporting":
-        title: "Reference and Support Materials"
+        title: "Reference Materials"
         position: 3
     "controls":
         title: "Widgets"
-        position: 3
+        position: 4
     "controls/data-management":
         title: "Data Management"
         position: 1
@@ -231,108 +234,81 @@ navigation:
     "controls/hybrid/faq":
         title: "Frequently Asked Questions"
         position: 24
-    "styles-and-layout":
-        title: "Styles and Appearance"
-        position: 4
     "framework":
-        title: "Framework and Utilities"
+        title: "Common Features"
         position: 5
     "framework/datasource":
-        title: "DataSource"
+        title: "Data Source"
         position: 1
     "framework/hierarchicaldatasource":
-        title: "HierarchicalDataSource"
+        title: "Hierarchical Data Source"
         position: 2
     "framework/mvvm":
-        title: "MVVM"
-        position: 3
+        title: "MVVM Pattern"
+        position: 4
     "framework/mvvm/bindings":
         title: "Bindings"
         position: 3
     "framework/mvvm/how-to":
         title: "How To"
         position: 4
-    "framework/mvvm/tutorials":
-        title: "Tutorials"
+    "framework/spa":
+        title: "Single-Page Applications"
         position: 5
+    "framework/drawing":
+        title: "Drawing Library"
+        position: 6
     "framework/templates":
         title: "Templates"
-        position: 4
-    "framework/spa":
-        title: "Single Page Applications"
-        position: 5
+        position: 7
     "framework/excel":
         title: "Excel Export"
-        position: 6
-    "framework/drawing":
-        title: "Drawing API"
-        position: 7
-    "framework/globalization":
-        title: "Globalization"
         position: 8
-    "framework/localization":
-        title: "Localization"
-        position: 9
-    "framework/class":
-        title: "Class"
-        position: 10
-    "framework/validator":
-        title: "Validator"
-        position: 11
-    "framework/save-files":
-        title: "Saving Files"
-        position: 12
-    "third-party":
-        title: "Third-Party Frameworks and Utilities"
-        position: 6
-    "third-party/tutorials":
-        title: "Tutorials"
-        position: 100
-    "third-party/tutorials/webforms":
-        title: "ASP.NET Web Forms"
-        position: 1
-    "kendo-in-the-cloud":
-        title: "Kendo UI in the Cloud"
-        position: 7
-        isNew: true
-    "AngularJS":
+    "framework/AngularJS":
         title: "AngularJS Directives"
-        position: 8
-    "AngularJS/how-to":
+        position: 10
+    "framework/AngularJS/how-to":
         title: "How To"
         position: 6
-    "AngularJS/Troubleshooting":
+    "framework/AngularJS/Troubleshooting":
         title: "Troubleshooting"
         position: 7
-    "AngularJS/tutorials":
-        title: "Tutorials"
-        position: 8
-    "jsp":
-        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
-        position: 9
-    "php":
-        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP"
-        position: 10
-    "php/widgets":
-        title: "Classes"
-    "troubleshoot":
-        title: "Troubleshooting"
+    "styles-and-layout":
+        title: "Styles & Appearance"
+        position: 6
+    "third-party":
+        title: "Third-Party Libraries"
+        position: 7
+    "third-party/webforms":
+        title: "ASP.NET Web Forms"
         position: 20
+    "kendo-in-the-cloud":
+        title: "Cloud Integration"
+        position: 8
+        isNew: true
+    "globalization":
+        title: "Globalization"
+        position: 9
+    "globalization/intl":
+        title: "Internationalization"
+        position: 2
     "accessibility":
         title: "Accessibility"
-        position: 30
-    "backwards-compatibility":
-        title: "Breaking Changes"
-        position: 40
-    "updates":
-        title: "Updates and Contribution"
-        position: 50
-    "knowledge-base":
-        title: "Knowledge Base"
         position: 10
-    "copyright":
-        title: "Copyright"
-        position: 60
+    "jsp":
+        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
+        position: 11
+    "php":
+        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP"
+        position: 12
+    "php/widgets":
+        title: "Classes"
+    "backwards-compatibility":
+        title: "Breaking Changes & Contribution"
+        position: 20
+    "troubleshoot":
+        title: "Troubleshooting"
+        position: 30
     "*how-to":
         title: "How To"
         position: 200

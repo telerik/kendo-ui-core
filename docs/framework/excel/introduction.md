@@ -1,22 +1,20 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Excel Export
+page_title: Excel Export Overview | Kendo UI Excel Export
 description: "Learn how to create Excel documents with Kendo UI."
 slug: introduction_excelexport_kendoui
 position: 1
 ---
 
-# Overview of Excel Export
+# Excel Export Overview
 
-Since Kendo UI 2014 Q3 release Kendo UI has provided Excel generation support. It allows you to create Excel documents in JavaScript and save them on the client machine.
+As of the Kendo UI 2014 Q3 release, Kendo UI has provided Excel generation support.
+
+Excel export allows you to create Excel documents in JavaScript and save them on the client machine.
 
 ## Requirements
 
-### JSZip
-
-To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files, as shown below.
-
-###### Example
+To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 
 ```
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -24,7 +22,7 @@ To take full advantage of the Excel export feature, download the [JSZip](http://
 <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 ```
 
-JSZip is part of the Kendo UI distribution and is also available via the Kendo UI CDN:
+JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN:
 
 ```
 <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
@@ -39,71 +37,56 @@ When you use JSZip in scenarios where the packages are loaded from NPM, explicit
 1. Import the library in the module where it will be used through `import JSZip from 'jszip'`.
 1. Assign the library object to a field of the `window` by setting `window.JSZip = JSZip`.
 
-### Compatibility with Other Libraries
+## Compatibility with Other Libraries
 
-#### GlobalizeJS
+* GlobalizeJS&mdash;If you want to use GlobalizeJS in your project, include it after the Kendo UI scripts.
+* RequireJS&mdash;JSZip requires some extra initialization code to work with RequireJS. For more information on using [RequireJS](http://requirejs.org/) with the Kendo UI Excel export functionality, refer to the [related article]({% slug requirejs_integration_kendoui %}).
 
-If you want to use GlobalizeJS in your project, include it after the Kendo UI scripts.
+## Browser Support
 
-#### RequireJS
+Excel generation is available for all [supported browsers]({% slug wbe_browserand_operating_system_support %}). Saving a file needs a server-side proxy for older browser versions. For more information, refer to the [article on saving files with Kendo UI](/framework/save-files/introduction).
 
-JSZip requires some extra initialization code to work with RequireJS.
+> Some mobile browsers do not support saving of files.
 
-For detailed information on using [RequireJS](http://requirejs.org/) with the Kendo UI Excel export functionality, refer to the [related article]({% slug requirejs_integration_kendoui %}).
+## Creating Excel Documents
 
-### Browser Support
+To create an Excel document (workbook):
 
-Excel generation is available for all [supported browsers]({% slug wbe_browserand_operating_system_support %}). Saving the file needs a server-side proxy for older browser versions.
-
-> Some mobile browsers will not allow you to save the file though.
-
-For detailed information on how to save files, refer to the [article about saving files with Kendo UI](/framework/save-files/introduction).
-
-## Excel Document Creation
-
-To create an Excel document (workbook), follow the steps:
-
-**Step 1** Instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). The workbook has an array of sheets. Sheets have rows and rows have cells.
-
-**Step 2** Call the [`toDataURL`](/api/javascript/ooxml/workbook/methods/todataurl) or [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
-
-**Step 3** Call the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method to save the Excel file on the client machine.
-
-The following example demonstrates how to create an Excel workbook.
-
-###### Example
+1. Instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). The workbook has an array of sheets. Sheets have rows and rows have cells.
+1. Call the [`toDataURL`](/api/javascript/ooxml/workbook/methods/todataurl) or [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
+1. Call the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method to save the Excel file on the client machine.
 
 ```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
     {
-      // Column settings (width)
+      // The column settings (width).
       columns: [
         { autoWidth: true },
         { autoWidth: true }
       ],
-      // Title of the sheet
+      // Th title of the sheet.
       title: "Customers",
-      // Rows of the sheet
+      // The rows of the sheet.
       rows: [
-        // First row (header)
+        // The first row (header).
         {
           cells: [
-            // First cell
+            // The first cell.
             { value: "Company Name" },
-            // Second cell
+            // The second cell.
             { value: "Contact" }
           ]
         },
-        // Second row (data)
+        // The second row (data).
         {
           cells: [
             { value: "Around the Horn" },
             { value: "Thomas Hardy" }
           ]
         },
-        // Third row (data)
+        // The third row (data).
         {
           cells: [
             { value: "B's Beverages" },
@@ -123,11 +106,9 @@ kendo.saveAs({
 
 ## See Also
 
-Articles on the Excel export functionality in Kendo UI:
-
-* [Customize the Appearance]({% slug appearance_excelexport_kendoui %})
-* [Freeze Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
-* [Set the Column Width]({% slug columnwidth_excelexport_kendoui %})
-* [Set the Colspan and Rowspan]({% slug colaspanandrowspan_excelexport_kendoui %})
-* [Create Multiple Sheets]({% slug sheets_excelexport_kendoui %})
-* [Export Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})
+* [Customizing the Appearance]({% slug appearance_excelexport_kendoui %})
+* [Freezing Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
+* [Setting the Column Width]({% slug columnwidth_excelexport_kendoui %})
+* [Spanning Cells across Rows and Columns]({% slug colaspanandrowspan_excelexport_kendoui %})
+* [Creating Multiple Sheets]({% slug sheets_excelexport_kendoui %})
+* [Exporting the Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})

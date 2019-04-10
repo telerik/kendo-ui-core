@@ -4,7 +4,7 @@ page_title: Introduction | Progress Kendo UI
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
 slug: welcometo_kendoui
-position: 1
+position: 2
 ---
 
 # Welcome to Kendo UI for jQuery!

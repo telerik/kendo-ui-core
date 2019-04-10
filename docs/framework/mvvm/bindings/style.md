@@ -1,6 +1,6 @@
 ---
 title: Style
-page_title: Style | Kendo UI MVVM
+page_title: Style Binding | Kendo UI MVVM
 description: "Learn how to set the style attributes of the target DOM element by using the style binding in Kendo UI MVVM."
 slug: stylebinding_mvvm_kendoui
 ---
@@ -9,9 +9,9 @@ slug: stylebinding_mvvm_kendoui
 
 The `style` binding sets the style (CSS) attributes of the target DOM element.
 
-The following example demonstrates how to use the `style` binding.
+## Getting Started
 
-###### Example
+The following example demonstrates how to use the `style` binding.
 
     <span data-bind="style: {color: priceColor, fontWeight: priceFontWeight},
                  text: price"></span>
@@ -42,20 +42,16 @@ The following example demonstrates how to use the `style` binding.
     kendo.bind($("span"), viewModel);
     </script>
 
-This example results in the output below.
-
-###### Example
+The following example demonstrates the expected output.
 
     <span style="color: #00ff00; font-weight: bold">42</span>
 
-## Common Scenarios
-
-### Use Style Attributes Containing Dashes
+## Using Style Attributes Which Contain Dashes
 
 If the `style` attribute contains a dash, such as `font-weight, font-size, background-color etc`) you should omit the dash and capitalize the
 next letter (`fontWeight, fontSize, backgroundColor`).
 
-### Reset Style Attributes to Their Original Value
+## Resetting Style Attributes to Their Original Value
 
 To reset the value of a style attribute set it to empty string: `""`.
 

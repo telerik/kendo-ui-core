@@ -8,17 +8,13 @@ position: 4
 
 # Column Width
 
-By default, all columns in Excel have the same width set (64px). If the cell value needs more space, it will be clipped. This article shows how to set the column width in pixels, or enable automatic width calculation.
+By default, all columns in Excel have the same width of 64px.
 
-## Configuration
+If the cell value needs more space, it will be clipped. This article provides information on how to set the column width in pixels or enable automatic width calculation.
 
-### Set Column Width
+## Setting Fixed Column Widths
 
-The [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns.width) configuration option specifies the column width in pixels.
-
-The following example demonstrates how to set the width of a column in a worksheet.
-
-###### Example
+To manually set the column width in pixels, use the [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns.width) option.
 
 ```dojo
 <script>
@@ -45,11 +41,9 @@ kendo.saveAs({
 </script>
 ```
 
-### Enable Automatic Column Width
+## Automatically Adjusting Widths to Content
 
-Enable the automatic width calculation by setting the [`autoWidth`](/api/javascript/ooxml/workbook/configuration/sheets.columns.autowidth) option to `true`, as demonstrated in the example below. When set, the he column stretches to accommodate the longest cell value.
-
-###### Example
+To enable the automatic width calculation, set the [`autoWidth`](/api/javascript/ooxml/workbook/configuration/sheets.columns.autowidth) option to `true`. When set, the he column stretches to accommodate the longest cell value.
 
 ```dojo
 <script>
@@ -78,11 +72,9 @@ kendo.saveAs({
 
 ## See Also
 
-Articles on the Excel export functionality in Kendo UI:
-
 * [Introduction to the Excel Export Functionality]({% slug introduction_excelexport_kendoui %})
-* [Customize the Appearance]({% slug appearance_excelexport_kendoui %})
-* [Freeze Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
-* [Set the Colspan and Rowspan]({% slug colaspanandrowspan_excelexport_kendoui %})
-* [Create Multiple Sheets]({% slug sheets_excelexport_kendoui %})
-* [Export Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})
+* [Customizing the Appearance]({% slug appearance_excelexport_kendoui %})
+* [Freezing Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
+* [Spanning Cells across Rows and Columns]({% slug colaspanandrowspan_excelexport_kendoui %})
+* [Creating Multiple Sheets]({% slug sheets_excelexport_kendoui %})
+* [Exporting the Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})

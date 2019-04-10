@@ -3,32 +3,27 @@ title: SystemJS
 page_title: SystemJS | Kendo UI Third-Party Tools
 description: "Include Kendo UI with SystemJS."
 slug: systemjs_integration_kendoui
-position: 8
 ---
 
 # SystemJS
 
-The Kendo UI packaged scripts are in an AMD-compatible format, which means that they can be used by [SystemJS](https://github.com/systemjs/systemjs). This article illustrates the necessary SystemJS configuration for this setup.
+The Kendo UI packaged scripts are in an AMD-compatible format, which means that they can be used by [SystemJS](https://github.com/systemjs/systemjs).
 
-## Obtain Packaged Kendo UI Script Files
+This article illustrates the necessary SystemJS configuration for this setup.
 
-This section is intended for holders of the commercial Kendo UI Complete license.
+## Obtaining Packaged Kendo UI Script Files
 
-The commercial Kendo UI distribution `zip` file, available for download for the active customer subscriptions, has the packaged scripts stored in the `js` directory.
+(For holders of the commercial Kendo UI Complete license) The commercial Kendo UI distribution `zip` file, available for download for the active customer subscriptions, has the packaged scripts stored in the `js` directory.
 
-## Build AMD-Formatted Scripts
+## Building AMD-Formatted Scripts
 
-This section is intended for users of the Kendo UI Core open-source distribution.
-
-The instructions for obtaining and building the Kendo UI Core scripts are listed in the [README](https://github.com/telerik/kendo-ui-core#how-to-build-kendo-ui-core) article.
+(For users of the Kendo UI Core open-source distribution) The instructions for obtaining and building the Kendo UI Core scripts are listed in the [README](https://github.com/telerik/kendo-ui-core#how-to-build-kendo-ui-core) article.
 
 Once the scripts are available and present in your project directory, the SystemJS configuration demonstrated in the sections below will pick and bundle them in your project.
 
-> **Important**
->
 > As of its 0.20.* version, SystemJS [has dropped the wildcard support](https://github.com/systemjs/systemjs/issues/1575) and entirely changed the script loading mechanism. As a result, the script loading differs.
 
-### SystemJS up to 0.20 version configuration
+The following example demonstrates the configuration for SystemJS up to 0.20 version.
 
 ```tab-index.html
     <!DOCTYPE html>
@@ -73,9 +68,7 @@ Once the scripts are available and present in your project directory, the System
     });
 ```
 
-### SystemJS 0.20.* version configuration
-
-**Test Project folder structure**
+The following example demonstrates the configuration for SystemJS 0.20.x.
 
 ![Folder structure](../images/systemjs020-folder-structure.png)
 

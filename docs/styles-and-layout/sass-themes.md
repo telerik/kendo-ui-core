@@ -11,20 +11,17 @@ position: 2
 
 As of the R1 2017 release, the Kendo UI distribution includes Sass-based themes.
 
-Currently, Kendo UI delivers two Sass themes:
+Currently, Kendo UI delivers the following Sass themes:
 
-* **Default v2** - a modern update of the Kendo UI Default theme.
-* **Bootstrap v4** - has linked variables to the famous Bootstrap, in order to achieve similarity in the look and feel. Therefore, customizing the original Bootstrap theme will affect the Kendo UI theme as well.
-* **Material** - an update of the Kendo UI Material to closely implement the [Material Design Guidelines](https://material.io/design/).
+* Kendo UI Default v.2&mdash;The latest update of the Kendo UI Default theme.
+* Kendo UI Bootstrap v.4&mdash;To achieve similarity with the Bootstrap look and feel, the theme has linked variables to Bootstrap. Thsi means that customizing the original Bootstrap theme will affect the Kendo UI theme as well.
+* Kendo UI Material&mdash;An update of the Kendo UI Material Theme to closely implement the [Material Design Guidelines](https://material.io/design/).
 
-## Overview
+## Less- vs. Sass-Based Themes
 
 Apart from being written in a different language, the Sass-based themes are slightly different from the Less-based ones. This article outlines those differences and demonstrates how to use the Sass-based themes.
 
-## Differences
-
 In Kendo UI, the Sass-based themes demonstrate the following differences from the Less-based ones:
-
 - Each Sass-based theme is represented by a single CSS file that combines the layout and the themes of the components. As a result, you do not need to match a theme with its common file.
 - Based on the widget you work with, the Sass-based themes can build a part of the widget theme in a similar way the Download Builder trims unused scripts.
 - The Sass-based themes are available on NPM. Each theme is stored as an NPM package and can be easily upgraded.
@@ -66,6 +63,16 @@ To access the Progress NPM registry, you need an active Telerik account with an 
 
 ## Customizing the Themes
 
+To customize a Sass-based theme, use any of the following approaches:
+
+* [Create a `.scss` file](#creating-scss-files)
+* [Use variables](#using-variables)
+* [Use mixins](#using-mixins)
+
+To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository it is stored in.
+
+### Creating SCSS Files
+
 To customize a Sass-based theme, create a `.scss` file and consume the theme package in the following way:
 
 1. Obtain the theme source through the NPM package.
@@ -93,7 +100,7 @@ To customize a Sass-based theme, create a `.scss` file and consume the theme pac
 
         node-sass styles.scss styles.css
 
-### Variables
+### Using Variables
 
 The following list describes the theme variables available for adjustment in the Kendo UI Default theme.
 
@@ -113,7 +120,7 @@ The following list describes the theme variables available for adjustment in the
 }
 </style>
 
-#### Common
+The following example demonstrates how to use common variables.
 
 <table class="theme-variables">
 <colgroup>
@@ -337,7 +344,7 @@ Used to provide contrast between the background and foreground colors.
 </tr>
 </table>
 
-#### Buttons
+The following example demonstrates how to configure the Buttons.
 
 <table class="theme-variables">
 <colgroup>
@@ -469,7 +476,7 @@ Used to provide contrast between the background and foreground colors.
 </tr>
 </table>
 
-#### Charts
+The following example demonstrates how to configure the Charts.
 
 <table class="theme-variables">
 <colgroup>
@@ -556,7 +563,7 @@ Used to provide contrast between the background and foreground colors.
 </tr>
 </table>
 
-#### Toolbar
+The following example demonstrates how to configure the Toolbar.
 
 <table class="theme-variables">
 <colgroup>
@@ -589,21 +596,12 @@ Used to provide contrast between the background and foreground colors.
 </tr>
 </table>
 
+### Using Mixins
 
-### Mixins
+* `exports`&mdash;Outputs a module once, no matter how many times it is included.
+* Parameters&mdash;`name: String` which represents the name of the exported module.
 
-#### `exports`
-
-Outputs a module once, no matter how many times it is included.
-
-##### Parameters
-- `name: String`&mdash;The name of the exported module.
-
-### Contribution
-
-To contribute to the development of the Kendo UI Default Theme, refer to the [telerik/kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository it is stored in.
-
-## Sass Theme Builder
+## Using the Sass Theme Builder
 
 [**Progress Sass Theme Builder**](https://themebuilder.telerik.com/kendo-ui) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
 
@@ -613,7 +611,7 @@ The tool renders the same look and feel as the look and feel of all other compon
 
 ![Theme Builder Overview](images/theme-builder-overview.png)
 
-### Creating New Themes
+### Using Newly Created Themes
 
 To create a new theme:
 
@@ -624,7 +622,7 @@ To create a new theme:
 
     ![Theme Builder Create and Download 1](images/theme-builder-create-and-download-1.png)
 
-### Customizing Existing Themes
+### Modifying Themes
 
 The Sass Theme Builder supports the following options for customization:
 
@@ -633,20 +631,16 @@ The Sass Theme Builder supports the following options for customization:
 * Manual updates of each component element.
 * Utilization of predefined color swatches.
 
-#### Functionalities for Customization
+To customize an existing theme, use the following Sass Theme Builder features:
 
-To customize an existing theme, use the following Sass Theme Builder functionalities:
-
-1. **Color Swatches**&mdash;Contains predefined color palettes that you can apply to all components in your application.
-1. **Default**&mdash;Provides the applicable color customization options.
-1. **Preview Components**&mdash;Keeps the main view of the components. It reflects the customization changes you make each time you add or remove theme elements.
-1. **Download**&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme.
+1. Color swatches&mdash;Contains predefined color palettes that you can apply to all components in your application.
+1. Default&mdash;Provides the applicable color customization options.
+1. Preview components&mdash;Keeps the main view of the components. It reflects the customization changes you make each time you add or remove theme elements.
+1. Download&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme.
 
 **Figure 3: Available options for customization**
 
 ![Theme Builder Create and Download 3](images/theme-builder-create-and-download-3.png)
-
-#### Importing the Themes
 
 To upload an existing theme you have previously created:
 
@@ -658,16 +652,12 @@ To upload an existing theme you have previously created:
 
 ![Themebuilder import existing theme](images/theme-builder-import-existing-theme.png)
 
-### Adding the Themes to Your Project
-
 When you complete the modifications and the theme is ready to be used:
 
 1. Download the theme as a compact archive by clicking the **Download** button.
 1. Add the newly created `Theme` folder to your application.
 1. Include the `all.css` file in the `head` tag of your HTML document.
 
-> **Important**
->
 > Avoid referencing the `kendo.common.min.css` and `kendo.rtl.min.css` files because the exported CSS file contains all styles you need.
 
 ## See Also
@@ -677,5 +667,4 @@ When you complete the modifications and the theme is ready to be used:
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
-* [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets]({% slug forms_hybridkendoui %})

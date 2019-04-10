@@ -8,31 +8,23 @@ position: 3
 
 # 2017 Releases
 
+This article lists the breaking changes in the Kendo UI 2017 releases.
+
 ## Kendo UI 2017 R1 SP1
-
-### Changes from 2017 R1
-
-#### Breaking Changes
 
 **DropDownList**
 
-* The widget will not select the focused item on click outside (on blur).
+The widget will not select the focused item on click outside (on `blur`).
 
 ## Kendo UI 2017 R1
 
-### Changes from 2016 R3 SP2
-
-#### Breaking Changes
-
 **Icons**
 
-**All icons are now font icons.** Raster images and images sprites are no longer used. The implications are as follows:
+All icons are now font icons. Raster images and images sprites are no longer used. The implications are as follows:
 
-* To be unified around the semantic meaning, **icon classes are changed**. If your code depends on them, for example, for DOM traversal, you might need to update it according to the following **Table 1**. For the full list of available icons and classes in the latest release, refer to the article on [web font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
+* To be unified around the semantic meaning, icon classes are changed. If your code depends on them, for example, for DOM traversal, you might need to update it according to the following **Table 1**. For the full list of available icons and classes in the latest release, refer to the article on [web font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
 
-* The `font-size: 0;` rule is **no longer applied** to elements using Kendo UI icons. In this way, if they have **text**, it will now show up and obscure the icon. You should move it to a **title** attribute.
-
-	###### Example
+* The `font-size: 0;` rule is no longer applied to elements using Kendo UI icons. In this way, if they have text, it will now show up and obscure the icon. You have to move it to a `title` attribute.
 
 	```tab-Old
 			<span class="k-icon k-i-close">Hide</span>
@@ -41,8 +33,6 @@ position: 3
 			<span class="k-icon k-i-close" title="Hide"></span>
 	```
 
-	###### Example
-
 	```tab-Old
 			<a href=""><span class="k-icon k-i-close">Hide</span></a>
 	```
@@ -50,7 +40,7 @@ position: 3
 			<a href="" title="Hide"><span class="k-icon k-i-close"></span>
 	```
 
-**Table 1. Changed Icon CSS Classes**
+**Table 1. Changed icon CSS classes**
 
 <!--
 stylesheet in _assets/stylesheets/icon-font.css

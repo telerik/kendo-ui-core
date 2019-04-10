@@ -9,8 +9,6 @@ slug: howto_freeformdrawing_drawingapi
 
 The following example demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
 
-###### Example
-
 ```dojo
     <div id="surface" style="width: 1000px; height: 1000px;border: 1px solid black;cursor: crosshair"></div>
     <script>

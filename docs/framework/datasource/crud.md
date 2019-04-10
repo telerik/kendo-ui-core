@@ -12,13 +12,13 @@ The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource
 
 However, it must be combined with some user interface or another Kendo UI widget such as the Grid, ListView, etc. Though the examples below use the Grid as a sample, the configurations apply to any other widget or scenario.
 
-## Transport
+## Setting the Transport
 
 The DataSource component can work with local data or remote data. In both cases, the CRUD operations are managed by the `transport` configuration of the DataSource. `transport` is a JavaScript object that can be configured to execute predefined functions or make requests to predefined URLs on certain events. For detailed information on the DataSource `transport`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/transport).
 
 > You have to define all transport actions (read, update, create, destroy) in the same way&mdash;for example, as functions (when using local or custom transport), or as objects (when using remote transport). It is not possible to mix the two configuration alternatives.
 
-## Schema
+## Setting the Schema
 
 The `schema` of the DataSource is responsible for the a number of data-connectivity actions. For detailed information on the DataSource `schema`, refer to the [DataSource API documentation](/api/javascript/data/datasource/configuration/schema).
 
@@ -41,7 +41,7 @@ The `schema` configuration defines the following fields and field types:
 
 * The `key`, which points to the data items array in `schema.data`. This is required when the data does not represent a plain array of objects or JSON.
 
-## Local CRUD Operations
+## Setting the Local CRUD Operations
 
 The following information is applicable to scenarios in which the data is already available on the client, or when you will have to take care of its retrieval and submission and the Kendo UI DataSource will not make any HTTP requests on its own.
 
@@ -49,23 +49,19 @@ The following information is applicable to scenarios in which the data is alread
 
 When you have to bind a Kendo UI DataSource instance to local data without the need to support editing, use the `data` option.
 
-###### Example
-
     var dataSource = new kendo.data.DataSource({
         data: sampleData
     }
 
 When you will use editing, you are required to provide a `transport` configuration. The `data` option is no longer needed. The `read` method of the `transport` has to pass a local variable and it can make a custom AJAX request and then pass the response.
 
-###### Example
-
     var dataSource = new kendo.data.DataSource({
         transport: {
             read: function (e) {
-                // on success
+                // On success.
                 e.success(sampleData);
-                // on failure
-                //e.error("XHR response", "status code", "error message");
+                // On failure.
+                // e.error("XHR response", "status code", "error message");
             }
         }
     }
@@ -81,24 +77,22 @@ The `update` configuration setting of the DataSource defines a function that han
 > * If you need to use zero `ID` values, then change the [`defaultValue`](/api/javascript/data/model/methods/define) of the ID field to `-1` (minus one) in
 [`schema.model.fields`](/api/javascript/data/datasource/configuration/schema.model).
 
-###### Example
-
     var dataSource = new kendo.data.DataSource({
         transport: {
             /* the other CRUD settings are omitted for brevity */
             update: function (e) {
-                // batch is enabled
-                //var updateItems = e.data.models;
-                // batch is disabled
+                // Batch is enabled.
+                // var updateItems = e.data.models;
+                // Batch is disabled.
                 var updatedItem = e.data;
 
-                // save the updated item to the original datasource
+                // Save the updated item to the original datasource.
                 // ...
 
-                // on success
+                // On success.
                 e.success();
-                // on failure
-                //e.error("XHR response", "status code", "error message");
+                // On failure.
+                // e.error("XHR response", "status code", "error message");
             }
         }
     });
@@ -113,27 +107,25 @@ The `create` function performs a similar routine as `update` with the following 
 * The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance will operate with incorrect data and subsequent data operations can fail.
 * If the [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) configuration is set, the `success` method receives the created data item in an object with the same structure as the object that is passed to the `success` method of the `read` function. For more information, refer to the following example and to the previous section on [local update operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#update-local).
 
-###### Example
-
 <!-- exit list -->
 
     var dataSource = new kendo.data.DataSource({
         transport: {
             /* the other CRUD settings are omitted for brevity */
             create: function (e) {
-                // batch is disabled
-                // generate appropriate data item ID and save the new items to the original datasource
+                // Batch is disabled.
+                // Generate appropriate data item ID and save the new items to the original datasource.
                 e.data.my_ID_field_name = 123;
                 // ...
 
-                // on success return the new data items with IDs (assuming schema.data is NOT SET)
+                // On success return the new data items with IDs (assuming schema.data is NOT SET).
                 e.success(e.data);
 
-                // if schema.data IS SET (for example to "foo"), use the following syntax instead
+                // If schema.data IS SET (for example to "foo"), use the following syntax instead:
                 // e.success({"foo": [e.data]});
 
-                // on failure
-                //e.error("XHR response", "status code", "error message");
+                // On failure.
+                // e.error("XHR response", "status code", "error message");
             }
         }
     });
@@ -144,18 +136,16 @@ The `create` function performs a similar routine as `update` with the following 
 
 Similar to `create` and `update`, the `destroy` function receives the items that will be deleted in `e.data`. The function removes the provided items from the original DataSource and returns `success` or `error`.
 
-###### Example
-
     var dataSource = new kendo.data.DataSource({
         transport: {
             /* the other CRUD settings are omitted for brevity */
             destroy: function (e) {
-                // remove items from the original datasource by using e.data
+                // Remove items from the original datasource by using e.data.
 
-                // on success
+                // On success.
                 e.success();
-                // on failure
-                //e.error("XHR response", "status code", "error message");
+                // On failure.
+                // e.error("XHR response", "status code", "error message");
             }
         }
     });
@@ -165,19 +155,17 @@ Similar to `create` and `update`, the `destroy` function receives the items that
 
 If any of the `transport` actions (read, update, create, destroy) fails, then you have to pass information about this to the DataSource instance by executing `e.error()` instead of `e.success()` in the respective `transport` function. The `error` method accepts the AJAX request object, status code, and custom error message parameters.
 
-###### Example
-
     var dataSource = new kendo.data.DataSource({
         transport: {
             read: function (e) {
-                // on success
+                // On success.
                 // e.success(sampleData);
-                // on failure
+                // On failure.
                 e.error("XHR response", "status code", "error message");
             }
         },
         error: function (e) {
-            // handle error
+            // Handle error.
             alert("Status: " + e.status + "; Error message: " + e.errorThrown);
         }
     });
@@ -185,8 +173,6 @@ If any of the `transport` actions (read, update, create, destroy) fails, then yo
 ### Examples
 
 The following example is the complete implementation based on the previous information and demonstrates CRUD operations with simple **Products** data. `original datasource` signifies the `sampleData` variable which is used to populate the Grid initially. All data operations are persisted in this variable so that it can be used or submitted somewhere else. Avoid using an [`ObservableArray`](/api/javascript/data/observablearray) instead of a plain JavaScript array in the example. The Kendo UI DataSource will wrap the provided plain array and transform it to a collection of [`ObservableObjects`](/api/javascript/data/observableobject) automatically.
-
-###### Example
 
 ```dojo
     <style>html { font: 12px sans-serif; }</style>
@@ -200,8 +186,7 @@ The following example is the complete implementation based on the previous infor
             {ProductID: 3, ProductName: "Nokia 5880", Introduced: new Date(2008, 10, 2), UnitPrice: 275, Discontinued: true, UnitsInStock: 0}
         ];
 
-        // custom logic start
-
+        // Custom logic start.
         var sampleDataNextID = sampleData.length + 1;
 
         function getIndexById(id) {
@@ -216,46 +201,45 @@ The following example is the complete implementation based on the previous infor
             return null;
         }
 
-        // custom logic end
-
+        // Custom logic end.
         $(document).ready(function () {
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: function (e) {
-                        // on success
+                        // On success.
                         e.success(sampleData);
-                        // on failure
+                        // On failure.
                         //e.error("XHR response", "status code", "error message");
                     },
                     create: function (e) {
-                        // assign an ID to the new item
+                        // Assign an ID to the new item.
                         e.data.ProductID = sampleDataNextID++;
-                        // save data item to the original datasource
+                        // Save data item to the original datasource.
                         sampleData.push(e.data);
-                        // on success
+                        // On success.
                         e.success(e.data);
-                        // on failure
+                        // On failure.
                         //e.error("XHR response", "status code", "error message");
                     },
                     update: function (e) {
-                        // locate item in original datasource and update it
+                        // Locate item in original datasource and update it.
                         sampleData[getIndexById(e.data.ProductID)] = e.data;
-                        // on success
+                        // On success.
                         e.success();
-                        // on failure
-                        //e.error("XHR response", "status code", "error message");
+                        // On failure.
+                        // e.error("XHR response", "status code", "error message");
                     },
                     destroy: function (e) {
-                        // locate item in original datasource and remove it
+                        // Locate item in original datasource and remove it.
                         sampleData.splice(getIndexById(e.data.ProductID), 1);
-                        // on success
+                        // On success.
                         e.success();
-                        // on failure
-                        //e.error("XHR response", "status code", "error message");
+                        // On failure.
+                        // e.error("XHR response", "status code", "error message");
                     }
                 },
                 error: function (e) {
-                    // handle data operation error
+                    // Handle data operation error.
                     alert("Status: " + e.status + "; Error message: " + e.errorThrown);
                 },
                 pageSize: 10,
@@ -293,7 +277,7 @@ The following example is the complete implementation based on the previous infor
     </script>
 ```
 
-## Remote CRUD Operations
+## Setting the Remote CRUD Operations
 
 The following information is applicable to scenarios in which you have to retrieve the data from and submit it to a remote data service through HTTP requests that are made by the Kendo UI DataSource.
 
@@ -311,9 +295,7 @@ The `read` service defined by the DataSource `transport` returns data in the exp
 
 The following example uses a `read` transport configuration. The assumed server response is a plain JSON array of objects.
 
-###### Example
-
-    /*Server response:
+    /* Server response:
 
     [{
         "ProductID": 1,
@@ -337,8 +319,6 @@ The following example uses a `read` transport configuration. The assumed server 
 
 <!--*-->
 The following example is a modified version of the previous one which, due to the more complex response structure, requires the usage of a `schema`. The declared `itemCount` does not match the number of returned items which is normal when you use [server paging](/api/javascript/data/datasource/configuration/serverpaging). The server response contains only the items from the current page but provides information about the [total number of items](/api/javascript/data/datasource/configuration/schema.total) so that you can generate a correct paging interface if needed.
-
-###### Example
 
     /*Server response:
 
@@ -383,8 +363,6 @@ The `update` service expects the edited data items and returns the same items (i
 
 The following example demonstrates a case with no `schema.data`.
 
-###### Example
-
     /*Client POST request:
 
     ProductID: 1
@@ -412,8 +390,6 @@ The following example demonstrates a case with no `schema.data`.
 <!--*-->
 The following example demonstrates a case with `schema.data`.
 
-###### Example
-
     /*Client POST request:
 
     ProductID: 1
@@ -432,7 +408,7 @@ The following example demonstrates a case with `schema.data`.
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are omitted for brevity */
+            /* The other CRUD settings are omitted for brevity. */
             update: {
                 url: "service/products/update/",
                 type: "post"
@@ -450,8 +426,6 @@ The following example demonstrates a case with `schema.data`.
 The `create` action performs a similar routine as `update` with the notable difference that the newly created data items have no IDs so they must be assigned server-side and returned by the remote service. If [`schema.data`](/api/javascript/data/datasource/configuration/schema.data) is set, then the server response will have the same structure as the response of the `read` request. For more information, refer to the previous section on [local update operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#update-local).
 
 The following example demonstrates a case with no `schema.data`.
-
-###### Example
 
     /*Client POST request:
 
@@ -476,7 +450,7 @@ The following example demonstrates a case with no `schema.data`.
         }
     });
 
-###### Example with schema.data
+ with schema.data
 
     /*Client POST request:
 
@@ -495,7 +469,7 @@ The following example demonstrates a case with no `schema.data`.
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* The other CRUD settings are omitted for brevity */
+            /* The other CRUD settings are omitted for brevity. */
             create: {
                 url: "service/products/create/",
                 type: "post"
@@ -511,8 +485,6 @@ The following example demonstrates a case with no `schema.data`.
 ### Remote Destroy Operations
 
 The `destroy` action submits the data items that will be deleted or only their IDs. The expected response is similar to that of the `update` action&mdash;it can be empty or it can include the same data items.
-
-###### Example
 
     /*Client POST request:
 
@@ -552,16 +524,14 @@ When an `error` event is fired, the DataSource does not process any data items w
 
 The following example demonstrates a standard error.
 
-###### Example
-
-    /* Server response:
+    /*Server response:
 
     HTTP status code: 401 Unathorized
     Response body: empty
 
     */
     var dataSource = new kendo.data.DataSource({
-        /* the other CRUD settings are omitted for brevity */
+        /* The other CRUD settings are omitted for brevity. */
         error: function (e) {
             /* The e event argument will represent the following object:
 
@@ -580,16 +550,14 @@ The following example demonstrates a standard error.
 <!--*-->
 The following example demonstrates a custom error.
 
-###### Example
-
-    /* Server response:
+    /*Server response:
 
     HTTP status code: 200 OK
     Response body: { "errors": ["foo", "bar"] }
 
     */
     var dataSource = new kendo.data.DataSource({
-        /* the other CRUD settings are omitted for brevity */
+        /* The other CRUD settings are omitted for brevity. */
         error: function (e) {
             /* The e event argument will represent the following object:
 
@@ -614,8 +582,6 @@ When you use custom transport, the create, update, and delete operations will be
 
 > In order for the defined function to invoke a single request for all read, create, update, and delete operation, set the DataSource in its [batch mode](/api/javascript/data/datasource#configuration-batch).
 
-###### Example
-
 ```dojo
 <script>
     var dataSource = new kendo.data.DataSource({
@@ -636,7 +602,7 @@ When you use custom transport, the create, update, and delete operations will be
                 var data = e.data;
                 console.log(data);
 
-                // send batch update to desired URL, then notify success/error
+                // Send batch update to desired URL, then notify success/error.
 
                 e.success(data.updated,"update");
                 e.success(data.created,"create");

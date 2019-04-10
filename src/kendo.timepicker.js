@@ -694,6 +694,10 @@ var __meta__ = { // jshint ignore:line
                 element = that.element.off(ns),
                 wrapper = that._inputWrapper.off(ns);
 
+            if (that._dateInput) {
+                that._dateInput._unbindInput();
+            }
+
             if (!readonly && !disable) {
                 wrapper
                     .addClass(DEFAULT)
@@ -711,6 +715,9 @@ var __meta__ = { // jshint ignore:line
                            that._inputWrapper.addClass(FOCUSED);
                        });
 
+                if (that._dateInput) {
+                    that._dateInput._bindInput();
+                }
                arrow.on(CLICK, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
             } else {

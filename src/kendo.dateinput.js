@@ -197,6 +197,9 @@ var __meta__ = { // jshint ignore:line
         _bindInput: function () {
             var that = this;
             that.element
+                .on("focusout" + ns, function () {
+                    that._change();
+                })
                 .on("paste" + ns, proxy(that._paste, that))
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on(INPUT_EVENT_NAME, proxy(that._input, that))
@@ -208,6 +211,7 @@ var __meta__ = { // jshint ignore:line
             this.element
                 .off("keydown" + ns)
                 .off("paste" + ns)
+                .off("focusout" + ns)
                 .off(INPUT_EVENT_NAME)
                 .off("mouseup" + ns)
                 .off("DOMMouseScroll" + ns + " mousewheel" + ns);

@@ -9,11 +9,9 @@ position: 7
 
 # 2013 Releases
 
+This article lists the breaking changes in the Kendo UI 2013 releases.
+
 ## Kendo UI 2013 Q3
-
-### Changes from 2013 Q2 SP1 (2013.2.918)
-
-#### Breaking Changes
 
 **Core**
 
@@ -53,10 +51,6 @@ The ModalView now supports auto-sizing when its content changes and when no heig
 
 ## Kendo UI 2013 Q2
 
-### Changes from 2013 Q1 SP1 (2013.1.514)
-
-#### Breaking Changes
-
 **Themes**
 
 The icons in the sprite image have been rearranged to include more icons in two different sizes.
@@ -95,7 +89,7 @@ The enabling of the endless scrolling or the press-to-load-more configuration op
 
 1. The `lastPageReached` event is no longer triggered because of the same reasons.
 
-#### Deprecated Functionality
+### Deprecated Functionality
 
 **Editor**
 
@@ -134,10 +128,6 @@ The **formatBlock** and **style** tools have been deprecated in favor of the uni
 ```
 
 ## Kendo UI 2013 Q1
-
-### Changes from 2012 Q3 SP1 (2012.3.1315)
-
-#### Breaking Changes
 
 **jQuery**
 

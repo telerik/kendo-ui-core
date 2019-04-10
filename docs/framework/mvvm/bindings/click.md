@@ -1,21 +1,19 @@
 ---
 title: Click
-page_title: Click | Kendo UI MVVM
+page_title: Click Binding | Kendo UI MVVM
 description: "Learn how to automatically trigger the attached methods once the user clicks the target DOM element by using the click binding in Kendo UI MVVM."
 slug: clickbinding_mvvm_kendoui
 ---
 
 # Click Binding
 
-The Kendo UI Click (`click`) binding attaches a method of the View-Model to the `click` DOM event of the target element. The methods is invoked when the user clicks the target DOM element.
+The Kendo UI Click (`click`) binding attaches a method of the View-Model to the `click` DOM event of the target element.
+
+The methods is invoked when the user clicks the target DOM element.
 
 ## Getting Started
 
-### Setup
-
 The following example demonstrates how to use the `click` binding.
-
-###### Example
 
     <div id="view">
     <span data-bind="click: showDescription">Show description</span>
@@ -35,29 +33,21 @@ The following example demonstrates how to use the `click` binding.
     </script>
      </div>
 
-### Events Binding
+## Binding to Events
 
-The `click` binding is a shorthand for the [`events`](events) binding. The code snippets from the example below are equivalent.
-
-###### Example
+The `click` binding is a shorthand for the [`events`](events) binding. The code snippets from the following example are equivalent.
 
     <span data-bind="click: clickHandler"></span>
 
     <span data-bind="events: { click: clickHandler }"></span>
 
-## DOM Events and Actions   
+## Accessing DOM Event Arguments
 
-### Access DOM Event Argument
+The Kendo UI MVVM pattern supplies the DOM event argument wrapped in a jQuery [`Event` object](http://api.jquery.com/category/events/event-object/).
 
-Kendo UI MVVM supplies the DOM event argument wrapped in a jQuery [`Event` object](http://api.jquery.com/category/events/event-object/).
-
-### Stop DOM Event Bubbling
+## Preventing DOM Event Bubbling
 
 To stop the event from bubbling up the DOM tree, use the [`stopPropagation`](http://api.jquery.com/event.stopPropagation/) method.
-
-The following example demonstrates how to stop DOM event bubbling.
-
-###### Example
 
     <span data-bind="click: click">Click</span>
     <script>
@@ -70,14 +60,10 @@ The following example demonstrates how to stop DOM event bubbling.
     kendo.bind($("span"), viewModel);
     </script>
 
-### Prevent Default Actions of DOM Events
+## Preventing Default Actions of DOM Events
 
-For some DOM elements the `click` event has a default action - for example navigate to another page or submit a form. To prevent the default action use the
-[preventDefault](http://api.jquery.com/event.preventDefault/) method.
-
-The following example demonstrates how to prevent the default actions of DOM events.
-
-###### Example
+For some DOM elements, the `click` event has a default action&mdash;for example, navigate to another page or submit a form. To prevent the default action, use the
+[`preventDefault`](http://api.jquery.com/event.preventDefault/) method.
 
     <a href="http://example.com" data-bind="click: click">Click</span>
     <script>

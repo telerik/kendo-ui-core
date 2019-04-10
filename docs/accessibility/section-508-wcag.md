@@ -81,11 +81,7 @@ Several Kendo UI widgets feature complex rendering which affects their accessibi
 
 Widgets, such as the ComboBox, MultiSelect, and NumericTextBox, hide their initial `input` or `select` element which breaks the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) focus functionality on click. In general, the browser cannot focus hidden elements. This results in the inability of the `label` element to focus the corresponding widget.
 
-**Solution**
-
-Place the widget inside the `label` element which in turn focuses the first visible element. Avoid using the `for` attribute because when it is applied to the `label` element, the respective widget does not focus. Instead, use the `aria-labelledby` attribute on the input to point to its wrapping `label` element:
-
-###### Example
+**Solution** Place the widget inside the `label` element which in turn focuses the first visible element. Avoid using the `for` attribute because when it is applied to the `label` element, the respective widget does not focus. Instead, use the `aria-labelledby` attribute on the input to point to its wrapping `label` element:
 
 ```
   <label id="label">
@@ -104,8 +100,6 @@ Place the widget inside the `label` element which in turn focuses the first visi
 Widgets, such as the Grid and Calendar, require additional configuration to enable them to successfully pass the Section 508 validation. Due to the fact that they render their content in tables, each table header element has to contain text. To achieve this behavior, use the [`messages.expandCollapseColumnHeader`](/api/javascript/ui/grid/configuration/messages.expandcollapsecolumnheader) and [`messages.weekColumnHeader`](/api/javascript/ui/calendar/configuration/messages.weekcolumnheader) configuration options.
 
 The following example demonstrates how to specify a text for the expand (collapse) column.
-
-###### Example
 
 ```
 	<div id="grid"></div>
@@ -133,8 +127,6 @@ The following example demonstrates how to specify a text for the expand (collaps
 ```
 
 The following example demonstrates how to specify a text for the week column header.
-
-###### Example
 
 ```
     <div id="calendar"></div>

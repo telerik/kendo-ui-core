@@ -3,7 +3,7 @@ title: Virtual Classroom
 page_title: Virtual Classroom | Progress Kendo UI
 description: "Get started with Kendo UI for jQuery and learn about the Virtual Classroom free on-demand technical training program exclusive to active license holders."
 slug: virtualclass_kendoui
-position: 17
+position: 40
 ---
 
 # Virtual Classroom

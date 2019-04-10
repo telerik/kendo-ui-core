@@ -9,15 +9,15 @@ position: 3
 
 # Responsive Web Design
 
-By definition, responsive web design, or responsiveness, is an approach to web design. It aims at crafting sites to provide an optimal viewing experience&mdash;easy reading and navigation with minimum of resizing, panning, and scrolling&mdash;across a wide range of devices from desktop computer monitors to smartphones. Responsive web design is the foundation of modern UX practices for building applications for the mobile web.
+By definition, responsive web design (responsiveness) is an approach to web design.
 
-## Kendo UI in Responsive Web Pages
+It aims at crafting sites to provide an optimal viewing experience&mdash;easy reading and navigation with minimum of resizing, panning, and scrolling&mdash;across a wide range of devices from desktop computer monitors to smartphones. Responsive web design is the foundation of modern UX practices for building applications for the mobile web.
 
 Most Kendo UI widgets work and auto-resize when used in responsive web pages out of the box. Several widgets are going to need an additional [`kendo.resize`](/api/javascript/kendo/methods/resize) if their dimensions are set to percentage values.
 
-### Non-Autoresizing Widgets in Container
+## Widgets that Do Not Auto-Resize
 
-Below is a list of the Kendo UI widgets that do not support auto-resizing when their container is resized.
+The following list shows the widgets that do not auto-resize when their container is resized.
 
 * All [widgets for data visualization: Charts and Barcodes](http://demos.telerik.com/kendo-ui/)
 * [Hybrid ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index)
@@ -32,11 +32,9 @@ Below is a list of the Kendo UI widgets that do not support auto-resizing when t
 * [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)
 * [Window](http://demos.telerik.com/kendo-ui/window/index)
 
-### Auto-Resize Widgets for Data Visualization
+## Auto-Resizing Widgets
 
-The example below demonstrates how to auto-resize a chart with a 100% width.
-
-###### Example
+The following example demonstrates how to auto-resize a Chart with a 100% width.
 
     <div class="chart-wrapper">
        <div id="chart" style="width:100%"></div>
@@ -86,38 +84,32 @@ The example below demonstrates how to auto-resize a chart with a 100% width.
         });
     </script>
 
-## Customization
-
-### Individual Widget Resizing
+## Applying Individual Widget Resizing
 
 Each Kendo UI widget has a `resize()` method which can be used to trigger a layout readjustment instead of using [`kendo.resize`](/api/javascript/kendo/methods/resize). The `resize` method of the widget accepts a single Boolean parameter, which defines whether the control should execute its layout adjustment algorithm even if the widget dimensions have not changed (`"force"` mode).
 
-### Apply the resize() Method
+## Applying the resize Method
 
-The example below demonstrates how to use the `resize()` method.
-
-###### Example
+The following example demonstrates how to use the `resize()` method and uses a `wrapper` field which is documented in the article on the [widget wrapper and widget element](/framework/widgets/wrapper-element). If the widget wrapper resizes automatically with its parent element during browser window resize, it is not required to set new dimensions for the `wrapper` before executing the `resize` method, nor to use the  `"force"` mode.
 
     var gridWidget = $("#GridID").data("kendoGrid");
 
-    // apply the new height and trigger the layout readjustment
+    // Apply the new height and trigger the layout readjustment.
     gridWidget.wrapper.height(800);
     gridWidget.resize();
 
-    // force the layout readjustment without setting a new height
+    // Force the layout readjustment without setting a new height.
     gridWidget.resize(true);
-
-The example above uses a `wrapper` field, which is documented in the article on the [widget wrapper and widget element](/framework/widgets/wrapper-element).
-
-If the widget wrapper resizes automatically with its parent element during browser window resize, it is not required to set new dimensions for the `wrapper` before executing the `resize` method, nor to use the  `"force"` mode.
 
 ## Media Queries
 
 Kendo UI uses media queries to enhance the behavior of the widgets on different form factors. Media queries, a part of the [CSS3 specification](http://www.w3.org/TR/css3-mediaqueries/), load different sets of styles to different devices and deliver improved and unified end-user experience.
 
-The example below demonstrates a CSS media query.
+The responsive styles of Kendo UI use the non-mobile first method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, written styles, e.g. under 480px breakpoint, are going to override the base styles on screens of max-width equal to 480px or less.
 
-###### Example
+> Responsive behaviors which depend on CSS media queries cannot be disabled.
+
+The following example demonstrates a CSS media query.
 
     @media only screen and (max-width: 480px) {
         h2 {
@@ -125,26 +117,18 @@ The example below demonstrates a CSS media query.
         }
     }
 
-The responsive styles of Kendo UI use the non-mobile first method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, written styles, e.g. under 480px breakpoint, are going to override the base styles on screens of max-width equal to 480px or less.
-
-> **Important**
->
-> Responsive behaviors which depend on CSS media queries cannot be disabled.
-
-## Responsive UI Enhancements
+## Enhancing Responsiveness
 
 Responsive UI enhancements utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors. Such features are available for Kendo UI widgets such as the Grid, Scheduler, TreeList, etc.
 
-### Responsive UI Features in Kendo UI Widgets
-
-* **Kendo UI Grid** Provides the ability to define which columns will be hidden on small view ports.
-* **Kendo UI Pager**
+* Kendo UI Grid&mdash;Provides the ability to define which columns will be hidden on small view ports.
+* Kendo UI Pager
     - [Less-Based Themes]({% slug themesandappearnce_kendoui_desktopwidgets %})&mdash;Utilize media queries to automatically adjust to different screen widths.
     - [Sass-Based Themes]({% slug sassbasedthemes_kendoui %})&mdash;Utilize assigned classes based on the current width of the Pager. The classes automatically update upon `window` resizes or when the Pager is placed in a Kendo UI Layout widget. In all other cases, you have to manually [apply `resize()` method](#apply-resize-method).
-* **Kendo UI Scheduler** Provides a mechanism to overflow its `view` selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios.
-* **Kendo UI Responsive Panel** This is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its hamburger icon button is clicked.
+* Kendo UI Scheduler&mdash;Provides a mechanism to overflow its `view` selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios.
+* Kendo UI Responsive Panel&mdash;This is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its hamburger icon button is clicked.
 
-To find the live demos to all Kendo UI components, visit the [Kendo UI demo page](http://demos.telerik.com/kendo-ui/).
+For live demos on all Kendo UI components, refer to the [Kendo UI demo page](http://demos.telerik.com/kendo-ui/).
 
 ## See Also
 
@@ -154,5 +138,4 @@ To find the live demos to all Kendo UI components, visit the [Kendo UI demo page
 * [Sass ThemeBuilder Overview]({% slug sassbasedthemes_kendoui %}#sass-theme-builder)
 * [Less ThemeBuilder Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-theme-builder)
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
-* [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)

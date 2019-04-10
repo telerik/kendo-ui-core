@@ -8,11 +8,9 @@ position: 1
 
 # 2019 Releases
 
+This article lists the breaking changes in the Kendo UI 2019 releases. 
+
 ## Kendo UI 2019 R1
-
-### Changes from 2018 R3 SP1
-
-#### Breaking Changes
 
 **AutoComplete**, **ColorPicker**, **ComboBox**, **DatePicker**, **DateTimePicker**, **DropDownList**, **TimePicker**, **MultiColumnComboBox**
 

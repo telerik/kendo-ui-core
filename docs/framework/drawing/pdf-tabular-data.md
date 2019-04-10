@@ -1,14 +1,14 @@
 ---
-title: Printing Tabular Data in PDF
-page_title: Printing Tabular Data in PDF | Kendo UI Drawing API
+title: Exporting Tabular Data to PDF
+page_title: Exporting Tabular Data to PDF | Kendo UI Drawing Library
 description: "Learn how to export a wide Kendo UI Grid into PDF."
 slug: tabulardata_drawingapi
 position: 5
 ---
 
-# Printing Tabular Data in PDF
+# Exporting Tabular Data to PDF
 
-The built-in PDF Export of the Kendo UI Grid exports as many columns as it can fit on a page with a defined page size.
+The built-in PDF export option of the Kendo UI Grid exports as many columns as it can fit on a page with a defined page size.
 
 The default export mechanism of the Grid uses the `drawDOM` function which renders HTML content. However, `drawDOM` cannot do horizontal page splitting and, as a result, wide content gets truncated. To work around this issue, you can fit the content on the page by using the `scale` argument but if the Grid is too wide, this approach will result in making the text too small.
 
@@ -36,8 +36,6 @@ To control the generated table, use any of the following options:
 - `fitWidth`&mdash;Determines whether to fit content on paper width. This will scale down content if needed to avoid horizontal splitting. By default, `fitWidth` is set to `false`.
 - `scale`&mdash;Sets a scale factor. No scale is set by default. By default, `scale` is set to `1`.
 - `rowHeights`&mdash;Determines the row height in screen pixels. By default, `rowHeights` is set to `20`.
-
-###### Example
 
 ```dojo
 <button onclick="saveTabularData()">Export PDF</button>
@@ -119,3 +117,10 @@ To control the generated table, use any of the following options:
   });
 </script>
 ```
+
+## See Also
+
+* [Overview of the Drawing Library]({% slug overview_kendoui_drawingapi %})
+* [Drawing Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Exporting Drawings to PDF]({% slug pdfderawingexport_drawingapi %})
+* [Drawing DOM Elements]({% slug drawingofhtmlelements_drawingapi %})

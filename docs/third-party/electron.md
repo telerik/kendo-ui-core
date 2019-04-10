@@ -3,22 +3,17 @@ title: Electron
 page_title: Electron | Kendo UI Third-Party Tools
 description: "Learn how to use the Kendo UI widgets in an Electron application."
 slug: electron_integration_kendoui
-position: 12
 ---
 
 # Electron
 
 [Electron](https://electronjs.org/) is a framework for creating native desktop applications with web technologies like JavaScript, HTML, and CSS.
 
-## Adding CSS and JavaScript References
-
 To use Kendo UI in your Electron projects, include the required JavaScript and CSS files.
 
-### Using Local Files
+## Using Local Files
 
 Due to the Node.js integration of Electron, some extra symbols were inserted into the DOM&mdash;`module`, `exports`, and `require`. To include the scripts, use the `require` symbol.
-
-##### Example
 
     <link href="lib/css/kendo.common.min.css" rel="stylesheet">
     <link href="lib/css/kendo.rtl.min.css" rel="stylesheet">
@@ -28,11 +23,9 @@ Due to the Node.js integration of Electron, some extra symbols were inserted int
     <script>window.$ = window.jQuery = require('./lib/js/jquery.min.js');</script>
     <script>require('./lib/js/kendo.all.min.js')</script>
 
-### Using CDN Services
+## Using CDN Services
 
 Before you include the jQuery library, unset `module`.
-
-##### Example
 
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
@@ -47,8 +40,6 @@ Before you include the jQuery library, unset `module`.
 ## Basic Usage
 
 The following example assumes that the Kendo UI scripts and stylesheets were added to the document.
-
-##### Example
 
     <div id="grid"></div>
     <script>
