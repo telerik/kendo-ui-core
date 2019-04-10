@@ -114,6 +114,7 @@ var __meta__ = { // jshint ignore:line
                         .append(that.currentPageTemplate({ text: 0}))
                         .append(that.selectTemplate({ text: 0}))
                         .appendTo(that.element);
+                   that.list.wrap('<div class="k-pager-numbers-wrap"></div>');
                 }
             }
 

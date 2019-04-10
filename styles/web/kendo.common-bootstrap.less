@@ -145,6 +145,14 @@
 @switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
 @switch-on-left-x: calc(100% - @switch-handle-size);
 
+// Pager
+@pager-button-border-radius-sm: 4px;
+@pager-button-border-radius-lg: @pager-button-border-radius-sm;
+@pager-button-width: 2em;
+@pager-button-height: 2.3em;
+@pager-button-margin: 0;
+
+
 @import "common/all.less";
 
 .k-widget.k-tabstrip
@@ -276,6 +284,16 @@ input.k-textbox {
     right: initial;
 }
 
+.k-pager-numbers-wrap {
+    margin-left: -1px;
+
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        margin-left: 0;
+    }
+}
+
 .k-pager-wrap,
 .k-pager-numbers .k-link {
     line-height: 2.3em;
@@ -380,9 +398,4 @@ input.k-textbox {
             padding-right: 0.167em;
         }
     }
-}
-
-.k-safari.k-mobile .k-picker-wrap .k-input,
-.k-safari.k-mobile .k-numeric-wrap .k-input {
-    height: 1.88em;
 }

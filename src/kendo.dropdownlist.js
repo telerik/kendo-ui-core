@@ -172,7 +172,8 @@ var __meta__ = { // jshint ignore:line
             optionLabelTemplate: null,
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
-            autoWidth: false
+            autoWidth: false,
+            popup: null
         },
 
         events: [

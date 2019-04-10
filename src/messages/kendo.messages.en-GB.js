@@ -31,9 +31,13 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortAscending": "Sort Ascending",
   "sortDescending": "Sort Descending",
   "filter": "Filter",
+  "column": "Column",
   "columns": "Columns",
+  "columnVisibility": "Column Visibility",
+  "clear": "Clear",
+  "cancel": "Cancel",
   "done": "Done",
-  "settings": "Column Settings",
+  "settings": "Edit Column Settings",
   "lock": "Lock",
   "unlock": "Unlock"
 });
@@ -252,7 +256,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "selectValue": "-Select value-",
   "operator": "Operator",
   "value": "Value",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "done": "Done",
+  "into": "in"
 });
 }
 
@@ -310,9 +316,14 @@ if (kendo.ui.FilterMultiCheck) {
 kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Select All",
+  "clearAll": "Clear All",
   "clear": "Clear",
   "filter": "Filter",
-  "search": "Search"
+  "search": "Search",
+  "cancel": "Cancel",
+  "selectedItemsFormat": "{0} items selected",
+  "done": "Done",
+  "into": "in"
 });
 }
 

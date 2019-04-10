@@ -32,6 +32,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortDescending": "Sort Descending",
   "filter": "Filter",
   "columns": "Columns",
+  "columnVisibility": "Column Visibility",
   "done": "Done",
   "settings": "Column Settings",
   "lock": "Lock",

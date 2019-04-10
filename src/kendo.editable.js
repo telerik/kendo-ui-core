@@ -151,6 +151,40 @@ var __meta__ = { // jshint ignore:line
         }
     };
 
+    var mobileEditors = {
+        "number": function (container, options) {
+            var attr = createAttributes(options);
+
+            $('<input type="number"/>').attr(attr).appendTo(container);
+        },
+        "date": function (container, options) {
+            var attr = createAttributes(options);
+
+            $('<input type="date"/>').attr(attr).appendTo(container);
+        },
+        "string": function (container, options) {
+            var attr = createAttributes(options);
+
+            $('<input type="text" />').attr(attr).appendTo(container);
+        },
+        "boolean": function (container, options) {
+            var attr = createAttributes(options);
+
+            $('<input type="checkbox" />').attr(attr).appendTo(container);
+        },
+        "values": function (container, options) {
+            var attr = createAttributes(options);
+            var items = options.values;
+            var select = $('<select />');
+
+            for (var index in items) {
+                $('<option value="' + items[index].value + '">' + items[index].text + '</option>').appendTo(select);
+            }
+
+            select.attr(attr).appendTo(container);
+        }
+    };
+
     function addValidationRules(modelField, rules) {
         var validation = modelField ? (modelField.validation || {}) : {},
             rule,
@@ -175,6 +209,10 @@ var __meta__ = { // jshint ignore:line
 
             if (options.target) {
                 options.$angular = options.target.options.$angular;
+
+                if (options.target.pane) {
+                    that._isMobile = true;
+                }
             }
             Widget.fn.init.call(that, element, options);
             that._validateProxy = $.proxy(that._validate, that);
@@ -186,6 +224,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "Editable",
             editors: editors,
+            mobileEditors: mobileEditors,
             clearContainer: true,
             errorTemplate: ERRORTEMPLATE,
             skipFocus: false
@@ -193,7 +232,7 @@ var __meta__ = { // jshint ignore:line
 
         editor: function(field, modelField) {
             var that = this,
-                editors = that.options.editors,
+                editors = that._isMobile ? mobileEditors : that.options.editors,
                 isObject = isPlainObject(field),
                 fieldName = isObject ? field.field : field,
                 model = that.options.model || {},

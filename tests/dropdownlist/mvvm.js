@@ -742,6 +742,18 @@
 
             assert.equal(dropdownlist.select(), -1);
         });
+
+        it("popup option can be successfully set through data attribute", function() {
+            dom = $('<select data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="dropdownlist" />');
+
+            var observable = kendo.observable({});
+
+            kendo.bind(dom, observable);
+            dropdownlist = dom.data("kendoDropDownList");
+
+            assert.equal(dropdownlist.options.popup.origin, "top left");
+            assert.equal(dropdownlist.options.popup.position, "bottom left");
+        });
     });
 
     //TODO Investigate random fails
@@ -756,7 +768,7 @@
 
     //     function generateData(parameters) {
     //         var items = [];
-            
+
     //         for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
     //             items.push({
     //                 id: i,

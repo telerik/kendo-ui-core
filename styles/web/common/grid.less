@@ -384,19 +384,6 @@ div.k-grid-footer
     border-width: 1px 0 0;
 }
 
-.k-grid .k-pager-numbers
-{
-    float: left;
-    cursor: default;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 1px;
-}
-
-.k-widget.k-grid .k-pager-numbers {
-    position: relative;
-}
-
 // Grid :: filtering
 
 .k-header > .k-grid-filter,
@@ -976,64 +963,6 @@ html .k-grid-edit-row .k-tooltip
         &.k-i-sort-desc-sm {
             margin-top: 1px;
             vertical-align: text-top;
-        }
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        .k-grid .k-pager-numbers {
-            position: absolute;
-            left: 4.8em;
-            display: inline-flex;
-            flex-direction: column-reverse;
-            overflow: visible;
-            height: auto;
-        }
-
-        .k-grid .k-pager-numbers:first-child { // move left when previousNext: false
-            left: .2em;
-        }
-
-        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
-            transform: translate(-50%, -100%);
-            -webkit-transform: translate(-50%, -100%);
-        }
-
-        .km-pane-wrapper .k-grid .k-pager-numbers {
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
-        }
-
-        .k-rtl .k-grid .k-pager-numbers {
-            left: auto;
-            right: 4.8em;
-            width: 4.5em
-        }
-
-        .k-rtl .k-grid .k-pager-numbers:first-child { // move right when previousNext: false
-            left: auto;
-            right: .2em;
-        }
-
-        .k-rtl .km-pane-wrapper .k-grid .k-pager-numbers {
-            right: 5.8em;
-        }
-
-        .k-grid .k-pager-numbers .k-current-page {
-            display: block;
-            border-left: 0;
-        }
-
-        .k-grid .k-pager-number.k-state-expanded .k-current-page {
-            transform: translatey(100%);
-            -webkit-transform: translatey(100%);
         }
     }
 }
