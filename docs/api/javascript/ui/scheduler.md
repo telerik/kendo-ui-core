@@ -3168,6 +3168,60 @@ The text similar to "Agenda" displayed as scheduler "agenda" view title.
     });
     </script>
 
+### messages.views.timelineMonth `String`
+
+The text similar to "Timelnie Month" displayed as scheduler "timelineMonth" view title.
+
+#### Example - set the "timelineMonth" view title
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [ "day", "month", "timelineMonth", "timelineWeek" ],
+      messages: {
+        views: {
+            timelineMonth: "Month, but sideways"
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### messages.views.timelineWeek `String`
+
+The text similar to "Timelnie Week" displayed as scheduler "timelineWeek" view title.
+
+#### Example - set the "timelineWeek" view title
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [ "day", "month", "timelineMonth", "timelineWeek" ],
+      messages: {
+        views: {
+            timelineWeek: "Week, but sideways"
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### min `Date` *(default: 1/1/1900)*
 
 Constraints the minimum date which can be selected via the scheduler navigation.
