@@ -1,5 +1,5 @@
 ---
-title: Getting Started with VS 2017
+title: Getting Started with Visual Studio
 page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Visual Studio | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and Visual Studio."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
@@ -9,7 +9,7 @@ position: 1
 
 # Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core in Visual Studio (VS) 2017.
+This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core in Visual Studio (VS) 2017/2019.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ The prerequisites for creating and running an ASP.NET Core on Windows with VS 20
 To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 1. Create an [ASP.NET Core Web Application](#configuration-Create).
-2. Add the [Kendo UI NuGet package](#configuration-Add).
+2. Add the [UI for ASP.NET Core NuGet package]({% slug nuget_install_aspnetmvc6_aspnetmvc %}).
 
 ### Create ASP.NET Core Project
 
@@ -45,7 +45,7 @@ To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 ### Add the Telerik UI for ASP.NET Core NuGet Package
 
-1. Before you continue, set up the [Telerik NuGet Private Feed](../../aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) with your Telerik account credentials. Store the password in clear text because the .NET Core tooling does not support encryption.
+1. Before you continue, set up the [Telerik NuGet Private Feed]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) with your Telerik account credentials. Store the password in clear text because the .NET Core tooling does not support encryption.
 
 2. Open the NuGet Package Manager.
 
