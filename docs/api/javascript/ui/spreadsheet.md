@@ -1370,7 +1370,7 @@ Gets or sets the active sheet.
 
 ##### sheet `kendo.spreadsheet.Sheet` *optional*
 
-The sheet that will be set as active.
+The [sheet](/api/javascript/spreadsheet/sheet) to set as active.
 
 #### Returns
 

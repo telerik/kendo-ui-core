@@ -610,6 +610,14 @@ var __meta__ = { // jshint ignore:line
             });
 
             this.element.append(rootItemsHtml);
+            var elements = this.element.children(".k-item");
+            for (var i = 0; i < items.length; i++) {
+                this.trigger("itemChange", {
+                    item: elements.eq(i).find(".k-link").first(),
+                    data: items[i],
+                    ns: ui
+                });
+            }
             this._angularCompileElements(rootItemsHtml, items);
         },
 
@@ -633,7 +641,7 @@ var __meta__ = { // jshint ignore:line
                 for (i = 0; i < children.length; i++) {
                     child = children.eq(i);
                     this.trigger("itemChange", {
-                        item: child,
+                        item: child.find(".k-link").first(),
                         data: this.dataItem(child),
                         ns: ui
                     });
@@ -915,7 +923,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (nodeWrapper.length) {
-                        this.trigger("itemChange", { item: nodeWrapper, data: item, ns: ui });
+                        this.trigger("itemChange", { item: nodeWrapper.find(".k-link").first(), data: item, ns: ui });
                     }
                 }
 
