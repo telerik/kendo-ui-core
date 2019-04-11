@@ -6533,6 +6533,8 @@ declare namespace kendo.ui {
         week?: string;
         month?: string;
         agenda?: string;
+        timelineMonth?: string;
+        timelineWeek?: string;
     }
 
     interface SchedulerMessages {
