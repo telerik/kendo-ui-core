@@ -9,7 +9,7 @@ position: 1
 
 # Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core in Visual Studio (VS) 2017/2019.
+This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core on Windows with Visual Studio (VS) 2017/2019. For using Telerik UI for ASP.NET Core on MacOS, refer to [Getting Started with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %}).
 
 ## Prerequisites
 
