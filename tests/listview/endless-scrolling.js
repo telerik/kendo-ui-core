@@ -77,12 +77,12 @@
         assert.equal(listview.element.find(".k-edit-item").length, 1);
     });
 
-    it("User can enter only one item in edit mode", function() {
+    it.only("User can enter only one item in edit mode", function() {
         var listview = setup();
         listview.edit(listview.element.children().eq(0));
         listview.element.scrollTop(listview.element.height());
         listview.element.scroll();
-        listview.edit(listview.element.children().eq(9));
+        listview.edit(listview.element.children().eq(1));
 
         assert.equal(listview.element.find(".k-edit-item").length, 1);
     });
