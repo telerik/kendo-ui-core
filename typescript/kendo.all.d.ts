@@ -3540,7 +3540,7 @@ declare namespace kendo.ui {
         resizable?: boolean | EditorResizable;
         serialization?: EditorSerialization;
         stylesheets?: any;
-        tools?: EditorTool[];
+        tools?: EditorTool[]|string[];
         imageBrowser?: EditorImageBrowser;
         fileBrowser?: EditorFileBrowser;
         change?(e: EditorEvent): void;
