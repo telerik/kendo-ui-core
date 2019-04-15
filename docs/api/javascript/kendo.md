@@ -33,11 +33,13 @@ found on the page.
 These include tokens used by ASP.NET, Ruby on Rails and others.
 
 #### Example - Send CSRF tokens in DataSource read request
+
+    <input type="hidden" name="__RequestVerificationToken" value="token" />
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp",
           data: function() {
             return kendo.antiForgeryTokens();
@@ -47,6 +49,7 @@ These include tokens used by ASP.NET, Ruby on Rails and others.
     });
 
     dataSource.fetch();
+    // check the request in the NetworkTab
     </script>
 
 #### Returns
@@ -636,13 +639,16 @@ Such browsers are IE version 9 and lower and Safari.
 
 The developer is responsible for implementing the server-side proxy.
 
+When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/javascript/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
+
 The proxy will receive a POST request with the following parameters in the request body:
 
-* contentType: The MIME type of the file
-* base64: The base-64 encoded file content
-* fileName: The file name, as requested by the caller.
+* `contentType`&mdash;This is the MIME type of the file.
+* `base64`&mdash;The `base-64`-encoded file content.
+* `fileName`&mdash;The file name as requested by the caller.
+* Any anti-forgery tokens if present on the page
 
-The proxy should return the decoded file with set "Content-Disposition" header.
+The proxy should return the decoded file with set `"Content-Disposition"` header.
 
 #### Example - Saving a text file
     <script>

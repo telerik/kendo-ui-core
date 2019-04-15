@@ -54,6 +54,8 @@ If the browser does not implement an API for saving files, then `kendo.saveAs` c
 
 ###### Example
 
+When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/javascript/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
+
 ```
 <script>
 	var dataURI = "data:text/plain;base64,SGVsbG8gV29ybGQh";
@@ -97,6 +99,7 @@ The proxy receives a POST request with the following parameters in the request b
 * `contentType`&mdash;This is the MIME type of the file.
 * `base64`&mdash;The `base-64`-encoded file content.
 * `fileName`&mdash;The file name as requested by the caller.
+* Any anti-forgery tokens if present on the page
 
 The proxy is expected to return the decoded file with set `"Content-Disposition"` header.
 
@@ -197,6 +200,7 @@ public class SaveFile : ApiController
 public class HomeController
 {
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public ActionResult Save(string contentType, string base64, string fileName)
     {
         var fileContents = Convert.FromBase64String(base64);
