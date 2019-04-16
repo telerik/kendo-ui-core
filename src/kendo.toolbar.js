@@ -26,12 +26,15 @@ var __meta__ = { // jshint ignore:line
         BUTTON_GROUP = "k-button-group",
         SPLIT_BUTTON = "k-split-button",
         SEPARATOR = "k-separator",
+        SPACER_CLASS = "k-spacer",
+        SPACER = "spacer",
         POPUP = "k-popup",
 
         RESIZABLE_TOOLBAR = "k-toolbar-resizable",
         STATE_ACTIVE = "k-state-active",
         STATE_DISABLED = "k-state-disabled",
         STATE_HIDDEN = "k-state-hidden",
+        HIDDEN = "k-hidden",
         GROUP_START = "k-group-start",
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
@@ -68,7 +71,7 @@ var __meta__ = { // jshint ignore:line
         kendo.toolbar = {};
 
         var components = {
-            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor"></div>',
+            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button"></div>',
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
@@ -749,6 +752,24 @@ var __meta__ = { // jshint ignore:line
 
         kendo.toolbar.registerComponent("separator", ToolBarSeparator, OverflowSeparator);
 
+        var ToolBarSpacer = Item.extend({
+            init: function(options, toolbar) {
+                var element = this.element = $('<div>&nbsp;</div>');
+
+                this.element = element;
+                this.options = options;
+                this.toolbar = toolbar;
+
+                element.addClass(SPACER_CLASS);
+
+                element.data({
+                    type: SPACER
+                });
+            }
+        });
+
+        kendo.toolbar.registerComponent(SPACER, ToolBarSpacer);
+
         var TemplateItem = Item.extend({
             init: function(template, options, toolbar) {
                 var element = isFunction(template) ? template(options) : template;
@@ -1037,7 +1058,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
 
-                if (template && !overflowTemplate) {
+                if ((template && !overflowTemplate) || options.type === SPACER) {
                     options.overflow = OVERFLOW_NEVER;
                 } else if (!options.overflow) {
                     options.overflow = OVERFLOW_AUTO;
@@ -1313,6 +1334,7 @@ var __meta__ = { // jshint ignore:line
 
             _toggleOverflowAnchor: function() {
                 var hasVisibleChildren = false;
+                var paddingEnd = this._isRtl ? "padding-left" : "padding-right";
 
                 if (this.options.mobile) {
                     hasVisibleChildren = this.popup.element.find("." + OVERFLOW_CONTAINER).children(":not(." + OVERFLOW_HIDDEN + ", ." + POPUP + ")").length > 0;
@@ -1325,11 +1347,13 @@ var __meta__ = { // jshint ignore:line
                         visibility: "visible",
                         width: ""
                     });
+                    this.wrapper.css(paddingEnd, this.overflowAnchor.outerWidth());
                 } else {
                     this.overflowAnchor.css({
                         visibility: "hidden",
                         width: "1px"
                     });
+                    this.wrapper.css(paddingEnd, "");
                 }
             },
 
@@ -1654,7 +1678,7 @@ var __meta__ = { // jshint ignore:line
             _childrenWidth: function() {
                 var childrenWidth = 0;
 
-                this.element.children(":visible:not('." + STATE_HIDDEN + "')").each(function() {
+                this.element.children(":visible:not(." + STATE_HIDDEN + ", ." + SPACER_CLASS + ")").each(function() {
                     childrenWidth += outerWidth($(this), true);
                 });
 

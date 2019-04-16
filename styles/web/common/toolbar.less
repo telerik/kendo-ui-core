@@ -8,6 +8,13 @@
     min-height: 2.4375em;
     box-sizing: border-box;
 }
+.k-toolbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
 
 .k-toolbar .k-button .k-sprite,
 .k-overflow-container .k-button .k-sprite {
@@ -48,6 +55,19 @@
     display: inline-block;
     vertical-align: middle;
 }
+.k-toolbar > * {
+    display: inline-flex;
+    align-items: stretch;
+    align-content: center;
+    vertical-align: middle;
+}
+
+
+// Spacer
+.k-toolbar .k-spacer {
+    flex: 1 1 auto;
+}
+
 
 .k-toolbar .k-separator {
     border-width: 0 0 0 1px;
