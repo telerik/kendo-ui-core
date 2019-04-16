@@ -23,38 +23,108 @@ To create a Kendo UI TreeList, use an empty `div` element and supply all TreeLis
 
 Kendo UI TreeList needs a data source from where it is able to retrieve the data you want it to display. The widget uses a special type of Kendo UI DataSource&mdash;[`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource). The `TreeListDataSource` contains instances of a custom Kendo UI model&mdash;[`kendo.data.TreeListModel`](/api/javascript/data/treelistmodel)&mdash;which represents the TreeList data items.
 
+The TreeList renders its hierarchy based on the `parentId` - `id` relationship. The data objects contain both an `id` and a `parentId` field which describe the hierarchy of items. These field names can be changed via the [`schema.model` definition](/api/javascript/data/datasource/configuration/schema#schema.model).
+
+Map the `parentId` field to the corresponding parentId field in your data. The schema definition below will inform the data source that the `ReportsTo` field is the `parentId` field:
+
+```
+    schema:{
+        model:{
+            parentId: "ReportsTo",
+            fields:{
+                ReportsTo: { type: "number", nullable: true }
+            }
+
+        }
+    }
+```
+
+> **Important**
+>
+> The Kendo UI TreeList distinguishes the root items based on the `parentId`. If the `schema.model.fields.[parentIdField]` is nullable, root items with be items whose `parentId` field values are `null`. If the `schema.model.fields.[parentIdField]` is *not* nullable, root items will be items which have a default value for their data type.
+>
+> When you use the `schema.model.fields` configuration, list all fields. Set the field which represents the `id` through the `schema.model.id`. If these are not set, they will still work for displaying data, but will post incomplete objects on the server when editing items.
+
 ### Bind to Local Arrays
 
 The following example demonstrates how to initialize the TreeList and bind it to a local data array.
 
-###### Example
+###### Example with a nullable parentId
 
 ```dojo
-<div id="treelist"></div>
+    <div id="treelist"></div>
 
-<!-- Initialize the TreeList -->
-<script>
+    <!-- Initialize the TreeList -->
+    <script>
 
-    $(document).ready(function(){
+      $(document).ready(function(){
         $("#treelist").kendoTreeList({
-            columns: [
-                { field: "Name" },
-                { field: "Position" }
-            ],
-            dataSource: {
-                data: [
-                    { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-                    { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
-                    { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
-                ]
-            }
+          columns: [
+            { field: "parentId", width:150 },
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          dataSource: {
+            schema:{
+              model:{
+                id: "id",
+                parentId:"parentId",
+                fields:{
+                  id: { type: "number"},
+                  parentId: { type: "number", nullable:true }
+                }
+              }
+            },
+            data: [
+              // Jane Smith is the root item because her parentId is null
+              { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
+              { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
+              { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+            ]
+          }
         });
-    });
-
-</script>
+      });
+    </script>
 ```
 
-Note that the data objects contain both an `id` and a `parentId` field which describe the hierarchy of items. These field names can be changed via the [`schema.model` definition](/api/javascript/data/datasource/configuration/schema#schema.model).
+###### Example with a non-nullable parentId
+
+```dojo
+    <div id="treelist"></div>
+
+    <!-- Initialize the TreeList -->
+    <script>
+
+      $(document).ready(function(){
+        $("#treelist").kendoTreeList({
+          columns: [
+            { field: "parentId", width:150 },
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          dataSource: {
+            schema:{
+              model:{
+                id: "id",
+                parentId:"parentId",
+                fields:{
+                  id: { type: "number"},
+                  parentId: { type: "number", nullable:false }
+                }
+              }
+            },
+            data: [
+              // Jane Smith is the root item because her parentId is 0 which is the default value for number types and the parentId field is NOT nullable
+              { id: 1, parentId: 0, Name: "Jane Smith", Position: "CEO" },
+              { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
+              { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+            ]
+          }
+        });
+      });
+    </script>
+
+```
 
 ### Bind to Remote Data
 
@@ -63,6 +133,12 @@ You can also bind the `TreeListDataSource` to remote data. This means that the T
 For additional information, refer to the article on the [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}).
 
 The following example demonstrates how to enable the remote binding for the TreeList by setting the DataSource `transport`.
+
+> To lazy load the Kendo UI TreeList hierarchy, calculate and include the boolean [`hasChildren`](/api/javascript/data/treelistmodel/fields/haschildren) field on the server.
+
+> When the user clicks on the expand icon, the Kendo UI TreeList DataSource requests the children of the item by sending the parent item `id` as a request parameter, for example `&id=1`.
+
+> The parameter name can be changed with the [`paramaterMap`](/api/javascript/data/datasource/configuration/transport.parametermap) function. Example controller code in the [`kendo-ui-demos service`](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Controllers/EmployeeDirectoryController.cs)
 
 ###### Example
 
@@ -111,9 +187,10 @@ The following example demonstrates how to enable the remote binding for the Tree
                 schema: {
                     model: {
                         id: "EmployeeId",
+                        parentId: "ReportsTo",
                         fields: {
                             EmployeeId: { type: "number", editable: false, nullable: false },
-                            parentId: { field: "ReportsTo", nullable: true },
+                            ReportsTo: { type: "number", nullable: true },
                             FirstName: { validation: { required: true } },
                             LastName: { validation: { required: true } },
                             HireDate: { type: "date" },
@@ -141,12 +218,6 @@ The following example demonstrates how to enable the remote binding for the Tree
 
     </script>
 ```
-
-Note that the `parentId` is mapped from the `ReportsTo` field by the `parentId: { field: "ReportsTo", nullable: true }` line. The TreeList renders its hierarchy based on the `parentId` - `id` relationship.
-
-> **Important**
->
-> When you use the `schema.model.fields` configuration, list all fields. Set the field which represents the `id` of the event through the `schema.model.id`. If these are not set, they will still work for displaying data, but will post incomplete objects on the server when editing items.
 
 ## Features
 

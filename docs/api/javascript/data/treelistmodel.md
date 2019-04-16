@@ -11,7 +11,7 @@ The `kendo.data.TreeListModel` class represents a data item from the [kendo.data
 
 ## Configuration
 
-### parentId
+### parentId *(default: "{ type: 'number', nullable: true }")*
 
 The name of the Model's parentId field.
 
@@ -19,9 +19,19 @@ The name of the Model's parentId field.
 
 ### hasChildren `Boolean`
 
-Indicates whether an item has children.
+Indicates whether an item has children. When the `hasChildren` field value is `true`, the TreeList renders an expand icon.
 
-#### Example - get input element
+>The data source calculates the `hasChildern` field value for local-binding scenarios.
+
+>For lazy loading with remote data, calculate the field on the server.
+
+>***The field is case-sensitive***.
+
+> When the user clicks on the expand icon, the Kendo UI TreeList DataSource requests the children of the item by sending the parent item `id` as a request parameter, for example `&id=1`.
+
+> The parameter name can be changed with the [`paramaterMap`](/api/javascript/data/datasource/configuration/transport.parametermap) function.
+
+#### Example
 
     <div id="example">
       <script>
