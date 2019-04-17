@@ -34,7 +34,6 @@ var __meta__ = { // jshint ignore:line
         STATE_ACTIVE = "k-state-active",
         STATE_DISABLED = "k-state-disabled",
         STATE_HIDDEN = "k-state-hidden",
-        HIDDEN = "k-hidden",
         GROUP_START = "k-group-start",
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
