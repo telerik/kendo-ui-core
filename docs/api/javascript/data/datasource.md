@@ -910,7 +910,7 @@ The aggregate results should have the following format:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverAggregates: true,
       schema: {
         aggregates: "aggregates" // aggregate results are returned in the "aggregates" field of the response
