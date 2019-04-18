@@ -60,7 +60,7 @@
 
     it("More items are requested when scrolled to the bottom", function() {
         var listview = setup();
-        listview.element.scrollTop(listview.element.height());
+        listview.element.scrollTop(listview.element[0].scrollHeight);
         listview.element.scroll();
 
         assert.equal(listview.dataSource.view().length, 10);
@@ -77,7 +77,7 @@
         assert.equal(listview.element.find(".k-edit-item").length, 1);
     });
 
-    it.only("User can enter only one item in edit mode", function() {
+    it("User can enter only one item in edit mode", function() {
         var listview = setup();
         listview.edit(listview.element.children().eq(0));
         listview.element.scrollTop(listview.element.height());
@@ -90,7 +90,7 @@
     it("Pager shows correct info when endless scrolling is used", function() {
         var listview = setup({ pageable: { pagerId: "pager" } });
 
-        listview.element.scrollTop(listview.element.height());
+        listview.element.scrollTop(listview.element[0].scrollHeight);
         listview.element.scroll();
         assert.equal($("#pager").data("kendoPager").element.find(".k-pager-info").text(), "1 - 10 of 50 items");
     });
@@ -98,7 +98,7 @@
     it("Calling the datasource read method replaces only the last subset of items", function() {
         var listview = setup();
 
-        listview.element.scrollTop(listview.element.height());
+        listview.element.scrollTop(listview.element[0].scrollHeight);
         listview.element.scroll();
         listview.dataSource.read();
 
@@ -109,7 +109,7 @@
     it("After calling the datasource read method the uid attributes are applied correctly", function() {
         var listview = setup();
 
-        listview.element.scrollTop(listview.element.height());
+        listview.element.scrollTop(listview.element[0].scrollHeight);
         listview.element.scroll();
         listview.dataSource.read();
 
