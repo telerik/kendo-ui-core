@@ -2697,7 +2697,7 @@ The color of the major grid lines. Accepts a valid CSS color string, including h
           color: "#aa00bb"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2714,7 +2714,7 @@ The color of the major grid lines. Accepts a valid CSS color string, including h
           color: "rgb(128, 0, 255)"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2731,7 +2731,7 @@ The color of the major grid lines. Accepts a valid CSS color string, including h
           color: "green"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
