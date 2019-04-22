@@ -2,7 +2,7 @@
 title: Overview
 page_title: Globalization Overview | Kendo UI Globalization
 description: "Learn how to define current culture settings, format number or date objects in the process of globalization when working with Kendo UI."
-previous_url: /framework/globalization/overview
+previous_url: /kendo-ui/framework/globalization/overview
 slug: overview_kendoui_globalization
 position: 1
 ---

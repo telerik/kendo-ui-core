@@ -2,7 +2,7 @@
 title: Date Formatting
 page_title: Date Formatting | Kendo UI Globalization
 description: "Learn how to convert the date object to a human readable string, and support standard and custom date formats in Kendo UI."
-previous_url: /framework/globalization/dateformatting
+previous_url: /kendo-ui/framework/globalization/dateformatting
 slug: dateformatting_kendoui_globalization
 position: 3
 ---

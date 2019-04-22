@@ -27,11 +27,11 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 
 **Figure 1: A Grid with its grouping functionality enabled**
 
-![Grid with Grouping Enabled](grid5_1.png)
+![Grid with Grouping Enabled](../grid5_1.png)
 
 **Figure 2: A Grid with its data grouped by last name**
 
-![Grid Grouped by Last Name](grid6_1.png)
+![Grid Grouped by Last Name](../grid6_1.png)
 
 ## Using with Row Templates
 
