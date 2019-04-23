@@ -20,15 +20,15 @@ All CRUD operations of the Kendo UI TreeList require a model with "id" and "pare
 
 	var dataSource = new kendo.data.TreeListDataSource({
         schema: {
-            model: {	
-                id: "IdField",	
+            model: {
+                id: "IdField",
                 parentId: "ParentIdField",
-                ... 
+                ...
 
 
 ### Transport configuration
 
-Once the schema is configured, you need to configure the "transport" actions for "update", "destroy" and "create". 
+Once the schema is configured, you need to configure the "transport" actions for "update", "destroy" and "create".
 
 ###### Example
 
@@ -105,16 +105,87 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
 		},
 		...
 		columns: [
-			... 
+			...
 			{ command: [{name: "createchild", text: "Add child"},"destroy" ], width: 240 }
 		]
 	});
 
 With "incell" (Batch) edit mode you do not need to use the command buttons for update, because editing is initiated on cell click. Another difference from the other two edit modes are the commands in the toolbar, which include the "Save changes" and "Cancel changes" buttons for saving or canceling all changes with a single click.
 
-Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have an assigned "id". However, since the "id" is assigned within the service on "create" action, when the new record is not saved, it will not have "id". The code within the "dataBound" event ensures that the "createChild" button is removed for all new records.
+Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have an assigned `id`. However, since the `id` is assigned within the service on the `create` action, when the new record is not saved, it will not have `id`. The code within the `dataBound` event ensures that the **Create child** button is removed for all new records.
 
-> Currently, items drag and drop (`editable.move = true`) is not supported with "incell" editing in the TreeList. This is so because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. A workaround for this scenario is suggested in this [GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
+### Drag and Drop
+
+> Currently, the dragging and dropping of otems (`editable.move = true`) is not supported with the in-cell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
+
+When the [`editable.move`](/api/javascript/ui/treelist/configuration/editable#editable.move) option is set to `true` the rows can be dragged and dropped. The Kendo UI TreeList internally updates the `parentId` field. To persist the new hierarchy, configure the treelist data source for CRUD operations ***(transport.update as a minimum)***.
+
+###### Example - TreeList with a batch data source and editable move configuration
+
+```dojo
+    <div id="treelist"></div>
+
+    <script>
+        $(document).ready(function () {
+            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+
+            var dataSource = new kendo.data.TreeListDataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+                            dataType: "jsonp"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+                            dataType: "jsonp"
+                        },
+                        parameterMap: function(options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return {models: kendo.stringify(options.models)};
+                            }
+                        }
+                    },
+                    batch: true,
+                    schema: {
+                        model: {
+                            id: "EmployeeId",
+                            parentId: "ReportsTo",
+                            fields: {
+                                EmployeeId: { type: "number", editable: false, nullable: false },
+                                ReportsTo: { nullable: true, type: "number" },
+                                FirstName: { validation: { required: true } },
+                                LastName: { validation: { required: true } },
+                                HireDate: { type: "date" },
+                                Phone: { type: "string" },
+                                HireDate: { type: "date" },
+                                BirthDate: { type: "date" },
+                                Extension: { type: "number", validation: { min: 0, required: true } },
+                                Position: { type: "string" }
+                            },
+                            expanded: true
+                        }
+                    }
+                });
+
+            $("#treelist").kendoTreeList({
+                dataSource: dataSource,
+                toolbar: [ "save" ],
+                editable: {
+                    move: true
+                },
+                height: 540,
+                columns: [
+                    { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+                    { field: "LastName", title: "Last Name", width: 100 },
+                    { field: "Position" },
+                    { field: "HireDate", title: "Hire Date", format: "{0:MMMM d, yyyy}" },
+                    { field: "Phone", title: "Phone" },
+                    { field: "Extension", title: "Ext", format: "{0:#}" }
+                ]
+            });
+        });
+    </script>
+```
 
 ## See Also
 

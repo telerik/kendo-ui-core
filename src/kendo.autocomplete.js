@@ -168,7 +168,8 @@ var __meta__ = { // jshint ignore:line
             virtual: false,
             value: null,
             clearButton: true,
-            autoWidth: false
+            autoWidth: false,
+            popup: null
         },
 
         _dataSource: function() {

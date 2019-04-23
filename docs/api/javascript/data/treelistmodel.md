@@ -13,7 +13,7 @@ The `kendo.data.TreeListModel` class represents a data item from the [kendo.data
 
 ### parentId *(default: "{ type: 'number', nullable: true }")*
 
-The name of the Model's parentId field.
+The name of the Model's parentId field. The Kendo UI TreeList distinguishes the root items based on the `parentId` field. If the `schema.model.fields.[parentIdField]` is nullable, root items with be items whose `parentId` field values are `null`. If the `schema.model.fields.[parentIdField]` is *not* nullable, root items will be items which have a default value for their data type.
 
 ## Fields
 
