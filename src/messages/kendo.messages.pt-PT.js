@@ -149,7 +149,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "isnull": "É nulo",
     "isnotnull": "É não nulo",
     "isempty": "É vazio",
-    "isnotempty": "É não vazio"
+    "isnotempty": "É não vazio",
+    "isnullorempty": "Não tem valor",
+    "isnotnullorempty": "Tem valor"
   },
   "number": {
     "eq": "É igual a",
@@ -215,7 +217,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "isnull": "É nulo",
     "isnotnull": "É não nulo",
     "isempty": "É vazio",
-    "isnotempty": "É não vazio"
+    "isnotempty": "É não vazio",
+    "isnullorempty": "Não tem valor",
+    "isnotnullorempty": "Tem valor"
   },
   "number": {
     "eq": "É igual a",
