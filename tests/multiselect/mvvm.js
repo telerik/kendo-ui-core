@@ -895,6 +895,17 @@
             assert.equal(observable.selectedItem[0], observable.items[0].id);
             assert.equal(observable.selectedItem[1], observable.items[1].id);
         });
+        it("popup option can be successfully set through data attribute", function() {
+            dom = $('<select data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="multiselect" />');
+
+            var observable = kendo.observable({});
+
+            kendo.bind(dom, observable);
+            var multiselect = dom.data("kendoMultiSelect");
+
+            assert.equal(multiselect.options.popup.origin, "top left");
+            assert.equal(multiselect.options.popup.position, "bottom left");
+        });
     });
 
     // TODO Investigate random fails

@@ -11,7 +11,7 @@ position: 1
 The DropDownList is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
 For more information, refer to:
-* [Keyboard navigation by Kendo UI DropDownList]({% slug keynav_kendoui_ddl_widget %})
+* [Keyboard navigation by the Kendo UI DropDownList]({% slug keynav_kendoui_ddl_widget %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
 ## WAI-ARIA

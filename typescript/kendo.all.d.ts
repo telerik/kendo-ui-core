@@ -7343,11 +7343,17 @@ declare namespace kendo.ui {
         insertRow?(e: SpreadsheetInsertRowEvent): void;
         select?(e: SpreadsheetSelectEvent): void;
         changeFormat?(e: SpreadsheetChangeFormatEvent): void;
+        changing?(e: SpreadsheetChangingEvent): void;
         change?(e: SpreadsheetChangeEvent): void;
         render?(e: SpreadsheetRenderEvent): void;
         excelExport?(e: SpreadsheetExcelExportEvent): void;
         excelImport?(e: SpreadsheetExcelImportEvent): void;
         pdfExport?(e: SpreadsheetPdfExportEvent): void;
+        cut?(e: SpreadsheetCutEvent): void;
+        copy?(e: SpreadsheetCopyEvent): void;
+        paste?(e: SpreadsheetPasteEvent): void;
+        dataBinding?(e: SpreadsheetDataBindingEvent): void;
+        dataBound?(e: SpreadsheetDataBoundEvent): void;
     }
     interface SpreadsheetEvent {
         sender: Spreadsheet;
@@ -7419,6 +7425,12 @@ declare namespace kendo.ui {
         range?: kendo.spreadsheet.Range;
     }
 
+    interface SpreadsheetChangingEvent extends SpreadsheetEvent {
+        range?: kendo.spreadsheet.Range;
+        data?: any;
+        changeType?: string;
+    }
+
     interface SpreadsheetChangeEvent extends SpreadsheetEvent {
         range?: kendo.spreadsheet.Range;
     }
@@ -7440,6 +7452,26 @@ declare namespace kendo.ui {
         promise?: JQueryPromise<any>;
     }
 
+    interface SpreadsheetCopyEvent extends SpreadsheetEvent {
+        range?: kendo.spreadsheet.Range;
+    }
+
+    interface SpreadsheetCutEvent extends SpreadsheetEvent {
+        range?: kendo.spreadsheet.Range;
+    }
+
+    interface SpreadsheetPasteEvent extends SpreadsheetEvent {
+        range?: kendo.spreadsheet.Range;
+        clipboardContent?: any;
+    }
+
+    interface SpreadsheetDataBindingEvent extends SpreadsheetEvent {
+        sheet?: kendo.spreadsheet.Sheet;
+    }
+
+    interface SpreadsheetDataBoundEvent extends SpreadsheetEvent {
+        sheet?: kendo.spreadsheet.Sheet;
+    }
 
     class Switch extends kendo.ui.Widget {
 

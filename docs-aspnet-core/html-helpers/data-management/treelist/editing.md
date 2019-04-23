@@ -14,21 +14,40 @@ You can set the TreeList HtmlHelper in the following edit modes:
 * Popup
 * Inline
 * Incell (batch)
+* Drag and Drop
 
 ## Prerequisites
 
 ### Model
 
-All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `ParentId` fields and those models must be configured in the DataSource of the TreeList.
+All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `ParentId` fields and those models must be configured in the DataSource of the TreeList. The TreeList distinguishes the root items based on the `ParentId` field. If the `ParentId` field is nullable, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is *not* nullable, root items will be items which have a default value for their data type.
 
-###### Example
+###### Example - nullable model (items with ParentId `null` will be root items)
 
-```
+```tab-Razor
  	.DataSource(dataSource => dataSource
 	...
 	.Model(m => {
 		m.Id(f => f.EmployeeId);
-		m.ParentId(f => f.ReportsTo);
+		m.ParentId(f => f.ReportsTo).Nullable(true);
+```
+```tab-Model
+    public int? ReportsTo { get; set; }
+	public int EmployeeId { get; set; }
+```
+
+###### Example - non-nullable model (items with ParentId `string.empty` will be root items)
+
+```tab-Razor
+ 	.DataSource(dataSource => dataSource
+	...
+	.Model(m => {
+		m.Id(f => f.EmployeeId);
+		m.ParentId(f => f.ReportsTo).Nullable(false);
+```
+```tab-Model
+    public string ReportsTo { get; set; }
+	public string EmployeeId { get; set; }
 ```
 
 ### Transport Configuration
@@ -69,7 +88,7 @@ To enable the Popup and Inline edit modes, configure the Toolbar to display the 
     		})
 ```
 
-The only difference between the inline and popup edit modes is the position of the rendered editors. With the popup editing, the editors are rendered in a modal window and with the inline edit mode, the editors are rendered in the `tr` element of the edited record.				
+The only difference between the inline and popup edit modes is the position of the rendered editors. With the popup editing, the editors are rendered in a modal window and with the inline edit mode, the editors are rendered in the `tr` element of the edited record.
 
 ### Incell Editing
 
@@ -107,7 +126,7 @@ The only difference between the inline and popup edit modes is the position of t
 			.Model(m =>
 			{
 				m.Id(f => f.EmployeeId);
-				m.ParentId(f => f.ReportsTo);
+				m.ParentId(f => f.ReportsTo).Nullable(true);
 				m.Expanded(true);
 				...
 			})
@@ -137,7 +156,50 @@ With the incell (batch) edit mode you do not need to use the command buttons for
 
 Due to the specifics of the TreeList, creating a child node for a new record is not supported, because in order for a child to be created, the parent node must have an assigned `id`. However, since the `id` is assigned within the service on the `create` action, when the new record is not saved, it will not have `id`. The code within the `dataBound` event ensures that the **createChild** button is removed for all new records.
 
+### Drag and Drop
+
+> Currently, the dragging and dropping of otems (`.Editable(editable=>editable.Move(true))`) is not supported with the in-cell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
+
+When the `.Editable(editable=>editable.Move(true))` option is set to `true` the rows can be dragged and dropped. The Kendo UI TreeList for ASP.NET Core internally updates the `ParentId` field. To persist the new hierarchy, configure the treelist data source for CRUD operations ***(transport.update as a minimum)***.
+
+###### Example
+
+```tab-Razor
+    @(Html.Kendo().TreeList<EmployeeViewModel>()
+    	.Name("treelist")
+    	.Toolbar(t=>t.Save()) /* to batch save the new hierarchy */
+		.DataSource(dataSource => dataSource
+        	.Batch(true) /* enable batch operations */
+        	.Read(read => read.Action("Employees_Read", "TreeList"))
+        	.Update(update => update.Action("Employees_Update", "TreeList"))
+        	.Model(m =>
+        	{
+        	    m.Id(f => f.OrderID);
+        	    m.ParentId(f => f.ParentOrderID).Nullable(true);
+        	    m.Expanded(true);
+        	})
+    	)
+		/* other TreeList settings */
+	)
+```
+```tab-Controller
+	// The TreeList sends the updated items with prefix "models" so remember to bind it in the controller so the collection can be intercepted
+	public JsonResult Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EmployeeDirectoryModel> employees)
+    {
+        if (ModelState.IsValid)
+        {
+            foreach (var employee in employees)
+            {
+                employeeDirectory.Update(employee, ModelState);
+            }
+        }
+
+        return Json(employees.ToTreeDataSourceResult(request, ModelState));
+    }
+```
+
 ## See Also
 
 * [JavaScript API Reference for the Kendo UI jQuery TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Overview of the jQuery Kendo UI TreeList](https://docs.telerik.com/kendo-ui/controls/data-management/treelist/overview)
 * [UI for ASP.NET Core TreeList editing live demo](https://demos.telerik.com/aspnet-core/treelist/editing)

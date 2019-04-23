@@ -1,322 +1,120 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Button
-description: "Learn how to initialize the Kendo UI Button widget and apply its other options."
+page_title: jQuery Button Documentation | Button Overview | Kendo UI
+description: "Get started with the jQuery Button by Kendo UI, initialize single or multiple buttons, and reference existing Button instances."
 slug: overview_kendoui_button_widget
 position: 1
 ---
 
 # Button Overview
 
-The [Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`).
+The [Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled and clickable UI functionality with arbitrary content.
 
-Note that the content of this article necessitates your understanding of the [fundamental Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}).
+Apart from the capability to render consistent Kendo UI styling, the Button provides keyboard navigation for elements which natively do not have it, for example, `span`.
+
+This article assumes that you have mastered the [fundamental Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}).
 
 ## Getting Started
 
-The Button widget can be initialized from any element with any content. However, using the `button` or `a` elements is more reasonable. When using a `button` element inside a `form`, you should be aware that the default `type` HTML attribute for buttons is `submit`. Clicking the button will submit the form and reload the page. If this is not desired, then use an explicit `type="button"` HTML attribute.
+Depending on the required scenario, you have options for initializing a single Button or multiple Buttons at once.   
 
-The Kendo UI Button can include both inline and block elements, but make sure to take into account web standards, which prohibit placing block elements&mdash;for example, `div` and `p`&mdash;inside inline elements&mdash;for example, `a` and `span`.
+### Initializing Single Buttons
 
-Placing clickable elements with their own special behavior inside the Button widget (for example, hyperlinks, textboxes, and other) may cause undesired side effects.
+While you can initialize the Button from any element and with any content, it is intuitive to use the `button` or the `a` element. When you use a `button` element inside a `form`, the default `type` HTML attribute for buttons is `submit` and clicking the button will submit the form and reload the page. To change this behavior, use an explicit `type="button"` HTML attribute.
 
-### Initialize the Button
+The Button can include both inline (for example, `div` or `p`) and block (for example, `a` or `span`) elements. However, web standards prohibit placing block elements inside inline elements.
+
+Placing clickable elements, such as hyperlinks or textboxes, with their own special behavior inside the Button may cause undesired side effects.
 
 The following example demonstrates how to initialize a single button.
 
     <button type="button" id="refreshButton">Refresh</button>
 
-	<script>
-	$(function(){
-		$("#refreshButton").kendoButton();
-	});
-	</script>
+  	<script>
+  	$(function(){
+  		$("#refreshButton").kendoButton();
+  	});
+  	</script>
 
-### Initialize Multiple Buttons
+### Initializing Multiple Buttons
 
-Although each Button represents a separate widget instance on the page, multiple buttons can be initialized simultaneously. There are two ways to do this:
+Although each Button represents a separate widget instance on the page, multiple buttons can be initialized simultaneously. To do so, use either of the following approaches:
 
-* Use a jQuery selector, which returns multiple elements.
-* Use `kendo.init()`.
+* Use a jQuery selector which returns multiple elements.
 
-#### Use a jQuery Selector
+  The following example demonstrates how to initialize multiple Buttons by using a jQuery selector.
 
-###### Example
+        <button type="button" class="myButton">Edit</button>
+        <button type="button" class="myButton">Delete</button>
+      	<button type="button" class="myButton">Add</button>
 
-    <button type="button" class="myButton">Edit</button>
-    <button type="button" class="myButton">Delete</button>
-	<button type="button" class="myButton">Add</button>
+      	<script>
+      	$(function(){
+      		$(".myButton").kendoButton();
+      	});
+      	</script>
 
-	<script>
-	$(function(){
-		$(".myButton").kendoButton();
-	});
-	</script>
+* Use the `kendo.init()` method which approach will allow you to initialize multiple Button widgets with different configuration options at once. For more information, refer to the documentation on [`data` attribute initialization]({% slug initialize_widgets_using_markup_installation %}) and [`kendo.init()` API](/api/javascript/kendo/methods/init).
 
-#### Apply kendo.init()
+      	<div id="buttonsContainer">
+      		<span data-role="button" data-sprite-css-class="myEditIcon">Edit</span>
+      		<span data-role="button" data-enable="false">Delete</span>
+      		<span data-role="button" data-click="myClickHandler">Add</span>
+      	</div>
 
-This approach allows you to initialize multiple Button widgets at once, but with different configuration options. For more information, refer to [Data Attribute Initialization]({% slug initialize_widgets_using_markup_installation %}) and [`kendo.init()` method description](/api/javascript/kendo/methods/init).
+      	<script>
+      	$(function(){
+      		function myClickHandler(e) {
+      			// Add Button click handler
+      		}
 
-###### Example
+      		kendo.init("#buttonsContainer");
+      	});
+      	</script>
 
-	<div id="buttonsContainer">
-		<span data-role="button" data-sprite-css-class="myEditIcon">Edit</span>
-		<span data-role="button" data-enable="false">Delete</span>
-		<span data-role="button" data-click="myClickHandler">Add</span>
-	</div>
+## Features and Functionality
 
-	<script>
-	$(function(){
-		function myClickHandler(e) {
-			// Add Button click handler
-		}
+* [Disabled Button]({% slug disabled_button %})
+* [Icon Button]({% slug icons_button %})
+* [Globalization]({% slug globalization_button %})
+* [Accessibility]({% slug accessibility_button %})
 
-		kendo.init("#buttonsContainer");
-	});
-	</script>
+## Events
 
-## Configuration
+For a complete example on the basic Button events, refer to the [demo on using the events of the Button](https://demos.telerik.com/kendo-ui/button/events).
 
-### Enable or Disable Buttons
+## Referencing Existing Instances
 
-The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with JavaScript by using its `enable()` method with a Boolean argument.
+You can access an existing Button instance by using the `.data()` jQuery method which gets executed by the jQuery object of the originating element.
 
-The example below demonstrates how to enable and disable the Button.
+	 <button type="button" id="editButton">Edit</button>
 
-###### Example
+  	<script>
+  	$(function(){
+  		$("#editButton").kendoButton();
 
-	<button type="button" id="editButton">Edit</button>
+  		var editButton = $("#editButton").data("kendoButton");
+  	});
+  	</script>
 
-	<script>
+The `kendoButton()` method returns the same jQuery object that was used to execute it. If the Button will be accessed on a later stage, you can save it at the time of initialization. For more information, refer to the [Button API](/api/javascript/ui/button).
 
-	$(function(){
-		var editButton = $("#editButton").kendoButton({
-			enable: false
-		}).data("kendoButton");
+  	<button type="button" id="editButton">Edit</button>
+  	<button type="button" id="deleteButton">Delete</button>
 
-		// ...
+  	<script>
+  	$(function(){
+  		// Save the button element and then the button widget object.
+  		var editButtonElement = $("#editButton").kendoButton();
+  		var editButton = editButtonElement.data("kendoButton");
 
-		// enable button
-		editButton.enable(true);
-	});
+  		// Save the button widget object and then retrieve the DOM element as a jQuery object.
+  		var deleteButton = $("#editButton").kendoButton().data("kendoButton");
+  		var deleteButtonElement = deleteButton.element;
+  	});
+  	</script>
 
-	</script>
-
-For more information on the Button [`enable` property](/api/javascript/ui/button/configuration/enable) and the [`enable` method](/api/javascript/ui/button/methods/enable), refer to the [Button API](/api/javascript/ui/button).
-
-## Add Icons
-
-The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite). From web standards' point of view, using background images is better, because the icon does not represent structural content, but is simply a decoration.
-
-Kendo UI Button provides three properties for configuring icons&mdash;`icon`, `spriteCssClass` and `imageUrl`. Use only one of them with a particular Button instance. If you define multiple properties, only one of them will be obeyed according to the order stated above.
-
-### Background Icons
-
-Background icons are applied via the `icon` or `spriteCssClass` property and are displayed as a background of a `span` element. The `span` element can be rendered by the Button automatically, or an existing `span` element can be used, if it has a `k-sprite` CSS class (or `k-icon` if the `icon` property is used). The difference between the two properties is that `icon` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite. For a list of available icon names, please refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
-
-The example below demonstrates how to use icons in the Button widget.
-
-###### Example
-
-	<button type="button" id="editButton">Edit</button>
-	<button type="button" id="deleteButton"><span class="k-icon"></span>Delete</button>
-
-	<script>
-
-	$(function(){
-		$("#editButton").kendoButton({
-			icon: "edit"
-		});
-
-		$("#deleteButton").kendoButton({
-			icon: "delete"
-		});
-	});
-
-	</script>
-
-The `icon` configuration in this example will produce the following HTML output:
-
-	<button type="button" id="editButton" class="k-button k-button-icontext"><span class="k-icon k-edit"></span>Edit</button>
-	<button type="button" id="deleteButton" class="k-button k-button-icontext"><span class="k-icon k-delete"></span>Delete</button>
-
-The example below demonstrates how to apply the `spriteCssClass`.
-
-###### Example
-
-	<button type="button" id="editButton">Edit</button>
-	<button type="button" id="deleteButton"><span class="k-sprite"></span>Delete</button>
-
-	<script>
-
-	$(function(){
-		$("#editButton").kendoButton({
-			spriteCssClass: "myEditIcon"
-		});
-
-		$("#deleteButton").kendoButton({
-			spriteCssClass: "myDeleteIcon"
-		});
-	});
-
-	</script>
-
-Technically, `spriteCssClass` can be used to achieve the same result as `icon`, but `icon` spares you the need to set two CSS classes at the same time and provides a certain level of abstraction. For example, the following two configurations are practically identical. `#button2` also applies a `k-sprite` CSS class to the `span` element, but it does not change the button appearance.
-
-###### Example
-
-	$(function(){
-		$("#button1").kendoButton({
-			icon: "foo"
-		});
-
-		$("#button2").kendoButton({
-			spriteCssClass: "k-icon k-foo"
-		});
-	});
-
-In some cases you may want to use a Button with no text and only an icon inside. In order to increase the accessibility of the widget in this case, a text label can be included inside the sprite `span`.
-
-The example below demonstrates how to use the Button with no text.
-
-###### Example
-
-	<button type="button" id="deleteButton"><span class="k-sprite">Delete</span></button>
-
-	<script>
-
-	$(function(){
-		$("#deleteButton").kendoButton({
-			spriteCssClass: "myDeleteIcon"
-		});
-	});
-
-	</script>
-
-### Image Icons
-
-Image icons are applied via the `imageUrl` property and are displayed as a `img` element. This element can be rendered by the Button automatically, or an existing `img` element can be used if it has a `k-image` CSS class.
-
-The example below demonstrates how to use the `imageUrl`.
-
-###### Example
-
-	<button type="button" id="editButton">Edit</button>
-	<button type="button" id="deleteButton"><img class="k-image" alt="Delete" />Delete</button>
-
-	<script>
-
-	$(function(){
-		$("#editButton").kendoButton({
-			imageUrl: "/images/myEditIcon.gif"
-		});
-
-		$("#deleteButton").kendoButton({
-			imageUrl: "/images/myDeleteIcon.gif"
-		});
-	});
-
-	</script>
-
-To increase the accessibility of the widget when adding an `img` element manually, apply an `alt` attribute.
-
-### Font Icons
-
-It is possible to use FontAwesome or other font icons inside the Kendo UI button by setting the required third-party CSS classes via the `spriteCssClass` property.
-However, this will cause a `k-sprite` CSS class to be rendered and it applies some font and size styles, which may interfere with the font icons styles.
-There are two ways to proceed in this case. One is to override the Kendo UI styles, which break the font icons.
-
-###### Example
-
-```dojo
-<link rel="stylesheet"
-    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
-<style>
-    .k-button .fa {
-        font-size: inherit;
-        line-height: inherit;
-        width: auto;
-        height: auto;
-        margin-left: 0;
-    }
-</style>
-
-<button type="button" id="archiveButton">Archive</button>
-
-<script>
-    $("#archiveButton").kendoButton({
-        spriteCssClass: "fa fa-archive"
-    });
-</script>
-```
-
-The other option is to include the required HTML markup and CSS classes inside the Kendo UI Button directly, as template content. In this way a `k-sprite` class will not be rendered by the Button.
-
-###### Example
-
-```dojo
-<link rel="stylesheet"
-    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
-
-<button type="button" id="archiveButton"><span class="fa fa-archive"></span> Archive</button>
-
-<script>
-    $("#archiveButton").kendoButton({});
-</script>
-```
-
-## Reference
-
-### Existing Instances
-
-Similar to all other Kendo UI widgets, you can access an existing Button instance via the `.data()` jQuery method, executed by the jQuery object of the originating element.
-
-The example below demonstrates how to access a Button instance.
-
-###### Example
-
-	<button type="button" id="editButton">Edit</button>
-
-	<script>
-
-	$(function(){
-		$("#editButton").kendoButton();
-
-		var editButton = $("#editButton").data("kendoButton");
-	});
-
-	</script>
-
-The `kendoButton()` method returns the same jQuery object that has been used to execute it. That is why, if the Button is to be accessed afterwards, it is a good idea to save it at the time of initialization.
-
-The example below demonstrates how to save and access a reference to a Button instance.
-
-###### Example
-
-	<button type="button" id="editButton">Edit</button>
-	<button type="button" id="deleteButton">Delete</button>
-
-	<script>
-
-	$(function(){
-		// save button element and then the button widget object
-		var editButtonElement = $("#editButton").kendoButton();
-		var editButton = editButtonElement.data("kendoButton");
-
-		// save the button widget object and then retrieve the DOM element as a jQuery object
-		var deleteButton = $("#editButton").kendoButton().data("kendoButton");
-		var deleteButtonElement = deleteButton.element;
-	});
-
-	</script>
-
-For further reading and related information, please refer to the [Button API](/api/javascript/ui/button).
-
-Kendo UI Button can be used for creating different style of buttons, like the Floating Action Button from the Material Design theme.
-
-The example below demonstrates how to create a Floating Action Button.
-
-###### Example
+You can also use the Button for creating different button styles such is the Floating Action Button from the Material Design theme.
 
     <button id="primaryTextButton" class="k-primary"></button>
     <script>
@@ -347,7 +145,9 @@ The example below demonstrates how to create a Floating Action Button.
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget](http://docs.telerik.com/aspnet-mvc/helpers/button/overview)
-* [Overview of the Button JSP Tag]({% slug overview_button_uiforjsp %})
-* [Overview of the Button PHP Class]({% slug overview_button_uiforphp %})
-* [Button JavaScript API Reference](/api/javascript/ui/button)
+* [Basic Usage of the Button (Demo)](https://demos.telerik.com/kendo-ui/button/index)
+* [Using the Basic Events of the Button (Demo)](https://demos.telerik.com/kendo-ui/button/events)
+* [Binding the Button over MVVM (Demo)](https://demos.telerik.com/kendo-ui/button/mvvm)
+* [Using the Button with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/button/angular)
+* [Applying the Button API (Demo)](https://demos.telerik.com/kendo-ui/button/api)
+* [JavaScript API Reference of the Button](/api/javascript/ui/button)

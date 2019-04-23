@@ -11,7 +11,7 @@ position: 1
 The Grid is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
 For more information, refer to:
-* [Keyboard navigation by Kendo UI Grid]({% slug keynav_kendoui_grid_widget %})
+* [Keyboard navigation by the Kendo UI Grid]({% slug keynav_kendoui_grid_widget %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 
 ## WAI-ARIA

@@ -147,11 +147,35 @@ navigation:
     "controls/layout":
         title: "Layout"
         position: 8
+    "controls/layout/window/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/layout/window/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/layout/window/how-to":
+        title: "How To"
+        position: 70
     "controls/navigation":
         title: "Navigation"
         position: 9
+    "controls/navigation/button/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/navigation/button/accessibility":
+        title: "Accessibility"
+        position: 50
     "controls/navigation/buttongroup":
         title: "ButtonGroup"
+    "controls/navigation/tabstrip/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/navigation/tabstrip/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/navigation/tabstrip/how-to":
+        title: "How To"
+        position: 70
     "controls/conversational-ui":
         title: "Conversational UI"
         position: 10

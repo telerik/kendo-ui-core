@@ -879,7 +879,7 @@ The font color of the cell. Many standard CSS formats are supported. However, th
 
 ### sheets.rows.cells.comment `String`
 
-The comment of the cell — a tooltip that appears when the cell is hovered.
+The comment of the cell - a tooltip that appears when the cell is hovered.
 
 ### sheets.rows.cells.fontFamily `String`
 
@@ -2137,6 +2137,44 @@ The widget instance which fired the event.
 ##### e.range `kendo.spreadsheet.Range`
 
 The [`Range`](/api/javascript/spreadsheet/range) whose format is changed.
+
+### changing
+
+Triggered when a value or validation in the Spreadsheet is about to be changed upon user interaction.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.range `kendo.spreadsheet.Range`
+
+The [Range](/api/javascript/spreadsheet/range) which values are about to be changed in the spreadsheet.
+
+##### e.changeType `String`
+
+The type of command that triggered the changing event. The possible types are:
+* `autoFill` - when the user uses the Spreadsheet AutoFill functionality.
+* `clear` - when the user clears content by selecting a cell / range and pressing Delete or Backspace keys.
+* `cut` - when the user cuts a range from the Spreadsheet.
+* `edit` - when the user types in a cell.
+* `paste` - when the user pastes some data in a range.
+* `validation` - when the user alters validation for a cell or range of cells.
+
+##### e.data `Object`
+
+The new value(s) that is(are) about to be applied to the range. Depending on the changeType the data parameter will be the following:
+* `autoFill` - the data will be an `Array` of `Arrays` holding all properties for the cells (including the values) that are about to be changed.
+* `clear` - the data will be an `Array` of `Arrays` holding null values.
+* `cut` - the data will be an `Array` of `Arrays` holding empty objects.
+* `edit` - the data will be a `String`.
+* `paste` - the data will be an `Array` of `Arrays` holding all properties for the cells (including the values) that are about to be changed.
+* `validation` - the data will hold the new `validation Object`.
+
+##### e.preventDefault `Function`
+
+If invoked the changing will not be performed and no changes will be applied to the sheet.
 
 ### change
 
