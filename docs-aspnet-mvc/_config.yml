@@ -7,7 +7,7 @@ capital_casing_redirects: true
 
 # Exclude files which should not be in the output
 exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
-exclude_navigation: [asp-net-mvc-3.html,asp-net-mvc-4.html]
+exclude_navigation: [asp-net-mvc-3.html,asp-net-mvc-4.html,api/Kendo.Mvc/*,api/Kendo.Mvc.Extensions/*,api/Kendo.Mvc.UI/*,api/Kendo.Mvc.UI.Fluent/*]
 navigation:
 ## List your directory names and order here, like this:
 
@@ -314,36 +314,13 @@ google_tag_manager: GTM-6X92
 gcs_engine: '001595215763381649090:rdwxfmavt8o'
 gcs_api_key: 'AIzaSyDnvT29LoZiLUcywskEgTTum7j5pkx6s8I'
 
+has_web_api_index: true
 skip_tabbed_code: true
 code_lang: true
+api_columns_count: 2
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet-mvc
 
 download: http://www.telerik.com/download/aspnet-mvc
-nav:
-  "Demos": http://demos.telerik.com/aspnet-mvc/
-  "Release History": https://www.telerik.com/support/whats-new/aspnet-mvc/release-history
-  "About": http://www.telerik.com/aspnet-mvc
-  "Pricing": http://www.telerik.com/purchase/aspnet-mvc
-
-footer:
--
-  title: "Getting Started"
-  links:
-    "Getting Started": https://docs.telerik.com/aspnet-mvc/getting-started/fundamentals
-    "Demos": http://demos.telerik.com/aspnet-mvc/
--
-  title: "Support Resources"
-  links:
-    "Code Library": https://www.telerik.com/support/code-library/aspnet-mvc
-    "Whitepapers": https://www.telerik.com/whitepapers/aspnet-mvc
--
-  title: "Community"
-  links:
-    "Forums": https://www.telerik.com/forums/aspnet-mvc
-    "Stack Overflow": http://stackoverflow.com/search?q=kendoui+mvc
-    "Blogs": https://www.telerik.com/blogs/web
-    "Feedback Portal": http://feedback.telerik.com/Project/184
-    "User Voice": http://kendo.uservoice.com/forums/127393-kendo-ui-feedback
 
 footer_social:
     facebook: https://www.facebook.com/Telerik/

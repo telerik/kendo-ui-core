@@ -367,7 +367,7 @@ var __meta__ = { // jshint ignore:line
             if (scrollable || height) {
 
                 that.element.css({
-                    "overflow": "scroll",
+                    "overflow-y": "scroll",
                     "position": "relative",
                     "-webkit-overflow-scrolling": "touch"
                 });
@@ -427,7 +427,7 @@ var __meta__ = { // jshint ignore:line
                 UseJQueryoffset = false,
                 SCROLL = "scroll";
 
-            if (that.wrapper.css("overflow") == "auto" || that.wrapper.css("overflow") == SCROLL) {
+            if (that.wrapper.css("overflow") == "auto" || that.wrapper.css("overflow") == SCROLL || that.wrapper.css("overflow-y") == SCROLL) {
                 container = that.wrapper[0];
             } else {
                 container = window;

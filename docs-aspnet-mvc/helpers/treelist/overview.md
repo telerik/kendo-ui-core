@@ -160,7 +160,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 ## Event Handling
 
-You can subscribe to all TreeList [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#events).
+You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#events).
 
 ### By Handler Name
 
@@ -274,7 +274,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ### Existing Instances
 
-To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
+To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
 
 ###### Example
 

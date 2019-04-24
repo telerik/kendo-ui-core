@@ -13701,6 +13701,29 @@ Angles increase clockwise and zero is to the left. Negative values are acceptabl
     });
     </script>
 
+
+### series.targetField `String` *(default: "target")*
+
+The data item field containing the target value.
+
+> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
+
+#### Example - set the bullet chart series current field
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        {
+          type: "bullet",
+          targetField: "price",
+          data: [
+            { current: 1, price: 2 }
+          ]
+        }
+      ]
+    });
+    </script>
+
 ### series.target `Object`
 
 The configuration options of the target
@@ -13911,28 +13934,6 @@ The width of the line.
           },
           data: [
             [1, 2]
-          ]
-        }
-      ]
-    });
-    </script>
-
-### series.targetField `String` *(default: "target")*
-
-The data item field containing the target value.
-
-> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
-
-#### Example - set the bullet chart series current field
-    <div id="chart"></div>
-    <script>
-    $("#chart").kendoChart({
-      series: [
-        {
-          type: "bullet",
-          targetField: "price",
-          data: [
-            { current: 1, price: 2 }
           ]
         }
       ]

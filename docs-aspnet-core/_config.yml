@@ -7,7 +7,7 @@ capital_casing_redirects: true
 
 # Exclude files which should not be in the output
 exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
-exclude_navigation: ["knowledge-base/*"]
+exclude_navigation: ["knowledge-base/*",api/Kendo.Mvc/*,api/Kendo.Mvc.Extensions/*,api/Kendo.Mvc.UI/*,api/Kendo.Mvc.UI.Fluent/*]
 navigation:
 
 ## List your directory names and order here, like this:
@@ -354,9 +354,11 @@ google_tag_manager: GTM-6X92
 gcs_engine: '001595215763381649090:rfbgc0yrusm'
 gcs_api_key: 'AIzaSyCkef2O-98IZGc0Jv16ozv8gqL-r1mL2_0'
 
+has_web_api_index: true
 skip_tabbed_code: true
 code_lang: true
 has_kb_portal: true
+api_columns_count: 2
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet-core
 download: https://www.telerik.com/download-trial-file/v2/aspnet-core-ui
 nav:

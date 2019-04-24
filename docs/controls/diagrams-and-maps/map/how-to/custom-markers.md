@@ -38,12 +38,12 @@ The following example demonstrates how to use custom markers on a Kendo UI Map.
 
       $(document).ready(createMap);
     </script>
- 	<style>
+    <style>
       .k-map .k-i-marker-custom-marker {
-        background-image: url('https://demos.telerik.com/kendo-ui/content/shared/images/we-are-here.png');
-        background-size: 50px;
-        width: 50px;
-        height: 50px;
+        background-image: url('https://demos.telerik.com/kendo-ui/content/dataviz/chart/images/sunny.png');
+        background-size: 30px;
+        width: 30px;
+        height: 30px;
       }
     </style>
 ```

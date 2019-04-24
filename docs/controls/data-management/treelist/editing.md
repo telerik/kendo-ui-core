@@ -8,21 +8,13 @@ position: 2
 
 # TreeList Editing
 
-<<<<<<< Updated upstream
-The [Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) provides the built-in popup, inline, and in-cell (batch) edit modes.
-=======
-The [Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) provides build-in editing functionality in three different edit modes: PopUp, InLine, InCell(Batch) and Drag and Drop.
->>>>>>> Stashed changes
+The [Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) provides build-in editing functionality in three different edit modes: PopUp, InLine, InCell(Batch) and features Drag and Drop.
 
 ## Prerequisite
 
 ### Model
 
-<<<<<<< Updated upstream
-All CRUD operations of the Kendo UI TreeList require a model with `id` and `parentId` fields and those models must be configured in the DataSource of the TreeList.
-=======
 All CRUD operations of the Kendo UI TreeList require a model with `id` and `parentId` fields and those models must be configured in the DataSource of the TreeList. The Kendo UI TreeList distinguishes the root items based on the `parentId` field. If the `schema.model.fields.[parentIdField]` is nullable, root items with be items whose `parentId` field values are `null`. If the `schema.model.fields.[parentIdField]` is *not* nullable, root items will be items which have a default value for their data type.
->>>>>>> Stashed changes
 
 ###### Example
 
@@ -124,7 +116,7 @@ Due to the specifics of the TreeList, creating child node for a new record is no
 
 ### Drag and Drop
 
-> Currently, the dragging and dropping of otems (`editable.move = true`) is not supported with the in-cell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
+> Currently, the dragging and dropping of items (`editable.move = true`) is not supported with the in-cell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
 
 When the [`editable.move`](/api/javascript/ui/treelist/configuration/editable#editable.move) option is set to `true` the rows can be dragged and dropped. The Kendo UI TreeList internally updates the `parentId` field. To persist the new hierarchy, configure the treelist data source for CRUD operations ***(transport.update as a minimum)***.
 

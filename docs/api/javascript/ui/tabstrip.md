@@ -939,14 +939,14 @@ Reloads TabStrip tab(s) via AJAX.
     <div id="tabstrip"></div>
 
     <script>
-        $("#tabstrip").kendoTabStrip({
+        var tabStrip = $("#tabstrip").kendoTabStrip({
             dataTextField: "Name",
             dataContentUrlField: "ContentUrl",
             dataSource: [
               { Name: "Tab1", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
               { Name: "Tab2", ContentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
             ]
-        });
+        }).data("kendoTabStrip");
 
         tabStrip.reload("li:first");
     </script>
