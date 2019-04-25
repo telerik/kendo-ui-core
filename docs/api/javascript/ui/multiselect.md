@@ -634,11 +634,22 @@ The available "x" positions are:
       dataTextField: "name",
       dataValueField: "id",
       popup: {
-        origin: "top left"
+        position: "top center"
       }
     });
     </script>
-
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style> 
+   
 ### popup.position `String`
 
 Specifies which point of the popup element to attach to the anchor's origin point. The value is

@@ -650,23 +650,33 @@ The available "x" positions are:
 
 #### Example - append the popup to a specific element
 
-    <div id="container">
-        <input id="dropdownlist" />
-    </div>
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      popup: {
-        origin: "top left"
-      }
-    });
-    </script>
-
+  <div id="container">
+      <input id="dropdownlist" />
+  </div>
+  <script>
+  $("#dropdownlist").kendoDropDownList({
+    dataSource: [
+      { id: 1, name: "Apples" },
+      { id: 2, name: "Oranges" }
+    ],
+    dataTextField: "name",
+    dataValueField: "id",
+    popup: {
+      position: "top center"
+    }
+  });
+  </script>
+  <style>
+    #container{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
 
 ### optionLabel `String | Object`*(default: "")*
 
