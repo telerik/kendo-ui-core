@@ -67,7 +67,7 @@ The following example demonstrates how to define the TreeList by using the TreeL
         .Read(read => read.Action("Index", "EmployeeDirectory"))
         .Model(m => {
             m.Id(f => f.EmployeeId);
-            m.ParentId(f => f.ReportsTo).Nullable(false);
+            m.ParentId(f => f.ReportsTo).Nullable(true);
             m.Field(f => f.FirstName);
             m.Field(f => f.LastName);
             m.Field(f => f.ReportsTo);
@@ -160,12 +160,12 @@ You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api
     )
     <script>
         function onDataBinding(e) {
-            //Handle the dataBound event.
+            //Handle the dataBinding event.
             var treelist = this;
         }
 
         function onDataBound(e) {
-            //Handle the change event.
+            //Handle the dataBound event.
             var treelist = e.sender;
         }
     </script>
