@@ -91,7 +91,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
                 .Read(read => read.Action("Index", "EmployeeDirectory"))
                 .Model(m => {
                     m.Id(f => f.EmployeeId);
-                    m.ParentId(f => f.ReportsTo);
+                    m.ParentId(f => f.ReportsTo).Nullable(true);
                     m.Field(f => f.FirstName);
                     m.Field(f => f.LastName);
                     m.Field(f => f.ReportsTo);

@@ -6172,8 +6172,9 @@ Allows the customization of the text in the column header for the expand or coll
 
 If set to `true` and the grid is viewed on mobile browser it will use adaptive rendering.
 
-Can be set to a string `phone` or `tablet` which will force the widget to use adaptive rendering regardless of browser type.
-The grid uses same layout for both `phone` and `tablet`.
+Can be set to a string `phone` which will force the widget to use adaptive rendering regardless of browser type.
+
+> Important: With the mobile rendering you should make sure to setup the `height` option as well.
 
 #### Example - enable adaptive rendering auto detect
 
@@ -6191,7 +6192,8 @@ The grid uses same layout for both `phone` and `tablet`.
        ],
        filterable: true,
        columnMenu: true,
-       mobile: true
+       mobile: true,
+       height: 550
     });
     </script>
 

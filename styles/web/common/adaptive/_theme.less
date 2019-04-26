@@ -32,6 +32,47 @@
         }
     }
 
+    .k-scheduler-mobile {
+
+        .k-nav-current {
+            color: @adaptive-scheduler-current-text;
+        }
+
+        .k-scheduler-times,
+        .k-scheduler-header,
+        .k-scheduler-groupcolumn,
+        .k-mobile-scheduler-agendadate {
+            color: @adaptive-scheduler-base-text;
+        }
+
+        .k-time-period,
+        .k-mobile-scheduler-agendaweekday {
+            color: lighten(@normal-text-color, 55%);
+        }
+
+        .k-scheduler-times,
+        .k-scheduler-header,
+        .k-scheduler-header-wrap,
+        .k-scheduler-datecolumn,
+        .k-scheduler-groupcolumn,
+        .k-scheduler-group-cell,
+        .k-scheduler-header-all-day {
+            background-color: @adaptive-content-bg;
+        }
+
+        .k-other-month {
+            background-color: @scheduler-nonwork-background-color;
+        }
+
+        .k-scheduler-toolbar {
+
+            .k-scheduler-tools > li,
+            .k-scheduler-navigation {
+                background-color: inherit;
+            }
+        }
+    }
+
     .k-grid-edit-form,
     .k-grid-column-menu,
     .k-grid-filter-menu,
@@ -52,7 +93,9 @@
         }
 
         .k-clear,
-        .k-select-all {
+        .k-select-all,
+        .k-scheduler-delete,
+        .k-scheduler-resetSeries {
             color: @adaptive-menu-clear-text;
         }
     }
@@ -64,7 +107,8 @@
         }
     }
 
-    .k-filter-menu {
+    .k-filter-menu,
+    .k-scheduler-edit-form {
 
         .k-check {
             color: @adaptive-content-text;
@@ -75,7 +119,7 @@
 
         .k-item {
             background-color: @widget-background-color;
-            border-top: 1px solid @adaptive-menu-item-border;
+            border-bottom: 1px solid @adaptive-menu-item-border;
 
             > .k-link,
             > .k-label,
@@ -97,8 +141,9 @@
                 border-top-color: @selected-border-color;
             }
 
-            &:last-child {
-                .box-shadow(inset 0 -1px 0 @adaptive-menu-item-border);
+            &:first-child,
+            &.k-clear-wrap {
+                .box-shadow(inset 0 1px 0 @adaptive-menu-item-border);
             }
         }
 

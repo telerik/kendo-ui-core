@@ -319,31 +319,6 @@ In addition, the Scheduler needs a fixed pixel width for itself or some of its a
 >
 > Due to an Internet Explorer bug, related to absolutely positioned elements inside tables, the Scheduler events will be printed over their correct time slots only if the widget fits on one page.
 
-### Adaptive Rendering Mode
-
-Kendo UI Scheduler supports adaptive enhancements like changes in styling and behavior in order to remain consistent with the specific user device experience. For instance, when editing on a mobile device, Kendo UI will slide in a new screen for the user, which is a departure from the more desktop-like popup behaviors.
-
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/scheduler/configuration/mobile) property to `true`, `"phone"` or `"tablet"`.
-
-The Kendo UI adaptive mode requires scripts, which are normally part of the Kendo UI Mobile (Hybrid) library (`kendo.mobile.min.js`). However, these scripts are also included in `kendo.web.min.js` and `kendo.all.min.js`. If you are using [individual widget scripts]({% slug include_only_what_you_need_kendoui_installation %}#individual-widget-scripts) or a [custom combined script]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder), make sure the relevant scripts are included.
-
-Each adaptive Scheduler is rendered inside a separate Kendo UI Mobile Pane. Since the panes are absolutely positioned, they can overlap with other content on the page. To avoid this, wrap the Scheduler inside a `<div>` container that has a `position:relative` style and a set `height`. The `height` must be consistent with the Scheduler's height. Note that the absolute position is required for the transitions between the main and editing views to work correctly.
-
-The example below demonstrates how to configure the adaptive rendering mode of the Scheduler.
-
-###### Example
-
-    <style>
-        .adaptive-scheduler-wrapper {
-            position: relative;
-            height: 400px;
-        }
-    </style>
-
-    <div class="adaptive-scheduler-wrapper">
-        <div id="scheduler1"></div>
-    </div>
-
 ## Scheduler API
 
 ### Methods and Fields
@@ -469,6 +444,7 @@ For more information on how to create custom views, refer to [this how-to exampl
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [Resources]({% slug resources_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
+* [Adaptive Rendering]({% slug adaptiverendering_kendoui_scheduler_widget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Scheduler Widget](/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview)
 * [Overview of the Scheduler JSP Tag]({% slug overview_scheduler_uiforjsp %})
 * [Overview of the Scheduler PHP Class](/php/widgets/scheduler/overview)

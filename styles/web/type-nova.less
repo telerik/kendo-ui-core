@@ -312,6 +312,10 @@
 // Adaptive Grid
 @adaptive-grid-sort-text: @accent;
 
+// Adaptive Scheduler
+@adaptive-scheduler-current-text: @normal-text-color;
+@adaptive-scheduler-base-text: inherit;
+
 
 @theme-name: ~"nova";
 
@@ -1832,18 +1836,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 
         .k-scheduler-toolbar .k-link {
             padding: 0 .5em;
-        }
-    }
-}
-
-@media only screen and (max-width: 1420px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        .k-scheduler .k-scheduler-toolbar .k-nav-current .k-link .k-i-calendar {
-            display: none;
         }
     }
 }

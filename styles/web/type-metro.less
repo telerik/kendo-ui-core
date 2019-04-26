@@ -383,6 +383,10 @@
 // Adaptive Grid
 @adaptive-grid-sort-text: @accent;
 
+// Adaptive Scheduler
+@adaptive-scheduler-current-text: @accent;
+@adaptive-scheduler-base-text: inherit;
+
 
 // Kendo skin
 
@@ -744,6 +748,10 @@ textarea.k-textbox:hover,
 .k-scheduler-table .k-nonwork-hour
 {
     background-color: @scheduler-nonwork-background-color;
+}
+
+.k-scheduler-mobile .k-scheduler-navigation .k-state-hover > .k-link {
+    color: @normal-text-color;
 }
 
 .k-gantt .k-nonwork-hour
@@ -1830,8 +1838,6 @@ div.k-filebrowser-dropzone em
     border-radius: 0 @border-radius @border-radius 0;
 }
 
-.k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today,
-.k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today .k-link,
 .k-edit-field > .k-scheduler-navigation
 {
     border-radius: @border-radius;

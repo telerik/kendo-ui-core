@@ -121,10 +121,8 @@ The following example demonstrates a CSS media query.
 
 Responsive UI enhancements utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors. Such features are available for Kendo UI widgets such as the Grid, Scheduler, TreeList, etc.
 
-* Kendo UI Grid&mdash;Provides the ability to define which columns will be hidden on small view ports.
-* Kendo UI Pager
-    - [Less-Based Themes]({% slug themesandappearnce_kendoui_desktopwidgets %})&mdash;Utilize media queries to automatically adjust to different screen widths.
-    - [Sass-Based Themes]({% slug sassbasedthemes_kendoui %})&mdash;Utilize assigned classes based on the current width of the Pager. The classes automatically update upon `window` resizes or when the Pager is placed in a Kendo UI Layout widget. In all other cases, you have to manually [apply `resize()` method](#apply-resize-method).
+* Kendo UI Grid&mdash;Provides the ability to define which columns will be hidden on small view ports. For a runnable example, refer to the [demo on implementing responsive columns in the Grid](https://demos.telerik.com/kendo-ui/grid/responsive-columns).
+* Kendo UI Pager&mdash;Utilize assigned classes based on the current width of the Pager. The classes automatically update upon `window` resizes or when the Pager is placed in a Kendo UI Layout widget. In all other cases, you have to manually [apply `resize()` method](#apply-resize-method).
 * Kendo UI Scheduler&mdash;Provides a mechanism to overflow its `view` selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios.
 * Kendo UI Responsive Panel&mdash;This is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its hamburger icon button is clicked.
 
