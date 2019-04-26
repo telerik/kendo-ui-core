@@ -2299,8 +2299,7 @@ declare namespace kendo.ui {
 
         constructor(element: Element, options?: ConfirmOptions);
 
-
-
+        open(): kendo.ui.Confirm;
     }
 
     interface ConfirmMessages {
@@ -2310,7 +2309,11 @@ declare namespace kendo.ui {
 
     interface ConfirmOptions {
         name?: string;
+        content?: string;
         messages?: ConfirmMessages;
+        title?: string | boolean;
+        initOpen?(e: DialogEvent): void;
+        open?(e: DialogEvent): void;
     }
     interface ConfirmEvent {
         sender: Confirm;
@@ -6088,6 +6091,7 @@ declare namespace kendo.ui {
     class Popup extends kendo.ui.Widget {
 
         static fn: Popup;
+        static TabKeyTrap: any;
 
         options: PopupOptions;
 
