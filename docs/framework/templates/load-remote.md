@@ -159,7 +159,7 @@ The following example demonstrates how by using the template loader previously d
 
 				//Use the template (assuming "data" is collection loaded elsewhere)
 				_itemTemplate(data);
-			}
+			})
 		</script>
 
 <!--_-->
