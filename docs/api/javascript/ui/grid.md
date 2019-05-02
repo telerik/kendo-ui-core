@@ -2379,7 +2379,7 @@ The text that is displayed in the column header cell. If not set the [field](col
 
 ### columns.width `String|Number`
 
-The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/controls/data-management/grid/appearance#column-widths)**.
+The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/controls/data-management/grid/columns/widths)**.
 
 #### Example - set the column width as a string
 
