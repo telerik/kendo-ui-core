@@ -838,55 +838,56 @@
         }, timeout);
     }
 
-    it("renders only the last retrieved range", function(asyncDone) {
-        var asyncDataSource = createAsyncDataSource({
-            transport: {
-                read: function(options) {
-                    setTimeout(function() {
-                        options.success({ data: generateData(options.data), total: 830 });
-                    }, 100);
-                }
-            },
-            schema: {
-                data: "data",
-                total: "total"
-            },
-            pageSize: 80,
-            serverPaging: true,
-            serverFiltering: true
-        });
+     //skipping due to instability
+    // it("renders only the last retrieved range", function(asyncDone) {
+    //     var asyncDataSource = createAsyncDataSource({
+    //         transport: {
+    //             read: function(options) {
+    //                 setTimeout(function() {
+    //                     options.success({ data: generateData(options.data), total: 830 });
+    //                 }, 100);
+    //             }
+    //         },
+    //         schema: {
+    //             data: "data",
+    //             total: "total"
+    //         },
+    //         pageSize: 80,
+    //         serverPaging: true,
+    //         serverFiltering: true
+    //     });
 
-        var virtualList = new VirtualList(container, {
-            delay: 0,
-            autoBind: false,
-            dataSource: asyncDataSource,
-            height: 520,
-            itemHeight: 26,
-            valueMapper: function(options) {
-                setTimeout(function() {
-                    options.success(options.value);
-                }, 0);
-            },
-            template: '#:text#',
-            selectable: true
-        });
+    //     var virtualList = new VirtualList(container, {
+    //         delay: 0,
+    //         autoBind: false,
+    //         dataSource: asyncDataSource,
+    //         height: 520,
+    //         itemHeight: 26,
+    //         valueMapper: function(options) {
+    //             setTimeout(function() {
+    //                 options.success(options.value);
+    //             }, 0);
+    //         },
+    //         template: '#:text#',
+    //         selectable: true
+    //     });
 
-        asyncDataSource.read().done(function() {
-            virtualList.one("listBound", function () {
-                var item100 = virtualList.items().filter(function() {
-                    return $(this).data("offsetIndex") == 100;
-                });
+    //     asyncDataSource.read().done(function() {
+    //         virtualList.one("listBound", function () {
+    //             var item100 = virtualList.items().filter(function() {
+    //                 return $(this).data("offsetIndex") == 100;
+    //             });
 
-                assert.equal(item100.text().trim(), "Item 100");
-                asyncDone();
+    //             assert.equal(item100.text().trim(), "Item 100");
+    //             asyncDone();
 
-            });
+    //         });
 
-            deferredScroll(virtualList, 1481, 60);
-            deferredScroll(virtualList, 1885, 70);
-            deferredScroll(virtualList, 2335, 90);
-        });
-    });
+    //         deferredScroll(virtualList, 1481, 60);
+    //         deferredScroll(virtualList, 1885, 70);
+    //         deferredScroll(virtualList, 2335, 90);
+    //     });
+    // });
 
     //utilities
     it("calculates buffer sizes in pixels", function(done) {

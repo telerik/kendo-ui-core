@@ -372,7 +372,9 @@ var __meta__ = { // jshint ignore:line
             var value = listView.value()[position];
             var dataItem = that.listView.selectedDataItems()[position];
             var customIndex = that._customOptions[value];
+            var listViewChildren = listView.element[0].children;
             var option;
+            var listViewChild;
 
             if (that.trigger(DESELECT, { dataItem: dataItem, item: tag })) {
                 that._close();
@@ -398,8 +400,11 @@ var __meta__ = { // jshint ignore:line
                 option = that.element[0].children[customIndex];
                 option.selected = false;
 
-                listView._deselect([customIndex]);
                 listView.removeAt(position);
+                listViewChild = listViewChildren[customIndex];
+                if (listViewChild) {
+                    listViewChildren[customIndex].classList.remove("k-state-selected");
+                }
                 tag.remove();
                 done();
             }
