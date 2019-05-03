@@ -16,7 +16,7 @@ For more information, refer to:
 
 ## See Also
 
-* [RTL Support by the Window (Demo)](https://demos.telerik.com/kendo-ui/Window/right-to-left-support)
+* [RTL Support by the Window (Demo)](https://demos.telerik.com/kendo-ui/window/right-to-left-support)
 * [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
 * [RTL Support in Kendo UI for jQuery]({% slug right_toleft_languages_accessibility_support %})
 * [JavaScript API Reference of the Window](/api/javascript/ui/window)

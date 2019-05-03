@@ -213,7 +213,7 @@ On initial load, the widget checks whether the selected value is present in the 
 
 **Figure 1: The virtualization process**
 
-![Virtualization process](mapValueTo-index.png)
+![Virtualization process](../mapValueTo-index.png)
 
 **Function result**
 
@@ -267,7 +267,7 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the first data page.
 8. The widget list displays the items from the first page no matter if the selected items are part of it or not.
 
-![Virtualization process](mapValueTo-dataItem.png)
+![Virtualization process](../mapValueTo-dataItem.png)
 
 **Function result**
 

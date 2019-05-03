@@ -445,7 +445,7 @@ For more information on how to create custom views, refer to [this how-to exampl
 * [Resources]({% slug resources_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
 * [Adaptive Rendering]({% slug adaptiverendering_kendoui_scheduler_widget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Scheduler Widget](/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Scheduler Widget](/aspnet-mvc/helpers/scheduler/overview)
 * [Overview of the Scheduler JSP Tag]({% slug overview_scheduler_uiforjsp %})
 * [Overview of the Scheduler PHP Class](/php/widgets/scheduler/overview)
 

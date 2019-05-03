@@ -36,7 +36,7 @@ To initialize the Switch, use a jQuery selector.
 
 ### Checking and Unchecking
 
-The checked state of the Switch depends on the [`checked` configuration option](/api/switch#checked) or the `checked` attribute of the widget element.
+The checked state of the Switch depends on the [`checked` configuration option](/api/javascript/ui/switch#checked) or the `checked` attribute of the widget element.
 
 The following example demonstrates how to initialize the Kendo UI Switch from a checked `input`.
 

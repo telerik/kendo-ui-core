@@ -142,7 +142,7 @@ The following example features local data but the data returned by the [`transpo
 
 ## Accent Folding
 
-Starting from R2 2019 release there is a built-in functionality in the Kendo UI DataSource to handle cases when user needs to filter on diacritic characters for specific language. The [accentFoldingFiltering](/api/javascript/data/datasource/configuration/accentFoldingFiltering) option allows user to define a specific culture to be used when applying the filter. Since these characters are unique for a specific language, setting the appropriate culture has to be set as a value. For example, `tr-TR` for Turkish, `es-ES` for Spanish, or `fr-FR` for French.
+Starting from R2 2019 release there is a built-in functionality in the Kendo UI DataSource to handle cases when user needs to filter on diacritic characters for specific language. The [accentFoldingFiltering](/api/javascript/data/datasource/configuration/accentfoldingfiltering) option allows user to define a specific culture to be used when applying the filter. Since these characters are unique for a specific language, setting the appropriate culture has to be set as a value. For example, `tr-TR` for Turkish, `es-ES` for Spanish, or `fr-FR` for French.
 
 > Due to the specifics of the case-insensitive search, only one language can be used to filter your data. For example, if you mix Spanish and Turkish in the data, you may observe unexpected behavior.
 

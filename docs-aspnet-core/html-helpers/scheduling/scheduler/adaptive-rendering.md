@@ -50,6 +50,6 @@ The example below demonstrates how to configure the adaptive rendering mode of t
 
 ## See Also
 
-* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [Adaptive Rendering of the Scheduler (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler/adaptiverendering)
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Overview of the Scheduler HtmlHelper]({% slug htmlhelpers_scheduler_aspnetcore %})
+* [Adaptive Rendering of the Scheduler (Demo)](https://demos.telerik.com/aspnet-core/scheduler/adaptiverendering)
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug knownissues_aspnetmvc6_aspnetmvc %})

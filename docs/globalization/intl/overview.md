@@ -19,7 +19,7 @@ All Kendo UI widgets which support date or number formatting depend also on the 
 The following Kendo UI widgets depend on the current culture:
 
 - [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)
-- [DateInput](https://demos.telerik.com/kendo-ui/dateinput/index})
+- [DateInput](https://demos.telerik.com/kendo-ui/dateinput/index)
 - [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)
 - [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)
 - [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index)
@@ -39,21 +39,25 @@ To define the current culture:
 
 1. Add the required culture script to the page, as demonstrated in the example below.
 
-    <script src="jquery.js"></script>
-    <script src="kendo.all.min.js"></script>
-    <script src="kendo.culture.en-GB.js"></script>
+    ```
+        <script src="jquery.js"></script>
+        <script src="kendo.all.min.js"></script>
+        <script src="kendo.culture.en-GB.js"></script>
 
-    <!-- or when using the Kendo UI CDN -->
-    <script src="http://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
+        <!-- or when using the Kendo UI CDN -->
+        <script src="http://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
+    ```
 
 1. Set the culture script that Kendo UI will use.
 
-    <script type="text/javascript">
-         //set current to the "en-GB" culture script
-         kendo.culture("en-GB");
-    </script>
+    ```
+        <script type="text/javascript">
+            //set current to the "en-GB" culture script
+            kendo.culture("en-GB");
+        </script>
+    ```
 
 ## Formatting Date and Number Objects
 
