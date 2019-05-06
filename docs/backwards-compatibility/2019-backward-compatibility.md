@@ -8,7 +8,15 @@ position: 1
 
 # 2019 Releases
 
-This article lists the breaking changes in the Kendo UI 2019 releases. 
+This article lists the breaking changes in the Kendo UI 2019 releases.
+
+## Kendo UI 2019 R2
+
+**Pager**, **Grid**, **TreeList**, **ListView**
+
+* Pager layout changed from Float to Flex for the [LESS-based themes]({% slug themesandappearnce_kendoui_desktopwidgets %}).
+
+* The `k-pager-numbers` `ul` of the Pager is now wrapped in a `div` with the `k-pager-numbers-wrap` class.
 
 ## Kendo UI 2019 R1
 
