@@ -1346,7 +1346,7 @@ var __meta__ = { // jshint ignore:line
                         visibility: "visible",
                         width: ""
                     });
-                    this.wrapper.css(paddingEnd, this.overflowAnchor.outerWidth());
+                    this.wrapper.css(paddingEnd, this.overflowAnchor.outerWidth(true));
                 } else {
                     this.overflowAnchor.css({
                         visibility: "hidden",

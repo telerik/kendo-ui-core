@@ -382,6 +382,23 @@
 @switch-off-handle-hovered-gradient: @button-hover-gradient;
 
 
+// PDF viewer
+@pdf-viewer-bg: null;
+@pdf-viewer-text: null;
+@pdf-viewer-border: null;
+
+@pdf-viewer-canvas-bg: @chat-bg;
+@pdf-viewer-canvas-text: null;
+@pdf-viewer-canvas-border: null;
+
+@pdf-viewer-page-bg: @component-bg;
+@pdf-viewer-page-text: @component-text;
+@pdf-viewer-page-border: @component-border;
+@pdf-viewer-page-shadow: 0 0 15px @pdf-viewer-page-border;
+
+@pdf-viewer-toolbar-button-bg: @button-text-color;
+
+
 // Adaptive Common
 @adaptive-content-bg: @header-background-color;
 @adaptive-content-text: @base;
@@ -413,10 +430,11 @@
 @import "mixins/border-radius.less";
 @import "themes/type.less";
 @import "themes/button.less";
-@import "Default/card/theme.less";
-@import "Office365/chat/theme.less";
+@import "Default/card/_theme.less";
+@import "Office365/chat/_theme.less";
 @import "Default/calendar/_theme.less";
 @import "Default/multiviewcalendar/_theme.less";
+@import "Default/pdf-viewer/_theme.less";
 @import "Default/scrollview/_theme.less";
 @import "Default/switch/_theme.less";
 @import "common/adaptive/_theme.less";
