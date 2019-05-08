@@ -43,24 +43,24 @@
             padding: 1px 3px;
             background-clip: padding-box;
 
-            &.k-spreadsheet-has-comment:after {
+            &.k-spreadsheet-has-comment::after {
                 content: "";
                 display: block;
                 position: absolute;
-                width: 4px;
-                height: 4px;
-                top: 0px;
-                right: 0px;
-                background: red;
+                top: 0;
+                right: 0;
+                left: auto;
+                border-width: 3px;
+                border-style: solid;
             }
         }
 
         .k-spreadsheet-cell-comment {
-            position: "absolute";
+            position: absolute;
             white-space: pre-wrap;
             text-align: left;
-            background: #fe9;
-            border: 1px solid #000;
+            border-width: 1px;
+            border-style: solid;
         }
     }
 
@@ -274,11 +274,8 @@
     .k-dirty {
         position: absolute;
         top: 0;
-        right: 0;
-        left: unset;
-        margin: -2px 0 0 -7px;
-        border-width: 4px;
-        border-color: #f00 #f00 transparent transparent;
+        left: 0;
+        right: unset;
     }
 
     .k-single-selection {

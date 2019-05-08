@@ -49,7 +49,7 @@ For more information on avoiding the blank space after the last column of the Gr
 
 ### Removing Column and Header Misalignment
 
-To remove the misalignment of the columns and headers when the Grid is resized in old Internet Explorer versions, provide at least one column without a specified width so that it can freely adjust.
+To remove the misalignment of the columns and headers when the Grid is resized, provide at least one column without a specified width so that it can freely adjust.
 
 ## See Also
 
