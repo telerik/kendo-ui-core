@@ -2,7 +2,7 @@
 title: Load and Append More Records While Scrolling Down
 page_title: jQuery Grid Documentation | Load and Append More Records | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to load and append more records as the user scrolls down the Grid."
-previous_url: /controls/data-management/grid/how-to/load-and-append-records
+previous_url: /controls/data-management/grid/how-to/load-and-append-records, /controls/data-management/grid/how-to/binding/load-and-append-records
 slug: howto_loadand_append_morerecords_while_scrollingdown_grid
 ---
 

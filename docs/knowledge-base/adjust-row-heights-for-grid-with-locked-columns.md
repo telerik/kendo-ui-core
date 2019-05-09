@@ -2,6 +2,7 @@
 title: Adjust Row Heights When Columns Are Locked
 page_title: jQuery Grid Documentation | Row Heights of Locked Columns | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to adjust the height of its rows when columns are locked."
+previous_url: /controls/data-management/grid/how-to/AngularJS/adjust-row-heights-for-grid-with-locked-columns
 slug: howto_adjust_row_heights_template_locked_columns_grid
 position: 1
 ---

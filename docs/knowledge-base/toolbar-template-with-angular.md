@@ -2,7 +2,7 @@
 title: Create Custom ToolBar Templates
 page_title: jQuery Grid Documentation | Create Custom ToolBar Templates | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to create a custom ToolBar template in an AngularJS application using the widget."
-previous_url: /kendo-mvc/controls/data-management/grid/how-to/AngularJS/toolbar-template-with-angular
+previous_url: /kendo-mvc/controls/data-management/grid/how-to/AngularJS/toolbar-template-with-angular, /controls/data-management/grid/how-to/AngularJS/toolbar-template-with-angular
 slug: howto_create_custom_toolbar_templates_grid
 ---
 

@@ -2867,6 +2867,52 @@ declare namespace kendo.ui {
         userTriggered?: boolean;
     }
 
+    class Drawer extends kendo.ui.Widget {
+
+        static fn: Drawer;
+
+        options: DrawerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Drawer;
+
+        constructor(element: Element, options?: DrawerOptions);
+
+
+        destroy(): void;
+        hide(): void;
+        show(): void;
+
+    }
+
+    interface DrawerMini {
+        width?: number;
+        template?: string;
+    }
+
+    interface DrawerOptions {
+        name?: string;
+        position?: string;
+        mode?: string;
+        template?: string;
+        minHeight?: number;
+        mini?: boolean | DrawerMini;
+        swipeToOpen?: boolean;
+        hide?(e: DrawerHideEvent): void;
+        show?(e: DrawerEvent): void;
+        itemClick?(e: DrawerEvent): void;
+    }
+    interface DrawerEvent {
+        sender: Drawer;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface DrawerHideEvent extends DrawerEvent {
+    }
 
     class DropDownList extends kendo.ui.Widget {
 

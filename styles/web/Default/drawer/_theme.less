@@ -1,0 +1,62 @@
+.k-drawer-container {
+    background-color: @drawer-bg;
+    color: @drawer-text;
+    border-color: @drawer-border;
+
+    &,
+    .k-drawer-items {
+
+        &::-webkit-scrollbar-track {
+            background: @drawer-scrollbar-bg;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: @drawer-scrollbar-color;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background:  @drawer-scrollbar-hovered-color;
+        }
+    }
+}
+
+.k-drawer-items {
+    .k-drawer-item {
+        color: @drawer-text;
+
+        &:hover,
+        &.k-state-hover {
+            color: @drawer-hovered-text;
+            background-color: @drawer-hovered-bg;
+            .composite-background(@drawer-hovered-gradient);
+            cursor: pointer;
+        }
+
+        &:focus,
+        &.k-state-focused {
+            background-color: @drawer-focused-bg;
+            .box-shadow(@drawer-focused-shadow);
+
+            &:hover,
+            &.k-state-hover {
+                color: @drawer-hovered-text;
+                background-color: @drawer-hovered-bg;
+            }
+        }
+
+        &.k-state-selected {
+            color: @drawer-selected-text;
+            background-color: @drawer-selected-bg;
+
+            &:hover,
+            &.k-state-hover {
+                color: @drawer-selected-hover-text;
+                background-color: @drawer-selected-hover-bg;
+            }
+        }
+
+        &.k-drawer-separator {
+            background-color: @drawer-border;
+        }
+    }
+}

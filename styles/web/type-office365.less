@@ -421,6 +421,28 @@
 @adaptive-scheduler-base-text: inherit;
 
 
+// Drawer
+@drawer-text:  @widget-text-color;
+@drawer-bg: @widget-background-color;
+@drawer-border: @widget-border-color;
+
+@drawer-scrollbar-color: rgba(156, 156, 156, 0.7);
+@drawer-scrollbar-bg: #dedede;
+@drawer-scrollbar-hovered-color: rgba(156, 156, 156, 1);
+
+@drawer-hovered-text: @hover-text-color;
+@drawer-hovered-bg: @hover-background;
+@drawer-hovered-gradient: @hover-gradient;
+
+@drawer-focused-bg: @drawer-bg;
+@drawer-focused-shadow: inset 0 0 0 1px @focused-border-color;
+
+@drawer-selected-text: @selected-text-color;
+@drawer-selected-bg: @selected-background;
+@drawer-selected-hover-bg: contrast(@background, lighten(@selected-background, 5%), darken(@selected-background, 5%), 0.5);
+@drawer-selected-hover-text: @selected-text-color;
+
+
 // Kendo skin
 
 @theme-name: ~"office365";
@@ -438,6 +460,7 @@
 @import "Default/scrollview/_theme.less";
 @import "Default/switch/_theme.less";
 @import "common/adaptive/_theme.less";
+@import "Default/drawer/_theme.less";
 
 
 .k-in,

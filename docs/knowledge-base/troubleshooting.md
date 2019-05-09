@@ -2,6 +2,7 @@
 title: Troubleshooting
 page_title: jQuery Grid Documentation | Editing Troubleshooting | Kendo UI
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and troubleshoot any issues that might occur while editing its data."
+previous_url: /controls/data-management/grid/editing/troubleshooting
 slug: edittroubleshoot_kendoui_grid_widget
 position: 80
 ---

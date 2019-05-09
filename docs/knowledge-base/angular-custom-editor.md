@@ -2,6 +2,7 @@
 title: Create Custom Editors
 page_title: jQuery Grid Documentation | Create Custom Editors | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to create custom editors by using AngularJS."
+previous_url: /controls/data-management/grid/how-to/AngularJS/angular-custom-editor
 slug: howto_create_custom_editors_grid
 ---
 

@@ -405,7 +405,11 @@ var __meta__ = { // jshint ignore:line
                 if (listViewChild) {
                     listViewChildren[customIndex].classList.remove("k-state-selected");
                 }
-                tag.remove();
+                if (that.options.tagMode !== "single"){
+                    tag.remove();
+                } else {
+                    that._updateTagListHTML();
+                }
                 done();
             }
         },
@@ -422,7 +426,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (that.options.tagMode === "single"){
-                that.listView.value([]);
+                that._clearSingleTagValue();
             } else{
                 that.tagList.children().each(function(index, tag) {
                     that._removeTag($(tag), false);
@@ -438,6 +442,18 @@ var __meta__ = { // jshint ignore:line
             if (that._state === FILTER) {
                 that._state = ACCEPT;
             }
+        },
+
+        _clearSingleTagValue: function() {
+            var that = this;
+            var persistTagList = that.persistTagList;
+
+            if (persistTagList) {
+                that.persistTagList = false;
+            }
+
+            that.listView.value([]);
+            that.persistTagList = persistTagList;
         },
 
         _editable: function(options) {
@@ -788,7 +804,6 @@ var __meta__ = { // jshint ignore:line
             var visible = that.popup.visible();
             var dir = 0;
             var activeItemIdx;
-            var persistTagList;
 
             if(key !== keys.ENTER) {
                 this._multipleSelection = false;
@@ -956,17 +971,10 @@ var __meta__ = { // jshint ignore:line
                 that._state = ACCEPT;
 
                 if (that.options.tagMode === "single") {
-                    persistTagList = that.persistTagList;
+                    that._clearSingleTagValue();
 
-                    if (persistTagList) {
-                        that.persistTagList = false;
-                    }
-
-                    listView.value([]);
                     that._change();
                     that._close();
-
-                    that.persistTagList = persistTagList;
                     return;
                 }
 
@@ -1236,7 +1244,6 @@ var __meta__ = { // jshint ignore:line
 
         _selectValue: function (added, removed) {
             var that = this;
-            var values = that.value();
             var total = that.dataSource.total();
             var tagList = that.tagList;
             var getter = that._value;
@@ -1274,16 +1281,7 @@ var __meta__ = { // jshint ignore:line
                     that._maxTotal = total;
                 }
 
-                tagList.html("");
-
-                if (values.length) {
-                    tagList.append(that.tagTemplate({
-                        values: values,
-                        dataItems: that.dataItems(),
-                        maxTotal: that._maxTotal,
-                        currentTotal: total
-                    }));
-                }
+                this._updateTagListHTML();
 
                 for (idx = removed.length - 1; idx > -1; idx--) {
                     that._setOption(getter(removed[idx].dataItem), false);
@@ -1296,6 +1294,24 @@ var __meta__ = { // jshint ignore:line
 
             that._angularTagItems("compile");
             that._placeholder();
+        },
+
+        _updateTagListHTML: function(){
+            var that = this;
+            var values = that.value();
+            var total = that.dataSource.total();
+            var tagList = that.tagList;
+
+            tagList.html("");
+
+            if (values.length) {
+                tagList.append(that.tagTemplate({
+                    values: values,
+                    dataItems: that.dataItems(),
+                    maxTotal: that._maxTotal,
+                    currentTotal: total
+                }));
+            }
         },
 
         _select: function(candidate) {

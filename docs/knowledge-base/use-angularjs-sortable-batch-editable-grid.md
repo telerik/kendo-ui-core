@@ -2,6 +2,7 @@
 title: Use Grid with Sortable in AngularJS
 page_title: jQuery Grid Documentation | Grid with Sortable in AngularJS | Kendo UI
 description: "Learn how to use the jQuery Grid by Kendo UI in both editable and non-editable modes together with a Kendo UI Sortable in AngularJS projects."
+previous_url: /controls/data-management/grid/how-to/AngularJS/use-angularjs-sortable-batch-editable-grid
 slug: howto_usegridwithsortableagularjs_grid
 ---
 

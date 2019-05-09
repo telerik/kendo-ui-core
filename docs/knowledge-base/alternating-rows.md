@@ -2,6 +2,7 @@
 title: Configure Color for Alternating Rows
 page_title:  jQuery Grid Documentation | Color for Alternating Rows | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to configure the background color for alternating rows."
+previous_url: /controls/data-management/grid/how-to/excel/alternating-rows
 slug: howto_configure_color_alternating_rows_grid
 ---
 

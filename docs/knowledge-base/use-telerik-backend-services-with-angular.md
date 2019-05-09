@@ -2,6 +2,7 @@
 title: Bind to Kinvey Backend Services
 page_title: jQuery Grid Documentation | Bind to Telerik Backend Services | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to use AngularJS directives to bind the widget to Telerik Backend Services."
+previous_url: /controls/data-management/grid/how-to/AngularJS/use-telerik-backend-services-with-angular
 slug: howto_bindto_telerik_backend_services_grid
 ---
 

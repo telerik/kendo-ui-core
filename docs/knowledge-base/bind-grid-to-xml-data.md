@@ -2,7 +2,7 @@
 title: Bind to XML Data
 page_title: jQuery Grid Documentation | Bind to XML Data | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to bind it to XML data."
-previous_url: /controls/data-management/grid/how-to/bind-grid-to-xml-data
+previous_url: /controls/data-management/grid/how-to/bind-grid-to-xml-data, /controls/data-management/grid/how-to/binding/bind-grid-to-xml-data
 slug: howto_bindgridtoxmldata_grid
 ---
 
