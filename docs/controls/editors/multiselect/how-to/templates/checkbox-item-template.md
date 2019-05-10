@@ -10,8 +10,6 @@ slug: howto_checkbox_custom_item_template_multiselect
 
 The following example demonstrates how to create a Kendo UI MultiSelect widget with checkboxes.
 
-###### Example
-
 ```dojo
     <div id="example" role="application">
         <div class="demo-section k-header">

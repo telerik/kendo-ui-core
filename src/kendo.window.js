@@ -91,7 +91,18 @@
         }
 
         function constrain(value, low, high) {
-            return Math.max(Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)), low === -Infinity ? low : parseInt(low, 10));
+            var normalizedValue;
+
+            if (value && isNaN(value) && value.toString().indexOf("px") < 0) {
+                normalizedValue = value;
+            } else {
+                normalizedValue = Math.max(
+                    Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)),
+                    low === -Infinity ? low : parseInt(low, 10)
+                );
+            }
+
+            return normalizedValue;
         }
 
         function executableScript() {
@@ -346,22 +357,14 @@
                 }
 
                 if (width) {
-                    if (isNaN(width) && width.toString().indexOf("px") < 0) {
-                        wrapper.width(width);
-                    } else {
-                        wrapper.width(constrain(width, options.minWidth, options.maxWidth));
-                    }
+                    wrapper.width(constrain(width, options.minWidth, options.maxWidth));
                 }
                 else {
                     wrapper.width("");
                 }
 
                 if (height) {
-                    if (isNaN(height) && height.toString().indexOf("px") < 0) {
-                        wrapper.height(height);
-                    } else {
-                        wrapper.height(constrain(height, options.minHeight, options.maxHeight));
-                    }
+                    wrapper.height(constrain(height, options.minHeight, options.maxHeight));
                 }
                 else {
                     wrapper.height("");

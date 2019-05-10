@@ -10,8 +10,6 @@ slug: howto_prevent_deleting_selected_items_on_backspace_multiselect
 
 The following example demonstrates how to prevent the deletion of selected items on a `Backspace` key-press in the Kendo UI MultiSelect widget.
 
-###### Example
-
 ```dojo
 <select id="multiselect" multiple="multiple"></select>
     <script>

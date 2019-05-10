@@ -10,8 +10,6 @@ slug: howto_select_allvalues_witha_single_selection_multiselect
 
 The following example demonstrates how to create a `dataItem` that holds an `all`-value, which selects all items in the Kendo UI MultiSelect widget.
 
-###### Example
-
 ```dojo
     <div id="example" role="application">
     <div class="demo-section k-header">
@@ -84,9 +82,7 @@ The following example demonstrates how to create a `dataItem` that holds an `all
   </div>
 ```
 
-The example below demonstrates how to select all items by selecting the `ALL` item.
-
-###### Example
+The following example demonstrates how to select all items by selecting the `ALL` item.
 
 ```dojo
     <div id="example" role="application">

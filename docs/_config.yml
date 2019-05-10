@@ -114,6 +114,33 @@ navigation:
     "controls/editors/dropdownlist/how-to":
         title: "How To"
         position: 70
+    "controls/editors/multiselect/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/editors/multiselect/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/editors/multiselect/how-to":
+        title: "How To"
+        position: 70
+    "controls/editors/numerictextbox/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/editors/numerictextbox/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/editors/numerictextbox/how-to":
+        title: "How To"
+        position: 70
+    "controls/editors/upload/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/editors/upload/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/editors/upload/how-to":
+        title: "How To"
+        position: 70
     "controls/charts":
         title: "Charts"
         position: 3

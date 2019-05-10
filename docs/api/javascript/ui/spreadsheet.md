@@ -141,6 +141,61 @@ The proxy will receive a POST request with the following parameters in the reque
         spreadsheet.saveAsExcel();
     </script>
 
+### images `Object` *(default: null)*
+
+An object containing any images used in the Spreadsheet.  The keys
+should be image ID-s (they are referenced by this ID in
+(`sheets.drawings`)[#configuration-sheets.drawings]) and the values
+should be image URLs.
+
+The image URLs can be either
+[data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs),
+in which case the images are fully contained by the JSON, or can be external
+URLs.
+
+Note that when external URLs are used, they should reside on the same domain, or
+the server must be configured with the proper
+[CORS headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS), for the
+Spreadsheet to be able to fetch binary image data using a XMLHttpRequest.  If it
+cannot fetch the image, export to Excel or PDF might not work.
+
+#### Example - declaring images in JSON
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            images: {
+                "1": "data:image/png;base64,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"
+            },
+
+            sheets: [{
+                name: "Sample image",
+                drawings: [
+                    {
+                        topLeftCell: "C2",
+                        offsetX: 32,
+                        offsetY: 10,
+                        width: 48,
+                        height: 48,
+                        image: "1"
+                    }, {
+                        topLeftCell: "E3",
+                        offsetX: 16,
+                        offsetY: 10,
+                        width: 48,
+                        height: 48,
+                        image: "1"
+                    }
+                ]
+            }]
+        });
+    </script>
+
+Note, we can reference the same image ID in two different drawings,
+anchored to cells C2 and E3.  See the
+(`sheets.drawings`)[#configuration-sheets.drawings] property for more
+information about a drawing's properties.
+
 ### pdf `Object`
 
 Configures the PDF export settings of the Spreadsheet.
@@ -693,6 +748,34 @@ The width of the column in pixels. Defaults to [`columnWidth`](/api/javascript/u
 ### sheets.dataSource `kendo.data.DataSource`
 
 The DataSource instance for this sheet. For more information, refer to the article on [binding to the DataSource](/web/spreadsheet/import-and-export-data/bind-to-data-source).
+
+### sheets.drawings `Array`
+
+An array which contains the drawings used in this sheet.
+
+### sheets.drawings.topLeftCell `String`
+
+A cell to which the drawing's top-left corner is anchored.
+
+### sheets.drawings.offsetX `Number`
+
+The horizontal offset from the anchor cell's top-left corner, in pixels.
+
+### sheets.drawings.offsetY `Number`
+
+The vertical offset from the anchor cell's top-left corner, in pixels.
+
+### sheets.drawings.width `Number`
+
+The drawing's width in pixels.
+
+### sheets.drawings.height `Number`
+
+The drawing's height in pixels.
+
+### sheets.drawing.image `String`
+
+The ID of the image to display.
 
 ### sheets.filter `Object`
 
@@ -1387,6 +1470,42 @@ The [sheet](/api/javascript/spreadsheet/sheet) to set as active.
         $("#spreadsheet").data("kendoSpreadsheet").activeSheet(sheets[1]);
     </script>
 
+### addImage
+
+Adds an image to this spreadsheet.
+
+#### Parameters
+
+##### image `Blob|String`
+
+The image to add.  If it's a string it will be interpreted as an URL.
+It can be a data URL, or an external URL.  [Read more
+information](#configuration-images) about image URLs in the
+configuration section.
+
+#### Returns
+
+`String` - The new image ID.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+        var spreadsheet = $("#spreadsheet").kendoSpreadsheet().getKendoSpreadsheet();
+        var imageId = spreadsheet.addImage("data:image/png;base64,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");
+        var sheet = spreadsheet.activeSheet();
+        sheet.batch(function(){
+            sheet.addDrawing({
+                topLeftCell: "B2",
+                offsetX: 0,
+                offsetY: 0,
+                width: 48,
+                height: 48,
+                image: imageId
+            });
+        });
+    </script>
+
 ### cellContextMenu
 
 Gets the `contextMenu` instance of the cell.
@@ -1418,6 +1537,14 @@ Gets the `contextMenu` instance of the cell.
            });
         });
     </script>
+
+### cleanupImages
+
+Discards the images that are no longer in use.  Note that you cannot
+remove a particular image directly by ID, for it might be used in
+multiple sheets, or they can be referenced by the undo/redo queue.
+This function acts like a "garbage collector" — it checks which images
+are no longer needed, and removes them.
 
 ### rowHeaderContextMenu
 
@@ -1734,9 +1861,43 @@ The new name of the sheet.
 
 `kendo.spreadsheet.Sheet` - The renamed sheet.
 
+### saveJSON
+
+Serializes the workbook in the format that is defined in the
+[configuration](#configuration).  This method does not return the
+JSON, but a `Promise` object which will yield the JSON data when it is
+available.
+
+This method is functionally similar to `toJSON`, but it is also able
+to save the embedded images (this is the reason why it must be
+asynchronous).
+
+#### Returns
+
+`Promise` - A Promise object which will be resolved with the JSON
+data.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <pre id="result"></pre>
+    <script>
+        var spreadsheet = $("#spreadsheet").kendoSpreadsheet().getKendoSpreadsheet();
+        spreadsheet
+            .saveJSON()
+            .then(function(data){
+                var json = JSON.stringify(data, null, 2);
+                $("#result").text(json);
+            });
+    </script>
+
 ### toJSON
 
 Serializes the workbook in the format that is defined in the [configuration](#configuration).
+
+Note that this method is unable to serialize embedded images.  To
+properly save images you need to use [`saveJSON`](#methods-saveJSON),
+which is asynchronous (returns a `Promise`).
 
 #### Example - storing the spreadsheet to JSON
 

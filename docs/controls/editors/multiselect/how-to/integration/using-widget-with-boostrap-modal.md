@@ -10,8 +10,6 @@ slug: howto_use_multiselect_with_bootstrap_modal_window_multiselect
 
 The following example demonstrates how to use the Kendo UI MultiSelect widget with a Bootstrap modal window and bind values.
 
-###### Example
-
 ```dojo
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

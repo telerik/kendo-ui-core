@@ -10,8 +10,6 @@ slug: howto_select_thefirst_itemon_tab_multiselect
 
 The following example demonstrates how to select the first item from the popup on a `Tab` key-press in a Kendo UI MultiSelect widget.
 
-###### Example
-
 ```dojo
 <div id="example">
     <div class="demo-section k-header">

@@ -10,8 +10,6 @@ slug: howto_bind_values_totemplate_multiselect
 
 The following example demonstrates how to bind the Kendo UI MultiSelect value to a template by using MVVM.
 
-###### Example
-
 ```dojo
     <div id="example">
       <div class="demo-section k-header">

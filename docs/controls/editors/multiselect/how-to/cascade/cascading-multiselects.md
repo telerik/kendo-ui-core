@@ -10,8 +10,6 @@ slug: howto_create_cascading_widgets_multiselect
 
 The following example demonstrates how to cascade multiple Kendo UI MultiSelect widgets.
 
-###### Example
-
 ```dojo
     supplier: <select id="suppliers"></select>
     product: <select id="products"></select>

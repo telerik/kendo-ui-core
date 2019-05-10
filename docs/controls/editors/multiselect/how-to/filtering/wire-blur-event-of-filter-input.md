@@ -10,8 +10,6 @@ slug: howto_wire_blur_event_ofthe_filtеr_input_multiselect
 
 The following example demonstrates how to bind to the `blur` event of the `filter` input element.
 
-###### Example
-
 ```dojo
     <div id="example" role="application">
         <div class="demo-section k-header">

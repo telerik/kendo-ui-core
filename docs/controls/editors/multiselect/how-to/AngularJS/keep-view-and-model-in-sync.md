@@ -25,8 +25,6 @@ You can implement a similar result by following the same steps and using the [`c
 
 The following example demonstrates how to keep in sync the view and the model of a Kendo UI MultiSelect in AngularJS applications.
 
-###### Example
-
 ```dojo
   <base href="https://demos.telerik.com/kendo-ui/multiselect/angular">
   <div id="example" ng-app="KendoDemos">

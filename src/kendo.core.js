@@ -2992,14 +2992,15 @@ function pad(number, digits, end) {
     function parseOptions(element, options, source) {
         var result = {},
             option,
-            value;
+            value,
+            role = element.getAttribute("data-" + kendo.ns + "role");
 
         for (option in options) {
             value = parseOption(element, option);
 
             if (value !== undefined) {
 
-                if (templateRegExp.test(option)) {
+                if (templateRegExp.test(option) && role != "drawer") {
                     if(typeof value === "string") {
                         if($("#" + value).length){
                             value = kendo.template($("#" + value).html());

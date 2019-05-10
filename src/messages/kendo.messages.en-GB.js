@@ -795,6 +795,11 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "comment": "Comment",
       "removeComment": "Remove comment"
     }
+  },
+  "insertImageDialog": {
+    "title": "Insert image",
+    "info": "Drag an image here, or click to select",
+    "typeError": "Please select a JPEG, PNG or GIF image"
   }
 });
 }
@@ -904,6 +909,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "unfreeze": "Unfreeze panes"
   },
   "insertComment": "Insert comment",
+  "insertImage": "Insert image",
   "italic": "Italic",
   "merge": "Merge cells",
   "mergeButtons": {

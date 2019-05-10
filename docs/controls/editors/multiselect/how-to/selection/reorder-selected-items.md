@@ -10,8 +10,6 @@ slug: howto_reorder_selected_items_multiselect
 
 The following example demonstrates how to use the Kendo UI Sortable to reorder the selected values in a Kendo UI MultiSelect widget.
 
-###### Example
-
 ```dojo
      <div id="example" role="application">
       <form method="post" action="http://trykendoui.telerik.com/@ggkrustev/oDEW">

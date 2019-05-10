@@ -76,7 +76,7 @@ Specifies the drawer's content.
 
 ### minHeight `Number`
 
-Specifies the minimum height for the drawer.
+Specifies the minimum height for the drawer in push mode. The overlay mode takes 100% of the page height.
 
 #### Example
 

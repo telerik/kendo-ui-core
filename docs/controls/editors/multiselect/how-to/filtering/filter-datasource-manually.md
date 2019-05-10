@@ -14,8 +14,6 @@ The widget uses this information to decide when to persist the selected value th
 
 The following example demonstrates how to manually filter the `dataSource` instance of the MultiSelect.
 
-###### Example
-
 ```dojo
 <div id="example">
     <div class="demo-section k-header">

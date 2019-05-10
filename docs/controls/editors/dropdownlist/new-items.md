@@ -62,5 +62,5 @@ For a runnable example, refer to the demo on [adding new items to the DropDownLi
 
 ## See Also
 
-* [Adding New Items in the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/addnewitem)
+* [Adding New Items to the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/addnewitem)
 * [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)

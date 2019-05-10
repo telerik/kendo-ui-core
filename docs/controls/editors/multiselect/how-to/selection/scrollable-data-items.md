@@ -10,8 +10,6 @@ slug: howto_create_scrollable_data_items_multiselect
 
 The following example demonstrates how to create a scrollable list of the selected items in a Kendo UI MultiSelect widget.
 
-###### Example
-
 ```dojo
 <div id="example">
     <style>

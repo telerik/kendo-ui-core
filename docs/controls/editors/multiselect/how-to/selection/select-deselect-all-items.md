@@ -10,8 +10,6 @@ slug: howto_select_and_deselect_allitems_multiselect
 
 The following example demonstrates how to select or deselect all items in the Kendo UI MultiSelect widget by using external buttons.
 
-###### Example
-
 ```dojo
     <div id="example" role="application">
       <div class="demo-section k-header">

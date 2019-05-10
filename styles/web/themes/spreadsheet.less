@@ -316,6 +316,43 @@
     }
 }
 
+
+// Images
+.k-spreadsheet-insert-image-dialog {
+    border-color: @widget-border-color;
+    border-radius: @border-radius;
+
+    .k-spreadsheet-has-image {
+        &:hover,
+        &.k-state-hovered {
+            box-shadow: @spreadsheet-insert-image-dialog-preview-overlay;
+            border-radius: @border-radius;
+        }
+
+        &:hover div,
+        &.k-state-hovered div {
+            color: @spreadsheet-insert-image-dialog-hovered-text;
+        }
+    }
+}
+
+.k-spreadsheet-drawing {
+    &.k-spreadsheet-active-drawing {
+        outline-color: @spreadsheet-drawing-handle-outline;
+    }
+
+    .k-spreadsheet-drawing-handle {
+        border-color: @spreadsheet-drawing-handle-border-color;
+        background-color: @spreadsheet-drawing-handle-bg;
+        border-radius: @spreadsheet-drawing-handle-border-radius;
+    }
+}
+
+.k-spreadsheet-drawing-anchor-cell {
+    background: @spreadsheet-drawing-anchor-bg;
+}
+
+
 // RTL
 .k-rtl .k-spreadsheet {
     .k-spreadsheet-has-comment::after {

@@ -10,8 +10,6 @@ slug: howto_filter_valuesin_widgetswith_shared_data_multiselect
 
 The following example demonstrates how to filter the values of 2 Kendo UI widgets, which share the same data, based on user selection.
 
-###### Example
-
 ```dojo
     <select id="multiselect1">
     </select>

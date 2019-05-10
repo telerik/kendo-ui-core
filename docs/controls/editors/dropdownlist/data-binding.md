@@ -8,12 +8,11 @@ position: 2
 
 # Data Binding
 
-The DropDownList enables you to initialize by using the `<input>` or the `<select>` element after you bind it to local data arrays or remote data services.
+The DropDownList enables you to initialize it by using the `<input>` or the `<select>` element after you bind it to local data arrays or remote data services.
 
 For more information on initializing the DropDownList through the `<option>` tag of an existing `<select>` element, refer to the [DropDownList **Overview** article]({% slug overview_kendoui_dropdownlist_widget %}#initializing-the-dropdownlist).
 
-> * When you configure the local or remote data source of the DropDownList, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_ddl_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
-> * For more information on other guidelines when you initiate the DropDownList, refer to the [**Overview** article]({% slug overview_kendoui_dropdownlist_widget %}#initializing-the-dropdownlist).
+> When you configure the local or remote data source of the DropDownList, enabling the paging functionality and setting [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) is efficient only when you use paging together with [virtualization]({% slug virtualization_kendoui_ddl_widget %}). In all other cases, enabling paging and setting `pageSize` is considered as incorrect configuration.
 
 ## Binding to Local Data
 

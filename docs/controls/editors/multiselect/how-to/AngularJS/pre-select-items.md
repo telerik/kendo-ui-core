@@ -15,8 +15,6 @@ slug: howto_preselect_itemson_load_angular_multiselect
 
 The following example demonstrates how to preselect items in the Kendo UI MultiSelect without loading the whole source in AngularJS. To ensure the proper functioning of the example, run it in the Dojo.
 
-###### Example
-
 ```dojo
 <script src="https://cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js"></script>
 <div id="example" ng-app="KendoDemos">

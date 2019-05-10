@@ -10,8 +10,6 @@ slug: howto_cascade_froma_dropdownlist_multiselect
 
 The following example demonstrates how to cascade the Kendo UI MultiSelect from a Kendo UI DropDownList.
 
-###### Example
-
 ```dojo
     <div>
       supplier: <select id="suppliers"></select>

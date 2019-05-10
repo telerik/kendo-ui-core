@@ -10,8 +10,6 @@ slug: howto_preselect_items_byusing_mvvm_binding_multiselect
 
 The following example demonstrates how to preselect items by using MVVM binding in the Kendo UI MultiSelect widget.
 
-###### Example
-
 ```dojo
     <div id="example" >
       <div class="demo-section k-header">
