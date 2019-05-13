@@ -153,6 +153,28 @@ you can also pass a function that will be dynamically resolved for each date of 
 
 note that a check for an empty `date` is needed, as the widget can work with a null value as well.
 
+### endField `String`*(default: "")*
+
+Specifies the end field name for model binding.
+
+#### Example - specify the initial view, which calendar renders
+
+	<div id="example">
+		<div id="daterangepicker" title="daterangepicker"></div>
+		<script>
+			$(document).ready(function () {
+				$("#daterangepicker").kendoDateRangePicker({
+					endField: "endField"
+				});
+
+				var viewModel = kendo.observable({
+					endField: new Date()
+				});
+				kendo.bind($("#example"), viewModel);
+			});
+		</script>
+	</div>
+	
 ### footer `String|Function`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -433,6 +455,28 @@ The following settings are available for the **start** value:
             start: "year"
         });
     </script>
+	
+### startField `String`*(default: "")*
+
+Specifies the start field name for model binding.
+
+#### Example - specify the initial view, which calendar renders
+
+	<div id="example">
+		<div id="daterangepicker" title="daterangepicker"></div>
+		<script>
+			$(document).ready(function () {
+				$("#daterangepicker").kendoDateRangePicker({
+					startField: "startField"
+				});
+
+				var viewModel = kendo.observable({
+					startField: new Date()
+				});
+				kendo.bind($("#example"), viewModel);
+			});
+		</script>
+	</div>
 
 ## Fields
 

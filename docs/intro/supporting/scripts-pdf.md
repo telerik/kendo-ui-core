@@ -1,26 +1,27 @@
 ---
 comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
-title: Script Files for Gauges
-page_title: Script Files for Gauges | Kendo UI Getting Started
-description: "Listing of required script files for the Kendo UI Gauges"
-slug: script_filesfor_gauges_widgets
-position: 7
+title: Script Files for PDF
+page_title: Script Files for PDF | Kendo UI Getting Started
+description: "Listing of required script files for the Kendo UI PDF"
+slug: script_filesfor_pdf
+position: 18
 ---
 
-# Script Files for Gauges
+# Script Files for PDF
 
-Below are listed the script files for the Kendo UI Gauges widgets.&nbsp;&nbsp;
+Below are listed the script files for the Kendo UI PDF export framework and wigets.&nbsp;&nbsp;
 
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
-| [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
+| [PDFViewer](http://demos.telerik.com/kendo-ui/pdfviewer/index) | jquery.js | |
 | | kendo.core.js | |
-| | kendo.color.js | |
+| | kendo.userevents.js | |
+| | kendo.draganddrop.js | |
 | | kendo.popup.js | |
-| | kendo.drawing.js | |
-| | kendo.dataviz.core.js | |
-| | kendo.dataviz.themes.js | |
-| | kendo.dataviz.gauge.js | |
+| | kendo.window.js | |
+| | kendo.dialog.js | |
+| | kendo.toolbar.js | |
+| | kendo.pdfviewer.js | |
 
 ## See Also
 
@@ -30,6 +31,7 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
 + [Script Files for Conversational UI]({% slug script_filesfor_conversationalui_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
++ [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
@@ -40,4 +42,3 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Media]({% slug script_filesfor_media_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
-+ [Script Files for PDF]({% slug script_filesfor_pdf %})

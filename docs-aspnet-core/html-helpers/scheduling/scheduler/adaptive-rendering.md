@@ -19,34 +19,34 @@ The example below demonstrates how to configure the adaptive rendering mode of t
 
 ###### Example
 
-    ```Razor
-        @(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
-            .Name("scheduler")
-            .Mobile(MobileMode.Auto)
-            .Date(new DateTime(2013, 6, 13))
-            .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
-            .Height(600)
-            .Views(views =>
-            {
-                views.DayView();
-                views.WeekView(weekView => weekView.Selected(true));
-                views.MonthView();
-                views.AgendaView();
-            })
-            .Timezone("Etc/UTC")
-            .DataSource(d => d
-                .Model(m => {
-                    m.Id(f => f.TaskID);
-                    m.Field(f => f.OwnerID).DefaultValue(1);
-                    m.RecurrenceId(f => f.RecurrenceID);
-                })
-                .Read("Tasks_Read", "Home")
-                .Create("Tasks_Create", "Home")
-                .Destroy("Tasks_Destroy", "Home")
-                .Update("Tasks_Update", "Home")
-            )
-        )
-    ```
+```Razor
+@(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
+    .Name("scheduler")
+    .Mobile(MobileMode.Auto)
+    .Date(new DateTime(2013, 6, 13))
+    .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
+    .Height(600)
+    .Views(views =>
+    {
+        views.DayView();
+        views.WeekView(weekView => weekView.Selected(true));
+        views.MonthView();
+        views.AgendaView();
+    })
+    .Timezone("Etc/UTC")
+    .DataSource(d => d
+        .Model(m => {
+            m.Id(f => f.TaskID);
+            m.Field(f => f.OwnerID).DefaultValue(1);
+            m.RecurrenceId(f => f.RecurrenceID);
+        })
+        .Read("Tasks_Read", "Home")
+        .Create("Tasks_Create", "Home")
+        .Destroy("Tasks_Destroy", "Home")
+        .Update("Tasks_Update", "Home")
+    )
+)
+```
 
 ## See Also
 

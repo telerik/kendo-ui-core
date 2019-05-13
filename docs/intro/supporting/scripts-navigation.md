@@ -4,7 +4,7 @@ title: Script Files for Navigation
 page_title: Script Files for Navigation | Kendo UI Getting Started
 description: "Listing of required script files for the Kendo UI Navigation"
 slug: script_filesfor_navigation_widgets
-position: 14
+position: 13
 ---
 
 # Script Files for Navigation
@@ -16,9 +16,15 @@ Below are listed the script files for the Kendo UI Navigation widgets.&nbsp;&nbs
 | [Button](http://demos.telerik.com/kendo-ui/button/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.button.js | |
+| [Drawer](http://demos.telerik.com/kendo-ui/drawer/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.drawer.js | |
 | [Menu](http://demos.telerik.com/kendo-ui/menu/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
+| | kendo.data.js | |
+| | kendo.data.odata.js | |
 | | kendo.menu.js | |
 | [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index) | jquery.js | |
 | | kendo.core.js | |
@@ -56,5 +62,7 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
 + [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
++ [Script Files for Media]({% slug script_filesfor_media_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for PDF]({% slug script_filesfor_pdf %})

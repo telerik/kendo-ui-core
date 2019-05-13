@@ -68,15 +68,11 @@ Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbs
 | | kendo.scheduler.agendaview.js | Scheduler Agenda View feature (optional) |
 | | kendo.scheduler.monthview.js | Scheduler Month View feature (optional) |
 | | kendo.scheduler.timelineview.js | Scheduler Timeline View feature (optional) |
+| | kendo.dialog.js | Scheduler adaptive rendering feature (optional) |
 | | kendo.fx.js | Scheduler adaptive rendering feature (optional) |
-| | kendo.mobile.scroller.js | Scheduler adaptive rendering feature (optional) |
 | | kendo.view.js | Scheduler adaptive rendering feature (optional) |
-| | kendo.mobile.view.js | Scheduler adaptive rendering feature (optional) |
-| | kendo.mobile.loader.js | Scheduler adaptive rendering feature (optional) |
-| | kendo.mobile.pane.js | Scheduler adaptive rendering feature (optional) |
-| | kendo.mobile.popover.js | Scheduler adaptive rendering feature (optional) |
-| | kendo.mobile.shim.js | Scheduler adaptive rendering feature (optional) |
-| | kendo.mobile.actionsheet.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.pane.js | Scheduler adaptive rendering feature (optional) |
+| | kendo.switch.js | Scheduler adaptive rendering feature (optional) |
 | | kendo.color.js | PDF export feature (optional) |
 | | kendo.drawing.js | PDF export feature (optional) |
 | | kendo.pdf.js | PDF export feature (optional) |
@@ -98,5 +94,7 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
++ [Script Files for Media]({% slug script_filesfor_media_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for PDF]({% slug script_filesfor_pdf %})

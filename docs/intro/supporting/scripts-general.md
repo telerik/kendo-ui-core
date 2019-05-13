@@ -47,6 +47,7 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.dropdownlist.js | Column menu feature (optional) |
 | | kendo.binder.js | Column menu feature (optional) |
 | | kendo.filtermenu.js | Column menu feature (optional) |
+| | kendo.data.odata.js | Column menu feature (optional) |
 | | kendo.menu.js | Column menu feature (optional) |
 | | kendo.columnmenu.js | Column menu feature (optional) |
 | | kendo.groupable.js | Grouping feature (optional) |
@@ -104,11 +105,13 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.list.js | Configurator feature (optional) |
 | | kendo.dropdownlist.js | Configurator feature (optional) |
 | | kendo.treeview.js | Configurator feature (optional) |
+| | kendo.data.odata.js | Configurator feature (optional) |
 | | kendo.menu.js | Configurator feature (optional) |
 | | kendo.window.js | Configurator feature (optional) |
 | | kendo.pivot.fieldmenu.js | Configurator feature (optional) |
 | | kendo.pivot.configurator.js | Configurator feature (optional) |
 | | kendo.popup.js | Filtering feature (optional) |
+| | kendo.data.odata.js | Filtering feature (optional) |
 | | kendo.menu.js | Filtering feature (optional) |
 | | kendo.window.js | Filtering feature (optional) |
 | | kendo.treeview.js | Filtering feature (optional) |
@@ -138,6 +141,7 @@ Below are listed the script files for the Kendo UI desktop widgets for mobile-re
 | | kendo.combobox.js | |
 | | kendo.dom.js | |
 | | kendo.dropdownlist.js | |
+| | kendo.data.odata.js | |
 | | kendo.menu.js | |
 | | kendo.ooxml.js | |
 | | kendo.sortable.js | |
@@ -208,5 +212,7 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
++ [Script Files for Media]({% slug script_filesfor_media_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for PDF]({% slug script_filesfor_pdf %})

@@ -152,4 +152,6 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
++ [Script Files for Media]({% slug script_filesfor_media_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for PDF]({% slug script_filesfor_pdf %})

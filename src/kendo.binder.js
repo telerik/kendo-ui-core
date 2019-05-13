@@ -1080,6 +1080,54 @@ var __meta__ = { // jshint ignore:line
             }
         }),
 
+        start: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                this._change = proxy(this.change, this);
+                this.widget = widget;
+                this.widget.bind(CHANGE, this._change);
+            },
+
+            change: function() {
+                this.bindings.start.set(this.widget.range().start);
+            },
+
+            refresh: function() {
+                var that = this;
+                var start = this.bindings.start.get();
+                var end = that.widget._range ? that.widget._range.end: null;
+                this.widget.range({start: start, end: end});
+            },
+
+            destroy: function() {
+                this.widget.unbind(CHANGE, this._change);
+            }
+        }),
+
+        end: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                this._change = proxy(this.change, this);
+                this.widget = widget;
+                this.widget.bind(CHANGE, this._change);
+            },
+
+            change: function() {
+                this.bindings.end.set(this.widget.range().end);
+            },
+
+            refresh: function() {
+                var that = this;
+                var end = this.bindings.end.get();
+                var start = that.widget._range ? that.widget._range.start: null;
+                this.widget.range({start: start, end: end});
+            },
+
+            destroy: function() {
+                this.widget.unbind(CHANGE, this._change);
+            }
+        }),
+
         visible: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);

@@ -773,7 +773,7 @@ The drawing's width in pixels.
 
 The drawing's height in pixels.
 
-### sheets.drawing.image `String`
+### sheets.drawings.image `String`
 
 The ID of the image to display.
 

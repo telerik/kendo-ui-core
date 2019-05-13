@@ -5,6 +5,8 @@
     overflow-x: hidden;
     white-space: nowrap;
     user-select: none;
+    width: 0;
+    transition: all 300ms ease-out;
 
     &,
     .k-drawer-items {
@@ -22,7 +24,6 @@
 
     .k-drawer-items {
         padding: 0;
-        width: 0;
         transition: all 300ms ease-out;
         overflow-x: hidden;
 
@@ -47,7 +48,7 @@
         .k-icon {
             display: inline-block;
             font-size: @drawer-icon-size;
-            padding: 0 @drawer-item-padding-x;
+            margin: 0 @drawer-item-padding-x;
         }
 
         .k-item-text {
@@ -64,11 +65,11 @@
 
 .k-drawer-wrapper {
     overflow-x: hidden;
-    height: 100%;
 
     &.k-drawer-mini-mode {
         .k-drawer-container {
             border-right-width: @drawer-border-width;
+            width: auto;
         }
 
         .k-drawer-items {
@@ -94,6 +95,7 @@
 
     &.k-drawer-push {
         display: flex;
+        height: 100%;
 
         .k-drawer-content {
             flex: 1 1 auto;

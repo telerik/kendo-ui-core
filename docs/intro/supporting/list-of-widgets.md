@@ -123,6 +123,8 @@ The following table lists all Kendo UI components with regard to their support p
 | [Single-Page Application](http://demos.telerik.com/kendo-ui/spa/index)| <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [Templates](http://demos.telerik.com/kendo-ui/templates/index)        | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder)        | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| **PDF**  |
+| [PDFViewer](http://demos.telerik.com/kendo-ui/pdfviewer/index)   | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | **Official Support**                                                  | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
 
 ## See Also

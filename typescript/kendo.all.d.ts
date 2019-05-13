@@ -5686,6 +5686,120 @@ declare namespace kendo.ui {
     interface NumericTextBoxSpinEvent extends NumericTextBoxEvent {
     }
 
+    class PDFViewer extends kendo.ui.Widget {
+
+        static fn: PDFViewer;
+
+        options: PDFViewerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PDFViewer;
+
+        constructor(element: Element, options?: PDFViewerOptions);
+
+
+        fromFile(): void;
+        activatePage(): void;
+        loadPage(): void;
+        execute(): void;
+        setOptions(): void;
+        destroy(): void;
+
+    }
+
+    interface PDFViewerDefaultPageSize {
+        width?: number;
+        height?: number;
+    }
+
+    interface PDFViewerDplProcessingDownload {
+        url?: string;
+    }
+
+    interface PDFViewerDplProcessingRead {
+        url?: string;
+        pageField?: string;
+        type?: string;
+        dataType?: string;
+    }
+
+    interface PDFViewerDplProcessingUpload {
+        url?: string;
+        saveField?: string;
+    }
+
+    interface PDFViewerDplProcessing {
+        read?: PDFViewerDplProcessingRead;
+        upload?: PDFViewerDplProcessingUpload;
+        download?: PDFViewerDplProcessingDownload;
+        loadOnDemand?: boolean;
+    }
+
+    interface PDFViewerMessagesToolbar {
+        open?: string;
+    }
+
+    interface PDFViewerMessages {
+        defaultFileName?: string;
+        toolbar?: PDFViewerMessagesToolbar;
+    }
+
+    interface PDFViewerPdfjsProcessing {
+        file?: string;
+    }
+
+    interface PDFViewerToolbarItem {
+        type?: string;
+        overflow?: string;
+        command?: string;
+        click?: Function;
+    }
+
+    interface PDFViewerToolbar {
+        items?: PDFViewerToolbarItem[];
+    }
+
+    interface PDFViewerView {
+        type?: string;
+    }
+
+    interface PDFViewerOptions {
+        name?: string;
+        dplProcessing?: PDFViewerDplProcessing;
+        pdfjsProcessing?: PDFViewerPdfjsProcessing;
+        width?: number|string;
+        height?: number|string;
+        defaultPageSize?: PDFViewerDefaultPageSize;
+        page?: number;
+        view?: PDFViewerView;
+        toolbar?: boolean | PDFViewerToolbar;
+        messages?: PDFViewerMessages;
+        render?(e: PDFViewerRenderEvent): void;
+        open?(e: PDFViewerOpenEvent): void;
+        error?(e: PDFViewerErrorEvent): void;
+    }
+    interface PDFViewerEvent {
+        sender: PDFViewer;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface PDFViewerRenderEvent extends PDFViewerEvent {
+        page?: any;
+    }
+
+    interface PDFViewerOpenEvent extends PDFViewerEvent {
+        file?: any;
+    }
+
+    interface PDFViewerErrorEvent extends PDFViewerEvent {
+        dialog?: kendo.ui.Dialog;
+        error?: any;
+        message?: string;
+    }
 
     class Pager extends kendo.ui.Widget {
 
@@ -21585,6 +21699,10 @@ interface JQuery {
     kendoNumericTextBox(): JQuery;
     kendoNumericTextBox(options: kendo.ui.NumericTextBoxOptions): JQuery;
     data(key: "kendoNumericTextBox"): kendo.ui.NumericTextBox;
+
+    kendoPDFViewer(): JQuery;
+    kendoPDFViewer(options: kendo.ui.PDFViewerOptions): JQuery;
+    data(key: "kendoPDFViewer"): kendo.ui.PDFViewer;
 
     kendoPager(): JQuery;
     kendoPager(options: kendo.ui.PagerOptions): JQuery;

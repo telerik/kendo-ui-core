@@ -116,15 +116,12 @@
         assert.equal(listview.dataSource.view()[6].uid,listview.items().eq(6).attr("data-uid"));
     });
 
-    it("when last child is focused down arrow will retrieve next items and listiview will focus the correct item", function(done) {
+    it("when last child is focused down arrow will retrieve next items and listiview will focus the correct item", function() {
         var listView = setup({ navigatable: true });
         listView.element.children().last().mousedown();
         listView.element.trigger("focus").press(kendo.keys.DOWN);
-        setTimeout(() => {
-            assert.isOk(listView.element.find("li:eq(5)").hasClass("k-state-focused"));
-            done()
-        }, 200);
 
+        assert.isOk(listView._focusNext);
     });
 
     });
