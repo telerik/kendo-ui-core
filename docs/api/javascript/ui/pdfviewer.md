@@ -19,6 +19,21 @@ Kendo UI PDF Viewer is used to display a PDF file in the browser. It provides ab
 
 Specifies the PDF.JS configuration options. Including `pdfjs` is mandatory.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+        $("#pdfviewer").kendoPDFViewer({
+            pdfjsProcessing: {
+                file: ""
+            }
+        });
+    </script>
+
 ### pdfjsProcessing.file `Blob | byte[] | String`
 
 Specifies the default file to be displayed.
@@ -84,7 +99,7 @@ The height of the PDFViewer.
 
     <div id="pdf-viewer"></div>
     <script>
-        $("#pdfviewer").kendoPDFViewer({
+        $("#pdf-viewer").kendoPDFViewer({
             height: 800
         });
     </script>
@@ -97,7 +112,7 @@ Specifies the default page size if no PDF is displayed in the PDFViewer. The pag
 
     <div id="pdf-viewer"></div>
     <script>
-        $("#pdfviewer").kendoPDFViewer({
+        $("#pdf-viewer").kendoPDFViewer({
             defaultPageSize: {
                 width: 595,
                 height: 842
@@ -125,7 +140,7 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 
     <div id="pdf-viewer"></div>
     <script>
-        $("#pdfviewer").kendoPDFViewer({
+        $("#pdf-viewer").kendoPDFViewer({
             view: {
               type: "svg"
             }
@@ -151,7 +166,7 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
 
     <div id="pdf-viewer"></div>
     <script>
-        $("#pdfviewer").kendoPDFViewer({
+        $("#pdf-viewer").kendoPDFViewer({
             toolbar: {
                 items: [
                   "pager", "spacer", "open", "download"

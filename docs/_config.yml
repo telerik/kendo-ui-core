@@ -220,9 +220,12 @@ navigation:
     "controls/media":
         title: "Media"
         position: 12
+    "controls/pdf":
+        title: "PDF"
+        position: 13
     "controls/hybrid":
         title: "Hybrid UI"
-        position: 13
+        position: 14
     "controls/hybrid/styles":
         title: "Styles and Appearance"
         position: 5
@@ -579,6 +582,8 @@ navigation:
         title: "NumericTextBox"
     "*panelbar":
         title: "PanelBar"
+    "*pdfviewer":
+        title: "PDFViewer"
     "*pivotdatasource":
         title: "PivotDataSource"
     "*pivotconfigurator":
@@ -641,10 +646,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2019.1.220"
+cdnVersion: "2019.2.514"
 
 ## The MVC Core version used
-mvcCoreVersion: "2019.1.220"
+mvcCoreVersion: "2019.2.514"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'

@@ -78,6 +78,11 @@ navigation:
      "tag-helpers/media":
         title: "Media"
         position: 13
+     "tag-helpers/pdf":
+        title: "PDF"
+        position: 14
+     "tag-helpers/pdf/pdfviewer":
+        title: "PDFViewer"
      "html-helpers/data-management":
         title: "Data Management"
         position: 1
@@ -133,6 +138,11 @@ navigation:
      "html-helpers/media":
         title: "Media"
         position: 12
+     "html-helpers/pdf":
+        title: "PDF"
+        position: 14
+     "html-helpers/pdf/pdfviewer":
+        title: "PDFViewer"
      "how-to":
         title: "How To"
         position: 5
@@ -203,7 +213,7 @@ navigation:
      "*datepicker":
         title: "DatePicker"
      "*daterangepicker":
-        title: "DateRangePicker"		
+        title: "DateRangePicker"
      "*datetimepicker":
         title: "DateTimePicker"
      "*dialog":
