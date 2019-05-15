@@ -68,7 +68,7 @@ navigation:
      "helpers/datepicker":
         title: "DatePicker"
      "helpers/daterangepicker":
-        title: "DateRangePicker"		
+        title: "DateRangePicker"
      "helpers/datetimepicker":
         title: "DateTimePicker"
      "helpers/diagram":
@@ -179,6 +179,8 @@ navigation:
         title: "NumericTextBox"
      "helpers/panelbar":
         title: "PanelBar"
+     "helpers/pdfviewer":
+        title: "PDFViewer"
      "helpers/pivotgrid":
         title: "PivotGrid"
      "helpers/progressbar":
