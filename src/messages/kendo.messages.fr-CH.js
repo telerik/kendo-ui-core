@@ -1,5 +1,196 @@
 (function ($, undefined) {
-/* Filter cell operator messages */
+
+  /* FlatColorPicker messages */
+
+  if (kendo.ui.FlatColorPicker) {
+    kendo.ui.FlatColorPicker.prototype.options.messages =
+    $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "Sans couleur",
+      "clearColor": "Supprimer la couleur"
+    });
+    }
+  
+  /* ColorPicker messages */
+
+  if (kendo.ui.ColorPicker) {
+    kendo.ui.ColorPicker.prototype.options.messages =
+   $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+     "apply": "Appliquer",
+     "cancel": "Annuler",
+     "noColor": "Sans couleur",
+     "clearColor": "Supprimer la couleur"
+   });
+   }
+   
+  /* ColumnMenu messages */
+
+  if (kendo.ui.ColumnMenu) {
+    kendo.ui.ColumnMenu.prototype.options.messages =
+    $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
+      "columns": "Colonnes",
+      "sortAscending": "Tri croissant",
+      "sortDescending": "Tri décroissant",
+      "settings": "Paramètres de colonne",
+      "done": "Fini",
+      "lock": "Bloquer",
+      "unlock": "Ouvrir",
+      "filter": "Filters"
+    });
+    }
+  
+/* DateRangePicker messages */
+
+if (kendo.ui.DateRangePicker) {
+  kendo.ui.DateRangePicker.prototype.options.messages =
+  $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages,{
+    "startLabel": "Début",
+    "endLabel": "Fin"
+  });
+  }
+
+  /* Editor messages */
+
+  if (kendo.ui.Editor) {
+    kendo.ui.Editor.prototype.options.messages =
+    $.extend(true, kendo.ui.Editor.prototype.options.messages,{
+      "bold": "Gras",
+      "createLink": "Insérer un lien hypertexte",
+      "fontName": "Police",
+      "fontNameInherit": "(police héritée)",
+      "fontSize": "Taille de police",
+      "fontSizeInherit": "(taille héritée)",
+      "formatBlock": "Style du paragraphe",
+      "indent": "Augmenter le retrait",
+      "insertHtml": "Insérer HTML",
+      "insertImage": "Insérer image",
+      "insertOrderedList": "Liste numérotée",
+      "insertUnorderedList": "Liste à puces",
+      "italic": "Italique",
+      "justifyCenter": "Centrer",
+      "justifyFull": "Justifier",
+      "justifyLeft": "Aligner le texte à gauche",
+      "justifyRight": "Aligner le texte à droite",
+      "outdent": "Diminuer le retrait",
+      "strikethrough": "Barré",
+      "styles": "Styles",
+      "subscript": "Subscript",
+      "superscript": "Superscript",
+      "underline": "Souligné",
+      "unlink": "Supprimer le lien hypertexte",
+      "deleteFile": "Êtes-vous sûr de vouloir supprimer \"{0}\"?",
+      "directoryNotFound": "Un répertoire avec ce nom n'a pas été trouvé.",
+      "emptyFolder": "Vider le dossier",
+      "invalidFileType": "Le fichier sélectionné \"{0}\" n'est pas valide. Les types de fichiers supportés sont {1}.",
+      "orderBy": "Organiser par:",
+      "orderByName": "Nom",
+      "orderBySize": "Taille",
+      "overwriteFile": "Un fichier avec le nom \"{0}\" existe déjà dans le répertoire courant. Voulez-vous le remplacer?",
+      "uploadFile": "Télécharger",
+      "backColor": "Couleur de fond",
+      "foreColor": "Couleur",
+      "dialogButtonSeparator": "Ou",
+      "dialogCancel": "Fermer",
+      "dialogInsert": "Insérer",
+      "imageAltText": "Le texte de remplacement",
+      "imageWebAddress": "Adresse Web",
+      "imageWidth": "Largeur (px)",
+      "imageHeight": "Hauteur (px)",
+      "linkOpenInNewWindow": "Ouvrir dans une nouvelle fenêtre",
+      "linkText": "Text",
+      "linkToolTip": "Info-bulle",
+      "linkWebAddress": "Adresse Web",
+      "search": "Search",
+      "createTable": "Insérer un tableau",
+      "addColumnLeft": "Ajouter colonne à gauche",
+      "addColumnRight": "Ajouter colonne à droite",
+      "addRowAbove": "Ajouter ligne au-dessus",
+      "addRowBelow": "Ajouter ligne au-dessous",
+      "deleteColumn": "Supprimer la colonne",
+      "deleteRow": "Supprimer la ligne",
+      "dropFilesHere": "drop files here to upload",
+      "formatting": "Format",
+      "viewHtml": "View HTML",
+      "dialogUpdate": "Update",
+      "insertFile": "Insérer un Fichier",
+      "dialogOk": "OK",
+      "tableWizard": "Assistant de tableau",
+      "tableTab": "Table",
+      "cellTab": "Cellule",
+      "accessibilityTab": "Accessibilité",
+      "caption": "Sous-titre",
+      "summary": "Sommaire",
+      "width": "Largeur",
+      "height": "Hauteur",
+      "cellSpacing": "Espacement des cellules",
+      "cellPadding": "Rembourrage des cellules",
+      "cellMargin": "Marge des cellules",
+      "alignment": "Alignement",
+      "background": "Fond",
+      "cssClass": "CSS Classe",
+      "id": "Id",
+      "border": "Bordure",
+      "borderStyle": "Style de bordure",
+      "collapseBorders": "Rétracter bordures",
+      "wrapText": "Renvoi à la ligne",
+      "associateCellsWithHeaders": "Cellules associées aux entêtes",
+      "alignLeft": "Aligner à gauche",
+      "alignCenter": "Aligner le centre",
+      "alignRight": "Aligner à droite",
+      "alignLeftTop": "Aligner à gauche et haut",
+      "alignCenterTop": "Aligner le centre et haut",
+      "alignRightTop": "Aligner à droite et haut",
+      "alignLeftMiddle": "Aligner à gauche et milieu",
+      "alignCenterMiddle": "Aligner le centre et milieu",
+      "alignRightMiddle": "Aligner à droite et milieu",
+      "alignLeftBottom": "Aligner à gauche et bas",
+      "alignCenterBottom": "Aligner le centre et bas",
+      "alignRightBottom": "Aligner à droite et bas",
+      "alignRemove": "Retirer alignement",
+      "columns": "Colonnes",
+      "rows": "Lignes",
+      "selectAllCells": "Sélectionner toutes les cellules",
+      "cleanFormatting": "Suppression du formatage",
+      "fileTitle":"Titre",
+      "overflowAnchor": "autres..."
+    });
+  }
+
+  /* FileBrowser messages */
+
+  if (kendo.ui.FileBrowser) {
+    kendo.ui.FileBrowser.prototype.options.messages =
+    $.extend(true, kendo.ui.FileBrowser.prototype.options.messages, browserMessages,{
+      "uploadFile" : "Charger",
+      "orderBy" : "Trier par",
+      "orderByName" : "Nom",
+      "orderBySize" : "Taille",
+      "directoryNotFound" : "Aucun répértoire de ce nom.",
+      "emptyFolder" : "Répertoire vide",
+      "deleteFile" : 'Etes-vous sûr de vouloir supprimer "{0}"?',
+      "invalidFileType" : "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
+      "overwriteFile" : "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
+      "dropFilesHere" : "glissez les fichiers ici pour les charger",
+      "search" : "Recherche"
+    });
+  }
+
+  /* FilterCell messages */
+
+  if (kendo.ui.FilterCell) {
+    kendo.ui.FilterCell.prototype.options.messages =
+    $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
+      "filter": "Filtrer",
+      "clear": "Effacer filtre",
+      "isFalse": "est fausse",
+      "isTrue": "est vrai",
+      "operator": "Opérateur"
+    });
+  }
+  
+  
+  /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.operators =
@@ -34,7 +225,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "isnull": "est nul",
     "isnotnull": "c nul",
     "isempty": "Est vide",
-    "isnotempty": "N’est pas vide"
+    "isnotempty": "N’est pas vide",
+    "isnotnullorempty": "a une valeur",
+    "isnullorempty": "N'a aucune valeur"
   },
   "enums": {
     "eq": "Est égal à",
@@ -45,6 +238,26 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
 });
 }
 
+  /* FilterMenu messages */
+
+  if (kendo.ui.FilterMenu) {
+    kendo.ui.FilterMenu.prototype.options.messages =
+    $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
+      "filter": "Filtrer",
+      "and": "Et",
+      "clear": "Effacer filtre",
+      "info": "Afficher les lignes avec la valeur qui",
+      "title": "Afficher les lignes avec la valeur qui",
+      "selectValue": "-Sélectionner-",
+      "isFalse": "est fausse",
+      "isTrue": "est vrai",
+      "or": "Ou",
+      "cancel": "Annuler",
+      "operator": "Opérateur",
+      "value": "Valeur"
+    });
+  }
+  
 /* Filter menu operator messages */
 
 if (kendo.ui.FilterMenu) {
@@ -80,7 +293,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "isnull": "Est nul",
     "isnotnull": "N’est pas nul" ,
     "isempty": "Est vide",
-    "isnotempty": "N’est pas vide"
+    "isnotempty": "N’est pas vide",
+    "isnotnullorempty": "a une valeur",
+    "isnullorempty": "N'a aucune valeur"
   },
   "enums": {
     "eq": "Est égal à",
@@ -91,26 +306,156 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 });
 }
 
-/* ColumnMenu messages */
 
-if (kendo.ui.ColumnMenu) {
-kendo.ui.ColumnMenu.prototype.options.messages =
-$.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "columns": "Colonnes",
-  "sortAscending": "Tri croissant",
-  "sortDescending": "Tri décroissant",
-  "settings": "Paramètres de colonne",
-  "done": "Done",
-  "lock": "Bloquer",
-  "unlock": "Ouvrir"
-});
-}
+  /* FilterMultiCheck messages */
 
-/* RecurrenceEditor messages */
+  if (kendo.ui.FilterMultiCheck) {
+    kendo.ui.FilterMultiCheck.prototype.options.messages =
+    $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+      "checkAll": "Choisir toutes",
+      "clear": "Effacer filtre",
+      "filter": "Filtrer",
+      "search": "Recherche"
+    });
+  }
+  
+/* Grid messages */
+
+if (kendo.ui.Grid) {
+  kendo.ui.Grid.prototype.options.messages =
+  $.extend(true, kendo.ui.Grid.prototype.options.messages,{
+    "commands": {
+      "create": "Insérer",
+      "destroy": "Effacer",
+      "canceledit": "Annuler",
+      "update": "Mettre à jour",
+      "edit": "Éditer",
+      "excel": "Export vers Excel",
+      "pdf": "Export en PDF",
+      "select": "Sélectionner",
+      "cancel": "Annuler les modifications",
+      "save": "Enregistrer les modifications"
+    },
+    "editable": {
+      "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
+      "cancelDelete": "Annuler",
+      "confirmDelete": "Effacer"
+    },
+    "noRecords": "Aucun enregistrement disponible.",
+    "expandCollapseColumnHeader": "",
+    "groupHeader": "Appuyez sur ctrl + espace pour grouper",
+    "ungroupHeader": "Appuyez sur ctrl + espace pour dégrouper"  
+  });
+  }
+  
+  /* TreeList messages */
+
+  if (kendo.ui.TreeList) {
+    kendo.ui.TreeList.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
+      "noRows": "Aucun enregistrement à afficher",
+      "loading": "Chargement...",
+      "requestFailed": "La requête a échoué.",
+      "retry": "Réessayer",
+      "commands": {
+          "edit": "Modifier",
+          "update": "Mettre à jour",
+          "canceledit": "Annuler",
+          "create": "Créer",
+          "createchild": "Créer un élément enfant",
+          "destroy": "Supprimer",
+          "excel": "Export vers Excel",
+          "pdf": "Export en PDF"
+      }
+    });
+  }
+
+  /* Groupable messages */
+
+  if (kendo.ui.Groupable) {
+    kendo.ui.Groupable.prototype.options.messages =
+    $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
+      "empty": "Faites glisser un en-tête de colonne et déposer ici pour grouper par cette colonne."
+    });
+  }
+  
+  /* NumericTextBox messages */
+
+  if (kendo.ui.NumericTextBox) {
+    kendo.ui.NumericTextBox.prototype.options =
+      $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
+        "upArrowText": "Augmenter la valeur",
+        "downArrowText": "Diminuer la valeur"
+      });
+  }
+
+  /* MediaPlayer messages */
+
+  if (kendo.ui.MediaPlayer) {
+    kendo.ui.MediaPlayer.prototype.options.messages =
+    $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+      "pause": "Pause",
+      "play": "Jouer",
+      "mute": "Muette",
+      "unmute": "Non Muette",
+      "quality": "qualité",
+      "fullscreen": "écran"
+    });
+  }
+
+  /* Pager messages */
+
+  if (kendo.ui.Pager) {
+    kendo.ui.Pager.prototype.options.messages =
+    $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+      "allPages": "Tous",
+      "page": "Page",
+      "display": "Afficher les items {0} - {1} de {2}",
+      "of": "de {0}",
+      "empty": "Aucun enregistrement à afficher.",
+      "refresh": "Actualiser",
+      "first": "Aller à la première page",
+      "itemsPerPage": "articles par page",
+      "last": "Aller à la dernière page",
+      "next": "Aller à la page suivante",
+      "previous": "Aller à la page précédente",
+      "morePages": "Plusieurs pages"
+    });
+  }
+
+  /* TreeListPager messages */
+
+  if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+      "allPages": "Tous",
+      "page": "Page",
+      "display": "Afficher les items {0} - {1} de {2}",
+      "of": "de {0}",
+      "empty": "Aucun enregistrement à afficher.",
+      "refresh": "Actualiser",
+      "first": "Aller à la première page",
+      "itemsPerPage": "articles par page",
+      "last": "Aller à la dernière page",
+      "next": "Aller à la page suivante",
+      "previous": "Aller à la page précédente",
+      "morePages": "Plusieurs pages"
+    });
+  }
+
+  /* RecurrenceEditor messages */
 
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "frequencies": {
+    "never": "Jamais",
+    "hourly": "Par heure",
+    "daily": "Une fois par jour",
+    "weekly": "Une fois par semaine",
+    "monthly": "Une fois par mois",
+    "yearly": "Une fois par an"
+  },
   "daily": {
     "interval": "jour(s)",
     "repeatEvery": "Répéter chaque:"
@@ -123,12 +468,9 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "on": "Sur",
     "mobileLabel": "Ends"
   },
-  "frequencies": {
-    "daily": "Une fois par jour",
-    "monthly": "Une fois par mois",
-    "never": "Jamais",
-    "weekly": "Une fois par semaine",
-    "yearly": "Une fois par an"
+  "hourly": {
+    "repeatEvery": "Répéter chaque:",
+    "interval": " heure(s)"
   },
   "monthly": {
     "day": "Jour",
@@ -162,332 +504,153 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 });
 }
 
-/* Grid messages */
-
-if (kendo.ui.Grid) {
-kendo.ui.Grid.prototype.options.messages =
-$.extend(true, kendo.ui.Grid.prototype.options.messages,{
-  "commands": {
-    "create": "Insérer",
-    "destroy": "Effacer",
-    "canceledit": "Annuler",
-    "update": "Mettre à jour",
-    "edit": "Éditer",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
-    "select": "Sélectionner",
-    "cancel": "Annuler les modifications",
-    "save": "Enregistrer les modifications"
-  },
-  "editable": {
-    "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
-    "cancelDelete": "Annuler",
-    "confirmDelete": "Effacer"
-  },
-  "noRecords": "Aucun enregistrement disponible."
-});
-}
-
-/* Pager messages */
-
-if (kendo.ui.Pager) {
-kendo.ui.Pager.prototype.options.messages =
-$.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "All",
-  "page": "Page",
-  "display": "Afficher les items {0} - {1} de {2}",
-  "of": "de {0}",
-  "empty": "Aucun enregistrement à afficher.",
-  "refresh": "Actualiser",
-  "first": "Aller à la première page",
-  "itemsPerPage": "articles par page",
-  "last": "Aller à la dernière page",
-  "next": "Aller à la page suivante",
-  "previous": "Aller à la page précédente",
-  "morePages": "Plusieurs pages"
-});
-}
-
-/* TreeListPager messages */
-
-if (kendo.ui.TreeListPager) {
-kendo.ui.TreeListPager.prototype.options.messages =
-$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
-  "allPages": "All",
-  "page": "Page",
-  "display": "Afficher les items {0} - {1} de {2}",
-  "of": "de {0}",
-  "empty": "Aucun enregistrement à afficher.",
-  "refresh": "Actualiser",
-  "first": "Aller à la première page",
-  "itemsPerPage": "articles par page",
-  "last": "Aller à la dernière page",
-  "next": "Aller à la page suivante",
-  "previous": "Aller à la page précédente",
-  "morePages": "Plusieurs pages"
-});
-}
-
-/* FilterCell messages */
-
-if (kendo.ui.FilterCell) {
-kendo.ui.FilterCell.prototype.options.messages =
-$.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
-  "filter": "Filtrer",
-  "clear": "Effacer filtre",
-  "isFalse": "est fausse",
-  "isTrue": "est vrai",
-  "operator": "Opérateur"
-});
-}
-
-/* FilterMenu messages */
-
-if (kendo.ui.FilterMenu) {
-kendo.ui.FilterMenu.prototype.options.messages =
-$.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
-  "filter": "Filtrer",
-  "and": "Et",
-  "clear": "Effacer filtre",
-  "info": "Afficher les lignes avec la valeur qui",
-  "title": "Afficher les lignes avec la valeur qui",
-  "selectValue": "-Sélectionner-",
-  "isFalse": "est fausse",
-  "isTrue": "est vrai",
-  "or": "Ou",
-  "cancel": "Annuler",
-  "operator": "Opérateur",
-  "value": "Valeur"
-});
-}
-
-/* FilterMultiCheck messages */
-
-if (kendo.ui.FilterMultiCheck) {
-kendo.ui.FilterMultiCheck.prototype.options.messages =
-$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
-  "checkAll": "Choisir toutes",
-  "clear": "Effacer filtre",
-  "filter": "Filtrer",
-  "search": "Recherche"
-});
-}
-
-/* Groupable messages */
-
-if (kendo.ui.Groupable) {
-kendo.ui.Groupable.prototype.options.messages =
-$.extend(true, kendo.ui.Groupable.prototype.options.messages,{
-  "empty": "Faites glisser un en-tête de colonne et déposer ici pour grouper par cette colonne."
-});
-}
-
-/* Editor messages */
-
-if (kendo.ui.Editor) {
-kendo.ui.Editor.prototype.options.messages =
-$.extend(true, kendo.ui.Editor.prototype.options.messages,{
-  "bold": "Gras",
-  "createLink": "Insérer un lien hypertexte",
-  "fontName": "Police",
-  "fontNameInherit": "(police héritée)",
-  "fontSize": "Taille de police",
-  "fontSizeInherit": "(taille héritée)",
-  "formatBlock": "Style du paragraphe",
-  "indent": "Augmenter le retrait",
-  "insertHtml": "Insérer HTML",
-  "insertImage": "Insérer image",
-  "insertOrderedList": "Liste numérotée",
-  "insertUnorderedList": "Liste à puces",
-  "italic": "Italique",
-  "justifyCenter": "Centrer",
-  "justifyFull": "Justifier",
-  "justifyLeft": "Aligner le texte à gauche",
-  "justifyRight": "Aligner le texte à droite",
-  "outdent": "Diminuer le retrait",
-  "strikethrough": "Barré",
-  "styles": "Styles",
-  "subscript": "Subscript",
-  "superscript": "Superscript",
-  "underline": "Souligné",
-  "unlink": "Supprimer le lien hypertexte",
-  "deleteFile": "Êtes-vous sûr de vouloir supprimer \"{0}\"?",
-  "directoryNotFound": "Un répertoire avec ce nom n'a pas été trouvé.",
-  "emptyFolder": "Vider le dossier",
-  "invalidFileType": "Le fichier sélectionné \"{0}\" n'est pas valide. Les types de fichiers supportés sont {1}.",
-  "orderBy": "Organiser par:",
-  "orderByName": "Nom",
-  "orderBySize": "Taille",
-  "overwriteFile": "Un fichier avec le nom \"{0}\" existe déjà dans le répertoire courant. Voulez-vous le remplacer?",
-  "uploadFile": "Télécharger",
-  "backColor": "Couleur de fond",
-  "foreColor": "Couleur",
-  "dialogButtonSeparator": "Ou",
-  "dialogCancel": "Fermer",
-  "dialogInsert": "Insérer",
-  "imageAltText": "Le texte de remplacement",
-  "imageWebAddress": "Adresse Web",
-  "imageWidth": "Largeur (px)",
-  "imageHeight": "Hauteur (px)",
-  "linkOpenInNewWindow": "Ouvrir dans une nouvelle fenêtre",
-  "linkText": "Text",
-  "linkToolTip": "Info-bulle",
-  "linkWebAddress": "Adresse Web",
-  "search": "Search",
-  "createTable": "Insérer un tableau",
-  "addColumnLeft": "Add column on the left",
-  "addColumnRight": "Add column on the right",
-  "addRowAbove": "Add row above",
-  "addRowBelow": "Add row below",
-  "deleteColumn": "Delete column",
-  "deleteRow": "Delete row",
-  "dropFilesHere": "drop files here to upload",
-  "formatting": "Format",
-  "viewHtml": "View HTML",
-  "dialogUpdate": "Update",
-  "insertFile": "Insert file",
-  "dialogOk": "OK",
-  "tableWizard": "Assistant de tableau",
-  "tableTab": "Table",
-  "cellTab": "Cellule",
-  "accessibilityTab": "Accessibilité",
-  "caption": "Sous-titre",
-  "summary": "Sommaire",
-  "width": "Largeur",
-  "height": "Hauteur",
-  "cellSpacing": "Espacement des cellules",
-  "cellPadding": "Rembourrage des cellules",
-  "cellMargin": "Marge des cellules",
-  "alignment": "Alignement",
-  "background": "Fond",
-  "cssClass": "CSS Classe",
-  "id": "Id",
-  "border": "Bordure",
-  "borderStyle": "Style de bordure",
-  "collapseBorders": "Rétracter bordures",
-  "wrapText": "Renvoi à la ligne",
-  "associateCellsWithHeaders": "Cellules associées aux entêtes",
-  "alignLeft": "Aligner à gauche",
-  "alignCenter": "Aligner le centre",
-  "alignRight": "Aligner à droite",
-  "alignLeftTop": "Aligner à gauche et haut",
-  "alignCenterTop": "Aligner le centre et haut",
-  "alignRightTop": "Aligner à droite et haut",
-  "alignLeftMiddle": "Aligner à gauche et milieu",
-  "alignCenterMiddle": "Aligner le centre et milieu",
-  "alignRightMiddle": "Aligner à droite et milieu",
-  "alignLeftBottom": "Aligner à gauche et bas",
-  "alignCenterBottom": "Aligner le centre et bas",
-  "alignRightBottom": "Aligner à droite et bas",
-  "alignRemove": "Retirer alignement",
-  "columns": "Colonnes",
-  "rows": "Lignes",
-  "selectAllCells": "Sélectionner toutes les cellules"
-});
-}
-
-/* FileBrowser and ImageBrowser messages */
-
-var browserMessages = {
-  "uploadFile" : "Charger",
-  "orderBy" : "Trier par",
-  "orderByName" : "Nom",
-  "orderBySize" : "Taille",
-  "directoryNotFound" : "Aucun répértoire de ce nom.",
-  "emptyFolder" : "Répertoire vide",
-  "deleteFile" : 'Etes-vous sûr de vouloir supprimer "{0}"?',
-  "invalidFileType" : "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
-  "overwriteFile" : "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
-  "dropFilesHere" : "glissez les fichiers ici pour les charger",
-  "search" : "Recherche"
-};
-
-if (kendo.ui.FileBrowser) {
-kendo.ui.FileBrowser.prototype.options.messages =
-$.extend(true, kendo.ui.FileBrowser.prototype.options.messages, browserMessages);
-}
-
-if (kendo.ui.ImageBrowser) {
-kendo.ui.ImageBrowser.prototype.options.messages =
-$.extend(true, kendo.ui.ImageBrowser.prototype.options.messages, browserMessages);
-}
-
-
-/* Upload messages */
-
-if (kendo.ui.Upload) {
-kendo.ui.Upload.prototype.options.localization =
-$.extend(true, kendo.ui.Upload.prototype.options.localization,{
-  "cancel": "Annuler",
-  "dropFilesHere": "déposer les fichiers à télécharger ici",
-  "remove": "Retirer",
-  "retry": "Réessayer",
-  "select": "Sélectionner...",
-  "statusFailed": "échoué",
-  "statusUploaded": "téléchargé",
-  "statusUploading": "téléchargement",
-  "uploadSelectedFiles": "Télécharger des fichiers",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
-});
-}
-
 /* Scheduler messages */
 
 if (kendo.ui.Scheduler) {
-kendo.ui.Scheduler.prototype.options.messages =
-$.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
-  "allDay": "toute la journée",
-  "cancel": "Annuler",
-  "editable": {
-    "confirmation": "Etes-vous sûr de vouloir supprimer cet élément?"
-  },
-  "date": "Date",
-  "destroy": "Effacer",
-  "editor": {
-    "allDayEvent": "Toute la journée",
-    "description": "Description",
-    "editorTitle": "Event",
-    "end": "Fin",
-    "endTimezone": "End timezone",
-    "repeat": "Répéter",
-    "separateTimezones": "Use separate start and end time zones",
-    "start": "Début",
-    "startTimezone": "Start timezone",
-    "timezone": " ",
-    "timezoneEditorButton": "Time zone",
-    "timezoneEditorTitle": "Timezones",
-    "title": "Titre",
-    "noTimezone": "No timezone"
-  },
-  "event": "Evènement",
-  "recurrenceMessages": {
-      "deleteRecurring": "Voulez-vous supprimer seulement cet évènement ou toute la série?",
-      "deleteWindowOccurrence": "Suppression de l'élément courant",
-      "deleteWindowSeries": "Suppression de toute la série",
-      "deleteWindowTitle": "Suppression d'un élément récurrent",
-      "editRecurring": "Voulez-vous modifier seulement cet évènement ou toute la série?",
+  kendo.ui.Scheduler.prototype.options.messages =
+  $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
+    "allDay": "toute la journée",
+    "cancel": "Annuler",
+    "editable": {
+      "confirmation": "Etes-vous sûr de vouloir supprimer cet élément?"
+    },
+    "date": "Date",
+    "destroy": "Effacer",
+    "editor": {
+      "allDayEvent": "Toute la journée",
+      "description": "Description",
+      "editorTitle": "Evènement",
+      "end": "Fin",
+      "endTimezone": "End timezone",
+      "repeat": "Répéter",
+      "separateTimezones": "Use separate start and end time zones",
+      "start": "Début",
+      "startTimezone": "Start timezone",
+      "timezone": " ",
+      "timezoneEditorButton": "Fuseau horaire",
+      "timezoneEditorTitle": "Fuseaux horaires",
+      "title": "Titre",
+      "noTimezone": "Pas de fuseau horaire"
+    },
+    "event": "Evènement",
+    "recurrenceMessages": {
+        "deleteRecurring": "Voulez-vous supprimer seulement cet évènement ou toute la série?",
+        "deleteWindowOccurrence": "Suppression de l'élément courant",
+        "deleteWindowSeries": "Suppression de toute la série",
+        "deleteWindowTitle": "Suppression d'un élément récurrent",
+        "editRecurring": "Voulez-vous modifier seulement cet évènement ou toute la série?",
+        "editWindowOccurrence": "Modifier l'occurrence courante",
+        "editWindowSeries": "Modifier la série",
+        "editWindowTitle": "Modification de l'élément courant",
+        "deleteRecurringConfirmation": "Êtes-vous sûr de vouloir supprimer cet événement?",
+        "deleteSeriesConfirmation": "Êtes-vous sûr de vouloir effacer toute la série?",
+        "resetSeriesWindowTitle": "Réinitialiser la série"
+    },
+    "save": "Sauvegarder",
+    "time": "Time",
+    "today": "Aujourd'hui",
+    "views": {
+      "agenda": "Agenda",
+      "day": "Jour",
+      "month": "Mois",
+      "week": "Semaine",
+      "workWeek": "Semaine de travail"
+    },
+    "deleteWindowTitle": "Suppression de l'élément",
+    "showFullDay": "Montrer toute la journée",
+    "showWorkDay": "Montrer les heures ouvrables",
+    "ariaSlotLabel": "Sélectionné de {0:t} à {1:t}",
+    "ariaEventLabel": "{0} {1:D} à {2:t}",
+    "resetSeries": "Série Reset"
+  });
+  }
+  
+  /* Slider messages */
 
-      "editWindowOccurrence": "Modifier l'occurrence courante",
-      "editWindowSeries": "Modifier la série",
-      "editWindowTitle": "Modification de l'élément courant"
+  if (kendo.ui.Slider) {
+    kendo.ui.Slider.prototype.options =
+      $.extend(true, kendo.ui.Slider.prototype.options,{
+        "increaseButtonTitle": "Augmentation",
+        "decreaseButtonTitle": "Diminution"
+      });
+  }
+  
+  /* ListBox messaages */
+  
+  if (kendo.ui.ListBox) {
+    kendo.ui.ListBox.prototype.options.messages =
+      $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+        "tools": {
+          "remove": "Supprimer",
+          "moveUp": "Déplacer vers le haut",
+          "moveDown": "Déplacer vers le bas",
+          "transferTo": "Transférer à",
+          "transferFrom": "Transférer de",
+          "transferAllTo": "Transférer tout à",
+          "transferAllFrom": "Transférer tout de"
+        }
+      });
+  }
+  
+  /* TreeView messages */
 
-  },
-  "save": "Sauvegarder",
-  "time": "Time",
-  "today": "Aujourd'hui",
-  "views": {
-    "agenda": "Agenda",
-    "day": "Jour",
-    "month": "Mois",
-    "week": "Semaine",
-    "workWeek": "Semaine de travail"
-  },
-  "deleteWindowTitle": "Suppression de l'élément",
-  "showFullDay": "Montrer toute la journée",
-  "showWorkDay": "Montrer les heures ouvrables"
-});
-}
+  if (kendo.ui.TreeView) {
+    kendo.ui.TreeView.prototype.options.messages =
+      $.extend(true, kendo.ui.TreeView.prototype.options.messages,{
+        "loading": "Chargement...",
+        "requestFailed": "Echec de la demande.",
+        "retry": "Réessayer"
+      });
+  }
+  
+  /* Upload messages */
+
+  if (kendo.ui.Upload) {
+    kendo.ui.Upload.prototype.options.localization =
+      $.extend(true, kendo.ui.Upload.prototype.options.localization, {
+        "cancel": "Annuler",
+        "dropFilesHere": "déposer les fichiers à télécharger ici",
+        "remove": "Retirer",
+        "retry": "Réessayer",
+        "select": "Sélectionner...",
+        "statusFailed": "échoué",
+        "statusUploaded": "téléchargé",
+        "statusUploading": "téléchargement",
+        "uploadSelectedFiles": "Télécharger des fichiers",
+        "clearSelectedFiles": "Supprimer",
+        "statusWarning": "Avertissement",
+        "headerStatusUploading": "Téléchargement...",
+        "headerStatusUploaded": "Complété",
+        "invalidMaxFileSize": "Le fichier est trop volumineux.",
+        "invalidMinFileSize": "Le fichier est trop petit.",
+        "invalidFileExtension": "Type de fichier non autorisé"
+      });
+  }
+
+  /* Validator messages */
+
+  if (kendo.ui.Validator) {
+    kendo.ui.Validator.prototype.options.messages =
+      $.extend(true, kendo.ui.Validator.prototype.options.messages, {
+        "required": "{0} est requis",
+        "pattern": "{0} n'est pas valide",
+        "min": "{0} doit être plus grand ou égal à {1}",
+        "max": "{0} doit être plus petit ou égal à {1}",
+        "step": "{0} n'est pas valide",
+        "email": "{0} n'est pas un courriel valide",
+        "url": "{0} n'est pas une adresse web valide",
+        "date": "{0} n'est pas une date valide",
+        "dateCompare": "La date de fin doit être postérieure à la date de début"
+      });
+  }
+
+  /* kendo.ui.progress method */
+  if (kendo.ui.progress) {
+    kendo.ui.progress.messages =
+      $.extend(true, kendo.ui.progress.messages, {
+        loading: "Chargement..."
+      });
+  }
 
 /* Dialog */
 
@@ -498,6 +661,14 @@ $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
 });
 }
 
+  /* Calendar */
+  if (kendo.ui.Calendar) {
+    kendo.ui.Calendar.prototype.options.messages =
+      $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+        "weekColumnHeader": ""
+      });
+  }
+  
 /* Alert */
 
 if (kendo.ui.Alert) {
@@ -525,5 +696,19 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
   "cancel": "Annuler"
 });
 }
+  /* DateInput */
+  if (kendo.ui.DateInput) {
+    kendo.ui.DateInput.prototype.options.messages =
+      $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+        "year": "année",
+        "month": "mois",
+        "day": "jour",
+        "weekday": "jour de la semaine",
+        "hour": "heure",
+        "minute": "minute",
+        "second": "second",
+        "dayperiod": "AM/PM"
+      });
+  }
 
 })(window.kendo.jQuery);
