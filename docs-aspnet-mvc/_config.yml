@@ -48,6 +48,8 @@ navigation:
         title: "Barcode"
      "helpers/button":
         title: "Button"
+     "helpers/buttongroup":
+        title: "ButtonGroup"
      "helpers/calendar":
         title: "Calendar"
      "helpers/chart":

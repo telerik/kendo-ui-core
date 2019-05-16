@@ -3,7 +3,7 @@ title: Custom Functions
 page_title: Custom Functions | Kendo UI Spreadsheet
 description: "Learn how to make your own JavaScript functions in the Kendo UI Spreadsheet widget."
 slug: custom_functions_spreadsheet_widget
-position: 4
+position: 6
 ---
 
 # Custom Functions
@@ -99,7 +99,7 @@ If you call `=TRUNCATE(12.634)`, the result is `12`. You can also call `=TRUNCAT
 
 ### Getting Error Values
 
-By default, if an argument is an error, your function is not called and that error is returned.  
+By default, if an argument is an error, your function is not called and that error is returned.
 
 ###### Example
 
