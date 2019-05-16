@@ -33,8 +33,6 @@ In specific scenarios you can set a height style to the scrollable data area eit
 
 You can make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, [remove the default data area height](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). Instead of the `GridID`, you can also use the `.k-grid` class to target all widget instances.
 
-###### Example
-
     #GridID .k-grid-content
     {
         min-height: 100px;
@@ -51,8 +49,6 @@ You can make the Grid expand and shrink vertically according to the number of it
   * If the vertical space that is available for the Grid depends on a custom resizing of the layout, which is controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked columns.
 
 The `resize` method works for the Kendo UI versions after the Kendo UI Q3 2013 release. For earlier versions, instead of `resize`, use the following approach which practically functions in the same way. For more information, refer to the article on [how to resize the Grid when the window is resized]({% slug howto_resize_whenthe_windowis_resized_grid %}).
-
-###### Example
 
     $(window).resize(function() {
         var gridElement = $("#GridID"),

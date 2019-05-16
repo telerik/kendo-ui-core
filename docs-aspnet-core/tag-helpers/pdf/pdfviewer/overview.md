@@ -27,7 +27,7 @@ The PDFViewer consists of a toolbar and a scrollable container that wraps the pa
 
 ## Basic Usage
 
-While initializing the widget using the HTML helper, choose the PDF processing library and setup its settings. The below example demonstrates a PDFViewer tag helper using the `PDF.JS` library:
+While initializing the widget using the tag helper, choose the PDF processing library and setup its settings. The below example demonstrates a PDFViewer tag helper using the `PDF.JS` library:
 
 ###### Example
 

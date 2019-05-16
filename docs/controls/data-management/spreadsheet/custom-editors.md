@@ -3,7 +3,7 @@ title: Custom Cell Editors
 page_title: Custom Cell Editors | Kendo UI Spreadsheet
 description: "Define custom cell editors in a Kendo UI Spreadsheet widget."
 slug: custom_editors_spreadsheet_widget
-position: 3
+position: 5
 ---
 
 # Custom Cell Editors

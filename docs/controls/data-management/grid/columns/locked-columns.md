@@ -29,12 +29,12 @@ Locked columns cannot be scrolled on touch because they are wrapped in a contain
 
 Locked columns rely on synchronizing the row height of the frozen and non-frozen parts of the Grid. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise, the synchronization might not work properly because of sub-pixel issues.
 
-###### Example
-
+```
 div.k-grid td
 {
   line-height: 18px;
 }
+```
 
 When you implement custom code and rely on selectors or target the Grid table, the Grid creates separate tables for its locked and scrollable sections. The locked columns are inside a `.k-grid-content-locked` element and the scrollable content is inside a `.k-grid-content` element.
 

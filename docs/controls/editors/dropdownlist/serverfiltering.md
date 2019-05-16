@@ -31,8 +31,6 @@ Displaying a subset of the whole data is useful to apply for large datasets whic
 
 Server filtering also enables you to bind the DropDownList to just one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text which boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the [`data`](/api/javascript/data/datasource/configuration/transport.read.data) callback of the DataSource.
 
-###### Example
-
 ```javascript
 data: function() {
   // The selectedValue is used on the server to filter the source and to return only the matching data item.

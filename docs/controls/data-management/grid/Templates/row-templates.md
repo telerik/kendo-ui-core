@@ -20,8 +20,6 @@ If you initialize the Grid from a `<div>` element, you can format any cell withi
 
 The following example demonstrates how to use a template for formatting the email address as a hyperlink through a template declared in a `script` block.
 
-###### Example
-
     <script id="template" type="text/x-kendo-tmpl">
         <tr>
             <td>
@@ -38,11 +36,9 @@ The following example demonstrates how to use a template for formatting the emai
 
 The following example demonstrates how to specify the previous approach as a template for each row by passing it in to the `rowTemplate` option and by initializing it with the `kendo.template` function. As a result, the email address is an interactive hyperlink which opens a new email message when the user clicks it.
 
-###### Example
-
     $("#grid").kendoGrid({
         rowTemplate: kendo.template($("#template").html()),
-       // other configuration
+       // Other configuration.
     });
 
 **Figure 1: A Grid with an applied row template**

@@ -38,8 +38,6 @@ For more information, refer to the [online demo on Excel export](http://demos.te
 
 The following example demonstrates how to enable the Excel export functionality of the Grid.
 
-###### Example
-
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
@@ -82,8 +80,6 @@ With regard to its Excel export, the Grid enables you to:
 By default, the Grid exports only the current page of data. To export all pages, set the [`allPages`](/api/javascript/ui/grid/configuration/excel.allpages) option to `true`.
 
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use [server-side export](#server-side-processing).
-
-###### Example
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
@@ -129,8 +125,6 @@ Each row has a `type` field that can be used to distinguish between the various 
 - `"group-header"`
 - `"group-footer"`
 - `"data"`
-
-###### Example
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
@@ -180,8 +174,7 @@ By default, each Grid exports its content in a separate Excel sheet. For more in
 
 To send the generated file to a remote service, prevent the default file saving and post the `base64` encoded contents.
 
-###### Example
-
+```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
     <div id="grid"></div>
@@ -216,6 +209,7 @@ To send the generated file to a remote service, prevent the default file saving 
             }
         });
     </script>
+```
 
 ## Server-Side Processing
 

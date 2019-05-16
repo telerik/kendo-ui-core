@@ -15,8 +15,6 @@ The Kendo UI Grid provides a templating engine and a built-in DataSource which a
 
 To bind the Grid to remote data, specify the `dataSource` option. You can either create the data source outside the widget, or pass it in it. If multiple widgets are bound to the same data set, you have to create the data source as an object that you can refer to in different widgets. If the Grid is the only item that is bound to the data, create it inline.
 
-###### Example
-
     $("#grid").kendoGrid({
          dataSource: {
              transport: {
@@ -52,9 +50,6 @@ The following example demonstrates how to implement the suggested approach. In t
 * The `data` functions as the JSON element that will be repeated&mdash;based on this element, Kendo UI binds each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
 * The `model` describes the structure of the data. By using it, you can specify the data type of each field in the data for proper handling as well as, when needed, explicitly state which is the unique id field.
 
-###### Example
-
-```dojo
     <div id="grid">
     </div>
 
@@ -88,17 +83,12 @@ The following example demonstrates how to implement the suggested approach. In t
         });
       });
     </script>   
-```
 
 ### Adding the Data
 
 The previous example renders a Grid with auto-generated columns with a column for each field in the data items. To display only the needed fields in the Grid, provide a `columns` list and specify which element of the `items` array in the server response has to be shown in each particular column.
 
 The following example demonstrates how to specify the `field` attribute in the column array so that the Grid displays the required data from the response. The columns also have a `title` property which provides more user-friendly header titles for the columns.
-
-###### Example
-
-```dojo
 
     <div id="grid">
     </div>
@@ -139,18 +129,13 @@ The following example demonstrates how to specify the `field` attribute in the c
       });
     </script>
 
-```
-
 ### Handling Visualization
 
 Instead of showing an image in the **Image** column, the Grid renders the string output of a JavaScript object and, also, the date does not appear in a user-friendly format.
 
 The following example demonstrates how to indicate to the Grid the way you want the widget to display the **Image** column by using an inline `template` for the image. The date is properly formatted by using the `format` option of the column.
 
-###### Example
-
 ```dojo
-
     <div id="grid">
     </div>
 
@@ -199,10 +184,7 @@ The following example demonstrates how to fully customize the Grid by applying a
 
 > The `html` code in the following example displays special script blocks which contain the templating syntax for the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}). The JavaScript that is used is also mixed with the HTML content and the syntax of the templates is similar to the syntax that is applied in the creation of a PHP, Razor, or other server-side templating engine.
 
-###### Example
-
 ```dojo
-
     <div id="grid">
     </div>
     <script id="detailsTemplate" type="text/x-kendo-template">

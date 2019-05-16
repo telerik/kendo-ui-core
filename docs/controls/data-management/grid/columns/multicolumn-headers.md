@@ -15,8 +15,6 @@ For a runnable example, refer to the [demo on implementing multi-column headers 
 
 That common header in turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For more information, refer to the [demo on implementing multicolumn headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders).
 
-###### Example
-
     columns: [
     {
         title: "Personal Info",

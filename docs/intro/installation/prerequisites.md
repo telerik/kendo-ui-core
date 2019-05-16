@@ -27,6 +27,7 @@ The following table provides a list of the jQuery versions that are compatible w
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [Kendo UI 2019.2.514 (R2 2019)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
 | [Kendo UI 2019.1.115 (R1 2019)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/progress-kendo-ui-2019-1-115-changelog-)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
 | [Kendo UI 2018.3.911 (R3 2018)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2018)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
 | [Kendo UI 2018.2.516 (R2 2018)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2018)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
@@ -34,7 +35,6 @@ The following table provides a list of the jQuery versions that are compatible w
 | [Kendo UI 2017.3.913 (R3 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2017.2.504 (R2 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2017.1.118 (R1 2017)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2017)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
-| [Kendo UI 2016.3.1118 (R3 2016 SP2)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016-sp2)	|1.12.3| Also compatible with 1.10.x, 2.2.x and 3.1.1|
 | [Kendo UI 2016.3.914 (R3 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2016)	|1.12.3| Also compatible with 1.10.x and 2.2.x|
 | [Kendo UI 2016.2.504 (R2 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016)	|1.12.3| Also compatible with 1.10.x and 2.2.x|
 | [Kendo UI 2016.1.112 (Q1 2016)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016)	|1.9.1| Also compatible with 1.10.x and 2.1.x|

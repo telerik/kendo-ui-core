@@ -105,6 +105,15 @@ navigation:
     "controls/editors":
         title: "Editors"
         position: 2
+    "controls/editors/datepicker/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/editors/datepicker/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/editors/datepicker/how-to":
+        title: "How To"
+        position: 70
     "controls/editors/dropdownlist/globalization":
         title: "Globalization"
         position: 40
@@ -194,6 +203,8 @@ navigation:
         position: 50
     "controls/navigation/buttongroup":
         title: "ButtonGroup"
+    "controls/navigation/drawer":
+        title: "Drawer"
     "controls/navigation/tabstrip/globalization":
         title: "Globalization"
         position: 40
