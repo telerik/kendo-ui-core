@@ -28,7 +28,7 @@ The DropDownList supports the standards for providing accessible web content whi
 
 ## See Also
 
-* [Keyboard Navigation by the DropDownList (Demo)](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
-* [Keyboard Navigation by the DropDownList]({% slug keynav_kendoui_grid_widget %})
+* [Keyboard Navigation by the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/keyboard-navigation)
+* [Keyboard Navigation by the DropDownList]({% slug keynav_kendoui_ddl_widget %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

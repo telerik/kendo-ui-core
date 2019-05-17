@@ -24,8 +24,6 @@ This article provides solutions for common issues you may encounter while workin
 
 The following example demonstrates a sample issue.
 
-###### Example
-
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
 
     $("#ms1").kendoDropDownList({
@@ -37,8 +35,6 @@ The following example demonstrates a sample issue.
     });
 
 The following example demonstrates the solution to the sample issue.
-
-###### Example
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
     ds.read();
@@ -58,8 +54,6 @@ The following example demonstrates the solution to the sample issue.
 **Solution** The `total` configuration has to respond to the total number of records that are found after filtering, that is, `dataResult.Count`. Otherwise, the widget continues to request the remainder of the `total`.
 
 The following example demonstrates how to change the service accordingly.
-
-###### Example
 
 ```
    public object Get(int? take = null, int? skip = null, string q = null)
@@ -84,8 +78,6 @@ The following example demonstrates how to change the service accordingly.
 
 Set the value of the DropDownLists&mdash;define it before initialization as demonstrated in the following example. You can also use the [`value`](/api/javascript/ui/combobox#configuration) option.
 
-###### Example
-
     <input id="parent" value="1" />
     <input id="child" value="36" />
 
@@ -100,8 +92,6 @@ Set the value of the DropDownLists&mdash;define it before initialization as demo
 ### How can I preset the selected items when I use cascading DropDownLists with load on demand?
 
 Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options.
-
-###### Example
 
     <input id="parent" value="1" />
     <input id="child" value="36" />
@@ -141,8 +131,7 @@ When [server filtering](/api/framework/datasource#configuration) is disabled, th
 
 Check the format of the request parameters as displayed in the section on [enabling the cascading functionality](#initialize-cascading). To get them correctly, modify your server code. Alternatively, manually pass the `ID` of the parent DropDownList by using the data callback of the `Transport.Read` DataSource object as demonstrated in the following example.
 
-###### Example
-
+```dojo
     <input id="child" />
 
     <script>
@@ -162,7 +151,7 @@ Check the format of the request parameters as displayed in the section on [enabl
         }
       });
     </script>
-
+```
 
 ## See Also
 

@@ -16,8 +16,6 @@ For more information on displaying aggregate results, refer to the article on [g
 
 To enable grouping, set the `groupable` option to `true`. As a result, the Grid exposes a new area in its header which enables the user to group the Grid data by a column. To group the data by multiple columns, users can drag the desired columns to the grouping header.
 
-###### Example
-
     $("#grid").kendoGrid({
          groupable: true
          // Other configuration.
@@ -36,8 +34,6 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 ## Using with Row Templates
 
 A row template explicitly defines the row markup while grouping requires you to change the row markup. To use the two features simultaneously, include a script in the row template which adds additional cells depending on the number of the existing groups.
-
-###### Example
 
     $(document).ready(function () {
         // window. can be omitted if the function is defined outside the document.ready closure.

@@ -17,8 +17,7 @@ For example, when you filter or edit data on mobile, Kendo UI slides in a new sc
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid/configuration/mobile) property to `true` or `phone`.
 
-###### Example
-
+```dojo
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -37,16 +36,50 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
        mobile: true
     });
     </script>
+```
 
 ## Configuring Panes on Mobile
 
-The Pane in which the adaptive Grid is placed does not automatically expand its height. Thus, define an explicit pixel Grid height.
+The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a Kendo UI mobile application, set the `stretch` configuration of the respective view to `true` and apply an `auto` height to the Grid. Alternatively, define an explicit pixel Grid height and omit the pane `stretch` option.
+
+The following example demonstrates how to apply the `stretch` option.
+
+```dojo
+    <div id="foo" data-role="view" data-init="onInit" data-stretch="true">
+        <div id="grid"></div>
+    </div>
+
+    <script>
+        var gridConfig = {
+            columns: [
+                { field: "name" },
+                { field: "age" },
+                { command: "destroy" }
+            ],
+            dataSource: [
+                { name: "Jane Doe", age: 30 },
+                { name: "John Doe", age: 33 }
+            ],
+            filterable: true,
+            columnMenu: true,
+            mobile: "phone",
+            height: "auto"
+        };
+
+        function onInit() {
+            $("#grid").kendoGrid(gridConfig);
+        }
+
+        var app = new kendo.mobile.Application();
+    </script>
+```
 
 The following example demonstrates how to apply the `height` option.
 
-###### Example
-
-    <div id="grid"></div>
+```dojo
+    <div id="foo" data-role="view" data-init="onInit">
+        <div id="grid"></div>
+    </div>
 
     <script>
         var gridConfig = {
@@ -67,6 +100,7 @@ The following example demonstrates how to apply the `height` option.
 
         $("#grid").kendoGrid(gridConfig);
     </script>
+```
 
 ### Resizing of Columns
 
@@ -75,6 +109,51 @@ The column resizing feature on touch screen devices is triggered when the user h
 **Figure 1: A Grid with resizable columns on a mobile device**
 
 ![Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
+
+## Applying Styles to Parent Grid Elements
+
+The suggested approach applies to the following cases:
+* When multiple adaptive Grids are used on the same page.
+* When the Grid is not the only content on the page.
+
+Each adaptive Grid is rendered inside a separate mobile pane. Because the position of the panes is absolute, they overlap. To avoid pane overlapping, wrap each Grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the proper functioning of the transition between main and edit views.
+
+The following example demonstrates how to add multiple adaptive Grids to the same page.
+
+```dojo
+    <div class="adaptive-grid-wrapper">
+        <div id="grid1"></div>
+    </div>
+
+    <div class="adaptive-grid-wrapper">
+        <div id="grid2"></div>
+    </div>
+    <style>
+        .adaptive-grid-wrapper {
+            position: relative;
+            height: 130px;
+         }
+    </style>
+    <script>
+        var gridConfig = {
+            columns: [
+                { field: "name" },
+                { field: "age" },
+                { command: "destroy" }
+            ],
+            dataSource: [
+                { name: "Jane Doe", age: 30 },
+                { name: "John Doe", age: 33 }
+            ],
+            filterable: true,
+            columnMenu: true,
+            mobile: "phone"
+        };
+
+        $("#grid1").kendoGrid(gridConfig);
+        $("#grid2").kendoGrid(gridConfig);
+    </script>
+```
 
 ## Destroying Adaptive Grids
 

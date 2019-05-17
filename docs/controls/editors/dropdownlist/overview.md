@@ -25,8 +25,7 @@ Regardless of the applied initialization, the performance and functionality of t
 
 The following example demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
 
-###### Example
-
+```dojo
     <select id="dropdownlist">
         <option>Item 1</option>
         <option>Item 2</option>
@@ -38,6 +37,7 @@ The following example demonstrates how to initialize the DropDownList from an ex
             $("#dropdownlist").kendoDropDownList();
         });
     </script>
+```
 
 ## Functionality and Features
 

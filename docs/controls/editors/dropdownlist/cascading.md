@@ -38,8 +38,6 @@ The child DropDownList takes the following actions during initialization:
 
 The following example demonstrates how to initialize a cascading DropDownList.
 
-###### Example
-
     <input id="parent" />
     <input id="child" />
 

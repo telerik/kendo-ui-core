@@ -23,8 +23,6 @@ To handle the behavior that is related to the initialization of the Grid inside 
 * Execute the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method of the Grid after the widget becomes visible.
 * Instead of setting an overall height for the Grid in its configuration, define the height for the scrollable data area only. In this case, no height calculations are made. This approach is applicable only if frozen columns and virtual scrolling are _not_ used.
 
-    ###### Example
-
     ```
       #GridID .k-grid-content
       {
@@ -33,8 +31,6 @@ To handle the behavior that is related to the initialization of the Grid inside 
     ```
 
 * Fetch the data source instead of calling the `resize()` method. This approach is applicable if virtual scrolling is enabled and the Kendo UI version is older than 2014.3.1119.
-
-    ###### Example
 
     ```
     $("#GridID").data("kendoGrid").dataSource.fetch();

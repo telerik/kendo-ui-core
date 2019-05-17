@@ -29,8 +29,6 @@ To initiate PDF export through code, call the [`saveAsPdf`](/api/javascript/ui/g
 
 The following example demonstrates how to enable the PDF export functionality of the Grid.
 
-###### Example
-
 ```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
     <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
@@ -76,8 +74,6 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
 
-###### Example
-
 ```dojo
     <div id="grid"></div>
     <script>
@@ -116,8 +112,6 @@ As of the Kendo UI 2016.2 release, you can specify a paper size that will be app
 > * The exact maximum number of exportable rows will vary depending on the browser, system resources, template complexity, and other factors.
 > * A good practice is to verify your own worst-case scenarios in each browser you intend to support.
 
-###### Example
-
 ```dojo
     <div id="grid"></div>
     <script>
@@ -153,8 +147,6 @@ As of the Kendo UI 2016.2 release, the Grid allows you to specify a page templat
 * `totalPages`
 
 > To use a page template, you have to set the paper size. For more information, refer to the section on [page templates](#page-templates).
-
-###### Example
 
 ```dojo
     <style>
@@ -235,8 +227,7 @@ As of the Kendo UI 2016.2 release, the Grid allows you to specify a page templat
 
 Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the server proxy URL, set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option.
 
-###### Example
-
+```dojo
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -261,14 +252,13 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
             ]
         });
     </script>
-
+```
 
 ### Saving Files on the Server
 
 To send the generated file to a remote service, set a `proxyUrl` and `forceProxy` to `true`. If the proxy returns `204 No Content`, no **Save As...** dialog will appear on the client.
 
-###### Example
-
+```dojo
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -292,14 +282,13 @@ To send the generated file to a remote service, set a `proxyUrl` and `forceProxy
             ]
         });
     </script>
+```
 
 ### Embedding Unicode Characters
 
 The default fonts in PDF files do not provide Unicode support. To support international characters, you have to embed an external font. For more information on the supported [Deja Vu font family](https://dejavu-fonts.github.io) as part of the Kendo UI distributions and other fonts, refer to the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
 The following example demonstrates how to handle custom fonts.
-
-###### Example
 
 ```dojo
     <style>

@@ -38,8 +38,6 @@ When editing is applied to a Boolean column, the Grid renders a standard, CheckB
 
 The following example demonstrates how to use Kendo UI-styled CheckBox editor for Boolean columns. For a runnable example, refer to [this demo on editing](http://demos.telerik.com/kendo-ui/grid/editing).
 
-###### Example
-
     function customBoolEditor(container, options) {
         $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
         $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);

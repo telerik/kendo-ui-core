@@ -82,6 +82,9 @@ navigation:
      "helpers/dropdowntree":
         isNew: true
         title: "DropDownTree"
+     "helpers/drawer":
+        isNew: true
+        title: "Drawer"
      "helpers/editor":
         title: "Editor"
      "helpers/flatcolorpicker":

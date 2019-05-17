@@ -16,4 +16,4 @@ For a complete example, refer to the [demo on keyboard navigation of the DropDow
 
 * [Keyboard Navigation by the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
-* [Accessibility in the Grid]({% slug keyboard_shortcuts_accessibility_support %})
+* [Accessibility in the DropDownList]({% slug accessibility_kendoui_ddl_widget %})

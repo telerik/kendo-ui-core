@@ -18,8 +18,6 @@ To enable grouping, use the remote `transport` configuration and a grouped DataS
 
 > The grouped data will be sorted either in ascending or descending order which is expected behavior and cannot be modified. To group the data in a specific order, use [server grouping](/api/javascript/data/datasource/configuration/servergrouping).
 
-###### Example
-
 ```dojo
 <div class="demo-section k-header">
     <h4>Customers</h4>
@@ -49,8 +47,6 @@ To enable grouping, use the remote `transport` configuration and a grouped DataS
 To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/grouptemplate) configuration. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
 
 The following example demonstrates how to define a custom group template.
-
-###### Example
 
 ```dojo
 <div class="demo-section k-header">
@@ -82,8 +78,6 @@ The following example demonstrates how to define a custom group template.
 To customize the group title which is displayed in the fixed group header positioned on top of the list, use the [`fixedGroupTemplate`](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/fixedgrouptemplate) option. It displays the group title of the current visible group. The value is updated dynamically on the scroll position of the grouped list. The parameter that is passed to the template is the group title value.
 
 The following example demonstrates how to define a custom fixed group template.
-
-###### Example
 
 ```dojo
 <div class="demo-section k-header">

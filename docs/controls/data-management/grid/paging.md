@@ -19,8 +19,6 @@ In order for paging to work properly:
 * Define the total number of records in the dataset.
 * Specify the `pageSize` on the data source and the field in the dataset that will contain the total number of records.
 
-###### Example
-
 $("#grid").kendoGrid({
   pageable: true
   // Other configuration.
@@ -35,8 +33,6 @@ To enhance the performance of the Grid, apply the paging operations on the serve
 For example, to display page 3 out of a 60-record dataset as split into ten records per page, the Grid will send `skip: 20`, `top: 10`.
 
 The Grid works with HTTP requests which send and receive JSON payload. For example, to bind the widget to a particular page of a specific data subset, instruct the dataSource to use [`serverPaging`](/api/javascript/data/datasource/configuration/serverpaging). As a result, it will directly use the received data. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
-
-###### Example
 
        $(document).ready(function(){
           $("#grid").kendoGrid({

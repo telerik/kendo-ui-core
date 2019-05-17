@@ -17,19 +17,15 @@ To get a table row in the Grid by the ID of the data item:
 1. Make sure the [ID field is defined in the model configuration](/api/javascript/data/model) of the data source of the Grid.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively.
 
-###### Example
-
-    var rowModel = gridObject.dataSource.get(10249); // get method of the Kendo UI dataSource object
-    var modelUID = rowModel.get("uid"); // get method of the Kendo UI Model object
-    var tableRow = $("[data-uid='" + modelUID + "']"); // the data-uid attribute is applied to the desired table row element. This UID is rendered by the Grid automatically.
+        var rowModel = gridObject.dataSource.get(10249); // get method of the Kendo UI dataSource object
+        var modelUID = rowModel.get("uid"); // get method of the Kendo UI Model object
+        var tableRow = $("[data-uid='" + modelUID + "']"); // the data-uid attribute is applied to the desired table row element. This UID is rendered by the Grid automatically.
 
 ## Adding Custom Rows
 
 You can manually add a table row with a user-friendly message when the DataSource does not return any data, for example, as a result of filtering. For more information, refer to the article on [row templates]({% slug row_templates_kendoui_grid_widget %}).
 
 The following example demonstrates how to add a table row in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the Grid.
-
-###### Example
 
     function onGridDataBound(e) {
         if (!e.sender.dataSource.view().length) {
@@ -50,8 +46,6 @@ As of the Kendo UI Q1 2016 release, all Kendo UI themes feature styles for row h
 However, if your project requires you to avoid the `hover` state, use either of the following approaches:
 * Open the Kendo UI theme CSS file (for example, `kendo.default.min.css`) and remove the following CSS rule.
 
-  ###### Example
-
       ```
       .k-grid tr:hover {
           /* ...background styles here... */
@@ -59,8 +53,6 @@ However, if your project requires you to avoid the `hover` state, use either of 
       ```
 
 * Override the `hover` styling by using the CSS code from the following example. The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for the Kendo UI theme that you are applying, use the DOM inspector of the browser. Alternatively, set a background color value of your preference.
-
-  ###### Example
 
     ```
     .k-grid tr:not(.k-state-selected):hover {

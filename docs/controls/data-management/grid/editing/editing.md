@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Basics
 page_title: jQuery Grid Documentation | Editing Basics | Kendo UI
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI allowing you to manipulate the way the data is presented."
 slug: editing_kendoui_grid_widget
@@ -28,8 +28,6 @@ To enable editing:
 
 The following example demonstrates how to configure the DataSource for CRUD (Create, Read, Update, Destroy) data operations.
 
-###### Example
-
     var dataSource = new kendo.data.DataSource({
        transport: {
          read:   "/Products",
@@ -46,7 +44,7 @@ The following example demonstrates how to configure the DataSource for CRUD (Cre
               type: "POST"
            }
          },
-         // determines if changes will be send to the server individually or as batch
+         // Determines if changes will be send to the server individually or as batch.
          batch: true
          //...
     });
@@ -68,8 +66,6 @@ Data Type | Column Template or Format | Editor | Parser
 `boolean` | Displayed as lowercase text `true` or `false` | `<input type="checkbox" name="fieldName" data-type="boolean" data-bind="checked:fieldName">`| Internal method. Boolean conversion.
 `object` |  Arrays and Objects without templates are rendered as `[object Object]`.| `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Not processed. The value is passed as is.
 
-###### Example
-
     var dataSource = new kendo.data.DataSource({
         schema: {
             model: {
@@ -85,17 +81,17 @@ Data Type | Column Template or Format | Editor | Parser
                         validation: { required: true }
                     },
                     price: {
-                         // A NumericTextBox editor will be initialized in edit mode
+                         // A NumericTextBox editor will be initialized in edit mode.
                          type: "number",
-                         // when a new model is created, this default will be used
+                         // When a new model is created, this default will be used.
                          defaultValue: 42
                     },
                     discontinued:{
-                        // a checkbox editor will be initialized in edit mode
+                        // A checkbox editor will be initialized in edit mode.
                         type: "boolean"
                     },
                     created: {
-                        // a date picker editor will be initialized in edit mode
+                        // A date picker editor will be initialized in edit mode.
                         type: "date"
                     },
                     supplier: {
@@ -113,14 +109,12 @@ By default, the Grid is not [`editable`](/api/javascript/ui/grid/configuration/e
 
 The following example demonstrates how to configure a basic Grid in the incell edit mode for CRUD operations.
 
-###### Example
-
-    // Incell editing
+    // Incell editing.
     $("#grid").kendoGrid({
-        // to enable the insertion of new records, save or cancel changes
+        // To enable the insertion of new records, save or cancel changes.
         toolbar: [ "create", "save", "cancel" ],
         columns: [ "name",
-          // to trigger the incell destroy operation
+          // To trigger the in-cell destroy operation.
           { command: [ "destroy" ] }
         ],
         dataSource: dataSource,
@@ -129,14 +123,12 @@ The following example demonstrates how to configure a basic Grid in the incell e
 
 The following example demonstrates how to configure a basic Grid in the inline or popup edit mode for CRUD operations.
 
-###### Example
-
-    // Inline OR Popup editing
+    // Inline OR Popup editing.
     $("#grid").kendoGrid({
-        // to enable the insertion of new records
+        // To enable the insertion of new records.
         toolbar: [ "create" ],
         columns: [ "name",
-          // to trigger the inline or popup edit and destroy operations
+          // To trigger the inline or popup edit and destroy operations.
           { command: [ "edit", "destroy" ] }
         ],
         dataSource: dataSource,

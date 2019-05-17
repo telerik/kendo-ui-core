@@ -18,8 +18,6 @@ For runnable examples, refer to:
 
 When virtual scrolling is enabled, the Grid loads data from its remote data source while the user scrolls vertically.
 
-###### Example
-
     $("#grid").kendoGrid({
         scrollable: {
             virtual: true
@@ -28,8 +26,6 @@ When virtual scrolling is enabled, the Grid loads data from its remote data sour
     });
 
 In virtual scrolling, the HTML output is different from the standard scrolling functionality&mdash;the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` which affects scenarios when the data rows have to be manually scrolled to a particular position.
-
-###### Example
 
     <div class="k-widget k-grid">
         <div class="k-grid-header">
@@ -42,7 +38,7 @@ In virtual scrolling, the HTML output is different from the standard scrolling f
                 <table>...</table>
             </div>
             <div class="k-scrollbar k-scrollbar-vertical">
-                ...<!-- divs, which generate a scrollbar -->...
+                ...<!-- div elements which generate a scrollbar -->...
             </div>
         </div>
     </div>
@@ -61,19 +57,17 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 * Disable text wrapping, or
 * Set an explicit, large-enough row height as demonstrated in the following example.
 
-###### Example
+        .k-virtual-scrollable-wrap tr
+        {
+            height: 3em;
+        }
 
-    .k-virtual-scrollable-wrap tr
-    {
-        height: 3em;
-    }
+        // Or
 
-    // or
-
-    .k-virtual-scrollable-wrap td
-    {
-        white-space: nowrap;
-    }
+        .k-virtual-scrollable-wrap td
+        {
+            white-space: nowrap;
+        }
 
 ## Using on Mobile
 

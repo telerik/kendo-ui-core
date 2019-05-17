@@ -10,11 +10,11 @@ position: 2
 
 The keyboard navigation of the Grid is always available.
 
+For a complete example, refer to the [demo on using the keyboard navigation of the Grid](http://demos.telerik.com/kendo-ui/web/grid/navigation.html).  
+
 The Grid supports its keyboard navigation functionality through the `navigatable` option. When set to `true`, you can initially select a row or cell and then move within the Grid by using the `Arrow` keys. The navigation occurs at a cell level regardless of what the `selectable` mode is. To select the current row or cell, press `Space`.
 
 The following example demonstrates how to enable the key navigation in the Grid.
-
-###### Example
 
     $("#grid").kendoGrid({
          navigatable: true

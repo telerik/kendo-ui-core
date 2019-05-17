@@ -177,6 +177,9 @@ navigation:
         title: "How To"
      "*grid":
         title: "Grid"
+     "*drawer":
+        title: "Drawer"
+        isNew: true
      "*listview":
         title: "ListView"
      "*treelist":
