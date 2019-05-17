@@ -345,6 +345,7 @@ var __meta__ = { // jshint ignore:line
                 DOCUMENT.off("keydown" + NS, that._documentKeyDownHandler);
             });
 
+            that.popup._hovered = true;
             that.popup.open();
         },
 
@@ -379,6 +380,7 @@ var __meta__ = { // jshint ignore:line
                     DOCUMENT.on("keydown" + NS, that._documentKeyDownHandler);
 
                     that.trigger(SHOW);
+                    that.popup._hovered = undefined;
                 },
                 close: function() {
                     that.trigger(HIDE);
