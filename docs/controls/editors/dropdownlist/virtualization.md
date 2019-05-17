@@ -170,7 +170,7 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the corresponding 25th page.
 8. The `dataSource` changes the page to `25` and displays the items showing the selected item too.
 
-**Figure 1: The virtualization process**
+**Figure 1: The virtualization process when mapping to index values**
 
 ![Virtualization process](../mapValueTo-index.png)
 
@@ -207,6 +207,8 @@ On initial load, the widget checks whether the selected value is present in the 
 6. The widget requests the first page from `service 2` using the `dataSource`.
 7. The `service 2` returns the first data page.
 8. The widget list displays the items from the first page no matter if the selected items are part of it or not.
+
+**Figure 2: The virtualization process when mapping to data item values**
 
 ![Virtualization process](../mapValueTo-dataItem.png)
 

@@ -22,6 +22,8 @@ The schema configuration of the GanttDataSource.
 
 The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework/gantttask#configuration) for more information.
 
+Note that if the `parentId` type is `number`, its `defaultValue` should be set to `null`.
+
 #### Example - configure the data source model schema
 
     <script>
@@ -50,7 +52,7 @@ The model configuration of the GanttDataSource. See [`GanttTask`](/api/framework
           fields: {
             id: { from: "ID", type: "number" },
             orderId: { from: "OrderID", type: "number", validation: { required: true } },
-            parentId: { from: "ParentID", type: "number", validation: { required: true } },
+            parentId: { from: "ParentID", type: "number", validation: { required: true }, defaultValue: null },
             start: { from: "Start", type: "date" },
             end: { from: "End", type: "date" },
             title: { from: "Title", defaultValue: "", type: "string" },

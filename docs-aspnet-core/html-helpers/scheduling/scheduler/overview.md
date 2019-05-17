@@ -13,7 +13,7 @@ The Scheduler HtmlHelper extension is a server-side wrapper for the [Kendo UI Sc
 
 It enables you to configure the Scheduler from server-side code. The [Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview) displays a set of events, appointments, or tasks. It support the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
-For more information on the HtmlHelper, refer to the article on the [Scheduler HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview).
+For more information on the HtmlHelper, refer to the article on the [Scheduler HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/scheduler/overview).
 
 ## Basic Usage
 
@@ -181,7 +181,7 @@ The following example demonstrates the basic configuration of the Scheduler Html
 ## See Also
 
 * [JavaScript API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Scheduler HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview)
+* [Scheduler HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/scheduler/overview)
 * [Scheduler Official Demos](http://demos.telerik.com/aspnet-core/scheduler/index)
 * [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})

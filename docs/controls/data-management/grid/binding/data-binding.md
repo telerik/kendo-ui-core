@@ -31,9 +31,9 @@ To bind the Grid to remote data, specify the `dataSource` option. You can either
 To configure the data source of the Grid:
 
 1. [Supply the remote endpoint](#supplying-the-remote-endpoint)
-1. [Adding the data](#adding-the-data)
-1. [Handling visualization](#handling-visualization)
-1. [Setting the row template](#setting-the-row-template)
+1. [Add the data](#adding-the-data)
+1. [Handle visualization](#handling-visualization)
+1. [Set the row template](#setting-the-row-template)
 
 ### Supplying the Remote Endpoint
 
@@ -50,39 +50,41 @@ The following example demonstrates how to implement the suggested approach. In t
 * The `data` functions as the JSON element that will be repeated&mdash;based on this element, Kendo UI binds each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
 * The `model` describes the structure of the data. By using it, you can specify the data type of each field in the data for proper handling as well as, when needed, explicitly state which is the unique id field.
 
-    <div id="grid">
-    </div>
+      ```dojo
+          <div id="grid">
+          </div>
 
-    <script>
-      $(function() {
-        $("#grid").kendoGrid({
-          dataSource: {   
-            transport: {   
-              read: {
-                url: "https://api.flickr.com/services/feeds/photos_public.gne",
-                data: {
-                  tags: "nature",
-                  format: "json"
+          <script>
+            $(function() {
+              $("#grid").kendoGrid({
+                dataSource: {   
+                  transport: {   
+                    read: {
+                      url: "https://api.flickr.com/services/feeds/photos_public.gne",
+                      data: {
+                        tags: "nature",
+                        format: "json"
+                      },
+                      dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                      jsonp: "jsoncallback",
+                    }
+                  },
+                  schema: {
+                    data: "items",
+                    model: {
+                      fields: {
+                        published: {type: "date"}
+                      }
+                    }
+                  }
                 },
-                dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-                jsonp: "jsoncallback",
-              }
-            },
-            schema: {
-              data: "items",
-              model: {
-                fields: {
-                  published: {type: "date"}
-                }
-              }
-            }
-          },
-          height: 500,
-          scrollable: true,
-          selectable: true
-        });
-      });
-    </script>   
+                height: 500,
+                scrollable: true,
+                selectable: true
+              });
+            });
+          </script>   
+      ```
 
 ### Adding the Data
 
@@ -90,6 +92,7 @@ The previous example renders a Grid with auto-generated columns with a column fo
 
 The following example demonstrates how to specify the `field` attribute in the column array so that the Grid displays the required data from the response. The columns also have a `title` property which provides more user-friendly header titles for the columns.
 
+```dojo
     <div id="grid">
     </div>
 
@@ -128,6 +131,7 @@ The following example demonstrates how to specify the `field` attribute in the c
         });
       });
     </script>
+```
 
 ### Handling Visualization
 

@@ -10,7 +10,7 @@ position: 2
 
 The Kendo UI Grid enables you to bind it to local arrays of data.
 
-To bind the Grid to local data, set the `dataSource` option of the `kendoGrid` object.
+To bind the Grid to local data, set the `dataSource` option of the `kendoGrid` object. For a runnable example, refer to the [demo on binding the Grid to local data](https://demos.telerik.com/kendo-ui/grid/local-data-binding).
 
     var people = [ { firstName: "John",
                      lastName: "Smith",

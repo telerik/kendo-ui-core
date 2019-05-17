@@ -19,10 +19,10 @@ In order for paging to work properly:
 * Define the total number of records in the dataset.
 * Specify the `pageSize` on the data source and the field in the dataset that will contain the total number of records.
 
-$("#grid").kendoGrid({
-  pageable: true
-  // Other configuration.
-  });
+    $("#grid").kendoGrid({
+      pageable: true
+      // Other configuration.
+      });
 
 ## Paging on the Server
 
