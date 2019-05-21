@@ -184,6 +184,29 @@
             assert.isOk(!header[0].style.display);
         });
 
+        it("kendoStaticList shows fixed group header value if item group is 0", function() {
+            var list = new StaticList(element, {
+                dataValueField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", code: 0 },
+                        { name: "item2", code: 1 },
+                        { name: "item3", code: 2 }
+                    ],
+                    group: "code"
+                },
+                template: '#:data.name#',
+                groupTemplate: '#:data#',
+                fixedGroupTemplate: '#:data#'
+            });
+
+            list.dataSource.read();
+
+            var header = list.header;
+
+            assert.equal(header.html(), "0");
+        });
+
         it("kendoStaticList hides fixed group header container if datasource is not grouped", function() {
             var list = new StaticList(element, {
                 dataValueField: "name",
@@ -250,7 +273,7 @@
         //TODO: Fix as it is unstable
         /*it("kendoStaticList renders fixed header to first visible item after scroll", function() {
             var wrapper = $('<div style="overflow:hidden;height:60px;position:absolute;"/>').appendTo(Mocha.fixture).append(element.height("100%"));
-    
+
             var list = new StaticList(element, {
                 dataValueField: "name",
                 dataSource: {
@@ -271,15 +294,15 @@
                 groupTemplate: '#:data#',
                 fixedGroupTemplate: '#:data#'
             });
-    
+
             list.dataSource.read();
-    
+
             element[0].scrollTop = 145; //scroll
-    
+
             list.refresh();
-    
+
             var header = list.header;
-    
+
             assert.equal(header.html(), "b");
         });*/
 

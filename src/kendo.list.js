@@ -2424,7 +2424,7 @@ var __meta__ = { // jshint ignore:line
 
             var visibleItem = this._firstVisibleItem();
 
-            if (visibleItem && visibleItem.group) {
+            if (visibleItem && visibleItem.group.toString().length) {
                 this.header.html(template(visibleItem.group));
             }
         },

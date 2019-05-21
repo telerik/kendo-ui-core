@@ -126,6 +126,11 @@ When binding the TreeView through the `dataSource` configuration option, each it
         // Renders a <img class="k-image" src="/images/icon.png" />
         imageUrl: "/images/icon.png",
 
+        // Renders a HTML attribites to the DOM element
+        attr: {
+            "data-myattr": "test"
+        },
+
         // Renders a <span class="k-sprite icon save" />
         spriteCssClass: "icon save",
 

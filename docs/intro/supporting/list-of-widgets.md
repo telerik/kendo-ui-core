@@ -85,6 +85,7 @@ The following table lists all Kendo UI components with regard to their support p
 | **Navigation**            |
 | [Button](http://demos.telerik.com/kendo-ui/button/index)              | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [ButtonGroup](http://demos.telerik.com/kendo-ui/buttongroup/index)    | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| [Drawer](http://demos.telerik.com/kendo-ui/drawer/index)              | <span class="tag-success">No</span>  | <span class="tag-success">Yes</span> |
 | [Menu](http://demos.telerik.com/kendo-ui/menu/index)                  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index)          | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)          | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
