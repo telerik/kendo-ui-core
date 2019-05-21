@@ -85,7 +85,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | **Navigation**            |
 | [Button](http://demos.telerik.com/kendo-ui/button/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ButtonGroup](http://demos.telerik.com/kendo-ui/buttongroup/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Drawer](http://demos.telerik.com/kendo-ui/drawer/index)                        | :x: | :white_check_mark: | :white_check_mark:               |
 | [Menu](http://demos.telerik.com/kendo-ui/menu/index)                  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
@@ -121,8 +120,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Single-Page Application](http://demos.telerik.com/kendo-ui/spa/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Templates](http://demos.telerik.com/kendo-ui/templates/index)        | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder)        | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| **PDF**   |
-| [PDFViewer](http://demos.telerik.com/kendo-ui/pdfviewer/index)        | :x: | :white_check_mark: | :white_check_mark:            |
 | **Official Support**                                                  | :x:  | :white_check_mark: | :white_check_mark:           |
 
 ## Compatibility and Requirements
