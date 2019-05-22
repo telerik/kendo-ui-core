@@ -7661,6 +7661,7 @@ declare namespace kendo.ui {
         enabled?: boolean;
         readonly?: boolean;
         width?: number|string;
+        messages?: SwitchMessages;
         change?(e: SwitchChangeEvent): void;
     }
 

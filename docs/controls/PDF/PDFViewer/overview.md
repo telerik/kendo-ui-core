@@ -49,4 +49,4 @@ The PDFViewer consists of a toolbar and a scrollable container that wraps the pa
 ## See also
 
 * [Basic Usage demo](https://demos.telerik.com/kendo-ui/pdfviewer/index)
-* [API Reference](api/javascript/ui/pdfviewer)
+* [API Reference](/api/javascript/ui/pdfviewer)

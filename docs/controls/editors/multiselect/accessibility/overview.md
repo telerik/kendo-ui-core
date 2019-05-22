@@ -24,7 +24,7 @@ The MultiSelect has three building blocks which, depending on the current state 
 * Tag list&mdash;Displays the selected values.
 * Items popup&mdash;Displays the list of items that can be selected.
 
-![Structure of the MultiSelect](images/multiselect-structure.png)
+![Structure of the MultiSelect](../images/multiselect-structure.png)
 
 ### Search Input
 

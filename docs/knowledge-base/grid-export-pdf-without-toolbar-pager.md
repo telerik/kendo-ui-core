@@ -205,4 +205,4 @@ The following example demonstrates the outcome of the suggested approach.
 
 ## See Also
 
-* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/data-management/grid/pdf-export)
+* [Exporting the Kendo UI Grid to PDF](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/pdf-export)

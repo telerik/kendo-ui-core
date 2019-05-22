@@ -286,7 +286,7 @@ The following example demonstrates how to enable scrolling within the ContextMen
     </script>
 
 
-You can also customize the scrollable amount by setting a value (in pixels) to the [`distance` property](kendo-ui/api/javascript/ui/contextmenu/configuration/scrollable.scrollabledistance). `distance` defaults to `50`.
+You can also customize the scrollable amount by setting a value (in pixels) to the [`distance` property](/kendo-ui/api/javascript/ui/contextmenu/configuration/scrollable.scrollabledistance). `distance` defaults to `50`.
 
 ###### Example
 

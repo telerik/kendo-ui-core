@@ -10,9 +10,9 @@ position: 6
 
 The MultiSelect provides options for displaying the items as individual (multiple) tags and as a single, summary tag.
 
-For the runnable example on setting the summary-tag mode, refer to the [demo on implementing the tag mode in the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/tag-mode).  
+For the runnable example on setting the summary-tag mode, refer to the [demo on implementing the tag mode in the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/tag-mode).
 
 ## See Also
 
 * [Implementing the Tag Mode in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/tag-mode)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/muultiselect)
+* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

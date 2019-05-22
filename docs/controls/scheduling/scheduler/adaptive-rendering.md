@@ -48,5 +48,5 @@ The example below demonstrates how to configure the adaptive rendering mode of t
 
 ## See Also
 
-* [Adaptive Rendering of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/adaptiverendering)
+* [Adaptive Rendering of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/adaptive-rendering)
 * [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

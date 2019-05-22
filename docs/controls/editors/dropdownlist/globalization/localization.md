@@ -8,7 +8,7 @@ position: 3
 
 # Localization
 
-The DropDownList provides options for localizing its user interface by utilizing the [available API configuration options](api/javascript/ui/dropdownlist).
+The DropDownList provides options for localizing its user interface by utilizing the [available API configuration options](/api/javascript/ui/dropdownlist).
 
 ## See Also
 
