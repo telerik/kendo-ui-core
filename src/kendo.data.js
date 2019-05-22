@@ -775,7 +775,7 @@ var __meta__ = { // jshint ignore:line
             return field ? field.editable !== false : true;
         },
 
-        set: function(field, value, initiator) {
+        set: function(field, value) {
             var that = this;
             var dirty = that.dirty;
 
@@ -786,7 +786,7 @@ var __meta__ = { // jshint ignore:line
                     that.dirty = true;
                     that.dirtyFields[field] = true;
 
-                    if (ObservableObject.fn.set.call(that, field, value, initiator) && !dirty) {
+                    if (ObservableObject.fn.set.call(that, field, value) && !dirty) {
                         that.dirty = dirty;
 
                         if (!that.dirty) {
