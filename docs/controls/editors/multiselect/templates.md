@@ -170,4 +170,4 @@ The MultiSelect widget displays `noDataTemplate` in the popup when the data sour
 ## See Also
 
 * [Customizing the Templates in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/template)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/muultiselect)
+* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

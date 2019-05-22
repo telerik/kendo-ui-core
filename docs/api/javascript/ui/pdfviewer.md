@@ -150,7 +150,7 @@ Defines the surface type. It accepts `canvas` or `svg`. This option is supported
 
 ### toolbar `Boolean|Object` *(default: true)*
 
-Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items`. Inherits [Kendo UI Toolbar](api/javascript/ui/toolbar).
+Toolbar option accepts a Boolean value which indicates if the toolbar will be displayed or an Object with `items`. Inherits [Kendo UI Toolbar](/api/javascript/ui/toolbar).
 
 ### toolbar.items `Array`
 
@@ -247,33 +247,61 @@ Specifies the default file name used for `Download`.
 Specifies the localization messages of the toolbar.
 
 ### messages.toolbar.open `String`  *(default: "Open")*
+
 ### messages.toolbar.exportAs `String`  *(default: "Export")*
+
 ### messages.toolbar.download `String` *(default: "Download")*
+
 ### messages.toolbar.pager `Object`
+
 ### messages.toolbar.pager.first `String`  *(default: "Go to the first page")*
+
 ### messages.toolbar.pager.previous `String` *(default: "Go to the previous page")*
+
 ### messages.toolbar.pager.next `String` *(default: "Go to the next page")*
+
 ### messages.toolbar.pager.last `String` *(default: "Go to the last page")*
+
 ### messages.toolbar.pager.of `String` *(default: " of {0} ")*
+
 ### messages.toolbar.pager.page `String` *(default: "page")*
+
 ### messages.toolbar.pager.pages `String` *(default: "pages")*
+
 ### messages.errorMessages `Object`
+
 ### messages.errorMessages.notSupported  `String` *(default: "Only pdf files allowed.")*
+
 ### messages.errorMessages.parseError  `String` *(default: "PDF file fails to process.")*
+
 ### messages.errorMessages.notFound  `String` *(default: "File is not found.")*
+
 ### messages.dialogs `Object`
+
 ### messages.dialogs.exportAsDialog `Object`
+
 ### messages.dialogs.exportAsDialog.title `String` *(default: "Export...")*
+
 ### messages.dialogs.exportAsDialog.defaultFileName `String` *(default: "Document")*
+
 ### messages.dialogs.exportAsDialog.pdf `String` *(default: "Portable Document Format (.pdf)")*
+
 ### messages.dialogs.exportAsDialog.png `String` *(default: "Portable Network Graphics (.png)")*
+
 ### messages.dialogs.exportAsDialog.svg `String` *(default: "Scalable Vector Graphics (.svg)")*
+
 ### messages.dialogs.exportAsDialog.labels `Object`
+
 ### messages.dialogs.exportAsDialog.labels.fileName `String`  *(default: "File name")*
+
 ### messages.dialogs.exportAsDialog.labels.saveAsType `String`  *(default: "Save as")*
+
 ### messages.dialogs.exportAsDialog.labels.page `String`  *(default: "Page")*
+
 ### messages.dialogs.okText `String`  *(default: "OK")*
+
 ### messages.dialogs.save `String`  *(default: "Save")*
+
 ### messages.dialogs.cancel `String`  *(default: "Cancel")*
 
 ## Methods

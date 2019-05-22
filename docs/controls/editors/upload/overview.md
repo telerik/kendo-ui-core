@@ -8,11 +8,11 @@ position: 1
 
 # Upload Overview
 
-The [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/upload/index) helps users send files from their file systems to dedicated server handlers which are configured to receive them and uses progressive enhancement to deliver an uploading user experience without the requirement of extra developer efforts.
+The [Kendo UI Upload widget](https://demos.telerik.com/kendo-ui/upload/index) helps users send files from their file systems to dedicated server handlers which are configured to receive them and uses progressive enhancement to deliver an uploading user experience without the requirement of extra developer efforts.
 
 ## Basic Usage
 
-The Upload provides a set of [default API configuration options](/api/javascript/ui/ipload) which can be set during its initialization such as synchronous and asynchronous modes of operation, chunk upload of files, multiple files selection and removal, progress tracking and in-progress cancellation of the upload, and so on.
+The Upload provides a set of [default API configuration options](/api/javascript/ui/upload) which can be set during its initialization such as synchronous and asynchronous modes of operation, chunk upload of files, multiple files selection and removal, progress tracking and in-progress cancellation of the upload, and so on.
 
 > * The Upload does not currently support the upload of large files in chunks because the feature would require an additional Flash or Silverlight plug-in to compensate for the missing API support in older browsers.
 > * The Upload works in `<input type="file" />` elements. Therefore, it can only upload files that are selected by the user and which exist in the file system. To upload files that are generated with JavaScript on the fly, use Ajax requests.

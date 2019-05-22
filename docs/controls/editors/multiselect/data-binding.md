@@ -95,4 +95,4 @@ The MultiSelect enables you to remove the values from its input area by using th
 ## See Also
 
 * [Basic Usage of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/index)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/muultiselect)
+* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

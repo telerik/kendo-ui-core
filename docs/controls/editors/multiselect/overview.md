@@ -61,4 +61,4 @@ For a complete example on the basic MultiSelect events, refer to the [demo on us
 * [Binding the MultiSelect over MVVM (Demo)](https://demos.telerik.com/kendo-ui/multiselect/mvvm)
 * [Using the MultiSelect with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/multiselect/angular)
 * [Applying the MultiSelect API (Demo)](https://demos.telerik.com/kendo-ui/multiselect/api)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/muultiselect)
+* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

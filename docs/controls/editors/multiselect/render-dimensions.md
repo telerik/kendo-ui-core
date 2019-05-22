@@ -68,4 +68,4 @@ By design, when the user adds an item that does not fit in the existing free spa
 ## See Also
 
 * [Handling the Scrollable Content in the MultiSelect (Demo)](http://dojo.telerik.com/axeMa)
-* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/muultiselect)
+* [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
