@@ -63,18 +63,19 @@ it("wraps element if no wrapper span.k-widget and hide element", function() {
 });
 
 it("create a text input", function() {
-   var combobox = new ComboBox(input.attr("name", "combo1"), {
-       text: "test"
-   });
+    var autocompleteAttr = kendo.support.browser.chrome ? "disabled" : "off";
+    var combobox = new ComboBox(input.attr("name", "combo1"), {
+        text: "test"
+    });
 
-   var text = combobox.input;
+    var text = combobox.input;
 
-   assert.isOk(text.is("input"));
-   assert.isOk(text.hasClass("k-input"));
+    assert.isOk(text.is("input"));
+    assert.isOk(text.hasClass("k-input"));
 
-   assert.equal(text.val(), "test");
-   assert.equal(text.attr("autocomplete"), "off");
-   assert.equal(text.attr("name"), "combo1_input");
+    assert.equal(text.val(), "test");
+    assert.equal(text.attr("autocomplete"), autocompleteAttr);
+    assert.equal(text.attr("name"), "combo1_input");
 });
 
 it("text input should be wrapped with span", function(){

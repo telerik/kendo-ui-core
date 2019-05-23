@@ -34,7 +34,7 @@ Telerik UI for ASP.NET MVC supports:
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx) / [VB.NET](http://www.tutorialspoint.com/vb.net/)
 * [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later
 
-Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2012 and later.
+Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2015 and later.
 
 ## Download
 

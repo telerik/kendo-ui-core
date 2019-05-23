@@ -48,6 +48,7 @@ var __meta__ = { // jshint ignore:line
         STATEDISABLED = "k-state-disabled",
         DISABLED = "disabled",
         READONLY = "readonly",
+        AUTOCOMPLETEVALUE = kendo.support.browser.chrome ? "disabled" : "off",
         ns = ".kendoMultiSelect",
         CLICK = "click" + ns,
         KEYDOWN = "keydown" + ns,
@@ -1421,7 +1422,7 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.input = input.attr({
                 "accesskey": accessKey,
-                "autocomplete": "off",
+                "autocomplete": AUTOCOMPLETEVALUE,
                 "role": "listbox",
                 "title": element[0].title,
                 "aria-expanded": false,
