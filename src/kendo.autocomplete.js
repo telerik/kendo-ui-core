@@ -40,6 +40,7 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        AUTOCOMPLETEVALUE = support.browser.chrome ? "disabled" : "off",
         HOVER = "k-state-hover",
         ns = ".kendoAutoComplete",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
@@ -113,7 +114,7 @@ var __meta__ = { // jshint ignore:line
                     wrapper.removeClass(FOCUSED);
                 })
                 .attr({
-                    autocomplete: "off",
+                    autocomplete: AUTOCOMPLETEVALUE,
                     role: "textbox",
                     "aria-haspopup": true
                 });

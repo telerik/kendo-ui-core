@@ -135,9 +135,9 @@
         });
 
         it("change event is fired when clicking a page button", function() {
-            var index = 0,
+            var index,
                 changeHandler = function(e) {
-                    index = parseInt(e.index, 10);
+                    index = e.index;
                 },
                 ul = setup({}, { change: changeHandler });
 
@@ -145,6 +145,7 @@
 
             ul.find("a:eq(0)").click();
             assert.equal(index, 2);
+            assert.equal(typeof index, "number");
         });
 
         it("clicking on the current page does not trigger change event", function() {

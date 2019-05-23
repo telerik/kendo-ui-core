@@ -457,7 +457,7 @@ var __meta__ = { // jshint ignore:line
             e.preventDefault();
 
             if (!target.is(".k-state-disabled")) {
-                this.page(target.attr(kendo.attr("page")));
+                this.page(parseInt(target.attr(kendo.attr("page")), 10));
             }
         },
 
