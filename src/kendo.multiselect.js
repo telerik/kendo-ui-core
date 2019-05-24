@@ -321,7 +321,7 @@ var __meta__ = { // jshint ignore:line
                 closeButton = !target.closest(".k-select").children(".k-i-arrow-60-down").length;
             }
 
-            if (notInput && !(closeButton && kendo.support.mobileOS)) {
+            if (notInput && !(closeButton && kendo.support.mobileOS) && e.cancelable) {
                 e.preventDefault();
             }
 
@@ -394,12 +394,14 @@ var __meta__ = { // jshint ignore:line
                 that._close();
             };
 
-            if (customIndex === undefined) {
+            if (customIndex === undefined && listView.select().length) {
                 that.persistTagList = false;
                 listView.select(listView.select()[position]).done(done);
             } else {
                 option = that.element[0].children[customIndex];
-                option.selected = false;
+                if (option) {
+                    option.selected = false;
+                }
 
                 listView.removeAt(position);
                 listViewChild = listViewChildren[customIndex];
@@ -634,7 +636,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             listView.value(value);
-            that._old = that._valueBeforeCascade = listView.value(); //get a new array reference
+            that._old = that._valueBeforeCascade = value.slice(); //get a new array reference
 
             if (!clearFilters) {
                 that._fetchData();
