@@ -470,7 +470,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         page: function(page) {
-            if (page !== undefined) {
+            if (page) {
                 if (this.trigger("pageChange", { index: page })) {
                    return;
                 }
