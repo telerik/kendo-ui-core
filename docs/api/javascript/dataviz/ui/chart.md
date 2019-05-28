@@ -187,7 +187,7 @@ The axis labels configuration.
 
 ### axisDefaults.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 ### axisDefaults.labels.format `String` *(default: "{0}")*
 
@@ -1957,7 +1957,7 @@ The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#co
 
 ### categoryAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the category axis label font
 
@@ -6442,7 +6442,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### legend.inactiveItems.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart legend label font
 
@@ -6645,7 +6645,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### legend.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart legend label font
 
@@ -11632,7 +11632,7 @@ The distance of the labels when [series.type](/api/javascript/dataviz/ui/chart#c
 
 ### series.labels.font `String|Function` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart series label font
     <div id="chart"></div>
@@ -15742,7 +15742,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### seriesDefaults.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart series label font
 
@@ -19710,7 +19710,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### valueAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the value axis label font
 
@@ -24438,7 +24438,7 @@ The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configura
 
 ### xAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the scatter chart x axis label font
 
@@ -29428,7 +29428,7 @@ The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configura
 
 ### yAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the scatter chart y axis label font
 

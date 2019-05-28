@@ -1,5 +1,5 @@
 ---
-title: Dynamically Select Row on Any Page of Grid
+title: Dynamically Select a Row on Any Page in the Grid
 description: An example on how to select a row that may be placed on a different page in the Grid.
 type: how-to
 page_title: Dynamically Select Row in Pageable Grid | Kendo UI Grid
@@ -15,14 +15,14 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Diagram</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-I want to be able to select a row in the Grid dynamically, regardless of the row position in the Grid data. How can I select a row if it is in a different page of the Grid?
+I want to be able to select a row in the Grid dynamically, regardless of the row position in the Grid data. How can I select a row if it is on a different page of the Grid?
 
 ## Solution
 
@@ -112,7 +112,7 @@ The following example demonstrates how to select a row on any page of a client-s
             },
             pageSize: 10
           },
-          height: 550,
+          height: 350,
           sortable: true,
           filterable: true,
           selectable: "row",

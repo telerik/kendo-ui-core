@@ -1015,5 +1015,21 @@
             assert.equal(calendar.selectDates().length, 6);
 
         });
+
+        it("navigating in century view works correctly", function() {
+            var calendar = div.kendoCalendar({
+                selectable: "multiple",
+                weekNumber: true,
+                start: "century",
+                disableDates: ["we", "sa"]
+            }).getKendoCalendar();
+
+            var rightEvent = { keyCode: kendo.keys.RIGHT, preventDefault: $.noop };
+            var current = calendar.current().getFullYear();
+            calendar.focus();
+            calendar._move(rightEvent);
+            assert.equal(calendar.current().getFullYear(), current + 10);
+
+        });
     });
 }());
