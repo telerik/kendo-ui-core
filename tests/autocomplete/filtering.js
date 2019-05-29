@@ -491,6 +491,27 @@ it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
     assert.closeTo(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
 });
 
+it("enabled autoWidth disables X scrolling", function() {
+    var autocomplete = new AutoComplete(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+
+        }
+    });
+
+    autocomplete.search("a");
+    assert.equal(autocomplete.listView.content.css("overflow"), "hidden auto")
+});
+
 it("update popup height when no items are found", function(done) {
     var autocomplete = new AutoComplete(input, {
         dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() })

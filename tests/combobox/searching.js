@@ -1128,6 +1128,55 @@ it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
     assert.closeTo(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 0.1);
 });
 
+it("enabled autoWidth disables X scrolling", function() {
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+
+        }
+    });
+
+    combobox.open();
+    assert.equal(combobox.listView.content.css("overflow"), "hidden auto")
+});
+
+it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: [
+                "Short item",
+                "An item with really, really, really, really, really, really, really, really, really, long text",
+                "Short item",
+                "Short item",
+                "Short item",
+                "Short item",
+                "Short item"
+            ]
+        }
+    });
+
+    combobox.open();
+    assert.equal(combobox.listView.content.css("overflow"), "hidden scroll")
+});
+
 it("keep popup opened on empty search result if noDataTemplate", function() {
     var combobox = new ComboBox(input, {
         animation: false,
