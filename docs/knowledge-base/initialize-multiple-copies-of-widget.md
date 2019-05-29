@@ -2,7 +2,7 @@
 title: Initialize Multiple Instances of Kendo UI Widgets
 description: An example on how to initialize multiple copies of the same Kendo UI widget without repeatedly declaring all of its properties.
 type: how-to
-page_title: Initialize Multiple Instances of the Same Widget without Repeating Declaration Code | Kendo UI for jQuery
+page_title: Initialize Multiple Instances of the Same Widget without Repeating Declaration Code | Kendo UI Grid for jQuery
 slug: initialize-multiple-copies-of-widget
 tags: initialize, multiple, copies, widget, declare, instance, initialization, declaration, copying, control
 ticketid: 1168945

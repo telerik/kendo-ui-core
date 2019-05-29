@@ -2,7 +2,7 @@
 title: Allow Only One Grouped Column in Grid
 description: An example on how to restrict the user from grouping more than one column in the Kendo UI Grid.
 type: how-to
-page_title: Group Only One Column at a Time | Kendo UI Grid
+page_title: Group Only One Column at a Time | Kendo UI Grid for jQuery
 slug: grid-group-one-column-only
 tags: grid, grouping, singe column
 ticketid: 1135530

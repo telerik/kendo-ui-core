@@ -2,7 +2,7 @@
 title: Expand and Collapse All Gantt Rows
 description: An example on how to implement a functionality to expand and collapse all kendo UI Gantt tasks.
 type: how-to
-page_title: Implement Expand and Collapse All Tasks on a Button Click | Kendo UI Gantt
+page_title: Implement Expand and Collapse All Tasks on a Button Click | Kendo UI Gantt for jQuery
 slug: gantt-expand-collapse-alltasks
 tags: kendo, kendoui, gantt, expand, collapse, all, tasks, button, click
 ticketid: 1142128

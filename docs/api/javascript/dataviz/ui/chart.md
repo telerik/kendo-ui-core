@@ -706,7 +706,9 @@ Category index at which the first value axis crosses this axis (when set as an o
 
 Category indices at which the value axes cross the category axis (when set as an array).
 
-> set an index greater than or equal to the number of categories to denote the far end of the axis.
+> Set an index greater than or equal to the number of categories to denote the far end of the axis.
+
+> If the Chart uses multiple panes, the crossing values are not scoped to a pane. To be able to customize the crossing values in a given pane, you first need to provide placeholder values for the previous pane axes and then the crossing values for the current pane.
 
 #### Example - set the category axis crossing values
 
@@ -722,6 +724,36 @@ Category indices at which the value axes cross the category axis (when set as an
         { data: [1, 2, 3] }
       ]
     });
+    </script>
+
+#### Example - set the crossing values in a multi-pane Chart
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [1, 7, 5, 3] },
+          { data: [1, 2, 3, 4], axis: "bottom-2" },
+          { data: [10, 20, 13, 14], axis: "bottom-2" }
+        ],
+        valueAxis: [
+          { pane: "top-pane" },
+          { pane: "bottom-pane", name: "bottom-1" },
+          { pane: "bottom-pane", name: "bottom-2" }
+        ],
+        panes: [
+          { name: "top-pane" },
+          { name: "bottom-pane" }
+        ],
+        categoryAxis: [{
+          pane: "top-pane",
+          categories: [2000, 2001, 2002, 2003]
+        },{
+          axisCrossingValues: [0, 0, 10000],
+          categories: [2002, 2003, 2004, 2005],
+          pane: "bottom-pane"
+        }]
+      });
     </script>
 
 ### categoryAxis.background `String`
@@ -3050,7 +3082,55 @@ The maximum number of groups (categories) to display when
 
 ### categoryAxis.maxDivisions `Number`
 
-The maximum number of ticks and labels to display. Applicable for date category axis.
+The maximum number of ticks, labels and grid lines to display. Applicable for date category axis. You can combine this property with a bigger value of the [maxDateGroups](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.maxdategroups) property to increase the number of rendered data points in the Chart without drawing too many labels, ticks, and grid lines.
+
+####Example
+
+    <div id="chart"></div>
+    <script>
+      function createChart() {
+        $("#chart").kendoChart({
+          dataSource: {
+            transport: {
+              read: {
+                url: "https://demos.telerik.com/kendo-ui/service/StockData",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                fields: {
+                  Date: {
+                    type: "date"
+                  }
+                }
+              }
+            }
+          },
+          seriesDefaults: {
+            type: "line"
+          },
+          series: [{
+            field: "Open",
+            categoryField: "Date"
+          }],
+          categoryAxis: {
+            maxDivisions: 20,
+            labels: {
+              rotation: -45
+            }
+          },
+          tooltip: {
+            visible: true,
+            format: "C2"
+          },
+          pannable: true,
+          zoomable: true
+        });
+      }
+
+      $(document).ready(createChart);
+    </script>
 
 ### categoryAxis.min `Object`
 
@@ -20623,7 +20703,7 @@ The maximum value of the axis.
 
 ### valueAxis.min `Number` *(default: 0)*
 
-The minimum value of the axis.
+The minimum value of the axis. Under certain conditions, the [narrowRange](/api/javascript/dataviz/ui/chart/configuration/valueaxis.narrowrange) setting can overwrite this setting. To give priority to the `min` setting of your choice, set `valueAxis.narrowRange` to `false`.
 
 #### Example - set the value axis minimum
 
@@ -21242,10 +21322,10 @@ The unique axis name. Used to associate a series with a value axis using the [se
     });
     </script>
 
-### valueAxis.narrowRange `Boolean`
+### valueAxis.narrowRange `Boolean` *(default: true)*
 
-If set to `true` the chart will prevent the automatic axis range from snapping to 0.
-Setting it to `false` will force the automatic axis range to snap to 0.
+If set to `true` the Chart will narrow the value axis range in order to display data points in better detail.
+Setting it to `false` will force the automatic axis range to start from 0 or the explicitly specified [valueAxis.min](/api/javascript/dataviz/ui/chart/configuration/valueaxis.min) value.
 
 #### Example - prevent automatic axis range snapping
 

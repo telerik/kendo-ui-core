@@ -1,16 +1,18 @@
 ---
-title: Persist Focused Grid Cells After Rebind
-page_title: jQuery Grid Documentation | Persist Focused Cells | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to persist a focused cell after rebind."
+title: Persist Focused Grid Cells after Rebind
+page_title: Persist Focused Cells after Rebind | Kendo UI Grid for jQuery
+description: "An example on how to persist a focused cell in the Kendo UI Grid for jQuery after rebind."
 previous_url: /controls/data-management/grid/how-to/Editing/persist-focused-cell
 slug: howto_persist_focused_grid_cell_grid
+tags: persist, focused, grid, cells, after, rebind
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Persist Focused Grid Cells After Rebind
 
 The following example demonstrates how to persist a focused Grid cell after rebinding.
 
-The demo implies the usage of in-cell editing, built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource/configuration/autosync) configuration for the Grid [DataSource instance](/api/javascript/data/datasource).
+The demo implies the usage of incell editing, built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource/configuration/autosync) configuration for the Grid [DataSource instance](/api/javascript/data/datasource).
 
 The functionality relies on the following milestones:
 
@@ -20,9 +22,7 @@ The functionality relies on the following milestones:
 * The saved row and cell indexes are applied through the [`current()`](/api/javascript/ui/grid/methods/current) method in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler.
 * The [`table`](/api/javascript/ui/grid#fields-table) option of the Grid can be focused explicitly if the user has clicked on the **Save Changes** button&mdash;this requires you to set a flag in the [`saveChanges`](/api/javascript/ui/grid/events/savechanges) event handler.
 
-Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/datasource/configuration/autosync) option for the in-cell editing because it greatly increases the amount of update-related remote requests. Nevertheless, it is possible for you to use such an approach if required.
-
-###### Example
+Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/datasource/configuration/autosync) option for the incell editing because it greatly increases the amount of update-related remote requests. Nevertheless, it is possible for you to use such an approach if required.
 
 ```dojo
 <div id="grid"></div>
@@ -119,20 +119,3 @@ Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/dataso
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Add New Rows When Tabbing out of the Last One]({% slug howto_add_new_rows_when_tabbingoutof_thelast_one_grid %})
-* [How to Build Custom dataSource for Custom Editor]({% slug howto_build_custom_datasourcefor_custom_editor_grid %})
-* [How to Customize the Delete Confirmation Dialog]({% slug howto_customize_delete_confirmation_dialog_grid %})
-* [How to Delete Multiple Rows Selected with Checkboxes]({% slug howto_delete_rows_selectedwith_checkboxes_grid %})
-* [How to Edit Records in Child Grids]({% slug howto_edit_recordsin_children_grid %})
-* [How to Edit Records Using External Forms]({% slug howto_edit_records_using_external_forms_grid %})
-* [How to Increase Popup Edit Form and Textbox Width]({% slug howto_increase_popup_edit_formand_textbox_grid %})
-* [How to Preserve Dirty Indicator in Incell Editing and Client Operations]({% slug howto_preserve_dirty_indicator_incell_editing_client_operations_grid %})
-* [How to Render Grid Editor in Column Template]({% slug howto_render_editor_column_template_grid %})
-* [How to Show Custom Editor Using the Selected Item outside the Grid]({% slug howto_use_show_custom_editor_selected_item_outside_grid %})
-* [How to Skip Non-editable Cells When Tabbing]({% slug howto_skip_noneditable_cells_when_tabbing_grid %})
-* [How to Use AutoComplete as Custom Column Editor]({% slug howto_use_autocompleteas_custom_column_editor_grid %})
-* [How to Use CRUD Operations When Grid Is Bound through MVVM]({% slug howto_use_crud_operationswith_mvvmbound_grid %})
-* [How to Use Editors Based on Data Item Property]({% slug howto_use_editors_basedon_dataitem_property_grid %})
-* [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

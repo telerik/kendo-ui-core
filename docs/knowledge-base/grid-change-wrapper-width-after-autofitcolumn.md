@@ -2,7 +2,7 @@
 title: Change the Width after Using AutoFitColumn Method over All Grid Columns
 description: An example on how to calculate the width of the Kendo UI Grid after using the autoFitColumn method.
 type: how-to
-page_title: Calculate New Width after Using AutoFitColumn Method | Kendo UI Grid
+page_title: Calculate New Width after Using AutoFitColumn Method | Kendo UI Grid for jQuery
 slug: grid-change-wrapper-width-after-autofitcolumn
 tags: kendoui, kendo, grid, column width, grid width
 res_type: kb

@@ -1,8 +1,8 @@
 ---
-title: Upload in Synchronous Mode File Type Validation 
+title: Upload in Synchronous Mode File Type Validation
 description: An example on how to validate the file type in Kendo UI Upload when it is in synchronous mode.
 type: how-to
-page_title: Validate the file type in synchronous mode | Kendo UI Upload
+page_title: Validate the file type in synchronous mode | Kendo UI Upload for jQuery
 slug: upload-synchronous-file-type-validate
 tags: upload, synchronous, validate, validation, file, type
 ticketid: 1138370
@@ -53,10 +53,10 @@ When the Upload is configured to use synchronous mode the file type validation c
             $("#files").kendoUpload({
 				validation: {
 					allowedExtensions: [".jpg"],
-				} 
+				}
             });
         });
-		
+
 		var validatable = $("form").kendoValidator({
 			rules: {
 				upload: function(input) {

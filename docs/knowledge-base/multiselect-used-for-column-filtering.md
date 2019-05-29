@@ -1,16 +1,16 @@
 ---
 title: Use MultiSelect for Column Filtering
-page_title: jQuery Grid Documentation | MultiSelect for Column Filtering | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to use MultiSelect for column filtering."
+page_title: MultiSelect for Column Filtering | Kendo UI Grid for jQuery
+description: "An example on how to use a Kendo UI MultiSelect for column filtering of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/filtering-array-column-using-multiselect, /controls/data-management/grid/how-to/multiselect-used-for-column-filtering, /web/grid/how-to/multiselect-used-for-column-filtering, /controls/data-management/grid/how-to/filtering/multiselect-used-for-column-filtering
 slug: howto_use_multiselect_forcolumn_filtering_grid
+tags: use, multiselect, grid, column, filtering
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Use MultiSelect for Column Filtering
-
 The following example demonstrates how to use the MultiSelect as a column filter for the Grid.
-
-###### Example
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
@@ -85,17 +85,3 @@ The following example demonstrates how to use the MultiSelect as a column filter
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
-* [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
-* [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
-* [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
-* [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
-* [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
-* [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
-* [How to Perform CRUD Operations with Local Storage Data]({% slug howto_perform_crud_operationswith_local_storage_data_grid %})
-* [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
-* [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
-* [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
-* [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

@@ -2,7 +2,7 @@
 title: Make MultiSelect Placeholder Accessible
 description: An example on how to make the Kendo UI MultiSelect placeholder accessible to screen readers.
 type: how-to
-page_title: Make MultiSelect Placeholder Accessible | Kendo UI MultiSelect
+page_title: Make MultiSelect Placeholder Accessible | Kendo UI MultiSelect for jQuery
 slug: multiselect-make-placeholder-accessible
 tags: multiselect, placeholder, accessible, screen, readers
 res_type: kb
@@ -64,4 +64,4 @@ Use the text [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/mult
 
 ## See Also
 
-* [MultiSelect API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [MultiSelect API Reference](/api/javascript/ui/multiselect)

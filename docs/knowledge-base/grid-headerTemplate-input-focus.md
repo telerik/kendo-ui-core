@@ -2,7 +2,7 @@
 title: Focus Column Header Input When navigatable Is true
 description: An example on how to allow the focusing of an input in the column header when the navigatable configuration of the Kendo UI Grid is true.
 type: how-to
-page_title: Focus Input in the Column headerTemplate | Kendo UI Grid
+page_title: Focus Input in the Column headerTemplate | Kendo UI Grid for jQuery
 slug: grid-headerTemplate-input-focus
 tags: grid, headerTemplate, input, focus
 ticketid: 1138938

@@ -2,7 +2,7 @@
 title: Add Scroll Shadow in Scrollable Grid
 description: An example on how to add top and bottom shadows on scroll to a Kendo UI Grid.
 type: how-to
-page_title: Add Top and Bottom Scroll Shadows | Kendo UI Grid
+page_title: Add Top and Bottom Scroll Shadows | Kendo UI Grid for jQuery
 slug: grid-add-scroll-shadow
 tags: grid, shadow
 ticketid: 1365055

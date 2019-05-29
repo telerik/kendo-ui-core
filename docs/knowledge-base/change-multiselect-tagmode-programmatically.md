@@ -1,8 +1,8 @@
 ---
 title: Change Multiselect Tag Mode Based on the Number of Selected Items
+page_title: Change the Tag Mode Programmatically | Kendo UI MultiSelect for jQuery
 description: An example on how to programmatically change the tag mode of the Kendo UI MultiSelect.
 type: how-to
-page_title: Change the Tag Mode Programmatically | Kendo UI MultiSelect
 slug: change-multiselect-tagmode-programmatically
 previous_url: /knowledge-base/change-multiselect-tagmode-programatically
 tags: multiselect, tagmode, change, programmatically, number, selected, items
@@ -12,6 +12,7 @@ component: multi-select
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -38,8 +39,8 @@ How can I set the `multiple` tag mode of the MultiSelect for the first X number 
 ## Solution
 
 1. To get the current count of selected items, handle the `change` event of the MultiSelect.
-
 1. If the current count exceeds the predefined number, change the tag mode through the `setOptions` method of the MultiSelect.
+
 
 ```dojo
 <select id="multiselect">
@@ -73,5 +74,3 @@ How can I set the `multiple` tag mode of the MultiSelect for the first X number 
 </script>
 
 ```
-
-For the complete implementation of the approach, refer to [this runnable example](http://dojo.telerik.com/@nenchef/eZALa/3).

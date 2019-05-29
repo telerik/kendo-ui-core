@@ -1,13 +1,14 @@
 ---
 title: Frequently Asked Questions
-page_title: jQuery Grid Documentation | Frequently Asked Questions | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and find answers to the most frequently asked questions related to the widget."
+page_title: Frequently Asked Questions | Kendo UI Grid for jQuery
+description: "Find answers to the most frequently asked questions related to the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/grid-faq
 slug: frequently_asked_questions_grid
-position: 80
+tags: grid, faq
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Frequently Asked Questions
 
 This article provides a collection of the most frequently asked questions (FAQ) on checkbox and answers related to the Kendo UI Grid.
 

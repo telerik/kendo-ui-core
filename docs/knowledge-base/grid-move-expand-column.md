@@ -2,7 +2,7 @@
 title: Move the Expand Column
 description: An example on how to relocate the expand column of a Kendo UI Grid.
 type: how-to
-page_title: Move the Expand Column | Kendo UI Grid
+page_title: Move the Expand Column | Kendo UI Grid for jQuery
 slug: grid-move-expand-column
 tags: grid, expand, detail, column, nested, hierarchy, relocate, move
 res_type: kb

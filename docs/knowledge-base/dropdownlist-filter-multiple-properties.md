@@ -2,7 +2,7 @@
 title: Filter DropDownList by Multiple Properties
 description: An example on how to filter the Kendo UI DropDownList by multiple properties.
 type: how-to
-page_title: Filter by Multiple Properties | Kendo UI DropDownList
+page_title: Filter by Multiple Properties | Kendo UI DropDownList for jQuery
 slug: dropdownlist-filter-multiple-properties
 tags: dropdownlist
 ticketid: 1138305

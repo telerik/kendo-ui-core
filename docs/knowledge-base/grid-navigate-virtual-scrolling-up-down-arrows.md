@@ -2,7 +2,7 @@
 title: Navigate Virtual Scrolling in Grid with Up and Down Arrows
 description: An example on how to use the Up and Down arrow buttons to navigate a Kendo UI Grid with its virtual scrolling enabled.
 type: how-to
-page_title: Use Up and Down Arrows to Navigate virtual Scrollbar | Kendo UI Grid
+page_title: Use Up and Down Arrows to Navigate virtual Scrollbar | Kendo UI Grid for jQuery
 slug: grid-navigate-virtual-scrolling-up-down-arrows
 tags: grid, virtual, scrolling, arrows, keyboard, navigate
 ticketid: 1156118

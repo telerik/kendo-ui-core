@@ -2,7 +2,7 @@
 title: Change Selection Mode in ListView
 description: An example on how to change the selection mode of the Kendo UI ListView.
 type: how-to
-page_title: Switch between Single and Multiple Selection | Kendo UI ListView
+page_title: Switch between Single and Multiple Selection | Kendo UI ListView for jQuery
 slug: listview-change-selection-mode
 tags: listview, select, mode, single, multiple, selection, change, switch, dynamic,
 res_type: kb

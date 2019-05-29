@@ -8150,6 +8150,28 @@ The jQuery object which represents the grid locked table element. Available only
 
 The jQuery object which represents the grid locked content element. Available only in a grid with locked columns.
 
+#### Example - get the locked column field name
+
+    <div id="grid"></div>
+    <script>
+      var grid = $("#grid").kendoGrid({
+        columns: [
+          { field: "name", locked: true, width: 640 },
+          { field: "age", width: 450 }
+        ],
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+          ]
+        }
+      }).data("kendoGrid");
+
+      var lockedHeaderElement = grid.lockedHeader;
+      var lockedHeaderField = lockedHeaderElement.find("th").attr('data-field');
+      console.log(lockedHeaderField); // logs "name"
+    </script>
+
 ## Methods
 
 ### addRow

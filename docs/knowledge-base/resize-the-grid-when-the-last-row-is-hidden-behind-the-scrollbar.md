@@ -2,7 +2,7 @@
 title: Persist the Resizing of the Last Grid Row When Virtual Scrolling Is Enabled
 description: An example on how to resize the Kendo UI Grid when its last row is hidden behind the scrollbar.
 type: how-to
-page_title: Resize the Grid When the Last Row Is Hidden behind the Scrollbar | Kendo UI Grid
+page_title: Resize the Grid When the Last Row Is Hidden behind the Scrollbar | Kendo UI Grid for jQuery
 slug: resize-the-grid-when-the-last-row-is-hidden-behind-the-scrollbar
 previous_url: /knowledge-base/how-to-resize-the-grid-when-the-last-row-is-hidden-behind-the-scrollbar
 tags: grid, virtualization, scroll, resize

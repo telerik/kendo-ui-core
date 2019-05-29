@@ -1,8 +1,8 @@
 ---
-title: Access TreeView Node DataItem Property 
+title: Access TreeView Node DataItem Property
 description: An example demonstrating how to access the ID of the DataItem that corresponds to a TreeView node
 type: how-to
-page_title: Access Property of DataItem from TreeView Node | Kendo UI TreeView
+page_title: Access Property of DataItem from TreeView Node | Kendo UI TreeView for jQuery
 slug: treeview-access-dataitem-property-from-node
 tags: treeview, access, dataitem, data, item, property, node, id
 ticketid: 1158103
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,13 +24,13 @@ res_type: kb
 
 ## Description
 
-How can I access the ID value of a TreeView node's DataItem?
+How can I access the DataItem `ID` value of a TreeView node?
 
 ## Solution
 
-In order to get a property from the model of a specific node, we take advantage of the [dataItem method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/dataitem#dataItem) of the Kendo UI TreeView API.
+To get a property from the model of a specific node, use the [`dataItem` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/dataitem#dataItem) of the TreeView.
 
-The following sample demonstrates the approach described above by displaying an alert with the DataItem's ID on the selection of a node:
+The following example demonstrates the full implementation of the suggested approach by displaying an alert with the DataItem `ID` when a node is selected.
 
 ```dojo
 <div class="demo-section k-content">
@@ -69,4 +70,4 @@ The following sample demonstrates the approach described above by displaying an 
 
 ## See Also
 
-* [dataItem method API Reference.](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/dataitem#dataItem)
+* [API Reference of the dataItem method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/methods/dataitem#dataItem)

@@ -1,18 +1,18 @@
 ---
 title: Select or Deselect All Rows with Select All Header Checkbox
-page_title: jQuery Grid Documentation | Select or Deselect All Checkboxes | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to select or deselect all rows with a Select All header checkbox."
+page_title: Select or Deselect All Checkboxes | Kendo UI Grid for jQuery
+description: "An example on how to select or deselect all rows in the Kendo UI Grid for jQuery with a Select All header checkbox."
 previous_url: /controls/data-management/grid/how-to/Selection/select-deselect-all-checkbox
 slug: howto_select_deselect_all_rowswith_checkboxes_grid
+tags: select, deselect, all, grid, rows, with, selectall, header, checkbox
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Select or Deselect All Rows with Select All Header Checkbox
 
 The following example demonstrates how to select or deselect all rows in a Grid by checking the **Select All** column header of the template checkbox.
 
 You can also select multiple rows by using the checkboxes and apply custom styling of the checkboxes.
-
-###### Example
 
 ```dojo
 <div id="grid"></div>
@@ -203,8 +203,3 @@ You can also select multiple rows by using the checkboxes and apply custom styli
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Make Selection with Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
-* [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})
-* [How to Prevent Selection for Checkbox Cells]({% slug howto_prevent_selection_checkbox_cells_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

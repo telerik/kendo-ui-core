@@ -2,7 +2,7 @@
 title: Show Tooltip on Selected Item in ComboBox
 description: An example on how to show a Kendo UI Tooltip on a selected item in the Kendo UI ComboBox.
 type: how-to
-page_title: Show Tooltip on Selected Item | Kendo UI Tooltip
+page_title: Show Tooltip on Selected Item | Kendo UI Tooltip for jQuery
 slug: combobox-tooltip-selected-item
 tags: combobox, tooltip, selected
 ticketid: 1143333  

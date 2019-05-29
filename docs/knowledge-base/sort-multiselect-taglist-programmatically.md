@@ -2,7 +2,7 @@
 title: Sort MultiSelect TagList Programmatically
 description: An example on how to programmatically sort the TagList of the Kendo UI MultiSelect.
 type: how-to
-page_title: Sort TagList Programmatically | Kendo UI MultiSelect
+page_title: Sort TagList Programmatically | Kendo UI MultiSelect for jQuery
 slug: sort-multiselect-taglist-programmatically
 tags: multiselect, sort, taglist, programmatically, selected, items
 res_type: kb

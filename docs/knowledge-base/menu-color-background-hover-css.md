@@ -2,7 +2,7 @@
 title: Style Hovered Menu Item with CSS
 description: An example demonstrating how to set the background color of a hovered Kendo UI Menu item
 type: how-to
-page_title: Set Background Color of Hovered Menu Item | Kendo UI Menu
+page_title: Set Background Color of Hovered Menu Item | Kendo UI Menu for jQuery
 slug: menu-color-background-hover-css
 tags: menu, color, background, hover, css
 ticketid: 1173746

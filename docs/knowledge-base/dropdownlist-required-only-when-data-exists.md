@@ -1,16 +1,16 @@
 ---
-title: Dropdown selection mandatory only if data existsts
-description: How to make Kendo DropDownList a required field only if the user has data options to select from
+title: Make DropDownList Selection Mandatory Only If Data Exists
+description: An example on how to make the Kendo UI DropDownList a required field only if the user has data options to select from.
 type: how-to
-page_title: Required Dropdown Only if Data Exists
+page_title: Make DropDownList Selection Mandatory Only If Data Exists | Kendo UI DropDownList for jQuery
 slug: dropdownlist-required-only-when-data-exists
-position: 
 tags: dropdown, required, field, validation, conditional, change
 ticketid: 1364233
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -20,15 +20,14 @@ res_type: kb
 
 
 ## Description
-In some cases, the dropdown should be mandatory only when there is data in it. Otherwise, it must not be a required field if there is no data.
+
+In some cases, the DropDownList has to be mandatory only when it presents some data. If it contains no data, it does not have to be a required field.
 
 ## Solution
 
-Use its [dataBound event](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/databound) to toggle the `required` or `data-val-required` attribute that triggers the required field validation depending on the data source of the dropdown.
+Use the [`dataBound` event](/api/javascript/ui/dropdownlist/events/databound) of the DropDownList to toggle the `required` or `data-val-required` attribute that triggers the required field validation depending on the data source of the DropDownList.
 
-Which attributes will be used depends on the validation mode you use. For example, the `required` attribute works on a generic HTML page, and the `data-val-required` attribute works with the Unobtrusive Validation used in ASP.NET.
-
-## Examples
+The attributes that will be used depend on the validation mode you use. For example, the `required` attribute works in a generic HTML page and the `data-val-required` attribute works with the Unobtrusive Validation used in ASP.NET.
 
 ```html
 <form id="myForm" action="someAction" method="post">
@@ -50,7 +49,7 @@ Which attributes will be used depends on the validation mode you use. For exampl
       optionLabel: "select an option",
       dataBound: setRequiredAttr
     });
-    
+
     function setRequiredAttr(evt) {
         if (evt.sender.dataSource.data().length < 1) {
             evt.sender.element.removeAttr("required");
@@ -77,7 +76,7 @@ Which attributes will be used depends on the validation mode you use. For exampl
 </script>
 ```
 
-Here is an MVC sample:
+The following example demonstrates how to implement the suggested approach in MVC.
 
 ```
 @(Html.Kendo().DropDownListFor(model => model.ClassId)
@@ -120,7 +119,7 @@ Here is an MVC sample:
 </script>
 ```
 
-Here is a basic controller example you can toggle to see how it behaves with and without data
+The following example demonstrates how to implement the suggested approach with a controller and which you can toggle to see how it behaves with and without data.
 
 ```
 [HttpGet]
@@ -133,15 +132,16 @@ public JsonResult Questions_GetClasses(string text)
 	}
 	);
 
-	//remove the declaration above and uncomment the empty list below, then build to test without data
+	// Remove the declaration above and uncomment the empty list below.
+	// Then build to test without data.
 
-	//List<MyClassModel> data = new List<MyClassModel>();
+	// List<MyClassModel> data = new List<MyClassModel>();
 
 	return Json(data, JsonRequestBehavior.AllowGet);
 }
 ```
 
-based on a simple model:
+The following code implements the simple model on which the previous example is based. 
 
 ```
 namespace SampleMvcApp.Models
@@ -153,4 +153,3 @@ namespace SampleMvcApp.Models
 	}
 }
 ```
-

@@ -2,7 +2,7 @@
 title: Display the Chart Title on Multiple Lines and Use Different Fonts
 description: An example on how to display a blank line in the title and use different fonts for every line in the Kendo UI Chart.
 type: how-to
-page_title: Display Subtitle with an Empty Line and Different Fonts | Kendo UI Chart
+page_title: Display Subtitle with an Empty Line and Different Fonts | Kendo UI Chart for jQuery
 slug: chart-title-empty-line-different-fonts
 tags: chart, title, font, subtitle
 ticketid: 1141221

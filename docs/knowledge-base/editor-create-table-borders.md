@@ -2,7 +2,7 @@
 title: Create a Table with Borders in the Editor
 description: An example on how to create a table with borders in the Kendo UI Editor.
 type: how-to
-page_title: Create a Table with Borders | Kendo UI Editor
+page_title: Create a Table with Borders | Kendo UI Editor for jQuery
 slug: editor-create-table-borders
 tags: editor, table, create, borders
 res_type: kb
@@ -24,11 +24,11 @@ component: editor
 
 ## Description
 
-How to create a table with borders in the Editor?
+How can I create a table with borders in the Editor?
 
 ## Solution
 
-The `Table Wizard` allows you to set table border size, color and style. To apply borders to the table created with the `Create a table` tool, handle the `execute` event and add the styles to the respective elements:
+The Table Wizard allows you to set a table border size, color, and style. To apply borders to the table that was created with the **Create a table** tool, handle the `execute` event and add the styles to the respective elements.
 
 ```dojo
     <div id="example">
@@ -36,7 +36,7 @@ The `Table Wizard` allows you to set table border size, color and style. To appl
         </textarea>
         <script>
             $(document).ready(function() {
-                $("#editor").kendoEditor({ 
+                $("#editor").kendoEditor({
                     execute: function(e) {
                         var editor = this;
                         if (e.name == "createtable") {
@@ -60,4 +60,4 @@ The `Table Wizard` allows you to set table border size, color and style. To appl
 
 ## See Also
 
-* [Editor API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor](/api/javascript/ui/editor)

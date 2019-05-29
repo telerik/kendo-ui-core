@@ -92,6 +92,17 @@ var __meta__ = { // jshint ignore:line
         return attr;
     }
 
+    function addIdAttribute(container, attr) {
+        var id = container.attr("id");
+
+        if (id) {
+            attr.id = id;
+            container.removeAttr("id");
+        }
+
+        return attr;
+    }
+
     function convertItems(items) {
         var idx,
             length,
@@ -154,21 +165,25 @@ var __meta__ = { // jshint ignore:line
     var mobileEditors = {
         "number": function (container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="number"/>').attr(attr).appendTo(container);
         },
         "date": function (container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="date"/>').attr(attr).appendTo(container);
         },
         "string": function (container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="text" />').attr(attr).appendTo(container);
         },
         "boolean": function (container, options) {
             var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
 
             $('<input type="checkbox" />').attr(attr).appendTo(container);
         },
@@ -176,6 +191,8 @@ var __meta__ = { // jshint ignore:line
             var attr = createAttributes(options);
             var items = options.values;
             var select = $('<select />');
+
+            attr = addIdAttribute(container, attr);
 
             for (var index in items) {
                 $('<option value="' + items[index].value + '">' + items[index].text + '</option>').appendTo(select);

@@ -1,18 +1,17 @@
 ---
 title: Add Custom Column Popup Editor
-description: "Get started with the jQuery Grid by Kendo UI and learn how to add a custom popup editor for a column."
+description: "An example on how to add a custom popup editor for a column in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Editing/custom_column_popup_editor
 type: how-to
-page_title: jQuery Grid Documentation | Custom Column Popup Editor | Kendo UI
+page_title: Add Custom Column Popup Editor | Kendo UI Grid for jQuery
 slug: custom_column_popup_editor
-position: 0
 tags: kendo ui, mvc, grid, editing, custom editor
 teampulseid:
 ticketid: 1112542
-pitsid:
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -26,13 +25,12 @@ pitsid:
 
 ## Description
 
-How to add a button to every cell in a column that invokes the Kendo UI Editor band to that cell.
+How to add a button to every cell in a column that invokes the Kendo UI Editor band to that cell?
 
 ## Possible Solution
 
-Use a column template to add a button to the cell. Once the user clicks the button, invoke a window that contains an editor to modify the data item of the cell.
-
-#### Example
+1. Use a [`columns.template`](/api/javascript/ui/grid/configuration/columns.template) to add a button to the cell.
+1. Once the user clicks the button, invoke a window that contains an editor to modify the data item of the cell.
 
 ```dojo
 <div id="grid"></div>

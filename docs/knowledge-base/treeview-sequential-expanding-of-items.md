@@ -2,7 +2,7 @@
 title: Expand TreeView Items Sequentially with loadOnDemand
 description: An example on how to sequentially expand TreeView items with loadOnDemand
 type: how-to
-page_title: Sequentially Expand Items with loadOnDemand | Kendo UI TreeView
+page_title: Sequentially Expand Items with loadOnDemand | Kendo UI TreeView for jQuery
 slug: treeview-sequentially-expand-items-with-loadondemand
 tags: kendo, kendo-ui, treeview, sequentially, expand, items, loadondemand
 res_type: kb

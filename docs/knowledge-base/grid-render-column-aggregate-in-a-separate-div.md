@@ -2,7 +2,7 @@
 title: Populate Column Aggregates In Separate div Elements
 description: An example on how to render a column aggregate of a Kendo UI Grid in a separate div element.
 type: how-to
-page_title: Render Column Aggregates In Separate div Elements | Kendo UI Grid
+page_title: Render Column Aggregates In Separate div Elements | Kendo UI Grid for jQuery
 slug: grid-render-column-aggregate-in-a-separate-div
 tags: grid, aggregates
 ticketid: 1148127

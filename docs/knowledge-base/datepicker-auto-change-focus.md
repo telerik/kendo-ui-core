@@ -2,7 +2,7 @@
 title: Auto-Change Focus of Date Input
 description: An example on how to automatically change the focus of the date input in the Kendo UI DatePicker.
 type: how-to
-page_title: Change Focus Automatically | Kendo UI DatePicker
+page_title: Change Focus Automatically | Kendo UI DatePicker for jQuery
 slug: datepicker-auto-change-focus
 tags: datepicker, change, focus, dateinput
 ticketid: 1168790

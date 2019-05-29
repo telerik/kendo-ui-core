@@ -2,7 +2,7 @@
 title: Filter Grid by Using the MultiSelect
 description: An example on how to customize the kendo UI Grid filter and use the Kendo UI MultiSelect widget.
 type: how-to
-page_title:  Filter the Grid with the MultiSelect Widget | Kendo UI Grid
+page_title: Filter the Grid with the MultiSelect Widget | Kendo UI Grid for jQuery
 slug: filter-grid-with-multi-select-widget
 tags: kendo ui, mvc, grid, multi, select, filter, custom,
 ticketid: 1129339

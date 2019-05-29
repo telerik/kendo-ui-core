@@ -2,7 +2,7 @@
 title: Set Date Cell Format during Excel Export in Reorderable Grid
 description: An example on how to change the format for date columns in a reorderable, dynamic Kendo UI Grid.
 type: how-to
-page_title: Format Date Columns Values before Exporting to Excel | Kendo UI Grid
+page_title: Format Date Columns Values before Exporting to Excel | Kendo UI Grid for jQuery
 slug: date-format-excel-export-grid
 tags: grid, excel, export, format, date, cells
 ticketid: 1133130

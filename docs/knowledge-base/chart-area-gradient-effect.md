@@ -1,8 +1,8 @@
 ---
 title: Apply Gradient Effect on Area Chart
+page_title: Apply Gradient Color | Kendo UI Chart for jQuery
 description: An example on how to apply a gradient color effect to the Kendo UI Area Chart.
 type: how-to
-page_title: Apply Gradient Color | Kendo UI Chart
 slug: chart-area-gradient-effect
 tags: chart, area, gradient, effect, color
 ticketid: 1158735

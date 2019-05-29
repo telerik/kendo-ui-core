@@ -2,7 +2,7 @@
 title: Set MVVM Toolbar Template
 description: An example on how to set the toolbar template in a Kendo UI MVVM TreeList.
 type: how-to
-page_title: Set MVVM Toolbar Template | Kendo UI TreeList
+page_title: Set MVVM Toolbar Template | Kendo UI TreeList for jQuery
 slug: treelist-mvvm-toolbar-template
 tags: treelist, mvvm, toolbar, template
 ticketid: 1153897

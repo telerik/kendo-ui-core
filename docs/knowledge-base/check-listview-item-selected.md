@@ -2,7 +2,7 @@
 title: Check If Particular ListView Item Is Selected
 description: An example on how to check if a particular item corresponds to a property of the selected items in the Kendo UI ListView.
 type: how-to
-page_title: Check If Particular Item Is Selected | Kendo UI ListView
+page_title: Check If Particular Item Is Selected | Kendo UI ListView for jQuery
 slug: check-listview-item-selected
 tags: listview, item, selected, check
 ticketid: 1134915

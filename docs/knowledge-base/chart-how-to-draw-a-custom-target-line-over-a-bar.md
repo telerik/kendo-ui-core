@@ -1,8 +1,8 @@
 ---
 title: Draw a Custom Target Line over a Bar
+page_title: Draw a Custom Target Line over a Bar | Kendo UI Chart for jQuery
 description: An example on how to draw a custom target line over a bar in the Kendo UI Chart.
 type: how-to
-page_title: Draw a Custom Target Line over a Bar | Kendo UI Chart
 slug: chart-how-to-draw-a-custom-target-line-over-a-bar
 tags: chart, bar, target,
 ticketid: 1140477

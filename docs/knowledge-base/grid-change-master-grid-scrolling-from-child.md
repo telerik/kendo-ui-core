@@ -2,7 +2,7 @@
 title: Scroll Parent Grid during Child Grid Navigation
 description: An example on how to scroll the parent Kendo UI Grid while navigating through the child Kendo UI Grid.
 type: how-to
-page_title: Change Master-Grid Scrolling Position during Child-Grid Navigation | Kendo UI Grid
+page_title: Change Master-Grid Scrolling Position during Child-Grid Navigation | Kendo UI Grid for jQuery
 slug: grid-change-master-grid-scrolling-from-child
 tags: grid, scrolling, master, child, hierarchy, navigation
 ticketid: 1160388

@@ -2,7 +2,7 @@
 title: Implement allowCopy in TreeList
 description: An example on how to enable the copying of the selected items in the Kendo UI TreeList.
 type: how-to
-page_title: Enable Copy of Selected Items | Kendo UI TreeList
+page_title: Enable Copy of Selected Items | Kendo UI TreeList for jQuery
 slug: treelist-copy-selection
 tags: treelist, allowCopy, selection, copy
 ticketid: 1161545
@@ -37,7 +37,7 @@ This functionality is not part of the built-in TreeList settings but is already 
 
 To focus the table, add an event handler to the [`change`](/api/javascript/ui/treelist/events/change) event of the TreeList and to the `Ctrl`+`C` key combination. You can further elaborate on the example with the help of the non-minified `kendo.grid.js` file and the `getTSV` internal function.
 
-###### Example
+
 
 ```dojo
 <div id="treeList"></div>

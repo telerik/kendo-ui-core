@@ -2,7 +2,7 @@
 title: Remove Trailing Space When Resizing Grid Columns
 description: An example on how to fill the empty space when the columns in the Kendo UI Grid are resized.
 type: how-to
-page_title: Remove Empty Space on Resizing | Kendo UI Grid
+page_title: Remove Empty Space on Resizing | Kendo UI Grid for jQuery
 slug: grid-remove-trailing-space-resize
 tags: grid, resize, column, empty, space, blank, trailing, size, zero, width
 ticketid: 1084792

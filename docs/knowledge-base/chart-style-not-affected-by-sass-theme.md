@@ -2,7 +2,7 @@
 title: The Custom Theme that Is Created by Using SASS ThemeBuilder Doesn't Affect Charts
 description: The theme which is created through the ThemeBuilder changes the style of every Kendo UI control except for the Charts.
 type: troubleshooting
-page_title: Custom Theme Created through the SASS ThemeBuilder Doesn't Affect the MVC Charts | UI for ASP.NET MVC
+page_title: Custom Theme Created through the SASS ThemeBuilder Doesn't Affect the MVC Charts | Kendo UI Chart for ASP.NET MVC
 slug: chart-style-not-affected-by-sass-theme
 tags: chart, theme, themebuilder, style, sass
 ticketid: 1141887

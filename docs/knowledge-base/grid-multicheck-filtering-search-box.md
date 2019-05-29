@@ -2,7 +2,7 @@
 title: Define Checkbox Filtering with Search Box in Grid
 description: An example on how to show a multi-check filtering with a search box in the Kendo UI Grid.
 type: how-to
-page_title: Display Search with Multi-Check Filtering | Kendo UI Grid
+page_title: Display Search with Multi-Check Filtering | Kendo UI Grid for jQuery
 slug: grid-multicheck-filtering-search-box
 tags: grid, multicheck, filtering, search box
 ticketid:

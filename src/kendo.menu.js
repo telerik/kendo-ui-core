@@ -1091,6 +1091,7 @@ var __meta__ = { // jshint ignore:line
                             popup = ul.kendoPopup({
                                 activate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: ACTIVATE }); },
                                 deactivate: function(e) {
+                                    that._closing = false;
                                     e.sender.element // Restore opacity after fade.
                                         .removeData("targetTransform")
                                         .css({ opacity: "" });
@@ -1107,6 +1108,7 @@ var __meta__ = { // jshint ignore:line
                                 },
                                 open: proxy(that._popupOpen, that),
                                 close: function (e) {
+                                    that._closing = true;
                                     var li = e.sender.wrapper.parent();
 
                                     if (overflowWrapper) {
@@ -1420,7 +1422,7 @@ var __meta__ = { // jshint ignore:line
                 that._openedPopups[popupId.toString()] = true;
             }
 
-            if (e.delegateTarget != element.parents(menuSelector)[0] && e.delegateTarget != element.parents(".k-menu-scroll-wrapper,.k-popups-wrapper")[0]) {
+            if (that._closing || (e.delegateTarget != element.parents(menuSelector)[0] && e.delegateTarget != element.parents(".k-menu-scroll-wrapper,.k-popups-wrapper")[0])) {
                 return;
             }
 

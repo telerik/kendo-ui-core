@@ -2,7 +2,7 @@
 title: Set Background Color of the Tab to the Content
 description: An example on how to set the background color of the tab to the content.
 type: how-to
-page_title: Set the Same Background Color for Tabs and Content  | Kendo UI TabStrip
+page_title: Set the Same Background Color for Tabs and Content  | Kendo UI TabStrip for jQuery
 slug: tabstrip-color-content-background-same-tab
 tags: tabstrip, color, content, background, same, tab
 ticketid: 1364933

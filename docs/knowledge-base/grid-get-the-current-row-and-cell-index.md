@@ -2,7 +2,7 @@
 title: Grid Does Not Recognize Mouse Clicks on Touch-Screen Devices
 description: When using the Kendo UI Grid in Chrome or Firefox on a hybrid device (touch screen), the Grid fails to recognize the mouse clicks.
 type: troubleshooting
-page_title: Cannot Get Row and Cell Index on Hybrid Devices | Kendo UI Grid
+page_title: Cannot Get Row and Cell Index on Hybrid Devices | Kendo UI Grid for jQuery
 slug: grid-get-the-current-row-and-cell-index
 tags: grid, cell, index, row, current, position, tap, touch, click
 ticketid: 1148726
@@ -45,8 +45,6 @@ if(kendo.support.touch){
 ```
 
 The following example demonstrates how to fully implement the suggested workaround.
-
-###### Example
 
 ```dojo
 <div id="example">

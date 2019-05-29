@@ -2,7 +2,7 @@
 title: Set the Color of the ColorPicker with a DropDownList
 description: An example on how to set the color of the Kendo UI ColorPicker with a DropDownList.
 type: how-to
-page_title: Change Colors in ColorPickers from DropDownLists | Kendo UI ColorPicker
+page_title: Change Colors in ColorPickers from DropDownLists | Kendo UI ColorPicker for jQuery
 slug: colorpicker-change-dropdownlist
 tags: colorpicker, dropdownlist, color
 ticketid: 1143760

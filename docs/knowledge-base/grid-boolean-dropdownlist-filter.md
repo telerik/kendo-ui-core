@@ -1,8 +1,8 @@
 ---
 title: Use DropDownList as Boolean Filter in Grid
-description: An example on how to use a DropDownList to filter a boolean column.
+description: An example on how to use a DropDownList to filter a Boolean column.
 type: how-to
-page_title: Filter Boolean Grid Column with DropDownList | Kendo UI Grid
+page_title: Filter Boolean Grid Column with DropDownList | Kendo UI Grid for jQuery
 slug: grid-boolean-dropdownlist-filter
 tags: grid, boolean, filter, template, dropdownlist
 ticketid: 1403934
@@ -25,15 +25,13 @@ res_type: kb
 
 ## Description
 
-I am trying to set up a custom filter for a boolean column in our Grid. I need to have a DropDownList which lists True, False, All. How can I implement this?
+How can I set up a custom filter for a Boolean column in the Grid and have a DropDownList which lists `true`, `false`, `all`?
 
 ## Solution
 
-When you initialize a DropDownList widget in the filtering UI, the column will not be filtered correctly because the DropDownList returns string values instead of boolean ones. To fix this, you need to convert the strings to boolean values before the generated filter expression is applied to the Grid.
+When you initialize a DropDownList widget in the filtering UI, the column will not be filtered correctly because the DropDownList returns string values instead of Boolean ones. To fix this, you need to convert the strings to Boolean values before the generated filter expression is applied to the Grid.
 
-Follow the steps below to implement this functionality:
-
-1. Use a filter template to show a DropDownList in the column filter menu:
+1. Use a filter template to show a DropDownList in the column filter menu.
 
     ```
          { field: "Discontinued", width: "130px", filterable: { ui: boolFilterTemplate } }
@@ -55,8 +53,9 @@ Follow the steps below to implement this functionality:
             });
           }
     ```
-1. Use the Grid [filterMenuInit](/api/javascript/ui/grid/events/filtermenuinit) event to replace the default filter label with more appropriate text:
-    
+
+1. Use the [`filterMenuInit`](/api/javascript/ui/grid/events/filtermenuinit) event of the Grid to replace the default filter label with more appropriate text.
+
     ```
           function onFilterMenuInit(e){
             if (e.field == "Discontinued") {
@@ -65,7 +64,8 @@ Follow the steps below to implement this functionality:
             }
           }
     ```
-1. Use the Grid [filter](/api/javascript/ui/grid/events/filter) event to replace the string value in the generated filter expression with its boolean equivalent:
+
+1. Use the [`filter`](/api/javascript/ui/grid/events/filter) event of the Grid to replace the string value in the generated filter expression with its Boolean equivalent.
 
     ```
           function onFilter(e){
@@ -80,7 +80,7 @@ Follow the steps below to implement this functionality:
           }
     ```
 
-###### Example
+The following example demonstrates the full implementation of the suggested approach.
 
 ```dojo
     <div id="grid"></div>
@@ -158,7 +158,4 @@ Follow the steps below to implement this functionality:
     </script>
 ```
 
-## See Also
 
-* [DataSource filter API](/api/javascript/data/datasource/configuration/filter)
-* [Grid Events](/api/javascript/ui/grid#events)

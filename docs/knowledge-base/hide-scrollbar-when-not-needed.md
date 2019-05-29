@@ -1,16 +1,16 @@
 ---
 title: Hide the Vertical Scrollbar
-page_title:  jQuery Grid Documentation | Hide the Vertical Scrollbar | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to hide the vertical scrollbar when you do not need it."
+page_title:  Hide the Vertical Scrollbar | Kendo UI Grid for jQuery
+description: "An example on how to hide the vertical scrollbar when you do not need it in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/hide-scrollbar-when-not-needed
 slug: howto_hide_vertical_scrollbar_grid
+tags: grid, hide, vertical, scrollbar, when, not, needed
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Hide the Vertical Scrollbar
-
-The example below demonstrates how to conditionally hide the vertical scrollbar of the Kendo UI Grid, when the total height of all table rows is less than the Grid height.
-
-###### Example
+The following example demonstrates how to conditionally hide the vertical scrollbar of the Kendo UI Grid, when the total height of all table rows is less than the Grid height.
 
 ```dojo
 <style>
@@ -91,13 +91,4 @@ $(function () {
 
 ## See Also
 
-* [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
-* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
-* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
-* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
-* [How to Disable Resizing for Specific Columns]({% slug howto_disable_column_resizing_grid %})
-* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
-* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

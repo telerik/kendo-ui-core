@@ -1,16 +1,16 @@
 ---
 title: Select Multiple Rows with Checkboxes
-page_title:  jQuery Grid Documentation | Multiple Rows with Checkboxes | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to select multiple rows with checkboxes."
+page_title:  Multiple Rows with Checkboxes | Kendo UI Grid for jQuery
+description: "An example on how to select multiple rows with checkboxes in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Selection/select-multiple-rows-with-checkboxes
 slug: howto_select_multiple_rowswith_checkboxes_grid
+tags: select, multiple, rows, checkboxes, grid
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Select Multiple Rows with Checkboxes
-
 The following example demonstrates how to select multiple rows by using the checkbox template in the Grid.
-
-###### Example
 
 ```dojo
    <div id="grid"></div>
@@ -47,14 +47,14 @@ The following example demonstrates how to select multiple rows by using the chec
             e.stopPropagation();
             $(e.target).closest("tr").toggleClass("k-state-selected");
           });
-          
+
           var rows = e.sender.element.find("tr");
           rows.each(function(e){
             $(this).children().first().on("click", onFirstTDClick);
           })
         }
       });
-      
+
       function onFirstTDClick(e){
         e.stopPropagation();
         var tr = $(e.target).closest("tr");
@@ -68,8 +68,3 @@ The following example demonstrates how to select multiple rows by using the chec
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Make Selection with Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
-* [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})
-* [How to Prevent Selection for Checkbox Cells]({% slug howto_prevent_selection_checkbox_cells_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

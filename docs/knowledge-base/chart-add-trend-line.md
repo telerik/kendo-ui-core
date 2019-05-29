@@ -1,8 +1,8 @@
 ---
 title: Add Trend Line or Average Line to Chart
+page_title: Add Trend Line or Average Line to Chart | Kendo UI Chart for jQuery
 description: An example on how to insert a trend line or an average line in a Kendo UI Chart.
 type: how-to
-page_title: Add Trend Line or Average Line to Chart | Kendo UI Charts
 slug: chart-add-trend-line
 tags: chart, trendline, average, mean, sampling
 ticketid: 1163517

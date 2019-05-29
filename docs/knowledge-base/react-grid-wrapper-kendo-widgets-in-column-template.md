@@ -2,7 +2,7 @@
 title: Use Kendo UI Widgets in the Column Template of the Grid Wrapper for React
 description: An example on how to use Kendo UI widgets in the column template of a kendo UI Grid wrapper for React.
 type: how-to
-page_title: Render kendo UI Widgets in the Grid Wrapper for React | Kendo UI for React  
+page_title: Render kendo UI Widgets in the Grid Wrapper for React | Kendo UI Wrappers for React  
 slug: react-grid-wrapper-kendo-widgets-in-column-template
 tags: react, reactjs, grid, column template, widgets, controls, components, render, show
 ticketid: 1149333
@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-I am using the Kendo UI Grid react wrapper and have a button inside the Grid, which uses a column template similar to the following:
+I am using the Kendo UI Grid React wrapper and have a button inside the Grid which uses a column template similar to the following:
 
 ```
 <GridColumn width="60px" template='<button class="k-button submit"\>Skicka </button\>' /\>

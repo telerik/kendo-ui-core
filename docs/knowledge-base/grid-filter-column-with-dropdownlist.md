@@ -2,7 +2,7 @@
 title: Filter Columns with DropDownList
 description: An example on how to filter Kendo UI Grid columns with complex objects.
 type: how-to
-page_title: Filter Columns with Complex Objects | Kendo UI Grid
+page_title: Filter Columns with Complex Objects | Kendo UI Grid for jQuery
 slug: grid-filter-column-with-dropdownlist
 tags: grid, filter, dropdownlist
 ticketid: 1144229
@@ -32,7 +32,7 @@ Programmatically apply the filters on the [`filter`](https://docs.telerik.com/ke
 
 ```dojo
    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
-    
+
     <div id="example">
       <div id="grid"></div>
 

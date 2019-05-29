@@ -2,7 +2,7 @@
 title: Expand One Grid Row Only at a Time
 description: An example on how to have only a single row expanded at a time in the Kendo UI Grid.
 type: how-to
-page_title: Collapse Other Rows on Row Expand | Kendo UI Grid
+page_title: Collapse Other Rows on Row Expand | Kendo UI Grid for jQuery
 slug: grid-collapse-rows-on-expand
 tags: grid, hierarchy, collapse, expand
 ticketid: 1141804

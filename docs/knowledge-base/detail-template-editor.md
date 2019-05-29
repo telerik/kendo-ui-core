@@ -1,16 +1,16 @@
 ---
 title: Create Custom Editor in Detail Template
-page_title: jQuery Grid Documentation | Custom Detail Template Editor | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to create custom editor in a detail template."
+page_title: Custom Detail Template Editor | Kendo UI Grid for jQuery
+description: "An example on how to create custom editor in the detail template of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Templates/detail-template-editor
 slug: howto_create_custom_editorin_detail_template_grid
+tags: grid, create, custom, editor, detail, template
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Create Custom Editor in Detail Template
-
 The following example demonstrates how to create a custom editor in a Grid detail template.
-
-###### Example
 
 ```dojo
     <div id="grid"></div>
@@ -132,8 +132,3 @@ The following example demonstrates how to create a custom editor in a Grid detai
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Refresh Grid in Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
-* [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
-* [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

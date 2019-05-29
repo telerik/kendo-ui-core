@@ -2,7 +2,7 @@
 title: Include SelectAll for Grid Column Sections in ColumnMenu
 description: An example on how to render SelectAll in the column menu of the Grid columns.
 type: how-to
-page_title: Display SelectAll in the ColumnMenu for Showing and Hiding Columns | Kendo UI Grid
+page_title: Display SelectAll in the ColumnMenu for Showing and Hiding Columns | Kendo UI Grid for jQuery
 slug: grid-include-selectall-in-columnmenu
 tags: kendoui, kendo, grid, column menu, select all
 res_type: kb

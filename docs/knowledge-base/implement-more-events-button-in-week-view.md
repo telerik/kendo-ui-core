@@ -2,7 +2,7 @@
 title: Implement More Events Button in Week View of Scheduler
 description: An example on how to implement a More Events button in the week view of the Scheduler which is similar to the one that is available in its month view.
 type: how-to
-page_title: Show More Events Button in Week View | Kendo UI Scheduler
+page_title: Show More Events Button in Week View | Kendo UI Scheduler for jQuery
 slug: implement-more-events-button-in-week-view
 tags: implement, show, more, events, button, scheduler, month, week, view
 ticketid: 1117416

@@ -2,7 +2,7 @@
 title: Implement Single-Row Selection on Click in Batch Edit Grid
 description: An example on how to allow click selection in a Kendo UI Grid in batch edit mode.
 type: how-to
-page_title: Implement Single-Row Selection on Click in Batch Edit Mode | Kendo UI Grid
+page_title: Implement Single-Row Selection on Click in Batch Edit Mode | Kendo UI Grid for jQuery
 slug: grid-click-selection-batch-edit
 tags: single, row, selection, grid, batch, edit, mode
 ticketid: 1125960
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>

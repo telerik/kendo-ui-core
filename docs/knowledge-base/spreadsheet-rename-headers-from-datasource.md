@@ -2,7 +2,7 @@
 title: Change the Columns Headers in a DataSource Bound Spreadsheet
 description: An example on how to manually alter the headers of the columns in a Kendo UI Spreadsheet which is populated from a DataSource.
 type: how-to
-page_title: Rename the Default Headers When Using DataSource | Kendo UI Spreadsheet
+page_title: Rename the Default Headers When Using DataSource | Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-rename-headers-from-datasource
 tags: kendo, kendoui, spreadsheet, datasource, headers
 res_type: kb

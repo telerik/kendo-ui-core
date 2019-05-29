@@ -2,7 +2,7 @@
 title: Editable Grid Removes Milliseconds from DateTime Fields
 description: During editing, the Kendo UI Grid removes the milliseconds portion from the DateTime fields.
 type: troubleshooting
-page_title: Grid Clears Milliseconds from DateTime Fields When Editing Records | Kendo UI Grid
+page_title: Grid Clears Milliseconds from DateTime Fields When Editing Records | Kendo UI Grid for ASP.NET MVC
 slug: grid-persist-milliseconds-during-edit
 tags: grid, editing
 ticketid: 1142164
@@ -21,7 +21,7 @@ res_type: kb
 
 ## Description
 
-When editing an MVC Grid, the model that is sent to the server upon clicking **Update** has the milliseconds reset to zero for date fields which previously had their milliseconds set to a non-zero value.
+When editing a Kendo UI Grid for ASP.NET MVC, the model that is sent to the server upon clicking **Update** has the milliseconds reset to zero for date fields which previously had their milliseconds set to a non-zero value.
 
 ## Steps to Reproduce
 

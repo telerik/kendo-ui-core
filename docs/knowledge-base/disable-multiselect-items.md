@@ -2,7 +2,7 @@
 title: Disable MultiSelect Options
 description: An example on how to disable a selection of certain options in a MultiSelect and prevent the drop-down from closing when the user clicks them.
 type: how-to
-page_title: Disable Items | Kendo UI MultiSelect
+page_title: Disable Items | Kendo UI MultiSelect for jQuery
 slug: disabled-items-multiselect
 tags: multiselect, disabled, items, options, prevent, selection
 ticketid: 1363148

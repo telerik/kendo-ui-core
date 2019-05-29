@@ -969,6 +969,18 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _refreshScroll: function () {
+            var listView = this.listView;
+            var enableYScroll = listView.element.height() > listView.content.height();
+
+            if (this.options.autoWidth) {
+                listView.content.css({
+                    overflowX: "hidden",
+                    overflowY: enableYScroll ? "scroll" : "auto"
+                });
+            }
+        },
+
         _resizePopup: function(force) {
             if (this.options.virtual) {
                 return;
@@ -980,6 +992,8 @@ var __meta__ = { // jshint ignore:line
                         this._calculatePopupHeight(force);
                     }, this);
                 }).call(this, force));
+
+                this.popup.one("activate", proxy(this._refreshScroll, this));
             } else {
                 this._calculatePopupHeight(force);
             }
