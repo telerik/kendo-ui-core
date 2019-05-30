@@ -659,8 +659,8 @@ var __meta__ = { // jshint ignore:line
 
         _dateInView: function(date) {
             var that = this,
-                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTOR + ":first").find("a")),
-                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTOR + ":last").find("a"));
+                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID + ":first").find("a")),
+                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID + ":last").find("a"));
 
             return +date <= +lastDateInView && +date >= +firstDateInView;
         },
