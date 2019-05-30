@@ -189,8 +189,6 @@ var __meta__ = { // jshint ignore:line
         _element: function() {
             var height = this.options.height;
 
-            this.hasHeight = height || this.element.height();
-
             this.element.addClass("k-widget k-listview").attr("role", "listbox");
 
             if (height) {
@@ -212,7 +210,7 @@ var __meta__ = { // jshint ignore:line
                 active = activeElement(),
                 endlessAppend =  that._endlessFetchInProgress,
                 index = endlessAppend ? that._skipRerenderItemsCount : 0,
-                height = that.hasHeight;
+                scrollable = that.options.scrollable;
 
             e = e || {};
 
@@ -282,7 +280,7 @@ var __meta__ = { // jshint ignore:line
                     that.current(that.current().next());
                 }
                 else {
-                    if (!height) {
+                    if (!scrollable) {
                         that.current(items.eq(0));
                     }
                 }
@@ -362,9 +360,8 @@ var __meta__ = { // jshint ignore:line
         _scrollable: function() {
             var that = this;
             var scrollable = that.options.scrollable;
-            var height = that.hasHeight;
 
-            if (scrollable || height) {
+            if (scrollable) {
 
                 that.element.css({
                     "overflow-y": "scroll",
@@ -487,8 +484,7 @@ var __meta__ = { // jshint ignore:line
                             preventDefault = kendo.preventDefault,
                             editItem = element.find("." + KEDITITEM),
                             active = activeElement(), idx,
-                            scrollable = that.options.scrollable,
-                            height = that.hasHeight;
+                            scrollable = that.options.scrollable;
 
                         if ((!canHandle && !isTextBox && keys.ESC != key) || (isTextBox && keys.ESC != key && keys.ENTER != key)) {
                             return;
@@ -502,12 +498,12 @@ var __meta__ = { // jshint ignore:line
                             if (current && current[0]) {
                                 that.current(current);
                             }
-                            else if (!height) {
+                            else if (!scrollable) {
                                 that.current(that._item("last"));
                             }
                             preventDefault(e);
                         } else if (keys.DOWN === key || keys.RIGHT === key) {
-                            if (scrollable || height) {
+                            if (scrollable) {
                                 if(that.options.scrollable === "endless" && !current.next().length) {
                                     that.element[0].scrollTop = that.element[0].scrollHeight;
                                     that._focusNext = true;

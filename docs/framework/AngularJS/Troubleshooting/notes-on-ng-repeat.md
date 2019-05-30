@@ -187,11 +187,11 @@ The following example demonstrates a Kendo UI TabStrip widget in AngularJS with 
             <div kendo-tab-strip k-ng-delay="tabStripDelay">
               <!-- tab list -->
               <ul>
-                <li ng-repeat="tab in tabs">{{tab}}</li>
+                <li ng-repeat="tab in tabs">Tab</li>
               </ul>
 
               <div ng-repeat="tabContent in tabContents">
-                {{ tabContent }}
+                TabContent
               </div>
 
             </div>
@@ -205,7 +205,7 @@ The following example demonstrates a Kendo UI TabStrip widget in AngularJS with 
           $scope.tabs = [ "t1", "t2" ];
           $scope.tabContents = [ "tc1", "tc2" ];
 
-                $timeout(function() {
+          $timeout(function() {
             $scope.tabStripDelay = true;
           });
       })
