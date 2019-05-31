@@ -58,13 +58,22 @@ The shape visual templates allow you to override the rendering entirely as demon
       function visualTemplate(options) {
         // Render template and bind it to the current data item
         var dataItem = options.dataItem;
-        var renderElement = $("<div />").appendTo("body");
+        var renderElement = $("<div style='display:inline-block' />").appendTo("body");
         renderElement.html(contentTemplate(dataItem));
 
         // Create a new group that will hold the rendered content
         var output = new kendo.drawing.Group();
+        var width = renderElement.width();
+        var height = renderElement.height();
+        // Create a rectangle using the renderElement dimensions to expand the group while waiting for its actual content
+        var geom = new kendo.geometry.Rect([0, 0], [width, height]);
+        output.append(new kendo.drawing.Rect(geom, { stroke: { width: 0 }}));
+
         draw.drawDOM(renderElement)
-        .then(function(group) {
+          .then(function(group) {
+          /* Remove helper rectangle */
+          output.clear();
+
           output.append(group);
 
           /* Clean-up */
