@@ -135,7 +135,7 @@ var __meta__ = { // jshint ignore:line
         "string": function(container, options) {
             var attr = createAttributes(options);
 
-            $('<input type="text" class="k-input k-textbox"/>').attr(attr).appendTo(container);
+            $('<input type="text" class="k-textbox"/>').attr(attr).appendTo(container);
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
