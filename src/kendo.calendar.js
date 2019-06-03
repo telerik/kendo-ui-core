@@ -665,6 +665,21 @@ var __meta__ = { // jshint ignore:line
             return +date <= +lastDateInView && +date >= +firstDateInView;
         },
 
+        _isNavigatable: function(currentValue, cellIndex) {
+            var that = this;
+            var isDisabled = that.options.disableDates;
+            var cell;
+            var index;
+
+            if (that._view.name == "month") {
+                return !isDisabled(currentValue);
+            } else {
+                index = that.wrapper.find("."+FOCUSED).index();
+                cell = that.wrapper.find(".k-content td:eq("+(index+cellIndex)+")");
+                return cell.is(CELLSELECTORVALID) || !isDisabled(currentValue);
+            }
+        },
+
         _move: function(e) {
             var that = this,
                 options = that.options,
@@ -780,7 +795,7 @@ var __meta__ = { // jshint ignore:line
                         currentValue = restrictValue(currentValue, options.min, options.max);
                     }
 
-                    if (isDisabled(currentValue)) {
+                    if (!that._isNavigatable(currentValue, value)) {
                         currentValue = that._nextNavigatable(currentValue, value);
                     }
 

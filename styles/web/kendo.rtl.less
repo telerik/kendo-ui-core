@@ -150,6 +150,12 @@
     transform: scaleX(-1);
 }
 
+.k-rtl .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view {
+    text-align: left;
+    padding-left: 1em;
+    text-align: left;
+}
+
 // Editor
 
 .k-rtl .k-form-text-row input
@@ -495,9 +501,12 @@
 // Menu
 
 .k-rtl .k-menu .k-item,
-.k-rtl .k-widget.k-menu-horizontal > .k-item
-{
+.k-rtl .k-widget.k-menu-horizontal > .k-item {
     border-width: 0 0 0 1px;
+}
+
+.k-rtl .k-menu.k-menu-vertical .k-item {
+    border: 0;
 }
 
 .k-rtl .k-widget.k-menu-horizontal > .k-item
@@ -558,9 +567,8 @@
 
 // Notification
 
-.k-rtl .k-notification-button .k-notification-wrap,
-.k-rtl.k-notification-button .k-notification-wrap
-{
+.k-rtl .k-notification-closable .k-notification-wrap,
+.k-rtl.k-notification-closable .k-notification-wrap {
     padding-right: .5em;
     padding-left: 20px;
 }
@@ -569,14 +577,12 @@
 .k-rtl .k-notification-wrap > .k-i-information,
 .k-rtl .k-notification-wrap > .k-i-information,
 .k-rtl .k-notification-wrap > .k-i-warning,
-.k-rtl .k-notification-wrap > .k-i-erorr
-{
+.k-rtl .k-notification-wrap > .k-i-erorr {
     margin-right: 0;
     margin-left: 4px;
 }
 
-.k-rtl .k-notification-wrap > .k-i-close
-{
+.k-rtl .k-notification-wrap > .k-i-close {
     right: auto;
     left: 4px;
 }

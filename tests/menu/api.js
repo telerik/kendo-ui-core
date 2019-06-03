@@ -520,6 +520,16 @@ it("Adding dynamic contentUrl element renders contents on root and inner levels"
         }, 1);
     });
 
+    it('remove with non-existing item should not throw js error', function() {
+        try {
+            menu.remove("#no-such-item")
+        } catch (error) {
+            assert.isOk(false);
+        }
+
+        assert.isOk(true);
+    });
+
     });
 }());
 

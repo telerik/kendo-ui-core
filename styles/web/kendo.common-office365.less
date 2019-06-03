@@ -285,17 +285,8 @@
     padding: 0 6px;
 }
 
-.k-notification-wrap {
+.k-notification {
     padding: 1.75em;
-
-    > .k-i-close {
-        top: 50%;
-        transform: translateY(-50%);
-    }
-}
-
-.k-notification-time {
-    padding: 1.250em;
 }
 
 .k-numerictextbox .k-link .k-i-arrow-60-up {
@@ -829,23 +820,26 @@ table.k-editor {
 }
 
 //RTL
-.k-rtl .k-widget.k-datetimepicker .k-picker-wrap .k-icon {
-    margin: 0 2px;
-}
+.k-rtl,
+[dir="rtl"] {
+    .k-widget.k-datetimepicker .k-picker-wrap .k-icon {
+        margin: 0 2px;
+    }
 
-.k-rtl .k-widget.k-autocomplete > .k-i-close,
-.k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    right: initial;
-    margin-right: 0;
-}
+    .k-widget.k-autocomplete > .k-i-close,
+    .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
+        right: initial;
+        margin-right: 0;
+    }
 
-.k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: calc(@combobox-clear-icon-offset);
-    right: initial;
-}
+    .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
+        left: calc(@combobox-clear-icon-offset);
+        right: initial;
+    }
 
-.k-rtl .k-radio:checked + .k-radio-label:after {
-    right: 5px;
+    .k-radio:checked + .k-radio-label:after {
+        right: 5px;
+    }
 }
 
 .k-spreadsheet {

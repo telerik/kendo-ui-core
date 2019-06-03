@@ -1,37 +1,35 @@
 // Notification
-
-.k-notification-wrap
-{
+.k-notification {
     padding: .6em .5em;
+    border-width: 1px;
+    border-style: solid;
     cursor: default;
     position: relative;
     white-space: nowrap;
-}
+    box-sizing: border-box;
 
-.k-notification-button .k-notification-wrap
-{
-    padding-right: 20px;
+    &-closable {
+        padding-right: 20px;
+    }
 }
 
 .k-notification-wrap > .k-i-information,
 .k-notification-wrap > .k-i-information,
 .k-notification-wrap > .k-i-information,
 .k-notification-wrap > .k-i-warning,
-.k-notification-wrap > .k-i-information
-{
+.k-notification-wrap > .k-i-information {
     vertical-align: text-bottom;
     margin-right: 4px;
 }
 
-.k-notification-wrap > .k-i-close
-{
+.k-notification-wrap > .k-i-close {
     position: absolute;
-    top: 7px;
+    top: 50%;
     right: 4px;
+    transform: translateY(-50%);
     display: none;
 }
 
-.k-notification-button .k-notification-wrap > .k-i-close
-{
+.k-notification-closable .k-notification-wrap > .k-i-close {
     display: block;
 }

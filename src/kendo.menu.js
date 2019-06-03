@@ -831,8 +831,10 @@ var __meta__ = { // jshint ignore:line
 
             if (item.length || candidate === this.element){
                 return item;
+            } else if (overflowWrapper) {
+                return overflowWrapper.find(candidate);
             } else {
-                return overflowWrapper && overflowWrapper.find(candidate);
+                return $();
             }
         },
 

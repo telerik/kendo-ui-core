@@ -475,5 +475,40 @@
         }
         assert.isOk(noErrors);
     });
+
+    it("doesn't sync value with text when mapValueTo dataItem and dataItem is selected", function() {
+        var noErrors = true;
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(o) {
+                    o.success([{text: "asd", value: 1}]);
+                }
+            }
+        });
+        dataSource.read();
+
+        var combobox = new ComboBox(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: dataSource,
+            virtual: {
+                valueMapper: function(o) { o.success({text: "foo", value: 2}); },
+                itemHeight: 20,
+                mapValueTo: "dataItem"
+            }
+        });
+
+        combobox.value(2);
+
+        assert.equal(combobox.dataItem().text, "foo");
+
+        combobox.text("foo");
+
+        assert.equal(combobox.value(), 2);
+    });
     });
 }());

@@ -541,6 +541,7 @@ var __meta__ = { // jshint ignore:line
 
         _select: function(candidate, keepState) {
             var that = this;
+
             candidate = that._get(candidate);
 
             if (candidate === -1) {
@@ -717,6 +718,10 @@ var __meta__ = { // jshint ignore:line
 
             if (ignoreCase) {
                 loweredText = loweredText.toLowerCase();
+            }
+
+            if(that.dataItem() && that._text(that.dataItem()) === text){
+                return;
             }
 
             that._select(function(data) {
