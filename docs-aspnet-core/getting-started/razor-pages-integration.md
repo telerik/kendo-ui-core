@@ -18,6 +18,10 @@ You can scaffold a Razor Pages sample which contains an ASP.NET Core Grid with e
 
 The sample Razor Pages samples which demonstrate the usage of the Telerik UI for ASP.NET Core components are located in the [ASP.NET Core Examples](https://github.com/telerik/ui-for-aspnet-core-examples) repository on GitHub.
 
+## Known Limitations
+
+Razor Pages use `Page` in their routing mechanism which interferes with `GET` requests made by the Kendo UI DataSource. As a result, only `POST` requests should be used when paging is required.
+
 ## See Also
 
 * [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
