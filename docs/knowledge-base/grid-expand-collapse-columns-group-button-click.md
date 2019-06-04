@@ -2,7 +2,7 @@
 title: Expand and Collapse Group of Columns on Button Click
 description: An example on how to expand and collapse a group of columns on a button click in the Kendo UI Grid.
 type: how-to
-page_title: Expand and Collapse Column Groups with Header Button | Kendo UI Grid
+page_title: Expand and Collapse Column Groups with Header Button | Kendo UI Grid for jQuery
 slug: grid-expand-collapse-columns-group-button-click
 tags: grid, multi-column, headers, expand, collapse, columns
 ticketid: 1158853

@@ -1,8 +1,8 @@
 ---
-title: Change MVC Gantt Resources Depending on the Edited Task
+title: Change the Resources of Gantt for ASP.NET MVC Depending on the Edited Task
 description: An example on how dynamically change the resources that are loaded in the assignments edit dialog of the Telerik UI for ASP.NET MVC Gantt.
 type: how-to
-page_title: Populate the Assignments Edit Dialog Based on StartDate and EndDate of Selected Tasks | Telerik UI for ASP.NET MVC
+page_title: Populate the Assignments Edit Dialog Based on StartDate and EndDate of Selected Tasks | Kendo UI Gantt for ASP.NET MVC
 slug: gantt-resources-depending-on-task
 tags: kendo, kendoui, gantt, resources, assignments, dynamic, task-specific
 ticketid: 1146251

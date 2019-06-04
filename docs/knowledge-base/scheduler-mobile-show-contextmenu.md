@@ -2,7 +2,7 @@
 title: Show ContextMenu in Scheduler on Mobile Devices
 description: An example on how to show a ContextMenu in the Kendo UI Scheduler on mobile devices.
 type: how-to
-page_title: Show ContextMenu on Tapping Events or Slots on Mobile Devices | Kendo UI Scheduler
+page_title: Show ContextMenu on Tapping Events or Slots on Mobile Devices | Kendo UI Scheduler for jQuery
 slug: scheduler-mobile-show-contextmenu
 tags: scheduler, show, context, menu, mobile, tap, contextmenu
 ticketid: 1137382

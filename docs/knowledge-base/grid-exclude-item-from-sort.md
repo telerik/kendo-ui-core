@@ -2,7 +2,7 @@
 title: Exclude Specific Items When Sorting Grid Data
 description: An example on how to exclude one or more specific items when the user sorts data in the Kendo UI Grid.
 type: how-to
-page_title: Exclude Specific Items When Sorting | Kendo UI Grid
+page_title: Exclude Specific Items When Sorting | Kendo UI Grid for jQuery
 slug: grid-exclude-item-from-sort
 tags: grid, exclude, item, sort, sorting, items, row, record
 ticketid: 1158437

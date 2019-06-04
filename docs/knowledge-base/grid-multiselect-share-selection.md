@@ -2,7 +2,7 @@
 title: Share Selection between MultiSelect and Grid
 description: An example on how to select rows from the MultiSelect in the Kendo UI Grid and choose values by selecting Grid rows in the MultiSelect.
 type: how-to
-page_title: Select Rows From MultiSelect | Kendo UI Grid
+page_title: Select Rows From MultiSelect | Kendo UI Grid for jQuery
 slug: grid-multiselect-share-selection
 tags: grid, multiselect, selection
 ticketid: 1144164

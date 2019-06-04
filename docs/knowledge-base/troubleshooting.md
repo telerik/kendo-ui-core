@@ -1,13 +1,14 @@
 ---
-title: Troubleshooting
-page_title: jQuery Grid Documentation | Editing Troubleshooting | Kendo UI
-description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and troubleshoot any issues that might occur while editing its data."
+title: Grid Troubleshooting on Editing
+page_title: Grid Troubleshooting on Editing | Kendo UI for jQuery
+description: "Troubleshoot any issues that might occur while editing the data of the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/editing/troubleshooting
 slug: edittroubleshoot_kendoui_grid_widget
-position: 80
+tags: grid, editing, troubleshooting
+component: grid
+type: troubleshooting
+res_type: kb
 ---
-
-# Editing Troubleshooting
 
 This article provides solutions for issues you might encounter while working with the editing functionality of the Grid.
 
@@ -46,5 +47,4 @@ The following example demonstrates how to use Kendo UI-styled CheckBox editor fo
 ## See Also
 
 * [Implementing Foreign-Key Columns in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn)
-* [Knowledge Base Section](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

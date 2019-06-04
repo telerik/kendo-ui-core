@@ -2,7 +2,7 @@
 title: Remove Double Left Border from the Grid
 description: An example on how to remove the double left border when hiding the first column in the Kendo UI Grid.
 type: how-to
-page_title: Remove Faulty Left Border after Hiding the First Column | Kendo UI Grid
+page_title: Remove Faulty Left Border after Hiding the First Column | Kendo UI Grid for jQuery
 slug: grid-remove-double-left-border
 tags: grid, columns, border
 ticketid: 1347080
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>

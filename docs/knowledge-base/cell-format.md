@@ -1,20 +1,20 @@
 ---
 title: Format Cell Values
-page_title: jQuery Grid Documentation | Format Cell Values | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to format the cell values of the widget during Excel export."
+page_title: Format Cell Values | Kendo UI Grid for jQuery
+description: "An example on how to format the cell values of the Kendo UI Grid during Excel export."
 previous_url: /controls/data-management/grid/how-to/excel/cell-format
 slug: howto_format_cell_values_grid
+tags: grid, cell, values
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Set Cell Format During Excel Export
-
-Your project might require you to format the cell values of the Grid.
+Your project might require you to format the cell values of the Kendo UI Grid.
 
 To achieve this behavior, set the [`format`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells. The page about [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats, supported by Excel.
 
 The following example demonstrates how to format cell values of the Grid while exporting it to Excel.
-
-###### Example
 
 ```dojo
 <div id="grid"></div>
@@ -42,9 +42,7 @@ The following example demonstrates how to format cell values of the Grid while e
 </script>
 ```
 
-The example below demonstrates how to set a custom format for `date` values.
-
-###### Example
+The following example demonstrates how to set a custom format for `date` values.
 
 ```dojo
 <div id="grid"></div>
@@ -91,12 +89,4 @@ The example below demonstrates how to set a custom format for `date` values.
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid/configuration/excel)
-* [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
-* [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
-* [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
-* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
-* [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
-* [How to Use Column Template]({% slug howto_use_column_template_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

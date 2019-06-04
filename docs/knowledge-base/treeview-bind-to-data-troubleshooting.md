@@ -2,7 +2,7 @@
 title: Troubleshoot When Binding the TreeView to Data
 description: An example on how to troubleshoot when you bind the Kendo UI TreeView to data.
 type: how-to
-page_title: Troubleshoot When Binding to Data | Kendo UI TreeView
+page_title: Troubleshoot When Binding to Data | Kendo UI TreeView for jQuery
 slug: treeview-bind-to-data-troubleshooting
 tags: treeview, troubleshooting
 ticketid: 1141952  

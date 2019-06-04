@@ -2,7 +2,7 @@
 title: Show Pager on Top and Bottom
 description: An example on how to show the Kendo UI Grid pager on top and bottom.
 type: how-to
-page_title: Duplicate Pager | Kendo UI Grid
+page_title: Duplicate Pager | Kendo UI Grid for jQuery
 slug: grid-show-pager-top-bottom
 tags: grid, pager, duplicate, top, bottom, multiply, clone
 res_type: kb

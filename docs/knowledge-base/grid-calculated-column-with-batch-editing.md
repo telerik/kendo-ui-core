@@ -1,8 +1,8 @@
 ---
 title: Implement Calculated Columns with Batch Editing in Grids
-description: An example on implementing a calculated column in a Kendo UI Grid with enabled Batch (InCell) editing.
+description: An example on how to implement a calculated column in a Kendo UI Grid for jQuery with enabled Batch (InCell) editing.
 type: how-to
-page_title: Implement Calculated Columns from Multiple Fields in a Grid with the Batch Edit Mode Enabled
+page_title: Implement Calculated Columns from Multiple Fields in a Grid with the Batch Edit Mode Enabled | Kendo UI Grid for jQuery
 slug: grid-calculated-column-with-batch-editing
 tags: grid, batch, incell, calculated
 res_type: kb
@@ -20,15 +20,17 @@ component: grid
 
 ## Description
 
-How can I display a calculated value in a template column of a Grid in the batch (InCell) edit mode by using values from other fields of the row.
+How can I display a calculated value in a template column of a Grid in the batch (InCell) edit mode by using values from other fields of the row?
 
 ## Solution
 
 If the calculated field will not be part of the model and if only the calculated value will be visible in the Grid for the end user:
+
 1. Create a template column.  
 1. In the template column, wrap the initially calculated value in an element with, for example, a class name, so that you can refer to it later.
 
 To change the calculated value dynamically:
+
 1. Handle the `edit` event of the Grid.
 1. Calculate the new value from the updated model.
 1. Get a reference to the wrapping element which holds the calculated value.

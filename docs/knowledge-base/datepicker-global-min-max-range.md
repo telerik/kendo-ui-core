@@ -1,8 +1,8 @@
 ---
-title: Setting Global Min and Max DatePicker Values 
+title: Setting Global Min and Max DatePicker Values
 description: An example demonstrating how to change the max and min values globally for all DatePickers
 type: how-to
-page_title: Modifying Min and Max Values Globally | Kendo UI DatePicker
+page_title: Modifying Min and Max Values Globally | Kendo UI DatePicker for jQuery
 slug: datepicker-global-min-max-range
 tags: datepicker, global, min, max, range
 ticketid: 1341901
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -21,13 +22,15 @@ res_type: kb
  </tr>
 </table>
 
+
 ## Description
 
 How can I change globally the min and max values for all Kendo UI DatePickers?  
 
 ## Solution
 
-In order to globally set the [min](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/min) and [max](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/max) configurations for all Kendo UI DatePickers, add the following script:
+To globally set the [`min`](/api/javascript/ui/datepicker/configuration/min) and [`max`](/api/javascript/ui/datepicker/configuration/max) configurations for all Kendo UI DatePickers, add the following script.
+
 ```
 <script>
   kendo.ui.DatePicker.fn.options.max = new Date(3999, 11, 31);
@@ -35,7 +38,7 @@ In order to globally set the [min](https://docs.telerik.com/kendo-ui/api/javascr
 </script>
 ```
 
-The following sample demonstrates the approach above by setting the max value to December 31, 3999 and the min value to January 1, 1700 for two Kendo UI DatePickers:
+The following example demonstrates the implementation of the suggested approach and sets the max value to December 31, 3999 and the min value to January 1, 1700 in two Kendo UI DatePickers.
 
 ```dojo
     <script>
@@ -54,17 +57,13 @@ The following sample demonstrates the approach above by setting the max value to
           $("#datepicker").kendoDatePicker();
 
           $("#datepicker1").kendoDatePicker({
-            //min: new Date()  //will overwrite global setting
+            // min: new Date()  // Will overwrite the global setting.
           });
         });
       </script>            
     </div>
 ```
+
 ## Notes
 
-If a DatePicker contains its own min or max configuration, it will have higher precedence than the global value.
-
-## See Also
-
-* [min - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/min)
-* [max - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/max)
+If a DatePicker contains its own min or max configuration, the individual settings will prevail over the global values.

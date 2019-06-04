@@ -2,7 +2,7 @@
 title: Add Page Breaks by Group When Exporting the Grid to PDF
 description: An example on how to add a new page for each group when exporting the Kendo UI Grid to PDF.
 type: how-to
-page_title: Add New Page for Each Group When Exporting the Grid to PDF | Kendo UI Grid
+page_title: Add New Page for Each Group When Exporting the Grid to PDF | Kendo UI Grid for jQuery
 previous_url: /knowledge-base/how-to-page-break-by-group-grid-pdf-export
 slug: page-break-by-group-grid-pdf-export
 tags: kendo, grid, pdf, export, group, page, break
@@ -35,3 +35,7 @@ pdf: { 
 ```
 
 For the complete implementation of this approach, refer to [this runnable example](http://dojo.telerik.com/uJIhA).
+
+## See Also
+
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

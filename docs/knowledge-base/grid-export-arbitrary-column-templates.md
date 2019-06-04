@@ -2,7 +2,7 @@
 title: Export to Excel Grids with Multiple Column Templates and Arbitrary Template Content
 description: An example on how to export multiple column templates that might contain additional HTML.
 type: how-to
-page_title: Export to Excel Grids with Many Template Columns and HTML Content in Their Templates | Kendo UI Grid
+page_title: Export to Excel Grids with Many Template Columns and HTML Content in Their Templates | Kendo UI Grid for jQuery
 slug: grid-export-arbitrary-column-templates
 tags: grid, export, excel, templates
 res_type: kb

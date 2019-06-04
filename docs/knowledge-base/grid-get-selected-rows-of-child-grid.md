@@ -2,7 +2,7 @@
 title: Get the Selected Rows of a Child Grid
 description: An example on how to get the selected rows of a child Kendo UI Grid.
 type: how-to
-page_title: Get the Selected Rows of a Child Grid | Kendo UI Gird
+page_title: Get the Selected Rows of a Child Grid | Kendo UI Gird for jQuery
 slug: grid-get-selected-rows-of-child-grid
 tags: grid, select, selected, child, hierarchy, rows, row, get, access
 res_type: kb

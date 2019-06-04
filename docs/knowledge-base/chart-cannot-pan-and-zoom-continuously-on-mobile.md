@@ -1,8 +1,8 @@
 ---
 title: Chart Stops Responding on Mobile Devices after Multiple Pan and Zoom Gestures
+page_title: SVG-Rendered Chart Stops Responding on Mobile after Multiple Pan and Zoom Gestures
 description: On mobile browsers, the Chart eventually freezes and stops responding to touch gestures after multiple zooms and pans.
 type: troubleshooting
-page_title: SVG-Rendered Chart Stops Responding on Mobile after Multiple Pan and Zoom Gestures
 slug: chart-cannot-pan-and-zoom-continuously-on-mobile
 tags: chart, mobile, svg-rendering
 ticketid: 1129220

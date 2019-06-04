@@ -1,8 +1,8 @@
 ---
-title: Validate Selection of Files for Upload 
+title: Validate Selection of Files for Upload
 description: An example on how to validate whether a file is selected for upload in the Kendo UI Upload by using the Kendo UI Validator.
 type: how-to
-page_title: Validate If Files Are Selected for Upload | Kendo UI Upload
+page_title: Validate If Files Are Selected for Upload | Kendo UI Upload for jQuery
 slug: upload-file-selected-validation
 tags: upload, file, selected, validate, validator
 ticketid: 1167714
@@ -70,7 +70,7 @@ Use a custom rule in the Kendo UI Validator to validate on form submission wheth
 
             if(!validator.validate()) {
             if(fileNotSelected) {
-                fileNotSelected = false; 
+                fileNotSelected = false;
             }
             e.preventDefault()
             }

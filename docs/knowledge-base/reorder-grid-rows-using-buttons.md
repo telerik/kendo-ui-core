@@ -2,7 +2,7 @@
 title: Enable Reordering in Grid by Adding Buttons to Each Row
 description: An example on how to reorder Kendo UI Grid rows by adding buttons to each row to move items up and down.
 type: how-to
-page_title: Reorder Rows by Adding Row Buttons | Kendo UI Grid
+page_title: Reorder Rows by Adding Row Buttons | Kendo UI Grid for jQuery
 slug: reorder-grid-rows-using-buttons
 tags: grid, reordering, items
 ticketid: 1112024
@@ -30,7 +30,6 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
 ## Solution
 
 1. Specify a column template to add the buttons to each Grid row.
-
 1. In the click handlers of the buttons, find a reference to the corresponding row and attach the click handlers to the `dataBound` event of the Grid.
 
 ```dojo

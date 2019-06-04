@@ -1,12 +1,14 @@
 ---
 title: Display Grid as Triangular Matrix
-page_title:  jQuery Grid Documentation | Display Grid as Triangular Matrix | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to change its default data layout to a Triangular matrix."
+page_title:  Display Grid as Triangular Matrix | Kendo UI Grid for jQuery
+description: "An example on how to change its default data layout to a Triangular matrix in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/display-grid-as-triangular-matrix
 slug: howto_display_grid_as_triangular_matrix_grid
+tags: grid, show, triangular, matrix
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Display Grid as Triangular Matrix
 
 The following example demonstrates how to change the default data layout of the Grid to a [Triangular matrix](https://en.wikipedia.org/wiki/Triangular_matrix).
 
@@ -16,11 +18,7 @@ To achieve this behavior:
 1. Change the background color of the cells in the main diagonal of the Grid.
 1. Remove the cells in the upper right triangular of the Grid.
 
-> **Important**
->
 > This is a custom solution which removes some of the table cells. As a result, the approach might not pass markup validation.
-
-###### Example
 
 ```dojo
 	<style>
@@ -108,13 +106,4 @@ To achieve this behavior:
 
 ## See Also
 
-* [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
-* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
-* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
-* [How to Disable Resizing for Specific Columns]({% slug howto_disable_column_resizing_grid %})
-* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
-* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
-* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

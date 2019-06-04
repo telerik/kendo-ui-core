@@ -2,7 +2,7 @@
 title: Remove Group Footer and Header Templates When One Record Is in the Group
 description: An example on how to remove the groupFooterTemplate and the groupHeaderTemplate when there is only one record in the group of the Kendo UI Grid.
 type: how-to
-page_title: Hide Group Details When Only One Record Is in the Group | Kendo UI Grid
+page_title: Hide Group Details When Only One Record Is in the Group | Kendo UI Grid for jQuery
 slug: grid-group-remove-footer-header-one-record
 tags: grid, group, groupFooterTemplate, groupHeaderTemplate
 ticketid: 1143117

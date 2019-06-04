@@ -1,21 +1,20 @@
 ---
 title: Adjust Row Heights When Columns Are Locked
-page_title: jQuery Grid Documentation | Row Heights of Locked Columns | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to adjust the height of its rows when columns are locked."
+page_title: Row Heights of Locked Columns | Kendo UI Grid for jQuery
+description: "An example on how to adjust the height of the Kendo UI Grid for jQuery rows when columns are locked."
 previous_url: /controls/data-management/grid/how-to/AngularJS/adjust-row-heights-for-grid-with-locked-columns
 slug: howto_adjust_row_heights_template_locked_columns_grid
-position: 1
+tags: grid, adjust, row, height, locked
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Adjust Row Heights When Columns Are Locked
 
 You might have to handle a scenario with locked columns where the content of the column template is initially hidden through the `ng-if` directive.
 
 In such cases, if you show the content later, you might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible issues, conditionally call the [`resize()`](/api/javascript/kendo/methods/resize) and [`refresh()`](/api/javascript/ui/grid/methods/refresh) methods of the Grid in its [`dataBound`](/api/javascript/ui/grid/events/databound) event when the scope value that controls the visibility of the template content is changed.
 
 The following example demonstrates how to adjust the row heights in a Kendo UI Grid with locked columns and with a column template that uses the `ng-if` directive.
-
-###### Example
 
 ```dojo
     <div id="example" ng-app="KendoDemos">
@@ -96,11 +95,3 @@ The following example demonstrates how to adjust the row heights in a Kendo UI G
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
-* [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
-* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
-* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
-* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
-* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its **How To** documentation folder.

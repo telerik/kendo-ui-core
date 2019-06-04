@@ -2,7 +2,7 @@
 title: Show base64 Image in Grid
 description: An example on how to show base64-encoded images in the Kendo UI Grid.
 type: how-to
-page_title: Render base64-Encoded Images | Kendo UI Grid
+page_title: Render base64-Encoded Images | Kendo UI Grid for jQuery
 slug: grid-show-base64-image
 tags: grid, image, base64, encoded, cell, template, show, display
 ticketid: 1149817

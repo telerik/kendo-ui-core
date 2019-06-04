@@ -2,7 +2,7 @@
 title: Show Multiple Aggregates in Separate Cells in Grid Group Header
 description: An example on how to show multiple aggregates in the group header of a Kendo UI Grid and align them with the Grid columns.
 type: how-to
-page_title: Align Group Header Template with Columns | Kendo UI Grid
+page_title: Align Group Header Template with Columns | Kendo UI Grid for jQuery
 slug: grid-align-group-header-cells
 tags: grid, grouping, aggregates, template
 ticketid: 1142332
@@ -21,10 +21,9 @@ res_type: kb
 
 ## Description
 
-I am looking for a way to:
-
-* Show other column aggregates in the group header row.
-* Control the `colspan` setting and show the aggregation in the specific columns.
+How can I:
+* Show other column aggregates in the group header row?
+* Control the `colspan` setting and show the aggregation in the specific columns?
 
 ## Solution
 
@@ -34,18 +33,18 @@ To display the different aggregates in separate cells that are aligned with the 
 
 1. Generate the group header template with the number of cells and align it with the Grid columns. Leave out the first opening and the last closing `<td>` tags, because the template is rendered within a single `<td></td>` in the group header.
 
-	```
-	    { field: "age", groupHeaderTemplate: "Names: #=aggregates.name.count#</td><td>Age: #= value #</td><td> Completed Tasks: #:aggregates.tasksCompleted.sum # " }
-	```
+  	```
+  	    { field: "age", groupHeaderTemplate: "Names: #=aggregates.name.count#</td><td>Age: #= value #</td><td> Completed Tasks: #:aggregates.tasksCompleted.sum # " }
+  	```
 
 1. Correct the `colspan` of the first cell in the group header by using the `dataBound` event of the Grid:
 
-	```
-	    dataBound: function(e){
-            var firstCell = e.sender.element.find(".k-grouping-row td:first-child");
-  	        firstCell.attr("colspan", 2);
-	    }
-	```
+  	```
+  	    dataBound: function(e){
+              var firstCell = e.sender.element.find(".k-grouping-row td:first-child");
+    	        firstCell.attr("colspan", 2);
+  	    }
+  	```
 
 The following example demonstrates the full implementation of the suggested approach.
 

@@ -1,8 +1,8 @@
 ---
 title: Set DateInput Messages of DateTimePicker
-description: An example demonstrating how to configure the messages for the Kendo UI DateTimePicker's DateInput
+description: An example on how to configure the messages for the date input in the  Kendo UI DateTimePicker.
 type: how-to
-page_title: Change Text of DateTimePicker DateInput Messages | Kendo UI DateTimePicker
+page_title: Change Text of DateTimePicker DateInput Messages | Kendo UI DateTimePicker for jQuery
 slug: datetimepicker-messages-dateinput-change-text
 tags: datetimepicker, messages, dateinput, change, text, year, month, day, hour, minute, second, dayperiod, datepicker
 ticketid: 1350298
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,11 +24,12 @@ res_type: kb
 
 ## Description
 
-How can I configure the messages of the Kendo UI DateTimePicker's dateInput?
+How can I configure the messages of the date input in the Kendo UI DateTimePicker?
 
 ## Solution
 
-Using the DateTimePicker's [setOptions method](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/setoptions), reference the dateinput, and change its [messages](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput/configuration/messages):
+1. Reference the date input by using the [`setOptions` method of the DateTimePicker](/api/javascript/ui/datetimepicker/methods/setoptions).
+1. Change its [`messages`](/api/javascript/ui/dateinput/configuration/messages).
 
 ```dojo
     <input id="datetimepicker" title="datetimepicker" style="width: 100%;" />

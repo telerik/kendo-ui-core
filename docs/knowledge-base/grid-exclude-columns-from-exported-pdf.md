@@ -2,7 +2,7 @@
 title: Exclude Certain Columns from the Exported PDF File
 description: An example on how to exclude certain columns from the exported PDF file when working with the Kendo UI Grid.
 type: how-to
-page_title: Exclude Certain Columns from the Exported PDF File | Kendo UI Grid
+page_title: Exclude Certain Columns from the Exported PDF File | Kendo UI Grid for jQuery
 slug: grid-exclude-columns-from-exported-pdf
 tags: grid, export, pdf, exclude, remove, column, columns, exported, file,
 res_type: kb
@@ -28,9 +28,14 @@ How can I exclude certain columns from the exported PDF file in a Kendo UI Grid?
 
 ## Solution
 
-### Option 1 - Use the k-pdf-export class and CSS
+Use either of the following approaches:
 
-To hide a grid column only during the PDF export, you can just use a CSS rule and reduce the width of the target column to 0. This is because the Kendo UI Drawing API adds [`the "k-pdf-export" class`](/framework/drawing/drawing-dom#the) on all elements on the page and you can target specific elements easily this way:
+*  [Use the `k-pdf-export` class and CSS](#using-the-k-pdf-export-class-and-css)
+*  [Using the showColum() and hideColumn() Grid methods](#using-the-showcolumns-and-hidecolumn-grid-methods)
+
+### Using the k-pdf-export Class and CSS
+
+To hide a Grid column only during the PDF export, use a CSS rule and reduce the width of the target column to zero. This approach is implemented because the Kendo UI Drawing API adds [the `k-pdf-export` class](/framework/drawing/drawing-dom#the) on all elements on the page and you can target specific elements in the following way.
 
 ```
 <style>
@@ -40,7 +45,7 @@ To hide a grid column only during the PDF export, you can just use a CSS rule an
 </style>
 ```
 
-###### Example - hide the last column during PDF Export only with CSS
+The following example demonstrates how to hide the last column during PDF Export only with CSS.
 
 ```dojo
 <style>
@@ -127,10 +132,10 @@ To hide a grid column only during the PDF export, you can just use a CSS rule an
     </script>
 ```
 
-### Option 2 - Use the showColum() and hideColumn() grid methods
+### Using the showColum() and hideColumn() Grid Methods
 
-1. Hide the columns by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method within the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler.
-1. When the export is done, display the hidden column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) method.
+1. Hide the columns by using the [`hideColumn`](/api/javascript/ui/grid/methods/hidecolumn) method within the [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) event handler.
+1. When the export is done, display the hidden column by using the [`showColumn`](/api/javascript/ui/grid/methods/showcolumn) method.
 
 ```dojo
     <div id="example">

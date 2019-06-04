@@ -1,12 +1,14 @@
 ---
 title: Expand Grids to Match the Height of TabStrip Containers within Splitter Panes
-page_title: jQuery Grid Documentation | Match TabStrip Container Height | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to expand it when it is located in a TabStrip container within a Splitter pane."
+page_title: Match TabStrip Container Height | Kendo UI Grid for jQuery
+description: "An example on how to expand the Kendo UI Grid for jQuery when it is located in a TabStrip container within a Splitter pane."
 previous_url: /controls/data-management/grid/how-to/Layout/expand-grid-to-match-tabstrip-height-within-splitter-pane
 slug: howto_expandtomatchtabstripinsplitter_grid
+tags: grid, expand, match, height, tabstrip, container, splitter, pane
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Expand Grids to Match the Height of TabStrip Containers within Splitter Panes
 
 Your project might require you to expand the height of the Grid to match the height of its TabStrip container within a Splitter pane.
 
@@ -17,13 +19,9 @@ To achieve this behavior:
 For more information on how to resize individual Kendo UI widgets, refer to [this article]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing).   
 For more information on how to set the Grid to 100% height and auto-resize it, refer to [this this article]({% slug height_kendoui_grid_widget %}).
 
-> **Important**
->
-> The `resize` method of the Splitter measures the height of the Grid's `<div>` element. It does not adjust the height of the scrollable data area because after the Splitter fires its `resize` event, you have to adjust the layout of the TabStrip. Only after that can you call the `resize` method of the Grid.
+> The `resize` method of the Splitter measures the height of the Grid's `<div>` element. It does not adjust the height of the scrollable data area because after the Splitter fires its [`resize`](/api/javascript/ui/splitter/events/resize) event, you have to adjust the layout of the TabStrip. Only after that can you call the `resize` method of the Grid.
 
 The following example demonstrates how to expand a Grid that is located in a TabStrip container within a Splitter pane.
-
-###### Example
 
 ```dojo
     <style>
@@ -156,13 +154,4 @@ The following example demonstrates how to expand a Grid that is located in a Tab
 
 ## See Also
 
-* [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
-* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
-* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
-* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
-* [How to Disable Resizing for Specific Columns]({% slug howto_disable_column_resizing_grid %})
-* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
-* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

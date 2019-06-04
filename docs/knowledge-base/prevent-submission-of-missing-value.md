@@ -2,7 +2,7 @@
 title: Prevent Submission of Value that Is not Present in the ComboBox DataSource
 description: An example on how to prevent the submission of a value that is not present in the DataSource of the Kendo UI ComboBox.
 type: how-to
-page_title: Prevent the Submission of Non-Present Values in the DataSource | Kendo UI ComboBox
+page_title: Prevent the Submission of Non-Present Values in the DataSource | Kendo UI ComboBox for jQuery
 slug: prevent-submission-of-missing-value
 tags: combobox, prevent, submit, submission, value, missing, not, present, datasource
 ticketid: 1133314

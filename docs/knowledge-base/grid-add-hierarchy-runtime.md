@@ -2,7 +2,7 @@
 title: Dynamically Add Hierarchical Grid
 description: An example on how to dynamically add hierarchy levels to the Kendo UI Grid.
 type: how-to
-page_title: Create Hierarchy Levels at Runtime | Kendo UI Grid
+page_title: Create Hierarchy Levels at Runtime | Kendo UI Grid for jQuery
 slug: grid-add-hierarchy-runtime
 tags: grid, hierarchy, setoptions, runtime
 ticketid: 1135018

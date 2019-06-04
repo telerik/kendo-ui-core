@@ -2,7 +2,7 @@
 title: Trigger SaveChanges outside the Grid
 description: An example on how to invoke the saveChanges method from a button in the Kendo UI Grid.
 type: how-to
-page_title: Save Grid Changes from External Button | Kendo UI Grid
+page_title: Save Grid Changes from External Button | Kendo UI Grid for jQuery
 slug: grid-savechanges-external-button
 tags: grid, saveChanges, button
 ticketid: 1135977

@@ -2,7 +2,7 @@
 title: Edit Grid as Part of a Form and Send Data to Server on Form Submit
 description: An example on how to create a Kendo UI Grid that is edited entirely on the client as part of a form and submit it on a form submit.
 type: how-to
-page_title: Edit on the Client as Part of a Form | Kendo UI Grid
+page_title: Edit on the Client as Part of a Form | Kendo UI Grid for jQuery
 slug: grid-edit-inside-form
 tags: grid, editing, form
 ticketid: 1137684

@@ -2,7 +2,7 @@
 title: Edit Rows in Detail Template
 description: An example on how to edit the records in the relevant detail rows of the Kendo UI Grid.
 type: how-to
-page_title: Use Detail Template to Edit Master Rows | Kendo UI Grid
+page_title: Use Detail Template to Edit Master Rows | Kendo UI Grid for jQuery
 slug: grid-detail-template-edit-master-rows
 tags: grid, detail, template, editing
 ticketid: 1139115

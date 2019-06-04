@@ -2,7 +2,7 @@
 title: Pass Arguments from View to ViewModel Functions
 description: An example on how to pass string parameters from the view to the viewModel function which controls an element visibility in Kendo UI.
 type: how-to
-page_title: Pass String Parameters from View to ViewModel Functions in MVVM | Kendo UI for jQuery
+page_title: Pass String Parameters from View to ViewModel Functions in MVVM | Kendo UI MVVM for jQuery
 slug: mvvm-pass-parameters-from-view-to-view-model-function
 tags: kendo, kendoui, mvvm, pass-parameters, visible, invisible
 ticketid: 1138171

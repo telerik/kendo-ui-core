@@ -2,7 +2,7 @@
 title: Create Zoom Shortcuts in StockChart
 description: An example on how to show buttons that will navigate the StockChart to different time periods.
 type: how-to
-page_title: Navigate to Pre-Defined Periods | Kendo UI Charts
+page_title: Navigate to Pre-Defined Periods | Kendo UI Chart for jQuery
 slug: stock-chart-navigate-to-predefined-periods
 tags: stock-chart, zoom, navigate
 ticketid: 1364958
@@ -28,7 +28,7 @@ How can I create multiple zoom shortcuts for a StockChart&mdash;for example, 3 m
 1. Handle the [`select`](/api/javascript/ui/buttongroup/events/select) event of the ButtonGroup.
 1. When the user selects a ButtonGroup option, change the StockChart navigator range to reflect the selected period.
 
-The following example demonstrates how to implement the suggested approach. 
+The following example demonstrates how to implement the suggested approach.
 
 ``` dojo
 

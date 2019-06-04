@@ -2,7 +2,7 @@
 title: Implement Default Checkbox Selection in Grid as Initially Checked
 description: An example on how to set the default value of checkboxes in the checkbox selection column to checked when working with the Kendo UI Grid.
 type: how-to
-page_title: Render Checkbox Selection as Checked by Default | Kendo UI Grid
+page_title: Render Checkbox Selection as Checked by Default | Kendo UI Grid for jQuery
 slug: grid-checked-select-column-by-default
 tags: grid, select, column, checked, checkbox, checkboxes, default
 ticketid: 1147197

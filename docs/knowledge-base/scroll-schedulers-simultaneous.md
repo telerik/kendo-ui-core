@@ -2,7 +2,7 @@
 title: Apply Simultaneous Scroll to Schedulers
 description: An example on how to implement simultaneous scroll across Kendo UI Schedulers.
 type: how-to
-page_title: Implement Simultaneous Scroll across Schedulers in Timeline View | Kendo UI Scheduler
+page_title: Implement Simultaneous Scroll across Schedulers in Timeline View | Kendo UI Scheduler for jQuery
 slug: scroll-schedulers-simultaneous
 tags: kendoui, kendo, scheduler, scroll, simultaneous
 ticketid: 1133971

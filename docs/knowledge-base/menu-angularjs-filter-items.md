@@ -2,7 +2,7 @@
 title: Filter Menu Items in AngularJS
 description: An example on how to filter the items of the Kendo UI Menu widget.
 type: how-to
-page_title: Filter Menu Items in AngularJS | Kendo UI Menu
+page_title: Filter Menu Items in AngularJS | Kendo UI Menu for jQuery
 slug: menu-angularjs-filter-items
 tags: menu, angularjs, filter, items
 res_type: kb

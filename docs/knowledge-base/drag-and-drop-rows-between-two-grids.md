@@ -1,16 +1,16 @@
 ---
 title: Drag and Drop Rows between Grids
-page_title: jQuery Grid Documentation | Drag and Drop Rows Between Grids | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to drag and drop rows between two Grids."
+page_title: Drag and Drop Rows Between Grids | Kendo UI Grid for jQuery
+description: "An example on how to drag and drop rows between two Kendo UI Grids for jQuery."
 previous_url: /controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /aspne-mvc/controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /controls/data-management/grid/how-to/various/drag-and-drop-rows-between-two-grids
 slug: howto_dragand_drop_rows_between_twogrids_grid
+tags: grid, drag, drop, rows, between
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Drag and Drop Rows between Grids
-
 The following example demonstrates how to drag and drop rows between two Kendo UI Grids.
-
-###### Example
 
 ```dojo
     <div id="grid1"></div>
@@ -97,16 +97,3 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
-* [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
-* [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
-* [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
-* [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
-* [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
-* [How to Perform CRUD Operations with Local Storage Data]({% slug howto_perform_crud_operationswith_local_storage_data_grid %})
-* [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
-* [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
-* [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
-* [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

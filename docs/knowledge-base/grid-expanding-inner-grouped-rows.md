@@ -2,7 +2,7 @@
 title: Expand Inner Grouped Rows
 description: An example on how to expand the inner grouped rows in a Kendo UI Grid.
 type: how-to
-page_title: Expand the Inner Grouped Rows | Kendo UI Grid
+page_title: Expand the Inner Grouped Rows | Kendo UI Grid for jQuery
 slug: grid-expanding-inner-grouped-rows
 tags: filter, grid, group, expand
 ticketid: 1145080

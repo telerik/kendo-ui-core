@@ -2,7 +2,7 @@
 title: Conditionally Make the DropDownList Editor Readonly
 description: An example on how to make the custom DropDownList editor readonly in the Kendo UI Grid.
 type: how-to
-page_title: Disable the DropDownList Editor| Kendo UI Grid
+page_title: Disable the DropDownList Editor| Kendo UI Grid for jQuery
 slug: grid-dropdown-editor-readonly
 tags: grid, dropdownlist, readonly, editor
 ticketid: 1133104
@@ -25,7 +25,7 @@ component: grid
 
 ## Description
 
-How can I make the drop-down editor readonly based on a condition in the Kendo UI Grid?
+How can I make the drop-down editor read-only based on a condition in the Kendo UI Grid?
 
 ## Solution
 

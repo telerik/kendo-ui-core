@@ -1,18 +1,18 @@
 ---
 title: Hide Columns on Clicking the Headers and Restore Them on Clicking a Button
-page_title: jQuery Grid Documentation | Hide Columns on Clicking Headers | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to hide columns and show them back later when working in AngularJS applications."
+page_title: Hide Columns on Clicking Headers | AngularJS Kendo UI Grid
+description: "An example on how to hide columns and show them back later when working in AngularJS applications with the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/AngularJS/hide-columns-by-clicking-the-headers, /controls/data-management/grid/how-to/AngularJS/hide-columns-by-clicking-the-headers
 slug: howto_hide_columns_and_subcolumns_grid
+tags: grid, hide, columns, click, restore, headers, buttonclick, angularjs
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Hide Columns on Clicking the Headers and Restore Them on Clicking a Button
 
 Your AngularJS project might require you to hide Grid columns and sub-columns by clicking the column headers and, then, restore the hidden columns by clicking a button.
 
 The following example demonstrates how to achieve this behavior.
-
-###### Example
 
 ```dojo
 <div id="example" ng-app="KendoDemos">
@@ -118,15 +118,3 @@ The following example demonstrates how to achieve this behavior.
       });
     </script>
 ```
-
-## See Also
-
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
-* [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
-* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
-* [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
-* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
-* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

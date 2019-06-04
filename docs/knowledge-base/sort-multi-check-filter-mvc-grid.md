@@ -2,7 +2,7 @@
 title: Sort MultiCheck Filter
 description: An example on how to sort the dataSource of the MultiCheck filter in a Kendo UI Grid for MVC.
 type: how-to
-page_title: Sort MultiCheck Filter DataSource in Grid for MVC | UI for ASP.NET MVC
+page_title: Sort MultiCheck Filter DataSource in Kenod UI Grid for ASP.NET MVC | Kendo UI Grid for ASP.NET MVC
 slug: sort-multi-check-filter-mvc-grid
 tags: grid, ASP.NET MVC, filter, multi, multi-filter, multi-checkbox, checkbox, not sorted
 ticketid: 1116585

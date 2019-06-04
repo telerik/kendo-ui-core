@@ -1,20 +1,18 @@
 ---
 title: Align Footer Cells
-page_title: jQuery Grid Documentation | Align Footer Cells | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to align the footer cells during Excel export."
+page_title: Align Footer Cells | Kendo UI Grid for jQuery
+description: "An example on how to align the footer cells during Excel export in a Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/excel/footer-alignment
 slug: howto_alignfootercells_grid
+tags: grid, align, footer, cells, excel, export
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Align Footer Cells
 
 The following example demonstrates how to align the footer cells during Excel export.
 
-To achieve this behavior, you can usually use HTML and CSS. However, Excel does not supported these options. To set the alignment, the demo uses the [`hAlign`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.halign) option of the cell.
-
-For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
-
-###### Example
+Normally, to achieve this behavior, you can use HTML and CSS. However, Excel does not supported these options. To set the alignment, the demo uses the [`hAlign`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.halign) option of the cell. For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
 
 ```dojo
 <div id="grid"></div>
@@ -91,12 +89,4 @@ For more information on how Excel documents work, refer to the [introductory art
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid/configuration/excel)
-* [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
-* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
-* [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
-* [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
-* [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
-* [How to Use Column Template]({% slug howto_use_column_template_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

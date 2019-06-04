@@ -1,18 +1,18 @@
 ---
 title: Use AngularJS in Popup Editor Templates
-page_title: jQuery Grid Documentation | AngularJS in Popup Editor Templates | Kendo UI
-description: "Get started with the popup editor template of the jQuery Grid by Kendo UI and learn how to use it with AngularJS."
+page_title: AngularJS in Popup Editor Templates | AngularJS Kendo UI Grid
+description: "An example on how to use the popup editor template of the Kendo UI Grid with AngularJS."
 previous_url: /controls/data-management/grid/how-to/AngularJS/use-angularjs-popup-edit-template
 slug: howto_use_angularin_popup_editor_templates_grid
+tags: use, angularjs, popup, editor, templates, grid
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Use AngularJS in Popup Editor Templates
 
 The following example demonstrates how to use AngularJS directives in a custom Grid popup editor template.
 
 The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-change` for Kendo UI widgets. Otherwise, the DataSource does not update the modified data items.
-
-###### Example
 
 ```dojo
     <div id="example" ng-app="KendoDemos">
@@ -113,11 +113,3 @@ The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-cha
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
-* [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
-* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
-* [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
-* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
-* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

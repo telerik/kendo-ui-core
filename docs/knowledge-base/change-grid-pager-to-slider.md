@@ -1,12 +1,14 @@
 ---
 title: Change Grid Pager to Slider
-page_title: jQuery Grid Documentation | Change Pager to Slider | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to change the default paging to a slider."
+page_title: Change Pager to Slider | Kendo UI Grid for jQuery
+description: "An example on how to change the default paging to a slider in a Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/change-grid-pager-to-slider, /controls/data-management/grid/how-to/Paging/change-grid-pager-to-slider
 slug: howto_change_grid_pager_to_slider
+tags: grid, pager, slider
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Change Grid Pager to Slider
 
 The following example demonstrates how to change the default pager of the Grid to a slider.
 
@@ -16,11 +18,7 @@ To achieve this behavior:
 1. Create a Kendo UI Slider in their place.
 1. Change the page of the Grid DataSource on the [`change`](/api/javascript/ui/slider/events/change) event of the Slider.
 
-> **Important**
->
 > When you apply this approach, the [`page`](/api/javascript/data/datasource/methods/page) method of the Grid does not fire.
-
-###### Example
 
 ```dojo
 <div id="grid"></div>
@@ -83,11 +81,3 @@ To achieve this behavior:
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
-* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
-* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
-* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
-* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
-* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

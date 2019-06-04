@@ -1,16 +1,16 @@
 ---
-title: Load grid when panel bar selected
-description: Load grid data only when its panel bar item is expanded
+title: Load the Grid When the PanelBar Is Selected
+page_title: Load the Grid When Its PanelBar Is Expanded | Kendo UI Grid and PanelBar for jQuery
 type: how-to
-page_title: Load grid when panel bar item activated
+description: An example on how to load the Kendo UI Grid for jQuery when its PanelBar item is activated.
 slug: panelbar-load-grid-data-on-expand
-position: 
-tags: 
-ticketid: 1401786, 1386928 
+tags: grid, panelbar, item, expanded, selected
+ticketid: 1401786, 1386928
 res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product</td>
@@ -21,15 +21,19 @@ res_type: kb
 
 ## Description
 
-I have a Kendo grid within a panelbar. Is there a way to load the grid when the panel bar is activated the first time? I only want to load the data on each grid when the specific panel is expanded. How can I trigger the grid load event from the panel header expansion?
+I have a Kendo UI Grid within a Kendo UI PanelBar and I want to load the data on each Grid when the specific panel is expanded.
+
+How can I load the Grid when the PanelBar is activated for the first time? How can I trigger the `load` event of the Grid from the panel header expansion?
 
 ## Solution
 
-You can set the grids to have [not bind automatically](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/autobind) so they don't request data upon initialization. Then, in the [panelbar's expand event](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar/events/expand), you can call their [.dataSource.read() method](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read). You can keep a flag (e.g., in the DOM as a data-attribute on the grid or panelbar element) to know if you need to read the data source.
+1. Set the Grids [not to bind automatically](/api/javascript/ui/grid/configuration/autobind) so they do not request data upon initialization.
+1. In the [`expand` event of the PanelBar](/api/javascript/ui/panelbar/events/expand), call their [`dataSource.read()` method](/api/javascript/data/datasource/methods/read).
+1. Keep a flag (for example, in the DOM as a `data` attribute on the Grid or PanelBar element) to know if you need to read the data source.
 
-**Tip**: Another option would be to use the expand event of the panelbar to add the grid to the DOM dynamically and instantiate the jQuery widget only then - with this you will avoid creating the grid with the initial page load, thereby making the page more lightweight. This can be especially useful if this item from the panelbar is not expected to be used often by the end user. In this case you would not be able to use the MVC helpers, though, and you would need to rely on the jQuery widget syntax only.
+Another option is to use the [`expand`](/api/javascript/ui/panelbar/events/expand) event of the PanelBar to add the Grid to the DOM dynamically and instantiate the jQuery widget only then. By doing this, you avoid creating the Grid with the initial page load thereby making the page more lightweight. This approach is useful if this item from the PanelBar is not expected to be used often by the end user. In this case, you will not be able to use the Kendo UI helpers for ASP.NET MVC, though, and you will need to rely on the jQuery widget syntax only.
 
-###### jQuery example
+The following example is jQuery-based.
 
 ```dojo
 <ul id="panelbar">
@@ -69,7 +73,7 @@ $(document).ready(function() {
   $("#grid").kendoGrid({
     autoBind: false,//this is how you prevent the initial bind
     //the rest of the properties are not really relevant, they just set up a grid
-    
+
     dataSource: {
       type: "odata",
       transport: {
@@ -117,8 +121,7 @@ $(document).ready(function() {
 </script>
 ```
 
-
-###### MVC Examples
+ The following example is MVC-based.
 
 ```View
 @{
@@ -200,7 +203,7 @@ namespace SampleMvcApp.Controllers
 		{
 			return View();
 		}
-		
+
 		public ActionResult GetData([DataSourceRequest] DataSourceRequest request)
 		{
 			var data = Enumerable.Range(1, 200).Select(x => new SampleMvcApp.Models.SampleData {
@@ -227,5 +230,3 @@ namespace SampleMvcApp.Models
 	}
 }
 ```
-
-

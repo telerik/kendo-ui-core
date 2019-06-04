@@ -1,16 +1,16 @@
 ---
 title: Copy Data from Excel
-page_title: jQuery Grid Documentation | Copy Data from Excel | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI which allows you to copy data from Excel."
+page_title: Copy Data from Excel | Kendo UI Grid for jQuery
+description: "An example on how to copy data from Excel in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/copy-from-excel-to-grid.html, /controls/data-management/grid/how-to/copy-from-excel-to-grid, /web/grid/how-to/copy-from-excel-to-grid, /controls/data-management/grid/how-to/excel/copy-from-excel-to-grid
 slug: howto_copy_datafrom_excel_grid
+tags: grid, copy, excel, data
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Copy Data from Excel
-
 The following example demonstrates how to create a Grid that supports pasting from Excel.
-
-###### Example
 
 ```dojo
      <div id="grid" tabindex="0"></div>
@@ -25,11 +25,11 @@ The following example demonstrates how to create a Grid that supports pasting fr
           { Name: "John Doe", Age: 33 }
         ]
       }).on('focusin', function(e) {
-        // get the grid position
+        // Get the position of the Grid.
         var offset = $(this).offset();
-        // crete a textarea element which will act as a clipboard
+        // Create a textarea element which will act as a clipboard.
         var textarea = $("<textarea>");
-        // position the textarea on top of the grid and make it transparent
+        // Position the textarea on top of the Grid and make it transparent.
         textarea.css({
           position: 'absolute',
           opacity: 0,
@@ -41,13 +41,13 @@ The following example demonstrates how to create a Grid that supports pasting fr
         })
         .appendTo('body')
         .on('paste', function() {
-          // handle the paste event
+          // Handle the paste event.
           setTimeout(function() {
-            // the the pasted content
+            // The pasted content.
             var value = $.trim(textarea.val());
-            // get instance to the grid
+            // Get instance to the Grid.
             var grid = $("#grid").data("kendoGrid");
-            // get the pasted rows - split the text by new line
+            // Get the pasted rows - split the text by new line.
             var rows = value.split('\n');
 
             var data = [];
@@ -62,10 +62,10 @@ The following example demonstrates how to create a Grid that supports pasting fr
             grid.dataSource.data(data);
           });
         }).on('focusout', function() {
-          // remove the textarea when it loses focus
+          // Remove the textarea when it loses focus.
           $(this).remove();
         });
-        // focus the textarea
+        // Focus the textarea.
         setTimeout(function() {
           textarea.focus();
         });
@@ -76,17 +76,3 @@ The following example demonstrates how to create a Grid that supports pasting fr
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
-* [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
-* [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
-* [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
-* [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
-* [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
-* [How to Paste Records from Excel to a Grid with Editing]({% slug grid-paste-data-from-excel-batch-edit %})
-* [How to Perform CRUD Operations with Local Storage Data]({% slug howto_perform_crud_operationswith_local_storage_data_grid %})
-* [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
-* [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
-* [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
-* [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

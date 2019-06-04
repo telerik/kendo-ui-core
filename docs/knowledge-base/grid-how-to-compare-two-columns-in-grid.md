@@ -2,7 +2,7 @@
 title: Compare Two Columns in AngularJS Grids
 description: An example on how to compare two columns of a Kendo UI Grid in AngularJS.
 type: how-to
-page_title: Compare Two Columns | Kendo UI Grid
+page_title: Compare Two Columns | Kendo UI Grid for jQuery
 slug: grid-how-to-compare-two-columns-in-grid
 tags: grid, angularjs, compare
 ticketid: 1122028

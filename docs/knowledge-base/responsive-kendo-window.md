@@ -2,7 +2,7 @@
 title: Make Kendo UI Window Responsive
 description: An example on how to make a Kendo UI Window responsive so that it reacts to changes in the size of the viewport and adapts to small screens.
 type: how-to
-page_title: Adapt Window to Viewport Size | Kendo UI Window
+page_title: Adapt Window to Viewport Size | Kendo UI Window for jQuery
 slug: responsive-kendo-window
 tags: kendo, window, responsive, adaptive, percent, size
 ticketid: 1362958

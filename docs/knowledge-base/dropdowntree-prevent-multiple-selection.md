@@ -2,7 +2,7 @@
 title: Prevent Multiple Selection in the DropDownTree
 description: An example on how to prevent multiple selection in the Kendo UI Editor.
 type: how-to
-page_title: Prevent Multiple Selection | Kendo UI Editor
+page_title: Prevent Multiple Selection | Kendo UI Editor for jQuery
 slug: dropdowntree-prevent-multiple-selection
 tags: dropdowntree, prevent, multiple, selection
 res_type: kb
@@ -24,14 +24,16 @@ component: dropdowntree
 
 ## Description
 
-How to prevent multiple selection in the DropDownTree?
+How can I prevent multiple selection in the DropDownTree?
 
 ## Solution
 
-Handle the `check` event of the embedded TreeView. Save the UID of the checked node in a variable. On checking a new node, uncheck the previously checked node:
+1. Handle the `check` event of the embedded TreeView.
+1. Save the UID of the checked node in a variable.
+1. On checking a new node, uncheck the previously checked node.
 
 ```dojo
-    <div id="example"> 
+    <div id="example">
         <input id="dropdowntree" />
 
         <script>
@@ -80,4 +82,4 @@ Handle the `check` event of the embedded TreeView. Save the UID of the checked n
 
 ## See Also
 
-* [DropDownTree API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [DropDownTree API Reference](/api/javascript/ui/dropdowntree)

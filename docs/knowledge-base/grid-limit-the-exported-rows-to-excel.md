@@ -2,7 +2,7 @@
 title: Export to Excel a Limited Number of Rows
 description: An example on how to limit the number of the Kendo UI Grid rows which are exported to Excel.
 type: how-to
-page_title: Limit the Exported Rows to Excel | Kendo UI Grid
+page_title: Limit the Exported Rows to Excel | Kendo UI Grid for ASP.NET MVC
 slug: grid-limit-the-exported-rows-to-excel
 tags: grid, excel, export
 ticketid: 1146796

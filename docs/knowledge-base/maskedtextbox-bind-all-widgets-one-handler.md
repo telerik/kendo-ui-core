@@ -2,7 +2,7 @@
 title: Bind Change Event Function to All MaskedTextBox Widgets
 description: An example on how to bind the change event handler function to all Kendo UI MaskedTextBox widgets.
 type: how-to
-page_title: Subscribe All Widgets to One Handler | Kendo UI MaskedTextBox
+page_title: Subscribe All Widgets to One Handler | Kendo UI MaskedTextBox for jQuery
 slug: maskedtextbox-bind-all-widgets-one-handler
 tags: maskedtextbox, bind, events
 ticketid: 1136846

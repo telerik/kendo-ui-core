@@ -2,7 +2,7 @@
 title: Integrate Editor into Dialog
 description: An example on how to integrate the Kendo UI Editor into the Kendo UI Dialog widget.
 type: how-to
-page_title: Integrate Editor into Dialog Widget | Kendo UI Editor
+page_title: Integrate Editor into Dialog Widget | Kendo UI Editor for jQuery
 slug: integrate-editor-in-dialog
 tags: integrate, editor, dialog
 ticketid: 1118201

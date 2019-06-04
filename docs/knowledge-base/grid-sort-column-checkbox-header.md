@@ -2,7 +2,7 @@
 title: Prevent Sorting with Checkbox in Header
 description: An example on how to implement a sortable column with a checkbox in the Kendo UI Grid header.
 type: how-to
-page_title: Implement Sortable Columns with Checkboxes in the Headers | Kendo UI Grid
+page_title: Implement Sortable Columns with Checkboxes in the Headers | Kendo UI Grid for jQuery
 slug: grid-sort-column-checkbox-header
 tags: grid, sort, header, checkbox, template, prevent, enable
 ticketid: 1141908

@@ -1,8 +1,8 @@
 ---
-title: MVC Gantt Initialized in Container Does Not Render Properly
+title: Gantt for ASP.NET MVC Initialized in Container Does Not Render Properly
 description: I want to properly display the Telerik UI for ASP.NET MVC Gantt chart when it is placed in an initially hidden container.
 type: troubleshooting
-page_title: Gantt Inside Hidden Container Does Not Properly Render | UI for ASP.NET MVC
+page_title: Gantt Inside Hidden Container Does Not Properly Render | Kendo UI Gantt for ASP.NET MVC
 slug: gantt-inside-container
 tags: kendo, kendoui, gantt, hiden, container
 ticketid: 1144634
@@ -22,9 +22,11 @@ res_type: kb
 
 My Gantt chart is placed in PanelBar item content that is not initially visible. When activating this item, the Gantt does not render properly.
 
-## Solution
+## Cause
 
-The reason for this issue is that the Gantt was initialized in a hidden (`display: none;`) container.
+The Gantt was initialized in a hidden (`display: none;`) container.
+
+## Solutions
 
 1. Use [the deferred initialization](https://docs.telerik.com/aspnet-mvc/getting-started/fundamentals#configuration-Deferring) of the Gantt.
 

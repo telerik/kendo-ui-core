@@ -1,8 +1,8 @@
 ---
-title: Remove Spinners from NumericTextBox Editors in MVC Grid
+title: Remove Spinners from NumericTextBox Editors in Grid for ASP.NET MVC
 description: An example on how to remove the side arrows of the NumericTextBox editor in the Kendo UI Grid for ASP.NET MVC.
 type: how-to
-page_title: Remove Spinner Arrows of NumericTextBox Editor | UI for ASP.NET MVC
+page_title: Remove Spinner Arrows of NumericTextBox Editor | Kendo UI Grid for ASP.NET MVC
 slug: grid-mvc-remove-spinner-numerictextbox-editor
 tags: NumericTextBox, spinners, editor, remove
 ticketid: 1132419, 1134869

@@ -2,7 +2,7 @@
 title: Cannot Display GeoJSON Coordinates in Proper Order for Bubble Type Layer in Map
 description: The received GeoJSON data is handled in a reversed longitude-latitude order when displaying a bubble-type layer in a Kendo UI Map.
 type: troubleshooting
-page_title: Problem with GeoJSON Coordinates for Bubble-Type Map Layer Received in Reversed Order | Kendo UI Map
+page_title: Problem with GeoJSON Coordinates for Bubble-Type Map Layer Received in Reversed Order | Kendo UI Map for jQuery
 slug: map-reverse-location-coordinates
 tags: kendo ui map, location, coordinates, longitude, latitude
 ticketid: 1111871

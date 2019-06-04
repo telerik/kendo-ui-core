@@ -2,7 +2,7 @@
 title: Delete Disabled Cell Content with ContextMenu in Spreadsheet
 description: An example on how to delete the content of disabled Spreadsheet cells with a ContextMenu command.
 type: how-to
-page_title: Delete Disabled Cell Content with ContextMenu Command | Kendo UI Spreadsheet
+page_title: Delete Disabled Cell Content with ContextMenu Command | Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-delete-disabled-cells-content
 tags: kendo, kendoui, spreadsheet, delete, disabled, cells, contextmenu
 ticketid: 1135315
@@ -67,7 +67,7 @@ How can I delete a disabled cell in a Spreadsheet row through the **Delete** com
 			var selection = sheet.selection();
 			var rowsToBeDeleted = [];
 			var shouldManuallyDelete = false;
-			
+
 			if (command == "Delete") {
 				selection.forEachCell(function(row, col, cell) {
 					var enabled = cell.enable;
@@ -75,12 +75,12 @@ How can I delete a disabled cell in a Spreadsheet row through the **Delete** com
 					if (rowsToBeDeleted.indexOf(row) < 0) {
 						rowsToBeDeleted.push(row);
 					}
-					
+
 					if (!shouldManuallyDelete && enabled === false) {
 						shouldManuallyDelete = true;
 					}
 				});
-			 
+
 				if (shouldManuallyDelete) {
 					selection.enable(true);
 

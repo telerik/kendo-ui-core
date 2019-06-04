@@ -2,7 +2,7 @@
 title: Grid Foreign Key DropDownList with Filter
 description: How to Add a filter to the DropDownList of a Foreign Key Column in the Grid
 type: how-to
-page_title: Add Filter to the Foreign Key Column Editor
+page_title: Add Filter to the Foreign Key Column Editor | Kendo UI Grid for jQuery
 slug: grid-add-filter-to-foreign-key-editor
 position:
 tags: grid, foreign key , dropdown, filter, column
@@ -11,6 +11,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
 	<tr>
 		<td>Product Version</td>
@@ -24,11 +25,11 @@ res_type: kb
 
 ## Description
 
-I would like to enable the [`filter`](/api/javascript/ui/dropdownlist/configuration/filter) of the foreign key column DropDownListEditor. How can I do that?
+How can I enable the [`filter`](/api/javascript/ui/dropdownlist/configuration/filter) of the foreign key column DropDownListEditor?
 
 ## Solution
 
-You may add the filter option but it will need to happen on the [`edit`](/api/javascript/ui/grid/events/edit) event of the Kendo UI Grid when the automatically generated Kendo UI DropDownList is initialized.
+You can add the `filter` option on the [`edit`](/api/javascript/ui/grid/events/edit) event of the Kendo UI Grid when the automatically generated Kendo UI DropDownList is initialized.
 
 ```dojo
 	 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>

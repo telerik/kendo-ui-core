@@ -1,16 +1,16 @@
 ---
 title: Refresh Grid in Detail Template
-page_title: jQuery Grid Documentation | Refresh Grid in Detail Template | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to refresh a child grid in a detail template by using external button."
+page_title: Refresh Grid in Detail Template | Kendo UI Grid for jQuery
+description: "An example on how to refresh a child grid in a detail template by using external button."
 previous_url: /controls/data-management/grid/how-to/Templates/refresh-grid-in-detail-template
 slug: howto_refresh_gridin_detail_template_grid
+tags: refresh, child, grid, detail, template, via, external, button
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Refresh Grid in Detail Template
-
 The following example demonstrates how to refresh a child Grid in a detail template by using an external button in the Grid.
-
-###### Example
 
 ```dojo
     <div id="grid"></div>
@@ -88,8 +88,3 @@ The following example demonstrates how to refresh a child Grid in a detail templ
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
-* [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
-* [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

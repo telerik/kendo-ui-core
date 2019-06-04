@@ -1,8 +1,8 @@
 ---
 title: Print the Barcode
+page_title: Print the Barcode | Kendo UI Barcode for jQuery
 description: An example on how to print a Kendo UI Barcode.
 type: how-to
-page_title: Print the Barcode | Kendo UI Barcode
 slug: barcode-how-to-print-the-barcode
 tags: barcode, print
 ticketid: 1136001
@@ -41,7 +41,7 @@ How can I print the Kendo UI Barcode?
 
 ## Solution
 
-You can print the Barcode on another page by opening a new window and placing the Barcode DOM elements on the page.
+Open a new window and place the Barcode DOM elements on the page.
 
 ```dojo
     <button class="k-button">Print</button>

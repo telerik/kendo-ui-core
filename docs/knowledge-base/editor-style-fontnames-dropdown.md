@@ -1,8 +1,8 @@
 ---
-title: Style the Font Names in Editor
+title: Style the Font Names in the Editor
 description: An example on how to style the fontNames drop-down in the Kendo UI Editor.
 type: how-to
-page_title: Style the Font Names | Kendo UI Editor
+page_title: Style the Font Names | Kendo UI Editor for jQuery
 slug: editor-style-fontnames-dropdown
 tags: editor
 ticketid: 1171186  
@@ -32,7 +32,7 @@ res_type: kb
 
 ## Description
 
-How to style the names of each font in the `fontNames` dropdown of the Editor?
+How can I style the names of each font in the `fontNames` drop-down of the Editor?
 
 ## Solution
 

@@ -1,24 +1,25 @@
 ---
 title: Resize and Expand Grid to 100% Height
-page_title: jQuery Grid Documentation | Resize and Expand to 100% Height | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to resize and expand it to 100% height when the parent container or browser window are resized too."
+page_title: Resize and Expand to 100% Height | Kendo UI Grid for jQuery
+description: "An example on how to resize and expand it to 100% height when the parent container or browser window are resized too."
 previous_url: /controls/data-management/grid/how-to/Layout/resize-grid-when-the-window-is-resized
 slug: howto_resize_whenthe_windowis_resized_grid
+tags: resize, expand, grids, 100%, height, when, parent, container, browser, window, resized
+component: grid
+type: how-to
+res_type: kb
 ---
 
-# Resize and Expand the Kendo UI Grid to 100% Height
+Web standards require elements with a percentage height to have a parent with an explicit height.
 
-Web standards require elements with a percentage height to have a parent with an explicit height. The rule applies recursively until an element with a pixel height is reached, or the root `<html>` element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.
+The rule applies recursively until an element with a pixel height is reached, or the root `<html>` element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.
 
-The examples below demonstrate how to resize the Kendo UI Grid in three different scenarios:
+The examples that follow demonstrate how to resize the Kendo UI Grid in three different scenarios:
+* Resize a Kendo UI Grid together with the browser viewport.
+* Resize a Grid in a Kendo UI Window.
+* Resize a Grid resizes in a Kendo UI Splitter.
 
-1. Resize a Kendo UI Grid together with the browser viewport.
-1. Resize a Grid in a Kendo UI Window.
-1. Resize a Grid resizes in a Kendo UI Splitter.
-
-The example below demonstrates how to resize the Kendo UI Grid together with the browser viewport.
-
-###### Example
+The following example demonstrates how to resize the Kendo UI Grid together with the browser viewport.
 
 ```dojo
     <style>
@@ -89,9 +90,7 @@ The example below demonstrates how to resize the Kendo UI Grid together with the
     </script>
 ```
 
-The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Window.
-
-###### Example
+The following example demonstrates how to resize the Kendo UI Grid in a Kendo UI Window.
 
 ```dojo
     <style>
@@ -160,9 +159,7 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Win
     </script>
 ```
 
-The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Splitter.
-
-###### Example
+The following example demonstrates how to resize the Kendo UI Grid in a Kendo UI Splitter.
 
 ```dojo
     <style>
@@ -237,12 +234,3 @@ The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Spl
 ## See Also
 
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
-* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
-* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
-* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
-* [How to Disable Resizing for Specific Columns]({% slug howto_disable_column_resizing_grid %})
-* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
-* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

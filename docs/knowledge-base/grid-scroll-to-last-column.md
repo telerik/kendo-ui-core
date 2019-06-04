@@ -2,7 +2,7 @@
 title: Scroll to the Last Grid Column
 description: An example on how to scroll the last column of the Kendo UI Grid into view.
 type: how-to
-page_title: Scroll the Last Column into View | Kendo UI Grid
+page_title: Scroll the Last Column into View | Kendo UI Grid for jQuery
 slug: grid-scroll-to-last-column
 tags: kendoui, kendo, grid, column, scroll, view, move
 res_type: kb

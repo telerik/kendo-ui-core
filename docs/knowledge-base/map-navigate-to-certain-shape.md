@@ -2,7 +2,7 @@
 title: Navigate to certain shape
 description: An example on how to programmatically navigate to certain shape of the Kendo UI Map.
 type: how-to
-page_title: Set Different Colors for Markers Based on Field Value | Kendo UI Map
+page_title: Set Different Colors for Markers Based on Field Value | Kendo UI Map for jQuery
 slug: map-navigate-to-certain-shape
 tags: map, kendo, shape, ui, navigate, zoom, programmatically
 ticketid: 1140119
@@ -98,7 +98,7 @@ The following example demonstrates the full implementation of the approach.
           var minY = coordinates[0][0][1];
           var maxY = coordinates[0][0][1];
           coordinates.forEach(function(shapeCoordinates){
-            
+
             shapeCoordinates.forEach(function(pointCoordinates){
               if(minX > pointCoordinates[0]){
                 minX = pointCoordinates[0];
@@ -115,11 +115,11 @@ The following example demonstrates the full implementation of the approach.
               if(maxY < pointCoordinates[1]){
                 minY = pointCoordinates[1];
               }              
-              
+
 
             })
           })
-          
+
           return [(minY+maxY)/2, (minX+maxX)/2];
         }
 

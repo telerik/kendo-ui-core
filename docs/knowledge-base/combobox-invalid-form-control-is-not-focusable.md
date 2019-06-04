@@ -2,7 +2,7 @@
 title: An Invalid Form Control with Is Not Focusable Error Occurs
 description: An Invalid Form Control is Not Focusable error occurs when working with the Kendo UI ComboBox and Kendo UI Validator.
 type: troubleshooting
-page_title: Avoid the Invalid Form Control is Not Focusable Error | Kendo UI ComboBox
+page_title: Avoid the Invalid Form Control is Not Focusable Error | Kendo UI ComboBox for jQuery
 slug: combobox-invalid-form-control-is-not-focusable
 ticketid: 1397842
 res_type: kb

@@ -1,12 +1,14 @@
 ---
 title: Use Grid Filtering with Dynamic Default Values
-page_title: jQuery Grid Documentation | Filter with Dynamic Default Values | Kendo UI
-description: "Learn how to use dynamic default field values in the jQuery Grid by Kendo UI when you apply its filtering functionality."
+page_title: Filter with Dynamic Default Values | Kendo UI Grid for jQuery
+description: "An example on how to use dynamic default field values in the jQuery Grid by Kendo UI when you apply its filtering functionality."
 previous_url: /controls/data-management/grid/how-to/use-filtering-with-dynamic-default-values, /controls/data-management/grid/how-to/filtering/use-filtering-with-dynamic-default-values
 slug: howto_gridfiltering_dynamicdefaultvalues_grid
+tags: use, grid, filtering, dynamic, default, values
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Use Grid Filtering with Dynamic Default Values
 
 Your project might require you to apply a specific approach to the Grid when you use its filtering functionality.
 
@@ -19,8 +21,6 @@ The following example demonstrates how to use dynamic default field values in a 
 2. Click **Add new record**.
 
 As a result, the default category of the new record matches the current (filtered) category and a new row is added to the Grid.
-
-###### Example
 
 ```dojo
       <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
@@ -109,17 +109,3 @@ As a result, the default category of the new record matches the current (filtere
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
-* [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
-* [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
-* [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
-* [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
-* [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
-* [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
-* [How to Perform CRUD Operations with Local Storage Data]({% slug howto_perform_crud_operationswith_local_storage_data_grid %})
-* [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
-* [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
-* [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
-* [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

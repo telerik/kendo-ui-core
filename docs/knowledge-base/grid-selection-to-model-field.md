@@ -1,20 +1,20 @@
 ---
 title: Bind Selection to Model Field with Checkbox Column
-page_title: jQuery Grid Documentation | Bind Selection to Model Field | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to select a row with a checkbox column that is bound to a model field."
+page_title: Bind Selection to Model Field | Kendo UI Grid for jQuery
+description: "An example on how to select a row with a checkbox column that is bound to a model field in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Selection/grid-selection-to-model-field
 slug: howto_bind_selection_to_model_field
+tags: grid, bind, selection, model, field, checkbox, column
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Bind Selection to Model Field with Checkbox Column
 
 Your project might require you to select a Kendo UI Grid row by using a checkbox which is bound to a field from the model.
 
 After the user checks or unchecks the checkbox, an `update` request initiates and it updates the Boolean field in the model.
 
 The following example demonstrates how `SelectAll` that is located in the header updates the Boolean field in all pages. This approach is suitable for scenarios with a limited number of records.
-
-###### Example
 
 ```dojo
 <style>
@@ -113,8 +113,6 @@ The following example demonstrates how `SelectAll` that is located in the header
 
 The following example demonstrates how `SelectAll` that is located in the header updates the Boolean field on the current page only. This approach is suitable for scenarios with a great number of records.
 
-###### Example
-
 ```dojo
 <style>
     html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }
@@ -212,9 +210,4 @@ The following example demonstrates how `SelectAll` that is located in the header
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
-* [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})
-* [How to Prevent Selection for Checkbox Cells]({% slug howto_prevent_selection_checkbox_cells_grid %})
-* [How to Select Multiple Rows with Checkboxes]({% slug howto_select_multiple_rowswith_checkboxes_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

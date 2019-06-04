@@ -1,18 +1,18 @@
 ---
 title: Use Checkbox Column Templates and Edit
-page_title:  jQuery Grid Documentation | Checkbox Column Templates | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to use checkbox column templates and perform editing."
+page_title:  Checkbox Column Templates | Kendo UI Grid for jQuery
+description: "An example on how to use checkbox column templates and perform editing."
 previous_url: /kendo-uimvc/web/grid/how-to/Templates/grid-with-checkbox-column, /controls/data-management/grid/how-to/Templates/grid-with-checkbox-column
 slug: howto_use_checkbox_column_templateand_edit_grid
+tags: grid, use, checkbox, column, templates, perform, edit
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Use Checkbox Column Templates and Edit
 
 The following example demonstrates how to use checkboxes in the Grid column templates and perform editing.
 
 For more information on how to apply batch editing with a bound Boolean column, check the article about [adding model-bound and batch-editable checkbox columns to the Grid](/knowledge-base/grid-bound-checkbox-editable-column).
-
-###### Example
 
 ```dojo
    <div id="grid"></div>
@@ -94,8 +94,3 @@ For more information on how to apply batch editing with a bound Boolean column, 
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
-* [How to Refresh Grid in Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
-* [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

@@ -1,18 +1,18 @@
 ---
 title: Implement Stable Sorting in Chrome
-page_title: jQuery Grid Documentation | Stable Sorting in Chrome | Kendo UI
-description: "Get started with the jQuery Grid by Kendo UI and learn how to implement stable sorting in Google Chrome. "
+page_title: Stable Sorting in Chrome | Kendo UI Grid for jQuery
+description: "An example on how to implement stable sorting in Google Chrome with the Kendo UI Grid for jQuery. "
 previous_url: /controls/data-management/grid/how-to/stable-sort-chrome, /controls/data-management/grid/how-to/sorting/stable-sort-chrome
 slug: howto_implement_stable_sortin_chrome_grid
+tags: implement, stable, sorting, grid, chrome
+component: grid
+type: how-to
+res_type: kb
 ---
-
-# Implement Stable Sorting in Chrome
 
 The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90).
 
 A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) might cause items with the same sorting order to change places. The following example demonstrates that when run in Chrome and items are sorted by **Address**, they change places. This is visible if you look at the **Name** column. The demo represents a typical case where a non-stable sorting causes side effects.
-
-###### Example
 
 ```dojo
     <div id="grid"></div>
@@ -47,7 +47,7 @@ A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm
 
 The solution for this issue is to add a position field and use it to maintain stability. This is done through a custom [`columns.sortable.compare function`](/api/javascript/ui/grid/configuration/columns.sortable.compare).
 
-###### Example - a stable sort function using a position field
+ - a stable sort function using a position field
 
 ```dojo
     <div id="grid"></div>
@@ -97,16 +97,3 @@ The solution for this issue is to add a position field and use it to maintain st
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
-* [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
-* [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
-* [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
-* [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
-* [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
-* [How to Perform CRUD Operations with Local Storage Data]({% slug howto_perform_crud_operationswith_local_storage_data_grid %})
-* [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
-* [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
-* [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
-* [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
-
-For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_adjust_row_heights_template_locked_columns_grid %}).

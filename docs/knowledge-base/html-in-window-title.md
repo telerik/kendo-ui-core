@@ -2,7 +2,7 @@
 title: Insert HTML in the Window Title
 description: An example on how to inject HTML in the Kendo UI Window title.
 type: how-to
-page_title: Inject HTML in the Title | Kendo UI Window
+page_title: Inject HTML in the Title | Kendo UI Window for jQuery
 slug: set-html-in-window-title
 tags: window, title, html
 res_type: kb
