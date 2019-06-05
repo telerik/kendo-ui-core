@@ -34,9 +34,17 @@ Specifies the PDF.JS configuration options. Including `pdfjs` is mandatory.
         });
     </script>
 
-### pdfjsProcessing.file `Blob | byte[] | String`
+### pdfjsProcessing.file `Object | String` *default: ""*
 
 Specifies the default file to be displayed.
+
+### pdfjsProcessing.file.data `Blob | byte[]`
+
+Specifies the data to be passed to the pdfjs processor.
+
+### pdfjsProcessing.file.url `Blob | byte[]`
+
+Specifies the url to be passed to the pdfjs processor.
 
 ### dplProcessing `Object`
 

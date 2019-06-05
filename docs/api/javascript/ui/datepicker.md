@@ -103,7 +103,7 @@ The duration of the open animation in milliseconds.
 
 ### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'D')#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate the value of the aria-label attribute of the currently focused cell of the calendar.
 
 #### Example
 
@@ -152,7 +152,7 @@ The duration of the open animation in milliseconds.
 
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month template](/api/javascript/ui/datepicker#configuration-month.content).
+Specifies a list of dates, which will be passed to the [month content](/api/javascript/ui/datepicker/configuration/month#monthcontent).
 
 #### Example - specify a list of dates
 
