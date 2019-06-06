@@ -1624,5 +1624,9 @@
 
             assert.isOk(true); //no errors were thrown;
         });
+
+        it("unifyType parses booleans correctly", function() {
+            assert.equal(kendo.ui.List.unifyType("false", "boolean"), false);
+        });
     });
 }());

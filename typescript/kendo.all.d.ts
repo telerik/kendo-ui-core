@@ -217,6 +217,10 @@ declare namespace kendo {
 
     function guid(): string;
 
+    function notify(widget: typeof kendo.ui.Widget, namespace?: typeof kendo.ui): void;
+    function notify(widget: typeof kendo.ui.Widget, namespace?: typeof kendo.mobile.ui): void;
+    function notify(widget: typeof kendo.ui.Widget, namespace?: typeof kendo.dataviz.ui): void;
+
     function widgetInstance(element: JQuery, suite?: typeof kendo.ui): kendo.ui.Widget;
     function widgetInstance(element: JQuery, suite?: typeof kendo.mobile.ui): kendo.ui.Widget;
     function widgetInstance(element: JQuery, suite?: typeof kendo.dataviz.ui): kendo.ui.Widget;
@@ -1642,6 +1646,7 @@ declare namespace kendo.ui {
         dataSource: kendo.data.DataSource;
         list: JQuery;
         ul: JQuery;
+        popup: kendo.ui.Popup;
 
         element: JQuery;
         wrapper: JQuery;
@@ -2151,6 +2156,7 @@ declare namespace kendo.ui {
         input: JQuery;
         list: JQuery;
         ul: JQuery;
+        popup: kendo.ui.Popup;
 
         element: JQuery;
         wrapper: JQuery;
@@ -2925,6 +2931,7 @@ declare namespace kendo.ui {
         filterInput: JQuery;
         list: JQuery;
         ul: JQuery;
+        popup: kendo.ui.Popup;
 
         element: JQuery;
         wrapper: JQuery;
@@ -3066,6 +3073,7 @@ declare namespace kendo.ui {
         tagList: JQuery;
         tree: JQuery;
         treeview: kendo.ui.TreeView;
+        popup: kendo.ui.Popup;
 
         element: JQuery;
         wrapper: JQuery;
@@ -5175,6 +5183,7 @@ declare namespace kendo.ui {
         input: JQuery;
         list: JQuery;
         ul: JQuery;
+        popup: kendo.ui.Popup;
 
         element: JQuery;
         wrapper: JQuery;
@@ -5329,6 +5338,7 @@ declare namespace kendo.ui {
         list: JQuery;
         ul: JQuery;
         tagList: JQuery;
+        popup: kendo.ui.Popup;
 
         element: JQuery;
         wrapper: JQuery;

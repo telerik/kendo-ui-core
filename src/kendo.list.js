@@ -1072,6 +1072,9 @@ var __meta__ = { // jshint ignore:line
     function unifyType(value, type) {
         if (value !== undefined && value !== "" && value !== null) {
             if (type === "boolean") {
+                if (typeof value !== "boolean") {
+                    value = value.toLowerCase() === "true";
+                }
                 value = Boolean(value);
             } else if (type === "number") {
                 value = Number(value);
