@@ -2019,7 +2019,7 @@ var __meta__ = { // jshint ignore:line
                 return deferred;
             }
 
-            if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1) {
+            if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1 && that._emptySearch) {
                 if (that._dataItems.length && that._view.length) {
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
