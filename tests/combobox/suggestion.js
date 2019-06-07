@@ -282,6 +282,7 @@ it("widget does not suggest when input is empty", function() {
 
     combobox.input.focus();
     combobox.input.val("");
+    combobox.input.trigger("blur");
     combobox.refresh();
 
     assert.equal(combobox.text(), "");
@@ -299,6 +300,26 @@ it("suggest int values on search", function() {
     combobox.search("1");
 
     assert.equal(combobox.input.val(), "1");
+});
+
+it("reselects same index items after clearing input", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        suggest: true,
+        delay: 0
+    });
+
+    combobox.input.focus();
+    combobox.search("baz");
+    combobox.select(0);
+
+    combobox.input.val("");
+    combobox.open();
+    combobox.select(0);
+
+    assert.equal(combobox.text(), "Foo");
 });
 
     });
