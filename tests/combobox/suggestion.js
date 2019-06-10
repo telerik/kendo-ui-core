@@ -302,7 +302,7 @@ it("suggest int values on search", function() {
     assert.equal(combobox.input.val(), "1");
 });
 
-it("reselects same index items after clearing input", function() {
+it("reselects same index items after clearing filter", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
@@ -311,12 +311,10 @@ it("reselects same index items after clearing input", function() {
         delay: 0
     });
 
-    combobox.input.focus();
-    combobox.search("baz");
-    combobox.select(0);
 
-    combobox.input.val("");
-    combobox.open();
+    combobox.search("Baz");
+    combobox.select(0);
+    combobox.search("");
     combobox.select(0);
 
     assert.equal(combobox.text(), "Foo");
