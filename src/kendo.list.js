@@ -1997,6 +1997,7 @@ var __meta__ = { // jshint ignore:line
             var selectable = that.options.selectable;
             var singleSelection = selectable !== "multiple" && selectable !== false;
             var selectedIndices = that._selectedIndices;
+            var uiSelectedIndices = [this.element.find(".k-state-selected").index()];
 
             var added = [];
             var removed = [];
@@ -2019,7 +2020,9 @@ var __meta__ = { // jshint ignore:line
                 return deferred;
             }
 
-            if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1 && that._emptySearch) {
+            if (singleSelection && !filtered &&
+                $.inArray(last(indices), selectedIndices) !== -1 && $.inArray(last(indices), uiSelectedIndices) !== -1) {
+
                 if (that._dataItems.length && that._view.length) {
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
