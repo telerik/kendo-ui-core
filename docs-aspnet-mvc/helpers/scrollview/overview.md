@@ -69,16 +69,16 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
 
 ```
     @(Html.Kendo().ScrollView()
-         Name("scrollView")
-         ContentHeight("100%")
-         TemplateId("employee-template")
-         DataSource(d =>
+         .Name("scrollView")
+         .ContentHeight("100%")
+         .TemplateId("employee-template")
+         .DataSource(d =>
                 d.Custom()
                   .Type("odata")
                   .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees")))
                   .ServerPaging(true)
                   .PageSize(1))
-         HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
+         .HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
     )
     <script id="employee-template" type="text/x-kendo-template">
         <div class="template">
