@@ -94,6 +94,65 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
     </script>
 ```
 
+###### Fetch Data From a Controller Action
+
+```View
+@(Html.Kendo().ScrollView()
+    .Name("scrollView")
+    .EnablePager(false)
+    .ContentHeight("100%")
+    .TemplateId("scrollview-template")
+     .DataSource(dataSource => dataSource
+        .Custom()
+        .Type("aspnetmvc-ajax")
+        .Transport(transport => transport
+          .Read(read => read.Action("GetScrollViewData", "Home"))
+        )
+        .Schema(s => s.Data("Data").Total("Total"))
+        .ServerPaging(true)
+        .PageSize(1))
+    .HtmlAttributes(new { style = "height:200px; width:300px" })
+)
+
+<script id="scrollview-template" type="text/x-kendo-template">
+    <p style="border: 2px solid blue; color: red;">#= data.SomeField #</p>
+</script>
+```
+```Controller
+public class HomeController : Controller
+{
+    public ActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult GetScrollViewData([DataSourceRequest]DataSourceRequest request)
+    {
+        IEnumerable<MyModel> data = Enumerable.Range(1, 5).Select(x => new MyModel { SomeField = "item " + x + " from page " + request.Page });
+        return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+    }
+}
+```
+```Model
+public class MyModel
+{
+    public string SomeField { get; set; }
+}
+```
+
+If you set the `PageSize` option to a larger value, you will need to use a loop in the template:
+
+###### Example
+
+```
+<script id="scrollview-template" type="text/x-kendo-template">
+    # for (var i = 0; i < data.length; i++) { #
+        <p style="border: 2px solid blue; color: red;">#= data[i].SomeField #</p>
+    # } #
+</script>
+```
+
 ## See Also
 
 * [ScrollView Official Demos](https://demos.telerik.com/aspnet-MVC/scrollview/index)
