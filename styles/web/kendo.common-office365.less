@@ -840,6 +840,21 @@ table.k-editor {
     .k-radio:checked + .k-radio-label:after {
         right: 5px;
     }
+
+    .k-context-menu.k-menu-vertical > .k-item > .k-link,
+    .k-menu .k-menu-group .k-item > .k-link {
+        padding: .786em 1.714em .786em  4.929em;
+    }
+
+    .k-menu {
+        &,
+        &.k-menu-vertical {
+            .k-item > .k-link > .k-i-arrow-60-left {
+                left: .7rem;
+                right: auto;
+            }
+        }
+    }
 }
 
 .k-spreadsheet {

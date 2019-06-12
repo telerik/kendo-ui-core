@@ -3471,9 +3471,9 @@ If set to `true` the grid will export all pages of data. By default the grid exp
     });
     </script>
 
-### excel.fileName `String` *(default: "Export.xslx")*
+### excel.fileName `String` *(default: "Export.xlsx")*
 
-Specifies the file name of the exported Excel file.
+Specifies the file name of the exported Excel file. Must end with ".xlsx".
 
 #### Example - set the default Excel file name
 

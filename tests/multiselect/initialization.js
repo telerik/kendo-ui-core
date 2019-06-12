@@ -577,6 +577,12 @@
         assert.equal(multiselect.element.attr("disabled"), undefined);
     });
 
+    it("MultiSelect adds k-no-click to wrapper element when readonly", function() {
+        var multiselect = new MultiSelect(select.attr("readonly", true));
+
+        assert.isOk(multiselect.wrapper.hasClass('k-no-click'));
+    });
+
     it("MultiSelect uses disabled attr over the readonly", function() {
         var multiselect = new MultiSelect(select.attr("readonly", true).attr("disabled", true));
 

@@ -46,6 +46,7 @@ var __meta__ = { // jshint ignore:line
         HIDDENCLASS = "k-hidden",
         HOVERCLASS = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
+        NOCLICKCLASS = "k-no-click",
         DISABLED = "disabled",
         READONLY = "readonly",
         AUTOCOMPLETEVALUE = kendo.support.browser.chrome ? "disabled" : "off",
@@ -489,11 +490,9 @@ var __meta__ = { // jshint ignore:line
                     .on(MOUSELEAVE, LI, function() { $(this).removeClass(HOVERCLASS); })
                     .on(CLICK, "li.k-button .k-select", proxy(that._tagListClick, that));
             } else {
-                if (disable) {
-                    wrapper.addClass(STATEDISABLED);
-                } else {
-                    wrapper.removeClass(STATEDISABLED);
-                }
+
+                wrapper.toggleClass(STATEDISABLED, disable)
+                       .toggleClass(NOCLICKCLASS, readonly);
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)

@@ -41,12 +41,35 @@ How can I show the editor of the Gantt when I select tasks in the tree-list?
 1. Call the `editTask` method of the Gantt and pass the dataItem of the selected task as a parameter.
 
 ```dojo
+	<div id="gantt"></div>
+  	<script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ]
+    });
+    </script>
 	<script>
 		$(document).ready(function() {
 		  $(".k-gantt").delegate(".k-gantt-treelist .k-grid-content tr", "click", function(e) {
-			var gantt = $("#gantt").data("kendoGantt");
-			var task = gantt.dataItem(this);
-			gantt.editTask(task);
+        var gantt = $("#gantt").data("kendoGantt");
+        var task = gantt.dataItem(this);
+        gantt.editTask(task);
 		  });
 		});
 	</script>

@@ -21,6 +21,8 @@ var __meta__ = { // jshint ignore:line
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
         POINT = ".",
+        support = kendo.support,
+        AUTOCOMPLETEVALUE = support.browser.chrome ? "disabled" : "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' +
                     '#=message#<div class="k-callout k-callout-n"></div></div>',
@@ -81,6 +83,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             attr[kendo.attr(ruleName + "-msg")] = rule.message;
+
+            attr.autocomplete = AUTOCOMPLETEVALUE;
         }
 
         if (inArray(type, specialRules) >= 0) {
