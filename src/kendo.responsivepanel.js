@@ -15,7 +15,7 @@ var __meta__ = { // jshint ignore:line
     var NS = ".kendoResponsivePanel";
     var OPEN = "open";
     var CLOSE = "close";
-    var ACTIVATE_EVENTS = "click" + NS +" touchstart" + NS;
+    var ACTIVATE_EVENTS = "click" + NS +" touchstart" + NS + " touchend" + NS;
     var Widget = kendo.ui.Widget;
     var ResponsivePanel = Widget.extend({
         init: function(element, options) {
@@ -108,6 +108,10 @@ var __meta__ = { // jshint ignore:line
         },
         _toggleButtonClick: function(e) {
             e.preventDefault();
+
+            if(e.type == "touchend") {
+                return;
+            }
 
             if (this.element.hasClass("k-rpanel-expanded")) {
                 this.close();
