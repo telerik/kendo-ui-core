@@ -4195,6 +4195,53 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
     gantt.destroy();
     </script>
 
+### editTask
+
+Opens the popup window to edit the GanttTask object which is received from the call.
+
+#### Parameters
+
+##### task `kendo.data.GanttTask`
+
+A kendo.data.GanttTask object which represents the currently selected task.
+
+#### Example - Edit the items from the Task Treelist.
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: {
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/kendo-ui/service/gantttasks",
+            dataType: "jsonp"
+          }
+        },
+        schema: {
+          model: {
+            id: "id",
+            fields: {
+              id: { from: "ID", type: "number" },
+              orderId: { from: "OrderID", type: "number", validation: { required: true } },
+              parentId: { from: "ParentID", type: "number", validation: { required: true } },
+              start: { from: "Start", type: "date" },
+              end: { from: "End", type: "date" },
+              title: { from: "Title", defaultValue: "", type: "string" },
+              percentComplete: { from: "PercentComplete", type: "number" },
+              summary: { from: "Summary" },
+              expanded: { from: "Expanded" }
+            }
+          }
+        }
+      }
+    });
+    $(".k-gantt").delegate(".k-gantt-treelist .k-grid-content tr", "click", function(e) {           
+      var gantt = $("#gantt").data("kendoGantt");
+      var task = gantt.dataItem(this);
+      gantt.editTask(task);
+    });
+    </script>
+
 ### range
 
 Sets range to the widget.
@@ -4211,7 +4258,7 @@ An Object that have start and end parameters of type Date.
 
 #### Example - set range to the widget
 
-      <div id="gantt"></div>
+    <div id="gantt"></div>
     <script>
     $("#gantt").kendoGantt({
       dataSource: [

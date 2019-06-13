@@ -41,7 +41,7 @@ var __meta__ = { // jshint ignore:line
         WRAPPER = '<div class="k-widget k-popup k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
                 '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
-                '#=content#' +
+                '<div class="k-notification-content">#=content#</div>' +
                 '<span class="k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
