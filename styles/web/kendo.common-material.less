@@ -196,6 +196,16 @@
 @spreadsheet-drawing-handle-border-width: 1px;
 
 
+// Notification
+@notification-border-width: 1px;
+
+@notification-padding-x: 1.786em;
+@notification-padding-y: 1.786em;
+@notification-padding-end: 1.786em;
+
+@notification-icon-spacing: 4px;
+
+
 @import "common/all.less";
 
 @spreadsheet-first-tool-offset: 0;
@@ -854,10 +864,6 @@ div.editorToolbarWindow.k-window-content {
     }
 }
 
-.k-notification {
-    padding: 1.786em;
-}
-
 .k-slider-track {
     border-width: 0;
 }
@@ -1143,6 +1149,16 @@ form.k-filter-menu .k-textbox {
     .k-context-menu.k-menu-vertical > .k-item > .k-link,
     .k-menu .k-menu-group .k-item > .k-link {
         padding: 0.5em 1.714em 0.5em 4.929em;
+    }
+
+    .k-menu {
+        .k-menu-group,
+        &.k-menu-vertical  {
+            .k-item > .k-link > .k-menu-expand-arrow {
+                right: auto;
+                left: 1.071em;
+            }
+        }
     }
 }
 
