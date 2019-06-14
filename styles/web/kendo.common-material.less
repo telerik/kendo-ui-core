@@ -616,8 +616,7 @@
 }
 
 .k-context-menu.k-menu-vertical > .k-item > .k-link,
-.k-menu .k-menu-group .k-item > .k-link
-{
+.k-menu .k-menu-group .k-item > .k-link {
     padding: 0.5em 4.929em 0.5em 1.714em;
 }
 
@@ -1113,29 +1112,54 @@ form.k-filter-menu .k-textbox {
 }
 
 //RTL
-.k-rtl .k-widget .k-dropdown-wrap,
-.k-rtl .k-widget .k-picker-wrap,
-.k-rtl .k-widget .k-numeric-wrap {
-    padding-left: 2.5em;
-}
+.k-rtl,
+[dir="rtl"] {
+    .k-widget {
+        .k-dropdown-wrap,
+        .k-picker-wrap,
+        .k-numeric-wrap {
+            padding-left: 2.5em;
+        }
 
-.k-rtl .k-widget.k-autocomplete > .k-i-close,
-.k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    right: initial;
-    margin-right: 0;
-}
+        &.k-autocomplete > .k-i-close,
+        &.k-multiselect > .k-multiselect-wrap > .k-i-close {
+            right: initial;
+            margin-right: 0;
+        }
 
-.k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: calc(@combobox-clear-icon-offset);
-    right: initial;
-}
+        &.k-combobox > .k-dropdown-wrap > .k-i-close {
+            left: calc(@combobox-clear-icon-offset);
+            right: initial;
+        }
 
-.k-rtl .k-widget.k-datetimepicker .k-picker-wrap {
-    padding-left: 5em;
-}
+        &.k-datetimepicker .k-picker-wrap {
+            padding-left: 5em;
 
-.k-rtl .k-widget.k-datetimepicker .k-picker-wrap .k-icon {
-    margin: 0 6px;
+            .k-icon {
+                margin: 0 6px;
+            }
+        }
+    }
+
+    .k-menu .k-item,
+    .k-widget.k-menu-horizontal > .k-item {
+        border-width: 0;
+    }
+
+    .k-context-menu.k-menu-vertical > .k-item > .k-link,
+    .k-menu .k-menu-group .k-item > .k-link {
+        padding: 0.5em 1.714em 0.5em 4.929em;
+    }
+
+    .k-menu {
+        .k-menu-group,
+        &.k-menu-vertical  {
+            .k-item > .k-link > .k-menu-expand-arrow {
+                right: auto;
+                left: 1.071em;
+            }
+        }
+    }
 }
 
 .k-spreadsheet .k-spreadsheet-action-bar {
@@ -1233,7 +1257,8 @@ div.k-spreadsheet-window {
 }
 
 // RTL
-.k-rtl {
+.k-rtl,
+[dir="rtl"] {
 
     .k-combobox-clearable {
 

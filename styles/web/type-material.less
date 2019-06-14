@@ -2167,6 +2167,10 @@ div.k-filebrowser-dropzone em
 .k-button-group {
     .box-shadow(@button-shadow);
 
+    &.k-state-disabled {
+        box-shadow: none;
+    }
+
     .k-button {
         box-shadow: none;
 
@@ -2176,17 +2180,6 @@ div.k-filebrowser-dropzone em
             background-color: @button-active-background;
             border-color: @button-active-border-color;
             .composite-background(@button-active-gradient);
-        }
-
-        // Disabled state
-        &.k-state-disabled,
-        .k-state-disabled&,
-        &.k-state-disabled.k-state-active,
-        .k-state-disabled&.k-state-active {
-            color: @disabled-text-color;
-            border-color: @disabled-background-color;
-            background-color: @disabled-background-color;
-            box-shadow: none;
         }
 
         // Focused state

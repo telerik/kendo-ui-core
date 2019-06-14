@@ -826,23 +826,45 @@ table.k-editor {
 }
 
 //RTL
-.k-rtl .k-widget.k-datetimepicker .k-picker-wrap .k-icon {
-    margin: 0 2px;
-}
+.k-rtl,
+[dir="rtl"] {
+    .k-widget.k-datetimepicker .k-picker-wrap .k-icon {
+        margin: 0 2px;
+    }
 
-.k-rtl .k-widget.k-autocomplete > .k-i-close,
-.k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    right: initial;
-    margin-right: 0;
-}
+    .k-widget.k-autocomplete > .k-i-close,
+    .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
+        right: initial;
+        margin-right: 0;
+    }
 
-.k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: calc(@combobox-clear-icon-offset);
-    right: initial;
-}
+    .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
+        left: calc(@combobox-clear-icon-offset);
+        right: initial;
+    }
 
-.k-rtl .k-radio:checked + .k-radio-label:after {
-    right: 5px;
+    .k-radio:checked + .k-radio-label:after {
+        right: 5px;
+    }
+
+    .k-menu .k-item > .k-link {
+        padding: .786em 1.714em .786em 1.071em ;
+    }
+
+    .k-context-menu.k-menu-vertical > .k-item > .k-link,
+    .k-menu .k-menu-group .k-item > .k-link {
+        padding: .786em 1.714em .786em  4.929em;
+    }
+
+    .k-menu {
+        &,
+        &.k-menu-vertical {
+            .k-item > .k-link > .k-i-arrow-60-left {
+                left: .7rem;
+                right: auto;
+            }
+        }
+    }
 }
 
 .k-spreadsheet {

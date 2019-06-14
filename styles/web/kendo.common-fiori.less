@@ -6,6 +6,7 @@
 @input-indent: .8em;
 @input-offset: (@input-height + .35em);
 
+@filter-icon-size: calc(2.71428571em + 2px); // dropdown select button width including borders
 @combobox-padding-x: 2.71428571em;
 
 @input-clear-icon-offset: ~"((@{input-offset} - @{grid-size})/2)";
@@ -377,7 +378,11 @@ input.k-textbox,
 }
 
 .k-filtercell > span {
-    padding-right: 5.714em;
+    padding-right: calc(@filter-icon-size * 2 + 4px); // width of 2 filter buttons + 4px spacing
+}
+
+.k-filtercell > .k-operator-hidden {
+    padding-right: calc(@filter-icon-size + 2px); // width of 1 filter button + 2px spacing
 }
 
 .k-filtercell > span > .k-button {
@@ -386,9 +391,14 @@ input.k-textbox,
     margin: 0;
 }
 
-.k-filter-row .k-dropdown-operator {
-    width: 2.714em;
-    right: 2.857em;
+.k-filter-row {
+  .k-dropdown-operator,
+  .k-button-icon {
+    width: @filter-icon-size;
+    right: calc(@filter-icon-size + 2px); // width of the button + 2px
+    height: 100%;
+    border-radius: 0;
+  }
 }
 
 .k-grouping-header .k-group-indicator
@@ -612,8 +622,7 @@ input.k-textbox,
 }
 
 .k-context-menu.k-menu-vertical > .k-item > .k-link,
-.k-menu .k-menu-group .k-item > .k-link
-{
+.k-menu .k-menu-group .k-item > .k-link {
     padding: 0.786em 3em 0.786em 1.714em;
 }
 
@@ -1019,41 +1028,86 @@ span.k-tooltip
 }
 
 //RTL
-.k-rtl .k-widget .k-dropdown-wrap,
-.k-rtl .k-widget .k-picker-wrap,
-.k-rtl .k-widget .k-numeric-wrap {
-    padding-left: 2.5em;
-}
+.k-rtl,
+[dir="rtl"] {
+    .k-widget {
+        .k-dropdown-wrap,
+        .k-picker-wrap,
+        .k-numeric-wrap {
+            padding-left: 2.5em;
+        }
 
-.k-rtl .k-widget.k-autocomplete > .k-i-close,
-.k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-i-close {
-    right: initial;
-    margin-right: 0;
-}
 
-.k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
-    left: calc(@combobox-clear-icon-offset);
-    right: initial;
-}
+        &.k-autocomplete > .k-i-close,
+        &.k-multiselect > .k-multiselect-wrap > .k-i-close {
+            right: initial;
+            margin-right: 0;
+        }
 
-.k-rtl .k-widget.k-datetimepicker .k-picker-wrap {
-    padding-left: 5em;
-}
+        &.k-combobox > .k-dropdown-wrap > .k-i-close {
+            left: calc(@combobox-clear-icon-offset);
+            right: initial;
+        }
 
-.k-rtl .k-widget.k-datetimepicker .k-picker-wrap .k-icon {
-    margin: 0 6px;
-}
+        &.k-datetimepicker .k-picker-wrap {
+            padding-left: 5em;
 
-.k-rtl .k-panelbar .k-panelbar-expand.k-icon,
-.k-rtl .k-panelbar .k-panelbar-collapse.k-icon {
-    left: auto;
-    right: 9px;
-}
+            .k-icon {
+                margin: 0 6px;
+            }
+        }
+    }
 
-.k-rtl .k-panelbar > .k-item > .k-link,
-.k-rtl .k-panel > .k-item > .k-link {
-    padding-left: 1em;
-    padding-right: 2.4em;
+    .k-panelbar .k-panelbar-expand.k-icon,
+    .k-panelbar .k-panelbar-collapse.k-icon {
+        left: auto;
+        right: 9px;
+    }
+
+    .k-panelbar > .k-item > .k-link,
+    .k-panel > .k-item > .k-link {
+        padding-left: 1em;
+        padding-right: 2.4em;
+    }
+
+    .k-context-menu.k-menu-vertical > .k-item > .k-link,
+    .k-menu .k-menu-group .k-item > .k-link {
+        padding: 0.786em 1.714em 0.786em 3em;
+    }
+
+    .k-menu {
+        &,
+        &.k-menu-vertical {
+            .k-item > .k-link > .k-i-arrow-60-left {
+                left: 1rem;
+            }
+        }
+    }
+
+    .k-filter-row {
+        .k-filtercell {
+            & > span {
+                padding-left: calc(@filter-icon-size * 2 + 4px); // width of 2 filter buttons + 4px spacing
+                padding-right: 0;
+
+                & > .k-button {
+                    right: auto;
+                    left: 0;
+                }
+            }
+
+            & > .k-operator-hidden {
+                padding-left: calc(@filter-icon-size + 2px); // width of 1 filter button + 2px spacing
+                padding-right: 0;
+            }
+
+            .k-dropdown-operator,
+            .k-button-icon {
+                left: calc(@filter-icon-size + 2px); // width of the button + 2px
+                right: auto;
+            }
+        }
+    }
 }
 
 .k-spreadsheet {
@@ -1183,7 +1237,8 @@ div.k-spreadsheet-window {
 }
 
 // RTL
-.k-rtl {
+.k-rtl,
+[dir="rtl"] {
     span.k-combobox-clearable .k-input {
         padding-left: @combobox-padding-x;
         padding-right: 0;

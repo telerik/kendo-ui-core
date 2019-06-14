@@ -633,13 +633,12 @@
 }
 
 .k-context-menu.k-menu-vertical > .k-item > .k-link,
-.k-menu .k-menu-group .k-item > .k-link
-{
+.k-menu .k-menu-group .k-item > .k-link {
     padding: 0.5em 4.929em 0.5em 1.714em;
 }
 
 .k-menu .k-item > .k-link > .k-i-arrow-60-right {
-    right: 2.143rem;
+    right: 1rem;
 }
 
 .k-menu .k-animation-container .k-menu-group {
@@ -1094,7 +1093,8 @@ form.k-filter-menu .k-textbox {
     margin: 0 6px;
 }
 
-.k-rtl {
+.k-rtl,
+[dir="rtl"] {
 
     .k-gantt {
 
@@ -1112,6 +1112,25 @@ form.k-filter-menu .k-textbox {
         right: 4px;
     }
 
+    .k-menu .k-item,
+    .k-widget.k-menu-horizontal > .k-item {
+        border-width: 0;
+    }
+
+    .k-context-menu.k-menu-vertical > .k-item > .k-link,
+    .k-menu .k-menu-group .k-item > .k-link {
+        padding: 0.5em 1.714em 0.5em 4.929em;
+    }
+
+    .k-menu {
+        &,
+        &.k-menu-vertical {
+            .k-item > .k-link > .k-i-arrow-60-left {
+                left: 1rem;
+                right: auto;
+            }
+        }
+    }
 }
 
 //ProgressBar
