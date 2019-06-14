@@ -38,13 +38,72 @@ Specifies the PDF.JS configuration options. Including `pdfjs` is mandatory.
 
 Specifies the default file to be displayed.
 
-### pdfjsProcessing.file.data `Blob | byte[]`
+#### Example
 
-Specifies the data to be passed to the pdfjs processor.
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+        $("#pdfviewer").kendoPDFViewer({
+            pdfjsProcessing: {
+                file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            }
+        });
+    </script>
 
-### pdfjsProcessing.file.url `Blob | byte[]`
+### pdfjsProcessing.file.data `Blob | byte[] | String`
+
+Specifies the `data` to be passed to the pdfjs processor. Accepts `blob`, `byte` array or `base64` string.
+
+#### Example
+
+    <div id="pdfViewer"></div>
+
+    <script>
+        var request = new XMLHttpRequest();
+        request.open('GET', "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf", true);
+        request.responseType = 'blob';
+        request.onload = function() {
+            var reader = new FileReader();
+            reader.readAsDataURL(request.response);
+            reader.onload =  function(e){
+                $("#pdfViewer").kendoPDFViewer({
+                    pdfjsProcessing: {
+                        file: {
+                            //retain the base64 data
+                            data: e.target.result.split(",")[1]
+                        }
+                    },
+                    width: "100%",
+                    height: 1200
+                }).getKendoPDFViewer();
+            };
+        };
+        request.send();
+    </script>
+
+### pdfjsProcessing.file.url `String`
 
 Specifies the url to be passed to the pdfjs processor.
+
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+    <script>
+        $("#pdfviewer").kendoPDFViewer({
+            pdfjsProcessing: {
+                file: {
+                    url: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+                }
+            }
+        });
+    </script>
 
 ### dplProcessing `Object`
 

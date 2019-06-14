@@ -60,7 +60,7 @@ var __meta__ = { // jshint ignore:line
             rule,
             attr = {
                 name: options.field,
-                title: options.title
+                title: options.title ? options.title : options.field
             };
 
         for (ruleName in validation) {
