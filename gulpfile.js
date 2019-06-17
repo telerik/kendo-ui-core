@@ -260,7 +260,12 @@ gulp.task('mdspell', shell.task(
 
 [ 'core' ].forEach(function(flavor) {
     gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
-        var js = gulp.src('dist/cjs/**/*').pipe(gulp.dest('dist/npm/js'));
+        var js = gulp.src('dist/cjs/**/*')
+                    .pipe(gulp.dest('dist/npm/js'));
+
+        var jsmin = gulp.src('dist/cjs/**/*.js')
+                    .pipe(uglify())
+                    .pipe(gulp.dest('dist/npm/js'));
 
         var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
 
@@ -278,7 +283,7 @@ gulp.task('mdspell', shell.task(
                     .pipe(rename('README.md'))
                     .pipe(gulp.dest('dist/npm'));
 
-        return merge(js, styles, pkg, license, readme);
+        return merge(js, jsmin, styles, pkg, license, readme);
     })
 })
 

@@ -112,6 +112,13 @@
 
         .k-check {
             color: @adaptive-content-text;
+            border-color: @adaptive-content-text;
+
+            &:focus,
+            &.k-state-focused {
+                border-color: @primary-focused-border-color;
+                box-shadow: @primary-focused-shadow;
+            }
         }
     }
 
@@ -165,7 +172,6 @@
         .k-check:checked {
             opacity: @default-icon-opacity;
             font-family: 'WebComponentsIcons';
-            border-color: transparent;
 
             &::before {
                 content: "\e118";
