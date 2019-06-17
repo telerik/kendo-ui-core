@@ -1159,7 +1159,7 @@ The event handler function context (available via the `this` keyword) will be se
         ],
         dataBinding: function(e) {
           // call e.preventDefault() if you want to cancel binding.
-          console.log("ListView is ready to bind to data").
+          console.log("ListView is ready to bind to data");
         }
       });
     </script>

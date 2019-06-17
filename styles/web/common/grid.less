@@ -715,13 +715,13 @@ html body .k-grid tbody .k-button-icon
     white-space: normal;
 }
 
-.k-edit-cell>.k-textbox,
-.k-edit-cell>.k-widget,
-.k-grid-edit-row>td>.k-textbox,
-.k-grid-edit-row>td>.k-widget,
-.k-grid-edit-row>td>.text-box
-{
-    width: 100%;
+.k-edit-cell,
+.k-grid-edit-row > td {
+    > .k-textbox,
+    > .k-widget:not(.k-switch),
+    > .text-box {
+        width: 100%;
+    }
 }
 
 html .k-edit-cell .k-tooltip,
