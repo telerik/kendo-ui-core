@@ -908,6 +908,16 @@ The row height (in pixels).
     });
     </script>
 
+### sheets.rows.type `String`
+
+Used to distinguish between the various row types in the Grid. The supported values are:
+
+- "header"
+- "footer"
+- "group-header"
+- "group-footer"
+- "data"
+
 ### sheets.showGridLines `Boolean` *(default: true)*
 
 A Boolean value which indicates if the grid lines of the sheet will be displayed.
