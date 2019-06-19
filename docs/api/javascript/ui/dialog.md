@@ -220,7 +220,13 @@ Possible values are:
     <div id="dialog"></div>
     <script>
         $("#dialog").kendoDialog({
-            buttonLayout: "normal"
+            buttonLayout: "normal",
+            actions: [{
+              text: "OK",
+              primary: true
+          },{
+              text: "Cancel"
+          }]
         });
     </script>
 
