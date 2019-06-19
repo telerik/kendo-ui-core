@@ -60,7 +60,10 @@ Specifies the `data` to be passed to the pdfjs processor. Accepts `blob`, `byte`
 #### Example
 
     <div id="pdfViewer"></div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
     <script>
         var request = new XMLHttpRequest();
         request.open('GET', "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf", true);

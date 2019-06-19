@@ -709,7 +709,7 @@ The function that will be executed against every cell. The function receives the
 
 - **rowIndex** - the row index of the cell
 - **columnIndex** - the column index of the cell
-- **value** - the cell properties
+- **cellProperties** - the cell properties
 
 #### Example
 
@@ -735,7 +735,7 @@ The function that will be executed against every cell. The function receives the
     var sheet = spreadsheet.activeSheet();
     var range = sheet.range("A1:B2");
 
-    range.forEachCell(function (row, column, value) {
+    range.forEachCell(function (row, column, cellProperties) {
         console.log(row, column, value);
     });
 </script>

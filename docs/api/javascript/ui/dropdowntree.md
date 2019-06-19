@@ -154,7 +154,7 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'false' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 #### Example - disable the clear button
 
