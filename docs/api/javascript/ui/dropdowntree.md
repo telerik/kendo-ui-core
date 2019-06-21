@@ -209,7 +209,9 @@ If `true` or an object, renders checkboxes beside each node. In this case the wi
 Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked. This
 also enables tri-state checkboxes with an indeterminate state.
 
-> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario not supported by the widget.
+> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario is not supported by the widget.
+
+> When this property is enabled, it should be used with [loadOnDemand](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree/configuration/loadondemand) set to 'false'. Otherwise, after expand of a checked node (and load of its inner items) the value selected in the widget and the checked items in the drop-down will no longer be in sync. Currently, such scenario is not among the supported.
 
 #### Example - enable tri-state checkboxes and propagate checked state to children
 
