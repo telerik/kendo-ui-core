@@ -2374,6 +2374,7 @@ var __meta__ = { // jshint ignore:line
             showOn: "contextmenu",
             orientation: "vertical",
             alignToAnchor: false,
+            copyAnchorStyles : true,
             target: "body"
         },
 

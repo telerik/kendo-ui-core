@@ -56,7 +56,7 @@ If you have already stored a token instead of storing the credentials as clear t
 ###### Example
 
 ```
-NNuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
+NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
       -UserName "your login email" -Password "your password" ^
       -StorePasswordInClearText
 ```
