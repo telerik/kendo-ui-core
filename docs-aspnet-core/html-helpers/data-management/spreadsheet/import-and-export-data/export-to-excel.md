@@ -1,0 +1,50 @@
+---
+title: Export to Excel
+page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn how to export to an Excel file in the browser using the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+slug: htmlhelpers_spreadsheet_export_to_excel_aspnetcore
+position: 2
+---
+
+# Export to Excel
+
+The Spreadsheet utilizes the [Excel export module](https://docs.telerik.com/kendo-ui/framework/excel/introduction) framework to produce Excel files directly in the browser.
+
+The output files are in the OOXML Spreadsheet format with an `.xlsx` extension. The legacy `.xls` binary format is not supported.
+
+## User Interface
+
+The default toolbar configuration includes an **Export** button. Clicking it opens a dialog box for entering the file name and selecting the desired output format for the exported document.
+
+**Figure 1: Activating Export Dialog**
+
+![Export to Excel](activate-export.png)
+
+**Figure 2: Export Dialog**
+
+![Export to Excel](export-to-excel.png)
+
+## API Export Reference
+
+The Spreadsheet client-side API includes the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/excel#excel.fileName):
+
+###### Example
+
+```
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .Excel(ex => ex.FileName("Order.xlsx"))
+    )
+```
+
+## Known Issues
+
+Currently, the export module does not handle sorting and filtering. This limitation will be addressed before the widget goes out of its Beta version.
+
+## See Also
+
+* [Overview of the Spreadsheet HtmlHelper]({% slug htmlhelpers_spreadsheet_aspnetcore %})
+* [Spreadsheet API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [Custom Functions]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
+* [Cell Formatting]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
+* [Data Source Binding]({% slug htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore %})

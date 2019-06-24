@@ -97,7 +97,7 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
 
 ## Configuration
 
-The following example demonstrates the basic configuration of the Spreadsheet HtmlHelper and how to get the Spreadsheet instance.
+The following example demonstrates the basic configuration of the Spreadsheet HtmlHelper.
 
 ###### Example
 
@@ -177,14 +177,66 @@ The following example demonstrates the basic configuration of the Spreadsheet Ht
            });
    })
 )
-
-<script type="text/javascript">
-$(function() {
-    //Notice that the Name() of the Spreadsheet is used to get its client-side instance.
-    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-});
-</script>
 ```
+
+## Event Handling
+
+You can subscribe to all Spreadsheet [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#events).
+
+The following example demonstrates how to subscribe to the `changing` and `change` events.
+
+```Razor
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .Events(events => events
+            .Changing("onChanging")
+            .Change("onChange")
+        )
+        .Sheets(sheets =>
+        {
+            sheets.Add()
+                .Name("Sheet1")
+                .Columns(columns =>
+                {
+                    columns.Add().Width(115);
+                })
+                .Rows(rows =>
+                {
+                    rows.Add().Height(25).Cells(cells =>
+                    {
+                        cells.Add()
+                            .Value("ID")
+                            .TextAlign(SpreadsheetTextAlign.Center);
+                    });
+                });
+        })
+    )
+
+    <script>
+        function onChanging(e) {
+            //Handle the changing event.
+        }
+
+        function onChange(e) {
+            //Handle the change event.
+        }
+    </script>
+```
+
+## Reference
+
+To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
+
+###### Example
+
+    //Put this after your Kendo UI Spreadsheet for ASP.NET Core declaration.
+    <script>
+        $(document).ready(function() {
+            //Note that the Name() of the Spreadsheet is used to get its client-side instance.
+            var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        });
+    </script>
+
 
 ## See Also
 

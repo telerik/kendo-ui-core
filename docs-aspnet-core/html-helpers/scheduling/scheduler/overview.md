@@ -9,15 +9,13 @@ position: 1
 
 # Scheduler HtmlHelper Overview
 
-The Scheduler HtmlHelper extension is a server-side wrapper for the [Kendo UI Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) widget.
+The Scheduler HtmlHelper extension is a server-side wrapper for the [Kendo UI Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview) widget.
 
-It enables you to configure the Scheduler from server-side code. The [Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview) displays a set of events, appointments, or tasks. It support the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
-
-For more information on the HtmlHelper, refer to the article on the [Scheduler HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/scheduler/overview).
+It enables you to configure the Scheduler from server-side code. The [Scheduler](https://demos.telerik.com/aspnet-core/scheduler/index) displays a set of events, appointments, or tasks. It support the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
 ## Basic Usage
 
-The following example demonstrates how to define the Scheduler by using the Scheduler HtmlHelper.
+The following example demonstrates how to define the Scheduler by using the Scheduler HtmlHelper. 
 
 ```Razor
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
@@ -51,70 +49,65 @@ The following example demonstrates how to define the Scheduler by using the Sche
 ```Controller
     public class SchedulerController : Controller
     {
-    	private SchedulerTaskService taskService;
+        private ISchedulerEventService<TaskViewModel> taskService;
 
-    	public SchedulerController()
-    	{
-    		this.taskService = new SchedulerTaskService();
-    	}
+        public SchedulerController(
+            ISchedulerEventService<TaskViewModel> schedulerTaskService)
+        {
+            taskService = schedulerTaskService;
+        }
 
-    	public ActionResult Index()
-    	{
-    		return View();
-    	}
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-    	public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request)
-    	{
-    		return Json(taskService.GetAll().ToDataSourceResult(request));
-    	}
+        public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(taskService.GetAll().ToDataSourceResult(request));
+        }
 
-    	public virtual JsonResult Destroy([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
-    	{
-    		if (ModelState.IsValid)
-    		{
-    			taskService.Delete(task, ModelState);
-    		}
+        public virtual JsonResult Destroy([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+        {
+            if (ModelState.IsValid)
+            {
+                taskService.Delete(task, ModelState);
+            }
 
-    		return Json(new[] { task }.ToDataSourceResult(request, ModelState));
-    	}
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
 
-    	public virtual JsonResult Create([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
-    	{
-    		if (ModelState.IsValid)
-    		{
-    			taskService.Insert(task, ModelState);
-    		}
+        public virtual JsonResult Create([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+        {
+            if (ModelState.IsValid)
+            {
+                taskService.Insert(task, ModelState);
+            }
 
-    		return Json(new[] { task }.ToDataSourceResult(request, ModelState));
-    	}
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
 
-    	public virtual JsonResult Update([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
-    	{
-    		if (ModelState.IsValid)
-    		{
-    			taskService.Update(task, ModelState);
-    		}
+        public virtual JsonResult Update([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+        {
+            //example custom validation:
+            if (task.Start.Hour < 8 || task.Start.Hour > 22)
+            {
+                ModelState.AddModelError("start", "Start date must be in working hours (8h - 22h)");
+            }
 
-    		return Json(new[] { task }.ToDataSourceResult(request, ModelState));
-    	}
+            if (ModelState.IsValid)
+            {
+                taskService.Update(task, ModelState);
+            }
 
-    	protected override void Dispose(bool disposing)
-    	{
-    		taskService.Dispose();
-    		base.Dispose(disposing);
-    	}
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
     }
 ```
 
-## Reset Series
-
-As of the R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing.
-
-If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
-
 ## Configuration
 
-The following example demonstrates the basic configuration of the Scheduler HtmlHelper and how to get the Scheduler instance.
+The following example demonstrates the basic configuration of the Scheduler HtmlHelper. 
 
 ###### Example
 
@@ -169,14 +162,66 @@ The following example demonstrates the basic configuration of the Scheduler Html
                 .Update("Date_Grouping_Update", "Scheduler")
         )
     )
+```
 
-    <script type="text/javascript">
-    $(function() {
-        //Notice that the Name() of the Scheduler is used to get its client-side instance.
-        var scheduler = $("#scheduler").data("kendoScheduler");
-    });
+## Reset Series
+
+As of the R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing.
+
+If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
+
+## Event Handling
+
+You can subscribe to all Scheduler [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events).
+
+The following example demonstrates how to subscribe to the `dataBound` and `dataBinding` events.
+
+```Razor
+    @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
+        .Name("scheduler")
+        .Date(new DateTime(2013, 6, 13))
+        .StartTime(new DateTime(2013, 6, 13, 10, 00, 00))
+        .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+        .Editable(false)
+        .Height(600)
+        .BindTo(Model)
+        .Events(e => {
+            e.DataBound("scheduler_dataBound");
+            e.DataBinding("scheduler_dataBinding");
+        })
+    )
+
+    <script>
+        function scheduler_dataBound(e) {
+            //Handle the dataBound event.
+        }
+
+        function scheduler_dataBinding(e) {
+            //Handle the dataBinding event.
+        }
     </script>
 ```
+
+## Reset Series
+
+As of the R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing.
+
+If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
+
+## Reference
+
+To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+
+###### Example
+
+    //Put this after your Kendo UI Scheduler for ASP.NET Core declaration.
+    <script>
+        $(document).ready(function() {
+            //Notice that the Name() of the Scheduler is used to get its client-side instance.
+            var scheduler = $("#scheduler").data("kendoScheduler");
+        });
+    </script>
+
 
 ## See Also
 
