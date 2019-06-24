@@ -92,6 +92,10 @@ navigation:
         title: "Features"
      "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
+     "html-helpers/data-management/spreadsheet/import-and-export-data":
+        title: "Import and Export of Data"
+     "html-helpers/data-management/spreadsheet/end-user":
+        title: "End-User Documentation"   
      "html-helpers/editors":
         title: "Editors"
         position: 2

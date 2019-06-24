@@ -12,7 +12,31 @@ Connections are usually created by calling [connect](/api/dataviz/diagram#method
 
 ### content `Object`
 
-Defines the label displayed on the connection path.
+Defines the options for the label displayed on the connection path.
+
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Step 1",
+          color: "#336699",
+          fontSize: 16,
+          fontStyle: "italic",
+          fontWeight: "bold"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+```
 
 ### content.color `String`
 
@@ -50,9 +74,54 @@ The static text displayed on the connection.
 
 A function returning a visual element to render for the content of a connection.
 
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        content: {
+          text: "Step 1",
+          visual: function(e){
+            var group = new kendo.dataviz.diagram.Group();
+            group.append(new kendo.dataviz.diagram.TextBlock({ text: e.text }));
+            group.rotate(-90, new kendo.dataviz.diagram.Point(10, 0));
+            return group;
+          }
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+```
+
 ### fromConnector `String` *(default: "Auto")*
 
 Specifies the name of the source shape connector that should be used by default.
+
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+```
 
 ### fromX `Number`
 
@@ -66,20 +135,49 @@ The absolute point (Y-coordinate), if any, that the connection is originating fr
 
 Defines the stroke configuration.
 
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        stroke: {
+          color: "red",
+          width: 2,
+          dashType: "dash"
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+```
+
 ### stroke.color `String`
 
 Defines the stroke or line color of the connection.
 
-#### Example - setting the stroke of a Connection
+### stroke.dashType `String`
 
-    <div id="diagram"></div>
-    <script>
-        var Point = kendo.dataviz.diagram.Point;
-        var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
-        var shapeA = diagram.addShape(new Point(100, 100));
-        var shapeB = diagram.addShape(new Point(400, 100));
-        var connection = diagram.connect(shapeA, shapeB, { stroke: { color: "red" } });
-    </script>
+Specifies the stroke dash type.
+
+The following dash types are supported:
+
+* "dash" - A line that consists of dashes
+* "dashDot" - A line that consists of a repeating pattern of dash-dot
+* "dot" - A line that consists of dots
+* "longDash" - A line that consists of a repeating pattern of long-dash
+* "longDashDot" - A line that consists of a repeating pattern of long-dash-dot
+* "longDashDotDot" - A line that consists of a repeating pattern of long-dash-dot-dot
+* "solid" - A solid line
+
+### stroke.width `Number`
+
+Defines the stroke width of the connection.
 
 ### hover `Object`
 
@@ -93,30 +191,37 @@ Defines the hover stroke configuration.
 
 Defines the highlight color when the pointer is hovering over the connection.
 
-#### Example setting color and hovering color of the connection
-
+```dojo
     <div id="diagram"></div>
     <script>
-        var Point = kendo.dataviz.diagram.Point;
-        var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
-        var shapeA = diagram.addShape(new Point(100, 100));
-        var shapeB = diagram.addShape(new Point(400, 100));
-        var connection = diagram.connect(shapeA, shapeB, {
-            stroke: { color: "red" },
-            hover: {
-                stroke: {
-                    color: "blue"
-                }
-            }
-        });
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 100}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 100}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        hover: {
+          stroke: {
+            color: "red"
+          }
+        },
+        stroke: {
+          color: "green",
+          width: 2
+        },
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
     </script>
+```
 
 ### startCap `String|Object`
 
 The connection start cap configuration or type name.
 
-#### Example - configuring the connection start cap
-
+```dojo
     <div id="diagram"></div>
     <script>
       var Point = kendo.dataviz.diagram.Point;
@@ -131,9 +236,11 @@ The connection start cap configuration or type name.
             color: "blue",
             width: 2
           }
-        }
+        },
+        selectable: false
       });
     </script>
+```
 
 ### startCap.fill `String|Object`
 
@@ -177,8 +284,7 @@ The supported values are:
 
 The connection end cap configuration or type name.
 
-#### Example - configuring the connection end cap
-
+```dojo
     <div id="diagram"></div>
     <script>
       var Point = kendo.dataviz.diagram.Point;
@@ -193,9 +299,11 @@ The connection end cap configuration or type name.
             color: "blue",
             width: 2
           }
-        }
+        },
+        selectable: false
       });
     </script>
+```
 
 ### endCap.fill `String|Object`
 
@@ -239,27 +347,44 @@ The supported values are:
 
 Sets the intermediate points (in global coordinates) of the connection.
 
-#### Example - setting intermediate connection points
-
-![Intermediate connection points.](connection_points.png)
-
+```dojo
     <div id="diagram"></div>
     <script>
-        var Point = kendo.dataviz.diagram.Point;
-        var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
-        var connection = diagram.connect(new Point(100,100), new Point(300,100), {
-            points: [
-                new Point(150,100),
-                new Point(150,150),
-                new Point(200,150),
-                new Point(200,100)
-            ]
-        });
+      var Point = kendo.dataviz.diagram.Point;
+      var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+      var connection = diagram.connect(new Point(100,100), new Point(300,100), {
+        type: "polyline",
+        points: [
+          new Point(150,100),
+          new Point(150,150),
+          new Point(200,150),
+          new Point(200,100)
+        ],
+        selectable: false
+      });
     </script>
+```
 
 ### points.x `Number`
 
 Sets the X coordinate of the point.
+
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Point = kendo.dataviz.diagram.Point;
+      var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+      var connection = diagram.connect(new Point(100,100), new Point(300,100), {
+        type: "polyline",
+        points: [
+          { x: 150, y: 100 },
+          { x: 175, y: 150 },
+          { x: 200, y: 100 }
+        ],
+        selectable: false
+      });
+    </script>
+```
 
 ### points.y `Number`
 
@@ -269,9 +394,40 @@ Sets the Y coordinate of the point.
 
 Specifies if the connection can be selected.
 
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Point = kendo.dataviz.diagram.Point;
+      var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+      var connection = diagram.connect(new Point(100,100), new Point(300,100), {
+        selectable: false
+      });
+    </script>
+```
+
 ### toConnector `String` *(default: "Auto")*
 
 Specifies the name of the target shape connector that should be used by default.
+
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 250}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 50}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "top",
+        toConnector: "bottom",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+```
 
 ### toX `Number`
 
@@ -285,22 +441,199 @@ The absolute point (Y-coordinate), if any, that the connection is pointing to.
 
 Specifies the connection type. The supported values are `"polyline"` and `"cascading"`.
 
+```dojo
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({x:100, y: 250}));
+      var shape2 = diagram.addShape( new Shape({x:300, y: 50}));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "top",
+        toConnector: "bottom",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+    </script>
+```
+
 ## Fields
 
 ### dataItem `Object`
 The data item, if any, for the connection.
 
+```dojo
+    <button id="getConnInfo">Get 1st Connection Label</button>
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [
+            {id: 1, name:"One"},
+            {id: 2, name:"Two"},
+            {id: 3, name:"Four"},
+          ],
+          schema: {
+            model: {
+              id: "id"
+            }
+          }
+        },
+        connectionsDataSource:[
+          {from: 1, to: 2, label: "plus one"},
+          {from: 2, to: 3, label: "plus three"}
+        ],
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        shapeDefaults: {
+          type: "circle",
+          content: {
+            template: "#= name #"
+          },
+          width: 70,
+          height: 70,
+          hover: {
+            fill: "Orange"
+          }
+        },
+        connectionDefaults: {
+          stroke: {
+            color: "#979797",
+            width: 1
+          },
+          type: "polyline",
+          startCap: "FilledCircle",
+          endCap: "ArrowEnd",
+          content:{
+            template:"#= label#"
+          }
+        }
+      });
+
+      $("#getConnInfo").on("click", function(){
+        var diagram = $("#diagram").getKendoDiagram();
+
+        var dataItem = diagram.connections[0].dataItem;
+        console.log("First connection text: " + dataItem.label);
+      });
+    </script>
+```
+
 ### from `kendo.dataviz.diagram.Shape`
 The shape, if any, that the connection originates from.
+
+```dojo
+    <button id="getShapeBtn">Get Source Shape</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getShapeBtn").on("click", function(){
+        console.log("Source shape id: " + diagram.connections[0].from.id);
+      });
+    </script>
+```
 
 ### sourceConnector `kendo.dataviz.diagram.Connector`
 The connector, if any, that the connection originates from.
 
+```dojo
+    <button id="getConnectorBtn">Get Source Connector</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getConnectorBtn").on("click", function(){
+        var connector = diagram.connections[0].sourceConnector;
+        console.log("Source connector name: " + connector.options.name);
+      });
+    </script>
+```
+
 ### targetConnector `kendo.dataviz.diagram.Connector`
 The connector, if any, that the connection points to.
 
+```dojo
+    <button id="getConnectorBtn">Get Target Connector</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getConnectorBtn").on("click", function(){
+        var connector = diagram.connections[0].targetConnector;
+        console.log("Target connector name: " + connector.options.name);
+      });
+    </script>
+```
+
 ### to `kendo.dataviz.diagram.Shape`
 The shape, if any, that the connection points to.
+
+```dojo
+    <button id="getShapeBtn">Get Target Shape</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getShapeBtn").on("click", function(){
+        console.log("Target shape id: " + diagram.connections[0].to.id);
+      });
+    </script>
+```
 
 ## Methods
 
@@ -324,6 +657,35 @@ If no source is specified the method will return the current object to which the
 
 `Object` the connection source.
 
+
+The following example shows how to change the source shape of a connection:
+
+```dojo
+    <button id="changeSourceBtn">Change Connection Source</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+      var shape3 = diagram.addShape( new Shape({ x: 300, y: 20 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#changeSourceBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        connection.source(shape3);
+      });
+    </script>
+```
+
 ### sourcePoint
 
 Gets the global coordinate of the connection's start (initial endpoint).
@@ -332,6 +694,33 @@ The method returns a Point independently of the object to which the source is at
 #### Returns
 
 `kendo.dataviz.diagram.Point` the coordinates of the connection source.
+
+
+```dojo
+    <button id="getSourceBtn">Get Connection Source Point</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getSourceBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        var point = connection.sourcePoint();
+        console.log("Connection source point: x = " + point.x + "; y = " + point.y);
+      });
+    </script>
+```
 
 ### target
 
@@ -349,6 +738,31 @@ This object can be a Point for a floating endpoint (i.e. not attached to a shape
 
 If no source is specified the method will return the current object to which the Connection's endpoint is attached.
 
+```dojo
+    <button id="changeTargetBtn">Change Connection Target</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 120, y: 180 }));
+      var shape2 = diagram.addShape( new Shape({ x: 120, y: 30 }));
+      var shape3 = diagram.addShape( new Shape({ x: 120, y: 330 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#changeTargetBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        connection.target(shape3.getConnector("right"));
+      });
+    </script>
+```
+
 #### Returns
 
 `Object` the connection target.
@@ -361,6 +775,32 @@ Similar to the sourcePoint, this gets the coordinates of the target of the Conne
 
 `kendo.dataviz.diagram.Point` the coordinates of the connection target.
 
+```dojo
+    <button id="getTargetBtn">Get Connection Target Point</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        fromConnector: "left",
+        type: "cascading",
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getTargetBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        var point = connection.targetPoint();
+        console.log("Connection target point: x = " + point.x + "; y = " + point.y);
+      });
+    </script>
+```
+
 ### select
 
 Select or deselects the Connection.
@@ -370,6 +810,39 @@ Select or deselects the Connection.
 ##### value `Boolean` *(default: true)*
 
 True to select the Connection and `false` to deselect it.
+
+```dojo
+    <button id="selectBtn">Select Connection</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 100 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        type: "cascading",
+        selection: {
+          handles: {
+            width: 8,
+            height: 8,
+            fill: {
+              color: "green"
+            }
+          }
+        },
+        editable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#selectBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        connection.select(true);
+      });
+    </script>
+```
 
 ### type
 
@@ -381,12 +854,64 @@ The routing of a connection is the way that intermediate points of a Connection 
 
 ##### value `String` *(default: "Polyline")*
 
-* "Polyline" - connects the defined intermediate points. See the points() method.
-* "Cascading" - discards given points and defines a cascading path between the endpoints.
+* "polyline" - connects the defined intermediate points. See the points() method.
+* "cascading" - discards given points and defines a cascading path between the endpoints.
+
+```dojo
+    <button id="changeTypeBtn">Change Connection Type</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 100, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#changeTypeBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        connection.type("cascading");
+      });
+    </script>
+```
 
 ### points
 
 Gets the intermediate points of the connection.
+
+```dojo
+    <button id="getPointsBtn">Get Connection Points</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 20, y: 180 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        type: "polyline",
+        points: [
+          { x: 150, y: 100 },
+          { x: 175, y: 150 },
+          { x: 200, y: 100 }
+        ],
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getPointsBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        console.log(connection.points());
+      });
+    </script>
+```
 
 #### Returns
 
@@ -401,6 +926,35 @@ This is the union of the endpoints and the intermediate points.
 
 `Array` all points of the connection.
 
+```dojo
+    <button id="getPointsBtn">Get Connection Points</button>
+    <div id="diagram"></div>
+    <script>
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 20, y: 180 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 180 }));
+
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        type: "polyline",
+        points: [
+          { x: 150, y: 100 },
+          { x: 175, y: 150 },
+          { x: 200, y: 100 }
+        ],
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#getPointsBtn").on("click", function(){
+        var connection = diagram.connections[0];
+        console.log(connection.points());
+      });
+    </script>
+```
+
 ### redraw
 
 Redraws the Connection with the given options.
@@ -410,22 +964,36 @@ Redraws the Connection with the given options.
 ##### options `Object` *optional*
 The new options for the connection. This object should follow the configuration structure.
 
-
-##### Example - changing the Connection after it has been added
-
+```dojo
+    <button id="redrawBtn">Redraw Connection</button>
     <div id="diagram"></div>
     <script>
-        var Point = kendo.dataviz.diagram.Point;
-        var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
-        var connection = diagram.connect(new Point(10,10), new Point(200,70));
+      var Shape = kendo.dataviz.diagram.Shape;
+      $("#diagram").kendoDiagram();
+      var diagram = $("#diagram").data("kendoDiagram");
+      var shape1 = diagram.addShape( new Shape({ x: 20, y: 100 }));
+      var shape2 = diagram.addShape( new Shape({ x: 300, y: 100 }));
 
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, {
+        selectable: false
+      });
+
+      diagram.addConnection(connection);
+
+      $("#redrawBtn").on("click", function(){
+        var connection = diagram.connections[0];
         connection.redraw({
-            stroke: {
-                color: "orange"
-            },
-            points:[new Point(200,10)]
+          stroke: {
+            color: "orange",
+            width: 3
+          },
+          content: {
+            text: "Step 1"
+          }
         });
+      });
     </script>
+```
 
 ### visible
 
@@ -436,7 +1004,7 @@ Gets or sets the connection visible state.
 ##### visible `Boolean` *optional*
 Indicates whether the connection should be visible in the Diagram. If skipped, the method will return the current visible state of the connection.
 
-#### Example
+```dojo
 
     <button id="hideBtn">Hide Connection</button>
     <div id="diagram"></div>
@@ -473,3 +1041,4 @@ Indicates whether the connection should be visible in the Diagram. If skipped, t
         ]
       });
     </script>
+```
