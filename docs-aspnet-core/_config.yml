@@ -130,6 +130,9 @@ navigation:
         position: 9
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
+     "html-helpers/navigation/menu/contextmenu":
+        title: "ContextMenu"
+        position: 10
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         position: 10
