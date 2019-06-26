@@ -1,18 +1,16 @@
 ---
-title: Multicolumn Headers
-page_title: Multicolumn Headers | Kendo UI TreeList HtmlHelper for ASP.NET Core
+title: Multi-Clumn Headers
+page_title: Multi-Column Headers | Kendo UI TreeList HtmlHelper for ASP.NET Core
 description: "Learn how to apply the multicolumn headers feature to the Kendo UI TreeList HtmlHelper for ASP.NET Core."
 slug: multicolumn_aspnetcore_treelist_helper
-position: 3
+position: 5
 ---
 
-# Multicolumn Headers
+# Multi-Column Headers
 
-The multicolumn headers of the TreeList represent a tree-like structure where one or more columns can be grouped together by a common header.
+The multi-column headers of the TreeList represent a tree-like structure where one or more columns can be grouped together by a common header.
 
-That common header in turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For more information, refer to the [demo on implementing multicolumn headers](https://demos.telerik.com/aspnet-core/treelist/multicolumnheaders).
-
-###### Example
+That common header in turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For a runnable example, refer to the [demo on implementing multi-column headers in the TreeList](https://demos.telerik.com/aspnet-core/treelist/multicolumnheaders).
 
     columns.Group(group => group
         .Title("Personal Info")
@@ -31,11 +29,11 @@ That common header in turn can be a child of another upper `MultiColumn` header 
         })
     );
 
-The above definition will be presented in the following output:
+The previous example will present the following output.
 
-![TreeList multi column header](images/treelist-multicolumn-headers.png)
+![TreeList multi-column headers](images/treelist-multicolumn-headers.png)
 
 ## See Also
 
-* [JavaScript API Reference for the Kendo UI jQuery TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
-* [UI for ASP.NET Core TreeList editing live demo](https://demos.telerik.com/aspnet-core/treelist/editing)
+* [Implementing Multi-Column Headers in the TreeList HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/treelist/multicolumnheaders)
+* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)

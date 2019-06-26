@@ -10,10 +10,8 @@ position: 2
 
 The Kendo UI Menu enables you to bind it to a hierarchical model.
 
-To perform model binding:
-
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}).
-1. Create a new action method and pass the **Categories** table as the model. Note that the **Categories** must be associated to the **Products** table.
+1. Create a new action method and pass the **Categories** table as the model. The **Categories** has to be associated to the **Products** table.
 
     ```Razor
     public ActionResult Index()
@@ -54,6 +52,6 @@ To perform model binding:
 
 ## See Also
 
+* [Model Binding by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/modelbinding)
+* [Binding to Custom Attributes by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/menu-bind-attributes)
 * [JavaScript API Reference of the Menu](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
-* [Menu HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/menu/overview)
-* [Menu Official Demos](http://demos.telerik.com/aspnet-core/menu/index)

@@ -1,22 +1,24 @@
 ---
-title: PDFJS Processing
-page_title: PDFViewer PDFJS Processing | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to use PDF.JS processing in the Kendo UI PDFViewer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+title: PDFjs Processing
+page_title: PDFjs Processing | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn how to use PDF.js processing in the Kendo UI PDFViewer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore
 position: 2
 ---
 
-# PDFJS Processing
+# PDFjs Processing
 
-The PDFViewer uses the `pdf.js` library by default, if no processing configuration is defined. [PDF.JS](https://mozilla.github.io/pdf.js/) is an open-source project developed by Mozilla.
+By default, if no processing configuration is defined, the PDFViewer uses the PDF.js library.
+
+[PDF.js](https://mozilla.github.io/pdf.js/) is an open-source project that is developed by Mozilla.
+
+## Requirements
+
+Add the PDF.js library scripts to the page.
 
 ## Basic Configuration
 
-PDF.JS Processing requires pdfjs lib scripts added to the page.
-
-An example of a PDFViewer widget configured to use PDF.JS Processing.
-
-###### Example
+The following example demonstrates how to configure the PDFViewer to use PDF.js processing.
 
 ```
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -33,24 +35,15 @@ An example of a PDFViewer widget configured to use PDF.JS Processing.
     )
 ```
 
-## Troubleshooting
+## Browser Support
 
-> **Important**
->
-> PDF.JS Processing is not supported in IE9
+PDF.js processing is not supported in Internet Explorer 9. To work properly in that browser version, PDF.js requires additional configuration.
 
-PDF.JS requires additional configuration, to work properly in IE. 
-
-###### Example
     <script>
-        // The workerSrc property should be specified for IE support
+        // Specify the workerSrc property for Internet Explorer support.
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
     </script>
 
-
 ## See Also
 
-* [PDFViewer Overview]({% slug htmlhelpers_pdfviewer_aspnetcore %})
-* [DPL Processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})
-
-For runnable examples on Kendo UI PDFViewer, refer to the [Telerik UI for ASP.NET Core Demos site](http://demos.telerik.com/aspnet-core/pdfviewer/index).
+* [JavaScript API Reference of the PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)

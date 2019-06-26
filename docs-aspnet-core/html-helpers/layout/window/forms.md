@@ -16,8 +16,6 @@ To insert a complete form inside a Window, end the Window declaration with `.Ren
 
 The following example demonstrates how to insert a complete form inside the Window.
 
-###### Example
-
     @{Html.Kendo().Window()
         .Name("window")
         .Content(@<text>
@@ -111,9 +109,5 @@ public IActionResult MyModel_Create(MyModel model)
 
 ## See Also
 
-* [Overview of Window HTML helper]({% slug htmlhelpers_window_aspnetcore %})
-* [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})
-* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})
-* [Constraining Position]({% slug htmlhelpers_window_constrain_aspnetcore %})
-* [Loading Content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
-* [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
+* [Constraining the Movement of the Window HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/constrain-movement)
+* [JavaScript API Reference of the Window](http://docs.telerik.com/kendo-ui/api/javascript/ui/window)

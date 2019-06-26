@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Editor | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Editor Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/editor
 slug: htmlhelpers_editor_aspnetcore
@@ -9,17 +9,15 @@ position: 1
 
 # Editor HtmlHelper Overview
 
-The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Editor](http://demos.telerik.com/kendo-ui/editor/index) widget.
+The [Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview) allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface.
 
-It enables you to configure the Editor from server-side code. The [Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview) allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface. The generated widget value is an XHTML markup.
+The generated widget value is an XHTML markup.
 
-For more information on the HtmlHelper, refer to the article on the [Editor HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/editor/overview).
+The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Editor](http://demos.telerik.com/kendo-ui/editor/index) widget. For more information on the Editor HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/editor/overview).
 
-## Basic Usage
+## Initializing the Editor
 
 The following example demonstrates how to define the Editor by using the Editor HtmlHelper.
-
-###### Example
 
 ```
 @(Html.Kendo().Editor()
@@ -34,9 +32,7 @@ The following example demonstrates how to define the Editor by using the Editor 
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the Editor HtmlHelper and how to get the Editor instance.
-
-###### Example
+The following example demonstrates the basic configuration of the Editor HtmlHelper.
 
 ```
 @(Html.Kendo().Editor()
@@ -52,7 +48,7 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
 
 <script type="text/javascript">
     $(function() {
-        //Notice that the Name() of the Editor is used to get its client-side instance.
+        // The Name() of the Editor is used to get its client-side instance.
         var editor = $("#editor").data("kendoEditor");
     });
 </script>
@@ -70,9 +66,7 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
 
 ## Events
 
-The following example demonstrates Editor HTML helper events, which could be handled on the client-side.
-
-###### Example
+The following example demonstrates Editor HTML helper events, which could be handled on the client-side. For a complete example on basic Editor events, refer to the [demo on using the events of the Editor](https://demos.telerik.com/aspnet-core/editor/events).
 
 ```
 @(Html.Kendo().Editor()
@@ -121,10 +115,6 @@ The following example demonstrates Editor HTML helper events, which could be han
 
 ## See Also
 
+* [Basic Usage of the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor)
+* [Using the API of the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/api)
 * [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
-* [Editor HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/editor/overview)
-* [Editor Official Demos](http://demos.telerik.com/aspnet-core/editor/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

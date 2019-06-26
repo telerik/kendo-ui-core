@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ColorPicker  | Telerik UI for ASP.NET Core Tag Helpers
+page_title: ColorPicker Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI ColorPicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/colorpicker, /aspnet-core/helpers/tag-helpers/colorpicker
 slug: taghelpers_colorpicker_aspnetcore
@@ -9,19 +9,19 @@ position: 1
 
 # ColorPicker Tag Helper Overview
 
-The ColorPicker tag helper helps you configure the Kendo UI ColorPicker widget in ASP.NET Core applications.
+The ColorPicker enables the user to select and submit color values.
 
-## Basic Usage
+The ColorPicker tag helper extension is a server-side wrapper for the [Kendo UI ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/index) widget and enables you to configure the Kendo UI ColorPicker widget in ASP.NET Core applications.
+
+## Initializing the ColorPicker
 
 The following example demonstrates how to define the ColorPicker by using the ColorPicker tag helper.
-
-###### Example
 
         <kendo-colorpicker name="picker">
 			<messages apply="Change" cancel="Close" />
 		</kendo-colorpicker>
 
-## Configuration
+## Basic Configuration
 
 The ColorPicker tag helper configuration options are passed as attributes of the tag and through nested tags (`<messages>`).
 
@@ -77,7 +77,5 @@ The ColorPalette tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the ColorPicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/tag-helper)
+* [JavaScript API Reference of the ColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)

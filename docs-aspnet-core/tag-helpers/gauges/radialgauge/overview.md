@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: RadialGauge | Telerik UI for ASP.NET Core Tag Helpers
+page_title: RadialGauge Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI RadialGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_radialgauge_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/radialgauge
@@ -9,17 +9,17 @@ position: 1
 
 # RadialGauge Tag Helper Overview
 
-The RadialGauge tag helper helps you configure the Kendo UI RadialGauge widget in ASP.NET Core applications.
+The RadialGauge represents values on a circular arc.
 
-## Basic Usage
+The RadialGauge tag helper extension is a server-side wrapper for the [Kendo UI RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/index) widget and enables you to configure the Kendo UI RadialGauge widget in ASP.NET Core applications.
+
+## Initializing the RadialGauge
 
 The following example demonstrates how to define the RadialGauge by using the RadialGauge tag helper.
 
-###### Example
-
     <kendo-radialgauge name="gauge"></kendo-radialgauge>
 
-## Configuration
+## Basic Configuration
 
 The RadialGauge tag helper configuration options are passed as attributes of the tag.
 
@@ -47,7 +47,5 @@ The RadialGauge tag helper configuration options are passed as attributes of the
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the RadialGauge Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radial-gauge/tag-helper)
+* [JavaScript API Reference of the RadialGauge](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge)

@@ -7,141 +7,100 @@ slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
+# Welcome to Telerik UI for ASP.NET Core!
 
-[Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](../kendo-ui/introduction) in .NET Core.
-
-This article demonstrates how to use Telerik UI for ASP.NET Core in ASP.NET Core applications.
+[Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers that allows you to use the [Kendo UI widgets](../kendo-ui/introduction) in .NET Core.
 
 ## Supported Environments
 
 Telerik UI for ASP.NET Core targets the stable releases of the ASP.NET Core framework. The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The UI for ASP.NET Core suite also supports the full desktop CLR.
 
-## Resources
+## Getting Started
 
-To get started, refer to the [ASP.NET Core Documentation](https://docs.asp.net/en/latest/index.html).
+* [Getting Started with ASP.NET Core Guide](https://docs.asp.net/en/latest/index.html)
+* [UI for ASP.NET Core Source Code on GitHub](https://github.com/aspnet/AspNetCore)
+* [UI for ASP.NET Core Announcements on Important Changes](https://github.com/aspnet/announcements/)
+* [Telerik UI for ASP.NET Core Demos and Sample Applications](https://demos.telerik.com/aspnet-core)
 
-To facilitate the process of tracking down particular issues or behaviors, use the following repositories which contain source code, instructions, and issue trackers for the ASP.NET project.
+## List of Wrappers
 
-- [ASP.NET Core](https://github.com/aspnet/AspNetCore) (on GitHub)
-- [ASP.NET Core Announcements](https://github.com/aspnet/announcements/) (for important changes)
-- [Telerik UI for ASP.NET Core Demos and Sample Applications](https://demos.telerik.com/aspnet-core)
+|Group                      |HtmlHelpers                               |Tag Helpers   
+| :---                      | :---                                      | :---                                         
+| **Data Source**           |N/A                                        |[Data Source Tag Helper Docs]({% slug taghelpers_datasource_aspnetcore %})
+| **Data Management**       |[Grid HtmlHelper Docs]({% slug htmlhelpers_grid_aspnetcore_overview %})        |[Grid Tag Helper Docs]({% slug taghelpers_grid_aspnetcore %})
+|                           |[ListView HtmlHelper Docs]({% slug htmlhelpers_listview_aspnetcore %})    |N/A
+|                           |[PivotGrid HtmlHelper Docs]({% slug overview_pivotgridhelper_aspnetcore %})   |[PivotGrid Tag Helper Docs]({% slug taghelpers_pivotgrid_aspnetcore %})
+|                           |[Spreadsheet HtmlHelper Docs]({% slug htmlhelpers_spreadsheet_aspnetcore %}) |[Spreadsheet Tag Helper Docs]({% slug taghelpers_spreadsheet_aspnetcore %})
+|                           |[TreeList HtmlHelper Docs]({% slug htmlhelpers_treelist_aspnetcore %})    |[TreeList Tag Helper Docs]({% slug taghelpers_treelist_aspnetcore %})
+|**Editors**                |[AutoComplete HtmlHelper Docs]({% slug htmlhelpers_autocomplete_aspnetcore %})  |[AutoComplete Tag Helper Docs]({% slug taghelpers_autocomplete_aspnetcore %})
+|                           |[ColorPalette HtmlHelper Docs]({% slug overview_colorpalettehelper_aspnetcore %})  |N/A
+|                           |[ColorPicker HtmlHelper Docs]({% slug overview_colorpickerhelper_aspnetcore %})   |[ColorPicker Tag Helper Docs]({% slug taghelpers_colorpicker_aspnetcore %})
+|                           |[ComboBox HtmlHelper Docs]({% slug htmlhelpers_combobox_aspnetcore %})      |[ComboBox Tag Helper Docs]({% slug taghelpers_combobox_aspnetcore %})
+|                           |[DateInput HtmlHelper Docs]({% slug htmlhelpers_dateinput_aspnetcore %})     |[DateInput Tag Helper Docs]({% slug taghelpers_dateinput_aspnetcore %})
+|                           |[DatePicker HtmlHelper Docs]({% slug htmlhelpers_datepicker_aspnetcore %})    |[DatePicker Tag Helper Docs]({% slug taghelpers_datepicker_aspnetcore %})
+|                           |[DateRangePicker HtmlHelper Docs]({% slug htmlhelpers_daterangepicker_aspnetcore %})  |N/A
+|                           |[DateTimePicker HtmlHelper Docs]({% slug htmlhelpers_datetimepicker_aspnetcore %})   |[DateTimePicker Tag Helper Docs]({% slug taghelpers_datetimepicker_aspnetcore %})
+|                           |[DropDownList HtmlHelper Docs]({% slug htmlhelpers_dropdownlist_aspnetcore %})     |[DropDownList Tag Helper Docs]({% slug taghelpers_dropdownlist_aspnetcore %})
+|                           |[DropDownTree HtmlHelper Docs]({% slug htmlhelpers_dropdowntree_aspnetcore %})     |[DropDownTree Tag Helper Docs]({% slug taghelpers_dropdowntree_aspnetcore %})
+|                           |[Editor HtmlHelper Docs]({% slug htmlhelpers_editor_aspnetcore %})           |[Editor Tag Helper Docs]({% slug taghelpers_editor_aspnetcore %})
+|                           |[FlatColorPicker HtmlHelper Docs]({% slug overview_flatcolorpickerhelper_aspnetcore %})  |N/A
+|                           |[ListBox HtmlHelper Docs]({% slug htmlhelpers_listbox_aspnetcore %})          |[ListBox Tag Helper Docs]({% slug taghelpers_listbox_aspnetcore %})
+|                           |[MaskedTextBox HtmlHelper Docs]({% slug htmlhelpers_maskedtextbox_aspnetcore %})    |[MaskedTextBox Tag Helper Docs]({% slug taghelpers_maskedtextbox_aspnetcore %})
+|                           |[MultiColumnComboBox HtmlHelper Docs]({% slug htmlhelpers_multicolumncombobox_aspnetcore %})    |[MultiColumnComboBox Tag Helper Docs]({% slug taghelpers_multicolumncombobox_aspnetcore %})
+|                           |[MultiSelect HtmlHelper Docs]({% slug htmlhelpers_multiselect_aspnetcore %})      |[MultiSelect Tag Helper Docs]({% slug taghelpers_multiselect_aspnetcore %})
+|                           |[NumericTextBox HtmlHelper Docs]({% slug htmlhelpers_numerictextbox_aspnetcore %})   |[NumericTextBox Tag Helper Docs]({% slug taghelpers_numerictextbox_aspnetcore %})
+|                           |[Slider HtmlHelper Docs]({% slug overview_sliderhelper_aspnetcore %})           |[Slider Tag Helper Docs]({% slug taghelpers_slider_aspnetcore %})
+|                           |[Switch HtmlHelper Docs]({% slug overview_switchhelper_aspnetcore %})           |[Switch Tag Helper Docs]({% slug taghelpers_switch_aspnetcore %})
+|                           |[TimePicker HtmlHelper Docs]({% slug overview_timepickerhelper_aspnetcore %})       |[TimePicker Tag Helper Docs]({% slug taghelpers_timepicker_aspnetcore %})
+|                           |[Upload HtmlHelper Docs]({% slug htmlhelpers_upload_aspnetcore %})           |[Upload Tag Helper Docs]({% slug taghelpers_upload_aspnetcore %})
+|                           |N/A                                             |[Validator Tag Helper Docs]({% slug taghelpers_validator_aspnetcore %})
+|**Charts**                 |[Chart HtmlHelper Docs]({% slug areacharts_aspnetcore_htmlhelper %})            |[Chart Tag Helper Docs]({% slug taghelpers_chart_aspnetcore %})
+|                           |[StockChart HtmlHelper Docs]({% slug overview_stockcharthelper_aspnetcore %})       |N/A
+|                           |[TreeMap HtmlHelper Docs]({% slug overview_treemaphelper_aspnetcore %})          |[TreeMap Tag Helper Docs]({% slug taghelpers_treemap_aspnetcore %})
+|**Gauges**                 |[ArcGauge HtmlHelper Docs]({% slug overview_arcgaugehelper_aspnetcore %})         |[ArcGauge Tag Helper Docs]({% slug taghelpers_arcgauge_aspnetcore %})
+|                           |[LinearGauge HtmlHelper Docs]({% slug overview_lineargaugehelper_aspnetcore %})      |[LinearGauge Tag Helper Docs]({% slug taghelpers_lineargauge_aspnetcore %})
+|                           |[RadialGauge HtmlHelper Docs]({% slug overview_radialgaugehelper_aspnetcore %})      |[RadialGauge Tag Helper Docs]({% slug taghelpers_radialgauge_aspnetcore %})
+|**Barcodes**               |[Barcode HtmlHelper Docs]({% slug overview_barcodehelper_aspnetcore %})          |[Barcode Tag Helper Docs]({% slug taghelpers_barcode_aspnetcore %})
+|                           |[QRCode HtmlHelper Docs]({% slug overview_qrcodehelper_aspnetcore %})           |[QRCode Tag Helper Docs]({% slug taghelpers_qrcode_aspnetcore %})
+|**Diagrams and Maps**      |[Map HtmlHelper Docs]({% slug htmlhelpers_map_aspnetcore %})              |[Map Tag Helper Docs]({% slug taghelpers_map_aspnetcore %})
+|**Scheduling**             |[Calendar HtmlHelper Docs]({% slug overview_calendarhelper_aspnetcore %})         |[Calendar Tag Helper Docs]({% slug taghelpers_calendar_aspnetcore %})
+|                           |[Gantt HtmlHelper Docs]({% slug htmlhelpers_gantt_aspnetcore %})            |[Gantt Tag Helper Docs]({% slug taghelpers_gantt_aspnetcore %})
+|                           |[MultiViewCalendar HtmlHelper Docs]({% slug overview_multiviewcalendar_htmlhelper_aspnetcore %})|[MultiViewCalendar Tag Helper Docs]({% slug overview_multiviewcalendar_taghelper_aspnetcore %})
+|                           |[Scheduler HtmlHelper Docs]({% slug htmlhelpers_scheduler_aspnetcore %})        |[Scheduler Tag Helper Docs]({% slug taghelpers_scheduler_aspnetcore %})
+|**Layout**                 |[Dialog HtmlHelper Docs]({% slug overview_dialoghelper_aspnetcore %})           |[Dialog Tag Helper Docs]({% slug taghelpers_dialog_aspnetcore %})
+|                           |[Notification HtmlHelper Docs]({% slug htmlhelpers_notification_aspnetcore %})     |[Notification Tag Helper Docs]({% slug taghelpers_notification_aspnetcore %})
+|                           |N/A    |[Popup Tag Helper Docs]({% slug taghelpers_popup_aspnetcore %})
+|                           |N/A    |[ResponsivePanel Tag Helper Docs]({% slug taghelpers_responsivepanel_aspnetcore %})
+|                           |[Splitter HtmlHelper Docs]({% slug htmlhelpers_splitter_aspnetcore %})         |[Splitter Tag Helper Docs]({% slug taghelpers_splitter_aspnetcore %})
+|                           |[Tooltip HtmlHelper Docs]({% slug htmlhelpers_tooltip_aspnetcore %})          |[Tooltip Tag Helper Docs]({% slug taghelpers_tooltip_aspnetcore %})
+|                           |[Window HtmlHelper Docs]({% slug htmlhelpers_window_aspnetcore %})           |[Window Tag Helper Docs]({% slug taghelpers_window_aspnetcore %})
+|**Navigation**             |[Button HtmlHelper Docs]({% slug htmlhelpers_button_aspnetcore %})           |[Button Tag Helper Docs]({% slug taghelpers_button_aspnetcore %})
+|                           |[ButtonGroup HtmlHelper Docs]({% slug htmlhelpers_buttongroup_aspnetcore %})      |[ButtonGroup Tag Helper Docs]({% slug taghelpers_buttongroup_aspnetcore %})
+|                           |[Drawer HtmlHelper Docs]({% slug htmlhelpers_drawer_aspnetcore %})           |[Drawer Tag Helper Docs]({% slug taghelpers_drawer_aspnetcore %})
+|                           |[Menu HtmlHelper Docs]({% slug htmlhelpers_menu_aspnetcore %})             |[Menu Tag Helper Docs]({% slug taghelpers_menu_aspnetcore %})
+|                           |[PanelBar HtmlHelper Docs]({% slug htmlhelpers_panelbar_aspnetcore %})         |[PanelBar Tag Helper Docs]({% slug taghelpers_panelbar_aspnetcore %})
+|                           |[RadioButton HtmlHelper Docs]({% slug htmlhelpers_radiobutton_aspnetcore %})      |N/A
+|                           |[TabStrip HtmlHelper Docs]({% slug htmlhelpers_tabstrip_aspnetcore %})         |[TabStrip Tag Helper Docs]({% slug taghelpers_tabstrip_aspnetcore %})
+|                           |[ToolBar HtmlHelper Docs]({% slug htmlhelpers_toolbar_aspnetcore %})          |[ToolBar Tag Helper Docs]({% slug taghelpers_toolbar_aspnetcore %})
+|                           |[TreeView HtmlHelper Docs]({% slug htmlhelpers_treeview_aspnetcore %})         |[TreeView Tag Helper Docs]({% slug taghelpers_treeview_aspnetcore %})
+|**Conversational UI**      |[Chat HtmlHelper Docs]({% slug htmlhelpers_chat_aspnetcore %})             |[Chat Tag Helper Docs]({% slug taghelpers_chat_aspnetcore %})
+|**Interactivity and UX**   |N/A                                             |[DragAndDrop Tag Helper Docs]({% slug taghelpers_dragdrop_aspnetcore %})
+|                           |[ProgressBar HtmlHelper Docs]({% slug htmlhelpers_progressbar_aspnetcore %})      |[ProgressBar Tag Helper Docs]({% slug taghelpers_progressbar_aspnetcore %})
+|                           |[Sortable HtmlHelper Docs]({% slug htmlhelpers_sortable_aspnetcore %})         |[Sortable Tag Helper Docs]({% slug taghelpers_sortable_aspnetcore %})
+|**Media**                  |[MediaPLayer HtmlHelper Docs]({% slug htmlhelpers_mediaplayer_aspnetcore %})      |N/A
+|                           |[ScrollView HtmlHelper Docs]({% slug htmlhelpers_scrollview_aspnetcore %})       |[ScrollView Tag Helper Docs]({% slug taghelpers_scrollview_aspnetcore %})
+|**PDF**                    |[PDFViewer HtmlHelper Docs]({% slug htmlhelpers_pdfviewer_aspnetcore %})        |[PDFViewer Tag Helper Docs]({% slug taghelpers_pdfviewer_aspnetcore %})
 
-## Setup
+## Next Steps
 
-To set up and install Telerik UI for ASP.NET Core, refer to the following sections:
-
-* [Prerequisites](#prerequisites)
-* [Download](#download)
-* [Installation](#installation)
-* [Distribution Contents](#distribution-contents)
-
-### Prerequisites
-
-Telerik UI for ASP.NET Core requires .NET Core.
-
-The offline sample application requires:
-
-* [.NET Core](https://www.microsoft.com/net/learn/get-started)
-* [Visual Studio](https://www.visualstudio.com/downloads/)
-
-### Download
-
-To download Telerik UI for ASP.NET Core:
-
-1. Log in to your [Telerik account](https://www.telerik.com/login/).
-
-1. Click **Downloads** in the top navigation.
-
-1. Click **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core**.
-
-1. In the **Installation**  section select to download the Telerik online installer (`exe` file), the `MSI` installer file directly.
-
-The Telerik UI for ASP.NET Core suite can be included in a project via NuGet without locally installing the suite on the machine. Further information on how to configure such application could be found in the [Getting Started article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#configuration-Add).
-
-### Installation
-
-Run the Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation. The setup installs Telerik UI for ASP.NET Core in `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <version>`.
-
-### Distribution Contents
-
-Telerik UI for ASP.NET Core contains the following directories:
-
-* `js`&mdash;These are the minified JavaScript files.
-* `styles`&mdash;The minified CSS files and images used by the themes.
-* `src`&mdash;The complete JavaScript, CSS, and C# source code. Note that this directory is not available in the trial version.
-* `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (*kendo.all*, *kendo.dataviz*, *kendo.web* and *kendo.mobile*).
-* `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts (as the above).
-* `VSExtensions`&mdash;The extensions for Visual Studio 2017.
-* `wrappers\aspnetcore\Binaries\AspNet.Core`&mdash;Containing the .nupkg NuGet package file.
-* `wrappers\aspnetcore\Examples\AspNet.Core\VS2017`&mdash;The ASP.NET Core sample application built with Visual Studio 2017.
-* `wrappers\aspnetcore\EditorTemplates\razor`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
-
-## Sample Application
-
-Telerik UI for ASP.NET Core comes with a sample .NET Core application, built with Visual Studio 2017, which is an offline version of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core).
-
-> **Important**
->
-> As of the Kendo UI R2 2018 release, the Visual Studio 2015 version of the sample application is no longer distributed because of its deprecated format and limited tooling support.
-
-### Running the Sample Application
-
-To run the sample application:
-
-1. Navigate to the installation directory of Telerik UI for ASP.NET Core.
-
-1. Open the Visual Studio 2017 sample project `wrappers\aspnetcore\Examples\AspNet.Core\VS2017\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
-
-1. Press `CTRL+F5` to build and run the application.
-
-### Distribution Contents
-
-The sample application Visual Studio Project contains the following items:
-
-* `Views`&mdash;The Razor views.
-* `Controllers`&mdash;The Controller classes.
-* `Models`&mdash;The Model classes.
-* `wwwroot`&mdash;The web application root which, in the **App_Data** folder, contains the LocalDB sample database and the other client resources such as libraries, scripts, styles, and others.
-
-## Upgrade
-
-You can upgrade the version of the Telerik UI for ASP.NET Core wrappers and also switch from a trial to a developer license.
-
-### Upgrade to Newer Versions
-
-To update Telerik UI for ASP.NET Core to a new version, either:
-
-* Upgrade with NuGet and Bower, or
-* Manually replace the references and files.
-
-#### Upgrade with NuGet and Bower
-
-To upgrade the version with NuGet and Bower:
-
-1. In Visual Studio, open the NuGet Package Manager on the **Installed** tab and click **Update** for the **Telerik.UI.for.AspNet.Core** package.
-1. In Visual Studio, open the Bower Package Manager on the **Installed** tab and click **Update** for the **kendo-ui** package.
-1. In the application, manually replace any references which point to the old Kendo UI resource files such as scripts and styles.
-
-> **Important**
->
-> To properly load the Telerik and Kendo UI packages, both [NuGet](https://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#set-up-nuget-package-source) and [Bower](https://docs.telerik.com/kendo-ui/intro/installation/bower-install#kendo-ui-professional) require authentication.
-
-#### Manual Upgrade
-
-1. [Download](#download) the desired version from the **Download** section of your account.
-1. Replace all [scripts, styles, and images](#distribution-contents) that are related to Telerik UI for ASP.NET Core with the desired version of the framework.
-1. Change the reference to the new `Kendo.MVC` dll and verify that the dll refers to the correct ASP.NET Core version.
-1. In the application, manually replace any references which point to the old Kendo UI resource files such as scripts and styles.
-
-### Upgrade from Trial to Licensed Versions
-
-1. Before you upgrade to a licensed version, delete (uninstall) the trial version from your machine. This deletion eliminates the possibility for trial assemblies to end up in the project references or in production.
-1. [Install](#installation) the licensed Kendo UI version and follow the steps for updating the Telerik UI for ASP.NET Core version.
+* [Getting Started with Telerik UI for ASP.NET Core (VS)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Getting Started with Telerik UI for ASP.NET Core (CLI)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Including client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
+* [Upgrading Telerik UI for ASP.NET Core in VS]({% slug upgrade_aspnetcore %})
 
 ## See Also
 
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [HtmlHelpers]({% slug overview_barcodehelper_aspnetcore %})
+* [Tag Helpers]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
+* [Integrating Telerik UI for ASP.NET Core in VS]({% slug overview_visualstudio_aspnetcore %})
 * [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
-* [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

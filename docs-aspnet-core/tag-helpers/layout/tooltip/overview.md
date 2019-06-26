@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Tooltip | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Tooltip Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Tooltip tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tooltip, /aspnet-core/helpers/tag-helpers/tooltip
 slug: taghelpers_tooltip_aspnetcore
@@ -9,17 +9,17 @@ position: 1
 
 # Tooltip Tag Helper Overview
 
-The Tooltip tag helper helps you configure the Kendo UI Tooltip widget in ASP.NET Core applications.
+The [Tooltip](http://docs.telerik.com/kendo-ui/controls/layout/tooltip/overview) displays a popup hint for a given html element. Its content can be defined either as static text, or loaded dynamically via AJAX.
 
-## Basic Usage
+The Tooltip tag helper extension is a server-side wrapper for the [Kendo UI Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index) widget and enables you to configure the Kendo UI Tooltip widget in ASP.NET Core applications.
+
+## Initializing the Tooltip
 
 The following example demonstrates how to define the Tooltip by using the Tooltip tag helper.
 
-###### Example
-
         <kendo-tooltip name="agglomerations" filter="span"></kendo-tooltip>
 
-## Configuration
+## Basic Configuration
 
 The Tooltip tag helper configuration options are passed as attributes of the tag and through nested tags.
 
@@ -44,7 +44,5 @@ The Tooltip tag helper configuration options are passed as attributes of the tag
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Tooltip Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/index)
+* [JavaScript API Reference of the Tooltip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)

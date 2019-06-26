@@ -8,7 +8,9 @@ position: 3
 
 # Group Templates
 
-Group rows are used to organize data rows into a tree structure when data grouping is applied.
+Group rows help organize data rows into a tree structure when data grouping is applied.
+
+For runnable examples, refer to the [demos on templates in the Grid](https://demos.telerik.com/aspnet-core/grid/toolbar-template).
 
 A group row contains an expanding and collapsing group icon that enables end-users to expand and collapse a group row, and thus show or hide its child rows. One of the main features of group rows is to display group summary values. Kendo UI Grid provides three different templates that can be used to customize the appearance of the group rows:
 
@@ -65,7 +67,5 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
-* [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Templates by the Grid (Demos)](https://demos.telerik.com/aspnet-core/grid/toolbar-template)
+* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

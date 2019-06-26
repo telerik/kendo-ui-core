@@ -8,11 +8,9 @@ position: 3
 
 # Custom Data Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI DropDownList to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
+You can configure the Kendo UI DropDownList for data binding to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
 1. Create an action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -20,8 +18,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
         }
 
 1. Create a new action method and pass the **Products** table as JSON result.
-
-    ###### Example
 
         public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
         {
@@ -31,8 +27,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
         }
 
 1. Add an Ajax-bound DropDownList.
-
-    ###### Example
 
         @(Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -57,6 +51,5 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ## See Also
 
+* [Customizing the Data Source of the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/custom-datasource)
 * [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
-* [DropDownList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview)
-* [DropDownList Official Demos](http://demos.telerik.com/aspnet-core/dropdownlist/index)

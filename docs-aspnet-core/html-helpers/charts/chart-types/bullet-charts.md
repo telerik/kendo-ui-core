@@ -9,17 +9,18 @@ slug: bulletcharts_aspnetcore_htmlhelper
 
 The [Kendo UI Bullet Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/bullet-charts/index) is a variation of the Bar Chart.
 
-You can use the Bullet Chart HtmlHelper to visualize a comparison between an expected (target) and actual (current) value&mdash;for example, company profit, employee performance, weather data, and so on.
+## Getting Started
 
-## Configuration
+You can use the Bullet Chart HtmlHelper to visualize a comparison between an expected (target) and actual (current) value&mdash;for example, company profit, employee performance, weather data, and so on.
 
 To create a Bullet series in the Chart helper, use `Bullet` and `VerticalBullet` in the `Series` configuration.
 
-### Axes
+* [Configuring the axes](#configuring-the-axes)
+* [Customizing the target value lines](#customizing-the-target-value-lines)
+
+## Configuring the Axes
 
 To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple value axes are also supported.
-
-###### Example
 
       @(Html.Kendo().Chart()
             .Name("chart")
@@ -59,7 +60,7 @@ The configuration from the previous example results in the following Bullet Char
 
 ![Bullet Chart](images/chart-bullet.png)
 
-### Target Line Customization
+## Customizing the Target Value Lines
 
 You can customize the line that represents the target value through the `Target` series configuration. `Target` exposes the `Border`, `Color`, and `Line` main settings that control the line appearance.
 
@@ -88,13 +89,5 @@ The following example demonstrates how to use all three options to customize the
 
 ## See Also
 
-* [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
-* [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %})
-* [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})
-* [BoxPlot Charts]({% slug boxplotcharts_aspnetcore_htmlhelper %})
-* [Bar Charts]({% slug barcharts_aspnetcore_htmlhelper %})
-* [Line Charts]({% slug linecharts_aspnetcore_htmlhelper %})
-* [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %})
-* [Stock Charts]({% slug overview_stockcharthelper_aspnetcore %})
-* [TreeMap]({% slug overview_treemaphelper_aspnetcore %})
-* [Chart JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Bullet Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bullet-charts/index)
+* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)

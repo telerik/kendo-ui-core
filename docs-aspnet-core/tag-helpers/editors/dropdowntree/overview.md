@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DropDownTree | Telerik UI for ASP.NET Core Tag Helpers
+page_title: DropDownTree Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI DropDownTree tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/dropdowntree, /aspnet-core/helpers/tag-helpers/dropdowntree
 slug: taghelpers_dropdowntree_aspnetcore
@@ -9,18 +9,18 @@ position: 1
 
 # DropDownTree Tag Helper Overview
 
-The DropDownTree tag helper helps you configure the Kendo UI DropDownTree widget in ASP.NET Core applications.
+The [DropDownTree](http://docs.telerik.com/kendo-ui/controls/editors/dropdowntree/overview) widget represents an editor of hierarchical data, rendered in a tree-like structure, which provides multiple selection option and custom nodes.
 
-## Basic Usage
+The DropDownTree tag helper extension is a server-side wrapper for the [Kendo UI DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) widget and enables you to configure the Kendo UI DropDownTree widget in ASP.NET Core applications.
+
+## Initializing the DropDownTree
 
 The following example demonstrates how to define the DropDownTree by using the DropDownTree tag helper.
-
-###### Example
 
     <kendo-dropdowntree name="dropdowntree1">
     </kendo-dropdowntree>
 
-## Configuration
+## Basic Configuration
 
 The DropDownTree tag helper configuration options are passed as attributes of the tag. You can configure the items by binding the widget to `<hierarchical-datasource>`.
 
@@ -86,7 +86,5 @@ The DropDownTree tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the DropDownTree Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/tag-helper)
+* [JavaScript API Reference of the DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)

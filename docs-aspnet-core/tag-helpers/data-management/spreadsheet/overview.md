@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Spreadsheet | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Spreadsheet Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/spreadsheet, /aspnet-core/helpers/tag-helpers/spreadsheet
 slug: taghelpers_spreadsheet_aspnetcore
@@ -9,17 +9,17 @@ position: 1
 
 # Spreadsheet Tag Helper Overview
 
-The Spreadsheet tag helper helps you configure the Kendo UI Spreadsheet widget in ASP.NET Core applications.
+The [Spreadsheet](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview) allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
-## Basic Usage
+The Spreadsheet tag helper extension is a server-side wrapper for the [Kendo UI Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index) widget and enables you to configure the Kendo UI Spreadsheet widget in ASP.NET Core applications.
+
+## Initializing the Spreadsheet
 
 The following example demonstrates how to define the Spreadsheet by using the Spreadsheet tag helper.
 
-###### Example
+    <kendo-spreadsheet name="spreadsheet"></kendo-spreadsheet>
 
-        <kendo-spreadsheet name="spreadsheet"></kendo-spreadsheet>
-
-## Configuration
+## Basic Configuration
 
 The Spreadsheet tag helper configuration options are passed as attributes of the tag. For more details on the Scheduler configurations, refer to the overview of the [MVC Spreadsheet HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/spreadsheet) and the [Kendo Spreadsheet for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet).
 
@@ -768,43 +768,11 @@ The Spreadsheet tag helper configuration options are passed as attributes of the
     </kendo-spreadsheet>
 ```
 
-## Data Binding
+## Functionality and Features
 
-The Spreadsheet supports binding individual sheets to a DataSource instance.
-
-###### Example
-    <kendo-spreadsheet name="spreadsheet" style="width: 100%">
-        <excel proxy-url="@Url.Action(" TagHelper_Save", "Spreadsheet" )" />
-        <pdf proxy-url="@Url.Action("TagHelper_Save", "Spreadsheet")" />
-        <sheets>
-            <sheet name="Products">
-                <datasource batch="true">
-                    <transport>
-                        <read url="https://demos.telerik.com/kendo-ui/service/Products" datatype="jsonp" />
-                        <create url="https://demos.telerik.com/kendo-ui/service/Products/Create" datatype="jsonp" />
-                        <update url="https://demos.telerik.com/kendo-ui/service/Products/Update" datatype="jsonp" />
-                        <destroy url="https://demos.telerik.com/kendo-ui/service/Products/Destroy" datatype="jsonp" />
-                    </transport>
-                    <schema>
-                        <model id="ProductID">
-                            <fields>
-                                <field type="number" name="ProductID"></field>
-                                <field type="string" name="ProductName"></field>
-                                <field type="number" name="UnitPrice"></field>
-                                <field type="boolean" name="Discontinued"></field>
-                                <field type="number" name="UnitsInStock"></field>
-                            </fields>
-                        </model>
-                    </schema>
-                </datasource>
-            </sheet>
-        </sheets>
-    </kendo-spreadsheet>
-
+The Spreadsheet provides options for [data binding]({% slug databinding_spreadsheet_aspnetcore %}).  
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Spreadsheet Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
+* [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)

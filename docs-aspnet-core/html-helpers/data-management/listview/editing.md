@@ -10,11 +10,17 @@ position: 3
 
 The ListView enables you to edit its records.
 
-## Configuration
+To implement the editing functionality of the Kendo UI ListView for ASP.NET Core:
 
-Below are the steps for you to follow when configuring the Kendo UI ListView for ASP.NET Core for editing.
+1. [Configure the ListView for editing](#configuring-the-listview-for-editing)
+1. [Define the item template](#defining-the-item-template)
+1. [Define the editor template](#defining-the-editor-template)
+1. [Enable the editing functionality](#enabling-the-editing-functionality)
+1. [Specify and implement the action methods and the model id of the data source](#specifying-the-action-methods)
 
-###### Example
+## Configuring the ListView for Editing
+
+The following example demonstrates how to configure the Kendo UI ListView for ASP.NET Core for editing.
 
     namespace ListViewExample.Models
     {
@@ -55,15 +61,11 @@ Below are the steps for you to follow when configuring the Kendo UI ListView for
         }
     }
 
-### Define the Item Template
+## Defining the Item Template
 
-The following example demonstrates how to define the item template for the Kendo UI ListView. Add buttons for the create, update and destroy.
+The following example demonstrates how to define the item template for the Kendo UI ListView. Add buttons for the create, update and destroy operations.
 
-> **Important**
->
 > `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Kendo UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Kendo UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
-
-###### Example
 
     <!-- Button for the Create operation. Use it to call the client ListView method add()  -->
     <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
@@ -110,18 +112,14 @@ The following example demonstrates how to define the item template for the Kendo
         </div>
     </script>
 
-### Set the Editor Template
+## Defining the Editor Template
 
 The following example demonstrates how to define the `EditorTemplate` for the model:
 
-1. Declare the editor template in a file that uses the name of the edited model&mdash;for example `OrderViewModel.cshtml`.
+1. Declare the editor template in a file that uses the name of the edited model&mdash;for example, `OrderViewModel.cshtml`.
 1. Place this file in the `~Views\Shared\EditorTemplates` directory of your project.
 
-> **Important**
->
 > `click` events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Kendo UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
-
-###### Example
 
     @model ListViewExample.Models.OrderViewModel
     <div class="order">
@@ -158,11 +156,9 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
         }
     </style>
 
-###	Enable Editing
+## Enabling the Editing Functionality
 
 The following example demonstrates how to enable the ListView editing.
-
-###### Example
 
     @(Html.Kendo().ListView<ListViewExample.Models.OrderViewModel>()
         .Name("listView")
@@ -171,15 +167,11 @@ The following example demonstrates how to enable the ListView editing.
         .Editable() //<-- Enable editing.
     )
 
-### Specify the Action Methods and Define a Data Source Model ID
+## Specifying the Action Methods
 
-> **Important**
->
 > The Model Id is required to enable the editing functionality. Use a unique identifier (primary key).
 
-The following example demonstrates how to specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
-
-###### Example
+The following example demonstrates how to specify the action methods which will handle the `Create`, `Update`, and `Destroy` operations.
 
     @(Html.Kendo().ListView<ListViewExample.Models.OrderViewModel>()
         .Name("listView")
@@ -198,12 +190,7 @@ The following example demonstrates how to specify the action methods which will 
         .Pageable()
     )
 
-
-### Implement the Action Methods
-
 For a quick test add a static list and copy and paste it in the controller, or use own service or data base which returns an `IEnumerable` or `IQueriable`.
-
-###### Example
 
     public class ListViewController : Controller
     {
@@ -217,10 +204,7 @@ For a quick test add a static list and copy and paste it in the controller, or u
         }).ToList();
     }
 
-
 The following example demonstrates how to implement the `read` action method.
-
-###### Example
 
     public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
     {
@@ -230,32 +214,28 @@ The following example demonstrates how to implement the `read` action method.
 
 The following example demonstrates how to implement the `create` action method.
 
-###### Example
-
     public ActionResult Orders_Create([DataSourceRequest] DataSourceRequest request,  OrderViewModel order)
     {
         if (order != null && ModelState.IsValid)
         {
-            // own update logic or use with sample data to test
+            // Own update logic or use with sample data to test.
 
                 var nextId = dbOrders.Count + 1;
                 order.OrderID = nextId;
                 dbOrders.Add(order);
         }
 
-        //Return any validation errors, if any.
+        // Return any validation errors, if any.
         return Json(new [] { order }.ToDataSourceResult(request, ModelState));
     }
 
 The following example demonstrates how to implement the `update` action method.
 
-###### Example
-
     public ActionResult Orders_Update([DataSourceRequest] DataSourceRequest request, OrderViewModel order)
     {
         if (order != null && ModelState.IsValid)
         {
-            // own create logic or use with sample data to test
+            // Own create logic or use with sample data to test.
             for (int i = 0; i < dbOrders.Count; i++)
             {
                 if (order.OrderID == dbOrders[i].OrderID)
@@ -265,19 +245,17 @@ The following example demonstrates how to implement the `update` action method.
             }
         }
 
-        //Return any validation errors, if any.
+        // Return any validation errors, if any.
         return Json(new[] { order }.ToDataSourceResult(request, ModelState));
     }
 
 The following example demonstrates how to implement the `destroy` action method.
 
-###### Example
-
     public ActionResult Orders_Destroy([DataSourceRequest] DataSourceRequest request, OrderViewModel order)
     {
         if (order != null)
         {
-            // own destroy logic or use with sample data to test
+            // Own destroy logic or use with sample data to test.
 
             for (int i = 0; i < dbOrders.Count; i++)
             {
@@ -289,14 +267,11 @@ The following example demonstrates how to implement the `destroy` action method.
             }
         }
 
-        //Return any validation errors, if any.
+        // Return any validation errors, if any.
         return Json(new[] { order }.ToDataSourceResult(request, ModelState));
     }
 
 ## See Also
 
-* [Overview of the ListView HtmlHelper]({% slug htmlhelpers_listview_aspnetcore %})
-* [Ajax Binding of the ListView HtmlHelper]({% slug htmlhelpers_listview_aspnetcore_ajaxbinding %})
-* [Official Demo of the Kendo UI ListView for ASP.NET Core Editing](https://demos.telerik.com/aspnet-core/listview/editing)
-* [Overview of the jQuery Kendo UI ListView Widget](https://docs.telerik.com/kendo-ui/controls/data-management/listview/overview)
-* [JavaScript API Reference of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Editing by the ListView (Demo)](https://demos.telerik.com/aspnet-core/listview/editing)
+* [JavaScript API Reference of the Kendo UI ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)

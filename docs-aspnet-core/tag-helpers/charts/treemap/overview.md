@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TreeMap | Telerik UI for ASP.NET Core Tag Helpers
+page_title: TreeMap Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI TreeMap tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_treemap_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/treemap
@@ -9,13 +9,13 @@ position: 1
 
 # TreeMap Tag Helper Overview
 
-The TreeMap tag helper helps you configure the Kendo UI TreeMap widget in ASP.NET Core applications.
+The Kendo UI TreeMap displays hierarchical data in a traditional tree structure.
 
-## Basic Usage
+The TreeMap tag helper extension is a server-side wrapper for the [Kendo UI TreeMap](https://demos.telerik.com/kendo-ui/treemap/index) widget and enables you to configure the Kendo UI TreeMap widget in ASP.NET Core applications.
+
+## Initializing the TreeMap
 
 The following example demonstrates how to define the TreeMap by using the TreeMap tag helper.
-
-###### Example
 
     <kendo-treemap datasource-id="dataSource" name="treeMap" text-field="name" value-field="value"></kendo-treemap>
 
@@ -62,7 +62,5 @@ You can also bind the `DataSource` to remote data. The following example demonst
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the TreeMap Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
+* [JavaScript API Reference of the Kendo UI TreeMap](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/treemap)

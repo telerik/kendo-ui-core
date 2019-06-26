@@ -8,15 +8,11 @@ position: 2
 
 # Ajax Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI ComboBox for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
+You can configure the Kendo UI ComboBox for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
 
-> **Important**
->
 > The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
 1. Create an action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -24,8 +20,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
         }
 
 1. Create a new action method and pass the **Products** table as JSON result.
-
-    ###### Example
 
         public JsonResult GetProducts()
         {
@@ -35,8 +29,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
         }
 
 1. Add an Ajax-bound ComboBox.
-
-    ###### Example
 
         @(Html.Kendo().ComboBox()
             .Name("productDropDownList") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -56,5 +48,3 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 ## See Also
 
 * [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-* [ComboBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/combobox/overview)
-* [ComboBox Official Demos](http://demos.telerik.com/aspnet-core/combobox/index)

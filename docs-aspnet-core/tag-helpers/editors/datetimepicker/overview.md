@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DateTimePicker | Telerik UI for ASP.NET Core Tag Helpers
+page_title: DateTimePicker Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI DateTimePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/date-time-picker, /aspnet-core/helpers/tag-helpers/date-time-picker
 slug: taghelpers_datetimepicker_aspnetcore
@@ -9,17 +9,17 @@ position: 1
 
 # DateTimePicker Tag Helper Overview
 
-The DateTimePicker tag helper helps you configure the Kendo UI DateTimePicker widget in ASP.NET Core applications.
+The Kendo UI DateTimePicker allows the user to select a value from a calendar, a time drop-down list, or through direct input.
 
-## Basic Usage
+The DateTimePicker tag helper extension is a server-side wrapper for the [Kendo UI DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/index) widget and enables you to configure the Kendo UI DateTimePicker widget in ASP.NET Core applications.
+
+## Initializing the DateTimePicker
 
 The following example demonstrates how to define the DateTimePicker by using the DateTimePicker tag helper.
 
-###### Example
-
         <kendo-datetimepicker name="timepicker1"></kendo-datetimepicker>
 
-## Configuration
+## Basic Configuration
 
 The DateTimePicker tag helper configuration options are passed as attributes of the tag.
 
@@ -38,12 +38,7 @@ The DateTimePicker tag helper configuration options are passed as attributes of 
         </kendo-datetimepicker>
 ```
 
-The `ParseFormats` option is of type `string[]` and can be assigned either:
-
-* By a `ViewBag` property, or
-* By a property of the model.
-
-    ###### Example
+The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property or by a property of the model.
 
         @{
             ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
@@ -53,7 +48,5 @@ The `ParseFormats` option is of type `string[]` and can be assigned either:
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the DateTimePicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/tag-helper)
+* [JavaScript API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)

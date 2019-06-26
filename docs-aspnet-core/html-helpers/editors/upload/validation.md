@@ -20,8 +20,6 @@ The Upload supports three types of validation:
 
 The following example demonstrates a sample configuration for all the three types of validation.
 
-###### Example
-
 ```
 @(Html.Kendo().Upload()
     .Name("files")
@@ -55,12 +53,5 @@ Internet Explorer versions prior to version 10 provide no information on the fil
 
 ## See Also
 
-* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [File Validation by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/validation)
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
-* [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
-* [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

@@ -8,30 +8,31 @@ position: 1
 
 # PDFViewer HtmlHelper Overview
 
-The PDFViewer HtmlHelper extension is a server-side wrapper for the [Kendo UI PDFViewer](http://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer) widget.
+The [Kendo UI PDFViewer](https://demos.telerik.com/aspnet-core/pdfviewer/index) displays PDF files in the browser.
 
-The [Kendo UI PDFViewer](https://demos.telerik.com/aspnet-core/pdfviewer/index) displays PDF files in the browser. It provides flexibility to choose the PDF library to be used for processing the file:
+It provides flexibility to choose the PDF library to be used for processing the file:
 
 * [PDF.JS Processing](https://demos.telerik.com/aspnet-core/pdfviewer/index)
 * [Telerik DPL Processing](https://demos.telerik.com/aspnet-core/pdfviewer/dpl-processing)
 
 The PDFViewer consists of a toolbar and a scrollable container that wraps the page elements. Default tools collection includes `pager`, `open` and `download` tool.
 
-**Key Features**
+The PDFViewer provides the following key features:
+* Selection of PDF processing library.
+* A built-in paging mechanism.
+* Virtualization capabilities.
+* A built-in default toolbar collection.
+* Responsive capabilities and page scaling.
 
-* Allows you to choose the PDF processing lib
-* Provides built-in paging mechanism
-* Has virtualization capabilities
-* Provides built-in default toolbar collection
-* Has responsive capabilities and page scaling
+The PDFViewer HtmlHelper extension is a server-side wrapper for the [Kendo UI PDFViewer](http://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer) widget. For more information on the PDFViewer HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/pdfviewer/overview).
 
-## Getting Started
+## Initializing the PDFViewer
 
-### Initialization
+You can initialize the PDFViewer from HTML either by [using PDF.JS](#using-pdfjs) or [with the Telerik Document Processing library](#using-telerik-document-processing).
 
-While initializing the widget using the HTML helper, choose the PDF processing library and setup its settings. You could initialize the widgets using [PDF.JS](https://mozilla.github.io/pdf.js/):
+### Using PDF.JS
 
-###### Example
+The following example demonstrates how to initialize the PDFViewer by using [PDF.JS](https://mozilla.github.io/pdf.js/).
 
 ```
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -48,9 +49,9 @@ While initializing the widget using the HTML helper, choose the PDF processing l
     )
 ```
 
-or using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction):
+### Using Telerik Document Processing
 
-###### Example
+The following example demonstrates how to initialize the PDFViewer by using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction):
 
 ```
     @(Html.Kendo().PDFViewer()
@@ -72,12 +73,17 @@ or using the [Telerik Document Processing library](https://docs.telerik.com/devt
     )
 ```
 
-## See also
+## Functionality and Features
 
-* [PDFViewer Official Demos](https://demos.telerik.com/aspnet-core/pdfviewer/index)
-* [PDFViewer PDFJS Processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore %})
-* [PDFViewer DPL Processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [PDF.js processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore %})
+* [DPL processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})
+
+## Events
+
+For a complete example on basic PDFViewer events, refer to the [demo on using the events of the PDFViewer](https://demos.telerik.com/aspnet-core/pdfviewer/events).
+
+## See Also
+
+* [Basic Usage of the PDFViewer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/index)
+* [Using the API of the PDFViewer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/api)
+* [JavaScript API Reference of the PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)

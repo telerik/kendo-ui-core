@@ -10,7 +10,7 @@ position: 5
 
 The Editor HtmlHelper allows you to configure and apply custom definitions for serializing and deserializing its content.
 
-## Serialize Content
+## Serializing
 
 The Editor provides the following configuration options:
 
@@ -18,10 +18,6 @@ The Editor provides the following configuration options:
 * `Scripts()`&mdash;Indicates whether inline scripts will be serialized and posted to the server. By default, scripts will be removed (`false`).
 * `Semantic()`&mdash;Indicates whether the font styles will be saved as semantic tags (`strong`, `em`, `span`) or as presentational tags (`b`, `i`, `u`, `font`). By default, the Editor uses semantic tags (`true`).
 * `Custom()`&mdash;Allows you to define custom serialization for the editable content. The JavaScript handler will receive the Editor content and will return its serialized version.
-
-The following example demonstrates a sample configuration of the serialization Editor options.
-
-###### Example
 
 ```
 @(Html.Kendo().Editor()
@@ -41,11 +37,9 @@ The following example demonstrates a sample configuration of the serialization E
 </script>
 ```
 
-## Deserialize Content
+## Deserializing
 
 Deserialization is the process of parsing the HTML string input from the `value()` method or from the `viewHtml` dialog into editable content. The `deserialization` configuration method allows you to use a custom JavaScript handler, as demonstrated in the following example.
-
-###### Example
 
 ```
 @(Html.Kendo().Editor()
@@ -64,10 +58,4 @@ Deserialization is the process of parsing the HTML string input from the `value(
 
 ## See Also
 
-* [Overview of the Editor HtmlHelper]({% slug htmlhelpers_editor_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
-* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
-* [Pasting Content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Image Browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
-* [Immutable Elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
-* [Styling Content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)

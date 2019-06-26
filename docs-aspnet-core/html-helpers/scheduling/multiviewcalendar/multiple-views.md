@@ -12,10 +12,7 @@ The Kendo UI MultiViewCalendar allows you to define the number of views and mont
 
 In some scenarios it might be necessary to display more than two months. This is especially helpful when performing range selection between months.
 
-###### Example
-
 ```Razor
-
         @(Html.Kendo().NumericTextBox()
             .Name("numberOfViews")
             .RestrictDecimals(true)
@@ -42,10 +39,10 @@ In some scenarios it might be necessary to display more than two months. This is
                 }
             }
         </script>
-
 ```
 
 ## See Also
 
-* [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
-* [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)
+* [Multiple Views in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/multiple-views)
+* [View Selection in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/view-selection)
+* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)

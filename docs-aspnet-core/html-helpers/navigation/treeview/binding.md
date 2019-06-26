@@ -1,6 +1,6 @@
 ---
-title: Binding
-page_title: TreeView Binding | Telerik UI for ASP.NET Core HtmlHelpers
+title: Data Binding
+page_title: Data Binding | Kendo UI TreeView HtmlHelper for ASP.NET Core
 description: "Learn the binding options for the Kendo UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treeview_binding_aspnetcore
 position: 2
@@ -12,9 +12,9 @@ The TreeView HTML helper provides support for declaratively defining its items a
 
 ## Declaring TreeView Items
 
-The TreeView allows you to declare all its items within the HTML helper declaration.The following example demonstrates how to configure a TreeView with three levels of hierarchy.
+The TreeView allows you to declare all its items within the HTML helper declaration.
 
-###### Example
+The following example demonstrates how to configure a TreeView with three levels of hierarchy.
 
     @(Html.Kendo().TreeView()
         .Name("treeview")
@@ -103,7 +103,7 @@ private IEnumerable<TreeViewItemModel> GetData()
 
 ## Remote Data Binding
 
-The TheeView provides support for remote data binding by using a `DataSource` configuration object.
+The TreeView provides support for remote data binding by using a `DataSource` configuration object.
 
 ```Razor
 @(Html.Kendo().TreeView()
@@ -149,7 +149,6 @@ public IActionResult Read_TreeViewData(int? id)
 
 ## See Also
 
-* [Overview of TreeView HTML Helper]({% slug htmlhelpers_treeview_aspnetcore %})
-* [Drag and Drop Functionality of the TreeView HTML Helper]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %})
-* [TreeView HTML Helper Item Properties]({% slug htmlhelpers_treeview_items_aspnetcore %})
-* [Checkboxes Functionality of the TreeView HTML Helper]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})
+* [Local Data Binding by the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/local-data-binding)
+* [Remote Data Binding by the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/remote-data-binding)
+* [JavaScript API Reference of the TreeView](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)

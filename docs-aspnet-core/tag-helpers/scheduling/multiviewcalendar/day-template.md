@@ -12,8 +12,6 @@ The MultiViewCalendar enables you to customize the rendered day for the `month` 
 
 The following example demonstrates how to create a MultiViewCalendar by using a custom template.
 
-###### Example
-
 ```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar">
@@ -40,7 +38,4 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)

@@ -8,9 +8,9 @@ position: 3
 
 # Binding to Remote Data
 
-Remote data binding is available as of the R2 2019 release.
+Remote data binding enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
 
-This feature enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
+The Menu supports remote data binding as of the Kendo UI R2 2019 release.
 
 1. Implement an action method in your controller that returns the collection for the Menu.
 
@@ -33,7 +33,7 @@ This feature enables you to bind the Menu to a server end-point that returns the
     }
     ```
 
-1. Use the DataSource to configure the action url to the end-point. Setup the DataTextField to configure which field to be bound to the items' text. And if the children items are not in an items field, you should configure the Model with the corresponding field that holds the children collection.
+1. Use the DataSource to configure the action URL to the end-point. Set up the `DataTextField` to define the field which will be bound to the text of the items. If the children items are not in an items field, configure the Model with the corresponding field that holds the children collection.
 
     ```Razor
         @(Html.Kendo().Menu()
@@ -50,6 +50,5 @@ This feature enables you to bind the Menu to a server end-point that returns the
 
 ## See Also
 
+* [Remote Data Binding by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/remote-data-binding)
 * [JavaScript API Reference of the Menu](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
-* [Menu HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/menu/overview)
-* [Menu Official Demos](http://demos.telerik.com/aspnet-core/menu/index)

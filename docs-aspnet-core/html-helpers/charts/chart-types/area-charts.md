@@ -9,17 +9,18 @@ slug: areacharts_aspnetcore_htmlhelper
 
 The [Kendo UI Area Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/area-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
 
+## Getting Started
+
 The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in values coming from several sets of similar data.
 
-## Configuration
+To define an Area Chart, use `Area` and `VerticalArea` in the `Series` configuration.
 
-To define an Area Chart, use `Area` and `VerticalArea`.
+* [Configuring the axes](#configuring-the-axes)
+* [Configuring the line styles](#configuring-the-line-styles)
 
-### Axes
+## Configuring the Axes
 
 To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value axes are also supported.
-
-###### Example
 
     @(Html.Kendo().Chart()
         .Name("chart")
@@ -43,14 +44,13 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value ax
         )
     )
 
-
 The configuration from the previous example results in the following Area Chart.
 
 **Figure 1: A sample Area Chart**
 
 ![Area Chart](images/chart-area.png)
 
-### Line Styles
+## Configuring the Line Styles
 
 The Area Charts support the rendering of lines between points by using different styles. You can set the supported styles through the [`line.style`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.line#series.line.style) option.
 
@@ -70,11 +70,5 @@ The supported styles are:
 
 ## See Also
 
-* [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
-* [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})
-* [BoxPlot Charts]({% slug boxplotcharts_aspnetcore_htmlhelper %})
-* [Bar Charts]({% slug barcharts_aspnetcore_htmlhelper %})
-* [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %})
-* [Stock Charts]({% slug overview_stockcharthelper_aspnetcore %})
-* [TreeMap]({% slug overview_treemaphelper_aspnetcore %})
-* [Chart JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Area Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/index)
+* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: NumericTextBox | Telerik UI for ASP.NET Core Tag Helpers
+page_title: NumericTextBox Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI NumericTextBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/numeric-text-box, /aspnet-core/helpers/tag-helpers/numeric-text-box
 slug: taghelpers_numerictextbox_aspnetcore
@@ -9,25 +9,23 @@ position: 1
 
 # NumericTextBox Tag Helper Overview
 
-The NumericTextBox tag helper helps you configure the Kendo UI NumericTextBox widget in ASP.NET Core applications.
+The Kendo UI NumericTextBox converts an `input` element into a numeric, percentage, or currency textbox.
 
-## Basic Usage
+The NumericTextBox tag helper extension is a server-side wrapper for the [Kendo UI NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index) widget and enables you to configure the Kendo UI NumericTextBox widget in ASP.NET Core applications.
+
+## Initializing the NumericTextBox
 
 The following example demonstrates how to define the NumericTextBox by using the NumericTextBox tag helper.
-
-###### Example
 
         <kendo-numerictextbox name="numeric"></kendo-numerictextbox>
 
 You can also bind the NumericTextBox to a particular model field by using the `for` attribute. This is equivalent to using the `Html.Kendo().NumericTextBoxFor<decimal>()` HtmlHelper.
 
-###### Example
-
         @model Kendo.Mvc.Examples.Models
 
         <kendo-numerictextbox for="CustomerID"></kendo-numerictextbox>
 
-## Configuration
+## Basic Configuration
 
 The NumericTextBox tag helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
@@ -51,7 +49,5 @@ The NumericTextBox tag helper supports all the configuration options that the Ht
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the NumericTextBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
+* [JavaScript API Reference of the NumericTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)

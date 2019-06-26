@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Sortable | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Sortable Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Sortable tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_sortable_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/sortable
@@ -9,22 +9,20 @@ position: 1
 
 # Sortable Tag Helper Overview
 
-The Sortable tag helper helps you configure the Kendo UI Sortable widget in ASP.NET Core applications.
+The Sortable provides a sortable drag-and-drop functionality to elements within a list.
 
-## Basic Usage
+The Sortable tag helper extension is a server-side wrapper for the [Kendo UI Sortable](https://demos.telerik.com/kendo-ui/sortable/index) widget and enables you to configure the Kendo UI Sortable widget in ASP.NET Core applications.
+
+## Initializing the Sortable
 
 The following example demonstrates how to define the Sortable by using the Sortable tag helper.
 
-###### Example
-
     <kendo-sortable name="sortable-basic"></kendo-sortable>
 
-## Configuration
+## Basic Configuration
 
 The Sortable tag helper configuration options are passed as attributes of the tag.
 
-> **Important**
->
 > Initialize the Sortable for already existing DOM elements.
 
 ```html
@@ -48,7 +46,5 @@ The Sortable tag helper configuration options are passed as attributes of the ta
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Sortable Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
+* [JavaScript API Reference of the Sortable](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable)

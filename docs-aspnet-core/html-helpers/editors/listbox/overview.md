@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ListBox | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: ListBox Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI ListBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/listbox
 slug: htmlhelpers_listbox_aspnetcore
@@ -9,13 +9,13 @@ position: 1
 
 # ListBox HtmlHelper Overview
 
-The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](https://demos.telerik.com/kendo-ui/listbox/index) widget.
+The ListBox displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items.
 
-It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
+You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
-For more information on the HtmlHelper, refer to the article on the [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview).
+The ListBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ListBox](https://demos.telerik.com/kendo-ui/listbox/index) widget. For more information on the ListBox HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview).
 
-## Basic Usage
+## Initializing the ListBox
 
 The following example demonstrates how to define the ListBox by using the ListBox HtmlHelper.
 
@@ -50,11 +50,9 @@ The following example demonstrates how to define the ListBox by using the ListBo
     }
 ```
 
-## Configuration
+## Basic Configuration
 
 The following example demonstrates the basic configuration for the ListBox HtmlHelper.
-
-###### Example
 
     @(Html.Kendo().ListBox()
         .Name("optional")
@@ -96,12 +94,12 @@ The following example demonstrates the basic configuration for the ListBox HtmlH
         )
     )
 
+## Events
+
+For a complete example on basic ListBox events, refer to the [demo on using the events of the ListBox](https://demos.telerik.com/aspnet-core/listbox/events).
+
 ## See Also
 
+* [Basic Usage of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/index)
+* [Using the API of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/api)
 * [JavaScript API Reference of the ListBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
-* [ListBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listbox/overview)
-* [ListBox Official Demos](http://demos.telerik.com/aspnet-core/listbox/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Gantt | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Gantt Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI Gantt HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/gantt
 slug: htmlhelpers_gantt_aspnetcore
@@ -9,17 +9,15 @@ position: 1
 
 # Gantt HtmlHelper Overview
 
-The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](http://demos.telerik.com/kendo-ui/gantt/index) widget.
-
-It allows you to configure the Gantt from server-side code and helps with data binding and editing. The [Gantt](http://docs.telerik.com/kendo-ui/controls/scheduling/gantt/overview) displays a set of tasks and dependencies which are used to visualize project-planning data.
+The [Gantt](http://docs.telerik.com/kendo-ui/controls/scheduling/gantt/overview) displays a set of tasks and dependencies which are used to visualize project-planning data.
 
 The widget provides:
-* A TreeList section where the user can edit the tasks, then sort and reorder them in a grid-like fashion.
-* A Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in three different views&mdash;day, week, and month.
+* A TreeList section where the user can edit the tasks, and sort and reorder them in a grid-like fashion.
+* A Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in the day, week, and month views.
 
-For more information on the HtmlHelper, refer to the article on the [Gantt HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/gantt/overview).
+The Gantt HtmlHelper extension is a server-side wrapper for the [Kendo UI Gantt](http://demos.telerik.com/kendo-ui/gantt/index) widget. For more information on the Gantt HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/gantt/overview).
 
-## Basic Usage
+## Initializing the Gantt
 
 The following example demonstrates how to define the Gantt by using the Gantt HtmlHelper.
 
@@ -150,11 +148,9 @@ The following example demonstrates how to define the Gantt by using the Gantt Ht
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the Gantt HtmlHelper and how to get the Gantt instance.
-
-###### Example
+The following example demonstrates the basic configuration of the Gantt HtmlHelper.
 
 ```
 @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
@@ -240,18 +236,18 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
 
 <script type="text/javascript">
     $(function() {
-        //Notice that the Name() of the Gantt is used to get its client-side instance.
+        // The Name() of the Gantt is used to get its client-side instance.
         var gantt = $("#gantt").data("kendoGantt");
     });
 </script>
 ```
 
+## Events
+
+For a complete example on basic Gantt events, refer to the [demo on using the events of the Gantt](https://demos.telerik.com/aspnet-core/gantt/events).
+
 ## See Also
 
+* [Basic Usage of the Gantt HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt)
+* [Using the API of the Gantt HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/api)
 * [JavaScript API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
-* [Gantt HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/gantt/overview)
-* [Gantt Official Demos](http://demos.telerik.com/aspnet-core/gantt/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

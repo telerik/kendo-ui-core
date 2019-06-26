@@ -13,11 +13,14 @@ The [Kendo UI Donut Chart HTMLHelper for ASP.NET Core](https://demos.telerik.com
 
 ## Getting Started
 
-### Create the Pie Chart
+To create a Pie Chart, use `Pie` in the `Series` configuration.
+
+* [Creating the Pie Chart](#creating-the-pie-chart)
+* [Configuring the effects overlay](#configuring-the-effects-overlay)
+
+## Creating the Pie Chart
 
 To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties, as demonstrated in the following example.
-
-###### Example
 
         @(Html.Kendo().Chart()
            .Name("chart")
@@ -40,18 +43,13 @@ To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Addition
            )
         )
 
-
 **Figure 1: A sample Pie Chart**
 
 ![Pie Chart](images/pie-chart.png)
 
-## Configuration
-
-### Effects Overlay
+## Configuring the Effects Overlay
 
 Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable, as demonstrated in the following example.
-
-###### Example
 
     .Series(series =>
     {
@@ -59,33 +57,27 @@ Each segment has a transparent effect overlay that adds depth to the two-dimensi
        .Overlay(o => o.Gradient(ChartSeriesGradient.None));
     })
 
-
 The following `ChartSeriesGradient` options are available:
 
 * (Default) `RoundedBevel`
+
+        **Figure 2: A Pie Chart with the `RoundedBevel` overlay applied**
+
+        ![Pie Chart with roundedBevel overlay](images/pie-chart.png)
+
 * `SharpBevel`
+
+        **Figure 3: A Pie Chart with the `SharpBevel` overlay applied**
+
+        ![Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
+
 * `None`
 
-The following figure demonstrates the usage of each of these options.
+        **Figure 4: A Pie Chart with no overlay**
 
-**Figure 2: A Pie Chart with the `RoundedBevel` overlay applied**
-
-![Pie Chart with roundedBevel overlay](images/pie-chart.png)
-
-**Figure 3: A Pie Chart with the `SharpBevel` overlay applied**
-
-![Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
-
-**Figure 4: A Pie Chart with no overlay**
-
-![Pie Chart with no overlay](images/chart-pie-overlay-none.png)
+        ![Pie Chart with no overlay](images/chart-pie-overlay-none.png)
 
 ## See Also
 
-* [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
-* [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %})
-* [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})
-* [Bar Charts]({% slug barcharts_aspnetcore_htmlhelper %})
-* [Stock Charts]({% slug overview_stockcharthelper_aspnetcore %})
-* [TreeMap]({% slug overview_treemaphelper_aspnetcore %})
-* [Chart JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Pie Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pie-charts/index)
+* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)

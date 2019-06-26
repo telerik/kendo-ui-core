@@ -9,13 +9,19 @@ slug: boxplotcharts_aspnetcore_htmlhelper
 
 The [Kendo UI Box Plot Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/box-plot-charts/index) is useful for displaying variation in statistical samples of data.
 
+## Getting Started
+
 The Box Plot Chart uses seven values&mdash;first and third quartile (q1 and q3), median (that is the second quartile), upper and lower value (inner fences), mean and outliers. The advantage of this type of series is that it displays detailed information about a set of data in a small space.
 
 If you are not familiar with the usage and terminology of the box plots and want to understand it better, check the [Wikipedia page on box plots](https://en.wikipedia.org/wiki/Box_plot).
 
-## Configuration
+To create a Box Plot Chart, use `BoxPlot` in the `Series` configuration.
 
-To create a Box Plot Chart, use the `BoxPlot` series type.
+* [Binding the Box Plot Chart](#binding-the-box-plot-chart)
+* [Setting the orientation](#setting-the-orientation)
+* [Customizing the outliers](#customizing-the-outliers)
+
+## Binding the Box Plot Chart
 
 When you bind the Box Plot Chart, you have to set seven special properties of the `Series` object so that the Chart is successfully displayed:
 
@@ -28,8 +34,6 @@ When you bind the Box Plot Chart, you have to set seven special properties of th
 * (Optional) `outliers`
 
 All properties except for `outliers` have to point to numeric fields in the DataSource. `outliers` has to point to a field that contains an array of numbers.
-
-###### Example
 
       @(Html.Kendo().Chart()
             .Name("chart")
@@ -57,11 +61,9 @@ All properties except for `outliers` have to point to numeric fields in the Data
             )
       )
 
-### Orientation
+## Setting the Orientation
 
 You can change the orientation of the Box Plot Chart by setting the series type to `VerticalBoxPlot`.
-
-###### Example
 
       @(Html.Kendo().Chart()
          .Name("chart")
@@ -89,7 +91,7 @@ You can change the orientation of the Box Plot Chart by setting the series type 
          )
       )
 
-### Customizing Outliers
+## Customizing the Outliers
 
 Outliers are values that appear outside the range between lower and upper values (inner fences). Based on their distance from the inner fences, the outliers in a box plot are mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme).
 
@@ -99,11 +101,5 @@ You can configure the outliers separately and customize them by using:
 
 ## See Also
 
-* [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
-* [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %})
-* [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})
-* [Bar Charts]({% slug barcharts_aspnetcore_htmlhelper %})
-* [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %})
-* [Stock Charts]({% slug overview_stockcharthelper_aspnetcore %})
-* [TreeMap]({% slug overview_treemaphelper_aspnetcore %})
-* [Chart JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Box Plot Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/box-plot-charts/index)
+* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)

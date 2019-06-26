@@ -44,7 +44,6 @@ Clicking **Update Now** starts the Latest Version Acquirer tool which, on its fi
 
  4. To access the latest version of Telerik UI for ASP.NET Core, go to **New Project Wizard** after the download completes.
 
-> **Important**
 > * The **Download** buttons of the **New Project Wizard** launch the **Latest Version Acquirer** tool.
 > * The **Latest Version Acquirer** tool downloads the `.zip` files, containing the latest Telerik UI for ASP.NET Core binaries and any resources that are vital for a Telerik UI for ASP.NET Core application. These get unpacked in the `%APPDATA%\Telerik\Updates` folder by default. If you find the list of the offered packages too long and you do not need the older versions, close the VS and use the Windows Explorer to delete these distributions.
 

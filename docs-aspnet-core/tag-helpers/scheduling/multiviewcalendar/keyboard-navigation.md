@@ -26,9 +26,6 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 | `Ctrl`+`Down Left`  | Navigates to the previous month.                 |
 | `Ctrl`+`Down Right` | Navigates to the next month.                     |
 
-
-###### Example
-
 ```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar" selectable="multiple">        
@@ -45,7 +42,4 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)

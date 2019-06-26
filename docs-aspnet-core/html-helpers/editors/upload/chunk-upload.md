@@ -12,8 +12,6 @@ The chunk upload of files enables the user to send large files which are uploade
 
 It also supports the pausing and resuming of the file upload during the time the application stays open in the browser.
 
-> **Important**
->
 > The chunk upload functionality is available only in the [asynchronous mode]({%slug htmlhelpers_upload_modes_of_operation_aspnetcore%}#asynchronous-mode) of the Upload.
 
 ## Basic Usage
@@ -21,8 +19,6 @@ It also supports the pausing and resuming of the file upload during the time the
 To enable the chunk upload:
 
 1. Set up the [`Async(a => a.ChunkSize())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.chunksize) option of the Upload.
-
-    ###### Example
 
     ```
     @(Html.Kendo().Upload()
@@ -37,8 +33,6 @@ To enable the chunk upload:
     ```
 
 1. Implement the server-side logic (that is, the `ChunkSave` action is assigned) which processes the file chunks and merges them into file:
-
-    ###### Example
 
     ```
     public class ChunkMetaData
@@ -93,14 +87,14 @@ To enable the chunk upload:
         }
 
         string path = String.Empty;
-        // The Name of the Upload component is "files"
+        // The Name of the Upload component is "files".
         if (files != null)
         {
             foreach (var file in files)
             {
                 path = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", chunkData.FileName);
 
-                //AppendToFile(path, file);
+                // AppendToFile(path, file);
             }
         }
 
@@ -117,7 +111,7 @@ To enable the chunk upload:
 
     public ActionResult Save(IEnumerable<IFormFile> files)
     {
-        // The Name of the Upload component is "files"
+        // The Name of the Upload component is "files".
         if (files != null)
         {
             foreach (var file in files)
@@ -125,7 +119,7 @@ To enable the chunk upload:
                 var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
                 // Some browsers send file names with full path.
-                // We are only interested in the file name.
+                // The demo is interested only in the file name.
                 var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
                 var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
@@ -133,12 +127,12 @@ To enable the chunk upload:
             }
         }
 
-        // Return an empty string to signify success
+        // Return an empty string to signify success.
         return Content("");
     }
     ```
 
-## Modification
+## Modifying the Chunk Upload
 
 To fine-tune the chunk upload, use any of the following configuration options:
 
@@ -146,11 +140,7 @@ To fine-tune the chunk upload, use any of the following configuration options:
 * [`Async(a => a.AutoRetryAfter())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoretryafter)&mdash;Represents the time interval in milliseconds after which the Upload attempts to retry a failed upload.
 * [`Async(a => a.MaxAutoRetries())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.maxautoretries)&mdash;Represents the number of attempts the Upload makes to retry a failed upload before reporting it.
 
-> **Important**
->
 > As a client-side solution, the Upload does not handle validation. File validation and security requirements have to be handled on the server by using application logic.
-
-###### Example
 
 ```
     @(Html.Kendo().Upload()
@@ -169,12 +159,5 @@ To fine-tune the chunk upload, use any of the following configuration options:
 
 ## See Also
 
-* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Chunk Upload by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/chunkupload)
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
-* [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
-* [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

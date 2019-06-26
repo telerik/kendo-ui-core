@@ -10,17 +10,14 @@ position: 7
 
 In the MultiViewCalendar, you can render a column which displays the number of the weeks within the current `month` view.
 
-###### Example
-
 ```Razor
-
-        @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .WeekNumber(true)
-        )
+      @(Html.Kendo().MultiViewCalendar()
+          .Name("MultiViewCalendar")
+          .WeekNumber(true)
+      )
 ```
 
 ## See Also
 
-* [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
-* [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)
+* [Week Column in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/week-column)
+* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)

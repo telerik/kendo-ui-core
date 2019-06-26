@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Barcode | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Barcode Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Barcode tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_barcode_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/barcode
@@ -9,17 +9,17 @@ position: 1
 
 # Barcode Tag Helper Overview
 
-The Barcode tag helper helps you configure the Kendo UI Barcode widget in ASP.NET Core applications.
+The Kendo UI Barcode is used to represent data in a machine-readable format.
 
-## Basic Usage
+The Barcode tag helper extension is a server-side wrapper for the [Kendo UI Barcode](https://demos.telerik.com/kendo-ui/barcode/index) widget and enables you to configure the widget in ASP.NET Core applications.
+
+## Initializing the Barcode
 
 The following example demonstrates how to define the Barcode by using the Barcode tag helper.
 
-###### Example
-
     <kendo-barcode name="BarCode"></kendo-barcode>
 
-## Configuration
+## Basic Configuration
 
 The Barcode tag helper configuration options are passed as attributes of the tag.
 
@@ -41,7 +41,5 @@ The Barcode tag helper configuration options are passed as attributes of the tag
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Barcode Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/barcode/tag-helper)
+* [JavaScript API Reference of the Kendo UI Barcode](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode)

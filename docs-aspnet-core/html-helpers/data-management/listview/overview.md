@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ListView | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: ListView Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI ListView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/listview
 slug: htmlhelpers_listview_aspnetcore
@@ -9,17 +9,15 @@ position: 1
 
 # ListView HtmlHelper Overview
 
-The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index) widget.
+The ListView enables you to display a custom layout of data-bound items.
 
-It enables you to display a custom layout of data-bound items. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
+It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 
-For more information on the HtmlHelper, refer to the article on the [ListView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview).
+The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI ListView](http://demos.telerik.com/aspnet-mvc/listview/index) widget. For more information on the ListView HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/listview/overview).
 
-## Basic Usage
+## Initializing the ListView
 
 The following example demonstrates how to define the ListView by using the ListView HtmlHelper.
-
-###### Example
 
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
@@ -44,11 +42,9 @@ The following example demonstrates how to define the ListView by using the ListV
     )
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration for the ListView with editing.
-
-###### Example
+The following example demonstrates the basic configuration for the ListView HtmlHelper.
 
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
@@ -87,12 +83,15 @@ The following example demonstrates the basic configuration for the ListView with
     )
 ```
 
+## Functionality and Features
+
+* [Ajax binding]({% slug htmlhelpers_listview_aspnetcore_ajaxbinding %})
+* [Editing]({% slug htmlhelpers_listview_aspnetcore_editing %})
+* [Scrolling]({% slug htmlhelpers_listview_aspnetcore_scrolling %})
+
 ## See Also
 
-* [JavaScript API Reference of the ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
-* [ListView HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/listview/overview)
-* [ListView Official Demos](https://demos.telerik.com/aspnet-core/listview/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/index)
+* [Basic Usage of the Kendo UI ListView Widget (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
+* [Using the API of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/api)
+* [JavaScript API Reference of the Kendo UI ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)

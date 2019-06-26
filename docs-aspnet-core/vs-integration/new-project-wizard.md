@@ -12,8 +12,6 @@ This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for 
 
 ## Getting Started
 
-### The Basics
-
 You can create new Telerik UI for ASP.NET Core applications by using the **Create New Project Wizard**.
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
@@ -41,14 +39,14 @@ As of the 2018 R2 release, the **Create New Project Wizard** in Visual Studio 20
 
 ![New Project Wizard](images/new-project-wizard-core.png)
 
-### Project Settings
+## Project Settings
 
 You can modify the project settings by configuring the options on the **Create New Project** page:
 
 * **Project type**&mdash;Choose the desired project type: **Blank**, **Standard**, **Grid and Menu**.
 * **Version**&mdash;Choose the version of Telerik UI for ASP.NET Core you want to use.
 
-### Creating New ASP.NET Core Applications
+## Creating New ASP.NET Core Applications
 
 After configuring the project settings, click **Finish** to start creating the new ASP.NET Core application.
 

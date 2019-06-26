@@ -9,25 +9,19 @@ slug: bubblecharts_aspnetcore_htmlhelper
 
 The [Kendo UI Bubble Chart HtmlHelper](https://demos.telerik.com/aspnet-core/bubble-charts/index) displays data as points with coordinates and sizes defined by the value of their items.
 
-The Bubble Chart HtmlHelper is similar to the [Kendo UI Scatter Charts HtmlHelper](https://demos.telerik.com/aspnet-core/scatter-charts/index) in which the data points are replaced with bubbles. In this way a Bubble Chart displays three-dimensional data&mdash;two values for the coordinates of the items and one value for their size. A Bubble Chart is useful for visualizing different scientific relationships&mdash;fr example, economic or social. The X-axis of the Bubble Charts is numerical and does not require items.
+## Getting Started
 
-## Basic Usage
-
-### Suitability
+The Bubble Chart HtmlHelper is similar to the [Kendo UI Scatter Charts HtmlHelper](https://demos.telerik.com/aspnet-core/scatter-charts/index) in which the data points are replaced with bubbles. In this way a Bubble Chart displays three-dimensional data&mdash;two values for the coordinates of the items and one value for their size. A Bubble Chart is useful for visualizing different scientific relationships&mdash;for example, economic or social. The X-axis of the Bubble Charts is numerical and does not require items.
 
 The Bubble Charts are well suited for displaying dozens to hundreds of values especially when you wish to visualize size values which differ by several orders of magnitude. As the size value is represented by a circle area, it is a best practice to plot positive values.
 
-### Negative Values
-
 By default, negative values are not displayed. However, their area is going to be calculated as if their value was positive. The point label displays their actual value and they will also have a different color. To control this behavior, use the `negativeValues.visible` and `negativeValues.color` options that are applicable to each series.
 
-## Getting Started
+## Creating the Bubble Chart
 
-### Create the Bubble Chart
+To create a Bubble Chart, use `Bubble` in the `Series` configuration.
 
-The following example visualizes several data points.
-
-###### Example
+The following example demonstrates how to create a Bubble Chart and visualizes several data points.
 
     @(Html.Kendo().Chart()
         .Name("chart")
@@ -53,11 +47,5 @@ The following example visualizes several data points.
 
 ## See Also
 
-* [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
-* [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %})
-* [BoxPlot Charts]({% slug boxplotcharts_aspnetcore_htmlhelper %})
-* [Bar Charts]({% slug barcharts_aspnetcore_htmlhelper %})
-* [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %})
-* [Stock Charts]({% slug overview_stockcharthelper_aspnetcore %})
-* [TreeMap]({% slug overview_treemaphelper_aspnetcore %})
-* [Chart JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Bubble Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bubble-charts/index)
+* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)

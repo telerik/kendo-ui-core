@@ -1,22 +1,22 @@
 ---
 title: Getting Started with Visual Studio
-page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Visual Studio | Telerik UI for ASP.NET Core
+page_title: Getting Started with Visual Studio | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and Visual Studio."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
+# Getting Started with Visual Studio
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core on Windows with Visual Studio (VS) 2017/2019. For using Telerik UI for ASP.NET Core on MacOS, refer to [Getting Started with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %}).
+This article demonstrates how to configure an Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core project on Windows with Visual Studio (VS) 2017/2019.
+
+For using Telerik UI for ASP.NET Core on MacOS, refer to [Getting Started with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %}).
 
 ## Prerequisites
 
 The prerequisites for creating and running an ASP.NET Core on Windows with VS 2017 are described on the [.NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites).
 
-> **Important**
->
 > You can use Visual Studio 2015 only for .NET Core 1.x development. However, this approach is not recommended because:
 > * The .NET Core tooling is in a preview version which is not officially supported.
 > * The projects are `project.json`-based which is deprecated.
@@ -57,23 +57,17 @@ To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 4. Install the `Telerik.UI.for.AspNet.Core` package. It adds a line to your `.csproj` file similar to the following example.
 
-    ###### Example
-
-		<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />
 
 5. Open `Startup.cs` and update it in the following way:
 
 	* Add the `using Newtonsoft.Json.Serialization` line at the top.
-
-		###### Example
 
 			...
 			using Newtonsoft.Json.Serialization;
 			...
 
 	* Locate the `ConfigureServices` method and add the calls.
-
-		###### Example
 
 			public void ConfigureServices(IServiceCollection services)
 			{
@@ -89,10 +83,9 @@ To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 				services.AddKendo();
 			}
 
-
 	* If you are using a version prior to R2 2018, locate the `Configure` method and add a call to `app.UseKendo` at the end.
 
-		###### Example
+
 
 			public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 			{
@@ -104,8 +97,6 @@ To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 
 6. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`.
 
-    ###### Example
-
             @using MyASPNETCoreProject
             @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
             @addTagHelper *, Kendo.Mvc
@@ -114,8 +105,6 @@ To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 7. Include the Kendo UI `client-side resources`. For more information about the different approaches for including client-side resources, refer to the article on [including client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
 
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
-
-    ###### Example
 
 		<h2>Kendo UI DatePicker</h2>
 

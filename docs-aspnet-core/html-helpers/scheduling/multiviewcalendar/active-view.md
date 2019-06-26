@@ -12,8 +12,7 @@ To define the first view which the MultiViewCalendar initially renders, use the 
 
 To control the navigation depth, set the `Depth` option.
 
-The following views are predefined:
-
+The MultiViewCalendar supports the following predefined views:
 * `month`&mdash;Shows the days of the month.
 * `year`&mdash;Shows the months of the year.
 * `decade`&mdash;Shows the years of the decade.
@@ -22,8 +21,6 @@ The following views are predefined:
 ## Selectable Month Calendars
 
 The following example demonstrates how to create a MultiViewCalendar that allows users to select a month.
-
-###### Example
 
 ```Razor
 
@@ -36,5 +33,4 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ## See Also
 
-* [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
-* [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)

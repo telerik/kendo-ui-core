@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Spreadsheet Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/spreadsheet
 slug: htmlhelpers_spreadsheet_aspnetcore
@@ -13,13 +13,11 @@ The Spreadsheet HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 
 It enables you to configure the Kendo UI Spreadsheet widget from server-side code. The [Spreadsheet](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview) allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
-For more information on the HtmlHelper, refer to the article on the [Spreadsheet HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/overview).
+For more information on the Spreadsheet HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/overview).
 
-## Basic Usage
+## Initializing the Spreadsheet
 
 The following example demonstrates how to define the Spreadsheet by using the Spreadsheet HtmlHelper.
-
-###### Example
 
 ```Razor
 @(Html.Kendo().Spreadsheet()
@@ -95,11 +93,9 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the Spreadsheet HtmlHelper.
-
-###### Example
+The following example demonstrates the basic configuration for the Spreadsheet HtmlHelper.
 
 ```
 @(Html.Kendo().Spreadsheet()
@@ -179,9 +175,9 @@ The following example demonstrates the basic configuration of the Spreadsheet Ht
 )
 ```
 
-## Event Handling
+## Events
 
-You can subscribe to all Spreadsheet [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#events).
+You can subscribe to all Spreadsheet [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#events). For a complete example on basic Spreadsheet events, refer to the [demo on using the events of the Spreadsheet](https://demos.telerik.com/aspnet-core/spreadsheet/events).
 
 The following example demonstrates how to subscribe to the `changing` and `change` events.
 
@@ -223,27 +219,21 @@ The following example demonstrates how to subscribe to the `changing` and `chang
     </script>
 ```
 
-## Reference
+## Referencing Existing Instances
 
 To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Spreadsheet for ASP.NET Core declaration.
+    // Place this after your Kendo UI Spreadsheet for ASP.NET Core declaration.
     <script>
         $(document).ready(function() {
-            //Note that the Name() of the Spreadsheet is used to get its client-side instance.
+            // The Name() of the Spreadsheet is used to get its client-side instance.
             var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         });
     </script>
 
-
 ## See Also
 
+* [Basic Usage of the Spreadsheet HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
+* [Basic Usage of the Kendo UI Spreadsheet Widget (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Overview of the Kendo UI Spreadsheet Widget](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
 * [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [Spreadsheet HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/overview)
-* [Spreadsheet Official Demos](http://demos.telerik.com/aspnet-core/spreadsheet/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

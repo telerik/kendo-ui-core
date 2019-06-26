@@ -8,11 +8,11 @@ position: 4
 
 # Custom Data Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI ComboBox to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
+You can configure the Kendo UI ComboBox for data binding to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
+
+For a runnable example, refer to the [demo on customizing the data source of the ComboBox](https://demos.telerik.com/aspnet-core/combobox/custom-datasource).
 
 1. Create an action method which renders the view.
-
-    ###### Example
 
         public IActionResult Index()
         {
@@ -20,8 +20,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
         }
 
 1. Create a new action method and pass the **Products** table as JSON result.
-
-    ###### Example
 
         public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
         {
@@ -31,8 +29,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
         }
 
 1. Add an Ajax-bound ComboBox.
-
-    ###### Example
 
         @(Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -57,6 +53,5 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 ## See Also
 
+* [Customizing the Data Source of the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/custom-datasource)
 * [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-* [ComboBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/combobox/overview)
-* [ComboBox Official Demos](http://demos.telerik.com/aspnet-core/combobox/index)

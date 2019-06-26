@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Notification | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Notification Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Notification tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/notification, /aspnet-core/helpers/tag-helpers/notification
 slug: taghelpers_notification_aspnetcore
@@ -9,17 +9,17 @@ position: 1
 
 # Notification Tag Helper Overview
 
-The Notification tag helper helps you configure the Kendo UI Notification widget in ASP.NET Core applications.
+The [Notification](http://docs.telerik.com/kendo-ui/controls/layout/notification/overview) provides a styled UI widget with arbitrary content which can provide information to the user on various occasions.
 
-## Basic Usage
+The Notification tag helper extension is a server-side wrapper for the [Kendo UI Notification](http://demos.telerik.com/kendo-ui/notification/index) widget and enables you to configure the Kendo UI Notification widget in ASP.NET Core applications.
+
+## Initializing the Notification
 
 The following example demonstrates how to define the Notification by using the Notification tag helper.
 
-###### Example
-
         <kendo-notification name="notification" auto-hide-after="0"></kendo-notification>
 
-## Configuration
+## Basic Configuration
 
 The Notification tag helper configuration options are passed as attributes of the tag and through nested tags.
 
@@ -60,7 +60,5 @@ The Notification tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Notification Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification/tag-helper)
+* [JavaScript API Reference of the Notification](http://docs.telerik.com/kendo-ui/api/javascript/ui/notification)

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TreeList | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: TreeList Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/treelist
 slug: htmlhelpers_treelist_aspnetcore
@@ -9,17 +9,15 @@ position: 1
 
 # TreeList HtmlHelper Overview
 
-The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index) widget.
+The TreeList enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
-It enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
+The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index) widget. For more information on the TreeList HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/treelist/overview).
 
-For more information on the HtmlHelper, refer to the article on the [TreeList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treelist/overview).
+## Initializing the TreeList
 
-## Basic Usage
+The following example demonstrates how to define the TreeList by using the TreeList HtmlHelper.
 
-The following example demonstrates how to define the TreeList by using the TreeList HtmlHelper and bind it to remote data.
-
-> The TreeList HtmlHelper distinguishes the root items based on the `ParentId` field. If the `ParentId` is set as `.Nullable(true)`, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is *not* nullable (`.Nullable(false)`), root items will be items which have a default value for their data type.
+> The TreeList HtmlHelper distinguishes the root items based on the `ParentId` field. If the `ParentId` is set as `.Nullable(true)`, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is not nullable (`.Nullable(false)`), root items will be items which have a default value for their data type.
 
 ```Model
     public class EmployeeViewModel
@@ -76,9 +74,9 @@ The following example demonstrates how to define the TreeList by using the TreeL
 )
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration for the TreeList with editing.
+The following example demonstrates the basic configuration for the TreeList HtmlHelper.
 
 ```Controller
 	public JsonResult All([DataSourceRequest] DataSourceRequest request)
@@ -145,14 +143,21 @@ The following example demonstrates the basic configuration for the TreeList with
 )
 ```
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#events).
+* [Ajax binding]({% slug htmlhelpers_treelist_aspnetcore_ajaxbinding %})
+* [Editing]({% slug editing_aspnetcore_treelist_helper %})
+* [Paging]({% slug client_side_paging_aspnetcore_treelist_helper %})
+* [Multi-column headers]({% slug multicolumn_aspnetcore_treelist_helper %})
+
+## Events
+
+You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#events). For a complete example on basic TreeList events, refer to the [demo on using the events of the TreeList](https://demos.telerik.com/aspnet-core/treelist/events).
 
 ```Razor
     @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
         .Name("treelist")
-        /* other configurations */
+        /* Other configurations. */
         .Events(events => {
             events.DataBinding("onDataBinding");
             events.DataBound("onDataBound");
@@ -160,42 +165,34 @@ You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api
     )
     <script>
         function onDataBinding(e) {
-            //Handle the dataBinding event.
+            // Handle the dataBinding event.
             var treelist = this;
         }
 
         function onDataBound(e) {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
             var treelist = e.sender;
         }
     </script>
 ```
 
-## Reference
-
-### Existing Instances
+## Referencing Existing Instances
 
 To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
 
-###### Example
-
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
-        /* other configurations */
+        /* Other configurations. */
     )
     <script>
         $(function() {
-            //Notice that the Name() of the TreeList is used to get its client-side instance.
+            // The Name() of the TreeList is used to get its client-side instance.
             var treelist = $("#treelist").data("kendoTreeList");
         });
     </script>
 
 ## See Also
 
+* [Basic Usage of the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/index)
+* [Basic Usage of the Kendo UI TreeList Widget (Demo)](https://demos.telerik.com/kendo-ui/treemap/index)
 * [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
-* [TreeList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treelist/overview)
-* [TreeList Official Demos](http://demos.telerik.com/aspnet-core/treelist/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

@@ -12,7 +12,7 @@ The Upload provides the [synchronous](#synchronous-mode) and [asynchronous](#asy
 
 ## Synchronous Mode
 
-An Upload in a synchronous mode behaves like a regular file input&mdash;the selected files are uploaded upon form submission and users can select a set of files. When the Upload is in its synchronous mode, the browser does not have to support multiple file selection.
+An Upload in the synchronous mode behaves like a regular file input&mdash;the selected files are uploaded upon form submission and users can select a set of files. When the Upload is in its synchronous mode, the browser does not have to support multiple file selection.
 
 ```Razor
 <form method="post" action='@Url.Action("Submit")'>
@@ -37,7 +37,7 @@ public UploadController(IHostingEnvironment hostingEnvironment)
 
 public ActionResult Submit(IEnumerable<IFormFile> files)
 {
-    // The Name of the Upload component is "files"
+    // The Name of the Upload component is "files".
     if (files != null)
     {
         foreach (var file in files)
@@ -45,11 +45,11 @@ public ActionResult Submit(IEnumerable<IFormFile> files)
             var fileContent = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
             // Some browsers send file names with full path.
-            // We are only interested in the file name.
+            // The demo is interested only in the file name.
             var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
             var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
-            // The files are not actually saved in this demo
+            // The files are not actually saved in this demo.
             using (var fileStream = new FileStream(physicalPath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -63,9 +63,7 @@ public ActionResult Submit(IEnumerable<IFormFile> files)
 
 ## Asynchronous Mode
 
-An Upload in the asynchronous mode requires dedicated server handlers to store and remove uploaded files. Files are upload immediately or, optionally, after the confirmation from the user. The upload request is executed out-of-band without interrupting the page flow.
-
-The asynchronous mode is implemented through the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API).
+An Upload in the asynchronous mode requires dedicated server handlers to store and remove uploaded files. Files are upload immediately or, optionally, after the confirmation from the user. The upload request is executed out-of-band without interrupting the page flow. The asynchronous mode is implemented through the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API).
 
 ```Razor
 @(Html.Kendo().Upload()
@@ -87,7 +85,7 @@ public UploadController(IHostingEnvironment hostingEnvironment)
 
 public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
 {
-    // The Name of the Upload component is "files"
+    // The Name of the Upload component is "files".
     if (files != null)
     {
         foreach (var file in files)
@@ -99,7 +97,7 @@ public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
             var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
             var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
-            // The files are not actually saved in this demo
+            // The files are not actually saved in this demo.
             using (var fileStream = new FileStream(physicalPath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -107,13 +105,13 @@ public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
         }
     }
 
-    // Return an empty string to signify success
+    // Return an empty string to signify success.
     return Content("");
 }
 
 public ActionResult Remove(string[] fileNames)
 {
-    // The parameter of the Remove action must be called "fileNames"
+    // The parameter of the Remove action must be called "fileNames".
 
     if (fileNames != null)
     {
@@ -122,35 +120,29 @@ public ActionResult Remove(string[] fileNames)
             var fileName = Path.GetFileName(fullName);
             var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
 
-            // TODO: Verify user permissions
+            // TODO: Verify user permissions.
 
             if (System.IO.File.Exists(physicalPath))
             {
-                // The files are not actually removed in this demo
+                // The files are not actually removed in this demo.
                 // System.IO.File.Delete(physicalPath);
             }
         }
     }
 
-    // Return an empty string to signify success
+    // Return an empty string to signify success.
     return Content("");
 }
 ```
 
-### Save Handler
+### Handlers
 
 The `save` handler has to accept `POST` requests. The requests will contain one or more files with the same name as the `input`&mdash;for example, `"files[]"` in the previous `Controller` example. The handler is expected to return any of the following responses:
-
 * An empty response to signify success.
 * A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) event handler, again to signify success.
 * Any other response to signify failure.
 
-### Remove Handler
-
-The `remove` handler has to accept `POST` requests. The requests will contain one or more text fields with the `"fileNames[]"` name.
-
-The handler is expected to return any of the following responses:
-
+The `remove` handler has to accept `POST` requests. The requests will contain one or more text fields with the `"fileNames[]"` name. The handler is expected to return any of the following responses:
 * An empty response to signify success.
 * A JSON string with `"text/plain"` content encoding. The de-serialized object is available in the [`success`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) event handler, again to signify success.
 * Any other response to signify failure.
@@ -163,12 +155,5 @@ The uploaded files must be handled both in the `save` handler and in the `form` 
 
 ## See Also
 
-* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Sending and Receiving of Metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
-* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
+* [Asynchronous Mode of Operation by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/async)
 * [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
-* [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
-* [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)

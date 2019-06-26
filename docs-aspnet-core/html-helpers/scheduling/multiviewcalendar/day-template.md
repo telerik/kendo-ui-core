@@ -12,8 +12,6 @@ The MultiViewCalendar enables you to customize the rendered day for the `month` 
 
 The following example demonstrates how to create a MultiViewCalendar by using a custom template.
 
-###### Example
-
 ```Razor
 
         @(Html.Kendo().MultiViewCalendar()
@@ -33,5 +31,4 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
 
 ## See Also
 
-* [Overview of the Kendo UI jQuery MultiViewCalendar Widget](https://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
-* [UI for ASP.NET Core MultiViewCalendar live demo](https://demos.telerik.com/aspnet-core/multiviewcalendar)
+* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)

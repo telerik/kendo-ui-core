@@ -8,15 +8,11 @@ position: 1
 
 # Ajax Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
+You can configure the Kendo UI DropDownList for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
 
-> **Important**
->
 > The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
 1. Create an action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -24,8 +20,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
         }
 
 1. Create a new action method and pass the **Products** table as JSON result.
-
-    ###### Example
 
         public JsonResult GetProducts()
         {
@@ -35,8 +29,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
         }
 
 1. Add an Ajax-bound DropDownList.
-
-    ###### Example
 
         @(Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -56,5 +48,3 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 ## See Also
 
 * [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
-* [DropDownList HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview)
-* [DropDownList Official Demos](http://demos.telerik.com/aspnet-core/dropdownlist/index)

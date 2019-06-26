@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ComboBox | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: ComboBox Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/combobox
 slug: htmlhelpers_combobox_aspnetcore
@@ -9,13 +9,13 @@ position: 0
 
 # ComboBox HtmlHelper Overview
 
-The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget.
+The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) displays a list of values and allows for a single selection from the list.
 
-It allows you to configure the Kendo UI ComboBox widget from server-side code. The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
+The user input is restricted within the predefined options.
 
-For more information on the HtmlHelper, refer to the article on the [ComboBox HtmlHelper for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/combobox/overview).
+The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget. For more information on the ComboBox HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/combobox/overview).
 
-## Basic Usage
+## Initializing the ComboBox
 
 The following example demonstrates how to define the ComboBox by using the ComboBox HtmlHelper.
 
@@ -54,9 +54,9 @@ The following example demonstrates how to define the ComboBox by using the Combo
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the ComboBox HtmlHelper and how to get the ComboBox instance.
+The following example demonstrates the basic configuration of the ComboBox HtmlHelper.
 
 ```
     @(Html.Kendo().ComboBox()
@@ -92,22 +92,27 @@ The following example demonstrates the basic configuration of the ComboBox HtmlH
 
     <script type="text/javascript">
         $(function () {
-            //Notice that the Name() of the ComboBox is used to get its client-side instance.
+            // The Name() of the ComboBox is used to get its client-side instance.
             var combobox = $("#combobox").data("kendoComboBox");
             console.log(combobox);
         });
     </script>
 ```
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all ComboBox [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#events).
+* [Binding]({% slug htmlhelpers_combobox_databinding_aspnetcore %})
+* [Grouping]({% slug htmlhelpers_combobox_grouping_aspnetcore %})
+* [Virtualization]({% slug htmlhelpers_combobox_virtualization_aspnetcore %})
+* [Templates]({% slug htmlhelpers_combobox_templates_aspnetcore %})
 
-### By Handler Name
+## Events
+
+You can subscribe to all ComboBox [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#events). For a complete example on basic ComboBox events, refer to the [demo on using the events of the ComboBox](https://demos.telerik.com/aspnet-core/combobox/events).
+
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
-
-###### Example
 
         @(Html.Kendo().ComboBox()
           .Name("combobox")
@@ -127,11 +132,9 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
         </script>
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
         @(Html.Kendo().ComboBox()
           .Name("combobox")
@@ -152,10 +155,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
+* [Basic Usage of the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox)
+* [Using the API of the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/api)
 * [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-* [ComboBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/combobox/overview)
-* [ComboBox Official Demos](http://demos.telerik.com/aspnet-core/combobox/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

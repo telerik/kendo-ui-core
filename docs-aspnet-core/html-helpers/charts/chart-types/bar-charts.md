@@ -9,19 +9,22 @@ slug: barcharts_aspnetcore_htmlhelper
 
 The [Kendo UI Bar Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/bar-charts/index) displays data through horizontal or vertical bars whose lengths vary according to their value.
 
+## Getting Started
+
 Bar Charts are suitable for displaying a comparison between sets of data&mdash;for example, a summary of unique and total site visitors over a certain period of time.
 
 The [Kendo UI Bullet Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/bullet-charts/index) is a variation of a Kendo UI Bar Chart. You can use it as a replacement for dashboard gauges and meters. The bullet graph compares a given quantitative measure, such as temperature, against qualitative ranges, such as warm, hot, mild, cool, chilly, cold, and so on, and a symbol marker that encodes the comparative measure, such as the max temperature a year ago.
 
 The [Kendo UI Range Bar Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/range-bar-charts/index) is yet another variation of the Kendo UI Bar Chart. It displays data as bars where each bar represents a value range that spans between its minimum and maximum levels. A Range Bar type has floating bars unlike the standard Kendo UI Bar Chart that has bars that are anchored to its `x`-axis.
 
-## Configuration
+To create a Bar Chart, use `Column` or `Bar` in the `Series` configuration.
 
-### Column Chart
+* [Defining a Column Chart](#defining-the-column-chart)
+* [Defining a Bar Chart](#defining-the-bar-chart)
+
+## Defining the Column Chart
 
 The [Kendo UI Column Chart for ASP.NET Core](https://demos.telerik.com/aspnet-core/bar-charts/column) is rendered when the `Series` is `Column`.
-
-###### Example
 
     @(Html.Kendo().Chart()
         .Name("chart")
@@ -38,16 +41,13 @@ The [Kendo UI Column Chart for ASP.NET Core](https://demos.telerik.com/aspnet-co
         )
     )
 
-
 **Figure 1: A sample Column Chart with categories**
 
 ![Column Chart with categories](images/chart-column-categories.png)
 
-### Bar Chart
+## Defining the Bar Chart
 
-Setting the `Series` object to `"Bar"` renders horizontal bars, as demonstrated in the following example.
-
-###### Example
+Setting the `Series` object to `"Bar"` renders horizontal bars.
 
     @(Html.Kendo().Chart()
        .Name("chart")
@@ -70,11 +70,6 @@ Setting the `Series` object to `"Bar"` renders horizontal bars, as demonstrated 
 
 ## See Also
 
-* [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
-* [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %})
-* [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})
-* [BoxPlot Charts]({% slug boxplotcharts_aspnetcore_htmlhelper %})
-* [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %})
-* [Stock Charts]({% slug overview_stockcharthelper_aspnetcore %})
-* [TreeMap]({% slug overview_treemaphelper_aspnetcore %})
-* [Chart JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Bar Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bar-charts/index)
+* [Basic Usage of the Range Bar Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/range-bar-charts/index)
+* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)

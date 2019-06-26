@@ -8,15 +8,11 @@ position: 1
 
 # Batch Editing
 
-This article demonstrates how to enable cell editing mode and batch updates in Kendo UI Grid for ASP.NET Core.
+You can enable the cell edit mode and the batch updates for the Kendo UI Grid for ASP.NET Core.
 
-## Configuration
-
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET Core to do cell editing and batch updates.
+For a runnable example, refer to the [demo on batch editing of the Grid](https://demos.telerik.com/aspnet-core/grid/editing).
 
 1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.
-
-    ###### Example
 
             public class ProductViewModel
             {
@@ -31,8 +27,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1.  Open `HomeController.cs` and add a new action method which will return the **Products** as JSON. The Grid will make Ajax requests to this action.
 
-    ###### Example
-
             public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
             {
 				//ToDataSourceResult works with IEnumerable and IQueryable
@@ -45,8 +39,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the new data items. Name the method `Products_Create`.
-
-    ###### Example
 
             public ActionResult Products_Create([DataSourceRequest]DataSourceRequest request, [Bind(Prefix="models")]IEnumerable<ProductViewModel> products)
             {
@@ -84,11 +76,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the updated data items. Name the method `Products_Update`.
 
-    ###### Example
-
             public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
             {
-                // Will keep the updated entitites here. Used to return the result later.
+                // Will keep the updated entities here. Used to return the result later.
                 var entities = new List<Product>();
                 if (ModelState.IsValid)
                 {
@@ -127,11 +117,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the deleted data items. Name the method `Products_Destroy`.
 
-    ###### Example
-
             public ActionResult Products_Destroy([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
             {
-                // Will keep the destroyed entitites here. Used to return the result later.
+                // Will keep the destroyed entities here. Used to return the result later.
                 var entities = new List<Product>();
                 if (ModelState.IsValid)
                 {
@@ -152,7 +140,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                             northwind.Products.Attach(entity);
                             // Delete the entity.
                             northwind.Products.Remove(entity);
-                            // Or use DeleteObject if using a previous versoin of Entity Framework.
+                            // Or use DeleteObject if using a previous version of Entity Framework.
                             // northwind.Products.DeleteObject(entity);
                         }
                         // Delete the entity in the database.
@@ -168,9 +156,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 }));
             }
 
-1. In the view, configure the Grid to use the action methods created in the previous steps.
-
-    ###### Example
+1. In the view, configure the Grid to use the action methods created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
             @(Html.Kendo().Grid<KendoGridBatchEditing.Models.ProductViewModel>()
                   .Name("grid")
@@ -206,9 +192,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                   .Pageable()
             )
 
-The **Create**, **Update** and **Destroy** action methods must return a collection with the modified/deleted records, which will allow the DataSource to apply the changes accordingly. The **Create** method should return collection with the created records with the assigned ID field.
-
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
+* [Batch Editing by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/editing)
+* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

@@ -8,15 +8,13 @@ position: 2
 
 # Ajax Editing
 
-This article demonstrates how to define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET Core for Ajax editing.
+You can define commands and set the edit mode to configure the Kendo UI Grid for ASP.NET Core for Ajax editing.
 
-## Configuration
+For runnable examples, refer to the [demos on implementing the editing approaches in the Grid](https://demos.telerik.com/aspnet-core/grid/editing).
 
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET Core to do Ajax editing to the Northwind database, the **Products** table.
+## Setting the Ajax Edit Mode
 
-1. Add a new class to the `~/Models` folder. For the following example we will name it `ProductViewModel`.
-
-    ###### Example
+1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.
 
             public class ProductViewModel
             {
@@ -31,11 +29,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Open `HomeController.cs` and add a new action method which will return the **Products** as JSON. The Grid will make Ajax requests to this action.
 
-    ###### Example
-
             public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
             {
-			    //ToDataSourceResult works with IEnumerable and IQueryable
+			    // ToDataSourceResult works with IEnumerable and IQueryable.
                 using (var northwind = new NorthwindEntities())
                 {
                     IQueryable<Product> products = northwind.Products;
@@ -45,8 +41,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the new data items. Name the method `Products_Create`.
-
-    ###### Example
 
             public ActionResult Products_Create([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
             {
@@ -68,13 +62,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                         product.ProductID = entity.ProductID;
                     }
                 }
-                // Return the inserted product. The grid needs the generated ProductID. Also return any validation errors.
+                // Return the inserted product. The Grid needs the generated ProductID. Also return any validation errors.
                 return Json(new[] { product }.ToDataSourceResult(request, ModelState));
             }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the updated data items. Name the method `Products_Update`.
-
-    ###### Example
 
             public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
             {
@@ -105,8 +97,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the deleted data items. Name the method `Products_Destroy`.
 
-    ###### Example
-
             public ActionResult Products_Destroy([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
             {
                 if (ModelState.IsValid)
@@ -134,9 +124,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 return Json(new[] { product }.ToDataSourceResult(request, ModelState));
             }
 
-1. In the view, configure the Grid to use the action methods created in the previous steps.
-
-    ###### Example
+1. In the view, configure the Grid to use the action methods created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
           @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
                 .Name("grid")
@@ -168,16 +156,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 .Pageable()
           )		  
 
-The **Create**, **Update** and **Destroy** action methods must return the modified or deleted record which will allow the DataSource to apply the changes accordingly. The **Create** method will return the created record with the assigned ID field value.
+## Handling ModelState Errors
 
-### ModelState Errors
-
-Server validation is often needed when performing editing. The section below demonstrates how to use the `AddModelError` method with the Kendo UI Grid for ASP.NET Core.
+Server validation is often needed when performing editing. The following section demonstrates how to use the `AddModelError` method with the Kendo UI Grid for ASP.NET Core.
 
 1. Perform all steps from the previous section.
 1. Add some validation code to the `Products_Update` method. For example, check the length of the `ProductName` property.
-
-    ###### Example
 
             public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
             {
@@ -197,7 +181,7 @@ Server validation is often needed when performing editing. The section below dem
                                       UnitsInStock = product.UnitsInStock
                         };
 
-                        // Attach the entity
+                        // Attach the entity.
                         northwind.Products.Attach(entity);
                         // Change its state to Modified so Entity Framework can update the existing product instead of creating a new one.
                         northwind.Entry(entity).State = EntityState.Modified;
@@ -214,8 +198,6 @@ Server validation is often needed when performing editing. The section below dem
             }
 
 1. Subscribe to the [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
-
-    ###### Example
 
           @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
                 .Name("grid")
@@ -268,8 +250,7 @@ Server validation is often needed when performing editing. The section below dem
           }
           </script>
 
-
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
+* [Editing Approaches by the Grid (Demos)](https://demos.telerik.com/aspnet-core/grid/editing)
+* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

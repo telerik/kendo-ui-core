@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Slider | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Slider Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Slider tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/slider, /aspnet-core/helpers/tag-helpers/slider
 slug: taghelpers_slider_aspnetcore
@@ -9,13 +9,17 @@ position: 1
 
 # Slider Tag Helper Overview
 
-The Slider tag helper helps you configure the Kendo UI Slider widget in ASP.NET Core applications.
+The Kendo UI Slider provides a rich input for selecting numeric values.
 
-## Basic Usage
+The Slider can be either of the following types:
+* Kendo UI Slider for ASP.NET Core, which presents one handle and two opposing buttons for selecting a single numeric value.
+* Kendo UI RangeSlider for ASP.NET Core, which present two handlers for defining a range of numeric values.
+
+The Slider tag helper extension is a server-side wrapper for the [Kendo UI Slider](https://demos.telerik.com/kendo-ui/slider/index) widget and enables you to configure the Kendo UI Slider widget in ASP.NET Core applications.
+
+## Initializing the Slider
 
 The following example demonstrates how to define the Slider by using the Slider tag helper.
-
-###### Example
 
         <kendo-slider name="slider"
                       increase-button-title="Right"
@@ -25,7 +29,7 @@ The following example demonstrates how to define the Slider by using the Slider 
                       large-step="10"
                       value="18" class="temperature" title="slider"></kendo-slider>
 
-## Configuration
+## Basic Configuration
 
 The Slider tag helper configuration options are passed as attributes of the tag.
 
@@ -55,8 +59,6 @@ The Slider tag helper configuration options are passed as attributes of the tag.
 
 The following example demonstrates how to define the RangeSlider by using the RangeSlider tag helper.
 
-###### Example
-
         <kendo-rangeslider name="rangeslider" class="humidity"
                            min="0" max="10"
                            small-step="1"
@@ -64,7 +66,5 @@ The following example demonstrates how to define the RangeSlider by using the Ra
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Slider Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/tag-helper)
+* [JavaScript API Reference of the Slider](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)

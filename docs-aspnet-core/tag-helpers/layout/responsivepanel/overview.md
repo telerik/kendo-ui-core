@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ResponsivePanel | Telerik UI for ASP.NET Core Tag Helpers
+page_title: ResponsivePanel Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Knedo UI ResponsivePanel tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/responsive-panel, /aspnet-core/helpers/tag-helpers/responsive-panel
 slug: taghelpers_responsivepanel_aspnetcore
@@ -9,13 +9,13 @@ position: 1
 
 # ResponsivePanel Tag Helper Overview
 
-The ResponsivePanel tag helper helps you configure the Kendo UI ResponsivePanel widget in ASP.NET Core applications.
+The Kendo UI ResponsivePanel widget allows you to hide part of a page content on small screens.
 
-## Basic Usage
+The ResponsivePanel tag helper extension is a server-side wrapper for the [Kendo UI ResponsivePanel](https://demos.telerik.com/kendo-ui/responsive-panel/index) widget and enables you to configure the Kendo UI ResponsivePanel widget in ASP.NET Core applications.
+
+## Initializing the ResponsivePanel
 
 The following example demonstrates how to define the ResponsivePanel by using the ResponsivePanel tag helper.
-
-###### Example
 
         <kendo-responsivepanel name="slidebar" breakpoint="1000" orientation="left">
             <div id="profile" class="widget">
@@ -49,7 +49,7 @@ The following example demonstrates how to define the ResponsivePanel by using th
         </kendo-responsivepanel>
 
 
-## Configuration
+## Basic Configuration
 
 The configuration options of the ResponsivePanel tag helper are passed as attributes of the tag.
 
@@ -126,7 +126,5 @@ The configuration options of the ResponsivePanel tag helper are passed as attrib
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the ResponsivePanel Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/responsive-panel/index)
+* [JavaScript API Reference of the ResponsivePanel](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel)

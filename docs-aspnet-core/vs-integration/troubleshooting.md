@@ -8,43 +8,36 @@ position: 4
 
 # Troubleshooting
 
-## 
+This article provides solutions for common issues you may encounter while working with the UI for ASP.NET Core Visual Studio (VS) Extensions.
 
-*Problem:*
+## The Telerik menu is missing in Visual Studio
 
-**Missing Telerik menu in Visual Studio**
+**Cause**
 
-*Reason:*
+The Visual Studio Extensions are disabled or not correctly installed.
 
-Telerik Visual Studio Extensions are disabled or not installed correctly.
+**Solution**
 
-*Suggested solution 1(Extension is Disabled):*
+If the extension is disabled:
 
-* Open Visual Studio;
-
-* Go to menu Tools - > Extensions and Updates...(for Visual Studio 2019 Extensions - > Manage Extensions)
-
-* Open the Installed tab on the left​
-
-* Search for Telerik ASP.NET Core VSExtensions and make sure they are Enabled
+1. Open Visual Studio.
+1. From the **Menu**, select **Tools** > **Extensions and Updates...**. For Visual Studio 2019, select **Extensions** > **Manage Extensions**.
+1. Open the **Installed** tab.
+1. Search for **Telerik ASP.NET Core VSExtensions** and make sure they are **Enabled**.
 
 ![vsextensions-disabled](images/vsextensions-disabled.png)
 
-*Suggested solution 2(Extension is not installed):*
+If the extension is not correctly installed:
 
-* Open Visual Studio;
+1. Open Visual Studio.
+1. From the **Menu**, select **Tools** > **Extensions and Updates...**. For Visual Studio 2019, select **Extensions** > **Manage Extensions**.
+1. Open the **Online** tab.
+1. Search for **Telerik ASP.NET Core VSExtensions**>
+1. Download and install the extensions.
 
-* Go to menu Tools - > Extensions and Updates...(for Visual Studio 2019 Extensions - > Manage Extensions)
+If after you apply the described approaches the issue persists, contact the Support Team at Progress after you generate Visual Studio [ActivityLog](https://docs.microsoft.com/en-us/visualstudio/ide/reference/log-devenv-exe?view=vs-2019) file:
 
-* Open the Online tab on the left​
-
-* Search for Telerik ASP.NET Core VSExtensions
-
-* Download and Install the extensions
-
-
->important If the article does not help solving your problem, please follow these steps to generate Visual Studio [ActivityLog](https://docs.microsoft.com/en-us/visualstudio/ide/reference/log-devenv-exe?view=vs-2019) file before contacting our support:
->* Open [Developer Command prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs) for Visual Studio 20xx under **Administrative rights**.
->* Execute the command - devenv /log %userprofile%\desktop\ActivityLog.xml . This will start Visual Studio and create logs on your Desktop.
->* Reproduce the problem
->* Attach the **Activitylog** files when you contact our support.
+1. Under **Administrative rights**, open the [**Developer Command** prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs) for Visual Studio 20xx.
+1. Execute the `devenv /log %userprofile%\desktop\ActivityLog.xml` command to start Visual Studio and create logs on your Desktop.
+1. Reproduce the issue.
+1. Attach the `Activitylog` files when you contact our support.

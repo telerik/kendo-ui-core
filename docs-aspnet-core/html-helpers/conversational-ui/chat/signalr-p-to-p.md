@@ -1,20 +1,23 @@
 ---
-title: Peer-to-Peer Chat with SignalR
-page_title: Peer-to-Peer Chat with SignalR | Kendo UI Chat HtmlHelper for ASP.NET Core
+title: Peer-to-Peer Chat
+page_title: Peer-to-Peer Chat | Kendo UI Chat HtmlHelper for ASP.NET Core
 description: "Learn how to create a peer-to-peer Kendo UI Chat with ASP.NET Core SignalR."
 slug: htmlhelpers_chat_aspnetcore_signalr
 position: 2
 ---
 
-# Peer-to-Peer Chat with SignalR
+# Peer-to-Peer Chat
 
-This article demonstrates how to configure a Telerik UI for ASP.NET Core Chat HTML helper and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
+You can configure a Chat HtmlHelper for ASP.NET Core and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
 
-## Implementing the SignalR Server Hub
+To create the Peer-to-Peer Chat you have to implement the SignalR Hub server and, then, to implement the application client:
 
-This section explains how to implement the SignalR Chat Hub server.
+1. [Create the new application](#creating-the-new-application)
+1. [Configure the SignalR Hub server](#configuring-the-signalr-hub-server)
+1. [Initialize the Chat](#initializing-the-chat)
+1. [Configure the SignalR client Hub proxy](#configuring-the-signalr-client-hub-proxy)
 
-### Creating the New Application
+## Creating the New Application
 
 Depending on your preferred editor, use any of the following approaches:
 
@@ -22,9 +25,11 @@ Depending on your preferred editor, use any of the following approaches:
 * [Create a new .Net Core application in Visual Studio and include the Telerik UI for ASP.NET Core package]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Create a new .Net Core application with the CLI and include the Telerik UI for ASP.NET Core package]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 
-### Configuring the SignalR Hub
+## Configuring the SignalR Hub Server
 
 1. Modify `Startup.cs`. The new lines have to be added to the bottom of the `ConfigureServices` and `Configure` methods.
+
+    > If in the `app.UseSignalR` line the editor throws an `IApplicationBuilder does not contain definition for UseSignalR` error, add the Microsoft.AspNetCore.SignalR v.1.0.0 package to the project.
 
     ```
     using Microsoft.AspNetCore.Builder;
@@ -39,7 +44,7 @@ Depending on your preferred editor, use any of the following approaches:
             {
                 ...
 
-                // Add the SignalR service
+                // Add the SignalR service.
                 services.AddSignalR();
             }
 
@@ -47,7 +52,7 @@ Depending on your preferred editor, use any of the following approaches:
             {
                 ...
 
-                // Point to the route that will return the SignalR Hub
+                // Point to the route that will return the SignalR Hub.
                 app.UseSignalR(routes =>
                 {
                     routes.MapHub<ChatHub>("/chat");
@@ -56,10 +61,6 @@ Depending on your preferred editor, use any of the following approaches:
         }
     }
     ```
-
-    > **Important**
-    >
-    > If in the `app.UseSignalR` line the editor throws an `IApplicationBuilder does not contain definition for UseSignalR` error, add the Microsoft.AspNetCore.SignalR v.1.0.0 package to the project.
 
 1. Add a `ChatHub` class to the project.
 
@@ -87,11 +88,7 @@ Depending on your preferred editor, use any of the following approaches:
     }
     ```
 
-## Implementing the Application Client
-
-This section explains how to implement the P2P Chat application client.
-
-### Initializing the Chat
+## Initializing the Chat
 
 In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events.
 
@@ -130,7 +127,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 </script>
 ```
 
-### Configuring the SignalR Client Hub Proxy
+## Configuring the SignalR Client Hub Proxy
 
 1. Get the SignalR client script from NPM.
 
@@ -148,7 +145,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 1. Initialize the SignalR Hub proxy.
 
     ```
-    // Point to the Hub remote endpoint
+    // Point to the Hub remote endpoint.
     window.chatHub = new signalR.HubConnectionBuilder()
         .withUrl('/chat')
         .build();
@@ -163,7 +160,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
         });
     ```
 
-1. Attach the event handlers for the respective remote hub actions.
+1. Attach the event handlers for the respective remote Hub actions.
 
     ```
     $(document).ready(function() {
@@ -175,23 +172,21 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
                 text: message
             };
 
-            // Render the received message in the Chat
+            // Render the received message in the Chat.
             chat.renderMessage(message, sender);
         });
 
         chatHub.on('typing', function(sender) {
-            // Display typing notification in the Chat
+            // Display typing notification in the Chat.
             chat.renderMessage({ type: 'typing' }, sender);
         });
     });
     ```
 
-1. Start the Peer-to-Peer Chat Application.
+1. Start the Peer-to-Peer Chat application.
 
 ## See Also
 
-* [Overview of the Chat TagHelper for .Net Core]({% slug taghelpers_chat_aspnetcore %})
-* [Overview of the Chat HtmlHelper for .Net Core]({% slug htmlhelpers_chat_aspnetcore %})
-* [Overview of the Kendo UI Chat Widget](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)
-* [JavaScript API Reference of the Chat](http://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
-* [Chat HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chat/overview)
+* [Basic Usage of the Chat HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chat/index)
+* [Basic Usage of the Kendo UI Chat Widget (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
+* [Overview of the Kendo UI Chat Widget](https://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)

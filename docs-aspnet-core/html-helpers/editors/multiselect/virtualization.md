@@ -12,13 +12,9 @@ Virtualization is useful for displaying large data sets.
 
 The UI virtualization technique uses a fixed amount of list items in the popup list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones. For more information, refer to the article on [virtualization in the ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
 
-> **Important**
->
 > If the `AutoBind` option of the MultiSelect is set to `false`, the widget will be able to display pre-selected items only after it is focused.
 
 1. Create the `Read` and `ValueMapper` actions.
-
-    ###### Example
 
         public IActionResult Index()
         {
@@ -68,8 +64,6 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
         }
 
 1. Add a MultiSelect to the view and configure it to use virtualization.
-
-    ###### Example
 
         @model MvcApplication1.Models.ProductViewModel
 
@@ -121,9 +115,7 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             }
         </script>
 
-
 ## See Also
 
+* [Virtualization by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/virtualization)
 * [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
-* [MultiSelect HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/multiselect/overview)
-* [MultiSelect Official Demos](http://demos.telerik.com/aspnet-core/multiselect/index)

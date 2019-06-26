@@ -1,15 +1,15 @@
 ---
 title: Getting Started with CLI
-page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Command line interface | Telerik UI for ASP.NET Core
+page_title: Getting Started with the Command Line Interface | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and the Command line interface."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /aspnet-core/getting-started/getting-started-linux, /aspnet-core/getting-started/getting-started-vscode
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
 position: 2
 ---
 
-# Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and the Command Line Interface
+# Getting Started with the Command Line Interface
 
-This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core by using the command line interface.
+This article demonstrates how to configure a Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core project by using the command line interface (CLI).
 
 The following approach is applicable when you work on .Net Core projects in [Visual Studio Code](https://code.visualstudio.com/) or any other code editor. It is also platform-agnostic which means that you can follow the same steps on MacOS, Linux, or Windows machines.
 
@@ -19,8 +19,6 @@ The following approach is applicable when you work on .Net Core projects in [Vis
 
 ## Creating the Application
 
-> **Important**
->
 > If you are configuring an existing project, skip this step.
 
 Below are listed the steps for you to follow when creating an ASP.NET Core web app.
@@ -36,8 +34,6 @@ Below are listed the steps for you to follow when creating an ASP.NET Core web a
 
 3. Run [`dotnet restore`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore) to restore the project template dependencies. As a result, the NuGet packages are downloaded.
 
-    > **Important**
-    >
     > For a list of current commands, refer to the [guide on getting started with .NET Core](https://docs.asp.net/en/latest/getting-started.html).
 
 4. Run [`dotnet run`](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-run) to start the application. The following example demonstrates a sample response that you are expected to receive.

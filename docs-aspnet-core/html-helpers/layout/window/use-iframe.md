@@ -10,13 +10,10 @@ position: 6
 
 You can force the Window to display its content in an `<iframe>` element by using the `Iframe(true)` configuration method.
 
-> **Important**
 > * Loading HTML fragments (partial content) inside an `iframe` is not correct. iframe pages have to include a `DOCTYPE`, `html`, `head`, and `body` tags, just like a standard web page does.
 > * Avoid using iframes on iOS devices because they are not scrollable and always expand to match the content.
 
 The following example demonstrates how to access the `window` and `document` objects inside the `iframe`. To achieve this, the nested page has to belong to the same domain as the main page. The `iframe` is accessed through the [`element`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/fields/element) of the Window.
-
-###### Example
 
     @(Html.Kendo().Window()
         .Name("window")
@@ -41,9 +38,4 @@ The following example demonstrates how to access the `window` and `document` obj
 
 ## See Also
 
-* [Overview of Window HTML helper]({% slug htmlhelpers_window_aspnetcore %})
-* [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})
-* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})
-* [Constraining Position]({% slug htmlhelpers_window_constrain_aspnetcore %})
-* [Loading Content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
-* [Integration with Forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+* [JavaScript API Reference of the Window](http://docs.telerik.com/kendo-ui/api/javascript/ui/window)

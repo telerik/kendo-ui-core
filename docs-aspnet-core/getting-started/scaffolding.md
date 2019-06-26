@@ -26,8 +26,6 @@ For more information on using the scaffolding by Microsoft, refer to the followi
 - [Add a model to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-2.1)
 - [Add a model to a Razor Pages app in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model?view=aspnetcore-2.1)
 
-> **Important**
->
 > The Scaffolding features allow you to generate templates based on classes. They are different from the editor templates that are used for editing by widgets such as the Grid, for example. The editor templates are located in your installation folder at `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <your version>\wrappers\aspnetcore\EditorTemplates`.
 
 ## Prerequisites
@@ -61,7 +59,7 @@ To install the UI for ASP.NET Core Scaffolding templates and extensions in your 
 
         ![Exclude Templatse folder](images/exclude-templates-from-project-GUI.png)
 
-As of the 2019 R1 release, the **Create New Project Wizard**, which comes with the Telerik UI for ASP.NET Core [Visual Studio Extensions](https://docs.telerik.com/aspnet-core/vs-integration/introduction), automatically creates the `Templates` folder in the root of the application. For more information on the wizard, refer to the article on [creating projects](https://docs.telerik.com/aspnet-core/vs-integration/new-project-wizard). 
+As of the 2019 R1 release, the **Create New Project Wizard**, which comes with the Telerik UI for ASP.NET Core [Visual Studio Extensions](https://docs.telerik.com/aspnet-core/vs-integration/introduction), automatically creates the `Templates` folder in the root of the application. For more information on the wizard, refer to the article on [creating projects](https://docs.telerik.com/aspnet-core/vs-integration/new-project-wizard).
 
 > As of .NET Core 2.2, when using Bootstrap 3, the views folder used is `ViewGenerator_Versioned\Bootstrap3\`. If you are upgrading your project make sure to update the folder's name.
 

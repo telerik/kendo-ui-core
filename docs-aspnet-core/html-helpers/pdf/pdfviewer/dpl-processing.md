@@ -8,25 +8,21 @@ position: 3
 
 # DPL Processing
 
-The PDFViewer can be configured to use [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction) for PDF processing.
+You can configure the PDFViewer to use the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction) for PDF processing.
 
-> **Important**
->
-> DPL Processing is BETA version and has the following limitations:
-> * Clipping elements and Gradients are currently not supported.
+> DPL Processing is in its beta version and has the following limitations:
+> * The clipping of elements and gradients is currently not supported.
 > * SVG or encoded images in other formats might not render correctly.
+
+## Requirements
+
+* DPL Processing depends on the `Telerik.Web.PDF` assembly.
+* To use DPL Processing in a project, it must target 4.6.2 .NET Framework.
+* The `Read.Url` option is mandatory, the `Open` and `Download` options are mandatory if the respective tools are displayed in the toolbar.
 
 ## Basic Configuration
 
-**Requirements**
-
-* DPL Processing depends on the `Telerik.Web.PDF` assembly.
-* To use DPL Processing in a project, it must target 4.6.2 .NET Framework. 
-* The `Read.Url` option is mandatory, the `Open` and `Download` options are mandatory if the respective tools are displayed in the toolbar.
-
-An example of a PDFViewer widget configured to use DPL Processing.
-
-###### Example
+The followin example demonstrates how to configure the PDFViewer to use DPL Processing.
 
 ```
     @(Html.Kendo().PDFViewer()
@@ -50,7 +46,5 @@ An example of a PDFViewer widget configured to use DPL Processing.
 
 ## See Also
 
-* [PDFViewer Overview]({% slug htmlhelpers_pdfviewer_aspnetcore %})
-* [PDF.JS Processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore %})
-
-For runnable examples on Kendo UI PDFViewer, refer to the [Telerik UI for ASP.NET Core Demos site](http://demos.telerik.com/aspnet-core/pdfviewer/index).
+* [DPL Processing by the PDFViewer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/dpl-processing)
+* [JavaScript API Reference of the PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)

@@ -14,11 +14,7 @@ As their major advantage, the VS extensions handle the [creation of projects]({%
 
 The Progress&reg; Telerik&reg; UI for ASP.NET Core VS Extensions support VS 2017 and are distributed with the Progress&reg; Telerik&reg; UI for ASP.NET Core installer.
 
-> **Important**
->
 > VS Express editions are not supported.
-
-## Adding Project Templates
 
 To access the VS Extensions, use the **Telerik | Telerik UI for ASP.NET Core** menu.
 

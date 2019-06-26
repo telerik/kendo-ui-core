@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Chart | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Chart Overview | Telerik UI for ASP.NET Core Tag Helpers
 description: "Learn the basics when working with the Kendo UI Chart tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/chart
 slug: taghelpers_chart_aspnetcore
@@ -9,12 +9,11 @@ position: 1
 
 # Charts Tag Helper Overview
 
-The Chart tag helper helps you configure the Kendo UI Chart widget in ASP.NET Core applications.
+The [Kendo UI Charts](http://demos.telerik.com/aspnet-core/) use modern browser technologies to render high-quality data visualizations.
 
-The [Kendo UI Charts](http://demos.telerik.com/aspnet-core/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
+All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
 
-Kendo UI Charts support the following series types:
-
+The Charts support the following series types:
 * Bar and Column
 * Line and Vertical Line
 * Area and Vertical Area
@@ -25,16 +24,15 @@ Kendo UI Charts support the following series types:
 * Bubble
 * Radar and Polar
 
+The Charts tag helper extension is a server-side wrapper for the [Kendo UI Charts](http://demos.telerik.com/kendo-ui/area-charts/index) widget and enable you to configure the Kendo UI Chart widget in ASP.NET Core applications.
 
-## Basic Usage
+## Initializing the Chart
 
 The following example demonstrates how to define the Chart by using the Chart tag helper.
 
-###### Example
-
     <kendo-chart name="chart"></kendo-chart>
 
-## Configuration
+## Basic Configuration
 
 The Chart tag helper configuration options are passed as attributes of the tag. The following **tagHelper** and **razor** configurations are equivalent.
 
@@ -99,7 +97,7 @@ The Chart tag helper configuration options are passed as attributes of the tag. 
         .Numeric()
             .Labels(labels => labels.Format("{0}%"))
 
-            // Move the label-axis all the way down the value axis
+            // Move the label-axis all the way down the value axis.
             .AxisCrossingValue(0, int.MinValue)
     )
     .Tooltip(tooltip => tooltip
@@ -112,7 +110,6 @@ The Chart tag helper configuration options are passed as attributes of the tag. 
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Kendo UI for jQuery Chart Series Types](https://docs.telerik.com/kendo-ui/controls/charts/chart-types/chart-types-compatibility)
+* [Basic Usage of the Kendo UI Area Charts Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
+* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)

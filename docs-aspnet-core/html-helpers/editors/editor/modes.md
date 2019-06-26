@@ -14,8 +14,6 @@ Depending on the element from which the Editor is initiated, it provides two typ
 
 If you use the default element for initializing the Editor (the `<textarea>` element), the Editor assumes its classic mode. The `textarea` is not visible and is used to hold the value of the widget. You can type in the `contenteditable iframe` that is created.
 
-###### Example
-
 ```
 @(Html.Kendo().Editor()
     .Name("editor")
@@ -27,9 +25,7 @@ The classic Editor posts its value automatically because it is based on a `form`
 
 ## Inline Mode
 
-If you use the `Tag()` method of the Editor HTML helper with a `"div"` parameter, the Editor assumes its inline mode. The `<div>` element is content-editable and is used by the widget to return its value.
-
-###### Example
+If you use the `Tag()` method of the Editor HTML helper with a `"div"` parameter, the Editor assumes its inline mode. The `<div>` element is content-editable and is used by the widget to return its value. For a runnable example, refer to the [demo on inline editing by the Editor](https://demos.telerik.com/aspnet-core/editor/inline-editing).
 
 ```
 @(Html.Kendo().Editor()
@@ -41,22 +37,13 @@ If you use the `Tag()` method of the Editor HTML helper with a `"div"` parameter
 
 With the previous configuration, the tools of the Editor are only visible when the widget is focused. Its content resides on the main web page and the styling of the page influences the editable content.
 
-> **Important**
->
 > While it is possible to initialize an inline Editor from a non-`div` element, such as `p` or `h1`, it is strongly recommended that you use the `<div>` one. Do not use `<table>` elements for creating inline Editors because of Internet Explorer browser limitations.
 
 Editors that are instantiated from a `contentEditable` element will not post their value to the server when the value was submitted within a form. For more information on submitting Editor values, refer to the article about [posting the value of an inline Editor value](https://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting#inline-editor-value-is-not-posted-to-the-server#inline-value-is-not-posted-to-server). For more information, refer to the [demo on the inline Editor mode](https://demos.telerik.com/aspnet-core/editor/inline-editing).
 
-> **Important**
->
 > Because of the limited `iframe` support by the iOS Safari browser, it is recommended to use the inline Editor mode on iOS devices.
 
 ## See Also
 
-* [Overview of the Editor HtmlHelper]({% slug htmlhelpers_editor_aspnetcore %})
-* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
-* [Pasting Content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Serialize / Deserialize Content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
-* [Image Browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
-* [Immutable Elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
-* [Styling Content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+* [Inline Mode by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/inline-editing)
+* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)

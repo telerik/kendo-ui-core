@@ -8,11 +8,9 @@ position: 4
 
 # Custom Data Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
+You can configure the Kendo UI MultiSelect to use a custom DataSource and, in this way, bind to a `ToDataSourceResult` instance.
 
 1. Create an action method which renders the view.
-
-    ###### Example
 
         public IActionResult Index()
         {
@@ -20,8 +18,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
         }
 
 1. Create a new action method and pass the **Products** table as JSON result.
-
-    ###### Example
 
         public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
         {
@@ -32,12 +28,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 1. Add an Ajax-bound MultiSelect.
 
-    ###### Example
-
         @(Html.Kendo().MultiSelect()
-            .Name("productDropDownList") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
-            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .Name("productDropDownList") // The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") // Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") // Specify which property of the Product to be used by the MultiSelect as a value.
             .DataSource(source =>
             {
                 source.Custom()
@@ -58,5 +52,3 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 ## See Also
 
 * [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
-* [MultiSelect HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/multiselect/overview)
-* [MultiSelect Official Demos](http://demos.telerik.com/aspnet-core/multiselect/index)
