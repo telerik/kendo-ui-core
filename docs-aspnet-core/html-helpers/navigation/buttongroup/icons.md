@@ -23,7 +23,7 @@ You can configure the icons by using the `.Icon()` method of the ButtonGroup.
             }))
 ```
 
-The previous configuration is expected to produce the HTML output from the following example.
+This ButtonGroup configuration is expected to produce the following HTML output:
 
     <div class="k-button-group k-widget" data-role="buttongroup" id="player" role="group" tabindex="0">
         <span data-icon="play" aria-pressed="false" role="button" class="k-button k-button-icon">

@@ -60,11 +60,11 @@ The following table lists the available data types.
 
 Data Type | Column Template or Format | Editor | Parser
 :-------: | :----: | :--------: | :------------------:
-`string`| Displayed as text.  | `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Internal method. String conversion.
+`string`| Displayed as text.  | `<input type="text" class="k-textbox" name="fieldName" data-bind="value:fieldName">` | Internal method. String conversion.
 `number`| [`columns.format`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.format) can be used to format the number as currency `"{0:c2}"`, percentage `"{0:p0}"`, exponential `"{0:e4}"` or a custom format `"{0:0.00}"`. See all [`Number Formatting`](/framework/globalization/numberformatting) | [`kendo.ui.NumericTextBox`](/controls/editors/numerictextbox/overview) | [`kendo.parseFloat()`](/api/javascript/kendo/methods/parsefloat)
 `date` | [`columns.format`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.format) can be used to format the date as a short `"{0:d}"`, long `"{0:D}"`, full date/time `"{0:F}"` and many more standard and custom date patterns. See all [`Date Formatting`](/framework/globalization/dateformatting) | [`kendo.ui.DatePicker`](/controls/editors/datepicker/overview) | [`kendo.parseDate()`](/api/javascript/kendo/methods/parsedate)
 `boolean` | Displayed as lowercase text `true` or `false` | `<input type="checkbox" name="fieldName" data-type="boolean" data-bind="checked:fieldName">`| Internal method. Boolean conversion.
-`object` |  Arrays and Objects without templates are rendered as `[object Object]`.| `<input type="text" class="k-input k-textbox" name="fieldName" data-bind="value:fieldName">` | Not processed. The value is passed as is.
+`object` |  Arrays and Objects without templates are rendered as `[object Object]`.| `<input type="text" class="k-textbox" name="fieldName" data-bind="value:fieldName">` | Not processed. The value is passed as is.
 
     var dataSource = new kendo.data.DataSource({
         schema: {

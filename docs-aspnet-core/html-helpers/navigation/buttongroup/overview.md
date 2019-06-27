@@ -13,7 +13,7 @@ The Kendo UI ButtonGroup groups a series of buttons together on a single line.
 
 The ButtonGroup HtmlHelper extension is a server-side wrapper for the [Kendo UI ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/index) widget. For more information on the ButtonGroup HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/buttongroup/overview).
 
-## Initializing the ButtonGroup
+## Initialization
 
 The following example demonstrates how to initialize the ButtonGroup.
 

@@ -76,7 +76,7 @@ How can I use a different editor based on the column value in a Grid?
         });
 
         $("#grid").kendoGrid({
-          dataSource: dataSource,                          
+          dataSource: dataSource,
           columns: [
             { field: "id" , title: "ID" },
             { field:"type" , title: "Type" },
@@ -138,7 +138,7 @@ How can I use a different editor based on the column value in a Grid?
 
       function dropdownEditor(container, options) {
         switch (options.model.question_attr) {
-          case 1:          
+          case 1:
             $('<input name="' + options.field + '"/>')
             .appendTo(container)
             .kendoComboBox({
@@ -189,7 +189,7 @@ How can I use a different editor based on the column value in a Grid?
 
       function textEditor(container, options) {
         $('<input type="text" name="' + options.field + '"/>')
-        .addClass('k-input k-textbox')
+        .addClass('k-textbox')
         .appendTo(container)
         .blur(function(e) {
           if (e.originalEvent.target.value) {

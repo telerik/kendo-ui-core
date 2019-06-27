@@ -110,7 +110,7 @@ The following example demonstrates how to create custom templates for the **Even
   <script id="customEditorTemplate" type="text/x-kendo-template">
     <div class="k-edit-label"><label for="title">Title</label></div>
     <div data-container-for="title" class="k-edit-field">
-        <input type="text" class="k-input k-textbox" name="title" required="required" data-bind="value:title">
+        <input type="text" class="k-textbox" name="title" required="required" data-bind="value:title">
       </div>
     <div class="k-edit-label">
         <label for="start">Start</label>

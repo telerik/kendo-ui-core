@@ -23,7 +23,7 @@ As a result, if the event is not new, the template hides the **Title** field and
 <div data-bind="visible: isNew">
   <div class="k-edit-label"><label for="title">Title</label></div>
   <div data-container-for="title" class="k-edit-field">
-      <input type="text" class="k-input k-textbox" name="title" required="required" data-bind="value:title">
+      <input type="text" class="k-textbox" name="title" required="required" data-bind="value:title">
   </div>
 </div>
 <div data-bind="invisible: isNew">

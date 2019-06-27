@@ -54,7 +54,7 @@ The following example demonstrates the available configuration options for the B
 
 ## Functionality and Features
 
-The Button provides options for rendering [icons in the button]({% icons_button_aspnetcore %}).
+The Button provides options for rendering [icons in the button]({% slug icons_button_aspnetcore %}).
 
 ## Events
 

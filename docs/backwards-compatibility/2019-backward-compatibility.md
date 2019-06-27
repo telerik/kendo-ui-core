@@ -10,6 +10,36 @@ position: 1
 
 This article lists the breaking changes in the Kendo UI 2019 releases.
 
+## Kendo UI 2019 R2 SP1
+
+**ToolBar**
+
+As of the Kendo UI 2019 R2 SP1 release, the recommended approach for moving tools to the right side of the [ToolBar]({% slug overview_kendoui_toolbar_widget %}) is by using the newly added `Spacer` command type. If you prefer to float some of the tools instead of using the spacer, apply `display: block;` to the wrapping element of the ToolBar.
+
+```
+<style>
+  .k-toolbar {
+    display: block;
+  }
+
+  .k-toolbar #button3 {
+    float: right;
+  }
+</style>
+
+<div id="toolbar"></div>
+
+<script>
+  $("#toolbar").kendoToolBar({
+    items: [
+      { type: "button", text: "Button 1" },
+      { type: "button", text: "Button 2" },
+      { type: "button", text: "Button 3", id: "button3"  }
+    ]
+  });
+</script>
+```
+
 ## Kendo UI 2019 R2
 
 **Pager**, **Grid**, **TreeList**, **ListView**

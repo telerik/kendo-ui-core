@@ -90,6 +90,42 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
 For more information, refer to the article on [supported command types](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview#command-types).
 
+## Spacer
+
+The `Spacer` command type moves the tools that are declared after it to the right side of the ToolBar.
+
+The following example demonstrates how to define a spacer.
+
+###### Example
+
+```
+    @(Html.Kendo().ToolBar()
+        .Name("ToolBar")
+        .Items(items => {
+            items.Add().Type(CommandType.Button).Text("Button 1").Id("button1");
+            items.Add().Type(CommandType.Spacer);
+            items.Add().Type(CommandType.Button).Text("Button 2").Id("button2");
+        })
+    )
+```
+
+You can use multiple spacers to create an equal amount of space between several tools.
+
+###### Example
+
+```
+    @(Html.Kendo().ToolBar()
+        .Name("ToolBar")
+        .Items(items => {
+            items.Add().Type(CommandType.Button).Text("Button 1").Id("button1");
+            items.Add().Type(CommandType.Spacer);
+            items.Add().Type(CommandType.Button).Text("Button 2").Id("button2");
+            items.Add().Type(CommandType.Spacer);
+            items.Add().Type(CommandType.Button).Text("Button 3").Id("button3");
+        })
+    )
+```
+
 ## Event Handling
 
 You can subscribe to all ToolBar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#events).

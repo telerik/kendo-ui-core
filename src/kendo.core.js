@@ -2873,6 +2873,9 @@ function pad(number, digits, end) {
                 e = that.events[idx];
                 if (that.options[e] && options[e]) {
                     that.unbind(e, that.options[e]);
+                    if (that._events && that._events[e]) {
+                        delete that._events[e];
+                    }
                 }
             }
 
