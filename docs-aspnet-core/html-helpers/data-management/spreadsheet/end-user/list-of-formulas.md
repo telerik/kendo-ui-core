@@ -1,14 +1,8 @@
 ---
 title: List of Formulas and Functions
-<<<<<<< HEAD
 page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
 description: "A list of the formulas and functions available in the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_list_of_formulas_aspnetcore
-=======
-page_title: List of Formulas and Functions | Kendo UI Spreadsheet
-description: "A list of the formulas and functions available in the Kendo UI Spreadsheet widget."
-slug: list_offormulas_andfunctions_spreadsheet_widget
->>>>>>> 501a7306b2... docs: add new and update Scheduler and Spreadsheet articles #9368
 position: 2
 ---
 
@@ -281,9 +275,5 @@ Similar to Excel, the Kendo UI Spreadsheet supports [array formulas](https://sup
 
 ## See Also
 
-<<<<<<< HEAD
 * [List of Keyboard Shortcuts]({% slug htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore %})
-=======
-* [List of Keyboard Shortcuts]({% slug htmlhelpers_spreadsheet_list_of_keyboard_shortcuts_aspnetcore %})
->>>>>>> 501a7306b2... docs: add new and update Scheduler and Spreadsheet articles #9368
 * [User Guide]({% slug htmlhelpers_spreadsheet_user_guide_aspnetcore %})

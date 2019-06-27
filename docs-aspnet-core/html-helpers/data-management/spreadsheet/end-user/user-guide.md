@@ -51,15 +51,9 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 | Select/activate       | Click a cell		    |
 | Select a range of cells | <ol><li>Click a cell</li> <li>Extend the selection by holding down the mouse while marking the selection you want</li></ol> |
 | Edit 					| Double-click a cell 	|
-<<<<<<< HEAD
 | Copy content			| <ol><li>Select a cell</li> <li>Click **Copy** [ <span class="k-icon k-i-copy"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Copy** from it, or use the [`Ctrl` + `C`]({% slug htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore %}) keyboard shortcut</li></ol>|
 | Cut content			| <ol><li>Select a cell</li> <li>Click **Cut** [ <span class="k-icon k-i-cut"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Cut** from it, or use the [`Ctrl` + `X`]({% slug htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore %}) keyboard shortcut</li></ol> |
 | Paste content			| <ol><li>Click the cell where you want to place the copied or cut content</li> <li>Click **Paste** [ <span class="k-icon k-i-paste"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Paste** from it, or use the [`Ctrl` + `V`]({% slug htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore %}) keyboard shortcut</li></ol> |
-=======
-| Copy content			| <ol><li>Select a cell</li> <li>Click **Copy** [ <span class="k-icon k-i-copy"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Copy** from it, or use the [`Ctrl` + `C`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol>|
-| Cut content			| <ol><li>Select a cell</li> <li>Click **Cut** [ <span class="k-icon k-i-cut"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Cut** from it, or use the [`Ctrl` + `X`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
-| Paste content			| <ol><li>Click the cell where you want to place the copied or cut content</li> <li>Click **Paste** [ <span class="k-icon k-i-paste"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Paste** from it, or use the [`Ctrl` + `V`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
->>>>>>> 501a7306b2... docs: add new and update Scheduler and Spreadsheet articles #9368
 | Delete content		| <ol><li>Select a cell</li> <li>Press **Delete** on your keyboard to remove its content</li></ol> |
 | Align content			| <ol><li>Select a cell</li> <li>Click **Alignment** [ <span class="k-icon k-i-justify-left"></span> ] on the **Toolbar**</li> <li>Choose a style form the drop-down list</li></ol> |
 | Wrap content				| <ol><li>Select a cell that contains the content you want to wrap</li> <li>Click **Wrap Text** [ <span class="k-icon k-i-text-wrap"></span> ] on the **Toolbar**</li></ol> |
@@ -151,11 +145,7 @@ The Spreadsheet supports many of the Excel formulas and functions as seen in the
 
 ## Keyboard Navigation
 
-<<<<<<< HEAD
 The Spreadsheet supports many of the Excel keyboard shortcuts as seen in the [List of Keyboard Shortcuts]({% slug htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore %}).
-=======
-The Spreadsheet supports many of the Excel keyboard shortcuts as seen in the [List of Keyboard Shortcuts]({% slug htmlhelpers_spreadsheet_list_of_keyboard_shortcuts_aspnetcore %}).
->>>>>>> 501a7306b2... docs: add new and update Scheduler and Spreadsheet articles #9368
 
 ## Known Limitations
 
@@ -168,9 +158,5 @@ Use `SUM` when your case is similar to the second example of the nested formulas
 
 ## See Also
 
-<<<<<<< HEAD
 * [List of Keyboard Shortcuts]({% slug htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore %})
-=======
-* [List of Keyboard Shortcuts]({% slug htmlhelpers_spreadsheet_list_of_keyboard_shortcuts_aspnetcore %})
->>>>>>> 501a7306b2... docs: add new and update Scheduler and Spreadsheet articles #9368
 * [List of Formulas and Functions]({% slug htmlhelpers_spreadsheet_list_of_formulas_aspnetcore %})

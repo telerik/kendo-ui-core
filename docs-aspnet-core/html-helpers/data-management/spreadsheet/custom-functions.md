@@ -547,16 +547,6 @@ In other words, if you use this raw form, you are responsible for type-checking 
 
 ## See Also
 
-<<<<<<< HEAD
 * [Overview of the Spreadsheet HtmlHelper]({% slug htmlhelpers_spreadsheet_aspnetcore %})
 * [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
 * [Spreadsheet Official Demos](http://demos.telerik.com/aspnet-core/spreadsheet/index)
-=======
-* [Overview]({% slug overview_spreadsheet_widget %})
-* [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
-* [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
-* [Store Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
-* [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
-* [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
-* [User Guide]({% slug user_guide_spreadsheet_widget %})
->>>>>>> 501a7306b2... docs: add new and update Scheduler and Spreadsheet articles #9368

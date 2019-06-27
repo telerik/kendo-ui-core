@@ -1,14 +1,8 @@
 ---
 title: List of Keyboard Shortcuts
-<<<<<<< HEAD
 page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
 description: "A list of the keyboard shortcuts supported by the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore
-=======
-page_title: List of Keyboard Shortcuts | Kendo UI Spreadsheet
-description: "A list of the keyboard shortcuts supported by the Kendo UI Spreadsheet widget."
-slug: list_ofkeyboard_shortcuts_spreadsheet_widget
->>>>>>> 501a7306b2... docs: add new and update Scheduler and Spreadsheet articles #9368
 position: 3
 ---
 

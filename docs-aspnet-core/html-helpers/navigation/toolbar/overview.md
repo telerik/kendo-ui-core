@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ToolBar | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: ToolBar Overview | Telerik UI for ASP.NET Core HtmlHelpers
 description: "Learn the basics when working with the Kendo UI ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/toolbar
 slug: htmlhelpers_toolbar_aspnetcore
@@ -9,13 +9,11 @@ position: 1
 
 # ToolBar HtmlHelper Overview
 
-The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) widget.
+The [ToolBar](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
 
-It enables you to configure the Kendo UI ToolBar widget from server-side code. The [ToolBar](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) widget. For more information on the ToolBar HtmlHelper, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/toolbar/overview).
 
-For more information on the HtmlHelper, refer to the article on the [ToolBar HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/toolbar/overview).
-
-## Basic Usage
+## Initializing the ToolBar
 
 The following example demonstrates how to define the ToolBar by using the ToolBar HtmlHelper.
 
@@ -44,11 +42,9 @@ The following example demonstrates how to define the ToolBar by using the ToolBa
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the ToolBar HtmlHelper and how to get the ToolBar instance.
-
-###### Example
+The following example demonstrates the basic configuration of the ToolBar HtmlHelper.
 
 ```
     @(Html.Kendo().ToolBar()
@@ -81,7 +77,7 @@ The following example demonstrates the basic configuration of the ToolBar HtmlHe
 
     <script type="text/javascript">
         $(function() {
-    	    //Initialize a DropDownList in a ToolBar item's template.
+    	    // Initialize a DropDownList in the template of a ToolBar item.
     		$("#dropdown").kendoDropDownList({
                 optionLabel: "Paragraph",
                 dataTextField: "text",
@@ -95,18 +91,54 @@ The following example demonstrates the basic configuration of the ToolBar HtmlHe
                 ]
             });
 
-            //Notice that the Name() of the ToolBar is used to get its client-side instance.
+            // The Name() of the ToolBar is used to get its client-side instance.
             var toolbar = $("#ToolBar").data("kendoToolBar");
         });
     </script>
 ```
 
+## Spacer
+
+The `Spacer` command type moves the tools that are declared after it to the right side of the ToolBar.
+
+The following example demonstrates how to define a spacer.
+
+###### Example
+
+```
+    @(Html.Kendo().ToolBar()
+        .Name("ToolBar")
+        .Items(items => {
+            items.Add().Type(CommandType.Button).Text("Button 1").Id("button1");
+            items.Add().Type(CommandType.Spacer);
+            items.Add().Type(CommandType.Button).Text("Button 2").Id("button2");
+        })
+    )
+```
+
+You can use multiple spacers to create an equal amount of space between several tools.
+
+###### Example
+
+```
+    @(Html.Kendo().ToolBar()
+        .Name("ToolBar")
+        .Items(items => {
+            items.Add().Type(CommandType.Button).Text("Button 1").Id("button1");
+            items.Add().Type(CommandType.Spacer);
+            items.Add().Type(CommandType.Button).Text("Button 2").Id("button2");
+            items.Add().Type(CommandType.Spacer);
+            items.Add().Type(CommandType.Button).Text("Button 3").Id("button3");
+        })
+    )
+```
+
+## Events
+
+For a complete example on basic ToolBar events, refer to the [demo on using the events of the ToolBar](https://demos.telerik.com/aspnet-core/toolbar/events).
+
 ## See Also
 
+* [Basic Usage of the ToolBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar)
+* [Using the API of the ToolBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/api)
 * [JavaScript API Reference of the ToolBar](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
-* [ToolBar HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/toolbar/overview)
-* [ToolBar Official Demos](http://demos.telerik.com/aspnet-mvc/toolbar/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
