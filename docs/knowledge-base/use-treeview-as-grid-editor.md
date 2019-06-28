@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use TreeView as an editor in the Kendo UI Grid for jQuery?
+
+## Solution
+
 The following example demonstrates how to use the TreeView for batch editing in the Grid.
 
 ```dojo

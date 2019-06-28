@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI AutoComplete</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>Google Chrome</td>
+ </tr>
+</table>
+
+## Description
+
+How can I show AutoComplete suggestions for the current grid filter?
+
+## Solution
+
 The AutoComplete filter of the Grid is bound to the whole data source of the Grid widget.
 
 However, it is possible to show the AutoComplete results only for the current filter of the Grid. To achieve this  by following the steps below:

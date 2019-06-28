@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I preserve the Kendo UI jQuery Grid state in a cookie and restore it when the page is re-visited?
+
+## Solution
+
 The following example demonstrates how to preserve the Grid state&mdash;filtering, sorting, paging, grouping, and selection&mdash;in a cookie and restore it when the page is re-visited.
 
 > If you run the page directly from the hard-drive in Chrome, and not through a web server, Chrome will not save cookies for this page and you will not be able to preserve the state.

@@ -10,6 +10,28 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use checkboxes inside the column menu of the Kendo UI Grid for jQuery?
+
+## Solution
+
 The following example demonstrates how to use checkboxes inside the column menu of a Grid.
 
 ```dojo

@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I change the validation message position in a popup edit form when working with the Kendo UI Grid?
+
+## Solution
+
 By design, validation messages inside the Grid are tooltips that are displayed over adjacent content.
 
 The following example demonstrates how to change this behavior and display the validation messages at a specific position in the popup edit form of the Grid.

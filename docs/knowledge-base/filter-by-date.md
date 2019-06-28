@@ -10,6 +10,26 @@ type: how-to
 res_type: kb
 ---
 
+
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
 Your project might require you to filter the columns of the Grid only by date.
 
 To achieve this behavior and ignore the exact time when you filter the data:

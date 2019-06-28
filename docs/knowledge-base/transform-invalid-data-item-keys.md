@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the `schema.parse()` method to replace the non-supported data item keys with supported ones in the Kendo UI Grid for jQuery?
+
+## Solution
+
 Sometimes the received remote data contains fields that are not valid JavaScript identifiers.
 
 To manipulate the received data and transform it so that it can be processed by the DataSource, use the `schema.parse()` method to replace the non-supported keys with supported.

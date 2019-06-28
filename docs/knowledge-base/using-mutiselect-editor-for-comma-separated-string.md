@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the Kendo UI MultiSelect as an editor for comma-separated string fields in the Kendo UI Grid widget?
+
+## Solution
+
 The following example demonstrates how to implement custom binding and use it for the MultiSelect to edit a string field that contains a list of comma-separated values.
 
 ```dojo

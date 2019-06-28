@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress AngularJS Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+ <tr>
+  <td>Preferred Framework</td>
+  <td>AngularJS</td>
+ </tr>
+</table>
+
+## Description
+
+How can I creat a custom editor in the Grid using AngularJS applications.
+
+## Solution
+
 The following example demonstrates how to create a custom editor in the [Grid](http://www.telerik.com/kendo-ui/grid) in AngularJS applications.
 
 ```dojo

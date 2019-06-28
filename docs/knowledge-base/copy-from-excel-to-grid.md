@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I copy data from Excel in the Kendo UI Grid for jQuery?
+
+## Solution
+
 The following example demonstrates how to create a Grid that supports pasting from Excel.
 
 ```dojo

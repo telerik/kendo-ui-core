@@ -145,7 +145,7 @@ The proxy will receive a POST request with the following parameters in the reque
 
 An object containing any images used in the Spreadsheet.  The keys
 should be image ID-s (they are referenced by this ID in
-(`sheets.drawings`)[#configuration-sheets.drawings]) and the values
+[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings)) and the values
 should be image URLs.
 
 The image URLs can be either
@@ -193,7 +193,7 @@ cannot fetch the image, export to Excel or PDF might not work.
 
 Note, we can reference the same image ID in two different drawings,
 anchored to cells C2 and E3.  See the
-(`sheets.drawings`)[#configuration-sheets.drawings] property for more
+[`sheets.drawings`](/api/javascript/ui/spreadsheet/configuration/sheets.drawings) property for more
 information about a drawing's properties.
 
 ### pdf `Object`

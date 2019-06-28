@@ -1,13 +1,13 @@
 ---
-title: Basics
-page_title: jQuery Grid Documentation | Data Binding Basics | Kendo UI
+title: Overview
+page_title: jQuery Grid Documentation | Data Binding Overview | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to disable the default data binding behavior and how to bind the Grid to local data arrays and to remote data sources."
 previous_url: /data-binding
 slug: data_binding_grid
 position: 1
 ---
 
-# Data Binding Basics
+# Data Binding Overview
 
 By default, the Kendo UI Grid for jQuery automatically binds to data.
 

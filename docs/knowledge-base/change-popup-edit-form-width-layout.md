@@ -10,6 +10,31 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+
+</table>
+
+
+## Description
+
+How can I increase the width of the popup edit form and the textbox in the Kendo UI Grid?
+
+## Solution
+
 The following example demonstrates how to increase the width of the popup edit form and the textbox width in the Kendo UI Grid.
 
 ```dojo

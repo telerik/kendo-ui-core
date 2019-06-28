@@ -10,7 +10,24 @@ type: how-to
 res_type: kb
 ---
 
-The following example demonstrates how to create auto layout for the Grid.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create auto layout for the Grid?
+
+## Solution
 
 The auto layout requires you to disable the scrolling functionality of the Grid.
 

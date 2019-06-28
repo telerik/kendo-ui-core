@@ -6,6 +6,29 @@ previous_url: /controls/data-management/grid/how-to/Layout/font-awesome-icons-in
 slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use FontAwesome icons with the built-in buttons of the Kendo UI Grid widget for jQuery?
+
+## Solution
+
 The following example demonstrates how to use FontAwesome icons with the built-in buttons of the Kendo UI Grid for jQuery.
 
 ```dojo

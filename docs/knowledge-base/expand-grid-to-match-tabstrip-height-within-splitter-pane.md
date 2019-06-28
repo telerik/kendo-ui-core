@@ -10,7 +10,28 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
 Your project might require you to expand the height of the Grid to match the height of its TabStrip container within a Splitter pane.
+
+## Solution
 
 To achieve this behavior:
 * Make sure that the layout of the Splitter corresponds to the requirements of your project. If the Splitter has to expand to 100% in height, [resize it]({% slug overview_kendoui_splitter_widget %}##set-a-100-height-and-auto-resize).

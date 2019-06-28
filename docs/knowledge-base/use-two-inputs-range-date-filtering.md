@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create range filtering for dates in the Kendo UI Grid for jQuery by using two Kendo UI DateTimePickers in row filtering modes?
+
+## Solution
+
 Your project might require you to create range filtering for dates in the Grid by using two Kendo UI DateTimePickers in row filtering modes.
 
 To see how the following example works, filter the date column in a range. As a result, the Grid filters the data in the given range.

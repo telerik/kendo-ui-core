@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the popup editor template of the Kendo UI Grid with AngularJS?
+
+## Solution
+
 The following example demonstrates how to use AngularJS directives in a custom Grid popup editor template.
 
 The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-change` for Kendo UI widgets. Otherwise, the DataSource does not update the modified data items.

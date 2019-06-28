@@ -10,9 +10,28 @@ type: how-to
 res_type: kb
 ---
 
-The following example demonstrates how to customize the Excel document that the Grid generates during exporting.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I customize the Excel document that the Grid generates during exporting?
+
+## Solution
 
 To set the background color of the alternating rows, the demo uses the [`background`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background) option of the cell. For more information on how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+
+The following example demonstrates how to customize the Excel document that the Grid generates during exporting.
 
 ```dojo
 <div id="grid"></div>

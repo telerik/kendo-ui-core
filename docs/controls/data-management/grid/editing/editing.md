@@ -1,12 +1,12 @@
 ---
-title: Basics
-page_title: jQuery Grid Documentation | Editing Basics | Kendo UI
+title: Overview
+page_title: jQuery Grid Documentation | Editing Overview | Kendo UI
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI allowing you to manipulate the way the data is presented."
 slug: editing_kendoui_grid_widget
 position: 1
 ---
 
-# Editing Basics
+# Editing Overview
 
 Editing is a basic functionality of the Kendo UI Grid which allows you to manipulate the way its data is presented.
 

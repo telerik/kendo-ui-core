@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I select a row with a checkbox column that is bound to a model field in the Kendo UI Grid for jQuery?
+
+## Solution
+
 Your project might require you to select a Kendo UI Grid row by using a checkbox which is bound to a field from the model.
 
 After the user checks or unchecks the checkbox, an `update` request initiates and it updates the Boolean field in the model.

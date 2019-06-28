@@ -10,7 +10,24 @@ type: how-to
 res_type: kb
 ---
 
-By default, the Grid does not support batch editing when binding to oData.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the batch edit mode of the Kendo UI Grid when binding to oData?
+
+## Solution
 
 To achieve this behavior, use a third-party library. To submit the actual request, the following example uses [Batch.js by Pavel Volgarev](https://github.com/volpav/batchjs). For more information, refer to [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the oData 3.0 documentation.
 

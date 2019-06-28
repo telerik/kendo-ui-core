@@ -10,6 +10,37 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+  <tr>
+  <td>Preferred Framework</td>
+  <td>AngularJS</td>
+ </tr>
+</table>
+
+## Description
+
+How can I resize the columns of the Kendo UI Grid for jQuery by using a custom button and AngularJS handlers?
+
+## Solution
+
 The following example demonstrates how to resize the columns of the Grid by using a custom button and AngularJS handlers.
 
 ```dojo

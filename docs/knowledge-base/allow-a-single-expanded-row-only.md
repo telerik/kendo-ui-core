@@ -10,7 +10,24 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
 A scenario might require the expanding of a single row in a master Grid at a specific time.
+
+## Solution
 
 To achieve this behavior:
 * Handle the [`detailExpand`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event.

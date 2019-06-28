@@ -10,7 +10,28 @@ type: how-to
 res_type: kb
 ---
 
-The following example demonstrates how to change the default pager of the Grid to a slider.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I change the default pager of the Grid to a slider?
+
+## Solution
 
 To achieve this behavior:
 

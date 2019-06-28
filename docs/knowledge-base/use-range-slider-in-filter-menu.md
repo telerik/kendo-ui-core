@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create range filtering in the Kendo UI Grid for jQuery by using the Kendo UI RangeSlider?
+
+## Solution
+
 Your project might require you to create range filtering in the Grid by using the Kendo UI RangeSlider.
 
 To see how the following example functions, filter the column by using the Kendo UI RangeSlider. As a result, the Grid filters the data in the given range.

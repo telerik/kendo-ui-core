@@ -10,7 +10,28 @@ type: how-to
 res_type: kb
 ---
 
-Your project might require you to dynamically change the language of the Grid.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress AngularJS Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+ <tr>
+  <td>Preferred Framework</td>
+  <td>AngularJS</td>
+ </tr>
+</table>
+
+## Description
+
+How can I dynamically change the language of the Grid using AngularJS?
+
+## Solution
 
 The following example represents the AngularJS version of [this demo](http://demos.telerik.com/kendo-ui/grid/localization).
 

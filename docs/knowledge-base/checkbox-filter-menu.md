@@ -10,6 +10,31 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+
+</table>
+
+
+## Description
+
+How can I create a checkbox filter menu functionality in the Kendo UI Grid?
+
+## Solution
+
 The following example demonstrates how to create a menu functionality based on a checkbox filter in a Grid.
 
 > The functionality is available out of the box using the [columns.filterable.multi](/api/javascript/ui/grid/configuration/columns.filterable.multi) property.

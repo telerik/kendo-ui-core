@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use nested model properties in the Kendo UI Grid for jQuery?
+
+## Solution
+
 When you use `from` together with CRUD operations and add new rows, you also have to define in `schema.model.fields` the original field or the sequence of nested fields which are used inside `from`.
 
 The reason is that during updates and creates, the Kendo UI DataSource tries to construct a data item object which matches the original (server-side) data-item structure. For new data items, such a structure does not exist and needs to be defined explicitly, as demonstrated in the following example.

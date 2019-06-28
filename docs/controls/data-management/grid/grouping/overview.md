@@ -1,12 +1,12 @@
 ---
-title: Basics
-page_title: jQuery Grid Documentation | Grouping Basics | Kendo UI
+title: Overview
+page_title: jQuery Grid Documentation | Grouping Overview | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: grouping_kendoui_grid_widget
 position: 1
 ---
 
-# Grouping Basics
+# Grouping Overview
 
 By default, the grouping functionality of the Grid is disabled.
 

@@ -10,6 +10,37 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Preferred Framework</td>
+  <td>AngularJS</td>
+ </tr>
+</table>
+
+## Description
+
+How can I hide columns and show them back later when working in AngularJS applications with the Kendo UI Grid?
+
+## Solution
+
 Your AngularJS project might require you to hide Grid columns and sub-columns by clicking the column headers and, then, restore the hidden columns by clicking a button.
 
 The following example demonstrates how to achieve this behavior.

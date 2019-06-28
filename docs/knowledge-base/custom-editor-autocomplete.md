@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the Kendo UI AutoComplete as a custom column editor for the Kendo UI Grid for jQuery?
+
+## Solution
+
 The following example demonstrates how to use the AutoComplete as a custom column editor of the Grid.
 
 > The AutoComplete works with a single data item field. This means that the selected value is directly set to the `model` field. If you want to work with `<value,text>` pairs, use the ComboBox, DropDownList, or MultiSelect.

@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create fixed headers on scroll in the Kendo UI Grid widget for jQuery?
+
+## Solution
+
 The following example demonstrates how to toggle a `fixed-header` class by using the window `scrollTop()`.
 
 This approach helps you achieve the look and feel of window-level fixed headers. The `fixed-header` class from the example applies the following CSS rules.

@@ -10,7 +10,20 @@ type: how-to
 res_type: kb
 ---
 
-Your project might require you to add a background color to the sorted columns of the Grid by using the [LESS themes]({% slug themesandappearnce_kendoui_desktopwidgets %}).
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI for jQuery</td>
+ </tr>
+</table>
+
+## Description
+
+How can I add a background color to the sorted columns of the Grid by using the [LESS themes]({% slug themesandappearnce_kendoui_desktopwidgets %})?
+
+## Solution
 
 To achieve this behavior:
 
@@ -25,7 +38,7 @@ The following examples demonstrate how to change the background color of selecte
 * [Dark themes](#dark-themes)
 * [Light themes](#light-themes)
 
-## Dark Themes
+### Dark Themes
 
 When your project uses a dark theme, use light colors for the background of the selected rows.
 
@@ -48,7 +61,7 @@ The following example demonstrates how to apply the suggested background colors 
     }
 ```
 
-## Light Themes
+### Light Themes
 
 When your project uses a light theme, use dark colors for the background of the selected rows.
 

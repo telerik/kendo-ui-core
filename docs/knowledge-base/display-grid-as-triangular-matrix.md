@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I change its default data layout to a Triangular matrix in the Kendo UI Grid for jQuery?
+
+## Solution
+
 The following example demonstrates how to change the default data layout of the Grid to a [Triangular matrix](https://en.wikipedia.org/wiki/Triangular_matrix).
 
 To achieve this behavior:

@@ -10,9 +10,26 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
 You might have to handle a scenario with locked columns where the content of the column template is initially hidden through the `ng-if` directive.
 
 In such cases, if you show the content later, you might cause issues related to the proper calculation of the row heights for the locked and unlocked parts of the Grid. To avoid such possible issues, conditionally call the [`resize()`](/api/javascript/kendo/methods/resize) and [`refresh()`](/api/javascript/ui/grid/methods/refresh) methods of the Grid in its [`dataBound`](/api/javascript/ui/grid/events/databound) event when the scope value that controls the visibility of the template content is changed.
+
+## Solution
 
 The following example demonstrates how to adjust the row heights in a Kendo UI Grid with locked columns and with a column template that uses the `ng-if` directive.
 

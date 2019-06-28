@@ -10,7 +10,24 @@ type: how-to
 res_type: kb
 ---
 
-Your project might require you to resize the Grid to match the visible column widths when hiding or showing columns while the sum of the column widths is less than the initial width of the Grid.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I resize the Grid to match the visible column widths when hiding or showing columns while the sum of the column widths is less than the initial width of the Grid?
+
+## Solution
 
 This approach prevents the appearance of white space in the widget when the sum of the widths of the visible columns is less than the initial width of the Grid.
 

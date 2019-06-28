@@ -10,7 +10,32 @@ type: how-to
 res_type: kb
 ---
 
-Your project might require you to configure the editing functionality of the Grid by using a custom UI form.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I configure the editing functionality of the Grid by using a custom UI form?
+
+## Solution
 
 The following example demonstrates how to achieve this behavior, create editors for the `string`, `number`, and `boolean` fields, and add validation.
 

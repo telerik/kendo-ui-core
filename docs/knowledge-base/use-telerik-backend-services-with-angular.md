@@ -10,6 +10,37 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+  <tr>
+  <td>Preferred Framework</td>
+  <td>AngularJS</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use AngularJS directives to bind the Kendo UI Grid for jQuery to Telerik Backend Services?
+
+## Solution
+
 The following example demonstrates how to bind the [Grid](http://www.telerik.com/kendo-ui/grid) to the Kinvey Backend Services in an AngularJS application.
 
 ```dojo

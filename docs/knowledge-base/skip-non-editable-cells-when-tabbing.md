@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I skip non-editable cells when tabbing in the Kendo UI Grid for jQuery?
+
+## Solution
+
 Normally, tabbing in an editable Grid steps on each cell, no matter if it is editable or not.
 
 The following examples demonstrate how to skip non-editable cells of a Grid during tabbing. They apply the following different scenarios:
