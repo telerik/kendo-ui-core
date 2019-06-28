@@ -195,7 +195,7 @@ kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "All",
   "page": "Page",
-  "display": "Afficher les items {0} - {1} de {2}",
+  "display": "Afficher les items {0} à {1} sur {2}",
   "of": "de {0}",
   "empty": "Aucun enregistrement à afficher.",
   "refresh": "Actualiser",
@@ -215,7 +215,7 @@ kendo.ui.TreeListPager.prototype.options.messages =
 $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "All",
   "page": "Page",
-  "display": "Afficher les items {0} - {1} de {2}",
+  "display": "Afficher les items {0} à {1} sur {2}",
   "of": "de {0}",
   "empty": "Aucun enregistrement à afficher.",
   "refresh": "Actualiser",
