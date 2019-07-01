@@ -459,9 +459,9 @@ var __meta__ = { // jshint ignore:line
 
         _isFloating: function (item) {
             var isFloating = /left|right/.test(item.css('float'));
-		    var isTable = /inline|table-cell/.test(item.css('display'));
-		    var isHorizontalFlex = /flex/.test(item.parent().css('display')) && (/row|row-reverse/.test(item.parent().css('flex-direction')) || !item.parent().css('flex-direction'));
-		    return isFloating || isTable || isHorizontalFlex;
+            var isTable = /inline|table-cell/.test(item.css('display'));
+            var isHorizontalFlex = /flex/.test(item.parent().css('display')) && (/row|row-reverse/.test(item.parent().css('flex-direction')) || !item.parent().css('flex-direction'));
+            return isFloating || isTable || isHorizontalFlex;
         },
 
         _cancel: function() {
