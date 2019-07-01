@@ -1,12 +1,12 @@
 ---
 title: Overview
-page_title: HierarchicalDatSource Overview | Kendo UI Hierarchical Data Source
+page_title: HierarchicalDataSource Overview | Kendo UI Hierarchical Data Source
 description: "Learn how to represent hierarchical data using the Kendo UI HierarchicalDataSource component, an extension of Kendo UI DataSource."
 slug: overview_hierarchical_datasourcecomponent
 position: 1
 ---
 
-# HierarchicalDatSource Overview
+# HierarchicalDataSource Overview
 
 The [Kendo UI HierarchicalDataSource component](/api/javascript/data/hierarchicaldatasource) extends the [DataSource component](/api/javascript/data/datasource) and allows the representation of hierarchical data.
 
