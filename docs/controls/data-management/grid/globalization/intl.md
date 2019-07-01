@@ -2,7 +2,7 @@
 title: Internationalization
 page_title: jQuery Grid Documentation | Grid Internationalization | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
-previous_url: /data-management/grid/date-formats
+previous_url: /controls/data-management/grid/date-formats
 slug: intl_kendoui_grid_widget
 position: 2
 ---
