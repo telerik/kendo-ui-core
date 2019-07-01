@@ -377,4 +377,111 @@
         });
 
     });
+    
+    describe("Sortable - flexbox", function() {
+        beforeEach(function() {
+            Mocha.fixture.append(
+                '<ul id="sortable" style="display: flex">' +
+                '<li><span class="handler">*</span><p>foo</p></li>' +
+                '<li><span class="handler">*</span><p>bar</p></li>' +
+                '<li><span class="handler">*</span><p>baz</p></li>' +
+                '<li><span class="handler">*</span><p>qux</p></li>' +
+                '</ul>'
+            );
+
+            element = $("#sortable");
+
+            element.kendoSortable({
+                handler: ".handler",
+                hint: $("<div class='hint'>hint</div>")
+            });
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+        it("placeholder is moved while user drags", function() {
+            var draggedElement = element.children().eq(0),
+                draggableOffset = kendo.getOffset(draggedElement),
+                targetElement = element.children().eq(1),
+                targetOffset = kendo.getOffset(targetElement),
+                sortable = element.kendoSortable().data("kendoSortable");
+
+            //simulate press to trigger draggable's hint initialization
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, targetOffset.left, targetOffset.top + 10);
+
+            assert.equal(sortable.placeholder.index(), 2, "placeholder is moved under the element under cursor");
+
+            targetElement = element.children().last();
+            targetOffset = kendo.getOffset(targetElement);
+
+            move(draggedElement, targetOffset.left, targetOffset.top + 10);
+            assert.equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
+        });
+
+        it("placeholder is moved while cursor enters in the target area (moveOnEnter)", function() {
+            var draggedElement = element.children().eq(0),
+                draggableOffset = kendo.getOffset(draggedElement),
+                targetElement = element.children().eq(1),
+                targetOffset = kendo.getOffset(targetElement),
+                sortable = element.kendoSortable().data("kendoSortable");
+
+            sortable.setOptions({ moveOnDragEnter: true });
+
+            //simulate press to trigger draggable's hint initialization
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, targetOffset.left, targetOffset.top);
+
+            assert.equal(sortable.placeholder.index(), 2, "placeholder is moved under the element under cursor");
+
+            targetElement = element.children().last();
+            targetOffset = kendo.getOffset(targetElement);
+
+            move(draggedElement, targetOffset.left, targetOffset.top);
+            assert.equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
+        });
+
+        it("placeholder is not moved if item is dragged outside of the sortable container", function() {
+            var draggedElement = element.children().eq(1),
+                draggableOffset = kendo.getOffset(draggedElement),
+                sortable = element.kendoSortable().data("kendoSortable");
+
+            //simulate press to trigger draggable's hint initialization
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, 500, 500);
+
+            assert.equal(sortable.placeholder.index(), 1, "placeholder position does not change");
+        });
+
+        it("item is sorted correctly on dragend", function() {
+            var draggedElement = element.children().eq(3),
+                draggableOffset = kendo.getOffset(draggedElement),
+                targetElement = element.children().eq(1),
+                targetOffset = kendo.getOffset(targetElement),
+                sortable = element.kendoSortable().data("kendoSortable");
+
+            //simulate press to trigger draggable's hint initialization
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, targetOffset.left, targetOffset.top);
+            release(draggedElement, targetOffset.left, targetOffset.top);
+
+            assert.equal(draggedElement.index(), 1, "draggedElement changes its position");
+        });
+
+        it("item is placed at the last valid position even if item is released outside of the sortable container", function() {
+            var draggedElement = element.children().eq(2),
+                draggableOffset = kendo.getOffset(draggedElement),
+                targetElement = element.children().eq(3),
+                targetOffset = kendo.getOffset(targetElement),
+                sortable = element.kendoSortable().data("kendoSortable");
+
+            //simulate press to trigger draggable's hint initialization
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, targetOffset.left, targetOffset.top + 10);
+            move(draggedElement, 500, 500);
+            release(draggedElement, 500, 500);
+
+            assert.equal(draggedElement.index(), 3, "draggedElement is placed at the last valid position");
+        });
+    });
 }());
