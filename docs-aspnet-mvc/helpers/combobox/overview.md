@@ -422,6 +422,7 @@ You can configure a ComboBox that is bound to a model field to use [virtualizati
                     });
             })
             .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+        )
 
         <script>
             function valueMapper(options) {
