@@ -48,7 +48,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 		.Name("chat")
 		.Events(e => e
 			.Post("onPost")
-			.SendMessage("onSendPessage")
+			.SendMessage("onSendMessage")
 		)
 	)
 
@@ -57,7 +57,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 		//Handle the post event.
 	  }
 
-	  function onSendPessage() {
+	  function onSendMessage() {
 		//Handle the sendMessage event.
 	  }
 	</script>
@@ -67,7 +67,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 		.Name("chat")
 		.Events(e => e
 			.Post("onPost")
-			.SendMessage("onSendPessage")
+			.SendMessage("onSendMessage")
 		)
 	%>
 
@@ -76,7 +76,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 		//Handle the post event.
 	  }
 
-	  function onSendPessage() {
+	  function onSendMessage() {
 		//Handle the sendMessage event.
 	  }
 	</script>
