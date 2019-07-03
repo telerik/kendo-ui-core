@@ -9,11 +9,11 @@ position: 1
 
 # ProgressBar HtmlHelper Overview
 
-The ProgressBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index) widget.
+The ProgressBar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ProgressBar widget.
 
-It allows you to configure the Kendo UI ProgressBar widget from server-side code. The [ProgressBar](http://docs.telerik.com/kendo-ui/controls/interactivity/progressbar/overview) offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
+The Kendo UI ProgressBar offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
 
-For more information on the HtmlHelper, refer to the article on the [ProgressBar HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/progressbar/overview).
+* [Demo page for the ProgressBar](https://demos.telerik.com/aspnet-core/progressbar/index)
 
 ## Basic Usage
 
@@ -39,7 +39,7 @@ The following example demonstrates how to define the ProgressBar by using the Pr
 
 The following example demonstrates the basic configuration of the ProgressBar HtmlHelper and how to get the ProgressBar instance.
 
-```
+```Razor
     @(Html.Kendo().ProgressBar()
         .Name("progressBar")
         .Type(ProgressBarType.Chunk)
@@ -54,6 +54,63 @@ The following example demonstrates the basic configuration of the ProgressBar Ht
             e.Change("onChange");
             e.Complete("onComplete");
         })
+        .Animation(а =>
+        {
+            а.Duration(500);
+        })
+    )
+```
+
+## Events
+
+You can subscribe to all ProgressBar events. For a complete example on basic ProgressBar events, refer to the [demo on using the events of the ProgressBar](https://demos.telerik.com/aspnet-core/progressbar/events).
+
+### Handling by Handler Name
+
+The following example demonstrates how to subscribe to events by a handler name.
+
+```Razor
+    @(Html.Kendo().ProgressBar()
+            .Name("progressBar")
+            .Events(e => {
+                    e.Change("onChange");
+                    e.Complete("onComplete");
+            })
+    )
+    <script>
+        function onChange(e) {
+            // Handle the change event.
+        }
+
+        function onComplete(e) {
+            // Handle the complete event.
+        }
+    </script>
+```
+
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+```Razor
+    @(Html.Kendo().ProgressBar()
+        .Name("progressBar")
+        .Events(e => e.Change(@<text>
+                function() {
+                    // Handle the change event.
+                }
+            </text>)
+        )
+    )
+```
+
+## Referencing Existing Instances
+
+The following example demonstrates how to get a reference to an existing Kendo UI ProgressBar instance. Once the reference is established, use the [ProgressBar API](../api/progressbar) to control its behavior.
+
+```Razor
+    @(Html.Kendo().ProgressBar()
+        .Name("progressBar")
     )
 
     <script type="text/javascript">
@@ -67,10 +124,5 @@ The following example demonstrates the basic configuration of the ProgressBar Ht
 
 ## See Also
 
-* [JavaScript API Reference of the ProgressBar](http://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar)
-* [ProgressBar HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/progressbar/overview)
-* [ProgressBar Official Demos](http://demos.telerik.com/aspnet-core/progressbar/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the ProgressBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/progressbar/index)
+* [API Reference of the ProgressBar HtmlHelper for ASP.NET Core](/api/progressbar)
