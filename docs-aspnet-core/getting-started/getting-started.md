@@ -82,7 +82,20 @@ To configure an ASP.NET Core Web Application to use Telerik UI for ASP.NET Core:
 				// Add Kendo UI services to the services container
 				services.AddKendo();
 			}
+			
+	* However, if you are using .Net Core 3.0 it should be the following
 
+			public void ConfigureServices(IServiceCollection services)
+			{
+				...
+				services.AddMvc()
+				        .AddNewtonsoftJson(options =>
+					   options.SerializerSettings.ContractResolver =
+					      new DefaultContractResolver());
+					      
+				// Add Kendo UI services to the services container
+				services.AddKendo();
+			}
 	* If you are using a version prior to R2 2018, locate the `Configure` method and add a call to `app.UseKendo` at the end.
 
 
