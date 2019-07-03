@@ -239,7 +239,7 @@ Allows localization of the strings that are used in the widget.
     $("#daterangepicker").kendoDateRangePicker({
         "messages": {
             "startLabel": "The Start",
-            "startLabel": "The End"
+            "endLabel": "The End"
         }
      })
     </script>
