@@ -198,6 +198,70 @@ Specifies the default page size if no PDF is displayed in the PDFViewer. The pag
 
 The selected page number in the viewer.
 
+### scale `Number`
+
+Specifies the default scale of the pages.
+
+#### Example - customizing the scale
+
+    <div id="pdf-viewer"></div>
+    <script>
+        $("#pdf-viewer").kendoPDFViewer({
+            pdfjsProcessing: {
+                file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            },
+            scale: 1.5
+        });
+    </script>
+
+### zoomMin `Number` *(default: 0.5)*
+
+Specifies the minimum zoom that could be applied to the pages.
+
+#### Example - customizing the zoomMin
+
+    <div id="pdf-viewer"></div>
+    <script>
+        $("#pdf-viewer").kendoPDFViewer({
+            pdfjsProcessing: {
+                file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            },
+            zoomMin: 1
+        });
+    </script>
+
+### zoomMax `Number` *(default: 4)*
+
+Specifies the maximum zoom that could be applied to the pages.
+
+#### Example - customizing the zoomMax
+
+    <div id="pdf-viewer"></div>
+    <script>
+        $("#pdf-viewer").kendoPDFViewer({
+            pdfjsProcessing: {
+                file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            },
+            zoomMin: 2
+        });
+    </script>
+
+### zoomRate `Number` *(default: 0.25)*
+
+Specifies the zoom rate that could be applied to the pages. Used when zooming on `mousewheel` and for the `zoomIn` and `zoomOut` tools.
+
+#### Example - customizing the zoomRate
+
+    <div id="pdf-viewer"></div>
+    <script>
+        $("#pdf-viewer").kendoPDFViewer({
+            pdfjsProcessing: {
+                file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+            },
+            zoomRate: 0.5
+        });
+    </script>
+
 ### view `Object`
 
 Defines the page surface options. This setting is available only for DPL Processing. The page render a drawing [Surface](/api/javascript/drawing/surface) and all of its configuration options could be defined.
@@ -227,6 +291,7 @@ Toolbar option accepts a Boolean value which indicates if the toolbar will be di
 The following list indicates the default tools:
 
 * `pager`
+* `zoom`
 * `open`
 * `download`
 
@@ -240,6 +305,33 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
             toolbar: {
                 items: [
                   "pager", "spacer", "open", "download"
+                ]
+            }
+        });
+    </script>
+
+
+#### Example - customizing the pager default tool
+
+    <div id="pdf-viewer"></div>
+    <script>
+        $("#pdf-viewer").kendoPDFViewer({
+            toolbar: {
+                items: [
+                  { type: "pager", input: false, previousNext: true, command: "PageChangeCommand"}
+                ]
+            }
+        });
+    </script>
+
+#### Example - customizing the zoom default tool
+
+    <div id="pdf-viewer"></div>
+    <script>
+        $("#pdf-viewer").kendoPDFViewer({
+            toolbar: {
+                items: [
+                  { type: "zoom", zoomInOut: true, combobox: { zoomLevels: [50, 100, 200]}, command: "ZoomCommand"}
                 ]
             }
         });
