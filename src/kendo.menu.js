@@ -1000,7 +1000,7 @@ var __meta__ = { // jshint ignore:line
             var overflowWrapper = that._overflowWrapper();
             element = (overflowWrapper || that.element).find(element);
 
-            var dataItem = that.dataSource && that.dataSource.getByUid(element.data("uid"));
+            var dataItem = that.dataSource && that.dataSource.getByUid(element.data(kendo.ns + "uid"));
 
             if(dataItem && dataItem.hasChildren && !dataItem.loaded() && !that._loading){
                 that._loading = true;
@@ -2115,7 +2115,7 @@ var __meta__ = { // jshint ignore:line
 
         findByUid: function (uid) {
             var wrapperElement = this._overflowWrapper() || this.element;
-            return wrapperElement.find("[data-uid=" + uid + "]");
+            return wrapperElement.find("[" + kendo.attr("uid") + "=" + uid + "]");
         },
 
         refresh: function (ev) {
