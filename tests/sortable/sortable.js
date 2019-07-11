@@ -377,15 +377,15 @@
         });
 
     });
-    
+
       describe("Sortable - flexbox sorting", function() {
         beforeEach(function() {
             Mocha.fixture.append(
                 '<ul style="display:flex" id="sortable">' +
-                '<li style="margin: 0; height: 18px;">foo</li>' +
-                '<li style="margin: 0; height: 18px;">bar</li>' +
-                '<li style="margin: 0; height: 18px;">baz</li>' +
-                '<li style="margin: 0; height: 18px;">qux</li>' +
+                '<li style="width: 50px; margin: 0; height: 18px;">foo</li>' +
+                '<li style="width: 50px; margin: 0; height: 18px;">bar</li>' +
+                '<li style="width: 50px; margin: 0; height: 18px;">baz</li>' +
+                '<li style="width: 50px; margin: 0; height: 18px;">qux</li>' +
                 '</ul>'
             );
 
@@ -453,14 +453,14 @@
 
             //simulate press to trigger draggable's hint initialization
             press(draggedElement, draggableOffset.left, draggableOffset.top);
-            move(draggedElement, targetOffset.left + 10, targetOffset.top);
+            move(draggedElement, targetOffset.left + 26, targetOffset.top); // 26 number comes from half width + 1px
 
             assert.equal(sortable.placeholder.index(), 2, "placeholder is moved under the element under cursor");
 
             targetElement = element.children().last();
             targetOffset = kendo.getOffset(targetElement);
 
-            move(draggedElement, targetOffset.left + 20, targetOffset.top);
+            move(draggedElement, targetOffset.left + 26, targetOffset.top); // 26 number comes from half width + 1px
             assert.equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
         });
 
@@ -522,7 +522,7 @@
 
             //simulate press to trigger draggable's hint initialization
             press(draggedElement, draggableOffset.left, draggableOffset.top);
-            move(draggedElement, targetOffset.left+ 20, targetOffset.top);
+            move(draggedElement, targetOffset.left + 26, targetOffset.top); // 26 number comes from half width + 1px
             move(draggedElement, 500, 500);
             release(draggedElement, 500, 500);
 
