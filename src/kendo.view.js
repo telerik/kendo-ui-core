@@ -59,7 +59,7 @@ var __meta__ = { // jshint ignore:line
             that.id = kendo.guid();
 
             Observable.fn.init.call(that);
-            that._initOptions(options);
+            this.options = $.extend({}, this.options, options);
 
             that.content = content;
 
