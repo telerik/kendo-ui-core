@@ -1,14 +1,16 @@
 ---
 title: Earlier Versions Support Policy
-page_title: Earlier Versions Support Policy | Kendo UI Documentation
-description: "Get started with the support policy regarding the earlier Kendo UI versions, learn how bug fixes and feature requests are implemented, and how you can get them."
+page_title: Support Policy for Earlier Kendo UI Versions | Support and Distribution | Kendo UI for jQuery
+description: "Get started with Kendo UI for jQuery and learn about the support policy on earlier versions, how bug fixes and feature requests are implemented, and how you can get them."
 slug: old_versions_support_policy
 position: 50
 ---
 
-# Support Policy for Earlier Kendo UI Versions
+# Earlier Versions Support Policy
 
-This article provides information on the way bug fixes, feature enhancements, and browser compatibility are updated and applied across the Progress&reg; Kendo&reg; UI for jQuery, Progress&reg; Telerik&reg; UI for ASP.NET MVC, Progress&reg; Telerik&reg; UI for ASP.NET Core, Progress&reg; Telerik&reg; UI for JSP, and Progress&reg; Telerik&reg; UI for PHP suites.
+This article provides information on the provided support for earlier Kendo UI versions.
+
+The support policy includes the way bug fixes, feature enhancements, and browser compatibility are updated and applied across the Progress&reg; Kendo&reg; UI for jQuery, Progress&reg; Telerik&reg; UI for ASP.NET MVC, Progress&reg; Telerik&reg; UI for ASP.NET Core, Progress&reg; Telerik&reg; UI for JSP, and Progress&reg; Telerik&reg; UI for PHP suites.
 
 * [Bug Fixes](#bug-fixes)
 * [New Features and Widgets](#new-features-and-widgets)

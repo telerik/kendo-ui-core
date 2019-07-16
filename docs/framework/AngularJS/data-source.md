@@ -4,7 +4,7 @@ page_title: Data Source Integration | AngularJS Directives
 description: "Learn more about the interaction between Kendo UI DataSource and AngularJS scope to take full advantage of AngularJS integration into Kendo UI controls."
 previous_url: /AngularJS/data-source
 slug: datasource_updates_angularjs_directives
-position: 3
+position: 4
 ---
 
 # Data Source Integration
@@ -112,4 +112,3 @@ The recommended way to update the object is to use the `set` method of the [`Obs
 * [How to Load View in Window]({% slug window_service_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
 * [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
-* [Angular 2 Migration Guide](http://ngmigrate.telerik.com/)

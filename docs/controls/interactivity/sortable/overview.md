@@ -16,7 +16,7 @@ The [Kendo UI Sortable widget](http://demos.telerik.com/kendo-ui/sortable/index)
 
 The Sortable is initialized on an existing HTML element and enables the reordering of the element's children.
 
-The following example demonstrates how to initialize Kendo UI Sortable by using jQuery plug-in syntax.
+The following example demonstrates how to initialize Kendo UI Sortable by using jQuery plugin syntax.
 
 ###### Example
 

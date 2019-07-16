@@ -4,7 +4,7 @@ page_title: Saving Files | Kendo UI Saving Files
 description: "Learn how to save files on the client machine when working with Kendo UI."
 previous_url: /framework/save-files/introduction
 slug: overview_savingfiles_kendoui
-position: 9
+position: 7
 ---
 
 # Saving Files
@@ -220,7 +220,7 @@ public @ResponseBody void save(String fileName, String base64, String contentTyp
 }
 ```
 
-## See also
+## See Also
 
 * [Overview of the Excel Export Feature]({% slug introduction_excelexport_kendoui %})
 * [Overview of Kendo UI Drawing API](/framework/drawing/overview)

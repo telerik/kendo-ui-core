@@ -1,7 +1,17 @@
-# what's this?
-# - http://editorconfig.org
+
+# EditorConfig is awesome: http://EditorConfig.org
+
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
 
 [*.js]
-end_of_line = lf
+charset = utf-8
 indent_style = space
 indent_size = 4
+
+[*.yml]
+indent_style = space
+indent_size = 2

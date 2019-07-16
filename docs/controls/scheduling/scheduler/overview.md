@@ -12,6 +12,12 @@ The [Kendo UI Scheduler widget](http://demos.telerik.com/kendo-ui/scheduler/inde
 
 It can display scheduled events in different views&mdash;a single day, a whole week, or month and as a list of tasks which need to be accomplished.
 
+As of the Kendo UI 2016 Q2 (2016.2.504) release:
+* The Scheduler substitutes the semicolon (`;`) as the delimiter type for recurrence exception with the comma (`,`).
+* The Scheduler no longer adds a trailing delimiter to a recurrence exception.
+
+The change was driven by the [RFC 5545](http://tools.ietf.org/html/rfc5545#page-120) specification. Note that the previously demonstrated behavior had been incorrect.
+
 ## Getting Started
 
 ### Initialize the Scheduler
@@ -445,8 +451,7 @@ For more information on how to create custom views, refer to [this how-to exampl
 * [Resources]({% slug resources_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
 * [Adaptive Rendering]({% slug adaptiverendering_kendoui_scheduler_widget %})
+* [Get Familiar with Common Editing Concepts]({% slug kendoui_editing_gettingstarted %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Scheduler Widget](/aspnet-mvc/helpers/scheduler/overview)
 * [Overview of the Scheduler JSP Tag]({% slug overview_scheduler_uiforjsp %})
 * [Overview of the Scheduler PHP Class](/php/widgets/scheduler/overview)
-
-For how-to examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).

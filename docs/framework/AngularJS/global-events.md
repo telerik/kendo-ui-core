@@ -4,7 +4,7 @@ page_title: Global Events | AngularJS Directives
 description: "Learn more about the Kendo UI global events in AngularJS to take full advantage of AngularJS integration into Kendo UI controls."
 previous_url: /AngularJS/global-events
 slug: global_events_angularjs_directives
-position: 2
+position: 3
 ---
 
 # Global Events

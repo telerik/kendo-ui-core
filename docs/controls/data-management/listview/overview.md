@@ -47,6 +47,8 @@ To initialize the widget, use the code from the following example.
 
 The ListView supports selection, navigation, and editing which, by default, are disabled. You can configure any of these functionalities by using Boolean options.
 
+To get familiar with the common editing concepts in Kendo UI, refer to the article on [editing widgets]({% slug kendoui_editing_gettingstarted %}).
+
 ###### Example
 
       $(document).ready(function() {

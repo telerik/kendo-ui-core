@@ -20,6 +20,7 @@ The Grid provides the following edit modes:
 
 To enable editing:
 
+1. [Get familiar with the common editing concepts in Kendo UI]({% slug kendoui_editing_gettingstarted %})
 1. [Configure the data source of the Grid](#configuring-the-data-source)
 1. [Define the fields through the `schema` configuration](#defining-fields-through-schema)
 1. [Set the `editable` option](#setting-the-editable-option)

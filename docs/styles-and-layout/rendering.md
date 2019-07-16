@@ -30,14 +30,14 @@ The following example demonstrates how to configure the preferred rendering mode
 
 ## Including Only What You Need
 
-The rendering modules are available under the following separate files. You are required to include at least one of them.
-
+You have to include at least one of the rendering modules which are available under the following separate files:
 * `kendo.dataviz.svg(.min).js`
 * `kendo.dataviz.canvas(.min).js`
 
-> The Canvas and SVG modules are required by the [`imageDataURL`](/api/dataviz/chart#methods-imageDataURL) and [`svg`](/api/dataviz/chart#methods-svg) methods.
+For more information on adding only the functionalities you need in your project, refer to the articles on the [jQuery dependency]({% slug jquerysupport_kendoui %}) and [export libraries dependencies]({% slug export_support_kendoui %}).
 
-For more information on how to add only the functionalities you want to your project, refer to the [articles on the JavaScript dependencies]({% slug javascript_prerequisites_kendoui_installation %}) and the [Custom Download Builder](http://www.telerik.com/download/custom-download) (requires login).
+> * The Canvas and SVG modules are required by the [`imageDataURL`](/api/dataviz/chart#methods-imageDataURL) and [`svg`](/api/dataviz/chart#methods-svg) methods.
+> * The Custom Download Builder is located at http://www.telerik.com/download/custom-download and requires a login.
 
 ## Known Limitations
 

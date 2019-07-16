@@ -43,7 +43,7 @@ The mobile Application consists of a single HTML page with one or more mobile Vi
 
 When a mobile View is initialized, that is, the first time the user visits it, it initializes all Kendo UI web and hybrid mobile widgets, as well as the Kendo UI widgets for data visualization it contains.
 
-For more details on the declarative widget initialization, refer to the [article about setting data attributes]({% slug dataattributes_configuration_installation %}).
+For more details on the declarative widget initialization, refer to the [article about setting data attributes]({% slug mvvm_initialization_kendoui %}).
 
 The example below demonstrates a mobile view with a mobile Button widget.
 

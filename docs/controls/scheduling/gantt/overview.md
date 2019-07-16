@@ -473,6 +473,7 @@ The example below demonstrates how to subscribe to a Gantt event using the `bind
 * [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
 * [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})
 * [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
+* [Get Familiar with Common Editing Concepts]({% slug kendoui_editing_gettingstarted %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Gantt Widget](/aspnet-mvc/helpers/gantt/overview)
 * [Overview of the Gantt JSP Tag]({% slug overview_gantt_uiforjsp %})
 * [Overview of the Gantt PHP Class](/php/widgets/gantt/overview)

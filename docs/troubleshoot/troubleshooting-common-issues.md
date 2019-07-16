@@ -39,7 +39,7 @@ Make sure that jQuery is included only before the Kendo UI JavaScript files and 
 
 ### Widgets Are Unavailable or Undefined
 
-If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}) are not included.
+If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required jQuery file]({% slug jquerysupport_kendoui %}) is not included.
 
 Depending on the browser, the following JavaScript errors will be thrown:
 
@@ -54,7 +54,7 @@ Depending on the browser, the following JavaScript errors will be thrown:
 
 **Solution**
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}).
+Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files]({% slug jquerysupport_kendoui %}).
 
 ### Widgets Cannot Be Initialized in Internet Explorer Compatibility Mode
 

@@ -21,15 +21,18 @@ navigation:
     "intro":
         title: "Getting Started"
         position: 3
-    "intro/installation":
-        title: "Prerequisites and Installation"
-        position: 1
-    "intro/widget-basics":
-        title: "Widget Basics"
-        position: 2
     "intro/supporting":
-        title: "Reference Materials"
+      title: "Prerequisites"
+      position: 1
+    "intro/installation":
+        title: "Download and Installation"
+        position: 2
+    "intro/widget-basics":
+        title: "Working with Widgets"
         position: 3
+    "intro/scripts":
+        title: "Widget Script Dependencies"
+        position: 4
     "controls":
         title: "Widgets"
         position: 4
@@ -105,15 +108,6 @@ navigation:
     "controls/editors":
         title: "Editors"
         position: 2
-    "controls/editors/datepicker/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/datepicker/accessibility":
-        title: "Accessibility"
-        position: 50
-    "controls/editors/datepicker/how-to":
-        title: "How To"
-        position: 70
     "controls/editors/dropdownlist/globalization":
         title: "Globalization"
         position: 40
@@ -300,45 +294,54 @@ navigation:
         title: "Frequently Asked Questions"
         position: 24
     "framework":
-        title: "Common Features"
+        title: "Shared Utilities"
         position: 5
     "framework/datasource":
         title: "Data Source"
         position: 1
-    "framework/hierarchicaldatasource":
-        title: "Hierarchical Data Source"
-        position: 2
     "framework/mvvm":
         title: "MVVM Pattern"
-        position: 4
+        position: 2
     "framework/mvvm/bindings":
         title: "Bindings"
-        position: 3
+        position: 4
     "framework/mvvm/how-to":
         title: "How To"
-        position: 4
-    "framework/spa":
-        title: "Single-Page Applications"
         position: 5
-    "framework/drawing":
-        title: "Drawing Library"
-        position: 6
     "framework/templates":
         title: "Templates"
-        position: 7
+        position: 3
+    "framework/drawing":
+        title: "Drawing Library"
+        position: 4
+    "framework/drawing/dom-elements":
+        title: "Drawing DOM Elements"
+        position: 2
+    "framework/drawing/pdf-output":
+        title: "PDF Output"
+        position: 3
+    "framework/pdf":
+        title: "PDF Export"
+        position: 5
     "framework/excel":
         title: "Excel Export"
-        position: 8
+        position: 6
     "framework/AngularJS":
         title: "AngularJS Directives"
-        position: 10
+        position: 8
+    "framework/AngularJS/widget-basics":
+        title: "Working with Widgets"
+        position: 2
     "framework/AngularJS/how-to":
         title: "How To"
-        position: 6
+        position: 7
     "framework/AngularJS/Troubleshooting":
         title: "Troubleshooting"
-        position: 7
-    "styles-and-layout":
+        position: 8
+    "framework/spa":
+        title: "Single-Page Applications"
+        position: 9
+   "styles-and-layout":
         title: "Styles & Appearance"
         position: 6
     "third-party":
@@ -369,7 +372,7 @@ navigation:
     "php/widgets":
         title: "Classes"
     "backwards-compatibility":
-        title: "Breaking Changes & Contribution"
+        title: "Breaking Changes"
         position: 20
     "troubleshoot":
         title: "Troubleshooting"

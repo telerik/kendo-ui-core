@@ -214,9 +214,9 @@ The flag, which indicates whether to show or hide the loading overlay.
     .k-loading-mask .k-loading-image {
       background-image: none;
     }
-     
+
     /* change */
-     
+
     .k-loading-mask .k-loading-image {
       background-image: url('...non-animated.image.here...');
     }
