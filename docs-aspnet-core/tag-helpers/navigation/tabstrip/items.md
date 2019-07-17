@@ -1,7 +1,7 @@
 ---
 title: Items
-page_title: Items | Kendo UI TabStrip Tag Helper for ASP.NET Core
-description: "Configure the items of the Kendo UI TabStrip tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Items | Telerik UI TabStrip Tag Helper for ASP.NET Core
+description: "Configure the items of the Telerik UI TabStrip tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: items_tabstrip_aspnetcoretaghelper
 position: 2
 ---
@@ -110,4 +110,4 @@ You can also define the content of each item by using the `<content>` tag helper
 
 ## See Also
 
-* [JavaScript API Reference of the TabStrip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [API Reference of the TabStrip Helper for ASP.NET Core](/api/tabstrip)

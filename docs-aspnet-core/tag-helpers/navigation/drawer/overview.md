@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: Drawer Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Drawer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Drawer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_drawer_aspnetcore
 position: 1
 ---
 
 # Drawer Tag Helper Overview
 
+The Telerik UI Drawer tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Drawer widget.
+
 The Drawer is a dismissible panel used for navigation in responsive web applications or for changing a content of a section in the page.
 
-The Drawer tag helper extension is a server-side wrapper for the [Kendo UI Drawer](https://demos.telerik.com/kendo-ui/drawer/index) widget and enables you to configure the Kendo UI Drawer widget in ASP.NET Core applications.
+* [Demo page for the Drawer](https://demos.telerik.com/aspnet-core/drawer/index)
 
 ## Initializing the Drawer
 
@@ -89,4 +91,5 @@ The following example demonstrates the basic configuration of the Drawer Tag Hel
 
 ## See Also
 
-* [JavaScript API Reference of the Drawer](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer)
+* [Basic Usage of the Drawer Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/index)
+* [API Reference of the Drawer Helper for ASP.NET Core](/api/drawer)

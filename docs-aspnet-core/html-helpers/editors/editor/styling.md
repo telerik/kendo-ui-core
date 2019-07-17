@@ -1,7 +1,7 @@
 ---
 title: Styling of Content
-page_title: Styling of Content | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn how to apply styles to the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Styling of Content | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to apply styles to the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_styling_aspnetcore
 position: 8
 ---
@@ -107,7 +107,7 @@ To avoid the default content styles from the previous example, remove or overrid
     .Name("editor")
     .Value(@<text>
         <p>
-            Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.
+            The Editor allows your users to edit HTML in a familiar, user-friendly way.
         </p>
     </text>)
 )
@@ -128,4 +128,4 @@ You can also use custom styles with [higher specificity](https://developer.mozil
 ## See Also
 
 * [Styles in the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/styles)
-* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

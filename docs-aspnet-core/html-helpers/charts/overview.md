@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Charts Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_charts_aspnetcore
 previous_url: /aspnet-core/helpers/html-helpers/charts/charts, /aspnet-core/helpers/html-helpers/charts
 position: 1
@@ -9,22 +9,11 @@ position: 1
 
 # Charts HtmlHelper Overview
 
-The [Kendo UI Charts](http://demos.telerik.com/aspnet-core/) use modern browser technologies to render high-quality data visualizations.
+The Telerik UI Chart HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Chart widget.
 
-All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/).
+The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_aspnetcore_htmlhelper %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
 
-The Charts support the following series types:
-* Bar and Column
-* Line and Vertical Line
-* Area and Vertical Area
-* Bullet
-* Pie and Donut
-* Scatter
-* Scatter Line
-* Bubble
-* Radar and Polar
-
-The Charts HtmlHelper extension is a server-side wrapper for the [Kendo UI Charts](http://demos.telerik.com/kendo-ui/area-charts/index) widgets. For additional information on new Kendo UI Chart types and features, refer to the [Kendo UI Roadmap](https://www.telerik.com/support/whats-new/kendo-ui-web/roadmap). For more information on the Chart HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/chart/overview).
+* [Demo page for the Chart](https://demos.telerik.com/aspnet-core/chart-api/index)
 
 ## Initializing the Chart
 
@@ -91,13 +80,11 @@ The following example demonstrates the basic configuration for the Line Chart Ht
 
 ## Functionality and Features
 
-The Charts provide options for [binding them to inline, local, or remote data]({% slug htmlhelpers_charts_databinding_aspnetcore %}).
+The Charts provide options for [binding to inline, local, or remote data]({% slug htmlhelpers_charts_databinding_aspnetcore %}).
 
 ## See Also
 
-* [Using the API of the Charts HtmlHelpers for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chart-api/index)
-* [Basic Usage of the Bar Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bar-charts/index)
-* [Basic Usage of the Kendo UI Bar Charts (Demo)](https://demos.telerik.com/aspnet-core/bar-charts/index)
-* [Basic Usage of the Line Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/line-charts/index)
-* [Basic Usage of the Kendo UI Line Charts (Demo)](https://demos.telerik.com/kendo-ui/line-charts/index)
-* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Using the API of the Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chart-api/index)
+* [Basic Usage of the Bar Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bar-charts/index)
+* [Basic Usage of the Line Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/line-charts/index)
+* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)

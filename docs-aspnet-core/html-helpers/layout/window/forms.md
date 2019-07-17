@@ -1,7 +1,7 @@
 ---
 title: Forms Integration
-page_title: Forms Integration | Kendo UI Window HtmlHelper for ASP.NET Core
-description: "Learn how to use forms in the Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Forms Integration | Telerik UI Window HtmlHelper for ASP.NET Core
+description: "Learn how to use forms in the Telerik UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_forms_aspnetcore
 position: 7
 ---
@@ -12,7 +12,7 @@ The Window HtmlHelper provides various approaches to load a `<form>` element as 
 
 ## Html.BeginForm inside Window
 
-To insert a complete form inside a Window, end the Window declaration with `.Render();` and wrap it in a non-rendering code block. This requirement does not apply if the form is defined through plain HTML tags (`&lt;form&gt;...&lt;/form&gt;`). For more information, refer to the [article on using the Kendo UI Window with a form](http://docs.telerik.com/kendo-ui/controls/layout/window/overview#using-kendo-ui-window-with-a-form).
+To insert a complete form inside a Window, end the Window declaration with `.Render();` and wrap it in a non-rendering code block. This requirement does not apply if the form is defined through plain HTML tags (`&lt;form&gt;...&lt;/form&gt;`).
 
 The following example demonstrates how to insert a complete form inside the Window.
 
@@ -29,9 +29,9 @@ The following example demonstrates how to insert a complete form inside the Wind
 
 ## Loading External Form
 
-The Kendo UI Window for ASP.NET MVC enables you to use the `LoadContentFrom()` method to load content from a view into the popup content. For more information, refer to the article on [loading content on demand]({% slug htmlhelpers_window_loadingcontent_aspnetcore %}#load-on-demand-content)).
+The Telerik UI Window for ASP.NET MVC enables you to use the `LoadContentFrom()` method to load content from a view into the popup content.
 
-Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view into a Kendo UI Window, it does not act as a separate browser window. This means that any returned data from the form submit action loads into the main page and eventually might lead to unexpected results.
+Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view into a Kendo UI for jQuery Window, it does not act as a separate browser window. This means that any returned data from the form submit action loads into the main page and eventually might lead to unexpected results.
 
 To handle this behavior, render the content in an `iframe`.
 
@@ -110,4 +110,4 @@ public IActionResult MyModel_Create(MyModel model)
 ## See Also
 
 * [Constraining the Movement of the Window HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/constrain-movement)
-* [JavaScript API Reference of the Window](http://docs.telerik.com/kendo-ui/api/javascript/ui/window)
+* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)

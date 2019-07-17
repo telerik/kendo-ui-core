@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Telerik UI for ASP.NET Core Tag Helpers
-description: "Enable and use the keyboard navigation when working with the Kendo UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Keyboard Navigation | Telerik UI Calendar Tag Helper for ASP.NET Core
+description: "Enable and use the keyboard navigation when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: keynav_calendar_aspnetcore
 position: 7
 ---
@@ -25,4 +25,4 @@ For a runnable example on performing date selection over the keyboard, refer to 
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)

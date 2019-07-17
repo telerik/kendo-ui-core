@@ -1,14 +1,14 @@
 ---
 title: Model Binding
 page_title: Model Binding | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Implement model binding in the Kendo UI RadioButton for ASP.NET MVC."
+description: "Implement model binding in the Telerik UI RadioButton for ASP.NET MVC."
 slug: modelbinding_radiobutton_aspnetcore
 position: 4
 ---
 
 # Model Binding
 
-You can bind a Kendo UI RadioButton to a model.
+You can bind a Telerik UI RadioButton to a model.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %}).
 1. Create a new action method and pass the instance of the model to the View.
@@ -40,5 +40,5 @@ You can bind a Kendo UI RadioButton to a model.
 
 ## See Also
 
+* [API Reference of the RadioButton HtmlHelper for ASP.NET Core](/api/radiobutton)
 * [Telerik UI for ASP.NET Core API Reference: RadioButtonBuilder](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
-* [Overview of the Kendo UI RadioButton Widget](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#customize-checkboxes-and-radio-buttons)

@@ -1,7 +1,7 @@
 ---
 title: Items
-page_title: Items | Kendo UI TreeView HtmlHelper for ASP.NET Core
-description: "Learn about the item properties in the Kendo UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Items | Telerik UI TreeView HtmlHelper for ASP.NET Core
+description: "Learn about the item properties in the Telerik UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treeview_items_aspnetcore
 position: 3
 ---
@@ -47,4 +47,4 @@ The following JSON example demonstrates how to pass item properties to the TreeV
 
 ## See Also
 
-* [JavaScript API Reference of the TreeView](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)

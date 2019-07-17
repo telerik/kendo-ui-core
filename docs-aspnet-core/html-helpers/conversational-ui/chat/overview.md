@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Chat Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Chat HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Chat HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/chat
 slug: htmlhelpers_chat_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Chat HtmlHelper Overview
 
-The Chat allows the user to participate in chat sessions with other users or with chat bots.
+The Telerik UI Chat HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Chat widget.
 
-The widget provides support for default [cards](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-cards) and [actions](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-actions), and enables the configuration of [custom templates](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-templates) and [custom components](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-components).
+The Chat allows the user to participate in chat sessions with other users or with chat bots. It provides support for default cards and actions, and enables the configuration of custom templates and custom components.
 
-The Chat HtmlHelper extension is a server-side wrapper for the [Kendo UI Chat](https://demos.telerik.com/kendo-ui/chat/index) widget. For more information on new Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap). For more information on the Chat HtmlHelper for ASP.NET MVC, refer to [the UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/chat/overview).
+* [Demo page for the Chat](https://demos.telerik.com/aspnet-core/chat/index)
 
 ## Initializing the Chat
 
@@ -59,5 +59,4 @@ The Chat provides an option for creating a [Peer-to-Peer Chat application by usi
 ## See Also
 
 * [Basic Usage of the Chat HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chat/index)
-* [Basic Usage of the Kendo UI Chat Widget (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [JavaScript API Reference of the Kendo UI Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [API Reference of the Chat HtmlHelper for ASP.NET Core](/api/chat)

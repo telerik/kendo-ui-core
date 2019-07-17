@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Scheduler Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/scheduler, /aspnet-core/helpers/tag-helpers/scheduler
 slug: taghelpers_scheduler_aspnetcore
 position: 1
@@ -9,11 +9,13 @@ position: 1
 
 # Scheduler Tag Helper Overview
 
-The [Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview) displays a set of events, appointments, or tasks.
+The Telerik UI Scheduler tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Scheduler widget.
 
-It support the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
+The Scheduler displays a set of events, appointments, or tasks. It supports the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
-The Scheduler tag helper extension is a server-side wrapper for the [Kendo UI Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) widget and enables you to configure the Kendo UI Scheduler widget in ASP.NET Core applications.
+> As of the Kendo UI for jQuery R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing. If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
+
+* [Demo page for the Scheduler](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
 
 ## Initializing the Scheduler
 
@@ -134,4 +136,4 @@ The Scheduler tag helper configuration options are passed as attributes of the t
 ## See Also
 
 * [Basic Usage of the Scheduler Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
-* [JavaScript API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler Helper for ASP.NET Core](/api/scheduler)

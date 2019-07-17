@@ -1,7 +1,7 @@
 ---
 title: Dragging and Dropping of Files
-page_title: Dragging and Dropping of Files | Kendo UI Upload HtmlHelper for ASP.NET Core
-description: "Learn about the file drag and drop functionality of the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Dragging and Dropping of Files | Telerik UI Upload HtmlHelper for ASP.NET Core
+description: "Learn about the file drag and drop functionality of the Telerik UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_drag_drop_aspnetcore
 position: 4
 ---
@@ -50,7 +50,7 @@ To customize the appearance of the drop zone during the process of dragging and 
 
 By default, the drop zone is not visible.
 
-The following example demonstrates how to override the default drop zone&mdash;when the Kendo UI Upload itself is used as a drop zone&mdash;by applying CSS rules.
+The following example demonstrates how to override the default drop zone&mdash;when the Upload itself is used as a drop zone&mdash;by applying CSS rules.
 
     div.k-dropzone {
         border: 1px solid #c5c5c5; /* For Default; Different for each theme */
@@ -76,4 +76,4 @@ The following example demonstrates how to customize the appearance of the drop z
 ## See Also
 
 * [Custom Drop Zones by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/customdropzone)
-* [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)

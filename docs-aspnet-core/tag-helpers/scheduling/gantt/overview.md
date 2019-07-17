@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Gantt Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/gantt
 slug: taghelpers_gantt_aspnetcore
 position: 1
@@ -9,13 +9,11 @@ position: 1
 
 # Gantt Tag Helper Overview
 
-The [Gantt](http://docs.telerik.com/kendo-ui/controls/scheduling/gantt/overview) displays a set of tasks and dependencies which are used to visualize project-planning data.
+The Telerik UI Gantt tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Gantt widget.
 
-The widget provides:
-* A TreeList section where the user can edit the tasks, and sort and reorder them in a grid-like fashion.
-* A Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in the day, week, and month views.
+The Gantt displays a set of tasks and dependencies which are used to visualize project-planning data. It provides a TreeList section where the user can edit the tasks, and sort and reorder them in a grid-like fashion, and a Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in the day, week, and month views.
 
-The Gantt tag helper extension is a server-side wrapper for the [Kendo UI Gantt](http://demos.telerik.com/kendo-ui/gantt/index) widget and enables you to configure the Kendo UI Gantt widget in ASP.NET Core applications.
+* [Demo page for the Gantt](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
 
 ## Initializing the Gantt
 
@@ -81,4 +79,4 @@ The Gantt provides options for [binding it to data]({% slug binding_gantt_aspnet
 ## See Also
 
 * [Basic Usage of the Gantt Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
-* [JavaScript API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt Helper for ASP.NET Core](/api/gantt)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Men Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/menu
 slug: htmlhelpers_menu_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Menu HtmlHelper Overview
 
-The [Menu](http://docs.telerik.com/kendo-ui/controls/navigation/menu/overview) displays hierarchical data as a multi-level menu.
+The Telerik UI Menu HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Menu widget.
 
-It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
+The Menu displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
 
-The Menu HtmlHelper extension is a server-side wrapper for the [Kendo UI Menu](http://demos.telerik.com/kendo-ui/menu/index) widget. For more information on the Menu HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/menu/overview).
+* [Demo page for the Menu](https://demos.telerik.com/aspnet-core/menu/index)
 
 ## Initializing the Menu
 
@@ -153,12 +153,13 @@ The following example demonstrates the basic configuration of the Menu HtmlHelpe
 ## Functionality and Features
 
 * [Binding]({% slug htmlhelpers_menu_databinding_aspnetcore %})
+* [Context menu]({% slug htmlhelpers_contextmenu_aspnetcore %})
 * [Security trimming]({% slug htmlhelpers_menu_securitytrimming_aspnetcore %})
 * [Keyboard navigation]({% slug htmlhelpers_menu_keyboardnavigation_aspnetcore %})
 
 ## Events
 
-You can subscribe to all Menu [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu#events). For a complete example on basic Menu events, refer to the [demo on using the events of the Menu](https://demos.telerik.com/aspnet-core/menu/events).
+You can subscribe to all Menu events. For a complete example on basic Menu events, refer to the [demo on using the events of the Menu](https://demos.telerik.com/aspnet-core/menu/events).
 
 ### Handling by Handler Names
 
@@ -224,4 +225,4 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 * [Basic Usage of the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu)
 * [Using the API of the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/api)
-* [JavaScript API Reference of the Menu](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: DateRangePicker Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI DateRangePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the  DateRangePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/daterangepicker
 slug: htmlhelpers_daterangepicker_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # DateRangePicker HtmlHelper Overview
 
+The Telerik UI DateRangePicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DateRangePicker widget.
+
 The DateRangePicker is a container for holding start and end date inputs.
 
-The DateRangePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/index) widget. For more information on the DateRangePicker HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/daterangepicker/overview).
+* [Demo page for the DateRangePicker](https://demos.telerik.com/aspnet-core/daterangepicker/index)
 
 ## Basic Configuration
 
@@ -28,7 +30,7 @@ The following example demonstrates the basic configuration for the DateRangePick
 
 ## Events
 
-You can subscribe to all DateRangePicker [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker#events). For a complete example on basic DateRangePicker events, refer to the [demo on using the events of the DateRangePicker](https://demos.telerik.com/aspnet-core/daterangepicker/events).
+You can subscribe to all DateRangePicker events. For a complete example on basic DateRangePicker events, refer to the [demo on using the events of the DateRangePicker](https://demos.telerik.com/aspnet-core/daterangepicker/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -58,7 +60,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [DateRangePicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker#methods) to control its behavior.
+To reference an existing Kendo UI DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [DateRangePicker API](/api/daterangepicker) to control its behavior.
 
 The following example demonstrates how to access an existing DateRangePicker instance.
 
@@ -74,4 +76,4 @@ The following example demonstrates how to access an existing DateRangePicker ins
 
 * [Basic Usage of the DateRangePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/index)
 * [Using the API of the DateRangePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/api)
-* [JavaScript API Reference of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker)
+* [API Reference of the DateRangePicker HtmlHelper for ASP.NET Core](/api/daterangepicker)

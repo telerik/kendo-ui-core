@@ -1,14 +1,14 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI MultiSelect HtmlHelper for ASP.NET Core
-description: "Learn how to implement Ajax Binding with Kendo UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Ajax Binding | Telerik UI MultiSelect HtmlHelper for ASP.NET Core
+description: "Learn how to implement Ajax Binding with Telerik UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_multiselect_ajaxbinding_aspnetcore
 position: 2
 ---
 
 # Ajax Binding
 
-You can configure the Kendo UI MultiSelect for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
+You can configure the Telerik UI MultiSelect for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
 
 > The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
@@ -46,4 +46,4 @@ You can configure the Kendo UI MultiSelect for Ajax binding to the Northwind **P
 
 ## See Also
 
-* [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)

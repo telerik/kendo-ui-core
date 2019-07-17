@@ -1,7 +1,7 @@
 ---
 title: Dragging and Dropping
-page_title: Dragging and Dropping | Kendo UI ListBox Tag Helper for ASP.NET Core
-description: "Enable the drag-and-drop feature of the Kendo UI ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Dragging and Dropping | Telerik UI ListBox Tag Helper for ASP.NET Core
+description: "Enable the drag-and-drop feature of the Telerik UI ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: dragdrops_listbox_aspnetcore
 position: 4
 ---
@@ -62,4 +62,4 @@ You can also customize the drag-and-drop behavior of the widget by using its `dr
 ## See Also
 
 * [Basic Usage of the ListBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
-* [JavaScript API Reference of the ListBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [API Reference of the ListBox Helper for ASP.NET Core](/api/listbox)

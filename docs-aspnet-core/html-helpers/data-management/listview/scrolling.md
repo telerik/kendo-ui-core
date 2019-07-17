@@ -1,14 +1,14 @@
 ---
 title: Scrolling
-page_title: Scrolling | Kendo UI ListView HtmlHelper for ASP.NET Core
-description: "Configure the Kendo UI ListView for ASP.NET Core to enable scrolling functionality."
+page_title: Scrolling | Telerik UI ListView HtmlHelper for ASP.NET Core
+description: "Configure the Telerik UI ListView for ASP.NET Core to enable scrolling functionality."
 slug: htmlhelpers_listview_aspnetcore_scrolling
 position: 4
 ---
 
 # Scrolling
 
-By default, the scrolling functionality of the Kendo UI ListView for ASP.NET Core is disabled.
+By default, the scrolling functionality of the Telerik UI ListView for ASP.NET Core is disabled.
 
 ## Getting Started
 
@@ -41,7 +41,7 @@ To control scrolling in the ListView, use the `Scrollable` property.
 
 ## Endless Scrolling
 
-The endless scrolling functionality enables the Kendo UI ListView for ASP.NET Core to display large amounts of data by appending additional pages of data on demand. The loading of new items happens when the scrollbar of the ListView reaches its end. When the data is returned, only the new items are rendered and appended to the old ones. The endless scrolling of the ListView works with both local and remote data. For a runnable example, refer to the [demo on the endless scroll mode in the ListView](https://demos.telerik.com/aspnet-core/listview/editing).
+The endless scrolling functionality enables the Telerik UI ListView for ASP.NET Core to display large amounts of data by appending additional pages of data on demand. The loading of new items happens when the scrollbar of the ListView reaches its end. When the data is returned, only the new items are rendered and appended to the old ones. The endless scrolling of the ListView works with both local and remote data. For a runnable example, refer to the [demo on the endless scroll mode in the ListView](https://demos.telerik.com/aspnet-core/listview/editing).
 
 The following example demonstrates how to enable the endless scroll mode of the ListView by setting the `Scrollable` property to the `Endless` value of the `ListViewScrollableMode` enum.
 
@@ -72,5 +72,5 @@ The following example demonstrates how to enable the endless scroll mode of the 
 
 ## See Also
 
-* [Endless Scrolling by the ListView (Demo)](https://demos.telerik.com/aspnet-core/listview/editing)
-* [JavaScript API Reference of the Kendo UI ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Endless Scrolling by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/editing)
+* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)

@@ -1,12 +1,12 @@
 ---
 title: Adaptive Rendering
-page_title: Adaptive Rendering | Telerik UI for ASP.NET Core Scheduler HtmlHelper
-description: "Get started with the Scheduler HtmlHelper for ASP.NET Core and learn how to configure adaptive rendering."
+page_title: Adaptive Rendering | Telerik UI Scheduler HtmlHelper for ASP.NET Core
+description: "Get started with the Scheduler HtmlHelper for ASP.NET Core and learn how to configure its adaptive rendering."
 slug: htmlhelpers_scheduler_adaptiverendering_aspnetcore
-position: 2
+position: 3
 ---
 
-# Adaptive Rendering Mode
+# Adaptive Rendering
 
 The Scheduler supports adaptive enhancements such as changes in styling and behavior in order to remain consistent with the specific user device experience.
 
@@ -50,4 +50,4 @@ The following example demonstrates how to configure the adaptive rendering mode 
 ## See Also
 
 * [Adaptive Rendering by the Scheduler HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/adaptive-rendering)
-* [JavaScript API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)

@@ -1,16 +1,16 @@
 ---
 title: Adaptive Rendering
-page_title: Adaptive Rendering | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Get started with the ASP.NET Core Grid by Kendo UI which provides consistency to the customer experience on any device by supporting adaptive rendering."
+page_title: Adaptive Rendering | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Get started with the ASP.NET Core Grid by Telerik UI which provides consistency to the customer experience on any device by supporting adaptive rendering."
 slug: adaptive_rendering_gridhelper_aspnetcore
 position: 12
 ---
 
 # Adaptive Rendering
 
-The Kendo UI Grid for ASP.NET Core provides consistency to the customer experience on any device by supporting adaptive enhancements.
+The Telerik UI Grid for ASP.NET Core provides consistency to the customer experience on any device by supporting adaptive enhancements.
 
-For example, when you filter or edit data on mobile, Kendo UI slides in a new screen for the user, which is a departure from the desktop-like inline and popup behaviors. For a runnable example, refer to the [demo on implementing the responsive web design in the Grid](https://demos.telerik.com/aspnet-core/grid/adaptive-rendering).
+For example, when you filter or edit data on mobile, the system slides in a new screen for the user, which is a departure from the desktop-like inline and popup behaviors. For a runnable example, refer to the [demo on implementing the responsive web design in the Grid](https://demos.telerik.com/aspnet-core/grid/adaptive-rendering).
 
 ## Enabling the Responsive Web Design
 
@@ -59,6 +59,6 @@ To manually destroy the Grid:
 
 ## See Also
 
-* [Responsive Columns by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/responsive-columns)
-* [Adaptive Rendering by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/adaptive-rendering)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Responsive Columns by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/responsive-columns)
+* [Adaptive Rendering by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/adaptive-rendering)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

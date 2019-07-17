@@ -1,7 +1,7 @@
 ---
 title: Week Number Column
-page_title: Week Number Column | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Render a column displaying the number of the weeks within the current month view when working with the Kendo UI MultiViewCalendar."
+page_title: Week Number Column | Telerik UI MultiViewCalendar Tag for ASP.NET Core
+description: "Render a column displaying the number of the weeks within the current month view when working with the Telerik UI MultiViewCalendar."
 slug: week_column_multiviewcalendar_taghelper_aspnetcore
 position: 7
 ---
@@ -26,4 +26,4 @@ In the MultiViewCalendar, you can render a column which displays the number of t
 
 ## See Also
 
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

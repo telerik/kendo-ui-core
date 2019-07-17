@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ColorPicker Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI ColorPicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ColorPicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/colorpicker, /aspnet-core/helpers/tag-helpers/colorpicker
 slug: taghelpers_colorpicker_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # ColorPicker Tag Helper Overview
 
-The ColorPicker enables the user to select and submit color values.
+The Telerik UI ColorPicker tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ColorPicker widget.
 
-The ColorPicker tag helper extension is a server-side wrapper for the [Kendo UI ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/index) widget and enables you to configure the Kendo UI ColorPicker widget in ASP.NET Core applications.
+The ColorPicker provides suggestions depending on the typed text and allows multiple value entries.
+
+* [Demo page for the ColorPicker](https://demos.telerik.com/aspnet-core/colorpicker/tag-helper)
 
 ## Initializing the ColorPicker
 
@@ -78,4 +80,4 @@ The ColorPalette tag helper configuration options are passed as attributes of th
 ## See Also
 
 * [Basic Usage of the ColorPicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/tag-helper)
-* [JavaScript API Reference of the ColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)
+* [API Reference of the ColorPicker Helper for ASP.NET Core](/api/colorpicker)

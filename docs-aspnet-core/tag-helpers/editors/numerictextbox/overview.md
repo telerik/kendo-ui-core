@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: NumericTextBox Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI NumericTextBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI NumericTextBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/numeric-text-box, /aspnet-core/helpers/tag-helpers/numeric-text-box
 slug: taghelpers_numerictextbox_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # NumericTextBox Tag Helper Overview
 
-The Kendo UI NumericTextBox converts an `input` element into a numeric, percentage, or currency textbox.
+The Telerik UI NumericTextBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiSelect widget.
 
-The NumericTextBox tag helper extension is a server-side wrapper for the [Kendo UI NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index) widget and enables you to configure the Kendo UI NumericTextBox widget in ASP.NET Core applications.
+The NumericTextBox converts an `input` element into a numeric, percentage, or currency textbox.
+
+* [Demo page for the NumericTextBox](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
 
 ## Initializing the NumericTextBox
 
@@ -50,4 +52,4 @@ The NumericTextBox tag helper supports all the configuration options that the Ht
 ## See Also
 
 * [Basic Usage of the NumericTextBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
-* [JavaScript API Reference of the NumericTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox)
+* [API Reference of the NumericTextBox Helper for ASP.NET Core](/api/numerictextbox)

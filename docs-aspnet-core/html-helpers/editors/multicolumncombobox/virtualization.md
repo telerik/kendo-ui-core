@@ -1,17 +1,17 @@
 ---
 title: Virtualization
-page_title: Virtualization | Kendo UI MultiColumnComboBox for ASP.NET Core
-description: "Learn the basics when working with the Kendo UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Virtualization | Telerik UI MultiColumnComboBox for ASP.NET Core
+description: "Learn the basics when working with the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: virtualization_multicolumncombobox_aspnetcore
 position: 5
 ---
 
 # Virtualization
 
-You can configure a MultiColumnComboBox that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/multicolumncombobox/virtualization).
+You can configure a MultiColumnComboBox that is bound to a model field to use virtualization.
 
 > * For the virtualization to work properly, define the widths of all columns in pixels.
-> * The value to which you can bind the MultiColumnComboBox on the server can be of the primitive type or an enum value only.
+> * The MultiColumnComboBox supports server binding to primitive or an enum value types only.
 
 1. Create the `Read` and `ValueMapper` actions.
 
@@ -128,10 +128,10 @@ If the `AutoBind` option of the MultiColumnComboBox is set to `false` and you ne
         .AutoBind(false)
         .Text(Model.ProductName)
         .DataTextField("ProductName")
-        //...additional configuration
+        // Additional configuration.
     )
 
 ## See Also
 
 * [Virtualization by the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/virtualization)
-* [JavaScript API Reference of the MultiColumnComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)

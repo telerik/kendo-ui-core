@@ -1,7 +1,7 @@
 ---
 title: Loading Content
-page_title: Loading Content | Kendo UI Window HtmlHelper for ASP.NET Core
-description: "Learn about the different ways of loading content in Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Loading Content | Telerik UI Window HtmlHelper for ASP.NET Core
+description: "Learn about the different ways of loading content in Telerik UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_loadingcontent_aspnetcore
 position: 5
 ---
@@ -50,4 +50,4 @@ To configure the Window with load-on-demand content:
 
 ## See Also
 
-* [JavaScript API Reference of the Window](http://docs.telerik.com/kendo-ui/api/javascript/ui/window)
+* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)

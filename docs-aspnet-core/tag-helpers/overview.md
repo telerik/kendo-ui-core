@@ -9,13 +9,13 @@ position: 0
 
 # Tag Helpers Overview
 
-The Kendo UI tag helper helps you configure the Kendo UI widgets by using the tag helper feature in ASP.NET Core.
+The Telerik UI tag helpers for ASP.NET Core enable you to configure the corresponding Kendo UI widgets.
 
-Tag helpers can be added and further configured through predefined strongly typed attributes, and enable you to handle the events of the widgets.
+Tag helpers can be added and further configured through predefined strongly typed attributes and also allow you to handle the events of the widgets in ASP.NET Core projects.
 
 ## Adding Tag Helpers
 
-To configure an ASP.NET Core project that enables you to use the Kendo UI tag helper, add the @addTagHelper directive to your `cshtml` file.
+To configure an ASP.NET Core project that enables you to use a Telerik UI tag helper, add the @addTagHelper directive to your `cshtml` file.
 
       @addTagHelper "*, Kendo.Mvc"
 
@@ -43,7 +43,6 @@ The following example demonstrates how to set the `change` event of a NumericTex
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Overview of UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with UI for ASP.NET Core on Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with UI for ASP.NET Core on Mac OS]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})

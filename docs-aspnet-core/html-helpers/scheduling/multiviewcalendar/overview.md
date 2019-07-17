@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI MultiViewCalendar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI MultiViewCalendar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_multiviewcalendar_htmlhelper_aspnetcore
 position: 1
 ---
 
 # MultiViewCalendar HtmlHelper Overview
 
-The Kendo UI MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
+The Telerik UI MultiViewCalendar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiViewCalendar widget.
 
-The MultiViewCalendar HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/index) widget. For more information on the MultiViewCalendar HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/multiviewcalendar/overview).
+The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
+
+* [Demo page for the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar/index)
 
 ## Initializing the MultiViewCalendar
 
@@ -45,7 +47,7 @@ The MultiViewCalendar HtmlHelper extension is a server-side wrapper for the [Ken
 
 ## Events
 
-You can subscribe to all MultiViewCalendar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar#events). For a complete example on basic MultiViewCalendar events, refer to the [demo on using the events of the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar/events).
+You can subscribe to all MultiViewCalendar events. For a complete example on basic MultiViewCalendar events, refer to the [demo on using the events of the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar/events).
 
 ### Handling by Handler Name
 
@@ -96,4 +98,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Basic Usage of the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar)
 * [Using the API of the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/api)
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)

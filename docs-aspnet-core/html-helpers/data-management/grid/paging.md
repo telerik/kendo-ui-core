@@ -1,14 +1,14 @@
 ---
 title: Paging
-page_title: Paging | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Learn how to enable the paging functionality of the Kendo UI Grid for ASP.NET Core."
+page_title: Paging | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Learn how to enable the paging functionality of the Telerik UI Grid for ASP.NET Core."
 slug: htmlhelpers_grid_aspnetcore_paging
 position: 6
 ---
 
 # Paging
 
-By default, the paging functionality of the Kendo UI Grid for ASP.NET Core is disabled.
+By default, the paging functionality of the Telerik UI Grid for ASP.NET Core is disabled.
 
 For a runnable example, refer to the [demo on paging by the Grid](https://demos.telerik.com/aspnet-core/grid/paging).
 
@@ -38,6 +38,6 @@ Use as small page sizes as possible, because rendering too many records causes p
 
 ## See Also
 
-* [Paging by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/aggregates)
-* [Setting the Pager Visibility in the Grid](https://demos.telerik.com/aspnet-core/grid/pager-visibility)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Paging by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/aggregates)
+* [Setting the Pager Visibility in the Grid HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/grid/pager-visibility)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

@@ -1,7 +1,7 @@
 ---
 title: Types
-page_title: Types | Kendo UI DataSource Tag Helper for ASP.NET Core
-description: "Learn about the types of DataSource supported by the Kendo UI DataSource tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Types | Telerik UI DataSource Tag Helper for ASP.NET Core
+description: "Learn about the types of DataSource supported by the Telerik UI DataSource tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: types_datasource_aspnetcore
 position: 2
 ---
@@ -79,4 +79,4 @@ The following example demonstrates how to use a simple remote service.
 
 ## See Also
 
-* [JavaScript API Reference of the Kendo UI DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [API Reference of the DataSource Helper for ASP.NET Core](/api/datasource)

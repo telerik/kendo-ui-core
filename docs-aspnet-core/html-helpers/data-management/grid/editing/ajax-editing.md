@@ -1,22 +1,22 @@
 ---
 title: Ajax Editing
-page_title: Ajax Editing | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET Core for Ajax editing."
+page_title: Ajax Editing | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Define commands and set the editing mode to configure the Telerik UI Grid for ASP.NET Core for Ajax editing."
 slug: ajaxediting_grid_aspnetcore
 position: 2
 ---
 
 # Ajax Editing
 
-You can define commands and set the edit mode to configure the Kendo UI Grid for ASP.NET Core for Ajax editing.
+You can define commands and set the edit mode to configure the Telerik UI Grid for ASP.NET Core for Ajax editing.
 
 For runnable examples, refer to the [demos on implementing the editing approaches in the Grid](https://demos.telerik.com/aspnet-core/grid/editing).
 
 ## Setting the Ajax Edit Mode
 
 1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.
-
             public class ProductViewModel
+
             {
                 public int ProductID { get; set; }
                 // The ProductName property is required.
@@ -252,5 +252,5 @@ Server validation is often needed when performing editing. The following section
 
 ## See Also
 
-* [Editing Approaches by the Grid (Demos)](https://demos.telerik.com/aspnet-core/grid/editing)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Editing Approaches by the Grid HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/grid/editing)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

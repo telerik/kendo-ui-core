@@ -1,7 +1,7 @@
 ---
 title: Items
-page_title: Items | Kendo UI Menu Tag Helper for ASP.NET Core
-description: "Configure the items of the Kendo UI Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Items | Telerik UI Menu Tag Helper for ASP.NET Core
+description: "Configure the items of the Telerik UI Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: items_menu_aspnetcore
 position: 2
 ---
@@ -151,4 +151,4 @@ You can also define the popup of each Menu item with HTML syntax by using the `<
 
 ## See Also
 
-* [JavaScript API Reference of the Menu](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [API Reference of the Menu Helper for ASP.NET Core](/api/menu)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Tooltip Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/tooltip
 slug: htmlhelpers_tooltip_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # Tooltip HtmlHelper Overview
 
-The [Tooltip](http://docs.telerik.com/kendo-ui/controls/layout/tooltip/overview) displays a popup hint for a given html element. Its content can be defined either as static text, or loaded dynamically via AJAX.
+The Telerik UI Tooltip HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Tooltip widget.
 
-The Tooltip HtmlHelper extension is a server-side wrapper for the [Kendo UI Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index) widget. For more information on the Tooltip HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/tooltip/overview).
+The Tooltip displays a popup hint for a given html element. Its content can be defined either as static text or loaded dynamically with AJAX.
+
+* [Demo page for the Tooltip](https://demos.telerik.com/aspnet-core/tooltip/index)
 
 ## Initializing the Tooltip
 
@@ -64,4 +66,4 @@ For a complete example on basic Tooltip events, refer to the [demo on using the 
 
 * [Basic Usage of the Tooltip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip)
 * [Using the API of the Tooltip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/api)
-* [JavaScript API Reference of the Tooltip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+* [API Reference of the Tooltip HtmlHelper for ASP.NET Core](/api/tooltip)

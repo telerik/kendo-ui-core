@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Learn how to implement Ajax Binding with Kendo UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Ajax Binding | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Learn how to implement Ajax Binding with Telerik UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_grid_aspnetcore_ajaxbinding
 previous_url: /aspnet-core/helpers/html-helpers/grid/ajax-binding
 ---
@@ -14,13 +14,13 @@ When configured for Ajax binding, the Grid for ASP.NET Core makes Ajax requests 
 
 The Ajax-bound mode has the following features:
 - The Grid retrieves only the data (in JSON format) representing the current page. As a result, only the Grid is updated.
-- All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
+- All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI for jQuery template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 To configure the Grid for ASP.NET Core to do Ajax binding to the **Products** table of the Northwind database:
 
-1. Create a new ASP.NET Core Web Application. Follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET Core to the application.
-1. Install the EntityFrameworkCore NuGet package
-1. Install Microsoft.EntityFrameworkCore.SqlServer package
+1. Create a new ASP.NET Core web application. Follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET Core to the application.
+1. Install the EntityFrameworkCore NuGet package.
+1. Install Microsoft.EntityFrameworkCore.SqlServer package.
 1. Run the following command in the Package Management Console. It will generate models from the tables in a database called 'Sample'. For more information on scaffolding a model from an existing database refer to [this Microsoft article](https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db#reverse-engineer-your-model).
 
     Scaffold-DbContext "Server=.\SQLSERVER;Database=Sample;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
@@ -85,5 +85,5 @@ To configure the Grid for ASP.NET Core to do Ajax binding to the **Products** ta
 
 ## See Also
 
-* [Custom Ajax Binding by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/customajaxbinding)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Custom Ajax Binding by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/customajaxbinding)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

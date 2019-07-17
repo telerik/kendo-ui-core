@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: Calendar Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Calendar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Calendar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_calendarhelper_aspnetcore
 position: 1
 ---
 
 # Calendar HtmlHelper Overview
 
-The Kendo UI Calendar renders a graphical calendar that provides navigation and selection functionalities.
+The Telerik UI Calendar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Calendar widget.
 
-The Calendar HtmlHelper extension is a server-side wrapper for the [Kendo UI Calendar](https://demos.telerik.com/kendo-ui/calendar/index) widget. For more information on the Calendar HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/calendar/overview).
+The Calendar renders a graphical calendar that provides navigation and selection functionalities.
+
+* [Demo page for the Calendar](https://demos.telerik.com/aspnet-core/calendar/index)
 
 ## Initializing the Calendar
 
@@ -27,7 +29,7 @@ The following example demonstrates how to define the Calendar by using the Calen
 
 ## Events
 
-You can subscribe to all Calendar [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar#events). For a complete example on basic Calendar events, refer to the [demo on using the events of the Calendar](https://demos.telerik.com/aspnet-core/calendar/events).
+You can subscribe to all Calendar events. For a complete example on basic Calendar events, refer to the [demo on using the events of the Calendar](https://demos.telerik.com/aspnet-core/calendar/events).
 
 ### Handling by Handler Name
 
@@ -81,10 +83,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI Calendar instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Calendar API](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar#methods) to control its behavior.
+To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Calendar API](/api/calendar) to control its behavior.
 
 ```
-    // Place this after your Kendo UI Calendar for ASP.NET Core declaration.
+    // Place this after your Telerik UI Calendar for ASP.NET Core declaration.
     <script>
          $(function() {
             // The Name() of the Calendar is used to get its client-side instance.
@@ -97,4 +99,4 @@ To reference an existing Kendo UI Calendar instance, use the [`jQuery.data()`](h
 
 * [Basic Usage of the Calendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/index)
 * [Using the API of the Calendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/api)
-* [JavaScript API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar HtmlHelper for ASP.NET Core](/api/calendar)

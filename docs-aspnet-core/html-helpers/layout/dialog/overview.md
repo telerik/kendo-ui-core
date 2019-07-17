@@ -1,18 +1,18 @@
 ---
 title: Overview
 page_title: Dialog Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Dialog HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Dialog HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_dialoghelper_aspnetcore
 position: 1
 ---
 
 # Dialog HtmlHelper Overview
 
-The Dialog is a modal popup that brings information to the user.
+The Telerik UI Dialog HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Dialog widget.
 
-It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI Window widget]({% slug htmlhelpers_window_aspnetcore %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
+The Dialog is a modal popup that brings information to the user. It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI for jQuery Window]({% slug htmlhelpers_window_aspnetcore %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
 
-The Dialog HtmlHelper extension is a server-side wrapper for the [Kendo UI Dialog](https://demos.telerik.com/kendo-ui/dialog/index) widget. For more information on the Dialog HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/dialog/overview).
+* [Demo page for the Dialog](https://demos.telerik.com/aspnet-core/dialog/index)
 
 ## Initializing the Dialog
 
@@ -62,7 +62,7 @@ The following example demonstrates a basic configuration of the Dialog HtmlHelpe
 
 ## Events
 
-You can subscribe to all Dialog [events](/api/Kendo.Mvc.UI.Fluent/DialogEventBuilder). For a complete example on basic Dialog events, refer to the [demo on using the events of the Dialog](https://demos.telerik.com/aspnet-core/dialog/events).
+You can subscribe to all Dialog events. For a complete example on basic Dialog events, refer to the [demo on using the events of the Dialog](https://demos.telerik.com/aspnet-core/dialog/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -104,4 +104,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Basic Usage of the Dialog HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog)
 * [Using the API of the Dialog HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog/api)
-* [JavaScript API Reference of the Dialog](http://docs.telerik.com/kendo-ui/api/javascript/ui/dialog)
+* [API Reference of the Dialog](/api/dialog)

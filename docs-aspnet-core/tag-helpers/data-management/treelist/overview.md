@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: TreeList Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI TreeList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_treelist_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/treelist
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # TreeList Tag Helper Overview
 
+The Telerik UI TreeList tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeList widget.
+
 The TreeList enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
-The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index) widget and enables you to configure the Kendo UI TreeList widget in ASP.NET Core applications.
+* [Demo page for the TreeList](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
 
 ## Initializing the TreeList
 
@@ -34,7 +36,7 @@ The following example demonstrates how to define the TreeList by using the TreeL
 
 ## Referencing Existing Instances
 
-To refer to an existing TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and pass `"kendoTreeList"` as an argument. Once a reference has been established, use the [API of the TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist) to control its behavior.
+To refer to an existing TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and pass `"kendoTreeList"` as an argument. Once a reference has been established, use the [API of the TreeList](/api/treelist) to control its behavior.
 
 The following example demonstrates how to access an existing TreeList instance.
 
@@ -95,4 +97,4 @@ The following example demonstrates how to access an existing TreeList instance.
 ## See Also
 
 * [Basic Usage of the TreeList Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
-* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [API Reference of the TreeList Helper for ASP.NET Core](/api/treelist)

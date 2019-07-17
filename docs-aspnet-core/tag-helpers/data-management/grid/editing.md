@@ -1,7 +1,7 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI Grid Tag Helper for ASP.NET Core
-description: "Learn the basics when working with the Kendo UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Editing | Telerik UI Grid Tag Helper for ASP.NET Core
+description: "Learn the basics when working with the Telerik UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: editing_grid_aspnetcore
 position: 3
 ---
@@ -156,4 +156,4 @@ The following example demonstrates how to set a Kendo UI DropDownList as a custo
 ## See Also
 
 * [Basic Usage of the Grid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)

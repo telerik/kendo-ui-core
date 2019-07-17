@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Window Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Window tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Window tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/window, /aspnet-core/helpers/tag-helpers/window
 slug: taghelpers_window_aspnetcore
 position: 1
@@ -9,17 +9,17 @@ position: 1
 
 # Window Tag Helper Overview
 
-The [Window](http://docs.telerik.com/kendo-ui/controls/layout/window/overview) displays content in a modal or non-modal HTML window.
+The Telerik UI Window tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Window widget.
 
-By default, the user can move, resize, and close a Window. Its content can also be defined either as static HTML or dynamically loaded through AJAX.
+The Window displays content in a modal or non-modal HTML window. By default, the user can move, resize, and close a Window. Its content can also be defined either as static HTML or dynamically loaded with AJAX.
 
-The Window tag helper extension is a server-side wrapper for the [Kendo UI Window](http://demos.telerik.com/kendo-ui/window/index) widget and enables you to configure the Kendo UI Window widget in ASP.NET Core applications.
+* [Demo page for the Window](https://demos.telerik.com/aspnet-core/window/tag-helper)
 
 ## Initializing the Window
 
 The following example demonstrates how to define the Window by using the Window tag helper.
 
-> To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI R1 2018 release introduces a change in the tag names of the Window. Previously, it was possible to nest content directly in the `<kendo-window>` tag while now, after the release, the content must be nested within a `<content>` tag.
+> To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI for jQuery R1 2018 release introduces a change in the tag names of the Window. Previously, it was possible to nest content directly in the `<kendo-window>` tag while now, after the release, the content must be nested within a `<content>` tag.
 
         <kendo-window name="window1">
 			<content>Window contents</content>
@@ -79,4 +79,4 @@ The Window tag helper configuration options are passed as attributes of the tag.
 ## See Also
 
 * [Basic Usage of the Window Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/tag-helper)
-* [JavaScript API Reference of the Window](http://docs.telerik.com/kendo-ui/api/javascript/ui/window)
+* [API Reference of the Window Helper for ASP.NET Core](/api/window)

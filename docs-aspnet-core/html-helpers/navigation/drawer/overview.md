@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: Drawer Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Drawer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Drawer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_drawer_aspnetcore
 position: 1
 ---
 
 # Drawer HtmlHelper Overview
 
+The Telerik UI Drawer HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Drawer widget.
+
 The Drawer is a dismissible panel used for navigation in responsive web applications or for changing a content of a section in the page.
 
-The Drawer HtmlHelper extension is a server-side wrapper for the [Kendo UI Drawer](https://demos.telerik.com/kendo-ui/drawer/index) widget. For more information on the Drawer HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/drawer/overview).
+* [Demo page for the Drawer](https://demos.telerik.com/aspnet-core/drawer/index)
 
 ## Initializing the Drawer
 
@@ -66,4 +68,4 @@ The following example demonstrates the basic configuration of the Drawer HtmlHel
 
 * [Basic Usage of the Drawer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer)
 * [Using the API of the Drawer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/api)
-* [JavaScript API Reference of the Drawer](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer)
+* [API Reference of the Drawer HtmlHelper for ASP.NET Core](/api/drawer)

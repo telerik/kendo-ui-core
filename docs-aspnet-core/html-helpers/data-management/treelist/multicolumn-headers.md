@@ -1,7 +1,7 @@
 ---
 title: Multi-Clumn Headers
-page_title: Multi-Column Headers | Kendo UI TreeList HtmlHelper for ASP.NET Core
-description: "Learn how to apply the multicolumn headers feature to the Kendo UI TreeList HtmlHelper for ASP.NET Core."
+page_title: Multi-Column Headers | Telerik UI TreeList HtmlHelper for ASP.NET Core
+description: "Learn how to apply the multicolumn headers feature to the Telerik UI TreeList HtmlHelper for ASP.NET Core."
 slug: multicolumn_aspnetcore_treelist_helper
 position: 5
 ---
@@ -36,4 +36,4 @@ The previous example will present the following output.
 ## See Also
 
 * [Implementing Multi-Column Headers in the TreeList HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/treelist/multicolumnheaders)
-* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)

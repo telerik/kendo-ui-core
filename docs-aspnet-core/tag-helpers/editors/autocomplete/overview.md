@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: AutoComplete Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI AutoComplete tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI AutoComplete tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/autocomplete, /aspnet-core/helpers/tag-helpers/autocomplete
 slug: taghelpers_autocomplete_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # AutoComplete Tag Helper Overview
 
-The [AutoComplete](http://docs.telerik.com/kendo-ui/controls/editors/autocomplete/overview) provides suggestions depending on the typed text. It also allows multiple value entries.
+The Telerik UI AutoComplete tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI AutoComplete widget.
 
-The suggestions shown by the widget come either from a local array or from a remote data service.
+The AutoComplete provides suggestions depending on the typed text and allows multiple value entries.
 
-The AutoComplete tag helper extension is a server-side wrapper for the [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index) widget and enables you to configure the Kendo UI AutoComplete widget in ASP.NET Core applications.
+* [Demo page for the AutoComplete](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
 
 ## Initializing the AutoComplete
 
@@ -77,4 +77,4 @@ The AutoComplete tag helper configuration options are passed as attributes of th
 ## See Also
 
 * [Basic Usage of the AutoComplete Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
-* [JavaScript API Reference of the AutoComplete](http://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [API Reference of the AutoComplete Helper for ASP.NET Core](/api/autocomplete)

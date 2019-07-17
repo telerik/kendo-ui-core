@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Button Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Button HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Button HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/button
 slug: htmlhelpers_button_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Button HtmlHelper Overview
 
-The [Button](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview) provides a styled clickable UI functionality with arbitrary content.
+The Telerik UI Button HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Button widget.
 
-Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it&mdash;for example, `span`.
+The Button provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI for jQuery styling, the Button provides keyboard operability for elements, which natively do not have it&mdash;for example, `span`.
 
-The Button HtmlHelper extension is a server-side wrapper for the [Kendo UI Button](http://demos.telerik.com/kendo-ui/button/index) widget. For more information on the Button HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/button/overview).
+* [Demo page for the Button](https://demos.telerik.com/aspnet-core/button/index)
 
 ## Initializing the Button
 
@@ -78,4 +78,4 @@ The Button HTML helper exposes only a `Click()` event that can be handled. For a
 
 * [Basic Usage of the Button HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/index)
 * [Using the API of the Button HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/api)
-* [JavaScript API Reference of the Button](http://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+* [API Reference of the Button HtmlHelper for ASP.NET Core](/api/button)

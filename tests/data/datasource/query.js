@@ -1112,6 +1112,24 @@
             assert.equal(dataSource.filter().filters[0].operator, "eq");
         });
 
+        it("using string filter with zero works correctly", function() {
+            var dataSource = new DataSource({
+                data: [{ id: 1 }, { id: 0 }]
+            });
+
+            dataSource.filter({ field: "id", operator: "contains", value: "0" });
+            assert.equal(dataSource.view().length, 1);
+        });
+
+        it("using string filter with false works correctly", function() {
+            var dataSource = new DataSource({
+                data: [{ id: true }, { id: false }]
+            });
+
+            dataSource.filter({ field: "id", operator: "contains", value: "false" });
+            assert.equal(dataSource.view().length, 1);
+        });
+
         it("query should update the total if filtering is enabled", function() {
             var dataSource = new DataSource({
                 data: [{ id: 1, bar: "foo" }, { id: 2, bar: "baz" }]

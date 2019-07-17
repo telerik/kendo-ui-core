@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ComboBox Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI ComboBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ComboBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/combobox, /aspnet-core/helpers/tag-helpers/combobox
 slug: taghelpers_combobox_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # ComboBox Tag Helper Overview
 
-The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) displays a list of values and allows for a single selection from the list.
+The Telerik UI ComboBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ComboBox widget.
 
-The user input is restricted within the predefined options.
+The ComboBox displays a list of values and allows for a single selection from the list.
 
-The ComboBox tag helper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget and enables you to configure the Kendo UI ComboBox widget in ASP.NET Core applications.
+* [Demo page for the ComboBox](https://demos.telerik.com/aspnet-core/combobox/tag-helper)
 
 ## Initializing the ComboBox
 
@@ -60,4 +60,4 @@ The ComboBox tag helper configuration options are passed as attributes of the ta
 ## See Also
 
 * [Basic Usage of the ComboBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/tag-helper)
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [API Reference of the ComboBox Helper for ASP.NET Core](/api/combobox)

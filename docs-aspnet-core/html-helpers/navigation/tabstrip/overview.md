@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: TabStrip Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI TabStrip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TabStrip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/tabstrip
 slug: htmlhelpers_tabstrip_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # TabStrip HtmlHelper Overview
 
-The [TabStrip](http://docs.telerik.com/kendo-ui/controls/navigation/tabstrip/overview) displays a collection of tabs with associated content.
+The Telerik UI TabStrip HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TabStrip widget.
 
-It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
+The TabStrip displays a collection of tabs with associated content. It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
 
-The TabStrip HtmlHelper extension is a server-side wrapper for the [Kendo UI TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index) widget. For more information on the TabStrip HtmlHelper, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/tabstrip/overview).
+* [Demo page for the TabStrip](https://demos.telerik.com/aspnet-core/tabstrip/index)
 
 ## Initializing the TabStrip
 
@@ -161,4 +161,4 @@ The following example demonstrates the available TabStrip events and how an even
 
 * [Basic Usage of the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip)
 * [Using the API of the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/api)
-* [JavaScript API Reference of the TabStrip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
+* [API Reference of the TabStrip HtmlHelper for ASP.NET Core](/api/tabstrip)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Grid Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/grid
 slug: htmlhelpers_grid_aspnetcore_overview
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Grid HtmlHelper Overview
 
-The [Grid](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview) is a powerful control for displaying data in a tabular format.
+The Telerik UI Grid HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Grid widget.
 
-It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the [Kendo UI DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview) component.
+The Grid is a powerful control for displaying data in a tabular format. It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
 
-The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index) widget. For more information on the Grid HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
+* [Demo page for the Grid](https://demos.telerik.com/aspnet-core/grid/index)
 
 ## Initializing the Grid
 
@@ -170,6 +170,5 @@ The following example demonstrates the basic configuration for the Grid HtmlHelp
 ## See Also
 
 * [Basic Usage of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/index)
-* [Basic Usage of the Kendo UI Grid Widget (Demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [Using the API of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/api)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

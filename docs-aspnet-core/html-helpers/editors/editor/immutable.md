@@ -1,7 +1,7 @@
 ---
 title: Immutable Elements
-page_title: Immutable Elements | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn how to use immutable elements in the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Immutable Elements | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to use immutable elements in the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_immutable_aspnetcore
 position: 7
 ---
@@ -42,7 +42,7 @@ The `immutables.serialization` configuration method accepts the following parame
     )
     ```
 
-* [Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/overview)&mdash;Contains the immutable `data` DOM element.
+* [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview)&mdash;Contains the immutable `data` DOM element.
 
     ```
     (Html.Kendo().Editor()
@@ -120,4 +120,4 @@ If you use the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#cla
 ## See Also
 
 * [Immutable Elements by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/immutable-elements)
-* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

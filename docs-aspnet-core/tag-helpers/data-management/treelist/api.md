@@ -1,7 +1,7 @@
 ---
 title: Using the API
-page_title: Using the API | Kendo UI TreeList Tag Helper for ASP.NET Core
-description: "Learn the basics when working with the Kendo UI TreeList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Using the API | Telerik UI TreeList Tag Helper for ASP.NET Core
+description: "Learn the basics when working with the Telerik UI TreeList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: usingapi_treelist_aspnetcore
 position: 4
 ---
@@ -202,4 +202,4 @@ The following example demonstrates how to subscribe to a TreeList event by using
 ## See Also
 
 * [Basic Usage of the TreeList Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
-* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [API Reference of the TreeList Helper for ASP.NET Core](/api/treelist)

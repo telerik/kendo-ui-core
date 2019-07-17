@@ -1,7 +1,7 @@
 ---
 title: Interaction Modes
-page_title: Interaction Modes | Kendo UI Drawer HtmlHelper for ASP.NET Core
-description: "Use the interaction modes and handle the position of the Kendo UI Drawer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Interaction Modes | Telerik UI Drawer HtmlHelper for ASP.NET Core
+description: "Use the interaction modes and handle the position of the Telerik UI Drawer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: interactionmodes_drawer_aspnetcore
 position: 3
 ---
@@ -23,4 +23,4 @@ The Drawer provides gesture support. It also features the mini mode which makes 
 ## See Also
 
 * [Position by the Drawer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/functionality)
-* [JavaScript API Reference of the Drawer](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer)
+* [API Reference of the Drawer HtmlHelper for ASP.NET Core](/api/drawer)

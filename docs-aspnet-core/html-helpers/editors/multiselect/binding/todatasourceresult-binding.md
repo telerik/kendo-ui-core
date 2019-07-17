@@ -1,14 +1,14 @@
 ---
 title: Custom Data Binding
-page_title: Custom Data Binding | Kendo UI MultiSelect HtmlHelper for ASP.NET Core
-description: "Learn how to implement custom ToDataSourceResult data binding in the Kendo UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Custom Data Binding | Telerik UI MultiSelect HtmlHelper for ASP.NET Core
+description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_multiselect_todatasourceresultbinding_aspnetcore
 position: 4
 ---
 
 # Custom Data Binding
 
-You can configure the Kendo UI MultiSelect to use a custom DataSource and, in this way, bind to a `ToDataSourceResult` instance.
+You can configure the Telerik UI MultiSelect to use a custom DataSource and, in this way, bind to a `ToDataSourceResult` instance.
 
 1. Create an action method which renders the view.
 
@@ -43,12 +43,12 @@ You can configure the Kendo UI MultiSelect to use a custom DataSource and, in th
                         })
                         .Schema(schema =>
                         {
-                            schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                            schema.Data("Data") // Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                                .Total("Total"); // Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
                         });
             })
         )
 
 ## See Also
 
-* [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)

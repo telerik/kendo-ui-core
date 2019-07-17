@@ -1,7 +1,7 @@
 ---
 title: Paging
-page_title: Paging | Kendo UI TreeList HtmlHelper for ASP.NET Core
-description: "Learn how to enable the client-side paging feature to the Kendo UI TreeList HtmlHelper for ASP.NET Core."
+page_title: Paging | Telerik UI TreeList HtmlHelper for ASP.NET Core
+description: "Learn how to enable the client-side paging feature to the Telerik UI TreeList HtmlHelper for ASP.NET Core."
 slug: client_side_paging_aspnetcore_treelist_helper
 position: 4
 ---
@@ -69,4 +69,4 @@ The root TreeList items have their `parentId` field set to the default value for
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)

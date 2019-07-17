@@ -684,6 +684,36 @@ textarea.k-textbox {
     height: auto;
 }
 
+// Input with icon
+.k-input-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: @input-icon-width;
+    position: relative;
+
+    .k-icon {
+        position: static;
+        margin: 0;
+    }
+
+    .k-ie9 & {
+        position: absolute;
+        height: 100%;
+        right: 0;
+        top: 0;
+    }
+
+    .k-rtl &,
+    [dir="rtl"] & {
+        .k-ie9 & {
+            left: 0;
+            right: auto;
+        }
+    }
+}
+
+
 // NumericTextBox
 
 span.k-numerictextbox {

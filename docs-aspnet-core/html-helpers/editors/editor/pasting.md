@@ -1,7 +1,7 @@
 ---
 title: Pasting
-page_title: Pasting Content | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn how to control the pasting behavior of the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Pasting Content | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to control the pasting behavior of the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_pasting_aspnetcore
 position: 4
 ---
@@ -100,4 +100,4 @@ The following example demonstrates a simple logic to strip the `<strong>` tags f
 
 ## See Also
 
-* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

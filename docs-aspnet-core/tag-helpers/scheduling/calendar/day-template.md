@@ -1,7 +1,7 @@
 ---
 title: Day Template
-page_title: Day Template | Kendo UI Calendar Tag Helper for ASP.NET Core
-description: "Customize the rendered day for the month view in the Kendo UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Day Template | Telerik UI Calendar Tag Helper for ASP.NET Core
+description: "Customize the rendered day for the month view in the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: daytemplate_calendar_aspnetcore
 position: 3
 ---
@@ -40,4 +40,4 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the `
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)

@@ -1,7 +1,7 @@
 ---
 title: Items
-page_title: Items | Kendo UI Sortable for ASP.NET Core
-description: "Disable and filter the items of the Kendo UI Sortable widget for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Items | Telerik UI Sortable for ASP.NET Core
+description: "Disable and filter the items of the Telerik UI Sortable widget for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 position: 3
 ---
 
@@ -59,4 +59,4 @@ To enable the dragging of items between two lists, create a Sortable for each li
 
 * [Disabling and Filtering Items in the Sortable HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/filter-disable)
 * [Dragging Items between Lists in the Sortable HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/linkedlists)
-* [JavaScript API Reference of the Sortable](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable)
+* [API Reference of the Sortable HtmlHelper for ASP.NET Core](/api/sortable)

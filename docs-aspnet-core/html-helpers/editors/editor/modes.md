@@ -1,7 +1,7 @@
 ---
 title: Modes
-page_title: Editor Modes | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn which are the modes in which the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) operates."
+page_title: Editor Modes | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn which are the modes in which the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) operates."
 slug: htmlhelpers_editor_modes_aspnetcore
 position: 2
 ---
@@ -39,11 +39,11 @@ With the previous configuration, the tools of the Editor are only visible when t
 
 > While it is possible to initialize an inline Editor from a non-`div` element, such as `p` or `h1`, it is strongly recommended that you use the `<div>` one. Do not use `<table>` elements for creating inline Editors because of Internet Explorer browser limitations.
 
-Editors that are instantiated from a `contentEditable` element will not post their value to the server when the value was submitted within a form. For more information on submitting Editor values, refer to the article about [posting the value of an inline Editor value](https://docs.telerik.com/kendo-ui/controls/editors/editor/troubleshoot/troubleshooting#inline-editor-value-is-not-posted-to-the-server#inline-value-is-not-posted-to-server). For more information, refer to the [demo on the inline Editor mode](https://demos.telerik.com/aspnet-core/editor/inline-editing).
+Editors that are instantiated from a `contentEditable` element will not post their value to the server when the value was submitted within a form. For more information, refer to the [demo on the inline Editor mode](https://demos.telerik.com/aspnet-core/editor/inline-editing).
 
 > Because of the limited `iframe` support by the iOS Safari browser, it is recommended to use the inline Editor mode on iOS devices.
 
 ## See Also
 
 * [Inline Mode by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/inline-editing)
-* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

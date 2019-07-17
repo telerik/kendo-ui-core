@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: ArcGauge Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI ArcGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ArcGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_arcgauge_aspnetcore
 position: 1
 ---
 
 # ArcGauge Tag Helper Overview
 
+The Telerik UI ArcGauge tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ArcGauge widget.
+
 The ArcGauge represents a value on a circular arc.
 
-The ArcGauge tag helper extension is a server-side wrapper for the [Kendo UI ArcGauge](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge) widget and enables you to configure the Kendo UI ArcGauge widget in ASP.NET Core applications.
+* [Demo page for the ArcGauge](https://demos.telerik.com/aspnet-core/arc-gauge/tag-helper)
 
 ## Initializing the ArcGauge
 
@@ -40,4 +42,4 @@ The ArcGauge tag helper configuration options are passed as attributes of the ta
 ## See Also
 
 * [Basic Usage of the ArcGauge Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/arc-gauge/tag-helper)
-* [JavaScript API Reference of the ArcGauge](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge)
+* [API Reference of the ArcGauge Helper for ASP.NET Core](/api/arcgauge)

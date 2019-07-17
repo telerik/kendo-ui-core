@@ -1,26 +1,31 @@
 ---
 title: Pie Charts
-page_title: Pie Charts | Kendo UI Charts HtmlHelper for ASP.NET Core
-description: "Learn how to create a Kendo UI Pie Chart for ASP.NET Core and specify its point value, category label, and other properties."
+page_title: Pie Charts | Telerik UI Charts HtmlHelper for ASP.NET Core
+description: "Learn how to create a Telerik UI Pie Chart for ASP.NET Core and specify its point value, category label, and other properties."
 slug: piecharts_aspnetcore_htmlhelper
 ---
 
 # Pie Charts
 
-The [Kendo UI Pie Chart HTMLHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/pie-charts/index) displays data as single-series sectors from a two-dimensional circle. It is useful for rendering data as a part of the whole.
+The [Telerik UI Pie Chart HtmlHelper for ASP.NET Core extension](https://demos.telerik.com/aspnet-core/pie-charts/index) is a server-side wrapper for the Kendo UI Pie Chart widget.
 
-The [Kendo UI Donut Chart HTMLHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/donut-charts/index) is a Kendo UI Pie Chart variation with the same ability to display a single data series in a two-dimensional circle and is likewise useful for displaying data as a part of the whole.
+Pie Charts display data as single-series sectors from a two-dimensional circle. It is useful for rendering data as a part of the whole.
+
+The [Donut Chart HTMLHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/donut-charts/index) is a Pie Chart variation with the same ability to display a single data series in a two-dimensional circle and is likewise useful for displaying data as a part of the whole.
+
+* [Demo page for the Pie Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/pie-charts/index)
+* [Demo page for the Donut Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/donut-charts/index)
 
 ## Getting Started
 
-To create a Pie Chart, use `Pie` in the `Series` configuration.
+To create a Pie series in the Chart HtmlHelper, use `Pie` in the `Series` configuration.
 
 * [Creating the Pie Chart](#creating-the-pie-chart)
 * [Configuring the effects overlay](#configuring-the-effects-overlay)
 
-## Creating the Pie Chart
+## Initializing the Pie Chart
 
-To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties, as demonstrated in the following example.
+The following example demonstrates how to define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties.
 
         @(Html.Kendo().Chart()
            .Name("chart")
@@ -49,7 +54,7 @@ To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Addition
 
 ## Configuring the Effects Overlay
 
-Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable, as demonstrated in the following example.
+Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable.
 
     .Series(series =>
     {
@@ -57,7 +62,7 @@ Each segment has a transparent effect overlay that adds depth to the two-dimensi
        .Overlay(o => o.Gradient(ChartSeriesGradient.None));
     })
 
-The following `ChartSeriesGradient` options are available:
+The Pie Chart supports the following `ChartSeriesGradient` options:
 
 * (Default) `RoundedBevel`
 
@@ -79,5 +84,5 @@ The following `ChartSeriesGradient` options are available:
 
 ## See Also
 
-* [Basic Usage of the Pie Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pie-charts/index)
-* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Pie Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pie-charts/index)
+* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)

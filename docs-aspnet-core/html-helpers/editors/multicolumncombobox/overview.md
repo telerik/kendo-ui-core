@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: MultiColumnComboBox Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/multicolumncombobox
 slug: htmlhelpers_multicolumncombobox_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # MultiColumnComboBox HtmlHelper Overview
 
+The Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiColumnComboBox widget.
+
 The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
 
-As of the Kendo UI R3 2018, the Telerik UI for ASP.NET Core suite delivers the MultiColumnComboBox HtmlHelper. The MultiColumnComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget. For more information on the MultiColumnComboBox HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/multicolumncombobox/overview).
+* [Demo page for the MultiColumnComboBox](https://demos.telerik.com/aspnet-core/multicolumncombobox/index)
 
 ## Initializing the MultiColumnComboBox
 
@@ -129,4 +131,4 @@ For a complete example on basic MultiColumnComboBox events, refer to the [demo o
 
 * [Basic Usage of the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/index)
 * [Using the API of the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/api)
-* [JavaScript API Reference of the MultiColumnComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)

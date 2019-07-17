@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Editor Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Editor tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Editor tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_editor_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/editor
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Editor Tag Helper Overview
 
-The [Editor](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview) allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface.
+The Telerik UI Editor tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Editor widget.
 
-The generated widget value is an XHTML markup.
+The Editor allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface and generate widget value as an XHTML markup.
 
-The Editor tag helper extension is a server-side wrapper for the [Kendo UI Editor](http://demos.telerik.com/kendo-ui/editor/index) widget and enables you to configure the Kendo UI Editor widget in ASP.NET Core applications.
+* [Demo page for the Editor](https://demos.telerik.com/aspnet-core/editor/index)
 
 ## Initializing the Editor
 
@@ -175,4 +175,4 @@ To configure other Editor options, such as PDF export, immutables, rezisability 
 ## See Also
 
 * [Basic Usage of the Editor Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/tag-helper)
-* [JavaScript API Reference of the Editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor Helper for ASP.NET Core](/api/editor)

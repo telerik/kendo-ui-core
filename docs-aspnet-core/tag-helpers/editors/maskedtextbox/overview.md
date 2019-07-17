@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: MaskedTextBox Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI MaskedTextBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI MaskedTextBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/maskedtextbox, /aspnet-core/helpers/tag-helpers/maskedtextbox
 slug: taghelpers_maskedtextbox_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # MaskedTextBox Tag Helper Overview
 
-The Kendo UI MaskedTextBox enables a controlled text input that is based on a specific format.
+The Telerik UI MaskedTextBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MaskedTextBox widget.
 
-The MaskedTextBox tag helper extension is a server-side wrapper for the [Kendo UI MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/index) widget and enables you to configure the Kendo UI MaskedTextBox widget in ASP.NET Core applications.
+The MaskedTextBox enables a controlled text input that is based on a specific format.
+
+* [Demo page for the MaskedTextBox](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
 
 ## Initializing the MaskedTextBox
 
@@ -39,4 +41,4 @@ The MaskedTextBox tag helper configuration options are passed as attributes of t
 ## See Also
 
 * [Basic Usage of the MaskedTextBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
-* [JavaScript API Reference of the MaskedTextBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox)
+* [API Reference of the MaskedTextBox Helper for ASP.NET Core](/api/maskedtextbox)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ComboBox Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/combobox
 slug: htmlhelpers_combobox_aspnetcore
 position: 0
@@ -9,11 +9,11 @@ position: 0
 
 # ComboBox HtmlHelper Overview
 
-The [ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/overview) displays a list of values and allows for a single selection from the list.
+The Telerik UI ComboBox HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ComboBox widget.
 
-The user input is restricted within the predefined options.
+The ComboBox displays a list of values and allows for a single selection from the list.
 
-The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) widget. For more information on the ComboBox HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/combobox/overview).
+* [Demo page for the ComboBox](https://demos.telerik.com/aspnet-core/combobox/index)
 
 ## Initializing the ComboBox
 
@@ -124,11 +124,11 @@ The following example demonstrates how to subscribe to events by a handler name.
         )
         <script>
         function combobox_select() {
-            //Handle the select event.
+            // Handle the select event.
         }
 
         function combobox_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
         </script>
 
@@ -142,12 +142,12 @@ The following example demonstrates how to subscribe to events by a template dele
           .Events(e => e
               .Select(@<text>
                 function() {
-                    //Handle the select event inline.
+                    // Handle the select event inline.
                 }
               </text>)
               .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
                 </text>)
           )
@@ -157,4 +157,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Basic Usage of the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox)
 * [Using the API of the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/api)
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)

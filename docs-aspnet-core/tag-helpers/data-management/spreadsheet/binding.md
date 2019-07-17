@@ -1,7 +1,7 @@
 ---
 title: Data Binding
-page_title: Data Binding | Kendo UI Spreadsheet Tag Helper for ASP.NET Core
-description: "Bind the sheets of the Kendo UI Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to a data source instance."
+page_title: Data Binding | Telerik UI Spreadsheet Tag Helper for ASP.NET Core
+description: "Bind the sheets of the Telerik UI Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to a data source instance."
 slug: databinding_spreadsheet_aspnetcore
 position: 2
 ---
@@ -41,4 +41,4 @@ You can bind the individual sheets of the Spreadsheet to a DataSource instance.
 ## See Also
 
 * [Basic Usage of the Spreadsheet Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
-* [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet helper for ASP.NET Core](/api/spreadsheet)

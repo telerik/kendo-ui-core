@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Resources | Telerik UI for ASP.NET Core Scheduler HtmlHelper
+page_title: Ajax Binding | Telerik UI Scheduler HtmlHelper for ASP.NET Core
 description: "Get started with the Scheduler HtmlHelper for ASP.NET Core and learn how to configure it for ajax binding."
 slug: htmlhelpers_scheduler_ajaxbinding_aspnetcore
 position: 1
@@ -8,7 +8,9 @@ position: 1
 
 # Ajax Binding
 
-The following example demonstrates how to configure the Scheduler HtmlHelper for AJAX binding. For a complete example on binding the Scheduler to remote data, refer to the [Scheduler demos](https://demos.telerik.com/aspnet-core/scheduler/resources).
+You can configure the Scheduler HtmlHelper for AJAX binding.
+
+For a complete example, refer to the [demo on binding the Scheduler to remote data](https://demos.telerik.com/aspnet-core/scheduler/resources).
 
 ```Razor
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
@@ -100,6 +102,5 @@ The following example demonstrates how to configure the Scheduler HtmlHelper for
 
 ## See Also
 
-* [Overview of the Scheduler HtmlHelper]({% slug htmlhelpers_scheduler_aspnetcore %})
-* [Server Binding of the Scheduler HtmlHelper]({% slug htmlhelpers_scheduler_serverbinding_aspnetcore %})
-* [Telerik UI for ASP.NET Core Troubleshooting]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Binding the Scheduler HtmlHelper for ASP.NET Core to Remote Data (demo)](https://demos.telerik.com/aspnet-core/scheduler/resources)
+* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)

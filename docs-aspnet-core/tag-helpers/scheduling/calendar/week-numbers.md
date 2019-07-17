@@ -1,7 +1,7 @@
 ---
 title: Week Numbers
-page_title: Week Numbers | Kendo UI Calendar Tag Helper for ASP.NET Core
-description: "Define the first rendered view when working with the Kendo UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Week Numbers | Telerik UI Calendar Tag Helper for ASP.NET Core
+description: "Define the first rendered view when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: weeknumbers_calendar_aspnetcore
 position: 4
 ---
@@ -54,4 +54,4 @@ You can use these properties in the template to make additional calculations.
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)

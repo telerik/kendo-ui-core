@@ -1,7 +1,7 @@
 ---
 title: Batch Editing
-page_title: Batch Editing | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Enable cell editing mode and batch updates in Kendo UI Grid for ASP.NET Core."
+page_title: Batch Editing | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Enable cell editing mode and batch updates in Telerik UI Grid for ASP.NET Core."
 slug: batchediting_grid_aspnetcore
 position: 1
 ---
@@ -194,5 +194,5 @@ For a runnable example, refer to the [demo on batch editing of the Grid](https:/
 
 ## See Also
 
-* [Batch Editing by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/editing)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Batch Editing by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/editing)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: LinearGauge Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI LinearGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI LinearGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_lineargaugehelper_aspnetcore
 position: 1
 ---
 
 # LinearGauge HtmlHelper Overview
 
+The Telerik UI LinearGauge HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI LinearGauge widget.
+
 The LinearGauge represents values on a linear scale.
 
-The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index) widget. For more information on the LinearGauge HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/lineargauge/overview).
+* [Demo page for the LinearGauge](https://demos.telerik.com/aspnet-core/linear-gauge/index)
 
 ## Initializing the LinearGauge
 
@@ -31,7 +33,7 @@ The following example demonstrates how to Initializing the LinearGauge by using 
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI LinearGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+To reference an existing Telerik UI LinearGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge API](/api/lineargauge) to control its behavior.
 
         // Place this after your Kendo UI LinearGauge for ASP.NET Core declaration.
         <script>
@@ -44,4 +46,4 @@ To reference an existing Kendo UI LinearGauge instance, use the [`jQuery.data()`
 ## See Also
 
 * [Basic Usage of the LinearGauge HtmlHelper for ASP.NET Core  (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/index)
-* [JavaScript API Reference of the LinearGauge](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge)
+* [API Reference of the LinearGauge HtmlHelper for ASP.NET Core](/api/lineargauge)

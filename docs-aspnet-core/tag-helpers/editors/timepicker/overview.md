@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: TimePicker Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI TimePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TimePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/time-picker, /aspnet-core/helpers/tag-helpers/time-picker
 slug: taghelpers_timepicker_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # TimePicker Tag Helper Overview
 
-The Kendo UI TimePicker enables users to select time values from a predefined list or enter new ones.
+The Telerik UI TimePicker tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TimePicker widget.
 
-The TimePicker tag helper extension is a server-side wrapper for the [Kendo UI TimePicker](https://demos.telerik.com/kendo-ui/timepicker/index) widget and enables you to configure the Kendo UI TimePicker widget in ASP.NET Core applications.
+The TimePicker enables users to select time values from a predefined list or enter new ones.
+
+* [Demo page for the TimePicker](https://demos.telerik.com/aspnet-core/timepicker/tag-helper)
 
 ## Initializing the TimePicker
 
@@ -50,4 +52,4 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
 ## See Also
 
 * [Basic Usage of the TimePicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker/tag-helper)
-* [JavaScript API Reference of the TimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker)
+* [API Reference of the TimePicker Helper for ASP.NET Core](/api/timepicker)

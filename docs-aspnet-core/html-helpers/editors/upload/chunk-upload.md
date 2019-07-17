@@ -1,7 +1,7 @@
 ---
 title: Chunk Upload
-page_title: Chunk Upload | Kendo UI Upload HtmlHelper for ASP.NET Core
-description: "Learn how to upload large files in chunks when using the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Chunk Upload | Telerik UI Upload HtmlHelper for ASP.NET Core
+description: "Learn how to upload large files in chunks when using the Telerik UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_chunks_aspnetcore
 position: 3
 ---
@@ -18,7 +18,7 @@ It also supports the pausing and resuming of the file upload during the time the
 
 To enable the chunk upload:
 
-1. Set up the [`Async(a => a.ChunkSize())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.chunksize) option of the Upload.
+1. Set up the `Async(a => a.ChunkSize())` option of the Upload.
 
     ```
     @(Html.Kendo().Upload()
@@ -136,9 +136,9 @@ To enable the chunk upload:
 
 To fine-tune the chunk upload, use any of the following configuration options:
 
-* [`Async(a => a.Concurrent())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.concurrent)&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
-* [`Async(a => a.AutoRetryAfter())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoretryafter)&mdash;Represents the time interval in milliseconds after which the Upload attempts to retry a failed upload.
-* [`Async(a => a.MaxAutoRetries())`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.maxautoretries)&mdash;Represents the number of attempts the Upload makes to retry a failed upload before reporting it.
+* `Async(a => a.Concurrent())`&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
+* `Async(a => a.AutoRetryAfter())`&mdash;Represents the time interval in milliseconds after which the Upload attempts to retry a failed upload.
+* `Async(a => a.MaxAutoRetries())`&mdash;Represents the number of attempts the Upload makes to retry a failed upload before reporting it.
 
 > As a client-side solution, the Upload does not handle validation. File validation and security requirements have to be handled on the server by using application logic.
 
@@ -160,4 +160,4 @@ To fine-tune the chunk upload, use any of the following configuration options:
 ## See Also
 
 * [Chunk Upload by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/chunkupload)
-* [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)

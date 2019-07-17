@@ -1,7 +1,7 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI ListView HtmlHelper for ASP.NET Core
-description: "Configure the Kendo UI ListView for ASP.NET Core for editing."
+page_title: Editing | Telerik UI ListView HtmlHelper for ASP.NET Core
+description: "Configure the Telerik UI ListView for ASP.NET Core for editing."
 slug: htmlhelpers_listview_aspnetcore_editing
 position: 3
 ---
@@ -10,7 +10,7 @@ position: 3
 
 The ListView enables you to edit its records.
 
-To implement the editing functionality of the Kendo UI ListView for ASP.NET Core:
+To implement the editing functionality of the Telerik UI ListView for ASP.NET Core:
 
 1. [Configure the ListView for editing](#configuring-the-listview-for-editing)
 1. [Define the item template](#defining-the-item-template)
@@ -20,7 +20,7 @@ To implement the editing functionality of the Kendo UI ListView for ASP.NET Core
 
 ## Configuring the ListView for Editing
 
-The following example demonstrates how to configure the Kendo UI ListView for ASP.NET Core for editing.
+The following example demonstrates how to configure the Telerik UI ListView for ASP.NET Core for editing.
 
     namespace ListViewExample.Models
     {
@@ -63,9 +63,9 @@ The following example demonstrates how to configure the Kendo UI ListView for AS
 
 ## Defining the Item Template
 
-The following example demonstrates how to define the item template for the Kendo UI ListView. Add buttons for the create, update and destroy operations.
+The following example demonstrates how to define the item template for the Telerik UI ListView. Add buttons for the create, update and destroy operations.
 
-> `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Kendo UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Kendo UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
+> `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Telerik UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Telerik UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
 
     <!-- Button for the Create operation. Use it to call the client ListView method add()  -->
     <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
@@ -119,7 +119,7 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
 1. Declare the editor template in a file that uses the name of the edited model&mdash;for example, `OrderViewModel.cshtml`.
 1. Place this file in the `~Views\Shared\EditorTemplates` directory of your project.
 
-> `click` events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Kendo UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
+> `click` events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Telerik UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
 
     @model ListViewExample.Models.OrderViewModel
     <div class="order">
@@ -273,5 +273,5 @@ The following example demonstrates how to implement the `destroy` action method.
 
 ## See Also
 
-* [Editing by the ListView (Demo)](https://demos.telerik.com/aspnet-core/listview/editing)
-* [JavaScript API Reference of the Kendo UI ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Editing by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/editing)
+* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)

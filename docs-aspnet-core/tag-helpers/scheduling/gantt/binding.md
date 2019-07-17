@@ -1,7 +1,7 @@
 ---
 title: Data Binding
-page_title: Data Binding | Kendo UI Gantt Tag Helper for ASP.NET Core
-description: "Configure the DataSource instances for the data, dependencies, resources, and assignments of the Kendo UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Data Binding | Telerik UI Gantt Tag Helper for ASP.NET Core
+description: "Configure the DataSource instances for the data, dependencies, resources, and assignments of the Telerik UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: binding_gantt_aspnetcore
 position: 2
 ---
@@ -182,4 +182,4 @@ You can also use external DataSource tag helpers to implement the same and assig
 
 ## See Also
 
-* [JavaScript API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt Helper for ASP.NET Core](/api/gantt)

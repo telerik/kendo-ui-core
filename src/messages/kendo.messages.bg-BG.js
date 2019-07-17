@@ -648,6 +648,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Изтрий"
   },
   "noRecords": "Няма налични записи.",
+  "search": "Търси...",
   "groupHeader": "Натиснете ctrl + space за да групирате",
   "ungroupHeader": "Натиснете ctrl + space за да разгрупирате"
 });

@@ -1,7 +1,7 @@
 ---
 title: Grouping
-page_title: Grouping | Kendo UI ComboBox HtmlHelper for ASP.NET Core
-description: "Learn how to group data in the Kendo UI ComboBox HtmlHelper for ASP.NET Core works."
+page_title: Grouping | Telerik UI ComboBox HtmlHelper for ASP.NET Core
+description: "Learn how to group data in the Telerik UI ComboBox HtmlHelper for ASP.NET Core works."
 slug: htmlhelpers_combobox_grouping_aspnetcore
 position: 3
 ---
@@ -34,4 +34,4 @@ The following example demonstrates how to group the ComboBox data by country.
 ## See Also
 
 * [Grouping by the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/grouping)
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)

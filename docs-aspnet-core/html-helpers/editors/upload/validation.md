@@ -1,7 +1,7 @@
 ---
 title: File Validation
-page_title: File Validation | Kendo UI Upload HtmlHelper for ASP.NET Core
-description: "Learn how to configure file validation on the client before it has been uploaded using the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: File Validation | Telerik UI Upload HtmlHelper for ASP.NET Core
+description: "Learn how to configure file validation on the client before it has been uploaded using the Telerik UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_validation_aspnetcore
 position: 7
 ---
@@ -54,4 +54,4 @@ Internet Explorer versions prior to version 10 provide no information on the fil
 ## See Also
 
 * [File Validation by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/validation)
-* [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)

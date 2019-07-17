@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Splitter Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/splitter
 slug: htmlhelpers_splitter_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Splitter HtmlHelper Overview
 
-The [Splitter](http://docs.telerik.com/kendo-ui/controls/layout/splitter/overview) provides a dynamic layout of resizable and collapsible panes.
+The Telerik UI Splitter HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Splitter widget.
 
-It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
+The Splitter provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of the Splitter can be combined to build complex layouts.
 
-The Splitter HtmlHelper extension is a server-side wrapper for the [Kendo UI Splitter](http://demos.telerik.com/kendo-ui/splitter/index) widget. For more information on the Splitter HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/splitter/overview).
+* [Demo page for the Splitter](https://demos.telerik.com/aspnet-core/splitter/index)
 
 ## Initializing the Splitter
 
@@ -131,6 +131,13 @@ The following example demonstrates the basic configuration of the Splitter HtmlH
     </script>
 ```
 
+## Functionality and Features
+
+* [Auto-resizing to window]({% slug htmlhelpers_add_auto_resizing_splitter_to_window_aspnetcore %})
+* [Auto-resizing to content]({% slug htmlhelpers_expand_splitter_to_content_aspnetcore %})
+* [Auto-resizing the height]({% slug htmlhelpers_expand_splitter_to_100_height_aspnetcore %})
+* [Persisting the pane size]({% slug htmlhelpers_keep_pane_size_in_percentages_aspnetcore %})
+
 ## Events
 
 For a complete example on basic Splitter events, refer to the [demo on using the events of the Splitter](https://demos.telerik.com/aspnet-core/splitter/events).
@@ -139,4 +146,4 @@ For a complete example on basic Splitter events, refer to the [demo on using the
 
 * [Basic Usage of the Splitter HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/index)
 * [Using the API of the Splitter HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/api)
-* [JavaScript API Reference of the Splitter](http://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)
+* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)

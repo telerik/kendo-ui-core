@@ -1,7 +1,7 @@
 ---
 title: Action Buttons
-page_title: Action Buttons | Kendo UI Dialog HtmlHelper for ASP.NET Core
-description: "Learn about the Action Buttons of the Kendo UI Dialog HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Action Buttons | Telerik UI Dialog HtmlHelper for ASP.NET Core
+description: "Learn about the Action Buttons of the Telerik UI Dialog HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: action_buttons_dialoghelper_aspnetcore
 position: 3
 ---
@@ -39,4 +39,4 @@ The following example demonstrates how to set three action buttons in a Dialog w
 
 ## See Also
 
-* [JavaScript API Reference of the Dialog](http://docs.telerik.com/kendo-ui/api/javascript/ui/dialog)
+* [API Reference of the Dialog](/api/dialog)

@@ -1,14 +1,14 @@
 ---
 title: Peer-to-Peer Chat
-page_title: Peer-to-Peer Chat | Kendo UI Chat HtmlHelper for ASP.NET Core
-description: "Learn how to create a peer-to-peer Kendo UI Chat with ASP.NET Core SignalR."
+page_title: Peer-to-Peer Chat | Telerik UI Chat HtmlHelper for ASP.NET Core
+description: "Learn how to create a peer-to-peer Telerik UI Chat with ASP.NET Core SignalR."
 slug: htmlhelpers_chat_aspnetcore_signalr
 position: 2
 ---
 
 # Peer-to-Peer Chat
 
-You can configure a Chat HtmlHelper for ASP.NET Core and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
+You can configure a Telerik UI Chat HtmlHelper for ASP.NET Core and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
 
 To create the Peer-to-Peer Chat you have to implement the SignalR Hub server and, then, to implement the application client:
 
@@ -177,7 +177,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
         });
 
         chatHub.on('typing', function(sender) {
-            // Display typing notification in the Chat.
+            // Display the typing notification in the Chat.
             chat.renderMessage({ type: 'typing' }, sender);
         });
     });
@@ -188,5 +188,4 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 ## See Also
 
 * [Basic Usage of the Chat HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chat/index)
-* [Basic Usage of the Kendo UI Chat Widget (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [Overview of the Kendo UI Chat Widget](https://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)
+* [API Reference of the Chat HtmlHelper for ASP.NET Core](/api/chat)

@@ -1,7 +1,7 @@
 ---
 title: Active View
-page_title: Active View | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Define the first view that the Kendo UI MultiViewCalendar initially renders."
+page_title: Active View | Telerik UI MultiViewCalendar Tag for ASP.NET Core
+description: "Define the first view that the Telerik UI MultiViewCalendar initially renders."
 slug: active_view_multiviewcalendar_taghelper_aspnetcore
 position: 2
 ---
@@ -40,4 +40,4 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ## See Also
 
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

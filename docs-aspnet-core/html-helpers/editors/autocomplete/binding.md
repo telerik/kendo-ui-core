@@ -1,7 +1,7 @@
 ---
 title: Model Binding
-page_title: Model Binding | Kendo UI AutoComplete HtmlHelper for ASP.NET Core
-description: "Implement model binding for the Kendo UI AutoComplete HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) with local or remote data and add virtualization."
+page_title: Model Binding | Telerik UI AutoComplete HtmlHelper for ASP.NET Core
+description: "Implement model binding for the Telerik UI AutoComplete HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) with local or remote data and add virtualization."
 slug: modelbinding_autocomplete_aspnetcore
 position: 2
 ---
@@ -94,7 +94,7 @@ You can configure the AutoComplete to get its data from a remote source by makin
 
 ## Virtualization
 
-You can configure an AutoComplete that is bound to a model field to use [virtualization](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+You can configure an AutoComplete that is bound to a model field to use virtualization.
 
 > The value to which the AutoComplete will be bound on the server can only be of a primitive type or an enum value.
 
@@ -201,5 +201,5 @@ You can configure an AutoComplete that is bound to a model field to use [virtual
 
 ## See Also
 
-* [Virtualization by the AutoComplete HtmlHelper fro ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/virtualization)
-* [JavaScript API Reference of the AutoComplete](http://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [Virtualization by the AutoComplete HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/virtualization)
+* [API Reference of the AutoComplete HtmlHelper for ASP.NET Core](/api/autocomplete)

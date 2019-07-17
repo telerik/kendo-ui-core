@@ -1,16 +1,14 @@
 ---
 title: Templates
-page_title: Templates | Kendo UI MultiSelect HtmlHelper for ASP.NET Core
-description: "Use templates and customize the rendering of the items, tags, and the popup header of the Kendo UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Templates | Telerik UI MultiSelect HtmlHelper for ASP.NET Core
+description: "Use templates and customize the rendering of the items, tags, and the popup header of the Telerik UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_multiselect_templates_aspnetcore
 position: 4
 ---
 
 # Templates
 
-The MultiSelect provides full control over the way items, tags, or a pop-up header is rendered through the Kendo UI templates.
-
-For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview).
+The MultiSelect provides full control over the way items, tags, or a pop-up header is rendered through the Kendo UI for jQuery templates.
 
 ## Basic Usage
 
@@ -185,4 +183,4 @@ The following example demonstrates how to define a `noDataTemplate` template.
 ## See Also
 
 * [Customizing Templates in the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/template)
-* [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)

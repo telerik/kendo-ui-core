@@ -102,7 +102,7 @@ navigation:
      "html-helpers/data-management/spreadsheet/import-and-export-data":
         title: "Import and Export of Data"
      "html-helpers/data-management/spreadsheet/end-user":
-        title: "End-User Documentation"   
+        title: "End-User Documentation"
      "html-helpers/editors":
         title: "Editors"
         position: 2
@@ -140,9 +140,12 @@ navigation:
         position: 9
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
+     "html-helpers/navigation/menu/binding":
+        title: "Binding"
+        position: 2
      "html-helpers/navigation/menu/contextmenu":
         title: "ContextMenu"
-        position: 10
+        position: 3
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         position: 10
@@ -160,6 +163,9 @@ navigation:
         position: 14
      "html-helpers/pdf/pdfviewer":
         title: "PDFViewer"
+     "html-helpers/scheduling/scheduler/binding":
+        title: "Binding"
+        position: 2
      "how-to":
         title: "How To"
         position: 5

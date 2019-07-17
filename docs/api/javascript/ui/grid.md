@@ -7577,6 +7577,14 @@ If set to `true` the grid will always display a single page of data. Scrolling t
 
 > Check [Endless scrolling of local data](http://demos.telerik.com/kendo-ui/grid/endless-scrolling-local) and [Endless scrolling of remote data](http://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote) for live demos.
 
+### search `Object`
+
+Configures the Kendo UI Grid search bar settings.
+
+### search.fields `Array`
+
+Defines a list of fields which will be included in the search. If values for the property are not defined the grid will search in all column fields.
+
 ### selectable `Boolean|String` *(default: false)*
 
 If set to `true` the user would be able to select grid rows. By default selection is disabled.
@@ -7761,6 +7769,8 @@ The "save" command persists any data changes done by the end user.
 The "excel" command exports the grid data in MS Excel format.
 
 The "pdf" command exports the grid data in PDF format.
+
+The "search" built-in search panel for the grid.
 
 #### Example - configure the Grid Toolbar as a string template
 

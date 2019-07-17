@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: TreeView Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI TreeView tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeView tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/treeview, /aspnet-core/helpers/tag-helpers/treeview
 slug: taghelpers_treeview_aspnetcore
 position: 1
@@ -9,7 +9,11 @@ position: 1
 
 # TreeView Tag Helper Overview
 
-The TreeView tag helper helps you configure the Kendo UI TreeView widget in ASP.NET Core applications.
+The Telerik UI TreeView tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeView widget.
+
+The TreeView displays hierarchical data in a traditional tree structure.
+
+* [Demo page for the TreeView](https://demos.telerik.com/aspnet-core/treeview/tag-helper)
 
 ## Initializing the TreeView
 
@@ -110,4 +114,4 @@ The TreeView tag helper configuration options are passed as attributes of the ta
 ## See Also
 
 * [Basic Usage of the TreeView Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/tag-helper)
-* [JavaScript API Reference of the TreeView](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [API Reference of the TreeView Helper for ASP.NET Core](/api/treeview)

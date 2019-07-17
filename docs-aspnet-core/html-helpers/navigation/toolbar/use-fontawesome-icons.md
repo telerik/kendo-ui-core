@@ -1,19 +1,16 @@
 ---
-title: Use FontAwesome Icons
-page_title: ToolBar | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to use Fontawesome icons in the Kendo UI ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+title: Using FontAwesome Icons
+page_title: Using FontAwesome Icons | Telerik UI ToolBar HtmlHelper for ASP.NET Core
+description: "Learn how to use Fontawesome icons in the Telerik UI ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_use_fontawesome_icons_aspnetcore
-position: 3
+position: 4
 ---
 
 # Use FontAwesome Icons
 
-The example below demonstrates how to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as Kendo UI ToolBar sprite icons.
+The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as its sprite icons.
 
-> **Important**
->
-> To use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as Kendo UI ToolBar sprite icons this code should be added to the **_Layout.cshtml** file: 
->```<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">```
+> To use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as ToolBar sprite icons, add `<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">` to the `_Layout.cshtml` file.
 
 ```Razor
 @(Html.Kendo().ToolBar()
@@ -45,3 +42,6 @@ The example below demonstrates how to use [FontAwesome icons](http://fortawesome
     }
 ```
 
+## See Also
+
+* [API Reference of the ToolBar HtmlHelper for ASP.NET Core](/api/toolbar)

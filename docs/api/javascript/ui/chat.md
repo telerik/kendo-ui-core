@@ -715,7 +715,7 @@ Removes the typing indicator bubble from the chat. If a typing indicator is rend
 
         chat.renderUserTypingIndicator({ id: "user-1", name: "User 1" });
         chat.renderUserTypingIndicator({ id: "user-2", name: "User 2" });
-        chat.removeTypingIndicator();
+        chat.removeTypingIndicator(chat.getUser());
     </script>
 
 ### toggleToolbar

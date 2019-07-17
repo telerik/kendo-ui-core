@@ -1,7 +1,7 @@
 ---
 title: Model Binding
-page_title: Model Binding | Kendo UI MultiColumnComboBox for ASP.NET Core
-description: "Implement model binding in the Kendo UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Model Binding | Telerik UI MultiColumnComboBox for ASP.NET Core
+description: "Implement model binding in the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: modelbinding_multicolumncombobox_aspnetcore
 position: 2
 ---
@@ -106,4 +106,4 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
 ## See Also
 
 * [Customizing the Data Source in the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/custom-datasource)
-* [JavaScript API Reference of the MultiColumnComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)

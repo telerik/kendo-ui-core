@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ListBox Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_listbox_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/listbox
 position: 1
@@ -9,13 +9,11 @@ position: 1
 
 # ListBox Tag Helper Overview
 
-The ListBox displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items.
+The Telerik UI ListBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ListBox widget.
 
-You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
+The ListBox provides suggestions depending on the typed text and allows multiple value entries. displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
-The ListBox supports the use of templates for its items that are passed as а function or a string.
-
-The ListBox tag helper extension is a server-side wrapper for the [Kendo UI ListBox](https://demos.telerik.com/kendo-ui/listbox/index) widget and enables you to configure the Kendo UI ListBox widget in ASP.NET Core applications.
+* [Demo page for the ListBox](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
 
 ## Initializing the ListBox
 
@@ -25,7 +23,7 @@ The following example demonstrates how to define the ListBox by using the ListBo
 
         <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.Attendees">
             <toolbar position="ListBoxToolbarPosition.Right"
-                     tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
+                     tools='new string[] {moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
         </kendo-listbox>
 
         <kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="new List<string>()">
@@ -66,4 +64,4 @@ The following example demonstrates how to define the ListBox by using the ListBo
 ## See Also
 
 * [Basic Usage of the ListBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
-* [JavaScript API Reference of the ListBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox)
+* [API Reference of the ListBox Helper for ASP.NET Core](/api/listbox)

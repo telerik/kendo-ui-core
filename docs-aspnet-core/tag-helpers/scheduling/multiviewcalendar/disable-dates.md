@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
+page_title: Disabled Dates | Telerik UI MultiViewCalendar Tag for ASP.NET Core
+description: "Learn how to disable dates in the Telerik UI MultiViewCalendar tag helper for ASP.NET Core."
 slug: disabled_dates_multiviewcalendar_taghelper_aspnetcore
 position: 6
 ---
@@ -28,4 +28,4 @@ To disable a date set an array of the dates that have to be disabled and list th
 
 ## See Also
 
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

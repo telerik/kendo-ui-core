@@ -1,7 +1,7 @@
 ---
 title: Image Browser
-page_title: Editor Image Browser | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn about the Image Browser component of the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Editor Image Browser | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn about the Image Browser component of the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_image_browser_aspnetcore
 position: 6
 ---
@@ -68,4 +68,4 @@ You can update all of these requests and responses through the [`ImageBrowser()`
 ## See Also
 
 * [File and Image Browser by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/imagebrowser)
-* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

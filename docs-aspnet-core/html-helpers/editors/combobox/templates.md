@@ -1,14 +1,14 @@
 ---
 title: Templates
-page_title: Templates | Kendo UI ComboBox HtmlHelper for ASP.NET Core
-description: "Use templates and customize the rendering of the items, values, and the popup header of the Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Templates | Telerik UI ComboBox HtmlHelper for ASP.NET Core
+description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_combobox_templates_aspnetcore
 position: 4
 ---
 
 # Templates
 
-The ComboBox provides full control over the way an item, a selected value, or a pop-up header is rendered through the Kendo UI templates.
+The ComboBox provides full control over the way an item, a selected value, or a pop-up header is rendered through the Kendo UI for jQuery templates.
 
 For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview). For a runnable example, refer to the [demo on customizing the templates in the ComboBox](https://demos.telerik.com/aspnet-core/combobox/template).
 
@@ -26,7 +26,7 @@ The following example demonstrates how to customize the ComboBox by referencing 
         .Name("customers")
         .DataTextField("ContactName")
         .DataValueField("CustomerID")
-        .TemplateId("itemTemplate") //Reference to the template
+        .TemplateId("itemTemplate") // Reference to the template.
         .DataSource(source =>
         {
             source.Read(read =>
@@ -67,7 +67,7 @@ The following example demonstrates how to define an item template and how to eva
         .Name("customers")
         .DataTextField("ContactName")
         .DataValueField("CustomerID")
-        .TemplateId("itemTemplate") //Reference to the template
+        .TemplateId("itemTemplate") // Reference to the template.
         .DataSource(source =>
         {
             source.Read(read =>
@@ -90,7 +90,7 @@ The header template manages the way the popup header of a ComboBox is rendered.
         .Name("customers")
         .DataTextField("ContactName")
         .DataValueField("CustomerID")
-        .HeaderTemplateId("headerTemplate") //Reference to the template
+        .HeaderTemplateId("headerTemplate") // Reference to the template.
         .DataSource(source =>
         {
             source.Read(read =>
@@ -113,7 +113,7 @@ The footer template manages the way the popup footer of a ComboBox is rendered. 
         .Name("customers")
         .DataTextField("ContactName")
         .DataValueField("CustomerID")
-        .FooterTemplateId("footerTemplate") //Reference to the template
+        .FooterTemplateId("footerTemplate") // Reference to the template.
         .DataSource(source =>
         {
             source.Read(read =>
@@ -149,4 +149,4 @@ The ComboBox displays `noDataTemplate` in the popup when the data source is empt
 ## See Also
 
 * [Customizing Templates in the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/template)
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)

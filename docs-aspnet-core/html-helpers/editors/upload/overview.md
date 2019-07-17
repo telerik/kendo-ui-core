@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Upload Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/upload
 slug: htmlhelpers_upload_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # Upload HtmlHelper Overview
 
-The [Upload](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview) uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
+The Telerik UI Upload HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Upload widget.
 
-The Upload HtmlHelper extension is a server-side wrapper for the [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) widget. For more information on the Upload HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview).
+The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
+
+* [Demo page for the Upload](https://demos.telerik.com/aspnet-core/upload/index)
 
 ## Initializing the Upload
 
@@ -77,7 +79,7 @@ public ActionResult Remove(string[] fileNames)
             if (System.IO.File.Exists(physicalPath))
             {
                 // The files are not actually removed in this demo.
-                // System.IO.File.Delete(physicalPath);
+                // System.     IO.File.Delete(physicalPath);
             }
         }
     }
@@ -199,4 +201,4 @@ The following example demonstrates Upload HTML helper exposes several events, wh
 
 * [Basic Usage by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload)
 * [Using the API of the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/api)
-* [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)

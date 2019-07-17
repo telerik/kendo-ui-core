@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: DataSource Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI DataSource tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI DataSource tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_datasource_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/datasource
 position: 1
@@ -9,15 +9,17 @@ position: 1
 
 # DataSource Tag Helper Overview
 
-The DataSource is an abstraction for using local data or remote data
+The Telerik UI DataSource tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI DataSource widget.
 
-The DataSource tag helper extension is a server-side wrapper for the [Kendo UI DataSource](https://docs.telerik.com/kendo-ui/framework/datasource/overview) and enables you to configure the Kendo UI DataSource component in ASP.NET Core applications.
+The DataSource is an abstraction for using local data or remote data.
+
+* [Demo page for the DataSource](https://demos.telerik.com/aspnet-core/datasource/tag-helper)
 
 ## Initializing the DataSource
 
 The following example demonstrates how to define the DataSource by using the DataSource tag helper.
 
-        <kendo-datasource name="datasource"></kendo-datasource >
+      <kendo-datasource name="datasource"></kendo-datasource >
 
 ## Basic Configuration
 
@@ -52,4 +54,4 @@ The DataSource provides [three types of data sources]({% slug types_datasource_a
 ## See Also
 
 * [Basic Usage of the Grid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datasource/tag-helper)
-* [JavaScript API Reference of the Kendo UI DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
+* [API Reference of the DataSource Helper for ASP.NET Core](/api/datasource)

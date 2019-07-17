@@ -1,7 +1,7 @@
 ---
 title: Serialization and Deserialization
-page_title: Serialization and Deserialization | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn how to control the serializing and deserializing behavior of the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Serialization and Deserialization | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to control the serializing and deserializing behavior of the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_serialize_aspnetcore
 position: 5
 ---
@@ -58,4 +58,4 @@ Deserialization is the process of parsing the HTML string input from the `value(
 
 ## See Also
 
-* [JavaScript API Reference of the Editor](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

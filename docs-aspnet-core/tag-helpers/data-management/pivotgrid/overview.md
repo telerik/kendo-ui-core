@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: PivotGrid Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI PivotGrid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI PivotGrid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_pivotgrid_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/pivotgrid
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # PivotGrid Tag Helper Overview
 
-The Kendo UI PivotGrid represents multidimensional data in a cross-tabular format.
+The Telerik UI PivotGrid tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI PivotGrid widget.
 
-The PivotGrid HtmlHelper extension is a server-side wrapper for the [Kendo UI PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index) widget and enables you to configure the Kendo UI PivotGrid widget in ASP.NET Core applications.
+The PivotGrid represents multidimensional data in a cross-tabular format.
+
+* [Demo page for the PivotGrid](https://demos.telerik.com/aspnet-core/pivotgrid/tag-helper)
 
 ## Initializing the PivotGrid
 
@@ -87,4 +89,4 @@ The PivotGrid tag helper configuration options are passed as attributes of the t
 ## See Also
 
 * [Basic Usage of the PivotGrid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/tag-helper)
-* [JavaScript API Reference of the Kendo UI PivotGrid](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid)
+* [API Reference of the PivotGrid Helper for ASP.NET Core](/api/pivotgrid)

@@ -1,6 +1,6 @@
 ---
 title: SignalR Binding
-page_title: SignalR Binding | Kendo UI Grid HtmlHelper for ASP.NET Core
+page_title: SignalR Binding | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Learn the basics when working with the Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_grid_aspnetcore_signalrbinding
 previous_url: /aspnet-core/helpers/html-helpers/grid/signalr-binding
@@ -100,6 +100,6 @@ function onPush(e) {
 
 ## See Also
 
-* [SignalR Binding by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/signalr)
+* [SignalR Binding by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/signalr)
 * [ASP.NET Core SignalR Get Started](https://docs.microsoft.com/en-us/aspnet/core/signalr/get-started?view=aspnetcore-2.1&tabs=visual-studio)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

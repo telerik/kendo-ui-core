@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Slider Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Slider tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Slider tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/slider, /aspnet-core/helpers/tag-helpers/slider
 slug: taghelpers_slider_aspnetcore
 position: 1
@@ -9,13 +9,11 @@ position: 1
 
 # Slider Tag Helper Overview
 
-The Kendo UI Slider provides a rich input for selecting numeric values.
+The Telerik UI Slider tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Slider widget.
 
-The Slider can be either of the following types:
-* Kendo UI Slider for ASP.NET Core, which presents one handle and two opposing buttons for selecting a single numeric value.
-* Kendo UI RangeSlider for ASP.NET Core, which present two handlers for defining a range of numeric values.
+The Slider provides a rich input for selecting numeric values nd can be either a Slider which presents one handle and two opposing buttons for selecting a single numeric value or a Slider which presents two handlers for defining a range of numeric values.
 
-The Slider tag helper extension is a server-side wrapper for the [Kendo UI Slider](https://demos.telerik.com/kendo-ui/slider/index) widget and enables you to configure the Kendo UI Slider widget in ASP.NET Core applications.
+* [Demo page for the Slider](https://demos.telerik.com/aspnet-core/slider/tag-helper)
 
 ## Initializing the Slider
 
@@ -67,4 +65,4 @@ The following example demonstrates how to define the RangeSlider by using the Ra
 ## See Also
 
 * [Basic Usage of the Slider Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/tag-helper)
-* [JavaScript API Reference of the Slider](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
+* [API Reference of the Slider Helper for ASP.NET Core](/api/slider)

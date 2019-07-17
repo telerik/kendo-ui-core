@@ -1,14 +1,14 @@
 ---
 title: Sorting
-page_title: Sorting | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Learn how to enable the sorting functionality of the Kendo UI Grid for ASP.NET Core."
+page_title: Sorting | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Learn how to enable the sorting functionality of the Telerik UI Grid for ASP.NET Core."
 slug: htmlhelpers_grid_aspnetcore_sorting
 position: 7
 ---
 
 # Sorting
 
-By default, the sorting functionality of the Kendo UI Grid for ASP.NET Core is disabled.
+By default, the sorting functionality of the Telerik UI Grid for ASP.NET Core is disabled.
 
 ## Getting Started
 
@@ -32,5 +32,5 @@ With multi-column sorting you can also configure the Grid to display the sort in
 
 ## See Also
 
-* [Sorting by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/sorting)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Sorting by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/sorting)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

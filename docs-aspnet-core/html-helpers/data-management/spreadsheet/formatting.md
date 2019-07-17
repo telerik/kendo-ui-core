@@ -1,7 +1,7 @@
 ---
 title: Cell Formatting
 page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to format cells in the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn how to format cells in the Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_formatting_aspnetcore
 position: 4
 ---
@@ -10,41 +10,27 @@ position: 4
 
 The Spreadsheet supports cell-formatting options such as formatting of strings, text, numbers, dates, and time.
 
-## Formatting
+## Strings
 
-### Strings
-
-While the format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), some [notable exceptions](#differences-to-excel) still exist.
-
-A format string consists of one or more sections that are separated by semicolons. Optionally, a section specifies a color and a condition.
+While the format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), some [notable exceptions](#differences-to-excel) still exist. A format string consists of one or more sections that are separated by semicolons. Optionally, a section specifies a color and a condition.
 
 The following example demonstrates how to display a number with up to three decimals.
-
-###### Example
 
     #.###
 
 The following example demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.
 
-###### Example
-
     [Green]#.###;[Red]#.###
 
 The following example demonstrates how to display positive numbers in green, negative numbers in red, and the `"Zero"` text in blue if the number is zero.
-
-###### Example
 
     [Green]#.###;[Red]#.###;[Blue]"Zero"
 
 This following example is the same as the previous one, with the difference to display any possible text in the cell in magenta.
 
-###### Example
-
     [Green]#.###;[Red]#.###;[Blue]"Zero";[Magenta]@
 
 The following example demonstrates how to format the Spreadsheet conditionally.
-
-###### Example
 
 ```Razor
 <div id="example">
@@ -646,13 +632,11 @@ Excel also supports a more flexible conditional formatting.
 
 The following example demonstrates how to display numbers greater than 100 in green, numbers less than minus 100 in yellow, and other numbers in cyan.
 
-###### Example
-
     [>100][GREEN]#,##0;[<=-100][YELLOW]#,##0;[CYAN]#,##0
 
 In this case, it is not clear whether only up to four sections are allowed, of which the last one must be text, while the Spreadsheet formatter allows for any number of conditional sections.
 
-### Default Format Strings
+## Default Format Strings
 
 The default format strings that are shown in the formatting drop-down are stored in the `kendo.spreadsheet.formats` object.
 
@@ -670,7 +654,7 @@ The default format strings that are shown in the formatting drop-down are stored
 
 You can use these formats with the [`range` format method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/format) in the following way: `sheet.range("A1").format(kendo.spreadsheet.formats.currency)`.
 
-### Text and Numbers
+## Text and Numbers
 
 | CHARACTER | MEANING       |
 |-----------|---------------|
@@ -688,8 +672,6 @@ The thousands separator (`,`) has a double role:
 * When situated between any digit placeholders, it outputs a number in thousands that are separated by the separator in the current culture. For example, `#,#` formats `1234567` as `1,234,567`.
 * When a comma follows a digit placeholder but is not followed by one, it scales the number by one thousand. For example, `#.##,` formats `12345` as `12.35`. This is a more complicated format displaying in which cases such behavior is useful: `[>1000000]#.##,,"M";[>1000]#.##,"K";[>0]#"B";[=0]"Empty";[<0]"Replace HDD!"`.
 
-###### Example
-
 | VALUE    | DISPLAY      |
 |----------|--------------|
 | 12345678 | 12.35M       |
@@ -698,7 +680,7 @@ The thousands separator (`,`) has a double role:
 |        0 | Empty        |
 |      -10 | Replace HDD! |
 
-### Dates and Time
+## Dates and Time
 
 | FORMAT STRING | MEANING                                                                           |
 |---------------|-----------------------------------------------------------------------------------|
@@ -743,6 +725,4 @@ The Spreadsheet does not support the following options that are otherwise availa
 
 ## See Also
 
-* [Overview of the Spreadsheet HtmlHelper]({% slug htmlhelpers_spreadsheet_aspnetcore %})
-* [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [Spreadsheet Official Demos](http://demos.telerik.com/aspnet-core/spreadsheet/index)
+* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)

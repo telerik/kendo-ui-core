@@ -1,7 +1,7 @@
 ---
 title:  Model Binding
-page_title: Model Binding | Kendo UI MultiSelect HtmlHelper for ASP.NET Core
-description: "Learn how to implement model binding with Kendo UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Model Binding | Telerik UI MultiSelect HtmlHelper for ASP.NET Core
+description: "Learn how to implement model binding with Telerik UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_multiselect_modelbinding_aspnetcore
 position: 5
 ---
@@ -94,6 +94,4 @@ You can configure the MultiSelect to get its data from a remote source by making
 
 ## See Also
 
-* [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
-* [MultiSelect HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/multiselect/overview)
-* [MultiSelect Official Demos](http://demos.telerik.com/aspnet-core/multiselect/index)
+* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)

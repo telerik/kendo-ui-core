@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: TreeList Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/treelist
 slug: htmlhelpers_treelist_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # TreeList HtmlHelper Overview
 
+The Telerik UI TreeList HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeList widget.
+
 The TreeList enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
-The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](http://demos.telerik.com/aspnet-mvc/treelist/index) widget. For more information on the TreeList HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/treelist/overview).
+* [Demo page for the TreeList](https://demos.telerik.com/aspnet-core/treelist/index)
 
 ## Initializing the TreeList
 
@@ -194,5 +196,4 @@ To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](h
 ## See Also
 
 * [Basic Usage of the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/index)
-* [Basic Usage of the Kendo UI TreeList Widget (Demo)](https://demos.telerik.com/kendo-ui/treemap/index)
-* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)

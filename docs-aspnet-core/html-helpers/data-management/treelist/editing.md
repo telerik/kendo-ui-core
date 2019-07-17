@@ -1,23 +1,21 @@
 ---
 title: Editing
 page_title: Editing | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to configure the Kendo UI TreeList HtmlHelper and enable CRUD operations."
+description: "Learn how to configure the Telerik UI TreeList HtmlHelper and enable CRUD operations."
 slug: editing_aspnetcore_treelist_helper
 position: 3
 ---
 
 # Editing
 
-The [Kendo UI TreeList HtmlHelper](https://demos.telerik.com/aspnet-core/treelist) provides a build-in editing functionality.
-
-## Getting Started
+The [Telerik UI TreeList HtmlHelper](https://demos.telerik.com/aspnet-core/treelist) provides a built-in editing functionality.
 
 To implement the editing functionality of the TreeList:
 
 1. [Set the model](#setting-the-model)
 1. [Configure the transport](#configuring-the-transport)
 
-### Setting the Model
+## Setting the Model
 
 All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `ParentId` fields and those models must be configured in the DataSource of the TreeList. The TreeList distinguishes the root items based on the `ParentId` field. If the `ParentId` field is nullable, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is *not* nullable, root items will be items which have a default value for their data type.
 
@@ -49,7 +47,7 @@ The following example demonstrates how to use the non-nullable model&mdash;items
 	public string EmployeeId { get; set; }
 ```
 
-### Configuring the Transport
+## Configuring the Transport
 
 Once the schema is configured, you need to configure the action methods in the DataSource for `"Update"`, `"Destroy"`, and `"Create"`. An important part of the CRUD operations is the response from the service, which needs to return the manipulated records, so that the TreeList can apply the changes to the DataSource accordingly. The new records also have to contain the newly assigned within the service `Id` value.
 
@@ -200,4 +198,4 @@ When the `.Editable(editable=>editable.Move(true))` option is set to `true`, the
 * [Incell Editing by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/editing-incell)
 * [Popup Editing by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/editing-popup)
 * [Editing by Dragging and Dropping in the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/dragdrop)
-* [JavaScript API Reference of the TreeList](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)

@@ -1,7 +1,7 @@
 ---
 title: HTML Structure and DOM Placement
-page_title: HTML Structure and DOM Placement | Kendo UI Dialog HtmlHelper for ASP.NET Core
-description: "Learn about the HTML Structure and DOM Placement of the Kendo UI Dialog HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: HTML Structure and DOM Placement | Telerik UI Dialog HtmlHelper for ASP.NET Core
+description: "Learn about the HTML Structure and DOM Placement of the Telerik UI Dialog HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: structure_and_placement_dialoghelper_aspnetcore
 position: 2
 ---
@@ -44,4 +44,4 @@ The following example demonstrates how the markup of the page from the previous 
 
 ## See Also
 
-* [JavaScript API Reference of the Dialog](http://docs.telerik.com/kendo-ui/api/javascript/ui/dialog)
+* [API Reference of the Dialog](/api/dialog)

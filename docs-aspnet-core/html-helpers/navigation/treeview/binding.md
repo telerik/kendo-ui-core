@@ -1,7 +1,7 @@
 ---
 title: Data Binding
-page_title: Data Binding | Kendo UI TreeView HtmlHelper for ASP.NET Core
-description: "Learn the binding options for the Kendo UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Data Binding | Telerik UI TreeView HtmlHelper for ASP.NET Core
+description: "Learn the binding options for the Telerik UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treeview_binding_aspnetcore
 position: 2
 ---
@@ -151,4 +151,4 @@ public IActionResult Read_TreeViewData(int? id)
 
 * [Local Data Binding by the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/local-data-binding)
 * [Remote Data Binding by the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/remote-data-binding)
-* [JavaScript API Reference of the TreeView](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)

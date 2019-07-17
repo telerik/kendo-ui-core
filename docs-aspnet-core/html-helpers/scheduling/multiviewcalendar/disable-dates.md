@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET Core
-description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
+page_title: Disabled Dates | Telerik UI MultiViewCalendar HtmlHelper for ASP.NET Core
+description: "Learn how to disable dates in the Telerik UI MultiViewCalendar widget."
 slug: disabled_dates_multiviewcalendar_htmlhelper_aspnetcore
 position: 6
 ---
@@ -50,4 +50,4 @@ When you add a function, determine its return value as `true` for the date that 
 ## See Also
 
 * [Disabled Dates in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/disabled-dates)
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)

@@ -1,7 +1,7 @@
 ---
 title: Hint
-page_title: Hint | Kendo UI Sortable for ASP.NET Core
-description: "Disable the hint in the Kendo UI Sortable HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Hint | Telerik UI Sortable for ASP.NET Core
+description: "Disable the hint in the Telerik UI Sortable HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: hint_sortable_aspnetcore
 position: 2
 ---
@@ -25,4 +25,4 @@ To disable that behavior, set the hint to an empty function by using [`jQuery.no
 
 ## See Also
 
-* [JavaScript API Reference of the Sortable](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable)
+* [API Reference of the Sortable HtmlHelper for ASP.NET Core](/api/sortable)

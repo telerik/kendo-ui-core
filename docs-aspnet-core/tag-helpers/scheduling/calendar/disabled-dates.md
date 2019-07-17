@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Kendo UI Calendar Tag Helper for ASP.NET Core
-description: "Disable dates when working with the Kendo UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Disabled Dates | Telerik UI Calendar Tag Helper for ASP.NET Core
+description: "Disable dates when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: disableddates_calendar_aspnetcore
 position: 6
 ---
@@ -56,4 +56,4 @@ When you add a function, determine its return value as `true` for the date that 
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)

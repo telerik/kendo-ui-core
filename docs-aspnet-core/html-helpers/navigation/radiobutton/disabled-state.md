@@ -1,7 +1,7 @@
 ---
 title: Disabled RadioButton
-page_title: Disabled RadioButton | Kendo UI RadioButton HtmlHelper for ASP.NET Core
-description: "Enable or disable the Kendo UI RadioButton for ASP.NET MVC."
+page_title: Disabled RadioButton | Telerik UI RadioButton HtmlHelper for ASP.NET Core
+description: "Enable or disable the Telerik UI RadioButton for ASP.NET MVC."
 slug: disabledstate_radiobutton_aspnetcore
 position: 2
 ---
@@ -22,6 +22,5 @@ The following example demonstrates how to use the `.Enable()` configuration opti
 
 ## See Also
 
+* [API Reference of the RadioButton HtmlHelper for ASP.NET Core](/api/radiobutton)
 * [Telerik UI for ASP.NET Core API Reference: RadioButtonBuilder](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Overview of the Kendo UI RadioButton Widget](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#customize-checkboxes-and-radio-buttons)

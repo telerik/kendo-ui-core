@@ -1,20 +1,20 @@
 ---
 title: Editor Templates
-page_title: Editor Templates | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Create the editing UI of a Kendo Grid ASP.NET Core with the ASP.NET Core editor templates."
+page_title: Editor Templates | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Create the editing Telerik UI Grid ASP.NET Core with the ASP.NET Core editor templates."
 slug: editortemplates_grid_aspnetcore
 position: 2
 ---
 
 # Editor Templates
 
-You can create an editing UI of a Kendo UI Grid for ASP.NET Core by defining editor templates.
+You can create an editing UI of a Telerik UI Grid for ASP.NET Core by defining editor templates.
 
 For runnable examples, refer to the [demos on templates in the Grid](https://demos.telerik.com/aspnet-core/grid/toolbar-template).
 
 ## Getting Started
 
-The Kendo UI Grid for ASP.NET Core relies on ASP.NET Core editor templates to create an editing UI. If the Grid is configured for in-line or in-cell editing, it uses the `Html.EditorFor` method to get the editor HTML for every property which is editable.
+The Telerik UI Grid for ASP.NET Core relies on ASP.NET Core editor templates to create an editing UI. If the Grid is configured for in-line or in-cell editing, it uses the `Html.EditorFor` method to get the editor HTML for every property which is editable.
 
 The configuration later in this article will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
@@ -56,8 +56,8 @@ Your project may require you to create a custom editor for a specific property. 
             public string EmployeeName { get; set; }
         }
 
-1. Create an editor template for the `Employee` property which will display a Kendo UI DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`.
-1. Add a Kendo UI DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
+1. Create an editor template for the `Employee` property which will display a DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`.
+1. Add a DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
 
         @(Html.Kendo().DropDownList()
             .Name("Employee") // The name of the widget should be the same as the name of the property.
@@ -96,5 +96,5 @@ Your project may require you to create a custom editor for a specific property. 
 
 ## See Also
 
-* [Templates by the Grid (Demos)](https://demos.telerik.com/aspnet-core/grid/toolbar-template)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Templates by the Grid HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/grid/toolbar-template)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

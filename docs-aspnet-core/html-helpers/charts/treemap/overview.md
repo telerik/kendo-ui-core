@@ -1,20 +1,22 @@
 ---
 title: Overview
 page_title: TreeMap Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI TreeMap HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeMap HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_treemaphelper_aspnetcore
 position: 1
 ---
 
 # TreeMap HtmlHelper Overview
 
-The Kendo UI TreeMap displays hierarchical data in a traditional tree structure.
+The Telerik UI TreeMap HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeMap widget.
 
-The TreeMap HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeMap](https://demos.telerik.com/kendo-ui/treemap/index) widget. For more information on the TreeMap HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/treemap/overview).
+The TreeMap displays hierarchical data in a traditional tree structure.
+
+* [Demo page for the TreeMap](https://demos.telerik.com/aspnet-core/treemap/index)
 
 ## Initializing the TreeMap
 
-The following example demonstrates how to create the TreeMap.
+The following example demonstrates how to define a TreeMap by using the TreeMap HtmlHelper.
 
 ```Razor
   @(Html.Kendo().TreeMap()
@@ -128,5 +130,4 @@ To reference an existing Kendo UI TreeMap instance, use the [`jQuery.data()`](ht
 ## See Also
 
 * [Basic Usage of the TreeMap HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/index)
-* [Basic Usage of the Kendo UI TreeMap Widget (Demo)](https://demos.telerik.com/kendo-ui/treemap/index)
-* [JavaScript API Reference of the Kendo UI TreeMap](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/treemap)
+* [API Reference of the TreeMap HtmlHelper for ASP.NET Core](/api/treemap)

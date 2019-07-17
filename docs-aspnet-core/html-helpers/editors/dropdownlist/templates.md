@@ -1,14 +1,14 @@
 ---
 title: Templates
-page_title: Templates | Kendo UI DropDownList HtmlHelper for ASP.NET Core
-description: "Use templates and customize the rendering of the items, values, and the popup header of the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Templates | Telerik UI DropDownList HtmlHelper for ASP.NET Core
+description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_templates_aspnetcore
 position: 4
 ---
 
 # Templates
 
-The DropDownList provides full control over the way an item, a selected value, or a pop-up header is rendered through the Kendo UI templates.
+The DropDownList provides full control over the way an item, a selected value, or a pop-up header is rendered through the Kendo UI for jQuery templates.
 
 For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview). For a runnable example, refer to the [demo on customizing the templates in the DropDownList](https://demos.telerik.com/aspnet-core/dropdownlist/template).
 
@@ -72,7 +72,7 @@ The following example demonstrates how to define an item template and how to eva
                 .Name("customers")
                 .DataTextField("ContactName")
                 .DataValueField("CustomerID")
-                .TemplateId("itemTemplate") //Reference to the template
+                .TemplateId("itemTemplate") // Reference to the template.
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -98,7 +98,7 @@ The value template manages the way the selected value of a DropDownList is rende
                 .Name("customers")
                 .DataTextField("ContactName")
                 .DataValueField("CustomerID")
-                .ValueTemplateId("valueTemplate") //Reference to the template
+                .ValueTemplateId("valueTemplate") // Reference to the template.
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -122,7 +122,7 @@ The header template manages the way the pop-up header of a DropDownList is rende
                 .Name("customers")
                 .DataTextField("ContactName")
                 .DataValueField("CustomerID")
-                .HeaderTemplateId("headerTemplate") //Reference to the template
+                .HeaderTemplateId("headerTemplate") // Reference to the template.
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -146,7 +146,7 @@ The footer template manages the way the pop-up footer of a DropDownList is rende
                 .Name("customers")
                 .DataTextField("ContactName")
                 .DataValueField("CustomerID")
-                .FooterTemplateId("footerTemplate") //Reference to the template
+                .FooterTemplateId("footerTemplate") // Reference to the template.
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -172,7 +172,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
                 .Name("customers")
                 .DataTextField("ContactName")
                 .DataValueField("CustomerID")
-                .NoDataTemplateId("noDataTemplate") //Reference to the template
+                .NoDataTemplateId("noDataTemplate") // Reference to the template.
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -185,4 +185,4 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 ## See Also
 
 * [Customizing Templates in the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/template)
-* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)

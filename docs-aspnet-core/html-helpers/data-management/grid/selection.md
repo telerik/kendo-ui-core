@@ -1,14 +1,14 @@
 ---
 title: Selection
-page_title: Selection | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Learn how to enable the selection functionality of the Kendo UI Grid for ASP.NET Core."
+page_title: Selection | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Learn how to enable the selection functionality of the Telerik UI Grid for ASP.NET Core."
 slug: htmlhelpers_grid_aspnetcore_selection
 position: 11
 ---
 
 # Selection
 
-By default, the selection functionality of the Kendo UI Grid for ASP.NET Core is disabled.
+By default, the selection functionality of the Telerik UI Grid for ASP.NET Core is disabled.
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ The Grid also provides a built-in functionality for persisting the selection thr
 
 ## See Also
 
-* [Multiple Selection by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/selection)
-* [Checkbox Selection by the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/checkbox-selection)
-* [Persisting the State of the Grid (Demo)](https://demos.telerik.com/aspnet-core/grid/persist-state)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [Multiple Selection by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/selection)
+* [Checkbox Selection by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/checkbox-selection)
+* [Persisting the State of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/persist-state)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Grid Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_grid_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/grid
 position: 1
@@ -9,25 +9,23 @@ position: 1
 
 # Grid Tag Helper Overview
 
-The [Grid](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview) is a powerful control for displaying data in a tabular format.
+The Telerik UI Grid tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Grid widget.
 
-It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the [Kendo UI DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview) component.
+The Grid is a powerful control for displaying data in a tabular format. It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
 
-The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index) widget and enables you to configure the Kendo UI Grid widget in ASP.NET Core applications.
+* [Demo page for the Grid](https://demos.telerik.com/aspnet-core/grid/tag-helper)
 
 ## Initializing the Grid
 
 The following example demonstrates how to define the Grid by using the Grid tag helper.
 
-        <kendo-grid name="grid"></kendo-grid>
+      <kendo-grid name="grid"></kendo-grid>
 
 ## Basic Configuration
 
 The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data.
 
 > To parse the value to a proper data type, set a `type` field in the DataSource schema model of the Grid tag helper.
-
-For more information on the configuration options of the Grid, refer to the overview of the [MVC Grid HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
 
 ```tagHelper
 <kendo-grid name="grid" height="550">
@@ -95,7 +93,7 @@ For more information on the configuration options of the Grid, refer to the over
 
 ## Events
 
-You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events).
+You can subscribe to all Grid events.
 
 ```tagHelper
         <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">
@@ -165,4 +163,4 @@ You can subscribe to all Grid [events](https://docs.telerik.com/kendo-ui/api/jav
 ## See Also
 
 * [Basic Usage of the Grid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)

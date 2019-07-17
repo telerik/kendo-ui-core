@@ -1,7 +1,7 @@
 ---
 title: Validation
-page_title: Validation | Kendo UI MaskedTextBox for ASP.NET Core HtmlHelpers
-description: "Use the predefined and custom masks in the Kendo UI MaskedTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Validation | Telerik UI MaskedTextBox for ASP.NET Core HtmlHelpers
+description: "Use the predefined and custom masks in the Telerik UI MaskedTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: validation_maskedtextbox_aspnetcore
 position: 2
 ---
@@ -45,4 +45,4 @@ The following example demonstrates how to define a custom rule for the `-` (minu
 
 ## See Also
 
-* [JavaScript API Reference of the MaskedTextBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox)
+* [API Reference of the MaskedTextBox HtmlHelper for ASP.NET Core](/api/maskedtextbox)

@@ -1,7 +1,7 @@
 ---
 title:  Overview
-page_title: Data Binding | Kendo UI DropDownList HtmlHelper for ASP.NET Core
-description: "Learn the basics approaches for binding the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Data Binding | Telerik UI DropDownList HtmlHelper for ASP.NET Core
+description: "Learn the basics approaches for binding the Telerik UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_databinding_aspnetcore
 position: 1
 ---
@@ -21,4 +21,4 @@ The supported data-binding approaches are:
 
 ## See Also
 
-* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)

@@ -1,13 +1,13 @@
 ---
-title: Getting Started with Visual Studio
-page_title: Getting Started with Visual Studio | Telerik UI for ASP.NET Core
+title: Getting Started on Windows
+page_title: Getting Started on Windows | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and Visual Studio."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Getting Started with Visual Studio
+# Getting Started on Windows
 
 This article demonstrates how to configure an Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core project on Windows with Visual Studio (VS) 2017/2019.
 

@@ -1,7 +1,7 @@
 ---
 title: Data Binding
-page_title: Data Binding | Kendo UI Charts HtmlHelper for ASP.NET Core
-description: "Learn the basics about binding the Kendo UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
+page_title: Data Binding | Telerik UI Charts HtmlHelper for ASP.NET Core
+description: "Learn the basics about binding the Telerik UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
 slug: htmlhelpers_charts_databinding_aspnetcore
 position: 2
 ---
@@ -308,6 +308,6 @@ To bind to remote data by using the DataSource component:
 
 ## See Also
 
-* [Using the API of the Charts HtmlHelpers for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chart-api/index)
-* [Basic Usage of the Charts HtmlHelpers for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/area-charts/index)
-* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Using the API of the Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chart-api/index)
+* [Basic Usage of the Area Chart HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/area-charts/index)
+* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)

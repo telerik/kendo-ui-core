@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: DropDownList Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/dropdownlist
 slug: htmlhelpers_dropdownlist_aspnetcore
 position: 0
@@ -9,11 +9,11 @@ position: 0
 
 # DropDownList HtmlHelper Overview
 
-The [DropDownList](http://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview) displays a list of values and allows for a single selection from the list.
+The Telerik UI DropDownList HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DropDownList widget.
 
-The user input is restricted within the predefined options.
+The DropDownList displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
 
-The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) widget. For more information on the DropDownList HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/dropdownlist/overview).
+* [Demo page for the DropDownList](https://demos.telerik.com/aspnet-core/dropdownlist/index)
 
 ## Initializing the DropDownList
 
@@ -108,7 +108,7 @@ The following example demonstrates the basic configuration of the DropDownList H
 
 ## Events
 
-You can subscribe to all DropDownList [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#events). For a complete example on basic DropDownList events, refer to the [demo on using the events of the DropDownList](https://demos.telerik.com/aspnet-core/dropdownlist/events).
+You can subscribe to all DropDownList events. For a complete example on basic DropDownList events, refer to the [demo on using the events of the DropDownList](https://demos.telerik.com/aspnet-core/dropdownlist/events).
 
 ### Handling by Handler Name
 
@@ -157,9 +157,9 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI DropDownList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownList API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods) to control its behavior.
+To reference an existing Telerik UI DropDownList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownList API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
-        // Place this after your Kendo UI DropDownList for ASP.NET MVC declaration.
+        // Place this after your Telerik UI DropDownList for ASP.NET Core declaration.
         <script>
         $(function() {
         // The Name() of the DropDownList is used to get its client-side instance.
@@ -171,4 +171,4 @@ To reference an existing Kendo UI DropDownList instance, use the [`jQuery.data()
 
 * [Basic Usage of the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist)
 * [Using the API of the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/api)
-* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)

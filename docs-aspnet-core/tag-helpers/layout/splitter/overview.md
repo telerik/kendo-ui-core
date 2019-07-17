@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Splitter Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Knedo UI Splitter tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Splitter tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/splitter, /aspnet-core/helpers/tag-helpers/splitter
 slug: taghelpers_splitter_aspnetcore
 position: 1
@@ -9,19 +9,19 @@ position: 1
 
 # Splitter Tag Helper Overview
 
-The [Splitter](http://docs.telerik.com/kendo-ui/controls/layout/splitter/overview) provides a dynamic layout of resizable and collapsible panes.
+The Telerik UI Splitter tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Splitter widget.
 
-It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
+The Splitter provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of the Splitter can be combined to build complex layouts.
 
-The Splitter tag helper extension is a server-side wrapper for the [Kendo UI Splitter](http://demos.telerik.com/kendo-ui/splitter/index) widget and enables you to configure the Kendo UI Splitter widget in ASP.NET Core applications.
+* [Demo page for the Splitter](https://demos.telerik.com/aspnet-core/splitter/tag-helper)
 
 ## Initializing the Splitter
 
-The Splitter pane tags do not automatically render `div` elements. Therefore, the container elements have to be explicitly defined and the whole pane content has to be placed inside these parent wrappers in the way demonstrated in the following example. To check the result of the declarative definition, refer to the [live sample on the Splitter Tag Helper](http://demos.telerik.com/aspnet-core/splitter/tag-helper).
+The Splitter pane tags do not automatically render `div` elements. Therefore, the container elements have to be explicitly defined and the whole pane content has to be placed inside these parent wrappers.
+
+> To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI for jQuery R1 2018 release introduces a change in the tag names of the Splitter. Previously, the tag name of the pane was `<kendo-splitter-pane>` while now, after the release, it is changed to `<pane>`.
 
 The following example demonstrates how to define the Splitter by using the Splitter tag helper.
-
-> To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI R1 2018 release introduces a change in the tag names of the Splitter. Previously, the tag name of the pane was `<kendo-splitter-pane>` while now, after the release, it is changed to `<pane>`.
 
     <kendo-splitter name="vertical" orientation="SplitterOrientation.Vertical">
         <pane scrollable="false" collapsible="false">
@@ -118,4 +118,4 @@ The Splitter tag helper supports all the configuration options that the HtmlHelp
 ## See Also
 
 * [Basic Usage of the Splitter Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/tag-helper)
-* [JavaScript API Reference of the Splitter](http://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)
+* [API Reference of the Splitter Helper for ASP.NET Core](/api/splitter)

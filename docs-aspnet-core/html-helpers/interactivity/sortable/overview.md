@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Sortable Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Sortable widget for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Sortable widget for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/sortable
 slug: htmlhelpers_sortable_aspnetcore
 position: 1
@@ -9,15 +9,17 @@ position: 1
 
 # Sortable HtmlHelper Overview
 
+The Telerik UI Sortable HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Sortable widget.
+
 The Sortable provides a sortable drag-and-drop functionality to elements within a list.
 
-The Sortable HtmlHelper extension is a server-side wrapper for the [Kendo UI Sortable](https://demos.telerik.com/kendo-ui/sortable/index) widget. For more information on the Sortable HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/sortable/overview).
+* [Demo page for the Sortable](https://demos.telerik.com/aspnet-core/sortable/index)
 
 ## Initializing the Sortable
 
 Unlike most of the HtmlHelpers, the Sortable does not render HTML markup. You have to initialize the Sortable HtmlHelper for an already existing DOM element.
 
-The following example demonstrates a basic declaration of a Sortable widget using the Sortable HtmlHelper. The widget is initialized for the "sortable-basic" element making its list items sortable.
+The following example demonstrates a basic declaration of a Sortable widget using the Sortable HtmlHelper. The widget is initialized for the `sortable-basic` element making its list items sortable.
 
 ```
       <ul id="sortable-basic">
@@ -118,10 +120,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [Sortable API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
+To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [Sortable API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
 
 ```
-    // Place this after your Kendo UI Sortable for ASP.NET MVC declaration.
+    // Place this after your Telerik UI Sortable for ASP.NET Core declaration.
     <script>
     $(function() {
         // The For() of the Sortable is used to get its client-side instance.
@@ -137,4 +139,4 @@ For a complete example on basic Sortable events, refer to the [demo on using the
 ## See Also
 
 * [Basic Usage of the Sortable HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/index)
-* [JavaScript API Reference of the Sortable](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable)
+* [API Reference of the Sortable HtmlHelper for ASP.NET Core](/api/sortable)

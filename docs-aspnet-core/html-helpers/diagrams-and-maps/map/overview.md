@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Map Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Map HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Map HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/map
 slug: htmlhelpers_map_aspnetcore
 position: 1
@@ -9,14 +9,11 @@ position: 1
 
 # Map HtmlHelper Overview
 
-The [Kendo UI Map widget](http://demos.telerik.com/aspnet-core/map/index) displays geospatial information organized in layers and is supported for both desktop and mobile devices.
+The Telerik UI Map HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Map widget.
 
-The layers that the Map provides are:
-* Tile layers
-* Shape (vector) layers
-* Marker layers
+The Map displays geospatial information organized in layers and is supported for both desktop and mobile devices. It also provides tile layers, shape (vector) layers, and marker layers.
 
-The Map HtmlHelper extension is a server-side wrapper for the [Kendo UI Map](http://demos.telerik.com/aspnet-mvc/map/index) widget. For more information on any new features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui/roadmap). For more information on the Map HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/map/overview).
+* [Demo page for the Map](https://demos.telerik.com/aspnet-core/map/index)
 
 ## Initializing the Map
 
@@ -95,4 +92,4 @@ For a complete example on basic Map events, refer to the [demo on using the even
 ## See Also
 
 * [Basic Usage of the Map HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/map/index)
-* [JavaScript API Reference of the Map](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map)
+* [API Reference of the Map HtmlHelper for ASP.NET Core](/api/map)

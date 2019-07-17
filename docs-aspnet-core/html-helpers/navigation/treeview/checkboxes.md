@@ -1,7 +1,7 @@
 ---
 title: Checkboxes
-page_title: Checkboxes | Kendo UI TreeView HtmlHelper for ASP.NET Core
-description: "Learn about the checkboxes functionality of the Kendo UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Checkboxes | Telerik UI TreeView HtmlHelper for ASP.NET Core
+description: "Learn about the checkboxes functionality of the Telerik UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treeview_checkboxes_aspnetcore
 position: 5
 ---
@@ -52,4 +52,4 @@ You can define the `Checkboxes` configuration option by:
 ## See Also
 
 * [Checkboxes in the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/checkboxes)
-* [JavaScript API Reference of the TreeView](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)

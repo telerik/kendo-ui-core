@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ToolBar Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI ToolBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ToolBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/toolbar, /aspnet-core/helpers/tag-helpers/toolbar
 slug: taghelpers_toolbar_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # ToolBar Tag Helper Overview
 
-The [ToolBar](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+The Telerik UI ToolBar tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ToolBar widget.
 
-The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) widget and enables you to configure the Kendo UI ToolBar widget in ASP.NET Core applications.
+The ToolBar is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+
+* [Demo page for the ToolBar](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
 
 ## Initializing the ToolBar
 
@@ -142,4 +144,4 @@ The following example demonstrates the basic configuration of the ToolBar tag he
 ## See Also
 
 * [Basic Usage of the ToolBar Tag lHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
-* [JavaScript API Reference of the ToolBar](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [API Reference of the ToolBar Helper for ASP.NET Core](/api/toolbar)

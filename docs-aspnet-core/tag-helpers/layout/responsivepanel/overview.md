@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ResponsivePanel Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Knedo UI ResponsivePanel tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ResponsivePanel tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/responsive-panel, /aspnet-core/helpers/tag-helpers/responsive-panel
 slug: taghelpers_responsivepanel_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # ResponsivePanel Tag Helper Overview
 
-The Kendo UI ResponsivePanel widget allows you to hide part of a page content on small screens.
+The Telerik UI ResponsivePanel tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ResponsivePanel widget.
 
-The ResponsivePanel tag helper extension is a server-side wrapper for the [Kendo UI ResponsivePanel](https://demos.telerik.com/kendo-ui/responsive-panel/index) widget and enables you to configure the Kendo UI ResponsivePanel widget in ASP.NET Core applications.
+The ResponsivePanel allows you to hide part of a page content on small screens.
+
+* [Demo page for the ResponsivePanel](https://demos.telerik.com/aspnet-core/responsivepanel/index)
 
 ## Initializing the ResponsivePanel
 
@@ -127,4 +129,4 @@ The configuration options of the ResponsivePanel tag helper are passed as attrib
 ## See Also
 
 * [Basic Usage of the ResponsivePanel Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/responsive-panel/index)
-* [JavaScript API Reference of the ResponsivePanel](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel)
+* [API Reference of the ResponsivePanel Helper for ASP.NET Core](/api/responsivepanel)

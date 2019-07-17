@@ -1,14 +1,14 @@
 ---
 title: Hierarchy
-page_title: Hierarchy | Kendo UI Grid Tag Helper for ASP.NET Core
-description: "Learn the basics when working with the Kendo UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Hierarchy | Telerik UI Grid Tag Helper for ASP.NET Core
+description: "Learn the basics when working with the Telerik UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: hierarchy_grid_aspnetcore
 position: 2
 ---
 
 # Hierarchy
 
-The Grid supports hierarchy and requires a [`DetailInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailinit) function.
+The Grid supports hierarchy and requires a `DetailInit` function.
 
 That function initializes the detail Grids by using the [Kendo UI Grid for jQuery](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
 
@@ -109,4 +109,4 @@ That function initializes the detail Grids by using the [Kendo UI Grid for jQuer
 ## See Also
 
 * [Basic Usage of the Grid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
-* [JavaScript API Reference of the Kendo UI Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)

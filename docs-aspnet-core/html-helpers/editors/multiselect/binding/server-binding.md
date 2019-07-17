@@ -1,14 +1,14 @@
 ---
 title:  Server Binding
-page_title: Server Binding | Kendo UI MultiSelect HtmlHelper for ASP.NET Core
-description: "Learn how to implement server binding in the Kendo UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Server Binding | Telerik UI MultiSelect HtmlHelper for ASP.NET Core
+description: "Learn how to implement server binding in the Telerik UI MultiSelect HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_multiselect_serverbinding_aspnetcore
 position: 3
 ---
 
 # Server Binding
 
-You can configure the Kendo UI MultiSelect for server binding to the Northwind **Products** table which uses Linq to SQL.
+You can configure the Telerik UI MultiSelect for server binding to the Northwind **Products** table which uses Linq to SQL.
 
 1. Create a new action method and pass the **Products** table as the model.
 
@@ -37,4 +37,4 @@ You can configure the Kendo UI MultiSelect for server binding to the Northwind *
 
 * [Server Filtering by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/serverfiltering)
 * [Client Filtering by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/clientfiltering)
-* [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: DropDownTree Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI DropDownTree HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI DropDownTree HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/dropdowntree
 slug: htmlhelpers_dropdowntree_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # DropDownTree HtmlHelper Overview
 
-The [DropDownTree](http://docs.telerik.com/kendo-ui/controls/editors/dropdowntree/overview) widget represents an editor of hierarchical data, rendered in a tree-like structure, which provides multiple selection option and custom nodes.
+The Telerik UI DropDownTree HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DropDownTree widget.
 
-As of the Kendo UI R2 2018, the DropDownTree is available in the Telerik UI for ASP.NET Core suite. The DropDownTree HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) widget. For more information on the DropDownTree HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/dropdowntree/overview).
+The DropDownTree represents an editor of hierarchical data, rendered in a tree-like structure, which provides multiple selection option and custom nodes.
+
+* [Demo page for the DropDownTree](https://demos.telerik.com/aspnet-core/dropdowntree/index)
 
 ## Initializing the DropDownTree
 
@@ -99,4 +101,4 @@ For a complete example on basic DropDownTree events, refer to the [demo on using
 
 * [Basic Usage of the DropDownTree HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/index)
 * [Using the API of the DropDownTree HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/api)
-* [JavaScript API Reference of the DropDownTree](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [API Reference of the DropDownTree HtmlHelper for ASP.NET Core](/api/dropdowntree)

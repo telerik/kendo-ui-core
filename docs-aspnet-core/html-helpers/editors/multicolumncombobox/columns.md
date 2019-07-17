@@ -1,16 +1,16 @@
 ---
 title: Columns
-page_title: Columns | Kendo UI MultiColumnComboBox for ASP.NET Core
-description: "Set the column width and other settings in the Kendo UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Columns |  MultiColumnComboBox for ASP.NET Core
+description: "Set the column width and other settings in the  MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: columns_multicolumncombobox_aspnetcore
 position: 3
 ---
 
 # Columns
 
-The MultiColumnComboBox allows you to predefine the columns that will be rendered in its drop-down list.
+The MultiColumnComboBox allows you to predefine the columns that will be rendered in its drop-down list through the `dropDownWidth` option.
 
-The MultiColumnComboBox allows you to set the width of the drop-down through the [`dropDownWidth`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/dropdownwidth) option. The columns also allow you to [set their width](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox/configuration/columns.width).
+The columns also allow you to set their width.
 
 > * If the widths of all columns are defined in pixels through their `width` option, the `dropDownWidth` value (if set) is overridden.
 > * In all other cases when the widths of all columns are not set, the `dropDownWidth` value is applied to the element.
@@ -34,4 +34,4 @@ You can also define which `dataItem` field will be populated and also set a titl
 
 ## See Also
 
-* [JavaScript API Reference of the MultiColumnComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)

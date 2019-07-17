@@ -1,7 +1,7 @@
 ---
 title: Selection
-page_title: Selection | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Learn how to select dates in the Kendo UI MultiViewCalendar widget."
+page_title: Selection | Telerik UI MultiViewCalendar Tag for ASP.NET Core
+description: "Learn how to select dates in the Telerik UI MultiViewCalendar tag helper for ASP.NET Core."
 slug: selection_multiviewcalendar_taghelper_aspnetcore
 position: 4
 ---
@@ -26,4 +26,4 @@ The Kendo UI MultiViewCalendar allows the user to select multiple dates by using
 
 ## See Also
 
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

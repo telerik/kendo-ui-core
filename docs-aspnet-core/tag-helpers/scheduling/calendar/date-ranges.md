@@ -1,7 +1,7 @@
 ---
 title: Date Ranges
-page_title: Date Ranges | Kendo UI Calendar Tag Helper for ASP.NET Core
-description: "Configure the minimum and maximum dates when working with the Kendo UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Date Ranges | Telerik UI Calendar Tag Helper for ASP.NET Core
+description: "Configure the minimum and maximum dates when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: dateranges_calendar_aspnetcore
 position: 2
 ---
@@ -33,4 +33,4 @@ As a result, the Calendar does not navigate to a date that is earlier than the s
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)

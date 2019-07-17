@@ -1,6 +1,6 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI TreeList HtmlHelper for ASP.NET Core
+page_title: Ajax Binding | Telerik UI TreeList HtmlHelper for ASP.NET Core
 description: "Learn the basics when working with the TreeList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treelist_aspnetcore_ajaxbinding
 position: 2
@@ -8,13 +8,13 @@ position: 2
 
 # Ajax Binding
 
-You can configure the Kendo UI TreeList extension for Ajax binding to make Ajax requests upon loading child nodes, sorting, or filtering.
+You can configure the Telerik UI TreeList for Ajax binding to make Ajax requests upon loading child nodes, sorting, or filtering.
 
-When configured for Ajax binding, the Kendo UI TreeList for ASP.NET Core makes Ajax requests when doing sorting, filtering or when expanding a node.
+When configured for Ajax binding, the Telerik UI TreeList for ASP.NET Core makes Ajax requests when doing sorting, filtering or when expanding a node.
 
 The Ajax-bound mode has the following features:
 - The TreeList retrieves only the data (in JSON format) representing the current level items.
-- All column templates are executed client-side. They follow the [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
+- All column templates are executed client-side. They follow the [Kendo UI for jQuery template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 To configure the Grid for ASP.NET Core to do Ajax binding:
 
@@ -44,7 +44,7 @@ To configure the Grid for ASP.NET Core to do Ajax binding:
 
         }
 
-1. Return the `TreeDataSourceResult` as JSON. Configure the Kendo UI TreeList for Ajax binding.
+1. Return the `TreeDataSourceResult` as JSON. Configure the Telerik UI TreeList for Ajax binding.
 
         public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? parentId)
         {
@@ -90,4 +90,4 @@ To configure the Grid for ASP.NET Core to do Ajax binding:
 
 * [Binding to Remote Data by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/remote-data-binding)
 * [Binding to OData by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/odata)
-* [JavaScript API Reference of the TreeList](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)

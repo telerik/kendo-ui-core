@@ -1,7 +1,7 @@
 ---
 title: Metadata
-page_title: Metadata | Kendo UI Upload HtmlHelper for ASP.NET Core
-description: "Learn how to send and receive metadata when uploading files with the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Metadata | Telerik UI Upload HtmlHelper for ASP.NET Core
+description: "Learn how to send and receive metadata when uploading files with the Telerik UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_send_meta_aspnetcore
 position: 6
 ---
@@ -22,7 +22,7 @@ To send metadata over to the `Save()` handler:
     @(Html.Kendo().TextBox().Name("fileDescription"))
     ```
 
-2. Declare a handler for the [`upload`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/upload) event and attach a data object to the passed event.
+2. Declare a handler for the `upload` event and attach a data object to the passed event.
 
     ```
     function onUpload(e) {
@@ -84,4 +84,4 @@ To receive metadata from the `save` handler:
 
 ## See Also
 
-* [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)

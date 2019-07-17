@@ -1,7 +1,7 @@
 ---
 title: Virtualization
-page_title: Virtualization | Kendo UI DropDownList HtmlHelper for ASP.NET Core
-description: "Learn how to setup the Virtualization feature of the Kendo UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Virtualization | Telerik UI DropDownList HtmlHelper for ASP.NET Core
+description: "Learn how to setup the Virtualization feature of the Telerik UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_virtualization_aspnetcore
 position: 5
 ---
@@ -12,7 +12,7 @@ Virtualization is useful for displaying large data sets.
 
 The UI virtualization technique uses a fixed amount of list items in the popup list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones. For a runnable example, refer to the [demo on virtualization in the DropDownList](https://demos.telerik.com/aspnet-core/dropdownlist/virtualization).
 
-> As value types to which the DropDownList can be bound, the widget accepts only primitive types or enum values.  
+> The DropDownList supports binding to primitive or enum value types.  
 
 1. Create the `Read` and `ValueMapper` actions.    
 
@@ -126,10 +126,10 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             .AutoBind(false)
             .Text(Model.ProductName)
             .DataTextField("ProductName")
-            // ...additional configuration.
+            // Additional configuration.
         )
 
 ## See Also
 
 * [Virtualization by the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/virtualization)
-* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)

@@ -8,9 +8,11 @@ position: 1
 
 # MultiColumnComboBox Tag Helper Overview
 
+The Telerik UI MultiColumnComboBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiColumnComboBox widget.
+
 The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
 
-The MultiColumnComboBox tag helper extension is a server-side wrapper for the [Kendo UI MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) widget and enables you to configure the Kendo UI MultiColumnComboBox widget in ASP.NET Core applications.
+* [Demo page for the MultiColumnComboBox](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
 
 ## Initializing the MultiColumnComboBox
 
@@ -57,4 +59,4 @@ The MultiColumnComboBox tag helper configuration options are passed as attribute
 ## See Also
 
 * [Basic Usage of the MultiColumnComboBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
-* [JavaScript API Reference of the MultiColumnComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [API Reference of the MultiColumnComboBox Helper for ASP.NET Core](/api/multicolumncombobox)

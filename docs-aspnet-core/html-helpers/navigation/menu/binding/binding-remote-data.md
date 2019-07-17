@@ -1,7 +1,7 @@
 ---
 title:  Binding to Remote Data
-page_title: Binding to Remote Data | Kendo UI Menu HtmlHelper for ASP.NET Core
-description: "Learn how to bind to remote data with Kendo UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Binding to Remote Data | Telerik UI Menu HtmlHelper for ASP.NET Core
+description: "Learn how to bind to remote data with Telerik UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_menu_bindingremotedata_aspnetcore
 position: 3
 ---
@@ -10,7 +10,7 @@ position: 3
 
 Remote data binding enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
 
-The Menu supports remote data binding as of the Kendo UI R2 2019 release.
+The Menu supports remote data binding as of the Kendo UI for jQuery R2 2019 release.
 
 1. Implement an action method in your controller that returns the collection for the Menu.
 
@@ -51,4 +51,4 @@ The Menu supports remote data binding as of the Kendo UI R2 2019 release.
 ## See Also
 
 * [Remote Data Binding by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/remote-data-binding)
-* [JavaScript API Reference of the Menu](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: TreeView Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/treeview
 slug: htmlhelpers_treeview_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # TreeView HtmlHelper Overview
 
-The [TreeView](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/overview) displays hierarchical data in a traditional tree structure.
+The Telerik UI TreeView HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeView widget.
 
-It supports user interaction through mouse or touch events and provides the [checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %}) and [drag-and-drop]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %}) features.
+The TreeView displays hierarchical data in a traditional tree structure.
 
-The TreeView HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeView](http://demos.telerik.com/kendo-ui/treeview/index) widget. For more information on the HtmlHelper, refer to the article on the [TreeView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treeview/overview).
+* [Demo page for the TreeView](https://demos.telerik.com/aspnet-core/treeview/index)
 
 ## Initializing the TreeView
 
@@ -161,4 +161,4 @@ The following example demonstrates the available TreeView events and how an even
 
 * [Basic Usage of the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/index)
 * [Using the API of the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/api)
-* [JavaScript API Reference of the TreeView](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
+* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)

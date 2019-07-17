@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Menu Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_menu_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/menu
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Menu Tag Helper Overview
 
-The [Menu](http://docs.telerik.com/kendo-ui/controls/navigation/menu/overview) displays hierarchical data as a multi-level menu.
+The Telerik UI Menu tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Menu widget.
 
-It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
+The Menu displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
 
-The Menu tag helper extension is a server-side wrapper for the [Kendo UI Menu](http://demos.telerik.com/kendo-ui/menu/index) widget and enables you to configure the Kendo UI Menu widget in ASP.NET Core applications.
+* [Demo page for the Menu](https://demos.telerik.com/aspnet-core/menu/tag-helper)
 
 ## Initializing the Menu
 
@@ -92,4 +92,4 @@ The Menu provides options for [setting up its items]({% slug items_menu_aspnetco
 ## See Also
 
 * [Basic Usage of the Menu Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/tag-helper)
-* [JavaScript API Reference of the Menu](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
+* [API Reference of the Menu Helper for ASP.NET Core](/api/menu)

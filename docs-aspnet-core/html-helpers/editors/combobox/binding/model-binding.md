@@ -1,7 +1,7 @@
 ---
 title:  Model Binding
-page_title: Model Binding | Kendo UI ComboBox HtmlHelper for ASP.NET Core
-description: "Learn how to implement Model Binding with Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Model Binding | Telerik UI ComboBox HtmlHelper for ASP.NET Core
+description: "Learn how to implement Model Binding with Telerik UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_combobox_modelbinding_aspnetcore
 position: 5
 ---
@@ -99,4 +99,4 @@ You can configure the ComboBox to get its data from a remote source by making an
 
 ## See Also
 
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)

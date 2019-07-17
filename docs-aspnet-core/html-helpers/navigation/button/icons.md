@@ -1,7 +1,7 @@
 ---
 title: Icon Button
-page_title: Icon Button | Kendo UI Button HtmlHelper for ASP.NET Core
-description: "Accommodate an icon and enhance the meaning of the text content of the Kendo UI Button HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Icon Button | Telerik UI Button HtmlHelper for ASP.NET Core
+description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI Button HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: icons_button_aspnetcore
 position: 2
 ---
@@ -17,7 +17,7 @@ The Button HtmlHelper provides the following methods for configuring icons:
 
 Use only one of them with a particular Button instance. If you define multiple properties, only one of them will be obeyed according to the order stated above.
 
-The `Icon()` method displays the appropriate [Kendo UI font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) as a content of a `<spn> :before` pseudo element. The Button enables you to completely omit any text to be specified for its contents.
+The `Icon()` method displays the appropriate [Kendo UI for jQuery font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) as a content of a `<spn> :before` pseudo element. The Button enables you to completely omit any text to be specified for its contents.
 
 ```
 @(Html.Kendo().Button()
@@ -49,4 +49,4 @@ Image icons are applied by using the `ImageUrl()` method and are displayed as an
 ## See Also
 
 * [Adding Images to the Button HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/images)
-* [JavaScript API Reference of the Button](http://docs.telerik.com/kendo-ui/api/javascript/ui/button)
+* [API Reference of the Button HtmlHelper for ASP.NET Core](/api/button)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ProgressBar Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI ProgressBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ProgressBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/progressbar
 slug: htmlhelpers_progressbar_aspnetcore
 position: 1
@@ -9,9 +9,9 @@ position: 1
 
 # ProgressBar HtmlHelper Overview
 
-The ProgressBar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ProgressBar widget.
+The Telerik UI ProgressBar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ProgressBar widget.
 
-The Kendo UI ProgressBar offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
+The ProgressBar offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
 
 * [Demo page for the ProgressBar](https://demos.telerik.com/aspnet-core/progressbar/index)
 
@@ -104,7 +104,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-The following example demonstrates how to get a reference to an existing Kendo UI ProgressBar instance. Once the reference is established, use the [ProgressBar API](../api/progressbar) to control its behavior.
+The following example demonstrates how to get a reference to an existing Telerik UI ProgressBar instance. Once the reference is established, use the [ProgressBar API](/api/progressbar) to control its behavior.
 
 ```Razor
     @(Html.Kendo().ProgressBar()

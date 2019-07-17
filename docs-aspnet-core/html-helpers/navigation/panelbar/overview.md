@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: PanelBar Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI PanelBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI PanelBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/panelbar
 slug: htmlhelpers_panelbar_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # PanelBar HtmlHelper Overview
 
-The [PanelBar](http://docs.telerik.com/kendo-ui/controls/navigation/panelbar/overview) displays hierarchical data as a multi-level, expandable widget.
+The Telerik UI PanelBar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI PanelBar widget.
 
-The PanelBar HtmlHelper extension is a server-side wrapper for the [Kendo UI PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index) widget. For more information on the PanelBar HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/panelbar/overview).
+The PanelBar displays hierarchical data as a multi-level, expandable widget.
+
+* [Demo page for the PanelBar](https://demos.telerik.com/aspnet-core/panelbar/index)
 
 ## Initializing the PanelBar
 
@@ -113,4 +115,4 @@ For a complete example on basic PanelBar events, refer to the [demo on using the
 
 * [Basic Usage of the PanelBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar)
 * [Using the API of the PanelBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar/api)
-* [JavaScript API Reference of the PanelBar](http://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [API Reference of the PanelBar HtmlHelper for ASP.NET Core](/api/panelbar)

@@ -1,26 +1,20 @@
 ---
 title: Resources
-page_title: Resources | Telerik UI for ASP.NET Core Scheduler HtmlHelper
+page_title: Resources | Telerik UI Scheduler HtmlHelper for ASP.NET Core
 description: "Get started with the Scheduler HtmlHelper for ASP.NET Core and learn how to configure its resources."
 slug: htmlhelpers_scheduler_resources_aspnetcore
-position: 3
+position: 4
 ---
 
 # Resources
 
 The Scheduler HtmlHelper allows you to assign events to a set of predefined resources.
 
-The widget supports multiple resources. Multiple instances of the same resource type can be assigned to a single Scheduler event. The Scheduler provides you with the option to assign resources via the Scheduler event edit form.
+You can assign multiple instances of the same resource type to a single Scheduler event and also assign resources through the Scheduler event edit form. For a runnable example, refer to the [demo on setting the Scheduler HtmlHelper resources](https://demos.telerik.com/aspnet-core/scheduler/resources).
 
-## Instance Resources
+## Single Instance Resources
 
-### Single Instance Resources
-
-A single instance resource is a resource of which only one instance can be assigned to a Scheduler event. A typical example is a Scheduler displaying a list of meetings (Scheduler events), which are held in two rooms (resources). Since a meeting can be held in one room it can be considered a single resource.
-
-The example below demonstrates how to use a single instance resource.
-
-###### Example
+A single instance resource is a resource of which only one instance can be assigned to a Scheduler event&mdash;for example, a Scheduler which displays a list of meetings (Scheduler events) which are held in two rooms (resources). Since a meeting can be held in one room, it can be considered a single resource. If a resource instance has its `color` field set, the Scheduler will use this value as a background for all events that are assigned to that instance.
 
 ```
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
@@ -36,7 +30,7 @@ The example below demonstrates how to use a single instance resource.
         .Timezone("Etc/UTC")
         .Resources(resource =>
         {
-            resource.Add(m => m.RoomID) // The field of the Scheduler event, which contains the resource identifier.
+            resource.Add(m => m.RoomID) // The field of the Scheduler event which contains the resource identifier.
                 .Title("Room") // The label displayed in the Scheduler edit form for this resource.
                 .DataTextField("Text")
                 .DataValueField("Value")
@@ -62,15 +56,9 @@ The example below demonstrates how to use a single instance resource.
     )
 ```
 
-If a resource instance has its `color` field set, the Scheduler will use this value as background for all events assigned to that instance.
+## Multiple Instance Resources
 
-### Multiple Instance Resources
-
-A multiple instance resource is a resource of which more than one instance can be assigned to a Scheduler event. A typical example is a Scheduler displaying a list of meetings and the meeting attendees. Since more than one attendee can participate in a meeting, it can be considered a multiple instance resource.
-
-The example below demonstrates how to use multiple instance resources.
-
-###### Example
+A multiple instance resource is a resource of which more than one instance can be assigned to a Scheduler event&mdash;for example, a Scheduler which displays a list of meetings and the meeting attendees. Since more than one attendee can participate in a meeting, it can be considered a multiple instance resource. The Scheduler uses the `color` of the first resource instance as a background for its events.
 
 ```
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
@@ -117,13 +105,9 @@ The example below demonstrates how to use multiple instance resources.
     )
 ```
 
-The scheduler will use the `color` of the first resource instance as background for the Scheduler events.
-
 ## Multiple Resource Types
 
-Kendo UI Scheduler supports multiple resource types. For example, you are able to combine a single and multiple instance resources at the same time, as demonstrated in the example below.
-
-###### Example
+The Scheduler supports multiple resource types. For example, you can combine single and multiple instance resources at the same time.
 
 ```
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
@@ -153,7 +137,7 @@ Kendo UI Scheduler supports multiple resource types. For example, you are able t
                         new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
                 });
             // Second resource type definition
-            resource.Add(m => m.Attendees) // The field of the Scheduler event, which contains the resource identifier.
+            resource.Add(m => m.Attendees) // The field of the Scheduler event which contains the resource identifier.
                 .Title("Attendees") // The label displayed in the Scheduler edit form for this resource.
                 .Multiple(true) // Indicate that this is a multiple instance resource.
                 .DataTextField("Text")
@@ -181,14 +165,6 @@ Kendo UI Scheduler supports multiple resource types. For example, you are able t
     )
 ```
 
-## Further Reading
-
-For more information on how to configure Kendo UI resources, see [this API article](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/resources).
-
-To build a better understanding of resources, see the [online demo](https://demos.telerik.com/aspnet-core/scheduler/resources).
-
 ## See  Also
 
-* [Overview of the Scheduler HtmlHelper]({% slug htmlhelpers_scheduler_aspnetcore %})
-* [JavaScript API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)

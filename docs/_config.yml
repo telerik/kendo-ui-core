@@ -22,8 +22,8 @@ navigation:
         title: "Getting Started"
         position: 3
     "intro/supporting":
-      title: "Prerequisites"
-      position: 1
+        title: "Prerequisites"
+        position: 1
     "intro/installation":
         title: "Download and Installation"
         position: 2
@@ -108,6 +108,15 @@ navigation:
     "controls/editors":
         title: "Editors"
         position: 2
+    "controls/editors/datepicker/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/editors/datepicker/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/editors/datepicker/how-to":
+        title: "How To"
+        position: 70
     "controls/editors/dropdownlist/globalization":
         title: "Globalization"
         position: 40
@@ -341,7 +350,7 @@ navigation:
     "framework/spa":
         title: "Single-Page Applications"
         position: 9
-   "styles-and-layout":
+    "styles-and-layout":
         title: "Styles & Appearance"
         position: 6
     "third-party":

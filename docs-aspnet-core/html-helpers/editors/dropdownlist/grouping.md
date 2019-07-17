@@ -1,7 +1,7 @@
 ---
 title: Grouping
-page_title: Grouping | Kendo UI DropDownList HtmlHelper for ASP.NET Core
-description: "Learn how to group data in the Kendo UI DropDownList HtmlHelper for ASP.NET Core works."
+page_title: Grouping | Telerik UI DropDownList HtmlHelper for ASP.NET Core
+description: "Learn how to group data in the Telerik UI DropDownList HtmlHelper for ASP.NET Core works."
 slug: htmlhelpers_dropdownlist_grouping_aspnetcore
 position: 3
 ---
@@ -36,4 +36,4 @@ The following example demonstrates how to group the data in the DropDownList by 
 ## See Also
 
 * [Grouping by the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/grouping)
-* [JavaScript API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)

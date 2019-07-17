@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ContextMenu | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI ContextMenu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ContextMenu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/menu/contextmenu
 slug: htmlhelpers_contextmenu_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # ContextMenu HtmlHelper Overview
 
-The ContextMenu HtmlHelper extension is a server-side wrapper for the [Kendo UI ContextMenu](https://demos.telerik.com/kendo-ui/menu/context-menu) widget.
+The Telerik UI ContextMenu HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ContextMenu widget.
 
-The [Kendo UI ContextMenu](https://docs.telerik.com/kendo-ui/controls/navigation/menu/contextmenu) displays hierarchical data as a multi-level menu in a popup. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands. 
+The ContextMenu displays hierarchical data as a multi-level menu in a popup. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
+
+* [Demo page for the ContextMenu](https://demos.telerik.com/aspnet-core/menu/context-menu)
 
 ## Basic Usage
 
@@ -135,15 +137,15 @@ The following example demonstrates how to subscribe to events by a handler name.
 )
 <script>
     function openMenu(){
-        //Handle the open event.
+        // Handle the open event.
     }
 
     function closeMenu(){
-        //Handle the close event.
+        // Handle the close event.
     }
 
     function onSelect(){
-        //Handle the select event.
+        // Handle the select event.
     }
 </script>
 ```
@@ -162,12 +164,12 @@ The following example demonstrates how to subscribe to events by a template dele
     .Events(events => events
         .Open(@<text>
             function(){
-                //Handle the open event inline.
+                // Handle the open event inline.
             }
         </text>)
         .Close(@<text>
             function(){
-                //Handle the close event inline.
+                // Handle the close event inline.
             }
         </text>)
     )
@@ -195,9 +197,4 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 ## See Also
 
-* [JavaScript API Reference of the ContextMenu](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
-* [ContextMenu Official Demo](https://demos.telerik.com/aspnet-core/menu/context-menu)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)

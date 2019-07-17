@@ -1,7 +1,7 @@
 ---
 title: PDFjs Processing
 page_title: PDFjs Processing | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to use PDF.js processing in the Kendo UI PDFViewer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn how to use PDF.js processing in the Telerik UI PDFViewer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore
 position: 2
 ---
@@ -46,4 +46,4 @@ PDF.js processing is not supported in Internet Explorer 9. To work properly in t
 
 ## See Also
 
-* [JavaScript API Reference of the PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer)
+* [API Reference of the PDFViewer HtmlHelper for ASP.NET Core](/api/pdfviewer)

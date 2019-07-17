@@ -119,6 +119,17 @@
             width: auto;
         }
     }
+
+    .k-grid .k-grid-search {
+        width: 100%;
+        margin-left: 0;
+        margin-top: @grid-header-padding-y;
+
+        // Remove top margin if search is the first child within the grid toolbar
+        &:first-child {
+            margin-top: 0;
+        }
+    }
 }
 
 .k-grid-mobile {

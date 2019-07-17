@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: TimePicker Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI TimePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TimePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_timepickerhelper_aspnetcore
 position: 1
 ---
 
 # TimePicker HtmlHelper Overview
 
-The Kendo UI TimePicker enables users to select time values from a predefined list or enter new ones.
+The Telerik UI TimePicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TimePicker widget.
 
-The TimePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI TimePicker](https://demos.telerik.com/kendo-ui/timepicker/index) widget. For more information on the TimePicker HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/timepicker/overview).
+The TimePicker enables users to select time values from a predefined list or enter new ones.
+
+* [Demo page for the TimePicker](https://demos.telerik.com/aspnet-core/timepicker/index)
 
 ## Initializing the TimePicker
 
@@ -25,7 +27,7 @@ The following example demonstrates how to how to define the TimePicker by using 
 
 ## Events
 
-You can subscribe to all TimePicker [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker#events). For a complete example on basic TimePicker events, refer to the [demo on using the events of the TimePicker](https://demos.telerik.com/aspnet-core/timepicker/events).
+You can subscribe to all TimePicker events. For a complete example on basic TimePicker events, refer to the [demo on using the events of the TimePicker](https://demos.telerik.com/aspnet-core/timepicker/events).
 
 ### Handling by Handler Name
 
@@ -79,7 +81,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI TimePicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TimePicker API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker#methods) to control its behavior.
+To reference an existing Telerik UI TimePicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TimePicker API](/api/timepicker) to control its behavior.
 
 ```
     // Place this after your Kendo UI TimePicker for ASP.NET Core declaration.
@@ -95,4 +97,4 @@ To reference an existing Kendo UI TimePicker instance, use the [`jQuery.data()`]
 
 * [Basic Usage by the TimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker)
 * [Using the API of the TimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker/api)
-* [JavaScript API Reference of the TimePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker)
+* [API Reference of the TimePicker HtmlHelper for ASP.NET Core](/api/timepicker)

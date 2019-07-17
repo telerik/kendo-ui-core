@@ -1,16 +1,18 @@
 ---
 title: Overview
 page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI MultiViewCalendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI MultiViewCalendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_multiviewcalendar_taghelper_aspnetcore
 position: 1
 ---
 
 # MultiViewCalendar Tag Helper Overview
 
-The Kendo UI MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
+The Telerik UI MultiViewCalendar tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiViewCalendar widget.
 
-The MultiViewCalendar tag helper extension is a server-side wrapper for the [Kendo UI MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/index) widget and enables you to configure the Kendo UI MultiViewCalendar widget in ASP.NET Core applications.
+The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
+
+* [Demo page for the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar/tag-helper)
 
 ## Initializing the MultiViewCalendar
 
@@ -54,7 +56,7 @@ The MultiViewCalendar tag helper extension is a server-side wrapper for the [Ken
 
 ## Events
 
-You can subscribe to all MultiViewCalendar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar#events).
+You can subscribe to all MultiViewCalendar events.
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -96,4 +98,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 ## See Also
 
 * [Basic Usage of the MultiViewCalendar Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/tag-helper)
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

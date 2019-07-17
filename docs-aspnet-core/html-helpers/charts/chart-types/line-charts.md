@@ -1,19 +1,23 @@
 ---
 title: Line Charts
-page_title: Line Charts | Kendo UI Charts HtmlHelper for ASP.NET Core
-description: "Learn how to define and configure Kendo UI Line Charts."
+page_title: Line Charts | Telerik UI Charts HtmlHelper for ASP.NET Core
+description: "Learn how to define and configure Telerik UI Line Charts."
 slug: linecharts_aspnetcore_htmlhelper
 ---
 
 # Line Charts
 
-The [Kendo UI Line Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/line-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
+The Telerik UI Line Chart HtmlHelper for ASP.NET Core extension is a server-side wrapper for the Kendo UI Line Chart widget.
+
+Line Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
+
+* [Demo page for the Line Chart](https://demos.telerik.com/aspnet-core/line-charts/index)
 
 ## Getting Started
 
 You can use the Line Chart HtmlHelper to render a trend over time and compare sets of similar data.
 
-To create a Line series in the Chart helper, use `Line` and `VerticalLine` in the `Series` configuration.
+To create a Line series in the Chart HtmlHelper, use `Line` and `VerticalLine` in the `Series` configuration.
 
 * [Configuring the axes](#configuring-the-axes)
 * [Configuring the line styles](#configuring-the-line-styles)
@@ -123,5 +127,5 @@ You can also completely draw custom markers for the Line series through the `Vis
 
 ## See Also
 
-* [Basic Usage of the Line Chart Series Type HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/line-charts/index)
-* [JavaScript API Reference of the Kendo UI Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Line Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/line-charts/index)
+* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)

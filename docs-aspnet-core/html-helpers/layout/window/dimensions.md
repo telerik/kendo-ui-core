@@ -1,7 +1,7 @@
 ---
 title: Dimensions
-page_title: Dimensions | Kendo UI Window HtmlHelper for ASP.NET Core
-description: "Learn how to configure the dimensions of the Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Dimensions | Telerik UI Window HtmlHelper for ASP.NET Core
+description: "Learn how to configure the dimensions of the Telerik UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_dimensions_aspnetcore
 position: 2
 ---
@@ -56,4 +56,4 @@ If the Window uses an `iframe` element, it does not resize automatically accordi
 
 ## See Also
 
-* [JavaScript API Reference of the Window](http://docs.telerik.com/kendo-ui/api/javascript/ui/window)
+* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)

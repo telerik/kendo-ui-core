@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Upload Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Upload tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Upload tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/upload, /aspnet-core/helpers/tag-helpers/upload
 slug: taghelpers_upload_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # Upload Tag Helper Overview
 
-The [Upload](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview) uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
+The Telerik UI Upload tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Upload widget.
 
-The Upload tag helper extension is a server-side wrapper for the [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) widget and enables you to configure the Kendo UI Upload widget in ASP.NET Core applications.
+The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
+
+* [Demo page for the Upload](https://demos.telerik.com/aspnet-core/upload/tag-helper)
 
 ## Initializing the Upload
 
@@ -58,4 +60,4 @@ The Upload tag helper configuration options are passed as attributes of the tag 
 ## See Also
 
 * [Basic Usage of the Upload Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/tag-helper)
-* [JavaScript API Reference of the Upload](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [API Reference of the Upload Helper for ASP.NET Core](/api/upload)

@@ -1,7 +1,7 @@
 ---
 title: Selection
-page_title: Selection | Kendo UI Scheduler Tag Helper for ASP.NET Core
-description: "Enable the selection of events in the Kendo UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Selection | Telerik UI Scheduler Tag Helper for ASP.NET Core
+description: "Enable the selection of events in the Telerik UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: selection_scheduler_aspnetcore
 position: 2
 ---
@@ -26,4 +26,4 @@ By default, the `selectable` option is disabled.
 
 ## See Also
 
-* [JavaScript API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler Helper for ASP.NET Core](/api/scheduler)

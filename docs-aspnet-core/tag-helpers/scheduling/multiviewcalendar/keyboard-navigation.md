@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Use the Kendo UI MultiViewCalendar keyboard navigation."
+page_title: Keyboard Navigation | Telerik UI MultiViewCalendar Tag Helper for ASP.NET Core
+description: "Use the keyboard navigation of the Telerik UI MultiViewCalendar tag helper for ASP.NET Core."
 slug: keyboard_navigation_multiviewcalendar_taghelper_aspnetcore
 position: 8
 ---
@@ -42,4 +42,4 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ## See Also
 
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

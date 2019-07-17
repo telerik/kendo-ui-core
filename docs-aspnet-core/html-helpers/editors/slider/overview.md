@@ -1,20 +1,18 @@
 ---
 title: Overview
 page_title: Slider Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Slider for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Slider for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_sliderhelper_aspnetcore
 position: 1
 ---
 
 # Slider HtmlHelper Overview
 
-The Kendo UI Slider provides a rich input for selecting numeric values.
+The Telerik UI Slider HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Slider widget.
 
-The Slider can be either of the following types:
-* Kendo UI Slider for ASP.NET Core, which presents one handle and two opposing buttons for selecting a single numeric value.
-* Kendo UI RangeSlider for ASP.NET Core, which present two handlers for defining a range of numeric values.
+The Slider provides a rich input for selecting numeric values nd can be either a Slider which presents one handle and two opposing buttons for selecting a single numeric value or a Slider which presents two handlers for defining a range of numeric values.
 
-The Slider HtmlHelper extension is a server-side wrapper for the [Kendo UI Slider](https://demos.telerik.com/kendo-ui/slider/index) widget. For more information on the Slider HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/slider/overview).
+* [Demo page for the Slider](https://demos.telerik.com/aspnet-core/slider/index)
 
 ## Initializing the Slider
 
@@ -38,7 +36,7 @@ The following example demonstrates how to how to define the Slider by using the 
 
 ## Events
 
-You can subscribe to all Slider [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider#events). For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/aspnet-core/slider/events).
+You can subscribe to all Slider events. For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/aspnet-core/slider/events).
 
 ### Handling by Handler Name
 
@@ -87,10 +85,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI Slider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider API](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider#methods) to control its behavior.
+To reference an existing Telerik UI Slider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider API](/api/slider) to control its behavior.
 
 ```
-    // Place this after your Kendo UI Slider for ASP.NET Core declaration.
+    // Place this after your Telerik UI Slider for ASP.NET Core declaration.
     <script>
         $(function() {
             // The Name() of the Slider is used to get its client-side instance.
@@ -103,4 +101,4 @@ To reference an existing Kendo UI Slider instance, use the [`jQuery.data()`](htt
 
 * [Basic Usage by the Slider HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider)
 * [Using the API of the Slider HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/api)
-* [JavaScript API Reference of the Slider](http://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
+* [API Reference of the Slider HtmlHelper for ASP.NET Core](/api/slider)

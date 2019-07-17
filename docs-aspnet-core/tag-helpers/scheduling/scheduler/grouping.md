@@ -1,7 +1,7 @@
 ---
 title: Grouping
-page_title: Grouping | Kendo UI Scheduler Tag Helper for ASP.NET Core
-description: "Group the resources in the Kendo UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Grouping | Telerik UI Scheduler Tag Helper for ASP.NET Core
+description: "Group the resources in the Telerik UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: grouping_scheduler_aspnetcore
 position: 3
 ---
@@ -121,4 +121,4 @@ By default, the `group.resources` option is disabled.
 
 ## See Also
 
-* [JavaScript API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler Helper for ASP.NET Core](/api/scheduler)

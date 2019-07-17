@@ -1,26 +1,26 @@
 ---
 title: Overview
 page_title: StockChart Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI StockChart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI StockChart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_stockcharthelper_aspnetcore
 position: 1
 ---
 
 # StockChart HtmlHelper Overview
 
-The Kendo UI Stock Chart is a specialized control visualizing the price movement of any financial instrument over a certain period of time.
+The Telerik UI StockChart HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI StockChart widget.
 
-The StockChart HtmlHelper extension is a server-side wrapper for the [Kendo UI StockChart](https://demos.telerik.com/kendo-ui/financial/index) widget. For more information on the StockChart HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/stockchart/overview).
+The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time.
 
-## Data Binding
+* [Demo page for the StockChart](https://demos.telerik.com/aspnet-core/financial/index)
 
-The UI for ASP.NET StockChart makes Ajax requests when bound to a data source.
+## Basic Configuration
 
-To configure the StockChart for Ajax binding:
+The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data source and has to be configured for Ajax binding.
 
-1. Add the new action method.  
+1. Add the new action method.
 
-    The following example demonstrates how to add a new action method which returns data to populate the StockChart.
+  The following example demonstrates how to add a new action method which returns data to populate the StockChart.
 
         ```Razor
             @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
@@ -125,11 +125,11 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function stockChart_dataBound(e) {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function stockChart_seriesClick(e) {
-            //Handle the seriesClick event.
+            // Handle the seriesClick event.
         }
     </script>
 ```
@@ -176,5 +176,4 @@ To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`]
 ## See Also
 
 * [Basic Usage of the StockChart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/financial/index)
-* [Basic Usage of the Kendo UI StockChart Widget (Demo)](https://demos.telerik.com/kendo-ui/financial/index)
-* [JavaScript API Reference of the Kendo UI StockChart](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart)
+* [API Reference of the StockChart HtmlHelper for ASP.NET Coret](/api/stock-chart)

@@ -1,7 +1,7 @@
 ---
 title: Selection
-page_title: Selection | Kendo UI Calendar Tag Helper for ASP.NET Core
-description: "Enable the single, multiple, range-date, and week selections when working with the Kendo UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Selection | Telerik UI Calendar Tag Helper for ASP.NET Core
+description: "Enable the single, multiple, range-date, and week selections when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: selection_calendar_aspnetcore
 position: 5
 ---
@@ -52,4 +52,4 @@ When the user clicks on a specific week number, the Calendar selects the entire 
 
 ## See Also
 
-* [JavaScript API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)

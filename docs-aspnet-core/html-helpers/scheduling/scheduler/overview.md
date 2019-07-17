@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Scheduler Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Scheduler HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Scheduler HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/scheduler
 slug: htmlhelpers_scheduler_aspnetcore
 position: 1
@@ -9,13 +9,13 @@ position: 1
 
 # Scheduler HtmlHelper Overview
 
-The [Scheduler](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview) displays a set of events, appointments, or tasks.
+The Telerik UI Scheduler HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Scheduler widget.
 
-It support the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
+The Scheduler displays a set of events, appointments, or tasks. It supports the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
-The Scheduler HtmlHelper extension is a server-side wrapper for the [Kendo UI Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) widget. For more information on the Scheduler HtmlHelper, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/scheduler/overview).
+> As of the Kendo UI for jQuery R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing. If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
 
-> As of the Kendo UI R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing. If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
+* [Demo page for the Scheduler](https://demos.telerik.com/aspnet-core/scheduler/index)
 
 ## Initializing the Scheduler
 
@@ -113,9 +113,6 @@ The following example demonstrates how to define the Scheduler by using the Sche
 
 The following example demonstrates the basic configuration of the Scheduler HtmlHelper.
 
-
-The following example demonstrates the basic configuration of the Scheduler HtmlHelper.
-
 ```
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
         .Name("scheduler")
@@ -171,11 +168,14 @@ The following example demonstrates the basic configuration of the Scheduler Html
 
 ## Functionality and Features
 
-The Scheduler provides options for [adaptive rendering]({% slug htmlhelpers_scheduler_adaptiverendering_aspnetcore %}).
+* [Binding]({% slug htmlhelpers_scheduler_adaptiverendering_aspnetcore %})
+* [Adaptive rendering]({% slug htmlhelpers_scheduler_adaptiverendering_aspnetcore %})
+* [Resources]({% slug htmlhelpers_scheduler_adaptiverendering_aspnetcore %})
+* [Timezones]({% slug htmlhelpers_scheduler_adaptiverendering_aspnetcore %})
 
 ## Events
 
-You can subscribe to all Scheduler [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events). For a complete example on basic Scheduler events, refer to the [demo on using the events of the Scheduler](https://demos.telerik.com/aspnet-core/scheduler/events). For a runnable example on the `move` and `resize` events, refer to the [demo on the specific events](https://demos.telerik.com/aspnet-core/scheduler/move-resize).
+You can subscribe to all Scheduler events. For a complete example on basic Scheduler events, refer to the [demo on using the events of the Scheduler](https://demos.telerik.com/aspnet-core/scheduler/events). For a runnable example on the `move` and `resize` events, refer to the [demo on the specific events](https://demos.telerik.com/aspnet-core/scheduler/move-resize).
 
 The following example demonstrates how to subscribe to the `dataBound` and `dataBinding` events.
 
@@ -207,9 +207,9 @@ The following example demonstrates how to subscribe to the `dataBound` and `data
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
 
-    // Place this after your Kendo UI Scheduler for ASP.NET Core declaration.
+    // Place this after your Telerik UI Scheduler for ASP.NET Core declaration.
     <script>
         $(document).ready(function() {
             // The Name() of the Scheduler is used to get its client-side instance.
@@ -221,4 +221,4 @@ To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](
 
 * [Basic Usage of the Scheduler HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler)
 * [Using the API of the Scheduler HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/api)
-* [JavaScript API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)

@@ -190,8 +190,8 @@ var __meta__ = { // jshint ignore:line
                 template = that.template,
                 start = new DATE(+min),
                 startDate = new DATE(start),
-                msStart, lastIdx,
-                idx = 0, length,
+                msStart,
+                length,
                 html = "";
 
             if (ignoreDST) {
@@ -208,26 +208,24 @@ var __meta__ = { // jshint ignore:line
                 length = ((msMax - msMin) / msInterval) + 1;
             }
 
-            lastIdx = parseInt(length, 10);
-
-            for (; idx < length; idx++) {
-                if (idx) {
-                    setTime(start, msInterval, ignoreDST);
-                }
-
-                if (msMax && lastIdx == idx) {
+            while (true) {
+                if (msMax && (getMilliseconds(start) >= msMax || startDate.getDate() != start.getDate())) {
                     msStart = getMilliseconds(start);
                     if (startDate < start) {
                         msStart += MS_PER_DAY;
                     }
-
                     if (msStart > msMax) {
                         start = new DATE(+max);
                     }
+                    html += template(toString(start, format, options.culture));
+                    break;
                 }
 
-                that._dates.push(getMilliseconds(start));
+                if (startDate.getDate() != start.getDate()) {
+                    break;
+                }
                 html += template(toString(start, format, options.culture));
+                start.setTime(start.getTime() + msInterval);
             }
 
             that._html(html);
@@ -483,18 +481,6 @@ var __meta__ = { // jshint ignore:line
             }
         }
     };
-
-    function setTime(date, time, ignoreDST) {
-        var offset = date.getTimezoneOffset(),
-            offsetDiff;
-
-        date.setTime(date.getTime() + time);
-
-        if (!ignoreDST) {
-            offsetDiff = date.getTimezoneOffset() - offset;
-            date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
-        }
-    }
 
     function dst() {
         var today = new DATE(),

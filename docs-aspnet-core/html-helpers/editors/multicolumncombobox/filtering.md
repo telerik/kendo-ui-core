@@ -1,7 +1,7 @@
 ---
 title: Filtering
-page_title: Filtering | Kendo UI MultiColumnComboBox for ASP.NET Core
-description: "Set the filter options of the Kendo UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Filtering | Telerik UI MultiColumnComboBox for ASP.NET Core
+description: "Set the filter options of the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: filtering_multicolumncombobox_aspnetcore
 position: 4
 ---
@@ -33,4 +33,4 @@ The option accepts an array of strings.
 
 * [Server Filtering by the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/serverfiltering)
 * [Client Filtering by the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/clientfiltering)
-* [JavaScript API Reference of the MultiColumnComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
+* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)

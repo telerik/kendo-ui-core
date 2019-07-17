@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI ListView HtmlHelper for ASP.NET Core
-description: "Configure the Kendo UI ListView component for AJAX binding and easily enable client-data processing during AJAX binding."
+page_title: Ajax Binding | Telerik UI ListView HtmlHelper for ASP.NET Core
+description: "Configure the Telerik UI ListView for AJAX binding and easily enable client-data processing during AJAX binding."
 slug: htmlhelpers_listview_aspnetcore_ajaxbinding
 position: 2
 ---
@@ -12,7 +12,7 @@ When configured for Ajax binding, the ListView for ASP.NET Core makes Ajax reque
 
 ## Getting Started
 
-To configure the Kendo UI ListView for ASP.NET Core for Ajax binding:
+To configure the ListView for ASP.NET Core for Ajax binding:
 
 1. Add a new action method which returns data to populate the ListView. Note that the action method has a parameter of type `Kendo.Mvc.UI.DataSourceRequest`. It will contain the current ListView request information. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
 
@@ -182,15 +182,15 @@ To pass additional parameters to the action method:
 
 ## Processing Client Data
 
-By default, Kendo UI ListView for ASP.NET Core requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
+By default, Telerik UI ListView for ASP.NET Core requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
 
     .DataSource(dataSource => dataSource
-        .ServerOperation(false) // all data will be requested at once and data operations will be applied client-side
+        .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
         .Read(read => read.Action("Orders_Read", "ListView"))
     )
 
 ## See Also
 
-* [Binding to Remote Data by the ListView (Demo)](https://demos.telerik.com/aspnet-core/listview/remote-data-binding)
-* [Customizing the Data Source of the ListView (Demo)](https://demos.telerik.com/aspnet-core/listview/custom-datasource)
-* [JavaScript API Reference of the Kendo UI ListView](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
+* [Binding to Remote Data by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/remote-data-binding)
+* [Customizing the Data Source of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/custom-datasource)
+* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)

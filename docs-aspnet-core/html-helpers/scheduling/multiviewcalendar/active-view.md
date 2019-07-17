@@ -1,7 +1,7 @@
 ---
 title: Active View
-page_title: Active View | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET Core
-description: "Define the first view that the Kendo UI MultiViewCalendar initially renders."
+page_title: Active View | Telerik UI MultiViewCalendar HtmlHelper for ASP.NET Core
+description: "Define the first view that the Telerik UI MultiViewCalendar initially renders."
 slug: active_view_multiviewcalendar_htmlhelper_aspnetcore
 position: 2
 ---
@@ -18,8 +18,6 @@ The MultiViewCalendar supports the following predefined views:
 * `decade`&mdash;Shows the years of the decade.
 * `century`&mdash;Shows the decades of the century.
 
-## Selectable Month Calendars
-
 The following example demonstrates how to create a MultiViewCalendar that allows users to select a month.
 
 ```Razor
@@ -33,4 +31,4 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ## See Also
 
-* [JavaScript API Reference of the MultiViewCalendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)

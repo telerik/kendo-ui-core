@@ -1,7 +1,7 @@
 ---
 title: Display Modes
-page_title: Display Modes | Kendo UI Drawer Tag Helper for ASP.NET Core
-description: "Use the display modes and handle the rendering of the Kendo UI Drawer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Display Modes | Telerik UI Drawer Tag Helper for ASP.NET Core
+description: "Use the display modes and handle the rendering of the Telerik UI Drawer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: displaymodes_drawer_aspnetcoretaghelper
 position: 2
 ---
@@ -12,11 +12,11 @@ The Drawer provides a set of modes for handling the way it is displayed.
 
 ## Overlay Mode
 
-The overlay mode is not associated with any content. The Drawer appears on top of the page contents from the side which is configured in the [`Position()`](/api/drawer) method. To show the Drawer, either swipe or drag with mouse or call the [`show()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer/methods/show) method of the widget. The Drawer closes on click or tap of any of the options or on the overlay.
+The overlay mode is not associated with any content. The Drawer appears on top of the page contents from the side which is configured in the [`Position()`](/api/drawer) method. To show the Drawer, either swipe or drag with mouse or call the [`show()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer/methods/show) method of the Kendo UI for jQuery widget. The Drawer closes on click or tap of any of the options or on the overlay.
 
 ## Push Mode
 
-The push mode is associated with specific page content and the element from which the widget is initialized has to wrap that content. When the drawer opens it will push that content to the side. It is designed for wider screens (desktop or tablet). To show the Drawer, either swipe or drag with mouse, or call the [`show()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer/methods/show) method of the widget. The Drawer closes on click or tap of any of the options or on the associated content.
+The push mode is associated with specific page content and the element from which the widget is initialized has to wrap that content. When the drawer opens it will push that content to the side. It is designed for wider screens (desktop or tablet). To show the Drawer, either swipe or drag with mouse, or call the [`show()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer/methods/show) method of the Kendo UI for jQuery widget. The Drawer closes on click or tap of any of the options or on the associated content.
 
 The height of the widget is determined by the higher content of the template of the widget or of the wrapped content with which it is associated. You can use the [`MinHeight()`](/api/drawer) method  to prevent the content from changing its height as the user toggles the drawer options.
 
@@ -28,4 +28,4 @@ You can use the `Mini()` option both with the overlay and push modes by adding a
 
 ## See Also
 
-* [JavaScript API Reference of the Drawer](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer)
+* [API Reference of the Drawer Helper for ASP.NET Core](/api/drawer)

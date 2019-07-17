@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Sortable Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Sortable tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Sortable tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_sortable_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/sortable
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # Sortable Tag Helper Overview
 
+The Telerik UI Sortable tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Sortable widget.
+
 The Sortable provides a sortable drag-and-drop functionality to elements within a list.
 
-The Sortable tag helper extension is a server-side wrapper for the [Kendo UI Sortable](https://demos.telerik.com/kendo-ui/sortable/index) widget and enables you to configure the Kendo UI Sortable widget in ASP.NET Core applications.
+* [Demo page for the Sortable](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
 
 ## Initializing the Sortable
 
@@ -47,4 +49,4 @@ The Sortable tag helper configuration options are passed as attributes of the ta
 ## See Also
 
 * [Basic Usage of the Sortable Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
-* [JavaScript API Reference of the Sortable](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable)
+* [API Reference of the Sortable Helper for ASP.NET Core](/api/sortable)

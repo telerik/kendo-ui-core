@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: DateTimePicker Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI DateTimePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the  DateTimePicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/datetimepicker
 slug: htmlhelpers_datetimepicker_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # DateTimePicker HtmlHelper Overview
 
-The Kendo UI DateTimePicker allows the user to select a value from a calendar, a time drop-down list, or through direct input.
+The Telerik UI DateTimePicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DateTimePicker widget.
 
-The DateTimePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/index) widget. For more information on the DateTimePicker HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/datetimepicker/overview).
+The DateTimePicker allows the user to select a value from a calendar, a time drop-down list, or through direct input.
+
+* [Demo page for the DateTimePicker](https://demos.telerik.com/aspnet-core/datetimepicker/index)
 
 ## Basic Configuration
 
@@ -28,7 +30,7 @@ The following example demonstrates the basic configuration for the DateTimePicke
 
 ## Events
 
-You can subscribe to all DateTimePicker [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#events). For a complete example on basic DateTimePicker events, refer to the [demo on using the events of the DateTimePicker](https://demos.telerik.com/aspnet-core/datetimepicker/events).
+You can subscribe to all DateTimePicker events. For a complete example on basic DateTimePicker events, refer to the [demo on using the events of the DateTimePicker](https://demos.telerik.com/aspnet-core/datetimepicker/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -58,11 +60,11 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI DateTimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateTimePicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#methods) to control its behavior.
+To reference an existing  DateTimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateTimePicker API](/api/datetimepicker) to control its behavior.
 
 The following example demonstrates how to access an existing DateTimePicker instance.
 
-      // Place this after your Kendo UI DateTimePicker for ASP.NET Core declaration.
+      // Place this after your  DateTimePicker for ASP.NET Core declaration.
       <script>
       $(function() {
       // The Name() of the DateTimePicker is used to get its client-side instance.
@@ -74,4 +76,4 @@ The following example demonstrates how to access an existing DateTimePicker inst
 
 * [Basic Usage of the DateTimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/index)
 * [Using the API of the DateTimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/api)
-* [JavaScript API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)

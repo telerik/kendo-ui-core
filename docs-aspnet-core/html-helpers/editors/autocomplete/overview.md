@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: AutoComplete Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI AutoComplete HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI AutoComplete HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/autocomplete
 slug: htmlhelpers_autocomplete_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # AutoComplete HtmlHelper Overview
 
-The [AutoComplete](http://docs.telerik.com/kendo-ui/controls/editors/autocomplete/overview) provides suggestions depending on the typed text. It also allows multiple value entries.
+The Telerik UI AutoComplete HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI AutoComplete widget.
 
-The suggestions shown by the widget come either from a local array or from a remote data service.
+The AutoComplete provides suggestions depending on the typed text and allows multiple value entries.
 
-The AutoComplete HtmlHelper extension is a server-side wrapper for the [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index) widget. For more information on the AutoComplete HtmlHelper for ASP.NET MVC, refer to the [UI for ASP.NET MVC documentation](https://docs.telerik.com/aspnet-mvc/helpers/autocomplete/overview).
+* [Demo page for the AutoComplete](https://demos.telerik.com/aspnet-core/autocomplete/index)
 
 ## Initializing the AutoComplete
 
@@ -143,4 +143,4 @@ For a complete example on basic AutoComplete events, refer to the [demo on using
 
 * [Basic Usage of the AutoComplete HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/index)
 * [Using the API of the AutoComplete HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/api)
-* [JavaScript API Reference of the AutoComplete](http://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete)
+* [API Reference of the AutoComplete HtmlHelper for ASP.NET Core](/api/autocomplete)

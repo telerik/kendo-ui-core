@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Spreadsheet Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/spreadsheet, /aspnet-core/helpers/tag-helpers/spreadsheet
 slug: taghelpers_spreadsheet_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # Spreadsheet Tag Helper Overview
 
-The [Spreadsheet](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview) allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
+The Telerik UI Spreadsheet tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Spreadsheet widget.
 
-The Spreadsheet tag helper extension is a server-side wrapper for the [Kendo UI Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index) widget and enables you to configure the Kendo UI Spreadsheet widget in ASP.NET Core applications.
+The Spreadsheet allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
+
+* [Demo page for the Spreadsheet](https://demos.telerik.com/aspnet-core/spreadsheet/tag-helper)
 
 ## Initializing the Spreadsheet
 
@@ -21,7 +23,7 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
 
 ## Basic Configuration
 
-The Spreadsheet tag helper configuration options are passed as attributes of the tag. For more details on the Scheduler configurations, refer to the overview of the [MVC Spreadsheet HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/spreadsheet) and the [Kendo Spreadsheet for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet).
+The Spreadsheet tag helper configuration options are passed as attributes of the tag.
 
 ```cshtml
     @(Html.Kendo().Spreadsheet()
@@ -775,4 +777,4 @@ The Spreadsheet provides options for [data binding]({% slug databinding_spreadsh
 ## See Also
 
 * [Basic Usage of the Spreadsheet Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
-* [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet helper for ASP.NET Core](/api/spreadsheet)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: DatePicker Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI DatePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI DatePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/date-picker, /aspnet-core/helpers/tag-helpers/date-picker
 slug: taghelpers_datepicker_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # DatePicker Tag Helper Overview
 
+The Telerik UI DatePicker tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI DatePicker widget.
+
 The DatePicker enables the user to enter or pick a date value.
 
-The DatePicker tag helper extension is a server-side wrapper for the [Kendo UI DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index) widget and enables you to configure the Kendo UI DatePicker widget in ASP.NET Core applications.
+* [Demo page for the DatePicker](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
 
 ## Initializing the DatePicker
 
@@ -51,4 +53,4 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
 ## See Also
 
 * [Basic Usage of the DatePicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
-* [JavaScript API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [API Reference of the DatePicker Helper for ASP.NET Core](/api/datepicker)
