@@ -12,9 +12,13 @@ The Grid enables you to make and save batch updates.
 
 To enable batch editing operations in the Grid, set the `batch` option of the data source to `true`. For a runnable example, refer to the [demo on setting the batch edit mode of the Grid](https://demos.telerik.com/kendo-ui/grid/editing).
 
+## KB Articles on Editing
+
+* [Implementing Batch Editing with OData]({% slug howto_batch_editing_odata_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Batch Editing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/editing)
 * [Batch Editing with oData v.4 by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/odatav4)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

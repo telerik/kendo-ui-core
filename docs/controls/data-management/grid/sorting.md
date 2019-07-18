@@ -48,8 +48,15 @@ To enable multi-column sorting, set the `mode` option of `editable` to `multiple
         // Other configuration.
     });
 
+## KB Articles on Sorting
+
+* [Enabling the ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
+* [Implementing Stable Sorting in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
+* [Implementing Stable Sorting for Grouped Data in Chrome]({% slug howto_implement_stable_sortwithgroupingin_chrome_grid %})
+* [Adding Background Color to Sorted Columns by Using LESS Themes]({% slug howto_add_background_sorted_columns_LESS_themes_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Sorting by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/sorting)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

@@ -357,6 +357,13 @@ The following example demonstrates how to handle custom fonts.
 * [Drawing HTML]({% slug drawingofhtmlelements_drawingapi %})
 * [Saving files with Kendo UI]({% slug overview_savingfiles_kendoui %})
 
+## KB Articles on PDF Export
+
+* [Exporting the Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})
+* [Exporting All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
+* [Exporting Multiple Pages with Variable Row Height]({% slug howto_export_multiple_pageswith_variable_rowheight_pdf_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
@@ -366,4 +373,3 @@ The following example demonstrates how to handle custom fonts.
 * [Adaptive Rendering of the Grid]({% slug adaptive_rendering_kendoui_grid_widget %})
 * [Export of the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
 * [Printing of the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
-* [Knowledge Base Section](/knowledge-base)

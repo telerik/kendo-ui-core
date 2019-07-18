@@ -29,6 +29,11 @@ By design, the last column of the Grid has no right border, so that no double bo
         border-right: 1px solid #ccc;
     }
 
+## KB Articles on Column Resizing
+
+* [Resizing the Grid Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Column Resizing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/column-resizing)

@@ -18,8 +18,14 @@ To implement a custom editor in the Grid, specify the `editor` field of the resp
 
 To define a validation rule for the edit operation, configure the `validation` option in the `schema` of the data source. For a runnable example, refer to the [demo on custom validator editing in the Grid](https://demos.telerik.com/kendo-ui/grid/editing-custom-validation).
 
+## KB Articles on Custom Editing
+
+* [Adding Custom Column Popup Editor]({% slug custom_column_popup_editor %})
+* [Using the AutoComplete as a Custom Column Editor]({% slug howto_use_autocompleteas_custom_column_editor_grid %})
+* [Creating a Custom Number Editor by Using NumericTextBox]({% slug howto_create_custom_number_editor_numerictextbox_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Custom Editing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/editing-custom)
 * [Custom Validator Editing by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/editing-custom-validation)
-* [Knowledge Base Section](/knowledge-base)

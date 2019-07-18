@@ -136,7 +136,13 @@ The following example demonstrates how to configure a basic Grid in the inline o
         editable: "inline" // OR editable: { mode : "popup" }
     });
 
+## KB Articles on Editing
+
+* [Customizing the Confirmation Window]({% slug howto_customize_delete_confirmation_dialog_grid %})
+* [Adding Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
+* [Accessing the Editor Controls in edit Events]({% slug howto_access_editor_controlsin_edit_events_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

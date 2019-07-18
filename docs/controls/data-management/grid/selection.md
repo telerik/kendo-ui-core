@@ -87,6 +87,14 @@ To enable the selection of multiple Grid cells, set `selectable` to `multiple ce
         // Other configuration.
     });
 
+## KB Articles on Selection
+
+* [Selecting or Deselecting All Rows with a Select All Header Checkbox]({% slug howto_select_deselect_all_rowswith_checkboxes_grid %})
+* [Making the Selection with a Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
+* [Selecting Multiple Rows with Checkboxes]({% slug howto_select_multiple_rowswith_checkboxes_grid %})
+* [Binding the Selection to the Model Field with a Checkbox Column]({% slug howto_bind_selection_to_model_field %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

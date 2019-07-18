@@ -55,8 +55,13 @@ Depending on the specific scenarios, you can use any of the following approaches
             min-width: initial;
         }
 
+## KB Articles on Width
+
+* [Applying Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
+* [Resizing the Grid to Match the Visible Column Widths When Hiding or Showing Columns]({% slug howto_resize_grid_when_hiding_columns_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Scroll Modes of the Grid]({% slug scrolling_kendoui_grid_widget %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Kendo UI Knowledge Base](/knowledge-base)

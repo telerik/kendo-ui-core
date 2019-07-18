@@ -45,6 +45,12 @@ The following example demonstrates how to specify the previous approach as a tem
 
 ![Grid with row template](../grid8_1.png)
 
+## KB Articles on Row Templates
+
+* [Adding Row Numbers]({% slug howto_addrownumbers_grid %})
+* [Using Dates inside the Row Template]({% slug howto_use_dates_inside_row_template_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Using Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/rowtemplate)

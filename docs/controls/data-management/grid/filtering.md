@@ -36,6 +36,14 @@ The runnable [demo on implementing custom menu filtering](https://demos.telerik.
 1. Define the built-in date-picker UI to filter the date-time column in the Grid.
 1. Instantiate the Kendo UI AutoComplete and DropDownList for the **Title** and **City** columns respectively.
 
+## KB Articles on Filtering
+
+* [Filtering by Date Only]({% slug howto_filter_date_columns_grid %})
+* [Using MultiSelect for Column Filtering]({% slug howto_use_multiselect_forcolumn_filtering_grid %})
+* [Using Filtering with Dynamic Default Values]({% slug howto_gridfiltering_dynamicdefaultvalues_grid %})
+* [Implementing Excel-Like Filter Menus]({% slug howto_gridfiltering_excellike_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Header Row Filtering by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-row)

@@ -128,5 +128,5 @@ When a web page is zoomed, the browser changes the content size of all pages exc
 ## See Also
 
 * [Scrolling Grids with Locked Columns (Demo)](https://demos.telerik.com/kendo-ui/grid/frozen-columns)
-* [Kendo UI Knowledge Base](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [Knowledge Base Section](/knowledge-base)

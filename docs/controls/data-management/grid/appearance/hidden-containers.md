@@ -36,11 +36,14 @@ To handle the behavior that is related to the initialization of the Grid inside 
     $("#GridID").data("kendoGrid").dataSource.fetch();
     ```
 
+## KB Articles on Hidden Containers
+
+* [Initializing the Grid inside a PanelBar]({% slug initialize_thegrid_panelbar_widget %})
+* [Initializing the Grid inside a TabStrib]({% slug initialize_thegrid_tabstrip_widget %})
+* [Initializing the Grid inside a Window]({% slug initialize_thegrid_window_widget %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Scroll Modes of the Grid]({% slug scrolling_kendoui_grid_widget %})
-* [Initializing the Grid inside the PanelBar]({% slug initialize_thegrid_panelbar_widget %})
-* [Initializing the Grid inside the TabStrib]({% slug initialize_thegrid_tabstrip_widget %})
-* [Initializing the Grid inside the Window]({% slug initialize_thegrid_window_widget %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Kendo UI Knowledge Base](/knowledge-base)

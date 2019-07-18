@@ -67,7 +67,12 @@ When you use grouping with paging, paging occurs before grouping. As a result:
 
 To enable the Grid to execute grouping before paging, group the whole data source. In this case, however, the performance of the Grid will be reduced.
 
+## KB Articles on Grouping
+
+* [Persisting the Collapsed State of Grouped Records]({% slug howto_persist_collapsed_stateof_grouped_records_grid %})
+* [Changing the Group Header Position When Columns Are Locked]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

@@ -22,6 +22,12 @@ For more information about binding the Grid to data, refer to the articles on:
 * [Local data binding]({% slug virtual_scrolling_kendoui_grid_widget %})
 * [Remote data binding]({% slug endless_scrolling_kendoui_grid_widget %})
 
+## KB Articles on Binding
+
+* [Using Nested Model Properties]({% slug howto_use_nested_model_properties_grid %})
+* [Loading and Appending More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Local Data Binding of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/local-data-binding)
