@@ -150,11 +150,14 @@ navigation:
         position: 14
      "html-helpers/pdf/pdfviewer":
         title: "PDFViewer"
-     "how-to":
-        title: "How To"
-        position: 5
+     "html-helpers/scheduling/scheduler/binding":
+        title: "Binding"
+        position: 2
      "vs-integration":
         title: "Visual Studio Integration"
+        position: 5
+     "accessibility":
+        title: "Accessibility"
         position: 6
      "backwards-compatibility":
         title: "Breaking Changes"

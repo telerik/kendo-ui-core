@@ -8,7 +8,7 @@ position: 4
 
 # Hidden Containers
 
-If you initialize a scrollable Grid with a set height inside a hidden container, the Grid will not adjust its vertical layout correctly.
+If you initialize a Grid inside a hidden container, the Grid may not adjust its layout correctly.
 
 For example, when you apply scrolling, virtual scrolling, or locked columns and initialize the Grid in a hidden container, its vertical layout will not be correctly adjusted because the JavaScript size calculations do not work for elements with a `display:none` style. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).
 
@@ -17,6 +17,7 @@ You can identify that the Grid is initialized in a hidden state if any of the fo
 * The scrollable data area overflows the bottom border of the Grid.
 * The vertical scrollbar is not visible even though [virtual scrolling]({% slug virtual_scrolling_kendoui_grid_widget %}) is enabled.
 * Frozen columns are too narrow and non-frozen columns are not visible.
+* The pager may not appear or may be the smallest responsive pager instead of the full one
 
 To handle the behavior that is related to the initialization of the Grid inside a hidden container, use any of the following approaches:
 * Delay the initialization of the Grid or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized after its element becomes visible.
