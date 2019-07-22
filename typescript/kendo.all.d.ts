@@ -1190,6 +1190,13 @@ declare namespace kendo.data {
         field?: string;
         dir?: string;
         aggregates?: DataSourceGroupItemAggregate[];
+        compare?: (a: DataSourceGroupCompareItem, b: DataSourceGroupCompareItem) => number;
+    }
+        
+    interface DataSourceGroupCompareItem {
+        field: string;
+        value: any;
+        items: any[];
     }
 
     interface DataSourceSchema {
