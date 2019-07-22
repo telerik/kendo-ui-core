@@ -166,11 +166,11 @@ navigation:
      "html-helpers/scheduling/scheduler/binding":
         title: "Binding"
         position: 2
-     "how-to":
-        title: "How To"
-        position: 5
      "vs-integration":
         title: "Visual Studio Integration"
+        position: 5
+     "accessibility":
+        title: "Accessibility"
         position: 6
      "backwards-compatibility":
         title: "Breaking Changes"
