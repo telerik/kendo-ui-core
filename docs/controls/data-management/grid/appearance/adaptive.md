@@ -164,10 +164,10 @@ To manually destroy the Grid:
 1. Call [`kendo.destroy()`](/api/javascript/kendo/methods/destroy) over the closest `.k-pane-wrapper` ancestor which is created around the Grid widget.
 1. Remove the whole `.k-pane-wrapper` element from the DOM.
 
-To recreate the Grid, insert a new `<div>` at the same place where the previous Grid `<div>` was initially placed.
+To re-create the Grid, insert a new `<div>` at the same place where the previous Grid `<div>` was initially placed.
 
 ## See Also
 
 * [Implementing Responsive Columns in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/responsive-columns)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Kendo UI Knowledge Base](/knowledge-base)
+* [Knowledge Base Section](/knowledge-base)

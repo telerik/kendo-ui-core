@@ -1,13 +1,14 @@
 ---
-title: Keep Pane Size in Percentages
-page_title: Splitter | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to keep the Kendo UI Splitter pane sizes in percentages using the Kendo UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+title: Persisting the Pane Size
+page_title: Persisting the Pane Size | Telerik UI Splitter HtmlHelper for ASP.NET Core
+description: "Learn how to keep the Splitter pane sizes in percentages using the Telerik UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_keep_pane_size_in_percentages_aspnetcore
 position: 5
 ---
 
-#Keep Pane Size in Percentages
-The example below demonstrates how to keep the Kendo UI Splitter pane sizes in percentages upon user resizes.
+# Persisting the Pane Size
+
+The Splitter enables you to keep its pane size in percentage upon user resizes.
 
 ```Razor
 @(Html.Kendo().Splitter()
@@ -22,11 +23,11 @@ The example below demonstrates how to keep the Kendo UI Splitter pane sizes in p
 <script>
         function onResize(e) {
             console.log(e.sender.options.panes);
-            // prevent endless recursion from resizes
+            // Prevent endless recursion from resizes.
             if (!this.appliesSizes) {
                 this.appliesSizes = true;
 
-                // calculate pane width
+                // Calculate the pane width.
                 var element = this.element;
                 var pane = element.find(".k-pane:first");
                 var ratio = Math.ceil(pane.width() * 100 / element.width());
@@ -49,3 +50,6 @@ The example below demonstrates how to keep the Kendo UI Splitter pane sizes in p
     }
 ```
 
+## See Also
+
+* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)

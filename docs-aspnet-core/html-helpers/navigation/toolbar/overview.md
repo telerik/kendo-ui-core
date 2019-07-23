@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ToolBar Overview | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/toolbar
 slug: htmlhelpers_toolbar_aspnetcore
 position: 1
@@ -9,9 +9,11 @@ position: 1
 
 # ToolBar HtmlHelper Overview
 
-The [ToolBar](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+The Telerik UI ToolBar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ToolBar widget.
 
-The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) widget. For more information on the ToolBar HtmlHelper, refer to the [UI for ASP.NET MVC documentation](http://docs.telerik.com/aspnet-mvc/helpers/toolbar/overview).
+The ToolBar is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+
+* [Demo page for the ToolBar](https://demos.telerik.com/aspnet-core/toolbar/index)
 
 ## Initializing the ToolBar
 
@@ -97,13 +99,10 @@ The following example demonstrates the basic configuration of the ToolBar HtmlHe
     </script>
 ```
 
+
 ## Spacer
 
 The `Spacer` command type moves the tools that are declared after it to the right side of the ToolBar.
-
-The following example demonstrates how to define a spacer.
-
-###### Example
 
 ```
     @(Html.Kendo().ToolBar()
@@ -118,8 +117,6 @@ The following example demonstrates how to define a spacer.
 
 You can use multiple spacers to create an equal amount of space between several tools.
 
-###### Example
-
 ```
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")
@@ -132,6 +129,12 @@ You can use multiple spacers to create an equal amount of space between several 
         })
     )
 ```
+
+## Functionality and Features
+
+* [Spacer]({% slug spacer_toolbar_aspnetcore %})
+* [Manual closing]({% slug htmlhelpers_toolbar_popup_manual_close_aspnetcore %})
+* [Using FontAwesome icons]({% slug htmlhelpers_use_fontawesome_icons_aspnetcore %})
 
 ## Events
 

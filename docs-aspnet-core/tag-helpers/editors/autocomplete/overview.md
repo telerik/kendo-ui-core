@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: AutoComplete | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI AutoComplete tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: AutoComplete Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI AutoComplete tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/autocomplete, /aspnet-core/helpers/tag-helpers/autocomplete
 slug: taghelpers_autocomplete_aspnetcore
 position: 1
@@ -9,17 +9,19 @@ position: 1
 
 # AutoComplete Tag Helper Overview
 
-The AutoComplete tag helper helps you configure the Kendo UI AutoComplete widget in ASP.NET Core applications.
+The Telerik UI AutoComplete tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI AutoComplete widget.
 
-## Basic Usage
+The AutoComplete provides suggestions depending on the typed text and allows multiple value entries.
+
+* [Demo page for the AutoComplete](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
+
+## Initializing the AutoComplete
 
 The following example demonstrates how to define the AutoComplete by using the AutoComplete tag helper.
 
-###### Example
+    <kendo-autocomplete name="products" filter="FilterType.StartsWith"></kendo-autocomplete>
 
-        <kendo-autocomplete name="products" filter="FilterType.StartsWith"></kendo-autocomplete>
-
-## Configuration
+## Basic Configuration
 
 The AutoComplete tag helper configuration options are passed as attributes of the tag.
 
@@ -74,7 +76,5 @@ The AutoComplete tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the AutoComplete Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
+* [API Reference of the AutoComplete Helper for ASP.NET Core](/api/autocomplete)

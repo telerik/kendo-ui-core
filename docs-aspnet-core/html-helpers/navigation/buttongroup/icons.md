@@ -1,7 +1,7 @@
 ---
 title: Icon ButtonGroup
-page_title: Icon ButtonGroup | Kendo UI ButtonGroup HtmlHelper for ASP.NET Core
-description: "Accommodate an icon and enhance the meaning of the text content of the Kendo UI ButtonGroup HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Icon ButtonGroup | Telerik UI ButtonGroup HtmlHelper for ASP.NET Core
+description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI ButtonGroup HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: icons_buttongroup_aspnetcore
 position: 3
 ---
@@ -40,4 +40,4 @@ This ButtonGroup configuration is expected to produce the following HTML output:
 ## See Also
 
 * [Adding Images to the ButtonGroup HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/icons)
-* [JavaScript API Reference of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup)
+* [API Reference of the ButtonGroup HtmlHelper for ASP.NET Core](/api/buttongroup)

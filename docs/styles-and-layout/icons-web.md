@@ -9,7 +9,7 @@ position: 7
 
 # Web Font Icons
 
-As of the R1 2017 release, Kendo UI delivers 400 integrated font icons intended for the [web and data visualization widgets]({% slug bundle_supportfor_kendoui_components %}) of the suite.
+As of the R1 2017 release, Kendo UI delivers 400 integrated font icons intended for the web and data visualization widgets of the suite.
 
 These icons can be used directly in a Kendo UI web project by assigning one of the predefined CSS classes provided in the [list of font icons](#list-of-font-icons) below. The following example demonstrates how to achieve this behavior.
 

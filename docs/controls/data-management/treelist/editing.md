@@ -10,6 +10,8 @@ position: 2
 
 The [Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) provides build-in editing functionality in three different edit modes: PopUp, InLine, InCell(Batch) and features Drag and Drop.
 
+To get familiar with the common editing concepts in Kendo UI, refer to the article on [editing widgets]({% slug kendoui_editing_gettingstarted %}).
+
 ## Prerequisite
 
 ### Model

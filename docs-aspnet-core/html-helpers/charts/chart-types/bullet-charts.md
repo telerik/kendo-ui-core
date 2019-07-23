@@ -1,25 +1,30 @@
 ---
 title: Bullet Charts
-page_title: Bullet Charts | Kendo UI Charts HtmlHelper for ASP.NET Core
-description: "Learn how to define and configure Kendo UI Bullet Charts."
+page_title: Bullet Charts | Telerik UI Charts HtmlHelper for ASP.NET Core
+description: "Learn how to define and configure Telerik UI Bullet Charts."
 slug: bulletcharts_aspnetcore_htmlhelper
 ---
 
 # Bullet Charts
 
-The [Kendo UI Bullet Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/bullet-charts/index) is a variation of the Bar Chart.
+The Telerik UI Bullet HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Bullet Chart widget.
+
+Bullet Charts represent a variation of the [Bar Chart]({% slug barcharts_aspnetcore_htmlhelper %}).
+
+* [Demo page for the Bullet Chart](https://demos.telerik.com/aspnet-core/bullet-charts/index)
+
+## Getting Started
 
 You can use the Bullet Chart HtmlHelper to visualize a comparison between an expected (target) and actual (current) value&mdash;for example, company profit, employee performance, weather data, and so on.
 
-## Configuration
+To create a Bullet series in the Chart HtmlHelper, use `Bullet` and `VerticalBullet` in the `Series` configuration.
 
-To create a Bullet series in the Chart helper, use `Bullet` and `VerticalBullet` in the `Series` configuration.
+* [Configuring the axes](#configuring-the-axes)
+* [Customizing the target value lines](#customizing-the-target-value-lines)
 
-### Axes
+## Configuring the Axes
 
 To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple value axes are also supported.
-
-###### Example
 
       @(Html.Kendo().Chart()
             .Name("chart")
@@ -59,7 +64,7 @@ The configuration from the previous example results in the following Bullet Char
 
 ![Bullet Chart](images/chart-bullet.png)
 
-### Target Line Customization
+## Customizing the Target Value Lines
 
 You can customize the line that represents the target value through the `Target` series configuration. `Target` exposes the `Border`, `Color`, and `Line` main settings that control the line appearance.
 
@@ -88,13 +93,5 @@ The following example demonstrates how to use all three options to customize the
 
 ## See Also
 
-* [Overview of the Kendo UI Chart Html Helper for ASP.NET Core ]({% slug htmlhelpers_charts_aspnetcore %})
-* [Area Charts]({% slug areacharts_aspnetcore_htmlhelper %})
-* [Bubble Charts]({% slug bubblecharts_aspnetcore_htmlhelper %})
-* [BoxPlot Charts]({% slug boxplotcharts_aspnetcore_htmlhelper %})
-* [Bar Charts]({% slug barcharts_aspnetcore_htmlhelper %})
-* [Line Charts]({% slug linecharts_aspnetcore_htmlhelper %})
-* [Pie Charts]({% slug piecharts_aspnetcore_htmlhelper %})
-* [Stock Charts]({% slug overview_stockcharthelper_aspnetcore %})
-* [TreeMap]({% slug overview_treemaphelper_aspnetcore %})
-* [Chart JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Bullet Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bullet-charts/index)
+* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)

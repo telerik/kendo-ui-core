@@ -1,23 +1,21 @@
 ---
-title: Web Browser and Operating System Support
-page_title: Web Browser and Operating System Support | Kendo UI Getting Started
+title: Web Browser Support
+page_title: Web Browser Support | Support and Distribution | Kendo UI for jQuery
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support, /intro/browser-support
-description: "Check out the browsers and operating systems supported by Kendo UI widgets and frameworks."
+description: "Get started with Kendo UI for jQuery and learn which are the browsers supported by the framework components."
 slug: wbe_browserand_operating_system_support
 position: 1
 ---
 
-# Web Browser and Operating System Support
+# Web Browser Support
 
-The Kendo UI components are designed to support all major browsers and operating systems.
+The [Kendo UI widgets and framework components](http://demos.telerik.com/kendo-ui/) are designed to support all major web browsers and deliver a cross-browser compatibility, standards compliance, or touch-device support.
 
-## Web Browser Support
+However, depending on the specifics of your project, the components you use, and the versions of the widgets, their browser support may vary.
 
-The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) can seamlessly operate without concerns for cross-browser compatibility, standards compliance, or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
+## Regular Support
 
-### General
-
-Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no specific limitations as of the browser versions they support.
+Most [Kendo UI widgets]({% slug welcometo_kendoui %}#list-of-widgets) have no specific limitations as of the browser versions they support.
 
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
@@ -28,9 +26,9 @@ Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-### Hybrid UI
+## Support for Kendo UI Hybrid
 
-The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_components %}) are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
+The [hybrid UI widgets and framework components]({% slug welcometo_kendoui %}#list-of-widgets) are intended for Cordova-based deployments and support the mobile device browsers and corresponding web view components listed in the following table.
 
 | BROWSER           | SUPPORTED VERSIONS               |
 | :---------------- | :------------------------------- |
@@ -39,9 +37,9 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | Firefox           | Not supported                    |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-### Data Visualizing Widgets
+## Support for Data Visualizing Widgets
 
-[Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}), such as Charts, Gauges, Barcodes, Diagrams, and Maps, might require more recent browser versions as well. If you want to use them in your project, consider the information below.
+The [Kendo UI widgets which render data visualization]({% slug welcometo_kendoui %}#list-of-widgets), such as the Charts, Gauges, Barcodes, Diagrams, and Maps, may require more recent browser versions according to the following table.
 
 **Fully supported browsers**
 
@@ -64,31 +62,24 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
 | Android           | 2.3                           | The Canvas rendering mode is only supported
 
-### PDF Export
+## Support for PDF Export
 
-The Kendo UI PDF generator is tested and supported in the following _desktop_ browsers:
-
+The Kendo UI PDF generator is tested and supported in the following desktop browsers:
 * Internet Explorer 9 and later.
 * Latest Chrome, Firefox, Safari, and Blink-based Opera versions.
 
-> **Important**
->
-> Internet Explorer 9 and Safari do not support the option for saving files. To achieve this, you need to [implement a server proxy]({% slug exporting_pdf_kendoui_grid_widget %}#server-proxy).
+> Internet Explorer 9 and Safari do not support the PDF-related option for saving files. To achieve this, you need to [implement a server proxy]({% slug exporting_pdf_kendoui_grid_widget %}#server-proxy).
 
-Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is _not_ supported in:
+Officially, PDF export is not supported on mobile because of browser limitations and CORS-related security restrictions in hybrid applications. For example, it is not possible to load locally stored font files in hybrid applications. Even though exporting in PDF might work on some mobile devices in specific scenarios, PDF export is not supported in mobile browsers and hybrid mobile applications.
 
-* Mobile browsers.
-* Hybrid mobile applications.
+## Best Performance
 
-### Best Performance
-
-To ensure the best performance of your project, make sure that you:
-
+To boost the performance of your project:
 * Always use an up-to-date browser version.
 * Check **Disable Script Debugging** from your browser configuration options.
 * Activate **Caching** in Internet Explorer.
 
-### Notes on Web Browser Support
+## Notes on Web Browser Support
 
 * As of the Kendo UI 2017 R1 release, Internet Explorer 8 is no longer supported.
 * As of the Kendo UI 2015 Q3 release, Internet Explorer 7 is no longer supported.
@@ -99,14 +90,12 @@ To ensure the best performance of your project, make sure that you:
 * Exporting a zoomed-in or zoomed-out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.
 
-    > **Important**
-    >
     > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
 * Windows Universal apps and [Cordova for Windows 10](https://cordova.apache.org/docs/en/5.1.1/guide/platforms/win8/win10-support.html) environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](http://www.telerik.com/windows-universal-ui).
 * Unexpected behaviors that occur only in a hybrid application, but not in a standalone supported browser, are by default considered to be triggered by the hybrid environment and unrelated to Kendo UI.
-* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header:
+* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) over a META tag or an HTTP header:
 
     ```
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -122,35 +111,9 @@ To ensure the best performance of your project, make sure that you:
     </script>
     ```
 
-## Operating System Support
-
-The following table lists the operating systems and their versions that are compatible with Kendo UI.
-
-| PLATFORM          | VERSION               |
-| :---------------- | :-------------------- |
-| Windows           | XP or later           |
-| Windows Server    | Server 2003 or later  |
-| OS X              | 10.5 or later         |
-| Android           | 2.3 or later          |
-| iOS               | 6.0 or later          |
-| Windows Phone     | 8.0 or later          |
-
-### Notes on Operating System Support
-
-* Hybrid mouse and touch-screen devices are supported; for example, Internet Explorer 10, Chrome and Firefox on Windows 8
-* JavaScript should be enabled on all browsers so that they can be allowed to run scripts
-
 ## See Also
 
-* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
-* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
-* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
-* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
-* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
-* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
-* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
-* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
-* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [jQuery Version Support by Kendo UI]({% slug jquerysupport_kendoui %})
+* [PDF and Excel Export Support by Kendo UI]({% slug export_support_kendoui %})
+* [Operation System Support by Kendo UI]({% slug ossupport_kendo %})
+* [Earlier Versions Support Policy by Kendo UI]({% slug old_versions_support_policy %})

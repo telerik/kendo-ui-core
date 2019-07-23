@@ -1,7 +1,7 @@
 ---
 title: Data Binding
-page_title: Data Binding | Kendo UI Charts HtmlHelper for ASP.NET Core
-description: "Learn the basics about binding the Kendo UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
+page_title: Data Binding | Telerik UI Charts HtmlHelper for ASP.NET Core
+description: "Learn the basics about binding the Telerik UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
 slug: htmlhelpers_charts_databinding_aspnetcore
 position: 2
 ---
@@ -14,19 +14,19 @@ You can populate the UI for ASP.NET Core Chart by using any of the following app
 * [Binding to local data](#binding-to-local-data)
 * [Binding to remote data](#binding-to-remote-data)
 
-## Binding to Inline Data
+## Inline Data
 
 You can specify the data points of the Charts as part of the series definitions. The type of the data points depends on the type of the series.
 
-### Categorical Series
+* [Binding categorical series to inline data](#binding-categorical-series-to-inline-data)
+* [Binding scatter series to inline data](#binding-scatter-series-to-inline-data)
+* [Binding to arrays of objects](#binding-to-arrays-of-objects)
+
+### Binding Categorical Series to Inline Data
 
 Categorical series, such as Bar, Line, Area, expect a data point of a numeric type. The category names are populated independently in the category axis.
 
-> **Important**
->
 > To keep the Chart consistent, all series have to contain the same number of points in an order that matches the order of the categories which are declared in `CategoryAxis`.
-
-###### Example
 
 	@(Html.Kendo().Chart()
         .Name("chart")
@@ -48,11 +48,9 @@ Categorical series, such as Bar, Line, Area, expect a data point of a numeric ty
         )
 	)
 
-### Scatter Series
+### Binding Scatter Series to Inline Data
 
-Scatter series include the two-dimensional Scatter and ScatterLine series. Each data point in the series has to be an array which contains two values&mdash;X and Y, as demonstrated in the example below.
-
-###### Example
+Scatter series include the two-dimensional Scatter and ScatterLine series. Each data point in the series has to be an array which contains an X and a Y value.
 
     @(Html.Kendo().Chart()
         .Name("chart")
@@ -92,9 +90,7 @@ Scatter series include the two-dimensional Scatter and ScatterLine series. Each 
 
 ### Binding to Arrays of Objects
 
-A more flexible alternative is to provide the series with an array of objects. This lets you map each value to the corresponding series field. This approach is useful for series that have both numeric and string fields in a single data point, like Pie, Donut, Bubble, and so on.
-
-###### Example
+A more flexible alternative is to provide the series with an array of objects. This enables you to map each value to the corresponding series field which is useful for series that have both numeric and string fields in a single data point such as Pie, Donut, Bubble, and so on.
 
     @(Html.Kendo().Chart()
       .Name("chart")
@@ -125,14 +121,11 @@ A more flexible alternative is to provide the series with an array of objects. T
       )
     )
 
-## Binding to Local Data
+## Local Data
 
-You can bind the Chart to a data set in the view model or to items tat are stored in `ViewBag`/`ViewData`.
+You can bind the Chart to a data set in the view model or to items that are stored in `ViewBag`/`ViewData`.
 
-The following example demonstrates how to bind the Chart to data in the view model.
-
-```Controller
-
+```tab-Controller
         public IActionResult Local_Data_Binding()
         {
             var internetUsers = new InternetUsers[] {
@@ -152,8 +145,7 @@ The following example demonstrates how to bind the Chart to data in the view mod
             return View(internetUsers);
         }
 ```
-```Model
-
+```tab-Model
     public class InternetUsers
     {
         public InternetUsers()
@@ -172,8 +164,7 @@ The following example demonstrates how to bind the Chart to data in the view mod
         public string Country { get; set; }
     }
 ```
-```Razor
-
+```tab-Razor
     @model IEnumerable<LocalBindingExample.Models.InternetUsers>
 
     @(Html.Kendo().Chart(Model)
@@ -195,14 +186,15 @@ The following example demonstrates how to bind the Chart to data in the view mod
     )
 ```
 
-## Binding to Remote Data
+## Remote Data
 
-The most flexible form of data binding is to use the DataSource component. It is easily configured to request data from a controller method or a remote API endpoint using Ajax requests. Below, you can see steps to follow when configuring the Kendo UI Chart for ASP.NET Core for binding using a DataSource.
+The most flexible form of data binding is to use the DataSource component. You can easily configure the component to request data from a controller method or a remote API endpoint by using Ajax requests.
+
+To bind to remote data by using the DataSource component:
 
 1. Add a new action method in your controller that returns the data set.
 
-
-    ```Controller
+    ```tab-Controller
             [HttpPost]
             public IActionResult _SpainElectricityProduction()
             {
@@ -221,7 +213,7 @@ The most flexible form of data binding is to use the DataSource component. It is
                 return Json(result);
             }
     ```
-    ```Model
+    ```tab-Model
         public class ElectricityProduction
         {
             public ElectricityProduction()
@@ -246,8 +238,6 @@ The most flexible form of data binding is to use the DataSource component. It is
     ```
 
 1. In the view, configure the Chart to use the action method that you created.
-
-    ###### Example
 
         ```
         @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
@@ -282,13 +272,13 @@ The most flexible form of data binding is to use the DataSource component. It is
 
     Unlike the Grid, the Chart is configured to read a flat data response by default. If you have custom logic that requires the usage of the `ToDataSourceResult()` extension method when returning data for the Chart, configure a custom DataSource with a schema that can correctly parse the response.
 
-    ```Controller
+    ```tab-Controller
         public IActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(productService.Read().ToDataSourceResult(request));
         }
     ```
-    ```Razor
+    ```tab-Razor
         @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ProductViewModel>()
             .Name("chart")
             .Title("Product Prices")
@@ -318,10 +308,6 @@ The most flexible form of data binding is to use the DataSource component. It is
 
 ## See Also
 
-* [JavaScript API Reference of the Charts](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
-* [Charts HtmlHelper for ASP.NET Core]({% slug htmlhelpers_charts_aspnetcore %})
-* [Charts Official Demos](https://demos.telerik.com/aspnet-core/area-charts/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Using the API of the Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chart-api/index)
+* [Basic Usage of the Area Chart HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/area-charts/index)
+* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)

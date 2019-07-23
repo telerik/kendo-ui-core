@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Map | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Map HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Map Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI Map HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/map
 slug: htmlhelpers_map_aspnetcore
 position: 1
@@ -9,24 +9,15 @@ position: 1
 
 # Map HtmlHelper Overview
 
-The Map HtmlHelper extension is a server-side wrapper for the [Kendo UI Map](http://demos.telerik.com/aspnet-mvc/map/index) widget.
+The Telerik UI Map HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Map widget.
 
-The [Kendo UI Map widget](http://demos.telerik.com/aspnet-core/map/index) displays geospatial information organized in layers and is supported for both desktop and mobile devices.
+The Map displays geospatial information organized in layers and is supported for both desktop and mobile devices. It also provides tile layers, shape (vector) layers, and marker layers.
 
-The layers that the Map provides are:
-* Tile layers
-* Shape (vector) layers
-* Marker layers
+* [Demo page for the Map](https://demos.telerik.com/aspnet-core/map/index)
 
-For more information on any new features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui/roadmap).
-
-For more information on the HtmlHelper, refer to the article on the [Map HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/map/overview).
-
-## Basic Usage
+## Initializing the Map
 
 The following example demonstrates how to define the Map by using the Map HtmlHelper.
-
-###### Example
 
 ```Razor
     @(Html.Kendo().Map()
@@ -61,11 +52,9 @@ The following example demonstrates how to define the Map by using the Map HtmlHe
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates how to use the basic `zoom` method of the Map HtmlHelper and retrieve the instance of the widget.
-
-###### Example
+The following example demonstrates the basic configuration for the Map HtmlHelper.
 
 ```
     <input id="zoomLevel"/>
@@ -96,12 +85,11 @@ The following example demonstrates how to use the basic `zoom` method of the Map
     </script>
 ```
 
+## Events
+
+For a complete example on basic Map events, refer to the [demo on using the events of the Map](https://demos.telerik.com/aspnet-core/map/events).
+
 ## See Also
 
-* [JavaScript API Reference of the Map](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map)
-* [Map HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/map/overview)
-* [Map Official Demos](http://demos.telerik.com/aspnet-core/map/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Map HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/map/index)
+* [API Reference of the Map HtmlHelper for ASP.NET Core](/api/map)

@@ -1,22 +1,18 @@
 ---
 title: Constraining the Position
-page_title: Constraining the Position | Kendo UI Window HtmlHelper for ASP.NET Core
-description: "Learn how to configure the containment limits for the Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Constraining the Position | Telerik UI Window HtmlHelper for ASP.NET Core
+description: "Learn how to configure the containment limits for the Telerik UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_constrain_aspnetcore
 position: 4
 ---
 
 # Constraining the Position
 
-The Window provides the [`Draggable(d => d.Containment())`](/api/Kendo.Mvc.UI.Fluent/WindowDraggableSettingsBuilder#containmentsystemstring) configuration option that you can use to constrain the movement of the widget inside a container element.
-
-## Containment
+The Window provides the `Draggable(d => d.Containment())` configuration option that you can use to constrain the movement of the widget inside a container element.
 
 The `Containment()` option overrides the `appendTo` setting and attaches the Window to the specified DOM element. You have to correctly position the `containment` element by using the `relative`, `absolute`, or `fixed` CSS rules.
 
 The following example demonstrates how to create a modal Window and constrain its movement inside a DOM element.
-
-###### Example
 
     <style>
         #container {
@@ -49,9 +45,5 @@ The following example demonstrates how to create a modal Window and constrain it
 
 ## See Also
 
-* [Overview of Window HTML helper]({% slug htmlhelpers_window_aspnetcore %})
-* [Dimensions]({% slug htmlhelpers_window_dimensions_aspnetcore %})
-* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})
-* [Loading Content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
-* [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
-* [Integration with Forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+* [Constraining the Movement of the Window HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/constrain-movement)
+* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)

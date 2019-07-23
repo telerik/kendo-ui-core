@@ -38,6 +38,11 @@ div.k-grid td
 
 When you implement custom code and rely on selectors or target the Grid table, the Grid creates separate tables for its locked and scrollable sections. The locked columns are inside a `.k-grid-content-locked` element and the scrollable content is inside a `.k-grid-content` element.
 
+## KB Articles on Locked Columns
+
+* [Adjusting Row Heights When the Grid Columns Are Locked]({% slug howto_adjust_row_heights_template_locked_columns_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Implementing Locked Columns in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/frozen-columns)

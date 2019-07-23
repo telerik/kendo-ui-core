@@ -1,6 +1,6 @@
 ---
 title: Hybrid UI Integration
-page_title: Hybrid UI Integration | Kendo UI Hybrid Components
+page_title: Hybrid UI Integration | AngularJS Directives
 description: "Use the AngularJS directives with hybrid mobile Kendo UI components."
 previous_url: /controls/hybrid/angular/angular, /controls/hybrid/support/angular/angular, /AngularJS/angular-hybrid
 slug: angularjssupport_hybridkendoui

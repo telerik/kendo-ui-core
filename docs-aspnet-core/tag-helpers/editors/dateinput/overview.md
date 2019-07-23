@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: DateInput | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI DateInput tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: DateInput Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI DateInput tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/date-input, /aspnet-core/helpers/tag-helpers/date-input
 slug: taghelpers_dateinput_aspnetcore
 position: 1
@@ -9,17 +9,19 @@ position: 1
 
 # DateInput Tag Helper Overview
 
-The DateInput tag helper helps you configure the Kendo UI DateInput widget in ASP.NET Core applications.
+The Telerik UI DateInput tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI DateInput widget.
 
-## Basic Usage
+The DateInput represents an input field that recognizes and formats scheduling values such as dates.
+
+* [Demo page for the DateInput](https://demos.telerik.com/aspnet-core/dateinput/tag-helper)
+
+## Initializing the DateInput
 
 The following example demonstrates how to define the DateInput by using the DateInput tag helper.
 
-###### Example
-
     <kendo-dateinput name="dateinput1"></kendo-dateinput>
 
-## Configuration
+## Basic Configuration
 
 The DateInput tag helper configuration options are passed as attributes of the tag.
 
@@ -35,10 +37,9 @@ The DateInput tag helper configuration options are passed as attributes of the t
 )
 ```
 
+## Events
 
-## Event Handling
-
-You can subscribe to all DateInput [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#events).
+You can subscribe to all DateInput events.
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -48,7 +49,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 <script>
     function onChangeHandler(e) {
-        // add logic here
+        // Add your logic here.
     }
 </script>
 ```
@@ -67,27 +68,19 @@ The following example demonstrates how to subscribe to events by a handler name.
 </script>
 ```
 
+## Referencing Existing Instances
 
-## Reference
+To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput API](/api/dateinput) to control its behavior.
 
-### Existing Instances
-
-To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
-
-###### Example
-
-    //Put this after your Kendo UI DateInput for ASP.NET Core declaration.
+    // Place this after your Kendo UI DateInput for ASP.NET Core declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the DateInput is used to get its client-side instance.
+            // The Name() of the DateInput is used to get its client-side instance.
             var dateInput = $("#dateinput").data("kendoDateInput");
         });
     </script>
 
-
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the DateInput Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/tag-helper)
+* [API Reference of the DateInput Helper for ASP.NET Core](/api/dateinput)

@@ -91,9 +91,13 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
 * When the Grid is `navigatable`, keyboard navigation supports only the `Up Arrow` and `Down Arrow` keys. The `Page Up` and `Page Down` key scrolling is not supported.
 * The new [`persistSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) can work with the single selection functionality by using the following [example]({% slug grid-virtual-scrolling-with-persist-single-selection %}). The multiple selection functionality is not recommended as the old page is removed from the DOM when scrolling occurs. This can break the selection as the DOM elements do not exist after the scrolling reaches the new page.
 
+## KB Articles on Scrolling
+
+* [Adjusting the Row Height in Grids with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Virtualization of Local Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data)
 * [Virtualization of Remote Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data)
-* [Kendo UI Knowledge Base](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

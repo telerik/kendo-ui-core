@@ -14,7 +14,7 @@ As of the R1 2017 release, the Kendo UI distribution includes Sass-based themes.
 Currently, Kendo UI delivers the following Sass themes:
 
 * Kendo UI Default v.2&mdash;The latest update of the Kendo UI Default theme.
-* Kendo UI Bootstrap v.4&mdash;To achieve similarity with the Bootstrap look and feel, the theme has linked variables to Bootstrap. Thsi means that customizing the original Bootstrap theme will affect the Kendo UI theme as well.
+* Kendo UI Bootstrap v.4&mdash;To achieve similarity with the Bootstrap look and feel, the theme has linked variables to Bootstrap. This means that customizing the original Bootstrap theme will affect the Kendo UI theme as well.
 * Kendo UI Material&mdash;An update of the Kendo UI Material Theme to closely implement the [Material Design Guidelines](https://material.io/design/).
 
 ## Less- vs. Sass-Based Themes

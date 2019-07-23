@@ -235,16 +235,20 @@ To export huge datasets to Excel, use the new [RadSpreadStreamProcessing library
 ## Further Reading
 
 * [Exporting Kendo UI Grid to Excel](http://www.telerik.com/support/code-library/export-grid-to-excel-8d91dd145501)
-* [Exporting MVC Grid to Excel](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/excel-export-server-side)
-* [Exporting MVC Grid to PDF](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/pdf-export-server-side)
-* [Exporting MVC Grid to CSV](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side)
 * [Creating Excel Documents with Kendo UI](/framework/excel/introduction)
 * [Saving Files with Kendo UI](/framework/save-files/introduction)
 * [JavaScript API Reference: kendo.ooxml.Workbook](/api/javascript/ooxml/workbook)
+
+## KB Articles on Excel Export
+
+* [Formatting Cell Values]({% slug howto_format_cell_values_grid %})
+* [Using the Column Template]({% slug howto_use_column_template_grid %})
+* [Exporting Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
+* [Exporting Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
 
 ## See Also
 
 * [Exporting the Grid to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/excel-export)
 * [Copying Data to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/copy-to-excel)
-* [Knowledge Base Section](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

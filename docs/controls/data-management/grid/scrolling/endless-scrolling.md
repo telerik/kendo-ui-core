@@ -50,9 +50,13 @@ If the Grid displays hierarchical data and an item gets expanded, it will not be
 
 > The filtering, sorting, and grouping operations reset the scroll position.
 
+## KB Articles on Scrolling
+
+* [Hiding the Vertical Scrollbar]({% slug howto_hide_vertical_scrollbar_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Endless Scrolling of Local Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
 * [Endless Scrolling of Remote Data by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote)
-* [Kendo UI Knowledge Base](/knowledge-base)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

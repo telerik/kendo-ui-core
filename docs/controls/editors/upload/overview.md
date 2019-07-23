@@ -14,7 +14,7 @@ The [Kendo UI Upload widget](https://demos.telerik.com/kendo-ui/upload/index) he
 
 The Upload provides a set of [default API configuration options](/api/javascript/ui/upload) which can be set during its initialization such as synchronous and asynchronous modes of operation, chunk upload of files, multiple files selection and removal, progress tracking and in-progress cancellation of the upload, and so on.
 
-> * The Upload does not currently support the upload of large files in chunks because the feature would require an additional Flash or Silverlight plug-in to compensate for the missing API support in older browsers.
+> * The Upload does not currently support the upload of large files in chunks because the feature would require an additional Flash or Silverlight plugin to compensate for the missing API support in older browsers.
 > * The Upload works in `<input type="file" />` elements. Therefore, it can only upload files that are selected by the user and which exist in the file system. To upload files that are generated with JavaScript on the fly, use Ajax requests.
 
 For the runnable example, refer to the [demo on the basic usage of the Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index).

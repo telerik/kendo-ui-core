@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: LinearGauge | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI LinearGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: LinearGauge Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI LinearGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/lineargauge
 slug: taghelpers_lineargauge_aspnetcore
 position: 1
@@ -9,17 +9,19 @@ position: 1
 
 # LinearGauge Tag Helper Overview
 
-The LinearGauge tag helper helps you configure the Kendo UI LinearGauge widget in ASP.NET Core applications.
+The Telerik UI LinearGauge tage helper for ASP.NET Core is a server-side wrapper for the Kendo UI LinearGauge widget.
 
-## Basic Usage
+The LinearGauge represents values on a linear scale.
+
+* [Demo page for the LinearGauge](https://demos.telerik.com/aspnet-core/linear-gauge/tag-helper)
+
+## Initializing the LinearGauge
 
 The following example demonstrates how to define the LinearGauge by using the LinearGauge tag helper.
 
-###### Example
-
     <kendo-lineargauge name="gauge"></kendo-lineargauge>
 
-## Configuration
+## Basic Configuration
 
 The LinearGauge tag helper configuration options are passed as attributes of the tag.
 
@@ -62,7 +64,5 @@ The LinearGauge tag helper configuration options are passed as attributes of the
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the LinearGauge Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/tag-helper)
+* [API Reference of the LinearGauge Helper for ASP.NET Core](/api/lineargauge)

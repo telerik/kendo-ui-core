@@ -1,14 +1,14 @@
 ---
 title: Scrolling
-page_title: Scrolling | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Learn how to enable the scrolling functionality of the Kendo UI Grid for ASP.NET Core."
+page_title: Scrolling | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Learn how to enable the scrolling functionality of the Telerik UI Grid for ASP.NET Core."
 slug: htmlhelpers_grid_aspnetcore_scrolling
 position: 6
 ---
 
 # Scrolling
 
-By default, the scrolling functionality of the Kendo UI Grid for ASP.NET Core is disabled.
+By default, the scrolling functionality of the Telerik UI Grid for ASP.NET Core is disabled.
 
 To control scrolling in the Grid, use the `Scrollable` property.
 
@@ -42,7 +42,7 @@ The `Endless` scrolling is suitable for limited number of records, because after
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
-* [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Virtual Scrolling by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/virtualization-remote-data)
+* [Endless Scrolling by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/endless-scrolling-remote)
+* [Scrolling of Frozen Columns in the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/frozen-columns)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

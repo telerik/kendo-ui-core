@@ -1,13 +1,13 @@
 ---
-title: Getting Started with CLI
-page_title: Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and Command line interface | Telerik UI for ASP.NET Core
+title: Getting Started on MacC OS
+page_title: Getting Started on Mac OS | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and the Command line interface."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /aspnet-core/getting-started/getting-started-linux, /aspnet-core/getting-started/getting-started-vscode
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
 position: 2
 ---
 
-# Getting Started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core and the Command Line Interface
+# Getting Started on Mac OS
 
 This article demonstrates how to configure an ASP.NET Core project to use Telerik UI for ASP.NET Core by using the command line interface.
 

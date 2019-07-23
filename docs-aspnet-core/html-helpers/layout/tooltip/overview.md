@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Tooltip | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Tooltip Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI Tooltip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/tooltip
 slug: htmlhelpers_tooltip_aspnetcore
 position: 1
@@ -9,17 +9,15 @@ position: 1
 
 # Tooltip HtmlHelper Overview
 
-The Tooltip HtmlHelper extension is a server-side wrapper for the [Kendo UI Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index) widget.
+The Telerik UI Tooltip HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Tooltip widget.
 
-It allows you to configure the Kendo UI Tooltip widget from server-side code. The [Tooltip](http://docs.telerik.com/kendo-ui/controls/layout/tooltip/overview) displays a popup hint for a given html element. Its content can be defined either as static text, or loaded dynamically via AJAX.
+The Tooltip displays a popup hint for a given html element. Its content can be defined either as static text or loaded dynamically with AJAX.
 
-For more information on the HtmlHelper, refer to the article on the [Tooltip HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/tooltip/overview).
+* [Demo page for the Tooltip](https://demos.telerik.com/aspnet-core/tooltip/index)
 
-## Basic Usage
+## Initializing the Tooltip
 
 The following example demonstrates how to define the Tooltip by using the Tooltip HtmlHelper.
-
-###### Example
 
 ```
    <span id="tooltip" class="k-button wider">Hover me!</span>
@@ -31,9 +29,9 @@ The following example demonstrates how to define the Tooltip by using the Toolti
     )
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the Tooltip HtmlHelper and how to get the Tooltip instance.
+The following example demonstrates the basic configuration of the Tooltip HtmlHelper.
 
 ```
     <span id="tooltip" class="k-button wider">
@@ -52,7 +50,7 @@ The following example demonstrates the basic configuration of the Tooltip HtmlHe
 
     <script type="text/javascript">
         $(function () {
-            //Notice that the Name() of the Tooltip is used to get its client-side instance.
+            // The Name() of the Tooltip is used to get its client-side instance.
             var tooltip = $("#tooltip").data("kendoTooltip");
             console.log(tooltip);
         });
@@ -60,12 +58,12 @@ The following example demonstrates the basic configuration of the Tooltip HtmlHe
 
 ```
 
+## Events
+
+For a complete example on basic Tooltip events, refer to the [demo on using the events of the Tooltip](https://demos.telerik.com/aspnet-core/tooltip/events).
+
 ## See Also
 
-* [JavaScript API Reference of the Tooltip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
-* [Tooltip HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/tooltip/overview)
-* [Tooltip Official Demos](http://demos.telerik.com/aspnet-core/tooltip/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Tooltip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip)
+* [Using the API of the Tooltip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/api)
+* [API Reference of the Tooltip HtmlHelper for ASP.NET Core](/api/tooltip)

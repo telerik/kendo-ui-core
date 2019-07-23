@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Accessibility Overview - Telerik UI for ASP.NET Core
+page_title: Accessibility Overview | Telerik UI for ASP.NET Core
 description: "General accessibility standards and keyboard navigation requirements for web applications and their support by Telerik UI for ASP.NET Core."
 slug: overview_accessibility
 position: 0
@@ -10,7 +10,7 @@ position: 0
 
 Websites and applications are accessible when they provide full control over their features by enabling users with disabilities to access their content by using assistive technologies or keyboard navigation.
 
-For the full list of components which support accessibility and keyboard navigation, refer to the article on [accessibility support by Kendo UI for Vue]({% slug compliance_accessibility %}).
+For the full list of components which support accessibility and keyboard navigation, refer to the article on [accessibility support by Telerik UI for ASP.NET Core]({% slug compliance_accessibility %}).
 
 ## Standards and Requirements
 

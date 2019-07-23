@@ -73,6 +73,12 @@ The following example demonstrates how to set the template as a function which r
     </script>
 ```
 
+## KB Articles on Column Templates
+
+* [Using Checkbox Column Templates and Editing]({% slug howto_use_checkbox_column_templateand_edit_grid %})
+* [Rendering a Grid Editor in the Column Template]({% slug howto_render_editor_column_template_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Using Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/rowtemplate)

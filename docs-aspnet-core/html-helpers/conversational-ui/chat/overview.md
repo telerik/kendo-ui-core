@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Chat | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Chat HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Chat Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI Chat HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/chat
 slug: htmlhelpers_chat_aspnetcore
 position: 1
@@ -9,41 +9,35 @@ position: 1
 
 # Chat HtmlHelper Overview
 
-The Chat HtmlHelper extension is a server-side wrapper for the [Kendo UI Chat](https://demos.telerik.com/kendo-ui/chat/index) widget.
+The Telerik UI Chat HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Chat widget.
 
-The Chat allows the user to participate in chat sessions with other users or with chat bots. The widget provides support for default [cards](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-cards) and [actions](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#default-actions), and enables the configuration of [custom templates](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-templates) and [custom components](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview#custom-components).
+The Chat allows the user to participate in chat sessions with other users or with chat bots. It provides support for default cards and actions, and enables the configuration of custom templates and custom components.
 
-For more information on new Chat features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
+* [Demo page for the Chat](https://demos.telerik.com/aspnet-core/chat/index)
 
-For more information on the HtmlHelper, refer to the article on the [Chat HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chat/overview).
-
-## Basic Usage
+## Initializing the Chat
 
 The following example demonstrates how to define the Chat by using the Chat HtmlHelper.
 
-###### Example
-
     @(Html.Kendo().Chat()
-        //The name of the Chat is mandatory.
-        //It specifies the "id" and the "name" attributes of the widget.
+        // The name of the Chat is mandatory.
+        // It specifies the "id" and the "name" attributes of the widget.
         .Name("chat")
     )
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the configuration options that are available for the Chat HtmlHelper.
-
-###### Example
+The following example demonstrates the available configuration options supported by the Chat HtmlHelper.
 
 ```
     @(Html.Kendo().Chat()
         .Name("chat")
-        // The Chat User configuration
+        // The user configuration of the Chat.
         .User(u => u
             .Name("ChatBot Name")
             .IconUrl("https://demos.telerik.com/kendo-ui/content/chat/avatar.png")
         )
-        // Attaching the event handlers
+        // Attach the event handlers.
         .Events(e => e
             .Post("onPost")
             .ActionClick("onActionClick")
@@ -51,19 +45,18 @@ The following example demonstrates the configuration options that are available 
             .TypingStart("onTypingStart")
             .TypingEnd("onTypingEnd")
         )
-        // Configuring the Placeholder message
+        // Configure the placeholder message.
         .Messages(m => m
             .Placeholder("Type your message")
         )
     )
 ```
 
+## Functionality and Features
+
+The Chat provides an option for creating a [Peer-to-Peer Chat application by using SignalR]({% slug htmlhelpers_chat_aspnetcore_signalr %}).   
+
 ## See Also
 
-* [Overview of the Chat TagHelper for .Net Core]({% slug taghelpers_chat_aspnetcore %})
-* [Overview of the Kendo UI Chat Widget](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)
-* [JavaScript API Reference of the Chat](http://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
-* [Chat HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/chat/overview)
-* [Telerik UI for ASP.NET MVC API Reference: ChatBuilder](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ChatBuilder)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Chat HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chat/index)
+* [API Reference of the Chat HtmlHelper for ASP.NET Core](/api/chat)

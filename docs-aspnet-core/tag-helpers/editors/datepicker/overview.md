@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: DatePicker | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI DatePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: DatePicker Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI DatePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/date-picker, /aspnet-core/helpers/tag-helpers/date-picker
 slug: taghelpers_datepicker_aspnetcore
 position: 1
@@ -9,17 +9,19 @@ position: 1
 
 # DatePicker Tag Helper Overview
 
-The DatePicker tag helper helps you configure the Kendo UI DatePicker widget in ASP.NET Core applications.
+The Telerik UI DatePicker tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI DatePicker widget.
 
-## Basic Usage
+The DatePicker enables the user to enter or pick a date value.
+
+* [Demo page for the DatePicker](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
+
+## Initializing the DatePicker
 
 The following example demonstrates how to define the DatePicker by using the DatePicker tag helper.
 
-###### Example
+      <kendo-datepicker name="datepicker1"></kendo-datepicker>
 
-        <kendo-datepicker name="datepicker1"></kendo-datepicker>
-
-## Configuration
+## Basic Configuration
 
 The DatePicker tag helper configuration options are passed as attributes of the tag.
 
@@ -40,12 +42,7 @@ The DatePicker tag helper configuration options are passed as attributes of the 
         </kendo-datepicker>
 ```
 
-The `ParseFormats` option is of type `string[]` and can be assigned either:
-
-* By a `ViewBag` property, or
-* By a property of the model.
-
-    ###### Example
+The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property or by a property of the model.
 
         @{
             ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
@@ -55,7 +52,5 @@ The `ParseFormats` option is of type `string[]` and can be assigned either:
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the DatePicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
+* [API Reference of the DatePicker Helper for ASP.NET Core](/api/datepicker)

@@ -55,8 +55,12 @@ As of the Kendo UI 2017 R3 release, the Grid enables you to toggle the visibilit
 
 For a runnable example, refer to the [demo on controlling the pager visibility in the Grid](https://demos.telerik.com/kendo-ui/grid/pager-visibility).
 
+## KB Articles on Paging
+
+* [Changing the Grid Pager to Slider]({% slug howto_change_grid_pager_to_slider %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Pager Visibility by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/pager-visibility)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Knowledge Base Section](/knowledge-base)

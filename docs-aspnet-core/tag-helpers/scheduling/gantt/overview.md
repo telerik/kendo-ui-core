@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Gantt | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Gantt Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/gantt
 slug: taghelpers_gantt_aspnetcore
 position: 1
@@ -9,13 +9,15 @@ position: 1
 
 # Gantt Tag Helper Overview
 
-The Gantt tag helper helps you configure the Kendo UI Gantt widget in ASP.NET Core applications.
+The Telerik UI Gantt tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Gantt widget.
 
-## Basic Usage
+The Gantt displays a set of tasks and dependencies which are used to visualize project-planning data. It provides a TreeList section where the user can edit the tasks, and sort and reorder them in a grid-like fashion, and a Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in the day, week, and month views.
+
+* [Demo page for the Gantt](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+
+## Initializing the Gantt
 
 The following example demonstrates how to define the Gantt by using the Gantt tag helper.
-
-###### Example
 
     <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700">
         <columns>
@@ -49,13 +51,9 @@ The following example demonstrates how to define the Gantt by using the Gantt ta
         </gantt-datasource>
     </kendo-gantt>
 
-## Configuration
-
-### Basic configurations
+## Basic Configuration
 
 With the attributes and inner tags you can define the columns, views, DataSource, messages, range and all other widget options available from the [API of the Gantt widget](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt).
-
-###### Example
 
     <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700">
         <tooltip visible="false" />
@@ -74,187 +72,11 @@ With the attributes and inner tags you can define the columns, views, DataSource
         </views>
     </kendo-gantt>
 
-### Data Binding
+## Functionality and Features
 
-Just like with the Gantt widget, the Gantt tag helper enables you to setup the DataSource instances for the data, dependencies, resources and assignments.
-
-###### Example
-
-    <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700">
-        <columns>
-            <gantt-column field="title" title="Title" editable="true" sortable="true"></gantt-column>
-            <gantt-column field="resources" title="Assigned Resources" editable="true" sortable="true"></gantt-column>
-        </columns>
-        <views>
-            <gantt-view type="GanttViewType.Day"></gantt-view>
-            <gantt-view type="GanttViewType.Week"></gantt-view>
-            <gantt-view type="GanttViewType.Month" selected="true"></gantt-view>
-        </views>
-        <gantt-datasource type="DataSourceTagHelperType.Ajax">
-            <transport>
-                <read url="@Url.Action("ReadTasks","Gantt")" />
-                <destroy url="@Url.Action("DestroyTask","Gantt")" />
-                <update url="@Url.Action("UpdateTask","Gantt")" />
-                <create url="@Url.Action("CreateTask","Gantt")" />
-            </transport>
-            <schema>
-                <model id="TaskID">
-                    <fields>
-                        <field name="TaskID" type="number"></field>
-                        <field name="parentId" from="ParentID" type="number"></field>
-                        <field name="title" from="Title" type="string"></field>
-                        <field name="start" from="Start" type="date"></field>
-                        <field name="end" from="End" type="date"></field>
-                        <field name="summary" from="Summary" type="boolean"></field>
-                        <field name="expanded" from="Expanded" type="boolean" default-value="true"></field>
-                        <field name="percentComplete" from="PercentComplete" type="number"></field>
-                        <field name="orderId" from="OrderId" type="number"></field>
-                    </fields>
-                </model>
-            </schema>
-        </gantt-datasource>
-        <dependency-datasource name="dependencies" type="DataSourceTagHelperType.Ajax">
-            <transport>
-                <read url="@Url.Action("ReadDependencies", "Gantt")" />
-                <create url="@Url.Action("CreateDependency", "Gantt")" />
-                <destroy url="@Url.Action("DestroyDependency", "Gantt")" />
-            </transport>
-            <schema>
-                <model id="DependencyID">
-                    <fields>
-                        <field name="DependencyID" type="number"></field>
-                        <field name="predecessorId" from="PredecessorID" type="number"></field>
-                        <field name="successorId" from="SuccessorID" type="number"></field>
-                        <field name="type" from="Type" type="number"></field>
-                    </fields>
-                </model>
-            </schema>
-        </dependency-datasource>
-        <resources field="resources" datacolorfield="Color" datatextfield="Name">
-            <datasource type="DataSourceTagHelperType.Custom">
-                <schema data="Data">
-                    <model id="ID"></model>
-                </schema>
-                <transport>
-                    <read url="@Url.Action("ReadResources", "Gantt")" />
-                </transport>
-            </datasource>
-        </resources>
-        <assignments datataskidfield="TaskID" dataresourceidfield="ResourceID" datavaluefield="Units">
-            <datasource type="DataSourceTagHelperType.Ajax">
-                <schema>
-                    <model id="ID">
-                        <fields>
-                            <field name="ID" type="number"></field>
-                            <field name="TaskID" type="number"></field>
-                            <field name="ResourceID" type="number"></field>
-                            <field name="Units" type="number"></field>
-                        </fields>
-                    </model>
-                </schema>
-                <transport>
-                    <read url="@Url.Action("ReadAssignments", "Gantt")" />
-                    <create url="@Url.Action("CreateAssignment", "Gantt")" />
-                    <destroy url="@Url.Action("DestroyAssignment", "Gantt")" />
-                    <update url="@Url.Action("UpdateAssignment", "Gantt")" />
-                </transport>
-            </datasource>
-        </assignments>
-    </kendo-gantt>
-
-You can also use external DataSource tag helpers to implement the same and assign their names to the corresponding fields.
-
-###### Example
-
-    <kendo-ganttdatasource name="ganttdatasource" type="DataSourceTagHelperType.Ajax">
-        <transport>
-            <read url="@Url.Action("ReadTasks","Gantt")" />
-            <destroy url="@Url.Action("DestroyTask","Gantt")" />
-            <update url="@Url.Action("UpdateTask","Gantt")" />
-            <create url="@Url.Action("CreateTask","Gantt")" />
-        </transport>
-        <schema>
-            <model id="TaskID">
-                <fields>
-                    <field name="TaskID" type="number"></field>
-                    <field name="parentId" from="ParentID" type="number"></field>
-                    <field name="title" from="Title" type="string"></field>
-                    <field name="start" from="Start" type="date"></field>
-                    <field name="end" from="End" type="date"></field>
-                    <field name="summary" from="Summary" type="boolean"></field>
-                    <field name="expanded" from="Expanded" type="boolean" default-value="true"></field>
-                    <field name="percentComplete" from="PercentComplete" type="number"></field>
-                    <field name="orderId" from="OrderId" type="number"></field>
-                </fields>
-            </model>
-        </schema>
-    </kendo-ganttdatasource>
-
-    <kendo-ganttdependencydatasource name="ganttdependencydatasource" type="DataSourceTagHelperType.Ajax">
-        <transport>
-            <read url="@Url.Action("ReadDependencies", "Gantt")" />
-            <create url="@Url.Action("CreateDependency", "Gantt")" />
-            <destroy url="@Url.Action("DestroyDependency", "Gantt")" />
-        </transport>
-        <schema>
-            <model id="DependencyID">
-                <fields>
-                    <field name="DependencyID" type="number"></field>
-                    <field name="predecessorId" from="PredecessorID" type="number"></field>
-                    <field name="successorId" from="SuccessorID" type="number"></field>
-                    <field name="type" from="Type" type="number"></field>
-                </fields>
-            </model>
-        </schema>
-    </kendo-ganttdependencydatasource>
-
-    <kendo-datasource name="resourcesdatasource" type="DataSourceTagHelperType.Custom">
-        <schema data="Data">
-            <model id="ID"></model>
-        </schema>
-        <transport>
-            <read url="@Url.Action("ReadResources", "Gantt")" />
-        </transport>
-    </kendo-datasource>
-
-    <kendo-datasource name="assignmentsdatasource" type="DataSourceTagHelperType.Ajax">
-        <schema>
-            <model id="ID">
-                <fields>
-                    <field name="ID" type="number"></field>
-                    <field name="TaskID" type="number"></field>
-                    <field name="ResourceID" type="number"></field>
-                    <field name="Units" type="number"></field>
-                </fields>
-            </model>
-        </schema>
-        <transport>
-            <read url="@Url.Action("ReadAssignments", "Gantt")" />
-            <create url="@Url.Action("CreateAssignment", "Gantt")" />
-            <destroy url="@Url.Action("DestroyAssignment", "Gantt")" />
-            <update url="@Url.Action("UpdateAssignment", "Gantt")" />
-        </transport>
-    </kendo-datasource>
-
-    <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700" datasource-id="ganttdatasource" dependancy-datasource-id="ganttdependencydatasource">
-        <columns>
-            <gantt-column field="title" title="Title" editable="true" sortable="true"></gantt-column>
-            <gantt-column field="resources" title="Assigned Resources" editable="true" sortable="true"></gantt-column>
-        </columns>
-        <views>
-            <gantt-view type="GanttViewType.Day"></gantt-view>
-            <gantt-view type="GanttViewType.Week"></gantt-view>
-            <gantt-view type="GanttViewType.Month" selected="true"></gantt-view>
-        </views>
-        <resources field="resources" datacolorfield="Color" datatextfield="Name" datasource-id="resourcesdatasource">
-        </resources>
-        <assignments datataskidfield="TaskID" dataresourceidfield="ResourceID" datavaluefield="Units" datasource-id="assignmentsdatasource">
-        </assignments>
-    </kendo-gantt>
+The Gantt provides options for [binding it to data]({% slug binding_gantt_aspnetcore %}).
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Gantt Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+* [API Reference of the Gantt Helper for ASP.NET Core](/api/gantt)

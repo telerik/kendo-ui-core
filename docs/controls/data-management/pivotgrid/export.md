@@ -14,9 +14,9 @@ As of the Kendo UI 2015 Q1 release and later, the PivotGrid provides a built-in 
 
 PDF export is enabled by default when `kendo.all.min.js`, `kendo.web.min.js`, or a custom build that includes PDF scripts are loaded on the page. To set up PDF export, refer to [the PDF configuration option](/api/javascript/ui/pivotgrid/configuration/pdf).
 
-> **Important**
->
-> Exporting in older browsers, such as Internet Explorer 9 or Safari, requires the implementation of a server proxy. For more information, refer to the [`proxyUrl` configuration sections](/api/javascript/ui/pivotgrid/configuration/pdf).
+### PDF Customization
+
+To customize the appearance of the exported PDF file, refer to the articles on the [PDF output by the Kendo UI Drawing library]({% slug customizingappearance_drawing %}).
 
 ## Excel Export
 
@@ -97,3 +97,4 @@ Internet Explorer 10 or older versions and Safari do not support the option of f
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
 * [How-To Examples]({% slug howto_change_pivotgrid_fields_names_pivotgrid %})
 * [Knowledge Base Section](/knowledge-base)
+* [PDF Export Known Limitations]({% slug supportedbrowsers_drawingapi %})

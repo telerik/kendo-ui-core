@@ -1,18 +1,18 @@
 ---
 title: Custom Data Binding
-page_title: Custom Data Binding | Kendo UI ComboBox HtmlHelper for ASP.NET Core
-description: "Learn how to implement custom ToDataSourceResult data binding in the Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Custom Data Binding | Telerik UI ComboBox HtmlHelper for ASP.NET Core
+description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_combobox_todatasourceresultbinding_aspnetcore
 position: 4
 ---
 
 # Custom Data Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI ComboBox to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
+You can configure the Telerik UI ComboBox for data binding to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
+
+For a runnable example, refer to the [demo on customizing the data source of the ComboBox](https://demos.telerik.com/aspnet-core/combobox/custom-datasource).
 
 1. Create an action method which renders the view.
-
-    ###### Example
 
         public IActionResult Index()
         {
@@ -20,8 +20,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
         }
 
 1. Create a new action method and pass the **Products** table as JSON result.
-
-    ###### Example
 
         public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
         {
@@ -32,12 +30,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 1. Add an Ajax-bound ComboBox.
 
-    ###### Example
-
         @(Html.Kendo().ComboBox()
-            .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
+            .Name("productComboBox") // The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") // Specify which property of the Product to be used by the ComboBox as a text.
+            .DataValueField("ProductID") // Specify which property of the Product to be used by the ComboBox as a value.
             .DataSource(source =>
             {
                 source.Custom()
@@ -49,14 +45,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
                         })
                         .Schema(schema =>
                         {
-                            schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                            schema.Data("Data") // Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                                .Total("Total"); // Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
                         });
             })
         )
 
 ## See Also
 
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-* [ComboBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/combobox/overview)
-* [ComboBox Official Demos](http://demos.telerik.com/aspnet-core/combobox/index)
+* [Customizing the Data Source of the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/custom-datasource)
+* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)

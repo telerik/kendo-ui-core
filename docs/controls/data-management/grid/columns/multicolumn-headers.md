@@ -38,6 +38,11 @@ The previous example results in the following output.
 
 <img src="multicolumn-headers.png">
 
+## KB Articles on Column Headers
+
+* [Hiding Columns on Clicking the Headers and Restore Them on Clicking a Button]({% slug howto_hide_columns_and_subcolumns_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Implementing Multi-Column Headers in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders)

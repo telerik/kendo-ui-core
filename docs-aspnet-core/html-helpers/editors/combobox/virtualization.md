@@ -1,7 +1,7 @@
 ---
 title: Virtualization
-page_title: Virtualization | Kendo UI ComboBox HtmlHelper for ASP.NET Core
-description: "Learn how to setup the Virtualization feature of the Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Virtualization | Telerik UI ComboBox HtmlHelper for ASP.NET Core
+description: "Learn how to setup the Virtualization feature of the Telerik UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_combobox_virtualization_aspnetcore
 position: 5
 ---
@@ -10,15 +10,11 @@ position: 5
 
 Virtualization is useful for displaying large data sets.
 
-The UI virtualization technique uses a fixed amount of list items in the popup list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones. For more information, refer to the article on [virtualization in the ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization).
+The UI virtualization technique uses a fixed amount of list items in the popup list of the widget regardless of the dataset size. When the list is scrolled, the widget reuses the existing items to display the relevant data instead of creating new ones. For a runnable example, refer to the [demo on virtualization in the ComboBox](https://demos.telerik.com/aspnet-core/combobox/virtualization).
 
-> **Important**
->
-> As value types to which the ComboBox can be bound, the widget accepts only primitive types or enum values.  
+> The ComboBox supports binding to primitive or enum value types.  
 
 1. Create the `Read` and `ValueMapper` actions.
-
-    ###### Example
 
             public IActionResult Index()
             {
@@ -69,8 +65,6 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             }
 
 1. Add a ComboBox to the view and configure it to use virtualization.
-
-    ###### Example
 
             @model MvcApplication1.Models.ProductViewModel
 
@@ -126,19 +120,16 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
 1. If the `AutoBind` option of the ComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 
-    ###### Example
-
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().ComboBoxFor(m => m.ProductID)
             .AutoBind(false)
             .Text(Model.ProductName)
             .DataTextField("ProductName")
-            //...additional configuration
+            // Additional configuration.
         )
 
 ## See Also
 
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-* [ComboBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/combobox/overview)
-* [ComboBox Official Demos](http://demos.telerik.com/aspnet-core/combobox/index)
+* [Virtualization by the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/virtualization)
+* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)

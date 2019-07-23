@@ -1,7 +1,7 @@
 ---
 title: Dimensions
-page_title: Dimensions | Kendo UI Window HtmlHelper for ASP.NET Core
-description: "Learn how to configure the dimensions of the Kendo UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Dimensions | Telerik UI Window HtmlHelper for ASP.NET Core
+description: "Learn how to configure the dimensions of the Telerik UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_window_dimensions_aspnetcore
 position: 2
 ---
@@ -13,8 +13,6 @@ By default, the Window HtmlHelper does not have any pre-set dimensions and its s
 ## Manual Size Control
 
 Apart from the automatic size calculation, you can explicitly set the `Width()` and the `Height()` of the HtmlHelper in pixels.
-
-###### Example
 
     @(Html.Kendo().Window()
         .Name("window")
@@ -32,8 +30,6 @@ Apart from the automatic size calculation, you can explicitly set the `Width()` 
 
 The Window HTML helper also allows configuration for its `min` and `max` dimensions (height and width).
 
-###### Example
-
     @(Html.Kendo().Window()
         .Name("window")
         .Title("Alvar Aalto")
@@ -50,7 +46,7 @@ The Window HTML helper also allows configuration for its `min` and `max` dimensi
         </text>)
     )
 
-## Size Adjustment Based on Content
+## Adjusting the Size Depending on Content
 
 If the Window contains horizontally expandable block-level elements&mdash;including other HtmlHelpers such as the Grid, Editor, and others&mdash;the widget can expand horizontally to the point of touching the right edge of the browser viewport. In such cases, the widget sticks to the right viewport edge and cannot be separated from it. This issue occurs because the Window is absolutely positioned with CSS. To avoid such behavior, set an appropriate width to the widget, or a (max-)width to its content.
 
@@ -60,9 +56,4 @@ If the Window uses an `iframe` element, it does not resize automatically accordi
 
 ## See Also
 
-* [Overview of Window HTML helper]({% slug htmlhelpers_window_aspnetcore %})
-* [Positioning]({% slug htmlhelpers_window_positioning_aspnetcore %})
-* [Constraining Position]({% slug htmlhelpers_window_constrain_aspnetcore %})
-* [Loading Content]({% slug htmlhelpers_window_loadingcontent_aspnetcore %})
-* [Using iframe]({% slug htmlhelpers_window_iframe_aspnetcore %})
-* [Integration with Forms]({% slug htmlhelpers_window_forms_aspnetcore %})
+* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)

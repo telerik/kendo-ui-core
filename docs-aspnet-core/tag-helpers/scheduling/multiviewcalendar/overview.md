@@ -1,24 +1,23 @@
 ---
 title: Overview
-page_title: MultiViewCalendar | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI MultiViewCalendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI MultiViewCalendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_multiviewcalendar_taghelper_aspnetcore
 position: 1
 ---
 
 # MultiViewCalendar Tag Helper Overview
 
-The MultiViewCalendar Tag Helper extension is a server-side wrapper for the [Kendo UI MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/index) widget.
+The Telerik UI MultiViewCalendar tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiViewCalendar widget.
 
-## Configuration
+The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultiViewCalendar.
+* [Demo page for the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar/tag-helper)
+
+## Initializing the MultiViewCalendar
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET Core](https://docs.telerik.com/aspnet-core/introduction).
-
 1. Create a new action method which renders the view.
-
-###### Example
 
             public ActionResult Index()
             {
@@ -27,8 +26,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 1. Add a MultiViewCalendar.
 
-###### Example
-
 ```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar"
@@ -36,7 +33,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                              max="new DateTime(2010, 1, 1, 20, 0, 0)"
                              value="DateTime.Now">
     </kendo-multiviewcalendar>
-
 ```
 ```Razor
 
@@ -58,15 +54,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 * [Week column]({% slug week_column_multiviewcalendar_taghelper_aspnetcore %})
 * [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar_taghelper_aspnetcore %})
 
-## Event Handling
+## Events
 
-You can subscribe to all MultiViewCalendar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar#events).
-
-### By Handler Name
+You can subscribe to all MultiViewCalendar events.
 
 The following example demonstrates how to subscribe to events by a handler name.
-
-###### Example
 
 ```tagHelper
 
@@ -74,11 +66,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-multiviewcalendar>
     <script>
         function calendar_navigate() {
-            //Handle the navigate event.
+            // Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 
@@ -94,18 +86,16 @@ The following example demonstrates how to subscribe to events by a handler name.
         )
         <script>
         function calendar_navigate() {
-            //Handle the navigate event.
+            // Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
         </script>
 ```
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the MultiViewCalendar Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/tag-helper)
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

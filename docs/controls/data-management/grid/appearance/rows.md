@@ -65,7 +65,12 @@ However, if your project requires you to avoid the `hover` state, use either of 
     }
     ```
 
+## KB Articles on Rows
+
+* [Customizing Rows and Cells Based on Data Item Values]({% slug howto_customize_rowsand_cells_basedon_dataitem_values_grid %})
+* [Allowing Single Rows in Master Grids to be Expanded]({% slug howto_allowonlyasingleexpandedrow_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Kendo UI Knowledge Base](/knowledge-base)

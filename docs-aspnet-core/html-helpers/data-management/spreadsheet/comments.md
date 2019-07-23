@@ -1,7 +1,7 @@
 ---
 title: Comments
 page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Define comments in cells in a Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Define comments in cells in a Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_comments_aspnetcore
 position: 2
 ---
@@ -10,11 +10,7 @@ position: 2
 
 The Spreadsheet offers support for comments to be placed within each of its cells.
 
-## Configuration
-
-The example below demonstrates how a cell in the Spreadsheet can be initially [configured to contain a comment](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.comment):
-
-###### Example
+The following example demonstrates how a cell in the Spreadsheet can be initially [configured to contain a comment](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.rows.cells.comment).
 
 ```
     @(Html.Kendo().Spreadsheet()
@@ -43,6 +39,4 @@ The example below demonstrates how a cell in the Spreadsheet can be initially [c
 
 ## See Also
 
-* [Overview of the Spreadsheet HtmlHelper]({% slug htmlhelpers_spreadsheet_aspnetcore %})
-* [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [Spreadsheet Official Demos](http://demos.telerik.com/aspnet-core/spreadsheet/index)
+* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)

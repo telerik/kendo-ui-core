@@ -1,16 +1,15 @@
 ---
-title: Close ToolBar Popup Manually
-page_title: ToolBar | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to close the ToolBar popup manually with the Kendo UI ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+title: Manual Closing
+page_title: Manual Closing | Telerik UI ToolBar HtmlHelper for ASP.NET Core
+description: "Learn how to close the ToolBar popup manually with the Telerik UI ToolBar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_toolbar_popup_manual_close_aspnetcore
-position: 2
+position: 3
 ---
 
-# Close ToolBar Popup Manually
+# Manual Closing
 
-The example below demonstrates how to close the Kendo UI ToolBar popup from a button `click` event in a template.
+The ToolBar provides options for closing its popup from a button `click` event in a template.
 
-###### Example
 ```Razor
 @(Html.Kendo().ToolBar()
                 .Name("toolbar")
@@ -38,3 +37,7 @@ The example below demonstrates how to close the Kendo UI ToolBar popup from a bu
         }
     }
 ```
+
+## See Also
+
+* [API Reference of the ToolBar HtmlHelper for ASP.NET Core](/api/toolbar)

@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: MultiSelect | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI MultiSelect tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: MultiSelect Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI MultiSelect tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/multiselect, /aspnet-core/helpers/tag-helpers/multiselect
 slug: taghelpers_multiselect_aspnetcore
 position: 1
@@ -9,17 +9,19 @@ position: 1
 
 # MultiSelect Tag Helper Overview
 
-The MultiSelect tag helper helps you configure the Kendo UI MultiSelect widget in ASP.NET Core applications.
+The Telerik UI MultiSelect tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiSelect widget.
 
-## Basic Usage
+The MultiSelect displays a list of options and allows multiple selections from this list. The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
+
+* [Demo page for the MultiSelect](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
+
+## Initializing the MultiSelect
 
 The following example demonstrates how to define the MultiSelect by using the MultiSelect tag helper.
 
-###### Example
+      <kendo-multiselect name="products" filter="FilterType.StartsWith"></kendo-multiselect>
 
-        <kendo-multiselect name="products" filter="FilterType.StartsWith"></kendo-multiselect>
-
-## Configuration
+## Basic Configuration
 
 The MultiSelect tag helper configuration options are passed as attributes of the tag.
 
@@ -53,7 +55,5 @@ The MultiSelect tag helper configuration options are passed as attributes of the
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the MultiSelect Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
+* [API Reference of the MultiSelect Helper for ASP.NET Core](/api/multiselect)

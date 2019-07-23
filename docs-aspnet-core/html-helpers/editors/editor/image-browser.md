@@ -1,7 +1,7 @@
 ---
 title: Image Browser
-page_title: Editor Image Browser | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn about the Image Browser component of the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Editor Image Browser | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn about the Image Browser component of the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_image_browser_aspnetcore
 position: 6
 ---
@@ -10,15 +10,9 @@ position: 6
 
 By default, the `Insert Image` tool opens a simple dialog that allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
-The Editor also supports another way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
+The Editor also supports another way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported. For a runnable example, refer to the [demo on file and image browser in the Editor](https://demos.telerik.com/aspnet-core/editor/imagebrowser).
 
-## Configuration
-
-To retrieve and upload the files and directories, the image browser needs a server-side implementation.
-
-To configure the image browser tool, use the [`ImageBrowser()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#imagebrowsersystemactionkendomvcuifluenteditorimagebrowsersettingsbuilder) method.
-
-###### Example
+To retrieve and upload the files and directories, the image browser needs a server-side implementation. To configure the image browser tool, use the [`ImageBrowser()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#imagebrowsersystemactionkendomvcuifluenteditorimagebrowsersettingsbuilder) method.
 
 ```
 @(Html.Kendo().Editor()
@@ -73,10 +67,5 @@ You can update all of these requests and responses through the [`ImageBrowser()`
 
 ## See Also
 
-* [Overview of the Editor HtmlHelper]({% slug htmlhelpers_editor_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
-* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
-* [Pasting Content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Serialize / Deserialize Content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
-* [Immutable Elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
-* [Styling Content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+* [File and Image Browser by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/imagebrowser)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

@@ -1,18 +1,16 @@
 ---
 title: Multiple Views
-page_title: Multiple Views | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Control the visible date ranges in the Kendo UI MultiViewCalendar and manage the number of its horizontally rendered views."
+page_title: Multiple Views | Telerik UI MultiViewCalendar Tag for ASP.NET Core
+description: "Control the visible date ranges in the Telerik UI MultiViewCalendar and manage the number of its horizontally rendered views."
 slug: multiple_views_multiviewcalendar_taghelper_aspnetcore
 position: 3
 ---
 
 # Multiple Views
 
-The Kendo UI MultiViewCalendar allows you to define the number of views and months that are displayed at a time.
+The Telerik UI MultiViewCalendar allows you to define the number of views and months that are displayed at a time.
 
 In some scenarios it might be necessary to display more than two months. This is especially helpful when performing range selection between months.
-
-###### Example
 
 ```tagHelper
 
@@ -63,12 +61,8 @@ In some scenarios it might be necessary to display more than two months. This is
                 }
             }
         </script>
-
 ```
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

@@ -1,7 +1,7 @@
 ---
 title: List of Formulas and Functions
 page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
-description: "A list of the formulas and functions available in the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "A list of the formulas and functions available in the Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_list_of_formulas_aspnetcore
 position: 2
 ---
@@ -271,7 +271,7 @@ For more information on how to create formulas and what their syntax is, see the
 
 ## Array Formulas
 
-Similar to Excel, the Kendo UI Spreadsheet supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US) which return a matrix of values. You have to enter them in the same way as in Excel&mdash;by pre-selecting the target range and pressing `Ctrl`+`Shift`+`Enter` to save the formula.
+Similar to Excel, the Spreadsheet supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US) which return a matrix of values. You have to enter them in the same way as in Excel&mdash;by pre-selecting the target range and pressing `Ctrl`+`Shift`+`Enter` to save the formula.
 
 ## See Also
 

@@ -1,119 +1,113 @@
 ---
 title: Overview
-page_title: StockChart | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI StockChart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: StockChart Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI StockChart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_stockcharthelper_aspnetcore
 position: 1
 ---
 
 # StockChart HtmlHelper Overview
 
-The StockChart HtmlHelper extension is a server-side wrapper for the [Kendo UI StockChart](https://demos.telerik.com/kendo-ui/financial/index) widget.
+The Telerik UI StockChart HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI StockChart widget.
 
-## Getting Started
+The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time.
 
-### Binding
+* [Demo page for the StockChart](https://demos.telerik.com/aspnet-core/financial/index)
 
-The UI for ASP.NET StockChart makes Ajax requests when bound to a data source.
+## Basic Configuration
 
-## Configuration
+The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data source and has to be configured for Ajax binding.
 
-Below are steps for you to follow when configuring the Kendo UI StockChart for ASP.NET MVC for Ajax binding.
+1. Add the new action method.
 
-### Add a New Action Method
+  The following example demonstrates how to add a new action method which returns data to populate the StockChart.
 
-Add a new action method which returns data to populate the StockChart.
+        ```Razor
+            @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+                .Name("stockChart")
+                .Title("The Boeing Company (NYSE:BA)")
+                .DataSource(ds => ds.Read(read => read
+                    .Action("_BoeingStockData", "Home")
+                ))
+                .DateField("Date")
+            )
+        ```
+        ```Model
+            public class StockDataPoint
+            {
+                public DateTime Date { get; set; }
 
-```Razor
-    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-        .Name("stockChart")
-        .Title("The Boeing Company (NYSE:BA)")
-        .DataSource(ds => ds.Read(read => read
-            .Action("_BoeingStockData", "Home")
-        ))
-        .DateField("Date")
-    )
-```
-```Model
-    public class StockDataPoint
-    {
-        public DateTime Date { get; set; }
+                public decimal Close { get; set; }
 
-        public decimal Close { get; set; }
+                public long Volume { get; set; }
 
-        public long Volume { get; set; }
+                public decimal Open { get; set; }
 
-        public decimal Open { get; set; }
+                public decimal High { get; set; }
 
-        public decimal High { get; set; }
+                public decimal Low { get; set; }
 
-        public decimal Low { get; set; }
+                public string Symbol { get; set; }
+            }
+        ```
+        ```HomeController
+            public IActionResult Index()
+            {
+                return View();
+            }
 
-        public string Symbol { get; set; }
-    }
-```
-```HomeController
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult _BoeingStockData()
-    {
-        using (var db = GetContext())
-        {
-            // Return the data as JSON.
-            return Json(
-                (from s in db.Stocks
-                where s.Symbol == "BA"
-                select new StockDataPoint
+            public IActionResult _BoeingStockData()
+            {
+                using (var db = GetContext())
                 {
-                    Date = s.Date,
-                    Open = s.Open,
-                    High = s.High,
-                    Low = s.Low,
-                    Close = s.Close,
-                    Volume = s.Volume
-                }).ToList()
-            );
-        }
-    }
-```
+                    // Return the data as JSON.
+                    return Json(
+                        (from s in db.Stocks
+                        where s.Symbol == "BA"
+                        select new StockDataPoint
+                        {
+                            Date = s.Date,
+                            Open = s.Open,
+                            High = s.High,
+                            Low = s.Low,
+                            Close = s.Close,
+                            Volume = s.Volume
+                        }).ToList()
+                    );
+                }
+            }
+        ```
 
-### Create the Data Series
+1. Create the data series.
 
-Create the main and navigator data series.
+    The following example demonstrates how to create the main and the navigator data series.
 
-###### Example
+        ```
+            @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+                .Name("stockChart")
+                .Title("The Boeing Company (NYSE:BA)")
+                .DataSource(ds => ds.Read(read => read
+                    .Action("_BoeingStockData", "Home")
+                ))
+                .DateField("Date")
+                        .Series(series => {
+                    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+                })
+                .Navigator(nav => nav
+                    .Series(series => {
+                        series.Line(s => s.Volume);
+                    })
+                )
+            )
+        ```
 
-```
-    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-        .Name("stockChart")
-        .Title("The Boeing Company (NYSE:BA)")
-        .DataSource(ds => ds.Read(read => read
-            .Action("_BoeingStockData", "Home")
-        ))
-        .DateField("Date")
-                .Series(series => {
-            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-        })
-        .Navigator(nav => nav
-            .Series(series => {
-                series.Line(s => s.Volume);
-            })
-        )
-    )
-```
-
-## Event Handling
+## Events
 
 You can subscribe to all StockChart [events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#events).
 
-### By Handler Name
+### Handling Events by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
-
-###### Example
 
 ```
     @(Html.Kendo().StockChart(Model)
@@ -131,20 +125,18 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function stockChart_dataBound(e) {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function stockChart_seriesClick(e) {
-            //Handle the seriesClick event.
+            // Handle the seriesClick event.
         }
     </script>
 ```
 
-### By Template Delegate
+### Handling Events by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
 ```
     @(Html.Kendo().StockChart(Model)
@@ -169,25 +161,19 @@ The following example demonstrates how to subscribe to events by a template dele
     )
 ```
 
-## Reference
-
-### Existing Instances
+## Referencing Existing Instances
 
 To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI StockChart for ASP.NET Core declaration.
+    // Place the following after the declaration of the Barcode for ASP.NET Core.
     <script>
         $(function() {
-            // Notice that the Name() of the StockChart is used to get its client-side instance.
+            // The Name() of the StockChart is used to get its client-side instance.
             var chart = $("#stockChart").data("kendoStockChart");
         });
     </script>
 
 ## See Also
 
-* [Overview of the Kendo UI StockChart Widget](https://docs.telerik.com/kendo-ui/controls/charts/stockchart/overview)
-* [Telerik UI for ASP.NET Core StockChart live demos](https://demos.telerik.com/aspnet-core/financial/index)
-* [Overview of the Telerik UI for ASP.NET Core charts]({% slug htmlhelpers_charts_aspnetcore %})
-* [Overview of the Telerik UI for ASP.NET Core TreeMap]({% slug overview_treemaphelper_aspnetcore %})
+* [Basic Usage of the StockChart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/financial/index)
+* [API Reference of the StockChart HtmlHelper for ASP.NET Coret](/api/stock-chart)

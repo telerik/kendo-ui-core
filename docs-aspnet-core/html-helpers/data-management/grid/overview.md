@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Grid | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Grid Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/grid
 slug: htmlhelpers_grid_aspnetcore_overview
 position: 1
@@ -9,17 +9,15 @@ position: 1
 
 # Grid HtmlHelper Overview
 
-The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index) widget.
+The Telerik UI Grid HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Grid widget.
 
-It enables you to configure the Kendo UI Grid widget from server-side code and helps with data binding and editing. The [Grid](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview) is a powerful control for displaying data in a tabular format. It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the [Kendo UI DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview) component.
+The Grid is a powerful control for displaying data in a tabular format. It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
 
-For more information on the HtmlHelper, refer to the article on the [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview).
+* [Demo page for the Grid](https://demos.telerik.com/aspnet-core/grid/index)
 
-## Basic Usage
+## Initializing the Grid
 
 The following example demonstrates how to define the Grid by using the Grid HtmlHelper.
-
-###### Example
 
 ```Razor
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
@@ -119,11 +117,9 @@ The following example demonstrates how to define the Grid by using the Grid Html
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the Grid HtmlHelper and how to get the Grid instance.
-
-###### Example
+The following example demonstrates the basic configuration for the Grid HtmlHelper.
 
 ```
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
@@ -157,12 +153,22 @@ The following example demonstrates the basic configuration of the Grid HtmlHelpe
     </script>
 ```
 
+## Functionality and Features
+
+* [Data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
+* [Editing]({% slug batchediting_grid_aspnetcore %})
+* [Filtering]({% slug htmlhelpers_grid_aspnetcore_filtering %})
+* [Grouping]({% slug htmlhelpers_grid_aspnetcore_grouping %})
+* [Paging]({% slug htmlhelpers_grid_aspnetcore_paging %})
+* [Sorting]({% slug htmlhelpers_grid_aspnetcore_sorting %})
+* [Excel export]({% slug excelexport_gridhelper_aspnetcore %})
+* [Templates]({% slug clientdetailtemplate_grid_aspnetcore %})
+* [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
+* [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %})
+* [Adaptive rendering]({% slug adaptive_rendering_gridhelper_aspnetcore %})
+
 ## See Also
 
-* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
-* [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/index)
+* [Using the API of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/api)
+* [API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

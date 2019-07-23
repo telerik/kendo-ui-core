@@ -1,7 +1,7 @@
 ---
 title: Styling of Content
-page_title: Styling of Content | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn how to apply styles to the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Styling of Content | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to apply styles to the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_styling_aspnetcore
 position: 8
 ---
@@ -10,13 +10,13 @@ position: 8
 
 The Editor HtmlHelper provides default and custom options for styling its content.
 
+For a runnable example, refer to the [demo on styles in the Editor](https://demos.telerik.com/aspnet-core/editor/styles).
+
 ## Default Options
 
 When the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#classic-mode) is enabled, the Editor uses an `iframe` and applies some default CSS styles to its content. This behavior overrides the default browser styling.
 
 The following example targets mainly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class which is not included in the value of the widget.
-
-###### Example
 
 ```css
 html,
@@ -102,14 +102,12 @@ code {
 
 To avoid the default content styles from the previous example, remove or override them after the Editor is initialized by executing the following code.
 
-###### Example
-
 ```
 @(Html.Kendo().Editor()
     .Name("editor")
     .Value(@<text>
         <p>
-            Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.
+            The Editor allows your users to edit HTML in a familiar, user-friendly way.
         </p>
     </text>)
 )
@@ -129,10 +127,5 @@ You can also use custom styles with [higher specificity](https://developer.mozil
 
 ## See Also
 
-* [Overview of the Editor HtmlHelper]({% slug htmlhelpers_editor_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
-* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
-* [Pasting Content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Serialize / Deserialize Content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
-* [Image Browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
-* [Immutable Elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
+* [Styles in the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/styles)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: TreeView | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: TreeView Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/treeview
 slug: htmlhelpers_treeview_aspnetcore
 position: 1
@@ -9,13 +9,13 @@ position: 1
 
 # TreeView HtmlHelper Overview
 
-The TreeView HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeView](http://demos.telerik.com/kendo-ui/treeview/index) widget.
+The Telerik UI TreeView HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeView widget.
 
-It allows you to configure the Kendo UI TreeView widget from server-side code. The [TreeView](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/overview) displays hierarchical data in a traditional tree structure. It supports user interaction through mouse or touch events and provides the [checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %}) and [drag-and-drop]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %}) features.
+The TreeView displays hierarchical data in a traditional tree structure.
 
-For more information on the HtmlHelper, refer to the article on the [TreeView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treeview/overview).
+* [Demo page for the TreeView](https://demos.telerik.com/aspnet-core/treeview/index)
 
-## Basic Usage
+## Initializing the TreeView
 
 The following example demonstrates how to define the TreeView by using the TreeView HtmlHelper.
 
@@ -61,11 +61,9 @@ public IActionResult Read_TreeViewData(int? id)
 }
 ```
 
-## Configuration
+## Basic Configuration
 
 The following example demonstrates the basic configuration of the TreeView HtmlHelper and how to get the TreeView instance.
-
-###### Example
 
     @(Html.Kendo().TreeView()
         .Name("treeview")
@@ -81,17 +79,22 @@ The following example demonstrates the basic configuration of the TreeView HtmlH
 
     <script type="text/javascript">
         $(function () {
-            //Notice that the Name() of the TreeView is used to get its client-side instance.
+            // The Name() of the TreeView is used to get its client-side instance.
             var treeview = $("#treeview").data("kendoTreeView");
             console.log(treeview);
         });
     </script>
 
+## Functionality and Features
+
+* [Data binding]({% slug htmlhelpers_treeview_binding_aspnetcore %})
+* [Items]({% slug htmlhelpers_treeview_items_aspnetcore %})
+* [Dragging and dropping]({% slug htmlhelpers_treeview_drag_drop_aspnetcore %})
+* [Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})
+
 ## Events
 
-The following example demonstrates the available TreeView events and how an event handler could be implemented for each of them.
-
-###### Example
+The following example demonstrates the available TreeView events and how an event handler could be implemented for each of them. For a complete example on basic TreeView events, refer to the [demo on using the events of the TreeView](https://demos.telerik.com/aspnet-core/treeview/events).
 
     @(Html.Kendo().TreeView()
         .Name("treeview")
@@ -156,10 +159,6 @@ The following example demonstrates the available TreeView events and how an even
 
 ## See Also
 
-* [JavaScript API Reference of the TreeView](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview)
-* [TreeView HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/treeview/overview)
-* [TreeView Official Demos](http://demos.telerik.com/aspnet-core/treeview/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/index)
+* [Using the API of the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/api)
+* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)

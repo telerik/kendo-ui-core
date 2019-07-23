@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: TimePicker | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI TimePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: TimePicker Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI TimePicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/time-picker, /aspnet-core/helpers/tag-helpers/time-picker
 slug: taghelpers_timepicker_aspnetcore
 position: 1
@@ -9,17 +9,19 @@ position: 1
 
 # TimePicker Tag Helper Overview
 
-The TimePicker tag helper helps you configure the Kendo UI TimePicker widget in ASP.NET Core applications.
+The Telerik UI TimePicker tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TimePicker widget.
 
-## Basic Usage
+The TimePicker enables users to select time values from a predefined list or enter new ones.
+
+* [Demo page for the TimePicker](https://demos.telerik.com/aspnet-core/timepicker/tag-helper)
+
+## Initializing the TimePicker
 
 The following example demonstrates how to define the TimePicker by using the TimePicker tag helper.
 
-###### Example
-
         <kendo-timepicker name="timepicker1"></kendo-timepicker>
 
-## Configuration
+## Basic Configuration
 
 The TimePicker tag helper configuration options are passed as attributes of the tag.
 
@@ -39,12 +41,7 @@ The TimePicker tag helper configuration options are passed as attributes of the 
         </kendo-timepicker>
 ```
 
-The `ParseFormats` option is of type `string[]` and can be assigned either:
-
-* By a `ViewBag` property, or
-* By a property of the model.
-
-    ###### Example
+The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property or by a property of the model.
 
             @{
                 ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
@@ -54,7 +51,5 @@ The `ParseFormats` option is of type `string[]` and can be assigned either:
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the TimePicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker/tag-helper)
+* [API Reference of the TimePicker Helper for ASP.NET Core](/api/timepicker)

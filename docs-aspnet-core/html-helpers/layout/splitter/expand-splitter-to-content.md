@@ -1,18 +1,16 @@
 ---
-title: Expand Splitter to Content
-page_title: Splitter | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn how to expand the Kendo UI Splitter to fit the content inside it using the Kendo UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+title: Auto-Resizing to Content
+page_title: Auto-Resizing to Content | Telerik UI Splitter for ASP.NET Core
+description: "Learn how to expand the Splitter to fit the content inside it using the Telerik UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_expand_splitter_to_content_aspnetcore
-position: 4
+position: 3
 ---
 
-# Expand to Content
+# Auto-Resizing to Content
 
-The example below demonstrates how to make the Kendo UI Splitter expand its height based on the content inside a pane.
+You can expand the height of the Splitter based on the content inside a pane.
 
-To achieve this, take the following notable steps:
-
-1. Set up the Kendo UI Splitter to expand to the height of its parent according to the article on how to [expand to 100% height and auto-resize]({% slug htmlhelpers_expand_splitter_to_100_height_aspnetcore %}).
+1. Set up the Splitter to expand to the height of its parent according to the article on how to [expand to 100% height and auto-resize]({% slug htmlhelpers_expand_splitter_to_100_height_aspnetcore %}).
 2. Make sure that the parent content is resized when the content of the pane is rendered.
 3. Call the `resize` method to finalize the process.
 
@@ -63,7 +61,7 @@ To achieve this, take the following notable steps:
     body,
     main,
     #vertical,
-    .container 
+    .container
     {
         height: 100%;
         margin: 0;
@@ -88,3 +86,7 @@ To achieve this, take the following notable steps:
         public decimal UnitPrice { get; set; }
     }
 ```
+
+## See Also
+
+* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)

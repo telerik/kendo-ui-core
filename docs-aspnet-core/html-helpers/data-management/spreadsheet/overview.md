@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Spreadsheet Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/spreadsheet
 slug: htmlhelpers_spreadsheet_aspnetcore
 position: 1
@@ -9,17 +9,15 @@ position: 1
 
 # Spreadsheet HtmlHelper Overview
 
-The Spreadsheet HtmlHelper extension is a server-side wrapper for the [Kendo UI Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index) widget.
+The Telerik UI Spreadsheet HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Spreadsheet widget.
 
-It enables you to configure the Kendo UI Spreadsheet widget from server-side code. The [Spreadsheet](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview) allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
+The Spreadsheet allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
-For more information on the HtmlHelper, refer to the article on the [Spreadsheet HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/overview).
+* [Demo page for the Spreadsheet](https://demos.telerik.com/aspnet-core/spreadsheet/index)
 
-## Basic Usage
+## Initializing the Spreadsheet
 
 The following example demonstrates how to define the Spreadsheet by using the Spreadsheet HtmlHelper.
-
-###### Example
 
 ```Razor
 @(Html.Kendo().Spreadsheet()
@@ -95,11 +93,9 @@ The following example demonstrates how to define the Spreadsheet by using the Sp
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the Spreadsheet HtmlHelper.
-
-###### Example
+The following example demonstrates the basic configuration for the Spreadsheet HtmlHelper.
 
 ```
 @(Html.Kendo().Spreadsheet()
@@ -179,9 +175,18 @@ The following example demonstrates the basic configuration of the Spreadsheet Ht
 )
 ```
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all Spreadsheet [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#events).
+* [Comments]({% slug htmlhelpers_spreadsheet_comments_aspnetcore %})
+* [Custom functions]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
+* [Cell formatting]({% slug htmlhelpers_spreadsheet_formatting_aspnetcore %})
+* [Images]({% slug htmlhelpers_spreadsheet_images_aspnetcore %})
+* [Import and export of data]({% slug htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore %})
+* [End user guide]({% slug htmlhelpers_spreadsheet_user_guide_aspnetcore %})
+
+## Events
+
+You can subscribe to all Spreadsheet [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#events). For a complete example on basic Spreadsheet events, refer to the [demo on using the events of the Spreadsheet](https://demos.telerik.com/aspnet-core/spreadsheet/events).
 
 The following example demonstrates how to subscribe to the `changing` and `change` events.
 
@@ -214,36 +219,28 @@ The following example demonstrates how to subscribe to the `changing` and `chang
 
     <script>
         function onChanging(e) {
-            //Handle the changing event.
+            // Handle the changing event.
         }
 
         function onChange(e) {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
 
-## Reference
+## Referencing Existing Instances
 
 To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Spreadsheet for ASP.NET Core declaration.
+    // Place this after your Kendo UI Spreadsheet for ASP.NET Core declaration.
     <script>
         $(document).ready(function() {
-            //Note that the Name() of the Spreadsheet is used to get its client-side instance.
+            // The Name() of the Spreadsheet is used to get its client-side instance.
             var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         });
     </script>
 
-
 ## See Also
 
-* [JavaScript API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
-* [Spreadsheet HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/overview)
-* [Spreadsheet Official Demos](http://demos.telerik.com/aspnet-core/spreadsheet/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Spreadsheet HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
+* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)

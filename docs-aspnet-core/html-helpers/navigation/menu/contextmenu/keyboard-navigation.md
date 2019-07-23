@@ -1,7 +1,7 @@
 ---
 title:  Keyboard Navigation
-page_title: Keyboard Navigation | Kendo UI ContextMenu HtmlHelper for ASP.NET Core
-description: "Learn how to use the keyboard navigation functionality of the Kendo UI ContextMenu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Keyboard Navigation | Telerik UI ContextMenu HtmlHelper for ASP.NET Core
+description: "Learn how to use the keyboard navigation functionality of the Telerik UI ContextMenu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_contextmenu_keyboardnavigation_aspnetcore
 position: 3
 ---
@@ -29,5 +29,4 @@ The ContextMenu supports the following keyboard shortcuts:
 
 ## See Also
 
-* [JavaScript API Reference of the ContextMenu](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
-* [ContextMenu Official Demo](https://demos.telerik.com/aspnet-core/menu/context-menu)
+* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)

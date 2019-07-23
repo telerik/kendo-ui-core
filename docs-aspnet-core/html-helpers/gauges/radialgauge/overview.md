@@ -1,20 +1,22 @@
 ---
 title: Overview
-page_title: RadialGauge | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI RadialGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: RadialGauge Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI RadialGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_radialgaugehelper_aspnetcore
 position: 1
 ---
 
 # RadialGauge HtmlHelper Overview
 
-The RadialGauge HtmlHelper extension is a server-side wrapper for the [Kendo UI RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/index) widget.
+The Telerik UI RadialGauge HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI RadialGauge widget.
 
-## Configuration
+The RadialGauge represents values on a circular arc.
 
-Add the RadialGauge.
+* [Demo page for the RadialGauge](https://demos.telerik.com/aspnet-core/radial-gauge/index)
 
-###### Example
+## Initializing the RadialGauge
+
+The following example demonstrates how to Initializing the RadialGauge by using the RadialGauge HtmlHelper.
 
 ```
     @(Html.Kendo().RadialGauge()
@@ -29,24 +31,19 @@ Add the RadialGauge.
     )
 ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
+To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge API](/api/radialgauge#methods) to control its behavior.
 
-To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
-
-###### Example
-
-        // Put this after your Kendo UI RadialGauge for ASP.NET Core declaration.
+        // Place this after your Kendo UI RadialGauge for ASP.NET Core declaration.
         <script>
             $(function() {
-                // Notice that the Name() of the RadialGauge is used to get its client-side instance.
+                // The Name() of the RadialGauge is used to get its client-side instance.
                 var gauge = $("#radialGauge").data("kendoRadialGauge");
             });
         </script>
 
 ## See Also
 
-* [OverView of the Kendo UI jQuery RadialGauge](https://docs.telerik.com/kendo-ui/controls/gauges/radialgauge/overview)
-* [Overview of the UI for ASP.NET Core ArcGauge]({% slug overview_arcgaugehelper_aspnetcore %})
-* [Overview of the UI for ASP.NET Core LinearGauge]({% slug overview_lineargaugehelper_aspnetcore %})
+* [Basic Usage of the RadialGauge HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radial-gauge/index)
+* [API Reference of the RadialGauge HtmlHelper for ASP.NET Core](/api/radialgauge)

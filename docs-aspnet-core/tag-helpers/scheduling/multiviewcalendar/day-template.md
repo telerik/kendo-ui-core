@@ -1,7 +1,7 @@
 ---
 title: Day Template
-page_title: Day Template | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Customize the content of each cell by using cell templates when working with the Kendo UI MultiViewCalendar Tag Helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Day Template | Telerik UI MultiViewCalendar Tag for ASP.NET Core
+description: "Customize the content of each cell by using cell templates when working with the Telerik UI MultiViewCalendar Tag Helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: day_template_multiviewcalendar_taghelper_aspnetcore
 position: 5
 ---
@@ -11,8 +11,6 @@ position: 5
 The MultiViewCalendar enables you to customize the rendered day for the `month` view.
 
 The following example demonstrates how to create a MultiViewCalendar by using a custom template.
-
-###### Example
 
 ```tagHelper
 
@@ -40,7 +38,4 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

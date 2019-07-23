@@ -1,16 +1,18 @@
 ---
 title: Group Templates
-page_title: Group Templates | Kendo UI Grid HtmlHelper for ASP.NET Core
-description: "Learn how to customize the group rows when the data of the Kendo UI Grid for ASP.NET MVC is grouped."
+page_title: Group Templates | Telerik UI Grid HtmlHelper for ASP.NET Core
+description: "Learn how to customize the group rows when the data of the Telerik UI Grid for ASP.NET MVC is grouped."
 slug: group_templates_grid_aspnetmvc_widget
 position: 3
 ---
 
 # Group Templates
 
-Group rows are used to organize data rows into a tree structure when data grouping is applied.
+Group rows help organize data rows into a tree structure when data grouping is applied.
 
-A group row contains an expanding and collapsing group icon that enables end-users to expand and collapse a group row, and thus show or hide its child rows. One of the main features of group rows is to display group summary values. Kendo UI Grid provides three different templates that can be used to customize the appearance of the group rows:
+For runnable examples, refer to the [demos on templates in the Grid](https://demos.telerik.com/aspnet-core/grid/toolbar-template).
+
+A group row contains an expanding and collapsing group icon that enables end-users to expand and collapse a group row, and thus show or hide its child rows. One of the main features of group rows is to display group summary values. The Grid provides three different templates that can be used to customize the appearance of the group rows:
 
 - `ClientGroupHeaderTemplate`&mdash;Renders a template to be displayed for the entire group row. Usually the main objective is to show an information about the entire group. By default if no template is defined the name of the field and the current group value is displayed.
 - `ClientGroupHeaderColumnTemplate`&mdash;Renders a template in the group row aligned to the column itself. Usually it is used to show an aggregate value for a specific column in the context of the current group. Visually the template content is displayed aligned to the column itself. This functionality is introduced in R3 2018 release.
@@ -65,7 +67,5 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 ## See Also
 
-* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
-* [Grid HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview)
-* [Grid Official Demos](http://demos.telerik.com/aspnet-core/grid/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Templates by the Grid HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/grid/toolbar-template)
+* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)

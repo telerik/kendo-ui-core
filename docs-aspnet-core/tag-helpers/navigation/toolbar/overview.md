@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: ToolBar | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI ToolBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: ToolBar Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI ToolBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/toolbar, /aspnet-core/helpers/tag-helpers/toolbar
 slug: taghelpers_toolbar_aspnetcore
 position: 1
@@ -9,13 +9,15 @@ position: 1
 
 # ToolBar Tag Helper Overview
 
-The ToolBar tag helper helps you configure the Kendo UI ToolBar widget in ASP.NET Core applications.
+The Telerik UI ToolBar tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ToolBar widget.
 
-## Basic Usage
+The ToolBar is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+
+* [Demo page for the ToolBar](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
+
+## Initializing the ToolBar
 
 The following example demonstrates how to define the ToolBar by using the ToolBar tag helper.
-
-###### Example
 
     <kendo-toolbar name="ToolBar">
         <toolbar-items>
@@ -25,7 +27,7 @@ The following example demonstrates how to define the ToolBar by using the ToolBa
         </toolbar-items>
     </kendo-toolbar>
 
-## Configuration
+## Basic Configuration
 
 The ToolBar tag helper configuration options are passed as attributes of the tag.
 
@@ -63,7 +65,7 @@ The following example demonstrates the basic configuration of the ToolBar tag he
 
     <script>
         $(document).ready(function () {
-            //Initialize a DropDownList in a ToolBar item's template.
+            // Initialize a DropDownList in a template of the ToolBar item.
             $("#dropdown").kendoDropDownList({
                 optionLabel: "Paragraph",
                 dataTextField: "text",
@@ -77,7 +79,7 @@ The following example demonstrates the basic configuration of the ToolBar tag he
                 ]
             });
 
-            //Notice that the Name() of the ToolBar is used to get its client-side instance.
+            // The Name() of the ToolBar is used to get its client-side instance.
             var toolbar = $("#ToolBar").data("kendoToolBar");
         });
     </script>
@@ -119,7 +121,7 @@ The following example demonstrates the basic configuration of the ToolBar tag he
 
     <script>
         $(document).ready(function () {
-            //Initialize a DropDownList in a ToolBar item's template.
+            // Initialize a DropDownList in a template of the ToolBar item.
             $("#dropdown").kendoDropDownList({
                 optionLabel: "Paragraph",
                 dataTextField: "text",
@@ -133,7 +135,7 @@ The following example demonstrates the basic configuration of the ToolBar tag he
                 ]
             });
 
-            //Notice that the Name() of the ToolBar is used to get its client-side instance.
+            // The Name() of the ToolBar is used to get its client-side instance.
             var toolbar = $("#ToolBar").data("kendoToolBar");
         });
     </script>
@@ -141,7 +143,5 @@ The following example demonstrates the basic configuration of the ToolBar tag he
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the ToolBar Tag lHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
+* [API Reference of the ToolBar Helper for ASP.NET Core](/api/toolbar)

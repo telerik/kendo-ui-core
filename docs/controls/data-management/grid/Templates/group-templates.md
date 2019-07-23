@@ -75,6 +75,13 @@ Because `GroupHeaderTemplate` is displayed next to the expanding icon of the gro
 
 ![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../grid-group-header-column-template-first-column.png)
 
+## KB Articles on Templates
+
+* [Editing Records in Child Grids]({% slug howto_edit_recordsin_children_grid %})
+* [Refreshing the Grid in the Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
+* [Creating a Custom Editor in the Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
 * [Using Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/rowtemplate)

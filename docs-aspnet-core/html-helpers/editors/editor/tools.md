@@ -1,7 +1,7 @@
 ---
 title: Tools
-page_title: Tools | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn which tools are available in the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Tools | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn which tools are available in the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_tools_aspnetcore
 position: 3
 ---
@@ -14,11 +14,9 @@ You can enable any of these tools by using the `Tools()` HtmlHelper method and c
 
 ## Default Tools
 
-The default tools in the Editor are included in the toolbar of the Editor upon setting the respective tool method.
+The default tools in the Editor are included in the toolbar of the Editor upon setting the respective tool method. For a runnable example, refer to the [demo on the built-in tools in the Editor](https://demos.telerik.com/aspnet-core/editor/all-tools).
 
 The following example demonstrates the default tool methods of the Editor.
-
-###### Example
 
 ```
 @(Html.Kendo().Editor()
@@ -63,11 +61,9 @@ The following example demonstrates the default tool methods of the Editor.
 
 ## Custom Tools
 
-To define the custom tools of the Editor, use the `CustomButton()` and `CustomTemplate()` methods. You can use `CustomButton()` for scenarios where only a single action has to be executed upon a button click. The custom template allows you to define a more complicated tool and also embed other widgets within the Editor toolbar. You can use `CustomTemplate()` for creating a Kendo UI DropDownList which changes the background color for the editable area of the Editor.
+To define the custom tools of the Editor, use the `CustomButton()` and `CustomTemplate()` methods. You can use `CustomButton()` for scenarios where only a single action has to be executed upon a button click. The custom template allows you to define a more complicated tool and also embed other widgets within the Editor toolbar. You can use `CustomTemplate()` for creating a DropDownList which changes the background color for the editable area of the Editor.
 
-The following example demonstrates these scenarios. Note the `Name()` method that is used for the `CustomButton()` configuration. The passed string value will be later used to populate the class for the `<span>` element for whose tool icon the `:before` pseudo element is used. In this case, the final result for that class will be `k-i-custom`. As the `k-i-custom` class is used by one of the Kendo UI icons, the respective icon will be displayed for the tool button. Note that the `undo` and `redo` tool names are reserved (forbidden).
-
-###### Example
+The following example demonstrates these scenarios. Note the `Name()` method that is used for the `CustomButton()` configuration. The passed string value will be later used to populate the class for the `<span>` element for whose tool icon the `:before` pseudo element is used. In this case, the final result for that class will be `k-i-custom`. As the `k-i-custom` class is used by one of the Kendo UI for jQuery icons, the respective icon will be displayed for the tool button. Note that the `undo` and `redo` tool names are reserved (forbidden). For a runnable example, refer to the [demo on custom tools in the Editor](https://demos.telerik.com/aspnet-core/editor/custom-tools).
 
 ```
 @(Html.Kendo().Editor()
@@ -108,10 +104,6 @@ The following example demonstrates these scenarios. Note the `Name()` method tha
 
 ## See Also
 
-* [Overview of the Editor HtmlHelper]({% slug htmlhelpers_editor_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
-* [Pasting Content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Serialize / Deserialize Content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
-* [Image Browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
-* [Immutable Elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
-* [Styling Content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+* [Default Tools by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/all-tools)
+* [Custom Tools by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/custom-tools)
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

@@ -1,36 +1,29 @@
 ---
 title: Overview
-page_title: Slider | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Slider for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Slider Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI Slider for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_sliderhelper_aspnetcore
 position: 1
 ---
 
 # Slider HtmlHelper Overview
 
-The Slider HtmlHelper extension is a server-side wrapper for the [Kendo UI Slider](https://demos.telerik.com/kendo-ui/slider/index) widget.
+The Telerik UI Slider HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Slider widget.
 
-## Getting Started
+The Slider provides a rich input for selecting numeric values nd can be either a Slider which presents one handle and two opposing buttons for selecting a single numeric value or a Slider which presents two handlers for defining a range of numeric values.
 
-### The Basics
+* [Demo page for the Slider](https://demos.telerik.com/aspnet-core/slider/index)
 
-There are two types of Sliders:
+## Initializing the Slider
 
-* Kendo UI Slider for ASP.NET Core, which presents one handle and two opposing buttons for selecting a single numeric value.
-* Kendo UI RangeSlider for ASP.NET Core, which present two handlers for defining a range of numeric values.
-
-### Configuration
-
-Add the Slider.
-
-###### Example
+The following example demonstrates how to how to define the Slider by using the Slider HtmlHelper.
 
 ```
     @(Html.Kendo().Slider()
-        .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-        .Min(0) //Set min value of the Slider.
-        .Max(100) //Set min value of the Slider.
-        .Value(20) //Set the value of the Slider.
+        .Name("slider") // The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+        .Min(0) // Set min value of the Slider.
+        .Max(100) // Set min value of the Slider.
+        .Value(20) // Set the value of the Slider.
     )
 
     @(Html.Kendo().RangeSlider()
@@ -41,15 +34,13 @@ Add the Slider.
       .LargeStep(10))
 ```
 
-## Event Handling
+## Events
 
-You can subscribe to all Slider [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider#events).
+You can subscribe to all Slider events. For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/aspnet-core/slider/events).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
-
-###### Example
 
 ```
     @(Html.Kendo().Slider()
@@ -61,20 +52,18 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function change(e) {
-            //Handle the change event.
+            // Handle the change event.
         }
 
         function slide(e) {
-            //Handle the slide event.
+            // Handle the slide event.
         }
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
 ```
     @(Html.Kendo().Slider()
@@ -82,31 +71,27 @@ The following example demonstrates how to subscribe to events by a template dele
         .Events(e => e
             .Change(@<text>
               function(e) {
-                  //Handle the change event inline.
+                  // Handle the change event inline.
               }
             </text>)
             .Slide(@<text>
               function(e) {
-                  //Handle the slide event inline.
+                  // Handle the slide event inline.
               }
               </text>)
         )
     )
 ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI Slider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider API](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider#methods) to control its behavior.
-
-###### Example
+To reference an existing Telerik UI Slider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider API](/api/slider) to control its behavior.
 
 ```
-    // Put this after your Kendo UI Slider for ASP.NET Core declaration.
+    // Place this after your Telerik UI Slider for ASP.NET Core declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Slider is used to get its client-side instance.
+            // The Name() of the Slider is used to get its client-side instance.
             var slider = $("#slider").data("kendoSlider");
         });
     </script>
@@ -114,5 +99,6 @@ To reference an existing Kendo UI Slider instance, use the [`jQuery.data()`](htt
 
 ## See Also
 
-* [Overview of the Kendo UI Slider Widget](https://docs.telerik.com/kendo-ui/controls/editors/slider/overview)
-* [UI for ASP.NET Core Slider official live demos](https://demos.telerik.com/aspnet-core/slider)
+* [Basic Usage by the Slider HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider)
+* [Using the API of the Slider HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/api)
+* [API Reference of the Slider HtmlHelper for ASP.NET Core](/api/slider)

@@ -1,26 +1,22 @@
 ---
 title: Overview
-page_title: Switch | UI for ASP.NET Core Switch HtmlHelper
-description: "Learn the basics when working with the Kendo UI Switch for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Switch Overview | UI for ASP.NET Core Switch HtmlHelper
+description: "Learn the basics when working with the Telerik UI Switch for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_switchhelper_aspnetcore
 position: 1
 ---
 
 # Switch HtmlHelper Overview
 
-The Switch HtmlHelper extension is a server-side wrapper for the [Kendo UI Switch](https://demos.telerik.com/kendo-ui/switch/index) widget.
+The Telerik UI Switch HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Switch widget.
 
-## Getting Started
+The Switch displays two exclusive choices. With the new Switch variables introduced in the Kendo UI for jQuery R1 2019 release, the default styling of the Switch component for each of the [Sass-based Kendo UI for jQuery themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout.
 
-### The Basics
+* [Demo page for the Switch](https://demos.telerik.com/aspnet-core/switch/index)
 
-The Kendo UI Switch displays two exclusive choices.
+## Initializing the Switch
 
-### Configuration
-
-Add the Switch.
-
-###### Example
+The following example demonstrates how to how to define the Switch by using the Switch HtmlHelper.
 
 ```
     @(Html.Kendo().Switch()
@@ -29,15 +25,13 @@ Add the Switch.
     )
 ```
 
-## Event Handling
+## Events
 
-You can subscribe to all Switch [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch#events).
+You can subscribe to all Switch events. For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/aspnet-core/switch/events).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
-
-###### Example
 
 ```
     @(Html.Kendo().Switch()
@@ -53,11 +47,9 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
 ```
     @(Html.Kendo().Switch()
@@ -72,27 +64,15 @@ The following example demonstrates how to subscribe to events by a template dele
     )
 ```
 
-## Customization
+## Referencing Existing Instances
 
-### Custom Switch Layout
-
-With the new Switch variables introduced in R1 2019 release, the default styling of the Switch component for each of the [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout.
-
-For more information and examples, refer to the [Custom Switch Component Layout](https://github.com/telerik/kendo-themes/wiki/Change-the-Switch-Layout) article, which demonstrates how to override the default Sass values in order to achieve any of the predefined custom layouts.
-
-## Reference
-
-### Existing Instances
-
-To reference an existing Kendo UI Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch) to control its behavior.
-
-###### Example
+To reference an existing Telerik UI Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](/api/switch) to control its behavior.
 
 ```
-    // Put this after your Kendo UI Switch for ASP.NET Core declaration.
+    // Place this after your Telerik UI Switch for ASP.NET Core declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Switch is used to get its client-side instance.
+            // The Name() of the Switch is used to get its client-side instance.
             var switch = $("#switch").data("kendoSwitch");
         });
     </script>
@@ -100,5 +80,6 @@ To reference an existing Kendo UI Switch instance, use the [`jQuery.data()`](htt
 
 ## See Also
 
-* [Overview of the Kendo UI Switch Widget](https://docs.telerik.com/kendo-ui/controls/editors/switch/overview)
-* [UI for ASP.NET Core Switch official live demos](https://demos.telerik.com/aspnet-core/switch)
+* [Basic Usage by the Switch HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch)
+* [Using the API of the Switch HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch/api)
+* [API Reference of the Switch HtmlHelper for ASP.NET Core](/api/switch)

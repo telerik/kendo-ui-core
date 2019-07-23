@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Splitter | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Splitter Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI Splitter HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/splitter
 slug: htmlhelpers_splitter_aspnetcore
 position: 1
@@ -9,13 +9,13 @@ position: 1
 
 # Splitter HtmlHelper Overview
 
-The Splitter HtmlHelper extension is a server-side wrapper for the [Kendo UI Splitter](http://demos.telerik.com/kendo-ui/splitter/index) widget.
+The Telerik UI Splitter HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Splitter widget.
 
-It allows you to configure the Kendo UI Splitter widget from server-side code. The [Splitter](http://docs.telerik.com/kendo-ui/controls/layout/splitter/overview) provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
+The Splitter provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of the Splitter can be combined to build complex layouts.
 
-For more information on the HtmlHelper, refer to the article on the [Splitter HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/splitter/overview).
+* [Demo page for the Splitter](https://demos.telerik.com/aspnet-core/splitter/index)
 
-## Basic Usage
+## Initializing the Splitter
 
 The following example demonstrates how to define the Splitter by using the Splitter HtmlHelper.
 
@@ -79,9 +79,9 @@ The following example demonstrates how to define the Splitter by using the Split
     }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the Splitter HtmlHelper and how to get the Splitter instance.
+The following example demonstrates the basic configuration of the Splitter HtmlHelper.
 
 ```
     @(Html.Kendo().Splitter()
@@ -124,19 +124,26 @@ The following example demonstrates the basic configuration of the Splitter HtmlH
 
     <script type="text/javascript">
         $(function () {
-            //Notice that the Name() of the Splitter is used to get its client-side instance.
+            // The Name() of the Splitter is used to get its client-side instance.
             var splitter = $("#splitter").data("kendoSplitter");
             console.log(splitter);
         });
     </script>
 ```
 
+## Functionality and Features
+
+* [Auto-resizing to window]({% slug htmlhelpers_add_auto_resizing_splitter_to_window_aspnetcore %})
+* [Auto-resizing to content]({% slug htmlhelpers_expand_splitter_to_content_aspnetcore %})
+* [Auto-resizing the height]({% slug htmlhelpers_expand_splitter_to_100_height_aspnetcore %})
+* [Persisting the pane size]({% slug htmlhelpers_keep_pane_size_in_percentages_aspnetcore %})
+
+## Events
+
+For a complete example on basic Splitter events, refer to the [demo on using the events of the Splitter](https://demos.telerik.com/aspnet-core/splitter/events).
+
 ## See Also
 
-* [JavaScript API Reference of the Splitter](http://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)
-* [Splitter HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/splitter/overview)
-* [Splitter Official Demos](http://demos.telerik.com/aspnet-core/splitter/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the Splitter HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/index)
+* [Using the API of the Splitter HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/api)
+* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)

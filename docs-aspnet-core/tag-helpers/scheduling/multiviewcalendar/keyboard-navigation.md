@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Use the Kendo UI MultiViewCalendar keyboard navigation."
+page_title: Keyboard Navigation | Telerik UI MultiViewCalendar Tag Helper for ASP.NET Core
+description: "Use the keyboard navigation of the Telerik UI MultiViewCalendar tag helper for ASP.NET Core."
 slug: keyboard_navigation_multiviewcalendar_taghelper_aspnetcore
 position: 8
 ---
@@ -26,9 +26,6 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 | `Ctrl`+`Down Left`  | Navigates to the previous month.                 |
 | `Ctrl`+`Down Right` | Navigates to the next month.                     |
 
-
-###### Example
-
 ```tagHelper
 
     <kendo-multiviewcalendar name="multiviewcalendar" selectable="multiple">        
@@ -45,7 +42,4 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

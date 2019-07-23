@@ -1,7 +1,7 @@
 ---
 title: Pasting
-page_title: Pasting Content | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn how to control the pasting behavior of the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Pasting Content | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to control the pasting behavior of the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_pasting_aspnetcore
 position: 4
 ---
@@ -16,13 +16,7 @@ This article demonstrates the basic concepts of pasting to editable elements as 
 
 The Editor facilitates the DOM clipboard events. Any content that is pasted is first processed by the browser. After the browser processes the content, the Editor applies the [`PasteCleanup()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#pastecleanupsystemactionkendomvcuifluenteditorpastecleanupsettingsbuilder) options which help control the content that will be pasted.
 
-## Common Scenarios
-
-* [Cleaning HTML content on paste](#clean-html-on-paste)
-* [Pasting from MS Word](#paste-from-ms-word)
-* [Creating custom `pasteCleanup` functions](#create-custom-pastecleanup-functions)
-
-### Clean HTML on Paste
+## Cleaning HTML on Paste
 
 The built-in [`PasteCleanup()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder) options are:
 
@@ -37,8 +31,6 @@ The built-in [`PasteCleanup()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSetti
 * [`Custom()`](/api/Kendo.Mvc.UI.Fluent/EditorPasteCleanupSettingsBuilder#customsystemstring)&mdash;Uses a callback function to create [a custom `pasteCleanup` option](#create-your-own-pastecleanup-fucntion).
 
 The following example demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `Span()` option, the `span` tags are removed.
-
-###### Example
 
 ```
 <p>
@@ -61,7 +53,7 @@ The following example demonstrates how to copy the HTML content above the Editor
 )
 ```
 
-### Paste from MS Word
+## Pasting from MS Word
 
 The `PasteCleanup()` options starting with an `Ms` prefix that targets MS Word. They offer more control over the pasting of content from MS Word. Most browsers translate MS Word content to HTML, but strict rules or specification leading to proper results do not exist. That is why, in such cases, these options deliver a better cross-browser outcome.
 
@@ -70,8 +62,6 @@ The `MsTags()` and the `MsAllFormatting()` options strip MS Word specific tags. 
 The `MsConvertLists()` is an option that enables the end user to successfully paste MS Word lists and convert them to proper HTML lists on pasting. Only few browsers support this feature and lists are pasted as plain `<p>` tags.
 
 The following example demonstrates how to adjust the MS Word specific options. To see the result, paste some content from MS Word.
-
-###### Example
 
 ```
 @(Html.Kendo().Editor()
@@ -84,13 +74,11 @@ The following example demonstrates how to adjust the MS Word specific options. T
 )
 ```
 
-### Create Custom pasteCleanup Functions
+## Creating Custom pasteCleanup Functions
 
 The `Custom()` method is a powerful way to define your own logic to clean the pasted HTML through the assignment of a callback function. The exposed argument of this callback is the HTML that is passed through all other `PasteCleanup()` options. In this way, you can implement your own logic that modifies the exposed HTML and return it as a `string`.
 
 The following example demonstrates a simple logic to strip the `<strong>` tags from the pasted HTML content.
-
-###### Example
 
 ```
 <p>some text with <strong>bold text</strong> inside.</p>
@@ -112,10 +100,4 @@ The following example demonstrates a simple logic to strip the `<strong>` tags f
 
 ## See Also
 
-* [Overview of the Editor HtmlHelper]({% slug htmlhelpers_editor_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
-* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
-* [Serialize / Deserialize Content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
-* [Image Browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
-* [Immutable Elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
-* [Styling Content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)

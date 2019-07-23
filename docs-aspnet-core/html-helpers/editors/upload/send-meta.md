@@ -1,7 +1,7 @@
 ---
 title: Metadata
-page_title: Metadata | Kendo UI Upload HtmlHelper for ASP.NET Core
-description: "Learn how to send and receive metadata when uploading files with the Kendo UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Metadata | Telerik UI Upload HtmlHelper for ASP.NET Core
+description: "Learn how to send and receive metadata when uploading files with the Telerik UI Upload HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_upload_send_meta_aspnetcore
 position: 6
 ---
@@ -18,15 +18,11 @@ To send metadata over to the `Save()` handler:
 
 1. Add an `input` field for the file description. Its value is going to be sent to the save handler.
 
-    ###### Example
-
     ```
     @(Html.Kendo().TextBox().Name("fileDescription"))
     ```
 
-2. Declare a handler for the [`upload`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/upload) event and attach a data object to the passed event.
-
-    ###### Example
+2. Declare a handler for the `upload` event and attach a data object to the passed event.
 
     ```
     function onUpload(e) {
@@ -36,9 +32,7 @@ To send metadata over to the `Save()` handler:
     }
     ```
 
-3. Attach the `upload` event handler.
-
-    ###### Example
+3. Attach the `upload` event handler.    
 
     ```
     @(Html.Kendo().Upload()
@@ -51,31 +45,23 @@ To send metadata over to the `Save()` handler:
     )
     ```
 
-4. Process the file and the associated description.
-
-The description, and any other fields of the `e.data` object, will be serialized in the `POST` request.
+4. Process the file and the associated description. The description, and any other fields of the `e.data` object, will be serialized in the `POST` request.
 
 ## Receiving Metadata
 
 The `save` handler can sometimes produce a result that needs to be routed back to the page. The Upload requires a response in a JSON format with a `Content-Type` set to `"text/plain"`. Responses that are not empty and in a format other than JSON are treated as a server error.
 
-> **Important**
->
 > The same approach of sending and receiving metadata is also applicable for the `remove` endpoint handler.
 
 To receive metadata from the `save` handler:
 
 1. Build the response.
 
-    ###### Example
-
     ```
     return Json(new object() { foo = "bar" });
     ```
 
 2. Declare a handler for the [`success` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) and process the response.
-
-    ###### Example
 
     ```
     function onSuccess(e) {
@@ -84,8 +70,6 @@ To receive metadata from the `save` handler:
     ```
 
 3. Attach the event handler.
-
-    ###### Example
 
     ```
     @(Html.Kendo().Upload()
@@ -100,12 +84,4 @@ To receive metadata from the `save` handler:
 
 ## See Also
 
-* [Overview of the Upload HtmlHelper]({% slug htmlhelpers_upload_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_upload_modes_of_operation_aspnetcore %})
-* [Dragging and Dropping of Files]({% slug htmlhelpers_upload_drag_drop_aspnetcore %})
-* [Chunk File Upload]({% slug htmlhelpers_upload_chunks_aspnetcore %})
-* [File Validation]({% slug htmlhelpers_upload_validation_aspnetcore %})
-* [Identifying Files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
-* [JavaScript API Reference of the Upload](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
-* [Upload HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/upload/overview)
-* [Upload Official Demos](http://demos.telerik.com/aspnet-core/upload/index)
+* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)

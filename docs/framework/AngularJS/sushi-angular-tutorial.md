@@ -4,7 +4,7 @@ page_title: Building the Hybrid Sushi Application | Kendo UI Hybrid Components
 description: "Build the Sushi single-page application by using the Kendo UI hybrid components in AngularJS."
 previous_url: /controls/hybrid/angular/sushi-angular-tutorial, /controls/hybrid/support/angular/tutorials/sushi-angular-tutorial, /AngularJS/tutorials/sushi-angular-tutorial
 slug: buildappswithangular_tutorial_hybridkendoui
-position: 8
+position: 9
 ---
 
 # Building the Hybrid Sushi Application

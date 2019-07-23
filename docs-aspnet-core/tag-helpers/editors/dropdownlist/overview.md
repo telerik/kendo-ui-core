@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: DropDownList | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI DropDownList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: DropDownList Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI DropDownList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/dropdownlist, /aspnet-core/helpers/tag-helpers/dropdownlist
 slug: taghelpers_dropdownlist_aspnetcore
 position: 1
@@ -9,17 +9,19 @@ position: 1
 
 # DropDownList Tag Helper Overview
 
-The DropDownList tag helper helps you configure the Kendo UI DropDownList widget in ASP.NET Core applications.
+The Telerik UI DropDownList tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI DropDownList widget.
 
-## Basic Usage
+The DropDownList displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
+
+* [Demo page for the DropDownList](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
+
+## Initializing the DropDownList
 
 The following example demonstrates how to define the DropDownList by using the DropDownList tag helper.
 
-###### Example
-
         <kendo-dropdownlist name="products" filter="FilterType.StartsWith"></kendo-dropdownlist>
 
-## Configuration
+## Basic Configuration
 
 The DropDownList tag helper configuration options are passed as attributes of the tag.
 
@@ -53,7 +55,5 @@ The DropDownList tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the DropDownList Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
+* [API Reference of the DropDownList Helper for ASP.NET Core](/api/dropdownlist)

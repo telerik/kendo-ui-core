@@ -1,22 +1,20 @@
 ---
 title:  Model Binding
-page_title: Model Binding | Kendo UI ComboBox HtmlHelper for ASP.NET Core
-description: "Learn how to implement Model Binding with Kendo UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Model Binding | Telerik UI ComboBox HtmlHelper for ASP.NET Core
+description: "Learn how to implement Model Binding with Telerik UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_combobox_modelbinding_aspnetcore
 position: 5
 ---
 
 # Model Binding
 
-You can implement model binding in the ComboBox with both [local data](#local-data) and [remote data](#remote-data), and in combination with [virtualization](#virtualization).
+You can implement model binding in the ComboBox with both [local data](#local-data) and [remote data](#remote-data).
 
 ## Local Data
 
 Local data is the data that is available on the client when the ComboBox is initialized.
 
 1. Pass the data to the view through `ViewData`.
-
-    ###### Example
 
         public IActionResult Index()
         {
@@ -43,9 +41,6 @@ Local data is the data that is available on the client when the ComboBox is init
 
 1. Add the ComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
-    ###### Example
-
-
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().ComboBoxFor(m => m.ProductID)
@@ -60,8 +55,6 @@ Local data is the data that is available on the client when the ComboBox is init
 You can configure the ComboBox to get its data from a remote source by making an AJAX request.
 
 1. Create an action that returns the data as a JSON result.
-
-    ###### Example
 
         public IActionResult Index()
         {
@@ -86,10 +79,6 @@ You can configure the ComboBox to get its data from a remote source by making an
 
 1. Add the ComboBox to the view and configure its DataSource to use remote data.
 
-    ###### Example
-
-
-
         @model MvcApplication1.Models.ProductViewModel
 
 
@@ -110,6 +99,4 @@ You can configure the ComboBox to get its data from a remote source by making an
 
 ## See Also
 
-* [JavaScript API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
-* [ComboBox HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/combobox/overview)
-* [ComboBox Official Demos](http://demos.telerik.com/aspnet-core/combobox/index)
+* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)

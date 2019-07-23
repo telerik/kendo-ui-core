@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: PanelBar | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI PanelBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: PanelBar Overview | Telerik UI for ASP.NET Core Tag Helpers
+description: "Learn the basics when working with the Telerik UI PanelBar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/panelbar, /aspnet-core/helpers/tag-helpers/panelbar
 slug: taghelpers_panelbar_aspnetcore
 position: 1
@@ -9,18 +9,20 @@ position: 1
 
 # PanelBar Tag Helper Overview
 
-The PanelBar tag helper helps you configure the Kendo UI PanelBar widget in ASP.NET Core applications.
+The Telerik UI PanelBar tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI PanelBar widget.
 
-## Basic Usage
+The PanelBar displays hierarchical data as a multi-level, expandable widget.
+
+* [Demo page for the PanelBar](https://demos.telerik.com/aspnet-core/panelbar/tag-helper)
+
+## Initializing the PanelBar
 
 The following example demonstrates how to define the PanelBar by using the PanelBar tag helper.
-
-###### Example
 
         <kendo-panelbar name="panelbar1">
         </kendo-panelbar>
 
-## Configuration
+## Basic Configuration
 
 The PanelBar tag helper configuration options are passed as attributes of the tag. You can configure items by using a nested `<items>` tag and bind the widget by using either the `bind-to` option, or the `<hierarchical-datasource>` tag helper.
 
@@ -97,7 +99,5 @@ The PanelBar tag helper configuration options are passed as attributes of the ta
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the PanelBar Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar/tag-helper)
+* [API Reference of the PanelBar Helper for ASP.NET Core](/api/panelbar)

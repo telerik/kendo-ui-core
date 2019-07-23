@@ -1,37 +1,37 @@
 ---
 title: Overview
-page_title: FlatColorPicker | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI FlatColorPicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: FlatColorPicker Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI FlatColorPicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_flatcolorpickerhelper_aspnetcore
 position: 1
 ---
 
 # FlatColorPicker HtmlHelper Overview
 
-The FlatColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo UI FlatColorPicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker) widget.
+The Telerik UI FlatColorPicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI FlatColorPicker widget.
 
-## Configuration
+The FlatColorPicker is the HSV color selector which is used by default in the `kendo.ui.ColorPicker` popup when no palette is set.
 
-Add the FlatColorPicker.
+* [Demo page for the FlatColorPicker](https://demos.telerik.com/aspnet-core/flatcolorpicker/index)
 
-###### Example
+## Initializing the FlatColorPicker
+
+The following example demonstrates how to define the FlatColorPicker by using the FlatColorPicker HtmlHelper.
 
 ```
     @(Html.Kendo().FlatColorPicker()
-          .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
-          .Value("#ff0000") //Set the value of the FlatColorPicker.
+          .Name("flatcolorpicker") // The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
+          .Value("#ff0000") // Set the value of the FlatColorPicker.
     )
 ```
 
-## Event Handling
+## Events
 
-You can subscribe to all FlatColorPicker [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker#events).
+You can subscribe to all FlatColorPicker events.
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
-
-###### Example
 
 ```
       @(Html.Kendo().FlatColorPicker()
@@ -47,11 +47,9 @@ The following example demonstrates how to subscribe to events by a handler name.
       </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
 ```
       @(Html.Kendo().FlatColorPicker()
@@ -59,32 +57,26 @@ The following example demonstrates how to subscribe to events by a template dele
             .Events(e => e
                 .Change(@<text>
                   function(e) {
-                      //Handle the change event inline.
+                      // Handle the change event inline.
                   }
                   </text>)
             )
       )
 ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
+To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [FlatColorPicker API](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
 
-To reference an existing Kendo UI FlatColorPicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [FlatColorPicker API](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
-
-###### Example
-
-      //Put this after your Kendo UI FlatColorPicker for ASP.NET Core declaration.
+      // Place this after your Telerik UI FlatColorPicker for ASP.NET Core declaration.
       <script>
       $(function() {
-          //Notice that the Name() of the FlatColorPicker is used to get its client-side instance.
+          // The Name() of the FlatColorPicker is used to get its client-side instance.
           var flatcolorpicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
       });
       </script>
 
 ## See Also
 
-* [FlatColorPicker JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)
-* [Overview of the Kendo UI jQuery ColorPicker Widget](http://docs.telerik.com/kendo-ui/controls/editors/colorpicker/overview)
-* [Overview of UI for ASP.NET Core ColorPicker]({% slug overview_colorpickerhelper_aspnetcore %})
-* [Overview of UI for ASP.NET Core ColorPalette]({% slug overview_colorpalettehelper_aspnetcore %})
+* [Basic Usage of the FlatColorPicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/flatcolorpicker)
+* [API Reference of the FlatColorPicker HtmlHelper for ASP.NET Core](/api/flatcolorpicker)

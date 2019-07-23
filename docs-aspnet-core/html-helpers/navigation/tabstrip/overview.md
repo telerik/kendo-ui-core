@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: TabStrip | Telerik UI for ASP.NET Core HtmlHelpers
-description: "Learn the basics when working with the Kendo UI TabStrip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: TabStrip Overview | Telerik UI for ASP.NET Core HtmlHelpers
+description: "Learn the basics when working with the Telerik UI TabStrip HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/tabstrip
 slug: htmlhelpers_tabstrip_aspnetcore
 position: 1
@@ -9,13 +9,13 @@ position: 1
 
 # TabStrip HtmlHelper Overview
 
-The TabStrip HtmlHelper extension is a server-side wrapper for the [Kendo UI TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index) widget.
+The Telerik UI TabStrip HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TabStrip widget.
 
-It allows you to configure the Kendo UI TabStrip widget from server-side code. The [TabStrip](http://docs.telerik.com/kendo-ui/controls/navigation/tabstrip/overview) displays a collection of tabs with associated content. It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
+The TabStrip displays a collection of tabs with associated content. It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
 
-For more information on the HtmlHelper, refer to the article on the [TabStrip HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/tabstrip/overview).
+* [Demo page for the TabStrip](https://demos.telerik.com/aspnet-core/tabstrip/index)
 
-## Basic Usage
+## Initializing the TabStrip
 
 The following example demonstrates how to define the TabStrip by using the TabStrip HtmlHelper.
 
@@ -65,11 +65,9 @@ public class TabStripController : Controller
 }
 ```
 
-## Configuration
+## Basic Configuration
 
-The following example demonstrates the basic configuration of the TabStrip HtmlHelper and how to get the TabStrip widget instance.
-
-###### Example
+The following example demonstrates the basic configuration of the TabStrip HtmlHelper.
 
 ```
 @(Html.Kendo().TabStrip()
@@ -100,18 +98,21 @@ The following example demonstrates the basic configuration of the TabStrip HtmlH
 
 <script type="text/javascript">
     $(function () {
-        //Notice that the Name() of the TabStrip is used to get its client-side instance.
+        // The Name() of the TabStrip is used to get its client-side instance.
         var tabstrip = $("#tabstrip").data("kendoTabStrip");
         console.log(tabstrip);
     });
 </script>
 ```
 
+## Functionality and Features
+
+* [Tabs]({% slug htmlhelpers_tabstrip_aspnetcore_tabs %})
+* [Tab content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})
+
 ## Events
 
-The following example demonstrates the available TabStrip events and how an event handler could be implemented for each of them.
-
-###### Example
+The following example demonstrates the available TabStrip events and how an event handler could be implemented for each of them. For a complete example on basic TabStrip events, refer to the [demo on using the events of the TabStrip](https://demos.telerik.com/aspnet-core/tabstrip/events).
 
 ```
 @(Html.Kendo().TabStrip()
@@ -158,12 +159,6 @@ The following example demonstrates the available TabStrip events and how an even
 
 ## See Also
 
-* [TabStrip Tabs]({% slug htmlhelpers_tabstrip_aspnetcore_tabs %})
-* [TabStrip Tab Content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})
-* [JavaScript API Reference of the TabStrip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip)
-* [TabStrip HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/tabstrip/overview)
-* [TabStrip Official Demos](http://demos.telerik.com/aspnet-core/tabstrip/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Basic Usage of the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip)
+* [Using the API of the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/api)
+* [API Reference of the TabStrip HtmlHelper for ASP.NET Core](/api/tabstrip)

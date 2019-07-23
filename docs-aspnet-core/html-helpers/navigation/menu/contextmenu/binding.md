@@ -1,7 +1,7 @@
 ---
 title: Binding
-page_title: Data Binding | Kendo UI ContextMenu HtmlHelper for ASP.NET Core
-description: "Learn the basics approaches for binding the Kendo UI ContextMenu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Data Binding | Telerik UI ContextMenu HtmlHelper for ASP.NET Core
+description: "Learn the basics approaches for binding the Telerik UI ContextMenu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_contextmenu_databinding_aspnetcore
 previous_url: https://docs.telerik.com/aspnet-core/html-helpers/navigation/menu/contextmenu
 position: 2
@@ -13,9 +13,7 @@ The ContextMenu provides Model Binding for binding it to data:
 
 ## Model Binding
 
-The Kendo UI ContextMenu enables you to bind it to a hierarchical model.
-
-To perform model binding:
+The Telerik UI ContextMenu enables you to bind it to a hierarchical model.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}).
 
@@ -91,10 +89,4 @@ To perform model binding:
 
 ## See Also
 
-* [JavaScript API Reference of the Menu](http://docs.telerik.com/kendo-ui/api/javascript/ui/menu)
-* [Menu HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/menu/overview)
-* [Menu Official Demos](http://demos.telerik.com/aspnet-core/menu/index)
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)

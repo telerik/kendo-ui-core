@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Kendo UI MultiViewCalendar Tag for ASP.NET Core
-description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
+page_title: Disabled Dates | Telerik UI MultiViewCalendar Tag for ASP.NET Core
+description: "Learn how to disable dates in the Telerik UI MultiViewCalendar tag helper for ASP.NET Core."
 slug: disabled_dates_multiviewcalendar_taghelper_aspnetcore
 position: 6
 ---
@@ -11,8 +11,6 @@ position: 6
 The MultiViewCalendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
 
 To disable a date set an array of the dates that have to be disabled and list the days that need to be disabled by using the first letters from their names in English.
-
-###### Example
 
 ```tagHelper
 
@@ -30,7 +28,4 @@ To disable a date set an array of the dates that have to be disabled and list th
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

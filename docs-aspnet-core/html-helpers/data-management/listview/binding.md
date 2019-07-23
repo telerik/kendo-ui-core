@@ -1,24 +1,20 @@
 ---
 title: Ajax Binding
-page_title: Binding | Kendo UI ListView HtmlHelper for ASP.NET Core
-description: "Configure the Kendo UI ListView component for AJAX binding and easily enable client-data processing during AJAX binding."
+page_title: Ajax Binding | Telerik UI ListView HtmlHelper for ASP.NET Core
+description: "Configure the Telerik UI ListView for AJAX binding and easily enable client-data processing during AJAX binding."
 slug: htmlhelpers_listview_aspnetcore_ajaxbinding
 position: 2
 ---
 
 # Ajax Binding
 
-When configured for AJAX binding, the Kendo UI ListView for ASP.NET Core makes Ajax requests when doing paging.
+When configured for Ajax binding, the ListView for ASP.NET Core makes Ajax requests when doing paging.
 
 ## Getting Started
 
-### Configuration
-
-Below are listed the steps for you to follow when configuring the Kendo UI ListView for ASP.NET Core for Ajax binding.
+To configure the ListView for ASP.NET Core for Ajax binding:
 
 1. Add a new action method which returns data to populate the ListView. Note that the action method has a parameter of type `Kendo.Mvc.UI.DataSourceRequest`. It will contain the current ListView request information. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
-
-    ###### Example
 
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -26,11 +22,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 1. Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a `Kendo.Mvc.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
-    ###### Example
-
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
-            // result can be any IEnumerable or IQueriable
+            // The result can be any IEnumerable or IQueriable.
             var result = myService.Orders;
 
             var dsResult = result.ToDataSourceResult(request);
@@ -38,20 +32,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 1. Return the `DataSourceResult` as JSON.
 
-    ###### Example
-
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
-            // get orders from service
+            // Get orders from the service.
             var orders = myService.Orders;
 
-            // apply requested sort, page, group, filtering with the ToDataSourceResult() extension method
+            // Apply the requested sort, page, group, filtering with the ToDataSourceResult() extension method.
             var dsResult = orders.ToDataSourceResult(request);
 
             return Json(dsResult);
         }
 
-1. In the view, configure the ListView to use the action method created in the previous steps. You may use the sample model and data from the example below
+1. In the view, configure the ListView to use the action method created in the previous steps. You may use the sample model and data from the following example. The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
 
     ```Razor
         @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
@@ -135,7 +127,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
         {
             public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
             {
-                // result can be any IEnumerable or IQueriable, this is just an example you can copy and paste
+                // The result can be any IEnumerable or IQueriable.
+                // This is just an example that you can copy and paste.
                 var result = Enumerable.Range(0, 50).Select(i => new OrderViewModel
                 {
                     OrderID = i,
@@ -151,61 +144,53 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
         }
     ```
 
-The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
+## Adding More Parameters
 
-### Additional Parameters
+To pass additional parameters to the action method:
 
-To pass additional parameters to the action method, use the `Data` setting. Provide the name of a JavaScript function which will return an object containing the additional data.
+1. Use the `Data` setting.
+1. Provide the name of a JavaScript function which will return an object containing the additional data.
 
-The following example demonstrates the action method.
+  The following example demonstrates the action method.
 
-###### Example
-
-    public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
-    {
-        //Implementation omitted
-    }
-
-
-The following example demonstrates how to send additional data.
-
-###### Example
-
-    @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
-        .Name("ListView")
-        .TagName("div")
-        .ClientTemplateId("template")
-        .DataSource(dataSource => dataSource
-            .Ajax()
-            .PageSize(6)
-            .Read(read => read.Action("Orders_Read", "ListView").Data("additionalData"))
-        )
-        .Pageable()
-    )
-    <script>
-        function additionalData() {
-            return {
-                firstName: "John",
-                lastName: "Doe"
-            };
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
+        {
+            // The implementation is omitted for brevity.
         }
-    </script>
 
-### Client Data Processing
+  The following example demonstrates how to send additional data.
 
-By default, Kendo UI ListView for ASP.NET Core requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. This behavior
-can be changed by disabling `ServerOperation`.
+        @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
+            .Name("ListView")
+            .TagName("div")
+            .ClientTemplateId("template")
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(6)
+                .Read(read => read.Action("Orders_Read", "ListView").Data("additionalData"))
+            )
+            .Pageable()
+        )
+        <script>
+            function additionalData() {
+                return {
+                    firstName: "John",
+                    lastName: "Doe"
+                };
+            }
+        </script>
 
-###### Example
+## Processing Client Data
+
+By default, Telerik UI ListView for ASP.NET Core requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
 
     .DataSource(dataSource => dataSource
-        .ServerOperation(false) // all data will be requested at once and data operations will be applied client-side
+        .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
         .Read(read => read.Action("Orders_Read", "ListView"))
     )
 
 ## See Also
 
-* [Overview of the ListView HtmlHelper]({% slug htmlhelpers_listview_aspnetcore %})
-* [JavaScript API Reference of the ListView](http://docs.telerik.com/kendo-ui/api/javascript/ui/listview)
-* [Overview of the jQuery Kendo UI ListView Widget](https://docs.telerik.com/kendo-ui/controls/data-management/listview/overview)
-* [UI for ASP.NET Core ListView Official Demos](http://demos.telerik.com/aspnet-core/listview/index)
+* [Binding to Remote Data by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/remote-data-binding)
+* [Customizing the Data Source of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/custom-datasource)
+* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
