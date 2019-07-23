@@ -16,18 +16,21 @@ navigation:
         position: 0
      "getting-started":
         title: "Getting Started"
-        position: 3
+        position: 2
      "helpers":
         title: "Widgets"
-        position: 4
+        position: 3
      "vs-integration":
         title: "Visual Studio Integration"
-        position: 5
+        position: 4
      "migration":
         title: "Migration"
-        position: 6
+        position: 5
      "styles-and-layout":
         title: "Styles and Appearance"
+        position: 6
+     "accessibility":
+        title: "Accessibility"
         position: 7
      "how-to":
         title: "How To"
