@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
         %>
     ```
     ```Razor
-        (Html.Kendo().DateTimePicker()
+        @(Html.Kendo().DateTimePicker()
             .Name("datetimepicker") //The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
             .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the DateTimePicker.
             .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the DateTimePicker.
