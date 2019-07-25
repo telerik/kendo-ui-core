@@ -29,7 +29,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
             return Json(DiagramDataRepository.OrgChart(), JsonRequestBehavior.AllowGet);
         }
 
-<!--_-->
 1. In the view, configure the Diagram to use the action method created in the previous step.
 
     ```ASPX
