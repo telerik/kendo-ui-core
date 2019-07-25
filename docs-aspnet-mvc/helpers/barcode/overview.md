@@ -46,14 +46,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
         <%: Html.Kendo().Barcode()
                 .Name("barcode")
                 .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
-                .Value("foo")
+                .Value("123456789123")
         %>
     ```
     ```Razor
         @(Html.Kendo().Barcode()
                 .Name("barcode")
                 .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
-                .Value("foo")
+                .Value("123456789123")
         )
     ```
 
