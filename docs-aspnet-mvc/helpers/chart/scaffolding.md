@@ -52,7 +52,7 @@ On the next screen, you are presented with the Model and Data Context options.
 
 1. Enter the Controller and View names.
 
-	**Figure 4. The Grid options**
+	**Figure 4. The Chart options**
 
 	![Grid options](../../helpers/grid/images/scaffolding/kendo_ui_grid1.png)
 
@@ -75,13 +75,14 @@ On the next screen, you are presented with the Model and Data Context options.
 1. If you have not yet created it, add a new class to the `~/Models` folder. Name it `ProductViewModel`.
 
 	###### Example
-
-			public class ProductViewModel
+      ```C#
+	public class ProductViewModel
       {
           public int ProductID { get; set; }
           public string ProductName { get; set; }
           public short? UnitsInStock { get; set; }
       }
+      ```
 
 1. Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.
 
@@ -105,7 +106,7 @@ On the next screen, you are presented with the Model and Data Context options.
 	* **Data Binding Type**&mdash;Remote or Local.
 	* **Title**&mdash;Define the `Title` of the Chart.
 	* **Show Tooltip**&mdash;Show the tooltip.
-	* **Show Legend**&mdash;Show a legend. The available options are `Bottom` and `Top`.
+	* **Show Legend**&mdash;Show a legend. The available options are `Bottom`,`Top`, `Left`, and `Right`.
 
 	**Figure 9. The legend options**
 
