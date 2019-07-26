@@ -94,7 +94,7 @@ Because this approach is not related to the functionality of the Kendo UI suite,
           kendoLinks = $("link[href*='kendo.']"),
           commonLink = kendoLinks.filter("[href*='kendo.common']"),
           skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
-          href = location.href,
+          url = location.href,
           skinRegex = /kendo\.\w+(\.min)?\.css/i,
           extension = skinLink.attr("rel") === "stylesheet" ? ".css" : ".less",
           newSkinUrl = skinLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1" + extension);

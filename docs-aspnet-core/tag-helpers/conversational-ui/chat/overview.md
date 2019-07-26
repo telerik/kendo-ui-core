@@ -13,7 +13,7 @@ The Telerik UI Chat tag helper for ASP.NET Core is a server-side wrapper for the
 
 The Chat allows the user to participate in chat sessions with other users or with chat bots. It provides support for default cards and actions, and enables the configuration of custom templates and custom components.
 
-* [Demo page for the Chat](https://demos.telerik.com/aspnet-core/chat/index)
+* [Demo page for the Chat](https://demos.telerik.com/aspnet-core/chat/tag-helper)
 
 ## Initializing the Chat
 
