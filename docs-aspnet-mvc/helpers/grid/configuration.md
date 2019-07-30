@@ -445,7 +445,7 @@ The following example demonstrates how to prevent `html` encoding.
 
 The `Filterable` method enables or disables the filtering UI. By default, it is set to `true` which means that the bound Grid columns can be filtered using the filtering UI.
 
-The following example demonstrates how to disable filtering.
+The following example demonstrates how to disable filtering for a specific column.
 
 ###### Example
 
@@ -462,6 +462,34 @@ The following example demonstrates how to disable filtering.
             .Read(read => read.Action("Products_Read", "Home"))
         )
     )
+
+### Search Panel
+
+The `Search` method enables or disables the Search Panel in the Grid toolbar. The Search Panel uses filtering under the hood to show only the relevant records in the Grid. 
+
+In addition it is possible to customize which fields to search when a value is entered in the search input.
+
+
+###### Example
+
+    @(Html.Kendo().Grid<Product>()
+        .Name("grid")
+        .Columns(
+        {
+            columns.Bound(product => product.ProductID).Filterable(false);
+            columns.Bound(product => product.ProductName);
+        })
+        .ToolBar(t => t.Search())
+        .Search(s=> { s.Field(c => c.ProductName); })
+        .DataSource(dataSource => dataSource
+            .Ajax() 
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    )
+
+When filtering is enabled in the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
+
+> When server operations are enabled it is possible to search only using string fields. Using `Contains` filter operation is available only for string types. 
 
 ### Format
 

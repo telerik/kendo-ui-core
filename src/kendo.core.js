@@ -4094,7 +4094,7 @@ function pad(number, digits, end) {
         }
 
         function setHours(date, time) {
-            date = new Date(kendo.date.getDate(date).getTime() + kendo.date.getMilliseconds(time));
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
             adjustDST(date, time.getHours());
             return date;
         }

@@ -686,7 +686,8 @@ var __meta__ = { // jshint ignore:line
                     if (current) {
                         element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
-                }
+                },
+                useValueToRender: true
             });
             ul = timeView.ul;
         },

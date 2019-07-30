@@ -191,6 +191,43 @@ The example below demonstrates how to disable gradients.
     </script>
 ```
 
+### Reduce the Number of Rendered Elements
+
+When you have a lot of data points and categories, having all of them render will not only slow the chart down, but will also make the chart unreadable for the end user.
+
+You can hide certain elements from the chart to improve both aspects:
+
+* hide minor and major grid lines on the x-axis where many categories exist
+* set a step for the category axis labels so only ever n-th label renders
+* use a shorter format string for date axis labels
+* hide labels for series and/or axes entirely
+
+###### Example
+
+```dojo
+    <div id="chart"></div>
+    <script>
+        $(function() {
+            $("#chart").kendoChart({
+               categoryAxis: {
+                  minorGridLines: {visible: false},//hide unnecessary elements
+                  majorGridLines: {visible: false},//hide unnecessary elements
+                  labels: {
+                    step: 60,//every hourly label so they don't overlap
+                    rotation: 90,//rotate so they take up less horizontal space and also reduce overlap
+                    //visible: false,//hide labels altogether, you can set that for the series/seriesDefaults as well
+                    dateFormats: {
+                      days: "HH:mm" //use shorter format for the labels
+                    }
+                  },
+                  baseUnit: "minutes" //set up a date axis, choose an appropriate range for your data
+                },
+                transitions: false
+            });
+        });
+    </script>
+```
+
 ## See Also
 
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})

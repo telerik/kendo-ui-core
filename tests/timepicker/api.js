@@ -593,5 +593,16 @@
             currentTarget.click();
             assert.equal(timepicker.options.dates[0], timepicker.value());
         });
+
+        it("refresh() should not render items which belong to another date", function () {
+            timepicker = input.kendoTimePicker({
+                min: new Date(2000, 1, 1, 18, 0, 0),
+                max: new Date(2000, 1, 2, 17, 0, 0)
+            }).data("kendoTimePicker");
+
+            timepicker.timeView.refresh();
+
+            assert.equal(timepicker.timeView.ul.find('li').length, 12);
+        });
     });
 }());

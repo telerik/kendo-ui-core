@@ -180,6 +180,8 @@ var __meta__ = { // jshint ignore:line
                 format = options.format,
                 offset = dst(),
                 ignoreDST = offset < 0,
+                value = kendo.parseDate(that._value),
+                parsedValue = value ? mergeDateAndTime(value, options.min) : mergeDateAndTime(new Date(), options.min),
                 min = options.min,
                 max = options.max,
                 msMin = getMilliseconds(min),
@@ -188,7 +190,7 @@ var __meta__ = { // jshint ignore:line
                 msInterval = options.interval * MS_PER_MINUTE,
                 toString = kendo.toString,
                 template = that.template,
-                start = new DATE(+min),
+                start = options.useValueToRender ? parsedValue : new Date(+options.min),
                 startDate = new DATE(start),
                 msStart,
                 length,
@@ -217,10 +219,11 @@ var __meta__ = { // jshint ignore:line
                     if (msStart > msMax) {
                         start = new DATE(+max);
                     }
-                    html += template(toString(start, format, options.culture));
+                    if (getMilliseconds(start) > 0) {
+                        html += template(toString(start, format, options.culture));
+                    }
                     break;
                 }
-
                 if (startDate.getDate() != start.getDate()) {
                     break;
                 }
@@ -961,6 +964,16 @@ var __meta__ = { // jshint ignore:line
 
     function preventDefault(e) {
         e.preventDefault();
+    }
+
+    function mergeDateAndTime(date, time) {
+        return new Date(date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),
+            time.getHours(),
+            time.getMinutes(),
+            time.getSeconds(),
+            time.getMilliseconds());
     }
 
     ui.plugin(TimePicker);
