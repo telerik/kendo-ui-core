@@ -47,8 +47,8 @@ To control the selection in the Grid, use the `selectable` property.
 ## Select Modes
 
 The Grid supports the following select modes:
-* [Single and multiple selection (htmlhelper demo)](https://demos.telerik.com/aspnet-core/grid/selection)
-* [Checkbox selection (htmlhelper demo)](https://demos.telerik.com/aspnet-core/grid/checkbox-selection)
+* [Single and multiple selection](https://demos.telerik.com/aspnet-core/grid/selection)
+* [Checkbox selection](https://demos.telerik.com/aspnet-core/grid/checkbox-selection)
 
 You can set the select mode to `Multiple` or `Single`. Additionally, the Grid provides the `Row` and `Cell` select types which allow multiple or single selection of rows or cells.
 
@@ -94,9 +94,9 @@ Accepted values in the kendo-grid tag for `selectable` are:
 
 The Grid also provides a built-in functionality for persisting the selection through the `persist-selection` property by setting it to be `true`. 
 
->You also need to configure the `ID` field in the schema of the DataSource. For a runnable example, refer to the [htmlhelper demo on persisting the state of the Grid](https://demos.telerik.com/aspnet-core/grid/persist-state).
+>You also need to configure the `ID` field in the schema of the DataSource. For a runnable example, refer to the [demo on persisting the state of the Grid](https://demos.telerik.com/aspnet-core/grid/persist-state).
 
-​```tagHelper
+```tagHelper
         <kendo-grid name="grid" height="550" on-change="onChange" persist-selection="true">
             <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
                 <transport>
