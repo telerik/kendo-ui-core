@@ -8,12 +8,14 @@ position: 6
 
 # Calendar Types
 
-By default, the DatePicker works with JavaScript `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar and, as a result, the DatePicker does not support other calendar types.
+By default, the DatePicker works with JavaScript `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar.
 
-To work around the default behavior of the widget and simulate a different calendar type, such as Lunar:
+As a result, the DatePicker does not support other calendar types such as Lunar.
 
-1. Use the JavaScript `Date` object.
-1. Create a date that is in the past.
+To work around the default behavior of the widget and simulate a different calendar type, use either of the following approaches:
+
+* Use the JavaScript `Date` object.
+* Create a date that is in the past.
 
 ```dojo
 <fieldset>
@@ -24,12 +26,12 @@ To work around the default behavior of the widget and simulate a different calen
     <label for="lunarStyle">Lunar year:</label>
     <input id="lunarStyle" type="text" />
 </fieldset>
-<h4>Disclamer: In both cases the Gregorian calendar date is used. The second widget just shows the Gregorian date with the Lunar year.</h4>
+<h4>Disclamer: In both cases, the DatePicker uses the Gregorian calendar date. The second widget only displays the Gregorian date with the Lunar year.</h4>
 
 <script>
 $(function() {
-    var gregorian = new Date(2000, 10, 10); //date using Gregorian calendar
-    var lunar = new Date(1497, 10, 10); //date using Gregorian calendar but created in lunar year
+    var gregorian = new Date(2000, 10, 10); // A date using the Gregorian calendar.
+    var lunar = new Date(1497, 10, 10); // A date using the Gregorian calendar but created in a Lunar year.
 
     $("#gregorianStyle").kendoDatePicker({ value: gregorian });
     $("#lunarStyle").kendoDatePicker({

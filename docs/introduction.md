@@ -208,6 +208,12 @@ Kendo UI Core is the free and open-source Kendo UI distribution, released under 
 
 Kendo UI is also incorporated into products such as [Telerik Platform](http://www.telerik.com/platform#overview), [Telerik Analytics](http://www.telerik.com/analytics), [Sitefinity](http://www.sitefinity.com/), [TeamPulse](http://www.telerik.com/teampulse), [Test Studio](http://www.telerik.com/teststudio), and others.
 
+## Monitoring the Progress Live Services
+
+Progress provides up-to-date information about the live services it delivers to its customers on a daily basis&mdash;for example, the Kendo UI CDN services, Kendo UI Dojo playground, and Telerik NuGet feed.
+
+* [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/)
+
 ## Trial Version and Commercial License
 
 This Kendo UI for jQuery library is a commercial UI library. You are welcome to explore its full functionality and get technical support from the team when you register for a free 30-day trial. To use it commercially, you need to [purchase a license](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Kendo UI for jQuery [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.
