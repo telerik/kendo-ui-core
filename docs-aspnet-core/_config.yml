@@ -99,8 +99,17 @@ navigation:
      "html-helpers/editors":
         title: "Editors"
         position: 2
+     "html-helpers/editors/datetimepicker/globalization":
+        title: "Globalization"
+        position: 40
+     "html-helpers/editors/datetimepicker/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
+     "html-helpers/editors/datepicker/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/charts":
         title: "Charts"
         position: 3
@@ -322,6 +331,8 @@ navigation:
         title: "Templates"
      "*switch":
         title: "Switch"
+     "*/accessibility":
+        title: "Accessibility"
 
 ## The application virtual path
 baseurl: /aspnet-core

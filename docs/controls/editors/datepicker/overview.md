@@ -27,7 +27,7 @@ The following example demonstrates how to initialize the DatePicker.
     </script>
 ```
 
-## Features and Functionality
+## Functionality and Features
 
 * [Disabled dates]({% slug disableddates_datepicker %})
 * [Selected dates]({% slug selecteddates_datepicker %})
@@ -37,6 +37,8 @@ The following example demonstrates how to initialize the DatePicker.
 * [Week number column]({% slug weeknumcolumn_datepicker %})
 * [DateInput integration]({% slug dateinputintegration_datepicker %})
 * [Templates]({% slug templates_datepicker %})
+* [Globalization]({% slug globalization_datepicker %})
+* [Accessibility]({% slug accessibility_datepicker %})
 
 For more information on implementing specific scenarios, refer to the [**Knowledge Base** section](https://docs.telerik.com/kendo-ui/knowledge-base).
 
