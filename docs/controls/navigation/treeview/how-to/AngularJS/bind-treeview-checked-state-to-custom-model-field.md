@@ -104,8 +104,10 @@ The following example demonstrates how to bind the checked state of a Kendo UI T
           for (var i = 0; i < model.length; i++) {
             var dataItem = model[i];
             var node = dataSource[i];
-
-            dataItem.isChecked = node.checked;
+            
+            if (node.checked != undefined) {
+              dataItem.isChecked = node.checked;
+            }
 
             if (dataItem.items) {
               updateChecked(dataItem.items, node.children.data());
