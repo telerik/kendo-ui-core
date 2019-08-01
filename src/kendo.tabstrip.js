@@ -357,7 +357,7 @@ var __meta__ = { // jshint ignore:line
                 isHorizontal = /top|bottom/.test(that.options.tabPosition),
                 action;
 
-            if (e.target != e.currentTarget) {
+            if (e.target != e.currentTarget || !current) {
                 return;
             }
 

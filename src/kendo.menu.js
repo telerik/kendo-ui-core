@@ -34,7 +34,7 @@ var __meta__ = { // jshint ignore:line
         MENU = "k-menu",
         LINK = "k-link k-menu-link",
         LINK_SELECTOR = ".k-link",
-        ICON_SELECTOR = ".k-menu-icon",
+        ICON_SELECTOR = ".k-menu-expand-arrow",
         LAST = "k-last",
         CLOSE = "close",
         TIMER = "timer",
@@ -2280,7 +2280,7 @@ var __meta__ = { // jshint ignore:line
                 ),
                 scrollButton: template(
                     "<span class='k-button k-button-icon k-menu-scroll-button k-scroll-#= direction #' unselectable='on'>" +
-                    "<span class='k-icon k-i-arrow-60-#= direction # k-menu-icon'></span></span>"
+                    "<span class='k-icon k-i-arrow-60-#= direction #'></span></span>"
                 ),
                 arrow: template("<span class='#= arrowClass(item, group) #'></span>"),
                 sprite: template("# var spriteCssClass = " + fieldAccessor("spriteCssClass") + "(data); if(spriteCssClass) {#<span class='k-sprite #= spriteCssClass #'></span>#}#"),
