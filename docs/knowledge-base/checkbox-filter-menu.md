@@ -94,7 +94,7 @@ The following example demonstrates how to create a menu functionality based on a
 
         var helpTextElement = e.container.children(":first").children(":first");
         helpTextElement.nextUntil(":has(.k-button)").remove();
-        var element = $("<div class='checkbox-ontainer'></div>").insertAfter(helpTextElement).kendoListView({
+        var element = $("<div class='checkbox-container'></div>").insertAfter(helpTextElement).kendoListView({
           dataSource: checkboxesDataSource,
           template: "<div><input type='checkbox' value='#:" + field + "#'/>#:" + field + "#</div>"
         });
@@ -149,7 +149,7 @@ The following example demonstrates how to create a menu functionality based on a
       }
     </script>
     <style type="text/css">
-      .checkbox-ontainer
+      .checkbox-container
       {
         max-height: 200px;
         overflow:auto;

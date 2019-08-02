@@ -154,7 +154,6 @@ The following example demonstrates the basic configuration of the Menu HtmlHelpe
 
 * [Binding]({% slug htmlhelpers_menu_databinding_aspnetcore %})
 * [Context menu]({% slug htmlhelpers_contextmenu_aspnetcore %})
-* [Security trimming]({% slug htmlhelpers_menu_securitytrimming_aspnetcore %})
 * [Keyboard navigation]({% slug htmlhelpers_menu_keyboardnavigation_aspnetcore %})
 
 ## Events
