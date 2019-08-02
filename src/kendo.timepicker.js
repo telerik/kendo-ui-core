@@ -624,7 +624,8 @@ var __meta__ = { // jshint ignore:line
                     format: options.format,
                     min: min,
                     max: max,
-                    value: options.value
+                    value: options.value,
+                    interval: options.interval
                 });
             }
             that._old = that._update(options.value || that.element.val());

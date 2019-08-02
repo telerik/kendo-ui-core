@@ -770,7 +770,8 @@ var __meta__ = { // jshint ignore:line
                     culture: options.culture,
                     format: options.format,
                     min: options.min,
-                    max: options.max
+                    max: options.max,
+                    interval: options.interval
                 });
             }
         },

@@ -394,7 +394,11 @@ var __meta__ = { // jshint ignore:line
                 selection = caret(this.element[0]);
                 var symbol = this._format[selection[0]];
                 if (knownSymbols.indexOf(symbol) >= 0) {
-                    this._dateTime.modifyPart(symbol, key == 38 ? 1 : -1);
+                    var interval = 1;
+                    if (symbol == 'm') {
+                        interval = this.options.interval || 1;
+                    }
+                    this._dateTime.modifyPart(symbol, key == 38 ? interval * 1 : interval * -1);
                     this._updateElementValue();
                     this._selectSegment(symbol);
                     this.element.trigger(CHANGE);
