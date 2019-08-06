@@ -10,12 +10,33 @@ type: how-to
 res_type: kb
 ---
 
-The AutoComplete filter of the Grid is bound to the whole data source of the Grid widget.
+## Environment
 
-However, it is possible to show the AutoComplete results only for the current filter of the Grid. To achieve this  by following the steps below:
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI AutoComplete</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>Google Chrome</td>
+ </tr>
+</table>
+
+## Description
+
+How can I show AutoComplete suggestions for the current Grid filter in Kendo UI?
+
+## Solution
+
+The AutoComplete filter of the Grid is bound to the whole data source of the Grid widget. However, it is possible to show the AutoComplete results only for the current filter of the Grid.
 
 1. Handle the [`dataBound` event of the Grid](/api/javascript/ui/grid/events/databound).
-2. Get the [data source filter of the Grid](/api/javascript/data/datasource/methods/filter) in the dataBound handler and set it as a filter to the AutoComplete data source.
+1. Get the [data source filter of the Grid](/api/javascript/data/datasource/methods/filter) in the dataBound handler and set it as a filter to the AutoComplete data source.
 
 The following example demonstrates how to use the AutoComplete for filtering and consider the current filter of the Grid.
 

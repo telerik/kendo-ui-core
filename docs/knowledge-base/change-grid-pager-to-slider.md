@@ -10,9 +10,28 @@ type: how-to
 res_type: kb
 ---
 
-The following example demonstrates how to change the default pager of the Grid to a slider.
+## Environment
 
-To achieve this behavior:
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I change the default pager of the Kendo UI Grid to a slider?
+
+## Solution
 
 1. Remove the default pager buttons on the first [`dataBound`](/api/javascript/ui/grid/events/databound) event.
 1. Create a Kendo UI Slider in their place.

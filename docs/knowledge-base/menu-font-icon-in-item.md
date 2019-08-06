@@ -1,16 +1,16 @@
 ---
-title: Menu Font Icon
-description: How to add font icons in a Kendo Menu item
+title: Add Font Icons to Menu Items
+description: An example on how to add font icons to a Kendo UI Menu item.
 type: how-to
-page_title: Font Icon in Kendo Menu
+page_title: Add Font Icons to Menu Items | Kendo UI Menu
 slug: menu-font-icon-in-item
-position: 
 tags: font,icon,menu
 ticketid: 1413471
 res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tbody>
 	    <tr>
@@ -22,16 +22,14 @@ res_type: kb
 
 
 ## Description
-The Kendo menu provides built-in support for raster images and sprites in its items, but you may want to add font icons as well.
 
-How to add font icons in a Kendo Menu item?
+The Kendo UI Menu provides built-in support for raster images and sprites in its items. However, how can I add font icons to a Kendo UI Menu item?
 
 ## Solution
-The easiest solution is to add your own HTML inside the menu items that supports font icons, for example, the [Kendo Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
 
-Below follow examples for the MVC HTML helpers and for a plain jQuery widget.
+Inside the Menu items, add your own HTML which supports font icons&mdash;for example, the [Kendo UI font icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
 
-For MVC - set `.Encode(false)` for the item so its HTML is parsed, and escape quotation marks:
+The following examples demonstrate the implementation of the suggested approach for the MVC HTML helpers and for a plain jQuery widget. For the MVC instance, set `.Encode(false)` for the item so that its HTML is parsed, and escape the quotation marks.
 
 ```
 @(Html.Kendo().Menu()
@@ -55,7 +53,7 @@ For MVC - set `.Encode(false)` for the item so its HTML is parsed, and escape qu
 )
 ```
 
-With a plain jQuery widget, you only need to add the HTML to the markup you instantiate the widget from
+When you work with a plain jQuery widget, you only need to add the HTML to the markup from which you instantiate the widget.
 
 ```dojo
 <ul id="menu">
@@ -65,15 +63,15 @@ With a plain jQuery widget, you only need to add the HTML to the markup you inst
             <li>
                 Furniture
             </li>
-          
-          <!-- if you instantiate the menu from HTML, you can put your own
-                content in it, and there you can easily use font icons
+
+          <!-- If you instantiate the Menu from HTML, you can put your own
+                content in it. There, you can use the font icons
                 as described in the following article:
                 https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web
           -->
             <li><span class="k-icon k-i-clock"></span>I have a font icon</li>
-          
-          
+
+
             <li>
                 Decor
             </li>
@@ -88,4 +86,3 @@ $(document).ready(function() {
 });
 </script>
 ```
-

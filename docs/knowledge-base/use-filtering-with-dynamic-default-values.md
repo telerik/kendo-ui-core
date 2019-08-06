@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use dynamic default field values in the jQuery Grid by Kendo UI when its filtering functionality is applied?
+
+## Solution
+
 Your project might require you to apply a specific approach to the Grid when you use its filtering functionality.
 
 For example, you might need to:

@@ -1,8 +1,8 @@
 ---
 title: Place Labels under Panes in CategoryAxis
-description: An example demonstrating how to position the CategoryAxis labels below each series in a pane
+description: An example on how to position the CategoryAxis labels of the Kendo UI Chart below each series in a pane.
 type: how-to
-page_title: Position CategoryAxis labels under Multiple Panes | Kendo UI Chart
+page_title: Position CategoryAxis Labels under Multiple Panes | Kendo UI Chart
 slug: chart-label-position-pane-category-axis
 tags: chart, label, position, pane, category, axis
 ticketid: 1411207
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,27 +24,29 @@ res_type: kb
 
 ## Description
 
-How can I position the categoryAxis labels below multiple panes?  
+How can I position the `categoryAxis` labels below multiple panes in a Kendo UI Chart?  
 
 ## Solution
 
-In order to place the CategoryAxis labels below each pane, set the [categoryAxis.labels.position configuration](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsposition) to "start".
+Set the [`categoryAxis.labels.position` configuration](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsposition) to `start`.
 
 ```javascript
         categoryAxis: [{
           categories: ["Category 1", "Category 2", "Category 3", "Category 4"],
           pane: "bottom-pane",
-          labels: { 
+          labels: {
             position: "start"
           },
         },{
           categories: ["Category 1", "Category 2", "Category 3", "Category 4"],
           pane: "top-pane",
-          labels: { 
+          labels: {
             position: "start"
           },
         }]
 ```
+
+The following example demonstrates the full implementation of the suggested approach.
 
 ```dojo
     <div id="chart"></div>
@@ -64,13 +67,13 @@ In order to place the CategoryAxis labels below each pane, set the [categoryAxis
         categoryAxis: [{
           categories: ["Category 1", "Category 2", "Category 3", "Category 4"],
           pane: "bottom-pane",
-          labels: { 
+          labels: {
             position: "start"
           },
         },{
           categories: ["Category 1", "Category 2", "Category 3", "Category 4"],
           pane: "top-pane",
-          labels: { 
+          labels: {
             position: "start"
           },
         }]
@@ -80,4 +83,4 @@ In order to place the CategoryAxis labels below each pane, set the [categoryAxis
 
 ## See Also
 
-* [categoryAxis.labels.position - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsposition)
+* [API Reference of categoryAxis.labels.position](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsposition)

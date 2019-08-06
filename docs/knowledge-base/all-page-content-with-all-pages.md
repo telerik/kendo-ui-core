@@ -10,6 +10,25 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I export all Kendo UI Grid pages and their full page content in a PDF file?
+
+## Solution
+
 The following example demonstrates how to export all Grid pages and their full page content in a PDF file.
 
 ```dojo

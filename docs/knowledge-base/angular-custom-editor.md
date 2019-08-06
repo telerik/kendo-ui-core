@@ -1,6 +1,6 @@
 ---
-title: Create Custom Editors
-page_title: Create Custom Editors | AngularJS Kendo UI Grid
+title: Create Custom Editors in AngularJS
+page_title: Create Custom Editors in AngularJS | Kendo UI Grid for jQuery
 description: "An example on how to create custom editors in the Kendo UI Grid by using AngularJS."
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-custom-editor
 slug: howto_create_custom_editors_grid
@@ -9,6 +9,29 @@ component: grid
 type: how-to
 res_type: kb
 ---
+
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress AngularJS Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+ <tr>
+  <td>Preferred Framework</td>
+  <td>AngularJS</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create a custom editor in the Kendo UI Grid in AngularJS applications?
+
+## Solution
 
 The following example demonstrates how to create a custom editor in the [Grid](http://www.telerik.com/kendo-ui/grid) in AngularJS applications.
 

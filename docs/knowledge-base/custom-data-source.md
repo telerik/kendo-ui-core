@@ -10,6 +10,29 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I customize the data source options for the PDF export of the Kendo UI Grid for jQuery?
+
+## Solution
+
 To fetch all data pages, the PDF Export functionality uses the configured Data Source.
 
 If your project requires you to avoid this behavior, customize the Data Source by using a different Data Source instance during the export in PDF.

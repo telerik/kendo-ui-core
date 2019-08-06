@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I resize the Kendo UI Grid with the drag handle and apply the new size?
+
+## Solution
+
 The following example demonstrates how to resize the Kendo UI Grid by dragging its bottom-right corner.
 
 The handler will be shown only at the bottom-right corner of the Grid after hover.

@@ -10,6 +10,31 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+
+</table>
+
+
+## Description
+
+How can I change the header position of the locked columns in a Kendo UI Grid?
+
+## Solution
+
 The following example demonstrates how to change the group header position when locked columns are used to show them on the right table.
 
 ```dojo

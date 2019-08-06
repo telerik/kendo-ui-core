@@ -100,7 +100,7 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
 </div>
 ```
 
-### Notes
+## Notes
 
 The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 release.
 

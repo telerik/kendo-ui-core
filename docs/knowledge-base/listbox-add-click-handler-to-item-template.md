@@ -1,16 +1,16 @@
 ---
-title: How to add a click handler to an icon in the ListBox template
-description: How do I add a small icon to the listbox items that would launch a window?
+title: Add Click Handlers to Icons in the ListBox Template
+description: An example on how to add a small icon to the Kendo UI ListBox items that will launch a window.
 type: how-to
-page_title: How to add a click handler to an item in a draggable ListBox
+page_title: Add Click Handlers to Icons in a Draggable ListBox | Kendo UI ListBox for jQuery
 slug: listbox-add-click-handler-to-item-template
-position:
 tags: listbox, click, icon, template, function, click not working, draggable
 ticketid: 1401928
 res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tbody>
 	    <tr>
@@ -26,11 +26,11 @@ res_type: kb
 
 ## Description
 
-I would like to add a small icon to the template of the Kendo UI ListBox that is clickable.  No matter what I try the function is not executed.
+How can I add a small icon to the template of the Kendo UI ListBox that is clickable? No matter what I try the function is not executed.
 
 ## Solution
 
-The Kendo UI ListBox prevents the `mousedown` event as it needs it for dragging and selection. To be able to attach a handler that responds to an external mouse event, you can wrap the list box in another div and check for the target element during  `mousedown` or `click`.
+The Kendo UI ListBox prevents the `mousedown` event as it needs it for dragging and selection. To attach a handler that responds to an external mouse event, wrap the ListBox in another `div` and check for the target element during `mousedown` or `click`.
 
 ```tab-jQuery
  	<div id="listbox-container">
@@ -38,7 +38,7 @@ The Kendo UI ListBox prevents the `mousedown` event as it needs it for dragging 
     </div>
 
 		<script>
-	 	// the item template has an icon with class see-more
+	 	// The item template has an icon with a see-more class.
 	  $("#listbox-container").on("click", ".see-more", function(e){
         var dataItem = listbox.dataItem($(e.target).closest(".k-item"));
         kendo.alert("Children: " + kendo.stringify(dataItem.children));
@@ -63,7 +63,7 @@ The Kendo UI ListBox prevents the `mousedown` event as it needs it for dragging 
 	</script>
 ```
 
-###### Example
+The following example demonstrates the full implementation of the suggested approach.
 
 ```dojo
 	<script type="text/kendo-x-tmpl" id="template">

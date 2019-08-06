@@ -10,6 +10,25 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I add a new row when the user navigates out of the last row in the Kendo UI Grid?
+
+## Solution
+
 The following example demonstrates how to add a new row when the user navigates out of the last row in the Grid.
 
 ```dojo

@@ -10,6 +10,33 @@ type: how-to
 res_type: kb
 ---
 
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser</td>
+  <td>All</td>
+ </tr>
+ <tr>
+  <td>Browser Version</td>
+  <td>All</td>
+ </tr>
+</table>
+
+## Description
+
+How can I resize and expand the Kendo UI Grid to a 100% height when the parent container or the browser window are resized too?
+
+## Solution
+
 Web standards require elements with a percentage height to have a parent with an explicit height.
 
 The rule applies recursively until an element with a pixel height is reached, or the root `<html>` element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.

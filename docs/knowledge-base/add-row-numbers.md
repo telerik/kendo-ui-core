@@ -10,7 +10,22 @@ type: how-to
 res_type: kb
 ---
 
-The following example demonstrates how to implement row numbers in a Grid by using the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+</table>
+
+## Description
+
+How can I implement row numbers in a Kendo UI Grid?
+
+## Solution
+
+Use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
 
 ```dojo
   <div id="grid"></div>

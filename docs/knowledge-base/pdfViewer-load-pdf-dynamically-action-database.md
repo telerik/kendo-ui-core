@@ -1,16 +1,16 @@
 ---
-title: How to load a pdf document dynamically
-description: how to load a PDF into Kendo PDF Viewer dynamically from a controller or database
+title: Load a PDF Document Dynamically
+description: An example on how to load a PDF document into a Kendo UI PDFViewer dynamically from a controller or a database.
 type: how-to
-page_title: Load PDF dynamically from the server or database
+page_title: Load PDF Dynamically from the Server or Database | Kendo UI PDFViewer for jQuery
 slug: pdfViewer-load-pdf-dynamically-action-database
-position: 
-tags: 
-ticketid: 1418499, 1418533 
+tags: pdfviewer, load, pdf, server, dynamically
+ticketid: 1418499, 1418533
 res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tbody>
 	    <tr>
@@ -26,14 +26,14 @@ res_type: kb
 
 
 ## Description
-I need to load a PDF dynamically, based on conditions (like a choice from a dropdown or a grid selection). That PDF may also not be a physical file, but may be stored in a database or other storage that cannot be accessed directly through a URL.
 
-The example below shows how you can change the loaded PDF dynamically by calling an action that will return the document.
+How can I load PDF dynamically based on conditions, for example, like a choice from a drop-down or a Grid selection? That PDF may not be a physical file but stored in a database or another storage that cannot be accessed directly through a URL.
 
 ## Solution
-You need to use the `.fromFile()` method of the Kendo PDF Viewer and pass to it a URL to an action method (e.g., MVC controller, or WebAPI, or any other suitable endpoint) that will return the PDF document with the correct MIME type (`application/pdf`).
 
-In the example below, the selection in a grid is used to trigger the change.
+Use the `.fromFile()` method of the Kendo UI PDFViewer and pass to it a URL to an action method&mdashh;for example, an MVC controller, WebAPI, or another suitable endpoint that will return the PDF document with the correct MIME type (`application/pdf`).
+
+The following example demonstrates how to change the loaded PDF dynamically by calling an action that will return the document and uses the selection in the Grid to trigger the change. The user can click Grid rows, extract data from them, and use that data to dynamically change the file that is loaded in a Kendo UI PDFViewer through its `.fromFile()` method. The example will not work in a sample Dojo because the handler does not actually exist. You need to implement that according to the logic of your application and it must return the PDF file with the correct MIME type (`application/pdf`).
 
 ```dojo
 <div id="grid"></div>
@@ -53,12 +53,12 @@ In the example below, the selection in a grid is used to trigger the change.
     ],
     selectable: "single, row",
     change: function(e) {
-      //obtain the identifier for the document
+      // Obtain the identifier for the document.
       var selectedRows = this.select();
       var dataItem = this.dataItem(selectedRows[0]);
       var id = dataItem.id;
-      
-      //create a viewer if you don't have one already
+
+      // Create a viewer if you do not have one already.
       var pdfViewer = $("#pdfViewer").data("kendoPDFViewer");
       if(!pdfViewer){
          pdfViewer = $("#pdfViewer").kendoPDFViewer({
@@ -69,11 +69,11 @@ In the example below, the selection in a grid is used to trigger the change.
             height: 500
           }).data("kendoPDFViewer");
       }
-      
-      //build the desired URL to point to your handler that will return the PDF
+
+      // Build the desired URL to point to your handler that will return the PDF.
       var pdfHandlerUrl = "/myController/myPdfAction/" + dataItem.id;
-      
-      //make the PDF viewer load the designated file
+
+      // Make the PDFViewer load the designated file.
       pdfViewer.fromFile(pdfHandlerUrl);
     }
   });
@@ -83,15 +83,9 @@ In the example below, the selection in a grid is used to trigger the change.
 <script>
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
 </script>
-
-This example shows how you can click grid rows, extract data from them and use that data
-to change dynamically the file loaded in a Kendo PDF Viewer through its .fromFile() method.
-In a sample dojo, it will not work because the handler does not actually exist. 
-You need to implement that according to your application's logic and it must return the PDF file
-with the correct MIME type (application/pdf).
 ```
 
-Here is a sample MVC controller that shows how to return the needed file (of course, the implementation details will vary between technologies and implementations):
+The following example demonstrates a sample MVC controller that shows how to return the needed file&mdash;the implementation details will vary between technologies and implementations.
 
 ```
 public class myControllerController : Controller
@@ -106,13 +100,12 @@ public class myControllerController : Controller
             throw new HttpException(404, "File not found for this record");
             //will show a "file not found" in the PDF viewer
         }
-        // one way is to get a stream, in a similar fashion you can use
-        // bytep[] and the File() type of result for the action
-        // https://docs.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.file
+        // One way is to get a stream, in a similar fashion you can use
+        // the bytep[] and the File() type of result for the action
+        // https://docs.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.file.
         Stream stream = new MemoryStream(file.Data);
-        
+
         return new FileStreamResult(stream, "application/pdf");
     }
 }
 ```
-

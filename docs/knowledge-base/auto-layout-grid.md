@@ -1,5 +1,5 @@
 ---
-title: Create and Use Auto Layout
+title: Create and Use Auto Layout in the Grid
 page_title:  Create and Use Auto Layout | Kendo UI Grid for jQuery
 description: "An example on how to create and use auto layout in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/auto-layout-grid
@@ -10,7 +10,24 @@ type: how-to
 res_type: kb
 ---
 
-The following example demonstrates how to create auto layout for the Grid.
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Grid for jQuery</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create an auto layout for the Kendo UI Grid?
+
+## Solution
 
 The auto layout requires you to disable the scrolling functionality of the Grid.
 

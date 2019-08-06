@@ -12,8 +12,6 @@ res_type: kb
 
 Your project might require you to add a background color to the sorted columns of the Grid by using the [LESS themes]({% slug themesandappearnce_kendoui_desktopwidgets %}).
 
-To achieve this behavior:
-
 1. Change the default background of the alternate row to an RGBA color format with a low opaque level.
 1. Add the background color to the `.k-sorted` class by using the RGBA color format.
 

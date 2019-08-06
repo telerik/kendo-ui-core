@@ -12,7 +12,7 @@ res_type: kb
 
 By default, the Grid does not support batch editing when binding to oData.
 
-To achieve this behavior, use a third-party library. To submit the actual request, the following example uses [Batch.js by Pavel Volgarev](https://github.com/volpav/batchjs). For more information, refer to [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the oData 3.0 documentation.
+Use a third-party library. To submit the actual request, the following example uses [Batch.js library by Pavel Volgarev](https://github.com/volpav/batchjs). For more information, refer to [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the oData 3.0 documentation.
 
 > The scenario uses an experimental `transport.submit` Data Source option. It is not yet included as an officially supported API call.
 
@@ -60,18 +60,18 @@ To achieve this behavior, use a third-party library. To submit the actual reques
             type: "odata",
             batch: true,
             transport: {
-              // Not an official feature, but it's close to being one
+              // Not an official feature, but it's close to being one.
               submit: function(e) {
                 var requests = [];
 
-                // We get all batched operations in e.data
+                // Get all batched operations in e.data.
                 queueCreated(requests, e.data.created);
                 queueUpdated(requests, e.data.updated);
                 queueDestroyed(requests, e.data.destroyed);
 
-                // Check out the network tab on "Save Changes"
+                // Check out the network tab on "Save Changes".
                 $.ajaxBatch({
-                  // Not that this service doesn't actually support batching
+                  // Note that this service doesn't actually support batching.
                   url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Batch",
                   data: requests
                 })
