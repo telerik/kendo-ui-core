@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I export two kendo UI Grids for jQuery in the same Excel document?
+How can I export two Kendo UI Grids for jQuery in the same Excel document?
 
 ## Solution
 

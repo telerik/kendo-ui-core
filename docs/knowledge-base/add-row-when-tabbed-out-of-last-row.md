@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-How to add a new row when the user navigates out of the last row in the Grid?
+How can I add a new row when the user navigates out of the last row in the Kendo UI Grid?
 
 ## Solution
 

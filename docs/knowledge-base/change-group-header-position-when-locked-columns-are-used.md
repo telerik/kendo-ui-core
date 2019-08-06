@@ -31,7 +31,7 @@ res_type: kb
 
 ## Description
 
-How can I change the header position of locked columns in Kendo UI Grid?
+How can I change the header position of the locked columns in a Kendo UI Grid?
 
 ## Solution
 

@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-How can I apply minimum width during column resize?
+How can I apply a minimum width during column resize in the Kendo UI Grid?
 
 ## Solution
 

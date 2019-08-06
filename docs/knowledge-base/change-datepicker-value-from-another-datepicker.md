@@ -1,5 +1,5 @@
 ---
-title: Change DatePicker Value from Another DatePicker
+title: Change DatePicker Value from Another DatePicker in the Grid
 page_title: Change DatePicker Value | Kendo UI Grid for jQuery
 description: "An example on how to change a DatePicker value from another DatePicker in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Editing/change-datepicker-value-from-another-datepicker
@@ -29,13 +29,11 @@ res_type: kb
 
 ## Description
 
-How can I change the value of one editor based on another editor's value?
+How can I change the value of one editor based on the value of another editor when working with the Kendo UI Grid?
 
 ## Solution
 
-The following example demonstrates how to change a Kendo UI DatePicker value based on the modified value of another DatePicker by using the inline edit mode of the Kendo UI Grid.
-
-When the user selects a date from the first DatePicker, the following date is programmatically set to the second DatePicker.
+The following example demonstrates how to change a Kendo UI DatePicker value based on the modified value of another DatePicker by using the inline edit mode of the Kendo UI Grid. When the user selects a date from the first DatePicker, the following date is programmatically set to the second DatePicker.
 
 ```dojo
 

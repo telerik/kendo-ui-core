@@ -29,7 +29,7 @@ res_type: kb
 
 ## Description
 
-How can I show a custom editor, which uses the currently selected item, outside the Kendo UI Grid for jQuery?
+How can I show a custom editor which uses the currently selected item outside the Kendo UI Grid for jQuery?
 
 ## Solution
 

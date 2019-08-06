@@ -29,7 +29,7 @@ res_type: kb
 
 ## Description
 
-How can I display the Delete confirmation as a button instead of a dialog in the command column of the Kendo UI Grid for jQuery?
+How can I display the **Delete** confirmation as a button instead of a dialog in the command column of the Kendo UI Grid for jQuery?
 
 ## Solution
 

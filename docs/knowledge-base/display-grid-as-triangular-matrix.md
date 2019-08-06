@@ -29,7 +29,7 @@ res_type: kb
 
 ## Description
 
-How can I change its default data layout to a Triangular matrix in the Kendo UI Grid for jQuery?
+How can I change the default data layout of the Kendo UI Grid to a triangular matrix?
 
 ## Solution
 

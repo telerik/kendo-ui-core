@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-How can I export all Grid pages and their full page content in a PDF file?
+How can I export all Kendo UI Grid pages and their full page content in a PDF file?
 
 ## Solution
 

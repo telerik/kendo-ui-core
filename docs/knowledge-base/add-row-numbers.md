@@ -21,11 +21,11 @@ res_type: kb
 
 ## Description
 
-How can I implement row numbers in a Grid?
+How can I implement row numbers in a Kendo UI Grid?
 
 ## Solution
 
-The row numbers for the Grid could be implemented by using the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
+Use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize()`](/api/javascript/data/datasource/methods/pagesize) methods of the Data Source.
 
 ```dojo
   <div id="grid"></div>

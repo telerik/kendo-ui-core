@@ -1,8 +1,8 @@
 ---
-title: Copy Entire Row using Context Menu
-description: An example demonstrating how to copy the contents of a Kendo UI Grid's row using a context menu
+title: Copy Entire Row by Using the ContextMenu
+description: An example on how to copy the contents of a Kendo UI Grid row by using a Kendo UI ContextMenu for jQuery.
 type: how-to
-page_title: Copy Row Text with Context Menu | Kendo UI Grid
+page_title: Copy Row Text with ContextMenu | Kendo UI Grid for jQuery
 slug: grid-copy-row-text-select-context-menu
 tags: grid, copy, row, text, select, context, menu
 ticketid: 1407108
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,41 +24,44 @@ res_type: kb
 
 ## Description
 
-How can I copy the contents of the Kendo UI Grid row with a Kendo UI Context Menu?
+How can I copy the contents of a row in the Kendo UI Grid by using a Kendo UI ContextMenu?
 
 ## Solution
 
-  1. Include the [clipboard.js library in your project](https://clipboardjs.com/).
-  ```
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-  ```
+1. Include the [clipboard.js library in your project](https://clipboardjs.com/).
 
-  2. When declaring the Kendo UI ContentMenu, [target the row using "tr[role='row']"](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/configuration/target).
-  1. During the [contextmenu's select event:](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select) 
-     1. Reference the Kendo UI Grid.
-     1. Get the [dataItem from the target row.](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem)
-     1. Specify the text which you would like to copy using the dataItem.
-     1. If the item.id is "copyText", return a new Clipboard object which returns the dataItem text.
+      ```
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+      ```
 
-```javascript
-    $("#context-menu").kendoContextMenu({
-        target: "#grid",
-        filter: "tr[role='row']",  //2
-        select: function (e) {  //3
-            var grid = $("#grid").data("kendoGrid");  //a
-            var model = grid.dataItem(e.target);  //b
-            var rowText = model.OrderID + ", " + model.Freight + ", " + model.OrderDate + ", " + model.ShipName + ", " + model.ShipCity;  //c
-    
-            if (e.item.id === 'copyText') {  //d
-                new Clipboard('#copyText', {
-                    text: function (trigger) {
-                        return rowText;
-                    }
-                });
-            };
-        }
-    });
-```
+1. When you declare the Kendo UI ContextMenu, [target the row by using `"tr[role='row']"`](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/configuration/target).
+1. During the [`select` even of the ContextMenu](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select):
+  1. Reference the Kendo UI Grid.
+  1. Get the [`dataItem` from the target row](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem).
+  1. Specify the text which you want to copy by using `dataItem`.
+  1. If the `item.id` is `"copyText"`, return a new `Clipboard` object which returns the `dataItem` text.
+
+        ```javascript
+            $("#context-menu").kendoContextMenu({
+                target: "#grid",
+                filter: "tr[role='row']",  //2
+                select: function (e) {  //3
+                    var grid = $("#grid").data("kendoGrid");  //a
+                    var model = grid.dataItem(e.target);  //b
+                    var rowText = model.OrderID + ", " + model.Freight + ", " + model.OrderDate + ", " + model.ShipName + ", " + model.ShipCity;  //c
+
+                    if (e.item.id === 'copyText') {  //d
+                        new Clipboard('#copyText', {
+                            text: function (trigger) {
+                                return rowText;
+                            }
+                        });
+                    };
+                }
+            });
+        ```
+
+The following example demonstrates the full implementation of the suggested approach.
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
@@ -190,7 +194,7 @@ How can I copy the contents of the Kendo UI Grid row with a Kendo UI Context Men
 
 ## See Also
 
-* [clipboard.js library - Documentation and API Reference](https://clipboardjs.com/)
-* [target - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/configuration/target)
-* [select - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select)
-* [dataItem - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem)
+* [API Reference of the clipboard.js Library](https://clipboardjs.com/)
+* [API Reference of target](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/configuration/target)
+* [API Reference of select](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select)
+* [API Reference of dataItem](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem)

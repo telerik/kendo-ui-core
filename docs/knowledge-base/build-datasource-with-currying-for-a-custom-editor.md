@@ -1,5 +1,5 @@
 ---
-title: Build Custom dataSource for Custom Editor
+title: Build Custom dataSource for a Custom Grid Editor
 page_title: Build dataSource for Custom Editor | Kendo UI Grid for jQuery
 description: "An example on how to build custom dataSource of the Kendo UI Grid for jQuery with currying for a custom editor in the widget."
 previous_url: /controls/data-management/grid/how-to/Editing/build-datasource-with-currying-for-a-custom-editor
@@ -25,7 +25,7 @@ res_type: kb
 
 ## Description
 
-How can I create a custom data source based on the data in a custom editor?
+How can I create a custom data source in the Kendo UI Grid based on the data in a custom editor?
 
 ## Solution
 

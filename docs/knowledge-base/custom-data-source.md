@@ -29,7 +29,7 @@ res_type: kb
 
 ## Description
 
-How can I customize the data source options for PDF export of the Kendo UI Grid for jQuery?
+How can I customize the data source options for the PDF export of the Kendo UI Grid for jQuery?
 
 ## Solution
 

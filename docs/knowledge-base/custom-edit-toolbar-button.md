@@ -24,7 +24,7 @@ res_type: kb
  <tr>
   <td>Preferred Language</td>
   <td>JavaScript</td>
- </tr> 
+ </tr>
  <tr>
   <td>Preferred Framework</td>
   <td>AngularJS</td>
@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I create a custom Edit button by using AngularJS in the Kendo UI Grid for jQuery?
+How can I create a custom **Edit** button by using AngularJS in the Kendo UI Grid for jQuery?
 
 ## Solution
 

@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I select or deselect all rows in the Kendo UI Grid for jQuery with a Select All header checkbox?
+How can I select or deselect all rows in the Kendo UI Grid for jQuery with a **Select All** header checkbox?
 
 ## Solution
 

@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I use dynamic default field values in the jQuery Grid by Kendo UI when you apply its filtering functionality?
+How can I use dynamic default field values in the jQuery Grid by Kendo UI when its filtering functionality is applied?
 
 ## Solution
 

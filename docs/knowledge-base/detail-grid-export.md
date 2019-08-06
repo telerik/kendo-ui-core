@@ -29,7 +29,7 @@ res_type: kb
 
 ## Description
 
-How can I export master and detail grids to Excel?
+How can I export master and detail Kendo UI Grids to Excel?
 
 ## Solution
 

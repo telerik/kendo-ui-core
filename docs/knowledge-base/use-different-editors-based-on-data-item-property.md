@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I use different editors based on the dataItem property of the Kendo UI Grid for jQuery?
+How can I use different editors based on the `dataItem` property of the Kendo UI Grid for jQuery?
 
 ## Solution
 

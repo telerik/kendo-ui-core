@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I resize the widget via drag handle and apply the new size?
+How can I resize the Kendo UI Grid with the drag handle and apply the new size?
 
 ## Solution
 

@@ -29,11 +29,9 @@ res_type: kb
 
 ## Description
 
-How can I change the default pager of the Grid to a slider?
+How can I change the default pager of the Kendo UI Grid to a slider?
 
 ## Solution
-
-To achieve this behavior:
 
 1. Remove the default pager buttons on the first [`dataBound`](/api/javascript/ui/grid/events/databound) event.
 1. Create a Kendo UI Slider in their place.

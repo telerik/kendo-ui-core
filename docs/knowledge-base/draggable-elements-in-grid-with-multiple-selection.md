@@ -29,7 +29,7 @@ res_type: kb
 
 ## Description
 
-How can use draggable components with enabled multi-selection in the Kendo UI Grid for jQuery?
+How can I use draggable components with enabled multi-selection in the Kendo UI Grid for jQuery?
 
 ## Solution
 

@@ -1,5 +1,5 @@
 ---
-title: Format Cell Values
+title: Format Cell Values in the Grid
 page_title: Format Cell Values | Kendo UI Grid for jQuery
 description: "An example on how to format the cell values of the Kendo UI Grid during Excel export."
 previous_url: /controls/data-management/grid/how-to/excel/cell-format
@@ -33,7 +33,7 @@ How can I format the cell values of the Kendo UI Grid?
 
 ## Solution
 
-To achieve this behavior, set the [`format`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells. The page about [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats, supported by Excel.
+Set the [`format`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.format) option of the cells. For more information on the formats that are supported by Excel, refer to the page on [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 
 The following example demonstrates how to format cell values of the Grid while exporting it to Excel.
 

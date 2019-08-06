@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I perform CRUD operations with local storage data?
+How can I perform CRUD operations with local storage data in the Kendo UI Grid?
 
 ## Solution
 

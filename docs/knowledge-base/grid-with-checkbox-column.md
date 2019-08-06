@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I use checkbox column templates and perform editing?
+How can I use checkbox column templates and perform editing in the Kendo UI Grid?
 
 ## Solution
 

@@ -1,6 +1,6 @@
 ---
 title: Change Grid Height When Using Frozen Columns
-page_title: Grid Height of Frozen Columns | Kendo UI Grid for jQuery
+page_title: Change the Height in Grid with Frozen Columns | Kendo UI Grid for jQuery
 description: "An example on how to resize the Kendo UI Grid when using frozen columns."
 previous_url: /controls/data-management/grid/how-to/Layout/change-grid-height-when-using-frozen-columns
 slug: howto_change_grid_height_frozen_columns
@@ -29,11 +29,13 @@ res_type: kb
 
 ## Description
 
-How can I resize grid which has frozen columns? The frozen column functionality requires the grid to have fixed height. However, the approach below ensures that the Grid is able to calculate and construct its layout properly during resizing. 
+How can I resize a Kendo UI Grid which has frozen columns?
 
 ## Solution
 
-The following example demonstrates how to resize the Grid even if you use frozen columns. The idea is to change the height style of the [`<div>`]({% slug widgetwrapperandelement_references_gettingstarted %}) wrapper element and then call the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method of the widget.
+The frozen column functionality requires the Grid to have fixed height. However, the suggested approach ensures that the Grid is able to calculate and construct its layout properly during resizing.
+
+The following example demonstrates how to change the height style of the [`<div>`]({% slug widgetwrapperandelement_references_gettingstarted %}) wrapper element and then call the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method of the Grid.
 
 ```dojo
 <div id="example">

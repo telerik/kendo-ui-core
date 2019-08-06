@@ -30,7 +30,7 @@ res_type: kb
 
 ## Description
 
-How can I use column template as the value of a corresponding cell in the Excel document while exporting the Kendo UI Grid for jQuery?
+How can I use a column template as the value of a corresponding cell in the Excel document while exporting the Kendo UI Grid for jQuery?
 
 ## Solution
 

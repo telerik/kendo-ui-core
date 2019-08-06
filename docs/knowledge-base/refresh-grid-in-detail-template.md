@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I refresh a child grid in a detail template by using external button?
+How can I refresh a child Kendo UI Grid in a detail template by using an external button?
 
 ## Solution
 

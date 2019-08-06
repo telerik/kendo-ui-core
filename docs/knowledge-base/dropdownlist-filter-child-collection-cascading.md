@@ -1,8 +1,8 @@
 ---
-title: Cascade Based on DataField of Parent
-description: An example demonstrating how to filter a child collection based on a parent property that is not the dataValueField
+title: Cascade Based on Parent DataField
+description: An example on how to filter a child collection of Kendo UI DropDownLists based on a parent property that is not the dataValueField.
 type: how-to
-page_title: Filtering On Specific Parent Property | Kendo UI DropDownList
+page_title: Filtering on Specific Parent Property | Kendo UI DropDownList
 slug: dropdownlist-filter-child-collection-cascading
 tags: dropdownlist, filter, child, collection, cascading, datavaluefield, parent, datafield
 ticketid: 1412636
@@ -10,6 +10,7 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
@@ -23,11 +24,11 @@ res_type: kb
 
 ## Description
 
-How can I filter my child collection based on a property that is not the parent's dataValueField in my cascading Kendo UI DropDownLists?
+How can I filter my child collection based on a property that is not the parent `dataValueField` in my cascading Kendo UI DropDownLists?
 
 ## Solution
 
-A child collection can be filtered by another datafield using the [cascadeFromParentField property](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/cascadefromparentfield).  
+You can filter a child collection by another `datafield` by using the [`cascadeFromParentField` property](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/cascadefromparentfield).  
 
 ```javascript
       $("#parent").kendoDropDownList({
@@ -38,7 +39,7 @@ A child collection can be filtered by another datafield using the [cascadeFromPa
           { name: "Parent2", id: 2, parentTest: 91 }
         ]
       });
-      
+
       $("#child").kendoDropDownList({
         cascadeFrom: "parent",
         cascadeFromField: "childTest",
@@ -86,4 +87,4 @@ A child collection can be filtered by another datafield using the [cascadeFromPa
 
 ## See Also
 
-* [cascadeFromParentField - Documentation and API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/cascadefromparentfield)
+* [API Reference of cascadeFromParentField](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/configuration/cascadefromparentfield)

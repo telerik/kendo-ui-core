@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I show Kendo UI Tooltip for the Kendo UI Grid for jQuery columns?
+How can I show a Kendo UI Tooltip for the Kendo UI Grid for jQuery columns?
 
 ## Solution
 

@@ -1,16 +1,16 @@
 ---
 title: Always Show Marker Tooltip
-description: How to have labels on the map markers by utilizing their tooltips
+description: An example on how to show labels on the map markers by utilizing their tooltips in the Kendo UI Map.
 type: how-to
-page_title: Always show marker tooltips like labels | Kendo UI Map
+page_title: Always Show Marker Tooltips Like Labels | Kendo UI Map
 slug: map-marker-labels-from-always-shown-tooltips
-position: 
 tags: map,show,always,marker,tooltip,label
 ticketid: 1412666
 res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tbody>
 	    <tr>
@@ -22,11 +22,14 @@ res_type: kb
 
 
 ## Description
-The map markers have tooltips the user can show by hovering with the mouse. In some cases, you may want them to show up automatically when the map loads.
 
-To do this, you need to loop the markers, and call the .show() method of their tooltips. You can do this after the map initializes and in its [events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#events).
+The map markers in the Kendo UI Map have tooltips which the user can display by hovering with the mouse. In some cases, you may want them to show up automatically when the Map loads.
 
 ## Solution
+
+1. Loop the markers.
+1. After the Map initializes, in its [events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#events), call the `.show()` method of their tooltips.
+
 ```dojo
 <div id="map"></div>
 
@@ -87,7 +90,7 @@ To do this, you need to loop the markers, and call the .show() method of their t
 </script>
 
 <style>
-	/* remove the manual close button from the tooltips so the user can't dismiss them and the are more like labels */
+	/* Remove the manual Close button from the tooltips so the user cannot dismiss them as they are more like labels. */
 
 	div.k-tooltip-button {
 		display: none;

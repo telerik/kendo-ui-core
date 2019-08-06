@@ -1,16 +1,16 @@
 ---
-title: Preview Export API in PDF Viewer
-description: How to preview the generated PDF from the Kendo Drawing API in PDV Viewer
+title: Preview Export API in PDFViewer
+description: An example on how to preview the generated PDF from the Kendo UI Drawing API in the Kendo UI PDFViewer for jQuery.
 type: how-to
-page_title: Using PDF Viewer with PDF Export API | Kendo UI PDF Viewer and Export API for jQuery
+page_title: Use PDFViewer with PDF Export API | Kendo UI PDFViewer for jQuery
 slug: preview-pdf-export-api-in-viewer
-position: 
 tags: pdf,viewer,export,preview,api,generate,download
 ticketid: 1412617
 res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tbody>
 	    <tr>
@@ -26,12 +26,15 @@ res_type: kb
 
 
 ## Description
-Sometimes, you may want to show your users the PDF that the [Kendo Drawing API](https://demos.telerik.com/kendo-ui/pdf-export/index) will generate, instead of having them download it.
 
-You can do this by combining the Drawing API with the [PDF Viewer component](https://demos.telerik.com/kendo-ui/pdfviewer/index).
+Instead of enabling your users to download the PDF that the [Kendo UI Drawing library](https://demos.telerik.com/kendo-ui/pdf-export/index) will generate, your project may require you only to show it to them.
 
 ## Solution
-Generate the PDF as usual through the ` kendo.drawing.drawDOM()` method, and when the promise is resolved, in the `done` method, use the [fromFile method](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) of the PDF viewer component, instead of `kendo.saveAs`.
+
+Combine the Drawing API with the [Kendo UI PDFViewer component](https://demos.telerik.com/kendo-ui/pdfviewer/index).
+
+1. Generate the PDF as usual through the ` kendo.drawing.drawDOM()` method.
+1. When the promise is resolved, in the `done` method, use the [`fromFile` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) of the PDFViewer component instead of `kendo.saveAs`.
 
 ```dojo
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -47,11 +50,9 @@ Generate the PDF as usual through the ` kendo.drawing.drawDOM()` method, and whe
   <button id="export-pdf">make the pdf</button>
   <br/>
   <br/>
-  
 
   <div id="pdfViewer">
   </div>
-
 
 <script>
     var viewer = $("#pdfViewer").kendoPDFViewer({
@@ -63,19 +64,18 @@ Generate the PDF as usual through the ` kendo.drawing.drawDOM()` method, and whe
     }).getKendoPDFViewer();
 
     $("#export-pdf").click(function() {
-        // Convert the DOM element to a drawing using kendo.drawing.drawDOM
+        // Convert the DOM element to a drawing by using kendo.drawing.drawDOM.
         kendo.drawing.drawDOM($(".content-wrapper"))
         .then(function(group) {
-            // Render the result as a PDF file
+            // Render the result as a PDF file.
             return kendo.drawing.exportPDF(group, {
                 paperSize: "auto",
                 margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" }
             });
         })
         .done(function(data) {
-           viewer.fromFile({ data: data.split(',')[1] }) //for versions prior to R2 2019 SP1, use window.atob(data.split(',')[1])
+           viewer.fromFile({ data: data.split(',')[1] }) // For versions prior to R2 2019 SP1, use window.atob(data.split(',')[1])
         });
     });
 </script>
 ```
-

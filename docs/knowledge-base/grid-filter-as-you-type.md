@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I filter the grid as I type?
+How can I filter the Kendo UI Grid as I type?
 
 ## Solution
 

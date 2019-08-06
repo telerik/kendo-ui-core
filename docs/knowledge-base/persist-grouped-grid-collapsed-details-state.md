@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I create persist the collapsed state of grouped records in the Kendo UI Grid for jQuery?
+How can I persist the collapsed state of grouped records in the Kendo UI Grid for jQuery?
 
 ## Solution
 

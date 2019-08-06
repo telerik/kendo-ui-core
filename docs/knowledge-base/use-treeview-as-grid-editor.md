@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I use TreeView as an editor in the Kendo UI Grid for jQuery?
+How can I use the Kendo UI TreeView as an editor in the Kendo UI Grid for jQuery?
 
 ## Solution
 
