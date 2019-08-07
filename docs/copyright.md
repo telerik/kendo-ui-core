@@ -3,7 +3,7 @@ title: Copyright
 page_title: Copyright | Kendo UI for jQuery by Progress
 description: "Copyright notice for Kendo UI for jQuery by Progress"
 slug: copyright_kendoui
-position: 50
+position: 60
 ---
 
 # Copyright
