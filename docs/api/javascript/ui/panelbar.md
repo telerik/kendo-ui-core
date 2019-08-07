@@ -325,7 +325,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
     <div id="panelbar"></div>
     <script>
-    $("#panelbar").kendoTreeView({
+    $("#panelbar").kendoPanelBar({
       dataSource: {
         data: [
           { text: "foo", items: [
@@ -542,7 +542,7 @@ Setting this to false causes all child DataSources to be loaded at initializatio
 
 The text messages displayed in the widget. Use it to customize or localize the messages.
 
-#### Example - customize TreeView messages
+#### Example - customize PanelBar messages
 
     <div id="panelbar"></div>
     <script>
@@ -800,6 +800,36 @@ when collapsing items.
 #### Returns
 
 `kendo.ui.PanelBar` Returns the PanelBar object to support chaining.
+
+### dataItem
+
+Returns the data item to which the specified item is bound.
+
+#### Parameters
+
+##### node `jQuery|Element|String`
+
+A string, DOM element or jQuery object which represents the item. A string is treated as a jQuery selector.
+
+#### Returns
+
+`kendo.data.Node` The model of the item that was passed as a parameter.
+
+#### Example - get the data item of the first node
+
+    <div id="panelBar"></div>
+    <script>
+        $("#panelBar").kendoPanelBar({
+            dataSource: [
+                { id: 1, text: "foo" },
+                { id: 2, text: "bar" }
+            ]
+        });
+
+        var panelBar = $("#panelBar").data("kendoPanelBar");
+        var dataItem = panelBar.dataItem(".k-item:first");
+        console.log(dataItem.text); // displays "foo"
+    </script>
 
 ### destroy
 Prepares the **PanelBar** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.

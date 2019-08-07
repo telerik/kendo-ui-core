@@ -1192,7 +1192,7 @@ declare namespace kendo.data {
         aggregates?: DataSourceGroupItemAggregate[];
         compare?: (a: DataSourceGroupCompareItem, b: DataSourceGroupCompareItem) => number;
     }
-        
+
     interface DataSourceGroupCompareItem {
         field: string;
         value: any;
@@ -5975,6 +5975,9 @@ declare namespace kendo.ui {
         collapse(element: string, useAnimation: boolean): kendo.ui.PanelBar;
         collapse(element: Element, useAnimation: boolean): kendo.ui.PanelBar;
         collapse(element: JQuery, useAnimation: boolean): kendo.ui.PanelBar;
+        dataItem(node: JQuery): kendo.data.Node;
+        dataItem(node: Element): kendo.data.Node;
+        dataItem(node: string): kendo.data.Node;
         destroy(): void;
         enable(element: string, enable: boolean): void;
         enable(element: Element, enable: boolean): void;
