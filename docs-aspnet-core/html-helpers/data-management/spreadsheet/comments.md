@@ -29,7 +29,7 @@ The following example demonstrates how a cell in the Spreadsheet can be initiall
                 {
                     cells.Add()
                         .Value("This cell has a comment.")
-                        .Bold(true);
+                        .Bold(true)
                         .Comment("Comment set on the cell with the Spreadsheet initialization.");
                 });
             });
