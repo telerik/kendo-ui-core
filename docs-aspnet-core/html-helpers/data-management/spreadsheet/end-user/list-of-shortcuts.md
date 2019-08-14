@@ -1,6 +1,6 @@
 ---
 title: List of Keyboard Shortcuts
-page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Spreadsheet | Telerik UI for ASP.NET Core HTML Helpers
 description: "A list of the keyboard shortcuts supported by the Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore
 position: 3

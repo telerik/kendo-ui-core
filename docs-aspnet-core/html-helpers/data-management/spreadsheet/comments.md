@@ -1,6 +1,6 @@
 ---
 title: Comments
-page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Spreadsheet | Telerik UI for ASP.NET Core HTML Helpers
 description: "Define comments in cells in a Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_comments_aspnetcore
 position: 2

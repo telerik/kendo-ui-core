@@ -1,7 +1,7 @@
 ---
 title: Items
-page_title: Items | Telerik UI TabStrip Tag Helper for ASP.NET Core
-description: "Configure the items of the Telerik UI TabStrip tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Items | Telerik UI TabStrip TagHelper for ASP.NET Core
+description: "Configure the items of the Telerik UI TabStrip TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: items_tabstrip_aspnetcoretaghelper
 position: 2
 ---

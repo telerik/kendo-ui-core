@@ -1,7 +1,7 @@
 ---
 title: Selection
-page_title: Selection | Telerik UI Calendar Tag Helper for ASP.NET Core
-description: "Enable the single, multiple, range-date, and week selections when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Selection | Telerik UI Calendar TagHelper for ASP.NET Core
+description: "Enable the single, multiple, range-date, and week selections when working with the Telerik UI Calendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: selection_calendar_aspnetcore
 position: 5
 ---

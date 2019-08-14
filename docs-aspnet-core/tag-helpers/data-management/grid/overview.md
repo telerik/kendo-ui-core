@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Grid Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Grid TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_grid_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/grid
 position: 1
 ---
 
-# Grid Tag Helper Overview
+# Grid TagHelper Overview
 
-The Telerik UI Grid tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Grid widget.
+The Telerik UI Grid TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Grid widget.
 
 The Grid is a powerful control for displaying data in a tabular format. It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
 
@@ -17,15 +17,15 @@ The Grid is a powerful control for displaying data in a tabular format. It provi
 
 ## Initializing the Grid
 
-The following example demonstrates how to define the Grid by using the Grid tag helper.
+The following example demonstrates how to define the Grid by using the Grid TagHelper.
 
       <kendo-grid name="grid"></kendo-grid>
 
 ## Basic Configuration
 
-The Grid tag helper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data.
+The Grid TagHelper configuration options are passed as attributes of the tag. The Grid uses the [DataSource tag helper]({% slug taghelpers_datasource_aspnetcore %}) to bind its data.
 
-> To parse the value to a proper data type, set a `type` field in the DataSource schema model of the Grid tag helper.
+> To parse the value to a proper data type, set a `type` field in the DataSource schema model of the Grid TagHelper.
 
 ```tagHelper
 <kendo-grid name="grid" height="550">
@@ -162,5 +162,5 @@ You can subscribe to all Grid events.
 
 ## See Also
 
-* [Basic Usage of the Grid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
+* [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
 * [API Reference of the Grid Helper for ASP.NET Core](/api/grid)

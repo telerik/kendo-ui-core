@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ArcGauge Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: ArcGauge Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI ArcGauge HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_arcgaugehelper_aspnetcore
 position: 1

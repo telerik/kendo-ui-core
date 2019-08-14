@@ -1,13 +1,13 @@
 ---
 title: Overview
 page_title: LinearGauge Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI LinearGauge tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI LinearGauge TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/lineargauge
 slug: taghelpers_lineargauge_aspnetcore
 position: 1
 ---
 
-# LinearGauge Tag Helper Overview
+# LinearGauge TagHelper Overview
 
 The Telerik UI LinearGauge tage helper for ASP.NET Core is a server-side wrapper for the Kendo UI LinearGauge widget.
 
@@ -17,13 +17,13 @@ The LinearGauge represents values on a linear scale.
 
 ## Initializing the LinearGauge
 
-The following example demonstrates how to define the LinearGauge by using the LinearGauge tag helper.
+The following example demonstrates how to define the LinearGauge by using the LinearGauge TagHelper.
 
     <kendo-lineargauge name="gauge"></kendo-lineargauge>
 
 ## Basic Configuration
 
-The LinearGauge tag helper configuration options are passed as attributes of the tag.
+The LinearGauge TagHelper configuration options are passed as attributes of the tag.
 
 ```tagHelper
     <kendo-lineargauge name="gauge">
@@ -64,5 +64,5 @@ The LinearGauge tag helper configuration options are passed as attributes of the
 
 ## See Also
 
-* [Basic Usage of the LinearGauge Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/tag-helper)
+* [Basic Usage of the LinearGauge TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/tag-helper)
 * [API Reference of the LinearGauge Helper for ASP.NET Core](/api/lineargauge)

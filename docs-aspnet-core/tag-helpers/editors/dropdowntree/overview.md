@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: DropDownTree Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI DropDownTree tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI DropDownTree TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/dropdowntree, /aspnet-core/helpers/tag-helpers/dropdowntree
 slug: taghelpers_dropdowntree_aspnetcore
 position: 1
 ---
 
-# DropDownTree Tag Helper Overview
+# DropDownTree TagHelper Overview
 
-The Telerik UI DropDownTree tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI DropDownTree widget.
+The Telerik UI DropDownTree TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DropDownTree widget.
 
 The DropDownTree represents an editor of hierarchical data, rendered in a tree-like structure, which provides multiple selection option and custom nodes.
 
@@ -17,14 +17,14 @@ The DropDownTree represents an editor of hierarchical data, rendered in a tree-l
 
 ## Initializing the DropDownTree
 
-The following example demonstrates how to define the DropDownTree by using the DropDownTree tag helper.
+The following example demonstrates how to define the DropDownTree by using the DropDownTree TagHelper.
 
     <kendo-dropdowntree name="dropdowntree1">
     </kendo-dropdowntree>
 
 ## Basic Configuration
 
-The DropDownTree tag helper configuration options are passed as attributes of the tag. You can configure the items by binding the widget to `<hierarchical-datasource>`.
+The DropDownTree TagHelper configuration options are passed as attributes of the tag. You can configure the items by binding the widget to `<hierarchical-datasource>`.
 
 ```tagHelper
     <kendo-dropdowntree name="dropdowntree1" datatextfield="FullName">
@@ -88,5 +88,5 @@ The DropDownTree tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Basic Usage of the DropDownTree Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/tag-helper)
+* [Basic Usage of the DropDownTree TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/tag-helper)
 * [API Reference of the DropDownTree Helper for ASP.NET Core](/api/dropdowntree)

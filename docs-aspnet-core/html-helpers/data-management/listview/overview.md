@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ListView Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: ListView Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI ListView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/listview
 slug: htmlhelpers_listview_aspnetcore
@@ -92,5 +92,4 @@ The following example demonstrates the basic configuration for the ListView Html
 ## See Also
 
 * [Basic Usage of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/index)
-* [Using the API of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/api)
 * [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)

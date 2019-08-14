@@ -8,7 +8,7 @@ position: 1
 
 # ScrollView Overview
 
-The Telerik UI ScrollView tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ScrollView widget.
+The Telerik UI ScrollView TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ScrollView widget.
 
 The ScrollView displays a horizontal collection of content or image views with built-in navigation between them. It can be scrolled through dragging, gestures, arrow click or page click or tap. Among the key features of the ScrollView are data-source binding, customizable template, built-in pager, adjustable bounce effects and scroll velocity.
 
@@ -74,5 +74,5 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
 
 ## See Also
 
-* [Basic Usage of the ScrollView Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)
+* [Basic Usage of the ScrollView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)
 * [API Reference of the ScrollView Helper for ASP.NET Core](/api/scrollview)

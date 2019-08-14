@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Spreadsheet Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Spreadsheet tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Spreadsheet TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/spreadsheet, /aspnet-core/helpers/tag-helpers/spreadsheet
 slug: taghelpers_spreadsheet_aspnetcore
 position: 1
 ---
 
-# Spreadsheet Tag Helper Overview
+# Spreadsheet TagHelper Overview
 
-The Telerik UI Spreadsheet tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Spreadsheet widget.
+The Telerik UI Spreadsheet TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Spreadsheet widget.
 
 The Spreadsheet allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
@@ -17,13 +17,13 @@ The Spreadsheet allows you to edit and visualize tabular data by using cell form
 
 ## Initializing the Spreadsheet
 
-The following example demonstrates how to define the Spreadsheet by using the Spreadsheet tag helper.
+The following example demonstrates how to define the Spreadsheet by using the Spreadsheet TagHelper.
 
     <kendo-spreadsheet name="spreadsheet"></kendo-spreadsheet>
 
 ## Basic Configuration
 
-The Spreadsheet tag helper configuration options are passed as attributes of the tag.
+The Spreadsheet TagHelper configuration options are passed as attributes of the tag.
 
 ```cshtml
     @(Html.Kendo().Spreadsheet()
@@ -776,5 +776,5 @@ The Spreadsheet provides options for [data binding]({% slug databinding_spreadsh
 
 ## See Also
 
-* [Basic Usage of the Spreadsheet Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
+* [Basic Usage of the Spreadsheet TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
 * [API Reference of the Spreadsheet helper for ASP.NET Core](/api/spreadsheet)

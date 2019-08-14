@@ -1,8 +1,8 @@
 ---
 title: Visual Studio Online Continuous Integration Randomly Asks for Login
-description: The Login dialog is randomly displayed during VS Online builds.
+description: The Visual Studio Online Login dialog is randomly displayed during VS Online builds.
 type: troubleshooting
-page_title: VS Online Continuous Integration Has an Authentication Issue | UI for ASP.NET Core
+page_title: VS Online Continuous Integration Has an Authentication Issue | Telerik UI for ASP.NET Core
 slug: vs-online-continuous-integration-login-problem
 tags: vs2017
 ticketid: 1106905
@@ -14,14 +14,14 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Telerik UI for ASP.NET Core</td>
+  <td>Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
  <tr>
   <td>.Net framework</td>
   <td>Version 4.6.1</td>
  </tr>
  <tr>
-  <td>Visual Studio version</td>
+  <td>Visual Studio Version</td>
   <td>Visual Studio Online</td>
  </tr>
 </table>
@@ -32,9 +32,7 @@ I have stored the passwords on the developer systems by using clear text but the
 
 ## Suggested Workarounds
 
-Telerik UI for ASP.NET Core does not provide a built-in solution for avoiding this behavior.
-
-However, you can still work around this issue and apply approaches that worked with other users.
+Telerik UI for ASP.NET Core does not provide a built-in solution for avoiding this behavior. However, you can still work around this issue and apply approaches that worked with other users.
 
 ### Workaround #1
 

@@ -1,42 +1,34 @@
 ---
-title: Bind DateRangePicker to model value and POST to controller
-description: How to bind Kendo DateRangePicker to model value and POST to controller
+title: Bind DateRangePicker to Model Value and POST to Controller
+description: An example on how to bind a Telerik UI for ASP.NET Core DateRangePicker to model value and POST to controller.
 type: how-to
-page_title: Bind DateRangePicker to model value and POST to controller
+page_title: Bind DateRangePicker to Model Value and POST to Controller | Telerik UI for ASP.NET Core DateRangePicker
 slug: daterangepicker-bind-to-model-and-post
-position: 
-tags: 
+tags: daterangepicker, model, value, post, controller
 ticketid: 1418770
 res_type: kb
 ---
 
 ## Environment
+
 <table>
-    <tbody>
-	    <tr>
-	    	<td>Product</td>
-	    	<td>DateRangePicker for ASP.NET Core and ASP.NET MVC</td>
-	    </tr>
-    </tbody>
+  <tr>
+  	<td>Product</td>
+  	<td>DateRangePicker for Progress® Telerik® UI for ASP.NET Core, DateRangePicker for Progress® Telerik® UI for ASP.NET MVC</td>
+  </tr>
 </table>
 
 
 ## Description
 
-How to show (bind) a model value in a Kendo DateRangePicker and also submit it in a POST to a controller action.
+How can I show (bind) a model value in the DateRangePicker and submit it in a POST to a controller action?
 
 ## Solution
 
-There are two things you need to do:
+* To show the dates from the model in the DateRangePicker, configure the `.Range(r => r.Start().End())`.
+* To submit the POST data, use the [`StartField`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/configuration/startfield) and [`EndField`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/configuration/endfield) settings of the DateRangePicker to set the names of the fields that are used in the query.
 
-* for showing the dates from the model in the range picker, configure the `.Range(r => r.Start().End())`
-
-* for the POST data, use the [StartField](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/configuration/startfield) and [EndField](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/configuration/endfield) settings of the widget to set the names of the fields used in the query.
-
-
-The two separate settings are needed because the widget consists of to actual inputs.
-
-Here is a basic example:
+These two settings are needed because the DateRangePicker consists of two actual inputs.
 
 ```View
 @model MyViewModel
@@ -75,4 +67,3 @@ public IActionResult Index(MyViewModel theUserInput)
     return View(theUserInput);//just return to the current view with the new data
 }
 ```
-

@@ -2,8 +2,9 @@
 title: Razor Pages Integration
 page_title: Razor Pages Integration with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core | Telerik UI for ASP.NET Core
 description: "Razor Pages Integration with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
+previous_url: /getting-started/razor-pages-integration
 slug: razor_pages_integration_aspnetmvc6_aspnetmvc
-position: 5
+position: 9
 ---
 
 # Razor Pages Integration
@@ -24,7 +25,6 @@ Razor Pages use `Page` in their routing mechanism which interferes with `GET` re
 
 ## See Also
 
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
-* [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
+* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
+* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})

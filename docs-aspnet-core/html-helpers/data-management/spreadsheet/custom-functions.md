@@ -1,6 +1,6 @@
 ---
 title: Custom Functions
-page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Spreadsheet | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn how to make your own JavaScript functions in the Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_custom_functions_aspnetcore
 position: 3

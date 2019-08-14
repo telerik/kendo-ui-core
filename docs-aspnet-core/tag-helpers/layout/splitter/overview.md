@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Splitter Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Splitter tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Splitter TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/splitter, /aspnet-core/helpers/tag-helpers/splitter
 slug: taghelpers_splitter_aspnetcore
 position: 1
 ---
 
-# Splitter Tag Helper Overview
+# Splitter TagHelper Overview
 
-The Telerik UI Splitter tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Splitter widget.
+The Telerik UI Splitter TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Splitter widget.
 
 The Splitter provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout by adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of the Splitter can be combined to build complex layouts.
 
@@ -21,7 +21,7 @@ The Splitter pane tags do not automatically render `div` elements. Therefore, th
 
 > To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI for jQuery R1 2018 release introduces a change in the tag names of the Splitter. Previously, the tag name of the pane was `<kendo-splitter-pane>` while now, after the release, it is changed to `<pane>`.
 
-The following example demonstrates how to define the Splitter by using the Splitter tag helper.
+The following example demonstrates how to define the Splitter by using the Splitter TagHelper.
 
     <kendo-splitter name="vertical" orientation="SplitterOrientation.Vertical">
         <pane scrollable="false" collapsible="false">
@@ -74,7 +74,7 @@ The following example demonstrates how to define the Splitter by using the Split
 
 ## Basic Configuration
 
-The Splitter tag helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
+The Splitter TagHelper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
 ```cshtml
 
@@ -117,5 +117,5 @@ The Splitter tag helper supports all the configuration options that the HtmlHelp
 
 ## See Also
 
-* [Basic Usage of the Splitter Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/tag-helper)
+* [Basic Usage of the Splitter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/tag-helper)
 * [API Reference of the Splitter Helper for ASP.NET Core](/api/splitter)

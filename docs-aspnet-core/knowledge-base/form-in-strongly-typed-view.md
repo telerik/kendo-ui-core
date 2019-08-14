@@ -2,7 +2,7 @@
 title: Create a Form by Using Strongly Typed .Net Core Helpers
 description: An example on how to create a form by using the strongly typed Telerik UI .Net Core HTML helpers.
 type: how-to
-page_title: Use Strongly Typed Helpers in Form | UI for ASP.NET Core
+page_title: Use Strongly Typed Helpers in Form | Telerik UI for ASP.NET Core
 slug: form-in-strongly-typed-view
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, form, strongly-typed, view
 res_type: kb
@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Telerik UI for ASP.NET Core</td>
+  <td>Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
 </table>
 

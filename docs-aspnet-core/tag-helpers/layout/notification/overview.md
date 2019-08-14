@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Notification Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Notification tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Notification TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/notification, /aspnet-core/helpers/tag-helpers/notification
 slug: taghelpers_notification_aspnetcore
 position: 1
 ---
 
-# Notification Tag Helper Overview
+# Notification TagHelper Overview
 
-The Telerik UI Notification tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Notification widget.
+The Telerik UI Notification TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Notification widget.
 
 The Notification provides a styled UI widget with arbitrary content which can provide information to the user on various occasions.
 
@@ -17,13 +17,13 @@ The Notification provides a styled UI widget with arbitrary content which can pr
 
 ## Initializing the Notification
 
-The following example demonstrates how to define the Notification by using the Notification tag helper.
+The following example demonstrates how to define the Notification by using the Notification TagHelper.
 
         <kendo-notification name="notification" auto-hide-after="0"></kendo-notification>
 
 ## Basic Configuration
 
-The Notification tag helper configuration options are passed as attributes of the tag and through nested tags.
+The Notification TagHelper configuration options are passed as attributes of the tag and through nested tags.
 
 ```cshtml
 
@@ -62,5 +62,5 @@ The Notification tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Basic Usage of the Notification Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification/tag-helper)
+* [Basic Usage of the Notification TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification/tag-helper)
 * [API Reference of the Notification Helper for ASP.NET Core](/api/notification)

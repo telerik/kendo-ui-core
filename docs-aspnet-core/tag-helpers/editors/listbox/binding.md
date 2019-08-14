@@ -1,7 +1,7 @@
 ---
 title: Data Binding
-page_title: Data Binding | Telerik UI ListBox Tag Helper for ASP.NET Core
-description: "Bind the Telerik UI ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to server-side arrays or client-side arrays, and to remote data."
+page_title: Data Binding | Telerik UI ListBox TagHelper for ASP.NET Core
+description: "Bind the Telerik UI ListBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to server-side arrays or client-side arrays, and to remote data."
 slug: databinding_listbox_aspnetcore
 position: 2
 ---
@@ -121,7 +121,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
 
 ## Remote Data
 
-The following example demonstrates how to bind the Kendo UI ListBox tag helper to a remote service.
+The following example demonstrates how to bind the Kendo UI ListBox TagHelper to a remote service.
 
 ```tagHelper
 
@@ -160,5 +160,5 @@ The following example demonstrates how to bind the Kendo UI ListBox tag helper t
 
 ## See Also
 
-* [Basic Usage of the ListBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
+* [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
 * [API Reference of the ListBox Helper for ASP.NET Core](/api/listbox)

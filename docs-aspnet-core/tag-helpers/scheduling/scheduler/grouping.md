@@ -1,7 +1,7 @@
 ---
 title: Grouping
-page_title: Grouping | Telerik UI Scheduler Tag Helper for ASP.NET Core
-description: "Group the resources in the Telerik UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Grouping | Telerik UI Scheduler TagHelper for ASP.NET Core
+description: "Group the resources in the Telerik UI Scheduler TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: grouping_scheduler_aspnetcore
 position: 3
 ---

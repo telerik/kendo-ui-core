@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: NumericTextBox Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI NumericTextBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI NumericTextBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/numeric-text-box, /aspnet-core/helpers/tag-helpers/numeric-text-box
 slug: taghelpers_numerictextbox_aspnetcore
 position: 1
 ---
 
-# NumericTextBox Tag Helper Overview
+# NumericTextBox TagHelper Overview
 
-The Telerik UI NumericTextBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiSelect widget.
+The Telerik UI NumericTextBox TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiSelect widget.
 
 The NumericTextBox converts an `input` element into a numeric, percentage, or currency textbox.
 
@@ -17,7 +17,7 @@ The NumericTextBox converts an `input` element into a numeric, percentage, or cu
 
 ## Initializing the NumericTextBox
 
-The following example demonstrates how to define the NumericTextBox by using the NumericTextBox tag helper.
+The following example demonstrates how to define the NumericTextBox by using the NumericTextBox TagHelper.
 
         <kendo-numerictextbox name="numeric"></kendo-numerictextbox>
 
@@ -29,7 +29,7 @@ You can also bind the NumericTextBox to a particular model field by using the `f
 
 ## Basic Configuration
 
-The NumericTextBox tag helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
+The NumericTextBox TagHelper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
 ```cshtml
 
@@ -51,5 +51,5 @@ The NumericTextBox tag helper supports all the configuration options that the Ht
 
 ## See Also
 
-* [Basic Usage of the NumericTextBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
+* [Basic Usage of the NumericTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
 * [API Reference of the NumericTextBox Helper for ASP.NET Core](/api/numerictextbox)

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: FlatColorPicker Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: FlatColorPicker Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI FlatColorPicker HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_flatcolorpickerhelper_aspnetcore
 position: 1
@@ -66,7 +66,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [FlatColorPicker API](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
+To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [FlatColorPicker API](/api/flatcolorpicker) to control its behavior.
 
       // Place this after your Telerik UI FlatColorPicker for ASP.NET Core declaration.
       <script>

@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: PDFViewer Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Get started with the server-side wrapper for the Telerik UI PDFViewer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Get started with the server-side wrapper for the Telerik UI PDFViewer TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_pdfviewer_aspnetcore
 position: 1
 ---
 
-# PDFViewer Tag Helper Overview
+# PDFViewer TagHelper Overview
 
-The Telerik UI PDFViewer tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI PDFViewer widget.
+The Telerik UI PDFViewer TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI PDFViewer widget.
 
 The PDFViewer displays PDF files in the browser and consists of a toolbar and a scrollable container that wraps the page elements. Default tools collection includes `pager`, `open` and `download` tool. For processing files, it supports the PDF.JS Processing and Telerik DPL Processing libraries. Among the key features the PDFViewer provides are the selection of a PDF processing library, a built-in paging mechanism, virtualization capabilities, a built-in default toolbar collection, and responsive capabilities and page scaling.
 
@@ -18,7 +18,7 @@ The PDFViewer displays PDF files in the browser and consists of a toolbar and a 
 
 To initialize the PDFViewer by using its tag helper, choose the PDF processing library and set up its settings.
 
-The following example demonstrates a PDFViewer tag helper which uses the `PDF.JS` library.
+The following example demonstrates a PDFViewer TagHelper which uses the `PDF.JS` library.
 
 ```
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -41,5 +41,5 @@ The following example demonstrates a PDFViewer tag helper which uses the `PDF.JS
 
 ## See Also
 
-* [Basic Usage of the PDFViewer Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/tag-helper)
+* [Basic Usage of the PDFViewer TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/tag-helper)
 * [API Reference of the PDFViewer Helper for ASP.NET Core](/api/pdfviewer)

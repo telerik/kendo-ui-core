@@ -1,10 +1,10 @@
 ---
 title: Resize Images before Upload
-description: An example on how to resize an image that is selected by the user before it is uploaded to the server.
+description: An example on how to resize an image that is selected by the user before it is uploaded to the server in the Telerik UI Upload for ASP.NET Core.
 type: how-to
-page_title: Resize Images before Upload | UI for ASP.NET Core
+page_title: Resize Images before They Are Uploaded | Telerik UI for ASP.NET Core Upload
 slug: upload-resize-image-before-upload
-tags: upload,resize,image,client,before upload
+tags: upload, resize, image, client, before, upload
 ticketid: 1381676
 res_type: kb
 ---
@@ -14,15 +14,13 @@ res_type: kb
 <table>
 	<tr>
 		<td>Product</td>
-		<td>Upload for ASP.NET Core</td>
+		<td>Upload for Progress® Telerik® UI for ASP.NET Core</td>
 	</tr>
 </table>
 
 ## Description
 
-I am using the Kendo UI Upload for uploading photos that were taken with a phone.
-
-How can I resize the photos before the upload to reduce the amount of time it takes to upload them? Is there a way to resize the photos by using JavaScript and the Upload?
+I am using the Upload for uploading photos that were taken with a phone. How can I resize the photos before they are uploaded to reduce the amount of time it takes to upload them? Is it possible to resize the photos by using JavaScript and the Upload?
 
 ## Solution
 
@@ -48,7 +46,7 @@ To achieve client-side resizing of images, use the `<canvas>` and `Image` elemen
 <script>
 	function fileSelectHandler(e) {
 		// A timeout so you do not break the built-in features and throw errors.
-		// Note: the file size shown by the Upload will, therefore, be wrong.
+		// Note that the file size that is shown by the Upload will therefore be wrong.
 		// Consider using a template to hide it: https://demos.telerik.com/aspnet-mvc/upload/templates.
 		setTimeout(function () {
 			triggerResizing();
@@ -121,7 +119,7 @@ To achieve client-side resizing of images, use the `<canvas>` and `Image` elemen
 </script>
 ```
 
-The following example demonstrates how to configure the controller. The controller is expected only to save the file but you may also add server resizing logic to ensure the file matches the project requirements.
+The following example demonstrates how to configure the controller. The controller is expected only to save the file but you may also add server resizing logic to ensure that the file matches the project requirements.
 
 ```C#
 public class ResizeFileController : Controller

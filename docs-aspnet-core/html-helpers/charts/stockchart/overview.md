@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: StockChart Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: StockChart Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI StockChart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_stockcharthelper_aspnetcore
 position: 1
@@ -103,7 +103,7 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
 
 ## Events
 
-You can subscribe to all StockChart [events](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#events).
+You can subscribe to all StockChart [events](/api/stockchart).
 
 ### Handling Events by Handler Name
 
@@ -163,7 +163,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart API](/api/stockchart) to control its behavior.
 
     // Place the following after the declaration of the Barcode for ASP.NET Core.
     <script>

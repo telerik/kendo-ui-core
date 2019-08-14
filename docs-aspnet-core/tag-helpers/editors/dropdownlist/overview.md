@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: DropDownList Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI DropDownList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI DropDownList TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/dropdownlist, /aspnet-core/helpers/tag-helpers/dropdownlist
 slug: taghelpers_dropdownlist_aspnetcore
 position: 1
 ---
 
-# DropDownList Tag Helper Overview
+# DropDownList TagHelper Overview
 
-The Telerik UI DropDownList tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI DropDownList widget.
+The Telerik UI DropDownList TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DropDownList widget.
 
 The DropDownList displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
 
@@ -17,13 +17,13 @@ The DropDownList displays a list of values and allows for a single selection fro
 
 ## Initializing the DropDownList
 
-The following example demonstrates how to define the DropDownList by using the DropDownList tag helper.
+The following example demonstrates how to define the DropDownList by using the DropDownList TagHelper.
 
         <kendo-dropdownlist name="products" filter="FilterType.StartsWith"></kendo-dropdownlist>
 
 ## Basic Configuration
 
-The DropDownList tag helper configuration options are passed as attributes of the tag.
+The DropDownList TagHelper configuration options are passed as attributes of the tag.
 
 ```cshtml
 
@@ -55,5 +55,5 @@ The DropDownList tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Basic Usage of the DropDownList Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
+* [Basic Usage of the DropDownList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
 * [API Reference of the DropDownList Helper for ASP.NET Core](/api/dropdownlist)

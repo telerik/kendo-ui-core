@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: TreeMap Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI TreeMap tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeMap TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_treemap_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/treemap
 position: 1
 ---
 
-# TreeMap Tag Helper Overview
+# TreeMap TagHelper Overview
 
-The Telerik UI TreeMap tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeMap widget.
+The Telerik UI TreeMap TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeMap widget.
 
 The TreeMap displays hierarchical data in a traditional tree structure.
 
@@ -17,7 +17,7 @@ The TreeMap displays hierarchical data in a traditional tree structure.
 
 ## Initializing the TreeMap
 
-The following example demonstrates how to define the TreeMap by using the TreeMap tag helper.
+The following example demonstrates how to define the TreeMap by using the TreeMap TagHelper.
 
     <kendo-treemap datasource-id="dataSource" name="treeMap" text-field="name" value-field="value"></kendo-treemap>
 
@@ -32,7 +32,7 @@ The following example demonstrates how to define the TreeMap by using the TreeMa
 
 ## Binding to Remote Data
 
-You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo UI TreeMap tag helper to a remote service.
+You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo UI TreeMap TagHelper to a remote service.
 
 ```tagHelper
     <kendo-treemap name="treemap" text-field="name" value-field="value">
@@ -64,5 +64,5 @@ You can also bind the `DataSource` to remote data. The following example demonst
 
 ## See Also
 
-* [Basic Usage of the TreeMap Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
+* [Basic Usage of the TreeMap TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
 * [API Reference of the TreeMap Helper for ASP.NET Core](/api/treemap)

@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: MultiColumnComboBox Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Kendo UI MultiColumnComboBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Kendo UI MultiColumnComboBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_multicolumncombobox_aspnetcore
 position: 1
 ---
 
-# MultiColumnComboBox Tag Helper Overview
+# MultiColumnComboBox TagHelper Overview
 
-The Telerik UI MultiColumnComboBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiColumnComboBox widget.
+The Telerik UI MultiColumnComboBox TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiColumnComboBox widget.
 
 The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
 
@@ -16,13 +16,13 @@ The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
 
 ## Initializing the MultiColumnComboBox
 
-The following example demonstrates how to define the MultiColumnComboBox by using the MultiColumnComboBox tag helper.
+The following example demonstrates how to define the MultiColumnComboBox by using the MultiColumnComboBox TagHelper.
 
     <kendo-multicolumncombobox name="products" filter="FilterType.StartsWith"></kendo-multicolumncombobox>
 
 ## Basic Configuration
 
-The MultiColumnComboBox tag helper configuration options are passed as attributes of the tag.
+The MultiColumnComboBox TagHelper configuration options are passed as attributes of the tag.
 
 ```tagHelper
 
@@ -58,5 +58,5 @@ The MultiColumnComboBox tag helper configuration options are passed as attribute
 
 ## See Also
 
-* [Basic Usage of the MultiColumnComboBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
+* [Basic Usage of the MultiColumnComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
 * [API Reference of the MultiColumnComboBox Helper for ASP.NET Core](/api/multicolumncombobox)

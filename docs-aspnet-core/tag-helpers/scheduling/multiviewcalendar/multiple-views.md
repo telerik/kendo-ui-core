@@ -1,7 +1,7 @@
 ---
 title: Multiple Views
-page_title: Multiple Views | Telerik UI MultiViewCalendar Tag for ASP.NET Core
-description: "Control the visible date ranges in the Telerik UI MultiViewCalendar and manage the number of its horizontally rendered views."
+page_title: Multiple Views | Telerik UI MultiViewCalendar TagHelper for ASP.NET Core
+description: "Control the visible date ranges in the Telerik UI MultiViewCalendar TagHelper and manage the number of its horizontally rendered views."
 slug: multiple_views_multiviewcalendar_taghelper_aspnetcore
 position: 3
 ---

@@ -1,8 +1,8 @@
 ---
-title: Button with Kendo UI Tooltips
-description: An example demonstrating how to set a tooltip to a button
+title: Add Tooltips to Buttons
+description: An example on how to set a tooltip to a Button in Telerik UI for ASP.NET Core.
 type: how-to
-page_title: Adding a Kendo UI Tooltip | Kendo UI Button
+page_title: Add Kendo UI Tooltips to Buttons | Telerik UI for ASP.NET Core Button
 slug: button-add-tooltip-hover-text
 tags: button, add, tooltip, hover, text
 ticketid: 1413806
@@ -10,12 +10,13 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
   <td>Button for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
-
+ <tr>
   <td>Product Version</td>
   <td>2019.2.514</td>
  </tr>
@@ -23,11 +24,11 @@ res_type: kb
 
 ## Description
 
-How can I add a Kendo UI Tooltip on a Button?
+How can I add a Kendo UI Tooltip to a Button?
 
 ## Solution
 
-By following the same approach in the [Kendo UI ToolTip Live Demo](https://demos.telerik.com/aspnet-core/tooltip/index), a button can have a tooltip associated to it.  
+To associate a tooltip with a Button in Telerik UI for ASP.NET Core, follow the approach demonstrated in the [demo on the Kendo UI Tooltip](https://demos.telerik.com/aspnet-core/tooltip/index).  
 
 ```javascript
     @(Html.Kendo().Button()
@@ -47,4 +48,4 @@ By following the same approach in the [Kendo UI ToolTip Live Demo](https://demos
 
 ## See Also
 
-* [Tooltip - Live Demo](https://demos.telerik.com/aspnet-core/tooltip/index)
+* [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/aspnet-core/tooltip/index)

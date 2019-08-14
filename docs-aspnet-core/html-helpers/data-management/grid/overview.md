@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Grid Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Grid Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/grid
 slug: htmlhelpers_grid_aspnetcore_overview
@@ -166,6 +166,7 @@ The following example demonstrates the basic configuration for the Grid HtmlHelp
 * [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
 * [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %})
 * [Adaptive rendering]({% slug adaptive_rendering_gridhelper_aspnetcore %})
+* [Search panel]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})
 
 ## See Also
 

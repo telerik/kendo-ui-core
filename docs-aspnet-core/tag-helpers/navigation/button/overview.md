@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Button Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Button tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Button TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/button, /aspnet-core/helpers/tag-helpers/button
 slug: taghelpers_button_aspnetcore
 position: 1
 ---
 
-# Button Tag Helper Overview
+# Button TagHelper Overview
 
-The Telerik UI Button tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Button widget.
+The Telerik UI Button TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Button widget.
 
 The Button provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI for jQuery styling, the Button provides keyboard operability for elements, which natively do not have it&mdash;for example, `span`.
 
@@ -17,13 +17,13 @@ The Button provides a styled clickable UI functionality with arbitrary content. 
 
 ## Initializing the Button
 
-The following example demonstrates how to define the Button by using the Button tag helper.
+The following example demonstrates how to define the Button by using the Button TagHelper.
 
         <kendo-button name="button1">Click here!</kendo-button>
 
 ## Basic Configuration
 
-The Button tag helper configuration options are passed as attributes of the tag.
+The Button TagHelper configuration options are passed as attributes of the tag.
 
 ```cshtml
 
@@ -41,5 +41,5 @@ The Button tag helper configuration options are passed as attributes of the tag.
 
 ## See Also
 
-* [Basic Usage of the Button Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/tag-helper)
+* [Basic Usage of the Button TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/tag-helper)
 * [API Reference of the Button Helper for ASP.NET Core](/api/button)

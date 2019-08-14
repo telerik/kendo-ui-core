@@ -1,8 +1,8 @@
 ---
 title: Cannot Get Any Data to Load in Grid
-description: The Grid does not load any records in an ASP.NET Core project.
+description: The Grid HtmlHelper does not load any records in an ASP.NET Core project.
 type: troubleshooting
-page_title: Grid in ASP.NET Core Does Not Show Any Records | UI for ASP.NET Core
+page_title: The Grid Does Not Show Any Records | Telerik UI for ASP.NET Core Grid
 slug: grid-is-not-showing-data
 tags: grid, data, core, aspnet, not showing, binding, loading
 ticketid: 1112718
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET Core</td>
+  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
 </table>
 

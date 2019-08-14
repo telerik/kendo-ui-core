@@ -1,7 +1,7 @@
 ---
 title: Week Numbers
-page_title: Week Numbers | Telerik UI Calendar Tag Helper for ASP.NET Core
-description: "Define the first rendered view when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Week Numbers | Telerik UI Calendar TagHelper for ASP.NET Core
+description: "Define the first rendered view when working with the Telerik UI Calendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: weeknumbers_calendar_aspnetcore
 position: 4
 ---

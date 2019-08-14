@@ -1,7 +1,7 @@
 ---
 title: Selection
-page_title: Selection | Telerik UI ListBox Tag Helper for ASP.NET Core
-description: "Enable the signle or multiple selection mode of the Telerik UI ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Selection | Telerik UI ListBox TagHelper for ASP.NET Core
+description: "Enable the signle or multiple selection mode of the Telerik UI ListBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: selection_listbox_aspnetcore
 position: 3
 ---
@@ -10,7 +10,7 @@ position: 3
 
 The ListBox provides a single and a multiple selection mode.
 
-By default, the `single` selection mode of the ListBox is enabled. To set the multiple selection mode, add `selectable="ListBoxSelectable.Multiple" `. When the multiple selectino mode is enabled, all selected items move together, that is, the selected items are transferred to another Telerik UI ListBox tag helper together or reordered as a set among other items.
+By default, the `single` selection mode of the ListBox is enabled. To set the multiple selection mode, add `selectable="ListBoxSelectable.Multiple" `. When the multiple selectino mode is enabled, all selected items move together, that is, the selected items are transferred to another Telerik UI ListBox TagHelper together or reordered as a set among other items.
 
 You can reorder selected items by using any of the following approaches:
 
@@ -58,5 +58,5 @@ You can reorder selected items by using any of the following approaches:
 
 ## See Also
 
-* [Basic Usage of the ListBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
+* [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
 * [API Reference of the ListBox Helper for ASP.NET Core](/api/listbox)

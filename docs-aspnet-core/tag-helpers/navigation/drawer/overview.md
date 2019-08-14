@@ -1,14 +1,14 @@
 ---
 title: Overview
 page_title: Drawer Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Drawer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Drawer TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_drawer_aspnetcore
 position: 1
 ---
 
-# Drawer Tag Helper Overview
+# Drawer TagHelper Overview
 
-The Telerik UI Drawer tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Drawer widget.
+The Telerik UI Drawer TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Drawer widget.
 
 The Drawer is a dismissible panel used for navigation in responsive web applications or for changing a content of a section in the page.
 
@@ -16,7 +16,7 @@ The Drawer is a dismissible panel used for navigation in responsive web applicat
 
 ## Initializing the Drawer
 
-The following example demonstrates how to define the Drawer by using the Drawer tag helper.
+The following example demonstrates how to define the Drawer by using the Drawer TagHelper.
 
 ```TagHelper
      <kendo-drawer name="drawer" template-id="template" mode="overlay" position="left">
@@ -34,7 +34,7 @@ The following example demonstrates how to define the Drawer by using the Drawer 
 
 ## Basic Configuration
 
-The Drawer tag helper configuration options are passed as strongly-typed attributes of the tag that come with IntelliSense.
+The Drawer TagHelper configuration options are passed as strongly-typed attributes of the tag that come with IntelliSense.
 
 ```TagHelper
     <kendo-drawer name="drawer" template-id="template" mode="push" position="left" min-height="330" swipe-to-open="true" on-item-click="onItemClick">
@@ -70,7 +70,7 @@ The Drawer tag helper configuration options are passed as strongly-typed attribu
 
 ## Referencing Existing Instances
 
-The following example demonstrates the basic configuration of the Drawer Tag Helper and how to get the Drawer instance.
+The following example demonstrates the basic configuration of the Drawer TagHelper and how to get the Drawer instance.
 
 ```TagHelper
     <kendo-drawer name="drawer" template-id="template" mode="push" position="left" min-height="330" swipe-to-open="true" on-item-click="onItemClick">

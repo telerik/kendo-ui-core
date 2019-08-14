@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: TreeList Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI TreeList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeList TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_treelist_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/treelist
 position: 1
 ---
 
-# TreeList Tag Helper Overview
+# TreeList TagHelper Overview
 
-The Telerik UI TreeList tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeList widget.
+The Telerik UI TreeList TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeList widget.
 
 The TreeList enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
@@ -17,7 +17,7 @@ The TreeList enables the display of self-referencing tabular data and allows sor
 
 ## Initializing the TreeList
 
-The following example demonstrates how to define the TreeList by using the TreeList tag helper.
+The following example demonstrates how to define the TreeList by using the TreeList TagHelper.
 
 ```tagHelper
     <kendo-treelist name="treelist">
@@ -96,5 +96,5 @@ The following example demonstrates how to access an existing TreeList instance.
 
 ## See Also
 
-* [Basic Usage of the TreeList Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
+* [Basic Usage of the TreeList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
 * [API Reference of the TreeList Helper for ASP.NET Core](/api/treelist)

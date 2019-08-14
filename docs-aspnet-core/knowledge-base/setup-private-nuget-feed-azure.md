@@ -13,7 +13,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Telerik UI for ASP.NET Core</td>
+  <td>Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
 </table>
 
@@ -23,7 +23,7 @@ How can I set up the private NuGet feed in Azure to publish an ASP.NET Core appl
 
 ## Solution
 
-Add a private NuGet feed when running an MSBuild on a Build machine such as one hosted by Azure.
+Add a private NuGet feed when running an MSBuild on a build machine such as one hosted by Azure.
 
 1. Add `NuGet.config` to the WebApp project in Visual Studio.
 1. Add a new `NuGet.config` item to the same directory as the `project.json` file is located.
@@ -48,7 +48,7 @@ Add a private NuGet feed when running an MSBuild on a Build machine such as one 
    1. Select **Team Explorer** > **Builds**.
    1. Select **Build Definitions** and right-click **Edit Build Definitions**. This operation opens the **Build Definitions** in your browser, as shown in the following screenshot.
 
-   ![image](images/azure-nuget-feed.png)
+    ![image](images/azure-nuget-feed.png)
 
 1. In the **Build Definitions** editor, add a **Nuget Installer** build step by clicking **Add build step...**.
 1. Drag-and-drop the **Nuget Installer** build step to the top of the build steps list. Specify the solution and the `NugGet.config` files and then save them.
@@ -58,4 +58,3 @@ Add a private NuGet feed when running an MSBuild on a Build machine such as one 
 ## See Also
 
 * [Visual Studio Integration]({% slug overview_visualstudio_aspnetcore %})
-* [Known Issues in Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})

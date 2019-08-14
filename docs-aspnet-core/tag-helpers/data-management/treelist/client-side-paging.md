@@ -1,7 +1,7 @@
 ---
 title: Paging
-page_title: Paging | Telerik UI TreeList Tag Helper for ASP.NET Core
-description: "Learn how to enable the client-side paging feature to the Telerik UI TreeList Tag Helper for ASP.NET Core."
+page_title: Paging | Telerik UI TreeList TagHelper for ASP.NET Core
+description: "Learn how to enable the client-side paging feature to the Telerik UI TreeList TagHelper for ASP.NET Core."
 slug: client_side_paging_aspnetcore_treelist_tag_helper
 position: 3
 ---
@@ -102,5 +102,5 @@ The root TreeList items have their `parentId` field set to the default value for
 
 ## See Also
 
-* [Basic Usage of the TreeList Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
+* [Basic Usage of the TreeList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
 * [API Reference of the TreeList Helper for ASP.NET Core](/api/treelist)

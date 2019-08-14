@@ -1,8 +1,8 @@
 ---
 title: DropDownList Cannot Preselect the Drop-Down ID of the Current Grid Row
-description: I cannot get the DropDownList to preselect the drop-down ID of the current Grid row and cannot bind it to the column value of the Kendo UI Grid for ASP.NET Core.
+description: I cannot get the DropDownList to preselect the drop-down ID of the current Grid row and cannot bind it to the column value of the Telerik UI Grid HtmlHelper for ASP.NET Core.
 type: troubleshooting
-page_title: Bind a DropDownList Editor in the Grid | UI for ASP.NET Core
+page_title: Bind a DropDownList Editor in the Grid | Telerik UI for ASP.NET Core Grid
 previous_url: /knowledge-base/how-to-bind-a-dropdownlist-editor-aspnet-core-grid
 slug: grid-bind-a-dropdownlist-editor
 tags: aspnet, core, kendo, grid, editor, dropdownlist,custom,editing, inline, incell, howto, bind, model
@@ -15,10 +15,10 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET Core</td>
+  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
  <tr>
-  <td>Kendo Version</td>
+  <td>Product Version</td>
   <td>217.2.621</td>
  </tr>
 </table>
@@ -29,11 +29,11 @@ I cannot get the DropDownList to preselect the drop-down ID of the current row.�
 
 ## Steps to Reproduce
 
-This is a logged issue. The Core wrappers duplicate the property name when the `DropDownList()` and `Name()` declarations are used. For more information, refer to [this issue](https://github.com/telerik/kendo-ui-core/issues/3447).
+This is a logged issue. The Core helpers duplicate the property name when the `DropDownList()` and `Name()` declarations are used. For more information, refer to [this issue](https://github.com/telerik/kendo-ui-core/issues/3447).
 
 ## Suggested Workarounds
 
-Kendo UI does not provide a built-in solution for achieving this behavior. However, you can still work around the issue by using a `.DropDownListFor(m => m)` definition.
+Telerik UI for ASP.NET Core does not provide a built-in solution for achieving this behavior. However, you can still work around the issue by using a `.DropDownListFor(m => m)` definition.
 
 ```
 @model Project.Models.StateProvinceRegionViewModel
