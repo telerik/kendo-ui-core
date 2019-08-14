@@ -1,23 +1,23 @@
 ---
 title: Overview
 page_title: ResponsivePanel Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI ResponsivePanel tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ResponsivePanel TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/responsive-panel, /aspnet-core/helpers/tag-helpers/responsive-panel
 slug: taghelpers_responsivepanel_aspnetcore
 position: 1
 ---
 
-# ResponsivePanel Tag Helper Overview
+# ResponsivePanel TagHelper Overview
 
-The Telerik UI ResponsivePanel tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ResponsivePanel widget.
+The Telerik UI ResponsivePanel TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ResponsivePanel widget.
 
 The ResponsivePanel allows you to hide part of a page content on small screens.
 
-* [Demo page for the ResponsivePanel](https://demos.telerik.com/aspnet-core/responsivepanel/index)
+* [Demo page for the ResponsivePanel](https://demos.telerik.com/aspnet-core/responsive-panel/index)
 
 ## Initializing the ResponsivePanel
 
-The following example demonstrates how to define the ResponsivePanel by using the ResponsivePanel tag helper.
+The following example demonstrates how to define the ResponsivePanel by using the ResponsivePanel TagHelper.
 
         <kendo-responsivepanel name="slidebar" breakpoint="1000" orientation="left">
             <div id="profile" class="widget">
@@ -53,7 +53,7 @@ The following example demonstrates how to define the ResponsivePanel by using th
 
 ## Basic Configuration
 
-The configuration options of the ResponsivePanel tag helper are passed as attributes of the tag.
+The configuration options of the ResponsivePanel TagHelper are passed as attributes of the tag.
 
 ```cshtml
 
@@ -128,5 +128,4 @@ The configuration options of the ResponsivePanel tag helper are passed as attrib
 
 ## See Also
 
-* [Basic Usage of the ResponsivePanel Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/responsive-panel/index)
-* [API Reference of the ResponsivePanel Helper for ASP.NET Core](/api/responsivepanel)
+* [Basic Usage of the ResponsivePanel TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/responsive-panel/index)

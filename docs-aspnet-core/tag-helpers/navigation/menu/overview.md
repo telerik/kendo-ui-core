@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Menu Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Menu tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Menu TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_menu_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/menu
 position: 1
 ---
 
-# Menu Tag Helper Overview
+# Menu TagHelper Overview
 
-The Telerik UI Menu tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Menu widget.
+The Telerik UI Menu TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Menu widget.
 
 The Menu displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
 
@@ -17,7 +17,7 @@ The Menu displays hierarchical data as a multi-level menu. It provides rich styl
 
 ## Initializing the Menu
 
-The following example demonstrates how to define the Menu by using the Menu tag helper.
+The following example demonstrates how to define the Menu by using the Menu TagHelper.
 
 		<kendo-menu name="menu">
 		</kendo-menu>
@@ -53,7 +53,7 @@ To pass the Menu items collection, either:
 )
 ```
 
-To further configure the Menu tag helper, use its other options&mdash;`<open-on-click>`, `<popup-animation>`, and `<scrollable>`.
+To further configure the Menu TagHelper, use its other options&mdash;`<open-on-click>`, `<popup-animation>`, and `<scrollable>`.
 
 ```tagHelper
 <kendo-menu name="menu">
@@ -91,5 +91,5 @@ The Menu provides options for [setting up its items]({% slug items_menu_aspnetco
 
 ## See Also
 
-* [Basic Usage of the Menu Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/tag-helper)
+* [Basic Usage of the Menu TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/tag-helper)
 * [API Reference of the Menu Helper for ASP.NET Core](/api/menu)

@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Chart Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Chart tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Chart TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/chart
 slug: taghelpers_chart_aspnetcore
 position: 1
 ---
 
-# Chart Tag Helper Overview
+# Chart TagHelper Overview
 
-The Telerik UI Chart tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Chart widget.
+The Telerik UI Chart TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Chart widget.
 
 The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_aspnetcore_htmlhelper %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
 
@@ -17,13 +17,13 @@ The Chart uses modern browser technologies to render high-quality data visualiza
 
 ## Initializing the Chart
 
-The following example demonstrates how to define the Chart by using the Chart tag helper.
+The following example demonstrates how to define the Chart by using the Chart TagHelper.
 
     <kendo-chart name="chart"></kendo-chart>
 
 ## Basic Configuration
 
-The Chart tag helper configuration options are passed as attributes of the tag. In the following example, the `tagHelper` and `razor` configurations are equivalent.
+The Chart TagHelper configuration options are passed as attributes of the tag. In the following example, the `tagHelper` and `razor` configurations are equivalent.
 
 ```tagHelper
 <kendo-chart name="chart">

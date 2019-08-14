@@ -1,22 +1,20 @@
 ---
 title: Troubleshooting
-page_title: Troubleshooting | UI for ASP.NET Core Visual Studio Integration
-description: "Troubleshooting steps for Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio Extensions."
+page_title: Troubleshooting | Visual Studio Integration | Telerik UI for ASP.NET Core
+description: "Troubleshooting steps for Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio extensions."
 slug: troubleshooting_visualstudio_aspnetcore
 position: 4
 ---
 
 # Troubleshooting
 
-This article provides solutions for common issues you may encounter while working with the UI for ASP.NET Core Visual Studio (VS) Extensions.
+This article provides solutions for common issues you may encounter while working with the Telerik UI for ASP.NET Core Visual Studio (VS) extensions.
 
 ## The Telerik menu is missing in Visual Studio
 
-**Cause**
+**Cause** The Visual Studio extensions are disabled or not correctly installed.
 
-The Visual Studio Extensions are disabled or not correctly installed.
-
-**Solution**
+**Solution** Depending on whether the extension is disabled or not correctly installed, use either of the following approaches.
 
 If the extension is disabled:
 
@@ -25,7 +23,7 @@ If the extension is disabled:
 1. Open the **Installed** tab.
 1. Search for **Telerik ASP.NET Core VSExtensions** and make sure they are **Enabled**.
 
-![vsextensions-disabled](images/vsextensions-disabled.png)
+![Troubleshooting when the VS extension is disabled](images/vsextensions-disabled.png)
 
 If the extension is not correctly installed:
 
@@ -41,3 +39,9 @@ If after you apply the described approaches the issue persists, contact the Supp
 1. Execute the `devenv /log %userprofile%\desktop\ActivityLog.xml` command to start Visual Studio and create logs on your Desktop.
 1. Reproduce the issue.
 1. Attach the `Activitylog` files when you contact our support.
+
+## See Also
+
+* [Integrating Visual Studio in Your .Net Project (Overview)]({% slug overview_visualstudio_aspnetcore %})
+* [Creating New Projects with Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetcore %})

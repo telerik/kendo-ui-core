@@ -1,8 +1,8 @@
 ---
 title: Set the NoRecords Template from Controller
-description: An example demonstrating how to set the NoRecords Template message from the server.
+description: An example on how to set the NoRecords template message from the server in Telerik UI for ASP.NET Core.
 type: how-to
-page_title: Use Controller for NoRecords Template  | Kendo UI Grid
+page_title: Use Controller for the NoRecords Template  | Telerik UI for ASP.NET Core Grid
 slug: grid-norecords-template-controller-server-viewdata
 tags: grid, norecords, template, controller, server, viewdata
 ticketid: 1398515
@@ -10,12 +10,12 @@ res_type: kb
 ---
 
 ## Environment
+
 <table>
  <tr>
   <td>Product</td>
   <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
-
   <td>Product Version</td>
   <td>2019.1.220</td>
  </tr>
@@ -23,11 +23,12 @@ res_type: kb
 
 ## Description
 
-How can I set the NoRecords Template message to content from the controller?
+How can I set the NoRecords template message to content from the controller?
 
 ## Solution
 
-Using a [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview.html), pass the text using the [controller's ViewData](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller.viewdata?view=aspnetcore-2.2).  Then, configure the [Kendo UI Grid's NoRecords TemplateID](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridNoRecordsSettingsBuilder) with the ID of the Kendo UI Template.
+1. Use a [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview.html) and pass the text by using the [`ViewData` setting of the controller](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller.viewdata?view=aspnetcore-2.2).
+1. Configure the [NoRecords TemplateID of the Grid](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridNoRecordsSettingsBuilder) with the ID of the Kendo UI Template.
 
 ```css
 <style>
@@ -63,7 +64,7 @@ Using a [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/template
         )
     )
 </div>
- 
+
 <script type="text/x-kendo-template" id="myTemplate">
     <div class="mystyle">@ViewData["NoRecords"]</div>
 </script>
@@ -82,6 +83,6 @@ public class HomeController : Controller
 
 ## See Also
 
-* [Kendo UI Templates - Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview.html)
-* [ViewData - Microsoft Documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller.viewdata?view=aspnetcore-2.2)
-* [Kendo.Mvc.UI.Fluent.GridNoRecordsSettingsBuilder - API Reference](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridNoRecordsSettingsBuilder)
+* [Overview of the Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview.html)
+* [Official Microsoft Documentation of ViewData](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller.viewdata?view=aspnetcore-2.2)
+* [API Reference of Kendo.Mvc.UI.Fluent.GridNoRecordsSettingsBuilder](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/GridNoRecordsSettingsBuilder)

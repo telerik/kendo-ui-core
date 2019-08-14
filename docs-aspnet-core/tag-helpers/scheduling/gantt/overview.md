@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Gantt Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Gantt tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Gantt TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tag-helpers/gantt
 slug: taghelpers_gantt_aspnetcore
 position: 1
 ---
 
-# Gantt Tag Helper Overview
+# Gantt TagHelper Overview
 
-The Telerik UI Gantt tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Gantt widget.
+The Telerik UI Gantt TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Gantt widget.
 
 The Gantt displays a set of tasks and dependencies which are used to visualize project-planning data. It provides a TreeList section where the user can edit the tasks, and sort and reorder them in a grid-like fashion, and a Timeline section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit and remove them. The Gantt also supports the display of the Timeline section in the day, week, and month views.
 
@@ -17,7 +17,7 @@ The Gantt displays a set of tasks and dependencies which are used to visualize p
 
 ## Initializing the Gantt
 
-The following example demonstrates how to define the Gantt by using the Gantt tag helper.
+The following example demonstrates how to define the Gantt by using the Gantt TagHelper.
 
     <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700">
         <columns>
@@ -78,5 +78,5 @@ The Gantt provides options for [binding it to data]({% slug binding_gantt_aspnet
 
 ## See Also
 
-* [Basic Usage of the Gantt Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+* [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
 * [API Reference of the Gantt Helper for ASP.NET Core](/api/gantt)

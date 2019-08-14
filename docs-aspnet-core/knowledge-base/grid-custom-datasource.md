@@ -1,8 +1,8 @@
 ---
-title: Configure Custom DataSource for Kendo UI Grid for ASP.NET Core
-description: An example on how to configure a custom DataSource to populate a Telerik UI for ASP.NET Core Grid HTML helper.
+title: Configure a Custom DataSource for the Grid
+description: An example on how to configure a custom DataSource to populate a Telerik UI for ASP.NET Core Grid HtmlHelper.
 type: how-to
-page_title: Grid Custom DataSource | UI for ASP.NET Core
+page_title: Configure Custom Grid DataSource | Telerik UI for ASP.NET Core Grid
 slug: grid-custom-datasource
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, datasource, custom, custom-datasource
 res_type: kb
@@ -14,21 +14,21 @@ component: grid, datasource
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET Core</td>
+  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI DataSource for ASP.NET Core</td>
+  <td>DataSource for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
 </table>
 
 ## Description
 
-How can I configure a custom DataSource for the Grid HTML helper?
+How can I configure a custom DataSource for the Grid HtmlHelper?
 
 ## Solution
 
-For the complete implementation on how to configure a custom DataSource to properly populate a Kendo UI Grid for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/custom-data-source).
+For the complete implementation on how to configure a custom DataSource to properly populate a Telerik UI Grid HtmlHelper for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/custom-data-source).
 
 ## See Also
 

@@ -1,16 +1,16 @@
 ---
-title: Same data on different chart instances
-description: how to fetch data once and use it with different filters for different charts
+title: Apply the Same Data on Different Chart Instances
+description: An example on how to fetch data once and use it with different filters for different Kendo UI Charts for jQuery.
 type: how-to
-page_title: One data set with different filters for different charts
+page_title: Fetch a Single Data Set with Different Filters for Different Charts | Kendo UI Chart for jQuery
 slug: chart-one-datasource-different-filters
-position: 
-tags: 
+tags: fetch, same, data, apply, different, chart, instances
 ticketid: 1424758
 res_type: kb
 ---
 
 ## Environment
+
 <table>
     <tbody>
 	    <tr>
@@ -22,15 +22,15 @@ res_type: kb
 
 
 ## Description
-I want to have a single POST from a datasource retrieve all the possible data and then filter it in different ways for each chart. 
 
-Applying filters or sorting on the data source, however, applies them to all charts (or other widgets) attached to the same data source. How can I make those operations independent?
+How can I have a single POST from a data source, retrieve all possible data, and then filter the data in different ways for each Kendo UI Chart? When I apply filters or sorting on the data source, they get applied to all charts and other widgets that are attached to the same data source. How can I make those operations independent?
 
 ## Solution
-1. Fetch the data with your own call (e.g., `$.ajax()`)
-1. When you have the data, instantiate the actual widgets, and set a new instance of a Kendo Data Source to their `dataSource` field.
+
+1. Fetch the data with your own call (for example, `$.ajax()`).
+1. When you have the data, instantiate the actual widgets and set a new instance of a Kendo UI Data Source to their `dataSource` field.
 1. Provide the array of data you got from the service to the `data` field of the data source.
-1. Set the desired filters/grouping/sorting on each data source individually
+1. Individually set the desired filters, grouping, or sorting on each data source.
 
 ```dojo
 <div id="chart1"></div>
@@ -39,9 +39,9 @@ Applying filters or sorting on the data source, however, applies them to all cha
     $.ajax({
         url: "/myActualEndpoint"
     }).always(function(realData) { //this uses always for the demo, use real code
-      
-        //in a real case, you should get the real data here. In this example, we will hardcode some
-        //to show how to have independend data sources in the charts based on remote data from a controller
+
+        // In a real use-case scenario, you will get the real data here. This example hardcodes some
+        // to demonstrate how to have independent data sources in the Charts based on remote data from a controller.
 
         var myData = [{
             field1: 10,
@@ -90,4 +90,3 @@ Applying filters or sorting on the data source, however, applies them to all cha
     }
 </script>
 ```
-

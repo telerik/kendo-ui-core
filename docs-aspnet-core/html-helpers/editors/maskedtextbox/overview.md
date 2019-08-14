@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MaskedTextBox Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: MaskedTextBox Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI MaskedTextBox for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/maskedtextbox
 slug: htmlhelpers_maskedtextbox_aspnetcore
@@ -33,7 +33,7 @@ The MaskedTextBox provides options for [using predefined and custom masks rules 
 
 ## Events
 
-You can subscribe to all MaskedTextBox [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#events). For a complete example on basic MaskedTextBox events, refer to the [demo on using the events of the MaskedTextBox](https://demos.telerik.com/aspnet-core/maskedtextbox/events).
+You can subscribe to all MaskedTextBox events. For a complete example on basic MaskedTextBox events, refer to the [demo on using the events of the MaskedTextBox](https://demos.telerik.com/aspnet-core/maskedtextbox/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -53,7 +53,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI MaskedTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [MaskedTextBox API](..api/maskedtextbox) to control its behavior.
+To reference an existing Telerik UI MaskedTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [MaskedTextBox API](/api/maskedtextbox) to control its behavior.
 
 The following example demonstrates how to access an existing MaskedTextBox instance.
 

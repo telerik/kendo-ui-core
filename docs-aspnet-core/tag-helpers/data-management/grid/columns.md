@@ -1,7 +1,7 @@
 ---
 title: Columns
-page_title: Columns | Telerik UI Grid Tag Helper for ASP.NET Core
-description: "Learn the basics when working with the Telerik UI Grid tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Columns | Telerik UI Grid TagHelper for ASP.NET Core
+description: "Learn the basics when working with the Telerik UI Grid TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: columntemplates_grid_aspnetcore
 position: 4
 ---
@@ -199,5 +199,5 @@ In the following example, the **Contact Info** and **Location** columns have nes
 
 ## See Also
 
-* [Basic Usage of the Grid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
+* [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
 * [API Reference of the Grid Helper for ASP.NET Core](/api/grid)

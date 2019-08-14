@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: ColorPicker Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI ColorPicker tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ColorPicker TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/colorpicker, /aspnet-core/helpers/tag-helpers/colorpicker
 slug: taghelpers_colorpicker_aspnetcore
 position: 1
 ---
 
-# ColorPicker Tag Helper Overview
+# ColorPicker TagHelper Overview
 
-The Telerik UI ColorPicker tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ColorPicker widget.
+The Telerik UI ColorPicker TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ColorPicker widget.
 
 The ColorPicker provides suggestions depending on the typed text and allows multiple value entries.
 
@@ -17,7 +17,7 @@ The ColorPicker provides suggestions depending on the typed text and allows mult
 
 ## Initializing the ColorPicker
 
-The following example demonstrates how to define the ColorPicker by using the ColorPicker tag helper.
+The following example demonstrates how to define the ColorPicker by using the ColorPicker TagHelper.
 
         <kendo-colorpicker name="picker">
 			<messages apply="Change" cancel="Close" />
@@ -25,7 +25,7 @@ The following example demonstrates how to define the ColorPicker by using the Co
 
 ## Basic Configuration
 
-The ColorPicker tag helper configuration options are passed as attributes of the tag and through nested tags (`<messages>`).
+The ColorPicker TagHelper configuration options are passed as attributes of the tag and through nested tags (`<messages>`).
 
 ```cshtml
 
@@ -79,5 +79,5 @@ The ColorPalette tag helper configuration options are passed as attributes of th
 
 ## See Also
 
-* [Basic Usage of the ColorPicker Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/tag-helper)
+* [Basic Usage of the ColorPicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/tag-helper)
 * [API Reference of the ColorPicker Helper for ASP.NET Core](/api/colorpicker)

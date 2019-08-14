@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Telerik UI MultiViewCalendar Tag for ASP.NET Core
-description: "Learn how to disable dates in the Telerik UI MultiViewCalendar tag helper for ASP.NET Core."
+page_title: Disabled Dates | Telerik UI MultiViewCalendar TagHelper for ASP.NET Core
+description: "Learn how to disable dates in the Telerik UI MultiViewCalendar TagHelper for ASP.NET Core."
 slug: disabled_dates_multiviewcalendar_taghelper_aspnetcore
 position: 6
 ---

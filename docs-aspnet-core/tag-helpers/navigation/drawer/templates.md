@@ -1,7 +1,7 @@
 ---
 title: Templates
-page_title: Templates | Telerik UI Drawer Tag Helper for ASP.NET Core
-description: "Use the available templates of the Telerik UI Drawer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Templates | Telerik UI Drawer TagHelper for ASP.NET Core
+description: "Use the available templates of the Telerik UI Drawer TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: templates_drawer_aspnetcoretaghelper
 position: 4
 ---

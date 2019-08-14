@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: ButtonGroup Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI ButtonGroup tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ButtonGroup TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/button-group, /aspnet-core/helpers/tag-helpers/button-group
 slug: taghelpers_buttongroup_aspnetcore
 position: 1
 ---
 
-# ButtonGroup Tag Helper Overview
+# ButtonGroup TagHelper Overview
 
-The Telerik UI ButtonGroup tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ButtonGroup widget.
+The Telerik UI ButtonGroup TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ButtonGroup widget.
 
 The ButtonGroup groups a series of buttons together on a single line.
 
@@ -17,7 +17,7 @@ The ButtonGroup groups a series of buttons together on a single line.
 
 ## Initializing the ButtonGroup
 
-The following example demonstrates how to define the ButtonGroup by using the ButtonGroup tag helper.
+The following example demonstrates how to define the ButtonGroup by using the ButtonGroup TagHelper.
 
     <kendo-buttongroup name="buttonGroup">
         <buttongroup-items>
@@ -54,5 +54,5 @@ The Button tag helper configuration options are passed as attributes of the tag.
 
 ## See Also
 
-* [Basic Usage of the ButtonGroup Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/tag-helper)
+* [Basic Usage of the ButtonGroup TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/tag-helper)
 * [API Reference of the ButtonGroup Helper for ASP.NET Core](/api/buttongroup)

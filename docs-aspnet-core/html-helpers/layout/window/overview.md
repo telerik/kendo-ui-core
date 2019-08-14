@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Window Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Window Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI Window HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/window
 slug: htmlhelpers_window_aspnetcore

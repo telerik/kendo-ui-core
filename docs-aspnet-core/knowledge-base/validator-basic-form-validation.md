@@ -1,8 +1,8 @@
 ---
 title: Validate a Form by Using the Validator TagHelper
-description: An example on how to validate a form by using the Telerik UI .Net Core Validator TagHelper.
+description: An example on how to validate a form by using the Telerik UI Validator TagHelper for ASP.NET Core.
 type: how-to
-page_title: Validate a From with the Validator TagHelper | UI for ASP.NET Core
+page_title: Validate a From with the Validator TagHelper | Telerik UI for ASP.NET Core Validator
 slug: validator-basic-form-validation
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, form, validation
 res_type: kb
@@ -13,14 +13,14 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Telerik UI for ASP.NET Core</td>
+  <td>Validator for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
 </table>
 
 
 ## Description
 
-How can I create validate a form by using the UI for ASP.NET Core Validator TagHelper?
+How can I validate a form by using the Telerik UI Validator TagHelper for ASP.NET Core?
 
 ## Solution
 

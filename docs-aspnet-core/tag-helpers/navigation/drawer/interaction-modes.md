@@ -1,7 +1,7 @@
 ---
 title: Interaction Modes
-page_title: Interaction Modes | Telerik UI Drawer Tag Helper for ASP.NET Core
-description: "Use the interaction modes and handle the position of the Telerik UI Drawer tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Interaction Modes | Telerik UI Drawer TagHelper for ASP.NET Core
+description: "Use the interaction modes and handle the position of the Telerik UI Drawer TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: interactionmodes_drawer_aspnetcoretaghelper
 position: 3
 ---

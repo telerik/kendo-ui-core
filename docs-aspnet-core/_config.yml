@@ -14,13 +14,28 @@ navigation:
 
      "knowledge-base":
         title: "Knowledge Base"
-        position: 7
+        position: 280
      "api":
         title: "API Reference"
         position: 0
      "getting-started":
         title: "Getting Started"
         position: 2
+     "getting-started/prerequisites":
+        title: "Prerequisites"
+        position: 4
+     "getting-started/installation":
+        title: "Download and Installation"
+        position: 5
+     "getting-started/helper-basics":
+        title: "Working with Helpers"
+        position: 6
+     "getting-started/vs-integration":
+        title: "Integrating with VS"
+        position: 7
+     "getting-started/scripts":
+        title: "Helper Script Dependencies"
+        position: 8
      "html-helpers":
         title: "Html Helpers"
         position: 3
@@ -175,15 +190,12 @@ navigation:
      "html-helpers/scheduling/scheduler/binding":
         title: "Binding"
         position: 2
-     "vs-integration":
-        title: "Visual Studio Integration"
-        position: 5
      "accessibility":
-        title: "Accessibility"
-        position: 6
+        title: "Accesibility"
+        position: 5
      "backwards-compatibility":
         title: "Breaking Changes"
-        position: 7
+        position: 6
 
 ## List helpers directory names and order here, like this:
      "*appearance":

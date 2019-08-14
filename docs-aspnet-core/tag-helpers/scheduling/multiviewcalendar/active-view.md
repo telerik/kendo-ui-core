@@ -1,14 +1,14 @@
 ---
 title: Active View
-page_title: Active View | Telerik UI MultiViewCalendar Tag for ASP.NET Core
-description: "Define the first view that the Telerik UI MultiViewCalendar initially renders."
+page_title: Active View | Telerik UI MultiViewCalendar TagHelper for ASP.NET Core
+description: "Define the first view that the Telerik UI MultiViewCalendar TagHelper initially renders."
 slug: active_view_multiviewcalendar_taghelper_aspnetcore
 position: 2
 ---
 
 # Active View
 
-To define the first view which the MultiViewCalendar intially renders, use the `Start` option.
+To define the first view which the MultiViewCalendar initially renders, use the `Start` option.
 
 To control the navigation depth, set the `Depth` option.
 

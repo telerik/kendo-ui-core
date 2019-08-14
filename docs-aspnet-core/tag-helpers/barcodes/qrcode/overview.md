@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: QRCode Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI QRCode tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI QRCode TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_qrcode_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/qrcode
 position: 1
 ---
 
-# QRCode Tag Helper Overview
+# QRCode TagHelper Overview
 
-The Telerik UI QRCode tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI QRCode widget.
+The Telerik UI QRCode TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI QRCode widget.
 
 The QRCode generates Canvas and Scalable Vector Graphics (SVG) images that represent Quick Response (QR) codes.
 
@@ -17,13 +17,13 @@ The QRCode generates Canvas and Scalable Vector Graphics (SVG) images that repre
 
 ## Initializing the QRCode
 
-The following example demonstrates how to define the QRCode by using the QRCode tag helper.
+The following example demonstrates how to define the QRCode by using the QRCode TagHelper.
 
     <kendo-qrcode name="qrcode"></kendo-qrcode>
 
 ## Basic Configuration
 
-The QRCode tag helper configuration options are passed as attributes of the tag.
+The QRCode TagHelper configuration options are passed as attributes of the tag.
 
 ```tagHelper
     <kendo-qrcode name="qrUrl" value="https://docs.telerik.com/aspnet-core/introduction" error-correction="QRErrorCorrectionLevel.M size=" 150">
@@ -43,5 +43,5 @@ The QRCode tag helper configuration options are passed as attributes of the tag.
 
 ## See Also
 
-* [Basic Usage of the QRCode Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/qrcode/tag-helper)
+* [Basic Usage of the QRCode TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/qrcode/tag-helper)
 * [API Reference of the QRCode Helper for ASP.NET Core](/api/qrcode)

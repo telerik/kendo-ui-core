@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: ListBox Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI ListBox tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI ListBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_listbox_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/listbox
 position: 1
 ---
 
-# ListBox Tag Helper Overview
+# ListBox TagHelper Overview
 
-The Telerik UI ListBox tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI ListBox widget.
+The Telerik UI ListBox TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ListBox widget.
 
 The ListBox provides suggestions depending on the typed text and allows multiple value entries. displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
@@ -17,7 +17,7 @@ The ListBox provides suggestions depending on the typed text and allows multiple
 
 ## Initializing the ListBox
 
-The following example demonstrates how to define the ListBox by using the ListBox tag helper.
+The following example demonstrates how to define the ListBox by using the ListBox TagHelper.
 
 ```tagHelper
 
@@ -63,5 +63,5 @@ The following example demonstrates how to define the ListBox by using the ListBo
 
 ## See Also
 
-* [Basic Usage of the ListBox Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
+* [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
 * [API Reference of the ListBox Helper for ASP.NET Core](/api/listbox)

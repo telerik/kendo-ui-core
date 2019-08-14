@@ -1,9 +1,9 @@
 ---
 title: Virtual Classroom
-page_title: Virtual Classroom | Progress UI for ASP.NET Core
+page_title: Virtual Classroom | Progress Telerik UI for ASP.NET Core
 description: "Get started with UI for ASP.NET Core and learn about the Virtual Classroom free on-demand technical training program exclusive to active license holders."
 slug: virtualclass_uiforcore
-position: 40
+position: 90
 ---
 
 # Virtual Classroom

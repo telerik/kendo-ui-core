@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Editor Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Editor tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Editor TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_editor_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/editor
 position: 1
 ---
 
-# Editor Tag Helper Overview
+# Editor TagHelper Overview
 
-The Telerik UI Editor tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Editor widget.
+The Telerik UI Editor TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Editor widget.
 
 The Editor allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface and generate widget value as an XHTML markup.
 
@@ -17,14 +17,14 @@ The Editor allows you to create rich textual content through a What-You-See-Is-W
 
 ## Initializing the Editor
 
-The following example demonstrates how to define the Editor by using the Editor tag helper.
+The following example demonstrates how to define the Editor by using the Editor TagHelper.
 
 		<kendo-editor name="editor">
 		</kendo-editor>
 
 ## Basic Configuration
 
-The tools collection of the Editor tag helper is passed through the nest `<tools>` tag.
+The tools collection of the Editor TagHelper is passed through the nest `<tools>` tag.
 
 ```tagHelper
 		<kendo-editor name="editor">
@@ -76,7 +76,7 @@ You can adjust and set up the tools in the tools collection through the `<tools>
 	)
 ```
 
-To specify a chunk of content in the Editor tag helper, use the `<content>` tag or the `value` attribute.
+To specify a chunk of content in the Editor TagHelper, use the `<content>` tag or the `value` attribute.
 
 ```tagHelper
 	<kendo-editor name="editor">
@@ -174,5 +174,5 @@ To configure other Editor options, such as PDF export, immutables, rezisability 
 
 ## See Also
 
-* [Basic Usage of the Editor Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/tag-helper)
+* [Basic Usage of the Editor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/tag-helper)
 * [API Reference of the Editor Helper for ASP.NET Core](/api/editor)

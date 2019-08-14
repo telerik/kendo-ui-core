@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TreeMap Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: TreeMap Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI TreeMap HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_treemaphelper_aspnetcore
 position: 1

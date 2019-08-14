@@ -1,6 +1,6 @@
 ---
 title: Copyright
-page_title: Copyright | Telerik UI for ASP.NET Core
+page_title: Copyright | Progress Telerik UI for ASP.NET Core
 description: "Copyright notice for Progress Telerik UI for ASP.NET Core"
 slug: copyright_kendoui
 position: 270

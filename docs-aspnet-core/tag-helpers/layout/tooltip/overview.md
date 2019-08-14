@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Tooltip Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Tooltip tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Tooltip TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/tooltip, /aspnet-core/helpers/tag-helpers/tooltip
 slug: taghelpers_tooltip_aspnetcore
 position: 1
 ---
 
-# Tooltip Tag Helper Overview
+# Tooltip TagHelper Overview
 
-The Telerik UI Tooltip tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Tooltip widget.
+The Telerik UI Tooltip TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Tooltip widget.
 
 The Tooltip displays a popup hint for a given html element. Its content can be defined either as static text or loaded dynamically with AJAX.
 
@@ -17,13 +17,13 @@ The Tooltip displays a popup hint for a given html element. Its content can be d
 
 ## Initializing the Tooltip
 
-The following example demonstrates how to define the Tooltip by using the Tooltip tag helper.
+The following example demonstrates how to define the Tooltip by using the Tooltip TagHelper.
 
         <kendo-tooltip name="agglomerations" filter="span"></kendo-tooltip>
 
 ## Basic Configuration
 
-The Tooltip tag helper configuration options are passed as attributes of the tag and through nested tags.
+The Tooltip TagHelper configuration options are passed as attributes of the tag and through nested tags.
 
 ```cshtml
 
@@ -46,5 +46,5 @@ The Tooltip tag helper configuration options are passed as attributes of the tag
 
 ## See Also
 
-* [Basic Usage of the Tooltip Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/index)
+* [Basic Usage of the Tooltip TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/index)
 * [API Reference of the Tooltip Helper for ASP.NET Core](/api/tooltip)

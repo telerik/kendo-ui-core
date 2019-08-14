@@ -1,7 +1,7 @@
 ---
 title: Day Template
-page_title: Day Template | Telerik UI MultiViewCalendar Tag for ASP.NET Core
-description: "Customize the content of each cell by using cell templates when working with the Telerik UI MultiViewCalendar Tag Helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Day Template | Telerik UI MultiViewCalendar TagHelper for ASP.NET Core
+description: "Customize the content of each cell by using cell templates when working with the Telerik UI MultiViewCalendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: day_template_multiviewcalendar_taghelper_aspnetcore
 position: 5
 ---

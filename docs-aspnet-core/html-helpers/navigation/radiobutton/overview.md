@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: RadioButton Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: RadioButton Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Get started with the server-side wrapper for the Telerik UI RadioButton for ASP.NET MVC."
 slug: htmlhelpers_radiobutton_aspnetcore
 position: 1

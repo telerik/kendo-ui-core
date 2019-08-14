@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Telerik UI Calendar Tag Helper for ASP.NET Core
-description: "Disable dates when working with the Telerik UI Calendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Disabled Dates | Telerik UI Calendar TagHelper for ASP.NET Core
+description: "Disable dates when working with the Telerik UI Calendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: disableddates_calendar_aspnetcore
 position: 6
 ---

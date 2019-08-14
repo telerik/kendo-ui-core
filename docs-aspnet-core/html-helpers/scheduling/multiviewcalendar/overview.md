@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI MultiViewCalendar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_multiviewcalendar_htmlhelper_aspnetcore
 position: 1
@@ -47,7 +47,7 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 ## Events
 
-You can subscribe to all MultiViewCalendar events. For a complete example on basic MultiViewCalendar events, refer to the [demo on using the events of the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar/events).
+You can subscribe to all MultiViewCalendar events. 
 
 ### Handling by Handler Name
 

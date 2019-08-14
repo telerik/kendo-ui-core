@@ -1,6 +1,6 @@
 ---
 title: Model Binding
-page_title: Model Binding | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Model Binding | Telerik UI for ASP.NET Core HTML Helpers
 description: "Implement model binding in the Telerik UI RadioButton for ASP.NET MVC."
 slug: modelbinding_radiobutton_aspnetcore
 position: 4

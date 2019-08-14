@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Dialog Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Dialog tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Dialog TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/dialog, /aspnet-core/helpers/tag-helpers/dialog
 slug: taghelpers_dialog_aspnetcore
 position: 1
 ---
 
-# Dialog Tag Helper Overview
+# Dialog TagHelper Overview
 
-The Telerik UI Dialog tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Dialog widget.
+The Telerik UI Dialog TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Dialog widget.
 
 The Dialog is a modal popup that brings information to the user. It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI for jQuery Window]({% slug htmlhelpers_window_aspnetcore %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
 
@@ -17,7 +17,7 @@ The Dialog is a modal popup that brings information to the user. It also provide
 
 ## Initializing the Dialog
 
-The following example demonstrates how to define the Dialog by using the Dialog tag helper.
+The following example demonstrates how to define the Dialog by using the Dialog TagHelper.
 
 > To enable more complex widget configuration scenarios, the Kendo UI R1 2018 release introduces a change in the tags of the Dialog. Previously, it was possible to nest content directly in the `<kendo-dialog>` tag while now, after the release, the content must be nested within a `<content>` tag.
 
@@ -27,7 +27,7 @@ The following example demonstrates how to define the Dialog by using the Dialog 
 
 ## Basic Configuration
 
-The Dialog tag helper configuration options are passed as attributes of the tag. Its content is placed within a `<content>` tag.
+The Dialog TagHelper configuration options are passed as attributes of the tag. Its content is placed within a `<content>` tag.
 
 ```cshtml
         @(Html.Kendo().Dialog()
@@ -66,5 +66,5 @@ To set simple content, use the `content` attribute.
 
 ## See Also
 
-* [Basic Usage of the Dialog Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tag-helper)
+* [Basic Usage of the Dialog TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog/tag-helper)
 * [API Reference of the Dialog Helper for ASP.NET Core](/api/dialog)

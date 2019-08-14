@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Telerik UI MultiViewCalendar Tag Helper for ASP.NET Core
-description: "Use the keyboard navigation of the Telerik UI MultiViewCalendar tag helper for ASP.NET Core."
+page_title: Keyboard Navigation | Telerik UI MultiViewCalendar TagHelper for ASP.NET Core
+description: "Use the keyboard navigation of the Telerik UI MultiViewCalendar TagHelper for ASP.NET Core."
 slug: keyboard_navigation_multiviewcalendar_taghelper_aspnetcore
 position: 8
 ---

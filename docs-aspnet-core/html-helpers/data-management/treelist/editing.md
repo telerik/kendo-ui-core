@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Editing | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn how to configure the Telerik UI TreeList HtmlHelper and enable CRUD operations."
 slug: editing_aspnetcore_treelist_helper
 position: 3

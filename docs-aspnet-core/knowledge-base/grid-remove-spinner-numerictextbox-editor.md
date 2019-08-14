@@ -1,10 +1,10 @@
 ---
-title: Remove Spinners from NumericTextBox Editors in Grid for ASP.NET Core
-description: An example on how to remove the side arrows of the Kendo UI NumericTextBox editor in the Kendo UI Grid for ASP.NET Core.
+title: Remove Spinners from NumericTextBox Editors in the Grid
+description: An example on how to remove the side arrows of the NumericTextBox editor in the Telerik UI Grid for ASP.NET Core.
 type: how-to
-page_title: Remove Spinner Arrows of NumericTextBox Editor | UI for ASP.NET Core
+page_title: Remove Spinner Arrows of the NumericTextBox Editor | Telerik UI for ASP.NET Core Grid
 slug: grid-remove-spinner-numerictextbox-editor
-tags: NumericTextBox, spinners, editor, remove
+tags: numerictextbox, spinners, editor, remove
 ticketid: 1132419, 1134869
 res_type: kb
 component: numerictextbox
@@ -15,21 +15,21 @@ component: numerictextbox
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET Core</td>
+  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
-  <td>Created with the 2017.3.913 version</td>
+  <td>Product Version</td>
+  <td>2017.3.913</td>
  </tr>
 </table>
 
 ## Description
 
-How can I remove the spinners from the editor of a `"[DataType("Integer")]"` field?
+How can I remove the spinners from the editor of a `"[DataType("Integer")]"` field in the Telerik UI Grid for ASP.NET Core?
 
 ## Solution
 
-1. Under `Views/Shared/EditorTemplates`, add a `.cshtml` file with the following definition:
+1. Under `Views/Shared/EditorTemplates`, add a `.cshtml` file with the following definition.
 
 	`NoSpinners.cshtml`
 
@@ -41,8 +41,7 @@ How can I remove the spinners from the editor of a `"[DataType("Integer")]"` fie
 		)
 
 1. Open the model that you are editing in the Grid.
-
-1. Add a `[UIHint("NoSpinners")]` annotation to the integer field which does not show spinners:
+1. Add a `[UIHint("NoSpinners")]` annotation to the integer field which does not show spinners.
 
 		[DisplayName("Units in stock")]
 		[UIHint("NoSpinners")]
@@ -55,8 +54,8 @@ How can I remove the spinners from the editor of a `"[DataType("Integer")]"` fie
 
 1. Make sure that the `NoSpinners` string matches the name of the editor template file.
 
-For e reference of the end result, refer to [this screenshot](https://www.screencast.com/t/NpPf3qWtsD).
+To see the end result, refer to [this screenshot](https://www.screencast.com/t/NpPf3qWtsD).
 
 ## See Also
 
-* [Remove Up and Down Arrows from the Grid NumericTextBox Editors](https://docs.telerik.com/kendo-ui/knowledge-base/grid-remove-spinners-from-the-grid-numerictextbox-editor)
+* [Remove Up and Down Arrows from the Grid NumericTextBox Editors in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/knowledge-base/grid-remove-spinners-from-the-grid-numerictextbox-editor)

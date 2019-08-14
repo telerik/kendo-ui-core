@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: TreeView Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI TreeView tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TreeView TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/treeview, /aspnet-core/helpers/tag-helpers/treeview
 slug: taghelpers_treeview_aspnetcore
 position: 1
 ---
 
-# TreeView Tag Helper Overview
+# TreeView TagHelper Overview
 
-The Telerik UI TreeView tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeView widget.
+The Telerik UI TreeView TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeView widget.
 
 The TreeView displays hierarchical data in a traditional tree structure.
 
@@ -17,14 +17,14 @@ The TreeView displays hierarchical data in a traditional tree structure.
 
 ## Initializing the TreeView
 
-The following example demonstrates how to define the TreeView by using the TreeView tag helper.
+The following example demonstrates how to define the TreeView by using the TreeView TagHelper.
 
         <kendo-treeview name="treeView1">
         </kendo-treeview>
 
 ## Basic Configuration
 
-The TreeView tag helper configuration options are passed as attributes of the tag. You can configure the items by using a nested `<items>` tag and also bind the widget to `<hierarchical-datasource>`.
+The TreeView TagHelper configuration options are passed as attributes of the tag. You can configure the items by using a nested `<items>` tag and also bind the widget to `<hierarchical-datasource>`.
 
 ```tagHelper
     <kendo-treeview name="treeview2" datatextfield="FullName">
@@ -113,5 +113,5 @@ The TreeView tag helper configuration options are passed as attributes of the ta
 
 ## See Also
 
-* [Basic Usage of the TreeView Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/tag-helper)
+* [Basic Usage of the TreeView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/tag-helper)
 * [API Reference of the TreeView Helper for ASP.NET Core](/api/treeview)

@@ -1,6 +1,6 @@
 ---
 title: PDFjs Processing
-page_title: PDFjs Processing | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: PDFjs Processing | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn how to use PDF.js processing in the Telerik UI PDFViewer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore
 position: 2

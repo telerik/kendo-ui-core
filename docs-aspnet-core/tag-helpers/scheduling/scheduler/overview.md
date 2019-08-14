@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Scheduler Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Scheduler tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Scheduler TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/scheduler, /aspnet-core/helpers/tag-helpers/scheduler
 slug: taghelpers_scheduler_aspnetcore
 position: 1
 ---
 
-# Scheduler Tag Helper Overview
+# Scheduler TagHelper Overview
 
-The Telerik UI Scheduler tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Scheduler widget.
+The Telerik UI Scheduler TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Scheduler widget.
 
 The Scheduler displays a set of events, appointments, or tasks. It supports the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
@@ -19,13 +19,13 @@ The Scheduler displays a set of events, appointments, or tasks. It supports the 
 
 ## Initializing the Scheduler
 
-The following example demonstrates how to define the Scheduler by using the Scheduler tag helper.
+The following example demonstrates how to define the Scheduler by using the Scheduler TagHelper.
 
     <kendo-scheduler name="scheduler"></kendo-scheduler>
 
 ## Basic Configuration
 
-The Scheduler tag helper configuration options are passed as attributes of the tag. For more details on the Scheduler configurations, refer to the overview of the [MVC Scheduler HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/scheduler) and the [Kendo Scheduler for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
+The Scheduler TagHelper configuration options are passed as attributes of the tag. For more details on the Scheduler configurations, refer to the overview of the [MVC Scheduler HtmlHelper](https://docs.telerik.com/aspnet-mvc/helpers/scheduler) and the [Kendo Scheduler for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler).
 
 ```cshtml
         @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
@@ -135,5 +135,5 @@ The Scheduler tag helper configuration options are passed as attributes of the t
 
 ## See Also
 
-* [Basic Usage of the Scheduler Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
+* [Basic Usage of the Scheduler TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
 * [API Reference of the Scheduler Helper for ASP.NET Core](/api/scheduler)

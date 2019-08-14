@@ -1,18 +1,18 @@
 ---
 title: Overview
 page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI MultiViewCalendar tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI MultiViewCalendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_multiviewcalendar_taghelper_aspnetcore
 position: 1
 ---
 
-# MultiViewCalendar Tag Helper Overview
+# MultiViewCalendar TagHelper Overview
 
-The Telerik UI MultiViewCalendar tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiViewCalendar widget.
+The Telerik UI MultiViewCalendar TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI MultiViewCalendar widget.
 
 The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
 
-* [Demo page for the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar/tag-helper)
+* [Demo page for the MultiViewCalendar](https://demos.telerik.com/aspnet-core/multiviewcalendar)
 
 ## Initializing the MultiViewCalendar
 
@@ -97,5 +97,5 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## See Also
 
-* [Basic Usage of the MultiViewCalendar Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/tag-helper)
+* [Basic Usage of the MultiViewCalendar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar)
 * [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)

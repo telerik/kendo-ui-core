@@ -1,7 +1,7 @@
 ---
 title: Data Binding
-page_title: Data Binding | Telerik UI TreeList tag Helper for ASP.NET Core
-description: "Learn the basics when working with the Telerik UI TreeList tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Data Binding | Telerik UI TreeList TagHelper for ASP.NET Core
+description: "Learn the basics when working with the Telerik UI TreeList TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: databinding_treelist_aspnetcore
 position: 2
 ---
@@ -120,5 +120,5 @@ The following example demonstrates how to enable the remote binding for the Tree
 
 ## See Also
 
-* [Basic Usage of the TreeList Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
+* [Basic Usage of the TreeList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
 * [API Reference of the TreeList Helper for ASP.NET Core](/api/treelist)

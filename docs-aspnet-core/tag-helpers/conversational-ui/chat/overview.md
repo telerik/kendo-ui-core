@@ -9,21 +9,21 @@ position: 1
 
 # Chat TagHelper Overview
 
-The Telerik UI Chat tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Chat widget.
+The Telerik UI Chat TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Chat widget.
 
 The Chat allows the user to participate in chat sessions with other users or with chat bots. It provides support for default cards and actions, and enables the configuration of custom templates and custom components.
 
-* [Demo page for the Chat](https://demos.telerik.com/aspnet-core/chat/tag-helper)
+* [Demo page for the Chat](https://demos.telerik.com/aspnet-core/chat)
 
 ## Initializing the Chat
 
-The following example demonstrates how to define the Chat by using the Chat tag helper.
+The following example demonstrates how to define the Chat by using the Chat TagHelper.
 
     <kendo-chat name="chat"></kendo-chat>
 
 ## Basic Configuration
 
-The following example demonstrates the configuration options that are available for the Chat tag helper.
+The following example demonstrates the configuration options that are available for the Chat TagHelper.
 
 ```
     <!-- Initializing the Chat and attaching the event handlers -->
@@ -47,5 +47,5 @@ The Chat provides an option for creating a [Peer-to-Peer Chat application by usi
 
 ## See Also
 
-* [Basic Usage of the Kendo UI Chat Widget (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
+* [Basic Usage of Chat HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chat/index)
 * [API Reference of the Chat Helper for ASP.NET Core](/api/chat)

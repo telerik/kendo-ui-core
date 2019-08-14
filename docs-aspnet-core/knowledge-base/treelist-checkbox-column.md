@@ -1,8 +1,8 @@
 ---
 title: Bind Checkboxes in the TreeList for ASP.NET MVC
-description: An example on how to add a checkbox column to the Kendo UI TreeList which will set the initial checked state based on model values.
+description: An example on how to add a checkbox column to the Telerik UI TreeList for ASP.NET Core which will set the initial checked state based on model values.
 type: how-to
-page_title: Add a Checkbox Column to the TreeList | UI for ASP.NET Core
+page_title: Add a Checkbox Column to the TreeList | Telerik UI for ASP.NET Core TreeList
 slug: treelist-checkbox-column
 tags: treelist, checkbox
 ticketid: 1141320
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>TreeList for ASP.NET Core</td>
+  <td>TreeList for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
 </table>
 

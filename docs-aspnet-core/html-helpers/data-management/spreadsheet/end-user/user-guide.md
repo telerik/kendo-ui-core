@@ -1,6 +1,6 @@
 ---
 title: User Guide
-page_title: Spreadsheet | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: Spreadsheet | Telerik UI for ASP.NET Core HTML Helpers
 description: "A user guide for the Telerik UI Spreadsheet HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_spreadsheet_user_guide_aspnetcore
 position: 1

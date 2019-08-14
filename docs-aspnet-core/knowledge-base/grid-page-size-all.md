@@ -1,8 +1,8 @@
 ---
-title: Set the All Page Size Feature in Grid for ASP.NET Core
-description: An example on how to set the all-page-size feature in the Kendo UI Grid in ASP.NET Core projects.
+title: Set the All Page Size Feature in the Grid
+description: An example on how to set the all-page-size feature in the Telerik UI Grid for ASP.NET Core.
 type: how-to
-page_title: Set the All Page Size in the Grid | UI for ASP.NET Core
+page_title: Set the All Page Size in the Grid | Telerik UI for ASP.NET Core Grid
 slug: grid-page-size-all
 tags: grid, pagesize, asp, core, all
 ticketid: 1115286
@@ -15,21 +15,21 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Grid for ASP.NET Core</td>
+  <td>Grid for Progress® Telerik® UI for ASP.NET Core</td>
  </tr>
  <tr>
-  <td>Progress Kendo UI version</td>
+  <td>Product Version</td>
   <td>2017.2.621</td>
  </tr>
 </table>
 
 ## Description
 
-How can I use an **All** page size in the Kendo UI Grid in ASP.NET Core projects?
+How can I use an **All** page size in the Telerik UI Grid for ASP.NET Core?
 
 ## Solution
 
-After the document is ready, dynamically add the option for the **All** page size through the dataSource of the DropdownList to allow for selecting the page size. The suggested approach also enables you to customize the text inside the DropDownList.
+After the document is ready, dynamically add the option for the **All** page size by using the dataSource of the DropdownList and thus allow for selecting the page size. The suggested approach also enables you to customize the text inside the DropDownList.
 
 ```
         $(function () {

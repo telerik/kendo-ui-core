@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: Upload Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI Upload tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI Upload TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/upload, /aspnet-core/helpers/tag-helpers/upload
 slug: taghelpers_upload_aspnetcore
 position: 1
 ---
 
-# Upload Tag Helper Overview
+# Upload TagHelper Overview
 
-The Telerik UI Upload tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI Upload widget.
+The Telerik UI Upload TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Upload widget.
 
 The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
 
@@ -17,7 +17,7 @@ The Upload uses progressive enhancement to deliver the best possible uploading e
 
 ## Initializing the Upload
 
-The following example demonstrates how to define the Upload by using the Upload tag helper.
+The following example demonstrates how to define the Upload by using the Upload TagHelper.
 
 > To ensure the tag-naming consistency across the Telerik UI for ASP.NET Core suite, the Kendo UI R1 2018 release introduces a change in the tag names of the Upload. As of the Kendo UI R1 2018 release:
 > * The `<kendo-upload-async-settings>` tag name is changed to `<async>`
@@ -36,7 +36,7 @@ The following example demonstrates how to define the Upload by using the Upload 
 
 ## Basic Configuration
 
-The Upload tag helper configuration options are passed as attributes of the tag or attributes of the nested composite and collection properties.
+The Upload TagHelper configuration options are passed as attributes of the tag or attributes of the nested composite and collection properties.
 
 ```cshtml
 
@@ -59,5 +59,5 @@ The Upload tag helper configuration options are passed as attributes of the tag 
 
 ## See Also
 
-* [Basic Usage of the Upload Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/tag-helper)
+* [Basic Usage of the Upload TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/tag-helper)
 * [API Reference of the Upload Helper for ASP.NET Core](/api/upload)

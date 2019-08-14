@@ -3,7 +3,7 @@ title: Upgrade
 page_title: Upgrade | Progress Telerik UI for ASP.NET Core
 description: "Upgrade your current version of Progress Telerik UI for ASP.NET Core (MVC 6 or ASP.NET Core MVC) and switch from a trial to a developer license."
 slug: upgrade_aspnetcore
-position: 3
+position: 80
 ---
 
 # Upgrade
@@ -41,7 +41,6 @@ To upgrade the version with NuGet and Bower:
 
 ## See Also
 
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET Core in ASP.NET Core Projects with the CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET Core]({% slug knownissues_aspnetmvc6_aspnetmvc %})
-* [Tag Helpers for ASP.NET Core]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
+* [First steps on Visual Studio for Windows (online guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [First steps on Visual Studio for Mac (online guide)]({% slug gettingstarted_firststeps_vsmac %})
+* [First steps with CLI (online guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})

@@ -1,15 +1,15 @@
 ---
 title: Overview
 page_title: TabStrip Overview | Telerik UI for ASP.NET Core Tag Helpers
-description: "Learn the basics when working with the Telerik UI TabStrip tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with the Telerik UI TabStrip TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_tabstrip_aspnetcore
 previous_url: /aspnet-core/helpers/tag-helpers/tabstrip
 position: 1
 ---
 
-# TabStrip Tag Helper Overview
+# TabStrip TagHelper Overview
 
-The Telerik UI TabStrip tag helper for ASP.NET Core is a server-side wrapper for the Kendo UI TabStrip widget.
+The Telerik UI TabStrip TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TabStrip widget.
 
 The TabStrip displays a collection of tabs with associated content. It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
 
@@ -17,7 +17,7 @@ The TabStrip displays a collection of tabs with associated content. It is compos
 
 ## Initializing the TabStrip
 
-The following example demonstrates how to define the TabStrip by using the TabStrip tag helper.
+The following example demonstrates how to define the TabStrip by using the TabStrip TagHelper.
 
 		<kendo-tabstrip name="tabstrip">
 		</kendo-tabstrip>
@@ -67,7 +67,7 @@ To pass the TabStrip items collection, either:
 )
 ```
 
-To further configure the TabStrip tag helper, use its other options&mdash;`<popup-animation>`, and `<scrollable>`.
+To further configure the TabStrip TagHelper, use its other options&mdash;`<popup-animation>`, and `<scrollable>`.
 
 ```tagHelper
 <kendo-tabstrip name="tabstrip">
@@ -111,5 +111,5 @@ The TabStrip provides options for [setting up its items]({% slug items_tabstrip_
 
 ## See Also
 
-* [Basic Usage of the TabStrip Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/tag-helper)
+* [Basic Usage of the TabStrip TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/tag-helper)
 * [API Reference of the TabStrip Helper for ASP.NET Core](/api/tabstrip)
