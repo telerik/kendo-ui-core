@@ -298,6 +298,8 @@ navigation:
         title: "Popup"
      "*numerictextbox":
         title: "NumericTextBox"
+     "*rating":
+        title: "Rating"
      "*progressbar":
         title: "ProgressBar"
      "*qrcode":

@@ -455,6 +455,16 @@
 @drawer-selected-hover-text: @selected-text-color;
 
 
+// Rating
+@rating-icon-text: contrast(@accent, @widget-border-color, @widget-text-color, 0.5);
+@rating-icon-selected-text: @accent;
+@rating-icon-hover-text: @accent;
+@rating-icon-focused-text: @accent;
+
+@rating-icon-focused-shadow: 0 2px 3.6px rgba(black, .1);
+@rating-icon-focused-selected-shadow: 0 2px 3.6px rgba(@accent, .5);
+
+
 // Spreadsheet
 @spreadsheet-insert-image-dialog-preview-overlay: inset 0 0 0 2000px rgba(0,0,0, 0.5);
 @spreadsheet-insert-image-dialog-hovered-text: #fff;
@@ -485,6 +495,7 @@
 @import "Default/switch/_theme.less";
 @import "common/adaptive/_theme.less";
 @import "Default/drawer/_theme.less";
+@import "Default/rating/_theme.less";
 
 
 .k-in,
@@ -1485,7 +1496,8 @@ div.k-filebrowser-dropzone em
 
 .k-slider,
 .k-treeview,
-.k-upload
+.k-upload,
+.k-rating
 {
     .box-shadow(none);
 }

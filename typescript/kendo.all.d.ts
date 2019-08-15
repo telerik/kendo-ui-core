@@ -7762,6 +7762,68 @@ declare namespace kendo.ui {
         checked?: any;
     }
 
+    class Rating extends kendo.ui.Widget {
+
+        static fn: Rating;
+
+        options: RatingOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+        container: JQuery;
+
+        static extend(proto: Object): Rating;
+
+        constructor(element: Element, options?: RatingOptions);
+
+        value(value: number): void;
+        reset(): void;
+        enable(enable: boolean): void;
+        readonly(enable: boolean): void;
+        setOptions(options: any): void;
+        destroy(): void;
+    }
+
+    interface RatingOptions {
+        name?: string;
+        min?: number;
+        max?: number;
+        selection: string | "continuous" | "single";
+        precision: string | "item" | "half";
+        label?: boolean | RatingLabel;
+        tooltip?: boolean;
+        itemTemplate?: string|Function;
+        selectedTemplate?: string|Function;
+        hoveredTemplate?: string|Function;
+        selectValueOnFocus?: number;
+        enabled?: boolean;
+        readonly?: boolean;
+        change?(e: RatingChangeEvent): void;
+        select?(e: RatingSelectEvent): void;
+    }
+
+    interface RatingLabel {
+        template: string|Function;
+    }
+
+    interface RatingEvent {
+        sender: Rating;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface RatingChangeEvent extends RatingEvent {
+        target?: Element;
+        oldValue?: number;
+        newValue?: number;
+    }
+
+    interface RatingSelectEvent extends RatingEvent {
+        target?: Element;
+    }
+
+
     class TabStrip extends kendo.ui.Widget {
 
         static fn: TabStrip;
@@ -21866,6 +21928,10 @@ interface JQuery {
     kendoSwitch(): JQuery;
     kendoSwitch(options: kendo.ui.SwitchOptions): JQuery;
     data(key: "kendoSwitch"): kendo.ui.Switch;
+
+    kendoRating(): JQuery;
+    kendoRating(options: kendo.ui.RatingOptions): JQuery;
+    data(key: "kendoRating"): kendo.ui.Rating;
 
     kendoTabStrip(): JQuery;
     kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery;

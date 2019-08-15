@@ -1418,7 +1418,7 @@ Toggles between case-insensitive (default) and case-sensitive [searching](column
 
 The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.
 
-> This feature is not supported for columns which have their [values](columns.values) option set and Boolean columns.
+> This feature is not supported for columns which have their [values](columns.values) option set.
 
 > If [filterable.mode](filterable.mode) is set to 'row', [columns.filterable.cell.template](columns.filterable.cell.template) should be used to customize the input.
 
@@ -1454,6 +1454,36 @@ The role data attribute of the widget used in the filter menu or a JavaScript fu
         filterable: true,
         dataSource: [ { date: new Date() }, { date: new Date() } ]
     });
+    </script>
+
+#### Example - use a Kendo UI DropDownList for boolean column
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [ "name", {
+          field: "employed",
+          filterable:{
+            ui: function(element){
+              element.kendoDropDownList({
+                dataSource:[true,false],
+                optionLabel: "--Select--"
+              })
+            }
+          }
+        } ],
+        filterable: true,
+        dataSource: {
+          data:[{ name: "John Doe" , employed: true }, { name: "Jane Doe", employed: true }, { name: "Tim Doe", employed: false} ],
+          schema:{
+            model:{
+              fields:{
+                employed: { type: "boolean" } // defining the field provides filterable.extra false out of the box for the column
+              }
+            }
+          }
+        }
+      });
     </script>
 
 > Check [Filter menu customization](http://demos.telerik.com/kendo-ui/grid/filter-menu-customization) for a live demo.

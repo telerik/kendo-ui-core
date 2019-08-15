@@ -119,6 +119,8 @@ A set of key/value pairs that configure the model fields. The key specifies the 
 
 Specifies the default value which will be used for the field when a new model instance is created. The default settings depend on the type of the field. The default value for a string is `""`, for a number is `0`, and for a date is `new Date()` (today).
 
+> If `options.fields.fieldName.nullable` is set to `true` the defaultValue will be ignored when a new model is created.
+
 The parameter can also be set to a function that returns the dynamic default values of the fields. For a live demo, refer to [this how-to example]({% slug howto_gridfiltering_dynamicdefaultvalues_grid %}).
 
 ##### options.fields.fieldName.editable `Boolean`
@@ -127,7 +129,7 @@ Specifies if the field is editable or not. Defaults to `true`.
 
 ##### options.fields.fieldName.nullable `Boolean`
 
-Specifies if the `defaultValue` setting should be used. Defaults to `false`.
+Specifies if the `defaultValue` setting will be used. If set to true, the defaultValue will be ignored and new models will be created with `null` field value. Defaults to `false`.
 
 ##### options.fields.fieldName.parse `Function`
 

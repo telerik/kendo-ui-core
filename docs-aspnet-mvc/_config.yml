@@ -185,6 +185,8 @@ navigation:
         title: "Notification"
      "helpers/numerictextbox":
         title: "NumericTextBox"
+     "helpers/rating":
+        title: "Rating"
      "helpers/panelbar":
         title: "PanelBar"
      "helpers/pdfviewer":

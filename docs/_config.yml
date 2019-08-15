@@ -150,6 +150,9 @@ navigation:
     "controls/editors/upload/accessibility":
         title: "Accessibility"
         position: 50
+    "controls/editors/rating/accessibility":
+        title: "Accessibility"
+        position: 50
     "controls/editors/upload/how-to":
         title: "How To"
         position: 70
@@ -603,6 +606,8 @@ navigation:
         title: "Popup"
     "*numerictextbox":
         title: "NumericTextBox"
+    "*rating":
+        title: "Rating"
     "*panelbar":
         title: "PanelBar"
     "*pdfviewer":
@@ -1739,6 +1744,12 @@ defaults:
         path: "controls/editors/numerictextbox"
     values:
         component: "numeric-textbox"
+
+-
+    scope:
+        path: "controls/editors/rating"
+    values:
+        component: "rating"
 
 -
     scope:
