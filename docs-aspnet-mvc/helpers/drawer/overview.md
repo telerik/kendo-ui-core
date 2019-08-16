@@ -32,8 +32,6 @@ The height of the widget is determined by the higher content of the two - the te
 
 The `Mini()` option can be used with both `overlay` and `push` modes by adding a the `Mini()` method. If set to true, the always visible portion of the Drawer will take up the default width of `50px` and the main template. If the `Mini()` configurator is used, the `Width()` and `Template()`/`TemplateId()` can also be changed.
 
-###### Example
-
     .Mini(m=>m.Width(500).TemplateId("mini-template"))
 
 ## Templates
@@ -44,7 +42,7 @@ The Kendo UI Drawer widget has two configurable templates - the main `Template()
 
 Icons can be added with a span with class `k-icon` combined with the desired [web font icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web#list-of-font-icons) class. To ensure that the icons and text have sufficient padding wrap the item template text in a span with class `k-item-text`.
 
-###### Example Template
+ Template
 
     @"<ul>
         <li data-role='drawer-item'>
@@ -90,7 +88,7 @@ The following example demonstrates the basic configuration of the Drawer HtmlHel
 
     <script type="text/javascript">
         $(function () {
-            //Notice that the Name() of the Drawer is used to get its client-side instance.
+            // The Name() of the Drawer is used to get its client-side instance.
             var drawer = $("#drawer").data("kendoDrawer");
             console.log(drawer);
         });

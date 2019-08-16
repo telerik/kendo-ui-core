@@ -30,8 +30,6 @@ Below are listed the steps for you to follow when using the Kendo UI Validator w
 
 1. Create a `class` and add the needed `DataAnnotation` attributes.
 
-    ###### Example
-
             public class OrderViewModel
             {
                 [HiddenInput(DisplayValue = false)]
@@ -58,16 +56,12 @@ Below are listed the steps for you to follow when using the Kendo UI Validator w
 
 1. Pass an instance of the model to the view.
 
-    ###### Example
-
-            public ActionResult Create()
+           public ActionResult Create()
             {                
                 return View(new OrderViewModel());
             }
 
 1. Create the editors in the view based on the model, and initialize the Kendo UI Validator on the form.
-
-    ###### Example
 
             @model OrderViewModel
 
@@ -134,8 +128,6 @@ Below are listed the steps for you to follow when implementing custom attributes
 
 1. Create a `class` that inherits from `ValidationAttribute` and `IClientValidatable`, and implement the `IsValid` and `GetClientValidationRules` methods.
 
-    ###### Example
-
             [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
             public class GreaterDateAttribute : ValidationAttribute, IClientValidatable
             {
@@ -172,8 +164,6 @@ Below are listed the steps for you to follow when implementing custom attributes
 
 2. Decorate the `ShippedDate` property with the newly implemented attribute.
 
-    ###### Example
-
             public class OrderViewModel
             {
                 //omitted for brevity
@@ -188,8 +178,6 @@ Below are listed the steps for you to follow when implementing custom attributes
             }
 
 1. Implement a Kendo UI Validator rule that will handle all inputs with the `data-val-greaterdate` attribute.
-
-    ###### Example
 
             @model OrderViewModel
 
@@ -248,8 +236,6 @@ Below are listed the steps for you to follow when implementing custom attributes
 
 Editable widgets, such as the Kendo UI Grid and ListView, initialize the Validator internally so that to specify custom rules, you should extend the Kendo UI Validator built-in validation rules. You can also use this approach to define rules after the Kendo UI scripts are included and to use them in all views.
 
-###### Example
-
     <script>
         (function ($, kendo) {
             $.extend(true, kendo.ui.validator, {
@@ -295,12 +281,8 @@ Editable widgets, such as the Kendo UI Grid and ListView, initialize the Validat
 Below are listed the steps for you to follow when using the jQuery validation with the Kendo UI widgets.
 
 1. Add the latest version of the [`jquery.validate`](http://www.nuget.org/packages/jQuery.Validation/) and [`jquery.validate.unobtrusive`](http://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation/) scripts to the project.
-
 1. Include them in the view in which you want to validate the user input or in the layout.
-
 1. Override the default ignore setting after including the scripts to enable validation of hidden elements. For instance, widgets like the Kendo UI DropDownList and NumericTextBox have a hidden input to keep the value.
-
-    ###### Example
 
             <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
             <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>

@@ -17,5 +17,3 @@ To see the example, refer to the article on how to [refer to Kendo UI from CDN w
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
 * [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-
-For runnable examples on the general functionalities of Telerik UI for ASP.NET MVC, browse the [**How To** documentation folder](/how-to/).

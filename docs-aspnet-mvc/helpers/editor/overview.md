@@ -17,10 +17,7 @@ The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Edito
 Below are listed the steps for you to follow when configuring the Kendo UI Editor.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -29,26 +26,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 1. Add an Editor.
 
-    ###### Example
-
     ```ASPX
         <%: Html.Kendo().Editor()
-                .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
-                .Value("<p>Initial value</p>") //Set the value of the Editor.
+                .Name("editor") // The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+                .Value("<p>Initial value</p>") // Set the value of the Editor.
         %>
     ```
     ```Razor
         @(Html.Kendo().Editor()
-                .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
-                .Value("<p>Initial value</p>") //Set the value of the Editor.
+                .Name("editor") // The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+                .Value("<p>Initial value</p>") // Set the value of the Editor.
         )
     ```
 
 ### Server Value Processing
 
 The Editor value is posted as a string and mapped to a variable with the name of the widget. Note that the posted value is HTML-encoded by default, to circumvent the [ASP.NET request validation](http://msdn.microsoft.com/en-us/library/hh882339.aspx). To decode the value, use the [`HttpUtility.HtmlDecode` method](http://msdn.microsoft.com/en-us/library/7c5fyk1k.aspx).
-
-###### Example
 
     [HttpPost]
     public ActionResult Save(string editor)
@@ -58,8 +51,6 @@ The Editor value is posted as a string and mapped to a variable with the name of
         return View();
     }
 
-> **Important**
->
 > You can suppress the Editor encoding by specifying `Encode(false)` via the fluent API and adding the [`AllowHtml` attribute](http://msdn.microsoft.com/en-us/library/system.web.mvc.allowhtmlattribute(v=vs.118).aspx) to the model field that stores the HTML.
 
 ## Event Handling
@@ -70,8 +61,6 @@ You can subscribe to all Editor [events](http://docs.telerik.com/kendo-ui/api/ja
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
 ```ASPX
     <%: Html.Kendo().Editor()
         .Name("editor")
@@ -81,7 +70,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function editor_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -94,7 +83,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function editor_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -103,15 +92,13 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
 ```Razor
     @(Html.Kendo().Editor()
         .Name("editor")
         .Events(e => e
             .Change(@<text>
             function() {
-                //Handle the change event inline.
+                // Handle the change event inline.
             }
             </text>)
         )
@@ -124,11 +111,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Editor instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Editor API](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor#methods) to control its behavior.
 
-###### Example
-    //Put this after your Kendo UI Editor for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Editor for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Editor is used to get its client-side instance.
+            // The Name() of the Editor is used to get its client-side instance.
             var editor = $("#editor").data("kendoEditor");
         });
     </script>
@@ -145,5 +131,3 @@ To reference an existing Kendo UI Editor instance, use the [`jQuery.data()`](htt
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-
-For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

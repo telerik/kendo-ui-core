@@ -16,4 +16,4 @@ To see the example, refer to the project on how to [use the Kendo UI Grid with t
 * [Overview of the ColorPicker HtmlHelper]({% slug overview_colorpickerhelper_aspnetmvc %})
 * [ColorPickerBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
 
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).
+

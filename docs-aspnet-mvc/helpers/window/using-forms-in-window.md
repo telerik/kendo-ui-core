@@ -12,8 +12,6 @@ This article provides basic information about handling views with forms in a Ken
 
 The Kendo UI Window widget for ASP.NET MVC enables you to use the `LoadContentFrom` method to load content from a view into the popup content ([Load-on-Demand Content]({%slug overview_windowhelper_aspnetmvc%}#load-on-demand-content)).
 
-> **Important**
->
 > If you use AJAX forms, refer to the article on [updating the Kendo UI Window with AJAX forms]({%slug howto_update_ajax_forms_windowaspnetmv%}).
 
 Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view into a Kendo UI Window, it does not act as a separate browser window. This means that any returned data from the form submit action loads into the main page and eventually might lead to unexpected results.

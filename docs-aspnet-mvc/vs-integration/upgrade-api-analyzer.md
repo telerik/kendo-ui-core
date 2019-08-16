@@ -20,61 +20,44 @@ While it upgrades the Telerik controls to a recent version, the Upgrade API Anal
 
 The tool also points out the exact piece of code that is affected by a certain change. In the cases of an obsolete method or property, the tool provides suggestions for you to modify that code.                      
 
-> **Important**
->
 > Currently, Telerik Upgrade API Analyzer checks only the C# code of the applications.
 
 ## Getting Started
 
 Telerik Upgrade API Analyzer is a click-once application. To download the installation, refer to its [setup page](http://demos.telerik.com/UpgradeAPIAnalyzer/setup.exe).
 
-> **Important**
->
 > The tool relies on Microsoft .NET Framework 4.5.2. If not installed on your machine, the setup of the tool installs it automatically.
 
 ### Running the Tool
 
 1. Run the Upgrade API Analyzer. As a result, the tool opens the following screen:
 
-		**Figure 1: The initial screen of Telerik Upgrade API Analyzer**
-
-		![](images/upgrade-api-analyzer_0.png)
+		![The initial screen of Telerik Upgrade API Analyzer](images/upgrade-api-analyzer_0.png)
 
 1. On the screen, select the platform.
-
 1. Select the current version of the Telerik assemblies you are using.
-
 1. Select the version to upgrade to. Because the three combo-boxes are populated on the fly upon your selection, choose the values consecutively.
-
 1. Open the solution you are planning to upgrade.  
 
 Alternatively, you can also run the Upgrade API Analyzer from the [Upgrade Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %}) by clicking the **Compatibility** button as demonstrated on **Figure 2**. As a result, the wizard provides the **Technology**, **Your Version**, and **Version to Upgrade** parameters. When you start the Upgrade API Analyzer directly through the **Compatibility** button without installing the tool first, the installation starts automatically. If the .NET Framework 4.5.2 is not present on your machine, the application prompts you to install it manually at the end of the installation.
 
-**Figure 2: The Compatibility button in the Upgrade API Analyzer**
-
-![](images/upgrade-api-analyzer_5.png)
+![The Compatibility button in the Upgrade API Analyzer](images/upgrade-api-analyzer_5.png)
 
 ### Analyzing the Changes
 
 After the setup of the tool is ready, the Upgrade API Analyzer starts analyzing the code.
 
-**Figure 3: The tool starts analyzing as soon as you open a solution**
-
-![](images/upgrade-api-analyzer_1.png)
+![The tool starts analyzing as soon as you open a solution](images/upgrade-api-analyzer_1.png)
 
 The tool lists all the changes that are found between the two versions. To present the results from the comparison, the it uses the [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html), which provides options for data handling such as sorting, filtering, and resizing columns.
 
-**Figure 4: The Upgrade API Analyzer lists the found differences**
-
-![](images/upgrade-api-analyzer_2.png)
+![The Upgrade API Analyzer lists the found differences](images/upgrade-api-analyzer_2.png)
 
 For each change, the grid presents the following information:
 
 * **Difference**&mdash;Teh possible values are **Obsolete**, **Deleted**, or **Modified**. By default, the modified changes are not displayed because they indicate an internal update in the method or class which generally does not affect its function and does not require you to act. However, the modified changes become available when you update the filter of the **Difference** column.
 
-		**Figure 5: Displaying all found changes including the modifications**
-
-		![](images/upgrade-api-analyzer_3.png)
+		![Displaying all found changes including the modifications](images/upgrade-api-analyzer_3.png)
 
 * **Kind**&mdash;The possible values are **Type**, **Property**, **Method**, and **Field**.
 * **Node**&mdash;The name of the **Type**, **Property**, **Method**, or **Field** value.
@@ -87,9 +70,7 @@ For each change, the grid presents the following information:
 
 Additionally, the Upgrade API Analyzer allows you to save the gathered information through the **Export** button that is located in the upper right corner. The data is arranged and exported to an HTML document. The exported information includes the currently visible (filtered) data in the grid.
 
-**Figure 6: The Upgrade API Analyzer allows an HTML export functionality**
-
-![](images/upgrade-api-analyzer_4.png)
+![The Upgrade API Analyzer allows an HTML export functionality](images/upgrade-api-analyzer_4.png)
 
 ## Feedback and Updates
 

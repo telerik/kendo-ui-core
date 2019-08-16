@@ -15,8 +15,6 @@ To enable this functionality, follow the steps and refer to the examples below. 
 
 1. Add the `Editable` property for a Grid column and specify the name of the JavaScript method.
 
-    ###### Example
-
     ```
         @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
@@ -39,8 +37,6 @@ To enable this functionality, follow the steps and refer to the examples below. 
 
 2. Add logic to the JavaScript function which will determine that the column is editable.
 
-    ###### Example
-
     ```
         <script>
             function productNameEditable(dataItem) {
@@ -54,5 +50,3 @@ To enable this functionality, follow the steps and refer to the examples below. 
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

@@ -9,10 +9,10 @@ position: 12
 
 # Use with ASP.NET MVC 3
 
-This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 3 applications. It uses Visual Studio 2010 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 3. The examples create a new ASP.NET MVC 3 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 3 applications are the same.
+This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 3 applications.
 
-> **Important**
->
+It uses Visual Studio 2010 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 3. The examples create a new ASP.NET MVC 3 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 3 applications are the same.
+
 > The [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
 
 ## Create New ASP.NET MVC 3 Applications
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in Solution Explorer](images/mvc3-solution.png)
+![Kendo directories in the Solution Explorer](images/mvc3-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
@@ -121,15 +121,11 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 Below are listed the steps for you to follow when including the Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN.
 
-> **Important**
->
 > Make sure you replace the `kendo ui version` from the code snippets below with the current version of the product&mdash;for example, `2013.2.918`.
 
 **Step 1** Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
 **Step 2** Include `kendo.common.min.css` and `kendo.default.min.css`. Add a `link` tag within the `head` tag of the layout.
-
-###### Example
 
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.default.min.css" />
@@ -138,20 +134,14 @@ Below are listed the steps for you to follow when including the Telerik UI for A
 
 **Step 4** Include the jQuery JavaScript file from the CDN or a compatible version from other location. Add a `script` tag in within the `head` tag.
 
-###### Example
-
         <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/jquery.min.js”></script>
 
 **Step 5** Include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after jQuery.
-
-###### Example
 
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js”></script>
     <script src=”http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js”></script>
 
 **Step 6** If using the Telerik MVC Scheduler wrapper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
-
-###### Example
 
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
@@ -179,8 +169,6 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
 
 **Step 3** Append an `add` tag to the `namespaces` tag.
 
-###### Example
-
     <namespaces>
         <add namespace="System.Web.Mvc" />
         <add namespace="System.Web.Mvc.Ajax" />
@@ -206,9 +194,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 3** Press `CTRL+F5` to build and run the application.
 
-**Figure 3. The final result**
-
-![Final result](images/mvc3-final.png)
+![The final result](images/mvc3-final.png)
 
 ## Next Steps
 

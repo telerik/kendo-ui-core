@@ -10,8 +10,6 @@ position: 3
 
 The PDFViewer can be configured to use [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction) for PDF processing.
 
-> **Important**
->
 > DPL Processing is BETA version and has the following limitations:
 > * Clipping elements and Gradients are currently not supported.
 > * SVG or encoded images in other formats might not render correctly.
@@ -21,12 +19,10 @@ The PDFViewer can be configured to use [Telerik Document Processing library](htt
 **Requirements**
 
 * DPL Processing depends on the `Telerik.Web.PDF` assembly.
-* To use DPL Processing in a project, it must target 4.6.2 .NET Framework. 
+* To use DPL Processing in a project, it must target 4.6.2 .NET Framework.
 * The `Read.Url` option is mandatory, the `Open` and `Download` options are mandatory if the respective tools are displayed in the toolbar.
 
 An example of a PDFViewer widget configured to use DPL Processing.
-
-###### Example
 
 ```
     @(Html.Kendo().PDFViewer()
@@ -52,5 +48,3 @@ An example of a PDFViewer widget configured to use DPL Processing.
 
 * [PDFViewer Overview]({% slug overview_pdfviewerhelper_aspnetmvc %})
 * [PDF.JS Processing]({% slug pdfjsprocessing_pdfviewerhelper_aspnetmvc %})
-
-For runnable examples on Kendo UI PDFViewer, refer to the [Telerik UI for ASP.NET MVC Demos site](http://demos.telerik.com/aspnet-mvc/pdfviewer/index).

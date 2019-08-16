@@ -8,9 +8,7 @@ position: 5
 
 # Create the Social Stats Page
 
-**Figure 1. A snapshot of the Kendo UI Music Store Social Networking page**
-
-![social-overview](images/social-overview.png)
+![A snapshot of the Kendo UI Music Store Social Networking page](images/social-overview.png)
 
 The **Social Stats** page contains various views of social networking data taken from the Kendo UI Music Store. This includes Facebook Likes, Twitter tweets, Google Plus pluses, and Pintrest pins. The different social networks can be selected to show their data in the main graph view, potentially combining the views and adding axes to the graph.
 
@@ -21,8 +19,6 @@ This page is contained in the `app/social-view.js`, `app/views/social.html`, and
 ### Construct the Dynamic Chart
 
 The chart itself is defined as a Kendo UI Chart in the JavaScript with some special considerations for the series and value axis, as these are the dynamic portions of the chart along with the data source. The relevant portions of the chart initializer are demonstrated in the example below. Note that the example is cut down for brevity.
-
-###### Example
 
     $('#social-stats-chart').kendoChart({
         title: {
@@ -39,13 +35,9 @@ The chart itself is defined as a Kendo UI Chart in the JavaScript with some spec
 
 Note the `buildSocialStatsSeries` and `buildSocialStatsValueAxis` functions. These define which data views appear in the chart and their styles. It is these functions that perform the addition and removal of the dynamic content, and so are called when the chart is created and also whenever the user selects or deselects one of the social networks through the interactive elements located below the chart.
 
-**Figure 2. A snapshot of the social tiles**
-
-![social-tiles](images/social-tiles.png)
+![A snapshot of the social tiles](images/social-tiles.png)
 
 These tiles are constructed by using standard declarative markup in HTML and JavaScript events. The following example demonstrates the HTML.
-
-###### Example
 
     <div class="social-tiles">
         <span class="social-tile-wrapper" data-selected="true">
@@ -65,15 +57,11 @@ These tiles are constructed by using standard declarative markup in HTML and Jav
 
 Each tile is its own `<span>`, each with a `social-tile-wrapper` class that is used to associate a click event in the JavaScript.
 
-###### Example
-
     $(".social-tile-wrapper").click(function (e) {
         changeChartData.call(this);
     });
 
 The `changeChartData()` is invoked this way, so it runs in the context of the tile wrapper itself, rather than globally. It has the task of marking the wrapper as selected and, therefore, updating its style, as well as invoking the `buildSocialStatsSeries` and `buildSocialStatsValueAxis` help functions.
-
-###### Example
 
     function changeChartData() {
         var selected = $(this).data('selected'),
@@ -99,8 +87,6 @@ jQuery does the heavy-lifting of locating the data and facilitating the actions,
 
 The `buildSocialStatsValueAxis` builds the JavaScript object the chart expects for defining the `ValueAxis` property, taking its information from the social tiles and if they have the `social-tile-selected` class attached. An excerpt of this function is demonstrated in the example below, snipped for brevity, as the use of the Facebook tile is representative of the use of the others.
 
-###### Example
-
     function buildSocialStatsValueAxis() {
         var axis = [
             {
@@ -116,7 +102,7 @@ The `buildSocialStatsValueAxis` builds the JavaScript object the chart expects f
             }
         ];
 
-        //facebook selected
+        // Facebook selected.
         if ($('.facebook-tile').hasClass("social-tile-selected")) {
             axis.push({
                 title: { text: "likes" },
@@ -129,8 +115,6 @@ The `buildSocialStatsValueAxis` builds the JavaScript object the chart expects f
 	}
 
 The `buildSocialStatsSeries` is similarly constructed, but provides information for the Series of the chart instead, including the axis names and legend title. Similarly, it is trimmed for brevity in the example below.
-
-###### Example
 
     function buildSocialStatsSeries() {
 

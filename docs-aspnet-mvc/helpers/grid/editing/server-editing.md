@@ -17,8 +17,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Define a command column for the `Edit` and `Destroy` commands.
 
-    ###### Example
-
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
@@ -33,8 +31,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         %>
 
 1. Set the editing mode to `InLine`.
-
-    ###### Example
 
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
@@ -52,8 +48,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add the `Create` command to the Grid toolbar.
 
-    ###### Example
-
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
@@ -70,8 +64,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         %>
 
 1. Specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
-
-    ###### Example
 
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
@@ -98,8 +90,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Specify the property of the model which is the unique identifier (primary key).
 
-    ###### Example
-
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
             .Name("Home")
             .Columns(columns =>
@@ -125,16 +115,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Implement the `Read` action method.
 
-    ###### Example
-
         public ActionResult Index()
         {
             return View(ProductRepository.All());
         }
 
 1. Implement the `Create` action method.
-
-    ###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Product product)
@@ -157,8 +143,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Implement the `Update` action method.
 
-    ###### Example
-
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Update(Product product)
         {
@@ -179,8 +163,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Implement the `Destroy` action method.
-
-    ###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Destroy(int productID)
@@ -210,8 +192,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             return RedirectToAction("Index", routeValues);
         }
 
-> **Important**
->
 > The Kendo UI Grid for ASP.NET MVC uses `form` elements internally when the server editing is enabled. This means that you are not able to place the widget in another `form` element on the page, because the nesting of forms is not a standard-compliant characteristic.
 
 ## See Also

@@ -98,9 +98,12 @@ navigation:
         position: 14
      "tag-helpers/pdf/pdfviewer":
         title: "PDFViewer"
+     "html-helpers/datasource":
+        title: "Data Source"
+        position: 1
      "html-helpers/data-management":
         title: "Data Management"
-        position: 1
+        position: 2
      "html-helpers/data-management/grid":
         title: "Grid"
      "html-helpers/data-management/grid/binding":
@@ -120,7 +123,7 @@ navigation:
         title: "End-User Documentation"
      "html-helpers/editors":
         title: "Editors"
-        position: 2
+        position: 3
      "html-helpers/editors/datetimepicker/globalization":
         title: "Globalization"
         position: 40
@@ -134,7 +137,7 @@ navigation:
         position: 50
      "html-helpers/charts":
         title: "Charts"
-        position: 3
+        position: 4
      "html-helpers/charts/chart-types":
         title: "Chart Types"
         position: 3
@@ -146,22 +149,22 @@ navigation:
         position: 5
      "html-helpers/gauges":
         title: "Gauges"
-        position: 4
+        position: 5
      "html-helpers/barcodes":
         title: "Barcodes"
-        position: 5
+        position: 6
      "html-helpers/diagrams-and-maps":
         title: "Diagrams and Maps"
-        position: 6
+        position: 7
      "html-helpers/scheduling":
         title: "Scheduling"
-        position: 7
+        position: 8
      "html-helpers/layout":
         title: "Layout"
-        position: 8
+        position: 9
      "html-helpers/navigation":
         title: "Navigation"
-        position: 9
+        position: 10
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
      "html-helpers/navigation/menu/binding":
@@ -172,16 +175,16 @@ navigation:
         position: 3
      "html-helpers/conversational-ui":
         title: "Conversational UI"
-        position: 10
+        position: 11
         isNew: true
      "html-helpers/conversational-ui/chat":
         title: "Chat"
      "html-helpers/interactivity":
         title: "Interactivity and UX"
-        position: 11
+        position: 12
      "html-helpers/media":
         title: "Media"
-        position: 12
+        position: 13
      "html-helpers/pdf":
         title: "PDF"
         position: 14
@@ -192,10 +195,10 @@ navigation:
         position: 2
      "accessibility":
         title: "Accesibility"
-        position: 5
+        position: 6
      "backwards-compatibility":
         title: "Breaking Changes"
-        position: 6
+        position: 7
 
 ## List helpers directory names and order here, like this:
      "*appearance":

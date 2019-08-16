@@ -17,28 +17,19 @@ The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI Tre
 Below are listed the steps for you to follow when configuring the Kendo UI TreeList to do server binding to the Northwind database, the **Employees** table.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 1. A new entity model**
-
-    ![New entity data model](images/treelist-new-entity-data-model.png)
+    ![A new entity data model](images/treelist-new-entity-data-model.png)
 
 1. Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-    **Figure 2. Choose the connection**
-
-    ![Choose the connection](images/treelist-entity-data-model.png)
+    ![Choosing the connection](images/treelist-entity-data-model.png)
 
 1. Choose the **Employees** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
-    **Figure 3. Choose the Employees table**
-
-    ![Choose the Employees table](images/treelist-database-objects.png)
+    ![Choosing the Employees table](images/treelist-database-objects.png)
 
 1. Right-click the `~/Models` folder in the solution explorer and add a new `EmployeeViewModel` class.
-
-    ###### Example
 
         public class EmployeeViewModel
         {
@@ -56,8 +47,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
         }
 
 1. Open `HomeController.cs` and create new `TreeList_Read` action method.
-
-    ###### Example
 
         public JsonResult TreeList_Read([DataSourceRequest] DataSourceRequest request)
         {
@@ -80,13 +69,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-    > **Important**
-    >
     > As of the Kendo UI R1 2017 SP1 release, you can use the `ToTreeDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToTreeDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
 
     The following example demonstrates how to implement the `ToTreeDataSourceResultAsync` extension method in your project.
-
-    ###### Example
 
         public async Task<JsonResult> TreeList_Read([DataSourceRequest] DataSourceRequest request)
         {
@@ -154,9 +139,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 1. Build and run the application.
 
-    **Figure 4. The final result**
-
-    ![Final result](images/treelist-bound.png)
+    ![The final result](images/treelist-bound.png)
 
 ## Event Handling
 
@@ -191,11 +174,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function treelist_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function treelist_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -224,11 +207,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function treelist_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function treelist_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -236,8 +219,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 ### By Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
     @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
         .Name("treelist")
@@ -258,12 +239,12 @@ The following example demonstrates how to subscribe to events by a template dele
         .Events(e => e
             .DataBound(@<text>
                 function() {
-                    //Handle the dataBound event inline.
+                    // Handle the dataBound event inline.
                 }
             </text>)
             .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
             </text>)
         )
@@ -275,8 +256,6 @@ The following example demonstrates how to subscribe to events by a template dele
 ### Existing Instances
 
 To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
-
-###### Example
 
     @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
         .Name("treelist")
@@ -298,7 +277,7 @@ To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](h
     )
     <script>
         $(function() {
-            //Notice that the Name() of the TreeList is used to get its client-side instance.
+            // The Name() of the TreeList is used to get its client-side instance.
             var treelist = $("#treelist").data("kendoTreeList");
         });
     </script>

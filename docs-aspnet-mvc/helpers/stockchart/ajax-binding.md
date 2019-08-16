@@ -18,8 +18,6 @@ Below are steps for you to follow when configuring the Kendo UI StockChart for A
 
 Add a new action method which returns data to populate the StockChart.
 
-###### Example
-
     public partial class HomeController : Controller
     {
         public ActionResult _BoeingStockData()
@@ -31,8 +29,6 @@ Add a new action method which returns data to populate the StockChart.
 ### Return Data
 
 Return the data as JSON.
-
-###### Example
 
     public ActionResult InternetUsers_Read()
     {

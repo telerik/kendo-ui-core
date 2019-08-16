@@ -8,9 +8,7 @@ position: 4
 
 # Create the Sales Page
 
-**Figure 1. A snapshot of the Kendo UI Music Store Sales Overview page**
-
-![sales-overview](images/sales-overview.png)
+![A snapshot of the Kendo UI Music Store Sales Overview page](images/sales-overview.png)
 
 This page is constructed to show a collection of data visualization graphs, exposing several different views of store data. The page is dominated by a general sales graph, which can be filtered by five different dimensions, selectable by the buttons to the left of graph.
 
@@ -26,21 +24,13 @@ The **Sales By Genre** chart allows for the chart type to be changed dynamically
 
 For example, the chart type can be changed from a bar graph to a line graph by using the buttons on the bottom-right side.
 
-**Figure 2. A bar graph representation of the Sales Overview page**
+![A bar graph representation of the Sales Overview page](images/sales-by-genre-bar.png)
 
-![sales-by-genre-bar](images/sales-by-genre-bar.png)
+![A line graph representation of the Sales Overview page](images/sales-by-genre-line.png)
 
-**Figure 3. A line graph representation of the Sales Overview page**
-
-![sales-by-genre-line](images/sales-by-genre-line.png)
-
-**Figure 4. The side buttons through which the graphic representation of the data can be changed**
-
-![sales-by-genre-bar-button-highlight](images/sales-by-genre-bar-button-highlight.png)
+![The side buttons through which the graphic representation of the data can be changed](images/sales-by-genre-bar-button-highlight.png)
 
 The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within its own `<div>`, with an accompanying `<span>` that contains the buttons for changing the chart type. The **Sales By Genre** chart is constructed as demonstrated in the example below.
-
-###### Example
 
 	<div class="sales-by-genre-chart half-width-chart"></div>
     <span class="store-sales-chart-type change-genre-sales-chart-type">
@@ -54,16 +44,12 @@ The **Sales By Genre** and **Searches By Genre** charts are built similarly, wit
 
 Note the `change-genre-sales-chart-type` class on the governing `<span>`, and the `chart-type-item` on the individual `<span>`. These classes are used to register click events that lead to the chart type changing.
 
-###### Example
-
 	$(".chart-type-item", ".change-genre-sales-chart-type").click(function (e) {
         e.preventDefault();
         changeChartType.call(this, ".sales-by-genre-chart", ".change-genre-sales-chart-type");
     });
 
 The `changeChartType` is a function that performs the chart type change, taking two parameters&mdash;the class of the chart to change and the class of the governing `<span>` containing the buttons. The use of the `call()` invocation, along with passing `this` tells the function to perform as a member of the button, rather than globally.
-
-###### Example
 
 	function changeChartType(chartSelector, parentChartType) {
 
@@ -101,19 +87,13 @@ This function clears the selection state of the buttons for the chart in questio
 
 The **Sales By Genre** and **Searches By Genre** charts also provide a method to dynamically change the temporal data in use. For example, the **Sales By Genre** chart can be changed from showing **Weekly** data to showing **Monthly** data by using the buttons on top.
 
-**Figure 5. A chart graph displaying Weekly data**
+![A chart graph displaying Weekly data](images/sales-by-genre-bar.png)
 
-![sales-by-genre-bar-weekly](images/sales-by-genre-bar.png)
-
-**Figure 6. A chart graph displaying Monthly data**
-
-![sales-by-genre-bar-monthly](images/sales-by-genre-bar-monthly.png)
+![A chart graph displaying Monthly data](images/sales-by-genre-bar-monthly.png)
 
 As before, the two charts are constructed similarly, with declarative markup, JavaScript, and jQuery.
 
 The chart is defined by the buttons in the previous section, and so they are not included here with the declaration of the tabs used as buttons for the temporal data.
-
-###### Example
 
     <div class="chart-group-tabs">
         <span class="time-sales-tab time-sales-tab-selected genre-sales-tab" data-period="weekly">Weekly</span>
@@ -122,8 +102,6 @@ The chart is defined by the buttons in the previous section, and so they are not
     </div>
 
 The `genre-sales-tab` class click event handler is then defined in the JavaScript.
-
-###### Example
 
     $(".genre-sales-tab").click(function (e) {
 

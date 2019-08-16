@@ -1253,7 +1253,39 @@ populated at the time the template function is called, if the Grid uses remote b
             dataSource: [ { color: "#ff0000", size: 30 }, { color: "#000000", size: 33 }] });
     </script>
 
+#### Example - use a Kendo UI DropDownList for a boolean column filter
 
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [ "name", {
+          field: "employed",
+          filterable:{
+            cell:{
+              template:function(args){
+                args.element.kendoDropDownList({
+                  dataSource: [{ value: true, text: "True" }, { value: false, text: "False" }],
+                  optionLabel: "--Select--",
+                  dataTextField: "text",
+                  dataValueField: "value"
+                });
+              }
+            } 
+          }
+        }],
+        filterable: { mode: "row"},
+        dataSource: {
+          data:[{ name: "John Doe" , employed: true }, { name: "Jane Doe", employed: true }, { name: "Tim Doe", employed: false} ],
+          schema:{
+            model:{
+              fields:{
+                employed: { type: "boolean" }
+              }
+            }
+          }
+        }
+      });
+    </script>
 
 ### columns.filterable.extra `Boolean` *(default: true)*
 
@@ -1456,7 +1488,7 @@ The role data attribute of the widget used in the filter menu or a JavaScript fu
     });
     </script>
 
-#### Example - use a Kendo UI DropDownList for boolean column
+#### Example - use a Kendo UI DropDownList for a boolean column
 
     <div id="grid"></div>
     <script>
@@ -1466,9 +1498,11 @@ The role data attribute of the widget used in the filter menu or a JavaScript fu
           filterable:{
             ui: function(element){
               element.kendoDropDownList({
-                dataSource:[true,false],
-                optionLabel: "--Select--"
-              })
+                dataSource: [{ value: true, text: "True" }, { value: false, text: "False" }],
+                optionLabel: "--Select--",
+                dataTextField: "text",
+                dataValueField: "value"
+              });
             }
           }
         } ],

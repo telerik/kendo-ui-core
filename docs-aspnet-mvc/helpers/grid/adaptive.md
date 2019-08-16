@@ -16,8 +16,6 @@ For example, when you filter or edit data on mobile, Kendo UI slides in a new sc
 
 To enable the adaptive rendering feature, use the [`Mobile`](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder#mobile) method.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Mobile()
@@ -34,8 +32,6 @@ The Pane in which the adaptive Grid is placed does not automatically expand its 
 
 The following example demonstrates how to apply the `height` option.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Mobile(MobileMode.Phone)
@@ -50,9 +46,7 @@ The following example demonstrates how to apply the `height` option.
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user can resize the column by dragging.
 
-**Figure 1: A Grid with resizable columns on a mobile device**
-
-![Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
+![A Grid with resizable columns on a mobile device](adaptive-resizing-icon.png)
 
 ## Destroying Adaptive Grids
 

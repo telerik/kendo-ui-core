@@ -22,8 +22,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 1. Return the data as JSON.
 
-    ###### Example
-
         public ActionResult _OrgChart()
         {
             return Json(DiagramDataRepository.OrgChart(), JsonRequestBehavior.AllowGet);
@@ -36,7 +34,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
             .Name("diagram")
             .DataSource(dataSource => dataSource
                 .Read(read => read
-                    .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+                    .Action("_OrgChart", "Diagram") // Specify the action method and controller names.
                 )
                 .Model(m => m.Children("Items"))
             )
@@ -48,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
             .Name("diagram")
             .DataSource(dataSource => dataSource
                 .Read(read => read
-                    .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+                    .Action("_OrgChart", "Diagram") // Specify the action method and controller names.
                 )
                 .Model(m => m.Children("Items"))
             )
@@ -69,7 +67,7 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Name("diagram")
             .DataSource(dataSource => dataSource
                 .Read(read => read
-                    .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+                    .Action("_OrgChart", "Diagram") // Specify the action method and controller names.
                 )
                 .Model(m => m.Children("Items"))
             )
@@ -90,7 +88,7 @@ The following example demonstrates how to subscribe to events by a handler name.
           .Name("diagram")
           .DataSource(dataSource => dataSource
               .Read(read => read
-                  .Action("_OrgChart", "Diagram") //Specify the action method and controller names.
+                  .Action("_OrgChart", "Diagram") // Specify the action method and controller names.
               )
               .Model(m => m.Children("Items"))
           )
@@ -111,14 +109,12 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().Diagram()
         .Name("diagram")
         .Events(e => e
             .Click(@<text>
                 function() {
-                    //Handle the click event inline.
+                    // Handle the click event inline.
                 }
             </text>)
         )
@@ -130,12 +126,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Diagram instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Diagram API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
 
-###### Example
-
-        //Put this after your Kendo UI Diagram for ASP.NET MVC declaration.
+        // Place this after your Kendo UI Diagram for ASP.NET MVC declaration.
         <script>
             $(function() {
-                //Notice that the Name() of the Diagram is used to get its client-side instance.
+                // The Name() of the Diagram is used to get its client-side instance.
                 var diagram = $("#diagram").data("kendoDiagram");
             });
         </script>

@@ -8,7 +8,9 @@ position: 6
 
 # Templates
 
-By default each Rating item is rendered with a star icon from [the Kendo Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web). Modifying the default icon could be achieved through the [`ItemTemplate`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#itemtemplatesystemstring), [`SelectedTemplate`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectedtemplatesystemstring) and [`HoveredTemplate`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#hoveredtemplatesystemstring) properties.
+By default each Rating item is rendered with a star icon from [the Kendo Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
+
+Modifying the default icon could be achieved through the [`ItemTemplate`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#itemtemplatesystemstring), [`SelectedTemplate`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectedtemplatesystemstring) and [`HoveredTemplate`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#hoveredtemplatesystemstring) properties.
 
 ## Item Template
 
@@ -33,8 +35,7 @@ Specifies the template which is used for rendering the selected state of the ite
 
 If the `ItemTemplate` is not specified, the widget will use the default start icon for displaying the normal state of the items. Therefore, it is recommended to specify the `ItemTemplate` when the `SelectedTemplate` option is used.
 
-> **Important**
-> * When the Rating is in half precision mode it is recommended to use the same template for both the SelectedTemplate and HoveredTemplate options.
+> When the Rating is in half precision mode it is recommended to use the same template for both the SelectedTemplate and HoveredTemplate options.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -53,8 +54,7 @@ Specifies the template which is used for rendering the hovered state of the item
 
 If the `ItemTemplate` is not specified, the widget will use the default start icon for displaying the normal and selected state of the items.
 
-> **Important**
-> * When the Rating is in half precision mode it is recommended to use the same template for both the SelectedTemplate and HoveredTemplate options.
+> When the Rating is in half precision mode it is recommended to use the same template for both the SelectedTemplate and HoveredTemplate options.
 
 ```Razor
     @(Html.Kendo().Rating()

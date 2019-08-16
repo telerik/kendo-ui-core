@@ -10,8 +10,6 @@ position: 4
 
 The Kendo UI MultiViewCalendar allows the user to select multiple dates by using the multiple-view MultiViewCalendar selection mode.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()

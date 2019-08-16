@@ -18,10 +18,7 @@ It allows you to configure the hybrid Kendo UI SplitView from server-side code.
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI SplitView for ASP.NET MVC.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Open `HomeController.cs` and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -35,7 +32,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
             .Name("MobileSplitView") //SplitView `id`
             .Panes(panes =>
             {
-                //Add the side pane.
+                // Add the side pane.
                 panes.Add().Content(() =>
                     {
                         %>
@@ -47,7 +44,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                         <%
                     }
                 );
-                //Add the main pane.
+                // Add the main pane.
                 panes.Add().Content(() =>
                     {
                         %>
@@ -68,7 +65,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
             .Name("MobileSplitView") //SplitView `id`
             .Panes(panes =>
             {
-                //Add the side pane.
+                // Add the side pane.
                 panes.Add().Content(
                     @<text>
                         @(Html.Kendo().MobileView()
@@ -77,7 +74,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                         )
                     </text>
                 );
-                //Add the main pane.
+                // Add the main pane.
                 panes.Add().Content(
                     @<text>
                         @(Html.Kendo().MobileView()
@@ -138,7 +135,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onInit() {
-            //Handle the init event.
+            // Handle the init event.
         }
     </script>
 ```
@@ -163,7 +160,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onInit() {
-            //Handle the init event.
+            // Handle the init event.
         }
     </script>
 ```
@@ -173,8 +170,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 ### Instances
 
 You can reference a hybrid SplitView instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid SplitView API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/splitview#methods) to control its behavior.
-
-###### Example
 
     @(Html.Kendo().MobileSplitView()
             .Name("MobileSplitView") //SplitView `id`
@@ -192,7 +187,7 @@ You can reference a hybrid SplitView instance by using the [jQuery.data()](http:
     )
     <script>
         $(function() {
-            //Notice that the Name() of the SplitView is used to get its client-side instance.
+            // The Name() of the SplitView is used to get its client-side instance.
             var splitview = $("#MobileSplitView").data("kendoMobileSplitView");
         });
     </script>

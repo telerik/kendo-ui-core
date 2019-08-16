@@ -30,25 +30,17 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 1. A new entity data model**
-
-    ![New entity data model](../images/grid-entity-data-model.png)
+    ![A new entity data model](../images/grid-entity-data-model.png)
 
 1.  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-    **Figure 2. Choose the connection**
-
-    ![Choose the connection](../images/grid-entity-data-model.png)
+    ![Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    **Figure 3. Choose the Products table**
-
-    ![Choose the Products table](../images/grid-database-objects.png)
+    ![Choosing the Products table](../images/grid-database-objects.png)
 
 1. Open the `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
-
-    ###### Example
 
         public ActionResult Products_Read()
         {
@@ -56,15 +48,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data. Now import the `Kendo.Mvc.UI` namespace.
 
-    ###### Example
-
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
         }
 
 1. Use the `ToDataSourceResult` extension method to convert the Products to a `Kendo.Mvc.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
-
-    ###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -75,14 +63,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
         }
 
-    > **Important**
+
     > * The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns an empty result.
     > * As of the Kendo UI R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
     > * If you impersonation is enabled, use the `ToDataSourceResultAsync` extension method with only one thread in your ASP.NET application. If you create a new thread, the impersonation in the newly created child thread decreases because, by default, all newly created child threads in ASP.NET run under the ASP.NET identity of the worker process. To change this behavior, explicitly impersonate the current identity within the code of the child thread.
 
     The following example demonstrates how to implement the `ToDataSourceResultAsync` extension method in your project.
-
-    ###### Example
 
         public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -95,8 +81,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Return the `DataSourceResult` as JSON. Configure the Kendo UI Grid for Ajax binding.
 
-    ###### Example
-
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
             using (var northwind = new NorthwindEntities())
@@ -108,8 +92,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
     The same thing applies when you use the asynchronous `ToDataSourceResultAsync` counterpart, as demonstrated in the following example.
-
-    ###### Example
 
         public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -127,7 +109,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
             .Name("grid")
             .DataSource(dataSource => dataSource //Configure the Grid data source.
-                .Ajax() //Specify that Ajax binding is used.
+                .Ajax() // Specify that Ajax binding is used.
                 .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format
             )
             .Columns(columns =>
@@ -147,8 +129,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
             .Name("grid")
             .DataSource(dataSource => dataSource //Configure the Grid data source.
-                .Ajax() //Specify that Ajax binding is used.
-                .Read(read => read.Action("Products_Read", "Home")) //Set the action method which will return the data in JSON format.
+                .Ajax() // Specify that Ajax binding is used.
+                .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
             )
             .Columns(columns =>
             {
@@ -166,16 +148,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Build and run the application.
 
-    **Figure 4. The final result**
-
-    ![Final result](../images/grid-bound-grid.png)
+    ![The final result](../images/grid-bound-grid.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding).
 
 The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and LINQ expressions to page, sort, filter, and group your data. The JSON response of the action method will contain only a single page of data and the Grid will be bound to that data.
 
-> **Important**
->
 > If your data is `IQueryable<T>` returned by a LINQ-enabled provider&mdash;Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other&mdash;the LINQ expressions, created by the `ToDataSourceResult` method, are converted to SQL and executed by the database server.
 
 ## Common Scenarios
@@ -187,10 +165,7 @@ Sometimes it is convenient to use view model objects instead of entities returne
 This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
 
 1. Perform all steps from the previous section.
-
 1. Add a new class to the `~/Models` folder. Name it `ProductViewModel`.
-
-    ###### Example
 
         public class ProductViewModel
         {
@@ -238,8 +213,6 @@ This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
 
 1. Modify the `Products_Read` action method and use the `ToDataSourceResult` method overload which accepts a mapping lambda.
 
-    ###### Example
-
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
             using (var northwind = new NorthwindEntities())
@@ -266,11 +239,9 @@ The custom parameter names must not match reserved words, which are used by the 
 
 The following example demonstrates how to add the additional parameters to the action method.
 
-###### Example
-
     public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
     {
-        //The implementation is omitted.
+        // The implementation is omitted.
     }
 
 The following example demonstrates how to specify the JavaScript function which returns additional data.
@@ -281,8 +252,8 @@ The following example demonstrates how to specify the JavaScript function which 
         .DataSource(dataSource => dataSource
             .Ajax()
             .Read(read => read
-                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
-                .Data("productsReadData") //Specify the JavaScript function which will return the data.
+                .Action("Products_Read", "Home") // Set the action method which will return the data in JSON format.
+                .Data("productsReadData") // Specify the JavaScript function which will return the data.
             )
         )
         .Columns(columns =>
@@ -309,8 +280,8 @@ The following example demonstrates how to specify the JavaScript function which 
         .DataSource(dataSource => dataSource
             .Ajax()
             .Read(read => read
-                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
-                .Data("productsReadData") //Specify the JavaScript function which will return the data.
+                .Action("Products_Read", "Home") // Set the action method which will return the data in JSON format.
+                .Data("productsReadData") // Specify the JavaScript function which will return the data.
             )
         )
         .Columns(columns =>
@@ -345,7 +316,7 @@ The following example demonstrates how to enable client data processing.
             .Ajax()
             .ServerOperation(false) //Paging, sorting, filtering, and grouping will be done client-side.
             .Read(read => read
-                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
+                .Action("Products_Read", "Home") // Set the action method which will return the data in JSON format.
                 .Data("productsReadData")
             )
         )
@@ -366,7 +337,7 @@ The following example demonstrates how to enable client data processing.
             .Ajax()
             .ServerOperation(false) //Paging, sorting, filtering, and grouping will be done client-side.
             .Read(read => read
-                .Action("Products_Read", "Home") //Set the action method which will return the data in JSON format.
+                .Action("Products_Read", "Home") // Set the action method which will return the data in JSON format.
                 .Data("productsReadData")
             )
         )

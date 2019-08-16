@@ -16,28 +16,19 @@ This article demonstrates how to enable cell editing mode and batch updates in K
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to do cell editing and batch updates.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridBatchEditing`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 1. A new entity data model**
-
-    ![New entity data model](../images/grid-entity-data-model.png)
+    ![A new entity data model](../images/grid-entity-data-model.png)
 
 1. Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-    **Figure 2. Choose the connection**
-
-    ![Choose the connection](../images/grid-entity-data-model.png)
+    ![Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    **Figure 3. Choose the Products table**
-
-    ![Choose the Products table](../images/grid-database-objects.png)
+    ![Choosing the Products table](../images/grid-database-objects.png)
 
 1. Add a new class to the `~/Models` folder. Name it `ProductViewModel`.
-
-    ###### Example
 
         public class ProductViewModel
         {
@@ -52,8 +43,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1.  Open `HomeController.cs` and add a new action method which will return the **Products** as JSON. The Grid will make Ajax requests to this action.
 
-    ###### Example
-
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
             using (var northwind = new NorthwindEntities())
@@ -65,8 +54,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the new data items. Name the method `Products_Create`.
-
-    ###### Example
 
         public ActionResult Products_Create([DataSourceRequest]DataSourceRequest request, [Bind(Prefix="models")]IEnumerable<ProductViewModel> products)
         {
@@ -103,8 +90,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the updated data items. Name the method `Products_Update`.
-
-    ###### Example
 
         public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
@@ -146,8 +131,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the deleted data items. Name the method `Products_Destroy`.
-
-    ###### Example
 
         public ActionResult Products_Destroy([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
@@ -266,7 +249,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 ## OData Support
 
 With the R1 2018 release the Grid component supports Batch operations with OData. The steps below describe how to configure the Grid to enable the feature. A runnable example illustrating the functionality is available in [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-odata-example).
-
 
 ## See Also
 

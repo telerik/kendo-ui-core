@@ -8,8 +8,6 @@ slug: howto_exportgriddataasexceldocs_gridaspnetmv
 
 # Export to Excel Server-Side
 
-> **Important**
->
 > The approach demonstrated in this article is now deprecated in favor of the [server-side processing concept]({% slug excelexport_gridhelper_aspnetmvc %}#use-server-side-processing).
 
 The following example demonstrates how to export the Kendo UI Grid data as an Excel document by implementing it through the NPOI open-source library as well as the Microsoft OpenXML SDK.
@@ -21,5 +19,3 @@ To see the example, refer to the project on how to [export to Excel on the serve
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction)
-
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

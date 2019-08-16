@@ -11,7 +11,6 @@ position: 3
 The widget allows to control the precision with which an item is selected by configuring the [`Precision`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property:
 
 * item - selecting the whole item.
-
 * half - selecting half of the item.
 
 ## Item Precision

@@ -9,11 +9,7 @@ slug: howto_create_masked_datepickers_datepickaspnetmvc
 
 The following example demonstrates how to add a mask to the Kendo UI DatePicker through a custom Kendo UI widget.
 
-> **Important**
->
 > The DatePicker does not officially support the suggested approach and its implementation might lead to undesired side-effects. As of the Kendo UI R2 2017 release, the DatePicker supports the [`dateInput`](/api/javascript/ui/datepicker/configuration/dateinput) property which provides a built-in mask.
-
-###### Example
 
 ```html
     <script>

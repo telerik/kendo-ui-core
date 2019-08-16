@@ -20,8 +20,6 @@ To disable a date, either:
 
 When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
@@ -40,8 +38,6 @@ When you set an array, list the days that need to be disabled by using the first
 ## Add a Function
 
 When you add a function, determine its return value as `true` for the date that is disabled.
-
-###### Example
 
 ```ASPX
 

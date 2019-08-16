@@ -20,8 +20,6 @@ Make sure this file is included after the other Kendo UI JavaScript files. For m
 
 The following example demonstrates the correct order of JavaScript files.
 
-###### Example
-
     <script src="/Scripts/kendo.all.min.js"></script>
     <script src="/Scripts/kendo.aspnetmvc.min.js"></script>
 
@@ -107,8 +105,6 @@ If the Grid does not display numbers and dates in the right format that correspo
 ### Culture-Specific Kendo UI JavaScript
 
 The following example demonstrates how to include culture-specific Kendo UI JavaScript.
-
-###### Example
 
     <script src="/Scripts/cultures/kendo.culture.de-DE.js"></script>
     <script>

@@ -51,9 +51,7 @@ The scenario adopted by the project considers the following aspects of the imple
 * The project applies a `FilterRange` model class to ensure the proper parsing of the sent range of data. The setters of the `start` and `end` properties convert the dates to UTC.
 * The SignalR `ProductHub Read` endpoint accepts one parameter of type `FilterRange` and returns the filtered results to the client.
 
-    ###### Example
-
-        public IEnumerable<MeetingViewModel> Read(FilterRange range)
+      public IEnumerable<MeetingViewModel> Read(FilterRange range)
         {
             var result = meetingService.GetAll().Where(t => t.Start < range.End && (t.End > range.Start || t.RecurrenceRule != null));
             return result;
@@ -63,5 +61,3 @@ The scenario adopted by the project considers the following aspects of the imple
 
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [SchedulerBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
-
-For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/scheduler/how-to/).

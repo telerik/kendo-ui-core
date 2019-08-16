@@ -15,10 +15,7 @@ The Splitter HtmlHelper extension is a server-side wrapper for the [Kendo UI Spl
 Below are listed the steps for you to follow when configuring the Kendo UI Splitter.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -29,21 +26,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
     ```ASPX
         <%: Html.Kendo().Splitter()
-            .Name("splitter") //The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
+            .Name("splitter") // The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
             .Panes(panes =>
             {
-                panes.Add().Content("Item 1"); //Add the pane.
-                panes.Add().Content("Item 2"); //Add the pane.
+                panes.Add().Content("Item 1"); // Add the pane.
+                panes.Add().Content("Item 2"); // Add the pane.
             })
         %>
     ```
     ```Razor
         @(Html.Kendo().Splitter()
-            .Name("splitter") //The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
+            .Name("splitter") // The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
             .Panes(panes =>
             {
-                panes.Add().Content("Item 1"); //Add the pane.
-                panes.Add().Content("Item 2"); //Add the pane.
+                panes.Add().Content("Item 1"); // Add the pane.
+                panes.Add().Content("Item 2"); // Add the pane.
             })
         )
     ```
@@ -65,7 +62,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function splitter_resize() {
-            //Handle the Resize event.
+            // Handle the Resize event.
         }
     </script>
 ```
@@ -78,7 +75,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function splitter_resize() {
-            //Handle the Resize event.
+            // Handle the Resize event.
         }
     </script>
 ```
@@ -87,14 +84,12 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().Splitter()
             .Name("splitter")
             .Events(e => e
                 .Resize(@<text>
                 function() {
-                    //Handle the Resize event inline.
+                    // Handle the Resize event inline.
                 }
                 </text>)
             )
@@ -106,12 +101,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Splitter instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Splitter API](http://docs.telerik.com/kendo-ui/api/javascript/ui/splitter#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Splitter for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Splitter for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Splitter is used to get its client-side instance.
+            // The Name() of the Splitter is used to get its client-side instance.
             var splitter = $("#splitter").data("kendoSplitter");
         });
     </script>

@@ -12,22 +12,14 @@ With the Progress&reg; Telerik&reg; UI for ASP.NET MVC Visual Studio (VS) Extens
 
 Once a day, upon loading a project with Progress&reg; Telerik&reg; UI for ASP.NET MVC controls, the extensions query the Telerik website for a new version of Progress&reg; Telerik&reg; UI for ASP.NET MVC. A notification gets displayed when a new version is discovered.
 
-**Figure 1. A displayed notification upon locating a new Telerik UI for ASP.NET MVC version**
+![A displayed notification upon locating a new Telerik UI for ASP.NET MVC version](images/notification.png)
 
-![Notification](images/notification.png)
-
-> **Important**
->
 > If you disable the notifications, you can use the **Options** Dialog to activate them again.
 
 Clicking **Update Now** starts the Latest Version Acquirer tool, prompting for your Telerik credentials in its first page. If you do not have a `www.telerik.com` account, you can create one through the **Create an account for free** link.
 
-**Figure 2. The Get the Latest Version dialog**
+![The Get the Latest Version dialog](images/lva1.png)
 
-![Get latest version](images/lva1.png)
-
-> **Important**
->
 > You cannot use the tool if you have a trial license. Attempting to download a distribution results in an error message.
 
 Check for any additional information about the release by clicking the **Release Notes** link. This starts a browser, navigating to a page with the release notes related to the specific version.
@@ -36,17 +28,14 @@ Use the **Save my password** checkbox to avoid having to enter your Telerik cred
 
 The download starts automatically after a confirmation window.
 
-**Figure 3, 4 and 5. The dialog indicating the download progress**
+![The dialog indicating the download progress, getting the latest version](images/lva2.png)
 
-![Get latest version](images/lva2.png)
+![The dialog indicating the download progress, getting the latest version](images/lva3.png)
 
-![Get latest version](images/lva3.png)
-
-![Get latest version](images/lva4.png)
+![The dialog indicating the download progress, getting the latest version](images/lva4.png)
 
 Once the download succeeds, the latest version of Progress&reg; Telerik&reg; UI for ASP.NET MVC is available to use in the **Upgrade Wizard** and the **New Project Wizard**.
 
-> **Important**
 > * The Download buttons of the **Upgrade Wizard** and the **New Project Wizard** launch the **Latest Version Acquirer** tool too.
 > * The **Latest Version Acquirer** tool downloads the `.zip` files, containing the latest Progress&reg; Telerik&reg; UI for ASP.NET MVC binaries and any resources vital for a Progress&reg; Telerik&reg; UI for ASP.NET MVC application. These get unpacked to the `%APPDATA%\Telerik\Updates` folder by default. If you find the list of packages offered too long and you do not need the older versions, close the VS and use the Windows Explorer to delete these distributions.
 

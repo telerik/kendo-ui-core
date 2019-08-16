@@ -14,5 +14,3 @@ To see the example, refer to the project on how to [enable security trimming whe
 
 * [Overview of the Menu HtmlHelper]({% slug overview_menu_aspnetmvc %})
 * [MenuBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
-
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its **How To** documentation folder.

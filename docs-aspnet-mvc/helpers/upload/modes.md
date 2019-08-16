@@ -48,8 +48,6 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 1. Add **Submit** and **Reset** buttons to the form.
 
-    ###### Example
-
         <input type="submit" value="Send" class="t-button" />
         <input type="reset" value="Reset" class="t-button" />
 
@@ -81,8 +79,6 @@ Below are listed the steps for you to follow when configuring the synchronous mo
     ```
 
 1. Process the files in the action. It requires no special server handling as compared to a regular input.
-
-    ###### Example
 
         [HttpPost]
         public ActionResult ProcessSubmit(IEnumerable<HttpPostedFileBase> attachments)
@@ -135,11 +131,9 @@ Below are listed the steps for you to follow when configuring the saving of the 
 
 1. Implement the `Save` controller action.
 
-    ###### Example
-
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
         {
-            //The Name of the Upload component is "attachments".
+            // The name of the Upload component is "attachments".
             foreach (var file in attachments)
             {
                 //Some browsers send file names with a full path. You only care about the file name.
@@ -149,7 +143,7 @@ Below are listed the steps for you to follow when configuring the saving of the 
                 file.SaveAs(destinationPath);
             }
 
-            //Return an empty string to signify success.
+            // Return an empty string to signify success.
             return Content("");
         }
 
@@ -184,8 +178,6 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 1. Implement the `Remove` action. It takes a `fileNames` parameter of type `string[]`.
 
-    ###### Example
-
         public ActionResult Remove(string[] fileNames)
         {
             foreach (var fullName in fileNames)
@@ -201,12 +193,10 @@ Below are listed the steps for you to follow when configuring the removing of th
                 }
             }
 
-            //Return an empty string to signify success
+            // Return an empty string to signify success
             return Content("");
         }
 
-> **Important**
->
 > The `Remove` action can be used as an attack vector if implemented poorly. Always sanitize the file names and verify that the user has the appropriate permissions before actually deleting any files.
 
 ### Disable Automatic Uploads

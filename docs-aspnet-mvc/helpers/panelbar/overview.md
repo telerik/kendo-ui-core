@@ -25,10 +25,7 @@ There are a few ways to bind a Kendo UI PanelBar for ASP.NET MVC:
 Below are listed the steps for you to follow when defining the items of a Kendo UI PanelBar.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -39,21 +36,21 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
     ```ASPX
         <%: Html.Kendo().PanelBar()
-            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
             {
-                items.Add().Text("Item 1"); //Add item with text "Item1")
-                items.Add().Text("Item 2"); //Add item with text "Item2")
+                items.Add().Text("Item 1"); // Add item with text "Item1")
+                items.Add().Text("Item 2"); // Add item with text "Item2")
             })
         %>
     ```
     ```Razor
         @(Html.Kendo().PanelBar()
-            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
             {
-                items.Add().Text("Item 1"); //Add item with text "Item1")
-                items.Add().Text("Item 2"); //Add item with text "Item2")
+                items.Add().Text("Item 1"); // Add item with text "Item1")
+                items.Add().Text("Item 2"); // Add item with text "Item2")
             })
         )
     ```
@@ -113,10 +110,7 @@ The PanelBar provides the `Single` or `Multiple` expand mode options.
 Below are listed the steps for you to follow when binding a Kendo UI PanelBar to a sitemap.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a simple sitemap with a `sample.sitemap` file name at the root of the project.
-
-    ###### Example
 
         <?xml version="1.0" encoding="utf-8" ?>
         <siteMap>
@@ -134,8 +128,6 @@ Below are listed the steps for you to follow when binding a Kendo UI PanelBar to
 
 1. Load the sitemap using the `SiteMapManager`.
 
-    ###### Example
-
         public ActionResult Index()
         {
             if (!SiteMapManager.SiteMaps.ContainsKey("sample"))
@@ -149,13 +141,13 @@ Below are listed the steps for you to follow when binding a Kendo UI PanelBar to
 
     ```ASPX
         <%: Html.Kendo().PanelBar()
-            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
             .BindTo("sample") //bind to sitemap with name "sample"
         %>
     ```
     ```Razor
         @(Html.Kendo().PanelBar()
-            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
             .BindTo("sample") //bind to sitemap with name "sample"
         )
     ```
@@ -165,10 +157,7 @@ Below are listed the steps for you to follow when binding a Kendo UI PanelBar to
 Below are listed the steps for you to follow when binding a kendo UI PanelBar to a hierarchical model.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method and pass the **Categories** table as the model. Note that the **Categories** should be associated to the **Products** table.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -191,15 +180,15 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
 
     ```ASPX
         <%: Html.Kendo().PanelBar()
-            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
             .BindTo(Model, mappings =>
             {
-                mappings.For<category>(binding => binding //define first level of panelbar
-                    .ItemDataBound((item, category) => //define mapping between panelbar item properties and the model properties
+                mappings.For<category>(binding => binding // Define first level of panelbar
+                    .ItemDataBound((item, category) => // Define mapping between panelbar item properties and the model properties
                     {
                         item.Text = category.CategoryName;
                     })
-                    .Children(category => category.Products)); //define which property of the model contains the children
+                    .Children(category => category.Products)); // Define which property of the model contains the children
                 mappings.For<product>(binding => binding
                     .ItemDataBound((item, product) =>
                     {
@@ -210,15 +199,15 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
     ```
     ```Razor
         @(Html.Kendo().PanelBar()
-            .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
             .BindTo(Model, mappings =>
             {
-                mappings.For<category>(binding => binding //define first level of panelbar
-                    .ItemDataBound((item, category) => //define mapping between panelbar item properties and the model properties
+                mappings.For<category>(binding => binding // Define first level of panelbar
+                    .ItemDataBound((item, category) => // Define mapping between panelbar item properties and the model properties
                         {
                         item.Text = category.CategoryName;
                         })
-                    .Children(category => category.Products)); //define which property of the model contains the children
+                    .Children(category => category.Products)); // Define which property of the model contains the children
                 mappings.For<product>(binding => binding
                     .ItemDataBound((item, product) =>
                         {
@@ -257,11 +246,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function panelbar_collapse() {
-            //Handle the collapse event
+            // Handle the collapse event
         }
 
         function panelbar_expand() {
-            //Handle the expand event
+            // Handle the expand event
         }
     </script>
 ```
@@ -275,11 +264,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function panelbar_collapse() {
-            //Handle the collapse event
+            // Handle the collapse event
         }
 
         function panelbar_expand() {
-            //Handle the expand event
+            // Handle the expand event
         }
     </script>
 ```
@@ -288,19 +277,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().PanelBar()
         .Name("panelbar")
         .Events(e => e
             .Expand(@<text>
                 function() {
-                    //Handle the expand event inline
+                    // Handle the expand event inline
                 }
             </text>)
             .Collapse(@<text>
                 function() {
-                    //Handle the collapse event inline
+                    // Handle the collapse event inline
                 }
             </text>)
         )
@@ -312,12 +299,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI PanelBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [PanelBar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo PanelBar for ASP.NET MVC declaration
+    // Place this after your Kendo PanelBar for ASP.NET MVC declaration
     <script>
         $(function() {
-            // Notice that the Name() of the panelbar is used to get its client-side instance
+            // The Name() of the panelbar is used to get its client-side instance
             var panelbar = $("#panelbar").data("kendoPanelBar");
         });
     </script>

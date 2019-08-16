@@ -15,5 +15,3 @@ To see the example, refer to the project on how to configure the Kendo UI Grid t
 * [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the DropDownList HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
 * [DropDownListBuilder API Reference](http://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
-
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

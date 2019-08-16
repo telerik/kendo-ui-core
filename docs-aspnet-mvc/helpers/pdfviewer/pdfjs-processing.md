@@ -16,8 +16,6 @@ PDF.JS Processing requires pdfjs lib scripts added to the page.
 
 An example of a PDFViewer widget configured to use PDF.JS Processing.
 
-###### Example
-
 ```
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <script>
@@ -35,13 +33,10 @@ An example of a PDFViewer widget configured to use PDF.JS Processing.
 
 ## Troubleshooting
 
-> **Important**
->
 > PDF.JS Processing is not supported in IE9
 
 PDF.JS requires additional configuration, to work properly in IE. 
 
-###### Example
     <script>
         // The workerSrc property should be specified for IE support
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';

@@ -13,8 +13,6 @@ This article demonstrates the correct Visual Basic (VB) syntax when you use [lam
 
 ## Editor
 
-###### Example
-
     @Code
 
         Html.Kendo().Editor() _
@@ -43,8 +41,6 @@ This article demonstrates the correct Visual Basic (VB) syntax when you use [lam
     End Code
 
 ## TabStrip
-
-###### Example
 
     @Code
 
@@ -78,8 +74,6 @@ This article demonstrates the correct Visual Basic (VB) syntax when you use [lam
 
 ### View
 
-###### Example
-
     @Code
         Html.Kendo().Grid(Of TelerikMvcAppVB.Person)() _
     .Name("Grid") _
@@ -106,8 +100,6 @@ This article demonstrates the correct Visual Basic (VB) syntax when you use [lam
 
 The following example demonstrates alternative ToolBar configurations.
 
-###### Example
-
     ...
     .ToolBar(Function(t)
                      t.Template("template as a string")
@@ -123,8 +115,6 @@ The following example demonstrates alternative ToolBar configurations.
     ...
 
 ### Controller
-
-###### Example
 
     Imports Kendo.Mvc.Extensions
     Imports Kendo.Mvc.UI
@@ -153,8 +143,6 @@ The following example demonstrates alternative ToolBar configurations.
 
 ### Model
 
-###### Example
-
     Public Class Person
         Public Property PersonID As Integer
         Public Property PersonName As String
@@ -162,8 +150,6 @@ The following example demonstrates alternative ToolBar configurations.
     End Class
 
 ## Editor Template
-
-###### Example
 
     @ModelType Nullable(Of Integer)
 

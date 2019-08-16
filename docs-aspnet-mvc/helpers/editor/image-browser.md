@@ -10,9 +10,7 @@ position: 2
 
 By default, the **Insert Image** tool opens a simple dialog that allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
-**Figure 1: The Insert Image dialog**
-
-![Insert Image Dialog](editor-insert-image.png)
+![The Insert Image dialog](editor-insert-image.png)
 
 ## Overview
 
@@ -21,9 +19,7 @@ As of the Kendo UI Q3 2012 release, you can:
 * Choose images by browsing through a list of predefined files and directories.
 * Upload new images.
 
-**Figure 2: The Image Browser dialog**
-
-![Image Browser Dialog](editor-image-browser.png)
+![The Image Browser dialog](editor-image-browser.png)
 
 ## Configuration
 
@@ -73,8 +69,6 @@ The **Image Browser** tool automatically appears as a file browser when the `Ima
 ### Built-In Options
 
 The `Kendo.Mvc` assembly enables you to use the built-in `EditorImageBrowserController` class. It enables you to easily implement an MVC controller that consumes data from the **Image Browser** tool. In this way, you can populate it with images from the server, update them, and upload new ones.
-
-###### Example
 
     public class ImageBrowserController : EditorImageBrowserController
     {
@@ -133,8 +127,6 @@ The `Kendo.Mvc` assembly enables you to use the built-in `EditorImageBrowserCont
 
 Similarly, you can use the `EditorFileBrowserController` class to create a controller for the **File Browser** tool as well.
 
-> **Important**
->
 > The consumed parameters for the `create`, `read`, `destroy`, and `upload` operations that are published in the article on the Image Browser of the Editor widget differ.
 
 The following list provides information about the default requests and responses for the `create`, `read`, `destroy`, and `upload` operations used with the Editor HtmlHelper.
@@ -189,5 +181,3 @@ For an example of such a custom controller, refer to the article on how to [stor
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-
-For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

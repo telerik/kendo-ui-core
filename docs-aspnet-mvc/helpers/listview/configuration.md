@@ -16,8 +16,6 @@ The `TagName` of Kendo UI ListView for ASP.NET MVC is used to create an element 
 
 The `ClientTemplateId` is mandatory for the ListView widget. It contains the `id` of the `script` element which accommodates the item template.
 
-###### Example
-
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
@@ -39,8 +37,6 @@ Kendo UI ListView for ASP.NET MVC supports [Ajax]({% slug ajaxbinding_listviewhe
 
 Specify the action method which will create the new model.
 
-###### Example
-
     .DataSource(dataSource => dataSource
         .Create(create => create.Action(/### action ###/ "Create", /### controller ###/ "Home"))
     )
@@ -49,8 +45,6 @@ Specify the action method which will create the new model.
 
 Specify the action method which will destroy the existing models.
 
-###### Example
-
     .DataSource(dataSource => dataSource
         .Destroy(destroy =>  destroy.Destroy(/### action ###/ "Destroy", /### controller ###/ "Home"))
     )
@@ -58,8 +52,6 @@ Specify the action method which will destroy the existing models.
 ### Events
 
 Handle the [events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events) of the Kendo UI DataSource object.
-
-###### Example
 
     .DataSource(dataSource => dataSource
         .Events(events => events
@@ -76,8 +68,6 @@ Handle the [events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasou
 
 Set the initial filter.
 
-###### Example
-
     .DataSource(dataSource => dataSource
         .Filter(filters =>
         {
@@ -92,12 +82,10 @@ Set the initial filter.
 
 Configure the model of the data source.
 
-###### Example
-
     .DataSource(dataSource => dataSource
         .Model(model =>
         {
-            //The unique identifier (primary key) of the model is the ProductID property.
+            // The unique identifier (primary key) of the model is the ProductID property.
             model.Id(p => p.ProductID);
 
             //Declare a model field and optionally specify its default value (used when a new model instance is created).
@@ -112,8 +100,6 @@ Configure the model of the data source.
 
 Set the page size used during paging. The default page size is `10`.
 
-###### Example
-
     .DataSource(dataSource => dataSource
         .PageSize(20)
     )
@@ -121,8 +107,6 @@ Set the page size used during paging. The default page size is `10`.
 ### Read
 
 Specify the action method which will read the existing models and return them as JSON.
-
-###### Example
 
     .DataSource(dataSource => dataSource
         .Read(read =>  read.Read(/### action ###/ "Read", /### controller ###/ "Home"))
@@ -132,14 +116,12 @@ Specify the action method which will read the existing models and return them as
 
 Set the initial sort.
 
-###### Example
-
     .DataSource(dataSource => dataSource
         .Sort(sort =>
         {
             //Sort by UnitsInStock in descending order.
             sort.Add(p => p.UnitsInStock).Descending();
-            //Then by ProductName in ascending order.
+            // Then by ProductName in ascending order.
             sort.Add(p => p.ProductName);
         })
     )
@@ -147,8 +129,6 @@ Set the initial sort.
 ### Update
 
 Specify the action method which will update the existing models.
-
-###### Example
 
     .DataSource(dataSource => dataSource
         .Update(update =>  update.Update(/### action ###/ "Update", /### controller ###/ "Home"))

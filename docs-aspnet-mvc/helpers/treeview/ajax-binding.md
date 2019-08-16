@@ -15,7 +15,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 ### Create the Application
 
 1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application.
-
 1. Name the application `KendoTreeViewAjaxBinding`. If you decide not to use the Visual Studio extensions, follow the procedure for adding Telerik UI for ASP.NET MVC to existing applications:
 
     * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
@@ -31,21 +30,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 1. Select **Generate from database**. Click **Next**. Configure a connection to the Northwind database and click **Next**.
 
-    **Figure 1. A new entity model**
-
-    ![New entity data model](images/tree-entity-data-model.png)
+    ![A new entity data model](images/tree-entity-data-model.png)
 
 1. Select the **Employees** table and click **Finish**.
 
-    **Figure 2. Choose the Employees table**
-
-    ![Choose the Employees table](images/tree-employees-table.png)
+    ![Choosing the Employees table](images/tree-employees-table.png)
 
 ### Configure the New Action Method
 
 1. Open `Controllers/HomeController.cs` and add a new action method which will return JSON. The TreeView makes an Ajax request to this action method any time the user expands a parent node. The action method returns only the child nodes of the expanded parent node. The TreeView provides the unique identifier of the parent node or `null` when it makes the initial request.
-
-    ###### Example
 
         public JsonResult Employees_Read(int? employeeId)
         {
@@ -112,9 +105,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 1. Press `CTRL`+`F5` to build and run the application. Expand the **Andrew Fuller** node and the TreeView loads its children.
 
-    **Figure 3. The final result**
-
-    ![Final result](images/tree-employees.png)
+    ![The final result](images/tree-employees.png)
 
 ## See Also
 

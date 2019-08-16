@@ -74,9 +74,7 @@ others.
 The related fields are:
 
 * **NetWeight** - When the net weight is changed, we update the units count.
-
 * **Units** - When the number of units is changed, we recalculate the net weight.
-
 * **UnitWeight** - When the unit weight is updated, we recalculate the net weight.
 
 In order to update these values we need to set up event handlers for the `Change` event of the widgets.

@@ -17,10 +17,7 @@ The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo Lin
 Below are listed the steps for you to follow when configuring the Kendo UI LinearGauge.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -31,25 +28,25 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
     ```ASPX
         <%: Html.Kendo().LinearGauge()
-            .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Name("linearGauge") // The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
             .Scale(scale => scale
-                .Min(0) //Set the min value of the LinearGauge.
-                .Max(200) //Set the min value of the LinearGauge.
+                .Min(0) // Set the min value of the LinearGauge.
+                .Max(200) // Set the min value of the LinearGauge.
             )
             .Pointer(pointer => pointer
-                .Value(10) //Set the value of the LinearGauge.
+                .Value(10) // Set the value of the LinearGauge.
             )
         %>
     ```
     ```Razor
         @(Html.Kendo().LinearGauge()
-            .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Name("linearGauge") // The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
             .Scale(scale => scale
-                .Min(0) //Set the min value of the LinearGauge.
-                .Max(200) //Set the min value of the LinearGauge.
+                .Min(0) // Set the min value of the LinearGauge.
+                .Max(200) // Set the min value of the LinearGauge.
             )
             .Pointer(pointer => pointer
-                .Value(10) //Set the value of the LinearGauge.
+                .Value(10) // Set the value of the LinearGauge.
             )
         )
     ```
@@ -60,12 +57,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
 To reference an existing Kendo UI LinearGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI LinearGauge for ASP.NET MVC declaration.
+    // Place this after your Kendo UI LinearGauge for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the LinearGauge is used to get its client-side instance.
+            // The Name() of the LinearGauge is used to get its client-side instance.
             var gauge = $("#linearGauge").data("kendoLinearGauge");
         });
     </script>

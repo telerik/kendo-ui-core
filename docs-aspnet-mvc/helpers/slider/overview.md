@@ -24,10 +24,7 @@ There are two types of Sliders:
 Below are listed the steps for you to follow when configuring the Kendo UI Slider.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -38,18 +35,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
     ```ASPX
         <%: Html.Kendo().Slider()
-            .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-            .Min(0) //Set min value of the Slider.
-            .Max(100) //Set min value of the Slider.
-            .Value(20) //Set the value of the Slider.
+            .Name("slider") // The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+            .Min(0) // Set min value of the Slider.
+            .Max(100) // Set min value of the Slider.
+            .Value(20) // Set the value of the Slider.
         %>
     ```
     ```Razor
         @(Html.Kendo().Slider()
-            .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
-            .Min(0) //Set min value of the Slider.
-            .Max(100) //Set min value of the Slider.
-            .Value(20) //Set the value of the Slider.
+            .Name("slider") // The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+            .Min(0) // Set min value of the Slider.
+            .Max(100) // Set min value of the Slider.
+            .Value(20) // Set the value of the Slider.
         )
     ```
 
@@ -71,11 +68,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function change() {
-            //Handle the change event.
+            // Handle the change event.
         }
 
         function slide() {
-            //Handle the slide event.
+            // Handle the slide event.
         }
     </script>
 ```
@@ -89,11 +86,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function change() {
-            //Handle the change event.
+            // Handle the change event.
         }
 
         function slide() {
-            //Handle the slide event.
+            // Handle the slide event.
         }
     </script>
 ```
@@ -102,19 +99,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().Slider()
         .Name("slider")
         .Events(e => e
             .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
             </text>)
             .Slide(@<text>
                 function() {
-                    //Handle the slide event inline.
+                    // Handle the slide event inline.
                 }
             </text>)
         )
@@ -126,12 +121,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Slider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider API](http://docs.telerik.com/kendo-ui/api/javascript/ui/slider#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Slider for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Slider for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Slider is used to get its client-side instance.
+            // The Name() of the Slider is used to get its client-side instance.
             var slider = $("#slider").data("kendoSlider");
         });
     </script>

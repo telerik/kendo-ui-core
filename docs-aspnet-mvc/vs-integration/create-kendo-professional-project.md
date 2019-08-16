@@ -30,9 +30,7 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 
 The wizard detects all the installed versions of Progress&reg; Telerik&reg; UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
-**Figure 1. New Kendo UI Project Wizard**
-
-![New Kendo UI Project Wizard](images/create_kendo.png)
+![A new Kendo UI Project Wizard](images/create_kendo.png)
 
 ### Project Settings
 

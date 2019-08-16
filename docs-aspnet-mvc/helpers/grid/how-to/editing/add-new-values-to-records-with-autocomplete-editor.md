@@ -15,5 +15,3 @@ To see the example, refer to the project on how to [add a new value to the Kendo
 * [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the AutoComplete HtmlHelper]({% slug overview_autocompletehelper_aspnetmvc %})
 * [AutoCompleteBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
-
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

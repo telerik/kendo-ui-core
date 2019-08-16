@@ -11,8 +11,6 @@ position: 13
 
 This article demonstrates how to use Progress Telerik UI for ASP.NET MVC in ASP.NET MVC 4 applications. It uses Visual Studio 2012 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 4. The examples create a new ASP.NET MVC 4 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 4 applications are the same.
 
-> **Important**
->
 > The Progress Telerik UI for ASP.NET MVC Visual Studio extensions ({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
 
 ## Create New ASP.NET MVC 4 Applications
@@ -31,9 +29,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 4 a
 
 **Step 6** Press `CTRL+F5` to build and run the application.
 
-**Figure 1. The new ASP.NET MVC 4 application**
-
-![New ASP.NET MVC 4 Application](images/mvc4-new-app.png)
+![The new ASP.NET MVC 4 application](images/mvc4-new-app.png)
 
 ## Add Progress Telerik UI for ASP.NET MVC
 
@@ -61,15 +57,13 @@ Below are listed the steps for you to follow when copying the required JavaScrip
 
 **Figure 2. Kendo UI directories in the Solution Explorer**
 
-![Kendo directories in Solution Explorer](images/mvc4-solution.png)
+![Kendo directories in the Solution Explorer](images/mvc4-solution.png)
 
 After the needed JavaScript and CSS files are added to the application, you can include them.
 
 **Step 5** Open `App_Start/BundleConfig.cs` to add bundles for Progress Telerik UI for ASP.NET MVC.
 
 **Step 6** Add a script bundle for Progress Telerik UI for ASP.NET MVC.
-
-###### Example
 
     bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                 "~/Scripts/kendo/kendo.all.min.js",
@@ -78,19 +72,13 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 7** Add a style bundle for Progress Telerik UI for ASP.NET MVC.
 
-> **Important**
->
 > Make sure you are familiar with the article on the Progress Telerik UI for ASP.NET MVC [fundamentals and CSS bundling]({% slug fundamentals_aspnetmvc %}#css-bundling).
-
-###### Example
 
     bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
                 "~/Content/kendo/kendo.common.min.css",
                 "~/Content/kendo/kendo.default.min.css"));
 
 **Step 8** Tell the ASP.NET bundles to allow minified files in debug mode.
-
-###### Example
 
     bundles.IgnoreList.Clear();
 
@@ -122,15 +110,11 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 Below are listed the steps for you to follow when including the Progress Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN.
 
-> **Important**
->
 > Make sure you replace the `kendo ui version` from the code snippets below with the current version of the product&mdash;for example, `2013.2.918`.
 
 **Step 1** Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
 **Step 2** Include `kendo.common.min.css` and `kendo.default.min.css`. Add a `link` tag within the `head` tag of the layout.
-
-###### Example
 
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.default.min.css" />
@@ -139,14 +123,10 @@ Below are listed the steps for you to follow when including the Progress Telerik
 
 **Step 4** Include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after jQuery.
 
-###### Example
-
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 **Step 5** If using the Telerik MVC Scheduler wrapper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
-
-###### Example
 
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
@@ -174,8 +154,6 @@ The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where t
 
 **Step 3** Append an `add` tag to the `namespaces` tag.
 
-###### Example
-
     <namespaces>
         <add namespace="System.Web.Mvc" />
         <add namespace="System.Web.Mvc.Ajax" />
@@ -201,9 +179,7 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 3** Press `CTRL+F5` to build and run the application.
 
-**Figure 3. The final result**
-
-![Final result](images/mvc4-final.png)
+![The final result](images/mvc4-final.png)
 
 ## Next Steps
 

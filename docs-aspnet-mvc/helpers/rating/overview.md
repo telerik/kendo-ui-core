@@ -38,7 +38,7 @@ The following example demonstrates the basic configuration for the Rating HtmlHe
 
     <script>
     $(function() {
-        //Notice that the Name() of the Rating is used to get its client-side instance.
+        // The Name() of the Rating is used to get its client-side instance.
         var rating = $("#rating").data("kendoRating");
     });
     </script>

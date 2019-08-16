@@ -12,17 +12,13 @@ The **Genre** listing is going to display all albums according to a selected gen
 
 ## Display Items in the ListView
 
-**Figure 1. A snapshot of the Kendo UI Music Store genre lists**
-
-![kendo-genre-screenshot](images/kendo-genre-screenshot.png)
+![A snapshot of the Kendo UI Music Store genre lists](images/kendo-genre-screenshot.png)
 
 ### Create the HTML
 
 This view is contained in `Views/Store/Browse.cshtml`.
 
 Start with a [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/web/listview/index.html) that is to become the container for the albums.
-
-###### Example
 
     <div data-role="listview" data-bind="source: albums" data-template="album-template"></div>
 
@@ -34,15 +30,10 @@ Note that we are reusing the same Album template from the [Main Page]({% slug cr
 by using the same ASP.NET MVC partial on both pages. This is a great way to keep the Albums looking and
 behaving consistently between the two views.
 
-###### Example
-
     @Html.Partial("_AlbumListTemplatePartial")
 
 <!--_-->
-Next, add the paging support for the ListView. This is done by using the Pager widget. It is a separate widget from the ListView, which enables you to put the pager
-controls anywhere on the page. In this case, you are going to include two pagers, one above and one below the ListView.
-
-###### Example
+Next, add the paging support for the ListView. This is done by using the Pager widget. It is a separate widget from the ListView, which enables you to put the pager controls anywhere on the page. In this case, you are going to include two pagers, one above and one below the ListView.
 
     <div data-role="pager" data-bind="source: albums"></div>
     <div data-role="listview" data-bind="source: albums" data-template="album-template"></div>
@@ -53,8 +44,6 @@ Both pagers have the attribute `data-bind="source: albums"` which is the same as
 ### Build the ViewModel
 
 This code is contained in `Scripts/App/store-browse.js`.
-
-###### Example
 
     var viewModel = kendo.observable({
 
@@ -82,8 +71,6 @@ The `genre` property is a placeholder to hold the `genre` object that you are go
 
 When a genre is selected from the main menu, the `Store/Browse` view is navigated to, and the selected `GenreId` is passed on the query string with the parameter `?Genre=n` where `n` is the number of the genre. This `GenreId` is retrieved by using a JavaScript function located in the `store.js` file, and then used to
 load the record for this `GenreId` from the server. This is done through a standard jQuery AJAX call, instead of using a Kendo UI DataSource.
-
-###### Example
 
     // Load the Genre data from the server.
     $.ajax({

@@ -51,7 +51,6 @@ The following example demonstrates the basic configuration for the Rating HtmlHe
 * [Label]({% slug htmlhelpers_rating_aspnetcore_label %})
 * [Tooltip]({% slug htmlhelpers_rating_aspnetcore_tooltip %})
 * [Templates]({% slug htmlhelpers_rating_aspnetcore_templates %})
-* [Accessibility]({% slug htmlhelpers_rating_aspnetcore_accessibility %})
 
 ## See Also
 

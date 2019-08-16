@@ -18,17 +18,13 @@ A group row contains an expanding and collapsing group icon that enables end-use
 
 If no template is defined, the name of the field and the current group are displayed in the following way.
 
-**Figure 1: Grid with no group templates**
-
-![Grid with no group templates](/helpers/grid/grid-no-group-header-template.png)
+![A Grid with no group templates](/helpers/grid/grid-no-group-header-template.png)
 
 The only difference in the use of `ClientGroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value.
 
 Both `ClientGroupHeaderColumnTemplate` and `ClientGroupFooterTemplate` work in a similar way. `ClientGroupHeaderColumnTemplate` displays the content as aligned to the column in the group row. `ClientGroupFooterTemplate` displays the content as aligned to the column in the group footer row. Their content is displayed as aligned to the column as shown in the following way.
 
-**Figure 2: Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied**
-
-![Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](/helpers/grid/grid-group-header-column-template.png)
+![A Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](/helpers/grid/grid-group-header-column-template.png)
 
 Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `ClientGroupHeaderColumnTemplate` of the first visible column. If you want to show the `ClientGroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `ClientGroupHeaderTemplate` for the group column. The following Grid configuration shows that commenting the `ClientGroupHeaderTemplate` for the **Units In Stock** column shows the `ClientGroupHeaderColumnTemplate` for the **Product Name** column.
 
@@ -85,9 +81,7 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
     )
 ```
 
-**Figure 3: Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate**
-
-![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](/helpers/grid/grid-group-header-column-template-first-column.png)
+![A Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](/helpers/grid/grid-group-header-column-template-first-column.png)
 
 In a server-binding scenario, you can set the group templates without the `Client` prefix&mdash;`GroupHeaderTemplate`, `GroupHeaderColumnTemplate`, and `GroupFooterTemplate`. For more information, refer to the demo on [server aggregates of the Grid](https://demos.telerik.com/aspnet-mvc/grid/serveraggregates).
 

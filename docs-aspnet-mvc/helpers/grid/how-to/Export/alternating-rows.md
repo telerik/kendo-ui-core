@@ -11,8 +11,6 @@ The demo on how to color the alternating rows of an exported Grid to Excel uses 
 
 To see the example, refer to the project on [coloring alternating rows](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/alternating-rows).
 
-> **Important**
->
 > These projects require a UI for ASP.NET MVC 2014.3.1125 version or later. Earlier versions do not expose the `ExcelExport` event through the fluent API.
 
 For more information on how Excel documents work, refer to the [introductory article on Excel](http://docs.telerik.com/kendo-ui/framework/excel/introduction).
@@ -21,5 +19,3 @@ For more information on how Excel documents work, refer to the [introductory art
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

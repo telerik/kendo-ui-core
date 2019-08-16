@@ -17,10 +17,7 @@ The TreeView HtmlHelper extension is a server-side wrapper for the [Kendo UI Tre
 Below are listed the steps for you to follow when configuring the Kendo UI TreeView.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -31,21 +28,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
     ```ASPX
         <%: Html.Kendo().TreeView()
-            .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
+            .Name("treeview") // The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
             {
-                items.Add().Text("Item 1"); //Add item with text "Item1")
-                items.Add().Text("Item 2"); //Add item with text "Item2")
+                items.Add().Text("Item 1"); // Add item with text "Item1")
+                items.Add().Text("Item 2"); // Add item with text "Item2")
             })
         %>
     ```
     ```Razor
         @(Html.Kendo().TreeView()
-            .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
+            .Name("treeview") // The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
             {
-                items.Add().Text("Item 1"); //Add item with text "Item1")
-                items.Add().Text("Item 2"); //Add item with text "Item2")
+                items.Add().Text("Item 1"); // Add item with text "Item1")
+                items.Add().Text("Item 2"); // Add item with text "Item2")
             })
         )
     ```
@@ -79,11 +76,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function treeview_collapse() {
-            //Handle the collapse event
+            // Handle the collapse event
         }
 
         function treeview_expand() {
-            //Handle the expand event
+            // Handle the expand event
         }
     </script>
 ```
@@ -97,11 +94,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function treeview_collapse() {
-            //Handle the collapse event
+            // Handle the collapse event
         }
 
         function treeview_expand() {
-            //Handle the expand event
+            // Handle the expand event
         }
     </script>
 ```
@@ -110,19 +107,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Events(e => e
             .Expand(@<text>
             function() {
-                //Handle the expand event inline
+                // Handle the expand event inline.
             }
             </text>)
             .Collapse(@<text>
             function() {
-                //Handle the collapse event inline
+                // Handle the collapse event inline.
             }
             </text>)
         )
@@ -134,12 +129,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI TreeView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeView API](http://docs.telerik.com/kendo-ui/api/javascript/ui/treeview#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo TreeView for ASP.NET MVC declaration
+    // Place this after your Kendo TreeView for ASP.NET MVC declaration
     <script>
         $(function() {
-            // Notice that the Name() of the treeview is used to get its client-side instance
+            // The Name() of the treeview is used to get its client-side instance
             var treeview = $("#treeview").data("kendoTreeView");
         });
     </script>

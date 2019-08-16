@@ -15,10 +15,7 @@ The Calendar HtmlHelper extension is a server-side wrapper for the [Kendo UI Cal
 Below are listed the steps for you to follow when configuring the Kendo UI Calendar.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -29,18 +26,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
     ```ASPX
         <%: Html.Kendo().Calendar()
-            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
-            .Value(DateTime.Now) //Set the value of the Calendar.
+            .Name("calendar") // The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the Calendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the Calendar.
+            .Value(DateTime.Now) // Set the value of the Calendar.
         %>
     ```
     ```Razor
         @(Html.Kendo().Calendar()
-            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
-            .Value(DateTime.Now) //Set the value of the Calendar.
+            .Name("calendar") // The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the Calendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the Calendar.
+            .Value(DateTime.Now) // Set the value of the Calendar.
         )
     ```
 
@@ -52,8 +49,6 @@ You can subscribe to all Calendar [events](http://docs.telerik.com/kendo-ui/api/
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
 ```ASPX
     <%: Html.Kendo().Calendar()
         .Name("calendar")
@@ -64,11 +59,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function calendar_navigate() {
-            //Handle the navigate event.
+            // Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -82,11 +77,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function calendar_navigate() {
-            //Handle the navigate event.
+            // Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -95,20 +90,18 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
 ```Razor
     @(Html.Kendo().Calendar()
         .Name("calendar")
         .Events(e => e
             .Change(@<text>
             function() {
-                //Handle the change event inline.
+                // Handle the change event inline.
             }
             </text>)
             .Navigate(@<text>
             function() {
-                //Handle the navigate event inline.
+                // Handle the navigate event inline.
             }
             </text>)
         )
@@ -121,12 +114,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Calendar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Calendar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Calendar for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Calendar for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Calendar is used to get its client-side instance.
+            // The Name() of the Calendar is used to get its client-side instance.
             var calendar = $("#calendar").data("kendoCalendar");
         });
     </script>

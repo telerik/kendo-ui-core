@@ -18,12 +18,8 @@ A server-side wrapper:
 * Allows you to configure a [Kendo UI widgets](../../kendo-ui/introduction) via the C# or VB.NET code&mdash;to set its value, data source, etc.
 * Renders the HTML and JavaScript needed to initialize a Kendo UI widget. The widget options propagate to the client-side via the widget initialization script.
 
-**Figure 1. Server-side wrapper HTML and JavaScript output**
+![The HTML and JavaScript output of the server-side wrapper](../images/wrapper-output.png)
 
-![Server-side wrapper outputs HTML and JavaScript](../images/wrapper-output.png)
-
-> **Important**
->
 > As of the jQuery 3.0 release, the [document-ready handlers are called asynchronously](http://demos.telerik.com/kendo-ui/). As a result, the code placed outside a document-ready handler is executed before the code within the handler, regardless of whether the document is ready at the point of execution or not. This change affects the usage of the Telerik UI for ASP.NET MVC components, because the widgets for the MVC wrappers are initialized in a document-ready handler. This means that after the jQuery 3.0 release you need to get the reference of a widget and its API calls within a document-ready handler.
 
 ## Configuration
@@ -32,21 +28,15 @@ A server-side wrapper:
 
 The Kendo UI [HtmlHelper](http://www.asp.net/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs) exposes all Kendo UI server-side wrappers.
 
-**Figure 2. Kendo UI HtmlHelper extension method**
-
-![Kendo HtmlHelper extension method](../images/kendo-extension.png)
+![The Kendo UI HTML Helper extension method](../images/kendo-extension.png)
 
 ### Widget Options
 
 The widget options are exposed through a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).
 
-**Figure 3. Application of fluent interface**
-
-![Fluent interface](../images/fluent-interface.png)
+![Applying the fluent interface](../images/fluent-interface.png)
 
 To set an option, call the corresponding method and pass the required option value.
-
-###### Example
 
     @(Html.Kendo().NumericTextBox()
           .Name("name") // set the name of the NumericTextBox
@@ -60,14 +50,10 @@ You have to set the `Name` option of a Kendo UI server-side wrapper. The value w
 
 IDs (Names) of widgets should meet the requirements for valid HTML `ID` attributes. They should not contain spaces and special characters, and should start with a letter.
 
-**Figure 4. An example of a server-side wrapper name**
-
-![Wrapper name](../images/wrapper-name.png)
+![A sample server-side wrapper name](../images/wrapper-name.png)
 
 Alternatively, use `NumericTextBoxFor`. All Kendo UI server-side wrappers which accept a value can be initialized via a `[WidgetName]For` method. For example, `DatePicker` > `DatePickerFor`. These methods set the `Name` of the server-side wrapper automatically. Thus, `@Html.Kendo().NumericTextBoxFor(model => model.Age)` is the same as `@Html.Kendo().NumericTextBox().Name("Age").Value(Model.Age)`.
 
-> **Important**
->
 > The `Name` options of the widgets always have to be unique in the context of the whole web page. If a partial view is loaded multiple times, each instance of this partial view has to render all widgets with unique `Name` options (IDs). If you fail to meet this requirement, duplicate element IDs render on the page and only the widget instance which occurs first in the HTML markup initializes and works properly.
 
 ### Deferring Initialization
@@ -76,8 +62,6 @@ The server-side wrapper outputs the Kendo UI widget initialization script right 
 
 1. Call the `Deferred` method of the wrapper. This suppresses the immediate script statement rendering.
 
-    ###### Example
-
             @(Html.Kendo().NumericTextBox()
                   .Name("age")
                   .Deferred()
@@ -85,21 +69,15 @@ The server-side wrapper outputs the Kendo UI widget initialization script right 
 
 1. Call the `DeferredScripts` method. This outputs all previously deferred initialization statements.
 
-    ###### Example
-
             @Html.Kendo().DeferredScripts()
 
 1. The `DeferredScripts` method accepts a Boolean parameter, which determines whether script elements should be rendered automatically. This is useful if you want to render the deferred initialization scripts inside existing script element.
-
-    ###### Example
 
         <script>
             @Html.Kendo().DeferredScripts(false)
         </script>
 
 1. Render the deferred initialization script of a particular widget via the `DeferredScriptsFor` method.
-
-    ###### Example
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")
@@ -109,8 +87,6 @@ The server-side wrapper outputs the Kendo UI widget initialization script right 
         @Html.Kendo().DeferredScriptsFor("age")
 
 1. The `DeferredScriptsFor` method can also suppress the output of script elements around the initialization script.
-
-    ###### Example
 
         <script>
         @Html.Kendo().DeferredScriptsFor("age", false)
@@ -122,8 +98,6 @@ To subscribe to the client-side events exposed by a Kendo UI widget, use the `Ev
 
 1. Specify the name of the JavaScript function which will handle the event.
 
-    ###### Example
-
             @(Html.Kendo().NumericTextBox()
                   .Name("age")
                   .Events(events =>
@@ -133,8 +107,6 @@ To subscribe to the client-side events exposed by a Kendo UI widget, use the `Ev
             )
 
 1. Declare the event handlers.
-
-    ###### Example
 
             <script>
             function age_change(e) {
@@ -151,8 +123,6 @@ To subscribe to the client-side events exposed by a Kendo UI widget, use the `Ev
 
 You can get a reference to the client-side object initialized by the server-side wrapper via the [`data`](http://api.jquery.com/data/) jQuery method. Use the `Name` of the widget in an `ID` jQuery selector and obtain the reference in a `document.ready` handler, which is placed or called after the widget is declared. This ensures that the widget is already initialized and the client-side object exists. After you get the object reference, use the widget's client-side API.
 
-###### Example
-
     @(Html.Kendo().NumericTextBox()
         .Name("age")
     )
@@ -165,8 +135,6 @@ You can get a reference to the client-side object initialized by the server-side
     </script>
 
 If you have deferred the initialization of the widget, make sure you get its instance after calling `DeferredScripts` or `DeferredScriptsFor`.
-
-###### Example
 
     @(Html.Kendo().NumericTextBox()
         .Name("age")
@@ -188,8 +156,6 @@ If you have deferred the initialization of the widget, make sure you get its ins
 
 By default, every Kendo UI MVC server-side wrapper renders a script element with an initialization statement. If the wrapper declaration is placed inside a Kendo UI template, this would lead to nested script elements which are invalid. The `ToClientTemplate` method instructs the widget wrapper to escape its own script element, so that it can be nested.
 
-###### Example
-
     <script id="template" type="text/x-kendo-template">
         @(Html.Kendo().NumericTextBox()
               .Name("age").ToClientTemplate()
@@ -208,8 +174,6 @@ By default, every Kendo UI MVC server-side wrapper renders a script element with
 If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a Kendo UI widget `.Content()`. The correct way to do it is to use the `.Render();` helper method and wrap the widget declaration in a non-rendering code block. For example, `@{}` instead of `@()`. Otherwise, the form is rendered outside the widget and the form fields inside the widget are not submitted as expected.
 
 The approach is required with widgets such as the Window, TabStrip, Splitter, and PanelBar. The approach is not required if the form is placed inside a partial view, which is loaded with Ajax via `.LoadContentFrom()`, or if a plain HTML `<form>` tag is used.
-
-###### Example
 
     @{Html.Kendo().TabStrip()
         .Name("TabStrip1")
@@ -238,8 +202,6 @@ There are 2 ways to enable bundling in development:
 
 Note that bundling can cause problems with relative paths in stylesheets. For example, the **DejaVu** font included in the common stylesheet uses such a path. The solution is to rewrite the URLs to absolute ones using the `CssRewriteUrlTransform`, as shown below.
 
-###### Example
-
     bundles.Add(new StyleBundle("~/Content/kendo/css")
         .Include("~/Content/web/kendo.common.min.css", new CssRewriteUrlTransform())
         .Include("~/Content/web/kendo.rtl.min.css", new CssRewriteUrlTransform())
@@ -252,8 +214,6 @@ For more details on the topic, refer to the [Bundling and Minification article](
 
 The ASP.NET bundling allows multiple stylesheets to be combined on the web server, so that the browser loads them as a single file.
 
-> **Important**
->
 > Internet Explorer versions 6-9 have various limitations with regard to the amount of CSS code. The ones that must be kept in mind when using CSS bundles are:
 > * A stylesheet may contain up to 4095 CSS selectors.
 > * A stylesheet may be up to 250KB in size.
@@ -273,8 +233,6 @@ Imagine the following scenario:
 
 The above scenario will result in the following implementation, which is incorrect.
 
-###### Example
-
     bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
         "~/Content/kendo/...VERSION.../kendo.common.min.css",
         "~/Content/kendo/...VERSION.../kendo.default.min.css"));
@@ -285,15 +243,11 @@ The specified virtual bundle URL will make the browser believe that it is regist
 
 The following implementation is correct and the theme images will be loaded successfully.
 
-###### Example
-
     bundles.Add(new StyleBundle("~/Content/kendo/...VERSION.../css").Include(
         "~/Content/kendo/...VERSION.../kendo.common.min.css",
         "~/Content/kendo/...VERSION.../kendo.default.min.css"));
 
 The following implementation is also correct, assuming that the Kendo UI Default theme images are located in the `~/Content/kendo/Default/` folder.
-
-###### Example
 
     bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
         "~/Content/kendo/kendo.common.min.css",

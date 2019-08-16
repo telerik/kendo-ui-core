@@ -82,10 +82,7 @@ The following example demonstrates how to use the `.Enable()` configuration opti
 Below are listed the steps for you to follow when binding a Kendo UI RadioButton to a model.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method and pass the instance of the model to the View.
-
-  ###### Example
 
     public class RadioButtonModel
     {

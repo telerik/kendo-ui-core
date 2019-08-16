@@ -16,5 +16,3 @@ To see the example, refer to the GitHub repo with the [sample project of a Signa
 
 * [Overview of the Chart HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
 * [ChartBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
-
-For more runnable examples on the Kendo UI Chart in ASP.NET MVC applications, browse its **How To** documentation folder.

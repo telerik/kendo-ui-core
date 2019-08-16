@@ -23,8 +23,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Switc
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
 
-  ###### Example
-
     public ActionResult Index()
     {
         return View();
@@ -32,17 +30,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Switc
 
 1. Add the Switch.
 
-  ###### Example
-
-    ```tab-Razor
+   ```tab-Razor
         @(Html.Kendo().Switch()
-            .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
+            .Name("switch") // The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
             .Checked(true)
         )
     ```
     ```tab-ASPX
         <%: Html.Kendo().Switch()
-            .Name("switch") //The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
+            .Name("switch") // The name of the Switch is mandatory. It specifies the "id" attribute of the widget.
             .Checked(true)
         %>
     ```
@@ -55,8 +51,6 @@ You can subscribe to all Switch [events](http://docs.telerik.com/kendo-ui/api/ja
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
 ```tab-Razor
     @(Html.Kendo().Switch()
             .Name("switch")
@@ -66,7 +60,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
     function change() {
-        //Handle the change event.
+        // Handle the change event.
     }
     </script>
 ```
@@ -79,7 +73,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -88,15 +82,13 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
 ```tab-Razor
     @(Html.Kendo().Switch()
             .Name("switch")
             .Events(e => e
                 .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
                 </text>)
             )
@@ -117,12 +109,10 @@ For more information and examples, refer to the [Custom Switch Component Layout]
 
 To reference an existing Kendo UI Switch instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](http://docs.telerik.com/kendo-ui/api/javascript/ui/switch) to control its behavior.
 
-###### Example
-
     // Place this after your Kendo UI Switch for ASP.NET MVC declaration.
     <script>
     $(function() {
-        // Notice that the Name() of the Switch is used to get its client-side instance.
+        // The Name() of the Switch is used to get its client-side instance.
         var switch = $("#switch").data("kendoSwitch");
     });
     </script>

@@ -11,7 +11,6 @@ position: 2
 The Rating allows to control the selection behavior of the items by configuring the [`Selection`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property:
 
 * single - allows selecting a single item.
-
 * continuous - allows selecting all items from the start to the end.
 
 ## Continuous Selection

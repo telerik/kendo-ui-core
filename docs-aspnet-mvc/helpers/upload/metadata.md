@@ -20,8 +20,6 @@ Below are listed the steps for you to follow when configuring the sending of met
 
 1. Generate an unique message ID and store it in the `ViewData`.
 
-    ###### Example
-
         public ActionResult Index()
         {
             ViewBag.MessageId = Guid.NewGuid().ToString();
@@ -52,8 +50,6 @@ Below are listed the steps for you to follow when configuring the sending of met
 
 1. Process the file using the message ID.
 
-    ###### Example
-
         [HttpPost]
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments, string messageId)
         {
@@ -81,13 +77,9 @@ Below are listed the steps for you to follow to do that.
 
 1. Add an input field for description. We will send its value to the save handler.
 
-    ###### Example
-
         <input type="text" id="fileDescription" />
 
 1. Declare a handler for the upload event and attach a data object to the passed event.
-
-    ###### Example
 
         function onUpload(e) {
             e.data = {
@@ -122,8 +114,6 @@ Below are listed the steps for you to follow to do that.
 
 1. Process the file and the associated description.
 
-    ###### Example
-
         [HttpPost]
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments, string fileDescription)
         {
@@ -150,8 +140,6 @@ Below are listed the steps for you to follow when configuring the receiving of m
 
 1. Build the response.
 
-    ###### Example
-
         [HttpPost]
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
         {
@@ -162,8 +150,6 @@ Below are listed the steps for you to follow when configuring the receiving of m
         }
 
 1. Declare a handler for the [`success` event](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#success) and process the response.
-
-    ###### Example
 
         function onSuccess(e) {
             alert("Status: " + e.response.status);

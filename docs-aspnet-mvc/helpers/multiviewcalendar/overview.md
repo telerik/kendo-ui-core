@@ -15,10 +15,7 @@ The MultiViewCalendar HtmlHelper extension is a server-side wrapper for the [Ken
 Below are listed the steps for you to follow when configuring the Kendo UI MultiViewCalendar.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-###### Example
 
             public ActionResult Index()
             {
@@ -27,24 +24,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 1. Add a MultiViewCalendar.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar") //The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the MultiViewCalendar.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the MultiViewCalendar.
-            .Value(DateTime.Now) //Set the value of the MultiViewCalendar.
+            .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
+            .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
         %>
 ```
 ```Razor
 
         @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar") //The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the MultiViewCalendar.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the MultiViewCalendar.
-            .Value(DateTime.Now) //Set the value of the MultiViewCalendar.
+            .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
+            .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
         )
 ```
 
@@ -66,8 +61,6 @@ You can subscribe to all MultiViewCalendar [events](http://docs.telerik.com/kend
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
@@ -79,11 +72,11 @@ The following example demonstrates how to subscribe to events by a handler name.
         %>
         <script>
         function calendar_navigate() {
-            //Handle the navigate event.
+            // Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
         </script>
 ```
@@ -98,11 +91,11 @@ The following example demonstrates how to subscribe to events by a handler name.
         )
         <script>
         function calendar_navigate() {
-            //Handle the navigate event.
+            // Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
         </script>
 ```
@@ -111,8 +104,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
 ```Razor
 
         @(Html.Kendo().MultiViewCalendar()
@@ -120,12 +111,12 @@ The following example demonstrates how to subscribe to events by a template dele
           .Events(e => e
               .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
               </text>)
               .Navigate(@<text>
                 function() {
-                    //Handle the navigate event inline.
+                    // Handle the navigate event inline.
                 }
                 </text>)
           )

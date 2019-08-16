@@ -20,8 +20,6 @@ In this way, you can programmatically:
 
 The following example demonstrates how to handle a custom command attribute to accomplish specific application requirements such as the ones mentioned in the previous list.
 
-##### Example
-
 ```js
 @(Html.Kendo().Menu()
     .Name("menu")

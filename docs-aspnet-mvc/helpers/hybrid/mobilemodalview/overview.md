@@ -20,10 +20,7 @@ It allows you to configure the hybrid Kendo UI ModalView from server-side code.
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI ModalView for ASP.NET MVC.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Open `HomeController.cs` and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -132,7 +129,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onClose() {
-            //Handle the close event.
+            // Handle the close event.
         }
     </script>
 ```
@@ -152,7 +149,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onClose() {
-            //Handle the close event.
+            // Handle the close event.
         }
     </script>
 ```
@@ -161,9 +158,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ### Instances
 
-You can reference a hybrid ModalView instance by using the code from the example below. Once a reference is established, use the [hybrid ModalView API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
-
-###### Example
+You can reference a hybrid ModalView instance by using the code from the following example. Once a reference is established, use the [hybrid ModalView API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
 
     @(Html.Kendo().MobileModalView()
             .Name("ModalView")
@@ -176,7 +171,7 @@ You can reference a hybrid ModalView instance by using the code from the example
     )
     <script>
         $(function() {
-            //Notice that the Name() of the ModalView is used to get its client-side instance.
+            // The Name() of the ModalView is used to get its client-side instance.
             var modalview = $("#ModalView").data("kendoMobileModalView");
         });
     </script>

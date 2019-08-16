@@ -13,5 +13,3 @@ To see the example, refer to the project on how to [use the same controller in d
 
 * [Overview of the Menu HtmlHelper]({% slug overview_menu_aspnetmvc %})
 * [MenuBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
-
-For more runnable examples on the Kendo UI Menu in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/menu/how-to/)

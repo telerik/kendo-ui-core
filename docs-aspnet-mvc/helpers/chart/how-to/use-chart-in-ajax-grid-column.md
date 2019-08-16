@@ -13,5 +13,3 @@ To see the example, refer to the project on how to [use a Chart in the `ClientTe
 
 * [Overview of the Chart HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
 * [ChartBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
-
-For more runnable examples on the Kendo UI Chart in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/chart/how-to/).

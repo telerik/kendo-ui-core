@@ -25,13 +25,9 @@ Depending on your preferred editor, use either of the following approaches:
 
 1. Add the `Microsoft.AspNet.SignalR` package to the application.
 
-    ###### Example
-
         install-package Microsoft.AspNet.SignalR
 
 1. Create a `Startup.cs` file to configure the hub connection.
-
-    ###### Example
 
         using Microsoft.Owin;
         using Owin;
@@ -51,8 +47,6 @@ Depending on your preferred editor, use either of the following approaches:
         }
 
 1. Create a `Hubs` folder and create a `ChatHub` class in it.
-
-    ###### Example
 
         using Microsoft.AspNet.SignalR;
 
@@ -81,8 +75,6 @@ This section explains how to implement the P2P Chat application client.
 ### Initializing the Chat
 
 In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events.
-
-###### Example
 
     @{
         var name = Guid.NewGuid().ToString();
@@ -121,19 +113,13 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 1. Include the SignalR 2 script in the page. It is distributed with the SignalR NuGet package.
 
-    ###### Example
-
         <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
 
 1. Reference the auto-generated SignalR hub script for the application.
 
-    ###### Example
-
         <script src="~/signalr/hubs"></script>
 
 1. Implement the initialization logic for the SignalR Hub proxy.
-
-    ###### Example
 
         function startHub(startCallback) {
             var hub = $.connection.chatHub;
@@ -146,8 +132,6 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
         }
 
 1. In the `$(document).ready()` handler start the Hub proxy and attach event handlers for the respective remote hub actions:
-
-    ###### Example
 
         $(document).ready(function () {
             window.chat = $('#chat').getKendoChat();

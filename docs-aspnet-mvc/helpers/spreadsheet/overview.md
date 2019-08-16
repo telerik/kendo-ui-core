@@ -18,8 +18,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
 
 1. Create a new ASP.NET MVC 5 application using any of the following templates:
 
-* Telerik UI for ASP.NET MVC application. It is available after installing the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}).
-* Default Visual Studio template. Follow the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) to set up to the application.
+    * Telerik UI for ASP.NET MVC application. It is available after installing the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}).
+    * Default Visual Studio template. Follow the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) to set up to the application.
 
 1. Add a Kendo UI Spreadsheet to the `Index` view in `Views/Home/Index.cshtml`.
 
@@ -154,9 +154,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
 
 1. Build and run the application.
 
-    **Figure 1. The final result**
-
-    ![Final result](images/spreadsheet-inline.png)
+    ![The final result](images/spreadsheet-inline.png)
 
 ## Event Handling
 
@@ -176,7 +174,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function spreadsheetRender() {
-            //Handle the render event.
+            // Handle the render event.
         }
     </script>
 ```
@@ -190,7 +188,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function spreadsheetRender() {
-            //Handle the render event.
+            // Handle the render event.
         }
     </script>
 ```
@@ -199,14 +197,12 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
         .Events(e => e
             .Render(@<text>
                 function() {
-                    //Handle the render event inline.
+                    // Handle the render event inline.
                 }
             </text>)
         )
@@ -218,15 +214,13 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
 
-###### Example
-
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
     )
 
     <script>
         $(function() {
-            //Notice that the Name() of the Spreadsheet is used to get its client-side instance.
+            // The Name() of the Spreadsheet is used to get its client-side instance.
             var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         });
     </script>

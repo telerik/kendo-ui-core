@@ -94,7 +94,7 @@ property called `item`, which is a jQuery object that points to the HTML element
 
 This event handler can be found in **Scripts/search.js**.
 
-## Set up the Search Results Window and Grid
+## Set Up the Search Results Window and Grid
 
 Since our AutoComplete only displays the first 20 results, we need a way of efficiently showing the user all of the results.
 To do this we create a [Kendo Window](http://demos.telerik.com/kendo-ui/web/window/index.html) that contains a

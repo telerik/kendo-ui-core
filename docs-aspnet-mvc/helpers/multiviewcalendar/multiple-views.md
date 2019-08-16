@@ -12,8 +12,6 @@ The Kendo UI MultiViewCalendar allows you to define the number of views or month
 
 In some scenarios it might be necessary to display more than two months. This is especially helpful for performing range selection between months.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().NumericTextBox()

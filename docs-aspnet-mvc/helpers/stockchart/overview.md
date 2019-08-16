@@ -24,10 +24,7 @@ There are two ways to bind a Kendo UI StockChart for ASP.NET MVC:
 Below are listed the steps for you to follow when configuring the Kendo UI StockChart for server binding.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method and pass the data list as the model.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -101,11 +98,11 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function stockChart_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function stockChart_seriesClick() {
-            //Handle the series click event.
+            // Handle the series click event.
         }
     </script>
 ```
@@ -125,11 +122,11 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function stockChart_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function stockChart_seriesClick() {
-            //Handle the seriesClick event.
+            // Handle the seriesClick event.
         }
     </script>
 ```
@@ -137,8 +134,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 ### By Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
     @(Html.Kendo().StockChart(Model)
         .Name("stockChart")
@@ -150,12 +145,12 @@ The following example demonstrates how to subscribe to events by a template dele
         .Events(e => e
             .DataBound(@<text>
                 function() {
-                    //Handle the dataBound event inline.
+                    // Handle the dataBound event inline.
                 }
             </text>)
             .SeriesClick(@<text>
                 function() {
-                    //Handle the seriesClick event inline.
+                    // Handle the seriesClick event inline.
                 }
             </text>)
         )
@@ -167,12 +162,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI StockChart for ASP.NET MVC declaration.
+    // Place this after your Kendo UI StockChart for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the StockChart is used to get its client-side instance.
+            // The Name() of the StockChart is used to get its client-side instance.
             var chart = $("#stockChart").data("kendoStockChart");
         });
     </script>

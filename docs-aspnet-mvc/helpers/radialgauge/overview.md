@@ -15,10 +15,7 @@ The RadialGauge HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 Below are listed the steps for you to follow when configuring the Kendo UI RadialGauge.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -31,23 +28,23 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
         <%: Html.Kendo().RadialGauge()
             .Name("radialGauge") // The name of the radialGauge is mandatory. It specifies the "id" attribute of the widget.
             .Scale(scale => scale
-                .Min(0) //Set the min value of the RadialGauge.
-                .Max(200) //Set the min value of the RadialGauge.
+                .Min(0) // Set the min value of the RadialGauge.
+                .Max(200) // Set the min value of the RadialGauge.
             )
             .Pointer(pointer => pointer
-                .Value(10) //Set the value of the RadialGauge.
+                .Value(10) // Set the value of the RadialGauge.
             )
         %>
     ```
     ```Razor
         @(Html.Kendo().RadialGauge()
-            .Name("radialGauge") //The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Name("radialGauge") // The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
             .Scale(scale => scale
                 .Min(0) // Set the min value of the RadialGauge.
                 .Max(200) // Set the min value of the RadialGauge.
             )
             .Pointer(pointer => pointer
-                .Value(10) //Set the value of the RadialGauge.
+                .Value(10) // Set the value of the RadialGauge.
             )
         )
     ```
@@ -58,12 +55,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI RadialGauge for ASP.NET MVC declaration.
+    // Place this after your Kendo UI RadialGauge for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the RadialGauge is used to get its client-side instance.
+            // The Name() of the RadialGauge is used to get its client-side instance.
             var gauge = $("#radialGauge").data("kendoRadialGauge");
         });
     </script>

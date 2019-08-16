@@ -42,7 +42,7 @@ For more similar issues, refer to the [article on troubleshooting in Kendo UI fo
 1. Include all [required Kendo UI JavaScript files](http://docs.telerik.com/kendo-ui/intro/installation/prerequisites).
 1. If the application is using Telerik Extensions for ASP.NET MVC, indicate to the `ScriptRegistrar` not to include jQuery.
 
-    ###### Example
+
 
         Html.Telerik().ScriptRegistrar().jQuery(false)
 
@@ -59,7 +59,7 @@ If an older version of `Kendo.Mvc.dll` is referenced and it uses a version of `S
 1. [Upgrade ASP.NET MVC 5](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/) which is used in the application to the newest version ASP.NET MVC 5 Nuget.
 1. Update the binding redirect for `System.Web.Mvc` in the `web.config` file.
 
-###### Example
+
 
     <dependentAssembly>
         <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
@@ -83,8 +83,6 @@ Below are listed the packages you need to update through [NuGet](https://www.nug
 * [`Microsoft.jQuery.Unobtrusive.Ajax`](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax)
 * [`Microsoft.jQuery.Unobtrusive.Validation`](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation)
 
-> **Important**
->
 > In ASP.NET MVC 3 applications `jquery.unobtrusive-ajax` and `jquery.validate.unobtrusive` are not installed as NuGet packages. Install them separately. The packages are [`Microsoft.jQuery.Unobtrusive.Ajax`](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax) and [`Microsoft.jQuery.Unobtrusive.Validation`](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation). First, delete `jquery.unobtrusive-ajax.js`, `jquery.unobtrusive-ajax.min.js`, `jquery.validate.unobtrusive.js`, and `jquery.validate.unobtrusive.min.js` from your `~/Sripts` folder. Then, install `Microsoft.jQuery.Unobtrusive.Ajax` and `Microsoft.jQuery.Unobtrusive.Validation`.
 
 ### DOM-Based Open Redirection Issue in kendo.aspnetmvc.min.js Is Reported
@@ -111,7 +109,7 @@ Below are listed the steps for you to follow to fix this issue.
 
     * If you are using the WebForms view engine, open the `web.config` file in the root folder of your application. Add `<add namespace="Kendo.Mvc.UI" />` before the closing `namespaces` tag.
 
-        ###### Example
+
 
             <namespaces>
                 <add namespace="System.Web.Mvc" />
@@ -125,7 +123,7 @@ Below are listed the steps for you to follow to fix this issue.
 
     * If you are using the Razor view engine, open the `web.config` file which is in the `Views` folder of your application. Add `<add namespace="Kendo.Mvc.UI" />` before the closing `namespaces` tag.
 
-        ###### Example
+
 
             <system.web.webPages.razor>
                 <pages pageBaseType="System.Web.Mvc.WebViewPage">
@@ -157,7 +155,7 @@ This can happen if the nested wrappers are declared within code blocks, which ou
 
 The following example demonstrates a wrong approach to avoid the issue.
 
-###### Example
+
 
     <%: Html.Kendo().Splitter()
         .Name("splitter")
@@ -175,7 +173,7 @@ The following example demonstrates a wrong approach to avoid the issue.
 
 The following example demonstrates the proper approach to avoid the issue.
 
-###### Example
+
 
     <% Html.Kendo().Splitter()
         .Name("splitter")
@@ -198,7 +196,7 @@ This can happen if there are nested `<text>` tags, which is not allowed by the R
 
 In such scenarios, the inner widget can be included through a custom helper.
 
-###### Example
+
 
     @helper PanelBarHelper()
     {
@@ -236,7 +234,7 @@ Using the [ASP.NET Bundling](http://www.asp.net/mvc/overview/performance/bundlin
 
 Use a plain `Bundle` instead of `ScriptBudle` for these files.
 
-###### Example
+
 
     bundles.Add(new Bundle("~/bundles/kendo").Include(
                 "~/Scripts/kendo.all.min.js",
@@ -270,7 +268,7 @@ Below are listed the steps for you to follow while handling this issue.
 
 1. Disable debug mode. Set the `debug` attribute of the `compilation` element in the `web.config` to `false`.
 
-    ###### Example
+
 
         <compilation debug="false">
 
@@ -299,8 +297,6 @@ If the name of a widget is different from the property of the Model, the `ModelB
 
 Verify that the name of the widget is the same as the Model's property you want to update.
 
-> **Important**
->
 > If strongly-typed widget is used, do not set the `Name` manually, because a name is generated automatically.
 
 ### Widget Loading Icon Continues Spinning
@@ -312,8 +308,6 @@ This issue refers to the Kendo UI AutoComplete, ComboBox, DropDownList, and Mult
 Apply either of the two options below:
 
 * Verify that `GET` requests are allowed.
-
-    ###### Example
 
         public JsonResult GetCascadeCategories()
         {
@@ -351,8 +345,6 @@ Apply either of the two options below:
 
 * Return a simple array of data.
 
-    ###### Example
-
         public JsonResult GetCascadeCategories()
         {
             var northwind = new NorthwindDataContext();
@@ -363,8 +355,6 @@ Apply either of the two options below:
         }
 
 * Return the `Data` property only.
-
-    ###### Example
 
         public JsonResult GetCascadeCategories([DataSourceRequest] DataSourceRequest request)
         {
@@ -384,8 +374,6 @@ The widget displays a `0` value if it is bound to the `non-nullable integer` or 
 **Solution**
 
 To avoid this default behavior, clear the value of the widget using its `Value` method.
-
-###### Example
 
     @model int
     @(Html.Kendo().ComboBoxFor(m)
@@ -415,8 +403,6 @@ Check the solution of the previous problem.
 
 Add the line from the example below to the `bundleconfig.cs` file.
 
-###### Example
-
     bundles.IgnoreList.Ignore("*.unobtrusive-ajax.min.js", OptimizationMode.WhenDisabled)
 
 This prevents the unobtrusive Ajax script from loading twice&mdash;the minified and non-minified&mdash;in debug mode, which is what causes the double postback.
@@ -439,8 +425,6 @@ Choose either of the options to overcome this behavior:
 
 * Force the `check for newer versions of stored pages` [(link)](https://support.microsoft.com/en-us/kb/263070).
 * Disable caching using HTTP headers.
-
-    ###### Example
 
         [OutputCache(Duration=0,NoStore=true,VaryByParam="None")]
         public JsonResult Index()

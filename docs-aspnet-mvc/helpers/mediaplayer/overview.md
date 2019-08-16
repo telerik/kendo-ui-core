@@ -16,9 +16,7 @@ The MediaPlayer also offers tight integration with the YouTube media provider. T
 
 To respond to cutting-end design practices and trends, the MediaPlayer component provides a *responsive* layout. This means that its size adapts depending on the capabilities of the client (end user) device and browser. The component automatically resizes its area to display the video in the most suitable possible way within the provided dimensions. The responsive web design of the MediaPlayer is shipped out-of-the-box and intends to save you time and efforts when developing your responsive applications.
 
- **Figure 1: A template of the MediaPlayer**
-
-![Template of the MediaPlayer](images/mediaplayer-overview1.png)
+![A template of the MediaPlayer](images/mediaplayer-overview1.png)
 
 **Key Features**
 
@@ -67,8 +65,6 @@ Once the video files are ready, initialize the MediaPlayer HtmlHelper. It will r
 
 To add multiple sources for the same video, configure the quality-dependent [HD feature](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview#configuration-Add).
 
-> **Important**
->
 > The example on initializing the MediaPlayer above uses the `autoPlay` property. Because of the [mobile considerations listed in this article](https://developers.google.com/youtube/iframe_api_reference#Mobile_considerations), browsers on iOS do not automatically play embedded media. This limitation prevents unsolicited downloads over cellular networks at the expense of the user. The user always has to initiate a playback. For more information on this behavior, refer to [the article on audio and video HTML](https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/AudioandVideoTagBasics/AudioandVideoTagBasics.html). There are other functionalities which may be limited due to iOS restrictions. For more information on this topic, refer to [this article](http://blog.millermedeiros.com/unsolved-html5-video-issues-on-ios/) and to other available resources on the Web.
 
 ## Configuration
@@ -213,8 +209,6 @@ The examples below demonstrates how to subscribe to events using a handler name.
 
 The following example demonstrates how to subscribe to events using a template delegate.
 
-###### Example
-
     @(Html.Kendo().MediaPlayer()
         .Name("mediaplayer1")
         .AutoPlay(true)
@@ -222,12 +216,12 @@ The following example demonstrates how to subscribe to events using a template d
         .Events(e =>
             e.Pause(@<text>
                 function(e) {
-                //Handle the pause event inline.
+                // Handle the pause event inline.
                 }
             </text>)
         .VolumeChange(@<text>
                 function(e) {
-                //Handle the volumeChange event inline.
+                // Handle the volumeChange event inline.
                 }
             </text>)
         )

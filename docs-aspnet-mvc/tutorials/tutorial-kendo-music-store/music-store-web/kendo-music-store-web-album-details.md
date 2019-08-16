@@ -10,9 +10,7 @@ position: 5
 
 When an album is clicked from any page, the album details are shown in a popup window. It enables users to change the quantity, to order and add the album to the shopping cart. More than one album details window can be opened at once, and they can be dragged around the screen.
 
-**Figure 1. A snapshot of the Kendo UI Music Store Album Details window**
-
-![kendo-album-details-window](images/kendo-album-details-window.png)
+![A snapshot of the Kendo UI Music Store Album Details window](images/kendo-album-details-window.png)
 
 ## Configuration
 
@@ -32,8 +30,6 @@ The `store` is an object held in the global scope that contains a variety of com
 
 The `viewAlbumDetails()` function makes a jQuery AJAX call to load the album from the WCF Data Service.
 
-###### Example
-
         viewAlbumDetails = function (albumId) {
             $.ajax({
                 url: config.albumsUrl + "(" + albumId + ")",
@@ -49,8 +45,6 @@ The `viewAlbumDetails()` function makes a jQuery AJAX call to load the album fro
 ### Create the View Model
 
 Upon completing the AJAX request, the `store._createAlbumDetailsViewModel()` function is called. This method takes the album record returned from the server, and returns an object that is used as the view model for the details window.
-
-###### Example
 
         _createAlbumDetailsViewModel = function (data) {
             return kendo.observable({
@@ -86,8 +80,6 @@ The `store._openWindow()` function is called with the created view model object,
 
 Users need to be able to open more than one window at a time. Normally, you would have a `<div>` element for the window and create a Kendo UI Window widget by selecting it with a jQuery selector and calling `.kendoWindow()` on it. However, this would only work for creating a single window. Instead, add a new `<div>` element for each window that is opened. Also, when the window is closed, remove the `<div>`.
 
-###### Example
-
       _openWindow = function (template, viewModel) {
           // Create a placeholder element.
           var window = $(document.createElement('div'));
@@ -119,25 +111,17 @@ Users need to be able to open more than one window at a time. Normally, you woul
 <!--_-->
 This function starts by creating the new `<div>` element. Then, a Kendo UI template is used to put the contents of the window into the `<div>` element. The `template` parameter passed to this method is the element `id` for the template that will be used as the window contents.
 
-###### Example
-
     var templateHtml = $(template).html();
 
 The code from above reads the contents of the template into the `templateHtml` variable.
-
-###### Example
 
     window.html(kendo.template(templateHtml)(viewModel));
 
 The `kendo.template(templateHtml)` function processes the HTML from the template, and returns another function that can be used to apply the view model to the template. The subsequent `(viewModel)` passes the `viewModel` into the function that will apply it to the template. This performs the replacements on the template.
 
-###### Example
-
     <span>#: data.Title #</span>
 
 The code above will result in the code from the example below.
-
-###### Example
 
     <span>Rock</span>
 
@@ -145,17 +129,13 @@ Here, the `viewModel.Data.Name` property is `"Rock"`. The final `window.html()` 
 
 At this point the window element can be appended to the end of the page.
 
-###### Example
-
     $('body').append(window);
 
 Now the element and its contents are part of the DOM, but they are still plain HTML.
 
 The following example demonstrates how to turn the element into a Kendo UI Window widget.
 
-###### Example
-
-    // Turn placeholder into a Window widget.
+    // Turn the placeholder into a Window widget.
     window.kendoWindow({
         width: config.albumDetailsWindowWidth,
         title: viewModel.data.Title,
@@ -170,8 +150,6 @@ The `close` event is being used to detect when the window closes, either by addi
 
 Finally, the window is positioned and shown. In this example, call `window.center()` to place the window in the middle of the screen. You can also calculate an actual `X` and `Y` coordinate to position the window at.
 
-###### Example
-
     // Center and show the Window.
     window.data("kendoWindow").center();
     window.data("kendoWindow").open();
@@ -180,13 +158,9 @@ Finally, the window is positioned and shown. In this example, call `window.cente
 
 One of the features of the album details window is that it enables users to change the quantity through implementing a [Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/web/numerictextbox/index.html). It uses an MVVM bound input box as the base element for the number box.
 
-###### Example
-
     <input type="number" value="1" min="1" max="100" data-role="numerictextbox" data-decimals="0" data-format="n0" data-bind="value: quantity, events: { spin: updateQty }" />
 
 The example specifies a `min` and `max` value, the number of decimal places, and a general formatting string. The `spin` event is fired when the user clicks either the `Up` or `Down` arrow, which then calls the `updateQty()` function on the view model and sets the value of the quantity property on the view model.
-
-###### Example
 
                 updateQty: function(e) {
                     this.set("quantity", e.sender.value());

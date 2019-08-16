@@ -10,9 +10,7 @@ position: 2
 
 This article explains the configuration options exposed by the fluent API of the Kendo UI Grid.
 
-All code examples assume the model demonstrated in the example below.
-
-###### Example
+All code examples assume the model demonstrated in the following example.
 
     public class Product
     {
@@ -25,8 +23,6 @@ All code examples assume the model demonstrated in the example below.
 
 The Kendo UI Grid API is exposed via the [`Kendo.Mvc.UI.Fluent.GridBuilder`](/api/Kendo.Mvc.UI.Fluent/GridBuilder) class. However, you do not have to instantiate that class. Use the `Grid` HtmlHelper extension method instead.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>().Name("grid"))
 
 ## Common DataSource Settings
@@ -35,9 +31,7 @@ The [`DataSource`](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/Gr
 
 ### Aggregates
 
-The `Aggregates` method sets the aggregates, as demonstrated in the example below.
-
-###### Example
+The `Aggregates` method sets the aggregates, as demonstrated in the following example.
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -60,8 +54,6 @@ The `Create` method sets the action method which is responsible for saving new d
 
 The following example demonstrates how to set the `create` action.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .ToolBar(toolbar => toolbar.Create())
@@ -78,8 +70,6 @@ The following example demonstrates how to set the `create` action.
 The `Destroy` method sets the action method which is responsible for destroying data items.
 
 The following example demonstrates how to set the `destroy` action.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -103,8 +93,6 @@ The `Events` method specifies the event handlers for the data source [events](ht
 
 The following example demonstrates how to handle data source events.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .DataSource(dataSource => dataSource
@@ -122,21 +110,19 @@ The following example demonstrates how to handle data source events.
     )
     <script>
         function dataSource_change(e) {
-            //Handle the "change" event.
+            // Handle the "change" event.
         }
         function dataSource_error(e) {
-            //Handle the "error" event.
+            // Handle the "error" event.
         }
         function dataSource_requestStart(e) {
-            //Handle the "requestStart" event.
+            // Handle the "requestStart" event.
         }
     </script>
 
 ### Filter
 
-The `Filter` method sets the initial filter of the data source, as demonstrated in the example below.
-
-###### Example
+The `Filter` method sets the initial filter of the data source, as demonstrated in the following example.
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -155,9 +141,7 @@ The `Filter` method sets the initial filter of the data source, as demonstrated 
 
 ### Group
 
-The `Group` method sets the initial grouping configuration of the data source, as demonstrated in the example below.
-
-###### Example
+The `Group` method sets the initial grouping configuration of the data source, as demonstrated in the following example.
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -180,8 +164,6 @@ The data field names must be valid JavaScript identifiers and contain neither sp
 
 The following example demonstrates how to configure the model.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .DataSource(dataSource => dataSource
@@ -189,7 +171,7 @@ The following example demonstrates how to configure the model.
             .Read(read => read.Action("Products_Read", "Home"))
             .Model(model =>
             {
-                //The unique identifier (primary key) of the model is the ProductID property.
+                // The unique identifier (primary key) of the model is the ProductID property.
                 model.Id(product => product.ProductID);
 
                 //Declare a model field and optionally specify its default value (used when a new model instance is created).
@@ -207,8 +189,6 @@ The `PageSize` method sets the page size used during paging. The default page si
 
 The following example demonstrates how to set the page size.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .DataSource(dataSource => dataSource
@@ -224,8 +204,6 @@ The `Read` method sets the action method which is responsible for reading data i
 
 The following example demonstrates how to set the `read` action.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .DataSource(dataSource => dataSource
@@ -236,9 +214,7 @@ The following example demonstrates how to set the `read` action.
 
 ### Sort
 
-The `Sort` method sets the initial sorting, as demonstrated in the example below.
-
-###### Example
+The `Sort` method sets the initial sorting, as demonstrated in the following example.
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -249,7 +225,7 @@ The `Sort` method sets the initial sorting, as demonstrated in the example below
             {
                 //Sort by the UnitsInStock in descending order.
                 sort.Add(product => product.UnitsInStock).Descending();
-                //Then sort by the ProductName in ascending order.
+                // Then sort by the ProductName in ascending order.
                 sort.Add(product => product.ProductName);
             })
         )
@@ -260,8 +236,6 @@ The `Sort` method sets the initial sorting, as demonstrated in the example below
 The `Update` method sets the action method which is responsible for saving updated data items.
 
 The following example demonstrates how to set the `update` action.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -286,8 +260,6 @@ The following example demonstrates how to set the `update` action.
 The `Batch` method configures the batch `create`, `update` and `destroy` operations. By default, the batch operations are disabled.
 
 The following example demonstrates how to enable the batch mode.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -318,13 +290,13 @@ The following example demonstrates how to configure the Grid columns.
         .Name("grid")
         .Columns(columns =>
         {
-            //Define a column which will display the value of the ProductID property.
+            // Define a column which will display the value of the ProductID property.
             columns.Bound(product => product.ProductID);
 
-            //Define a column and set a column setting.
+            // Define a column and set a column setting.
             columns.Bound(product => product.ProductName).Title("Product Name");
 
-            //Define a template column. It needs a server-side code block (<% %>).
+            // Define a template column. It needs a server-side code block (<% %>).
             columns.Template(product =>
             {
                 %>
@@ -332,14 +304,14 @@ The following example demonstrates how to configure the Grid columns.
                 <%
             });
 
-            //Define a command column with a "Destroy" button.
+            // Define a command column with a "Destroy" button.
 
             columns.Command(commands =>
             {
                 commands.Destroy();
             });
         })
-        //The Render method is used because of the server-side code blocks.
+        // The Render method is used because of the server-side code blocks.
         .Render();
     %>
 ```
@@ -348,19 +320,18 @@ The following example demonstrates how to configure the Grid columns.
         .Name("grid")
         .Columns(columns =>
         {
-            //Define a column which will display the value of the ProductID property.
+            // Define a column which will display the value of the ProductID property.
             columns.Bound(product => product.ProductID);
 
-            //Define a column and set a column setting.
+            // Define a column and set a column setting.
             columns.Bound(product => product.ProductName).Title("Product Name");
 
-            //Define a template column. It needs a templated razor delegate.
+            // Define a template column. It needs a templated razor delegate.
             columns.Template(@<text>
                 @Html.ActionLink("Edit", "Home", new { id = item.ProductID })
             </text>);
 
-            //Define a command column with a "Destroy" button.
-
+            // Define a command column with a "Destroy" button.
             columns.Command(commands =>
             {
                 commands.Destroy();
@@ -373,8 +344,6 @@ The following example demonstrates how to configure the Grid columns.
 
 A bound column is declared through the `Bound` method, which specifies a data field.
 
-> **Important**
->
 > The data field names must be valid JavaScript identifiers and contain neither spaces, nor special characters. The first character should be a letter.
 
 Bound columns support the following settings:
@@ -393,8 +362,6 @@ Bound columns support the following settings:
 
 A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
-> **Important**
->
 > The `ClientTemplate` is used when the Grid is configured for [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}) or when [server binding]({% slug serverbinding_grid_aspnetmvc %}) is combined with client-side data operations^&mdash;when [`ServerOperation` is set to `false`]({% slug ajaxbinding_grid_aspnetmvc %}#enable-client-data-processing-during-ajax-binding).
 
 Client templates defined in server-side code are URL encoded before they are sent to the client. As a result, a `+` (plus) sign, which is used inside a binding expression, is lost&mdash;for example, `"#= 3 + 5 #"`.
@@ -405,8 +372,6 @@ There are two possible workarounds:
 * Encode the `+` (plus) sign&mdash;for example, `"#= 3 %2b 5 #"`.
 
 The following example demonstrates how to set the column `ClientTemplate`.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -425,8 +390,6 @@ The following example demonstrates how to set the column `ClientTemplate`.
 The `Encoded` method configures the HTML encoding of the bound property value. By default, it is set to `true` which means that the column values are encoded.
 
 The following example demonstrates how to prevent `html` encoding.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -447,8 +410,6 @@ The `Filterable` method enables or disables the filtering UI. By default, it is 
 
 The following example demonstrates how to disable filtering for a specific column.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .Columns(
@@ -465,12 +426,9 @@ The following example demonstrates how to disable filtering for a specific colum
 
 ### Search Panel
 
-The `Search` method enables or disables the Search Panel in the Grid toolbar. The Search Panel uses filtering under the hood to show only the relevant records in the Grid. 
+The `Search` method enables or disables the Search Panel in the Grid toolbar. The Search Panel uses filtering under the hood to show only the relevant records in the Grid.
 
 In addition it is possible to customize which fields to search when a value is entered in the search input.
-
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -482,22 +440,20 @@ In addition it is possible to customize which fields to search when a value is e
         .ToolBar(t => t.Search())
         .Search(s=> { s.Field(c => c.ProductName); })
         .DataSource(dataSource => dataSource
-            .Ajax() 
+            .Ajax()
             .Read(read => read.Action("Products_Read", "Home"))
         )
     )
 
 When filtering is enabled in the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
 
-> When server operations are enabled it is possible to search only using string fields. Using `Contains` filter operation is available only for string types. 
+> When server operations are enabled it is possible to search only using string fields. Using `Contains` filter operation is available only for string types.
 
 ### Format
 
 The `Format` method specifies the format used when displaying the value of the bound property. By default, it is empty.
 
 The following example demonstrates how to specify the column format string.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -521,8 +477,6 @@ The `Groupable` method enables or disables the dragging of the column header to 
 
 The following example demonstrates how to disable grouping.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .Columns(
@@ -543,8 +497,6 @@ The `Sortable` method enables or disables the sorting by that column.
 
 The following example demonstrates how to disable the sorting.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .Columns(
@@ -563,8 +515,6 @@ The following example demonstrates how to disable the sorting.
 
 The `Template` method sets the server template which is used when the bound field is displayed.
 
-> **Important**
->
 > The `Template` is used when the Grid is configured for [server binding]({% slug serverbinding_grid_aspnetmvc %}). If the client-side data operations are enabled&mdash;when [`ServerOperation` is set to `false`]({% slug ajaxbinding_grid_aspnetmvc %}#enable-client-data-processing-during-ajax-binding)), you will also need a [`ClientTemplate`](#clienttemplate).
 
 In WebForms, the template is a [server-side code block](https://msdn.microsoft.com/en-us/library/ms178135(vs.80).aspx).
@@ -578,7 +528,7 @@ The following example demonstrates how to set the column template.
         .Name("grid")
         .Columns(columns =>
         {
-            //The template is a server-side code block (<% %>).
+            // The template is a server-side code block (<% %>).
             columns.Bound(product => product.ProductID).Template(product =>
             {
                 %>
@@ -586,7 +536,7 @@ The following example demonstrates how to set the column template.
                 <%
             });
         })
-        //The Render method is used because of the server-side code blocks.
+        // The Render method is used because of the server-side code blocks.
         .Render();
     %>
 ```
@@ -595,7 +545,7 @@ The following example demonstrates how to set the column template.
         .Name("grid")
         .Columns(columns =>
         {
-                //The template is a templated razor delegate. The argument of the delegate is called "item".
+                // The template is a templated razor delegate. The argument of the delegate is called "item".
                 columns.Bound(product => product.ProductID).Template(@<text>
                     <strong>@item.ProductID</strong>
                 </text>);
@@ -610,8 +560,6 @@ The `Title` method sets the text displayed in the header of the column. By defau
 The `Title` should not include non-encoded HTML content. Use a `HeaderTemplate` instead.
 
 The following example demonstrates how to set the column title.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -631,15 +579,13 @@ The `Width` method sets the width of the column in pixels or other units. By def
 
 The following example demonstrates how to set the column width.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .Columns(
         {
-            //Set the column width in pixels.
+            // Set the column width in pixels.
             columns.Bound(product => product.ProductID).Width(200);
-            //Set the column width in em.
+            // Set the column width in em.
             columns.Bound(product => product.ProductName).Width("10em");
         })
         .DataSource(dataSource => dataSource
@@ -653,8 +599,6 @@ The following example demonstrates how to set the column width.
 The multicolumn headers of the Grid represent a tree-like structure where one or more columns can be grouped together by a common header.
 
 That common header in turn can be a child of another upper `MultiColumn` header which can also span both columns and other headers. For more information, refer to the [demo on implementing multicolumn headers](https://demos.telerik.com/aspnet-mvc/grid/multicolumnheaders).
-
-###### Example
 
     columns.Group(group => group
         .Title("Contact Info")
@@ -696,13 +640,9 @@ Template columns have the following settings:
 
 A [Kendo UI template](http://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 
-> **Important**
->
 > The `ClientTemplate` is used when the Grid is configured for [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).
 
 The following example demonstrates how to set the template column client template.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -725,8 +665,6 @@ The `Title` method sets the text displayed in the header of the column. By defau
 
 The following example demonstrates how to set the template column title.
 
-###### Example
-
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
         .Columns(
@@ -748,8 +686,6 @@ The following example demonstrates how to set the template column title.
 The `Width` method sets the width of the column in pixels or other units. By default, the width is not set and the column would try to accommodate its content.
 
 The following example demonstrates how to set the template column width.
-
-###### Example
 
     @(Html.Kendo().Grid<Product>()
         .Name("grid")
@@ -774,8 +710,6 @@ The `Paging` method configures the paging functionality.
 ### Enable Paging
 
 To enable paging with the default settings, call the `Paegable` method without arguments.
-
-###### Example
 
 ```ASPX
     <%: Html.Kendo().Grid(Model)
@@ -804,8 +738,6 @@ The `ButtonCount` method specifies the number of numeric buttons that should be 
 
 The following example demonstrates how to specify a custom button count.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager.ButtonCount(15))
@@ -820,8 +752,6 @@ The following example demonstrates how to specify a custom button count.
 The `Enabled` method enables or disables paging. Use it when paging based on a condition should be enabled.
 
 The following example demonstrates how to conditionally enable paging.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -840,8 +770,6 @@ If the Grid is empty, the pager would show `"No items to display"`. The paging i
 
 The following example demonstrates how to hide the paging info.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager.Info(false))
@@ -856,8 +784,6 @@ The following example demonstrates how to hide the paging info.
 The `Input` method specifies whether to show a textbox for typing in a page number. By default, such a textbox is not shown.
 
 The following example demonstrates how to show a textbox for the page number.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -891,8 +817,6 @@ The `Display` method sets the pager info message. By default, it is set to `"{0}
 
 The following example demonstrates how to set the display message.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
@@ -909,8 +833,6 @@ The following example demonstrates how to set the display message.
 The `Empty` method configures the pager info message displayed when there are no items in the Grid. By default, it is set to `"No items to display"`.
 
 The following example demonstrates how to set the empty message.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -929,8 +851,6 @@ The `First` method sets the tooltip displayed when the user hovers over the `"fi
 
 The following example demonstrates how to set the first message.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
@@ -947,8 +867,6 @@ The following example demonstrates how to set the first message.
 The `ItemsPerPage` method sets the label displayed when page sizes dropdown is displayed. By default, it is set to `"items per page`".
 
 The following example demonstrates how to set the items per page message.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -968,8 +886,6 @@ The `Last` method sets the tooltip displayed when the user hovers over the `"las
 
 The following example demonstrates how to set the last message.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
@@ -987,8 +903,6 @@ The `Next` method configures the tooltip displayed when the user hovers over the
 
 The following example demonstrates how to set the `next` message.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
@@ -1005,8 +919,6 @@ The following example demonstrates how to set the `next` message.
 The `Of` method configures the label displayed after the page textbox. By default, it is set to `"of {0}"`. The placeholder contains the total number of pages.
 
 The following example demonstrates how to set the `of` message.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -1026,8 +938,6 @@ The `Page` method configures the label displayed before the page textbox. By def
 
 The following example demonstrates how to set the `page` message.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
@@ -1046,8 +956,6 @@ The `Previous` method sets the tooltip displayed when the user hovers over the `
 
 The following example demonstrates how to set the `previous` message.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
@@ -1064,8 +972,6 @@ The following example demonstrates how to set the `previous` message.
 The `Refresh` method sets the tooltip displayed when the user hovers over the `"refresh"` button of the pager. Clicking that button refreshes the current page. By default, it is set to `"Refresh"`.
 
 The following example demonstrates how to set the `refresh` message.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -1085,8 +991,6 @@ The `Numeric` method sets the numeric pager. When enabled the pager will display
 
 The following example demonstrates how to disable the numeric pager.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
@@ -1104,12 +1008,10 @@ The `PageSizes` method enables or disables the page size dropdown. When enabled,
 
 The following example demonstrates how to enable the page size dropdown.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
-            .PageSizes(true) //The default page sizes are 5, 10 and 20.
+            .PageSizes(true) // The default page sizes are 5, 10 and 20.
         )
         .DataSource(dataSource => dataSource
             .Ajax() //Or Server()
@@ -1119,12 +1021,10 @@ The following example demonstrates how to enable the page size dropdown.
 
 The following example demonstrates how to enable the page size dropdowns with custom page sizes.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Pageable(pager => pager
-            .PageSizes(new [] { 10, 20, 30 }) //The default page sizes are 5, 10 and 20.
+            .PageSizes(new [] { 10, 20, 30 }) // The default page sizes are 5, 10 and 20.
         )
         .DataSource(dataSource => dataSource
             .Ajax() //Or Server()
@@ -1137,8 +1037,6 @@ The following example demonstrates how to enable the page size dropdowns with cu
 The `PreviousNext` method enables or disables the `previous/next/first/last` pager buttons. These buttons navigate to the corresponding page when clicked. By default, the method is enabled.
 
 The following example demonstrates how to disable the `previous` and `next` pager buttons.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -1156,8 +1054,6 @@ The following example demonstrates how to disable the `previous` and `next` page
 The `Refresh` method enables or disables the `refresh` pager button. Clicking that button reloads the current page. By default, the method is disabled.
 
 The following example demonstrates how to show the `refresh` button.
-
-###### Example
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
@@ -1178,8 +1074,6 @@ The Grid can show a built-in or custom message to the user when there are no rec
 
 The following example demonstrates how to enable the default built-in `No Records` message.
 
-###### Example
-
     @(Html.Kendo().Grid<Order>()
         .Name("Grid")
         .NoRecords()
@@ -1188,8 +1082,6 @@ The following example demonstrates how to enable the default built-in `No Record
 ### Custom Message
 
 The following example demonstrates how to define a custom `No Records` message. In this case, the custom message is be displayed centered inside the empty Grid's data area.
-
-###### Example
 
     @(Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -1200,8 +1092,6 @@ The following example demonstrates how to define a custom `No Records` message. 
 
 The following example demonstrates how to define a non-centered custom `No Records` message. In this case, the custom message is displayed with no centering styles applied, which allows an easier and more advanced appearance customization through custom CSS code.
 
-###### Example
-
     @(Html.Kendo().Grid<Order>()
         .Name("Grid")
         .NoRecords(n => n.Template("string HTML template, not centered"))
@@ -1210,8 +1100,6 @@ The following example demonstrates how to define a non-centered custom `No Recor
 ### External Template Message
 
 The following example demonstrates how to define a custom `No Records` message with an external Kendo UI template. This case is the same as the above one, but the template is defined outside the Grid declaration.
-
-###### Example
 
     <script id="no-records-template-id" type="text/x-kendo-template">
         external HTML template, not centered
@@ -1224,13 +1112,11 @@ The following example demonstrates how to define a custom `No Records` message w
 
 ## Scrolling
 
-By default, the Kendo UI MVC Grid is not scrollable. When scrolling is enabled, the widget applies a default height of 200px to its data area. This can be changed or removed by setting an optional height style in the Grid's `Scrollable` settings, as demonstrated in the example below.
-
-###### Example
+By default, the Kendo UI MVC Grid is not scrollable. When scrolling is enabled, the widget applies a default height of 200px to its data area. This can be changed or removed by setting an optional height style in the Grid's `Scrollable` settings, as demonstrated in the following example.
 
     @(Html.Kendo().Grid(Model)
         .Name("grid")
-        .Scrollable(s => s.Height(400)) //Set a 400px-height style.
+        .Scrollable(s => s.Height(400)) // Set a 400px-height style.
     )
 
     //Or:

@@ -19,25 +19,17 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 1. A new entity data model**
-
-    ![New entity data model](../images/grid-entity-data-model.png)
+    ![A new entity data model](../images/grid-entity-data-model.png)
 
 1. Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-    **Figure 2. Choose the connection**
-
-    ![Choose the connection](../images/grid-entity-data-model.png)
+    ![Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    **Figure 3. Choose the Products table**
-
-    ![Choose the Products table](../images/grid-database-objects.png)
+    ![Choosing the Products table](../images/grid-database-objects.png)
 
 1. Add a new class to the `~/Models` folder. Name it `ProductViewModel`.
-
-    ###### Example
 
         public class ProductViewModel
         {
@@ -52,8 +44,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Open `HomeController.cs` and add a new action method which will return the **Products** as JSON. The Grid will make Ajax requests to this action.
 
-    ###### Example
-
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
             using (var northwind = new NorthwindEntities())
@@ -65,8 +55,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the new data items. Name the method `Products_Create`.
-
-    ###### Example
 
         public ActionResult Products_Create([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {
@@ -93,8 +81,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the updated data items. Name the method `Products_Update`.
-
-    ###### Example
 
         public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {
@@ -124,8 +110,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Add a new action method to `HomeController.cs`. It will be responsible for saving the deleted data items. Name the method `Products_Destroy`.
-
-    ###### Example
 
         public ActionResult Products_Destroy([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {
@@ -221,9 +205,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Build and run the application.
 
-    **Figure 4. The final result**
-
-    ![Final result](../images/grid-inline-grid.png)
+    ![The final result](../images/grid-inline-grid.png)
 
     To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing).
 
@@ -232,10 +214,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 Server validation is often needed when performing editing. The section below demonstrates how to use the `AddModelError` method with the Kendo UI Grid for ASP.NET MVC.
 
 1. Perform all steps from the previous section.
-
 1. Add some validation code to the `Products_Update` method. For example, check the length of the `ProductName` property.
-
-    ###### Example
 
         public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
         {

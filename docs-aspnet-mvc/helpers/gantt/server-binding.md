@@ -18,8 +18,6 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ### TaskViewModel
 
-###### Example
-
     public class TaskViewModel : IGanttTask
     {
         public int TaskID { get; set; }
@@ -76,8 +74,6 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
     }
 
 ### DependencyViewModel
-
-###### Example
 
     public class DependencyViewModel : IGanttDependency
     {

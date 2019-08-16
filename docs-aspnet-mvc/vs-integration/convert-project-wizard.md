@@ -27,15 +27,11 @@ The conversion wizard has three steps:
 
 The distribution selection lets you choose the version of the Progress&reg; Telerik&reg; UI for ASP.NET MVC you want to use.
 
-**Figure 1. Distribution selection**
-
 ![Distribution selection](images/convert_distribution.png)
 
 ### Theme Selection
 
 The theme selection lets you choose the visual theme for your Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
-
-**Figure 2. Theme selection**
 
 ![Theme selection](images/convert_theme.png)
 
@@ -47,8 +43,6 @@ The **Project Settings** page enables you to modify the project settings by conf
 - **Copy Editor Templates**&mdash;Copies the predefined editor templates to `~/Views/Shared/EditorTemplates`. Existing editor templates will be overwritten.
 - **Copy Global Resources**&mdash;Copies the localization files to `~/Scripts/kendo/{version}/cultures`.
 - **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
-
-**Figure 3. Project settings**
 
 ![Project settings](images/convert_settings.png)
 

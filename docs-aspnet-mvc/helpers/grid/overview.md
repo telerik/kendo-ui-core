@@ -31,34 +31,25 @@ Here are some of the differences between server and AJAX bound modes:
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for server binding to the Northwind **Products** table using.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 1. A new entity data model**
-
-    ![New entity data model](images/grid-entity-data-model.png)
+    ![A new entity data model](images/grid-entity-data-model.png)
 
 1.  Pick the **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
 
-    **Figure 2. Choose the connection**
-
-    ![Choose the connection](images/grid-entity-data-model.png)
+    ![Choosing the connection](images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
-    **Figure 3. Choose the Products table**
-
-    ![Choose the Products table](images/grid-database-objects.png)
+    ![Choosing the Products table](images/grid-database-objects.png)
 
 1. Open **HomeController.cs** and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
             var northwind = new NorthwindEntities();
-            //Get the Products entities and add them to the ViewBag.
+            // Get the Products entities and add them to the ViewBag.
             ViewBag.Products = northwind.Products;
             return View();
         }
@@ -100,17 +91,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Build and run the application.
 
-    **Figure 4. The final result**
-
-    ![Final result](images/grid-bound-grid.png)
+    ![The final result](images/grid-bound-grid.png)
 
 ## Reference
 
 ### Existing Instances
 
 To reference an existing Kendo UI Grid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Grid API](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
-
-###### Example
 
     @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products)
             .Name("grid")
@@ -123,7 +110,7 @@ To reference an existing Kendo UI Grid instance, use the [`jQuery.data()`](http:
     )
     <script>
         $(function() {
-            //Notice that the Name() of the Grid is used to get its client-side instance.
+            // The Name() of the Grid is used to get its client-side instance.
             var grid = $("#grid").data("kendoGrid");
         });
     </script>
@@ -136,8 +123,6 @@ You can subscribe to all Grid [events](http://docs.telerik.com/kendo-ui/api/java
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-###### Example
-
 ```ASPX
     <%: Html.Kendo().Grid(Model)
         .Name("grid")
@@ -148,11 +133,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function grid_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function grid_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -166,11 +151,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function grid_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function grid_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -179,19 +164,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().Grid(Model)
           .Name("grid")
           .Events(e => e
               .DataBound(@<text>
                   function() {
-                      //Handle the dataBound event inline.
+                      // Handle the dataBound event inline.
                   }
               </text>)
               .Change(@<text>
                   function() {
-                      //Handle the change event inline.
+                      // Handle the change event inline.
                   }
               </text>)
           )

@@ -24,8 +24,6 @@ To support filtering on the server side in the **Orders** Grid, enable `ServerOp
 
 The following example is an excerpt from the declaration of the **Orders** Grid&mdash;which can be found in **Views/Home/Index.cshtml**&mdash;which shows the configuration of the DataSource.
 
-###### Example
-
     .DataSource(dataSource => dataSource
         .Ajax()
         .Read(builder => builder.Url("/api/CustomerOrders/GetOrdersForCustomer/").Type(HttpVerbs.Get))
@@ -42,8 +40,6 @@ For the full declaration for the **Orders** Grid, refer to **Views/Home/Index.cs
 To make the supporting server-side filtering easier, the Kendo UI MVC extensions expose a few classes and functions which handle this approach. The extensions provide `DataSourceRequest`, `DataSourceResponse`, and `ToDataSourceResult` to help with the server-side filtering.
 
 The following example demonstrates part of the code in `Api/CustomerOrdersController.cs` that supports this behavior.
-
-###### Example
 
     using System.Linq;
     using System.Web.Mvc;
@@ -90,15 +86,11 @@ The implementation for the `CustomerOrdersController` is short, because the Kend
 
 The following example demonstrates the first chunk of code.
 
-###### Example
-
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
 The `using` statements in the implementation of the Controller are important because they include the namespaces, which contain the DataSource
 request helpers that are used later.
-
-###### Example
 
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
 
@@ -106,13 +98,9 @@ request helpers that are used later.
 <--*-->
 Though not related to Kendo UI, this attribute is useful when trying to prevent some browsers (for example, Internet Explorer) from caching AJAX calls to the service. They need to be included on the Controller because the underlying data might change any time and the data has to be updated for the user to see.
 
-###### Example
-
     public JsonResult GetOrdersForCustomer([DataSourceRequest] DataSourceRequest request)
 
 In the previous example, an MVC Action for the `CustomerOrdersController` is declared. The return value of the function is a `JsonResult` because it is a data service. As filtering data will be received from the client-side DataSource, you have to take a `DataSourceRequest` object as a parameter. The `[DataSourceRequest]` attribute, which is applied to the parameter, is used by the MVC framework when it binds data from the request to parameters that the Action takes.
-
-###### Example
 
     IQueryable<Order> orders = _orderRepository.GetAllOrders();
 
@@ -140,8 +128,6 @@ To display orders for the currently selected Customer in the TreeView, you need 
 
 The following code snippets are located in **Scripts/home.js**.
 
-###### Example
-
     var updateGridCustomerFilter = function (customerId) {
         var ordersGrid = $("#ordersGrid").data("kendoGrid");
         ordersGrid.dataSource.filter({ field: "CustomerId", operator: "eq", value: customerId });
@@ -158,8 +144,6 @@ The following code snippets are located in **Scripts/home.js**.
 
 During its [setup](kendo-saleshub-customer-treeview), a `select` event handler is configured for the customer TreeeView and the `window.SalesHub.CustomerTreeView_Select` event handler is stated.
 
-###### Example
-
     window.SalesHub.CustomerTreeView_Select = function (e) {
         var node = $(e.node);
         var dataItem = e.sender.dataItem(e.node);
@@ -171,16 +155,12 @@ During its [setup](kendo-saleshub-customer-treeview), a `select` event handler i
 
 The event handler contains an `e` parameter. This is the event object that you get from the Kendo UI TreeView when a new node is selected in it. It contains information about which node is selected.
 
-###### Example
-
     var node = $(e.node);
     var dataItem = e.sender.dataItem(e.node);
 
 The first part of the event handler interacts with the `node` property on the event object. The `node` property is the DOM element that is selected. That is why you need to convert the DOM object into a jQuery object and then get the corresponding `dataItem` for that node.
 
 The `dataItem` you get from the Kendo UI TreeView is an object that the Kendo UI TreeView uses to describe each node in the tree.
-
-###### Example
 
     if (!dataItem.hasChildren) {
         updateGridCustomerFilter(node.data("customer-id"));
@@ -192,8 +172,6 @@ Now you need to call the `updateGridCustomerFilter` function, which takes a `cus
 
 The following example demonstrates the function which commands the update of the filters on the Grid.
 
-###### Example
-
     var updateGridCustomerFilter = function (customerId) {
         var ordersGrid = $("#ordersGrid").data("kendoGrid");
         ordersGrid.dataSource.filter({ field: "CustomerId", operator: "eq", value: customerId });
@@ -202,8 +180,6 @@ The following example demonstrates the function which commands the update of the
 First, you have to find the **Orders** Grid element on the page by using a jQuery selector locating it by id. Once you get the Grid on the page, get the `kendoGrid` object that is associated with it.
 
 After you got the `kendoGrid` object, access the DataSource for it through the `dataSource` property. Call the `filter` function on it and pass in a new filter object to it by using the DataSource.
-
-###### Example
 
     { field: "CustomerId", operator: "eq", value: customerId }
 
