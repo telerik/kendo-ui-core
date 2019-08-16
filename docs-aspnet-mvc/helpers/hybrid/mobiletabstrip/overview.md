@@ -18,10 +18,7 @@ It allows you to configure the hybrid Kendo UI TabStrip from server-side code.
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI TabStrip for ASP.NET MVC.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Open `HomeController.cs` and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -115,7 +112,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onSelect() {
-            //Handle the select event.
+            // Handle the select event.
         }
     </script>
 ```
@@ -136,7 +133,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onSelect() {
-            //Handle the select event.
+            // Handle the select event.
         }
     </script>
 ```
@@ -146,8 +143,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 ### Instances
 
 You can reference a hybrid TabStrip instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid TabStrip API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/tabstrip#methods) to control its behavior.
-
-###### Example
 
     @(Html.Kendo().MobileTabStrip()
         .Name("tabstrip")
@@ -161,7 +156,7 @@ You can reference a hybrid TabStrip instance by using the [jQuery.data()](http:/
     )
     <script>
         $(function() {
-            //Notice that the Name() of the TabStrip is used to get its client-side instance.
+            // The Name() of the TabStrip is used to get its client-side instance.
             var tabstrip = $("#tabstrip").data("kendoMobileTabStrip");
         });
     </script>

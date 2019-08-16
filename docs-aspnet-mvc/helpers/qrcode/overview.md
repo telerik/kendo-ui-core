@@ -15,10 +15,7 @@ The QRCode HtmlHelper extension is a server-side wrapper for the [Kendo UI QRCod
 Below are listed the steps for you to follow when configuring the Kendo UI QRCode.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -29,14 +26,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
     ```ASPX
         <%: Html.Kendo().QRCode()
-            .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
-            .Value("#ff0000") //Set the value of the QRCode.
+            .Name("qrcode") // The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
+            .Value("#ff0000") // Set the value of the QRCode.
         %>
     ```
     ```Razor
         @(Html.Kendo().QRCode()
-            .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
-            .Value("#ff0000") //Set the value of the QRCode.
+            .Name("qrcode") // The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
+            .Value("#ff0000") // Set the value of the QRCode.
         )
     ```
 
@@ -65,12 +62,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 To reference an existing Kendo UI QRCode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo QRCode for ASP.NET MVC declaration.
+    // Place this after your Kendo QRCode for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the QRCode is used to get its client-side instance.
+            // The Name() of the QRCode is used to get its client-side instance.
             var qrcode = $("#qrcode").data("kendoQRCode");
         });
     </script>

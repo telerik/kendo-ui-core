@@ -17,8 +17,6 @@ TDP handles the data import, export, and processing from the following formats:
 * Tab-separated values (`.txt`)
 * Portable document format (`.pdf`) (export only)
 
-> **Important**
->
 > The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and are available for the Kendo UI Enterprise and DevCraft bundles.
 
 For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
@@ -35,8 +33,6 @@ The main entry point for the project is the `Telerik.Web.Spreadsheet.Workbook` c
 
 Below are listed the typical usage scenarios as they would appear in ASP.NET MVC applications for you to get familiar with.
 
-> **Important**
->
 > There is no strict dependency on the type of server framework used. Popular choices, such as MVC, WebAPI, and WebForms, work equally well.
 
 ### Load Data from External File
@@ -76,8 +72,6 @@ public class HomeController : Controller
 ### Load Data from External File Using BindTo Method
 
 Load a file from the file system and use it to populate the Spreadsheet widget. The supported file extensions are `.xlsx`, `.csv`, `.txt`, and `.json`.
-
-###### Example
 
 @{
     var path = Server.MapPath("~/App_Data/path/to/document.xlsx");
@@ -120,8 +114,6 @@ Load the data by using the `BindTo` method and the Spreadsheet document model.
 
 Post a Workbook to a controller and save it as a local file. The supported file extensions are `.xlsx`, `.csv`, `.txt`, `.pdf`, and `.json`.
 
-> **Important**
->
 > Set [`aspnet:MaxJsonDeserializerMembers`](https://msdn.microsoft.com/en-us/library/hh975440%28v=vs.120%29.aspx?f=255&MSPPError=-2147217396) to a higher value than the default one in the `web.config`.
 
 ```cs
@@ -162,8 +154,6 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
 
 Telerik Document Processing provides a full-blown model for a Spreadsheet document. Convert it to `Telerik.Web.Spreadsheet.Workbook` if you want to display the result in the Kendo UI Spreadsheet widget.
 
-###### Example
-
     var document = new Telerik.Windows.Documents.Spreadsheet.Model.Workbook();
     var worksheet = document.Worksheets.Add();
     worksheet.Cells[0, 0].SetValue("1.23");
@@ -174,14 +164,12 @@ Telerik Document Processing provides a full-blown model for a Spreadsheet docume
 
 Conversely, you can start with a Kendo UI Spreadsheet model (`Telerik.Web.Spreadsheet.Workbook`) and convert it to a TDP document. Then, it can be further processed, converted, and stored as needed.
 
-###### Example
-
 [HttpPost]
 public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 {
     var document = workbook.ToDocument();
 
-    //Continue with the TDP API as usual.
+    // sContinue with the TDP API as usual.
     var worksheet = document.ActiveWorksheet;
     var A1Cell = new CellIndex(0, 0);
     var B2Cell = new CellIndex(1, 1);

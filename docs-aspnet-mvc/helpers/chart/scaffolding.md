@@ -10,8 +10,6 @@ position: 3
 
 This article demonstrates how to scaffold a Kendo UI Chart for ASP.NET MVC by using the Kendo UI Scaffolder Visual Studio extension.
 
-> **Important**
->
 > The Kendo UI Scaffolder will not include the required `UI for ASP.NET MVC` files to the project. To achieve this automatically, use the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_aspnetmvc %}). To achieve this manually, refer to [this article]({% slug aspnetmvc5_aspnetmvc %}).
 
 ## Getting Started
@@ -26,25 +24,19 @@ Create a new ASP.NET MVC application. Include an Entity Framework Data Model and
 
 Right-click the location where the Chart Controller should be generated. Select **Add** > **New Scaffolded item...** from the displayed menu. In this example, you are going to generate it in the **Controllers** folder.
 
-**Figure 1. A new scaffolded item**
-
-![New Scaffolded Item](../../images/scaffolding/new_scaffolded_item.png)
+![The new scaffolded iItem](../../images/scaffolding/new_scaffolded_item.png)
 
 ### Select the Scaffolder
 
 Select **Kendo UI Scaffolder** from the list of available Scaffolders.
 
-**Figure 2. The Kendo UI Scaffolder**
-
-![Kendo UI Scaffolder](../../images/scaffolding/kendo_ui_scaffolder.png)
+![The Kendo UI scaffolder](../../images/scaffolding/kendo_ui_scaffolder.png)
 
 ### Select the Chart
 
 Select the Kendo UI Chart from the available widgets to the left to scaffold.
 
-**Figure 3. The Kendo UI Chart Scaffolder**
-
-![Kendo UI Chart Scaffolder](images/scaffolding/kendo_ui_chart.png)
+![The Kendo UI Chart scaffolder](images/scaffolding/kendo_ui_chart.png)
 
 ### Set Model and Data Context Options
 
@@ -52,21 +44,15 @@ On the next screen, you are presented with the Model and Data Context options.
 
 1. Enter the Controller and View names.
 
-	**Figure 4. The Grid options**
-
-	![Grid options](../../helpers/grid/images/scaffolding/kendo_ui_grid1.png)
+	![The Chart options](../../helpers/grid/images/scaffolding/kendo_ui_grid1.png)
 
 1. The **Model Class** DropDownList contains all model types from the active project. In this example, you are going to list products in the Chart. Select the **Product** entity.
 
-	**Figure 5. The Model class**
-
-	![Model Class](../../helpers/grid/images/scaffolding/model_class.png)
+	![The Model class](../../helpers/grid/images/scaffolding/model_class.png)
 
 1. From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this example, it is **NorthwindEntities**.
 
-	**Figure 6. The Data Context class**
-
-	![Data Context Class](../../helpers/grid/images/scaffolding/data_context_class.png)
+	![The Data Context class](../../helpers/grid/images/scaffolding/data_context_class.png)
 
 ### Use View Model Objects
 
@@ -74,32 +60,26 @@ On the next screen, you are presented with the Model and Data Context options.
 
 1. If you have not yet created it, add a new class to the `~/Models` folder. Name it `ProductViewModel`.
 
-	###### Example
-
-			public class ProductViewModel
+      ```C#
+	    public class ProductViewModel
       {
           public int ProductID { get; set; }
           public string ProductName { get; set; }
           public short? UnitsInStock { get; set; }
       }
+			```
 
 1. Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.
 
-	**Figure 7. The ViewModel class**
+	![The ViewModel class](images/scaffolding/view_model_class.png)
 
-	![ViewModel Class](images/scaffolding/view_model_class.png)
-
-> **Important**
->
 > The names of the properties in the ViewModel have to be exactly the same as the corresponding ones in the Entity. Otherwise, the Kendo UI Scaffolder is not able to link them correctly.
 
 ### Set Chart Functionalities
 
 1. Click the **Chart options** item on the left.
 
-	**Figure 8. The options when setting the Chart functionalities**
-
-	![Grid options](images/scaffolding/kendo_ui_chart2.png)
+	![The options when setting the Chart functionalities](images/scaffolding/kendo_ui_chart2.png)
 
 	This screen contains the Chart functionalities that you can configure before scaffolding:
 	* **Data Binding Type**&mdash;Remote or Local.
@@ -107,15 +87,11 @@ On the next screen, you are presented with the Model and Data Context options.
 	* **Show Tooltip**&mdash;Show the tooltip.
 	* **Show Legend**&mdash;Show a legend. The available options are `Bottom` and `Top`.
 
-	**Figure 9. The legend options**
-
-	![Legend options](images/scaffolding/legend.png)
+		![The legend options](images/scaffolding/legend.png)
 
 	* **Series Type**&mdash;Select the series type. Each series type shows different **Series Options** configuration.
 
-		**Figure 10. The series options**
-
-		![Series options](images/scaffolding/series_options_1.png)
+		![The series options](images/scaffolding/series_options_1.png)
 
 	* **Add More Series**&mdash;Add one additional configuration panel for a series.
 

@@ -23,8 +23,6 @@ Using the CustomDataSource builder, even for small customizations, requires addi
 
 The following example demonstrates how to convert a regular [Grid](http://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
 
-###### Example
-
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .DataSource(dataSource => dataSource
@@ -40,8 +38,6 @@ The following example demonstrates how to convert a regular [Grid](http://demos.
     )
 
 The following example demonstrates how the CustomDataSourceBuilder equivalent.
-
-###### Example
 
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
@@ -82,8 +78,6 @@ The following example demonstrates how the CustomDataSourceBuilder equivalent.
 To set a JavaScript function or object as an option for the DataSource, use the `ClientHandlerDescriptor` class.
 
 The following example demonstrates how to set a JavaScript function for the `Read` operation of the Scheduler by utilizing the `ClientHandlerDescriptor` type included in the `Kendo.Mvc` namespace. This class allows code rendering as-is, without the need of string wrapping. In this way the JavaScript functions and objects can be set to apply various options from the CustomDataSource.
-
-###### Example
 
     @(Html.Kendo().Scheduler<MeetingViewModel>()
         .Name("scheduler")
@@ -129,8 +123,6 @@ The following example demonstrates how to set a JavaScript function for the `Rea
 ### Model Fields Setup as Functions
 
 The following example demonstrates how to set the default value of the `EmployeeID` field to a JavaScript function. This is applicable in the cases where the default value should be dynamic. For instance, a case when the user inserts a new record while the `EmployeeID` column specifies a filter value different from the default one.
-
-###### Example
 
     @(Html.Kendo().Grid<ForeignKeyColumnDemo.Models.Order>()
         .Name("grid")
@@ -184,8 +176,6 @@ The following example demonstrates how to set the default value of the `Employee
 The following example demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data.
 
 To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
-
-###### Example
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
         .Name("Grid")    
@@ -246,8 +236,6 @@ The following example demonstrates how to bind the Grid to the oData service.
 
 To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
 
-###### Example
-
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -280,8 +268,6 @@ To see the full demo, refer to the [introductory article on Telerik UI for ASP.N
 The following example demonstrates how to use the CustomDataSource builder to bind the Grid wrapper to oData v4 service.
 
 To see the full demo, refer to this [Grid how-to example]({% slug howto_useodata4webapicontroller_gridaspnetmvc %}).
-
-###### Example
 
     @(Html.Kendo().Grid<KendoUIMVC5.Models.Product>()
         .Name("products")

@@ -47,8 +47,6 @@ The boilerplate has an HTML page, a layout, the Northwind database, and some ser
 
 1. Using the package manager console, run the command below.
 
-    ###### Example
-
         PM> Install-Package KendoQsBoilerplate
 
     Alternatively, you can use the GUI package manager.
@@ -62,9 +60,7 @@ The boilerplate has an HTML page, a layout, the Northwind database, and some ser
     ![](images/chapter1/nuget-gui2.jpg)
 
 1. Click **Install** to continue.
-
 1. When the package installs, you may be prompted to accept a license agreement for the NorthwindDB. Click **I Accept** to continue.
-
 1. It is normal for the quick start boilerplate to overwrite existing files. When prompted with a file conflict, choose **Yes to All**.
 
     ![](images/chapter1/file-conflict.jpg)
@@ -82,7 +78,6 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 #### Exercise: Convert to a Telerik Application
 
 1. Stop the application if it is already running.
-
 1. In the Solution Explorer, right-click the project name and select **Telerik UI for ASP.NET MVC** > **Convert to Telerik Application**. This will launch the **Project Configuration** wizard. From here you can choose settings for your Telerik project.
 
     ![](images/chapter1/convert-to-telerik1.jpg)
@@ -96,12 +91,8 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
     ![](images/chapter1/convert-to-telerik3.jpg)
 
 1. Open `\Views\Shared\_Layout.cshtml`. Find and remove the `@Scripts.Render("~/bundles/modernizr")` script bundle. This script is included with the Kendo UI assets.
-
 1. Next, find the CSS `@Styles.Render("~/Content/css")` bundle and move it just above the closing head tag `</head>`. This will ensure that the custom styles are applied when you customize the application.
-
 1. The final code of the head section should look like the one shown in the example below.
-
-    ###### Example
 
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,8 +111,6 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
             <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
             @Styles.Render("~/Content/css")
 
-> **Tip**
->
 > Because the **Convert to Telerik application**, **Upgrade Project**, or **Configure Project** wizards modify the `_Layout.cshtml` file, make sure you check the position of the custom CSS declarations afterwards.
 
 Now that your app is ready for development. Let's add some simple input components to create a nice user experience.
@@ -155,8 +144,6 @@ The widget options are exposed via a fluent interface.
 
 Below is an example of how a NumericTextBox input is created.
 
-###### Example
-
     @(Html.Kendo().NumericTextBox()
         .Name("name") // set the name of the NumericTextBox
         .Value(10) //set the value
@@ -169,22 +156,16 @@ Below is an example of how a NumericTextBox input is created.
 
 Let's open the `Index.cshtml` page under the folder `views/home/`. The `Index.cshtml` page is where most of the application's UI lives. This page currently contains basic HTML inputs to collect date input from the user. To provide a better user experience, replace the standard HTML inputs with Kendo UI date picker controls. The Kendo UI date picker controls offer users a flyout calendar to choose a desired date.
 
-> **Note**
->
 > The Kendo UI DatePicker control is touch and mouse friendly. No additional code is necessary to support tablets and phones.
 
 #### Exercise: Replace StatsFrom and StatsTo TextBoxes with Kendo UI Date Pickers
 
 1. Open `Views/Home/Index.cshtml` and find the `StatsFrom` text box helper.
 
-    ###### Example
-
         <!-- Stats From Date Picker -->
     	@Html.TextBox("StatsFrom", new DateTime(1996, 1, 1))
 
 1. Replace the text box helper with a Kendo UI date picker. Set the `Name` property to `StatsFrom` and the `Value` with a new `DateTime` of `1996,1,1`.
-
-    ###### Example
 
     	<!-- Stats From Date Picker -->
     	@(Html.Kendo().DatePicker()
@@ -194,14 +175,10 @@ Let's open the `Index.cshtml` page under the folder `views/home/`. The `Index.cs
 
 1. Find the `StatsTo` text box helper.
 
-    ###### Example
-
     	<!-- Stats To Date Picker -->
     	@Html.TextBox("StatsTo", new DateTime(1996, 1, 1))
 
 1. Replace the text box helper with a Kendo UI DatePicker. Set the `Name` property to `StatsTo` and the `Value` with a new `DateTime` of `1998,8,1`.
-
-    ###### Example
 
     	<!-- Stats To Date Picker -->
     	@(Html.Kendo().DatePicker()
@@ -230,14 +207,10 @@ In this chapter, you'll learn how to add leverage Telerik UI for ASP.NET MVC sca
 
 A copy of the Northwind database is included in the Kendo UI Quick Start Boilerplate. Before you begin scaffolding, make sure the Northwind database is upgraded. Having a working connection to the database is needed for the scaffolding wizard to work properly.
 
-> **Note**
->
 > Upgrading the database is only necessary for this guide because the database supplied must support multiple versions of SQL. Therefore, we chose the lowest database version possible.
 
 #### Exercise: Upgrade the Northwind Database
 
-> **Note**
->
 > If you do not have an SQL Server instance installed on your machine, you may need to install the SQL Server Express Edition from Microsoft. You can download the free installer [here](http://www.microsoft.com/en-us/server-cloud/products/sql-server-editions/sql-server-express.aspx).
 
 1. Using Visual Studio's **Server Explorer**, expand **DataConnections**, and right-click **NorthwindDB** > **Modify Connection**.
@@ -346,8 +319,6 @@ In this chapter you will modify the scaffolded Grid code to further customize th
 
 As you may have noticed in the scaffolding wizard, the Grid is a versatile component with many options. The options for the Grid are set using the server-side HTML wrapper. Take a close look at the code generated by the Scaffolder in `/Views/Invoices/Index.cshtml`. Below is a breakdown with additional comments of what each configuration method is used for. Also, note that the fluent API chain can be extended to include further options and there is no strict order in which the options are defined.
 
-###### Example
-
         @(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>() // Kendo UI Grid Wrapper
             // Name, also HTML elements "id" attribute
             .Name("grid")
@@ -382,17 +353,12 @@ As you may have noticed in the scaffolding wizard, the Grid is a versatile compo
             )
         )
 
-> **Tip**
->
 > If you find the comments above useful, feel free to copy them into your project. Comments are completely valid inside the Fluent API chain.
 
 #### Exercise: Modify the Grid's Name Property
 
 1. Change the Grid's `Name` from `"grid"` to `"EmployeeSales"`. This is an important step since the `Name` property of all Telerik UI for MVC wrappers set the `id` attribute of the rendered Kendo UI widget.
-
 1. Find the `.Name` method and change the value from `"grid"` to `"EmployeeSales"`.
-
-    ###### Example
 
     	@(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>()
     	      .Name("grid")
@@ -401,9 +367,7 @@ As you may have noticed in the scaffolding wizard, the Grid is a versatile compo
 
     The resulting code should look like the one in the example below.
 
-    ###### Example
-
-        @(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>()
+       @(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>()
     	      .Name("EmployeeSales")
     		  ...
     	)
@@ -413,12 +377,9 @@ As you may have noticed in the scaffolding wizard, the Grid is a versatile compo
 #### Exercise: Add the Grid to the Dashboard
 
 1. Ensure the application's layout is not repeated. Set the `Layout` of the view to `null`. Skipping this step will result in duplicate scripts which could cause the page to load improperly.
-
 1. At the top of `/Views/Invoices/Index.cshtml`, add `@{ Layout = null;}`.
 
     The resulting code should be like the one in the example below.
-
-    ###### Example
 
     	@{ Layout = null;}
         @(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>()
@@ -428,20 +389,15 @@ As you may have noticed in the scaffolding wizard, the Grid is a versatile compo
 
 1. Add the grid as a child action. Open `/Home/Index.cshtml`, locate the `<!-- Invoices -->` placeholder, and replace it with the `@Html.Action("Index","Invoice")` child action.
 
-    ###### Example
-
     	<!-- Invoices -->
         @Html.Ipsum().table(5, 3, "d,t,n", new { @class = "table table-striped table-bordered" })
 
     The resulting code should be like the one in the example below.
 
-    ###### Example
-
         <!-- Invoices -->
     	@Html.Action("Index","Invoice")
 
 1. Run the project and visit the dashboard page `/Home/Index` in the browser. Take a moment to interact with the grid's sorting, paging, and exporting features.
-
 1. Currently, the data in the **Order Date** Grid column is verbose and looks like `Mon Aug 25 1997 00:00:00 GMT-0400 (Eastern Daylight Time)`. This isn't very user-friendly, let's change that. The Grid's data can easily be formatted by adding the `.Format` property chain to any column. Use the `MM/dd/yyyy` Date Format on the `OrderDate` column using the `.Format` method.
 
 #### Exercise: Customize the Order Date Column Formatting
@@ -450,15 +406,11 @@ You can keep the application running while performing this exercise.
 
 1. Open `/Views/Invoice/Index.cshtml` and find the `OrderDate` column property.
 
-    ###### Example
-
         columns.Bound(c => c.OrderDate);
 
 1. Set the `OrderDate` column's `Format` property to `"{0:MM/dd/yyyy}"` to apply the format to the column.
 
     The resulting code should be like the one in the example below.
-
-    ###### Example
 
     	columns.Bound(c => c.OrderDate).Format("{0:MM/dd/yyyy}");
 
@@ -478,8 +430,6 @@ The purpose of [Kendo UI ListView](http://docs.telerik.com/kendo-ui/controls/dat
 
 The ListView is designed to put you back in control when it comes to displaying data. It does not provide a default rendering of data-bound items, but, instead, relies entirely on templates to define how a list of items&mdash;including alternating items and items being edited&mdash;is displayed.
 
-###### Example
-
     @(Html.Kendo().ListView(Model) //The listview will be initially bound to the Model which is the Products table
             .Name("productListView") //The name of the listview is mandatory. It specifies the "id" attribute of the widget.
             .TagName("div") //The tag name of the listview is mandatory. It specifies the element which wraps all listview items.
@@ -495,34 +445,22 @@ Use a ListView to create a selectable list of employees containing the employee'
 #### Exercise: Add a ListView to the Dashboard
 
 1. Since you will need to update the `HomeController`, stop the project if it is already running.
-
 1. Open `/Views/Home/Index.cshtml` and find the `<!-- Employee List View -->` placeholder.
-
 1. Remove the `<ul>` and its child elements that follow `<!-- Employee List View -->`.
-
 1. Now add a Kendo UI ListView of type `KendoQsBoilerplate.Employee` using the `@(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()` Fluent HTML Helper.
-
 1. Set the `Name` property to `"EmployeesList"`.
-
-    ###### Example
 
         .Name("EmployeesList")
 
 1. Set the `ClientTemplateId` property to `"EmployeeItemTemplate"`. The template `EmployeeItemTemplate` will be created later in the exercise.
 
-    ###### Example
-
         .ClientTemplateId("EmployeeItemTemplate")
 
 1. Set the `TagName` property to `"ul"`. The `TagName` is the element type that will wrap the ListView items when the control is rendered. In this case, we're creating an unordered list element.
 
-    ###### Example
-
         .TagName("ul")
 
 1. Set the `DataSource` read action to `"EmployeeList_Read"` and the controller to `"Home"`. The action will be created later in the exercise.
-
-    ###### Example
 
         .DataSource(dataSource =>
         {
@@ -531,13 +469,9 @@ Use a ListView to create a selectable list of employees containing the employee'
 
 1. Set the select mode by setting the `Selectable` property to `ListViewSelectionMode.Single`.
 
-    ###### Example
-
         .Selectable(s => s.Mode(ListViewSelectionMode.Single))
 
     The resulting code should look like the one in the example below.
-
-    ###### Example
 
     	<!-- Employee List View -->
     	@(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()
@@ -559,22 +493,16 @@ Now that the ListView is defined, you'll need to supply the datasource with the 
 
     At the top of the file you should have the statements as shown in the example below.
 
-    ###### Example
-
     	using Kendo.Mvc.UI;
     	using Kendo.Mvc.Extensions;
 
 1. Now, create an `ActionResult` named `EmployeesList_Read` that accepts a `DataSourceRequest` parameter. The parameter of type `DataSourceRequest` will contain the current ListView request information. Decorate that parameter with the `DataSourceRequestAttribute` which is  responsible for populating the `DataSourceRequest` object.
-
-    ###### Example
 
         public ActionResult EmployeesList_Read([DataSourceRequest]DataSourceRequest request)
         {
         }
 
 1. Use entity framework to query a list of employees, ordered by `FirstName` from the database and return the result as `Json` using the `.ToDataSourceResult` extension method. The method will format the data to be consumed by the ListView.
-
-    ###### Example
 
         public ActionResult EmployeesList_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -598,8 +526,6 @@ There are three ways to use the hash syntax:
 - Use HTML encoding to display values: `#: #`.
 - Execute arbitrary JavaScript code: `# if (true) { # ... non-script content here ... # } #`.
 
-###### Example
-
     <script type="text/x-kendo-template" id="myTemplate">
         #if(isAdmin){#
             <li>#: name # is Admin</li>
@@ -611,12 +537,9 @@ There are three ways to use the hash syntax:
 #### Exercise: Create the ListView Template for Showing Employees
 
 1. Open `/Views/Home/Index.cshtml` and find the `<!-- Kendo Templates -->` placeholder.
-
 1. After `<!-- Kendo Templates -->`, add a new `<script>` element of `type` `"text/x-kendo-tmpl"` with an `id` of `EmployeeItemTemplate`
 
     The resulting code should be like the one shown below.
-
-    ###### Example
 
     	<!-- Kendo Templates -->
     	<script type="text/x-kendo-tmpl" id="EmployeeItemTemplate">
@@ -624,12 +547,9 @@ There are three ways to use the hash syntax:
     	<!-- /Kendo Templates -->
 
 1. Inside the template, create a `<li>` and set the class to `employee`.
-
 1. Add a `<div>` element inside the `<li>`. Inside the `<div>`, add an image that corresponds to the `EmployeeId` by setting the `src` to `"@(Url.Content("~/content/employees/"))#:EmployeeId#-t.png"` and a `<span>` with the template field `#: FullName #`.
 
     The resulting code should be like the one shown below.
-
-    ###### Example
 
     	<!-- Kendo Templates -->
     	<script type="text/x-kendo-tmpl" id="EmployeeItemTemplate">
@@ -646,7 +566,7 @@ There are three ways to use the hash syntax:
 
 If everything was done correctly, the ListView should look like the one shown below.
 
-![employee list view](images/chapter5/employee-list.jpg)
+![The Employee ListView](images/chapter5/employee-list.jpg)
 
 At this point you can select items from the list, but before the dashboard can become truly interactive you'll need to work with the client-side APIs.
 
@@ -659,8 +579,6 @@ The client side is where Kendo UI really shines. Kendo UI uses a common JavaScri
 #### Overview
 
 Telerik UI for MVC helpers provide an Events method that is part of the HTML Helper's property chain. The `events` method is used to set event handlers for the Kendo UI widget. Each widget has a variety of events that can be handled including: `cancel`, `change`, `dataBound`, `dataBinding`, `edit`, `remove`, and `save`.
-
-###### Example
 
     @(Html.Kendo().ListView<ProductViewModel>()
             .Name("listView")
@@ -681,8 +599,6 @@ Let's continue to work with the `EmployeesList` that was created in the previous
 
 1. Find the `EmployeeList`.
 
-    ###### Example
-
     	<!-- Employee List View -->
     	@(Html.Kendo().ListView<Employee>()
                 .Name("EmployeesList")
@@ -692,8 +608,6 @@ Let's continue to work with the `EmployeesList` that was created in the previous
 
 1. Add an event handler named `onListDataBound` for the `DataBound` event for the EmployeeList.
 
-    ###### Example
-
     	@(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()
     		...
     		.Selectable(s => s.Mode(ListViewSelectionMode.Single))
@@ -701,8 +615,6 @@ Let's continue to work with the `EmployeesList` that was created in the previous
     	)
 
     The resulting code should be like the one shown below.
-
-    ###### Example
 
     	<!-- Employee List View -->
     	@(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()
@@ -720,8 +632,6 @@ Let's continue to work with the `EmployeesList` that was created in the previous
 
 1. In the same view, find the `Scripts` section.
 
-    ###### Example
-
     	@section Scripts {
     	    <script>
     	        //Custom Scripts
@@ -729,10 +639,7 @@ Let's continue to work with the `EmployeesList` that was created in the previous
     	}
 
 1. In the `<script>` element, add a function `onListDataBound`.
-
 1. Select the first element by calling the `.select` function on the ListView `this` object and pass in the first employee element using the jQuery selector `$(".employee:first")`.
-
-    ###### Example
 
     	@section Scripts {
     	    <script>
@@ -745,15 +652,13 @@ Let's continue to work with the `EmployeesList` that was created in the previous
 
 1. Refresh the page to see that the first item in the list is selected by default.
 
-    ![employee list selected](images/chapter6/employee-list-selected.jpg)
+    ![Selecting the Eemployee list](images/chapter6/employee-list-selected.jpg)
 
 Selecting the first item using the `DataBound` event was a good start. Next we'll take it a step further by using the selected item to populate a Kendo UI template showing the selected employee on the dashboard.
 
 #### Exercise: Use the Change Event to Populate Templates
 
 1. Add an event handler named `onCriteriaChange` for the `Change` event for the `EmployeeList`.
-
-    ###### Example
 
     	@(Html.Kendo().ListView<Employee>()
     			...
@@ -764,15 +669,11 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
 
 1. Find the `<!-- Kendo Templates -->` placeholder.
 
-    ###### Example
-
     	<!-- Kendo Templates -->
     		...
     	<!-- /Kendo Templates -->
 
 1. Add a new template that will display the selected employee's image and full name.
-
-    ###### Example
 
     	<!-- Kendo Templates -->
     	<script type="text/x-kendo-tmpl" id="employeeAvatarTemplate">
@@ -782,15 +683,11 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
 
 1. Find the `<script>` section.
 
-    ###### Example
-
     	<script>
     		...
         </script>
 
 1. Add a function named `getSelectedEmployee` that returns the selected employee from the `EmployeeList`.
-
-    ###### Example
 
     	function getSelectedEmployee() {
         	var employeeList = $("#EmployeesList").data("kendoListView"),
@@ -799,8 +696,6 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
     	}
 
 1. Add a function named `updateEmployeeAvatar` that binds the selected employee data to the `employeeAvatarTemplate` and places the template's content in the `employee-about` element.
-
-    ###### Example
 
     	function updateEmployeeAvatar() {
             var employee = getSelectedEmployee(),
@@ -812,19 +707,15 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
 
 1. Add a function named `onCriteriaChange`. This function will handle the `Change` event and call `updateEmployeeAvatar`.
 
-    ###### Example
-
     	function onCriteriaChange() {
             updateEmployeeAvatar();
     	}
 
 1. Refresh the page and select an employee from the `EmployeeList`. Selecting an item should update the dashboard with the selected employee's data.
 
-    ![selected item to template](images/chapter6/selected-item-to-template.jpg)
+    ![Selecting an item to template](images/chapter6/selected-item-to-template.jpg)
 
 1. Find and remove the `<!-- Employee Avatar -->` placeholder code, it is no longer needed because the element is created dynamically. Remove the code shown in the example below.
-
-    ###### Example
 
          <!-- Employee Avatar -->
          @Html.Placehold(90, 90, "Face")
@@ -860,8 +751,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. In the `/Views/Home/Index.cshtml` view, find the scripts section.
 
-    ###### Example
-
     	<script>
     		...
         </script>
@@ -869,8 +758,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 1. Add a function named `getEmployeeFilter` that gets the `employeeId`, `salesPerson`, `statsFrom` and `statsTo` values and returns a JSON object.
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
         function getEmployeeFilter() {
             var employee = getSelectedEmployee(),
@@ -888,8 +775,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. In the `/Views/Invoice/Index.cshtml` view, find the `EmployeeSales` grid.
 
-    ###### Example
-
     	@(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>()
     	      .Name("EmployeeSales")
     		  ...
@@ -902,8 +787,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. On the grid's `DataSource` property, set the `Data` property to `getEmployeeFilter`. The `Data` property supplies additional data to the server. In this case the data is our filter parameters.
 
-    ###### Example
-
         .DataSource(dataSource => dataSource
                     .Ajax()
                     .Read(read => read.Action("Invoices_Read", "Invoice")
@@ -913,8 +796,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 1. Add the property `AutoBind` to the end of the property chain and set the value to `false`. Setting `AutoBind` to `false` tells the Telerik UI for MVC that the datasource's `Read` action is invoked manually on the client.
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
     	@(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>()
     	      .Name("EmployeeSales")
@@ -930,16 +811,12 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. In the `/Views/Home/Index.cshtml` view, add a function named `refreshGrid`. This function will invoke the grid's `Read` action.
 
-    ###### Example
-
     	function refreshGrid() {
             var employeeSales = $("#EmployeeSales").data("kendoGrid");
             employeeSales.dataSource.read();
         }
 
 1. Find the `onCriteriaChange` function and add a call to the `refreshGrid` function. This will cause the Grid's data to refresh whenever the employee selection changes.
-
-    ###### Example
 
     	function onCriteriaChange() {
             updateEmployeeAvatar();
@@ -949,8 +826,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
     Next, we'll need to update the grid's `Read` action to apply the filter using Entity Framework.
 
 1. Open `Controllers/InvoiceController.cs` and find the `Invoices_Read` action.
-
-    ###### Example
 
         public ActionResult Invoices_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -970,8 +845,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. Add the `salesPerson`, `statsFrom` and `statsTo` parameters to the action.
 
-    ###### Example
-
         public ActionResult Invoices_Read([DataSourceRequest]DataSourceRequest request,
             string salesPerson,
             DateTime statsFrom,
@@ -980,8 +853,6 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 1. Using the parameter values, filter the invoices using a `Where` LINQ query.
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
         public ActionResult Invoices_Read([DataSourceRequest]DataSourceRequest request,
             string salesPerson,
@@ -1013,16 +884,12 @@ At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`.
 
 1. In the `/Views/Home/Index.cshtml` view, find the StatsFrom DatePicker.
 
-    ###### Example
-
         @(Html.Kendo().DatePicker()
                         .Name("StatsFrom")
                         .Value(new DateTime(1996, 1, 1))
     	)
 
 1. Add the `Events` property and set the `Change` event to `onCriteriaChange`.
-
-    ###### Example
 
         @(Html.Kendo().DatePicker()
                         .Name("StatsFrom")
@@ -1031,8 +898,6 @@ At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`.
     	)
 
 1. Find the `StatsTo` DatePicker, set the `Events` property, and set the `Change` event to `onCriteriaChange`.
-
-    ###### Example
 
         @(Html.Kendo().DatePicker()
     			        .Name("StatsTo")
@@ -1056,8 +921,6 @@ The component offers a variety of chart types such as area, bar, line, scatter, 
 
 The Chart HtmlHelper extension is a server-side wrapper for the Kendo UI Chart widget.
 
-###### Example
-
     @(Html.Kendo().Chart(Model) // The chart will be bound to the Model which is the InternetUsers list
         .Name("internetUsersChart") // The name of the chart is mandatory. It specifies the "id" attribute of the widget.
         .Title("Internet Users")
@@ -1079,12 +942,8 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 #### Exercise: Add a Bullet Series Chart
 
 1. Since changes to the controller are necessary, stop the application if it is running.
-
 1. Use partials to keep the markup tidy. Under `Views/Home/`, add a new empty partial view `_QuarterToDateSales.cshtml`.
-
 1. In the new partial `_QuarterToDateSales.cshtml` view, add a new Kendo UI Chart helper of type `QuarterToDateSalesViewModel`. The `QuarterToDateSalesViewModel` is part of the quick start boilerplate.
-
-    ###### Example
 
     	@(Html.Kendo().Chart<KendoQsBoilerplate.QuarterToDateSalesViewModel>()
 
@@ -1092,13 +951,9 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 
 1. Set the `Name` property to `EmployeeAverageSales`.
 
-    ###### Example
-
         .Name("EmployeeQuarterSales")
 
 1. Using the `.HtmlAttributes` property, set the controls height to `30px`.
-
-    ###### Example
 
         .HtmlAttributes(new { style = "height:30px;" })
 
@@ -1107,8 +962,6 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
     - Set the current value to the `Current` property on the model.
     - Set the target value to the `Target` property on the model.
 
-    ###### Example
-
         .Series(series =>
         {
             series.Bullet(model => model.Current, model => m.Target);
@@ -1116,16 +969,11 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 
 1. Next, add and configure the `CategoryAxis`. Since the chart will be a spark line visualization, set the `Visible` and `MajorGridLines` properties to `false`.
 
-    ###### Example
-
-
          .CategoryAxis(ca => ca.Labels(lab => lab.Visible(false))
              .MajorGridLines(m => m.Visible(false)).Visible(false)
          )
 
 1. Next, add and configure the `ValueAxis` with a Numeric configuration. Since the chart will be a spark line visualization, set the `Labels`, `MajorGridLines`, and `MajorTicks` `Visible` properties to `false` to disable them.
-
-###### Example
 
      .ValueAxis(va => va.Numeric()
          .Labels(lab => lab.Visible(false))
@@ -1135,23 +983,15 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 
 1. Also set the `Legend` to `false`.
 
-###### Example
-
     .Legend(leg => leg.Visible(false))
 
 1. Configure the `DataSource` by setting `Read` to the action `EmployeeQuarterSales` on the `Home` controller.
-
 1. Using the `Data` property, set the value to `getEmployeeFilter` sending filter data back to the `Read` action.
-
 1. Since the DataSource will be invoked manually, set `AutoBind` to `false`.
-
-    ###### Example
 
         .AutoBind(false)
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
         @(Html.Kendo().Chart<KendoQsBoilerplate.QuarterToDateSalesViewModel>()
             .Name("EmployeeQuarterSales")
@@ -1176,10 +1016,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
         )
 
 1. Open `controllers/HomeController.cs` and create a controller action named `EmployeeAverageSales` on the `Home` controller. This action will supply the Chart with data.
-
 1. The boilerplate installed in the **Getting Up and Running** chapter has a function named `EmployeeQuarterSales`. This query will select the data required for the chart. Return the results of `EmployeeQuarterSalesQuery` as JSON.
-
-    ###### Example
 
     	public ActionResult EmployeeQuarterSales(int employeeId, DateTime statsTo)
         {
@@ -1191,17 +1028,12 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
         }
 
 1. Add the partial view to the main application page.
-
 1. In `Views/Home/Index.cshtm`, find the `<!-- QTD Sales Chart -->` placeholder.
-
-    ###### Example
 
     	<!-- QTD Sales Chart -->
     	@Html.Placehold(430, 120, "Chart")
 
 1. Replace the placeholder with the `_QuarterToDateSales` partial.
-
-    ###### Example
 
     	<!-- QTD Sales Chart -->
         @Html.Partial("_QuarterToDateSales")
@@ -1209,15 +1041,11 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 <!--_-->
 1. Find the scripts section. Add a new function named `refreshEmployeeQuarterSales`, this function will invoke `read` on the chart's DataSource.
 
-    ###### Example
-
     	<script>
     		...
     	</script>
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
         function refreshEmployeeQuarterSales() {
             var employeeQuarterSales = $("#EmployeeQuarterSales").data("kendoChart");
@@ -1225,8 +1053,6 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
         }
 
 1. Find and modify the `onCriteriaChanged` function so it calls `refreshGrid` updating the entire dashboard when a filter is changed.
-
-    ###### Example
 
         function onCriteriaChange() {
             updateEmployeeAvatar();
@@ -1247,12 +1073,8 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 #### Exercise: Trigger the Grid DataSource from a DatePicker Event
 
 1. Since changes to the controller are necessary, stop the application if it is running.
-
 1. Use partials to keep the markup tidy. Under `Views/Home`, add a new empty partial view `_MonthlySalesByEmployee.cshtml`.
-
 1. In the new partial `_MonthlySalesByEmployee.cshtml` view, add a new Kendo UI Chart helper.
-
-    ###### Example
 
     	@(Html.Kendo().Chart<KendoQsBoilerplate.MonthlySalesByEmployeeViewModel>()
 
@@ -1260,13 +1082,9 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Set the `Name` property to `EmployeeAverageSales`.
 
-    ###### Example
-
         .Name("EmployeeAverageSales")
 
 1. Set the controls height to `30px`.
-
-    ###### Example
 
         .HtmlAttributes(new { style = "height:30px;" })
 
@@ -1277,8 +1095,6 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
      - Disable markers by setting the `Markers` visible property to `false`.
      - Set the tooltip using an inline Kendo UI Template `#=kendo.toString(value, 'c2')#`.
 
-    ###### Example
-
         .Series(series =>
         {
             series.Line(model => model.EmployeeSales)
@@ -1288,10 +1104,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
         })
 
 1. Next, add and configure the `CategoryAxis` with a `Date` configuration. Set the Category to the `Date` field of the view model.
-
 1. Since the chart will be a formatted like a [sparkline](https://en.wikipedia.org/wiki/Sparkline), set the `Axis` and `MajorGridLines` `Visible` properties to `false` to disable them.
-
-    ###### Example
 
          .CategoryAxis(ca => ca
              .Date()
@@ -1301,10 +1114,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
          )
 
 1. Next, add and configure the `ValueAxis` with a Numeric configuration.
-
 1. Set the `Axis`, `Visible`, and `MajorGridLines` properties to `false` to disable them.
-
-    ###### Example
 
          .ValueAxis(va => va.Numeric()
              .Visible(false)
@@ -1314,17 +1124,11 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Also set the `Legend` to `false`.
 
-    ###### Example
-
         .Legend(leg => leg.Visible(false))
 
 1. Configure the `DataSource` by setting `Read` to the action `EmployeeAverageSales` on the `Home` controller.
-
 1. Using the `Data` property, set the value to `getEmployeeFilter` sending filter data back to the `Read` action.
-
 1. Add an `Aggregates` on the DataSource to `Average` the `EmployeeSales`.
-
-    ###### Example
 
         .DataSource(ds => ds
             .Read(read => read.Action("EmployeeAverageSales", "Home")
@@ -1334,13 +1138,9 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Since the DataSource will be invoked manually, set `AutoBind` to `false`.
 
-    ###### Example
-
         .AutoBind(false)
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
         @(Html.Kendo().Chart<KendoQsBoilerplate.MonthlySalesByEmployeeViewModel>()
             .Name("EmployeeAverageSales")
@@ -1375,10 +1175,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
         )
 
 1. Open `controllers/HomeController.cs` and create a controller action named `EmployeeAverageSales` on the `Home` controller. This action will supply the Chart with data.
-
 1. The boilerplate installed in the **Getting Up and Running** chapter has a function named `EmployeeAverageSalesQuery`. This query will select the data required for the chart. Return the results of `EmployeeAverageSalesQuery` as JSON.
-
-    ###### Example
 
     	public ActionResult EmployeeAverageSales(
             int employeeId,
@@ -1392,14 +1189,10 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Add the partial view to the main application page. In `Views/Home/Index.cshtm` find the `<!-- Montly Sales Chart -->` placeholder.
 
-    ###### Example
-
     	<!-- Montly Sales Chart -->
     	@Html.Placehold(430, 120, "Chart")
 
 1. Replace the placeholder with the `_MonthlySalesByEmployee` partial.
-
-    ###### Example
 
     	<!-- Montly Sales Chart -->
     	@Html.Partial("_MonthlySalesByEmployee")
@@ -1407,15 +1200,11 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Find the scripts section and add a new function named `refreshEmployeeAverageSales`. This function will invoke `read` on the chart's data source.
 
-    ###### Example
-
     	<script>
     		...
     	</script>
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
     	function refreshEmployeeAverageSales() {
             var employeeAverageSales = $("#EmployeeAverageSales").data("kendoChart");
@@ -1423,8 +1212,6 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
         }
 
 1. Find and modify the `onCriteriaChanged` function so it calls `refreshGrid` updating the entire dashboard when a filter is changed.
-
-    ###### Example
 
     	function onCriteriaChange() {
             updateEmployeeAvatar();
@@ -1435,7 +1222,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Run the application to see the chart render on the dashboard. Change the filter criteria to see the chart update along with other UI elements.
 
-    ![Spark Line Chart](images/chapter8/spark-line-chart.jpg)
+    ![A Sparkline chart](images/chapter8/spark-line-chart.jpg)
 
 ### Client-Side API
 
@@ -1447,15 +1234,11 @@ Charts, like other Kendo UI widgets are easy to interact with on the client side
 
 1. In `Views/Home/Index.cshtm`, find the scripts section.
 
-    ###### Example
-
     	<script>
     		...
     	</script>
 
 1. Add a function named `onQuarterSalesDataBound`, find the first element of the datasource and displays the Current value in `EmployeeQuarterSalesLabel`.
-
-    ###### Example
 
         function onQuarterSalesDataBound(e) {
             var data = this.dataSource.at(0);
@@ -1463,8 +1246,6 @@ Charts, like other Kendo UI widgets are easy to interact with on the client side
         }
 
 1. Add a function named `onAverageSalesDataBound` find the `dataSource` aggregates and display the average of `EmployeeSales` in the `EmployeeAverageSalesLabel`.
-
-    ###### Example
 
     	function onAverageSalesDataBound(e) {
             var label = $("#EmployeeAverageSalesLabel"),
@@ -1479,8 +1260,6 @@ Charts, like other Kendo UI widgets are easy to interact with on the client side
 
 1. Open the partial view `_MonthlySalesByEmployee.cshtml` and add a `DataBound` event handler to the chart, set the event handler to `onQuarterSalesDataBound`.
 
-    ###### Example
-
         @(Html.Kendo().Chart<KendoQsBoilerplate.MonthlySalesByEmployeeViewModel>()
             ...
     	    .AutoBind(false)
@@ -1489,15 +1268,13 @@ Charts, like other Kendo UI widgets are easy to interact with on the client side
 
 1. Open the partial view `_QuarterToDateSales.cshtml` and add a `DataBound` event handler to the chart. Set the event handler to `onQuarterSalesDataBound`.
 
-    ###### Example
-
         @(Html.Kendo().Chart<KendoQsBoilerplate.QuarterToDateSalesViewModel>()
             ...
             .AutoBind(false)
             .Events(e => e.DataBound("onQuarterSalesDataBound"))
         )
 
-    ![Chart Client API](images/chapter8/chart-client-api.jpg)
+    ![The client API of the Chart](images/chapter8/chart-client-api.jpg)
 
 The Team Efficiency Dashboard is starting to look complete, but it hasn't been tested for devices like mobile phones or tablets yet. In the next chapter you'll use responsive web design techniques to support devices beyond the desktop.
 
@@ -1515,8 +1292,6 @@ Run the project and shrink the browser window horizontally to about 400 pixels w
 
 1. Open `Views/Invoice/Index.cshtml` and find where the `Columns` are defined in the `EmployeeSales` grid.
 
-    ###### Example
-
     	.Columns(columns =>
         {
             ...
@@ -1525,10 +1300,7 @@ Run the project and shrink the browser window horizontally to about 400 pixels w
     Remove the `Salesperson` column completely. The sales person is already displayed at the top of the page.
 
 1. Set the `MinScreenWidth` of the `CustomerName` column to `900`. This means that the column will no longer be displayed on screen sizes less than 900 pixels wide.
-
 1. Set the `MinScreenWidth` of the `ProductName` column to `768`. This means that the column will no longer be displayed on screen sizes less than 768 pixels wide.
-
-    ###### Example
 
     	.Columns(columns =>
         {
@@ -1541,7 +1313,7 @@ Run the project and shrink the browser window horizontally to about 400 pixels w
 
 1. Refresh the page, then shrink and grow the browser to different widths to see how the grid reacts at various sizes.
 
-    ![Responsive Grid](images/chapter9/responsive-grid.jpg)
+    ![A responsive Grid](images/chapter9/responsive-grid.jpg)
 
 ### Responsive Panel
 
@@ -1555,13 +1327,9 @@ When changing the screen size, you may have noticed the Report Range side bar di
 
 1. Add a `Content` property and include all of the elements until you reach the ending `<!-- /Menu Panel -->` placeholder.
 
-    > **Note**
-    >
     > The `at` symbol `@` is used as an escape charter for HTML content.
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
     	<!-- Menu Panel -->
     	    @(Html.Kendo().ResponsivePanel().Name("menuPanel").Breakpoint(768).Content(
@@ -1573,8 +1341,6 @@ When changing the screen size, you may have noticed the Report Range side bar di
 
 1. Remove `class="hidden-xs" style="float:left;"` from the `div` element in the newly added responsive panel.
 
-    ###### Example
-
     	<!-- Menu Panel -->
     	    @(Html.Kendo().ResponsivePanel().Name("menuPanel").Breakpoint(768).Content(
     	    @<div>
@@ -1584,10 +1350,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
         <!-- /Menu Panel -->
 
 1. Next, add a button for users to tap and toggle the responsive panel.
-
 1. Find the block of code shown in the example below.
-
-    ###### Example
 
     	<section id="app-title-bar" class="row">
     	    <div class="col-sm-3">
@@ -1604,11 +1367,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
     - `Icon: hbars`
     - `HtmlAttributes: new { @class = "k-rpanel-toggle" }`
 
-    > **Note**
-    >
     > Any element with the `k-rpanel-toggle` class will be able to toggle the current page's responsive panel.
-
-    ###### Example
 
     	<div class="hamburger">
     	    <!-- toggle button for responsive panel, hidden on large screens -->
@@ -1622,14 +1381,10 @@ When changing the screen size, you may have noticed the Report Range side bar di
 
 1. Open `Content/Site.css` and find the `/* Top Bar */` placeholder.
 
-    ###### Example
-
     	/* Top Bar */
 
 <!--*-->
 1. Add a style that selects the `hamburger` element and sets the `position` to `absolute`. Give the style a `top` of `5` and `left` of `5` to create a margin around the element.
-
-    ###### Example
 
     	.hamburger {
     	    position: absolute;
@@ -1639,8 +1394,6 @@ When changing the screen size, you may have noticed the Report Range side bar di
 
 1. Add a style that selects the `menuPanel`. Set a solid background color of `#fff` (white), include a `padding` of `10px` and `z-index` of `3`. This style will ensure that the panel appears above other UI elements and has a solid background.
 
-    ###### Example
-
     	#menuPanel {
     	    background-color: #fff;
     	    padding: 10px;
@@ -1648,9 +1401,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
     	}
 
 1. Run or refresh the application. Expand and contract the browser's width, notice the **Menu** button appear when the browser is small. Click the **Menu** button to open the panel. Click beside the panel to collapse it.
-
 1. For a better user experience, add a **Close** button to the panel so the interaction is discoverable and intuitive.
-
 1. Find the `menuPanel` and add a Kendo UI Button inside the Content's first `div`. Set the following button's properties:
 
     - `Name: menuPanelClose`
@@ -1659,8 +1410,6 @@ When changing the screen size, you may have noticed the Report Range side bar di
     - `HtmlAttributes: new { @class = "k-rpanel-toggle" }``
 
 1. Wrap the button in a `div` with a class of `text-right` to position the button on the right hand edge of the panel.
-
-    ###### Example
 
     	@(Html.Kendo().ResponsivePanel().Name("menuPanel").Breakpoint(768).Content(
         @<div>
@@ -1677,7 +1426,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
 
 1. Refresh the application. Expand and contract the browser's width until the **Menu** button is shown. Toggle the responsive panel using the **Menu** and **Close** buttons.
 
-    ![Responsive Grid](images/chapter9/responsive-panel.jpg)
+    ![A responsive Grid](images/chapter9/responsive-panel.jpg)
 
 The application is almost complete, just apply a nice bright theme and it will be ready to ship.
 
@@ -1690,33 +1439,21 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
 #### Exercise: Theme the Application
 
 1. If running, stop the project.
-
 1. In the Visual Studio's Project Explorer, right-click the project and choose **Telerik UI For MVC** > **Configure Project** from the menu.
-
 1. From the Project Configuration Wizard, choose the Nova theme.
-
 1. Open `Views/Shared/_Layout.cshtml` and move `@Styles.Render("~/Content/css")` just above the closing head tag `</head>`.
-
 1. Run the application to see the theme applied to the Kendo UI widgets.
-
 1. Next, you'll be finishing the theme by adding styles to non-Kendo UI elements creating a completely custom look. A style sheet was installed with the boilerplate to give you a jump-start. Add it to the application by opening `Views/Shared/_Layout.cshtml` and adding a reference to `~/Content/site-nova.css` just above the closing head tag `</head>`.
 
-    > **Note**
-    >
     > This is CSS, so the order in which the style sheets are added is very important.
-
-    ###### Example
 
         <link href="~/Content/site-nova.css" rel="stylesheet" />
 	</head>
 
 1. Refresh the application and notice the look is starting to come together. There's just a few items that could use some fine-tuning. Let's add some additional styles to `site-nova.css` to complete the theme.
-
 1. Open `site-nova.css` and find the `/* Side Panel - Employee List */`. Add a style that sets the date picker widgets inside the `menuPanel` to 100% width of the container.
 
     The resulting code should be like the one shown in the example below.
-
-    ###### Example
 
     	/* Side Panel - Employee List */
     	#menuPanel .k-widget.k-datepicker.k-header {
@@ -1724,29 +1461,23 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
     	}
 
     <!--*-->
-    ![Date Picker Width](images/chapter10/datepicker-width.jpg)
+    ![The DatePicker width](images/chapter10/datepicker-width.jpg)
 
 1. Add a style to offset the employee list so its content lines up with the left edge of its container.
-
-    ###### Example
 
     	#employee-list > ul {
         	margin: 0 -10px;
     	}
 
-    ![Date Picker Width](images/chapter10/list-view-container.jpg)
+    ![The :ListView container](images/chapter10/list-view-container.jpg)
 
 1. Find `/* Small Devices, Tablets, and Up */`. Here you'll find a media query that will hold some styles that are only applied to scree sizes above `768px`.
-
-    ###### Example
 
     	@media only screen and (min-width : 768px) {
 
     	}
 
 1. Inside the media query, add a selector for `.app-wrapper` and set a left margin of `-15` and set the `position` to `relative`. This style will align the app with the left hand edge of the screen.
-
-    ###### Example
 
     	/* Small Devices, Tablets, and Up */
     	@media only screen and (min-width : 768px) {
@@ -1761,8 +1492,6 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
 
 1. Finally, set the Kendo UI Chart themes. Open `_MontlySalesByEmployee.cshtml` and set the `Theme` property to `nova` on the `EmployeeAverageSales` chart.
 
-    ###### Example
-
     	@(Html.Kendo().Chart<KendoQsBoilerplate.MonthlySalesByEmployeeViewModel>()
             .Name("EmployeeAverageSales")
             ...
@@ -1772,8 +1501,6 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
     	)
 
 1. Open `_QuarterToDateSales.cshtml` and set the `Theme` property to `nova` on the `EmployeeQuarterSales` chart.
-
-    ###### Example
 
         @(Html.Kendo().Chart<KendoQsBoilerplate.QuarterToDateSalesViewModel>()
             .Name("EmployeeQuarterSales")

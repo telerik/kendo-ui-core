@@ -34,8 +34,6 @@ To initialize the Kendo UI ScrollView from HTML:
 * Use its `Items()` method.
 * Add HTML elements for each page as part of the content of the ScrollView items.
 
-###### Example
-
 ```
 <style>
     h1 {
@@ -64,8 +62,6 @@ To initialize the Kendo UI ScrollView with a Data Source and a template:
 1. Use the `TemplateId()` method to pass it and provide a DataSource.
 
 Make sure that the template provides the `pageSize` of the data source. If `serverPaging` is enabled, the ScrollView will request the data in advance so it becomes available before it is required, thus improving user experience. The Kendo UI ScrollView uses virtualization when it is bound to a data source and it only has three pages at all times&mdash;the current, the previous, and the next.
-
-###### Example
 
 ```
     @(Html.Kendo().ScrollView()
@@ -142,8 +138,6 @@ public class MyModel
 ```
 
 If you set the `PageSize` option to a larger value, you will need to use a loop in the template:
-
-###### Example
 
 ```
 <script id="scrollview-template" type="text/x-kendo-template">

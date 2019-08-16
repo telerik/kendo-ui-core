@@ -16,8 +16,6 @@ When logged in the Music Store as an administrator, an additional button titled 
 
 This code is located in `Scripts/App/storemanager-graphs.js`.
 
-> **Important**
->
 > Log in the Music Store as an administrator by using the `Owner` username and the `p@ssword123` password.
 
 ## HTML Setup
@@ -26,8 +24,6 @@ The page contains a date range selector that can be used to choose whether to vi
 
 The following example demonstrates the HTML that is used.
 
-###### Example
-
     <ul id="date-range" class="selector" ></ul>
     <h3>Overall Sales</h3>
     <div id="revenue-chart"></div>
@@ -35,8 +31,6 @@ The following example demonstrates the HTML that is used.
 ## Widget Initialization
 
 Start by setting up the DataSource for the **Revenue/Orders** chart.
-
-###### Example
 
     var revenueChartDataSource = new kendo.data.DataSource({
         transport: {
@@ -51,13 +45,9 @@ Start by setting up the DataSource for the **Revenue/Orders** chart.
         }
     });
 
-> **Important**
->
 > The data represented by these charts is generated randomly on the server. It was unreasonable to backfill a year's worth of orders into the SQL Local DB on startup.
 
 The grid is now initialized with this data.
-
-###### Example
 
     var createOrderRevenueChart = function () {
         $("#revenue-chart").kendoChart({
@@ -84,8 +74,6 @@ The grid is now initialized with this data.
 ### Specify the Series
 
 The chart contains two series. One is the total revenue per day. The other is the number of orders per day. They are defined in the `series: []` array property.
-
-###### Example
 
     series: [
           {
@@ -123,8 +111,6 @@ Each series is defined by an object that contains the properties listed below:
 
 The `valueAxis` property is set to an array of objects that represent the vertical axis on the chart. The number of items in the series and `valueAxis` arrays should be the same.
 
-###### Example
-
         valueAxis: [
             {
                 title: { text: "Revenue" },
@@ -142,8 +128,6 @@ The `valueAxis` property is set to an array of objects that represent the vertic
 The `name` property is the display value that will be placed alongside the vertical axis.
 
 The `categoryAxis` property is set to a single item that represents the horizontal axis.
-
-###### Example
 
         categoryAxis: {
             field: "Day",
@@ -165,8 +149,6 @@ The `axisCrossingValue` is an array that specified where each of the vertical ax
 ## Date Range Updates
 
 To facilitate selecting a date range to display on the chart, the examples use a Kendo UI ListView widget to display the available date ranges. First, define an array of the date ranges, using `date.js` to get ranges appropriate date ranges. The default selected item is also saved to a separate variable.
-
-###### Example
 
     var dateRanges = [{
         name: "Day",
@@ -197,8 +179,6 @@ To facilitate selecting a date range to display on the chart, the examples use a
 
 When you query the server for data, add the start and end date of the selected date range as query string parameters. To do this, override the `transport.parameterMap` on the DataSource, referencing the `selectedDateRange` in a closure.
 
-###### Example
-
     var revenueChartDataSource = new kendo.data.DataSource({
         transport: {
             ...
@@ -216,8 +196,6 @@ In the `parameterMap` function, we return an object that has `start` and `end` p
 
 The HTML element to hold the date range selector also needs to be set to a ListView widget, and the currently selected value set to the default date range.
 
-###### Example
-
     var dateRangeSelector = $("#date-range");
     dateRangeSelector.kendoListView({
         dataSource: dateRanges,
@@ -228,8 +206,6 @@ The HTML element to hold the date range selector also needs to be set to a ListV
     dateRangeSelector.data("kendoListView").select(dateRangeSelector.children()[1]);
 
 The ListView has `selectable: "single"` defined in its configuration, which puts the ListView into a selection mode where one item can be selected at a time. On selection change, the `change` event is triggered. This calls the `dateRangeChanged` function.
-
-###### Example
 
     var dateRangeChanged = function (e) {
         var data = this.dataSource.view();

@@ -19,16 +19,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for the populating of the `DataSourceRequest` object.
 
-    ###### Example
-
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
             IQueryable<Order> orders = new NorthwindEntities().Orders;
         }
 
 1. Assign a default `pageSize`.
-
-    ###### Example
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
@@ -41,8 +37,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Handle the appropriate data operations.
-
-    ###### Example
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
@@ -88,7 +82,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 orders = orders.OrderBy(o => o.OrderID);
             }
 
-            //Apply paging.
+            // Apply paging.
             if (request.Page > 0) {
                 orders = orders.Skip((request.Page - 1) * request.PageSize);
             }
@@ -96,8 +90,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 1. Calculate the total number of records.
-
-    ###### Example
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
@@ -107,34 +99,30 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
             IQueryable<Order> orders = new NorthwindEntities().Orders;
 
-            //Apply sorting (code omitted).
+            // Apply sorting (code omitted).
 
             //Calculate the total number of records before paging.
             var total = orders.Count();
 
-            //Apply paging.
+            // Apply paging.
 
             ViewData["total"] = total;
         }
 
 1. Pass the processed data to the View.
 
-    ###### Example
-
         public ActionResult Index([DataSourceRequest]DataSourceRequest request)
         {
-            //Get the data (code omitted).
-            //Apply sorting (code omitted).
+            // Get the data (code omitted).
+            // Apply sorting (code omitted).
             //Calculate the total number of records (code omitted).
 
-            //Apply paging (code omitted).
+            // Apply paging (code omitted).
 
             return View(orders);
         }
 
 1. Set `EnableCustomBinding(true)` through the Grid widget declaration.
-
-    ###### Example
 
         @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
@@ -151,8 +139,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         )
 
 1. If paging is enabled, assign the total number of records through the `DataSource`.
-
-    ###### Example
 
         @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
@@ -180,8 +166,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
 
-    ###### Example
-
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Order> orders = new NorthwindEntities().Orders;
@@ -189,13 +173,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Handle the appropriate data operations and calculate the total number of records.
 
-    ###### Example
-
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Order> orders = new NorthwindEntities().Orders;
 
-            //Apply sorting.
+            // Apply sorting.
 
             if (request.Sorts.Any())
             {
@@ -229,13 +211,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
             else
             {
-                //EF cannot page unsorted data.
+                // If cannot page unsorted data.
                 orders = orders.OrderBy(o => o.OrderID);
             }
 
             var total = orders.Count();
 
-            //Apply paging.
+            // Apply paging.
             if (request.Page > 0) {
                 orders = orders.Skip((request.Page - 1) * request.PageSize);
             }
@@ -244,53 +226,43 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Create a new instance of `DataSourceResult`. Set the `Data` and `Total` properties to the processed data and to the total number of records.
 
-    ###### Example
-
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
-            //Get the data (code omitted).
+            // Get the data (code omitted).
             IQueryable<Order> orders = new NorthwindEntities().Orders;
 
-            //Apply sorting (code omitted).
+            // Apply sorting (code omitted).
 
-            //Apply paging (code omitted).
+            // Apply paging (code omitted).
 
-            //Initialize  the DataSourceResult.
+            // Initialize the DataSourceResult.
             var result = new DataSourceResult()
             {
-                Data = orders, // Process data (paging and sorting applied)
-                Total = total // Total number of records
+                Data = orders, // Process data (paging and sorting applied).
+                Total = total // The total number of records.
             };
         }
 
 1. Return the `DataSourceResult` as JSON.
 
-    ###### Example
-
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
-            //Get the data (code omitted).
+            // Get the data (code omitted).
             IQueryable<Order> orders = new NorthwindEntities().Orders;
-
-            //Apply sorting (code omitted).
-
-            //Apply paging (code omitted).
-
-            //Initialize the DataSourceResult (code omitted).
-
+            // Apply sorting (code omitted).
+            // Apply paging (code omitted).
+            // Initialize the DataSourceResult (code omitted).
             var result = new DataSourceResult()
             {
                 Data = orders, // Process data (paging and sorting applied)
                 Total = total // Total number of records
             };
 
-            //Return the result as JSON.
+            // Return the result as JSON.
             return Json(result);
         }
 
 1. Configure the Grid for custom Ajax binding.
-
-    ###### Example
 
         @(Html.Kendo().Grid<KendoGridCustomAjaxBinding.Models.Order>()
             .Name("Grid")

@@ -18,10 +18,7 @@ The Scheduler HtmlHelper extension is a server-side wrapper for the [Kendo UI Sc
 Below are listed the steps for you to follow when configuring the Kendo UI Scheduler.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which inherits the `ISchedulerEvent` interface.
-
-    ###### Example
 
         public class Projection : ISchedulerEvent
         {
@@ -36,8 +33,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
         }
 
 1. Create a new action method which passes the `List` of projections to the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -112,11 +107,11 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function scheduler_dataBound(e) {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function scheduler_dataBinding(e) {
-            //Handle the dataBinding event.
+            // Handle the dataBinding event.
         }
     </script>
 ```
@@ -137,11 +132,11 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function scheduler_dataBound(e) {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function scheduler_dataBinding(e) {
-            //Handle the dataBinding event.
+            // Handle the dataBinding event.
         }
     </script>
 ```
@@ -149,8 +144,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 ### By Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Projection>()
         .Name("scheduler")
@@ -163,17 +156,16 @@ The following example demonstrates how to subscribe to events by a template dele
         .Events(e => {
             e.DataBound(@<text>
                 function (e) {
-                    //Handle the dataBound event.
+                    // Handle the dataBound event.
                 }
             </text>);
             e.DataBinding(@<text>
                 function (e) {
-                    //Handle the dataBinding event.
+                    // Handle the dataBinding event.
                 }
             </text>);
         })
     )
-
 
 ## Reset Series
 
@@ -187,12 +179,10 @@ If a series contains an exception, the Scheduler renders a **Reset Series** butt
 
 To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Scheduler for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Scheduler for ASP.NET MVC declaration.
     <script>
         $(function () {
-            //Notice that the Name() of the Scheduler is used to get its client-side instance.
+            // The Name() of the Scheduler is used to get its client-side instance.
             var scheduler = $("#scheduler").data("kendoScheduler");
         });
     </script>

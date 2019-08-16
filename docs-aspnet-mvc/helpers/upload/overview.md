@@ -15,10 +15,7 @@ The Upload HtmlHelper extension is a server-side wrapper for the [Kendo UI Uploa
 Below are listed the steps for you to follow when configuring the Kendo UI Upload.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -48,11 +45,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
 
 1. Implement the `Save` controller action.
 
-    ###### Example
-
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
         {
-            //The Name of the Upload component is "attachments".
+            // The name of the Upload component is "attachments".
             foreach (var file in attachments)
             {
                 //Some browsers send file names with a full path. You only care about the file name.
@@ -62,7 +57,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
                 file.SaveAs(destinationPath);
             }
 
-            //Return an empty string to signify success.
+            // Return an empty string to signify success.
             return Content("");
         }
 
@@ -86,11 +81,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function onUpload(e) {
-            //Handle the upload event.
+            // Handle the upload event.
         }
 
         function onSuccess() {
-            //Handle the success event.
+            // Handle the success event.
         }
     </script>
 ```
@@ -104,11 +99,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function onUpload(e) {
-            //Handle the upload event.
+            // Handle the upload event.
         }
 
         function onSuccess() {
-            //Handle the success event.
+            // Handle the success event.
         }
     </script>
 ```
@@ -117,19 +112,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().Upload()
         .Name("attachments")
         .Events(e => e
             .Upload(@<text>
             function() {
-                //Handle the upload event inline.
+                // Handle the upload event inline.
             }
             </text>)
             .Success(@<text>
             function() {
-                //Handle the success event inline.
+                // Handle the success event inline.
             }
             </text>)
         )
@@ -141,12 +134,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Upload instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Upload API](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Upload for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Upload for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Upload is used to get its client-side instance.
+            // The Name() of the Upload is used to get its client-side instance.
             var upload = $("#attachments").data("kendoUpload");
         });
     </script>

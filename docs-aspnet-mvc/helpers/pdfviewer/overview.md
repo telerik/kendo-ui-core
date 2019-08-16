@@ -38,7 +38,7 @@ While initializing the widget using the HTML helper, choose the PDF processing l
     </script>
 
     @(Html.Kendo().PDFViewer()
-        .Name("pdfviewer") //The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
         .PdfjsProcessing(pdf => pdf
             .File(Url.Content("~/Content/web/pdfViewer/sample.pdf"))
         )
@@ -52,7 +52,7 @@ While initializing the widget using the HTML helper, choose the PDF processing l
     </script>
 
     <%: Html.Kendo().PDFViewer()
-        .Name("pdfviewer") //The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
         .PdfjsProcessing(pdf => pdf
             .File(Url.Content("~/Content/web/pdfViewer/sample.pdf"))
         )
@@ -64,7 +64,7 @@ or using the [Telerik Document Processing library](https://docs.telerik.com/devt
 
 ```Razor
     @(Html.Kendo().PDFViewer()
-        .Name("pdfviewer") //The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
         .DplProcessing(dpl => {
             dpl.Read(r => r.Url(Url.Action("GetInitialPdf", "PdfViewer")));
             dpl.Upload(upload => upload.Url(Url.Action("GetPdf", "PdfViewer")).SaveField("file"));
@@ -83,7 +83,7 @@ or using the [Telerik Document Processing library](https://docs.telerik.com/devt
 ```
 ```ASPX
     <%: Html.Kendo().PDFViewer()
-        .Name("pdfviewer") //The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
         .DplProcessing(dpl => {
             dpl.Read(r => r.Url(Url.Action("GetInitialPdf", "PdfViewer")));
             dpl.Upload(upload => upload.Url(Url.Action("GetPdf", "PdfViewer")).SaveField("file"));

@@ -18,8 +18,6 @@ Make sure you are familiar with the fundamental Kendo UI widget concepts and tha
 
 The following example demonstrates how to initialize the ButtonGroup.
 
-###### Example
-
 ```Razor
 
         @(Html.Kendo().ButtonGroup()
@@ -47,8 +45,6 @@ The following example demonstrates how to initialize the ButtonGroup.
 
 The ButtonGroup provides the `.Icon()` method for configuring icons.
 
-###### Example
-
 ```Razor
 
          @(Html.Kendo().ButtonGroup()
@@ -74,8 +70,6 @@ The ButtonGroup provides the `.Icon()` method for configuring icons.
 
 The previous configuration is expected to produce the HTML output from the following example.
 
-###### Example
-
         <div class="k-button-group k-widget" data-role="buttongroup" id="player" role="group" tabindex="0">
             <span data-icon="play" aria-pressed="false" role="button" class="k-button k-button-icon">
                 <span class="k-icon k-i-play"></span>
@@ -97,8 +91,6 @@ You can configure the ButtonGroup as initially disabled by using its `.Enable()`
 For more information on the [`enable` method of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#methods-enable), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
 
 The following example demonstrates how to enable and disable the ButtonGroup over the `.Enable()` configuration.
-
-###### Example
 
 ```Razor
 
@@ -133,8 +125,6 @@ For more information on the [`index` setting of the ButtonGroup](http://docs.tel
 
 The following example demonstrates how to select a button by its index.
 
-###### Example
-
 ```Razor
 
         @(Html.Kendo().ButtonGroup()
@@ -167,8 +157,6 @@ The ButtonGroup enables you to restrict the number of Buttons that can be select
 For more information on the [`selection` setting of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#configuration-selection), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
 
 The following example demonstrates how to use `.Selection()`.
-
-###### Example
 
 ```Razor
 

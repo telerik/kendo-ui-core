@@ -32,9 +32,7 @@ For convenience, the same project templates are located under the **Visual C#** 
 
 The wizard detects all the installed versions of Progress&reg; Telerik&reg; UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
-**Figure 1. New Project Wizard**
-
-![New Project Wizard](images/new_project.png)
+![The new Project Wizard](images/new_project.png)
 
 ### Project Settings
 

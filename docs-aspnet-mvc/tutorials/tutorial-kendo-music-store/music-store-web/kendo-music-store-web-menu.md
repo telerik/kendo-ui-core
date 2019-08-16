@@ -8,9 +8,7 @@ position: 2
 
 # Create the Main Menu
 
-**Figure 1. Overview of the main menu**
-
-![kendo-menu-overview](images/kendo-menu-overview.png)
+![An overview of the main menu](images/kendo-menu-overview.png)
 
 The main menu of the Music Store application features some of the [Kendo UI Menu widget functionalities](http://demos.telerik.com/kendo-ui/web/menu/index.html) and consists of the items listed below:
 
@@ -24,8 +22,6 @@ The main menu of the Music Store application features some of the [Kendo UI Menu
 
 The examples use the Kendo UI Menu widget to add a navigation menu to the Music Store. Define the menu items as a `<ul>` with HTML and Razor, as demonstrated in the example below.
 
-###### Example
-
     <ul id="menu">
         <li>Genres</li>
         <li>About</li>
@@ -33,8 +29,6 @@ The examples use the Kendo UI Menu widget to add a navigation menu to the Music 
     </ul>
 
 Add JavaScript to convert this to a Kendo UI Menu.
-
-###### Example
 
     $(document).ready(function () {
         $("#menu").kendoMenu();
@@ -46,8 +40,6 @@ This uses a jQuery selector to get your `<ul>` tag with the id `menu`, then turn
 
 The next step is to convert the **Genres** list to a pull-down menu. Any `<li>` element that in turn contains another list `<ul>` element is treated as a pull-down item. Start with an empty pull-down menu item for the **Genres**.
 
-###### Example
-
     <li>Genres
         <ul>
             <li>placeholder 1</li>
@@ -57,13 +49,9 @@ The next step is to convert the **Genres** list to a pull-down menu. Any `<li>` 
 
 The code from the example above creates the pull-down item.
 
-**Figure 2. Overview of the pull-down Genres menu item**
-
-![kendo-menu-pulldown-placeholder](images/kendo-menu-pulldown-placeholder.png)
+![An overview of the pull-down Genres menu item](images/kendo-menu-pulldown-placeholder.png)
 
 You can replace your placeholder `<li>` elements with an MVC partial that loads the list of **Genres**.
-
-###### Example
 
     <li>Genres
         <ul>
@@ -72,8 +60,6 @@ You can replace your placeholder `<li>` elements with an MVC partial that loads 
     </li>
 
 This partial outputs a list of `<li>` elements that work as links to each Genre.
-
-###### Example
 
     @model IEnumerable<MvcMusicStore.Models.Genre>
 
@@ -93,8 +79,6 @@ The Kendo UI Menu control allows adding any content to a drop-down menu item. It
 
 The following example demonstrates how to add this content for the **About** menu item.
 
-###### Example
-
     <li>About
         <ul>
             <li>
@@ -110,9 +94,7 @@ The following example demonstrates how to add this content for the **About** men
 <!--_-->
 This creates the `<div>` content displayed in a drop-down menu item, as shown in the figure below.
 
-**Figure 3. The Kendo UI pull-down content in a drop-down menu item**
-
-![kendo-menu-pulldown-content](images/kendo-menu-pulldown-content.png)
+![The Kendo UI pull-down content in a drop-down menu item](images/kendo-menu-pulldown-content.png)
 
 ## See Also
 

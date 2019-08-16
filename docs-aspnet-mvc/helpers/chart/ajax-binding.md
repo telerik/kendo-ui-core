@@ -18,8 +18,6 @@ Below are steps for you to follow when configuring the Kendo UI Chart for ASP.NE
 
 Add a new action method which returns data to populate the Chart.
 
-###### Example
-
         public ActionResult InternetUsers_Read()
         {
             var data = ChartDataRepository.InternetUsers();
@@ -28,8 +26,6 @@ Add a new action method which returns data to populate the Chart.
 ### Return Data
 
 Return the data as JSON.
-
-###### Example
 
         public ActionResult InternetUsers_Read()
         {
@@ -41,14 +37,12 @@ Return the data as JSON.
 
 In the view, configure the Chart to use the action method created in the previous steps.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
                 .Name("internetUsersChart")
                 .DataSource(dataSource => dataSource
-                    .Read(read => read.Action("InternetUsers_Read", "Home")) //Specify the action method and controller names.
+                    .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller names.
                 )
                 .Series(series => {
                     series.Bar(d => d.Value)
@@ -64,7 +58,7 @@ In the view, configure the Chart to use the action method created in the previou
         @(Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
               .Name("internetUsersChart")
               .DataSource(dataSource => dataSource
-                  .Read(read => read.Action("InternetUsers_Read", "Home")) //Specify the action method and controller names.
+                  .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller names.
               )
               .Series(series => {
                   series.Bar(d => d.Value)

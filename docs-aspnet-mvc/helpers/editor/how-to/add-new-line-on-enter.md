@@ -13,5 +13,3 @@ To see the example, refer to the project on how to [add a new line instead of a 
 
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
 * [EditorBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
-
-For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

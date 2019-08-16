@@ -49,7 +49,7 @@ The DataSource TagHelper configuration options are passed as attributes of the t
 
 ## Functionality and Features
 
-The DataSource provides [three types of data sources]({% slug types_datasource_aspnetcore %}).
+The DataSource provides [three main types of data sources]({% slug types_datasource_aspnetcore %}). In addition to that it features SignalR, Hierarchical DataSource as well as Gantt, Gantt Dependency and Pivot which are used by the corresponding widgets. 
 
 ## See Also
 

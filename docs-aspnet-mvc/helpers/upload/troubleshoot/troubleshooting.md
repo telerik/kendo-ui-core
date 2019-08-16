@@ -19,8 +19,6 @@ This page provides solutions for common problems you may encounter while working
 
 Make sure that the action parameter is of type `IEnumerable<HttpPostedFileBase>` or `HttpPostedFileBase`.
 
-> **Important**
->
 > Using HttpPostedFile does not work.
 
 ### The Upload of Large Files Is Impossible
@@ -33,16 +31,12 @@ Override these settings in the `web.config` file. Below are listed the steps for
 
 1. Increase the allowed request size and execution timeout in the `httpRuntime` section.
 
-    ###### Example
-
         <system.web>
             <!-- The request length is in kilobytes, execution timeout is in seconds  -->
             <httpRuntime maxRequestLength="10240" executionTimeout="120" />
         </system.web>
 
 1. Increase the allowed request size for IIS 7 in the `requestFiltering` section.
-
-    ###### Example
 
         <system.webServer>
             <security>
@@ -57,8 +51,6 @@ Override these settings in the `web.config` file. Below are listed the steps for
 
 The issue is caused by a bug in Safari and occurs only when the **Windows authentication and disabled Anonymous Authentication** setting is enabled. It is reproducible with a standard `<input type="file" name="file" enctype="multipart/form-data" />` HTML element in ASP.NET MVC and Web Forms applications.
 
-> **Important**
->
 > Because the **File Browser** dialogs of the Kendo UI Editor for ASP.NET MVC rely on the Upload control, the issue might occur when uploading images and other files through them on MAC Safari.
 
 **Solution**
@@ -74,10 +66,7 @@ The solution solely depends on a dedicated decision by Apple about whether and w
 Below are listed the steps for you to follow when doing this.
 
 1. Change the controller [Session State Behavior](http://msdn.microsoft.com/en-us/library/system.web.sessionstate.sessionstatebehavior.aspx) to `ReadOnly` or `Disabled`. For more information on this topic, refer to the [article on concurrent requests in ASP.NET MVC](http://weblogs.asp.net/imranbaloch/archive/2010/07/10/concurrent-requests-in-asp-net-mvc.aspx)
-
 1. Enable request batching to reduce the number of concurrent requests.
-
-    ###### Example
 
         .Async(async => async
             .Save("Save", "Home")

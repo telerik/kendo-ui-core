@@ -15,5 +15,3 @@ To see the example, refer to the project on how to [configure the Kendo UI Grid 
 * [DropDownListBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
-
-For more runnable examples on the Kendo UI DropDownLists in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/dropdownlist/how-to/).

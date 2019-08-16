@@ -8,17 +8,13 @@ position: 10
 
 # Create the Management Grid
 
-**Figure 1. A screenshot of the Kendo UI Music Store management grid**
-
-![kendo-manage-grid-screenshot](images/kendo-manage-grid-screenshot.png)
+![A screenshot of the Kendo UI Music Store management grid](images/kendo-manage-grid-screenshot.png)
 
 When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management grid which can be used to add, remove, or delete albums from the store. This page uses the [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/web/grid/index.html).
 
 This code is located in `Scripts/App/storemanager-index.js`.
 
-> **Important**
->
-> Log in the Music Store as an administrator by using the `Owner` username and the `p@ssword123` password.
+> Log in into the Music Store as an administrator by using the `Owner` username and the `p@ssword123` password.
 
 ## Data Source Definition
 
@@ -27,8 +23,6 @@ The data source for the grid has a large definition compared to the other DataSo
 ### Apply Basic Data Source Settings
 
 The basic settings for the DataSource are demonstrated in the example below.
-
-###### Example
 
       dataSource: {
           pageSize: 50,
@@ -42,8 +36,6 @@ It is advisable to do paging on the server, not on the client side, when the ser
 ### Set the Data Source Transport
 
 Next, define the `transport` for the DataSource. So far, you only read data from the server using the `read` transport. For the Create Update and Delete operations, use the definition demonstrated in the example below.
-
-###### Example
 
       dataSource: {
           // ... basic settings omitted ...
@@ -78,8 +70,6 @@ Next, define the `transport` for the DataSource. So far, you only read data from
 
 Each of these sets the `url` and `type` for the action. In the case of `destroy` and `update`, include the `AlbumId` in the URL itself, not as a parameter. To do this define a function instead of a string to act as the URL. Kendo UI automatically calls this function and passes in the data item that is being deleted. This allows you to get the `AlbumID` and append it to the base URL.
 
-###### Example
-
           url: function (data) {
               return store.config.albumsUrl + "(" + data.AlbumId + ")";
           }
@@ -87,8 +77,6 @@ Each of these sets the `url` and `type` for the action. In the case of `destroy`
 ### Include the Data Source Schema
 
 Unlike the other DataSources in the Music Store that only read data, when you are going to create new records, it is best to include the `schema.model` property. The model defines the data layout of the record, so when the Kendo UI DataSource is asked to create a new record, it knows the fields and data types, as well as some basic validation information. This data is used by the Grid widget to define what editors each column will have when the **Create** button is clicked.
-
-###### Example
 
          schema: {
               data: store.config.wcfSchemaData,
@@ -124,8 +112,6 @@ Unlike the other DataSources in the Music Store that only read data, when you ar
 
 Notice that this `schema.model` data basically matches the server side model in `Models\Album.cs`.
 
-###### Example
-
          public class Album {
               [ScaffoldColumn(false)]
               public int AlbumId { get; set; }
@@ -158,13 +144,9 @@ One of the important aspects of defining the model is setting default values by 
 
 Now that the DataSource is defined, you can define the grid. A single HTML element is used as the placeholder for the grid.
 
-###### Example
-
         <div id="albumsGrid"></div>
 
 The element is turned into a Grid widget when the page is loaded with JavaScript.
-
-###### Example
 
         $("#albumsGrid").kendoGrid({
             sortable: true,
@@ -187,8 +169,6 @@ The element is turned into a Grid widget when the page is loaded with JavaScript
 ### Define the Grid Columns
 
 The `columns: []` property of the grid configuration takes an array of objects, each of which defines a column of data. The album edit grid contains these columns.
-
-###### Example
 
             columns: [
                 { title: "Album Art", field: "AlbumArtUrl", template: '<img src="#= AlbumArtUrl #" />', width: "110px", editor: albumArtEditor, filterable: false, sortable: false, groupable: false },
@@ -217,8 +197,6 @@ When an album grid row is edited, use a custom editor for selecting an Artist. I
 
 To set a custom editor for a cell, start by defining a function that is called to create the editor.
 
-###### Example
-
             var artistEditor = function (container, options) {
                 $('<input data-text-field="text" data-value-field="value" data-bind="value:' + options.field + '" />')
                     .appendTo(container)
@@ -240,8 +218,6 @@ In the Kendo UI Grid, this is called a [Foreign Key column](http://demos.telerik
 
 The Music Store uses the jQuery `$.Deferred()` functionality to asynchronously load the lists of Genres and Albums from the server. Once they are retrieved, they are mapped to lists of objects that follow the format from the example below.
 
-###### Example
-
     {
         value:
         text:
@@ -250,8 +226,6 @@ The Music Store uses the jQuery `$.Deferred()` functionality to asynchronously l
 In this example the `value` is the ID of the item, and `text` is its display name. These lists need to be loaded before populating the grid, but the `DataSource.read()` method used to read the data is asynchronous. That is why defers are used to load the data asynchronously and continue loading the grid when both genres and artists finish loading. Once these lists are loaded, use the `column.values` property to set it as the foreign key lookup for a column.
 
 The following example demonstrates how to define the Genre column.
-
-###### Example
 
             columns: [
                 ...
@@ -268,8 +242,6 @@ Using a Foreign Key column also changes the default editor behavior for the cell
 Use another custom editor for the album art column. This one is a little more complicated than the artist name because you need to support the ability to upload new album art. To facilitate this, user the [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/web/upload/index.html).
 
 A custom editor is defined for the column by specifying `editor: albumArtEditor` and the editor function.
-
-###### Example
 
             var albumArtEditor = function (container, options) {
                 if (options.model.AlbumArtUrl) {

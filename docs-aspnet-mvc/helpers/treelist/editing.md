@@ -16,7 +16,7 @@ The [TreeList HtmlHelper](https://demos.telerik.com/aspnet-mvc/treelist) provide
 
 All CRUD operations of the TreeList HtmlHelper require a model with "Id" and "ParentId" fields and those models must be configured in the DataSource of the TreeList.
 
-###### Example
+
 
     .DataSource(dataSource => dataSource
         ...
@@ -27,8 +27,6 @@ All CRUD operations of the TreeList HtmlHelper require a model with "Id" and "Pa
 ### Transport configuration
 
 Once the schema is configured, you need to configure the action methods in the DataSource for "Update", "Destroy" and "Create".
-
-###### Example
 
     .DataSource(dataSource => dataSource
         .Create(create => create.Action("Create", "EmployeeDirectory"))
@@ -41,8 +39,6 @@ Important part of the CRUD operations is the response from the service, which ne
 ### PopUp and InLine Editing
 
 To enable the PopUp and InLine edit modes you need to configure the "Toolbar", so it could display "Add new record" button and you will also have to define a command column for the "Update", "Delete" and "Add child" buttons:
-
-###### Example
 
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
@@ -63,8 +59,6 @@ The only difference between the "inline" and "popup" edit modes is the position 
 ### InCell (Batch) Editing
 
 The "incell" edit mode renders editor per field when the user clicks on a particular cell of the record. It allows multiple edits before the "Save changes" button is clicked, which could then send all changes to the service.
-
-###### Example
 
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
@@ -103,9 +97,9 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
     )
 
     <script>
-        //The following code removes the 'Add child' button from the new records,
-        //because they will receive an ID after saving the changes, which means that
-        //no child records  could be added until that
+        // The following code removes the 'Add child' button from the new records,
+        // because they will receive an ID after saving the changes, which means that
+        // no child records  could be added until that
         function onDataBound(e) {
             var items = e.sender.items();
             for (var i = 0; i < items.length; i++) {

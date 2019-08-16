@@ -10,7 +10,6 @@ position: 3
 
 The chunk upload of files enables the user to send large files, which are uploaded asynchronously with multiple requests, to the server and to pause and resume the file upload for the time the application is open in the browser.
 
-> **Important**
 > * The chunk upload functionality is available as of the Kendo UI 2017 R2 release.
 > * The chunk upload functionality is available only in the [asynchronous mode](http://docs.telerik.com/kendo-ui/controls/editors/upload/modes.html#asynchronous-mode) of the Upload.
 
@@ -89,7 +88,7 @@ public ActionResult ChunkSave(IEnumerable<HttpPostedFileBase> files, string meta
         {
             path = Path.Combine(Server.MapPath("~/App_Data"), chunkData.FileName);
 
-            //AppendToFile(path, file.InputStream);
+            // AppendToFile(path, file.InputStream);
         }
     }
 
@@ -108,8 +107,6 @@ To modify or fine-tune the chunk upload, use any of the following configuration 
 * `Concurrent` ([async.concurrent](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.concurrent))&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
 * `AutoRetryAfter` ([async.autoRetryAfter](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.autoRetryAfter))&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
 * `MaxAutoRetries` ([async.maxAutoRetries](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.maxAutoRetries))&mdash;The number of attempts the Upload makes to retry a failed upload before reporting it.
-
-###### Example
 
     @(Html.Kendo().Upload()
         .Name("files")
@@ -130,8 +127,6 @@ The chunk upload functionality separates the selected files chunks or blobs of d
 
 The response has to include the meta data from the following example.
 
-###### Example
-
     {
         "uploaded": true | false,
         /*  False instructs the Upload to send the next chunk of data.
@@ -144,7 +139,7 @@ The response has to include the meta data from the following example.
 
 The following example demonstrates a valid server response.
 
-###### Example
+
 
     {"uploaded":true,"fileUid":"b95ee9fa-85e8-482c-946d-a12ed6dbefed"}
 
@@ -152,8 +147,6 @@ The following example demonstrates a valid server response.
 
 The server-side implementation entirely depends on the application requirements and logic. The approach that is demonstrated in this article and in the [chunk upload demo](http://demos.telerik.com/aspnet-mvc/upload/chunkupload) can serve you as an example on how to handle chunks and merge them into files.
 
-> **Important**
->
 > As a client-side solution, the Upload does not handle validation. File validation and security requirements should be handled on the server by using application logic.
 
 ## See Also

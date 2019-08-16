@@ -41,13 +41,9 @@ Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2015 a
 To download Telerik UI for ASP.NET MVC:
 
 1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik?ReturnUrl=https://www.telerik.com/v2/oauth/telerik/authorize%3Fclient_id%3Dhttp://www.lean.telerik.com%26redirect_uri%3Dhttp://www.telerik.com/account/default.aspx%26response_type%3Dcode%26state%3DBC61727E88E19B88D8471959A1CD745B15A7E71498002F0383A966A0200E7FDA).
-
 1. Click **Downloads** in the top navigation.
-
 1. Click **UI for ASP.NET MVC**. If this option is not available, click one of the following: **DevCraft UI Edition**, **DevCraft Complete**  or **DevCraft Ultimate**.
-
 1. Click **Download Installer and other resources**.
-
 1. Find the **UI for ASP.NET MVC**  item, click **Browse all product files**, and select to download the Telerik online installer (`exe` file), the `MSI` installer file directly, or the `.zip` file.
 
 ## Installation
@@ -79,7 +75,6 @@ Telerik UI for ASP.NET MVC contains the following directories:
 * `wrappers\aspnetmvc\Examples\VS2017`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2017.
 * `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
 
-
 ## Sample Application
 
 Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application available in four versions:
@@ -94,16 +89,13 @@ Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application available
 To run the sample application:
 
 1. Navigate to the installation directory of Telerik UI for ASP.NET MVC.
-
 1. Open the sample Visual Studio Solution:
 
-* To run the ASP.NET MVC 4 version, open `wrappers\aspnetmvc\Examples\VS2012\Kendo.Mvc.Examples.sln` with Visual Studio 2012.
-* To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\VS2013\Kendo.Mvc.Examples.sln` with Visual Studio 2013, 2015, and 2017.
+    * To run the ASP.NET MVC 4 version, open `wrappers\aspnetmvc\Examples\VS2012\Kendo.Mvc.Examples.sln` with Visual Studio 2012.
+    * To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\VS2013\Kendo.Mvc.Examples.sln` with Visual Studio 2013, 2015, and 2017.
 
 1. Install Microsoft .NET 4.6.2 Framework Developer Pack.
-
 1. Press `CTRL+F5` to build and run the application.
-
 1. A browser loads the start page of the sample application.
 
 ### Sample Application Contents

@@ -22,9 +22,7 @@ To open the **Project Configuration Wizard**, click **Telerik** > **Telerik UI f
 
 The first page of the **Project Configuration Wizard** enables you to change the visual theme of your Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
-**Figure 1. Visual theme configuration page of the Project Configuration Wizard**
-
-![Configure project theme](images/configure_theme.png)
+![Visual theme configuration page of the Project Configuration Wizard](images/configure_theme.png)
 
 Click **Next** to move on to the next page.
 
@@ -36,9 +34,7 @@ The second page of the **Project Configuration Wizard** enables you to modify th
 - **Copy Global Resources**&mdash;Copies the localization files to `~/Scripts/kendo/{version}/cultures`.
 - **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
-**Figure 2. Project settings configuration page of the Project Configuration Wizard**
-
-![Configure project settings](images/configure_settings.png)
+![Project settings configuration page of the Project Configuration Wizard](images/configure_settings.png)
 
 ## See Also
 

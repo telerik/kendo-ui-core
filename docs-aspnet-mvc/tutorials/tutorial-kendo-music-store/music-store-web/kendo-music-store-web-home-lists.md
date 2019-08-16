@@ -14,13 +14,9 @@ This page is contained in the `Views\Home\Index.cshtml` and `Scripts\App\home-in
 
 ## Display Items in the ListView
 
-**Figure 1. A snapshot of the Kendo UI Music Store main lists**
-
-![kendo-music-store-web-main-lists-screenshot](images/kendo-music-store-web-main-lists-screenshot.png)
+![A snapshot of the Kendo UI Music Store main lists](images/kendo-music-store-web-main-lists-screenshot.png)
 
 To implement the lists of the **Featured Artist** and **Top Selling** albums, start with simple HTML markup to represent the two ListView widgets.
-
-###### Example
 
 	<section class="album-list">
 		<h3>Featured Artist: <span data-bind="text: featuredArtistName" class="featureartist-text"></span></h3>
@@ -34,8 +30,6 @@ To implement the lists of the **Featured Artist** and **Top Selling** albums, st
 
 The `data-role="listview"` of each `<div>` is set in such a way that Kendo UI knows to transform these `<div>` elements into ListView widgets. Each album will look the same between the two lists, which enables you to share a template. Both `<div>` elements get the attribute `data-template="album-template"`. Now add the template itself.
 
-###### Example
-
     <script id="album-template" type="text/x-kendo-template">
         <div class="album" data-bind="click: viewAlbumDetails">
             <img src="" data-bind="attr: { src: AlbumArtUrl }" />
@@ -47,8 +41,6 @@ The `data-role="listview"` of each `<div>` is set in such a way that Kendo UI kn
 
 The template is moved to an ASP.NET MVC partial to keep the code clean and to allow the reuse of the template between pages. Include the partial as demonstrated in the example below.
 
-###### Example
-
     @Html.Partial("_AlbumListTemplatePartial")
 
 <!--_-->
@@ -57,8 +49,6 @@ In the template, note the special `type="text/x-kendo-template"`. This is requir
 For more information on templates, refer to [this online demo](http://demos.telerik.com/kendo-ui/web/templates/index.html).
 
 Finally, the `data-bind` property contains the list of binders that will be applied to this widget. In this case the examples are using the `source` binder, and binding it to the `featuredArtistAlbums` property of the view model. This means you need to create your view model in JavaScript, as shown in the example below.
-
-###### Example
 
     var viewModel = kendo.observable({
         featuredArtistName: store.config.featuredArtist,
@@ -76,8 +66,6 @@ Finally, the `data-bind` property contains the list of binders that will be appl
 
 The `viewModel` is a Kendo UI `Observable` object, which facilitates the updating of properties and notifying the view when it needs to be redrawn. The last line of JavaScript tells Kendo UI to apply bindings between the `viewModel` and the HTML element with the ID `"body"`, using normal jQuery selector syntax. In your view model, you have set a featured artist on the `featuredArtistName` property. This text string will be shown in the `<h3>` header element, due to the data-binding.
 
-###### Example
-
     <h3>Featured Artist: <span data-bind="text: featuredArtistName"></span></h3>
 
 The `featuredArtistAlbums` and `topSellingAlbums` properties of the view model are both set to the [Kendo UI DataSources](http://demos.telerik.com/kendo-ui/web/datasource/index.html) that will pull remote data from our WCF Data Service. In the case of the `featuredArtistAlbums` data source, there is additional code specified that enabled server-side filtering by artist name, which is using oData.
@@ -90,8 +78,6 @@ The final item that needs to be added to the main page is an image rotator. Kend
 
 Start by setting up a property on the view model to hold the URLs for the images you want to rotate.
 
-###### Example
-
     var viewModel = kendo.observable({
         bannerImages: [
             "/Content/Images/banner1.jpg",
@@ -102,8 +88,6 @@ Start by setting up a property on the view model to hold the URLs for the images
 The `bannerImages` property is just a simple array of image URLs. Next, make our custom binding. The best practice is to separate your custom Kendo UI extensions into a separate file, or into multiple files if they become large. In this case, put your custom binder in `Scripts\App\kendo-custom-bindings.js`.
 
 The following example demonstrates what the basic layout for the custom binder is.
-
-###### Example
 
 	kendo.data.binders.rotateImages = kendo.data.Binder.extend({
 		init: function (element, bindings, options) {
@@ -133,8 +117,6 @@ For the image rotator, your `init` function fetches the array of images to rotat
 
 The following example demonstrates what the `init` function contains.
 
-###### Example
-
     init: function (element, bindings, options) {
         kendo.data.Binder.fn.init.call(this, element, bindings, options);
         var binding = this.bindings.rotateImages;
@@ -154,8 +136,6 @@ The following example demonstrates what the `init` function contains.
 
 Note the third line of code above.
 
-###### Example
-
     var binding = this.bindings.rotateImages;
 
 The `this.bindings` contains all the bindings that are being applied to this element. Each of them is added as a property with the same name as the binding. So `this.bindings.rotateImages` gives us this instance of the binder object.
@@ -163,8 +143,6 @@ The `this.bindings` contains all the bindings that are being applied to this ele
 The `refresh` function is called as the array of images is bound to the element, so that it knows to update.
 
 The following example demonstrates what the code is.
-
-###### Example
 
     refresh: function () {
         var binding = this.bindings.rotateImages;
@@ -181,8 +159,6 @@ Also, the interval is saved to the binding, so that you can get to it later in t
 
 Finally, the `destroy` function just stops the interval that we started.
 
-###### Example
-
     destroy: function () {
         var binding = this.bindings.rotateImages;
         clearInterval(binding.interval);
@@ -194,8 +170,6 @@ with jQuery `$(element).data("rotate-delay")`.
 ### Apply the rotateImages Binder
 
 Now you can make our HTML that uses our custom binding.
-
-###### Example
 
     <img data-bind="rotateImages: bannerImages" data-rotate-delay="5000" />
 

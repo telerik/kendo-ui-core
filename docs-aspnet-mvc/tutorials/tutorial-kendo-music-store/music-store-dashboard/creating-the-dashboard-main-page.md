@@ -8,9 +8,7 @@ position: 3
 
 # Create the Main Page
 
-**Figure 1. An overview of the Kendo UI Music Store Sales page**
-
-![dashboard-overview](images/dashboard-overview.png)
+![An overview of the Kendo UI Music Store Sales page](images/dashboard-overview.png)
 
 The main page constitutes of the Dashboard landing page, and the navigation strip, an overview of recent sales for various periods of time, top singles and albums, and a series of gauges showing hourly data. For this view, the sample project uses a declarative approach similar to the Kendo UI Music Store itself, also using the `data-` attributes, and the [Kendo UI MVVM framework](http://demos.telerik.com/kendo-ui/web/mvvm/index.html).
 
@@ -21,8 +19,6 @@ This page is located in the files `app/views/main.html`, `app/main-view.js`, and
 ### Display the Tabs
 
 To implement the listings of the Sales for the various times, start with some simple HTML to define the categories to display.
-
-###### Example
 
 	<section class="store-tall-tabs">
         <span class="big-sales-tab today-sales">
@@ -46,8 +42,6 @@ To implement the listings of the Sales for the various times, start with some si
 Each of the `<span>` elements contain the `data-bind` attribute that specifies the name of the data in the scheme to place in that view.
 
 This data is bound to an external `DataSource`, which is pulled and bound to these display widgets in the `main-view.js` file.
-
-###### Example
 
 	var totals = new kendo.data.DataSource({
         transport: {
@@ -75,8 +69,6 @@ Note that the value names in the scheme data of the DataSource match the `data-b
 
 The entirety of the view information in `main.html` is wrapped in the tag demonstrated below.
 
-###### Example
-
 	<section id="home-view">
 
 Therefore, the binding of the sales totals passes back through to the view. `kendo.bind($("#home-view")`, `data.items[0]);` makes use of the standard jQuery syntax and performs the binding.
@@ -86,8 +78,6 @@ Therefore, the binding of the sales totals passes back through to the view. `ken
 These lists are created through the combination between HTML markup, templating, and MVVM bindings, with the data provided by a remote DataSource.
 
 The following example starts with the markup.
-
-###### Example
 
 	<div class="top-singles-list">
         <h3 class="list-title">Top <span class="italic">Singles</span></h3>
@@ -113,8 +103,6 @@ Each requires a Kendo UI template, to render the individual items in the proper 
 There are several differences in this approach from the one used in the Kendo UI Music Store&mdash;the use of a remote DataSource makes it easier for some of the details to be moved around.
 
 The bindings are invoked in the JavaScript&mdash;int `main-view.js`. This is also where the templates are applied and the DataSource is bound.
-
-###### Example
 
 	var dataSource = new kendo.data.DataSource({
         transport: {
@@ -145,8 +133,6 @@ The `Albums` ListView is constructed similarly, with the same structure.
 
 The radial gauges on this page use a custom background image of a record. Every gauge is contained within its own `<div>`, as demonstrated in the example below.
 
-###### Example
-
 	<div class="gauge-container">
     	<div class="albums-per-hour home-gauge-box"></div>
         <header>
@@ -157,8 +143,6 @@ The radial gauges on this page use a custom background image of a record. Every 
 The key here is the `class` attribute `gauge-container` assigned to each.
 
 Look at the CSS for this page in `home-view.css`. The background image is defined in the `background-image` attribute.
-
-###### Example
 
 	.gauge-container {
  		height: 250px;

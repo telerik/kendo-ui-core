@@ -13,13 +13,9 @@ The page on how to [create a custom number format](https://support.office.com/en
 
 To see the example, refer to the project on how to [format the cells during the export of the Grid to Excel](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/cell-format-excel).
 
-> **Important**
->
 > These projects require a UI for ASP.NET MVC 2014.3.1125 version or later. Earlier versions do not expose the `ExcelExport` event through the fluent API.
 
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-
-For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %}).

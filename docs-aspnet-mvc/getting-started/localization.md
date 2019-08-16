@@ -37,7 +37,7 @@ Telerik UI for ASP.NET MVC comes with localized messages for the cultures listed
 
 If the `CurrentUICulture` is not supported, the default `en-US` will be used.
 
-> **Important**
+
 >
 > The culture used for the localization messages is determined by the `CurrentUICulture` and not by the `CurrentCulture` property.
 
@@ -73,7 +73,7 @@ Below are listed the steps for you to follow when willing to change the provided
 
 Apart from building a custom version of `Kendo.Mvc.dll`, you can specify a new value for the corresponding message in the MVC HtmlHelper configuration. For example, change the default message for the `create` Grid toolbar command as demonstrated below.
 
-###### Example
+
 
 ```ASPX
 

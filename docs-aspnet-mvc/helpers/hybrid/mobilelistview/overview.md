@@ -27,10 +27,7 @@ There are two ways to configure the hybrid ListView for ASP.NET MVC:
 Below are listed the steps for you to follow when defining the items of a hybrid Kendo UI ListView.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Open `HomeController.cs` and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -48,10 +45,10 @@ Below are listed the steps for you to follow when defining the items of a hybrid
                 %>
                 <% Html.Kendo().MobileListView().Style("inset").Type("group")
                         .Items(root => {
-                            //Add the root item.
+                            // Add the root item.
                             root.Add().Text("Africa").Items(items =>
                             {
-                                //Add the nested link item.
+                                // Add the nested link item.
                                 items.AddLink().Text("Nairobi").Icon("toprated");
                             });
 
@@ -77,10 +74,10 @@ Below are listed the steps for you to follow when defining the items of a hybrid
                 Html.Kendo().MobileListView().Style("inset").Type("group")
                     .Items(root =>
                     {
-                        //Add the root item.
+                        // Add the root item.
                         root.Add().Text("Africa").Items(items =>
                         {
-                            //Add the nested link item.
+                            // Add the nested link item.
                             items.AddLink().Text("Nairobi").Icon("toprated");
                         });
 
@@ -115,10 +112,7 @@ Below are listed the steps for you to follow when defining the items of a hybrid
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI ListView for data binding.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Open `HomeController.cs` and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -126,8 +120,6 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
         }
 
 1. Add a new action method that returns the data populating the ListView.
-
-    ###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
@@ -154,11 +146,11 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 new { Name = "Yaki Udon", Letter = "Y" }
             };
 
-            //Return the data as JSON.
+            // Return the data as JSON.
             return Json(products.ToDataSourceResult(request));
         }
 
-1.hybrid ListView to the `Index` view. It must be inside the View content.
+1. Add the hybrid ListView to the `Index` view. It must be inside the View content.
 
     ```ASPX
         <%: Html.Kendo().MobileView()
@@ -216,14 +208,12 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 You can reference a hybrid Layout instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid ListView API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
 
-###### Example
-
     @(Html.Kendo().MobileListView()
             .Name("MobileListView")
     )
     <script>
         $(function() {
-            //Notice that the Name() of the ListView is used to get its client-side instance.
+            // The Name() of the ListView is used to get its client-side instance.
             var listview = $("#MobileListView").data("kendoMobileListView");
         });
     </script>
@@ -246,7 +236,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onClick() {
-            //Handle the click event.
+            // Handle the click event.
         }
     </script>
 ```
@@ -260,7 +250,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function onClick() {
-            //Handle the click event.
+            // Handle the click event.
         }
     </script>
 ```

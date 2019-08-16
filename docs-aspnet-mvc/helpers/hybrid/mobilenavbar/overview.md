@@ -19,10 +19,7 @@ It allows you to configure the hybrid Kendo UI NavBar from server-side code.
 Below are listed the steps for you to follow when configuring the hybrid Kendo UI NavBar for ASP.NET MVC.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Open `HomeController.cs` and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -80,7 +77,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
         )
     ```
 
-1. Initialize the mobile applic1.###### Example
+1. Initialize the mobile applic1.
 
     ```ASPX
         <%: Html.Kendo().MobileApplication()
@@ -99,9 +96,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ### Instances
 
-You can reference a hybrid NavBar instance by using the code from the example below. Once a reference is established, use the [hybrid NavBar API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/navbar#methods) to control its behavior.
-
-###### Example
+You can reference a hybrid NavBar instance by using the code from the following example. Once a reference is established, use the [hybrid NavBar API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/navbar#methods) to control its behavior.
 
     @(Html.Kendo().MobileView()
         .Name("navbar-home")
@@ -121,7 +116,7 @@ You can reference a hybrid NavBar instance by using the code from the example be
     )
     <script>
         $(function() {
-            //Notice that the Name() of the NavBar is used to get its client-side instance.
+            // The Name() of the NavBar is used to get its client-side instance.
             var navbar = $("#MobileNavBar").data("kendoMobileNavBar");
         });
     </script>

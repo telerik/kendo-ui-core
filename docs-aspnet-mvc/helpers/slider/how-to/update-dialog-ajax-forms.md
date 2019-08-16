@@ -13,8 +13,6 @@ This behavior helps you consume and process a model property that holds an array
 
 The following example demonstrates a very basic approach for using, consuming, and updating such a model with the `RangeSliderFor` method.
 
-##### Example
-
 ```Model
 public class MyModel
 {

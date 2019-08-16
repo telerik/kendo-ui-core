@@ -18,7 +18,6 @@ The culture defines specific information for the number formats, week and month 
 Below are listed the steps for you to follow when you want to make Telerik UI for ASP.NET MVC use a culture that is different from the default one, which is `en-US`.
 
 1. Copy the required culture JavaScript file from the `\js\culture\` directory of your Telerik UI for ASP.NET MVC installation to the `~/Scripts/cultures/` directory of your application. Use the Spanish `es-ES` culture for the example.
-
 1. Include the corresponding culture JavaScript file after the other JavaScript product files.
 
     ```ASPX
@@ -35,8 +34,6 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
     ```
 
 1. Set the current culture by calling the [`kendo.culture`](../../kendo-ui/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
-
-    ###### Example
 
         <script>
             kendo.culture("es-ES");
@@ -56,8 +53,6 @@ You can choose to set the server-side culture globally or per-request.
 
 To set the server-side culture, update the `web.config` file of your ASP.NET MVC application.
 
-###### Example
-
     <system.web>
         <!-- snip --!>
         <globalization uiCulture="es-ES" culture="es-ES"></globalization>
@@ -68,8 +63,6 @@ To set the server-side culture, update the `web.config` file of your ASP.NET MVC
 #### Per-Request Setup
 
 Override the [`Controller.Initialize`](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [`CurrentCulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx) and [`CurrentUICulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
-
-###### Example
 
     protected override void Initialize(System.Web.Routing.RequestContext requestContext)
     {
@@ -88,8 +81,6 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 **Step 2** Get the current culture.
 
-###### Example
-
 ```ASPX
     <%
       var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
@@ -103,8 +94,6 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 **Step 3** Include the corresponding culture JavaScript file.
 
-###### Example
-
 ```ASPX
     <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
 ```
@@ -113,8 +102,6 @@ Below are listed the steps for you to follow when you want to make the widgets u
 ```
 
 **Step 4** Set the current culture by calling the [`kendo.culture`](../../kendo-ui/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
-
-###### Example
 
 ```ASPX
     <script>
@@ -127,8 +114,6 @@ Below are listed the steps for you to follow when you want to make the widgets u
     </script>
 ```
 
-> **Important**
->
 > Set the client-side culture before initializing any Kendo UI widgets that rely on it.
 
 ## Use the Culture Helper
@@ -138,8 +123,6 @@ The Kendo UI culture scripts are generated based on the Windows 8 formats. If yo
 ### Generate Cultures
 
 The example below demonstrates how to generate the current and specified cultures.
-
-###### Example
 
 ```Current
     @Html.Kendo().Culture()
@@ -153,8 +136,6 @@ The example below demonstrates how to generate the current and specified culture
 The Culture helper also provides the option to disable the rendering inside a script tag, so it can be included in the existing script.
 
 The example below demonstrates how to generate the current and specified cultures in an existing script file.
-
-###### Example
 
 ```Current
     <script>

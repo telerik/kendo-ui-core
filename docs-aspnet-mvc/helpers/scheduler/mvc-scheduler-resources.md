@@ -16,8 +16,6 @@ The Scheduler HtmlHelper extension supports assigning Scheduler events to a set 
 
 The following example demonstrates how to add a Scheduler resource and bind it to local data.
 
-###### Example
-
     @(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))
@@ -25,17 +23,17 @@ The following example demonstrates how to add a Scheduler resource and bind it t
         .Height(600)
         .Resources(resource =>
         {
-            //specify the field from the model which contains the resource id
+            // Specify the field from the model which contains the resource id
             resource.Add(m => m.OwnerID)
-                 //set the title of the resource
+                 // Set the title of the resource
                 .Title("Owner")
-                 //set the field which contains the text of the resource
+                 // Set the field which contains the text of the resource
                 .DataTextField("Text")
-                 //set the field which contains the value of the resource
+                 // Set the field which contains the value of the resource
                 .DataValueField("Value")
-                 //set the field which contains the color of the resource
+                 // Set the field which contains the color of the resource
                 .DataColorField("Color")
-                //set local data
+                // Set local data
                 .BindTo(new[] {
                     new {
                         Text = "Alex", //text of the resource instance
@@ -55,11 +53,7 @@ The following example demonstrates how to add a Scheduler resource and bind it t
 
 The Scheduler HtmlHelper extension supports unlimited resource types. For example, it enables you to combine the single and the multiple resource examples in a single one.
 
-> **Important**
->
 > The widget requires the first resource to have a color field, because the event background color is taken from the first resource.
-
-###### Example
 
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
         .Name("scheduler")
@@ -82,7 +76,7 @@ The Scheduler HtmlHelper extension supports unlimited resource types. For exampl
                 //event atendees resource - multiple resource
                 resource.Add(m => m.Atendees)
                     .Title("Atendees")
-                    //set the Multiple option to true
+                    // Set the Multiple option to true
                     .Multiple(true)
                     .DataTextField("Text")
                     .DataValueField("Value")

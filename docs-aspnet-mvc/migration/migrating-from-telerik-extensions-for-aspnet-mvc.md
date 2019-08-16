@@ -230,8 +230,6 @@ The styling mechanism of the MVC extensions and the Kendo UI widgets is quite si
 
 In some cases when developers migrate from Telerik Extensions for ASP.NET MVC to Telerik UI for ASP.NET MVC, they might want to preserve the previous look of the components. This is the purpose for providing the so-called legacy themes. They represent modified versions of the MVC extensions stylesheets, so that they are compatible with the Kendo UI widgets. Changes include updates in the classnames prefix from `t-` to `k-` and some tweaks required by the slightly different HTML output of the Kendo UI widgets.
 
-> **Important**
->
 > Using Kendo UI stylesheets and legacy themes on the same page is not supported.
 
 Generally, it is recommended that you use the Kendo UI themes and not the legacy ones. The latter are located in the `wrappers/aspnetmvc/LegacyThemes` folder of the Telerik UI for ASP.NET MVC distribution package. Legacy themes can also be referenced from the Kendo UI CDN. If so, do not forget to specify the version&mdash;for example, 2012.2.710.
@@ -241,8 +239,6 @@ Generally, it is recommended that you use the Kendo UI themes and not the legacy
     <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/telerik/telerik.common.min.css" rel="stylesheet" type="text/css" />
     <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/telerik/telerik.black.min.css" rel="stylesheet" type="text/css" />
 
-> **Important**
->
 > As of the R3 2015 release, legacy themes are not shipped.
 
 ## See Also

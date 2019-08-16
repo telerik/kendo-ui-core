@@ -24,10 +24,7 @@ There are two ways to populate the content of the Kendo UI Window for ASP.NET MV
 Below are listed the steps for you to follow when configuring the Kendo UI Window.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -38,9 +35,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
     ```ASPX
         <% Html.Kendo().Window()
-            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-            .Title("About Alvar Aalto") //Set the title of the Window.
-            .Content(() => //Define the content of the Window.
+            .Name("window") // The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") // Set the title of the Window.
+            .Content(() => // Define the content of the Window.
             {
                 %>
                     Static content of the Window
@@ -48,20 +45,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
             })
             .Draggable() //Enable the dragging of the Window.
             .Resizable() //Enable the resizing of the Window.
-            .Width(600)  //Set the width of the Window.
+            .Width(600)  // Set the width of the Window.
             .Render(); //Render the Window.
         %>
     ```
     ```Razor
         @(Html.Kendo().Window()
-            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-            .Title("About Alvar Aalto") //Set the title of the Window.
-            .Content(@<text> //Define the content of the Window.
+            .Name("window") // The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") // Set the title of the Window.
+            .Content(@<text> // Define the content of the Window.
                     The static content of the Window.
             </text>)
             .Draggable() //Enable the dragging of the Window.
             .Resizable() //Enable the resizing of the Window.
-            .Width(600)  //Set the width of the Window.
+            .Width(600)  // Set the width of the Window.
         )
     ```
 
@@ -70,10 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 Below are listed the steps for you to follow when configuring the Kendo UI Window with a load-on-demand content.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -81,8 +75,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
         }
 
 1. Create an action method which renders the content.
-
-    ###### Example
 
         public ActionResult AjaxContent()
         {
@@ -93,16 +85,16 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
     ```ASPX
         <% Html.Kendo().Window()
-            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-            .Title("About Alvar Aalto") //Set the title of the Window.
-            .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
+            .Name("window") // The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") // Set the title of the Window.
+            .LoadContentFrom("AjaxContent", "Window") // Define the Action and Controller names.
         %>
     ```
     ```Razor
         @(Html.Kendo().Window()
-            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-            .Title("About Alvar Aalto") //Set the title of the Window.
-            .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
+            .Name("window") // The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") // Set the title of the Window.
+            .LoadContentFrom("AjaxContent", "Window") // Define the Action and Controller names.
         )
     ```
 
@@ -155,11 +147,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function window_open() {
-            //Handle the open event.
+            // Handle the open event.
         }
 
         function window_close() {
-            //Handle the close event.
+            // Handle the close event.
         }
     </script>
 ```
@@ -173,11 +165,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function window_open() {
-            //Handle the open event.
+            // Handle the open event.
         }
 
         function window_close() {
-            //Handle the close event.
+            // Handle the close event.
         }
     </script>
 ```
@@ -186,19 +178,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().Window()
         .Name("window")
         .Events(e => e
             .Open(@<text>
             function() {
-                //Handle the open event inline.
+                // Handle the open event inline.
             }
             </text>)
             .Close(@<text>
             function() {
-                //Handle the close event inline.
+                // Handle the close event inline.
             }
             </text>)
         )
@@ -210,12 +200,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI Window instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Window API](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Window for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Window for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Window is used to get its client-side instance.
+            // The Name() of the Window is used to get its client-side instance.
             var window = $("#window").data("kendoWindow");
         });
     </script>

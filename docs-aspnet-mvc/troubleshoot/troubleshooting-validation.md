@@ -22,8 +22,6 @@ Customize the Tooltip position by using either of the following approaches:
 
 * Use the `ValidationMessage` or `ValidationMessageFor` helpers for the property.
 
-    ###### Example
-
         @Html.Kendo().NumericTextBoxFor(model => model.UnitPrice)
         @Html.ValidationMessageFor(model => model.UnitPrice)
 
@@ -36,8 +34,6 @@ If the client-side validation does not prevent the form to be posted and the ser
 **Solution**
 
 To avoid this behavior, either implement a client-side validation for the rule that caused the validation to fail on the server, or remove the class from the wrapper elements after the initialization of the widgets.
-
-###### Example
 
     @using (Html.BeginForm()) {
         //omitted for brevity
@@ -59,8 +55,6 @@ In order for the values to be recognized as valid, use the same culture on the c
 
 If the above solution is not feasible, because a custom date format is used, then the build-in `mvcdate` rule that comes from `kendo.aspnetmvc.min.js` needs to be overridden.
 
-###### Example
-
     <script src="../kendo/js/kendo.aspnetmvc.min.js"></script>
     <script>
         kendo.ui.validator.rules.mvcdate = function (input) {
@@ -78,8 +72,6 @@ The jQuery validation does not support globalized dates and numbers.
 **Solution**
 
 In order for the values to be recognized as valid when using a non-default culture, override the Validator date and number methods.
-
-###### Example
 
     jQuery.extend(jQuery.validator.methods, {
         date: function (value, element) {

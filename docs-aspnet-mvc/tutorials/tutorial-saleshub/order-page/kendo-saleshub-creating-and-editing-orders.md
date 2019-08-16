@@ -11,9 +11,7 @@ position: 1
 
 Since there are many similarities between the create and edit views of an Order, this article demonstrates how both of them work.
 
-**Figure 1. A screenshot of the Kendo UI Sales Hub Orders page**
-
-![kendo-saleshub-order-edit-screenshot](images/kendo-saleshub-order-edit-screenshot.png)
+![A screenshot of the Kendo UI Sales Hub Orders page](images/kendo-saleshub-order-edit-screenshot.png)
 
 ## Set up the Partial View for an Order
 
@@ -21,7 +19,7 @@ Since the contents of the Edit and New view for Orders are nearly the same, cont
 a MVC partial view which contains the markup that is shared between the views. This partial view
 can be found in **Views/Order/_Order.cshtml**.
 
-## Set up the basic Order fields
+## Set Up the Basic Order Fields
 
 ![kendo-saleshub-order-info-screenshot](images/kendo-saleshub-order-info-screenshot.png)
 
@@ -266,7 +264,7 @@ Finally we set up some aggregates for a few of the properties on the model. Addi
 grid is being bound against. After you `Add` an aggregate for a property you can then specify the type(s) of the aggregate which can be `Sum`, `Count`, `Min`,
 `Max`, or `Average`. We use these aggregates in the footer templates for each of these that are bound to these properties.
 
-## Set up the Order notes grid
+## Set Up the Order Notes Grid
 
     @(Html.Kendo().Grid<OrderNoteViewModel>()
         .Name("orderNotesGrid")
@@ -295,7 +293,7 @@ a ClientTemplate for the `PostedDate` column which makes use of Kendo UI's [date
 capabilities. Another difference is that we only support viewing and creating order notes, so we only provide `Read` and `Create` URLs for the
 DataSource.
 
-## Set up the Panel Bar
+## Set Up the PanelBar
 
 ![kendo-saleshub-order-panelbar-screenshot](images/kendo-saleshub-order-panelbar-screenshot.png)
 
@@ -318,7 +316,7 @@ We set up the PanelBar by declaring its HTML structure and then telling the exte
 against to be a `<ul>`. Where each `<li>` is a section in the PanelBar and the first text element that appears it the title for that section. So in our case
 "Payment Terms" and "Comments" will be the titles for each PanelBar section. Any element that appears after the title will be included in the contents of that section.
 
-## Set up the Payment Terms Section
+## Set Up the Payment Terms Section
 
     <li>
         Payment Terms
@@ -352,10 +350,7 @@ against to be a `<ul>`. Where each `<li>` is a section in the PanelBar and the f
 To prevent having duplicate HTML markup in the payment terms section there's a Partial view which we render for each payment term that is on an Order. This
 partial view can be found in **Views/Order/_OrderPaymentTerm.cshtml**.
 
-> Since standard HTML textboxes do not look like the Kendo UI text widgets it throws off the uniform look and feel widgets on your page. To fix this
-you can add the `k-textbox` class to a standard HTML text field and this will give it some of the textbox styles that Kendo UI applies to its widgets.
-This can be done using MVC by specifying an additional parameter to the text widget you're creating with the MVC HtmlHelper, which is an anonymous object
-with a property name of `class` and a value of `k-textbox`.
+> Since standard HTML textboxes do not look like the Kendo UI text widgets it throws off the uniform look and feel widgets on your page. To fix this you can add the `k-textbox` class to a standard HTML text field and this will give it some of the textbox styles that Kendo UI applies to its widgets. This can be done using MVC by specifying an additional parameter to the text widget you're creating with the MVC HtmlHelper, which is an anonymous object with a property name of `class` and a value of `k-textbox`.
 
     <div class="paymentterm">
         <div>
@@ -377,10 +372,7 @@ with a property name of `class` and a value of `k-textbox`.
     </div>
 
 The Payment Terms view mostly consists of [Kendo DropDownLists](http://demos.telerik.com/kendo-ui/web/dropdownlist/index.html) along with a
-[Kendo NumericTextBox](http://demos.telerik.com/kendo-ui/web/numerictextbox/index.html). The DropDownLists are generated server-side using the
-`BindTo` function and we set the selected index by calling the `SelectedIndex` function. To find which item in each dropdown needs to be
-selected when the page loads, we use the `FindSelected`, which is provided by MVC. This function runs against an Enumerable of SelectListItems
-and finds which SelectListItem has its `Selected` property set to true.
+[Kendo NumericTextBox](http://demos.telerik.com/kendo-ui/web/numerictextbox/index.html). The DropDownLists are generated server-side using the `BindTo` function and we set the selected index by calling the `SelectedIndex` function. To find which item in each dropdown needs to be selected when the page loads, we use the `FindSelected`, which is provided by MVC. This function runs against an Enumerable of SelectListItems and finds which SelectListItem has its `Selected` property set to true.
 
 The last part of the Payment terms section is the Payment terms override textarea and the "Suggested Values" window and grid.
 
@@ -405,9 +397,7 @@ The last part of the Payment terms section is the Payment terms override textare
                 .Events(events => events.Change("window.SalesHub.SuggestedValuesGrid_Changed")))
         </text>))
 
-We set up the Suggested Values window to be modal and to have a width of 600px. The contents of the window is a [Kendo Grid](http://demos.telerik.com/kendo-ui/web/grid/index.html)
-which displays a list of suggested values that the user can select from. When the user selects a value from the grid, that value is copied into the payment terms override
-textarea and the window is closed. In order to know when the user selects a value, we listen to the `Change` event of the Grid.
+We set up the Suggested Values window to be modal and to have a width of 600px. The contents of the window is a [Kendo Grid](http://demos.telerik.com/kendo-ui/web/grid/index.html) which displays a list of suggested values that the user can select from. When the user selects a value from the grid, that value is copied into the payment terms override textarea and the window is closed. In order to know when the user selects a value, we listen to the `Change` event of the Grid.
 
 The event handler for the change event, which can be found in **Scripts/order.js**, is:
 
@@ -418,11 +408,7 @@ The event handler for the change event, which can be found in **Scripts/order.js
         $("#suggestedValuesWindow").data("kendoWindow").close();
     };
 
-We first get the selected item in the grid by using the `select()` function on the grid (which is the `this` context in our event handler). Since
-the `select` function returns an array of selected elements we index into it to get the first selected element. Since we bound the grid server-side,
-the grid on the client-side doesn't actually have any `dataItem`s that we can access. This means we have to find the text of the suggested value by
-using jQuery to find the `<td>` that has the text we need. Once this is done, we assign the text we found to the value of the payment terms override textarea. After
-setting the value, we find the suggested values window, using jQuery, and close it.
+We first get the selected item in the grid by using the `select()` function on the grid (which is the `this` context in our event handler). Since the `select` function returns an array of selected elements we index into it to get the first selected element. Since we bound the grid server-side, the grid on the client-side doesn't actually have any `dataItem`s that we can access. This means we have to find the text of the suggested value by using jQuery to find the `<td>` that has the text we need. Once this is done, we assign the text we found to the value of the payment terms override textarea. After setting the value, we find the suggested values window, using jQuery, and close it.
 
 ## Setting up the Comments Section
 

@@ -23,8 +23,6 @@ The following views are predefined:
 
 The following example demonstrates how to create a MultiViewCalendar that allows users to select a month.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()

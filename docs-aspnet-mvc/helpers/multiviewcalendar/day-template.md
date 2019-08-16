@@ -12,8 +12,6 @@ The MultiViewCalendar enables you to customize the rendered day for the `month` 
 
 The following example demonstrates how to create a MultiViewCalendar by using a custom template.
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()

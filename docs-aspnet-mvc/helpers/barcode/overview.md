@@ -15,10 +15,7 @@ The Barcode HtmlHelper extension is a server-side wrapper for the [Kendo UI Barc
 Below are listed the steps for you to follow when configuring the Kendo UI Barcode.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -29,14 +26,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
     ```ASPX
         <%: Html.Kendo().Barcode()
-                .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
-                .Value("foo") //Set the value of the Barcode.
+                .Name("barcode") // The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
+                .Value("foo") // Set the value of the Barcode.
         %>
     ```
     ```Razor
         @(Html.Kendo().Barcode()
-                .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
-                .Value("foo") //Set the value of the Barcode.
+                .Name("barcode") // The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
+                .Value("foo") // Set the value of the Barcode.
         )
     ```
 
@@ -63,12 +60,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 To reference an existing Kendo UI Barcode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Barcode API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI Barcode for ASP.NET MVC declaration.
+    // Place this after your Kendo UI Barcode for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the Barcode is used to get its client-side instance.
+            // The Name() of the Barcode is used to get its client-side instance.
             var barcode = $("#barcode").data("kendoBarcode");
             barcode.value("foo") //make sure you supply valid value for that encoding then the barcode will redraw automatically
         });

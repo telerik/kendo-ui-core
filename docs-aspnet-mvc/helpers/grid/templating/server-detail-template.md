@@ -22,28 +22,19 @@ Kendo UI Grid for ASP.NET MVC enables you to show additional information for a d
 Below are the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to display additional details of the **Product** entity from the **Northwind** database.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerDetailTemplate`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 1. A new entity data model**
-
-    ![New entity data model](../images/grid-entity-data-model.png)
+    ![A new entity data model](../images/grid-entity-data-model.png)
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
-    **Figure 2. Choosing a connection**
-
-    ![Choose the connection](../images/grid-entity-data-model.png)
+    ![Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** table from **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-    **Figure 3. Choosing the Products table**
-
-    ![Choose the Products table](../images/grid-database-objects.png)
+    ![Choosing the Products table](../images/grid-database-objects.png)
 
 1. Open `HomeController.cs` and edit the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -122,9 +113,7 @@ Below are the steps for you to follow when configuring the Kendo UI Grid for ASP
 
 1. Build and run the project.
 
-    **Figure 4. Choosing the Products table**
-
-    ![Server detail template](../images/grid-detail-template.png)
+    ![The final result](../images/grid-detail-template.png)
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-detail-template).
 
@@ -133,24 +122,16 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to display all **Product** entities available per **Category** entity from the **Northwind** database.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerHierarchy`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 5. A new entity data model**
-
-    ![New entity data model](../images/grid-entity-data-model.png)
+    ![A new entity data model](../images/grid-entity-data-model.png)
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
 
-    **Figure 6. Choosing the connection**
-
-    ![Choose the connection](../images/grid-entity-data-model.png)
+    ![Choosing the connection](../images/grid-entity-data-model.png)
 
 1. Choose the **Products** and **Categories** tables from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
-
 1. Open `HomeController.cs` and edit the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -235,9 +216,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 1. Build and run the project.
 
-    **Figure 7. The final result**
-
-    ![Server hierarchy](../images/grid-hierarchy.png)
+    ![The final result](../images/grid-hierarchy.png)
 
 ## See Also
 

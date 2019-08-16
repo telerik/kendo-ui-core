@@ -21,7 +21,6 @@ To see the complete implementation of the approach, refer to the GitHub project 
 ### Create the Application
 
 1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application.
-
 1. If you decide not to use the Visual Studio extensions, follow the procedure for adding Telerik UI for ASP.NET MVC to existing applications:
 
     * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
@@ -39,8 +38,7 @@ To see the complete implementation of the approach, refer to the GitHub project 
 1. Select **Generate from database** and click **Next**.
 1. Configure a connection to the Northwind database and click **Next**.
 
-    **Figure 1. A new entity model**
-    ![New entity data model](../images/tree-entity-data-model.png)
+    ![A new entity data model](../images/tree-entity-data-model.png)
 
 1. Select all tables and click **Finish**.
 
@@ -48,9 +46,7 @@ To see the complete implementation of the approach, refer to the GitHub project 
 
 1. Open `Controllers/HomeController.cs` and add a new action method which will return JSON. Each time the user expands a parent node, the TreeView makes an Ajax request to this action method. The action method returns only the child nodes of the expanded parent node. The TreeView provides the unique identifier of the parent node or, when it makes the initial request, `null`.
 
-    ###### Example
-
-        public JsonResult Employees_Read(int? id)
+      public JsonResult Employees_Read(int? id)
         {
             using (var northwind = new NORTHWNDEntities())
             {
@@ -91,8 +87,6 @@ To see the complete implementation of the approach, refer to the GitHub project 
         }
 
 1. Open `Views/Index.cshtml` and add a TreeView.
-
-    ###### Example
 
         @(Html.Kendo().TreeView()
             .Name("treeview")

@@ -49,8 +49,6 @@ The following example demonstrates how to enable the Excel export functionality.
 
 To initiate the Excel export through code, call the [`saveAsExcel`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid.html#methods-saveAsExcel) method.
 
-> **Important**
->
 > Older browsers, such as Internet Explorer 9 and below and Safari, require the implementation of a [server proxy](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 ### Output the Result
@@ -59,7 +57,6 @@ Through its default configuration, the Kendo UI Grid exports the current page of
 
 The Grid uses the current column order, visibility, and dimensions to generate the Excel file. It does not export the current CSS theme in the Excel file. For more information on changing the visual appearance of the Excel document, refer to [this section](#customize-the-excel-document).
 
-> **Important**
 > * The Grid exports only data-bound columns. Template and command columns are ignored.
 > * The `Format` option is not used during export. For more information on this, refer to [this section](#column-format).
 > * The `ClientTemplate` option is not used during export. For more information on this, refer to [this section](#column-template).
@@ -71,8 +68,6 @@ The Grid uses the current column order, visibility, and dimensions to generate t
 
 By default, the Kendo UI Grid exports only the current page of data. To export all pages, set the `AllPages` option to `true`.
 
-> **Important**
->
 > When the `AllPages` option is set to `true` the Grid makes a `read` request for all data. If the data items are too many, the browser may become unresponsive. Consider implementing [server-side export](#use-server-side-processing) for such cases.
 
 The following example demonstrates how to export all the data.
@@ -146,8 +141,6 @@ TDP handles the data import, export, and processing from the following formats:
 * Tab-separated values (`.txt`)
 * Portable document format (`.pdf`) (export only)
 
-> **Important**
->
 > The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and are available for the Kendo UI Enterprise and DevCraft bundles.
 
 For examples on how to export Excel files, refer to the [example on the integration of the Document Processing Library and the Grid for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-dpl-integration), or to the information on the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).

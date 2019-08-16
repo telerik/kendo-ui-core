@@ -32,8 +32,6 @@ Below are listed some of the possible solutions for you to apply when resolving 
 
 * **Option 3** Manually serialize the `DataSourceResult`.
 
-    ###### Example
-
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
             var data = GetData();
@@ -57,15 +55,11 @@ Yet another reason is that you explicitly specified that the Grid should make HT
 
 Allow `GET` requests.
 
-###### Example
-
     // View
-
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
         .Read(read => read.Action("Read", "Home").Type(HttpVerbs.Get)) // tell the DataSource to make GET requests
     // Omitted for brevity.
-
     // Controller
     public ActionResult Read([DataSourceRequest] DataSourceRequest request)
     {
@@ -109,7 +103,6 @@ In the above scenario, the widget **C** will not be rendered correctly and will 
 The easiest way to avoid the JavaScript error is to:
 
 1. Move the declaration of widget **C** to a separate partial view.
-
 1. Render the partial view in the main View where Grid **A** is defined. In this case widget **C** will not exist in a nested template context and its HTML/JavaScript output will not need any escaping.
 
 ## See Also

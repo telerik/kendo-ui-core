@@ -8,9 +8,7 @@ position: 6
 
 # Create the Search Box
 
-**Figure 1. A snapshot of Kendo UI Music Store Search box functionality**
-
-![kendo-search-overview](images/kendo-search-overview.png)
+![A snapshot of Kendo UI Music Store Search box functionality](images/kendo-search-overview.png)
 
 The Music Store application provides a text box for searching the store by an album title. To implement this functionality, use a [Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/web/autocomplete/index.html). This aims at having the AutoComplete box query the server for albums that match the entered user text and having the filtering performed server-side by applying a [remote DataSource](http://demos.telerik.com/kendo-ui/web/datasource/remote-data.html). The results are then listed together with the album art, title, and artist name, and are clickable, so that users are able to get details about the album.
 
@@ -20,13 +18,9 @@ The Music Store application provides a text box for searching the store by an al
 
 Start with a normal `<input>` element.
 
-###### Example
-
     <input id="main-search"/>
 
 Here an ID is assigned to the element so that you can easily target it with jQuery. Next, turn the `input` element into an AutoComplete widget by using JavaScript.
-
-###### Example
 
     $("#main-search").kendoAutoComplete({
         filter: 'contains',
@@ -74,21 +68,15 @@ These are the parts of this JavaScript and what they are doing:
 
 Each AutoComplete item in the dropdown will be a `<li>` element. Within that element, a template is used to render the result. If not specified, Kendo UI puts the text of the field specified by the `dataTextField` property into the `<li>`. You are able to use templates to make the results looking much nicer. In this case, include the album cover art, title, and artist name.
 
-###### Example
-
     template: kendo.template($("#search-result-template").html())
 
 The template property may be set to a string&mdash;for example `template: "foo"`&mdash;and each result would render `<li>foo</li>`. To make more intricate templates, you can use `#...#` to put in JavaScript and calculated the values.
 
 The following example demonstrates a better template.
 
-###### Example
-
     template: "<img src='#:data.AlbumArtUrl#' /><span>#:data.Title#</span><span>#:data.Artist.Name#</span>"
 
 Here, the template is using the special `data` value. This variable is set to the JavaScript object that the template is being generated for. Looking at this template, you can conclude that the returned JSON from the server included the search results in the format.
-
-###### Example
 
     {
         AlbumArtUrl: "...",
@@ -101,15 +89,11 @@ However, even with this improved template, the example is including some HTML el
 
 Including a template in the body of your HTML is done by placing the tag demonstrated in the example below inside the `<body>` of your document.
 
-###### Example
-
     <script type="text/x-kendo-template" id="some-template-name">...</script>
 
 The `type` is always `"text/x-kendo-template"`, and the `id` is the unique name of your template. The HTML for your template then goes inside the `<script>` tags.
 
 The following example demonstrates the template for the auto-complete search box.
-
-###### Example
 
     <script id="search-result-template" type="text/x-kendo-template">
         <div class="album-wide" data-album-id="#:data.AlbumId#">
@@ -127,8 +111,6 @@ You can also take advantage of the ASP.NET MVC ability to render partial pages h
 
 In the `_Layout.cshtml` file, this template is included with the line, demonstrated in the example below.
 
-###### Example
-
     @Html.Partial("_SearchResultTemplatePartial")
 
 <!--_-->
@@ -138,8 +120,6 @@ For more information on remote template loading, refer to the [article on extern
 
 Now that the template is included in the body of the page, the application code is using a jQuery selector to fetch this `<script>` element by its `id` and get the contents. It then calls `kendo.template()` to process the template.
 
-###### Example
-
     kendo.template($("#search-result-template").html())
 
 ### Get Data and Filter on Server Side
@@ -147,8 +127,6 @@ Now that the template is included in the body of the page, the application code 
 Ideally, the server is expected to perform the filtering for the search AutoComplete box. Kendo UI supports both client and server-side filtering, but in a real music store, you would not want to return every album title in the store to the client.
 
 The following example demonstrates a quick breakdown of the code to do this.
-
-###### Example
 
       dataSource: {
 
@@ -188,16 +166,12 @@ For more information on each field set on the DataSource, refer to the [DataSour
 
 When a search result is clicked, the details for the selected album should be displayed. Do this by specifying a function to handle the `selected` event on the auto-complete box.
 
-###### Example
-
         // This function will be called when the user selects an item from the auto-complete result list.
         select: function (e) {
             // ... code omitted ...
         }
 
 The first thing to do in this case is override some of the default behavior for the AutoComplete box. Normally, when you select something from a standard auto-complete box, the selected text is moved up into the box. This is a behavior that is not desired here. Instead, the entered user text should be cleared, resetting back to the **Search music...** placeholder text. To achieve this, call `preventDefault()` on the event to suppress the normal handling, and the `e.sender.value("")` to clear the text.
-
-###### Example
 
     select: function (e) {
         e.preventDefault(); // Stop the selected item text from moving up to the AutoComplete.
@@ -207,14 +181,10 @@ The `e.sender` is the jQuery object representing the `<input>` element. The `.va
 
 Next, display the album details to the user. To do this, you need to get the album ID. Note that a `data-album-id` attribute was added to each search result on the template.
 
-###### Example
-
     <script id="search-result-template" type="text/x-kendo-template">
         <div class="album-wide" data-album-id="#:data.AlbumId#">
 
 In the event object `e`, `e.item` is the `<li>` element. Then, use a jQuery selector to get the `<div>` element within the `<li>`, and jQuery's `.data()` method to get the value of the `data-album-id` attribute.
-
-###### Example
 
     select: function (e) {
         // ... code omitted ...

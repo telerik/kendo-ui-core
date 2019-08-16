@@ -15,10 +15,7 @@ The DateTimePicker HtmlHelper extension is a server-side wrapper for the [Kendo 
 Below are listed the steps for you to follow when configuring the Kendo UI DateTimePicker.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -29,18 +26,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
 
     ```ASPX
         <%: Html.Kendo().DateTimePicker()
-            .Name("datetimepicker") //The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the DateTimePicker.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the DateTimePicker.
-            .Value(DateTime.Now) //Set the value of the DateTimePicker.
+            .Name("datetimepicker") // The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the DateTimePicker.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the DateTimePicker.
+            .Value(DateTime.Now) // Set the value of the DateTimePicker.
         %>
     ```
     ```Razor
-        (Html.Kendo().DateTimePicker()
-            .Name("datetimepicker") //The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the DateTimePicker.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the DateTimePicker.
-            .Value(DateTime.Now) //Set the value of the DateTimePicker.
+        @(Html.Kendo().DateTimePicker()
+            .Name("datetimepicker") // The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the DateTimePicker.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the DateTimePicker.
+            .Value(DateTime.Now) // Set the value of the DateTimePicker.
         )
     ```
 
@@ -63,15 +60,15 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function datetimepicker_open() {
-            //Handle the open event.
+            // Handle the open event.
         }
 
         function datetimepicker_close() {
-            //Handle the close event.
+            // Handle the close event.
         }
 
         function datetimepicker_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -86,15 +83,15 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function datetimepicker_open() {
-            //Handle the open event.
+            // Handle the open event.
         }
 
         function datetimepicker_close() {
-            //Handle the close event.
+            // Handle the close event.
         }
 
         function datetimepicker_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -103,19 +100,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().DateTimePicker()
         .Name("datetimepicker")
         .Events(e => e
             .Open(@<text>
                 function() {
-                    //Handle the open event inline.
+                    // Handle the open event inline.
                 }
             </text>)
             .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
                 </text>)
         )
@@ -127,12 +122,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI DateTimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateTimePicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI DateTimePicker for ASP.NET MVC declaration.
+    // Place this after your Kendo UI DateTimePicker for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the DateTimePicker is used to get its client-side instance.
+            // The Name() of the DateTimePicker is used to get its client-side instance.
             var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
         });
     </script>

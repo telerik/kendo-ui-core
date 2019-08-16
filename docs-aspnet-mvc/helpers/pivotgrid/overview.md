@@ -35,7 +35,6 @@ For more information, refer to the demos on:
 Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for ASP.NET MVC and doing Ajax binding to an **Adventure Works** cube, hosted on demos.telerik.com/olap/msmdpump.dll.
 
 1. Create a new ASP.NET MVC 4 application. If you have the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions) installed, create a Telerik UI for ASP.NET MVC application. Name the application `KendoPivotGrid`. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a Kendo UI PivotGrid to the `Index` view.
 
     ```ASPX
@@ -91,9 +90,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 1. Build and run the application.
 
-  **Figure 1. The finished application**
-
-  ![Final result](images/pivotgrid.png)
+  ![The final result](images/pivotgrid.png)
 
 ## See Also
 

@@ -19,8 +19,6 @@ To start using the ListBox, you can use either:
 * [Server-binding with static data](#server-binding-with-static-data), or
 * [Ajax binding](#ajax-binding).
 
-> **Important**
->
 > When you use complex data objects, set the `DataTextField("TextField")` and `DataValueField("ValueField")` properties to notify the widget of your preferred binding behavior.
 
 ### Server-Binding with Static Data
@@ -62,8 +60,6 @@ The following example demonstrates how to bind the ListBox on the server when yo
 
 The following example demonstrates how to bind the `DataSource` component to remote data.
 
-###### Example
-
     @(Html.Kendo().ListBox()
         .Name("listbox")
         .Toolbar(toolbar => toolbar.Tools(
@@ -101,15 +97,11 @@ Selected items can be reordered by using any of the following approaches:
 1. The drag-and-drop functionality if the widget is `draggable`.
 1. The `Ctrl`+`Shift`+ <kbd>&darr;</kbd> or `Ctrl`+`Shift`+ <kbd>&uarr;</kbd> keyboard combination.
 
-> **Important**
->
 > Currently, the widget does not support the drag-and-drop feature for multiple selected items.
 
 ### Dragging and Dropping
 
 To enable the drag-and-drop feature of the ListBox, set it as `Draggable()` and configure its `.Draggable().DropSources("dropSourceId")` option. You can also customize the drag-and-drop behavior of the widget by using a draggable placeholder hint templates which accept the name of a JavaScript function.
-
-###### Example
 
     @(Html.Kendo().ListBox()
         .Name("selected")
@@ -139,8 +131,6 @@ To enable the drag-and-drop feature of the ListBox, set it as `Draggable()` and 
 
 The ListBox supports the use of [templates](https://docs.telerik.com/kendo-ui/framework/templates/overview) for its items that are passed as а function or string.
 
-###### Example
-
     <script id="customer-item-template" type="text/x-kendo-template">
         <span class="k-state-default" style="background-image: url('../content/web/Customers/#:data.CustomerID#.jpg')"></span>
         <span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>
@@ -157,8 +147,6 @@ The ListBox supports the use of [templates](https://docs.telerik.com/kendo-ui/fr
 ### Localization
 
 You can configure the ListBox `Messages()` for each toolbar command button. The messages serve as tooltip text when the user hovers over the buttons.
-
-###### Example
 
     @(Html.Kendo().ListBox()
         .Name("listbox")

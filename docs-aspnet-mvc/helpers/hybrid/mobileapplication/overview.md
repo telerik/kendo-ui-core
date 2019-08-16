@@ -27,10 +27,7 @@ There are two ways of navigation:
 ### Server Navigation
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Open `HomeController.cs` and modify the `Index` action method.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -38,8 +35,6 @@ There are two ways of navigation:
         }
 
 1. Add an action method for the `detail` view.
-
-    ###### Example
 
         public ActionResult Details()
         {
@@ -142,8 +137,6 @@ There are two ways of navigation:
 
 1. Open `HomeController.cs` and modify the `Index` action method.
 
-    ###### Example
-
         public ActionResult Index()
         {
             return View();
@@ -151,15 +144,11 @@ There are two ways of navigation:
 
 1. Add an action method for the `detail` view.
 
-    ###### Example
-
         public ActionResult Details()
         {
             return PartialView();
         }
 
-    > **Important**
-    >
     > Notice that the view is returned as partial.
 
 1. Add the default Hybrid UI View for ASP.NET MVC. The mobile application expects that the immediate child of the application element is a `MobileView`.
@@ -258,9 +247,7 @@ There are two ways of navigation:
 
 ### Instances
 
-You can reference a hybrid Application instance by using the code from the example below. Once a reference is established, use the [hybrid Application API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/application#methods) to control its behavior.
-
-###### Example
+You can reference a hybrid Application instance by using the code from the following example. Once a reference is established, use the [hybrid Application API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/application#methods) to control its behavior.
 
     @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)

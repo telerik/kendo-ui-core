@@ -12,8 +12,6 @@ The Editor provides options for checking the length of the text content or the l
 
 The following example demonstrates how to define custom Kendo UI validators through custom validation rules while working with the Editor HtmlHelper in ASP.NET MVC applications.
 
-###### Example
-
     <form>
         @(Html.Kendo().Editor()
             .Name("editor")
@@ -25,7 +23,7 @@ The following example demonstrates how to define custom Kendo UI validators thro
     </form>
 
     <script>
-        // register custom validation rules
+        // Register custom validation rules.
         (function ($, kendo) {
             $.extend(true, kendo.ui.validator, {
                 rules: {
@@ -58,5 +56,3 @@ The following example demonstrates how to define custom Kendo UI validators thro
 
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
 * [EditorBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
-
-For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its **How To** documentation folder.

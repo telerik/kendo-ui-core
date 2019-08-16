@@ -17,10 +17,7 @@ The DropDownTree HtmlHelper extension is a server-side wrapper for the [Kendo UI
 Below are listed the steps for you to follow when configuring the Kendo UI DropDownTree.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -31,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
     ```Razor
         @(Html.Kendo().DropDownTree()
-            .Name("dropdowntree") //The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
+            .Name("dropdowntree") // The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
             {
                 items.Add().Text("Root Item 1")
@@ -40,13 +37,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                         childred.Add().Text("Child Item 1");
                         childred.Add().Text("Child Item 2");
                     });
-                items.Add().Text("Root Item 2"); //Add item with text "Item2")
+                items.Add().Text("Root Item 2"); // Add item with text "Item2")
             })
         )
     ```
     ```ASPX
         <%: Html.Kendo().DropDownTree()
-            .Name("dropdowntree") //The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
+            .Name("dropdowntree") // The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
             .Items(items =>
             {
                 items.Add().Text("Root Item 1")
@@ -55,7 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                         childred.Add().Text("Child Item 1");
                         childred.Add().Text("Child Item 2");
                     });
-                items.Add().Text("Root Item 2"); //Add item with text "Item2")
+                items.Add().Text("Root Item 2"); // Add item with text "Item2")
             })
         %>
     ```
@@ -78,11 +75,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function onExpand() {
-            //Handle the expand event
+            // Handle the expand event.
         }
 
         function onCollapse() {
-            //Handle the collapse event
+            // Handle the collapse event.
         }
     </script>
 ```
@@ -96,11 +93,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function onExpand() {
-            //Handle the expand event
+            // Handle the expand event.
         }
 
         function onCollapse() {
-            //Handle the collapse event
+            // Handle the collapse event.
         }
     </script>
 ```
@@ -109,19 +106,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree")
         .Events(e => e
             .Expand(@<text>
             function() {
-                //Handle the expand event inline
+                // Handle the expand event inline
             }
             </text>)
             .Collapse(@<text>
             function() {
-                //Handle the collapse event inline
+                // Handle the collapse event inline
             }
             </text>)
         )
@@ -133,12 +128,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI DropDownTree instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownTree API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo DropDownTree for ASP.NET MVC declaration
+    // Place this after your Kendo DropDownTree for ASP.NET MVC declaration.
     <script>
         $(function() {
-            // Notice that the Name() of the dropdowntree is used to get its client-side instance
+            // The Name() of the dropdowntree is used to get its client-side instance.
             var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
         });
     </script>

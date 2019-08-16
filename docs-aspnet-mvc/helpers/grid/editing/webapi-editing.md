@@ -16,34 +16,23 @@ This article demonstrates how to implement the CRUD (Create, Read, Update, Destr
 Below are listed the steps for you to follow when implementing the CRUD data operations with a Web API controller for the Kendo UI Grid for ASP.NET MVC. The configuration example uses the **Products** table from the Northwind database.
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC Web application. Name the application `KendoGridWebApiCRUD`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug aspnetmvc4_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-    **Figure 1. A new entity data model**
-
-    ![New entity data model](../images/grid-entity-data-model.png)
+    ![A new entity data model](../images/grid-entity-data-model.png)
 
 1. Select **Generate from database** and click **Next**. Configure a connection to the Northwind database. Click **Next**.
-
 1. Select the **Products** table. Leave all other options as they are set by default. Click **Finish** to create the Entity Framework model.
 
-    **Figure 2. Choosing the connection**
-
-    ![Choose the Products table](../images/grid-database-objects.png)
+    ![Choosing the Products table](../images/grid-database-objects.png)
 
 1. Right click the `Controllers` folder in Visual Studio solution explorer. Select **Add** > **Controller**.
 
 1. Set **ProductsController** as **Controller name**. Select **API controller with read/write actions, using Entity Framework** as **Template**. Select **Product (KendoGridWebApiCRUD.Models)** as **Model class** and **NorthwindEntities (KendoGridWebApiCRUD.Models)** as **Data context class**. Click **Add** to create the Web API controller.
 
-    **Figure 3. Adding the Controller**
-
-    ![Add Controller](../images/grid-api-controller.png)
+    ![Adding the Controller](../images/grid-api-controller.png)
 
 1. Open `Controllers/ProductsController.cs`.
-
 1. Update the `GetProducts` method as demonstrated by The following example.
-
-    ###### Example
 
         public DataSourceResult GetProducts([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
         {
@@ -51,8 +40,6 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
         }
 
 1. Update the `PostProduct` method as demonstrated in The following example.
-
-    ###### Example
 
         public HttpResponseMessage PostProduct(Product product)
         {
@@ -143,9 +130,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
 1. Build and run the application.
 
-    **Figure 4. The final result**
-
-    ![Final result](../images/grid-inline-grid.png)
+    ![The final result](../images/grid-inline-grid.png)
 
 ## See Also
 

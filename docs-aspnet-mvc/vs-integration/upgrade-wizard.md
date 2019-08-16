@@ -18,15 +18,11 @@ The Upgrade Project Wizard upgrades existing Progress&reg; Telerik&reg; UI for A
 
 To open the wizard, click **Telerik** > **Telerik UI for ASP.NET MVC** > **Upgrade Wizard**.
 
-**Figure 1. Launch the Upgrade Wizard**
-
-![Choose projects](images/upgrade_menu.png)
+![Launching the Upgrade Wizard and choosing projects](images/upgrade_menu.png)
 
 ### Files for Upgrade
 
 The **Information Page** of the Upgrade Project Wizard describes the files and assemblies that are going to be upgraded.
-
-**Figure 2. Information page**
 
 ![Information page](images/upgrade_warning.png)
 
@@ -36,21 +32,15 @@ On the next page, the Wizard lists all projects from the solution that use Progr
 
 It is recommended to upgrade all projects to the selected version. The Compatibility button will invoke the [Upgrade API Analyzer tool](http://docs.telerik.com/aspnet-mvc/vs-integration/upgrade-api-analyzer):
 
-> **Important**
->
 > The listed projects target all MVC versions that are supported. When you complete the Wizard, all selected projects will be updated.
 
-**Figure 3. Choose projects and distribution version**
-
-![Choose projects and distribution version](images/upgrade_version.png)
+![Choosing projects and distribution version](images/upgrade_version.png)
 
 ### Project Resources for Upgrade
 
 The **Upgrade Project Resources** page allows you to update the editor templates in `~/Views/Shared/EditorTemplates` by choosing **Update Editor Templates**.
 
-**Figure 4. Update Project Resources page**
-
-![Update Project Resources](images/upgrade_settings.png)
+![Updating project resources](images/upgrade_settings.png)
 
 ### Backup Creation
 
@@ -60,9 +50,7 @@ The **Create Backup** page provides the following options:
 - **Don't create a backup**&mdash;Upgrades without creating a backup of your application.
 - **Show upgrade log when the Upgrade wizard finishes the upgrade**&mdash;Displays the upgrade log after the **Upgrade Wizard** finishes the upgrade.
 
-**Figure 5. Create Backup page**
-
-![Create Backup](images/upgrade_backup.png)
+![Creating backup](images/upgrade_backup.png)
 
 ## See Also
 

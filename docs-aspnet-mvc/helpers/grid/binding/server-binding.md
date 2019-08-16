@@ -153,13 +153,10 @@ The Grid makes `HTTP GET` requests to the action method which initially renders 
 
 For more information on how a typical URL would look like, refer to [this location](http://localhost:4939/?Grid-sort=ProductName-asc&amp;Grid-page=2\). The `Name` of the Grid will be used as a prefix of the query string parameters. In this way, more than one server-bound Grid can coexist in the same view. The prefix can be disabled through the `PrefixUrlParameters` method.
 
-###### Example
-
     <%: Html.Kendo().Grid(Model)
         .Name("Grid")
         .PrefixUrlParameters(false)
     %>
-
 
 ### Pass Additional Data to Action Methods
 
@@ -179,7 +176,7 @@ The following example demonstrates how to pass them.
     <%: Html.Kendo().Grid(Model)
         .Name("Grid")
         .DataSource(dataSource => dataSource
-            .Server() //specify server type
+            .Server() // Specify server type
             .Read(read => read.Action("Index", "Home", new { firstName = "John", lastName = "Doe } ))
         )
     %>
@@ -188,7 +185,7 @@ The following example demonstrates how to pass them.
     @(Html.Kendo().Grid(Model)
         .Name("Grid")
         .DataSource(dataSource => dataSource
-            .Server() //specify server type
+            .Server() // Specify server type
             .Read(read => read.Action("Index", "Home", new { firstName = "John", lastName = "Doe } ))
         )
     )
@@ -212,8 +209,6 @@ The following client-side events are supported in the server binding mode:
 - `GroupExpand`&mdash;The group object that is associated with group row will be empty in server binding scenario.
 - `GroupCollapse`&mdash;The group object that is associated with group row will be empty in server binding scenario.
 
-> **Important**
->
 > * The other client-side events, which are related to data-binding and CRUD data operations, will not be raised when the Grid is configured for server binding.
 > * Locked columns are not supported. To support locked columns, use [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}) instead.
 > * Showing or hiding of columns and reordering with the `GroupHeaderColumnTemplate` in server-binding scenarios is not supported. The reason is that in server-binding scenarios, the Kendo UI DataSource instance does not have groups and aggregates information. Therefore, the templates for the group rows cannot be compiled on the client side. If your project requires such a scenario, use [Ajax binding]({% slug ajaxbinding_grid_aspnetmvc %}).

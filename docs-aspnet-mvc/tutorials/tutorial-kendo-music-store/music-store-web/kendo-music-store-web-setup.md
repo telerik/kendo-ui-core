@@ -24,9 +24,7 @@ Start by adding Kendo UI to the project. The Kendo UI distribution can be downlo
 
 The preferred method of getting Kendo UI is to browse to [telerik.com](http://www.telerik.com/download/kendo-ui) and download Kendo UI as a `.zip` file. Depending on whether you are using the Trial version or have purchased the full Commercial distribution, you have a `.zip` file that follows one of these directory structures:
 
-**Figure 1. The Kendo UI directory structure**
-
-![kendo-commecrial-zip-layout](images/kendo-commecrial-zip-layout.png)
+![The Kendo UI directory structure](images/kendo-commecrial-zip-layout.png)
 
 The `\js` and `\styles` folders in the root of the `.zip` file contain the minified versions of the Kendo UI `.js` and `.css` files. If you have the commercial version of Kendo UI, you may also notice the `\source` folder. This folder also contains `\js` and `\styles` folders, but these are the full, non-minified versions of the `.js` and `.css`. These are typically used for local development and debugging, but the minified versions are the ones that should be deployed in a real application. For that reason, the examples use the minified files in this project.
 
@@ -38,9 +36,7 @@ Kendo UI enables you to fetch it from a CDN instead of downloading its files. Fo
 
 Kendo UI is also available using the NuGet package manager in Visual Studio. Search for `kendo`.
 
-**Figure 2. The search result for Kendo UI using the NuGet package manager**
-
-![kendo-nuget](images/kendo-nuget.png)
+![The search result for Kendo UI using the NuGet package manager](images/kendo-nuget.png)
 
 ### Additional Information
 
@@ -56,15 +52,11 @@ Also, in the `Debug` mode the bundler does not include minified files by default
 
 The following example demonstrates the making of a bundle from the Kendo UI `.css` files.
 
-###### Example
-
     bundles.Add(new StyleBundle("~/Content/kendo").Include(
         "~/Content/kendo.common.min.css",
         "~/Content/kendo.default.min.css"));
 
 These files are going to be included when running in the `Release` mode and not in the `Debug` mode. You are able to see and modify which files the ASP.NET bundler will ignore by inspecting the `bundles.IgnoreList` collection at runtime.
-
-###### Example
 
     // Clear all items from the default ignore list to allow minified CSS and JavaScript files to be included in debug mode
     bundles.IgnoreList.Clear();
@@ -79,8 +71,6 @@ Most sizeable web applications include a number of `.js` files. It is a good pra
 
 Besides Kendo UI, the only third-party library the Music Store application uses is Date.js. Set a `libs` bundle for this third-party library and an `app` bundle for your own application code.
 
-###### Example
-
     bundles.Add(new ScriptBundle("~/bundles/libs").Include(
         "~/Scripts/date.js"));
 
@@ -94,8 +84,6 @@ Besides Kendo UI, the only third-party library the Music Store application uses 
 
 Render them in `_Layout.cshtml`.
 
-###### Example
-
     @Scripts.Render("~/bundles/libs")
     @Scripts.Render("~/bundles/app")
 
@@ -104,8 +92,6 @@ Render them in `_Layout.cshtml`.
 While it is a typically good practice to always include the minified versions of `.js` and `.css` files that you use, it makes debugging JavaScript errors more difficult. The commercial version of Kendo UI comes with the full non-minified source code. You can include these files instead, using the ASP.NET bundler to bundle and minify them for production, while still keeping them un-minified for development.
 
 To do this, include the non-minified `.js` and `.css` files from the `\source` folder of the downloaded Kendo UI `.zip` file in your project. Then, configure the ASP.NET bundles to include these files.
-
-###### Example
 
     bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
         "~/Scripts/kendo.all.js"));
@@ -116,14 +102,10 @@ To do this, include the non-minified `.js` and `.css` files from the `\source` f
 
 Then set up your `web.config` file to enable bundling only for the `Release` builds of the application. In this way, ASP.NET servers the non-minified files for `Debug`, and a bundled, minified version for `Release`. To do this, set the compilation debug to `true` in the `Debug` version of your `web.config` file.
 
-###### Example
-
     <system.web>
       <compilation debug="true" targetFramework="4.5" />
 
 The `Release` version of the `web.config` file set debug to `false`.
-
-###### Example
 
     <system.web>
       <compilation debug="false" targetFramework="4.5" />
@@ -133,8 +115,6 @@ The `Release` version of the `web.config` file set debug to `false`.
 You are now able to add Kendo UI and any other third-party libraries to the pages. The Music Store uses the `Views\Shared\_Layout.cshtml` master page, so add Kendo UI here. Make sure that the Kendo UI JavaScript files come after jQuery. For styling, include `kendo.common.min.css`, plus one of the Kendo UI themes.
 
 The following example demonstrates how to use the `kendo.default.min.css` which is the Default theme.
-
-###### Example
 
     <head>
         <meta charset="utf-8" />

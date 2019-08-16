@@ -16,18 +16,18 @@ Models:
 ```Map
 public class Map
 {
-    // Map properties
+    // Map properties.
     public string Name { get; set; }
     public double CenterLatitude { get; set; }
     public double CenterLongitude { get; set; }
     public int Zoom { get; set; }
 
-    // Tile layer properties
+    // Tile layer properties.
     public string TileUrlTemplate { get; set; }
     public string[] TileSubdomains { get; set; }
     public string TileAttribution { get; set; }
 
-    // Markers collection
+    // Markers collection.
     public IEnumerable<Marker> Markers { get; set; }
 }
 ```
@@ -95,7 +95,7 @@ View:
             }
         })
 )
-```
+```s
 
 ## See Also
 

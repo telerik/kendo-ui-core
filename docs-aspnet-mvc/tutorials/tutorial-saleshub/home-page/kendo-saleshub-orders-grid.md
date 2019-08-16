@@ -11,17 +11,13 @@ position: 2
 
 After you have created the customer TreeView, you need to set up the Grid of orders by using the Kendo UI MVC extensions in the Kendo UI Sales Hub.
 
-**Figure 1. The Orders list in the Kendo UI Sales Hub**
-
-![kendo-saleshub-orders-grid-screenshot](images/kendo-saleshub-orders-grid-screenshot.png)
+![The Orders list in the Kendo UI Sales Hub](images/kendo-saleshub-orders-grid-screenshot.png)
 
 ## Configuration
 
 ### Create the Data-Bound Grid
 
 To find the Grid, refer to **Views/Home/Index.cshtml**.
-
-###### Example
 
     @Html.Kendo().Grid<CustomerOrderViewModel>().Name("ordersGrid")
 
@@ -30,8 +26,6 @@ The first part of the declaration from this example instructs the Kendo UI MVC e
 ### Define Columns
 
 The following example declares what columns the Grid needs to have.
-
-###### Example
 
     .Columns(columns =>
     {
@@ -54,22 +48,16 @@ The last column of the Grid works differently from the other columns. This is be
 
 It is not possible to specify a template for the column by using the `Template` function because the Grid will be bound on the client side. Instead, you have to call the `ClientTemplate` function which allows the specification of a Kendo UI template. In this case, you need to generate an `<a>` with a `href` attribute that links to the edit page and contains the id of the order to edit.
 
-###### Example
-
     columns.Template(model => null)
             .ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Order", action = "Edit" }) + "/#= OrderId #'>Edit</a>");
 
 Then, you need to supply a template for the Toolbar of the Grid. This template contains an `<a>` that is used to redirect the user to the page for creating an order. This behavior is handled by some custom JavaScript, which is located in **Scripts/home.js** and which will be described further in this article.
-
-###### Example
 
         .ToolBar(toolbar => toolbar.Template("<a id='createOrderButton' class='k-button k-button-icontext k-grid-add' href='#'>Create order</a>"))
 
 ### Use Filter Columns
 
 By using the code from the example below, you instruct the Grid that it is possible for the user to filter the columns. It also allows them to select an entire row and configures the page sizes, from which the user can select.
-
-###### Example
 
         .Filterable()
         .Selectable(settings => settings.Mode(GridSelectionMode.Single))
@@ -85,8 +73,6 @@ You also have to communicate to the DataSource what property on the model the Id
 
 The last two function calls tell the DataSource that the server will handle the filtering and that you want to get only 20 orders back from the server.
 
-###### Example
-
         .DataSource(dataSource => dataSource
             .Ajax()
             .Read(builder => builder.Url("/api/CustomerOrders/GetOrdersForCustomer/").Type(HttpVerbs.Get))
@@ -101,15 +87,11 @@ The `"Create an Order"` button was previously set up in the toolbar of the Grid.
 
 Get the URL of the page, to which the user will be redirected for creating an order. You do not have to hardcode it to that page in your JavaScript because it might change later. That is why you have to inject it into a JavaScript variable by using Razor. The code is located in **Views/Home/Index.cshtml**.
 
-###### Example
-
     <script>
         window.SalesHub.createOrderUrl = "@Url.RouteUrl("Default", new { controller = "Order", action = "New" }, Request.Url.Scheme)";
     </script>
 
 Now that the URL is placed in a variable that can be accessed from your JavaScript function, set up the code which will redirect the user to that page when the **Create Order** button is clicked.
-
-###### Example
 
     $("#createOrderButton").on("click", function() {
         window.location.href = window.SalesHub.createOrderUrl + '/' + window.SalesHub.selectedCustomerId;

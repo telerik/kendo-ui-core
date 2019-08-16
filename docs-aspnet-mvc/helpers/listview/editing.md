@@ -16,8 +16,6 @@ Below are the steps for you to follow when configuring the Kendo UI ListView for
 
 The following example demonstrates how to define the item template for the Kendo UI ListView.
 
-###### Example
-
     <!-- The following markup contains the `Add new record` button -->
     <div class="k-toolbar k-grid-toolbar">
         <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
@@ -43,8 +41,6 @@ The following example demonstrates how to define the item template for the Kendo
             </div>
     </script>
 
-> **Important**
->
 > Click events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Kendo UI ListView as `edit` and `delete` actions.
 
 ### Set the Editor Template
@@ -54,8 +50,6 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
 You need to:
 1. Declare the editor template in a file that uses the name of the edited model&mdash;for example `ProductViewModel.cshtml`.
 1. Place this file in the `Views\Shared\EditorTemplates` directory of your project.
-
-###### Example
 
     @model Kendo.Mvc.Examples.Models.ProductViewModel
     <div class="product-view">
@@ -87,15 +81,11 @@ You need to:
         </div>
     </div>
 
-> **Important**
->
 > Click events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Kendo UI ListView as `save` and `cancel` actions. The editor template should be wrapped in an HTML container, same as the item template.
 
 ###	Enable Editing
 
 The following example demonstrates how to enable the ListView editing.
-
-###### Example
 
     @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("listView")
@@ -107,8 +97,6 @@ The following example demonstrates how to enable the ListView editing.
 ### Specify the Action Methods
 
 The following example demonstrates how to specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
-
-###### Example
 
     @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
         .Name("listView")
@@ -129,15 +117,13 @@ The following example demonstrates how to specify the action methods which will 
 
 The following example demonstrates how to specify the property of the model which is the unique identifier (primary key).
 
-###### Example
-
     @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
         .Name("listView")
         .TagName("div")
         .ClientTemplateId("list-view-template")
         .Editable()
         .DataSource(dataSource => dataSource
-            //Specify that the ProductID property is the unique identifier of the model.
+            // Specify that the ProductID property is the unique identifier of the model.
             .Model(model => model.Id("ProductID"))
             .Create(create => create.Action("Editing_Create", "ListView"))
             .Read(read => read.Action("Editing_Read", "ListView"))
@@ -150,16 +136,12 @@ The following example demonstrates how to specify the property of the model whic
 
 The following example demonstrates how to implement the `read` action method.
 
-###### Example
-
     public ActionResult Editing_Read([DataSourceRequest] DataSourceRequest request)
     {
         return Json(ProductRepository.All().ToDataSourceResult(request));
     }
 
 The following example demonstrates how to implement the `create` action method.
-
-###### Example
 
     [AcceptVerbs(HttpVerbs.Post)]
     public ActionResult Editing_Create([DataSourceRequest] DataSourceRequest request, Product product)
@@ -169,13 +151,11 @@ The following example demonstrates how to implement the `create` action method.
             ProductRepository.Insert(product);
         }
 
-        //Return any validation errors, if any.
+        // Return any validation errors, if any.
         return Json(new [] { product }.ToDataSourceResult(request, ModelState));
     }
 
 The following example demonstrates how to implement the `update` action method.
-
-###### Example
 
     [AcceptVerbs(HttpVerbs.Post)]
     public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, Product product)
@@ -194,13 +174,11 @@ The following example demonstrates how to implement the `update` action method.
             }
         }
 
-        //Return any validation errors, if any.
+        // Return any validation errors, if any.
         return Json(ModelState.ToDataSourceResult());
     }
 
 The following example demonstrates how to implement the `destroy` action method.
-
-###### Example
 
     [AcceptVerbs(HttpVerbs.Post)]
     public ActionResult Editing_Destroy([DataSourceRequest] DataSourceRequest request, Product product)
@@ -210,7 +188,7 @@ The following example demonstrates how to implement the `destroy` action method.
             ProductRepository.Delete(product);
         }
 
-        //Return any validation errors, if any.
+        // Return any validation errors, if any.
         return Json(ModelState.ToDataSourceResult());
     }
 

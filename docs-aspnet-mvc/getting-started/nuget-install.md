@@ -29,11 +29,7 @@ As of now, Visual Studio does not provide a UI for configuring authenticated NuG
 
 The command from the example below stores a token in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
 
-> **Important**
->
 > If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text.
-
-###### Example
 
 ```
 NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
@@ -44,8 +40,6 @@ NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" 
 
 The command from the example below stores the password in clear text in the `%AppData%\NuGet\NuGet.config` file. If you are unable to connect to the feed using encrypted credentials, use this alternative approach.
 
-###### Example
-
 ```
 NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
       -UserName "your login email" -Password "your password" ^
@@ -53,8 +47,6 @@ NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" 
 ```
 
 If you have already stored a token instead of storing the credentials as clear text, update the definition in the `%AppData%\NuGet\NuGet.config` file by using the following command.
-
-###### Example
 
 ```
 NNuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^

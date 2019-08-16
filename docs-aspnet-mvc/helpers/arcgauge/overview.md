@@ -15,10 +15,7 @@ The ArcGauge HtmlHelper extension is a server-side wrapper for the [Kendo UI Arc
 Below are listed the steps for you to follow when configuring the Kendo UI ArcGauge.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -54,12 +51,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI ArcGa
 
 To reference an existing Kendo UI ArcGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ArcGauge API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI ArcGauge for ASP.NET MVC declaration.
+    // Place this after your Kendo UI ArcGauge for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the ArcGauge is used to get its client-side instance.
+            // The Name() of the ArcGauge is used to get its client-side instance.
             var gauge = $("#arcGauge").data("kendoArcGauge");
         });
     </script>

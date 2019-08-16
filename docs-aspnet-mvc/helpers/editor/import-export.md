@@ -16,7 +16,7 @@ As of the **R1 2017** release, the Kendo UI Editor widget for ASP.NET MVC provid
 
 Along with the server-side integration of the [Telerik Document Processing](http://docs.telerik.com/devtools/document-processing/introduction) suite, there are two new tools that utilize the import and export functionality&mdash;`ExportAs` and `Import`.
 
-![](import-export-animation.gif)
+![Importing and exporting an animation](import-export-animation.gif)
 
 ## Dependencies
 
@@ -27,8 +27,6 @@ To start using the import and export functionality:
 1. Add a reference in your project to the `Kendo.MVC.Export` assembly.
 2. Add references in your project to the required [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries).
 
-> **Important**
->
 > You can get the required assemblies from the `telerik.ui.for.aspnetmvc.<version>.zip` archive that contains a `Kendo.MVC.Export` folder with the assemblies for both .NET 4.0 and .NET 4.5 versions.
 
 ## Getting Started
@@ -116,8 +114,6 @@ Below are listed the steps for you to follow when enabling the export capabiliti
 
 1. Implement the action method in the corresponding controller.
 
-    ###### Example
-
     ```
     using Kendo.Mvc.Export;
     ...
@@ -179,8 +175,6 @@ Similar to exporting, below are listed the steps for you to follow when enabling
     %>
     ```
 
-    > **Important**
-    >
     > The `Import` tool integrates the [Kendo UI Upload HtmlHelper]({%slug overview_uploadhelper_aspnetmvc%}) to send a file to the server. You can configure it through the following exposed helper methods:
     >
     > * [`AllowedExtensions()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-AllowedExtensions%28System.String%5B%5D%29)
@@ -191,8 +185,6 @@ Similar to exporting, below are listed the steps for you to follow when enabling
     > * [`Success()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Success%28System.String%29)
 
 1. Implement the action method in the corresponding controller.
-
-    ###### Example
 
     ```
     using Kendo.Mvc.Export;
@@ -225,7 +217,6 @@ The **Document Processing Library** provides settings for the import and export.
 
 The following example demonstrates how to use [`HtmlImportSettings`](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so you can process HTML images before they are exported to `RadFlowDocument`.
 
-###### Example
 
 ```
 using Kendo.Mvc.Export;
@@ -262,8 +253,6 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 
 The following example demonstrates hoe to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag.
 
-###### Example
-
 ```
 using Kendo.Mvc.Export;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
@@ -292,5 +281,3 @@ For more information on each setting supported by `EditorImportSettings`, refer 
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-
-For runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder](/helpers/editor/how-to/).

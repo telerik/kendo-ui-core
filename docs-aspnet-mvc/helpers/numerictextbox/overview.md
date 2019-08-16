@@ -15,10 +15,7 @@ The NumericTextBox HtmlHelper extension is a server-side wrapper for the [Kendo 
 Below are listed the steps for you to follow when configuring the Kendo UI NumericTextBox.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -29,18 +26,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
 
     ```ASPX
         <%: Html.Kendo().NumericTextBox()
-            .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
-            .Min(-100) //Set the min value of the NumericTextBox.
-            .Max(100) //Set the min value of the NumericTextBox.
-            .Value(10) //Set the value of the NumericTextBoxNumericTextBox.
+            .Name("numerictextbox") // The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
+            .Min(-100) // Set the min value of the NumericTextBox.
+            .Max(100) // Set the min value of the NumericTextBox.
+            .Value(10) // Set the value of the NumericTextBoxNumericTextBox.
         %>
     ```
     ```Razor
         @(Html.Kendo().NumericTextBox()
-            .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
-            .Min(-100) //Set the min value of the NumericTextBox.
-            .Max(100) //Set the min value of the NumericTextBox.
-            .Value(10) //Set the value of the NumericTextBox.
+            .Name("numerictextbox") // The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
+            .Min(-100) // Set the min value of the NumericTextBox.
+            .Max(100) // Set the min value of the NumericTextBox.
+            .Value(10) // Set the value of the NumericTextBox.
         )
     ```
 
@@ -62,11 +59,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function numerictextbox_spin() {
-            //Handle the spin event.
+            // Handle the spin event.
         }
 
         function numerictextbox_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -80,11 +77,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function numerictextbox_spin() {
-            //Handle the spin event.
+            // Handle the spin event.
         }
 
         function numerictextbox_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -93,19 +90,17 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-###### Example
-
     @(Html.Kendo().NumericTextBox()
         .Name("numerictextbox")
         .Events(e => e
             .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
             </text>)
             .Spin(@<text>
                 function() {
-                    //Handle the spin event inline.
+                    // Handle the spin event inline.
                 }
             </text>)
         )
@@ -117,16 +112,13 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI NumericTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [NumericTextBox API](http://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI NumericTextBox for ASP.NET MVC declaration.
+    // Place this after your Kendo UI NumericTextBox for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the NumericTextBox is used to get its client-side instance.
+            // The Name() of the NumericTextBox is used to get its client-side instance.
             var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
         });
     </script>
-
 
 ## See Also
 

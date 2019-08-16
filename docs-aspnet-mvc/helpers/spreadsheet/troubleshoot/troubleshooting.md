@@ -16,9 +16,7 @@ This page provides solutions for common problems you may encounter while working
 
 The conversion and processing can hang or fail even if the Spreadsheet file does not contain a lot of data. Even cells that appear empty are processed if they have a non-default styling.
 
-**Solution**
-
-Reset all cells outside the used range to the default borders, formatting and colors.
+**Solution** Reset all cells outside the used range to the default borders, formatting and colors.
 
 ## See Also
 

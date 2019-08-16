@@ -25,8 +25,6 @@ If the Notification element is used to contain static (non-popup) notifications,
 
 The following example demonstrates how to initialize the Notification.
 
-###### Example
-
     @(Html.Kendo().Notification()
         .Name("notification")
     )
@@ -47,15 +45,11 @@ The following example demonstrates how to initialize the Notification.
 
 The Notification provides several built-in notification types&mdash;`"info"`, `"success"`, `"warning"`, and `"error"`. The benefit of having different notification types is the ability to use different templates and looks for each type. The built-in types provide ready-to-use shorthand methods for display, as well as built-in templates and styling. The shorthand method names match the listed notification types.
 
-> **Important**
->
 > If no type is specified when a notification is shown, the `"info"` type is displayed. An unlimited amount of custom notification types and corresponding templates can be defined.
 
 For further details, refer to the [section on templates]({% slug overview_notificatiomhelper_aspnetmvc %}#templates).
 
 The following example demonstrates the built-in Notification types.
-
-###### Example
 
     @(Html.Kendo().Notification()
         .Name("notification")
@@ -87,8 +81,6 @@ If needed, automatic hiding by clicking anywhere on the notifications can be dis
 
 The following example demonstrates how to manage the hide settings of the Notification.
 
-###### Example
-
     @(Html.Kendo().Notification()
         .Name("notification")
         //Hide automatically after 7 seconds.
@@ -113,21 +105,19 @@ If the popup content varies and stacking is likely to occur, explicitly define d
 
 The following example demonstrates how to manage the position, stacking, and size of the Notification.
 
-###### Example
-
     @(Html.Kendo().Notification()
         .Name("notification")
         .Position(p =>
         {
             //Notification popup will scroll together with the other content.
             p.Pinned(false);
-            //The first notification popup will appear 30px from the viewport's top and right edge.
+            // The first notification popup will appear 30px from the viewport's top and right edge.
             p.Top(30);
             p.Right(30);
         })
         //New notifications will appear below old ones.
         .Stacking(NotificationStackingSettings.Down)
-        //Set the appropriate size.
+        // Set the appropriate size.
         .Width(300)
         .Height(50)
     )
@@ -138,13 +128,11 @@ Notifications can also display static messages, which do not overlay other eleme
 
 The following example demonstrates how to enable static notifications.
 
-###### Example
-
     @(Html.Kendo().Notification()
         .Name("notification")
-        //Insert all notifications to the widget's originating element.
+        // Insert all notifications to the widget's originating element.
         .AppendTo("#notification")
-        //New notifications will appear above old ones.
+        // New notifications will appear above old ones.
         .Stacking(NotificationStackingSettings.Up)
     )
 
@@ -156,8 +144,6 @@ Notifications allow configuring multiple templates. Each template is used togeth
 
 The following example demonstrates how to use templates.
 
-###### Example
-
     <script id="myAlertTemplate" type="text/x-kendo-template">
         <div class="myAlert">System alert generated at #= time # : #= myMessage #</div>
     </script>
@@ -166,11 +152,11 @@ The following example demonstrates how to use templates.
         .Name("notification")
         .Templates(t =>
         {
-            //Define a custom template for the built-in "warning" Notification type.
+            // Define a custom template for the built-in "warning" Notification type.
             t.Add().Type("warning").ClientTemplate("<div class='myWarning'>Warning: #= myMessage #</div>");
-            //Define a template for the custom "timeAlert" Notification type.
+            // Define a template for the custom "timeAlert" Notification type.
             t.Add().Type("timeAlert").ClientTemplate("<div class='myAlert'>System alert generated at #= time # : #= myMessage #</div>");
-            //The template content can also be defined separately. The above line can be replaced with:
+            // The template content can also be defined separately. The above line can be replaced with:
             t.Add().Type("timeAlert").ClientTemplateID("myAlertTemplate");
         })
     )
@@ -179,12 +165,12 @@ The following example demonstrates how to use templates.
         $(function(){
             var n = $("#notification").data("kendoNotification");
 
-            //Show a warning message using the built-in shorthand method.
+            // Show a warning message using the built-in shorthand method.
             n.warning({
                 myMessage: "some warning message here"
             });
 
-            //Show a "timeAlert" message using the default show() method.
+            // Show a "timeAlert" message using the default show() method.
             n.show({
                 time: new Date().toLocaleTimeString(),
                 myMessage: "Server will be restarted."

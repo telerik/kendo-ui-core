@@ -16,8 +16,6 @@ The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI Tool
 
 The following example demonstrates how to initialize the ToolBar.
 
-###### Example
-
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")
         .Items(items => {
@@ -28,7 +26,7 @@ The following example demonstrates how to initialize the ToolBar.
             //A toggle button.
             items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true).Selected(true);
 
-            //The Split button.
+            // The Split button.
             items.Add().Type(CommandType.SplitButton).Text("Split Button").MenuButtons(menuButtons =>
             {
                 menuButtons.Add().Text("Option 1").Id("option1");
@@ -36,7 +34,7 @@ The following example demonstrates how to initialize the ToolBar.
                 menuButtons.Add().Text("Option 3").Id("option3");
             });
 
-            //The ButtonGroup.
+            // The ButtonGroup.
             items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
             {
                 buttons.Add().Text("Left").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyLeft");
@@ -44,7 +42,7 @@ The following example demonstrates how to initialize the ToolBar.
                 buttons.Add().Text("Right").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyRight");
             });
 
-            //The separator.
+            // The separator.
             items.Add().Type(CommandType.Separator);
 
             //A custom template.
@@ -57,10 +55,7 @@ The following example demonstrates how to initialize the ToolBar.
 Below are listed the steps for you to follow when configuring the Kendo UI ToolBar.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method which renders the view.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -73,7 +68,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
         <%: Html.Kendo().ToolBar()
             .Resizable(true)   //Enable or disable the resizing feature.
 
-            .Items(items => {  //Define the widget commands.
+            .Items(items => {  // Define the widget commands.
                 items.Add().Type(CommandType.Button).Text("Button");
             })
         %>
@@ -82,7 +77,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
         @(Html.Kendo().ToolBar()
             .Resizable(true)   //Enable or disable the resizing feature.
 
-            .Items(items => {  //Define the widget commands.
+            .Items(items => {  // Define the widget commands.
                 items.Add().Type(CommandType.Button).Text("Button");
             })
         )
@@ -96,8 +91,6 @@ The `Spacer` command type moves the tools that are declared after it to the righ
 
 The following example demonstrates how to define a spacer.
 
-###### Example
-
 ```
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")
@@ -110,8 +103,6 @@ The following example demonstrates how to define a spacer.
 ```
 
 You can use multiple spacers to create an equal amount of space between several tools.
-
-###### Example
 
 ```
     @(Html.Kendo().ToolBar()
@@ -136,7 +127,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ```ASPX
     <%: Html.Kendo().ToolBar()
-        .Items(items => {  //Define the widget commands
+        .Items(items => {  // Define the widget commands
             items.Add().Type(CommandType.Button).Text("Button");
         })
         .Events(e => e
@@ -150,7 +141,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function onClick(e) {
-            //Handle the click event.
+            // Handle the click event.
         }
 
         //.....
@@ -158,7 +149,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 ```
 ```Razor
     @(Html.Kendo().ToolBar()
-        .Items(items => {  //Define the widget commands
+        .Items(items => {  // Define the widget commands
             items.Add().Type(CommandType.Button).Text("Button");
         })
         .Events(e => e
@@ -172,7 +163,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function onClick(e) {
-            //Handle the click event.
+            // Handle the click event.
         }
 
         //.....
@@ -185,9 +176,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 To reference an existing Kendo UI ToolBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ToolBar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI ToolBar for ASP.NET MVC declaration.
+    // Place this after your Kendo UI ToolBar for ASP.NET MVC declaration.
     <script>
         $(function() {
             var toolbar = $("#container").data("kendoToolBar");

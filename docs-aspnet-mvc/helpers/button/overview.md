@@ -26,8 +26,6 @@ Placing clickable elements with their own special behavior inside the Button&mda
 
 The following example demonstrates how to initialize the Button by using the default `button` tag.
 
-###### Example
-
 ```Razor
 
         @(Html.Kendo().Button()
@@ -44,8 +42,6 @@ The following example demonstrates how to initialize the Button by using the def
 ```
 
 The following example demonstrates how to initialize the Button by using the `anchor` tag.
-
-###### Example
 
 ```Razor
 
@@ -78,8 +74,6 @@ Background icons are applied via the `.Icon()` or `.SpriteCssClass()` fluent met
 
 The following example demonstrates how to add a background icon by using `.Icon()`.
 
-###### Example
-
 ```Razor
 
         @(Html.Kendo().Button()
@@ -97,13 +91,9 @@ The following example demonstrates how to add a background icon by using `.Icon(
 
 The above configuration is expected to produce the HTML output from the following example.
 
-###### Example
-
         <button type="button" id="cancelButton" class="k-button k-button-icontext"><span class="k-icon k-cancel"></span>Cancel</button>
 
 The following example demonstrates how to add a background icon by using `.SpriteCssClass()`.
-
-###### Example
 
 ```Razor
 
@@ -122,15 +112,11 @@ The following example demonstrates how to add a background icon by using `.Sprit
 
 The above configuration is expected to produce the HTML output from the following example.
 
-###### Example
-
       <button type="button" id="spriteButton" class="k-button k-button-icontext"><span class="k-sprite myIconClass"></span>Sprite button</button>
 
 Technically, `.SpriteCssClass("k-icon k-cancel")` can be used to achieve the same result as `.Icon("cancel")`, but `.Icon()` spares you the need to set two CSS classes at the same time and provides a certain level of abstraction. The Button uses an existing `span` element if it is supplied as `.Content()`&mdash;for example, if you want to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
 
 The following example demonstrates how to use a button with no text.
-
-###### Example
 
 ```Razor
 
@@ -153,8 +139,6 @@ Image icons are applied via the `.ImageUrl()` property and are displayed as an `
 
 The following example demonstrates how to use `.ImageUrl()`.
 
-###### Example
-
 ```Razor
 
         @(Html.Kendo().Button()
@@ -172,13 +156,9 @@ The following example demonstrates how to use `.ImageUrl()`.
 
 The above configuration is expected to produce the HTML output from the following example.
 
-###### Example
-
         <button type="button" id="imageButton" class="k-button k-button-icontext"><img class="k-image" src="/images/myIcon.gif" alt="icon" />Image button</button>
 
 The following example demonstrates how to use `.ImageUrl()` with no text. Note that an `img` tag should be placed inside the Button content. The image should have a `k-image` CSS class.
-
-###### Example
 
 ```Razor
 
@@ -202,8 +182,6 @@ The following example demonstrates how to use `.ImageUrl()` with no text. Note t
 The business logic of an application often requires a certain button to be temporarily enabled or disabled. The Button can be configured to be initially disabled via its `.Enable()` setting. The widget can also be disabled or enabled at any time with JavaScript by using its `enable()` method with a Boolean argument.
 
 The following example demonstrates how to use `.Enable()`.
-
-###### Example
 
 ```Razor
 

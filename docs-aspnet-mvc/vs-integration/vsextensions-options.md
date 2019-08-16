@@ -12,9 +12,7 @@ The Visual Studio (VS) **Extensions Options** dialog provides settings, allowing
 
 It can be accessed by clicking on **Telerik** > **VSExtensions Options**.
 
-**Figure 1. The Options menu**
-
-![Options menu](images/options_menu.png)
+![The Options menu](images/options_menu.png)
 
 The **Extensions Options** dialog contains two sets of options that affect the Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions.
 
@@ -22,9 +20,7 @@ The **Extensions Options** dialog contains two sets of options that affect the P
 
 The settings under the General category affect all of the installed Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions.
 
-**Figure 2. The General Settings Options dialog**
-
-![Options Dialog](images/options.png)
+![The Options dialog](images/options.png)
 
 ### Project Setup
 
@@ -41,17 +37,13 @@ Set the project upgrade notifications for detected local distributions by using 
 
 - **Select a folder for downloads**&mdash;Configures the path where the extensions look for and store distributions.
 
-> **Important**
->
 > Changing the folder path does not move existing folder contents from your previous path. Move your previous folder contents manually if you still want to use them.
 
 ## Progress&reg; Telerik&reg; UI for ASP.NET MVC Settings
 
 All settings under the Kendo UI category affect only the Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions.
 
-**Figure 3. The Progress&reg; Telerik&reg; UI for ASP.NET MVC Settings dialog**
-
-![Options Dialog](images/options_kendo.png)
+![The Options dialog](images/options_kendo.png)
 
 ### Latest Version Retrieval
 

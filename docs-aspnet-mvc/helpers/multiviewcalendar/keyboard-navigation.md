@@ -28,8 +28,6 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 | `Ctrl`+`Down Right` | Navigates to the next month.                     |
 
 
-###### Example
-
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()

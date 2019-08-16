@@ -14,5 +14,3 @@ To see the example, refer to the project on how to [use the Kendo UI MultiSelect
 
 * [Overview of the MultiSelect HtmlHelper]({% slug overview_multiselecthelper_aspnetmvc %})
 * [MultiSelectBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
-
-For more runnable examples on the Kendo UI MultiSelect in ASP.NET MVC applications, browse its **How To** documentation folder.

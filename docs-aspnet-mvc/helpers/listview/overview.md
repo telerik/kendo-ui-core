@@ -17,10 +17,7 @@ The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI Lis
 Below are listed the steps for you to follow when configuring the Kendo UI ListView.
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
-
 1. Create a new action method and pass the **Products** table as the model.
-
-    ###### Example
 
         public ActionResult Index()
         {
@@ -61,10 +58,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
         </script>
     ```
     ```ASPX
-        <%: Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
-            .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
-            .TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
-            .ClientTemplateId("template") //This template will be used for rendering the ListView items.
+        <%: Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
+            .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+            .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
+            .ClientTemplateId("template") // This template will be used for rendering the ListView items.
             .DataSource(dataSource => {
                 dataSource.Read(read => read.Action("Products_Read", "ListView"));
             }) //DataSource configuration. It will be used on paging.
@@ -72,10 +69,10 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
         %>
     ```
     ```Razor
-            @(Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
-                .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
-                .TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
-                .ClientTemplateId("template") //This template will be used for rendering the ListView items.
+            @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
+                .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+                .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
+                .ClientTemplateId("template") // This template will be used for rendering the ListView items.
                 .DataSource(dataSource => {
                     dataSource.Read(read => read.Action("Products_Read", "ListView"));
                 }) //DataSource configuration. It will be used on paging.
@@ -106,11 +103,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function productListView_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function productListView_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -129,11 +126,11 @@ The following example demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function productListView_dataBound() {
-            //Handle the dataBound event.
+            // Handle the dataBound event.
         }
 
         function productListView_change() {
-            //Handle the change event.
+            // Handle the change event.
         }
     </script>
 ```
@@ -141,8 +138,6 @@ The following example demonstrates how to subscribe to events by a handler name.
 ### By Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
-###### Example
 
     @(Html.Kendo().ListView<ProductViewModel>()
         .Name("listView")
@@ -154,12 +149,12 @@ The following example demonstrates how to subscribe to events by a template dele
         .Events(e => e
             .DataBound(@<text>
                 function() {
-                    //Handle the dataBound event inline.
+                    // Handle the dataBound event inline.
                 }
             </text>)
             .Change(@<text>
                 function() {
-                    //Handle the change event inline.
+                    // Handle the change event inline.
                 }
             </text>)
         )
@@ -171,12 +166,10 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Kendo UI ListView instance,. use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ListView API](http://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
 
-###### Example
-
-    //Put this after your Kendo UI ListView for ASP.NET MVC declaration.
+    // Place this after your Kendo UI ListView for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the Name() of the ListView is used to get its client-side instance.
+            // The Name() of the ListView is used to get its client-side instance.
             var listView = $("#productGrid").data("kendoListView");
         });
     </script>

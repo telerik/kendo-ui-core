@@ -18,16 +18,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 1. Add a new action method which returns data to populate the ListView.
 
-    ###### Example
-
-        public ActionResult Products_Read()
+      public ActionResult Products_Read()
         {
             var products = new NorthwindDataContext().Products;
         }
 
 1. Add a new parameter of type `Kendo.UI.DataSourceRequest`. It will contain the current ListView request information. Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
-
-    ###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -35,8 +31,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
         }
 
 1. Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a `Kendo.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
-
-    ###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -46,8 +40,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
         }
 
 1. Return the `DataSourceResult` as JSON.
-
-    ###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -103,13 +95,10 @@ To pass additional parameters to the action method, use the `Data` setting. Prov
 
 The following example demonstrates the action method.
 
-###### Example
-
     public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
     {
         //Implementation omitted
     }
-
 
 The following example demonstrates how to send additional data.
 
@@ -156,13 +145,10 @@ The following example demonstrates how to send additional data.
 
 ### Client Data Processing
 
-By default, Kendo UI ListView for ASP.NET MVC requests data from the server every time the user changes the page, filters the grid, sorts, or groups. This behavior
-can be changed by disabling `ServerOperation`.
-
-###### Example
+By default, Kendo UI ListView for ASP.NET MVC requests data from the server every time the user changes the page, filters the grid, sorts, or groups. This behavior can be changed by disabling `ServerOperation`.
 
     .DataSource(dataSource => dataSource
-        .ServerOperation(false) // paging will be applied client-side
+        .ServerOperation(false) // Paging will be applied client-side
         .Read(read => read.Action("Products_Read", "Home"))
     )
 
