@@ -128,5 +128,5 @@ Manually change the content of the filter menu container and its logic by subscr
 
 ## See Also
 
-* [API Reference of the filterMenuInit Event](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)
+* [API Reference of the filterMenuInit Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit)
 * [API Reference of the filterable.extra Property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable.extra)
