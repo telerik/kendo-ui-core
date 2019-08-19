@@ -31,14 +31,14 @@ The following example demonstrates how to define the ListView by using the ListV
     </script>
 ```
 ```Razor
-    @(Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
-        .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
-        .TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
-        .ClientTemplateId("template") //This template will be used for rendering the ListView items.
+    @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
+        .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+        .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
+        .ClientTemplateId("template") // This template will be used for rendering the ListView items.
         .DataSource(dataSource => {
                 dataSource.Read(read => read.Action("Products_Read", "ListView"));
-        }) //DataSource configuration. It will be used on paging.
-        .Pageable() //Enable paging.
+        }) // The DataSource configuration. It will be used on paging.
+        .Pageable() // Enable paging.
     )
 ```
 
@@ -87,7 +87,12 @@ The following example demonstrates the basic configuration for the ListView Html
 
 * [Ajax binding]({% slug htmlhelpers_listview_aspnetcore_ajaxbinding %})
 * [Editing]({% slug htmlhelpers_listview_aspnetcore_editing %})
-* [Scrolling]({% slug htmlhelpers_listview_aspnetcore_scrolling %})
+* [Paging]({% slug htmlhelpers_listview_aspnetcore_paging %})
+* [Templates]({% slug htmlhelpers_listview_aspnetcore_templates%})
+* [Scroll modes]({% slug htmlhelpers_listview_aspnetcore_scrolling %})
+* [Selection]({% slug htmlhelpers_listview_aspnetcore_selection %})
+* [Globalization]({% slug globalization_htmlhelpers_listview %})
+* [Accessibility]({% slug accessibility_htmlhelpers_listview %})
 
 ## See Also
 

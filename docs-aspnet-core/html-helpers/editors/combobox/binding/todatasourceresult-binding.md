@@ -38,7 +38,7 @@ For a runnable example, refer to the [demo on customizing the data source of the
             {
                 source.Custom()
                         .ServerFiltering(true)
-                        .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                        .Type("aspnetmvc-ajax") // Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
                         .Transport(transport =>
                         {
                             transport.Read("GetProducts", "Home");

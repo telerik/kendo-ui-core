@@ -115,6 +115,12 @@ navigation:
      "html-helpers/data-management/grid/templates":
         title: "Templates"
         position: 9
+     "html-helpers/data-management/listview/globalization":
+        title: "Globalization"
+        position: 40
+     "html-helpers/data-management/listview/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
      "html-helpers/data-management/spreadsheet/import-and-export-data":

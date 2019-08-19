@@ -20,13 +20,13 @@ The following example demonstrates how to Initializing the RadialGauge by using 
 
 ```
     @(Html.Kendo().RadialGauge()
-          .Name("radialGauge") //The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
+          .Name("radialGauge") // The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
           .Scale(scale => scale
               .Min(0) // Set the min value of the RadialGauge.
               .Max(200) // Set the min value of the RadialGauge.
           )
           .Pointer(pointer => pointer
-              .Value(10) //Set the value of the RadialGauge.
+              .Value(10) // Set the value of the RadialGauge.
           )
     )
 ```

@@ -1,7 +1,7 @@
 ---
 title: Selection
 page_title: Selection | Telerik UI Grid Tag Helper for ASP.NET Core
-description: "Learn how to enable the selection functionality of the Telerik UI Grid for ASP.NET Core using tag helpers."
+description: "Learn how to enable the selection functionality of the Telerik UI Grid for ASP.NET Core by using the Grid TagHelper."
 slug: taghelpers_grid_aspnetcore_selection
 position: 5
 ---
@@ -52,12 +52,12 @@ The Grid supports the following select modes:
 
 You can set the select mode to `Multiple` or `Single`. Additionally, the Grid provides the `Row` and `Cell` select types which allow multiple or single selection of rows or cells.
 
-Accepted values in the kendo-grid tag for `selectable` are:
-* "true" - enables selection
-* "row" - the user can select a single row.
-* "cell" - the user can select a single cell.
-* "multiple, row" - the user can select multiple rows.
-* "multiple, cell" - the user can select multiple cells.
+The Grid TagHelper accepts the following values for its `selectable` property:
+* `true`&mdash;Enables the selection.
+* `row`&mdash;Enables the single-row selection.
+* `cell`&mdash;Enables the single-cell selection.
+* `multiple, row`&mdash;Enables the multiple-row selection.
+* `multiple, cell`&mdash;Enables the multiple-cell selection.
 
    ```tagHelper
         <kendo-grid name="grid" height="550" on-change="onChange" selectable="multiple, cell">
@@ -92,9 +92,9 @@ Accepted values in the kendo-grid tag for `selectable` are:
 
 ## Persisting the Selection
 
-The Grid also provides a built-in functionality for persisting the selection through the `persist-selection` property by setting it to be `true`. 
+The Grid provides a built-in functionality for persisting the selection through the `persist-selection` property and its setting it to `true`.
 
->You also need to configure the `ID` field in the schema of the DataSource. For a runnable example, refer to the [demo on persisting the state of the Grid](https://demos.telerik.com/aspnet-core/grid/persist-state).
+> To persist the selection in the Grid, you also need to configure the `ID` field in the schema of the DataSource. For a runnable example, refer to the [demo on persisting the state of the Grid](https://demos.telerik.com/aspnet-core/grid/persist-state).
 
 ```tagHelper
         <kendo-grid name="grid" height="550" on-change="onChange" persist-selection="true">
@@ -138,6 +138,6 @@ The Grid also provides a built-in functionality for persisting the selection thr
 
 ## See Also
 
-* [Kendo UI for jQuery: selectable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/selectable)
-* [Kendo UI for jQuery: Grid/Selection](https://demos.telerik.com/kendo-ui/grid/selection)
-* [JavaScript API Reference for the ASP.NET Core Grid](/api/grid)
+* [Selection by the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/selection)
+* [API Reference of selectable in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/selectable)
+* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)

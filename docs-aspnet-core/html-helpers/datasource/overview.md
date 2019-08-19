@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DataSource Overview | Telerik UI for ASP.NET Core HtmlHelpers
+page_title: DataSource Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI DataSource HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_datasource_aspnetcore
 position: 1
@@ -8,17 +8,15 @@ position: 1
 
 # DataSource HtmlHelper Overview
 
-The Telerik UI DataSource HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DataSource widget. To use the built-in data source types, include the following script in your _Layout.cshtml file after the kendo scripts. 
+The Telerik UI DataSource HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DataSource widget.
 
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-
-The DataSource is an abstraction for using local data or remote data. The DataSource definition is declared as part of the HtmlHelpers' configurations in most cases. The standalone data source HtmlHelper is most needed in scenarios that require a Shared DataSource.
+The DataSource is an abstraction for using local data or remote data. In most cases, the DataSource definition is declared as part of the configurations for the Telerik UI HTML Helpers. The standalone DataSource HtmlHelper is suitable for scenarios that require a shared data source.
 
 * [Demo page for the DataSource](https://demos.telerik.com/aspnet-core/datasource/index)
 
 ## Initializing the DataSource
 
-The following example demonstrates how to define the DataSource by using the DataSource HtmlHelper. The `Name()` of the widget can be used to access its instance on the client and use its [jQuery API methods and events](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource). 
+The following example demonstrates how to define the DataSource by using the DataSource HtmlHelper. You can use `Name()` to access the DataSource instance on the client and utilize the [API methods and events of the Kendo UI for jQuery DataSource widget](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource).
 
 ```htmlHelper
     @(Html.Kendo().DataSource<OrderViewModel>()
@@ -27,26 +25,26 @@ The following example demonstrates how to define the DataSource by using the Dat
     )
 
     <script>
-        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action
+        myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action.
     </script>  
 ```
 ```HomeController
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
-        // orders can be IQueriable or IEnumerable
+        // Orders can be IQueriable or IEnumerable.
         return Json(orders.ToDataSourceResult(request));
     }
 ```
 
 ## Basic Configuration
 
-The DataSource HtmlHelper configuration options are declared using the different available methods. You can set the pageSize, page, sort order, filter, group, aggregates and define the model. The configuration accepts the definition for all CRUD operations and facilitates sending additional data like the AntiForgeryTokens.
+You can declare the DataSource HtmlHelper configuration options by using the available methods&mdash;for example, you can define the page size, page, sort order, filter, group, aggregates, and the model. The configuration accepts the definition for all CRUD operations and facilitates the sending of additional data such as the `AntiForgeryTokens`.
 
     @(Html.AntiForgeryToken())
 
     <script>
-        // send forgery tokens as additional data
+        // Send the forgery tokens as additional data.
         function forgeryTokens() {
             return kendo.antiForgeryTokens();
         }    
@@ -76,10 +74,9 @@ The DataSource HtmlHelper configuration options are declared using the different
 
 ## Functionality and Features
 
-The DataSource provides [three main types of data sources]({% slug htmlhelper_datasourcetypes_aspnetcore %}).In addition to that it features SignalR, Hierarchical DataSource as well as Gantt, Gantt Dependency and Pivot which are used by the corresponding widgets.
+The DataSource HtmlHelper provides [three main types of data sources]({% slug htmlhelper_datasourcetypes_aspnetcore %}). For more information on the Kendo UI for jQuery types of DataSource, refer to the [official Kendo UI for jQuery documentation](https://docs.telerik.com/kendo-ui/framework/datasource/overview).
 
 ## See Also
 
 * [Basic Usage of the DataSource HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datasource/html-helper)
 * [API Reference of the DataSource Helper for ASP.NET Core](/api/datasource)
-* [API Reference of the jQuery DataSource widget](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)

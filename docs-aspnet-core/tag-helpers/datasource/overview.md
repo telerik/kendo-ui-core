@@ -23,7 +23,7 @@ The following example demonstrates how to define the DataSource by using the Dat
 
 ## Basic Configuration
 
-The DataSource TagHelper configuration options are passed as attributes of the tag. The DataSource is an abstraction for binding the Kendo UI widgets to local and remote data and to handle various data operations with the `databound` Kendo UI tag helpers.
+The DataSource TagHelper configuration options are passed as attributes of the tag. The DataSource is an abstraction for binding the Kendo UI widgets to local and remote data and to handle various data operations with the `databound` Tag Helpers.
 
 ```tagHelper
     <kendo-datasource name="dataSource" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
@@ -49,9 +49,9 @@ The DataSource TagHelper configuration options are passed as attributes of the t
 
 ## Functionality and Features
 
-The DataSource provides [three main types of data sources]({% slug types_datasource_aspnetcore %}). In addition to that it features SignalR, Hierarchical DataSource as well as Gantt, Gantt Dependency and Pivot which are used by the corresponding widgets. 
+The DataSource HtmlHelper provides [three main types of data sources]({% slug types_datasource_aspnetcore %}). For more information on the Kendo UI for jQuery types of DataSource, refer to the [official Kendo UI for jQuery documentation](https://docs.telerik.com/kendo-ui/framework/datasource/overview).
 
 ## See Also
 
-* [Basic Usage of the Grid Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datasource/tag-helper)
+* [Basic Usage of the DataSource TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datasource/tag-helper)
 * [API Reference of the DataSource Helper for ASP.NET Core](/api/datasource)

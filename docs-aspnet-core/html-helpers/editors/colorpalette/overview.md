@@ -20,8 +20,8 @@ The following example demonstrates how to define the ColorPalette by using the C
 
 ```
     @(Html.Kendo().ColorPalette()
-          .Name("colorpalette") //The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
-          .Value("#ff0000") //Set the value of the ColorPalette.
+          .Name("colorpalette") // The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
+          .Value("#ff0000") // Set the value of the ColorPalette.
     )
 ```
 

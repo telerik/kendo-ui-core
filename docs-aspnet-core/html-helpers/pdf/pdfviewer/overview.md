@@ -29,7 +29,7 @@ The following example demonstrates how to initialize the PDFViewer by using [PDF
     </script>
 
     @(Html.Kendo().PDFViewer()
-        .Name("pdfviewer") //The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
         .PdfjsProcessing(pdf => pdf
             .File(Url.Content("~/Content/web/pdfViewer/sample.pdf"))
         )
@@ -43,7 +43,7 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 
 ```
     @(Html.Kendo().PDFViewer()
-        .Name("pdfviewer") //The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
         .DplProcessing(dpl => {
             dpl.Read(r => r.Url(Url.Action("GetInitialPdf", "PdfViewer")));
             dpl.Upload(upload => upload.Url(Url.Action("GetPdf", "PdfViewer")).SaveField("file"));

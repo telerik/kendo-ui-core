@@ -43,8 +43,8 @@ To configure the Window with load-on-demand content:
 1. Add a Window.
 
         @(Html.Kendo().Window()
-            .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
-            .Title("About Alvar Aalto") //Set the title of the Window.
+            .Name("window") // The name of the Window is mandatory. It specifies the "id" attribute of the widget.
+            .Title("About Alvar Aalto") // Set the title of the Window.
             .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
         )
 

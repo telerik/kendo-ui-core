@@ -20,7 +20,7 @@ The QRCode generates Canvas and Scalable Vector Graphics (SVG) images that repre
 
     ```
         @(Html.Kendo().QRCode()
-            .Name("qrMail") //The name of the QRcode is mandatory. It specifies the "id" attribute of the widget.
+            .Name("qrMail") // The name of the QRcode is mandatory. It specifies the "id" attribute of the widget.
             .Value("mailto:clientservice@telerik.com") // Set the value of the QRCode.
             .Color("#e15613")
             .Background("transparent")
