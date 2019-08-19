@@ -1136,7 +1136,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
               validation: { required: true }
             },
             UnitPrice: {
-              //data type of the field {Number|String|Boolean|Date} default is String
+              //data type of the field {number|string|boolean|date} default is string
               type: "number",
               // used when new model is created
               defaultValue: 42,
@@ -1165,7 +1165,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
           validation: { required: true }
         },
         UnitPrice: {
-          //data type of the field {Number|String|Boolean|Date} default is String
+          //data type of the field {number|string|boolean|date} default is string
           type: "number",
           // used when new model is created
           defaultValue: 42,
