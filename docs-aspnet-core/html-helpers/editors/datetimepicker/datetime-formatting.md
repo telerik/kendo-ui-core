@@ -30,7 +30,7 @@ The following example demonstrates how to define the time format.
     @(Html.Kendo().DateTimePicker()
         .Name("dateTimePicker")
         .Value(DateTime.Now)
-        .TimeFormat("hh:mm:ss tt") //this format will be used to format the predefined values in the time list.
+        .TimeFormat("hh:mm:ss tt") // This format will be used to format the predefined values in the time list.
     )
 ```
 

@@ -26,23 +26,23 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 1. Add a MultiViewCalendar.
 
-```tagHelper
+    ```tagHelper
 
-    <kendo-multiviewcalendar name="multiviewcalendar"
-                             min="new DateTime(2010, 1, 1, 10, 0, 0)"
-                             max="new DateTime(2010, 1, 1, 20, 0, 0)"
-                             value="DateTime.Now">
-    </kendo-multiviewcalendar>
-```
-```Razor
+        <kendo-multiviewcalendar name="multiviewcalendar"
+                                 min="new DateTime(2010, 1, 1, 10, 0, 0)"
+                                 max="new DateTime(2010, 1, 1, 20, 0, 0)"
+                                 value="DateTime.Now">
+        </kendo-multiviewcalendar>
+    ```
+    ```Razor
 
-        @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar") //The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the MultiViewCalendar.
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the MultiViewCalendar.
-            .Value(DateTime.Now) //Set the value of the MultiViewCalendar.
-        )
-```
+            @(Html.Kendo().MultiViewCalendar()
+                .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
+                .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
+                .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
+                .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
+            )
+    ```
 
 ## Functionality and Features
 

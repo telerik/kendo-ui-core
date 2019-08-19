@@ -66,7 +66,7 @@ To configure the Grid for ASP.NET Core to do Ajax binding to the **Products** ta
               .Name("grid")
               .DataSource(dataSource => dataSource //Configure the Grid data source.
                   .Ajax() //Specify that Ajax binding is used.
-                  .Read(read => read.Action("Customers_Read", "Home")) //Set the action method which will return the data in JSON format.
+                  .Read(read => read.Action("Customers_Read", "Home")) // Set the action method which will return the data in JSON format.
                )
               .Columns(columns =>
               {

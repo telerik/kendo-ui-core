@@ -90,6 +90,7 @@ The Grid TagHelper configuration options are passed as attributes of the tag. Th
 * [Hierarchy]({% slug hierarchy_grid_aspnetcore %})
 * [Editing]({% slug editing_grid_aspnetcore %})
 * [Columns]({% slug columntemplates_grid_aspnetcore %})
+* [Selection]({% slug taghelpers_grid_aspnetcore_selection %})
 
 ## Events
 

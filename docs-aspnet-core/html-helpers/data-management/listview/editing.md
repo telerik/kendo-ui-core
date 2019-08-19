@@ -8,9 +8,9 @@ position: 3
 
 # Editing
 
-The ListView enables you to edit its records.
+The Telerik UI ListView for ASP.NET Core enables you to edit its records.
 
-To implement the editing functionality of the Telerik UI ListView for ASP.NET Core:
+To implement the editing functionality of the ListView:
 
 1. [Configure the ListView for editing](#configuring-the-listview-for-editing)
 1. [Define the item template](#defining-the-item-template)

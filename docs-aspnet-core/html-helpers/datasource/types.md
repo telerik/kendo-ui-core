@@ -1,16 +1,25 @@
 ---
 title: Types
 page_title: Types | Telerik UI DataSource HtmlHelper for ASP.NET Core
-description: "Learn about the types of DataSource supported by the Telerik UI DataSource HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn about the types of DataSource that are supported by the Telerik UI DataSource HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelper_datasourcetypes_aspnetcore
 position: 2
 ---
 
-# DataSource Types
+# Types
 
-The DataSource supports the following types of binding:
+The DataSource HtmlHelper supports built-in types of data binding.
 
-* Ajax&mdash; This is the most popular data source type. It performs ajax requests to retrieve or update data. It formats the request filter, sort, group, page, pageSize, aggregates and binds the model out of the box to a controller which expects a [`[DataSourceRequest]DataSourceRequest request`](/api/Kendo.Mvc.UI/DataSourceRequest) parameter. This allows us to use the [`ToDataSourceResult()`](/api/Kendo.Mvc.Extensions/QueryableExtensions) extension method and return a collection that corresponds to the request without having to deal with data operations programmatically.
+To include the default data source types, add the `<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>` script to your `_Layout.cshtml` file after the Kendo UI scripts.
+
+The available DataSource types of data binding are:
+* [Ajax](#ajax-datasource)
+* [WebAPI](#webapi-datasource)
+* [Custom](#custom-datasource)
+
+## Ajax DataSource
+
+The Ajax DataSource type of data binding is the most popular data source type and performs Ajax requests to retrieve or update data. It formats the request filter, sort, group, page, page size, and aggregates, and, out of the box, binds the model to a controller which expects a [`[DataSourceRequest]DataSourceRequest request`](/api/Kendo.Mvc.UI/DataSourceRequest) parameter. This allows you to use the [`ToDataSourceResult()`](/api/Kendo.Mvc.Extensions/QueryableExtensions) extension method and to return a collection that corresponds to the request without having to deal with data operations programmatically.
 
 ```HtmlHelper
      @(Html.Kendo().DataSource<OrderViewModel>()
@@ -45,8 +54,8 @@ The DataSource supports the following types of binding:
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
-        // orders can be IQueriable or IEnumerable
-        // the result is a filtered, paged, grouped, sorted collection 
+        // Orders can be IQueriable or IEnumerable.
+        // The result is a filtered, paged, grouped, and sorted collection.
         var result = orders.ToDataSourceResult(request);
 
         // response object : { AggregateResults: [], Data: [{},{}], Errors: null, Total: 7 }
@@ -54,7 +63,9 @@ The DataSource supports the following types of binding:
     }
 ```
 
-* WebApi&mdash; It works in the same way as the Ajax data source but it is designed for WebAPI projects. 
+## WebAPI DataSource
+
+The WebAPI DataSource type of data binding is designed for WebAPI projects and works in the same way as the Ajax data source.
 
 ```HtmlHelper
      @(Html.Kendo().DataSource<OrderViewModel>()
@@ -85,8 +96,8 @@ The DataSource supports the following types of binding:
     [HttpGet]
 	public DataSourceResult Get([DataSourceRequest]DataSourceRequest request)
     {
-        // orders can be IQueriable or IEnumerable
-        // the result is a filtered, paged, grouped, sorted collection 
+        // Orders can be IQueriable or IEnumerable.
+        // The result is a filtered, paged, grouped, and sorted collection.
         var result = orders.ToDataSourceResult(request);
 
         // response object : { AggregateResults: [], Data: [{},{}], Errors: null, Total: 7 }
@@ -94,9 +105,11 @@ The DataSource supports the following types of binding:
     }
 ```
 
-* Custom (`default`)&mdash; The custom type binding allows a full control over the DataSource options listed in the  [client-side API](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource). For example, the server operations have to be separately set (server-filtering, server-sorting, server-paging, server-grouping, and server-aggregates) instead of using the `serverOperation` property (only applicable for Ajax and WebApi types of binding).
+## Custom DataSource
 
-> The custom type binding is suitable for working with `oData` and `oData-v4` services. This is achievable because of [type](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/type) property and usage of predefined transport and schema settings for consuming such services. Since the custom type binding is the default type it can be omitted in the DataSource declaration. Please refer to the examples below in order to get a better idea of what the custom type binding can be used for.
+The Custom DataSource type of data binding is the default type of binding and provides full control over the [client-side API options of the Kendo UI for jQuery DataSource](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource). For example, instead of using the `serverOperation` property, which is only applicable for the Ajax and WebApi types of data binding, you have to separately state the server operations (server-filtering, server-sorting, server-paging, server-grouping, and server-aggregates).
+
+> The custom DataSource type of data binding is suitable for working with the `oData` and `oData-v4` services because of the [`type`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/type) property and of the usage of predefined transport and schema settings for consuming such services. Since the custom type binding is the default type, you can omit it in the DataSource declaration.
 
 The following example demonstrates how to consume an OData service.
 

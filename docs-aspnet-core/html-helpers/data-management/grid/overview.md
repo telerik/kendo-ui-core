@@ -17,10 +17,10 @@ The Grid is a powerful control for displaying data in a tabular format. It provi
 
 ## Advance Reading
 
-Because of the numerous functionalities it supports, the Grid is the most complex of the Kendo UI widgets. To gain greater confidence before you start working with it, make sure you get familiar with the following concepts:
+Because of the numerous functionalities it supports, the Grid is the most complex of the Telerik UI HTML Helpers. To gain greater confidence before you start working with it, make sure you get familiar with the following concepts:
 
-* [DataSource]({% slug htmlhelpers_datasource_aspnetcore %})&mdash;The DataSource is one of the pivotal Kendo UI components. It is an abstraction for using local or remote data and a key concept in understanding how the Grid functions.
-* [Remote CRUD operations]({% slug ajaxediting_grid_aspnetcore %})&mdash;The section elaborates on scenarios, in which data is retrieved from and submitted to a remote data service through HTTP requests made by the Kendo UI DataSource.
+* [DataSource]({% slug htmlhelpers_datasource_aspnetcore %})&mdash;The DataSource is one of the pivotal suite components. It is an abstraction for using local or remote data and a key concept in understanding how the Grid functions.
+* [Remote CRUD operations]({% slug ajaxediting_grid_aspnetcore %})&mdash;The section elaborates on scenarios in which data is retrieved from and submitted to a remote data service through HTTP requests that are made by the DataSource.
 * [Remote data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})&mdash;The article provides information on server filtering, paging, and other features of the Grid.
 
 ## Initializing the Grid

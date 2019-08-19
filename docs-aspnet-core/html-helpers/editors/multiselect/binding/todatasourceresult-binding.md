@@ -36,7 +36,7 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
             {
                 source.Custom()
                         .ServerFiltering(true)
-                        .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                        .Type("aspnetmvc-ajax") // Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
                         .Transport(transport =>
                         {
                             transport.Read("GetProducts", "Home");

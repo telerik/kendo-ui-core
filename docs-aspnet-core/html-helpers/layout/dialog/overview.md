@@ -39,7 +39,7 @@ The following example demonstrates a basic configuration of the Dialog HtmlHelpe
         .Content("Do you agree terms and conditions?")
         .Width(400)  // Set the width of the Dialog.
         .Modal(false) // Disable the modality of the Dialog.
-        .ButtonLayout("stretched") //Set a "stretched" layout for the action buttons.
+        .ButtonLayout("stretched") // Set a "stretched" layout for the action buttons.
         .Actions(actions =>
         {
             actions.Add().Text("NO"); // Set text of the first button.

@@ -44,7 +44,7 @@ The UI for ASP.NET Core helpers:
 
 More resources on getting started with UI for ASP.NET Core:
 
-* [First Steps with UI for ASP.NET Core on Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [First Steps with UI for ASP.NET Core on Visual Studio for Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [First Steps with UI for ASP.NET Core on Visual Studio for Mac]({% slug gettingstarted_firststeps_vsmac %})
 * [First Steps with UI for ASP.NET Core with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 

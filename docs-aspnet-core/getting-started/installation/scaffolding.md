@@ -166,7 +166,7 @@ namespace SampleCoreApp.Controllers
 {
     public class TestScaffoldingController : Controller
     {
-		//the rest of the controller is omitted for brevity
+		// The rest of the controller is omitted for brevity
 
         // GET: TestScaffolding/Edit/5
         public ActionResult Edit(int id)

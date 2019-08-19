@@ -20,8 +20,8 @@ The following example demonstrates how to define the ColorPicker by using the Co
 
 ```
     @(Html.Kendo().ColorPicker()
-          .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
-          .Value("#ff0000") //Set the value of the ColorPicker.
+          .Name("colorpicker") // The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+          .Value("#ff0000") // Set the value of the ColorPicker.
     )
 ```
 
