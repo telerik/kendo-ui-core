@@ -64,7 +64,7 @@ To reference an existing Kendo UI DateRangePicker instance, use the [`jQuery.dat
 
 The following example demonstrates how to access an existing DateRangePicker instance.
 
-        // Place this after your Kendo UI DateRangePicker for ASP.NET Core declaration.
+        // Place the following after the DateRangePicker for ASP.NET Core declaration.
         <script>
         $(function() {
         // The Name() of the DateRangePicker is used to get its client-side instance.

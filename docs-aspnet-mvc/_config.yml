@@ -18,8 +18,36 @@ navigation:
         title: "Getting Started"
         position: 2
      "helpers":
-        title: "Widgets"
+        title: "HTML Helpers"
         position: 3
+     "helpers/barcodes":
+        title: "Barcodes"
+     "helpers/charts":
+        title: "Charts"
+     "helpers/conversationl-ui":
+        title: "Conversational UI"
+     "helpers/data-management":
+        title: "Data Management"
+     "helpers/diagrams-and-maps":
+        title: "Diagrams and Maps"
+     "helpers/editors":
+        title: "Editors"
+     "helpers/gauges":
+        title: "Gauges"
+     "helpers/hybrid":
+        title: "Hybrid"
+     "helpers/interactivity":
+        title: "Interactivity and UX"
+     "helpers/layout":
+        title: "Layout"
+     "helpers/media":
+        title: "Media"
+     "helpers/navigation":
+        title: "Navigation"
+     "helpers/pdf":
+        title: "PDF"
+     "helpers/scheduling":
+        title: "Scheduling"
      "vs-integration":
         title: "Visual Studio Integration"
         position: 4
@@ -41,8 +69,6 @@ navigation:
      "troubleshoot":
         title: "Troubleshooting"
         position: 10
-
-
 
 ## List helpers directory names and order here, like this:
      "helpers/autocomplete":

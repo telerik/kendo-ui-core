@@ -8,7 +8,7 @@ position: 2
 
 # Data Binding
 
-You can populate the UI for ASP.NET Core Chart by using any of the following approaches.
+You can populate the UI for ASP.NET Core Chart with data by using any of the following approaches.
 
 * [Binding to inline data](#binding-to-inline-data)
 * [Binding to local data](#binding-to-local-data)

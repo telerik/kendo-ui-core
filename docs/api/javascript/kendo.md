@@ -898,6 +898,29 @@ Unbinds a tree of HTML elements from a View-Model.
 The root element(s) from which the unbinding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
 All descendant elements are traversed.
 
+### unescape
+
+Decodes string from UTF-8 or a Unicode character set. Substitutes the native [`unescape`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/unescape) function, which should not be used according to the recommendations of the ECMA-262 standard.
+
+#### Example
+    <script>
+        var result = kendo.unescape("This is a test: %97 %3f %D5 %e5 %U0107 %U123F %u39f5 %uDEe5");
+        console.log(result);
+
+        var second = kendo.unescape("This is a test: %D1%88%D0%B5%D0%BB%D0%BB%D1%8B");
+        console.log(second);
+    </script>
+
+#### Parameters
+
+##### value `String`
+
+The string that needs to be unescaped (decoded).
+
+#### Returns
+
+`String` The unescaped (decoded) string.
+
 ### widgetInstance
 
 Returns a Kendo UI widget instance, attached to the provided element.

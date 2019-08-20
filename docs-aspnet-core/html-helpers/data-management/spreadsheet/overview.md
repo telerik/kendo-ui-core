@@ -232,7 +232,7 @@ The following example demonstrates how to subscribe to the `changing` and `chang
 
 To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
 
-    // Place this after your Kendo UI Spreadsheet for ASP.NET Core declaration.
+    // Place the following after the Spreadsheet for ASP.NET Core declaration.
     <script>
         $(document).ready(function() {
             // The Name() of the Spreadsheet is used to get its client-side instance.
