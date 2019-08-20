@@ -2555,6 +2555,23 @@ function pad(number, digits, end) {
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
 
+    function unescape(value) {
+        var template;
+
+        try {
+            template = window.decodeURIComponent(value);
+        } catch(error) {
+            // If the string contains Unicode characters
+            // the decodeURIComponent() will throw an error.
+            // Therefore: convert to UTF-8 character
+            template = value.replace(/%u([\dA-F]{4})|%([\dA-F]{2})/gi, function(_, m1, m2) {
+                return String.fromCharCode(parseInt("0x" + (m1 || m2), 16));
+            });
+        }
+
+        return template;
+    }
+
     var eventTarget = function (e) {
         return e.target;
     };
@@ -2704,6 +2721,7 @@ function pad(number, digits, end) {
         stringify: proxy(JSON.stringify, JSON),
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
+        unescape: unescape,
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);
         },
@@ -3387,7 +3405,8 @@ function pad(number, digits, end) {
 
     kendo.widgetInstance = function(element, suites) {
         var role = element.data(kendo.ns + "role"),
-            widgets = [], i, length;
+            widgets = [], i, length,
+            elementData = element.data("kendoView");
 
         if (role) {
             // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
@@ -3405,8 +3424,9 @@ function pad(number, digits, end) {
             }
 
             // kendo.View is not a ui plugin
-            if (role === "view") {
-                return element.data("kendoView");
+
+            if (role === "view" && elementData) {
+                return elementData;
             }
 
             if (suites) {

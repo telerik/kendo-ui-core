@@ -59,6 +59,14 @@
             kendo.destroy(testbed);
         });
 
+        it("widgetInstance returns mobile view instances correctly", function() {
+            var testbed = $("<div data-role='view'>test</div>");
+            kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
+
+            assert.isOk(kendo.widgetInstance(testbed.filter(".km-view"), [kendo.mobile.ui]));
+            kendo.destroy(testbed);
+        });
+
         var directiveSelector = kendo.directiveSelector;
 
         it("puts hyphens before 'view', 'bar', 'strip', 'over' words in the widget names", function() {

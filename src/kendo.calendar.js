@@ -87,7 +87,7 @@ var __meta__ = { // jshint ignore:line
             element = that.wrapper = that.element;
             options = that.options;
 
-            options.url = window.unescape(options.url);
+            options.url = kendo.unescape(options.url);
 
             that.options.disableDates = getDisabledExpr(that.options.disableDates);
 

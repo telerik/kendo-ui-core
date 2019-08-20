@@ -35,7 +35,7 @@ The following example demonstrates how to Initializing the LinearGauge by using 
 
 To reference an existing Telerik UI LinearGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge API](/api/lineargauge) to control its behavior.
 
-        // Place this after your Kendo UI LinearGauge for ASP.NET Core declaration.
+        // Place the following after the LinearGauge for ASP.NET Core declaration.
         <script>
         $(function() {
         // The Name() of the LinearGauge is used to get its client-side instance.

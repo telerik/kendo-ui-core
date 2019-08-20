@@ -35,7 +35,7 @@ The following example demonstrates how to Initializing the RadialGauge by using 
 
 To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge API](/api/radialgauge#methods) to control its behavior.
 
-        // Place this after your Kendo UI RadialGauge for ASP.NET Core declaration.
+        // Place the following after the RadialGauge for ASP.NET Core declaration.
         <script>
             $(function() {
                 // The Name() of the RadialGauge is used to get its client-side instance.

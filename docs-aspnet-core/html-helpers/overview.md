@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: HTML Helpers Overview | Telerik UI for ASP.NET Core
-description: "Learn the basics when working with Telerik HTML Helpers for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
+description: "Learn the basics when working with Telerik UI HTML Helpers for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues, /known-issues
 slug: knownissues_aspnetmvc6_aspnetmvc
 position: 0
@@ -16,22 +16,22 @@ HTML Helpers can be added and further configured through predefined strongly typ
 ## Known Issues
 
 * Currently, Telerik UI for ASP.NET Core does not support localization resources. For more information and discussion on this issue, refer to [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007) and [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142).
-* The current set of helpers is limited and the following releases will add more helpers.
+* The current set of helpers is limited and next releases will add more helpers.
 * [`Deferred()`](http://docs.telerik.com/aspnet-mvc/getting-started/fundamentals#configuration-Deferred) can be invoked only as a last setting.
 
-    @(Html.Kendo().NumericTextBox()
-          .Name("age")
-          /* Other configuration. */
-          .Deferred()
-    )
+        @(Html.Kendo().NumericTextBox()
+              .Name("age")
+              /* Other configuration. */
+              .Deferred()
+        )
 
-### Grid
+## Grid Specifics
 
 The Grid does not support server-side rendering. The toolbar template, column header template, and column template are no longer rendered on the server.
 
-### Chart
+## Chart Specifics
 
-| Enum                      | Now by                  |
+| Previous Enum                      | Now                   |
 |:---                       |:---                     |
 | `ChartAreaStyle`          | `ChartSeriesLineStyle`  |
 | `ChartAreaMissingValues`  | `ChartSeriesMissingValues` |
@@ -52,7 +52,7 @@ The Grid does not support server-side rendering. The toolbar template, column he
 | `ChartScatterLineMissingValues` | `ChartSeriesMissingValues`|
 | `ChartScatterLineStyle`   | `ChartSeriesStyle`      |
 
-### Editor
+## Editor Specifics
 
 The **Thumbnails** view of the ImageBrowser is not supported because the `System.Drawing` namespace is [not part of ASP.NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/). However, you can process images on the server side by using a third-party library.
 
