@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI Chart HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Chart widget.
 
-The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_aspnetcore_htmlhelper %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
+The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a set of series types such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
 
 * [Demo page for the Chart](https://demos.telerik.com/aspnet-mvc/chart-api)
 
