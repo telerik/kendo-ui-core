@@ -803,7 +803,7 @@ when collapsing items.
 
 ### dataItem
 
-Returns the data item to which the specified item is bound.
+Returns the data item to which the specified item is bound. The method will return an item only when the PanelBar is populated using a DataSource.
 
 #### Parameters
 

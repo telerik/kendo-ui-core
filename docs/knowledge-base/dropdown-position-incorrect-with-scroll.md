@@ -19,7 +19,7 @@ res_type: kb
 
 ## Description
 
-When the page is scrolled down, the drop-down position is incorrect&mdash;it does not consider the page scroll position and is detached from its element by roughly the scroll distance. This issue affects widgets that contain dropdowns such as the Kendo UI ComboBox, DatePicker, DropDownList, Multiselect, and so on.
+When the page is scrolled down, the drop-down position is incorrect&mdash;it does not consider the page scroll position and is detached from its element by roughly the scroll distance. This issue affects widgets that contain dropdowns such as the Kendo UI ComboBox, DatePicker, DropDownList, Multiselect, and so on. It could also affect other popup components like the ToolTip. 
 
 **Table 1: A demonstration of the issue**
 
