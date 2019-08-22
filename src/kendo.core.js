@@ -3420,7 +3420,7 @@ function pad(number, digits, end) {
             }
 
             // kendo.View is not a ui plugin
-            if (role === "view") {
+            if (role === "view" && element.data("kendoView")) {
                 return element.data("kendoView");
             }
 

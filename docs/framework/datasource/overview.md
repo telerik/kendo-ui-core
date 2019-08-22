@@ -114,6 +114,8 @@ The following example demonstrates how to create a DataSource inline with the ot
         }
     });
 
+## Shared DataSource
+
 The following example demonstrates how to create a shared DataSource and allow multiple Kendo UI widgets to bind to the same data collection. Using a shared DataSource decreases the data requests, improves the performance, and provides automatic synchronized refreshing of all the bound widgets when the data changes.
 
     var sharedDataSource = new kendo.data.DataSource({

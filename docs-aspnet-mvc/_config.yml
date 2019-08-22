@@ -24,10 +24,18 @@ navigation:
         title: "Barcodes"
      "helpers/charts":
         title: "Charts"
+     "helpers/charts/stockchart":
+        title: "StockChart"
+        position: 4
+     "helpers/charts/treemap":
+        title: "TreeMap"
+        position: 5
      "helpers/conversational-ui":
         title: "Conversational UI"
      "helpers/data-management":
         title: "Data Management"
+     "helpers/data-management/pivotgrid":
+        title: "PivotGrid"
      "helpers/diagrams-and-maps":
         title: "Diagrams and Maps"
      "helpers/editors":
@@ -44,10 +52,16 @@ navigation:
         title: "Media"
      "helpers/navigation":
         title: "Navigation"
+     "helpers/navigation/radiobutton":
+        title: "RadioButton"
+     "helpers/navigation/panelbar":
+        title: "PanelBar"
      "helpers/pdf":
         title: "PDF"
      "helpers/scheduling":
         title: "Scheduling"
+     "helpers/scheduling/multiviewcalendar":
+        title: "MultiViewCalendar"
      "vs-integration":
         title: "Visual Studio Integration"
         position: 4
