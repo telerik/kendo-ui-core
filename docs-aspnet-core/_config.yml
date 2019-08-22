@@ -171,6 +171,9 @@ navigation:
      "html-helpers/scheduling/scheduler/binding":
         title: "Binding"
         position: 2
+     "globalization":
+        title: "Globalization"
+        position: 5
      "accessibility":
         title: "Accesibility"
         position: 6
