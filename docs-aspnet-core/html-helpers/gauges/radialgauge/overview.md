@@ -46,4 +46,4 @@ To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`
 ## See Also
 
 * [Basic Usage of the RadialGauge HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radial-gauge/index)
-* [API Reference of the RadialGauge HtmlHelper for ASP.NET Core](/api/radialgauge)
+* [Server-Side API](/api/radialgauge)

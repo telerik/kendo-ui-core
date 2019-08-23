@@ -525,6 +525,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listBound: function() {
+
             var that = this;
             var initialIndex = that._initialIndex;
             var filtered = that._state === STATE_FILTER;

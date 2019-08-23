@@ -34,4 +34,4 @@ You can also define which `dataItem` field will be populated and also set a titl
 
 ## See Also
 
-* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)
+* [Server-Side API](/api/multicolumncombobox)

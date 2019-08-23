@@ -310,4 +310,4 @@ To bind to remote data by using the DataSource component:
 
 * [Using the API of the Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/area-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

@@ -14,4 +14,4 @@ For more information, refer to the [demo on RTL support by the ListView](https:/
 
 ## See Also
 
-* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
+* [Server-Side API](/api/listview)

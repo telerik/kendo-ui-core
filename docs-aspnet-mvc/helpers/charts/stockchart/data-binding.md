@@ -156,4 +156,4 @@ To configure the StockChart for Ajax binding:
 ## See Also
 
 * [Basic Usage of the StockChart HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/aspnet-mvc/area-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET MVC](/api/chart)
+* [Server-Side API](/api/chart)

@@ -48,4 +48,4 @@ The Chat provides an option for creating a [Peer-to-Peer Chat application by usi
 ## See Also
 
 * [Basic Usage of Chat HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chat/index)
-* [API Reference of the Chat Helper for ASP.NET Core](/api/chat)
+* [Server-Side API](/api/chat)

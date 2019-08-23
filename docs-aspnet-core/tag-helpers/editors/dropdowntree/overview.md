@@ -89,4 +89,4 @@ The DropDownTree TagHelper configuration options are passed as attributes of the
 ## See Also
 
 * [Basic Usage of the DropDownTree TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/tag-helper)
-* [API Reference of the DropDownTree Helper for ASP.NET Core](/api/dropdowntree)
+* [Server-Side API](/api/dropdowntree)

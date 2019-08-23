@@ -140,4 +140,4 @@ The Grid provides a built-in functionality for persisting the selection through 
 
 * [Selection by the Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/selection)
 * [API Reference of selectable in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/selectable)
-* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

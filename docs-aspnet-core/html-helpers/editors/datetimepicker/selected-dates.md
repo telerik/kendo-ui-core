@@ -29,4 +29,4 @@ The following example demonstrates how to render a DateTimePicker with an initia
 
 * [Selecting Date Ranges by Using the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/rangeselection)
 * [Selecting Date Ranges by Using the DateRangePicker (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/date-range)
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

@@ -8,20 +8,20 @@ position: 1
 
 # Spreadsheet HtmlHelper Overview
 
-The Spreadsheet HtmlHelper extension is a server-side wrapper for the [Kendo UI Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index) widget. It allows you to configure the Kendo UI Spreadsheet from server-side code.
+The Telerik UI Spreadsheet HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Spreadsheet widget.
 
-## Getting started
+The Spreadsheet allows you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
-### Configuration
+* [Demo page for the Spreadsheet](https://demos.telerik.com/aspnet-mvc/spreadsheet/index)
 
-Below are listed the steps for you to follow when configuring the Kendo UI Spreadsheet for ASP.NET MVC to bind to inline data.
+## Basic Configuration
 
 1. Create a new ASP.NET MVC 5 application using any of the following templates:
 
     * Telerik UI for ASP.NET MVC application. It is available after installing the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}).
     * Default Visual Studio template. Follow the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) to set up to the application.
 
-1. Add a Kendo UI Spreadsheet to the `Index` view in `Views/Home/Index.cshtml`.
+1. Add a Spreadsheet to the `Index` view in `Views/Home/Index.cshtml`.
 
     ```ASPX
         <%:Html.Kendo().Spreadsheet()
@@ -156,11 +156,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
 
     ![The final result](images/spreadsheet-inline.png)
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all Spreadsheet [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#events).
+The Spreadsheet provides options for [server-side processing of data]({% slug spreadsheet_processing_spreadsheet_mvc %}).
 
-### By Handler Name
+## Events
+
+You can subscribe to all Spreadsheet [events](/api/spreadsheet). For a complete example on basic Spreadsheet events, refer to the [demo on using the events of the Spreadsheet](https://demos.telerik.com/aspnet-mvc/spreadsheet/events).
+
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -193,7 +197,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -208,11 +212,9 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
+To reference an existing Spreadsheet instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Spreadsheet API](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control its behavior.
 
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
@@ -227,14 +229,5 @@ To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: SpreadsheetBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SpreadsheetBuilder)
-* [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})
-* [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Spreadsheet HtmlHelper Troubleshooting]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
+* [Basic Usage of the Spreadsheet HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/spreadsheet/index)
+* [API Reference of the Spreadsheet HtmlHelper for ASP.NET MVC](/api/spreadsheet)

@@ -123,4 +123,4 @@ The following example demonstrates how to get a reference to an existing Telerik
 ## See Also
 
 * [Basic Usage of the ProgressBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/progressbar/index)
-* [API Reference of the ProgressBar HtmlHelper for ASP.NET Core](/api/progressbar)
+* [Server-Side API](/api/progressbar)

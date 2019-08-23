@@ -40,4 +40,4 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the `
 
 ## See Also
 
-* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

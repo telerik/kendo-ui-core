@@ -151,4 +151,4 @@ public IActionResult Read_TreeViewData(int? id)
 
 * [Local Data Binding by the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/local-data-binding)
 * [Remote Data Binding by the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/remote-data-binding)
-* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)
+* [Server-Side API](/api/treeview)

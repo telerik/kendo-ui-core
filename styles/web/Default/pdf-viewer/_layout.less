@@ -12,34 +12,67 @@
         flex: 0 0 auto;
         z-index: 2;
     }
-    .k-toolbar .k-pager-wrap {
-        padding: 0;
-        color: inherit;
-        background: none;
-    }
-
-
-    // Canvas
-    .k-list-scroller {
-        flex: 1 1 auto;
-    }
 
     // Pager
     .k-pager-wrap {
         display: flex;
         flex: 0 0 auto;
-        align-items: center;
+        padding: 0;
         min-height: auto;
+        align-items: center;
+        background: none;
+        color: inherit;
+    }
+
+    // Canvas
+    .k-list-scroller {
+        flex: 1 1 auto;
+        outline: none;
+
+        .k-enable-text-select {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            cursor: text;
+        }
+
+        .k-enable-panning {
+            cursor: grab;
+        }
+        .k-enable-panning span::selection {
+            background-color: transparent;
+        }
     }
 
     // Page
     .k-page {
+        position: relative;
         margin: @pdf-viewer-page-spacing auto;
+
+        canvas {
+            direction: ltr;
+        }
+
+        .k-text-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: .2;
+            overflow: hidden;
+
+            > span {
+                position: absolute;
+                transform-origin: 0% 0%;
+                color: transparent;
+            }
+
+            mark {
+                color: transparent;
+            }
+        }
     }
 
-    .k-page canvas {
-        direction: ltr;
-    }
 }
 
 // Window
@@ -57,5 +90,46 @@
         top: @pdf-viewer-action-buttons-top-offset;
         padding: @pdf-viewer-action-buttons-padding;
         margin-bottom: calc(@pdf-viewer-action-buttons-padding - 1em);
+    }
+}
+
+// Search
+.k-pdf-viewer-search-dialog {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    align-items: center;
+
+    .k-textbox {
+        display: inline-flex;
+        align-items: center;
+        background: none;
+        padding-right: @pdf-viewer-search-dialog-textbox-padding-x;
+
+        .k-icon {
+            position: relative;
+            top: auto;
+            margin: 0;
+        }
+
+        .k-search-dialog-input::-ms-clear {
+            display: none;
+        }
+
+        &:after {
+            content: "";
+        }
+    }
+
+    .k-match-case-button {
+        height: @pdf-viewer-search-dialog-input-button-height;
+    }
+
+    .k-search-matches {
+        margin: @pdf-viewer-search-dialog-matches-margin;
+    }
+
+    .k-search-dialog-draghandle  {
+        margin: @pdf-viewer-search-dialog-draghandle-margin;
     }
 }

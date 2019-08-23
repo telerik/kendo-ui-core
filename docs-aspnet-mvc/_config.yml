@@ -102,6 +102,8 @@ navigation:
         isNew: true
      "*colorpalette":
         title: "ColorPalette"
+     "*flatcolorpicker":
+        title: "FlatColorPicker"
      "*colorpicker":
         title: "ColorPicker"
      "*multicolumncombobox":
@@ -130,27 +132,25 @@ navigation:
         title: "Drawer"
      "*editor":
         title: "Editor"
-     "*flatcolorpicker":
-        title: "FlatColorPicker"
      "*gantt":
         title: "Gantt"
      "*grid":
         title: "Grid"
      "helpers/data-management/grid/binding":
-        title: "Binding"
-        position: 6
+        title: "Data Binding"
+        position: 4
      "helpers/data-management/grid/editing":
         title: "Editing"
-        position: 7
+        position: 5
      "helpers/data-management/grid/templating":
         title: "Templates"
-        position: 8
+        position: 6
      "helpers/data-management/grid/how-to":
         title: "How To"
-        position: 9
+        position: 30
      "helpers/data-management/grid/troubleshoot":
         title: "Troubeshooting"
-        position: 10
+        position: 40
      "*appearance":
         title: "Appearance"
      "*binding":

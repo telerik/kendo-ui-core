@@ -56,4 +56,4 @@ When you add a function, determine its return value as `true` for the date that 
 
 ## See Also
 
-* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

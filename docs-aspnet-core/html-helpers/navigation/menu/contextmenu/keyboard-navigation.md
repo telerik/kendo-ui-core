@@ -29,4 +29,4 @@ The ContextMenu supports the following keyboard shortcuts:
 
 ## See Also
 
-* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

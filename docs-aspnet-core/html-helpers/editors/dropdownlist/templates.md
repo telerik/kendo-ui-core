@@ -185,4 +185,4 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 ## See Also
 
 * [Customizing Templates in the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/template)
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

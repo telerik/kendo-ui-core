@@ -73,4 +73,4 @@ The multiple selection functionality allows the user to select one or more items
 ## See Also
 
 * [Selection by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/selection)
-* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
+* [Server-Side API](/api/listview)

@@ -30,6 +30,6 @@ The DatePicker supports the standards for providing accessible web content which
 
 ## See Also
 
-* [Keyboard Navigation by the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
-* [Keyboard Navigation by the DatePicker]({% slug htmlhelpers_datepicker_aspnetcore_accessibility_keyboardnavigation %})
+* [Keyboard Navigation by the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
+* [Keyboard Navigation by the DatePicker HtmlHelper for ASP.NET Core]({% slug htmlhelpers_datepicker_aspnetcore_accessibility_keyboardnavigation %})
 * [Accessibility in Telerik UI for ASP.NET Core]({% slug compliance_accessibility %})

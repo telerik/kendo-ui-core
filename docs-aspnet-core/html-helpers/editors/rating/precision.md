@@ -63,4 +63,4 @@ With half precision the Rating widget allows to set decimal values. The passed v
 ## See Also
 
 * [Precision by the Rating HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/rating/precision)
-* [API Reference of the Rating HtmlHelper for ASP.NET Core](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)
+* [Server-Side API](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)

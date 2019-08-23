@@ -44,9 +44,7 @@ The Pane in which the adaptive Grid is placed does not automatically expand its 
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user can resize the column by dragging.
 
-**Figure 1: A Grid with resizable columns on a mobile device**
-
-![Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
+![A Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
 
 ## Destroying Adaptive Grids
 
@@ -54,11 +52,11 @@ When the Grid is in its adaptive rendering mode, it generates auxiliary markup w
 
 To manually destroy the Grid:
 
-1. Call [`kendo.destroy()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/destroy) over the closest `.k-pane-wrapper` ancestor which is created around the Grid widget.
+1. Call the Kendo UI for jQuery [`kendo.destroy()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/destroy) method over the closest `.k-pane-wrapper` ancestor which is created around the Grid.
 1. Remove the whole `.k-pane-wrapper` element from the DOM.
 
 ## See Also
 
 * [Responsive Columns by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/responsive-columns)
 * [Adaptive Rendering by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/adaptive-rendering)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

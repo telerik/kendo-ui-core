@@ -39,4 +39,4 @@ The following example demonstrates how a cell in the Spreadsheet can be initiall
 
 ## See Also
 
-* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)

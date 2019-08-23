@@ -50,4 +50,4 @@ To configure the Window with load-on-demand content:
 
 ## See Also
 
-* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)
+* [Server-Side API](/api/window)

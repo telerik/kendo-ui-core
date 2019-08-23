@@ -34,4 +34,4 @@ The following example demonstrates how to group the ComboBox data by country.
 ## See Also
 
 * [Grouping by the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/grouping)
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

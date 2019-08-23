@@ -76,4 +76,4 @@ The following example demonstrates how to customize the appearance of the drop z
 ## See Also
 
 * [Custom Drop Zones by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/customdropzone)
-* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

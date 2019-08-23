@@ -65,4 +65,4 @@ You can also bind the `DataSource` to remote data. The following example demonst
 ## See Also
 
 * [Basic Usage of the TreeMap TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
-* [API Reference of the TreeMap Helper for ASP.NET Core](/api/treemap)
+* [Server-Side API](/api/treemap)

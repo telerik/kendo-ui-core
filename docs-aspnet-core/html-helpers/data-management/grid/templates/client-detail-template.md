@@ -224,4 +224,4 @@ Nesting client templates are not an out-of-the-box feature the Kendo UI Core wra
 ## See Also
 
 * [Client Detail Templates by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/detailtemplate)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

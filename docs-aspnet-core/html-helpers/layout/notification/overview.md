@@ -69,4 +69,4 @@ For a complete example on basic Notification events, refer to the [demo on using
 
 * [Basic Usage of the Notification HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification)
 * [Using the API of the Notification HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification/api)
-* [API Reference of the Notification HtmlHelper for ASP.NET Core](/api/notification)
+* [Server-Side API](/api/notification)

@@ -183,4 +183,4 @@ The following example demonstrates how to define a `noDataTemplate` template.
 ## See Also
 
 * [Customizing Templates in the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/template)
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

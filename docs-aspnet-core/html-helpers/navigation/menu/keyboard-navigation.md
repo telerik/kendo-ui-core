@@ -30,4 +30,4 @@ The Menu supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Navigation by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/keyboard-navigation)
-* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

@@ -18,4 +18,4 @@ To validate the input value of the DateTimePicker, use a client-validation frame
 
 ## See Also
 
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

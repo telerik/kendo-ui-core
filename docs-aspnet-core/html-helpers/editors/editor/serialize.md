@@ -58,4 +58,4 @@ Deserialization is the process of parsing the HTML string input from the `value(
 
 ## See Also
 
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

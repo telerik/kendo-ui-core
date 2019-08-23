@@ -56,4 +56,4 @@ The MultiSelect TagHelper configuration options are passed as attributes of the 
 ## See Also
 
 * [Basic Usage of the MultiSelect TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
-* [API Reference of the MultiSelect Helper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

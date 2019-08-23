@@ -98,4 +98,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 ## See Also
 
 * [Basic Usage of the MultiViewCalendar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar)
-* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

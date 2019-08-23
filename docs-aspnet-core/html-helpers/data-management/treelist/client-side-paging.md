@@ -69,4 +69,4 @@ The root TreeList items have their `parentId` field set to the default value for
 
 ## See Also
 
-* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)
+* [Server-Side API](/api/treelist)

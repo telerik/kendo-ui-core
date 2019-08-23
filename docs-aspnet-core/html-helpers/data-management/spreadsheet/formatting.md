@@ -725,4 +725,4 @@ The Spreadsheet does not support the following options that are otherwise availa
 
 ## See Also
 
-* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)

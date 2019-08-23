@@ -224,4 +224,4 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 * [Basic Usage of the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu)
 * [Using the API of the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/api)
-* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

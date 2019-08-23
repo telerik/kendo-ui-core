@@ -24,4 +24,4 @@ To enable the desired culture, add a reference to the script file before the Dat
 ## See Also
 
 * [Globalization Support by the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/globalization)
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

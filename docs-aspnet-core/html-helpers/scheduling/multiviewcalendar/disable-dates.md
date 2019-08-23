@@ -50,4 +50,4 @@ When you add a function, determine its return value as `true` for the date that 
 ## See Also
 
 * [Disabled Dates in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/disabled-dates)
-* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

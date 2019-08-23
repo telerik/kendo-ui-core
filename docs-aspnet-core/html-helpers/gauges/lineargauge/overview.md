@@ -45,5 +45,5 @@ To reference an existing Telerik UI LinearGauge instance, use the [`jQuery.data(
 
 ## See Also
 
-* [Basic Usage of the LinearGauge HtmlHelper for ASP.NET Core  (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/index)
-* [API Reference of the LinearGauge HtmlHelper for ASP.NET Core](/api/lineargauge)
+* [Basic Usage of the LinearGauge HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/index)
+* [Server-Side API](/api/lineargauge)

@@ -37,4 +37,4 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Navigation in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/keyboard-navigation)
-* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

@@ -54,4 +54,4 @@ To disable dates through using a function, set the return value for the date tha
 ## See Also
 
 * [Disabling Dates in the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/disable-dates)
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

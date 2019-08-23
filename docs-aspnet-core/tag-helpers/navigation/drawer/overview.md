@@ -92,4 +92,4 @@ The following example demonstrates the basic configuration of the Drawer TagHelp
 ## See Also
 
 * [Basic Usage of the Drawer Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/index)
-* [API Reference of the Drawer Helper for ASP.NET Core](/api/drawer)
+* [Server-Side API](/api/drawer)

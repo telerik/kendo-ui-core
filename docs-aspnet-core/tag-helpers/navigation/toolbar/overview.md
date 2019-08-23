@@ -144,4 +144,4 @@ The following example demonstrates the basic configuration of the ToolBar TagHel
 ## See Also
 
 * [Basic Usage of the ToolBar Tag lHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/tag-helper)
-* [API Reference of the ToolBar Helper for ASP.NET Core](/api/toolbar)
+* [Server-Side API](/api/toolbar)

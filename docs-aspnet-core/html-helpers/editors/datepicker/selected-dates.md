@@ -27,6 +27,6 @@ The following example demonstrates how to render a DatePicker with an initially 
 
 ## See Also
 
-* [Selecting Date Ranges by Using the DatePicker (Demo)](https://demos.telerik.com/aspnet-core/datepicker/rangeselection)
-* [Selecting Date Ranges by Using the DateRangePicker (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/date-range)
-* [API Reference of the DatePicker](/api/datepicker)
+* [Selecting Date Ranges in the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/rangeselection)
+* [Selecting Date Ranges in the DateRangePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/date-range)
+* [Server-Side API](/api/datepicker)

@@ -23,4 +23,4 @@ The Drawer provides gesture support. It also features the mini mode which makes 
 ## See Also
 
 * [Position by the Drawer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/functionality)
-* [API Reference of the Drawer HtmlHelper for ASP.NET Core](/api/drawer)
+* [Server-Side API](/api/drawer)

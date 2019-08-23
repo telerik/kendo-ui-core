@@ -51,4 +51,4 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
 
 ## See Also
 
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

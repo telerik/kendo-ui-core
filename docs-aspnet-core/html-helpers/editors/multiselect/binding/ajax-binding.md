@@ -46,4 +46,4 @@ You can configure the Telerik UI MultiSelect for Ajax binding to the Northwind *
 
 ## See Also
 
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

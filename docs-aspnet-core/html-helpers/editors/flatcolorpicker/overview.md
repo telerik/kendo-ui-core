@@ -68,7 +68,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [FlatColorPicker API](/api/flatcolorpicker) to control its behavior.
 
-      // Place this after your Telerik UI FlatColorPicker for ASP.NET Core declaration.
+      // Place the following after your Telerik UI FlatColorPicker for ASP.NET Core declaration.
       <script>
       $(function() {
           // The Name() of the FlatColorPicker is used to get its client-side instance.
@@ -79,4 +79,4 @@ To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.d
 ## See Also
 
 * [Basic Usage of the FlatColorPicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/flatcolorpicker)
-* [API Reference of the FlatColorPicker HtmlHelper for ASP.NET Core](/api/flatcolorpicker)
+* [Server-Side API](/api/flatcolorpicker)

@@ -67,5 +67,5 @@ Because of the NumericTextBox complex rendering, to focus the widget through the
 
 ## See Also
 
-* [Keyboard Navigation by the NumericTextBox (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/keyboard-navigation)
+* [Keyboard Navigation by the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/keyboard-navigation)
 * [Accessibility in Telerik UI for ASP.NET Core]({% slug overview_accessibility %})

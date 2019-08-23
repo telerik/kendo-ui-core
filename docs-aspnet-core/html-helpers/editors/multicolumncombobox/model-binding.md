@@ -106,4 +106,4 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
 ## See Also
 
 * [Customizing the Data Source in the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/custom-datasource)
-* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)
+* [Server-Side API](/api/multicolumncombobox)

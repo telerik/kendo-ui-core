@@ -33,4 +33,4 @@ To work around the default behavior of the DatePicker and simulate a different c
 
 ## See Also
 
-* [API Reference of the DatePicker](/api/datepicker)
+* [Server-Side API](/api/datepicker)

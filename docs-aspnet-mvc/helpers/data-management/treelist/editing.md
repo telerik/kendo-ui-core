@@ -1,22 +1,23 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI TreeList HtmlHelper for ASP.NET MVC
-description: "Learn how to configure TreeList HtmlHelper for enabling CRUD operations."
+page_title: Editing | Telerik UI TreeList HtmlHelper for ASP.NET MVC
+description: "Learn how to configure Telerik UI TreeList HtmlHelper and enable CRUD operations."
 slug: editing_mvc_treelist_helper
 position: 2
 ---
 
-# TreeList Editing
+# Editing
 
-The [TreeList HtmlHelper](https://demos.telerik.com/aspnet-mvc/treelist) provides build-in editing functionality with three different edit modes: PopUp, InLine and InCell(Batch).
+The [Telerik UI TreeList HtmlHelper](https://demos.telerik.com/aspnet-mvc/treelist) provides a built-in editing functionality.
 
-## Prerequisite
+To implement the editing functionality of the TreeList:
 
-### Model
+1. [Set the model](#setting-the-model)
+1. [Configure the transport](#configuring-the-transport)
 
-All CRUD operations of the TreeList HtmlHelper require a model with "Id" and "ParentId" fields and those models must be configured in the DataSource of the TreeList.
+## Setting the Model
 
-
+All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `ParentId` fields. Those models has to be configured in the DataSource of the TreeList.
 
     .DataSource(dataSource => dataSource
         ...
@@ -24,9 +25,9 @@ All CRUD operations of the TreeList HtmlHelper require a model with "Id" and "Pa
             m.Id(f => f.EmployeeId);
             m.ParentId(f => f.ReportsTo);
 
-### Transport configuration
+## Configuring the Transport
 
-Once the schema is configured, you need to configure the action methods in the DataSource for "Update", "Destroy" and "Create".
+Once the schema is configured, you need to configure the action methods in the DataSource for `"Update"`, `"Destroy"`, and `"Create"`. An important part of the CRUD operations is the response from the service, which needs to return the manipulated records, so that the TreeList can apply the changes to the DataSource accordingly. The new records also have to contain the newly assigned within the service `Id` value.
 
     .DataSource(dataSource => dataSource
         .Create(create => create.Action("Create", "EmployeeDirectory"))
@@ -34,11 +35,16 @@ Once the schema is configured, you need to configure the action methods in the D
         .Update(update => update.Action("Update", "EmployeeDirectory"))
         .Destroy(delete => delete.Action("Destroy", "EmployeeDirectory"))
 
-Important part of the CRUD operations is the response from the service, which needs to return the manipulated records, so that the TreeList could apply the changes to the DataSource accordingly. The new records should also contain the newly assigned within the service "Id" value.
+## Edit Modes
 
-### PopUp and InLine Editing
+The TreeList supports the following edit modes:
 
-To enable the PopUp and InLine edit modes you need to configure the "Toolbar", so it could display "Add new record" button and you will also have to define a command column for the "Update", "Delete" and "Add child" buttons:
+* [Popup and inline editing](#popup-and-inine-editing)
+* [Incell editing](#incell-editing)
+
+### Popup and Inline Editing
+
+To enable the popup and inline edit modes, configure the toolbar to display the **Add new record** button and define a command column for the **Update**, **Delete**, and **Add child** buttons. The only difference between the inline and popup edit modes is the position of the rendered editors. With the popup editing, the editors are rendered in a modal window and with the inline edit mode, the editors are rendered in the `tr` element of the edited record. For runnable examples, refer to the demo on [popup editing of the TreeList](https://demos.telerik.com/aspnet-mvc/treelist/editing-popup).
 
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
@@ -54,11 +60,13 @@ To enable the PopUp and InLine edit modes you need to configure the "Toolbar", s
                 c.Destroy();
             })
 
-The only difference between the "inline" and "popup" edit modes is the position of the rendered editors. With the "popup" editing, the editors are rendered in a modal window and with the "inline" edit mode, the editors are rendered in the TR element of the edited record.
+### Incell Editing
 
-### InCell (Batch) Editing
+The incell (batch) edit mode renders editor per field when the user clicks on a particular cell of the record. It allows multiple edits before the **Save changes** button is clicked, which can then send all changes to the service.
 
-The "incell" edit mode renders editor per field when the user clicks on a particular cell of the record. It allows multiple edits before the "Save changes" button is clicked, which could then send all changes to the service.
+With the incell edit mode you do not need to use the command buttons for update, because the editing is initiated on cell click. Another difference from the other two edit modes are the commands in the toolbar, which includes the **Save changes** and **Cancel changes** buttons for saving or canceling all changes with a single click.
+
+Due to the specifics of the TreeList, creating a child node for a new record is not supported, because in order for a child to be created, the parent node must have an assigned `id`. However, since the `id` is assigned within the service on the `create` action, when the new record is not saved, it will not have `id`. The code within the `dataBound` event ensures that the **createChild** button is removed for all new records. For a runnable example, refer to the [demo on incell editing in the TreeList](https://demos.telerik.com/aspnet-mvc/treelist/editing-incell).
 
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
@@ -99,7 +107,7 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
     <script>
         // The following code removes the 'Add child' button from the new records,
         // because they will receive an ID after saving the changes, which means that
-        // no child records  could be added until that
+        // no child records can be added until that.
         function onDataBound(e) {
             var items = e.sender.items();
             for (var i = 0; i < items.length; i++) {
@@ -115,10 +123,10 @@ The "incell" edit mode renders editor per field when the user clicks on a partic
         }
     </script>
 
-With "incell" (Batch) edit mode you do not need to use the command buttons for update, because the editing is initiated on cell click. Another difference with the other two edit modes are the commands in the toolbar, which include the "Save changes" and "Cancel changes" buttons for saving or canceling all changes with a single click.
-
-Due to the specifics of the TreeList, creating child node for a new record is not supported, because in order for a child to be created, the parent node must have assigned "id". However, since the "id" is assigned within the service on "create" action, when the new record is not saved, it will not have "id". The code within the "dataBound" event ensures that the "createChild" button is removed for all new records.
-
 ## See Also
 
-* [JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
+* [Editing by the TreeList HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treelist/editing)
+* [Incell Editing by the TreeList HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treelist/editing-incell)
+* [Popup Editing by the TreeList HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treelist/editing-popup)
+* [TreeList Server-Side API](/api/treelist)
+* [TreeList Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)

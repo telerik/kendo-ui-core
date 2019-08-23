@@ -109,4 +109,4 @@ That function initializes the detail Grids by using the [Kendo UI Grid for jQuer
 ## See Also
 
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
-* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

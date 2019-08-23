@@ -103,4 +103,4 @@ For a complete example, refer to the [demo on binding the Scheduler to remote da
 ## See Also
 
 * [Binding the Scheduler HtmlHelper for ASP.NET Core to Remote Data (demo)](https://demos.telerik.com/aspnet-core/scheduler/resources)
-* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

@@ -60,4 +60,4 @@ The Upload TagHelper configuration options are passed as attributes of the tag o
 ## See Also
 
 * [Basic Usage of the Upload TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/tag-helper)
-* [API Reference of the Upload Helper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

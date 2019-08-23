@@ -14,5 +14,5 @@ For more information, refer to the [demo on RTL support by the NumericTextBox](h
 
 ## See Also
 
-* [RTL Support by the NumericTextBox (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/right-to-left-support)
-* [API Reference of the NumericTextBox HtmlHelper for ASP.NET Core](/api/numerictextbox)
+* [RTL Support by the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/right-to-left-support)
+* [Server-Side API](/api/numerictextbox)

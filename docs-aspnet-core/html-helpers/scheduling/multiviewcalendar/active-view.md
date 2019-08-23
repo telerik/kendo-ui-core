@@ -31,4 +31,4 @@ The following example demonstrates how to create a MultiViewCalendar that allows
 
 ## See Also
 
-* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

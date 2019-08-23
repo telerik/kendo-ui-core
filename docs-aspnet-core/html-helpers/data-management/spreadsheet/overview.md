@@ -243,4 +243,4 @@ To reference an existing Kendo UI Spreadsheet instance, use the [`jQuery.data()`
 ## See Also
 
 * [Basic Usage of the Spreadsheet HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
-* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)

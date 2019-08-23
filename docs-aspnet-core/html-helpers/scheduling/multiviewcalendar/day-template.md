@@ -31,4 +31,4 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
 
 ## See Also
 
-* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

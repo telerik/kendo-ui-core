@@ -118,4 +118,4 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 ## See Also
 
 * [Virtualization by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/virtualization)
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

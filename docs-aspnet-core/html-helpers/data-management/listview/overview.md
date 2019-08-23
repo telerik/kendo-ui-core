@@ -97,4 +97,4 @@ The following example demonstrates the basic configuration for the ListView Html
 ## See Also
 
 * [Basic Usage of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/index)
-* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
+* [Server-Side API](/api/listview)

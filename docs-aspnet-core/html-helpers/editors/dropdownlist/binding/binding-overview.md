@@ -21,4 +21,4 @@ The supported data-binding approaches are:
 
 ## See Also
 
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

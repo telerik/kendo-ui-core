@@ -160,4 +160,4 @@ To fine-tune the chunk upload, use any of the following configuration options:
 ## See Also
 
 * [Chunk Upload by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/chunkupload)
-* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

@@ -50,4 +50,4 @@ The Grid also provides a built-in functionality for persisting the selection thr
 * [Multiple Selection by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/selection)
 * [Checkbox Selection by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/checkbox-selection)
 * [Persisting the State of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/persist-state)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

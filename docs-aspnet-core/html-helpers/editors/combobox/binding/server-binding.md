@@ -36,4 +36,4 @@ You can configure the Telerik UI ComboBox for server binding to the Northwind **
 
 ## See Also
 
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

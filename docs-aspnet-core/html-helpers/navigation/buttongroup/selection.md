@@ -29,4 +29,4 @@ The following example demonstrates how to use the `.Selection()` configuration.
 ## See Also
 
 * [Selection by the Telerik UI ButtonGroup HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/selection)
-* [API Reference of the ButtonGroup HtmlHelper for ASP.NET Core](/api/buttongroup)
+* [Server-Side API](/api/buttongroup)

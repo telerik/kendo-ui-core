@@ -50,7 +50,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 To reference an existing Telerik UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
 
-        // Place this after your Telerik UI DateInput for ASP.NET Core declaration.
+        // Place the following after your Telerik UI DateInput for ASP.NET Core declaration.
         <script>
         $(function() {
         // The Name() of the DateInput is used to get its client-side instance.
@@ -62,4 +62,4 @@ To reference an existing Telerik UI DateInput instance, use the [`jQuery.data()`
 
 * [Basic Usage of the DateInput HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/index)
 * [Using the API of the DateInput HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/api)
-* [API Reference of the DateInput HtmlHelper for ASP.NET Core](/api/dateinput)
+* [Server-Side API](/api/dateinput)

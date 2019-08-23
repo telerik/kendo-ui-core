@@ -54,4 +54,4 @@ You can use these properties in the template to make additional calculations.
 
 ## See Also
 
-* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

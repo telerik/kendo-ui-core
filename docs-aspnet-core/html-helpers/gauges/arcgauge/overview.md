@@ -37,7 +37,7 @@ The ArcGauge represents a value on a circular arc.
 
 To reference an existing Telerik UI ArcGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ArcGauge API](/api/arcgauge) to control its behavior.
 
-    // Place this after your Telerik UI ArcGauge for ASP.NET Core declaration.
+    // Place the following after your Telerik UI ArcGauge for ASP.NET Core declaration.
     <script>
         $(function() {
             // The Name() of the ArcGauge is used to get its client-side instance.
@@ -48,4 +48,4 @@ To reference an existing Telerik UI ArcGauge instance, use the [`jQuery.data()`]
 ## See Also
 
 * [Basic Usage of the ArcGauge HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/arc-gauge/index)
-* [API Reference of the ArcGauge HtmlHelper for ASP.NET Core](/api/arcgauge)
+* [Server-Side API](/api/arcgauge)

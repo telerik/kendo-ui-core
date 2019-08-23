@@ -1,18 +1,19 @@
 ---
 title: Group Templates
-page_title: Group Templates | Kendo UI Grid HtmlHelper for ASP.NET MVC
-description: "Learn how to customize the group rows when the data of the Kendo UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) is grouped."
+page_title: Group Templates | Telerik UI Grid HtmlHelper for ASP.NET MVC
+description: "Learn how to customize the group rows when the data of the Telerik UI Grid for ASP.NET MVC is grouped."
 slug: htmlhelpers_group_templates_grid_aspnetcore
-position: 4
 ---
 
 # Group Templates
 
-Group rows are used to organize data rows into a tree structure when data grouping is applied.
+Group rows help organize data rows into a tree structure when data grouping is applied.
 
-A group row contains an expanding and collapsing group icon that enables end-users to expand and collapse a group row, and thus show or hide its child rows. One of the main features of group rows is to display group summary values. Kendo UI Grid provides three different templates that can be used to customize the appearance of the group rows:
+For runnable examples, refer to the [demos on templates in the Grid](https://demos.telerik.com/aspnet-mvc/grid/toolbar-template).
 
-- `ClientGroupHeaderTemplate`&mdash;Renders a template to be displayed for the entire group row. Usually the main objective is to show an information about the entire group. By default if no template is defined the name of the field and the current group value is displayed.
+A group row contains an expanding and collapsing group icon that enables end-users to expand and collapse a group row, and thus show or hide its child rows. One of the main features of group rows is to display group summary values. The Grid provides three different templates that can be used to customize the appearance of the group rows:
+
+- `ClientGroupHeaderTemplate`&mdash;Renders a template that will be displayed for the entire group row. Usually the main objective is to show an information about the entire group. By default if no template is defined the name of the field and the current group value is displayed.
 - `ClientGroupHeaderColumnTemplate`&mdash;Renders a template in the group row aligned to the column itself. Usually it is used to show an aggregate value for a specific column in the context of the current group. Visually the template content is displayed aligned to the column itself. This functionality is introduced in R3 2018 release.
 - `ClientGroupFooterTemplate`&mdash;Renders a template in the group footer row aligned to the column. Pretty much it works in the same way as the `ClientGroupHeaderColumnTemplate` for the group footer row.
 
@@ -87,13 +88,5 @@ In a server-binding scenario, you can set the group templates without the `Clien
 
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
-* [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
-* [Excel Export]({% slug excelexport_gridhelper_aspnetmvc %})
-* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
-* [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
-* [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
-* [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
+* [Templates by the Grid HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/aspnet-mvc/grid/toolbar-template)
+* [Server-Side API](/api/grid)

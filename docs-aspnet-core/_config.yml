@@ -119,6 +119,15 @@ navigation:
      "html-helpers/editors/datetimepicker/accessibility":
         title: "Accessibility"
         position: 50
+     "html-helpers/editors/listbox/globalization":
+        title: "Globalization"
+        position: 40
+     "html-helpers/editors/listbox/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/listbox/binding":
+        title: "Data Binding"
+        position: 2        
      "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
      "html-helpers/editors/datepicker/accessibility":

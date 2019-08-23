@@ -44,4 +44,4 @@ The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/
 
 ## See Also
 
-* [API Reference of the ToolBar HtmlHelper for ASP.NET Core](/api/toolbar)
+* [Server-Side API](/api/toolbar)

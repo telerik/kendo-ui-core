@@ -46,4 +46,4 @@ Setting the [`Label`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Flu
 
 ## See Also
 
-* [API Reference of the Rating HtmlHelper for ASP.NET Core](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)
+* [Server-Side API](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)

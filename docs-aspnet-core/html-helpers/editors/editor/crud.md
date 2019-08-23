@@ -1,20 +1,20 @@
 ---
-title: CRUD operations
-page_title: CRUD operations | Kendo UI Editor HtmlHelper for ASP.NET Core
-description: "Learn how to Create, Read, Update and Delete (CRUD) with the Kendo UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhelpers_editor_create_read_update_delete_crud_aspnetcore
-position: 9
+title: CRUD Operations
+page_title: CRUD Operations | Telerik UI Editor HtmlHelper for ASP.NET Core
+description: "Learn how to use the create, read, update, and delete CRUD operations with the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+slug: htmlhelpers_crud_editor_aspnetcore
+position: 8
 ---
 
-# CRUD operations
+# CRUD Operations
 
-The below example demonstates how you can save, read, update and delete a text data content in a local database using the Editor component. 
+The following example demonstrates how to save, read, update and delete a text data content in a local database using the Editor component.
 
-A runnable project demonstrating the below described functionality could be found in [this repository](https://github.com/telerik/ui-for-aspnet-core-examples). The previoulsy linked example assumes you have a Telerik UI for ASP.NET Core and Entity framework installed and a local database setuped.
+For a runnable project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples). The previously linked example assumes you have a Telerik UI for ASP.NET Core and Entity framework installed and a local database set up.
 
-> Please note that the current project doesn't have any XSS attack preventions applied. It is a developer's responsibility to manage these security risks. For more information, please refer to this [Preventing Cross-Site Scripting](https://docs.telerik.com/kendo-ui/controls/editors/editor/preventing-xss) article. 
+> The current project has no applied XSS attack prevention and it is the responsibility of the developer to manage these security risks. For more information, refer to the article on [preventing cross-site scripting](https://docs.telerik.com/kendo-ui/controls/editors/editor/preventing-xss).
 
-## Defining the Database model 
+The following example demonstrates how to define the database model.
 
 ```
 public class EditorDataContext : DbContext
@@ -35,7 +35,9 @@ public class EditorData
 
 }
 ```
-## Defining the Index page of your application 
+
+The following example demonstrates how to define the **Index** page of your application.
+
 ```Razor
 <h1>Index</h1>
 
@@ -74,7 +76,8 @@ public async Task<IActionResult> Index()
 }
 ```
 
-## Add Editor's content to Database 
+The following example demonstrates how to add the content of the Editor to the database.
+
 ```HTML-helper
 <h1>Create</h1>
 
@@ -88,7 +91,7 @@ public async Task<IActionResult> Index()
                 <label asp-for="EditorContent"></label>
 
                 @Html.Kendo().EditorFor(m => m.EditorContent)
-                
+
                 <span asp-validation-for="EditorContent" class="text-danger k-invalid-msg" data-for="EditorContent"></span>
             </div>
 <div class="form-group">
@@ -117,7 +120,7 @@ public async Task<IActionResult> Index()
 
                 <kendo-editor for="EditorContent">
                 </kendo-editor>
-                
+
                 <span asp-validation-for="EditorContent" class="text-danger k-invalid-msg" data-for="EditorContent"></span>
             </div>
 <div class="form-group">
@@ -151,7 +154,8 @@ public async Task<IActionResult> Create([Bind("ContentId,EditorContent")] Editor
 }
 ```
 
-## Read the stored in the Database data 
+The following example demonstrates how to read the stored data in the database.
+
 ```Razor
 <h1>Details</h1>
 
@@ -191,7 +195,8 @@ public async Task<IActionResult> Details(int? id)
 }
 ```
 
-##Edit the stored data
+The following example demonstrates how to edit the stored data.
+
 ```HTML-helper
 <h1>Edit</h1>
 
@@ -298,7 +303,8 @@ public async Task<IActionResult> Edit(int id, [Bind("ContentId,EditorContent")] 
 }
 ```
 
-## Delete records from the Database 
+The following example demonstrates how to delete records from the database.
+
 ```Controller
 public async Task<IActionResult> Delete(int? id)
 {
@@ -330,10 +336,4 @@ public async Task<IActionResult> DeleteConfirmed(int id)
 
 ## See Also
 
-* [Overview of the Editor HtmlHelper]({% slug htmlhelpers_editor_aspnetcore %})
-* [Modes of Operation]({% slug htmlhelpers_editor_modes_aspnetcore %})
-* [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})
-* [Pasting Content]({% slug htmlhelpers_editor_pasting_aspnetcore %})
-* [Serialize / Deserialize Content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
-* [Image Browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
-* [Immutable Elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
+* [Server-Side API](/api/editor)

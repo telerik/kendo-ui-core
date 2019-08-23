@@ -28,4 +28,4 @@ To disable a date set an array of the dates that have to be disabled and list th
 
 ## See Also
 
-* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

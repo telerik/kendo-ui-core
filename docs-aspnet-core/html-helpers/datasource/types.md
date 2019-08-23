@@ -136,4 +136,4 @@ The following example demonstrates how to consume an OData service.
 
 ## See Also
 
-* [API Reference of the DataSource Helper for ASP.NET Core](/api/datasource)
+* [Server-Side API](/api/datasource)

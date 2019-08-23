@@ -71,7 +71,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 To reference an existing Telerik UI ColorPalette instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPalette API](/api/colorpalette) to control its behavior.
 
-        // Place this after your Telerik UI ColorPalette for ASP.NET Core declaration.
+        // Place the following after your Telerik UI ColorPalette for ASP.NET Core declaration.
         <script>
             $(function() {
                 // The Name() of the ColorPalette is used to get its client-side instance.
@@ -83,4 +83,4 @@ To reference an existing Telerik UI ColorPalette instance, use the [`jQuery.data
 
 * [Basic Usage of the ColorPalette HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/palette)
 * [Using the Palette Presets in the ColorPalette HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/palette-presets)
-* [API Reference of the ColorPalette HtmlHelper for ASP.NET Core](/api/colorpalette)
+* [Server-Side API](/api/colorpalette)

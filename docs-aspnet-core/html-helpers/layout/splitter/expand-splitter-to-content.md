@@ -89,4 +89,4 @@ You can expand the height of the Splitter based on the content inside a pane.
 
 ## See Also
 
-* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)
+* [Server-Side API](/api/splitter)

@@ -38,4 +38,4 @@ You can use multiple spacers to create an equal amount of space between several 
 
 ## See Also
 
-* [API Reference of the ToolBar HtmlHelper for ASP.NET Core](/api/toolbar)
+* [Server-Side API](/api/toolbar)

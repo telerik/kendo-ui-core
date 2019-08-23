@@ -149,4 +149,4 @@ The ComboBox displays `noDataTemplate` in the popup when the data source is empt
 ## See Also
 
 * [Customizing Templates in the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/template)
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

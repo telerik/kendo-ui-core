@@ -30,5 +30,5 @@ The DateTimePicker supports the standards for providing accessible web content w
 
 ## See Also
 
-* [Keyboard Navigation by the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/index)
+* [Keyboard Navigation by the DateTimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/index)
 * [Accessibility in Telerik UI for ASP.NET Core]({% slug overview_accessibility %})

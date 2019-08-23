@@ -65,4 +65,4 @@ In some scenarios it might be necessary to display more than two months. This is
 
 ## See Also
 
-* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

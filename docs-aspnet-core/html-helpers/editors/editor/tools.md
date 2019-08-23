@@ -106,4 +106,4 @@ The following example demonstrates these scenarios. Note the `Name()` method tha
 
 * [Default Tools by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/all-tools)
 * [Custom Tools by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/custom-tools)
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

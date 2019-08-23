@@ -76,4 +76,4 @@ Depending on the browser, you can reset the scroll position of the content when 
 ## See Also
 
 * [Loading Content with AJAX in the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/ajax)
-* [API Reference of the TabStrip HtmlHelper for ASP.NET Core](/api/tabstrip)
+* [Server-Side API](/api/tabstrip)

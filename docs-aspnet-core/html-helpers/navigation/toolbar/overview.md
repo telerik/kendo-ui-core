@@ -144,4 +144,5 @@ For a complete example on basic ToolBar events, refer to the [demo on using the 
 
 * [Basic Usage of the ToolBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar)
 * [Using the API of the ToolBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/toolbar/api)
-* [JavaScript API Reference of the ToolBar](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [ToolBar Server-Side API](/api/toolbar)
+* [ToolBar Client-Side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)

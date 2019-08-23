@@ -63,4 +63,4 @@ The Notification TagHelper configuration options are passed as attributes of the
 ## See Also
 
 * [Basic Usage of the Notification TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/notification/tag-helper)
-* [API Reference of the Notification Helper for ASP.NET Core](/api/notification)
+* [Server-Side API](/api/notification)

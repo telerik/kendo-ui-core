@@ -210,8 +210,9 @@ var __meta__ = { // jshint ignore:line
 
         move: function(touchInfo) {
             var that = this;
+            var preventMove = touchInfo.type !== "api" && that.userEvents._shouldNotMove;
 
-            if (that._finished) { return; }
+            if (that._finished || preventMove) { return; }
 
             that.x.move(touchInfo.location);
             that.y.move(touchInfo.location);

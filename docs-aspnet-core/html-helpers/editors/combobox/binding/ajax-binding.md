@@ -47,4 +47,4 @@ You can configure the Telerik UI ComboBox for Ajax binding to the Northwind **Pr
 
 ## See Also
 
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

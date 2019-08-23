@@ -104,4 +104,4 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 * [Basic Usage of the Dialog HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog)
 * [Using the API of the Dialog HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog/api)
-* [API Reference of the Dialog](/api/dialog)
+* [Server-Side API](/api/dialog)

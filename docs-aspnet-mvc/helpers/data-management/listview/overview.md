@@ -1,20 +1,20 @@
 ---
 title: Overview
 page_title: ListView | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI ListView widget for ASP.NET MVC."
+description: "Get started with the server-side wrapper for the Telerik UI ListView HtmlHelper for ASP.NET MVC."
 slug: overview_listviewhelper_aspnetmvc
 position: 1
 ---
 
 # ListView HtmlHelper Overview
 
-The ListView HtmlHelper extension is a server-side wrapper for the [Kendo UI ListView](https://demos.telerik.com/kendo-ui/listview/index) widget.
+The Telerik UI ListView HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI ListView widget.
 
-## Getting Started
+The ListView enables you to display a custom layout of data-bound items. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 
-### Setup
+* [Demo page for the ListView](https://demos.telerik.com/aspnet-mvc/listview)
 
-Below are listed the steps for you to follow when configuring the Kendo UI ListView.
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method and pass the **Products** table as the model.
@@ -59,32 +59,38 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
     ```
     ```ASPX
         <%: Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
-            .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+            .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the ListView.
             .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
             .ClientTemplateId("template") // This template will be used for rendering the ListView items.
             .DataSource(dataSource => {
                 dataSource.Read(read => read.Action("Products_Read", "ListView"));
-            }) //DataSource configuration. It will be used on paging.
-            .Pageable() //Enable paging.
+            }) // The DataSource configuration. It will be used on paging.
+            .Pageable() // Enable paging.
         %>
     ```
     ```Razor
             @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
-                .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+                .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the ListView.
                 .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
                 .ClientTemplateId("template") // This template will be used for rendering the ListView items.
                 .DataSource(dataSource => {
                     dataSource.Read(read => read.Action("Products_Read", "ListView"));
-                }) //DataSource configuration. It will be used on paging.
-                .Pageable() //Enable paging.
+                }) // The DataSource configuration. It will be used on paging.
+                .Pageable() // Enable paging.
             )
     ```
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all ListView [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/listview#events).
+* [Advanced Configuration]({% slug configuration_listviewhelper_aspnetmvc %})
+* [Ajax binding]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
+* [Editing]({% slug eiditing_listviewhelper_aspnetmvc %})
 
-### By Handler Name
+## Events
+
+You can subscribe to all ListView [events](/api/listview).
+
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -135,7 +141,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -160,11 +166,9 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI ListView instance,. use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ListView API](http://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
+To reference an existing ListView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ListView client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/listview#methods) to control its behavior.
 
     // Place the following after the ListView for ASP.NET MVC declaration.
     <script>
@@ -176,16 +180,5 @@ To reference an existing Kendo UI ListView instance,. use the [`jQuery.data()`](
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: ListViewBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ListViewBuilder)
-* [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
-* [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
-* [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
-* [Editing of the ListView HtmlHelper]({% slug eiditing_listviewhelper_aspnetmvc %})
-* [Overview of the Kendo UI ListView Widget](http://docs.telerik.com/kendo-ui/controls/data-management/listview/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the ListView HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/listview/index)
+* [Server-Side API](/api/listview)

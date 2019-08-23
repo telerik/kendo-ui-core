@@ -48,4 +48,4 @@ To see the full examples, refer to the GitHub repository of the [sample project 
 ## See Also
 
 * [Overview of the Chart HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
-* [ChartBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)
+* [ChartBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/ChartBuilder)

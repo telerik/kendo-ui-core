@@ -58,4 +58,4 @@ You can subscribe to all Rating events.
 ## See Also
 
 * [Basic Usage of the Rating Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/rating/tag-helper)
-* [API Reference of the Rating Helper for ASP.NET Core](/api/rating)
+* [Server-Side API](/api/rating)

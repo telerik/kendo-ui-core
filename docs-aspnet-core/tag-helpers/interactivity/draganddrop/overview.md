@@ -30,4 +30,4 @@ The following example demonstrates how to define the Drag and Drop by using the 
 
 ## See Also
 
-* [JavaScript API Reference of the Drag-and-Drop](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/draganddrop)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treeview/configuration/draganddrop)

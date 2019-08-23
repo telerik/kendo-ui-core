@@ -86,4 +86,4 @@ To configure the Grid for ASP.NET Core to do Ajax binding to the **Products** ta
 ## See Also
 
 * [Custom Ajax Binding by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/customajaxbinding)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

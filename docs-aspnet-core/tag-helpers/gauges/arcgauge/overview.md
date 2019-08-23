@@ -42,4 +42,4 @@ The ArcGauge TagHelper configuration options are passed as attributes of the tag
 ## See Also
 
 * [Basic Usage of the ArcGauge TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/arc-gauge/tag-helper)
-* [API Reference of the ArcGauge Helper for ASP.NET Core](/api/arcgauge)
+* [Server-Side API](/api/arcgauge)

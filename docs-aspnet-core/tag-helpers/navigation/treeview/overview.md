@@ -114,4 +114,4 @@ The TreeView TagHelper configuration options are passed as attributes of the tag
 ## See Also
 
 * [Basic Usage of the TreeView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/tag-helper)
-* [API Reference of the TreeView Helper for ASP.NET Core](/api/treeview)
+* [Server-Side API](/api/treeview)

@@ -90,4 +90,4 @@ The following example demonstrates how to use a simple remote service.
 
 ## See Also
 
-* [API Reference of the DataSource Helper for ASP.NET Core](/api/datasource)
+* [Server-Side API](/api/datasource)

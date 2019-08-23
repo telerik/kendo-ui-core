@@ -28,4 +28,4 @@ You can use the `Mini()` option both with the overlay and push modes by adding a
 
 ## See Also
 
-* [API Reference of the Drawer Helper for ASP.NET Core](/api/drawer)
+* [Server-Side API](/api/drawer)

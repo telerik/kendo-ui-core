@@ -132,4 +132,4 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 ## See Also
 
 * [Virtualization by the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/virtualization)
-* [API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

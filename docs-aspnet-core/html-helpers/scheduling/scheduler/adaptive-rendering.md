@@ -50,4 +50,4 @@ The following example demonstrates how to configure the adaptive rendering mode 
 ## See Also
 
 * [Adaptive Rendering by the Scheduler HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/adaptive-rendering)
-* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

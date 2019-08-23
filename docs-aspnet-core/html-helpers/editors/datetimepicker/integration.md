@@ -21,4 +21,4 @@ To use the DateInput as the input element in a DateTimePicker, enable the [`Date
 
 ## See Also
 
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

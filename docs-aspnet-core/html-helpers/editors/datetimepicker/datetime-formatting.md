@@ -48,4 +48,4 @@ The following example demonstrates how to define the interval (in minutes) betwe
 
 ## See Also
 
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

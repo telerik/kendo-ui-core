@@ -25,4 +25,4 @@ To disable that behavior, set the hint to an empty function by using [`jQuery.no
 
 ## See Also
 
-* [API Reference of the Sortable HtmlHelper for ASP.NET Core](/api/sortable)
+* [Server-Side API](/api/sortable)

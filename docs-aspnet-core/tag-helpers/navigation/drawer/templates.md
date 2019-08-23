@@ -31,4 +31,4 @@ You can add icons with a span with the `k-icon` class combined with the desired 
 
 ## See Also
 
-* [API Reference of the Drawer Helper for ASP.NET Core](/api/drawer)
+* [Server-Side API](/api/drawer)

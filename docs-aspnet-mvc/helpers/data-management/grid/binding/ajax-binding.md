@@ -1,33 +1,26 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
-description: "Configure the Kendo UI Grid extension for Ajax binding to make Ajax requests upon paging, sorting, filtering, or grouping."
+page_title: Ajax Binding | Telerik UI Grid HtmlHelper for ASP.NET MVC
+description: "Learn how to implement Ajax binding with Telerik UI Grid HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/grid/ajax-binding
 slug: ajaxbinding_grid_aspnetmvc
-position: 1
 ---
 
 # Ajax Binding
 
-This article demonstrates how to configure the Kendo UI Grid extension for Ajax binding to make Ajax requests upon paging, sorting, filtering, or grouping.
+You can configure the Grid HtmlHelper extension for Ajax binding.
 
-## Getting Started
-
-When configured for Ajax binding, the Kendo UI Grid for ASP.NET MVC makes Ajax requests when doing paging, sorting, filtering, grouping, or when saving data.
-
-### The Basics
+When configured for Ajax binding, the Grid for ASP.NET MVC makes Ajax requests when doing paging, sorting, filtering, grouping, or when saving data. For runnable examples, refer to the [demo page on binding of the Grid](https://demos.telerik.com/aspnet-mvc/grid/local-data-binding).  
 
 The Ajax-bound mode has the following features:
+- The Grid retrieves only the data (in JSON format) representing the current page. As a result, only the Grid is updated.
+- All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI for jQuery template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
- - The Grid retrieves only the data (in JSON format) representing the current page. As a result, only the Grid is updated.
- - All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
+## Setting Up the Project
 
-### Configuration
-
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to do Ajax binding to the Northwind database, the **Products** table.
+To configure the Grid for ASP.NET MVC to do Ajax binding to the **Products** table of the Northwind database:
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridAjaxBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
     ![A new entity data model](../images/grid-entity-data-model.png)
@@ -64,22 +57,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         }
 
 
-    > * The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns an empty result.
-    > * As of the Kendo UI R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
-    > * If you impersonation is enabled, use the `ToDataSourceResultAsync` extension method with only one thread in your ASP.NET application. If you create a new thread, the impersonation in the newly created child thread decreases because, by default, all newly created child threads in ASP.NET run under the ASP.NET identity of the worker process. To change this behavior, explicitly impersonate the current identity within the code of the child thread.
-
-    The following example demonstrates how to implement the `ToDataSourceResultAsync` extension method in your project.
-
-        public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            using (var northwind = new NorthwindEntities())
-            {
-                IQueryable<Product> products = northwind.Products;
-                DataSourceResult result = await products.ToDataSourceResultAsync(request);
-            }
-        }
-
-1. Return the `DataSourceResult` as JSON. Configure the Kendo UI Grid for Ajax binding.
+1. Return the `DataSourceResult` as JSON. Configure the Grid for Ajax binding.
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -91,7 +69,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
         }
 
-    The same thing applies when you use the asynchronous `ToDataSourceResultAsync` counterpart, as demonstrated in the following example.
+    The same thing applies when you use the asynchronous `ToDataSourceResultAsync` counterpart.
 
         public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -108,17 +86,17 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     ```ASPX
         <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
             .Name("grid")
-            .DataSource(dataSource => dataSource //Configure the Grid data source.
+            .DataSource(dataSource => dataSource // Configure the Grid data source.
                 .Ajax() // Specify that Ajax binding is used.
                 .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format
             )
             .Columns(columns =>
             {
-                //Create a column bound to the ProductID property.
+                // Create a column bound to the ProductID property.
                 columns.Bound(product => product.ProductID);
-                //Create a column bound to the ProductName property.
+                // Create a column bound to the ProductName property.
                 columns.Bound(product => product.ProductName);
-                //Create a column bound to the UnitsInStock property.
+                // Create a column bound to the UnitsInStock property.
                 columns.Bound(product => product.UnitsInStock);
             })
             .Pageable() // Enable paging
@@ -128,17 +106,17 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
     ```Razor
         @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
             .Name("grid")
-            .DataSource(dataSource => dataSource //Configure the Grid data source.
+            .DataSource(dataSource => dataSource // Configure the Grid data source.
                 .Ajax() // Specify that Ajax binding is used.
                 .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
             )
             .Columns(columns =>
             {
-                //Create a column bound to the ProductID property.
+                // Create a column bound to the ProductID property.
                 columns.Bound(product => product.ProductID);
-                //Create a column bound to the ProductName property.
+                // Create a column bound to the ProductName property.
                 columns.Bound(product => product.ProductName);
-                //Create a column bound to the UnitsInStock property.
+                // Create a column bound to the UnitsInStock property.
                 columns.Bound(product => product.UnitsInStock);
             })
             .Pageable() // Enable paging
@@ -154,17 +132,29 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and LINQ expressions to page, sort, filter, and group your data. The JSON response of the action method will contain only a single page of data and the Grid will be bound to that data.
 
-> If your data is `IQueryable<T>` returned by a LINQ-enabled provider&mdash;Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other&mdash;the LINQ expressions, created by the `ToDataSourceResult` method, are converted to SQL and executed by the database server.
+> * If your data is `IQueryable<T>` returned by a LINQ-enabled provider&mdash;Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other&mdash;the LINQ expressions, created by the `ToDataSourceResult` method, are converted to SQL and executed by the database server.
+> * The `ToDataSourceResult()` method will page, sort, filter, and group the collection that is passed to it. If this collection is already paged, the method returns an empty result.
+> * As of the R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
+> * If you impersonation is enabled, use the `ToDataSourceResultAsync` extension method with only one thread in your ASP.NET application. If you create a new thread, the impersonation in the newly created child thread decreases because, by default, all newly created child threads in ASP.NET run under the ASP.NET identity of the worker process. To change this behavior, explicitly impersonate the current identity within the code of the child thread.
 
-## Common Scenarios
+The following example demonstrates how to implement the `ToDataSourceResultAsync` extension method in your project.
 
-### Use View Models
+    public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new NorthwindEntities())
+        {
+            IQueryable<Product> products = northwind.Products;
+            DataSourceResult result = await products.ToDataSourceResultAsync(request);
+        }
+    }
+
+## Using the View Models
 
 Sometimes it is convenient to use view model objects instead of entities returned by Entity Framework. For example, you may want to avoid serializing all Entity Framework properties as JSON or prevent serialization exceptions caused by circular references.
 
-This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
+To use the view models and the Telerik UI Grid for ASP.NET MVC:
 
-1. Perform all steps from the previous section.
+1. Perform all steps from the previous **Setting Up the Project** section.
 1. Add a new class to the `~/Models` folder. Name it `ProductViewModel`.
 
         public class ProductViewModel
@@ -218,7 +208,7 @@ This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
             using (var northwind = new NorthwindEntities())
             {
                 IQueryable<Product> products = northwind.Products;
-                //Convert the Product entities to ProductViewModel instances.
+                // Convert the Product entities to ProductViewModel instances.
                 DataSourceResult result = products.ToDataSourceResult(request, product => new ProductViewModel
                         {
                         ProductID = product.ProductID,
@@ -231,11 +221,11 @@ This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding).
 
-### Pass Additional Data to Action Methods
+## Passing Additional Data to Action Methods
 
 To pass additional parameters to the action, use the `Data` method. Provide the name of a JavaScript function which will return a JavaScript object with the additional data.
 
-The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for [sorting](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
+The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for jQuery for [sorting](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
 
 The following example demonstrates how to add the additional parameters to the action method.
 
@@ -303,11 +293,9 @@ The following example demonstrates how to specify the JavaScript function which 
     </script>
 ```
 
-### Enable Client Data Processing
+## Enabling Client Data Processing
 
-By default, the Kendo UI Grid for ASP.NET MVC makes an Ajax request to the `action` method every time the user changes the page, sorts, filters, or groups. Change this behavior by disabling the `ServerOperation`.
-
-The following example demonstrates how to enable client data processing.
+By default, the Telerik UI Grid for ASP.NET MVC makes an Ajax request to the `action` method every time the user changes the page, sorts, filters, or groups. Change this behavior by disabling the `ServerOperation`.
 
 ```ASPX
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
@@ -335,7 +323,7 @@ The following example demonstrates how to enable client data processing.
         .Name("grid")
         .DataSource(dataSource => dataSource
             .Ajax()
-            .ServerOperation(false) //Paging, sorting, filtering, and grouping will be done client-side.
+            .ServerOperation(false) // Paging, sorting, filtering, and grouping will be done client-side.
             .Read(read => read
                 .Action("Products_Read", "Home") // Set the action method which will return the data in JSON format.
                 .Data("productsReadData")
@@ -352,34 +340,19 @@ The following example demonstrates how to enable client data processing.
     )
 ```
 
-### Customize Content and Attach Event Handlers on the Fly
+## Customizing Content and Attaching Event Handlers on the Fly
 
-In addition to using [server]({% slug configuration_gridhelper_aspnetmvc %}#template) and [client]({% slug configuration_gridhelper_aspnetmvc %}#clienttemplate) column templates, in some cases you may need to customize the appearance or content of the Grid data rows by using JavaScript&mdash;hide, show, or modify content, attach custom event handlers, etc.
+In addition to using [server]({% slug configuration_gridhelper_aspnetmvc %}#template) and [client]({% slug configuration_gridhelper_aspnetmvc %}#clienttemplate) column templates, you may need to customize the appearance or content of the Grid data rows by using JavaScript&mdash;hide, show, or modify content, or attach custom event handlers.
 
-When using client-side data binding for the Grid, perform all these customizations in the [`dataBound`]({% slug overview_gridhelper_aspnetmvc %}#event-handling) event of the Grid. If the custom code is executed earlier&mdash;for example, in `document.ready`&mdash;it is very likely it has no effect, because the table rows are still not rendered at that time.
+When you use client-side data binding for the Grid, perform all these customizations in the [`dataBound`]({% slug overview_gridhelper_aspnetmvc %}#event-handling) event of the Grid. If the custom code is executed earlier&mdash;for example, in `document.ready`&mdash;it is very likely it has no effect, because the table rows are still not rendered at that time.
 
-There is one exception to the above. Delegated event handlers will work, because they are attached to an ancestor element of the data rows&mdash;for example, the Grid [`table`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-table), [`tbody`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-tbody), or [`wrapper`](http://docs.telerik.com/kendo-ui/intro/widget-basics/wrapper-element), and the event handler code should check what the event target is.
+The following exception exists: delegated event handlers will work because they are attached to an ancestor element of the data rows&mdash;for example, the Grid [`table`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-table), [`tbody`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-tbody), or [`wrapper`](http://docs.telerik.com/kendo-ui/intro/widget-basics/wrapper-element), and the event handler code has to check what the event target is.
 
-### Prevent Ajax Response Caching
+## Preventing Ajax Response Caching
 
 To prevent Ajax response caching, refer to [this section from the Frequently Asked Questions article]({% slug freqaskedquestions_gridhelper_aspnetmvc %}#how-to-prevent-ajax-response-caching)
 
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
-* [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
-* [Excel Export]({% slug excelexport_gridhelper_aspnetmvc %})
-* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
-* [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
-* [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Binding the Grid HtmlHelper for ASP.NET MVC to Data (Demos)](https://demos.telerik.com/aspnet-mvc/grid/local-data-binding)
+* [Server-Side API](/api/grid)

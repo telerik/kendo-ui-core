@@ -120,4 +120,4 @@ If you use the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#cla
 ## See Also
 
 * [Immutable Elements by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/immutable-elements)
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

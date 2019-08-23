@@ -167,4 +167,4 @@ The Scheduler supports multiple resource types. For example, you can combine sin
 
 ## See  Also
 
-* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

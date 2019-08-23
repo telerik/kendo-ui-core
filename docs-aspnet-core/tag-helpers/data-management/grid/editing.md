@@ -156,4 +156,4 @@ The following example demonstrates how to set a Kendo UI DropDownList as a custo
 ## See Also
 
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
-* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

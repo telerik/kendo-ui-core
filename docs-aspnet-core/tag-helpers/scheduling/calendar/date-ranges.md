@@ -33,4 +33,4 @@ As a result, the Calendar does not navigate to a date that is earlier than the s
 
 ## See Also
 
-* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

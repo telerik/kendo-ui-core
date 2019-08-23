@@ -109,5 +109,5 @@ You can configure the outliers separately and customize them by using:
 ## See Also
 
 * [Basic Usage of the Box Plot Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/box-plot-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
 * [Box Plot Charts on Wikipedia](https://en.wikipedia.org/wiki/Box_plot)
+* [Server-Side API](/api/chart)

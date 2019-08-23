@@ -41,4 +41,4 @@ The MaskedTextBox TagHelper configuration options are passed as attributes of th
 ## See Also
 
 * [Basic Usage of the MaskedTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
-* [API Reference of the MaskedTextBox Helper for ASP.NET Core](/api/maskedtextbox)
+* [Server-Side API](/api/maskedtextbox)

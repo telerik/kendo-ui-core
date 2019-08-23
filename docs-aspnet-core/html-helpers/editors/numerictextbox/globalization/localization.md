@@ -18,5 +18,5 @@ You can change the messages that are displayed in the NumericTextBox by includin
 
 ## See Also
 
-* [Globalization Support by the NumericTextBox (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/globalization)
-* [API Reference of the NumericTextBox HtmlHelper for ASP.NET Core](/api/numerictextbox)
+* [Globalization Support by the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/globalization)
+* [Server-Side API](/api/numerictextbox)

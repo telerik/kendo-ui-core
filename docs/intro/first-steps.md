@@ -28,6 +28,8 @@ In the process, we will go through these important milestones:
 The explanations below contain links to some fundamental or relevant articles in the Kendo UI documentation.
 You will not need those immediately, but do check them later for in-depth learning of Kendo UI.
 
+Some of the steps provide links to complete runnable examples, so you can compare and verify your implementation.
+
 ## 1. Required JavaScript and CSS Files
 
 First, let's add the Kendo UI assets to your HTML document. In this case, we will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}).

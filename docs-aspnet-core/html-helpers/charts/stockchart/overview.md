@@ -176,4 +176,4 @@ To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`]
 ## See Also
 
 * [Basic Usage of the StockChart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/financial/index)
-* [API Reference of the StockChart HtmlHelper for ASP.NET Core](/api/stockchart)
+* [Server-Side API](/api/stockchart)

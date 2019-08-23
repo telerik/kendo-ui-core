@@ -100,4 +100,4 @@ The PanelBar TagHelper configuration options are passed as attributes of the tag
 ## See Also
 
 * [Basic Usage of the PanelBar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar/tag-helper)
-* [API Reference of the PanelBar Helper for ASP.NET Core](/api/panelbar)
+* [Server-Side API](/api/panelbar)

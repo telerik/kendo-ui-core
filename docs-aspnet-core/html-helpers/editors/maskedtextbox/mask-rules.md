@@ -45,4 +45,4 @@ The following example demonstrates how to define a custom rule for the `-` (minu
 
 ## See Also
 
-* [API Reference of the MaskedTextBox HtmlHelper for ASP.NET Core](/api/maskedtextbox)
+* [Server-Side API](/api/maskedtextbox)

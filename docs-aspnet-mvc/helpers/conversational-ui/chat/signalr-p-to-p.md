@@ -1,27 +1,30 @@
 ---
-title: Peer-to-Peer Chat with SignalR
-page_title: Peer-to-Peer Chat with SignalR | Kendo UI Chat HtmlHelper for ASP.NET MVC
-description: "Learn how to create a peer-to-peer Knedo UI Chat UI with ASP.NET MVC and SignalR 2."
+title: Peer-to-Peer Chat
+page_title: Peer-to-Peer Chat with SignalR | Telerik UI Chat HtmlHelper for ASP.NET MVC
+description: "Learn how to create a peer-to-peer Telerik UI Chat with ASP.NET MVC SignalR."
 slug: signalr_chathelper_aspnetmvc
 position: 2
 ---
 
-# Peer-to-Peer Chat with SignalR
+# Peer-to-Peer Chat
 
-This article demonstrates how to configure a Telerik UI for ASP.NET MVC Chat and a [SignalR 2](https://www.asp.net/signalr) service to create a Peer-to-Peer Chat application.
+You can configure a Telerik UI Chat HtmlHelper for ASP.NET Core and a [SignalR 2](https://www.asp.net/signalr) service to create a Peer-to-Peer Chat application.
 
-## Implementing the SignalR Server Hub
+To create the Peer-to-Peer Chat you have to implement the SignalR Hub server and, then, to implement the application client:
 
-This section explains how to implement the SignalR Chat Hub server.
+1. [Create the new application](#creating-the-new-application)
+1. [Configure the SignalR Hub server](#configuring-the-signalr-hub-server)
+1. [Initialize the Chat](#initializing-the-chat)
+1. [Configure the SignalR client Hub proxy](#configuring-the-signalr-client-hub-proxy)
 
-### Creating the New Application
+## Creating the New Application
 
-Depending on your preferred editor, use either of the following approaches:
+Depending on your preferred editor, use any of the following approaches:
 
-* [Create a new Telerik UI for ASP.NET MVC application form the Standard template]({% slug newprojectwizards_visualstudio_aspnetmvc %}), or
-* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC to the project]({% slug aspnetmvc5_aspnetmvc %})
+* [Create a new Telerik UI for ASP.NET MVC application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC package]({% slug aspnetmvc5_aspnetmvc %})
 
-#### Configuring the SignalR Hub
+## Configuring the SignalR Hub Server
 
 1. Add the `Microsoft.AspNet.SignalR` package to the application.
 
@@ -52,27 +55,23 @@ Depending on your preferred editor, use either of the following approaches:
 
         namespace SignalR.Hubs
         {
-            // The Hub class should inherit from the Microsoft.AspNet.SignalR.Hub
+            // The Hub class has to inherit from the Microsoft.AspNet.SignalR.Hub.
             public class ChatHub : Hub
             {
                 public void Send(object sender, string message)
                 {
-                    // Broadcast the message to all clients except the sender
+                    // Broadcast the message to all clients except the sender.
                     Clients.Others.broadcastMessage(sender, message);
                 }
                 public void SendTyping(object sender)
                 {
-                    // Broadcast the typing notification to all clients except the sender
+                    // Broadcast the typing notification to all clients except the sender.
                     Clients.Others.typing(sender);
                 }
             }
         }
 
-## Implementing the Application Client
-
-This section explains how to implement the P2P Chat application client.
-
-### Initializing the Chat
+## Initializing the Chat
 
 In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events.
 
@@ -109,7 +108,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
         }
     </script>
 
-### Configuring the SignalR Client Hub Proxy
+## Configuring the SignalR Client Hub Proxy
 
 1. Include the SignalR 2 script in the page. It is distributed with the SignalR NuGet package.
 
@@ -131,7 +130,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
             return hub;
         }
 
-1. In the `$(document).ready()` handler start the Hub proxy and attach event handlers for the respective remote hub actions:
+1. In the `$(document).ready()` handler, start the Hub proxy and attach event handlers for the respective remote hub actions.
 
         $(document).ready(function () {
             window.chat = $('#chat').getKendoChat();
@@ -143,12 +142,12 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
                     text: message
                 };
 
-                // Render the received message in the Chat
+                // Render the received message in the Chat.
                 chat.renderMessage(message, sender);
             });
 
             chatHub.on("typing", function (sender) {
-                // Display the typing notification in the Chat
+                // Display the typing notification in the Chat.
                 chat.renderMessage({ type: "typing" }, sender);
             });
         });
@@ -157,6 +156,5 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 ## See Also
 
-* [Overview of the Chat HtmlHelper]({% slug overview_chathelper_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference: ChatBuilder](/api/Kendo.Mvc.UI.Fluent/ChatBuilder)
-* [Overview of the Kendo UI Chat Widget](http://docs.telerik.com/kendo-ui/controls/conversational-ui/chat/overview)
+* [Basic Usage of the Chat HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/chat)
+* [Server-Side API](/api/chat)

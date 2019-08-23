@@ -54,4 +54,4 @@ To reference an existing Barcode instance, use the [`jQuery.data()`](https://api
 
 * [Basic Usage of the Barcode HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/barcode/index)
 * [Using the API of the Barcode HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/barcode/api)
-* [API Reference of the Barcode HtmlHelper for ASP.NET Core](/api/barcode)
+* [Server-Side API](/api/barcode)

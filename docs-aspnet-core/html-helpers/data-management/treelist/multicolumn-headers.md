@@ -36,4 +36,4 @@ The previous example will present the following output.
 ## See Also
 
 * [Implementing Multi-Column Headers in the TreeList HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/treelist/multicolumnheaders)
-* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)
+* [Server-Side API](/api/treelist)

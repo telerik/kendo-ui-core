@@ -55,4 +55,4 @@ The Button tag helper configuration options are passed as attributes of the tag.
 ## See Also
 
 * [Basic Usage of the ButtonGroup TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/tag-helper)
-* [API Reference of the ButtonGroup Helper for ASP.NET Core](/api/buttongroup)
+* [Server-Side API](/api/buttongroup)

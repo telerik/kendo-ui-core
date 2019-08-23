@@ -79,4 +79,4 @@ The Window TagHelper configuration options are passed as attributes of the tag. 
 ## See Also
 
 * [Basic Usage of the Window TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/tag-helper)
-* [API Reference of the Window Helper for ASP.NET Core](/api/window)
+* [Server-Side API](/api/window)

@@ -101,4 +101,4 @@ For a complete example on basic DropDownTree events, refer to the [demo on using
 
 * [Basic Usage of the DropDownTree HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/index)
 * [Using the API of the DropDownTree HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/api)
-* [API Reference of the DropDownTree HtmlHelper for ASP.NET Core](/api/dropdowntree)
+* [Server-Side API](/api/dropdowntree)

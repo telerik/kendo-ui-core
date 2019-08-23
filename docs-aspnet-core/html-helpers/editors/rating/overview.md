@@ -56,4 +56,4 @@ The following example demonstrates the basic configuration for the Rating HtmlHe
 
 * [Basic Usage of the Rating HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/rating/index)
 * [Using the API of the Rating HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/rating/api)
-* [API Reference of the Rating HtmlHelper for ASP.NET Core](/api/rating)
+* [Server-Side API](/api/rating)

@@ -28,4 +28,4 @@ You can restrict the value of the NumericTextBox to a specific range by using ei
 ## See Also
 
 * [Using the API of the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/api)
-* [API Reference of the NumericTextBox HtmlHelper for ASP.NET Core](/api/numerictextbox)
+* [Server-Side API](/api/numerictextbox)

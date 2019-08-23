@@ -90,4 +90,4 @@ To configure the Grid for ASP.NET Core to do Ajax binding:
 
 * [Binding to Remote Data by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/remote-data-binding)
 * [Binding to OData by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/odata)
-* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)
+* [Server-Side API](/api/treelist)

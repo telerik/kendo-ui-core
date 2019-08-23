@@ -92,4 +92,4 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 * [Excel Export by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/excel-export)
 * [Copying to Excel by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/copy-to-excel)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

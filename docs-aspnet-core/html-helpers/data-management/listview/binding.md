@@ -182,7 +182,7 @@ To pass additional parameters to the action method:
 
 ## Processing Client Data
 
-By default, Telerik UI ListView for ASP.NET Core requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
+By default, the Telerik UI ListView for ASP.NET Core requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
 
     .DataSource(dataSource => dataSource
         .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
@@ -193,4 +193,4 @@ By default, Telerik UI ListView for ASP.NET Core requests data from the server e
 
 * [Binding to Remote Data by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/remote-data-binding)
 * [Customizing the Data Source of the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/custom-datasource)
-* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
+* [Server-Side API](/api/listview)

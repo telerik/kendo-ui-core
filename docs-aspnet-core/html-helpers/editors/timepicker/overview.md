@@ -97,4 +97,4 @@ To reference an existing Telerik UI TimePicker instance, use the [`jQuery.data()
 
 * [Basic Usage by the TimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker)
 * [Using the API of the TimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker/api)
-* [API Reference of the TimePicker HtmlHelper for ASP.NET Core](/api/timepicker)
+* [Server-Side API](/api/timepicker)

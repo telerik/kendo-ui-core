@@ -52,4 +52,4 @@ The following example demonstrates how to create a Bubble Chart and visualizes s
 ## See Also
 
 * [Basic Usage of the Bubble Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bubble-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

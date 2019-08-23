@@ -67,4 +67,4 @@ To set simple content, use the `content` attribute.
 ## See Also
 
 * [Basic Usage of the Dialog TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dialog/tag-helper)
-* [API Reference of the Dialog Helper for ASP.NET Core](/api/dialog)
+* [Server-Side API](/api/dialog)

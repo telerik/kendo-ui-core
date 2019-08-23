@@ -15,5 +15,5 @@ The keyboard navigation of the NumericTextBox is always available.
 
 ## See Also
 
-* [Keyboard Navigation by the NumericTextBox (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/keyboard-navigation)
-* [Accessibility in the NumericTextBox]({% slug accessibility_numerictextbox_aspnetcore %})
+* [Keyboard Navigation by the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/keyboard-navigation)
+* [Accessibility in the NumericTextBox  HtmlHelper for ASP.NET Core]({% slug accessibility_numerictextbox_aspnetcore %})

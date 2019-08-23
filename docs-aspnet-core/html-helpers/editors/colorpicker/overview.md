@@ -110,4 +110,4 @@ To reference an existing Kendo UI ColorPicker instance, use the [`jQuery.data()`
 ## See Also
 
 * [Basic Usage of the ColorPicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/index)
-* [API Reference of the ColorPicker HtmlHelper for ASP.NET Core](/api/colorpicker)
+* [Server-Side API](/api/colorpicker)

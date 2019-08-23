@@ -20,4 +20,4 @@ The Telerik UI MultiViewCalendar allows the user to select multiple dates by usi
 ## See Also
 
 * [Selection in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/selection)
-* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

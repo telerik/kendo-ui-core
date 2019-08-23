@@ -34,4 +34,4 @@ When filtering is enabled in the filter textboxes for all Grid columns will be p
 
 ## See Also
 
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

@@ -181,4 +181,4 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 ## See Also
 
 * [Basic Usage of the Kendo UI Chat Widget (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
-* [API Reference of the Chat Helper for ASP.NET Core](/api/chat)
+* [Server-Side API](/api/chat)

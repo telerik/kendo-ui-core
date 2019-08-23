@@ -26,4 +26,4 @@ The Kendo UI MultiViewCalendar allows the user to select multiple dates by using
 
 ## See Also
 
-* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

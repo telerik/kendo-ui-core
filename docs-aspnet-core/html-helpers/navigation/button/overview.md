@@ -78,4 +78,4 @@ The Button HTML helper exposes only a `Click()` event that can be handled. For a
 
 * [Basic Usage of the Button HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/index)
 * [Using the API of the Button HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/api)
-* [API Reference of the Button HtmlHelper for ASP.NET Core](/api/button)
+* [Server-Side API](/api/button)

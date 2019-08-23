@@ -149,4 +149,4 @@ If the dimensions of the Splitter do not depend directly on the browser viewport
 
 ## See Also
 
-* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)
+* [Server-Side API](/api/splitter)

@@ -50,56 +50,35 @@ The following example demonstrates how to define the ListBox by using the ListBo
     }
 ```
 
-## Basic Configuration
+## Functionality and Features
 
-The following example demonstrates the basic configuration for the ListBox HtmlHelper.
-
-    @(Html.Kendo().ListBox()
-        .Name("optional")
-        .Toolbar(toolbar =>
-        {
-            toolbar.Position(ListBoxToolbarPosition.Right);
-            toolbar.Tools(tools => tools
-                .MoveUp()
-                .MoveDown()
-                .TransferTo()
-                .TransferFrom()
-                .TransferAllTo()
-                .TransferAllFrom()
-                .Remove()
-            );
-        })
-        .ConnectWith("#selected")
-        .Selectable(ListBoxSelectable.Multiple)
-        .TemplateId("customer-item-template")
-        .Draggable(draggable => draggable.Placeholder("customPlaceholder"))
-        .DropSources("selected")
-        .DataTextField("ContactName")
-        .DataValueField("CustomerID")
-        .DataSource(source => source
-            .Transport(transport => transport
-                .Read(read => read.Action("GetCustomers", "ListBox"))
-            )
-        )
-        .Events(events => events
-            .Add("onAdd")
-            .Change("onChange")
-            .DataBound("onDataBound")
-            .DragStart("onDragStart")
-            .Drag("onDrag")
-            .Drop("onDrop")
-            .DragEnd("onDragEnd")
-            .Remove("onRemove")
-            .Reorder("onReorder")
-        )
-    )
+* [Data Binding]({% slug htmlhelpers_listbox_databinding_aspnetcore %})
+* [Item templates]({% slug htmlhelpers_listbox_templates_aspnetcore %})
+* [Dragging and dropping]({% slug htmlhelpers_listbox_draganddrop_aspnetcore %})
+* [Selection]({% slug htmlhelpers_listbox_selection_aspnetcore %})
+* [Globalization]({% slug htmlhelpers_listbox_globalization_aspnetcore %})
+* [Accessibility]({% slug htmlhelpers_listbox_accessibility_aspnetcore %})
 
 ## Events
 
 For a complete example on basic ListBox events, refer to the [demo on using the events of the ListBox](https://demos.telerik.com/aspnet-core/listbox/events).
 
+## Referencing Existing Instances
+
+To reference an existing  ListBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ListBox API](/api/listbox) to control its behavior.
+
+The following example demonstrates how to access an existing ListBox instance.
+
+      // Place the following after your ListBox for ASP.NET Core declaration.
+      <script>
+      $(function() {
+      // The Name() of the ListBox is used to get its client-side instance.
+          var listbox = $("#listbox").getKendoListBox();
+      });
+      </script>
+
 ## See Also
 
 * [Basic Usage of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/index)
 * [Using the API of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/api)
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

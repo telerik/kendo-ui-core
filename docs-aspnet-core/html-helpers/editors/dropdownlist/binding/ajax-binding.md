@@ -47,4 +47,4 @@ You can configure the Telerik UI DropDownList for Ajax binding to the Northwind 
 
 ## See Also
 
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

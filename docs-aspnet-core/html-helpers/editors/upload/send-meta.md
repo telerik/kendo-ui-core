@@ -84,4 +84,4 @@ To receive metadata from the `save` handler:
 
 ## See Also
 
-* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

@@ -40,5 +40,5 @@ You can bind a Telerik UI RadioButton to a model.
 
 ## See Also
 
-* [API Reference of the RadioButton HtmlHelper for ASP.NET Core](/api/radiobutton)
-* [Telerik UI for ASP.NET Core API Reference: RadioButtonBuilder](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [RadioButton Server-Side API](/api/radiobutton)
+* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)

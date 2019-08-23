@@ -28,4 +28,4 @@ The following example demonstrates how to enable and disable the ButtonGroup ove
 
 ## See Also
 
-* [API Reference of the ButtonGroup HtmlHelper for ASP.NET Core](/api/buttongroup)
+* [Server-Side API](/api/buttongroup)

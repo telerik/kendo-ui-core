@@ -123,7 +123,7 @@ The following example demonstrates how to subscribe to events by a template dele
 To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [Sortable API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
 
 ```
-    // Place this after your Telerik UI Sortable for ASP.NET Core declaration.
+    // Place the following after your Telerik UI Sortable for ASP.NET Core declaration.
     <script>
     $(function() {
         // The For() of the Sortable is used to get its client-side instance.
@@ -139,4 +139,4 @@ For a complete example on basic Sortable events, refer to the [demo on using the
 ## See Also
 
 * [Basic Usage of the Sortable HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/index)
-* [API Reference of the Sortable HtmlHelper for ASP.NET Core](/api/sortable)
+* [Server-Side API](/api/sortable)

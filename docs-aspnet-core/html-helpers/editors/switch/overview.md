@@ -69,7 +69,7 @@ The following example demonstrates how to subscribe to events by a template dele
 To reference an existing Telerik UI Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](/api/switch) to control its behavior.
 
 ```
-    // Place this after your Telerik UI Switch for ASP.NET Core declaration.
+    // Place the following after your Telerik UI Switch for ASP.NET Core declaration.
     <script>
         $(function() {
             // The Name() of the Switch is used to get its client-side instance.
@@ -82,4 +82,4 @@ To reference an existing Telerik UI Switch instance, use the [`jQuery.data()`](h
 
 * [Basic Usage by the Switch HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch)
 * [Using the API of the Switch HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch/api)
-* [API Reference of the Switch HtmlHelper for ASP.NET Core](/api/switch)
+* [Server-Side API](/api/switch)

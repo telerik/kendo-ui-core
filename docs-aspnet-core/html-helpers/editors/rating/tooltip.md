@@ -38,4 +38,4 @@ Setting the [`Tooltip`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.F
 ## See Also
 
 * [Selection by the Rating HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/rating/selection)
-* [API Reference of the Rating HtmlHelper for ASP.NET Core](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)
+* [Server-Side API](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)

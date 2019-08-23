@@ -47,4 +47,4 @@ The following JSON example demonstrates how to pass item properties to the TreeV
 
 ## See Also
 
-* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)
+* [Server-Side API](/api/treeview)

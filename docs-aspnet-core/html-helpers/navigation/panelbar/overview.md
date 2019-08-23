@@ -115,4 +115,4 @@ For a complete example on basic PanelBar events, refer to the [demo on using the
 
 * [Basic Usage of the PanelBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar)
 * [Using the API of the PanelBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar/api)
-* [API Reference of the PanelBar HtmlHelper for ASP.NET Core](/api/panelbar)
+* [Server-Side API](/api/panelbar)

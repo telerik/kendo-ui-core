@@ -74,7 +74,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [DatePicker API](/api/datepicker) to control its behavior.
 
-        // Place this after your Telerik UI DatePicker for ASP.NET Core declaration.
+        // Place the following after your Telerik UI DatePicker for ASP.NET Core declaration.
         <script>
         $(function() {
         // The Name() of the DatePicker is used to get its client-side instance.
@@ -86,4 +86,4 @@ To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()
 
 * [Basic Usage of the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/index)
 * [Using the API of the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/api)
-* [API Reference of the DatePicker HtmlHelper for ASP.NET Core](/api/datepicker)
+* [Server-Side API](/api/datepicker)

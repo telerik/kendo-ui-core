@@ -86,7 +86,7 @@ The following example demonstrates how to subscribe to events by a template dele
 To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Calendar API](/api/calendar) to control its behavior.
 
 ```
-    // Place this after your Telerik UI Calendar for ASP.NET Core declaration.
+    // Place the following after your Telerik UI Calendar for ASP.NET Core declaration.
     <script>
          $(function() {
             // The Name() of the Calendar is used to get its client-side instance.
@@ -99,4 +99,4 @@ To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`]
 
 * [Basic Usage of the Calendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/index)
 * [Using the API of the Calendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/api)
-* [API Reference of the Calendar HtmlHelper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

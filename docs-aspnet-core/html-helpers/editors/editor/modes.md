@@ -46,4 +46,4 @@ Editors that are instantiated from a `contentEditable` element will not post the
 ## See Also
 
 * [Inline Mode by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/inline-editing)
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

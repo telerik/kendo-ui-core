@@ -97,4 +97,4 @@ The following example demonstrates how to access an existing TreeList instance.
 ## See Also
 
 * [Basic Usage of the TreeList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
-* [API Reference of the TreeList Helper for ASP.NET Core](/api/treelist)
+* [Server-Side API](/api/treelist)

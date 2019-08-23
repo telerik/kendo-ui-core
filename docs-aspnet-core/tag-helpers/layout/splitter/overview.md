@@ -118,4 +118,4 @@ The Splitter TagHelper supports all the configuration options that the HtmlHelpe
 ## See Also
 
 * [Basic Usage of the Splitter TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/tag-helper)
-* [API Reference of the Splitter Helper for ASP.NET Core](/api/splitter)
+* [Server-Side API](/api/splitter)

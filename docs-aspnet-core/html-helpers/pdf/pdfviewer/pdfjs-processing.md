@@ -46,4 +46,4 @@ PDF.js processing is not supported in Internet Explorer 9. To work properly in t
 
 ## See Also
 
-* [API Reference of the PDFViewer HtmlHelper for ASP.NET Core](/api/pdfviewer)
+* [Server-Side API](/api/pdfviewer)

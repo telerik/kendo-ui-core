@@ -42,4 +42,4 @@ The following example demonstrates how to define the Calendar by using the Calen
 ## See Also
 
 * [Basic Usage of the Calendar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/tag-helper)
-* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)
