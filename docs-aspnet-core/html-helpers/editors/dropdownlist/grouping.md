@@ -36,4 +36,4 @@ The following example demonstrates how to group the data in the DropDownList by 
 ## See Also
 
 * [Grouping by the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/grouping)
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

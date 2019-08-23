@@ -55,4 +55,4 @@ To reference an existing QRCode instance, use the [`jQuery.data()`](https://api.
 
 * [Basic Usage of the QRCode HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/qrcode/index)
 * [Using the API of the QRCode HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/qrcode/api)
-* [API Reference of the QRCode HtmlHelper for ASP.NET Core](/api/qrcode)
+* [Server-Side API](/api/qrcode)

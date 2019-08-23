@@ -52,4 +52,4 @@ You can define the `Checkboxes` configuration option by:
 ## See Also
 
 * [Checkboxes in the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/checkboxes)
-* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)
+* [Server-Side API](/api/treeview)

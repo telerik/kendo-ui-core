@@ -79,4 +79,4 @@ The Gantt provides options for [binding it to data]({% slug binding_gantt_aspnet
 ## See Also
 
 * [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
-* [API Reference of the Gantt Helper for ASP.NET Core](/api/gantt)
+* [Server-Side API](/api/gantt)

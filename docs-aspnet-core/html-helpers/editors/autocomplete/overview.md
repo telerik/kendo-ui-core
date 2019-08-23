@@ -143,4 +143,4 @@ For a complete example on basic AutoComplete events, refer to the [demo on using
 
 * [Basic Usage of the AutoComplete HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/index)
 * [Using the API of the AutoComplete HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/api)
-* [API Reference of the AutoComplete HtmlHelper for ASP.NET Core](/api/autocomplete)
+* [Server-Side API](/api/autocomplete)

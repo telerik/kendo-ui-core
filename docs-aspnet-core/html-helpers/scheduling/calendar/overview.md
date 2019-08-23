@@ -99,4 +99,4 @@ To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`]
 
 * [Basic Usage of the Calendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/index)
 * [Using the API of the Calendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/calendar/api)
-* [API Reference of the Calendar HtmlHelper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

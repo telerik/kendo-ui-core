@@ -87,4 +87,4 @@ The Charts provide options for [binding to inline, local, or remote data]({% slu
 * [Using the API of the Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chart-api/index)
 * [Basic Usage of the Bar Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bar-charts/index)
 * [Basic Usage of the Line Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/line-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

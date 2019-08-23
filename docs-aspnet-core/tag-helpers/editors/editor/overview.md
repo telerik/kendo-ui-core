@@ -175,4 +175,4 @@ To configure other Editor options, such as PDF export, immutables, rezisability 
 ## See Also
 
 * [Basic Usage of the Editor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/tag-helper)
-* [API Reference of the Editor Helper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

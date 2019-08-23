@@ -123,4 +123,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Basic Usage of the ScrollView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/index)
 * [Using the API of the MediaPlayer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/mediaplayer/api)
-* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)
+* [Server-Side API](/api/treeview)

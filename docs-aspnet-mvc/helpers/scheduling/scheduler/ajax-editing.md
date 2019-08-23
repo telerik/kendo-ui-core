@@ -113,7 +113,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             {
                 using (var sampleDB = new SampleEntities())
                 {
-                    //Create a new Task entity and set its properties from the posted TaskViewModel.
+                    // Create a new Task entity and set its properties from the posted TaskViewModel.
                     var entity = new Task
                     {
                         TaskID = task.TaskID,
@@ -148,7 +148,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             {
                 using (var sampleDB = new SampleEntities())
                 {
-                    //Create a new Task entity and set its properties from the posted TaskViewModel.
+                    // Create a new Task entity and set its properties from the posted TaskViewModel.
                     var entity = new Task
                     {
                         TaskID = task.TaskID,
@@ -184,7 +184,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             {
                 using (var sampleDB = new SampleEntities())
                 {
-                    //Create a new Task entity and set its properties from the posted TaskViewModel.
+                    // Create a new Task entity and set its properties from the posted TaskViewModel.
                     var entity = new Task
                     {
                         TaskID = task.TaskID,

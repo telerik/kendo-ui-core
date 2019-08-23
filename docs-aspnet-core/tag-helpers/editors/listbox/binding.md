@@ -161,4 +161,4 @@ The following example demonstrates how to bind the Kendo UI ListBox TagHelper to
 ## See Also
 
 * [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
-* [API Reference of the ListBox Helper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

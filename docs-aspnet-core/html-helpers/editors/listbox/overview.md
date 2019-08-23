@@ -102,4 +102,4 @@ For a complete example on basic ListBox events, refer to the [demo on using the 
 
 * [Basic Usage of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/index)
 * [Using the API of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/api)
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

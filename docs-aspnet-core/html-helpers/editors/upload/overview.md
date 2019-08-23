@@ -201,4 +201,4 @@ The following example demonstrates Upload HTML helper exposes several events, wh
 
 * [Basic Usage by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload)
 * [Using the API of the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/api)
-* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

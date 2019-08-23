@@ -83,4 +83,4 @@ To reference an existing Telerik UI ColorPalette instance, use the [`jQuery.data
 
 * [Basic Usage of the ColorPalette HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/palette)
 * [Using the Palette Presets in the ColorPalette HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/palette-presets)
-* [API Reference of the ColorPalette HtmlHelper for ASP.NET Core](/api/colorpalette)
+* [Server-Side API](/api/colorpalette)

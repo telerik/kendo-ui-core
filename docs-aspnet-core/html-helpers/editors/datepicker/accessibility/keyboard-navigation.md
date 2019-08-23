@@ -14,5 +14,5 @@ For a complete example, refer to the [demo on keyboard navigation of the DatePic
 
 ## See Also
 
-* [Keyboard Navigation in the DatePicker (Demo)](https://demos.telerik.com/aspnet-core/datepicker/keyboard-navigation)
-* [Accessibility in the DatePicker]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %})
+* [Keyboard Navigation in the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/keyboard-navigation)
+* [Accessibility in the DatePicker HtmlHelper for ASP.NET Core]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %})

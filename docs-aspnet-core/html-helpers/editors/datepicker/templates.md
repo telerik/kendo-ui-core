@@ -22,5 +22,5 @@ For more information on customizing the `aria-label` text, refer to the article 
 
 ## See Also
 
-* [Customizing Templates in the DatePicker (Demo)](https://demos.telerik.com/aspnet-core/datepicker/template)
-* [API Reference of the DatePicker](/api/datepicker)
+* [Customizing Templates in the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/template)
+* [Server-Side API](/api/datepicker)

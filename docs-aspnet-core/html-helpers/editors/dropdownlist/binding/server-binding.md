@@ -35,4 +35,4 @@ You can configure the Telerik UI DropDownList for server binding to the Northwin
 
 ## See Also
 
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

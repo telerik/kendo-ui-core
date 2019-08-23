@@ -89,4 +89,4 @@ The Telerik UI ContextMenu enables you to bind it to a hierarchical model.
 
 ## See Also
 
-* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

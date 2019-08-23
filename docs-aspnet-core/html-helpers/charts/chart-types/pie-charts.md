@@ -85,4 +85,4 @@ The Pie Chart supports the following `ChartSeriesGradient` options:
 ## See Also
 
 * [Basic Usage of the Pie Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pie-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

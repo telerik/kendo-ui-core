@@ -80,5 +80,5 @@ Your project might require you to visually differentiate each alternating item i
 ## See Also
 
 * [Templates in the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/index)
-* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
+* [Server-Side API](/api/listview)
 * [Editor Template for the ListView HtmlHelper for ASP.NET Core]({% slug htmlhelpers_listview_aspnetcore_editing %}#defining-the-editor-template)

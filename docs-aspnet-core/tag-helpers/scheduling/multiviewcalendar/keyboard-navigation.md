@@ -42,4 +42,4 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ## See Also
 
-* [API Reference of the MultiViewCalendar Helper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

@@ -40,4 +40,4 @@ The ToolBar provides options for closing its popup from a button `click` event i
 
 ## See Also
 
-* [API Reference of the ToolBar HtmlHelper for ASP.NET Core](/api/toolbar)
+* [Server-Side API](/api/toolbar)

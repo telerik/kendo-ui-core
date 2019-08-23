@@ -86,4 +86,4 @@ To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()
 
 * [Basic Usage of the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/index)
 * [Using the API of the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/api)
-* [API Reference of the DatePicker HtmlHelper for ASP.NET Core](/api/datepicker)
+* [Server-Side API](/api/datepicker)

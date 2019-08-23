@@ -182,4 +182,4 @@ You can also use external DataSource tag helpers to implement the same and assig
 
 ## See Also
 
-* [API Reference of the Gantt Helper for ASP.NET Core](/api/gantt)
+* [Server-Side API](/api/gantt)

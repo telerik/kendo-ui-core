@@ -51,4 +51,4 @@ The generated `uid` is added as a property of the `e.files` collection to all of
 
 ## See Also
 
-* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

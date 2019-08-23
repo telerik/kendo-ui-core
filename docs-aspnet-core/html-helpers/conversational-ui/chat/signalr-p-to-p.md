@@ -1,6 +1,6 @@
 ---
 title: Peer-to-Peer Chat
-page_title: Peer-to-Peer Chat | Telerik UI Chat HtmlHelper for ASP.NET Core
+page_title: Peer-to-Peer Chat with SignalR | Telerik UI Chat HtmlHelper for ASP.NET Core
 description: "Learn how to create a peer-to-peer Telerik UI Chat with ASP.NET Core SignalR."
 slug: htmlhelpers_chat_aspnetcore_signalr
 position: 2
@@ -21,7 +21,7 @@ To create the Peer-to-Peer Chat you have to implement the SignalR Hub server and
 
 Depending on your preferred editor, use any of the following approaches:
 
-* [Create a new Telerik UI for ASP.NET Core application form the Standard template]({% slug newprojectwizards_visualstudio_aspnetcore %})
+* [Create a new Telerik UI for ASP.NET Core application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetcore %})
 * [Create a new .Net Core application in Visual Studio and include the Telerik UI for ASP.NET Core package]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Create a new .Net Core application with the CLI and include the Telerik UI for ASP.NET Core package]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 
@@ -188,4 +188,4 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 ## See Also
 
 * [Basic Usage of the Chat HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/chat/index)
-* [API Reference of the Chat HtmlHelper for ASP.NET Core](/api/chat)
+* [Server-Side API](/api/chat)

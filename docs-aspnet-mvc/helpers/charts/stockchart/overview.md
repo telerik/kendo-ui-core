@@ -106,7 +106,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart API](/api/stockchart) to control its behavior.
+To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [StockChart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart) to control its behavior.
 
     // Place the following after the StockChart for ASP.NET MVC declaration.
     <script>
@@ -119,4 +119,4 @@ To reference an existing Kendo UI StockChart instance, use the [`jQuery.data()`]
 ## See Also
 
 * [Basic Usage of the StockChart HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/financial)
-* [API Reference of the StockChart HtmlHelper for ASP.NET MVC](/api/stockchart)
+* [Server-Side API](/api/stockchart)

@@ -168,4 +168,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Basic Usage by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/index)
 * [Using the API of the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/api)
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

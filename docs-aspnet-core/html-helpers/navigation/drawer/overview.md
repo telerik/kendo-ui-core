@@ -68,4 +68,4 @@ The following example demonstrates the basic configuration of the Drawer HtmlHel
 
 * [Basic Usage of the Drawer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer)
 * [Using the API of the Drawer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/drawer/api)
-* [API Reference of the Drawer HtmlHelper for ASP.NET Core](/api/drawer)
+* [Server-Side API](/api/drawer)

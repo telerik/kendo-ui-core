@@ -20,7 +20,7 @@ The PivotGrid for ASP.NET Core supports Ajax data-binding to HTTP accessible OLA
 - [PivotGrid fundamentals](https://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/overview)
 - [Setting up OLAP cubes](https://docs.telerik.com/kendo-ui/controls/data-management/pivotgrid/fundamentals)
 
-Kendo UI for jQuery provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/olap/msmdpump.dll`. However, to see the responses, the service needs to be queried and cannot be opened directly in the browser.
+Kendo UI for jQuery provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/olap/msmdpump.dll`. To see the responses, the service needs to be queried and cannot be opened directly in the browser.
 
 The PivotGrid for ASP.NET Core also supports Ajax data-binding to flat data. It creates a client-side cube which allows the categorization of the flat data. For runnable examples, refer to:
 * [Local binding of the PivotGrid HtmlHelper for ASP.NET Core (demo)](https://demos.telerik.com/aspnet-core/pivotgrid/local-flat-data-binding)
@@ -66,4 +66,4 @@ The following examples demonstrate how to configure the PivotGrid for ASP.NET Co
 * [Basic Usage of the PivotGrid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/index)
 * [Local Binding by the PivotGrid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/local-flat-data-binding)
 * [Remote Binding by the PivotGrid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/remote-flat-data-binding)
-* [API Reference of the PivotGrid HtmlHelper for ASP.NET Core](/api/pivotgrid)
+* [Server-Side API](/api/pivotgrid)

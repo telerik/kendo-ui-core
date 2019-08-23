@@ -95,4 +95,4 @@ You can configure the DropDownList to get its data from a remote source by makin
 
 ## See Also
 
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

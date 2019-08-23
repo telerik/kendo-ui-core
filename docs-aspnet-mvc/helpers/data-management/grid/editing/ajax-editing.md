@@ -1,22 +1,20 @@
 ---
 title: Ajax Editing
-page_title: Ajax Editing | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
+page_title: Ajax Editing | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET MVC for Ajax editing."
 previous_url: /helpers/grid/ajax-editing
 slug: ajaxediting_grid_aspnetmvc
-position: 2
 ---
 
 # Ajax Editing
 
-This article demonstrates how to define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET MVC for Ajax editing.
+You can define commands and set the edit mode to configure the Telerik UI Grid for ASP.NET MVC for Ajax editing.
 
-## Configuration
+For runnable examples, refer to the [demos on implementing the editing approaches in the Grid](https://demos.telerik.com/aspnet-mvc/grid/editing).
 
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to do Ajax editing to the Northwind database, the **Products** table.
+## Setting the Ajax Edit Mode
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridAjaxEditing`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
-
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
     ![A new entity data model](../images/grid-entity-data-model.png)
@@ -164,7 +162,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                     model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
                 })
                 .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item
-                .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the grid needs data.
+                .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Grid needs data.
                 .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
                 .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
             )
@@ -186,7 +184,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 }).Title("Commands").Width(200);
             })
             .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
-            .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode.
+            .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline edit mode.
             .DataSource(dataSource =>
                 dataSource.Ajax()
                     .Model(model =>
@@ -195,7 +193,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                         model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
                     })
                     .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item.
-                    .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the grid needs data.
+                    .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Grid needs data.
                     .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
                     .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
             )
@@ -207,13 +205,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
     ![The final result](../images/grid-inline-grid.png)
 
-    To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing).
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing).
 
-### ModelState Errors
+## Handling ModelState Errors
 
-Server validation is often needed when performing editing. The section below demonstrates how to use the `AddModelError` method with the Kendo UI Grid for ASP.NET MVC.
+Server validation is often needed when performing editing. The following section demonstrates how to use the `AddModelError` method with the Telerik UI Grid for ASP.NET MVC.
 
-1. Perform all steps from the previous section.
+1. Perform all steps from the previous **Setting the Ajax Edit Mode** section.
 1. Add some validation code to the `Products_Update` method. For example, check the length of the `ProductName` property.
 
         public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, ProductViewModel product)
@@ -234,7 +232,7 @@ Server validation is often needed when performing editing. The section below dem
                                     UnitsInStock = product.UnitsInStock
                     };
 
-                    // Attach the entity
+                    // Attach the entity.
                     northwind.Products.Attach(entity);
                     // Change its state to Modified so Entity Framework can update the existing product instead of creating a new one.
                     northwind.Entry(entity).State = EntityState.Modified;
@@ -250,7 +248,7 @@ Server validation is often needed when performing editing. The section below dem
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 
-1. Subscribe to the [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
+1. Subscribe to the Kendo UI for jQuery [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the Kendo UI for jQuery [`cancelChanges`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
 
     ```ASPX
         <%: Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
@@ -359,21 +357,5 @@ Server validation is often needed when performing editing. The section below dem
 
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
-* [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
-* [Excel Export]({% slug excelexport_gridhelper_aspnetmvc %})
-* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
-* [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
-* [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing-model-state)
+* [Editing Approaches by the Grid HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/aspnet-mvc/grid/editing)
+* [Server-Side API](/api/grid)

@@ -103,4 +103,4 @@ The root TreeList items have their `parentId` field set to the default value for
 ## See Also
 
 * [Basic Usage of the TreeList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/tag-helper)
-* [API Reference of the TreeList Helper for ASP.NET Core](/api/treelist)
+* [Server-Side API](/api/treelist)

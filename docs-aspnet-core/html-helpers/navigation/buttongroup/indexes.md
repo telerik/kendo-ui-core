@@ -28,4 +28,4 @@ The following example demonstrates how to select a button by its index.
 
 ## See Also
 
-* [API Reference of the ButtonGroup HtmlHelper for ASP.NET Core](/api/buttongroup)
+* [Server-Side API](/api/buttongroup)

@@ -132,4 +132,4 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 ## See Also
 
 * [Virtualization by the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/virtualization)
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

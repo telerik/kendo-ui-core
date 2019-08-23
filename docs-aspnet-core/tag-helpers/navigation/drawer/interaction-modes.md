@@ -22,4 +22,4 @@ The Drawer provides gesture support. It also features the mini mode which makes 
 
 ## See Also
 
-* [API Reference of the Drawer Helper for ASP.NET Core](/api/drawer)
+* [Server-Side API](/api/drawer)

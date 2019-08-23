@@ -82,4 +82,4 @@ To reference an existing Telerik UI Switch instance, use the [`jQuery.data()`](h
 
 * [Basic Usage by the Switch HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch)
 * [Using the API of the Switch HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch/api)
-* [API Reference of the Switch HtmlHelper for ASP.NET Core](/api/switch)
+* [Server-Side API](/api/switch)

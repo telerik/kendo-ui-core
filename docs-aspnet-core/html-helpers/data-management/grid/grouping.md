@@ -29,4 +29,4 @@ You can also render groups by setting group expressions in the DataSource of the
 ## See Also
 
 * [Grouping with Aggregates by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/aggregates)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

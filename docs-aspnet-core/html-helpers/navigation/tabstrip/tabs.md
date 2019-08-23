@@ -108,4 +108,4 @@ The following example demonstrates how to use the `Selected()` configuration met
 
 * [Scrollable Tabs by the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/scrollable-tabs)
 * [Tab Position in the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/tab-position)
-* [API Reference of the TabStrip HtmlHelper for ASP.NET Core](/api/tabstrip)
+* [Server-Side API](/api/tabstrip)

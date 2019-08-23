@@ -89,4 +89,4 @@ The PivotGrid TagHelper configuration options are passed as attributes of the ta
 ## See Also
 
 * [Basic Usage of the PivotGrid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/tag-helper)
-* [API Reference of the PivotGrid Helper for ASP.NET Core](/api/pivotgrid)
+* [Server-Side API](/api/pivotgrid)

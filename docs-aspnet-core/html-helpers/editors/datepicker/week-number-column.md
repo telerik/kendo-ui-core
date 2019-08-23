@@ -22,5 +22,5 @@ To render the week number column, enable the [`WeekNumber`](/api//Kendo.Mvc.UI.F
 
 ## See Also
 
-* [Showing the Week Column in the DatePicker (Demo)](https://demos.telerik.com/aspnet-core/datepicker/week-column)
-* [API Reference of the DatePicker](/api/datepicker)
+* [Showing the Week Column in the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/week-column)
+* [Server-Side API](/api/datepicker)

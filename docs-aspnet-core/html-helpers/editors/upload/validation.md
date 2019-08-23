@@ -54,4 +54,4 @@ Internet Explorer versions prior to version 10 provide no information on the fil
 ## See Also
 
 * [File Validation by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/validation)
-* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

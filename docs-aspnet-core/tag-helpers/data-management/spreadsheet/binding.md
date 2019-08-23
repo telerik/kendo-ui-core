@@ -41,4 +41,4 @@ You can bind the individual sheets of the Spreadsheet to a DataSource instance.
 ## See Also
 
 * [Basic Usage of the Spreadsheet TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
-* [API Reference of the Spreadsheet helper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)

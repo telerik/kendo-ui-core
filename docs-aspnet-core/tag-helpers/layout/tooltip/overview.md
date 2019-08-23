@@ -47,4 +47,4 @@ The Tooltip TagHelper configuration options are passed as attributes of the tag 
 ## See Also
 
 * [Basic Usage of the Tooltip TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/index)
-* [API Reference of the Tooltip Helper for ASP.NET Core](/api/tooltip)
+* [Server-Side API](/api/tooltip)

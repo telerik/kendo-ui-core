@@ -59,4 +59,4 @@ To enable the dragging of items between two lists, create a Sortable for each li
 
 * [Disabling and Filtering Items in the Sortable HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/filter-disable)
 * [Dragging Items between Lists in the Sortable HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/linkedlists)
-* [API Reference of the Sortable HtmlHelper for ASP.NET Core](/api/sortable)
+* [Server-Side API](/api/sortable)

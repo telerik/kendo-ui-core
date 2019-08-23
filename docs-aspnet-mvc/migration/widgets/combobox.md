@@ -212,7 +212,7 @@ Not supported
 
 ```Previous
 
-    //Create item with text  “Select…” and value “”
+    // Create item with text  “Select…” and value “”
     Html.Telerik().ComboBox().Name("AjaxComboBox").Placeholder(“Select…”)
 
 ```

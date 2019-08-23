@@ -14,7 +14,7 @@ The Barcode is used to represent data in a machine-readable format.
 
 * [Demo page for the Barcode](https://demos.telerik.com/aspnet-mvc/barcode/index)
 
-## Initializing the Barcode
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -58,9 +58,9 @@ The Barcode is used to represent data in a machine-readable format.
 
 ## Referencing Existing Instances
 
-To reference an existing Barcode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Barcode API](/api/barcode) to control its behavior.
+To reference an existing Barcode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Barcode client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode) to control its behavior.
 
-    // Place the following after thedeclaration of the Barcode for ASP.NET MVC.
+    // Place the following after the declaration of the Barcode for ASP.NET MVC.
     <script>
         $(function() {
             // The Name() of the Barcode is used to get its client-side instance.
@@ -73,4 +73,4 @@ To reference an existing Barcode instance, use the [`jQuery.data()`](http://api.
 
 * [Basic Usage of the Barcode HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/barcode/index)
 * [Using the API of the Barcode HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/barcode/api)
-* [API Reference of the Barcode HtmlHelper for ASP.NET MVC](/api/barcode)
+* [Server-Side API](/api/barcode)

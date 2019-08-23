@@ -52,4 +52,4 @@ The Splitter enables you to keep its pane size in percentage upon user resizes.
 
 ## See Also
 
-* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)
+* [Server-Side API](/api/splitter)

@@ -49,4 +49,4 @@ Image icons are applied by using the `ImageUrl()` method and are displayed as an
 ## See Also
 
 * [Adding Images to the Button HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/images)
-* [API Reference of the Button HtmlHelper for ASP.NET Core](/api/button)
+* [Server-Side API](/api/button)

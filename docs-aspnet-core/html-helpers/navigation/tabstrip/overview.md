@@ -161,4 +161,4 @@ The following example demonstrates the available TabStrip events and how an even
 
 * [Basic Usage of the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip)
 * [Using the API of the TabStrip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/api)
-* [API Reference of the TabStrip HtmlHelper for ASP.NET Core](/api/tabstrip)
+* [Server-Side API](/api/tabstrip)

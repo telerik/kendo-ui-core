@@ -112,4 +112,4 @@ The TabStrip provides options for [setting up its items]({% slug items_tabstrip_
 ## See Also
 
 * [Basic Usage of the TabStrip TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/tag-helper)
-* [API Reference of the TabStrip Helper for ASP.NET Core](/api/tabstrip)
+* [Server-Side API](/api/tabstrip)

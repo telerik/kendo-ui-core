@@ -74,4 +74,4 @@ For a complete example on basic PDFViewer events, refer to the [demo on using th
 
 * [Basic Usage of the PDFViewer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/index)
 * [Using the API of the PDFViewer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/api)
-* [API Reference of the PDFViewer HtmlHelper for ASP.NET Core](/api/pdfviewer)
+* [Server-Side API](/api/pdfviewer)

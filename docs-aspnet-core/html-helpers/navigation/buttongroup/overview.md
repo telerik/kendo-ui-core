@@ -45,4 +45,4 @@ For a complete example on basic ButtonGroup events, refer to the [demo on using 
 
 * [Basic Usage of the ButtonGroup HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup)
 * [Using the API of the ButtonGroup HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/api)
-* [API Reference of the ButtonGroup HtmlHelper for ASP.NET Core](/api/buttongroup)
+* [Server-Side API](/api/buttongroup)

@@ -139,4 +139,4 @@ For a complete example on basic Sortable events, refer to the [demo on using the
 ## See Also
 
 * [Basic Usage of the Sortable HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/index)
-* [API Reference of the Sortable HtmlHelper for ASP.NET Core](/api/sortable)
+* [Server-Side API](/api/sortable)

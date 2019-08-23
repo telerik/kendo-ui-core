@@ -1,22 +1,18 @@
 ---
 title: Scaffolding
-page_title: Scaffolding | Kendo UI Grid HtmlHelper for ASP.NET MVC
-description: "Scaffold the Kendo UI Grid for ASP.NET MVC by using the Kendo UI Scaffolder extension for Visual Studio."
+page_title: Scaffolding | Telerik UI Grid HtmlHelper for ASP.NET MVC
+description: "Learn the basics about scaffolding the Telerik UI Grid HtmlHelper for ASP.NET MVC by using the Scaffolder extension for Visual Studio."
 slug: scaffoldinggrid_aspnetmvc
 position: 3
 ---
 
 # Scaffolding
 
-This article demonstrates how to scaffold a Kendo UI Grid for ASP.NET MVC by using the Kendo UI Scaffolder Visual Studio extension.
+The Grid HtmlHelper for ASP.NET MVC enables you to use the Kendo UI Scaffolder Visual Studio extension.
 
 > The Kendo UI Scaffolder will not include the required UI for ASP.NET MVC files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}). To manually achieve this, refer to [this article]({% slug aspnetmvc5_aspnetmvc %}).
 
-## Getting Started
-
-### Configuration
-
-Below are listed the steps for you to follow when scaffolding the Kendo UI Grid.
+To scaffold the Grid HtmlHelper for ASP.NET MVC:
 
 1. Create a new ASP.NET MVC application, include an Entity Framework Data Model and add Telerik UI for ASP.NET MVC. If you have already done so, move on to the next step. Otherwise, follow the first four steps described [in this article]({% slug overview_gridhelper_aspnetmvc %}).
 1. Right-click the location where the Grid Controller should be generated. Select **Add** > **New Scaffolded item...** from the displayed menu. In this example, you generate it in the **Controllers** folder.
@@ -91,7 +87,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI Grid.
 
 	![The Events item in the Grid options](images/scaffolding/kendo_ui_grid3.png)
 
-	From this screen you could select the Grid events that you would like to attach handlers to.
+	From this screen, you can select the Grid events to which you want to attach handlers.
 
 	> Not all events are supported in the server-binding mode. To see the complete list, refer to [this article]({% slug serverbinding_grid_aspnetmvc %}#client-side-events-and-server-binding).
 
@@ -99,20 +95,6 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI Grid.
 
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
-* [Excel Export]({% slug excelexport_gridhelper_aspnetmvc %})
-* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
-* [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
-* [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
-* [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid)
+* [Using the API of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/api)
+* [Server-Side API](/api/grid)

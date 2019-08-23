@@ -28,4 +28,4 @@ The following example demonstrates how to enable the drag-and-drop functionality
 ## See Also
 
 * [Dragging and Dropping in the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/dragdrop)
-* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)
+* [Server-Side API](/api/treeview)

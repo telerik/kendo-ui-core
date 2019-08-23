@@ -43,4 +43,4 @@ To set the desired filter mode, use the `Filterable->Mode` property. You can ena
 * [Filter Rows by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/filter-row)
 * [Filter Checkboxes by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/filter-multi-checkboxes)
 * [Customizing the Filter Menu by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/filter-menu-customization)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

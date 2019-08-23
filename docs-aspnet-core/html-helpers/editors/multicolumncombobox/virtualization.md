@@ -134,4 +134,4 @@ If the `AutoBind` option of the MultiColumnComboBox is set to `false` and you ne
 ## See Also
 
 * [Virtualization by the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/virtualization)
-* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)
+* [Server-Side API](/api/multicolumncombobox)

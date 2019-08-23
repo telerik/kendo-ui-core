@@ -40,4 +40,4 @@ The following example demonstrates how to center and open the Window upon button
 
 ## See Also
 
-* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)
+* [Server-Side API](/api/window)

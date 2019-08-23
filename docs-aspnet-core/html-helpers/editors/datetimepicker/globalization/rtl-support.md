@@ -15,4 +15,4 @@ For more information, refer to the [demo on RTL support by the DateTimePicker](h
 ## See Also
 
 * [RTL Support by the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/right-to-left-support)
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

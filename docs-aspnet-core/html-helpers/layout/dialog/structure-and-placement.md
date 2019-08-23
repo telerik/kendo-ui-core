@@ -44,4 +44,4 @@ The following example demonstrates how the markup of the page from the previous 
 
 ## See Also
 
-* [API Reference of the Dialog](/api/dialog)
+* [Server-Side API](/api/dialog)

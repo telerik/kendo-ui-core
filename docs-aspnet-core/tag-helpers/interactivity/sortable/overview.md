@@ -49,4 +49,4 @@ The Sortable TagHelper configuration options are passed as attributes of the tag
 ## See Also
 
 * [Basic Usage of the Sortable TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
-* [API Reference of the Sortable Helper for ASP.NET Core](/api/sortable)
+* [Server-Side API](/api/sortable)

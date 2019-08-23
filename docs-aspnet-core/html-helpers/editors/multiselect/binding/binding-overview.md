@@ -21,4 +21,4 @@ The supported data-binding approaches are:
 
 ## See Also
 
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

@@ -89,4 +89,4 @@ The following example demonstrates how to access an existing DateTimePicker inst
 
 * [Basic Usage of the DateTimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/index)
 * [Using the API of the DateTimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/api)
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

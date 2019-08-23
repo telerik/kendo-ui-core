@@ -513,4 +513,4 @@ In other words, if you use this raw form, you are responsible for type-checking 
 
 ## See Also
 
-* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)

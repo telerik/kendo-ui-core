@@ -110,4 +110,4 @@ You can also define the content of each item by using the `<content>` tag helper
 
 ## See Also
 
-* [API Reference of the TabStrip Helper for ASP.NET Core](/api/tabstrip)
+* [Server-Side API](/api/tabstrip)

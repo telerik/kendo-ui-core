@@ -142,4 +142,5 @@ For a complete example on basic ScrollView events, refer to the [demo on using t
 
 * [Basic Usage of the ScrollView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/index)
 * [Using the API of the ScrollView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/api)
-* [JavaScript API Reference of the ScrollView](http://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)
+* [ScrollView Server-Side API](/api/scrollview)
+* [ScrollView Client-Side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)

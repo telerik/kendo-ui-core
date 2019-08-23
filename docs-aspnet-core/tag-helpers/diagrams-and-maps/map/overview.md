@@ -74,4 +74,4 @@ The Map TagHelper configuration options are passed as attributes of the tag.
 ## See Also
 
 * [Basic Usage of the Map TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/map/tag-helper)
-* [API Reference of the Map Helper for ASP.NET Core](/api/map)
+* [Server-Side API](/api/map)

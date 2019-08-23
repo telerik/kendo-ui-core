@@ -40,4 +40,4 @@ This ButtonGroup configuration is expected to produce the following HTML output:
 ## See Also
 
 * [Adding Images to the ButtonGroup HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/buttongroup/icons)
-* [API Reference of the ButtonGroup HtmlHelper for ASP.NET Core](/api/buttongroup)
+* [Server-Side API](/api/buttongroup)

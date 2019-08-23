@@ -65,4 +65,4 @@ If you do not define a timezone option, your system timezone settings will apply
 
 ## See Also
 
-* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

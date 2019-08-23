@@ -94,4 +94,4 @@ You can configure the MultiSelect to get its data from a remote source by making
 
 ## See Also
 
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

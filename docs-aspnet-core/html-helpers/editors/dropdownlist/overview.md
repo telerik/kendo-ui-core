@@ -171,4 +171,4 @@ To reference an existing Telerik UI DropDownList instance, use the [`jQuery.data
 
 * [Basic Usage of the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist)
 * [Using the API of the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/api)
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

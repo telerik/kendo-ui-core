@@ -50,4 +50,4 @@ The RadialGauge TagHelper configuration options are passed as attributes of the 
 ## See Also
 
 * [Basic Usage of the RadialGauge TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radial-gauge/tag-helper)
-* [API Reference of the RadialGauge Helper for ASP.NET Core](/api/radialgauge)
+* [Server-Side API](/api/radialgauge)

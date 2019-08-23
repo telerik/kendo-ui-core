@@ -38,7 +38,7 @@ CRUD operations are also handled in a specific way:
 
 ## See Also
 
-* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)
 * [Custom Functions]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
 * [Cell Formatting]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
 * [Export to Excel]({% slug htmlhelpers_spreadsheet_export_to_excel_aspnetcore %})

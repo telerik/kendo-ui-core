@@ -67,4 +67,4 @@ You can bind the Scheduler to a model.
 
 ## See Also
 
-* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

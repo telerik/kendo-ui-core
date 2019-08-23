@@ -122,4 +122,4 @@ The following example demonstrates how to subscribe to events by using a templat
 
 * [Basic Usage of the Window HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/index)
 * [Using the API of the Window HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/api)
-* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)
+* [Server-Side API](/api/window)

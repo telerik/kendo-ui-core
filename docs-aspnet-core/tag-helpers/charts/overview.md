@@ -100,4 +100,4 @@ The Chart TagHelper configuration options are passed as attributes of the tag. I
 ## See Also
 
 * [Basic Usage of the Kendo UI Area Charts Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
-* [API Reference of the Chart Helper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

@@ -56,11 +56,11 @@ Your project may require you to create a custom editor for a specific property. 
             public string EmployeeName { get; set; }
         }
 
-1. Create an editor template for the `Employee` property which will display a DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`.
-1. Add a DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
+1. Create an editor template for the `Employee` property which will display a Kendo UI for jQuery DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`.
+1. Add the DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
 
         @(Html.Kendo().DropDownList()
-            .Name("Employee") // The name of the widget should be the same as the name of the property.
+            .Name("Employee") // The name of the widget has to be the same as the name of the property.
             .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
             .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
             .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
@@ -97,4 +97,4 @@ Your project may require you to create a custom editor for a specific property. 
 ## See Also
 
 * [Templates by the Grid HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/grid/toolbar-template)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

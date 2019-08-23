@@ -14,7 +14,7 @@ The QRCode generates Canvas and Scalable Vector Graphics (SVG) images that repre
 
 * [Demo page for the QRCode](https://demos.telerik.com/aspnet-mvc/qrcode/index)
 
-## Initializing the QRCode
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -60,9 +60,9 @@ The QRCode generates Canvas and Scalable Vector Graphics (SVG) images that repre
 
 ## Referencing Existing Instances
 
-To reference an existing QRCode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode API](/api/qrcode) to control its behavior.
+To reference an existing QRCode instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/qrcode) to control its behavior.
 
-    // Place the following after thedeclaration of the QRCode for ASP.NET MVC.
+    // Place the following after the declaration of the QRCode for ASP.NET MVC.
     <script>
         $(function() {
             // The Name() of the QRCode is used to get its client-side instance.
@@ -74,4 +74,4 @@ To reference an existing QRCode instance, use the [`jQuery.data()`](http://api.j
 
 * [Basic Usage of the QRCode HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/qrcode/index)
 * [Using the API of the QRCode HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/qrcode/api)
-* [API Reference of the QRCode HtmlHelper for ASP.NET MVC](/api/qrcode)
+* [Server-Side API](/api/qrcode)

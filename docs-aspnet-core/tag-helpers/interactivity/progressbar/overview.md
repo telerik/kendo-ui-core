@@ -42,4 +42,4 @@ The ProgressBar TagHelper configuration options are passed as attributes of the 
 ## See Also
 
 * [Basic Usage of the ProgressBar TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/progressbar/tag-helper)
-* [API Reference of the ProgressBar Helper for ASP.NET Core](/api/progressbar)
+* [Server-Side API](/api/progressbar)

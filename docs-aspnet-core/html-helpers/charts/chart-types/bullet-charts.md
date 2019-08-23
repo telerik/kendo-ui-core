@@ -94,4 +94,4 @@ The following example demonstrates how to use all three options to customize the
 ## See Also
 
 * [Basic Usage of the Bullet Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bullet-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

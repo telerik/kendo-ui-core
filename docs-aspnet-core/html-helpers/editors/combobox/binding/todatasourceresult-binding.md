@@ -54,4 +54,4 @@ For a runnable example, refer to the [demo on customizing the data source of the
 ## See Also
 
 * [Customizing the Data Source of the ComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/custom-datasource)
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

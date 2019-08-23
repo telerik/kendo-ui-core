@@ -53,4 +53,4 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
 ## See Also
 
 * [Basic Usage of the DatePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/tag-helper)
-* [API Reference of the DatePicker Helper for ASP.NET Core](/api/datepicker)
+* [Server-Side API](/api/datepicker)

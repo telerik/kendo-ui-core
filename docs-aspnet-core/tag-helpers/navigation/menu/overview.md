@@ -92,4 +92,4 @@ The Menu provides options for [setting up its items]({% slug items_menu_aspnetco
 ## See Also
 
 * [Basic Usage of the Menu TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/tag-helper)
-* [API Reference of the Menu Helper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

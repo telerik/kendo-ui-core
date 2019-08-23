@@ -70,4 +70,4 @@ You can add a Splitter that resizes automatically along with the Kendo UI for jQ
 
 ## See Also
 
-* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)
+* [Server-Side API](/api/splitter)

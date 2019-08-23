@@ -16,4 +16,4 @@ The lack of restrictions over the dimensions for vertical expanding of the Dialo
 
 ## See Also
 
-* [API Reference of the Dialog](/api/dialog)
+* [Server-Side API](/api/dialog)

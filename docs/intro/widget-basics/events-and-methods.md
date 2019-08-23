@@ -11,17 +11,16 @@ position: 5
 
 All Kendo UI widgets provide methods and events that you can use to query or modify their state at runtime.
 
-## Using Methods
+## Getting the Widget Instance
 
 To use the methods of the widgets, you have to obtain a reference to the specific widget instance by using any of the following approaches:
 
 * [Using the jQuery `data` method](#the-jquery-data-method)
 * [Using the `getKendo<WidgetName>` method](#the-getkendo-method)
-* [Using the standard JavaScript method syntax](#the-javascript-method-syntax)
 
 ### The jQuery data Method
 
-To get a reference to a widget instance, use the [jQuery `data`](http://api.jquery.com/data/) method and pass the plugin name as a string (the Kendo UI widgets are jQuery plugins).
+The Kendo UI widgets are jQuery plugins. A common way to get a reference to a widget instance is to use the [jQuery `data`](http://api.jquery.com/data/) method and pass the plugin name as a string.
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -59,7 +58,7 @@ To get a reference to a widget instance, you may also use the `getKendo<WidgetNa
     </script>
 ```
 
-### The JavaScript Method Syntax
+## Using Methods
 
 After the widget instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section. If the code which will return a widget instance returns `undefined`, then the widget is not yet initialized. Such a problem may occur, for example, if a widget is created in a `document.ready` handler but the widget instance is referenced from code that was executed earlier.
 

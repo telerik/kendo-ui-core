@@ -62,4 +62,4 @@ To reference an existing Telerik UI DateInput instance, use the [`jQuery.data()`
 
 * [Basic Usage of the DateInput HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/index)
 * [Using the API of the DateInput HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/api)
-* [API Reference of the DateInput HtmlHelper for ASP.NET Core](/api/dateinput)
+* [Server-Side API](/api/dateinput)

@@ -158,7 +158,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 ## Handling ModelState Errors
 
-Server validation is often needed when performing editing. The following section demonstrates how to use the `AddModelError` method with the Kendo UI Grid for ASP.NET Core.
+Server validation is often needed when performing editing. The following section demonstrates how to use the `AddModelError` method with the Telerik UI Grid for ASP.NET Core.
 
 1. Perform all steps from the previous section.
 1. Add some validation code to the `Products_Update` method. For example, check the length of the `ProductName` property.
@@ -197,7 +197,7 @@ Server validation is often needed when performing editing. The following section
                 return Json(new[] { product }.ToDataSourceResult(request, ModelState));
             }
 
-1. Subscribe to the [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
+1. Subscribe to the Kendo UI for jQuery [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#events-error) event of the data source. It is fired when model state errors or other unexpected problem occurs when making the Ajax request. In the event handler, display the errors and call the Kendo UI for jQuery [`cancelChanges`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
 
           @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
                 .Name("grid")
@@ -253,4 +253,4 @@ Server validation is often needed when performing editing. The following section
 ## See Also
 
 * [Editing Approaches by the Grid HtmlHelper for ASP.NET Core (Demos)](https://demos.telerik.com/aspnet-core/grid/editing)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

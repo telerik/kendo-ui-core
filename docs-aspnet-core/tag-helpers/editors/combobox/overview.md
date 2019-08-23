@@ -60,4 +60,4 @@ The ComboBox TagHelper configuration options are passed as attributes of the tag
 ## See Also
 
 * [Basic Usage of the ComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/combobox/tag-helper)
-* [API Reference of the ComboBox Helper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

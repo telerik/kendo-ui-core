@@ -75,4 +75,4 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
 ## See Also
 
 * [Basic Usage of the ScrollView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)
-* [API Reference of the ScrollView Helper for ASP.NET Core](/api/scrollview)
+* [Server-Side API](/api/scrollview)

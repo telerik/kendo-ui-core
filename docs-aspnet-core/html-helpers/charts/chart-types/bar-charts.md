@@ -76,4 +76,4 @@ Setting the `Series` object to `"Bar"` renders horizontal bars.
 
 * [Basic Usage of the Bar Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bar-charts/index)
 * [Basic Usage of the Range Bar Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/range-bar-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

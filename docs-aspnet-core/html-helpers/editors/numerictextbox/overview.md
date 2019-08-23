@@ -71,4 +71,4 @@ The following example demonstrates how to access an existing NumericTextBox inst
 
 * [Basic Usage by the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/index)
 * [Using the API of the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/api)
-* [API Reference of the NumericTextBox HtmlHelper for ASP.NET Core](/api/numerictextbox)
+* [Server-Side API](/api/numerictextbox)

@@ -102,4 +102,4 @@ function onPush(e) {
 
 * [SignalR Binding by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/signalr)
 * [ASP.NET Core SignalR Get Started](https://docs.microsoft.com/en-us/aspnet/core/signalr/get-started?view=aspnetcore-2.1&tabs=visual-studio)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

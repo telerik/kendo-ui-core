@@ -1,9 +1,9 @@
 ---
 title: Excel Export
-page_title: Excel Export | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Excel Export | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Export the Kendo UI Grid for ASP.NET MVC to Excel."
 slug: excelexport_gridhelper_aspnetmvc
-position: 4
+position: 7
 ---
 
 # Excel Export
@@ -147,23 +147,4 @@ For examples on how to export Excel files, refer to the [example on the integrat
 
 ## See Also
 
-* [Create Excel Documents with Kendo UI](http://docs.telerik.com/kendo-ui/framework/excel/introduction)
-* [Save Files with Kendo UI](http://docs.telerik.com/kendo-ui/framework/save-files/introduction)
-* [API Reference: kendo.ooxml.Workbook](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
-* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
-* [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
-* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
-* [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
-* [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
-* [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Server-Side API](/api/grid)

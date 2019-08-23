@@ -73,4 +73,4 @@ The following example demonstrates how to enable the endless scroll mode of the 
 ## See Also
 
 * [Endless Scrolling by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/editing)
-* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
+* [Server-Side API](/api/listview)

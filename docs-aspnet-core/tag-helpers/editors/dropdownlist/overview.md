@@ -56,4 +56,4 @@ The DropDownList TagHelper configuration options are passed as attributes of the
 ## See Also
 
 * [Basic Usage of the DropDownList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
-* [API Reference of the DropDownList Helper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

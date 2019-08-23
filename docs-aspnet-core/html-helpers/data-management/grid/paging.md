@@ -40,4 +40,4 @@ Use as small page sizes as possible, because rendering too many records causes p
 
 * [Paging by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/aggregates)
 * [Setting the Pager Visibility in the Grid HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/grid/pager-visibility)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

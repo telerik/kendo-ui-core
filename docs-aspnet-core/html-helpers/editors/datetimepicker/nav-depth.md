@@ -31,4 +31,4 @@ The following example demonstrates how to create a DateTimePicker that allows th
 
 ## See Also
 
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

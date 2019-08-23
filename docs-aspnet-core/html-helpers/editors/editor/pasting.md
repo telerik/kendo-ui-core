@@ -100,4 +100,4 @@ The following example demonstrates a simple logic to strip the `<strong>` tags f
 
 ## See Also
 
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

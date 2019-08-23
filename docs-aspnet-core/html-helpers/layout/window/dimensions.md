@@ -56,4 +56,4 @@ If the Window uses an `iframe` element, it does not resize automatically accordi
 
 ## See Also
 
-* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)
+* [Server-Side API](/api/window)

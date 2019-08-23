@@ -59,4 +59,4 @@ The MultiColumnComboBox TagHelper configuration options are passed as attributes
 ## See Also
 
 * [Basic Usage of the MultiColumnComboBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/tag-helper)
-* [API Reference of the MultiColumnComboBox Helper for ASP.NET Core](/api/multicolumncombobox)
+* [Server-Side API](/api/multicolumncombobox)

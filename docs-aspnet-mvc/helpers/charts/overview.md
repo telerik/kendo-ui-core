@@ -94,7 +94,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Chart API](/api/chart) to control its behavior.
+To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Chart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart) to control its behavior.
 
     // Place the following after the Chart for ASP.NET MVC declaration.
     <script>
@@ -109,4 +109,4 @@ To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jq
 * [Using the API of the Chart HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/chart-api/index)
 * [Basic Usage of the Bar Chart HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/bar-charts/index)
 * [Basic Usage of the Line Chart HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/line-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET MVC](/api/chart)
+* [Server-Side API](/api/chart)

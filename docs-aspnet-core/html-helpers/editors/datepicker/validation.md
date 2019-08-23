@@ -18,4 +18,4 @@ To validate the input value of the DatePicker on the client, use a client-valida
 
 ## See Also
 
-* [API Reference of the DatePicker](/api/datepicker)
+* [Server-Side API](/api/datepicker)

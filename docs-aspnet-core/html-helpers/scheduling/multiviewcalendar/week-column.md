@@ -20,4 +20,4 @@ In the MultiViewCalendar, you can render a column which displays the number of t
 ## See Also
 
 * [Week Column in the MultiViewCalendar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiviewcalendar/week-column)
-* [API Reference of the MultiViewCalendar HtmlHelper for ASP.NET Core](/api/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar)

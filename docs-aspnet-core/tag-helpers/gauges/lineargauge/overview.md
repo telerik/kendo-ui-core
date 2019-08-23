@@ -65,4 +65,4 @@ The LinearGauge TagHelper configuration options are passed as attributes of the 
 ## See Also
 
 * [Basic Usage of the LinearGauge TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/linear-gauge/tag-helper)
-* [API Reference of the LinearGauge Helper for ASP.NET Core](/api/lineargauge)
+* [Server-Side API](/api/lineargauge)

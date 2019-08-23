@@ -16,8 +16,6 @@ The TreeMap displays hierarchical data in a traditional tree structure.
 
 ## Basic Configuration
 
-The following example demonstrates how to define a TreeMap by using the TreeMap HtmlHelper.
-
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
 
@@ -124,7 +122,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing TreeMap instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeMap API](/api/treemap) to control its behavior.
+To reference an existing TreeMap instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeMap client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/treemap) to control its behavior.
 
     // Place the following after the TreeMap for ASP.NET MVC declaration.
     <script>
@@ -137,4 +135,4 @@ To reference an existing TreeMap instance, use the [`jQuery.data()`](http://api.
 ## See Also
 
 * [Basic Usage of the StockChart HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-core/financial/index)
-* [API Reference of the StockChart HtmlHelper for ASP.NET MVC](/api/stockchart)
+* [Server-Side API](/api/stockchart)

@@ -38,4 +38,4 @@ The following example demonstrates how to access the `window` and `document` obj
 
 ## See Also
 
-* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)
+* [Server-Side API](/api/window)

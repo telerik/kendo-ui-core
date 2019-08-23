@@ -156,4 +156,4 @@ The uploaded files must be handled both in the `save` handler and in the `form` 
 ## See Also
 
 * [Asynchronous Mode of Operation by the Upload HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/async)
-* [API Reference of the Upload HtmlHelper for ASP.NET Core](/api/upload)
+* [Server-Side API](/api/upload)

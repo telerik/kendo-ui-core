@@ -134,4 +134,4 @@ The Spreadsheet Sheet API exposes a method that would allow you to programmatica
 
 ## See Also
 
-* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)

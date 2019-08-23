@@ -21,4 +21,4 @@ The supported data-binding approaches are:
 
 ## See Also
 
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

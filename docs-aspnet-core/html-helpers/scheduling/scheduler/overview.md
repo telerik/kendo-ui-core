@@ -221,4 +221,4 @@ To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`
 
 * [Basic Usage of the Scheduler HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler)
 * [Using the API of the Scheduler HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/api)
-* [API Reference of the Scheduler HtmlHelper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

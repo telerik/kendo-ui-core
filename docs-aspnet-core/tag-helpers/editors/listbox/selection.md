@@ -59,4 +59,4 @@ You can reorder selected items by using any of the following approaches:
 ## See Also
 
 * [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
-* [API Reference of the ListBox Helper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

@@ -44,4 +44,4 @@ The QRCode TagHelper configuration options are passed as attributes of the tag.
 ## See Also
 
 * [Basic Usage of the QRCode TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/qrcode/tag-helper)
-* [API Reference of the QRCode Helper for ASP.NET Core](/api/qrcode)
+* [Server-Side API](/api/qrcode)

@@ -92,4 +92,4 @@ For a complete example on basic Map events, refer to the [demo on using the even
 ## See Also
 
 * [Basic Usage of the Map HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/map/index)
-* [API Reference of the Map HtmlHelper for ASP.NET Core](/api/map)
+* [Server-Side API](/api/map)

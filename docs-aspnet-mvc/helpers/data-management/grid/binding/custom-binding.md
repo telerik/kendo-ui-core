@@ -1,23 +1,20 @@
 ---
 title: Custom Binding
-page_title: Custom Binding | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
-description: "Use and configure Kendo UI Grid for ASP.NET MVC for server custom binding."
+page_title: Custom Binding | Telerik UI Grid HtmlHelper for ASP.NET MVC
+description: "Learn how to implement custom binding with Telerik UI Grid HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/grid/custom-binding
 slug: custombinding_grid_aspnetmvc
-position: 3
 ---
 
 # Custom Binding
 
-The Kendo UI Grid for ASP.NET MVC enables you to bypass the built-in data processing and to handle operations such paging, sorting, filtering, and grouping yourself. This is supported both in the server-binding and Ajax-binding mode.
+The Telerik UI Grid for ASP.NET MVC enables you to bypass the built-in data processing and to handle operations such paging, sorting, filtering, and grouping yourself.
 
-## Configuration
+The Grid provides options for setting [custom server-binding](#setting-custom-server-binding) and [custom Ajax-binding](#setting-custom-ajax-binding).
 
-### Set Custom Server Binding
+## Setting Custom Server Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for custom server binding.
-
-1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for the populating of the `DataSourceRequest` object.
+1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
 
         public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
@@ -78,7 +75,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             }
             else
             {
-                //EF cannot page unsorted data.
+                // If cannot page unsorted data.
                 orders = orders.OrderBy(o => o.OrderID);
             }
 
@@ -100,10 +97,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             IQueryable<Order> orders = new NorthwindEntities().Orders;
 
             // Apply sorting (code omitted).
-
-            //Calculate the total number of records before paging.
+            // Calculate the total number of records before paging.
             var total = orders.Count();
-
             // Apply paging.
 
             ViewData["total"] = total;
@@ -115,8 +110,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         {
             // Get the data (code omitted).
             // Apply sorting (code omitted).
-            //Calculate the total number of records (code omitted).
-
+            // Calculate the total number of records (code omitted).
             // Apply paging (code omitted).
 
             return View(orders);
@@ -160,9 +154,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-server-binding).
 
-### Apply Custom Ajax Binding
-
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for custom Ajax binding.
+## Setting Custom Ajax Binding
 
 1. Add a new parameter of type `Kendo.UI.DataSourceRequest` to the action method. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate this parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
 
@@ -230,11 +222,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         {
             // Get the data (code omitted).
             IQueryable<Order> orders = new NorthwindEntities().Orders;
-
             // Apply sorting (code omitted).
-
             // Apply paging (code omitted).
-
             // Initialize the DataSourceResult.
             var result = new DataSourceResult()
             {
@@ -284,20 +273,6 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
-* [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
-* [Excel Export]({% slug excelexport_gridhelper_aspnetmvc %})
-* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
-* [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
-* [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Custom Server Binding by the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/customserverbinding)
+* [Custom Ajax Binding by the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/customajaxbinding)
+* [Server-Side API](/api/grid)

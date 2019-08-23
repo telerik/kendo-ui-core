@@ -202,4 +202,4 @@ You can configure an AutoComplete that is bound to a model field to use virtuali
 ## See Also
 
 * [Virtualization by the AutoComplete HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/virtualization)
-* [API Reference of the AutoComplete HtmlHelper for ASP.NET Core](/api/autocomplete)
+* [Server-Side API](/api/autocomplete)

@@ -121,4 +121,4 @@ By default, the `group.resources` option is disabled.
 
 ## See Also
 
-* [API Reference of the Scheduler Helper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

@@ -131,4 +131,4 @@ For a complete example on basic MultiColumnComboBox events, refer to the [demo o
 
 * [Basic Usage of the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/index)
 * [Using the API of the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/api)
-* [API Reference of the MultiColumnComboBox HtmlHelper for ASP.NET Core](/api/multicolumncombobox)
+* [Server-Side API](/api/multicolumncombobox)

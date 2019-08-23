@@ -42,7 +42,7 @@ To configure the Chart for server binding to the **InternetUsers** list:
                 .Name("internetUsersChart") // The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
                 .Title("Internet Users")
                 .Series(series => {
-                    series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
+                    series.Bar(model => model.Value) // Create a Bar Chart series bound to the "Value" property.
                             .Name("United States");
                 })
                 .CategoryAxis(axis => axis
@@ -124,4 +124,4 @@ To configure the Chart for Ajax binding:
 
 * [Using the API of the Chart HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/aspnet-mvc/area-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET MVC](/api/chart)
+* [Server-Side API](/api/chart)

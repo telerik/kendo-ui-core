@@ -1,19 +1,18 @@
 ---
 title: Batch Editing
-page_title: Batch Editing | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
+page_title: Batch Editing | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Enable cell editing mode and batch updates in Kendo UI Grid for ASP.NET MVC."
 previous_url: /helpers/grid/batch-editing
 slug: batchediting_grid_aspnetmvc
-position: 1
 ---
 
 # Batch Editing
 
-This article demonstrates how to enable cell editing mode and batch updates in Kendo UI Grid for ASP.NET MVC.
+You can enable the cell edit mode and the batch updates for the Telerik UI Grid for ASP.NET MVC.
 
-## Configuration
+For runnable examples, refer to the [demos on editing of the Grid](https://demos.telerik.com/aspnet-mvc/grid/editing).
 
-Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to do cell editing and batch updates.
+## Setting Up the Batch Edit Mode
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridBatchEditing`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
@@ -57,7 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
         public ActionResult Products_Create([DataSourceRequest]DataSourceRequest request, [Bind(Prefix="models")]IEnumerable<ProductViewModel> products)
         {
-            // Will keep the inserted entitites here. Used to return the result later.
+            // Will keep the inserted entities here. Used to return the result later.
             var entities = new List<Product>();
             if (ModelState.IsValid)
             {
@@ -93,7 +92,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
         public ActionResult Products_Update([DataSourceRequest]DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
-            // Will keep the updated entitites here. Used to return the result later.
+            // Will keep the updated entities here. Used to return the result later.
             var entities = new List<Product>();
             if (ModelState.IsValid)
             {
@@ -201,7 +200,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                         model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
                     })
                     .Create(create => create.Action("Products_Create", "Home")) // Action method invoked when the user saves a new data item.
-                    .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the grid needs data.
+                    .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the Grid needs data.
                     .Update(update => update.Action("Products_Update", "Home"))  // Action method invoked when the user saves an updated data item.
                     .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action method invoked when the user removes a data item.
                 )
@@ -226,7 +225,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                     toolbar.Create(); // The "create" command adds new data items.
                     toolbar.Save(); // The "save" command saves the changed data items.
                 })
-                .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell editing mode.
+                .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell edit mode.
                 .DataSource(dataSource =>
                     dataSource.Ajax()
                     .Batch(true) // Enable batch updates.
@@ -236,7 +235,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                         model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
                     })
                     .Create(create => create.Action("Products_Create", "Home")) // Action method invoked when the user saves a new data item.
-                    .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the grid needs data.
+                    .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the Grid needs data.
                     .Update(update => update.Action("Products_Update", "Home"))  // Action method invoked when the user saves an updated data item.
                     .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action method invoked when the user removes a data item.
                 )
@@ -248,25 +247,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ## OData Support
 
-With the R1 2018 release the Grid component supports Batch operations with OData. The steps below describe how to configure the Grid to enable the feature. A runnable example illustrating the functionality is available in [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-odata-example).
+With the R1 2018 release the Grid supports batch operations with OData. For a runnable example on implementing the batch edit mode with OData in the Grid, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-odata-example).
 
 ## See Also
 
-* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
-* [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
-* [Excel Export]({% slug excelexport_gridhelper_aspnetmvc %})
-* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
-* [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
-* [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
-* [Troubleshooting of the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
-* [API Reference of the Grid HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the Kendo UI Grid Widget](http://docs.telerik.com/kendo-ui/controls/data-management/grid/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/batch-editing)
+* [Editing Approaches by the Grid HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/aspnet-mvc/grid/editing)
+* [Server-Side API](/api/grid)

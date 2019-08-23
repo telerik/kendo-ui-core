@@ -33,4 +33,4 @@ With multi-column sorting you can also configure the Grid to display the sort in
 ## See Also
 
 * [Sorting by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/sorting)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

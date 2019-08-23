@@ -30,5 +30,5 @@ The following example demonstrates how to create a DatePicker that allows the us
 
 ## See Also
 
-* [Specifying the Start View and Selection Depth (Demo)](https://demos.telerik.com/aspnet-core/datepicker/index)
-* [API Reference of the DatePicker](/api/datepicker)
+* [Specifying the Start View and Selection Depth in the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/index)
+* [Server-Side API](/api/datepicker)

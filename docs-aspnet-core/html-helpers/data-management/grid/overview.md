@@ -180,4 +180,4 @@ The following example demonstrates the basic configuration for the Grid HtmlHelp
 
 * [Basic Usage of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/index)
 * [Using the API of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/api)
-* [API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

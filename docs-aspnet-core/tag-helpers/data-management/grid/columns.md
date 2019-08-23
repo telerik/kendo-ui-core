@@ -200,4 +200,4 @@ In the following example, the **Contact Info** and **Location** columns have nes
 ## See Also
 
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
-* [API Reference of the Grid Helper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

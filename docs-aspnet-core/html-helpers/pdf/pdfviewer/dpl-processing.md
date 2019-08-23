@@ -47,4 +47,4 @@ The followin example demonstrates how to configure the PDFViewer to use DPL Proc
 ## See Also
 
 * [DPL Processing by the PDFViewer HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/dpl-processing)
-* [API Reference of the PDFViewer HtmlHelper for ASP.NET Core](/api/pdfviewer)
+* [Server-Side API](/api/pdfviewer)

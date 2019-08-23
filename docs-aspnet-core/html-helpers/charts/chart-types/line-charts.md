@@ -128,4 +128,4 @@ You can also completely draw custom markers for the Line series through the `Vis
 ## See Also
 
 * [Basic Usage of the Line Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/line-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)

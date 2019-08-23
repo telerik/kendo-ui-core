@@ -25,4 +25,4 @@ For a runnable example on performing date selection over the keyboard, refer to 
 
 ## See Also
 
-* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

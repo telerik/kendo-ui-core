@@ -248,4 +248,4 @@ For a complete example on basic Gantt events, refer to the [demo on using the ev
 
 * [Basic Usage of the Gantt HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt)
 * [Using the API of the Gantt HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/api)
-* [API Reference of the Gantt HtmlHelper for ASP.NET Core](/api/gantt)
+* [Server-Side API](/api/gantt)

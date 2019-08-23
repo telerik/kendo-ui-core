@@ -76,4 +76,4 @@ The following example demonstrates how to access an existing DateRangePicker ins
 
 * [Basic Usage of the DateRangePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/index)
 * [Using the API of the DateRangePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/api)
-* [API Reference of the DateRangePicker HtmlHelper for ASP.NET Core](/api/daterangepicker)
+* [Server-Side API](/api/daterangepicker)

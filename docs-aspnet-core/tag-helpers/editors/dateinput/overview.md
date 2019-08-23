@@ -83,4 +83,4 @@ To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](
 ## See Also
 
 * [Basic Usage of the DateInput TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dateinput/tag-helper)
-* [API Reference of the DateInput Helper for ASP.NET Core](/api/dateinput)
+* [Server-Side API](/api/dateinput)

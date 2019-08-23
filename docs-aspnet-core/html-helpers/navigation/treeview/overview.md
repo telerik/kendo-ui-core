@@ -161,4 +161,4 @@ The following example demonstrates the available TreeView events and how an even
 
 * [Basic Usage of the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/index)
 * [Using the API of the TreeView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treeview/api)
-* [API Reference of the TreeView HtmlHelper for ASP.NET Core](/api/treeview)
+* [Server-Side API](/api/treeview)

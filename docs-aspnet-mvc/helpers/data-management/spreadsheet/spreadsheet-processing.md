@@ -1,14 +1,18 @@
 ---
 title: Server-Side Processing
-page_title: Server-Side Processing | Kendo UI Spreadsheet HtmlHelper for ASP.NET MVC
-description: "Process Kendo UI Spreadsheet data using the Telerik Document Processing library."
+page_title: Server-Side Processing | Telerik UI Spreadsheet HtmlHelper for ASP.NET MVC
+description: "Process the data of the Telerik UI Spreadsheet by using the Telerik Document Processing library."
 slug: spreadsheet_processing_spreadsheet_mvc
 position: 2
 ---
 
 # Server-Side Processing
 
-To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, you can use the [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+
+> The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and are available for the Telerik UI Enterprise and DevCraft bundles.
+
+For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
 TDP handles the data import, export, and processing from the following formats:
 
@@ -17,27 +21,21 @@ TDP handles the data import, export, and processing from the following formats:
 * Tab-separated values (`.txt`)
 * Portable document format (`.pdf`) (export only)
 
-> The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and are available for the Kendo UI Enterprise and DevCraft bundles.
-
-For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
-
 ## Dependencies
 
-The `.NET` server-side module is distributed as a part of the [UI for ASP.NET MVC bundle]({% slug overview_aspnetmvc %}).
+The `.NET` server-side module is distributed as a part of the [Telerik UI for ASP.NET MVC bundle]({% slug overview_aspnetmvc %}). The `telerik.ui.for.aspnetmvc.<version>.zip` archive contains a `spreadsheet` folder that contains assemblies for both .NET 4.0 and .NET 4.5 versions. Include a reference to the `Telerik.Web.Spreadsheet.dll` assembly for the respective framework version. The main entry point for the project is the `Telerik.Web.Spreadsheet.Workbook` class. This is a `POCO` object that mirrors the object structure of the JSON and provides format conversion methods. Under the hood, it uses TDP to perform the actual conversion.
 
-The `telerik.ui.for.aspnetmvc.<version>.zip` archive contains a `spreadsheet` folder that contains assemblies for both .NET 4.0 and .NET 4.5 versions. Include a reference to the `Telerik.Web.Spreadsheet.dll` assembly for the respective framework version.
+> No strict dependency on the type of the server framework that is used exists. Popular choices, such as MVC, WebAPI, and WebForms, work equally well.
 
-The main entry point for the project is the `Telerik.Web.Spreadsheet.Workbook` class. This is a `POCO` object that mirrors the object structure of the JSON and provides format conversion methods. Under the hood, it uses TDP to perform the actual conversion.
+## Loading Data from External Files
 
-## Supported Scenarios
+The following example demonstrates how to load a file from the file system and convert it to a Workbook for serialization.
 
-Below are listed the typical usage scenarios as they would appear in ASP.NET MVC applications for you to get familiar with.
-
-> There is no strict dependency on the type of server framework used. Popular choices, such as MVC, WebAPI, and WebForms, work equally well.
-
-### Load Data from External File
-
-Load a file from the file system and convert it to a Workbook for serialization. The supported file extensions are `.xlsx`, `.csv`, `.txt`, and `.json`.
+The supported file extensions are:
+* `.xlsx`
+* `.csv`
+* `.txt`
+* `.json`
 
 ```cs
 public class HomeController : Controller
@@ -69,23 +67,29 @@ public class HomeController : Controller
 </script>
 ```
 
-### Load Data from External File Using BindTo Method
+## Loading Data from External Files by Using BindTo Method
 
-Load a file from the file system and use it to populate the Spreadsheet widget. The supported file extensions are `.xlsx`, `.csv`, `.txt`, and `.json`.
+The following example demonstrates how to load a file from the file system and use it to populate the Spreadsheet.
 
-@{
-    var path = Server.MapPath("~/App_Data/path/to/document.xlsx");
-    var workbook = Telerik.Web.Spreadsheet.Workbook.Load(path);
-}
+The supported file extensions are:
+* `.xlsx`
+* `.csv`
+* `.txt`
+* `.json`
 
-@(Html.Kendo().Spreadsheet()
-    .Name("spreadsheet")
-    .BindTo(workbook)
-)
+    @{
+        var path = Server.MapPath("~/App_Data/path/to/document.xlsx");
+        var workbook = Telerik.Web.Spreadsheet.Workbook.Load(path);
+    }
 
-### Load Data Using BindTo Model and Spreadsheet Document Model
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .BindTo(workbook)
+    )
 
-Load the data by using the `BindTo` method and the Spreadsheet document model.
+## Loading Data by Using BindTo and Document Model
+
+The following example demonstrates how to load the data by using the `BindTo` method and the Spreadsheet document model.
 
 ```cs
 	public class HomeController : Controller
@@ -110,9 +114,16 @@ Load the data by using the `BindTo` method and the Spreadsheet document model.
 );
 ```
 
-### Save Workbook to External File
+## Saving Workbooks to External Files
 
-Post a Workbook to a controller and save it as a local file. The supported file extensions are `.xlsx`, `.csv`, `.txt`, `.pdf`, and `.json`.
+The following example demonstrates how to post a workbook to a controller and save it as a local file.
+
+The supported file extensions are:
+* `.xlsx`
+* `.csv`
+* `.txt`
+* `.pdf`
+* `.json`
 
 > Set [`aspnet:MaxJsonDeserializerMembers`](https://msdn.microsoft.com/en-us/library/hh975440%28v=vs.120%29.aspx?f=255&MSPPError=-2147217396) to a higher value than the default one in the `web.config`.
 
@@ -150,9 +161,9 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
 </configuration>
 ```
 
-### Convert TDP Document to Workbook
+## Converting TDP Documents to Workbooks
 
-Telerik Document Processing provides a full-blown model for a Spreadsheet document. Convert it to `Telerik.Web.Spreadsheet.Workbook` if you want to display the result in the Kendo UI Spreadsheet widget.
+Telerik Document Processing provides a full-blown model for a Spreadsheet document. To display the result in a Spreadsheet, convert it to `Telerik.Web.Spreadsheet.Workbook`.
 
     var document = new Telerik.Windows.Documents.Spreadsheet.Model.Workbook();
     var worksheet = document.Worksheets.Add();
@@ -160,36 +171,26 @@ Telerik Document Processing provides a full-blown model for a Spreadsheet docume
 
     return Telerik.Web.Spreadsheet.Workbook.FromDocument(document);
 
-### Convert Workbook to TDP Document
+## Converting Workbooks to TDP Documents
 
-Conversely, you can start with a Kendo UI Spreadsheet model (`Telerik.Web.Spreadsheet.Workbook`) and convert it to a TDP document. Then, it can be further processed, converted, and stored as needed.
+You can convert a `Telerik.Web.Spreadsheet.Workbook` Spreadsheet model and to a TDP document and then process it further and convert and store it as needed.
 
-[HttpPost]
-public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
-{
-    var document = workbook.ToDocument();
+    [HttpPost]
+    public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
+    {
+        var document = workbook.ToDocument();
 
-    // sContinue with the TDP API as usual.
-    var worksheet = document.ActiveWorksheet;
-    var A1Cell = new CellIndex(0, 0);
-    var B2Cell = new CellIndex(1, 1);
+        // Continue with the TDP API as usual.
+        var worksheet = document.ActiveWorksheet;
+        var A1Cell = new CellIndex(0, 0);
+        var B2Cell = new CellIndex(1, 1);
 
-    worksheet.Cells[A1Cell, B2Cell].Merge();
+        worksheet.Cells[A1Cell, B2Cell].Merge();
 
-    return new EmptyResult();
-}
+        return new EmptyResult();
+    }
 
 ## See Also
 
-* [Load and Save Data as JSON](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/json)
-* [Export to Excel](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/export-to-excel)
-* [Overview of the Kendo UI Spreadsheet Widget](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/overview)
-* [Overview of the Spreadsheet HtmlHelper]({% slug overview_spreadsheethelper_aspnetmvc %})
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Spreadsheet HtmlHelper Troubleshooting]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
+* [Basic Usage of the Spreadsheet HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/spreadsheet/index)
+* [API Reference of the Spreadsheet HtmlHelper for ASP.NET MVC](/api/spreadsheet)

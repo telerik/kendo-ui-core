@@ -77,4 +77,4 @@ The AutoComplete TagHelper configuration options are passed as attributes of the
 ## See Also
 
 * [Basic Usage of the AutoComplete TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/autocomplete/tag-helper)
-* [API Reference of the AutoComplete Helper for ASP.NET Core](/api/autocomplete)
+* [Server-Side API](/api/autocomplete)

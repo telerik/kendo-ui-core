@@ -24,20 +24,20 @@ The following example demonstrates how to define the TreeList by using the TreeL
 ```Model
     public class EmployeeViewModel
     {
-        // Id
+        // The Id.
         public int EmployeeID { get; set; }
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        // a nullable ParentId
+        // A nullable ParentId.
         public int? ReportsTo { get; set; }
 
         public string Address { get; set; }
 
         // This is a case-sensitive property. Define it only if you want to use lazy-loading.
-        // If it is not defined, the treelist will calculate and assign its value on the client.
+        // If it is not defined, the TreeList will calculate and assign its value on the client.
         public bool hasChildren { get; set; }
     }
 ```
@@ -94,19 +94,19 @@ The following example demonstrates the basic configuration for the TreeList Html
 
     public JsonResult Destroy([DataSourceRequest] DataSourceRequest request, EmployeeDirectoryModel employee)
     {
-        // Delete from database. Return the deleted item in an array and call the ToTreeDataSourceResult() method
+        // Delete from database. Return the deleted item in an array and call the ToTreeDataSourceResult() method.
         return Json(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
     }
 
     public JsonResult Create([DataSourceRequest] DataSourceRequest request, EmployeeDirectoryModel employee)
     {
-        // Create in the database. Return the created item with an Id/ParentId fields in an array and call the ToTreeDataSourceResult() method
+        // Create in the database. Return the created item with an Id/ParentId fields in an array and call the ToTreeDataSourceResult() method.
         return Json(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
     }
 
     public JsonResult Update([DataSourceRequest] DataSourceRequest request, EmployeeDirectoryModel employee)
     {
-        // Update in database. Return the updated item in an array and call the ToTreeDataSourceResult() method
+        // Update in database. Return the updated item in an array and call the ToTreeDataSourceResult() method.
         return Json(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
     }
 ```
@@ -196,4 +196,4 @@ To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](h
 ## See Also
 
 * [Basic Usage of the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/index)
-* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)
+* [Server-Side API](/api/treelist)

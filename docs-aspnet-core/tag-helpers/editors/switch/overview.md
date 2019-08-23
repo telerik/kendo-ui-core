@@ -41,4 +41,4 @@ The configuration options of the Switch TagHelper are passed as attributes of th
 ## See Also
 
 * [Basic Usage of the Switch TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/switch/tag-helper)
-* [API Reference of the Switch Helper for ASP.NET Core](/api/switch)
+* [Server-Side API](/api/switch)

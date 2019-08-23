@@ -43,4 +43,4 @@ The following example demonstrates how to group the data in the MultiSelect by c
 ## See Also
 
 * [Grouping by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/grouping)
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

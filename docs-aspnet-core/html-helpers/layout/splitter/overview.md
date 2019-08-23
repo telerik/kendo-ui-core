@@ -146,4 +146,4 @@ For a complete example on basic Splitter events, refer to the [demo on using the
 
 * [Basic Usage of the Splitter HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/index)
 * [Using the API of the Splitter HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/splitter/api)
-* [API Reference of the Splitter HtmlHelper for ASP.NET Core](/api/splitter)
+* [Server-Side API](/api/splitter)

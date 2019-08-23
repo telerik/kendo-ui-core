@@ -19,4 +19,4 @@ For more information on customizing the `aria-label` text, refer to the article 
 ## See Also
 
 * [Customizing Templates in the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/template)
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

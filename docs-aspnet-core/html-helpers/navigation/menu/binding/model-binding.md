@@ -54,4 +54,4 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
 
 * [Model Binding by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/modelbinding)
 * [Binding to Custom Attributes by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/menu-bind-attributes)
-* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

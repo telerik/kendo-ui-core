@@ -39,4 +39,4 @@ The following example demonstrates how to set three action buttons in a Dialog w
 
 ## See Also
 
-* [API Reference of the Dialog](/api/dialog)
+* [Server-Side API](/api/dialog)

@@ -44,4 +44,4 @@ The Barcode TagHelper configuration options are passed as attributes of the tag.
 ## See Also
 
 * [Basic Usage of the Barcode TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/barcode/tag-helper)
-* [API Reference of the Barcode Helper for ASP.NET Core](/api/barcode)
+* [Server-Side API](/api/barcode)

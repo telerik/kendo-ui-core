@@ -48,4 +48,4 @@ To reference an existing Telerik UI ArcGauge instance, use the [`jQuery.data()`]
 ## See Also
 
 * [Basic Usage of the ArcGauge HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/arc-gauge/index)
-* [API Reference of the ArcGauge HtmlHelper for ASP.NET Core](/api/arcgauge)
+* [Server-Side API](/api/arcgauge)

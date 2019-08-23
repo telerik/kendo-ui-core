@@ -52,4 +52,4 @@ You can configure the Telerik UI DropDownList for data binding to use a custom D
 ## See Also
 
 * [Customizing the Data Source of the DropDownList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/custom-datasource)
-* [API Reference of the DropDownList HtmlHelper for ASP.NET Core](/api/dropdownlist)
+* [Server-Side API](/api/dropdownlist)

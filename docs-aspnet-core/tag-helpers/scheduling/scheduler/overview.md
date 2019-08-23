@@ -136,4 +136,4 @@ The Scheduler TagHelper configuration options are passed as attributes of the ta
 ## See Also
 
 * [Basic Usage of the Scheduler TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
-* [API Reference of the Scheduler Helper for ASP.NET Core](/api/scheduler)
+* [Server-Side API](/api/scheduler)

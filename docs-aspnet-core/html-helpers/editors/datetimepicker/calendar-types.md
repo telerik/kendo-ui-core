@@ -19,4 +19,4 @@ To work around the default behavior of the DateTimePicker and simulate a differe
 
 ## See Also
 
-* [API Reference of the DateTimePicker HtmlHelper for ASP.NET Core](/api/datetimepicker)
+* [Server-Side API](/api/datetimepicker)

@@ -80,4 +80,4 @@ The ColorPalette tag helper configuration options are passed as attributes of th
 ## See Also
 
 * [Basic Usage of the ColorPicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/colorpicker/tag-helper)
-* [API Reference of the ColorPicker Helper for ASP.NET Core](/api/colorpicker)
+* [Server-Side API](/api/colorpicker)

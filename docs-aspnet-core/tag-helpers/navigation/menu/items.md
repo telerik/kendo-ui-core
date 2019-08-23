@@ -151,4 +151,4 @@ You can also define the popup of each Menu item with HTML syntax by using the `<
 
 ## See Also
 
-* [API Reference of the Menu Helper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

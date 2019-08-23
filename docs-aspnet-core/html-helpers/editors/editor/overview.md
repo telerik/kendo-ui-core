@@ -62,6 +62,7 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
 * [Serializing and deserializing content]({% slug htmlhelpers_editor_serialize_aspnetcore %})
 * [Image browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})
 * [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
+* [CRUD operations]({% slug htmlhelpers_crud_editor_aspnetcore %})
 * [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})
 
 ## Events
@@ -117,4 +118,4 @@ The following example demonstrates Editor HTML helper events, which could be han
 
 * [Basic Usage of the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor)
 * [Using the API of the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/api)
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

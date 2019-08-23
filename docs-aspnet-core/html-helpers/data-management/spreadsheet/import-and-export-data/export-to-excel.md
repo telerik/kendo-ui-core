@@ -41,7 +41,7 @@ Currently, the export module does not handle sorting and filtering. This limitat
 
 ## See Also
 
-* [API Reference of the Spreadsheet HtmlHelper for ASP.NET Core](/api/spreadsheet)
+* [Server-Side API](/api/spreadsheet)
 * [Custom Functions]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
 * [Cell Formatting]({% slug htmlhelpers_spreadsheet_custom_functions_aspnetcore %})
 * [Data Source Binding]({% slug htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore %})

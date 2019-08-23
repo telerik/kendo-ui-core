@@ -68,4 +68,4 @@ You can update all of these requests and responses through the [`ImageBrowser()`
 ## See Also
 
 * [File and Image Browser by the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/imagebrowser)
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

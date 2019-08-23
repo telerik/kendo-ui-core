@@ -52,4 +52,4 @@ The `ParseFormats` option is of type `string[]` and can be assigned either by a 
 ## See Also
 
 * [Basic Usage of the TimePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker/tag-helper)
-* [API Reference of the TimePicker Helper for ASP.NET Core](/api/timepicker)
+* [Server-Side API](/api/timepicker)

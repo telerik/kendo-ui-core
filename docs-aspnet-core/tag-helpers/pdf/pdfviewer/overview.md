@@ -42,4 +42,4 @@ The following example demonstrates a PDFViewer TagHelper which uses the `PDF.JS`
 ## See Also
 
 * [Basic Usage of the PDFViewer TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/tag-helper)
-* [API Reference of the PDFViewer Helper for ASP.NET Core](/api/pdfviewer)
+* [Server-Side API](/api/pdfviewer)

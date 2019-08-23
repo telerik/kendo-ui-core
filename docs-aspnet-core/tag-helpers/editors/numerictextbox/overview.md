@@ -52,4 +52,4 @@ The NumericTextBox TagHelper supports all the configuration options that the Htm
 ## See Also
 
 * [Basic Usage of the NumericTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
-* [API Reference of the NumericTextBox Helper for ASP.NET Core](/api/numerictextbox)
+* [Server-Side API](/api/numerictextbox)

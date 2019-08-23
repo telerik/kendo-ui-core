@@ -52,4 +52,4 @@ When the user clicks on a specific week number, the Calendar selects the entire 
 
 ## See Also
 
-* [API Reference of the Calendar Helper for ASP.NET Core](/api/calendar)
+* [Server-Side API](/api/calendar)

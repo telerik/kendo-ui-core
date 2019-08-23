@@ -22,6 +22,5 @@ To use the DateInput as the input element in a DatePicker, enable the [`DateInpu
 
 ## See Also
 
-* [DatePicker Basic Usage (Demo)](https://demos.telerik.com/aspnet-core/datepicker/index)
-* [DateInput Overview]({% slug htmlhelpers_dateinput_aspnetcore %})
-* [API Reference of the DatePicker](/api/datepicker)
+* [Basic Usage of the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/index)
+* [Server-Side API](/api/datepicker)

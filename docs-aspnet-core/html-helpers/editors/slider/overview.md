@@ -101,4 +101,4 @@ To reference an existing Telerik UI Slider instance, use the [`jQuery.data()`](h
 
 * [Basic Usage by the Slider HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider)
 * [Using the API of the Slider HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/api)
-* [API Reference of the Slider HtmlHelper for ASP.NET Core](/api/slider)
+* [Server-Side API](/api/slider)

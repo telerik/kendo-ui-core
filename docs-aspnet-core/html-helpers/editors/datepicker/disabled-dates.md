@@ -74,5 +74,5 @@ To disable dates through using a function, set the return value for the date tha
 
 ## See Also
 
-* [Disabling Dates in the DatePicker (Demo)](https://demos.telerik.com/aspnet-core/datepicker/disable-dates)
-* [API Reference of the DatePicker](/api/datepicker)
+* [Disabling Dates in the DatePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datepicker/disable-dates)
+* [Server-Side API](/api/datepicker)

@@ -17,7 +17,7 @@ To implement the editing functionality of the TreeList:
 
 ## Setting the Model
 
-All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `ParentId` fields and those models must be configured in the DataSource of the TreeList. The TreeList distinguishes the root items based on the `ParentId` field. If the `ParentId` field is nullable, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is *not* nullable, root items will be items which have a default value for their data type.
+All CRUD operations of the TreeList HtmlHelper require a model with `Id` and `ParentId` fields. Those models has to be configured in the DataSource of the TreeList. Based on the `ParentId` field, the TreeList distinguishes the root items. If the `ParentId` field is nullable, root items with be items whose `ParentId` field values are `null`. If the `ParentId` is not nullable, root items will be items which have a default value for their data type.
 
  The following example demonstrates how to use the nullable model&mdash;items with ParentId `null` will be root items.
 
@@ -198,4 +198,4 @@ When the `.Editable(editable=>editable.Move(true))` option is set to `true`, the
 * [Incell Editing by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/editing-incell)
 * [Popup Editing by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/editing-popup)
 * [Editing by Dragging and Dropping in the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/dragdrop)
-* [API Reference of the TreeList HtmlHelper for ASP.NET Core](/api/treelist)
+* [Server-Side API](/api/treelist)

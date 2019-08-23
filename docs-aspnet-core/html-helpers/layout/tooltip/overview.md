@@ -66,4 +66,4 @@ For a complete example on basic Tooltip events, refer to the [demo on using the 
 
 * [Basic Usage of the Tooltip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip)
 * [Using the API of the Tooltip HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tooltip/api)
-* [API Reference of the Tooltip HtmlHelper for ASP.NET Core](/api/tooltip)
+* [Server-Side API](/api/tooltip)

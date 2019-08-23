@@ -99,4 +99,4 @@ You can configure the ComboBox to get its data from a remote source by making an
 
 ## See Also
 
-* [API Reference of the ComboBox HtmlHelper for ASP.NET Core](/api/combobox)
+* [Server-Side API](/api/combobox)

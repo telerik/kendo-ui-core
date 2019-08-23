@@ -37,4 +37,4 @@ You can configure the Telerik UI MultiSelect for server binding to the Northwind
 
 * [Server Filtering by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/serverfiltering)
 * [Client Filtering by the MultiSelect HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/clientfiltering)
-* [API Reference of the MultiSelect HtmlHelper for ASP.NET Core](/api/multiselect)
+* [Server-Side API](/api/multiselect)

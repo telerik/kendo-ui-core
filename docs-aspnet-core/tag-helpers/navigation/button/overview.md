@@ -42,4 +42,4 @@ The Button TagHelper configuration options are passed as attributes of the tag.
 ## See Also
 
 * [Basic Usage of the Button TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/button/tag-helper)
-* [API Reference of the Button Helper for ASP.NET Core](/api/button)
+* [Server-Side API](/api/button)

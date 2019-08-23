@@ -51,4 +51,4 @@ The Menu supports remote data binding as of the Kendo UI for jQuery R2 2019 rele
 ## See Also
 
 * [Remote Data Binding by the Menu HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/remote-data-binding)
-* [API Reference of the Menu HtmlHelper for ASP.NET Core](/api/menu)
+* [Server-Side API](/api/menu)

@@ -1,20 +1,29 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI ListView HtmlHelper for ASP.NET MVC
-description: "Configure the Kendo UI ListView for ASP.NET MVC for editing."
+page_title: Editing | Telerik UI ListView HtmlHelper for ASP.NET MVC
+description: "Configure the Telerik UI ListView for ASP.NET MVC for editing."
 slug: eiditing_listviewhelper_aspnetmvc
 position: 4
 ---
 
 # Editing
 
-## Configuration
+The Telerik UI ListView for ASP.NET Core enables you to edit its records.
 
-Below are the steps for you to follow when configuring the Kendo UI ListView for ASP.NET MVC for editing.
+To implement the editing functionality of the ListView:
 
-### Define the Item Template
+1. [Define the item template](#defining-the-item-template)
+1. [Define the editor template](#defining-the-editor-template)
+1. [Enable the editing functionality](#enabling-the-editing-functionality)
+1. [Specify the action methods](#specifying-the-action-methods)
+1. [Determine the `Model` property](#determining-the-model-property)
+1. [Implement the action methods](#implementing-the-action-methods)
 
-The following example demonstrates how to define the item template for the Kendo UI ListView.
+## Defining the Item Template
+
+The following example demonstrates how to define the item template for the Telerik UI ListView.
+
+> `click` events for elements with the `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Telerik UI ListView as `edit` and `delete` actions.
 
     <!-- The following markup contains the `Add new record` button -->
     <div class="k-toolbar k-grid-toolbar">
@@ -41,15 +50,14 @@ The following example demonstrates how to define the item template for the Kendo
             </div>
     </script>
 
-> Click events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Kendo UI ListView as `edit` and `delete` actions.
+## Defining the Editor Template
 
-### Set the Editor Template
+The following example demonstrates how to define the `EditorTemplate` for the model:
 
-The following example demonstrates how to define the `EditorTemplate` for the model.
+1. Declare the editor template in a file that uses the name of the edited model&mdash;for example, `ProductViewModel.cshtml`.
+1. Place this file in the `~Views\Shared\EditorTemplates` directory of your project.
 
-You need to:
-1. Declare the editor template in a file that uses the name of the edited model&mdash;for example `ProductViewModel.cshtml`.
-1. Place this file in the `Views\Shared\EditorTemplates` directory of your project.
+> `click` events for elements with the `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Telerik UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
 
     @model Kendo.Mvc.Examples.Models.ProductViewModel
     <div class="product-view">
@@ -81,9 +89,7 @@ You need to:
         </div>
     </div>
 
-> Click events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Kendo UI ListView as `save` and `cancel` actions. The editor template should be wrapped in an HTML container, same as the item template.
-
-###	Enable Editing
+## Enabling the Editing Functionality
 
 The following example demonstrates how to enable the ListView editing.
 
@@ -94,9 +100,9 @@ The following example demonstrates how to enable the ListView editing.
         .Editable() //<-- Enable editing.
     )
 
-### Specify the Action Methods
+## Specifying the Action Methods
 
-The following example demonstrates how to specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
+The following example demonstrates how to specify the action methods which will handle the `Create`, `Update`, and `Destroy` operations.
 
     @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
         .Name("listView")
@@ -113,7 +119,7 @@ The following example demonstrates how to specify the action methods which will 
         )
     )
 
-### Determine the Model Property
+## Determining the Model Property
 
 The following example demonstrates how to specify the property of the model which is the unique identifier (primary key).
 
@@ -132,7 +138,7 @@ The following example demonstrates how to specify the property of the model whic
         )
     )
 
-### Implement the Action Methods
+## Implementing the Action Methods
 
 The following example demonstrates how to implement the `read` action method.
 
@@ -194,14 +200,5 @@ The following example demonstrates how to implement the `destroy` action method.
 
 ## See Also
 
-* [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
-* [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
-* [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
-* [Overview of the Kendo UI ListView Widget](http://docs.telerik.com/kendo-ui/controls/data-management/listview/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Editing by the ListView HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/listview/editing)
+* [Server-Side API](/api/listview)

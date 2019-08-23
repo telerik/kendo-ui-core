@@ -50,4 +50,4 @@ The `Endless` scrolling is suitable for limited number of records, because after
 * [Virtual Scrolling by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/virtualization-remote-data)
 * [Endless Scrolling by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/endless-scrolling-remote)
 * [Scrolling of Frozen Columns in the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/frozen-columns)
-* [JavaScript API Reference of the Grid HtmlHelper for ASP.NET Core](/api/grid)
+* [Server-Side API](/api/grid)

@@ -21,5 +21,5 @@ The following example demonstrates how to use the `.Checked()` configuration opt
 
 ## See Also
 
-* [API Reference of the RadioButton HtmlHelper for ASP.NET Core](/api/radiobutton)
-* [Telerik UI for ASP.NET Core API Reference: RadioButtonBuilder](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)
+* [RadioButton Server-Side API](/api/radiobutton)
+* [RadioButtonBuilder Server-Side API](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RadioButtonBuilder)

@@ -274,4 +274,4 @@ The following example demonstrates how to implement the `destroy` action method.
 ## See Also
 
 * [Editing by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/editing)
-* [API Reference of the ListView HtmlHelper for ASP.NET Core](/api/listview)
+* [Server-Side API](/api/listview)

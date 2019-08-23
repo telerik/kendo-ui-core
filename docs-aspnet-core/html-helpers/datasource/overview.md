@@ -79,4 +79,4 @@ The DataSource HtmlHelper provides [three main types of data sources]({% slug ht
 ## See Also
 
 * [Basic Usage of the DataSource HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datasource/html-helper)
-* [API Reference of the DataSource Helper for ASP.NET Core](/api/datasource)
+* [Server-Side API](/api/datasource)

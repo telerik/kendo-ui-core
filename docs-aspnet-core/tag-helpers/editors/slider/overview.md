@@ -65,4 +65,4 @@ The following example demonstrates how to define the RangeSlider by using the Ra
 ## See Also
 
 * [Basic Usage of the Slider TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/slider/tag-helper)
-* [API Reference of the Slider Helper for ASP.NET Core](/api/slider)
+* [Server-Side API](/api/slider)

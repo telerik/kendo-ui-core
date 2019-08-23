@@ -1,20 +1,20 @@
 ---
 title: Overview
 page_title: TreeList | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI TreeList widget for ASP.NET MVC."
+description: "Get started with the server-side wrapper for the Telerik UI TreeList HtmlHelper for ASP.NET MVC."
 slug: overview_treelisthelper_aspnetmvc
 position: 1
 ---
 
 # TreeList HtmlHelper Overview
 
-The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI TreeList](https://demos.telerik.com/kendo-ui/treelist/index) widget. It allows you to configure the Kendo UI TreeList from server-side code and helps you bind it to data and edit it.
+The Telerik UI TreeList HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI TreeList widget.
 
-## Getting Started
+The TreeList enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
-### Configuration
+* [Demo page for the TreeList](https://demos.telerik.com/aspnet-core/treelist/index)
 
-Below are listed the steps for you to follow when configuring the Kendo UI TreeList to do server binding to the Northwind database, the **Employees** table.
+## Basic Configuration
 
 1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
@@ -141,11 +141,16 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
     ![The final result](images/treelist-bound.png)
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all TreeList [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#events).
+* [Editing]({% slug editing_mvc_treelist_helper %})
+* [Multi-column headers]({% slug multicolumn_headers_mvc_treelist_helper %})
 
-### By Handler Name
+## Events
+
+You can subscribe to all TreeList [events](/api/treelist). For a complete example on basic TreeList events, refer to the [demo on using the events of the TreeList](https://demos.telerik.com/aspnet-mvc/treelist/events).
+
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -216,7 +221,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -251,11 +256,9 @@ The following example demonstrates how to subscribe to events by a template dele
         .Height(540)
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
+To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
 
     @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
         .Name("treelist")
@@ -284,13 +287,5 @@ To reference an existing Kendo UI TreeList instance, use the [`jQuery.data()`](h
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: TreeListBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeListBuilder)
-* [How to Export Multiple TreeLists to Excel]({% slug howto_exportmultipletoexcel_treelistaspnetmvc %})
-* [Overview of the Kendo UI TreeList Widget](http://docs.telerik.com/kendo-ui/controls/data-management/treelist/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the TreeList HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treelist/index)
+* [Server-Side API](/api/treelist)

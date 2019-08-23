@@ -3,7 +3,7 @@ title: Styling of Content
 page_title: Styling of Content | Telerik UI Editor HtmlHelper for ASP.NET Core
 description: "Learn how to apply styles to the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_editor_styling_aspnetcore
-position: 8
+position: 9
 ---
 
 # Styling of Content
@@ -128,4 +128,4 @@ You can also use custom styles with [higher specificity](https://developer.mozil
 ## See Also
 
 * [Styles in the Editor HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/styles)
-* [API Reference of the Editor HtmlHelper for ASP.NET Core](/api/editor)
+* [Server-Side API](/api/editor)

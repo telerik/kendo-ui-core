@@ -110,4 +110,4 @@ public IActionResult MyModel_Create(MyModel model)
 ## See Also
 
 * [Constraining the Movement of the Window HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/window/constrain-movement)
-* [API Reference of the Window HtmlHelper for ASP.NET Core](/api/window)
+* [Server-Side API](/api/window)

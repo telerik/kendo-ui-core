@@ -130,4 +130,4 @@ To reference an existing Kendo UI TreeMap instance, use the [`jQuery.data()`](ht
 ## See Also
 
 * [Basic Usage of the TreeMap HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/index)
-* [API Reference of the TreeMap HtmlHelper for ASP.NET Core](/api/treemap)
+* [Server-Side API](/api/treemap)

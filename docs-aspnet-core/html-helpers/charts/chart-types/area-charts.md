@@ -75,4 +75,4 @@ The Area Chart supports the following styles:
 ## See Also
 
 * [Basic Usage of the Area Chart HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/index)
-* [API Reference of the Chart HtmlHelper for ASP.NET Core](/api/chart)
+* [Server-Side API](/api/chart)
