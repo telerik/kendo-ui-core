@@ -1,9 +1,10 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding | Telerik UI Grid HtmlHelper for ASP.NET Core
-description: "Learn how to implement Ajax Binding with Telerik UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn how to implement Ajax binding with the Telerik UI Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_grid_aspnetcore_ajaxbinding
 previous_url: /aspnet-core/helpers/html-helpers/grid/ajax-binding
+position: 2
 ---
 
 # Ajax Binding
@@ -86,4 +87,5 @@ To configure the Grid for ASP.NET Core to do Ajax binding to the **Products** ta
 ## See Also
 
 * [Custom Ajax Binding by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/customajaxbinding)
+* [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)

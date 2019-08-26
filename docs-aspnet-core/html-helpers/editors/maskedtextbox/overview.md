@@ -57,7 +57,7 @@ To reference an existing Telerik UI MaskedTextBox instance, use the [`jQuery.dat
 
 The following example demonstrates how to access an existing MaskedTextBox instance.
 
-      // Place this after your Telerik UI MaskedTextBox for ASP.NET Core declaration.
+      // Place the following after your Telerik UI MaskedTextBox for ASP.NET Core declaration.
       <script>
       $(function() {
           // The Name() of the MaskedTextBox is used to get its client-side instance.

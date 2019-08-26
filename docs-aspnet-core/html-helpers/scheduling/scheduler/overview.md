@@ -209,7 +209,7 @@ The following example demonstrates how to subscribe to the `dataBound` and `data
 
 To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
 
-    // Place this after your Telerik UI Scheduler for ASP.NET Core declaration.
+    // Place the following after your Telerik UI Scheduler for ASP.NET Core declaration.
     <script>
         $(document).ready(function() {
             // The Name() of the Scheduler is used to get its client-side instance.

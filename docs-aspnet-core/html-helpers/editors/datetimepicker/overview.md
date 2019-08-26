@@ -77,7 +77,7 @@ To reference an existing  DateTimePicker instance, use the [`jQuery.data()`](htt
 
 The following example demonstrates how to access an existing DateTimePicker instance.
 
-      // Place this after your DateTimePicker for ASP.NET Core declaration.
+      // Place the following after your DateTimePicker for ASP.NET Core declaration.
       <script>
       $(function() {
       // The Name() of the DateTimePicker is used to get its client-side instance.

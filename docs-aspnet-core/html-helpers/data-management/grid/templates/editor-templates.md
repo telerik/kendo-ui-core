@@ -3,7 +3,7 @@ title: Editor Templates
 page_title: Editor Templates | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Create the editing Telerik UI Grid ASP.NET Core with the ASP.NET Core editor templates."
 slug: editortemplates_grid_aspnetcore
-position: 2
+position: 6
 ---
 
 # Editor Templates
@@ -18,19 +18,19 @@ The Telerik UI Grid for ASP.NET Core relies on ASP.NET Core editor templates to 
 
 The configuration later in this article will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
-    Html.Kendo().Grid<Order>()
-        .Name("Grid")
-        .Columns(columns =>
-        {
-            columns.Bound(o => o.OrderDate);
-            columns.Bound(o => o.ShipCountry);
-        })
-        .Editable(editable => editable.Mode(GridEditMode.InLine))
+        @(Html.Kendo().Grid<Order>()
+            .Name("Grid")
+            .Columns(columns =>
+            {
+                columns.Bound(o => o.OrderDate);
+                columns.Bound(o => o.ShipCountry);
+            })
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
 
 The following example demonstrates the code that will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
-    Html.EditorFor(o => o.OrderDate);
-    Html.EditorFor(o => o.ShipCountry);
+        @(Html.EditorFor(o => o.OrderDate);
+        @(Html.EditorFor(o => o.ShipCountry);
 
 If the Grid is configured for popup editing, it will use the `Html.EditorForModel` to get the editor HTML for the whole model.
 
@@ -61,7 +61,7 @@ Your project may require you to create a custom editor for a specific property. 
 
         @(Html.Kendo().DropDownList()
             .Name("Employee") // The name of the widget has to be the same as the name of the property.
-            .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
+            .DataValueField("EmployeeID") // The value of the drop-down is taken from the EmployeeID property.
             .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
             .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
         )

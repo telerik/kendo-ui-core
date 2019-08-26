@@ -15,7 +15,7 @@ Telerik UI for ASP.NET Core integrates the Pako and JSZip libraries to support t
 The [Pako Deflate library](https://nodeca.github.io/pako/#Deflate) enables the compression of the files that will be exported to PDF. To enable the PDF export, you need to load Pako in the specified page.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
 
 For more information on the available PDF export options by Kendo UI, refer to the articles on [PDF Export](https://docs.telerik.com/kendo-ui/framework/pdf/overview) and [PDF output by the Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/overview).
 
@@ -23,7 +23,34 @@ For more information on the available PDF export options by Kendo UI, refer to t
 
 The [JSZip library](https://stuk.github.io/jszip/) is necessary for the components to support Excel export and for the Spreadsheet to support the import of Excel files. You need to include the JSZip library only if you have to provide support for export to or import from ([`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/fromfile)) Excel files.
 
-For more information on the available Excel export options by Kendo UI, refer to the section on [Excel export](https://docs.telerik.com/kendo-ui/framework/excel/introduction).
+To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+    <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+
+JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN.
+
+    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
+
+> * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.
+> * As of the Kendo UI R3 2017 release, the Excel Export feature supports JSZip 2.x and 3.x versions. Kendo UI releases prior to R2 2017 SP1 provided Excel export of JSZip 2.x versions only.
+
+When you use JSZip in scenarios where the packages are loaded from NPM, explicitly assign the JSZip object to a field in the `window` object. To properly load JSZip in the application:
+
+1. Install the library and save it to the `package.json` file by running `npm install jszip --save`.
+1. Import the library in the module where it will be used through `import JSZip from 'jszip'`.
+1. Assign the library object to a field of the `window` by setting `window.JSZip = JSZip`.
+
+## Globalizejs Library
+
+To use [Globalizejs](https://github.com/globalizejs/globalize) in your project, include it after the Kendo UI scripts.
+
+## Browser Support
+
+Excel generation is available for all [supported browsers]({% slug webbrowsersupport_core %}). Saving a file needs a server-side proxy for older browser versions. For more information, refer to the [article on saving files with Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/framework/saving-files).
+
+> Some mobile browsers do not support the saving of files.
 
 ## See Also
 

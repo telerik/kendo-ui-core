@@ -98,15 +98,36 @@ navigation:
      "html-helpers/data-management/grid/editing":
         title: "Editing"
         position: 3
+     "html-helpers/data-management/grid/columns":
+        title: "Columns"
+        position: 12
+     "html-helpers/data-management/grid/grouping":
+        title: "Grouping"
+        position: 5
+     "html-helpers/data-management/grid/columns":
+        title: "Columns"
+        position: 11
+     "html-helpers/data-management/grid/scrolling":
+        title: "Scroll Modes"
+        position: 12
+     "html-helpers/data-management/grid/export":
+        title: "Export"
+        position: 14
      "html-helpers/data-management/grid/templates":
         title: "Templates"
-        position: 9
-     "html-helpers/data-management/listview/globalization":
+        position: 15
+     "html-helpers/data-management/grid/appearance":
+        title: "Appearance"
+        position: 16
+     "html-helpers/data-management/grid/performance":
+        title: "Performance Tips"
+        position: 17
+     "html-helpers/data-management/grid/globalization":
         title: "Globalization"
-        position: 40
-     "html-helpers/data-management/listview/accessibility":
-        title: "Accessibility"
         position: 50
+     "html-helpers/data-management/grid/accessibility":
+        title: "Accessibility"
+        position: 60
      "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
      "html-helpers/data-management/spreadsheet/import-and-export-data":
@@ -121,6 +142,15 @@ navigation:
      "html-helpers/editors/datetimepicker/accessibility":
         title: "Accessibility"
         position: 50
+     "html-helpers/editors/listbox/globalization":
+        title: "Globalization"
+        position: 40
+     "html-helpers/editors/listbox/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/listbox/binding":
+        title: "Data Binding"
+        position: 2        
      "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
      "html-helpers/editors/datepicker/accessibility":

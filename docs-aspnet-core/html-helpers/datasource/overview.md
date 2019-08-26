@@ -26,7 +26,7 @@ The following example demonstrates how to define the DataSource by using the Dat
 
     <script>
         myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action.
-    </script>  
+    </script>
 ```
 ```HomeController
 

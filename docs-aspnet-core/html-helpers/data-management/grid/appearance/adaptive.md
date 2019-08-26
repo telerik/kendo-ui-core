@@ -3,7 +3,8 @@ title: Adaptive Rendering
 page_title: Adaptive Rendering | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Get started with the ASP.NET Core Grid by Telerik UI which provides consistency to the customer experience on any device by supporting adaptive rendering."
 slug: adaptive_rendering_gridhelper_aspnetcore
-position: 12
+previous_url: /html-helpers/data-management/grid/adaptive
+position: 5
 ---
 
 # Adaptive Rendering
@@ -44,11 +45,11 @@ The Pane in which the adaptive Grid is placed does not automatically expand its 
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user can resize the column by dragging.
 
-![A Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
+![A Grid with resizable columns on a mobile device](../adaptive-resizing-icon.png)
 
 ## Destroying Adaptive Grids
 
-When the Grid is in its adaptive rendering mode, it generates auxiliary markup which needs to be removed if the widget is to be [destroyed](https://docs.telerik.com/kendo-ui/intro/widget-basics/destroy) manually.
+When the Grid is in its adaptive rendering mode, it generates auxiliary markup which needs to be removed if the Grid is to be [destroyed]({% slug destroyhelpers_core %}) manually.
 
 To manually destroy the Grid:
 

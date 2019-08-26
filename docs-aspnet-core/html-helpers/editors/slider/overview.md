@@ -88,7 +88,7 @@ The following example demonstrates how to subscribe to events by a template dele
 To reference an existing Telerik UI Slider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Slider API](/api/slider) to control its behavior.
 
 ```
-    // Place this after your Telerik UI Slider for ASP.NET Core declaration.
+    // Place the following after your Telerik UI Slider for ASP.NET Core declaration.
     <script>
         $(function() {
             // The Name() of the Slider is used to get its client-side instance.

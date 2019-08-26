@@ -3,7 +3,7 @@ title: Client Detail Templates
 page_title: Client Detail Templates | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Set the detail template used during Ajax binding of the Telerik UI Grid for ASP.NET Core."
 slug: clientdetailtemplate_grid_aspnetcore
-position: 1
+position: 4
 ---
 
 # Client Detail Templates
@@ -181,7 +181,7 @@ To configure the Grid for ASP.NET Core to display all **Product** entities that 
 
 1. Define the client template using [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
-    > * Always call the `ToClientTemplate` method when using Telerik UI for ASP.NET Core widgets in a client template.
+    > * Always call the `ToClientTemplate` method when using Telerik UI for ASP.NET Core helpers in a client template.
     > * Escape the `#` characters used for a template expression when using a column `ClientTemplate` in a detail template, so that the expression is evaluated in the correct context.
 
         <script id="client-template" type="text/x-kendo-template">

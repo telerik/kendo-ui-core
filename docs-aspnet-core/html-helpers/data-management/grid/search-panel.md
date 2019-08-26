@@ -3,7 +3,7 @@ title: Search Panel
 page_title: Search Panel | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Learn how to enable the searching functionality of the Telerik UI Grid for ASP.NET Core."
 slug: htmlhelpers_grid_aspnetcore_searchpanel
-position: 13
+position: 9
 ---
 
 # Search Panel
@@ -35,3 +35,4 @@ When filtering is enabled in the filter textboxes for all Grid columns will be p
 ## See Also
 
 * [Server-Side API](/api/grid)
+* [Knowledge Base Section](/knowledge-base)

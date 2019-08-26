@@ -20,7 +20,7 @@ The Grid is a powerful control for displaying data in a tabular format. It provi
 Because of the numerous functionalities it supports, the Grid is the most complex of the Telerik UI HTML Helpers. To gain greater confidence before you start working with it, make sure you get familiar with the following concepts:
 
 * [DataSource]({% slug htmlhelpers_datasource_aspnetcore %})&mdash;The DataSource is one of the pivotal suite components. It is an abstraction for using local or remote data and a key concept in understanding how the Grid functions.
-* [Remote CRUD operations]({% slug ajaxediting_grid_aspnetcore %})&mdash;The section elaborates on scenarios in which data is retrieved from and submitted to a remote data service through HTTP requests that are made by the DataSource.
+* [Remote CRUD operations]({% slug inlineediting_grid_aspnetcore %})&mdash;The section elaborates on scenarios in which data is retrieved from and submitted to a remote data service through HTTP requests that are made by the DataSource.
 * [Remote data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})&mdash;The article provides information on server filtering, paging, and other features of the Grid.
 
 ## Initializing the Grid
@@ -47,137 +47,87 @@ The following example demonstrates how to define the Grid by using the Grid Html
     namespace Kendo.Mvc.Examples.Controllers
     {
 	    public partial class GridController : BaseController
-    {
-        private IProductService productService;
-
-        public GridController(
-            IProductService service)
         {
-			productService = service;
-		}
-
-        [Demo]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-		public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
-		{
-			return Json(GetCustomers().ToDataSourceResult(request));
-		}
-
-		private static IEnumerable<CustomerViewModel> GetCustomers()
-		{
-            using (var northwind = new SampleEntitiesDataContext())
+            [Demo]
+            public IActionResult Index()
             {
-                return northwind.Customers.Select(customer => new CustomerViewModel
+                return View();
+            }
+
+		    public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+		    {
+		    	return Json(GetCustomers().ToDataSourceResult(request));
+		    }
+
+		    private static IEnumerable<CustomerViewModel> GetCustomers()
+		    {
+                using (var northwind = new SampleEntitiesDataContext())
                 {
-                    CustomerID = customer.CustomerID,
-                    CompanyName = customer.CompanyName,
-                    ContactName = customer.ContactName,
-                    ContactTitle = customer.ContactTitle,
-                    Address = customer.Address,
-                    City = customer.City,
-                    Region = customer.Region,
-                    PostalCode = customer.PostalCode,
-                    Country = customer.Country,
-                    Phone = customer.Phone,
-                    Fax = customer.Fax,
-                    Bool = customer.Bool
-                }).ToList();
-            }
-		}
-
-		public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-		{
-			return Json(GetOrders().ToDataSourceResult(request));
-		}
-
-		private static IEnumerable<OrderViewModel> GetOrders()
-		{
-            using (var northwind = new SampleEntitiesDataContext())
-            {
-                var customers = northwind.Customers.ToList();
-
-                return northwind.Orders.ToList().Select(order => new OrderViewModel
-                {
-                    ContactName = customers.First(c => c.CustomerID == order.CustomerID).ContactName,
-                    Freight = order.Freight,
-                    OrderDate = order.OrderDate,
-                    ShippedDate = order.ShippedDate,
-                    OrderID = order.OrderID,
-                    ShipAddress = order.ShipAddress,
-                    ShipCountry = order.ShipCountry,
-                    ShipName = order.ShipName,
-                    ShipCity = order.ShipCity,
-                    EmployeeID = order.EmployeeID,
-                    CustomerID = order.CustomerID
-                }).ToList();
-            }
-		}
-
-            public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
-            {
-                return Json(productService.Read().ToDataSourceResult(request));
-            }
-        }
+                    return northwind.Customers.Select(customer => new CustomerViewModel
+                    {
+                        CustomerID = customer.CustomerID,
+                        CompanyName = customer.CompanyName,
+                        ContactName = customer.ContactName,
+                        ContactTitle = customer.ContactTitle,
+                        Address = customer.Address,
+                        City = customer.City,
+                        Region = customer.Region,
+                        PostalCode = customer.PostalCode,
+                        Country = customer.Country,
+                        Phone = customer.Phone,
+                        Fax = customer.Fax,
+                        Bool = customer.Bool
+                    }).ToList();
+                }
+		    }
+        }    
     }
-```
-
-## Basic Configuration
-
-The following example demonstrates the basic configuration for the Grid HtmlHelper.
-
-```
-    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Customer>()
-		.Name("grid")
-		.Columns(columns =>
-		{
-			columns.Bound(c => c.ContactName).Width(140);
-			columns.Bound(c => c.ContactTitle).Width(190);
-			columns.Bound(c => c.CompanyName);
-			columns.Bound(c => c.Country).Width(110);
-		})
-		.HtmlAttributes(new { style = "height: 380px;" })
-		.Scrollable()
-		.Groupable()
-		.Sortable()
-		.Pageable(pageable => pageable
-			.Refresh(true)
-			.PageSizes(true)
-			.ButtonCount(5))
-		.DataSource(dataSource => dataSource
-			.Ajax()
-			.Read(read => read.Action("Customers_Read", "Grid"))
-		)
-    )
-
-    <script>
-    $(function() {
-        //Notice that the Name() of the Grid is used to get its client-side instance.
-        var grid = $("#grid").data("kendoGrid");
-    });
-    </script>
 ```
 
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
-* [Editing]({% slug batchediting_grid_aspnetcore %})
-* [Filtering]({% slug htmlhelpers_grid_aspnetcore_filtering %})
-* [Grouping]({% slug htmlhelpers_grid_aspnetcore_grouping %})
-* [Paging]({% slug htmlhelpers_grid_aspnetcore_paging %})
-* [Sorting]({% slug htmlhelpers_grid_aspnetcore_sorting %})
-* [Excel export]({% slug excelexport_gridhelper_aspnetcore %})
-* [Templates]({% slug clientdetailtemplate_grid_aspnetcore %})
-* [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
-* [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %})
-* [Adaptive rendering]({% slug adaptive_rendering_gridhelper_aspnetcore %})
-* [Search panel]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})
+* Data operations
+    * [Data binding]({% slug htmlhelpers_grid_aspnetcore_binding_overview %})
+    * [Editing]({% slug batchediting_grid_aspnetcore %})
+    * [Filtering]({% slug htmlhelpers_grid_aspnetcore_filtering %})
+    * [Grouping]({% slug htmlhelpers_grid_aspnetcore_grouping %})
+    * [Paging]({% slug htmlhelpers_grid_aspnetcore_paging %})
+    * [Sorting]({% slug htmlhelpers_grid_aspnetcore_sorting %})
+    * [Search panel]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})
+* Export options
+    * [Excel]({% slug excelexport_gridhelper_aspnetcore %})
+    * [PDF]({% slug pdfexport_gridhelper_aspnetcore %})
+    * [Printing]({% slug pdfexport_gridhelper_aspnetcore %})
+* Advanced implementations
+    * [Column enhancements]({% slug column_widths_grid_aspnetcore %})
+    * [State persistence]({% slug persiststate_grid_aspnetcore %})
+    * [Hierarchy]({% slug hierarchy_grid_htmlhelper_aspnetcore %})
+    * [Templates]({% slug clientdetailtemplate_grid_aspnetcore %})
+* More settings
+    * [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
+    * [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %})
+    * [Rendering and dimensions]({% slug width_grid_aspnetcore %})
+    * [Responsive Grid]({% slug adaptive_rendering_gridhelper_aspnetcore %})
+    * [Performance tips]({% slug performance_htmlhelpers_grid_aspnetcore %})
+    * [Globalization]({% slug globalization_grid_aspnetcore %})
+    * [Accessibility]({% slug accessibility_aspnetcore_grid %})
+
+For more information on implementing specific scenarios, refer to the [**Knowledge Base**](/knowledge-base) section.
+
+## Referencing Existing Instances
+
+To refer to an existing Grid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) to control its behavior.
+
+        <script>
+        $(function() {
+            // The Name() of the Grid is used to get its client-side instance.
+            var grid = $("#grid").data("kendoGrid");
+        });
+        </script>
 
 ## See Also
 
 * [Basic Usage of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/index)
 * [Using the API of the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/api)
+* [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)
