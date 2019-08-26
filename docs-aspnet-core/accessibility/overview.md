@@ -16,10 +16,10 @@ For the full list of components which support accessibility and keyboard navigat
 
 Accessible websites and applications normally provide support for:
 
-* [Section 508](#toc-section-508)
-* [W3C Web Content Accessibility Guidelines (WCAG) 2.0](#toc-wcag-20)
-* [WAI-ARIA](#toc-wai-aria)
-* [Keyboard navigation requirements](#toc-keyboard-navigation)
+* [Section 508](#section-508)
+* [W3C Web Content Accessibility Guidelines (WCAG) 2.0](#wcag-21)
+* [WAI-ARIA](#wai-aria)
+* [Keyboard navigation requirements](#keyboard-navigation)
 
 ### Section 508
 

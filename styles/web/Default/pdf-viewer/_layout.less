@@ -95,41 +95,55 @@
 
 // Search
 .k-pdf-viewer-search-dialog {
-    display: flex;
-    flex: 0 0 auto;
-    justify-content: center;
-    align-items: center;
+    padding: @pdf-viewer-search-dialog-spacing;
 
-    .k-textbox {
-        display: inline-flex;
+    .k-search-container {
+        display: flex;
+        flex: 0 0 auto;
+        justify-content: flex-start;
         align-items: center;
-        background: none;
-        padding-right: @pdf-viewer-search-dialog-textbox-padding-x;
 
-        .k-icon {
-            position: relative;
-            top: auto;
-            margin: 0;
+        .k-textbox {
+            display: inline-flex;
+            align-items: center;
+            background: none;
+            padding-right: @pdf-viewer-search-dialog-textbox-padding-x;
+            margin: 0 @pdf-viewer-search-dialog-spacing;
+
+            .k-icon {
+                position: relative;
+                top: auto;
+                margin: 0;
+            }
+
+            .k-search-dialog-input::-ms-clear {
+                display: none;
+            }
+
+            &:after {
+                content: "";
+            }
         }
 
-        .k-search-dialog-input::-ms-clear {
-            display: none;
+        .k-match-case-button {
+            height: @pdf-viewer-search-dialog-input-button-height;
+            font-size: initial;
         }
 
-        &:after {
-            content: "";
+        .k-search-matches {
+            display: inline-block;
+            min-width: @pdf-viewer-search-dialog-matches-width;
+            margin: 0 @pdf-viewer-search-dialog-spacing 0 @pdf-viewer-search-dialog-button-spacing;
+            vertical-align: middle;
         }
-    }
 
-    .k-match-case-button {
-        height: @pdf-viewer-search-dialog-input-button-height;
-    }
+        > .k-button {
+            margin-left: @pdf-viewer-search-dialog-button-spacing;
+        }
 
-    .k-search-matches {
-        margin: @pdf-viewer-search-dialog-matches-margin;
-    }
-
-    .k-search-dialog-draghandle  {
-        margin: @pdf-viewer-search-dialog-draghandle-margin;
+        .k-search-dialog-draghandle  {
+            cursor: move;
+            margin-left: 0;
+        }
     }
 }

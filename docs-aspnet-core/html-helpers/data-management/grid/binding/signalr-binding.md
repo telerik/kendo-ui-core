@@ -4,6 +4,7 @@ page_title: SignalR Binding | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Learn the basics when working with the Grid HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_grid_aspnetcore_signalrbinding
 previous_url: /aspnet-core/helpers/html-helpers/grid/signalr-binding
+position: 4
 ---
 
 # SignalR Binding
@@ -12,7 +13,7 @@ As of the [ASP.NET Core R2 2018 release](https://docs.microsoft.com/en-us/aspnet
 
 > The feature is tested with SignalR 1.0.0-rc1-final.
 
-The SignalR binding feature relies on the client-side implementation of SignalR. It can be used with both the MVC and Core wrappers of the Grid since they wrap the [jQuery Grid widget](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview). For a runnable example, refer to the [demo on SignalR binding of the Grid](https://demos.telerik.com/aspnet-core/grid/signalr).
+The SignalR binding feature relies on the client-side implementation of SignalR. It can be used with both the MVC and Core wrappers of the Grid since they wrap the [Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview). For a runnable example, refer to the [demo on SignalR binding of the Grid HtmlHelper](https://demos.telerik.com/aspnet-core/grid/signalr).
 
 The following example:
 * Demonstrates a sample implementation of a Grid which uses SignalR. The service that is used is available in [this GitHub repository](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs).
@@ -101,5 +102,5 @@ function onPush(e) {
 ## See Also
 
 * [SignalR Binding by the Grid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/signalr)
-* [ASP.NET Core SignalR Get Started](https://docs.microsoft.com/en-us/aspnet/core/signalr/get-started?view=aspnetcore-2.1&tabs=visual-studio)
+* [Official Microsoft Documentation on Getting Started with ASP.NET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/get-started?view=aspnetcore-2.1&tabs=visual-studio)
 * [Server-Side API](/api/grid)

@@ -33,7 +33,6 @@ You can change the available page sizes from which the user can choose with an a
         p.PageSizes(new[] { 5, 10, 30 });
     })
 
-
 Use as small page sizes as possible, because rendering too many records causes performance issues especially when the Grid renders many columns or complex templates for its cells.	  
 
 ## See Also

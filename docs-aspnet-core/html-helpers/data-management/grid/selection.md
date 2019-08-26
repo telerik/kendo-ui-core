@@ -3,7 +3,7 @@ title: Selection
 page_title: Selection | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Learn how to enable the selection functionality of the Telerik UI Grid for ASP.NET Core."
 slug: htmlhelpers_grid_aspnetcore_selection
-position: 11
+position: 8
 ---
 
 # Selection

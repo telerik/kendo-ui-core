@@ -146,7 +146,7 @@ The Grid allows you to specify a page template and use the template to position 
 * `pageNumber`
 * `totalPages`
 
-> To use a page template, you have to set the paper size. For more information, refer to the section on [page templates](#page-templates).
+> To use a page template, you have to set the paper size.
 
 ```dojo
     <style>
