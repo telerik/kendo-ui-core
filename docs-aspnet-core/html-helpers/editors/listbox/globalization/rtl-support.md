@@ -14,4 +14,4 @@ For more information, refer to the [demo on RTL support by the ListBox](https://
 
 ## See Also
 
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

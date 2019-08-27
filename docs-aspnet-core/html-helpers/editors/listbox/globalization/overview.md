@@ -17,6 +17,6 @@ For more information on using localization and right-to-left languages with Tele
 
 ## See Also
 
-* [RTL Support by the ListBox (Demo)](https://demos.telerik.com/aspnet-core/listbox/right-to-left-support)
+* [RTL Support by the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/right-to-left-support)
 * [Globalization in Telerik UI for ASP.NET Core]({% slug overview_globalization_core %})
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

@@ -49,5 +49,5 @@ These messages serve as tooltip text when the user hovers over the buttons.
 
 ## See Also
 
-* [RTL Support by the ListBox (Demo)](https://demos.telerik.com/aspnet-core/listbox/right-to-left-support)
+* [RTL Support by the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/right-to-left-support)
 * [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)

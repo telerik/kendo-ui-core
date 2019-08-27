@@ -1,7 +1,7 @@
 ---
 title: Selected Dates
 page_title: Selected Dates | Telerik UI DatePicker HtmlHelper for ASP.NET Core
-description: "Get started with the Telerik UI for ASP.NET Core DatePicker and learn how to set selected dates and date ranges in the widget."
+description: "Get started with the Telerik UI for ASP.NET Core DatePicker and learn how to set selected dates and date ranges in the DatePicker."
 slug: htmlhelpers_datepicker_aspnetcore_selecteddates
 position: 3
 ---

@@ -14,5 +14,5 @@ The globalization functionality of the ListView is enabled through its [right-to
 
 ## See Also
 
-* [RTL Support by the ListView (Demo)](https://demos.telerik.com/aspnet-core/listview/right-to-left-support)
+* [RTL Support by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/right-to-left-support)
 * [Server-Side API](/api/listview)

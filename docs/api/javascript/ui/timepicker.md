@@ -224,6 +224,110 @@ Specifies the start value in the popup list.
     });
     </script>
 
+### popup `Object`
+
+The options that will be used for the popup initialization. For more details about the available options
+refer to [Popup](/api/javascript/ui/popup) documentation.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="timepicker" />
+    </div>
+    <script>
+    $("#timepicker").kendoTimePicker({
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.appendTo `String`
+
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="timepicker" />
+    </div>
+    <script>
+    $("#timepicker").kendoTimePicker({
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.origin `String`
+
+Specifies how to position the popup element based on anchor point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+
+    <div id="container">
+        <input id="timepicker" />
+    </div>
+    <script>
+    $("#timepicker").kendoTimePicker({
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+### popup.position `String`
+
+Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+
+    <div id="container">
+        <input id="timepicker" />
+    </div>
+    <script>
+    $("#timepicker").kendoTimePicker({
+      popup: {
+        position: "top center"
+      }
+    });
+    </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+
 ### value `Date`*(default: null)*
 
 Specifies the selected time.

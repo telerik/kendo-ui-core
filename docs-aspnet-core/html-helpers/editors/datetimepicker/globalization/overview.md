@@ -16,6 +16,6 @@ The globalization functionality of the DateTimePicker is enabled through:
 
 ## See Also
 
-* [Globalization Support by the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/globalization)
-* [RTL Support by the DateTimePicker (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/right-to-left-support)
+* [Globalization Support by the DateTimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/globalization)
+* [RTL Support by the DateTimePicker HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/datetimepicker/right-to-left-support)
 * [Server-Side API](/api/datetimepicker)

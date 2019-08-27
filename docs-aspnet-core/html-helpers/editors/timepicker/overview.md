@@ -25,6 +25,14 @@ The following example demonstrates how to how to define the TimePicker by using 
     )
 ```
 
+## Functionality and Features
+
+* [Selected times]({% slug htmlhelpers_timepicker_aspnetcore_selectedtimes %})
+* [Formats]({% slug formats_timepicker_aspnetcore %})
+* [Validation]({% slug htmlhelpers_timepicker_aspnetcore_validation %})
+* [Globalization]({% slug globalization_timepicker_aspnetcore %})
+* [Accessibility]({% slug accessibility_timepicker_aspnetcore %})
+
 ## Events
 
 You can subscribe to all TimePicker events. For a complete example on basic TimePicker events, refer to the [demo on using the events of the TimePicker](https://demos.telerik.com/aspnet-core/timepicker/events).
