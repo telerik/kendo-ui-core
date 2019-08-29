@@ -40,6 +40,15 @@ navigation:
         title: "Diagrams and Maps"
      "helpers/editors":
         title: "Editors"
+     "helpers/editors/autocomplete/binding":
+        title: "Data Binding"
+        position: 2
+     "helpers/editors/combobox/binding":
+        title: "Data Binding"
+        position: 2
+     "helpers/editors/dropdownlist/binding":
+        title: "Data Binding"
+        position: 2
      "helpers/gauges":
         title: "Gauges"
      "helpers/hybrid":

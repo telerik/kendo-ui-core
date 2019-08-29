@@ -1,18 +1,20 @@
 ---
 title: Overview
 page_title: ColorPicker | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI ColorPicker widget for ASP.NET MVC."
+description: "Learn the basics when working with the Telerik UI ColorPicker HtmlHelper for ASP.NET MVC."
 slug: overview_colorpickerhelper_aspnetmvc
 position: 1
 ---
 
 # ColorPicker HtmlHelper Overview
 
-The ColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo UI ColorPicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker) widget.
+The Telerik UI ColorPicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ColorPicker widget.
 
-## Configuration
+The ColorPicker provides suggestions depending on the typed text and allows multiple value entries.
 
-Below are listed the steps for you to follow when configuring the Kendo UI ColorPicker.
+* [Demo page for the ColorPicker](https://demos.telerik.com/aspnet-mvc/colorpicker)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -26,22 +28,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
     ```ASPX
         <%: Html.Kendo().ColorPicker()
-                .Name("colorpicker") // The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+                .Name("colorpicker") // The name of the ColorPicker is mandatory. It specifies the "id" attribute of the ColorPicker.
                 .Value("#ff0000") // Set the value of the ColorPicker.
         %>
     ```
     ```Razor
         @(Html.Kendo().ColorPicker()
-                .Name("colorpicker") // The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+                .Name("colorpicker") // The name of the ColorPicker is mandatory. It specifies the "id" attribute of the ColorPicker.
                 .Value("#ff0000") // Set the value of the ColorPicker.
         )
     ```
 
-## Event Handling
+## Events
 
-You can subscribe to all ColorPicker [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker#events).
+You can subscribe to all ColorPicker [events](/api/colorpicker). For a complete example on basic ColorPicker events, refer to the [demo on using the events of the ColorPicker](https://demos.telerik.com/aspnet-mvc/colorpicker/events).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -102,7 +104,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -132,11 +134,9 @@ The following example demonstrates how to subscribe to events by a template dele
           )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI ColorPicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker#methods) to control its behavior.
+To reference an existing ColorPicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPicker client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker#methods) to control its behavior.
 
     // Place the following after the ColorPicker for ASP.NET MVC declaration.
     <script>
@@ -148,12 +148,6 @@ To reference an existing Kendo UI ColorPicker instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: ColorPickerBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI ColorPicker Widget](http://docs.telerik.com/kendo-ui/controls/editors/colorpicker/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the ColorPicker HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/colorpicker)
+* [ColorPickerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
+* [ColorPicker Server-Side API](/api/colorpicker)

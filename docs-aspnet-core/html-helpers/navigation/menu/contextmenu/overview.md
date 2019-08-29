@@ -107,7 +107,7 @@ The following example demonstrates the basic configuration of the ContextMenu Ht
 
 <script type="text/javascript">
     function onOpen() {
-    //Notice that the Name() of the ContextMenu is used to get its instance.
+    // The Name() of the ContextMenu is used to get its instance.
     var menu = $("#contextmenu").data("kendoContextMenu");
     console.log(menu);
     }

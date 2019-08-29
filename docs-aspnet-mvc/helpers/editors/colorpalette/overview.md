@@ -1,18 +1,20 @@
 ---
 title: Overview
 page_title: ColorPalette | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI ColorPalette widget for ASP.NET MVC."
+description: "Learn the basics when working with the Telerik UI ColorPalette HtmlHelper for ASP.NET MVC."
 slug: overview_colorpalettehelper_aspnetmvc
 position: 1
 ---
 
 # ColorPalette HtmlHelper Overview
 
-The ColorPalette HtmlHelper extension is a server-side wrapper for the [Kendo UI ColorPalette](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette) widget.
+The Telerik UI ColorPalette HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI ColorPalette widget.
 
-## Configuration
+The ColorPalette provides suggestions depending on the typed text and allows multiple value entries.
 
-Below are listed the steps for you to follow when configuring the Kendo UI ColorPalette.
+* [Demo page for the ColorPalette](https://demos.telerik.com/aspnet-mvc/colorpicker/palette)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -26,22 +28,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
     ```ASPX
         <%: Html.Kendo().ColorPalette()
-                .Name("colorpalette") // The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
+                .Name("colorpalette") // The name of the ColorPalette is mandatory. It specifies the "id" attribute of the ColorPalette.
                 .Value("#ff0000") // Set the value of the ColorPalette.
         %>
     ```
     ```Razor
         @(Html.Kendo().ColorPalette()
-                .Name("colorpalette") // The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
+                .Name("colorpalette") // The name of the ColorPalette is mandatory. It specifies the "id" attribute of the ColorPalette.
                 .Value("#ff0000") // Set the value of the ColorPalette.
         )
     ```
 
-## Event Handling
+## Events
 
-You can subscribe to all ColorPalette [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette#events).
+You can subscribe to all ColorPalette [events](/api/colorpalette).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -72,7 +74,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -89,11 +91,9 @@ The following example demonstrates how to subscribe to events by a template dele
     )
 ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI ColorPalette instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPalette API](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette#methods) to control its behavior.
+To reference an existing ColorPalette instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPalette client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette#methods) to control its behavior.
 
     // Place the following after the ColorPalette for ASP.NET MVC declaration.
     <script>
@@ -105,12 +105,7 @@ To reference an existing Kendo UI ColorPalette instance, use the [`jQuery.data()
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: ColorPaletteBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPaletteBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI ColorPicker Widget](http://docs.telerik.com/kendo-ui/controls/editors/colorpicker/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the ColorPalette HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/colorpicker/palette)
+* [Using the Palette Presets in the ColorPalette HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/colorpicker/palette-presets)
+* [ColorPaletteBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPaletteBuilder)
+* [ColorPalette Server-Side API](/api/colorpalette)

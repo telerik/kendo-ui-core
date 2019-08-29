@@ -42,7 +42,7 @@ The following example demonstrates the basic configuration for the DatePicker Ht
 
 ## Events
 
-You can subscribe to all DatePicker events. For a complete example on DatePicker events, refer to the [demo on handling DatePicker events](https://demos.telerik.com/aspnet-core/datepicker/events).
+You can subscribe to all DatePicker [events](/api/datepicker). For a complete example on DatePicker events, refer to the [demo on handling DatePicker events](https://demos.telerik.com/aspnet-core/datepicker/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 

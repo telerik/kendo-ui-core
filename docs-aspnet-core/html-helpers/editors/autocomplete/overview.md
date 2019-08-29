@@ -124,7 +124,7 @@ The following example demonstrates the basic configuration of the AutoComplete H
         }
 
         $(function () {
-            //Notice that the Name() of the AutoComplete is used to get its client-side instance.
+            // The Name() of the AutoComplete is used to get its client-side instance.
             var autocomplete = $("#autocomplete").data("kendoAutoComplete");
             console.log(autocomplete);
         });
@@ -133,7 +133,8 @@ The following example demonstrates the basic configuration of the AutoComplete H
 
 ## Functionality and Features
 
-The AutoComplete provides options for [model binding]({% slug modelbinding_autocomplete_aspnetcore %}).
+* [Model binding]({% slug modelbinding_autocomplete_aspnetcore %})
+* [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})
 
 ## Events
 

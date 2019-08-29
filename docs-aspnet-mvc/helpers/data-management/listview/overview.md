@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ListView | Telerik UI for ASP.NET MVC HTML Helpers
+page_title: ListView Overview | Telerik UI for ASP.NET MVC HTML Helpers
 description: "Get started with the server-side wrapper for the Telerik UI ListView HtmlHelper for ASP.NET MVC."
 slug: overview_listviewhelper_aspnetmvc
 position: 1

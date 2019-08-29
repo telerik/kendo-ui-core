@@ -1,24 +1,20 @@
 ---
 title: Overview
-page_title: Diagram | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI Diagram widget for ASP.NET MVC."
+page_title: Diagram Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Get started with the server-side wrapper for the Telerik UI Diagram HtmlHelper for ASP.NET MVC."
 slug: overview_diagramhelper_aspnetmvc
 position: 1
 ---
 
 # Diagram HtmlHelper Overview
 
-The Diagram HtmlHelper extension is a server-side wrapper for the [Kendo UI Diagram](https://demos.telerik.com/kendo-ui/diagram/index) widget.
+The Telerik UI Diagram HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Diagram widget.
 
-## Getting Started
+The Diagram represents information in a schematic way and according to particular visualization techniques.
 
-### The Basics
+* [Demo page for the Diagram](https://demos.telerik.com/aspnet-mvc/diagram)
 
-The Kendo UI Diagram for ASP.NET MVC can be bound through Ajax binding. This means that the Diagram makes Ajax requests to get the data.
-
-### Configuration
-
-Below are listed the steps for you to follow when configuring the Kendo UI Diagram for ASP.NET MVC.
+## Basic Configuration
 
 1. Return the data as JSON.
 
@@ -27,8 +23,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
             return Json(DiagramDataRepository.OrgChart(), JsonRequestBehavior.AllowGet);
         }
 
-<!--_-->
-1. In the view, configure the Diagram to use the action method created in the previous step.
+1. In the view, configure the Diagram to use the action method that was created in the previous step.
 
     ```ASPX
         <%= Html.Kendo().Diagram()
@@ -55,11 +50,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
         )
     ```
 
-## Event Handling
+## Events
 
-You can subscribe to all Diagram [events](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#events).
+You can subscribe to all Diagram [events](/api/diagram). For a complete example on basic Diagram events, refer to the [demo on using the events of the Diagram](https://demos.telerik.com/aspnet-mvc/diagram/events).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -80,7 +75,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function diagram_click() {
-            // Handle the click event
+            // Handle the click event.
         }
     </script>
 ```
@@ -101,12 +96,12 @@ The following example demonstrates how to subscribe to events by a handler name.
 
     <script>
         function diagram_click() {
-            // Handle the click event
+            // Handle the click event.
         }
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -121,9 +116,7 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
-## Reference
-
-### Existing Instances
+## Referencing Existing Instances
 
 To reference an existing Kendo UI Diagram instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Diagram API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
 
@@ -137,12 +130,5 @@ To reference an existing Kendo UI Diagram instance, use the [`jQuery.data()`](ht
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: DiagramBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DiagramBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Diagram Widget](http://docs.telerik.com/kendo-ui/controls/diagrams-and-maps/diagram/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Diagram HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/diagram)
+* [Server-Side API](/api/diagram)

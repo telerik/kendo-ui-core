@@ -143,7 +143,7 @@ The following example demonstrates the basic configuration of the Menu HtmlHelpe
 
 <script type="text/javascript">
     $(function () {
-        //Notice that the Name() of the Menu is used to get its client-side instance.
+        // The Name() of the Menu is used to get its client-side instance.
         var menu = $("#menu").data("kendoMenu");
         console.log(menu);
     });

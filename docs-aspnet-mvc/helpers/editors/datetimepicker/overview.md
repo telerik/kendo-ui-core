@@ -1,18 +1,20 @@
 ---
 title: Overview
-page_title: DateTimePicker | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI DateTimePicker widget for ASP.NET MVC."
+page_title: DateTimePicker Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the DateTimePicker HtmlHelper for ASP.NET MVC."
 slug: overview_datetimepickerhelper_aspnetmvc
 position: 1
 ---
 
 # DateTimePicker HtmlHelper Overview
 
-The DateTimePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/index) widget.
+The Telerik UI DateTimePicker HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI DateTimePicker widget.
 
-## Configuration
+The DateTimePicker allows the user to select a value from a calendar, a time drop-down list, or through direct input.
 
-Below are listed the steps for you to follow when configuring the Kendo UI DateTimePicker.
+* [Demo page for the DateTimePicker](https://demos.telerik.com/aspnet-mvc/datetimepicker)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -26,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
 
     ```ASPX
         <%: Html.Kendo().DateTimePicker()
-            .Name("datetimepicker") // The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
+            .Name("datetimepicker") // The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the DateTimePicker.
             .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the DateTimePicker.
             .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the DateTimePicker.
             .Value(DateTime.Now) // Set the value of the DateTimePicker.
@@ -34,18 +36,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
     ```
     ```Razor
         @(Html.Kendo().DateTimePicker()
-            .Name("datetimepicker") // The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
+            .Name("datetimepicker") // The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the DateTimePicker.
             .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the DateTimePicker.
             .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the DateTimePicker.
             .Value(DateTime.Now) // Set the value of the DateTimePicker.
         )
     ```
 
-## Event Handling
+## Events
 
-You can subscribe to all DateTimePicker [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#events).
+You can subscribe to all DateTimePicker [events](/api/datetimepicker). For a complete example on basic DateTimePicker events, refer to the [demo on using the events of the DateTimePicker](https://demos.telerik.com/aspnet-mvc/datetimepicker/events).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -96,7 +98,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -116,11 +118,9 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI DateTimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateTimePicker API](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#methods) to control its behavior.
+To reference an existing Kendo UI DateTimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateTimePicker client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#methods) to control its behavior.
 
     // Place the following after the DateTimePicker for ASP.NET MVC declaration.
     <script>
@@ -132,12 +132,7 @@ To reference an existing Kendo UI DateTimePicker instance, use the [`jQuery.data
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: DateTimePickerBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI DateTimePicker Widget](http://docs.telerik.com/kendo-ui/controls/editors/datetimepicker/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the DateTimePicker HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/datetimepicker)
+* [Using the API of the DateTimePicker HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/datetimepicker/api)
+* [DateTimePickerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder)
+* [DateTimePicker Server-Side API](/api/datetimepicker)

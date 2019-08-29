@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: ComboBox Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI ComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: ComboBox Overview | Telerik UI for ASP.NET Core HTML Helpers
 previous_url: /aspnet-core/helpers/html-helpers/combobox
 slug: htmlhelpers_combobox_aspnetcore
 position: 0
@@ -108,7 +108,7 @@ The following example demonstrates the basic configuration of the ComboBox HtmlH
 
 ## Events
 
-You can subscribe to all ComboBox [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#events). For a complete example on basic ComboBox events, refer to the [demo on using the events of the ComboBox](https://demos.telerik.com/aspnet-core/combobox/events).
+You can subscribe to all ComboBox [events](/api/combobox). For a complete example on basic ComboBox events, refer to the [demo on using the events of the ComboBox](https://demos.telerik.com/aspnet-core/combobox/events).
 
 ### Handling by Handler Name
 

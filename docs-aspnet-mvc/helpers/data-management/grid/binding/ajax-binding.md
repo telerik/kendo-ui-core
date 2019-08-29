@@ -4,6 +4,7 @@ page_title: Ajax Binding | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Learn how to implement Ajax binding with Telerik UI Grid HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/grid/ajax-binding
 slug: ajaxbinding_grid_aspnetmvc
+position: 2
 ---
 
 # Ajax Binding

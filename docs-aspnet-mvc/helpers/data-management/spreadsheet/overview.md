@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Spreadsheet | Telerik UI for ASP.NET MVC HTML Helpers
+page_title: Spreadsheet Overview | Telerik UI for ASP.NET MVC HTML Helpers
 description: "Get started with the server-side wrapper for the Kendo UI Spreadsheet widget for ASP.NET MVC."
 slug: overview_spreadsheethelper_aspnetmvc
 position: 1

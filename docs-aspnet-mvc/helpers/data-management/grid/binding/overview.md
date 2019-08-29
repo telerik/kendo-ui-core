@@ -3,6 +3,7 @@ title: Data Binding
 page_title: Data Binding | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Learn the basics about the Ajax and server binding of the Telerik UI Grid HtmlHelper for ASP.NET MVC."
 slug: databinding_grid_aspnetmvc
+position: 1
 ---
 
 # Data Binding

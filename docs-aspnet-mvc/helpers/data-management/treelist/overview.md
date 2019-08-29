@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TreeList | Telerik UI for ASP.NET MVC HTML Helpers
+page_title: TreeList Overview | Telerik UI for ASP.NET MVC HTML Helpers
 description: "Get started with the server-side wrapper for the Telerik UI TreeList HtmlHelper for ASP.NET MVC."
 slug: overview_treelisthelper_aspnetmvc
 position: 1

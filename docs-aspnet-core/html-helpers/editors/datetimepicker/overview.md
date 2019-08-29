@@ -43,7 +43,7 @@ The following example demonstrates how to define the DateTimePicker by using the
 
 ## Events
 
-You can subscribe to all DateTimePicker events. For a complete example on basic DateTimePicker events, refer to the [demo on using the events of the DateTimePicker](https://demos.telerik.com/aspnet-core/datetimepicker/events).
+You can subscribe to all DateTimePicker [events](/api/datetimepicker). For a complete example on basic DateTimePicker events, refer to the [demo on using the events of the DateTimePicker](https://demos.telerik.com/aspnet-core/datetimepicker/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
