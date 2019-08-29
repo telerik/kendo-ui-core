@@ -1,33 +1,33 @@
 ---
 title: Bind Map to View Model
-page_title: Bind Map to View Model | Kendo UI Map HtmlHelper for ASP.NET MVC
-description: "Binding a Map to Model in ASP.NET MVC applications."
+page_title: Bind Map to View Model | Telerik UI Map HtmlHelper for ASP.NET MVC
+description: "Learn how to bind a Map to the View Model in ASP.NET MVC applications."
 slug: howto_bindtomodel_map
 ---
 
 # Bind Map to View Model
 
-MVC enables you to natively bind parts of the page to the Model passed from the controller. Using this techiques you can also bind **Map** helper methods to the Model.
+MVC enables you to natively bind parts of the page to the Model that is passed from the controller.
 
-Also, populate the **Markers** collection to a collection defined in the Model.
+Using this technique, you can also bind Telerik UI Map HtmlHelper for ASP.NET MVC methods to the Model and populate the **Markers** collection to a collection that is defined in the Model.
 
-Models:
+The following example demonstrates how to set up the models.
 
 ```Map
 public class Map
 {
-    // Map properties.
+    // The Map properties.
     public string Name { get; set; }
     public double CenterLatitude { get; set; }
     public double CenterLongitude { get; set; }
     public int Zoom { get; set; }
 
-    // Tile layer properties.
+    // The tile layer properties.
     public string TileUrlTemplate { get; set; }
     public string[] TileSubdomains { get; set; }
     public string TileAttribution { get; set; }
 
-    // Markers collection.
+    // The markers collection.
     public IEnumerable<Marker> Markers { get; set; }
 }
 ```
@@ -45,7 +45,7 @@ public class Marker
 }
 ```
 
-Controller:
+The following example demonstrates how to set up the Controller.
 
 ```
 public ActionResult Index()
@@ -69,7 +69,7 @@ public ActionResult Index()
 }
 ```
 
-View:
+The following example demonstrates how to set up the View.
 
 ```
 @model TelerikMvcApp.Models.Map
@@ -95,9 +95,9 @@ View:
             }
         })
 )
-```s
+```
 
 ## See Also
 
-* [Overview of the Map HtmlHelper]({% slug overview_maphelper_aspnetmvc %})
-* [Map API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MapBuilder)
+* [Basic Usage of the Map HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/map)
+* [Server-Side API](/api/map)

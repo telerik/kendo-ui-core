@@ -1,20 +1,20 @@
 ---
 title: Overview
-page_title: DropDownTree | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI DropDownTree widget for ASP.NET MVC."
+page_title: DropDownTree Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI DropDownTree HtmlHelper for ASP.NET MVC."
 slug: overview_dropdowntreehelper_aspnetmvc
 position: 1
 ---
 
 # DropDownTree HtmlHelper Overview
 
-The DropDownTree HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/index) widget.
+The Telerik UI DropDownTree HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI DropDownTree widget.
 
-## Getting Started
+The DropDownTree represents an editor of hierarchical data, rendered in a tree-like structure, which provides multiple selection option and custom nodes.
 
-### Configuration
+* [Demo page for the DropDownTree](https://demos.telerik.com/aspnet-mvc/dropdowntree)
 
-Below are listed the steps for you to follow when configuring the Kendo UI DropDownTree.
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
     ```Razor
         @(Html.Kendo().DropDownTree()
-            .Name("dropdowntree") // The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
+            .Name("dropdowntree") // The name of the DropDownTree is mandatory. It specifies the "id" attribute of the DropDownTree.
             .Items(items =>
             {
                 items.Add().Text("Root Item 1")
@@ -37,13 +37,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                         childred.Add().Text("Child Item 1");
                         childred.Add().Text("Child Item 2");
                     });
-                items.Add().Text("Root Item 2"); // Add item with text "Item2")
+                items.Add().Text("Root Item 2"); // Add an item with text "Item2".
             })
         )
     ```
     ```ASPX
         <%: Html.Kendo().DropDownTree()
-            .Name("dropdowntree") // The name of the dropdowntree is mandatory. It specifies the "id" attribute of the widget.
+            .Name("dropdowntree") // The name of the DropDownTree is mandatory. It specifies the "id" attribute of the DropDownTree.
             .Items(items =>
             {
                 items.Add().Text("Root Item 1")
@@ -52,16 +52,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                         childred.Add().Text("Child Item 1");
                         childred.Add().Text("Child Item 2");
                     });
-                items.Add().Text("Root Item 2"); // Add item with text "Item2")
+                items.Add().Text("Root Item 2"); // Add an item with text "Item2".
             })
         %>
     ```
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all DropDownTree [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#events).
+The DropDownTree provides options for [Ajax binding]({% slug ajaxbinding_dropdowntreehelper_aspnetmvc %}).
 
-### By Handler Name
+## Events
+
+You can subscribe to all DropDownTree [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#events). For a complete example on basic DropDownTree events, refer to the [demo on using the events of the DropDownTree](https://demos.telerik.com/aspnet-mvc/dropdowntree/events).
+
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -102,7 +106,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -111,39 +115,32 @@ The following example demonstrates how to subscribe to events by a template dele
         .Events(e => e
             .Expand(@<text>
             function() {
-                // Handle the expand event inline
+                // Handle the expand event inline.
             }
             </text>)
             .Collapse(@<text>
             function() {
-                // Handle the collapse event inline
+                // Handle the collapse event inline.
             }
             </text>)
         )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
+To reference an existing DropDownTree instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownTree client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#methods) to control its behavior.
 
-To reference an existing Kendo UI DropDownTree instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownTree API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#methods) to control its behavior.
-
-    // Place this after your Kendo DropDownTree for ASP.NET MVC declaration.
+    // Place the following after the DropDownTree for ASP.NET MVC declaration.
     <script>
         $(function() {
-            // The Name() of the dropdowntree is used to get its client-side instance.
+            // The Name() of the DropDownTree is used to get its client-side instance.
             var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
         });
     </script>
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: DropDownTreeBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownTreeBuilder)
-* [Ajax Binding of the DropDownTree HtmlHelper]({% slug ajaxbinding_dropdowntreehelper_aspnetmvc %})
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the DropDownList HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/dropdowntree)
+* [Using the API of the DropDownTree HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/dropdowntree/api)
+* [DropDownTreeBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownTreeBuilder)
+* [DropDownTree Server-Side API](/api/dropdowntree)

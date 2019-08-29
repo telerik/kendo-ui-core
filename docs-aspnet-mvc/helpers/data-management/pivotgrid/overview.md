@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: PivotGrid | Telerik UI for ASP.NET MVC HTML Helpers
+page_title: PivotGrid Overview | Telerik UI for ASP.NET MVC HTML Helpers
 description: "Learn the basics when working with the Telerik UI PivotGrid HtmlHelper for ASP.NET MVC."
 slug: overview_pivotgridhelper_aspnetmvc
 position: 1

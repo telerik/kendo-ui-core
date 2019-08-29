@@ -110,7 +110,7 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 
     <script type="text/javascript">
         $(function () {
-            //Notice that the Name() of the MultiColumnComboBox is used to get its client-side instance.
+            // The Name() of the MultiColumnComboBox is used to get its client-side instance.
             var multicolumncombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
             console.log(multicolumncombobox);
         });

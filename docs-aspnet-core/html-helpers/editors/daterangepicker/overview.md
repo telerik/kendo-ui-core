@@ -30,7 +30,7 @@ The following example demonstrates the basic configuration for the DateRangePick
 
 ## Events
 
-You can subscribe to all DateRangePicker events. For a complete example on basic DateRangePicker events, refer to the [demo on using the events of the DateRangePicker](https://demos.telerik.com/aspnet-core/daterangepicker/events).
+You can subscribe to all DateRangePicker [events](/api/daterangepicker). For a complete example on basic DateRangePicker events, refer to the [demo on using the events of the DateRangePicker](https://demos.telerik.com/aspnet-core/daterangepicker/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 

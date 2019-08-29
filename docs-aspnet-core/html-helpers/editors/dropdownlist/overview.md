@@ -92,7 +92,7 @@ The following example demonstrates the basic configuration of the DropDownList H
 
     <script type="text/javascript">
         $(function () {
-            //Notice that the Name() of the DropDownList is used to get its client-side instance.
+            // The Name() of the DropDownList is used to get its client-side instance.
             var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
             console.log(dropdownlist);
         });

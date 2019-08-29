@@ -1,6 +1,6 @@
 ---
 title: Use Custom DataSource to Bind to ToDataSourceResult Output
-page_title: Use Custom DataSource to Bind to ToDataSourceResult Output | Kendo UI DropDownList HtmlHelper for ASP.NET MVC
+page_title: Use Custom DataSource to Bind to ToDataSourceResult Output | Telerik UI DropDownList HtmlHelper for ASP.NET MVC
 description: "Use a custom DataSource to bind to a ToDataSourceResult output in ASP.NET MVC applications."
 slug: howto_usecustomdatasource_bindtodatasourceoutput_ddlaspnetmvc
 ---
@@ -13,5 +13,5 @@ To see the example, refer to the GitHub repo on how to [use a custom DataSource 
 
 ## See Also
 
-* [Overview of the DropDownList HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
-* [DropDownListBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+* [DropDownListBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+* [DropDownList Server-Side API](/api/dropdownlist)
