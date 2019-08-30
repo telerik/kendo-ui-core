@@ -76,7 +76,6 @@ The following example demonstrates how to access an existing ListBox instance.
           var listbox = $("#listbox").getKendoListBox();
       });
       </script>
-
 ## See Also
 
 * [Basic Usage of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/index)

@@ -89,7 +89,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI TimePicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TimePicker API](/api/timepicker) to control its behavior.
+To reference an existing Telerik UI TimePicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [TimePicker client-side API](/api/timepicker) to control its behavior.
 
 ```
     // Place the following after the TimePicker for ASP.NET Core declaration.

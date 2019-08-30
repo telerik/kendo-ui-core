@@ -120,4 +120,4 @@ The ListBox provides templates for its items that are passed as а function or s
 ## See Also
 
 * [Templates in the Telerik UI ListBox for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/templates)
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

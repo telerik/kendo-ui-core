@@ -27,7 +27,7 @@ The following example demonstrates how to define the FlatColorPicker by using th
 
 ## Events
 
-You can subscribe to all FlatColorPicker events.
+You can subscribe to all FlatColorPicker [events](/api/flatcolorpicker).
 
 ### Handling by Handler Name
 

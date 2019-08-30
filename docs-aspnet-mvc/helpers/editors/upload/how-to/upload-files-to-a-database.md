@@ -1,6 +1,6 @@
 ---
 title: Upload Files to Databases
-page_title: Upload Files to Databases | Kendo UI Upload HtmlHelper for ASP.NET MVC
+page_title: Upload Files to Databases | Telerik UI Upload HtmlHelper for ASP.NET MVC
 description: "Upload files to a database in ASP.NET MVC applications."
 slug: howto_uploadfilesdatabases_uploadaspnetmvc
 ---
@@ -11,5 +11,6 @@ To see the example, refer to the project on how to [upload files to a database](
 
 ## See Also
 
-* [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [UploadBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [Basic Usage by the Upload HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/upload)
+* [UploadBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [Upload Server-Side API](/api/upload)

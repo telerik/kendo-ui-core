@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI NumericTextBox HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI NumericTextBox widget.
 
-The NumericTextBox allows the user to select numeric values through direct input or using spinner buttons
+The NumericTextBox allows the user to select numeric values through direct input or using spinner buttons.
 
 * [Demo page for the NumericTextBox](https://demos.telerik.com/aspnet-core/numerictextbox/index)
 

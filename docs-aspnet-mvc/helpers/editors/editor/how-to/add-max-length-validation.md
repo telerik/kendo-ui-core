@@ -1,6 +1,6 @@
 ---
 title: Add maxlength Validations
-page_title: Add maxlength Validations | Kendo UI Editor HtmlHelper for ASP.NET MVC
+page_title: Add maxlength Validations | Telerik UI Editor HtmlHelper for ASP.NET MVC
 description: "Define custom Kendo UI validators to check the length of the text content through custom validation rules when working with the Editor HtmlHelper in ASP.NET MVC applications."
 slug: howto_addmaxlengthvalidation_editoraspnetmvc
 position: 0
@@ -54,5 +54,7 @@ The following example demonstrates how to define custom Kendo UI validators thro
 
 ## See Also
 
-* [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
-* [EditorBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [Basic Usage of the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor)
+* [Using the API of the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/api)
+* [EditorBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [Editor Server-Side API](/api/editor)

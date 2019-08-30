@@ -8,7 +8,7 @@ position: 2
 
 # Localization
 
-You can customize the messages for each toolbar command button of the ListBox.
+You can customize the `Messages()` for each toolbar command button of the ListBox.
 
 These messages serve as tooltip text when the user hovers over the buttons.
 
@@ -50,4 +50,4 @@ These messages serve as tooltip text when the user hovers over the buttons.
 ## See Also
 
 * [RTL Support by the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/right-to-left-support)
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

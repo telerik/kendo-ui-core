@@ -1,6 +1,6 @@
 ---
 title: Tooltip
-page_title: Rating Tooltip | Telerik UI for ASP.NET MVC HTML Helpers
+page_title: Tooltip | Telerik UI Rating HtmlHelper for ASP.NET MVC
 description: "Get started with the Telerik UI for ASP.NET MVC Rating HtmlHelper and learn how to configure the tooltip."
 slug: tooltip_ratinghelper_aspnetmvc
 position: 5
@@ -8,9 +8,11 @@ position: 5
 
 # Tooltip
 
-Each Rating item displays a tooltip that is enabled by default and contains text equal to the item's value.
+By default, each Rating item displays a tooltip which contains text that equals the value of the item.
 
-## Default Tooltips
+## Rendering the Default Tooltip
+
+The following example demonstrates how to render the default tooltip.  
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -23,7 +25,7 @@ Each Rating item displays a tooltip that is enabled by default and contains text
 
 ## Disabling the Tooltips
 
-Setting the [`Tooltip`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) to false prevents the items to display tooltips when hovered.
+To prevent the tooltip from displaying on hover, set the [`Tooltip`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) to `false`.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -37,5 +39,5 @@ Setting the [`Tooltip`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fl
 
 ## See Also
 
-* [Tooltip by the Rating HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/rating/tooltip)
-* [API Reference of the Rating HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/Rating)
+* [Tooltips by the Rating HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/rating/tooltip)
+* [Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/Rating)

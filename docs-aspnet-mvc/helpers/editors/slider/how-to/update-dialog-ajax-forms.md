@@ -1,6 +1,6 @@
 ---
 title: Use the RangeSliderFor Method
-page_title: Use the RangeSliderFor Method | Kendo UI Slider HtmlHelper for ASP.NET MVC
+page_title: Use the RangeSliderFor Method | Telerik UI Slider HtmlHelper for ASP.NET MVC
 description: "Use the RangeSliderFor method to update a model in ASP.NET MVC applications."
 slug: howto_userangesliderfor_slideraspnetmv
 ---
@@ -9,7 +9,7 @@ slug: howto_userangesliderfor_slideraspnetmv
 
 The RangeSlider HtmlHelper renders two hidden inputs behind the scenes.
 
-This behavior helps you consume and process a model property that holds an array of 2 numbers&mdash;start and end.
+This behavior helps you consume and process a model property that holds an array of two numbers&mdash;start and end.
 
 The following example demonstrates a very basic approach for using, consuming, and updating such a model with the `RangeSliderFor` method.
 
@@ -28,7 +28,7 @@ public ActionResult Index()
 
 public ActionResult UpdateMyModel(MyModel model)
 {
-    // ToDo: Update the model in the database
+    // ToDo: Update the model in the database.
     return View("Index", model);
 }
 ```
@@ -45,12 +45,7 @@ public ActionResult UpdateMyModel(MyModel model)
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: SliderBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SliderBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Slider Widget](http://docs.telerik.com/kendo-ui/controls/editors/slider/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage by the Slider HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/slider)
+* [Using the API of the Slider HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/slider/api)
+* [SliderBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SliderBuilder)
+* [Slider Server-Side API](/api/slider)

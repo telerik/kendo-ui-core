@@ -1,6 +1,6 @@
 ---
 title: Label
-page_title: Rating Label | Telerik UI for ASP.NET MVC HTML Helpers
+page_title: Label | Telerik UI Rating HtmlHelper for ASP.NET MVC
 description: "Get started with the Telerik UI for ASP.NET MVC Rating HtmlHelper and learn how to configure the label."
 slug: label_ratinghelper_aspnetmvc
 position: 4
@@ -8,9 +8,13 @@ position: 4
 
 # Label
 
-The Rating displays a label by default that shows the current value out of the max value in the format `3 / 5`. If the widget does not have a selected value, the label will not be displayed initially and will be toggled after an item is selected.
+By default, the Rating displays a label which shows the current out of the max value in the `3 / 5` format.
 
-## Default Label
+If the rating does not have a selected value, the label will not be initially displayed and will be toggled after an item is selected.
+
+## Rendering the Default Label
+
+The following example demonstrates how to render the default label.  
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -23,9 +27,7 @@ The Rating displays a label by default that shows the current value out of the m
 
 ## Customizing the Label
 
-Customizing the text of the label could be achieved through the [`Label.TemplateId`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingLabelSettingsBuilder#templateidsystemstring) property.
-
-By default, the template automatically receives the `value` and `maxValue` in the data object. This allows those properties to be used inside the template through [the Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
+To customize the text of the label, use the [`Label.TemplateId`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingLabelSettingsBuilder#templateidsystemstring) property. By default, the template automatically receives the `value` and `maxValue` in the data object which allows you to use those properties inside the template through [the Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -45,7 +47,7 @@ By default, the template automatically receives the `value` and `maxValue` in th
 
 ## Disabling the Label
 
-Setting the [`Label`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#labelsystemstring) property to false prevents the label from, being displayed.
+To prevent the label from being displayed, set the [`Label`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Fluent/RatingBuilder#labelsystemstring) property to `false`.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -59,5 +61,5 @@ Setting the [`Label`](https://docs.telerik.com/aspnet-mvc/api//Kendo.Mvc.UI.Flue
 
 ## See Also
 
-* [Label by the Rating HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/rating/label)
-* [API Reference of the Rating HtmlHelper for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/Rating)
+* [Labels by the Rating HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/rating/label)
+* [Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/Rating)

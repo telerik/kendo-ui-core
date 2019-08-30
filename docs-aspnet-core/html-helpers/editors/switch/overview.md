@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Switch Overview | UI for ASP.NET Core Switch HtmlHelper
+page_title: Switch Overview | Telerik UI Switch HtmlHelper for ASP.NET Core
 description: "Learn the basics when working with the Telerik UI Switch for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_switchhelper_aspnetcore
 position: 1
@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI Switch HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Switch widget.
 
-The Switch displays two exclusive choices. With the new Switch variables introduced in the Kendo UI for jQuery R1 2019 release, the default styling of the Switch component for each of the [Sass-based Kendo UI for jQuery themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout.
+The Switch displays two exclusive choices. With the new Switch variables introduced in the Kendo UI for jQuery R1 2019 release, the default styling of the Switch component for each of the [Sass-based Kendo UI for jQuery themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout. For more information and examples, refer to the article on implementing a [custom layout for the Switch](https://github.com/telerik/kendo-themes/wiki/Change-the-Switch-Layout).
 
 * [Demo page for the Switch](https://demos.telerik.com/aspnet-core/switch/index)
 

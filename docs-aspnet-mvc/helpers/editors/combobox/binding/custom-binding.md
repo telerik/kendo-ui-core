@@ -78,7 +78,7 @@ You can use a custom DataSource and bind the ComboBox to a `ToDataSourceResult` 
 
 ## Sending Parameters to the Server
 
-The following example demonstrates how to configure the AutoComplete to send parameters to the server.
+The following example demonstrates how to configure the ComboBox to send parameters to the server.
 
 ```ASPX
      <%: Html.Kendo().ComboBox()

@@ -1,7 +1,7 @@
 ---
 title: Image Browser
-page_title: Image Browser | Kendo UI Editor HtmlHelper for ASP.NET MVC
-description: "Import and export different types of documents with the Kendo UI Editor widget for ASP.NET MVC."
+page_title: Image Browser | Telerik UI Editor HtmlHelper for ASP.NET MVC
+description: "Learn about the Image Browser component of the Telerik UI Editor HtmlHelper for ASP.NET MVC."
 slug: overview_imagebrowser_aspnetmvc
 position: 2
 ---
@@ -12,24 +12,19 @@ By default, the **Insert Image** tool opens a simple dialog that allows you to t
 
 ![The Insert Image dialog](editor-insert-image.png)
 
-## Overview
-
-As of the Kendo UI Q3 2012 release, you can:
-
-* Choose images by browsing through a list of predefined files and directories.
-* Upload new images.
+The Editor also supports another way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported. For a runnable example, refer to the [demo on file and image browser in the Editor](https://demos.telerik.com/aspnet-mvc/editor/imagebrowser).
 
 ![The Image Browser dialog](editor-image-browser.png)
 
-## Configuration
+## Getting Started
 
-The **Image Browser** tool automatically appears as a file browser when the `ImageBrowser` method is defined in the code.
+The Image Browser tool automatically appears as a file browser when the `ImageBrowser` method is defined in the code.
 
 ```Razor
 @(Html.Kendo().Editor()
     .Name("Editor")
     .ImageBrowser(imageBrowser => imageBrowser
-        // {0} is a placeholder, which will be replaced with the item's Name—the file.
+        // {0} is a placeholder, which will be replaced with the item Name—the file.
         .Image("~/Content/UserFiles/Images/{0}")
         .Read("Read", "ImageBrowser")
         .Create("Create", "ImageBrowser")
@@ -37,7 +32,7 @@ The **Image Browser** tool automatically appears as a file browser when the `Ima
         .Upload("Upload", "ImageBrowser")
         .Thumbnail("Thumbnail", "ImageBrowser"))
     .FileBrowser(fileBrowser => fileBrowser
-         // {0} is a placeholder, which will be replaced with the item's Name—the file.
+         // {0} is a placeholder, which will be replaced with the item Name—the file.
         .File("~/Content/UserFiles/Images/{0}")
         .Read("Read", "FileBrowser")
         .Create("Create", "FileBrowser")
@@ -66,9 +61,9 @@ The **Image Browser** tool automatically appears as a file browser when the `Ima
 %>
 ```
 
-### Built-In Options
+## Built-In Options
 
-The `Kendo.Mvc` assembly enables you to use the built-in `EditorImageBrowserController` class. It enables you to easily implement an MVC controller that consumes data from the **Image Browser** tool. In this way, you can populate it with images from the server, update them, and upload new ones.
+The `Kendo.Mvc` assembly enables you to use the built-in `EditorImageBrowserController` class. It allows you to implement an MVC controller that consumes data from the **Image Browser** tool. In this way, you can populate it with images from the server, update them, and upload new ones.
 
     public class ImageBrowserController : EditorImageBrowserController
     {
@@ -127,9 +122,7 @@ The `Kendo.Mvc` assembly enables you to use the built-in `EditorImageBrowserCont
 
 Similarly, you can use the `EditorFileBrowserController` class to create a controller for the **File Browser** tool as well.
 
-> The consumed parameters for the `create`, `read`, `destroy`, and `upload` operations that are published in the article on the Image Browser of the Editor widget differ.
-
-The following list provides information about the default requests and responses for the `create`, `read`, `destroy`, and `upload` operations used with the Editor HtmlHelper.
+The following list provides information about the default requests and responses for the `create`, `read`, `destroy`, and `upload` operations used with the Editor HtmlHelper. The consumed parameters for the `create`, `read`, `destroy`, and `upload` operations for the [Image Browser of the kendo UI for jQuery Editor](https://docs.telerik.com/kendo-ui/controls/editors/editor/imagebrowser) differ.
 
 - `create`&mdash;Makes a `POST` request for the creation of a directory with the following parameters. Does not expect a response.
 
@@ -137,7 +130,7 @@ The following list provides information about the default requests and responses
         {"Name":"New folder name","Size":0,"EntryType":1}
     ```
 
-- `read`&mdash;Makes a `POST` request that contains the `Name` parameter to specify the path which is browsed. Expects a file listing in the following format:
+- `read`&mdash;Makes a `POST` request that contains the `Name` parameter to specify the path which is browsed. Expects a file listing in the following format where `Name` is the file or directory name, `EntryType` is either a `0` (zero) for a file or a `1` (one) for a directory. `Size` is the file size and is optional.
 
     ```
         [
@@ -147,13 +140,11 @@ The following list provides information about the default requests and responses
         ]
     ```
 
-    Where `Name` is the file or directory name, `EntryType` is either a **0** (zero) for a file or a **1** (one) for a directory. `Size` is the file size  and is optional.
-
 - `destroy`&mdash;Makes a `POST` request with the following parameters:
 
-    - `Name`&mdash;The file or directory to be deleted.
+    - `Name`&mdash;The file or directory that will be deleted.
     - `path`&mdash;The directory in which the file or directory resides.
-    - `EntryType`&mdash;Whether a file or a directory is to be deleted (**0** (zero) or **1** (one)).
+    - `EntryType`&mdash;Whether a file or a directory will be deleted (`0` (zero) or `1` (one)).
     - `Size`&mdash;(Optional) The file size as provided by the `read` response.
 
 - `upload`&mdash;Makes a `POST` request to the `upload` action. The request contains `FormData` containing the upload path, file name, and type. Its payload consists of the uploaded file. The expected response is a `file` object in the following format:
@@ -164,20 +155,12 @@ The following list provides information about the default requests and responses
 
 - `imageUrl`&mdash;Used by the Editor to generate the `src` attribute of the original image when it is inserted. It results in a `GET` request generated by the browser for each inserted image. The URL can point to a file system or to a service and is parameterized&mdash;the `{0}` placeholder denotes the `path` and `fileName` as received from the `Read` service. By default, the placeholder value is URL-encoded.
 
-### Customization
+## Customization
 
-Your project might require you to get files from sources other than the server such as databases, cloud storage utilities, and other. In such cases, you can use the `IImageBrowserController` and  `IFileBrowserController` interfaces. They help you create a controller that provides firm command over the actions that are intended to serve and consume files.
-
-For an example of such a custom controller, refer to the article on how to [store images in the database with the Image Browser]({%slug howto_storeimagesindatabases_editoraspnetmvc%}).
+Your project might require you to get files from sources other than the server such as databases, cloud storage utilities, and other. In such cases, you can use the `IImageBrowserController` and  `IFileBrowserController` interfaces. They help you create a controller that provides firm command over the actions that are intended to serve and consume files. For an example, refer to the article on how to [store images in the database with the Image Browser]({%slug howto_storeimagesindatabases_editoraspnetmvc%}).
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: EditorBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Editor Widget](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [File and Image Browser by the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/imagebrowser)
+* [EditorBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [Editor Server-Side API](/api/editor)

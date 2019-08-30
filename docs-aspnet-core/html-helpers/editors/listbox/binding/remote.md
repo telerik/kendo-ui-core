@@ -107,4 +107,4 @@ When you use complex data objects, use the `DataTextField` and `DataValueField` 
 ## See Also
 
 * [Remote Data Binding of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/templates)
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

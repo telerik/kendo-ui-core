@@ -33,7 +33,7 @@ You can use a custom DataSource and bind the ComboBox to a `ToDataSourceResult` 
 
     ```ASPX
         <%: Html.Kendo().DropDownList()
-            .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+            .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the DropDownList.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
             .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
             .DataSource(source =>
@@ -47,15 +47,15 @@ You can use a custom DataSource and bind the ComboBox to a `ToDataSourceResult` 
                     })
                     .Schema(schema =>
                     {
-                    schema.Data("Data") // Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                        .Total("Total"); // Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                    schema.Data("Data") // Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                        .Total("Total"); // Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
                     });
             })
         %>
     ```
     ```Razor
         @(Html.Kendo().DropDownList()
-            .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+            .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the DropDownList.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
             .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
             .DataSource(source =>
@@ -69,8 +69,8 @@ You can use a custom DataSource and bind the ComboBox to a `ToDataSourceResult` 
                     })
                     .Schema(schema =>
                     {
-                        schema.Data("Data") // Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                            .Total("Total"); // Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                        schema.Data("Data") // Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                            .Total("Total"); // Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
                     });
             })
         )
