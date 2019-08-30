@@ -1,6 +1,6 @@
 ---
 title: Model Binding
-page_title: Model Binding | Telerik UI MultiColumnComboBox for ASP.NET Core
+page_title: Model Binding | Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core
 description: "Implement model binding in the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: modelbinding_multicolumncombobox_aspnetcore
 position: 2

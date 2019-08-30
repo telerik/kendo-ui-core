@@ -1,6 +1,6 @@
 ---
 title: Filtering
-page_title: Filtering | Telerik UI MultiColumnComboBox for ASP.NET Core
+page_title: Filtering | Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core
 description: "Set the filter options of the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: filtering_multicolumncombobox_aspnetcore
 position: 4

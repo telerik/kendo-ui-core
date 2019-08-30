@@ -21,7 +21,7 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 
 ```
 	@(Html.Kendo().MaskedTextBox()
-		.Name("maskedtextbox") // The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the widget.
+		.Name("maskedtextbox") // The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the MaskedTextBox.
 		.Mask("(000) 000-0000") // Set the mask value of the MaskedTextBox.
 		.Value("(123) 345-6789") // Set the value of the MaskedTextBox.
 	)

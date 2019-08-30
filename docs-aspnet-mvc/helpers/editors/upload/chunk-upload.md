@@ -1,14 +1,14 @@
 ---
 title: Chunk Upload
-page_title: Chunk Upload | Kendo UI Upload HtmlHelper for ASP.NET MVC
-description: "Upload files in chunks in asynchronous mode in the Kendo UI Upload widget."
+page_title: Chunk Upload | Telerik UI Upload HtmlHelper for ASP.NET MVC
+description: "Learn how to upload large files in chunks when using the Telerik UI Upload HtmlHelper for ASP.NET MVC."
 slug: chunkupload_uploadhelper_aspnetmvc
 position: 3
 ---
 
 # Chunk Upload
 
-The chunk upload of files enables the user to send large files, which are uploaded asynchronously with multiple requests, to the server and to pause and resume the file upload for the time the application is open in the browser.
+The chunk upload of files enables the user to send large files which are uploaded asynchronously with multiple requests to the server and to pause and resume the file upload for the time the application is open in the browser.
 
 > * The chunk upload functionality is available as of the Kendo UI 2017 R2 release.
 > * The chunk upload functionality is available only in the [asynchronous mode](http://docs.telerik.com/kendo-ui/controls/editors/upload/modes.html#asynchronous-mode) of the Upload.
@@ -100,9 +100,9 @@ public ActionResult ChunkSave(IEnumerable<HttpPostedFileBase> files, string meta
 }
 ```
 
-## Fine-Tuning
+## Modifying the Chunk Upload
 
-To modify or fine-tune the chunk upload, use any of the following configuration options:
+To modify the chunk upload, use any of the following configuration options:
 
 * `Concurrent` ([async.concurrent](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.concurrent))&mdash;Controls whether the selected files are uploaded simultaneously or one after the other.
 * `AutoRetryAfter` ([async.autoRetryAfter](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#configuration-async.autoRetryAfter))&mdash;The time interval in milliseconds after which the Upload attempts to retry a failed upload.
@@ -121,46 +121,34 @@ To modify or fine-tune the chunk upload, use any of the following configuration 
         )
     )
 
-## Transfer of Chunks
+## Transferring of Chunks
 
 The chunk upload functionality separates the selected files chunks or blobs of data. These chunks are automatically sent to the server to the destination that is set up in the `saveUrl` option over an AJAX request. Because the chunks are sent in a specific order, the server is expected to send back a response with the meta data of the chunk that is uploaded. This response indicates to the Upload that it can proceed either with the next chunk (`"uploaded": false`) or with the next file (`"uploaded": true`).
 
-The response has to include the meta data from the following example.
+The response has to include the metadata from the following example.
 
     {
         "uploaded": true | false,
-        /*  False instructs the Upload to send the next chunk of data.
-            True indicates that the last chunk is processed, the upload was successful
+        /*  false instructs the Upload to send the next chunk of data.
+            true indicates that the last chunk is processed, the upload was successful
             and the upload of the next file can continue. */
 
         "fileUid": Number
-        /* The UID of the uploaded chunk, so that the Upload can get the next chunk and send it. */
+        /* The UID of the uploaded chunk so that the Upload can get the next chunk and send it. */
     }
 
 The following example demonstrates a valid server response.
 
-
-
     {"uploaded":true,"fileUid":"b95ee9fa-85e8-482c-946d-a12ed6dbefed"}
 
-## Server-side Implementation
+## Implementing on the Server
 
-The server-side implementation entirely depends on the application requirements and logic. The approach that is demonstrated in this article and in the [chunk upload demo](http://demos.telerik.com/aspnet-mvc/upload/chunkupload) can serve you as an example on how to handle chunks and merge them into files.
+The server-side implementation entirely depends on the application requirements and logic. The suggested approach can serve you as an example on how to handle chunks and merge them into files.
 
-> As a client-side solution, the Upload does not handle validation. File validation and security requirements should be handled on the server by using application logic.
+> As a client-side solution, the Upload does not handle validation. File validation and security requirements have to be handled on the server by using application logic.
 
 ## See Also
 
-* [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
-* [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
-* [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
-* [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Upload HtmlHelper Troubleshooting]({% slug troubleshoot_uploadhelper_aspnetmvc %})
+* [Chunk Upload by the Upload HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/upload/chunkupload)
+* [UploadBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [Upload Server-Side API](/api/upload)

@@ -1,7 +1,7 @@
 ---
 title: Virtualization
 page_title: Virtualization | Telerik UI DropDownList HtmlHelper for ASP.NET Core
-description: "Learn how to setup the Virtualization feature of the Telerik UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn how to set up the virtualization feature of the Telerik UI DropDownList HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_dropdownlist_virtualization_aspnetcore
 position: 5
 ---

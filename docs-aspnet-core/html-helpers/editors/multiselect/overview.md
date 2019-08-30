@@ -118,7 +118,7 @@ The following example demonstrates the basic configuration of the MultiSelect Ht
 
 ## Events
 
-You can subscribe to all MultiSelect [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#events). For a complete example on basic MultiSelect events, refer to the [demo on using the events of the MultiSelect](https://demos.telerik.com/aspnet-core/multiselect/events).
+You can subscribe to all MultiSelect [events](/api/multiselect). For a complete example on basic MultiSelect events, refer to the [demo on using the events of the MultiSelect](https://demos.telerik.com/aspnet-core/multiselect/events).
 
 ### Handling by Handler Name
 

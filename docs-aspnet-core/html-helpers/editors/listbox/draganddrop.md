@@ -42,4 +42,4 @@ You can also customize the drag-and-drop appearance of the ListBox by using its 
 ## See Also
 
 * [Dragging and Dropping by the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/drag-and-drop)
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

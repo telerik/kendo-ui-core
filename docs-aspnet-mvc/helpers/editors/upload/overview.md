@@ -1,18 +1,20 @@
 ---
 title: Overview
-page_title: Upload | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI Upload widget for ASP.NET MVC."
+page_title: Upload Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI Upload HtmlHelper for ASP.NET MVC."
 slug: overview_uploadhelper_aspnetmvc
 position: 1
 ---
 
 # Upload HtmlHelper Overview
 
-The Upload HtmlHelper extension is a server-side wrapper for the [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) widget.
+The Telerik UI Upload HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Upload widget.
 
-## Configuration
+The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
 
-Below are listed the steps for you to follow when configuring the Kendo UI Upload.
+* [Demo page for the Upload](https://demos.telerik.com/aspnet-mvc/upload)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -22,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
             return View();
         }
 
-1. Add the Upload to the view.
+1. Add the Upload to the view. The `name` attribute is required and must be unique. It is used as a form field name in the requests to the server.
 
     ```ASPX
         <%: Html.Kendo().Upload()
@@ -40,8 +42,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
             )
         )
     ```
-
-    The name attribute is required and must be unique. It is used as a form field name in the requests to the server.
 
 1. Implement the `Save` controller action.
 
@@ -63,11 +63,17 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
 
 1. Build and run the application. The uploaded files appear in the `App_Data` folder.
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all Upload [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#events).
+* [Modes of operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
+* [Chunk upload of files]({% slug chunkupload_uploadhelper_aspnetmvc %})
+* [Sending and receiving metadata]({% slug metadata_uploadhelper_aspnetmvc %})
 
-### By Handler Name
+## Events
+
+You can subscribe to all Upload [events](/api/upload). For a complete example on basic Upload events, refer to the [demo on using the events of the Upload](https://demos.telerik.com/aspnet-mvc/upload/events).
+
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -108,7 +114,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -128,11 +134,9 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI Upload instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Upload API](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#methods) to control its behavior.
+To reference an existing Upload instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Upload client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload#methods) to control its behavior.
 
     // Place the following after the Upload for ASP.NET MVC declaration.
     <script>
@@ -144,18 +148,7 @@ To reference an existing Kendo UI Upload instance, use the [`jQuery.data()`](htt
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: UploadBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
-* [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
-* [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
-* [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_uploadhelper_aspnetmvc %})
-* [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
-* [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
-* [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Upload HtmlHelper Troubleshooting]({% slug troubleshoot_uploadhelper_aspnetmvc %})
+* [Basic Usage by the Upload HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/upload)
+* [Using the API of the Upload HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/upload/api)
+* [UploadBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [Upload Server-Side API](/api/upload)

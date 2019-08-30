@@ -12,7 +12,7 @@ By default, the ListBox is set into a single-selection mode.
 
 ## Enabling Multiple Selection
 
-To enable its multiple-selection mode, add `ListBoxSelectable.Multiple` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Telerik UI ListBox together or reordered as a set among other items.
+To enable the multiple-selection mode of the ListBox, add `ListBoxSelectable.Multiple` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Telerik UI ListBox together or reordered as a set among other items.
 
 ```
     @(Html.Kendo().ListBox()
@@ -62,4 +62,4 @@ The ListBox allows you to reorder the selected items by using any of the followi
 
 ## See Also
 
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)

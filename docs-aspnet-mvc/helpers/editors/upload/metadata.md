@@ -1,22 +1,26 @@
 ---
-title: Handling of Metadata
-page_title: Handling of Metadata | Kendo UI Upload HtmlHelper for ASP.NET MVC
-description: "Get started with the asynchronous uploading of metadata in Telerik UI for ASP.NET MVC helpers."
+title: Metadata
+page_title: Metadata | Telerik UI Upload HtmlHelper for ASP.NET MVC
+description: "Learn how to send and receive metadata when uploading files with the Telerik UI Upload HtmlHelper for ASP.NET MVC."
 slug: metadata_uploadhelper_aspnetmvc
 position: 4
 ---
 
-# Handling of Metadata
+# Metadata
 
-Asynchronous uploading usually means that you lose the association between the files and the context that they originate from. Take an e-mail application, for example. The save handler must associate the uploaded files to a particular message. The message and the file might even be processed on different servers in a load balancing or a cloud-computing scenario.
+Usually, asynchronous uploading means that you lose the association between the files and the context they originate from.
 
-## Send Metadata to Save Actions
+For example, in an application, the `save` handler must associate the uploaded files with a particular message. The message and the file might be processed on different servers in a load-balancing or cloud-computing scenario.
 
-### Use Route Values
+## Sending Metadata
 
-The metadata known during the rendering can be forwarded to the `save` action as route variables.
+You can send metadata by [using route values](#forwarding-metadata-through-route-values) or by [using the `upload` event on the client](#adding-metadata-on-the-client).
 
-Below are listed the steps for you to follow when configuring the sending of metadata to the `save` action by using route values in the Kendo UI Upload.
+### Forwarding Metadata through Route Values
+
+The suggested approach is also applicable to the `remove` action and `remove` event.
+
+To forward the metadata that is known during the rendering to the `save` action as route variables:
 
 1. Generate an unique message ID and store it in the `ViewData`.
 
@@ -55,7 +59,7 @@ Below are listed the steps for you to follow when configuring the sending of met
         {
             foreach (var file in attachments)
             {
-                // Some browsers send file names with full path. We only care about the file name.
+                // Some browsers send file names with full path but you have to take into account only the file name.
                 var fileName = Path.GetFileName(file.FileName);
                 var destinationPath = Path.Combine(
                     Server.MapPath("~/App_Data"), messageId, fileName);
@@ -67,19 +71,15 @@ Below are listed the steps for you to follow when configuring the sending of met
             return Content("");
         }
 
-The same technique is applicable with the `remove` action and `remove` event.
+### Adding Metadata on the Client
 
-### Use Upload Client-Side Event
+When the data is not known in advance, you can also add the metadata directly on the client:
 
-You can also add metadata directly on the client, which is useful when the data is not known in advance.
-
-Below are listed the steps for you to follow to do that.
-
-1. Add an input field for description. We will send its value to the save handler.
+1. Add an input field for the description. You will then send its value to the `save` handler.
 
         <input type="text" id="fileDescription" />
 
-1. Declare a handler for the upload event and attach a data object to the passed event.
+1. Declare a handler for the `upload` event and attach a data object to the passed event.
 
         function onUpload(e) {
             e.data = {
@@ -119,24 +119,24 @@ Below are listed the steps for you to follow to do that.
         {
             foreach (var file in attachments)
             {
-                // Some browsers send file names with full path. We only care about the file name.
+                // Some browsers send file names with a full path but you need to take into account only the file name.
                 var fileName = Path.GetFileName(file.FileName);
                 var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
 
-                // TODO: Store description...
+                // TODO: Store description.
 
                 file.SaveAs(destinationPath);
             }
 
-            // Return an empty string to signify success
+            // Return an empty string to signify success.
             return Content("");
         }
 
-## Receive Metadata from Save Handlers
+## Receiving Metadata
 
-The `save` handler can sometimes produce a result that needs to be routed back to the page. The Upload requires the response to be in JSON format with the Content-Type set to `"text/plain"`. Any non-empty response that is not JSON is treated as a server error.
+The `save` handler can sometimes produce a result that needs to be routed back to the page. The Upload requires the response to be in JSON format with the `Content-Type` set to `"text/plain"`. Any non-empty response that is not JSON is treated as a server error. The suggested approach is applicable for the `remove` handler as well.
 
-Below are listed the steps for you to follow when configuring the receiving of metadata from the `save` action in the Kendo UI Upload.
+To configure the receiving of metadata from the `save` action in the Upload:
 
 1. Build the response.
 
@@ -180,21 +180,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
         )
     ```
 
-The same approach is applicable for the `remove` handler as well.
-
 ## See Also
 
-* [Overview of the Upload HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
-* [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
-* [Chunk Upload]({% slug chunkupload_uploadhelper_aspnetmvc %})
-* [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
-* [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
-* [Overview of the Kendo UI Upload Widget](http://docs.telerik.com/kendo-ui/controls/editors/upload/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Upload HtmlHelper Troubleshooting]({% slug troubleshoot_uploadhelper_aspnetmvc %})
+* [UploadBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [Upload Server-Side API](/api/upload)

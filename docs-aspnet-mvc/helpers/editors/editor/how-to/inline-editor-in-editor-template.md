@@ -1,15 +1,15 @@
 ---
 title: Use Inline Editors in Editor Templates
-page_title: Use Inline Editors in Editor Templates | Kendo UI Editor HtmlHelper for ASP.NET MVC
+page_title: Use Inline Editors in Editor Templates | Telerik UI Editor HtmlHelper for ASP.NET MVC
 description: "Use an inline Editor in an Editor template in ASP.NET MVC applications."
 slug: howto_useinlineeditorineditortemplate_editoraspnetmvc
 ---
 
 # Use Inline Editors in Editor Templates
 
-When you use the Kendo UI Editor in the inline editing mode in an MVC Editor template, the posting of content to the action is prevented.
+When you use the Telerik UI Editor in the inline editing mode in an MVC Editor template, the posting of content to the action is prevented.
 
-The reason for this behavior is that the inline mode renders a DOM element which is not a form field and, therefore, no data is sent. To handle this scenario, implement further the Editor template by adding a hidden input and update it when the content of the Kendo UI Editor changes.
+The reason for this behavior is that the inline mode renders a DOM element which is not a form field and, therefore, no data is sent. To handle this scenario, implement further the Editor template by adding a hidden input and update it when the content of the Editor changes.
 
     @model string
 
@@ -28,5 +28,7 @@ The reason for this behavior is that the inline mode renders a DOM element which
 
 ## See Also
 
-* [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
-* [EditorBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [Basic Usage of the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor)
+* [Using the API of the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/api)
+* [EditorBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [Editor Server-Side API](/api/editor)

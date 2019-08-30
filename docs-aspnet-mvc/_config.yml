@@ -49,6 +49,12 @@ navigation:
      "helpers/editors/dropdownlist/binding":
         title: "Data Binding"
         position: 2
+     "helpers/editors/multicolumncombobox/binding":
+        title: "Data Binding"
+        position: 2
+     "helpers/editors/multiselect/binding":
+        title: "Data Binding"
+        position: 2
      "helpers/gauges":
         title: "Gauges"
      "helpers/hybrid":
@@ -155,6 +161,9 @@ navigation:
         title: "Templates"
         position: 6
      "helpers/data-management/grid/how-to":
+        title: "How To"
+        position: 30
+     "helpers/editors/upload/how-to":
         title: "How To"
         position: 30
      "helpers/data-management/grid/troubleshoot":

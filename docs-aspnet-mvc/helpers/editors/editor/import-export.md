@@ -1,39 +1,29 @@
 ---
-title: Documentation Import and Export
-page_title: Documentation Import and Export | Kendo UI Editor HtmlHelper for ASP.NET MVC
-description: "Import and export different types of documents with the Kendo UI Editor widget for ASP.NET MVC."
+title: Import and Export of Documents
+page_title: Import and Export of Documents | Telerik UI Editor HtmlHelper for ASP.NET MVC
+description: "Import and export different types of documents with the Telerik UI Editor for ASP.NET MVC."
 slug: overview_importexportdpl_aspnetmvc
 position: 3
 ---
 
-# Documentation Import and Export
+# Import and Export of Documents
 
-This article provides basic information on the import and export functionality of the Kendo UI Editor widget for ASP.NET MVC.
+As of the R1 2017 release, the Telerik UI Editor for ASP.NET MVC enables you to import and export various types of documents through the dedicated `Kendo.Mvc.Export` assembly.
 
-## Overview
-
-As of the **R1 2017** release, the Kendo UI Editor widget for ASP.NET MVC provides capabilities for import and export through the dedicated `Kendo.Mvc.Export` assembly.
-
-Along with the server-side integration of the [Telerik Document Processing](http://docs.telerik.com/devtools/document-processing/introduction) suite, there are two new tools that utilize the import and export functionality&mdash;`ExportAs` and `Import`.
+Along with the server-side integration of the [Telerik Document Processing](http://docs.telerik.com/devtools/document-processing/introduction) suite, the new `ExportAs` and `Import` tools which utilize the import and export functionality are available.
 
 ![Importing and exporting an animation](import-export-animation.gif)
 
-## Dependencies
+## Requirements
 
-The import and export capabilities are bundled as part of the [UI for ASP.NET MVC suite]({% slug overview_aspnetmvc %}).
+The import and export capabilities are bundled as part of the [UI for ASP.NET MVC suite]({% slug overview_aspnetmvc %}). You can get the required assemblies from the `telerik.ui.for.aspnetmvc.<version>.zip` archive that contains a `Kendo.MVC.Export` folder with the assemblies for both .NET 4.0 and .NET 4.5 versions.
 
 To start using the import and export functionality:
 
 1. Add a reference in your project to the `Kendo.MVC.Export` assembly.
-2. Add references in your project to the required [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries).
+1. Add references in your project to the required [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries).
 
-> You can get the required assemblies from the `telerik.ui.for.aspnetmvc.<version>.zip` archive that contains a `Kendo.MVC.Export` folder with the assemblies for both .NET 4.0 and .NET 4.5 versions.
-
-## Getting Started
-
-### Exporting Content from the Editor
-
-Below are listed the steps for you to follow when enabling the export capabilities of the Editor.
+## Exporting Content from the Editor
 
 1. Add the `ExportAs` tool.
 
@@ -125,9 +115,7 @@ Below are listed the steps for you to follow when enabling the export capabiliti
     ...
     ```
 
-### Importing Content from Files
-
-Similar to exporting, below are listed the steps for you to follow when enabling the `Import` tool to update the content of the Editor from a file.
+## Importing Content from Files
 
 1. Add the `Import` tool.
 
@@ -150,6 +138,15 @@ Similar to exporting, below are listed the steps for you to follow when enabling
 
 1. Configure the `Import` by using the `Proxy` and `AllowedExtensions` methods.
 
+    > To send a file to the server, the `Import` tool integrates the [Telerik UI Upload HtmlHelper]({%slug overview_uploadhelper_aspnetmvc%}). You can configure it through the following exposed helper methods:
+    >
+    > * [`AllowedExtensions()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-AllowedExtensions%28System.String%5B%5D%29)
+    > * [`MaxFileSize()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-MaxFileSize%28System.Nullable<System.Double>%29)
+    > * [`Complete()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Complete%28System.String%29)
+    > * [`Progress()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Progress%28System.String%29)
+    > * [`Select()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Select%28System.String%29)
+    > * [`Success()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Success%28System.String%29)
+
     ```Razor
     @(Html.Kendo().Editor()
         .Name("Editor")
@@ -174,15 +171,6 @@ Similar to exporting, below are listed the steps for you to follow when enabling
         )
     %>
     ```
-
-    > The `Import` tool integrates the [Kendo UI Upload HtmlHelper]({%slug overview_uploadhelper_aspnetmvc%}) to send a file to the server. You can configure it through the following exposed helper methods:
-    >
-    > * [`AllowedExtensions()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-AllowedExtensions%28System.String%5B%5D%29)
-    > * [`MaxFileSize()`](/api/Kendo.Mvc.UI.Fluent/UploadValidationSettingsBuilder#methods-MaxFileSize%28System.Nullable<System.Double>%29)
-    > * [`Complete()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Complete%28System.String%29)
-    > * [`Progress()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Progress%28System.String%29)
-    > * [`Select()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Select%28System.String%29)
-    > * [`Success()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#methods-Success%28System.String%29)
 
 1. Implement the action method in the corresponding controller.
 
@@ -213,10 +201,7 @@ Similar to exporting, below are listed the steps for you to follow when enabling
 
 ## Changing Import and Export Settings
 
-The **Document Processing Library** provides settings for the import and export. This enables you to fine-tune the way the content is handled in the supported document types.
-
-The following example demonstrates how to use [`HtmlImportSettings`](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so you can process HTML images before they are exported to `RadFlowDocument`.
-
+The Document Processing Library provides settings for the import and export which enables you to fine-tune the way the content is handled in the supported document types. The following example demonstrates how to use [`HtmlImportSettings`](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so that you can process HTML images before they are exported to `RadFlowDocument`.
 
 ```
 using Kendo.Mvc.Export;
@@ -251,7 +236,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
 ```
 
-The following example demonstrates hoe to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag.
+The following example demonstrates how to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag. For more information on each setting that is supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
 
 ```
 using Kendo.Mvc.Export;
@@ -268,16 +253,8 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
 ```
 
-For more information on each setting supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
-
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: EditorBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Editor Widget](http://docs.telerik.com/kendo-ui/controls/editors/editor/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Document Import and Export by the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/import-export)
+* [EditorBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [Editor Server-Side API](/api/editor)

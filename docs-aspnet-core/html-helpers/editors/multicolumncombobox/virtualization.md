@@ -1,7 +1,7 @@
 ---
 title: Virtualization
-page_title: Virtualization | Telerik UI MultiColumnComboBox for ASP.NET Core
-description: "Learn the basics when working with the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Virtualization | Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core
+description: "Learn how to set up the virtualization feature of the Telerik UI MultiColumnComboBox HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: virtualization_multicolumncombobox_aspnetcore
 position: 5
 ---

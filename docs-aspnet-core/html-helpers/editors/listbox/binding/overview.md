@@ -43,4 +43,4 @@ For more information about binding the ListBox to data, refer to the articles on
 ## See Also
 
 * [Basic Usage of the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/index)
-* [API Reference of the ListBox HtmlHelper for ASP.NET Core](/api/listbox)
+* [Server-Side API](/api/listbox)
