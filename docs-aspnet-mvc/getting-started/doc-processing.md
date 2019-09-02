@@ -57,6 +57,7 @@ Telerik Document Processing is available as part of the following suites:
 * DevCraft
 * Telerik UI for ASP.NET AJAX
 * Telerik UI for ASP.NET MVC
+* Telerik UI for ASP.NET Core
 * Telerik UI for WPF
 * Telerik UI for WinForms
 * Telerik UI for Silverlight

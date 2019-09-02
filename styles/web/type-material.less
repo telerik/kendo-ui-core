@@ -479,6 +479,10 @@
 @spreadsheet-drawing-anchor-bg:  @spreadsheet-selection-background;
 
 
+// Filter
+@filter-field-text: @accent;
+
+
 // Kendo skin
 
 @theme-name: ~"material";
@@ -496,6 +500,7 @@
 @import "Default/scrollview/_theme.less";
 @import "Default/switch/_theme.less";
 @import "common/adaptive/_theme.less";
+@import "Default/filter/_theme.less";
 @import "Default/drawer/_theme.less";
 @import "Default/rating/_theme.less";
 
@@ -3833,8 +3838,8 @@ table.k-editor {
 }
 
 .k-editor-toolbar .k-dropdown-wrap.k-state-default,
-.k-toolbar .k-dropdown-wrap.k-state-default
-{
+.k-toolbar .k-dropdown-wrap.k-state-default,
+.k-toolbar .k-picker-wrap {
     border-color: @alt-background-color;
 }
 
