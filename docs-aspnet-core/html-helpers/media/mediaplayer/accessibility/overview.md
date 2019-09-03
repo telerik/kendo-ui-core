@@ -20,14 +20,14 @@ The Media Player follows the WAI-ARIA Authoring Practices for implementing the k
 
 ## Section 508
 
-The Media Player is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 and WCAG 2.1 compliance in UI for ASP.NET Core]({% slug section508_wcag20_accessibility_support %}).
+The Media Player is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 and WCAG 2.1 compliance in UI for ASP.NET Core]({% slug compliance_accessibility %}).
 
 
 ## WCAG 2.1
 
 The Media Player supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/).
 
-For more information, refer to [Section 508 and WCAG 2.1 compliance in UI for ASP.NET Core]({% slug section508_wcag20_accessibility_support %}).
+For more information, refer to [Section 508 and WCAG 2.1 compliance in UI for ASP.NET Core]({% slug compliance_accessibility %}).
 
 ## See Also
 

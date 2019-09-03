@@ -1,20 +1,51 @@
 ---
-title: Using Forms
-page_title: Using Forms | Kendo UI Window HtmlHelper for ASP.NET MVC
-description: "Handle forms in when working with a Kendo UI Window in ASP.NET MVC applications."
+title: Forms
+page_title: Forms | Telerik UI Window HtmlHelper for ASP.NET MVC
+description: "Insert complete forms and handle form views in a popup when working with a Telerik UI Window for ASP.NET MVC."
 slug: using_formsinwindow_aspnetmvc
-position: 2
+position: 3
 ---
 
-# Using Forms
+# Forms
 
-This article provides basic information about handling views with forms in a Kendo UI Window popup, showing validation messages from the state of the model, and closing the Window on a valid model.
+The Window enables you to [insert complete forms](#inserting-complete-forms) and to [handle form views in a popup](#using-popup-forms).
 
-The Kendo UI Window widget for ASP.NET MVC enables you to use the `LoadContentFrom` method to load content from a view into the popup content ([Load-on-Demand Content]({%slug overview_windowhelper_aspnetmvc%}#load-on-demand-content)).
+## Inserting Complete Forms
 
-> If you use AJAX forms, refer to the article on [updating the Kendo UI Window with AJAX forms]({%slug howto_update_ajax_forms_windowaspnetmv%}).
+To insert a complete form inside a Window, end the Window declaration with `.Render();` and wrap it in a non-rendering code block. This requirement does not apply if the form is defined through plain HTML tags (`&lt;form&gt;...&lt;/form&gt;`). For more information, refer to the article on [using the Kendo UI for jQuery Window with a form](http://docs.telerik.com/kendo-ui/controls/layout/window/overview#using-kendo-ui-window-with-a-form).
 
-Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view into a Kendo UI Window, it does not act as a separate browser window. This means that any returned data from the form submit action loads into the main page and eventually might lead to unexpected results.
+The following example demonstrates how to insert a complete form inside the Window.
+
+```ASPX
+    <% Html.Kendo().Window()
+        .Content(() =>
+        {
+            using (Html.BeginForm(...)) { %>
+                .........
+            <% }
+        })
+        .Render();
+    %>
+```
+```Razor
+    @{Html.Kendo().Window()
+        .Content(@<text>
+            @using (Html.BeginForm(...))
+            {
+                .........
+            }
+        </text>)
+        .Render();
+    }
+```
+
+## Using Popup Forms
+
+The Window enables you to handle views with forms in a Window popup, show validation messages from the state of the model and close the Window on a valid model. The Telerik UI Window for ASP.NET MVC enables you to use the `LoadContentFrom` method to [load content from a view to the popup content]({% slug content_windowhelper_aspnetmvc %}).
+
+> For more information on using Ajax forms, refer to the article on [updating the Window with Ajax]({%slug howto_update_ajax_forms_windowaspnetmv%}).
+
+Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view to a Window, it does not act as a separate browser window. This means that any returned data from the form `submit` action loads into the main page and eventually might lead to unexpected results.
 
 To handle this behavior, render the content in an iframe.
 
@@ -38,12 +69,12 @@ To handle this behavior, render the content in an iframe.
 ```HomeController.cs
 public ActionResult GetForm()
 {
-    // Return the view with the form
+    // Return the view with the form.
     return View("Form");
 }
 ```
 ```Form.cshtml
-@* As this is loaded in an iframe, the view should have a layout in order to load an entire HTML page. *@
+@* As this is loaded in an iframe, the view needs to have a layout so that it loads an entire HTML page. *@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -80,24 +111,18 @@ public ActionResult MyModel_Create(MyModel model)
 {
     if (!ModelState.IsValid)
     {
-        /* If model is invalid, as expected, return the same
+        /* If model is invalid as expected, return the same
         view and send the invalid model to update validation. */
         return View("Form", model);
     }
 
-    // Return a script that runs the parent's window close method.
+    // Return a script that runs the window close method of the parent.
     return Content("<script>window.parent.closeFormPopup()</script>");
 }
 ```
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: WindowBuilder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/WindowBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Window Widget](http://docs.telerik.com/kendo-ui/controls/layout/window/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/kendo-ui/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Window HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mc/window)
+* [WindowBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [Window Server-Side API](/api/window)

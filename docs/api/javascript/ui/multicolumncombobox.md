@@ -851,6 +851,64 @@ The index of the initially selected item. The index is `0` based.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize MultiColumnComboBox messages
+
+    <input id="multicolumncombobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!",
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.clear `String` *(default: "clear")*
+
+The text message when hovering the input clear button.
+
+#### Example - customize clear message
+
+    <input id="multicolumncombobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!"
+        }
+      });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="multicolumncombobox" />
+    <script>
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataSource: [],
+        index: 1,
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
@@ -866,7 +924,7 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.

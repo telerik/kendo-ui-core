@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI Tooltip HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Tooltip widget.
 
-The Tooltip displays a popup hint for a given html element. Its content can be defined either as static text or loaded dynamically with AJAX.
+The Tooltip displays a popup hint for a specified HTML element. Its content can be defined either as static text or loaded dynamically with AJAX.
 
 * [Demo page for the Tooltip](https://demos.telerik.com/aspnet-core/tooltip/index)
 

@@ -1,18 +1,20 @@
 ---
 title: Overview
-page_title: Dialog | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI Dialog widget for ASP.NET MVC."
+page_title: Dialog Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI Dialog HtmlHelper for ASP.NET MVC."
 slug: overview_dialoghelper_aspnetmvc
 position: 1
 ---
 
 # Dialog HtmlHelper Overview
 
-The Dialog HtmlHelper extension is a server-side wrapper for the [Kendo UI Dialog](https://demos.telerik.com/kendo-ui/dialog/index) widget.
+The Telerik UI Dialog HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Dialog widget.
 
-## Configuration
+The Dialog is a modal popup that brings information to the user. It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI for jQuery Window]({% slug overview_windowhelper_aspnetmvc %}) where the most prominent difference is the added functionality for actions and predefined dialogs.
 
-Below are listed the steps for you to follow when configuring the Kendo UI Dialog.
+* [Demo page for the Dialog](https://demos.telerik.com/aspnet-mvc/dialog)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -26,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
     ```ASPX
         <% Html.Kendo().Dialog()
-            .Name("dialog") // The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
+            .Name("dialog") // The name of the Dialog is mandatory. It specifies the "id" attribute of the Dialog.
             .Title("Software Update")// Set the title of the Dialog.
             .Content("Do you agree terms and conditions?") // Define the content of the Dialog.
             .Width(400)  // Set the width of the Dialog.
@@ -42,7 +44,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
     ```
     ```Razor
         @(Html.Kendo().Dialog()
-            .Name("dialog") // The name of the Dialog is mandatory. It specifies the "id" attribute of the widget.
+            .Name("dialog") // The name of the Dialog is mandatory. It specifies the "id" attribute of the Dialog.
             .Title("Software Update")// Set the title of the Dialog.
             .Content("Do you agree terms and conditions?") // Define the content of the Dialog.
             .Width(400)  // Set the width of the Dialog.
@@ -56,11 +58,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
         )
     ```
 
-## Event Handling
+## Events
 
-You can subscribe to all Dialog [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dialog#events).
-
-### By Handler Name
+You can subscribe to all Dialog [events](/api/dialog). For a complete example on basic Dialog events, refer to the [demo on using the events of the Dialog](https://demos.telerik.com/aspnet-mvc/dialog/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -101,11 +101,9 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To refer to an existing Kendo UI Dialog instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Dialog API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dialog#methods) to control its behavior.
+To refer to an existing Kendo UI Dialog instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Dialog client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dialog#methods) to control its behavior.
 
     // Place the following after the Dialog for ASP.NET MVC declaration.
     <script>
@@ -117,12 +115,7 @@ To refer to an existing Kendo UI Dialog instance, use the [`jQuery.data()`](http
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: DialogBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DialogBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Dialog Widget](http://docs.telerik.com/kendo-ui/controls/layout/dialog/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Dialog HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/dialog)
+* [Using the API of the Dialog HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/dialog/api)
+* [DialogBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DialogBuilder)
+* [Dialog Server-Side API](/api/dialog)

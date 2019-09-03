@@ -1,24 +1,20 @@
 ---
 title: Overview
-page_title: Sortable | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI Sortable widget for ASP.NET MVC."
+page_title: Sortable Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI Sortable widget for ASP.NET MVC."
 slug: overview_sortablehelper_aspnetmvc
 position: 1
 ---
 
 # Sortable HtmlHelper Overview
 
-The Sortable HtmlHelper extension is a server-side wrapper for the [Kendo UI Sortable](https://demos.telerik.com/kendo-ui/sortable/index) widget.
+The Telerik UI Sortable HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Sortable widget.
 
-## Getting Started
+The Sortable provides a sortable drag-and-drop functionality to elements within a list. Unlike most of the Telerik UI HtmlHelpers for ASP.NET MVC, the Sortable does not render HTML markup. You have to initialize it for a DOM element which already exists.
 
-Unlike most of the HtmlHelpers, the Sortable does not render HTML markup.
+* [Demo page for the Sortable](https://demos.telerik.com/aspnet-mvc/sortable)
 
-> Initialize the Sortable HtmlHelper for already existing DOM element.
-
-### Configuration
-
-Below are listed the steps for you to follow when configuring the Kendo UI Sortable.
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method.
@@ -38,12 +34,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
         </ul>
         <%:Html.Kendo().Sortable()
             .For("#sortable-basic") // The for option of the Sortable is mandatory.
-                                    //It is a jQuery selector which specifies.
+                                    // It is a jQuery selector which specifies.
                                     // The already existing element for which the Sortable will be initialized.
             .HintHandler("hint") // The JavaScript function which
-                                //constructs the Sortable's hint element.
+                                // constructs the hint element of the Sortable.
             .PlaceholderHandler("placeholder") // The JavaScript function which
-                                                //constructs the Sortable's placeholder element
+                                                //constructs the placeholder element of the Sortable.
         %>
         <script>
             // Define the hint handler.
@@ -64,12 +60,12 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
         </ul>
         @(Html.Kendo().Sortable()
             .For("#sortable-basic") // The for option of the Sortable is mandatory.
-                                    //It is a jQuery selector which specifies
+                                    // It is a jQuery selector which specifies
                                     // The already existing element for which the Sortable will be initialized.
             .HintHandler("hint") // The JavaScript function which
-                                //constructs the Sortable's hint element.
+                                // constructs the hint element of the Sortable.
             .PlaceholderHandler("placeholder") // The JavaScript function which
-                                                //constructs the Sortable's placeholder element.
+                                                // constructs the placeholder element of the Sortable.
         )
         <script>
             // Define the hint handler.
@@ -83,9 +79,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
         </script>
     ```
 
-### Hint Disabling
-
-The Sortable can operate without a hint. To disable the hint, set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
+The Sortable enables you to disable its hint by setting it to an empty [`jQuery.noop`](http://api.jquery.com/jQuery.noop/) function.
 
     @(Html.Kendo().Sortable()
         .For("#sortable")
@@ -96,11 +90,11 @@ The Sortable can operate without a hint. To disable the hint, set it to an empty
         var noHint = $.noop;
     </script>
 
-## Event Handling
+## Events
 
-You can subscribe to all Sortable [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#events).
+You can subscribe to all Sortable [events](/api/sortable). For a complete example on basic Sortable events, refer to the [demo on using the events of the Sortable](https://demos.telerik.com/aspnet-mvc/sortable/events).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -163,7 +157,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -188,28 +182,20 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Sortable API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
+To reference an existing Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Sortable client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
 
     // Place the following after the Sortable for ASP.NET MVC declaration.
     <script>
         $(function() {
-            //Notice that the For() of the Sortable is used to get its client-side instance.
+            // The For() of the Sortable is used to get its client-side instance.
             var sortable = $("#container").data("kendoSortable");
         });
     </script>
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: SortableBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SortableBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Sortable Widget](http://docs.telerik.com/kendo-ui/controls/interactivity/sortable/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Sortable HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/sortable/index)
+* [SortableBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SortableBuilder)
+* [Sortable Server-Side API](/api/sortable)

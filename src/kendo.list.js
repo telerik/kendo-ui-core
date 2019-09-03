@@ -106,7 +106,11 @@ var __meta__ = { // jshint ignore:line
             valuePrimitive: false,
             footerTemplate: "",
             headerTemplate: "",
-            noDataTemplate: "No data found."
+            noDataTemplate: true,
+            messages: {
+                "noData": "No data found.",
+                "clear": "clear"
+            }
         },
 
         setOptions: function(options) {
@@ -218,7 +222,7 @@ var __meta__ = { // jshint ignore:line
         _noData: function() {
             var list = this;
             var noData = $(list.noData);
-            var template = list.options.noDataTemplate;
+            var template = list.options.noDataTemplate === true ?  list.options.messages.noData : list.options.noDataTemplate;
 
             list.angular("cleanup", function() { return { elements: noData }; });
             kendo.destroy(noData);
@@ -571,7 +575,7 @@ var __meta__ = { // jshint ignore:line
 
         _clearButton: function() {
             var list = this;
-            var clearTitle = (list.options.messages && list.options.messages.clear) ? list.options.messages.clear: "clear";
+            var clearTitle = list.options.messages.clear;
 
             if (!list._clear){
                 list._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="' + clearTitle + '"></span>').attr({

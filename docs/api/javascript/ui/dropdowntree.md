@@ -710,6 +710,22 @@ The text message shown when hovering delete icon in a selected tag.
         });
     </script>
 
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="dropdowntree" />
+    <script>
+        $("#dropdowntree").kendoDropDownTree({
+            dataSource: [],
+            messages: {
+                noData: "There is no data!"
+            }
+        });
+    </script>
+
 ### messages.singleTag `String` *(default: "item(s) selected")*
 
 The text message shown in the single TagMode tag.
@@ -751,7 +767,7 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.

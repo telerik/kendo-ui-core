@@ -1,18 +1,20 @@
 ---
 title: Overview
-page_title: ProgressBar | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI ProgressBar widget for ASP.NET MVC."
+page_title: ProgressBar Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI ProgressBar HtmlHelper for ASP.NET MVC."
 slug: overview_progressbarhelper_aspnetmvc
 position: 1
 ---
 
 # ProgressBar HtmlHelper Overview
 
-The ProgressBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index) widget.
+The Telerik UI ProgressBar HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI ProgressBar widget.
 
-## Configuration
+The ProgressBar offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
 
-Below are listed the steps for you to follow when configuring the Kendo UI ProgressBar.
+* [Demo page for the ProgressBar](https://demos.telerik.com/aspnet-mvc/progressbar)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -37,11 +39,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
         )
     ```
 
-## Event Handling
+## Events
 
-You can subscribe to all ProgressBar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar#events).
+You can subscribe to all ProgressBar [events](/api/progressbar). For a complete example on basic ProgressBar events, refer to the [demo on using the events of the ProgressBar](https://demos.telerik.com/aspnet-mvc/progressbar/events).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -82,7 +84,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -96,13 +98,11 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
+To reference an existing ProgressBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ProgressBar client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar#methods) to control its behavior.
 
-To reference an existing Kendo UI ProgressBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ProgressBar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar#methods) to control its behavior.
-
-    // Place this after your Kendo ProgressBar for ASP.NET MVC declaration.
+    // Place this after your ProgressBar for ASP.NET MVC declaration.
     <script>
         $(function() {
             // The Name() of the ProgressBar is used to get its client-side instance.
@@ -112,12 +112,7 @@ To reference an existing Kendo UI ProgressBar instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: ProgressBarBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI ProgressBar Widget](http://docs.telerik.com/kendo-ui/controls/interactivity/progressbar/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the ProgressBar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/progressbar)
+* [Using the API of the ProgressBar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/progressbar/api)
+* [ProgressBarBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
+* [ProgressBar Server-Side API](/api/progressbar)

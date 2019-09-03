@@ -149,6 +149,12 @@ var __meta__ = { // jshint ignore:line
             filter: "startswith",
             ignoreCase: true,
             minLength: 1,
+            messages: {
+                "singleTag": "item(s) selected",
+                "clear": "clear",
+                "deleteTag": "delete",
+                "noData": "No data found."
+            },
             enforceMinLength: false,
             delay: 100,
             value: null,
@@ -1449,6 +1455,7 @@ var __meta__ = { // jshint ignore:line
             var tagTemplate = options.tagTemplate;
             var hasDataSource = options.dataSource;
             var isMultiple = options.tagMode === "multiple";
+            var singleTag = options.messages.singleTag;
             var defaultTemplate;
 
             if (that.element[0].length && !hasDataSource) {
@@ -1456,15 +1463,15 @@ var __meta__ = { // jshint ignore:line
                 options.dataValueField = options.dataValueField || "value";
             }
 
-            defaultTemplate = isMultiple ? kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false }) : kendo.template("#:values.length# item(s) selected");
+            defaultTemplate = isMultiple ? kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false }) : kendo.template("#:values.length# " + singleTag);
 
             that.tagTextTemplate = tagTemplate = tagTemplate ? kendo.template(tagTemplate) : defaultTemplate;
 
             that.tagTemplate = function(data) {
                 return '<li role="option" aria-selected="true" class="k-button" unselectable="on"><span unselectable="on">' +
-                        tagTemplate(data) +
-                        '</span><span aria-hidden="true" unselectable="on" aria-label="' +
-                        (isMultiple ? "delete" : "open") +
+                        tagTemplate(data) + '</span>' +
+                        '<span aria-hidden="true" unselectable="on" aria-label="' +
+                        (isMultiple ? ('delete" title="' + that.options.messages.deleteTag + '" aria-label="' + that.options.messages.deleteTag) : 'open') +
                         '" class="k-select"><span class="k-icon ' +
                         (isMultiple ? "k-i-close" : "k-i-arrow-60-down") + '">' +
                         '</span></span></li>';

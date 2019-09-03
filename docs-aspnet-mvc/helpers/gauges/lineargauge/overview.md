@@ -1,20 +1,20 @@
 ---
 title: Overview
-page_title: LinearGauge | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI LinearGauge widget for ASP.NET MVC."
+page_title: LinearGauge Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI LinearGauge HtmlHelper for ASP.NET MVC."
 slug: overview_lineargaugehelper_aspnetmvc
 position: 1
 ---
 
 # LinearGauge HtmlHelper Overview
 
-The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index) widget.
+The Telerik UI LinearGauge HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI LinearGauge widget.
 
-## Getting Started
+The LinearGauge represents values on a linear scale.
 
-### Configuration
+* [Demo page for the LinearGauge](https://demos.telerik.com/aspnet-mvc/linear-gauge)
 
-Below are listed the steps for you to follow when configuring the Kendo UI LinearGauge.
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
     ```ASPX
         <%: Html.Kendo().LinearGauge()
-            .Name("linearGauge") // The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Name("linearGauge") // The name of the LinearGauge is mandatory. It specifies the "id" attribute of the LinearGauge.
             .Scale(scale => scale
                 .Min(0) // Set the min value of the LinearGauge.
                 .Max(200) // Set the min value of the LinearGauge.
@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
     ```
     ```Razor
         @(Html.Kendo().LinearGauge()
-            .Name("linearGauge") // The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Name("linearGauge") // The name of the LinearGauge is mandatory. It specifies the "id" attribute of the LinearGauge.
             .Scale(scale => scale
                 .Min(0) // Set the min value of the LinearGauge.
                 .Max(200) // Set the min value of the LinearGauge.
@@ -51,11 +51,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
         )
     ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI LinearGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+To reference an existing LinearGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge client-side API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
 
     // Place the following after the LinearGauge for ASP.NET MVC declaration.
     <script>
@@ -67,12 +65,6 @@ To reference an existing Kendo UI LinearGauge instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: LinearGaugeBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/LinearGaugeBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI LinearGauge Widget](http://docs.telerik.com/kendo-ui/controls/gauges/lineargauge/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the LinearGauge HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/linear-gauge)
+* [LinearGaugeBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/LinearGaugeBuilder)
+* [LinearGauge Server-Side API](/api/lineargauge)

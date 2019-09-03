@@ -1723,7 +1723,7 @@ declare namespace kendo.ui {
         highlightFirst?: boolean;
         ignoreCase?: boolean;
         minLength?: number;
-        noDataTemplate?: string|Function;
+        noDataTemplate?: string|Function|boolean;
         placeholder?: string;
         popup?: any;
         separator?: string|any;
@@ -2247,7 +2247,7 @@ declare namespace kendo.ui {
         ignoreCase?: boolean;
         index?: number;
         minLength?: number;
-        noDataTemplate?: string|Function;
+        noDataTemplate?: string|Function|boolean;
         placeholder?: string;
         popup?: ComboBoxPopup;
         suggest?: boolean;
@@ -3023,7 +3023,7 @@ declare namespace kendo.ui {
         ignoreCase?: boolean;
         index?: number;
         minLength?: number;
-        noDataTemplate?: string|Function;
+        noDataTemplate?: string|Function|boolean;
         popup?: DropDownListPopup;
         optionLabel?: string|any;
         optionLabelTemplate?: string|Function;
@@ -3169,7 +3169,7 @@ declare namespace kendo.ui {
         loadOnDemand?: boolean;
         messages?: DropDownTreeMessages;
         minLength?: number;
-        noDataTemplate?: string|Function;
+        noDataTemplate?: string|Function|boolean;
         placeholder?: string;
         popup?: DropDownTreePopup;
         headerTemplate?: string|Function;
@@ -5288,7 +5288,7 @@ declare namespace kendo.ui {
         ignoreCase?: boolean;
         index?: number;
         minLength?: number;
-        noDataTemplate?: string|Function;
+        noDataTemplate?: string|Function|boolean;
         placeholder?: string;
         popup?: MultiColumnComboBoxPopup;
         suggest?: boolean;
@@ -5425,7 +5425,7 @@ declare namespace kendo.ui {
         ignoreCase?: boolean;
         minLength?: number;
         maxSelectedItems?: number;
-        noDataTemplate?: string|Function;
+        noDataTemplate?: string|Function|boolean;
         placeholder?: string;
         popup?: MultiSelectPopup;
         headerTemplate?: string|Function;

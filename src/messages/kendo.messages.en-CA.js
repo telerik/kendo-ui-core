@@ -1008,4 +1008,66 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* List messages */
+
+if (kendo.ui.List) {
+    kendo.ui.List.prototype.options.messages =
+    $.extend(true, kendo.ui.List.prototype.options.messages,{
+      "clear": "clear",
+      "noData": "No data found."
+    });
+}
+
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+    kendo.ui.DropDownList.prototype.options.messages =
+    $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+    kendo.ui.ComboBox.prototype.options.messages =
+    $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+    kendo.ui.AutoComplete.prototype.options.messages =
+    $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+    $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+    kendo.ui.DropDownTree.prototype.options.messages =
+    $.extend(true, kendo.ui.DropDownTree.prototype.options.messages,{
+        "singleTag": "item(s) selected",
+        "clear": "clear",
+        "deleteTag": "delete",
+        "noData": "No data found."
+    });
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+    kendo.ui.MultiSelect.prototype.options.messages =
+    $.extend(true, kendo.ui.MultiSelect.prototype.options.messages,{
+        "singleTag": "item(s) selected",
+        "clear": "clear",
+        "deleteTag": "delete",
+        "noData": "No data found."
+    });
+}
+
 })(window.kendo.jQuery);
