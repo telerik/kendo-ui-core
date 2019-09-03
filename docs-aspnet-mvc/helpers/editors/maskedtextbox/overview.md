@@ -43,7 +43,7 @@ The MaskedTextBox enables a controlled text input that is based on a specific fo
 
 ## Functionality and Features
 
-The MaskedTextBox provides options for [using predefined and custom masks rules and validate user input]({% slug validation_maskedtextbox_aspnetcore %}).
+The MaskedTextBox provides options for [using predefined and custom masks rules and validate user input]({% slug validation_maskedtextbox_aspnetmvc %}).
 
 ## Events
 

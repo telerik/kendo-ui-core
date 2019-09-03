@@ -1,18 +1,20 @@
 ---
 title: Overview
-page_title: RadialGauge | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI RadialGauge widget for ASP.NET MVC."
+page_title: RadialGauge Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI RadialGauge HtmlHelper for ASP.NET MVC."
 slug: overview_radialgaugehelper_aspnetmvc
 position: 1
 ---
 
 # RadialGauge HtmlHelper Overview
 
-The RadialGauge HtmlHelper extension is a server-side wrapper for the [Kendo UI RadialGauge](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge) widget.
+The Telerik UI RadialGauge HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI RadialGauge widget.
 
-## Configuration
+The RadialGauge represents values on a circular arc.
 
-Below are listed the steps for you to follow when configuring the Kendo UI RadialGauge.
+* [Demo page for the RadialGauge](https://demos.telerik.com/aspnet-mvc/radial-gauge)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -26,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
     ```ASPX
         <%: Html.Kendo().RadialGauge()
-            .Name("radialGauge") // The name of the radialGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Name("radialGauge") // The name of the radialGauge is mandatory. It specifies the "id" attribute of the RadialGauge.
             .Scale(scale => scale
                 .Min(0) // Set the min value of the RadialGauge.
                 .Max(200) // Set the min value of the RadialGauge.
@@ -38,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
     ```
     ```Razor
         @(Html.Kendo().RadialGauge()
-            .Name("radialGauge") // The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
+            .Name("radialGauge") // The name of the RadialGauge is mandatory. It specifies the "id" attribute of the RadialGauge.
             .Scale(scale => scale
                 .Min(0) // Set the min value of the RadialGauge.
                 .Max(200) // Set the min value of the RadialGauge.
@@ -49,11 +51,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
         )
     ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
+To reference an existing RadialGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge client-side API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
 
     // Place the following after the RadialGauge for ASP.NET MVC declaration.
     <script>
@@ -65,12 +65,6 @@ To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: RadialGaugeBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/RadialGaugeBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI RadialGauge Widget](http://docs.telerik.com/kendo-ui/controls/gauges/radialgauge/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the RadialGauge HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/radial-gauge)
+* [RadialGaugeBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/RadialGaugeBuilder)
+* [RadialGauge Server-Side API](/api/radialgauge)

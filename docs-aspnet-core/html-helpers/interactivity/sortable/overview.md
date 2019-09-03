@@ -55,7 +55,7 @@ The following example demonstrates a basic declaration of a Sortable widget usin
 
 ## Events
 
-You can subscribe to all Sortable [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#events).
+You can subscribe to all Sortable [events](/api/sortable).
 
 ### Handling Events by Handler Name
 
