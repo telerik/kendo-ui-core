@@ -42,7 +42,7 @@ The following example demonstrates how to define the Drawer by using the Drawer 
 
 ## Referencing Existing Instances
 
-The following example demonstrates the basic configuration of the Drawer HtmlHelper and how to get the Drawer instance.
+The following example demonstrates how to get the Drawer instance.
 
 ```Razor
     @(Html.Kendo().Drawer()

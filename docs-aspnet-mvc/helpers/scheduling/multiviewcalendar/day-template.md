@@ -1,7 +1,7 @@
 ---
 title: Day Template
-page_title: Day Template | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
-description: "Customize the content of each cell by using cell templates when working with the Kendo UI MultiViewCalendar."
+page_title: Day Template | Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC
+description: "Customize the content of each cell by using cell templates when working with the Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC."
 slug: day_template_multiviewcalendar_aspnetmvc
 position: 5
 ---
@@ -27,16 +27,15 @@ The following example demonstrates how to create a MultiViewCalendar by using a 
         )
 ```
 
-The template wraps the `value` in a `<div>` HTML element. The structure of the data object that is passed to the template function:
+The template wraps the `value` in a `<div>` HTML element. The structure of the data object that is passed to the template function.
 
     data = {
-        date: date, // Date object corresponding to the current cell
+        date: date, // A date object that corresponds to the current cell.
         title: kendo.toString(date, "D"),
         value: date.getDate(),
-        dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
+        dateString: "2011/0/1" // The formatted date by using the yyyy/MM/dd format and the month is zero-based.
     };
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Server-Side API](/api/multiviewcalendar))

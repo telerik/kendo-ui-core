@@ -28,7 +28,7 @@ A card can have an optional header through the `.k-card-header` class. It can in
 * Adding a subtitle requires the `.k-card-subtitle` class to an `h` element.
 
 ```dojo
- <div class="k-card">
+ <div class="k-card" style="width: 300px;">
     <div class="k-card-header">
         <h5 class="k-card-title">Card Title</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -42,7 +42,7 @@ A card can have an optional header through the `.k-card-header` class. It can in
 Titles and subtitles can also be used outside of the header:
 
 ```dojo
-<div class="k-card">
+<div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -60,7 +60,7 @@ Titles and subtitles can also be used outside of the header:
 The main content of a card is the body which can be defined through the `.k-card-body` class:
 
 ```dojo
-<div class="k-card">
+<div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <p>
             Some quick example text to build on the card title and make up the bulk of the card's content.
@@ -74,7 +74,7 @@ The main content of a card is the body which can be defined through the `.k-card
 A list of actions could be added to a card through the `.k-card-actions` class:
 
 ```dojo
-<div class="k-card">
+<div class="k-card" style="width: 300px;">
     <div class="k-card-header">
         Card Header
     </div>
@@ -91,7 +91,7 @@ A list of actions could be added to a card through the `.k-card-actions` class:
 Each action could be wrapped in a `.k-card-action` container to have consistent styling:
 
 ```dojo
-<div class="k-card">
+<div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -111,7 +111,7 @@ Each action could be wrapped in a `.k-card-action` container to have consistent 
 The actions can be stretched to take the entire container by adding the `.k-card-actions-stretched`:
 
 ```dojo
-<div class="k-card">
+<div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -131,7 +131,7 @@ The actions can be stretched to take the entire container by adding the `.k-card
 The actions can also be forced to display vertically through the `.k-card-actions-vertical` class:
 
 ```dojo
-<div class="k-card">
+<div class="k-card" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -148,8 +148,8 @@ The actions can also be forced to display vertically through the `.k-card-action
 
 Cards support images through the `.k-card-image` class:
 
-```dojo
-<div class="k-card">
+```
+<div class="k-card" style="width: 300px;">
     <div class="k-card-header">
             Card Header
     </div>
@@ -165,7 +165,7 @@ Cards support images through the `.k-card-image` class:
 Cards support images through the `.k-hr` class:
 
 ```dojo
-<div class="k-card">
+<div class="k-card" style="width: 300px;">
     <div class="k-columnset k-flex-auto">
         <div class="k-card-body">
             <h5 class="k-card-title">Card Title</h5>
@@ -192,7 +192,7 @@ Rendering cards detached from one another in a column through the `.k-card-list`
 
 ```dojo
     <div class="k-card-list">
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -203,7 +203,7 @@ Rendering cards detached from one another in a column through the `.k-card-list`
                 <span class="k-button k-flat k-primary">Action 2</span>
             </div>
         </div>
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -214,7 +214,7 @@ Rendering cards detached from one another in a column through the `.k-card-list`
                 <span class="k-button k-flat k-primary">Action 2</span>
             </div>
         </div>
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -234,7 +234,7 @@ Rendering cards attached to one another on a single row through the `.k-card-gro
 
 ```dojo
     <div class="k-card-group">
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -245,7 +245,7 @@ Rendering cards attached to one another on a single row through the `.k-card-gro
                 <span class="k-button k-flat k-primary">Action 2</span>
             </div>
         </div>
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -256,7 +256,7 @@ Rendering cards attached to one another on a single row through the `.k-card-gro
                 <span class="k-button k-flat k-primary">Action 2</span>
             </div>
         </div>
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -276,7 +276,7 @@ Rendering cards detached from one another on a single row through the `.k-card-d
 
 ```dojo
     <div class="k-card-deck">
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -287,7 +287,7 @@ Rendering cards detached from one another on a single row through the `.k-card-d
                 <span class="k-button k-flat k-primary">Action 2</span>
             </div>
         </div>
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -298,7 +298,7 @@ Rendering cards detached from one another on a single row through the `.k-card-d
                 <span class="k-button k-flat k-primary">Action 2</span>
             </div>
         </div>
-        <div class="k-card">
+        <div class="k-card" style="width: 300px;">
             <div class="k-card-body">
                 <h5 class="k-card-title">Card Title</h5>
                 <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -316,8 +316,8 @@ Rendering cards detached from one another on a single row through the `.k-card-d
 
 Cards have several pre-defined state classes that change their appearance:
 
-```dojo
-<div class="k-card k-state-primary">
+```
+<div class="k-card k-state-primary" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title Primary</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -329,7 +329,7 @@ Cards have several pre-defined state classes that change their appearance:
     </div>
 </div>
 
-<div class="k-card k-state-info">
+<div class="k-card k-state-info" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title Info</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -341,7 +341,7 @@ Cards have several pre-defined state classes that change their appearance:
     </div>
 </div>
 
-<div class="k-card k-state-success">
+<div class="k-card k-state-success" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title Success</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -353,7 +353,7 @@ Cards have several pre-defined state classes that change their appearance:
     </div>
 </div>
 
-<div class="k-card k-state-warning">
+<div class="k-card k-state-warning" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title Warning</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -365,7 +365,7 @@ Cards have several pre-defined state classes that change their appearance:
     </div>
 </div>
 
-<div class="k-card k-state-error">
+<div class="k-card k-state-error" style="width: 300px;">
     <div class="k-card-body">
         <h5 class="k-card-title">Card Title Error</h5>
         <h6 class="k-card-subtitle">Card Subtitle</h6>

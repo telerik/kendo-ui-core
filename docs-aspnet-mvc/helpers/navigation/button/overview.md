@@ -1,30 +1,22 @@
 ---
 title: Overview
-page_title: Button | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI Button widget for ASP.NET MVC."
+page_title: Button Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI ButtonGroup HtmlHelper for ASP.NET MVC."
 slug: overview_buttonhelper_aspnetmvc
 position: 1
 ---
 
 # Button HtmlHelper Overview
 
-The Button HtmlHelper extension is a server-side wrapper for the [Kendo UI Button](https://demos.telerik.com/kendo-ui/button/index) widget.
+The Telerik UI Button HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Button widget.
 
-Make sure you are familiar with the fundamental Kendo UI widget concepts and that the [Kendo UI MVC wrappers]({% slug overview_aspnetmvc %}) are set up correctly.
+The Button provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI for jQuery styling, the Button provides keyboard operability for elements, which natively do not have it&mdash;for example, `span`.
 
-## Getting Started
+* [Demo page for the Button](https://demos.telerik.com/aspnet-mvc/button)
 
-### The Basics
+## Initializing the Button
 
-The Kendo UI Button widget can be initialized from any element, defined through the `.Tag()` fluent method. However, using the `button` or `a` elements is more reasonable. A `button` tag is used by default, unless otherwise specified.
-
-The Button can include both inline and block elements defined via `.Content()`. Take into account the web standards, which prohibit placing block elements, such as `div`, and `p`, inside inline elements, such as `a` and `span`.
-
-Placing clickable elements with their own special behavior inside the Button&mdash;hyperlinks, textboxes, and others&mdash;may cause undesired side effects.
-
-### Initialization
-
-The following example demonstrates how to initialize the Button by using the default `button` tag.
+The following example demonstrates how to define the Button by using the Button HtmlHelper.
 
 ```Razor
 
@@ -58,162 +50,31 @@ The following example demonstrates how to initialize the Button by using the `an
             .Content("Link button") %>
 ```
 
-## Appearance
+## Basic Configuration
 
-The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image, usually a sprite. Taking web standards into consideration, using background images is better, because the icon does not represent structural content, but it's simply a decoration.
+* The `Name()` configuration method is mandatory as its value will be used for the `id` and the `name` attributes of the Button element. Moreover, the `id` is used in order to properly initialize the Button widget. The `id` attribute value is also used to retrieve its client-side instance.
+* The `Content()` configuration specifies the text that would be rendered in the button. This option does not accept HTML, but only string values.
+* The `Enable()` option determines whether the widget will be initially enabled (by default) of disabled.
+* The `Tag()` method allows the developer to determine whether the widget will be initialized from a `<button>` element (by default), or from an `<a>` element.
 
-To configure the icons in the Buttons, use just one of the following available settings at a time:
+For a runnable example, refer to the [demo on the basic usage of the Button](https://demos.telerik.com/aspnet-mvc/button).
 
-* `.Icon()`
-* `.SpriteCssClass()`
-* `.ImageUrl()`
+## Functionality and Features
 
-### Background Icons
+* [Disabled Button]({% slug disabled_buttonhelper_aspnetmvc %})
+* [Icon Button]({% slug iconbuttonhelper_aspnetmvc %})
 
-Background icons are applied via the `.Icon()` or `.SpriteCssClass()` fluent methods and are displayed as a background of a `span` element. The difference between the two settings is that `.Icon()` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite. For a list of available icon names, refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+## Events
 
-The following example demonstrates how to add a background icon by using `.Icon()`.
+For a complete example on basic Button events, refer to the [demo on using the events of the Button](https://demos.telerik.com/aspnet-mvc/button/events).
 
-```Razor
+## Referencing Existing Instances
 
-        @(Html.Kendo().Button()
-            .Name("cancelButton")
-            .Icon("cancel")
-            .Content("Cancel"))
-```
-```ASPX
-
-        <%= Html.Kendo().Button()
-            .Name("cancelButton")
-            .Icon("cancel")
-            .Content("Cancel") %>
-```
-
-The above configuration is expected to produce the HTML output from the following example.
-
-        <button type="button" id="cancelButton" class="k-button k-button-icontext"><span class="k-icon k-cancel"></span>Cancel</button>
-
-The following example demonstrates how to add a background icon by using `.SpriteCssClass()`.
-
-```Razor
-
-        @(Html.Kendo().Button()
-            .Name("spriteButton")
-            .SpriteCssClass("myIconClass")
-            .Content("Sprite button"))
-```
-```ASPX
-
-        <%= Html.Kendo().Button()
-            .Name("spriteButton")
-            .SpriteCssClass("myIconClass")
-            .Content("Sprite button") %>
-```
-
-The above configuration is expected to produce the HTML output from the following example.
-
-      <button type="button" id="spriteButton" class="k-button k-button-icontext"><span class="k-sprite myIconClass"></span>Sprite button</button>
-
-Technically, `.SpriteCssClass("k-icon k-cancel")` can be used to achieve the same result as `.Icon("cancel")`, but `.Icon()` spares you the need to set two CSS classes at the same time and provides a certain level of abstraction. The Button uses an existing `span` element if it is supplied as `.Content()`&mdash;for example, if you want to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
-
-The following example demonstrates how to use a button with no text.
-
-```Razor
-
-        @(Html.Kendo().Button()
-            .Name("deleteButton")
-            .SpriteCssClass("myDeleteClass")
-            .Content("<span class='k-sprite'>Delete</span>"))
-```
-```ASPX
-
-        <%= Html.Kendo().Button()
-            .Name("deleteButton")
-            .SpriteCssClass("myDeleteClass")
-            .Content("<span class='k-sprite'>Delete</span>") %>
-```
-
-### Image Icons
-
-Image icons are applied via the `.ImageUrl()` property and are displayed as an `img` element.
-
-The following example demonstrates how to use `.ImageUrl()`.
-
-```Razor
-
-        @(Html.Kendo().Button()
-            .Name("imageButton")
-            .ImageUrl("/images/myIcon.gif")
-            .Content("Image button"))
-```
-```ASPX
-
-        <%= Html.Kendo().Button()
-            .Name("imageButton")
-            .ImageUrl("/images/myIcon.gif")
-            .Content("Image button") %>
-```
-
-The above configuration is expected to produce the HTML output from the following example.
-
-        <button type="button" id="imageButton" class="k-button k-button-icontext"><img class="k-image" src="/images/myIcon.gif" alt="icon" />Image button</button>
-
-The following example demonstrates how to use `.ImageUrl()` with no text. Note that an `img` tag should be placed inside the Button content. The image should have a `k-image` CSS class.
-
-```Razor
-
-        @(Html.Kendo().Button()
-            .Name("iconButton")
-            .ImageUrl("/images/myIcon.gif")
-            .Content("<img class='k-image' alt='my icon' />"))
-```
-```ASPX
-
-        <%= Html.Kendo().Button()
-            .Name("iconButton")
-            .ImageUrl("/images/myIcon.gif")
-            .Content("<img class='k-image' alt='my icon' />") %>
-```
-
-## Features
-
-### Enable and Disable Buttons
-
-The business logic of an application often requires a certain button to be temporarily enabled or disabled. The Button can be configured to be initially disabled via its `.Enable()` setting. The widget can also be disabled or enabled at any time with JavaScript by using its `enable()` method with a Boolean argument.
-
-The following example demonstrates how to use `.Enable()`.
-
-```Razor
-
-        @(Html.Kendo().Button()
-            .Name("disabledButton")
-            .Enable(false)
-            .Content("Disabled button"))
-```
-```ASPX
-
-        <%= Html.Kendo().Button()
-            .Name("disabledButton")
-            .Enable(false)
-            .Content("Disabled button") %>
-```
-
-For more information on the [`enable` method of the Button](http://docs.telerik.com/kendo-ui/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](http://docs.telerik.com/kendo-ui/api/javascript/ui/button).
-
-## Reference
-
-### Existing Instances
-
-For more information on how to access an instance, refer to the [introductory article on the Button](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview).
+To reference an existing Button instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Button client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/button).
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: ButtonBuilder](/api/Kendo.Mvc.UI.Fluent/ButtonBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI Button Widget](http://docs.telerik.com/kendo-ui/controls/navigation/button/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Button HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/button)
+* [Using the API of the Button HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/button/api)
+* [ButtonBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/ButtonBuilder)
+* [Button Server-Side API](/api/button)

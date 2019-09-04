@@ -1,16 +1,16 @@
 ---
 title: Multiple Views
-page_title:  Multiple Views | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
-description: "Control the visible date ranges in the Kendo UI MultiViewCalendar and manage the number of its horizontally rendered views."
+page_title:  Multiple Views | Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC
+description: "Control the visible date ranges in the Telerik UI MultiViewCalendar and manage the number of its horizontally rendered views."
 slug: multiple_views_multiviewcalendar_aspnetmvc
 position: 3
 ---
 
 # Multiple Views
 
-The Kendo UI MultiViewCalendar allows you to define the number of views or months that are displayed at a time.
+The Telerik UI MultiViewCalendar allows you to define the number of views and months that are displayed at a time.
 
-In some scenarios it might be necessary to display more than two months. This is especially helpful for performing range selection between months.
+In some scenarios it might be necessary to display more than two months. This is especially helpful when performing range selection between months.
 
 ```ASPX
 
@@ -78,5 +78,6 @@ In some scenarios it might be necessary to display more than two months. This is
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Multiple Views in the MultiViewCalendar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/multiviewcalendar/multiple-views)
+* [View Selection in the MultiViewCalendar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/multiviewcalendar/view-selection)
+* [Server-Side API](/api/multiviewcalendar)

@@ -1,28 +1,28 @@
 ---
 title: DPL Processing
-page_title: DPL Processing | Kendo UI PDFViewer HtmlHelper for ASP.NET MVC
-description: "Learn how to use DPL processing in the Kendo UI PDFViewer HtmlHelper for ASP.NET MVC."
+page_title: DPL Processing | Telerik UI PDFViewer HtmlHelper for ASP.NET MVC
+description: "Learn how to use DPL processing in the Telerik UI PDFViewer HtmlHelper for ASP.NET MVC."
 slug: dplprocessing_pdfviewerhelper_aspnetmvc
 position: 3
 ---
 
 # DPL Processing
 
-The PDFViewer can be configured to use [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction) for PDF processing.
+You can configure the PDFViewer to use the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction) for PDF processing.
 
-> DPL Processing is BETA version and has the following limitations:
-> * Clipping elements and Gradients are currently not supported.
+> DPL Processing is in its beta version and has the following limitations:
+> * The clipping of elements and gradients is currently not supported.
 > * SVG or encoded images in other formats might not render correctly.
 
-## Basic Configuration
-
-**Requirements**
+## Requirements
 
 * DPL Processing depends on the `Telerik.Web.PDF` assembly.
 * To use DPL Processing in a project, it must target 4.6.2 .NET Framework.
 * The `Read.Url` option is mandatory, the `Open` and `Download` options are mandatory if the respective tools are displayed in the toolbar.
 
-An example of a PDFViewer widget configured to use DPL Processing.
+## Basic Configuration
+
+The following example demonstrates how to configure the PDFViewer to use DPL Processing.
 
 ```
     @(Html.Kendo().PDFViewer()
@@ -46,5 +46,5 @@ An example of a PDFViewer widget configured to use DPL Processing.
 
 ## See Also
 
-* [PDFViewer Overview]({% slug overview_pdfviewerhelper_aspnetmvc %})
-* [PDF.JS Processing]({% slug pdfjsprocessing_pdfviewerhelper_aspnetmvc %})
+* [DPL Processing by the PDFViewer HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/pdfviewer/dpl-processing)
+* [Server-Side API](/api/pdfviewer)

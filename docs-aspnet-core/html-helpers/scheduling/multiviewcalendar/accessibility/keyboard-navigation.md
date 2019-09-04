@@ -3,7 +3,7 @@ title: Keyboard Navigation
 page_title: Keyboard Navigation | Telerik UI MultiViewCalendar HtmlHelper for ASP.NET Core
 description: "Use the Telerik UI MultiViewCalendar keyboard navigation."
 slug: keyboard_navigation_multiviewcalendar_htmlhelper_aspnetcore
-position: 8
+position: 2
 ---
 
 # Keyboard Navigation

@@ -2,8 +2,9 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation | Telerik UI Menu HtmlHelper for ASP.NET Core
 description: "Learn how to use the keyboard navigation functionality of the Telerik UI Menu HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /html-helpers/navigation/menu/keyboard-navigation
 slug: htmlhelpers_menu_keyboardnavigation_aspnetcore
-position: 30
+position: 2
 ---
 
 # Keyboard Navigation

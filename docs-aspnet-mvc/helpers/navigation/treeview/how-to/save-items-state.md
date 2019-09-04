@@ -1,6 +1,6 @@
 ---
 title: Save the State of TreeView Items
-page_title: Save the State of TreeView Items | Kendo UI TreeView HtmlHelper for ASP.NET MVC
+page_title: Save the State of TreeView Items | Telerik UI TreeView HtmlHelper for ASP.NET MVC
 description: "Save the state of TreeView items in ASP.NET MVC applications."
 slug: howto_savetreeviewitemsstate_treeviewaspnetmvc
 ---
@@ -11,5 +11,6 @@ To see the example, refer to the project on how to [save the expanded and checke
 
 ## See Also
 
-* [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [TreeViewBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [Basic Usage of the TreeView HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treeview/index)
+* [TreeViewBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeView Server-Side API](/api/treeview)

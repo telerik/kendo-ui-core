@@ -1,13 +1,13 @@
 ---
 title: Handle Unique Identifiers with Menu Items
-page_title: Handle Unique Identifiers with Menu Items | Kendo UI Menu HtmlHelper for ASP.NET MVC
+page_title: Handle Unique Identifiers with Menu Items | Telerik UI Menu HtmlHelper for ASP.NET MVC
 description: "Learn how to handle unique identifiers with Kendo UI Menu items in ASP.NET MVC applications."
 slug: howto_handleuniqueidentifiers_menuaspnetmvc
 ---
 
 # Handle Unique Identifiers with Menu Items
 
-Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/select) event.
+Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [client-side `select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/select) event.
 
 To provide for the functionality, the Kendo UI Menu mainly uses the HTML elements that are rendered. That is why you can use custom HTML attributes to serve you as unique identifiers in your code.  
 
@@ -62,5 +62,7 @@ The following example demonstrates how to handle a custom command attribute to a
 
 ## See Also
 
-* [Overview of the Menu HtmlHelper]({% slug overview_menu_aspnetmvc %})
-* [MenuBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [Basic Usage of the Menu HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/menu)
+* [MenuItemBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
+* [MenuBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [Menu Server-Side API](/api/menu)

@@ -1,20 +1,20 @@
 ---
 title: Overview
-page_title: ButtonGroup | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI ButtonGroup widget for ASP.NET MVC."
+page_title: ButtonGroup Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI ButtonGroup HtmlHelper for ASP.NET MVC."
 slug: overview_buttongrouphelper_aspnetmvc
 position: 1
 ---
 
 # ButtonGroup HtmlHelper Overview
 
-The ButtonGroup HtmlHelper extension is a server-side wrapper for the [Kendo UI ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/index) widget.
+The Telerik UI ButtonGroup HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI ButtonGroup widget.
 
-Make sure you are familiar with the fundamental Kendo UI widget concepts and that the [Kendo UI MVC wrappers]({% slug overview_aspnetmvc %}) are set up correctly.
+The ButtonGroup groups a series of buttons together on a single line.
 
-## Getting Started
+* [Demo page for the ButtonGroup](https://demos.telerik.com/aspnet-mvc/buttongroup/index)
 
-### Initialization
+## Initializing the ButtonGroup
 
 The following example demonstrates how to initialize the ButtonGroup.
 
@@ -41,162 +41,24 @@ The following example demonstrates how to initialize the ButtonGroup.
                 }) %>
 ```
 
-## Icons
+## Functionality and Features
 
-The ButtonGroup provides the `.Icon()` method for configuring icons.
+* [Disabled ButtonGroup]({% slug disabled_buttongrouphelper_aspnetmvc %})
+* [Icon ButtonGroup]({% slug icons_buttongrouphelper_aspnetmvc %})
+* [Index]({% slug index_buttongrouphelper_aspnetmvc %})
+* [Selection]({% slug selection_buttongrouphelper_aspnetmvc %})
 
-```Razor
+## Events
 
-         @(Html.Kendo().ButtonGroup()
-            .Name("player")
-            .Items(t =>
-            {
-                    t.Add().Icon("play");
-                    t.Add().Icon("pause");
-                    t.Add().Icon("stop");
-            }))
-```
-```ASPX
+For a complete example on basic ButtonGroup events, refer to the [demo on using the events of the ButtonGroup](https://demos.telerik.com/aspnet-mvc/buttongroup/events).
 
-        <%= Html.Kendo().ButtonGroup()
-            .Name("player")
-            .Items(t =>
-            {
-                    t.Add().Icon("play");
-                    t.Add().Icon("pause");
-                    t.Add().Icon("stop");
-            }) %>
-```
+## Referencing Existing Instances
 
-The previous configuration is expected to produce the HTML output from the following example.
-
-        <div class="k-button-group k-widget" data-role="buttongroup" id="player" role="group" tabindex="0">
-            <span data-icon="play" aria-pressed="false" role="button" class="k-button k-button-icon">
-                <span class="k-icon k-i-play"></span>
-            </span>
-            <span data-icon="pause" aria-pressed="false" role="button" class="k-button k-button-icon">
-                <span class="k-icon k-i-pause"></span>
-            </span>
-            <span data-icon="stop" aria-pressed="false" role="button" class="k-button k-button-icon">
-                <span class="k-icon k-i-stop"></span>
-            </span>
-        </div>
-
-## Features
-
-### Enable and Disable ButtonGroup
-
-You can configure the ButtonGroup as initially disabled by using its `.Enable()` setting. The ButtonGroup can also be disabled or enabled at any time with JavaScript by using its `.Enable()` method with a Boolean argument.
-
-For more information on the [`enable` method of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#methods-enable), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
-
-The following example demonstrates how to enable and disable the ButtonGroup over the `.Enable()` configuration.
-
-```Razor
-
-        @(Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Enable(false)
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }))
-```
-```ASPX
-
-        <%= Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Enable(false)
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }) %>
-```
-
-### Index
-
-You can configure the initially selected index of the ButtonGroup by using its `index` property. An index can be selected through the `select()` method with a Integer argument.
-
-For more information on the [`index` setting of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#configuration-index), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
-
-The following example demonstrates how to select a button by its index.
-
-```Razor
-
-        @(Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Index(1)
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }))
-```
-```ASPX
-
-        <%= Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Index(1)
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }) %>
-```
-
-### Selection
-
-The ButtonGroup enables you to restrict the number of Buttons that can be selected through its `.Selection()` property. The property can be configured for a `single` or `multiple` selection.
-
-For more information on the [`selection` setting of the ButtonGroup](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup#configuration-selection), refer to the [API of the ButtonGroup control](http://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
-
-The following example demonstrates how to use `.Selection()`.
-
-```Razor
-
-        @(Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Selection("multiple")
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }))
-```
-```ASPX
-
-        <%= Html.Kendo().ButtonGroup()
-            .Name("select-period")
-            .Selection("multiple")
-            .Items(t =>
-                {
-                        t.Add().Text("Month");
-                        t.Add().Text("Quarter");
-                        t.Add().Text("Year");
-                }) %>
-```
-
-## Reference
-
-### Existing Instances
-
-For more information on how to access an instance, refer to the [introductory article on the ButtonGroup](http://docs.telerik.com/kendo-ui/controls/navigation/buttongroup/overview).
+To reference an existing ButtonGroup instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ButtonGroup client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/buttongroup).
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: ButtonGroupBuilder](/api/Kendo.Mvc.UI.Fluent/ButtonGroupBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI ButtonGroup Widget](http://docs.telerik.com/kendo-ui/controls/navigation/buttongroup/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the ButtonGroup HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/buttongroup)
+* [Using the API of the ButtonGroup HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/buttongroup/api)
+* [ButtonGroupBuilder Server-Side API](/api/Kendo.Mvc.UI.Fluent/ButtonGroupBuilder)
+* [ButtonGroup Server-Side API](/api/buttongroup)

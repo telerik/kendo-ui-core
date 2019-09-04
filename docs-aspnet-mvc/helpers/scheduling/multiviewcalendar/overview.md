@@ -1,18 +1,20 @@
 ---
 title: Overview
-page_title: MultiViewCalendar | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI MultiViewCalendar widget for ASP.NET MVC."
+page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI MultiViewCalendar HtmlHelper for ASP.NETT MVC."
 slug: overview_multiviewcalendar_aspnetmvc
 position: 1
 ---
 
 # MultiViewCalendar HtmlHelper Overview
 
-The MultiViewCalendar HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/index) widget.
+The Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI MultiViewCalendar widget.
 
-## Configuration
+The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
 
-Below are listed the steps for you to follow when configuring the Kendo UI MultiViewCalendar.
+* [Demo page for the MultiViewCalendar](https://demos.telerik.com/aspnet-mvc/multiviewcalendar)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -27,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 ```ASPX
 
         <%: Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the MultiViewCalendar.
             .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
             .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
             .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
@@ -36,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 ```Razor
 
         @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
+            .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the MultiViewCalendar.
             .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
             .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
             .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
@@ -53,11 +55,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 * [Week column]({% slug week_column_multiviewcalendar_aspnetmvc %})
 * [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar_aspnetmvc %})
 
-## Event Handling
+## Events
 
-You can subscribe to all MultiViewCalendar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar#events).
+You can subscribe to all MultiViewCalendar [events](/api/multiviewcalendar).
 
-### By Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -100,7 +102,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -125,11 +127,6 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## See Also
 
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI MultiViewCalendar Widget](http://docs.telerik.com/kendo-ui/controls/scheduling/multiviewcalendar/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the MultiViewCalendar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/multiviewcalendar)
+* [Using the API of the MultiViewCalendar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/multiviewcalendar/api)
+* [Server-Side API](/api/multiviewcalendar)

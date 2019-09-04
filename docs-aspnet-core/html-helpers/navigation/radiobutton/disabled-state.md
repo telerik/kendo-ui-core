@@ -1,7 +1,7 @@
 ---
 title: Disabled RadioButton
 page_title: Disabled RadioButton | Telerik UI RadioButton HtmlHelper for ASP.NET Core
-description: "Enable or disable the Telerik UI RadioButton for ASP.NET MVC."
+description: "Enable or disable the Telerik UI RadioButton for ASP.NET Core."
 slug: disabledstate_radiobutton_aspnetcore
 position: 2
 ---

@@ -27,6 +27,15 @@ The following example demonstrates how to define the Calendar by using the Calen
     )
 ```
 
+## Functionality and Features
+
+* [Date ranges]({% slug htmlhelpers_dateranges_calendar_aspnetcore %})
+* [Day template]({% slug htmlhelpers_daytemplate_calendar_aspnetcore %})
+* [Week numbers]({% slug htmlhelpers_weeknumbers_calendar_aspnetcore %})
+* [Selection]({% slug htmlhelpers_selection_calendar_aspnetcore %})
+* [Disabled dates]({% slug htmlhelpers_disableddates_calendar_aspnetcore %})
+* [Accessibility]({% slug htmlhelpers_accessibility_calendar_aspnetcore %})
+
 ## Events
 
 You can subscribe to all Calendar events. For a complete example on basic Calendar events, refer to the [demo on using the events of the Calendar](https://demos.telerik.com/aspnet-core/calendar/events).
@@ -94,15 +103,6 @@ To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`]
          });
     </script>
 ```
-
-## Functionality and Features
-
-* [Date ranges]({% slug htmlhelpers_dateranges_calendar_aspnetcore %})
-* [Day template]({% slug htmlhelpers_daytemplate_calendar_aspnetcore %})
-* [Week numbers]({% slug htmlhelpers_weeknumbers_calendar_aspnetcore %})
-* [Selection]({% slug htmlhelpers_selection_calendar_aspnetcore %})
-* [Disabled dates]({% slug htmlhelpers_disableddates_calendar_aspnetcore %})
-* [Accessibility]({% slug htmlhelpers_accessibility_calendar_aspnetcore %})
 
 ## See Also
 

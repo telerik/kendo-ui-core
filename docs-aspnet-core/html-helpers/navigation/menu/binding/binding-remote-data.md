@@ -10,7 +10,7 @@ position: 3
 
 Remote data binding enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
 
-The Menu supports remote data binding as of the Kendo UI for jQuery R2 2019 release.
+The Menu supports remote data binding as of the R2 2019 release.
 
 1. Implement an action method in your controller that returns the collection for the Menu.
 

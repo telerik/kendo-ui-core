@@ -15,7 +15,7 @@ The ButtonGroup groups a series of buttons together on a single line.
 
 * [Demo page for the ButtonGroup](https://demos.telerik.com/aspnet-core/buttongroup/index)
 
-## Initialization
+## Initializing the ButtonGroup
 
 The following example demonstrates how to initialize the ButtonGroup.
 

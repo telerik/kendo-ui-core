@@ -1,9 +1,9 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
-description: "Use the Kendo UI MultiViewCalendar keyboard navigation."
+page_title: Keyboard Navigation | Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC
+description: "Use the Telerik UI MultiViewCalendar keyboard navigation."
 slug: keyboard_navigation_multiviewcalendar_aspnetmvc
-position: 8
+position: 2
 ---
 
 
@@ -45,5 +45,5 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Keyboard Navigation by the MultiViewCalendar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/multiviewcalendar/keyboard-navigation)
+* [Accessibility in Telerik UI for ASP.NET MVC]({% slug overview_accessibility %})
