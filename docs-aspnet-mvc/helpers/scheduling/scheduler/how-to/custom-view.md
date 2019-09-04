@@ -1,15 +1,16 @@
 ---
 title: Implement Custom Views
-page_title: Implement Custom Views | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Implement Custom Views | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Implement a custom view for a Kendo UI Scheduler in ASP.NET MVC applications."
 slug: howto_implementcustomviews_scheduleraspnetmvc
 ---
 
 # Implement Custom Views
 
-To see the example, refer to the project on how to [implement a custom view for a Kendo UI Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-custom-view) in ASP.NET MVC applications.
+To see the example, refer to the project on how to [implement a custom view for a Scheduler](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-custom-view) in ASP.NET MVC applications.
 
 ## See Also
 
-* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [SchedulerBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [Basic Usage of the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler)
+* [SchedulerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [Scheduler Server-Side API](/api/scheduler)

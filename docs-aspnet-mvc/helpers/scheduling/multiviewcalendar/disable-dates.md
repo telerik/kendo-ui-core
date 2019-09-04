@@ -1,22 +1,18 @@
 ---
 title: Disabled Dates
-page_title:  Disabled Dates| Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
-description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
+page_title: Disabled Dates| Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC
+description: "Learn how to disable dates in the Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC."
 slug: disabled_dates_multiviewcalendar_aspnetmvc
 position: 6
 ---
-
 
 # Disabled Dates
 
 The MultiViewCalendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
 
-To disable a date, either:
+To disable a date, either [set an array](#setting-and-array) or [add a function](#adding-a-function).
 
-* Set an array, or
-* Add a function.
-
-## Set an Array
+## Setting an Array
 
 When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
@@ -35,7 +31,7 @@ When you set an array, list the days that need to be disabled by using the first
         )
 ```
 
-## Add a Function
+## Adding a Function
 
 When you add a function, determine its return value as `true` for the date that is disabled.
 
@@ -78,5 +74,5 @@ When you add a function, determine its return value as `true` for the date that 
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Disabled Dates in the MultiViewCalendar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/multiviewcalendar/disabled-dates)
+* [Server-Side API](/api/multiviewcalendar)

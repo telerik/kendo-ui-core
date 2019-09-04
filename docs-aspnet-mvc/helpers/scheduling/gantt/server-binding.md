@@ -1,22 +1,22 @@
 ---
 title: Server Binding
-page_title: Server Binding | Kendo UI Gantt HtmlHelper for ASP.NET MVC
-description: "Configure the Kendo UI Gamtt for ASP.NET MVC for server binding."
+page_title: Server Binding | Telerik UI Gantt HtmlHelper for ASP.NET MVC
+description: "Learn how to implement server binding with Telerik UI Gantt HtmlHelper for ASP.NET MVC."
 slug: serverbinding_gantthelper_aspnetmvc
 position: 2
 ---
 
 # Server Binding
 
-By default, the Kendo UI Gantt for ASP.NET MVC performs `HTTP GET` requests to load both its tasks and dependencies from the server.
+By default, the Telerik UI Gantt for ASP.NET MVC performs server-side requests (`HTTP` and `GET`) when doing paging, sorting, and filtering.
 
-There is an option to render the view with the data for the tasks and dependences. The data models for the `GanttTasks` and `GantDependencies` should implement `IGanttTask` and `IGanttDependency` interfaces respectively.
+You can also render the view with the data for the tasks and dependences. You have to implement the `IGanttTask` and `IGanttDependency` interfaces in the data models for the `GanttTasks` and `GantDependencies` respectively.
 
-## Set Data Model Classes
+## Setting the Data Model Classes
 
-Below are listed the data model classes for the Tasks and Dependencies and the available options on how to bind the Kendo UI Gantt for ASP.NET MVC.
+You can bind the Gantt by using the data model classes for its Tasks and Dependencies.
 
-### TaskViewModel
+The following example demonstrates how to bind the Gantt through the `TaskViewModel`.
 
     public class TaskViewModel : IGanttTask
     {
@@ -73,7 +73,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         }
     }
 
-### DependencyViewModel
+The following example demonstrates how to bind the Gantt through the `DependencyViewModel`.
 
     public class DependencyViewModel : IGanttDependency
     {
@@ -95,7 +95,9 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         }
     }
 
-## Bind to Items from ViewData
+## Binding to Items from ViewData
+
+The following example demonstrates how to bind the Gantt to items by using the `ViewData` configuration.
 
 ```Controller
     public ActionResult ServerBinding()
@@ -196,7 +198,9 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
     )
 ```
 
-## Bind to Items from ViewBag
+## Binding to Items from ViewBag
+
+The following example demonstrates how to bind the Gantt to items by using the `ViewBag` configuration.
 
 ```Controller
     public ActionResult ServerBinding()
@@ -299,11 +303,6 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ## See Also
 
-* [Overview of the Kendo UI Gantt HtmlHelper]({% slug overview_gantthelper_aspnetmvc %})
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Gantt HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/gantt)
+* [GanttBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GanttBuilder)
+* [Gantt Server-Side API](/api/gantt)

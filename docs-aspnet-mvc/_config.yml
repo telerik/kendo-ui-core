@@ -65,10 +65,19 @@ navigation:
         title: "Layout"
      "helpers/media":
         title: "Media"
+     "helpers/media/mediaplayer/globalization":
+        title: "Globalization"
+        position: 40
+     "helpers/media/mediaplayer/accessibility":
+        title: "Accessibility"
+        position: 50
      "helpers/navigation":
         title: "Navigation"
      "helpers/navigation/radiobutton":
         title: "RadioButton"
+     "helpers/navigation/menu/binding":
+        title: "Data Binding"
+        position: 2
      "helpers/navigation/panelbar":
         title: "PanelBar"
      "helpers/pdf":

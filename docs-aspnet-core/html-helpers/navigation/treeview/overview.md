@@ -106,8 +106,7 @@ The following example demonstrates the available TreeView events and how an even
                 .Action("Employees", "TreeView")
             )
         )
-        .Events(events => events
-            .Change("onChange")
+        .Events(events => eventsChange("onChange")
             .Select("onSelect")
             .Check("onCheck")
             .Collapse("onCollapse")

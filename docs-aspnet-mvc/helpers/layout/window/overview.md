@@ -62,7 +62,7 @@ The Window displays content in a modal or non-modal HTML window. By default, the
 
 ## Events
 
-You can subscribe to all Window [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/window#events).
+You can subscribe to all Window [events](/api/window). For a complete example on basic Window events, refer to the [demo on using the events of the Window](https://demos.telerik.com/aspnet-mvc/window/events).
 
 ### Handling by Handler Name
 

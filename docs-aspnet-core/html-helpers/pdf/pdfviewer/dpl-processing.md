@@ -1,6 +1,6 @@
 ---
 title: DPL Processing
-page_title: PDFViewer DPL Processing | Telerik UI for ASP.NET Core HTML Helpers
+page_title: DPL Processing | Telerik UI PDFViewer HtmlHelper for ASP.NET Core
 description: "Learn how to use DPL processing in the Telerik UI PDFViewer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_pdfviewer_dpl_processing_aspnetcore
 position: 3
@@ -22,7 +22,7 @@ You can configure the PDFViewer to use the [Telerik Document Processing library]
 
 ## Basic Configuration
 
-The followin example demonstrates how to configure the PDFViewer to use DPL Processing.
+The following example demonstrates how to configure the PDFViewer to use DPL Processing.
 
 ```
     @(Html.Kendo().PDFViewer()

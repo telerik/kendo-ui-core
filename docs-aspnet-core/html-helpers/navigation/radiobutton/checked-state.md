@@ -1,7 +1,7 @@
 ---
 title: Checked RadioButton
 page_title: Checked RadioButton | Telerik UI RadioButton HtmlHelper for ASP.NET Core
-description: "Enable the checked or unchecked state of the Telerik UI RadioButton for ASP.NET MVC."
+description: "Enable the checked or unchecked state of the Telerik UI RadioButton for ASP.NET Core."
 slug: checkedstate_radiobutton_aspnetcore
 position: 3
 ---

@@ -1,29 +1,31 @@
 ---
 title: Overview
-page_title: ToolBar | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI ToolBar widget for ASP.NET MVC."
+page_title: ToolBar Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI ToolBar HtmlHelper for ASP.NET MVC."
 slug: overview_toolbarhelper_aspnetmvc
 position: 1
 ---
 
 # ToolBar HtmlHelper Overview
 
-The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](https://demos.telerik.com/kendo-ui/toolbar/index) widget.
+The Telerik UI ToolBar HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI ToolBar widget.
 
-## Getting Started
+The ToolBar is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
 
-### Initialization
+* [Demo page for the ToolBar](https://demos.telerik.com/aspnet-mvc/toolbar)
 
-The following example demonstrates how to initialize the ToolBar.
+## Initializing the ToolBar
+
+The following example demonstrates how to define the ToolBar by using the ToolBar HtmlHelper.
 
     @(Html.Kendo().ToolBar()
         .Name("ToolBar")
         .Items(items => {
 
-            //A regular button.
+            // A regular button.
             items.Add().Type(CommandType.Button).Text("Button").Icon("note");
 
-            //A toggle button.
+            // A toggle button.
             items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true).Selected(true);
 
             // The Split button.
@@ -45,14 +47,12 @@ The following example demonstrates how to initialize the ToolBar.
             // The separator.
             items.Add().Type(CommandType.Separator);
 
-            //A custom template.
+            // A custom template.
             items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
         })
     )
 
-### Configuration
-
-Below are listed the steps for you to follow when configuring the Kendo UI ToolBar.
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which renders the view.
@@ -66,68 +66,36 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
     ```ASPX
         <%: Html.Kendo().ToolBar()
-            .Resizable(true)   //Enable or disable the resizing feature.
+            .Resizable(true)   // Enable or disable the resizing feature.
 
-            .Items(items => {  // Define the widget commands.
+            .Items(items => {  // Define the commands of the helper.
                 items.Add().Type(CommandType.Button).Text("Button");
             })
         %>
     ```
     ```Razor
         @(Html.Kendo().ToolBar()
-            .Resizable(true)   //Enable or disable the resizing feature.
+            .Resizable(true)   // Enable or disable the resizing feature.
 
-            .Items(items => {  // Define the widget commands.
+            .Items(items => {  // Define the commands of the helper.
                 items.Add().Type(CommandType.Button).Text("Button");
             })
         )
     ```
 
-For more information, refer to the article on [supported command types](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview#command-types).
+## Functionality and Features
 
-## Spacer
+The ToolBar provides an option for implementing the [spacer command type]({% slug spacer_toolbarhelper_aspnetmvc %}).
 
-The `Spacer` command type moves the tools that are declared after it to the right side of the ToolBar.
+## Events
 
-The following example demonstrates how to define a spacer.
-
-```
-    @(Html.Kendo().ToolBar()
-        .Name("ToolBar")
-        .Items(items => {
-            items.Add().Type(CommandType.Button).Text("Button 1").Id("button1");
-            items.Add().Type(CommandType.Spacer);
-            items.Add().Type(CommandType.Button).Text("Button 2").Id("button2");
-        })
-    )
-```
-
-You can use multiple spacers to create an equal amount of space between several tools.
-
-```
-    @(Html.Kendo().ToolBar()
-        .Name("ToolBar")
-        .Items(items => {
-            items.Add().Type(CommandType.Button).Text("Button 1").Id("button1");
-            items.Add().Type(CommandType.Spacer);
-            items.Add().Type(CommandType.Button).Text("Button 2").Id("button2");
-            items.Add().Type(CommandType.Spacer);
-            items.Add().Type(CommandType.Button).Text("Button 3").Id("button3");
-        })
-    )
-```
-
-## Event Handling
-
-You can subscribe to all ToolBar [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#events).
-
-### By Handler Name
+You can subscribe to all ToolBar [events](/api/toolbar). For a complete example on basic ToolBar events, refer to the [demo on using the events of the ToolBar](https://demos.telerik.com/aspnet-mvc/toolbar/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
 ```ASPX
     <%: Html.Kendo().ToolBar()
-        .Items(items => {  // Define the widget commands
+        .Items(items => {  // Define the commands of the ToolBar.
             items.Add().Type(CommandType.Button).Text("Button");
         })
         .Events(e => e
@@ -144,12 +112,12 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the click event.
         }
 
-        //.....
+        // ...
     </script>
 ```
 ```Razor
     @(Html.Kendo().ToolBar()
-        .Items(items => {  // Define the widget commands
+        .Items(items => {  // Define the commands of the ToolBar.
             items.Add().Type(CommandType.Button).Text("Button");
         })
         .Events(e => e
@@ -166,15 +134,13 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the click event.
         }
 
-        //.....
+        // ...
     </script>
 ```
 
-## Reference
+## Referencing Existing Instances
 
-### Existing Instances
-
-To reference an existing Kendo UI ToolBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ToolBar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#methods) to control its behavior.
+To reference an existing ToolBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ToolBar client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#methods) to control its behavior.
 
     // Place the following after the ToolBar for ASP.NET MVC declaration.
     <script>
@@ -185,12 +151,8 @@ To reference an existing Kendo UI ToolBar instance, use the [`jQuery.data()`](ht
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: ToolBarBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ToolBarBuilder)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI ToolBar Widget](http://docs.telerik.com/kendo-ui/controls/navigation/toolbar/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the ToolBar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/toolbar)
+* [Using the API of the ToolBar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/toolbar/api)
+* [ToolBarBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ToolBarBuilder)
+* [ToolBar Server-Side API](/api/toolbar)
+* [ToolBar Client-Side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)

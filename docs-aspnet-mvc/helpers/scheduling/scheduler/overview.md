@@ -1,21 +1,23 @@
 ---
 title: Overview
-page_title: Scheduler | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI Scheduler widget for ASP.NET MVC."
+page_title: Scheduler Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI Scheduler HtmlHelper for ASP.NET MVC."
 slug: overview_schedulerhelper_aspnetmvc
 previous_url: /helpers/scheduler/mvc-scheduler-overview
 position: 1
 ---
 
-# Scheduler
+# Scheduler HtmlHelper Overview
 
-The Scheduler HtmlHelper extension is a server-side wrapper for the [Kendo UI Scheduler](https://demos.telerik.com/kendo-ui/scheduler/index) widget.
+The Telerik UI Scheduler HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Scheduler widget.
 
-## Getting Started
+The Scheduler displays a set of events, appointments, or tasks. It supports the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
-### Configuration
+> As of the R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing. If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
 
-Below are listed the steps for you to follow when configuring the Kendo UI Scheduler.
+* [Demo page for the Scheduler](https://demos.telerik.com/aspnet-mvc/scheduler)
+
+## Basic Configuration
 
 1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 1. Create a new action method which inherits the `ISchedulerEvent` interface.
@@ -81,11 +83,18 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
         )
     ```
 
-## Event Handling
+## Functionality and Features
 
-You can subscribe to all Scheduler [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events).
+* [Ajax binding]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})
+* [Adaptive rendering]({% slug adaptiverendering_schedulerhelper_aspnetmvc %})
+* [Resources]({% slug resourcesscheduler_aspnetmvc %})
+* [Scaffolding]({% slug scaffoldingscheduler_aspnetmvc %})
 
-### By Handler Name
+## Events
+
+You can subscribe to all Scheduler [events](/api/scheduler). For a complete example on basic Scheduler events, refer to the [demo on using the events of the Scheduler](https://demos.telerik.com/aspnet-mvc/scheduler/events). For a runnable example on the `move` and `resize` events, refer to the [demo on the specific events](https://demos.telerik.com/aspnet-mvc/scheduler/move-resize).
+
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -141,7 +150,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### By Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -167,17 +176,9 @@ The following example demonstrates how to subscribe to events by a template dele
         })
     )
 
-## Reset Series
+## Referencing Existing Instances
 
-As of the R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing.
-
-If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
-
-## Reference
-
-### Existing Instances
-
-To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+To reference an existing Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.  
 
     // Place the following after the Scheduler for ASP.NET MVC declaration.
     <script>
@@ -189,17 +190,7 @@ To reference an existing Kendo UI Scheduler instance, use the [`jQuery.data()`](
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC API Reference: SchedulerBuilder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
-* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [Ajax Binding of the Scheduler HtmlHelper]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})
-* [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
-* [Resources of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
-* [Scheduler HtmlHelper How-To Examples]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %})
-* [Overview of the Kendo UI Scheduler Widget](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler)
+* [Using the API of the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler/api)
+* [SchedulerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [Scheduler Server-Side API](/api/scheduler)

@@ -1,6 +1,6 @@
 ---
 title: Use SignalR Binding
-page_title: Use SignalR Binding | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Use SignalR Binding | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Use real-time push-notifications from SignalR(v2) with local hub in ASP.NET MVC applications."
 slug: howto_usesignalrbinding_scheduleraspnetmvc
 ---
@@ -19,7 +19,6 @@ To see the example, refer to [this GitHub repository](https://github.com/telerik
 
 ## See Also
 
-* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [SchedulerBuilder API Reference](/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
-
-
+* [Basic Usage of the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler)
+* [SchedulerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [Scheduler Server-Side API](/api/scheduler)

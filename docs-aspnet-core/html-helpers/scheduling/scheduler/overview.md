@@ -13,7 +13,7 @@ The Telerik UI Scheduler HtmlHelper for ASP.NET Core is a server-side wrapper fo
 
 The Scheduler displays a set of events, appointments, or tasks. It supports the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
-> As of the Kendo UI for jQuery R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing. If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
+> As of the R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing. If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
 
 * [Demo page for the Scheduler](https://demos.telerik.com/aspnet-core/scheduler/index)
 
@@ -207,7 +207,7 @@ The following example demonstrates how to subscribe to the `dataBound` and `data
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
 
     // Place the following after your Telerik UI Scheduler for ASP.NET Core declaration.
     <script>

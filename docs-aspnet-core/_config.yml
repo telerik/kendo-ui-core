@@ -184,6 +184,9 @@ navigation:
      "html-helpers/navigation/menu/contextmenu":
         title: "ContextMenu"
         position: 3
+     "html-helpers/navigation/menu/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         isNew: true
@@ -193,6 +196,12 @@ navigation:
         title: "Interactivity and UX"
      "html-helpers/media":
         title: "Media"
+     "html-helpers/media/mediaplayer/globalization":
+        title: "Globalization"
+        position: 40
+     "html-helpers/media/mediaplayer/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/pdf":
         title: "PDF"
      "html-helpers/pdf/pdfviewer":

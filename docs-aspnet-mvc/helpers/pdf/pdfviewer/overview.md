@@ -1,35 +1,26 @@
 ---
 title: Overview
-page_title: PDFViewer | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Get started with the server-side wrapper for the Kendo UI PDFViewer widget for ASP.NET MVC."
+page_title: PDFViewer Overview | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Learn the basics when working with the Telerik UI PDFViewer HtmlHelper for ASP.NET."
 slug: overview_pdfviewerhelper_aspnetmvc
 position: 1
 ---
 
 # PDFViewer HtmlHelper Overview
 
-The PDFViewer HtmlHelper extension is a server-side wrapper for the [Kendo UI PDFViewer](http://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer) widget.
+The Telerik UI PDFViewer HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI PDFViewer widget.
 
-The [Kendo UI PDFViewer](https://demos.telerik.com/aspnet-mvc/pdfviewer) displays PDF files in the browser. It provides flexibility to choose the PDF library to be used for processing the file:
+The PDFViewer displays PDF files in the browser and consists of a toolbar and a scrollable container that wraps the page elements. Default tools collection includes `pager`, `open` and `download` tool. For processing files, it supports the PDF.JS Processing and Telerik DPL Processing libraries. Among the key features the PDFViewer provides are the selection of a PDF processing library, a built-in paging mechanism, virtualization capabilities, a built-in default toolbar collection, and responsive capabilities and page scaling.
 
-* [PDF.JS Processing](https://demos.telerik.com/aspnet-mvc/pdfviewer)
-* [Telerik DPL Processing](https://demos.telerik.com/aspnet-mvc/pdfviewer/dpl-processing)
+* [Demo page for the PDFViewer](https://demos.telerik.com/aspnet-mvc/pdfviewer)
 
-The PDFViewer consists of a toolbar and a scrollable container that wraps the page elements. Default tools collection includes `pager`, `open` and `download` tool.
+## Initializing the PDFViewer
 
-**Key Features**
+You can initialize the PDFViewer from HTML either by [using PDF.JS](#using-pdfjs) or [with the Telerik Document Processing library](#using-telerik-document-processing).
 
-* Allows you to choose the PDF processing lib
-* Provides built-in paging mechanism
-* Has virtualization capabilities
-* Provides built-in default toolbar collection
-* Has responsive capabilities and page scaling
+### Using PDF.JS
 
-## Getting Started
-
-### Initialization
-
-While initializing the widget using the HTML helper, choose the PDF processing library and setup its settings. You could initialize the widgets using [PDF.JS](https://mozilla.github.io/pdf.js/):
+The following example demonstrates how to initialize the PDFViewer by using [PDF.JS](https://mozilla.github.io/pdf.js/).
 
 ```Razor
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -38,7 +29,7 @@ While initializing the widget using the HTML helper, choose the PDF processing l
     </script>
 
     @(Html.Kendo().PDFViewer()
-        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the PDFViewer.
         .PdfjsProcessing(pdf => pdf
             .File(Url.Content("~/Content/web/pdfViewer/sample.pdf"))
         )
@@ -52,7 +43,7 @@ While initializing the widget using the HTML helper, choose the PDF processing l
     </script>
 
     <%: Html.Kendo().PDFViewer()
-        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the PDFViewer.
         .PdfjsProcessing(pdf => pdf
             .File(Url.Content("~/Content/web/pdfViewer/sample.pdf"))
         )
@@ -60,11 +51,13 @@ While initializing the widget using the HTML helper, choose the PDF processing l
     %>
 ```
 
-or using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction):
+### Using Telerik Document Processing
+
+The following example demonstrates how to initialize the PDFViewer by using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction).
 
 ```Razor
     @(Html.Kendo().PDFViewer()
-        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the PDFViewer.
         .DplProcessing(dpl => {
             dpl.Read(r => r.Url(Url.Action("GetInitialPdf", "PdfViewer")));
             dpl.Upload(upload => upload.Url(Url.Action("GetPdf", "PdfViewer")).SaveField("file"));
@@ -83,7 +76,7 @@ or using the [Telerik Document Processing library](https://docs.telerik.com/devt
 ```
 ```ASPX
     <%: Html.Kendo().PDFViewer()
-        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the widget.
+        .Name("pdfviewer") // The name of the PDFViewer is mandatory. It specifies the "id" attribute of the PDFViewer.
         .DplProcessing(dpl => {
             dpl.Read(r => r.Url(Url.Action("GetInitialPdf", "PdfViewer")));
             dpl.Upload(upload => upload.Url(Url.Action("GetPdf", "PdfViewer")).SaveField("file"));
@@ -101,11 +94,17 @@ or using the [Telerik Document Processing library](https://docs.telerik.com/devt
     %>
 ```
 
-## See also
+## Functionality and Features
 
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Overview of the Kendo UI PDFViewerBuilder Widget](http://docs.telerik.com/kendo-ui/controls/PDF/PDFViewer/overview)
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [PDF.js processing]({% slug pdfjsprocessing_pdfviewerhelper_aspnetmvc %})
+* [DPL processing]({% slug dplprocessing_pdfviewerhelper_aspnetmvc %})
+
+## Events
+
+For a complete example on basic PDFViewer events, refer to the [demo on using the events of the PDFViewer](https://demos.telerik.com/aspnet-mvc/pdfviewer/events).
+
+## See Also
+
+* [Basic Usage of the PDFViewer HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/pdfviewer/index)
+* [Using the API of the PDFViewer HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/pdfviewer/api)
+* [Server-Side API](/api/pdfviewer)

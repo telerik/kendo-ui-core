@@ -1,14 +1,14 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding | Telerik UI Scheduler HtmlHelper for ASP.NET Core
-description: "Get started with the Scheduler HtmlHelper for ASP.NET Core and learn how to configure it for ajax binding."
+description: "Get started with the Scheduler HtmlHelper for ASP.NET Core and learn how to configure it for Ajax binding."
 slug: htmlhelpers_scheduler_ajaxbinding_aspnetcore
 position: 1
 ---
 
 # Ajax Binding
 
-You can configure the Scheduler HtmlHelper for AJAX binding.
+You can configure the Scheduler HtmlHelper for Ajax binding.
 
 For a complete example, refer to the [demo on binding the Scheduler to remote data](https://demos.telerik.com/aspnet-core/scheduler/resources).
 

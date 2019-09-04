@@ -35,7 +35,7 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
 
 	![Choosing the Data Context class](images/scaffolding/data_context_class.png)
 
-1. (Optional) In some scenarios it is convenient to use view model objects instead of the entities returned by the Entity Framework. If this is the case, check the **Use an existing ViewModel** checkbox. It displays a DropDownList similar to the first one, from which you can select the ViewModel to be used.
+1. (Optional) In some scenarios it is convenient to use view model objects instead of the entities returned by the Entity Framework. If this is the case, check the **Use an existing ViewModel** checkbox. It displays a drop-down list similar to the first one from which you can select the ViewModel that will be used.
 
 	If you have not created it yet, add a new class to the `~/Models` folder. Name it `ProductViewModel`.
 
@@ -46,7 +46,7 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
             public short? UnitsInStock { get; set; }
         }
 
-	Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.
+	Select the **ProductViewModel** class from the **ViewModel Class** drop-down list.
 
 	![Selecting the ViewModel Class](images/scaffolding/view_model_class.png)
 
@@ -59,7 +59,7 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
 	This screen contains the Grid functionalities that can be configured before scaffolding:
 
 	* `DataSource Type`&mdash;Ajax, Server, or WebApi.
-	* `Editable`&mdash;Enable the editing, configure the edit mode&mdash;`InLine`, `InCell`, or `PopUp`&mdash;and the operations to be included&mdash;`Create`, `Update`, `Destroy`.
+	* `Editable`&mdash;Enable the editing, configure the edit mode&mdash;`InLine`, `InCell`, or `PopUp`&mdash;and the operations that will be included&mdash;`Create`, `Update`, `Destroy`.
 
 	  ![Selecting the editable options](images/scaffolding/editable.png)
 

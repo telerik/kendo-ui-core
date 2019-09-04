@@ -20,13 +20,13 @@ The following example demonstrates how to create a MultiViewCalendar by using a 
         )
 ```
 
-The template wraps the `value` in a `<div>` HTML element. The structure of the data object that is passed to the template function:
+The template wraps the `value` in a `<div>` HTML element. The structure of the data object that is passed to the template function.
 
     data = {
-        date: date, // Date object corresponding to the current cell
+        date: date, // A date object that corresponds to the current cell.
         title: kendo.toString(date, "D"),
         value: date.getDate(),
-        dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
+        dateString: "2011/0/1" // The formatted date by using the yyyy/MM/dd format and the month is zero-based.
     };
 
 ## See Also

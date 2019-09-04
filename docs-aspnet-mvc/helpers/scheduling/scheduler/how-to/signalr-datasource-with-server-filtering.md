@@ -1,6 +1,6 @@
 ---
 title: Configure SignalR Data Source with Server Filtering
-page_title: Configure SignalR Data Source with Server Filtering | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Configure SignalR Data Source with Server Filtering | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
 description: "Configuring the Kendo UI Scheduler to work with SignalR data source by using local hub and server filtering in ASP.NET MVC applications."
 slug: signalr_datasource_with_server_filtering
 ---
@@ -59,5 +59,6 @@ The scenario adopted by the project considers the following aspects of the imple
 
 ## See Also
 
-* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [SchedulerBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [Basic Usage of the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler)
+* [SchedulerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [Scheduler Server-Side API](/api/scheduler)

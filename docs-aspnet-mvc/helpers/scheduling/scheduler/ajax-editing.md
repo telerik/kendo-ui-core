@@ -1,83 +1,68 @@
 ---
 title: Ajax Binding
-page_title: Ajax Binding | Kendo UI Scheduler HtmlHelper for ASP.NET MVC
-description: "Populate the Scheduler with nodes in ASP.NET MVC applications by using Ajax requests."
+page_title: Ajax Binding | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
+description: "Get started with the Scheduler HtmlHelper for ASP.NET MVC and learn how to configure it for Ajax binding."
 slug: ajaxbinding_schedulerhelper_aspnetmvc
 position: 2
 ---
 
-# Ajax Editing
+# Ajax Binding
 
-Below are listed the steps for you to follow when configuring the Kendo UI Scheduler for ASP.NET MVC to do editing of the sample database (the **Tasks** table) included in the offline demos.
+You can configure the Scheduler HtmlHelper for Ajax binding.
 
-## Configuration
+1. Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. Name the application `KendoSchedulerAjaxEditing`.If you decide not to use the Visual Studio extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Sample.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
 
-### Create the Application
+    ![A new entity data model](images/entity-data-model.png)
 
-Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. Name the application `KendoSchedulerAjaxEditing`.If you decide not to use the Visual Studio extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+1. Pick the **Generate from database** option and click **Next**. Configure a connection to the sample database. Click **Next**.
 
-### Set the Entity Model
+    ![Choosing the connection](images/entity-data-model.png)
 
- Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Sample.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
+1. Choose the **Tasks** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-![A new entity data model](images/entity-data-model.png)
+    ![Choosing the Tasks table](images/database-objects.png)
 
-### Configure the Connection
+1. Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
 
-Pick the **Generate from database** option and click **Next**. Configure a connection to the sample database. Click **Next**.
-
-![Choosing the connection](images/entity-data-model.png)
-
-### Choose the Database Object
-
-Choose the **Tasks** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
-
-![Choosing the Tasks table](images/database-objects.png)
-
-### Include the New Class
-
-Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
-
-    public class TaskViewModel : ISchedulerEvent
-    {
-        public int TaskID { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-
-        private DateTime start;
-        public DateTime Start
+        public class TaskViewModel : ISchedulerEvent
         {
-            get
+            public int TaskID { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
+
+            private DateTime start;
+            public DateTime Start
             {
-                return start;
+                get
+                {
+                    return start;
+                }
+                set
+                {
+                    start = value.ToUniversalTime();
+                }
             }
-            set
+
+            private DateTime end;
+            public DateTime End
             {
-                start = value.ToUniversalTime();
+                get
+                {
+                    return end;
+                }
+                set
+                {
+                    end = value.ToUniversalTime();
+                }
             }
+
+            public string RecurrenceRule { get; set; }
+            public int? RecurrenceID { get; set; }
+            public string RecurrenceException { get; set; }
+            public bool IsAllDay { get; set; }
+            public int? OwnerID { get; set; }
         }
-
-        private DateTime end;
-        public DateTime End
-        {
-            get
-            {
-                return end;
-            }
-            set
-            {
-                end = value.ToUniversalTime();
-            }
-        }
-
-        public string RecurrenceRule { get; set; }
-        public int? RecurrenceID { get; set; }
-        public string RecurrenceException { get; set; }
-        public bool IsAllDay { get; set; }
-        public int? OwnerID { get; set; }
-    }
-
-### Add the Action Methods
 
 1. Open `HomeController.cs` and add a new action method which will return the `Tasks` as JSON. The Scheduler will make Ajax requests to this action.
 
@@ -162,13 +147,13 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };
-                    //Attach the entity.
+                    // Attach the entity.
                     sampleDB.Tasks.Attach(entity);
-                    //Change its state to Modified so the Entity Framework can update the existing task instead of creating a new one.
-                    //sampleDB.Entry(entity).State = EntityState.Modified;
-                    //Or use ObjectStateManager if using a previous version of Entity Framework.
+                    // Change its state to Modified so the Entity Framework can update the existing task instead of creating a new one.
+                    sampleDB.Entry(entity).State = EntityState.Modified;
+                    // Or use ObjectStateManager if using a previous version of Entity Framework.
                     sampleDB.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
-                    //Update the entity in the database
+                    // Update the entity in the database.
                     sampleDB.SaveChanges();
                 }
             }
@@ -198,13 +183,13 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                         IsAllDay = task.IsAllDay,
                         OwnerID = task.OwnerID
                     };
-                    //Attach the entity.
+                    // Attach the entity.
                     sampleDB.Tasks.Attach(entity);
-                    //Delete the entity.
+                    // Delete the entity.
                     //sampleDB.Tasks.Remove(entity);
-                    //Or use DeleteObject if using a previous versoin of Entity Framework.
+                    // Or use DeleteObject if using a previous version of Entity Framework.
                     sampleDB.Tasks.DeleteObject(entity);
-                    //Delete the entity in the database.
+                    // Delete the entity in the database.
                     sampleDB.SaveChanges();
                 }
             }
@@ -212,7 +197,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
         }
 
-1. In the view, configure the Scheduler to use the action methods created in the previous steps.
+1. In the view, configure the Scheduler to use the action methods that were created in the previous steps.
 
     ```ASPX
         <%= Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
@@ -232,7 +217,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                 .Model(m => {
                     m.Id(f => f.TaskID);
                     m.Field(f => f.OwnerID).DefaultValue(1);
-                    // Set the recurrence ID field from the model:
+                    // Set the recurrence ID field from the model.
                     m.RecurrenceId(f => f.RecurrenceID);
                 })
                 .Read("Tasks_Read", "Home")
@@ -260,7 +245,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                 .Model(m => {
                     m.Id(f => f.TaskID);
                     m.Field(f => f.OwnerID).DefaultValue(1);
-                    // Set the recurrence ID field from the model:
+                    // Set the recurrence ID field from the model.
                     m.RecurrenceId(f => f.RecurrenceID);
                 })
                 .Read("Tasks_Read", "Home")
@@ -277,15 +262,9 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
 
 ## See Also
 
-* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
-* [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
-* [Resources of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
-* [Scheduler HtmlHelper How-To Examples]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %})
-* [Overview of the Kendo UI Scheduler Widget](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Binding the Scheduler HtmlHelper for ASP.NET MVC to SignalR (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler/signalr)
+* [Binding the Scheduler HtmlHelper for ASP.NET MVC to Kinvey Backend Services  (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler/kinvey)
+* [Binding the Scheduler HtmlHelper for ASP.NET MVC to Web API (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler/webapi)
+* [Binding the Scheduler HtmlHelper for ASP.NET MVC to a Custom data Source (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler/custom-datasource)
+* [SchedulerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [Scheduler Server-Side API](/api/scheduler)

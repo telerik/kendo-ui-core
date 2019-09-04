@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Grid Accessibility | Telerik UI Grid HtmlHelper for ASP.NET Core
-description: "Get started with the UI for ASP.NET Core Grid by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the UI for ASP.NET Core Grid by Telerik UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_aspnetcore_grid
 position: 1
 ---

@@ -1,7 +1,7 @@
 ---
 title: Week Column
-page_title: Week Column | Kendo UI MultiViewCalendar HtmlHelper for ASP.NET MVC
-description: "Render a column displaying the number of the weeks within the current month view when working with the Kendo UI MultiViewCalendar."
+page_title: Week Column | Telerik UI MultiViewCalendar HtmlHelper for ASP.NET MVC
+description: "Render a column displaying the number of the weeks within the current month view when working with the Telerik UI MultiViewCalendar."
 slug: week_column_multiviewcalendar_aspnetmvc
 position: 7
 ---
@@ -27,5 +27,5 @@ In the MultiViewCalendar, you can render a column which displays the number of t
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiviewcalendar)
+* [Week Column in the MultiViewCalendar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/multiviewcalendar/week-column)
+* [Server-Side API](/api/multiviewcalendar)

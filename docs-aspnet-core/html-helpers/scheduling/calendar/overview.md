@@ -2,7 +2,7 @@
 title: Overview
 page_title: Calendar Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI Calendar HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: overview_calendarhelper_aspnetcore
+slug: htmlhelpers_overview_calendarhelper_aspnetcore
 position: 1
 ---
 
@@ -26,6 +26,15 @@ The following example demonstrates how to define the Calendar by using the Calen
         .Value(DateTime.Now) // Set the value of the Calendar.
     )
 ```
+
+## Functionality and Features
+
+* [Date ranges]({% slug htmlhelpers_dateranges_calendar_aspnetcore %})
+* [Day template]({% slug htmlhelpers_daytemplate_calendar_aspnetcore %})
+* [Week numbers]({% slug htmlhelpers_weeknumbers_calendar_aspnetcore %})
+* [Selection]({% slug htmlhelpers_selection_calendar_aspnetcore %})
+* [Disabled dates]({% slug htmlhelpers_disableddates_calendar_aspnetcore %})
+* [Accessibility]({% slug htmlhelpers_accessibility_calendar_aspnetcore %})
 
 ## Events
 

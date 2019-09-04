@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
 page_title: Keyboard Navigation | Telerik UI Grid HtmlHelper for ASP.NET Core
-description: "Get started with the UI for ASP.NET Core Grid by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+description: "Get started with the UI for ASP.NET Core Grid by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_aspnetcore_grid
 position: 2
 ---

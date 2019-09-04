@@ -1,6 +1,6 @@
 ---
 title: Expand Selected Nodes Asynchronously
-page_title: Expand Selected Nodes Asynchronously | Kendo UI TreeView HtmlHelper for ASP.NET MVC
+page_title: Expand Selected Nodes Asynchronously | Telerik UI TreeView HtmlHelper for ASP.NET MVC
 description: "Learn how to asynchronously expand the selected node of the Kendo UI TreeView in ASP.NET MVC."
 slug: howto_expandselectednodeasync_treeviewaspnetmvc
 ---
@@ -11,14 +11,7 @@ The TreeView for ASP.NET MVC enables you to do Ajax binding by using Entity Fram
 
 To see the complete implementation of the approach, refer to the GitHub project on [asynchronously expanding the selected nodes of the TreeView in ASP.NET MVC applications](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/treeview/ExpandSelectedItemAsync).
 
-## Configuration
-
-* [Creating the application](#create-the-application)
-* [Adding the new item](#add-the-new-item)
-* [Setting the Entity Data model](#set-the-entity-data-model)
-* [Configuring the new action method](#configure-the-new-action-method)
-
-### Create the Application
+To asynchronously expand the selected nodes of the TreeView:
 
 1. Create a new ASP.NET MVC application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application.
 1. If you decide not to use the Visual Studio extensions, follow the procedure for adding Telerik UI for ASP.NET MVC to existing applications:
@@ -26,24 +19,16 @@ To see the complete implementation of the approach, refer to the GitHub project 
     * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
     * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
 
-### Add the New Item
-
 1. In the Visual Studio solution explorer, right-click **Models**.
 1. Select **Add** > **New Item**.
 1. On the **Add New Item** dialog, select **Data** > **ADO.NET Data Model**.
 1. Provide the `Northwind.edmx` name to the model and click **Next**. As a result, the **Entity Data Model Wizard** starts.
-
-### Set the Entity Data Model
-
 1. Select **Generate from database** and click **Next**.
 1. Configure a connection to the Northwind database and click **Next**.
 
     ![A new entity data model](../images/tree-entity-data-model.png)
 
 1. Select all tables and click **Finish**.
-
-### Configure the New Action Method
-
 1. Open `Controllers/HomeController.cs` and add a new action method which will return JSON. Each time the user expands a parent node, the TreeView makes an Ajax request to this action method. The action method returns only the child nodes of the expanded parent node. The TreeView provides the unique identifier of the parent node or, when it makes the initial request, `null`.
 
       public JsonResult Employees_Read(int? id)
@@ -154,15 +139,6 @@ To see the complete implementation of the approach, refer to the GitHub project 
 
 ## See Also
 
-* [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
-* [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})
-* [How to Save the State of TreeView Items]({% slug howto_savetreeviewitemsstate_treeviewaspnetmvc %})
-* [Overview of the Kendo UI TreeView Widget](http://docs.telerik.com/kendo-ui/controls/navigation/treeview/overview)
-* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
-* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC API Reference Folder](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc/AggregateFunction)
-* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Basic Usage of the TreeView HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/treeview/index)
+* [TreeViewBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
+* [TreeView Server-Side API](/api/treeview)
