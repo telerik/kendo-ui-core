@@ -20,21 +20,12 @@ The following example demonstrates how to define the Calendar by using the Calen
 
 ```
     @(Html.Kendo().Calendar()
-        .Name("calendar") // The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+        .Name("calendar") // The name of the Calendar is mandatory. It specifies the "id" attribute of the Calendar.
         .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the Calendar.
         .Max(new DateTime(2020, 1, 1, 20, 0, 0)) // Set the min date of the Calendar.
         .Value(DateTime.Now) // Set the value of the Calendar.
     )
 ```
-
-## Functionality and Features
-
-* [Date ranges]({% slug htmlhelpers_dateranges_calendar_aspnetcore %})
-* [Day template]({% slug htmlhelpers_daytemplate_calendar_aspnetcore %})
-* [Week numbers]({% slug htmlhelpers_weeknumbers_calendar_aspnetcore %})
-* [Selection]({% slug htmlhelpers_selection_calendar_aspnetcore %})
-* [Disabled dates]({% slug htmlhelpers_disableddates_calendar_aspnetcore %})
-* [Accessibility]({% slug htmlhelpers_accessibility_calendar_aspnetcore %})
 
 ## Events
 
@@ -92,7 +83,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Calendar API](/api/calendar) to control its behavior.
+To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Calendar client-side API](/api/calendar) to control its behavior.
 
 ```
     // Place the following after your Telerik UI Calendar for ASP.NET Core declaration.
@@ -103,6 +94,15 @@ To reference an existing Telerik UI Calendar instance, use the [`jQuery.data()`]
          });
     </script>
 ```
+
+## Functionality and Features
+
+* [Date ranges]({% slug htmlhelpers_dateranges_calendar_aspnetcore %})
+* [Day template]({% slug htmlhelpers_daytemplate_calendar_aspnetcore %})
+* [Week numbers]({% slug htmlhelpers_weeknumbers_calendar_aspnetcore %})
+* [Selection]({% slug htmlhelpers_selection_calendar_aspnetcore %})
+* [Disabled dates]({% slug htmlhelpers_disableddates_calendar_aspnetcore %})
+* [Accessibility]({% slug htmlhelpers_accessibility_calendar_aspnetcore %})
 
 ## See Also
 

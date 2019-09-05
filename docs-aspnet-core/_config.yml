@@ -150,7 +150,7 @@ navigation:
         position: 50
      "html-helpers/editors/listbox/binding":
         title: "Data Binding"
-        position: 2        
+        position: 2
      "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
      "html-helpers/editors/datepicker/accessibility":
@@ -264,6 +264,9 @@ navigation:
         title: "ButtonGroup"
      "html-helpers/scheduling/calendar":
         title: "Calendar"
+     "html-helpers/scheduling/calendar/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
      "tag-helpers/scheduling/multiviewcalendar":

@@ -86,6 +86,9 @@ navigation:
         title: "Scheduling"
      "helpers/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
+     "helpers/scheduling/multiviewcalendar/accessibility":
+        title: "Accessibility"
+        position: 50
      "vs-integration":
         title: "Visual Studio Integration"
         position: 4
