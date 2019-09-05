@@ -1,6 +1,6 @@
 ---
 title: Line Charts
-page_title: Line Charts | Telerik UI Charts HtmlHelper for ASP.NET Core
+page_title: Line Charts | Telerik UI Chart HtmlHelper for ASP.NET Core
 description: "Learn how to define and configure Telerik UI Line Charts."
 slug: linecharts_aspnetcore_htmlhelper
 ---
@@ -50,9 +50,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple
 
 The configuration from the previous example results in the following Line Chart.
 
-**Figure 1: A sample Line Chart**
-
-![Line Chart](images/chart-line.png)
+![A sample Line Chart](images/chart-line.png)
 
 ## Configuring the Line Styles
 
@@ -82,13 +80,11 @@ You can also set the line style for each Line series individually.
    })
 ```
 
-**Figure 2: A step-line Line Chart**
+![A step-line Line Chart](images/chart-step-line.png)
 
-![Step Line Chart](images/chart-step-line.png)
+The following image displays a smooth-line Line Chart.
 
-**Figure 3: A smooth-line Line Chart**
-
-![Smooth Line Chart](images/chart-smooth-line.png)
+![A smooth-line Line Chart](images/chart-smooth-line.png)
 
 ## Setting the Type of Lines
 
@@ -102,9 +98,7 @@ By default, the Chart draws its Line series as solid lines. You can configure th
      })
 ```
 
-**Figure 4: A dotted Line Series**
-
-![Dotted Line Series](images/chart-dotted-line.png)
+![A dotted Line Series](images/chart-dotted-line.png)
 
 ## Customizing the Markers
 
@@ -119,9 +113,7 @@ The series markers are the visuals that represent the point value in the Line se
       );
 ```
 
-**Figure 5: A Line Chart with custom markers**
-
-![Line Chart with Custom Markers](images/chart-line-markers.png)
+![A Line Chart with custom markers](images/chart-line-markers.png)
 
 You can also completely draw custom markers for the Line series through the `Visual` setting as shown in the [Custom Visuals](https://demos.telerik.com/aspnet-core/line-charts/visuals) demo.
 

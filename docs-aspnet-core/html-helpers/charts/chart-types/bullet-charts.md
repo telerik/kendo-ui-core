@@ -1,6 +1,6 @@
 ---
 title: Bullet Charts
-page_title: Bullet Charts | Telerik UI Charts HtmlHelper for ASP.NET Core
+page_title: Bullet Charts | Telerik UI Chart HtmlHelper for ASP.NET Core
 description: "Learn how to define and configure Telerik UI Bullet Charts."
 slug: bulletcharts_aspnetcore_htmlhelper
 ---
@@ -60,9 +60,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple
 
 The configuration from the previous example results in the following Bullet Chart.
 
-**Figure 1: A sample Bullet Chart**
-
-![Bullet Chart](images/chart-bullet.png)
+![A sample Bullet Chart](images/chart-bullet.png)
 
 ## Customizing the Target Value Lines
 
@@ -87,9 +85,7 @@ The following example demonstrates how to use all three options to customize the
               })
 ```
 
-**Figure 2: A Bullet Chart with custom target line**
-
-![Bullet Chart with Custom Line](images/chart-bullet-target.png)
+![A Bullet Chart with custom target line](images/chart-bullet-target.png)
 
 ## See Also
 

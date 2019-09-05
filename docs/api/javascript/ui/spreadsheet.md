@@ -2353,7 +2353,7 @@ The [`Range`](/api/javascript/spreadsheet/range) that triggered the change.
 
 ### render
 
-Triggered after the widget has completed rendering.
+Triggered after the widget has completed rendering. The event will also fire when a cell is selected or when the Spreadsheet's tools (bold, italic) are used, as the target element is re-generated with new styles (e.g background-color, box-shadow, font-weight, etc.).
 
 #### Event Data
 

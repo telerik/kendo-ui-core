@@ -48,6 +48,10 @@ As of the Kendo UI 2019 R2 SP1 release, the recommended approach for moving tool
 
 * The `k-pager-numbers` `ul` of the Pager is now wrapped in a `div` with the `k-pager-numbers-wrap` class.
 
+**Scheduler**
+
+The mobile pane in which [the Adaptive Scheduler]({% slug adaptiverendering_kendoui_scheduler_widget %}) is placed does not automatically expand its height. Therefore, it is required to define an explicit pixel Scheduler height by setting [the height option](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/height). This change is part of the improved adaptive rendering of the widget.
+
 ## Kendo UI 2019 R1
 
 **AutoComplete**, **ColorPicker**, **ComboBox**, **DatePicker**, **DateTimePicker**, **DropDownList**, **TimePicker**, **MultiColumnComboBox**

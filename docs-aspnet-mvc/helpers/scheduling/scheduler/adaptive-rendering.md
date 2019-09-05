@@ -47,6 +47,17 @@ The following example demonstrates how to configure the adaptive rendering mode 
 )
 ```
 
+## Configuring Panes on Mobile
+
+The Pane in which the adaptive Scheduler is placed does not automatically expand its height and you need to define an explicit pixel Scheduler height by setting the height option.
+
+```Razor
+@(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
+    ...
+    .Height(600)
+)
+```
+
 ## See Also
 
 * [Adaptive Rendering by the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler/adaptive-rendering)

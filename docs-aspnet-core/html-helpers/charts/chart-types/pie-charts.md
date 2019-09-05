@@ -1,6 +1,6 @@
 ---
 title: Pie Charts
-page_title: Pie Charts | Telerik UI Charts HtmlHelper for ASP.NET Core
+page_title: Pie Charts | Telerik UI Chart HtmlHelper for ASP.NET Core
 description: "Learn how to create a Telerik UI Pie Chart for ASP.NET Core and specify its point value, category label, and other properties."
 slug: piecharts_aspnetcore_htmlhelper
 ---
@@ -48,9 +48,7 @@ The following example demonstrates how to define a single series of type `"pie"`
            )
         )
 
-**Figure 1: A sample Pie Chart**
-
-![Pie Chart](images/pie-chart.png)
+![A sample Pie Chart](images/pie-chart.png)
 
 ## Configuring the Effects Overlay
 
@@ -66,21 +64,15 @@ The Pie Chart supports the following `ChartSeriesGradient` options:
 
 * (Default) `RoundedBevel`
 
-        **Figure 2: A Pie Chart with the `RoundedBevel` overlay applied**
-
-        ![Pie Chart with roundedBevel overlay](images/pie-chart.png)
+        ![A Pie Chart with roundedBevel overlay](images/pie-chart.png)
 
 * `SharpBevel`
 
-        **Figure 3: A Pie Chart with the `SharpBevel` overlay applied**
-
-        ![Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
+        ![a Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
 
 * `None`
 
-        **Figure 4: A Pie Chart with no overlay**
-
-        ![Pie Chart with no overlay](images/chart-pie-overlay-none.png)
+        ![A Pie Chart with no overlay](images/chart-pie-overlay-none.png)
 
 ## See Also
 
