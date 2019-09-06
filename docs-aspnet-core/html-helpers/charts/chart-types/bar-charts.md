@@ -45,9 +45,7 @@ The [Telerik UI Column Chart for ASP.NET Core](https://demos.telerik.com/aspnet-
         )
     )
 
-**Figure 1: A sample Column Chart with categories**
-
-![Column Chart with categories](images/chart-column-categories.png)
+![A sample Column Chart with categories](images/chart-column-categories.png)
 
 ## Defining the Bar Chart
 
@@ -68,9 +66,7 @@ Setting the `Series` object to `"Bar"` renders horizontal bars.
        )
     )
 
-**Figure 2: A sample Bar Chart**
-
-![Bar Chart](images/chart-bar.png)
+![A sample Bar Chart](images/chart-bar.png)
 
 ## See Also
 

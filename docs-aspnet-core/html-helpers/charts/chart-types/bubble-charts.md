@@ -1,6 +1,6 @@
 ---
 title: Bubble Charts
-page_title: Bubble Charts | Telerik UI Charts HtmlHelpers for ASP.NET Core
+page_title: Bubble Charts | Telerik UI Chart HtmlHelper for ASP.NET Core
 description: "Learn how to create a Telerik UI Bubble Chart for ASP.NET Core to visualize data points and how to set its properties."
 slug: bubblecharts_aspnetcore_htmlhelper
 ---
@@ -45,9 +45,7 @@ The following example demonstrates how to create a Bubble Chart and visualizes s
         })
     )
 
-**Figure 1: A sample Bubble Chart**
-
- ![Bubble Chart](images/chart-bubble.png)
+ ![A sample Bubble Chart](images/chart-bubble.png)
 
 ## See Also
 

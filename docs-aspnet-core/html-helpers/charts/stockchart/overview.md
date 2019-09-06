@@ -101,6 +101,10 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
             )
         ```
 
+## Functionality and Features
+
+The StockChart provides options for [binding it to data]({% slug databinding_stockchart_aspnetcore %}).
+
 ## Events
 
 You can subscribe to all StockChart [events](/api/stockchart).

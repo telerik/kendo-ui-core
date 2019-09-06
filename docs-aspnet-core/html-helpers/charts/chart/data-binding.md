@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Data Binding | Telerik UI Charts HtmlHelper for ASP.NET Core
+page_title: Data Binding | Telerik UI Chart HtmlHelper for ASP.NET Core
 description: "Learn the basics about binding the Telerik UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
 slug: htmlhelpers_charts_databinding_aspnetcore
 position: 2
@@ -8,11 +8,7 @@ position: 2
 
 # Data Binding
 
-You can populate the UI for ASP.NET Core Chart with data by using any of the following approaches.
-
-* [Binding to inline data](#binding-to-inline-data)
-* [Binding to local data](#binding-to-local-data)
-* [Binding to remote data](#binding-to-remote-data)
+You can populate the Telerik UI Chart for ASP.NET Core with data by [binding it to inline data](#binding-to-inline-data), [binding it to local data](#binding-to-local-data), or [binding it to remote data](#binding-to-remote-data).
 
 ## Inline Data
 
@@ -24,7 +20,7 @@ You can specify the data points of the Charts as part of the series definitions.
 
 ### Binding Categorical Series to Inline Data
 
-Categorical series, such as Bar, Line, Area, expect a data point of a numeric type. The category names are populated independently in the category axis.
+[Categorical series]({% slug htmlhelpers_categoricalcharts_aspnetcore %}), such as Bar, Line, Area, expect a data point of a numeric type. The category names are populated independently in the category axis.
 
 > To keep the Chart consistent, all series have to contain the same number of points in an order that matches the order of the categories which are declared in `CategoryAxis`.
 
@@ -50,7 +46,7 @@ Categorical series, such as Bar, Line, Area, expect a data point of a numeric ty
 
 ### Binding Scatter Series to Inline Data
 
-Scatter series include the two-dimensional Scatter and ScatterLine series. Each data point in the series has to be an array which contains an X and a Y value.
+[Scatter series]({% slug htmlhelpers_scattercharts_aspnetcore %}) include the two-dimensional Scatter and ScatterLine series. Each data point in the series has to be an array which contains an X and a Y value.
 
     @(Html.Kendo().Chart()
         .Name("chart")

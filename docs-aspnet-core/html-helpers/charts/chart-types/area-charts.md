@@ -50,9 +50,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value ax
 
 The configuration from the previous example results in the following Area Chart.
 
-**Figure 1: A sample Area Chart**
-
-![Area Chart](images/chart-area.png)
+![A simple Area Chart](images/chart-area.png)
 
 ## Configuring the Line Styles
 
@@ -64,13 +62,11 @@ The Area Chart supports the following styles:
 * Step&mdash;The style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
 * Smooth&mdash;This style causes the Area Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
 
-**Figure 2: A step-line Area Chart**
+![A step-line Area Chart](images/chart-step-area.png)
 
-![Step Line Chart](images/chart-step-area.png)
+The following image displays a smooth-line Area Chart. 
 
-**Figure 3: A smooth-line Area Chart**
-
-![Smooth Line Chart](images/chart-smooth-area.png)
+![A smooth-line Area Chart](images/chart-smooth-area.png)
 
 ## See Also
 
