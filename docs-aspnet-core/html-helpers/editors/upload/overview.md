@@ -125,6 +125,7 @@ An Upload widget configured in such way offers support for multiple file selecti
 * [Validation of files]({% slug htmlhelpers_upload_validation_aspnetcore %})
 * [Identification of files]({% slug htmlhelpers_upload_identify_files_aspnetcore %})
 * [Sending and receiving metadata]({% slug htmlhelpers_upload_send_meta_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_upload %})
 
 ## Events
 

@@ -21,12 +21,24 @@ The following example demonstrates the basic configuration for the DateRangePick
 
 ```
     @(Html.Kendo().DateRangePicker()
-        .Name("daterangepicker") // The name of the DateRangePicker is mandatory. It specifies the "id" attribute of the widget.
+        .Name("daterangepicker") // The name of the DateRangePicker is mandatory. It specifies the "id" attribute of the DateRangePicker.
         .Min(new DateTime(1900, 1, 1)) // Sets the min date of the DateRangePicker.
         .Max(new DateTime(2099, 12, 31)) // Sets the min date of the DateRangePicker.
         .Range(r => r.Start(DateTime.Now).End(DateTime.Now.AddDays(10))) // Sets the range of the DateRangePicker.
     )
 ```
+
+## Functionality and Features
+
+* [Disabled dates]({% slug disableddates_daterangepicker_aspnetcore %})
+* [Selected dates]({% slug selecteddates_daterangepicker_aspnetcore %})
+* [Start view and navigation depth]({% slug navdepth_daterangepicker_aspnetcore %})
+* [Validation]({% slug validation_daterangepicker_aspnetcore %})
+* [Date formatting]({% slug dateformatting_daterangepicker_aspnetcore %})
+* [Calendar types]({% slug calendartypes_daterangepicker_aspnetcore %})
+* [Week number column]({% slug weeknumcolumn_daterangepicker_aspnetcore %})
+* [Globalization]({% slug globalization_daterangepicker_aspnetcore %})
+* [Accessibility]({% slug accessibility_daterangepicker_aspnetcore %})
 
 ## Events
 
@@ -60,7 +72,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [DateRangePicker API](/api/daterangepicker) to control its behavior.
+To reference an existing DateRangePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [DateRangePicker client-side API](/api/daterangepicker) to control its behavior.
 
 The following example demonstrates how to access an existing DateRangePicker instance.
 

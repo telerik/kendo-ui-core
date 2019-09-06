@@ -318,7 +318,7 @@ var __meta__ = { // jshint ignore:line
             that.wrapper = element.addClass("k-widget k-flatcolorpicker")
                 .append(that._template(options));
 
-            that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", element);
+            that._hueElements = $(".k-hsv-rectangle, .k-alpha-slider .k-slider-track", element);
 
             that._selectedColor = $(".k-selected-color-display", element);
 
@@ -402,7 +402,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 element = that.element,
                 hueSlider = element.find(".k-hue-slider"),
-                opacitySlider = element.find(".k-transparency-slider");
+                opacitySlider = element.find(".k-alpha-slider");
 
             function hueChange(e) {
                 that._updateUI(that._getHSV(e.value, null, null, null));
@@ -618,10 +618,12 @@ var __meta__ = { // jshint ignore:line
                     '<div class="k-clear-color-container"><span class="k-clear-color k-button k-bare">#: messages.clearColor #</span></div>' +
              '# } #' +
             '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
-            '<input class="k-hue-slider" />' +
-            '# if (opacity) { #' +
-                '<input class="k-transparency-slider" />' +
-            '# } #' +
+            '<div class="k-sliders-wrap k-vbox">' +
+                '<input class="k-hue-slider" />' +
+                '# if (opacity) { #' +
+                    '<input class="k-alpha-slider k-transparency-slider" />' +
+                '# } #' +
+            '</div>' +
             '# if (buttons) { #' +
                 '<div unselectable="on" class="k-controls"><button class="k-button k-primary apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
             '# } #'

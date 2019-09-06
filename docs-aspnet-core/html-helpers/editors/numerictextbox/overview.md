@@ -32,8 +32,6 @@ The following example demonstrates the basic configuration for the NumericTextBo
 * [Globalization]({% slug globalization_numerictextbox_aspnetcore %})
 * [Accessibility]({% slug accessibility_numerictextbox_aspnetcore %})
 
-For more information on the known limitations of the NumericTextBox, refer to [this article]({% slug limitations_numerictextbox_aspnetcore %}).
-
 ## Events
 
 You can subscribe to all NumericTextBox events. For a complete example on basic NumericTextBox events, refer to the [demo on using the events of the NumericTextBox](https://demos.telerik.com/aspnet-core/numerictextbox/events).
@@ -79,4 +77,5 @@ The following example demonstrates how to get a reference to an existing instanc
 
 * [Basic Usage by the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/index)
 * [Using the API of the NumericTextBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/numerictextbox/api)
+* [Known Limitations of the NumericTextBox HtmlHelper for ASP.NET Core]({% slug limitations_numerictextbox_aspnetcore %})
 * [Server-Side API](/api/numerictextbox)

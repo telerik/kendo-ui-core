@@ -64,6 +64,7 @@ The following example demonstrates the basic configuration of the Editor HtmlHel
 * [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})
 * [CRUD operations]({% slug htmlhelpers_crud_editor_aspnetcore %})
 * [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_editor %})
 
 ## Events
 

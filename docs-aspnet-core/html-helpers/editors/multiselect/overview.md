@@ -115,6 +115,7 @@ The following example demonstrates the basic configuration of the MultiSelect Ht
 * [Grouping]({% slug htmlhelpers_multiselect_grouping_aspnetcore %})
 * [Virtualization]({% slug htmlhelpers_multiselect_virtualization_aspnetcore %})
 * [Templates]({% slug htmlhelpers_multiselect_templates_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_multiselect %})
 
 ## Events
 

@@ -126,6 +126,21 @@ navigation:
      "html-helpers/data-management/grid/accessibility":
         title: "Accessibility"
         position: 60
+     "html-helpers/data-management/treelist/editing":
+        title: "Editing"
+        position: 3
+     "html-helpers/data-management/treelist/export":
+        title: "Export"
+        position: 6
+     "html-helpers/data-management/treelist/columns":
+        title: "Columns"
+        position: 7
+     "html-helpers/data-management/treelist/globalization":
+        title: "Globalization"
+        position: 40
+     "html-helpers/data-management/treelist/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
      "html-helpers/data-management/spreadsheet/import-and-export-data":
@@ -134,16 +149,55 @@ navigation:
         title: "End-User Documentation"
      "html-helpers/editors":
         title: "Editors"
+     "html-helpers/editors/autocomplete/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/combobox/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/daterangepicker/globalization":
+        title: "Globalization"
+        position: 40
+     "html-helpers/editors/daterangepicker/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/editors/datetimepicker/globalization":
         title: "Globalization"
         position: 40
      "html-helpers/editors/datetimepicker/accessibility":
         title: "Accessibility"
         position: 50
+     "html-helpers/editors/dropdownlist/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/dropdowntree/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/editor/accessibility":
+        title: "Accessibility"
+        position: 50
      "html-helpers/editors/listbox/globalization":
         title: "Globalization"
         position: 40
      "html-helpers/editors/listbox/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/multicolumncombobox/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/multiselect/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/numerictextbox/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/rating/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/switch/accessibility":
+        title: "Accessibility"
+        position: 50
+     "html-helpers/editors/upload/accessibility":
         title: "Accessibility"
         position: 50
      "html-helpers/editors/listbox/binding":

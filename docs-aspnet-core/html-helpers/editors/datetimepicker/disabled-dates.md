@@ -6,11 +6,11 @@ slug: disableddates_datetimepicker_aspnetcore
 position: 2
 ---
 
-# Disable Dates
+# Disabled Dates
 
-The DateTimePicker provides the opportunity to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+The DateTimePicker allows you to disable specific days which are not intended to be selected by the end user such as weekends and national holidays.
 
-To disable a date, either:
+To disable a date in the DateTimePicker, use either of the following approaches:
 * [Set an array of dates](#setting-an-array)
 * [Add a function](#adding-a-function)
 
@@ -30,7 +30,7 @@ To disable dates by setting an array, list the names of days that will be disabl
 
 ## Adding a Function
 
-To disable dates through using a function, set the return value for the date that will be disabled to `true`.
+To disable dates by using a function, set the return value for the date that will be disabled to `true`.
 
 ```
     @(Html.Kendo().DateTimePicker()

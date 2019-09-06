@@ -93,6 +93,10 @@ The following example demonstrates the basic configuration of the DropDownTree H
         });
     </script>
 
+## Functionality and Features
+
+The DropDownTree provides [accessibility support]({% slug accessibility_aspnetcore_dropdowntree %}) through its keyboard navigation.
+
 ## Events
 
 For a complete example on basic DropDownTree events, refer to the [demo on using the events of the DropDownTree](https://demos.telerik.com/aspnet-core/dropdowntree/events).

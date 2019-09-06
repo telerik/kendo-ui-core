@@ -11,7 +11,7 @@ position: 1
 The NumericTextBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.1, and keyboard support.
 
 For more information, refer to:
-* [Keyboard navigation by Kendo UI NumericTextBox]({% slug keynav_numerictextbox_aspnetcore %})
+* [Keyboard navigation by the Telerik UI NumericTextBox]({% slug keynav_numerictextbox_aspnetcore %})
 * [Accessibility in Telerik UI for ASP.NET Core](https://docs.telerik.com/aspnet-core/accessibility/overview)
 
 ## WAI-ARIA
@@ -28,7 +28,7 @@ The NumericTextBox supports the standards for providing accessible web content w
 
 ## label Element Support
 
-Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need to manually handle the click event of the label and focus the widget as shown below.
+Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need to manually handle the click event of the label and focus the NumericTextBox.
 
 ```
     @Html.Label("numeric", "Value")

@@ -13,12 +13,12 @@ The following table lists the Telerik UI for ASP.NET Core components which suppo
 |Component     |Section 508 |WCAG 2.1  |Keyboard Navigation
 |:---          |:---        |:---      |:---
 |AutoComplete  |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/autocomplete/keyboard-navigation)
-|BarCode	     |Yes         |AAA       |N/A
+|BarCode	     |Yes         |AAA       |n/a
 |Button 	     |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/button/keyboard-navigation)
 |ButtonGroup   |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/buttongroup/keyboard-navigation)
 |Calendar	     |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/calendar/keyboard-navigation)
-|Charts        |Yes         |AAA       |N/A
-|Chat          |Yes         |AAA       |N/A
+|Charts        |Yes         |AAA       |n/a
+|Chat          |Yes         |AAA       |n/a
 |ComboBox      |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/combobox/keyboard-navigation)
 |ColorPicker   |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/colorpicker/keyboard-navigation)
 |DateInput	   |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/dateinput/keyboard-navigation)
@@ -30,7 +30,7 @@ The following table lists the Telerik UI for ASP.NET Core components which suppo
 |Editor        |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/editor/keyboard-navigation)
 |Gantt         |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/gantt/keyboard-navigation)
 |Grid          |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/grid/keyboard-navigation)
-|LinearGauge   |Yes         |AAA       |N/A
+|LinearGauge   |Yes         |AAA       |n/a
 |ListBox       |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/listbox/keyboard-navigation)
 |ListView	     |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/listview/keyboard-navigation)
 |Map	         |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/map/index)
@@ -38,27 +38,27 @@ The following table lists the Telerik UI for ASP.NET Core components which suppo
 |Menu          |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/menu/keyboard-navigation)
 |MediaPlayer   |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/mediaplayer/keyboard-navigation)
 |MultiSelect   |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/multiselect/keyboard-navigation)
-|Notification  |Yes         |AA        |N/A
+|Notification  |Yes         |AA        |n/a
 |NumericTextbox|Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/numerictextbox/keyboard-navigation)
 |PanelBar	     |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/panelbar/keyboard-navigation)
-|PivotGrid	   |Yes         |AAA       |N/A
-|QRCode	   	   |Yes         |AAA       |N/A
-|RadialGauge   |Yes         |AAA       |N/A
-|Responsive Panel |Yes      |AA        |N/A
-|ScrollView	   |Yes         |AAA       |N/A
+|PivotGrid	   |Yes         |AAA       |n/a
+|QRCode	   	   |Yes         |AAA       |n/a
+|RadialGauge   |Yes         |AAA       |n/a
+|Responsive Panel |Yes      |AA        |n/a
+|ScrollView	   |Yes         |AAA       |n/a
 |Scheduler	   |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/scheduler/selection)
 |Slider	       |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/slider/keyboard-navigation)
-|Sortable	     |Yes         |AAA       |N/A
+|Sortable	     |Yes         |AAA       |n/a
 |Splitter      |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/splitter/keyboard-navigation)
-|Spreadsheet   |No          |N/A       |N/A
+|Spreadsheet   |No          |n/a       |n/a
 |Switch        |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/switch/keyboard-navigation)
 |TabStrip	     |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/tabstrip/keyboard-navigation)
 |TimePicker	   |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/timepicker/keyboard-navigation)
 |ToolBar	     |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/toolbar/index)
-|Tooltip	     |Yes         |AA        |N/A
+|Tooltip	     |Yes         |AA        |n/a
 |TreeList	     |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/treelist/keyboard-navigation)
 |TreeView	     |Yes         |AA        |[Yes](http://demos.telerik.com/aspnet-core/treeview/keyboard-navigation)
-|Upload 	     |Yes         |AA        |N/A
+|Upload 	     |Yes         |AA        |n/a
 |Window 	     |Yes         |AAA       |[Yes](http://demos.telerik.com/aspnet-core/window/keyboard-navigation)
 
 ## Suggested Links  

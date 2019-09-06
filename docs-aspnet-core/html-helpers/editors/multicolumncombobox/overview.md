@@ -122,6 +122,7 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 * [Columns]({% slug columns_multicolumncombobox_aspnetcore %})
 * [Filtering]({% slug filtering_multicolumncombobox_aspnetcore %})
 * [Virtualization]({% slug virtualization_multicolumncombobox_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})
 
 ## Events
 

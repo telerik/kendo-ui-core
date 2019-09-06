@@ -25,9 +25,13 @@ The following example demonstrates how to how to define the Switch by using the 
     )
 ```
 
+## Functionality and Features
+
+The Switch provides [accessibility support]({% slug accessibility_aspnetcore_switch %}) through its keyboard navigation.
+
 ## Events
 
-You can subscribe to all Switch events. For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/aspnet-core/switch/events).
+You can subscribe to all Switch events. For a complete example on basic Slider events, refer to the [demo on using the events of the Switch](https://demos.telerik.com/aspnet-core/switch/events).
 
 ### Handling by Handler Name
 

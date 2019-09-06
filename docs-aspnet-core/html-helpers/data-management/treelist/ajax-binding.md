@@ -16,7 +16,7 @@ The Ajax-bound mode has the following features:
 - The TreeList retrieves only the data (in JSON format) representing the current level items.
 - All column templates are executed client-side. They follow the [Kendo UI for jQuery template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
-To configure the Grid for ASP.NET Core to do Ajax binding:
+To configure the TreeList for ASP.NET Core to do Ajax binding:
 
 1. Create a new ASP.NET Core web application. Follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to add Telerik UI for ASP.NET Core to the application.
 1. Open the `HomeController.cs` and add a new action method which will return the items as JSON. The TreeList makes Ajax requests to this action.

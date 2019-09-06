@@ -135,6 +135,7 @@ The following example demonstrates the basic configuration of the AutoComplete H
 
 * [Model binding]({% slug modelbinding_autocomplete_aspnetcore %})
 * [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})
 
 ## Events
 

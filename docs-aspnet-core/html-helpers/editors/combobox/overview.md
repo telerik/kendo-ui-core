@@ -105,6 +105,7 @@ The following example demonstrates the basic configuration of the ComboBox HtmlH
 * [Grouping]({% slug htmlhelpers_combobox_grouping_aspnetcore %})
 * [Virtualization]({% slug htmlhelpers_combobox_virtualization_aspnetcore %})
 * [Templates]({% slug htmlhelpers_combobox_templates_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_combobox %})
 
 ## Events
 

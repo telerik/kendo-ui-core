@@ -1,9 +1,10 @@
 ---
-title: Multi-Clumn Headers
+title: Multi-Column Headers
 page_title: Multi-Column Headers | Telerik UI TreeList HtmlHelper for ASP.NET Core
-description: "Learn how to apply the multicolumn headers feature to the Telerik UI TreeList HtmlHelper for ASP.NET Core."
+description: "Learn how to apply the multi-column header feature to the Telerik UI TreeList HtmlHelper for ASP.NET Core."
+previous_url: /aspnet-core/html-helpers/data-management/treelist/multicolumn-headers
 slug: multicolumn_aspnetcore_treelist_helper
-position: 5
+position: 3
 ---
 
 # Multi-Column Headers
@@ -31,7 +32,7 @@ That common header in turn can be a child of another upper `MultiColumn` header 
 
 The previous example will present the following output.
 
-![TreeList multi-column headers](images/treelist-multicolumn-headers.png)
+![TreeList multi-column headers](../images/treelist-multicolumn-headers.png)
 
 ## See Also
 

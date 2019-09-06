@@ -105,6 +105,7 @@ The following example demonstrates the basic configuration of the DropDownList H
 * [Grouping]({% slug htmlhelpers_dropdownlist_grouping_aspnetcore %})
 * [Virtualization]({% slug htmlhelpers_dropdownlist_virtualization_aspnetcore %})
 * [Templates]({% slug htmlhelpers_dropdownlist_templates_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_dropdownlist %})
 
 ## Events
 
