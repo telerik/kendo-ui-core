@@ -1120,6 +1120,8 @@ declare namespace kendo.data {
         pageSize(size: number): void;
         pushCreate(model: Object): void;
         pushCreate(models: any[]): void;
+        pushInsert(index: number, model: Object): void;
+        pushInsert(index: number, models: any[]): void;
         pushDestroy(model: Object): void;
         pushDestroy(models: any[]): void;
         pushUpdate(model: Object): void;
