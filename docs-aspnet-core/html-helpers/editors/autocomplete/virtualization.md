@@ -3,12 +3,12 @@ title: Virtualization
 page_title: Virtualization | Telerik UI AutoComplete HtmlHelper for ASP.NET Core
 description: "Implement virtualization in a model-bound Telerik UI AutoComplete HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: virtualization_autocomplete_aspnetcore
-position: 3
+position: 4
 ---
 
 # Virtualization
 
-You can configure an AutoComplete that is [bound to a model field]({% slug modelbinding_autocomplete_aspnetcore %}) to use virtualization.
+You can configure an AutoComplete to use virtualization.
 
 > The value to which the AutoComplete will be bound on the server can only be of a primitive type or an enum value.
 

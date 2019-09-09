@@ -16,7 +16,7 @@ The Switch displays two exclusive choices. With the new Switch variables introdu
 
 ## Initializing the Switch
 
-The following example demonstrates how to how to define the Switch by using the Switch HtmlHelper.
+The following example demonstrates how to define the Switch by using the Switch HtmlHelper.
 
 ```
     @(Html.Kendo().Switch()
@@ -31,7 +31,7 @@ The Switch provides [accessibility support]({% slug accessibility_aspnetcore_swi
 
 ## Events
 
-You can subscribe to all Switch events. For a complete example on basic Slider events, refer to the [demo on using the events of the Switch](https://demos.telerik.com/aspnet-core/switch/events).
+You can subscribe to all Switch events. For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/aspnet-core/switch/events).
 
 ### Handling by Handler Name
 
@@ -70,12 +70,12 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](/api/switch) to control its behavior.
+To reference an existing Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Switch API](/api/switch) to control its behavior.
 
 ```
     // Place the following after your Telerik UI Switch for ASP.NET Core declaration.
     <script>
-        $(function() {
+        $(document).ready(function() {
             // The Name() of the Switch is used to get its client-side instance.
             var switch = $("#switch").data("kendoSwitch");
         });

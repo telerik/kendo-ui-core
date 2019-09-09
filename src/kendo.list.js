@@ -48,8 +48,9 @@ var __meta__ = { // jshint ignore:line
         isIE8 = isIE && browser.version < 9,
         quotRegExp = /"/g,
         alternativeNames = {
-            "ComboBox": "DropDownList",
-            "DropDownList": "ComboBox"
+            "ComboBox": [ "DropDownList", "MultiColumnComboBox" ],
+            "DropDownList": [ "ComboBox", "MultiColumnComboBox" ],
+            "MultiColumnComboBox": [ "ComboBox", "DropDownList" ]
         };
 
     var List = kendo.ui.DataBoundWidget.extend({
@@ -1553,7 +1554,13 @@ var __meta__ = { // jshint ignore:line
             var parent = parentElement.data("kendo" + name);
 
             if (!parent) {
-                parent = parentElement.data("kendo" + alternativeNames[name]);
+                for(var i = 0; i < alternativeNames[name].length; i+=1) {
+                    parent = parentElement.data("kendo" + alternativeNames[name][i]);
+
+                    if (!!parent) {
+                        break;
+                    }
+                }
             }
 
             return parent;

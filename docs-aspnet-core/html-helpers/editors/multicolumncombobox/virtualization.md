@@ -8,7 +8,7 @@ position: 5
 
 # Virtualization
 
-You can configure a MultiColumnComboBox that is bound to a model field to use virtualization.
+You can configure a MultiColumnComboBox to use virtualization.
 
 > * For the virtualization to work properly, define the widths of all columns in pixels.
 > * The MultiColumnComboBox supports server binding to primitive or an enum value types only.

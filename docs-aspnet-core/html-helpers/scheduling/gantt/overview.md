@@ -231,21 +231,35 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
         )
     )
 )
-
-<script type="text/javascript">
-    $(function() {
-        // The Name() of the Gantt is used to get its client-side instance.
-        var gantt = $("#gantt").data("kendoGantt");
-    });
-</script>
 ```
+
+## Functionality and Features
+
+* [Data Binding]({% slug htmlhelpers_gantt_binding_aspnetcore %})
+* [Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %})
+* [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %})
+* [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_gantt %})
 
 ## Events
 
 For a complete example on basic Gantt events, refer to the [demo on using the events of the Gantt](https://demos.telerik.com/aspnet-core/gantt/events).
 
+## Referencing Existing Instances
+
+To reference an existing Gantt instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side Gantt API](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt) to control its behavior.
+
+    // Place this after the Gantt for ASP.NET Core declaration.
+    <script>
+        $(document).ready(function() {
+            // The Name() of the Gantt is used to get its client-side instance.
+            var gantt = $("#gantt").data("kendoGantt");
+        });
+    </script>
+
 ## See Also
 
 * [Basic Usage of the Gantt HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt)
 * [Using the API of the Gantt HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/api)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
 * [Server-Side API](/api/gantt)

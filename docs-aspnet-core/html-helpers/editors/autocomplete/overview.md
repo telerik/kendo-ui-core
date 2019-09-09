@@ -80,7 +80,7 @@ The following example demonstrates how to define the AutoComplete by using the A
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the AutoComplete HtmlHelper and how to get the AutoComplete instance.
+The following example demonstrates the basic configuration of the AutoComplete HtmlHelper.
 
 ```
     @(Html.Kendo().AutoComplete()
@@ -96,7 +96,6 @@ The following example demonstrates the basic configuration of the AutoComplete H
         .MinLength(3)
         .HtmlAttributes(new { style = "width:100%" })
         .Height(520)
-
         .DataSource(source =>
         {
             source.Read(read =>
@@ -106,14 +105,6 @@ The following example demonstrates the basic configuration of the AutoComplete H
             })
             .ServerFiltering(true);
         })
-        .Events(e => e
-        .Change("onChange")
-        .Select("onSelect")
-        .Open("onOpen")
-        .Close("onClose")
-        .DataBound("onDataBound")
-        .Filtering("onFiltering")
-        )
     )
 
     <script type="text/javascript">
@@ -122,24 +113,34 @@ The following example demonstrates the basic configuration of the AutoComplete H
                 text: $("#autocomplete").val()
             };
         }
-
-        $(function () {
-            // The Name() of the AutoComplete is used to get its client-side instance.
-            var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-            console.log(autocomplete);
-        });
     </script>
 ```
 
 ## Functionality and Features
 
-* [Model binding]({% slug modelbinding_autocomplete_aspnetcore %})
+* [Data binding]({% slug htmlhelpers_autocomplete_databinding_aspnetcore %})
+* [Grouping]({% slug htmlhelpers_autocomplete_grouping_aspnetcore %})
+* [Templates]({% slug htmlhelpers_autocomplete_templates_aspnetcore %})
 * [Virtualization]({% slug virtualization_autocomplete_aspnetcore %})
 * [Accessibility]({% slug accessibility_aspnetcore_autocomplete %})
 
 ## Events
 
 For a complete example on basic AutoComplete events, refer to the [demo on using the events of the AutoComplete](https://demos.telerik.com/aspnet-core/autocomplete/events).
+
+## Referencing Existing Instances
+
+To reference an existing AutoComplete instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [AutoComplete API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete) to control its behavior.
+
+```
+    // Place the following after your Telerik UI AutoComplete for ASP.NET Core declaration.
+    <script>
+        $(document).ready(function() {
+            // The Name() of the AutoComplete is used to get its client-side instance.
+            var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        });
+    </script>
+```
 
 ## See Also
 

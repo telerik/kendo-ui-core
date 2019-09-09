@@ -98,27 +98,11 @@ The following example demonstrates the basic configuration of the MultiColumnCom
             .Read(read => read.Action("Products_Read", "MultiColumnComboBox"))
             .ServerFiltering(true)
         )
-        .Events(events => events
-            .Change("onChange")
-            .Select("onSelect")
-            .Open("onOpen")
-            .Close("onClose")
-            .DataBound("onDataBound")
-            .Filtering("onFiltering")
-        )
     )
-
-    <script type="text/javascript">
-        $(function () {
-            // The Name() of the MultiColumnComboBox is used to get its client-side instance.
-            var multicolumncombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
-            console.log(multicolumncombobox);
-        });
-    </script>
 
 ## Functionality and Features
 
-* [Model binding]({% slug modelbinding_multicolumncombobox_aspnetcore %})
+* [Data binding]({% slug htmlhelpers_multicolumncombobox_databinding_aspnetcore %})
 * [Columns]({% slug columns_multicolumncombobox_aspnetcore %})
 * [Filtering]({% slug filtering_multicolumncombobox_aspnetcore %})
 * [Virtualization]({% slug virtualization_multicolumncombobox_aspnetcore %})
@@ -128,8 +112,23 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 
 For a complete example on basic MultiColumnComboBox events, refer to the [demo on using the events of the MultiColumnComboBox](https://demos.telerik.com/aspnet-core/multicolumncombobox/events).
 
+## Referencing Existing Instances
+
+To reference an existing MultiColumnComboBox instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiColumnComboBox API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox) to control its behavior.
+
+```
+    // Place the following after your Telerik UI MultiColumnComboBox for ASP.NET Core declaration.
+    <script>
+        $(document).ready(function() {
+            // The Name() of the MultiColumnComboBox is used to get its client-side instance.
+            var mccombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
+        });
+    </script>
+```
+
 ## See Also
 
 * [Basic Usage of the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/index)
 * [Using the API of the MultiColumnComboBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multicolumncombobox/api)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox)
 * [Server-Side API](/api/multicolumncombobox)

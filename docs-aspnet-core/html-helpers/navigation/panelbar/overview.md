@@ -13,59 +13,7 @@ The Telerik UI PanelBar HtmlHelper for ASP.NET Core is a server-side wrapper for
 
 The PanelBar displays hierarchical data as a multi-level, expandable widget.
 
-* [Demo page for the PanelBar](https://demos.telerik.com/aspnet-core/panelbar/index)
-
-## Initializing the PanelBar
-
-The following example demonstrates how to define the PanelBar by using the PanelBar HtmlHelper.
-
-```Razor
-   @(Html.Kendo().PanelBar()
-        .Name("panelbar")
-        .DataSource(source =>
-        {
-            source.Read(read => read.Action("Read_PanelBarData", "PanelBar"));
-        })
-    )
-```
-```Controller
-     public class PanelBarController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public static IList<HierarchicalViewModel> GetHierarchicalData()
-        {
-            var result = new List<HierarchicalViewModel>()
-            {
-                new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-                new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
-                new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
-                new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
-                new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
-            };
-
-            return result;
-        }
-
-        public IActionResult Read_PanelBarData(int? id)
-        {
-            var result = GetHierarchicalData()
-                .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
-                .Select(item => new {
-                    id = item.ID,
-                    Name = item.Name,
-                    expanded = item.Expanded,
-                    imageUrl = item.ImageUrl,
-                    hasChildren = item.HasChildren
-                });
-
-            return Json(result);
-        }
-    }
-```
+* [Demo page for the PanelBar](https://demos.telerik.com/aspnet-core/panelbar)
 
 ## Basic Configuration
 
@@ -74,45 +22,94 @@ The following example demonstrates the basic configuration of the PanelBar HtmlH
 ```Razor
     @(Html.Kendo().PanelBar()
         .Name("panelbar")
-        .TemplateId("panelbar-template")
         .ExpandMode(PanelBarExpandMode.Single)
-        .Events(events => events
-            .Select("select")
-            .Expand("expand")
-            .Collapse("collapse")
-            .Activate("activate")
-            .ContentLoad("contentLoad")
-            .Error("error")
-        )
-        .DataSource(source =>
+        .Items(items =>
         {
-            source.Read(read => read.Action("Read_PanelBarData", "PanelBar"));
+            items.Add().Text("Root1")
+                .Items(subitems =>
+                {
+                    subitems.Add().Text("Level2 1");
+                    subitems.Add().Text("Level2 2");
+                });
+            items.Add().Text("Root2")
+                .Items(subitems =>
+                {
+                    subitems.Add().Text("Level2 1");
+                    subitems.Add().Text("Level2 2");
+                });
         })
     )
+```
 
-    <script type="text/javascript">
-        $(function () {
-            // The Name() of the PanelBar is used to get its client-side instance.
-            var panelbar = $("#panelbar").data("kendoPanelBar");
-            console.log(panelbar);
-        });
-    </script>
-```
-```Template
-    <script id="panelbar-template" type="text/kendo-ui-template">
-        #: item.text #
-        # if (!item.items) { #
-            <a class='delete-link' href='\#'></a>
-        # } #
-    </script>
-```
+## Functionality and Features
+
+* [Data Binding]({% slug htmlhelpers_panelbar_databinding_aspnetcore %})
+* [Expand modes]({% slug htmlhelpers_panelbar_expandmodes_aspnetcore %})
+* [Accessibility]({% slug accessibility_aspnetcore_panelbar %})
 
 ## Events
 
-For a complete example on basic PanelBar events, refer to the [demo on using the events of the PanelBar](https://demos.telerik.com/aspnet-core/panelbar/events).
+You can subscribe to all PanelBar [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#events). For a complete example on basic PanelBar events, refer to the [demo on using the events of the PanelBar](https://demos.telerik.com/aspnet-core/panelbar/events).
+
+### Handling by Handler Name
+
+The following example demonstrates how to subscribe to events by a handler name.
+
+```Razor
+    @(Html.Kendo().PanelBar()
+            .Name("panelbar")
+            .Events(e => e
+                .Expand("panelbar_expand")
+                .Collapse("panelbar_collapse")
+            )
+    )
+    <script>
+        function panelbar_collapse() {
+            // Handle the collapse event.
+        }
+
+        function panelbar_expand() {
+            // Handle the expand event.
+        }
+    </script>
+```
+
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+    @(Html.Kendo().PanelBar()
+        .Name("panelbar")
+        .Events(e => e
+            .Expand(@<text>
+                function() {
+                    // Handle the expand event inline.
+                }
+            </text>)
+            .Collapse(@<text>
+                function() {
+                    // Handle the collapse event inline.
+                }
+            </text>)
+        )
+    )
+
+## Referencing Existing Instances
+
+To reference an existing PanelBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side PanelBar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control its behavior.
+
+    // Place this after the PanelBar for ASP.NET Core declaration.
+    <script>
+        $(document).ready(function() {
+            // The Name() of the panelbar is used to get its client-side instance.
+            var panelbar = $("#panelbar").data("kendoPanelBar");
+        });
+    </script>
 
 ## See Also
 
 * [Basic Usage of the PanelBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar)
 * [Using the API of the PanelBar HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/panelbar/api)
-* [Server-Side API](/api/panelbar)
+* [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
+* [PanelBarBuilder Server-Side API](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBar Server-Side API](/api/panelbar)
