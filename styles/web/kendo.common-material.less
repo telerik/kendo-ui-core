@@ -265,6 +265,58 @@
 @filter-padding-y: 8px;
 
 
+// Timeline
+@timeline-border-radius: 2px;
+@timeline-border-radius-lg: 4px;
+@timeline-spacing-x: 40px;
+@timeline-spacing-y: 40px;
+@timeline-items-padding: 16px;
+@timeline-mobile-spacing-x: 16px;
+@timeline-mobile-spacing-y: 16px;
+
+@timeline-track-arrow-width: 30px;
+@timeline-track-arrow-height: 30px;
+
+@timeline-track-size: 6px;
+@timeline-track-border-width: 1px;
+@timeline-track-margin-bottom: 16px;
+@timeline-track-start-calc: calc(@timeline-track-arrow-width - 2 * @timeline-track-border-width);
+@timeline-track-end-calc: calc(@timeline-track-arrow-width - 2 * @timeline-track-border-width);
+
+@timeline-track-event-offset: 36px;
+
+@timeline-flag-padding-x: @button-padding-x;
+@timeline-flag-padding-y: @button-padding-y;
+@timeline-flag-line-height: @button-line-height;
+@timeline-flag-min-width: 80px;
+@timeline-flag-max-width: calc(@timeline-flag-min-width + 2 * @timeline-spacing-x);
+@timeline-mobile-flag-max-width: calc(@timeline-flag-min-width + 2 * @timeline-mobile-spacing-x);
+@timeline-horizontal-flag-min-width: 60px;
+
+@timeline-flag-callout-width: 10px;
+@timeline-flag-callout-height: 10px;
+
+@timeline-flag-offset-bottom: 4px;
+@timeline-flag-margin-bottom-calc: calc(@timeline-track-size + 2 * @timeline-track-border-width + @timeline-flag-offset-bottom + @timeline-flag-callout-height);
+
+@timeline-date-margin-bottom: 8px;
+@timeline-date-width: 50px;
+
+@timeline-vertical-padding-calc: calc(@timeline-spacing-x + (@timeline-flag-min-width - @timeline-track-size) / 2);
+@timeline-vertical-padding-with-dates-calc: calc(@timeline-vertical-padding-calc + @timeline-date-width);
+@timeline-mobile-vertical-padding-calc: calc(@timeline-mobile-spacing-x + (@timeline-flag-min-width - @timeline-track-size) / 2);
+@timeline-mobile-vertical-padding-with-dates-calc: calc(@timeline-mobile-vertical-padding-calc + @timeline-date-width);
+
+@timeline-circle-width: 16px;
+@timeline-circle-height: 16px;
+
+@timeline-collapse-arrow-padding-x: 8px;
+
+@timeline-event-width: 400px;
+@timeline-event-height: 600px;
+@timeline-event-min-height-calc: calc(2 * @timeline-track-event-offset);
+
+
 @import "common/all.less";
 
 @spreadsheet-first-tool-offset: 0;

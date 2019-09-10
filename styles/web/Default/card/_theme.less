@@ -21,9 +21,40 @@
 }
 
 
-// Theme variants
-// .k-card.k-state-primary { @extend .k-state-primary !optional; }
-// .k-card.k-state-info { @extend .k-state-info !optional; }
-// .k-card.k-state-success { @extend .k-state-success !optional; }
-// .k-card.k-state-warning { @extend .k-state-warning !optional; }
-// .k-card.k-state-error { @extend .k-state-error !optional; }
+// Theme variantsmix
+.k-card.k-state-primary {
+    .fill(
+        @card-primary-text,
+        @card-primary-bg,
+        @card-primary-border
+    )
+}
+.k-card.k-state-info {
+    .fill(
+        @card-info-text,
+        @card-info-bg,
+        @card-info-border
+    )
+}
+.k-card.k-state-success {
+    .fill(
+        @card-success-text,
+        @card-success-bg,
+        @card-success-border
+    )
+}
+.k-card.k-state-warning {
+    .fill(
+        @card-warning-text,
+        @card-warning-bg,
+        @card-warning-border
+    )
+}
+.k-card.k-state-error {
+    .fill(
+        @card-error-text,
+        @card-error-bg,
+        @card-error-border
+    )
+}
+

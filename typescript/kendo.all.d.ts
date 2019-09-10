@@ -8046,6 +8046,93 @@ declare namespace kendo.ui {
     interface TimePickerOpenEvent extends TimePickerEvent {
     }
 
+    class Timeline extends kendo.ui.Widget {
+
+        static fn: Timeline;
+
+        options: TimelineOptions;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Timeline;
+
+        constructor(element: Element, options?: TimelineOptions);
+
+
+        expand(event: string): void;
+        expand(event: Element): void;
+        expand(event: JQuery): void;
+        collapse(event: string): void;
+        collapse(event: Element): void;
+        collapse(event: JQuery): void;
+        open(event: string): void;
+        open(event: Element): void;
+        open(event: JQuery): void;
+        destroy(): void;
+        next(): void;
+        previous(): void;
+        redraw(): void;
+        setDataSource(dataSource: kendo.data.DataSource): void;
+
+    }
+
+    interface TimelineOptions {
+        name?: string;
+        alternatingMode?: boolean;
+        orientation?: string;
+        collapsibleEvents?: boolean;
+        dataActionsField?: string;
+        dataDescriptionField?: string;
+        dataDateField?: string;
+        dataImagesField?: string;
+        dataSubTitleField?: string;
+        dataTitleField?: string;
+        dataSource?: kendo.data.DataSource|any;
+        eventTemplate?: string|Function;
+        dateformat?: string;
+        eventHeight?: number;
+        eventWidth?: number;
+        showDateLabels?: boolean;
+        change?(e: TimelineChangeEvent): void;
+        dataBound?(e: TimelineDataBoundEvent): void;
+        expand?(e: TimelineExpandEvent): void;
+        collapse?(e: TimelineCollapseEvent): void;
+        actionClick?(e: TimelineActionClickEvent): void;
+        navigate?(e: TimelineNavigateEvent): void;
+    }
+    interface TimelineEvent {
+        sender: Timeline;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface TimelineChangeEvent extends TimelineEvent {
+        dataItem?: kendo.data.Model;
+        eventContainer?: JQuery;
+    }
+
+    interface TimelineDataBoundEvent extends TimelineEvent {
+    }
+
+    interface TimelineExpandEvent extends TimelineEvent {
+        dataItem?: kendo.data.Model;
+    }
+
+    interface TimelineCollapseEvent extends TimelineEvent {
+        dataItem?: kendo.data.Model;
+    }
+
+    interface TimelineActionClickEvent extends TimelineEvent {
+        dataItem?: kendo.data.Model;
+        element?: JQuery;
+    }
+
+    interface TimelineNavigateEvent extends TimelineEvent {
+        action?: string;
+    }
 
     class ToolBar extends kendo.ui.Widget {
 
@@ -21940,6 +22027,10 @@ interface JQuery {
     kendoTimePicker(): JQuery;
     kendoTimePicker(options: kendo.ui.TimePickerOptions): JQuery;
     data(key: "kendoTimePicker"): kendo.ui.TimePicker;
+
+    kendoTimeline(): JQuery;
+    kendoTimeline(options: kendo.ui.TimelineOptions): JQuery;
+    data(key: "kendoTimeline"): kendo.ui.Timeline;
 
     kendoToolBar(): JQuery;
     kendoToolBar(options: kendo.ui.ToolBarOptions): JQuery;

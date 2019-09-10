@@ -186,6 +186,11 @@ fonts in fonts/
    <li><span class="k-icon k-i-minus"></span> .k-i-minus<br /> .k-i-kpi-trend-equal</li>
    <li><span class="k-icon k-i-minus-outline"></span> .k-i-minus-outline</li>
    <li><span class="k-icon k-i-minus-circle"></span> .k-i-minus-circle</li>
+   <li><span class="k-icon k-i-divide"></span> .k-i-divide</li>
+   <li><span class="k-icon k-i-equal"></span> .k-i-equal</li>
+   <li><span class="k-icon k-i-not-equal"></span> .k-i-not-equal</li>
+   <li><span class="k-icon k-less-or-equal"></span> .k-i-less-or-equal</li>
+   <li><span class="k-icon k-greater-or-equal"></span> .k-i-greater-or-equal</li>
    <li><span class="k-icon k-i-sort-asc"></span> .k-i-sort-asc</li>
    <li><span class="k-icon k-i-sort-desc"></span> .k-i-sort-desc</li>
    <li><span class="k-icon k-i-unsort"></span> .k-i-unsort</li>
@@ -217,6 +222,8 @@ fonts in fonts/
    <li><span class="k-icon k-i-zoom-in"></span> .k-i-zoom-in</li>
    <li><span class="k-icon k-i-zoom-out"></span> .k-i-zoom-out</li>
    <li><span class="k-icon k-i-pan"></span> .k-i-pan<br /> .k-i-move</li>
+   <li><span class="k-icon k-i-hand"></span> .k-i-hand</li>
+   <li><span class="k-icon k-i-cursor"></span> .k-i-cursor</li>
    <li><span class="k-icon k-i-calculator"></span> .k-i-calculator</li>
    <li><span class="k-icon k-i-cart"></span> .k-i-cart<br /> .k-i-shopping-cart</li>
    <li><span class="k-icon k-i-connector"></span> .k-i-connector</li>
@@ -225,6 +232,15 @@ fonts in fonts/
    <li><span class="k-icon k-i-kpi-status-deny"></span> .k-i-kpi-status-deny</li>
    <li><span class="k-icon k-i-kpi-status-hold"></span> .k-i-kpi-status-hold</li>
    <li><span class="k-icon k-i-kpi-status-open"></span> .k-i-kpi-status-open</li>
+   <li><span class="k-icon k-i-barcode"></span> .k-i-barcode</li>
+   <li><span class="k-icon k-i-barcode-outline"></span> .k-i-barcode-outline</li>
+   <li><span class="k-icon k-i-barcode-scanner"></span> .k-i-barcode-scanner</li>
+   <li><span class="k-icon k-i-qr-code"></span> .k-i-qr-code</li>
+   <li><span class="k-icon k-i-qr-code-outline"></span> .k-i-qr-code-outline</li>
+   <li><span class="k-icon k-i-qr-code-scanner"></span> .k-i-qr-code-scanner</li>
+   <li><span class="k-icon k-i-barcode-qr-code-scanner"></span> .k-i-barcode-qr-code-scanner</li>
+   <li><span class="k-icon k-i-signature"></span> .k-i-signature</li>
+   <li><span class="k-icon k-i-accessibility"></span> .k-i-accessibility</li>
 </ul>
 
 ### Alerts and Notifications
@@ -393,6 +409,7 @@ fonts in fonts/
     <li><span class="k-icon k-i-decimal-decrease"></span> .k-i-decimal-decrease</li>
     <li><span class="k-icon k-i-font-size"></span> .k-i-font-size</li>
     <li><span class="k-icon k-i-image-absolute-position"></span> .k-i-image-absolute-position</li>
+    <li><span class="k-icon k-i-strip-all-formatting"></span> .k-i-strip-all-formatting</li>
 </ul>
 
 ### Files and Folders
@@ -441,6 +458,7 @@ fonts in fonts/
 <ul class="WebComponentsIcons">
     <li><span class="k-icon k-i-photo-camera"></span> .k-i-photo-camera</li>
     <li><span class="k-icon k-i-image"></span> .k-i-image<br /> .k-i-photo</li>
+    <li><span class="k-icon k-i-images"></span> .k-i-images</li>
     <li><span class="k-icon k-i-image-export"></span> .k-i-image-export<br /> .k-i-photo-export</li>
     <li><span class="k-icon k-i-zoom-actual-size"></span> .k-i-zoom-actual-size</li>
     <li><span class="k-icon k-i-zoom-best-fit"></span> .k-i-zoom-best-fit</li>

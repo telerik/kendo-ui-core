@@ -334,10 +334,11 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "addRowBelow": "Aggiungi riga sotto",
   "deleteColumn": "Rimuovi colonna",
   "deleteRow": "Rimuovi riga",
-  "viewHtml": "View HTML",
-  "dialogUpdate": "Update",
-  "insertFile": "Insert file",
-  "insertFile1": "Insert file"
+  "viewHtml": "Veda HTML",
+  "dialogUpdate": "Aggiorna",
+  "insertFile": "Inserisci file",
+  "insertFile1": "Inserisci file",
+  "print": "Stampa"
 });
 }
 

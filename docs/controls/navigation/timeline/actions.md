@@ -1,0 +1,76 @@
+---
+title: Actions
+page_title: jQuery TimeLine Documentation | Actions | Kendo UI
+description: "Action links in the Kendo UI jQuery TimeLine widget allow you to provide extra details to the users."
+slug: actions_kendoui_timeline_widget
+position: 10
+---
+
+# Actions
+
+The TimeLine can render links (`<a>` tags) for the items from the `actions` collection in its data source, so the user can navigate to the specific pages.
+
+The `href` attribute of an action will be set to the value of the `src` field of the action literal, and the text will come from the `text` field.
+
+The example below shows how you can use a field with a specific name to provide actions for the events.
+
+```dojo
+<div id="timeline"></div>
+
+<script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataActionsField: "linksList",
+            dataSource: {
+                data: eventsData, // you can also use a remote data source that will return the corresponding array of JSON literals
+                schema: {
+                    model: {
+                        fields: {
+                            date: {
+                                type: "date"
+                            },
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    var eventsData = [
+        {
+            description: "Lorem ipsum dolor sit amet.",
+            date: new Date(2015, 6, 25),
+            title: "Summer trip in Europe",
+            subtitle: "Barcelona, Tenerife, Malta",
+            linksList: [
+                {
+                    text: "More info about Barcelona",
+                    url: "https://en.wikipedia.org/wiki/Barcelona"
+                },
+                {
+                    text: "More info about Malta",
+                    url: "https://en.wikipedia.org/wiki/Malta"
+                }
+            ]
+        },
+        {
+            description: "The second event description.",
+            date: new Date(2018, 1, 27),
+            title: "United States East Coast Tour",
+            subtitle: "Feb 27, 2018",
+            linksList: [
+                {
+                    text: "More info about New York City",
+                    url: "https://en.wikipedia.org/wiki/New_York_City"
+                }
+            ]
+        }
+    ];
+</script>
+```
+
+## See Also
+
+
+* [Basic Usage of the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/index)
+* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)

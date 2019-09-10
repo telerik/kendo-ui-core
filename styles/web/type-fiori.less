@@ -200,6 +200,8 @@
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
 
+
+// Cards
 @card-bg: @component-bg;
 @card-text: @component-text;
 @card-border: @component-border;
@@ -208,7 +210,33 @@
 @card-header-text: @header-text-color;
 @card-header-border: @card-border;
 
+@card-primary: @accent;
+@card-primary-bg: mix( white, @card-primary, 70%);
+@card-primary-text: mix(black, @card-primary);
+@card-primary-border: mix(white, @card-primary);
 
+@card-error: darken(@error, 30%);
+@card-error-bg: mix( white, @card-error, 70%);
+@card-error-text: mix(black, @card-error);
+@card-error-border: mix(white, @card-error);
+
+@card-warning: darken(@warning, 30%);
+@card-warning-bg: mix( white, @card-warning, 70%);
+@card-warning-text: mix(black, @card-warning);
+@card-warning-border: mix(white, @card-warning);
+
+@card-success: darken(@success, 30%);
+@card-success-bg: mix( white, @card-success, 70%);
+@card-success-text: mix(black, @card-success);
+@card-success-border: mix(white, @card-success);
+
+@card-info: darken(@info, 30%);
+@card-info-bg: mix( white, @card-info, 70%);
+@card-info-text: mix(black, @card-info);
+@card-info-border: mix(white, @card-info);
+
+
+// Chat
 @chat-bg: @component-bg;
 @chat-text: @component-text;
 @chat-border: @component-border;
@@ -467,6 +495,20 @@
 @filter-field-text: @accent;
 
 
+// Timeline
+@timeline-track-arrow-disabled-text: @disabled-text-color;
+@timeline-track-arrow-disabled-bg: @disabled-background-color;
+@timeline-track-arrow-disabled-border: @disabled-border-color;
+
+@timeline-track-bg: @button-background-color;
+@timeline-track-border-color: @button-border-color;
+
+@timeline-flag-background: @accent;
+@timeline-flag-text: contrast(@accent);
+
+@timeline-circle-color: @accent;
+
+
 // Kendo skin
 
 @theme-name: ~"fiori";
@@ -487,7 +529,7 @@
 @import "Default/filter/_theme.less";
 @import "Default/drawer/_theme.less";
 @import "Default/rating/_theme.less";
-
+@import "Default/timeline/_theme.less";
 
 .k-in,
 .k-item

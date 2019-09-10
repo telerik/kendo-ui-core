@@ -291,6 +291,8 @@ navigation:
         title: "Switch"
      "*tabstrip":
         title: "TabStrip"
+     "*timeline":
+        title: "TimeLine"
      "*timepicker":
         title: "TimePicker"
      "*toolbar":

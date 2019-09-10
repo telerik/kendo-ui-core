@@ -36,11 +36,15 @@ The wizard detects all the installed versions of Progress&reg; Telerik&reg; UI f
 
 ### Project Settings
 
-The **Create New Project** page enables you to modify the project settings by configuring the following options:
+The first page of the **Create New Project Wizard** enables you to modify the project settings by configuring the following options:
 
-* **Project type**&mdash;Choose the desired project type: **Blank**, **Standard**, **Grid**, and **Menu**, **Mobile with Ajax Navigation**, or **Mobile with Server Navigation**.
+* **Project type**&mdash;Choose the desired project type: **Blank**, **Standard**, **Grid**, and **Menu**.
 * **Version**&mdash;Choose the version of Progress&reg; Telerik&reg; UI for ASP.NET MVC you want to use.
 * **MVC Version**&mdash;Choose the targeted ASP.NET MVC version.
+
+To move to the second page of the **Create New Project Wizard** where you can select the visual theme of your Telerik UI for ASP.NET MVC application, click **Next**. 
+
+![The new Project Wizard](images/new_project_theme_selection.png)
 
 ### New Web Application Creation
 

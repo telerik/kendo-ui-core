@@ -422,6 +422,8 @@ navigation:
         title: "StockChart"
      "*tabstrip":
         title: "TabStrip"
+     "*timeline":
+        title: "TimeLine"
      "*timepicker":
         title: "TimePicker"
      "*tooltip":

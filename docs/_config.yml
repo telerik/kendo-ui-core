@@ -636,6 +636,8 @@ navigation:
         title: "Splitter"
     "*tabstrip":
         title: "TabStrip"
+    "*timeline":
+        title: "TimeLine"
     "*timepicker":
         title: "TimePicker"
     "*tooltip":

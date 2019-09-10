@@ -182,7 +182,7 @@ var __meta__ = { // jshint ignore:line
             kendo.destroy(columnsHeader);
             columnsHeader.remove();
 
-            var header = "<div class='k-grid-header'><div class='k-grid-header-wrap'><table>";
+            var header = "<div class='k-grid-header'><div class='k-grid-header-wrap'><table role='presentation'>";
             var colGroup = "<colgroup>";
             var row = "<tr>";
 

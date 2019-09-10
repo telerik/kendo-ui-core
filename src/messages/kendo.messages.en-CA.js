@@ -143,7 +143,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "alignRemove": "Remove Alignment",
   "columns": "Columns",
   "rows": "Rows",
-  "selectAllCells": "Select All Cells"
+  "selectAllCells": "Select All Cells",
+  "print": "Print"
 });
 }
 

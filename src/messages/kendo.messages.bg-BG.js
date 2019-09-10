@@ -896,7 +896,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "alignRemove": "RПремахни подравняване",
   "columns": "Колони",
   "rows": "Редове",
-  "selectAllCells": "Избери всички клетки"
+  "selectAllCells": "Избери всички клетки",
+  "print": "Принтирай"
 });
 }
 
