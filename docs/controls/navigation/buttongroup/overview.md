@@ -41,7 +41,7 @@ The following example demonstrates how to initialize Kendo UI ButtonGroup from a
 
 ###### Example
 
-    <div id="buttonGroup"></div>
+    <div id="buttongroup"></div>
 
     <script>
 		$("#buttongroup").kendoButtonGroup({
