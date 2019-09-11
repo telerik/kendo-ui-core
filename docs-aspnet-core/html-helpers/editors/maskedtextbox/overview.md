@@ -29,7 +29,9 @@ The following example demonstrates the basic configuration for the MaskedTextBox
 
 ## Functionality and Features
 
-The MaskedTextBox provides options for [using predefined and custom masks rules and validate user input]({% slug validation_maskedtextbox_aspnetcore %}).
+* [Mask rules]({% slug validation_maskedtextbox_aspnetcore %})
+* [Globalization]({% slug globalization_maskedtextbox_aspnetcore %})
+* [Accessibility]({% slug accessibility_maskedtextbox_aspnetcore %})
 
 ## Events
 
@@ -53,7 +55,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI MaskedTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [MaskedTextBox API](/api/maskedtextbox) to control its behavior.
+To reference an existing Telerik UI MaskedTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [MaskedTextBox client-side API](/api/maskedtextbox) to control its behavior.
 
 The following example demonstrates how to access an existing MaskedTextBox instance.
 

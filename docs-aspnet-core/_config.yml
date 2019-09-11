@@ -120,12 +120,6 @@ navigation:
      "html-helpers/data-management/grid/performance":
         title: "Performance Tips"
         position: 17
-     "html-helpers/data-management/grid/globalization":
-        title: "Globalization"
-        position: 50
-     "html-helpers/data-management/grid/accessibility":
-        title: "Accessibility"
-        position: 60
      "html-helpers/data-management/treelist/editing":
         title: "Editing"
         position: 3
@@ -135,12 +129,6 @@ navigation:
      "html-helpers/data-management/treelist/columns":
         title: "Columns"
         position: 7
-     "html-helpers/data-management/treelist/globalization":
-        title: "Globalization"
-        position: 40
-     "html-helpers/data-management/treelist/accessibility":
-        title: "Accessibility"
-        position: 50
      "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
      "html-helpers/data-management/spreadsheet/import-and-export-data":
@@ -149,65 +137,11 @@ navigation:
         title: "End-User Documentation"
      "html-helpers/editors":
         title: "Editors"
-     "html-helpers/editors/autocomplete/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/combobox/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/daterangepicker/globalization":
-        title: "Globalization"
-        position: 40
-     "html-helpers/editors/daterangepicker/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/datetimepicker/globalization":
-        title: "Globalization"
-        position: 40
-     "html-helpers/editors/datetimepicker/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/dropdownlist/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/dropdowntree/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/editor/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/listbox/globalization":
-        title: "Globalization"
-        position: 40
-     "html-helpers/editors/listbox/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/multicolumncombobox/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/multiselect/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/numerictextbox/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/rating/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/switch/accessibility":
-        title: "Accessibility"
-        position: 50
-     "html-helpers/editors/upload/accessibility":
-        title: "Accessibility"
-        position: 50
      "html-helpers/editors/listbox/binding":
         title: "Data Binding"
         position: 2
      "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
-     "html-helpers/editors/datepicker/accessibility":
-        title: "Accessibility"
-        position: 50
      "html-helpers/charts":
         title: "Charts"
      "html-helpers/charts/chart":
@@ -248,9 +182,6 @@ navigation:
      "html-helpers/navigation/menu/contextmenu":
         title: "ContextMenu"
         position: 3
-     "html-helpers/navigation/menu/accessibility":
-        title: "Accessibility"
-        position: 50
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         isNew: true
@@ -258,14 +189,11 @@ navigation:
         title: "Chat"
      "html-helpers/interactivity":
         title: "Interactivity and UX"
+     "html-helpers/interactivity/sortable/integration":
+        title: "Integration"
+        position: 6
      "html-helpers/media":
         title: "Media"
-     "html-helpers/media/mediaplayer/globalization":
-        title: "Globalization"
-        position: 40
-     "html-helpers/media/mediaplayer/accessibility":
-        title: "Accessibility"
-        position: 50
      "html-helpers/pdf":
         title: "PDF"
      "html-helpers/pdf/pdfviewer":
@@ -331,9 +259,6 @@ navigation:
         title: "ButtonGroup"
      "html-helpers/scheduling/calendar":
         title: "Calendar"
-     "html-helpers/scheduling/calendar/accessibility":
-        title: "Accessibility"
-        position: 50
      "html-helpers/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
      "tag-helpers/scheduling/multiviewcalendar":
@@ -446,8 +371,12 @@ navigation:
         title: "Templates"
      "*switch":
         title: "Switch"
+     "*/globalization":
+        title: "Globalization"
+        position: 50
      "*/accessibility":
         title: "Accessibility"
+        position: 60
 
 ## The application virtual path
 baseurl: /aspnet-core

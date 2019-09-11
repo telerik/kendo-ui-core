@@ -1,6 +1,6 @@
 ---
 title: Hint
-page_title: Hint | Telerik UI Sortable for ASP.NET Core
+page_title: Hint | Telerik UI Sortable HtmlHelper for ASP.NET Core
 description: "Disable the hint in the Telerik UI Sortable HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: hint_sortable_aspnetcore
 position: 2

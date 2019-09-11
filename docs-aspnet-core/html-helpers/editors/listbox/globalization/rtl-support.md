@@ -1,7 +1,7 @@
 ---
 title: RTL Support
 page_title: Right-to-Left Support | Telerik UI ListBox HtmlHelper for ASP.NET Core
-description: "Configure the Telerik UI ListBox for ASP.NET Core to enable its RTL functionality."
+description: "Get started with the Telerik UI ListBox for ASP.NET Core and learn about the RTL supports it provides."
 slug: htmlhelpers_listbox_rtl_aspnetcore
 position: 3
 ---
@@ -14,4 +14,5 @@ For more information, refer to the [demo on RTL support by the ListBox](https://
 
 ## See Also
 
+* [RTL Support by the ListBox HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/right-to-left-support)
 * [Server-Side API](/api/listbox)

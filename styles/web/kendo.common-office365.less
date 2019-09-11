@@ -467,12 +467,14 @@ span.k-tooltip {
     margin: 0;
 }
 
-.k-grid-header th.k-header
+.k-grid-header th.k-header,
+.k-gantt-timeline .k-grid-header .k-header
 {
     padding-left: 1.286em;
 }
 
-.k-rtl .k-grid-header th.k-header
+.k-rtl .k-grid-header th.k-header,
+.k-rtl .k-gantt-timeline .k-grid-header .k-header
 {
     padding-right: 1.286em;
 }
@@ -620,7 +622,7 @@ span.k-tooltip {
         margin: 0 17px;
     }
 
-    .k-gantt-timeline th {
+    .k-gantt-timeline .k-header {
         text-align: left;
     }
 }

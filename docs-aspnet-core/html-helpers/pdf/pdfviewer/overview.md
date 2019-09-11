@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI PDFViewer HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI PDFViewer widget.
 
-The PDFViewer displays PDF files in the browser and consists of a toolbar and a scrollable container that wraps the page elements. Default tools collection includes `pager`, `open` and `download` tool. For processing files, it supports the PDF.JS Processing and Telerik DPL Processing libraries. Among the key features the PDFViewer provides are the selection of a PDF processing library, a built-in paging mechanism, virtualization capabilities, a built-in default toolbar collection, and responsive capabilities and page scaling.
+The PDFViewer displays PDF files in the browser and consists of a toolbar and a scrollable container that wraps the page elements. The default tools collection includes the `pager`, `open`, and `download` tools. For processing files, it supports the PDF.JS Processing and Telerik DPL Processing libraries. Among the key features the PDFViewer provides are the selection of a PDF processing library, a built-in paging mechanism, virtualization capabilities, a built-in default toolbar collection, and responsive capabilities and page scaling.
 
 * [Demo page for the PDFViewer](https://demos.telerik.com/aspnet-core/pdfviewer/index)
 
@@ -65,6 +65,7 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 
 * [PDF.js processing]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore %})
 * [DPL processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})
+* [Toolbar and tools]({% slug htmlhelpers_pdfviewer_toolbar_aspnetcore %})
 
 ## Events
 

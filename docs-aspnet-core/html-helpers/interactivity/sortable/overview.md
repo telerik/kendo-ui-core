@@ -50,14 +50,18 @@ The following example demonstrates a basic declaration of a Sortable widget usin
 
 ## Functionality and Features
 
-* [Hint](#disabling-the-hint)
-* [Items](#disabling-and-filtering-items)
+* [Hint]({% slug hint_sortable_aspnetcore %})
+* [Items]({% slug htmlhelpers_sortable_aspnetcore_items %})
+* [Cursor]({% slug htmlhelpers_sortable_aspnetcore_cursor %})
+* [Placeholder]({% slug htmlhelpers_sortable_aspnetcore_placeholder %})
+* [Integration with other Telerik UI HTML Helpers]({% slug htmlhelpers_sortable_aspnetcore_integration_gridlistview %})
+* [Common Scenarios]({% slug htmlhelpers_sortable_aspnetcore_common_scenarios %})
 
 ## Events
 
-You can subscribe to all Sortable [events](/api/sortable).
+You can subscribe to all Sortable [events](/api/sortable). For a complete example on basic Sortable events, refer to the [demo on using the events of the Sortable](https://demos.telerik.com/aspnet-core/sortable/events).
 
-### Handling Events by Handler Name
+### Handling by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -91,7 +95,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### Handling Events by Template Delegate
+### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
@@ -120,7 +124,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [Sortable API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
+To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [Sortable client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI Sortable for ASP.NET Core declaration.
@@ -131,10 +135,6 @@ To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`]
     });
     </script>
 ```
-
-## Events
-
-For a complete example on basic Sortable events, refer to the [demo on using the events of the Sortable](https://demos.telerik.com/aspnet-core/sortable/events).
 
 ## See Also
 

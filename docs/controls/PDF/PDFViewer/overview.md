@@ -8,29 +8,16 @@ position: 1
 
 # PDFViewer Overview
 
-The [Kendo UI PDFViewer widget](https://demos.telerik.com/kendo-ui/pdfviewer/index) displays PDF files in the browser. It provides flexibility to choose the PDF library to be used for processing the file:
+The [Kendo UI PDFViewer widget](https://demos.telerik.com/kendo-ui/pdfviewer/index) displays PDF files in the browser and consists of a toolbar and a scrollable container that wraps the page elements.
 
-* [PDF.JS Processing]({% slug pdfjs_processing_pdfviewer_widget %})
-* [DPL Processing]({% slug dpl_processing_pdfviewer_widget %})
+The default tools collection includes the `pager`, `open`, and `download` tools. For processing files, it supports the PDF.JS Processing and Telerik DPL Processing libraries. Among the key features the PDFViewer provides are the selection of a PDF processing library, a built-in paging mechanism, virtualization capabilities, a built-in default toolbar collection, and responsive capabilities and page scaling.
 
-The PDFViewer consists of a toolbar and a scrollable container that wraps the page elements. Default tools collection includes `pager`, `open` and `download` tool.
+* [Demo page for the PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer)
 
-**Key Features**
+## Initializing the PDFViewer
 
-* Allows you to choose the PDF processing lib
-* Provides built-in paging mechanism
-* Has virtualization capabilities
-* Provides built-in default toolbar collection
-* Has responsive capabilities and page scaling
-
-## Getting Started
-
-### Initialization
-
-1. Add a `<div>` element used to initialize the PDFViewer
-1. Choose PDF processing library and setup its settings
-
-#### Example
+1. Add a `<div>` element that will be used to initialize the PDFViewer.
+1. Choose the PDF processing library and configure its settings.
 
     <div id="pdfviewer"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -45,8 +32,14 @@ The PDFViewer consists of a toolbar and a scrollable container that wraps the pa
         });
     </script>
 
+## Functionality and Features
 
-## See also
+* [Toolbar and tools]({% slug dpl_processing_pdfviewer_widget %})
+* [PDF.js processing]({% slug pdfjs_processing_pdfviewer_widget %})
+* [DPL processing]({% slug dpl_processing_pdfviewer_widget %})
 
-* [Basic Usage demo](https://demos.telerik.com/kendo-ui/pdfviewer/index)
-* [API Reference](/api/javascript/ui/pdfviewer)
+
+## See Also
+
+* [Basic Usage of the Kendo UI for jQuery PDFViewer (Demo)](https://demos.telerik.com/kendo-ui/pdfviewer/index)
+* [Client-Side API](/api/javascript/ui/pdfviewer)

@@ -1,6 +1,6 @@
 ---
 title: PDF Viewer
-page_title: Configuration, methods and events of Kendo UI Pdf Viewer
+page_title: Configuration, methods and events of Kendo UI PDF Viewer
 description: Display PDF files in the browser.
 res_type: api
 component: pdfviewer
@@ -8,7 +8,7 @@ component: pdfviewer
 
 # kendo.ui.PDFViewer
 
-Kendo UI PDF Viewer is used to display a PDF file in the browser. It provides ability to choose the PDF library used for processing. If processing option is not set, pdfjs is used for processing. The viewer supports:
+Kendo UI PDFViewer is used to display a PDF file in the browser. It provides ability to choose the PDF library used for processing. If processing option is not set, pdfjs is used for processing. The viewer supports:
 
 * `PDF.JS`
 * `DPL`
@@ -292,8 +292,11 @@ The following list indicates the default tools:
 
 * `pager`
 * `zoom`
+* `toggleSelection`
+* `search`
 * `open`
 * `download`
+* `print`
 
 For DPL Processing `exportAs` tool could be configured to export a single page to `.png` or `.svg`.
 
@@ -343,11 +346,17 @@ For DPL Processing `exportAs` tool could be configured to export a single page t
 
 ### toolbar.items.command `String`
 
-Default commands in the PDFViewer are:
+Default commands in the PDF Viewer are:
 
 * `OpenCommand`
 * `PageChangeCommand`
 * `DownloadCommand`
+* `EnableSelectionCommand`
+* `EnablePanCommand`
+* `ExportCommand`
+* `PrintCommand`
+* `OpenSearchCommand`
+* `ZoomCommand`
 
 ### toolbar.items.name `String`
 Specifies the tool's name. Tool definition will be taken from the default collection - `kendo.pdfviewer.DefaultTools`

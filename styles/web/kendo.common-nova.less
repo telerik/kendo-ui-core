@@ -424,13 +424,15 @@
 }
 
 .k-grid-header th.k-header,
-.k-filter-row th
+.k-filter-row th,
+.k-gantt-timeline .k-grid-header .k-header
 {
     padding: @grid-th-padding;
 }
 
 .k-rtl .k-grid-header th.k-header,
-.k-rtl .k-filter-row th
+.k-rtl .k-filter-row th,
+.k-rtl .k-gantt-timeline .k-grid-header .k-header
 {
     padding: .786em 1.286em .786em .6em;
 }
@@ -957,7 +959,7 @@ div.editorToolbarWindow.k-window-content {
         bottom: -11px;
     }
 
-    .k-gantt-timeline th {
+    .k-gantt-timeline .k-header {
         text-align: left;
     }
 }

@@ -24,7 +24,8 @@
     background-repeat: repeat-y;
 }
 
-.k-gantt .k-gantt-layout th
+.k-gantt .k-gantt-layout th,
+.k-gantt .k-gantt-layout .k-grid-header td
 {
     vertical-align: bottom;
 }
@@ -160,6 +161,11 @@
     height: 2.5em;
 }
 
+.k-gantt-timeline .k-grid-header .k-header {
+    vertical-align: bottom;
+    cursor: default;
+}
+
 .k-gantt-tasks
 {
     // needed for RTL
@@ -201,14 +207,26 @@
     overflow-x: scroll;
 }
 
-.k-gantt .k-gantt-timeline th
+.k-gantt .k-gantt-timeline th,
+.k-gantt-timeline .k-grid-header td
 {
     text-align: center;
 }
 
-.k-gantt .k-gantt-timeline tr:first-child th
+.k-gantt .k-gantt-timeline tr:first-child th,
+.k-gantt .k-gantt-timeline .k-grid-header tr:first-child td
 {
     border-bottom-width: 1px;
+}
+
+.k-gantt-timeline td.k-header {
+    overflow: hidden;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    padding: .5em .6em .4em .6em;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 // Gantt TimeLine objects
