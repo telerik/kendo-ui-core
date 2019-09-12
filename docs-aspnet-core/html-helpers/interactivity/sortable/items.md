@@ -2,7 +2,7 @@
 title: Items
 page_title: Items | Telerik UI Sortable HtmlHelper for ASP.NET Core
 description: "Disable, filter, and drag items within containers and between lists when working with the Telerik UI Sortable HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
-slug: htmlhlpers_sortable_aspnetcore_items
+slug: htmlhelpers_sortable_aspnetcore_items
 position: 3
 ---
 

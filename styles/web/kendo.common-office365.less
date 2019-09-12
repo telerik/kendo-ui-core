@@ -262,6 +262,7 @@
 @filter-line-size: 1px;
 @filter-padding-x: 8px;
 @filter-padding-y: 4px;
+@filter-operator-dropdown-width: 15em;
 
 
 // Timeline
@@ -600,6 +601,10 @@ span.k-tooltip {
     height: 4.286em;
 }
 
+.k-gantt-timeline .k-header {
+    line-height: normal;
+}
+
 .k-gantt {
     .k-task {
         border-width: 0;
@@ -647,6 +652,10 @@ span.k-tooltip {
 
 .k-tabstrip > .k-button.k-bare {
     top: .1em;
+}
+
+.k-tabstrip-bottom > .k-button.k-bare {
+    top: auto;
 }
 
 .k-panelbar .k-tabstrip-items .k-link {

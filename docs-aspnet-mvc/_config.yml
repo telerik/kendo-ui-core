@@ -179,7 +179,7 @@ navigation:
         title: "How To"
         position: 30
      "helpers/data-management/grid/troubleshoot":
-        title: "Troubeshooting"
+        title: "Troubleshooting"
         position: 40
      "*appearance":
         title: "Appearance"

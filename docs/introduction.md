@@ -26,6 +26,7 @@ The following table lists all Kendo UI widgets (controls) that are available in 
 |Group                      |Widgets             |Kendo UI Core Availability   |Kendo UI Professional Availability
 | :---                      | :---               | :---                        | :---                      
 | **Data Management**       |[Grid Overview]({% slug overview_kendoui_grid_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/grid/index) | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span>
+|                           |[Filter Overview]({% slug overview_kendoui_filter_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/filter/index) | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span>
 |                           |[ListView Overview]({% slug overview_kendoui_listview_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/listview/index) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>
 |                           |[PivotGrid Overview]({% slug overview_kendoui_pivotgrid_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/pivotgrid/index)| <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span>
 |                           |[Spreadsheet Overview]({% slug overview_spreadsheet_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/spreadsheet/index) | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span>

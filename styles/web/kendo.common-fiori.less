@@ -263,7 +263,7 @@
 @filter-line-size: 1px;
 @filter-padding-x: 14px;
 @filter-padding-y: 8px;
-
+@filter-operator-dropdown-width: 15.5em;
 
 // Timeline
 @timeline-border-radius: 2px;
@@ -407,8 +407,12 @@ input.k-textbox,
 .k-tabstrip > .k-button.k-bare {
     padding: 0;
     top: 0;
-    bottom: 0;
     height: auto;
+
+
+}
+.k-tabstrip-bottom > .k-button.k-bare {
+    top: auto;
 }
 
 .k-tabstrip-items .k-loading.k-complete {
@@ -489,6 +493,11 @@ input.k-textbox,
 .k-rtl .k-gantt-timeline .k-grid-header .k-header
 {
     padding-right: 1.286em;
+}
+
+.k-gantt-timeline .k-header
+{
+    line-height: normal;
 }
 
 .k-filtercell > span {

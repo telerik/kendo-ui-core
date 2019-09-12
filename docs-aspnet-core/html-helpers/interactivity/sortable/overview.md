@@ -54,7 +54,7 @@ The following example demonstrates a basic declaration of a Sortable widget usin
 * [Items]({% slug htmlhelpers_sortable_aspnetcore_items %})
 * [Cursor]({% slug htmlhelpers_sortable_aspnetcore_cursor %})
 * [Placeholder]({% slug htmlhelpers_sortable_aspnetcore_placeholder %})
-* [Integration with other Telerik UI HTML Helpers]({% slug htmlhelpers_sortable_aspnetcore_integration_gridlistview %})
+* [Integration with other Telerik UI HTML Helpers]({% slug sortable_aspnetcore_integration_grid %})
 * [Common Scenarios]({% slug htmlhelpers_sortable_aspnetcore_common_scenarios %})
 
 ## Events

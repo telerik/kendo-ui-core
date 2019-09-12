@@ -12,6 +12,10 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
+| [Filter](http://demos.telerik.com/kendo-ui/filter/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.buttongroup.js | |
+| | kendo.filter.js | |
 | [Grid](http://demos.telerik.com/kendo-ui/grid/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -59,16 +63,12 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.reorderable.js | Column reordering feature (optional) |
 | | kendo.resizable.js | Column resizing feature (optional) |
 | | kendo.popup.js | Grid adaptive rendering feature (optional) |
-| | kendo.fx.js | Grid adaptive rendering feature (optional) |
-| | kendo.mobile.scroller.js | Grid adaptive rendering feature (optional) |
+| | kendo.dialog.js | Grid adaptive rendering feature (optional) |
 | | kendo.binder.js | Grid adaptive rendering feature (optional) |
+| | kendo.fx.js | Grid adaptive rendering feature (optional) |
 | | kendo.view.js | Grid adaptive rendering feature (optional) |
-| | kendo.mobile.view.js | Grid adaptive rendering feature (optional) |
-| | kendo.mobile.loader.js | Grid adaptive rendering feature (optional) |
-| | kendo.mobile.pane.js | Grid adaptive rendering feature (optional) |
-| | kendo.mobile.popover.js | Grid adaptive rendering feature (optional) |
-| | kendo.mobile.shim.js | Grid adaptive rendering feature (optional) |
-| | kendo.mobile.actionsheet.js | Grid adaptive rendering feature (optional) |
+| | kendo.pane.js | Grid adaptive rendering feature (optional) |
+| | kendo.switch.js | Grid adaptive rendering feature (optional) |
 | | kendo.ooxml.js | Excel export feature (optional) |
 | | kendo.excel.js | Excel export feature (optional) |
 | | kendo.color.js | PDF export feature (optional) |

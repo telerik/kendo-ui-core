@@ -263,6 +263,7 @@
 @filter-line-size: 1px;
 @filter-padding-x: 14px;
 @filter-padding-y: 8px;
+@filter-operator-dropdown-width: 15em;
 
 
 // Timeline
@@ -350,6 +351,10 @@
     top: .3em;
 }
 
+.k-tabstrip-bottom > .k-button.k-bare {
+    top: auto;
+}
+
 .k-tabstrip > div.k-content,
 .k-panelbar .k-tabstrip > div.k-content
 {
@@ -428,6 +433,10 @@
 .k-rtl .k-grid-header th.k-header,
 .k-rtl .k-gantt-timeline .k-grid-header .k-header {
   padding-right: 1.286em;
+}
+
+.k-gantt-timeline .k-header {
+    line-height: normal;
 }
 
 .k-filtercell > span {

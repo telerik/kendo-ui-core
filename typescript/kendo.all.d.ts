@@ -3635,6 +3635,112 @@ declare namespace kendo.ui {
     }
 
 
+    class Filter extends kendo.ui.Widget {
+
+        static fn: Filter;
+
+        options: FilterOptions;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Filter;
+
+        constructor(element: Element, options?: FilterOptions);
+
+
+        applyFilter(): void;
+
+    }
+
+    interface FilterField {
+        defaultValue?: any;
+        editorTemplate?: string|Function;
+        label?: string;
+        name?: string;
+        type?: string;
+    }
+
+    interface FilterMessages {
+        and?: string;
+        apply?: string;
+        or?: string;
+    }
+
+    interface FilterOperatorsBoolean {
+        eq?: string;
+        neq?: string;
+    }
+
+    interface FilterOperatorsDate {
+        eq?: string;
+        neq?: string;
+        isnull?: string;
+        isnotnull?: string;
+        gte?: string;
+        gt?: string;
+        lte?: string;
+        lt?: string;
+    }
+
+    interface FilterOperatorsNumber {
+        eq?: string;
+        neq?: string;
+        isnull?: string;
+        isnotnull?: string;
+        gte?: string;
+        gt?: string;
+        lte?: string;
+        lt?: string;
+    }
+
+    interface FilterOperatorsString {
+        eq?: string;
+        neq?: string;
+        isnull?: string;
+        isnotnull?: string;
+        isempty?: string;
+        isnotempty?: string;
+        startswith?: string;
+        contains?: string;
+        doesnotcontain?: string;
+        endswith?: string;
+        isnullorempty?: string;
+        isnotnullorempty?: string;
+    }
+
+    interface FilterOperators {
+        string?: FilterOperatorsString;
+        number?: FilterOperatorsNumber;
+        date?: FilterOperatorsDate;
+        boolean?: FilterOperatorsBoolean;
+    }
+
+    interface FilterOptions {
+        name?: string;
+        applyButton?: boolean;
+        dataSource?: kendo.data.DataSource;
+        expression?: any;
+        expressionPreview?: boolean;
+        fields?: FilterField[];
+        mainLogic?: string;
+        messages?: FilterMessages;
+        operators?: FilterOperators;
+        change?(e: FilterChangeEvent): void;
+    }
+    interface FilterEvent {
+        sender: Filter;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface FilterChangeEvent extends FilterEvent {
+        expression?: any;
+    }
+
+
     class FilterMenu extends kendo.ui.Widget {
 
         static fn: FilterMenu;
@@ -21788,6 +21894,10 @@ interface JQuery {
     kendoEditor(): JQuery;
     kendoEditor(options: kendo.ui.EditorOptions): JQuery;
     data(key: "kendoEditor"): kendo.ui.Editor;
+
+    kendoFilter(): JQuery;
+    kendoFilter(options: kendo.ui.FilterOptions): JQuery;
+    data(key: "kendoFilter"): kendo.ui.Filter;
 
     kendoFilterMenu(): JQuery;
     kendoFilterMenu(options: kendo.ui.FilterMenuOptions): JQuery;

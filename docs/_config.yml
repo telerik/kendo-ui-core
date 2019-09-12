@@ -569,6 +569,8 @@ navigation:
         title: "DropDownTree"
     "*editor":
         title: "Editor"
+    "*filter":
+        title: "Filter"
     "*gantt":
         title: "Gantt"
     "*pivotgrid":
