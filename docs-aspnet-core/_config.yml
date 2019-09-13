@@ -131,6 +131,12 @@ navigation:
         position: 7
      "html-helpers/data-management/pivotgrid":
         title: "PivotGrid"
+     "html-helpers/data-management/pivotgrid/data-binding":
+        title: "Data Binding"
+        position: 2
+     "html-helpers/data-management/pivotgrid/export":
+        title: "Export"
+        position: 6
      "html-helpers/data-management/spreadsheet/import-and-export-data":
         title: "Import and Export of Data"
      "html-helpers/data-management/spreadsheet/end-user":

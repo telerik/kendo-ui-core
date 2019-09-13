@@ -1,13 +1,13 @@
 ---
 title: Overview
-page_title: MediaPlayer Overview | Telerik UI for ASP.NET Core HTML Helpers
+page_title: MediaPlayer HtmlHelper Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI MediaPlayer for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnet-core/helpers/html-helpers/mediaplayer
 slug: htmlhelpers_mediaplayer_aspnetcore
 position: 1
 ---
 
-# MediaPlayer Overview
+# MediaPlayer HtmlHelper Overview
 
 The Telerik UI MediaPlayer HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI MediaPlayer widget.
 

@@ -1,12 +1,12 @@
 ---
 title: Overview
-page_title: ScrollView Overview | Telerik UI for ASP.NET Core HTML Helpers
+page_title: ScrollView HtmlHelper Overview | Telerik UI for ASP.NET Core HTML Helpers
 description: "Learn the basics when working with the Telerik UI ScrollView for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_scrollview_aspnetcore
 position: 1
 ---
 
-# ScrollView Overview
+# ScrollView HtmlHelper Overview
 
 The Telerik UI ScrollView HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ScrollView widget.
 
@@ -134,9 +134,28 @@ If you set the `PageSize` option to a larger value, you will need to use a loop 
 </script>
 ```
 
+## Functionality and Features
+
+* [Paging]({% slug htmlhelpers_scrollview_aspnetcore_paging %})
+* [Templates]({% slug htmlhelpers_scrollview_aspnetcore_templates %})
+
 ## Events
 
 For a complete example on basic ScrollView events, refer to the [demo on using the events of the ScrollView](https://demos.telerik.com/aspnet-core/scrollview/events).
+
+## Referencing Existing Instances
+
+To reference an existing Telerik UI ScrollView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [ScrollView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview#configuration) to control its behavior.
+
+```
+    // Place the following after your Telerik UI ScrollView for ASP.NET Core declaration.
+    <script>
+    $(function() {
+        // The For() of the ScrollView is used to get its client-side instance.
+        var scrollview = $("#scrollview").data("kendoScrollView");
+    });
+    </script>
+```
 
 ## See Also
 

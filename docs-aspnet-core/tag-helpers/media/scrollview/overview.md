@@ -50,7 +50,7 @@ You can initialize the ScrollView either [from HTML](#from-html) or [from a data
 1. Create a [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 1. Use the `template-id` property to pass it and provide a DataSource.
 
-Make sure that the template provides the `pageSize` of the data source. If `serverPaging` is enabled, the ScrollView will request the data in advance so it becomes available before it is required, thus improving user experience. The Kendo UI ScrollView uses virtualization when it is bound to a data source and it only has three pages at all times&mdash;the current, the previous, and the next.
+Make sure that the template provides the `pageSize` of the data source. If `serverPaging` is enabled, the ScrollView will request the data in advance so it becomes available before it is required, thus improving user experience. The ScrollView uses virtualization when it is bound to a data source and it only has three pages at all times&mdash;the current, the previous, and the next.
 
 ```
     <kendo-scrollview name="scrollView" content-height="100%" template-id="scrollview-template" style="height:600px; width:890px; max-width: 100%;">
