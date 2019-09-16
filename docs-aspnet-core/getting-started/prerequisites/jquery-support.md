@@ -22,6 +22,7 @@ The following table provides a list of the jQuery versions that are compatible w
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [UI for ASP.NET Core 2019.2.514 (R2 2019)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r2-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
 | [UI for ASP.NET Core 2019.1.115 (R1 2019)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/progress-telerik-ui-for-asp-net-core-2019-1-115-changelog--uiaspcore-2019-1-115-058b0897-ab2d-46ba-b26d-4a4cbb33210c)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
 | [UI for ASP.NET Core 2018.3.911 (R3 2018)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r3-2018)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
 | [UI for ASP.NET Core 2018.2.516 (R2 2018)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/ui-for-asp-net-core-r2-2018-uiaspcore-2018-2-516)	|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
