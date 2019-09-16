@@ -1,20 +1,20 @@
 ---
-title: Store State
-page_title: Store State | Kendo UI Filter
-description: "Learn how to save and restore the state, options and filter expression of the Kendo UI Filter widget."
+title: Persisting the State
+page_title: jQuery Filter Documentation | Persisting the State | Kendo UI
+description: "Get started with the jQuery Filter by Kendo UI and learn how to save and restore its state, options, and filter expression."
 slug: store_settings_kendoui_filter_widget
-position: 5
+position: 3
 ---
 
-# Save and Restore State
+# Persisting the State
 
-You can store the filter expression of the Filter widget, so you can restore its state for your users.
+The Filter enables you to store its filter expression and restore its state for the user.
 
-## Save Automatically and Restore on Load
+## Restoring the State on Load
 
-You can store only the filter expression to, for example, apply it the next time the user visits the page.
+You can store only the filter expression and enable the Filter to apply it the next time the user visits the page, for example.
 
-The example below shows how you can use the `change` event to apply filtering automatically, and to also maintain an up-to-date state of the filter. Then, upon a page reload, the stored settings are provided to the widget configuration and are applied.
+The following example demonstrates how to use the `change` event to automatically apply filtering and to maintain an up-to-date state of the Filter. Upon a page reload, the stored settings will be provided to the Filter configuration and will be applied.
 
 ```dojo
 <ol>
@@ -64,7 +64,7 @@ The example below shows how you can use the `change` event to apply filtering au
             expression: getInitialExpression()
         }).data("kendoFilter");
 
-        if (getInitialExpression()) { // apply filter if there was a stored expression
+        if (getInitialExpression()) { // Apply filter if there was a stored expression.
             $("#filter").data("kendoFilter").applyFilter();
         }
 
@@ -76,8 +76,8 @@ The example below shows how you can use the `change` event to apply filtering au
     });
 
     function applyAndStoreFilterExpression(e) {
-        e.sender.applyFilter(); // apply filtering on every change
-        localStorage["myInitialFilterExpression"] = JSON.stringify(e.expression); // store the filter expression for future use
+        e.sender.applyFilter(); // Apply filtering on every change.
+        localStorage["myInitialFilterExpression"] = JSON.stringify(e.expression); // Store the filter expression for future use.
     }
 
     function getInitialExpression() {
@@ -97,11 +97,11 @@ The example below shows how you can use the `change` event to apply filtering au
 </script>
 ```
 
-## Save and Load Settings On Demand
+## Loading Settings on Demand
 
-You can save and load a certain previous state upon some application logic event.
+You can also save and load a previous specific state of the Filter upon an application logic event.
 
-The example below shows how you can obtain the current filter expression (and any other settings) in order to appply them again when needed by the business logic.
+The following example demonstrates how to obtain the current filter expression and any other settings and apply them when needed.
 
 ```dojo
 <ol>
@@ -156,7 +156,7 @@ The example below shows how you can obtain the current filter expression (and an
 
     function saveState(e) {
         localStorage["myFilterSettings"] = JSON.stringify(getFilter().getOptions().expression);
-        // you can store and restore all the options not just the expression
+        // You can store and restore all options not just the expression.
     }
 
     function loadState() {
@@ -165,9 +165,9 @@ The example below shows how you can obtain the current filter expression (and an
             var opts = filter.getOptions();
             opts.expression = JSON.parse(localStorage["myFilterSettings"]);
             filter.setOptions(opts);
-            //if you will be restoring all options you need only filter.setOptions(myOptionsLiteral)
-            
-            filter.applyFilter(); //apply the new filter expression
+            // If you will restore all options, you need only filter.setOptions(myOptionsLiteral).
+
+            filter.applyFilter(); // Apply the new filter expression.
         }
     }
 
@@ -183,8 +183,6 @@ The example below shows how you can obtain the current filter expression (and an
 
 ## See Also
 
-* [Filter Overview]({%slug overview_kendoui_filter_widget%})
-* [Kendo UI Filter Basics (Demo)](https://demos.telerik.com/kendo-ui/filter/index)
-* [Kendo UI Filter Persist State (Demo)](https://demos.telerik.com/kendo-ui/filter/persist-state)
-* [JavaScript API Reference](/api/javascript/ui/treelist)
-
+* [Basic Usage of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/index)
+* [Persisting the State of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/persist-state)
+* [JavaScript API Reference of the Filter](/api/javascript/ui/filter)

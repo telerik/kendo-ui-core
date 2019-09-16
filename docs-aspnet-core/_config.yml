@@ -46,12 +46,12 @@ navigation:
         title: "Data Source"
      "tag-helpers/data-management":
         title: "Data Management"
+     "tag-helpers/data-management/filter":
+        title: "Filter"
      "tag-helpers/data-management/grid":
         title: "Grid"
-        position: 1
      "tag-helpers/data-management/pivotgrid":
         title: "PivotGrid"
-        position: 2
      "tag-helpers/editors":
         title: "Editors"
      "tag-helpers/charts":
@@ -88,11 +88,10 @@ navigation:
         title: "Data Source"
      "html-helpers/data-management":
         title: "Data Management"
+     "html-helpers/data-management/filter":
+        title: "Filter"
      "html-helpers/data-management/grid":
         title: "Grid"
-     "html-helpers/data-management/grid/binding":
-        title: "Data Binding"
-        position: 2
      "html-helpers/data-management/grid/editing":
         title: "Editing"
         position: 3
@@ -182,9 +181,6 @@ navigation:
         title: "Navigation"
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
-     "html-helpers/navigation/menu/binding":
-        title: "Binding"
-        position: 2
      "html-helpers/navigation/menu/contextmenu":
         title: "ContextMenu"
         position: 3
@@ -204,9 +200,6 @@ navigation:
         title: "PDF"
      "html-helpers/pdf/pdfviewer":
         title: "PDFViewer"
-     "html-helpers/scheduling/scheduler/binding":
-        title: "Binding"
-        position: 2
      "styles-and-layout":
         title: "Styles and Appearance"
         position: 5
@@ -223,8 +216,8 @@ navigation:
 ## List helpers directory names and order here, like this:
      "*appearance":
         title: "Appearance"
-     "*binding":
-        title: "Binding"
+     "*/binding":
+        title: "Data Binding"
         position: 2
      "*troubleshoot":
         title: "Troubleshooting"
@@ -286,6 +279,8 @@ navigation:
         title: "DateRangePicker"
      "*datetimepicker":
         title: "DateTimePicker"
+     "*diagram":
+        title: "Diagram"
      "*dialog":
         title: "Dialog"
      "*draganddrop":

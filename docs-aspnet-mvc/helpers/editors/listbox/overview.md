@@ -24,7 +24,7 @@ The ListBox provides suggestions depending on the typed text and allows multiple
 * [Item templates]({% slug itemtemplates_listboxhelper_aspnetmvc %})
 * [Dragging and dropping]({% slug draganddrop_listboxhelper_aspnetmvc %})
 * [Selection]({% slug selection_listboxhelper_aspnetmvc %})
-* [Localization]({% slug localization_listboxhelper_aspnetmvc %})
+* [Globalization]({% slug globalization_listbox_aspnetmvc %})
 
 ## Events
 

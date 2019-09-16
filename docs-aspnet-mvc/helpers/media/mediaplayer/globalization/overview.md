@@ -10,7 +10,7 @@ position: 1
 
 The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support).
 
-The globalization functionality of the MediaPlayer is enabled through the [localization of messages]({% slug mediaplayer_localization_aspnetmvc %}).
+The globalization functionality of the MediaPlayer is enabled through the [localization of its messages]({% slug mediaplayer_localization_aspnetmvc %}).
 
 ## See Also
 

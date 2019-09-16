@@ -136,15 +136,6 @@ As the previous and the following examples demonstrate, the client object of the
     </script>
 ```
 
-## Referencing Existing Instances
-
-To refer to an existing Grid instance:
-
-1. Use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
-
-        var grid = $("#grid").data("kendoGrid");
-
 ## Functionality and Features
 
 * Data operations
@@ -173,6 +164,15 @@ To refer to an existing Grid instance:
 
 For more information on implementing specific scenarios, refer to the [**Knowledge Base** section](https://docs.telerik.com/kendo-ui/knowledge-base).
 
+## Referencing Existing Instances
+
+To refer to an existing Grid instance:
+
+1. Use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
+1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
+
+        var grid = $("#grid").data("kendoGrid");
+        
 ## See Also
 
 * [Basic Usage of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/index)

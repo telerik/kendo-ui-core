@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization | Telerik UI ListBox HtmlHelper for ASP.NET MVC
 description: "Get started with the Telerik UI ListBox HtmlHelper for ASP.NET MVC and learn about the localization options it supports."
+previous_url: /helpers/editors/listbox/localization
 slug: localization_listboxhelper_aspnetmvc
 position: 6
 ---

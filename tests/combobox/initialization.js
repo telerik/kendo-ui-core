@@ -63,7 +63,7 @@ it("wraps element if no wrapper span.k-widget and hide element", function() {
 });
 
 it("create a text input", function() {
-    var autocompleteAttr = kendo.support.browser.chrome ? "disabled" : "off";
+    var autocompleteAttr = "off";
     var combobox = new ComboBox(input.attr("name", "combo1"), {
         text: "test"
     });

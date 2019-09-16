@@ -16,16 +16,15 @@ You can control the number and type of the rendered tools by initializing the it
 
 The toolbar collection includes the following built-in tools:
 
-* `pager` with a corresponding command `PageChangeCommand`.
-* `zoom` with a corresponding command `ZoomCommand`.
-* `toggleSelection` with a corresponding commands `EnableSelectionCommand`.
-* `togglePan` with a corresponding commands `EnablePanCommand`.
-* `search` with a corresponding command `OpenSearchCommand`.
-* `open` with a corresponding command `OpenCommand`.
-* `download` with a corresponding command `DownloadCommand`.
-* `print` with a corresponding command `PrintCommand`.
+* `pager`
+* `zoom`
+* `toggleSelection`
+* `search` 
+* `open` 
+* `download`
+* `print`
 
-The following example demonstrates basic configuration options for the PDFViewer toolbar tools.
+The following example demonstrates basic configuration options for the PDFViewer toolbar tools. You can also add `spacer` elements, in order to group a preferable set of tools. 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <script>
@@ -37,29 +36,15 @@ The following example demonstrates basic configuration options for the PDFViewer
         $(document).ready(function () {
             $("#pdfViewer").kendoPDFViewer({            
               toolbar: {
-                items: [
-                      { type: "pager", overflow: "never", command: "PageChangeCommand" },
-                      { type: "spacer" },
-                      { type: "zoom", command: "ZoomCommand", zoomInOut: true, combobox: { zoomLevels: [50, 100, 150, 200, 300, 400] } },
-                      {
-                          type: "buttonGroup",
-                          buttons: [
-                              { togglable: true, text: "Enable Selection", command: "EnableSelectionCommand", icon: "k-i-cursor", showText: "overflow", name: "toggleSelection", group: "toggle-pan" },
-                              { togglable: true, text: "Enable Panning", command: "EnablePanCommand", icon: "k-i-hand", showText: "overflow", name: "togglePan", group: "toggle-pan", selected: true }
-                          ]
-                      },
-                      { type: "spacer" },
-                      { type: "button", text: "Search", command: "OpenSearchCommand", icon: "search", name: "search", showText: "overflow" },
-                      { type: "button", text: "Open", showText: "overflow", name: "open", icon: "folder-open", command: "OpenCommand" },
-                      { type: "button", text: "Download", showText: "overflow", name: "download", icon: "download", command: "DownloadCommand" },
-                      { type: "button", text: "Print", showText: "overflow", name: "print", icon: "print", command: "PrintCommand" }                  
-                ]
+              items: [
+                "pager","spacer","zoom","toggleSelection","spacer","search","open","download","print"               
+              ]
             },
             })
         });
     </script>
 
-You can also add and remove client-side API methods to programmatically render the desired toolbar tools in the PDFViewer.
+You can also use the `add` and `remove` client-side API methods to programmatically manage the rendered tools in the PDFViewer.
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <script>
@@ -73,6 +58,37 @@ You can also add and remove client-side API methods to programmatically render t
       var printToolElement = $(".k-toolbar").find('a[title="Print"]');
       pdfviewer.toolbar.remove(printToolElement);
     </script>
+
+ You can add custom tool in the items collection of the toolbar:
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+
+    <div id="pdfviewer"></div>
+    <script>
+        $(document).ready(function () {
+            $("#pdfViewer").kendoPDFViewer({            
+            toolbar: {
+                items: [
+                    "pager", 
+                    "spacer", 
+                    "open", 
+                    "download",
+                    {
+                    name: "myCustomTool",
+                    template: "<select id='myDropdown'></select>"
+                    }
+                ]
+                },
+            })
+            $("#myDropdown").kendoDropDownList({
+        	    dataSource: ["Option 1", "Option 2", "Option 3"]
+            });
+        });
+    </script>
+
 
 ## See Also
 

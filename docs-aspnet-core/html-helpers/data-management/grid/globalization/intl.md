@@ -1,6 +1,6 @@
 ---
 title: Internationalization
-page_title: UI for ASP.NET Core Grid Documentation | Grid Internationalization | UI for ASP.NET Core
+page_title: Internationalization | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Get started with the UI for ASP.NET Core Grid by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
 slug: intl_aspnetcore_grid
 position: 2

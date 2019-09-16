@@ -45,83 +45,87 @@ Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped]
 
 * Creating widgets through TypeScript inheritance&mdash;The following example demonstrates how to inherit from an existing Kendo UI widget.
 
-      /// <reference path="jquery.d.ts" />
-      /// <reference path="kendo.all.d.ts" />
+```
+/// <reference path="jquery.d.ts" />
+/// <reference path="kendo.all.d.ts" />
 
-      module KendoWidgets {
-          // (Optional) Extend the default widget options.
-          export interface MyDatePickerOptions extends kendo.ui.DatePickerOptions {
-          }
+module KendoWidgets {
+    // (Optional) Extend the default widget options.
+    export interface MyDatePickerOptions extends kendo.ui.DatePickerOptions {
+    }
 
-          // Create a class which inherits from the Kendo UI widget.
-          export class MyDatePicker extends kendo.ui.DatePicker {
-              constructor(element: Element, options?: MyDatePickerOptions) {
-                  super(element, options);
-              }
-              // (Optional) Override a widget method.
-              open() {
-                  // Log to the console (optional).
-                  console.log("open");
+    // Create a class which inherits from the Kendo UI widget.
+    export class MyDatePicker extends kendo.ui.DatePicker {
+        constructor(element: Element, options?: MyDatePickerOptions) {
+            super(element, options);
+        }
+        // (Optional) Override a widget method.
+        open() {
+            // Log to the console (optional).
+            console.log("open");
 
-                  // Invoke a base widget method.
+            // Invoke a base widget method.
 
-                  super.open();
-              }
-          }
-          // Create an alias of the prototype (required by kendo.ui.plugin).
-          MyDatePicker.fn = MyDatePicker.prototype;
-          // Deep clone the widget default options.
-          MyDatePicker.fn.options = $.extend(true, {}, kendo.ui.DatePicker.fn.options);
-          // Specify the name of your Kendo UI widget. Used to create the corresponding jQuery plugin.
-          MyDatePicker.fn.options.name = "MyDatePicker";
-          // Create a jQuery plugin.
-          kendo.ui.plugin(MyDatePicker);
-      }
-      // Expose the newly created jQuery plugin to TypeScript.
-      interface JQuery {
-          kendoMyDatePicker(options?: kendo.ui.DatePickerOptions): JQuery;
-      }
-      $(function () {
-          // Initialize your custom widget.
-          $("#datepicker").kendoMyDatePicker();
-          // Get a reference to the widget instance.
-          var myDatePicker = <KendoWidgets.MyDatePicker>$("#datepicker").data("kendoMyDatePicker");
-          // Call a widget method.
-          myDatePicker.open();
-      });
+            super.open();
+        }
+    }
+    // Create an alias of the prototype (required by kendo.ui.plugin).
+    MyDatePicker.fn = MyDatePicker.prototype;
+    // Deep clone the widget default options.
+    MyDatePicker.fn.options = $.extend(true, {}, kendo.ui.DatePicker.fn.options);
+    // Specify the name of your Kendo UI widget. Used to create the corresponding jQuery plugin.
+    MyDatePicker.fn.options.name = "MyDatePicker";
+    // Create a jQuery plugin.
+    kendo.ui.plugin(MyDatePicker);
+}
+// Expose the newly created jQuery plugin to TypeScript.
+interface JQuery {
+    kendoMyDatePicker(options?: kendo.ui.DatePickerOptions): JQuery;
+}
+$(function () {
+    // Initialize your custom widget.
+    $("#datepicker").kendoMyDatePicker();
+    // Get a reference to the widget instance.
+    var myDatePicker = <KendoWidgets.MyDatePicker>$("#datepicker").data("kendoMyDatePicker");
+    // Call a widget method.
+    myDatePicker.open();
+});
+```
 
 * Using Kendo UI MVVM in TypeScript&mdash;When inheriting from `kendo.data.ObservableObject` in TypeScript you should call the `super.init` method to properly set up dependency tracking. The following example shows how to use Kendo UI MVVM in TypeScript.
 
-      /// <reference path="jquery.d.ts" />
-      /// <reference path="kendo.all.d.ts" />
+```
+/// <reference path="jquery.d.ts" />
+/// <reference path="kendo.all.d.ts" />
 
-      class Person extends kendo.data.ObservableObject {
-          name = "John Doe";
+class Person extends kendo.data.ObservableObject {
+    name = "John Doe";
 
-          constructor() {
-              super();
+    constructor() {
+        super();
 
-              super.init(this);
-          }
-      }
+        super.init(this);
+    }
+}
 
-      class ViewModel extends kendo.data.ObservableObject {
-          person = new Person();
+class ViewModel extends kendo.data.ObservableObject {
+    person = new Person();
 
-          constructor() {
-              super();
+    constructor() {
+        super();
 
-              super.init(this);
-          }
-      }
+        super.init(this);
+    }
+}
 
-      $(function () {
-          var viewModel = new ViewModel();
+$(function () {
+    var viewModel = new ViewModel();
 
-          kendo.bind(document.body, viewModel);
+    kendo.bind(document.body, viewModel);
 
-          viewModel.set("person.name", "Jane Doe");
-      });
+    viewModel.set("person.name", "Jane Doe");
+});
+```
 
 ## See Also
 

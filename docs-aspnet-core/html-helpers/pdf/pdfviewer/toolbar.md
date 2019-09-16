@@ -16,33 +16,36 @@ You can control the number and type of the rendered tools by initializing the it
 
 The toolbar collection includes the following built-in tools:
 
-* `pager` with a corresponding command `PageChangeCommand`.
-* `zoom` with a corresponding command `ZoomCommand`.
-* `toggleSelection` with a corresponding commands `EnableSelectionCommand`.
-* `togglePan` with a corresponding commands `EnablePanCommand`.
-* `search` with a corresponding command `OpenSearchCommand`.
-* `open` with a corresponding command `OpenCommand`.
-* `download` with a corresponding command `DownloadCommand`.
-* `print` with a corresponding command `PrintCommand`.
+* `pager`
+* `zoom`
+* `toggleSelection`
+* `search` 
+* `open` 
+* `download`
+* `print`
 
-The following example demonstrates basic configuration options for the PDFViewer toolbar tools.
+The following example demonstrates basic configuration options for the PDFViewer toolbar tools. You can also add `spacer` elements, in order to group a preferable set of tools. 
 
-```
+```  
       @(Html.Kendo().PDFViewer().Name("pdfviewer")
         .Toolbar(toolbar =>
             toolbar.Items(items =>
             {
-                items.Add().Command("PageChangeCommand").Type("pager").Name("pager");
-                items.Add().Name("spacer").Type("spacer");
-                items.Add().Command("OpenCommand").Type("button").Name("open").Icon("folder-open");
-                items.Add().Command("DownloadCommand").Type("button").Name("download").Icon("download");
-                items.Add().Command("PrintCommand").Type("button").Name("print").Icon("print");
+                items.Add().Name("pager");
+                items.Add().Name("spacer");
+                items.Add().Name("zoom");
+                items.Add().Name("toggleSelection");
+                items.Add().Name("spacer");
+                items.Add().Name("search");
+                items.Add().Name("open");
+                items.Add().Name("download");
+                items.Add().Name("print");
             })
         )
     )
 ```
 
-You can also add and remove client-side API methods to programmatically render the desired toolbar tools in the PDFViewer.
+You can also use the `add` and `remove` client-side API methods to programmatically manage the rendered tools in the PDFViewer.
 
     @(Html.Kendo().PDFViewer()
         .Name("pdfviewer")     

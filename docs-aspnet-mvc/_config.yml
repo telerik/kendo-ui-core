@@ -34,27 +34,17 @@ navigation:
         title: "Conversational UI"
      "helpers/data-management":
         title: "Data Management"
+     "helpers/data-management/filter":
+        title: "Filter"
      "helpers/data-management/pivotgrid":
         title: "PivotGrid"
      "helpers/diagrams-and-maps":
         title: "Diagrams and Maps"
+     "helpers/diagrams-and-maps/diagram/export":
+        title: "Export"
+        position: 6
      "helpers/editors":
         title: "Editors"
-     "helpers/editors/autocomplete/binding":
-        title: "Data Binding"
-        position: 2
-     "helpers/editors/combobox/binding":
-        title: "Data Binding"
-        position: 2
-     "helpers/editors/dropdownlist/binding":
-        title: "Data Binding"
-        position: 2
-     "helpers/editors/multicolumncombobox/binding":
-        title: "Data Binding"
-        position: 2
-     "helpers/editors/multiselect/binding":
-        title: "Data Binding"
-        position: 2
      "helpers/gauges":
         title: "Gauges"
      "helpers/hybrid":
@@ -75,9 +65,6 @@ navigation:
         title: "Navigation"
      "helpers/navigation/radiobutton":
         title: "RadioButton"
-     "helpers/navigation/menu/binding":
-        title: "Data Binding"
-        position: 2
      "helpers/navigation/panelbar":
         title: "PanelBar"
      "helpers/pdf":
@@ -183,8 +170,9 @@ navigation:
         position: 40
      "*appearance":
         title: "Appearance"
-     "*binding":
-        title: "Binding"
+     "*/binding":
+        title: "Data Binding"
+        position: 2
      "*troubleshoot":
         title: "Troubleshooting"
      "*editing":
