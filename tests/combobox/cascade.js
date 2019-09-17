@@ -1467,46 +1467,5 @@
 
             assert.equal(child.data("kendoComboBox").text(), "X5");
         });
-
-        it("cascades from MultiColumnComboBox widget", function() {
-            // array of all brands
-            var brands = [
-                { id: 1, name: "Ford" },
-                { id: 2, name: "BMW" },
-                { id: 3, name: "Chevrolet" }
-            ];
-
-            // array of all models
-            var models = [
-                { modelId: 1, name: "Explorer", brandId: 1 },
-                { modelId: 2, name: "Focus", brandId: 1 },
-                { modelId: 3, name: "X3", brandId: 2 },
-                { modelId: 4, name: "X5", brandId: 2 },
-                { modelId: 5, name: "Impala", brandId: 3 },
-                { modelId: 6, name: "Cruze", brandId: 3 }
-            ];
-
-            parent.kendoMultiColumnComboBox({
-                dataTextField: "name",
-                dataValueField: "id",
-                dataSource: brands, // bind it to the brands array
-                value: "1"
-            });
-
-            child.kendoComboBox({
-                dataTextField: "name",
-                dataValueField: "modelId",
-                cascadeFrom: "parent",
-                cascadeFromField: "brandId",
-                dataSource: models // bind it to the models array
-            });
-
-            child.data("kendoComboBox").one("dataBound", function(ev) {
-                ev.sender.select(1);
-            });
-            parent.data("kendoMultiColumnComboBox").select(1);
-
-            assert.equal(child.data("kendoComboBox").text(), "X5");
-        });
     });
 }());
