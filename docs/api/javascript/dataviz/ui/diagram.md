@@ -11144,7 +11144,7 @@ The shape that will be removed.
 
 ##### e.preventDefault `Function`
 
-Prevents the remove action. If called, the element will not be removed to the diagram.
+Prevents the remove action. If called, the element will not be removed from the diagram.
 
 ##### e.sender `kendo.dataviz.ui.Diagram`
 
