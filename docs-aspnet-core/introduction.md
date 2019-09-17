@@ -11,7 +11,7 @@ position: 1
 
 Thank you for choosing Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core!  
 
-[UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers (HTML and Tag helpers) that allow you to use the Kendo UI widgets in .NET Core. From a client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their ASP.NET Core helpers represent the same functionalities and provide the same capabilities.
+[Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui) is a set of server-side wrappers (HTML and Tag helpers) that allow you to use the Kendo UI widgets in .NET Core. From a client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their ASP.NET Core helpers represent the same functionalities and provide the same capabilities.
 
 The Telerik UI ASP.NET Core HTML and Tag helpers:
 * Allow you to configure a Kendo UI widget through the C# or VB.NET code&mdash;for example, to set its value, data source, and so on.

@@ -3,7 +3,7 @@ title: Data Binding
 page_title: Data Binding | Telerik UI StockChart HtmlHelper for ASP.NET Core
 description: "Learn how to bind the Telerik UI StockChart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
 slug: databinding_stockchart_aspnetcore
-position: 1
+position: 2
 ---
 
 # Data Binding

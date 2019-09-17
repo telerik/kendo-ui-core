@@ -3,7 +3,7 @@ title: Copyright
 page_title: Copyright | Telerik UI for ASP.NET MVC
 description: "Copyright notice for Progress Telerik UI for ASP.NET MVC"
 slug: copyright_kendoui
-position: 270
+position: 80
 ---
 
 # Copyright

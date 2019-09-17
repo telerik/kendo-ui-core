@@ -1,14 +1,14 @@
 ---
 title: Overview
-page_title: Overview | UI for ASP.NET MVC Visual Studio Integration
-description: "Learn how to enhance experience of developing web applications with Progress&reg; Telerik&reg; UI for ASP.NET MVC."
+page_title: VS Integration Overview | Visual Studio Integration | Telerik UI for ASP.NET MVC
+description: "Learn how to enhance experience of developing web applications with Telerik UI for ASP.NET MVC."
 slug: overview_visualstudio_aspnetmvc
 position: 1
 ---
 
 # Visual Studio Integration Overview
 
-The Progress&reg; Telerik&reg; UI for ASP.NET MVC Visual Studio (VS) Extensions enhance the experience of developing web applications with Progress&reg; Telerik&reg; UI for ASP.NET MVC.
+The Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio (VS) Extensions enhance the experience in developing MVC web applications with Telerik UI for ASP.NET MVC.
 
 The extensions handle the following major points:
 
@@ -47,9 +47,5 @@ The new ASP.NET MVC 4 project wizard also contains the Progress&reg; Telerik&reg
 
 ## See Also
 
-* [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [VS Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Creating New Projects with Visual Studio]({% slug newprojectwizards_visualstudio_aspnetmvc %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

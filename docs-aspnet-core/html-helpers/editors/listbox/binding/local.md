@@ -1,12 +1,12 @@
 ---
-title: Local Data Binding
-page_title: Local Data Binding | Telerik UI ListBox HtmlHelper for ASP.NET Core
+title: Local Binding
+page_title: Local Binding | Telerik UI ListBox HtmlHelper for ASP.NET Core
 description: "Get started with the Telerik UI for ASP.NET Core ListBox and learn how to bind the ListBox to local data."
 slug: htmlhelpers_listbox_local_aspnetcore
 position: 2
 ---
 
-# Local Data
+# Local Binding
 
 The Telerik UI ListBox for ASP.NET Core enables you to bind it to local arrays of data.
 

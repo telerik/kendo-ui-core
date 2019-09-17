@@ -41,7 +41,7 @@ Telerik UI for ASP.NET Core contains the following directories:
 * `js`&mdash;These are the minified JavaScript files.
 * `styles`&mdash;The minified CSS files and images used by the themes.
 * `src`&mdash;The complete JavaScript, CSS, and C# source code. Note that this directory is not available in the trial version.
-* `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (*kendo.all*, *kendo.dataviz*, *kendo.web* and *kendo.mobile*).
+* `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (`kendo.all`, `kendo.dataviz`, `kendo.web`, and `kendo.mobile`).
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts (as the above).
 * `VSExtensions`&mdash;The extensions for Visual Studio 2017.
 * `wrappers\aspnetcore\Binaries\AspNet.Core`&mdash;Containing the .nupkg NuGet package file.

@@ -1,12 +1,12 @@
 ---
-title: Remote Data Binding
-page_title: Remote Data Binding | Telerik UI ListBox HtmlHelper for ASP.NET Core
+title: Remote Binding
+page_title: Remote Binding | Telerik UI ListBox HtmlHelper for ASP.NET Core
 description: "Get started with the Telerik UI for ASP.NET Core ListBox and learn how to bind the ListBox to remote data."
 slug: htmlhelpers_listbox_remote_aspnetcore
 position: 3
 ---
 
-# Remote Data
+# Remote Binding
 
 The Telerik UI ListBox for ASP.NET Core enables you to bind it to a remote data source.
 

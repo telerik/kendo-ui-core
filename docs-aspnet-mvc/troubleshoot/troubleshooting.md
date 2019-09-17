@@ -13,6 +13,35 @@ This page provides solutions to common issues you may encounter while working wi
 
 Because Telerik UI for ASP.NET MVC is powered by Kendo UI, check the [general article on Kendo UI troubleshooting](http://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues) for more issues and their solutions.
 
+### Troubleshooting
+
+#### Kendo.Mvc.Examples upgraded to 4.6.2
+
+The examples project is 4.6.2 targetFramework. Installation of Microsoft .NET Framework 4.6.2 is required. If you cannot install it, you could switch the targetFramework to 4.5 and run the examples without using `Telerik.Web.PDF` dependency. `Telerik.Web.PDF` is a netstandard project that uses DPL libraries to convert PDF documents into json that is utilized by the PDFViewer component.
+
+#### I Am Still Getting the Old Version
+
+Sometimes the .NET Framework caches the old Kendo.MVC dll. As a result, the upgrade may seem to have failed.
+
+**Solution**
+
+1. From the Windows **Task Manager**, terminate the IIS process and close Visual Studio.
+1. Clean up the Temporary ASP.NET files from `<sysdrive>:\Windows\Microsoft.NET\Framework[64] <vernum>\Temporary ASP.NET Files`.
+1. Delete your browser cache. For Internet Explorer, select **Tools** > **Internet Options** > **Delete Files**.
+1. Clean up the Windows WebSite Cache from `\Users<UserName>\AppData\Local\Microsoft\WebsiteCache`. The location of this cache may vary from one operating system to another.
+1. Clean up the Visual Studio Backup from `<sysdrive>:\Users\<UserName>\Documents\Visual Studio <vsVersion>\Backup Files`. The exact location depends on your Visual Studio settings and installation.
+
+#### The Icons Are Missing after the Upgrade
+
+As of the [Kendo UI R1 2017 release](http://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1), the Telerik UI for ASP.NET MVC uses [font icons](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web), which might lead to compatibility issues.
+
+**Solution**
+
+If you upgrade your project from a prior version to the R1 2017 version (2017.1.118) or later, you have to change the [classes of the custom CSS rules that you use accordingly](http://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1).
+
+If the icons are still missing after you change the classes, verify that the version is fully [updated](#upgrade-to-newer-versions).
+
+
 ## JavaScript
 
 ### jQuery Is Unavailable or Undefined

@@ -1,17 +1,17 @@
 ---
 title: Visual Basic Syntax
-page_title: Visual Basic Syntax - Getting Started
-description: "Apply a proper Visual Basic syntax when using lamba expressions and anonymous types inside Kendo UI MVC wrapper declarations."
+page_title: Visual Basic Syntax | Working with Helpers | Telerik UI for ASP.NET MVC
+description: "Get started with Telerik UI for ASP.NET MVC and apply the proper Visual Basic syntax when using lambda expressions and anonymous types inside the helper declarations."
 slug: visualbasic_aspnetmvc
-previous_url: /vb
-position: 9
+previous_url: /vb, /getting-started/vb
+position: 4
 ---
 
 # Visual Basic Syntax
 
-This article demonstrates the correct Visual Basic (VB) syntax when you use [lamba expressions](http://msdn.microsoft.com/en-us/library/bb531253.aspx) and [anonymous types](http://msdn.microsoft.com/en-us/library/bb384767.aspx) inside the Kendo UI MVC wrapper declarations.
+When you use [lambda expressions](http://msdn.microsoft.com/en-us/library/bb531253.aspx) and [anonymous types](http://msdn.microsoft.com/en-us/library/bb384767.aspx) inside the helper declarations, you have to apply the correct Visual Basic (VB) syntax.
 
-## Editor
+The following example demonstrates how to use the VB syntax in the Editor.
 
     @Code
 
@@ -40,7 +40,7 @@ This article demonstrates the correct Visual Basic (VB) syntax when you use [lam
 
     End Code
 
-## TabStrip
+The following example demonstrates how to use the VB syntax in the TabStrip.
 
     @Code
 
@@ -70,11 +70,9 @@ This article demonstrates the correct Visual Basic (VB) syntax when you use [lam
         .Selected(True) _
         .Content("string content")))
 
-## Grid
+The following example demonstrates how to use the VB syntax in the Grid.
 
-### View
-
-    @Code
+   @Code
         Html.Kendo().Grid(Of TelerikMvcAppVB.Person)() _
     .Name("Grid") _
     .Columns(Sub(c)
@@ -114,7 +112,7 @@ The following example demonstrates alternative ToolBar configurations.
              End Function) _
     ...
 
-### Controller
+The following example demonstrates how to use the VB syntax with the Cotroller.
 
     Imports Kendo.Mvc.Extensions
     Imports Kendo.Mvc.UI
@@ -141,7 +139,7 @@ The following example demonstrates alternative ToolBar configurations.
 
     End Class
 
-### Model
+The following example demonstrates how to use the VB syntax with the Model.
 
     Public Class Person
         Public Property PersonID As Integer
@@ -149,7 +147,7 @@ The following example demonstrates alternative ToolBar configurations.
         Public Property PersonBirthDate As DateTime
     End Class
 
-## Editor Template
+The following example demonstrates how to use the VB syntax with editor templates.
 
     @ModelType Nullable(Of Integer)
 
@@ -161,11 +159,5 @@ The following example demonstrates alternative ToolBar configurations.
 
 ## See Also
 
-* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
-* [ASP.NET Core](http://docs.telerik.com/aspnet-core/introduction)
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Download and Installation]({% slug overview_downloadinstallation_mvc %})

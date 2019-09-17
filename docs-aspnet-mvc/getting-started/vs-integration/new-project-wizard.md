@@ -1,18 +1,16 @@
 ---
-title: Creating Projects
-page_title: Creating Projects | UI for ASP.NET MVC Visual Studio Integration
+title: Creating New Projects
+page_title: Creating New Projects | Visual Studio Integration | Telerik UI for ASP.NET MVC
 description: "Learn how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
 ---
 
-# Creating Projects
+# Creating New Projects
 
 This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
 ## Getting Started
-
-### The Basics
 
 New Progress&reg; Telerik&reg; UI for ASP.NET MVC applications are created by using the **Create New Project Wizard**.
 
@@ -42,7 +40,7 @@ The first page of the **Create New Project Wizard** enables you to modify the pr
 * **Version**&mdash;Choose the version of Progress&reg; Telerik&reg; UI for ASP.NET MVC you want to use.
 * **MVC Version**&mdash;Choose the targeted ASP.NET MVC version.
 
-To move to the second page of the **Create New Project Wizard** where you can select the visual theme of your Telerik UI for ASP.NET MVC application, click **Next**. 
+To move to the second page of the **Create New Project Wizard** where you can select the visual theme of your Telerik UI for ASP.NET MVC application, click **Next**.
 
 ![The new Project Wizard](images/new_project_theme_selection.png)
 
@@ -65,10 +63,5 @@ If you need the Modernizr in your application, remove the existing Modernizr and
 
 ## See Also
 
-* [Create Kendo UI Professional Projects]({% slug newprojectwizard_visualstudio_kendoui %})
-* [Visual Studio Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetmvc %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

@@ -1,6 +1,6 @@
 ---
-title: Visual Studio Extensions Options
-page_title: Visual Studio Extensions Options | UI for ASP.NET MVC Visual Studio Integration
+title: VS Extension Options
+page_title: VS Extension Options | Visual Studio Integration | Telerik UI for ASP.NET MVC
 description: "Learn how to use the settings Visual Studio (VS) provides that allow you to configure the Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions to best suit your needs."
 slug: vsextensionsoptions_visualstudio_aspnetmvc
 position: 9
@@ -55,9 +55,5 @@ All settings under the Kendo UI category affect only the Progress&reg; Telerik&r
 
 ## See Also
 
-* [VS Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Configure Projects]({% slug projectwizardconfig_visualstudio_aspnetmvc %})
-* [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetmvc %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

@@ -266,6 +266,8 @@ navigation:
         title: "ColorPalette"
      "*colorpicker":
         title: "ColorPicker"
+     "*calendar":
+        title: "Calendar"
      "*/multicolumncombobox":
         isNew: true
         title: "MultiColumnComboBox"

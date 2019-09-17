@@ -3,7 +3,7 @@ title: Breaking Changes
 page_title: Breaking Changes | Telerik UI for ASP.NET MVC
 description: "Learn about the breaking changes and backwards compatibility released by Telerik UI for ASP.NET MVC."
 slug: breakingchanges_mvc
-position: 250
+position: 9
 ---
 
 # Breaking Changes

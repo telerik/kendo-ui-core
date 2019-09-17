@@ -1,6 +1,6 @@
 ---
 title: Configuring Projects
-page_title: Configuring Projects | UI for ASP.NET MVC Visual Studio Integration
+page_title: Configuring Projects | Visual Studio Integration | Telerik UI for ASP.NET MVC
 description: "Learn how to configure a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: projectwizardconfig_visualstudio_aspnetmvc
 position: 6
@@ -38,9 +38,5 @@ The second page of the **Project Configuration Wizard** enables you to modify th
 
 ## See Also
 
-* [VS Integration Overview]({% slug overview_visualstudio_aspnetmvc %})
-* [Create Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Upgrade Projects]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [Convert Projects]({% slug projectwizardcoversion_visualstudio_aspnetmvc %})
-* [VS Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %})
-* [Download New Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetmvc %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

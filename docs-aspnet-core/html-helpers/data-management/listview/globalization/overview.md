@@ -12,6 +12,8 @@ The globalization process combines the translation of component messages (locali
 
 The globalization functionality of the ListView is enabled through its [right-to-left support]({% slug htmlhelpers_listview_aspnetcore_rtl %}).
 
+For more information on using localization and right-to-left languages with Telerik UI for ASP.NET Core helpers, refer to the article on [globalization support by Telerik UI for ASP.NET Core]({% slug overview_globalization_core %}).
+
 ## See Also
 
 * [RTL Support by the ListView HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listview/right-to-left-support)

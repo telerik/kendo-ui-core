@@ -34,7 +34,7 @@ And here is what the app will look like on mobile.
 ### Telerik UI for ASP.NET MVC vs Kendo UI Widgets
 
 From client-side point of view, the vanilla HTML/JavaScript **Kendo UI** widgets and the rendered **Telerik UI for ASP.NET MVC** represent the same thing and provide the same capabilities.
-However, the Telerik UI for ASP.NET MVC wrappers provide additional capabilities for use with ASP.NET MVC and tooling for VisualStudio. Refer to the [documentation]({% slug wrappersvswidgets_aspnetmvc %}) for a complete feature comparison.
+However, the Telerik UI for ASP.NET MVC wrappers provide additional capabilities for use with ASP.NET MVC and tooling for VisualStudio. Refer to the [documentation]({% slug overview_aspnetmvc %}#widgets-vs-wrappers) for a complete feature comparison.
 
 ### Important Resources
 

@@ -2,194 +2,164 @@
 title: Introduction
 page_title: Introduction | Progress Telerik UI for ASP.NET MVC
 description: "Download and install Progress Telerik UI for ASP.NET MVC, and run a sample application."
+previous_url: /getting-started/kendo-ui-vs-mvc-wrappers
 slug: overview_aspnetmvc
 position: 1
 ---
 
-# Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC
+# Welcome to Telerik UI for ASP.NET MVC
 
-[Telerik UI for ASP.NET MVC](http://www.telerik.com/aspnet-mvc) is a set of server-side wrappers that allows using the [Kendo UI widgets](../kendo-ui/introduction) from C# or VB.NET code.
+Thank you for choosing Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC!  
 
-This article demonstrates how to download Telerik UI for ASP.NET MVC, install it, and run a sample ASP.NET MVC application.
+Telerik UI for ASP.NET MVC is a set of server-side wrappers (HTML helpers) that allow you to use the Kendo UI widgets in .NET MVC. From a client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their ASP.NET MVC helpers represent the same functionalities and provide the same capabilities.
 
-## Requirements
+The Telerik UI ASP.NET MVC HTML helpers:
+* Allow you to configure a Kendo UI widget through the C# or VB.NET code&mdash;for example, to set its value, data source, and so on.
+* Render the HTML and JavaScript that are needed to initialize a Kendo UI widget whose options propagate to the client-side through its initialization script.
 
-Telerik UI for ASP.NET MVC requires ASP.NET MVC.
+## Widgets vs. Helpers
 
-The offline sample application requires:
+The Kendo UI widgets:
 
-* [.NET 4.6.2](https://www.microsoft.com/en-us/download/details.aspx?id=53321)
-* [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4) or [ASP.NET MVC 5](http://www.asp.net/mvc/mvc5)
-* [Visual Studio](https://www.visualstudio.com/downloads/)
-* LocalDB
+* Allow for a complete server-platform independence.
+* Provide full control over the placement of the initialization scripts.
+* Support the integration with the [MVVM](http://docs.telerik.com/kendo-ui/framework/mvvm/overview), [AngularJS](http://docs.telerik.com/kendo-ui/framework/AngularJS/introduction), and [Single-Page Application](http://docs.telerik.com/kendo-ui/framework/spa/overview) development patterns.
+* Support [Visual Studio IntelliSense](http://docs.telerik.com/kendo-ui/third-party/vs-intellisense) for the client-side API.
 
-## Environments
+The UI for ASP.NET MVC helpers:
+
+* Allow you to create widgets with no HTML and JavaScript coding.
+* Provide for server-side data binding and, in some cases, server-side rendering.
+* Allow you to use the `ToDataSourceResult()` extension method for binding Kendo UI widgets to server-side collections and for performing data operations (paging, sorting, filtering, and grouping).
+* Provide integration with some ASP.NET MVC features such as security trimming and editor templates.
+* Support unobtrusive validation based on Data Annotation attributes.
+* Enable a simple implementation of CRUD operations.
+* Support Visual Studio IntelliSense for the server-side configuration syntax.
+* Enable Visual Studio Extensions for automatic creation of new Telerik UI ASP.NET MVC applications and for automatic updating of the Telerik UI version.
+* Enable you to use scaffolding to generate widget declarations and related controller action methods.
+
+## Getting Started
+
+* [Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug aspnetmvc_nuget %})
+* [Scaffolding the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetmvc %})
+* [Integrating the Telerik UI for ASP.NET MVC project with Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
+
+## Supported Environments
 
 Telerik UI for ASP.NET MVC supports:
 
-* [.NET Framework 3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later
-* [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later
-* Visual Studio 2012 and later
-* [IIS 5](https://www.microsoft.com/en-us/download/details.aspx?id=24843) and later
-* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx) / [VB.NET](http://www.tutorialspoint.com/vb.net/)
-* [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later
+* [.NET Framework v3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
+* [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later.
+* Visual Studio 2012 and later.
+* [IIS 5](https://www.microsoft.com/en-us/download/details.aspx?id=24843) and later.
+* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx)  and [VB.NET](http://www.tutorialspoint.com/vb.net/).
+* [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later.
 
-Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2015 and later.
+The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 2015 and later.
 
-## Download
+## List of Helpers
 
-To download Telerik UI for ASP.NET MVC:
+|Group                      |HTML Helpers                                 
+| :---                      | :---                                                                            
+| **Data Source**           |[DataSource Demos](https://demos.telerik.com/aspnet-mvc/datasource)                      
+| **Data Management**       |[Grid Docs]({% slug overview_gridhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/grid)     
+|                           |[ListView Docs]({% slug overview_listviewhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/listview)    
+|                           |[PivotGrid Docs]({% slug overview_pivotgridhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/pivotgrid)  
+|                           |[Spreadsheet Docs]({% slug overview_spreadsheethelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/spreadsheet)
+|                           |[TreeList Docs]({% slug overview_treelisthelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/treelist)   
+|**Editors**                |[AutoComplete Docs]({% slug overview_autocompletehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/autocomplete)  
+|                           |[ColorPalette Docs]({% slug overview_colorpalettehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/colorpicker/palette)  
+|                           |[ColorPicker Docs]({% slug overview_colorpickerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/colorpicker)  
+|                           |[ComboBox Docs]({% slug overview_combobox_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/combobox)     
+|                           |[DateInput Docs]({% slug overview_dateinputhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/dateinput)                               
+|                           |[DatePicker Docs]({% slug overview_datepickerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/datepicker)                              
+|                           |[DateRangePicker Docs]({% slug overview_daterangepickerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/daterangepicker)
+|                           |[DateTimePicker Docs]({% slug overview_datetimepickerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/datetimepicker)  
+|                           |[DropDownList Docs]({% slug overview_dropdownlisthelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/dropdownlist)     
+|                           |[DropDownTree Docs]({% slug overview_dropdowntreehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/dropdowntree)    
+|                           |[Editor Docs]({% slug overview_editorhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/editor)           
+|                           |[FlatColorPicker Docs]({% slug overview_flatcolorpickerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/colorpicker/flatcolorpicker)
+|                           |[ListBox Docs]({% slug overview_listboxhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/listbox)          
+|                           |[MaskedTextBox Docs]({% slug overview_maskedtextboxhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/maskedtextbox)   
+|                           |[MultiColumnComboBox Docs]({% slug overview_multicolumncombobox_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/multicolumncombobox)   
+|                           |[MultiSelect Docs]({% slug overview_multiselecthelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/multiselect)      
+|                           |[NumericTextBox Docs]({% slug overview_numerictextboxhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/numerictextbox)  
+|                           |[Slider Docs]({% slug overview_sliderhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/slider)          
+|                           |[Switch Docs]({% slug overview_switchhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/switch)
+|                           |[TimePicker Docs]({% slug overview_timepickerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/timepicker)      
+|                           |[Upload Docs]({% slug overview_uploadhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/upload)                    
+|                           |[Validator Demos](https://demos.telerik.com/aspnet-mvc/validator)                    
+|**Charts**                 |[Chart Docs]({% slug overview_charthelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/chart-api)           
+|                           |[StockChart Docs]({% slug overview_stockcharthelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/financial)     
+|                           |[TreeMap Docs]({% slug overview_treemaphelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/treemap)         
+|**Gauges**                 |[ArcGauge Docs]({% slug overview_arcgaugehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/arc-gauge)       
+|                           |[LinearGauge Docs]({% slug overview_lineargaugehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/linear-gauge)     
+|                           |[RadialGauge Docs]({% slug overview_radialgaugehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/radial-gauge)    
+|**Barcodes**               |[Barcode Docs]({% slug overview_barcodehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/barcode)         
+|                           |[QRCode Docs]({% slug overview_qrcodehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/qrcode)         
+|**Diagrams and Maps**      |[Diagram Docs]({% slug overview_diagramhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/diagram)            
+|                           |[Map Docs]({% slug overview_maphelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/map)            
+|**Scheduling**             |[Calendar Docs]({% slug overview_calendarhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/calendar)       
+|                           |[Gantt Docs]({% slug overview_gantthelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/gantt)          
+|                           |[MultiViewCalendar Docs]({% slug overview_multiviewcalendar_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/multiviewcalendar)
+|                           |[Scheduler Docs]({% slug overview_schedulerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/scheduler)       
+|**Layout**                 |[Dialog Docs]({% slug overview_dialoghelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/dialog)           
+|                           |[Notification Docs]({% slug overview_notificatiomhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/notification)    
+|                           |[ResponsivePanel Demos](https://demos.telerik.com/aspnet-mvc/responsive-panel)      
+|                           |[Splitter Docs]({% slug overview_splitterhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/splitter)      
+|                           |[Tooltip Docs]({% slug overview_tooltiphelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/tooltip)         
+|                           |[Window Docs]({% slug overview_windowhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/window)          
+|**Navigation**             |[Button Docs]({% slug overview_buttonhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/button)          
+|                           |[ButtonGroup Docs]({% slug overview_buttongrouphelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/buttongroup)     
+|                           |[Drawer Docs]({% slug htmlhelpers_drawer_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/drawer)         
+|                           |[Menu Docs]({% slug overview_menu_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/menu)            
+|                           |[PanelBar Docs]({% slug overview_panelbarhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/panelbar)     
+|                           |[RadioButton Docs]({% slug overview_radiobuttonhelper_aspnetmvc %})     
+|                           |[TabStrip Docs]({% slug overview_tabstrip_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/tabstrip)         
+|                           |[TimeLine Docs]({% slug overview_timeline_aspnetmvc %})    
+|                           |[ToolBar Docs]({% slug overview_toolbarhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/toolbar)      
+|                           |[TreeView Docs]({% slug overview_treeviewhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/treeview)        
+|**Conversational UI**      |[Chat Docs]({% slug overview_chathelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/chat)             
+|**Interactivity and UX**   |[ProgressBar Docs]({% slug overview_progressbarhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/progressbar)      
+|                           |[Sortable Docs]({% slug overview_sortablehelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/sortable)         
+|**Media**                  |[MediaPLayer Docs]({% slug overview_mediaplayerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/mediaplayer)      
+|                           |[ScrollView Docs]({% slug htmlhelpers_scrollview_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/scrollview)       
+|**PDF**                    |[PDFViewer Docs]({% slug overview_pdfviewerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/pdfviewer)        
+|                           |[ScrollView Docs]({% slug htmlhelpers_scrollview_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/scrollview)       
+|**Hybrid UI**              |[Hybrid UI Docs]({% slug overview_pdfviewerhelper_aspnetmvc %})         
 
-1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik?ReturnUrl=https://www.telerik.com/v2/oauth/telerik/authorize%3Fclient_id%3Dhttp://www.lean.telerik.com%26redirect_uri%3Dhttp://www.telerik.com/account/default.aspx%26response_type%3Dcode%26state%3DBC61727E88E19B88D8471959A1CD745B15A7E71498002F0383A966A0200E7FDA).
-1. Click **Downloads** in the top navigation.
-1. Click **UI for ASP.NET MVC**. If this option is not available, click one of the following: **DevCraft UI Edition**, **DevCraft Complete**  or **DevCraft Ultimate**.
-1. Click **Download Installer and other resources**.
-1. Find the **UI for ASP.NET MVC**  item, click **Browse all product files**, and select to download the Telerik online installer (`exe` file), the `MSI` installer file directly, or the `.zip` file.
+## Monitoring the Progress Live Services
 
-## Installation
+Progress provides up-to-date information about the live services it delivers to its customers on a daily basis&mdash;for example, the Kendo UI CDN services, Kendo UI Dojo playground, and Telerik NuGet feed.
 
-Run Telerik UI for ASP.NET MVC installer. The automatic setup will guide you through the rest of the installation. If you chose to download the `.zip` file, extract it to a location of your preference.
+* [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/)
 
-### Location
+## Trial Version and Commercial License
 
-The setup installs Telerik UI for ASP.NET MVC in `C:\Program Files (x86)\Progress\UI for ASP.NET MVC<version>`.
+This UI for ASP.NET MVC library is a commercial UI library. You are welcome to explore its full functionality and get technical support from the team when you register for a free 30-day trial. To use it commercially, you need to [purchase a license](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Telerik UI for ASP.NET MVC [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.
 
-For versions prior to R3 2017, the default installation folder for Telerik UI for ASP.NET MVC is `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC<version>`.
+## Support Options
 
-### Distribution Contents
+For any issues you might encounter while working with UI for ASP.NET MVC, use any of the available support channels:
 
-Telerik UI for ASP.NET MVC contains the following directories:
+* UI for ASP.NET MVC license holders and active trialists can take advantage of the outstanding customer support delivered by the developers building the library. To submit a support ticket, use the [UI for ASP.NET MVC dedicated support](https://www.telerik.com/account/support-tickets/) system.
+* [UI for ASP.NET MVC forums](https://www.telerik.com/forums/aspnet-mvc) are part of the free support you can get from the community and from the UI for ASP.NET MVC team on all kinds of general issues.
+* [UI for ASP.NET MVC feedback portal](https://feedback.telerik.com/aspnet-mvc) and [UI for ASP.NET MVC roadmap](https://www.telerik.com/support/whats-new/kendo-ui/roadmap) provide information on the features in discussion and also the planned ones for release.
+* You may still need a tailor-made solution for your project. In such cases, go straight to [Progress Services](https://www.progress.com/services).
 
-* `js`&mdash;These are the minified JavaScript files.
-* `styles`&mdash;The minified CSS files and images used by the themes.
-* `src`&mdash;A `README` file which states that as of R2 2016 the source code is distributed in separate `.source.zip` packages that are located in your account.
-* `Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables the generation of the Kendo UI MVC wrapper widget declarations inside Visual Studio projects and is added to the Kendo UI Q1 2015 release.
-* `spreadsheet`&mdash;[`Telerik.Web.Spreadsheet`](../kendo-ui/controls/data-management/spreadsheet/import-and-export-data/server-side-processing) assembly and its dependencies from Telerik Document Processing library.
-* `pdfviewer`&mdash;`Telerik.Web.PDF` assembly and its dependencies from Telerik Document Processing library.
-* `wrappers\aspnetmvc\Binaries\MVC3`&mdash;The assemblies for the ASP.NET MVC 3 applications.
-* `wrappers\aspnetmvc\Binaries\MVC4`&mdash;The assemblies for the ASP.NET MVC 4 applications.
-* `wrappers\aspnetmvc\Binaries\MVC5`&mdash;The assemblies for the ASP.NET MVC 5 applications.
-* `wrappers\aspnetmvc\Examples\VS2012`&mdash;The ASP.NET MVC 4 sample application built with Visual Studio 2012.
-* `wrappers\aspnetmvc\Examples\VS2013`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2013.
-* `wrappers\aspnetmvc\Examples\VS2015`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2015.
-* `wrappers\aspnetmvc\Examples\VS2017`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2017.
-* `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
+## Learning Resources
 
-## Sample Application
-
-Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application available in four versions:
-
-* The ASP.NET MVC 4 application built with Visual Studio 2012.
-* The ASP.NET MVC 5 application built with Visual Studio 2013.
-* The ASP.NET MVC 5 application built with Visual Studio 2015.
-* The ASP.NET MVC 5 application built with Visual Studio 2017.
-
-### Running the Sample Application
-
-To run the sample application:
-
-1. Navigate to the installation directory of Telerik UI for ASP.NET MVC.
-1. Open the sample Visual Studio Solution:
-
-    * To run the ASP.NET MVC 4 version, open `wrappers\aspnetmvc\Examples\VS2012\Kendo.Mvc.Examples.sln` with Visual Studio 2012.
-    * To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\VS2013\Kendo.Mvc.Examples.sln` with Visual Studio 2013, 2015, and 2017.
-
-1. Install Microsoft .NET 4.6.2 Framework Developer Pack.
-1. Press `CTRL+F5` to build and run the application.
-1. A browser loads the start page of the sample application.
-
-### Sample Application Contents
-
-The sample application Visual Studio solution contains the following items:
-
-* `Views`&mdash;Razor views.
-* `Controllers`&mdash;Controller classes.
-* `Models`&mdash;Model classes.
-* `App_Data`&mdash;LocalDB sample database.
-
-## Upgrade
-
-You can upgrade the version of the Telerik UI for ASP.NET MVC wrappers and also switch from a trial to a developer license.
-
-### Upgrade to Newer Versions
-
-To update Telerik UI for ASP.NET MVC to a new version, either:
-* Use the [Upgrade Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %}), or
-* Manually replace the scripts and the style files.
-
-#### Automatic Upgrade
-
-To utilize the Upgrade Project Wizard, refer to the articles on:
-
-1. [Downloading new versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
-1. [Upgrading the Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-
-#### Manual Upgrade
-
-To manually upgrade to a newer Telerik UI for ASP.NET MVC version:
-
-1. Replace all [scripts, styles, and images](#distribution-contents) related to Telerik UI for ASP.NET MVC with the desired version of the framework. [Download](#download) the desired version from the **Download** section of your account. Load the scripts and styles locally or from the [Kendo UI CDN Services](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service#cdn-services).
-1. Change the reference to the new [Kendo.MVC dll]({% slug aspnetmvc5_aspnetmvc %}#add-kendomvcdll-reference). Verify that the dll refers to the correct ASP.NET MVC version.
-
-### Upgrade From Trial to Licensed Versions
-
-1. Before upgrading to a licensed version, delete (uninstall) the trial version from your machine. This eliminates the possibility for trial assemblies to end up in the project references or in production.
-1. [Install](#installation) the licensed Kendo UI version and follow the steps for updating the Telerik UI for ASP.NET MVC version.
-
-### Troubleshooting
-
-#### Kendo.Mvc.Examples upgraded to 4.6.2
-
-The examples project is 4.6.2 targetFramework. Installation of Microsoft .NET Framework 4.6.2 is required. If you cannot install it, you could switch the targetFramework to 4.5 and run the examples without using `Telerik.Web.PDF` dependency. `Telerik.Web.PDF` is a netstandard project that uses DPL libraries to convert PDF documents into json that is utilized by the PDFViewer component.
-
-#### I Am Still Getting the Old Version
-
-Sometimes the .NET Framework caches the old Kendo.MVC dll. As a result, the upgrade may seem to have failed.
-
-**Solution**
-
-1. From the Windows **Task Manager**, terminate the IIS process and close Visual Studio.
-1. Clean up the Temporary ASP.NET files from `<sysdrive>:\Windows\Microsoft.NET\Framework[64] <vernum>\Temporary ASP.NET Files`.
-1. Delete your browser cache. For Internet Explorer, select **Tools** > **Internet Options** > **Delete Files**.
-1. Clean up the Windows WebSite Cache from `\Users<UserName>\AppData\Local\Microsoft\WebsiteCache`. The location of this cache may vary from one operating system to another.
-1. Clean up the Visual Studio Backup from `<sysdrive>:\Users\<UserName>\Documents\Visual Studio <vsVersion>\Backup Files`. The exact location depends on your Visual Studio settings and installation.
-
-#### The Icons Are Missing after the Upgrade
-
-As of the [Kendo UI R1 2017 release](http://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1), the Telerik UI for ASP.NET MVC uses [font icons](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web), which might lead to compatibility issues.
-
-**Solution**
-
-If you upgrade your project from a prior version to the R1 2017 version (2017.1.118) or later, you have to change the [classes of the custom CSS rules that you use accordingly](http://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1).
-
-If the icons are still missing after you change the classes, verify that the version is fully [updated](#upgrade-to-newer-versions).
+* [Virtual Classroom](https://progress.exceedlms.com/student/path/369634-telerik-asp-net-mvc-net-core)
+* [Tutorials]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Support Resources Hub Page](https://www.telerik.com/support/aspnet-mvc)
+* [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
+* [Collected Examples on ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
+* [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
 
 ## Next Steps
 
-After you run the sample application, read through the following articles, related to Telerik UI for ASP.NET MVC:
-
-* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
-* [Use Telerik UI for ASP.NET Core](../aspnet-core/introduction)
-* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-
-## See Also
-
-* [Collected ASP.NET MVC Examples](https://github.com/telerik/kendo-examples-asp-net-mvc)
-* [Collected Examples on ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
-* [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
-* [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
-* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
-* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
-* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
-* [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
-* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Downloading and installing Telerik UI for ASP.NET MVC]({% slug overview_downloadinstallation_mvc %})
+* [Exploring the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Integrating Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
+* [Upgrading Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetmvc %})

@@ -1,12 +1,12 @@
 ---
-title: Upgrading Project API
-page_title: Upgrading Project API | UI for ASP.NET MVC Visual Studio Integration
+title: Upgrading the Project API
+page_title: Upgrading the Project API | Visual Studio Integration | Telerik UI for ASP.NET MVC
 description: "Learn how to analyze a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
 slug: upgrade_api_analyzer_visualstudio_aspnetmvc
 position: 8
 ---
 
-# Upgrading Project API
+# Upgrading the Project API
 
 Each new Kendo UI release might include changes that affect the public Kendo UI API.  
 
@@ -83,6 +83,5 @@ For more information on possible issues and their solutions, refer to the sectio
 
 ## See Also
 
-* [Setup Page for Telerik Upgrade API Analyzer](http://demos.telerik.com/UpgradeAPIAnalyzer)
-* [Upgrade Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %})
-* [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html)
+* [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetmvc %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})

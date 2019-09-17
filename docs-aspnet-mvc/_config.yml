@@ -17,6 +17,15 @@ navigation:
      "getting-started":
         title: "Getting Started"
         position: 2
+     "getting-started/installation":
+        title: "Download and Installation"
+        position: 1
+     "getting-started/helper-basics":
+        title: "Working with Helpers"
+        position: 2
+     "getting-started/vs-integration":
+        title: "Integrating with VS"
+        position: 3
      "helpers":
         title: "HTML Helpers"
         position: 3
@@ -55,12 +64,6 @@ navigation:
         title: "Layout"
      "helpers/media":
         title: "Media"
-     "helpers/media/mediaplayer/globalization":
-        title: "Globalization"
-        position: 40
-     "helpers/media/mediaplayer/accessibility":
-        title: "Accessibility"
-        position: 50
      "helpers/navigation":
         title: "Navigation"
      "helpers/navigation/radiobutton":
@@ -73,30 +76,27 @@ navigation:
         title: "Scheduling"
      "helpers/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
-     "helpers/scheduling/multiviewcalendar/accessibility":
-        title: "Accessibility"
-        position: 50
-     "vs-integration":
-        title: "Visual Studio Integration"
-        position: 4
      "migration":
         title: "Migration"
-        position: 5
+        position: 4
      "styles-and-layout":
         title: "Styles and Appearance"
+        position: 5
+     "globalization":
+        title: "Globalizstion"
         position: 6
      "accessibility":
         title: "Accessibility"
         position: 7
      "how-to":
         title: "How To"
-        position: 8
+        position: 40
      "tutorials":
         title: "Tutorials"
-        position: 9
+        position: 50
      "troubleshoot":
         title: "Troubleshooting"
-        position: 10
+        position: 60
 
 ## List helpers directory names and order here, like this:
      "*autocomplete":
@@ -168,6 +168,12 @@ navigation:
      "helpers/data-management/grid/troubleshoot":
         title: "Troubleshooting"
         position: 40
+     "*/globalization":
+        title: "Globalization"
+        position: 50
+     "*/accessibility":
+        title: "Accessibility"
+        position: 60
      "*appearance":
         title: "Appearance"
      "*/binding":

@@ -8,7 +8,7 @@ position: 80
 
 # Upgrade
 
-You can upgrade the version of the Telerik UI for ASP.NET Core wrappers and also switch from a trial to a developer license.
+You can upgrade the version of the Telerik UI for ASP.NET Core helpers and also switch from a trial to a developer license.
 
 ## Upgrading to New Versions
 
@@ -30,7 +30,7 @@ To upgrade the version with NuGet and Bower:
 ### Upgrading Manually
 
 1. [Download]({% slug downloadinstall_aspnetcore %}#download) the desired version from the **Download** section of your account.
-1. Replace all [scripts, styles, and images](#distribution-contents) that are related to Telerik UI for ASP.NET Core with the desired version of the framework.
+1. Replace all scripts, styles, and images that are related to Telerik UI for ASP.NET Core with the desired version of the framework.
 1. Change the reference to the new `Kendo.MVC` dll and verify that the dll refers to the correct ASP.NET Core version.
 1. In the application, manually replace any references which point to the old Kendo UI resource files such as scripts and styles.
 

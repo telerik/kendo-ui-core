@@ -3,7 +3,7 @@ title: Personal Data Collection
 page_title: Personal Data Collection | Telerik UI for ASP.NET MVC
 description: "Learn what personal data related to your usage of Telerik UI for ASP.NET MVC is collected by Progress Software Corporation and/or its affiliates."
 slug: gdpr_telerikmvc
-position: 260
+position: 70
 ---
 
 # Personal Data Collection

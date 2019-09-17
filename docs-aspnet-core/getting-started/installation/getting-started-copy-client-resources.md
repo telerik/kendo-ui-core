@@ -1,7 +1,7 @@
 ---
 title: Including Client-Side Resources
-page_title: Copying Client-Side Resources | Telerik UI for ASP.NET Core
-description: "Learn about different ways of copying the client-side resources into Telerik UI for ASP.NET Core project."
+page_title: Copying Client-Side Resources | Download and Installation | Telerik UI for ASP.NET Core
+description: "Get started with Telerik UI for ASP.NET Core and learn about different ways of copying the client-side resources into Telerik UI for ASP.NET Core project."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-vscode, /mvc-6/getting-started-vscode, /getting-started/getting-started-copy-client-resources
 slug: copyclientresources_aspnetmvc6_aspnetmvc
 position: 2
@@ -18,11 +18,9 @@ As the UI for ASP.NET Core suite is a set of [server-side wrappers over the Kend
 
 To include the client-side resources, use any of the following approaches:
 
-* [Manual installation](#manual-installation)
+* (Demonstrated in this guide) [Manual installation](#manual-installation)
 * [Using Bower]({% slug bowerpackage_core %})
 * [Using NPM and Webpack]({% slug npmpackages_core %})
-
-## Manual Installation
 
 1. Go to the [UI for ASP.NET Core download page](https://www.telerik.com/account/product-download?product=UIASPCORE) or to **Account Overview** > **Downloads** > **Telerik UI for ASP.NET Core**.
 1. Download the archive that matches the `Kendo.Mvc.UI` version:

@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: Troubleshooting | UI for ASP.NET MVC Visual Studio Integration
+page_title: Troubleshooting | Visual Studio Integration | Telerik UI for ASP.NET MVC
 description: "Troubleshooting Progress&reg; Telerik&reg; UI for ASP.NET MVC Visual Studio Extensions."
 slug: troubleshooting_visualstudio_aspnetmvc
 position: 11
@@ -38,3 +38,8 @@ Telerik Visual Studio Extensions are disabled or not installed correctly.
 > * Execute the command - devenv /log %userprofile%\desktop\ActivityLog.xml . This will start Visual Studio and create logs on your Desktop.
 > * Reproduce the problem
 > * Attach the **Activitylog** files when you contact our support.
+
+## See Also
+
+* [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetmvc %})
+* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
