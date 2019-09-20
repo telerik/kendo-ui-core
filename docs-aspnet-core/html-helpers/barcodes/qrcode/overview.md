@@ -39,6 +39,10 @@ The QRCode generates Canvas and Scalable Vector Graphics (SVG) images that repre
         )
     ```
 
+## Functionality and Features
+
+The QRCode supports a set of [encoding conventions]({% slug encoding_qrcode_aspnetcore_helper %}).
+
 ## Referencing Existing Instances
 
 To reference an existing QRCode instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode API](/api/qrcode) to control its behavior.

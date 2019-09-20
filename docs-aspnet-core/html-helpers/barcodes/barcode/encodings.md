@@ -1,20 +1,18 @@
 ---
-title: Encodings
-page_title: Encodings | UI for ASP.NET Core Barcode HtmlHelper
-description: "Learn more about the character set and length, and check the digits of the Barcode symbologies when configuring the UI for ASP.NET Core Barcode HtmlHelper."
+title: Encoding
+page_title: Encoding | Telerik UI Barcode HtmlHelper for ASP.NET Core
+description: "Get started with the Telerik UI Barcode HtmlHelper for ASP.NET Core and learn more about the character set and length and check the digits of the symbologies."
 slug: encodings_aspnetcore_barcode_widget
 position: 2
 ---
 
-# Encodings
+# Encoding
 
-The mapping between messages and barcodes is called symbology (encoding).
+Encoding (symbology) represents the mapping between messages and barcodes.
 
-The symbology specification includes the encoding of the individual digits or characters of the message, the start and stop markers in the bars and the space, the size of the quiet zone required to be before and after the barcode, as well as the computation of a checksum.
+The symbology specification includes the encoding of the individual digits or characters of the message, the start and stop markers in the bars and the space, the size of the quiet zone before and after the Barcode, and the computation of a checksum.
 
-## Supported Symbologies
-
-The following table lists the symbologies and their specifications that the [Barcode](https://demos.telerik.com/aspnet-core/barcode/index) supports.
+The following table lists the available symbologies and their specifications supported by the [Barcode](https://demos.telerik.com/aspnet-core/barcode/index).
 
 <style scoped>
     .stripes
@@ -42,8 +40,6 @@ The following table lists the symbologies and their specifications that the [Bar
     }
 </style>
 
-> **Important**
->
 > If the value for a particular encoding you provide does not meet the expected length or character set, it will throw an error.
 
 <table class="stripes" style="margin-top: 1.2em;">
@@ -173,5 +169,5 @@ The following table lists the symbologies and their specifications that the [Bar
 
 ## See Also
 
-* [Overview of the Barcode Widget]({% slug overview_barcodehelper_aspnetcore %})
-* [Barcode JavaScript API Reference](/api/barcode)
+* [Basic Usage of the Barcode HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/barcode/index)
+* [Server-Side API](/api/barcode)
