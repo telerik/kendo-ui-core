@@ -67,6 +67,44 @@ The following example demonstrates the CustomDataSourceBuilder equivalent.
         )
     )
 
+## Headers
+
+As of the Telerik UI for ASP.NET MVC R3 2019 release, you can set request headers through the `Headers` configuration option using the regular or the CustomDataSource builder.
+
+The following example demonstrates how to use the `Headers` option to set a request header using custom DataSource.
+
+```HtmlHelper
+    @(Html.Kendo().DataSource<OrderViewModel>()
+        .Name("myDataSource")
+        .Custom(dataSource =>
+        {
+            dataSource
+            .Type("odata")
+            .Transport(transport =>
+            {
+                transport.Read(read =>
+                {
+                    read.Action("ReadOrders", "Home")
+                    .DataType("json")
+                    .Headers(new { header1 = "test" });
+                });
+            });
+        })
+    )
+
+    <script>
+        myDataSource.read(); // the header will be set in the request sent to the HomeController ReadOrders action.
+    </script> 
+```
+```HomeController
+
+    public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
+    {
+        // Orders can be IQueriable or IEnumerable.
+        return Json(orders.ToDataSourceResult(request));
+    }
+```
+
 ## Setting Functions and Objects as DataSource Objects
 
 To set a JavaScript function or object as an option for the DataSource, use the `ClientHandlerDescriptor` class.

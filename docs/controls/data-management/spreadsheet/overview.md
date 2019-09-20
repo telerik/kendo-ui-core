@@ -10,22 +10,6 @@ position: 1
 
 The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/index) enables you to edit and visualize tabular data by using cell formatting options, styles, and themes.
 
-Out of the box, the Spreadsheet supports:
-
-* Selection and activation of cells that are functionally similar to ones in Excel.
-* Selection of cell and background colors.
-* Validation, insertion, deletion, editing, and merging of cells.
-* Vertical and horizontal alignment of cells.
-* Formatting of cells, including the provision of fonts and font sizes, application of borders, rendering of content in bold, italics and underline styles.
-* Formatting of data, including the provision of the number, currency, accounting, date, time, percentage, fraction, scientific, text, special, and custom options.
-* Applying formulas in categories such as logical, text, date, and time.
-* Resizing, insertion, and deletion of rows and columns.
-* Multiple sheets.
-* Frozen panes.
-* Text wrapping.
-
-Each of these features is exposed as a user interface (UI) to the end user and as API calls for further UI customization to the developer.
-
 > **Important**
 >
 > The Spreadsheet supports Internet Explorer 9 or later versions.
@@ -94,6 +78,36 @@ The Spreadsheet features a built-in [export-to-Excel]({% slug export_toexcel_spr
 You can bind individual sheets to a Data Source in a special data-driven mode.
 
 For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source]({% slug bind_todata_source_spreadsheet_widget %}).
+
+## Functionalities and Features
+* Import and Export of Data
+    * [Store Data as JSON](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/json)
+    * [Export to Excel](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/export-to-excel)
+    * [Bind to Data Source](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/bind-to-data-source)
+    * [Server-Side Processing](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/server-side-processing)
+
+* Cell Features
+    * [Cell Formatting](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/format)
+    * [Cell Comments](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/comments)
+    * [Cell Images](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/images)
+
+* Custom Functionalities
+    * [Custom Cell Editor](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
+    * [Custom Functions](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-functions)
+
+* Localization
+    * [Localization Overview](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/localization-spreadsh/localization)
+    * [List of borderPalette Messages](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/localization-spreadsh/messages-border-palette)
+    * [List of colorPicker Messages](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/localization-spreadsh/messages-colorpicker)
+    * [List of dialogs Messages](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/localization-spreadsh/messages-dialogs)
+    * [List of filterMenu Messages](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/localization-spreadsh/messages-filter-menu)
+    * [List of toolbar Messages](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/localization-spreadsh/messages-toolbar)
+    * [List of view Messages](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/localization-spreadsh/messages-view)
+
+* End-User Documentation
+    * [User Guide](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/end-user/user-guide)
+    * [Formulas and Functions](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/end-user/list-of-formulas)
+    * [Keyboard Shortcuts](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/end-user/list-of-shortcuts)
 
 ## Mobile Integration
 

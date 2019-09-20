@@ -10,12 +10,9 @@ position: 9
 
 [Telerik UI for ASP.NET MVC](http://www.telerik.com/aspnet-mvc) is a set of server-side wrappers that allows using the [Kendo UI widgets](../kendo-ui/introduction) from C# or VB.NET code.
 
-That is why, all important changes in the Kendo UI suite also apply to the client-side code and behavior of the UI for ASP.NET MVC wrappers. For the list of all breaking changes, refer to the articles on the [Kendo UI breaking changes](../kendo-ui/backwards-compatibility/2017-backward-compatibility).
+The [breaking changes in the vanilla Kendo UI for jQuery suite](https://docs.telerik.com/kendo-ui/backwards-compatibility/2019-backward-compatibility) apply to the client-side code and behavior of the Telerik UI HTML Helpers for ASP.NET MVC.
 
-## See also
+## See Also
 
-* [Kendo UI 2016 Breaking Changes](../kendo-ui/backwards-compatibility/2016-backward-compatibility)
-* [Kendo UI 2015 Breaking Changes](../kendo-ui/backwards-compatibility/2015-backward-compatibility)
-* [Kendo UI 2014 Breaking Changes](../kendo-ui/backwards-compatibility/2014-backward-compatibility)
-* [Kendo UI 2013 Breaking Changes](../kendo-ui/backwards-compatibility/2013-backward-compatibility)
-* [Kendo UI 2012 Breaking Changes](../kendo-ui/backwards-compatibility/2012-backward-compatibility)
+* [Kendo UI 2019 Breaking Changes](https://docs.telerik.com/kendo-ui/backwards-compatibility/2019-backward-compatibility)
+* [Kendo UI 2018 Breaking Changes](https://docs.telerik.com/kendo-ui/backwards-compatibility/2018-backward-compatibility)

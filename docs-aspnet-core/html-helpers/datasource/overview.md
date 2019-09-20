@@ -74,7 +74,8 @@ You can declare the DataSource HtmlHelper configuration options by using the ava
 
 ## Functionality and Features
 
-The DataSource HtmlHelper provides [three main types of data sources]({% slug htmlhelper_datasourcetypes_aspnetcore %}). For more information on the Kendo UI for jQuery types of DataSource, refer to the [official Kendo UI for jQuery documentation](https://docs.telerik.com/kendo-ui/framework/datasource/overview).
+* [DataSource Types]({% slug htmlhelper_datasourcetypes_aspnetcore %})
+* [Setting Headers]({% slug htmlhelper_datasourceheaders_aspnetcore %})
 
 ## See Also
 
