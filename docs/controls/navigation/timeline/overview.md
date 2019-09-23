@@ -8,7 +8,7 @@ position: 1
 
 # TimeLine Overview
 
-The [Kendo UI TimeLine widget](http://demos.telerik.com/kendo-ui/timeline/index) displays a collection of events and their data in a chronological succession for each year.
+The [Kendo UI TimeLine widget](https://demos.telerik.com/kendo-ui/timeline/index) displays a collection of events and their data in a chronological succession for each year.
 
 You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the widget behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
 

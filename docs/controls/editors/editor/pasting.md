@@ -99,6 +99,16 @@ The following example demonstrates a simple logic to strip the `<strong>` tags f
     </script>
 ````
 
+## Known Limitations
+
+### Copy/Pasting Image+Text from MS Word to Editor
+
+If you copy text + image from MS Word and paste in Editor, the image will not get pasted as expected. This behvior is due to the browser's security policy. Instead of reading the image data and loading it as a base64 string to the src attribute of the `<img>` element it generates an `<img>` tag which points to the clipboard location of the file on the client machine. As the browser is not allowed to access such resource, it trows the error observed and the image is not rendered. This is verifiable in the browser dev tools console. In Chrome an exception will be thrown (Not allowed to load local resource...), more on which you can find in [this stackoverflow thread](https://stackoverflow.com/questions/39007243/cannot-open-local-file-chrome-not-allowed-to-load-local-resource). In Internet Explorer a differnt type of error will be thrown ( HTTPS security is compromised...). Additional information is available in [this stackoverflow thread](https://stackoverflow.com/questions/16168132/https-security-is-compromised-error-how-to-fix).
+
+**Solution**
+
+Copying only text or a single image from the MS Word document and pasting in the Editor's content area is supported. By default, the browser allows you to copy and paste a single image from Word into the Editor by converting its src to base64 string. If you paste more images at the same time, however, their src attributes will not be converted to base64 string and the browser will paste them with http and the url pointing to the physical folder, thus the observed behaviur will be exhibited.
+
 ## See Also
 
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})

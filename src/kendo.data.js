@@ -1791,8 +1791,10 @@ var __meta__ = { // jshint ignore:line
             total = query.toArray().length;
         }
 
-        if (sort && !inPlace) {
-            query = query.sort(sort);
+        if (sort) {
+            if (!inPlace) {
+                query = query.sort(sort);
+            }
 
             if (group) {
                 data = query.toArray();

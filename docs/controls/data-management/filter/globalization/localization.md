@@ -10,7 +10,7 @@ position: 2
 
 The Filter provides options for defining the text of its filter operators (for example, `contains`, `equals`, or `greater than`) and logic messages (for example, `AND` and `OR`).
 
-To localize the messages, set the desired strings in the [`messages`](/api/javascript/ui/filter.md#messages-object) field. To localize the names of the operators, list the available ones and set their text in the [`operators`](/api/javascript/ui/filter.md#operators-object) field.
+To localize the messages, set the desired strings in the [`messages`](/api/javascript/ui/filter/configuration/messages) field. To localize the names of the operators, list the available ones and set their text in the [`operators`](/api/javascript/ui/filter/configuration/operators) field.
 
 ```dojo
 <div id="filter"></div>
@@ -90,4 +90,4 @@ To localize the messages, set the desired strings in the [`messages`](/api/javas
 ## See Also
 
 * [Basic Usage of the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/index)
-* [JavaScript API Reference of the Filter](/api/javascript/ui/treelist)
+* [JavaScript API Reference of the Filter](/api/javascript/ui/filter)

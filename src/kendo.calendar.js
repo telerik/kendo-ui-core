@@ -216,6 +216,7 @@ var __meta__ = { // jshint ignore:line
             normalize(options);
 
             options.disableDates = getDisabledExpr(options.disableDates);
+            that._destroySelectable();
 
             Widget.fn.setOptions.call(that, options);
 

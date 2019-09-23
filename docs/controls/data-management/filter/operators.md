@@ -10,7 +10,7 @@ position: 2
 
 The Filter provides options for defining which filter operators will be displayed in the filtering drop-down.
 
-The [`operators`](/api/javascript/ui/filter.md#operators-object) field takes a literal with the available operators for each field type and you can list the desired operators together with their text.
+The [`operators`](/api/javascript/ui/filter/configuration/operators) field takes a literal with the available operators for each field type and you can list the desired operators together with their text.
 
 The following example demonstrates how to set the `equals` and `contains` filter operators to the string fields and the `greater than` and `less than` filter operators to the numerical fields.
 

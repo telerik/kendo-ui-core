@@ -808,6 +808,17 @@ it("setOptions updates options.dates", function() {
     assert.equal(calendar.options.dates.length, 2);
 });
 
+it("setOptions should destroy selectable", function() {
+    var value = new Date(2000,10,10),
+        cal = new Calendar(div, {value: value});
+
+    stub(cal, "_destroySelectable");
+
+    cal.setOptions({});
+
+    assert.equal(cal.calls("_destroySelectable"), 1);
+});
+
 it("disabled date does get k-state-focused class", function() {
     var calendar = new Calendar(div, {
         value: new Date(2015,9,3),

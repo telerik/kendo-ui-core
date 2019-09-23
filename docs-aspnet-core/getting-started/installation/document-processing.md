@@ -1,23 +1,19 @@
 ---
 title: Document Processing Libraries
 page_title: Document Processing Libraries| Download and Installation | Telerik UI for ASP.NET Core
-description: "Get started with Telerik UI for ASP.NET Core and import and export content between different formats and work with archive files by using Telerik Document Processing."
+description: "Get started with Telerik UI for ASP.NET Core and learn how to work with the RadPdfProcessing, RadSpreadStreamProcessing, RadWordsProcessing, and RadZipLibrary libraries as part of the Telerik Document Processing."
 slug: document_processing_core
 position: 11
 ---
 
 # Telerik Document Processing
 
-Telerik Document Processing is a set of UI-independent and cross-platform libraries that let you process content between different formats and work with archive files.
+Telerik Document Processing provides the RadPdfProcessing, RadSpreadStreamProcessing, RadWordsProcessing, and RadZipLibrary UI-independent and cross-platform libraries which enable you to process content between different formats and work with archive files.
 
-## List of Libraries
-
-Telerik Document Processing includes the following libraries:
-
-* [RadPdfProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview)&mdash;Create, import, and export PDF documents.
-* [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview)&mdash;Export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
-* [RadWordsProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview)&mdash;Create, import, and export `DOCX`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
-* [RadZipLibrary](http://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview)&mdash;Compress and decompress `ZIP` files.
+* The [RadPdfProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview) library enables you to create, import, and export PDF documents.
+* The [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) library enables you to export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
+* The [RadWordsProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview) library enables you to create, import, and export `DOCX`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
+* The [RadZipLibrary](http://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview) library enables you to compress and decompress `ZIP` files.
 
 ## Supported File Formats
 
