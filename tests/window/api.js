@@ -943,6 +943,7 @@
             dialog.title(false);
 
             assert.equal(dialog.wrapper.find(".k-window-titlebar").length, 0);
+            assert.equal(parseInt(dialog.wrapper.css("padding-top"), 10), 0);
         });
 
         it("title('foo') on titleless window adds title", function() {

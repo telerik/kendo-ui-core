@@ -28,9 +28,9 @@ The Rating displays a label by default that shows the current value out of the m
 
 ## Customized Label
 
-Customizing the text of the label could be achieved through the [`label.template`]((http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/label.template)) option.
+Customizing the text of the label could be achieved through the [`label.template`](/api/javascript/ui/rating/configuration/label.template) option.
 
-By default, the template automatically receives the `value` and `maxValue` in the data object. This allows those properties to be used inside the template through [the Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
+By default, the template automatically receives the `value` and `maxValue` in the data object. This allows those properties to be used inside the template through [the Kendo UI Templates syntax](/framework/templates/overview).
 
 ```dojo
     <input id="rating" name="rating">

@@ -19,7 +19,7 @@ The following example demonstrates how to use the `Headers` option to set a requ
     )
 
     <script>
-        myDataSource.read(); // the header will be set in the request sent to the HomeController ReadOrders action 
+        myDataSource.read(); // The header will be set in the request that is sent to the HomeController ReadOrders action.
     </script>  
 ```
 ```HomeController

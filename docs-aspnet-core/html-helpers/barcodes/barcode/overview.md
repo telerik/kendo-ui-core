@@ -37,6 +37,10 @@ The Barcode is used to represent data in a machine-readable format.
         .Height(100))
     ```
 
+## Functionality and Features  
+
+The Barcode supports a set of [encoding types]({% slug encodings_aspnetcore_barcode_widget %}).
+
 ## Referencing Existing Instances
 
 To reference an existing Barcode instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Barcode API](/api/barcode) to control its behavior.

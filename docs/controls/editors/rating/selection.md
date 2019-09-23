@@ -8,7 +8,7 @@ position: 2
 
 # Selection
 
-The Rating allows to control the selection behavior of the items by configuring the [`selection`](http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/selection) option:
+The Rating allows to control the selection behavior of the items by configuring the [`selection`](/api/javascript/ui/rating/configuration/selection) option:
 
 * single - allows selecting a single item.
 
@@ -16,7 +16,7 @@ The Rating allows to control the selection behavior of the items by configuring 
 
 ## Continuous Selection
 
-This is the default selection behavior of the Rating. If not configured, the widget will automatically set the [`selection`](http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/selection) option to `"continuous"`:
+This is the default selection behavior of the Rating. If not configured, the widget will automatically set the [`selection`](/api/javascript/ui/rating/configuration/selection) option to `"continuous"`:
 
 ```dojo
    <input id="rating" name="rating">
@@ -32,7 +32,7 @@ This is the default selection behavior of the Rating. If not configured, the wid
 
 ## Single Selection
 
-Single selection can be configured by setting the [`selection`](http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/label.template) option to `"single"`:
+Single selection can be configured by setting the [`selection`](/api/javascript/ui/rating/configuration/selection) option to `"single"`:
 
 ```dojo
     <input id="rating" name="rating">

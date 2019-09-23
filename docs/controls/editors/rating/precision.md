@@ -8,7 +8,7 @@ position: 3
 
 # Precision
 
-The widget allows to control the precision with which an item is selected by configuring the [`precision`](http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/label.template) option:
+The widget allows to control the precision with which an item is selected by configuring the [`precision`](/api/javascript/ui/rating/configuration/precision) option:
 
 * item - selecting the whole item.
 
@@ -16,7 +16,7 @@ The widget allows to control the precision with which an item is selected by con
 
 ## Item Precision
 
-This is the default precision mode of the Rating. If not configured, the widget will automatically set the [`precision`](http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/label.template) option to `"item"`:
+This is the default precision mode of the Rating. If not configured, the widget will automatically set the [`precision`](/api/javascript/ui/rating/configuration/precision) option to `"item"`:
 
 In this mode only whole stars can be selected by click or keyboard interaction.
 
@@ -37,7 +37,7 @@ In this mode only whole stars can be selected by click or keyboard interaction.
 
 ## Half Precision
 
-Half precision can be configured by setting the [`precision`](http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/label.template) option to `"half"`:
+Half precision can be configured by setting the [`precision`](/api/javascript/ui/rating/configuration/precision) option to `"half"`:
 
 With half precision the Rating widget allows to set decimal values. The passed value is rounded during the rendering phase for the purpose of displaying full or half item based on the value:
 

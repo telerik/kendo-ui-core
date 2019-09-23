@@ -75,7 +75,7 @@ You can declare the DataSource HtmlHelper configuration options by using the ava
 ## Functionality and Features
 
 * [DataSource Types]({% slug htmlhelper_datasourcetypes_aspnetcore %})
-* [Setting Headers]({% slug htmlhelper_datasourceheaders_aspnetcore %})
+* [Headers]({% slug htmlhelper_datasourceheaders_aspnetcore %})
 
 ## See Also
 

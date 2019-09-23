@@ -1,7 +1,7 @@
 ---
 title: Encoding
-page_title: UI for ASP.NET Core QRCode Documentation | Encoding | UI for ASP.NET Core
-description: "Get started with the UI for ASP.NET Core QRCode by Kendo UI and use its supported encoding conventions."
+page_title: Encoding | Telerik UI QRCode HtmlHelper for ASP.NET Core
+description: "Get started with the Telerik UI QRCode HtmlHelper for ASP.NET Core and use its supported encoding conventions."
 slug: encoding_qrcode_aspnetcore_helper
 position: 2
 ---
@@ -38,5 +38,5 @@ To encode a point on the earth, including altitude, use a geo URI. For example, 
 
 ## See Also
 
-* [Basic Usage of the QRCode (Demo)](https://demos.telerik.com/aspnet-core/qrcode/index)
-* [JavaScript API Reference of the QRCode](/api/qrcode)
+* [Basic Usage of the QRCode HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/qrcode/index)
+* [Server-Side API](/api/qrcode)

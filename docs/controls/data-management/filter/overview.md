@@ -22,7 +22,7 @@ The following example demonstrates how to:
 * Tie a filter to a data source.
 * Display the filtered data in a list view.
 * Use human-readable names for the fields.
-* Set an initial [filter expression](/api/javascript/ui/javascript/data/datasource/configuration/filter).
+* Set an initial [filter expression](/api/javascript/ui/filter/configuration/expression).
 
 > * You can use a remote data source instead of an array of local data. The local array is used for brevity in this example.
 > * Providing the fields is not required because the Filter can extract them from the data source. If you do not set the fields in the filter settings, the actual field names, and not the human-readable `label`, will be displayed to the user. If you set the fields in the filter settings, they must match the schema of the data source.

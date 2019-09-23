@@ -27,7 +27,7 @@ Each Rating item displays a tooltip that is enabled by default and contains text
 
 ## Disabled Tooltips
 
-Setting the [`tooltip`](http://docs.telerik.com/kendo-ui/api/javascript/rating/configuration/label.template) option to false prevents the items to display tooltips when hovered.
+Setting the [`tooltip`](/api/javascript/ui/rating/configuration/tooltip) option to false prevents the items to display tooltips when hovered.
 
 ```dojo
     <input id="rating" name="rating">

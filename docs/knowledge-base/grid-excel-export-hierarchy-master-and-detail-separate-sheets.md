@@ -23,7 +23,7 @@ component: grid
 
 ## Description
 
-I implemented the Excel export of a master-detail Grid based on the URL by following [this example](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/excel/detail-grid-export). However, users want me to change the way the data is exported for each summary row and how the details are injected because this behavior prevents them from instantly checking the pivots and making a detailed analysis.
+I implemented the Excel export of a master-detail Grid based on the URL by following [this example]({% slug howto_exportto_excel_masterand_detail_grid %}). However, users want me to change the way the data is exported for each summary row and how the details are injected because this behavior prevents them from instantly checking the pivots and making a detailed analysis.
 
 How can I have separate sheets for the rows of the master Grid and for all detailed records of each row?
 
@@ -173,6 +173,6 @@ How can I have separate sheets for the rows of the master Grid and for all detai
 
 ## See Also
 
-* [Exporting All Data](https://docs.telerik.com/kendo-ui/controls/data-management/grid/excel-export#excel-export-of-all-data)
+* [Exporting All Data]({% slug grid-excel-export-entire-data %})
 * [sheets.filter API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.filter)
 * [sheets.columns.width API](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.columns.width)
