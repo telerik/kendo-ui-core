@@ -26273,7 +26273,7 @@ If set to `true` the value axis direction will be reversed. By default values in
 
 ### xAxis.startAngle `Number` *(default: 0)*
 
-The angle (degrees) where the 0 value is placed.
+The angle (degrees) where the 0 value is placed. Applicable to polar series.
 
 Angles increase counterclockwise and zero is to the right. Negative values are acceptable.
 

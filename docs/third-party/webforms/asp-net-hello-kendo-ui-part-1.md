@@ -2,7 +2,7 @@
 title: Part 4 - Hello Kendo UI
 page_title: Part 4 - Hello Kendo UI | Kendo UI Third-Party Frameworks
 description: "Learn how to get working with the Kendo UI Grid widget, the Kendo UI DataSource component and use them together in your web application."
-previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-1
+previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-1, /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-1.html
 slug: part4_aspnetwebforms_tutorials
 position: 4
 ---

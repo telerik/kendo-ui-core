@@ -12,9 +12,7 @@ The order of the categories in a grouped chart cannot be set through the `sort` 
 
 The reason for this behavior is that the grouping overrides the sort order as part of its implementation. In effect, the sort order is respected only within the resulting groups. Still, you can influence the final order of the categories during the `dataBound` event.
 
-The example below demonstrates how to sort categories in a grouped Kendo UI Chart.
-
-###### Example
+The following example demonstrates how to sort categories in a grouped Kendo UI Chart.
 
 ```dojo
     <div id="chart"></div>
@@ -72,11 +70,3 @@ The example below demonstrates how to sort categories in a grouped Kendo UI Char
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

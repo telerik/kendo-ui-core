@@ -21,7 +21,7 @@ The basic conceptual options of a Telerik UI Funnel Chart are:
 
 * `dynamicHeight`&mdah;When `equal` is set to `false`, `dynamicHeight` specifies whether the different elements will have equal height, or specifies whether the height of each element has to be based on its value.
 * `dynamicSlope`&mdash;When disabled, the Chart takes the `neckRatio` option into account. When enabled, the Chart neglects the `neckRatio` option and each segment creates its form based on the ratio between the current value and the next value.
-* `neckRatio`&mdash;Specifies the ratio between the top and the bottom bases of the whole Funnel series. For example, if set to `ten`, the top base will be ten times smaller than the bottom base, as demonstrated below.
+* `neckRatio`&mdash;Specifies the ratio between the top and the bottom bases of the whole Funnel series. For example, if set to `ten`, the top base will be ten times smaller than the bottom base.
 
 ![Using the neckRatio option in the Funnel Chart](images/funnel-neckratio.png)
 

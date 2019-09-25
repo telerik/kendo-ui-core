@@ -1,25 +1,20 @@
 ---
 title: Notes
-page_title: Notes | Kendo UI Charts
-description: "Learn how to configure the notes of a Kendo UI Chart widget."
+page_title: jQuery Chart Documentation | Notes | Kendo UI
+description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its notes."
 previous_url: /controls/charts/notes
 slug: chartnotes_charts_widget
-position: 2
 ---
 
 # Notes
 
-Kendo UI Charts can display the metadata of a point or a specific part of the axis.
+The Kendo UI Chart enables you to display the metadata of a point or a specific part of the axis.
 
-**Figure 1: Notes displayed in a chart**
+![Notes displayed in a chart](../chart-notes.png)
 
-![](../chart-notes.png)
+## Getting Started
 
-## Configuration
-
-You can easily add a note for each series point in the way demonstrated below.
-
-###### Example
+The following example demonstrates how to add a note for each series point.
 
     $("#chart").kendoChart({
         dataSource: {
@@ -40,9 +35,7 @@ You can easily add a note for each series point in the way demonstrated below.
         }]
     });
 
-You are also able to add a note to the value axis.
-
-###### Example
+You can also add a note to the value axis.
 
     $("#chart").kendoChart({
         series: [{
@@ -60,18 +53,16 @@ You are also able to add a note to the value axis.
         }
     });
 
-## Options
+## Using Templates
 
-### Templates
+To provide better flexibility, define the content of the notes through a template.
 
-When you desire a higher level of flexibility, define the content of the notes via a Kendo UI template. The template provides access to all information associated with the point:
+The template provides access to all information that is associated with the point:
 
-*   `value`&mdash;The point value. Value dimensions are available as properties, e.g. `value.x` and `value.y`.
-*   `category`&mdash;The category name.
-*   `series`&mdash;The data series.
-*   `dataItem`&mdash;The original data item (when binding to dataSource).
-
-###### Example
+* `value`&mdash;The point value. Value dimensions are available as properties, for example, `value.x` and `value.y`.
+* `category`&mdash;The category name.
+* `series`&mdash;The data series.
+* (When binding to a data source) `dataItem`&mdash;The original data item.
 
     $("#chart").kendoChart({
         dataSource: {
@@ -98,9 +89,7 @@ When you desire a higher level of flexibility, define the content of the notes v
         }]
     });
 
-In the axis configuration you only have `value`, which is the value of the axis.
-
-###### Example
+In the axis configuration, you have only `value` which represents the value of the axis.
 
     $("#chart").kendoChart({
         series: [{
@@ -122,13 +111,5 @@ In the axis configuration you only have `value`, which is the value of the axis.
 
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Binding]({% slug databinding_charts_widget %})
-* [Date Series]({% slug dateseries_charts_widget %})
-* [Tooltip]({% slug tooltip_charts_widget %})
-* [Title and Legend]({% slug titlelegend_features_charts %})
-* [Appearance]({% slug appearance_charts_widget %})
-* [Error Bars]({% slug errorbars_charts_widget %})
-* [Data Series]({% slug seriestypeofcharts_widget %})
-* [Types of Kendo UI Charts]({% slug areacharts_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

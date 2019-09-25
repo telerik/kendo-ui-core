@@ -14,9 +14,7 @@ For example, you might need to draw a checkbox that matches the visible state of
 
 For a list of all available drawing primitives, refer to the [Drawing API article](/framework/drawing/overview).
 
-The example below demonstrates how to customize the appearance of the legend items in a Kendo UI Chart.
-
-###### Example
+The following example demonstrates how to customize the appearance of the legend items in a Kendo UI Chart.
 
 ```dojo
     <div id="chart" />
@@ -76,11 +74,3 @@ The example below demonstrates how to customize the appearance of the legend ite
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

@@ -84,13 +84,13 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
 
 ## Animated Transitions
 
-Telerik UI for ASP.NET Core Charts use animated transitions to display new and updated data. These transitions can be disabled through the transitions option, as demonstrated below.
+Telerik UI for ASP.NET Core Charts use animated transitions to display new and updated data. To disable these transitions, use the `transitions` option.
 
 ```
     @(Html.Kendo().Chart()
         .Name("chart")
         .Transitions(false)
-        // other option
+        // Other options. 
     )
 ```
 

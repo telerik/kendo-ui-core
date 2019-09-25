@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Kendo UI Charts
+page_title: jQuery Chart Documentation | Common Issues | Kendo UI
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Chart widget."
 previous_url: /dataviz/troubleshooting
 slug: troubleshooting_chart_widget
@@ -9,17 +9,13 @@ position: 1
 
 # Common Issues
 
-This page provides solutions for common problems related to the Kendo UI Charts.
+This article provides solutions for issues you might encounter while working with the Kendo UI Charts for jQuery.
 
-## Rendering
-
-### Chart Labels Overlap after Refresh in Internet Explorer
+## Chart labels overlap after refresh in Internet Explorer
 
 This limitation is browser-specific and is due to the lack of events that can be handled in regards to the font loading of the browser.
 
-**Solution**
-
-To work around this issue, either:
+**Solution** To work around this issue, either:
 
 * Delay the initialization of the Chart, or
 * Add the [`@telerik/kendo-pack-fonts`](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) module. For more information on how to implement this approach, refer to the article on [packing fonts for export]({% slug howto_packfontsforpdfexport_drawingapi %}).
@@ -107,33 +103,23 @@ The following Dojo example demonstrates how to handle the issue by using `kendo-
     </div>
 ```
 
-### Chart Graphics Do Not Render in Internet Explorer
+## Chart graphics do not render in Internet Explorer
 
-**Figure 1: Chart in the Internet Explorer with its graphics failing to render**
+![A Chart in the Internet Explorer with its graphics failing to render](../../../styles-and-layout/chart-ie.png)
 
-![Chart in IE](../../../styles-and-layout/chart-ie.png)
+> A security message which prompts you to enable the Intranet settings might appear. If you do so, skip the following steps.
 
-> **Important**
->
-> A security message suggesting that you enable the Intranet settings might appear. If you choose to do so, then you do not need to follow the steps below.
+**Solution** Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**  and enable **Binary and script behaviors** by ticking the **Enable** radio button.
 
-**Solution**
+![Options and settings to apply to render the chart graphics](../../../styles-and-layout/chart-ie-script-behaviors.png)
 
-Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**  and enable **Binary and script behaviors** by ticking the **Enable** radio button.
-
-**Figure 2: Options and settings to apply to render the chart graphics**
-
-![IEscript behaviors](../../../styles-and-layout/chart-ie-script-behaviors.png)
-
-### Chart Does Not Render with JavaScript Disabled
+## The Chart does not render when JavaScript is disabled
 
 The Kendo UI Chart widgets requires JavaScript to run.
 
-**Solution**
+**Solution** Enable JavaScript.
 
-Enable JavaScript.
-
-### Chart Does Not Render on Mobile Device or Tablet
+## The Chart does not render on mobile devices or tablets
 
 The browser must support SVG as the below ones do:
 
@@ -141,21 +127,13 @@ The browser must support SVG as the below ones do:
 2.  Opera Mobile 10.0 and later versions
 3.  Android 3.0 and later versions
 
-## Export
+## The layout of the Chart is different in the exported PDF files
 
-### Layout Is Different in Exported PDF Files
+Such issues are typically caused by the different fonts that are used on screen and in the PDF. For display, the browser will substitute the selected font with whatever is provided by the system. During export, you will take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF will be displayed with a different font which leads to layout and encoding issues.
 
-Such issues are typically caused by the different fonts that are used on screen and in the PDF.
-
-For display, the browser will substitute the selected font with whatever is provided by the system. During export, you will take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF will be displayed with a different font, leading to layout and encoding issues.
-
-**Solution**
-
-The solution is to [make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom). This means that the fonts should be available as binary TTF files and registered for export, which is demonstrated in the [PDF Export demo on Charts](http://demos.telerik.com/kendo-ui/pdf-export/index) as well.
+**Solution** [Make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-custom). This means that the fonts have to be available as binary TTF files and registered for export which is demonstrated in the [PDF Export demo on Charts](http://demos.telerik.com/kendo-ui/pdf-export/index) as well.
 
 The following example demonstrates how to embed fonts in exported PDF.
-
-###### Example
 
 ```dojo
 <button class='export-pdf k-button'>Save as PDF</button>
@@ -220,19 +198,3 @@ The following example demonstrates how to embed fonts in exported PDF.
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
-* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
-* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
-* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
-* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
-* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
-* [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
-* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
-* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
-* [Validation Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
-* [Scaffolding Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/troubleshooting)
-* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/excel-export-issues)
-* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/troubleshoot/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/upload/troubleshoot/troubleshooting)

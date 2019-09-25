@@ -13,15 +13,11 @@ Color ranges can be used to convey additional information&mdash;for example, val
 
 This behavior is usually achieved through stacked bar series. However, if you need to convey more flexibility, consider the following Chart.
 
-**Figure 1: Color ranges in a Kendo UI Chart**
-
-![Color-coded ranges](../images/color-coded-bars.png)
+![Color ranges in a Kendo UI Chart](../images/color-coded-bars.png)
 
 To implement this functionality, define a [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) that draws the ranges dynamically. Note that the visual remains in use until the next [`render` event](/api/javascript/dataviz/ui/chart/events/render). This allows you to update it asynchronously or in real-time.
 
-The example below demonstrates how to implement color-coded ranges (stripes) in bars when working with Kendo UI Charts.
-
-###### Example
+The following example demonstrates how to implement color-coded ranges (stripes) in bars when working with Kendo UI Charts.
 
 ```dojo
     <div id="chart" />
@@ -76,11 +72,3 @@ The example below demonstrates how to implement color-coded ranges (stripes) in 
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the **How To** documentation folder.

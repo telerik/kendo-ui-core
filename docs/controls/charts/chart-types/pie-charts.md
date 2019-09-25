@@ -1,23 +1,28 @@
 ---
 title: Pie Charts
-page_title: Pie Charts | Kendo UI Charts
+page_title: jQuery Chart Documentation | Pie Charts | Kendo UI
 description: "Learn how to create a Kendo UI Pie Chart and specify its point value, category label, and other properties."
 slug: pietypecharts_widget
 ---
 
 # Pie Charts
 
-The [Kendo UI Pie Chart widget](http://demos.telerik.com/kendo-ui/pie-charts/index) displays data as single-series sectors from a two-dimensional circle. It is useful for rendering data as a part of the whole.
+Pie Charts display data as single-series sectors from a two-dimensional circle which is useful for rendering data as a part of the whole.
 
-The [Kendo UI Donut Chart widget](http://demos.telerik.com/kendo-ui/donut-charts/index) is a Kendo UI Pie Chart variation with the same ability to display a single data series in a two-dimensional circle and is likewise useful for displaying data as a part of the whole.
+* [Demo page for the Pie Chart](https://demos.telerik.com/kendo-ui/pie-charts/index)
 
 ## Getting Started
 
-### Create the Pie Chart
+The [Kendo UI Donut Chart](https://demos.telerik.com/kendo-ui/donut-charts/index) is a Pie Chart variation with the same ability to display a single data series in a two-dimensional circle and is likewise useful for displaying data as a part of the whole.
 
-To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties, as demonstrated in the example below.
+To create a Pie series in the Chart HtmlHelper, use `Pie` in the `Series` configuration.
 
-###### Example
+* [Creating the Pie Chart](#creating-the-pie-chart)
+* [Configuring the effects overlay](#configuring-the-effects-overlay)
+
+## Creating the Pie Chart
+
+The following example demonstrates how to define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties.
 
     $("#chart").kendoChart({
         title: {
@@ -51,17 +56,11 @@ To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Addition
     });
 
 
-**Figure 1: A sample Pie Chart**
+![A sample Pie Chart](chart-pie.png)
 
-![Pie Chart](chart-pie.png)
+## Configuring the Effects Overlay
 
-## Configuration
-
-### Effects Overlay
-
-Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable, as demonstrated below.
-
-###### Example
+Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable.
 
     $("#chart").kendoChart({
         series: [{
@@ -72,38 +71,21 @@ Each segment has a transparent effect overlay that adds depth to the two-dimensi
         }]
     });
 
+The Pie Chart supports the following gradient options:
 
-The following gradient options are available:
+* (Default) `roundedBevel`
 
-* `roundedBevel`&mdash;This is the default gradient option.
+        ![A Pie Chart with roundedBevel overlay](chart-pie-overlay-roundbevel.png)
+
 * `sharpBevel`
-* none
 
-The figure below demonstrate the usage of each of these options.
+        ![A Pie Chart with sharpBevel overlay](chart-pie-overlay-sharpbevel.png)
 
-**Figure 2: A Pie Chart with the `roundedBevel` overlay applied**
+* `none`
 
-![Pie Chart with roundedBevel overlay](chart-pie-overlay-roundbevel.png)
-
-**Figure 3: A Pie Chart with the `sharpBevel` overlay applied**
-
-![Pie Chart with sharpBevel overlay](chart-pie-overlay-sharpbevel.png)
-
-**Figure 4: A Pie Chart with no overlay**
-
-![Pie Chart with no overlay](chart-pie-overlay-none.png)
+        ![A Pie Chart with no overlay](chart-pie-overlay-none.png)
 
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
-* [Area Charts]({% slug areacharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Bubble Charts]({% slug bubblecharts_widget %})
-* [Funnel Charts]({% slug funnelcharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Scatter Charts]({% slug scattercharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Pie Chart (Demo)](https://demos.telerik.com/kendo-ui/pie-charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

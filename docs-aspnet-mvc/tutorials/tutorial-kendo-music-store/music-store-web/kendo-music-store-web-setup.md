@@ -42,7 +42,7 @@ Kendo UI is also available using the NuGet package manager in Visual Studio. Sea
 
 In the Music Store project, the `kendo.all.min.js` file and the `Default` Kendo UI theme are referenced, because the project intends to use the Kendo UI widgets rendering data visualization together with other Kendo UI widgets. If the project was intended to use a few selected portions of Kendo UI, it would have taken individual JavaScript files and make a separate bundle for them, reducing the download size for the end user.
 
-For more information on this topic, refer to the [article on how to get started with Kendo UI](http://docs.telerik.com/kendo-ui/intro/installation/getting-started).
+For more information on this topic, refer to the [article on how to get started with Kendo UI](https://docs.telerik.com/kendo-ui/intro/first-steps).
 
 ## Create MVC Bundles
 

@@ -2,7 +2,7 @@
 title: Part 5 - Hello CRUD Data Operations
 page_title: Part 5 - Hello CRUD Data Operations | Kendo UI Third-Party Frameworks
 description: "Learn how to enable CRUD operations, handle the editing functionality and failed requests in the Kendo UI Grid widget."
-previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2
+previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2, /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2.html
 slug: part5_aspnetwebforms_tutorials
 position: 5
 ---

@@ -26,7 +26,7 @@ Basic knowledge on the organization of [Azure Portal](https://docs.microsoft.com
 
 ## Adding CSS and JavaScript References
 
-To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references]({% slug getting_started_installation_kendoui%}#1-required-javascript-and-css-files) in the head tag of the `_Layout.cshtml` file.
+To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references]({% slug getting_started_installation_kendoui %}) in the head tag of the `_Layout.cshtml` file.
 
 ```HTML
 <head>
@@ -36,11 +36,11 @@ To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript refe
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css" />
 
     @Scripts.Render("~/bundles/jquery")
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"></script>
 </head>
 ```
 

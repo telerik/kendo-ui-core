@@ -1,15 +1,14 @@
 ---
-title: Set Header Items Color
+title: Set TreeMap Header Items Color
 page_title: Set Header Items Color | Kendo UI TreeMap
 description: "Learn how to set the Kendo UI TreeMap widget tiles color from the items."
+previous_url: /controls/charts/treemap/how-to/set-header-color
 slug: howto_setheaderitemscolor_treemap
 ---
 
 # Set Header Items Color
 
-The example below demonstrates how to set the Kendo UI TreeMap tiles color from the items.
-
-###### Example
+The following example demonstrates how to set the Kendo UI TreeMap tiles color from the items.
 
 ```dojo
 

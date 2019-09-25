@@ -2,7 +2,7 @@
 title: First Steps
 page_title: First Steps with Your Kendo UI for jQuery Project Guide | Getting Started | Kendo UI for jQuery
 description: "A guide on getting started with Kendo UI for jQuery, how to add the necessary CSS and JavaScript files and implement the DatePicker widget."
-previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper
+previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper, /intro/installation/getting-started
 slug: getting_started_installation_kendoui
 position: 0
 ---
@@ -11,77 +11,71 @@ position: 0
 
 Welcome to the First Steps guide on getting started with Kendo UI for jQuery!
 
-This guide demonstrates how to start working with the suite and implements a use case scenario with Kendo UI [Grid]({% slug overview_kendoui_grid_widget %}),
-[Chart]({% slug overview_kendoui_charts_widget %}) and [Button]({% slug overview_kendoui_button_widget %}) widgets.
-In the process, we will go through these important milestones:
+This guide demonstrates how to start working with the suite and implements a use case scenario with the Kendo UI [Grid]({% slug overview_kendoui_grid_widget %}), [Chart]({% slug overview_kendoui_charts_widget %}), and [Button]({% slug overview_kendoui_button_widget %}) widgets.
 
- 1. [Required JavaScript and CSS files](#1-required-javascript-and-css-files)
- 1. [Data binding](#2-data-binding)
- 1. [Widget initialization](#3-widget-initialization)
- 1. [Grid configuration](#4-grid-configuration)
- 1. [Date formatting](#5-date-formatting)
- 1. [Templates](#6-templates)
- 1. [Globalization](#7-globalization)
- 1. [Using Charts](#8-using-charts)
- 1. [Events](#9-events)
- 
-The explanations below contain links to some fundamental or relevant articles in the Kendo UI documentation.
-You will not need those immediately, but do check them later for in-depth learning of Kendo UI.
+The process draws on the following milestones:
 
-Some of the steps provide links to complete runnable examples, so you can compare and verify your implementation.
+ 1. [Required JavaScript and CSS files](#1-adding-the-required-javascript-and-css-files)
+ 1. [Data binding](#2-binding-to-data)
+ 1. [Widget initialization](#3-Initializing-the-widgets)
+ 1. [Grid configuration](#4-configuring-the-grid)
+ 1. [Date formatting](#5-formatting-the-dates)
+ 1. [Templates](#6-using-templates)
+ 1. [Globalization](#7-adding-globalization)
+ 1. [Chart implementation](#8-including-charts)
+ 1. [Events](#9-handling-the-events)
 
-## 1. Required JavaScript and CSS Files
+The included explanations contain links to some fundamental or relevant articles in the Kendo UI documentation. While you will not need those immediately, do check them later for in-depth learning of Kendo UI.
 
-First, let's add the Kendo UI assets to your HTML document. In this case, we will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}).
-In other scenarios, you may want to [host the files locally]({% slug hosting_kendoui %}).
+Some of the described steps provide links to complete runnable examples so that you can compare and verify your implementation.
 
-Always register the *common (base)* [Kendo UI stylesheet]({% slug themesandappearnce_kendoui_desktopwidgets %}) before the *theme* stylesheet.
-Similarly, always register jQuery before the Kendo UI script, otherwise you will get [JavaScript errors]({% slug troubleshooting_common_issues_kendoui %})
+## 1. Adding the Required JavaScript and CSS Files
+
+First, you will add the Kendo UI assets to your HTML document. In this sample case, you will use the [Kendo UI CDN service]({% slug kendoui_cdn_services_installation %}). In other scenarios, you may want to [host the files locally]({% slug hosting_kendoui %}).
+
+Always register the common (base) [Kendo UI stylesheet]({% slug themesandappearnce_kendoui_desktopwidgets %}) before the theme stylesheet. Similarly, always register jQuery before the Kendo UI script&mdash;otherwise, you will get [JavaScript errors]({% slug troubleshooting_common_issues_kendoui %})
 when you try to initialize a Kendo UI widget or use the Kendo UI API.
 
-To make sure all scripts are loaded, we will make a simple API call to render the [Kendo UI version](/api/javascript/kendo/fields/version).
+To make sure all scripts are loaded, make a simple API call to render the [Kendo UI version](/api/javascript/kendo/fields/version).
+
+> The `$(function() { });` code block is a [jQuery `document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) handler. Except for the template function in [6. Using Templates](#6-using-templates), all JavaScript code from this guide has to go inside this closure.
 
 	<!DOCTYPE html>
 	<html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Getting Started with Kendo UI for jQuery</title>
-		
+
 		<link href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css" rel="stylesheet" />
 		<link href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css" rel="stylesheet" />
 		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 	</head>
 	<body>
-		
+
 		<p>Hello <a href="https://docs.telerik.com/kendo-ui/intro/first-steps">Kendo UI for jQuery</a>!
 			This is version <strong id="kendoVersion"></strong>.</p>
-		
+
 		<script>
-		
+
 			$(function() {
-			
+
 				$("#kendoVersion").text(kendo.version);
-				
+
 			});
-		
+
 		</script>
-		
+
 	</body>
 	</html>
 
-> The `$(function() { });` code block is a [jQuery document.ready](https://learn.jquery.com/using-jquery-core/document-ready/) handler.
-All JavaScript code from this tutorial should go inside this closure, except the template function in step 6.
+## 2. Binding to Data
 
-## 2. Data Binding
+You will now create a [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) with some dummy orders which will later be used used to bind a Grid.
 
-Let's create a [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) with some dummy orders. Later we will use it to bind a Grid.
+A hard-coded array of data items is the simplest way to create a datasource. In real-life scenarios, you may want to fetch [remote data]({% slug basicusage_kendoui_datasourcecomponent %}) or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
 
-A hard-coded array of data items is the simplest way to create a datasource. In real-life scenarios, you may want to fetch [remote data]({% slug basicusage_kendoui_datasourcecomponent %})
-or configure [editing (CRUD operations)]({% slug cruddataoperations_kendoui_datasourcecomponent %}).
-
-To ensure correct data operations, we need to configure the [data field types](/api/javascript/data/datasource/configuration/schema#schemamodel).
-In addition, let's apply a [page size](/api/javascript/data/datasource/configuration/pagesize) and default [sorting](/api/javascript/data/datasource/configuration/sort) by `OrderDate`.
+To ensure the correct implementation of the data operations, you need to configure the [data field types](/api/javascript/data/datasource/configuration/schema#schemamodel). In addition, you will apply a [page size](/api/javascript/data/datasource/configuration/pagesize) and a default [sorting](/api/javascript/data/datasource/configuration/sort) by `OrderDate`.
 
     var orderData = [
       { OrderID: 1, OrderDate: "2017-11-06T12:00:00", Freight: 12.34, ShipCity: "Antwerp", ShipCountry: "Belgium" },
@@ -129,30 +123,27 @@ In addition, let's apply a [page size](/api/javascript/data/datasource/configura
         }
     });
 
-## 3. Widget Initialization
+## 3. Initializing the Widgets
 
-Now we are ready to [initialize a Kendo UI Grid]({% slug overview_kendoui_grid_widget %}#initializing-the-grid). First, add a new `<div>` element to the page.
-  
+Now you are ready to [initialize a Kendo UI Grid]({% slug overview_kendoui_grid_widget %}#initializing-the-grid). First, add a new `<div>` element to the page.
+
 	<div id="ordersGrid"></div>
-  
-Here is the JavaScript code, which will [create the widget instance]({% slug initialize_widgets_using_jquery_plugins_installation %}) and use the defined datasource.
-Place it after the `gridDataSource` definition.
+
+The following snippet contains the JavaScript code which will [create the widget instance]({% slug initialize_widgets_using_jquery_plugins_installation %}) and use the defined datasource. Place the code after the `gridDataSource` definition. For a runnable version of the page after the current step, refer to [this demo](https://dojo.telerik.com/URepufIY).
 
 	$("#ordersGrid").kendoGrid({
 	  dataSource: gridDataSource
 	});
 
-> Here is a [runnable version of our page after step 3](https://dojo.telerik.com/URepufIY).
+## 4. Configuring the Grid
 
-## 4. Grid Configuration
+At this point, you have a populated the Kendo UI Grid. However, you need to improve and polish its performance such as:
 
-At this point we have a populated Kendo UI Grid. However, there are some things that we can improve and polish, for example:
+* Define user-friendly column titles and [widths]({% slug column_widths_kendoui_grid_widget %})
+* Enable data operations&mdash;[paging]({% slug paging_kendoui_grid_widget %}), [sorting]({% slug sorting_kendoui_grid_widget %}), and [filtering]({% slug filtering_kendoui_grid_widget %})
+* Define a height and enable [scrolling]({% slug scrolling_kendoui_grid_widget %}) so that the Grid cannot expand indefinitely
 
-* define user-friendly column titles and [widths]({% slug column_widths_kendoui_grid_widget %})
-* enable data operations - [paging]({% slug paging_kendoui_grid_widget %}), [sorting]({% slug sorting_kendoui_grid_widget %}) and [filtering]({% slug filtering_kendoui_grid_widget %})
-* define a height and enable [scrolling]({% slug scrolling_kendoui_grid_widget %}), so that the grid cannot expand indefinitely
-	
-Here is the updated Grid configuration:
+The following example demonstrates the updated Grid configuration.
 
 	$("#ordersGrid").kendoGrid({
 	  dataSource: gridDataSource,
@@ -180,31 +171,27 @@ Here is the updated Grid configuration:
 	  }]
 	});
 
-## 5. Date Formatting
+## 5. Formatting the Dates
 
-Kendo UI widgets can [display dates in a variety of ways]({% slug dateformatting_kendoui_globalization %}).
-Let's [format](/api/javascript/ui/grid/configuration/columns.format) the **Order Date** column:
+Kendo UI widgets can [display dates in a variety of ways]({% slug dateformatting_kendoui_globalization %}). For example, you can [format](/api/javascript/ui/grid/configuration/columns.format) the **Order Date** column.
 
 	//field: "OrderDate",
 	//title: "Order Date",
 	//width: 200,
 	format: "{0:dd MMMM yyyy}"
 
-## 6. Templates
+## 6. Using Templates
 
-It is pretty common to customize how information appears in a databound component. Let's apply different colors to large and small shipments in the **Freight** column.
-For this, we will use a [Kendo UI template]({% slug overview_kendoui_templatescomponent %}), which calls a JavaScript function and passes the Freight value as an argument.
+It is common to customize the way information appears in a data-bound component. For example, to apply different colors to large and small shipments in the **Freight** column, use a [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) which will call a JavaScript function and pass the `Freight` value as an argument.
 
-Define a `getFreightColor` function [in the **global** JavaScript scope]({% slug overview_kendoui_templatescomponent %}#handling-external-templates-and-expressions),
-i.e. **outside the `document.ready` closure**. This is necessary, because Kendo UI templates are evaluated in the global scope,
-so all functions that they call, must be defined in the global scope as well.
+You need to define a `getFreightColor` function [in the global JavaScript scope]({% slug overview_kendoui_templatescomponent %}#handling-external-templates-and-expressions)&mdash;that is, outside the `document.ready` closure. This approach is necessary because the Kendo UI templates are evaluated in the global scope and all functions that they call must be defined in the global scope as well.
 
-The function will return a color style value, depending on the freight value.
+The function will return a color style value which depends on the `freight` value.
 
 	// $(function() {
 	// ...
 	// });
-	
+
 	function getFreightColor(freight) {
 		if (freight > 60) {
 		  return "#090";
@@ -215,39 +202,44 @@ The function will return a color style value, depending on the freight value.
 		}
 	}
 
-Then, call the function in the Freight [column template](/api/javascript/ui/grid/configuration/columns.template).
-If `getFreightColor` is not defined in the global scope, you will get a `getFreightColor is not defined`
-[JavaScript error]({% slug troubleshooting_common_issues_kendoui %}) in the [browser's console]({% slug troubleshooting_javascript_errors_kendoui %}).
+Then, call the function in the `Freight` [column template](/api/javascript/ui/grid/configuration/columns.template). If `getFreightColor` is not defined in the global scope, you will get a `getFreightColor is not defined` [JavaScript error]({% slug troubleshooting_common_issues_kendoui %}) in the [browser console]({% slug troubleshooting_javascript_errors_kendoui %}). For a runnable version of the page after the current step, refer to [this demo](https://dojo.telerik.com/icexeFiK).
 
 	//field: "Freight",
 	//width: 160,
 	template: "<span style='color:#= getFreightColor(Freight) #'>#= Freight #</span>"
 
-> Here is a [runnable version of our page after step 6](https://dojo.telerik.com/icexeFiK).
+## 7. Adding Globalization
 
-## 7. Globalization 
-
-[Globalization]({% slug overview_kendoui_globalization %}) is a standard requirement for many software applications.
-Kendo UI allows developers to override the default English messages of the widgets by including an additional JavaScript file.
-
-Let's say you want the Grid to render French messages. Register the following [localization]({% slug overview_localization_kendoui %}) file **after** `kendo.all.min.js`.
+[Globalization]({% slug overview_kendoui_globalization %}) is a standard requirement for many software applications. Kendo UI enables you to override the default English messages of the widgets by including an additional JavaScript file. For example, if you want the Grid to render French messages, register the following [localization]({% slug overview_localization_kendoui %}) file after `kendo.all.min.js`.
 
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/messages/kendo.messages.fr-FR.min.js"></script>
 
-Instead of `fr-FR`, you can experiment with a few other localizations, which are available out-of-the-box and hosted on the Kendo UI CDN, for example `es-ES` or `de-DE`.
+Instead of `fr-FR`, you can experiment with a few other localizations which are available out-of-the-box and hosted on the Kendo UI CDN&mdash;for example, `es-ES` or `de-DE`.
 
-On the other hand, culture-aware widgets, such as the Calendar, DatePicker and NumericTextBox can change the way they display dates and numbers.
-The [Internationalization]({% slug overview_kendoui_intl%}) article discusses this in more detail.
+Additionally, culture-aware widgets, such as the Calendar, DatePicker, and NumericTextBox, can change the way they display dates and numbers. For more information, refer to the article on [internationalization]({% slug overview_kendoui_intl %}).
 
-## 8. Using Charts
+## 8. Including Charts
 
-We already have a functional grid. How about displaying the data in a more visual and user-friendly format? The Kendo UI Chart will do this job nicely.
+You have already rendered a functional Grid in the project and can now display its data in a more visual and user-friendly format by including a Kendo UI Chart.
 
-Add a new `<div>` element for the Chart, above the Grid.
+Above the Grid, add a new `<div>` element for the Chart.
 
 	<div id="ordersChart"></div>
 
-Place the Chart declaration before the Grid declaration.
+Place the Chart declaration before the declaration of the Grid.
+
+The following Chart configuration includes:
+
+* No initial data. To spare a remote request, the Grid data will be reused by the Chart after it is loaded.
+* Default alphabetic [sorting](/api/javascript/data/datasource/configuration/sort) by `ShipCountry`.
+* A [Chart title](/api/javascript/dataviz/ui/chart/configuration/title) with some font styles.
+* The data will be [displayed in bars (columns)](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.type).
+* Definitions about which is the [`category` field](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield) and which is the [`value` field](/api/javascript/dataviz/ui/chart/configuration/series.field). Normally, the category axis is horizontal and the value axis is vertical.
+* [Rotation](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsrotation) of the country labels so that they can fit more easily.
+* [A cursor style on label hover](https://www.telerik.com/forums/change-cursor-to-pointer-when-hovering-over-a-label-in-axislabel#jY5GIVMDfUGEcyuNGe2YXg) is applied with a [`visual`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual) function.
+* Number [formatting](/api/javascript/dataviz/ui/chart/configuration/valueaxis.labels#valueaxislabelsformat) for the `Freight` values.
+* An [axis title](/api/javascript/dataviz/ui/chart/configuration/valueaxis.title#valueaxis.title) for the vertical axis.
+* [Tooltips](/api/javascript/dataviz/ui/chart/configuration/tooltip) on series hover.
 
 	$("#ordersChart").kendoChart({
 	  dataSource: {
@@ -293,60 +285,43 @@ Place the Chart declaration before the Grid declaration.
 	  }
 	});
 
-The above Chart configuration includes:
+## 9. Handling the Events
 
-* No initial data. To spare a remote request, the Grid data will be reused by the Chart after it is loaded.
-* Default alphabetic [sorting](/api/javascript/data/datasource/configuration/sort) by `ShipCountry`.
-* A [Chart title](/api/javascript/dataviz/ui/chart/configuration/title) with some font styles.
-* The data will be [displayed in bars (columns)](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.type).
-* Definitions about which is the [category field](/api/javascript/dataviz/ui/chart/configuration/series.categoryfield) and
-which is the [value field](/api/javascript/dataviz/ui/chart/configuration/series.field). Normally, the category axis is horizontal, and the value axis is vertical.
-* [Rotation](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsrotation) of the country labels, so that they can fit more easily.
-[A cursor style on label hover](https://www.telerik.com/forums/change-cursor-to-pointer-when-hovering-over-a-label-in-axislabel#jY5GIVMDfUGEcyuNGe2YXg) is applied with a
-[visual](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual) function.
-* Number [formatting](/api/javascript/dataviz/ui/chart/configuration/valueaxis.labels#valueaxislabelsformat) for the Freight values.
-* An [axis title](/api/javascript/dataviz/ui/chart/configuration/valueaxis.title#valueaxis.title) for the vertical axis.
-* [Tooltips](/api/javascript/dataviz/ui/chart/configuration/tooltip) on series hover.
+* [Using the `dataBound` event of the Grid](#using-the-grid-databound)
+* [Using the `seriesClick` and `axisLabelClick` events of the Chart](#using-the-chart-seriesclick-and-axislabelclick)
+* [Using the `click` event of the Button](#using-the-button-click)
 
-## 9. Events
+### Using the Grid dataBound
 
-### Grid dataBound
+At this point, the Chart is rendered empty. To get the Grid data and set it to the Chart, you will use the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grid.
 
-At this point, the Chart is rendered empty. To get the Grid data and set it to the Chart, we will use the [`dataBound`](/api/javascript/ui/grid/events/databound) event of the Grid.
+In the next example, note the following:
+
+- Kendo UI events expose some common [arguments]({% slug widget_methodsand_events_kendoui_installation %}#using-event-handler-arguments),
+including the widget instance that fired the event (`e.sender`).
+- The `dataBound` event handler obtains a [reference to the Chart instance]({% slug widget_methodsand_events_kendoui_installation %}) so that the Chart must already exist. That is why you placed the Chart declaration before the declaration of the Grid.
+- The Grid and the Chart can use a [shared Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}#shared-datasource) instance. Avoid using this approach so that the data operations in the Grid do not influence the appearance of the Chart.
+- The `dataBound` event of the Grid will be fired on each data operation (sorting, filtering, paging, and so on). However, you need to bind the Chart just once. That is why you will [unsubscribe]({% slug widget_methodsand_events_kendoui_installation %}#unbinding-from-events) from the `dataBound` event at the end of the handler.
 
         //$("#ordersGrid").kendoGrid({
           //dataSource: gridDataSource,
-		  
+
           dataBound: function(e) {
 		    var grid = e.sender,
 				chart = $("#ordersChart").data("kendoChart");
-			
+
 			chart.dataSource.data(grid.dataSource.data());
             grid.unbind("dataBound");
           },
-		  
+
 		  //height: 500,
 		  // ...
 		//});
 
-There are a few things to note here:
+### Using the Chart seriesClick and axisLabelClick
 
-- Kendo UI events expose some common [arguments]({% slug widget_methodsand_events_kendoui_installation %}#using-event-handler-arguments),
-including the widget instance that fired the event (`e.sender`).
-- The `dataBound` event handler obtains a [reference to the Chart instance]({% slug widget_methodsand_events_kendoui_installation %}), so the latter must already exist.
-That is why we placed the Chart declaration before the Grid declaration.
-- The Grid and the Chart could use a [shared Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}#shared-datasource) instance.
-We want to avoid that, so that data operations in the Grid do not influence the appearance of the Chart.
-- The `dataBound` event of the Grid will be fired on each data operation (sorting, filtering, paging, etc.). However, we need to bind the Chart just once.
-That's why we [unsubscribe]({% slug widget_methodsand_events_kendoui_installation %}#unbinding-from-events) from the `dataBound` event at the of the handler.
-
-### Chart seriesClick and axisLabelClick
-
-Now, let's enhance the example with some widget interaction. Let's say that we want to click on a country in the Chart and filter the Grid by `ShipCountry`.
-
-In this case, there are two applicable places we can click on: the [bars (series)](/api/javascript/dataviz/ui/chart/events/seriesclick) and
-the [axis labels](/api/javascript/dataviz/ui/chart/events/axislabelclick).
-So we will use two separate click handlers:
+Now, enhance the project with some widget interaction. For example, if you want to click on a country in the Chart and filter the Grid by `ShipCountry`, you can click a couple of applicable places&mdash;the [bars (series)](/api/javascript/dataviz/ui/chart/events/seriesclick) and
+the [axis labels](/api/javascript/dataviz/ui/chart/events/axislabelclick). Therefore, you will use two separate click handlers.
 
 	//$("#ordersChart").kendoChart({
 	  // ...
@@ -354,24 +329,24 @@ So we will use two separate click handlers:
 	  //  field: "Freight",
 	  //  categoryField: "ShipCountry"
 	  //}],
-	  
+
 	  seriesClick: function(e) {
 		filterGrid(e.category);
 	  },
 	  axisLabelClick: function(e) {
 		filterGrid(e.value);
 	  },
-	  
+
 	  //categoryAxis: {
 	  // ...
 	//});
 
-The handlers will call the same function to [filter the Grid via its dataSource API](/api/javascript/data/datasource/methods/filter).
+To [filter the Grid by using its dataSource API](/api/javascript/data/datasource/methods/filter), the handlers will call the same function.
 
 	//$("#ordersChart").kendoChart({
 	  // ...
 	//});
-	
+
 	function filterGrid(country) {
 		$("#ordersGrid").data("kendoGrid").dataSource.filter({
 			field: "ShipCountry",
@@ -380,9 +355,9 @@ The handlers will call the same function to [filter the Grid via its dataSource 
 		});
 	}
 
-### Button click
+### Using the Button click
 
-Finally, let's add a button that will reset the Grid filter state programmatically. This can also be done via the *Clear* button inside the filtering menu of the **Ship Country** column.
+Finally, you can add a button that will programmatically reset the Grid filter state. This functionality can also be achieved through the **Clear** button inside the filtering menu of the **Ship Country** column.
 
 Add the following button markup just above the Grid `<div>`.
 
@@ -400,7 +375,7 @@ Initialize the [Button widget]({% slug overview_kendoui_button_widget %}) and co
 
 This is it! Now you are ready to dive more deeply into Kendo UI for jQuery and implement modern and slick web applications!
 
-Below is the final runnable version of our page.
+The following implementation demonstrates the final runnable version of the page.
 
 ```dojo
 <!DOCTYPE html>

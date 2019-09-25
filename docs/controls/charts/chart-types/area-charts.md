@@ -1,23 +1,28 @@
 ---
 title: Area Charts
-page_title: Area Charts | Kendo UI Charts
+page_title: jQuery Chart Documentation | Area Charts | Kendo UI
 description: "Learn how to define Kendo UI Area Charts."
 slug: areacharts_widget
 ---
 
 # Area Charts
 
-The [Kendo UI Area Chart widget](http://demos.telerik.com/kendo-ui/area-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items. The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in values coming from several sets of similar data.
+Area Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
 
-## Configuration
+* [Demo page for the Area Chart](http://demos.telerik.com/kendo-ui/area-charts/index)
 
-Use `area` and `verticalArea` to define the Kendo UI Area Charts.
+## Getting Started
 
-### Axes
+The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in the values which come from several sets of similar data.
 
-Axes are configured through `categoryAxis` and `valueAxis`. Multiple value axes are supported.
+To create an Area Charts series, use `area` and `verticalArea` in the `series` configuration.
 
-###### Example
+* [Configuring the axes](#configuring-the-axes)
+* [Configuring the line styles](#configuring-the-line-styles)
+
+## Configuring the Axes
+
+To configure the axes, use the `categoryAxis` and `valueAxis`. Multiple value axes are also supported.
 
     $("#chart").kendoChart({
         title: {
@@ -47,39 +52,27 @@ Axes are configured through `categoryAxis` and `valueAxis`. Multiple value axes 
     });
 
 
-This configuration results in the Area Chart below.
+The configuration from the previous example results in the following Area Chart.
 
-**Figure 1: A sample Area Chart**
+![A sample Area Chart](chart-area.png)
 
-![Area Chart](chart-area.png)
+## Configuring the Line Styles
 
-### Line Styles
+The Area Charts support the rendering of lines between points by using different styles. You can set the supported styles through the [`line.style`](/api/javascript/dataviz/ui/chart/configuration/series.line#series.line.style) option.
 
-Kendo UI Area Charts support the rendering of lines between the points with different styles. The supported styles can be set via the [`line.style`](/api/dataviz/chart#configuration-series.line.style) option and are:
+The Area Chart supports the following styles:
 
-* Normal&mdash;This is the default style. It produces a straight line between data points.
+* Normal&mdash;The default style. It produces a straight line between data points.
 * Step&mdash;The style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
 * Smooth&mdash;This style causes the Area Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
 
-**Figure 2: A step-line Area Chart**
+![A step-line Area Chart](chart-step-area.png)
 
-![Step Line Chart](chart-step-area.png)
+The following image displays a smooth-line Area Chart.
 
-**Figure 3: A smooth-line Area Chart**
-
-![Smooth Line Chart](chart-smooth-area.png)
+![A smooth-line Area Chart](chart-smooth-area.png)
 
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Bubble Charts]({% slug bubblecharts_widget %})
-* [Funnel Charts]({% slug funnelcharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Pie Charts]({% slug pietypecharts_widget %})
-* [Scatter Charts]({% slug scattercharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Area Chart (Demo)](http://demos.telerik.com/kendo-ui/area-charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
