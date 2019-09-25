@@ -2,7 +2,7 @@
 title: Introduction
 page_title: Introduction | Progress Kendo UI
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
-previous_url: /index
+previous_url: /index, /intro/supporting/list-of-widgets
 slug: welcometo_kendoui
 position: 2
 ---

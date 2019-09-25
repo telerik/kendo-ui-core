@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI TreeMap HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TreeMap widget.
 
-The TreeMap displays hierarchical data in a traditional tree structure.
+The TreeMap displays hierarchical data in a traditional tree structure. TreeMaps also support different rendering types such us Squarified, Vertical, and Horizontal (slice and dice algorithm).
 
 * [Demo page for the TreeMap](https://demos.telerik.com/aspnet-core/treemap/index)
 

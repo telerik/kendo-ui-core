@@ -1,15 +1,14 @@
 ---
-title: Show TreeMap Tooltip
-page_title: Show TreeMap Tooltip | Kendo UI TreeMap
+title: Show a Tooltip in the TreeMap
+page_title: Show a Tooltip | Kendo UI TreeMap
 description: "Learn how to use the Kendo UI Tooltip for the Kendo UI TreeMap tiles."
+previous_url: /controls/charts/treemap/how-to/show-treemap-tooltip
 slug: howto_showtreemaptooltip_treemap
 ---
 
 # Show TreeMap Tooltip
 
-The example below demonstrates how to use the Kendo UI Tooltip for the Kendo UI TreeMap tiles.
-
-###### Example
+The following example demonstrates how to use the Kendo UI Tooltip for the Kendo UI TreeMap tiles.
 
 ```dojo
     <div id="treemap">

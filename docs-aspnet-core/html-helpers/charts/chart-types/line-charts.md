@@ -21,7 +21,7 @@ To create a Line series in the Chart HtmlHelper, use `Line` and `VerticalLine` i
 
 * [Configuring the axes](#configuring-the-axes)
 * [Configuring the line styles](#configuring-the-line-styles)
-* [Setting the type of lines](#setting-the-type-of-lines)
+* [Setting the line type](#setting-the-line-type)
 * [Customizing the markers](#customizing-the-markers)
 
 ## Configuring the Axes
@@ -54,15 +54,13 @@ The configuration from the previous example results in the following Line Chart.
 
 ## Configuring the Line Styles
 
-The Line Charts support the rendering of lines between points by using different styles.
+You can render the lines between the points by setting different styles through the `Style` configuration in the `SeriesDefaults` common settings.
 
 The supported line styles are:
 
 * Normal&mdash;This is the default style. It produces a straight line between data points.
 * Step&mdash;This style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
 * Smooth&mdash;This style causes the Line Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
-
-You can set the line style through the `Style` configuration in the `SeriesDefaults` common settings.
 
 ```
    .SeriesDefaults(seriesDefaults =>
@@ -86,7 +84,7 @@ The following image displays a smooth-line Line Chart.
 
 ![A smooth-line Line Chart](images/chart-smooth-line.png)
 
-## Setting the Type of Lines
+## Setting the Line Type
 
 By default, the Chart draws its Line series as solid lines. You can configure the line to be drawn through different dash styles by setting `DashType`.
 

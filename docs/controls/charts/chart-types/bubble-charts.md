@@ -1,31 +1,29 @@
 ---
 title: Bubble Charts
-page_title: Bubble Charts | Kendo UI Charts
+page_title: jQuery Chart Documentation | Bubble Charts | Kendo UI
 description: "Learn how to create a Kendo UI Bubble Chart to visualize data points and how to set its properties."
 slug: bubblecharts_widget
 ---
 
 # Bubble Charts
 
-The [Kendo UI Bubble Chart widget](http://demos.telerik.com/kendo-ui/bubble-charts/index) displays data as points with coordinates and sizes defined by the value of their items. It is similar to the [Kendo UI Scatter Charts](http://demos.telerik.com/kendo-ui/scatter-charts/index), in which the data points are replaced with bubbles. This allows a Bubble Chart to display three-dimensional data&mdash;two values for the items' coordinates and one for their size. A Bubble Chart is useful for visualizing different scientific relationships, e.g. economic or social. The X-axis of the Bubble Charts is numerical and does not require items.
+Bubble Charts display data as points with coordinates and sizes defined by the value of their items.
 
-## Basic Usage
-
-### Suitability
-
-Kendo UI Bubble Charts are well suited for displaying dozens to hundreds of values. They come in handy especially when you wish to visualize size values, differing by several orders of magnitude. As the size value is represented by a circle area, it is a best practice to plot positive values.
-
-### Negative Values
-
-By default, negative values are not displayed. Yet, if you wish to show these, their area is going to be calculated as if their value was positive. The point label displays their actual value and they are also going to have a different color. This behavior is controlled by using the `negativeValues.visible` and `negativeValues.color` options that are applicable to each series.
+* [Demo page for the Bubble Chart](https://demos.telerik.com/kendo-ui/bubble-charts/index)
 
 ## Getting Started
 
-### Create the Bubble Chart
+The Bubble Chart is similar to the [Kendo UI Scatter Charts](https://demos.telerik.com/kendo-ui/scatter-charts/index) in which the data points are replaced with bubbles. In this way a Bubble Chart displays three-dimensional data&mdash;two values for the coordinates of the items and one value for their size. A Bubble Chart is useful for visualizing different scientific relationships&mdash;for example, economic or social. The X-axis of the Bubble Charts is numerical and does not require items.
 
-The example below visualizes several data points.
+The Bubble Charts are well suited for displaying dozens to hundreds of values especially when you wish to visualize size values which differ by several orders of magnitude. As the size value is represented by a circle area, it is a best practice to plot positive values.
 
-###### Example
+By default, negative values are not displayed. However, their area is going to be calculated as if their value was positive. The point label displays their actual value and they will also have a different color. To control this behavior, use the `negativeValues.visible` and `negativeValues.color` options that are applicable to each series.
+
+To create a Bubble series in the Chart HtmlHelper, use `Bubble` in the `Series` configuration.
+
+## Initializing the Bubble Chart
+
+The following example demonstrates how to create a Bubble Chart and visualizes several data points.
 
     var salesData = [{
         numberOfSales: 10,
@@ -50,21 +48,9 @@ The example below visualizes several data points.
         }]
     });
 
-**Figure 1: A sample Bubble Chart**
-
- ![Bubble Chart](chart-bubble.png)
+![A sample Bubble Chart](chart-bubble.png)
 
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
-* [Area Charts]({% slug areacharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Funnel Charts]({% slug funnelcharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Pie Charts]({% slug pietypecharts_widget %})
-* [Scatter Charts]({% slug scattercharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Bubble Chart (Demo)](http://demos.telerik.com/kendo-ui/bubble-charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

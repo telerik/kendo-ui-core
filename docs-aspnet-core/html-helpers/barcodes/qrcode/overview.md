@@ -10,7 +10,9 @@ position: 1
 
 The Telerik UI QRCode HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI QRCode widget.
 
-The QRCode generates Canvas and Scalable Vector Graphics (SVG) images that represent Quick Response (QR) codes.
+The QRCode generates [Canvas](https://en.wikipedia.org/wiki/Canvas_X) and [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) images that represent [Quick Response (QR) codes](https://en.wikipedia.org/wiki/QR_code).
+
+QR codes take a piece of information from a transitory media, place it into the cell phone, and enable the cell phone to quickly read these generated images. All graphics are rendered on the client by using Canvas or SVG.
 
 * [Demo page for the QRCode](https://demos.telerik.com/aspnet-core/qrcode/index)
 

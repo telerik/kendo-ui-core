@@ -97,7 +97,7 @@ The following example demonstrates date series that are grouped by the year.
     )
 ```
 
-The following image displays a chart with a grouped date category axis. Note the how the maximum value for each year is now displayed.
+The following image displays a chart with a grouped date category axis. Note how the maximum value for each year is now displayed.
 
 ![Chart with grouped date category axis](../images/chart-category-date-axis-grouped.png)
 
@@ -286,9 +286,7 @@ The default base unit is determined by the axis (or series) range.
 
 #### Manual Configuration
 
-You can also manually specify the base unit.
-
-The following options are valid
+You can also manually specify the base unit by using the following valid options:
 
 * Milliseconds
 * Seconds

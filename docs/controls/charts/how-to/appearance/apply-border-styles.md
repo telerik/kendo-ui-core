@@ -1,7 +1,8 @@
 ---
-title: Apply Border Styles to Tiles
+title: Apply Border Styles to TreeMap Tiles
 page_title: Apply Border Styles to Tiles | Kendo UI TreeMap
 description: "Learn how to apply border styles to the Kendo UI TreeMap tiles."
+previous_url: /controls/charts/treemap/how-to/apply-border-styles
 slug: howto_applyborderstyles_treemap
 ---
 
@@ -9,9 +10,7 @@ slug: howto_applyborderstyles_treemap
 
 The Kendo UI TreeMap widget considers the width of its container and calculates the dimensions of its tiles accordingly. If the `border-width` configuration of the tiles is changed to a value that is greater than 1px, then a negative value must be provided as a margin to compensate the update of the dimensions.
 
-The example below demonstrates how to apply border styles to the Kendo UI TreeMap tiles.
-
-###### Example
+The following example demonstrates how to apply border styles to the Kendo UI TreeMap tiles.
 
 ```dojo
     <style>

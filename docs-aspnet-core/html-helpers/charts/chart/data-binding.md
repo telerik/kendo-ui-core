@@ -8,7 +8,7 @@ position: 2
 
 # Data Binding
 
-You can populate the Telerik UI Chart for ASP.NET Core with data by [binding it to inline data](#binding-to-inline-data), [binding it to local data](#binding-to-local-data), or [binding it to remote data](#binding-to-remote-data).
+You can populate the Telerik UI Chart for ASP.NET Core with data by [binding it to inline data](#inline-data), [binding it to local data](#local-data), or [binding it to remote data](#remote-data).
 
 ## Inline Data
 
@@ -20,7 +20,7 @@ You can specify the data points of the Charts as part of the series definitions.
 
 ### Binding Categorical Series to Inline Data
 
-[Categorical series]({% slug htmlhelpers_categoricalcharts_aspnetcore %}), such as Bar, Line, Area, expect a data point of a numeric type. The category names are populated independently in the category axis.
+[Categorical series]({% slug htmlhelpers_categoricalcharts_aspnetcore %}), such as Bar, Line, or Area, expect a data point of a numeric type. The category names are populated independently in the category axis.
 
 > To keep the Chart consistent, all series have to contain the same number of points in an order that matches the order of the categories which are declared in `CategoryAxis`.
 

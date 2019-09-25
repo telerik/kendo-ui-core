@@ -11,7 +11,7 @@ The Telerik UI Chart supports options for configuring the appearance of its titl
 
 ## Setting the Title
 
-To control the location of the title, use the following available `Position` options of the `Title` property:
+To control the position of the title, use the following available `Position` options of the `Title` property:
 
 * `"Top"`
 * `"Bottom"`

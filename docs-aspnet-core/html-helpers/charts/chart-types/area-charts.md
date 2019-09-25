@@ -15,7 +15,7 @@ Area Charts are suitable for displaying quantitative data by using continuous li
 
 ## Getting Started
 
-The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in values coming from several sets of similar data.
+The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in the values which come from several sets of similar data.
 
 To create an Area series in the Chart HtmlHelper, use `Area` and `VerticalArea` in the `Series` configuration.
 
@@ -50,7 +50,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value ax
 
 The configuration from the previous example results in the following Area Chart.
 
-![A simple Area Chart](images/chart-area.png)
+![A sample Area Chart](images/chart-area.png)
 
 ## Configuring the Line Styles
 
@@ -64,7 +64,7 @@ The Area Chart supports the following styles:
 
 ![A step-line Area Chart](images/chart-step-area.png)
 
-The following image displays a smooth-line Area Chart. 
+The following image displays a smooth-line Area Chart.
 
 ![A smooth-line Area Chart](images/chart-smooth-area.png)
 

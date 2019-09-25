@@ -1,23 +1,29 @@
 ---
 title: Line Charts
-page_title: Line Charts | Kendo UI Charts
+page_title: jQuery Chart Documentation | Line Charts | Kendo UI
 description: "Learn how to create a Kendo UI Line Chart and configure its options."
 slug: linetypeoscharts_widget
 ---
 
 # Line Charts
 
-The [Kendo UI Line Chart widget](http://demos.telerik.com/kendo-ui/line-charts/index) displays data as continuous lines that pass through points defined by the values of their items. It is  useful for rendering a trend over time and comparing several sets of similar data.
+Line Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
 
-## Configuration
+* [Demo page for the Line Chart](https://demos.telerik.com/kendo-ui/line-charts/index)
 
-Use the `line` series type to create a Kendo UI Line Chart.
+## Getting Started
 
-### Orientation
+You can use the Line Chart to render a trend over time and compare sets of similar data.
 
-The Line Chart orientation can be changed by using `verticalLine`.
+To create a Line series, use `line` in the `series` configuration.
 
-###### Example
+* [Setting the orientation](#setting-the-orientation)
+* [Configuring the line styles](#configuring-the-line-styles)
+* [Setting the line type](#setting-the-line-type)
+
+## Setting the Orientation
+
+You can change the orientation of the Line Chart by setting the series type to `verticalLine`.
 
     $("#chart").kendoChart({
         title: {
@@ -47,15 +53,27 @@ The Line Chart orientation can be changed by using `verticalLine`.
     });
 
 
-**Figure 1: A sample Line Chart**
+![A sample Line Chart](chart-line.png)
 
-![Line Chart](chart-line.png)
+## Configuring the Line Styles
 
-### Types of Lines
+You can render the lines between the points by setting different styles through the [`style`](/api/dataviz/chart#configuration-series.style) option.
 
-The default line type is solid. However, dash styles are also available through the `dashType` option, as demonstrated in the example below.
+The supported line styles are:
 
-###### Example
+* Normal&mdash;This is the default style. It produces a straight line between data points.
+* Step&mdash;This style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
+* Smooth&mdash;This style causes the Line Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
+
+![A step-line Line Chart](chart-step-line.png)
+
+The following image displays a smooth-line Line Chart.
+
+![A smooth-line Line Chart](chart-smooth-line.png)
+
+## Setting the Line Type
+
+The default line type of a Line Chart is solid. You can implement the dash line styles by using the `dashType` option.
 
   series: [{
       name: "World",
@@ -63,37 +81,9 @@ The default line type is solid. However, dash styles are also available through 
       dashType: "dot"
   }]
 
-**Figure 2: Dash line types**
-
-![Dash Type](chart-dash-types.png)
-
-### Line Styles
-
-Kendo UI Line Charts support the rendering of lines between the points with different styles. The supported styles can be set via the [`style`](/api/dataviz/chart#configuration-series.style) option and are:
-
-* Normal&mdash;This is the default style. It produces a straight line between data points.
-* Step&mdash;The style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
-* Smooth&mdash;This style causes the Area Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
-
-**Figure 3: A step Line Chart**
-
-![Step Line Chart](chart-step-line.png)
-
-**Figure 4: A smooth Line Chart**
-
-![Smooth Line Chart](chart-smooth-line.png)
+![A Line Chart with a dash type of line](chart-dash-types.png)
 
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
-* [Area Charts]({% slug areacharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Bubble Charts]({% slug bubblecharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Pie Charts]({% slug pietypecharts_widget %})
-* [Scatter Charts]({% slug scattercharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Line Chart (Demo)](https://demos.telerik.com/kendo-ui/line-charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

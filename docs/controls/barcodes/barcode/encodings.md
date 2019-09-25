@@ -1,20 +1,18 @@
 ---
-title: Encodings
-page_title: Encodings | Kendo UI Barcode
-description: "Learn more about the character set and length, and check the digits of the Barcode symbologies when configuring the Kendo UI Barcode widget."
+title: Encoding
+page_title: jQuery Barcode Documentation | Encoding | Kendo UI
+description: "Get started with the jQuery Barcode by Kendo UI and learn more about the character set and length and check the digits of the symbologies."
 slug: encodings_kendoui_barcode_widget
 position: 2
 ---
 
-# Encodings
+# Encoding
 
-The mapping between messages and barcodes is called symbology (encoding).
+Encoding (symbology) represents the mapping between messages and barcodes.
 
-The symbology specification includes the encoding of the individual digits or characters of the message, the start and stop markers in the bars and the space, the size of the quiet zone required to be before and after the barcode, as well as the computation of a checksum.
+The symbology specification includes the encoding of the individual digits or characters of the message, the start and stop markers in the bars and the space, the size of the quiet zone before and after the Barcode, and the computation of a checksum.
 
-## Supported Symbologies
-
-The following table lists the symbologies and their specifications that the [Barcode](http://demos.telerik.com/kendo-ui/barcode/index) supports.
+The following table lists the available symbologies and their specifications supported by the Barcode.
 
 <style scoped>
     .stripes
@@ -42,9 +40,7 @@ The following table lists the symbologies and their specifications that the [Bar
     }
 </style>
 
-> **Important**
->
-> If the value for a particular encoding you provide does not meet the expected length or character set, it will throw an error.
+> If the value of a particular encoding does not meet the expected length or character set, it will throw an error.
 
 <table class="stripes" style="margin-top: 1.2em;">
    <tbody>
@@ -173,5 +169,5 @@ The following table lists the symbologies and their specifications that the [Bar
 
 ## See Also
 
-* [Overview of the Barcode Widget]({% slug overview_kendoui_barcode_widget %})
-* [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)
+* [Basic Usage of the Barcode (Demo)](http://demos.telerik.com/kendo-ui/barcode/index)
+* [JavaScript API Reference of the Barcode](/api/javascript/dataviz/ui/barcode)

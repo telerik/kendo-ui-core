@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Chart Types Overview |
+page_title: Chart Types Overview | Telerik UI for ASP.NET Core
 description: "Learn the basics when working with the chart types in the Telerik UI for ASP.NET Core suite."
 slug: overview_charttypes_charts
 position: 1
@@ -12,7 +12,7 @@ The Charts support a wide range of series types.
 
 ## Categorical Charts
 
-[Categorical charts]({% slug htmlhelpers_categoricalcharts_aspnetcore %}) provide built-in support for displaying dates. The categories represent unique values which are not mathematically related to each other.</p>
+[Categorical charts]({% slug htmlhelpers_categoricalcharts_aspnetcore %}) provide built-in support for displaying dates. The categories represent unique values which are not mathematically related to each other.
 
 Examples of categorical charts are [Area]({% slug areacharts_aspnetcore_htmlhelper %}), [Bar]({% slug barcharts_aspnetcore_htmlhelper %}), [Box Plot]({% slug boxplotcharts_aspnetcore_htmlhelper %}), [Bullet]({% slug bulletcharts_aspnetcore_htmlhelper %}), and [Line Charts]({% slug linecharts_aspnetcore_htmlhelper %}).
 

@@ -8,7 +8,9 @@ position: 3
 
 # Axes Configuration
 
-The Sparkline HtmlHelper is a categorical (discrete) chart and has an implicit category and a value axis. The axis orientation (horizontal or vertical) is inferred from the series type.
+The Sparkline HtmlHelper is a categorical (discrete) chart and has an implicit category and a value axis.
+
+The axis orientation (horizontal or vertical) is inferred from the series type.
 
 ## Setting the Category Axis
 
@@ -49,7 +51,7 @@ You can also bind the category name to a field of the data item.
 
 The category axis provides built-in support for displaying dates. This includes:
 
-* Automatic selection of granularity/base unit (minutes, hours, days, etc.)
+* Automatic selection of granularity/base unit (minutes, hours, days, and so on)
 * Label formatting matched to the granularity
 * Grouping of categories into base units and series aggregates
 

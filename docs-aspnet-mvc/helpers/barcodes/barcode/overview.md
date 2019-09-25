@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI Barcode HtmlHelper for ASP.NET MVC is a server-side wrapper for the Kendo UI Barcode widget.
 
-The Barcode is used to represent data in a machine-readable format.
+The Barcode represents data in a machine-readable format.
 
 * [Demo page for the Barcode](https://demos.telerik.com/aspnet-mvc/barcode/index)
 

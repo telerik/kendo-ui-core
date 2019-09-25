@@ -17,9 +17,7 @@ To achieve this behavior:
 
 For a list of all available drawing primitives, refer to the introductory article on the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
-The example below demonstrates how to draw freely on the Scatter plot surface.
-
-###### Example
+The following example demonstrates how to draw freely on the Scatter plot surface.
 
 ```dojo
     <div id="chart" />
@@ -85,10 +83,3 @@ The example below demonstrates how to draw freely on the Scatter plot surface.
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
 * [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

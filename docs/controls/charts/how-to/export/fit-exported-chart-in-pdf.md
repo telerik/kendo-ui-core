@@ -10,9 +10,7 @@ slug: howto_fitpdfexportedcharttopage_charts
 
 Sometimes when exporting a Kendo UI Chart, its content might overflow the borders of the page.
 
-The example below demonstrates how to work around this issue and fit a PDF-exported Kendo UI Chart to a page.
-
-###### Example
+The following example demonstrates how to work around this issue and fit a PDF-exported Kendo UI Chart to a page.
 
 ```dojo
 	 <button class='export-img k-button'>Export as PDF</button>
@@ -95,10 +93,3 @@ The example below demonstrates how to work around this issue and fit a PDF-expor
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

@@ -14,7 +14,7 @@ The axis orientation (horizontal or vertical) is inferred from the series type. 
 
 ## Setting the Category Axis
 
-Use the `CategoryAxis` object to set the category names, as demonstrated in the example below.
+To set the category names, use the `CategoryAxis` object.
 
 ```
     @(Html.Kendo().Chart()
@@ -29,7 +29,7 @@ Use the `CategoryAxis` object to set the category names, as demonstrated in the 
     )
 ```
 
-The category name can also be bound to a field of the data item, as demonstrated below.
+You can also bind the category name to a field of the data item.
 
 ```
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
@@ -90,7 +90,7 @@ The following example demonstrates how to configure a numeric axis with a minimu
 
 A Telerik UI Chart can have more than one value axis. The additional axes must have unique names.
 
-The following example demonstrates how to define the `miles` and `km` axes. Series are associated to a value axis by specifying its name.
+The following example demonstrates how to define the `miles` and `km` axes. To associate a series to a value axis, specify its name.
 
 ```
     @(Html.Kendo().Chart()

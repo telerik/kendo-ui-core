@@ -8,7 +8,9 @@ position: 3
 
 # Scatter Charts
 
-Scatter charts are suitable for displaying and comparing different sets of numerical values.
+Scatter charts display data as points that are defined by the values of their items.
+
+Scatter Charts are useful for displaying the relation between different sets of data (for example, scientific experimental results) and plotting two-dimensional data.
 
 ## Setting the Primary Axes
 

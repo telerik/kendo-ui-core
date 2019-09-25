@@ -9,7 +9,7 @@ slug: htmlhelpers_charts_dataseries_aspnetcore
 
 You can plot one or more data series of a specified type in the Telerik UI Chart for ASP.NET Core.
 
-## Getting Started 
+## Getting Started
 
 To define the data series, add them to the `series` array.
 
@@ -30,7 +30,7 @@ The following example demonstrates how to define two Bar series that are bound t
 
 To specify the options that will be applied to all series, use `seriesDefaults`. You can define default options for all series of a specified type.
 
-> Options for individual series take precedence over options specified in `seriesDefaults`.
+> Options for individual series take precedence over the options that are specified in `seriesDefaults`.
 
 ```
     @(Html.Kendo().Chart()

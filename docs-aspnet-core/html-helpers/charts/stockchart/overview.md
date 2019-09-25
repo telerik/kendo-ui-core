@@ -10,9 +10,17 @@ position: 1
 
 The Telerik UI StockChart HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI StockChart widget.
 
-The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time.
+The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time. StockCharts include extensive touch support and a navigator pane for easy browsing of extended time periods. Generally, StockCharts extend the Telerik UI Chart and share most of its features.
 
 * [Demo page for the StockChart](https://demos.telerik.com/aspnet-core/financial/index)
+
+All of the following series types that are supported by the StockChart are also accessible from a Telerik UI Chart:
+
+* [Candlestick](https://en.wikipedia.org/wiki/Candlestick_chart)
+* [Open-high-low-close (OHLC)](https://en.wikipedia.org/wiki/Open-high-low-close_chart)
+* Column
+* Line
+* Area
 
 ## Basic Configuration
 

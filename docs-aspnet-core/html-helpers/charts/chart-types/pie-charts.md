@@ -7,23 +7,22 @@ slug: piecharts_aspnetcore_htmlhelper
 
 # Pie Charts
 
-The [Telerik UI Pie Chart HtmlHelper for ASP.NET Core extension](https://demos.telerik.com/aspnet-core/pie-charts/index) is a server-side wrapper for the Kendo UI Pie Chart widget.
+The Telerik UI Pie Chart HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Pie Chart widget.
 
-Pie Charts display data as single-series sectors from a two-dimensional circle. It is useful for rendering data as a part of the whole.
+Pie Charts display data as single-series sectors from a two-dimensional circle which is useful for rendering data as a part of the whole.
 
-The [Donut Chart HTMLHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/donut-charts/index) is a Pie Chart variation with the same ability to display a single data series in a two-dimensional circle and is likewise useful for displaying data as a part of the whole.
-
-* [Demo page for the Pie Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/pie-charts/index)
-* [Demo page for the Donut Chart HtmlHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/donut-charts/index)
+* [Demo page for the Pie Chart](https://demos.telerik.com/aspnet-core/pie-charts/index)
 
 ## Getting Started
+
+The [Telerik UI Donut Chart HTMLHelper for ASP.NET Core](https://demos.telerik.com/aspnet-core/donut-charts/index) is a Pie Chart variation with the same ability to display a single data series in a two-dimensional circle and is likewise useful for displaying data as a part of the whole.
 
 To create a Pie series in the Chart HtmlHelper, use `Pie` in the `Series` configuration.
 
 * [Creating the Pie Chart](#creating-the-pie-chart)
 * [Configuring the effects overlay](#configuring-the-effects-overlay)
 
-## Initializing the Pie Chart
+## Creating the Pie Chart
 
 The following example demonstrates how to define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties.
 
@@ -68,7 +67,7 @@ The Pie Chart supports the following `ChartSeriesGradient` options:
 
 * `SharpBevel`
 
-        ![a Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
+        ![A Pie Chart with sharpBevel overlay](images/chart-pie-overlay-sharpbevel.png)
 
 * `None`
 
