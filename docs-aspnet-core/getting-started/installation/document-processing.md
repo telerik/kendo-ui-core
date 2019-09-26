@@ -1,7 +1,7 @@
 ---
 title: Document Processing Libraries
 page_title: Document Processing Libraries| Download and Installation | Telerik UI for ASP.NET Core
-description: "Get started with Telerik UI for ASP.NET Core and learn how to work with the RadPdfProcessing, RadSpreadStreamProcessing, RadWordsProcessing, and RadZipLibrary libraries as part of the Telerik Document Processing."
+description: "Get started with Telerik UI for ASP.NET Core and learn how to work with the PdfProcessing, SpreadStreamProcessing, WordsProcessing, and ZipLibrary libraries as part of the Telerik Document Processing."
 slug: document_processing_core
 position: 11
 ---

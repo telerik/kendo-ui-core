@@ -18,7 +18,16 @@ The following example demonstrates how to apply this approach.
   <textarea id="editor"></textarea>
 
   <style>
-        .k-fullscreen .k-editor {
+    @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) { 
+      .selector:not(*:root), .k-fullscreen .k-editor .k-editable-area {
+        height: auto;
+      }
+    
+      .selector:not(*:root), .k-fullscreen .k-editor .k-editor-toolbar-wrap {
+        height: 35px;
+      }
+    }
+    .k-fullscreen .k-editor {
       position: fixed;
       left: 0;
       top: 0;
