@@ -79,12 +79,17 @@
         });
 
         it("DateTimePicker sets correct options to TimeView", function() {
-            var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+            var datetimepicker = input.kendoDateTimePicker({
+                popup: {
+                    appendTo: "#container"
+                }
+            }).data("kendoDateTimePicker"),
                 timeView = datetimepicker.timeView;
 
             assert.equal(timeView.options.anchor, datetimepicker.wrapper);
             assert.equal(timeView.options.format, datetimepicker.options.timeFormat);
             assert.equal(timeView.options.interval, datetimepicker.options.interval);
+            assert.equal(timeView.options.popup, datetimepicker.options.popup);
         });
 
         it("datetimepicker wire date icon click", function() {

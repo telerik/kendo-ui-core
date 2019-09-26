@@ -140,7 +140,7 @@ The duration (in milliseconds) for the ScrollView to snap to the current page af
 
 #### Example - increasing the duration of the snap transition
 
-    <div id="scrollView" style="height: 500px;>
+    <div id="scrollView" style="height: 500px;">
       <div data-role="page">This page will stretch to fit the entire view height</div>
       <div data-role="page">This page will stretch to fit the entire view height</div>
       <div data-role="page">This page will stretch to fit the entire view height</div>

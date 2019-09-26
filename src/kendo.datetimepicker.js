@@ -687,6 +687,7 @@ var __meta__ = { // jshint ignore:line
                         element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
                 },
+                popup: options.popup,
                 useValueToRender: true
             });
             ul = timeView.ul;
