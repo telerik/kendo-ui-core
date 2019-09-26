@@ -387,6 +387,45 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "insertFile": "Wstaw plik"
 });
 }
+ 
+/* FormattingTool messages */
+  
+if (kendo.ui.editor) {
+(<any>kendo.ui).editor.FormattingTool.prototype.options.items = [
+    {
+        text: 'Paragraf',
+        value: 'p'
+    },
+    {
+        text: 'Cytat',
+        value: 'blockquote'
+    },
+    {
+        text: 'Nagłówek 1',
+        value: 'h1'
+    },
+    {
+        text: 'Nagłówek 2',
+        value: 'h2'
+    },
+    {
+        text: 'Nagłówek 3',
+        value: 'h3'
+    },
+    {
+        text: 'Nagłówek 4',
+        value: 'h4'
+    },
+    {
+        text: 'Nagłówek 5',
+        value: 'h5'
+    },
+    {
+        text: 'Nagłówek 6',
+        value: 'h6'
+    }
+]
+}
 
 /* FileBrowser and ImageBrowser messages */
 
