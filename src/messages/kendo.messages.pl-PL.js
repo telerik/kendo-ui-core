@@ -564,4 +564,42 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* List messages */
+
+if (kendo.ui.List) {
+    kendo.ui.List.prototype.options.messages =
+    $.extend(true, kendo.ui.List.prototype.options.messages,{
+      "clear": "Wyczyść",
+      "noData": "Brak danych."
+    });
+}
+
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+    kendo.ui.DropDownList.prototype.options.messages =
+    $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+    kendo.ui.ComboBox.prototype.options.messages =
+    $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+    kendo.ui.AutoComplete.prototype.options.messages =
+    $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+    $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+}
+  
 })(window.kendo.jQuery);
