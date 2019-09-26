@@ -164,10 +164,33 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmation": "Czy na pewno chcesz usunąć ten rekord?",
     "cancelDelete": "Anuluj",
     "confirmDelete": "Usuń"
-  }
+  },
+  "noRecords": "Brak danych"
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Brak danych",
+    "loading": "Ładowanie...",
+    "requestFailed": "Niepowodzenie.",
+    "retry": "Ponów",
+    "commands": {
+        "edit": "Edycja",
+        "update": "Aktualizuj",
+        "canceledit": "Anuluj",
+        "create": "Wstaw",
+        "createchild": "Wstaw dziecko",
+        "destroy": "Usuń",
+        "excel": "Eksportuj do Excel",
+        "pdf": "Eksportuj to PDF"
+    }
+});
+}  
+  
 /* Pager messages */
 
 if (kendo.ui.Pager) {
