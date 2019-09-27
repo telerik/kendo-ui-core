@@ -1035,6 +1035,23 @@
             assert.equal(combobox.calls("_hideBusy"), 1);
         });
 
+        it("focus input when _clear is clicked", function() {
+            var combobox = new ComboBox(input, {
+                dataValueField: "id",
+                dataTextField: "name",
+                dataSource: [
+                    { id: 1, name: "name1" },
+                    { id: 2, name: "name2" },
+                    { id: 3, name: "name3" }
+                ],
+                value: "2"
+            });
+
+            combobox._clearValue();
+
+            assert.equal(assert.equal(document.activeElement, combobox.input[0]));
+        });
+
         it("show clear button", function() {
             var combobox = new ComboBox(input, {
                 dataValueField: "id",

@@ -8,22 +8,22 @@ position: 2
 
 # First Steps on VS for Mac
 
-Welcome to the First Steps on Mac guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core with Visual Studio!
+<iframe width="700" height="400" src="https://www.youtube.com/embed/901yBM2WYb4?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Welcome to the First Steps on Mac guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core with Visual Studio for Mac!
 
 The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Mac 2019.
 
-To configure an ASP.NET Core web application to use UI for ASP.NET Core you can use either of the following approaches:
-* (Demonstrated in this guide) Create the application from scratch and add the necessary setup manually.
-* [Use the Telerik UI for ASP.NET Core Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) and create an application that has all necessary scripts, styles, and editor templates.
+To get up and running with the project:
 
-This First Steps on Mac guide includes the following steps:
-
+1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Add the UI for ASP.NET Core NuGet package](#adding-the-nuget-package)
 
-## Prerequisites
+## Meeting the Requirements
 
-Follow the instructions from the [official .NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/macos-prerequisites?tabs=netcore2x).
+* Follow the instructions from the [official .NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/macos-prerequisites?tabs=netcore2x).
+* Make sure that you have an active trial or commercial license for the product by downloading the installer from the [Telerik UI for ASP.NET Core product page](https://www.telerik.com/aspnet-core-ui). You will need the active trial or commercial license for [making downloads from YourAccount](https://www.telerik.com/account/my-downloads) and for working with your NuGet Feed.
 
 ## Creating the Application
 
@@ -46,7 +46,9 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 
 	![Adding the credentials and authenticating for NuGet](images/mac-nuget-authenticate.png)
 
-4. From the sources drop-down, select the **Telerik Source**. Search for and select `Telerik.UI.for.AspNet.Core`. Click **Add Package** to install it. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
+4. From the drop-down list with sources, select the **Telerik Source**. Search for and select `Telerik.UI.for.AspNet.Core`. Click **Add Package** to install it. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
+
+	> If the package for Telerik UI for ASP.NET Core is not visible in your NuGet feed, then either you do not have an active trial or commercial license for the product, or your current trial or commercial license has expired. Download it from the [Telerik UI for ASP.NET Core product page](https://www.telerik.com/aspnet-core-ui).
 
 	![Selecting and installing the NuGet package](images/mac-nuget-install.png)
 
@@ -54,7 +56,7 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			// Add Kendo UI services to the services container
+			// Add Kendo UI services to the services container.
 			services.AddKendo();
 		}
 
@@ -102,10 +104,6 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 	As a result, the following sample page is created.
 
     ![The created sample page](images/mac-sample-page.png)
-
-## Video Guide
-
-<iframe width="853" height="480" src="https://www.youtube.com/embed/901yBM2WYb4?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Next Steps
 

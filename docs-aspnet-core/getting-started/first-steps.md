@@ -9,6 +9,8 @@ position: 1
 
 # First Steps on VS for Windows
 
+<iframe width="700" height="400" src="https://www.youtube.com/embed/AIFNeWrZCdM?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Welcome to the First Steps on Windows guide on getting started with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core with Visual Studio!
 
 The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Windows 2019.
@@ -17,12 +19,13 @@ To configure an ASP.NET Core web application to use UI for ASP.NET Core you can 
 * (Demonstrated in this guide) Create the application from scratch and add the necessary setup manually.
 * [Use the Telerik UI for ASP.NET Core Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) and create an application that has all necessary scripts, styles, and editor templates.
 
-This First Steps on Windows guide includes the following steps:
+To get up and running with the project:
 
+1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Add the UI for ASP.NET Core NuGet package](#adding-the-nuget-package)
 
-## Prerequisites
+## Meeting the Requirements
 
 Follow the instructions from the [official .NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites).
 
@@ -103,10 +106,6 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 	As a result, the following sample page is created.
 
     ![Sample page](images/sample-page.png)
-
-## Video Guide
-
-<iframe width="853" height="480" src="https://www.youtube.com/embed/AIFNeWrZCdM?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Next Steps
 

@@ -2,7 +2,7 @@
 title: Ajax Editing
 page_title: Ajax Editing | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET MVC for Ajax editing."
-previous_url: /helpers/grid/ajax-editing
+previous_url: /helpers/grid/ajax-editing, /helpers/data-management/grid/ajax-editing
 slug: ajaxediting_grid_aspnetmvc
 ---
 

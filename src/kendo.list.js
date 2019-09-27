@@ -1614,14 +1614,13 @@ var __meta__ = { // jshint ignore:line
         _toggleCascadeOnFocus: function() {
             var that = this;
             var parent = that._parentWidget();
-            var focusout = isIE ? "blur" : "focusout";
 
             parent._focused.add(parent.filterInput).bind("focus", function() {
                 parent.unbind(CASCADE, that._cascadeHandlerProxy);
                 parent.first(CHANGE, that._cascadeHandlerProxy);
             });
 
-            parent._focused.add(parent.filterInput).bind(focusout, function() {
+            parent._focused.add(parent.filterInput).bind("focusout", function() {
                 parent.unbind(CHANGE, that._cascadeHandlerProxy);
                 parent.first(CASCADE, that._cascadeHandlerProxy);
             });

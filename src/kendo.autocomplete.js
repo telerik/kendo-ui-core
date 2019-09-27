@@ -822,6 +822,11 @@ var __meta__ = { // jshint ignore:line
                 .addClass(DOMelement.className);
 
             that._inputWrapper = $(wrapper[0]);
+        },
+
+        _clearValue: function() {
+            List.fn._clearValue.call(this);
+            this.element.focus();
         }
     });
 

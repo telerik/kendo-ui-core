@@ -2,7 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Learn how to implement custom binding with Telerik UI Grid HtmlHelper for ASP.NET MVC."
-previous_url: /helpers/grid/custom-binding
+previous_url: /helpers/grid/custom-binding, /helpers/data-management/grid/custom-binding
 slug: custombinding_grid_aspnetmvc
 position: 4
 ---
