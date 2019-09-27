@@ -15,12 +15,13 @@ The guide creates a use-case scenario which demonstrates how to start working wi
 
 The suggested approach is platform-agnostic&mdash;you can apply it for macOS, Linux, and Windows. The steps are applicable for .NET Core projects in [Visual Studio Code](https://code.visualstudio.com/).
 
-This First Steps with CLI guide includes the following steps:
+To get up and running with the project:
 
+1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Integrate UI for ASP.NET Core in the project](#integrating-ui-for-aspnet-core)
 
-## Prerequisites
+## Meeting the Requirements
 
 Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/net/download/all) for your platform.
 

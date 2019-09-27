@@ -447,6 +447,17 @@
             assert.isOk(multiselect.wrapper.hasClass("k-state-focused"));
         });
 
+        it("focus input when _clear is clicked", function() {
+            var multiselect = new MultiSelect(select, {
+                dataSource: ["foo", "bar", "baz", "item1", "item2"],
+                value: ["item1", "bar"]
+            });
+
+            multiselect._clear.click();
+
+            assert.equal(assert.equal(document.activeElement, multiselect.input[0]));
+        });
+
         it("reset value when _clear is clicked", function() {
             var multiselect = new MultiSelect(select, {
                 dataSource: ["foo", "bar", "baz", "item1", "item2"],

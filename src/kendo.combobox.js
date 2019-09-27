@@ -297,8 +297,7 @@ var __meta__ = { // jshint ignore:line
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
-                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that))
-                    .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
 
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
@@ -1135,6 +1134,11 @@ var __meta__ = { // jshint ignore:line
             this._initialIndex = null;
             this._presetValue = true;
             this._toggleCloseVisibility();
+        },
+
+        _clearValue: function() {
+            Select.fn._clearValue.call(this);
+            this.input.focus();
         }
     });
 

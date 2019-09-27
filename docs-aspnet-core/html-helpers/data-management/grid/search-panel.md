@@ -3,6 +3,7 @@ title: Search Panel
 page_title: Search Panel | Telerik UI Grid HtmlHelper for ASP.NET Core
 description: "Learn how to enable the searching functionality of the Telerik UI Grid for ASP.NET Core."
 slug: htmlhelpers_grid_aspnetcore_searchpanel
+previous_url: /aspnet-core/helpers/html-helpers/grid/features/searching
 position: 9
 ---
 

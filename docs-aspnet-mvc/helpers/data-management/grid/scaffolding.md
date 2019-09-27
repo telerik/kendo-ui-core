@@ -17,11 +17,11 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
 1. Create a new ASP.NET MVC application, include an Entity Framework Data Model and add Telerik UI for ASP.NET MVC. If you have already done so, move on to the next step. Otherwise, follow the first four steps described [in this article]({% slug overview_gridhelper_aspnetmvc %}).
 1. Right-click the location where the Grid Controller should be generated. Select **Add** > **New Scaffolded item...** from the displayed menu. In this example, you generate it in the **Controllers** folder.
 
-	![A new scaffolded item](../../images/scaffolding/new_scaffolded_item.png)
+	![A new scaffolded item](../../../images/scaffolding/new_scaffolded_item.png)
 
 1. Select **Kendo UI Scaffolder** from the list of available scaffolders.
 
-	![Choosing the Kendo UI Scaffolder](../../images/scaffolding/kendo_ui_scaffolder.png)
+	![Choosing the Kendo UI Scaffolder](../../../images/scaffolding/kendo_ui_scaffolder.png)
 
 1. On the next screen, you are presented with the **Model** and **Data Context** options. Enter the **Controller** and **View** names.
 

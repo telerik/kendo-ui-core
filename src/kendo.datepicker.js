@@ -547,6 +547,9 @@ var __meta__ = { // jshint ignore:line
             that.close();
             if (value !== that._oldText) {
                 that._change(value);
+                if (!value) {
+                    that.dateView.current(kendo.calendar.getToday());
+                }
             }
 
             that._inputWrapper.removeClass(FOCUSED);

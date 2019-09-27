@@ -368,6 +368,22 @@
             assert.equal(autocomplete.value(), "");
         });
 
+        it("focus input when _clear is clicked", function() {
+            var autocomplete = new AutoComplete(input, {
+                dataTextField: "name",
+                dataSource: [
+                    { id: 1, name: "name1" },
+                    { id: 2, name: "name2" },
+                    { id: 3, name: "name3" }
+                ],
+                value: "2"
+            });
+
+            autocomplete._clearValue();
+
+            assert.equal(assert.equal(document.activeElement, autocomplete.element[0]));
+        });
+
         it("show clear button", function() {
             var autocomplete = new AutoComplete(input, {
                 dataTextField: "name",

@@ -2,7 +2,7 @@
 title: WebAPI Editing
 page_title: WebAPI Editing | Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Implement CRUD data operations with a WebAPI controller for the Kendo UI Grid for ASP.NET MVC."
-previous_url: /helpers/grid/webapi-editing
+previous_url: /helpers/grid/webapi-editing, /helpers/data-management/grid/webapi-editing
 slug: webapi_editing_grid_aspnetmvc
 ---
 
