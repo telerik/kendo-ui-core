@@ -11,7 +11,9 @@ position: 1
 
 The Telerik UI ListView HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ListView widget.
 
-The ListView enables you to display a custom layout of data-bound items. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
+The ListView enables you to display a custom layout of data-bound items. The ListView is ideally suited for displaying a list of items in a consistent manner. You can see commonplace examples of its use in the design structures of the Internet, search engine results, tweets from Twitter, Facebook updates, inbox items in Gmail, card lists in Trello, and so on.
+
+The ListView enables you to control the display of data. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 
 * [Demo page for the ListView](https://demos.telerik.com/aspnet-core/listview/index)
 

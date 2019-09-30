@@ -10,8 +10,6 @@ position: 1
 
 The following example demonstrates how to add a custom **Delete** confirmation dialog to the ListView widget.
 
-###### Example
-
 ```dojo
 <div id="example">
 
@@ -262,8 +260,6 @@ The following example demonstrates how to add a custom **Delete** confirmation d
 
 ## See Also
 
-* [ListView JavaScript API Reference](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
 * [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
 * [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
-
-For more runnable examples on Kendo UI ListView, browse its **How To** documentation folder.

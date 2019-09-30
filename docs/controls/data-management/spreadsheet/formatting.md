@@ -1,50 +1,37 @@
 ---
 title: Cell Formatting
-page_title: Cell Formatting | Kendo UI Spreadsheet
-description: "Learn how to format cells in the Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation | Cell Formatting | Kendo UI
+description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to format cells in the widget."
+previous_url: /controls/data-management/spreadsheet/format
 slug: cell_formatting_spreadsheet_widget
-position: 2
+position: 4
 ---
 
 # Cell Formatting
 
-The Spreadsheet widget supports cell-formatting options such as formatting of strings, text, numbers, dates, and time.
+The Spreadsheet supports cell-formatting options such as formatting of strings, text, numbers, dates, and time.
 
-## Formatting
+## Strings
 
-### Strings
-
-While the format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), some [notable exceptions](#differences-to-excel) still exist.
-
-A format string consists of one or more sections that are separated by semicolons. Optionally, a section specifies a color and a condition.
+While the format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), some [notable exceptions](#differences-to-excel) still exist. A format string consists of one or more sections that are separated by semicolons. Optionally, a section specifies a color and a condition.
 
 The following example demonstrates how to display a number with up to three decimals.
-
-###### Example
 
     #.###
 
 The following example demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.
 
-###### Example
-
     [Green]#.###;[Red]#.###
 
 The following example demonstrates how to display positive numbers in green, negative numbers in red, and the `"Zero"` text in blue if the number is zero.
-
-###### Example
 
     [Green]#.###;[Red]#.###;[Blue]"Zero"
 
 This following example is the same as the previous one, with the difference to display any possible text in the cell in magenta.
 
-###### Example
-
     [Green]#.###;[Red]#.###;[Blue]"Zero";[Magenta]@
 
 The following example demonstrates how to format the Spreadsheet conditionally.
-
-###### Example
 
 ```dojo
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
@@ -55,7 +42,7 @@ The following example demonstrates how to format the Spreadsheet conditionally.
     $(function() {
         $("#spreadsheet").kendoSpreadsheet({
             excel: {                
-                // Required to enable saving files in older browsers
+                // Required to enable saving files in older browsers.
                 proxyURL: "//demos.telerik.com/kendo-ui/service/export"
             },
             pdf: {                
@@ -471,8 +458,6 @@ Excel also supports a more flexible conditional formatting.
 
 The following example demonstrates how to display numbers greater than 100 in green, numbers less than minus 100 in yellow, and other numbers in cyan.
 
-###### Example
-
     [>100][GREEN]#,##0;[<=-100][YELLOW]#,##0;[CYAN]#,##0
 
 In this case, it is not clear whether only up to four sections are allowed, of which the last one must be text, while the Spreadsheet formatter allows for any number of conditional sections.
@@ -512,8 +497,6 @@ You can use these formats with the [`range` value method](/api/javascript/spread
 The thousands separator (`,`) has a double role:
 * When situated between any digit placeholders, it outputs a number in thousands that are separated by the separator in the current culture. For example, `#,#` formats `1234567` as `1,234,567`.
 * When a comma follows a digit placeholder but is not followed by one, it scales the number by one thousand. For example, `#.##,` formats `12345` as `12.35`. This is a more complicated format displaying in which cases such behavior is useful: `[>1000000]#.##,,"M";[>1000]#.##,"K";[>0]#"B";[=0]"Empty";[<0]"Replace HDD!"`.
-
-###### Example
 
 | VALUE    | DISPLAY      |
 |----------|--------------|
@@ -568,10 +551,5 @@ The Spreadsheet does not support the following options that are otherwise availa
 
 ## See Also
 
-* [Overview]({% slug overview_spreadsheet_widget %})
-* [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
-* [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
-* [Store Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
-* [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
-* [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
-* [User Guide]({% slug user_guide_spreadsheet_widget %})
+* [Basic Usage of the Spreadsheet (Demo)](http://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

@@ -39,6 +39,12 @@ navigation:
     "controls/data-management":
         title: "Data Management"
         position: 1
+    "controls/data-management/listview/binding":
+        title: "Data Binding"
+        position: 2
+    "controls/data-management/listview/export":
+        title: "Export"
+        position: 5
     "controls/data-management/grid/binding":
         title: "Data Binding"
         position: 2
@@ -105,6 +111,18 @@ navigation:
         title: "Templates"
     "controls/data-management/grid/how-to/various":
         title: "Various"
+    "controls/data-management/spreadsheet/import-and-export-data":
+        title: "Data Import and Export"
+        position: 7
+    "controls/data-management/spreadsheet/localization-spreadsh":
+        title: "Localization"
+        position: 8
+    "controls/data-management/spreadsheet/end-user":
+        title: "End User"
+        position: 9
+    "controls/data-management/treelist/editing":
+        title: "Editing"
+        position: 3
     "controls/editors":
         title: "Editors"
         position: 2
@@ -159,21 +177,24 @@ navigation:
     "controls/charts":
         title: "Charts"
         position: 3
-    "controls/charts/features":
-        title: "Features"
-        position: 7
+    "controls/charts/chart":
+        title: "Chart"
+        position: 1
     "controls/charts/chart-types":
         title: "Chart Types"
-        position: 8
-    "controls/charts/stockchart":
-        title: "Stock Charts"
-        position: 9
+        position: 2
+    "controls/charts/elements":
+        title: "Elements"
+        position: 3
     "controls/charts/sparkline":
-        title: "Sparklines"
-        position: 10
+        title: "Sparkline"
+        position: 4
+    "controls/charts/stockchart":
+        title: "StockChart"
+        position: 5
     "controls/charts/treemap":
         title: "TreeMap"
-        position: 11
+        position: 6
     "controls/gauges":
         title: "Gauges"
         position: 4
@@ -225,6 +246,9 @@ navigation:
         position: 10
     "controls/conversational-ui/chat":
         title: "Chat"
+    "controls/conversational-ui/chat/integrations":
+        title: "Integrations"
+        position: 4
     "controls/interactivity":
         title: "Interactivity and UX"
         position: 11
@@ -392,8 +416,6 @@ navigation:
     "*how-to":
         title: "How To"
         position: 200
-    "*localization":
-        title: "Localization"
     "*editing":
         title: "Editing"
     "*interaction":
@@ -583,15 +605,6 @@ navigation:
         title: "MediaPlayer"
     "*spreadsheet":
         title: "Spreadsheet"
-    "*import-and-export-data":
-        title: "Import and Export of Data"
-        position: 5
-    "*localization-spreadsh":
-        title: "Localization"
-        position: 6
-    "*end-user":
-        title: "End-User Documentation"
-        position: 7
     "*listview":
         title: "ListView"
     "*listbox":

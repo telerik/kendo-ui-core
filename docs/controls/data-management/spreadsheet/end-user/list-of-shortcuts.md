@@ -1,7 +1,7 @@
 ---
 title: List of Keyboard Shortcuts
-page_title: List of Keyboard Shortcuts | Kendo UI Spreadsheet
-description: "A list of the keyboard shortcuts supported by the Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation | List of Keyboard Shortcuts | Kendo UI
+description: "Get started with the jQuery Spreadsheet by Kendo UI and check out the list of its keyboard shortcuts."
 slug: list_ofkeyboard_shortcuts_spreadsheet_widget
 position: 3
 ---

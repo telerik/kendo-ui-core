@@ -1,7 +1,7 @@
 ---
 title: Frequently Asked Questions
-page_title: Frequently Asked Questions | Kendo UI PivotGrid
-description: "Find the most frequently asked questions related to the Kendo UI PivotGrid widget and their answers."
+page_title: jQuery PivotGrid Documentation | PivotGrid Overview | Kendo UI
+description: "Get started with the jQuery PivotGrid by Kendo UI and find the most frequently asked questions related to the Kendo UI PivotGrid widget and their answers."
 slug: frequently_asked_questions_pivotgrid
 position: 6
 ---
@@ -44,10 +44,6 @@ Currently, the Kendo UI `PivotDataSource` has limited support for [binding to fl
 
 Other article on the Kendo UI PivotGrid:
 
-* [Overview]({% slug overview_kendoui_pivotgrid_widget %})
-* [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
-* [Exporting]({% slug exporting_functionality_pivotgridwidget %})
-* [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
-* [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
-* [How-To Examples]({% slug howto_change_pivotgrid_fields_names_pivotgrid %})
+* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [Knowledge Base Section](/knowledge-base)
