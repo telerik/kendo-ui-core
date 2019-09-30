@@ -1,26 +1,29 @@
 ---
-title: Peer-to-Peer Chat with SignalR
-page_title: Peer-to-Peer Chat with SignalR | Kendo UI Chat
-description: "Learn how to create a peer-to-peer Chat UI with ASP.NET Core SignalR."
-slug: signalr-p-to-p
-position: 7
+title: Peer-to-Peer Chat
+page_title: jQuery Chat Documentation | Peer-to-Peer Chat | Kendo UI
+description: "Get started with the jQuery Chat by Kendo UI and learn how to create a peer-to-peer Chat UI with ASP.NET Core SignalR."
+previous_url: /controls/conversational-ui/chat/signalr-p-to-p
+slug: peertopeerp_chat_kendoui
 ---
 
-# Peer-to-Peer Chat with SignalR
+# Peer-to-Peer Chat
 
-This article demonstrates how to configure a Kendo UI Chat widget and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
+You can configure a Kendo UI Chat widget and a [.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) service to create a Peer-to-Peer Chat application.
 
-## Implementing the SignalR Server Hub
+To create the Peer-to-Peer Chat you have to implement the SignalR Hub and, then, to implement the application client:
 
-This section explains how to implement the SignalR Chat Hub server.
+1. [Initialize the Chat](#initializing-the-chat)
+1. [Configure the SignalR Client Hub proxy](#configuring-the-signalr-hub-server)
+1. [Set up the project](#setting-up-the-project)
+1. [Configure the SignalR Hub](#configuring-the-signalr-hub)
 
-### Initializing the Chat
+## Initializing the Chat
 
-Initialize the Chat widget and implement the handlers for its [`post`](/api/javascript/ui/chat/events/post) and [`typingStart`](/api/javascript/ui/chat/events/typingstart) events.
+The following example demonstrates how to initialize the Chat and implement the handlers for its [`post`](/api/javascript/ui/chat/events/post) and [`typingStart`](/api/javascript/ui/chat/events/typingstart) events.
 
 ```JavaScript
 var chat = $("#chat").kendoChat({
-    // Each instance of the app will generate a unique username.
+    // Each instance of the application will generate a unique username.
     // In this way, the SignalR Hub "knows" who is the user that sends the message
     // and who are the clients that have to receive that message.
     user: {
@@ -41,7 +44,7 @@ var chat = $("#chat").kendoChat({
 }).data("kendoChat");
 ```
 
-### Configuring the SignalR Client Hub Proxy
+## Configuring the SignalR Client Hub Proxy
 
 1. Get the SignalR client script from NPM.
 
@@ -58,7 +61,7 @@ var chat = $("#chat").kendoChat({
 1. Initialize the SignalR Hub proxy.
 
     ```js
-    // Point to the Hub remote endpoint
+    // Point to the Hub remote endpoint.
     window.chatHub = new signalR.HubConnectionBuilder()
         .withUrl('http://localhost:5000/chat')
         .build();
@@ -82,21 +85,17 @@ var chat = $("#chat").kendoChat({
             text: message
         };
 
-        // Render the received message in the Chat
+        // Render the received message in the Chat.
         chat.renderMessage(message, sender);
     });
 
     chatHub.on('typing', function(sender) {
-        // Display typing notification in the Chat
+        // Display the typing notification in the Chat.
         chat.renderMessage({ type: 'typing' }, sender);
     });
     ```
 
-## Implementing the SignalR Server Hub
-
-This section explains how to implement the SignalR Chat Hub server.
-
-### Setting Up the Project
+## Setting Up the Project
 
 1. Create a new ASP.NET Core Empty Web Application.
 
@@ -116,9 +115,7 @@ This section explains how to implement the SignalR Chat Hub server.
     dotnet run
     ```
 
-### Configuring the SignalR Hub
-
-This section demonstrates how to configure and implement the SignaR Hub.
+## Configuring the SignalR Hub
 
 1. Implement `Startup.cs`.
 
@@ -151,10 +148,10 @@ This section demonstrates how to configure and implement the SignaR Hub.
 
             public void Configure(IApplicationBuilder app, IHostingEnvironment env)
             {
-                // Use the CORS configuration
+                // Use the CORS configuration.
                 app.UseCors("AllowCors");
 
-                // Point to the route that would return the SignalR Hub
+                // Point to the route that will return the SignalR Hub.
                 app.UseSignalR(routes =>
                 {
                     routes.MapHub<ChatHub>("/chat");
@@ -173,18 +170,18 @@ This section demonstrates how to configure and implement the SignaR Hub.
 
     namespace CoreSignalR
     {
-        // The Hub class should inherit from the Microsoft.AspNet.SignalR.Hub
+        // The Hub class has to inherit from the Microsoft.AspNet.SignalR.Hub.
         public class ChatHub : Hub
         {
             public async Task Send(object sender, string message)
             {
-                // Broadcast the message to all clients except the sender
+                // Broadcast the message to all clients except the sender.
                 await Clients.Others.SendAsync("broadcastMessage", sender, message);
             }
 
             public async Task SendTyping(object sender)
             {
-                // Broadcast the typing notification to all clients except the sender
+                // Broadcast the typing notification to all clients except the sender.
                 await Clients.Others.SendAsync("typing", sender);
             }
         }
@@ -199,9 +196,5 @@ This section demonstrates how to configure and implement the SignaR Hub.
 
 ## See Also
 
-* [Chat Overview]({% slug overview_kendoui_chat_widget %})
-* [Chat Items]({% slug chat_items %})
-* [Connecting to Chat Bot Services]({% slug connect_to_chatbot_service %})
-* [Chat JavaScript API Reference](/api/javascript/ui/chat)
-
-For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).
+* [Basic Usage of the Chat (Demo)](http://demos.telerik.com/kendo-ui/chat/index)
+* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

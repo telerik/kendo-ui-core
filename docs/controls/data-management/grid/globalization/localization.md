@@ -22,7 +22,6 @@ The following example demonstrates how to implement the translation of the toolb
 		{ name: "cancel", text: "Custom Cancel" }
 	]
 
-
 ## Menu Messages
 
 The following example demonstrates how to implement the message translation of the column menu in the Grid. For more information, refer to the [`columnMenu.messages`](/api/javascript/ui/grid/configuration/columnmenu.messages) API reference.  

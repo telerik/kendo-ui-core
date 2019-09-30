@@ -1,14 +1,14 @@
 ---
-title: Connecting to Google DialogFlow
-page_title: Connecting to Google DialogFlow | Kendo UI Chat
-description: "Configure and connect the Kendo UI Chat widget to the Google DialogFlow."
+title: Google DialogFlow
+page_title: jQuery Chat Documentation | Google DialogFlow | Kendo UI
+description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat widget to the Google DialogFlow."
+previous_url: /controls/conversational-ui/chat/connect-to-google-dialogflow
 slug: connect_to_google_dialogflow
-position: 6
 ---
 
-# Connecting to Google DialogFlow
+# Google DialogFlow
 
-The following example demonstrates how to configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](http://demos.telerik.com/kendo-ui/chat/index) for jQuery and the [Google DialogFlow](https://dialogflow.com/).
+You can configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](http://demos.telerik.com/kendo-ui/chat/index) widget and the [Google DialogFlow](https://dialogflow.com/).
 
 In this case, the `postMessage` method of the agent class implements the logic that will be executed on user interaction. When the `textRequest()` promise of the DialogFlowClient is resolved, the `onResponse()` method of the agent is executed. It then passes the received data to the `renderMessages()` method that renders the response in the Chat widget.
 
@@ -23,14 +23,14 @@ In this case, the `postMessage` method of the agent class implements the logic t
 
 <script>
   $(document).ready(function () {
-    // Initialize the Chat widget
+    // Initialize the Chat.
     var chat = $("#chat").kendoChat({
       post: function (args) {
         agent.postMessage(args.text);
       }
     }).data("kendoChat");
 
-    // Create the agent instance and pass the Chat widget to it
+    // Create the agent instance and pass the Chat to it.
     var agent = new DialogFlowAgent(chat);
   });
 </script>
@@ -45,28 +45,28 @@ In this case, the `postMessage` method of the agent class implements the logic t
         name: "Botty McbotFace"
       };
 
-      // Assign the DialogFlow client to a property of the agent
+      // Assign the DialogFlow client to a property of the agent.
       this.dialogFlowClient = new ApiAi.ApiAiClient({ accessToken: "280344fb165a461a8ccfef7e1bb47e65" });
 
-      // Post a predefined event to the DialogFlow
-      // It will return predefined messages to be rendered in the Chat widget
+      // Post a predefined event to the DialogFlow.
+      // It will return predefined messages to be rendered in the Chat.
       this.postEvent("Welcome");
 
       this._timestamp;
     },
-    // Post the predefined event and attach the listener for the resolved promise
+    // Post the predefined event and attach the listener for the resolved promise.
     postEvent: function (event) {
       this.dialogFlowClient
         .eventRequest(event)
         .then($.proxy(this.onResponse, this));
     },
-    // Post a user message to the DialogFlow and attach the listener for the resolved promise
+    // Post a user message to the DialogFlow and attach the listener for the resolved promise.
     postMessage: function (text) {
       this.dialogFlowClient
         .textRequest(text)
         .then($.proxy(this.onResponse, this));
     },
-    // The promise.then() implementation
+    // The promise.then() implementation.
     onResponse: function (response) {
       this._timestamp = response.timestamp;
 
@@ -77,7 +77,7 @@ In this case, the `postMessage` method of the agent class implements the logic t
         this.renderMessages(fulfillment.messages);
       }
     },
-    // Render the returned messages in the Chat widget
+    // Render the returned messages in the Chat.
     renderMessages: function (messages) {
       var that = this;
 
@@ -108,10 +108,5 @@ In this case, the `postMessage` method of the agent class implements the logic t
 
 ## See Also
 
-* [Chat Overview]({% slug overview_kendoui_chat_widget %})
-* [Chat Items]({% slug chat_items %})
-* [Connecting to Chat Bot Services]({% slug connect_to_chatbot_service %})
-* [Connecting to Microsoft Bot Framework]({% slug connect_to_ms_bot_framework %})
-* [Chat JavaScript API Reference](/api/javascript/ui/chat)
-
-For runnable examples on Kendo UI Chat, refer to the [Kendo UI Demos site](http://demos.telerik.com/kendo-ui/chat/index).
+* [Basic Usage of the Chat (Demo)](http://demos.telerik.com/kendo-ui/chat/index)
+* [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

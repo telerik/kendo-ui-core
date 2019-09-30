@@ -1,52 +1,47 @@
 ---
 title: OLAP Cube Setup
-page_title: OLAP Cube Setup | Kendo UI PivotGrid
-description: "Learn how to set up the OLAP Cube when working with the Kendo UI PivotGrid widget."
+page_title: jQuery PivotGrid Documentation | OLAP Cube Setup | Kendo UI
+description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to set up the OLAP Cube when working with the widget."
 slug: olap_cube_setup_pivotgrid_widget
-position: 5
+position: 3
 ---
 
 # OLAP Cube Setup
 
-This article demonstrates the required steps to set up the OLAP Cube by using Microsoft SQL Server Analysis Services [SSAS](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx).
+You can set up the OLAP cube by using Microsoft SQL Server Analysis Services [SSAS](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx).
 
-## Install SSAS
+## Installing SSAS
 
-For detailed information on how to install the [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx), refer to the [MSDN tutorial](http://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
+For more information on installing the [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx), refer to the [MSDN tutorial](http://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
 
-## Define OLAP Cube
+## Defining the OLAP Cube
 
-For detailed information on how to create, define, and deploy the OLAP multidimensional cube, refer to the [MSDN multidimensional modelling tutorial](http://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx).
+For more information on creating, defining, and deploying the OLAP multidimensional cube, refer to the [MSDN multidimensional modelling tutorial](http://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx).
 
-## Configure HTTP Access
+## Configuring the HTTP Access
 
-To enable the HTTP access to SQL Server Analysis Services, use an `MSMDPUMP.ddl` ISAPI extension.
+To enable the HTTP access to the SQL Server Analysis Services, use an `MSMDPUMP.ddl` ISAPI extension.
 
-For detailed information on how to set up the `MSMDPUMP.ddl` extension, refer to the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
+* For more information on setting up the `MSMDPUMP.ddl` extension, refer to the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
+* For an online accessible OLAP service for testing purposes, use `http://demos.telerik.com/olap/msmdpump.dll`. The URL does not open directly in the browser.
 
-For an online accessible OLAP service for test purposes, use `http://demos.telerik.com/olap/msmdpump.dll`. Note that the URL does not open directly in the browser.
+## Enabling the Cross-Domain Access
 
-## Enable Cross-Domain Access
+> If the cube will not be requested from different domains, skip this step.
 
-> **Important**
->
-> If the cube is not intended to be requested from different domains, skip this step.
+To allow cross-domain requests to the OLAP service, enable the CORS behavior of your server. For more information on Cross-Origin Resource Sharing (CORS), refer to [this link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
 
-For detailed information on Cross-Origin Resource Sharing (CORS), refer to [this link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
-
-To allow cross-domain requests to the OLAP service, enable the CORS behavior of your server. The following sections demonstrate how to enable CORS on an [Internet Information Services (IIS)](http://www.iis.net/) server. Cross-domain access requires you to configure the HTTP Response Headers and the `OPTIONS` method server response.
+The following sections demonstrate how to enable CORS on an [Internet Information Services (IIS)](http://www.iis.net/) server. Cross-domain access requires you to configure the HTTP Response Headers and the `OPTIONS` method server response.
 
 ### Configuring HTTP Response Headers
 
-To configure HTTP Response Headers, specify:
+To configure HTTP Response Headers, specify the following requirements:
 * The domains that will perform the data requests.
 * An [HTTP method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) through which the data will be transferred.
-* The HTTP Headers that can be used in the requests.
-* The user credentials that are going to be required if an authenticated access is used.
+* The HTTP headers that can be used in the requests.
+* The user credentials that will be required if an authenticated access is used.
 
-The following example demonstrates the list of the HTTP Response Headers that show the settings required to enable the IIS CORS behavior.
-
-###### Example
+The following example demonstrates the list of the HTTP Response Headers that show the settings which are required to enable the IIS CORS behavior.
 
 <table>
     <tbody>
@@ -110,8 +105,6 @@ To configure the `OPTIONS` method server response, specify the server response t
 
 The following example demonstrates the list of settings that you have to apply.
 
-###### Example
-
 <table>
     <tbody>
         <tr>
@@ -132,17 +125,10 @@ The following example demonstrates the list of settings that you have to apply.
 ### Accessing the Cube Securely
 
 To implement a secured access to the OLAP instance, use either of the following approaches:
-* Use a proxy service which communicates with the cube on a secured protocol. This proxy should support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For detailed information on this, refer to [this forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll).
-* Send the credentials with a request header, even though thus the **Username** and **Password** will be visible on the client side (browser). For details on how to pass credentials with request headers, refer to this [StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read) object, as they will be passed to the `$.ajax` method.
+* Use a proxy service which communicates with the cube on a secured protocol. This proxy has to support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For more information, refer to [this forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll).
+* Send the credentials with a request header even though the **Username** and **Password** will be visible on the client side (browser). For more information on passing credentials with request headers, refer to [this StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](/api/javascript/data/datasource/configuration/transport.read) object because they will be passed to the `$.ajax` method.
 
 ## See Also
 
-Other article on the Kendo UI PivotGrid:
-
-* [Overview]({% slug overview_kendoui_pivotgrid_widget %})
-* [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
-* [Exporting]({% slug exporting_functionality_pivotgridwidget %})
-* [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
-* [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
-* [How-To Examples]({% slug howto_change_pivotgrid_fields_names_pivotgrid %})
-* [Knowledge Base Section](/knowledge-base)
+* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)

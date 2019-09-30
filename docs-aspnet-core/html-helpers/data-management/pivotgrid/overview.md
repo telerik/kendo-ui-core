@@ -64,7 +64,6 @@ To reference an existing PivotGrid instance, use the [`jQuery.data()`](http://ap
 
     var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
 
-
 ## See Also
 
 * [Basic Usage of the PivotGrid HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/index)

@@ -15,7 +15,7 @@ Telerik UI provides an OLAP service dll that can be used for testing and is host
 * [OLAP Cube Setup]({% slug htmlhelpers_pivotgrid_aspnetcore_olap_cube_setup %})
 * [PivotConfigurator Overview]({% slug htmlhelpers_pivotgrid_aspnetcore_configurator %})
 
-When the PivotGridis bound to flat data, it creates a client-side cube which allows the categorization of the flat data. For runnable examples on binding the PivotGrid to flat data, refer to the following online demos:
+When the PivotGrid is bound to flat data, it creates a client-side cube which allows the categorization of the flat data. For runnable examples on binding the PivotGrid to flat data, refer to the following online demos:
 * [Local binding of the PivotGrid HtmlHelper for ASP.NET Core (demo)](https://demos.telerik.com/aspnet-core/pivotgrid/local-flat-data-binding)
 * [Remote binding of the PivotGrid HtmlHelper for ASP.NET Core (demo)](https://demos.telerik.com/aspnet-core/pivotgrid/remote-flat-data-binding)
 

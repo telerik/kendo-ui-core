@@ -8,7 +8,7 @@ position: 2
 
 # PDF Export
 
-As of the 2015 Q1 release, PivotGrid HtmlHelper provides a built-in PDF export functionality.
+As of the 2015 Q1 release, the PivotGrid HtmlHelper provides a built-in PDF export functionality.
 
 By default, PDF export is enabled when `kendo.all.min.js`, `kendo.web.min.js`, or a custom build that includes PDF scripts is loaded to the page.
 

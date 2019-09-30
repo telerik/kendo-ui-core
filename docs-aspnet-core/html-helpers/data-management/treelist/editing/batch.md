@@ -1,18 +1,18 @@
 ---
-title: Batch
-page_title: Batch Editing | Telerik UI TreeList HtmlHelper for ASP.NET Core
+title: Incell
+page_title: Incell Editing | Telerik UI TreeList HtmlHelper for ASP.NET Core
 description: "Enable cell edit mode and batch updates in Telerik UI TreeList HtmlHelper for ASP.NET Core."
 slug: htmlhelpers_treelist_aspnetcore_batch_editing
 position: 2
 ---
 
-# Batch Editing
+# Incell Editing
 
 The Telerik UI TreeList HtmlHelper for ASP.NET Core enables you to implement cell editing and make and save batch updates.
 
-For a runnable example, refer to the [demo on batch editing of the TreeList](https://demos.telerik.com/aspnet-core/treelist/editing-incell).
+For a runnable example, refer to the [demo on incell (batch) editing of the TreeList](https://demos.telerik.com/aspnet-core/treelist/editing-incell).
 
-To set the batch (incell) edit mode of the TreeList:
+To set the incell edit mode of the TreeList:
 
 1. Add a new class to the `~/Models` folder. The following example uses the `EmployeeDirectoryModel` name.
 
@@ -120,5 +120,5 @@ To set the batch (incell) edit mode of the TreeList:
 
 ## See Also
 
-* [Batch Editing by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/editing-incell)
+* [Incell Editing by the TreeList HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treelist/editing-incell)
 * [Server-Side API](/api/treelist)

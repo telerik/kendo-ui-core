@@ -11,8 +11,6 @@ The ListView does not update the content dynamically on model field update.
 
 To re-render the widget, manually trigger the `change` event of the dataSource after the model update. The following example demonstrates how to achieve this behavior.
 
-###### Example
-
 ```dojo
     <base href="https://demos.telerik.com/kendo-ui/listview/mvvm">
 
@@ -245,8 +243,6 @@ To re-render the widget, manually trigger the `change` event of the dataSource a
 
 ## See Also
 
-* [ListView JavaScript API Reference](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
 * [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
-
-For more runnable examples on Kendo UI ListView, browse its [**How To** documentation folder]({% slug add_custom_delete_confirmation_dialog %}).

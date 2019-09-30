@@ -55,7 +55,7 @@ The following example demonstrates how to create a new localization file. The `k
 
 ### Localizing Widgets That Are Rendered by Server-Side Wrappers
 
-The server-side wrappers render some of the markup and the respective messages that are needed for the widgets from the server. Applying the UI localization on the client side may not work as expected. Currently, the ASP.NET MVC wrappers come with localization resource files which work with the default localization mechanism provided by ASP.NET MVC. For more information, refer to the article on [globalization in ASP.NET MVC](/aspnet-mvc/globalization#localized-user-interface).
+The server-side wrappers (helpers) render some of the markup and the respective messages that are needed for the widgets from the server. Applying the UI localization on the client side may not work as expected. Currently, the ASP.NET MVC wrappers come with localization resource files which work with the default localization mechanism provided by ASP.NET MVC. For more information, refer to the article on [globalization in ASP.NET MVC](/aspnet-mvc/globalization#localized-user-interface).
 
 ### Changing the Language at Runtime in AngularJS Applications
 

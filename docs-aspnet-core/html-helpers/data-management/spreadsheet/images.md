@@ -20,30 +20,25 @@ To load an image to a sheet, use any of the following approaches:
 
 You can upload and insert a custom image in the Spreadsheet with the `Insert Image` tool.
 
-**Figure 1: The Insert Image Tool**
-
 ![Spreadsheet Insert Image tool](images/spreadsheet-insert-image-tool.png)
 
-Then, in the pop-up window, you can select or drag-in a file from the file system:
-
-**Figure 2: The Insert Image Tool**
+Then, in the popup window, you can select or drag in a file from the file system.
 
 ![Spreadsheet Insert Image pop-up](images/spreadsheet-insert-image-pop-up.png)
 
-## Configuring the Spreadsheet to Display an Image Initially
+## Configuring the Spreadsheet to Initially Display an Image
 
 1. To properly configure the Spreadsheet to display an image on one its sheets, add a definition for the image to the Spreadsheet [`images`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/images) field. In the `images` object each image should be specified with unique key (property name) holding as value the image URL. The image URLs can be either [data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs), in which case the images are fully contained in the definition, or can be external URLs.
+1. Reference that image and place it accordingly using the [`drawings`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.drawings) array of the respective sheet.
 
-1. Then you should reference that image and place it accordingly using the [`drawings`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/configuration/sheets.drawings) array of the respective sheet.
+  The drawing definition has to contain:
 
-The drawing definition should contain:
+      * A pointer to the cell that will hold the top-left corner of the image: `TopLeftCell`.
+      * X and Y offset of the top-left corner: `OffsetX` and  `OffsetY`.
+      * Dimensions of the rendered image: `Width` and `Height`.
+      * A pointer to the image key that is used in the `Images` configuration of the Spreadsheet: `Image`.
 
-* A pointer to the cell that will hold the top-left corner of the image: `TopLeftCell`.
-* X and Y offset of the top-left corner: `OffsetX` and  `OffsetY`.
-* Dimensions of the rendered image: `Width` and `Height`.
-* A pointer to the image key that is used in the `Images` configuration of the Spreadsheet: `Image`.
-
-The following example demonstrates how to configure the Spreadsheet to display an image with top-left corner placed in the `J6` cell:
+The following example demonstrates how to configure the Spreadsheet to display an image with top-left corner placed in the `J6` cell.
 
 ```
     @(Html.Kendo().Spreadsheet()
@@ -83,54 +78,57 @@ The following example demonstrates how to configure the Spreadsheet to display a
 
 ## Using the addImage() Method
 
-The Spreadsheet Sheet API exposes a method that would allow you to programmatically add an image to the Spreadsheet and place in on a Sheet. To do that, a new `kendo.spreadsheet.Drawing` object should be created first. The configuration of the `Drawing` object is the same as the one described in the example from the previous section. Then, the `Drawing` should be passed to the [`sheet.addDrawing()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/adddrawing):
+The Spreadsheet Sheet API exposes a method that allows you to programmatically add an image to the Spreadsheet and place it on a sheet.
 
-```
-    @(Html.Kendo().Spreadsheet()
-       .Name("spreadsheet")
-       .Sheets(sheets =>
-       {
-           sheets.Add()
-               .Name("Sheet1")
-               .Columns(columns =>
-               {
-                   columns.Add().Width(115);
-               })
-               .Rows(rows =>
-               {
-                   rows.Add().Height(25).Cells(cells =>
+1. Create a new `kendo.spreadsheet.Drawing` object. The configuration of the `Drawing` object is the same as the one described in the example from the previous section.
+1. Pass the `Drawing` to the [`sheet.addDrawing()`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/methods/adddrawing).
+
+    > When you use the export functionality of the Spreadsheet together with images, note the following:
+    > * Images are supported only for client-side import and export. When you engage server-side import or export, no images will be loaded or exported.
+    > * To properly export any image to PDF by using the default Spreadsheet functionality, at least one cell with data has to be present on the sheet which contains that image.
+
+    ```
+        @(Html.Kendo().Spreadsheet()
+           .Name("spreadsheet")
+           .Sheets(sheets =>
+           {
+               sheets.Add()
+                   .Name("Sheet1")
+                   .Columns(columns =>
                    {
-                           cells.Add()
-                           .Value("ID")
-                           .TextAlign(SpreadsheetTextAlign.Center);
+                       columns.Add().Width(115);
+                   })
+                   .Rows(rows =>
+                   {
+                       rows.Add().Height(25).Cells(cells =>
+                       {
+                               cells.Add()
+                               .Value("ID")
+                               .TextAlign(SpreadsheetTextAlign.Center);
+                       });
                    });
-               });
-       })
-    )
+           })
+        )
 
-    <script>
-        $(document).ready(function () {
-            var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        <script>
+            $(document).ready(function () {
+                var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-            var sheet = spreadsheet.activeSheet();
+                var sheet = spreadsheet.activeSheet();
 
-            var drawing = kendo.spreadsheet.Drawing.fromJSON({
-                topLeftCell: "J6",
-                offsetX: 30,
-                offsetY: 10,
-                width: 50,
-                height: 50,
-                image: spreadsheet.addImage("/images/chrome.gif")
-            });
+                var drawing = kendo.spreadsheet.Drawing.fromJSON({
+                    topLeftCell: "J6",
+                    offsetX: 30,
+                    offsetY: 10,
+                    width: 50,
+                    height: 50,
+                    image: spreadsheet.addImage("/images/chrome.gif")
+                });
 
-            sheet.addDrawing(drawing);
-        })
-    </script>
-```
-
->  While using the Spreadsheet exporting functionality in combination with images:
-> * Images are supported only for client-side Import/Export functionality. When engaging server Import/Export, no images will be loaded/exported.
-> * To properly export any image to PDF using the default Spreadsheet functionality, at least one cell with data should be present on the sheet containing that image.
+                sheet.addDrawing(drawing);
+            })
+        </script>
+    ```
 
 ## See Also
 

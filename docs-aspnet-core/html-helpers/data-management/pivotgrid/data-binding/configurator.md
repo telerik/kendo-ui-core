@@ -10,7 +10,7 @@ position: 4
 
 The [Telerik UI PivotConfigurator HtmlHelper for ASP.NET Core](/api/pivotconfigurator) represents an OLAP cube structure.
 
-It PivotConfigurator can be used for configuring the column and row dimensions, and the measure fields of the [PivotGrid](https://demos.telerik.com/aspnet-core/pivotgrid/index). It is a supplementary component which is strongly related to the Telerik UI PivotDataSource.
+The PivotConfigurator can be used for configuring the column and row dimensions, and the measure fields of the [PivotGrid](https://demos.telerik.com/aspnet-core/pivotgrid/index). It is a supplementary component which is strongly related to the Telerik UI PivotDataSource.
 
 ## Initializing the PivotConfigurator
 
