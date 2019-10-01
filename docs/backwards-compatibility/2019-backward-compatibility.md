@@ -10,6 +10,12 @@ position: 1
 
 This article lists the breaking changes in the Kendo UI 2019 releases.
 
+## Kendo UI 2019 R3 SP1
+
+**Draggable**
+
+As of the Kendo UI 2019 R3 SP1 release, setting [the holdToDrag option](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/configuration/holdtodrag) to `false` does not cancel the [hold event](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/events/hold).
+
 ## Kendo UI 2019 R2 SP1
 
 **ToolBar**

@@ -564,8 +564,12 @@ The draggable element.
 
 ### hold
 
-Triggered only when `holdToDrag` is set to `true`. Fired before the `dragStart` event.
+Fired before the `dragStart` event.
 The `hold` event represents a jQuery `mousedown` event and contains all the event data of the [jQuery Event Object](http://api.jquery.com/category/events/event-object/).
+
+> **Important**
+>
+> As of the Kendo UI R3 2019 SP1 release, setting the holdToDrag option to `false` does not cancel the [hold event](https://docs.telerik.com/kendo-ui/api/javascript/ui/draggable/events/hold).
 
 #### Example - hold to drag
 

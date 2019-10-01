@@ -20,19 +20,20 @@ describe("kendo.ui.ComboBox events", function () {
         kendo.destroy(Mocha.fixture);
     });
 
-it("_blur calls _change", function() {
+it("_blur calls _change", function(done) {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}]
     });
 
     combobox._change = function() {
         assert.isOk(true);
+        done();
     }
 
     combobox._blur();
 });
 
-it("_blur calls popup close", function() {
+it("_blur calls popup close", function(done) {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}]
     });
@@ -42,16 +43,18 @@ it("_blur calls popup close", function() {
 
     combobox.popup.bind("close", function() {
         assert.isOk(true);
+        done();
     });
 
     combobox._blur();
 });
 
-it("_change raises the change event if value has changed", function() {
+it("_change raises the change event if value has changed", function(done) {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
         change: function() {
             assert.isOk(true);
+            done();
         }
     });
 
@@ -60,13 +63,14 @@ it("_change raises the change event if value has changed", function() {
     combobox._change();
 });
 
-it("_change raises the input change event", function() {
+it("_change raises the input change event", function(done) {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}]
     });
 
     input.bind("change", function() {
         assert.isOk(true);
+        done();
     });
 
     combobox.value("bar");
@@ -116,11 +120,12 @@ it("clicking an item raises the change event", function(done) {
     combobox.ul.children().eq(1).trigger(CLICK);
 });
 
-it("change should be raised on enter", function() {
+it("change should be raised on enter", function(done) {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
         change: function() {
             assert.isOk(true);
+            done();
         }
     });
 
@@ -142,11 +147,12 @@ it("change should not be raised on enter if input is empty", function() {
     combobox.input.press(kendo.keys.ENTER);
 });
 
-it("change should be raised on tab", function() {
+it("change should be raised on tab", function(done) {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
         change: function() {
             assert.isOk(true);
+            done();
         }
     });
 
@@ -157,11 +163,12 @@ it("change should be raised on tab", function() {
     combobox.input.focusout();
 });
 
-it("change should not be raised on tab after already changed value", function() {
+it("change should not be raised on tab after already changed value", function(done) {
     combobox = new ComboBox(input, {
         dataSource: ["One", "Two", "Three"],
         change: function() {
             assert.isOk(true);
+            done();
         }
     });
 
@@ -194,13 +201,14 @@ it("change should not be raised twice on tab after edits of arbitrary text", fun
     assert.equal(counter, 2);
 });
 
-it("_change raises change event if selectedIndex has changed", function() {
+it("_change raises change event if selectedIndex has changed", function(done) {
     var select = $("<select/>");
 
     combobox = new ComboBox(select, {
         dataSource: ["foo", "bar"],
         change: function() {
             assert.isOk(true);
+            done();
         }
     });
 
@@ -208,11 +216,12 @@ it("_change raises change event if selectedIndex has changed", function() {
     combobox._change();
 });
 
-it("clicking an item raises the change event of HTML select", function() {
+it("clicking an item raises the change event of HTML select", function(done) {
     var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
-                    .bind("change", function() {
-                        assert.isOk(true);
-                    });
+        .bind("change", function() {
+            assert.isOk(true);
+            done();
+        });
 
     combobox = new ComboBox(select, {
         dataTextField: "text",
@@ -383,13 +392,14 @@ it("change on ENTER with custom text and empty value", function(done) {
     combobox.input.press(kendo.keys.ENTER);
 });
 
-it("open event when click _arrow", function() {
+it("open event when click _arrow", function(done) {
     combobox = input.kendoComboBox({
         animation: false,
         dataSource: [{text: "foo"}, {text: "bar"}],
         open: function() {
             assert.isOk(true);
             assert.isOk(this === combobox, "'this' is not the correct scope");
+            done();
         }
     }).data("kendoComboBox");
 
@@ -428,11 +438,12 @@ it("open event should not raise twice on initial binding", function() {
     assert.equal(index, 1);
 });
 
-it("open event when ALT + down _arrow", function() {
+it("open event when ALT + down _arrow", function(done) {
     input.kendoComboBox({
         dataSource: [{text: "foo"}, {text: "bar"}],
         open: function() {
             assert.isOk(true);
+            done();
         }
     });
 
@@ -441,12 +452,13 @@ it("open event when ALT + down _arrow", function() {
     combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN, altKey: true } );
 });
 
-it("close event when click _arrow", function() {
+it("close event when click _arrow", function(done) {
     input.kendoComboBox({
         dataSource: [{text: "foo"}, {text: "bar"}],
         close: function() {
             assert.isOk(true);
             assert.isOk(this === combobox, "'this' is not the correct scope");
+            done();
         }
     });
 
@@ -482,11 +494,12 @@ it("close should not raise if no data", function() {
     combobox._arrow.trigger(CLICK);
 });
 
-it("close event when ALT + up _arrow", function() {
+it("close event when ALT + up _arrow", function(done) {
     input.kendoComboBox({
         dataSource: [{text: "foo"}, {text: "bar"}],
         close: function() {
             assert.isOk(true);
+            done();
         }
     });
 
@@ -644,21 +657,23 @@ it("prevent select event on blur returns old value", function(done) {
     });
 });
 
-it("ComboBox trigger blur of the hidden input", function() {
+it("ComboBox trigger blur of the hidden input", function(done) {
     combobox = input.kendoComboBox().data("kendoComboBox");
 
     combobox.element.blur(function() {
         assert.isOk(true);
+        done();
     });
 
     combobox.input.focusout();
 });
 
-it("ComboBox trigger cascade on TAB", function() {
+it("ComboBox trigger cascade on TAB", function(done) {
     combobox = input.kendoComboBox({
         dataSource: ["foo"],
         cascade: function() {
             assert.isOk(true);
+            done();
         }
     }).data("kendoComboBox");
 
@@ -723,7 +738,7 @@ it("ComboBox does not trigger cascade when selected index is changed due to filt
     assert.equal(timesCascadeCalled, 1);
 });
 
-it("ComboBox triggers cascade only once when setting value externally", function() {
+it("ComboBox triggers cascade only once when setting value externally", function(done) {
     combobox = input.kendoComboBox({
         dataSource: {
             transport: {
@@ -741,12 +756,13 @@ it("ComboBox triggers cascade only once when setting value externally", function
 
     combobox.bind("cascade", function() {
         assert.isOk(true);
+        done();
     });
 
     combobox.value("2");
 });
 
-it("ComboBox trigger change on blur after filtration", function() {
+it("ComboBox trigger change on blur after filtration", function(done) {
     combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
         filter: "contains",
@@ -758,6 +774,7 @@ it("ComboBox trigger change on blur after filtration", function() {
 
     combobox.bind("change", function() {
         assert.isOk(true);
+        done();
     });
 
     combobox.search("b");
@@ -787,6 +804,70 @@ it("ComboBox trigger change when selected index is changed", function() {
     combobox.input.focus().val("1");
     combobox.search("1");
     combobox.input.blur();
+});
+
+it("ComboBox trigger change when selected value is cleared", function(done) {
+    combobox = input.kendoComboBox({
+        dataSource: [
+            "Apples",
+            "Oranges"
+        ],
+        change: function() {
+            assert.isOk(true);
+            done();
+        }
+    }).data("kendoComboBox");
+
+    combobox.value("Apples");
+    combobox._clear.trigger(CLICK);
+});
+
+it("ComboBox trigger change when selected custom value is cleared", function(done) {
+    combobox = input.kendoComboBox({
+        dataSource: [
+            "Apples",
+            "Oranges"
+        ],
+        change: function() {
+            assert.isOk(true);
+            done();
+        }
+    }).data("kendoComboBox");
+
+    combobox.value("Pears");
+    combobox._clear.trigger(CLICK);
+});
+
+it("ComboBox trigger change when selected text is cleared", function(done) {
+    combobox = input.kendoComboBox({
+        dataSource: [
+            "Apples",
+            "Oranges"
+        ],
+        change: function() {
+            assert.isOk(true);
+            done();
+        }
+    }).data("kendoComboBox");
+
+    combobox.text("Apples");
+    combobox._clear.trigger(CLICK);
+});
+
+it("ComboBox trigger change when selected custom text is cleared", function(done) {
+    combobox = input.kendoComboBox({
+        dataSource: [
+            "Apples",
+            "Oranges"
+        ],
+        change: function() {
+            assert.isOk(true);
+            done();
+        }
+    }).data("kendoComboBox");
+
+    combobox.text("Pears");
+    combobox._clear.trigger(CLICK);
 });
 
 it("ComboBox triggers filtering event on data source filter", function() {
@@ -931,7 +1012,7 @@ it("trigger set when setting value", function() {
     combobox.value(value);
 });
 
-it("raised change event on blur after filtering", function() {
+it("raised change event on blur after filtering", function(done) {
     var combobox = new ComboBox(input, {
         dataValueField: "id",
         dataTextField: "name",
@@ -942,6 +1023,7 @@ it("raised change event on blur after filtering", function() {
         ],
         change: function() {
             assert.isOk(true);
+            done();
         }
     });
 

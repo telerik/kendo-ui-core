@@ -153,6 +153,19 @@
             assert.isOk(!datetimepicker.dateView.popup.visible());
         });
 
+        it("deleting the value in the input sets the current day to the dateview", function() {
+            var datepicker = new DateTimePicker(input, {
+                value: "1/1/2011 11:00 AM"
+            });
+            datepicker.open();
+            datepicker.close();
+            input.focus().val("");
+
+            input.trigger("focusout");
+
+            assert.deepEqual(datepicker.dateView.calendar.current(), kendo.calendar.getToday());
+        });
+
         it("DateTimePicker closes TimeView when press ALT + UP", function() {
             var datetimepicker = new DateTimePicker(input);
 

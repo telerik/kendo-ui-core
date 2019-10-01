@@ -1135,6 +1135,11 @@ var __meta__ = { // jshint ignore:line
             this._presetValue = true;
             this._toggleCloseVisibility();
         },
+      
+        _clearText: function() {
+            this._old = this.value();
+            this.text("");
+        },
 
         _clearValue: function() {
             Select.fn._clearValue.call(this);
