@@ -294,45 +294,5 @@
             trigger("mousedown", { pageX: 1, pageY: 1 }, Mocha.fixture.find("#bar"));
             trigger("mousemove", { pageX: 21, pageY: 1 }, Mocha.fixture.find("#foo"));
         });
-
-        it("hold event is not fired when holdToDrag is false", function(done) {
-            var calls = 0;
-            kendo.UserEvents.minHold(5);
-            var draggable = setup({
-                holdToDrag: false,
-                hold: function (e) {
-                    calls++;
-                },
-            });
-
-            press(draggable.element, 10, 20);
-
-            setTimeout(function() {
-                release(draggable.element, 10, 20);
-                kendo.UserEvents.minHold(800);
-                assert.equal(calls, 0);
-                done();
-            }, 10);
-        });
-
-        it("hold event is fired when holdToDrag is true", function(done) {
-            var calls = 0;
-            kendo.UserEvents.minHold(5);
-            var draggable = setup({
-                holdToDrag: true,
-                hold: function (e) {
-                    calls++;
-                },
-            });
-
-            press(draggable.element, 10, 20);
-
-            setTimeout(function() {
-                release(draggable.element, 10, 20);
-                kendo.UserEvents.minHold(800);
-                assert.equal(calls, 1);
-                done();
-            }, 10);
-        });
     });
 }());

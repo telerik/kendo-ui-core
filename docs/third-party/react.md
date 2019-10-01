@@ -71,28 +71,14 @@ The KendoReact suite is still growing and some of the components will be availab
 
 For convenience, we created example wrapper packages of some of the components that can be used while we are developing a native React equivalent. These packages will handle the creation, updating and destroying of the widgets and will provide a declarative approach of creating the components:
 
-1. [Scheduler](#scheduler)
 1. [Spreadsheet](#spreadsheet)
-1. [TreeList](#treelist)
 1. [PivotGrid](#pivotgrid)
-
-### Scheduler
-
-The following example demonstrates how to use the Scheduler wrapper.
-
-<iframe src="https://stackblitz.com/edit/kendo-react-scheduler?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 
 ### Spreadsheet
 
 The following example demonstrates how to use the Spreadsheet wrapper.
 
 <iframe src="https://stackblitz.com/edit/kendo-react-spreadsheet?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
-
-### TreeList
-
-The following example demonstrates how to use the TreeList wrapper.
-
-<iframe src="https://stackblitz.com/edit/kendo-react-treelist?embed=1&file=app/main.js&hideNavigation=1&view=preview" frameborder="0" width="100%" height="800"></iframe>
 
 ### PivotGrid
 
