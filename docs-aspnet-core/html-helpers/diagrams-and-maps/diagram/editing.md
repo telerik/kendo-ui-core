@@ -14,9 +14,7 @@ The Diagram provides editing options which enable you to add tools and shapes to
 
 To enable the editing functionality of the Diagram:
 
-1. Configure the DataSource for remote CRUD operations.
-
-  The following example demonstrates how to configure the `shapeDataSource` for remote CRUD (Create, Read, Update, Destroy) data operations. You have to include the model declaration. The `Id` is mandatory to indicate which of the fields is the unique identifier.
+1. Configure the DataSource for remote CRUD operations. You have to include the model declaration. The `Id` is mandatory to indicate which of the fields is the unique identifier.
 
       .DataSource(d => d
           .ShapeDataSource()

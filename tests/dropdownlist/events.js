@@ -39,7 +39,7 @@
             assert.isOk(changeWasCalled);
         });
 
-        it("_blur calls popup close", function() {
+        it("_blur calls popup close", function(done) {
             var changeWasCalled = false, dropdownlist = new DropDownList(input, {
                 dataSource: ["foo", "bar"]
             });
@@ -49,6 +49,7 @@
 
             dropdownlist.popup.bind("close", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist._blur();
@@ -73,7 +74,7 @@
             });
         });
 
-        it("change event is raised once when value is 0 and widget is blurred", function() {
+        it("change event is raised once when value is 0 and widget is blurred", function(done) {
             var dropdownlist = new DropDownList(input, {
                 dataTextField: "text",
                 dataValueField: "value",
@@ -85,6 +86,7 @@
                 index: 1,
                 change: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
@@ -140,13 +142,14 @@
             assert.equal(counter, 1);
         });
 
-        it("_change raises change event if selectedIndex has changed", function() {
+        it("_change raises change event if selectedIndex has changed", function(done) {
             var dropdownlist = new DropDownList(select, {
                 dataSource: ["foo", "bar"]
             });
 
             dropdownlist.bind("change", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist.selectedIndex = 1;
@@ -180,13 +183,14 @@
             dropdownlist.select($("<li>foo</li>"));
         });
 
-        it("clicking an item raises the change event", function() {
+        it("clicking an item raises the change event", function(done) {
             var changeWasCalled = false, dropdownlist = new DropDownList(input, {
                 dataSource: ["foo", "bar"]
             });
 
             dropdownlist.bind("change", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist.wrapper.focus();
@@ -194,13 +198,14 @@
             dropdownlist.ul.children().eq(1).trigger(CLICK);
         });
 
-        it("change should be raised on enter", function() {
+        it("change should be raised on enter", function(done) {
             var dropdownlist = new DropDownList(input, {
                 dataSource: ["foo", "bar"]
             });
 
             dropdownlist.bind("change", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist.open();
@@ -209,13 +214,14 @@
             dropdownlist.wrapper.press(kendo.keys.ENTER);
         });
 
-        it("change should be raised on tab", function() {
+        it("change should be raised on tab", function(done) {
             var dropdownlist = new DropDownList(input, {
                 dataSource: ["foo", "bar"]
             });
 
             dropdownlist.bind("change", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist.open();
@@ -224,7 +230,7 @@
             dropdownlist.wrapper.press(kendo.keys.TAB);
         });
 
-        it("clicking an item raises the change event of HTML select", function() {
+        it("clicking an item raises the change event of HTML select", function(done) {
             var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>").appendTo(Mocha.fixture);
             var dropdownlist = new DropDownList(select, {
                 dataSource: ["foo", "bar"]
@@ -232,30 +238,33 @@
 
             select.bind("change", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist.wrapper.focus();
             dropdownlist.ul.children().eq(1).trigger(CLICK);
         });
 
-        it("change should be raised on down arrow and closed popup", function() {
+        it("change should be raised on down arrow and closed popup", function(done) {
             var dropdownlist = new DropDownList(input, {
                 dataSource: ["foo", "bar"]
             });
 
             dropdownlist.bind("change", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist.wrapper.focus();
             dropdownlist.wrapper.press(kendo.keys.DOWN);
         });
 
-        it("open event when click arrow", function() {
+        it("open event when click arrow", function(done) {
             input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 open: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
@@ -280,22 +289,24 @@
             }, 200);
         });
 
-        it("open event when ALT + down arrow", function() {
+        it("open event when ALT + down arrow", function(done) {
             input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 open: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
             input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN, altKey: true });
         });
 
-        it("close event when click arrow", function() {
+        it("close event when click arrow", function(done) {
             input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 close: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
@@ -324,12 +335,13 @@
             }, 200);
         });
 
-        it("close event when ALT + up arrow", function() {
+        it("close event when ALT + up arrow", function(done) {
             input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 dataSource: [{ text: "foo" }, { text: "bar" }],
                 close: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
@@ -338,11 +350,12 @@
             input.trigger({ type: "keydown", keyCode: kendo.keys.UP, altKey: true });
         });
 
-        it("close event when select item", function() {
+        it("close event when select item", function(done) {
             input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 close: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
@@ -466,29 +479,31 @@
             dropdownlist.wrapper.focusout();
         });
 
-        it("DropDownList triggers cascade on initial load", function() {
+        it("DropDownList triggers cascade on initial load", function(done) {
             input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 cascade: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
         });
 
-        it("DropDownList triggers cascade when item is selected", function() {
+        it("DropDownList triggers cascade when item is selected", function(done) {
             var dropdownlist = new DropDownList(input, {
-                dataSource: ["foo", "bar"],
+                dataSource: ["foo", "bar"]
             });
 
             dropdownlist.bind("cascade", function() {
                 assert.isOk(true);
+                done();
             });
 
             dropdownlist.open();
             dropdownlist.ul.children(":last").click();
         });
 
-        it("DropDownList trigger cascade set value using value method (autoBind: false)", function() {
+        it("DropDownList trigger cascade set value using value method (autoBind: false)", function(done) {
             input.val("foo");
 
             input.kendoDropDownList({
@@ -496,6 +511,7 @@
                 autoBind: false,
                 cascade: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
@@ -503,11 +519,12 @@
         });
 
 
-        it("DropDownList triggers cascade when item is selected via keyboard", function() {
+        it("DropDownList triggers cascade when item is selected via keyboard", function(done) {
             var dropdownlist = new DropDownList(input, {
                 dataSource: ["foo", "bar"],
                 cascade: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
             dropdownlist.open();
@@ -745,12 +762,13 @@
             dropdownlist.filterInput.focus().val("bar").keydown();
         });
 
-        it("DropDownList with option lable raises change event on first click", function() {
+        it("DropDownList with option lable raises change event on first click", function(done) {
             var changeWasCalled = false, dropdownlist = new DropDownList(input, {
                 optionLabel: "Select...",
                 dataSource: ["foo", "bar"],
                 change: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
 
@@ -850,7 +868,7 @@
             });
         });
 
-        it("widget triggers cascade only once on value set", function() {
+        it("widget triggers cascade only once on value set", function(done) {
             var ddl = new DropDownList(input, {
                 optionLabel: "Select",
                 dataTextField: "CategoryName",
@@ -863,6 +881,7 @@
 
             ddl.bind("cascade", function() {
                 assert.isOk(true);
+                done();
             });
 
             ddl.value(1);
@@ -949,7 +968,7 @@
             dropdownlist.value(value);
         });
 
-        it("cascading child triggers filtering event", function() {
+        it("cascading child triggers filtering event", function(done) {
             var parent = $("<input id='parent' />").appendTo(Mocha.fixture);
             var child = $("<input />").appendTo(Mocha.fixture);
 
@@ -974,6 +993,7 @@
                 ],
                 filtering: function() {
                     assert.isOk(true);
+                    done();
                 }
             });
         });
@@ -1084,6 +1104,19 @@
             dropdownlist.wrapper.focusin();
             dropdownlist.open();
             dropdownlist.wrapper.focusout();
+        });
+
+        it("element click focuses the wrapper", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["foo", "foo1", "foo2"]
+            });
+
+            dropdownlist.wrapper.on("focus", function() {
+                assert.isOk(true);
+                done();
+            });
+
+            dropdownlist.element.click();
         });
     });
 }());

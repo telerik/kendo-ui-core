@@ -981,5 +981,18 @@ it("not raise change event on selecting current item after filtering", function(
     });
     combobox.input.focus().blur();
 });
+
+it("element click calls _focusHandler", function(done) {
+    combobox = new ComboBox(input, {
+        dataSource: [{text: "foo"}, {text: "bar"}]
+    });
+
+    combobox.input.on("focus", function() {
+        assert.isOk(true);
+        done();
+    });
+
+    combobox.element.trigger(CLICK);
+});
     });
 }());

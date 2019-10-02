@@ -186,6 +186,7 @@ var __meta__ = { // jshint ignore:line
             that.input.off(ns);
             that.input.off(nsFocusEvent);
             that.element.off(ns);
+            that.wrapper.off(ns);
             that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
 
@@ -304,6 +305,7 @@ var __meta__ = { // jshint ignore:line
                     .on("input" + ns, proxy(that._search, that))
                     .on("paste" + ns, proxy(that._inputPaste, that));
 
+                that.wrapper.on(CLICK + ns, proxy(that._focusHandler, that));
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)

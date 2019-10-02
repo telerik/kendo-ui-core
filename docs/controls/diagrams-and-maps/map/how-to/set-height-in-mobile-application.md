@@ -9,8 +9,6 @@ slug: howto_set100percentheight_inmobileapps_map
 
 The following example demonstrates how to use the Map widget in a Kendo UI Mobile View and set the height for the Map to 100%.
 
-###### Example
-
 ```dojo
     <div data-role="view" data-init="createMap" data-stretch="true">
       <div id="map"></div>
@@ -38,10 +36,6 @@ The following example demonstrates how to use the Map widget in a Kendo UI Mobil
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
-* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
-
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

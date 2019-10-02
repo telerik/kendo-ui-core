@@ -9,8 +9,6 @@ slug: howto_disablemousezoom_map
 
 The following example demonstrates how to disable the mousewheel zoom in the Map widget.
 
-###### Example
-
 ```dojo
     <div id="map"></div>
     <div style="height: 1000px; color: #fff; background: purple; font-size: 24px; text-align: center;">Very high div</div>
@@ -44,10 +42,6 @@ The following example demonstrates how to disable the mousewheel zoom in the Map
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
-* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
-* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
-* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
-
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
