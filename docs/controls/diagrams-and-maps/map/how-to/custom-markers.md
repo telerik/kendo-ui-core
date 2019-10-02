@@ -9,8 +9,6 @@ slug: howto_customizemarkersonmap_map
 
 The following example demonstrates how to use custom markers on a Kendo UI Map.
 
-###### Example
-
 ```dojo
     <div id="map"></div>
     <script>
@@ -50,11 +48,6 @@ The following example demonstrates how to use custom markers on a Kendo UI Map.
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
-* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
-* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
-* [How to Zoom on Double Click]({% slug howto_zoomondblclick_map %})
-
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

@@ -11,8 +11,6 @@ The following example demonstrates how to add a title text for shapes in the Map
 
 In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/javascript/dataviz/ui/map/events/shapecreated) event.
 
-###### Example
-
 ```dojo
   <div id="map"></div>
   <script>
@@ -59,22 +57,22 @@ In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) elem
         }
       }],
       shapeCreated: function(e) {
-        // Calculate shape bounding box
+        // Calculate the shape bounding box.
         var bbox = e.shape.bbox();
         var center = bbox.center();
 
-        // Create the label
+        // Create the label.
         var labelText = e.shape.dataItem.properties.abbrev;
         var label = new kendo.drawing.Text(labelText);
         var labelCenter = label.bbox().center();
 
-        // Position the label
+        // Position the label.
         label.position([
           center.x - labelCenter.x,
           center.y - labelCenter.y
         ]);
 
-        // Render the label on the layer surface
+        // Render the label on the layer surface.
         e.layer.surface.draw(label);
       }
     });
@@ -83,10 +81,6 @@ In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) elem
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
-* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
-* [How to Zoom on Double Click]({% slug howto_zoomondblclick_map %})
-
-For more runnable examples on the Kendo UI Map, browse the **How To** documentation folder.
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

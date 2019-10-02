@@ -1,106 +1,90 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI Diagram
-description: "Learn how to enable the editing functionality of the Kendo UI Diagram widget."
+page_title: jQuery Diagram Documentation | Editing | Kendo UI
+description: "Get started with the jQuery Diagram by Kendo UI and enable its editing functionality."
 slug: editing_kendoui_diagram_widget
-position: 2
+position: 3
 ---
 
 # Editing
 
-By enabling the editing support for the [Kendo UI Diagram](http://demos.telerik.com/kendo-ui/diagram/index), you can add tools and shape forms to it and take full advantage of its layout options.
+The Diagram provides editing options which enable you to add tools and shapes to it, and use its layout options.
 
-## Enable Editing Support
+## Getting Started
 
-To enable the editing support for Kendo UI Diagram widget, perform the steps below.
+To enable the editing functionality of the Diagram:
 
-### Configure DataSource for Remote CRUD Operations
+1. Configure the DataSource for remote CRUD operations.
 
-The following example demonstrates how to configure the Kendo UI dataSource (shapeDataSource) for remote CRUD (Create, Read, Update, Destroy) data operations.
+        var dataSource = new kendo.data.DataSource({
+          transport: {
+            read: {
+              url: "/DiagramShapes",
+              dataType: "jsonp"
+            },
+            update: {
+              url: "/DiagramShapes/Update",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: "/DiagramShapes/Destroy",
+              dataType: "jsonp"
+            },
+            create: {
+              url: "/DiagramShapes/Create",
+              dataType: "jsonp"
+            },
+            //...
+    	  }
+        });
 
-###### Example
+1. Configure `connectionsDataSource` for remote CRUD operations. Without setting the `ConnectionsDataSource`, editing is disabled.
 
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "/DiagramShapes",
-          dataType: "jsonp"
-        },
-        update: {
-          url: "/DiagramShapes/Update",
-          dataType: "jsonp"
-        },
-        destroy: {
-          url: "/DiagramShapes/Destroy",
-          dataType: "jsonp"
-        },
-        create: {
-          url: "/DiagramShapes/Create",
-          dataType: "jsonp"
-        },
-        //...
-	  }
-    });
+        var connectionsDataSource = new kendo.data.DataSource({
+          transport: {
+            read: {
+              url: "/DiagramConnections",
+              dataType: "jsonp"
+            },
+            update: {
+              url: "/DiagramConnections/Update",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: "/DiagramConnections/Destroy",
+              dataType: "jsonp"
+            },
+            create: {
+              url: "/DiagramConnections/Create",
+              dataType: "jsonp"
+            },
+            //...
+    	  }
+        });
 
-### Configure `connectionsDataSource` for Remote CRUD Operations
+1. Declare the fields definition by using the `schema` of the DataSource.
 
-To configure the `connectionsDataSource` for remote CRUD data operations, use the following example. Note that without the `connectionsDataSource`, the editing support is turned off.
+        var dataSource = new kendo.data.DataSource({
+          //..
+          model: {
+            id: "id",
+            fields: {
+    		  // This field will not be editable. The default value is true.
+              id: { from: "Id", type: "number", editable: false },
+              JobTitle: { type: "string" },
+              Color: { type: "string" }
+            }
+          }
+        });
 
-###### Example
-
-    var connectionsDataSource = new kendo.data.DataSource({
-      transport: {
-        read: {
-          url: "/DiagramConnections",
-          dataType: "jsonp"
-        },
-        update: {
-          url: "/DiagramConnections/Update",
-          dataType: "jsonp"
-        },
-        destroy: {
-          url: "/DiagramConnections/Destroy",
-          dataType: "jsonp"
-        },
-        create: {
-          url: "/DiagramConnections/Create",
-          dataType: "jsonp"
-        },
-        //...
-	  }
-    });
-
-### Declare Fields Definition: dataSource schema
-
-To declare the fields definition through the `dataSource schema`, use the following example.
-
-###### Example
-
-    var dataSource = new kendo.data.DataSource({
-      //..
-      model: {
-        id: "id",
-        fields: {
-		  // this field will not be editable (default value is true)
-          id: { from: "Id", type: "number", editable: false },
-          JobTitle: { type: "string" },
-          Color: { type: "string" }
-        }
-      }
-    });
-
-### Declare Fields Definition: connectionsDataSource schema
-
-To declare the fields definition through the `connectionsDataSource schema`, use the following example.
-
-###### Example
+1. Declare fields definition by using the `schema` of the `connectionsDataSource`.
 
     var connectionsDataSource = new kendo.data.DataSource({
       //..
       model: {
         id: "id",
         fields: {
-		  // this field will not be editable (default value is true)
+		  // This field will not be editable. The default value is true.
           id: { from: "Id", type: "number", editable: false },
           from: { from: "FromShapeId", type: "number" },
           to: { from: "ToShapeId", type: "number" },
@@ -112,11 +96,7 @@ To declare the fields definition through the `connectionsDataSource schema`, use
       }
     });
 
-## Configure Toolbar
-
-To enable new records insertion, configure the Toolbar. The `createShape` is added by default.
-
-###### Example
+1. Enable the insertion of new record by configuring the toolbar. The `createShape` is added by default.
 
     $("#diagram").kendoDiagram({
       dataSource: dataSource,
@@ -126,11 +106,7 @@ To enable new records insertion, configure the Toolbar. The `createShape` is add
 	  }
     });
 
-### Add Delete Tool
-
-To enable the deletion of records, add a delete tool.
-
-###### Example
+1. Enable the deletion of records by adding a delete tool.
 
     $("#diagram").kendoDiagram({
       dataSource: dataSource,
@@ -142,62 +118,61 @@ To enable the deletion of records, add a delete tool.
 
 ## Model Fields
 
-### Shape Model Fields
+
+### Shape Model
 
 The shape model provides the following fields:
 
-* `id` (Number)&mdash;The unique identifier of the shape. Shape without `id` field will not be connected.
+* `id` (Number)&mdash;A mandatory field. Represents the unique identifier of the shape. A shape without an `id` field will not be connected.
 * `type` (String)&mdash;The shape type.
 * `text` (String)&mdash;The shape text.
-* `x` (Number)&mdash;The shape `x` position.
-* `y` (Number)&mdash;The shape `y` position.
+* `x` (Number)&mdash;The `x` position of the shape.
+* `y` (Number)&mdash;The `y` position of the shape.
 * `width` (Number)&mdash;The shape width.
 * `height` (Number)&mdash;The shape height.
 
-Each field gets updated upon user interaction. All fields except `id` are optional.
+Each shape model field gets updated upon user interaction.
 
 The following example demonstrates the DataSource `model` definition.
-
-###### Example
 
 	schema: {
 	  model: {
 		id: "id", // The "id" of the shape is the "id" field. Mandatory.
 		fields: {
-		  // Describe the shape fields and map them to the fields returned by the remote service
+		  // Describe the shape fields and map them to the fields that are returned by the remote service.
 		  id: {
-		    // The 'Id' server-side field is mapped to the 'id' client-side field
+		    // The 'Id' server-side field is mapped to the 'id' client-side field.
 		    from: "Id", type: "number"
 		  },
 		  text: {
-		    // The 'Text' server-side field is mapped to the 'text' client-side field
+		    // The 'Text' server-side field is mapped to the 'text' client-side field.
 		    from: "Text", type: "string"
 		  },
 		  type: {
-		    // The 'Type' server-side field is mapped to the 'type' client-side field
+		    // The 'Type' server-side field is mapped to the 'type' client-side field.
 		    from: "Type", type: "string"
 		  },
 		  x: {
-		    // The 'X' server-side field is mapped to the 'x' client-side field
+		    // The 'X' server-side field is mapped to the 'x' client-side field.
 		    from: "X", type: "number"
 		  },
 		  y: {
-		    // The 'Y' server-side field is mapped to the 'y' client-side field
+		    // The 'Y' server-side field is mapped to the 'y' client-side field.
 		    from: "Y", type: "number"
 		  },
 		  width: {
-		    // The 'Width' server-side field is mapped to the 'width' client-side field
+		    // The 'Width' server-side field is mapped to the 'width' client-side field.
 		    from: "Width", type: "number"
 		  },
 		  height: {
-		    // The 'Height' server-side field is mapped to the 'height' client-side field
+		    // The 'Height' server-side field is mapped to the 'height' client-side field.
 		    from: "Height", type: "number"
 		  }
 		}
 	  }
 	}
 
-### Connection Model Fields
+### Connection Model
 
 The connection model provides the following fields:
 
@@ -212,55 +187,53 @@ The connection model provides the following fields:
 * `fromConnector` (String)&mdash;The name of the source shape connector.
 * `toConnector` (String)&mdash;The name of the target shape connector.
 
-Each field gets updated upon user interaction.
+Each connection model field gets updated upon user interaction.
 
 The following example demonstrates the `connectionsDataSource model` definition.
-
-###### Example
 
 	schema: {
 	  model: {
 		id: "id", // The "id" of the connection is the "id" field.
 		fields: {
-		  // Describe the connection fields and map them to the fields returned by the remote service
+		  // Describe the connection fields and map them to the fields that are returned by the remote service.
 		  id: {
 		    // The 'Id' server-side field is mapped to the 'id' client-side field
 		    from: "Id", type: "number"
 		  },
 		  text: {
-		    // The 'Text' server-side field is mapped to the 'text' client-side field
+		    // The 'Text' server-side field is mapped to the 'text' client-side field.
 		    from: "Text", type: "string"
 		  },
 		  from: {
-		    // The 'From' server-side field is mapped to the 'from' client-side field
+		    // The 'From' server-side field is mapped to the 'from' client-side field.
 		    from: "From", type: "number"
 		  },
 		  fromX: {
-		    // The 'FromX' server-side field is mapped to the 'fromX' client-side field
+		    // The 'FromX' server-side field is mapped to the 'fromX' client-side field.
 		    from: "FromX", type: "number"
 		  },
 		  fromY: {
-		    // The 'FromY' server-side field is mapped to the 'fromY' client-side field
+		    // The 'FromY' server-side field is mapped to the 'fromY' client-side field.
 		    from: "FromY", type: "number"
 		  },
 		  to: {
-		    // The 'To' server-side field is mapped to the 'to' client-side field
+		    // The 'To' server-side field is mapped to the 'to' client-side field.
 		    from: "To", type: "number"
 		  },
 		  toX: {
-		    // The 'ToX' server-side field is mapped to the 'toX' client-side field
+		    // The 'ToX' server-side field is mapped to the 'toX' client-side field.
 		    from: "ToX", type: "number"
 		  },
 		  toY: {
-		    // The 'ToY' server-side field is mapped to the 'toY' client-side field
+		    // The 'ToY' server-side field is mapped to the 'toY' client-side field.
 		    from: "ToY", type: "number"
 		  },
 		  fromConnector: {
-		    // The 'FromConnector' server-side field is mapped to the 'fromConnector' client-side field
+		    // The 'FromConnector' server-side field is mapped to the 'fromConnector' client-side field.
 		    from: "FromConnector", type: "string"
 		  },
 		  toConnector: {
-		    // The 'ToConnector' server-side field is mapped to the 'toConnector' client-side field
+		    // The 'ToConnector' server-side field is mapped to the 'toConnector' client-side field.
 		    from: "ToConnector", type: "string"
 		  }
 		}
@@ -269,5 +242,5 @@ The following example demonstrates the `connectionsDataSource model` definition.
 
 ## See Also
 
-* [Overview of the Diagram Widget]({% slug overview_kendoui_diagram_widget %})
+* [Editing in the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/editing)
 * [Diagram JavaScript API Reference](/api/javascript/dataviz/ui/diagram)

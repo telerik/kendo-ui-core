@@ -9,8 +9,6 @@ slug: howto_loadmarkers_map
 
 The following example demonstrates how to filter the data for a marker layer depending on the visible area of the Kendo UI Map.
 
-###### Example
-
 ```dojo
 <div id="map"></div>
 <script>
@@ -47,9 +45,9 @@ function createMap() {
       locationField: "latlng",
       titleField: "name"
     }],
-    // Request new markers when the viewport is reset
+    // Request the new markers when the viewport is reset...
     reset: updateMarkers,
-    // And after a pan operation
+    // ...and after a pan operation.
     panEnd: updateMarkers
   });
 }
@@ -60,11 +58,6 @@ $(document).ready(createMap);
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
-* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
-* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
-* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
-
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

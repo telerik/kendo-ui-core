@@ -466,6 +466,10 @@ var __meta__ = { // jshint ignore:line
             that.persistTagList = persistTagList;
         },
 
+        _focusHandler: function() {
+            this.input.focus();
+        },
+
         _editable: function(options) {
             var that = this,
                 disable = options.disable,
@@ -477,8 +481,10 @@ var __meta__ = { // jshint ignore:line
             if (!readonly && !disable) {
                 wrapper
                     .removeClass(STATEDISABLED)
+                    .removeClass(NOCLICKCLASS)
                     .on(HOVEREVENTS, that._toggleHover)
-                    .on("mousedown" + ns + " touchend" + ns, proxy(that._wrapperMousedown, that));
+                    .on("mousedown" + ns + " touchend" + ns, proxy(that._wrapperMousedown, that))
+                    .on(CLICK + ns, proxy(that._focusHandler, that));
 
                 that.input.on(KEYDOWN, proxy(that._keydown, that))
                     .on("paste" + ns, proxy(that._search, that))
@@ -550,7 +556,7 @@ var __meta__ = { // jshint ignore:line
 
                 //selects values in autoBind false and non virtual scenario on initial load
                 if (that._initialOpen && !that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
-                    that.value(that._initialValues);
+                    that.value(that.value() || that._initialValues);
                 }
 
                 // In some cases when the popup is opened resize is triggered which will cause it to close
