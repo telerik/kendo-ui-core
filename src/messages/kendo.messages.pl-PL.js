@@ -428,7 +428,7 @@ kendo.ui.editor.FormattingTool.prototype.options.items = [
         text: 'Nagłówek 6',
         value: 'h6'
     }
-]
+];
 }
 
 /* FileBrowser and ImageBrowser messages */
