@@ -655,7 +655,7 @@ if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
 kendo.spreadsheet.messages.filterMenu =
 $.extend(true, kendo.spreadsheet.messages.filterMenu,{
   "sortAscending": "Sortuj przedział A do Z",
-  "sortDescending": "Sortuj przedział Z do A" 
+  "sortDescending": "Sortuj przedział Z do A",
   "filterByValue": "Filtruj po wartości",
   "filterByCondition": "Filtruj po warunku",
   "apply": "Zastosuj",
