@@ -11,7 +11,7 @@ Your project might require you to enable users to edit the nodes of the TreeView
 
 The following example demonstrates how to achieve this behavior by using a standalone form.
 
-###### Example
+
 
 ```dojo
   <!-- TreeView -->

@@ -24,7 +24,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 2** Define the item template for the ListView.
 
-###### Example
+
 
 		<!-- The following markup contains the `Add new record` button -->
 		<div class="k-toolbar k-grid-toolbar">
@@ -57,7 +57,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 3** Define the edit template for the ListView.
 
-###### Example
+
 
 		<script type="text/x-kendo-tmpl" id="editTemplate">
 		<div class="product-view">
@@ -93,7 +93,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 4** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -175,7 +175,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 5** Create a ListView, configure its `template` and set its `dataSource`.
 
-###### Example
+
 
 		<!-- The following markup contains the `Add new record` button -->
 		<div class="k-toolbar k-grid-toolbar">
@@ -192,7 +192,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 6** Output the ListView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $listview->render();
@@ -204,7 +204,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -212,7 +212,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 3** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -220,7 +220,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 4** Get the current operation type, available as the `type` query string parameter.
 
-###### Example
+
 
         <?php
         $type = $_GET['type'];
@@ -229,7 +229,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 <!--_-->
 **Step 5** Declare a variable which will be returned as a result of the operation.
 
-###### Example
+
 
         <?php
         $result = null;
@@ -237,7 +237,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 6** Implement `create`.
 
-###### Example
+
 
         <?php
         if ($type == 'create') {
@@ -271,7 +271,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 7** Implement `read`.
 
-###### Example
+
 
         <?php
         if ($type == 'read') {
@@ -288,7 +288,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 8** Implement `update`.
 
-###### Example
+
 
         <?php
         if ($type == 'update') {
@@ -314,7 +314,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 9** Implement `destroy`.
 
-###### Example
+
 
         <?php
         if ($type == 'destroy') {
@@ -336,7 +336,7 @@ This demo shows how to use [PDO](http://www.php.net/manual/en/intro.pdo.php) to 
 
 **Step 10** Return the result of the operation as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -357,7 +357,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 2** Define the item template for the ListView.
 
-###### Example
+
 
 		<!-- The following markup contains the `Add new record` button -->
 		<div class="k-toolbar k-grid-toolbar">
@@ -390,7 +390,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 3** Define the edit template for the ListView.
 
-###### Example
+
 
 		<script type="text/x-kendo-tmpl" id="editTemplate">
 		<div class="product-view">
@@ -426,7 +426,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 4** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         // Configure the remote service - a PHP file called 'products.php'
@@ -508,7 +508,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 5** Create a ListView, configure its `template` and set its `dataSource`.
 
-###### Example
+
 
         <div class="k-toolbar k-grid-toolbar">
     		<a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
@@ -524,7 +524,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 6** Output the ListView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $listview->render();
@@ -536,13 +536,13 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
 
 **Step 3** Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -550,7 +550,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 4** Create a new instance of the `DataSourceResult`.
 
-###### Example
+
 
 				<?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -558,7 +558,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 5** Get the current operation type. Available as the `type` query string parameter.
 
-###### Example
+
 
         <?php
         $type = $_GET['type'];
@@ -567,7 +567,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 <!--_-->				
 **Step 6** Declare a variable which will be returned as a result of the operation.
 
-###### Example
+
 
         <?php
         $data = null;
@@ -575,7 +575,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 7** Implement `create`.
 
-###### Example
+
 
         <?php
         if ($type == 'create') {
@@ -586,7 +586,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 8** Implement `read`.
 
-###### Example
+
 
         <?php
         if ($type == 'read') {
@@ -597,7 +597,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 9** Implement `update`.
 
-###### Example
+
 
         <?php
         if ($type == 'update') {
@@ -608,7 +608,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 10** Implement `destroy`.
 
-###### Example
+
 
         <?php
         if ($type == 'destroy') {
@@ -619,7 +619,7 @@ First, configure a Kendo UI ListView for PHP binding and then implement the remo
 
 **Step 11** Return the result of the operation as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

@@ -10,7 +10,7 @@ slug: howto_retrievecurrent_viewdaterange_scheduler
 
 The following example demonstrates how to retrieve the date range of the current Kendo UI Scheduler view.
 
-###### Example
+
 
 ```dojo
 <div id="example">

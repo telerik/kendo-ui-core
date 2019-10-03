@@ -18,7 +18,7 @@ Unlike the HTML5 range input, the Slider enables the consistent experience acros
 
 To create the Slider, use an HTML `<input>` element.
 
-###### Example
+
 
     <input id="slider" />
 
@@ -26,7 +26,7 @@ To create the Slider, use an HTML `<input>` element.
 
 To initialize the Slider, use a jQuery selector.
 
-###### Example
+
 
     $(document).ready(function() {
         $("#slider").kendoSlider();
@@ -49,7 +49,7 @@ The Slider provides configuration options for you to customize its behavior. The
 
 The following example demonstrates how to customize the Slider behaviors by configuring its properties.
 
-###### Example
+
 
     $("#slider").kendoSlider({
         min: 10,
@@ -65,7 +65,7 @@ The following example demonstrates how to customize the Slider behaviors by conf
 
 To reference an existing Slider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
 
-###### Example
+
 
     var slider = $("#slider").data("kendoSlider");
 

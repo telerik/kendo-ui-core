@@ -10,7 +10,7 @@ slug: howto_reorderrowsinnestedgrid_sortable
 
 The example below demonstrates how to reorder rows in a child Grid using the Kendo UI Sortable widget.
 
-###### Example
+
 
 ```dojo
     <div id="example">

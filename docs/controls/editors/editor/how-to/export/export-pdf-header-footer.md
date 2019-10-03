@@ -16,7 +16,7 @@ To style the header and footer elements:
 * If the Editor is in its [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add an external CSS file to the [`options.stylesheets array`](/api/javascript/ui/editor/configuration/stylesheets) and apply the needed decoration.
 * If the Editor is in its [inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode), directly reference the implemented CSS file to the page.
 
-###### Example
+
 
 ```dojo
 <script>

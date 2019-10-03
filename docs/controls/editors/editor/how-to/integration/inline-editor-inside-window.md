@@ -16,7 +16,7 @@ The following example demonstrates how to handle such a scenario by:
 * Enforcing a fixed `z-index` style to the Window that holds the Editor.
 * Using an `!important` clause with the `z-index` style.
 
-###### Example
+
 
 ```dojo
 <style>

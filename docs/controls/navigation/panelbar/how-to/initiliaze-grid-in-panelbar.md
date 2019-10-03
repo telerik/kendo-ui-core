@@ -12,7 +12,7 @@ The example below demonstrates how to use the `activate` event when initializing
 > **Important**
 > In addition to the Kendo UI PanelBar, this example can be applied to the TabStrip and Window widgets, which, too, act as hidden containers for the Grid.
 
-###### Example
+
 
 ```dojo
     <body>

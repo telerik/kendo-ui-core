@@ -9,7 +9,7 @@ slug: howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview
 
 The following example demonstrates how to render multiple TreeViews by using HTML source binding.
 
-###### Example
+
 
 ```dojo
   <div id="customfield">

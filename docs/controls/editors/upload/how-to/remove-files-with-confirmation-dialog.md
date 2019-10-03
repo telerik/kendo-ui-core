@@ -9,7 +9,7 @@ slug: howto_remove_files_with_confirmation
 
 The following example demonstrates how to display a custom confirmation dialog by utilizing the [`kendo.confirm()`](/api/javascript/kendo/methods/confirm) method.
 
-###### Example
+
 
 ```dojo
     <input name="files" id="files" type="file" />

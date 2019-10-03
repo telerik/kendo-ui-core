@@ -10,7 +10,7 @@ slug: howto_usemvvmbinding_forwindowdataediting_mvvm_window
 
 The example below demonstrates how to edit data in a Kendo UI Window by using MVVM binding.
 
-###### Example
+
 
 ```dojo
 

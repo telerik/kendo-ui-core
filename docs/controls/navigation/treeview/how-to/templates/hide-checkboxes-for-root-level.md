@@ -11,7 +11,7 @@ Your project might require you to hide the checkboxes for the root level items i
 
 The following example demonstrates how to achieve this behavior by using the `checkboxes.template` configuration option.
 
-###### Example
+
 
 ```dojo
     <div id="treeview"></div>

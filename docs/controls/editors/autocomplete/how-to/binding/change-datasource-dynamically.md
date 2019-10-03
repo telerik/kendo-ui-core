@@ -10,8 +10,6 @@ slug: howto_change_datasource_dynamically_autocomplete
 
 The following example demonstrates how to dynamically change the `DataSource` based on user selections in the AutoComplete that are made through radio buttons.
 
-###### Example
-
 ```dojo
     <div id="example">
     <div class="demo-section k-content">
@@ -83,7 +81,7 @@ The following example demonstrates how to dynamically change the `DataSource` ba
                ]
            });
 
-           //create AutoComplete UI component
+           // Create the UI of the AutoComplete.
            var countries = $("#countries").kendoAutoComplete({
                dataSource: ds1,
                filter: "startswith",
@@ -101,8 +99,6 @@ The following example demonstrates how to dynamically change the `DataSource` ba
 
 ## See Also
 
-* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
-* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
-* [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
-
-For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_autocomplete %}).
+* [Basic Usage of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)
+* [Using the API of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/api)
+* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)

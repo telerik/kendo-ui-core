@@ -22,7 +22,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 **Step 2** Create a `PivotDataSourceTransport` and define the service URL.
 
-###### Example
+
 
         $transport = new \Kendo\Data\PivotDataSourceTransport();
 
@@ -51,14 +51,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 **Step 3** Create a `PivotDataSourceSchema` and set its type.
 
-###### Example
+
 
         $schema = new \Kendo\Data\PivotDataSourceSchema();
         $schema->type('xmla');
 
 **Step 4** Define the column and row dimensions of the PivotGrid.
 
-###### Example
+
 
         $dateColumn = new \Kendo\Data\PivotDataSourceColumn();
         $dateColumn->name('[Date].[Calendar]')
@@ -69,7 +69,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 **Step 5** Create a `PivotDataSource` instance.
 
-###### Example
+
 
         $dataSource = new \Kendo\Data\PivotDataSource();
 
@@ -82,14 +82,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 **Step 6** Create a [PivotGrid](/api/php/Kendo/UI/PivotGrid) and set its `dataSource`.
 
-###### Example
+
 
         $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
         $pivotgrid->dataSource($dataSource);
 
 **Step 7** Render the PivotGrid.
 
-###### Example
+
 
         <?php
         echo $pivotgrid->render();
@@ -103,7 +103,7 @@ You can subscribe to all PivotGrid [events](/api/javascript/ui/pivotgrid#events)
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
@@ -124,7 +124,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
@@ -148,7 +148,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 You are able to reference an existing PivotGrid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [PivotGrid API](/api/javascript/ui/pivotgrid#methods) to control its behavior.
 
-###### Example
+
 
         <script>
         $(function() {

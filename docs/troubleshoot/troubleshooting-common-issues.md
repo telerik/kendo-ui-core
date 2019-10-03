@@ -212,7 +212,7 @@ By default, IIS does not serve files with unknown extensions. The mime types can
 
 The example below demonstrates how to configure the IIS `Web.config`. Note the mime is removed first to avoid clashes if it is already defined.
 
-###### Example
+
 
 ```xml
     <?xml version="1.0"?>
@@ -240,7 +240,7 @@ Load a partial HTML fragment that does not contain any unneeded jQuery reference
 
 The example below demonstrates a test issue.
 
-###### Example
+
 
     $("#dialog").kendoWinodow({
         // loads complete page
@@ -249,7 +249,7 @@ The example below demonstrates a test issue.
 
 The example below demonstrates the solution of the test issue above.
 
-###### Example
+
 
     $("#dialog").kendoWindow({
         // load complete page...

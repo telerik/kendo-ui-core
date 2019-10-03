@@ -22,7 +22,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ## Bound with JSON Data
 
-###### Example
+
 
 ```dojo
 <ul id="menu"></ul>
@@ -71,7 +71,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ## Created with HTML Elements
 
-###### Example
+
 
 ```dojo
 <ul id="menu">

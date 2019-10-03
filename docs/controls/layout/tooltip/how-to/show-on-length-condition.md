@@ -9,7 +9,7 @@ slug: howto_showonlyiftextexceedscertainlength_tooltip
 
 The example below demonstrates how to show a Kendo UI Tooltip only if the text of the target exceeds a certain length.
 
-###### Example
+
 
 ```dojo
     <div id="content" style="width: 500px">

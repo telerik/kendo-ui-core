@@ -18,7 +18,7 @@ The actual transformation from HTML to Markdown is not part of the Kendo UI Edit
 
 The following example demonstrates how transform the Kendo UI Editor widget into a Markdown editor by using third-party JS libraries.
 
-###### Example
+
 
 ```dojo
 <script src="https://unpkg.com/markdown@0.5.0/lib/markdown.js"></script>

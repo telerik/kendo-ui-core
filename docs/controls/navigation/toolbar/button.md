@@ -14,7 +14,7 @@ You can configure the Button command type of the ToolBar to acquire different be
 
 The following example demonstrates the properties of the button.
 
-###### Example
+
 
     $("#toolbar").kendoToolBar({
         items: [
@@ -90,7 +90,7 @@ The `overflow` property accepts the following values:
 
 The following example demonstrates how to use icons in the ToolBar when you set the appearance of the Button.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -116,7 +116,7 @@ The `showText` property accepts the following values:
 
 The following example demonstrates how to define a button that is displayed only as an icon in the ToolBar wrapper and having only text in the command overflow container.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

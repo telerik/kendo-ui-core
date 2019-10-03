@@ -9,7 +9,7 @@ slug: howto_edit_using_contectmenu_angularjs_scheduler
 
 The following example demonstrates how to edit an event in the Scheduler by using the Kendo UI ContextMenu in AngularJS.
 
-###### Example
+
 
 ```dojo
      <div id="example" ng-app="KendoDemos">

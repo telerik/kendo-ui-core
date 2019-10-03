@@ -11,7 +11,7 @@ Your project might require you to partially preload TreeView items.
 
 The following example demonstrates how to achieve this behavior and request data from a remote service that has not yet been loaded.
 
-###### Example
+
 
 ```dojo
   <div id="tree"></div>

@@ -10,7 +10,7 @@ slug: howto_calculate_scheduler_height_dunamically_scheduler
 
 The following example demonstrates how to dynamically calculate the height of the Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
 <div id="scheduler"></div>

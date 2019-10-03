@@ -12,7 +12,7 @@ The following example demonstrates how to drag and drop images in the Kendo UI E
 
 As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](http://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
 
-###### Example
+
 
 ```dojo
   <style>

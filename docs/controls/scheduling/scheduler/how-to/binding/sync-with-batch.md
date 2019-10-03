@@ -10,7 +10,7 @@ slug: howto_create_a_scheduler_on_the_client_and_sync_with_batch_scheduler
 
 The following example demonstrates how to create a Kendo UI Scheduler on the client and then sync the changes with the batch mode turned on.
 
-###### Example
+
 
 ```dojo
   <div id="example" class="k-content">

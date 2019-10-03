@@ -15,7 +15,7 @@ To achieve this, take the following notable steps:
 2. Make sure that the parent content is resized when the content of the pane is rendered.
 3. Call the `resize` method to finalize the process.
 
-###### Example
+
 
 ```dojo
 <style>

@@ -18,7 +18,7 @@ It allows single or multiple selection, reordering of selected items, and deleti
 
 To create a Kendo UI ListBox, use a `select` HTML element and supply the configuration settings in the initialization script. Alternatively, you can use the declarative approach which conforms to the convention of initializing Kendo UI widgets with [`data`](/intro/widget-basics/data-attribute-initialization) attributes.
 
-###### Example
+
 
     <!-- Add the select HTML element that is going to hold the Kendo UI ListBox widget -->
     <select id="optional">
@@ -36,7 +36,7 @@ If a data source is not provided in its configuration settings, the ListBox uses
 
 The following example demonstrates how to initialize the ListBox and bind it to a local data array.
 
-###### Example
+
 
 ```dojo
     <select id="listbox"></select>
@@ -64,7 +64,7 @@ When you use complex data objects, use the `dataTextField` and `dataValueField` 
 
 You can also bind the `DataSource` to remote data. The following example demonstrates how to bind the Kendo UI ListBox to a remote service.
 
-###### Example
+
 
 ```dojo
 
@@ -116,7 +116,7 @@ Selected items can be reordered by using any of the following approaches:
 >
 > Currently, the widget does not support the drag-and-drop feature for multiple selected items.
 
-###### Example
+
 
 ```dojo
 

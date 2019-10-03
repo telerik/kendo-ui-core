@@ -9,7 +9,7 @@ slug: howto_create_custom_views_gantt
 
 The example below demonstrates how to create a custom view in the Kendo UI Gantt.
 
-###### Example
+
 
 ```dojo
     <div id="gantt"></div>

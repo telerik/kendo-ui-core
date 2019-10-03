@@ -34,7 +34,7 @@ To initialize the Kendo UI ScrollView from HTML:
 1. Add a `<div>` element which will be used to initialize the widget.
 1. Nest a `<div data-role="page"></div>` for each page and place any template inside the `<div>`.
 
-###### Example
+
 
 ```dojo
     <div style="width:900px;">
@@ -84,7 +84,7 @@ To initialize the Kendo UI ScrollView with a Data Source and a template:
 
 If `serverPaging` is enabled, the Kendo UI ScrollView will request the data in advance so it becomes available before it is required, thus improving user experience. The Kendo UI ScrollView uses virtualization when it is bound to a data source and it only has three pages at all times&mdash;the current, the previous, and the next.
 
-###### Example
+
 
 ```dojo
     <div style="margin:auto; width:60%">

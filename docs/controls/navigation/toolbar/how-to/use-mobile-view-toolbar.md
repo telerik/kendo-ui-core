@@ -15,7 +15,7 @@ To enable the mobile view of the ToolBar widget:
 
 The example below demonstrates how to use the mobile view of the Toolbar. It is recommended that you open it in Dojo.
 
-###### Example
+
 
 ```dojo
 <div id="toolbar"></div>

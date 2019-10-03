@@ -26,7 +26,7 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 | `Ctrl`+`Down Left`  | Navigates to the previous month.                 |
 | `Ctrl`+`Down Right` | Navigates to the next month.                     |
 
-###### Example
+
 
 ```dojo
     <div id="multiViewCalendar"></div>

@@ -10,7 +10,7 @@ slug: howto_persistresourcevalues_onamoveevent_scheduler
 
 The following example demonstrates how to persist the event resources on the `move` event in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
 <div id="example">

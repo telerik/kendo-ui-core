@@ -10,7 +10,7 @@ slug: howto_hideheaderandfooter_inadaptiverebdering_scheduler
 
 The following example demonstrates how to hide the header and the footer of the Scheduler when the widget is used in an adaptive rendering mode.
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-init="initScheduler">

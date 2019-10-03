@@ -98,7 +98,7 @@ Another option is to enable the [inline Editor mode](/web/editor/overview#classi
 
 The back-forward cache of the browser can be disabled by attaching a `window.unload` handler, as demonstrated in the following example.
 
-###### Example
+
 
     $(window).unload(function() {
       // nothing required here
@@ -114,7 +114,7 @@ Because the inline Editor is initialized from a non-`form` element, it is not po
 
 To submit the value of the Editor along with the `form`, use the approach demonstrated in the following example.
 
-###### Example
+
 
     <form>
       <div id="comment" contentEditable></div>

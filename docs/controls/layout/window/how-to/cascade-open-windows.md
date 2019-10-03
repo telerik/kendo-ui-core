@@ -9,7 +9,7 @@ slug: howto_cascadeopenwindows_window
 
 The example below demonstrates how to cascade open Kendo UI Windows on top of each other.
 
-###### Example
+
 
 ```dojo
    <script>

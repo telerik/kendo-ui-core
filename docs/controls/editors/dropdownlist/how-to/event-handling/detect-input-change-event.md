@@ -12,7 +12,7 @@ The `change` event of the DropDownList fires when the value of the widget is cha
 
 The following example demonstrates how to detect changes in the input of the widget.
 
-###### Example
+
 
 ```dojo
   <div id="example">

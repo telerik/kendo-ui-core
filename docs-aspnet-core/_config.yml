@@ -156,19 +156,19 @@ navigation:
         position: 1
      "html-helpers/charts/chart-types":
         title: "Chart Types"
-        position: 2
+        position: 4
      "html-helpers/charts/elements":
         title: "Elements"
-        position: 3
+        position: 5
      "html-helpers/charts/sparkline":
         title: "Sparkline"
-        position: 4
+        position: 6
      "html-helpers/charts/stockchart":
         title: "StockChart"
-        position: 5
+        position: 7
      "html-helpers/charts/treemap":
         title: "TreeMap"
-        position: 6
+        position: 8
      "html-helpers/gauges":
         title: "Gauges"
      "html-helpers/barcodes":

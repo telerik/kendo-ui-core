@@ -9,7 +9,7 @@ slug: howto_shiwnodecontextmenu_treeview
 
 The following example demonstrates how to show a ContextMenu with tree-item actions in a TreeView widget.
 
-###### Example
+
 
 ```dojo
     <ul id="treeview">

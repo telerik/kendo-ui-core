@@ -21,7 +21,7 @@ For additional information about the code used in the example, refer to:
 * [How to Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)
 * [Notes on Destroying Windows]({% slug overview_kendoui_window_widget %}#configuration-Destroy)
 
-###### Example
+
 
 ```dojo
     <div id="example">

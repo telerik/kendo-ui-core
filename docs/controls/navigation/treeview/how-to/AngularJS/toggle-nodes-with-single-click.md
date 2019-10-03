@@ -11,7 +11,7 @@ You might need to toggle the TreeView nodes between their expanded and collapsed
 
 The following example demonstrates how to achieve this behavior through a single click.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="KendoDemos">

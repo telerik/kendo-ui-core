@@ -10,7 +10,7 @@ slug: howto_clear_filter_open_combobox
 
 The following example demonstrates how to clear the filter of the Kendo UI ComboBox on opening the widget.
 
-###### Example
+
 
 ```dojo
   <div id="example">

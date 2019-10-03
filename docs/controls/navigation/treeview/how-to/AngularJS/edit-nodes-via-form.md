@@ -11,7 +11,7 @@ Your AngularJS project might require you to enable users to edit the nodes of th
 
 The following example demonstrates how to achieve this behavior by using a standalone form.
 
-###### Example
+
 
 ```dojo
     <div ng-app="KendoDemos">

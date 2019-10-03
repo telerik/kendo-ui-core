@@ -11,7 +11,7 @@ position: 5
 
 The following example demonstrates how to implement a custom Timeline view in a Kendo UI Scheduler which allows to change its length dynamically.
 
-###### Example
+
 
 ```dojo
     Number of shown days:

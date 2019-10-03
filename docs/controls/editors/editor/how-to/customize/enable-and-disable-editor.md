@@ -10,7 +10,7 @@ slug: howto_enable_and_disable_the_editor_editor
 
 The following example demonstrates how to enable and disable the Kendo UI Editor.
 
-###### Example
+
 
 ```dojo
   <style>

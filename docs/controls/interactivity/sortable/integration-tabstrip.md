@@ -29,7 +29,7 @@ Before going on reading, make sure you are familiar with the following topics:
 
 To reorder the tabs of a TabStrip, initialize the Sortable widget on the TabStrip's `ul.k-tabstrip-items` element. Normally, the `filter` property of the widget should select all `li.k-item` elements. If required, the Hint movement can be restricted within the `ul.k-tabstrip-items` element.
 
-###### Example
+
 
     $("#tabstrip ul.k-tabstrip-items").kendoSortable({
         filter: "li.k-item",
@@ -55,7 +55,7 @@ To reorder the tabs of a TabStrip, initialize the Sortable widget on the TabStri
 
 To avoid visual glitches, it is advisable to activate the current tab at the `start` event handler of the Sortable widget.
 
-###### Example
+
 
     start: function(e) {
         $("#tabstrip").data("kendoTabStrip").activateTab(e.item);
@@ -63,7 +63,7 @@ To avoid visual glitches, it is advisable to activate the current tab at the `st
 
 After a tab is sorted, update its order in the TabStrip widget.
 
-###### Example
+
 
     change: function(e) {
         var tabstrip = $("#tabstrip").data("kendoTabStrip"),

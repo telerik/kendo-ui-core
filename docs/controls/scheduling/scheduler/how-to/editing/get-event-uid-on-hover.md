@@ -10,7 +10,7 @@ slug: howto_get_the_uid_of_an_event_on_hover_scheduler
 
 The example below demonstrates how to get the UID of a Kendo UI Scheduler event on hover.
 
-###### Example
+
 
 ```dojo
    <div id="example">

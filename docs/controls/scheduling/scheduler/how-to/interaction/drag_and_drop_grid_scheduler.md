@@ -10,7 +10,7 @@ slug: drag_and_drop_between_grid_and_scheduler
 
 The following example demonstrates how to implement the drag-and-drop functionality to move items between the Kendo UI Grid and the Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
 

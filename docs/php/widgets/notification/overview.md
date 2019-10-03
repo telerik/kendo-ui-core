@@ -26,7 +26,7 @@ On the other hand, if the Notification element is used to contain static (non-po
 
 The example below demonstrates how to initialize the Notification and what its basic usage is.
 
-###### Example
+
 
         <?php
         $notification = new \Kendo\UI\Notification('notification');
@@ -53,7 +53,7 @@ If no type is specified when a notification is shown, `"info"` is assumed. An un
 
 The example below demonstrates how to apply the built-in notification types.
 
-###### Example
+
 
         <?php
         $notification = new \Kendo\UI\Notification('notification');
@@ -86,7 +86,7 @@ If needed, automatic hiding by clicking anywhere on the notifications can be dis
 
 The example below demonstrates how to manage the settings related to hiding the notifications.
 
-###### Example
+
 
         <?php
         $notification = new \Kendo\UI\Notification('notification');
@@ -109,7 +109,7 @@ If the popup content varies and stacking is likely to occur, it is recommendable
 
 The example below demonstrates how to manage the position, stacking, and the size of a notification.
 
-###### Example
+
 
         <?php
         $position = new \Kendo\UI\NotificationPosition();
@@ -136,7 +136,7 @@ One widget instance can display either popup or static notifications, but not bo
 
 The example below demonstrates how to enable static notifications.
 
-###### Example
+
 
         <?php
         $notification = new \Kendo\UI\Notification('notification');
@@ -155,7 +155,7 @@ The Notification widget allows the configuration of multiple templates. Each tem
 
 The example below demonstrates how to use templates when configuring the Notification.
 
-###### Example
+
 
         <script id="myAlertTemplate" type="text/x-kendo-template">
             <div class="myAlert">System alert generated at #= time # : #= myMessage #</div>

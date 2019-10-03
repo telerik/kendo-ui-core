@@ -12,7 +12,7 @@ You can export the Kendo UI Scheduler Agenda view to a paged PDF by using the [d
 
 The following example demonstrates how to achieve this.
 
-###### Example
+
 
 ```dojo
     <script src="//kendo.cdn.telerik.com/2016.2.504/js/jszip.min.js"></script>

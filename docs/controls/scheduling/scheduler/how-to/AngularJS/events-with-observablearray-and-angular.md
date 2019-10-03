@@ -9,7 +9,7 @@ slug: howto_createand_set_observablearray_events_angularjs_scheduler
 
 The following example demonstrates how to create events by using the Kendo UI `ObservableArray` configuration, set them using AngularJS, and switch between timezones.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="KendoDemos">

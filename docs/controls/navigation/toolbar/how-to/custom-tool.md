@@ -13,7 +13,7 @@ The example below demonstrates how to develop and register custom ToolBar tools,
 >
 > The following approach works in the Kendo UI Q3 2015 release, while not in previous versions of the framework
 
-###### Example
+
 
 ```dojo
   <div id="toolbar"></div>

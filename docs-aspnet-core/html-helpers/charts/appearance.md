@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance | Telerik UI Chart HtmlHelper for ASP.NET Core
 description: "Learn how to control the appearance of the Telerik UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+previous_url: /aspnet-core/helpers/html-helpers/charts/chart/appearance
 slug: htmlhelpers_charts_appearance_aspnetcore
 position: 3
 ---
@@ -90,7 +91,7 @@ Telerik UI for ASP.NET Core Charts use animated transitions to display new and u
     @(Html.Kendo().Chart()
         .Name("chart")
         .Transitions(false)
-        // Other options. 
+        // Other options.
     )
 ```
 

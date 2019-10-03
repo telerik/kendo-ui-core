@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 2** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -62,7 +62,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 3** Create a ListView, configure its `template` and set its `dataSource`.
 
-###### Example
+
 
         <script type="text/x-kendo-tmpl" id="template">
     		<div class="product">
@@ -83,7 +83,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 4** Output the ListView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $listview->render();
@@ -95,7 +95,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -103,7 +103,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 3** Retrieve all records from the **Products** table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT * FROM Products');
@@ -113,7 +113,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -141,7 +141,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -196,7 +196,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 3** Create a ListView, configure its `template` and set its `dataSource`.
 
-###### Example
+
 
         <script type="text/x-kendo-tmpl" id="template">
     		<div class="product">
@@ -217,7 +217,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 4** Output the ListView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $listview->render();
@@ -229,13 +229,13 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
 
 **Step 3** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -243,7 +243,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 4** Create a new instance of the `DataSourceResult` class and call its `read` method.
 
-###### Example
+
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -254,7 +254,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 5** Return the result of the `read` method as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

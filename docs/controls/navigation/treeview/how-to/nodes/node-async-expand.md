@@ -11,7 +11,7 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
 
 Load the child nodes asynchronously in the child data source by using the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method of the node.
 
-###### Example
+
 
 ```dojo
 <div id="container">

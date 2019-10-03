@@ -14,7 +14,7 @@ There are two options to use custom icons for the action buttons of a Kendo UI W
 
 The example below demonstrates the two options of how to use custom icons for the action buttons of a Kendo UI Window. Note that the custom Window action name takes part in the generated CSS class of the icon's `span` element in the Window title bar. For example, an action name `abc` is going to generate a `span.k-i-abc` element in the title bar. When using Kendo UI icons, there is no need to write additional CSS code. When using non-Kendo UI icons, custom CSS is required, so that the generated CSS class is assigned the desired background image.
 
-###### Example
+
 
 ```dojo
     <style>

@@ -9,7 +9,7 @@ slug: howto_sortableparentandchildcontainers_sortable
 
 The following example demonstrates how to create nested sortable containers.
 
-###### Example
+
 
 ```dojo
      <div id="baSurveyGroupTemplateListView">

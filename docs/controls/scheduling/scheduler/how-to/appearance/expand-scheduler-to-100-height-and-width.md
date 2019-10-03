@@ -18,7 +18,7 @@ When you handle the height of the Scheduler, note that:
 
 The following example demonstrates how to expand the Scheduler to 100% height and width.
 
-###### Example
+
 
 ```dojo
 

@@ -14,7 +14,7 @@ The Kendo UI MultiViewCalendar allows the user to select multiple dates or a ran
 
 The following example demonstrates how to implement the multiple-view selection mode in the MultiViewCalendar.
 
-###### Example
+
 
 ```dojo
     <div id="multiViewCalendar"></div>
@@ -29,7 +29,7 @@ The following example demonstrates how to implement the multiple-view selection 
 
 The following example demonstrates how to implement the range selection mode in the MultiViewCalendar.
 
-###### Example
+
 
 ```dojo
     <div id="multiViewCalendar"></div>

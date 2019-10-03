@@ -45,7 +45,7 @@ To use Progress Telerik UI for PHP in your PHP website, follow the steps below:
 
 **Step 3** Include the Kendo UI JavaScript and CSS files in your PHP page.
 
-###### Example
+
 
         <link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
@@ -58,13 +58,13 @@ To use Progress Telerik UI for PHP in your PHP website, follow the steps below:
 
 **Step 4** Include the Kendo PHP [`Autoload`](http://php.net/manual/en/language.oop5.autoload.php) file.
 
-###### Example
+
 
         <?php require_once 'lib/Kendo/Autoload.php'; ?>
 
 **Step 5** Use any Kendo UI PHP wrapper.
 
-###### Example
+
 
         <?php
         // Instantiate a new instance of the DatePicker class and specify its 'id'
@@ -80,7 +80,7 @@ To use Progress Telerik UI for PHP in your PHP website, follow the steps below:
 
 The example below demonstrates the complete source code.
 
-###### Example
+
 
     <!DOCTYPE html>
     <html>

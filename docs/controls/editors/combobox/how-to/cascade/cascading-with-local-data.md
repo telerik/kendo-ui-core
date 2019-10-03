@@ -10,7 +10,7 @@ slug: howto_implement_cascading_local_data_combobox
 
 The following example demonstrates how to cascade Kendo UI ComboBoxes when working with local data.
 
-###### Example
+
 
 ```dojo
 category: <select id="category"></select>

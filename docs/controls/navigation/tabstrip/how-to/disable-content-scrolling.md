@@ -16,7 +16,7 @@ The milestones of the approach are:
 
 The example below demonstrates how to disable content scrolling for a specific TabStrip instance only by using its ID in the CSS selector.
 
-###### Example
+
 
 ```dojo
     <div id="tabstrip1">

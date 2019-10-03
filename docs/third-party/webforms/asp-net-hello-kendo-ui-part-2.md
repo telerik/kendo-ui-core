@@ -25,7 +25,7 @@ To start with, return some additional data from the database. Add in the **Title
 
 The example below demonstrates how the `Employee` model object now looks like.
 
-###### Example
+
 
     public class Employee {
 
@@ -52,7 +52,7 @@ The example below demonstrates how the `Employee` model object now looks like.
 
 The `EmployeesController` `Get` method now looks a bit different. Notice that it is now quite slim and consists mostly of comments, as demonstrated in the example below.
 
-###### Example
+
 
     // WebAPI will respond to an HTTP GET with this method
     public Models.Response Get() {
@@ -82,7 +82,7 @@ This example uses the built-in [inline](http://demos.telerik.com/kendo-ui/web/gr
 
 To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as demonstrated in the example below. With this change, you can now save the page and launch it with Visual Studio. When you click on a row, it becomes editable.
 
-###### Example
+
 
     editable: true
 
@@ -98,7 +98,7 @@ In the `Default.aspx` file, add a column to the columns definition that specifie
 
 The example below demonstrates how to specify command columns.
 
-###### Example
+
 
     // specify the columns on the grid
     columns: [
@@ -114,7 +114,7 @@ The example below demonstrates how to specify command columns.
 
 This will create the **Edit** and **Delete** buttons in the last column of the Grid with no title on the column. At this point, the application shows the buttons. However, if you click them, nothing happens, because the Grid is expecting you to click on the cell to edit the field. To fix this, change the `editable: true` to `editable: "inline"`, as demonstrated in the example below.
 
-###### Example
+
 
     editable: "inline"
 
@@ -128,7 +128,7 @@ Add a `model` to the `schema` declaration specifying that the `id` is mapped to 
 
 The example below demonstrates how to specify a model for the DataSource.
 
-###### Example
+
 
     // the schema defines the schema of the JSON coming
     // back from the server so the datasource can parse it
@@ -159,7 +159,7 @@ Run the application now and notice that when you put the grid into edit mode you
 
 If you want to tweak this validation message, change the model definition for the **LastName** so it looks like the one demonstrated in the example below.
 
-###### Example
+
 
     LastName: {
         editable: true,
@@ -181,7 +181,7 @@ The required `Id` parameter can be retrieved by setting the `url` portion of the
 
 The example below demonstrates how to add updates, create, and destroy to the transport.
 
-###### Example
+
 
     // the transport tells the datasource what endpoints
     // to use for CRUD actions
@@ -209,7 +209,7 @@ Since you cannot rely on client-side validation, as anything in the browser can 
 
 The example below demonstrates how to add `POST` to the transport.
 
-###### Example
+
 
     public HttpResponseMessage Post(int id) {
         // create a response message to send back
@@ -267,7 +267,7 @@ This is because Dates are formatted for JavaScript and you need to get the date 
 
 The example below demonstrates how to cleanse the  BirthDate in the parameter map.
 
-###### Example
+
 
     // the transport tells the datasource what endpoints
     // to use for CRUD actions
@@ -310,7 +310,7 @@ There is more than one way to tell Kendo UI that there has been an error. All yo
 
 The example below demonstrates how to add an `Errors` field  to the response object.
 
-###### Example
+
 
     public class Response {
 
@@ -333,7 +333,7 @@ If the update succeeds, you can return an empty `Models.Response` object. If it 
 
 The example below demonstrates how to return an `Errors` property on error.
 
-###### Example
+
 
     public Models.Response Delete(int id) {
 
@@ -369,7 +369,7 @@ Now modify the `schema` to map the `Errors` property of the response to the `Err
 
 This demonstration is made for the sake of showing how to do things differently on the `update` and `delete` for accomplishing the same thing. The example below demonstrates how to map the `errors` field int he `schema`.
 
-###### Example
+
 
     // the schema defines the schema of the JSON coming
     // back from the server so the datasource can parse it
@@ -416,7 +416,7 @@ If you did not throw the error, the user is not aware that the `delete` failed b
 
 The example below demonstrates how to cancel changes on a failed request.
 
-###### Example
+
 
     error: function (e) {
         alert("The action failed. Please see the logs.");

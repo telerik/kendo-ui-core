@@ -20,13 +20,13 @@ Below are listed the steps for you to follow when configuring the sending of met
 
 **Step 1** Add an `input` field for description. Send its value to the `save` handler.
 
-###### Example
+
 
         <input type="text" id="fileDescription" />
 
 **Step 2** Declare a handler for the `upload` event and attach a data object to the passed event.
 
-###### Example
+
 
         function onUpload(e) {
             e.data = {
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when configuring the sending of met
 
 **Step 3** Attach the event handler.
 
-###### Example
+
 
         <kendo:upload name="files" upload="onUpload">
             <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
@@ -44,7 +44,7 @@ Below are listed the steps for you to follow when configuring the sending of met
 
 **Step 4** Process the file and the associated description.
 
-###### Example
+
 
         @RequestMapping(value = "/events/save", method = RequestMethod.POST)
         public @ResponseBody String save(@RequestParam List<MultipartFile> files,
@@ -65,7 +65,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
 
 **Step 1** Build the response.
 
-###### Example
+
 
         // When returning JSON the mime-type must be set to text/plain
         @RequestMapping(value = "/async/save", method = RequestMethod.POST, produces = "text/plain")
@@ -78,7 +78,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
 
 **Step 2** Declare a handler for the [`success` event](/api/javascript/ui/upload#success) and process the response.
 
-###### Example
+
 
         function onSuccess(e) {
             alert("Status: " + e.response.status);
@@ -86,7 +86,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
 
 **Step 3** Attach the event handler.
 
-###### Example
+
 
         <kendo:upload name="files" success="onSuccess">
             <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>

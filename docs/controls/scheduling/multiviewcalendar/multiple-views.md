@@ -12,7 +12,7 @@ The Kendo UI MultiViewCalendar allows you to define the number of views and mont
 
 In some scenarios it might be necessary to display more than two months. This is helpful especially in case of range selection among a couple of months.
 
-###### Example
+
 
 ```dojo
     <input id="numberOfViews" />

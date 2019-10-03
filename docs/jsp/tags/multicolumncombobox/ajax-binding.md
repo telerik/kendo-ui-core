@@ -18,7 +18,7 @@ To configure the Kendo UI MultiColumnComboBox for Ajax binding, follow the steps
 
 **Step 1** Add a new action method which will return data to populate the MultiColumnComboBox.
 
-###### Example
+
 
         @Autowired
         private ProductDao product;
@@ -30,7 +30,7 @@ To configure the Kendo UI MultiColumnComboBox for Ajax binding, follow the steps
 
 **Step 2** Add a new parameter, which is to be populated with the current MultiColumnComboBox request information&mdash;filter.
 
-###### Example
+
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
@@ -39,7 +39,7 @@ To configure the Kendo UI MultiColumnComboBox for Ajax binding, follow the steps
 
 **Step 3** Use the request information to process the data and return the result as JSON.
 
-###### Example
+
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
@@ -49,7 +49,7 @@ To configure the Kendo UI MultiColumnComboBox for Ajax binding, follow the steps
 
 The result format in this case is similar to the signature, demonstrated in the example below.
 
-###### Example
+
 
 
         public class DataSourceResult {
@@ -80,7 +80,7 @@ The result format in this case is similar to the signature, demonstrated in the 
 
 **Step 4** In the view, configure the MultiColumnComboBox to use the action method created in the previous steps.
 
-###### Example
+
 
         <c:url value="/web/multicolumncombobox/remote-data/read" var="readUrl" />
 
@@ -98,7 +98,7 @@ The result format in this case is similar to the signature, demonstrated in the 
 
 In the configuration that enables client data processing during Ajax binding, Kendo UI MultiColumnComboBox for JSP requests data from the server every time the user types in the widget. This behavior can be changed by setting the DataSource server operation options to `false`.
 
-###### Example
+
 
        <kendo:dataSource serverFiltering="false">
            <kendo:dataSource-transport>

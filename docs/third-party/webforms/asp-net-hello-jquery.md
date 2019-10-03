@@ -47,7 +47,7 @@ Double-click the **Say Hello** button to create a new button `click` event in th
 
 The example below demonstrates the `btnSayHello click` event.
 
-###### Example
+
 
     protected void btnSayHello_Click(object sender, EventArgs e) {
 
@@ -128,7 +128,7 @@ For this project, you are expected to know that [jQuery](http://jquery.com/) sel
 
 The example below demonstrates how to select an element by ID with jQuery.
 
-###### Example
+
 
     // gets the First Name text box
     var txtFirstName = $("#txtFirstName");
@@ -137,7 +137,7 @@ The example below demonstrates how to select an element by ID with jQuery.
 
 The example below demonstrates how to select elements by class with jQuery.
 
-###### Example
+
 
     // gets the text boxes with a textbox class
     var textboxes = $(".textbox");
@@ -148,7 +148,7 @@ To select the **First Name** text box value in this project, remember that you s
 
 The example below demonstrates how to get the text of `txtFirstName` by entering the command in the console and pressing **Enter**.
 
-###### Example
+
 
     // gets the text of the element with a txtFirstName ID
     $("#txtFirstName").val();
@@ -167,7 +167,7 @@ To figure out why this did not work, click on the white arrow which is the eleme
 
 Switch back to the **Console** tab and, keeping in mind the actual ID of `txtFirstName` at runtime, get the text of `txtFirstName` by entering the following command in the console.
 
-###### Example
+
 
     // gets the text of the element with a txtFirstName id
     $("#MainContent_txtFirstName").val();
@@ -184,7 +184,7 @@ Given that you can select any element in the page, and get or set its value, swi
 
 The example below demonstrates how to open a new script block.
 
-###### Example
+
 
     <script>
         // ... JavaScript will go here
@@ -198,7 +198,7 @@ The shorthand for this function is to declare a function, wrap that function in 
 
 The example below demonstrates how to create a `document ready` function.
 
-###### Example
+
 
     <script>
 
@@ -213,7 +213,7 @@ Before writing any code in the [`Document Ready`](http://api.jquery.com/ready/),
 
 The example below demonstrates how to replace an ASP button control with standard input.
 
-###### Example
+
 
     <!-- Replace This -->
     <asp:Button ID="btnSayHello" runat="server" onclick="btnSayHello_Click" Text="Say Hello" />
@@ -225,7 +225,7 @@ To create a new `click` event for the input button, select the button with [jQue
 
 The example below demonstrates how to create a `click` event for the new button.
 
-###### Example
+
 
     <script>
 
@@ -246,7 +246,7 @@ Select both the **First name** and **Last name** text boxes and store their valu
 
 The example below demonstrates the full `click` event code.
 
-###### Example
+
 
     <script>
 

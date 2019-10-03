@@ -11,7 +11,7 @@ When the Upload is configured to use a template, the content of the template rep
 
 The following example demonstrates how to add a `span` element to the template. This allows a validation message to be conditionally displayed.
 
-###### Example
+
 
 ```dojo
 <div id="example">

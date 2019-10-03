@@ -73,7 +73,7 @@ The new HTML5 DOCTYPE is very simple and replaces much of the unnecessary verbos
 
 The example below demonstrates how to add the  new HTML5 DOCTYPE to your page by using a line of code where the previous DOCTYPE declaration is removed.
 
-###### Example
+
 
     <!doctype html>
 
@@ -141,7 +141,7 @@ Return to Visual Studio and add a stylesheet to the application by right-clickin
 
 Open `site.css` and add some style to change the background color of the article to `salmon`, as demonstrated in the example below.
 
-###### Example
+
 
     article {
 

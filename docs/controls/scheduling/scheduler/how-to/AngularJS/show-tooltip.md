@@ -11,7 +11,7 @@ You can show additional data when the user hovers over the Scheduler.
 
 The following example demonstrates how to achieve this by using a tooltip which opens upon a `hover` event.
 
-###### Example
+
 
 ```dojo
 <div id="example" ng-app="KendoDemos">

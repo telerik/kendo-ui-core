@@ -40,7 +40,7 @@ The DateInput provides configuration options that can be set during initializati
 
 The following example demonstrates how to create a non-editable DateInput with a selected date. The date is displayed in a predefined format.
 
-###### Example
+
 
 ```dojo
     <input id="dateInput" />
@@ -70,7 +70,7 @@ You can integrate the DateInput with:
 
 The following example demonstrates how to integrate the DateInput with the DatePicker by enabling the `dateInput` property of the DatePicker.
 
-###### Example
+
 
 ```dojo
     <input id="datepicker" />
@@ -86,7 +86,7 @@ The following example demonstrates how to integrate the DateInput with the DateP
 
 The DateInput enables you to modify the text that is displayed in the placeholders based on your requirements.
 
-###### Example
+
 
 ```dojo
     <input id="dateinput" />

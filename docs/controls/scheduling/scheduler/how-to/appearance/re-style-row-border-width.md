@@ -10,7 +10,7 @@ slug: howto_restyle_row_border_width_scheduler
 
 The following example demonstrates how to restyle the width of the row border in a Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
     <div id="example">

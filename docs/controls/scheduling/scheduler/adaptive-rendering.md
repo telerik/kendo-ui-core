@@ -17,7 +17,7 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
 
 The example below demonstrates how to configure the adaptive rendering mode of the Scheduler.
 
-###### Example
+
 
     <div id="scheduler"></div>
 

@@ -9,7 +9,7 @@ slug: howto_attache_methodsto_dataitems_treeview
 
 The following example demonstrates how to attach TreeView methods to data items at different levels and then use them in a template.
 
-###### Example
+
 
 
 ```dojo

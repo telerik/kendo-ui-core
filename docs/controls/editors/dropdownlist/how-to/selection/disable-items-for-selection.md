@@ -14,7 +14,7 @@ A possible approach to make items appear as disabled is to apply the `k-state-di
 
 To prevent the future selection of disabled items, add an event handler to the [`select`](/api/javascript/ui/dropdownlist/events/select) event and call `e.preventDefault()`.
 
-###### Example
+
 
 ```dojo
     <input id="dropdownlist" /> <button class="k-button"> Mark Oranges as deleted</button>

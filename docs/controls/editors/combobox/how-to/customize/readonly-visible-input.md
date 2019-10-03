@@ -10,7 +10,7 @@ slug: howto_make_visible_inputs_readonly_combobox
 
 The following example demonstrates how to make a visible input of a Kendo UI ComboBox read-only.
 
-###### Example
+
 
 ```dojo
 <div id="example" role="application">

@@ -9,7 +9,7 @@ slug: displa_validation_summary_hybridapplication
 
 The example below demonstrates how to display a validation summary if the validation fails when working with the Hybrid UI Application of Kendo UI.
 
-###### Example
+
 
 ```dojo
      <div id="home" data-role="view" data-title="Registration Form" data-init="onInit">

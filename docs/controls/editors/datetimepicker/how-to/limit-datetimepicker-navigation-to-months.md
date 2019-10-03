@@ -10,7 +10,7 @@ position: 1
 
 The following example demonstrates how to limit the calendar navigation of the DateTimePicker to months (MVVM).
 
-###### Example
+
 
 ```dojo
       <input data-role="datetimepicker" />

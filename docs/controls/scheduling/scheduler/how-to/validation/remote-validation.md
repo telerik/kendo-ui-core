@@ -10,7 +10,7 @@ slug: howto_useremotevalidation_scheduler
 
 The following example demonstrates how to use remote validation during event editing in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
 <div id="example">

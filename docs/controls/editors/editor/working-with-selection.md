@@ -16,7 +16,7 @@ To set the Editor selection, create a `Range` object that specifies the desired 
 
 The following example demonstrates how to set the Editor selections.
 
-###### Example
+
 
     <textarea id="editor"></textarea>
     <script>
@@ -58,7 +58,7 @@ Because Internet Explorer keeps a single instance of the selection and the range
 
 The following example shows how to implement a custom tool in a DropDownList with its filtering enabled.
 
-###### Example
+
 
     <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
     </textarea>

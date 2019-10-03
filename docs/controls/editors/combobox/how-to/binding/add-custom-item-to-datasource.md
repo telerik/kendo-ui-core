@@ -23,7 +23,7 @@ To achieve this:
 >
 > This approach is not designed to be used and to work in scenarios where the ComboBox is an editor of a Kendo UI `anotherData` widget item such as the Kendo UI Grid.
 
-###### Example
+
 
 ```dojo
 <div id="example">

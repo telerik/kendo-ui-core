@@ -9,7 +9,7 @@ slug: howto_transfergridrows_sortable
 
 The example below demonstrates how to move a row from one Kendo UI Grid to another by dragging it from the first Grid to the second one and vice versa. Reordering the rows within the same Grid in the same way is also supported.
 
-###### Example
+
 
 ```dojo
 <div id="grid1" style="width: 400px; float:left"></div>

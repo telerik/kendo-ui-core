@@ -9,7 +9,7 @@ slug: howto_nestsortables_sortable
 
 The example below demonstrates how to create nested Kendo UI Sortable widgets.
 
-###### Example
+
 
 ```dojo
   <ul id="parent">

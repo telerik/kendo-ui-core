@@ -14,7 +14,7 @@ The exact implementation in other scenarios varies, depending on the business lo
 
 The following example demonstrates how to use a position index&mdash;that is, it sets a caret position inside the Editor to a specified index.
 
-###### Example
+
 
 ```dojo
     <div id="example" style="margin: 2em;">
@@ -47,7 +47,7 @@ The following example demonstrates how to use a position index&mdash;that is, it
 
 The following example demonstrates how to search for a string&mdash;that is, it sets the a caret position to the start of a string.
 
-###### Example
+
 
 ```dojo
     <div id="example" style="margin: 2em;">

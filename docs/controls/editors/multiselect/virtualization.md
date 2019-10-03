@@ -58,7 +58,7 @@ You can specify the fields that contain the array of [data](/api/javascript/data
 
 The following example demonstrates how to enable virtualization in the MultiSelect and shows the minimum widget and DataSource configuration requirements for the virtualization to work as expected.
 
-###### Example
+
 
 ```dojo
     <input id="orders" style="width: 400px" />
@@ -119,7 +119,7 @@ The `valueMapper` function is called when you want to select a data item that is
 
 When the widget receives a value which is not fetched from the remote server yet, it calls the `valueMapper` function and passes the selected values in that function. If the `mapValueTo` is not explicitly set to `dataItem`, the `valueMapper` implementation will return the respective data item index. From this index, the widget calculates the page number and in this way pre-fetches only that particular page by sending an additional AJAX request. If the value does not exist, the `valueMapper` will return `null`, `[]`, or `-1` and the widget will deselect the currently selected items.
 
-###### Example
+
 
 ```javascript
     valueMapper: function(options) {
@@ -138,7 +138,7 @@ The MultiSelect enables you to determine if the `valueMapper` has to resolve a v
 
 If you implement the `mapValueTo: "dataItem"` configuration, the `valueMapper` will return the data items that correspond to the selected values. The widget will use the returned data items to render the selected values but will not scroll the list to the selected values. When the user opens the list, the widget will display the options from the first data page no matter whether the selected value is a part of the first page or not. This represents a limitation of the `mapValueTo: dataItem` configuration.
 
-###### Example
+
 
 ```javascript
     mapValueTo: "dataItem",
@@ -182,7 +182,7 @@ On initial load, the widget checks whether the selected value is present in the 
 
 The `valueMapper` is expected to return a row index or a list of indices when a multiple selection is available. That being said, the service is expected to return either an index (number) or a list of indices. If the value does not exist, the `valueMapper` returns `null`, `[]`, or `-1`, and the widget deselects the currently selected items. For a runnable  example, refer to the result of [the test service](https://demos.telerik.com/kendo-ui/multiselect/virtualization) that is used in the online demos.
 
-###### Example
+
 
 ```javascript
 $.ajax({

@@ -10,7 +10,7 @@ slug: howto_make_the_editor_auto_expanding_editor
 
 The following example demonstrates how to create an auto-expanding Kendo UI Editor.
 
-###### Example
+
 
 ```dojo
   <style>

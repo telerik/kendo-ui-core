@@ -29,7 +29,7 @@ To create a TreeView, you can either:
 
 The following example demonstrates how to initialize the TreeView through a hierarchical list in HTML.
 
-###### Example
+
 
     <ul id="treeView">
         <li>Item 1
@@ -51,7 +51,7 @@ The following example demonstrates how to initialize the TreeView through a hier
 
 The following example demonstrates how to create a TreeView and bind it to a local data source.
 
-###### Example
+
 
     <div id="treeView"></div>
 
@@ -76,7 +76,7 @@ The following example demonstrates how to create a TreeView and bind it to a loc
 
 The following example demonstrates how to create a TreeView and bind it to a remote HierarchicalDataSource.
 
-###### Example
+
 
     $("#treeView").kendoTreeView({
         dataSource: {
@@ -105,7 +105,7 @@ When the drag-and-drop feature is enabled, the nodes of a TreeView can be dragge
 
 The following example demonstrates how to enable the drag-and-drop functionality for TreeView nodes.
 
-###### Example
+
 
     $("#treeView").kendoTreeView({
         dragAndDrop: true
@@ -115,7 +115,7 @@ The following example demonstrates how to enable the drag-and-drop functionality
 
 When binding the TreeView through the `dataSource` configuration option, each item can acquire the properties demonstrated in the example below.
 
-###### Example
+
 
     var item = {
         text: "Item text",
@@ -167,7 +167,7 @@ You can get the TreeView node data in the `select` event handler
 
 The following example demonstrates how to achieve this behavior.
 
-###### Example
+
 
     function onSelect(e) {
         // this refers to the TreeView object
@@ -192,7 +192,7 @@ Since `dataItem` is of the [`Node`](/api/framework/node) type, you are able to u
 
 The following example demonstrates how to reload child nodes when nodes are expanded.
 
-###### Example
+
 
     function onExpand(e) {
         var dataItem = this.dataItem(e.node);
@@ -209,7 +209,7 @@ The following example demonstrates how to reload child nodes when nodes are expa
 
 The following example demonstrates how to gather the checked nodes from a Kendo UI TreeView. You can also use this approach to gather expanded nodes.
 
-###### Example
+
 
     var treeview = $("#treeview").data("kendoTreeView");
     var checkedNodes = [];
@@ -234,7 +234,7 @@ The `HierarchicalDataSource` does not support data projection. Therefore, you mi
 
 The following example demonstrates how to project a TreeView state.
 
-###### Example
+
 
     <div id="tree">
     <script>
@@ -278,7 +278,7 @@ To refer to an existing TreeView instance, use the [`jQuery.data()`](http://api.
 
 The following example demonstrates how to access an existing TreeView instance.
 
-###### Example
+
 
     var treeView = $("#treeView").data("kendoTreeView");
 

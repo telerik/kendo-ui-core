@@ -12,7 +12,7 @@ The DropDownList enables you to render long items by showing just a part of them
 
 The following example demonstrates how to create a Kendo UI DropDownLists with long items.
 
-###### Example
+
 
 ```dojo
 <div id="div">

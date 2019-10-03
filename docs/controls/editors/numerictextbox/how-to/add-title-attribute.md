@@ -9,7 +9,7 @@ slug: howto_add_title_attribute_numerictextbox
 
 The following example demonstrates how to add a `title` attribute to the input element of the NumericTextBox.
 
-###### Example
+
 
 ```dojo
 <input id="numerictextbox" value="10" title="this is the numerictextbox title"/>

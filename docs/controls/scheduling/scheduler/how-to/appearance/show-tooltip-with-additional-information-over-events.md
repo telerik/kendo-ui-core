@@ -10,7 +10,7 @@ slug: howto_showtooltipwith_additionalinformation_overevents_scheduler
 
 The following example demonstrates how to use the Kendo UI Tooltip to show additional information over Kendo UI Scheduler events.
 
-###### Example
+
 
 ```dojo
 <div id="scheduler"></div>

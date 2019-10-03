@@ -10,7 +10,7 @@ slug: howto_drag-events-between-schedulers_scheduler
 
 The following example demonstrates how to implement the drag-and-drop functionality in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
    <div id="scheduler1"></div>

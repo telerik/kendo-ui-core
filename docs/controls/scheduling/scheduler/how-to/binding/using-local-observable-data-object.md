@@ -10,7 +10,7 @@ slug: howto_uselocalobservable_dataobject_scheduler
 
 The following example demonstrates how to bind the Scheduler to a local `observableObject` and change the properties during runtime.
 
-###### Example
+
 
 ```dojo
     <div id="example">

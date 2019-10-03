@@ -14,7 +14,7 @@ In the command overflow popup, the SplitButton is rendered as a flat list of com
 
 The following example demonstrates how to define a SplitButton in the ToolBar widget.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

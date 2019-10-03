@@ -18,7 +18,7 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 To create the Arc Gauge, use a `div` element and optionally set a height and width by using CSS.
 
-###### Example
+
 
     <div id="arc-gauge"></div>
 
@@ -26,7 +26,7 @@ To create the Arc Gauge, use a `div` element and optionally set a height and wid
 
 To initialize the Arc Gauge with its default configuration, use the following example.
 
-###### Example
+
 
 	$(document).ready(function() {
     	$("#arc-gauge").kendoArcGauge();
@@ -40,7 +40,7 @@ To render the center template of an Arc Gauge specify the [`centerTemplate`](/ap
 
 The following example demonstrates how to create a custom center template.
 
-###### Example
+
 
     $("#gauge").kendoArcGauge({
         value: 30,
@@ -53,7 +53,7 @@ The Arc Gauge enables you to set different colors depending on the current value
 
 To configure the range colors, set the [`colors`](/api/javascript/dataviz/ui/arcgauge/configuration/colors)  option.
 
-###### Example
+
 
     $("#gauge").kendoArcGauge({
         value: 30,
@@ -80,7 +80,7 @@ The Arc Gauge enables you to customize the options of the scale.
 
 For example, you can change the start and end angle, the appearance of the label and ticks, customize the ranges, and others. For the full list of options, refer to the [API reference of the Arc Gauge](/api/javascript/dataviz/ui/arcgauge).
 
-###### Example
+
 
     $("#gauge").kendoArcGauge({
         scale: {

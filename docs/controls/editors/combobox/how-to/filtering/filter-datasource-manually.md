@@ -14,7 +14,7 @@ This information is used by the widget to decide when to persist the selected va
 
 The following example demonstrates how to manually filter the Data Source instance of the Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
 <div id="example">

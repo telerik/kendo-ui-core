@@ -10,7 +10,7 @@ slug: howto_select_the_first_event_in_agenda_view_scheduler
 
 The following example demonstrates how to select the first event in the Agenda view of the Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
     <div id="example" class="k-content">

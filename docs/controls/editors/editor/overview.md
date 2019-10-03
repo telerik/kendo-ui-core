@@ -18,7 +18,7 @@ The generated widget value is an `XHTML` markup.
 
 To initialize the Editor, use an existing `HTML` element and a jQuery selector.
 
-###### Example
+
 
       <textarea id="editor" rows="10" cols="30"></textarea>
 
@@ -66,7 +66,7 @@ If you do not define a set of specific tools, the Editor creates a set of defaul
 
 The following example demonstrates how to implement a set of specific Editor tools.
 
-###### Example
+
 
        $(document).ready(function(){
           $("#editor").kendoEditor({
@@ -85,7 +85,7 @@ Apart from the available built-in tools, the Editor functionality can be extende
 
 The following example demonstrates how to add a custom tool button. To allow styling where `toolName` is the name specified in the custom tool configuration, the custom buttons get a `k-toolName` CSS class. The `undo` and `redo` tool names are reserved.
 
-###### Example
+
 
        $("#editor").kendoEditor({
            tools: [
@@ -107,7 +107,7 @@ To make the Editor read-only, remove the `contenteditable` attribute of the [`bo
 
 The following example demonstrates how to apply a read-only functionality to the Editor.
 
-###### Example
+
 
     var editor = $("#editor").data("kendoEditor"),
         editorBody = $(editor.body);
@@ -139,7 +139,7 @@ When using the classic (iFrame) mode, the Editor does not assume a very small he
 
 To set a height that is smaller than 200px, use the approach demonstrated in the following example.
 
-###### Example
+
 
 ```dojo
 <style>
@@ -187,7 +187,7 @@ When using the MVC wrapper of the Editor, apply the CSS class through `.HtmlAttr
 
 When the [classic mode](#classic-mode) is enabled, the Editor uses an `iframe` and applies some default CSS styles to its content. This behavior overrides the default browser styling that are shown in the following example and that target mainly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class, which is not included in the value of the widget.
 
-###### Example
+
 
     html,
     body {

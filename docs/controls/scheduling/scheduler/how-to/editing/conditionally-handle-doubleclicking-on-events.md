@@ -10,7 +10,7 @@ slug: howto_conditionally_handle_doubleclicking_events_scheduler
 
 The following example demonstrates how to handle double-clicking on events conditionally based on the view name in a Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
 <div id="example" class="k-content">

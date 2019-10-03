@@ -11,7 +11,7 @@ The following example demonstrates how to fully integrate the Validator in an MV
 
 To achieve this behavior, use the [`change`](/api/javascript/data/observableobject/events/change) event of the Observable and the [`validate`](/api/javascript/ui/validator/methods/validate) method of the Validator.
 
-###### Example
+
 
 ```dojo
 <div id="example">

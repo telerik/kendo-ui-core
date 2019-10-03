@@ -10,7 +10,7 @@ slug: howto_updateoppositepickervalue_onmodelchange_scheduler
 
 The following example demonstrates how to update the opposite start/end picker value on model change in a Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
 <div id="scheduler"></div>

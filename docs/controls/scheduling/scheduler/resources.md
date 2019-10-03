@@ -20,7 +20,7 @@ A single instance resource is a resource of which only one instance can be assig
 
 The example below demonstrates how to use a single instance resource.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>
@@ -67,7 +67,7 @@ A multiple instance resource is a resource of which more than one instance can b
 
 The example below demonstrates how to use multiple instance resources.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>
@@ -116,7 +116,7 @@ The scheduler will use the `color` of the first resource instance as background 
 
 Kendo UI Scheduler supports unlimited resource types. For instance, you are able to combine the single and multiple resource examples in one, as demonstrated in the example below.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>

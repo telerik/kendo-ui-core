@@ -16,7 +16,7 @@ The immutable feature enables you to add HTML elements that cannot be edited by 
 
 To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To make the Editor prevent the user from editing this element, you also need to enable the [`immutables`](/api/javascript/ui/editor/configuration/immutables) option.
 
-###### Example
+
 
 ```dojo
     <textarea id="editor">
@@ -39,7 +39,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
 * `String`&mdash;This plain string implements an opening and a closing tag of the representation you want to display in the **viewHtml** dialog.
 
-    ###### Example
+    
 
     ```dojo
         <textarea id="editor">
@@ -62,7 +62,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
 * [Kendo UI Template]({%slug overview_kendoui_templatescomponent %})&mdash;In it, the immutable DOM element is `data`.
 
-    ###### Example
+    
 
     ```dojo
         <textarea id="editor">
@@ -85,7 +85,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
 * `Function`&mdash;This callback function exposes the immutable DOM element in the overload and is expected to return a string.
 
-    ###### Example
+    
 
     ```dojo
         <textarea id="editor">
@@ -115,7 +115,7 @@ The [`immutables.deserialization`](/api/javascript/ui/editor/configuration/immut
 
 The following example demonstrates how to use the `immutables.serialization` and `immutables.deserialization` options to expose the CSS `text-align` property in the **viewHtml** dialog so that the user is able to change it from the HTML code.
 
-###### Example
+
 
 ```dojo
     <textarea id="editor">
@@ -144,7 +144,7 @@ If you use the [classic mode]({% slug overview_kendoui_editor_widget %}#classic-
 
 If you use the [inline mode]({% slug overview_kendoui_editor_widget %}#inline-mode), place the CSS rule on the page as demonstrated in the following example.
 
-###### Example
+
 
 ```dojo
     <style>

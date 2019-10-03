@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Sparkline
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Sparkline
 
 **Step 3** Retrieve all records from the `Weather` table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT TMax FROM Weather LIMIT 10');
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Sparkline
 
 **Step 4** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data) and [`schema`](/api/php/Kendo/Data/DataSource#schema). Setting the `schema` is required to specify the model fields. Those fields are required for filtering and editing.
 
-###### Example
+
 
         <?php
         // Create the schema model
@@ -74,7 +74,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Sparkline
 
 **Step 5** Create a [Sparkline](/api/php/Kendo/Dataviz/UI/Sparkline), configure its [`series`](/api/php/Kendo/Dataviz/UI/Sparkline#addSeriesItem).
 
-###### Example
+
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
@@ -88,7 +88,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Sparkline
 
 **Step 6** Output the Sparkline by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $sparkline->render();

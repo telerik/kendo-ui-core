@@ -47,7 +47,7 @@ The first day of the week in the Calendar view depends on the applied [culture](
 
 The following example demonstrates how to define selected, min, and max datetimes.
 
-###### Example
+
 
     <input id="dateTimePicker">
 
@@ -67,7 +67,7 @@ The DateTimePicker sets the value only if the entered datetime is valid and with
 
 The following example demonstrates how to define the datetime format.
 
-###### Example
+
 
     <input id="dateTimePicker">
 
@@ -91,7 +91,7 @@ The DateTimePicker value is parsed when the user changes the content through typ
 
 The following example demonstrates how to define the time format.
 
-###### Example
+
 
     <input id="dateTimePicker">
 
@@ -114,7 +114,7 @@ To define the first rendered view, use the `start` option. To control the naviga
 
 The following example demonstrates how to create a DateTimePicker with a selectable month.
 
-###### Example
+
 
     <input id="dateTimePicker">
 
@@ -129,7 +129,7 @@ The following example demonstrates how to create a DateTimePicker with a selecta
 
 To define the interval (in minutes) between values in the time drop-down list, use the following example.
 
-###### Example
+
 
     <input id="dateTimePicker">
 
@@ -151,7 +151,7 @@ To disable a date, either:
 
 When you disable dates by setting an array, list the days that need to be disabled by using the first letters from their names in English.
 
-###### Example
+
 
 ```dojo
     <input id="dateTimePicker" />
@@ -168,7 +168,7 @@ When you disable dates by setting an array, list the days that need to be disabl
 
 When you disable dates by adding a function, determine its return value as `true` for the date that is disabled.
 
-###### Example
+
 
 ```dojo
     <input id="dateTimePicker" />

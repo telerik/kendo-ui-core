@@ -9,7 +9,7 @@ slug: howto_expandallnodes_uponcheck_treeview
 
 The following example demonstrates how to expand all child nodes of a TreeView when checking a root node.
 
-###### Example
+
 
 ```dojo
   <div id="tree"></div>

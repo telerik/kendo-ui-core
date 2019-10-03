@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Data Binding | Telerik UI Chart HtmlHelper for ASP.NET Core
 description: "Learn the basics about binding the Telerik UI Chart HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to data."
+previous_url: /aspnet-core/helpers/html-helpers/charts/chart/data-binding
 slug: htmlhelpers_charts_databinding_aspnetcore
 position: 2
 ---

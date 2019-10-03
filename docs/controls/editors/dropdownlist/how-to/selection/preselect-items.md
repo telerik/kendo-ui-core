@@ -12,7 +12,7 @@ The following example demonstrates how to preselect items in a Kendo UI DropDown
 
 This approach is also applicable for the Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
 <div id="example">

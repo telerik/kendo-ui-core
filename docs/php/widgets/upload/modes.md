@@ -22,14 +22,14 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 **Step 1** Add a `form` declaration and set a `controller` action.
 
-###### Example
+
 
         <form method="post" action="form-action.php">
         </form>
 
 **Step 2** Add the Upload inside the form. The only required setting is a `Name`.
 
-###### Example
+
 
         <?php
         $upload = new \Kendo\UI\Upload('upload');
@@ -38,14 +38,14 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 **Step 3** Add a submit and reset buttons to the form.
 
-###### Example
+
 
         <input type="submit" value="Send" class="t-button" />
         <input type="reset" value="Reset" class="t-button" />
 
 **Step 4** The form should look like this.
 
-###### Example
+
 
         <form method="post" action="<c:url value='/web/upload/' />">
             <?php
@@ -58,7 +58,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 **Step 5** Process the files in `form-action.php`. This requires no special server handling compared to a regular input.
 
-###### Example
+
 
         <?php
         // Check if any files are uploaded
@@ -85,7 +85,7 @@ Below are listed the steps for you to follow when configuring the saving of the 
 
 **Step 1** Add the Upload to the page.
 
-###### Example
+
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -98,7 +98,7 @@ The `name` attribute is required and must be unique. It will be used as a `form`
 
 **Step 2** Implement the Save handler (`save.php`).
 
-###### Example
+
 
         <?php
         $files = $_FILES['files'];
@@ -120,7 +120,7 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 **Step 1** Specify a `Remove` action.
 
-###### Example
+
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -133,7 +133,7 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 **Step 2** Implement the Remove handler (`remove.php`).
 
-###### Example
+
 
         $fileNames = $_POST['fileNames'];
         // Delete uploaded files
@@ -150,7 +150,7 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 The selected files are uploaded immediately by default. You can change this behavior by setting `AutoUpload` to `false`.
 
-###### Example
+
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');

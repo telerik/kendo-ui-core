@@ -97,7 +97,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 **Step 6** Configure your page to include the Kendo UI web JavaScript and CSS files to the page, as shown in the example below.
 
-###### Example
+
 
         <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="resources/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
@@ -110,7 +110,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 >
 > If you want to use Kendo UI web and data visualization widgets at the same time, include `kendo.all.min.js` instead of `kendo.web.min.js` and `kendo.dataviz.min.js`. You can also create a custom JavaScript file by using the [Custom Download Builder](https://www.telerik.com/login/v2/telerik?ReturnUrl=http%3a%2f%2fwww.telerik.com%2fdownload%2fcustom-download).
 
-###### Example
+
 
         <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="resources/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
@@ -121,13 +121,13 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 **Step 7** Add taglib mapping to the Kendo UI tags.
 
-###### Example
+
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 8** Use any Kendo UI HtmlHelper extension.
 
-###### Example
+
 
         <kendo:datePicker name="datePicker"></kendo:datePicker>
 
@@ -135,7 +135,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 You are also able to include the JavaScript and CSS files from CDN. Do not forget to specify the version, e.g. 2012.2.710.
 
-###### Example
+
 
        <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
        <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />

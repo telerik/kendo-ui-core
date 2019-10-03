@@ -10,7 +10,7 @@ slug: howto_detect_wrapper_blur_events_dropdownlist
 
 The following example demonstrates how to detect the `blur` event of the Kendo UI DropDownList wrapper.
 
-###### Example
+
 
 ```dojo
 <div id="example">

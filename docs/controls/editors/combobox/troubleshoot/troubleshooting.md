@@ -26,7 +26,7 @@ Use separate data sources.
 
 The example below demonstrates a sample issue.
 
-###### Example
+
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
 
@@ -40,7 +40,7 @@ The example below demonstrates a sample issue.
 
 The example below demonstrates the solution to the above issue.
 
-###### Example
+
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
     ds.read();

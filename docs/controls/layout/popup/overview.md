@@ -22,7 +22,7 @@ The element is initially hidden, as the content of the widget is designed to be 
 
 The example below demonstrates how to initialize the Popup and what its basic usage is.
 
-###### Example
+
 
     <input id="name" /><button> Open/Close </button>
 
@@ -50,7 +50,7 @@ The example below demonstrates how to initialize the Popup and what its basic us
 
 To align the Popup to a specific element, use the `anchor` option. The Popup opens next to the defined anchor element.
 
-###### Example
+
 
 	<style>
       .content {

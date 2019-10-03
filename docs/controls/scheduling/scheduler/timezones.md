@@ -18,7 +18,7 @@ In JavaScript the `Date` object represents a single moment in time, measured in 
 
 The example below demonstrates how to construct a new `Date` object.
 
-###### Example
+
 
     new Date(2014,1,1,12,0,0);
 
@@ -66,7 +66,7 @@ If you run the first example below, the Scheduler will show the dates in the loc
 
 The example below demonstrates how to bind the Scheduler to local dates when the `timezone` option is not set.
 
-###### Example
+
 
 ````dojo
     <div id="scheduler"></div>
@@ -101,7 +101,7 @@ If you run the second example below, the Scheduler will show the dates according
 
 The example below demonstrates how to bind the Scheduler to UTC dates when the `timezone` option is not set.
 
-###### Example
+
 
 ````dojo
     <div id="scheduler"></div>

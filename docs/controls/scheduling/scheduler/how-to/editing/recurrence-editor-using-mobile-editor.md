@@ -10,7 +10,7 @@ slug: howto_createrecurrenceeditor_byusingmobileeditor_scheduler
 
 The following example demonstrates how to create a recurrence editor in the Scheduler by using a mobile-editor approach.
 
-###### Example
+
 
 ```dojo
      <div class="calendar"></div>

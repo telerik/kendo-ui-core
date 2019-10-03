@@ -12,7 +12,7 @@ The Spacer command type moves the tools that are declared after it to the right 
 
 The following example demonstrates how to define a spacer.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -28,7 +28,7 @@ The following example demonstrates how to define a spacer.
 
 You can use multiple spacers to create an equal amount of space between several tools.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

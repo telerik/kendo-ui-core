@@ -20,7 +20,7 @@ The example is based on the following API and widget functionality:
 * [Positioning and Stacking]({% slug overview_kendoui_notification_widget %}#configuration-Position) documentation,
 which also explains how to [change the auto-hide timeout on the fly]({% slug overview_kendoui_notification_widget %}#change-settings-for-specific-notification-messages)
 
-###### Example
+
 
 ```dojo
 <style>

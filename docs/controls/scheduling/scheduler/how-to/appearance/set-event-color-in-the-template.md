@@ -10,7 +10,7 @@ slug: howto_seteventcolorinthetemplate_scheduler
 
 The following example demonstrates how to set the event color in the template of the Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="example" class="k-content">

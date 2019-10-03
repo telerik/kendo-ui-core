@@ -111,6 +111,17 @@ navigation:
         title: "Templates"
     "controls/data-management/grid/how-to/various":
         title: "Various"
+
+    "controls/data-management/pivotgrid/binding":
+        title: "Data Binding"
+        position: 2
+    "controls/data-management/pivotgrid/export":
+        title: "Export"
+        position: 5
+    "controls/data-management/pivotgrid/how-to":
+        title: "How To"
+        position: 70
+
     "controls/data-management/spreadsheet/import-and-export-data":
         title: "Data Import and Export"
         position: 7
@@ -182,19 +193,19 @@ navigation:
         position: 1
     "controls/charts/chart-types":
         title: "Chart Types"
-        position: 2
+        position: 5
     "controls/charts/elements":
         title: "Elements"
-        position: 3
+        position: 6
     "controls/charts/sparkline":
         title: "Sparkline"
-        position: 4
+        position: 7
     "controls/charts/stockchart":
         title: "StockChart"
-        position: 5
+        position: 8
     "controls/charts/treemap":
         title: "TreeMap"
-        position: 6
+        position: 9
     "controls/gauges":
         title: "Gauges"
         position: 4

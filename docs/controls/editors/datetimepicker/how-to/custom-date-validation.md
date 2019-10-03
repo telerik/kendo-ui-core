@@ -9,7 +9,7 @@ slug: howto_validate_custom_dates_datetimepicker
 
 The following example demonstrates how to create a custom date validation in the DateTimePicker.
 
-###### Example
+
 
 ```dojo
   <div id="example">

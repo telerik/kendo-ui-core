@@ -14,7 +14,7 @@ The [cascading MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolu
 
 To initialize a cascading MultiColumnComboBox, use the following example.
 
-###### Example
+
 
     <label for="categories">Categories</label>
     <input id="categories"/>

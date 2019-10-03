@@ -18,7 +18,7 @@ Each effect utilizes CSS transitions if possible, with a fallback to manual prop
 
 To create the Effect instances, use the `kendo.fx` jQuery selector wrapper. To create multiple effects, you can also use a single wrapper.
 
-###### Example
+
 
     <div id="foo">
         I will be animated
@@ -32,7 +32,7 @@ To create the Effect instances, use the `kendo.fx` jQuery selector wrapper. To c
 
 You can compress the code from the previous example to a single line.
 
-###### Example
+
 
     <div id="foo">
         I will be animated
@@ -76,7 +76,7 @@ To determine the direction of the effects either:
 
 The following example demonstrates how to specify a direction for the desired effect. All three lines produce identical effect.
 
-###### Example
+
 
     <div id="foo">
         I will be animated
@@ -94,7 +94,7 @@ The following example demonstrates how to specify a direction for the desired ef
 
 If the effects run on the same element, you can combine most of them.
 
-###### Example
+
 
     <div id="foo">
         I will be faded out and zoomed out.
@@ -110,7 +110,7 @@ If the effects run on the same element, you can combine most of them.
 
 If the effects run on different elements, use the [`jQuery.when`](http://api.jquery.com/jQuery.when/)) configuration.
 
-###### Example
+
 
     <div id="foo">
         I will fade out.

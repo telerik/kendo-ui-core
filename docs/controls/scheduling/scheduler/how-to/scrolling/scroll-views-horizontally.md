@@ -12,7 +12,7 @@ The Kendo UI Scheduler views are normally 100% wide and depend on the width of t
 
 The following example demonstrates how to expand them and utilize a horizontal scrollbar inside the Scheduler.
 
-###### Example
+
 
 ```dojo
     <style>

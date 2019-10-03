@@ -23,7 +23,7 @@ You can use either of the following approaches to convert flat data into a hiera
 
 Prior to binding the DropDownTree widget, you can pre-process all available data and convert it into a hierarchy. This approach requires more time and memory, and the resulting tree is fully rendered.
 
-###### Example
+
 
     <input id="dropdowntree"></input>
     <script>
@@ -71,7 +71,7 @@ Prior to binding the DropDownTree widget, you can pre-process all available data
 
 You can also load the nodes on demand. However, this approach is more computationally intensive than the initial all-data pre-processing because it requires the filtering of the collection each time a node gets expanded.
 
-###### Example
+
 
     <input id="dropdowntree"></input>
     <script>

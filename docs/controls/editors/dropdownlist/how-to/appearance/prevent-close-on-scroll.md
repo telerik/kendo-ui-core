@@ -12,7 +12,7 @@ Normally, when the popup item list is open and the user scrolls it to the end, t
 
 The DropDownList enables you to prevent this behavior and to make the popup remain open in such cases. The following example demonstrates how to achieve this behavior.
 
-###### Example
+
 
 ```dojo
 <div id="example">

@@ -9,7 +9,7 @@ slug: howto_showlinesbetweennodes_treeview
 
 The following example demonstrates how to show lines between the nodes of the TreeView.
 
-###### Example
+
 
 ```dojo
     <div id="treeview"></div>

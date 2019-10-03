@@ -25,7 +25,7 @@ To attach events with [`bind()`](/intro/installation/events-and-methods#bind-to-
 
 The following `transport` configurations are over-simplified and invalid.
 
-###### Example
+
 
 ```dojo
     <textarea name="editor" id="editor"></textarea>

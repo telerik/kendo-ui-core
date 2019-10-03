@@ -10,7 +10,7 @@ slug: howto_create_custom_restrivtions_scheduler
 
 The following example demonstrates how to create a custom restriction for Scheduler events.
 
-###### Example
+
 
 ```dojo
      <div id="scheduler"></div>

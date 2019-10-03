@@ -27,7 +27,7 @@ The Kendo UI Menu widget can be initialized in two ways:
 
 The example below demonstrates how to initialize the Menu by using HTML markup.
 
-###### Example
+
 
     <ul id="menu">
         <li>Normal Item
@@ -57,7 +57,7 @@ The example below demonstrates how to initialize the Menu by using a JSON data o
 
 By initializing the Menu using JSON, you can use assign a select handler for each item by assigning a function to the `select` property.
 
-###### Example
+
 
     <ul id="menu"></ul>
     <script>
@@ -108,7 +108,7 @@ Using [`Kendo HierarchicalDataSource`](/api/framework/hierarchicaldatasource) is
 
 The following example demonstrates how to create a Menu and bind it to a local data source.
 
-###### Example
+
 
     <ul id="menu"></ul>
 
@@ -134,7 +134,7 @@ The following example demonstrates how to create a Menu and bind it to a local d
 
 The following example demonstrates how to create a Menu and bind it to a remote HierarchicalDataSource.
 
-###### Example
+
 
     <ul id="menu"></ul>
 
@@ -166,7 +166,7 @@ For a complete reference on how to bind the PanelBar to different service end-po
 
 The example below demonstrates the basic approach to build a Menu by using HTML markup.
 
-###### Example
+
 
     <ul id="MenuID">
         <li>root item 1</li>
@@ -188,7 +188,7 @@ The example below demonstrates the basic approach to build a Menu by using HTML 
 
 To create a Kendo UI Menu based on the example above, elaborate on the DOM elements in the way demonstrated by the code below.
 
-###### Example
+
 
     <ul id="MenuID" class="k-widget k-menu">
         <li class="k-item k-state-default"><span class="k-link">root item 1</span></li>
@@ -222,7 +222,7 @@ The basic emphasis is on the following changes:
 
 Once a menu group is opened, the `ul.k-group` element is wrapped by a `div.k-animation-container` and the DOM structure is transformed in the way demonstrated below.
 
-###### Example
+
 
     <li class="k-item k-state-default">
         <span class="k-link">root item 2
@@ -244,7 +244,7 @@ By default, the Menu uses a slide animation to expand sub-items on a mouse hover
 
 The example below demonstrates how to change Menu animation and open behavior.
 
-###### Example
+
 
     <ul id="menu"></ul>
 
@@ -268,7 +268,7 @@ For more information on configuring Menu items, see the [Menu API demos](http://
 
 The example below demonstrates how to add a new root Menu item.
 
-###### Example
+
 
     <ul id="menu"></ul>
 
@@ -286,7 +286,7 @@ The example below demonstrates how to add a new root Menu item.
 
 The Menu renders as a `<ul>` element and expands horizontally by default. If a horizontal Menu is wider than the total width of its root items, a blank space will remain visible on the right. To remove this space, use the CSS rules in the example below.
 
-###### Example
+
 
     #menu-id /* for a specific menu instance */
     ,
@@ -297,7 +297,7 @@ The Menu renders as a `<ul>` element and expands horizontally by default. If a h
 
 In left-to-right layouts, shrinking the horizontal Menu will make the border of the last root item touch the right border of the Menu. The last item border can be removed as shown int he example below.
 
-###### Example
+
 
     #menu-id > .k-last /* for a specific menu instance */
     ,

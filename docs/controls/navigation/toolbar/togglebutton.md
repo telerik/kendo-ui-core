@@ -16,7 +16,7 @@ To define a Toggle Button, set the `togglable` property of the button to `true`.
 
 The following example demonstrates how to define a Toggle Button in the ToolBar widget.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

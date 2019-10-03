@@ -10,7 +10,7 @@ slug: howto_edit_records_using_touchendonmobile_scheduler
 
 The following example demonstrates how to edit an Scheduler event by using `touchend` on mobile devices.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

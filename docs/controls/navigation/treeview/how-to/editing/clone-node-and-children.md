@@ -19,7 +19,7 @@ To achieve this behavior:
 
 The following example demonstrates how to copy the selected node together with its children.
 
-###### Example
+
 
 ```dojo
     <p><button class="k-button" id="cloneNode">Clone selected node</button></p>
@@ -80,7 +80,7 @@ The following example demonstrates how to copy the selected node together with i
 
 The following example provides a variation of the previous approach and demonstrates how to copy the right-clicked node. It relies on a Context Menu click instead of a selection.
 
-###### Example
+
 
 ```dojo
 <div id="treeview"></div>

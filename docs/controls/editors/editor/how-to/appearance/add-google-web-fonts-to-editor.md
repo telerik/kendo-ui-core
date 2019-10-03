@@ -10,7 +10,7 @@ slug: howto_add_google_webfonts_editor
 
 The following example demonstrates how to include Google Web Fonts to the Kendo UI Editor.
 
-###### Example
+
 
 ```dojo
 <textarea id="editor" rows="10" cols="30" style="width:740px;height:440px">

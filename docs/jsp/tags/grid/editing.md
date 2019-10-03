@@ -16,7 +16,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 1** Define a command column for the `Edit` and `Destroy` commands.
 
-###### Example
+
 
 	       <kendo:grid name="grid">
 		        <kendo:grid-columns>
@@ -35,7 +35,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 2** Set the editing mode to `InLine`.
 
-###### Example
+
 
         <kendo:grid name="grid">
     		<kendo:grid-editable mode="inline"/>
@@ -55,7 +55,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 3** Add the `Create` command to the Grid toolbar.
 
-###### Example
+
 
         <kendo:grid name="grid">
 			<kendo:grid-toolbar>
@@ -78,7 +78,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 4** Specify the `parameterMap` and the action methods which will handle the `Create`, `Update`, and `Destroy` operations.
 
-###### Example
+
 
    		<kendo:grid name="grid">
 			<kendo:grid-toolbar>
@@ -116,7 +116,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 5** Specify the properties of the model as well as the unique identifier (primary key).
 
-###### Example
+
 
         <kendo:grid name="grid">
 			<kendo:grid-toolbar>
@@ -163,7 +163,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 6** Implement the `Read` action method.
 
-###### Example
+
 
 		@Autowired
 		private ProductDao product;
@@ -175,7 +175,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 7** Implement the `Create` action method.
 
-###### Example
+
 
 		@RequestMapping(value = "/editing-inline/create", method = RequestMethod.POST)
     	public @ResponseBody Product create(@RequestBody Map<String, Object> model) {
@@ -193,7 +193,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 8** Implement the `Update` action method.
 
-###### Example
+
 
         @RequestMapping(value = "/editing-inline/update", method = RequestMethod.POST)
 		public @ResponseBody Product update(@RequestBody Map<String, Object> model) {
@@ -213,7 +213,7 @@ To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (usi
 
 **Step 9** Implement the `Destroy` action method.
 
-###### Example
+
 
         @RequestMapping(value = "/editing-inline/destroy", method = RequestMethod.POST)
     	public @ResponseBody Product destroy(@RequestBody Map<String, Object> model) {

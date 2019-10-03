@@ -24,7 +24,7 @@ To retrieve and upload the files and directories, the image browser needs a serv
 
 The image browser tool can be configured through the [`imagebrowser`](/api/javascript/ui/editor/configuration/imagebrowser) configuration option.
 
-###### Example
+
 
        $(document).ready(function(){
          $("#editor").kendoEditor({

@@ -10,7 +10,7 @@ slug: howto_declaratively_initialize_with_templates_combobox
 
 The following example demonstrates how to declaratively initialize a Kendo UI ComboBox with templates.
 
-###### Example
+
 
 ```dojo
   <div id="example">

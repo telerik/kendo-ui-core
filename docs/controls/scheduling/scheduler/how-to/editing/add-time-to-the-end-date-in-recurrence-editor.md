@@ -10,7 +10,7 @@ slug: howto_add_time_to_the_end_date_of_a_recurring_event_scheduler
 
 The following example demonstrates how to format the end date of a recurring event in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
   <div id="example" class="k-content">

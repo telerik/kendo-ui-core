@@ -11,7 +11,7 @@ You might need to list a great number of items in the TreeView of your AngularJS
 
 The following example demonstrates how to scroll to a particular item of the TreeView that has a given `id`.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="KendoDemos">

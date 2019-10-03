@@ -10,7 +10,7 @@ slug: howto_configure_deffered_value_binding_combobox
 
 The following example demonstrates how to configure a deferred value binding in a Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
   <h2>Combobox Server Side Filter</h2>

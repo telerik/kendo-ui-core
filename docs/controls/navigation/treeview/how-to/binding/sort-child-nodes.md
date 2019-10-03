@@ -9,7 +9,7 @@ slug: howto_sortchildnodes_treeview
 
 The following example demonstrates how to programmatically change the order of all TreeView nodes.
 
-###### Example
+
 
 ```dojo
       <div>

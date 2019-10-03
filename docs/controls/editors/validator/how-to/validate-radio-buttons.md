@@ -10,7 +10,7 @@ slug: howto_validateradiowithonemessage_validator
 
 The following example demonstrates how to validate a group of Kendo UI radio buttons and show only one error message.
 
-###### Example
+
 
 ```dojo
 <div id="form">

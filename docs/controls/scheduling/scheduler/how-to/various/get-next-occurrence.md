@@ -10,7 +10,7 @@ slug: howto_getthe_next_occurance_scheduler
 
 The following example demonstrates how to get `nextOccurrence` of the Kendo UI `SchedulerEvent` in the Scheduler.
 
-###### Example
+
 
 ```dojo
     <script>

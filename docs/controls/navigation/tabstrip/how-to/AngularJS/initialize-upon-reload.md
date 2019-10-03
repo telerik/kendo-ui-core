@@ -19,7 +19,7 @@ To ensure that the Kendo UI TabStrip is properly initialized, choose one of the 
 >
 > It is not recommended to create Kendo UI widgets by using `ng-repeat`. Use the Kendo UI DataSource instead. For more information, refer to the article on [troubleshooting]({% slug ngrepeat_ngif_ngbind_support_angularjs %}) as well as on the [DataSource abstraction]({% slug datasource_updates_angularjs_directives %}) in AngularJS.
 
-###### Example
+
 
 ```dojo
     <div ng-app="foo">

@@ -13,7 +13,7 @@ Your project might require you to hide the validation tooltip and add borders ar
 
 The following example demonstrates how to achieve this behavior and add a red border around the non-validated elements.
 
-###### Example
+
 
 ```dojo
     <style scoped>

@@ -9,7 +9,7 @@ slug: howto_keeppanesizepercentages_splitter
 
 The example below demonstrates how to keep the Kendo UI Splitter pane sizes in percentages upon user resizes.
 
-###### Example
+
 
 ```dojo
     <div id="splitter" style="height: 400px">
