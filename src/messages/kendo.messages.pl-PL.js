@@ -791,7 +791,7 @@ if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
 kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
   "errors": {
-    "shiftingNonblankCells": "Nie można wstawić komórek ze względu na możliwą utratę danych. Wybierz inne miejsce docelowe lub usuń dane z końca arkusza."
+    "shiftingNonblankCells": "Nie można wstawić komórek ze względu na możliwą utratę danych. Wybierz inne miejsce docelowe lub usuń dane z końca arkusza.",
     "filterRangeContainingMerges": "Nie można utworzyć filtra w przedziale zawierającym scalenia.",
     "validationError": "Wprowadzona wartość łamie reguły walidacji dla tej komórki."
   },
