@@ -14,7 +14,7 @@ It is possible to override this behavior.
 
 The following example demonstrates how to force the toolbar to be always visible.
 
-###### Example
+
 
 ```dojo
     <p>The Editor toolbar will remain visible after blurring the widget.</p>

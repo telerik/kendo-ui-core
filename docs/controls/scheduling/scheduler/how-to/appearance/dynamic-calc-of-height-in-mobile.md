@@ -10,7 +10,7 @@ slug: howto_calculate_scheduler_height_dunamically_onmobile_scheduler
 
 The following example demonstrates how to dynamically calculate the height of the Kendo UI Scheduler widget on a mobile device.
 
-###### Example
+
 
 ```dojo
 <div data-init="initLoginView" data-role="view" id="login"  data-stretch="true">

@@ -26,7 +26,7 @@ One of the highly anticipated features in HTML5 is the arrival of new [HTML5 for
 
 To use HTML5 form validation, these attributes are added to simple HTML input elements, as shown below.
 
-###### Example
+
 
     <input type="email" required>
 
@@ -54,7 +54,7 @@ The Validator works with the standard HTML5 form validation attributes. It allow
 
 To use the Validator, define an HTML form that includes one or more of these new attributes.
 
-###### Example
+
 
     <div id="myform">
         <input type="text" name="firstName" required />
@@ -66,7 +66,7 @@ To use the Validator, define an HTML form that includes one or more of these new
 
 You need to add a Validator to the page. Add the code from the following example in a JavaScript block on the page.
 
-###### Example
+
 
     // Initialize the Kendo UI Validator on your "form" container
     // (NOTE: Does NOT have to be a HTML form tag)
@@ -90,43 +90,43 @@ For detailed information, refer to the [live demo of the Validator](http://demos
 
 The `required` rule requires that the element has a value.
 
-###### Example
+
 
      <input type="text" name="firstName" required />
 
 The `pattern` rule constrains the value to match a specific regular expression.
 
-###### Example
+
 
      <input type="text" name="twitter" pattern="https?://(?:www\.)?twitter\.com/.+i" />
 
 The `max/min` rule constrains the minimum and maximum numeric values that can be entered.
 
-###### Example
+
 
      <input type="number" name="age" min="1" max="42" />
 
 The `step` rule, when used in combination with the `min` and `max` attributes, constrains the granularity of the values that can be entered.
 
-###### Example
+
 
      <input type="number" name="age" min="1" max="100" step="2" />
 
 The `url` rule constrains the value to a valid URL format.
 
-###### Example
+
 
      <input type="url" name="url" />
 
 The `email` rule constrains the value to a valid email format.
 
-###### Example
+
 
      <input type="email" name="email" />
 
 The `date` rule constrains the value to a valid date format. To validate the input, use [`kendo.parseDate`](/api/javascript/kendo/methods/parsedate).
 
-###### Example
+
 
      <input type="date" name="date" />
      // or
@@ -140,7 +140,7 @@ Besides the built-in validation rules, you can set custom rules with the Kendo U
 
 * Each custom rule is run for each element in a form. If there are multiple inputs in the form and the validation should only apply to a specific input, the custom validation code should check the input before validating.
 
-###### Example
+
 
         custom: function (input) {
             if (input.is("[name=firstName]")) {
@@ -171,7 +171,7 @@ The Validator provides default messages which map to the built-in validation rul
 
 The following example demonstrates how to define custom messages when the validation rules are not fulfilled.
 
-###### Example
+
 
     <form id="myform">
         <input name="username" required /> <br />
@@ -221,7 +221,7 @@ These attributes will be checked before applying the message from the `messages`
 
 The following example demonstrates how the set multiple `data-[rule]-msg` attributes allow a field to have different messages for each different validation rule.
 
-###### Example
+
 
     <form id="myform">
         <input type="url" required data-required-msg="You need to enter a URL" data-url-msg="This url is invalid">
@@ -234,7 +234,7 @@ The following example demonstrates how the set multiple `data-[rule]-msg` attrib
 
 The following example demonstrates how to use the `validationMessage` attribute to specify a custom validation message.
 
-###### Example
+
 
     <form id="myform">
         <input type="tel" pattern="\d{10}" validationMessage="Plase enter a ten digit phone number" value="123"> <br />
@@ -247,7 +247,7 @@ The following example demonstrates how to use the `validationMessage` attribute 
 
 Validation messages can also be defined for custom rules.
 
-###### Example
+
 
     <form id="myform">
         <input name="username" /> <br />
@@ -286,7 +286,7 @@ Ideally, the Kendo UI Validator places its tooltips besides the validated input.
 
 The following example demonstrates a specific Tooltip placement. The Tooltip remains outside the AutoComplete widget after enhancement.
 
-###### Example  
+  
 
      <div id="myform">
          <input type="text" id="name" name="name" required>

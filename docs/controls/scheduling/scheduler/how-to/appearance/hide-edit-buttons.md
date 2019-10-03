@@ -10,7 +10,7 @@ slug: howto_hidethe_editbutons_scheduler
 
 The following example demonstrates how to hide the **Edit** button of the Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

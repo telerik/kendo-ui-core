@@ -19,7 +19,7 @@ To initialize the Dialog, use virtually any DOM element. During initialization, 
 
 The example below demonstrates how to create the widget from an HTML element, which contains the content of the Dialog, and initialize it by using a jQuery selector.
 
-###### Example
+
 
     <div id="dialog">
         Content of the Dialog
@@ -37,7 +37,7 @@ By default, the Dialog is created as a child of the `<body>` element.
 
 The example below demonstrates the possible markup before the initialization of the Kendo UI Dialog.
 
-###### Example
+
 
 	<body>
 		<div id="container1">
@@ -53,7 +53,7 @@ The example below demonstrates the possible markup before the initialization of 
 
 The following example demonstrates how the page markup from the previous example changes after the initialization of the Kendo UI Dialog, when the widget is moved to become a child of the `<body>` and its additional markup&mdash;the wrapper and the title bar&mdash;is generated.
 
-###### Example
+
 
 	<body>
 		<div id="container1">
@@ -87,7 +87,7 @@ Some of the properties that can be overridden and controlled are:
 
 The example below demonstrates how to create a non-modal Dialog that contains two action buttons and no **Close** button.
 
-###### Example
+
 
     $("#dialog").kendoDialog({
         width: "400px",
@@ -110,7 +110,7 @@ The order of the values in the actions array determines the order in which the a
 
 The example below demonstrates how to set three action buttons in a Dialog with a `stretched` layout. The last button has an `action` event handler attached and is set as `primary`.
 
-###### Example
+
 
       $("#dialog").kendoDialog({
           width: "400px",
@@ -138,7 +138,7 @@ Usually, a Dialog is opened as a result of a user action rather than of the `loa
 
 The example below demonstrates how to open a Kendo UI Dialog on a button click.
 
-###### Example
+
 
     <div id="dialog">
         Content of the Dialog
@@ -147,7 +147,7 @@ The example below demonstrates how to open a Kendo UI Dialog on a button click.
 
 The example below demonstrates how to initialize a Dialog, center, and configure the button click action.
 
-###### Example
+
 
     $(document).ready(function(){
         $("#dialog").kendoDialog({
@@ -185,7 +185,7 @@ Unlike most widgets, the Dialog is completely removed from the DOM when [destroy
 
 To select only the Dialog content that is visible during printing and hide the rest of the page content, use the CSS code demonstrated in the following example. It assumes that only one Dialog instance exists on the page. If there are multiple Dialog instances on the page and only one needs to be printed, replace the `.k-dialog` class by a custom CSS class that is manually applied to the wrapper element of the Dialog.
 
-###### Example
+
 
     @media print
     {
@@ -224,7 +224,7 @@ For more information, refer the API documentation for:
 
 The example below demonstrates how to call the Kendo UI alert, confirm, and prompt dialogs.
 
-###### Example
+
 
     kendo.alert("String to alert");
     kendo.confirm("Continue?");
@@ -232,7 +232,7 @@ The example below demonstrates how to call the Kendo UI alert, confirm, and prom
 
 It is not possible to interrupt the current thread for the confirm and prompt dialogs the way the browser can. To achieve this behavior, use promises.
 
-###### Example
+
 
     kendo.confirm("Continue?")
         .done(function() { console.log("Ok") })
@@ -250,7 +250,7 @@ To refer to an existing Dialog instance, use the [`jQuery.data()`](http://api.jq
 
 The example below demonstrates how to access an existing Dialog instance.
 
-###### Example
+
 
     var dialog = $("#dialog").data("kendoDialog");
 
@@ -258,7 +258,7 @@ The example below demonstrates how to access an existing Dialog instance.
 
 Similar to other Kendo UI widgets, the Dialog has two DOM elements, which can be accessed and used to customize the appearance of the widget or its content. These are the [`wrapper` and `element`]({% slug widgetwrapperandelement_references_gettingstarted %}) elements of the widget, which are provided as fields of the widget object. In specific scenarios, the Dialog wrapper can be used to tweak the position or the size of the widget although this is normally done through the API and the [`setOptions` method](/api/javascript/ui/widget/methods/setoptions).
 
-###### Example
+
 
     var dialog = $("#dialog").data("kendoDialog");
     var dialogWrapper = dialog.wrapper;
@@ -275,7 +275,7 @@ A scrollbar of an element below the Dialog popup might be displayed incorrectly 
 
 Apply the CSS style to the scrollbar container below the Dialog as demonstrated in the example below.
 
-###### Example
+
 
     -webkit-transform: translate3d(0, 0, 0);
 

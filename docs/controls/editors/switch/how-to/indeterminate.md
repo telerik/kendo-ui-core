@@ -13,7 +13,7 @@ The indeterminate state of the Switch is used only for visual representation and
 
 The following example demonstrates how to set the Switch in an indeterminate state.
 
-###### Example
+
 
 ```dojo
   <style>

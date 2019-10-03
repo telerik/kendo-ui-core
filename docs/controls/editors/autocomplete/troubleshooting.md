@@ -1,24 +1,24 @@
 ---
-title: Common Issues
-page_title: Common Issues | Kendo UI AutoComplete
+title: Troubleshooting
+page_title: jQuery AutoComplete Documentation | Troubleshooting | Kendo UI AutoComplete
 description: "Learn how to deal with issues you may encounter while using the Kendo UI AutoComplete widget."
 previous_url: /controls/editors/autocomplete/troubleshooting
 slug: troubleshooting_autocomplete_widget
+position: 60
 ---
 
-# Common Issues
+# Troubleshooting
 
-This page provides solutions for common issues you might encounter while working with the Kendo UI AutoComplete widget.
+This article provides solutions for issues you might encounter while working with the Kendo UI AutoComplete widget.
 
-## Chrome AutoFill Popup
+## The Chrome browser performs auto-fill popup issues
 
-`Chrome` browser ignores the `autocomplete="off"` and ignores any value set to the attribute if the input name matches one of the predefined autofill fields.
+If the input name matches any of the predefined autofill fields, the Chrome browser ignores the `autocomplete="off"` setting and also the value that is set to the attribute.
 
 **Solution**
 
-Toggle the name attribute on `focus` and `focusout`.
-
-###### Example
+1. Use a `name` attribute that is not contained in the predefined auto-fill fields of Chrome.
+1. Toggle the `name` attribute on `focus` and `focusout`.
 
     <form>
         <input name="city" ID="City" required />
@@ -47,11 +47,6 @@ Toggle the name attribute on `focus` and `focusout`.
         });
     </script>
 
-
-**Solution**
-
-Use a `name` attribute that is not contained in the predefined autofill fields of Chrome.
-
 ## See Also
 
-* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
+* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)

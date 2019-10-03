@@ -10,7 +10,7 @@ slug: howto_checknodeprogramatically_treeview
 
 The following example demonstrates how to programmatically select the checkbox of a TreeView node.
 
-###### Example
+
 
 ```dojo
   <div id="tree"></div>

@@ -9,7 +9,7 @@ slug: howto_stack_static_tothe_leftor_right_notification
 
 The example below demonstrates how to stack static notifications to the left or to the right.
 
-###### Example
+
 
 ```dojo
 <style>

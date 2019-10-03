@@ -10,7 +10,7 @@ slug: howto_customize_no_events_days_content_scheduler
 
 The following example demonstrates how to customize the content of days with no events in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="example">

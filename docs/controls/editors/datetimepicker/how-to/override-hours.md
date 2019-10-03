@@ -9,7 +9,7 @@ slug: howto_override_hours_inpopup_datetimepicker
 
 The following example demonstrates how to override hours in the popup of the DateTimePicker.
 
-###### Example
+
 
 ```dojo
 <input id="datetimepicker" />

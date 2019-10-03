@@ -18,7 +18,7 @@ It supports configurable options for the format, minimum and maximum time, and i
 
 To initialize the DatePicker, use an `id` selector.
 
-###### Example
+
 
     <input id="timePicker" />
 
@@ -45,7 +45,7 @@ The DatePicker provides default configuration options that can be set during ini
 
 The following example demonstrates how to define the selected, minimum, and maximum times.
 
-###### Example
+
 
     <input id="timePicker" />
 
@@ -63,7 +63,7 @@ The TimePicker sets the value only if the entered time is valid and within the d
 
 The following example demonstrates how to define the time format.
 
-###### Example
+
 
     <input id="timePicker" />
 
@@ -77,7 +77,7 @@ The following example demonstrates how to define the time format.
 
 The following example demonstrates how to define the interval in minutes between values in the list.
 
-###### Example
+
 
     <input id="timePicker" />
 

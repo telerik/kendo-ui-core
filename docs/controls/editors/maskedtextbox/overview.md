@@ -86,7 +86,7 @@ Based on the current culture, the following mask literals are globalized:
 
 The MaskedTextBox enables you to define custom mask rules during initialization. To customize a mask rule, define it in the [`rules`](/api/web/maskedtextbox#configuration-rules) option. The widget supports rules defined as regular expression or a function.
 
-###### Example
+
 
     <input id="maskedtextbox">
 

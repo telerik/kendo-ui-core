@@ -10,7 +10,7 @@ slug: howto_add_events_programatically_scheduler
 
 The following example demonstrates how to programmatically add an event to the Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
     <div id="example" class="k-content">

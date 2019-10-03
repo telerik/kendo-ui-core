@@ -10,7 +10,7 @@ slug: howto_add_max_length_validation_editor
 
 The following example demonstrates how to define custom Kendo UI validators to check the length of the text content or the length of the HTML content in a Kendo UI Editor.
 
-###### Example
+
 
 ```dojo
   <form id="employeeForm" novalidate="novalidate">

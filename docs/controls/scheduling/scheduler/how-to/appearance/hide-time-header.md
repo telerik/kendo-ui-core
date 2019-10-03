@@ -18,7 +18,7 @@ You can achieve this behavior in:
 
 The following example demonstrates how to hide the time headers of a grouped Kendo UI Scheduler view.
 
-###### Example
+
 
 ```dojo
 <body>
@@ -132,7 +132,7 @@ $(function() {
 
 The following example demonstrates how to hide the time headers of an ungrouped Kendo UI Scheduler view.
 
-###### Example
+
 
 ```dojo
 <body>

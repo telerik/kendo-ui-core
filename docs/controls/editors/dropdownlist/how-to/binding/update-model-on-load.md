@@ -10,7 +10,7 @@ slug: howto_update_mvvm_model_onload_dropdownlist
 
 The following example demonstrates how to update an MVVM-bound model on load in a Kendo UI DropDownList.
 
-###### Example
+
 
 ```dojo
   <div id="example">

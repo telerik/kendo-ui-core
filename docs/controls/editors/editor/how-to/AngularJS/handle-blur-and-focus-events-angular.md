@@ -20,7 +20,7 @@ The Editor can be initialized from a `<textarea>` HTML element&mdash;[the classi
 
 The following example demonstrates how to handle the `blur` and the `focus` events in AngularJS when the Editor is in the classic mode.
 
-###### Example
+
 
 ```dojo
     <style>
@@ -67,7 +67,7 @@ The Editor can be initialized from a `<div>` HTML element&mdash;[the inline mode
 
 The following example demonstrates how to handle the `blur` and the `focus` events in AngularJS when the Editor is in the inline mode.
 
-###### Example
+
 
 ```dojo
     <style>

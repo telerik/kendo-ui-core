@@ -9,7 +9,7 @@ slug: howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox
 
 The following example demonstrates how to implement [a custom MVVM binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the mask option of the MaskedTextBox.
 
-###### Example
+
 
 ```dojo
 <div id="example">

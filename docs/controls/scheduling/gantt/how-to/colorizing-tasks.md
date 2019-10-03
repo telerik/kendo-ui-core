@@ -9,7 +9,7 @@ slug: howto_colorize_tasks_gantt
 
 The example below demonstrates how to colorize each task based on a condition in the Kendo UI Gantt widget.
 
-###### Example
+
 
 ```dojo
     <div id="gantt"></div>

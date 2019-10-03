@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create a [data source](/api/php/Kendo/Data/DataSource) for the tasks and set its [`transport`](/api/php/Kendo/Data/DataSource#transport) and [`schema`](/api/php/Kendo/Data/DataSource#schema).
 
-###### Example
+
 
         <?php
         $taskTransport = new \Kendo\Data\DataSourceTransport();
@@ -141,7 +141,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) for the dependencies and set its [`transport`](/api/php/Kendo/Data/DataSource#transport) and [`schema`](/api/php/Kendo/Data/DataSource#schema).
 
-###### Example
+
 
         <?php
         $dependencyTransport = new \Kendo\Data\DataSourceTransport();
@@ -224,7 +224,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 4** Create a [Gantt](/api/php/Kendo/UI/Gantt) and set its [data source](/api/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/php/Kendo/UI/Gantt#dependencies).
 
-###### Example
+
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -235,7 +235,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 5** Output the gantt by echoing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
-###### Example
+
 
         <?php
         echo $gantt->render();
@@ -249,7 +249,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -257,7 +257,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Retrieve all records from the `GanttTasks` table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT *, strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start, strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End FROM GanttTasks');
@@ -268,7 +268,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 <!--*-->
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -284,7 +284,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -292,7 +292,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Retrieve all records from the `GanttDependencies` table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT * FROM GanttDependencies');
@@ -302,7 +302,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -318,7 +318,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -326,7 +326,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured so as to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -334,7 +334,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Get the current operation type, available as the `type` query string parameter.
 
-###### Example
+
 
         <?php
         $type = $_GET['type'];
@@ -343,7 +343,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 <!--_-->
 **Step 5** Declare a variable which will be returned as a result of the operation.
 
-###### Example
+
 
         <?php
         $result = null;
@@ -351,7 +351,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 6** Implement `create`.
 
-###### Example
+
 
         <?php
         if ($type == 'create') {
@@ -388,7 +388,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 7** Implement `read`.
 
-###### Example
+
 
         <?php
         if ($type == 'read') {
@@ -401,7 +401,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 <!--*-->
 **Step 8** Implement `update`.
 
-###### Example
+
 
         <?php
         if ($type == 'update') {
@@ -436,7 +436,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 9** Implement `destroy`.
 
-###### Example
+
 
         <?php
         if ($type == 'destroy') {
@@ -458,7 +458,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 10** Return the result of the operation as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -473,7 +473,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -481,7 +481,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured so as to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -489,7 +489,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Get the current operation type, available as the `type` query string parameter.
 
-###### Example
+
 
         <?php
         $type = $_GET['type'];
@@ -498,7 +498,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 <!--_-->
 **Step 5** Declare a variable which will be returned as a result of the operation.
 
-###### Example
+
 
         <?php
         $result = null;
@@ -506,7 +506,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 6** Implement `create`.
 
-###### Example
+
 
         <?php
         if ($type == 'create') {
@@ -538,7 +538,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 7** Implement `read`.
 
-###### Example
+
 
         <?php
         if ($type == 'read') {
@@ -550,7 +550,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 8** Implement `destroy`.
 
-###### Example
+
 
         <?php
         if ($type == 'destroy') {
@@ -572,7 +572,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 9** Return the result of the operation as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -595,7 +595,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $taskTransport = new \Kendo\Data\DataSourceTransport();
@@ -714,7 +714,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) for the dependencies and configure it.
 
-###### Example
+
 
         <?php
         $dependencyTransport = new \Kendo\Data\DataSourceTransport();
@@ -799,7 +799,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 4** Create a [Gantt](/api/php/Kendo/UI/Gantt) and set its [data source](/api/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/php/Kendo/UI/Gantt#dependencies).
 
-###### Example
+
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -810,7 +810,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 5** Output the Gantt by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $gantt->render();
@@ -822,7 +822,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 2** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -830,7 +830,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 3** Create a new instance of the `DataSourceResult`.
 
-###### Example
+
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -838,7 +838,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 4** Get the current operation type, available as the `type` query string parameter.
 
-###### Example
+
 
         <?php
         $type = $_GET['type'];
@@ -847,7 +847,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 <!--_-->
 **Step 5** Declare a variable which will be returned as a result of the operation.
 
-###### Example
+
 
         <?php
         $data = null;
@@ -855,7 +855,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 6** Implement `create`.
 
-###### Example
+
 
         <?php
         if ($type == 'create') {
@@ -868,7 +868,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 7** Implement `read`.
 
-###### Example
+
 
         <?php
         if ($type == 'read') {
@@ -881,7 +881,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 8** Implement `update`.
 
-###### Example
+
 
         <?php
         if ($type == 'update') {
@@ -894,7 +894,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 9** Implement `destroy`.
 
-###### Example
+
 
         <?php
         if ($type == 'destroy') {
@@ -905,7 +905,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 10** Return the result of the operation as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -920,13 +920,13 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once '../lib/DataSourceResult.php'; ?>
 
 **Step 3** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -934,7 +934,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 4** Create a new instance of the `DataSourceResult`.
 
-###### Example
+
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -942,7 +942,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 5** Get the current operation type, available as the `type` query string parameter.
 
-###### Example
+
 
         <?php
         $type = $_GET['type'];
@@ -951,7 +951,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 <!--_-->
 **Step 6** Declare a variable which will be returned as a result of the operation.
 
-###### Example
+
 
         <?php
         $data = null;
@@ -959,7 +959,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 7** Implement `create`.
 
-###### Example
+
 
         <?php
         if ($type == 'create') {
@@ -972,7 +972,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 8** Implement `read`.
 
-###### Example
+
 
         <?php
         if ($type == 'read') {
@@ -984,7 +984,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 9** Implement `destroy`.
 
-###### Example
+
 
         <?php
         if ($type == 'destroy') {
@@ -995,7 +995,7 @@ Below are listed the steps for you to follow when configuring the Gantt for remo
 
 **Step 10** Return the result of the operation as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

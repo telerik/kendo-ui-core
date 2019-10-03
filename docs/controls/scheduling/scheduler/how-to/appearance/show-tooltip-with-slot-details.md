@@ -10,7 +10,7 @@ slug: howto_showtooltipwith_additionalinformation_overslots_scheduler
 
 The following example demonstrates how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
 <div id="example">

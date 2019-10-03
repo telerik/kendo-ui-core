@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI PDFVi
 
 **Step 2** Add the [PDF.JS Processing](https://mozilla.github.io/pdf.js/) scripts.
 
-###### Example
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <script>
@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI PDFVi
 
 **Step 3** Create a [PDFViewer](/api/php/Kendo/UI/PDFViewer).
 
-###### Example
+
 
     <?php
     $pdfjs = new \Kendo\UI\PDFViewerPdfjsProcessing();
@@ -52,7 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI PDFVi
 
 **Step 3** Output the PDFViewer by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $pdfViewer->render();
@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI PDFVi
 
 You are able to reference an existing PDFViewer instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [PDFViewer API](/api/javascript/ui/pdfviewer#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $pdfjs = new \Kendo\UI\PDFViewerPdfjsProcessing();

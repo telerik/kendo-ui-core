@@ -9,7 +9,7 @@ slug: howto_usecompactuimode_upload
 
 The following example demonstrates how to hide the selected files for upload from the user interface and render only the **Select files** button without additional UI elements in the Kendo UI Upload.
 
-###### Example
+
 
 ```dojo
   <style>

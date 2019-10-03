@@ -2,7 +2,7 @@
 title: Export
 page_title: jQuery Chart Documentation | Export | Kendo UI
 description: "Get started with the jQuery Chart by Kendo UI and set its export functionality to produce PDF, SVG, and Images."
-previous_url: /controls/charts/export
+previous_url: /controls/charts/chart/export
 slug: exporting_kendoui_chart_widget
 position: 3
 ---
@@ -339,7 +339,7 @@ The following example demonstrates how to handle custom fonts by embedding a cus
 
 All [known limitations of the Drawing library]({% slug drawingofhtmlelements_drawingapi %}#known-limitations) apply to the PDF export of the Chart.
 
-The following limitations are the most important among the listed ones for exporting the Chart to PDF: 
+The following limitations are the most important among the listed ones for exporting the Chart to PDF:
 
 * The maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
 * Older browsers, such as Internet Explorer 9 and Safari, require the implementation of a server proxy. For more information, refer to the [`proxyUrl`](/api/javascript/ui/grid/configuration/pdf.proxyurl) API reference.

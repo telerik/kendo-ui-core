@@ -10,7 +10,7 @@ slug: scroll_to_given_time_slot
 
 The following example demonstrates how to scroll to a given time slot by using JavaScript in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
     <div style="width: 50%; margin-left: auto; margin-right: auto;">

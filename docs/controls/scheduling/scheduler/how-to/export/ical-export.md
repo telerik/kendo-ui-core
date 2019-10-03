@@ -10,7 +10,7 @@ slug: howto_exportto_ical_scheduler
 
 The following example demonstrates how to extract Kendo UI Scheduler events to an `.ical` file.
 
-###### Example
+
 
 ```dojo
     <script src="https://rawgit.com/nwcell/ics.js/master/ics.js"></script>

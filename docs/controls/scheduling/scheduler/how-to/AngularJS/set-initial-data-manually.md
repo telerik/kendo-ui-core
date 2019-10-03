@@ -9,7 +9,7 @@ slug: howto_set_intial_data_manually_angularjs_scheduler
 
 The following example demonstrates how to manually set initial data in the Kendo UI Scheduler when using AngularJS.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="KendoDemos">

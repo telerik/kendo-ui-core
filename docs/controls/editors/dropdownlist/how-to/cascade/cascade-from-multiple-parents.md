@@ -12,7 +12,7 @@ Depending on your project, you might need to cascade DropDownLists from multiple
 
 The following example demonstrates how to achieve this behavior.
 
-###### Example
+
 
 ```dojo
 <select id="region" name="" id="region"></select><br />

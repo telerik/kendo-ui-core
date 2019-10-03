@@ -10,7 +10,7 @@ position: 1
 
 The following example demonstrates how to implement [a custom AngularJS directive](https://docs.angularjs.org/guide/directive) to get the unmasked value of the MaskedTextBox.
 
-###### Example
+
 
 ```dojo
 <div id="example" ng-app="KendoDemos">

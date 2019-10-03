@@ -11,7 +11,7 @@ Your project might require you to include a collection of form fields as [metada
 
 The output from the commonly used [`jQuery.serializeArray`](http://api.jquery.com/serializeArray/) helper is not directly usable in the [`upload`](/api/javascript/ui/upload/events/upload) event and needs to be processed. The following example demonstrates how to achieve this.
 
-###### Example
+
 
 ```dojo
     <form id="form"/>
@@ -42,7 +42,7 @@ The output from the commonly used [`jQuery.serializeArray`](http://api.jquery.co
 
 The network request is expected to look like the one shown below.
 
-###### Example
+
 
 ```
 ------WebKitFormBoundaryXLTaUOP1FzKWJJlD

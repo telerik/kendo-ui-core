@@ -18,7 +18,7 @@ When the `useNativeScrolling` configuration option is set to `true`, the view he
 
 The example below demonstrates a hybrid application with the native scrolling configuration option enabled.
 
-###### Example
+
 
     <div data-role="view">
         <header data-role="header">

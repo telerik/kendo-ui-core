@@ -10,7 +10,7 @@ slug: howto_showonlyalldayevents_scheduler
 
 The following example demonstrates how to show only all-day events in a Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
     <div id="example" class="k-content">

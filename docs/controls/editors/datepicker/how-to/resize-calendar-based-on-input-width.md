@@ -9,7 +9,7 @@ slug: howto_use_resize_calendar_basedon_input_width_datepicker
 
 The following example demonstrates how to resize the nested Kendo UI Calendar based on the width of the DatePicker input element.
 
-###### Example
+
 
 ```dojo
       <div id="example">

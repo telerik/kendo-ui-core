@@ -12,7 +12,7 @@ Your project might require you to show more events in the Scheduler.
 
 The following example demonstrates how to achieve this by increasing the height of the cells.
 
-###### Example
+
 
 ```dojo
     <style>

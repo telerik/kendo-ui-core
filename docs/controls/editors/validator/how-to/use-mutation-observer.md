@@ -12,7 +12,7 @@ Your project might require you to hide the validation tooltip and add borders ar
 
 The following example demonstrates how to achieve this behavior by using a `MutationObserver`.
 
-###### Example
+
 
 ```dojo
     <style scoped>

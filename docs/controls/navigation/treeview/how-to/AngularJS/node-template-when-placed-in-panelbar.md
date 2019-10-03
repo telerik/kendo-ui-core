@@ -11,7 +11,7 @@ Kendo UI offers template support in AngularJS applications for both its TreeView
 
 If you define a template through the `k-template` directive, it will not be mapped correctly to the TreeView. To work around this issue, define the template in a `<script type="text/x-kendo-template">` element. As a result, it will be programmatically assigned to the TreeView.
 
-###### Example
+
 
 ```dojo
 

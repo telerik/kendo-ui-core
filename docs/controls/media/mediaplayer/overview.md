@@ -42,7 +42,7 @@ When using local sources, consider the video formats supported by the different 
 
 Once the video files are ready, initialize the MediaPlayer by using the `div` element.
 
-###### Example
+
 
 ```dojo
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>
@@ -71,7 +71,7 @@ The MediaPlayer provides properties, methods, and events to match your specific 
 
 When you add multiple sources for the video, an **HD** button is automatically displayed in the bottom right corner, right next to the **FullScreen** one. This enables you to select your preferred quality.
 
-###### Example
+
 
 ```dojo
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>
@@ -102,7 +102,7 @@ To access an existing MediaPlayer instance, use the `.data()` jQuery method, exe
 
 The example below demonstrates how to access an existing MediaPlayer instance.
 
-###### Example
+
 
 ```dojo
 <button onclick="buttonClick();">Pause Video</button>
@@ -128,7 +128,7 @@ To implement your own **Playlist** structures, change the source of the MediaPla
 
 The example below demonstrates a basic way of changing the source of the MediaPlayer.
 
-###### Example
+
 
 ```javascript
 function buttonClick() {
@@ -155,7 +155,7 @@ The following list provides the built-in keyboard commands of the MediaPlayer:
 
 To localize the tooltip texts from the interface, use the configuration options of the MediaPlayer.
 
-###### Example
+
 
 ```dojo
 <div id="mediaplayer1" style="width:640px; height: 360px;"></div>

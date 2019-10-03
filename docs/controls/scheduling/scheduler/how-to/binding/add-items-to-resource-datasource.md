@@ -10,7 +10,7 @@ slug: howto_insert_items_in_resource_datasource_scheduler
 
 The following example demonstrates how to insert new items into a resource DataSource in the Scheduler.
 
-###### Example
+
 
 ```dojo
 <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>

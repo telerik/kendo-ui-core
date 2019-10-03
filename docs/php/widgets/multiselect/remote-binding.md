@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -56,7 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 3** Create a MultiSelect, configure its `dataTextField` option and set its `dataSource`.
 
-###### Example
+
 
         <?php
         $multiSelect = new \Kendo\UI\MultiSelect('MultiSelect');
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 4** Output the MultiSelect by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $multiSelect->render();
@@ -81,7 +81,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -89,7 +89,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Retrieve all records from the **Products** table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT * FROM Products');
@@ -124,7 +124,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -171,7 +171,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 3** Create a MultiSelect, configure its `dataTextField` option and set its `dataSource`.
 
-###### Example
+
 
         <?php
         $multiSelect = new \Kendo\UI\MultiSelect('MultiSelect');
@@ -182,7 +182,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 4** Output the MultiSelect by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $multiSelect->render();
@@ -194,13 +194,13 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
 
 **Step 3** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -208,7 +208,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 4** Create a new instance of the `DataSourceResult` class and call its `read` method.
 
-###### Example
+
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -219,7 +219,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 5** Return the result of the `read` method as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

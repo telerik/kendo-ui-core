@@ -18,7 +18,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 1** Set the edit mode to `InCell`.
 
-###### Example
+
 
         <kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 2** Add the `Create` and `Save` commands.
 
-###### Example
+
 
 		 <kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
@@ -49,7 +49,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 3** Specify the `parameterMap` and the action methods which will handle the `Create`, `Update` and `Destroy` operations.
 
-###### Example
+
 
 	       <kendo:grid name="grid">
 				<kendo:grid-editable mode="incell"/>
@@ -90,7 +90,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 4** Specify the property of the model which is the unique identifier (primary key).
 
-###### Example
+
 
     	<kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
@@ -134,7 +134,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 5** Enable the batch mode.
 
-###### Example
+
 
    		<kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
@@ -157,7 +157,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 6** Implement the `Read` action method.
 
-###### Example
+
 
 		@Autowired
 		private ProductDao product;
@@ -169,7 +169,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 7** Implement the `Create` action method.
 
-###### Example
+
 
         @RequestMapping(value = "/editing/create", method = RequestMethod.POST)
     	public @ResponseBody List<Product> create(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -193,7 +193,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 8** Implement the `Update` action method.
 
-###### Example
+
 
         @RequestMapping(value = "/editing/update", method = RequestMethod.POST)
     	public @ResponseBody List<Product> update(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -219,7 +219,7 @@ Below are listed the steps for you to follow when enabling this mode for the Ken
 
 **Step 9** Implement the `Destroy` action method.
 
-###### Example
+
 
 	    @RequestMapping(value = "/editing/destroy", method = RequestMethod.POST)
    		public @ResponseBody List<Product> destroy(@RequestBody ArrayList<Map<String, Object>> models) {

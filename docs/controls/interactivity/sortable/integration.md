@@ -40,7 +40,7 @@ The `hint` element of the Sortable is appended to the `<body>` element. As a res
 
 The example below demonstrates how to style the `hint` element, so it looks like the `row` element that is currently dragged.
 
-###### Example
+
 
     <div id="grid"></div>
     <script>
@@ -94,7 +94,7 @@ The editing functionality of the Kendo UI Grid is rendered through its [inline](
 
 If you use the `inline` or `popup` editing mode, set a more specific filter which excludes the item that is currently in editing mode, as demonstrated in the example below.
 
-###### Example
+
 
     .filter(">tbody >tr:not(.k-grid-edit-row)")
 
@@ -132,7 +132,7 @@ The `change` event of the Sortable widget will fire after a row position is chan
 
 The example below demonstrates how to shift the position of the items in the DataSource.
 
-###### Example
+
 
     //the change event handler of the Sortable widget
     function onChange(e) {
@@ -163,7 +163,7 @@ The example below demonstrates how to shift the position of the items in the Dat
 
 The example below demonstrates how to send the `newIndex` and `oldIndex` to the server.
 
-###### Example
+
 
     //the change event handler of the Sortable widget
     function onChange(e) {

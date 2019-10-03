@@ -19,7 +19,7 @@ To disable a date, either:
 
 When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
-###### Example
+
 
 ```dojo
    <div id="multiViewCalendar"></div>
@@ -35,7 +35,7 @@ When you set an array, list the days that need to be disabled by using the first
 
 When you add a function, determine its return value as `true` for the date that is disabled.
 
-###### Example
+
 
 ```dojo
     <div id="multiViewCalendar"></div>

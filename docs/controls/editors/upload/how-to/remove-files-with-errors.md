@@ -9,7 +9,7 @@ slug: howto_remove_files_with_errors
 
 The following example demonstrates how to remove files which contain errors and which have not passed the validation by using the Kendo UI Upload.
 
-###### Example
+
 
 ```dojo
 <style>

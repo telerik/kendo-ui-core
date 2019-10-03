@@ -9,7 +9,7 @@ slug: howto_persistoderinlocalstorage_sortable
 
 The example below demonstrates how to save the order of items in `localStorage` and restore it on page `load` in Kendo UI Sortable.
 
-###### Example
+
 
 ```dojo
     <div id="sortable"></div>

@@ -1,7 +1,7 @@
 ---
-title: Overview
-page_title: jQuery Diagram Documentation | Diagram Overview | Kendo UI
-description: "Get started with the jQuery Diagram by Kendo UI and learn how to create, initialize, and enable the widget."
+title: Data Binding
+page_title: jQuery Diagram Documentation | Data Binding | Kendo UI
+description: "Get started with the jQuery Diagram by Kendo UI and learn how to bind the widget to data."
 slug: binding_kendoui_diagram
 position: 2
 ---

@@ -26,7 +26,7 @@ The `replace` configuration works in the following way:
 
 The following example demonstrates how to apply the Kendo UI `replace` effect.
 
-###### Example
+
 
     <style>
         #container {
@@ -86,7 +86,7 @@ The `replace` effect provides the following options for additional configuration
 
 The transition duration is configured through the CSS selectors which are present in `kendo.common.css`.
 
-###### Example
+
 
     .k-fx-end .k-fx-next,
     .k-fx-end .k-fx-current {
@@ -101,7 +101,7 @@ You can override the default duration for the entire document by using a [higher
 
 The following example demonstrates how to apply a faster `replace` effect transition.
 
-###### Example
+
 
     <html>
         <head>
@@ -133,7 +133,7 @@ In addition to the two elements themselves, the contents of the elements can als
 
 The following example demonstrates the Kendo UI multi-element iOS transition.
 
-###### Example  
+  
 
     .k-fx-slide.k-fx-end .k-fx-next .km-content,
     .k-fx-slide.k-fx-end .k-fx-next .km-header,

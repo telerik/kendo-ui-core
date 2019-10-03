@@ -11,7 +11,7 @@ The following example demonstrates how to persist the date that is already enter
 
 While supported by default in modern browsers, this functionality is not provided by Internet Explorer 9 and earlier.
 
-###### Example
+
 
 ```dojo
     <a href="http://www.telerik.com" alt="navigate">navigate</a>

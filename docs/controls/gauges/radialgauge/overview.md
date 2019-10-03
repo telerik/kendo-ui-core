@@ -18,7 +18,7 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 To create the Radial Gauge, use a `div` element and optionally set a height and width by using CSS.
 
-###### Example
+
 
     <div id="radial-gauge"></div>
 
@@ -26,7 +26,7 @@ To create the Radial Gauge, use a `div` element and optionally set a height and 
 
 To initialize the Radial Gauge with its default configuration, use the following example.
 
-###### Example
+
 
 	$(document).ready(function() {
     	$("#radial-gauge").kendoRadialGauge();
@@ -42,7 +42,7 @@ The [`startAngle`](/api/dataviz/radialgauge#scale.startAngle) and [`endAngle`](/
 
 The following example demonstrates how to create a quarter-gauge, oriented to the top-right.
 
-###### Example
+
 
     $("#radial-gauge").kendoRadialGauge({
         startAngle: 90,
@@ -57,7 +57,7 @@ The Radial Gauge enables you to highlight multiple values by rendering multiple 
 
 You can independently customize each pointer including its current value, color, and length.
 
-###### Example
+
 
     <div id="gauge"></div>
     <script>

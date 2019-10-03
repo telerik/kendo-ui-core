@@ -12,7 +12,7 @@ If the Editor is within a `<form>` element, the convenient moment to post-proces
 
 The following example demonstrates how to remove all paragraphs before posting the content to the server.
 
-###### Example
+
 
     <form>
       <textarea id="comments"></textarea>

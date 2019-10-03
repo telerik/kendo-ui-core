@@ -10,7 +10,7 @@ slug: howto_use_custom_event_templatewith_specific_background_color_scheduler
 
 The following example demonstrates how to use the event template to render events with specific background color in the Scheduler.
 
-###### Example
+
 
 ```dojo
 <style>

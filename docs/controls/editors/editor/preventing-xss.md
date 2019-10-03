@@ -53,7 +53,7 @@ Script tags and DOM event attributes stripping, as well as value encoding, are b
 
 The following example demonstrates how to use the serialization and deserialization custom otpions, to sanitize the value of the Editor and remove `object` tags.
 
-###### Example
+
 
 ```dojo
 <textarea id="editor"></textarea>

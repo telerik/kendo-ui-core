@@ -20,7 +20,7 @@ The ScrollView widget supports two operation modes&mdash;standard and data-bound
 
 The example below demonstrates how to initialize the Hybrid UI ScrollView by using the data-role attribute.
 
-###### Example
+
 
     <div data-role="scrollview">
         Foo
@@ -30,7 +30,7 @@ The example below demonstrates how to initialize the Hybrid UI ScrollView by usi
 
 The example below demonstrates how to initialize the Hybrid UI ScrollView by using jQuery plugin syntax.
 
-###### Example
+
 
     <div data-role="view" data-init="initScrollView">
         <div id="scrollView">
@@ -65,7 +65,7 @@ Once the ScrollView reaches the total amount of DataSource items, forward scroll
 
 The example below demonstrates how to initialize a Hybrid UI ScrollView bound to remote data by using the data attributes.
 
-###### Example
+
 
     <div data-role="view" data-stretch="true">
         <div data-role="scrollview"
@@ -104,7 +104,7 @@ The example below demonstrates how to initialize a Hybrid UI ScrollView bound to
 
 The example below demonstrates how to initialize a Hybrid UI ScrollView bound to remote data by using jQuery plugin syntax.
 
-###### Example
+
 
     <div data-role="view" data-stretch="true" data-init="onInit">
         <div id="scrollview"></div>
@@ -159,7 +159,7 @@ By default, the widget displays one data-record per page. There is an opportunit
 
 The example below demonstrates a single-item template.
 
-###### Example
+
 
     <script id="scrollview-template" type="text/x-kendo-template">
         <div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"></div>
@@ -170,7 +170,7 @@ The example below demonstrates a single-item template.
 
 The example below demonstrates a multiple-item template.
 
-###### Example
+
 
     <!-- Note! data is accessed via data[index].fieldName -->
     <script id="scrollview-template" type="text/x-kendo-template">
@@ -223,7 +223,7 @@ A possible approach to handle this issue is to use JavaScript logic (the `for` l
 
 The example below demonstrates a template with a JavaScript `for` loop.
 
-###### Example
+
 
     <div id="home" data-role="view" data-model="viewModel">
         <div id="scrollview" data-role="scrollview"
@@ -264,7 +264,7 @@ The example below demonstrates a template with a JavaScript `for` loop.
 
 To define a local page, wrap the content in a `div` tag with `data-role="page"` attribute set.
 
-###### Example
+
 
     <div data-role="scrollView">
         <div data-role="page">Foo</div>
@@ -275,7 +275,7 @@ To define a local page, wrap the content in a `div` tag with `data-role="page"` 
 
 Whitespaces between page elements in markup causes the ScrollView pager to display an extra page. To fix this, remove any whitespace between the page elements.
 
-###### Example
+
 
     <div data-role="page">
         <!--page content-->
@@ -287,7 +287,7 @@ Whitespaces between page elements in markup causes the ScrollView pager to displ
 
 If a Kendo UI template is used to generate the pages, the whitespace gaps can be avoided in the way shown in the example below.
 
-###### Example
+
 
     <script type="text/x-kendo-template" id="tmp"><div data-role="page" >
         <!-- page content -->
@@ -303,7 +303,7 @@ If a Kendo UI template is used to generate the pages, the whitespace gaps can be
 
 To activate the feature, add the `km-scrollview-overlay` class to the ScrollView element.
 
-###### Example
+
 
     <div data-role="scrollView" class="km-scrollview-overlay">
         <div data-role="page">Foo</div>

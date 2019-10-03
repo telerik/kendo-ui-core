@@ -11,7 +11,7 @@ position: 3
 
 The following example demonstrates how to inherit the built-in Month view and implement showing the hidden events count when the **Show More** button is rendered.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

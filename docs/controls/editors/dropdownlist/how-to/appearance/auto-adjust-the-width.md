@@ -22,7 +22,7 @@ Either of the following scenarios occur:
 
 The following example demonstrates how to automatically adjust the width of a DropDownList depending on its list items.
 
-###### Example
+
 
 ```dojo
 <style>

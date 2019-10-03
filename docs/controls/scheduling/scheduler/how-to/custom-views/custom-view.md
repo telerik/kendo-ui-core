@@ -11,7 +11,7 @@ position: 2
 
 The following example demonstrates how to inherit some of the built-in views and implement specific custom logic in the Kendo UI Scheduler widget.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

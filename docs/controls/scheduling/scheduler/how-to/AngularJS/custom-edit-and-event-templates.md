@@ -10,7 +10,7 @@ position: 1
 
 The following example demonstrates how to create custom templates for the **Events** and **Edit** windows of the Scheduler in AngularJS.
 
-###### Example
+
 
 ```dojo
 <div id="example" ng-app="KendoDemos">

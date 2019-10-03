@@ -10,7 +10,7 @@ slug: howto_usedifferentdateformats_scheduler
 
 The following example demonstrates how to use different date formats for the Scheduler events.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

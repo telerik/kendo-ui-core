@@ -17,7 +17,7 @@ To achieve this behavior:
 
 The following example demonstrates how to accomplish this scenario.
 
-###### Example
+
 
 ```dojo
   <button id="btn">Enable/Disable</button>

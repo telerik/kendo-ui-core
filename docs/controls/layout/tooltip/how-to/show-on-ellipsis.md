@@ -9,7 +9,7 @@ slug: howto_showonlyiftextoverflowswithellipsis_tooltip
 
 The example below demonstrates how to show a Kendo UI Tooltip only if the text of the target overflows with ellipsis.
 
-###### Example
+
 
 ```dojo
     <style>

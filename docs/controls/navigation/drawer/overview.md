@@ -38,7 +38,7 @@ The Kendo UI Drawer widget has two configurable templates - the main [`template`
 
 Icons can be added with a span with class `k-icon` combined with the desired [web font icons](/styles-and-layout/icons-web#list-of-font-icons) class. To ensure that the icons and text have sufficient padding wrap the item template text in a span with class `k-item-text`.
 
-###### Example
+
 
     template: "<ul><li data-role='drawer-item'><span class='k-icon k-i-eye'></span><span class='k-item-text'>See More</span></li></ul>"
 
@@ -50,7 +50,7 @@ You can create a Drawer in any of the following ways:
 
 You can create a Kendo UI Drawer by using an HTML element and a template.
 
-###### Example
+
 
 ```dojo
 
@@ -84,7 +84,7 @@ You can create a Kendo UI Drawer by using an HTML element and a template.
 
 The following example demonstrates how to initialize a Drawer with MVVM.
 
-###### Example
+
 
 ```dojo
 

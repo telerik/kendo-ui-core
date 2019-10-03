@@ -10,7 +10,7 @@ slug: howto_customize_editand_event_templates_scheduler
 
 The following example demonstrates how to create and use custom templates for the Scheduler events and the **Edit** window.
 
-###### Example
+
 
 ```dojo
     <div id="example">

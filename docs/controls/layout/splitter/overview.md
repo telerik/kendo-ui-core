@@ -18,7 +18,7 @@ The layout and structure of a Kendo UI Splitter are defined within the DOM as a 
 
 The example below demonstrates how to create a Kendo UI Splitter with children that become panes in the resulting layout of the page. When the Splitter is initialized, a vertical split bar will be placed between the two `<div>` elements. This bar can be moved by users to the left and right to adjust the size of the panes.
 
-###### Example
+
 
     <div id="splitter">
         <div>Area 1</div>
@@ -34,7 +34,7 @@ The example below demonstrates how to create a Kendo UI Splitter with children t
 
 The example below demonstrates how to initialize the Splitter using a jQuery selector.
 
-###### Example
+
 
     $(document).ready(function() {
         $("#splitter").kendoSplitter();
@@ -54,7 +54,7 @@ The properties of a pane must be specified during initialization and set for eac
 
 The example below demonstrates how to initialize a Splitter and the properties of its panes.
 
-###### Example
+
 
     $("#splitter").kendoSplitter({
         panes: [
@@ -70,7 +70,7 @@ While any valid technique for loading content via AJAX may be used, Kendo UI Spl
 
 #### Load Content Asynchronously
 
-###### Example
+
 
     <div id="splitter">
         <div>Area 1 with Static Content</div>
@@ -82,7 +82,7 @@ While any valid technique for loading content via AJAX may be used, Kendo UI Spl
 
 The example below demonstrates how to load content for one pane asynchronously and load a third pane in an `iframe`.
 
-###### Example
+
 
     $(document).ready(function() {
         $("#splitter").kendoSplitter({
@@ -98,7 +98,7 @@ The example below demonstrates how to load content for one pane asynchronously a
 
 The pane settings (`collapsible` and `resizable`) of the Splitter can be changed via JavaScript after the widget has been initialized. Note that the `resize()` method of the Splitter causes the pane sizes to be recalculated, and the split bars to be rendered with the current widget settings.
 
-###### Example
+
 
     $("#SplitterID").kendoSplitter({
         panes: [
@@ -121,7 +121,7 @@ The Splitter supports nested layouts to achieve complex layouts.
 
 #### Create Nested Splitter Layouts
 
-###### Example
+
 
     <div id="horizontalSplitter">
         <div><p>Left Side Pane Content</p></div>
@@ -135,7 +135,7 @@ The Splitter supports nested layouts to achieve complex layouts.
 
 #### Initialize Two Splitters with Different Orientations
 
-###### Example
+
 
     $("#horizontalSplitter").kendoSplitter();
     $("#verticalSplitter").kendoSplitter({ orientation: "vertical" });
@@ -152,7 +152,7 @@ To configure the height of the Splitter to 100% and make it resize automatically
 
 The Splitter `<div>` can be resized manually by applying a new width or height style through JavaScript. Afterwards, execute the [`resize()`](/using-kendo-in-responsive-web-pages) method, so that the widget readjusts its layout and pane sizes.
 
-###### Example
+
 
     var splitterElement = $("#SplitterID"),
         splitterObject = splitterElement.data("kendoSplitter");
@@ -175,7 +175,7 @@ The panes of the Splitter are either scrollable&mdash;have an `overflow:auto` st
 
 The solution to this issue is to disable pane-content scrolling and clipping by enforcing an `overflow:visible` style to the Splitter `<div>` pane. In addition, the stacking context of the pane must be raised by applying a positive `z-index` style.
 
-###### Example
+
 
     //HTML
     <div id="splitter1">
@@ -213,7 +213,7 @@ Refer to an existing Splitter instance via the [`jQuery.data()`](http://api.jque
 
 The example below demonstrates how to access an existing Splitter instance.
 
-###### Example
+
 
     var splitter = $("#splitter").data("kendoSplitter");
 

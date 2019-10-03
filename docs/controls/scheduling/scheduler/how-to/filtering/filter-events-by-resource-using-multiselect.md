@@ -10,7 +10,7 @@ slug: howto_filter_eventsby_resourceusing_multiselect_scheduler
 
 The following example demonstrates how to filter Scheduler events by the resource by using the Kendo UI MultiSelect.
 
-###### Example
+
 
 ```dojo
 <div id="example">

@@ -9,7 +9,7 @@ slug: howto_change_text_color_numerictextbox
 
 The following example demonstrates how to change the color of a NumericTextBox value.
 
-###### Example
+
 
 ```dojo
 <input id="numeric" value="10" />

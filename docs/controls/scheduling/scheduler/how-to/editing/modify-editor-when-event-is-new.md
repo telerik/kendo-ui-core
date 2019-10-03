@@ -12,7 +12,7 @@ The following example demonstrates how to show or hide different parts of the ed
 
 As a result, if the event is not new, the template hides the **Title** field and displays a message.
 
-###### Example
+
 
 ```dojo
 <div id="example">

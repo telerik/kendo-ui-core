@@ -11,7 +11,7 @@ The example below demonstrates how to display a [Kendo-UI-style loading indicato
 
 The loading overlay must be displayed over the Window [widget `element`](/framework/widgets/wrapper-element) or some of its ancestors. This ensures that the overlay is removed automatically when the new content is loaded and rendered.
 
-###### Example
+
 
 ```dojo
     <div id="example">

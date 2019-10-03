@@ -16,7 +16,7 @@ For more information on the grouping functionality of the data source, refer to 
 
 To enable the grouping functionality in a MultiColumnComboBox, use the remote transport and a grouped data source.
 
-###### Example
+
 
 ```dojo
 <div class="demo-section k-header">
@@ -64,7 +64,7 @@ To customize the inline group title displayed next to the suggestion item in the
 
 The following example demonstrates how to define a custom group template.
 
-###### Example
+
 
 ```dojo
 <div class="demo-section k-header">

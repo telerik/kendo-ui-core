@@ -13,7 +13,7 @@ However, it is possible to use a workaround and to compile the HTML content manu
 
 The example below demonstrates how to add new tabs by using the [`$compile` AngularJS service](https://docs.angularjs.org/api/ng/service/$compile) and load content dynamically.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="KendoDemos">

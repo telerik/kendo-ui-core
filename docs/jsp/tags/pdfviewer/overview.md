@@ -29,7 +29,7 @@ The PDFViewer consists of a toolbar and a scrollable container that wraps the pa
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index() {
@@ -39,13 +39,13 @@ The PDFViewer consists of a toolbar and a scrollable container that wraps the pa
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
+
 
     <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 4** Add the [PDF.JS Processing](https://mozilla.github.io/pdf.js/) scripts.
 
-###### Example
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <script>
@@ -54,7 +54,7 @@ The PDFViewer consists of a toolbar and a scrollable container that wraps the pa
 
 **Step 5** Add the `PDFViewer` tag.
 
-###### Example
+
 
     <kendo:pdfViewer name="pdfviewer">
         <kendo:pdfViewer-pdfjsProcessing file="/spring-demos/resources/web/pdfViewer/sample.pdf"/>

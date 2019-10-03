@@ -13,7 +13,7 @@ The example below demonstrates how to display the tab buttons at the bottom of t
 >
 > This example is now obsolete unless you are working with a very old Kendo UI version. For recent versions, use the [`tabPosition` property](/api/javascript/ui/tabstrip/configuration/tabposition) instead.
 
-###### Example
+
 
 ```dojo
     <style>

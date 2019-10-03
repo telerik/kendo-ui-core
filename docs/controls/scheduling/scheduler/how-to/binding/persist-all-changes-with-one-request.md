@@ -10,7 +10,7 @@ slug: howto_persist_all_changes_with_a_single_request_scheduler
 
 The following example demonstrates how to persist all changes with a single request in the Scheduler.
 
-###### Example
+
 
 ```dojo
 <div id="example">

@@ -18,7 +18,7 @@ It supports the selection and navigation between dates as well as data templates
 
 To initialize the MultiViewCalendar, use a jQuery selector.
 
-###### Example
+
 
 ```dojo
     <div id="multiViewCalendar"></div>
@@ -41,7 +41,7 @@ To initialize the MultiViewCalendar, use a jQuery selector.
 
 The following example demonstrates basic MultiViewCalendar events.
 
-###### Example
+
 
 ```dojo
     <div id="multiViewCalendar"></div>

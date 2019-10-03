@@ -23,7 +23,7 @@ The tabs of the TabStrip navigate to the mobile application's views. When the mo
 
 The example below demonstrates how to initialize the Hybrid UI TabStrip based on the `data-role` attribute.
 
-###### Example
+
 
     <div data-role="tabstrip">
         <a href="#index">Home</a>
@@ -38,7 +38,7 @@ Every tab can have a badge, which is set using the `badge` data-attribute of the
 
 The example below demonstrates how to set badges to tabs.
 
-###### Example
+
 
     <div data-role="tabstrip">
         <a data-badge="5" href="#index">Home</a>
@@ -54,7 +54,7 @@ A tab icon can be set in two ways:
 
 The example below demonstrates how to use font icons with the `data-icon` attribute.
 
-###### Example
+
 
     <div data-role="tabstrip">
         <a data-icon="home" href="#index">Home</a>

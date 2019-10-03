@@ -10,7 +10,7 @@ slug: howto_setdifferent_startweekday_scheduler
 
 The following example demonstrates how to set a different start weekday in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

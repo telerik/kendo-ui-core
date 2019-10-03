@@ -10,7 +10,7 @@ slug: howto_prevent_adding_custom_values_combobox
 
 The following example demonstrates how to prevent adding custom values to a Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
   <div id="example">

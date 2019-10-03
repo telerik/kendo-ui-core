@@ -11,7 +11,7 @@ Your project might require you to prevent the TreeView nodes from being dragged 
 
 The following example demonstrates how to handle the `drag` event to achieve this behavior.
 
-###### Example
+
 
 ```dojo
     <div id="tree"></div>

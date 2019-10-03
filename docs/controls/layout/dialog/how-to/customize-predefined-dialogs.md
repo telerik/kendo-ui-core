@@ -13,7 +13,7 @@ The easiest way to achieve this behavior is to use the dedicated methods which a
 
 The following example demonstrates a possible way to implement your own methods that open customized instances of the alert, prompt, and confirmation Dialogs. This is achieved by using the [`kendo.ui.Alert`](/api/javascript/ui/alert), [`kendo.ui.Prompt`](/api/javascript/ui/prompt), and [`kendo.ui.Confirm`](/api/javascript/ui/confirm) configuration options.
 
-###### Example
+
 
 ````dojo
 <button id="alertBtn" class="k-button">myalert</button>

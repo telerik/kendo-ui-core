@@ -10,7 +10,7 @@ slug: howto_detect_wrapper_focus_events_dropdownlist
 
 The following example demonstrates how to detect the `focus` event of the Kendo UI DropDownList wrapper.
 
-###### Example
+
 
 ```dojo
   <input id="ddl1" class="ddl" />

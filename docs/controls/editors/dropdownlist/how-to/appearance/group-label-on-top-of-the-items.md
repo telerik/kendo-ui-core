@@ -12,7 +12,7 @@ The DropDownList provides an option for grouping its list items by certain crite
 
 The following example demonstrates how to move the group label on top of the grouped items in a Kendo UI DropDownList. The approach is also applicable to the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets.
 
-###### Example
+
 
 ```dojo
 <input id="customers" style="width: 400px" />

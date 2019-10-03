@@ -43,7 +43,7 @@ The MultiColumnComboBox allows you to set the width of the drop-down through the
 
 The following example demonstrates how to combine the column width values, set the drop-down width value, and ender a drop-down with a width of 300px in the MultiColumnComboBox.
 
-###### Example
+
 
     <input id="multicolumncombobox" />
     <script>
@@ -63,7 +63,7 @@ The following example demonstrates how to combine the column width values, set t
 
 The following example demonstrated how to set a specific width for the first column and calculate the rest of the space (the set `dropDownWidth` column width) so that the space is evenly split between the rest of the columns.
 
-###### Example
+
 
     <input id="multicolumncombobox" />
     <script>
@@ -88,7 +88,7 @@ The following example demonstrated how to set a specific width for the first col
 
 Besides the standard filter options, the MultiColumnComboBox allows you to set fields against which the data will be filtered. The option accepts an array of strings.
 
-###### Example
+
 
     <input id="multicolumncombobox" />
     <script>
@@ -120,7 +120,7 @@ To initialize the MultiColumnComboBox by binding the widget to a local data arra
 
 The following example demonstrates how to initialize the MultiColumnComboBox by using this approach.
 
-###### Example
+
 
     <input id="comboBox" />
 
@@ -147,7 +147,7 @@ To initialize the MultiColumnComboBox by binding the widget to remote data array
 
 The following example demonstrates how to initialize the MultiColumnComboBox by using this approach.
 
-###### Example
+
 
     <input id="comboBox" />
 
@@ -183,7 +183,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 You can define [column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.template) and [header column templates](/api/javascript/ui/multicolumncombobox/configuration/columns.headertemplate) to customize the layout of your project.
 
-###### Example
+
 
     <input id="multicolumncombobox" />
     <script>
@@ -207,7 +207,7 @@ The header template manages the way the pop-up header of a MultiColumnComboBox i
 
 The following example demonstrates how to define a header template.
 
-###### Example
+
 
     <input id="comboBox" />
     <!-- Template -->
@@ -244,7 +244,7 @@ The footer template manages the way the pop-up footer of a MultiColumnComboBox i
 
 The following example demonstrates how to define a footer template.
 
-###### Example
+
 
     <input id="comboBox" />
     <!-- Template -->
@@ -285,7 +285,7 @@ The following example demonstrates how to define a `noDataTemplate` template.
 >
 > When the `noDataTemplate` option is defined, the widget always opens the popup element.
 
-###### Example
+
 
     <input id="comboBox" />
     <!-- Template -->

@@ -10,7 +10,7 @@ slug: howto_get_referencetothe_builtin_validator_scheduler
 
 The following example demonstrates how to get a reference to the built-in Kendo UI Validator by using the `edit` event of the Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

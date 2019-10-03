@@ -9,7 +9,7 @@ slug: howto_gettheswipetarget_hybridui
 
 The example below demonstrates how to save the reference of the swiped element in `touchStart` and then use it in the `swipe` handler.
 
-###### Example
+
 
 ```dojo
     <title>Kendo UI Snippet</title>

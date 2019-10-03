@@ -12,7 +12,7 @@ You can set the cell background color based on the slot date in the Scheduler.
 
 The following example demonstrates how to achieve this behavior by using the `slotTemplate` and `allDaySlotTemplate` configuration options.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

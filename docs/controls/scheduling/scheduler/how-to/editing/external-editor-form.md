@@ -10,7 +10,7 @@ slug: howto_create_external_editor_form_scheduler
 
 The following example demonstrates how create an external editor form in the Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

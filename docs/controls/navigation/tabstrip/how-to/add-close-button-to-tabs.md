@@ -16,7 +16,7 @@ The milestones of the approach are:
 * The [`tabGroup`](/api/javascript/ui/tabstrip#fields-tabgroup) field. and the [`append`](/api/javascript/ui/tabstrip/methods/append) and [`remove`](/api/javascript/ui/tabstrip/methods/remove) TabStrip methods are used.
 * A `data-type="remove"` attribute is used to distinguish the tab remove buttons.
 
-###### Example
+
 
 ```dojo
 <style>

@@ -10,7 +10,7 @@ slug: howto_clone_eventson_ctrlplus_move_scheduler
 
 The following example demonstrates how to clone events in the Scheduler on `Ctrl`+`Move`.
 
-###### Example
+
 
 ```dojo
 <div id="example">

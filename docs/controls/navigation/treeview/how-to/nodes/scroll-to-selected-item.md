@@ -9,7 +9,7 @@ slug: howto_scrolltoselecteditem_treeview
 
 The following example demonstrates how to scroll the TreeView viewport to the selected node.
 
-###### Example
+
 
 ```dojo
     <div id="tree"></div>

@@ -24,7 +24,7 @@ The Tooltip can be initialized:
 
 The example below demonstrates how to create a Tooltip for a single target and initialize it.
 
-###### Example
+
 
     <div id="target">
         Some Content
@@ -38,7 +38,7 @@ The example below demonstrates how to create a Tooltip for a single target and i
 
 The example below demonstrates how to create a Tooltip for multiple targets within a container, initialize it using a jQuery selector and specify the filter to match the target elements. By default, the Tooltip content is extracted from the `title` attribute of the target element.
 
-###### Example
+
 
     <div id="container">
         Some <a href="#" title="Some text">Content</a><br />
@@ -53,7 +53,7 @@ The example below demonstrates how to create a Tooltip for multiple targets with
 
 The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work. By design, disabled elements do not fire events. If working with disabled elements is a strict requirement, a possible workaround is to initialize the Tooltip widget over a parent of the disabled element. Note that there must be some empty space between the disabled element and the boundaries of its parent, so that the `mouseenter` event is fired.
 
-###### Example
+
 
 ```dojo
 <style>
@@ -101,7 +101,7 @@ Kendo UI Tooltip provides default configuration options that can be set during i
 
 The example below demonstrates how to initialize a Tooltip and configure its main properties.
 
-###### Example
+
 
     $("#container").kendoTooltip({
         position: "right",
@@ -120,7 +120,7 @@ A Kendo UI Tooltip widget provides built-in support for asynchronously loading c
 
 The example below demonstrates how to asynchronously load content to the Tooltip.
 
-###### Example
+
 
     <div id="target">Content Text</div>
 
@@ -138,7 +138,7 @@ Refer to an existing Tooltip instance via the [`jQuery.data()`](http://api.jquer
 
 The example below demonstrates how to access an existing Tooltip instance.
 
-###### Example
+
 
     var tooltip = $("#target").data("kendoTooltip");
 

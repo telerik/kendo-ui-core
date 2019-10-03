@@ -11,7 +11,7 @@ By default, if the content is too little, the Tooltip width is going to be reduc
 
 The example below demonstrates how to calculate the width of a Kendo UI Tooltip on each opening and allow for a greater flexibility.
 
-###### Example
+
 
 ```dojo
     <style>

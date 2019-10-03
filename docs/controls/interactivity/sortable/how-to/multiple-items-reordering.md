@@ -9,7 +9,7 @@ slug: howto_reordermultipleitems_sortable
 
 The example below demonstrates how to reorder multiple items using the Kendo UI Sortable widget.
 
-###### Example
+
 
 ```dojo
   <p>Select multiple items with CTRL key</p>

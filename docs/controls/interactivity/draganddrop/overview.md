@@ -22,7 +22,7 @@ The Kendo UI Draggable (`kendoDraggable`) allows a DOM element to be moved by us
 
 To initialize the Draggable widget, use the following example.
 
-###### Example
+
 
     <div id="draggable" style="width: 200px; height: 200px; background-color: #0ff;">drag me</div>
     <script>
@@ -45,7 +45,7 @@ The Kendo UI DropTarget marks a DOM element as a drop target for the Kendo UI Dr
 
 To initialize the DropTarget element, use the following example.
 
-###### Example
+
 
     <div id="listB"></div>
     <script>
@@ -76,7 +76,7 @@ The DropTargetArea enables you to create multiple DropTarget elements that are l
 
 To initialize the DropTargetArea element, use the following example.
 
-###### Example
+
 
     <div id="area">
       <div class="orange"></div>
@@ -146,7 +146,7 @@ The Draggable does not support binding to DataSource. To work around this issue,
 
 The following example demonstrates how to create a Kendo UI ListView with draggable items.
 
-###### Example
+
 
     <div id="listA"></div>
 
@@ -206,7 +206,7 @@ The following example demonstrates how to create a Kendo UI ListView with dragga
 
 Data management widgets, such as the Kendo UI Grid or ListView, append an `uid` data attribute to the DOM elements of their items. You can use the `uid` attribute to get a reference to the `dataItem` from the DataSource instance.
 
-###### Example
+
 
     <div id="listA"></div>
     <script>
@@ -236,7 +236,7 @@ Data management widgets, such as the Kendo UI Grid or ListView, append an `uid` 
 
 You can also use the DropTarget events, such as `dragenter` and `dragleave`, to visually indicate when the dragged item enters or leaves the DropTarget element boundaries.
 
-###### Example
+
 
     <div id="listA"></div>
     <div id="listB"></div>
@@ -337,7 +337,7 @@ You can also use the DropTarget events, such as `dragenter` and `dragleave`, to 
 
 The Drag-and-Drop components do not automatically change the data-bound widget data. To apply the move changes to the DataSource instances, use the `drop` event and the `add` and `remove` methods of the DataSource.
 
-###### Example
+
 
     <div id="listA"></div>
     <div id="listB"></div>

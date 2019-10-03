@@ -9,7 +9,7 @@ slug: howto_show_custom_placeholderon_blur_maskedtextbox
 
 The following example demonstrates how to show a custom placeholder text on `blur` when the MaskedTextBox has no value.
 
-###### Example
+
 
 ```dojo
 <div id="example">

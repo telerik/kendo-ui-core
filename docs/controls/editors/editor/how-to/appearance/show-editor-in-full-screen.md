@@ -12,7 +12,7 @@ It is possible for you to show the Kendo UI Editor in full screen by using the [
 
 The following example demonstrates how to apply this approach.
 
-###### Example
+
 
 ```dojo
   <textarea id="editor"></textarea>

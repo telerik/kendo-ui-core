@@ -10,7 +10,7 @@ slug: howto_usetemplatestocustomizetooltips_validator
 
 The following example demonstrates how to use an [`errorTemplate`](/api/framework/validator#configuration-errorTemplate) to customize the tooltip in Kendo UI.
 
-###### Example
+
 
 ```dojo
     <div id="example">

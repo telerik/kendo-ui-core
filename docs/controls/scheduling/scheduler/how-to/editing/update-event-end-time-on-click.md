@@ -10,7 +10,7 @@ slug: howto_update_event_end_time_on_click_scheduler
 
 The following example demonstrates how to update the end time of an event on click in a Kendo UI Scheduler.
 
-###### Example
+
 
 ```dojo
 <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>

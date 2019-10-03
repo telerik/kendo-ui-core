@@ -18,7 +18,7 @@ All graphics render on the client by using the [Scalable Vector Graphics (SVG)](
 
 To create the Linear Gauge, use a `div` element and optionally set a height and width by using CSS.
 
-###### Example
+
 
     <div id="linear-gauge"></div>
 
@@ -26,7 +26,7 @@ To create the Linear Gauge, use a `div` element and optionally set a height and 
 
 To initialize the Linear Gauge with its default configuration, use the following example.
 
-###### Example
+
 
        $(document).ready(function() {
            $("#linear-gauge").kendoLinearGauge();
@@ -39,7 +39,7 @@ To initialize the Linear Gauge with its default configuration, use the following
 
 The following example demonstrates how to create a horizontal Linear Gauge with a value of 20 and a minimum value of 10.
 
-###### Example
+
 
         $("#linear-gauge").kendoLinearGauge({
             pointer: {

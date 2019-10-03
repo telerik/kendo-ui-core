@@ -9,7 +9,7 @@ slug: howto_selectvaluefrom_anotherview_hybridui
 
 The example below demonstrates how to navigate to a child view from a ListView, select an item and return back to the parent view showing the selected item when working with the Hybrid UI components of Kendo UI.
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-model="app.models.survey" data-title="Survey" data-stretch="true" id="survey">

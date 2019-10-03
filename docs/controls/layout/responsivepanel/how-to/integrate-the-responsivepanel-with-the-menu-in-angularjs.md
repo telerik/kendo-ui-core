@@ -11,7 +11,7 @@ When working in AngularJS applications, your project might require you to implem
 
 The following example demonstrates how to achieve this behavior.
 
-###### Example
+
 
 ```dojo
 <div id="example" ng-app="KendoDemos">

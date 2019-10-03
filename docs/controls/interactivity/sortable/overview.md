@@ -18,7 +18,7 @@ The Sortable is initialized on an existing HTML element and enables the reorderi
 
 The following example demonstrates how to initialize Kendo UI Sortable by using jQuery plugin syntax.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -48,7 +48,7 @@ You can change the default Placeholder by setting the `placeholder` configuratio
 
 The example below demonstrates how to build the Placeholder from the dragged element.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -71,7 +71,7 @@ The example below demonstrates how to build the Placeholder from the dragged ele
 
 The example below demonstrates how to build a static Placeholder.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -100,7 +100,7 @@ You can change the default Hint by setting the `hint` configuration option.
 
 The example below demonstrates how to build the Hint from the dragged element.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -122,7 +122,7 @@ The example below demonstrates how to build the Hint from the dragged element.
 
 The example below demonstrates how to build a static Hint.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -140,7 +140,7 @@ The example below demonstrates how to build a static Hint.
 
 The example below demonstrates how to disable the Hint.
 
-###### Example
+
 
 The Sortable widget can work without a visible hint. To disable the hint, set the `hint` option to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
 
@@ -164,7 +164,7 @@ The `cursor` configuration option determines the type of cursor to be displayed 
 
 The example below demonstrates how to change the cursor type to `"move"`.
 
-###### Example
+
 
 ```
     <ul id="sortable">
@@ -184,7 +184,7 @@ The `cursor` option changes the cursor style only for the time while the item is
 
 The example below demonstrates how to grab the cursor on `hover`.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -218,7 +218,7 @@ The `disabled` option specifies which items inside the Sortable's container cann
 
 The example below demonstrates how to disable all items at runtime.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -256,7 +256,7 @@ The Sortable widget does not persist the order of the current items. If you want
 
 The example below demonstrates how to persist the order of items in local storage.
 
-###### Example
+
 
 ```dojo
     <div id="sortable"></div>
@@ -325,7 +325,7 @@ The example below demonstrates how to persist the order of items in local storag
 
 The `<input>` elements inside Sortable items cannot be focused because the items are draggable. To avoid that, use the `ignore` option, as demonstrated in the example below.
 
-###### Example
+
 
 ```dojo
     <ul id="sortable">
@@ -345,7 +345,7 @@ The `<input>` elements inside Sortable items cannot be focused because the items
 
 A Sortable with radio buttons and a Hint cloned from the Sortable element will lose the selected radio if dragged, because the clone will take over the selection. To avoid this, clear the name of the radio in the Hint, as demonstrated in the example below.
 
-###### Example
+
 
 ```dojo
  <ul id="sortable-basic">

@@ -20,7 +20,7 @@ This method pre-processes all available data and converts it into a hierarchy pr
 
 The following example demonstrates how to pre-process all data before binding the TreeView to it.
 
-###### Example
+
 
     <div id="tree"></div>
     <script>
@@ -70,7 +70,7 @@ This second method allows nodes to be loaded on demand, but is more computationa
 
 The following example demonstrates how to filter data incrementally.
 
-###### Example
+
 
     <div id="tree"></div>
     <script>

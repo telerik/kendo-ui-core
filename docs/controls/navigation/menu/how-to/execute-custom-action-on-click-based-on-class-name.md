@@ -9,7 +9,7 @@ slug: howto_execute_custom_click_actions_basedon_classnames_menu
 
 The example below demonstrates how to execute a custom click action based on the class name of the clicked item.
 
-###### Example
+
 
 ```dojo
     <div id="example">

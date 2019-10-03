@@ -9,7 +9,7 @@ slug: howto_expandnodesduringdrag_treeview
 
 The following example demonstrates how to expand the TreeView items that are hovered when the user drags a node.
 
-###### Example
+
 
 ```dojo
     <div id="treeview"></div>

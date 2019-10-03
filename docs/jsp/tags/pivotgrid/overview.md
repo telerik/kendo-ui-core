@@ -25,7 +25,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
@@ -34,19 +34,19 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
+
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 4** Add a reference to the OLAP service URL.
 
-###### Example
+
 
         <c:url value="http://demos.telerik.com/olap/msmdpump.dll" var="transportReadUrl" />
 
 **Step 5** Add a `pivotgrid` tag.
 
-###### Example
+
 
         <kendo:pivotGrid name="pivotgrid">
     		<kendo:pivotDataSource type="xmla">
@@ -78,7 +78,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 You can subscribe to all [events exposed by Kendo UI PivotGrid](/api/javascript/ui/pivotgrid#events) by the handler name.
 
-###### Example
+
 
         <kendo:grid name="productGrid" dataBound="productGrid_dataBound" change="productGrid_change">
             <kendo:dataSource data="${data}" pageSize="10"/>
@@ -128,7 +128,7 @@ You can subscribe to all [events exposed by Kendo UI PivotGrid](/api/javascript/
 
 You are able to reference an existing PivotGrid instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [PivotGrid API](/api/javascript/ui/pivotgrid#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo PivotGrid tag declaration
     <script>

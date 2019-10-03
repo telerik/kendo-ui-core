@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI ColorPicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ColorPicker widget.
 
-The ColorPicker provides suggestions depending on the typed text and allows multiple value entries.
+The ColorPicker is a drop-down list for selecting colors.
 
 * [Demo page for the ColorPicker](https://demos.telerik.com/aspnet-core/colorpicker/index)
 

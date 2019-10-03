@@ -23,7 +23,7 @@ To initialize the ButtonGroup, either use:
 
 The following example demonstrates how to initialize Kendo UI ButtonGroup from HTML markup.
 
-###### Example
+
 
     <ul id="buttongroup">
         <li>Option 1</li>
@@ -39,7 +39,7 @@ The following example demonstrates how to initialize Kendo UI ButtonGroup from H
 
 The following example demonstrates how to initialize Kendo UI ButtonGroup from a JSON data object.
 
-###### Example
+
 
     <div id="buttonGroup"></div>
 
@@ -63,7 +63,7 @@ For more information on the [`enable`](/api/javascript/ui/buttongroup/configurat
 
 The following example demonstrates how to enable and disable the ButtonGroup.
 
-###### Example
+
 
 	<ul id="buttongroup">
 		<li>Option 1</li>
@@ -94,7 +94,7 @@ For more information on the [`index`](/api/javascript/ui/buttongroup/configurati
 
 The following example demonstrates how to select a button by its index.
 
-###### Example
+
 
 	<ul id="buttongroup">
 		<li>Option 1</li>
@@ -121,7 +121,7 @@ The following example demonstrates how to select a button by its index.
 
 The Kendo UI ButtonGroup enables you to restrict the number of Buttons that can be selected through the `selection` property. The property can be configured for a `single` or `multiple` selection.
 
-###### Example
+
 
     <div id="buttongroup">
         <span class="k-state-active">Option 1</span>
@@ -139,7 +139,7 @@ The Kendo UI ButtonGroup enables you to restrict the number of Buttons that can 
 
 The ButtonGroup provides the `icon` and `imageUrl` properties for configuring icons. To set a particular Button instance, use only one of them.
 
-###### Example
+
 
     <div id="buttongroup">
     </div>
@@ -159,7 +159,7 @@ The ButtonGroup provides options for adding badges to its Buttons. To add or upd
 
 For more information on the ButtonGroup [`badge` method](/api/javascript/ui/buttongroup/methods/badge), refer to the [ButtonGroup API](/api/javascript/ui/buttongroup).
 
-###### Example
+
 
     <div id="buttongroup">
     </div>

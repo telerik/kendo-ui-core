@@ -25,7 +25,7 @@ A View is associated with a Layout by setting its `data-layout` attribute value 
 
 The example below demonstrates how to define views with layout.
 
-###### Example
+
 
     <div data-role="view" data-layout="foo">Foo view</div>
     <div data-role="view" data-layout="foo">Bar view</div>
@@ -43,7 +43,7 @@ A default application layout can be set through the [`layout` configuration](/ap
 
 The example below demonstrates a default application layout.
 
-###### Example
+
 
     <div data-role="view">Bar</div>
 
@@ -61,7 +61,7 @@ Layouts can be platform-specific, allowing for different layout and behavior per
 
 The example below demonstrates an iOS and Android application layout.
 
-###### Example
+
 
     <div data-role="view">Bar</div>
 

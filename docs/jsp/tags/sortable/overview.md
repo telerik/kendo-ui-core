@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -33,20 +33,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 **Step 3** Add kendo taglib mapping to the page.
 
-###### Example
+
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 4** Add a sortable tag (use the element with `sortable-basic` id and initialize Sortable instance for it).
 
-###### Example
+
 
     <kendo:sortable name="#sortable-basic" hint="hint" placeholder="placeholder">
     </kendo:sortable>
 
 **Step 5** Add the HTML markup from which the widget will be initialized and define the hint/placeholder functions.
 
-###### Example
+
 
     <ul id="sortable-basic">
         <li>Item 1</li>
@@ -68,7 +68,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 The Kendo UI Sortable widget can operate without a hint. To disable the hint, set it to an empty function via [`jQuery.noop`](http://api.jquery.com/jQuery.noop/).
 
-###### Example
+
 
     <kendo:sortable name="#sortable-basic" hint="noHint">
     </kendo:sortable>
@@ -83,7 +83,7 @@ The Kendo UI Sortable widget can operate without a hint. To disable the hint, se
 
 You can subscribe to all [events exposed by Kendo UI Sortable](/api/javascript/ui/sortable#events) by the handler name.
 
-###### Example
+
 
     <kendo:sortable name="#sortable-basic" start="onStart" change="onChange">
     </kendo:sortable>
@@ -110,7 +110,7 @@ You can subscribe to all [events exposed by Kendo UI Sortable](/api/javascript/u
 
 You are able to reference an existing Sortable instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo Sortable tag declaration
     <script>

@@ -119,7 +119,7 @@ Inside the `Get()` method, write a simple LINQ query to retrieve all employees f
 
 The example below demonstrates the LINQ query to select all employees.
 
-###### Example
+
 
     public List<Data.Employee> Get() {
 
@@ -145,7 +145,7 @@ Before Web API can return results via a URL, a route needs to be set up, so that
 
 Open the `Global.asax` file. Under the `Application_Start` method, add the following code demonstrated in the example below.
 
-###### Example
+
 
     void Application_Start(object sender, EventArgs e) {
 
@@ -177,7 +177,7 @@ Right-click the project in Visual Studio and select **Add Folder**. Name this fo
 
 The example below demonstrates the `Employee` model object.
 
-###### Example
+
 
     public class Employee {
 
@@ -197,7 +197,7 @@ Open up the `EmployeesController.cs` file in the `Controllers` folder. Alter the
 
 The example below demonstrates how to return a list of `Employee` model objects.
 
-###### Example
+
 
     public List<Model.Employees> Get() {
 
@@ -242,13 +242,13 @@ Open the `Site.Master` file and drag the `jquery.min` file over to the page just
 
 Open up the `Default.aspx` file. Create an HTML `table` element with an `employees` id, as demonstrated in the example below.
 
-###### Example
+
 
     <table id="employees"></table>
 
 Below the `table` element that you just created, but before the closing `content` tag, open a new script block as demonstrated in the example below.
 
-###### Example
+
 
     <table id="employees"></table>
 
@@ -264,7 +264,7 @@ Inside the `Document Ready` function, select the HTML table with the `employees`
 
 The example below demonstrates how to select a table when the document is ready.
 
-###### Example
+
 
     <table id="employees"></table>
 
@@ -294,7 +294,7 @@ One of the things that makes [jQuery](http://jquery.com/) so desirable, is that 
 
 The example below demonstrates how to make an AJAX call for employees data in JSON format.
 
-###### Example
+
 
     <table id="employees"></table>
 
@@ -337,7 +337,7 @@ To put the data returned into the page, iterate over the results returned by the
 
 The example below demonstrates how to make an AJAX call fir the employees data in JSON format.
 
-###### Example
+
 
     <table id="employees"></table>
 
@@ -414,7 +414,7 @@ For this example, a very basic form of manual templating is demonstrated. The id
 
 The example below demonstrates how to create a block of template HTML.
 
-###### Example
+
 
     <table id="employees"></table>
 
@@ -484,7 +484,7 @@ Inside the `click` event, create another `ajax()` method. The URL will be the sa
 
 The example below demonstrates how to create a block of template HTML.
 
-###### Example
+
 
     <table id="employees"></table>
 
@@ -581,7 +581,7 @@ Press `F5` to run the application. Open the Developer Tools in Internet Explorer
 
 Switch back to Visual Studio and stop the application. Open up the `EmployeesController.cs` file in the `Controllers` folder. Create a void method underneath the `Get()` method called `Delete()` which takes in an `id` parameter of `int` type, as demonstrated in the example below.
 
-###### Example
+
 
     public void Delete(int id) {
 
@@ -593,7 +593,7 @@ Inside the `Delete()` method, select the employee to delete by its id from the L
 
 The example below demonstrates how to delete an employee by using LINQ To SQL.
 
-###### Example
+
 
     public void Delete(int id) {
 

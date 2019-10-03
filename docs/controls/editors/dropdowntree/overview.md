@@ -28,7 +28,7 @@ To initialize the DropDownTree by binding the widget to a local data array, use 
 
 The following example demonstrates how to initialize the DropDownTree by using this approach.
 
-###### Example
+
 
     <input id="dropdowntree">
 
@@ -53,7 +53,7 @@ The following example demonstrates how to initialize the DropDownTree by using t
 
 The following example demonstrates how to create a DropDownTree and bind it to a remote HierarchicalDataSource.
 
-###### Example
+
 
     <input id="dropdowntree"></input>
 
@@ -88,7 +88,7 @@ Once the `checkboxes` option is set to `true`, the DropDownTree provides the mul
 
 Along with the standard checkbox support, the DropDownTree allows you to manage the checked state of all nodes. To enable this functionality, set the `CheckAll` option to `true`.
 
-###### Example
+
 
     <input id="dropdowntree"></input>
 
@@ -129,7 +129,7 @@ The DropDownTree supports the following filter values:
 * `endswith`
 * `contains`
 
-###### Example
+
 
     <input id="dropdowntree"></input>
 
@@ -162,7 +162,7 @@ The DropDownTree supports the following filter values:
 
 To customize the width of a drop-down list and change its dimensions, use the jQuery `width()` method.
 
-###### Example
+
 
     <input id="dropdowntree">
 
@@ -191,7 +191,7 @@ To customize the width of a drop-down list and change its dimensions, use the jQ
 
 You can let the popup element automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup shows the content on one line and does not wrap it up.
 
-###### Example
+
 
     <input id="dropdowntree">
 
@@ -217,7 +217,7 @@ You can let the popup element automatically adjust its width according to the le
 
 When you bind the DropDownTree through the `dataSource` configuration option, each item can acquire the properties that the following example demnstrates.
 
-###### Example
+
 
     var item = {
         text: "Item text",
@@ -268,7 +268,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 The node template manages the way the items in the dropdown are rendered.
 
-###### Example
+
 
     <input id="dropdowntree">
     <script id="treeview-template" type="text/kendo-ui-template">
@@ -301,7 +301,7 @@ The value template manages the way the selected value of a DropDownTree is rende
 >
 > Value templates must consist of `inline` HTML elements only.
 
-###### Example
+
 
     <input id="dropdowntree"></input>
     <!-- Template -->
@@ -336,7 +336,7 @@ The value template manages the way the selected value of a DropDownTree is rende
 
 The header template manages the way the popup header of a DropDownTree is rendered.
 
-###### Example
+
 
     <input id="dropdowntree">
     <script id="headerTemplate" type="text/x-kendo-template">
@@ -364,7 +364,7 @@ The header template manages the way the popup header of a DropDownTree is render
 
 The footer template manages the way the popup footer of a DropDownTree is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
-###### Example
+
 
     <input id="dropdowntree"></input>
     <!-- Template -->
@@ -403,7 +403,7 @@ The DropDownTree widget displays `noDataTemplate` in the popup when the data sou
 >
 > When the `noDataTemplate` option is defined, the widget always opens the popup element.
 
-###### Example
+
 
     <input id="dropdowntree"></input>
     <!-- Template -->

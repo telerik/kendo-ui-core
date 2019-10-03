@@ -14,7 +14,7 @@ The examples below demonstrate how to use the Kendo UI Sortable widget with a Ke
 
 The example below demonstrates how to reorder the rows of a Kendo UI Grid in a non-editable mode by using the Kendo UI Sortable.
 
-###### Example
+
 
 ```dojo
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>
@@ -92,7 +92,7 @@ The main milestones of the approach are:
 
 * The standard HTML inputs that are used as editors should have a `data-value-update="input"` attribute. If this attribute is not attached to the HTML element, the Grid will not update its data.
 
-###### Example
+
 
        var textEditor = function (container, options) {
          $('<input data-value-update="input" data-bind="value:' + options.field + '"/>')
@@ -101,7 +101,7 @@ The main milestones of the approach are:
 
 * If a Kendo UI widget is used as an editor, its `change` event should be manually triggered in the `edit` event of the Grid widget.
 
-###### Example
+
 
        //Kendo UI widget used as editor
        var numericEditor = function (container, options) {
@@ -129,7 +129,7 @@ The main milestones of the approach are:
 > * For simplicity the demo uses local data with a dummy order field. This may not be the case in a real-world scenario.
 > * The `change` event handler of the Sortable widget updates the **Order** field, which is a sample implementation. The `change` event handler should be modified to fit your real-world scenario.
 
-###### Example
+
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

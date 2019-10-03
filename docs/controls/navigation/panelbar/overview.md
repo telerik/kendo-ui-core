@@ -32,7 +32,7 @@ You can create a PanelBar in any of the following ways:
 
 You can create a Kendo UI PanelBar by targeting the root element of an HTML list. The widget utilizes this list to define its structure and content.
 
-###### Example
+
 
     <ul id="panelbar">
         <li>
@@ -55,7 +55,7 @@ You can create a Kendo UI PanelBar by targeting the root element of an HTML list
 
 The following example demonstrates how to initialize a PanelBar by using a JSON data object.
 
-###### Example
+
 
     <ul id="panelbar"></ul>
 
@@ -101,7 +101,7 @@ This approach has been available as of the R1 2017 release.
 
 The following example demonstrates how to create a PanelBar and bind it to a local data source.
 
-###### Example
+
 
     <div id="panelBar"></div>
 
@@ -129,7 +129,7 @@ This approach has been available as of the R1 2017 release.
 
 The following example demonstrates how to create a PanelBar and bind it to a remote HierarchicalDataSource.
 
-###### Example
+
 
     <div id="panelBar"></div>
 
@@ -163,7 +163,7 @@ For a complete reference on how to bind the PanelBar to different service end-po
 
 PanelBar items may contain nested content, including markup, within a `<div>` element. The text content located outside the nested content is used as a title of the item.
 
-###### Example
+
 
     <ul id="panelbar">
         <li>Item with no content</li>
@@ -185,7 +185,7 @@ The PanelBar provides built-in support for asynchronously loading content from r
 
 The following example demonstrates how to load a PanelBar item content asynchronously via AJAX.
 
-###### Example
+
 
     <ul id="panelbar">
         <li>Item 1
@@ -219,7 +219,7 @@ The PanelBar provides the `Single` or `Multiple` expand mode options.
 * If `ExpandMode` is set to `Single`, the user can expand only a single root item or a single child item of a specific parent item. Expanding another root item or another child of the currently expanded item's parent will collapse the currently expanded item. This approach is also the only way to collapse an expanded item in the `single` expand mode.
 * If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them.
 
-###### Example
+
 
 	<div id="panelbar"></div>
 	<script>
@@ -253,7 +253,7 @@ By default, a PanelBar uses animations to expand and reveal sub-items when an it
 
 The following example demonstrates how to change the PanelBar animation and `expandMode` behavior.
 
-###### Example
+
 
     <ul id="panelbar"></ul>
 
@@ -277,7 +277,7 @@ For more information on configuring PanelBar items, see the [PanelBar API demos]
 
 The following example demonstrates how to add a new root PanelBar item.
 
-###### Example
+
 
     <ul id="panelbar"></ul>
 
@@ -298,7 +298,7 @@ To disable, expand, or select a certain PanelBar item, get a reference to its `d
 
 The following example demonstrates how to use the `disable`, `expand`, and `select` methods.
 
-###### Example
+
 
     <div id="panelBar"></div>
     <button id="btn1" class="k-button">Update Data Item</button>

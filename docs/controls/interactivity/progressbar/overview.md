@@ -24,7 +24,7 @@ Kendo UI ProgressBar supports three different types:
 
 Create the ProgressBar by using a `<div>` element as demonstrated in the example below.
 
-###### Example
+
 
 	<div id="progressbar"></div>
 
@@ -32,7 +32,7 @@ Create the ProgressBar by using a `<div>` element as demonstrated in the example
 
 Initialize the ProgressBar by using a jQuery selector as shown in the example below.
 
-###### Example
+
 
 	$(document).ready(function(){
       $("#progressbar").kendoProgressBar();
@@ -42,7 +42,7 @@ Initialize the ProgressBar by using a jQuery selector as shown in the example be
 
 Initialize a chunk ProgressBar in the way displayed in the example below.
 
-###### Example
+
 
 	<div id="progressbar"></div>
 	<script>
@@ -65,7 +65,7 @@ Many of the options delivered by the ProgressBar can be configured through its p
 
 The example below demonstrates how to configure the properties of the ProgressBar.
 
-###### Example
+
 
 	$("#progressbar").kendoProgressBar({
       min: 100,
@@ -90,7 +90,7 @@ By default, the ProgressBar is a `27em` wide `inline-block` element. The easiest
 
 The example below demonstrates how to make the ProgressBar 100% wide and automatically resizeable.
 
-###### Example
+
 
     <style>
 
@@ -136,7 +136,7 @@ Make a reference to an existing ProgressBar instance via [`jQuery.data()`](http:
 
 The example below demonstrates how to access an existing ProgressBar instance.
 
-###### Example
+
 
 	var progressbar = $("#progressbar").data("kendoProgressBar");
 

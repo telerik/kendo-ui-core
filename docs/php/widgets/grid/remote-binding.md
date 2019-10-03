@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 2** Create a [data source](/api/php/Kendo/Data/DataSource) for the tasks and set its [`transport`](/api/php/Kendo/Data/DataSource#transport) and [`schema`](/api/php/Kendo/Data/DataSource#schema).
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -66,7 +66,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 3** Create a Grid, configure its columns and set its data source.
 
-###### Example
+
 
         <?php
         $grid = new \Kendo\UI\Grid('grid');
@@ -90,7 +90,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 4** Output the Grid by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $grid->render();
@@ -102,7 +102,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -110,7 +110,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 3** Retrieve all records from the **Products** table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT * FROM Products');
@@ -120,7 +120,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -144,7 +144,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -202,7 +202,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 3** Create a Grid, configure its columns and set its data source.
 
-###### Example
+
 
         <?php
         $grid = new \Kendo\UI\Grid('grid');
@@ -226,7 +226,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 4** Output the Grid by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $grid->render();
@@ -238,13 +238,13 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
 
 **Step 3** Read the request body and parse it as JSON. In the previous example, the Kendo UI DataSource is configured to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -252,7 +252,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 4** Create a new instance of the `DataSourceResult` class and call its `read` method.
 
-###### Example
+
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -263,7 +263,7 @@ Below are listed the steps for you to follow when configuring the Grid for remot
 
 **Step 5** Return the result of the `read` method as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

@@ -15,7 +15,7 @@ To see how the example works:
 * Drag it to the input field of the ComboBox.
 * Release the mouse.
 
-###### Example
+
 
 ```dojo
   <div id="example">

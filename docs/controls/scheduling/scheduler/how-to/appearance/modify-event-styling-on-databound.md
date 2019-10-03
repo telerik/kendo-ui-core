@@ -12,7 +12,7 @@ Your project might require you to modify the styling of an event in the Schedule
 
 The following example demonstrates how to achieve this by using the `databound` event.
 
-###### Example
+
 
 ```dojo
     <div id="example" class="k-content">

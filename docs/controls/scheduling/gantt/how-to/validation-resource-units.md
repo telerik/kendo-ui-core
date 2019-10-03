@@ -9,7 +9,7 @@ slug: howto_validation_resource_units_gantt
 
 The example below demonstrates how to configure the validation options of the resource units in the Kendo UI Gantt.
 
-###### Example
+
 
 ```dojo
      <div id="gantt"></div>

@@ -35,7 +35,7 @@ When binding the Scheduler to a local array, you can switch from a "day" to a "w
 
 The example below demonstrates how to initialize a Scheduler with two events and how to bind it to an array of JavaScript objects.
 
-###### Example
+
 
     <!-- HTML element in which the Kendo UI Scheduler will initialize -->
     <div id="scheduler"></div>
@@ -75,7 +75,7 @@ For more information on cross-domain requests, see [this article](/framework/dat
 
 The example below demonstrates how to bind the Scheduler to a remote service.
 
-###### Example
+
 
     $("#scheduler").kendoScheduler({
         date: new Date("2013/6/13"),
@@ -149,7 +149,7 @@ If your remote service stores and returns the Scheduler events in a different fo
 
 The example below demonstrates how to map remote service fields to client-side scheduler event fields.
 
-###### Example
+
 
         schema: {
             model: {
@@ -225,7 +225,7 @@ The `day` and `week` views are enabled by default. To enable other views or conf
 
 The example below demonstrates how to enable all Scheduler views.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>
@@ -260,7 +260,7 @@ Kendo UI Scheduler may be scrollable when displayed on a web page. However, it s
 
 The example below demonstrates how to ensure that the widget expands and displays all events in the current view during printing.
 
-###### Example
+
 
 	@media print {
 	   .k-scheduler,
@@ -280,7 +280,7 @@ The code in the example above works in Internet Explorer and Google Chrome.
 
 The example below demonstrates how to trigger the same behavior in Firefox as it ignores the `overflow-y` style.
 
-###### Example
+
 
     @media print {
         /* the same rules as above... */
@@ -296,7 +296,7 @@ The example below demonstrates how to trigger the same behavior in Firefox as it
 
 In addition, the Scheduler needs a fixed pixel width for itself or some of its ancestors. Otherwise, it may resize during printing, which will cause the displayed absolutely positioned events to become misaligned. If the widget is part of a fluid layout, a fixed width can be set only for the printing task and then removed, as demonstrated in the example below.
 
-###### Example
+
 
     <button id="printPage" type="button">Print</button>
 
@@ -333,7 +333,7 @@ Kendo UI Scheduler exposes a set of [methods](/api/web/scheduler#methods) and [f
 
 The example below demonstrates how to apply the Scheduler API.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>
@@ -366,7 +366,7 @@ The event handler is the JavaScript function invoked when the event is fired. Th
 
 The example below demonstrates how to subscribe to a Scheduler event during the initialization of the widget.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>
@@ -388,7 +388,7 @@ The example below demonstrates how to subscribe to a Scheduler event during the 
 
 The example below demonstrates how to subscribe to a Scheduler event by using the `bind` method.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>
@@ -418,7 +418,7 @@ Make a reference to an existing Scheduler instance via `jQuery.data()` and then 
 
 The example below demonstrates how to access an existing Scheduler instance.
 
-###### Example
+
 
     <div id="scheduler"></div>
     <script>

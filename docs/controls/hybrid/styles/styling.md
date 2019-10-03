@@ -27,7 +27,7 @@ Depending on the project requirements, the mobile application may be styled in s
 
 For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min.css` CSS should be referred.
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-title="Hello world">
@@ -50,7 +50,7 @@ For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min
 
 If you are targeting iOS devices only, or you want your application to have the iOS look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.ios.min.css`. Each of the two stylesheet files includes both the iOS6 (default) and iOS7+ looks. The `majorVersion` of the `platform` configuration option determines which one is going to be used.
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-title="Hello world">
@@ -79,7 +79,7 @@ If you are targeting Android devices only, or you want your application to have 
 
 #### Mobile Application with Android Halo Dark Look
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-title="Hello world">
@@ -106,7 +106,7 @@ If you are targeting Windows Phone devices only, or you want your application to
 
 #### Mobile Application with Windows Phone 8 Look
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-title="Hello world">
@@ -140,7 +140,7 @@ The skin should be activated by including the respective skin CSS file `kendo.mo
 
 ### Mobile Application with Nova Skin
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-title="Hello world">
@@ -170,7 +170,7 @@ On 10<sup>th</sup> September 2013 Kendo UI released an iOS7 theme for mobile dev
 
 In iOS7 every application can have the ability to set a tint color which is used for highlighting specific interactive elements throughout the whole application. The tint color can be also set per single view. The Kendo UI iOS7 theme for mobile is created to be similarly easy to change the application tint color with the simple CSS rule shown below.
 
-###### Example
+
 
     .km-ios7 .k-list,
     .km-ios7 .k-slider,
@@ -183,7 +183,7 @@ In iOS7 every application can have the ability to set a tint color which is used
 
 Additionally, a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20 (avoid `#ID` selectors and `!important`), otherwise all the text in the View will be colorized.
 
-###### Example
+
 
     .specific-view .k-list,
     .specific-view .k-slider,
@@ -194,7 +194,7 @@ Additionally, a single View tint color can be changed by simply adding a CSS cla
 
 The example below demonstrates an application and a View-specific tint.
 
-###### Example
+
 
 ```dojo
     <style scoped>
@@ -247,7 +247,7 @@ The example below demonstrates an application and a View-specific tint.
 
 As of Kendo UI Q1 2014 release, every Android application can also have the ability to set a tint color which is used for highlighting specific interactive elements throughout the whole application. The tint color can also be set per a single view. The Kendo UI Android themes for mobile (`android-light` and `android-dark`) are created to be similarly easy to change the application tint color with the CSS rule demonstrated below.
 
-###### Example
+
 
     .km-android .km-shim,
     .km-android .km-popup,
@@ -273,7 +273,7 @@ The CSS rule is longer than the iOS one, as the Android theme has mostly highlig
 Additionally, a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20
 (avoid `#ID` selectors and `!important`).
 
-###### Example
+
 
     .specific-view .km-shim,
     .specific-view .km-popup,
@@ -294,7 +294,7 @@ Additionally, a single View tint color can be changed by simply adding a CSS cla
 
 The example below demonstrates an application and a View-specific tint.
 
-###### Example
+
 
 ```dojo
     <style scoped>
@@ -369,7 +369,7 @@ The Flat skin, shipped with Kendo UI Q2 2013 release for mobile, was created to 
 
 The example below demonstrates how to change the flat skin active background to blue.
 
-###### Example
+
 
     .km-flat .km-switch-handle,
     .km-flat .k-slider-selection,
@@ -409,7 +409,7 @@ The example below demonstrates how to change the flat skin active background to 
 
 The example below demonstrates how to change the flat skin active background to red and the color to beige.
 
-###### Example
+
 
     .km-flat .km-badge,
     .km-flat .km-rowinsert,
@@ -497,7 +497,7 @@ The Kendo UI Nova theme provides three predefined font weights&mdash;light, medi
 
 The example below demonstrates Nova theme font weights.
 
-###### Example
+
 
 	<div data-role="view" data-title="Typography">
 		<!-- h1 with bold font weight -->

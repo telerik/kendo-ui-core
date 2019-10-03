@@ -9,7 +9,7 @@ slug: howto_restrict_reordergridrows_sortable
 
 The example below demonstrates how to reorder Grid rows using the Kendo UI Sortable widget and disable the top rows from reordering.
 
-###### Example
+
 
 ```dojo
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>

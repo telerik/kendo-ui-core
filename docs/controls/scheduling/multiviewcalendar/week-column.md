@@ -10,7 +10,7 @@ position: 7
 
 In the MultiViewCalendar, you can render a column which displays the number of the weeks within the current `month` view.
 
-###### Example
+
 
 ```dojo
     <div id="multiViewCalendar"></div>

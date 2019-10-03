@@ -12,7 +12,7 @@ The following example demonstrates how to set up the Scheduler to work offline.
 
 For more information, refer to the article on [working offline]({% slug offlinesupport_kendoui_datasourcecomponent %}).
 
-###### Example
+
 
 ```dojo
     <div id="example">

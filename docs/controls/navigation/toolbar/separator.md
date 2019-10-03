@@ -12,7 +12,7 @@ The Separator can act as a delimiter between the ToolBar commands.
 
 The following example demonstrates how to define a Separator.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

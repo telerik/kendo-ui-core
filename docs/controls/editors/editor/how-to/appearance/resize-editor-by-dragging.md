@@ -10,7 +10,7 @@ slug: howto_resize_the_editor_by_dragging_editor
 
 The following example demonstrates how to resize the Kendo UI Editor by dragging its bottom-right corner.
 
-###### Example
+
 
 ```dojo
 <style>

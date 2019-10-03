@@ -18,7 +18,7 @@ While, as a result, the AngularJS scope model field (`$scope.treeData`) does not
 
 The following example demonstrates how to bind the checked state of a Kendo UI TreeView to a custom model field in AngularJS applications.
 
-###### Example
+
 
 ```dojo
   <link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">

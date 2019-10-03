@@ -41,7 +41,7 @@ The first day of the week in the Calendar view depends on the applied [culture](
 
 The following example demonstrates how to create a DateRangePicker with a selected date and a defined minimum and maximum dates. Note that the DateRangePicker sets the range only if the entered date is valid and within min and max values.
 
-###### Example
+
 
     <div id="daterangepicker"></div>
 
@@ -86,7 +86,7 @@ To disable a date, either:
 
 When you disable dates by setting an array, list the days that need to be disabled by using the first letters from their names in English.
 
-###### Example
+
 
 ```dojo
     <div id="daterangepicker"></div>
@@ -105,7 +105,7 @@ When you disable dates by setting an array, list the days that need to be disabl
 
 When you disable dates by adding a function, determine its return value as `true` for the date that is disabled.
 
-###### Example
+
 
 ```dojo
     <div id="daterangepicker"></div>
@@ -128,7 +128,7 @@ When you disable dates by adding a function, determine its return value as `true
 
 The DateRangePicker works with the JavaScript `Date` objects that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
 
-###### Example
+
 
 ```dojo
     <div id="daterangepicker"></div>

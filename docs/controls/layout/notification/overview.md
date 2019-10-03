@@ -22,7 +22,7 @@ The element will be hidden if the widget is used with popup notifications, or if
 
 The example below demonstrates how to initialize the Notification and what its basic usage is.
 
-###### Example
+
 
     <span id="notification"></span>
 
@@ -51,7 +51,7 @@ For more information on Notification templates, refer to the [Templates section 
 
 The example below demonstrates how to apply built-in notification types.
 
-###### Example
+
 
     <span id="notification"></span>
 
@@ -87,7 +87,7 @@ The option of hiding a notification manually can also be postponed, which is use
 
 The example below demonstrates how to manage the hiding settings of a notification.
 
-###### Example
+
 
     <span id="notification"></span>
 
@@ -120,7 +120,7 @@ If the popup content is expected to vary and stacking is likely to occur, it is 
 
 The example below demonstrates how to manage the positioning, stacking, and sizing functionalities of notifications.
 
-###### Example
+
 
     <span id="notification"></span>
 
@@ -159,7 +159,7 @@ Kendo UI Notification also allows for displaying static notifications, which do 
 
 The example below demonstrates how to enable static notifications.
 
-###### Example
+
 
     <div id="notification"></div>
 
@@ -178,7 +178,7 @@ The example below demonstrates how to enable static notifications.
 
 It is possible for a single Notification widget instance to display different messages with different settings, e.g. messages related to automatic hiding, hide timeouts, etc. To apply the desired configuration options, use the [`setOptions`](/api/javascript/ui/widget/methods/setoptions) method. The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times as necessary.
 
-###### Example
+
 
     <span id="notification"></span>
     <script>
@@ -233,7 +233,7 @@ For more information on the configuration options, refer to the [Kendo UI Notifi
 
 Kendo UI Notification allows configuring multiple templates. Each template will be used together with its corresponding [notification type](#configuration-Types), either build-in, or custom. If you define a custom template for a built-in notification type, you will no longer be able to use the corresponding built-in template, but you will still be able to use the shorthand show methods, as demonstrated in the example below.
 
-###### Example
+
 
     <span id="notification"></span>
 

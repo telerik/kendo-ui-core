@@ -37,7 +37,7 @@ The `<form>` tag in the page is what Web Forms uses to post any data in the page
 
 Now that you removed the `form` tag, the server tag at the top of the page declaring the page language and preceding code is not necessary either. The project is using straight HTML here, so remove the `runat` attribute from the head, as demonstrated in the example below.
 
-###### Example
+
 
     <!DOCTYPE html>
 
@@ -80,7 +80,7 @@ It turns out that the `Script` includes do not need a type. If you do not specif
 
 When you are done pruning, your code is simple and looks as demonstrated in the example below.
 
-###### Example
+
 
     <!DOCTYPE html>
 
@@ -109,13 +109,13 @@ You now have everything it takes to get started. Since we already have an `emplo
 
 Make a Grid by adding an empty `div` to the page with an id of `employeesGrid`. You are going to select this later with jQuery to turn it into a Kendo UI Grid.
 
-###### Example
+
 
      <div id="employeesGrid"></div>
 
 Now turn this grid into a Kendo UI Grid using JavaScript. To do that, select the `div` by its ID with a jQuery selector and then call the `kendoGrid` function. Inside that function, create the [Kendo UI DataSource](http://demos.telerik.com/kendo-ui/web/datasource/index.html) for the grid and set its `read` endpoint to the `Get` method on the `EmployeesController`. The `Get` method simply specifies that the controller should respond to a `GET` HTTP request at the `api/employees` endpoint.
 
-###### Example
+
 
     $(function () {
 
@@ -138,7 +138,7 @@ Kendo UI automatically creates columns for each of the data items and assigns th
 
 The example below demonstrates how to specify the Grid columns.
 
-###### Example
+
 
      $(function () {
         $("#employeesGrid").kendoGrid({
@@ -171,7 +171,7 @@ Assume that this grid is backed by data with thousands of rows, not just 10. In 
 
 Configure the paging functionality in the grid by setting `pageable: true`. Set the `pageSize` on the DataSource as demonstrated in the example below, where the `pageSize` is set to 3 since there are just 10 records to work with.
 
-###### Example
+
 
     $(function () {
         $("#employeesGrid").kendoGrid({
@@ -195,7 +195,7 @@ Configure the paging functionality in the grid by setting `pageable: true`. Set 
 
 Push this paging to the server. To tell Kendo UI to do this, toggle the `serverPaging: true` on the DataSource in the grid, as demonstrated in the example below.
 
-###### Example
+
 
      $(function () {
         $("#employeesGrid").kendoGrid({
@@ -240,7 +240,7 @@ LINQ has these functions built in and they are simple to use. Retrieve the value
 
 The example below demonstrates how to create a Kendo UI Grid.
 
-###### Example
+
 
     HttpRequest request = HttpContext.Current.Request;
 
@@ -280,7 +280,7 @@ However, for this scenario, the `Array` is going to contain a collection of clas
 
 Your `Reponse` model object should look like the one demonstrated in the example below.
 
-###### Example
+
 
     public class Response {
         // properties public Array Data { get; set; }
@@ -295,7 +295,7 @@ A constructor was also added so that this object can be built by passing values 
 
 Now alter the `Get` method to return `Model.Response` instead of `List<Model.Employee>`. Also, instead of casting the returned query results to a list, cast them `ToArray()`; You can do this inline right off of the LINQ query. The count can be ascertained from the `Data.Employee` LINQ object by calling its `Count()` method, as demonstrated int he example below.
 
-###### Example
+
 
     public Models.Response Get() {
         // get the take and skip parameters
@@ -311,7 +311,7 @@ Now alter the `Get` method to return `Model.Response` instead of `List<Model.Emp
 <!--_-->
 If you fire up the application now, the Grid is going to be empty. This is because the collection of employees is no longer the top level element. You need to tell Kendo UI about your new response structure. Specifically, it needs to know where the repeating data is (the employees array) and where the total count of records is. This is done in the `schema` configuration, as demonstrated in the example below.
 
-###### Example
+
 
      $(function () {
         $("#employeesGrid").kendoGrid({

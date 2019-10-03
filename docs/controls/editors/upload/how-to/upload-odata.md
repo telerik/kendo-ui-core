@@ -15,7 +15,7 @@ In order for the OData service to consume a file, the body of the sent request h
 >
 > The `useArrayBuffer` option enables you to use the Upload in SharePoint 2013 and utilize its native [REST service for the file upload mechanism](https://msdn.microsoft.com/en-us/library/office/dn292553.aspx).
 
-###### Example
+
 
 ```
 <input type="file" name="files" id="photos" />

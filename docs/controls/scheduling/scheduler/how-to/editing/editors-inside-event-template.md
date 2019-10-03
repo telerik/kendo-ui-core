@@ -10,7 +10,7 @@ slug: howto_nest_editorsinside_event_templates_scheduler
 
 The following example demonstrates how to nest editors inside the Scheduler event templates and update the underlying model.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

@@ -15,7 +15,7 @@ The examples below demonstrate how to use the Kendo UI Sortable widget with a Ke
 
 The example below demonstrates how to reorder the rows of a Kendo UI Grid in a non-editable mode by using the Kendo UI Sortable in AngularJS.
 
-###### Example
+
 
 ```dojo
   <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -81,7 +81,7 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in a n
 
 The example below demonstrates how to reorder the rows of a Kendo UI Grid in an editable mode by using the Kendo UI Sortable in AngularJS.
 
-###### Example
+
 
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

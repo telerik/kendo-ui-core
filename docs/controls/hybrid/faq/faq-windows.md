@@ -22,7 +22,7 @@ By default, WP8 highlights all links when they are active (hold down). Stopping 
 
 The example below demonstrates the meta tag you need to add to work around this issue.
 
-###### Example
+
 
     <meta name="msapplication-tap-highlight" content="no" />
 

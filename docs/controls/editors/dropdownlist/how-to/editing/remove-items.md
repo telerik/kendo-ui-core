@@ -10,7 +10,7 @@ slug: howto_remove_items_dropdownlist
 
 The following example demonstrates how to remove items from a Kendo UI DropDownList.
 
-###### Example
+
 
 ```dojo
   <div id="example">

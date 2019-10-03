@@ -11,7 +11,7 @@ You can enable the users to slide the Switch to reveal its second value.
 
 The following example demonstrates how to enable the dragging of the Switch drag handle.
 
-###### Example
+
 
 ```dojo
   <input type="checkbox" id="switch" />

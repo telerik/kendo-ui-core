@@ -9,7 +9,7 @@ slug: howto_usejssignature_hybridlistview
 
 The example below demonstrates how to include a signing functionality by using jSignature in a hybrid Kendo UI ListView.
 
-###### Example
+
 
 ```dojo
     <script src="https://willowsystems.github.io/jSignature/js/libs/jSignature.min.js"></script>

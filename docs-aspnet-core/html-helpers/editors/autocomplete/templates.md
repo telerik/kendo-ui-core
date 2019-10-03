@@ -8,9 +8,9 @@ position: 3
 
 # Templates
 
-The AutoComplete provides full control over the way an item, the pop-up header and the pop-up footer is rendered through the Kendo UI for jQuery templates.
+The AutoComplete provides full control over the way an item, the popup header and the popup footer is rendered through the Kendo UI for jQuery templates.
 
-For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview). For a runnable example, refer to the [demo on customizing the templates in the DropDownList](https://demos.telerik.com/aspnet-core/autocomplete/template).
+For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview). For a runnable example, refer to the [demo on customizing the templates in the AutoComplete](https://demos.telerik.com/aspnet-core/autocomplete/template).
 
 ## Basic Usage
 
@@ -81,7 +81,7 @@ The following example demonstrates how to define an item template and how to eva
 
 ## Header Template
 
-The header template manages the way the pop-up header of a AutoComplete is rendered.
+The header template manages the way the popup header of a AutoComplete is rendered.
 
     <!-- Template -->
     <script id="headerTemplate" type="text/x-kendo-template">
@@ -104,7 +104,7 @@ The header template manages the way the pop-up header of a AutoComplete is rende
 
 ## Footer Template
 
-The footer template manages the way the pop-up footer of a AutoComplete is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
+The footer template manages the way the popup footer of a AutoComplete is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
     <!-- Template -->
     <script id="footerTemplate" type="text/x-kendo-template">

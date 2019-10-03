@@ -14,7 +14,7 @@ This approach is useful when you create a group of mutually exclusive Toggle But
 
 The following example demonstrates how to define a group of mutually exclusive Toggle Buttons.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

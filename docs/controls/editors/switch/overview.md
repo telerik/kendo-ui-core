@@ -18,7 +18,7 @@ When initialized, it shows the currently selected value. The Switch can be creat
 
 To create the Switch, use an HTML `<input>` element.
 
-###### Example
+
 
     <input id="switch" />
 
@@ -26,7 +26,7 @@ To create the Switch, use an HTML `<input>` element.
 
 To initialize the Switch, use a jQuery selector.
 
-###### Example
+
 
     $(document).ready(function() {
         $("#switch").kendoSwitch();
@@ -40,7 +40,7 @@ The checked state of the Switch depends on the [`checked` configuration option](
 
 The following example demonstrates how to initialize the Kendo UI Switch from a checked `input`.
 
-###### Example
+
 
     <input type="checkbox" id="switch" checked="checked" />
 
@@ -50,7 +50,7 @@ The following example demonstrates how to initialize the Kendo UI Switch from a 
 
 The following example demonstrates how to initialize a checked Kendo UI Switch by using the jQuery plugin syntax.
 
-###### Example
+
 
     <input type="checkbox" id="switch" />
 
@@ -66,7 +66,7 @@ The following example demonstrates how to initialize a checked Kendo UI Switch b
 
 The following example demonstrates how to customize the checked and unchecked messages of the Switch.
 
-###### Example
+
 
     <input type="checkbox" id="switch" />
 
@@ -82,7 +82,7 @@ The following example demonstrates how to customize the checked and unchecked me
 
 The following example demonstrates how to disable the Switch.
 
-###### Example
+
 
     <input type="checkbox" id="switch" />
 
@@ -96,7 +96,7 @@ The following example demonstrates how to disable the Switch.
 
 The following example demonstrates how to render the Switch in its read-only state.
 
-###### Example
+
 
     <input type="checkbox" id="switch" />
 

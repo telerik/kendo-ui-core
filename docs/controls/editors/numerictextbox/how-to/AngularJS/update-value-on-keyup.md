@@ -10,7 +10,7 @@ position: 1
 
 The following example demonstrates how to update the NumericTextBox value on `keyup`.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="app">

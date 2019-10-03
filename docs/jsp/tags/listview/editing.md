@@ -16,7 +16,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 1** Define the `item` template.
 
-###### Example
+
 
         <script type="text/x-kendo-tmpl" id="template">
             <div class="product-view">
@@ -43,7 +43,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 2** Define the `edit` template.
 
-###### Example
+
 
         <script type="text/x-kendo-tmpl" id="editTemplate">
             <div class="product-view">
@@ -79,7 +79,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 3** Define the interface for creating new items.
 
-###### Example
+
 
         <div class="k-toolbar k-grid-toolbar">
             <a class="k-button k-button-icontext k-add-button" href="#">
@@ -99,7 +99,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 4** Specify the `parameterMap` and the action methods which will handle the `Create`, `Update` and `Destroy` operations.
 
-###### Example
+
 
         <kendo:listView name="listView" template="template" pageable="true"
             editTemplate="editTemplate">
@@ -124,7 +124,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 5** Specify the properties of the model as well as the unique identifier (primary key).
 
-###### Example
+
 
         <kendo:listView name="listView" template="template" pageable="true"
             editTemplate="editTemplate">
@@ -159,7 +159,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 6** Implement the `Read` action method.
 
-###### Example
+
 
         @Autowired
         private ProductDao product;
@@ -172,7 +172,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 7** Implement the `Create` action method.
 
-###### Example
+
 
         @SuppressWarnings("serial")
         @RequestMapping(value = "/editing/create", method = RequestMethod.POST)
@@ -193,7 +193,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 8** Implement the `Update` action method.
 
-###### Example
+
 
         @RequestMapping(value = "/editing/update", method = RequestMethod.POST)
         public @ResponseBody Product update(@RequestBody Map<String, Object> model) {
@@ -212,7 +212,7 @@ To configure the Kendo UI ListView for JSP editing, follow the steps below.
 
 **Step 9** Implement the `Destroy` action method.
 
-###### Example
+
 
         @RequestMapping(value = "/editing/destroy", method = RequestMethod.POST)
         public @ResponseBody Product destroy(@RequestBody Map<String, Object> model) {

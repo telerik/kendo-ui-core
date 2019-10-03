@@ -36,7 +36,7 @@ The built-in [`pasteCleanup`](/api/javascript/ui/editor/configuration/pasteclean
 
 The following example demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `span` option, the `span` tags are removed.
 
-###### Example
+
 
 ```dojo
     <p>Copy this is a paragraph that has some <span style="font-family:Impact, Charcoal, sans-serif;">inline </span><span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">styles</span> and paste it in the Editor.</p>
@@ -61,7 +61,7 @@ The `msConvertLists` is an option that enables the end user to successfully past
 
 The following example demonstrates how to adjust the MS Word specific options. To see the result, paste some content from MS Word and click on **PREVIEW**.
 
-###### Example
+
 
 ```dojo
     <textarea id="editor"></textarea>
@@ -82,7 +82,7 @@ The `custom` field is a powerful way to define your own logic to clean the paste
 
 The following example demonstrates a simple logic to strip the `<strong>` tags from the pasted HTML content.
 
-###### Example
+
 
 ```dojo
     <p>some text with <strong>bold text</strong> inside.</p>

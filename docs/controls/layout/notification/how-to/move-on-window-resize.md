@@ -15,7 +15,7 @@ The code from the snippet executes the following actions:
 1. Calculates the expected position of the first (oldest) notification popup and compare it with the current position.
 1. Moves all notification popups, according to the discrepancy derived from the previous point.
 
-###### Example
+
 
 ```dojo
     <div id="example">

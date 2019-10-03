@@ -9,7 +9,7 @@ slug: howto_closetoolbarpopupmanually_toolbar
 
 The example below demonstrates how to close the Kendo UI ToolBar popup from a button `click` event in a template.
 
-###### Example
+
 
 ```dojo
    <div id="toolbar"></div>

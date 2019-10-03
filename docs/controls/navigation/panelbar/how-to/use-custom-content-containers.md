@@ -9,7 +9,7 @@ slug: howto_use_custom_content_containers_in_the_panelbar_widget
 
 The example below demonstrates how to use custom content containers in the Kendo UI PanelBar widget.
 
-###### Example
+
 
 ```dojo
     <style>

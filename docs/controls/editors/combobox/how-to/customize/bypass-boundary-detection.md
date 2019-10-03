@@ -10,7 +10,7 @@ slug: howto_bypass_boudary_detection_combobox
 
 The following example demonstrates how to auto-size the popup height in a Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
 <div id="example" role="application">

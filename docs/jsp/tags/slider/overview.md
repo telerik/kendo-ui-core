@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 **Step 2** Create a new action method.
 
-###### Example
+
 
         @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
         public String index() {
@@ -36,13 +36,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
+
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 4** Add a `slider` tag.
 
-###### Example
+
 
         <kendo:slider name="slider" class="temperature" min="0" max="30" smallStep="1" largeStep="10" value="18">
 	    </kendo:slider>
@@ -53,7 +53,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 You can subscribe to all [events exposed by Kendo UI Slider](/api/javascript/ui/slider#events) by the handler name.
 
-###### Example
+
 
       <kendo:slider name="slider" change="sliderOnChange" slide="sliderOnSlide">
       </kendo:slider>
@@ -74,7 +74,7 @@ You can subscribe to all [events exposed by Kendo UI Slider](/api/javascript/ui/
 
 You are able to reference an existing Slider instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo Slider tag declaration
     <script>

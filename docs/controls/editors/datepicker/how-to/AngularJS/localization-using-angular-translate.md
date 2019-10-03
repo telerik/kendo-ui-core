@@ -10,7 +10,7 @@ position: 1
 
 The following example demonstrates how to localize a DatePicker in an AngularJS environment by using [Angular Translate](https://github.com/angular-translate/angular-translate).
 
-###### Example
+
 
 ```dojo
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bower-angular-translate/2.0.1/angular-translate.min.js"></script>

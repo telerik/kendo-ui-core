@@ -10,7 +10,7 @@ slug: howto_set_datasource_dynamically_dropdownlist
 
 The following example demonstrates how to dynamically set the DataSource in a Kendo UI DropDownList widget.
 
-###### Example
+
 
 ```dojo
   <div id="example">

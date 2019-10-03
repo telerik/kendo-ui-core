@@ -10,7 +10,7 @@ slug: howto_add_controlsto_custom_event_editor_scheduler
 
 The following example demonstrates how to add Kendo UI controls to a custom event editor in the Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="scheduler"></div>

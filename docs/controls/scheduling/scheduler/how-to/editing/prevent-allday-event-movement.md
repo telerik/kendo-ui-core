@@ -10,7 +10,7 @@ slug: howto_preventmovingalldayevents_fromalldayheader_scheduler
 
 The following example demonstrates how to prevent the movement of events if users try to drop it outside the **All Day** header of the Scheduler.
 
-###### Example
+
 
 ```dojo
 <div id="scheduler"></div>

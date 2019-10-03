@@ -18,7 +18,7 @@ To configure the Kendo UI DropDownList for Ajax binding, follow the steps below 
 
 **Step 1** Add a new action method which will return data to populate the DropDownList.
 
-###### Example
+
 
         @Autowired
         private ProductDao product;
@@ -30,7 +30,7 @@ To configure the Kendo UI DropDownList for Ajax binding, follow the steps below 
 
 **Step 2** Return the result as JSON.
 
-###### Example
+
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody List<?> DataSourceResult read() {
@@ -40,7 +40,7 @@ To configure the Kendo UI DropDownList for Ajax binding, follow the steps below 
 
 **Step 3** In the view, configure the DropDownList to use the action method created in the previous steps.
 
-###### Example
+
 
         <c:url value="/web/dropdownlist/remote-data/read" var="readUrl" />
 

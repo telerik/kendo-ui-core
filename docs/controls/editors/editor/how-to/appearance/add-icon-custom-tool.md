@@ -14,7 +14,7 @@ To add such visual elements, use the automatically generated class name taken fr
 
 The following example demonstrates how to decorate your own custom tool with a background image or a FontAwesome icon.
 
-###### Example
+
 
 ```dojo
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">

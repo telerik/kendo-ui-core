@@ -41,7 +41,7 @@ The following example demonstrates how to:
 2. Add the [Bootstrap feel to the checkboxes]({% slug themesandappearnce_kendoui_desktopwidgets %}#common-css-files).
 3. Show nested items under the TreeView elements.
 
-###### Example
+
 
 ```dojo
   <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css">

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
     <?php
     $transport = new \Kendo\Data\DataSourceTransport();
@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Create an AutoComplete, configure its `dataTextField` option and set its data source.
 
-###### Example
+
 
     <?php
     $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 4** Output the AutoComplete by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $autoComplete->render();
@@ -78,7 +78,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
     <?php
     $db = new PDO('sqlite:../sample.db');
@@ -86,7 +86,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Retrieve all records from the **Products** table.
 
-###### Example
+
 
     <?php
     $statement = $db->prepare('SELECT * FROM Products');
@@ -95,7 +95,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
     <?php
     // Set response content type
@@ -123,7 +123,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
    <?php
    $transport = new \Kendo\Data\DataSourceTransport();
@@ -167,7 +167,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 3** Create an AutoComplete, configure its `dataTextField` option and set its `dataSource`.
 
-###### Example
+
 
     <?php
     $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
@@ -177,7 +177,7 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 **Step 4** Output the AutoComplete by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $autoComplete->render();
@@ -191,13 +191,13 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
 
 **Step 3** Read the request body and parse it as JSON. In the previous example you configured the Kendo UI DataSource to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -205,7 +205,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Create a new instance of the `DataSourceResult` class and call its `read` method.
 
-###### Example
+
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -216,7 +216,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 5** Return the result of the `read` method as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

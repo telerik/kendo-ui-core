@@ -13,8 +13,6 @@ The reason for this behavior is that the viewport of the hidden DOM element is z
 
 To handle such situations, call the `value` method of the Kendo UI FlatColorPicker widget again after showing it. This reassigns the color and positions the selection to the selected color.
 
-###### Example
-
 ```dojo
     <div id="colorPickerFlat"></div>
     <div id="colorPicker"></div>
@@ -47,5 +45,7 @@ To handle such situations, call the `value` method of the Kendo UI FlatColorPick
 
 ## See Also
 
-* [ColorPicker JavaScript API Reference](/api/javascript/ui/colorpicker)
-* [ColorPalette JavaScript API Reference](/api/javascript/ui/colorpalette)
+* [Basic Usage of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/index)
+* [Using the API of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/api)
+* [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
+* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)

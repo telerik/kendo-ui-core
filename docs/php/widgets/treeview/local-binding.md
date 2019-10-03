@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when binding the Kendo UI TreeView 
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when binding the Kendo UI TreeView 
 
 **Step 3** Retrieve all records from the **Employees** table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT EmployeeID, FirstName, ReportsTo FROM Employees');
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when binding the Kendo UI TreeView 
 
 **Step 4** Convert the table rows into hierarchical data.
 
-###### Example
+
 
         <?php
         function toHierarchy($rows, $idField = 'id', $foreignKey = 'parent') {
@@ -89,7 +89,7 @@ Below are listed the steps for you to follow when binding the Kendo UI TreeView 
 
 **Step 5** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -99,7 +99,7 @@ Below are listed the steps for you to follow when binding the Kendo UI TreeView 
 
 **Step 6** Create a [TreeView](/api/php/Kendo/UI/TreeView), configure its [`dataTextField`](/api/php/Kendo/UI/TreeView#dataTextField) and set its [`dataSource`](/api/php/Kendo/UI/TreeView#datasource).
 
-###### Example
+
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -112,7 +112,7 @@ Below are listed the steps for you to follow when binding the Kendo UI TreeView 
 
 **Step 7** Output the TreeView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $treeview->render();

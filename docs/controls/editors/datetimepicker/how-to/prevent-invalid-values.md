@@ -9,7 +9,7 @@ slug: howto_prevent_invalid_values_datetimepicker
 
 The following example demonstrates how to prevent invalid values in a Kendo UI DateTimePicker.
 
-###### Example
+
 
 ```dojo
   <div id="example">

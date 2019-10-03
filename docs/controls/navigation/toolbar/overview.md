@@ -21,7 +21,7 @@ The ToolBar consists of three main areas: ToolBar wrapper, overflow anchor, and 
 
 The example below demonstrates how to initialize the ToolBar and apply its basic functionalities.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -86,7 +86,7 @@ The example below demonstrates how to initialize the ToolBar and apply its basic
 
 The example below demonstrates the properties of each button.
 
-###### Example
+
 
     $("#toolbar").kendoToolBar({
         items: [
@@ -163,7 +163,7 @@ The `overflow` property accepts the following values:
 
 The example below demonstrates how to use icons in the ToolBar when setting the appearance of the Button.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -191,7 +191,7 @@ The `showText` property accepts the following values:
 
 The example below demonstrates how to define a button displayed only as an icon in the ToolBar wrapper and having only text in the command overflow container.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -219,7 +219,7 @@ The Toggle Button allows users to change a setting between two states. To define
 
 The example below demonstrates how to define a Toggle Button in the ToolBar widget.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -244,7 +244,7 @@ Only one button from a group of buttons can be selected at a time. This is usefu
 
 The example below demonstrates how to define a group of mutually exclusive Toggle Buttons.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -264,7 +264,7 @@ The Split Button is a composite control which has a primary (main) button and al
 
 The example below demonstrates how to defines a Split Button in the ToolBar widget.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -292,7 +292,7 @@ The Button Group consists of multiple button elements that are visually separate
 
 The example below demonstrates how to define a Button Group in the ToolBar widget.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -314,7 +314,7 @@ The example below demonstrates how to define a Button Group in the ToolBar widge
 
 The example below demonstrates how to define a Button Group with mutually exclusive options.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -341,7 +341,7 @@ The Separator can act as a delimiter between the ToolBar commands.
 
 The example below demonstrates how to define a Separator.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -367,7 +367,7 @@ Unlike all other commands the template command does not need a type set. If a te
 
 The example below demonstrates how to add a template command.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -387,7 +387,7 @@ The example below demonstrates how to add a template command.
 
 The example below demonstrates how to add a template command that is going to appear only in the ToolBar wrapper.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -407,7 +407,7 @@ Custom template commands allow you to add other Kendo UI widgets in the ToolBar.
 
 The example below demonstrates how to implement a Kendo UI DropDown widget in the Kendo UI ToolBar.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -439,7 +439,7 @@ By design, the ToolBar detects changes in the viewport width and hides the overf
 
 The example below demonstrates how to use the `overflow` property.
 
-###### Example
+
 
     <div id="toolbar" style="min-width: 240px;"></div>
 
@@ -482,7 +482,7 @@ For more information on the configuration options Kendo UI ToolBar supports, ref
 
 The example below demonstrates how to use ToolBar events.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

@@ -20,7 +20,7 @@ In a nested-Splitter scenario, the inner Splitters remove their borders automati
 
 In the first example below, the outer Splitter has no siblings and has a 100% height style applies. Its parent is the `<body>` element, so it receives a `height:100%` style. This in turn requires the `<html>` element to obtain the same style.
 
-###### Example
+
 
 ```dojo
 <style>
@@ -103,7 +103,7 @@ If the dimensions of the Splitter do not depend directly on the browser viewport
 
 The example below demonstrates a Kendo UI Splitter with a calculated height.
 
-###### Example
+
 
 ```dojo
 <style>

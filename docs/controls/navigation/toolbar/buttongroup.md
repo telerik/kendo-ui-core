@@ -14,7 +14,7 @@ In the command overflow popup, the ButtonGroup is rendered as a list of commands
 
 The following example demonstrates how to define a ButtonGroup in the ToolBar widget.
 
-###### Example
+
 
     <div id="toolbar"></div>
 
@@ -36,7 +36,7 @@ The following example demonstrates how to define a ButtonGroup in the ToolBar wi
 
 The following example demonstrates how to define a ButtonGroup with mutually exclusive options.
 
-###### Example
+
 
     <div id="toolbar"></div>
 

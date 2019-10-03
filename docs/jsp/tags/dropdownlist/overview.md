@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 2** Create a new action method and pass the **Products** table to the View.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index(Model model) {
@@ -38,13 +38,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
+
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 4** Add a server-bound DropDownList.
 
-###### Example
+
 
         <kendo:dropdownlist name="productDropDownList" taTextField="productName" dataValueField="productId">
             <kendo:dataSource data="${products}"></kendo:dataSource>
@@ -56,7 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 You can subscribe to all [events exposed by Kendo UI DropDownList](/api/javascript/ui/dropdownlist#events) by the handler name.
 
-###### Example
+
 
         <kendo:dropDownList name="productDropDownList" dataTextField="productName" dataValueField="productId" change="dropdownlist_change">
             <kendo:dataSource data="${products}">
@@ -75,7 +75,7 @@ You can subscribe to all [events exposed by Kendo UI DropDownList](/api/javascri
 
 You are able to reference an existing DropDownList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo DropDownList tag declaration
     <script>

@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
 
 **Step 3** Retrieve all records from the `GanttTasks` and `GanttDependencies` tables (format the Dates as UTC).
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT *, strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start, strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End FROM GanttTasks');
@@ -51,7 +51,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
 <!--*-->
 **Step 4** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) for the tasks and set its [`data`](/api/php/Kendo/Data/DataSource#data) and [`schema`](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required to specify the model fields.
 
-###### Example
+
 
         <?php
         // Create the schema model
@@ -133,7 +133,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
 
 **Step 5** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) for the dependencies and set its [`data`](/api/php/Kendo/Data/DataSource#data) and [`schema`](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required to specify the model fields.
 
-###### Example
+
 
         <?php
         // Create the schema model
@@ -181,7 +181,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
 
 **Step 6** Create a [gantt](/api/php/Kendo/UI/Gantt) and set its [data source](/api/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/php/Kendo/UI/Gantt#dependencies).
 
-###### Example
+
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -192,7 +192,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
 
 **Step 7** Output the gantt by echoing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
-###### Example
+
 
         <?php
         echo $gantt->render();
@@ -206,13 +206,13 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 **Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
 
 **Step 3** Create a new instance of the `DataSourceResult` and use its `read` method to retrieve data from the database.
 
-###### Example
+
 
         <?php
         // The constructor accepts the PDO DSN for the target database
@@ -226,7 +226,7 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 **Step 4** Configure a `DataSource` and `schema` for the tasks.
 
-###### Example
+
 
         <?php
         // Create the schema model
@@ -310,7 +310,7 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 **Step 5** Configure a `DataSource` and `schema` for the dependencies.
 
-###### Example
+
 
         <?php
         // Create the schema model
@@ -360,7 +360,7 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 **Step 6** Create a Gantt and set its `DataSource` and dependencies `DataSource`.
 
-###### Example
+
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -371,7 +371,7 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 **Step 7** Output the Gantt by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $gantt->render();

@@ -20,7 +20,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
 
 **Step 2.** Scroll the container using JavaScript, as the example below demonstrates.
 
-###### Example
+
 
 ```dojo
     <style>

@@ -22,7 +22,7 @@ Specify the page width when the content becomes hidden via the `breakpoint` conf
 
 The example below demonstrates how to collapse the menu on the left of small screens.
 
-###### Example
+
 
 ```dojo
   <header>

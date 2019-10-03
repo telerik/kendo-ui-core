@@ -10,7 +10,7 @@ slug: howto_navigate_the_scheduler_via_separate_calendar_scheduler
 
 The following example demonstrates how to navigate the Kendo UI Scheduler by using a separate calendar.
 
-###### Example
+
 
 ```dojo
     <div id="example" class="k-content">

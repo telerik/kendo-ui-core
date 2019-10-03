@@ -18,7 +18,7 @@ It also supports custom templates for its `month` view and configuration options
 
 To initialize the Calendar, use a jQuery selector.
 
-###### Example
+
 
     <div id="calendar"></div>
 
@@ -47,7 +47,7 @@ The first day of the week depends on the applied [culture]({% slug culture_defin
 
 The following example demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates.
 
-###### Example
+
 
     <div id="calendar"></div>
 
@@ -76,7 +76,7 @@ The following views are predefined:
 
 The following example demonstrates how to create a Calendar that allows users to select a month.
 
-###### Example
+
 
     <div id="calendar"></div>
 
@@ -93,7 +93,7 @@ The Calendar enables you to customize the rendered day for the `month` view.
 
 The following example demonstrates how to create a Calendar by using a custom template.
 
-###### Example
+
 
     <div id="calendar"></div>
 
@@ -122,7 +122,7 @@ You can configure the Calendar to display the week number and also use the week 
 
 The [`weekNumber`](/api/javascript/ui/calendar/configuration/weeknumber) option enables the Calendar to display the week number on an annual base to the left side of month view and as a separate column.
 
-###### Example
+
 
 ```dojo
    <div id="calendar"></div>
@@ -144,7 +144,7 @@ The week-number template intends to customize the cells in the **Week** column. 
 
 You can use these properties in the template to make additional calculations.
 
-###### Example
+
 
     <style>
       .italic{
@@ -178,7 +178,7 @@ By default, the user can select a single date from the Calendar by using the mou
 
 As of the Kendo UI 2017 R3 release, the Calendar allows you to implement the multiple date selection by using the [`selectable`](/api/javascript/ui/calendar/configuration/selectable) configuration property.
 
-###### Example
+
 
 ```dojo
    <div id="calendar"></div>
@@ -246,7 +246,7 @@ To disable a date, either:
 
 When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
-###### Example
+
 
 ```dojo
    <div id="calendar"></div>
@@ -262,7 +262,7 @@ When you set an array, list the days that need to be disabled by using the first
 
 When you add a function, determine its return value as `true` for the date that is disabled.
 
-###### Example
+
 
 ```dojo
     <div id="calendar"></div>

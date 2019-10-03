@@ -14,7 +14,7 @@ The widget uses this information to decide when to persist the selected value th
 
 The following example demonstrates how to manually filter the `dataSource` instance of the DropDownList.
 
-###### Example
+
 
 ```dojo
 <div id="example">

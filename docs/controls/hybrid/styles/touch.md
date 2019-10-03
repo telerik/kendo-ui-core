@@ -18,7 +18,7 @@ The Kendo UI Hybrid Application widget automatically initializes a Touch compone
 
 ### Handle Element Touch Events
 
-###### Example
+
 
     <div data-role="view">
         <div data-role="touch" data-tap="onTap">
@@ -34,7 +34,7 @@ The Kendo UI Hybrid Application widget automatically initializes a Touch compone
 
 ### Initialize the Touch Component
 
-###### Example
+
 
     <div data-role="view" data-init="initTouch">
         <div id="touch-surface">

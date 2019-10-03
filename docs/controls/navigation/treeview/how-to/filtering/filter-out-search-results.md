@@ -11,7 +11,7 @@ Your project might require you to enable the searching for TreeView nodes which 
 
 The following example demonstrates how to achieve this behavior and then show the nodes along with their parent items.
 
-###### Example
+
 
 
 ```dojo

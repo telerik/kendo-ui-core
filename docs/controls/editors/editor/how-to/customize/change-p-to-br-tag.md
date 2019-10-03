@@ -9,7 +9,7 @@ slug: howto_change-p-to-br-tag_editor
 
 The example here demonstrates a way to change the default new-line behavior from inserting `<p>` tag to `<br>` tag.
 
-###### Example
+
 
 ```dojo
   <textarea id="editor"></textarea>

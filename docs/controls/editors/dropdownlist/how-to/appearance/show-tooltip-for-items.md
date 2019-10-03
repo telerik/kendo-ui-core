@@ -14,7 +14,7 @@ A possible way to achieve this behavior is to use a Kendo UI Tooltip that displa
 
 The following example demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
 
-###### Example
+
 
 ```dojo
 <input id="dropdownlist" />

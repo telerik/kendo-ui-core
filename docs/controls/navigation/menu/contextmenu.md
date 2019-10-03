@@ -29,7 +29,7 @@ Kendo UI ContextMenu can be initialized in two ways:
 
 The example below demonstrates how to initialize the ContextMenu by using HTML markup.
 
-###### Example
+
 
     <ul id="context-menu">
         <li>Item 1</li>
@@ -45,7 +45,7 @@ The example below demonstrates how to initialize the ContextMenu by using HTML m
 
 The example below demonstrates how to initialize the ContextMenu by using a JSON data object.
 
-###### Example
+
 
     <ul id="context-menu"></ul>
     <script>
@@ -88,7 +88,7 @@ Using [`Kendo HierarchicalDataSource`](/api/framework/hierarchicaldatasource) is
 
 The following example demonstrates how to create a ContextMenu and bind it to a local data source.
 
-###### Example
+
     <div id="target">target</div>
     <ul id="contextmenu"></ul>
 
@@ -115,7 +115,7 @@ The following example demonstrates how to create a ContextMenu and bind it to a 
 
 The following example demonstrates how to create a Menu and bind it to a remote HierarchicalDataSource.
 
-###### Example
+
     <div id="target">target</div>
     <ul id="contextmenu"></ul>
 
@@ -146,7 +146,7 @@ The following example demonstrates how to create a Menu and bind it to a remote 
 
 By default, the ContextMenu is created as a child of the `<body>` element.
 
-###### Example
+
 
 ```dojo
     <body>
@@ -172,7 +172,7 @@ By default, the ContextMenu is created as a child of the `<body>` element.
 
 The following example demonstrates how the page markup from the previous example changes after the initialization of the ContextMenu when the widget is moved to become a child of the `<body>` element and its additional markup&mdash;the wrapper and the title bar&mdash;is generated.
 
-###### Example
+
 
       <body>
         <div id="target"></div>
@@ -196,7 +196,7 @@ By default, the ContextMenu uses a slide animation to expand sub-items on a mous
 
 The example below demonstrates how to change ContextMenu animation and open behavior.
 
-###### Example
+
 
     <ul id="context-menu">
         <li>Item 1</li>
@@ -222,7 +222,7 @@ For more information on configuring Menu items, see the [Menu API demos](http://
 
 The example below demonstrates how to add a new root ContextMenu item.
 
-###### Example
+
 
     <ul id="context-menu">
         <li>Item 1</li>
@@ -242,7 +242,7 @@ By default, the items inside the ContextMenu do not scroll. However, you can ena
 
 The following example demonstrates how to enable scrolling within the ContextMenu.
 
-###### Example
+
 
     <div id="target">Right Click to Open ContextMenu</div>
     <ul id="context-menu">
@@ -288,7 +288,7 @@ The following example demonstrates how to enable scrolling within the ContextMen
 
 You can also customize the scrollable amount by setting a value (in pixels) to the [`distance` property](/kendo-ui/api/javascript/ui/contextmenu/configuration/scrollable.distance). `distance` defaults to `50`.
 
-###### Example
+
 
     <div id="target">Right Click to open the ContextMenu</div>
     <ul id="context-menu">

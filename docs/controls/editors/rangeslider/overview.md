@@ -18,7 +18,7 @@ Unlike the HTML5 range input, the RangeSlider enables the consistent experience 
 
 To create the RangeSlider, use two HTML `<input>` elements in a `<div>` one.
 
-###### Example
+
 
     <div id="rangeSlider">
         <input />
@@ -30,7 +30,7 @@ To create the RangeSlider, use two HTML `<input>` elements in a `<div>` one.
 
 To initialize the RangeSlider, use a jQuery selector.
 
-###### Example
+
 
     $(document).ready(function() {
         $("#rangeSlider").kendoRangeSlider();
@@ -53,7 +53,7 @@ The RangeSlider provides configuration options for you to customize its behavior
 
 The following example demonstrates how to customize the RangeSlider behaviors by configuring its properties.
 
-###### Example
+
 
     $("#rangeSlider").kendoRangeSlider({
         min: 10,
@@ -69,7 +69,7 @@ The following example demonstrates how to customize the RangeSlider behaviors by
 
 To reference to an existing RangeSlider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
 
-###### Example
+
 
     var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
 

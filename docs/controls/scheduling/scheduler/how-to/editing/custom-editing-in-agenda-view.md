@@ -10,7 +10,7 @@ slug: howto_implement_custom_editing_inagenda_view_scheduler
 
 The following example demonstrates how to implement custom editing in the Agenda view of the Scheduler.
 
-###### Example
+
 
 ```dojo
     <div id="example">

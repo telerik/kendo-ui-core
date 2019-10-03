@@ -10,7 +10,7 @@ slug: howto_show_events_in_a_kendo_ui_tooltip_scheduler
 
 The following example demonstrates how to show the events of a Kendo UI Scheduler widget in a Kendo UI Tooltip.
 
-###### Example
+
 
 ```dojo
 <div id="example">

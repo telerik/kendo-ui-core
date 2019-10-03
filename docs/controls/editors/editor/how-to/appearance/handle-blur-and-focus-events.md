@@ -16,7 +16,7 @@ For more information on how to handle the `blur` and `focus` events in AngularJS
 
 The following example demonstrates how to handle the `blur` and the `focus` events of the Editor.
 
-###### Example
+
 
 ```dojo
     <style>

@@ -11,7 +11,7 @@ Your application might require you to persist the expanded state of the TreeView
 
 The following example demonstrates how to achieve this behavior and then restore the nodes upon refreshing the page in a TreeView.
 
-###### Example
+
 
 ```dojo
   <div id="treeview"></div>
