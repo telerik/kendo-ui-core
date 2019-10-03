@@ -395,7 +395,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 /* FormattingTool messages */
   
 if (kendo.ui.editor) {
-(<any>kendo.ui).editor.FormattingTool.prototype.options.items = [
+kendo.ui.editor.FormattingTool.prototype.options.items = [
     {
         text: 'Paragraf',
         value: 'p'
