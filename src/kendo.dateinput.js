@@ -354,11 +354,16 @@ var __meta__ = { // jshint ignore:line
             var element = that.element;
             var formId = element.attr("form");
             var form = formId ? $("#" + formId) : element.closest("form");
+            var initialValue = element[0].value;
+
+            if (!initialValue && that.options.value) {
+                initialValue = that.options.value;
+            }
 
             if (form[0]) {
                 that._resetHandler = function () {
                     setTimeout(function () {
-                        that.value(element[0].value);
+                        that.value(initialValue);
                     });
                 };
 

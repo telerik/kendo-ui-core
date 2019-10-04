@@ -746,11 +746,23 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 element = that.element,
                 formId = element.attr("form"),
-                form = formId ? $("#" + formId) : element.closest("form");
+                form = formId ? $("#" + formId) : element.closest("form"),
+                options = that.options,
+                disabledDate = options.disableDates,
+                optionsValue = that._initialOptions.value,
+                initialValue = element[0].defaultValue;
+
+            if (optionsValue && (disabledDate && disabledDate(optionsValue))) {
+                optionsValue = null;
+            }
+
+            if (!initialValue && optionsValue) {
+                element.attr("value", kendo.toString(optionsValue, options.format, options.culture));
+            }
 
             if (form[0]) {
                 that._resetHandler = function() {
-                    that.value(element[0].defaultValue);
+                    that.value(optionsValue || element[0].defaultValue);
                     that.max(that._initialOptions.max);
                     that.min(that._initialOptions.min);
                 };
