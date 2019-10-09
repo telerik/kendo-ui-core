@@ -981,6 +981,9 @@
 
                     if (!wrapper.is(VISIBLE)) {
                         contentElement.css(OVERFLOW, HIDDEN);
+
+                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-bare");
+
                         wrapper.show().kendoStop().kendoAnimate({
                             effects: showOptions.effects,
                             duration: showOptions.duration,
@@ -1074,13 +1077,15 @@
 
                     this._removeOverlay();
 
+                    // Prevent close animation from stopping
+                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-bare");
+
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
                         complete: proxy(this._deactivate, this)
                     });
-
                     $(window).off(MODAL_NS);
                 }
 
