@@ -1,7 +1,3 @@
-.transition(@transition) {
-    transition: ~"@{transition}";
-}
-
 .flexbox() {
     display: flex;
 }
@@ -80,10 +76,6 @@
 
 .transform-style(...) {
     transform-style: @arguments;
-}
-
-.transition(...) {
-    transition: @arguments;
 }
 
 .guarded-border-radius(@value) when (@value < 0) {

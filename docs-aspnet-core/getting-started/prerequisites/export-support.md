@@ -21,7 +21,12 @@ For more information on the available PDF export options by Kendo UI, refer to t
 
 ## JSZip Library
 
-The [JSZip library](https://stuk.github.io/jszip/) is necessary for the components to support Excel export and for the Spreadsheet to support the import of Excel files. You need to include the JSZip library only if you have to provide support for export to or import from ([`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/fromfile)) Excel files.
+Since Excel files are a zipped collection of XML files, the [JSZip library](https://stuk.github.io/jszip/) is necessary to process the generated workbook to an `.xslx` file.
+
+Include the JSZip library:
+
+* To support client-side Excel export (all components)
+* To support Excel imports with the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet/methods/fromfile) method (Spreadsheet component)
 
 To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 

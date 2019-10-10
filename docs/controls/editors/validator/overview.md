@@ -306,6 +306,17 @@ The following example demonstrates a specific Tooltip placement. The Tooltip rem
 >
 > The validation Tooltip element is bound to the input `name` through the `data-for` attribute.
 
+Within a Grid, the validation tooltip is placed under the input field and is left-aligned with it. By default, the maximum width of the tooltip is 300px. To set a column field width less than 300px, you might need to manually override the default CSS and adjust the desired tooltip position.
+
+###### Example  
+
+    <style>
+      .k-tooltip {
+        max-width: 160px !important;
+        transform: translate(-20%, 0%);
+      }
+    </style>
+
 ## See Also
 
 Articles and how-to examples on the Kendo UI Validator:

@@ -10673,7 +10673,7 @@ declare namespace kendo.dataviz.ui {
         background?: string;
         border?: ArcGaugeGaugeAreaBorder;
         height?: number;
-        margin?: ArcGaugeGaugeAreaMargin;
+        margin?: number | ArcGaugeGaugeAreaMargin;
         width?: number;
     }
 
@@ -10704,8 +10704,8 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         font?: string;
         format?: string;
-        margin?: ArcGaugeScaleLabelsMargin;
-        padding?: ArcGaugeScaleLabelsPadding;
+        margin?: number | ArcGaugeScaleLabelsMargin;
+        padding?: number | ArcGaugeScaleLabelsPadding;
         position?: string;
         template?: string|Function;
         visible?: boolean;
@@ -10957,9 +10957,9 @@ declare namespace kendo.dataviz.ui {
     interface ChartAxisDefaultsLabels {
         font?: string;
         format?: string;
-        margin?: ChartAxisDefaultsLabelsMargin;
+        margin?: number | ChartAxisDefaultsLabelsMargin;
         mirror?: boolean;
-        padding?: ChartAxisDefaultsLabelsPadding;
+        padding?: number | ChartAxisDefaultsLabelsPadding;
         rotation?: string | number | ChartAxisDefaultsLabelsRotation;
         skip?: number;
         step?: number;
@@ -11043,8 +11043,8 @@ declare namespace kendo.dataviz.ui {
         border?: ChartAxisDefaultsTitleBorder;
         color?: string;
         font?: string;
-        margin?: ChartAxisDefaultsTitleMargin;
-        padding?: ChartAxisDefaultsTitlePadding;
+        margin?: number | ChartAxisDefaultsTitleMargin;
+        padding?: number | ChartAxisDefaultsTitlePadding;
         position?: string;
         rotation?: number;
         text?: string;
@@ -11156,9 +11156,9 @@ declare namespace kendo.dataviz.ui {
         dateFormats?: ChartCategoryAxisItemLabelsDateFormats;
         font?: string;
         format?: string;
-        margin?: ChartCategoryAxisItemLabelsMargin;
+        margin?: number | ChartCategoryAxisItemLabelsMargin;
         mirror?: boolean;
-        padding?: ChartCategoryAxisItemLabelsPadding;
+        padding?: number | ChartCategoryAxisItemLabelsPadding;
         rotation?: string | number | ChartCategoryAxisItemLabelsRotation;
         skip?: number;
         step?: number;
@@ -11348,7 +11348,7 @@ declare namespace kendo.dataviz.ui {
         border?: ChartCategoryAxisItemTitleBorder;
         color?: string;
         font?: string;
-        margin?: ChartCategoryAxisItemTitleMargin;
+        margin?: number | ChartCategoryAxisItemTitleMargin;
         padding?: ChartCategoryAxisItemTitlePadding;
         position?: string;
         rotation?: number;
@@ -11409,7 +11409,7 @@ declare namespace kendo.dataviz.ui {
         background?: string;
         border?: ChartChartAreaBorder;
         height?: number;
-        margin?: ChartChartAreaMargin;
+        margin?: number | ChartChartAreaMargin;
         opacity?: number;
         width?: number;
     }
@@ -11452,7 +11452,7 @@ declare namespace kendo.dataviz.ui {
     interface ChartLegendLabels {
         color?: string;
         font?: string;
-        margin?: ChartLegendLabelsMargin;
+        margin?: number | ChartLegendLabelsMargin;
         padding?: ChartLegendLabelsPadding;
         template?: string|Function;
     }
@@ -11479,11 +11479,11 @@ declare namespace kendo.dataviz.ui {
         inactiveItems?: ChartLegendInactiveItems;
         item?: ChartLegendItem;
         labels?: ChartLegendLabels;
-        margin?: ChartLegendMargin;
+        margin?: number | ChartLegendMargin;
         offsetX?: number;
         offsetY?: number;
         orientation?: string;
-        padding?: ChartLegendPadding;
+        padding?: number | ChartLegendPadding;
         position?: string;
         reverse?: boolean;
         spacing?: number;
@@ -11529,7 +11529,7 @@ declare namespace kendo.dataviz.ui {
         border?: ChartPaneTitleBorder;
         color?: string;
         font?: string;
-        margin?: ChartPaneTitleMargin;
+        margin?: number | ChartPaneTitleMargin;
         position?: string;
         text?: string;
         visible?: boolean;
@@ -11541,7 +11541,7 @@ declare namespace kendo.dataviz.ui {
         border?: ChartPaneBorder;
         clip?: boolean;
         height?: number;
-        margin?: ChartPaneMargin;
+        margin?: number | ChartPaneMargin;
         name?: string;
         padding?: ChartPanePadding;
         title?: string | ChartPaneTitle;
@@ -11598,9 +11598,9 @@ declare namespace kendo.dataviz.ui {
     interface ChartPlotArea {
         background?: string;
         border?: ChartPlotAreaBorder;
-        margin?: ChartPlotAreaMargin;
+        margin?: number| ChartPlotAreaMargin;
         opacity?: number;
-        padding?: ChartPlotAreaPadding;
+        padding?: number | ChartPlotAreaPadding;
     }
 
     interface ChartSeriesItemBorder {
@@ -11699,8 +11699,8 @@ declare namespace kendo.dataviz.ui {
         color?: string|Function;
         font?: string|Function;
         format?: string|Function;
-        margin?: ChartSeriesItemLabelsFromMargin;
-        padding?: ChartSeriesItemLabelsFromPadding;
+        margin?: number | ChartSeriesItemLabelsFromMargin;
+        padding?: number | ChartSeriesItemLabelsFromPadding;
         position?: string|Function;
         template?: string|Function;
         visible?: boolean|Function;
@@ -11746,8 +11746,8 @@ declare namespace kendo.dataviz.ui {
         color?: string|Function;
         font?: string|Function;
         format?: string|Function;
-        margin?: ChartSeriesItemLabelsToMargin;
-        padding?: ChartSeriesItemLabelsToPadding;
+        margin?: number | ChartSeriesItemLabelsToMargin;
+        padding?: number | ChartSeriesItemLabelsToPadding;
         position?: string|Function;
         template?: string|Function;
         visible?: boolean|Function;
@@ -11761,8 +11761,8 @@ declare namespace kendo.dataviz.ui {
         distance?: number;
         font?: string|Function;
         format?: string|Function;
-        margin?: ChartSeriesItemLabelsMargin;
-        padding?: ChartSeriesItemLabelsPadding;
+        margin?: number | ChartSeriesItemLabelsMargin;
+        padding?: number | ChartSeriesItemLabelsPadding;
         position?: string|Function;
         rotation?: string|number;
         template?: string|Function;
@@ -11991,7 +11991,7 @@ declare namespace kendo.dataviz.ui {
         labels?: ChartSeriesItemLabels;
         line?: string | ChartSeriesItemLine;
         lowField?: string;
-        margin?: ChartSeriesItemMargin;
+        margin?: number | ChartSeriesItemMargin;
         markers?: ChartSeriesItemMarkers;
         outliers?: ChartSeriesItemOutliers;
         extremes?: ChartSeriesItemExtremes;
@@ -12066,8 +12066,8 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         font?: string;
         format?: string;
-        margin?: ChartSeriesDefaultsLabelsFromMargin;
-        padding?: ChartSeriesDefaultsLabelsFromPadding;
+        margin?: number | ChartSeriesDefaultsLabelsFromMargin;
+        padding?: number | ChartSeriesDefaultsLabelsFromPadding;
         template?: string|Function;
         visible?: boolean;
     }
@@ -12112,8 +12112,8 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         font?: string;
         format?: string;
-        margin?: ChartSeriesDefaultsLabelsToMargin;
-        padding?: ChartSeriesDefaultsLabelsToPadding;
+        margin?: number | ChartSeriesDefaultsLabelsToMargin;
+        padding?: number | ChartSeriesDefaultsLabelsToPadding;
         template?: string|Function;
         visible?: boolean;
     }
@@ -12124,8 +12124,8 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         font?: string;
         format?: string;
-        margin?: ChartSeriesDefaultsLabelsMargin;
-        padding?: ChartSeriesDefaultsLabelsPadding;
+        margin?: number | ChartSeriesDefaultsLabelsMargin;
+        padding?: number | ChartSeriesDefaultsLabelsPadding;
         rotation?: string|number;
         template?: string|Function;
         visible?: boolean;
@@ -12264,8 +12264,8 @@ declare namespace kendo.dataviz.ui {
         border?: ChartTitleBorder;
         color?: string;
         font?: string;
-        margin?: ChartTitleMargin;
-        padding?: ChartTitlePadding;
+        margin?: number | ChartTitleMargin;
+        padding?: number | ChartTitlePadding;
         position?: string;
         text?: string;
         visible?: boolean;
@@ -12361,9 +12361,9 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         font?: string;
         format?: string;
-        margin?: ChartValueAxisItemLabelsMargin;
+        margin?: number | ChartValueAxisItemLabelsMargin;
         mirror?: boolean;
-        padding?: ChartValueAxisItemLabelsPadding;
+        padding?: number | ChartValueAxisItemLabelsPadding;
         rotation?: string | number | ChartValueAxisItemLabelsRotation;
         skip?: number;
         step?: number;
@@ -12541,8 +12541,8 @@ declare namespace kendo.dataviz.ui {
         border?: ChartValueAxisItemTitleBorder;
         color?: string;
         font?: string;
-        margin?: ChartValueAxisItemTitleMargin;
-        padding?: ChartValueAxisItemTitlePadding;
+        margin?: number | ChartValueAxisItemTitleMargin;
+        padding?: number | ChartValueAxisItemTitlePadding;
         position?: string;
         rotation?: number;
         text?: string;
@@ -12650,9 +12650,9 @@ declare namespace kendo.dataviz.ui {
         dateFormats?: ChartXAxisItemLabelsDateFormats;
         font?: string;
         format?: string;
-        margin?: ChartXAxisItemLabelsMargin;
+        margin?: number | ChartXAxisItemLabelsMargin;
         mirror?: boolean;
-        padding?: ChartXAxisItemLabelsPadding;
+        padding?: number | ChartXAxisItemLabelsPadding;
         rotation?: string | number | ChartXAxisItemLabelsRotation;
         skip?: number;
         step?: number;
@@ -12829,8 +12829,8 @@ declare namespace kendo.dataviz.ui {
         border?: ChartXAxisItemTitleBorder;
         color?: string;
         font?: string;
-        margin?: ChartXAxisItemTitleMargin;
-        padding?: ChartXAxisItemTitlePadding;
+        margin?: number | ChartXAxisItemTitleMargin;
+        padding?: number | ChartXAxisItemTitlePadding;
         position?: string;
         rotation?: number;
         text?: string;
@@ -12940,9 +12940,9 @@ declare namespace kendo.dataviz.ui {
         dateFormats?: ChartYAxisItemLabelsDateFormats;
         font?: string;
         format?: string;
-        margin?: ChartYAxisItemLabelsMargin;
+        margin?: number | ChartYAxisItemLabelsMargin;
         mirror?: boolean;
-        padding?: ChartYAxisItemLabelsPadding;
+        padding?: number | ChartYAxisItemLabelsPadding;
         rotation?: number |ChartYAxisItemLabelsRotation;
         skip?: number;
         step?: number;
@@ -13119,8 +13119,8 @@ declare namespace kendo.dataviz.ui {
         border?: ChartYAxisItemTitleBorder;
         color?: string;
         font?: string;
-        margin?: ChartYAxisItemTitleMargin;
-        padding?: ChartYAxisItemTitlePadding;
+        margin?: number | ChartYAxisItemTitleMargin;
+        padding?: number | ChartYAxisItemTitlePadding;
         position?: string;
         rotation?: number;
         text?: string;
@@ -14416,7 +14416,7 @@ declare namespace kendo.dataviz.ui {
         background?: string;
         border?: LinearGaugeGaugeAreaBorder;
         height?: number;
-        margin?: LinearGaugeGaugeAreaMargin;
+        margin?: number | LinearGaugeGaugeAreaMargin;
         width?: number;
     }
 
@@ -14477,8 +14477,8 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         font?: string;
         format?: string;
-        margin?: LinearGaugeScaleLabelsMargin;
-        padding?: LinearGaugeScaleLabelsPadding;
+        margin?: number | LinearGaugeScaleLabelsMargin;
+        padding?: number | LinearGaugeScaleLabelsPadding;
         template?: string|Function;
         visible?: boolean;
     }
@@ -15108,7 +15108,7 @@ declare namespace kendo.dataviz.ui {
         background?: string;
         border?: RadialGaugeGaugeAreaBorder;
         height?: number;
-        margin?: RadialGaugeGaugeAreaMargin;
+        margin?: number | RadialGaugeGaugeAreaMargin;
         width?: number;
     }
 
@@ -15151,8 +15151,8 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         font?: string;
         format?: string;
-        margin?: RadialGaugeScaleLabelsMargin;
-        padding?: RadialGaugeScaleLabelsPadding;
+        margin?: number | RadialGaugeScaleLabelsMargin;
+        padding?: number | RadialGaugeScaleLabelsPadding;
         position?: string;
         template?: string|Function;
         visible?: boolean;
@@ -16629,9 +16629,9 @@ declare namespace kendo.dataviz.ui {
         dateFormats?: StockChartNavigatorCategoryAxisLabelsDateFormats;
         font?: string;
         format?: string;
-        margin?: StockChartNavigatorCategoryAxisLabelsMargin;
+        margin?: number | StockChartNavigatorCategoryAxisLabelsMargin;
         mirror?: boolean;
-        padding?: StockChartNavigatorCategoryAxisLabelsPadding;
+        padding?: number | StockChartNavigatorCategoryAxisLabelsPadding;
         rotation?: number;
         skip?: number;
         step?: number;
@@ -16805,8 +16805,8 @@ declare namespace kendo.dataviz.ui {
         border?: StockChartNavigatorCategoryAxisTitleBorder;
         color?: string;
         font?: string;
-        margin?: StockChartNavigatorCategoryAxisTitleMargin;
-        padding?: StockChartNavigatorCategoryAxisTitlePadding;
+        margin?: number | StockChartNavigatorCategoryAxisTitleMargin;
+        padding?: number | StockChartNavigatorCategoryAxisTitlePadding;
         position?: string;
         rotation?: number;
         text?: string;
@@ -16886,7 +16886,7 @@ declare namespace kendo.dataviz.ui {
         border?: StockChartNavigatorPaneTitleBorder;
         color?: string;
         font?: string;
-        margin?: StockChartNavigatorPaneTitleMargin;
+        margin?: number | StockChartNavigatorPaneTitleMargin;
         position?: string;
         text?: string;
         visible?: boolean;
@@ -16896,9 +16896,9 @@ declare namespace kendo.dataviz.ui {
         background?: string;
         border?: StockChartNavigatorPaneBorder;
         height?: number;
-        margin?: StockChartNavigatorPaneMargin;
+        margin?: number | StockChartNavigatorPaneMargin;
         name?: string;
-        padding?: StockChartNavigatorPanePadding;
+        padding?: number | StockChartNavigatorPanePadding;
         title?: string | StockChartNavigatorPaneTitle;
     }
 
