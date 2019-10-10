@@ -30,84 +30,84 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
 
   The following example demonstrates how to add a new action method which returns data to populate the StockChart.
 
-        ```Razor
-            @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-                .Name("stockChart")
-                .Title("The Boeing Company (NYSE:BA)")
-                .DataSource(ds => ds.Read(read => read
-                    .Action("_BoeingStockData", "Home")
-                ))
-                .DateField("Date")
-            )
-        ```
-        ```Model
-            public class StockDataPoint
+    ```Razor
+        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+            .Name("stockChart")
+            .Title("The Boeing Company (NYSE:BA)")
+            .DataSource(ds => ds.Read(read => read
+                .Action("_BoeingStockData", "Home")
+            ))
+            .DateField("Date")
+        )
+    ```
+    ```Model
+        public class StockDataPoint
+        {
+            public DateTime Date { get; set; }
+
+            public decimal Close { get; set; }
+
+            public long Volume { get; set; }
+
+            public decimal Open { get; set; }
+
+            public decimal High { get; set; }
+
+            public decimal Low { get; set; }
+
+            public string Symbol { get; set; }
+        }
+    ```
+    ```HomeController
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult _BoeingStockData()
+        {
+            using (var db = GetContext())
             {
-                public DateTime Date { get; set; }
-
-                public decimal Close { get; set; }
-
-                public long Volume { get; set; }
-
-                public decimal Open { get; set; }
-
-                public decimal High { get; set; }
-
-                public decimal Low { get; set; }
-
-                public string Symbol { get; set; }
+                // Return the data as JSON.
+                return Json(
+                    (from s in db.Stocks
+                    where s.Symbol == "BA"
+                    select new StockDataPoint
+                    {
+                        Date = s.Date,
+                        Open = s.Open,
+                        High = s.High,
+                        Low = s.Low,
+                        Close = s.Close,
+                        Volume = s.Volume
+                    }).ToList()
+                );
             }
-        ```
-        ```HomeController
-            public IActionResult Index()
-            {
-                return View();
-            }
-
-            public IActionResult _BoeingStockData()
-            {
-                using (var db = GetContext())
-                {
-                    // Return the data as JSON.
-                    return Json(
-                        (from s in db.Stocks
-                        where s.Symbol == "BA"
-                        select new StockDataPoint
-                        {
-                            Date = s.Date,
-                            Open = s.Open,
-                            High = s.High,
-                            Low = s.Low,
-                            Close = s.Close,
-                            Volume = s.Volume
-                        }).ToList()
-                    );
-                }
-            }
-        ```
+        }
+    ```
 
 1. Create the data series.
 
     The following example demonstrates how to create the main and the navigator data series.
 
-        ```
-            @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-                .Name("stockChart")
-                .Title("The Boeing Company (NYSE:BA)")
-                .DataSource(ds => ds.Read(read => read
-                    .Action("_BoeingStockData", "Home")
-                ))
-                .DateField("Date")
-                        .Series(series => {
-                    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-                })
-                .Navigator(nav => nav
+    ```
+        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+            .Name("stockChart")
+            .Title("The Boeing Company (NYSE:BA)")
+            .DataSource(ds => ds.Read(read => read
+                .Action("_BoeingStockData", "Home")
+            ))
+            .DateField("Date")
                     .Series(series => {
-                        series.Line(s => s.Volume);
-                    })
-                )
+                series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+            })
+            .Navigator(nav => nav
+                .Series(series => {
+                    series.Line(s => s.Volume);
+                })
             )
-        ```
+        )
+    ```
 
 ## Functionality and Features
 

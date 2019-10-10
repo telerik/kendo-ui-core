@@ -24,7 +24,7 @@ The Chart contains the following [building block elements]({% slug htmlhelpers_c
 
 The following image displays the structure of the Chart.
 
-![Chart Structure](../images/chart-structure.png)
+![Chart Structure](images/chart-structure.png)
 
 * [Demo page for the Chart](https://demos.telerik.com/aspnet-core/chart-api/index)
 
@@ -121,7 +121,7 @@ You can also add a title to clearly indicate the role of the axis.
     )
 ```
 
-![Chart with axis titles](../images/chart-axis-titles.png)
+![Chart with axis titles](images/chart-axis-titles.png)
 
 The Chart enables you to configure each axis to display bands with different colors for predefined value ranges. The category index (zero-based) is used as a value for the category axis.
 
@@ -138,7 +138,7 @@ The Chart enables you to configure each axis to display bands with different col
     )
 ```
 
-![Chart with axis plot bands](../images/chart-plot-bands.png)
+![Chart with axis plot bands](images/chart-plot-bands.png)
 
 You may also need to apply global settings that affect all axes. In such cases, use [`AxisDefaults`](/api//Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultssettingsbuildert).
 
