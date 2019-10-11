@@ -2346,10 +2346,11 @@ function pad(number, digits, end) {
         support.customElements = ("registerElement" in window.document);
 
         var chrome = support.browser.chrome,
+            mobileChrome = support.browser.crios,
             mozilla = support.browser.mozilla,
             safari = support.browser.safari;
         support.msPointers = !chrome && window.MSPointerEvent;
-        support.pointers = !chrome && !mozilla && !safari && window.PointerEvent;
+        support.pointers = !chrome && !mobileChrome && !mozilla && !safari && window.PointerEvent;
         support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
     })();
 
