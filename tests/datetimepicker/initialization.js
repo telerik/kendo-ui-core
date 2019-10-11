@@ -165,6 +165,22 @@
             }, 200);
         });
 
+        it("form reset support works correctly with value from options", function(done) {
+            input.attr("value", "dd MMM yyyy HH:mm");
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+            datetimepicker = input.kendoDateTimePicker({ value: new Date(2018, 1, 1) }).data("kendoDateTimePicker");
+
+            datetimepicker.value(new Date(2011, 1, 1));
+
+            form[0].reset();
+
+            setTimeout(function() {
+                assert.equal(datetimepicker.element.val(), "2/1/2018 12:00 AM");
+                assert.deepEqual(datetimepicker.value(), new Date(2018, 1, 1));
+                done();
+            }, 200);
+        });
+
         it("extend popup options if datetimepicker.options.popup", function() {
             var appendTo = "body",
                 datetimepicker = new kendo.ui.DateTimePicker(input, {

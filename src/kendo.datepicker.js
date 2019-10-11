@@ -725,6 +725,7 @@ var __meta__ = { // jshint ignore:line
                 formId = element.attr("form"),
                 options = that.options,
                 disabledDate = options.disableDates,
+                parseFormats = options.parseFormats.length ? options.parseFormats : null,
                 optionsValue = that._initialOptions.value,
                 form = formId ? $("#" + formId) : element.closest("form"),
                 initialValue = element[0].defaultValue;
@@ -733,7 +734,7 @@ var __meta__ = { // jshint ignore:line
                 optionsValue = null;
             }
 
-            if (!initialValue && optionsValue) {
+            if ((!initialValue || !kendo.parseDate(initialValue, parseFormats, options.culture)) && optionsValue) {
                 element.attr("value", kendo.toString(optionsValue, options.format, options.culture));
             }
 
