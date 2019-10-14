@@ -12,7 +12,7 @@ The ComboBox provides options for setting the widths of its [list](#setting-the-
 
 ## Setting the List Width
 
-To customize the width of the AutoComplete list and change its dimensions, use the jQuery `width()` method.
+To customize the width of the ComboBox list and change its dimensions, use the jQuery `width()` method.
 
     <input id="comboBox" />
 

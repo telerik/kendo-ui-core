@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI MaskedTextBox HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI MaskedTextBox widget.
 
-The MaskedTextBox enables a controlled text input that is based on a specific format.
+The MaskedTextBox enables a controlled text input that is based on a specific format. The helper enables you to define its value and mask value, and set custom mask rules, prompt characters, and culture names. Each mask can contain mask rules and mask literals. The mask literals are automatically entered for the user and cannot be removed. You can also use the MaskedTextBox predefined rules which specify the required or optional digit, letter, or character input.
 
 * [Demo page for the MaskedTextBox](https://demos.telerik.com/aspnet-core/maskedtextbox/index)
 

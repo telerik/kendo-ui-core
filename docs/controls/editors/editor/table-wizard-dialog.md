@@ -1,20 +1,18 @@
 ---
 title: Table Wizard Dialog
-page_title: Table Wizard Dialog | Kendo UI Editor
-description: "Enable the user to add HTML tables and configure them easily by using the Table Wizard dialog in the Kendo UI Editor."
+page_title: jQuery Editor Documentation | Table Wizard Dialog | Kendo UI
+description: "Get started with the jQuery Editor by Kendo UI and enable the user to add and configure HTML tables with the Table Wizard dialog."
 slug: table_wizard_dialog_editor_widget
-position: 8
+position: 11
 ---
 
 # Table Wizard Dialog
 
-As of the Kendo UI R3 2016 release and in addition to the **Insert Table** tool, the user is now able to add and configure tables by using the **Table Wizard** dialog.
+As of the Kendo UI R3 2016 release and in addition to the **Insert Table** tool, the user can add and configure tables by using the **Table Wizard** dialog.
 
 ![Table Wizard](table-wizard.png)
 
-## Getting Started
-
-### Insert Tables
+## Inserting Tables
 
 To insert a new table by using the **Table Wizard** dialog:
 
@@ -25,29 +23,26 @@ To insert a new table by using the **Table Wizard** dialog:
 
 ![Table Wizard Open](table-wizard-open.png)
 
-### Modify Tables
+## Modifying Tables
 
 To modify an existing table or a table cell:
 
 1. Select the table or the table cell to edit.
 1. Click the **Table Wizard** tool in the toolbar.
 
+> You can resize the table rows and columns by dragging the cell border with the mouse and without using the **Table Wizard** dialog.
+
 ![Table Wizard Edit](table-wizard-edit.png)
 
-
-> **Important**
->
-> Even without using the table wizard dialog, you can resize the table rows and columns by dragging the cell border with the mouse.
-
-## Table Wizard Options
+## Available Options
 
 The table and cell options that are available in the **Table Wizard** are displayed in the following three tabs:
 
-* [**Table**](#table)&mdash;The available options for the table element.
-* [**Cell**](#cell)&mdash;The available options for the selected cell or all cells in the table.
-* [**Accessibility**](#accessibility)&mdash;The available options related to accessibility.
+* [**Table**](#table-tab)&mdash;The available options for the table element.
+* [**Cell**](#cell-tab)&mdash;The available options for the selected cell or all cells in the table.
+* [**Accessibility**](#accessibility-tab)&mdash;The available options related to accessibility.
 
-### Table
+### Table Tab
 
 The **Table** tab provides the following options:
 
@@ -65,7 +60,7 @@ The **Table** tab provides the following options:
 * **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
 * **Collapse borders**&mdash;Adds an inline style to that table element with the `border-collapse: collapse` rule ([`border-collapse` property](http://www.w3schools.com/cssref/pr_border-collapse.asp)).
 
-### Cell
+### Cell Tab
 
 The **Cell** tab provides the following options:
 
@@ -82,7 +77,7 @@ The **Cell** tab provides the following options:
 * **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
 * **Wrap text**&mdash;When unchecked, applies a `white-space: nowrap` style to the cells ([`white-space` property](http://www.w3schools.com/cssref/pr_text_white-space.asp)).
 
-### Accessibility
+### Accessibility Tab
 
 The **Accessibility** tab provides the following options:
 
@@ -93,12 +88,5 @@ The **Accessibility** tab provides the following options:
 
 ## See Also
 
-* [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
-* [Image Browser]({% slug image_browser_editor_widget %})
-* [Post-Process Content]({% slug post_process_content_editor_widget %})
-* [Set Selections]({% slug set_selections_editor_widget %})
-* [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
-* [Troubleshooting]({% slug troubleshooting_editor_widget %})
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How-To Examples]({% slug howto_handleblurandfocuseventsangular_editor %})
-* [Knowledge Base Section](/knowledge-base)
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI DateRangePicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DateRangePicker widget.
 
-The DateRangePicker is a container for holding start and end date inputs.
+The DateRangePicker is a container for holding start and end date inputs. It allows the user to select a date range from a calendar or through a direct input. The helper also supports custom templates for its `month` view, configuration options for minimum and maximum dates, a start view, and a depth for navigation.
 
 * [Demo page for the DateRangePicker](https://demos.telerik.com/aspnet-core/daterangepicker/index)
 

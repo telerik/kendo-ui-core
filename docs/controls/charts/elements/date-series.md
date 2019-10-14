@@ -63,7 +63,7 @@ If the series contain two or more values for a specific period (base unit), they
 
 The following image demonstrates a chart with a set date category axis.
 
-![A Chart with a date category axis](chart-category-date-axis.png)
+![A Chart with a date category axis](../chart-category-date-axis.png)
 
 The following example demonstrates date series that are grouped by the year.
 
@@ -103,7 +103,7 @@ The following example demonstrates date series that are grouped by the year.
 
 The following image displays a chart with a grouped date category axis. Note how the maximum value for each year is now displayed.
 
-![A Chart with a grouped date category axis](chart-category-date-axis-grouped.png)
+![A Chart with a grouped date category axis](../chart-category-date-axis-grouped.png)
 
 ### Setting Aggregates
 
@@ -218,7 +218,7 @@ Setting the [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit)
         categoryAxis: {
             baseUnit: "fit",
 
-            // Constraint number of groups to 5
+            // Constraint number of groups to five.
             maxDateGroups: 5,
 
             autoBaseUnitSteps: {
@@ -226,11 +226,11 @@ Setting the [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit)
                 // => Skip to weeks
                 days: [1],
 
-                // Not allowed as no steps are defined
+                // Not allowed as no steps are defined.
                 // => Skip to months
                 weeks: [],
 
-                // Results in 2 groups
+                // Results in two groups.                
                 // => Chosen
                 months: [1]
             }

@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI ListBox HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ListBox widget.
 
-The ListBox provides suggestions depending on the typed text and allows multiple value entries. displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
+The ListBox provides suggestions depending on the typed text and allows multiple value entries. It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
 * [Demo page for the ListBox](https://demos.telerik.com/aspnet-core/listbox/index)
 

@@ -6,7 +6,7 @@ slug: htmlhelpers_dropdowntree_items_aspnetcore
 position: 4
 ---
 
-# Item Properties
+# Items
 
 When you bind the DropDownTree through the `DataSource()` configuration option, each item can acquire specific properties.
 

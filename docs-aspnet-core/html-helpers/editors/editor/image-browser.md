@@ -8,7 +8,7 @@ position: 6
 
 # Image Browser
 
-By default, the `Insert Image` tool opens a simple dialog that allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
+By default, the **Insert Image** tool opens a simple dialog that allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
 The Editor also supports another way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported. For a runnable example, refer to the [demo on file and image browser in the Editor](https://demos.telerik.com/aspnet-core/editor/imagebrowser).
 

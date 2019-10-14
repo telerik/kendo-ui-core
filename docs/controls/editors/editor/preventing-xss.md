@@ -1,16 +1,14 @@
 ---
 title: Preventing Cross-Site Scripting
-page_title: Preventing Cross-Site Scripting | Kendo UI Editor
-description: "Learn the security implications of allowing an HTML editing in your pages and how to secure them in the Kendo UI Editor widget."
+page_title: jQuery Editor Documentation | Preventing Cross-Site Scripting | Kendo UI
+description: "Get started with the jQuery Editor by Kendo UI and learn about the security implications of allowing an HTML editing in your pages and how to secure them."
 slug: prevent_xss_editor_widget
-position: 5
+position: 10
 ---
 
 # Preventing Cross-Site Scripting
 
 Allowing users to enter the HTML of your site imposes security risks that you need to address.
-
-This article demonstrates how a hypothetical attack proceeds and what to do to prevent it.
 
 ## XSS Attacks
 
@@ -32,7 +30,7 @@ The following steps demonstrate the way a typical XSS attack proceeds.
 
 ## XSS Protection
 
-The Editor itself can do little to protect you from XSS attacks because malicious users can manually edit form fields and post forged requests to the server, as shown in **Step 2**. To protect your users from these attacks, clean the posted content on the server through an HTML parsing and a whitelist of allowed tags.
+The Editor itself cannot protect you from XSS attacks because malicious users can manually edit form fields and post forged requests to the server. To protect your users from these attacks, clean the posted content on the server through an HTML parsing and a whitelist of allowed tags.
 
 ## Script Tags
 
@@ -52,8 +50,6 @@ To allow the execution of scripts inside the Editor content:
 Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/javascript/ui/editor/configuration/serialization.custom) and [`deserialization.custom`](/api/javascript/ui/editor/configuration/deserialization.custom) options of the Editor, to implement your own sanitizing functionality.
 
 The following example demonstrates how to use the serialization and deserialization custom otpions, to sanitize the value of the Editor and remove `object` tags.
-
-
 
 ```dojo
 <textarea id="editor"></textarea>
@@ -85,7 +81,7 @@ The following example demonstrates how to use the serialization and deserializat
   editor.value('<object data="data:text/html;base64,PHNjcmlwdD5hbGVydCgic2VjdGVzdCIpPC9zY3JpcHQ+"></object>');
   console.log(editor.value());
 </script>
-````
+```
 
 ## Whitelist Tags
 
@@ -98,12 +94,5 @@ The following list provides information on the libraries that allow processing H
 
 ## See Also
 
-* [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
-* [Image Browser]({% slug image_browser_editor_widget %})
-* [Post-Process Content]({% slug post_process_content_editor_widget %})
-* [Pasting]({% slug pasting_editor_widget %})
-* [Set Selections]({% slug set_selections_editor_widget %})
-* [Troubleshooting]({% slug troubleshooting_editor_widget %})
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How-To Examples]({% slug howto_handleblurandfocuseventsangular_editor %})
-* [Knowledge Base Section](/knowledge-base)
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

@@ -8,12 +8,11 @@ position: 7
 
 # Calendar Types
 
-By default, the DatePicker works with `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar.
+By default, the DateRangePicker works with `Date` objects which support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar.
 
 As a result, the DateRangePicker does not support other calendar types such as Lunar.
 
 To work around the default behavior of the DateRangePicker and simulate a different calendar type, use either of the following approaches:
-
 * Use the JavaScript `Date` object.
 * Create a date that is in the past.
 

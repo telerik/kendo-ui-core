@@ -137,7 +137,13 @@ navigation:
     "controls/editors":
         title: "Editors"
         position: 2
+    "controls/editors/dateinput/globalization":
+        title: "Globalization"
+        position: 40
     "controls/editors/datepicker/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/editors/listbox/globalization":
         title: "Globalization"
         position: 40
     "controls/editors/datepicker/accessibility":
@@ -146,6 +152,9 @@ navigation:
     "controls/editors/datepicker/how-to":
         title: "How To"
         position: 70
+    "controls/editors/dropdowntree/binding":
+        title: "Data Binding"
+        position: 2
     "controls/editors/dropdownlist/globalization":
         title: "Globalization"
         position: 40

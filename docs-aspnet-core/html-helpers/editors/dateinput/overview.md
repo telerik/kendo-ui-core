@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI DateInput HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DateInput widget.
 
-The DateInput represents an input field that recognizes and formats scheduling values such as dates.
+The DateInput represents an input field that recognizes and formats scheduling values such as dates. It provides separate sections for days, months, years, hours, and minutes, and also supports the customization of date and time formats.
 
 * [Demo page for the DateInput](https://demos.telerik.com/aspnet-core/dateinput/index)
 

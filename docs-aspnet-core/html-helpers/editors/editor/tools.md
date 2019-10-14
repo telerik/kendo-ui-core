@@ -8,7 +8,7 @@ position: 3
 
 # Tools
 
-The Editor provides a predefined collection of tools that are used to interact with the widget.
+The Editor provides a predefined collection of tools that are used to interact with the control.
 
 You can enable any of these tools by using the `Tools()` HtmlHelper method and configure it with the specific tool method. Custom tools and tools that require configuration are defined using inner methods for the tool.
 
