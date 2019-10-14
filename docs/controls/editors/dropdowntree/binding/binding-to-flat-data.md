@@ -1,29 +1,24 @@
 ---
-title: Binding to Flat Tables
-page_title: Binding to Flat Tables | Kendo UI DropDownTree
-description: "Learn how to bind the Kendo UI DropDownTree widget to a flat data table that keeps references about the hierarchical structure."
+title: Flat Data
+page_title: jQuery DropDownTree Documentation | Flat Data Binding | Kendo UI
+description: "Get started with the jQuery DropDownTree by Kendo UI and bind the widget to a flat data table that keeps references about the hierarchical structure."
+previous_Url: /controls/editors/dropdowntree/binding-to-flat-data
 slug: bindtoflattables_dropdowntree_widget
 position: 2
 ---
 
-# Binding to Flat Tables
+# Flat Data Binding
 
-The [Kendo UI DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) expects hierarchical data.
+The DropDownTree expects hierarchical data and, therefore, before binding the widget to data, you have to convert all flat structures to hierarchical data.
 
-That is why, before binding the DropDownTree to data, you have to convert all flat structures to hierarchical data.
-
-## Approaches
-
-You can use either of the following approaches to convert flat data into a hierarchical structure. These approaches differ from each other in the amount of time necessary for their completion and the resulting tree.
+To convert flat data into a hierarchical structure, use either of the following approaches which differ in the time that is necessary for their completion and the resulting tree.
 
 * [Initial all data pre-processing](#initial-all-data-pre-processing)
 * [Incremental data filtering](#incremental-data-filtering)
 
-### Initial All-Data Pre-Processing
+## Initial All-Data Pre-Processing
 
 Prior to binding the DropDownTree widget, you can pre-process all available data and convert it into a hierarchy. This approach requires more time and memory, and the resulting tree is fully rendered.
-
-
 
     <input id="dropdowntree"></input>
     <script>
@@ -60,18 +55,16 @@ Prior to binding the DropDownTree widget, you can pre-process all available data
       return hash[rootLevel];
     }
 
-    // the tree for visualizing data
+    // The tree for visualizing the data.
     $("#dropdowntree").kendoDropDownTree({
       dataSource: processTable(flatData, "id", "parent", 0),
       loadOnDemand: false
     });
     </script>
 
-### Incremental Data Filtering
+## Incremental Data Filtering
 
 You can also load the nodes on demand. However, this approach is more computationally intensive than the initial all-data pre-processing because it requires the filtering of the collection each time a node gets expanded.
-
-
 
     <input id="dropdowntree"></input>
     <script>
@@ -122,5 +115,6 @@ You can also load the nodes on demand. However, this approach is more computatio
 
 ## See Also
 
-* [Overview of the DropDownTree]({% slug overview_kendoui_dropdowntree_widget %})
-* [DropDownTree JavaScript API Reference](/api/javascript/ui/dropdowntree)
+* [Remote Data Binding by the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/remote-data-binding)
+* [OData Binding by the DropDownTree (Demo)](https://demos.telerik.com/kendo-ui/dropdowntree/odata-binding)
+* [JavaScript API Reference of the DropDownTree](/api/javascript/ui/dropdowntree)

@@ -100,7 +100,8 @@ The following example demonstrates how to use the `Serialization()` and `Deseria
 
 To decorate all `contenteditable="false"` elements and improve user experience (UX), use a CSS rule.
 
-If you use the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#classic-mode), add the CSS rule to an external CSS file that is adjoined to the [stylesheet collection]({% slug htmlhelpers_editor_styling_aspnetcore %}) of the Editor. If you use the [inline mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#inline-mode), place the CSS rule on the page as demonstrated in the following example.
+* If you use the [classic mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#classic-mode), add the CSS rule to an external CSS file that is adjoined to the [stylesheet collection]({% slug htmlhelpers_editor_styling_aspnetcore %}) of the Editor.
+* If you use the [inline mode]({% slug htmlhelpers_editor_modes_aspnetcore %}#inline-mode), place the CSS rule on the page as demonstrated in the following example.
 
 ```
 <style>

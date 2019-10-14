@@ -10,7 +10,7 @@ position: 5
 
 The DropDownTree provides full control over the way a node, a selected value, a pop-up header, or footer is rendered through the Kendo UI for jQuery templates.
 
-For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview). For a runnable example, refer to the [Templates demo](https://demos.telerik.com/aspnet-core/dropdowntree/templates).
+For more information on the capabilities and syntax of the templates, refer to this [documentation article](https://docs.telerik.com/kendo-ui/framework/templates/overview). For a runnable example, refer to the [dem on using templates in the DropDownTree](https://demos.telerik.com/aspnet-core/dropdowntree/templates).
 
 ## Basic Usage
 
@@ -51,7 +51,7 @@ The following example demonstrates how to customize the DropDownTree by referenc
 
 The item template manages the way the nodes in the DropDownTree are rendered.
 
-The following example demonstrates how to define an item template and how to evaluate it against the dataItem.
+The following example demonstrates how to define an item template and how to evaluate it against the `dataItem`.
 
 ```
     <!-- Template -->
@@ -106,7 +106,7 @@ The header template manages the way the pop-up header of a DropDownTree is rende
     <!-- DropDownTree initialization -->
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree")
-        .HeaderTemplateId("dropdowntree-header-template") 
+        .HeaderTemplateId("dropdowntree-header-template")
         .DataSource(source =>
         {
             source.Read(read => read.Action("Read_TemplateData", "DropDownTree"));
@@ -160,4 +160,3 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 
 * [Templates in the DropDownTree HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdowntree/templates)
 * [Server-Side API](/api/dropdowntree)
-

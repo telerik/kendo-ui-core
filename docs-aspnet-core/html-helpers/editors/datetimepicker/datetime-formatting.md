@@ -10,8 +10,6 @@ position: 6
 
 The DateTimePicker allows you to define its date and time formatting.
 
-## Date and Time Format
-
 The following example demonstrates how to define the date-time format.
 
 ```
@@ -22,8 +20,6 @@ The following example demonstrates how to define the date-time format.
     )
 ```
 
-## Time Format
-
 The following example demonstrates how to define the time format.
 
 ```
@@ -33,8 +29,6 @@ The following example demonstrates how to define the time format.
         .TimeFormat("hh:mm:ss tt") // This format will be used to format the predefined values in the time list.
     )
 ```
-
-## Intervals
 
 The following example demonstrates how to define the interval (in minutes) between values in the drop-down list with time slots.
 

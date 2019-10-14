@@ -14,9 +14,9 @@ By default, filtering is disabled and can be performed over string values using 
 
 The DropDownTree supports the following filter values:
 
-* StartsWith
-* EndsWith
-* Contains
+* `StartsWith`
+* `EndsWith`
+* `Contains`
 
 The following example demonstrates how to set the filter of the DropDownTree.
 

@@ -36,7 +36,12 @@ The example below demonstrates how to restrict the movement of a Kendo UI Window
           }
 
           if (shouldOverridePosition) {
-            windowWrapper.css({top: newTop, left: newLeft});
+            winObject.setOptions({
+              position: {
+                top: newTop,
+                left: newLeft
+              }
+            });
           }
         }
 

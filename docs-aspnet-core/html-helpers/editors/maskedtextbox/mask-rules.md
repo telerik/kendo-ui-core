@@ -10,11 +10,11 @@ position: 2
 
 The MaskedTextBox provides a set of predefined mask rules and enables you to modify them.
 
-## Predefined Masks
-
 > If no mask is defined, the MaskedTextBox allows for any input.
 
-The MaskedTextBox has [a list of predefined mask rules](http://docs.telerik.com/kendo-ui/controls/editors/maskedtextbox/overview#configuration-Rules) which can be used to compose the mask of a widget.
+## Predefined Masks
+
+The MaskedTextBox has [a list of predefined mask rules](http://docs.telerik.com/kendo-ui/controls/editors/maskedtextbox/mask-rules) which can be used to validate its user input.
 
 The following example demonstrates how to set a `zip code` mask.
 

@@ -1,18 +1,20 @@
 ---
-title: Modes
-page_title: Editor Modes | Telerik UI Editor HtmlHelper for ASP.NET Core
+title: Modes of Operation
+page_title: Modes of Operation  | Telerik UI Editor HtmlHelper for ASP.NET Core
 description: "Learn which are the modes in which the Telerik UI Editor HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) operates."
 slug: htmlhelpers_editor_modes_aspnetcore
 position: 2
 ---
 
-# Editor Modes
+# Modes of Operation
 
 Depending on the element from which the Editor is initiated, it provides two types of operation modes&mdash;the [classic](#classic-mode) and the [inline](#inline-mode) mode.   
 
 ## Classic Mode
 
-If you use the default element for initializing the Editor (the `<textarea>` element), the Editor assumes its classic mode. The `textarea` is not visible and is used to hold the value of the widget. You can type in the `contenteditable iframe` that is created.
+If you use the default `<textarea>` element for initializing the Editor, the Editor assumes its classic mode. The `textarea` is not visible and is used to hold the value of the widget. You can type in the `contenteditable iframe` that is created.
+
+The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor]({% slug htmlhelpers_editor_styling_aspnetcore %}). For more information, refer to the [demo on the classic Editor mode](https://demos.telerik.com/aspnet-core/editor/index).
 
 ```
 @(Html.Kendo().Editor()
@@ -20,8 +22,6 @@ If you use the default element for initializing the Editor (the `<textarea>` ele
     .HtmlAttributes(new { style = "width: 100%;height:440px" })
 )
 ```
-
-The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor]({% slug htmlhelpers_editor_styling_aspnetcore %}). For more information, refer to the [demo on the classic Editor mode](https://demos.telerik.com/aspnet-core/editor/index).
 
 ## Inline Mode
 
