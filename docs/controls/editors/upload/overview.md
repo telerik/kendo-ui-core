@@ -1,23 +1,21 @@
 ---
 title: Overview
 page_title: jQuery Upload Documentation | Upload Overview | Kendo UI
-description: "Get started with the jQuery Upload by Kendo UI and learn how to initialize the widget, use its events, and reference its existing instances."
+description: "Get started with the jQuery Upload by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_upload_widget
 position: 1
 ---
 
 # Upload Overview
 
-The [Kendo UI Upload widget](https://demos.telerik.com/kendo-ui/upload/index) helps users send files from their file systems to dedicated server handlers which are configured to receive them and uses progressive enhancement to deliver an uploading user experience without the requirement of extra developer efforts.
-
-## Basic Usage
+The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
 
 The Upload provides a set of [default API configuration options](/api/javascript/ui/upload) which can be set during its initialization such as synchronous and asynchronous modes of operation, chunk upload of files, multiple files selection and removal, progress tracking and in-progress cancellation of the upload, and so on.
 
 > * The Upload does not currently support the upload of large files in chunks because the feature would require an additional Flash or Silverlight plugin to compensate for the missing API support in older browsers.
 > * The Upload works in `<input type="file" />` elements. Therefore, it can only upload files that are selected by the user and which exist in the file system. To upload files that are generated with JavaScript on the fly, use Ajax requests.
 
-For the runnable example, refer to the [demo on the basic usage of the Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index).
+* [Demo page for the Upload](https://demos.telerik.com/kendo-ui/upload/index)
 
 ## Initializing the Upload
 
@@ -50,7 +48,7 @@ The following example demonstrates how to initialize the Upload. The array synta
 * [Globalization]({% slug globalization_upload %})
 * [Accessibility]({% slug accessibility_upload %})
 
-For more information on the browser versions which support the Upload features, refer to the article on [browser support]({% slug browsersupport_upload_widget %}). For more information on implementing specific scenarios, refer to the [**Knowledge Base** section](https://docs.telerik.com/kendo-ui/knowledge-base).
+For more information on the browser versions which support the Upload features, refer to the article on [browser support]({% slug browsersupport_upload_widget %}).
 
 ## Events
 

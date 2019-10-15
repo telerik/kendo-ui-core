@@ -8,17 +8,16 @@ position: 3
 
 # Precision
 
-The widget allows to control the precision with which an item is selected by configuring the [`precision`](/api/javascript/ui/rating/configuration/precision) option:
+The Rating allows you to control the precision with which an item is selected.
 
-* item - selecting the whole item.
+To configure the [`precision`](/api/javascript/ui/rating/configuration/precision) option, use either of the available properties:
 
-* half - selecting half of the item.
+* `item`&mdash;Selects the whole item.
+* `half`&mdash;Selects half of the item.
 
 ## Item Precision
 
-This is the default precision mode of the Rating. If not configured, the widget will automatically set the [`precision`](/api/javascript/ui/rating/configuration/precision) option to `"item"`:
-
-In this mode only whole stars can be selected by click or keyboard interaction.
+The item mode is the default precision mode of the Rating. If not configured, the widget will automatically set the [`precision`](/api/javascript/ui/rating/configuration/precision) option to `"item"` which enables only whole stars to be selected by click or keyboard interaction.
 
 ```dojo
    <input id="rating" name="rating">
@@ -37,12 +36,9 @@ In this mode only whole stars can be selected by click or keyboard interaction.
 
 ## Half Precision
 
-Half precision can be configured by setting the [`precision`](/api/javascript/ui/rating/configuration/precision) option to `"half"`:
-
-With half precision the Rating widget allows to set decimal values. The passed value is rounded during the rendering phase for the purpose of displaying full or half item based on the value:
-
-* Value which is less than or equal to .5 displays a half item.
-* Value which is greater than .5 displays a full item.
+To configure he half precision mode of the Rating, set the [`precision`](/api/javascript/ui/rating/configuration/precision) option to `"half"` which allows you to set decimal values. The passed value is rounded during the rendering phase to display a full or half item based on the following value specifics:
+* A value which is less than or equal to `.5` displays half an item.
+* A value which is greater than `.5` displays a full item.
 
 ```dojo
     <input id="rating" name="rating">

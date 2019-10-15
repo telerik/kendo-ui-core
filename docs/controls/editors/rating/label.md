@@ -8,9 +8,13 @@ position: 4
 
 # Label
 
-The Rating displays a label by default that shows the current value out of the max value in the format `3 / 5`. If the widget does not have a selected value, the label will not be displayed initially and will be toggled after an item is selected.
+By default, the Rating displays a label that shows the current value out of the max value in the format `3 / 5`.
 
-## Default Label
+If the Rating does not have a selected value, the label will not be displayed initially and will be toggled after an item is selected.
+
+## Getting Started
+
+The following example demonstrates how to use the default label.
 
 ```dojo
    <input id="rating" name="rating">
@@ -26,11 +30,9 @@ The Rating displays a label by default that shows the current value out of the m
     </script>
 ```
 
-## Customized Label
+## Customizing the Label
 
-Customizing the text of the label could be achieved through the [`label.template`](/api/javascript/ui/rating/configuration/label.template) option.
-
-By default, the template automatically receives the `value` and `maxValue` in the data object. This allows those properties to be used inside the template through [the Kendo UI Templates syntax](/framework/templates/overview).
+To customize the text of the label, use the [`label.template`](/api/javascript/ui/rating/configuration/label.template) option. By default, the template automatically receives the `value` and `maxValue` in the data object which allows you to use those properties inside the template through [the Kendo UI Templates syntax](/framework/templates/overview).
 
 ```dojo
     <input id="rating" name="rating">
@@ -51,9 +53,9 @@ By default, the template automatically receives the `value` and `maxValue` in th
     </script>
 ```
 
-## Disabled label
+## Disabling the Label
 
-Setting the `label` option to false prevents the label from, being displayed.
+Setting the `label` option to `false` prevents the label from being displayed.
 
 ```dojo
     <input id="rating" name="rating">

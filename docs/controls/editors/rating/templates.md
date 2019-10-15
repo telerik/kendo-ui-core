@@ -8,13 +8,13 @@ position: 5
 
 # Templates
 
-By default each Rating item is rendered with a star icon from [the Kendo Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web). Modifying the default icon could be achieved through the `itemTemplate`, `selectedTemplate` and `hoveredTemplate` options.
+By default, each Rating item is rendered with a star icon from [the Kendo Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
+
+To modify the default icon, use the `itemTemplate`, `selectedTemplate`, and `hoveredTemplate` options.
 
 ## Item Template
 
-Specifies the template which is used for rendering the items of the Rating.
-
-If the `selectedTemplate` is not specified, the widget will use the default start icon for selected items. Therefore, it is recommended to specify the `selectedTemplate` when the `itemTemplate` option is used.
+The item template specifies the template which is used for rendering the items of the Rating. If the `selectedTemplate` is not specified, the widget will use the default start icon for selected items. Therefore, it is recommended that you specify the `selectedTemplate` when the `itemTemplate` option is used.
 
 ```dojo
    <input id="rating" name="rating">
@@ -34,12 +34,9 @@ If the `selectedTemplate` is not specified, the widget will use the default star
 
 ## Selected Template
 
-Specifies the template which is used for rendering the selected state of the items.
+The selected template specifies the template for rendering the selected state of the items. If the `itemTemplate` is not specified, the widget will use the default start icon for displaying the normal state of the items. Therefore, it is recommended that you specify the `itemTemplate` when the `selectedTemplate` option is used.
 
-If the `itemTemplate` is not specified, the widget will use the default start icon for displaying the normal state of the items. Therefore, it is recommended to specify the `itemTemplate` when the `selectedTemplate` option is used.
-
-> **Important**
-> * When the Rating is in half precision mode it is recommended to use the same template for both the selectedTemplate and hoveredTemplate options.
+> When the Rating is in half precision mode, use the same template for both the `selectedTemplate` and `hoveredTemplate` options.
 
 ```dojo
     <input id="rating" name="rating">
@@ -59,12 +56,9 @@ If the `itemTemplate` is not specified, the widget will use the default start ic
 
 ## Hovered Template
 
-Specifies the template which is used for rendering the hovered state of the items.
+The hovered template specifies the template which is used for rendering the hovered state of the items. If the `itemTemplate` is not specified, the widget will use the default start icon for displaying the normal and selected state of the items.
 
-If the `itemTemplate` is not specified, the widget will use the default start icon for displaying the normal and selected state of the items.
-
-> **Important**
-> * When the Rating is in half precision mode it is recommended to use the same template for both the selectedTemplate and hoveredTemplate options.
+> When the Rating is in half precision mode, use the same template for both the `selectedTemplate` and `hoveredTemplate` options.
 
 ```dojo
     <input id="rating" name="rating">

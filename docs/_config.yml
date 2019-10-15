@@ -191,6 +191,12 @@ navigation:
     "controls/editors/rating/accessibility":
         title: "Accessibility"
         position: 50
+    "controls/editors/slider/accessibility":
+        title: "Accessibility"
+        position: 50
+    "controls/editors/switch/accessibility":
+        title: "Accessibility"
+        position: 50
     "controls/editors/upload/how-to":
         title: "How To"
         position: 70

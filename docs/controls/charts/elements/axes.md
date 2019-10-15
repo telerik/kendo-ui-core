@@ -2,7 +2,7 @@
 title: Axes
 page_title: jQuery Chart Documentation | Axes | Kendo UI
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its axes."
-previous_url: /howto/add-charts-and-graphs-to-an-application, /controls/charts/overview
+previous_url: /howto/add-charts-and-graphs-to-an-application
 slug: elements_kendoui_charts_widget
 ---
 

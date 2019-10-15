@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI Slider HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Slider widget.
 
-The Slider provides a rich input for selecting numeric values nd can be either a Slider which presents one handle and two opposing buttons for selecting a single numeric value or a Slider which presents two handlers for defining a range of numeric values.
+The Slider provides a rich input for selecting numeric values. The Slider can either present one handle and two opposing buttons for selecting a single numeric value, or two handlers for defining a range of numeric values. Unlike the HTML5 range input, the Slider enables the consistent experience across browsers and delivers rich API calls and event models.
 
 * [Demo page for the Slider](https://demos.telerik.com/aspnet-core/slider/index)
 

@@ -13,5 +13,5 @@ To see the example on how to achieve this behavior, refer to the [how-to article
 
 ## See Also
 
-* [Slider JavaScript API Reference](/api/javascript/ui/slider)
-* [Overview of the Slider]({% slug overview_kendoui_slider_widget %})
+* [Basic Usage of the Slider (Demo)](https://demos.telerik.com/kendo-ui/slider/index)
+* [JavaScript API Reference of the Slider](/api/javascript/ui/slider)

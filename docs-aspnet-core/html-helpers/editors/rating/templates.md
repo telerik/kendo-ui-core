@@ -8,13 +8,13 @@ position: 6
 
 # Templates
 
-By default each Rating item is rendered with a star icon from [the Kendo Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web). Modifying the default icon could be achieved through the [`ItemTemplate`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#itemtemplatesystemstring), [`SelectedTemplate`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectedtemplatesystemstring) and [`HoveredTemplate`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#hoveredtemplatesystemstring) properties.
+By default, each Rating item is rendered with a star icon from [the Kendo Web Font Icons](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
+
+To modify the default icon, use the [`ItemTemplate`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#itemtemplatesystemstring), [`SelectedTemplate`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectedtemplatesystemstring), and [`HoveredTemplate`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#hoveredtemplatesystemstring) properties.
 
 ## Item Template
 
-Specifies the template which is used for rendering the items of the Rating.
-
-If the `SelectedTemplate` is not specified, the widget will use the default start icon for selected items. Therefore, it is recommended to specify the `SelectedTemplate` when the `ItemTemplate` option is used.
+The item template specifies the template which is used for rendering the items of the Rating. If the `SelectedTemplate` is not specified, the helper will use the default start icon for selected items. Therefore, it is recommended that you specify the `SelectedTemplate` when the `ItemTemplate` option is used.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -29,12 +29,9 @@ If the `SelectedTemplate` is not specified, the widget will use the default star
 
 ## Selected Template
 
-Specifies the template which is used for rendering the selected state of the items.
+The selected template specifies the template for rendering the selected state of the items. If the `ItemTemplate` is not specified, the helper will use the default start icon for displaying the normal state of the items. Therefore, it is recommended that you specify the `ItemTemplate` when the `SelectedTemplate` option is used.
 
-If the `ItemTemplate` is not specified, the widget will use the default start icon for displaying the normal state of the items. Therefore, it is recommended to specify the `ItemTemplate` when the `SelectedTemplate` option is used.
-
-> **Important**
-> * When the Rating is in half precision mode it is recommended to use the same template for both the SelectedTemplate and HoveredTemplate options.
+> When the Rating is in half precision mode, use the same template for both the `SelectedTemplate` and `HoveredTemplate` options.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -49,12 +46,9 @@ If the `ItemTemplate` is not specified, the widget will use the default start ic
 
 ## Hovered Template
 
-Specifies the template which is used for rendering the hovered state of the items.
+The hovered template specifies the template which is used for rendering the hovered state of the items. If the `ItemTemplate` is not specified, the helper will use the default start icon for displaying the normal and selected state of the items.
 
-If the `itemTemplate` is not specified, the widget will use the default start icon for displaying the normal and selected state of the items.
-
-> **Important**
-> * When the Rating is in half precision mode it is recommended to use the same template for both the SelectedTemplate and HoveredTemplate options.
+> When the Rating is in half precision mode, use the same template for both the `SelectedTemplate` and `HoveredTemplate` options.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -68,5 +62,4 @@ If the `itemTemplate` is not specified, the widget will use the default start ic
 
 ## See Also
 
-* [Selection by the Rating HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/rating/selection)
 * [Server-Side API](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)
