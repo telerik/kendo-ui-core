@@ -8,15 +8,16 @@ position: 3
 
 # Precision
 
-The widget allows to control the precision with which an item is selected by configuring the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property:
+The Rating allows you to control the precision with which an item is selected.
 
-* item - selecting the whole item.
+To configure the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property, use either of the available properties:
 
-* half - selecting half of the item.
+* `item`&mdash;Selects the whole item.
+* `half`&mdash;Selects half of the item.
 
 ## Item Precision
 
-This is the default precision of the Rating. If not configured, the widget will automatically set the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"item"`:
+The item mode is the default precision mode of the Rating. If not configured, the widget will automatically set the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"item"` which enables only whole stars to be selected by click or keyboard interaction.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -27,12 +28,9 @@ This is the default precision of the Rating. If not configured, the widget will 
 
 ## Half Precision
 
-Half precision can be configured by setting the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"half"`:
-
-With half precision the Rating widget allows to set decimal values. The passed value is rounded during the rendering phase for the purpose of displaying full or half item based on the value:
-
-* Value which is less than or equal to .5 displays a half item.
-* Value which is greater than .5 displays a full item.
+To configure he half precision mode of the Rating, set the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) option to `"half"` which allows you to set decimal values. The passed value is rounded during the rendering phase to display a full or half item based on the following value specifics:
+* A value which is less than or equal to `.5` displays half an item.
+* A value which is greater than `.5` displays a full item.
 
 ```Razor
     @(Html.Kendo().Rating()

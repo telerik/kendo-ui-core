@@ -37,8 +37,6 @@ The following example demonstrates how to initialize the Rating from an existing
 * [Templates]({% slug templates_rating_widget %})
 * [Accessibility]({% slug accessibility_kendoui_rating_widget %})
 
-For more information on implementing specific scenarios, refer to the [**Knowledge Base** section](https://docs.telerik.com/kendo-ui/knowledge-base).
-
 ## See Also
 
 * [Basic Usage of the Rating (Demo)](https://demos.telerik.com/kendo-ui/rating/index)

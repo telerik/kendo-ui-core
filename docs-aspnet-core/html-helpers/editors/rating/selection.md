@@ -8,15 +8,16 @@ position: 2
 
 # Selection
 
-The Rating allows to control the selection behavior of the items by configuring the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property:
+The Rating allows you to control the selection of its items.
 
-* single - allows selecting a single item.
+To configure the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property, use either of the following settings:
 
-* continuous - allows selecting all items from the start to the end.
+* `continuous`&mdash;Allows the selection of all items from the start to the end.
+* `single`&mdash;Allows the selection of a single item.
 
 ## Continuous Selection
 
-This is the default selection behavior of the Rating. If not configured, the widget will automatically set the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"continuous"`:
+The continuous selection is the default selection mode of the Rating. If not configured, the Rating will automatically set the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"continuous"`.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -27,7 +28,7 @@ This is the default selection behavior of the Rating. If not configured, the wid
 
 ## Single Selection
 
-Single selection can be configured by setting the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"single"`:
+To configure the single selection mode, set the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"single"`.
 
 ```Razor
     @(Html.Kendo().Rating()

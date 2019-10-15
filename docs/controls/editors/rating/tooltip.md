@@ -8,9 +8,11 @@ position: 5
 
 # Tooltip
 
-Each Rating item displays a tooltip that is enabled by default and contains text equal to the item's value.
+Each Rating item displays a tooltip that is enabled by default and contains text that is equal to the value of the item.
 
-## Default Tooltips
+## Getting Started
+
+The following example demonstrates how to use the default tooltip of the Rating.
 
 ```dojo
    <input id="rating" name="rating">
@@ -25,9 +27,9 @@ Each Rating item displays a tooltip that is enabled by default and contains text
     </script>
 ```
 
-## Disabled Tooltips
+## Disabling Tooltips
 
-Setting the [`tooltip`](/api/javascript/ui/rating/configuration/tooltip) option to false prevents the items to display tooltips when hovered.
+Setting the [`tooltip`](/api/javascript/ui/rating/configuration/tooltip) option to `false` prevents the items to display tooltips when hovered.
 
 ```dojo
     <input id="rating" name="rating">

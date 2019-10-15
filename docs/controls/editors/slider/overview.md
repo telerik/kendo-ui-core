@@ -1,55 +1,34 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Slider
-description: "Learn how to initialize the Kendo UI Slider widget and configure its behaviors."
+page_title: jQuery Slider Documentation | Slider Overview | Kendo UI
+description: "Get started with the jQuery Slider by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_slider_widget
 position: 1
 ---
 
 # Slider Overview
 
-The [Kendo UI Slider widget](http://demos.telerik.com/kendo-ui/slider) provides a rich input for selecting numeric values.
+The Slider provides a rich input for selecting numeric values.
 
-Unlike the HTML5 range input, the Slider enables the consistent experience across browsers and delivers rich API calls and event models.
+The Slider can either present one handle and two opposing buttons for selecting a single numeric value, or two handlers for defining a range of numeric values. Unlike the HTML5 range input, the Slider enables the consistent experience across browsers and delivers rich API calls and event models. The Slider provides configuration options for customizing its behavior, for example, setting its minimum and maximum values, orientation, step, and tooltip format and placement.
 
-## Getting Started
+* [Demo page for the Slider](http://demos.telerik.com/kendo-ui/slider)
 
-### Create the Slider
+## Initializing the Slider
 
 To create the Slider, use an HTML `<input>` element.
 
-
-
     <input id="slider" />
-
-### Initialize the Slider
 
 To initialize the Slider, use a jQuery selector.
 
-
+> Verify that you create the Slider within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
 
     $(document).ready(function() {
         $("#slider").kendoSlider();
     });
 
-> **Important**  
->
-> Verify that you create the Slider within a `$(document).ready()` statement because the widget has to be initialized after the DOM fully loads.
-
-## Customization
-
-### Behaviors
-
-The Slider provides configuration options for you to customize its behavior. The available settings are:
-
-* Minimum and/or maximum values
-* Horizontal or vertical orientation
-* Small or large step
-* Tooltip format/placement
-
-The following example demonstrates how to customize the Slider behaviors by configuring its properties.
-
-
+The following example demonstrates how to customize the Slider.
 
     $("#slider").kendoSlider({
         min: 10,
@@ -59,36 +38,18 @@ The following example demonstrates how to customize the Slider behaviors by conf
         largeStep: 10
     });
 
-## Reference
+## Functionality and Features
 
-### Existing Instances
+The Slider provides [accessibility support]({% slug accessibility_kendoui_slider %}).
+
+## Referencing Existing Instances
 
 To reference an existing Slider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
 
-
-
     var slider = $("#slider").data("kendoSlider");
-
-## Keyboard Navigation
-
-The user can focus the drag-handles of the Slider through tabbing. When focused in this way, the respective drag-handle renders with its active style and the following keys and supports the following keyboard shortcuts:
-
-| SHORTCUT						          | DESCRIPTION				                                 |
-|:---                           |:---                                                |
-| Left/Down `Arrow` key         | Increments the value by a `smallStep` amount       |
-| Right/Up `Arrow` key          | Decrements the value by a `smallStep` amount       |
-| `Page Up` key                 | Increments the value by a `largeStep` amount       |
-| `Page Down` key               | Decrements the value by a `largeStep` amount       |
-| `Home`                        | Places the focused draghandle at the minimum value |
-| `End`                         | Places the focused draghandle at the maximum value |
-
-> **Important**
->
-> In the right-to-left (RTL) mode, the behavior of the left and right `Arrow` keys is reversed.
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Slider Widget](/aspnet-mvc/helpers/slider/overview)
-* [Overview of the Slider JSP Tag]({% slug overview_slider_uiforjsp %})
-* [Overview of the Slider PHP Class](/php/widgets/slider/overview)
-* [Slider JavaScript API Reference](/api/javascript/ui/slider)
+* [Basic Usage of the Slider (Demo)](https://demos.telerik.com/kendo-ui/slider/index)
+* [Using the API of the Slider (Demo)](https://demos.telerik.com/kendo-ui/slider/api)
+* [JavaScript API Reference of the Slider](/api/javascript/ui/slider)

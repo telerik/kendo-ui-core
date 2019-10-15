@@ -8,9 +8,11 @@ position: 5
 
 # Tooltip
 
-Each Rating item displays a tooltip that is enabled by default and contains text equal to the item's value.
+Each Rating item displays a tooltip that is enabled by default and contains text that is equal to the value of the item.
 
-## Default Tooltips
+## Getting Started
+
+The following example demonstrates how to use the default tooltip of the Rating.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -23,7 +25,7 @@ Each Rating item displays a tooltip that is enabled by default and contains text
 
 ## Disabling the Tooltips
 
-Setting the [`Tooltip`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) to false prevents the items to display tooltips when hovered.
+Setting the [`Tooltip`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) property to `false` prevents the items to display tooltips when hovered.
 
 ```Razor
     @(Html.Kendo().Rating()
@@ -37,5 +39,4 @@ Setting the [`Tooltip`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.F
 
 ## See Also
 
-* [Selection by the Rating HtmlHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/rating/selection)
 * [Server-Side API](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)

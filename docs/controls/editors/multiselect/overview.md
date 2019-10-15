@@ -48,8 +48,6 @@ The following example demonstrates how to initialize the MultiSelect from an exi
 * [Globalization]({% slug globalization_multiselect %})
 * [Accessibility]({% slug accessibility_kendoui_multiselect_widget %})
 
-For more information on implementing specific scenarios, refer to the [**Knowledge Base** section](https://docs.telerik.com/kendo-ui/knowledge-base).
-
 ## Events
 
 For a complete example on the basic MultiSelect events, refer to the [demo on using the events of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/events).
@@ -58,7 +56,6 @@ For a complete example on the basic MultiSelect events, refer to the [demo on us
 
 * [Basic Usage of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/index)
 * [Using the Basic Events of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/events)
-* [Binding the MultiSelect over MVVM (Demo)](https://demos.telerik.com/kendo-ui/multiselect/mvvm)
 * [Using the MultiSelect with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/multiselect/angular)
-* [Applying the MultiSelect API (Demo)](https://demos.telerik.com/kendo-ui/multiselect/api)
+* [Using the API of the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/api)
 * [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
