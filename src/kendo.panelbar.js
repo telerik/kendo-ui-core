@@ -228,9 +228,7 @@ var __meta__ = { // jshint ignore:line
 
             element
                 .on("click" + NS, clickableItems, function(e) {
-                    if (that._click($(e.currentTarget))) {
-                        e.preventDefault();
-                    }
+                    that._click($(e.target));
                 })
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
                 .on("click" + NS, disabledItems, false)
@@ -1414,6 +1412,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (target.closest(".k-widget")[0] != element[0]) {
+                return;
+            }
+
+            if (target.is(":kendoFocusable")) {
                 return;
             }
 

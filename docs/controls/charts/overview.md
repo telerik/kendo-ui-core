@@ -24,7 +24,7 @@ The Chart contains the following [building block elements]({% slug seriestypeofc
 
 The following image displays the structure of the Chart.
 
-![Chart Structure](../chart-structure.png)
+![Chart Structure](chart-structure.png)
 
 * [Demo page for the Charts](http://demos.telerik.com/kendo-ui/)
 
@@ -40,7 +40,7 @@ To render the Chart, select the `div` with a jQuery selector and call the `kendo
 
 The previous example results in the following output.
 
-![An empty Chart](../chart-empty.png)
+![An empty Chart](chart-empty.png)
 
 You can add a title to the Chart by specifying the `text` property of the `title` object.
 
@@ -63,7 +63,7 @@ The Chart can also visualize series that are bound to both local and remote data
 
 The previous example results in the following output.
 
-![A chart without categories](../chart-column-no-categories.png)
+![A chart without categories](chart-column-no-categories.png)
 
 To add labels across the category axis of the Chart columns, specify the labeling for the series in the [`categoryAxis`](/api/dataviz/chart#categoryAxis) property.
 
@@ -82,7 +82,7 @@ To add labels across the category axis of the Chart columns, specify the labelin
 
 The previous example results in the following output.
 
-![A chart with categories](../chart-column-categories.png)
+![A chart with categories](chart-column-categories.png)
 
 ## Functionality and Features
 

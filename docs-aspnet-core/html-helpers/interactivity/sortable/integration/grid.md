@@ -90,7 +90,7 @@ If the Grid is configured to display details, use a selector that matches only t
 
 For more information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/sortable#eventssystemactionkendomvcuifluentsortableeventbuilder) and the [demo on integrating the Sortable and the Grid](https://demos.telerik.com/aspnet-core/sortable/integration-grid).
 
-The editing functionality of the Telerik UI Grid for ASP.NET Core is rendered through its [inline](https://demos.telerik.com/aspnet-core/grid/editing-inline), [popup](https://demos.telerik.com/aspnet-core/grid/editing-popup), and [batch](https://demos.telerik.com/aspnet-core/grid/editing) edit modes. The inline and popup modes are more common and easier to implement.
+The editing functionality of the Telerik UI Grid for ASP.NET Core is rendered through its [inline](https://demos.telerik.com/aspnet-core/grid/editing-inline), [popup](https://demos.telerik.com/aspnet-core/grid/editing-popup), and [batch](https://demos.telerik.com/aspnet-core/grid/editing) edit modes. The inline and popup modes are more common and easier to implement than the batch edit mode.
 
 ### Using Grids in Inline and Popup Edit Modes
 

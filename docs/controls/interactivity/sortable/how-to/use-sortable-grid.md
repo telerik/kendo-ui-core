@@ -8,13 +8,11 @@ slug: howto_usesortablewithgrid_inincellediting_sortable
 
 # Reorder Rows in Grids
 
-The examples below demonstrate how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode.
+The following examples demonstrate how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode.
 
 ## Non-Editable Grid Mode
 
-The example below demonstrates how to reorder the rows of a Kendo UI Grid in a non-editable mode by using the Kendo UI Sortable.
-
-
+The following example demonstrates how to reorder the rows of a Kendo UI Grid in a non-editable mode by using the Kendo UI Sortable.
 
 ```dojo
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>
@@ -46,14 +44,14 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in a n
 
       grid.table.kendoSortable({
         filter: ">tbody >tr",
-        hint: function(element) { //customize the hint
+        hint: function(element) { // Customize the hint.
           var table = $('<table style="width: 600px;" class="k-grid k-widget"></table>'),
               hint;
 
-          table.append(element.clone()); //append the dragged element
+          table.append(element.clone()); // Append the dragged element.
           table.css("opacity", 0.7);
 
-          return table; //return the hint element
+          return table; // Return the hint element.
         },
         cursor: "move",
         placeholder: function(element) {
@@ -86,30 +84,26 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in a n
 
 ## Editable Grid Mode
 
-The example below demonstrates how to reorder the rows of a Kendo UI Grid in an in-cell editable mode by using the Kendo UI Sortable.
+The following example demonstrates how to reorder the rows of a Kendo UI Grid in an in-cell editable mode by using the Sortable.
 
-The main milestones of the approach are:
+The main milestones of the approach are the following:
 
-* The standard HTML inputs that are used as editors should have a `data-value-update="input"` attribute. If this attribute is not attached to the HTML element, the Grid will not update its data.
-
-
+* The standard HTML inputs that are used as editors need to have a `data-value-update="input"` attribute. If this attribute is not attached to the HTML element, the Grid will not update its data.
 
        var textEditor = function (container, options) {
          $('<input data-value-update="input" data-bind="value:' + options.field + '"/>')
            .appendTo(container);
        };
 
-* If a Kendo UI widget is used as an editor, its `change` event should be manually triggered in the `edit` event of the Grid widget.
+* If you use a Kendo UI widget as an editor, manually trigger its `change` event in the `edit` event of the Grid.
 
-
-
-       //Kendo UI widget used as editor
+       // The Kendo UI widget that is used as an editor.
        var numericEditor = function (container, options) {
          $('<input data-role="numerictextbox" data-bind="value:' + options.field + '"/>')
            .appendTo(container);
        };
 
-       //Grid edit event handler
+       // The Grid edit event handler.
        edit: function(e) {
          var input = e.container.find("[data-role=numerictextbox]");
          var widget = input.data("kendoNumericTextBox");
@@ -117,7 +111,7 @@ The main milestones of the approach are:
 
          input.on("keyup", function(e) {
            if(e.key === kendo.culture().numberFormat["."]) {
-             // for Kendo UI NumericTextBox only
+             // For the Kendo UI NumericTextBox only.
              return;
            }
            widget.value(input.val());
@@ -125,11 +119,8 @@ The main milestones of the approach are:
          });
        },
 
-> **Important**
-> * For simplicity the demo uses local data with a dummy order field. This may not be the case in a real-world scenario.
-> * The `change` event handler of the Sortable widget updates the **Order** field, which is a sample implementation. The `change` event handler should be modified to fit your real-world scenario.
-
-
+> * For simplicity, the demo uses local data with a dummy **Order** field. This may not be the case in a real-world scenario.
+> * The `change` event handler of the Sortable updates the **Order** field, which is a sample implementation. The `change` event handler has to be modified to fit your real-world scenario.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -151,7 +142,7 @@ The main milestones of the approach are:
            .appendTo(container);
        };
 
-       // Initialize the product Order field
+       // Initialize the Order product field.
        for(var j=0; j < products.length; j++){
          products[j].Order = j;
        }
@@ -188,7 +179,7 @@ The main milestones of the approach are:
 
            input.on("keyup", function(e) {
              if(e.key === kendo.culture().numberFormat["."]) {
-                // for Kendo UI NumericTextBox only
+                // For the Kendo UI NumericTextBox only.
                return;
              }
              widget.value(input.val());
@@ -216,15 +207,15 @@ The main milestones of the approach are:
          filter: ">tbody >tr",
          change: function(e) {
            var grid = $("#grid").data("kendoGrid"),
-               oldIndex = e.oldIndex , // The old position
-               newIndex = e.newIndex , // The new position
+               oldIndex = e.oldIndex , // The old position.
+               newIndex = e.newIndex , // The new position.
                view = grid.dataSource.view(),
-               dataItem = grid.dataSource.getByUid(e.item.data("uid")); // Retrieve the moved dataItem
+               dataItem = grid.dataSource.getByUid(e.item.data("uid")); // Retrieve the moved dataItem.
 
            dataItem.Order = newIndex; // Update the order
            dataItem.dirty = true;
 
-           // Shift the order of the records
+           // Shift the order of the records.
            if (oldIndex < newIndex) {
              for (var i = oldIndex + 1; i <= newIndex; i++) {
                view[i].Order--;
@@ -242,22 +233,22 @@ The main milestones of the approach are:
        });
      });
 
-     function hintElement(element) { // Customize the hint
+     function hintElement(element) { // Customize the hint.
 
        var grid = $("#grid").data("kendoGrid"),
-           table = grid.table.clone(), // Clone Grid's table
-           wrapperWidth = grid.wrapper.width(), //get Grid's width
+           table = grid.table.clone(), // Clone the Grid table.
+           wrapperWidth = grid.wrapper.width(), // Get the Grid width.
            wrapper = $("<div class='k-grid k-widget'></div>").width(wrapperWidth),
            hint;
 
-       table.find("thead").remove(); // Remove Grid's header from the hint
-       table.find("tbody").empty(); // Remove the existing rows from the hint
+       table.find("thead").remove(); // Remove the Grid header from the hint.
+       table.find("tbody").empty(); // Remove the existing rows from the hint.
        table.wrap(wrapper); // Wrap the table
-       table.append(element.clone().removeAttr("uid")); // Append the dragged element
+       table.append(element.clone().removeAttr("uid")); // Append the dragged element.
 
-       hint = table.parent(); // Get the wrapper
+       hint = table.parent(); // Get the wrapper.
 
-       return hint; // Return the hint element
+       return hint; // Return the hint element.
      }
    </script>
 
@@ -271,10 +262,5 @@ The main milestones of the approach are:
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
-* [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
-* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
