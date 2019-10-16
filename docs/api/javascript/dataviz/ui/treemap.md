@@ -177,46 +177,52 @@ The source widget instance.
 
     <div id="treemap"></div>
     <script>
-    $("#treemap").kendoTreeMap({
+      $("#treemap").kendoTreeMap({
         dataSource: {
-            data: [{
-                name: "foo",
-                value: 1,
-                color: "red"
+          data: [{
+            name: "test",
+            items: [{
+              category: "foo",
+              value: 1,
+              color: "#3073ad"
             }]
+          }]
         },
         valueField: "value",
-        textField: "name",
+        textField: "category",
         colorField: "color",
         dataBound: function(e) {
-            console.log("DataBound");
+          console.log("DataBound");
         }
-    });
+      });
     </script>
 
 #### Example - subscribe to the "dataBound" event after initialization
     <div id="treemap"></div>
     <script>
-    function dataBound(e) {
-      console.log("DataBound");
-    }
+      function dataBound(e) {
+        console.log("DataBound");
+      }
 
-    $("#treemap").kendoTreeMap({
+      $("#treemap").kendoTreeMap({
         dataSource: {
-            data: [{
-                name: "foo",
-                value: 1,
-                color: "red"
+          data: [{
+            name: "test",
+            items: [{
+              category: "foo",
+              value: 1,
+              color: "#3073ad"
             }]
+          }]
         },
         autoBind: false,
         valueField: "value",
-        textField: "name",
+        textField: "category",
         colorField: "color"
-    });
-    var treemap = $("#treemap").getKendoTreeMap();
-    treemap.bind("dataBound", dataBound);
-    treemap.dataSource.fetch();
+      });
+      var treemap = $("#treemap").getKendoTreeMap();
+      treemap.bind("dataBound", dataBound);
+      treemap.dataSource.fetch();
     </script>
 
 ## Methods

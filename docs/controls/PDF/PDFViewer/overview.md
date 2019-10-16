@@ -19,6 +19,8 @@ The default tools collection includes the `pager`, `open`, and `download` tools.
 1. Add a `<div>` element that will be used to initialize the PDFViewer.
 1. Choose the PDF processing library and configure its settings.
 
+##### Example
+
     <div id="pdfviewer"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
     <script>
@@ -28,7 +30,7 @@ The default tools collection includes the `pager`, `open`, and `download` tools.
         $("#pdfviewer").kendoPDFViewer({
             pdfjsProcessing: {
                 file: ""
-            }
+            }   
         });
     </script>
 

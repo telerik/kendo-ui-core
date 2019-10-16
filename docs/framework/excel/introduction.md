@@ -17,15 +17,15 @@ Excel export allows you to create Excel documents in JavaScript and save them on
 To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 
 ```
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
-<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 ```
 
 JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN:
 
 ```
-<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
 ```
 
 > * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.

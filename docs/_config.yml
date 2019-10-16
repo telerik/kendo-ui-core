@@ -284,6 +284,9 @@ navigation:
         title: "Drag and Drop"
     "controls/interactivity/ripplecontainer":
         title: "Ripple Container"
+    "controls/interactivity/sortable/integration":
+        title: "Integration"
+        position: 6
     "controls/media":
         title: "Media"
         position: 12

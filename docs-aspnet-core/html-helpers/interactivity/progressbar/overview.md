@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI ProgressBar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ProgressBar widget.
 
-The ProgressBar offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
+The ProgressBar delivers rich functionality for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, reversed direction, minimum and maximum values, and animation duration. 
 
 * [Demo page for the ProgressBar](https://demos.telerik.com/aspnet-core/progressbar/index)
 

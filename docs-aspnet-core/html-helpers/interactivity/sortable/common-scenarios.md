@@ -12,7 +12,7 @@ This article provides common scenarios you might encounter when working with the
 
 * [Persisting the current items order](#persisting-the-current-items-order)
 * [Handling items which contain input elements](#handling-items-with-input-elements)
-* [Handling the selection of radio buttons](#handling-radio-button-selection)
+* [Handling the selection of radio buttons](#handling-radio-button-selections)
 
 ## Persisting the Current Items Order
 
@@ -98,7 +98,7 @@ The `<input>` elements inside Sortable items cannot be focused because the items
         .Ignore("input")
     )   
 
-## Handling Radio Button Selection
+## Handling Radio Button Selections
 
 A Sortable with radio buttons and a hint cloned from the Sortable element will lose the selected radio button if dragged because the clone will take over the selection. To avoid this behavior, clear the name of the radio button in the hint.
 
