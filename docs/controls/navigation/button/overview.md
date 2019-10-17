@@ -72,7 +72,7 @@ Although each Button represents a separate widget instance on the page, multiple
       	});
       	</script>
 
-## Features and Functionality
+## Functionality and Features
 
 * [Disabled Button]({% slug disabled_button %})
 * [Icon Button]({% slug icons_button %})

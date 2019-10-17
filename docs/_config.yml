@@ -283,7 +283,7 @@ navigation:
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
     "controls/interactivity/ripplecontainer":
-        title: "Ripple Container"
+        title: "RippleContainer"
     "controls/interactivity/sortable/integration":
         title: "Integration"
         position: 6

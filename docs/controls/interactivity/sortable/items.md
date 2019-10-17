@@ -10,9 +10,8 @@ position: 3
 
 The Sortable provides options for controlling the behavior of its items.
 
-The `filter` option specifies which items inside the Sortable container will be sortable. Items which do not match the `filter` selector will neither be draggable nor reordered when the user drags a sortable item over them.
-
-The `disabled` option specifies which items inside the Sortable container cannot be dragged. Items which match the `disabled` selector cannot be dragged but will reorder when the user drags a sortable item over them.
+* The `filter` option specifies which items inside the Sortable container will be sortable. Items which do not match the `filter` selector will neither be draggable nor reordered when the user drags a sortable item over them.
+* The `disabled` option specifies which items inside the Sortable container cannot be dragged. Items which match the `disabled` selector cannot be dragged but will reorder when the user drags a sortable item over them.
 
 The following example demonstrates how to disable all items at runtime.
 

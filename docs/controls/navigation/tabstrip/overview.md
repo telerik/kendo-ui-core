@@ -79,7 +79,7 @@ The following example demonstrates how to initialize the TabStrip from a JSON `d
       });
     </script>
 
-## Features and Functionality
+## Functionality and Features
 
 * [Icon TabStrip]({% slug icons_tabstrip %})
 * [Tabs]({% slug tabs_tabstrip %})

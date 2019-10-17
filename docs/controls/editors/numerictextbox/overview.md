@@ -47,7 +47,7 @@ The following example demonstrates how to initialize the NumericTextBox.
         });
     </script>
 
-## Features and Functionality
+## Functionality and Features
 
 * [Formats]({% slug formats_numerictextbox %})
 * [Input Restrictions]({% slug input_restrictions_numerictextbox %})
