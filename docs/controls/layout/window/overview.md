@@ -105,7 +105,7 @@ To create a Kendo UI Window instance multiple times with the same ID, make sure 
 
 Alternatively, you can [`open`](/api/javascript/ui/window/methods/open) the existing Window instance, [`refresh`](/api/javascript/ui/window/methods/refresh) its AJAX content or [set some new static content](/api/javascript/ui/dialog/methods/content) without having to destroy the instance.
 
-## Features and Functionality
+## Functionality and Features
 
 * [Animations]({% slug animations_window %})
 * [Positioning]({% slug positiondrag_window %})

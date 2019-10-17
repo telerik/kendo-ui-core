@@ -37,7 +37,7 @@ The following example demonstrates how to initialize the Upload. The array synta
         $("#photos").kendoUpload();
     });
 
-## Features and Functionality
+## Functionality and Features
 
 * [Dragging and dropping]({% slug dragandrop_upload_widget %})
 * [File processing]({% slug chunkupload_upload_widget %})
