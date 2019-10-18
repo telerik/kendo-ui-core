@@ -8,11 +8,11 @@ position: 1
 
 # Button Overview
 
-The [Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled and clickable UI functionality with arbitrary content.
+The Button provides a styled clickable UI functionality with arbitrary content.
 
-Apart from the capability to render consistent Kendo UI styling, the Button provides keyboard navigation for elements which natively do not have it, for example, `span`.
+Apart from consistent Kendo UI for jQuery styling, the Button provides keyboard operability for elements, which natively do not have it&mdash;for example, `span`.
 
-This article assumes that you have mastered the [fundamental Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}).
+* [Demo page for the Button](http://demos.telerik.com/kendo-ui/button/index) 
 
 ## Getting Started
 

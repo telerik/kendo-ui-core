@@ -8,7 +8,11 @@ position: 1
 
 # DatePicker Overview
 
-The [Kendo UI DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index) allows the user to select a date from a calendar or through a direct input and provides options for using custom templates for its **Month** view, setting minimum and maximum dates, a start view, and a depth for navigation.
+The DatePicker enables the user to select a date from a calendar or through a direct input.
+
+It provides options for using custom templates for its **Month** view, setting minimum and maximum dates, a start view, and a depth for navigation.
+
+* [Demo page for the DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)
 
 ## Initializing the DatePicker
 

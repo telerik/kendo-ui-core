@@ -9,9 +9,11 @@ position: 1
 
 # Grid Overview
 
-The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful control for displaying data in a tabular format.
+The Grid is a powerful control for displaying data in a tabular format.
 
-It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the Kendo UI DataSource component.
+It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
+
+* [Demo page for the Grid](http://demos.telerik.com/kendo-ui/grid/index)
 
 ## Advance Reading
 
@@ -172,7 +174,7 @@ To refer to an existing Grid instance:
 1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
 
         var grid = $("#grid").data("kendoGrid");
-        
+
 ## See Also
 
 * [Basic Usage of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/index)

@@ -30,8 +30,6 @@ table.k-editor
 .k-editortoolbar-dragHandle
 {
     cursor: move;
-    padding-left: 0;
-    padding-right: 3px;
     box-shadow: none !important;
 }
 
@@ -408,11 +406,28 @@ a.k-tool {
     min-height: 2.4375em;
     position: relative
 }
-
-.k-overflow-tools {
+.k-editor-toolbar {
+    width: 100%;
+    position: relative;
+    flex: 1;
+}
+.editorToolbarWindow  {
+    display: flex;
+    align-content: flex-start;
+}
+.k-editortoolbar-dragHandle {
+    position: relative;
+    padding: 0;
+    margin: 0 3px 0 0;
+}
+.k-editor-toolbar .k-overflow-tools {
     position: absolute;
     right: 0;
     top: 0;
+    margin: 0;
+}
+.k-editor-toolbar .k-tool-group .k-widget:last-child {
+    margin-right: 0;
 }
 
 .k-editor-overflow-popup .k-tool {

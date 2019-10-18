@@ -8,7 +8,9 @@ position: 1
 
 # Rating Overview
 
-The [Kendo UI Rating widget](http://demos.telerik.com/kendo-ui/rating/index) allow to intuitively rate by selecting number of items [stars] from a predefined maximum number of items.
+The Rating allows to intuitively rate by selecting number of items stars from a predefined maximum number of items.
+
+* [Demo page for the Rating](http://demos.telerik.com/kendo-ui/rating/index) 
 
 ## Initializing the Rating
 
@@ -40,4 +42,4 @@ The following example demonstrates how to initialize the Rating from an existing
 ## See Also
 
 * [Basic Usage of the Rating (Demo)](https://demos.telerik.com/kendo-ui/rating/index)
-* [JavaScript API Reference of the DropDownList](/api/javascript/ui/rating)
+* [JavaScript API Reference of the Rating](/api/javascript/ui/rating)

@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI DatePicker HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI DatePicker widget.
 
-The DatePicker enables the user to enter or pick a date value.
+The DatePicker enables the user to select a date from a calendar or through a direct input. It provides options for using custom templates for its **Month** view, setting minimum and maximum dates, a start view, and a depth for navigation.
 
 * [Demo page for the DatePicker](https://demos.telerik.com/aspnet-core/datepicker/index)
 

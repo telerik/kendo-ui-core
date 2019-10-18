@@ -9,7 +9,7 @@ position: 2
 
 # Multiple Sources
 
-To add multiple sources for the same video, you have to configure the quality-dependent [client-side HD feature](http://docs.telerik.com/kendo-ui/controls/media/mediaplayer/overview#configuration-Add).
+To add multiple sources for the same video, you have to configure the quality-dependent client-side HD feature.
 
 When you add multiple sources for the video, an **HD** button is automatically displayed in the bottom right corner next to the **FullScreen** button. This behavior enables you to select your preferred quality.
 
@@ -28,7 +28,6 @@ When you add multiple sources for the video, an **HD** button is automatically d
 			.HtmlAttributes(new { style = "height:360px; width:640px" })
 )
 ```
-
 
 ## See Also
 

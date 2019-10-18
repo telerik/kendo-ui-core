@@ -8,7 +8,11 @@ position: 1
 
 # Window Overview
 
-The [Kendo UI Window widget](http://demos.telerik.com/kendo-ui/window/index) displays content in a modal or non-modal HTML window. By default, a Window can be moved, resized, and closed. Its content can also be defined with either as static HTML, or dynamically loaded via AJAX.
+The Window displays content in a modal or non-modal HTML window.
+
+By default, the user can move, resize, and close a Window. Its content can also be defined either as static HTML or dynamically loaded with AJAX.
+
+* [Demo page for the Window](http://demos.telerik.com/kendo-ui/window/index) 
 
 ## Basic Usage
 
