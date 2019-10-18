@@ -8,9 +8,11 @@ position: 1
 
 # QRCode Overview
 
-The [Kendo UI QRCode widget](http://demos.telerik.com/kendo-ui/qrcode/index) generates [Canvas](https://en.wikipedia.org/wiki/Canvas_X) and [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) images that represent [Quick Response (QR) codes](https://en.wikipedia.org/wiki/QR_code).
+The QRCode generates [Canvas](https://en.wikipedia.org/wiki/Canvas_X) and [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) images that represent [Quick Response (QR) codes](https://en.wikipedia.org/wiki/QR_code).
 
 QR codes take a piece of information from a transitory media, place it into the cell phone, and enable the cell phone to quickly read these generated images. All graphics are rendered on the client by using Canvas or SVG.
+
+* [Demo page for the QRCode](http://demos.telerik.com/kendo-ui/qrcode/index)
 
 ## Basic Configuration
 

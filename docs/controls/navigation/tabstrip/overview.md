@@ -8,7 +8,11 @@ position: 1
 
 # TabStrip Overview
 
-The [Kendo UI TabStrip widget](http://demos.telerik.com/kendo-ui/tabstrip/index) displays a collection of tabs with associated content and contains an unordered list of items which represent its tabs and a collection of `div` elements which hold the content for each tab.
+The TabStrip displays a collection of tabs with associated content.
+
+It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
+
+* [Demo page for the TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)
 
 ## Initializing the TabStrip
 

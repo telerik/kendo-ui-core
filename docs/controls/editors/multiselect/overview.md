@@ -8,7 +8,11 @@ position: 1
 
 # MultiSelect Overview
 
-The [Kendo UI MultiSelect widget](http://demos.telerik.com/kendo-ui/multiselect/index) displays a list of options, allows multiple selections from that list, represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
+The MultiSelect displays a list of options and allows multiple selections from this list.
+
+The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
+
+* [Demo page for the MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)
 
 ## Initializing the MultiSelect
 

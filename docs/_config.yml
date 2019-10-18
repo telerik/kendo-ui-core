@@ -290,6 +290,12 @@ navigation:
     "controls/media":
         title: "Media"
         position: 12
+    "controls/media/mediaplayer/globalization":
+        title: "Globalization"
+        position: 40
+    "controls/media/mediaplayer/accessibility":
+        title: "Accessibility"
+        position: 50
     "controls/pdf":
         title: "PDF"
         position: 13

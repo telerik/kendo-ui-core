@@ -8,9 +8,11 @@ position: 1
 
 # Barcode Overview
 
-The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) represents data in a machine-readable format.
+The Barcode represents data in a machine-readable format.
 
 All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](http://www.w3.org/Graphics/SVG/).
+
+* [Demo page for the Barcode](http://demos.telerik.com/kendo-ui/barcode/index)
 
 ## Basic Configuration
 
