@@ -3,26 +3,25 @@ title: Images
 page_title: jQuery TimeLine Documentation | Images | Kendo UI
 description: "Adding images in the Kendo UI jQuery TimeLine card."
 slug: images_kendoui_timeline_widget
-position: 15
+position: 4
 ---
 
 # Images
 
-The TimeLine can render an `<img />` tag for the first item from the `images` collection in its data source. Its `src` attribute will be set to the value of the `src` field of the image literal.
+The TimeLine can render an `<img />` tag for the first item of its `images` collection in the data source.
 
-The example below shows how you can use a field with a specific name to provide an image for the events.
+Its `src` attribute will be set to the value of the `src` field of the image literal.
 
->tip If you want to show more than one image, you need to customize the [template of the TimeLine](templates).
-
+The following example demonstrates how to use a field with a specific name to provide an image for the events. To show more than one image, customize the [template of the TimeLine]({% slug templates_kendoui_timeline_widget %}).
 
 ```
 <div id="timeline"></div>
 <script>
     $(document).ready(function () {
         $("#timeline").kendoTimeline({
-            dataImagesField: "tripImage", // the name of the field that holds an array with the event image as its element
+            dataImagesField: "tripImage", // The name of the field that holds an array with the event image as its element.
             dataSource: {
-                data: eventsData, // you can also use a remote data source that will return the corresponding array of JSON literals
+                data: eventsData, // You can also use a remote data source that will return the corresponding array of JSON literals.
                 schema: {
                     model: {
                         fields: {
@@ -63,9 +62,7 @@ The example below shows how you can use a field with a specific name to provide 
 </script>
 ```
 
-
 ## See Also
 
-
-* [Templates in the TimeLine]({% slug templates_kendoui_timeline_widget %}).
+* [Templates in the TimeLine]({% slug templates_kendoui_timeline_widget %})
 * [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)

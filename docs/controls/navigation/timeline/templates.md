@@ -3,16 +3,16 @@ title: Templates
 page_title: jQuery TimeLine Documentation | Templates | Kendo UI
 description: "Event templates in the Kendo UI jQuery TimeLine widget allow you to customize the appearance of the cards."
 slug: templates_kendoui_timeline_widget
-position: 20
+position: 5
 ---
 
 # Templates
 
-The TimeLine lets you define your own template for rendering the events data, so you can customize it to your needs instead of using the default card.
+The TimeLine enables to define your own template for rendering the events data so that you can customize it to your needs instead of using the default card.
 
-You can find a live example in the [Templates demo of the TimeLine](https://demos.telerik.com/kendo-ui/timeline/templates).
+For a runnable example, refer to the [dem on using templates in the TimeLine](https://demos.telerik.com/kendo-ui/timeline/templates).
 
-The following example shows how you can customize the template of the timeline - to show more than one image and how you can use custom fields from your model that would not be recognized by the default template. The classes and HTML structure in this example mimic the default card template (except the custom field).
+The following example demonstrates how to customize the template of the TimeLine. To render more than one image, use custom fields from your model that will not be recognized by the default template. The classes and HTML structure in this example, except for the custom field, mimic the default card template.
 
 ```
 <div id="timeline"></div>
@@ -45,7 +45,7 @@ The following example shows how you can customize the template of the timeline -
             dateFormat: "MMMM yyyy",
             orientation: "horizontal",
             dataSource: {
-                data: eventsData, // you can also use a remote data source that will return the corresponding array of JSON literals
+                data: eventsData, // You can also use a remote data source that will return the corresponding array of JSON literals.
                 schema: {
                     model: {
                         fields: {
@@ -108,7 +108,6 @@ The following example shows how you can customize the template of the timeline -
 ```
 
 ## See Also
-
 
 * [Templates in the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/templates).
 * [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)

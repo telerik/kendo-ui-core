@@ -8,30 +8,34 @@ position: 1
 
 # TimeLine Overview
 
-The [Kendo UI TimeLine widget](https://demos.telerik.com/kendo-ui/timeline/index) displays a collection of events and their data in a chronological succession for each year.
+The Kendo UI TimeLine widget displays a collection of events and their data in a chronological succession for each year.
 
 You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the widget behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
 
-![](images/timeline-overview.png)
+* [Demo page for the TimeLine](https://demos.telerik.com/kendo-ui/timeline/index)
+
+The following image demonstrates a TimeLine widget.
+
+![A Kendo UI TimeLine widget](images/timeline-overview.png)
 
 ## Initializing the TimeLine
 
 To initialize the TimeLine, use a blank `<div>` element and the `kendoTimeline()` method. In its arguments, provide a JSON literal with the options for the widget and a data source that contains the information about the events.
 
-> When you initialize the TimeLine, create it within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
+> Create the TimeLine within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 
-The following example demonstrates how to initialize the TimeLine from a JSON `data` object.
+The following example demonstrates how to initialize the TimeLine from a JSON `data` object. You can use a remote data source that will return the array of JSON literals instead of a local array of data. The `date` field in such a data source must be parsable by JavaScript (for example, `yyyy-mm-dd` or [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)). The widget data source is a [Kendo DataSource](/framework/datasource/overview) widget so you can use its features.
 
 ```dojo
 <div id="timeline"></div>
 <script>
     $(document).ready(function () {
         $("#timeline").kendoTimeline({
-            orientation: "vertical", // defines the layout of the widget
-            alterMode: true, // renders the events on both sides of the axis in vertical mode
-            collapsibleEvents: true, // starts all events collapsed in vertical mode
+            orientation: "vertical", // Define the layout of the widget.
+            alterMode: true, // Render the events on both sides of the axis in the vertical mode.
+            collapsibleEvents: true, // Start all collapsed events in the vertical mode.
             dataSource: {
-                data: eventsData, // defined later in this snippet
+                data: eventsData, // Defined later in this snippet.
                 schema: {
                     model: {
                         fields: {
@@ -44,8 +48,8 @@ The following example demonstrates how to initialize the TimeLine from a JSON `d
             }
         });
     });
-    
-    // the literals in this example use the default field names the widget takes
+
+    // The literals in this example use the default field names the widget takes.
     var eventsData = [
         {
             description: "First event description.",
@@ -102,25 +106,20 @@ The following example demonstrates how to initialize the TimeLine from a JSON `d
 </script>
 ```
 
->tip You can use a remote data source that will return the array of JSON literals instead of a local array of data. The `date` field in such a data source must be parsable by JavaScript (for example, `yyyy-mm-dd` or [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)). The widget data source is a [Kendo DataSource](/framework/datasource/overview) widget, so you can use its features.
+## Functionality and Features
 
-
+* [Orientation]({% slug orientation_kendoui_timeline_widget %})
+* [Actions]({% slug actions_kendoui_timeline_widget %})
+* [Images]({% slug images_kendoui_timeline_widget %})
+* [Templates]({% slug templates_kendoui_timeline_widget %})
 
 ## Referencing Existing Instances
 
-To refer to an existing TimeLine instance use the `jQuery.data()` method. Once a reference is established, use the [TimeLine widget API](/api/javascript/ui/timeline) to control its behavior.
+To refer to an existing TimeLine instance, use the `jQuery.data()` method. Once a reference is established, use the [TimeLine API](/api/javascript/ui/timeline) to control its behavior.
 
 ```
 var timeLine = $("#timeline").data("kendoTimeLine");
 ```
-
-## Functionality and Features
-
-* [Orientation]({%slug orientation_kendoui_timeline_widget %})
-* [Actions]({%slug actions_kendoui_timeline_widget %})
-* [Images]({%slug images_kendoui_timeline_widget%})
-* [Templates]({%slug templates_kendoui_timeline_widget %})
-
 
 ## Events
 

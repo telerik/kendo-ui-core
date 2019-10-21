@@ -1,9 +1,9 @@
 ---
 title: Separator
-page_title: Separator | Kendo UI ToolBar
-description: "Learn how to configure and use the Separator Command Type of the Kendo UI ToolBar widget."
+page_title: jQuery ToolBar Documentation | Separator Command Type | Kendo UI
+description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the Separator command type."
+previous_url: /controls/navigation/toolbar/separator
 slug: separator_toolbar_widget
-position: 7
 ---
 
 # Separator
@@ -11,8 +11,6 @@ position: 7
 The Separator can act as a delimiter between the ToolBar commands.
 
 The following example demonstrates how to define a Separator.
-
-
 
     <div id="toolbar"></div>
 
@@ -29,4 +27,4 @@ The following example demonstrates how to define a Separator.
 ## See Also
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
-* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)

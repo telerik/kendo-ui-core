@@ -48,7 +48,7 @@ You have to define the properties of a pane during initialization and to set the
 
 ## Functionality and Features
 
-* [Content]({% slug content_kendoui_splitter %})
+* [Content operations]({% slug content_kendoui_splitter %})
 * [Panes]({% slug panes_kendoui_splitter %})
 * [Appearance]({% slug appearance_kendoui_splitter %})
 

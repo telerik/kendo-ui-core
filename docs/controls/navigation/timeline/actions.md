@@ -3,16 +3,16 @@ title: Actions
 page_title: jQuery TimeLine Documentation | Actions | Kendo UI
 description: "Action links in the Kendo UI jQuery TimeLine widget allow you to provide extra details to the users."
 slug: actions_kendoui_timeline_widget
-position: 10
+position: 3
 ---
 
 # Actions
 
-The TimeLine can render links (`<a>` tags) for the items from the `actions` collection in its data source, so the user can navigate to the specific pages.
+The TimeLine can render links (`<a>` tags) for the items of its `actions` collection in the data source and the user can navigate to the specific pages.
 
-The `href` attribute of an action will be set to the value of the `src` field of the action literal, and the text will come from the `text` field.
+The `href` attribute of an action will be set to the value of the `src` field of the action literal and the text will come from the `text` field.
 
-The example below shows how you can use a field with a specific name to provide actions for the events.
+The following example demonstrates how to use a field with a specific name to provide actions for the events.
 
 ```dojo
 <div id="timeline"></div>
@@ -22,7 +22,7 @@ The example below shows how you can use a field with a specific name to provide 
         $("#timeline").kendoTimeline({
             dataActionsField: "linksList",
             dataSource: {
-                data: eventsData, // you can also use a remote data source that will return the corresponding array of JSON literals
+                data: eventsData, // You can also use a remote data source that will return the corresponding array of JSON literals.
                 schema: {
                     model: {
                         fields: {
@@ -70,7 +70,6 @@ The example below shows how you can use a field with a specific name to provide 
 ```
 
 ## See Also
-
 
 * [Basic Usage of the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/index)
 * [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)

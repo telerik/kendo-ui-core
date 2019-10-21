@@ -1373,10 +1373,12 @@ div.k-filebrowser-dropzone em
 }
 
 // Upload
-
-.k-file
-{
+.k-dropzone {}
+.k-file {
     border-color: @cell-border-color;
+}
+.k-file:last-child {
+    border-radius: 0 0 @border-radius @border-radius;
 }
 
 .k-file-progress

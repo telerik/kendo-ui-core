@@ -1,12 +1,12 @@
 ---
-title: Content
-page_title: jQuery Tooltip Documentation | Content | Kendo UI
+title: Content Operations
+page_title: jQuery Tooltip Documentation | Content Operations | Kendo UI
 description: "Get started with the jQuery Tooltip by Kendo UI and load its content with AJAX."
 slug: content_kendoui_tooltip
 position: 2
 ---
 
-# Content
+# Content Operations
 
 You can use any valid technique for loading Tooltip content.
 

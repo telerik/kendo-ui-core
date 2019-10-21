@@ -1,12 +1,12 @@
 ---
-title: Content
-page_title: jQuery Splitter Documentation | Content | Kendo UI
+title: Content Operations
+page_title: jQuery Splitter Documentation | Content Operations | Kendo UI
 description: "Get started with the jQuery Splitter by Kendo UI and load its content with AJAX."
 slug: content_kendoui_splitter
 position: 2
 ---
 
-# Content
+# Content Operations
 
 You can use any valid technique for loading Splitter content.
 

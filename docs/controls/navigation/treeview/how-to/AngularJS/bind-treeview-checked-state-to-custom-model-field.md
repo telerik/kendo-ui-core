@@ -12,13 +12,9 @@ By design, the TreeView does not support custom checkbox binding.
 
 While, as a result, the AngularJS scope model field (`$scope.treeData`) does not get updated, the TreeView updates its own Data Source instance. To programmatically update the AngularJS scope model field, assign the checked state of the TreeView Data Source to the scope model field. Alternatively, you can use the TreeView Data Source. The TreeView is then initialized as a Kendo UI component, loads its own Data Source, and the AngularJS bindings are applied consequently. Therefore, to update the `ng-model` within the template, assign `ng-model=dataItem.customField`.
 
-> **Important**
->
 > For large data sets, it is not recommended to bind the checked state to an AngularJS `$scope` model field because performance recursion issues might occur.
 
 The following example demonstrates how to bind the checked state of a Kendo UI TreeView to a custom model field in AngularJS applications.
-
-
 
 ```dojo
   <link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
@@ -104,7 +100,7 @@ The following example demonstrates how to bind the checked state of a Kendo UI T
           for (var i = 0; i < model.length; i++) {
             var dataItem = model[i];
             var node = dataSource[i];
-            
+
             if (node.checked != undefined) {
               dataItem.isChecked = node.checked;
             }
@@ -132,14 +128,6 @@ The following example demonstrates how to bind the checked state of a Kendo UI T
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its **How To** documentation folder.
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

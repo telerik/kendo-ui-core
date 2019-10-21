@@ -1,9 +1,9 @@
 ---
 title: Spacer
-page_title: Spacer | Kendo UI ToolBar
-description: "Learn how to configure and use the Spacer Command Type of the Kendo UI ToolBar widget."
+ppage_title: jQuery ToolBar Documentation | Spacer Command Type | Kendo UI
+description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the Spacer command type."
+previous_url: /controls/navigation/toolbar/spacer
 slug: spacer_toolbar_widget
-position: 8
 ---
 
 # Spacer
@@ -11,8 +11,6 @@ position: 8
 The Spacer command type moves the tools that are declared after it to the right side of the ToolBar.
 
 The following example demonstrates how to define a spacer.
-
-
 
     <div id="toolbar"></div>
 
@@ -27,8 +25,6 @@ The following example demonstrates how to define a spacer.
     </script>
 
 You can use multiple spacers to create an equal amount of space between several tools.
-
-
 
     <div id="toolbar"></div>
 
@@ -47,4 +43,4 @@ You can use multiple spacers to create an equal amount of space between several 
 ## See Also
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
-* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
