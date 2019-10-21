@@ -11,8 +11,6 @@ Your project might require you to hide the checkboxes for the root level items i
 
 The following example demonstrates how to achieve this behavior by using the `checkboxes.template` configuration option.
 
-
-
 ```dojo
     <div id="treeview"></div>
 
@@ -52,13 +50,6 @@ The following example demonstrates how to achieve this behavior by using the `ch
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

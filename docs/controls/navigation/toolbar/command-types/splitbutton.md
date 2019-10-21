@@ -1,9 +1,9 @@
 ---
 title: SplitButton
-page_title: SplitButton | Kendo UI ToolBar
-description: "Learn how to configure and use the SplitButton Command Type of the Kendo UI ToolBar widget."
+page_title: jQuery ToolBar Documentation | SplitButton Command Type | Kendo UI
+description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the SplitButton command type."
+previous_url: /controls/navigation/toolbar/splitbutton
 slug: splitbutton_toolbar_widget
-position: 5
 ---
 
 # SplitButton
@@ -13,8 +13,6 @@ The SplitButton is a composite control which has a primary (main) button and alt
 In the command overflow popup, the SplitButton is rendered as a flat list of commands. The first one is the primary (main) button, followed by the drop-down items in the order they are defined.
 
 The following example demonstrates how to define a SplitButton in the ToolBar widget.
-
-
 
     <div id="toolbar"></div>
 
@@ -39,4 +37,4 @@ The following example demonstrates how to define a SplitButton in the ToolBar wi
 ## See Also
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
-* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)

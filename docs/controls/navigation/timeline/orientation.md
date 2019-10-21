@@ -3,31 +3,29 @@ title: Orientation
 page_title: jQuery TimeLine Documentation | Orientation | Kendo UI
 description: "See how to control the orientation of the TimeLine widget for jQuery by Kendo UI."
 slug: orientation_kendoui_timeline_widget
-position: 5
+position: 2
 ---
 
 # Orientation
 
 The TimeLine can render its events in a [vertical](#vertical) or [horizontal](#horizontal) list.
 
-## Vertical
+## Vertical Mode
 
-By default, the timeline is vertical, with events arranged on one side of the axis.
+By default, the TimeLine is vertical with its events arranged on one side of the axis and all events are expanded.
 
-You can have the events render alternatingly on both sides of the axis by setting its `alterMode` option to `true`.
-
-If you set the `collapsibleEvents` option to `true`, all events will start out collapsed (by default, all events are expanded). The user can then expand a particular event to see more than its title and subtitle.
+You can have the events render alternatingly on both sides of the axis by setting its `alterMode` option to `true`. If you set the `collapsibleEvents` option to `true`, all events will start out collapsed. The user can then expand a particular event to see more than its title and subtitle.
 
 ```
 <div id="timeline"></div>
 <script>
     $(document).ready(function () {
         $("#timeline").kendoTimeline({
-            orientation: "vertical", // defines the layout of the widget
-            alterMode: true, // renders the events on both sides of the axis in vertical mode
-            collapsibleEvents: true, // starts all events collapsed in vertical mode
+            orientation: "vertical", // Define the layout of the widget.
+            alterMode: true, // Render the events on both sides of the axis in the vertical mode.
+            collapsibleEvents: true, // Start all collapsed events in the vertical mode.
             dataSource: {
-                data: eventsData, // defined later in this snippet
+                data: eventsData, // Defined later in this snippet.
                 schema: {
                     model: {
                         fields: {
@@ -40,8 +38,8 @@ If you set the `collapsibleEvents` option to `true`, all events will start out c
             }
         });
     });
-    
-    // the literals in this example use the default field names the widget takes
+
+    // The literals in this example use the default field names the widget takes.
     var eventsData = [
         {
             description: "First event description.",
@@ -98,24 +96,24 @@ If you set the `collapsibleEvents` option to `true`, all events will start out c
 </script>
 ```
 
-## Horizontal
+## Horizontal Mode
 
-To use the horizontal rendering, set the `orientation` option to `horizontal`.
+To use the horizontal rendering, set the `orientation` option f the TimeLine to `horizontal`.
 
-In the horizontal mode, the timeline renders buttons the user can click or tap to navigate between periods. There is always one rendered event below the time axis, and the user can select another to reveal its details.
+In the horizontal mode, the TimeLine renders buttons which the user can click or tap to navigate between periods. One of the events is always rendered below the time axis and the user can select another event to reveal its details.
 
-The horizontal mode renders the event details on demand (only when they are selected), and is responsive (renders as many of the events as there is room on the axis for).
+The horizontal mode renders the event details on demand (only when they are selected) and is responsive (renders as many of the events as there is room on the axis for).
 
-Alternating rendering and collapsing is not available for the events in this mode.
+The horizontal mode does not support alternating rendering and collapsing of events.
 
 ```
 <div id="timeline"></div>
 <script>
     $(document).ready(function () {
         $("#timeline").kendoTimeline({
-            orientation: "horizontal", // defines the layout of the widget
+            orientation: "horizontal", // Defined the layout of the widget.
             dataSource: {
-                data: eventsData, // defined later in this snippet
+                data: eventsData, // Defined later in this snippet.
                 schema: {
                     model: {
                         fields: {
@@ -128,8 +126,8 @@ Alternating rendering and collapsing is not available for the events in this mod
             }
         });
     });
-    
-    // the literals in this example use the default field names the widget takes
+
+    // The literals in this example use the default field names the widget takes.
     var eventsData = [
         {
             description: "First event description.",
@@ -190,4 +188,3 @@ Alternating rendering and collapsing is not available for the events in this mod
 
 * [Horizontal Orientation of the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/horizontal)
 * [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
-

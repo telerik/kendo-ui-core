@@ -1191,7 +1191,7 @@ div.k-filebrowser-dropzone em
 .k-state-disabled .k-link,
 .k-other-month,
 .k-other-month .k-link,
-.k-dropzone em,
+.k-dropzone .k-dropzone-hint,
 .k-dropzone .k-upload-status,
 .k-tile-empty strong,
 .k-slider .k-draghandle
@@ -1312,11 +1312,18 @@ div.k-filebrowser-dropzone em
 }
 
 // Upload
-
-.k-file
-{
+.k-dropzone {
+    color: @header-text-color;
+    background-color: @header-background-color;
+    .composite-background(@widget-gradient);
+    background-position: 50% 50%;
+}
+.k-file {
     background-color: @active-background-color;
     border-color: @cell-border-color;
+}
+.k-file:last-child {
+    border-radius: 0 0 @border-radius @border-radius;
 }
 
 .k-file-progress

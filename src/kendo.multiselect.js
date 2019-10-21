@@ -484,7 +484,7 @@ var __meta__ = { // jshint ignore:line
                     .removeClass(NOCLICKCLASS)
                     .on(HOVEREVENTS, that._toggleHover)
                     .on("mousedown" + ns + " touchend" + ns, proxy(that._wrapperMousedown, that))
-                    .on(CLICK + ns, proxy(that._focusHandler, that));
+                    .on(CLICK, proxy(that._focusHandler, that));
 
                 that.input.on(KEYDOWN, proxy(that._keydown, that))
                     .on("paste" + ns, proxy(that._search, that))
@@ -492,7 +492,7 @@ var __meta__ = { // jshint ignore:line
                     .on("focus" + ns, proxy(that._inputFocus, that))
                     .on("focusout" + ns, proxy(that._inputFocusout, that));
 
-                that._clear.on(CLICK + ns + " touchend" + ns, proxy(that._clearValue, that));
+                that._clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
                      .attr(ARIA_DISABLED, false);
@@ -500,7 +500,7 @@ var __meta__ = { // jshint ignore:line
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, LI, function() { $(this).removeClass(HOVERCLASS); })
-                    .on(CLICK, "li.k-button .k-select", proxy(that._tagListClick, that));
+                    .on(CLICK + " touchend" + ns, "li.k-button .k-select", proxy(that._tagListClick, that));
             } else {
 
                 wrapper.toggleClass(STATEDISABLED, disable)

@@ -1,9 +1,9 @@
 ---
 title: Button
-page_title: Button | Kendo UI ToolBar
-description: "Learn how to configure and use the Button Command Type of the Kendo UI ToolBar widget."
+page_title: jQuery ToolBar Documentation | Button Command Type | Kendo UI
+description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the Button command type."
+previous_url: /controls/navigation/toolbar/button
 slug: button_toolbar_widget
-position: 2
 ---
 
 # Button
@@ -13,8 +13,6 @@ You can configure the Button command type of the ToolBar to acquire different be
 ## Configuration of the Button
 
 The following example demonstrates the properties of the button.
-
-
 
     $("#toolbar").kendoToolBar({
         items: [
@@ -74,7 +72,6 @@ The following example demonstrates the properties of the button.
         ]
     });
 
-
 When resizing is enabled, the control will be rendered once in the ToolBar and another time in the command overflow popup. If the button has a set `ID`, it will be assigned to the element in the ToolBar wrapper. The corresponding element in the command overflow popup will receive the same `ID` with an `"_overflow"` suffix. For example, a button with `id: "foo"` and `overflow: "auto"` will render an element with `id="foo"` in the ToolBar and another element with `id="foo_overflow"` in the ToolBar command overflow popup.
 
 The `overflow` property accepts the following values:
@@ -89,8 +86,6 @@ The `overflow` property accepts the following values:
 * `spriteCssClass`&mdash;The property defines one or more CSS classes that are separated by spaces which will be used for applying a background image to a `span` element inside the Button. To use an icon from the Kendo UI theme sprite background image, use the `icon` property.
 
 The following example demonstrates how to use icons in the ToolBar when you set the appearance of the Button.
-
-
 
     <div id="toolbar"></div>
 
@@ -116,8 +111,6 @@ The `showText` property accepts the following values:
 
 The following example demonstrates how to define a button that is displayed only as an icon in the ToolBar wrapper and having only text in the command overflow container.
 
-
-
     <div id="toolbar"></div>
 
     <script>
@@ -137,4 +130,4 @@ The following example demonstrates how to define a button that is displayed only
 ## See Also
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/kendo-ui/toolbar/index)
-* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
+* [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)

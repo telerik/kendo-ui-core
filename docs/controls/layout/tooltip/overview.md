@@ -56,7 +56,7 @@ The following example demonstrates how to initialize a Tooltip and configure its
 
 ## Functionality and Features
 
-* [Content]({% slug content_kendoui_tooltip %})
+* [Content operations]({% slug content_kendoui_tooltip %})
 * [Rendering over disabled elements]({% slug disabledelements_kendoui_tooltip %})
 
 ## Referencing Existing Instances

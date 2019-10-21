@@ -24,7 +24,7 @@ To initialize the TabStrip, use either of the following approaches:
 > * When you initialize the TabStrip, create it within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 > * It is not mandatory for the tabs to have content. Therefore, when you create an empty tab, you can skip its associated `div` element.
 
-### Using HTML Markup
+### From HTML
 
 The following example demonstrates how to initialize the TabStrip from HTML markup.
 
@@ -43,7 +43,7 @@ The following example demonstrates how to initialize the TabStrip from HTML mark
         });
     </script>
 
-### Using JSON data Object
+### From JSON
 
 The following example demonstrates how to initialize the TabStrip from a JSON `data` object.
 

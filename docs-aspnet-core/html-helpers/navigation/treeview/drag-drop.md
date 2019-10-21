@@ -1,7 +1,7 @@
 ---
 title: Dragging and Dropping
 page_title: TreeView Drag and Drop | Telerik UI TreeView HtmlHelper for ASP.NET Core
-description: "Learn about the drag and drop functionality of the Telerik UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+description: "Learn about the drag-and-drop functionality of the Telerik UI TreeView HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: htmlhelpers_treeview_drag_drop_aspnetcore
 position: 4
 ---

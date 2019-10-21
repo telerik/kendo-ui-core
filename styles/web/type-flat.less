@@ -1303,16 +1303,13 @@ div.k-filebrowser-dropzone em
 }
 
 // Upload
-
-.k-upload.k-header {
-    background: @widget-background-color;
-    border-color: @widget-border-color;
-}
-
-.k-file
-{
+.k-dropzone {}
+.k-file {
     color: @widget-text-color;
     border-color: @cell-border-color;
+}
+.k-file:last-child {
+    border-radius: 0 0 @border-radius @border-radius;
 }
 
 .k-file .k-icon {

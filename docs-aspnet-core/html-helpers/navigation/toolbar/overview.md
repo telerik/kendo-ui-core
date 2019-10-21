@@ -11,7 +11,7 @@ position: 1
 
 The Telerik UI ToolBar HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI ToolBar widget.
 
-The ToolBar is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
+The ToolBar is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements. The ToolBar consists of the ToolBar wrapper, overflow anchor, and command overflow popup main areas. The wrapper holds all commands that can be placed within the available container width. The ones that have no space to fit are moved to the command overflow popup.
 
 * [Demo page for the ToolBar](https://demos.telerik.com/aspnet-core/toolbar/index)
 

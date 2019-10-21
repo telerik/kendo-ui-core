@@ -256,8 +256,17 @@ navigation:
         position: 50
     "controls/navigation/buttongroup":
         title: "ButtonGroup"
+    "controls/navigation/buttongroup/accessibility":
+        title: "Accessibility"
+        position: 50
     "controls/navigation/drawer":
         title: "Drawer"
+    "controls/navigation/menu/contextmenu":
+        title: "ContextMenu"
+        position: 6
+    "controls/navigation/menu/accessibility":
+        title: "Accessibility"
+        position: 50
     "controls/navigation/tabstrip/globalization":
         title: "Globalization"
         position: 40
@@ -267,6 +276,12 @@ navigation:
     "controls/navigation/tabstrip/how-to":
         title: "How To"
         position: 70
+    "controls/navigation/toolbar/command-types":
+        title: "Command Types"
+        position: 2
+    "controls/navigation/treeview/binding":
+        title: "Data Binding"
+        position: 2
     "controls/conversational-ui":
         title: "Conversational UI"
         position: 10
