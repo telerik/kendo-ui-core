@@ -8,7 +8,7 @@ position: 5
 
 # Selection
 
-The Calendar enables the user to make a single, multiple, range-date, and week selections.
+The Calendar enables the user to make single, multiple, range-date, and week selections.
 
 For a runnable example, refer to [the demo on multiple selection in the Calendar HtmlHelper](https://demos.telerik.com/aspnet-core/calendar/selection).
 

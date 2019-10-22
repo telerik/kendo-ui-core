@@ -14,7 +14,7 @@ To disable a date in the DateTimePicker, use either of the following approaches:
 * [Set an array of dates](#setting-an-array)
 * [Add a function](#adding-a-function)
 
-For a complete example, refer to the [demo on disabling dates in the DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/disable-dates).
+For a runnable example, refer to the [demo on disabling dates in the DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/disable-dates).
 
 ## Setting an Array
 

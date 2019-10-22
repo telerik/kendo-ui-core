@@ -38,7 +38,6 @@ navigation:
         position: 4
     "controls/data-management":
         title: "Data Management"
-        position: 1
     "controls/data-management/listview/binding":
         title: "Data Binding"
         position: 2
@@ -72,12 +71,6 @@ navigation:
     "controls/data-management/grid/performance":
         title: "Performance Tips"
         position: 16
-    "controls/data-management/grid/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/data-management/grid/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/data-management/grid/how-to":
         title: "How To"
         position: 70
@@ -136,73 +129,26 @@ navigation:
         position: 3
     "controls/editors":
         title: "Editors"
-        position: 2
-    "controls/editors/dateinput/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/datepicker/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/listbox/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/datepicker/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/editors/datepicker/how-to":
         title: "How To"
         position: 70
     "controls/editors/dropdowntree/binding":
         title: "Data Binding"
         position: 2
-    "controls/editors/dropdownlist/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/dropdownlist/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/editors/dropdownlist/how-to":
         title: "How To"
         position: 70
-    "controls/editors/multiselect/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/multiselect/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/editors/multiselect/how-to":
         title: "How To"
         position: 70
-    "controls/editors/numerictextbox/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/numerictextbox/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/editors/numerictextbox/how-to":
         title: "How To"
         position: 70
-    "controls/editors/upload/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/editors/upload/accessibility":
-        title: "Accessibility"
-        position: 50
-    "controls/editors/rating/accessibility":
-        title: "Accessibility"
-        position: 50
-    "controls/editors/slider/accessibility":
-        title: "Accessibility"
-        position: 50
-    "controls/editors/switch/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/editors/upload/how-to":
         title: "How To"
         position: 70
     "controls/charts":
         title: "Charts"
-        position: 3
     "controls/charts/chart":
         title: "Chart"
         position: 1
@@ -223,56 +169,26 @@ navigation:
         position: 9
     "controls/gauges":
         title: "Gauges"
-        position: 4
     "controls/barcodes":
         title: "Barcodes"
-        position: 5
     "controls/diagrams-and-maps":
         title: "Diagrams and Maps"
-        position: 6
     "controls/scheduling":
         title: "Scheduling"
-        position: 7
     "controls/layout":
         title: "Layout"
-        position: 8
-    "controls/layout/window/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/layout/window/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/layout/window/how-to":
         title: "How To"
         position: 70
     "controls/navigation":
         title: "Navigation"
-        position: 9
-    "controls/navigation/button/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/navigation/button/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/navigation/buttongroup":
         title: "ButtonGroup"
-    "controls/navigation/buttongroup/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/navigation/drawer":
         title: "Drawer"
     "controls/navigation/menu/contextmenu":
         title: "ContextMenu"
         position: 6
-    "controls/navigation/menu/accessibility":
-        title: "Accessibility"
-        position: 50
-    "controls/navigation/tabstrip/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/navigation/tabstrip/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/navigation/tabstrip/how-to":
         title: "How To"
         position: 70
@@ -284,7 +200,6 @@ navigation:
         position: 2
     "controls/conversational-ui":
         title: "Conversational UI"
-        position: 10
     "controls/conversational-ui/chat":
         title: "Chat"
     "controls/conversational-ui/chat/integrations":
@@ -292,7 +207,6 @@ navigation:
         position: 4
     "controls/interactivity":
         title: "Interactivity and UX"
-        position: 11
     "controls/interactivity/fx":
         title: "FX"
     "controls/interactivity/draganddrop":
@@ -304,19 +218,10 @@ navigation:
         position: 6
     "controls/media":
         title: "Media"
-        position: 12
-    "controls/media/mediaplayer/globalization":
-        title: "Globalization"
-        position: 40
-    "controls/media/mediaplayer/accessibility":
-        title: "Accessibility"
-        position: 50
     "controls/pdf":
         title: "PDF"
-        position: 13
     "controls/hybrid":
         title: "Hybrid UI"
-        position: 14
     "controls/hybrid/styles":
         title: "Styles and Appearance"
         position: 5
@@ -725,6 +630,12 @@ navigation:
         title: "Order Page"
     "*localization":
         title: "Localization"
+    "*/globalization":
+        title: "Globalization"
+        position: 40
+    "*/accessibility":
+        title: "Accessibility"
+        position: 50
     "api/javascript":
         title: "JavaScript"
         position: 2

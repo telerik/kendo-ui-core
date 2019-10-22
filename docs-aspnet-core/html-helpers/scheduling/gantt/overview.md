@@ -235,7 +235,7 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
 
 ## Functionality and Features
 
-* [Data Binding]({% slug htmlhelpers_gantt_binding_aspnetcore %})
+* [Data binding]({% slug htmlhelpers_gantt_binding_aspnetcore %})
 * [Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %})
 * [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %})
 * [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %})

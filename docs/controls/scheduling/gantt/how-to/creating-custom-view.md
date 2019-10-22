@@ -7,9 +7,7 @@ slug: howto_create_custom_views_gantt
 
 # Create Custom Views
 
-The example below demonstrates how to create a custom view in the Kendo UI Gantt.
-
-
+The following example demonstrates how to create a custom view in the Kendo UI Gantt.
 
 ```dojo
     <div id="gantt"></div>
@@ -105,5 +103,5 @@ The example below demonstrates how to create a custom view in the Kendo UI Gantt
 
 ## See Also
 
-* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
-* [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
+* [Basic Usage of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/index)
+* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)

@@ -1,23 +1,25 @@
 ---
 title: Adaptive Rendering
 page_title: jQuery Scheduler Documentation | Adaptive Rendering | Kendo UI
-description: "Get started with the jQuery Scheduler by Kendo UI and learn how to configure adaptive rendering."
+description: "Get started with the jQuery Scheduler by Kendo UI and learn how to configure its adaptive rendering."
 slug: adaptiverendering_kendoui_scheduler_widget
-position: 5
+position: 7
 ---
 
-### Adaptive Rendering Mode
+# Adaptive Rendering
 
-Kendo UI Scheduler supports adaptive enhancements like changes in styling and behavior in order to remain consistent with the specific user device experience. For instance, when editing on a mobile device, Kendo UI will slide in a new screen for the user, which is a departure from the more desktop-like popup behaviors.
+The Scheduler supports adaptive enhancements such as changes in styling and behavior so that it remains consistent with the specific user device experience.
 
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/scheduler/configuration/mobile) property to `true`, `"phone"` or `"tablet"`:
+For example, when editing is done on a mobile device, the Scheduler will slide in a new screen for the user which is a departure from the more desktop-like popup behaviors.
+
+## Getting Started
+
+To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/scheduler/configuration/mobile) property to `true`, `"phone"`, or `"tablet"`:
 
 * If set to `true`, the widget will use adaptive rendering when viewed on a mobile browser.
 * If set to `phone` or `tablet`, the widget will be forced to use adaptive rendering regardless of the browser type.
 
-The example below demonstrates how to configure the adaptive rendering mode of the Scheduler.
-
-
+The following example demonstrates how to configure the adaptive rendering mode of the Scheduler.
 
     <div id="scheduler"></div>
 

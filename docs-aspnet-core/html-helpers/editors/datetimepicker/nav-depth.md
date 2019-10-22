@@ -1,5 +1,5 @@
 ---
-title: Start View and Selection Depth
+title: Start View and Navigation Depth
 page_title: Start View and Selection Depth | Telerik UI DateTimePicker HtmlHelper for ASP.NET Core
 description: "Get started with the Telerik UI DateTimePicker for ASP.NET Core and learn how to define the start view and control the navigation depth of the HTML Helper."
 slug: navdepth_datetimepicker_aspnetcore

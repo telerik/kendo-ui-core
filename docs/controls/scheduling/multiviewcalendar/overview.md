@@ -1,24 +1,22 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MultiViewCalendar
-description: "Learn how to initialize the Kendo UI MultiViewCalendar widget, configure its options, and make use of custom templates."
+page_title: jQuery MultiViewCalendar Documentation | MultiViewCalendar Overview | Kendo UI
+description: "Get started with the jQuery MultiViewCalendar by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_multiviewcalendar_widget
 position: 1
 ---
 
 # MultiViewCalendar Overview
 
-The [Kendo UI MultiViewCalendar widget](http://demos.telerik.com/kendo-ui/multiviewcalendar/index) renders a graphical Gregorian calendar with multiple horizontal views.
+The MultiViewCalendar renders a graphical Gregorian calendar with multiple horizontal views.
 
 It supports the selection and navigation between dates as well as data templates and ranges for scheduling appointments.
 
-## Getting Started
+* [Demo page for the MultiViewCalendar](http://demos.telerik.com/kendo-ui/multiviewcalendar/index)
 
-### Initialize the MultiViewCalendar
+## Initializing the MultiViewCalendar
 
 To initialize the MultiViewCalendar, use a jQuery selector.
-
-
 
 ```dojo
     <div id="multiViewCalendar"></div>
@@ -35,13 +33,11 @@ To initialize the MultiViewCalendar, use a jQuery selector.
 * [Day template]({% slug day_template_multiviewcalendar %})
 * [Disabled dates]({% slug disabled_dates_multiviewcalendar %})
 * [Week column]({% slug week_column_multiviewcalendar %})
-* [Keyboard navigation]({% slug keyboard_navigation_multiviewcalendar %})
+* [Accessibility]({% slug accessibility_muliviewcalendar %})
 
 ## Events
 
 The following example demonstrates basic MultiViewCalendar events.
-
-
 
 ```dojo
     <div id="multiViewCalendar"></div>
@@ -49,14 +45,14 @@ The following example demonstrates basic MultiViewCalendar events.
         $("#multiViewCalendar").kendoMultiViewCalendar({
             change: function() {
                 var value = this.value();
-                console.log(value); //value is the selected date in the multiViewCalendar
+                console.log(value); // The value is the selected date in the MultiViewCalendar.
             },
             navigate: function() {
                 var view = this.view();
-                console.log(view.name); //name of the current view
+                console.log(view.name); // The name of the current view.
 
                 var current = this.current();
-                console.log(current); //currently focused date
+                console.log(current); // The currently focused date.
             }
         });
     </script>
@@ -64,5 +60,6 @@ The following example demonstrates basic MultiViewCalendar events.
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Basic Usage of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
+* [Using the API of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/api)
+* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
