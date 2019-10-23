@@ -425,6 +425,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _tagListClick: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             var target = $(e.currentTarget);
 
             if (!target.children(".k-i-arrow-60-down").length) {
