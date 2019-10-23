@@ -87,38 +87,38 @@ To configure the Chart for Ajax binding:
 
 1. In the view, configure the Chart to use the action method created in the previous steps.
 
-        ```ASPX
+    ```ASPX
 
-                <%: Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
-                        .Name("internetUsersChart")
-                        .DataSource(dataSource => dataSource
-                            .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller names.
-                        )
-                        .Series(series => {
-                            series.Bar(d => d.Value)
-                                  .Name("United States");
-                        })
-                        .CategoryAxis(axis => axis
-                            .Categories(model => model.Year)
-                        )
-                %>
-        ```
-        ```Razor
-
-                @(Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
-                      .Name("internetUsersChart")
-                      .DataSource(dataSource => dataSource
-                          .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller names.
-                      )
-                      .Series(series => {
-                          series.Bar(d => d.Value)
+            <%: Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
+                    .Name("internetUsersChart")
+                    .DataSource(dataSource => dataSource
+                        .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller names.
+                    )
+                    .Series(series => {
+                        series.Bar(d => d.Value)
                                 .Name("United States");
-                      })
-                      .CategoryAxis(axis => axis
-                          .Categories(model => model.Year)
-                      )
-                )
-        ```
+                    })
+                    .CategoryAxis(axis => axis
+                        .Categories(model => model.Year)
+                    )
+            %>
+    ```
+    ```Razor
+
+            @(Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
+                    .Name("internetUsersChart")
+                    .DataSource(dataSource => dataSource
+                        .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller names.
+                    )
+                    .Series(series => {
+                        series.Bar(d => d.Value)
+                            .Name("United States");
+                    })
+                    .CategoryAxis(axis => axis
+                        .Categories(model => model.Year)
+                    )
+            )
+    ```
 
 ## See Also
 
