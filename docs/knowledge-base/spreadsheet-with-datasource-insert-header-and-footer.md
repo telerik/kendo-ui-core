@@ -48,7 +48,7 @@ How can I have additional header and footer rows that are not part of the return
           var sheet = spread.activeSheet();
           var responseLength = e.response.length;
           // Insert the custom header row
-          sheet.insertRow(0);
+          sheet.insertRow(0, true); // the second parameter skips the update of the dataSource
           var headerRange = sheet.range('A1:E1');
           headerRange.values([["Test", "This", "Custom", "Header", "Once"]]);
           headerRange.fontSize(30);

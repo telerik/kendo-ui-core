@@ -193,6 +193,10 @@ Deletes the contents of the row at the provided index and shifts the remaining c
 
 The zero-based index of the row
 
+##### skipDataSourceDelete `Boolean` *optional*
+
+If passed `true`, the method does not delete item from the DataSource.
+
 #### Example
 
 
@@ -430,6 +434,10 @@ Inserts a new, empty row at the provided index. The contents of the spreadsheet 
 ##### index `Number`
 
 The zero-based index of the column
+
+##### skipDataSourceInsert `Boolean` *optional*
+
+If passed `true`, the method does not insert item in the DataSource.
 
 #### Example
 
