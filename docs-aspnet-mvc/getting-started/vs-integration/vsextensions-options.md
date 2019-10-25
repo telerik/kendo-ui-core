@@ -1,7 +1,7 @@
 ---
 title: VS Extension Options
 page_title: VS Extension Options | Visual Studio Integration | Telerik UI for ASP.NET MVC
-description: "Learn how to use the settings Visual Studio (VS) provides that allow you to configure the Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions to best suit your needs."
+description: "Learn how to use the settings Visual Studio (VS) provides that allow you to configure the Telerik UI for ASP.NET MVC VS Extensions to best suit your needs."
 slug: vsextensionsoptions_visualstudio_aspnetmvc
 position: 9
 ---
@@ -14,11 +14,11 @@ It can be accessed by clicking on **Telerik** > **VSExtensions Options**.
 
 ![The Options menu](images/options_menu.png)
 
-The **Extensions Options** dialog contains two sets of options that affect the Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions.
+The **Extensions Options** dialog contains two sets of options that affect the Telerik UI for ASP.NET MVC VS Extensions.
 
 ## General Settings
 
-The settings under the General category affect all of the installed Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions.
+The settings under the General category affect all of the installed Telerik UI for ASP.NET MVC VS Extensions.
 
 ![The Options dialog](images/options.png)
 
@@ -39,9 +39,9 @@ Set the project upgrade notifications for detected local distributions by using 
 
 > Changing the folder path does not move existing folder contents from your previous path. Move your previous folder contents manually if you still want to use them.
 
-## Progress&reg; Telerik&reg; UI for ASP.NET MVC Settings
+## Telerik UI for ASP.NET MVC Settings
 
-All settings under the Kendo UI category affect only the Progress&reg; Telerik&reg; UI for ASP.NET MVC VS Extensions.
+All settings under the Kendo UI category affect only the Telerik UI for ASP.NET MVC VS Extensions.
 
 ![The Options dialog](images/options_kendo.png)
 
@@ -51,7 +51,7 @@ All settings under the Kendo UI category affect only the Progress&reg; Telerik&r
 
 ### Notifications
 
-- **Show me message when a newer version is available on www.telerik.com**&mdash;When enabled, you receive notifications if a new version of Progress&reg; Telerik&reg; UI for ASP.NET MVC is available on the Telerik website.
+- **Show me message when a newer version is available on www.telerik.com**&mdash;When enabled, you receive notifications if a new version of Telerik UI for ASP.NET MVC is available on the Telerik website.
 
 ## See Also
 

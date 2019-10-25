@@ -17,15 +17,21 @@ navigation:
      "getting-started":
         title: "Getting Started"
         position: 2
+     "getting-started/prerequisites":
+        title: "Prerequisites"
+        position: 2
      "getting-started/installation":
         title: "Download and Installation"
-        position: 1
+        position: 3
      "getting-started/helper-basics":
         title: "Working with Helpers"
-        position: 2
+        position: 4
      "getting-started/vs-integration":
         title: "Integrating with VS"
-        position: 3
+        position: 5
+     "getting-started/scripts":
+        title: "Helper Script Dependencies"
+        position: 6
      "helpers":
         title: "HTML Helpers"
         position: 3

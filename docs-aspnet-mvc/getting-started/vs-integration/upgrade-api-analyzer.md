@@ -1,7 +1,7 @@
 ---
 title: Upgrading the Project API
 page_title: Upgrading the Project API | Visual Studio Integration | Telerik UI for ASP.NET MVC
-description: "Learn how to analyze a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
+description: "Learn how to analyze a Telerik UI for ASP.NET MVC application."
 slug: upgrade_api_analyzer_visualstudio_aspnetmvc
 position: 8
 ---
@@ -28,7 +28,7 @@ Telerik Upgrade API Analyzer is a click-once application. To download the instal
 
 > The tool relies on Microsoft .NET Framework 4.5.2. If not installed on your machine, the setup of the tool installs it automatically.
 
-### Running the Tool
+## Running the Tool
 
 1. Run the Upgrade API Analyzer. As a result, the tool opens the following screen:
 
@@ -43,7 +43,7 @@ Alternatively, you can also run the Upgrade API Analyzer from the [Upgrade Proje
 
 ![The Compatibility button in the Upgrade API Analyzer](images/upgrade-api-analyzer_5.png)
 
-### Analyzing the Changes
+## Analyzing the Changes
 
 After the setup of the tool is ready, the Upgrade API Analyzer starts analyzing the code.
 

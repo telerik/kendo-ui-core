@@ -1,7 +1,7 @@
 ---
 title: Creating New Projects
 page_title: Creating New Projects | Visual Studio Integration | Telerik UI for ASP.NET MVC
-description: "Learn how to create a new Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
+description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2
 ---
@@ -12,7 +12,7 @@ This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for 
 
 ## Getting Started
 
-New Progress&reg; Telerik&reg; UI for ASP.NET MVC applications are created by using the **Create New Project Wizard**.
+New Telerik UI for ASP.NET MVC applications are created by using the **Create New Project Wizard**.
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
 
@@ -28,23 +28,23 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 
 For convenience, the same project templates are located under the **Visual C#** > **Web** and **Visual Basic** > **Web** nodes.
 
-The wizard detects all the installed versions of Progress&reg; Telerik&reg; UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
+The wizard detects all the installed versions of Telerik UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
 ![The new Project Wizard](images/new_project.png)
 
-### Project Settings
+## Project Settings
 
 The first page of the **Create New Project Wizard** enables you to modify the project settings by configuring the following options:
 
 * **Project type**&mdash;Choose the desired project type: **Blank**, **Standard**, **Grid**, and **Menu**.
-* **Version**&mdash;Choose the version of Progress&reg; Telerik&reg; UI for ASP.NET MVC you want to use.
+* **Version**&mdash;Choose the version of Telerik UI for ASP.NET MVC you want to use.
 * **MVC Version**&mdash;Choose the targeted ASP.NET MVC version.
 
 To move to the second page of the **Create New Project Wizard** where you can select the visual theme of your Telerik UI for ASP.NET MVC application, click **Next**.
 
 ![The new Project Wizard](images/new_project_theme_selection.png)
 
-### New Web Application Creation
+## New Web Application Creation
 
 After configuring the project settings, click **Finish** to start the creation of the new Kendo UI web application.
 
@@ -55,7 +55,7 @@ As a result, the wizard:
 * (Optional) Copies the Kendo UI assembly to your solution folder&mdash;it is possible to change this setting in the [Visual Studio Extensions Options]({% slug vsextensionsoptions_visualstudio_aspnetmvc %}).
 * Adds a reference to the `Kendo.Mvc` assembly.
 
-### Custom Modernizr
+## Custom Modernizr
 
 The Kendo UI ASP.NET MVC application includes a custom stripped-down Modernizr in a file called `kendo.modernizr.custom.js`. It provides an HTML5 element support for old browsers, specifically Internet Explorer.
 

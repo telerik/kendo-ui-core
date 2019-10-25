@@ -1,41 +1,39 @@
 ---
 title: Converting Projects
 page_title: Converting Projects | Visual Studio Integration | Telerik UI for ASP.NET MVC
-description: "Learn how to convert an existing ASP.NET MVC application to a Progress&reg; Telerik&reg; UI for ASP.NET MVC application."
+description: "Learn how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application."
 slug: projectwizardcoversion_visualstudio_aspnetmvc
 position: 5
 ---
 
 # Converting Projects
 
-This article demonstrates how to convert an existing ASP.NET MVC application to a Progress&reg;  Telerik&reg; UI for ASP.NET MVC application.
+This article demonstrates how to convert an existing ASP.NET MVC application to a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
 
-## Getting Started
+## The Basics
 
-### The Basics
-
-The **Convert Project Wizard** converts an existing ASP.NET MVC 4 or 5 to a Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
+The **Convert Project Wizard** converts an existing ASP.NET MVC 4 or 5 to a Telerik UI for ASP.NET MVC application.
 
 To start the **Convert Project Wizard**, click **Telerik** > **Telerik UI for ASP.NET MVC** > **Convert to Telerik Application**.
 
-The conversion wizard has three steps:  
+The conversion wizard provides the following steps:  
 - [Distribution selection](#distribution-selection)
 - [Theme selection](#theme-selection)
 - [Project settings](#project-settings)
 
-### Distribution Selection
+## Distribution Selection
 
-The distribution selection lets you choose the version of the Progress&reg; Telerik&reg; UI for ASP.NET MVC you want to use.
+The distribution selection allows you to choose the version of the Telerik UI for ASP.NET MVC you want to use.
 
 ![Distribution selection](images/convert_distribution.png)
 
-### Theme Selection
+## Theme Selection
 
-The theme selection lets you choose the visual theme for your Progress&reg; Telerik&reg; UI for ASP.NET MVC application.
+The theme selection allows you to choose the visual theme for your Telerik UI for ASP.NET MVC application.
 
 ![Theme selection](images/convert_theme.png)
 
-### Project Settings
+## Project Settings
 
 The **Project Settings** page enables you to modify the project settings by configuring the following options:
 
@@ -46,9 +44,9 @@ The **Project Settings** page enables you to modify the project settings by conf
 
 ![Project settings](images/convert_settings.png)
 
-### Conversion of Existing Telerik MVC Extensions Projects
+## Conversion of Existing Telerik MVC Extensions Projects
 
-It is possible to convert an existing Telerik MVC Extensions project by using the **Convert Project Wizard**. This adds the Kendo UI components to the project without removing the existing Telerik MVC Extensions content. For compatibility reasons, the Kendo UI Convert Wizard will attempt to disable the Telerik MVC Extensions embedded jQuery usage because it might interfere with the Kendo UI jQuery inclusion.
+You can convert an existing Telerik MVC Extensions project by using the **Convert Project Wizard**. This adds the Kendo UI components to the project without removing the existing Telerik MVC Extensions content. For compatibility reasons, the Kendo UI Convert Wizard will attempt to disable the Telerik MVC Extensions embedded jQuery usage because it might interfere with the Kendo UI jQuery inclusion.
 
 ## See Also
 

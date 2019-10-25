@@ -52,11 +52,11 @@ If you are using a VS 2015 version prior to R2 2018, locate the `Configure` meth
 		services.AddKendo();
 	}
 
-(For ASP.NET Core 3) To maintain the property names casing, locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
+(For ASP.NET Core 3) To maintain the property names casing globally, locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
 
-			...
-			using Newtonsoft.Json.Serialization;
-			...
+	...
+	  	using Newtonsoft.Json.Serialization;
+	...
 
     public void ConfigureServices(IServiceCollection services)
 	{
@@ -69,6 +69,19 @@ If you are using a VS 2015 version prior to R2 2018, locate the `Configure` meth
 		// Add the Kendo UI services to the services container.
 		services.AddKendo();
 	}
+
+(For ASP.NET Core 3) Alternatively, you can use the default Json serialization throughout the application and include the built-in `System.Text.Json.JsonSerializerOptions` in the controller action method response.
+
+	...
+		using System.Text.Json;
+	...
+
+	public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+    {
+
+        DataSourceResult result =  orders.ToDataSourceResult(request);
+        return Json(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = false });
+    }	
 
 ## See Also
 

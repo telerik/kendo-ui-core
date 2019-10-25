@@ -16,7 +16,7 @@ To configure the DropDownTree for Ajax binding to the Northwind database by usin
 1. Name the application `KendoDropDownTreeAjaxBinding`. If you decide not to use the Visual Studio extensions, follow the procedure for adding Telerik UI for ASP.NET MVC to existing applications:
 
     * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
-    * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
+    * [ASP.NET MVC 5]({% slug gettingstarted_aspnetmvc %})
 
 1. Add a new `Entity Framework DataM Model`. Right-click the **Models** folder in Visual Studio solution explorer. Select **Add** > **New Item**. Choose **Data** > **ADO.NET Data Model** from the **Add New Item** dialog.
 1. Name the model `Northwind.edmx`. Click **Next**. This starts the **Entity Data Model Wizard**.

@@ -15,8 +15,8 @@ Welcome to the First Steps on Windows guide on getting started with Progress<sup
 
 The guide creates a use-case scenario which demonstrates how to start working with the suite and implements the Kendo UI DatePicker for ASP.NET Core in your project by using the Telerik UI DatePicker HtmlHelper or TagHelper. For its purposes, the guide uses Visual Studio for Windows 2019.
 
-To configure an ASP.NET Core web application to use UI for ASP.NET Core you can use either of the following approaches:
-* (Demonstrated in this guide) Create the application from scratch and add the necessary setup manually.
+To configure an ASP.NET Core web application to use UI for ASP.NET Core, you can use either of the following approaches:
+* (Demonstrated in this guide) Create the application from scratch and manually add the necessary setup.
 * [Use the Telerik UI for ASP.NET Core Visual Studio extensions]({% slug overview_visualstudio_aspnetcore %}) and create an application that has all necessary scripts, styles, and editor templates.
 
 To get up and running with the project:

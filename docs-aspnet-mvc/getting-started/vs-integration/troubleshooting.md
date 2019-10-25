@@ -1,43 +1,42 @@
 ---
 title: Troubleshooting
 page_title: Troubleshooting | Visual Studio Integration | Telerik UI for ASP.NET MVC
-description: "Troubleshooting Progress&reg; Telerik&reg; UI for ASP.NET MVC Visual Studio Extensions."
+description: "Troubleshooting Telerik UI for ASP.NET MVC Visual Studio Extensions."
 slug: troubleshooting_visualstudio_aspnetmvc
 position: 11
 ---
 
 # Troubleshooting
 
-This article provides solutions to common issues you may encounter while integrating Telerik UI for ASP.NET MVC in Visual Studio.
+This article provides solutions to common issues you may encounter while integrating Progress&reg; Telerik&reg; UI for ASP.NET MVC in Visual Studio.
 
 ## The Telerik menu is missing in Visual Studio**
 
-**Cause**
+**Cause** Telerik Visual Studio Extensions are disabled or not installed correctly.
 
-Telerik Visual Studio Extensions are disabled or not installed correctly.
+**Solution 1: the extension is disabled**
 
-**Suggested solution 1(Extension is Disabled):**
-
-* Open Visual Studio;
-* Go to menu Tools - > Extensions and Updates...(for Visual Studio 2019 Extensions - > Manage Extensions)
-* Open the Installed tab on the left​
-* Search for Telerik ASP.NET MVC VSExtensions and make sure they are Enabled
+1. Open Visual Studio.
+1. Navigate to the **Menu** > **Tools** > **Extensions and Updates...**. For Visual Studio 2019 Extensions, navigate to **Manage Extensions**.
+1. Open the **Installed** tab on the left​.
+1. Search for **Telerik ASP.NET MVC VSExtensions**. Make sure they are **Enabled**.
 
 ![vsextensions-disabled](images/vsextensions-disabled.png)
 
-**Suggested solution 2(Extension is not installed):**
+**Solution 2: the extension is not installed**
 
-* Open Visual Studio;
-* Go to menu Tools - > Extensions and Updates...(for Visual Studio 2019 Extensions - > Manage Extensions)
-* Open the Online tab on the left​
-* Search for Telerik ASP.NET MVC VSExtensions
-* Download and install the extensions
+1. Open Visual Studio.
+1. Navigate to the **Menu** > **Tools** > **Extensions and Updates...**. For Visual Studio 2019 Extensions, navigate to **Manage Extensions**.
+1. Open the **Online** tab on the left.​
+1. Search for **Telerik ASP.NET MVC VSExtensions**.
+1. Download and install the extensions.
 
-> If the article does not help solving your problem, please follow these steps to generate Visual Studio [ActivityLog](https://docs.microsoft.com/en-us/visualstudio/ide/reference/log-devenv-exe?view=vs-2019) file before contacting our support:
-> * Open [Developer Command prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs) for Visual Studio 20xx under **Administrative rights**.
-> * Execute the command - devenv /log %userprofile%\desktop\ActivityLog.xml . This will start Visual Studio and create logs on your Desktop.
-> * Reproduce the problem
-> * Attach the **Activitylog** files when you contact our support.
+If the suggested solutions do not solve your issue and before you contact the Support Team, generate the Visual Studio [**ActivityLog**](https://docs.microsoft.com/en-us/visualstudio/ide/reference/log-devenv-exe?view=vs-2019) files:
+
+1. Under **Administrative rights**, open the [Developer Command prompt](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs) for Visual Studio 20xx.
+1. Execute the `devenv /log %userprofile%\desktop\ActivityLog.xml` command to start Visual Studio and to create logs on your Desktop.
+1. Reproduce the problem.
+1. Attach the **Activitylog** files when you contact the Support Team.
 
 ## See Also
 

@@ -31,6 +31,14 @@
             assert.equal(pb.value(), 50);
         });
 
+        it("value method returns the actual initial decimal value", function() {
+            pb = new ProgressBar(container, {
+                value: 8.12
+            });
+
+            assert.equal(pb.value(), 8.12);
+        });
+
         it("value method sets indeterminate state correctly when false is passed", function() {
             pb = new ProgressBar(container, {
                 value: 50
@@ -61,6 +69,18 @@
             pb.value(40);
 
             assert.equal(pb.value(), 40);
+        });
+
+        it("value method sets value correctly when the value is decimal", function() {
+            pb = new ProgressBar(container, {
+                value: 50,
+                min: 5,
+                max: 60
+            });
+
+            pb.value(8.12);
+
+            assert.equal(pb.value(), 8.12);
         });
 
         it("value method sets value equal to max value when it is bigger than max", function() {

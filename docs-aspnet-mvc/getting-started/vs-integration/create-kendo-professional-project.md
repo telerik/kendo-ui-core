@@ -10,11 +10,9 @@ position: 3
 
 This article demonstrates how to create a new Progress&reg; Kendo UI&reg; for jQuery application.
 
-## Getting Started
+## The Basics
 
-### The Basics
-
-New Progress&copy; Telerik&copy; Kendo UI for jQuery applications are created by using the **Create New Project Wizard**.
+New Kendo UI for jQuery applications are created by using the **Create New Project Wizard**.
 
 To start the **Create New Project Wizard**, follow either of the approaches below.
 
@@ -28,18 +26,18 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 1. Click **File** > **New** > **Project**.
 2. Navigate to the Kendo UI ASP.NET MVC 5 project templates under **Telerik** > **Web**.
 
-The wizard detects all the installed versions of Progress&reg; Telerik&reg; UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
+The wizard detects all the installed versions of Telerik UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
 ![A new Kendo UI Project Wizard](images/create_kendo.png)
 
-### Project Settings
+## Project Settings
 
 The **Create New Project** page enables you to modify the project settings by configuring the following options:
 
 * **Project type**&mdash;Choose the desired project type: **Empty**, **Standard**, **Grid and Menu**, **Angular JS**, or **Dashboard**.
 * **Version**&mdash;Choose the version of Kendo UI you want to use.
 
-### New Web Application Creation
+## New Web Application Creation
 
 After configuring the project settings, click **Finish** to start the creation of the new Kendo UI Professional application.
 

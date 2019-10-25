@@ -4,7 +4,7 @@ page_title: Document Processing Libraries| Download and Installation | Telerik U
 description: "Get started with Telerik UI for ASP.NET MVC and import and export content between different formats and work with archive files by using Telerik Document Processing."
 slug: docsprocessing_aspnetmvc
 previous_url: /doc-processing, /getting-started/doc-processing
-position: 4
+position: 6
 ---
 
 # Telerik Document Processing

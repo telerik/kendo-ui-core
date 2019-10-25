@@ -87,11 +87,11 @@ The sample application Visual Studio Project contains the following items:
 
 ## Next Steps
 
-* [Exploring the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug aspnetmvc_nuget %})
-* [Scaffolding the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetmvc %})
-* [Integrating Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
-* [Upgrading Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetmvc %})
+* [Explore the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Install Telerik UI for ASP.NET MVC with NuGet]({% slug aspnetmvc_nuget %})
+* [Scaffold the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetmvc %})
+* [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
+* [Upgrade Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetmvc %})
 
 ## See Also
 

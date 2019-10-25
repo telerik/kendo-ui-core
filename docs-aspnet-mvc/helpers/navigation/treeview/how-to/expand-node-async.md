@@ -17,7 +17,7 @@ To asynchronously expand the selected nodes of the TreeView:
 1. If you decide not to use the Visual Studio extensions, follow the procedure for adding Telerik UI for ASP.NET MVC to existing applications:
 
     * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
-    * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
+    * [ASP.NET MVC 5]({% slug gettingstarted_aspnetmvc %})
 
 1. In the Visual Studio solution explorer, right-click **Models**.
 1. Select **Add** > **New Item**.
