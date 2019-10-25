@@ -7073,7 +7073,7 @@ Whether the addition should be recorded in the undo-redo stack.
 
 ### addShape
 
-Adds a new shape to the diagram.
+Adds a new shape to the diagram. If the diagram is bound to a data source, do not use `addShae(newShape)`. Instead, use `diagram.dataSource.add(newShape);` and optionally `.sync()` the data source.
 
 #### Parameters
 
