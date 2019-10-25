@@ -1,16 +1,16 @@
 ---
 title: Downloading New Versions
 page_title: Downloading New Versions | Visual Studio Integration | Telerik UI for ASP.NET MVC
-description: "Learn how to keep your projects updated when using Progress&reg; Telerik&reg; UI for ASP.NET MVC."
+description: "Learn how to keep your projects updated when using Telerik UI for ASP.NET MVC."
 slug: latestversionretrieval_visualstudio_aspnetmvc
 position: 10
 ---
 
 # Downloading New Versions
 
-With the Progress&reg; Telerik&reg; UI for ASP.NET MVC Visual Studio (VS) Extensions you keep your projects in an up-to-date state. The Latest Version Acquirer tool automatically retrieves the latest Progress&reg; Telerik&reg; UI for ASP.NET MVC distribution available on the Telerik website.
+With the Progress&reg; Telerik&reg; UI for ASP.NET MVC Visual Studio (VS) Extensions you keep your projects in an up-to-date state. The Latest Version Acquirer tool automatically retrieves the latest Telerik UI for ASP.NET MVC distribution available on the Telerik website.
 
-Once a day, upon loading a project with Progress&reg; Telerik&reg; UI for ASP.NET MVC controls, the extensions query the Telerik website for a new version of Progress&reg; Telerik&reg; UI for ASP.NET MVC. A notification gets displayed when a new version is discovered.
+Once a day, upon loading a project with Telerik UI for ASP.NET MVC controls, the extensions query the Telerik website for a new version of Telerik UI for ASP.NET MVC. A notification gets displayed when a new version is discovered.
 
 ![A displayed notification upon locating a new Telerik UI for ASP.NET MVC version](images/notification.png)
 
@@ -34,10 +34,10 @@ The download starts automatically after a confirmation window.
 
 ![The dialog indicating the download progress, getting the latest version](images/lva4.png)
 
-Once the download succeeds, the latest version of Progress&reg; Telerik&reg; UI for ASP.NET MVC is available to use in the **Upgrade Wizard** and the **New Project Wizard**.
+Once the download succeeds, the latest version of Telerik UI for ASP.NET MVC is available to use in the **Upgrade Wizard** and the **New Project Wizard**.
 
-> * The Download buttons of the **Upgrade Wizard** and the **New Project Wizard** launch the **Latest Version Acquirer** tool too.
-> * The **Latest Version Acquirer** tool downloads the `.zip` files, containing the latest Progress&reg; Telerik&reg; UI for ASP.NET MVC binaries and any resources vital for a Progress&reg; Telerik&reg; UI for ASP.NET MVC application. These get unpacked to the `%APPDATA%\Telerik\Updates` folder by default. If you find the list of packages offered too long and you do not need the older versions, close the VS and use the Windows Explorer to delete these distributions.
+> * The **Download** buttons of the **Upgrade Wizard** and the **New Project Wizard** launch the **Latest Version Acquirer** tool too.
+> * The **Latest Version Acquirer** tool downloads the `.zip` files, containing the latest Telerik UI for ASP.NET MVC binaries and any resources vital for a Telerik UI for ASP.NET MVC application. These get unpacked to the `%APPDATA%\Telerik\Updates` folder by default. If you find the list of packages offered too long and you do not need the older versions, close the VS and use the Windows Explorer to delete these distributions.
 
 ## See Also
 

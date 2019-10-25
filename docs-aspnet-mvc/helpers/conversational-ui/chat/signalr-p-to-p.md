@@ -22,7 +22,7 @@ To create the Peer-to-Peer Chat you have to implement the SignalR Hub server and
 Depending on your preferred editor, use any of the following approaches:
 
 * [Create a new Telerik UI for ASP.NET MVC application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetmvc %})
-* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC package]({% slug aspnetmvc5_aspnetmvc %})
+* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC package]({% slug gettingstarted_aspnetmvc %})
 
 ## Configuring the SignalR Hub Server
 

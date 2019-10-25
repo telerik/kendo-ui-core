@@ -4,7 +4,7 @@ page_title: Installing with NuGet | Download and Installation | Telerik UI for A
 description: "Get started with Telerik UI for ASP.NET MVC and install the NuGet packages of the helpers."
 slug: aspnetmvc_nuget
 previous_url: /nuget-install, /getting-started/nuget-install
-position: 2
+position: 5
 ---
 
 # Installing with NuGet
@@ -56,7 +56,7 @@ This section provides solutions for common issues you might encounter while usin
 
 After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your new password"` command.
 
-### NuGet package takes too long to install or update on Visual Studio
+### The NuGet package takes too long to install or update on Visual Studio
 
 * Disable the auto-sync in the `_references.js` file by modifying the following `/// <autosync enabled="false" />` line.
 * You can also disconnect the project from the source control before running the Update Wizard.
@@ -65,6 +65,6 @@ After changing your Telerik password, you need to reset your credentials in the 
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding the Telerik UI for ASP.NET MVC Project]({% slug scaffolding_aspnetmvc %})
-* [Using Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
+* [Using Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug gettingstarted_aspnetmvc %})
 * [Using Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
 * [Using Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})

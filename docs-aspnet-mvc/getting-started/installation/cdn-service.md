@@ -1,9 +1,9 @@
 ---
 title: Using CDN
-page_title: Using CDN | Download and Installation | Telerik UI for ASP.NET Core
-description: "Get started with Telerik UI for ASP.NET Core and install the helpers by using the Telerik UI CDN services."
-slug: cdnservices_core
-position: 5
+page_title: Using CDN | Download and Installation | Telerik UI for ASP.NET MVC
+description: "Get started with Telerik UI for ASP.NET MVC and install the helpers by using the Telerik UI CDN services."
+slug: cdnservices_aspnetmvc
+position: 3
 ---
 
 # Using CDN
@@ -71,7 +71,7 @@ This section provides solutions for common issues you might encounter while usin
                 // Checking for loaded CSS files is cumbersome.
                 // Therefore, assume that if the scripts have failed, so have the stylesheets.
 
-                // A fallback to local Kendo UI stylesheets.
+                // A fallback to the local Kendo UI stylesheets.
                 document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.common.min.css" %3C/%3E'));
                 document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.blueopal.min.css" %3C/%3E'));
 
@@ -88,19 +88,14 @@ This section provides solutions for common issues you might encounter while usin
 
 ## Next Steps
 
-* [Create your own custom bundles]({% slug custombundles_core %})
-* [Check out the jQuery version support]({% slug jquerysupport_core %})
-* [Check out the web browser support]({% slug webbrowsersupport_core %})
-* [Check out the operation system support]({% slug ossupport_core %})
-* [Check out the PDF and Excel export support]({% slug exportsupport_core %})
+* [Check out the jQuery version support]({% slug jquerysupport_aspnetmvc %})
+* [Check out the web browser support]({% slug webbrowsersupport_aspnetmvc %})
+* [Check out the PDF and Excel export support]({% slug exportsupport_aspnetmvc %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Explore the earlier versions support policy]({% slug oldversionssupportpolicy_aspnetmvc %})
 
 ## See Also
 
-* [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-* [Installing Telerik UI for ASP.NET Core with Bower]({% slug bowerpackage_core %})
-* [Installing Telerik UI for ASP.NET Core with NPM]({% slug npmpackages_core %})
-* [Installing Telerik UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc %})
+* [Installing Telerik UI for ASP.NET Core with NuGet]({% slug aspnetmvc_nuget %})
+* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc %})
