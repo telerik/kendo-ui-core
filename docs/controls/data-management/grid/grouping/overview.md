@@ -69,6 +69,7 @@ To enable the Grid to execute grouping before paging, group the whole data sourc
 
 ## KB Articles on Grouping
 
+* [Enable Grouping for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})
 * [Persisting the Collapsed State of Grouped Records]({% slug howto_persist_collapsed_stateof_grouped_records_grid %})
 * [Changing the Group Header Position When Columns Are Locked]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
 * [Find Out More in the Knowledge Base](/knowledge-base)
