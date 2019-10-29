@@ -38,6 +38,7 @@ The runnable [demo on implementing custom menu filtering](https://demos.telerik.
 
 ## KB Articles on Filtering
 
+* [Enable Filtering for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})
 * [Filtering by Date Only]({% slug howto_filter_date_columns_grid %})
 * [Using MultiSelect for Column Filtering]({% slug howto_use_multiselect_forcolumn_filtering_grid %})
 * [Using Filtering with Dynamic Default Values]({% slug howto_gridfiltering_dynamicdefaultvalues_grid %})

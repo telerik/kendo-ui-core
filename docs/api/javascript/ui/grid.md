@@ -1405,6 +1405,46 @@ Allows customization on the logic that renders the checkboxes when using checkbo
 
 The property is identical to [`filterable.operators`](filterable.operators), but is used for a specific column.
 
+#### Example - Set custom filterable operators
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          {
+            field: "name",
+            filterable:{
+              operators:{
+                string:{
+                  eq: "custom equal",
+                  neq: "custom not equal"
+                }
+              }
+            }
+          },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                name: { type: "string" },
+                age: { type: "number" }
+              }
+            }
+          }
+        },
+        filterable: {
+          extra: false
+        }
+      });
+    </script>
+
 ### columns.filterable.search `Boolean` *(default: false)*
 Controls whether to show a search box when [checkbox filtering](columns.filterable.multi) is enabled.
 
@@ -9267,6 +9307,8 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 > In case of using frozen (locked) columns and row selection, the `select` method will return **two** table row elements for each selected item. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`.
 
+> In order to clear the currently selected row, use the [clearSelection() method](/api/javascript/ui/grid/methods/clearselection).
+
 #### Example - select the first and second table rows
 
     <div id="grid"></div>
@@ -9284,6 +9326,37 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
       });
       var grid = $("#grid").data("kendoGrid");
       grid.select("tr:eq(0), tr:eq(1)");
+    </script>
+
+#### Example - get the selected table rows
+
+    <div id="grid"></div>
+    <button class='k-button' id="btn">Get selected rows</button>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        selectable: "multiple, row"
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.select("tr:eq(0), tr:eq(1)");
+
+      $("#btn").on("click", function(e){
+        var rows = grid.select();
+        var selectedIds = [];
+        
+        $(rows).each(function(){
+          selectedIds.push($(this).attr("data-uid"))  
+        });
+
+        console.log("Selected row Ids: " + selectedIds.join(", "));
+      })
     </script>
 
 ### selectedKeyNames
@@ -9625,6 +9698,49 @@ The widget instance which fired the event.
     });
     </script>
 
+#### Example - subscribe to the "beforeEdit" after initialization
+
+    <div id="grid"></div>
+    <script>
+      function grid_beforeEdit(e) {
+          if (!e.model.isNew()) {
+            e.preventDefault();
+          }
+      }
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" },
+          { command: "edit" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                "id": { type: "number" }
+              }
+            }
+          }
+        },
+        editable: "popup",
+        toolbar:["create"],
+        beforeEdit: function(e) {
+          if (!e.model.isNew()) {
+            e.preventDefault();
+          }
+        }
+      });
+
+      var grid = $("#grid").data("kendoGrid");
+      grid.bind("beforeEdit", grid_beforeEdit);
+    </script>
+
 ### cancel
 
 Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/javascript/ui/grid/configuration/editable.mode)) or closes the popup window.
@@ -9728,7 +9844,7 @@ The type of the cell close action - can be either "save" or "cancel". The "cance
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "cancel" event during initialization
+#### Example - subscribe to the "cellClose" event during initialization
 
     <div id="grid"></div>
     <script>
@@ -9752,6 +9868,37 @@ The widget instance which fired the event.
       }
     });
     var grid = $("#grid").data("kendoGrid");
+    grid.editCell($("#grid td:eq(1)"));
+    </script>
+
+#### Example - subscribe to the "cellClose" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_cellClose(e) {
+        console.log(e.type);
+    }
+    
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      editable: "incell",
+    });
+
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("cellClose", grid_cellClose);
+
     grid.editCell($("#grid td:eq(1)"));
     </script>
 
@@ -10058,6 +10205,33 @@ The widget instance which fired the event.
         menu.open(menu.element.find("li:first"));
       },
     });
+    </script>
+
+#### Example - subscribe to the "columnMenuOpen" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_columnMenuOpen(e) {
+        var menu = e.container.children().data("kendoMenu");
+        menu.open(menu.element.find("li:first"));
+    }
+
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id" },
+        { field: "name" },
+        { field: "phone" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", id: 1, phone: "88443558741" },
+        { name: "John Doe", id: 2, phone: "88443558751" }
+      ],
+      filterable: true,
+      columnMenu: true
+    });
+
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("columnMenuOpen", grid_columnMenuOpen);
     </script>
 
 ### columnReorder
@@ -11031,6 +11205,31 @@ The widget instance which fired the event.
         }
       },
     });
+    </script>
+
+#### Example - subscribe to the "filterMenuOpen" after initialization and focus second input
+
+    <div id="grid"></div>
+    <script>
+    function grid_filterMenuOpen(e) {
+      if (e.field == "name") {
+        e.container.find(".k-textbox:last").focus();
+      }
+    }
+
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe"},
+        { name: "John Doe"}
+      ],
+      filterable: true,
+    });
+
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("filterMenuOpen", grid_filterMenuOpen);
     </script>
 
 ### group

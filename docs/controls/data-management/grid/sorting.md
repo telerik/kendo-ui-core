@@ -50,6 +50,7 @@ To enable multi-column sorting, set the `mode` option of `editable` to `multiple
 
 ## KB Articles on Sorting
 
+* [Enable Sorting for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})
 * [Enabling the ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
 * [Implementing Stable Sorting in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
 * [Implementing Stable Sorting for Grouped Data in Chrome]({% slug howto_implement_stable_sortwithgroupingin_chrome_grid %})
