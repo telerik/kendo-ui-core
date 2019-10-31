@@ -12,7 +12,7 @@ Depending on the configuration of its [DataSource]({% slug htmlhelpers_datasourc
 
 * [Local data binding]({% slug htmlhelpers_grid_aspnetcore_localbinding %})
 * [Remote data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
-* [SignalR data binding](htmlhelpers_grid_aspnetcore_signalrbinding)
+* [SignalR data binding]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %})
 
 ## See Also
 
