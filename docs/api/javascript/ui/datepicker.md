@@ -302,7 +302,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
-### max `Date`*(default: Date(2099, 11, 31))*
+### max `Date`*(default: Date(2099, 12, 31))*
 
  Specifies the maximum date, which the calendar can show.
 
