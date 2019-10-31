@@ -49,9 +49,9 @@ Set the `setOptions` method for the widget that you use.
 
 The following example demonstrates how to dynamically change the Grid columns based on a selection of the MultiSelect widget. You can use the same approach to adjust all options of both the Grid and the other Kendo UI widgets.
 
-For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/IvIcU).
 
-```
+
+```dojo
    <div id="example">
    <p>Select Grid columns: </p>
     <select id="columns"></select>

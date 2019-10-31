@@ -32,7 +32,7 @@ Manually select all records within the `click` event of the checkbox for selecti
     <script>
       $(document).ready(function () {
         //DataSource definition
-        var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read: {

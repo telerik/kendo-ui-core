@@ -39,7 +39,7 @@ To create a new object with Kendo UI, define it by calling `kendo.Class.extend`&
 
 **Figure 1: Creating a new object**
 
-![Capture](../images/inheritance/8c23-capture.png)
+![Capture](../../images/inheritance/8c23-capture.png)
 
 ### Adding Constructors
 
@@ -64,7 +64,7 @@ You can also add a constructor for this object by including an `init` method. To
 
 **Figure 2: Setting the name of the new person**
 
-![nh5](../images/inheritance/8c23-nh5.png)
+![nh5](../../images/inheritance/8c23-nh5.png)
 
 ### Instantiating New Parent Objects
 
@@ -82,11 +82,11 @@ You can instantiate a new `person` object of type parent that inherits the prope
 
 **Figure 3: Instantiating a parent**
 
-![nh1](../images/inheritance/8c23-nh1_1.png)
+![nh1](../../images/inheritance/8c23-nh1_1.png)
 
 **Figure 4: Toggling a quality**
 
-![nh2](../images/inheritance/8c23-nh2.png)
+![nh2](../../images/inheritance/8c23-nh2.png)
 
 ### Inheriting Parent Properties
 
@@ -100,11 +100,11 @@ A child inherits some, but not all, properties from their parents. If you inheri
 
 **Figure 5: Inheriting some parent properties**
 
-![nh3](../images/inheritance/8c23-nh3.png)
+![nh3](../../images/inheritance/8c23-nh3.png)
 
 **Figure 6: Trying to inherit more parent properties**
 
-![nh4](../images/inheritance/8c23-nh4.png)
+![nh4](../../images/inheritance/8c23-nh4.png)
 
 ### Understanding Parent Objects
 
