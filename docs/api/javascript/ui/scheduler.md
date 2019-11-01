@@ -3249,7 +3249,7 @@ If set to `true` and the scheduler is viewed on mobile browser it will use adapt
 
 Can be set to a string `phone` or `tablet` which will force the widget to use adaptive rendering regardless of browser type.
 
-> Important: With the mobile rendering you should make sure to setup the `height` option as well.
+> Important: With the mobile rendering set to `Phone` or `Tablet` mode make sure to setup the `height` option as well.
 
 #### Example - enable adaptive rendering auto detect
     <div id="scheduler"></div>

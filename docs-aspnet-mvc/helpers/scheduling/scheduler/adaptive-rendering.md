@@ -16,6 +16,8 @@ To enable the adaptive rendering feature, set the [`Mobile`](https://docs.teleri
 * If set to `MobileMode.Auto`, the widget will use adaptive rendering when viewed on a mobile browser.
 * If set to `MobileMode.Phone"` or `MobileMode.Tablet`, the widget will be forced to use adaptive rendering regardless of the browser type.
 
+> Important: With the mobile rendering set to `Phone` or `Tablet` mode make sure to setup the `height` option as well.
+
 The following example demonstrates how to configure the adaptive rendering mode of the Scheduler.
 
 ```Razor
@@ -54,6 +56,7 @@ The Pane in which the adaptive Scheduler is placed does not automatically expand
 ```Razor
 @(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
     ...
+    .Mobile(MobileMode.Phone)
     .Height(600)
 )
 ```

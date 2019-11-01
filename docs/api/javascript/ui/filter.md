@@ -323,6 +323,48 @@ A value matching a field name from the datasource model.
       });
     </script>
 
+### fields.operators `Object`
+
+The text of the filter operators displayed for the current field.
+
+#### Example - set the operators
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        expression: {
+            logic: "or",
+            filters: [
+                { field: "name", value: "Jane Doe", operator: "eq" },
+                { field: "name", value: "John Doe", operator: "eq" },
+                { field: "age", value: 33, operator: "eq" },
+                { field: "age", value: 30, operator: "eq" }
+            ]
+        },
+        fields: [
+          { name: "age", type:"number", label: "Age" },
+          { name: "name", type:"string", label: "Name", operators: {
+              string:{
+                eq: 'Custom equal message'
+              }
+            }
+          }
+        ]
+      });
+    </script>
+
 ### fields.type `String`
 
 Defines the value type of the field. 
