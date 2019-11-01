@@ -15,9 +15,9 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
 * If set to `true`, the widget will use adaptive rendering when viewed on a mobile browser.
 * If set to `phone` or `tablet`, the widget will be forced to use adaptive rendering regardless of the browser type.
 
-The example below demonstrates how to configure the adaptive rendering mode of the Scheduler.
+> Important: With the mobile rendering set to `Phone` or `Tablet` mode make sure to setup the `height` option as well.
 
-
+The following example demonstrates how to configure the adaptive rendering mode of the Scheduler.
 
     <div id="scheduler"></div>
 
@@ -25,6 +25,7 @@ The example below demonstrates how to configure the adaptive rendering mode of t
         $("#scheduler").kendoScheduler({
             date: new Date("2013/6/6"),
             mobile: "phone",
+            height: "600px",
             views: [
                 "day",
                 { type: "week", selected: true },

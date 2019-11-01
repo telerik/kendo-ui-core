@@ -1118,8 +1118,6 @@ var __meta__ = { // jshint ignore:line
             if (isFiltered || !hasValue || custom) {
                 that.options.value = "";
                 that.value("");
-                // Reset selected value for cascading
-                that._selectedValue = null;
             }
         },
 

@@ -1630,7 +1630,7 @@ var __meta__ = { // jshint ignore:line
             var parent = this._parentWidget();
             var valueBeforeCascade = this.value();
 
-            this._userTriggered = e.userTriggered;
+            this._userTriggered = e.userTriggered || parent._userTriggered;
 
             if (this.listView.bound()) {
                 this._clearSelection(parent, true);
