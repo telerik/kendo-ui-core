@@ -6353,6 +6353,8 @@ The widget instance which fired the event.
 
 Fired when the user selects a cell or event in the scheduler.
 
+> Make sure you enabled the `selectable` option of the Scheduler, in order to be able to trigger a change event.
+
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 #### Event Data
