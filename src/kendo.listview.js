@@ -625,6 +625,7 @@ var __meta__ = { // jshint ignore:line
                editable.element.replaceWith(template(data));
                item = that.items().eq(index);
                item.attr(kendo.attr("uid"), data.uid);
+               item.attr("role", "option");
 
                if (that._hasBindingTarget()) {
                    kendo.bind(item, data);

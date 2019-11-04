@@ -12,6 +12,39 @@ Represents the Kendo UI Timeline widget. Inherits from [kendo.ui.Widget](/api/ja
 
 ## Configuration
 
+### autoBind `Boolean` *(default: true)*
+
+If set to `false`, the Timeline will not bind to the data source during initialization, i.e. it will not call the [`fetch`](/api/javascript/data/datasource/methods/fetch) method of the [dataSource](/api/javascript/ui/grid/fields/datasource) instance. In such scenarios data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
+dataSource instance is fired. By default, `autoBind` is set to `true` and the widget will bind to the data source specified in the configuration.
+
+> Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
+
+#### Example - disable automatic binding
+
+    <div id="timeline"></div>
+    <script>
+    $("#timeline").kendoTimeline({
+        autoBind: false,
+        dataSource: {
+            data:[ {"id":1,"title":"Bowling tournament","subtitle":"Location: Sterling Lanes","description":"Summer Bowling tournament in Michigan","date":"2025-06-30T21:00:00.000Z","actions":[{"text":"Visit the Bowling tournament page"}] },
+                    {"id":2,"title":"Charlie's first football game","subtitle":"Location: City Football Stadium","description":"Call coach Williams","date":"2022-10-22T21:00:00.000Z"},
+                    {"id":3,"title":"Alex's Birthday","subtitle":"Location: Alex's House","description":"Buy birthday cake and some fruits","date":"2010-01-09T22:00:00.000Z","images":[{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/4.jpg"},{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/16.jpg"}]},
+                    {"id":4,"title":"Vacation in Mexico","subtitle": "Location: Cabo San Lucas","description":"Check-in for the flight","date":"2017-12-24T22:00:00.000Z"}],
+            schema: {
+                model: {
+                    fields: {
+                        date: {
+                        type: "date"
+                        }
+                    }
+                }
+            }
+        },
+        alternatingMode: true,
+        orientation: "horizontal"
+    });
+    </script>
+
 ### alternatingMode `Boolean`*(default: false)*
 
 Indicates whether events should be positioned on both sides of the timeline axis. By default all events are displayed on the right side of the timeline axis. 
