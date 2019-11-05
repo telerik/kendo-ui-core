@@ -1965,6 +1965,8 @@ declare namespace kendo.ui {
 
     interface ChatMessages {
         placeholder?: string;
+        sendButton?: string;
+        toggleButton?: string;
     }
 
     interface ChatUser {
@@ -4570,6 +4572,7 @@ declare namespace kendo.ui {
         input?: boolean;
         pageSizes?: boolean|any;
         refresh?: boolean;
+        responsive?: boolean;
         info?: boolean;
         messages?: GridPageableMessages;
     }
@@ -6037,6 +6040,7 @@ declare namespace kendo.ui {
         pageSizes?: boolean|any;
         previousNext?: boolean;
         refresh?: boolean;
+        responsive?: boolean;
         messages?: PagerMessages;
         change?(e: PagerChangeEvent): void;
     }
@@ -8813,6 +8817,7 @@ declare namespace kendo.ui {
         input?: boolean;
         pageSizes?: boolean|any;
         refresh?: boolean;
+        responsive?: boolean;
         info?: boolean;
         messages?: TreeListPageableMessages;
     }

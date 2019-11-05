@@ -817,4 +817,15 @@ if (kendo.ui.MultiSelect) {
     });
 }
 
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+    kendo.ui.Chat.prototype.options.messages =
+    $.extend(true, kendo.ui.Chat.prototype.options.messages,{
+        "placeholder": "Scrivi...",
+        "toggleButton": "Apri/chiudi barra degli strumenti",
+        "sendButton": "Invia messaggio"
+    });
+}
+
 })(window.kendo.jQuery);

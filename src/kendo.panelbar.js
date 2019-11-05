@@ -37,6 +37,7 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         EXPAND = "expand",
         SELECT = "select",
+        CLICK = "click",
         CONTENT = "k-content",
         ACTIVATE = "activate",
         COLLAPSE = "collapse",
@@ -227,13 +228,11 @@ var __meta__ = { // jshint ignore:line
             that._animations(options);
 
             element
-                .on("click" + NS, clickableItems, function(e) {
-                    that._click($(e.target));
-                })
+                .on(CLICK + NS, clickableItems, proxy(that._click, that))
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
-                .on("click" + NS, disabledItems, false)
-                .on("click" + NS, ".k-request-retry", proxy(that._retryRequest, that))
-                .on("keydown" + NS, $.proxy(that._keydown, that))
+                .on(CLICK + NS, disabledItems, false)
+                .on(CLICK + NS, ".k-request-retry", proxy(that._retryRequest, that))
+                .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, function() {
                     var item = that.select();
                     that._current(item[0] ? item : that._first());
@@ -1144,7 +1143,7 @@ var __meta__ = { // jshint ignore:line
                 that._current(that._prevItem(current));
                 e.preventDefault();
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
-                that._click(current.children(LINKSELECTOR));
+                that._click(e);
                 e.preventDefault();
             } else if (key == keys.HOME) {
                 that._current(that._first());
@@ -1402,8 +1401,9 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _click: function (target) {
+        _click: function (e) {
             var that = this,
+                target = e.type == CLICK ? $(e.target) : that._current().children(LINKSELECTOR),
                 element = that.element,
                 prevent, contents, href, isAnchor;
 
@@ -1416,6 +1416,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (target.is(":kendoFocusable")) {
+                e.preventDefault();
                 return;
             }
 

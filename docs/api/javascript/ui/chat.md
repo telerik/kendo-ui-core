@@ -41,6 +41,42 @@ The hint that is displayed in the input textbox of the widget.
     }).data("kendoChat");
     </script>
 
+### messages.sendButton `String` *(default: "Send message")*
+
+The title and the aria-label attribute of the message box send button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messages: {
+            sendButton: "This is send"
+        }
+    }).data("kendoChat");
+    </script>
+
+### messages.toggleButton `String` *(default: "Toggle toolbar")*
+
+The title and the aria-label attribute of the toggle toolbar button.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messages: {
+            toggleButton: "Show/hide toolbar"
+        },
+        toolbar: {
+            toggleable: true,
+            buttons: [
+                {name: "restart", iconClass: "k-icon k-i-reload"}
+            ]
+        },
+    }).data("kendoChat");
+    </script>
+
 ### user `Object`
 
 Configures the user information of the Chat.

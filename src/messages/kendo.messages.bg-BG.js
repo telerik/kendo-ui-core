@@ -1101,4 +1101,15 @@ if (kendo.ui.MultiSelect) {
     });
 }
 
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+    kendo.ui.Chat.prototype.options.messages =
+    $.extend(true, kendo.ui.Chat.prototype.options.messages,{
+        "placeholder": "Напиши съобщение...",
+        "toggleButton": "Отвори/затвори лентата с инструменти",
+        "sendButton": "Изпрати съобщение"
+    });
+}
+
 })(window.kendo.jQuery);

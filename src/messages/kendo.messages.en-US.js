@@ -1217,4 +1217,15 @@ if (kendo.ui.MultiSelect) {
     });
 }
 
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+    kendo.ui.Chat.prototype.options.messages =
+    $.extend(true, kendo.ui.Chat.prototype.options.messages,{
+        "placeholder": "Type a message...",
+        "toggleButton": "Toggle toolbar",
+        "sendButton": "Send message"
+    });
+}
+
 })(window.kendo.jQuery);

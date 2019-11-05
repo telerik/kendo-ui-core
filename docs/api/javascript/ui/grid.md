@@ -2483,7 +2483,16 @@ The text that is displayed in the column header cell. If not set the [field](col
 
 ### columns.width `String|Number`
 
-The width of the column. Numeric values are treated as pixels. **For more important information, please refer to [Column Widths](/controls/data-management/grid/columns/widths)**.
+The width of the column. Numeric values are treated as pixels. The width option supports the fundamental measuring units. For instance:
+
+* `px` sets the width in pixels 
+* `cm` sets the width in centimeters
+* `mm` sets the width in millimeters
+* `%` sets the width relative to the grid's element width
+* `em` sets the width relative to the font-size of the grid's element width
+* `rem` sets the width relative to font-size of the root element
+
+**For more important information, please refer to [Column Widths](/controls/data-management/grid/columns/widths)**.
 
 #### Example - set the column width as a string
 
@@ -3221,6 +3230,7 @@ If the grid is in mobile mode this text will be used for the cancel button.
          }
         }
        },
+       height: 550,
        mobile: "phone",
        editable: {
          confirmation: true,
@@ -6388,6 +6398,30 @@ The [template](/api/javascript/kendo/methods/template) which is rendered when cu
     });
     </script>
 
+#### Example - specify noRecords message as a function
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        pageable: true,
+        noRecords: {
+          template: function(e){
+            var page = $("#grid").getKendoGrid().dataSource.page();
+            return "No data available on current page. Current page is: " + page;
+          }
+        },
+        dataSource: {
+          data: [{name: "John", age: 29}],
+          page: 2,
+          pageSize: 10
+        }
+      });
+    </script>
+
 ### pageable `Boolean|Object` *(default: false)*
 
 If set to `true` the grid will display a pager. By default paging is disabled.
@@ -7616,6 +7650,18 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
 #### Example - specify row template as a function
 
     <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        dataSource: [ { name: "Jane Doe", age: 30 }, { name: "John Doe", age: 33 } ],
+        rowTemplate: function(dataItem){
+          return "<tr data-uid=" + dataItem.uid + "><td colspan='2'><strong>" + dataItem.name + "</strong><strong>" + dataItem.age + "</strong></td></tr>";
+        }
+      });
+    </script>
+
+#### Example - specify row template as a function with Kendo template
+
+    <div id="grid"></div>
     <script id="template" type="text/x-kendo-template">
         <tr data-uid="#= uid #">
             <td colspan="2">
@@ -7688,6 +7734,24 @@ Configures the Kendo UI Grid search bar settings.
 ### search.fields `Array`
 
 Defines a list of fields which will be included in the search. If values for the property are not defined the grid will search in all column fields.
+
+#### Example - specify which fields will be included in the search
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+      toolbar:["search"],
+      search: {
+        fields: ["name"] // Or, specify multiple fields by adding them to the array, e.g ["name", "age"]
+      }
+    });
+    </script>
+
 
 ### selectable `Boolean|String` *(default: false)*
 
@@ -8193,6 +8257,40 @@ The [data source](/api/javascript/data/datasource) of the widget. Configured via
 
 The jQuery object which represents the grid footer element.
 
+#### Example - hightligh the cells within the footer of the grid
+
+    <div id="grid"></div>
+    <br />
+    <button id="btn" class='k-button'>Highlight footer row's cells</button>
+
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age",
+           footerTemplate: "Min: #: min # Max: #: max #"
+          }
+        ],
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+          ],
+          aggregate: [
+            { field: "age", aggregate: "min" },
+            { field: "age", aggregate: "max" }
+          ]
+        }
+      });
+
+      $("#btn").click(function(e){
+        var gridFooter = $("#grid").getKendoGrid().footer;
+        var cells = gridFooter.find("td");
+        cells.css("background-color", "#90EE90");
+      });
+    </script>
+
+
 ### pager `kendo.ui.Pager`
 
 The [Pager widget](/api/javascript/ui/pager) attached to the Grid.
@@ -8240,7 +8338,7 @@ The jQuery object which represents the table body. Contains all grid table rows.
     });
     var grid = $("#grid").data("kendoGrid");
     var row = grid.tbody.find("tr:eq(0)");
-    var data = grid.dataItem(row);
+    var data = grid.dataItem(row);f
     console.log(data.name); // displays "Jane Doe"
     </script>
 
@@ -8248,9 +8346,58 @@ The jQuery object which represents the table body. Contains all grid table rows.
 
 The jQuery object which represents the grid table header element.
 
+#### Example - hightligh the cells within the header row of the grid
+
+    <div id="grid"></div>
+    <br />
+    <button id="btn" class='k-button'>Highlight header row's cells</button>
+
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age"}
+        ],
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+          ]
+        }
+      });
+
+      $("#btn").click(function(e){
+        var gridHead = $("#grid").getKendoGrid().thead;
+        var cells = gridHead.find("th");
+        cells.css("background-color", "#90EE90");
+      });
+    </script>
+
 ### content `jQuery`
 
 The jQuery object which represents the grid content element, which holds the scrollable content. Available only in a grid with locked columns.
+
+#### Example - hightligh the cells within the content of the grid
+
+    <div id="grid"></div>
+    <br />
+    <button id="btn" class='k-button'>Highlight content's cells</button>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { locked: true, field: "id", width:200 },
+          { field: "name", width:800 }
+        ],
+        dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
+      });
+
+      $("#btn").click(function(e){
+        var gridContent = $("#grid").getKendoGrid().content;
+        var cells = gridContent.find("td");
+      	cells.css("color", "green");
+      });
+    </script>
+
 
 ### lockedHeader `jQuery`
 
@@ -8400,29 +8547,30 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
 
 Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed and updated data items are restored to their initial state.
 
-#### Example - cancel any changes
-
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
         ],
-        schema: {
-          model: { id: "id" }
-        }
-      },
-      editable: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.addRow();
-    grid.cancelChanges();
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        editable: true
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.addRow();
+
+      setTimeout(function(){
+        grid.cancelChanges();
+      }, 1000);
     </script>
 
 ### cancelRow
@@ -8433,25 +8581,28 @@ Cancels editing for the table row which is in edit mode. Reverts any changes mad
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, name: "Jane Doe", age: 30 },
-          { id: 2, name: "John Doe", age: 33 }
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
         ],
-        schema: {
-          model: { id: "id" }
-        }
-      },
-      editable: true
-    });
-    var grid = $("#grid").data("kendoGrid");
-    grid.addRow();
-    grid.cancelRow();
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        editable: true
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.addRow();
+      
+      setTimeout(function(){
+        grid.cancelRow();
+      }, 1000);
     </script>
 
 ### cellIndex
@@ -9203,6 +9354,8 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
 
 > Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
 
+> The [pdfExport](/api/javascript/ui/grid/events/pdfexport) event handler could be used to dynamically modify the to-be-exported PDF file.
+
 #### Returns
 
 `Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/grid/events/pdfexport) event arguments.
@@ -9918,26 +10071,28 @@ The widget instance which fired the event.
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      selectable: "multiple, row",
-      change: function(e) {
-        var selectedRows = this.select();
-        var selectedDataItems = [];
-        for (var i = 0; i < selectedRows.length; i++) {
-          var dataItem = this.dataItem(selectedRows[i]);
-          selectedDataItems.push(dataItem);
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        selectable: "multiple, row",
+        change: function(e) {
+          var selectedRows = this.select();
+          var selectedDataItems = [];
+          for (var i = 0; i < selectedRows.length; i++) {
+            var dataItem = this.dataItem(selectedRows[i]);
+            selectedDataItems.push(dataItem);
+          }
+
+          // selectedDataItems contains all selected data items
+          console.log("Selected data items' name: " + selectedDataItems.map(e => e.name).join(", "));
         }
-        // selectedDataItems contains all selected data items
-      }
-    });
+      });
     </script>
 
 #### Example - get the selected data item(s) when using cell selection
@@ -10928,6 +11083,107 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("edit", grid_edit);
+    </script>
+
+#### Example - container element when the edit mode is set to "incell"
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                "id": { type: "number" }
+              }
+            }
+          }
+        },
+        editable: "incell",
+        toolbar:["create"],
+        edit: function(e) {
+          var container = e.container;
+          container.css("background-color", "#90EE90");
+        }
+      });
+    </script>
+
+#### Example - container element when the edit mode is set to "inline"
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" },
+          { command: "edit" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                "id": { type: "number" }
+              }
+            }
+          }
+        },
+        editable: "inline",
+        toolbar:["create"],
+        edit: function(e) {
+          var container = e.container;
+          container.css("background-color", "#90EE90");
+        }
+      });
+    </script>
+
+#### Example - container element when the edit mode is set to "popup"
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "age" },
+          { command: "edit" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                "id": { type: "number" }
+              }
+            }
+          }
+        },
+        editable: "popup",
+        toolbar:["create"],
+        edit: function(e) {
+          var container = e.container;
+          container.css("background-color", "#90EE90");
+        }
+      });
     </script>
 
 ### excelExport

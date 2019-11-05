@@ -157,7 +157,7 @@ var __meta__ = { // jshint ignore:line
 
         var Button = Item.extend({
             init: function(options, toolbar) {
-                var element = options.useButtonTag ? $('<button tabindex="0"></button>') : $('<a href tabindex="0"></a>');
+                var element = options.useButtonTag ? $('<button tabindex="0"></button>') : $('<a role="button" href tabindex="0"></a>');
 
                 this.element = element;
                 this.options = options;
