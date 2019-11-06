@@ -36,7 +36,7 @@ namespace grid_data_source_request_web_api.Controllers
         private NorthwindEntities db = new NorthwindEntities();
 
         // GET api/Orders
-        public DataSourceResult GetOrders([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
+        public DataSourceResult GetOrders([DataSourceRequest]DataSourceRequest request)
         {
             return db.Orders.ToDataSourceResult(request);
         }
