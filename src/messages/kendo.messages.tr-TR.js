@@ -466,4 +466,19 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* DateInput */
+if (kendo.ui.DateInput) {
+  kendo.ui.DateInput.prototype.options.messages =
+    $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+      "year": "yıl",
+      "month": "ay",
+      "day": "gün",
+      "weekday": "haftanın günü",
+      "hour": "saat",
+      "minute": "dakika",
+      "second": "saniye",
+      "dayperiod": "AM/PM"
+    });
+}  
+  
 })(window.kendo.jQuery);
