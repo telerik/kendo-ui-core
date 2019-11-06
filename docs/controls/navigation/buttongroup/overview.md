@@ -34,7 +34,7 @@ The following example demonstrates how to initialize Kendo UI ButtonGroup from H
 
 The following example demonstrates how to initialize Kendo UI ButtonGroup from a JSON `data` object.
 
-    <div id="buttonGroup"></div>
+    <div id="buttongroup"></div>
 
     <script>
 		$("#buttongroup").kendoButtonGroup({
