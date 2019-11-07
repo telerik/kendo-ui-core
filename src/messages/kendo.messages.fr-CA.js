@@ -546,4 +546,28 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* FlatColorPicker messages */
+
+if (kendo.ui.FlatColorPicker) {
+  kendo.ui.FlatColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
+/* ColorPicker messages */
+
+if (kendo.ui.ColorPicker) {
+  kendo.ui.ColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
 })(window.kendo.jQuery);
