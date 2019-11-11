@@ -1416,7 +1416,7 @@ You can overcome this behavior by triggering the `change` event manually using [
 
 ##### value `Array|String`
 
-The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false' and an *Array of strings* when `checkboxes` is true. To clear the value, pass an empty array.
+The value to set. A *String* value, when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false', and an *Array* of items of the value field type (number or string), when `checkboxes` is true. To clear the value, pass an empty array.
 
 #### Returns
 
@@ -1429,16 +1429,16 @@ The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdown
     <script>
         $("#dropdowntree").kendoDropDownTree({
             dataSource: [{ text: "Item1", value: 1 }, { text: "Item2", value: 2 }],
-            checkboxes:true,
+            checkboxes:true
         });
 
         var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
 
-        // get the value of the dropdowntree.
-        var value = dropdowntree.value();
+        // set the value of the dropdowntree
+        dropdowntree.value([1, 2]); //select items which have value respectively 1 and 2
 
-        // set the value of the dropdowntree.
-        dropdowntree.value(["1", "2"]); //select items which have value respectively "1" and "2"
+        // get the value of the dropdowntree
+        console.log(dropdowntree.value());
     </script>
 
 ## Events
