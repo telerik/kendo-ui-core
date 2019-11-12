@@ -124,6 +124,8 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
         )
     ```
 
+    > Defining a Schema.Model.Id is mandatory for the proper execution of the Update, Create and Destroy of the Grid.
+
 1. Build and run the application.
 
     ![The final result](../images/grid-inline-grid.png)

@@ -242,6 +242,8 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
                 .Pageable()
         )
     ```
+    
+    > Defining a Schema.Model.Id is mandatory for the proper execution of the Update, Create and Destroy of the Grid.
 
 1. Build and run the application.
 

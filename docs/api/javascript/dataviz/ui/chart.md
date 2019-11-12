@@ -23363,6 +23363,50 @@ A function that can be used to create a custom visual for the notes. The availab
       });
     </script>
 
+### valueAxis.zIndex `Number`
+
+An optional Z-index that can be used to change the default stacking position of the valueAxis.
+
+> Available for RadarChart
+
+#### Example - set the value axis note color width
+
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Employment candidate review"
+                },
+                seriesDefaults: {
+                    type: "radarArea"
+                },
+                series: [{
+                    name: "Andrew Dodsworth",
+                    data: [10, 3, 3, 10, 2, 10]
+                }],
+                categoryAxis: {
+                    categories: [
+                        "Experience", "Communication", "Friendliness",
+                        "Subject knowledge", "Presentation", "Education"
+                    ]
+                },
+                valueAxis: {
+                  	zIndex:1,
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: true
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+
+
 ### xAxis `Array`
 
 The X-axis configuration options of the scatter chart X-axis. Supports all [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis) options.
