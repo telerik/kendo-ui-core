@@ -49,7 +49,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Menu          |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/menu/index)
 |MediaPlayer   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/mediaplayer/index)
 |MultiSelect   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/multiselect/index)
-|Notification  |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/notification/index)
+|Notification  |No  |-   |[Browse](http://demos.telerik.com/kendo-ui/notification/index)
 |NumericTextbox|Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/numerictextbox/index)
 |PanelBar	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/panelbar/index)
 |PivotGrid	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/pivotgrid/index)
