@@ -17937,7 +17937,7 @@ A function that can be used to create a custom visual for the notes. The availab
 ### theme `String`
 
 The chart theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}). More information on the built-in themes could be found in the [Less-based themes]({% slug themesandappearnce_kendoui_desktopwidgets%}) article.
 
 The supported values are:
 
@@ -23371,6 +23371,7 @@ An optional Z-index that can be used to change the default stacking position of 
 
 #### Example - set the value axis note color width
 
+    <div id='chart'></div>
     <script>
         function createChart() {
             $("#chart").kendoChart({

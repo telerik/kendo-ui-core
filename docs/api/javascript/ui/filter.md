@@ -492,6 +492,90 @@ The texts of the filter operators displayed for string fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
+### operators.string.custom `Object`
+
+Specifies a custom operator.
+
+### operators.string.custom.text `String`
+
+The text displated in the operators drop down.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "age", type:"number", label: "Age" },
+          { name: "name", type:"string", label: "Name", operators: {
+              string:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            }
+          }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue.indexOf(filterValue) > 1;
+      }
+    </script>
+
+### operators.string.custom.handler `Function`
+
+The handler of the operator.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "age", type:"number", label: "Age" },
+          { name: "name", type:"string", label: "Name", operators: {
+              string:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            }
+          }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue.indexOf(filterValue) > 1;
+      }
+    </script>
+
 ### operators.string.eq `String` *(default: "Is equal to")*
 
 The text of the "equal" filter operator.
@@ -546,6 +630,88 @@ The texts of the filter operators displayed for number fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
+### operators.number.custom `Object`
+
+Specifies a custom operator.
+
+### operators.number.custom.text `String`
+
+The text displated in the operators drop down.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "age", type:"number", label: "Age", operators: {
+              number:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            } },
+          { name: "name", type:"string", label: "Name" }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue > filterValue / 2;
+      }
+    </script>
+
+### operators.number.custom.handler `Function`
+
+The handler of the operator.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "age", type:"number", label: "Age", operators: {
+              number:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            } },
+          { name: "name", type:"string", label: "Name" }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue > filterValue / 2;
+      }
+    </script>
+
 ### operators.number.eq `String` *(default: "Is equal to")*
 
 The text of the "equal" filter operator.
@@ -584,6 +750,88 @@ The texts of the filter operators displayed for date fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
+### operators.date.custom `Object`
+
+Specifies a custom operator.
+
+### operators.date.custom.text `String`
+
+The text displated in the operators drop down.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", hireDate: new Date(2017,5,2) },
+          { name: "John Doe", hireDate: new Date(2019,6,9) }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "hireDate", type:"date", label: "Hire Date", operators: {
+              date:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            } },
+          { name: "name", type:"string", label: "Name" }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue.getMonth() > filterValue.getMonth();
+      }
+    </script>
+
+### operators.date.custom.handler `Function`
+
+The handler of the operator.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", hireDate: new Date(2017,5,2) },
+          { name: "John Doe", hireDate: new Date(2019,6,9) }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "hireDate", type:"date", label: "Hire Date", operators: {
+              date:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            } },
+          { name: "name", type:"string", label: "Name" }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue.getMonth() > filterValue.getMonth();
+      }
+    </script>
+
 ### operators.date.eq `String` *(default: "Is equal to")*
 
 The text of the "equal" filter operator.
@@ -621,6 +869,88 @@ The text of the "less than" filter operator.
 The texts of the filter operators displayed for boolean fields
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
+
+### operators.boolean.custom `Object`
+
+Specifies a custom operator.
+
+### operators.boolean.custom.text `String`
+
+The text displated in the operators drop down.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", isManager: true },
+          { name: "John Doe", isManager: false }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "isManager", type:"boolean", label: "Is manager", operators: {
+              boolean:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            } },
+          { name: "name", type:"string", label: "Name" }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue == filterValue;
+      }
+    </script>
+
+### operators.boolean.custom.handler `Function`
+
+The handler of the operator.
+
+#### Example - set the operator
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", isManager: true },
+          { name: "John Doe", isManager: false }
+        ];
+
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { name: "isManager", type:"boolean", label: "Is manager", operators: {
+              boolean:{
+                customOperator:{
+                  text: 'Custom operator',
+                  handler: customOperatorHandler
+                }
+              }
+            } },
+          { name: "name", type:"string", label: "Name" }
+        ]
+      });
+
+      function customOperatorHandler(itemValue, filterValue){
+        return itemValue == filterValue;
+      }
+    </script>
 
 ### operators.boolean.eq `String` *(default: "Is equal to")*
 

@@ -89,14 +89,14 @@ var __meta__ = { // jshint ignore:line
             return this[index];
         },
 
-        toJSON: function() {
+        toJSON: function(serializeFunctions) {
             var idx, length = this.length, value, json = new Array(length);
 
             for (idx = 0; idx < length; idx++){
                 value = this[idx];
 
                 if (value instanceof ObservableObject) {
-                    value = value.toJSON();
+                    value = value.toJSON(serializeFunctions);
                 }
 
                 json[idx] = value;
@@ -478,8 +478,8 @@ var __meta__ = { // jshint ignore:line
             that.uid = kendo.guid();
         },
 
-        shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_handlers" && field !== "_events" && typeof this[field] !== FUNCTION && field !== "uid";
+        shouldSerialize: function(field, serializeFunctions) {
+            return this.hasOwnProperty(field) && field !== "_handlers" && field !== "_events" && ((serializeFunctions && serializeFunctions[field]) || typeof this[field] !== FUNCTION) && field !== "uid";
         },
 
         forEach: function(f) {
@@ -490,15 +490,15 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        toJSON: function() {
+        toJSON: function (serializeFunctions) {
             var result = {}, value, field;
 
             for (field in this) {
-                if (this.shouldSerialize(field)) {
+                if (this.shouldSerialize(field, serializeFunctions)) {
                     value = this[field];
 
                     if (value instanceof ObservableObject || value instanceof ObservableArray) {
-                        value = value.toJSON();
+                        value = value.toJSON(serializeFunctions);
                     }
 
                     result[field] = value;
