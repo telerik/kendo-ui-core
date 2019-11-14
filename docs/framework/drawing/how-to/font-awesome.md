@@ -12,13 +12,13 @@ Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.gi
 The following example demonstrates how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF.
 
 ```dojo
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 
     <script>
       // The font file location must be set explicitly if it's not hosted in the same domain
       kendo.pdf.defineFont({
         "FontAwesome":
-            "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf"
+            "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf"
       });
     </script>
 
