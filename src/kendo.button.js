@@ -18,6 +18,7 @@ var __meta__ = { // jshint ignore:line
         CLICK = "click",
         MOUSEDOWN = kendo.support.mousedown,
         MOUSEUP = kendo.support.mouseup,
+        MOUSEOUT = "mouseout",
         KBUTTON = "k-button",
         KBUTTONICON = "k-button-icon",
         KBUTTONICONTEXT = "k-button-icontext",
@@ -54,7 +55,7 @@ var __meta__ = { // jshint ignore:line
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("keyup" + NS, proxy(that._removeActive, that))
                 .on(MOUSEDOWN + NS, proxy(that._addActive, that))
-                .on(MOUSEUP + NS, proxy(that._removeActive, that));
+                .on(MOUSEUP + NS  + " " + MOUSEOUT + NS, proxy(that._removeActive, that));
 
             kendo.notify(that);
         },

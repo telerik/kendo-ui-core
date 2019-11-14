@@ -1,0 +1,42 @@
+.k-breadcrumb {
+
+    // Normal state
+    .k-breadcrumb-item {
+        .k-link {
+            .fill(
+                @breadcrumb-link-text,
+                @breadcrumb-link-bg,
+                @breadcrumb-link-border
+            );
+
+            // Hovered state
+            &:hover,
+            &.k-state-hover {
+                .fill(
+                    @breadcrumb-link-hovered-text,
+                    @breadcrumb-link-hovered-bg,
+                    @breadcrumb-link-hovered-border
+                );
+                .box-shadow(none);
+                text-decoration: underline;
+            }
+
+            // Focused state
+            &:focus,
+            &.k-state-focused {
+                .fill(
+                    @breadcrumb-link-focused-text,
+                    @breadcrumb-link-focused-bg,
+                    @breadcrumb-link-focused-border
+                );
+                .box-shadow(none);
+                text-decoration: underline;
+            }
+        }
+
+        .k-breadcrumb-icon {
+            color: inherit;
+        }
+    }
+
+}
