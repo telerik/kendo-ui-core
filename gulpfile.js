@@ -260,6 +260,10 @@ gulp.task('mdspell', shell.task(
 
 [ 'core' ].forEach(function(flavor) {
     gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
+        var internalOption = "", i = process.argv.indexOf("--channel");
+        if(i>-1) {
+            internalOption = process.argv[i+1];
+        }
         var js = gulp.src('dist/cjs/**/*')
                     .pipe(gulp.dest('dist/npm/js'));
 
@@ -270,7 +274,7 @@ gulp.task('mdspell', shell.task(
         var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
 
         var pkg = gulp.src('build/package-' + flavor + '.json')
-                    .pipe(replace("$KENDO_VERSION", kendoVersion))
+                    .pipe(replace("$KENDO_VERSION", kendoVersion + internalOption))
                     .pipe(rename('package.json'))
                     .pipe(gulp.dest('dist/npm'));
 
