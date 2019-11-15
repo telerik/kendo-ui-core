@@ -39,6 +39,8 @@ The following example demonstrates a PDFViewer TagHelper which uses the `PDF.JS`
     </kendo-pdfviewer>
 ```
 
+> Running an Adblock extension in Chrome might treat the new browser tab for the print dialog as a potential ad and block it.
+
 ## See Also
 
 * [Basic Usage of the PDFViewer TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pdfviewer/tag-helper)

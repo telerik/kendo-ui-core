@@ -24,6 +24,8 @@ The toolbar collection includes the following built-in tools:
 * `download`
 * `print`
 
+ > Running an Adblock extension in Chrome might treat the new browser tab for the print dialog as a potential ad and block it.
+
 The following example demonstrates basic configuration options for the PDFViewer toolbar tools. You can also add `spacer` elements, in order to group a preferable set of tools.
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
