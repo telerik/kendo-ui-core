@@ -1415,11 +1415,15 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (target.is(":kendoFocusable")) {
+            if (target.hasClass(LINK)) {
+                e.preventDefault();
+            }
+
+            if (target.is(":kendoFocusable") && !target.hasClass(LINK)) {
                 e.preventDefault();
                 return;
             }
-
+        
             var link = target.closest(LINKSELECTOR),
                 item = link.closest(ITEM);
 
