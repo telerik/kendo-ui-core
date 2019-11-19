@@ -357,7 +357,7 @@
             });
     }
 
-    /* FilterMenu operator messages */
+    /* FilterMenu operators */
     if (kendo.ui.FilterMenu) {
         kendo.ui.FilterMenu.prototype.options.operators =
             $.extend(true, kendo.ui.FilterMenu.prototype.options.operators, {
@@ -698,7 +698,7 @@
     /* MobileRecurrenceEditor messages */
     if (kendo.ui.MobileRecurrenceEditor) {
         kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
-            $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages,{
+            $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
                 "recurrenceEditorTitle": "週期類型事件編輯",
                 "cancel": "取消",
                 "update": "保存",
