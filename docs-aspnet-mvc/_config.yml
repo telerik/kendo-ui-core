@@ -6,7 +6,8 @@ all_pages_domain: "https://docs.telerik.com"
 capital_casing_redirects: true
 
 # Exclude files which should not be in the output
-exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh]
+# excluded migration as outdated will delete mid 2020
+exclude: [README.md, Gemfile, Gemfile.lock,api_sort.rb, Dockerfile, bs-config.js, build-docs.sh, copy_content.sh, copy_local.sh, docs-watcher/*, exclude_files.txt, install-npm.sh, start-docs.sh, watch.sh,migration/*]
 exclude_navigation: [asp-net-mvc-3.html,asp-net-mvc-4.html,api/Kendo.Mvc/*,api/Kendo.Mvc.UI/*,api/Kendo.Mvc.UI.Fluent/*]
 navigation:
 ## List your directory names and order here, like this:

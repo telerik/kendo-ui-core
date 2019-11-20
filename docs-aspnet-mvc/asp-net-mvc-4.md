@@ -190,7 +190,6 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 ## See Also
 
 * [Progress Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Migration from Progress Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
 * [Progress Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Progress Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Progress Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})

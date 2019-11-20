@@ -2,7 +2,7 @@
 title: Overview
 page_title: Globalization Overview | Telerik UI for ASP.NET MVC
 description: "Learn how to define the current culture in the process of globalization when working with Telerik UI for ASP.NET MVC."
-previous_url: /globalization, /getting-started/globalization
+previous_url: /getting-started/globalization
 slug: globalization_aspnetmvc
 position: 1
 ---

@@ -2,7 +2,6 @@
 title: Upgrade
 page_title: Upgrade | Progress Telerik UI for ASP.NET MVC
 description: "Upgrade your current version of Progress Telerik UI for ASP.NET MVC and switch from a trial to a developer license."
-previous_url: /getting-started/kendo-ui-vs-mvc-wrappers
 slug: upgrade_aspnetmvc
 position: 30
 ---
