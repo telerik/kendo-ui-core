@@ -1419,11 +1419,10 @@ var __meta__ = { // jshint ignore:line
                 e.preventDefault();
             }
 
-            if (target.is(":kendoFocusable") && !target.hasClass(LINK)) {
-                e.preventDefault();
-                return;
-            }
-        
+           if (target.is(":kendoFocusable") && !target.hasClass(LINK)) {
+               return;
+           }
+
             var link = target.closest(LINKSELECTOR),
                 item = link.closest(ITEM);
 

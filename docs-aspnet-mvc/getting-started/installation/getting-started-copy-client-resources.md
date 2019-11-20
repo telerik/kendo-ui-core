@@ -10,7 +10,7 @@ position: 2
 
 This article demonstrates how to include the client-side resources which are required by Telerik<sup>®</sup> UI for ASP.NET MVC in Visual Studio projects.
 
-As the UI for ASP.NET MVC suite is a set of [server-side wrappers over the Kendo UI for jQuery client-side widgets](https://docs.telerik.com/aspnet-mvc/getting-started/kendo-ui-vs-mvc-wrappers), to run the components, you have to provide the same set of web assets. For more information on the files you need, refer to the articles on:
+As the UI for ASP.NET MVC suite is a set of [server-side wrappers over the Kendo UI for jQuery client-side widgets]({% slug overview_aspnetmvc %}), to run the components, you have to provide the same set of web assets. For more information on the files you need, refer to the articles on:
 
 * [Getting Started with Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/intro/first-steps)
 * [Getting Started with Kendo UI Themes](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)

@@ -2,7 +2,6 @@
 title: Overview
 page_title: Download and Installation Overview | Download and Installation | Telerik UI for ASP.NET MVC
 description: "Get started with Telerik UI for ASP.NET MVC and learn how to download the library and initialize its HTML helpers."
-previous_url: /getting-started/kendo-ui-vs-mvc-wrappers
 slug: overview_downloadinstallation_mvc
 position: 1
 ---

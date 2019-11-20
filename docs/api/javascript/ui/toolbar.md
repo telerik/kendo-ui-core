@@ -493,6 +493,29 @@ Specifies the url of the button to navigate to.
         });
     </script>
 
+### items.buttons.useButtonTag `Boolean` *(default: false)*
+
+Indicates whether the Toolbar items would be rendered as *button* elements. By default, they will be rendered as *anchor* elements.
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [
+            {
+                type: "buttonGroup",
+                buttons: [
+                    { text: "foo", useButtonTag: true },
+                    { text: "bar", useButtonTag: true },
+                    { text: "baz", useButtonTag: true }
+                ]
+            }
+            ]
+        });
+    </script>
+
 ### items.click `Function`
 
 Specifies the click event handler of the button. Applicable only for commands of type `button` and `splitButton`.

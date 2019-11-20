@@ -205,7 +205,6 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 ## See Also
 
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})

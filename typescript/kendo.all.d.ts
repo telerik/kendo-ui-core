@@ -8299,6 +8299,7 @@ declare namespace kendo.ui {
         togglable?: boolean;
         text?: string;
         url?: string;
+        useButtonTag?: boolean;
     }
 
     interface ToolBarItemMenuButton {
@@ -8311,6 +8312,7 @@ declare namespace kendo.ui {
         spriteCssClass?: string;
         text?: string;
         url?: string;
+        useButtonTag?: boolean;
     }
 
     interface ToolBarItem {
@@ -8335,8 +8337,9 @@ declare namespace kendo.ui {
         text?: string;
         togglable?: boolean;
         toggle?: Function;
-        type?: string;
+        type?: string;        
         url?: string;
+        useButtonTag?: boolean;
     }
 
     interface ToolBarOptions {
