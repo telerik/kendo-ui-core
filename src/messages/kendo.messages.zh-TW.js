@@ -167,16 +167,11 @@
                 "import": "導入",
                 "print": "列印"
             });
-    }
-    
-    /* Export PDF options */
-    if (kendo.ui.Editor) {
         kendo.ui.Editor.defaultTools.pdf.options.template.options =
             $.extend(true, kendo.ui.Editor.defaultTools.pdf.options.template.options, {
                 "title": "匯出 PDF"
             });
     }
-
 
     /* ImageBrowser messages */
     if (kendo.ui.ImageBrowser) {
@@ -227,10 +222,6 @@
                 "fields": "欄位",
                 "operators": "運算子"
             });
-    }
-
-    /* Filter operators */
-    if (kendo.ui.Filter) {
         kendo.ui.Filter.prototype.options.operators =
             $.extend(true, kendo.ui.Filter.prototype.options.operators, {
                 "string": {
@@ -284,10 +275,6 @@
                 "clear": "清空",
                 "operator": "運算子"
             });
-    }
-
-    /* FilterCell operators */
-    if (kendo.ui.FilterCell) {
         kendo.ui.FilterCell.prototype.options.operators =
             $.extend(true, kendo.ui.FilterCell.prototype.options.operators, {
                 "string": {
@@ -355,10 +342,6 @@
                 "done": "完成",
                 "into": "在"
             });
-    }
-
-    /* FilterMenu operators */
-    if (kendo.ui.FilterMenu) {
         kendo.ui.FilterMenu.prototype.options.operators =
             $.extend(true, kendo.ui.FilterMenu.prototype.options.operators, {
                 "string": {
@@ -955,11 +938,7 @@
                 "topBorder": "上框線",
                 "rightBorder": "右框線",
                 "bottomBorder": "下框線",
-                "noBorders": "無框線",
-                "reset": "無填充顏色",
-                "customColor": "其他顏色...",
-                "apply": "確定",
-                "cancel": "取消"
+                "noBorders": "無框線"
             });
     }
 
