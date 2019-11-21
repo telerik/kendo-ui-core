@@ -3151,7 +3151,8 @@ body of the chart.
       categoryAxis: [{
         minorGridLines: {
           width: 3,
-          color: "green"
+          color: "green",
+		  visible: true
         },
         categories: ["2012", "2013"]
       }],
@@ -3173,7 +3174,8 @@ The color of the minor grid lines. Accepts a valid CSS color string, including h
       categoryAxis: {
         categories: [ "2012", "2013"],
         minorGridLines: {
-          color: "#aa00bb"
+          color: "#aa00bb",
+		  visible: true
         }
       },
       series: [
@@ -3190,7 +3192,8 @@ The color of the minor grid lines. Accepts a valid CSS color string, including h
       categoryAxis: {
         categories: [ "2012", "2013"],
         minorGridLines: {
-          color: "rgb(128, 0, 255)"
+          color: "rgb(128, 0, 255)",
+		  visible: true
         }
       },
       series: [
@@ -3207,7 +3210,8 @@ The color of the minor grid lines. Accepts a valid CSS color string, including h
       categoryAxis: {
         categories: [ "2012", "2013"],
         minorGridLines: {
-          color: "green"
+          color: "green",
+		  visible: true
         }
       },
       series: [
@@ -3237,7 +3241,8 @@ The following dash types are supported:
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          dashType: "dashDot"
+          dashType: "dashDot",
+		  visible: true,
         },
         categories: ["2012", "2013"]
       }],
@@ -3249,16 +3254,16 @@ The following dash types are supported:
 
 ### categoryAxis.minorGridLines.visible `Boolean` *(default: false)*
 
-If set to `true` the chart will display the minor grid lines. By default the minor grid lines are visible.
+If set to `true` the chart will display the minor grid lines. By default the minor grid lines are not visible.
 
-#### Example - hide the category axis minor grid lines
+#### Example - show the category axis minor grid lines
 
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          visible: false
+          visible: true
         },
         categories: ["2012", "2013"]
       }],
@@ -3279,7 +3284,8 @@ The width of the category axis minor grid lines in pixels.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          width: 3
+          width: 3,
+		  visible: true
         },
         categories: ["2012", "2013"]
       }],
@@ -3300,7 +3306,8 @@ The step of the category axis minor grid lines.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          step: 2
+          step: 2,
+		  visible: true
         },
         categories: ["2011", "2012", "2013"]
       }],
@@ -3321,7 +3328,8 @@ The skip of the category axis minor grid lines.
     $("#chart").kendoChart({
       categoryAxis: [{
         minorGridLines: {
-          skip: 2
+          skip: 2,
+		  visible: true
         },
         categories: ["2011", "2012", "2013"]
       }],
