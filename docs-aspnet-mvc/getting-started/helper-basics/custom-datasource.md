@@ -105,6 +105,8 @@ The following example demonstrates how to use the `Headers` option to set a requ
     }
 ```
 
+Unlike the Grid, or other helpers that can be bound to local data, the DataSource helper does not provide functionality for binding to data in the ViewModel and must be configured to use remote data, as demonstrated in the example above.
+
 ## Setting Functions and Objects as DataSource Objects
 
 To set a JavaScript function or object as an option for the DataSource, use the `ClientHandlerDescriptor` class.

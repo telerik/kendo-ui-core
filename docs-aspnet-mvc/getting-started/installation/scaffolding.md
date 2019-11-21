@@ -11,17 +11,18 @@ position: 4
 
 As of the Q1 2015 release, Telerik UI for ASP.NET MVC provides Scaffolding templates.
 
-These templates allow you to apply standard scaffolding to generate MVC-helper declarations together with the related Controller action methods. Currently, the Grid, Scheduler, and Chart support scaffolding.
+These templates allow you to apply standard scaffolding to generate MVC-helper declarations together with the related Controller action methods. Currently, the Grid, Scheduler, Chart and TreeView support scaffolding.
 
 For more information on the available configuration options, refer to the following articles:
 
 * [Scaffolding of the Grid HtmlHelper]({% slug scaffoldinggrid_aspnetmvc %})
 * [Scaffolding of the Chart HtmlHelper]({% slug scaffoldingchart_aspnetmvc %})
 * [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
+* [Scaffolding of the TreeView HtmlHelper]({% slug scaffoldingtreeview_aspnetmvc %})
 
 ## Prerequisites
 
-* Visual Studio 2013 (with Update 2 or later) or Visual Studio 2015
+* Visual Studio 2013 (with Update 2 or later), 2015, 2017 or 2019
 * ASP.NET MVC 4 or ASP.NET MVC 5
 * C#
 * Entity Framework Data Model
