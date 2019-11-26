@@ -19,19 +19,27 @@ The following table lists the localized messages for the cultures which are supp
 
 | Culture   | Language  | Country
 |:---       |:---       |:---
+|`ar-AE`    |Arabic     |U.A.E.
 |`bg-BG`    |Bulgarian  |Bulgaria
+|`cs-CZ`    |Czech      |Czech Republic
 |`da-DK`    |Danish     |Denmark
 |`de-DE`    |German     |Germany
-|`es-ES`    |Spanish    |Spain
+|`el-GR`    |Greek      |Greece
 |`en-US`    |English    |United States of America
+|`es-ES`    |Spanish    |Spain
+|`fr-CA`    |French     |Canada
 |`fr-FR`    |French     |France
+|`he-IL`    |Hebrew     |Israel
+|`it-IT`    |Italian    |Italy
 |`nl-NL`    |Dutch      |The Netherlands
 |`pl-PL`    |Polish     |Poland
-|`pt-PT`    |Portuguese |Portugal
 |`pt-BR`    |Portuguese |Brazil
+|`pt-PT`    |Portuguese |Portugal
 |`ro-RO`    |Romanian   |Romania
 |`ru-RU`    |Russian    |Russia
+|`sk-SK`    |Slovak     |Slovakia
 |`sv-SE`    |Swedish    |Sweden
+|`tr-TR`    |Turkish    |Turkish
 |`uk-UA`    |Ukrainian  |Ukraine
 |`zh-CN`    |Chinese    |People's Republic of China
 

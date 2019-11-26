@@ -28,6 +28,8 @@ var __meta__ = { // jshint ignore:line
         LAST = "k-last",
         LINK = "k-link",
         LINKSELECTOR = "." + LINK,
+        ICONEXPAND = "k-panelbar-expand",
+        ICONCOLLAPSE = "k-panelbar-collapse",
         ERROR = "error",
         ITEM = ".k-item",
         GROUP = ".k-group",
@@ -1415,7 +1417,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (target.hasClass(LINK)) {
+            if (target.hasClass(LINK) || target.hasClass(ICONEXPAND) || target.hasClass(ICONCOLLAPSE)) {
                 e.preventDefault();
             }
 

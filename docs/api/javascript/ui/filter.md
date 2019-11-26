@@ -247,6 +247,38 @@ The [template](/api/javascript/kendo/methods/template) which the widget will use
       });
     </script>
 
+### fields.format `String`
+
+The format of the value displayed in the preview.
+
+#### Example - set the editorTemplate
+
+    <div id="filter"></div>
+    <br /><br />
+    <script>
+      var data = [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ];
+      
+      var dataSource = new kendo.data.DataSource({
+      	data: data
+      });
+
+      $("#filter").kendoFilter({
+      	dataSource: dataSource,
+        expressionPreview: true,
+        fields: [
+          { 
+            name: "age", 
+            type:"number",
+            format:'n2'
+          },
+          { name: "name", type:"string" }
+        ]
+      });
+    </script>
+
 ### fields.label `String`
 
 Defines a value which will be visualized instead of the data feild name. 
