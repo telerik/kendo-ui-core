@@ -59,7 +59,7 @@ The following example demonstrates how to preserve the Grid state&mdash;filterin
             return c.substring(name.length, c.length);
           }
         }
-        return "";
+        return "false";
       }
 
       function setCookie(cname, cvalue, exdays) {

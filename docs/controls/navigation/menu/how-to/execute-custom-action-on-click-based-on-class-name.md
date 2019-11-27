@@ -74,7 +74,7 @@ The example below demonstrates how to execute a custom click action based on the
           width: 500px;
         }
         #menu-sprites .k-sprite {
-          background-image: url("../content/shared/styles/flags.png");
+          background-image: url("https://demos.telerik.com/kendo-ui/content/shared/styles/flags.png");
         }
         .brazilFlag {
           background-position: 0 0;

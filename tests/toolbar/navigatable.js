@@ -223,7 +223,7 @@
             assert.isOk(toolbar.popup.element.is(":visible"));
         });
 
-        it("overflow popup focuses the first item when opened", function() {
+        it("overflow popup focuses the first item when opened", function(done) {
             var toolbar = container.kendoToolBar({
                 items: [
                     { type: "button", id: "foo", text: "foo" },
@@ -240,6 +240,7 @@
 
             toolbar.popup.bind("activate", function() {
                 assert.equal(document.activeElement.text, "baz");
+                done();
             });
 
             $(".k-overflow-anchor").focus();

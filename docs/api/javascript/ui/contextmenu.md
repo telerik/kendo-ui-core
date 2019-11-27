@@ -910,7 +910,7 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://demos.telerik.com/kendo-ui/content/web/toolbar/todo.png", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -920,10 +920,15 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
             },
             {
                 text: "Item 4",
-                spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
+                spriteCssClass: "mail"                // Item image sprite CSS class, optional.
             }]
         );
     </script>
+    <style>
+    .k-sprite {
+            background-image: url("https://demos.telerik.com/kendo-ui/content/web/toolbar/mail.png");
+        }
+    </style>
 
 #### Parameters
 
@@ -1539,6 +1544,7 @@ The jQuery event that triggered this one - only available for the open event of 
 #### Example
 
     <div id="target">Target</div>
+    <input type="checkbox" id="cbx"/> Prevent the `open` event
     <ul id="context-menu">
         <li>Item 1
             <ul>
@@ -1559,7 +1565,9 @@ The jQuery event that triggered this one - only available for the open event of 
         $("#context-menu").kendoContextMenu({
             target: "#target",
             open: function(e) {
-                // handle event
+                if($('#cbx').is(':checked')){
+                    e.preventDefault();
+                }
             }
         });
     </script>
@@ -1636,8 +1644,13 @@ The current target of the ContextMenu - either the init target or the current el
     <script>
         $("#context-menu").kendoContextMenu({
             target: "#target",
-            activate: function(e) {
-                // handle event
+            activate: function(e){
+                $('li.k-item.k-state-hover').css('font-weight','bold');
+                console.log(e.item);
+            },
+            deactivate: function(e) {
+                $('li.k-item').css('font-weight','');
+                console.log(e.item);
             }
         });
     </script>
@@ -1714,8 +1727,13 @@ The current target of the ContextMenu - either the init target or the current el
     <script>
         $("#context-menu").kendoContextMenu({
             target: "#target",
+            activate: function(e){
+                $('li.k-item.k-state-hover').css('font-weight','bold');
+            console.log(e.item);
+            },
             deactivate: function(e) {
-                // handle event
+                $('li.k-item').css('font-weight','');
+                console.log(e.item);
             }
         });
     </script>
