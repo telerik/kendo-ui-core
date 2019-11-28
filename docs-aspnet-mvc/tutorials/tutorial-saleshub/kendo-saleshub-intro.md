@@ -9,7 +9,7 @@ position: 1
 
 # Kendo UI Sales Hub Overview
 
-This article is an overview of the Kendo UI Sales Hub sample project. The Kendo UI Music Store includes two sub-projects: the Home and the Order Sales Hub page.
+This article is an overview of the Kendo UI Sales Hub sample project. The Kendo UI Sales Store includes two sub-projects: the Home and the Order Sales Hub page.
 
 ![A screenshot of the Kendo UI Sales Hub Home page](images/kendo-saleshub-intro-home-screenshot.png)
 

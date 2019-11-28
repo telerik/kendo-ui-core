@@ -207,6 +207,22 @@
         assert.equal(button.data("kendoButton").element.attr("disabled"), "disabled");
     });
 
+    it("enabled:false adds a k-state-disabled class", function() {
+        getButton().kendoButton({
+            enabled: false
+        });
+
+        assert.isOk(button.data("kendoButton").element.hasClass("k-state-disabled"));
+    });
+
+    it("enabled:false adds a disabled attribute", function() {
+        getButton().kendoButton({
+            enabled: false
+        });
+
+        assert.equal(button.data("kendoButton").element.attr("disabled"), "disabled");
+    });
+
     it("disabled attribute adds a k-state-disabled class", function() {
         getButton().attr("disabled", "disabled").kendoButton();
 
