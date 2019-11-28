@@ -101,7 +101,6 @@ The code from the previous example uses jQuery to find the button created earlie
 
 ## See Also
 
-* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_saleshubtutorial_aspnetmvc %})
 * [Create the Customer TreeView]({% slug createcustomtreeview_saleshubtutorial_aspnetmvc %})
 * [Filter Orders on the Server]({% slug filterordersonserver_saleshubtutorial_aspnetmvc %})
 * [Create and Edit Orders]({% slug createeditorders_saleshubtutorial_aspnetmvc %})

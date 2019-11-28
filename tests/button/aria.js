@@ -25,9 +25,17 @@
         assert.equal(button.attr("aria-disabled"), "false");
     });
 
-    it("initialization adds an aria-disabled true attribute", function() {
+    it("initialization adds an aria-disabled true attribute when enable: false", function() {
         getButton().kendoButton({
             enable: false
+        });
+
+        assert.equal(button.attr("aria-disabled"), "true");
+    });
+
+    it("initialization adds an aria-disabled true attribute when enabled: false", function() {
+        getButton().kendoButton({
+            enabled: false
         });
 
         assert.equal(button.attr("aria-disabled"), "true");
