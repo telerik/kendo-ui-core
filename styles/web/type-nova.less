@@ -397,8 +397,8 @@
 @rating-icon-hover-text: @accent;
 @rating-icon-focused-text: @accent;
 
-@rating-icon-focused-shadow: 0 2px 3.6px rgba(black, .1);
-@rating-icon-focused-selected-shadow: 0 2px 3.6px rgba(@accent, .5);
+@rating-icon-focused-shadow: 0 2px 3.6px rgba(0, 0, 0, .1);
+@rating-icon-focused-selected-shadow: 0 2px 3.6px fade(@accent, 50);
 
 
 // Spreadsheet
@@ -1205,15 +1205,13 @@ input.k-textbox:active {
     box-shadow: inset 0 0 0 1px darken(@widget-border-color, 27%);
 }
 
-.k-grid-toolbar .k-button,
-.k-grid-content .k-button {
+.k-grid .k-button {
     color: @accent;
     border-color: transparent;
     background-color: @normal-background;
 }
 
-.k-grid-toolbar .k-button-icontext .k-icon,
-.k-grid-content .k-button-icontext .k-icon,
+.k-grid .k-button-icontext .k-icon,
 .k-edit-form-container .k-edit-buttons .k-button-icontext .k-icon  {
     display: none;
 }
@@ -1226,23 +1224,19 @@ input.k-textbox:active {
     border-color: @hover-background;
 }
 
-.k-grid-content .k-button-icontext {
+.k-grid .k-button-icontext {
     background-color: transparent;
 }
 
-.k-grid-content .k-primary {
+.k-grid .k-primary {
     color: @inversed-text-color;
     background-color: @accent;
 }
 
-.k-grid-toolbar .k-button:active,
-.k-grid-content .k-button-icontext:active {
+.k-grid .k-button:active,
+.k-grid .k-button-icontext:active  {
     color: @inversed-text-color;
     background-color: @selected-background;
-    border-color: @selected-background;
-}
-
-.k-grid-content .k-button:active {
     border-color: @selected-background;
 }
 
