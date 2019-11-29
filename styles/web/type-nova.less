@@ -445,6 +445,42 @@
 @breadcrumb-link-focused-border: transparent;
 
 
+// Listgroup
+@listgroup-border-radius: @border-radius;
+
+@listgroup-bg: @component-bg;
+@listgroup-text: @component-text;
+@listgroup-border: @component-border;
+
+
+// Badge
+@badge-secondary-bg: darken(@normal-background, 5%);
+@badge-secondary-text: @normal-text-color;
+@badge-secondary-border: @badge-secondary-bg;
+
+@badge-primary-bg: @primary-background-color;
+@badge-primary-text: @primary-text-color;
+@badge-primary-border: @badge-primary-bg;
+
+@badge-info-bg: darken(@info, 30%);
+@badge-info-text: contrast( @badge-info-bg );
+@badge-info-border: @badge-info-bg;
+
+@badge-success-bg: darken(@success, 30%);
+@badge-success-text: contrast( @badge-success-bg );
+@badge-success-border: @badge-success-bg;
+
+@badge-warning-bg: darken(@warning, 30%);
+@badge-warning-text: contrast( @badge-warning-bg );
+@badge-warning-border: @badge-warning-bg;
+
+@badge-error-bg: darken(@error, 30%);
+@badge-error-text: contrast( @badge-error-bg );
+@badge-error-border: @badge-error-bg;
+
+
+// Kendo skin
+
 @theme-name: ~"nova";
 
 @import "common/mixins.less";
@@ -465,6 +501,8 @@
 @import "Default/rating/_theme.less";
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
+@import "Default/listgroup/_theme.less";
+@import "Default/badge/_theme.less";
 
 
 // Main colors
@@ -1023,12 +1061,6 @@ input.k-textbox:active {
     border-color: @warning;
     .box-shadow(none);
     border-radius: 0;
-}
-
-// Badge
-.k-badge {
-    background-color: @accent;
-    color: contrast(@accent, @normal-background, @normal-text-color, 0.5);
 }
 
 // TreeView

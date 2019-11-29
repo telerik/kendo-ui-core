@@ -511,6 +511,8 @@ navigation:
         title: "AutoComplete"
     "*autocomplete/how-to/input":
         title: "Managing Inputs"
+    "*/badge":
+        title: "Badge"
     "*/button":
         title: "Button"
     "*/radiobutton":

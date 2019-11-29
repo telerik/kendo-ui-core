@@ -527,6 +527,40 @@
 @breadcrumb-link-focused-border: transparent;
 
 
+// Listgroup
+@listgroup-border-radius: @border-radius;
+
+@listgroup-bg: @component-bg;
+@listgroup-text: @component-text;
+@listgroup-border: @component-border;
+
+
+// Badge
+@badge-secondary-bg: @base;
+@badge-secondary-text: @normal-text-color;
+@badge-secondary-border: @badge-secondary-bg;
+
+@badge-primary-bg: @primary-background-color;
+@badge-primary-text: @primary-text-color;
+@badge-primary-border: @badge-primary-bg;
+
+@badge-info-bg: @info;
+@badge-info-text: contrast( @badge-info-bg );
+@badge-info-border: @badge-info-bg;
+
+@badge-success-bg: @success;
+@badge-success-text: contrast( @badge-success-bg );
+@badge-success-border: @badge-success-bg;
+
+@badge-warning-bg: darken(@warning, 30%);
+@badge-warning-text: contrast( @badge-warning-bg );
+@badge-warning-border: @badge-warning-bg;
+
+@badge-error-bg: @error;
+@badge-error-text: contrast( @badge-error-bg );
+@badge-error-border: @badge-error-bg;
+
+
 // Kendo skin
 
 @theme-name: ~"office365";
@@ -549,6 +583,8 @@
 @import "Default/rating/_theme.less";
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
+@import "Default/listgroup/_theme.less";
+@import "Default/badge/_theme.less";
 
 .k-in,
 .k-item
@@ -790,13 +826,6 @@ textarea.k-textbox:hover,
 
 .k-hr {
     border-color: @widget-border-color;
-}
-
-// Badge
-.k-badge {
-    background-color: @accent;
-    color: contrast(@accent, @normal-background, @normal-text-color, 0.5);
-    border-radius: @inner-border-radius;
 }
 
 .k-tool

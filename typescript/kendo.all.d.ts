@@ -19675,6 +19675,52 @@ declare namespace kendo.mobile.ui {
         context?: JQuery;
     }
 
+    class Badge extends kendo.ui.Widget {
+
+        static fn: Badge;
+
+        options: BadgeOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Badge;
+
+        constructor(element: Element, options?: BadgeOptions);
+
+
+        hide(): void;
+        setOptions(options: any): void;
+        show(): void;
+        value(newValue: string): void;
+        value(newValue: number): void;
+
+    }
+
+    interface BadgeOptions {
+        name?: string;
+        appearance?: string;
+        look?: string;
+        template?: string|Function;
+        type?: string;
+        value?: string|number;
+        visible?: boolean;
+        change?(e: BadgeChangeEvent): void;
+        hide?(e: BadgeEvent): void;
+        show?(e: BadgeEvent): void;
+    }
+    interface BadgeEvent {
+        sender: Badge;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface BadgeChangeEvent extends BadgeEvent {
+        oldValue?: string|number;
+        newValue?: string|number;
+    }
+
 
     class BackButton extends kendo.mobile.ui.Widget {
 

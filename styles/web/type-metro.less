@@ -512,6 +512,40 @@
 @breadcrumb-link-focused-border: transparent;
 
 
+// Listgroup
+@listgroup-border-radius: @border-radius;
+
+@listgroup-bg: @component-bg;
+@listgroup-text: @component-text;
+@listgroup-border: @component-border;
+
+
+// Badge
+@badge-secondary-bg: darken(@normal-background, 5%);
+@badge-secondary-text: @normal-text-color;
+@badge-secondary-border: @badge-secondary-bg;
+
+@badge-primary-bg: @primary-background-color;
+@badge-primary-text: @primary-text-color;
+@badge-primary-border: @badge-primary-bg;
+
+@badge-info-bg: contrast(@base, darken(@info, 30%), @info, 0.5);
+@badge-info-text: contrast( @badge-info-bg );
+@badge-info-border: @badge-info-bg;
+
+@badge-success-bg: contrast(@base, darken(@success, 30%), @success, 0.5);
+@badge-success-text: contrast( @badge-success-bg );
+@badge-success-border: @badge-success-bg;
+
+@badge-warning-bg: contrast(@base, darken(@warning, 30%), @warning, 0.5);
+@badge-warning-text: contrast( @badge-warning-bg );
+@badge-warning-border: @badge-warning-bg;
+
+@badge-error-bg: contrast(@base, darken(@error, 30%), @error, 0.5);
+@badge-error-text: contrast( @badge-error-bg );
+@badge-error-border: @badge-error-bg;
+
+
 // Kendo skin
 
 @theme-name: ~"metro";
@@ -534,6 +568,8 @@
 @import "Default/rating/_theme.less";
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
+@import "Default/listgroup/_theme.less";
+@import "Default/badge/_theme.less";
 
 
 .k-in,
@@ -803,13 +839,6 @@ textarea.k-textbox:hover,
 
 .k-clear-value {
     color: @input-text;
-}
-
-// Badge
-.k-badge {
-    background-color: @accent;
-    color: contrast(@accent, @normal-background, @normal-text-color, 0.5);
-    border-radius: @inner-border-radius;
 }
 
 .k-tool

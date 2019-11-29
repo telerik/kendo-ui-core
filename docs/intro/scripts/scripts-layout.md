@@ -12,6 +12,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
+| [Badge](http://demos.telerik.com/kendo-ui/badge/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.badge.js | |
 | [Dialog](http://demos.telerik.com/kendo-ui/dialog/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |

@@ -332,6 +332,27 @@
 @breadcrumb-icon-padding-y: 0;
 
 
+// Listgroup
+@listgroup-border-width: 1px;
+
+@listgroup-item-padding-x: 1em;
+@listgroup-item-padding-y: .5em;
+@listgroup-item-border-width: 1px;
+
+
+// Badge
+@badge-font-size: 75%;
+@badge-line-height: 1;
+
+@badge-padding: @button-padding-y;
+@badge-border-width: 1px;
+@badge-border-radius: 0;
+
+@badge-size: calc( @badge-line-height * 1em + 2 * @badge-padding + 2 * @badge-border-width );
+@badge-overlay-x: calc( @badge-line-height * .5em + @badge-padding + @badge-border-width );
+@badge-overlay-y: @badge-overlay-x;
+
+
 @import "common/all.less";
 
 .k-textbox > input,
