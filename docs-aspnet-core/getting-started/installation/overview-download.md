@@ -17,7 +17,7 @@ Telerik UI for ASP.NET Core requires .NET Core.
 The offline sample application requires:
 
 * [.NET Core](https://www.microsoft.com/net/learn/get-started)
-* [Visual Studio](https://www.visualstudio.com/downloads/)
+* [Visual Studio](https://www.visualstudio.com/downloads/) with a whole `.NET Core cross-platform development` workload installed
 
 ## Download
 
