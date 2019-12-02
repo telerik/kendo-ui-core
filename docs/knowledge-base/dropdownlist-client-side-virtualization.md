@@ -68,7 +68,7 @@ Based on the index of the currently selected value, calculate the indexes of the
           options.success(indices);
         }
       },
-      height: 290,
+      height: 520,
       dataSource: {
         data: data,
         schema: {
