@@ -18,7 +18,7 @@ var __meta__ = { // jshint ignore:line
         isFunction = kendo.isFunction,
         keys = kendo.keys,
         outerWidth = kendo._outerWidth,
-
+        ns = ".kendoToolBar",
         TOOLBAR = "k-toolbar",
         BUTTON = "k-button",
         OVERFLOW_BUTTON = "k-overflow-button",
@@ -524,7 +524,7 @@ var __meta__ = { // jshint ignore:line
             _navigatable: function() {
                 var that = this;
 
-                that.popupElement.on("keydown", "." + BUTTON, function(e) {
+                that.popupElement.on("keydown" + ns, "." + BUTTON, function(e) {
                     var li = $(e.target).parent();
 
                     e.preventDefault();
@@ -598,7 +598,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }).data("kendoPopup");
 
-                this.popup.element.on(CLICK, "a.k-button", preventClick);
+                this.popup.element.on(CLICK + ns, "a.k-button", preventClick);
             },
 
             adjustPopupWidth: function (popup) {
@@ -621,7 +621,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             remove: function() {
-                this.popup.element.off(CLICK, "a.k-button");
+                this.popup.element.off(CLICK + ns, "a.k-button");
                 this.popup.destroy();
                 this.element.remove();
             },
@@ -905,7 +905,6 @@ var __meta__ = { // jshint ignore:line
         var ToolBar = Widget.extend({
             init: function(element, options) {
                 var that = this;
-
                 Widget.fn.init.call(that, element, options);
 
                 options = that.options;
@@ -970,11 +969,11 @@ var __meta__ = { // jshint ignore:line
                     release: toggleActive
                 });
 
-                that.element.on(CLICK, "a.k-button", preventClick);
+                that.element.on(CLICK + ns, "a.k-button", preventClick);
                 that._navigatable();
 
                 if (options.resizable) {
-                    that.popup.element.on(CLICK, + "a.k-button", preventClick);
+                    that.popup.element.on(CLICK + ns, + "a.k-button", preventClick);
                 }
 
                 if (options.resizable) {
@@ -1020,14 +1019,14 @@ var __meta__ = { // jshint ignore:line
                     $(element).data("kendoPopup").destroy();
                 });
 
-                that.element.off(CLICK, "a.k-button");
+                that.element.off(ns, "a.k-button");
 
                 that.userEvents.destroy();
 
                 if (that.options.resizable) {
                     kendo.unbindResize(that._resizeHandler);
                     that.overflowUserEvents.destroy();
-                    that.popup.element.off(CLICK, "a.k-button");
+                    that.popup.element.off(ns, "a.k-button");
                     that.popup.destroy();
                 }
 
@@ -1294,7 +1293,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
 
-                that.popup.element.on("keydown", "." + BUTTON, function(e) {
+                that.popup.element.on("keydown" + ns, "." + BUTTON, function(e) {
                     var target = $(e.target),
                         li = target.parent(),
                         isComplexTool = li.is("." + BUTTON_GROUP) || li.is("." + SPLIT_BUTTON),
@@ -1425,7 +1424,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.element
                     .attr("tabindex", 0)
-                    .on("focusin", function(ev) {
+                    .on("focusin" + ns, function(ev) {
                         var target = $(ev.target);
                         var element = $(this).find(":kendoFocusable:first");
 
@@ -1441,7 +1440,7 @@ var __meta__ = { // jshint ignore:line
                             element[0].focus();
                         }
                     })
-                    .on("keydown", proxy(that._keydown, that));
+                    .on("keydown" + ns, proxy(that._keydown, that));
             },
 
             _keydown: function(e) {

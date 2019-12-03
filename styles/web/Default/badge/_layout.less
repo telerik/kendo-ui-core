@@ -1,4 +1,5 @@
 .k-badge {
+    margin: 0 0 0 .5em;
     padding: @badge-padding;
     box-sizing: border-box;
     border-width: @badge-border-width;
@@ -11,6 +12,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    // RTL
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        margin: 0 .5em 0 0;
+    }
 }
 
 .k-badge > * {
@@ -40,9 +48,11 @@ a.k-badge:hover,
 
 .k-badge-overlay {
     position: relative;
+    overflow: visible;
 }
 
 .k-badge-overlay .k-badge {
+    margin: 0;
     position: absolute;
     top: @badge-overlay-y;
     right: @badge-overlay-x;
