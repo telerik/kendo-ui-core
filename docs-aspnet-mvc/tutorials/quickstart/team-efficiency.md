@@ -25,13 +25,13 @@ Telerik UI for ASP.NET MVC can easily be added to an existing ASP.NET MVC projec
 
 1. In the **New Project** dialog, choose the **ASP.NET Web Application** template by expanding the **Templates** tree to **Templates** > **Visual C#** > **Web**.
 
-    ![](images/chapter1/file-new-mvc-project.jpg)
+    ![](images/chapter1/file-new-mvc-project.png)
 
 1. Give the application a name, for example, **MyQuickStartApp**. Click **OK** to continue.
 
-1. In the **New ASP.NET Project** dialog, choose **MVC** from the 4.6 template selection.
+1. In the **New ASP.NET Project** dialog, choose **MVC** from the template selection.
 
-    ![](images/chapter1/file-new-mvc-project2.jpg)
+    ![](images/chapter1/file-new-mvc-project2.png)
 
 1. Click **OK** to finish.
 
@@ -53,21 +53,21 @@ The boilerplate has an HTML page, a layout, the Northwind database, and some ser
 
 1. From the Solution Explorer, right-click **References**, then choose **Manage NuGet Packages**.
 
-    ![](images/chapter1/nuget-gui.jpg)
+    ![](images/chapter1/nuget-gui.png)
 
 1. Search for **KendoQsBoilerplate**.
 
-    ![](images/chapter1/nuget-gui2.jpg)
+    ![](images/chapter1/nuget-gui2.png)
 
 1. Click **Install** to continue.
 1. When the package installs, you may be prompted to accept a license agreement for the NorthwindDB. Click **I Accept** to continue.
 1. It is normal for the quick start boilerplate to overwrite existing files. When prompted with a file conflict, choose **Yes to All**.
 
-    ![](images/chapter1/file-conflict.jpg)
+    ![](images/chapter1/file-conflict.png)
 
 1. With the boilerplate installed, take a moment to run the application. If all went well, you should see something similar to what is shown below.
 
-    ![](images/chapter1/wire-frame.jpg)
+    ![](images/chapter1/wire-frame.png)
 
 ### Convert to Telerik Applications
 
@@ -80,36 +80,34 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 1. Stop the application if it is already running.
 1. In the Solution Explorer, right-click the project name and select **Telerik UI for ASP.NET MVC** > **Convert to Telerik Application**. This will launch the **Project Configuration** wizard. From here you can choose settings for your Telerik project.
 
-    ![](images/chapter1/convert-to-telerik1.jpg)
+    ![](images/chapter1/convert-to-telerik1.png)
 
-1. For this tutorial your project will use CDN support. This means that all Kendo UI resources are served from Telerik content delivery network (CDN) versus relying on your server for the assets. Mark the box **Use CDN support** and click **Next** to continue.
+1. For this tutorial your project will use CDN support. This means that all Kendo UI resources are served from Telerik content delivery network (CDN) versus relying on your server for the assets. Verify that the box **Use CDN support** is checked and click **Finish** to continue.
 
-    ![](images/chapter1/convert-to-telerik2.jpg)
+    ![](images/chapter1/convert-to-telerik2.png)
 
 1. Since the boilerplate is designed with [Bootstrap](http://getbootstrap.com), choose **Bootstrap** from themes select box so the theme matches the current look of the boilerplate. You'll change the theme later when you're ready to customize the look of the application.
 
-    ![](images/chapter1/convert-to-telerik3.jpg)
+    ![](images/chapter1/convert-to-telerik3.png)
 
 1. Open `\Views\Shared\_Layout.cshtml`. Find and remove the `@Scripts.Render("~/bundles/modernizr")` script bundle. This script is included with the Kendo UI assets.
 1. Next, find the CSS `@Styles.Render("~/Content/css")` bundle and move it just above the closing head tag `</head>`. This will ensure that the custom styles are applied when you customize the application.
 1. The final code of the head section should look like the one shown in the example below.
-
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-            <title>@ViewBag.Title - UI for MVC / Kendo Quick Start Guide</title>
-
-            <link href="http://cdn.kendostatic.com/2015.3.1111/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
-            <link href="http://cdn.kendostatic.com/2015.3.1111/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
-            <link href="http://cdn.kendostatic.com/2015.3.1111/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
-            <link href="http://cdn.kendostatic.com/2015.3.1111/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
-            <link href="http://cdn.kendostatic.com/2015.3.1111/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" type="text/css" />
-            <script src="http://cdn.kendostatic.com/2015.3.1111/js/jquery.min.js"></script>
-            <script src="http://cdn.kendostatic.com/2015.3.1111/js/jszip.min.js"></script>
-            <script src="http://cdn.kendostatic.com/2015.3.1111/js/kendo.all.min.js"></script>
-            <script src="http://cdn.kendostatic.com/2015.3.1111/js/kendo.aspnetmvc.min.js"></script>
-            <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
-            @Styles.Render("~/Content/css")
+        
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - UI for MVC / Kendo Quick Start Guide</title>
+        <link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.common-bootstrap.min.css" rel="stylesheet"   type="text/css" />
+        <link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap.min.css" rel="stylesheet"  type="text/css" />
+        <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+        @Styles.Render("~/Content/css")
 
 > Because the **Convert to Telerik application**, **Upgrade Project**, or **Configure Project** wizards modify the `_Layout.cshtml` file, make sure you check the position of the custom CSS declarations afterwards.
 
@@ -145,7 +143,7 @@ The widget options are exposed via a fluent interface.
 Below is an example of how a NumericTextBox input is created.
 
     @(Html.Kendo().NumericTextBox()
-        .Name("name") // set the name of the NumericTextBox
+        .Name("age") // set the name of the NumericTextBox
         .Value(10) //set the value
         .Spinners(false) // disable the spinners
     )
@@ -154,13 +152,13 @@ Below is an example of how a NumericTextBox input is created.
 
 #### Overview
 
-Let's open the `Index.cshtml` page under the folder `views/home/`. The `Index.cshtml` page is where most of the application's UI lives. This page currently contains basic HTML inputs to collect date input from the user. To provide a better user experience, replace the standard HTML inputs with Kendo UI date picker controls. The Kendo UI date picker controls offer users a flyout calendar to choose a desired date.
+Let's open the `Index.cshtml` page under the folder `~\Views\Home\`. The `Index.cshtml` page is where most of the application's UI lives. This page currently contains basic HTML inputs to collect date input from the user. To provide a better user experience, replace the standard HTML inputs with Kendo UI date picker controls. The Kendo UI date picker controls offer users a flyout calendar to choose a desired date.
 
 > The Kendo UI DatePicker control is touch and mouse friendly. No additional code is necessary to support tablets and phones.
 
 #### Exercise: Replace StatsFrom and StatsTo TextBoxes with Kendo UI Date Pickers
 
-1. Open `Views/Home/Index.cshtml` and find the `StatsFrom` text box helper.
+1. Open `~\Views\Home\Index.cshtml` and find the `StatsFrom` text box helper.
 
         <!-- Stats From Date Picker -->
     	@Html.TextBox("StatsFrom", new DateTime(1996, 1, 1))
@@ -193,7 +191,7 @@ The Kendo UI HTML helper's fluent interface lets you configure a widget's behavi
 
 After you run your app with this change, you will see a calendar icon in the **Stats from** field. Click or tap the icon to reveal the date picker.
 
-![Tap to show a date picker](images/chapter2/date-picker-flyout.jpg)
+![Tap to show a date picker](images/chapter2/date-picker-flyout.png)
 
 With the inputs upgraded, let's move on to the extremely robust Kendo UI Grid.
 
@@ -215,19 +213,19 @@ A copy of the Northwind database is included in the Kendo UI Quick Start Boilerp
 
 1. Using Visual Studio's **Server Explorer**, expand **DataConnections**, and right-click **NorthwindDB** > **Modify Connection**.
 
-    ![](images/chapter3/upgrade-db-1.jpg)
+    ![](images/chapter3/upgrade-db-1.png)
 
 1. Next, click **OK**.
 
-    ![](images/chapter3/upgrade-db-2.jpg)
+    ![](images/chapter3/upgrade-db-2.png)
 
 1. Finally, click **Yes** to complete the upgrade.
 
-    ![](images/chapter3/upgrade-db-3.jpg)
+    ![](images/chapter3/upgrade-db-3.png)
 
 1. Once the upgrade is complete, expand the Northwind Database Tables to verify connectivity.
 
-    ![](images/chapter3/upgrade-db-4.jpg)
+    ![](images/chapter3/upgrade-db-4.png)
 
 With the database upgraded, use the scaffolding wizard to create an interactive grid view.
 
@@ -239,13 +237,13 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
 
 #### Exercise: Scaffold a Grid View of Invoices
 
-1. Start the scaffolding wizard by right-clicking **Controllers** > **Add** > **New Scaffolded Item**.
+1. Start the scaffolding wizard by right-clicking **Controllers** > **Add** > **New Scaffolded Item**. The Scaffolder should be automatically installed. In case it is not, navigate to `\wrappers\aspnetmvc\Scaffolding` and click on **KendoScaffolderExtension.vsix** to install the Scaffolder manually.
 
-    ![](images/chapter3/scaffold-1.jpg)
+    ![](images/chapter3/scaffold-1.png)
 
 1. Choose **Kendo UI Scaffolder** and click **Add** to continue.
 
-    ![](images/chapter3/scaffold-2.jpg)
+    ![](images/chapter3/scaffold-2.png)
 
 1. Notice that the Scaffolder is capable of creating Grid, Chart, and Scheduler views for both C# and JavaScript. For this guide you'll be using the Telerik UI for MVC Grid scaffolding option. Choose **Telerik UI for MVC Grid** and click **Add** to continue.
 
@@ -365,7 +363,7 @@ As you may have noticed in the scaffolding wizard, the Grid is a versatile compo
     		  ...
     	)
 
-    The resulting code should look like the one in the example below.
+The resulting code should look like the one in the example below.
 
        @(Html.Kendo().Grid<KendoQsBoilerplate.Invoice>()
     	      .Name("EmployeeSales")
