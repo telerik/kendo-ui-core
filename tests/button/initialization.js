@@ -240,5 +240,13 @@
 
         assert.equal(button.data("kendoButton").element.attr("tabindex"), 1);
     });
+
+    it("when badge is enabled a kendo.ui.Badge is initialized", function() {
+        getButton().attr("tabindex", 1).kendoButton({
+            badge: "1"
+        });
+
+        assert.isOk(button.data("kendoButton").badge instanceof kendo.ui.Badge);
+    });
     });
 }());

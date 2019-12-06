@@ -9,6 +9,149 @@ component: button
 
 ## Configuration
 
+### badge `Boolean|String|Object`
+
+If set to true a default overlay badge will be displayed. If set to a string, an ovelay with content set to the specified string will be displayed. Can be set to a JavaScript object which represents the configuration of the [`Badge widget`](/api/javascript/ui/badge).
+
+#### Example - boolean badge
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: true
+		});
+	</script>
+
+#### Example - string badge
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: '99+'
+		});
+	</script>
+
+### badge.appearance  `String` *(default: pill)*
+
+Specifies the shape of the badge - `rectangle` or `pill`.
+
+#### Example
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				appearance: 'rectangle'
+			}
+		});
+	</script>
+
+### badge.look `String` *(default: flat)*
+
+Specifies the look of the badge - `flat` or `outlined`.
+
+#### Example
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				look: 'outlined'
+			}
+		});
+	</script>
+
+### badge.overlay `Boolean` *(default: true)*
+
+If set to false the badge is displayed inside the button.
+
+#### Example
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				overlay: false,
+				value: 15
+			}
+		});
+	</script>
+
+### badge.template `String|Function`
+
+The template which renders the content of the badge
+
+#### Example - string template
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				value: 1234,
+				template: '#=value > 99? "99+" : value#'
+			}
+		});
+	</script>
+
+#### Example - function template
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				value: 1234,
+				template: function (value){
+					return value > 99 ? '99+' : value;
+				}
+			}
+		});
+	</script>
+
+### badge.type `String`
+
+Specifies the type of the badge - `primary`, `secondary`, `info`, `success`, `warning` and `error`.
+
+#### Example - string template
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				type: 'warning'
+			}
+		});
+	</script>
+
+### badge.value `String|Number`
+
+The value of the badge
+
+#### Example - string template
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				 value: 15
+			}
+		});
+	</script>
+
+### badge.visible `Boolean`
+
+If set to false the badge will not be displayed.
+
+#### Example - string template
+
+	<button id="button" type="button">Foo</button>
+	<script>
+		$("#button").kendoButton({
+			badge: {
+				 visible: false
+			}
+		});
+	</script>
+
 ### enable `Boolean` *(default: true)*
 
 Indicates whether the **Button** should be enabled or disabled. By default, it is enabled, unless a `disabled="disabled"` attribute is detected.
