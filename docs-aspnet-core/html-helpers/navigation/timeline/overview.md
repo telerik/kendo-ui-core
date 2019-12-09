@@ -1,26 +1,26 @@
 ---
 title: Overview
-page_title: TimeLine Overview | Telerik UI for ASP.NET Core HTML Helpers
-description: "Learn the basics when working with the Telerik UI TimeLine HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Timeline Overview | Telerik UI for ASP.NET Core HTML Helpers
+description: "Learn the basics when working with the Telerik UI Timeline HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_htmlhelpers_timeline_aspnetcore
 position: 1
 ---
 
-# TimeLine Overview
+# Timeline Overview
 
-The Telerik UI TimeLine HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TimeLine widget.
+The Telerik UI Timeline HtmlHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Timeline widget.
 
-The TimeLine widget displays a collection of events and their data in a chronological succession for each year.
+The Timeline widget displays a collection of events and their data in a chronological succession for each year.
 
 You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the widget behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
 
-* [Demo page for the TimeLine](https://demos.telerik.com/aspnet-core/timeline/index)
+* [Demo page for the Timeline](https://demos.telerik.com/aspnet-core/timeline/index)
 
 ![](images/timeline-overview.png)
 
-## Initializing the TimeLine
+## Initializing the Timeline
 
-The following example demonstrates how to define the TimeLine by using the TimeLine HtmlHelper. Note the tabs for the controller and model code that show how to feed data to the widget.
+The following example demonstrates how to define the Timeline by using the Timeline HtmlHelper. Note the tabs for the controller and model code that show how to feed data to the widget.
 
 ```Razor
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
@@ -34,13 +34,13 @@ The following example demonstrates how to define the TimeLine by using the TimeL
            .Orientation("vertical") // defines the layout of the widget
            .AlternatingMode() // renders the events on both sides of the axis in vertical mode
            .CollapsibleEvents() // starts all events collapsed in vertical mode
-           .DataSource(dt => dt.Read("GetTimeLineData", "TimeLine"))
+           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
 )
 ```
 ```Controller
-public partial class TimeLine : BaseController
+public partial class Timeline : BaseController
 {
-    public JsonResult GetTimeLineData()
+    public JsonResult GetTimelineData()
     {
         List<TimelineEventModel> events = new List<TimelineEventModel>();
 
@@ -125,7 +125,7 @@ public class TimelineEventActionModel
 
 ## Events
 
-For a complete example on the TimeLine events, refer to the [demo on using the events of the TimeLine in ASP.NET Core](https://demos.telerik.com/aspnet-core/timeline/events).
+For a complete example on the Timeline events, refer to the [demo on using the events of the Timeline in ASP.NET Core](https://demos.telerik.com/aspnet-core/timeline/events).
 
 You can provide an event handler through its [JavaScript function name](#handling-events-by-handler-name), or by [specifying an inline function in a template](#handling-events-by-template-delegate).
 
@@ -149,7 +149,7 @@ The following example demonstrates how to subscribe to events by using a handler
     .DataTitleField("Title")
     .DataImagesField("Images")
     .DataActionsField("Actions")
-    .DataSource(dt => dt.Read("GetTimeLineData", "TimeLine")) // see the first example in this article for a sample data source
+    .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
 )
 
 <script>
@@ -196,18 +196,18 @@ The following example demonstrates how to subscribe to events by using a templat
     .DataTitleField("Title")
     .DataImagesField("Images")
     .DataActionsField("Actions")
-    .DataSource(dt => dt.Read("GetTimeLineData", "TimeLine")) // see the first example in this article for a sample data source
+    .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
 )
 ```
 
 
 ## Referencing Existing Instances
 
-To access an existing TimeLine instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [client-side methods the widget exposes](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
+To access an existing Timeline instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [client-side methods the widget exposes](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
 
 ```
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-    .Name("TimeLine")
+    .Name("Timeline")
     .DataDateField("EventDate")
     .DataDescriptionField("Description")
     .DataSubTitleField("Subtitle")
@@ -215,12 +215,12 @@ To access an existing TimeLine instance, use the `.data()` jQuery method, execut
     .DataImagesField("Images")
     .DataActionsField("Actions")
     .Orientation("horizontal")
-    .DataSource(dt => dt.Read("GetTimeLineData", "TimeLine")) // see the first example in this article for a sample data source
+    .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
 )
 <button onclick="buttonClick();">Go to next event</button>
 <script>
     function buttonClick() {
-        var timeline = $("#TimeLine").data("kendoTimeLine");
+        var timeline = $("#Timeline").data("kendoTimeline");
         timeline.next();
     }
 </script>
@@ -229,8 +229,8 @@ To access an existing TimeLine instance, use the `.data()` jQuery method, execut
 
 ## See Also
 
-* [Basic Usage of the TimeLine (Demo)](https://demos.telerik.com/aspnet-core/timeline/index)
-* [Using the Events of the TimeLine (Demo)](https://demos.telerik.com/aspnet-core/timeline/events)
-* [Applying the TimeLine API (Demo)](https://demos.telerik.com/aspnet-core/timeline/api)
-* [JavaScript API Reference of the TimeLine](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
+* [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/aspnet-core/timeline/index)
+* [Using the Events of the Timeline (Demo)](https://demos.telerik.com/aspnet-core/timeline/events)
+* [Applying the Timeline API (Demo)](https://demos.telerik.com/aspnet-core/timeline/api)
+* [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)
 

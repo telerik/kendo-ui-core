@@ -1,18 +1,18 @@
 ---
 title: Orientation
-page_title: jQuery TimeLine Documentation | Orientation | Kendo UI
-description: "See how to control the orientation of the TimeLine widget for jQuery by Kendo UI."
+page_title: jQuery Timeline Documentation | Orientation | Kendo UI
+description: "See how to control the orientation of the Timeline widget for jQuery by Kendo UI."
 slug: orientation_kendoui_timeline_widget
 position: 2
 ---
 
 # Orientation
 
-The TimeLine can render its events in a [vertical](#vertical) or [horizontal](#horizontal) list.
+The Timeline can render its events in a [vertical](#vertical) or [horizontal](#horizontal) list.
 
 ## Vertical Mode
 
-By default, the TimeLine is vertical with its events arranged on one side of the axis and all events are expanded.
+By default, the Timeline is vertical with its events arranged on one side of the axis and all events are expanded.
 
 You can have the events render alternatingly on both sides of the axis by setting its `alterMode` option to `true`. If you set the `collapsibleEvents` option to `true`, all events will start out collapsed. The user can then expand a particular event to see more than its title and subtitle.
 
@@ -98,9 +98,9 @@ You can have the events render alternatingly on both sides of the axis by settin
 
 ## Horizontal Mode
 
-To use the horizontal rendering, set the `orientation` option f the TimeLine to `horizontal`.
+To use the horizontal rendering, set the `orientation` option f the Timeline to `horizontal`.
 
-In the horizontal mode, the TimeLine renders buttons which the user can click or tap to navigate between periods. One of the events is always rendered below the time axis and the user can select another event to reveal its details.
+In the horizontal mode, the Timeline renders buttons which the user can click or tap to navigate between periods. One of the events is always rendered below the time axis and the user can select another event to reveal its details.
 
 The horizontal mode renders the event details on demand (only when they are selected) and is responsive (renders as many of the events as there is room on the axis for).
 
@@ -186,5 +186,5 @@ The horizontal mode does not support alternating rendering and collapsing of eve
 
 ## See Also
 
-* [Horizontal Orientation of the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/horizontal)
-* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
+* [Horizontal Orientation of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/horizontal)
+* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)

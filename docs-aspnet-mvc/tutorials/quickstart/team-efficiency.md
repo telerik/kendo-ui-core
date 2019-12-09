@@ -424,25 +424,24 @@ In this chapter you will learn about the Kendo UI ListView control and client-si
 
 #### Overview
 
-The purpose of [Kendo UI ListView](http://docs.telerik.com/kendo-ui/controls/data-management/listview/overview) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
+The purpose of [Kendo UI ListView](https://docs.telerik.com/kendo-ui/controls/data-management/listview/overview) is to display a custom layout of data-bound items through templates. The ListView is ideally suited for scenarios where you wish to display a list of items in a consistent manner.
 
 The ListView is designed to put you back in control when it comes to displaying data. It does not provide a default rendering of data-bound items, but, instead, relies entirely on templates to define how a list of items&mdash;including alternating items and items being edited&mdash;is displayed.
 
-    @(Html.Kendo().ListView(Model) //The listview will be initially bound to the Model which is the Products table
-            .Name("productListView") //The name of the listview is mandatory. It specifies the "id" attribute of the widget.
-            .TagName("div") //The tag name of the listview is mandatory. It specifies the element which wraps all listview items.
-            .ClientTemplateId("template") // This template will be used for rendering the listview items.
-            .DataSource(dataSource => {
-                dataSource.Read(read => read.Action("Products_Read", "ListView"));
-            }) // DataSource configuration. It will be used on paging.
-            .Pageable() //Enable paging
+    @(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()//The listview data source will infer the Employee Model properties and their types
+        .Name("EmployeesList") // Name is mandatory. It specifies the "id" attribute of the widget.
+        .TagName("ul") // TagName is mandatory. It specifies the element which wraps all listview items.
+        .ClientTemplateId("EmployeeItemTemplate") // The template is mandatory and will be used for rendering the listview items.
+        .DataSource(dataSource => {
+            dataSource.Read(read => read.Action("EmployeesList_Read", "Home"));
+        }) 
+        .Selectable(s => s.Mode(ListViewSelectionMode.Single))
     )
 
 Use a ListView to create a selectable list of employees containing the employee's full name and avatar image.
 
 #### Exercise: Add a ListView to the Dashboard
 
-1. Since you will need to update the `HomeController`, stop the project if it is already running.
 1. Open `/Views/Home/Index.cshtml` and find the `<!-- Employee List View -->` placeholder.
 1. Remove the `<ul>` and its child elements that follow `<!-- Employee List View -->`.
 1. Now add a Kendo UI ListView of type `KendoQsBoilerplate.Employee` using the `@(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()` Fluent HTML Helper.
@@ -473,19 +472,21 @@ Use a ListView to create a selectable list of employees containing the employee'
 
     	<!-- Employee List View -->
     	@(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()
-                    .Name("EmployeesList")
-                    .ClientTemplateId("EmployeeItemTemplate")
-                    .TagName("ul")
-                    .DataSource(dataSource =>
-                    {
-                        dataSource.Read(read => read.Action("EmployeesList_Read", "Home"));
-                    })
-                    .Selectable(s => s.Mode(ListViewSelectionMode.Single))
+            .Name("EmployeesList")
+            .ClientTemplateId("EmployeeItemTemplate")
+            .TagName("ul")
+            .DataSource(dataSource =>
+            {
+                dataSource.Read(read => read.Action("EmployeesList_Read", "Home"));
+            })
+            .Selectable(s => s.Mode(ListViewSelectionMode.Single))
         )
 
 Now that the ListView is defined, you'll need to supply the datasource with the employee data by creating the `read` action for the ListView.
 
 #### Exercise: Create the EmployeesList_Read Action
+
+1. Since you will need to update the `HomeController`, stop the project if it is already running.
 
 1. Open `Controllers/HomeController.cs` and add a reference to `Kendo.Mvc.UI` and `Kendo.Mvc.Extensions`. These dependencies are needed for the `DataSourceRequest` object and `.ToDataSourceResult` extension method.
 
@@ -514,7 +515,7 @@ The ListView is almost complete. However, the ListView still needs a template to
 
 ### Overview
 
-The [Kendo UI Templates](http://docs.telerik.com/kendo-ui/framework/templates/overview) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI framework. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
+The [Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview) provide a simple-to-use, high-performance JavaScript templating engine within the Kendo UI framework. Templates offer a way to create HTML chunks that can be automatically merged with JavaScript data. They are a substitute for traditional HTML string building in JavaScript.
 
 Kendo UI Templates use a simple templating syntax called hash templates. With this syntax, the `#` (hash) sign is used to mark areas in a template that should be replaced by data when the template is executed. The `#` character is also used to signify the beginning and end of custom JavaScript code inside the template.
 
@@ -578,17 +579,18 @@ The client side is where Kendo UI really shines. Kendo UI uses a common JavaScri
 
 Telerik UI for MVC helpers provide an Events method that is part of the HTML Helper's property chain. The `events` method is used to set event handlers for the Kendo UI widget. Each widget has a variety of events that can be handled including: `cancel`, `change`, `dataBound`, `dataBinding`, `edit`, `remove`, and `save`.
 
-    @(Html.Kendo().ListView<ProductViewModel>()
-            .Name("listView")
-            .TagName("div")
-            .ClientTemplateId("template")
-            .DataSource(dataSource => {
-                dataSource.Read(read => read.Action("Products_Read", "ListView"));
-            })
-            .Events(e => e
-                .DataBound("productListView_dataBound")
-                .Change("productListView_change")
-            )
+     @(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()
+        .Name("EmployeesList")
+        .TagName("ul")
+        .ClientTemplateId("EmployeeItemTemplate")
+        .DataSource(dataSource => {
+            dataSource.Read(read => read.Action("EmployeesList_Read", "Home"));
+        })
+        .Selectable(s => s.Mode(ListViewSelectionMode.Single))
+        .Events(e => e
+            .DataBound("onListDataBound")
+            .Change("onCriteriaChange")
+        )
     )
 
 Let's continue to work with the `EmployeesList` that was created in the previous chapter. The list is selectable, but when the application starts the first item should be selected by default giving the user a starting point to begin interacting with the dashboard.
@@ -598,10 +600,10 @@ Let's continue to work with the `EmployeesList` that was created in the previous
 1. Find the `EmployeeList`.
 
     	<!-- Employee List View -->
-    	@(Html.Kendo().ListView<Employee>()
-                .Name("EmployeesList")
-    			...
-            	.Selectable(s => s.Mode(ListViewSelectionMode.Single))
+    	@(Html.Kendo().ListView<KendoQsBoilerplate.Employee>()
+            .Name("EmployeesList")
+    		...
+            .Selectable(s => s.Mode(ListViewSelectionMode.Single))
     	)
 
 1. Add an event handler named `onListDataBound` for the `DataBound` event for the EmployeeList.
@@ -624,8 +626,8 @@ Let's continue to work with the `EmployeesList` that was created in the previous
             	dataSource.Read(read => read.Action("EmployeesList_Read", "Home"));
             	dataSource.PageSize(9);
     		})
-            	.Selectable(s => s.Mode(ListViewSelectionMode.Single))
-                .Events(e => e.DataBound("onListDataBound"))
+            .Selectable(s => s.Mode(ListViewSelectionMode.Single))
+            .Events(e => e.DataBound("onListDataBound"))
     	)
 
 1. In the same view, find the `Scripts` section.
@@ -643,7 +645,9 @@ Let's continue to work with the `EmployeesList` that was created in the previous
     	    <script>
     	        //Custom Scripts
     			function onListDataBound(e) {
-    		        this.select($(".employee:first"));
+                    var listView = this;
+                    var firstChild = listView.element.children().first();
+    		        listView.select(firstChild);
     		    }
     	    </script>
     	}
@@ -685,7 +689,7 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
     		...
         </script>
 
-1. Add a function named `getSelectedEmployee` that returns the selected employee from the `EmployeeList`.
+1. Add a function named `getSelectedEmployee` that returns the selected employee from the `EmployeeList` using the unique `uid` that the Kendo UI DataSource generates for each dataItem with the [`getByUid()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/getbyuid) method.
 
     	function getSelectedEmployee() {
         	var employeeList = $("#EmployeesList").data("kendoListView"),
@@ -693,7 +697,7 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
     		return employee;
     	}
 
-1. Add a function named `updateEmployeeAvatar` that binds the selected employee data to the `employeeAvatarTemplate` and places the template's content in the `employee-about` element.
+1. Add a function named `updateEmployeeAvatar` that binds the selected employee data to the `employeeAvatarTemplate` and places the template's content in the `employee-about` element. The [`kendo.template()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/template) method allows us to bind the data to the HTML. 
 
     	function updateEmployeeAvatar() {
             var employee = getSelectedEmployee(),
@@ -711,7 +715,7 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
 
 1. Refresh the page and select an employee from the `EmployeeList`. Selecting an item should update the dashboard with the selected employee's data.
 
-    ![Selecting an item to template](images/chapter6/selected-item-to-template.jpg)
+    ![Selecting an item to template](images/chapter6/selected-item-to-template.png)
 
 1. Find and remove the `<!-- Employee Avatar -->` placeholder code, it is no longer needed because the element is created dynamically. Remove the code shown in the example below.
 

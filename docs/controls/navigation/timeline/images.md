@@ -1,18 +1,18 @@
 ---
 title: Images
-page_title: jQuery TimeLine Documentation | Images | Kendo UI
-description: "Adding images in the Kendo UI jQuery TimeLine card."
+page_title: jQuery Timeline Documentation | Images | Kendo UI
+description: "Adding images in the Kendo UI jQuery Timeline card."
 slug: images_kendoui_timeline_widget
 position: 4
 ---
 
 # Images
 
-The TimeLine can render an `<img />` tag for the first item of its `images` collection in the data source.
+The Timeline can render an `<img />` tag for the first item of its `images` collection in the data source.
 
 Its `src` attribute will be set to the value of the `src` field of the image literal.
 
-The following example demonstrates how to use a field with a specific name to provide an image for the events. To show more than one image, customize the [template of the TimeLine]({% slug templates_kendoui_timeline_widget %}).
+The following example demonstrates how to use a field with a specific name to provide an image for the events. To show more than one image, customize the [template of the Timeline]({% slug templates_kendoui_timeline_widget %}).
 
 ```
 <div id="timeline"></div>
@@ -64,5 +64,5 @@ The following example demonstrates how to use a field with a specific name to pr
 
 ## See Also
 
-* [Templates in the TimeLine]({% slug templates_kendoui_timeline_widget %})
-* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
+* [Templates in the Timeline]({% slug templates_kendoui_timeline_widget %})
+* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)

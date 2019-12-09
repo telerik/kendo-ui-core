@@ -1,16 +1,16 @@
 ---
 title: Templates
-page_title: TimeLine Templates | Telerik UI for ASP.NET Core HTML Helpers
-description: "Event templates in the Telerik UI TimeLine HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Timeline Templates | Telerik UI for ASP.NET Core HTML Helpers
+description: "Event templates in the Telerik UI Timeline HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: templates_htmlhelpers_timeline_aspnetcore
 position: 20
 ---
 
 # Templates
 
-The TimeLine lets you define your own template for rendering the events data, so you can customize it to your needs instead of using the default card.
+The Timeline lets you define your own template for rendering the events data, so you can customize it to your needs instead of using the default card.
 
-You can find a live example in the [Templates demo of the TimeLine](https://demos.telerik.com/aspnet-core/timeline/templates).
+You can find a live example in the [Templates demo of the Timeline](https://demos.telerik.com/aspnet-core/timeline/templates).
 
 The following example shows how you can customize the template of the timeline - to show more than one image and how you can use custom fields from your model that would not be recognized by the default template. The classes and HTML structure in this example mimic the default card template (except the custom field).
 
@@ -26,7 +26,7 @@ The following example shows how you can customize the template of the timeline -
            .DataTitleField("Title")
            .DataImagesField("Images")
            .DataActionsField("Actions")
-           .DataSource(dt => dt.Read("GetTimeLineData", "Timeline"))
+           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
 )
 
 <script id="eventTemplate" type="text/x-kendo-template">
@@ -53,7 +53,7 @@ The following example shows how you can customize the template of the timeline -
 ```Controller
 public partial class Timeline : BaseController
 {
-    public JsonResult GetTimeLineData()
+    public JsonResult GetTimelineData()
     {
         List<TimelineEventModel> events = new List<TimelineEventModel>();
 
@@ -121,5 +121,5 @@ public class TimelineEventActionModel
 ## See Also
 
 
-* [Templates in the TimeLine (Demo)](https://demos.telerik.com/aspnet-core/timeline/templates).
-* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
+* [Templates in the Timeline (Demo)](https://demos.telerik.com/aspnet-core/timeline/templates).
+* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)

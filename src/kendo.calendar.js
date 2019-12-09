@@ -1130,11 +1130,11 @@ var __meta__ = { // jshint ignore:line
 
             links = element.find(".k-link")
             .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
-            .on("click", function() { return false; });
+            .on(CLICK + " touchend" + ns, function() { return false; } );
 
-            that._title = links.eq(1).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateUp(); });
-            that[PREVARROW] = links.eq(0).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToPast(); });
-            that[NEXTARROW] = links.eq(2).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToFuture(); });
+            that._title = links.eq(1).on(CLICK + " touchend" + ns, function() { that._active = that.options.focusOnNav !== false; that.navigateUp(); });
+            that[PREVARROW] = links.eq(0).on(CLICK + " touchend" + ns, function() { that._active = that.options.focusOnNav !== false; that.navigateToPast(); });
+            that[NEXTARROW] = links.eq(2).on(CLICK + " touchend" + ns, function() { that._active = that.options.focusOnNav !== false; that.navigateToFuture(); });
         },
 
         _navigate: function(arrow, modifier) {

@@ -1,14 +1,14 @@
 ---
 title: Actions
-page_title: TimeLine Actions | Telerik UI for ASP.NET MVC HTML Helpers
-description: "Action links in the Telerik UI TimeLine HtmlHelper for ASP.NET MVC."
+page_title: Timeline Actions | Telerik UI for ASP.NET MVC HTML Helpers
+description: "Action links in the Telerik UI Timeline HtmlHelper for ASP.NET MVC."
 slug: actions_timeline_aspnetmvc
 position: 10
 ---
 
 # Actions
 
-The TimeLine can render links (`<a>` tags) for the items from the `Actions` collection in its data source, so the user can navigate to the specific pages.
+The Timeline can render links (`<a>` tags) for the items from the `Actions` collection in its data source, so the user can navigate to the specific pages.
 
 The `href` attribute of an action will be set to the value of the `src` field of the action literal, and the text will come from the `text` field.
 
@@ -23,13 +23,13 @@ The example below shows how you can a few actions actions for one event.
            .DataTitleField("Title")
            .DataActionsField("Actions")
            .Orientation("horizontal")
-           .DataSource(dt => dt.Read("GetTimeLineData", "Timeline"))
+           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
 )
 ```
 ```Controller
-public partial class TimeLineController : Controller
+public partial class TimelineController : Controller
 {
-        public JsonResult GetTimeLineData()
+        public JsonResult GetTimelineData()
         {
             List<TimelineEventModel> events = new List<TimelineEventModel>();
 
@@ -81,5 +81,5 @@ public class TimelineEventActionModel
 ## See Also
 
 
-* [Basic Usage of the TimeLine (Demo)](https://demos.telerik.com/aspnet-mvc/timeline/index)
+* [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/aspnet-mvc/timeline/index)
 

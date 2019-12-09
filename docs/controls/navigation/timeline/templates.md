@@ -1,18 +1,18 @@
 ---
 title: Templates
-page_title: jQuery TimeLine Documentation | Templates | Kendo UI
-description: "Event templates in the Kendo UI jQuery TimeLine widget allow you to customize the appearance of the cards."
+page_title: jQuery Timeline Documentation | Templates | Kendo UI
+description: "Event templates in the Kendo UI jQuery Timeline widget allow you to customize the appearance of the cards."
 slug: templates_kendoui_timeline_widget
 position: 5
 ---
 
 # Templates
 
-The TimeLine enables to define your own template for rendering the events data so that you can customize it to your needs instead of using the default card.
+The Timeline enables to define your own template for rendering the events data so that you can customize it to your needs instead of using the default card.
 
-For a runnable example, refer to the [dem on using templates in the TimeLine](https://demos.telerik.com/kendo-ui/timeline/templates).
+For a runnable example, refer to the [dem on using templates in the Timeline](https://demos.telerik.com/kendo-ui/timeline/templates).
 
-The following example demonstrates how to customize the template of the TimeLine. To render more than one image, use custom fields from your model that will not be recognized by the default template. The classes and HTML structure in this example, except for the custom field, mimic the default card template.
+The following example demonstrates how to customize the template of the Timeline. To render more than one image, use custom fields from your model that will not be recognized by the default template. The classes and HTML structure in this example, except for the custom field, mimic the default card template.
 
 ```
 <div id="timeline"></div>
@@ -109,5 +109,5 @@ The following example demonstrates how to customize the template of the TimeLine
 
 ## See Also
 
-* [Templates in the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/templates).
-* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
+* [Templates in the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/templates).
+* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)

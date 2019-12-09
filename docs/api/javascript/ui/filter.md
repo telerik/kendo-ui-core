@@ -247,7 +247,7 @@ The [template](/api/javascript/kendo/methods/template) which the widget will use
       });
     </script>
 
-### fields.format `String`
+### fields.previewFormat `String`
 
 The format of the value displayed in the preview.
 
@@ -272,7 +272,7 @@ The format of the value displayed in the preview.
           { 
             name: "age", 
             type:"number",
-            format:'n2'
+            previewFormat:'n2'
           },
           { name: "name", type:"string" }
         ]
