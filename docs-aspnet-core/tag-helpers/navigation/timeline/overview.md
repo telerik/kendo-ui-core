@@ -1,30 +1,30 @@
 ---
 title: Overview
-page_title: TimeLine Overview | Telerik UI for ASP.NET Core TagHelpers
-description: "Learn the basics when working with the Telerik UI TimeLine for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Timeline Overview | Telerik UI for ASP.NET Core TagHelpers
+description: "Learn the basics when working with the Telerik UI Timeline for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_taghelpers_timeline_aspnetcore
 position: 1
 ---
 
-# TimeLine Overview
+# Timeline Overview
 
-The Telerik UI TimeLine TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI TimeLine widget.
+The Telerik UI Timeline TagHelper for ASP.NET Core is a server-side wrapper for the Kendo UI Timeline widget.
 
-The TimeLine widget displays a collection of events and their data in a chronological succession for each year.
+The Timeline widget displays a collection of events and their data in a chronological succession for each year.
 
 You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the widget behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
 
-* [Demo page for the TimeLine](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
+* [Demo page for the Timeline](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
 
-## Initializing the TimeLine
+## Initializing the Timeline
 
-The following example demonstrates how to define the TimeLine by using the TimeLine TagHelper. Note the tabs for the controller and model code that show how to feed data to the widget.
+The following example demonstrates how to define the Timeline by using the Timeline TagHelper. Note the tabs for the controller and model code that show how to feed data to the widget.
 
 ```Razor
 <kendo-timeline name="timeline" orientation="horizontal" datadatefield="EventDate" datatitlefield="Title" datasubtitlefield="Subtitle" datadescriptionfield="Description" dataactionsfield="Actions" dataimagesfield="Images">
     <datasource>
         <transport>
-            <read url="/Timeline/GetTimeLineData" />
+            <read url="/Timeline/GetTimelineData" />
         </transport>
         <schema>
             <model>
@@ -37,9 +37,9 @@ The following example demonstrates how to define the TimeLine by using the TimeL
 </kendo-timeline>
 ```
 ```Controller
-public partial class TimeLine : BaseController
+public partial class Timeline : BaseController
 {
-    public JsonResult GetTimeLineData()
+    public JsonResult GetTimelineData()
     {
         List<TimelineEventModel> events = new List<TimelineEventModel>();
 
@@ -117,6 +117,6 @@ public class TimelineEventActionModel
 
 ## See Also
 
-* [Basic Usage of the TimeLine TagHelper (Demo)](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
+* [Basic Usage of the Timeline TagHelper (Demo)](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
 
 

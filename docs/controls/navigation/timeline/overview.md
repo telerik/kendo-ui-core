@@ -1,30 +1,30 @@
 ---
 title: Overview
-page_title: jQuery TimeLine Documentation | TimeLine Overview | Kendo UI
-description: "Get started with the jQuery TimeLine by Kendo UI and learn how to initialize the widget and use its events."
+page_title: jQuery Timeline Documentation | Timeline Overview | Kendo UI
+description: "Get started with the jQuery Timeline by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_timeline_widget
 position: 1
 ---
 
-# TimeLine Overview
+# Timeline Overview
 
-The Kendo UI TimeLine widget displays a collection of events and their data in a chronological succession for each year.
+The Kendo UI Timeline widget displays a collection of events and their data in a chronological succession for each year.
 
 You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the widget behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
 
-* [Demo page for the TimeLine](https://demos.telerik.com/kendo-ui/timeline/index)
+* [Demo page for the Timeline](https://demos.telerik.com/kendo-ui/timeline/index)
 
-The following image demonstrates a TimeLine widget.
+The following image demonstrates a Timeline widget.
 
-![A Kendo UI TimeLine widget](images/timeline-overview.png)
+![A Kendo UI Timeline widget](images/timeline-overview.png)
 
-## Initializing the TimeLine
+## Initializing the Timeline
 
-To initialize the TimeLine, use a blank `<div>` element and the `kendoTimeline()` method. In its arguments, provide a JSON literal with the options for the widget and a data source that contains the information about the events.
+To initialize the Timeline, use a blank `<div>` element and the `kendoTimeline()` method. In its arguments, provide a JSON literal with the options for the widget and a data source that contains the information about the events.
 
-> Create the TimeLine within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
+> Create the Timeline within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 
-The following example demonstrates how to initialize the TimeLine from a JSON `data` object. You can use a remote data source that will return the array of JSON literals instead of a local array of data. The `date` field in such a data source must be parsable by JavaScript (for example, `yyyy-mm-dd` or [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)). The widget data source is a [Kendo DataSource](/framework/datasource/overview) widget so you can use its features.
+The following example demonstrates how to initialize the Timeline from a JSON `data` object. You can use a remote data source that will return the array of JSON literals instead of a local array of data. The `date` field in such a data source must be parsable by JavaScript (for example, `yyyy-mm-dd` or [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)). The widget data source is a [Kendo DataSource](/framework/datasource/overview) widget so you can use its features.
 
 ```dojo
 <div id="timeline"></div>
@@ -115,20 +115,20 @@ The following example demonstrates how to initialize the TimeLine from a JSON `d
 
 ## Referencing Existing Instances
 
-To refer to an existing TimeLine instance, use the `jQuery.data()` method. Once a reference is established, use the [TimeLine API](/api/javascript/ui/timeline) to control its behavior.
+To refer to an existing Timeline instance, use the `jQuery.data()` method. Once a reference is established, use the [Timeline API](/api/javascript/ui/timeline) to control its behavior.
 
 ```
-var timeLine = $("#timeline").data("kendoTimeLine");
+var timeLine = $("#timeline").data("kendoTimeline");
 ```
 
 ## Events
 
-For a complete example on the basic TimeLine events, refer to the [demo on using the events of the TimeLine](https://demos.telerik.com/kendo-ui/timeline/events) or to its [API reference](/api/javascript/ui/timeline#events).
+For a complete example on the basic Timeline events, refer to the [demo on using the events of the Timeline](https://demos.telerik.com/kendo-ui/timeline/events) or to its [API reference](/api/javascript/ui/timeline#events).
 
 ## See Also
 
-* [Basic Usage of the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/index)
-* [Using the Basic Events of the TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/events)
-* [Binding the TimeLine over MVVM (Demo)](https://demos.telerik.com/kendo-ui/timeline/mvvm)
-* [Applying the TimeLine API (Demo)](https://demos.telerik.com/kendo-ui/timeline/api)
-* [JavaScript API Reference of the TimeLine](/api/javascript/ui/timeline)
+* [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/index)
+* [Using the Basic Events of the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/events)
+* [Binding the Timeline over MVVM (Demo)](https://demos.telerik.com/kendo-ui/timeline/mvvm)
+* [Applying the Timeline API (Demo)](https://demos.telerik.com/kendo-ui/timeline/api)
+* [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)

@@ -1,14 +1,14 @@
 ---
 title: Orientation
-page_title: TimeLine Orientation | Telerik UI for ASP.NET MVC HTML Helpers
-description: "See how to control the orientation of the Telerik UI TimeLine HtmlHelper for ASP.NET MVC."
+page_title: Timeline Orientation | Telerik UI for ASP.NET MVC HTML Helpers
+description: "See how to control the orientation of the Telerik UI Timeline HtmlHelper for ASP.NET MVC."
 slug: orientation_timeline_aspnetmvc
 position: 5
 ---
 
 # Orientation
 
-The TimeLine can render its events in a [vertical](#vertical) or [horizontal](#horizontal) list.
+The Timeline can render its events in a [vertical](#vertical) or [horizontal](#horizontal) list.
 
 ## Vertical
 
@@ -30,13 +30,13 @@ If you add the `.CollapsibleEvents()` option, all events will start out collapse
            .DataTitleField("Title")
            .DataImagesField("Images")
            .DataActionsField("Actions")
-           .DataSource(dt => dt.Read("GetTimeLineData", "TimeLine"))
+           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
 )
 ```
 ```Controller
-public partial class TimeLineController : Controller
+public partial class TimelineController : Controller
 {
-    public JsonResult GetTimeLineData()
+    public JsonResult GetTimelineData()
     {
         List<TimelineEventModel> events = new List<TimelineEventModel>();
 
@@ -129,13 +129,13 @@ Alternating rendering and collapsing is not available for the events in this mod
            .DataTitleField("Title")
            .DataImagesField("Images")
            .DataActionsField("Actions")
-           .DataSource(dt => dt.Read("GetTimeLineData", "TimeLine"))
+           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
 )
 ```
 ```Controller
-public partial class TimeLineController : Controller
+public partial class TimelineController : Controller
 {
-    public JsonResult GetTimeLineData()
+    public JsonResult GetTimelineData()
     {
         List<TimelineEventModel> events = new List<TimelineEventModel>();
 
@@ -210,6 +210,6 @@ public class TimelineEventActionModel
 
 ## See Also
 
-* [Horizontal Orientation of the TimeLine (Demo)](https://demos.telerik.com/aspnet-mvc/timeline/horizontal)
+* [Horizontal Orientation of the Timeline (Demo)](https://demos.telerik.com/aspnet-mvc/timeline/horizontal)
 
 

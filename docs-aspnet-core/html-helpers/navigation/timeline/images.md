@@ -1,18 +1,18 @@
 ---
 title: Images
-page_title: TimeLine Images | Telerik UI for ASP.NET Core HTML Helpers
-description: "Adding images in the Telerik UI TimeLine HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+page_title: Timeline Images | Telerik UI for ASP.NET Core HTML Helpers
+description: "Adding images in the Telerik UI Timeline HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: images_htmlhelpers_timeline_aspnetcore
 position: 15
 ---
 
 # Images
 
-The TimeLine can render an `<img />` tag for the first item from the `Images` collection in its data source. Its `src` attribute will be set to the value of the `src` field of the image literal.
+The Timeline can render an `<img />` tag for the first item from the `Images` collection in its data source. Its `src` attribute will be set to the value of the `src` field of the image literal.
 
 The example below shows how you can add an image for the events.
 
->tip If you want to show more than one image, you need to customize the [template of the TimeLine](templates).
+>tip If you want to show more than one image, you need to customize the [template of the Timeline](templates).
 
 
 ```Razor
@@ -24,13 +24,13 @@ The example below shows how you can add an image for the events.
            .DataTitleField("Title")
            .DataImagesField("Images")
            .Orientation("vertical")
-           .DataSource(dt => dt.Read("GetTimeLineData", "Timeline"))
+           .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
 )
 ```
 ```Controller
-public partial class TimeLine : BaseController
+public partial class Timeline : BaseController
 {
-    public JsonResult GetTimeLineData()
+    public JsonResult GetTimelineData()
     {
         List<TimelineEventModel> events = new List<TimelineEventModel>();
 
@@ -81,5 +81,5 @@ public class TimelineEventImageModel
 ## See Also
 
 
-* [Templates in the TimeLine]({% slug templates_htmlhelpers_timeline_aspnetcore %}).
-* [Basic Usage of the TimeLine (Demo)](https://demos.telerik.com/aspnet-core/timeline/index)
+* [Templates in the Timeline]({% slug templates_htmlhelpers_timeline_aspnetcore %}).
+* [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/aspnet-core/timeline/index)

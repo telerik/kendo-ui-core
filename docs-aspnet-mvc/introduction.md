@@ -117,7 +117,7 @@ The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 20
 |                           |[PanelBar Docs]({% slug overview_panelbarhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/panelbar)     
 |                           |[RadioButton Docs]({% slug overview_radiobuttonhelper_aspnetmvc %})     
 |                           |[TabStrip Docs]({% slug overview_tabstrip_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/tabstrip)         
-|                           |[TimeLine Docs]({% slug overview_timeline_aspnetmvc %})    
+|                           |[Timeline Docs]({% slug overview_timeline_aspnetmvc %})    
 |                           |[ToolBar Docs]({% slug overview_toolbarhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/toolbar)      
 |                           |[TreeView Docs]({% slug overview_treeviewhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/treeview)        
 |**Conversational UI**      |[Chat Docs]({% slug overview_chathelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/chat)             
