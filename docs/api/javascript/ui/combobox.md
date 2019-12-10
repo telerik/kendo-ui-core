@@ -1801,7 +1801,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           var filter = e.filter;
 
-          if (!filter.value) {
+          if (filter && !filter.value) {
             //prevent filtering if the filter does not value
             e.preventDefault();
           }
