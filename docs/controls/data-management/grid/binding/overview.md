@@ -19,8 +19,8 @@ Immediately after the Grid loads, the [DataSource]({% slug overview_kendoui_data
     });
 
 For more information about binding the Grid to data, refer to the articles on:
-* [Local data binding]({% slug virtual_scrolling_kendoui_grid_widget %})
-* [Remote data binding]({% slug endless_scrolling_kendoui_grid_widget %})
+* [Local data binding]({% slug local_data_grid %})
+* [Remote data binding]({% slug remote_data_binding_grid %})
 
 ## KB Articles on Binding
 

@@ -63,7 +63,8 @@ The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 20
 |Group                      |HTML Helpers                                 
 | :---                      | :---                                                                            
 | **Data Source**           |[DataSource Demos](https://demos.telerik.com/aspnet-mvc/datasource)                      
-| **Data Management**       |[Grid Docs]({% slug overview_gridhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/grid)     
+| **Data Management**       |[Filter Docs]({% slug overview_filterhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/filter)     
+|                           |[Grid Docs]({% slug overview_gridhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/grid)     
 |                           |[ListView Docs]({% slug overview_listviewhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/listview)    
 |                           |[PivotGrid Docs]({% slug overview_pivotgridhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/pivotgrid)  
 |                           |[Spreadsheet Docs]({% slug overview_spreadsheethelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/spreadsheet)
@@ -126,7 +127,6 @@ The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 20
 |**Media**                  |[MediaPLayer Docs]({% slug overview_mediaplayerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/mediaplayer)      
 |                           |[ScrollView Docs]({% slug htmlhelpers_scrollview_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/scrollview)       
 |**PDF**                    |[PDFViewer Docs]({% slug overview_pdfviewerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/pdfviewer)        
-|                           |[ScrollView Docs]({% slug htmlhelpers_scrollview_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/scrollview)       
 |**Hybrid UI**              |[Hybrid UI Docs]({% slug overview_pdfviewerhelper_aspnetmvc %})         
 
 ## Monitoring the Progress Live Services

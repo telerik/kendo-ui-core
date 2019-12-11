@@ -733,19 +733,19 @@ In this chapter you'll learn how to work with Kendo UI datasources.
 
 #### Overview
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data arrays of JavaScript objects or remote data web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML.
+The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data arrays of JavaScript objects or remote data web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML.
 
 The Kendo UI DataSource has many abilities and responsibilities, among which to:
 
-- [Retrieve data from a remote endpoint](http://docs.telerik.com/kendo-ui/framework/datasource/cors).
-- Maintain the [structure and type of the data (schema)](http://docs.telerik.com/kendo-ui/framework/datasource/crud#schema).
+- [Retrieve data from a remote endpoint](https://docs.telerik.com/kendo-ui/framework/datasource/cors).
+- Maintain the [structure and type of the data (schema)](https://docs.telerik.com/kendo-ui/framework/datasource/crud#setting-the-schema).
 - Process serialization formats to and from a remote endpoint.
-- [Synchronize updates, create, update, delete](http://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
-- [Maintain an in-memory cache of data, including changes](http://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-page).
-- Provide a query mechanism via [filter expressions](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter).
+- [Synchronize updates, create, update, delete](https://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
+- [Maintain an in-memory cache of data, including changes](https://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
+- Calculate and maintain [aggregates](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/aggregate), [sorting order](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/sort) and [paging](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page).
+- Provide a query mechanism via [filter expressions](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter).
 
-For detailed information on the capabilities of the [DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource](https://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](https://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 
@@ -845,7 +845,7 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
             return Json(result);
         }
 
-1. Add the `salesPerson`, `statsFrom` and `statsTo` parameters to the action.
+1. Add the `salesPerson`, `statsFrom` and `statsTo` parameters to the action. Note that the additional parameters match the parameters returned by the `getEmployeeFilter` function exactly.
 
         public ActionResult Invoices_Read([DataSourceRequest]DataSourceRequest request,
             string salesPerson,
@@ -878,7 +878,7 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. Run the project to see the behavior. Now the `EmployeeList` and `EmployeeSales` grid are in sync. When an employee is selected, only that employee's data will show in the grid.
 
-    ![](images/chapter7/datasource-filter.jpg)
+    ![](images/chapter7/datasource-filter.png)
 
 At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`. However, the data shown does not reflect the `StatsFrom`/`StatsTo` date range. With the filtering code in place, additional controls are wired up with relative ease. Let's wire up the `StatsFrom`/`StatsTo` DatePickers to `EmployeeSales`.
 
@@ -887,29 +887,29 @@ At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`.
 1. In the `/Views/Home/Index.cshtml` view, find the StatsFrom DatePicker.
 
         @(Html.Kendo().DatePicker()
-                        .Name("StatsFrom")
-                        .Value(new DateTime(1996, 1, 1))
+            .Name("StatsFrom")
+            .Value(new DateTime(1996, 1, 1))
     	)
 
 1. Add the `Events` property and set the `Change` event to `onCriteriaChange`.
 
         @(Html.Kendo().DatePicker()
-                        .Name("StatsFrom")
-                        .Value(new DateTime(1996, 1, 1))
-                        .Events(e => e.Change("onCriteriaChange"))
+            .Name("StatsFrom")
+            .Value(new DateTime(1996, 1, 1))
+            .Events(e => e.Change("onCriteriaChange"))
     	)
 
 1. Find the `StatsTo` DatePicker, set the `Events` property, and set the `Change` event to `onCriteriaChange`.
 
         @(Html.Kendo().DatePicker()
-    			        .Name("StatsTo")
-    			        .Value(new DateTime(1998, 8, 1))
-    			        .Events(e => e.Change("onCriteriaChange"))
+    		.Name("StatsTo")
+    		.Value(new DateTime(1998, 8, 1))
+    		.Events(e => e.Change("onCriteriaChange"))
     	)
 
 1. Save the changes and refresh the browser. `StatsFrom`/`StatsTo` and `EmployeeList` will update `EmployeeSales` with data based on the selected dates and employee.
 
-    ![](images/chapter7/datasource-filter2.jpg)
+    ![](images/chapter7/datasource-filter2.png)
 
 Your Team Efficiency Dashboard is now interactive. Users can filter data using dates and employees. Next, you'll enhance the application by adding some data visualizations.
 
