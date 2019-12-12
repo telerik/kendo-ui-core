@@ -75,15 +75,15 @@ The Pie Chart supports the following gradient options:
 
 * (Default) `roundedBevel`
 
-        ![A Pie Chart with roundedBevel overlay](chart-pie-overlay-roundbevel.png)
+    ![A Pie Chart with roundedBevel overlay](chart-pie-overlay-roundbevel.png)
 
 * `sharpBevel`
 
-        ![A Pie Chart with sharpBevel overlay](chart-pie-overlay-sharpbevel.png)
+    ![A Pie Chart with sharpBevel overlay](chart-pie-overlay-sharpbevel.png)
 
 * `none`
 
-        ![A Pie Chart with no overlay](chart-pie-overlay-none.png)
+    ![A Pie Chart with no overlay](chart-pie-overlay-none.png)
 
 ## See Also
 
