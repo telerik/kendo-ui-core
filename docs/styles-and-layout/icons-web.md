@@ -141,6 +141,7 @@ The font icons are sorted in groups, depending on the function they help you to 
 * [Media](#media)
 * [Social Sharing](#social-sharing)
 * [Toggle](#toggle)
+* [Charts](#charts)
 
 <!--
 stylesheet in _assets/stylesheets/icon-font.css
@@ -410,6 +411,11 @@ fonts in fonts/
     <li><span class="k-icon k-i-font-size"></span> .k-i-font-size</li>
     <li><span class="k-icon k-i-image-absolute-position"></span> .k-i-image-absolute-position</li>
     <li><span class="k-icon k-i-strip-all-formatting"></span> .k-i-strip-all-formatting</li>
+    <li><span class="k-icon k-i-crosstab"></span> .k-i-crosstab</li>
+    <li><span class="k-icon k-i-table-body"></span> .k-i-table-body</li>
+    <li><span class="k-icon k-i-table-column-groups"></span> .k-i-table-column-groups</li>
+    <li><span class="k-icon k-i-table-corner"></span> .k-i-table-corner</li>
+    <li><span class="k-icon k-i-table-row-groups"></span> .k-i-table-row-groups</li>
 </ul>
 
 ### Files and Folders
@@ -450,7 +456,30 @@ fonts in fonts/
     <li><span class="k-icon k-i-sln"></span> .k-i-sln</li>
     <li><span class="k-icon k-i-cloud"></span> .k-i-cloud</li>
     <li><span class="k-icon k-i-file-horizontal"></span> .k-i-file-horizontal</li>
-
+    <li><span class="k-icon k-i-subreport"></span> .k-i-subreport</li>
+    <li><span class="k-icon k-i-data"></span> .k-i-data</li>
+    <li><span class="k-icon k-i-report-header-section"></span> .k-i-report-header-section</li>
+    <li><span class="k-icon k-i-report-footer-section"></span> .k-i-report-footer-section</li>
+    <li><span class="k-icon k-i-group-header-section"></span> .k-i-group-header-section</li>
+    <li><span class="k-icon k-i-group-footer-section"></span> .k-i-group-footer-section</li>
+    <li><span class="k-icon k-i-page-header-section"></span> .k-i-page-header-section</li>
+    <li><span class="k-icon k-i-page-footer-section"></span> .k-i-page-footer-section</li>
+    <li><span class="k-icon k-i-detail-section"></span> .k-i-detail-section</li>
+    <li><span class="k-icon k-i-toc-section"></span> .k-i-toc-section</li>
+    <li><span class="k-icon k-i-group-section"></span> .k-i-group-section</li>
+    <li><span class="k-icon k-i-parameters"></span> .k-i-parameters</li>
+    <li><span class="k-icon k-i-data-csv"></span> .k-i-data-csv</li>
+    <li><span class="k-icon k-i-data-json"></span> .k-i-data-json</li>
+    <li><span class="k-icon k-i-data-sql"></span> .k-i-data-sql</li>
+    <li><span class="k-icon k-i-data-web"></span> .k-i-data-web</li>
+    <li><span class="k-icon k-i-group-collection"></span> .k-i-group-collection</li>
+    <li><span class="k-icon k-i-parameter-boolean"></span> .k-i-parameter-boolean</li>
+    <li><span class="k-icon k-i-parameter-date-time"></span> .k-i-parameter-date-time</li>
+    <li><span class="k-icon k-i-parameter-float"></span> .k-i-parameter-float</li>
+    <li><span class="k-icon k-i-parameter-integer"></span> .k-i-parameter-integer</li>
+    <li><span class="k-icon k-i-parameter-string"></span> .k-i-parameter-string</li>
+    <li><span class="k-icon k-i-toc-section-level"></span> .k-i-toc-section-level</li>
+    <li><span class="k-icon k-i-inherited"></span> .k-i-inherited</li>
 </ul>
 
 ### Images
@@ -500,6 +529,24 @@ fonts in fonts/
     <li><span class="k-icon k-i-full-screen"></span> .k-i-full-screen<br /> .k-i-fullscreen</li>
     <li><span class="k-icon k-i-full-screen-exit"></span> .k-i-full-screen-exit<br /> .k-i-fullscreen-exit</li>
     <li><span class="k-icon k-i-reset-color"></span> .k-i-reset-color<br /> .k-i-paint-remove<br /> .k-i-background-remove</li>
+    <li><span class="k-icon k-i-align-to-grid"></span> .k-i-align-to-grid</li>
+    <li><span class="k-icon k-i-size-to-grid"></span> .k-i-size-to-grid</li>
+    <li><span class="k-icon k-i-make-same-size"></span> .k-i-make-same-size</li>
+    <li><span class="k-icon k-i-make-same-width"></span> .k-i-make-same-width</li>
+    <li><span class="k-icon k-i-make-same-height"></span> .k-i-make-same-height</li>
+    <li><span class="k-icon k-i-make-horizontal-spacing-equal"></span> .k-i-make-horizontal-spacing-equal</li>
+    <li><span class="k-icon k-i-increase-horizontal-spacing"></span> .k-i-increase-horizontal-spacing</li>
+    <li><span class="k-icon k-i-decrease-horizontal-spacing"></span> .k-i-decrease-horizontal-spacing</li>
+    <li><span class="k-icon k-i-remove-horizontal-spacing"></span> .k-i-remove-horizontal-spacing</li>
+    <li><span class="k-icon k-i-make-vertical-spacing-equal"></span> .k-i-make-vertical-spacing-equal</li>
+    <li><span class="k-icon k-i-increase-vertical-spacing"></span> .k-i-increase-vertical-spacing</li>
+    <li><span class="k-icon k-i-decrease-vertical-spacing"></span> .k-i-decrease-vertical-spacing</li>
+    <li><span class="k-icon k-i-remove-vertical-spacing"></span> .k-i-remove-vertical-spacing</li>
+    <li><span class="k-icon k-i-eyedropper"></span> .k-i-eyedropper</li>
+    <li><span class="k-icon k-i-snap-grid"></span> .k-i-snap-grid</li>
+    <li><span class="k-icon k-i-snap-to-gridlines"></span> .k-i-snap-to-gridlines</li>
+    <li><span class="k-icon k-i-snap-to-snaplines"></span> .k-i-snap-to-snaplines</li>
+    <li><span class="k-icon k-i-dimensions"></span> .k-i-dimensions</li>
 </ul>
 
 ### Layout and Navigation
@@ -559,6 +606,8 @@ fonts in fonts/
     <li><span class="k-icon k-i-menu"></span> .k-i-menu</li>
     <li><span class="k-icon k-i-more-vertical"></span> .k-i-more-vertical</li>
     <li><span class="k-icon k-i-more-horizontal"></span> .k-i-more-horizontal</li>
+    <li><span class="k-icon k-i-home"></span> .k-i-home</li>
+    <li><span class="k-icon k-i-overlap"></span> .k-i-overlap</li>
 </ul>
 
 ### Mapping
@@ -653,6 +702,44 @@ fonts in fonts/
     <li><span class="k-icon k-i-circle"></span> .k-i-circle</li>
     <li><span class="k-icon k-i-radiobutton"></span> .k-i-radiobutton<br /> .k-i-shape-circle</li>
     <li><span class="k-icon k-i-radiobutton-checked"></span> .k-i-radiobutton-checked</li>
+</ul>
+
+### Charts
+
+<ul class="WebComponentsIcons">
+    <li><span class="k-icon k-i-graph"></span> .k-i-graph</li>
+    <li><span class="k-icon k-i-column-clustered"></span> .k-i-column-clustered</li>
+    <li><span class="k-icon k-i-column-stacked"></span> .k-i-column-stacked</li>
+    <li><span class="k-icon k-i-column-stacked100"></span> .k-i-column-stacked100</li>
+    <li><span class="k-icon k-i-column-range"></span> .k-i-column-range</li>
+    <li><span class="k-icon k-i-bar-clustered"></span> .k-i-bar-clustered</li>
+    <li><span class="k-icon k-i-bar-stacked"></span> .k-i-bar-stacked</li>
+    <li><span class="k-icon k-i-bar-stacked100"></span> .k-i-bar-stacked100</li>
+    <li><span class="k-icon k-i-bar-range"></span> .k-i-bar-range</li>
+    <li><span class="k-icon k-i-area-clustered"></span> .k-i-area-clustered</li>
+    <li><span class="k-icon k-i-area-stacked"></span> .k-i-area-stacked</li>
+    <li><span class="k-icon k-i-area-stacked100"></span> .k-i-area-stacked100</li>
+    <li><span class="k-icon k-i-area-range"></span> .k-i-area-range</li>
+    <li><span class="k-icon k-i-line-stacked"></span> .k-i-line-stacked</li>
+    <li><span class="k-icon k-i-line-stacked100"></span> .k-i-line-stacked100</li>
+    <li><span class="k-icon k-i-line-markers"></span> .k-i-line-markers</li>
+    <li><span class="k-icon k-i-line-stacked-markers"></span> .k-i-line-stacked-markers</li>
+    <li><span class="k-icon k-i-line-stacked100-markers"></span> .k-i-line-stacked100-markers</li>
+    <li><span class="k-icon k-i-pie"></span> .k-i-pie</li>
+    <li><span class="k-icon k-i-doughnut"></span> .k-i-doughnut</li>
+    <li><span class="k-icon k-i-scatter"></span> .k-i-scatter</li>
+    <li><span class="k-icon k-i-scatter-smooth-lines-markers"></span> .k-i-scatter-smooth-lines-markers</li>
+    <li><span class="k-icon k-i-scatter-smooth-lines"></span> .k-i-scatter-smooth-lines</li>
+    <li><span class="k-icon k-i-scatter-straight-lines-markers"></span> .k-i-scatter-straight-lines-markers</li>
+    <li><span class="k-icon k-i-scatter-straight-lines"></span> .k-i-scatter-straight-lines</li>
+    <li><span class="k-icon k-i-bubble"></span> .k-i-bubble</li>
+    <li><span class="k-icon k-i-candlestick"></span> .k-i-candlestick</li>
+    <li><span class="k-icon k-i-bar"></span> .k-i-bar</li>
+    <li><span class="k-icon k-i-radar"></span> .k-i-radar</li>
+    <li><span class="k-icon k-i-radar-markers"></span> .k-i-radar-markers</li>
+    <li><span class="k-icon k-i-radar-filled"></span> .k-i-radar-filled</li>
+    <li><span class="k-icon k-i-rose"></span> .k-i-rose</li>
+    <li><span class="k-icon k-i-choropleth"></span> .k-i-choropleth</li>
 </ul>
 
 <script>

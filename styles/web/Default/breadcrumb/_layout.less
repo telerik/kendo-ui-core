@@ -1,10 +1,10 @@
 .k-breadcrumb {
-    margin-right: @breadcrumb-margin-x;
     box-sizing: border-box;
     border: 0;
     display: flex;
     flex-direction: row;
     background-color: transparent;
+    min-height: @breadcrumb-min-height;
 
     // Items
     .k-breadcrumb-container {
@@ -14,6 +14,7 @@
         flex-direction: row;
         flex-wrap: nowrap;
         list-style: none;
+        overflow: hidden;
     }
 
     .k-breadcrumb-item {
@@ -21,26 +22,49 @@
         display: inline-flex;
         flex-direction: row;
         align-items: center;
+        overflow: hidden;
     }
-    .k-breadcrumb-item .k-link {
+
+    .k-breadcrumb-root-item {
+        flex: 1 0 auto;
+    }
+
+    .k-breadcrumb-link,
+    .k-breadcrumb-root-link {
+        padding: @breadcrumb-link-padding-y @breadcrumb-link-padding-x;
+        border-radius: @breadcrumb-link-border-radius;
+        position: relative;
+        line-height: @breadcrumb-link-line-height;
+        display: inline-flex;
+        align-items: center;
+        align-self: stretch;
+        overflow: hidden;
         white-space: nowrap;
+        text-decoration: none;
+        outline: none;
     }
 
-    .k-breadcrumb-icon {
-        padding: @breadcrumb-icon-padding-y @breadcrumb-icon-padding-x;
-        font-size: @breadcrumb-icon-font-size;
+    .k-breadcrumb-root-link {
+        margin-right: @breadcrumb-root-link-spacing;
     }
 
-    .k-breadcrumb-overflow-icon {
-        padding: 0 0 0 @breadcrumb-icon-padding-x;
+    .k-breadcrumb-icon-link {
+        padding: @breadcrumb-icon-link-padding-y @breadcrumb-icon-link-padding-x;
     }
-    .k-breadcrumb-overflow-icon + .k-breadcrumb-overflow-icon {
-        padding: 0 @breadcrumb-icon-padding-x 0 0;
+
+    .k-breadcrumb-icontext-link .k-icon {
+        margin-right: @breadcrumb-link-icon-spacing;
+    }
+
+    .k-breadcrumb-delimiter-icon {
+        font-size: @breadcrumb-delimiter-icon-font-size;
     }
 
     // Editing
-    .k-textbox {
+    .k-breadcrumb-input-container,
+    .k-breadcrumb-input-container .k-textbox {
         width: 100%;
+        height: 100%;
     }
 }
 
@@ -52,14 +76,5 @@
 
     .k-breadcrumb-item {
         display: inline-block;
-    }
-}
-
-// RTL
-.k-rtl,
-[dir="rtl"] {
-    .k-breadcrumb {
-        margin-right: 0;
-        margin-left: @breadcrumb-margin-x;
     }
 }

@@ -328,7 +328,7 @@
 
 
 // Breadcrumb
-@breadcrumb-margin-x: @button-padding-x;
+@breadcrumb-min-height: 2.682em;
 
 @breadcrumb-container-padding-x: 0;
 @breadcrumb-container-padding-y: 0;
@@ -336,10 +336,21 @@
 @breadcrumb-container-margin-x: 0;
 @breadcrumb-container-margin-y: 0;
 
+@breadcrumb-link-padding-x: @button-padding-x;
+@breadcrumb-link-padding-y: @button-padding-y;
+@breadcrumb-link-line-height: 1.6em;
+@breadcrumb-link-border-radius: 4px;
+
+@breadcrumb-icon-link-padding-x: @breadcrumb-link-padding-x;
+@breadcrumb-icon-link-padding-y: @breadcrumb-icon-link-padding-x;
+
+@breadcrumb-root-link-spacing: @breadcrumb-link-padding-x;
+@breadcrumb-link-icon-spacing: @button-padding-x;
+
 @breadcrumb-root-icon-font-size: @icon-size;
-@breadcrumb-icon-font-size: 12px;
-@breadcrumb-icon-padding-x: @button-padding-x;
-@breadcrumb-icon-padding-y: 0;
+@breadcrumb-delimiter-icon-font-size: 12px;
+@breadcrumb-delimiter-icon-padding-x: calc( @button-padding-x / 2 );
+@breadcrumb-delimiter-icon-padding-y: 0;
 
 // Badge
 @badge-font-size: 75%;
@@ -514,6 +525,9 @@
 .k-edit-form-container .k-button {
     margin: 0;
     padding: 10px 11px;
+}
+.k-edit-form-container .k-breadcrumb .k-button {
+    padding: @button-padding-y (@button-padding-x / 2);
 }
 
 .k-edit-form-container .k-primary {
