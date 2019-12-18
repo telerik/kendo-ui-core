@@ -40,7 +40,7 @@ The TreeMap displays hierarchical data in a traditional tree structure.
         %>
     ```
     ```Razor
-        $(Html.Kendo().TreeMap()
+        @(Html.Kendo().TreeMap()
             .Name("treeMap")
             .DataSource(dataSource => dataSource
                 .Read(read => read
@@ -81,7 +81,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 ```Razor
-    $(Html.Kendo().TreeMap()
+    @(Html.Kendo().TreeMap()
             .Name("treemap")
             .Events(events => events
                 .ItemCreated("onItemCreated")
