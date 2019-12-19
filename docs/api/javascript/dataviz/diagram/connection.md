@@ -14,7 +14,8 @@ Connections are usually created by calling [connect](/api/dataviz/diagram#method
 
 Defines the options for the label displayed on the connection path.
 
-```dojo
+#### Example - configuring the content
+
     <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
@@ -36,7 +37,7 @@ Defines the options for the label displayed on the connection path.
 
       diagram.addConnection(connection);
     </script>
-```
+
 
 ### content.color `String`
 
@@ -74,7 +75,8 @@ The static text displayed on the connection.
 
 A function returning a visual element to render for the content of a connection.
 
-```dojo
+#### Example - configuring the content
+
     <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
@@ -98,7 +100,7 @@ A function returning a visual element to render for the content of a connection.
 
       diagram.addConnection(connection);
     </script>
-```
+
 
 ### fromConnector `String` *(default: "Auto")*
 
