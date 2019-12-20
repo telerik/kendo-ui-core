@@ -413,6 +413,8 @@ footer_social:
     linkedin: https://www.linkedin.com/showcase/telerik/
     twitter: https://twitter.com/Telerik/
 
+# improved feedback form
+feedback_ab: true
 
 # Assets pipeline configuration
 assets:
