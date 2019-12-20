@@ -156,6 +156,8 @@ html .k-upload
 
 .k-file-extension-wrapper,
 .k-file-name-size-wrapper,
+.k-file-group-wrapper,
+.k-multiple-files-group-wrapper,
 .k-multiple-files-extension-wrapper,
 .k-file-invalid-extension-wrapper,
 .k-multiple-files-invalid-extension-wrapper {
@@ -184,6 +186,24 @@ html .k-upload
 .k-multiple-files-extension-wrapper,
 .k-multiple-files-invalid-extension-wrapper {
     margin-top: 4px;
+}
+
+.k-file-group-wrapper,
+.k-file-invalid-group-wrapper,
+.k-multiple-files-group-wrapper,
+.k-multiple-files-invalid-group-wrapper {
+    .k-file-group{
+        font-size: 32px;
+    }
+
+    .k-file-state {
+        position: absolute;
+    }
+}
+
+.k-multiple-files-group-wrapper,
+.k-multiple-files-invalid-group-wrapper {
+    vertical-align: top;
 }
 
 .k-file-state {

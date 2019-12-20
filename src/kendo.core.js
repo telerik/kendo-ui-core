@@ -4471,6 +4471,48 @@ function pad(number, digits, end) {
         }[bootstrapMedia];
     };
 
+    kendo.fileGroupMap = {
+        audio: [".aif", ".iff", ".m3u", ".m4a", ".mid", ".mp3", ".mpa", ".wav", ".wma", ".ogg", ".wav", ".wma", ".wpl"],
+        video: [".3g2", ".3gp", ".avi", ".asf", ".flv", ".m4u", ".rm", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg",
+                ".rm", ".swf", ".vob", ".wmv"],
+        image: [".ai", ".dds", ".heic", ".jpe", "jfif", ".jif", ".jp2", ".jps", ".eps", ".bmp", ".gif", ".jpeg",
+                ".jpg", ".png", ".ps", ".psd", ".svg", ".svgz", ".tif", ".tiff"],
+        txt: [".doc", ".docx", ".log", ".pages", ".tex", ".wpd", ".wps", ".odt", ".rtf", ".text", ".txt", ".wks"],
+        presentation: [".key", ".odp", ".pps", ".ppt", ".pptx"],
+        data: [".xlr", ".xls", ".xlsx"],
+        programming: [".tmp", ".bak", ".msi", ".cab", ".cpl", ".cur", ".dll", ".dmp", ".drv", ".icns", ".ico", ".link",
+                      ".sys", ".cfg", ".ini", ".asp", ".aspx", ".cer", ".csr", ".css", ".dcr", ".htm", ".html", ".js",
+                      ".php", ".rss", ".xhtml"],
+        pdf: [".pdf"],
+        config: [".apk", ".app", ".bat", ".cgi", ".com", ".exe", ".gadget", ".jar", ".wsf"],
+        zip: [".7z", ".cbr", ".gz", ".sitx", ".arj", ".deb", ".pkg", ".rar", ".rpm", ".tar.gz", ".z", ".zip", ".zipx"],
+        "disc-image": [".dmg", ".iso", ".toast", ".vcd", ".bin", ".cue", ".mdf"]
+    };
+
+    kendo.getFileGroup = function(extension) {
+        var fileTypeMap = kendo.fileGroupMap;
+        var groups = Object.keys(fileTypeMap);
+        var type = "file";
+
+        if (extension === undefined) {
+            return "";
+        }
+
+        if (extension === "") {
+            return "folder";
+        }
+
+        for (var i = 0; i < groups.length; i += 1) {
+            var extensions = fileTypeMap[groups[i]];
+
+            if (extensions.indexOf(extension.toLowerCase()) > -1) {
+               return "file-" + groups[i];
+            }
+        }
+
+        return type;
+    };
+
     // kendo.saveAs -----------------------------------------------
     (function() {
         function postToProxy(dataURI, fileName, proxyURL, proxyTarget) {

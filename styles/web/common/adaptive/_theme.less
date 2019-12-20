@@ -102,86 +102,13 @@
 
     .k-column-menu {
 
-        .k-state-selected .k-link {
+        .k-listgroup-item.k-state-selected {
             color: @adaptive-grid-sort-text;
+            background: none;
+        }
+        .k-listgroup-item.k-state-selected .k-link {
+            color: inherit;
         }
     }
 
-    .k-filter-menu,
-    .k-scheduler-edit-form {
-
-        .k-check {
-            color: @adaptive-content-text;
-            border-color: @adaptive-content-text;
-
-            &:focus,
-            &.k-state-focused {
-                border-color: @primary-focused-border-color;
-                box-shadow: @primary-focused-shadow;
-            }
-        }
-    }
-
-    .k-mobile-list {
-
-        .k-item {
-            background-color: @widget-background-color;
-            border-bottom: 1px solid @adaptive-menu-item-border;
-
-            > .k-link,
-            > .k-label,
-            .k-edit-label.k-check,
-            .k-recur-view .k-check {
-
-                &:active {
-                    color: @hover-text-color;
-                    background-color: @hover-background-color;
-                    border-color: @hover-border-color;
-                }
-            }
-        }
-
-        .k-item {
-
-            .k-state-selected {
-                background-color: @selected-background-color;
-                border-top-color: @selected-border-color;
-            }
-
-            &:first-child,
-            &.k-clear-wrap {
-                .box-shadow(inset 0 1px 0 @adaptive-menu-item-border);
-            }
-        }
-
-        &.k-filter-menu {
-
-            .k-space-right {
-
-                > input {
-                    background: @background;
-                    border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
-
-                    &:focus {
-                        .box-shadow(@focused-shadow);
-                    }
-                }
-            }
-        }
-
-        .k-check:checked {
-            opacity: @default-icon-opacity;
-            font-family: 'WebComponentsIcons';
-
-            &::before {
-                content: "\e118";
-            }
-        }
-
-        .k-list-title,
-        .k-filter-help-text,
-        .k-filter-selected-items {
-            color: @adaptive-menu-title-text;
-        }
-    }
 }

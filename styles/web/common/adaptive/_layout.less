@@ -172,6 +172,16 @@
 
     .k-scheduler-edit-form {
 
+        .k-recur-view {
+            padding: 0;
+            flex-direction: column;
+            align-items: stretch;
+
+            > .k-listgroup-form-row {
+                margin: 0;
+            }
+        }
+
         .k-recur-items-wrap {
             width: 100%;
             margin: -1px 0;
@@ -376,302 +386,104 @@
         background-clip: border-box;
     }
 
-    .k-mobile-list {
+    .k-list-title,
+    .k-filter-help-text {
+        padding: @listgroup-item-padding-y @listgroup-item-padding-x;
+        display: block;
+    }
 
-        &,
-        ul {
-            padding: 0;
-            margin: 0;
-            list-style-type: none;
-            border-radius: 0;
-            background: none;
+    .k-listgroup {
+
+        .k-listgroup-item {
+            border-color: inherit;
         }
 
-        &.k-column-menu,
-        &.k-filter-menu {
+    }
+    .k-listgroup + .k-listgroup {
+        margin-top: 2em;
+    }
 
-            > ul > li {
 
-                &,
-                > ul {
-                    margin: 1em 0;
-                }
+    // Column menu
+    .k-column-menu {
 
-                .k-list-title,
-                .k-filter-help-text {
-                    display: block;
-                    padding: 1em 1em 0 1em;
-                }
-            }
-        }
 
-        &.k-popup-edit-form {
-
-            > ul {
-                margin-top: 1em;
-            }
-        }
-
-        &.k-scheduler-edit-form .k-content > ul {
-            margin: 1em 0;
-        }
-
-        .k-item {
-
-            > * {
-                line-height: normal;
-            }
-
-            &,
-            > .k-link,
-            > .k-label {
-                display: flex;
-                align-items: center;
-                position: relative;
-                list-style-type: none;
-                .box-sizing(border-box);
-                font-size: 1em;
-                line-height: 1.6em;
-                overflow: visible;
-                text-decoration: none;
-            }
-
-            > .k-link,
-            > .k-label {
-                padding: .5em 1em;
-                flex: 1 1 auto;
-                max-width: 100%;
-            }
-
-            .k-item-title,
-            .k-filter-input-text,
-            .k-filter-operator-text,
-            .k-filter-logic-and-text,
-            .k-filter-logic-or-text {
-                width: 40%;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            &.k-recur-view {
-                align-items: normal;
-                flex-direction: column;
-            }
-        }
-
-        &.k-column-menu {
-
-            .k-item {
-
-                .k-link,
-                .k-label {
-                    justify-content: flex-start;
-                }
-
-                &.k-filter-item {
-
-                    .k-filterable::before {
-                        content: "\e014";
-                        position: absolute;
-                        right: .5em;
-                        font: 1.5em/1 'WebComponentsIcons';
-                    }
-                }
-            }
-
-            .k-columns-item {
-
-                .k-item {
-                    padding: .5em 1em;
-                    justify-content: space-between;
-
-                    .k-label {
-                        flex: 0 1 auto;
-                        padding: 0;
-                        pointer-events: none;
-                    }
-                }
-            }
-        }
-
-        &.k-filter-menu {
-
-            .k-item {
-
-                > .k-link,
-                > .k-label {
-                    justify-content: space-between;
-
-                    > input,
-                    > select {
-                        min-width: 50%;
-                        max-width: 50%;
-                        font-size: 100%;
-                    }
-
-                    .k-check,
-                    .k-radio-label {
-                        flex: 0 1 auto;
-                        min-width: 0;
-                    }
-                }
-
-                .k-radio-label {
-
-                    &::before,
-                    &::after {
-                        transform: translateY(-50%);
-                    }
-
-                    &::after {
-                        top: 0;
-                    }
-                }
-            }
-
-            .k-space-right {
-                border: 0;
-                padding: 0 10px;
-                background: 0;
-
-                > input {
-                    width: 100%;
-                    height: 2em;
-                    padding: 1px 0;
-                    margin: 0;
-                    border-radius: 3px;
-                    text-indent: 1em;
-                    border-width: 1px;
-                    border-style: solid;
-                }
-
-                > .k-i-zoom {
-                    right: 15px;
-                    z-index: 2;
-                }
-            }
-
-            .k-filter-tools {
-                margin: 1em;
-                display: flex;
-                justify-content: space-between;
-            }
-        }
-
-        &.k-popup-edit-form {
-
-            .k-item {
-
-                > .k-label {
-                    justify-content: space-between;
-
-                    > div {
-
-                        &,
-                        .k-mobiletimezoneeditor {
-                            width: 50%;
-                            display: flex;
-                            position: relative;
-                            align-items: center;
-                            justify-content: flex-end;
-                            font-size: 100%;
-                            text-align: end;
-                        }
-
-                        select,
-                        input:not([type="checkbox"]),
-                        .k-mobiletimezoneeditor {
-                            flex: 1 1 auto;
-                            min-width: 100%;
-                            max-width: 100%;
-                        }
-
-                        &.k-recur-editor-wrap {
-                            display: flex;
-
-                            .k-recur-editor-text {
-                                margin-left: .5em;
-                            }
-
-                            select,
-                            input:not([type="checkbox"]) {
-                                min-width: 50%;
-                            }
-                        }
-
-                        .k-tooltip-validation {
-                            top: 100%;
-                            left: 0;
-                        }
-                    }
-                }
-            }
-        }
-
-        .k-multicheck-wrap,
-        .k-multicheck-bool-wrap {
-            // Overriding the Web multicheck-wrap max-height
-            max-height: none;
-
-            .k-item {
-
-                .k-link,
-                .k-label {
-                    white-space: normal;
-                    flex-direction: row-reverse;
-                }
-            }
-        }
-
-        .k-state-disabled {
-            opacity: 1;
-
-            > * {
-                opacity: .7;
-            }
+        .k-filter-item .k-filterable * {
+            pointer-events: none;
         }
     }
-}
 
-// Mobile list form elements
 
-.k-check[type=radio],
-.k-check[type=checkbox] {
-    appearance: none;
-    background-color: transparent;
+    // Filter menu
+    .k-filter-menu {
+        padding: 0;
+
+        .k-space-right {
+            border: 0;
+            padding: 0 10px;
+            background: 0;
+
+            > input {
+                width: 100%;
+                height: 2em;
+                padding: 1px 0;
+                margin: 0;
+                border-radius: 3px;
+                text-indent: 1em;
+                border-width: 1px;
+                border-style: solid;
+            }
+
+            > .k-i-zoom {
+                right: 15px;
+                z-index: 2;
+            }
+        }
+
+        .k-filter-tools {
+            margin: 1em;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .k-popup-edit-form {
+
+        .k-recur-editor-wrap {
+            display: flex;
+        }
+
+        .k-tooltip-validation {
+            top: 100%;
+            left: 0;
+        }
+
+        .k-mobiletimezoneeditor {
+            width: 100;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            flex: 1 1 auto;
+        }
+    }
+
+    .k-multicheck-wrap.k-listgroup {
+        overflow-y: auto;
+    }
+
+    .k-state-disabled {
+        opacity: 1;
+
+        > * {
+            opacity: .7;
+        }
+    }
 }
 
 .k-pane-wrapper {
 
-    .k-mobile-list {
-
-        .k-link,
-        .k-label {
-
-            .k-check {
-                border-width: 1px;
-                border-style: solid;
-                font-size: inherit;
-                outline: 0;
-                width: 13px;
-                height: 13px;
-                margin: .26em 1em .26em 0;
-            }
-        }
-    }
-
     .k-ie & {
-
-        .k-link,
-        .k-label {
-
-            .k-check {
-                text-indent: -9999px;
-                width: 1.01em;
-                height: 1em;
-            }
-        }
 
         .k-grid {
 
@@ -751,26 +563,11 @@
             }
         }
 
-        .k-mobile-list {
+        .k-filter-menu {
 
-            &.k-column-menu {
-
-                .k-item.k-filter-item {
-
-                    .k-filterable::before {
-                        content: "\e016";
-                        right: auto;
-                        left: .5em;
-                    }
-                }
-            }
-
-            &.k-filter-menu {
-
-                .k-space-right > .k-i-zoom {
-                    left: 15px;
-                    right: auto;
-                }
+            .k-space-right > .k-i-zoom {
+                left: 15px;
+                right: auto;
             }
         }
 

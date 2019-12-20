@@ -480,6 +480,14 @@ fonts in fonts/
     <li><span class="k-icon k-i-parameter-string"></span> .k-i-parameter-string</li>
     <li><span class="k-icon k-i-toc-section-level"></span> .k-i-toc-section-level</li>
     <li><span class="k-icon k-i-inherited"></span> .k-i-inherited</li>
+
+    <li><span class="k-icon k-i-file-video"></span> .k-i-file-video</li>
+    <li><span class="k-icon k-i-file-audio"></span> .k-i-file-audio</li>
+    <li><span class="k-icon k-i-file-image"></span> .k-i-file-image</li>
+    <li><span class="k-icon k-i-file-presentation"></span> .k-i-file-presentation</li>
+    <li><span class="k-icon k-i-file-data"></span> .k-i-file-data</li>
+    <li><span class="k-icon k-i-file-disc-image"></span> .k-i-file-disc-image</li>
+    <li><span class="k-icon k-i-file-programming"></span> .k-i-file-programming</li>
 </ul>
 
 ### Images
