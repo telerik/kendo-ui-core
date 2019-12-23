@@ -70,6 +70,7 @@ The DropDownList renders an `ID` attribute that is generated from the ID of the 
 
         // The div popup element that holds the header and footer templates, and the suggestion options.
         var popupElement = $("#ddl-list");
+        popupElement.css('border','2px solid red');
 
         console.log(popupElement);
       });

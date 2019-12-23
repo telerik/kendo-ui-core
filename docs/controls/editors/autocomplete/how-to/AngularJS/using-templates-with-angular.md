@@ -108,8 +108,8 @@ The following example demonstrates how to use AngularJS templates inside the Ken
           '</div>',
 
           // Using {{angular}} templates:
-          template: '<span class="k-state-default"><img src=\"https://demos.telerik.com/kendo-ui/content/web/Customers/{{dataItem.CustomerID}}.jpg\" alt=\"{{dataItem.CustomerID}}\" /></span>' +
-          '<span class="k-state-default"><h3>{{dataItem.ContactName}}</h3><p>{{dataItem.CompanyName}}</p></span>',
+          template: '<span class="k-state-default"><img src=\"https://demos.telerik.com/kendo-ui/content/web/Customers/{% raw %}{{dataItem.CustomerID}}{% endraw %}.jpg\" alt=\"{% raw %}{{dataItem.CustomerID}}{% endraw %}\" /></span>' +
+          '<span class="k-state-default"><h3>{% raw %}{{dataItem.ContactName}}{% endraw %}</h3><p>{% raw %}{{dataItem.CompanyName}}{% endraw %}</p></span>',
         };
       });
     </script>

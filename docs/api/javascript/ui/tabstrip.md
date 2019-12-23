@@ -583,31 +583,47 @@ Appends a tab to the collection of tabs in a **TabStrip**.
     <div id="tabstrip"></div>
 
     <script>
-        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+         var tabStrip = $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
+            dataImageUrlField: "imageUrl",
+            dataContentField: "content",
+            dataContentUrlField: "contentUrl"
+            dataSource: [
+                            {
+                                text: "Tab 1",
+                                content: "Tab 1 content"
+                            },
+                            {
+                                text: "Tab 2",
+                                content: "Tab 2 content"
+                            },
+                            {
+                                text: "Tab 3",
+                                content: "Tab 3 content"
+                            }
+                        ]
+        }).data("kendoTabStrip");
+  
         tabStrip.append(
             [{
-                text: "Item 1",
-                url: "http://www.telerik.com"               // Link URL if navigation is needed, optional.
-            },
-            {
-                text: "<b>Item 2</b>",
+                text: "<b>Appended Tab 1</b>",
                 encoded: false,                             // Allows use of HTML for item text
-                content: "text"                             // Content for the content element
+                content: "Appended Tab 1 content",                             // Content for the content element
+                imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png" // Provides the image URL of the tab
             },
             {
-                text: "Item 3",
-                contentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
-            },
-            {
-                text: "Item 4",
-                imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
-            },
-            {
-                text: "Item 5",
-                spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+                text: "<i>Appended Tab 2</i>",
+                encoded: false,                             // Allows use of HTML for item text                           
+                contentUrl: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html", // Provides the URL for the Ajax loaded tab content
+                spriteCssClass: "brazilFlag"  // Item image sprite CSS class, optional.
             }]
         );
     </script>
+    <style>
+        #tabstrip .k-sprite {
+        background-image: url("https://demos.telerik.com/kendo-ui/content/shared/styles/flags.png");
+        }
+    </style>
 
 #### Parameters
 

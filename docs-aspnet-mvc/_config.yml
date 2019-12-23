@@ -405,6 +405,7 @@ gcs_api_key: 'AIzaSyDnvT29LoZiLUcywskEgTTum7j5pkx6s8I'
 has_web_api_index: true
 skip_tabbed_code: true
 code_lang: true
+has_kb_portal: true
 api_columns_count: 2
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet-mvc
 

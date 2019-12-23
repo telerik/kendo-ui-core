@@ -36,23 +36,35 @@ The following example demonstrates the parameters of this request.
 
 The following example demonstrates how to initialize a cascading ComboBox.
 
+```dojo
     <input id="parent" />
     <input id="child" />
 
     <script type="text/javascript">
          $(function() {
              $("#parent").kendoComboBox({
-                dataTextField: "parentName",
-                dataValueField: "parentID"
-                // Define the ComboBox settings.
-             });
+               dataTextField: "parentName",
+               dataValueField: "parentId",
+               dataSource: [
+                  { parentName: "Parent1", parentId: 1 },
+                  { parentName: "Parent2", parentId: 2 }
+               ]
+            });
 
-             $("#child").kendoComboBox({
-                cascadeFrom: "parent"
-                // Define other settings.
-             });
+            $("#child").kendoComboBox({
+               cascadeFrom: "parent",
+               dataTextField: "childName",
+               dataValueField: "childId",
+               dataSource: [
+                  { childName: "Child1", childId: 1, parentId: 1 },
+                  { childName: "Child2", childId: 2, parentId: 2 },
+                  { childName: "Child3", childId: 3, parentId: 1 },
+                  { childName: "Child4", childId: 4, parentId: 2 }
+               ]
+            });
          });
     </script>
+```
 
 ## MVVM Value Binding
 
@@ -69,50 +81,73 @@ This section lists the answers to the most frequently asked questions (FAQs) abo
 
 Set the value of the ComboBoxes&mdash;define it before initialization as demonstrated in the following example. You also can use the [`value`](/api/javascript/ui/combobox#configuration) option.
 
-    <input id="parent" value="1" />
-    <input id="child" value="36" />
+```dojo
+    <input id="parent" value="2" />
+    <input id="child" value="4" />
 
     <script>
-       $("#parent").kendoComboBox();
+       $("#parent").kendoComboBox({
+         dataTextField: "parentName",
+         dataValueField: "parentId",
+         dataSource: [
+            { parentName: "Parent1", parentId: 1 },
+            { parentName: "Parent2", parentId: 2 }
+         ]
+      });
 
-       $("#child").kendoComboBox({
-                cascadeFrom: "parent"
-       });
+      $("#child").kendoComboBox({
+         cascadeFrom: "parent",
+         dataTextField: "childName",
+         dataValueField: "childId",
+         dataSource: [
+            { childName: "Child1", childId: 1, parentId: 1 },
+            { childName: "Child2", childId: 2, parentId: 2 },
+            { childName: "Child3", childId: 3, parentId: 1 },
+            { childName: "Child4", childId: 4, parentId: 2 }
+         ]
+      });
     </script>
+```
 
 ### How can I preset the selected items when I use cascading ComboBoxes with load on demand?
 
 Set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options.
 
-    <input id="parent" value="1" />
-    <input id="child" value="36" />
+```dojo
+    <input id="parent" value="2" />
+    <input id="child" value="4" />
 
     <script>
        $(function() {
             $("#parent").kendoComboBox({
-               value: "1",
-               text: "Parent1",
+               value:"2",
+               text:"Parent2",
                dataTextField: "parentName",
-               dataValueField: "parentID",
-               dataSource: {
-                  // The dataSource settings.
-               },
-               autoBind: false
+               dataValueField: "parentId",
+               dataSource: [
+                  { parentName: "Parent1", parentId: 1 },
+                  { parentName: "Parent2", parentId: 2 }
+               ],
+               autoBind:false
             });
 
             $("#child").kendoComboBox({
+               value:"4",
+               text:"Child4",
                cascadeFrom: "parent",
-               value: "36",
-               text: "Child36",
                dataTextField: "childName",
-               dataValueField: "childID",
-               dataSource: {
-                  // The dataSource settings.
-               },
-               autoBind: false
+               dataValueField: "childId",
+               dataSource: [
+                  { childName: "Child1", childId: 1, parentId: 1 },
+                  { childName: "Child2", childId: 2, parentId: 2 },
+                  { childName: "Child3", childId: 3, parentId: 1 },
+                  { childName: "Child4", childId: 4, parentId: 2 }
+               ],
+               autoBind:false
             });
        });
     </script>
+```
 
 ### Why server filtering is disabled and the child ComboBox does not work?
 
