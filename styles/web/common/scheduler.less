@@ -250,10 +250,14 @@
 }
 
 .k-scheduler-monthview .k-scheduler-table td,
-.k-scheduler-monthview .k-hidden
-{
+.k-scheduler-monthview .k-hidden {
     height: 80px;
     text-align: right;
+}
+.k-scheduler-monthview .k-scheduler-table-auto,
+.k-scheduler-monthview .k-scheduler-table-auto td,
+.k-scheduler-monthview .k-scheduler-content .k-scheduler-table-auto {
+    height: auto;
 }
 
 .k-scheduler-table td,
@@ -378,17 +382,19 @@ div.k-more-events
 }
 
 .k-event,
-.k-more-events
-{
-    position:absolute;
-    border-style:solid;
-    border-width:1px;
-    text-align:left;
+.k-more-events {
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    text-align: left;
     overflow: hidden;
+    position: absolute;
+}
+.k-event .k-nav-day {
+    display: inline-block;
 }
 
-.k-event
-{
+.k-event {
     cursor: default;
     min-height: 1.3em;
 }
