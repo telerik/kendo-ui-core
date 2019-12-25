@@ -1,15 +1,15 @@
 ---
-title: Sass-Based Themes
-page_title: Sass-Based Themes | Kendo UI Styles and Appearance
-description: "Learn how to apply CSS classes to the Kendo UI desktop widgets to change their appearance and further customize their style."
-previous_url: /themebuilder_overview_kendouistyling
+title: Sass Theme Builder
+page_title: Sass Theme Builder
+description: "Use the Sass Theme Builder to customize Kendo UI themes in Telerik UI for ASP.NET Core applications."
+previous_url: 
 slug: sassbasedthemes_aspnetcore
 position: 2
 ---
 
 ## Using the Sass Theme Builder
 
-[**Progress Sass Theme Builder**](https://themebuilder.telerik.com/aspnet-core) for Kendo UI is an Angular web application that enables you to create new or customize existing themes.
+[**Progress Sass Theme Builder**](https://themebuilder.telerik.com/aspnet-core) is an Angular web application that enables you to create new or customize existing themes.
 
 The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.
 
