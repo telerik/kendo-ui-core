@@ -2,7 +2,6 @@
 title: Sass Theme Builder
 page_title: Sass Theme Builder
 description: "Use the Sass Theme Builder to customize Kendo UI themes in Telerik UI for ASP.NET Core applications."
-previous_url: 
 slug: sassbasedthemes_aspnetcore
 position: 2
 ---

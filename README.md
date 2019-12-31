@@ -19,6 +19,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [ListView](http://demos.telerik.com/kendo-ui/listview/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
 | [TreeList](http://demos.telerik.com/kendo-ui/treelist/index)          | :x:  | :white_check_mark: | :white_check_mark:           |
+| [Filter](https://demos.telerik.com/kendo-ui/filter/index)             | :x:  | :white_check_mark: | :white_check_mark:           |
 | **Editors**               |
 | [AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Color Picker](http://demos.telerik.com/kendo-ui/colorpicker/index)   | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
@@ -33,6 +34,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index) | :white_check_mark: | :white_check_mark: | :white_check_mark:        |
+| [Rating](https://demos.telerik.com/kendo-ui/rating/index)             | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Slider](http://demos.telerik.com/kendo-ui/slider/index)              | :white_check_mark:| :white_check_mark: | :white_check_mark:            |
 | [Switch](http://demos.telerik.com/kendo-ui/switch/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
 | [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
@@ -60,6 +62,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [TreeMap](http://demos.telerik.com/kendo-ui/treemap/index)            | :x: | :white_check_mark: | :white_check_mark:            |
 | [Waterfall Charts](http://demos.telerik.com/kendo-ui/waterfall-charts/index) | :x: | :white_check_mark: | :white_check_mark:     |
 | **Gauges**                |
+| [ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
 | [LinearGauge](http://demos.telerik.com/kendo-ui/linear-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | [RadialGauge](http://demos.telerik.com/kendo-ui/radial-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | **Barcodes**              |
@@ -82,12 +85,15 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | **Media**            |
 | [MediaPlayer](http://demos.telerik.com/kendo-ui/mediaplayer/index)              | :x: | :white_check_mark: | :white_check_mark:           |
 | [ScrollView](http://demos.telerik.com/kendo-ui/scrollview/index)    | :x: | :white_check_mark: | :white_check_mark:           |
+| **PDF**              |
+| [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/index)    | :x: | :white_check_mark: | :white_check_mark:           |
 | **Navigation**            |
 | [Button](http://demos.telerik.com/kendo-ui/button/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ButtonGroup](http://demos.telerik.com/kendo-ui/buttongroup/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Menu](http://demos.telerik.com/kendo-ui/menu/index)                  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
+| [Timeline](https://demos.telerik.com/kendo-ui/timeline/index)         | :x: | :white_check_mark: | :white_check_mark:           |
 | [ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index)            | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [TreeView](http://demos.telerik.com/kendo-ui/treeview/index)          | :x:  | :white_check_mark: | :white_check_mark:           |
 | **Interactivity and UX**  |

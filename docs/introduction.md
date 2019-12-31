@@ -47,6 +47,7 @@ The following table lists all Kendo UI widgets (controls) that are available in 
 |                           |[MultiSelect Overview]({% slug overview_kendoui_multiselect_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/multiselect/index)   | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 |                           |[NumericTextBox Overview]({% slug overview_kendoui_numerictextbox_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/numerictextbox/index) | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 |                           |[RangeSlider Overview]({% slug overview_kendoui_rangeslider_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/slider/index)        | <span class="tag-success">Yes</span>| <span class="tag-success">Yes</span> |
+|                           |[Rating]({% slug overview_kendoui_rating_widget %}) & [Demos](https://demos.telerik.com/kendo-ui/rating/index)       | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 |                           |[Slider Overview]({% slug overview_kendoui_slider_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/slider/index)              | <span class="tag-success">Yes</span>| <span class="tag-success">Yes</span> |
 |                           |[Switch Overview]({% slug overview_kendoui_switch_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/switch/index)              | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> |
 |                           |[TimePicker Overview]({% slug overview_kendoui_timepicker_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/timepicker/index)      | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
@@ -106,7 +107,7 @@ The following table lists all Kendo UI widgets (controls) that are available in 
 |                           |[Styling and Appearance Overview]({% slug themesandappearnce_kendoui_desktopwidgets %}) & [Demos](http://demos.telerik.com/kendo-ui/styling/index)            | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 | **Media**                 |[MediaPlayer Overview]({% slug overview_kendoui_mediaplayer_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/mediaplayer/index)   | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 |                           |[ScrollView Overview]({% slug overview_kendoui_scrollview_widget %}) & [Demos](http://demos.telerik.com/kendo-ui/scrollview/index)      | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
-| **PDF**                   |[PDFViewer Overview]({% slug overview_kendoui_pdfviewer_widget %}) & [Demos](https://demos.telerik.com/kendo-ui/pdfviewer/index)                  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
+| **PDF**                   |[PDFViewer Overview]({% slug overview_kendoui_pdfviewer_widget %}) & [Demos](https://demos.telerik.com/kendo-ui/pdfviewer/index)                  | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> |
 | **Hybrid UI**             |[Hybrid UI Widgets Overview]({% slug overview_hybridkendoui %}) & [Demos](http://demos.telerik.com/kendo-ui/m/index)                  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> |
 |**Official Support**       |                                                   |<span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span>
 
@@ -229,7 +230,7 @@ For any issues you might encounter while working with Kendo UI for jQuery, use a
 * Kendo UI Professional license holders and active trialists can take advantage of our outstanding customer support delivered by the developers building the library. To submit a support ticket, use the [Kendo UI for jQuery dedicated support](https://www.telerik.com/account/support-tickets/) system.
 * [Kendo UI for jQuery forums](https://www.telerik.com/forums/kendo-ui) are part of the free support you can get from the community and from the Kendo UI for jQuery team on all kinds of general issues.
 * [Kendo UI for jQuery feedback portal](https://feedback.telerik.com/kendo-jquery-ui) and [Kendo UI for jQuery roadmap](https://www.telerik.com/support/whats-new/kendo-ui/roadmap) provide information on the features in discussion and also the planned ones for release.
-* Kendo UI for jQuery uses [GitHub Issues](https://github.com/telerik/kendo/issues/) as its bug tracker and you can submit any related reports there. Also, check out the [closed list](https://github.com/telerik/kendo/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed).
+* Kendo UI for jQuery uses [GitHub Issues](https://github.com/telerik/kendo-ui-core/issues/) as its bug tracker and you can submit any related reports there. Also, check out the [closed list](https://github.com/telerik/kendo-ui-core/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed).
 * You may still need a tailor-made solution for your project. In such cases, go straight to [Progress Services](https://www.progress.com/services).
 
 ## Learning Resources

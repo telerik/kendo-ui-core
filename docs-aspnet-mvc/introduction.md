@@ -85,7 +85,8 @@ The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 20
 |                           |[MaskedTextBox Docs]({% slug overview_maskedtextboxhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/maskedtextbox)   
 |                           |[MultiColumnComboBox Docs]({% slug overview_multicolumncombobox_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/multicolumncombobox)   
 |                           |[MultiSelect Docs]({% slug overview_multiselecthelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/multiselect)      
-|                           |[NumericTextBox Docs]({% slug overview_numerictextboxhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/numerictextbox)  
+|                           |[NumericTextBox Docs]({% slug overview_numerictextboxhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/numerictextbox)
+|                           |[Rating]({% slug overview_ratinghelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/rating)  
 |                           |[Slider Docs]({% slug overview_sliderhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/slider)          
 |                           |[Switch Docs]({% slug overview_switchhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/switch)
 |                           |[TimePicker Docs]({% slug overview_timepickerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/timepicker)      
@@ -163,3 +164,4 @@ For any issues you might encounter while working with UI for ASP.NET MVC, use an
 * [Exploring the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Integrating Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
 * [Upgrading Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetmvc %})
+

@@ -106,7 +106,8 @@ A function returning a visual element to render for the content of a connection.
 
 Specifies the name of the source shape connector that should be used by default.
 
-```dojo
+#### Example - configuring the fromConnector
+
     <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
@@ -123,7 +124,7 @@ Specifies the name of the source shape connector that should be used by default.
 
       diagram.addConnection(connection);
     </script>
-```
+
 
 ### fromX `Number`
 
@@ -137,7 +138,8 @@ The absolute point (Y-coordinate), if any, that the connection is originating fr
 
 Defines the stroke configuration.
 
-```dojo
+#### Example - configuring the stroke
+
     <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
@@ -157,7 +159,7 @@ Defines the stroke configuration.
 
       diagram.addConnection(connection);
     </script>
-```
+
 
 ### stroke.color `String`
 
@@ -193,7 +195,8 @@ Defines the hover stroke configuration.
 
 Defines the highlight color when the pointer is hovering over the connection.
 
-```dojo
+#### Example - configuring the hover
+
     <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
@@ -217,13 +220,14 @@ Defines the highlight color when the pointer is hovering over the connection.
 
       diagram.addConnection(connection);
     </script>
-```
+
 
 ### startCap `String|Object`
 
 The connection start cap configuration or type name.
 
-```dojo
+#### Example - configuring the startCap
+
     <div id="diagram"></div>
     <script>
       var Point = kendo.dataviz.diagram.Point;
@@ -242,7 +246,7 @@ The connection start cap configuration or type name.
         selectable: false
       });
     </script>
-```
+
 
 ### startCap.fill `String|Object`
 
@@ -286,7 +290,8 @@ The supported values are:
 
 The connection end cap configuration or type name.
 
-```dojo
+#### Example - configuring the endCap
+
     <div id="diagram"></div>
     <script>
       var Point = kendo.dataviz.diagram.Point;
@@ -305,7 +310,7 @@ The connection end cap configuration or type name.
         selectable: false
       });
     </script>
-```
+
 
 ### endCap.fill `String|Object`
 
@@ -349,7 +354,8 @@ The supported values are:
 
 Sets the intermediate points (in global coordinates) of the connection.
 
-```dojo
+#### Example - configuring the points
+
     <div id="diagram"></div>
     <script>
       var Point = kendo.dataviz.diagram.Point;
@@ -365,13 +371,14 @@ Sets the intermediate points (in global coordinates) of the connection.
         selectable: false
       });
     </script>
-```
+
 
 ### points.x `Number`
 
 Sets the X coordinate of the point.
 
-```dojo
+#### Example - configuring the points.x
+
     <div id="diagram"></div>
     <script>
       var Point = kendo.dataviz.diagram.Point;
@@ -386,7 +393,7 @@ Sets the X coordinate of the point.
         selectable: false
       });
     </script>
-```
+
 
 ### points.y `Number`
 
@@ -396,7 +403,8 @@ Sets the Y coordinate of the point.
 
 Specifies if the connection can be selected.
 
-```dojo
+#### Example - configuring the selectable
+
     <div id="diagram"></div>
     <script>
       var Point = kendo.dataviz.diagram.Point;
@@ -405,13 +413,14 @@ Specifies if the connection can be selected.
         selectable: false
       });
     </script>
-```
+
 
 ### toConnector `String` *(default: "Auto")*
 
 Specifies the name of the target shape connector that should be used by default.
 
-```dojo
+#### Example - configuring the toConnector
+
     <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
@@ -429,7 +438,7 @@ Specifies the name of the target shape connector that should be used by default.
 
       diagram.addConnection(connection);
     </script>
-```
+
 
 ### toX `Number`
 
@@ -443,7 +452,8 @@ The absolute point (Y-coordinate), if any, that the connection is pointing to.
 
 Specifies the connection type. The supported values are `"polyline"` and `"cascading"`.
 
-```dojo
+#### Example - configuring the type
+
     <div id="diagram"></div>
     <script>
       var Shape = kendo.dataviz.diagram.Shape;
@@ -461,14 +471,15 @@ Specifies the connection type. The supported values are `"polyline"` and `"casca
 
       diagram.addConnection(connection);
     </script>
-```
+
 
 ## Fields
 
 ### dataItem `Object`
 The data item, if any, for the connection.
 
-```dojo
+#### Example - configuring the dataItem
+
     <button id="getConnInfo">Get 1st Connection Label</button>
     <div id="diagram"></div>
     <script>
@@ -525,12 +536,13 @@ The data item, if any, for the connection.
         console.log("First connection text: " + dataItem.label);
       });
     </script>
-```
+
 
 ### from `kendo.dataviz.diagram.Shape`
 The shape, if any, that the connection originates from.
 
-```dojo
+#### Example - configuring the from
+
     <button id="getShapeBtn">Get Source Shape</button>
     <div id="diagram"></div>
     <script>
@@ -552,12 +564,13 @@ The shape, if any, that the connection originates from.
         console.log("Source shape id: " + diagram.connections[0].from.id);
       });
     </script>
-```
+
 
 ### sourceConnector `kendo.dataviz.diagram.Connector`
 The connector, if any, that the connection originates from.
 
-```dojo
+#### Example - configuring the sourceConnector
+
     <button id="getConnectorBtn">Get Source Connector</button>
     <div id="diagram"></div>
     <script>
@@ -580,12 +593,13 @@ The connector, if any, that the connection originates from.
         console.log("Source connector name: " + connector.options.name);
       });
     </script>
-```
+
 
 ### targetConnector `kendo.dataviz.diagram.Connector`
 The connector, if any, that the connection points to.
 
-```dojo
+#### Example - configuring the targetConnector
+
     <button id="getConnectorBtn">Get Target Connector</button>
     <div id="diagram"></div>
     <script>
@@ -608,12 +622,13 @@ The connector, if any, that the connection points to.
         console.log("Target connector name: " + connector.options.name);
       });
     </script>
-```
+
 
 ### to `kendo.dataviz.diagram.Shape`
 The shape, if any, that the connection points to.
 
-```dojo
+#### Example - configuring the to
+
     <button id="getShapeBtn">Get Target Shape</button>
     <div id="diagram"></div>
     <script>
@@ -635,7 +650,7 @@ The shape, if any, that the connection points to.
         console.log("Target shape id: " + diagram.connections[0].to.id);
       });
     </script>
-```
+
 
 ## Methods
 
@@ -662,7 +677,8 @@ If no source is specified the method will return the current object to which the
 
 The following example shows how to change the source shape of a connection:
 
-```dojo
+#### Example - configuring the source
+
     <button id="changeSourceBtn">Change Connection Source</button>
     <div id="diagram"></div>
     <script>
@@ -686,7 +702,7 @@ The following example shows how to change the source shape of a connection:
         connection.source(shape3);
       });
     </script>
-```
+
 
 ### sourcePoint
 
@@ -698,7 +714,8 @@ The method returns a Point independently of the object to which the source is at
 `kendo.dataviz.diagram.Point` the coordinates of the connection source.
 
 
-```dojo
+#### Example - configuring the sourcePoint
+
     <button id="getSourceBtn">Get Connection Source Point</button>
     <div id="diagram"></div>
     <script>
@@ -722,7 +739,7 @@ The method returns a Point independently of the object to which the source is at
         console.log("Connection source point: x = " + point.x + "; y = " + point.y);
       });
     </script>
-```
+
 
 ### target
 
@@ -740,7 +757,8 @@ This object can be a Point for a floating endpoint (i.e. not attached to a shape
 
 If no source is specified the method will return the current object to which the Connection's endpoint is attached.
 
-```dojo
+#### Example - configuring the target
+
     <button id="changeTargetBtn">Change Connection Target</button>
     <div id="diagram"></div>
     <script>
@@ -763,7 +781,7 @@ If no source is specified the method will return the current object to which the
         connection.target(shape3.getConnector("right"));
       });
     </script>
-```
+
 
 #### Returns
 
@@ -777,7 +795,8 @@ Similar to the sourcePoint, this gets the coordinates of the target of the Conne
 
 `kendo.dataviz.diagram.Point` the coordinates of the connection target.
 
-```dojo
+#### Example - configuring the targetPoint
+
     <button id="getTargetBtn">Get Connection Target Point</button>
     <div id="diagram"></div>
     <script>
@@ -801,7 +820,7 @@ Similar to the sourcePoint, this gets the coordinates of the target of the Conne
         console.log("Connection target point: x = " + point.x + "; y = " + point.y);
       });
     </script>
-```
+
 
 ### select
 
@@ -813,7 +832,8 @@ Select or deselects the Connection.
 
 True to select the Connection and `false` to deselect it.
 
-```dojo
+#### Example - configuring the select
+
     <button id="selectBtn">Select Connection</button>
     <div id="diagram"></div>
     <script>
@@ -844,7 +864,7 @@ True to select the Connection and `false` to deselect it.
         connection.select(true);
       });
     </script>
-```
+
 
 ### type
 
@@ -859,7 +879,8 @@ The routing of a connection is the way that intermediate points of a Connection 
 * "polyline" - connects the defined intermediate points. See the points() method.
 * "cascading" - discards given points and defines a cascading path between the endpoints.
 
-```dojo
+#### Example - configuring the type
+
     <button id="changeTypeBtn">Change Connection Type</button>
     <div id="diagram"></div>
     <script>
@@ -880,13 +901,14 @@ The routing of a connection is the way that intermediate points of a Connection 
         connection.type("cascading");
       });
     </script>
-```
+
 
 ### points
 
 Gets the intermediate points of the connection.
 
-```dojo
+#### Example - configuring the points
+
     <button id="getPointsBtn">Get Connection Points</button>
     <div id="diagram"></div>
     <script>
@@ -913,7 +935,7 @@ Gets the intermediate points of the connection.
         console.log(connection.points());
       });
     </script>
-```
+
 
 #### Returns
 
@@ -928,7 +950,8 @@ This is the union of the endpoints and the intermediate points.
 
 `Array` all points of the connection.
 
-```dojo
+#### Example - using allPoints
+
     <button id="getPointsBtn">Get Connection Points</button>
     <div id="diagram"></div>
     <script>
@@ -955,7 +978,7 @@ This is the union of the endpoints and the intermediate points.
         console.log(connection.points());
       });
     </script>
-```
+
 
 ### redraw
 
@@ -966,7 +989,8 @@ Redraws the Connection with the given options.
 ##### options `Object` *optional*
 The new options for the connection. This object should follow the configuration structure.
 
-```dojo
+#### Example - using redraw
+
     <button id="redrawBtn">Redraw Connection</button>
     <div id="diagram"></div>
     <script>
@@ -995,7 +1019,7 @@ The new options for the connection. This object should follow the configuration 
         });
       });
     </script>
-```
+
 
 ### visible
 
@@ -1006,7 +1030,7 @@ Gets or sets the connection visible state.
 ##### visible `Boolean` *optional*
 Indicates whether the connection should be visible in the Diagram. If skipped, the method will return the current visible state of the connection.
 
-```dojo
+#### Example - using visible
 
     <button id="hideBtn">Hide Connection</button>
     <div id="diagram"></div>
@@ -1043,4 +1067,3 @@ Indicates whether the connection should be visible in the Diagram. If skipped, t
         ]
       });
     </script>
-```
