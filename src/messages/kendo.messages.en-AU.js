@@ -127,7 +127,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Border Style",
   "collapseBorders": "Collapse borders",
   "wrapText": "Wrap text",
-  "associateCellsWithHeaders": "Associate cells with headers",
+  "associateCellsWithHeaders": "Associate headers",
   "alignLeft": "Align Left",
   "alignCenter": "Align Center",
   "alignRight": "Align Right",
@@ -143,7 +143,13 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "alignRemove": "Remove Alignment",
   "columns": "Columns",
   "rows": "Rows",
-  "selectAllCells": "Select All Cells"
+  "selectAllCells": "Select All Cells",
+  "headerRows": "Header Rows",
+  "headerColumns": "Header Columns",
+  "tableSummaryPlaceholder": "Summary attribute is not HTML5 compatible.",
+  "associateNone": "None",
+  "associateScope": "Associate using 'scope' attribute",
+  "associateIds": "Associate using Ids"
 });
 }
 

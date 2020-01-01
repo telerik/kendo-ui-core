@@ -880,7 +880,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Стил на рамката",
   "collapseBorders": "Свиване на рамката",
   "wrapText": "Събиране на текста",
-  "associateCellsWithHeaders": "Асоциирай клетките с заглавията на колоните",
+  "associateCellsWithHeaders": "Асоциирай заглавията",
   "alignLeft": "Подравни ляво",
   "alignCenter": "Подравни център",
   "alignRight": "Подравни дясно",
@@ -897,7 +897,10 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "columns": "Колони",
   "rows": "Редове",
   "selectAllCells": "Избери всички клетки",
-  "print": "Принтирай"
+  "print": "Принтирай",
+  "associateNone": "Без асоцииране",
+  "associateScope": "Асоцииране чрез 'scope' атрибут",
+  "associateIds": "Асоцииране чрез Id"
 });
 }
 

@@ -297,7 +297,7 @@
         "borderStyle": "Rahmenstil",
         "collapseBorders": "Collapse rahmen",
         "wrapText": "Texthülle",
-        "associateCellsWithHeaders": "Zellen mit header verbinden",
+        "associateCellsWithHeaders": "Header verbinden",
         "alignLeft": "Ausrichten links",
         "alignCenter": "Ausrichten zentriert",
         "alignRight": "Ausrichten rechts",

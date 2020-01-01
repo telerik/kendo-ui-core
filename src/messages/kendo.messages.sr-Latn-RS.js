@@ -151,7 +151,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Stil ruba",
   "collapseBorders": "Sakrij rub",
   "wrapText": "Zamotaj tekst",
-  "associateCellsWithHeaders": "Udružene ćelije sa zaglavljima",
+  "associateCellsWithHeaders": "Udružene zaglavljima",
   "alignLeft": "Poravnati levo",
   "alignCenter": "Poravnajte centar",
   "alignRight": "Poravnati desno",

@@ -258,8 +258,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Annuler",
   "operator": "Opérateur",
   "value": "Valeur",
-  "logic": "Logique des filtres", 
-  "additionalOperator": "Opérateur supplémentaire", 
+  "logic": "Logique des filtres",
+  "additionalOperator": "Opérateur supplémentaire",
   "additionalValue": "Valeur supplémentaire"
 });
 }
@@ -369,7 +369,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Style de bordure",
   "collapseBorders": "Rétracter bordures",
   "wrapText": "Renvoi à la ligne",
-  "associateCellsWithHeaders": "Cellules associées aux entêtes",
+  "associateCellsWithHeaders": "Entêtes associées",
   "alignLeft": "Aligner à gauche",
   "alignCenter": "Aligner le centre",
   "alignRight": "Aligner à droite",

@@ -343,7 +343,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Styl CSS brzegów",
   "collapseBorders": "Sklejaj brzegi",
   "wrapText": "Zawijanie wierszy",
-  "associateCellsWithHeaders": "Powiąż komórki z nagłówkami",
+  "associateCellsWithHeaders": "Powiąż nagłówkami",
   "alignLeft": "Wyrównaj w lewo",
   "alignCenter": "Centruj",
   "alignRight": "Wyrównaj w prawo",

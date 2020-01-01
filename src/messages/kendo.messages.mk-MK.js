@@ -151,7 +151,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Стил на раб",
   "collapseBorders": "Сокриј рабови",
   "wrapText": "Прелом на текст",
-  "associateCellsWithHeaders": "Асоцирај ќелии со заглавија",
+  "associateCellsWithHeaders": "Асоцирај заглавија",
   "alignLeft": "Порамнување од лево",
   "alignCenter": "Централно порaмнување",
   "alignRight": "Порамнување од десно",
