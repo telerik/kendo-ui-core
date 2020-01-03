@@ -25,7 +25,7 @@ Specifies the shape of the badge - `rectangle` or `pill`.
 
 ### look `String` *(default: flat)*
 
-Specifies the look of the badge - `flat` or `outlined`.
+Specifies the look of the badge - `flat` or `outline`.
 
 #### Example
 
@@ -33,7 +33,7 @@ Specifies the look of the badge - `flat` or `outlined`.
 	<script>
         $('#badge').kendoBadge({
             value: 'badge',
-            appearance: 'outlined'
+            appearance: 'outline'
         })
 	</script>
 
@@ -99,7 +99,7 @@ The value of the badge
 
 ### visible `Boolean`
 
-Ff set to false the badge will not be displayed.
+If set to false the badge will not be displayed.
 
 #### Example
 

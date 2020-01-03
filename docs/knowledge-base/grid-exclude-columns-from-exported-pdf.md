@@ -35,7 +35,7 @@ Use either of the following approaches:
 
 ### Using the k-pdf-export Class and CSS
 
-To hide a Grid column only during the PDF export, use a CSS rule and reduce the width of the target column to zero. This approach is implemented because the Kendo UI Drawing API adds [the `k-pdf-export` class](/framework/drawing/drawing-dom#the) on all elements on the page and you can target specific elements in the following way.
+To hide a Grid column only during the PDF export, use a CSS rule and reduce the width of the target column to zero. This approach is implemented because the Kendo UI Drawing API adds [the `k-pdf-export` class](/framework/drawing/pdf-output/custom-appearance#using-the) on all elements on the page and you can target specific elements in the following way.
 
 ```
 <style>

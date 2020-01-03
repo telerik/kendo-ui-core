@@ -10,7 +10,7 @@ slug: howto_renderexternalcontent_inshapes_diagram
 
 The Diagram is rendered through the [Drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/overview).
 
-The shape visual templates allow you to override the rendering entirely as demonstrated in the [Basic Usage](http://demos.telerik.com/kendo-ui/diagram/index) demo. In addition to the manual drawing of the shapes, you can use the [HTML Drawing](/framework/drawing/drawing-dom) feature to convert existing document content into static drawings.
+The shape visual templates allow you to override the rendering entirely as demonstrated in the [Basic Usage](http://demos.telerik.com/kendo-ui/diagram/index) demo. In addition to the manual drawing of the shapes, you can use the [HTML Drawing](/framework/drawing/dom-elements/overview) feature to convert existing document content into static drawings.
 
 ```dojo
     <style>

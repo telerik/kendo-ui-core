@@ -17,7 +17,7 @@ The following **Figure 1** demonstrates a simple static scene.
 
 **Figure 1: Basic scene**
 
-![Basic Scene](images/basic-scene.png)
+![Basic Scene](../images/basic-scene.png)
 
 In terms of the Drawing API, the **Figure 1** scene consists of a [`Path`](/api/javascript/drawing/path) (the violet border), [`Text`](/api/javascript/drawing/text), and an [`Image`](/api/javascript/drawing/image). The following example demonstrates the full code required to render the scene. Notice a number of structures that define the position, size, and appearance of each element.
 

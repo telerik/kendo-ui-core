@@ -38,5 +38,5 @@ To encode a point on the earth, including altitude, use a geo URI. For example, 
 
 ## See Also
 
-* [Basic Usage of the QRCode (Demo)](http://demos.telerik.com/kendo-ui/qrcode/inde)
+* [Basic Usage of the QRCode (Demo)](http://demos.telerik.com/kendo-ui/qrcode/index)
 * [JavaScript API Reference of the QRCode](/api/javascript/dataviz/ui/qrcode)
