@@ -132,7 +132,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 
 Kendo UI Core depends on the following libraries:
 
-- [jQuery](http://www.jquery.com) v1.12.4+
+- [jQuery](http://www.jquery.com) v1.9.1+
 
 Kendo UI Core has not been tested against any other versions of these libraries. You may find that versions other than these are compatible with Kendo UI Core. However, we make no claims to support those versions, and will not troubleshoot issues that arise when using those versions.
 

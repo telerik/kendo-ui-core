@@ -44,6 +44,9 @@ navigation:
     "controls/data-management/listview/export":
         title: "Export"
         position: 5
+    "controls/data-management/filemanager/binding":
+        title: "Data Binding"
+        position: 2
     "controls/data-management/grid/binding":
         title: "Data Binding"
         position: 2
@@ -104,7 +107,6 @@ navigation:
         title: "Templates"
     "controls/data-management/grid/how-to/various":
         title: "Various"
-
     "controls/data-management/pivotgrid/binding":
         title: "Data Binding"
         position: 2
@@ -114,7 +116,6 @@ navigation:
     "controls/data-management/pivotgrid/how-to":
         title: "How To"
         position: 70
-
     "controls/data-management/spreadsheet/import-and-export-data":
         title: "Data Import and Export"
         position: 7
@@ -548,6 +549,9 @@ navigation:
         title: "DropDownTree"
     "*editor":
         title: "Editor"
+    "*filemanager":
+        title: "FileManager"
+        isNew: true
     "*filter":
         title: "Filter"
     "*gantt":
@@ -1640,6 +1644,12 @@ defaults:
         path: "framework/globalization"
     values:
         component: "globalization"
+
+-
+    scope:
+        path: "controls/data-management/filemanager"
+    values:
+        component: "filemanager"
 
 -
     scope:

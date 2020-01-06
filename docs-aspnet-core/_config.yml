@@ -88,6 +88,8 @@ navigation:
         title: "Data Source"
      "html-helpers/data-management":
         title: "Data Management"
+     "html-helpers/data-management/filemanager":
+        title: "FileManager"
      "html-helpers/data-management/filter":
         title: "Filter"
      "html-helpers/data-management/grid":
