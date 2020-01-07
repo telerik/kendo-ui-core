@@ -4491,6 +4491,14 @@ If set to `true`, the TreeList will display a scrollbar when the total row heigh
       });
     </script>
 
+### search `Object`
+
+Configures the Kendo UI TreeList search bar settings.
+
+### search.fields `Array`
+
+Defines a list of fields which will be included in the search. If values for the property are not defined the treelist will search in all column fields.
+
 ### selectable `Boolean|String` *(default: false)*
 
 If set to `true`, the user will be able to select TreeList rows. By default, selection is disabled.
@@ -4623,13 +4631,14 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
   * `create` - Adds an empty data item to the treelist.
   * `excel` - Exports the TreeList data in MS Excel format.
   * `pdf` - Exports the TreeList data in PDF format.
+  * `search` - built-in search panel for the TreeList.
 
 #### Example - configuring the TreeList toolbar as a string template
 
       <div id="treeList"></div>
       <script>
         $("#treeList").kendoTreeList({
-            toolbar: "<p>My string template in a paragraph.</p>",
+          toolbar: "<p>My string template in a paragraph.</p>",
           columns: [
             { field: "name" },
             { field: "age" }
@@ -4647,13 +4656,24 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
         });
       </script>
 
-#### Example - configuring the TreeList Toolbar template with a function
+#### Example - configuring the TreeList Toolbar template with a function and including the built in search functionality
 
     <div id="treeList"></div>
     <script type="text/x-kendo-template" id="template">
-			<label for="enableChk"><input type="checkbox" id="enableChk"/>Enable</label>
+			<a class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
+      <span class="k-textbox k-grid-search k-display-flex">
+          <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+          <span class="k-input-icon">
+              <span class="k-icon k-i-search"></span>
+          </span>
+      </span>
     </script>
     <script>
+      function toolbar_click() {
+        kendo.alert("Toolbar command is clicked!");
+        return false;
+      }
+
       $("#treeList").kendoTreeList({
         toolbar: kendo.template($("#template").html()),
         columns: [
@@ -4678,7 +4698,7 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
     <div id="treeList"></div>
     <script>
       $("#treeList").kendoTreeList({
-        toolbar: ["excel", "pdf"],
+        toolbar: ["excel", "pdf", "search"],
         columns: [
           { field: "name" },
           { field: "age" }

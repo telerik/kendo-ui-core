@@ -55,6 +55,8 @@ navigation:
         title: "Data Management"
      "helpers/data-management/filter":
         title: "Filter"
+     "helpers/data-management/filemanager":
+        title: "FileManager"
      "helpers/data-management/pivotgrid":
         title: "PivotGrid"
      "helpers/diagrams-and-maps":
@@ -158,8 +160,13 @@ navigation:
         title: "Editor"
      "*gantt":
         title: "Gantt"
+     "*filemanager":
+        title: "FileManager"
      "*grid":
         title: "Grid"
+     "helpers/data-management/filemanager/binding":
+        title: "Data Binding"
+        position: 2
      "helpers/data-management/grid/binding":
         title: "Data Binding"
         position: 4

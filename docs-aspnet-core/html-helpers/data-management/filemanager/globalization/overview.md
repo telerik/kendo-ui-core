@@ -15,11 +15,10 @@ The globalization functionality of the FileManager is enabled through:
 * [Localization of messages]({% slug localization_aspnetcore_filemanager %})
 * [Right-to-left support]({% slug rtl_aspnetcore_filemanager %})
 
-For more information on using localization, internationalization, and right-to-left languages with Kendo UI widgets, refer to the article on [globalization support by Kendo UI for jQuery]({% slug overview_kendoui_globalization %}).
+For more information on using localization and right-to-left languages with Telerik UI for ASP.NET Core helpers, refer to the article on [globalization support by Telerik UI for ASP.NET Core]({% slug overview_globalization_core %}).
+
 
 ## See Also
 
-<!-- * [Localization Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/filemanager/localization) -->
-<!-- * [RTL Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/right-to-left-support) -->
-* [Globalization in Kendo UI for jQuery]({% slug overview_kendoui_globalization %})
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [Globalization in Telerik UI for ASP.NET Core]({% slug overview_globalization_core %})
+

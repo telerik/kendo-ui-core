@@ -742,6 +742,10 @@ declare namespace kendo.data {
         parentNode(): Node;
     }
 
+    class FileEntrty extends Node {
+        children: FileManagerDataSource;
+    }
+
     class SchedulerDataSource extends DataSource {
         add(model: Object): kendo.data.SchedulerEvent;
         add(model: kendo.data.SchedulerEvent): kendo.data.SchedulerEvent;
@@ -798,6 +802,23 @@ declare namespace kendo.data {
     interface HierarchicalDataSourceSchemaModel extends DataSourceSchemaModel {
         hasChildren?: any;
         children?: any;
+    }
+
+    class FileManagerDataSource extends HierarchicalDataSource {
+        constructor(options?: FileManagerDataSourceOptions);
+        init(options?: FileManagerDataSourceOptions): void;
+    }
+
+    interface FileManagerDataSourceOptions extends HierarchicalDataSourceOptions {
+        schema?: FileManagerDataSourceSchema;
+    }
+
+    interface FileManagerDataSourceSchema extends HierarchicalDataSourceSchema {
+        model?: FileManagerDataSourceSchemaModel;
+    }
+
+    interface FileManagerDataSourceSchemaModel extends HierarchicalDataSourceSchemaModel {
+        isDirectory?: any;
     }
 
     interface PivotDiscoverRequestRestrictionOptions {
@@ -3635,6 +3656,210 @@ declare namespace kendo.ui {
     interface EditorPdfExportEvent extends EditorEvent {
         promise?: JQueryPromise<any>;
     }
+
+    class FileManager extends kendo.ui.Widget {
+
+        static fn: FileManager;
+
+        options: FileManagerOptions;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): FileManager;
+
+        constructor(element: Element, options?: FileManagerOptions);
+
+
+        path(): void;
+        view(): void;
+        navigate(): void;
+        refresh(): void;
+        select(): void;
+        executeCommand(): void;
+        getSelected(): void;
+        getSize(): void;
+        destroy(): void;
+
+    }
+
+    interface FileManagerBreadcrumb {
+        rootIcon?: string;
+        delimiterIcon?: string;
+    }
+
+    interface FileManagerContextMenuItem {
+        name?: string;
+        text?: string;
+        spriteCssClass?: string;
+        command?: string;
+    }
+
+    interface FileManagerContextMenu {
+        items?: FileManagerContextMenuItem[];
+    }
+
+    interface FileManagerDialogs {
+        upload?: any;
+        moveConfirm?: any;
+        deleteConfirm?: any;
+        renamePrompt?: any;
+    }
+
+    interface FileManagerMessagesDialogsDeleteConfirm {
+        title?: string;
+        content?: string;
+        okText?: string;
+        cancel?: string;
+        close?: string;
+    }
+
+    interface FileManagerMessagesDialogsMoveConfirm {
+        title?: string;
+        content?: string;
+        okText?: string;
+        cancel?: string;
+        close?: string;
+    }
+
+    interface FileManagerMessagesDialogsRenamePrompt {
+        title?: string;
+        content?: string;
+        okText?: string;
+        cancel?: string;
+        close?: string;
+    }
+
+    interface FileManagerMessagesDialogsUpload {
+        title?: string;
+        clear?: string;
+        done?: string;
+    }
+
+    interface FileManagerMessagesDialogs {
+        upload?: FileManagerMessagesDialogsUpload;
+        moveConfirm?: FileManagerMessagesDialogsMoveConfirm;
+        deleteConfirm?: FileManagerMessagesDialogsDeleteConfirm;
+        renamePrompt?: FileManagerMessagesDialogsRenamePrompt;
+    }
+
+    interface FileManagerMessagesPreviewPane {
+        noFileSelected?: string;
+        extension?: string;
+        size?: string;
+        created?: string;
+        modified?: string;
+        items?: string;
+    }
+
+    interface FileManagerMessagesToolbar {
+        createFolder?: string;
+        uploadDialog?: string;
+        sortDirection?: string;
+        sortDirectionAsc?: string;
+        sortDirectionDesc?: string;
+        sortField?: string;
+        nameField?: string;
+        sizeField?: string;
+        typeField?: string;
+        dateModifiedField?: string;
+        dateCreatedField?: string;
+        search?: string;
+        details?: string;
+        detailsChecked?: string;
+        detailsUnchecked?: string;
+        delete?: string;
+        rename?: string;
+    }
+
+    interface FileManagerMessagesViews {
+        nameField?: string;
+        sizeField?: string;
+        typeField?: string;
+        dateModifiedField?: string;
+        dateCreatedField?: string;
+        items?: string;
+    }
+
+    interface FileManagerMessages {
+        toolbar?: FileManagerMessagesToolbar;
+        views?: FileManagerMessagesViews;
+        dialogs?: FileManagerMessagesDialogs;
+        previewPane?: FileManagerMessagesPreviewPane;
+    }
+
+    interface FileManagerPreviewPane {
+        metaFields?: any;
+        noFileTemplate?: string|Function;
+        singleFileTemplate?: string|Function;
+        multipleFilesTemplate?: string|Function;
+    }
+
+    interface FileManagerToolbarItem {
+        type?: string;
+        overflow?: string;
+        command?: string;
+        options?: string;
+        name?: string;
+        togglable?: boolean;
+        text?: string;
+        template?: string|Function;
+        showText?: string;
+        primary?: boolean;
+        attributes?: any;
+        enable?: boolean;
+        hidden?: boolean;
+        spriteCssClass?: string;
+        imageUrl?: string;
+        showIcon?: string;
+        icon?: string;
+        id?: string;
+    }
+
+    interface FileManagerToolbar {
+        items?: FileManagerToolbarItem[];
+    }
+
+    interface FileManagerViews {
+        grid?: any;
+        list?: any;
+        tree?: any;
+    }
+
+    interface FileManagerOptions {
+        name?: string;
+        width?: number|string;
+        height?: number|string;
+        initialView?: string;
+        resizable?: boolean;
+        draggable?: boolean;
+        dataSource?: any|any|kendo.data.FileManagerDataSource;
+        upload?: any;
+        uploadUrl?: string;
+        toolbar?: boolean | FileManagerToolbar;
+        dialogs?: FileManagerDialogs;
+        contextMenu?: boolean | FileManagerContextMenu;
+        views?: FileManagerViews;
+        previewPane?: FileManagerPreviewPane;
+        breadcrumb?: boolean | FileManagerBreadcrumb;
+        messages?: FileManagerMessages;
+        navigate?(e: FileManagerEvent): void;
+        select?(e: FileManagerEvent): void;
+        open?(e: FileManagerEvent): void;
+        execute?(e: FileManagerEvent): void;
+        error?(e: FileManagerEvent): void;
+        dataBinding?(e: FileManagerEvent): void;
+        dataBound?(e: FileManagerEvent): void;
+        drop?(e: FileManagerEvent): void;
+    }
+    interface FileManagerEvent {
+        sender: FileManager;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
 
 
     class Filter extends kendo.ui.Widget {
@@ -8335,7 +8560,7 @@ declare namespace kendo.ui {
         text?: string;
         togglable?: boolean;
         toggle?: Function;
-        type?: string;        
+        type?: string;
         url?: string;
     }
 

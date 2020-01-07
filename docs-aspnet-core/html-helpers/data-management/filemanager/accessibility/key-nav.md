@@ -15,6 +15,4 @@ The FileManager entirely relies on the composite components for their keyboard n
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
-* [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
-* [Accessibility in the Grid]({% slug keyboard_shortcuts_accessibility_support %})
+* [Accessibility in Telerik UI for ASP.NET Core]({% slug overview_accessibility %})

@@ -4496,7 +4496,7 @@ function pad(number, digits, end) {
         "disc-image": [".dmg", ".iso", ".toast", ".vcd", ".bin", ".cue", ".mdf"]
     };
 
-    kendo.getFileGroup = function(extension) {
+    kendo.getFileGroup = function(extension, withPrefix) {
         var fileTypeMap = kendo.fileGroupMap;
         var groups = Object.keys(fileTypeMap);
         var type = "file";
@@ -4513,7 +4513,7 @@ function pad(number, digits, end) {
             var extensions = fileTypeMap[groups[i]];
 
             if (extensions.indexOf(extension.toLowerCase()) > -1) {
-               return "file-" + groups[i];
+               return withPrefix ? "file-" + groups[i] : groups[i];
             }
         }
 

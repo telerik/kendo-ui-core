@@ -11,9 +11,9 @@ position: 2
 
 This article demonstrates how to include the client-side resources which are required by Telerik<sup>®</sup> UI for ASP.NET Core in Visual Studio 2017 projects.
 
-As the UI for ASP.NET Core suite is a set of [server-side wrappers over the Kendo UI for jQuery client-side widgets](https://docs.telerik.com/aspnet-mvc/getting-started/kendo-ui-vs-mvc-wrappers), to run the components, you have to provide the same set of web assets. For more information on the files you need, refer to the articles on:
+As the UI for ASP.NET Core suite is a set of [server-side wrappers over the Kendo UI for jQuery client-side widgets](https://docs.telerik.com/aspnet-core/introduction#widgets-vs-helpers), to run the components, you have to provide the same set of web assets. For more information on the files you need, refer to the articles on:
 
-* [Getting Started with Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/intro/first-steps)
+* [Getting Started with Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/intro/first-steps) - Add the required JavaScript and CSS files
 * [Getting Started with Kendo UI Themes](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)
 
 To include the client-side resources, use any of the following approaches:
@@ -23,6 +23,9 @@ To include the client-side resources, use any of the following approaches:
 * [Using NPM and Webpack]({% slug npmpackages_core %})
 
 1. Go to the [UI for ASP.NET Core download page](https://www.telerik.com/account/product-download?product=UIASPCORE) or to **Account Overview** > **Downloads** > **Telerik UI for ASP.NET Core**.
+
+## Manual Installation
+
 1. Download the archive that matches the `Kendo.Mvc.UI` version:
 
     - `telerik.ui.for.aspnet.core.{{ site.mvcCoreVersion }}.commercial-source` includes non-minified scripts and styles.

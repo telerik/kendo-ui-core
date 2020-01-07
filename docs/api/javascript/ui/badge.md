@@ -33,7 +33,7 @@ Specifies the look of the badge - `flat` or `outline`.
 	<script>
         $('#badge').kendoBadge({
             value: 'badge',
-            appearance: 'outline'
+            look: 'outline'
         })
 	</script>
 

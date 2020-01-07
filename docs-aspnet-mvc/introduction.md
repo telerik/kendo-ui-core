@@ -63,7 +63,8 @@ The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 20
 |Group                      |HTML Helpers                                 
 | :---                      | :---                                                                            
 | **Data Source**           |[DataSource Demos](https://demos.telerik.com/aspnet-mvc/datasource)                      
-| **Data Management**       |[Filter Docs]({% slug overview_filterhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/filter)     
+| **Data Management**       |[FileManager Docs]({% slug overview_filemanagerhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/filemanager) 
+|                           |[Filter Docs]({% slug overview_filterhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/filter)     
 |                           |[Grid Docs]({% slug overview_gridhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/grid)     
 |                           |[ListView Docs]({% slug overview_listviewhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/listview)    
 |                           |[PivotGrid Docs]({% slug overview_pivotgridhelper_aspnetmvc %}) & [Demos](https://demos.telerik.com/aspnet-mvc/pivotgrid)  

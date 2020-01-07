@@ -28,6 +28,7 @@ The following table lists the Telerik UI for ASP.NET MVC components which suppor
 |DropDownList  |Yes |AA  |[Yes](http://demos.telerik.com/aspnet-mvc/dropdownlist/keyboard-navigation)
 |DropDownTree  |Yes |AA  |[Yes](http://demos.telerik.com/aspnet-mvc/dropdowntree/keyboard-navigation)
 |Editor        |Yes |AA  |[Yes](http://demos.telerik.com/aspnet-mvc/editor/keyboard-navigation)
+|FileManager   |Yes |AAA |[Yes](http://demos.telerik.com/aspnet-mvc/filemanager/keyboard-navigation)
 |Gantt         |Yes |AA  |[Yes](http://demos.telerik.com/aspnet-mvc/gantt/keyboard-navigation)
 |Grid          |Yes |AAA |[Yes](http://demos.telerik.com/aspnet-mvc/grid/keyboard-navigation)
 |LinearGauge   |Yes |AAA |-
