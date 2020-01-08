@@ -3,7 +3,7 @@ title: Images
 page_title: Timeline Images | Telerik UI for ASP.NET MVC HTML Helpers
 description: "Adding images in the Telerik UI Timeline HtmlHelper for ASP.NET MVC"
 slug: images_timeline_aspnetmvc
-position: 15
+position: 4
 ---
 
 # Images

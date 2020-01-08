@@ -3,7 +3,7 @@ title: Actions
 page_title: Timeline Actions | Telerik UI for ASP.NET MVC HTML Helpers
 description: "Action links in the Telerik UI Timeline HtmlHelper for ASP.NET MVC."
 slug: actions_timeline_aspnetmvc
-position: 10
+position: 3
 ---
 
 # Actions

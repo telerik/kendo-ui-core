@@ -3,7 +3,7 @@ title: Templates
 page_title: Timeline Templates | Telerik UI for ASP.NET MVC HTML Helpers
 description: "Event templates in the Telerik UI Timeline HtmlHelper for ASP.NET MVC."
 slug: templates_timeline_aspnetmvc
-position: 20
+position: 6
 ---
 
 # Templates

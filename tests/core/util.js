@@ -83,6 +83,16 @@
             assert.equal(directiveSelector("view"), "kendo-mobile-view");
         });
 
+        var getFileSizeMessage = kendo.getFileSizeMessage;
+
+        it("returns correct message according to the size", function() {
+            assert.equal(getFileSizeMessage(0), "0 Byte");
+            assert.equal(getFileSizeMessage(1024), "1 KB");
+            assert.equal(getFileSizeMessage(1048576), "1 MB");
+            assert.equal(getFileSizeMessage(1073741824), "1 GB");
+            assert.equal(getFileSizeMessage(1099511627776), "1 TB");
+        });
+
     });
 }());
 

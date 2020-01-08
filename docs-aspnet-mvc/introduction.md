@@ -152,7 +152,7 @@ For any issues you might encounter while working with UI for ASP.NET MVC, use an
 
 ## Learning Resources
 
-* [Virtual Classroom](https://progress.exceedlms.com/student/path/369634-telerik-asp-net-mvc-net-core)
+* [Virtual Classroom](https://progress.exceedlms.com/student/path/498054-telerik-ui-for-asp-net-mvc)
 * [Tutorials]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Support Resources Hub Page](https://www.telerik.com/support/aspnet-mvc)
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)

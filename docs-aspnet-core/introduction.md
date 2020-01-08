@@ -146,7 +146,7 @@ For any issues you might encounter while working with UI for ASP.NET Core, use a
 
 ## Learning Resources
 
-* [Virtual Classroom](https://progress.exceedlms.com/student/path/369634-telerik-asp-net-mvc-net-core)
+* [Virtual Classroom](https://progress.exceedlms.com/student/path/497495-telerik-ui-for-asp-net-core)
 * [Knowledge Base](https://docs.telerik.com/aspnet-core/knowledge-base.html)
 * [Support Resources Hub Page](https://www.telerik.com/support/aspnet-core)
 

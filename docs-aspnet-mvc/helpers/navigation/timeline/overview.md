@@ -121,7 +121,7 @@ public class TimelineEventActionModel
 * [Actions]({%slug actions_timeline_aspnetmvc %})
 * [Images]({%slug images_timeline_aspnetmvc %})
 * [Templates]({%slug templates_timeline_aspnetmvc %})
-
+* [Binding to a Shared DataSource]({% slug shared_datasource_timeline_aspnetmvc %})
 
 ## Events
 

@@ -113,14 +113,13 @@ public class TimelineEventActionModel
 }
 ```
 
-
-
 ## Functionality and Features
 
 * [Orientation]({%slug orientation_htmlhelpers_timeline_aspnetcore %})
 * [Actions]({%slug actions_htmlhelpers_timeline_aspnetcore %})
 * [Images]({%slug images_htmlhelpers_timeline_aspnetcore %})
 * [Templates]({%slug templates_htmlhelpers_timeline_aspnetcore %})
+* [Binding to a Shared DataSource]({% slug shared_datasource_timeline_aspnetcore %})
 
 
 ## Events

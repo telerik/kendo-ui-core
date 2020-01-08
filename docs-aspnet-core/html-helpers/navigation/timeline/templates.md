@@ -3,7 +3,7 @@ title: Templates
 page_title: Timeline Templates | Telerik UI for ASP.NET Core HTML Helpers
 description: "Event templates in the Telerik UI Timeline HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: templates_htmlhelpers_timeline_aspnetcore
-position: 20
+position: 6
 ---
 
 # Templates

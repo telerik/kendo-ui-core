@@ -3,7 +3,7 @@ title: Actions
 page_title: Timeline Actions | Telerik UI for ASP.NET Core HTML Helpers
 description: "Action links in the Telerik UI Timeline HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: actions_htmlhelpers_timeline_aspnetcore
-position: 10
+position: 3
 ---
 
 # Actions

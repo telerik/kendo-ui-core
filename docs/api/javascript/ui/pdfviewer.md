@@ -480,20 +480,285 @@ Specifies the localization messages of the toolbar.
 ### fromFile
 Displays the file passed as a parameter in the PDFViewer. Currently, supported only for PDFJS Processing.
 
+> To run the below example, open it in Dojo
+
+#### Example
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+        <script>
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+        </script>
+
+        <div id="example">
+            <div class="box">
+                <div class="box-col">
+                    <h4>Load File</h4>
+                    <ul class="options">
+                        <li>
+                            <button class="k-button" id="loadFile" type="button">Load</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="pdfViewer">
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+
+                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+                    pdfjsProcessing: {
+                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"     },
+                    width: "100%",
+                    height: 700
+                }).data("kendoPDFViewer");
+
+                $("#loadFile").click(function () {
+                    pdfViewer.fromFile("https://demos.telerik.com/kendo-ui/content/web/pdfViewer/How Does Kendo UI Cut Development Time.pdf")
+                });
+            });
+        </script>
+
 ### activatePage
 Loads and scrolls to the page by number.
 
+> To run the below example, open it in Dojo
+
+#### Example
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+        <script>
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+        </script>
+
+        <div id="example">
+            <div class="box">
+                <div class="box-col">
+                    <h4>Change page</h4>
+                    <ul class="options">
+                        <li>
+                            <input id="numeric" type="number" title="numeric" value="17" min="1" max="3" step="1" style="width: 100%;" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="pdfViewer">
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                var numeric = $("#numeric").kendoNumericTextBox({
+                    change: onChange,
+                    spin: onSpin,
+                    format: "n0",
+                    value: 1
+                }).data("kendoNumericTextBox");
+
+                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+                    pdfjsProcessing: {
+                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+                    },
+                    width: "100%",
+                    height: 700
+                }).data("kendoPDFViewer");
+
+
+                function onChange(e) {
+                    var value = this.value();
+                    changePdfViewerPage(value)
+                }
+
+                function onSpin(e) {
+                    var value = this.value();
+                    changePdfViewerPage(value)
+                }
+
+                function changePdfViewerPage(value) {
+                    pdfViewer.activatePage(value);
+                }
+            });
+        </script>
+
 ### loadPage
-Loads the page by number.
+Renders page canvas by number
+
+> To run the below example, open it in Dojo
+
+#### Example
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+            <script>
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+            </script>
+
+            <div id="example">
+            <button id="btn">Load 3rd page of the current document</button>      
+            <br/><br/>
+            <div id="pdfViewer">
+            </div>
+            </div>
+
+            <script>
+            $(document).ready(function () {
+                var button = $("#btn").kendoButton({
+                click: onChange,
+                }).data("kendoButton");
+
+                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+                pdfjsProcessing: {
+                    file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+                },
+                width: "100%",
+                height: 700
+                }).data("kendoPDFViewer");
+
+
+                function onChange(e) {
+                pdfViewer.bind("render", function(){
+                    var canvas = pdfViewer.pageContainer.find("canvas")[2];
+
+                    $('<div></div>').kendoAlert({
+                    content: "<img width ='300' height ='300' src='"+ canvas.toDataURL() +"'/>"
+                    }).data("kendoAlert").open();
+                })
+                
+                pdfViewer.loadPage(3);
+
+                }
+            });
+            </script>
 
 ### execute
 Executes a command of the PDFViewer.
 
+> To run the below example, open it in Dojo
+
+#### Example
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+        <script>
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+        </script>
+
+        <div id="example">
+        
+            <input type="button" value="Download" onclick="onDownloadClick()"/>
+            <div id="pdfViewer">
+            </div>
+        </div>
+
+        <script>
+        
+
+        
+            $(document).ready(function () {
+                $("#pdfViewer").kendoPDFViewer({
+                    pdfjsProcessing: {
+                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
+                    },
+                    width: "100%",
+                    height: 1000,
+                    toolbar: {
+                        items: [
+                            "pager",
+                            "spacer",
+                            "open",
+                            "download"
+                        ]
+                    }
+                });
+            });
+        
+            function onDownloadClick(){
+                var pdfViewer = $("#pdfViewer").data("kendoPDFViewer");
+                pdfViewer.execute({command:"DownloadCommand"});
+            }
+        </script>
+
 ### setOptions
 Update the dimensions of the widget, the active page or the processor.
 
+> To run the below example, open it in Dojo
+
+#### Example
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+        <script>
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+        </script>
+
+        <div id="example">
+            <div class="box">
+                <div class="box-col">
+                    <ul class="options">
+                        <li>
+                            <button class="k-button" id="setOptions" type="button">Set the new options</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="pdfViewer">
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+
+                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+                    pdfjsProcessing: {
+                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"     
+                    },
+                    width: "100%",
+                    height: 700
+                }).data("kendoPDFViewer");
+
+                $("#setOptions").click(function () {
+                    pdfViewer.setOptions({
+                        width: "85%",
+                    height: 450
+                    })
+                });
+            });
+        </script>
+
 ### destroy
 Destroys the widget.
+
+> To run the below example, open it in Dojo
+
+#### Example
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+        <script>
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+        </script>
+
+        <div id="example">
+            <div class="box">
+                    <ul class="options">
+                        <li>
+                            <button class="k-button" id="destroyBtn" type="button">Destroy the widget</button>
+                        </li>
+                    </ul>
+            </div>
+            <div id="pdfViewer">
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+
+                var pdfViewer = $("#pdfViewer").kendoPDFViewer({
+                    pdfjsProcessing: {
+                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"     
+                    },
+                    width: "100%",
+                    height: 700
+                }).data("kendoPDFViewer");
+
+                $("#destroyBtn").click(function () {
+                debugger;
+                    $("#pdfViewer").data("kendoPDFViewer").destroy();
+                });
+            });
+        </script>
 
 ## Events
 

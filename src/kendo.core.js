@@ -4520,6 +4520,17 @@ function pad(number, digits, end) {
         return type;
     };
 
+    kendo.getFileSizeMessage = function(size) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+        if (size === 0) {
+            return '0 Byte';
+        }
+
+        var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)), 10);
+        return Math.round(size / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    };
+
     // kendo.saveAs -----------------------------------------------
     (function() {
         function postToProxy(dataURI, fileName, proxyURL, proxyTarget) {

@@ -22,5 +22,5 @@ The Virtual Classroom program aims at:
 * Exploring common development practices, code examples, and sample applications.
 
 To get started with the trainings, refer to:
-* [UI for ASP.NET Core Virtual Classroom](https://progress.exceedlms.com/student/path/369634-telerik-asp-net-mvc-net-core)
+* [UI for ASP.NET Core Virtual Classroom](https://progress.exceedlms.com/student/path/497495-telerik-ui-for-asp-net-core)
 * [All-Progress Products Virtual Classroom](https://www.telerik.com/account/support/virtual-classroom)
