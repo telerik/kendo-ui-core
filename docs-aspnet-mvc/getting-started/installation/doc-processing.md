@@ -16,6 +16,7 @@ Telerik Document Processing is a set of UI-independent and cross-platform librar
 Telerik Document Processing includes the following libraries:
 
 * [RadPdfProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview)&mdash;Create, import, and export PDF documents.
+* [RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview)&mdash;Create, modify, and save spreadsheet documents.
 * [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview)&mdash;Export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
 * [RadWordsProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview)&mdash;Create, import, and export `DOCX`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
 * [RadZipLibrary](http://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview)&mdash;Compress and decompress `ZIP` files.
@@ -24,27 +25,25 @@ Telerik Document Processing includes the following libraries:
 
 The Telerik Document Processing libraries support the following file formats:
 
-* `CSV`
 * `DOCX`
 * `HTML`
-* `PDF`
 * `RTF`
 * `TXT`
+* `PDF`
 * `XLSX`
+* `CSV`
 * `ZIP`
 
 ## Available Assemblies
 
-Telerik Document Processing supports [.NET Framework 4.0](https://dotnet.microsoft.com/download/dotnet-framework/net40) and [.NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653). To handle the demands of your project, take the required assembly from the `Bin40` or `Bin45` folder respectively:
+Telerik Document Processing supports [.NET Framework 4.0](https://dotnet.microsoft.com/download/dotnet-framework/net40) and [.NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653) or later versions. To handle the demands of your project, take the required assembly from the `Bin40` or `Bin45` folder respectively:
 
 * `Telerik.Windows.Documents.Core.dll`&mdash;The main assembly from the Telerik Document Processing libraries. Required when you plan to use the library.
 * `Telerik.Windows.Documents.Flow.dll`&mdash;The assembly is part of the Word (text) processing library. Required for processing `HTML`, `DOCX`, `RTF`, and `TXT` documents.
-* `Telerik.Windows.Zip.dll`&mdash;The assembly is required when working with zipped formats such as `DOCX`, `XLSX`, and PDF.
 * `Telerik.Windows.Documents.Flow.FormatProviders.Pdf`&mdash;The assembly allows for exporting of flow documents, such as `DOCX` and `RTF`, to PDF.
-* `Telerik.Windows.Documents.Spreadsheet.dll`&mdash;The main assembly for spreadsheet processing. Required when processing `XLSX`, `CSV`, and `TXT` documents.
 * `Telerik.Documents.SpreadsheetStreaming.dll`&mdash;The main assembly for generating huge spreadsheet files and using minimum resources.
+* `Telerik.Windows.Documents.Fixed.dll`&mdash;The assembly is required when processing PDF documents.* `Telerik.Windows.Documents.Spreadsheet.dll`&mdash;The main assembly for spreadsheet processing. Required when processing `XLSX`, `CSV`, and `TXT` documents.
 * `Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll`&mdash;The assembly is required when processing `XLSX` documents.
-* `Telerik.Windows.Documents.Fixed.dll`&mdash;The assembly is required when processing PDF documents.
 * `Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll`&mdash;The assembly is required when processing PDF documents.
 * `Telerik.Windows.Zip.dll`&mdash;The assembly of the [**Telerik Zip Library**](http://demos.telerik.com/aspnet-ajax/ziplibrary/examples/overview/defaultcs.aspx). Required when working with zipped formats, such as `DOCX` and `XLSX`, and PDF.
 * `Telerik.Windows.Zip.Extensions.dll`&mdash;The assembly extends `Telerik.Windows.Zip` with additional helper methods (Zip Extensions).
