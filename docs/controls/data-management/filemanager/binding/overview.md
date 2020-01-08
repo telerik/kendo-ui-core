@@ -7,3 +7,14 @@ position: 0
 ---
 
 # DataBiding Overview
+
+descrive mandatory fields: 
+
+ name: "Folder",
+    isDirectory: true,
+    hasDirectories: false,
+    path: "Folder2/Folder",
+    extension: "",
+    size: 0,
+    createdUtc: new Date(),
+    items: []

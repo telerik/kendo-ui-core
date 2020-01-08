@@ -251,8 +251,6 @@ Specifies the ID of the button.
 
 ### refresh
 
-### select
-
 ### executeCommand
 
 ### getSelected

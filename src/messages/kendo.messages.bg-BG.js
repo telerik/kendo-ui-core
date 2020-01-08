@@ -893,14 +893,16 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "alignLeftBottom": "Подравни ляво и долу",
   "alignCenterBottom": "Подравни център и горе",
   "alignRightBottom": "Подравни дясно и долу",
-  "alignRemove": "RПремахни подравняване",
+  "alignRemove": "Премахни подравняване",
   "columns": "Колони",
   "rows": "Редове",
   "selectAllCells": "Избери всички клетки",
   "print": "Принтирай",
   "associateNone": "Без асоцииране",
   "associateScope": "Асоцииране чрез 'scope' атрибут",
-  "associateIds": "Асоцииране чрез Id"
+  "associateIds": "Асоцииране чрез Id",
+  "copyFormat": "Копирай форматирането",
+  "applyFormat": "Приложи форматирането"
 });
 }
 

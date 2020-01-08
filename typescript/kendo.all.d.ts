@@ -3538,6 +3538,8 @@ declare namespace kendo.ui {
         viewHtml?: string;
         width?: string;
         wrapText?: string;
+        copyFormat?: string;
+        applyFormat?: string;
     }
 
     interface EditorPasteCleanup {
@@ -3677,7 +3679,6 @@ declare namespace kendo.ui {
         view(): void;
         navigate(): void;
         refresh(): void;
-        select(): void;
         executeCommand(): void;
         getSelected(): void;
         getSize(): void;
@@ -7189,6 +7190,7 @@ declare namespace kendo.ui {
     }
 
     interface SchedulerView {
+        adaptiveSlotHeight?: boolean;
         allDayEventTemplate?: string|Function;
         allDaySlot?: boolean;
         allDaySlotTemplate?: string|Function;
@@ -7197,7 +7199,9 @@ declare namespace kendo.ui {
         dayTemplate?: string|Function;
         editable?: boolean | SchedulerViewEditable;
         endTime?: Date;
-        eventHeight?: number;
+        eventHeight?: number | string;
+        eventSpacing?: number;
+        eventsPerDay?: number;
         eventTemplate?: string|Function;
         eventTimeTemplate?: string|Function;
         group?: SchedulerViewGroup;

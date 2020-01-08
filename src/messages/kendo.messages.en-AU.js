@@ -149,7 +149,9 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "tableSummaryPlaceholder": "Summary attribute is not HTML5 compatible.",
   "associateNone": "None",
   "associateScope": "Associate using 'scope' attribute",
-  "associateIds": "Associate using Ids"
+  "associateIds": "Associate using Ids",
+  "copyFormat": "Copy format",
+  "applyFormat": "Apply format"
 });
 }
 

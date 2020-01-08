@@ -112,6 +112,8 @@ The following example demonstrates how to initialize the Timeline from a JSON `d
 * [Actions]({% slug actions_kendoui_timeline_widget %})
 * [Images]({% slug images_kendoui_timeline_widget %})
 * [Templates]({% slug templates_kendoui_timeline_widget %})
+* [Binding to a Shared DataSource]({% slug shared_datasource_kendoui_timeline_widget %})
+
 
 ## Referencing Existing Instances
 

@@ -489,6 +489,21 @@ The title of the tool that aligns the cell text.
     });
     </script>
 
+### messages.applyFormat `String` *(default: 'Apply format')*
+
+The title of the format painter tool button that applies the copied format.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        applyFormat: "Apply the format that has been copied"
+      }
+    });
+    </script>
+
 ### messages.associateCellsWithHeaders `String` *(default: 'Associate cells with headers')*
 
 The title of the Associate cells with headers tool.
@@ -695,6 +710,21 @@ The title of the Columns tool in Table Wizard.
     $("#editor").kendoEditor({
       messages: {
         columns: "Columns"
+      }
+    });
+    </script>
+
+### messages.copyFormat `String` *(default: 'Copy format')*
+
+The title of the format painter tool button that copies format.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        copyFormat: "Copy format from selected range"
       }
     });
     </script>
@@ -2195,6 +2225,8 @@ The available editor commands are:
         - **print**
 *   Export to PDF
         - **pdf**
+*   Format painter
+        - **copyFormat**, **applyFormat**
 
 #### Example
 

@@ -4287,6 +4287,55 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.
     });
     </script>
 
+### views.adaptiveSlotHeight `Boolean` *(default: false)*
+
+Increases the slot height when containing events up to views.eventsPerDay and reduces its height if there are less events for that specific day.
+
+> The `adaptiveSlotHeight` option is supported when `views.type` is set to "month".
+
+#### Example - set the adaptive slot height in month view
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "month",
+          eventsPerDay: 4,
+          adaptiveSlotHeight: true
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview1"
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview2"
+        },
+        {
+          id: 3,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview3"
+        },
+        {
+          id: 4,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview4"
+        }
+      ],
+      height: 1000
+    });
+    </script>
+
 ### views.allDayEventTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the "all day" scheduler events.
@@ -4747,11 +4796,11 @@ The fields which can be used in the template are:
     });
     </script>
 
-### views.eventHeight `Number` *(default: 25)*
+### views.eventHeight `String|Number` *(default: 25)*
 
-The height of the scheduler event rendered in month and timeline views.
+The height of the scheduler event rendered in month and timeline views. In month view it could be set to a concrete number or to the string value "auto". When set to "auto" it will automatically set the views.adaptiveSlotHeight property to true.
 
-> The `eventHeight` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
+> The `eventHeight` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth". The "auto" value is supported when views.type is set to "month" and it sets the views.adaptiveSlotHeight to true.
 
 #### Example - set the event height in month view
 
@@ -4771,6 +4820,103 @@ The height of the scheduler event rendered in month and timeline views.
           start: new Date("2013/6/6 08:00 AM"),
           end: new Date("2013/6/6 09:00 AM"),
           title: "Interview"
+        }
+      ],
+      height: 1000
+    });
+    </script>
+
+### views.eventSpacing `Number` *(default: 3)*
+
+Specifies the distance between individual events.
+
+> The`eventSpacing option is supported when `views.type` is set to "month".
+
+#### Example - set the event spacing in month view
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "month",
+          eventsPerDay: 4,
+          eventSpacing: 4
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview1"
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview2"
+        },
+        {
+          id: 3,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview3"
+        },
+        {
+          id: 4,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview4"
+        }
+      ],
+      height: 1000
+    });
+    </script>
+
+### views.eventsPerDay `Number` *(default: 2)*
+
+Indicates how many events could be listed for a day. When there are more events for a specific day a "more" link will be placed at the bottom of the day slot and will navigate to the day view if clicked.
+
+> The `eventsPerDay` option is supported when `views.type` is set to "month". If it is set to 0 it is internally set to 1.
+
+#### Example - set the events per day in month view
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "month",
+          eventsPerDay: 4
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview1"
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview2"
+        },
+        {
+          id: 3,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview3"
+        },
+        {
+          id: 4,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview4"
         }
       ],
       height: 1000
