@@ -44,6 +44,10 @@
     cursor: default;
 }
 
+.k-grid-header th.k-header .k-checkbox {
+    vertical-align: top;
+}
+
 .k-filtercell,
 .k-filtercell > span,
 .k-filtercell .k-widget
@@ -890,24 +894,6 @@ html .k-grid-edit-row .k-widget.k-tooltip {
     display: none !important;
 }
 
-.k-grid {
-    input.k-checkbox + label.k-checkbox-label {
-        cursor: default;
-        outline: 0;
-    }
-
-    .k-checkbox-label.k-no-text {
-        padding: 0;
-    }
-
-    .k-edit-cell {
-        input[type='checkbox'],
-        input.k-checkbox + label.k-checkbox-label {
-            margin-left: .3em;
-        }
-    }
-}
-
 .k-grid .k-grouping-row {
     td {
         border-bottom-width: 0;
@@ -925,25 +911,6 @@ html .k-grid-edit-row .k-widget.k-tooltip {
 .k-grid .k-group-cell {
     border-bottom-width: 0;
     border-top-width: 0;
-}
-
-.k-window .k-popup-edit-form .k-edit-field {
-    input.k-checkbox {
-        position: absolute;
-        margin-left: 1px;
-        margin-top: 0.8em;
-        width: 14px;
-        height: 14px;
-        z-index: 1;
-
-        + label.k-checkbox-label {
-            cursor: default;
-        }
-    }
-
-    label.k-checkbox-label {
-        margin-top: 0.5em;
-    }
 }
 
 .k-grid-header {

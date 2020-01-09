@@ -14,6 +14,16 @@
     .fill( @card-header-text, @card-header-bg, @card-header-border );
 }
 
+// Footer
+.k-card-footer {
+    .fill( @card-footer-text, @card-footer-bg, @card-footer-border );
+}
+
+// Separator
+.k-card-separator {
+    border-color: @card-border;
+}
+
 
 // Card actions
 .k-card-actions {
@@ -22,35 +32,40 @@
 
 
 // Theme variantsmix
-.k-card.k-state-primary {
+.k-card.k-state-primary,
+.k-card.k-card-primary {
     .fill(
         @card-primary-text,
         @card-primary-bg,
         @card-primary-border
     )
 }
-.k-card.k-state-info {
+.k-card.k-state-info,
+.k-card.k-card-info {
     .fill(
         @card-info-text,
         @card-info-bg,
         @card-info-border
     )
 }
-.k-card.k-state-success {
+.k-card.k-state-success,
+.k-card.k-card-success {
     .fill(
         @card-success-text,
         @card-success-bg,
         @card-success-border
     )
 }
-.k-card.k-state-warning {
+.k-card.k-state-warning,
+.k-card.k-card-warning {
     .fill(
         @card-warning-text,
         @card-warning-bg,
         @card-warning-border
     )
 }
-.k-card.k-state-error {
+.k-card.k-state-error,
+.k-card.k-card-error {
     .fill(
         @card-error-text,
         @card-error-bg,

@@ -1263,6 +1263,21 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
+    function sortFields(sorts, dir) {
+        var sortObject = {};
+
+        if (sorts) {
+            var descriptor = typeof sorts === STRING ? { field: sorts, dir: dir } : sorts,
+            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+            for (var i = 0; i < descriptors.length; i++) {
+                sortObject[descriptors[i].field] = { dir: descriptors[i].dir, index: i + 1 };
+            }
+        }
+
+        return sortObject;
+    }
+
     var operatorMap = {
         "==": "eq",
         equals: "eq",
@@ -3871,6 +3886,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (options.sort) {
                     that._sort = options.sort = normalizeSort(options.sort);
+                    that._sortFields = sortFields(options.sort);
                 }
 
                 if (options.filter) {
@@ -4029,6 +4045,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if(val !== undefined) {
+                that.trigger("sort");
                 that._query({ sort: val });
                 return;
             }

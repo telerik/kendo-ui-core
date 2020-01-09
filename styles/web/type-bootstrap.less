@@ -216,6 +216,10 @@
 @card-header-text: @header-text-color;
 @card-header-border: @card-border;
 
+@card-footer-bg: @header-background-color;
+@card-footer-text: @header-text-color;
+@card-footer-border: @card-border;
+
 @card-primary: @accent;
 @card-primary-bg: mix( white, @card-primary, 70%);
 @card-primary-text: mix(black, @card-primary);
@@ -576,6 +580,70 @@
 @badge-error-text: contrast( @badge-error-bg );
 @badge-error-border: @badge-error-bg;
 
+//Checkboxes
+@checkbox-icon-size: 12px;
+@checkbox-size: @icon-size;
+@checkbox-radius: @border-radius;
+@checkbox-border-width: 1px;
+@checkbox-line-height: (@checkbox-size + @checkbox-border-width);
+
+@checkbox-bg: @input-bg;
+@checkbox-text: @input-text;
+@checkbox-border: @input-border;
+@checkbox-hovered-bg: @checkbox-bg;
+@checkbox-hovered-text: @accent;
+@checkbox-hovered-border: @input-hovered-border;
+@checkbox-checked-bg: @accent;
+@checkbox-checked-text: @checkbox-bg;
+@checkbox-checked-border: @accent;
+@checkbox-indeterminate-bg: @checkbox-bg;
+@checkbox-indeterminate-text: @checkbox-checked-bg;
+@checkbox-indeterminate-border: @checkbox-border;
+@checkbox-focused-border: @checkbox-hovered-border;
+@checkbox-focused-shadow: 0 0 0 2px rgba(0, 0, 0, .06);
+@checkbox-focused-checked-border: @checkbox-checked-border;
+@checkbox-focused-checked-shadow: 0 0 0 2px rgba(@accent, .3);
+@checkbox-disabled-bg: null;
+@checkbox-disabled-text: null;
+@checkbox-disabled-border: null;
+@checkbox-disabled-checked-bg: null;
+@checkbox-disabled-checked-text: null;
+@checkbox-disabled-checked-border: null;
+@checkbox-invalid-bg: null;
+@checkbox-invalid-text: null;
+@checkbox-invalid-border: @checkbox-checked-bg;
+
+
+//Radio Buttons
+@radio-icon-size: 12px;
+@radio-size: @icon-size;
+@radio-radius: 50%;
+@radio-border-width: 1px;
+@radio-line-height: @radio-size + @radio-border-width;
+
+@radio-bg: @checkbox-bg;
+@radio-text: @checkbox-text;
+@radio-border: @checkbox-border;
+@radio-hovered-bg: @checkbox-hovered-bg;
+@radio-hovered-text: @checkbox-hovered-text;
+@radio-hovered-border: @checkbox-hovered-border;
+@radio-checked-bg: @checkbox-checked-bg;
+@radio-checked-text: @checkbox-checked-text;
+@radio-checked-border: @checkbox-checked-border;
+@radio-indeterminate-bg: @radio-checked-bg;
+@radio-indeterminate-text: @radio-checked-text;
+@radio-indeterminate-border: @radio-checked-border;
+@radio-focused-border: @checkbox-hovered-border;
+@radio-focused-shadow: @checkbox-focused-shadow;
+@radio-focused-checked-border: @checkbox-checked-border;
+@radio-focused-checked-shadow: @checkbox-focused-checked-shadow;
+@radio-disabled-bg: null;
+@radio-disabled-text: null;
+@radio-disabled-border: null;
+@radio-disabled-checked-bg: null;
+@radio-disabled-checked-text: null;
+@radio-disabled-checked-border: null;
+
 
 // FileManager
 @filemanager-bg: false;
@@ -654,6 +722,8 @@
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
 @import "Default/badge/_theme.less";
+@import "Default/checkbox/_theme.less";
+@import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
 
 
@@ -2377,9 +2447,6 @@ div.k-filebrowser-dropzone em
    .box-shadow(@button-focused-shadow);
 }
 
-@import "themes/checkbox.less";
-@import "themes/radiobutton.less";
-
 // High contrast mode
 @media screen and (-ms-high-contrast: active) {
     .k-editor-toolbar-wrap .k-dropdown-wrap.k-state-focused,
@@ -3114,16 +3181,6 @@ td.k-state-focused.k-state-selected,
 }
 .k-spreadsheet-name-editor .k-select {
     background-color: @button-hover-background-color;
-}
-
-.k-window .k-popup-edit-form .k-edit-field {
-    input.k-checkbox {
-        margin-top: 1.1em;
-    }
-
-    label.k-checkbox-label {
-        margin-top: 0.7em;
-    }
 }
 
 // Dialog

@@ -181,6 +181,9 @@
 @card-header-padding-x: 15px;
 @card-header-padding-y: 15px;
 @card-header-border-width: 1px;
+@card-footer-padding-x: 15px;
+@card-footer-padding-y: 15px;
+@card-footer-border-width: 1px;
 @card-body-padding-x: 15px;
 @card-body-padding-y: 15px;
 @paragraph-margin-bottom: 8px;
@@ -191,6 +194,7 @@
 @card-actions-border-width: 1px;
 @card-button-padding-x: 8px;
 @card-button-padding-y: 4px;
+@card-img-max-width: 100px;
 @card-deck-gap: 16px;
 
 @card-deck-scroll-button-radius: 0;
@@ -364,6 +368,23 @@
 @badge-size: calc( @badge-line-height * 1em + 2 * @badge-padding + 2 * @badge-border-width );
 @badge-overlay-x: calc( @badge-line-height * .5em + @badge-padding + @badge-border-width );
 @badge-overlay-y: @badge-overlay-x;
+
+
+// Checkbox
+@icon-size: 16px;
+@icon-spacing: 4px;
+
+@checkbox-icon-size: 12px;
+@checkbox-size: @icon-size;
+// @checkbox-radius: @border-radius;
+@checkbox-border-width: 1px;
+@checkbox-line-height: (@checkbox-size + @checkbox-border-width);
+
+@radio-icon-size: 12px;
+@radio-size: @icon-size;
+@radio-radius: 50%;
+@radio-border-width: 1px;
+@radio-line-height: @radio-size + @radio-border-width;
 
 
 // FileManager
@@ -597,13 +618,6 @@ input.k-textbox {
     line-height: 2em;
 }
 
-.k-checkbox-label:before,
-.k-checkbox-label:after,
-.k-radio-label:before,
-.k-radio-label:after {
-    box-sizing: content-box;
-}
-
 .k-spreadsheet-sheets-bar .k-spreadsheet-sheets-remove {
     margin: 0 0 0 -.5em;
     padding: .65em .92em .65em .32em;
@@ -639,19 +653,6 @@ input.k-textbox {
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
     min-width: 56px;
-}
-
-.k-grid {
-    .k-edit-cell {
-        input[type='checkbox'],
-        input.k-checkbox {
-            margin-left: calc(.3em + 3px);
-
-            + label.k-checkbox-label {
-                margin-left: .3em;
-            }
-        }
-    }
 }
 
 .k-filtercell > span {

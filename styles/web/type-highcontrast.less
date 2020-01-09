@@ -199,6 +199,10 @@
 @card-header-text: @header-text-color;
 @card-header-border: @card-border;
 
+@card-footer-bg: @header-background-color;
+@card-footer-text: @header-text-color;
+@card-footer-border: @card-border;
+
 @card-primary: @accent;
 @card-primary-bg: mix( white, @card-primary, 70%);
 @card-primary-text: mix(black, @card-primary);
@@ -561,6 +565,70 @@
 @badge-error-text: contrast( @badge-error-bg );
 @badge-error-border: @badge-error-bg;
 
+//Checkboxes
+@checkbox-icon-size: 12px;
+@checkbox-size: @icon-size;
+@checkbox-radius: 2px;
+@checkbox-border-width: 1px;
+@checkbox-line-height: (@checkbox-size + @checkbox-border-width);
+
+@checkbox-bg: @normal-background;
+@checkbox-text: @normal-text-color;
+@checkbox-border: @normal-text-color;
+@checkbox-hovered-bg: @checkbox-bg;
+@checkbox-hovered-text: @checkbox-text;
+@checkbox-hovered-border: @checkbox-border;
+@checkbox-checked-bg: @checkbox-bg;
+@checkbox-checked-text: @checkbox-text;
+@checkbox-checked-border: @checkbox-border;
+@checkbox-indeterminate-bg: @checkbox-bg;
+@checkbox-indeterminate-text: @checkbox-text;
+@checkbox-indeterminate-border: @checkbox-border;
+@checkbox-focused-border: @checkbox-border;
+@checkbox-focused-shadow: 0 0 3px 0 @checkbox-text;
+@checkbox-focused-checked-border: @checkbox-border;
+@checkbox-focused-checked-shadow: 0 0 3px 0 @checkbox-text;
+@checkbox-disabled-bg: null;
+@checkbox-disabled-text: null;
+@checkbox-disabled-border: null;
+@checkbox-disabled-checked-bg: null;
+@checkbox-disabled-checked-text: null;
+@checkbox-disabled-checked-border: null;
+@checkbox-invalid-bg: null;
+@checkbox-invalid-text: null;
+@checkbox-invalid-border: @checkbox-checked-bg;
+
+
+//Radio Buttons
+@radio-icon-size: 12px;
+@radio-size: @icon-size;
+@radio-radius: 50%;
+@radio-border-width: 1px;
+@radio-line-height: @radio-size + @radio-border-width;
+
+@radio-bg: @checkbox-bg;
+@radio-text: @checkbox-text;
+@radio-border: @checkbox-border;
+@radio-hovered-bg: @checkbox-hovered-bg;
+@radio-hovered-text: @checkbox-hovered-text;
+@radio-hovered-border: @checkbox-hovered-border;
+@radio-checked-bg: @checkbox-checked-bg;
+@radio-checked-text: @checkbox-checked-text;
+@radio-checked-border: @checkbox-checked-border;
+@radio-indeterminate-bg: @radio-checked-bg;
+@radio-indeterminate-text: @radio-checked-text;
+@radio-indeterminate-border: @radio-checked-border;
+@radio-focused-border: @checkbox-hovered-border;
+@radio-focused-shadow: @checkbox-focused-shadow;
+@radio-focused-checked-border: @checkbox-checked-border;
+@radio-focused-checked-shadow: @checkbox-focused-checked-shadow;
+@radio-disabled-bg: null;
+@radio-disabled-text: null;
+@radio-disabled-border: null;
+@radio-disabled-checked-bg: null;
+@radio-disabled-checked-text: null;
+@radio-disabled-checked-border: null;
+
 
 // FileManager
 @filemanager-bg: false;
@@ -639,7 +707,10 @@
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
 @import "Default/badge/_theme.less";
+@import "Default/checkbox/_theme.less";
+@import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
+
 
 .k-in,
 .k-item,
@@ -2363,33 +2434,6 @@ div.k-filebrowser-dropzone em
    .box-shadow(@button-focused-shadow);
 }
 
-@import "themes/checkbox.less";
-
-@checkbox-border-color: @normal-text-color;
-@checkbox-border-radius: 3px;
-@checkbox-background-color: darken(@base, 7%);
-@checkbox-hover-border-color: @normal-text-color;
-@checkbox-hover-box-shadow: 0 0 0 1px #fff;
-@checkbox-checked-border-color: @normal-text-color;
-@checkbox-checked-color: @normal-text-color;
-@checkbox-active-border-color: @normal-text-color;
-@checkbox-active-box-shadow: 0 0 3px 0 #fff;
-@checkbox-disabled-color: lighten(@base, 22%);
-@checkbox-disabled-border-color: lighten(@background, 26%);
-
-@import "themes/radiobutton.less";
-
-@radio-border-color: @normal-text-color;
-@radio-background-color: @normal-background;
-@radio-hover-border-color: @normal-text-color;
-@radio-hover-box-shadow: 0 0 0 1px @normal-text-color;
-@radio-checked-background-color: @normal-text-color;
-@radio-active-border-color: @normal-text-color;
-@radio-active-box-shadow: 0 0 3px 0 @normal-text-color;
-@radio-disabled-background-color: @normal-background;
-@radio-disabled-color: @disabled-text-color;
-@radio-disabled-border-color: #634b5f;
-
 // High contrast mode
 @media screen and (-ms-high-contrast: active) {
     .k-editor-toolbar-wrap .k-dropdown-wrap.k-state-focused,
@@ -2811,4 +2855,18 @@ div.k-filebrowser-dropzone em
     .k-content .k-link {
         border-radius: 20px;
     }
+}
+
+
+
+// Checkbox / Radio
+.k-radio:hover {
+    box-shadow: 0 0 0 1px @radio-border;
+}
+.k-checkbox:hover {
+    box-shadow: 0 0 0 1px @checkbox-border;
+}
+.k-radio:disabled,
+.k-checkbox:disabled {
+    box-shadow: none;
 }

@@ -7715,9 +7715,15 @@ Can be set to a JavaScript object which represents the scrolling configuration.
     });
     </script>
 
-### scrollable.virtual `Boolean` *(default: false)*
+### scrollable.virtual `Boolean|String` *(default: false)*
 
-If set to `true` the grid will always display a single page of data. Scrolling would just change the data which is currently displayed.
+Configures the grid virtualization settings. If set to `true` the grid will enable row virtualization and display a single page of data. Scrolling would just change the data which is currently displayed.
+
+Can also be set to the following string values:
+
+- "rows" - enables virtualization of rows.
+- "columns" - enables virtualization of columns.
+- "rows, columns" - enables virtualization of both rows and columns.
 
 > Check [Virtualization of local data](http://demos.telerik.com/kendo-ui/grid/virtualization-local-data) and [Virtualization of remote data](http://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) for live demos.
 

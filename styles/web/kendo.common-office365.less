@@ -181,6 +181,9 @@
 @card-header-padding-x: 16px;
 @card-header-padding-y: 12px;
 @card-header-border-width: 1px;
+@card-footer-padding-x: 16px;
+@card-footer-padding-y: 12px;
+@card-footer-border-width: 1px;
 @card-body-padding-x: 16px;
 @card-body-padding-y: 12px;
 @paragraph-margin-bottom: 8px;
@@ -191,6 +194,7 @@
 @card-actions-border-width: 1px;
 @card-button-padding-x: 8px;
 @card-button-padding-y: 4px;
+@card-img-max-width: 100px;
 @card-deck-gap: 16px;
 
 @card-deck-scroll-button-radius: 0;
@@ -364,6 +368,23 @@
 @badge-overlay-y: @badge-overlay-x;
 
 
+// Checkbox
+@icon-size: 16px;
+@icon-spacing: 4px;
+
+@checkbox-icon-size: 12px;
+@checkbox-size: @icon-size;
+// @checkbox-radius: @border-radius;
+@checkbox-border-width: 1px;
+@checkbox-line-height: (@checkbox-size + @checkbox-border-width);
+
+@radio-icon-size: 12px;
+@radio-size: @icon-size;
+@radio-radius: 50%;
+@radio-border-width: 1px;
+@radio-line-height: @radio-size + @radio-border-width;
+
+
 // FileManager
 @filemanager-spacer: calc(@button-padding-y * 4);
 @filemanager-border-width: 1px;
@@ -528,10 +549,6 @@
 .k-treeview .k-in {
     line-height: 1.143em;
     padding: .429em .571em;
-}
-
-.k-treeview .k-checkbox {
-    margin-top: .5em;
 }
 
 div.k-tooltip {
@@ -1020,38 +1037,10 @@ table.k-editor {
     }
 }
 
-@checkbox-size: 18px;
-@checkbox-check-size: @checkbox-size;
-
-.k-checkbox:indeterminate + .k-checkbox-label:after {
-    margin-left: 0;
-    top: 5px;
-    left: 5px;
-    transform: none;
-}
-
-.k-checkbox-label,
-.k-radio-label,
-.k-checkbox-wrapper {
-    line-height: 20px;
-}
-
-.k-radio-label:before {
-    width: @checkbox-size;
-    height: @checkbox-size;
-}
-
-.k-radio:checked + .k-radio-label:after {
-    width: 10px;
-    height: 10px;
-    top: 5px;
-    left: 5px;
-}
-
 .k-filter-menu:after {
     content: "";
     display: block;
-    close: both;
+    clear: both;
 }
 
 //RTL
@@ -1150,14 +1139,6 @@ div.k-spreadsheet-window {
 .k-editor-dialog ul.k-tabstrip-items {
     padding: 0;
     border: 0;
-}
-
-.k-grid {
-    .k-edit-cell {
-        input.k-checkbox + label.k-checkbox-label {
-            margin-left: 1em;
-        }
-    }
 }
 
 .k-spreadsheet-filter-menu > .k-menu .k-link {

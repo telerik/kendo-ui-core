@@ -182,6 +182,9 @@
 @card-header-padding-x: 14px;
 @card-header-padding-y: 12px;
 @card-header-border-width: 1px;
+@card-footer-padding-x: 14px;
+@card-footer-padding-y: 12px;
+@card-footer-border-width: 1px;
 @card-body-padding-x: 14px;
 @card-body-padding-y: 12px;
 @paragraph-margin-bottom: 8px;
@@ -192,6 +195,7 @@
 @card-actions-border-width: 1px;
 @card-button-padding-x: 8px;
 @card-button-padding-y: 4px;
+@card-img-max-width: 100px;
 @card-deck-gap: 16px;
 
 @card-deck-scroll-button-radius: 0;
@@ -362,6 +366,23 @@
 @badge-size: calc( @badge-line-height * 1em + 2 * @badge-padding + 2 * @badge-border-width );
 @badge-overlay-x: calc( @badge-line-height * .5em + @badge-padding + @badge-border-width );
 @badge-overlay-y: @badge-overlay-x;
+
+
+// Checkbox
+@icon-size: 16px;
+@icon-spacing: 4px;
+
+@checkbox-icon-size: 12px;
+@checkbox-size: @icon-size;
+// @checkbox-radius: @border-radius;
+@checkbox-border-width: 1px;
+@checkbox-line-height: (@checkbox-size + @checkbox-border-width);
+
+@radio-icon-size: 12px;
+@radio-size: @icon-size;
+@radio-radius: 50%;
+@radio-border-width: 1px;
+@radio-line-height: @radio-size + @radio-border-width;
 
 
 // FileManager
@@ -1226,35 +1247,6 @@ span.k-tooltip
     margin: -.929em -.6em -.714em 0;
 }
 
-@checkbox-border-width: 2px;
-
-@checkbox-size: 16px;
-
-.k-checkbox-label,
-.k-radio-label,
-.k-checkbox-wrapper {
-    line-height: 20px;
-}
-
-.k-checkbox:indeterminate + .k-checkbox-label:after {
-    width: 6px;
-    height: 6px;
-    margin-left: 0;
-    top: 5px;
-    left: 5px;
-    transform: none;
-}
-
-.k-radio:checked + .k-radio-label:after {
-   top: 5px;
-   left: 5px;
-}
-
-.k-radio-label:before {
-   width: 16px;
-   height: 16px;
-}
-
 .k-dropzone .k-upload-status
 {
     top: 1.1em;
@@ -1395,17 +1387,6 @@ span.k-tooltip
         vertical-align: middle;
     }
 
-    .k-edit-field {
-        .k-radio-label {
-            padding-left: 1.75em;
-        }
-
-        > .k-radio-label:before,
-        > .k-radio-label:after {
-            margin-top: -4px;
-        }
-    }
-
     .k-root-tabs {
         margin: -0.5em -0.5em 0;
     }
@@ -1466,24 +1447,12 @@ div.k-spreadsheet-window {
     padding: 0.6em 1.3em;
 }
 
-.k-grid {
-    .k-edit-cell {
-        input.k-checkbox + label.k-checkbox-label {
-            margin-left: 1em;
-        }
-    }
-}
-
 // RTL
 .k-rtl,
 [dir="rtl"] {
     span.k-combobox-clearable .k-input {
         padding-left: @combobox-padding-x;
         padding-right: 0;
-    }
-
-    .k-radio:checked + .k-radio-label:after {
-        right: 5px;
     }
 }
 

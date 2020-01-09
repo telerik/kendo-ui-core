@@ -188,6 +188,9 @@
 @card-header-padding-x: 16px;
 @card-header-padding-y: 16px;
 @card-header-border-width: 1px;
+@card-footer-padding-x: 16px;
+@card-footer-padding-y: 16px;
+@card-footer-border-width: 1px;
 @card-body-padding-x: 16px;
 @card-body-padding-y: 16px;
 @paragraph-margin-bottom: 8px;
@@ -198,6 +201,7 @@
 @card-actions-border-width: 1px;
 @card-button-padding-x: 8px;
 @card-button-padding-y: 4px;
+@card-img-max-width: 100px;
 @card-deck-gap: 16px;
 
 @card-deck-scroll-button-radius: 0;
@@ -434,6 +438,23 @@
 @listgroup-item-padding-x: 1em;
 @listgroup-item-padding-y: .5em;
 @listgroup-item-border-width: 1px;
+
+
+// Checkbox
+@icon-size: 16px;
+@icon-spacing: 4px;
+
+@checkbox-icon-size: 12px;
+@checkbox-size: @icon-size;
+// @checkbox-radius: @border-radius;
+@checkbox-border-width: 1px;
+@checkbox-line-height: (@checkbox-size + @checkbox-border-width);
+
+@radio-icon-size: 12px;
+@radio-size: @icon-size;
+@radio-radius: 50%;
+@radio-border-width: 1px;
+@radio-line-height: @radio-size + @radio-border-width;
 
 
 @import "common/all.less";
@@ -1279,28 +1300,6 @@ form.k-filter-menu .k-textbox {
     margin: -0.9em -0.6em -0.714em 0;
 }
 
-@checkbox-size: 16px;
-
-.k-checkbox-label,
-.k-radio-label,
-.k-checkbox-wrapper {
-    line-height: 18px;
-}
-
-.k-radio-label:before {
-    width: 16px;
-    height: 16px;
-}
-
-.k-radio:checked + .k-radio-label:after {
-  top: 4px;
-  left: 4px
-}
-
-.k-checkbox:indeterminate + .k-checkbox-label:after {
-    left: 9px;
-    top: 9px;
-}
 
 //RTL
 .k-rtl .k-widget .k-dropdown-wrap,
@@ -1341,10 +1340,6 @@ form.k-filter-menu .k-textbox {
             border-width: 8px;
             border-radius: 50% 0 50% 50%;
         }
-    }
-
-    .k-radio:checked + .k-radio-label:after {
-        right: 4px;
     }
 
     .k-menu .k-item,
@@ -1402,17 +1397,6 @@ li.k-item.k-last.k-state-selected {
     .k-edit-label > label {
         vertical-align: middle;
     }
-
-    .k-edit-field {
-        .k-radio-label {
-            padding-left: 1.75em;
-        }
-
-        > .k-radio-label:before,
-        > .k-radio-label:after {
-            margin-top: -2px;
-        }
-    }
 }
 
 div.k-spreadsheet-window {
@@ -1467,14 +1451,6 @@ div.k-spreadsheet-window {
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-buttons {
     padding: 0.6em 1.3em;
-}
-
-.k-grid {
-    .k-edit-cell {
-        input.k-checkbox + label.k-checkbox-label {
-            margin-left: 1em;
-        }
-    }
 }
 
 .k-window-titlebar .k-window-actions {
