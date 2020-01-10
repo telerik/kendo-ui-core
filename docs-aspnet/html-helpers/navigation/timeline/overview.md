@@ -114,8 +114,6 @@ public class TimelineEventActionModel
 }
 ```
 
-
-
 ## Functionality and Features
 
 * [Orientation]({%slug orientation_htmlhelpers_timeline_aspnetcore %})

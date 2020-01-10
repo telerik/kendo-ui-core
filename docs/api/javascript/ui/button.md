@@ -48,7 +48,7 @@ Specifies the shape of the badge - `rectangle` or `pill`.
 
 ### badge.look `String` *(default: flat)*
 
-Specifies the look of the badge - `flat` or `outlined`.
+Specifies the look of the badge - `flat` or `outline`.
 
 #### Example
 
@@ -56,7 +56,7 @@ Specifies the look of the badge - `flat` or `outlined`.
 	<script>
 		$("#button").kendoButton({
 			badge: {
-				look: 'outlined'
+				look: 'outline'
 			}
 		});
 	</script>

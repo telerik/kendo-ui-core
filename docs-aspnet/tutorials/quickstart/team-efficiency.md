@@ -733,19 +733,19 @@ In this chapter you'll learn how to work with Kendo UI datasources.
 
 #### Overview
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data arrays of JavaScript objects or remote data web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML.
+The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data arrays of JavaScript objects or remote data web services returning JSON, JSONP, [OData](http://www.odata.org/) or XML.
 
 The Kendo UI DataSource has many abilities and responsibilities, among which to:
 
-- [Retrieve data from a remote endpoint](http://docs.telerik.com/kendo-ui/framework/datasource/cors).
-- Maintain the [structure and type of the data (schema)](http://docs.telerik.com/kendo-ui/framework/datasource/crud#schema).
+- [Retrieve data from a remote endpoint](https://docs.telerik.com/kendo-ui/framework/datasource/cors).
+- Maintain the [structure and type of the data (schema)](https://docs.telerik.com/kendo-ui/framework/datasource/crud#setting-the-schema).
 - Process serialization formats to and from a remote endpoint.
-- [Synchronize updates, create, update, delete](http://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
-- [Maintain an in-memory cache of data, including changes](http://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-aggregate), [sorting order](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-page).
-- Provide a query mechanism via [filter expressions](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter).
+- [Synchronize updates, create, update, delete](https://docs.telerik.com/kendo-ui/framework/datasource/crud) to and from a remote endpoint.
+- [Maintain an in-memory cache of data, including changes](https://docs.telerik.com/kendo-ui/framework/datasource/offline) for updating to a remote endpoint.
+- Calculate and maintain [aggregates](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/aggregate), [sorting order](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/sort) and [paging](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page).
+- Provide a query mechanism via [filter expressions](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter).
 
-For detailed information on the capabilities of the [DataSource](http://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource](https://docs.telerik.com/kendo-ui/framework/datasource/overview), refer to its [configuration API methods, and events](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](https://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 
@@ -845,7 +845,7 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
             return Json(result);
         }
 
-1. Add the `salesPerson`, `statsFrom` and `statsTo` parameters to the action.
+1. Add the `salesPerson`, `statsFrom` and `statsTo` parameters to the action. Note that the additional parameters match the parameters returned by the `getEmployeeFilter` function exactly.
 
         public ActionResult Invoices_Read([DataSourceRequest]DataSourceRequest request,
             string salesPerson,
@@ -878,7 +878,7 @@ At this point the dashboard is showing all invoice data. Let's use the `Employee
 
 1. Run the project to see the behavior. Now the `EmployeeList` and `EmployeeSales` grid are in sync. When an employee is selected, only that employee's data will show in the grid.
 
-    ![](images/chapter7/datasource-filter.jpg)
+    ![](images/chapter7/datasource-filter.png)
 
 At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`. However, the data shown does not reflect the `StatsFrom`/`StatsTo` date range. With the filtering code in place, additional controls are wired up with relative ease. Let's wire up the `StatsFrom`/`StatsTo` DatePickers to `EmployeeSales`.
 
@@ -887,29 +887,29 @@ At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`.
 1. In the `/Views/Home/Index.cshtml` view, find the StatsFrom DatePicker.
 
         @(Html.Kendo().DatePicker()
-                        .Name("StatsFrom")
-                        .Value(new DateTime(1996, 1, 1))
+            .Name("StatsFrom")
+            .Value(new DateTime(1996, 1, 1))
     	)
 
 1. Add the `Events` property and set the `Change` event to `onCriteriaChange`.
 
         @(Html.Kendo().DatePicker()
-                        .Name("StatsFrom")
-                        .Value(new DateTime(1996, 1, 1))
-                        .Events(e => e.Change("onCriteriaChange"))
+            .Name("StatsFrom")
+            .Value(new DateTime(1996, 1, 1))
+            .Events(e => e.Change("onCriteriaChange"))
     	)
 
 1. Find the `StatsTo` DatePicker, set the `Events` property, and set the `Change` event to `onCriteriaChange`.
 
         @(Html.Kendo().DatePicker()
-    			        .Name("StatsTo")
-    			        .Value(new DateTime(1998, 8, 1))
-    			        .Events(e => e.Change("onCriteriaChange"))
+    		.Name("StatsTo")
+    		.Value(new DateTime(1998, 8, 1))
+    		.Events(e => e.Change("onCriteriaChange"))
     	)
 
 1. Save the changes and refresh the browser. `StatsFrom`/`StatsTo` and `EmployeeList` will update `EmployeeSales` with data based on the selected dates and employee.
 
-    ![](images/chapter7/datasource-filter2.jpg)
+    ![](images/chapter7/datasource-filter2.png)
 
 Your Team Efficiency Dashboard is now interactive. Users can filter data using dates and employees. Next, you'll enhance the application by adding some data visualizations.
 
@@ -964,10 +964,12 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
     - Set the current value to the `Current` property on the model.
     - Set the target value to the `Target` property on the model.
 
-        .Series(series =>
-        {
-            series.Bullet(model => model.Current, model => m.Target);
-        })
+    ```
+     .Series(series =>
+     {
+         series.Bullet(model => model.Current, model => model.Target);
+     })
+    ```
 
 1. Next, add and configure the `CategoryAxis`. Since the chart will be a spark line visualization, set the `Visible` and `MajorGridLines` properties to `false`.
 
@@ -977,15 +979,17 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
 
 1. Next, add and configure the `ValueAxis` with a Numeric configuration. Since the chart will be a spark line visualization, set the `Labels`, `MajorGridLines`, and `MajorTicks` `Visible` properties to `false` to disable them.
 
-     .ValueAxis(va => va.Numeric()
-         .Labels(lab => lab.Visible(false))
-         .MajorGridLines(m => m.Visible(false))
-         .MajorTicks(mT => mT.Visible(false))
-     )
+    ```
+        .ValueAxis(va => va.Numeric()
+            .Labels(lab => lab.Visible(false))
+            .MajorGridLines(m => m.Visible(false))
+            .MajorTicks(mT => mT.Visible(false))
+        )
+    ```
 
 1. Also set the `Legend` to `false`.
 
-    .Legend(leg => leg.Visible(false))
+        .Legend(leg => leg.Visible(false))
 
 1. Configure the `DataSource` by setting `Read` to the action `EmployeeQuarterSales` on the `Home` controller.
 1. Using the `Data` property, set the value to `getEmployeeFilter` sending filter data back to the `Read` action.
@@ -1000,7 +1004,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
             .HtmlAttributes(new { style = "height:30px;" })
             .Series(series =>
             {
-                series.Bullet(m => m.Current, m => m.Target);
+                series.Bullet(model => model.Current, model => model.Target);
             })
             .CategoryAxis(ca => ca.Labels(lab => lab.Visible(false))
                 .MajorGridLines(m => m.Visible(false)).Visible(false)
@@ -1008,6 +1012,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
             .ValueAxis(va => va.Numeric()
                 .Labels(lab => lab.Visible(false))
                 .MajorGridLines(m => m.Visible(false))
+                .MajorTicks(mT => mT.Visible(false))
             )
             .Legend(leg => leg.Visible(false))
             .DataSource(ds => ds
@@ -1017,7 +1022,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
             .AutoBind(false)
         )
 
-1. Open `controllers/HomeController.cs` and create a controller action named `EmployeeAverageSales` on the `Home` controller. This action will supply the Chart with data.
+1. Open `controllers/HomeController.cs` and create a controller action named `EmployeeQuarterSales` on the `Home` controller. This action will supply the Chart with data.
 1. The boilerplate installed in the **Getting Up and Running** chapter has a function named `EmployeeQuarterSales`. This query will select the data required for the chart. Return the results of `EmployeeQuarterSalesQuery` as JSON.
 
     	public ActionResult EmployeeQuarterSales(int employeeId, DateTime statsTo)
@@ -1054,7 +1059,7 @@ Begin by adding a Bullet chart, a variation of a bar chart. Bullet charts make g
             employeeQuarterSales.dataSource.read();
         }
 
-1. Find and modify the `onCriteriaChanged` function so it calls `refreshGrid` updating the entire dashboard when a filter is changed.
+1. Find and modify the `onCriteriaChange` function so it calls `refreshEmployeeQuarterSales` updating the bullet chart's data source when the filter or the employee selection is changed.
 
         function onCriteriaChange() {
             updateEmployeeAvatar();
@@ -1095,15 +1100,17 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
      - Set `Line` to the `EmployeeSales` property on the model.
      - Set the `Width` to `1.5`.
      - Disable markers by setting the `Markers` visible property to `false`.
-     - Set the tooltip using an inline Kendo UI Template `#=kendo.toString(value, 'c2')#`.
+     - Set the tooltip using a valid [number format](https://docs.telerik.com/kendo-ui/globalization/intl/numberformatting) and enabling its visibility.
 
+    ```
         .Series(series =>
         {
             series.Line(model => model.EmployeeSales)
             .Width(1.5)
             .Markers(m => m.Visible(false))
-            .Tooltip(t => t.Template("#=kendo.toString(value, 'c2')#"));
+            .Tooltip(t =>  t.Format("{0:c0}").Visible(true));
         })
+    ```
 
 1. Next, add and configure the `CategoryAxis` with a `Date` configuration. Set the Category to the `Date` field of the view model.
 1. Since the chart will be a formatted like a [sparkline](https://en.wikipedia.org/wiki/Sparkline), set the `Axis` and `MajorGridLines` `Visible` properties to `false` to disable them.
@@ -1152,7 +1159,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
                 series.Line(model => model.EmployeeSales)
                 .Width(1.5)
                 .Markers(m => m.Visible(false))
-                .Tooltip(t => t.Template("#=kendo.toString(value,'c2')#"));
+                .Tooltip(t =>  t.Format("{0:c0}").Visible(true));
             })
 
             .CategoryAxis(ca => ca
@@ -1213,7 +1220,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
             employeeAverageSales.dataSource.read();
         }
 
-1. Find and modify the `onCriteriaChanged` function so it calls `refreshGrid` updating the entire dashboard when a filter is changed.
+1. Find and modify the `onCriteriaChange` function so it calls `refreshEmployeeAverageSales` updating the chart's data  when a filter or employee selection is changed.
 
     	function onCriteriaChange() {
             updateEmployeeAvatar();
@@ -1224,7 +1231,7 @@ Next, add a Line chart, a Line chart shows data as continuous lines that pass th
 
 1. Run the application to see the chart render on the dashboard. Change the filter criteria to see the chart update along with other UI elements.
 
-    ![A Sparkline chart](images/chapter8/spark-line-chart.jpg)
+    ![A Sparkline chart](images/chapter8/spark-line-chart.png)
 
 ### Client-Side API
 
@@ -1366,7 +1373,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
 
     - `Name: menuPanelOpen`
     - `Content: menu`
-    - `Icon: hbars`
+    - `Icon: more-horizontal`
     - `HtmlAttributes: new { @class = "k-rpanel-toggle" }`
 
     > Any element with the `k-rpanel-toggle` class will be able to toggle the current page's responsive panel.
@@ -1376,7 +1383,7 @@ When changing the screen size, you may have noticed the Report Range side bar di
     	    @(Html.Kendo().Button()
     	                .Name("menuPanelOpen")
     	                .Content("menu")
-    	                .Icon("hbars")
+    	                .Icon("more-horizontal")
     	                .HtmlAttributes(new { @class = "k-rpanel-toggle" })
     	    )
     	</div>
@@ -1458,12 +1465,12 @@ Kendo UI widgets include a number of predefined themes. In this chapter you'll l
     The resulting code should be like the one shown in the example below.
 
     	/* Side Panel - Employee List */
-    	#menuPanel .k-widget.k-datepicker.k-header {
+    	#menuPanel .k-widget.k-datepicker {
     	    width: 100%;
     	}
 
     <!--*-->
-    ![The DatePicker width](images/chapter10/datepicker-width.jpg)
+    ![The DatePicker width](images/chapter10/datepicker-width.png)
 
 1. Add a style to offset the employee list so its content lines up with the left edge of its container.
 
@@ -1516,10 +1523,12 @@ And... that's it! You've created an interactive dashboard application using Tele
 
 Congratulations!
 
+![Finished App - Nova theme](images/chapter10/finished-app-in-nova.png)
+
 ## Next Steps
 
 Your journey with Telerik is just beginning. Here are some resources to help you figure out where to go from here.
 
 - Follow [@telerik](https://twitter.com/telerik) on Twitter for the latest and greatest news about Telerik UIs.
-- Check out the [Telerik UI for ASP.NET MVC roadmap](http://www.telerik.com/support/whats-new/aspnet-mvc) to see what's coming next.
-- Find comprehensive [demos of individual widgets and complete applications](http://demos.telerik.com/aspnet-mvc/).
+- Check out the [Telerik UI for ASP.NET MVC roadmap](https://www.telerik.com/support/whats-new/aspnet-mvc) to see what's coming next.
+- Find comprehensive [demos of individual widgets and complete applications](https://demos.telerik.com/aspnet-mvc/).

@@ -71,7 +71,7 @@ The MultiSelect implements the following WAI-ARIA roles, states, and properties 
 
 ## Section 508
 
-The MultiSelect is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in {{ site.product }}]({% slug overview_accessibility %}#section-508}).
+The MultiSelect is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in {{ site.product }}]({% slug overview_accessibility %}#section-508).
 
 ## WCAG 2.1
 

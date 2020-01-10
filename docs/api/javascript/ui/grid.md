@@ -2980,12 +2980,12 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     });
     </script>
 
-> Check [Binding to local data](http://demos.telerik.com/kendo-ui/grid/local-data-binding) and [Binding to remote data](http://demos.telerik.com/kendo-ui/grid/remote-data-binding) for live demos.
+> Check [Binding to local data](https://demos.telerik.com/kendo-ui/grid/local-data-binding) and [Binding to remote data](https://demos.telerik.com/kendo-ui/grid/remote-data-binding) for live demos.
 
 ### detailTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the detail rows.
-Check [Detail Template](http://demos.telerik.com/kendo-ui/grid/detailtemplate) for a live demo.
+Check [Detail Template](https://demos.telerik.com/kendo-ui/grid/detailtemplate) for a live demo.
 
 > The detail template content cannot be wider than the total width of all master columns, unless the detail template is scrollable.
 
@@ -7725,7 +7725,9 @@ Can also be set to the following string values:
 - "columns" - enables virtualization of columns.
 - "rows, columns" - enables virtualization of both rows and columns.
 
-> Check [Virtualization of local data](http://demos.telerik.com/kendo-ui/grid/virtualization-local-data) and [Virtualization of remote data](http://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) for live demos.
+> For columns virtualization to work, define [widths for the columns](/api/javascript/ui/grid/configuration/columns.width)
+
+> Check [Virtualization of local data](https://demos.telerik.com/kendo-ui/grid/virtualization-local-data), [Virtualization of remote data](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) and [Colums Virtualization](https://demos.telerik.com/kendo-ui/grid/column-virtualization) for live demos.
 
 ### scrollable.endless `Boolean` *(default: false)*
 

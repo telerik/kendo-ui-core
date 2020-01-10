@@ -25,6 +25,8 @@ To get up and running with the project:
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Add the UI for ASP.NET Core NuGet package](#adding-the-nuget-package)
+1. [Add reference to Kendo.Mvc.UI](#adding-reference-to-kendomvcui)
+1. [Include the Telerik UI for ASP.NET Core client-side resources](#including-the-telerik-ui-for-aspnet-core-client-side-resources)
 
 ## Meeting the Requirements
 
@@ -43,19 +45,21 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 
 	![Locating and opening the NuGet package manager menu](../getting-started-core/images/manage-nuget.png)
 
-2. Add a new [package source](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#package-sources) to https://nuget.telerik.com/nuget.
+1. Add a new [package source](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui#package-sources) to https://nuget.telerik.com/nuget.
 
 	![Adding the new NuGet source dialog](../getting-started-core/images/add-nuget-source.png)
 
-3. From the package source drop-down, select **Telerik Source** and add your credentials (telerik.com email and password) as prompted.
+1. From the package source drop-down, select **Telerik Source** and add your credentials (telerik.com email and password) as prompted.
 
 	![Adding the credentials and authenticating for NuGet](../getting-started-core/images/nuget-authenticate.png)
 
-4. Click the **Browse** tab and search for `Telerik.UI.for.AspNet.Core` to install it. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
+1. Click the **Browse** tab and search for `Telerik.UI.for.AspNet.Core` to install it. As a result, a line similar to `<PackageReference Include="Telerik.UI.for.AspNet.Core" Version="{{ site.mvcCoreVersion }}" />` is added to your `.csproj` file.
 
 	![Selecting and installing the NuGet package](../getting-started-core/images/nuget-install.png)
 
-5. Open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
+## Adding reference to Kendo.Mvc.UI
+
+1. Open the `Startup.cs` file and register the Kendo UI services in the `ConfigureServices` method.
 
 		public void ConfigureServices(IServiceCollection services)
 		{
@@ -63,7 +67,7 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 			services.AddKendo();
 		}
 
-6. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`. If you intend to use the Telerik UI ASP.NET Core Tag Helpers, add them with `@addTagHelper *, Kendo.Mvc`.
+1. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml` through `@using Kendo.Mvc.UI`. If you intend to use the Telerik UI ASP.NET Core Tag Helpers, add them with `@addTagHelper *, Kendo.Mvc`.
 
         @using MyASPNETCoreProject
 	    @using MyASPNETCoreProject.Models
@@ -71,8 +75,9 @@ Follow the instructions from the [official .NET Core documentation site](https:/
         @addTagHelper *, Kendo.Mvc
         @using Kendo.Mvc.UI
 
+## Including the Telerik UI for ASP.NET Core client-side resources
 
-7. Include the client-side resources.
+1. Include the client-side resources.
 
 	> * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
 	> * The Kendo UI scripts have to be placed after `jQuery`.
@@ -87,7 +92,7 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>   			
 
-8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
+1. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
 	```tab-HtmlHelper
 		<div class="text-center">

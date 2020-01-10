@@ -4,7 +4,7 @@ page_title: Timeline Templates
 description: "Event templates in the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/templates
 slug: templates_htmlhelpers_timeline_aspnetcore
-position: 20
+position: 6
 ---
 
 # Templates

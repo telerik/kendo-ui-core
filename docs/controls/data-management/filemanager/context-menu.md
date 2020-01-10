@@ -28,5 +28,6 @@ The default items in the ContextMenu are `rename` and `delete`. You can define y
 
 ## See Also
 
+* [Overview of Kendo UI FileManager]({% slug overview_kendoui_filemanager_widget %})
 * [Drag and Drop in Kendo UI FileManager]({% slug dragndrop_kendoui_filemanager_widget %})
 * [Navigation in Kendo UI FileManager]({% slug navigation_kendoui_filemanager_widget %})

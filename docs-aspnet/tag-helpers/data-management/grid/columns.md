@@ -197,6 +197,28 @@ In the following example, the **Contact Info** and **Location** columns have nes
     )
 ```
 
+## Virtualization
+
+The Grid provides a built-in option for virtualizing its columns. To enable it, set the `scollable.virtual` property to `"columns"`. As a result, the columns outside the current visible aria of the Grid will not be rendered and this will improve the rendering performance. When scrolling is performed the visual subset of columns is changed accordingly.
+
+> To work properly, the column virtualization requires you to set the widths of the columns.
+
+To enable virtualized columns:
+
+```
+    <kendo-grid name="grid" height="550">
+        <scrollable virtual=@("columns")/>
+    </kendo-grid>
+```
+
+To enable both virtualized columns and rows:
+
+```
+    <kendo-grid name="grid" height="550">
+        <scrollable virtual=@("rows, columns")/>
+    </kendo-grid>
+
+```
 ## See Also
 
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)

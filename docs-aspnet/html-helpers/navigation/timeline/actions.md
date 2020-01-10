@@ -4,7 +4,7 @@ page_title: Timeline Actions
 description: "Action links in the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/actions
 slug: actions_htmlhelpers_timeline_aspnetcore
-position: 10
+position: 3
 ---
 
 # Actions

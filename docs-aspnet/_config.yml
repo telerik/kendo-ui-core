@@ -189,6 +189,8 @@ navigation:
         title: "Data Management"
      "tag-helpers/data-management/filter":
         title: "Filter"
+     "html-helpers/data-management/filemanager":
+        title: "FileManager"
      "tag-helpers/data-management/grid":
         title: "Grid"
      "tag-helpers/data-management/pivotgrid":
@@ -405,6 +407,8 @@ navigation:
         title: "MultiViewCalendar"
      "tag-helpers/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
+     "*badge":
+        title: "Badge"
      "*colorpalette":
         title: "ColorPalette"
      "*colorpicker":
@@ -439,6 +443,8 @@ navigation:
         title: "Editor"
      "*flatcolorpicker":
         title: "FlatColorPicker"
+     "*filemanager":
+        title: "FileManager"
      "*gantt":
         title: "Gantt"
      "*lineargauge":

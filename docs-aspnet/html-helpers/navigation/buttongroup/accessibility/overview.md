@@ -20,7 +20,7 @@ The component follows the WAI-ARIA Authoring Practices for implementing the keyb
 
 ## Section 508
 
-The ButtonGroup is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo {{ site.product_short }}]({% slug overview_accessibility %}#section-508}).
+The ButtonGroup is compliant with the Section 508 requirements. For more information, refer to the article on [Section 508 support in Kendo {{ site.product_short }}]({% slug overview_accessibility %}#section-508).
 
 ## WCAG 2.1
 

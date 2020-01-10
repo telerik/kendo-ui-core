@@ -26,5 +26,6 @@ The following exampel demonstrated how to disable the Drag and Drop functionalit
 
 ## See Also
 
+* [Overview of Kendo UI FileManager]({% slug overview_kendoui_filemanager_widget %})
 * [Preview Panes in Kendo UI FileManager]({% slug previewpane_kendoui_filemanager_widget %})
 * [ToolbarCommands in Kendo UI FileManager]({% slug toolbar_kendoui_filemanager_widget %})

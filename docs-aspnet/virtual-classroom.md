@@ -5,6 +5,11 @@ description: "Get started with {{ site.product_short }} and learn about the Virt
 slug: virtualclass_uiforcore
 position: 90
 ---
+{% if site.core %}
+    {% assign VirtualClassroom = "https://progress.exceedlms.com/student/path/497495-telerik-ui-for-asp-net-core" %}
+{% else %}
+    {% assign VirtualClassroom = "https://progress.exceedlms.com/student/path/498054-telerik-ui-for-asp-net-mvc" %}
+{% endif %}
 
 # Virtual Classroom
 
@@ -22,5 +27,5 @@ The Virtual Classroom program aims at:
 * Exploring common development practices, code examples, and sample applications.
 
 To get started with the trainings, refer to:
-* [{{ site.product_short }} Virtual Classroom](https://progress.exceedlms.com/student/path/369634-telerik-asp-net-mvc-net-core)
+* [{{ site.product_short }} Virtual Classroom]({{ VirtualClassroom }})
 * [All-Progress Products Virtual Classroom](https://www.telerik.com/account/support/virtual-classroom)
