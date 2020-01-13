@@ -1,6 +1,6 @@
 ---
 title: Save the State of TreeView Items
-page_title: Save the State of TreeView Items | Telerik UI TreeView HtmlHelper for ASP.NET MVC
+page_title: Save the State of TreeView Items
 description: "Save the state of TreeView items in ASP.NET MVC applications."
 previous_url: /helpers/navigation/treeview/how-to/save-items-state
 slug: howto_savetreeviewitemsstate_treeviewaspnetmvc

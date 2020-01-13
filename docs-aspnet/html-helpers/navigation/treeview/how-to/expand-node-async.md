@@ -1,6 +1,6 @@
 ---
 title: Expand Selected Nodes Asynchronously
-page_title: Expand Selected Nodes Asynchronously | Telerik UI TreeView HtmlHelper for ASP.NET MVC
+page_title: Expand Selected Nodes Asynchronously
 description: "Learn how to asynchronously expand the selected node of the Kendo UI TreeView in ASP.NET MVC."
 previous_url: /helpers/navigation/treeview/how-to/expand-node-async
 slug: howto_expandselectednodeasync_treeviewaspnetmvc

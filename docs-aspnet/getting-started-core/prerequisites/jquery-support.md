@@ -1,6 +1,6 @@
 ---
 title: jQuery Support
-page_title: jQuery Support | Prerequisites | Telerik UI for ASP.NET Core
+page_title: jQuery Support
 description: "Get started with Telerik UI for ASP.NET Core and learn about the jQuery version support which is delivered by the library."
 slug: jquerysupport_core
 position: 4

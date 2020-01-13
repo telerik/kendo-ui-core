@@ -1,6 +1,6 @@
 ---
 title: Configure Ajax Editing with Localized Enumerations
-page_title: Configure Ajax Editing with Localized Enumerations | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Configure Ajax Editing with Localized Enumerations
 description: "Create columns bound to an enum field displaying localized texts for corresponding values."
 previous_url: /helpers/data-management/grid/how-to/editing/enum-editing-with-dropdownlist-localization
 slug: howto_doajaxeditlcoalizedenumeration_gridaspnetmvc

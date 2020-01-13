@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TreeList Accessibility
+page_title: Accessibility
 description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: htmlhelpers_treelist_aspnetcore_accessibility
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: PanelBar Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI PanelBar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /helpers/panelbar, /helpers/tag-helpers/panelbar
 slug: taghelpers_panelbar_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Splitter Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Splitter HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/splitter, /helpers/layout/splitter/overview
 slug: htmlhelpers_splitter_aspnetcore

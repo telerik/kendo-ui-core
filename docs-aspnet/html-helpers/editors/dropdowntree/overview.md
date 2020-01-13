@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DropDownTree Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI DropDownTree HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/dropdowntree, /helpers/editors/dropdowntree/overview
 slug: htmlhelpers_dropdowntree_aspnetcore

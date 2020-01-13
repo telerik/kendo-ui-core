@@ -1,6 +1,6 @@
 ---
 title: Enable Security Trimming
-page_title: Enable Security Trimming | Telerik UI Menu HtmlHelper for ASP.NET MVC
+page_title: Enable Security Trimming
 description: "Enable security trimming when working with the Kendo UI Menu in ASP.NET MVC applications."
 previous_url: /helpers/navigation/menu/how-to/enable-security-trimming
 slug: howto_enablesecuritytrimming_menuaspnetmv

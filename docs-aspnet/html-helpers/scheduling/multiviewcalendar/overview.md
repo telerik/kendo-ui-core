@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MultiViewCalendar Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI MultiViewCalendar HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/scheduling/multiviewcalendar/overview
 slug: overview_multiviewcalendar_htmlhelper_aspnetcore

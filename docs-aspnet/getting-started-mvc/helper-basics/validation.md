@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: Validation | Working with Helpers | Telerik UI for ASP.NET MVC
+page_title: Validation
 description: "Get started with Telerik UI for ASP.NET MVC and use client-side validation."
 slug: validation_aspnetmvc
 previous_url: /validation, /getting-started/validation

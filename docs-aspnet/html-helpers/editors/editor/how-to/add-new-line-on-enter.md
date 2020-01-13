@@ -1,6 +1,6 @@
 ---
 title: Add New Lines instead of New Paragraphs on Enter
-page_title: Add New Lines instead of New Paragraphs on Enter | Telerik UI Editor HtmlHelper for ASP.NET MVC
+page_title: Add New Lines instead of New Paragraphs on Enter
 description: "Add a new line instead of a new paragraph on enter in ASP.NET MVC applications."
 previous_url: /helpers/editors/editor/how-to/add-new-line-on-enter
 slug: howto_addnewlinesinsteadofnewparaonenter_editoraspnetmvc

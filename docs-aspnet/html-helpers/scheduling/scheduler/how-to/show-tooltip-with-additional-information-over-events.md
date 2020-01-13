@@ -1,6 +1,6 @@
 ---
 title: Show Tooltip over Scheduler Events
-page_title: Show Tooltip over Scheduler Events | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Show Tooltip over Scheduler Events
 description: "Use the Tooltip HtmlHelper to show additional information over the Kendo UI Scheduler events in ASP.NET MVC applications."
 previous_url: /helpers/scheduling/scheduler/how-to/show-tooltip-with-additional-information-over-events
 slug: howto_showtooltipoverevents_scheduleraspnetmvc

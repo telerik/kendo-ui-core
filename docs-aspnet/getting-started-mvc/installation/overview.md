@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Download and Installation Overview | Download and Installation | Telerik UI for ASP.NET MVC
+page_title: Download and Installation Overview
 description: "Get started with Telerik UI for ASP.NET MVC and learn how to download the library and initialize its HTML helpers."
 slug: overview_downloadinstallation_mvc
 position: 1

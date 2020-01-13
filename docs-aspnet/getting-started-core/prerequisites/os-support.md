@@ -1,6 +1,6 @@
 ---
 title: Operating System Support
-page_title: Operating System Support | Prerequisites | Telerik UI for ASP.NET Core
+page_title: Operating System Support
 description: "Get started with Telerik UI for ASP.NET Core and learn which are the operating systems that are supported by the framework components."
 slug: ossupport_core
 position: 3

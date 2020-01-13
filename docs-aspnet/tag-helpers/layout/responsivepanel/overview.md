@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ResponsivePanel Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI ResponsivePanel TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /helpers/responsive-panel, /helpers/tag-helpers/responsive-panel
 slug: taghelpers_responsivepanel_aspnetcore

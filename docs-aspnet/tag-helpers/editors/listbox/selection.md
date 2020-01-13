@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: Selection | Telerik UI ListBox TagHelper for ASP.NET Core
+page_title: Selection
 description: "Enable the signle or multiple selection mode of the Telerik UI ListBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: selection_listbox_aspnetcore
 position: 3

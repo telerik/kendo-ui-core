@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ListView Globalization
+page_title: Globalization
 description: "Get started with the Telerik UI ListView HtmlHelper for {{ site.framework }} and learn about the globalization options it supports."
 slug: globalization_htmlhelpers_listview
 position: 1

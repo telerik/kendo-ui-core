@@ -1,6 +1,6 @@
 ---
 title: Downloading New Versions
-page_title: Downloading New Versions | Visual Studio Integration | Telerik UI for ASP.NET MVC
+page_title: Downloading New Versions
 description: "Learn how to keep your projects updated when using Telerik UI for ASP.NET MVC."
 slug: latestversionretrieval_visualstudio_aspnetmvc
 position: 10

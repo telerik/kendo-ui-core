@@ -1,6 +1,6 @@
 ---
 title: Handle Cascading DropDownLists within the Grid
-page_title: Handle Cascading DropDownLists within the Grid | Telerik UI DropDownList HtmlHelper for ASP.NET MVC
+page_title: Handle Cascading DropDownLists within the Grid
 description: "Configure the Grid to handle cascading DropDownLists when using the Popup or Inline editing modes."
 previous_url: /helpers/editors/dropdownlist/how-to/cascading-in-grid
 slug: howto_handlecascadingddlsingrid_ddlaspnetmvc

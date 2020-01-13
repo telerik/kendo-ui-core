@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Filter Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Filter HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/data-management/filter/overview
 slug: htmlhelpers_filter_aspnetcore_overview

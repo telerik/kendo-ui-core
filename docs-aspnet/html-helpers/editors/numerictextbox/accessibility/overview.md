@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: NumericTextBox Accessibility
+page_title: Accessibility
 description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_numerictextbox_aspnetcore
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: Rating Templates | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Rating Templates
 description: "Learn how to configure the item templates of the Rating when working with the Telerik UI Rating tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_rating_aspnetcore_templates
 position: 6

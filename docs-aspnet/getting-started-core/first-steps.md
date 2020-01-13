@@ -1,6 +1,6 @@
 ---
 title: First Steps on VS for Windows
-page_title: Getting Started on Visual Studio for Windows | Telerik UI for ASP.NET Core
+page_title: Getting Started on Visual Studio for Windows
 description: "Create a sample project on Visual Studio for Windows with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started, /getting-started/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc

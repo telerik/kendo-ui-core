@@ -1,6 +1,6 @@
 ---
 title: Use Inline Editors in Editor Templates
-page_title: Use Inline Editors in Editor Templates | Telerik UI Editor HtmlHelper for ASP.NET MVC
+page_title: Use Inline Editors in Editor Templates
 description: "Use an inline Editor in an Editor template in ASP.NET MVC applications."
 previous_url: /helpers/editors/editor/how-to/inline-editor-in-editor-template
 slug: howto_useinlineeditorineditortemplate_editoraspnetmvc

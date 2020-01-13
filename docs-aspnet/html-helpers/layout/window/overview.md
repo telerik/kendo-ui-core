@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Window Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Window HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/window, /helpers/layout/window/overview
 slug: htmlhelpers_window_aspnetcore

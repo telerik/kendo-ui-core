@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CONTENT, COPY THE NEW DEPENDENCIES FROM THE RELEVANT jQUERY FILE.
 title: Media
-page_title: Individual Scripts for Media | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Media
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Media"
 slug: script_filesfor_media_widgets
 permalink: /getting-started/scripts/scripts-media

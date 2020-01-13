@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery FileManager Documentation | FileManager Overview | Kendo UI
-description: "Get started with the jQuery Filter by Kendo UI and learn how to create, initialize, and enable the widget."
+description: "Get started with the jQuery FileManager by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_filemanager_widget
 position: 0
 ---
@@ -10,7 +10,7 @@ position: 0
 
 The Telerik UI for ASP.NET MVC FileManager is an Explorer-like component enabling you to manage file and folders. 
 
-It enables to you to upload, delete, move files, as well as creating new folders, deletion and copy. It also provides you with the ability to create custom views, in order to fit your specific scenario. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug overview_kendoui_grid_widget %}), [ListView]({% slug overview_kendoui_listview_widget %}), [TreeView]({% slug overview_kendoui_treeview_widget %}), [Toolbar]({% slug overview_kendoui_toolbar_widget %}), [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}). 
+It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug overview_kendoui_grid_widget %}), [ListView]({% slug overview_kendoui_listview_widget %}), [TreeView]({% slug overview_kendoui_treeview_widget %}), [Toolbar]({% slug overview_kendoui_toolbar_widget %}), [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}). 
 
 * [Demo page for the FileManager](http://demos.telerik.com/kendo-ui/filemanager/index)
 
@@ -63,7 +63,7 @@ The following example demonstrates initialization of the FileManager with a loca
 ```
 ## Referencing Existing Instances
 
-To refer to an existing Grid instance:
+To refer to an existing FileManager instance:
 
 1. Use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
 1. Once a reference is established, use the [FileManager API](/api/javascript/ui/filemanager) to control its behavior.
@@ -90,4 +90,4 @@ Visit the [Client API section](/api/javascript/ui/filemanager) for full descript
 
 * [Basic Usage of the FileManager (Demo)](https://demos.telerik.com/kendo-ui/filemanager/index)
 * [Knowledge Base Section](/knowledge-base)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/filemanager)
+* [JavaScript API Reference of the FileManager](/api/javascript/ui/filemanager)

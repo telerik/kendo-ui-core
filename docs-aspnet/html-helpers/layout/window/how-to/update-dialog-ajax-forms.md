@@ -1,6 +1,6 @@
 ---
 title: Update Telerik UI Windows with Ajax Forms
-page_title: Update Telerik UI Windows with Ajax Forms | Kendo UI Window HtmlHelper for ASP.NET MVC
+page_title: Update Telerik UI Windows with Ajax Forms
 description: "This article demonstrates how to use AJAX forms and update the Kendo UI Window with the validation fetched from the controller in ASP.NET MVC applications."
 previous_url: /helpers/layout/window/how-to/update-dialog-ajax-forms
 slug: howto_update_ajax_forms_windowaspnetmv

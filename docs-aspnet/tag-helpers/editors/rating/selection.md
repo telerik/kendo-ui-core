@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: Rating Selection | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Rating Selection
 description: "Learn how to configure the selection functionality of the Rating when working with the Telerik UI Rating tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_rating_aspnetcore_selection
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Filter Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Filter TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_filter_aspnetcore
 position: 1

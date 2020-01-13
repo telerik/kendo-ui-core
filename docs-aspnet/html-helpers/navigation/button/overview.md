@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Button Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Button HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/button, /helpers/navigation/button/overview
 slug: htmlhelpers_button_aspnetcore

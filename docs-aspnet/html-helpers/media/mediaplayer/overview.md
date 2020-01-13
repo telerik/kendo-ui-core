@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MediaPlayer HtmlHelper Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI MediaPlayer for {{ site.framework }}."
 previous_url: /helpers/html-helpers/mediaplayer, /helpers/media/mediaplayer/overview
 slug: htmlhelpers_mediaplayer_aspnetcore

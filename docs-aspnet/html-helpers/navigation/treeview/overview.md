@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TreeView Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI TreeView HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/treeview, /helpers/navigation/treeview/overview
 slug: htmlhelpers_treeview_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ScrollView HtmlHelper Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI ScrollView for {{ site.framework }}."
 previous_url: /helpers/media/scrollview/overview
 slug: htmlhelpers_scrollview_aspnetcore

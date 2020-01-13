@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Barcode Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Barcode HtmlHelper for {{ site.framework }}"
 previous_url: /helpers/barcodes/barcode/overview
 slug: overview_barcodehelper_aspnetcore

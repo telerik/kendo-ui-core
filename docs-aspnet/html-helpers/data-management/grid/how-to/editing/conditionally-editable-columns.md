@@ -1,6 +1,6 @@
 ---
 title: Make Columns Editable Conditionally
-page_title: Make Columns Editable Conditionally | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Make Columns Editable Conditionally
 description: "Learn how to configure the Grid for ASP.NET MVC columns to be editable based on condition."
 previous_url: /helpers/data-management/grid/how-to/editing/conditionally-editable-columns
 slug: howto_conditionallyeditablecolumns_gridaspnetmv

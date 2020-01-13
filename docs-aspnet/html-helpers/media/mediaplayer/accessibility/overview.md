@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MediaPlayer Accessibility
+page_title: Accessibility
 description: "Get started with the {{ site.product_short }} MediaPlayer by Telerik UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 previous_url: /helpers/media/mediaplayer/accessibility/overview
 slug: htmlhelpers_mediaplayer_accessibility_overview_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Installing with NuGet
-page_title: Installing with NuGet | Download and Installation | Telerik UI for ASP.NET Core
+page_title: Installing with NuGet
 description: "Get started with Telerik UI for ASP.NET Core and install the NuGet packages of the helpers."
 previous_url: /getting-started/nuget-install
 slug: nuget_install_aspnetmvc6_aspnetmvc

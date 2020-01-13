@@ -1,6 +1,6 @@
 ---
 title: Use Excel-Like Filter in Grid
-page_title: Use Excel-Like Filter in Grid | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Use Excel-Like Filter in Grid
 description: "Use an Excel-like filter in the Kendo UI Grid in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/Filtering/grid-with-excel-like-filter
 slug: howto_useexcellikefilteringrid_gridaspnetmvc

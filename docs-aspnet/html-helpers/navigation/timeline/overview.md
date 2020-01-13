@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Timeline Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/overview
 slug: overview_htmlhelpers_timeline_aspnetcore

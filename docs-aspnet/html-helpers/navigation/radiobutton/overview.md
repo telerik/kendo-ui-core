@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: RadioButton Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI RadioButton HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/navigation/radiobutton/overview
 slug: htmlhelpers_radiobutton_aspnetcore

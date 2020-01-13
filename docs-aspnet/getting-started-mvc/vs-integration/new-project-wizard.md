@@ -1,6 +1,6 @@
 ---
 title: Creating New Projects
-page_title: Creating New Projects | Visual Studio Integration | Telerik UI for ASP.NET MVC
+page_title: Creating New Projects
 description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
 position: 2

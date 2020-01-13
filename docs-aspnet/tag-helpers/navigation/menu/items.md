@@ -1,6 +1,6 @@
 ---
 title: Items
-page_title: Items | Telerik UI Menu TagHelper for ASP.NET Core
+page_title: Items
 description: "Configure the items of the Telerik UI Menu TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: items_menu_aspnetcore
 position: 2

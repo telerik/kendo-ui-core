@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Chat Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Chat HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/chat, /helpers/conversational-ui/chat/overview
 slug: htmlhelpers_chat_aspnetcore

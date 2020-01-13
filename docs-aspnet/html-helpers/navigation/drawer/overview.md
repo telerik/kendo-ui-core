@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Drawer Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Drawer HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/navigation/drawer/overview
 slug: htmlhelpers_drawer_aspnetcore

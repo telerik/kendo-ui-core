@@ -1,6 +1,6 @@
 ---
 title: jQuery Support
-page_title: jQuery Support | Prerequisites | Telerik UI for ASP.NET MVC
+page_title: jQuery Support
 description: "Get started with Telerik UI for ASP.NET MVC and learn about the jQuery version support which is delivered by the library."
 slug: jquerysupport_aspnetmvc
 position: 3

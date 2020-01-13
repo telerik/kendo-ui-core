@@ -1,6 +1,6 @@
 ---
 title: NavBar
-page_title: Hybrid NavBar Overview
+page_title: NavBar Overview
 description: "Learn the basics when working with the hybrid Telerik UI NavBar HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/hybrid/mobilelanavbar/overview, /helpers/hybrid/mobilenavbar
 slug: overview_hybridnavbar_aspnetmvc

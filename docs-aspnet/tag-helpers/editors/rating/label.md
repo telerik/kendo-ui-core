@@ -1,6 +1,6 @@
 ---
 title: Label
-page_title: Rating Label | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Rating Label
 description: "Learn how to configure the label of the Rating when working with the Telerik UI Rating tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_rating_aspnetcore_label
 position: 4

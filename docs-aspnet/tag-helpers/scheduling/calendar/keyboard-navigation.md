@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: Keyboard Navigation | Telerik UI Calendar TagHelper for ASP.NET Core
+page_title: Keyboard Navigation
 description: "Enable and use the keyboard navigation when working with the Telerik UI Calendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: keynav_calendar_aspnetcore
 position: 7

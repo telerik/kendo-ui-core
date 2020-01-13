@@ -1,6 +1,6 @@
 ---
 title: Save State with URL History Browser API
-page_title: Save State with URL History Browser API | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Save State with URL History Browser API
 description: "Save the state of the Kendo UI Grid by using the URL history browser API in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/state/save-state-with-url-browser-history-api
 slug: howto_savestateurlhistorybrowserapi_gridaspnetmv

@@ -1,6 +1,6 @@
 ---
 title: Day Template
-page_title: Day Template | Telerik UI Calendar TagHelper for ASP.NET Core
+page_title: Day Template
 description: "Customize the rendered day for the month view in the Telerik UI Calendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: daytemplate_calendar_aspnetcore
 position: 3

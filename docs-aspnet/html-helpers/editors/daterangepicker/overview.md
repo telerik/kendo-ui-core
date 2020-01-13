@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DateRangePicker Overview
+page_title: Overview
 description: "Learn the basics when working with the  DateRangePicker HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/daterangepicker, /helpers/editors/daterangepicker/overview
 slug: htmlhelpers_daterangepicker_aspnetcore

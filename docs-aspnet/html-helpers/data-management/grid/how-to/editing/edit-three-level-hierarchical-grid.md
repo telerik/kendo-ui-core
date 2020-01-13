@@ -1,6 +1,6 @@
 ---
 title: Edit Three-Level Hierarchical Grids
-page_title: Edit Three-Level Hierarchical Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Edit Three-Level Hierarchical Grids
 description: "Edit Kendo UI Grids of a three-level hierarchy in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/edit-three-level-hierarchical-grid
 slug: howto_editthreelevelhierarchygrids_gridaspnetmvc

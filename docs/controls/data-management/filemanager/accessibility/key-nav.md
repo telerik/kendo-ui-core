@@ -11,10 +11,11 @@ position: 2
 The keyboard navigation of the FileManager is always available.
 
 The FileManager entirely relies on the composite components for their keyboard navigation capabilities ([Grid]({% slug keynav_kendoui_grid_widget %}), TreeView, ToolBar, Breadcrumb).
+The F2 button allows you to enter in edit mode of the currently selected file or folder, in order to rename it.
+D
 
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+* [Keyboard Navigation by the Grid (Demo)](http://demos.telerik.com/kendo-ui/web/filemanager/keyboard-navigation.html)
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
-* [Accessibility in the Grid]({% slug keyboard_shortcuts_accessibility_support %})

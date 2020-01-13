@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: NumericTextBox Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI NumericTextBox for {{ site.framework }}."
 previous_url: /helpers/html-helpers/numerictextbox, /helpers/editors/numerictextbox/overview
 slug: htmlhelpers_numerictextbox_aspnetcore

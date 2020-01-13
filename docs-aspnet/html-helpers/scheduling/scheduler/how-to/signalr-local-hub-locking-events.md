@@ -1,6 +1,6 @@
 ---
 title: Use SignalR Binding
-page_title: Use SignalR Binding | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Use SignalR Binding
 description: "Use real-time push-notifications from SignalR(v2) with local hub in ASP.NET MVC applications."
 previous_url: /helpers/scheduling/scheduler/how-to/signalr-local-hub-locking-events
 slug: howto_usesignalrbinding_scheduleraspnetmvc

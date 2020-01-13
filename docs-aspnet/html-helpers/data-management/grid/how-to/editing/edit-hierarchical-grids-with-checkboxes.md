@@ -1,6 +1,6 @@
 ---
 title: Edit Hierarchical Grids with Checkboxes
-page_title: Edit Hierarchical Grids with Checkboxes | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Edit Hierarchical Grids with Checkboxes
 description: "Edit a hierarchical Kendo UI Grid with checkboxes in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/edit-hierarchical-grids-with-checkboxes
 slug: howto_edithierarchicalwithchecboxes_gridaspnetmvc

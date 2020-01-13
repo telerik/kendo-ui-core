@@ -1,6 +1,6 @@
 ---
 title: Edit Grids in Incell Batch Mode Using WebAPI Controller
-page_title: Edit Grids in Incell Batch Mode Using WebAPI Controller | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Edit Grids in Incell Batch Mode Using WebAPI Controller
 description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
 previous_url: /helpers/data-management/grid/how-to/editing/incell-batch-editing-webapi
 slug: howto_editincellbatchmodewebapi_gridaspnetmvc

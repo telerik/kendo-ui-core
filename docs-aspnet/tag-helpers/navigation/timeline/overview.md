@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Timeline Overview | Telerik UI for ASP.NET Core TagHelpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Timeline for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_taghelpers_timeline_aspnetcore
 position: 1

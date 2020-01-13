@@ -1,6 +1,6 @@
 ---
 title: Bind TreeViews to XML
-page_title: Bind TreeViews to XML | Telerik UI TreeView HtmlHelper for ASP.NET MVC
+page_title: Bind TreeViews to XML
 description: "Bind a TreeView to XML in ASP.NET MVC applications."
 previous_url: /helpers/navigation/treeview/how-to/bind-to-xml
 slug: howto_bindtoaml_treeviewaspnetmvc

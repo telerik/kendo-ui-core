@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MultiColumnComboBox Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/multicolumncombobox, /helpers/editors/multicolumncombobox/overview
 slug: htmlhelpers_multicolumncombobox_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Display Server Error in a Tooltip
-page_title: Display Server Error in a Tooltip | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Display Server Error in a Tooltip
 description: "Display Server Error in a Tooltip"
 previous_url: /helpers/data-management/grid/how-to/editing/grid-handle-server-error
 slug: howto_displayservererrorinatooltip_gridaspnetmvc

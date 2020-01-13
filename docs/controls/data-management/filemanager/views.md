@@ -40,7 +40,7 @@ The List view is implemented with the help of the Kendo ListView component. The 
 ```js
     $("#filemanager").kendoFileManager({
         views: {
-            listview: {
+            list: {
                ... //disable the sorting of the grid
             }
         },

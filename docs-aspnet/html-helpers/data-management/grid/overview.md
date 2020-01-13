@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Grid Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Grid HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/grid, /helpers/data-management/grid/overview, /helpers/data-management/grid/configuration
 slug: htmlhelpers_grid_aspnetcore_overview

@@ -1,6 +1,6 @@
 ---
 title: Use the RangeSliderFor Method
-page_title: Use the RangeSliderFor Method | Telerik UI Slider HtmlHelper for ASP.NET MVC
+page_title: Use the RangeSliderFor Method
 description: "Use the RangeSliderFor method to update a model in ASP.NET MVC applications."
 previous_url: /helpers/editors/slider/how-to/update-dialog-ajax-forms
 slug: howto_userangesliderfor_slideraspnetmv

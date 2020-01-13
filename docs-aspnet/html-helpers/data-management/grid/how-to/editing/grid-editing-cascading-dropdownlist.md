@@ -1,6 +1,6 @@
 ---
 title: Handle Cascading DropDownLists within the Grid
-page_title: Handle Cascading DropDownLists within the Grid | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Handle Cascading DropDownLists within the Grid
 description: "Configure the Grid to handle cascading DropDownLists when using the Popup or Inline editing modes."
 previous_url: /helpers/data-management/grid/how-to/editing/grid-editing-cascading-dropdownlist
 slug: howto_handleeditingcascadingddls_gridaspnetmvc

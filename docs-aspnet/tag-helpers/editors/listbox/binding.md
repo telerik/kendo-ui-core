@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Data Binding | Telerik UI ListBox TagHelper for ASP.NET Core
+page_title: Data Binding
 description: "Bind the Telerik UI ListBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to server-side arrays or client-side arrays, and to remote data."
 slug: databinding_listbox_aspnetcore
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: Selection | Telerik UI Grid Tag Helper for ASP.NET Core
+page_title: Selection
 description: "Learn how to enable the selection functionality of the Telerik UI Grid for ASP.NET Core by using the Grid TagHelper."
 slug: taghelpers_grid_aspnetcore_selection
 position: 5

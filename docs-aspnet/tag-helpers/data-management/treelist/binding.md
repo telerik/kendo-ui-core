@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Data Binding | Telerik UI TreeList TagHelper for ASP.NET Core
+page_title: Data Binding
 description: "Learn the basics when working with the Telerik UI TreeList TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: databinding_treelist_aspnetcore
 position: 2

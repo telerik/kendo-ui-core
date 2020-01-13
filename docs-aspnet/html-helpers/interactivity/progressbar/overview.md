@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ProgressBar Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI ProgressBar HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/progressbar, /helpers/interactivity/progressbar/overview
 slug: htmlhelpers_progressbar_aspnetcore

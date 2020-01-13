@@ -1,6 +1,6 @@
 ---
 title: Converting Projects
-page_title: Converting Projects | Visual Studio Integration | Telerik UI for ASP.NET MVC
+page_title: Converting Projects
 description: "Learn how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application."
 slug: projectwizardcoversion_visualstudio_aspnetmvc
 position: 5

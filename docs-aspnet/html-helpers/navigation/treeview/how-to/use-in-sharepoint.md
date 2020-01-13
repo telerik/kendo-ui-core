@@ -1,6 +1,6 @@
 ---
 title: Integrate with Sharepoint
-page_title: Integrate with Sharepoint | Telerik UI TreeView HtmlHelper for ASP.NET MVC
+page_title: Integrate with Sharepoint
 description: "Use SharePoint Sandbox Visual Web Part to add a Kendo UI TreeView in ASP.NET MVC applications."
 previous_url: /helpers/navigation/treeview/how-to/use-in-sharepoint
 slug: howto_integratewithsharepoint_treeviewaspnetmvc

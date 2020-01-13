@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Notification Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Notification HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/notification, /helpers/layout/notification/overview
 slug: htmlhelpers_notification_aspnetcore

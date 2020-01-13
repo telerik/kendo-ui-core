@@ -1,6 +1,6 @@
 ---
 title: Export to Excel Server-Side
-page_title: Export to Excel Server-Side | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Export to Excel Server-Side
 description: "Export big datasets from the Kendo UI Grid to Excel by using the Document Processing Library in ASP.NET MVC applications."
 previous_url: /kendo-ui/aspnet-mvc/helpers/grid/how-to/excel-export-server-side, /helpers/data-management/grid/how-to/Export/excel-export-server-side
 slug: howto_exportgriddataasexceldocs_gridaspnetmv

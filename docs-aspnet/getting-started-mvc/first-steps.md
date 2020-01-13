@@ -1,6 +1,6 @@
 ---
 title: First Steps
-page_title: Getting Started on Visual Studio | Telerik UI for ASP.NET MVC
+page_title: Getting Started on Visual Studio
 description: "Create a sample project on Visual Studio with Progress Telerik UI for ASP.NET MVC."
 slug: gettingstarted_aspnetmvc
 previous_url: /getting-started/asp-net-mvc-5

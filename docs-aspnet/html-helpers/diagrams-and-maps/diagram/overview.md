@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Diagram Overview
+page_title: Overview
 description: "Get started with the server-side wrapper for the Telerik UI Diagram HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/diagrams-and-maps/diagram/overview
 slug: htmlhelpers_diagram_aspnetcore

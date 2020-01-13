@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DateRangePicker Accessibility
+page_title: Accessibility
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_daterangepicker_aspnetcore
 position: 1

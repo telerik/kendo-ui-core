@@ -1,6 +1,6 @@
 ---
 title: Implement Self-Referencing Hierarchy of Grids
-page_title: Implement Self-Referencing Hierarchy of Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
+page_title: Implement Self-Referencing Hierarchy of Grids
 description: "Implement a Kendo UI Grid which builds multiple levels of hierarchy by using a single table of data."
 previous_url: /helpers/data-management/grid/how-to/Binding/grid-self-referencing-hierarchy
 slug: howto_usegridselfrefhierarchy_gridaspnetmv

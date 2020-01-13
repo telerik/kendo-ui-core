@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ComboBox Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI ComboBox HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/combobox, /helpers/editors/combobox/overview
 slug: htmlhelpers_combobox_aspnetcore

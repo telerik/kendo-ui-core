@@ -1,6 +1,6 @@
 ---
 title: Handle Unauthorized Requests with Ajax-Bound Grids
-page_title: Handle Unauthorized Requests with Ajax-Bound Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
+page_title: Handle Unauthorized Requests with Ajax-Bound Grids
 description: "Create a custom AuthorizeAttribute that returns results that can be handled on the client."
 previous_url: /helpers/data-management/grid/how-to/Binding/handling-unauthorized-requests
 slug: howto_handleunathorizedrequestsajaxbound_gridaspnetmv

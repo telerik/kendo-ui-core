@@ -1,6 +1,6 @@
 ---
 title: Columns
-page_title: Columns | Telerik UI Grid TagHelper for ASP.NET Core
+page_title: Columns
 description: "Learn the basics when working with the Telerik UI Grid TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: columntemplates_grid_aspnetcore
 position: 4

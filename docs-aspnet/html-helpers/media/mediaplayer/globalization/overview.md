@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MediaPlayer Globalization
+page_title: Globalization
 description: "Get started with the Telerik UI MediaPlayer HtmlHelper for {{ site.framework }} and learn about the globalization options it supports."
 previous_url: /helpers/media/mediaplayer/globalization/overview
 slug: globalization_mediaplayer_aspnetcore

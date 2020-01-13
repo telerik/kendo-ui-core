@@ -1,6 +1,6 @@
 ---
 title: Create View Model Bound Dynamic Series
-page_title: Create View Model Bound Dynamic Series | Kendo UI Chart HtmlHelper for ASP.NET MVC
+page_title: Create View Model Bound Dynamic Series
 description: "Create dynamic Chart series bound to a view model in ASP.NET MVC applications."
 previous_url: /helpers/charts/how-to/create-dynamic-series
 slug: howto_cerateviewmodelboundseries_chartaspnetmvc

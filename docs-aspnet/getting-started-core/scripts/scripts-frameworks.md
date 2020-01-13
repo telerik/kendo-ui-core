@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CONTENT, COPY THE NEW DEPENDENCIES FROM THE RELEVANT jQUERY FILE.
 title: Framework and Utilities
-page_title: Individual Scripts for Framework and Utilities | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Framework and Utilities
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Framework and Utilities"
 slug: script_filesfor_tools_frameworks_utilities
 permalink: /getting-started/scripts/scripts-frameworks

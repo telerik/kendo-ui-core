@@ -1,6 +1,6 @@
 ---
 title: Downloading New Versions
-page_title: Downloading New Versions | Visual Studio Integration | Telerik UI for ASP.NET Core
+page_title: Downloading New Versions
 description: "Learn how to keep your projects updated when using Progress&reg; Telerik&reg; UI for ASP.NET Core."
 slug: latestversionretrieval_visualstudio_aspnetcore
 position: 3

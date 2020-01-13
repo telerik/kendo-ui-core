@@ -1,6 +1,6 @@
 ---
 title: Edit Hierarchical Grids in Incell Mode
-page_title: Edit Hierarchical Grids in Incell Mode | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Edit Hierarchical Grids in Incell Mode
 description: "Edit hierarchical Kendo UI Grids in incell editing mode in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/edit-hierarchical-grids-in-incell-mode
 slug: howto_edithierarchicalinincellmode_gridaspnetmvc

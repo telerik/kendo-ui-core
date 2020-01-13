@@ -1,6 +1,6 @@
 ---
 title: Tooltip
-page_title: Rating Tooltip | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Rating Tooltip
 description: "Learn how to configure the tooltip of the Rating when working with the Telerik UI Rating tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_rating_aspnetcore_tooltip
 position: 5

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TabStrip Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI TabStrip HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/tabstrip, /helpers/navigation/tabstrip/overview
 slug: htmlhelpers_tabstrip_aspnetcore

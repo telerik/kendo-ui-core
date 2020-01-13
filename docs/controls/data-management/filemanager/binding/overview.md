@@ -8,13 +8,37 @@ position: 0
 
 # DataBiding Overview
 
-descrive mandatory fields: 
+The FileManager provides different data-binding options.
 
- name: "Folder",
-    isDirectory: true,
-    hasDirectories: false,
-    path: "Folder2/Folder",
-    extension: "",
-    size: 0,
-    createdUtc: new Date(),
-    items: []
+* [Local data binding]({% slug localdata_kendoui_filemanager_widget %})
+* [Remote data binding]({% slug remotedata_kendoui_filemanager_widget %})
+
+The Component uses an extended [HierarchicalDataSource]({% slug overview_hierarchical_datasourcecomponent %}) - FileManagerDataSource and an extended [Node](/api/javascript/ui/filemanager) - FileEntry. 
+
+The FileManager uses the following built-in `filemanager` schema:
+
+```js
+model: {
+    id: "path",
+    hasChildren: "hasDirectories",
+    fields: {
+        name: {editable: true, type: "String", defaultValue: "New Folder" },
+        size: {editable: false, type: "Number"},
+        path: {editable: false, type: "String"},
+        extension: {editable: false, type: "String"},
+        isDirectory: {editable: false, defaultValue: true, type: "Boolean"},
+        hasDirectories: {editable: false, defaultValue: false, type: "Boolean"},
+        created: { from: "created", type: "Date", editable: false},
+        createdUtc: { from: "createdUtc", type: "Date", editable: false },
+        modified: { from: "modified", type: "Date", editable: false},
+        modifiedUtc: { from: "modifiedUtc", type: "Date", editable: false }
+    }
+}
+
+```
+
+
+
+
+
+descrive mandatory fields: 

@@ -1,6 +1,6 @@
 ---
 title: Upload Files from Grid Popup Editors
-page_title: Upload Files from Grid Popup Editors | Telerik UI Upload HtmlHelper for ASP.NET MVC
+page_title: Upload Files from Grid Popup Editors
 description: "Upload files from a Grid popup editor in ASP.NET MVC applications."
 previous_url: /helpers/editors/upload/how-to/upload-files-from-grid
 slug: howto_uploadfilesgridpopupeditor_uploadaspnetmvc

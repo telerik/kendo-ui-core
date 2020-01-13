@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MultiColumnComboBox Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Kendo UI MultiColumnComboBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_multicolumncombobox_aspnetcore
 position: 1

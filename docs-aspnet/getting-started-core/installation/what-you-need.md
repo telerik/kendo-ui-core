@@ -1,6 +1,6 @@
 ---
 title: Creating Your Own Custom Bundles
-page_title: Creating Your Own Custom Bundles | Download and Installation | Telerik UI for ASP.NET Core
+page_title: Creating Your Own Custom Bundles
 description: "Get started with Telerik UI for ASP.NET Core, customize its components according to your project and add only the helpers that you need."
 slug: custombundles_core
 position: 8

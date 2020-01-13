@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ListView Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI ListView HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/listview, /helpers/data-management/listview/overview, /helpers/data-management/listview/configuration
 slug: htmlhelpers_listview_aspnetcore

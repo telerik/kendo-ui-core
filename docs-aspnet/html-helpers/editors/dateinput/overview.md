@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DateInput Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI DateInput HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/dateinput, /helpers/editors/dateinput/overview
 slug: htmlhelpers_dateinput_aspnetcore

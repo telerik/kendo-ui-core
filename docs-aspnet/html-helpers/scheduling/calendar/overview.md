@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Calendar Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Calendar HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/scheduling/calendar/overview
 slug: htmlhelpers_overview_calendarhelper_aspnetcore

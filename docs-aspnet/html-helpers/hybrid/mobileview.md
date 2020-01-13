@@ -1,6 +1,6 @@
 ---
 title: View
-page_title: Hybrid View Overview
+page_title: View Overview
 description: "Learn the basics when working with the hybrid Telerik UI View HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/hybrid/mobileview/overview, /helpers/hybrid/mobileview
 slug: overview_hybridview_aspnetmvc

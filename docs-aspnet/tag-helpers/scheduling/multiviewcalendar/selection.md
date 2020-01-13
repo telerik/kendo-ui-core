@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: Selection | Telerik UI MultiViewCalendar TagHelper for ASP.NET Core
+page_title: Selection
 description: "Learn how to select dates in the Telerik UI MultiViewCalendar TagHelper for ASP.NET Core."
 slug: selection_multiviewcalendar_taghelper_aspnetcore
 position: 4

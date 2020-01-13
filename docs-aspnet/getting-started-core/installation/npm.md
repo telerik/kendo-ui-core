@@ -1,6 +1,6 @@
 ---
 title: Installing with NPM
-page_title: Installing with NPM | Download and Installation | Telerik UI for ASP.NET Core
+page_title: Installing with NPM
 description: "Get started with Telerik UI for ASP.NET Core and install NPM packages of the helpers."
 slug: npmpackages_core
 position: 6

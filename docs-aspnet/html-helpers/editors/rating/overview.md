@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Rating Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Rating HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/rating/overview
 slug: htmlhelpers_rating_aspnetcore_overview

@@ -1,6 +1,6 @@
 ---
 title: Upload Files to Databases
-page_title: Upload Files to Databases | Telerik UI Upload HtmlHelper for ASP.NET MVC
+page_title: Upload Files to Databases
 description: "Upload files to a database in ASP.NET MVC applications."
 previous_url: /helpers/editors/upload/how-to/upload-files-to-a-database
 slug: howto_uploadfilesdatabases_uploadaspnetmvc

@@ -1,6 +1,6 @@
 ---
 title: Environment Specifics
-page_title: Environment Specifics | Prerequisites | Telerik UI for ASP.NET Core
+page_title: Environment Specifics
 description: "Learn about IDE or framework specifics while working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and Visual Studio."
 slug: environmentsupport_core
 position: 1

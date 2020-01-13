@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ListBox Overview
+page_title: Data Binding
 description: "Get started with the {{ site.product }} ListBox and learn how to bind the ListBox to local or remote data."
 previous_url: /helpers/editors/listbox/data-binding
 slug: htmlhelpers_listbox_databinding_aspnetcore

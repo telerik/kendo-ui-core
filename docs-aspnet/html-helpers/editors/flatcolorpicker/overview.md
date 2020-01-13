@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: FlatColorPicker Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI FlatColorPicker HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/flatcolorpicker/overview
 slug: overview_flatcolorpickerhelper_aspnetcore

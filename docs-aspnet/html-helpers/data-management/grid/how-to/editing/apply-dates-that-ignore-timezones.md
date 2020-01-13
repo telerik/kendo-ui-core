@@ -1,6 +1,6 @@
 ---
 title: Apply Dates that Ignore Timezones
-page_title: Apply Dates that Ignore Timezones | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Apply Dates that Ignore Timezones
 description: "Apply dates that ignore timezones when working with the Kendo UI Grid in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/apply-dates-that-ignore-timezones
 slug: howto_applydatesignoretimezones_gridaspnetmv

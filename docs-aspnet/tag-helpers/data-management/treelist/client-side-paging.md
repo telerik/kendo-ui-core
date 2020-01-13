@@ -1,6 +1,6 @@
 ---
 title: Paging
-page_title: Paging | Telerik UI TreeList TagHelper for ASP.NET Core
+page_title: Paging
 description: "Learn how to enable the client-side paging feature to the Telerik UI TreeList TagHelper for ASP.NET Core."
 slug: client_side_paging_aspnetcore_treelist_tag_helper
 position: 3

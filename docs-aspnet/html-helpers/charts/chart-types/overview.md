@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Chart Types Overview
+page_title: Types Overview
 description: "Learn the basics when working with the chart types in the {{ site.product }} suite."
 slug: overview_charttypes_charts
 position: 1

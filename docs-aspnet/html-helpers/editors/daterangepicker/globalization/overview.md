@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Globalization Overview
+page_title: Globalization
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn about the globalization options it supports."
 slug: globalization_daterangepicker_aspnetcore
 position: 1

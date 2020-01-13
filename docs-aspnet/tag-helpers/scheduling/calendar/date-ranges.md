@@ -1,6 +1,6 @@
 ---
 title: Date Ranges
-page_title: Date Ranges | Telerik UI Calendar TagHelper for ASP.NET Core
+page_title: Date Ranges
 description: "Configure the minimum and maximum dates when working with the Telerik UI Calendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: dateranges_calendar_aspnetcore
 position: 2

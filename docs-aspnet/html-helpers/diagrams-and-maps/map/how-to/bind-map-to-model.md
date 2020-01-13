@@ -1,6 +1,6 @@
 ---
 title: Bind Map to View Model
-page_title: Bind Map to View Model | Telerik UI Map HtmlHelper for ASP.NET MVC
+page_title: Bind Map to View Model
 description: "Learn how to bind a Map to the View Model in ASP.NET MVC applications."
 previous_url: /helpers/diagrams-and-maps/map/how-to/bind-map-to-model
 slug: howto_bindtomodel_map

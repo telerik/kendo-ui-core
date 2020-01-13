@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Download and Installation Overview | Download and Installation | Telerik UI for ASP.NET Core
+page_title: Download and Installation Overview
 description: "Get started with Telerik UI for ASP.NET Core and learn how to download the library and initialize its Html and tag helpers."
 slug: downloadinstall_aspnetcore
 position: 1

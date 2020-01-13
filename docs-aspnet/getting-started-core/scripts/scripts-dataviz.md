@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CONTENT, COPY THE NEW DEPENDENCIES FROM THE RELEVANT jQUERY FILE.
 title: Charts
-page_title: Individual Scripts for Charts | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Charts
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Charts"
 slug: script_filesfor_charts_widgets
 permalink: /getting-started/scripts/scripts-dataviz

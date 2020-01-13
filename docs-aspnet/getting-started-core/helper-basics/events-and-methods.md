@@ -1,6 +1,6 @@
 ---
 title: Methods and Events
-page_title: Methods and Events | Working with Helpers | Telerik UI for ASP.NET Core
+page_title: Methods and Events
 description: "Get started with Telerik UI for ASP.NET Core, obtain a reference to initialized helper instances, and call their methods and events."
 slug: methodevents_core
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Implement Custom Editors
-page_title: Implement Custom Editors | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Implement Custom Editors
 description: "Implement a custom editor similar to the build-in editor of a Kendo UI Scheduler in ASP.NET MVC applications."
 previous_url: /helpers/scheduling/scheduler/how-to/custom-editor
 slug: howto_implementcustomeditor_scheduleraspnetmvc

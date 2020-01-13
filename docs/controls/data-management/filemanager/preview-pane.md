@@ -8,9 +8,9 @@ position: 6
 
 # Preview Pane Overview
 
-The Preview Pane shows additional information about the selected file or folder.
+The Preview Pane shows additional information about the selected files or folders in the view.
 
-The preview pane visibility could be toggled by the switch button in the toolbar of the FileManager. By default, it shows the following information about the selected file or folder:
+The preview pane visibility could be toggled by the Switch Tool in the FileManager Toolbar. By default, it shows the following information about the selected file or folder:
 
 * Thumbnail, representing the file
 * File name 
@@ -18,9 +18,26 @@ The preview pane visibility could be toggled by the switch button in the toolbar
 * Date created 
 * Date modified
 
-The Preview Pane define which fields to be rendered or customizable the entire layout via kendo template. The Pane can accept the following:
+The `metaFields` object in the PreivewPane configuration, allows you to control which fields from the above-enumerated should be displayed. If you need to show only the Name and Size information in the Preview Pane, the configuration would be as follows:
 
-* metaFields: Boolean | Array<String> - Controls whether to show details and meta. Or define which fields to render 
+```js
+    <div id="filemanager"></div>
+    $("#filemanager").kendoFileManager({
+         previewPane: {
+                metaFields:  ["name", "size"]
+            },
+        dataSource: {
+            data: myData
+        }
+    });
+
+
+```
+
+## Customize Preview Pane
+
+You can customize the Preview Pane layout by specifying a kendo template. The Pane accepts the following templates:
+
 * noFileTemplate: String | Function - Template when no file/folder is selected
 * singleFileTemplate: String | Function - Template when only a single file/folder is selected
 * multipleFilesTemplate: String | Function - Template when multiple files/folders are selected

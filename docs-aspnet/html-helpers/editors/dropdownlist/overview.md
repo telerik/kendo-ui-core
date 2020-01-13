@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DropDownList Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/dropdownlist, /helpers/editors/dropdownlist/overview
 slug: htmlhelpers_dropdownlist_aspnetcore

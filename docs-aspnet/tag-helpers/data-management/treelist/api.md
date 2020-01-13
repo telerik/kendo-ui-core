@@ -1,6 +1,6 @@
 ---
 title: Using the API
-page_title: Using the API | Telerik UI TreeList TagHelper for ASP.NET Core
+page_title: Using the API
 description: "Learn the basics when working with the Telerik UI TreeList TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: usingapi_treelist_aspnetcore
 position: 4

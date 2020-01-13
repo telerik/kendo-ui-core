@@ -1,6 +1,6 @@
 ---
 title: Preserve Server Toolbar Templates of Grids after Using setOptions
-page_title: Preserve the Grid Server Toolbar Template after Using setOptions | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Preserve the Grid Server Toolbar Template after Using setOptions
 description: "Preserve the Grid server toolbar template after using the setOptions method."
 previous_url: /helpers/data-management/grid/how-to/state/grid-preserve-server-toolbar-template-after-set-options
 slug: howto_preserveservertemplateaftersetoptions_gridaspnetmv

@@ -1,6 +1,6 @@
 ---
 title: Create Masked DatePickers
-page_title: Create Masked DatePickers | Kendo UI DatePicker HtmlHelper for ASP.NET MVC
+page_title: Create Masked DatePickers
 description: "Create a masking functionality for the Telerik UI DatePicker in ASP.NET MVC applications."
 previous_url: /helpers/editors/datepicker/how-to/masked-date-picker-grid
 slug: howto_create_masked_datepickers_datepickaspnetmvc

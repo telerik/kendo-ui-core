@@ -1,6 +1,6 @@
 ---
 title: ModalView
-page_title: Hybrid ModalView Overview
+page_title: ModalView Overview
 description: "Learn the basics when working with the hybrid Telerik UI ModalView HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/hybrid/mobilemodalview/overview, /helpers/hybrid/mobilemodalview
 slug: overview_hybridmodalview_aspnetmvc

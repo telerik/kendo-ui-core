@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ColorPalette Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI ColorPalette HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/colorpalette/overview
 slug: overview_colorpalettehelper_aspnetcore

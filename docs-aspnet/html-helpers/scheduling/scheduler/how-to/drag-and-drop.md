@@ -1,6 +1,6 @@
 ---
 title: Implement Drag-and-Drop Support
-page_title: Implement Drag-and-Drop Support | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Implement Drag-and-Drop Support
 description: "Implement the drag-and-drop functionality between a Kendo UI Grid and Scheduler in ASP.NET MVC applications."
 previous_url: /helpers/scheduling/scheduler/how-to/drag-and-drop
 slug: howto_implementdraganddrop_scheduleraspnetmvc

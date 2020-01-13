@@ -1,6 +1,6 @@
 ---
 title: Hierarchy
-page_title: Hierarchy | Telerik UI Grid TagHelper for ASP.NET Core
+page_title: Hierarchy
 description: "Learn the basics when working with the Telerik UI Grid TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: hierarchy_grid_aspnetcore
 position: 2

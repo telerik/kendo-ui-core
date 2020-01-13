@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: TreeView Accessibility | Telerik UI TreeView HtmlHelper for {{ site.framework }}
+page_title: Accessibility
 description: "Get started with the {{ site.product }} TreeView and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_aspnetcore_treeview
 position: 1

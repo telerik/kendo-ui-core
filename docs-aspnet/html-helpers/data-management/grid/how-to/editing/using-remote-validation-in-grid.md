@@ -1,6 +1,6 @@
 ---
 title: Implement Remote Validation
-page_title: Implement Remote Validation | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Implement Remote Validation
 description: "Configure the remote validation functionality in the Kendo UI Grid in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/using-remote-validation-in-grid
 slug: howto_usingremotevalidationingrid_gridaspnetmvc

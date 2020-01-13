@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Splitter Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Splitter TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /helpers/splitter, /helpers/tag-helpers/splitter
 slug: taghelpers_splitter_aspnetcore

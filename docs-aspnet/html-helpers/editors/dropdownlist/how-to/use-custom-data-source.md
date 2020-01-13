@@ -1,6 +1,6 @@
 ---
 title: Use Custom DataSource to Bind to ToDataSourceResult Output
-page_title: Use Custom DataSource to Bind to ToDataSourceResult Output | Telerik UI DropDownList HtmlHelper for ASP.NET MVC
+page_title: Use Custom DataSource to Bind to ToDataSourceResult Output
 description: "Use a custom DataSource to bind to a ToDataSourceResult output in ASP.NET MVC applications."
 previous_url: /helpers/editors/dropdownlist/how-to/use-custom-data-source
 slug: howto_usecustomdatasource_bindtodatasourceoutput_ddlaspnetmvc

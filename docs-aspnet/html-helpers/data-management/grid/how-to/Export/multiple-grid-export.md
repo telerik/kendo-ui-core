@@ -1,6 +1,6 @@
 ---
 title: Export Multiple Grids to Excel
-page_title: Export Multiple Grids to Excel | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Export Multiple Grids to Excel
 description: "Export two or more Kendo UI Grids for ASP.NET MVC to Excel."
 previous_url: /helpers/data-management/grid/how-to/Export/multiple-grid-export
 slug: howto_multiplegridexport_aspnetmvcgrid

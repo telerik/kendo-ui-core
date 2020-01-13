@@ -1,6 +1,6 @@
 ---
 title: Store Images in Database with ImageBrowser
-page_title: Store Images in Database with ImageBrowser | Telerik UI Editor HtmlHelper for ASP.NET MVC
+page_title: Store Images in Database with ImageBrowser
 description: "Set up the Editor ImageBrowser to store the images in an MS SQL database in ASP.NET MVC applications."
 previous_url: /helpers/editors/editor/how-to/database-with-imagebrowser
 slug: howto_storeimagesindatabases_editoraspnetmvc

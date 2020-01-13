@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: MultiViewCalendar Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI MultiViewCalendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: overview_multiviewcalendar_taghelper_aspnetcore
 position: 1

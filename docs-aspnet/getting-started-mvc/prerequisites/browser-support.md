@@ -1,6 +1,6 @@
 ---
 title: Web Browser Support
-page_title: Web Browser Support | Prerequisites | Telerik UI for ASP.NET MVC
+page_title: Web Browser Support
 description: "Get started with Telerik UI for ASP.NET MVC and learn which are the browsers supported by the framework components."
 slug: webbrowsersupport_aspnetmvc
 position: 1

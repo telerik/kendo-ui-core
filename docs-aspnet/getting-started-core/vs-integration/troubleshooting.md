@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: Troubleshooting | Visual Studio Integration | Telerik UI for ASP.NET Core
+page_title: Troubleshooting
 description: "Troubleshooting steps for Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio extensions."
 slug: troubleshooting_visualstudio_aspnetcore
 position: 4

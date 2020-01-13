@@ -1,6 +1,6 @@
 ---
 title: Display Modes
-page_title: Display Modes | Telerik UI Drawer TagHelper for ASP.NET Core
+page_title: Display Modes
 description: "Use the display modes and handle the rendering of the Telerik UI Drawer HtmlHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: displaymodes_drawer_aspnetcoretaghelper
 position: 2

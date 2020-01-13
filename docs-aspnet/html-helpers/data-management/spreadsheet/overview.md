@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Spreadsheet Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/spreadsheet, /helpers/data-management/spreadsheet/overview
 slug: htmlhelpers_spreadsheet_aspnetcore

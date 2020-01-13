@@ -1,6 +1,6 @@
 ---
 title: Post Grid Selection to Server
-page_title: Post Grid Selection to Server | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Post Grid Selection to Server
 description: "Post the Grid selection to the server."
 previous_url: /helpers/grid/how-to/post-grid-selection-to-server, /helpers/data-management/grid/how-to/Selection/post-grid-selection-to-server
 slug: howto_postselectiontoserver_gridaspnetmv

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: AutoComplete Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/autocomplete, /helpers/editors/autocomplete/overview
 slug: htmlhelpers_autocomplete_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Export Detail Grids to Excel
-page_title: Export Detail Grids to Excel | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Export Detail Grids to Excel
 description: "Export master and detail Grids in Excel using ASP.NET MVC."
 previous_url: /helpers/data-management/grid/how-to/Export/detail-grid-export
 slug: howto_detailgridexcelexport_aspnetmvcgrid

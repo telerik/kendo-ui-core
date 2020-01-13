@@ -1,6 +1,6 @@
 ---
 title: Razor Pages Integration
-page_title: Razor Pages Integration | Download and Installation | Telerik UI for ASP.NET Core
+page_title: Razor Pages Integration
 description: "Get started with Telerik UI for ASP.NET Core and integrate Razor Pages with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /getting-started/razor-pages-integration
 slug: razor_pages_integration_aspnetmvc6_aspnetmvc

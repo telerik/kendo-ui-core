@@ -1,6 +1,6 @@
 ---
 title: Open Window from Menu Item Click by Using Ajax
-page_title: Open Window from Menu Item Click by Using Ajax | Telerik UI Menu HtmlHelper for ASP.NET MVC
+page_title: Open Window from Menu Item Click by Using Ajax
 description: "Open a window when clicking on a Kendo UI Menu item by using Ajax in ASP.NET MVC applications."
 previous_url: /helpers/navigation/menu/how-to/grid-hierarchy-with-dynamic-model-loading-and-datatable
 slug: howto_openwindowfrommenuotemajax_menuaspnetmv

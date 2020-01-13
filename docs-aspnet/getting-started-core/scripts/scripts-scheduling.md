@@ -1,7 +1,7 @@
 ---
 comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CONTENT, COPY THE NEW DEPENDENCIES FROM THE RELEVANT jQUERY FILE.
 title: Scheduling
-page_title: Individual Scripts for Scheduling | Scripts | Kendo UI for jQuery
+page_title: Individual Scripts for Scheduling
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Scheduling"
 slug: script_filesfor_scheduling_widgets
 permalink: /getting-started/scripts/scripts-scheduling

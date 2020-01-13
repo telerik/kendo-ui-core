@@ -1,6 +1,6 @@
 ---
 title: Creating Kendo UI Projects
-page_title: Creating Kendo UI Projects | Visual Studio Integration | Telerik UI for ASP.NET MVC
+page_title: Creating Kendo UI Projects
 description: "Learn how to create a new Progress&reg; Kendo UI&reg; for jQuery application."
 slug: newprojectwizard_visualstudio_kendoui
 position: 3

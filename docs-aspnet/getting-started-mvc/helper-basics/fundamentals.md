@@ -1,6 +1,6 @@
 ---
 title: Fundamentals
-page_title: Fundamentals | Working with Helpers | Telerik UI for ASP.NET MVC
+page_title: Fundamentals
 description: "Get started with Telerik UI for ASP.NET MVC and download, install, and configure your project."
 slug: fundamentals_aspnetmvc
 previous_url: /fundamentals, /getting-started/fundamentals

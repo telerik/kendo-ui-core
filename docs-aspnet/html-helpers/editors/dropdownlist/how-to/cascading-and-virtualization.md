@@ -1,6 +1,6 @@
 ---
 title: Cascade DropDownLists with Enabled Virtualization
-page_title: Cascade DropDownLists with Enabled Virtualization | Telerik UI DropDownList HtmlHelper for ASP.NET MVC
+page_title: Cascade DropDownLists with Enabled Virtualization
 description: "Cascade DropDownLists and enable virtualization in ASP.NET MVC applications."
 previous_url: /helpers/editors/dropdownlist/how-to/cascading-and-virtualization
 slug: howto_cascadeddlenabledvirtualization_ddlaspnetmvc

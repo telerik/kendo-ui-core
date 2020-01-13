@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: NumericTextBox Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI NumericTextBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /helpers/numeric-text-box, /helpers/tag-helpers/numeric-text-box
 slug: taghelpers_numerictextbox_aspnetcore

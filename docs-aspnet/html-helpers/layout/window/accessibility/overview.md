@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Window Accessibility
+page_title: Accessibility
 description: "Get started with the {{ site.product }} Window and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_aspnetcore_window
 position: 1

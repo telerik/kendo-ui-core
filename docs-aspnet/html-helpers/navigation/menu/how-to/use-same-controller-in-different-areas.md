@@ -1,6 +1,6 @@
 ---
 title: Use the Same Controllers in Different Areas
-page_title: Use the Same Controllers in Different Areas | Telerik UI Menu HtmlHelper for ASP.NET MVC
+page_title: Use the Same Controllers in Different Areas
 description: "Use the same controller in different areas of the Kendo UI Menu in ASP.NET MVC applications."
 previous_url: /helpers/navigation/menu/how-to/use-same-controller-in-different-areas
 slug: howto_usethesamecontrollerdiffareas_menuaspnetmv

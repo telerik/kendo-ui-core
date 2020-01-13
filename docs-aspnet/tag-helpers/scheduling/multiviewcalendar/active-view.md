@@ -1,6 +1,6 @@
 ---
 title: Active View
-page_title: Active View | Telerik UI MultiViewCalendar TagHelper for ASP.NET Core
+page_title: Active View
 description: "Define the first view that the Telerik UI MultiViewCalendar TagHelper initially renders."
 slug: active_view_multiviewcalendar_taghelper_aspnetcore
 position: 2

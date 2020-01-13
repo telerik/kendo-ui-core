@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Filter Globalization
+page_title: Globalization
 description: "Get started with the Telerik UI Filter HtmlHelper for {{ site.framework }} and learn about the globalization options it supports."
 previous_url: /helpers/data-management/filter/globalization/overview
 slug: globalization_filter_aspnetcore

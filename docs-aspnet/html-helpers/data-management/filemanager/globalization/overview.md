@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: FileManager Globalization
+page_title: Globalization
 description: "Get started with the Telerik UI FileManager HtmlHelper for {{ site.framework }} and learn about the globalization options it supports."
 slug: globalization_filemanager_aspnetcore
 position: 1

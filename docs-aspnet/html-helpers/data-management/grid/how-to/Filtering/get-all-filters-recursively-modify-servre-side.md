@@ -1,6 +1,6 @@
 ---
 title: Get All Filters Recursively and Modify Them on the Server Side
-page_title: Get All Filters Recursively and Modify Them on the Server Side | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Get All Filters Recursively and Modify Them on the Server Side
 description: "Get all Kendo UI Grid filters recursively and modify them on the server side in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/Filtering/get-all-filters-recursively-modify-servre-side
 slug: howto_getallfiltersrecursivelymodifyserverside_gridaspnetmv

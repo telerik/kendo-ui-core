@@ -1,6 +1,6 @@
 ---
 title: Export Grid Data in PDF
-page_title: Export Grid Data in PDF | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Export Grid Data in PDF
 description: "Export the Kendo UI Grid data as a PDF document."
 previous_url: /helpers/data-management/grid/how-to/Export/pdf-export-server-side
 slug: howto_exportonpdf_gridaspnetmv

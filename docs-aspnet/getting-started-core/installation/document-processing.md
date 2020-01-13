@@ -1,6 +1,6 @@
 ---
 title: Document Processing Libraries
-page_title: Document Processing Libraries| Download and Installation | Telerik UI for ASP.NET Core
+page_title: Document Processing Libraries
 description: "Get started with Telerik UI for ASP.NET Core and learn how to work with the PdfProcessing, SpreadStreamProcessing, WordsProcessing, and ZipLibrary libraries as part of the Telerik Document Processing."
 slug: document_processing_core
 position: 11
@@ -9,9 +9,10 @@ permalink: /getting-started/installation/document-processing
 
 # Telerik Document Processing
 
-Telerik Document Processing provides the RadPdfProcessing, RadSpreadStreamProcessing, RadWordsProcessing, and RadZipLibrary UI-independent and cross-platform libraries which enable you to process content between different formats and work with archive files.
+Telerik Document Processing provides the RadPdfProcessing, RadSpreadProcessing, RadSpreadStreamProcessing, RadWordsProcessing, and RadZipLibrary UI-independent and cross-platform libraries which enable you to process content between different formats and work with archive files.
 
 * The [RadPdfProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview) library enables you to create, import, and export PDF documents.
+* The [RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview) enables you to effortlessly convert documents from one to another file format among XLSX, CSV and TXT. .
 * The [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) library enables you to export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
 * The [RadWordsProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview) library enables you to create, import, and export `DOCX`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
 * The [RadZipLibrary](http://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview) library enables you to compress and decompress `ZIP` files.

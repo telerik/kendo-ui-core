@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Data Binding | Telerik UI Gantt TagHelper for ASP.NET Core
+page_title: Data Binding
 description: "Configure the DataSource instances for the data, dependencies, resources, and assignments of the Telerik UI Gantt TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: binding_gantt_aspnetcore
 position: 2

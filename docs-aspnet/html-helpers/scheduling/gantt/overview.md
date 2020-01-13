@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Gantt Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/gantt, /helpers/scheduling/gantt/overview
 slug: htmlhelpers_gantt_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Data Binding | Telerik UI Spreadsheet TagHelper for ASP.NET Core
+page_title: Data Binding
 description: "Bind the sheets of the Telerik UI Spreadsheet TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC) to a data source instance."
 slug: databinding_spreadsheet_aspnetcore
 position: 2

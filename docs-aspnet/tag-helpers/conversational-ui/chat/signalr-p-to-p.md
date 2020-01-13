@@ -1,6 +1,6 @@
 ---
 title: Peer-to-Peer Chat
-page_title: Peer-to-Peer Chat | Telerik UI Chat TagHelper for ASP.NET Core
+page_title: Peer-to-Peer Chat
 description: "Learn how to create a peer-to-peer Telerik UI Chat UI with ASP.NET Core SignalR."
 slug: taghelpers_chat_aspnetcore_signalr
 position: 2

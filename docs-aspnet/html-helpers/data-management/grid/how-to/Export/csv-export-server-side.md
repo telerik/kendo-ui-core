@@ -1,6 +1,6 @@
 ---
 title: Export Grid Data to CSV Files
-page_title: Do Ajax Editing with Enumeration | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Do Ajax Editing with Enumeration
 description: "Export Kendo UI Grid data as a CSV (comma-separated value) file."
 previous_url: /helpers/data-management/grid/how-to/Export/csv-export-server-side
 slug: howto_exportgriddatacsvfile_gridaspnetmv

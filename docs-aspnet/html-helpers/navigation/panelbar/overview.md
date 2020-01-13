@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: PanelBar Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI PanelBar HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/panelbar, /helpers/navigation/panelbar/overview
 slug: htmlhelpers_panelbar_aspnetcore

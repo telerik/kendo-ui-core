@@ -1,6 +1,6 @@
 ---
 title: Edit RadioButton Templates in InCell Mode
-page_title: Edit RadioButton Templates in InCell Mode | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Edit RadioButton Templates in InCell Mode
 description: "Use the batch editing functionality of the Kendo UI Grid to edit RadioButton templates in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/edit-radio-button-templates-incell-mode
 slug: howto_editradiobuttontemplatesincellmode_gridaspnetmv

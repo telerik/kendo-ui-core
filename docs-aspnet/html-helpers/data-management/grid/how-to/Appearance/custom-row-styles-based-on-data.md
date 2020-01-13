@@ -1,6 +1,6 @@
 ---
 title: Apply Custom Row Styles Based on Model Data
-page_title: Apply Custom Row Styles Based on Model Data | Kendo UI Grid HtmlHelper for ASP.NET MVC for ASP.NET MVC
+page_title: Apply Custom Row Styles Based on Model Data
 description: "Apply custom row styles based on model data when exporting the Kendo UI Grid to Excel."
 previous_url: /helpers/data-management/grid/how-to/Appearance/custom-row-styles-based-on-data
 slug: howto_applycustomrrowstylesmodeldata_gridaspnetmv

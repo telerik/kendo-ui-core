@@ -1,6 +1,6 @@
 ---
 title: Use Grid with Kendo UI ContextMenu
-page_title: Use Grid with Kendo UI ContextMenu | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Use Grid with Kendo UI ContextMenu
 description: "Use the Kendo UI Grid with the Kendo UI ContextMenu in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/Integration/use-grid-with-contextmenu
 slug: howto_usegridwithontextmenu_gridaspnetmv

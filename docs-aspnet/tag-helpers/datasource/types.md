@@ -1,6 +1,6 @@
 ---
 title: Types
-page_title: Types | Telerik UI DataSource TagHelper for ASP.NET Core
+page_title: Types
 description: "Learn about the types of DataSource supported by the Telerik UI DataSource TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: types_datasource_aspnetcore
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Update Grids by Using timestamp Property
-page_title: Update Grids by Using timestamp Property | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Update Grids by Using timestamp Property
 description: "Update the Kendo UI Grid in ASP.NET MVC applications by using the timestamp property."
 previous_url: /helpers/data-management/grid/how-to/editing/update-using-timestamp
 slug: howto_updategridusingtimestamp_gridaspnetmv

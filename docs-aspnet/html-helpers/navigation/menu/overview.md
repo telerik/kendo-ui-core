@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Men Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Menu HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/menu, /helpers/navigation/menu/overview
 slug: htmlhelpers_menu_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Custom DataSource
-page_title: Custom DataSource | Working with Helpers | Telerik UI for ASP.NET MVC
+page_title: Custom DataSource
 description: "Get started with Telerik UI for ASP.NET MVC and use the CustomDataSource builder."
 slug: customdatasource_aspnetmvc
 previous_url: /custom-datasource, /getting-started/custom-datasource

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: RadialGauge Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI RadialGauge HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/gauges/radialgauge/overview
 slug: overview_radialgaugehelper_aspnetcore

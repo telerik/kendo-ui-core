@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: ArcGauge Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI ArcGauge HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/gauges/arcgauge/overview
 slug: overview_arcgaugehelper_aspnetcore

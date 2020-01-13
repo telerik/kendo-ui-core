@@ -36,6 +36,6 @@ To enable both virtualized columns and rows:
 
 * [Column Virtualization by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/column-virtualization)
 * [Virtual Scrolling of the Kendo UI Grid]({% slug virtual_scrolling_kendoui_grid_widget %})
-* [Column Widths]({% column_widths_kendoui_grid_widget %})
+* [Column Widths]({% slug column_widths_kendoui_grid_widget %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Kendo UI Knowledge Base](/knowledge-base)

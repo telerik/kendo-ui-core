@@ -22,5 +22,7 @@ As for R1 2020, the [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}) 
 ## See Also
 
 * [Overview of Kendo UI FileManager]({% slug overview_kendoui_filemanager_widget %})
+* [Kendo UI TreeView]({% slug overview_kendoui_treeview_widget %})
+* [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %})
 * [Sort in Kendo UI FileManager]({% slug sort_kendoui_filemanager_widget %})
 * [Search in Kendo UI FileManager]({% slug search_kendoui_filemanager_widget %})

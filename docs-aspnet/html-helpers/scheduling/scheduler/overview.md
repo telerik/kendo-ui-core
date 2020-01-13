@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Scheduler Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI Scheduler HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/scheduler, /helpers/scheduling/scheduler/overview
 slug: htmlhelpers_scheduler_aspnetcore

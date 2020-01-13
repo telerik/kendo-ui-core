@@ -1,6 +1,6 @@
 ---
 title: Installing with Bower
-page_title: Installing with Bower | Download and Installation | Telerik UI for ASP.NET Core
+page_title: Installing with Bower
 description: "Get started with Telerik UI for ASP.NET Core and install the helpers by using the Bower package manager."
 slug: bowerpackage_core
 position: 4

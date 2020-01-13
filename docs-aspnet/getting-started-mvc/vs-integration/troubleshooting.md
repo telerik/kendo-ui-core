@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: Troubleshooting | Visual Studio Integration | Telerik UI for ASP.NET MVC
+page_title: Troubleshooting
 description: "Troubleshooting Telerik UI for ASP.NET MVC Visual Studio Extensions."
 slug: troubleshooting_visualstudio_aspnetmvc
 position: 11

@@ -1,6 +1,6 @@
 ---
 title: Use MultiSelect as Filter in Grids
-page_title: Use MultiSelect as Filter in Grids | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Use MultiSelect as Filter in Grids
 description: "Use the Kendo UI MultiSelect as a filter in Kendo UI Grids in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/Filtering/use-multiselect-filter
 slug: howto_usemultiselectasfilter_gridaspnetmvc

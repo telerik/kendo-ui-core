@@ -1,6 +1,6 @@
 ---
 title: ScrollView
-page_title: Hybrid ScrollView Overview
+page_title: ScrollView Overview
 description: "Learn the basics when working with the hybrid Telerik UI ScrollView HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/hybrid/mobilescrollview/overview, /helpers/hybrid/mobilescrollview
 slug: overview_hybridscrollview_aspnetmvc

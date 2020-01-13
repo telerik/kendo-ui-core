@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: PDFViewer Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Get started with the server-side wrapper for the Telerik UI PDFViewer TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_pdfviewer_aspnetcore
 position: 1

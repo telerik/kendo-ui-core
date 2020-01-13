@@ -1,6 +1,6 @@
 ---
 title: First Steps on VS for Mac
-page_title: Getting Started on Visual Studio for Mac | Telerik UI for ASP.NET Core
+page_title: Getting Started on Visual Studio for Mac
 description: "Create a sample project on Visual Studio for Mac with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 slug: gettingstarted_firststeps_vsmac
 position: 2

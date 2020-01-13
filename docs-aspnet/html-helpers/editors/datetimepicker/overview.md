@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DateTimePicker Overview
+page_title: Overview
 description: "Learn the basics when working with the DateTimePicker HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/html-helpers/datetimepicker, /helpers/editors/datetimepicker/overview
 slug: htmlhelpers_datetimepicker_aspnetcore

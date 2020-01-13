@@ -1,6 +1,6 @@
 ---
 title: Earlier Versions Support Policy
-page_title: Support Policy for Earlier Kendo UI Versions | Prerequisites | Telerik UI for ASP.NET Core
+page_title: Support Policy for Earlier Kendo UI Versions
 description: "Get started with Telerik UI for ASP.NET Core and learn about the support policy on earlier versions, how bug fixes and feature requests are implemented, and how you can get them."
 slug: oldversionssupportpolicy_core
 position: 50

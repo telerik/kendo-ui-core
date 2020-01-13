@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: QRCode Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI QRCode HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/barcodes/qrcode/overview
 slug: overview_qrcodehelper_aspnetcore

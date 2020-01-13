@@ -1,6 +1,6 @@
 ---
 title: Delete Multiple Grid Rows at Once
-page_title: Delete Multiple Grid Rows at Once | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Delete Multiple Grid Rows at Once
 description: "Select multiple rows from a Kendo UI Grid in a batch editing mode and delete them at once in ASP.NET MVC applications."
 previous_url: /helpers/data-management/grid/how-to/editing/edit-batch-mode-mutliselect-delete
 slug: howto_deletemultiplerowsatonce_gridaspnetmv

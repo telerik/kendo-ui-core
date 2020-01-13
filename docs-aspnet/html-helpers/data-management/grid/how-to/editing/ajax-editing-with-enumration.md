@@ -1,6 +1,6 @@
 ---
 title: Configure Ajax Editing with Enumeration
-page_title: Configure Ajax Editing with Enumeration | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Configure Ajax Editing with Enumeration
 description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
 previous_url: /helpers/data-management/grid/how-to/editing/ajax-editing-with-enumration
 slug: howto_doajaxeditingenumeration_gridaspnetmvc

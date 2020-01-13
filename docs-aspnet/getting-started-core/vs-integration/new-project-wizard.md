@@ -1,6 +1,6 @@
 ---
 title: Creating New Projects
-page_title: Creating New Projects | Visual Studio Integration | Telerik UI for ASP.NET Core
+page_title: Creating New Projects
 description: "Learn how to create a new Telerik UI for ASP.NET Core application."
 slug: newprojectwizards_visualstudio_aspnetcore
 position: 2

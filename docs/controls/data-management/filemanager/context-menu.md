@@ -7,7 +7,7 @@ position: 3
 ---
 
 # ContextMenu in FileManager
-The FileManager's ContextMenu enables you to easily execute a preferable action on the selected file or folder. 
+The FileManager's ContextMenu enables you to easily execute FileManager commands on the selected file or folder. 
 
 The component uses the Kendo ContextMenu, enabling you to get full advantage of its [Client API](/api/javascript/ui/filemanager). Once an item is selected, the corresponding command is executed. 
 
@@ -17,8 +17,9 @@ The default items in the ContextMenu are `rename` and `delete`. You can define y
     <div id="filemanager"></div>
 
     $("#filemanager").kendoFileManager({
+        //contextMenu: false, //disables the ContextMenu
         contextMenu: {
-            items: [{text: "RemoveSelected", name: "remove", command: "DeleteCommand"}]
+            items: ["rename"] //initializing only the `rename` item 
         },
         dataSource: {
             data: myData

@@ -156,18 +156,6 @@ To customize the appearance of a particular widget instance, you will need a cus
         color: red;
     }
 
-## Customizing Checkboxes and Radio Buttons
-
-As of the 2014 Q3 release, Kendo UI provides customized presentation for checkboxes and radio buttons via the `k-checkbox` and `k-radio` classes respectively. At this time these two types of input cannot be styled with CSS only. Therefore, Kendo UI Checkboxes and Radio buttons appearance relies on the `<input>` element being immediately followed by a `<label>` element with the respective `k-checkbox-label` or `k-radio-label` class. The following example demonstrates the expected HTML.
-
-    <!-- Kendo UI Checkbox -->
-    <input type="checkbox" id="checkbox" class="k-checkbox">
-    <label class="k-checkbox-label" for="checkbox"></label>
-
-    <!-- Kendo UI Radio button -->
-    <input type="radio" id="radiobutton" class="k-radio">
-    <label class="k-radio-label" for="radiobutton"></label>
-
 ## Customizing Themes
 
 To create a custom theme with Kendo UI, use either of the following approaches:

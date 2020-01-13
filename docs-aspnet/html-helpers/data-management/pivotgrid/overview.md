@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: PivotGrid Overview
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/data-management/pivotgrid/overview
 slug: overview_pivotgridhelper_aspnetcore

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Grid Globalization
+page_title: Globalization
 description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn about the globalization options it supports."
 slug: globalization_grid_aspnetcore
 position: 1

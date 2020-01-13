@@ -1,6 +1,6 @@
 ---
 title: Implement Server Filtering
-page_title: Implement Server Filtering | Telerik UI Scheduler HtmlHelper for ASP.NET MVC
+page_title: Implement Server Filtering
 description: "Implement server filtering for the Kendo UI Scheduler to retrieve only events for the current view in ASP.NET MVC applications."
 previous_url: /helpers/scheduling/scheduler/how-to/server-filtering
 slug: howto_servrefiltering_scheduleraspnetmvc

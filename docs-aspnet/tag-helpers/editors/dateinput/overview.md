@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: DateInput Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Overview
 description: "Learn the basics when working with the Telerik UI DateInput TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /helpers/date-input, /helpers/tag-helpers/date-input
 slug: taghelpers_dateinput_aspnetcore

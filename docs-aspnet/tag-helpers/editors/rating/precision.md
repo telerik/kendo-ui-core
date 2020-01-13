@@ -1,6 +1,6 @@
 ---
 title: Precision
-page_title: Rating Precision | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Rating Precision
 description: "Learn how to configure the precision functionality of the Rating when working with the Telerik UI Rating tag helper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: taghelpers_rating_aspnetcore_precision
 position: 3

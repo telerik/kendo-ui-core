@@ -1,6 +1,6 @@
 ---
 title: Using CDN
-page_title: Using CDN | Download and Installation | Telerik UI for ASP.NET MVC
+page_title: Using CDN
 description: "Get started with Telerik UI for ASP.NET MVC and install the helpers by using the Telerik UI CDN services."
 slug: cdnservices_aspnetmvc
 position: 3

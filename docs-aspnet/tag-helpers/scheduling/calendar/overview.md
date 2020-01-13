@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Calendar Overview | Telerik UI for ASP.NET Core Tag Helpers
+page_title: Calendar Overview
 description: "Learn the basics when working with the Telerik UI Calendar TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 previous_url: /helpers/tag-helpers/calendar
 slug: taghelpers_calendar_aspnetcore

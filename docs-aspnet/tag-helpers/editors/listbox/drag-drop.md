@@ -1,6 +1,6 @@
 ---
 title: Dragging and Dropping
-page_title: Dragging and Dropping | Telerik UI ListBox TagHelper for ASP.NET Core
+page_title: Dragging and Dropping
 description: "Enable the drag-and-drop feature of the Telerik UI ListBox TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
 slug: dragdrops_listbox_aspnetcore
 position: 4

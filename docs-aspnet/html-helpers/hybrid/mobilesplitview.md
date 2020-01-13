@@ -1,6 +1,6 @@
 ---
 title: SplitView
-page_title: Hybrid SplitView Overview
+page_title: SplitView Overview
 description: "Learn the basics when working with the hybrid Telerik UI SplitView HtmlHelper for ASP.NET MVC."
 previous_url: /helpers/hybrid/mobilesplitview/overview, /helpers/hybrid/mobilesplitview
 slug: overview_hybridsplitview_aspnetmvc

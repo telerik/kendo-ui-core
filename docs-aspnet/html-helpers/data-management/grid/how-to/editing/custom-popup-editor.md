@@ -1,6 +1,6 @@
 ---
 title: Use Custom Popup Editors
-page_title: Use Custom Popup Editors | Kendo UI Grid HtmlHelper for ASP.NET MVC
+page_title: Use Custom Popup Editors
 description: "Customize the popup editor of the Kendo UI Grid in a popup mode."
 previous_url: /helpers/data-management/grid/how-to/editing/custom-popup-editor
 slug: howto_usecustompopupeditors_gridaspnetmvc
