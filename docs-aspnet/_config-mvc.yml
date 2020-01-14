@@ -371,7 +371,8 @@ defaults:
         path: "html-helpers/navigation/breadcrumb"
     values:
         title_prefix: "MVC Breadcrumb Component"
--
+        title: "Breadcrumb"
+-       
     scope:
         path: "html-helpers/navigation/button"
     values:

@@ -37,8 +37,6 @@ model: {
 
 ```
 
-
-
-
-
-descrive mandatory fields: 
+* [Overview of Kendo UI FileManager]({% slug overview_kendoui_filemanager_widget %})
+* [Search in Kendo UI FileManager]({% slug search_kendoui_filemanager_widget %})
+* [Toolbar Commands in Kendo UI FileManager]({% slug toolbar_kendoui_filemanager_widget %})

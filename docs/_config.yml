@@ -183,6 +183,8 @@ navigation:
         position: 70
     "controls/navigation":
         title: "Navigation"
+    "controls/navigation/breadcrumb":
+        title: "Breadcrumb"
     "controls/navigation/buttongroup":
         title: "ButtonGroup"
     "controls/navigation/drawer":

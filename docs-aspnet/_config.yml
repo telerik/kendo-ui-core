@@ -326,6 +326,8 @@ navigation:
         title: "Layout"
      "html-helpers/navigation":
         title: "Navigation"
+     "html-helpers/navigation/breadcrumb":
+        title: "Breadcrumb"   
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
      "html-helpers/navigation/menu/contextmenu":

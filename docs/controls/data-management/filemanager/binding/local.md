@@ -11,8 +11,7 @@ position: 1
 The Kendo UI FileManager enables you to bind it to local arrays of data.
 
 
-To bind the FileManager to local data, set the `dataSource` option of the `kendoGrid` object. The data should correspond ot the FileManager built-in model 
-schema (see [Data Binding Overview]({% slug: bindingoverview_kendoui_filemanager_widget %})article)
+To bind the FileManager to local data, set the `dataSource` option of the `kendoFileManager` object. The data should correspond ot the FileManager built-in model schema (see [Data Binding Overview]({% slug bindingoverview_kendoui_filemanager_widget %}) article)
 
 ```dojo
     // Define the HTML div that will contain the FileManager.
@@ -60,3 +59,7 @@ schema (see [Data Binding Overview]({% slug: bindingoverview_kendoui_filemanager
 
     </script>
 ```
+
+* [Overview of Kendo UI FileManager]({% slug overview_kendoui_filemanager_widget %})
+* [Sort in Kendo UI FileManager]({% slug sort_kendoui_filemanager_widget %})
+* [Toolbar Commands in Kendo UI FileManager]({% slug toolbar_kendoui_filemanager_widget %})

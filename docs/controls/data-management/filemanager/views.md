@@ -35,7 +35,7 @@ This view is achieved with the Kendo Grid and in renders the files in a tabular 
 
 ## List View (Thumbnails)
 
-The List view is implemented with the help of the Kendo ListView component. The content in this view is rendered as a list of thumbnails, representing the files. You can control the configuration of this view trough the `views.listview` object of the FileManager. 
+The List view is implemented with the help of the Kendo ListView component. The content in this view is rendered as a list of thumbnails, representing the files. You can control the configuration of this view trough the `views.list` object of the FileManager. 
 
 ```js
     $("#filemanager").kendoFileManager({

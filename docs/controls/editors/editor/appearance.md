@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery Editor Documentation | Appearance | Kendo UI
 description: "Get started with the jQuery Editor by Kendo UI and set its size and use the default content styles or implement custom styles."
 slug: appearance_kendoui_editor_widget
-position: 12
+position: 13
 ---
 
 # Appearance

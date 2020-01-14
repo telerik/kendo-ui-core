@@ -31,6 +31,7 @@ To initialize the Editor, use an existing `HTML` element and a jQuery selector.
 * [Tools]({% slug tools_kendoui_editor_widget %})
 * [Selection]({% slug set_selections_editor_widget %})
 * [Image browser]({% slug image_browser_editor_widget %})
+* [Format Painter]({% slug format_painter_editor_widget %})
 * [Immutable elements]({% slug immutable_elements_editor_widget %})
 * [Pasting content]({% slug pasting_editor_widget %})
 * [Post-processing content]({% slug post_process_content_editor_widget %})

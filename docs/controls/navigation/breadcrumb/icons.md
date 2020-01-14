@@ -12,7 +12,7 @@ The Breadcrumb allows to configure the icons of the items and the delimiters.
 
 ## Root Icon
 
-The root icon is the first icon and is rendered as a home icon - ![image](https://user-images.githubusercontent.com/4222379/68296492-6b670300-009d-11ea-95fd-89231ce1fa6d.png). It can be changed through the [`items.icon`](/api/javascript/ui/breadcrumb/configuration/items) configuration. It is also clickable and it will reset the value of the component.
+The root icon is the first icon and is rendered as a `home` icon. It can be changed through the [`items.icon`](/api/javascript/ui/breadcrumb/configuration/items) configuration. It is also clickable and it will reset the value of the component.
 
 ## Item Icon
 

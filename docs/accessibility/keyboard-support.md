@@ -25,6 +25,8 @@ Keyboard support in Kendo UI maps access-key combinations and ensures that users
 In addition to the `accesskey` attribute support, most Kendo UI widgets also offer a series of keyboard controls for interacting with them. The specific keyboard shortcuts supported by each widget are provided in the following keyboard examples.
 
 - [AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/keyboard-navigation)
+- [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/keyboard-navigation)
+- [Button](https://demos.telerik.com/kendo-ui/button/keyboard-navigation)
 - [Button](https://demos.telerik.com/kendo-ui/button/keyboard-navigation)
 - [ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/keyboard-navigation)
 - [Calendar](https://demos.telerik.com/kendo-ui/calendar/keyboard-navigation)

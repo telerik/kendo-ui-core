@@ -24,6 +24,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |:---          |:---|:---  |:---
 |AutoComplete  |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/autocomplete/index)
 |BarCode	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/barcode/index)
+|Breadcrumb	   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/breadcrumb/index)
 |Button 	   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/button/index)
 |ButtonGroup   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/buttongroup/index)
 |Calendar	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/calendar/index)

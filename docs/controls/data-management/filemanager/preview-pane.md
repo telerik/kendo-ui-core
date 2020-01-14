@@ -13,18 +13,18 @@ The Preview Pane shows additional information about the selected files or folder
 The preview pane visibility could be toggled by the Switch Tool in the FileManager Toolbar. By default, it shows the following information about the selected file or folder:
 
 * Thumbnail, representing the file
-* File name 
+* File extension 
 * File size
 * Date created 
 * Date modified
 
-The `metaFields` object in the PreivewPane configuration, allows you to control which fields from the above-enumerated should be displayed. If you need to show only the Name and Size information in the Preview Pane, the configuration would be as follows:
+The `metaFields` object in the PreivewPane configuration, allows you to control which fields from the above-enumerated should be displayed. If you need to show only the Extension and Size information in the Preview Pane, the configuration would be as follows:
 
 ```js
     <div id="filemanager"></div>
     $("#filemanager").kendoFileManager({
          previewPane: {
-                metaFields:  ["name", "size"]
+                metaFields:  ["extension", "size"]
             },
         dataSource: {
             data: myData

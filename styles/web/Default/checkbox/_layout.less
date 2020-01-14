@@ -74,13 +74,17 @@
     cursor: pointer;
 
     // Hide empty label
-    &:empty,
-    &.k-no-text {
+    &:empty {
         display: none;
     }
 
+    // Keep it "visible" in jquery grid
+    &.k-no-text {
+        min-width: 1px;
+    }
+
     .k-ripple {
-        display: none !important;
+        visibility: hidden !important;
     }
 }
 .k-checkbox + .k-checkbox-label {

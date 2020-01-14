@@ -16,7 +16,7 @@ The toolbar has a predefined set of tools which you can show or hide, depending 
 * *Upload Button* prompting you with a window to upload files.
 * *Sort By* dropdown, allowing you to sort by a number of predicates
 * *Views* button group to control 
-* *View Details* switch button to toggle the Preivew Pane visibility
+* *View Details* switch button to toggle the Preview Pane visibility
 * *Search* textbox to filter the content
 
 **Inbuilt Sort  functionality in FileManager:** 
