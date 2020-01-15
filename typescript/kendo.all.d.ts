@@ -1916,7 +1916,6 @@ declare namespace kendo.ui {
         navigateToPast(): void;
         navigateUp(): void;
         selectDates(): void;
-        selectDates(): void;
         value(): Date;
         value(value: Date): void;
         value(value: string): void;
@@ -10879,8 +10878,6 @@ declare namespace kendo.dataviz.ui {
         svg(): void;
         imageDataURL(): string;
         value(): void;
-        value(): void;
-
     }
 
     interface ArcGaugeColor {
@@ -18609,8 +18606,6 @@ declare namespace kendo.dataviz {
 
 
         select(): any;
-        select(): void;
-
     }
 
     interface NavigatorOptions {

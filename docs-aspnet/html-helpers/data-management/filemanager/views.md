@@ -18,7 +18,7 @@ This view is achieved with the {{ site.product }} Grid and in renders the files 
         
         @(Html.Kendo().FileManager()
             .Name("filemanager")
-            .Views(v => v.Grid(grid => grid.Columns(cols => cols.Add(....))))
+            .Views(v => v.Grid(grid => grid.Columns(cols => cols.Add().Field(....))))
         
         )
         
