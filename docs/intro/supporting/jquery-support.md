@@ -21,6 +21,7 @@ The following table provides a list of the jQuery versions that are compatible w
 
 | Major Releases												                                         | jQuery Version    | Comments  |
 | :---															                                             | :---			         | :---	     |
+| [Kendo UI 2020.1.114 (R1 2020)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2020)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
 | [Kendo UI 2019.3.917 (R3 2019)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
 | [Kendo UI 2019.2.514 (R2 2019)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2019)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.4.1|
 | [Kendo UI 2019.1.115 (R1 2019)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/progress-kendo-ui-2019-1-115-changelog-)|1.12.4| Also compatible with 1.10.x, 2.2.x and 3.3.1|
