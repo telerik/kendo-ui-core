@@ -1288,5 +1288,23 @@ it("filterFields option should search by multiple columns", function() {
     assert.equal(combobox.ul.find("li").length, 1);
 });
 
+it("clear selection on empty search", function(done) {
+    var select = $("<select></select>");
+
+    combobox = new ComboBox(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "contains",
+        change: function() {
+            assert.equal(this.value(), "");
+            done()
+        },
+        value: 2
+    });
+
+    combobox.input.val("").trigger({type: "keydown", keyCode: kendo.keys.BACKSPACE});
+});
+
     });
 }());

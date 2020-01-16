@@ -1071,7 +1071,7 @@ var __meta__ = { // jshint ignore:line
             that._typingTimeout = setTimeout(function() {
                 var value = that.text();
 
-                if (that._prev !== value) {
+                if (value !== "" && that._prev !== value) {
                     that._prev = value;
 
                     if (that.options.filter === "none" && that.options.virtual) {
@@ -1079,7 +1079,11 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     that.search(value);
+
                     that._toggleCloseVisibility();
+                }
+                else if (value === "") {
+                    that._clearValue();
                 }
 
                 that._typingTimeout = null;
