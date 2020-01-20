@@ -105,7 +105,7 @@ var __meta__ = { // jshint ignore:line
                     .addClass("k-widget k-calendar " + (options.weekNumber ? " k-week-number" : ""))
                     .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
                     .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
-                    .on(CLICK, CELLSELECTOR, function(e) {
+                    .on(CLICK + " touchend", CELLSELECTOR, function(e) {
                         var link = e.currentTarget.firstChild,
                             value = toDateObject(link);
 

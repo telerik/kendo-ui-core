@@ -5,12 +5,19 @@ description: "Get started with the Telerik UI DateRangePicker for {{ site.framew
 slug: navdepth_daterangepicker_aspnetcore
 position: 4
 ---
+{% if site.core %}
+    {% assign Start = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#startkendomvcuicalendarview" %}
+    {% assign Depth = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#depthkendomvcuicalendarview" %}
+{% else %}
+    {% assign Start = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#startsystemstring" %}
+    {% assign Depth = "/api/Kendo.Mvc.UI.Fluent/DateRangePickerBuilder#depthsystemstring" %}
+{% endif %}
 
 # Start View and Navigation Depth
 
 The DateRangePicker enables you to set the initial view it renders and define the navigation depth of the views.
 
-To define the initially rendered view, use the `Start` option. To control the navigation depth, use the `Depth` option.
+To define the initially rendered view, use the [`Start`]({{ Start }}) option. To control the navigation depth, use the [`Depth`]({{ Depth }}) option.
 
 The **Calendar** view supports the following predefined views:
 * `Month`&mdash;Shows the days of the month.
