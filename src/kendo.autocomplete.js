@@ -451,7 +451,7 @@ var __meta__ = { // jshint ignore:line
             popup.position();
 
             if (length) {
-                if (options.suggest && isActive) {
+                if (options.suggest && isActive && that._inputValue()) {
                     that.suggest(data[0]);
                 }
             }
