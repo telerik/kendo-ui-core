@@ -213,7 +213,7 @@ Kendo UI Core is the free and open-source Kendo UI distribution, released under 
 
 ### Incorporation in Other Progress Software Products
 
-Kendo UI is also incorporated into products such as [Telerik Platform](http://www.telerik.com/platform#overview), [Telerik Analytics](http://www.telerik.com/analytics), [Sitefinity](http://www.sitefinity.com/), [TeamPulse](http://www.telerik.com/teampulse), [Test Studio](http://www.telerik.com/teststudio), and others.
+Kendo UI is also incorporated into products such as [Sitefinity](http://www.sitefinity.com/), [Test Studio](http://www.telerik.com/teststudio), and others.
 
 ## Monitoring the Progress Live Services
 

@@ -5,12 +5,17 @@ description: "Get started with the {{ site.product }} DatePicker and learn how t
 slug: htmlhelpers_datepicker_aspnetcore_dateinputintegration
 position: 8
 ---
+{% if site.core %}
+    {% assign DateInput = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder#dateinputsystemboolean" %}
+{% else %}
+    {% assign DateInput = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#dateinputsystemboolean" %}
+{% endif %}
 
 # DateInput Integration
 
 The DatePicker provides integration options with the [{{ site.product }} DateInput]({% slug htmlhelpers_dateinput_aspnetcore %}) for the input element it renders.
 
-To use the DateInput as the input element in a DatePicker, enable the [`DateInput`](/api//Kendo.Mvc.UI.Fluent/DatePickerBuilder#dateinputsystemboolean) property of the DatePicker.
+To use the DateInput as the input element in a DatePicker, enable the [`DateInput`]({{ DateInput }}) property of the DatePicker.
 
 ```Razor
     @(Html.Kendo().DatePicker()

@@ -430,5 +430,37 @@ it("suggest method accepts an object", function() {
     assert.equal(autocomplete.value(), "Foo");
 });
 
+it("suggest is not triggered after value is cleared", function(done) {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        if (options.data.filter && options.data.filter.filters[0]) {
+                            options.success([{ text: "foo", value: 1 }]);
+                        } else {
+                            options.success([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
+                        }
+                    });
+                }
+            },
+            serverFiltering: true
+        },
+        dataTextField: "text",
+        suggest: true,
+        filter: "contains",
+        placeholder: "..."
+    });
+
+    autocomplete.suggest("fo");
+    autocomplete._clearValue();
+
+    setTimeout(function() {
+        assert.equal(autocomplete.value(), "");
+        assert.equal(autocomplete.element.val(), "");
+        done();
+    });
+});
+
     });
 }());

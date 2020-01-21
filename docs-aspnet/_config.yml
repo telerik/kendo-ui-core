@@ -1,6 +1,7 @@
 # The public documentation URL, used for sitemap.xml
 url: "https://docs.telerik.com/aspnet-core"
 
+# The destination folder where Jekyll will write the site files
 destination: _site-core
 
 all_pages_domain: "https://docs.telerik.com"
