@@ -531,6 +531,341 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 });
 }
 
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "Wszystkie brzegi",
+  "insideBorders": "Brzegi wewnętrzne",
+  "insideHorizontalBorders": "Poziome brzegi wewnętrzne",
+  "insideVerticalBorders": "Pionowe brzegi wewnętrzne",
+  "outsideBorders": "Brzegi zewnętrzne",
+  "leftBorder": "Lewy brzeg",
+  "topBorder": "Górny brzeg",
+  "rightBorder": "Prawy brzeg",
+  "bottomBorder": "Dolny brzeg",
+  "noBorders": "Bez brzegu",
+  "reset": "Resetuj kolor",
+  "customColor": "Inny kolor...",
+  "apply": "Zastosuj",
+  "cancel": "Anuluj"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "Zastosuj",
+  "save": "Zapisz",
+  "cancel": "Anuluj",
+  "remove": "Usuń",
+  "retry": "Ponów",
+  "revert": "Przywróć",
+  "okText": "OK",
+  "formatCellsDialog": {
+    "title": "Format",
+    "categories": {
+      "number": "Liczba",
+      "currency": "Waluta",
+      "date": "Data"
+      }
+  },
+  "fontFamilyDialog": {
+    "title": "Czcionka"
+  },
+  "fontSizeDialog": {
+    "title": "Rozmiar"
+  },
+  "bordersDialog": {
+    "title": "Brzegi"
+  },
+  "alignmentDialog": {
+    "title": "Wyrównanie",
+    "buttons": {
+      "justtifyLeft": "Wyrównaj w lewo",
+      "justifyCenter": "Centruj",
+      "justifyRight": "Wyrównaj w prawo",
+      "justifyFull": "Dostosuj",
+      "alignTop": "Wyrównaj do góry",
+      "alignMiddle": "Wyrównaj do środka",
+      "alignBottom": "Wyrównaj do dołu"
+    }
+  },
+  "mergeDialog": {
+    "title": "Scal komórki",
+    "buttons": {
+      "mergeCells": "Scal wszystkie",
+      "mergeHorizontally": "Scal w poziomie",
+      "mergeVertically": "Scal w pionie",
+      "unmerge": "Rozdziel"
+    }
+  },
+  "freezeDialog": {
+    "title": "Zablokuj okienka",
+    "buttons": {
+    "freezePanes": "Zablokuj okienka",
+    "freezeRows": "Zablokuj wiersze",
+    "freezeColumns": "Zablokuj kolumny",
+    "unfreeze": "Odblokuj okienka"
+    }
+  }, 
+  "confirmationDialog": {
+    "text": "Czy na pewno chcesz usunąć ten arkusz?",
+    "title": "Usuń arkusz"
+  },
+  "validationDialog": {
+    "title": "Walidacja danych",
+    "hintMessage": "Wprowadź prawidłową wartość {0} {1}.",
+    "hintTitle": "Walidacja {0}",
+    "criteria": {
+      "any": "Dowolna",
+      "number": "Liczba",
+      "text": "Tekst",
+      "date": "Data",
+      "custom": "Niestandardowe",
+      "list": "Lista"
+    },
+    "comparers": {
+      "greaterThan": "większa niż",
+      "lessThan": "mniejsza niż",
+      "between": "między",
+      "notBetween": "nie między",
+      "equalTo": "równa",
+      "notEqualTo": "nierówna",
+      "greaterThanOrEqualTo": "większa lub równa",
+      "lessThanOrEqualTo": "mniejsza lub równa"
+    },
+    "comparerMessages": {
+      "greaterThan": "większa niż {0}",
+      "lessThan": "mniejsza niż {0}",
+      "between": "między {0} i {1}",
+      "notBetween": "nie między {0} i {1}",
+      "equalTo": "równa {0}",
+      "notEqualTo": "nierówna {0}",
+      "greaterThanOrEqualTo": "większa lub równa {0}",
+      "lessThanOrEqualTo": "mniejsza lub równa {0}",
+      "custom": "spełnia warunek: {0}"
+    },
+    "labels": {
+      "criteria": "Kryteria",
+      "comparer": "Porównanie",
+      "min": "Min",
+      "max": "Max",
+      "value": "Wartość",
+      "start": "Start",
+      "end": "Koniec",
+      "onInvalidData": "W razie nieprawidłowych danych",
+      "rejectInput": "Odrzuć",
+      "showWarning": "Pokaż ostrzeżenie",
+      "showHint": "Pokaż podpowiedź",
+      "hintTitle": "Tytuł podpowiedzi",
+      "hintMessage": "Treść podpowiedzi",
+      "ignoreBlank": "Ignoruj blanki"
+    },
+    "placeholders": {
+      "typeTitle": "Wprowadź tytuł",
+      "typeMessage": "Wprowadź wiadomość"
+    }
+  },
+  "exportAsDialog": {
+    "title": "Eksport...",
+    "labels": {
+      "fileName": "Nazwa pliku",
+      "saveAsType": "Zapisz jako plik typu",
+      "exportArea": "Eksport",
+      "paperSize": "Rozmiar papieru",
+      "margins": "Marginesy",
+      "orientation": "Orientacja",
+      "print": "Drukuj",
+      "guidelines": "Wskazówki",
+      "center": "Wyśrodkuj",
+      "horizontally": "Poziomo",
+      "vertically": "Pionowo"
+    }
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "Nie można zmienić części scalonej komórki."
+  },
+  "useKeyboardDialog": {
+    "title": "Kopiowanie i wklejanie",
+    "errorMessage": "Te działania nie mogą zostać wywołane przez menu. Użyj następujących skrótów klawiszowych:",
+    "labels": {
+      "forCopy": "kopiuj",
+      "forCut": "wytnij",
+      "forPaste": "wklej"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "To działanie nie może zostać wykonane na wielokrotnym zaznaczeniu."
+  },
+  "insertCommentDialog": {
+    "title": "Wstaw komentarz",
+    "labels": {
+      "comment": "Komentarz",
+      "removeComment": "Usuń komentarz"
+    }
+  },
+  "insertImageDialog": {
+    "title": "Wstaw obraz",
+    "info": "Przeciągnij tu obrazek, lub klikjnij by wybrać",
+    "typeError": "Wybierz plik JPEG, PNG lub GIF"
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "Sortuj przedział A do Z",
+  "sortDescending": "Sortuj przedział Z do A",
+  "filterByValue": "Filtruj po wartości",
+  "filterByCondition": "Filtruj po warunku",
+  "apply": "Zastosuj",
+  "search": "Szukaj",
+  "addToCurrent": "Dodaj do zaznaczenia",
+  "clear": "Wyczyść ",
+  "blanks": "(Blanki)",
+  "operatorNone": "Żaden",
+  "and": "I",
+  "or": "LUB",
+  "operators": {
+    "string": {
+      "contains": "Tekst zawiera",
+      "doesnotcontain": "Tekst does nie zawiera",
+      "startswith": "Tekst zaczyna się od",
+      "endswith": "Tekst kończy się na"
+    },
+    "date": {
+      "eq":  "Data jest równa",
+      "neq": "Data nie jest równa",
+      "lt":  "Data jest przed",
+      "gt":  "Data jest po"
+    },
+    "number": {
+      "eq": "Jest równa",
+      "neq": "Nie jest równa",
+      "gte": "Jest większa lub równa",
+      "gt": "Jest większa",
+      "lte": "Jest mniejsza lub równa",
+      "lt": "Jest mniejsza"
+    }
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
+kendo.spreadsheet.messages.colorPicker =
+$.extend(true, kendo.spreadsheet.messages.colorPicker,{
+  "reset": "Resetuj kolor",
+  "customColor": "Inny kolor...",
+  "apply": "Zastosuj",
+  "cancel": "Anuluj"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "Dodaj kolumnę z lewej",
+  "addColumnRight": "Dodaj kolumnę z prawej",
+  "addRowAbove": "Dodaj wiersz powyżej",
+  "addRowBelow": "Dodaj wiersz poniżej",
+  "alignment": "Wyrównanie",
+  "alignmentButtons": {
+    "justtifyLeft": "Wyrównaj w lewo",
+    "justifyCenter": "Centruj",
+    "justifyRight": "Wyrównaj w prawo",
+    "justifyFull": "Dostosuj",
+    "alignTop": "Wyrównaj do góry",
+    "alignMiddle": "Wyrównaj do środka",
+    "alignBottom": "Wyrównaj do dołu"
+  },
+  "backgroundColor": "Kolor tła",
+  "bold": "Wytłuszczenie",
+  "borders": "Brzegi",
+  "colorPicker": {
+    "reset": "Resetuj kolor",
+    "customColor": "Inny kolor..."
+  },
+  "copy": "Kopiuj",
+  "cut": "Wklej",
+  "deleteColumn": "Usuń kolumnę",
+  "deleteRow": "Usuń wiersz",
+  "excelImport": "Importuj z Excel...",
+  "filter": "Filtruj",
+  "fontFamily": "Czcionka",
+  "fontSize": "Rozmiar",
+  "format": "Inne formatowanie...",
+  "formatTypes": {
+    "automatic": "Auto",
+    "number": "Liczba",
+    "percent": "Procenty",
+    "financial": "Waluta",
+    "currency": "Waluta",
+    "date": "Data",
+    "time": "Czas",
+    "dateTime": "Data i czas",
+    "duration": "Czas trwania",
+    "moreFormats": "Więcej formatów..."
+  },
+  "formatDecreaseDecimal": "Zwiększ",
+  "formatIncreaseDecimal": "Zmniejsz",
+  "freeze": "Zablokuj okienka",
+  "freezeButtons": {
+    "freezePanes": "Zablokuj okienka",
+    "freezeRows": "Zablokuj wiersze",
+    "freezeColumns": "Zablokuj kolumny",
+    "unfreeze": "Odblokuj okienka"
+  },
+  "insertComment": "Wstaw komentarz",
+  "insertImage": "Wstaw obrazek",
+  "italic": "Kursywa",
+  "merge": "Scal komórki",
+  "mergeButtons": {
+    "mergeCells": "Scal wszystkie",
+    "mergeHorizontally": "Scal w poziomie",
+    "mergeVertically": "Scal w pionie",
+    "unmerge": "Rozdziel"
+  },
+  "open": "Otwórz...",
+  "paste": "Wklej",
+  "quickAccess": {
+    "redo": "Ponów",
+    "undo": "Cofnij"
+  },
+  "saveAs": "Zapisz jako...",
+  "sortAsc": "Sortuj rosnąco",
+  "sortDesc": "Sortuj malejąco",
+  "sortButtons": {
+    "sortSheetAsc": "Sortuj arkusz A do Z",
+    "sortSheetDesc": "Sortuj arkusz Z do A",
+    "sortRangeAsc": "Sortuj przedział A do Z",
+    "sortRangeDesc": "Sortuj przedział Z do A"
+  },
+  "textColor": "Kolor tekstu",
+  "textWrap": "Zawijanie",
+  "underline": "Podkreślenie",
+  "validation": "Walidacja danych..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "errors": {
+    "shiftingNonblankCells": "Nie można wstawić komórek ze względu na możliwą utratę danych. Wybierz inne miejsce docelowe lub usuń dane z końca arkusza.",
+    "filterRangeContainingMerges": "Nie można utworzyć filtra w przedziale zawierającym scalenia.",
+    "validationError": "Wprowadzona wartość łamie reguły walidacji dla tej komórki."
+  },
+  "tabs": {
+    "home": "Narzędzia główne",
+    "insert": "Wstaw",
+    "data": "Dane"
+  }
+});
+}
+
 /* Dialog */
 
 if (kendo.ui.Dialog) {
