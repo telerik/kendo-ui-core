@@ -1084,6 +1084,7 @@ var __meta__ = { // jshint ignore:line
                 }
                 else if (value === "") {
                     that._clearValue();
+                    that.search("");
                 }
 
                 that._typingTimeout = null;

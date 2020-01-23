@@ -312,6 +312,40 @@ The new configuration options.
 	popup.open();
     </script>
 
+### toggle
+
+Opens or closes the Popup component.
+
+#### Parameters
+
+##### toggle `Boolean` *(optional)*
+
+Defines the whether to open/close the Popup.
+
+#### Example
+
+    <input id="name" class='k-textbox'/>
+    <button class='k-button'>Open/Close</button>
+    <div id="popup" style="width:33%">
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $("#popup").kendoPopup({
+          anchor: $("#name")
+        });
+      })
+
+      $("button").click(function(){
+        $("#popup").data("kendoPopup").toggle();
+      });
+    </script>
+    
 ### visible
 
 Checks whether the popup is visible
