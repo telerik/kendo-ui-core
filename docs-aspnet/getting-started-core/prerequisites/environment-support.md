@@ -53,6 +53,20 @@ If you are using a VS 2015 version prior to R2 2018, locate the `Configure` meth
 		services.AddKendo();
 	}
 
+(For ASP.NET Core 3 - Recommended) To use the default serialization delivered with ASP.Net Core 3, locate the `ConfigureServices` method and update it by adding the below configuration. 
+
+    public void ConfigureServices(IServiceCollection services)
+	{
+		...
+		services
+				.AddControllersWithViews()
+				.AddJsonOptions(options => 
+					options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+		// Add the Kendo UI services to the services container.
+		services.AddKendo();
+	}
+
 (For ASP.NET Core 3) To maintain the property names casing globally, locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
 
 	...

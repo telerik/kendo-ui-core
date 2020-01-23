@@ -6681,6 +6681,7 @@ declare namespace kendo.ui {
         open(): void;
         position(): void;
         setOptions(options: any): void;
+        toggle(toggle?: boolean): void;
         visible(): boolean;
 
     }

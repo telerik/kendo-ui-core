@@ -267,6 +267,9 @@ Specifies the type of the button.
 ### toolbar.items.overflow `String`
 Specifies the overflow of the button.
 
+### toolbar.items.click `Function`
+Specifies the click handler of the button.
+
 ### toolbar.items.command `String`
 Specifies the command of the button.
 
