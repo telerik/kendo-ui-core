@@ -28,10 +28,18 @@ The `.NoDataTemplate` method of the ASP.NET MVC wrappers for the dropdown widget
 Disable `noDataTemplate` by setting the `noDataTemplate` option of the wrapped widget to `false` after the wrapped widget is initialized.
 
 ```dojo
+<input id="autocomplete" style="width: 100%;" />
 <script>
-$(document).ready(function () {
-    var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-    autocomplete.setOptions({ noDataTemplate: false });
-});
+    // The below configuration mimicks the initialization with a wrapper (MVC/Core, JSP/PHP).
+    
+    $(document).ready(function(){
+        $("#autocomplete").kendoAutoComplete({
+            dataSource: {
+            data: ["One", "Two"]
+            }
+        });
+        var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        autocomplete.setOptions({ noDataTemplate: false });
+    });
 </script>
 ```

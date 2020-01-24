@@ -476,7 +476,7 @@ var __meta__ = { // jshint ignore:line
             var method = toggle ? "on" : "off";
             var eventNames = support.resize;
 
-            if (!(support.mobileOS.ios || support.mobileOS.android)) {
+            if (!(support.mobileOS.ios || support.mobileOS.android || support.browser.safari)) {
                 eventNames += " " + SCROLL;
             }
 
