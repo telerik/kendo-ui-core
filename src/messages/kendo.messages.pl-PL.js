@@ -457,6 +457,80 @@ kendo.ui.ImageBrowser.prototype.options.messages =
 $.extend(true, kendo.ui.ImageBrowser.prototype.options.messages, browserMessages);
 }
 
+/* FileManager messages */ 
+  
+if (kendo.ui.FileManager) {
+    kendo.ui.FileManager.prototype.options.messages = $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+        toolbar: {
+            createFolder: 'Nowy folder',
+            upload: 'Prześlij',
+            sortDirection: 'Sort Direction',
+            sortDirectionAsc: 'Sortuj rosnąco',
+            sortDirectionDesc: 'Sortuj malejąco',
+            sortField: 'Sortuj według',
+            nameField: 'Nazwa',
+            sizeField: 'Rozmiar',
+            typeField: 'Typ',
+            dateModifiedField: 'Data modyfikacji',
+            dateCreatedField: 'Data utworzenia',
+            listView: 'Ikony',
+            gridView: 'Szczegóły',
+            search: 'Szukaj',
+            details: 'Szczegóły',
+            detailsChecked: 'tak',
+            detailsUnchecked: 'nie',
+            'Delete': 'Usuń',
+            Rename: 'Zmień nazwę'
+        },
+        views: {
+            nameField: 'Nazwa',
+            sizeField: 'Rozmiar',
+            typeField: 'Typ',
+            dateModifiedField: 'Data modyfikacji',
+            dateCreatedField: 'Data utworzenia',
+            items: 'elementów'
+        },
+        dialogs: {
+            upload: {
+                title: 'Prześlij pliki',
+                clear: 'Wyczyść listę',
+                done: 'OK'
+            },
+            moveConfirm: {
+                title: ' ',
+                content: '<p style=\'text-align: center;\'>Czy chcesz przenieść zaznaczone pliki, czy skopiować?</p>',
+                okText: 'Kopiuj',
+                cancel: 'Przenieś',
+                close: 'Zamknij'
+            },
+            deleteConfirm: {
+                title: 'Potwierdź usunięcie',
+                content: '<p style=\'text-align: center;\'>Czy na pewno chcesz usunąć zaznaczone pliki?</br>Nie ma możliwości cofnięcia tej operacji.</p>',
+                okText: 'Usuń',
+                cancel: 'Anuluj',
+                close: 'Zamknij'
+            },
+            renamePrompt: {
+                title: 'Zmień nazwę',
+                content: '<p style=\'text-align: center;\'>Wprowadź nową nazwę pliku</p>',
+                okText: 'Zastosuj',
+                cancel: 'Anuluj',
+                close: 'Zamknij'
+            }
+        },
+        previewPane: {
+            noFileSelected: 'Nie zaznaczono pliku',
+            extension: 'Typ',
+            size: 'Rozmiar',
+            created: 'Data utworzenia',
+            createdUtc: 'Data utworzenia UTC',
+            modified: 'Data modyfikacji',
+            modifiedUtc: 'Data modyfikacji UTC',
+            items: 'elementów'
+        }
+    });
+}
+  
 /* Upload messages */
 
 if (kendo.ui.Upload) {

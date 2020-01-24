@@ -2280,11 +2280,6 @@ so the two should not be used at the same time.
 
 If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page.
 
-> **Note:** The checkbox column selection functionality has two limitations:
-> * It is not integrated with the keyboard navigation
-> * It is not integrated with the currently existing select functionality of the grid which is enabled via the [selectable option](selectable).
-> They are mutually exclusive and we recommend using only one of the approaches for enabling selection.
-
 #### Example - disable sorting
 
     <div id="grid"></div>

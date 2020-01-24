@@ -77,7 +77,6 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
 
 > When virtual scrolling is not supported or recommended and depending on the number of data items, either revert to standard paging or to non-virtual scrolling without paging.
 
-* Horizontal scrolling is not virtualized.
 * Either enable virtual scrolling or paging. Do not apply both features at the same time.
 * Virtual scrolling is not compatible with grouping and hierarchy. Editing is supported as of R3 2017.
 * Virtual scrolling relies on calculating the average row height based on already loaded data. Having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
