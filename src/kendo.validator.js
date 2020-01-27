@@ -434,7 +434,7 @@ var __meta__ = { // jshint ignore:line
 
             customMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || nonDefaultMessage || input.attr("title") || customMessage || "",
+            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || nonDefaultMessage || customMessage || input.attr("title") || "",
                 fieldName,
                 input.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
         },

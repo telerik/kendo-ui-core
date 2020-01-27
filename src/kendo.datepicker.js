@@ -238,7 +238,9 @@ var __meta__ = { // jshint ignore:line
 
         current: function(date) {
             this._current = date;
-            this.calendar._focus(date);
+            if (this.calendar) {
+                this.calendar._focus(date);
+            }
         },
 
         value: function(value) {
