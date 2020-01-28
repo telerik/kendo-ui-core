@@ -139,6 +139,10 @@ var __meta__ = { // jshint ignore:line
 
             that._documentKeyDownHandler = proxy(that._documentKeyDown, that);
 
+            if (kendo.support.touch && this._isShownOnMouseEnter()) {
+                that.element.on(kendo.support.mousedown + NS, that.options.filter, proxy(that._showOn, that));
+            }
+
             that.element.on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that));
 
             if (this._isShownOnMouseEnter() || this._isShownOnClick()) {
@@ -151,6 +155,10 @@ var __meta__ = { // jshint ignore:line
 
             if (this.options.autoHide && this._isShownOnFocus()) {
                 that.element.on("blur" + NS, that.options.filter, proxy(that._blur, that));
+            }
+
+            if (kendo.support.touch) {
+                that.element.on(kendo.support.mousedown + NS, that.options.filter, proxy(that._mouseenter, that));
             }
         },
 
