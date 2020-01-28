@@ -133,7 +133,7 @@ var __meta__ = { // jshint ignore:line
                      elements: that._text.get()
                  };
              });
-
+             
              kendo.notify(that);
          },
 
@@ -523,47 +523,12 @@ var __meta__ = { // jshint ignore:line
             } else if (key == keys.ENTER) {
                 that._change(that.element.val());
                 return;
-            } else if(e.which === 0 || e.metaKey || e.ctrlKey || e.keyCode === keys.BACKSPACE || e.keyCode === keys.ENTER) {
-                return;
-            }
+            } 
 
             if (key != keys.TAB) {
                 that._typing = true;
             }
-
-            var min = that.options.min;
-            var element = that.element;
-            var selection = caret(element);
-            var selectionStart = selection[0];
-            var selectionEnd = selection[1];
-            var character = String.fromCharCode(e.which);
-            var numberFormat = that._format(that.options.format);
-            var isNumPadDecimal = key === keys.NUMPAD_DOT;
-            var value = element.val();
-            var isValid;
-
-            that._oldText = value;
-            if (isNumPadDecimal) {
-                character = numberFormat[POINT];
-            }
-
-            value = value.substring(0, selectionStart) + character + value.substring(selectionEnd);
-            isValid = that._numericRegex(numberFormat).test(value);
-
-            if (isValid) {
-                that._isInvalid = false;
-            }
-
-            if (isValid && isNumPadDecimal) {
-                element.val(value);
-                caret(element, selectionStart + character.length);
-
-                e.preventDefault();
-            } else if ((min !== null && min >= 0 && value.charAt(0) === "-") || !isValid) {
-                that._isInvalid = true;
-                that._addInvalidState();
-                e.preventDefault();
-            }
+            that._cachedCaret = caret(that.element);
         },
 
         _keyup: function () {
@@ -571,12 +536,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         _inputHandler: function () {
-            if (this._isInvalid) {
-                if (kendo.support.mobileOS && kendo.support.mobileOS.android) {
-                    this._blinkInvalidState();
-                }
-                this._isInvalid = false;
+            var element = this.element;
+            var value = element.val();
+            var numberFormat = this._format(this.options.format);
+            var isValid = this._numericRegex(numberFormat).test(value);
+
+            if (isValid) {
+                this._oldText = value;
+            } else {
+                this._blinkInvalidState();
                 this.element.val(this._oldText);
+                if (this._cachedCaret) {
+                    caret(element, this._cachedCaret[0]);
+                    this._cachedCaret = null;
+                }
             }
         },
 
@@ -772,6 +745,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.element.val(value);
+            that._oldText = value;
             that.element.add(that._text).attr("aria-valuenow", value);
         },
 

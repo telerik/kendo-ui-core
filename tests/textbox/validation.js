@@ -19,9 +19,10 @@
             assert.equal(textbox._validationIcon.css("display"), "none");
         });
 
-        it("the keydown event adds invalid decoration.", function() {
+        it("the input event adds invalid decoration.", function() {
             var textbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
-            textbox.element.trigger(keyDownA);
+            textbox.element.val("a");
+            textbox.element.trigger("input");
 
             assert.isOk(textbox._inputWrapper.hasClass(STATE_INVALID));
             assert.notEqual(textbox._validationIcon.css("display"), "none");
