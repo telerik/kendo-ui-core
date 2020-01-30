@@ -641,7 +641,7 @@ var __meta__ = { // jshint ignore:line
                 select: proxy(that._select, that)
             });
 
-            if (kendo.support.browser.safari) {
+            if (kendo.support.touch) {
                 that.element.css('touch-action', 'none');
             }
 
