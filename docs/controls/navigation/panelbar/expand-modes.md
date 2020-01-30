@@ -10,8 +10,9 @@ position: 3
 
 The PanelBar supports a single and a multiple expand mode.
 
-* If `ExpandMode` is set to `Single`, the user can expand only a single root item or a single child item of a specific parent item. Expanding another root item or another child of the parent of the currently expanded item will collapse the currently expanded item. This approach is also the only way to collapse an expanded item in the single expand mode.
-* If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them.
+If `ExpandMode` is set to `Single`, the user can expand only a single root item or a single child item of a specific parent item. Expanding another root item or another child of the parent of the currently expanded item will collapse the currently expanded item. This approach is also the only way to collapse an expanded item in the single expand mode.
+
+If `ExpandMode` is set to `Multiple`, the user can expand multiple root items or children of the same parent item at a time. Expanding an item does not collapse the currently expanded items. Expanded items can be collapsed by clicking on them.
 
 	<div id="panelbar"></div>
 	<script>

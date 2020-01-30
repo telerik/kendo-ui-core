@@ -2361,6 +2361,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (options.appendTo) {
+                    options.appendTo = $(options.appendTo);
                     options.appendTo.append(that._popupsWrapper);
                 }
 
