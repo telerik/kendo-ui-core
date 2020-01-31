@@ -970,11 +970,6 @@ textarea.k-textbox:hover,
     border-color: @widget-border-color;
 }
 
-.k-tool
-{
-    border-color: transparent;
-}
-
 .k-i-loading {
     background-image: url('@{image-folder}/loading.gif');
 }
@@ -2680,9 +2675,35 @@ div.k-filebrowser-dropzone em
     background: #fff;
 }
 
-.k-map .k-marker {
-    font-size: 28px;
-    color: @accent;
+// Map
+.k-map {
+    border-color: @widget-border-color;
+    color: @widget-text-color;
+    background-color: @widget-background-color;
+
+
+    // Controls
+    .k-navigator {
+        border-color: @button-border-color;
+        color: @button-text-color;
+        background-color: @button-background-color;
+        background-position: 50% 50%;
+        .composite-background(@button-gradient);
+        .box-shadow(0 1px 2px 0 @shadow-color);
+    }
+    .k-zoom-control {
+        .box-shadow(0 1px 2px 0 @shadow-color);
+    }
+
+
+    // Attribution
+    .k-attribution {}
+
+
+    // Marker
+    .k-marker {
+        color: @accent;
+    }
 }
 
 @import "themes/spreadsheet.less";

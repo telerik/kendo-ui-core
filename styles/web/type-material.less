@@ -3463,56 +3463,36 @@ div.k-scheduler-marquee:after {
 }
 
 // Map
+.k-map {
+    border-color: @widget-border-color;
+    color: @widget-text-color;
+    background-color: @widget-background-color;
 
-.k-map .k-marker {
-    font-size: 28px;
-    color: @accent;
-}
 
-.k-map .k-attribution {
-    color: #666666;
-}
+    // Controls
+    .k-navigator {
+        border-color: @button-border-color;
+        color: @button-text-color;
+        background-color: @button-background-color;
+        background-position: 50% 50%;
+        .composite-background(@button-gradient);
+        .box-shadow(@button-shadow);
 
-.k-map .k-shadow {
-    background-color: #f9f9f9;
-    border-color: #f9f9f9;
-}
+        .k-button {
+            box-shadow: none;
+        }
+    }
+    .k-zoom-control {}
 
-.k-map .k-zoom-control {
-    border-color: #fff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 2px;
-}
 
-.k-map .k-map-controls .k-button {
-    box-shadow: none;
-}
+    // Attribution
+    .k-attribution {}
 
-.k-map .k-map-controls .k-button:focus,
-.k-map .k-map-controls .k-button:active,
-.k-map .k-map-controls .k-button:focus:active {
-    background-color: #d6d6d6;
-    border-color: #d6d6d6;
-    box-shadow: none;
-}
 
-.k-buttons-horizontal .k-zoom-out {
-    border-radius: 0 2px 2px 0;
-}
-
-.k-buttons-horizontal :first-child
-{
-    border-radius: 2px 0 0 2px;
-}
-
-.k-rtl .k-buttons-horizontal .k-zoom-out
-{
-    border-radius: 2px 0 0 2px;
-}
-
-.k-rtl .k-buttons-horizontal :first-child
-{
-    border-radius: 0 2px 2px 0;
+    // Marker
+    .k-marker {
+        color: @accent;
+    }
 }
 
 @import "themes/spreadsheet.less";
@@ -3905,9 +3885,6 @@ div.k-scheduler-marquee:after {
 // Editor
 .k-editor .k-tool {
     color: inherit;
-}
-.k-tool {
-    border-color: transparent;
 }
 .k-tool {
     text-align: center;

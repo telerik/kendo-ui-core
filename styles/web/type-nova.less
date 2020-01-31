@@ -2284,18 +2284,31 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 }
 
 // Map
-.k-map .k-header {
-    background-color: @widget-background-color;
+.k-map {
     border-color: @widget-border-color;
-}
+    color: @widget-text-color;
+    background-color: @widget-background-color;
 
-.k-map .k-marker {
-    font-size: 28px;
-    color: @accent;
-}
 
-.k-map .k-attribution {
-    color: #666666;
+    // Controls
+    .k-navigator {
+        border-color: @button-border-color;
+        color: @button-text-color;
+        background-color: @button-background-color;
+        background-position: 50% 50%;
+        .composite-background(@button-gradient);
+    }
+    .k-zoom-control {}
+
+
+    // Attribution
+    .k-attribution {}
+
+
+    // Marker
+    .k-marker {
+        color: @accent;
+    }
 }
 
 @import "themes/spreadsheet.less";
