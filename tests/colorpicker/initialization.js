@@ -26,6 +26,15 @@
             assert.equal(cp.wrapper.attr("tabIndex"), 5);
         });
 
+        it("unbinds events from hsv area container", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
+            var cp = dom.data("kendoFlatColorPicker");
+
+            cp.destroy();
+
+            assert.isOk($.isEmptyObject(cp._hsvEvents._events));
+        });
+
     });
 }());
 

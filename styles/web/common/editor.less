@@ -131,26 +131,27 @@ table.k-editor
 }
 
 .k-button-group .k-tool {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 1px 0;
+    margin: 1px -1px 1px 0;
     width: @editor-icon-size;
     height: @editor-icon-size;
+    border-width: 1px;
+    border-style: solid;
     line-height: @editor-icon-size;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    &:focus,
+    &.k-state-hover {
+        z-index: 1;
+    }
 }
 
-.k-button-group .k-tool-icon
-{
+.k-button-group .k-tool-icon {
     width: 24px;
     height: 24px;
     vertical-align: middle;
     .disable-high-contrast();
-}
-
-.k-editor-toolbar .k-tool-icon.k-icon
-{
-    top: auto;
-    font-size: 16px;
 }
 
 // default tool widths
@@ -179,36 +180,6 @@ table.k-editor
 
 .k-editor-toolbar .k-i-login {
     transform: scaleX(-1);
-}
-
-.k-button-group .k-tool
-{
-    border-style: solid;
-    border-width: 1px;
-    margin-right: -1px;
-}
-
-.k-button-group .k-tool.k-state-hover,
-.k-button-group .k-tool:focus
-{
-    position: relative;
-    z-index: 1;
-}
-
-.k-rtl .k-button-group .k-tool
-{
-    border-style: solid;
-    border-width: 1px;
-}
-
-.k-button-group .k-tool.k-group-end
-{
-    border-right-width: 1px;
-}
-
-.k-rtl .k-button-group .k-tool.k-group-end
-{
-    border-left-width: 1px;
 }
 
 .k-editor-toolbar {
@@ -369,6 +340,10 @@ a.k-tool {
 .k-ct-popup {
     width: (8.2 * (@editor-createTable-cellSize + 4));
     padding: .65em .5em .5em;
+
+    .k-button {
+        width: 100%;
+    }
 }
 
 .k-ct-popup .k-status {

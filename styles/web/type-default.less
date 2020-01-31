@@ -994,11 +994,6 @@ textarea.k-textbox:hover,
     opacity: @default-icon-opacity;
 }
 
-.k-tool
-{
-    border-color: transparent;
-}
-
 .k-i-loading {
     background-image: url('@{image-folder}/loading.gif');
 }
@@ -2628,15 +2623,35 @@ textarea.k-textbox,
 }
 
 // Map
+.k-map {
+    border-color: @widget-border-color;
+    color: @widget-text-color;
+    background-color: @widget-background-color;
 
-.k-map .k-marker {
-    font-size: 28px;
-    color: @accent;
-    text-shadow: 0 0 3px rgba(0, 0, 0, .4);
-}
 
-.k-map .k-attribution {
-    color: #666666;
+    // Controls
+    .k-navigator {
+        border-color: @button-border-color;
+        color: @button-text-color;
+        background-color: @button-background-color;
+        background-position: 50% 50%;
+        .composite-background(@button-gradient);
+        .box-shadow(0 1px 2px 0 @shadow-color);
+    }
+    .k-zoom-control {
+        .box-shadow(0 1px 2px 0 @shadow-color);
+    }
+
+
+    // Attribution
+    .k-attribution {}
+
+
+    // Marker
+    .k-marker {
+        color: @accent;
+        text-shadow: 0 0 3px rgba(0, 0, 0, .4);
+    }
 }
 
 @import "themes/spreadsheet.less";
