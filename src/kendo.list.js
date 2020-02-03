@@ -38,6 +38,9 @@ var __meta__ = { // jshint ignore:line
         SELECTED = "selected",
         REQUESTSTART = "requestStart",
         REQUESTEND = "requestEnd",
+        BLUR = "blur",
+        FOCUS = "focus",
+        FOCUSOUT = "focusout",
         extend = $.extend,
         proxy = $.proxy,
         isArray = $.isArray,
@@ -1614,13 +1617,14 @@ var __meta__ = { // jshint ignore:line
         _toggleCascadeOnFocus: function() {
             var that = this;
             var parent = that._parentWidget();
+            var focusout = isIE && parent instanceof ui.DropDownList ? BLUR : FOCUSOUT;
 
-            parent._focused.add(parent.filterInput).bind("focus", function() {
+            parent._focused.add(parent.filterInput).bind(FOCUS, function() {
                 parent.unbind(CASCADE, that._cascadeHandlerProxy);
                 parent.first(CHANGE, that._cascadeHandlerProxy);
             });
 
-            parent._focused.add(parent.filterInput).bind("focusout", function() {
+            parent._focused.add(parent.filterInput).bind(focusout, function() {
                 parent.unbind(CHANGE, that._cascadeHandlerProxy);
                 parent.first(CASCADE, that._cascadeHandlerProxy);
             });
