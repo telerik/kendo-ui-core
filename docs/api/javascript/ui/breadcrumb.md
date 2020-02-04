@@ -102,11 +102,11 @@ Defines the icon classes (the `span` element).
 
 ### items.showIcon `Boolean`  
 
-Defines whether to show the icon.
+Defines whether to show the icon. Default value is *true* for `rootItem` and *false* for `item`.
 
 ### items.showText `Boolean`  
 
-Defines whether to show the text.
+Defines whether to show the text. Default value is *false* for `rootItem` and *true* for `item`.
 
 ### gap `Number` *(default: 0)*
 
@@ -256,7 +256,7 @@ The path segments separated by slash.
         }).getKendoBreadcrumb();
 
 		breadcrumb.items([
-			{ type: "rootitem", text: "Home", showText: true. showIcon: false }
+			{ type: "rootitem", text: "Home", showText: true, showIcon: false }
 		]);
 	</script>
 

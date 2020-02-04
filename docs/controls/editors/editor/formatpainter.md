@@ -25,7 +25,7 @@ Format a section with the desired bold, italic, underline, font size and font fa
 
 To apply the saved formatting, select the text that you want to format and click the **Apply Format** button.
 
-### Supported formatting
+## Supported formatting
 
 The tool will copy and apply all inline styles. Also, any classes and attributes present in the source will be copied to the target.
 
