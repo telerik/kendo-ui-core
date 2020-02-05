@@ -1105,6 +1105,70 @@ Gets the selected files (the JSON representation of the files).
 ### getSize
 Gets the size of the FileManager wrapper.
 
+### setDataSource
+
+Sets the dataSource of an existing FileManager and rebinds it.
+
+#### Parameters
+
+##### dataSource `kendo.data.FileManagerDataSource`
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dataSource: {
+            transport: {
+                read: {
+                type: "post",
+                url: baseUrl + "Read"
+                },
+                update: {
+                type: "post",
+                url: baseUrl + "Update"
+                },
+                create: {
+                type: "post",
+                url: baseUrl + "Create"
+                },
+                destroy: {
+                type: "post",
+                url: baseUrl + "Destroy"
+                }
+            }
+            }
+        });
+        
+        var myData = [{
+            name: "Folder",
+            isDirectory: true,
+            hasDirectories: true,
+            path: "Folder",
+            extension: "",
+            size: 0,
+            createdUtc: new Date(),
+            items: [{
+                name: "Subfolder",
+                isDirectory: true,
+                hasDirectories: false,
+                path: "SubFolder",
+                extension: "",
+                size: 0,
+                createdUtc: new Date()
+            }]
+        }];
+        var dataSource = new kendo.data.FileManagerDataSource({
+            data: myData,
+            schema: kendo.data.schemas.filemanager
+        });
+      
+        var filemanager = $("#fileManager").data("kendoFileManager");
+        filemanager.setDataSource(dataSource);
+    </script>
+
 ### destroy
 Destroys the FileManagers.
 
