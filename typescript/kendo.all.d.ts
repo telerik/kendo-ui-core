@@ -3682,7 +3682,8 @@ declare namespace kendo.ui {
         getSelected(): void;
         getSize(): void;
         destroy(): void;
-
+        setDataSource(dataSource: kendo.data.FileManagerDataSource): void;
+        
     }
 
     interface FileManagerBreadcrumb {
