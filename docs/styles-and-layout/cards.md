@@ -28,8 +28,9 @@ The Card can accommodate the following elements:
 
 * [Header](#header)
 * [Body](#body)
+* [Footer](#footer)
 * [Actions](#actions)
-* [Images](#images)
+* [Media](#media)
 * [Separators](#separators)
 
 ### Header
@@ -81,6 +82,18 @@ The main content of a card is the body which can be defined through the `.k-card
 </div>
 ```
 
+### Footer
+
+The main content of a card is the body which can be defined through the `.k-card-body` class.
+
+```dojo
+<div class="k-card" style="width: 300px;">
+    <div class="k-card-footer">
+        <span>Card Footer</span>
+    </div>
+</div>
+```
+
 ### Actions
 
 You can add a list of actions to a Card by using the `.k-card-actions` class.
@@ -120,7 +133,7 @@ To achieve a consistent styling, each action can be wrapped in a `.k-card-action
 </div>
 ```
 
-The actions can be stretched to take the entire container by adding the `.k-card-actions-stretched`.
+The actions can be stretched to take the entire container by adding the `.k-card-actions-stretched` class.
 
 ```dojo
 <div class="k-card" style="width: 300px;">
@@ -130,6 +143,66 @@ The actions can be stretched to take the entire container by adding the `.k-card
         <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
     </div>
     <div class="k-card-actions k-card-actions-stretched">
+        <span class="k-card-action">
+            <span class="k-button k-flat k-primary">Action 1</span>
+        </span>
+        <span class="k-card-action">
+            <span class="k-button k-flat k-primary">Action 2</span>
+        </span>
+    </div>
+</div>
+```
+
+The actions can be centered inside the container by adding the `.k-card-actions-center` class:
+
+```dojo
+<div class="k-card" style="width: 300px;">
+    <div class="k-card-body">
+        <h5 class="k-card-title">Card Title</h5>
+        <h6 class="k-card-subtitle">Card Subtitle</h6>
+        <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
+    </div>
+    <div class="k-card-actions k-card-actions-center">
+        <span class="k-card-action">
+            <span class="k-button k-flat k-primary">Action 1</span>
+        </span>
+        <span class="k-card-action">
+            <span class="k-button k-flat k-primary">Action 2</span>
+        </span>
+    </div>
+</div>
+```
+
+The actions can be aligned at the start of the container with the `.k-card-actions-start` class:
+
+```dojo
+<div class="k-card" style="width: 300px;">
+    <div class="k-card-body">
+        <h5 class="k-card-title">Card Title</h5>
+        <h6 class="k-card-subtitle">Card Subtitle</h6>
+        <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
+    </div>
+    <div class="k-card-actions k-card-actions-start">
+        <span class="k-card-action">
+            <span class="k-button k-flat k-primary">Action 1</span>
+        </span>
+        <span class="k-card-action">
+            <span class="k-button k-flat k-primary">Action 2</span>
+        </span>
+    </div>
+</div>
+```
+
+The actions can be aligned at the end of the container with the `.k-card-actions-end` class:
+
+```dojo
+<div class="k-card" style="width: 300px;">
+    <div class="k-card-body">
+        <h5 class="k-card-title">Card Title</h5>
+        <h6 class="k-card-subtitle">Card Subtitle</h6>
+        <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
+    </div>
+    <div class="k-card-actions k-card-actions-end">
         <span class="k-card-action">
             <span class="k-button k-flat k-primary">Action 1</span>
         </span>
@@ -156,9 +229,11 @@ The actions can also be forced to display vertically through the `.k-card-action
 </div>
 ```
 
-### Images
+### Media
 
-Cards support images through the `.k-card-image` class.
+The Cards allows you to display an image or video within its content.
+
+Images can be added through the `.k-card-image` class.
 
 ```
 <div class="k-card" style="width: 300px;">
@@ -172,9 +247,29 @@ Cards support images through the `.k-card-image` class.
 </div>
 ```
 
+Videos can be added through the `.k-card-media` class.
+
+```
+<div class="k-card k-card-vertical">
+    <div class="k-card-header k-display-flex k-align-items-center ">
+        <h5 class="k-card-title">DevReach</h5>
+    </div>
+    <iframe height="267" src="https://www.youtube.com/embed/00EMMRFocNs" class="k-card-media"></iframe>
+    <div class="k-card-body">
+        <p><strong>DevReach 2019 Day 2 Morning Keynote:</strong> Technical Leadership: Lessons Learned at NASA with Jody Davis</p>
+    </div>
+    <span class="k-card-separator"></span>
+    <div class="k-card-actions">
+        <span class="k-button k-flat"><span class="k-icon k-i-heart-outline"></span></span>
+        <span class="k-button k-flat"><span class="k-icon k-i-comment"></span></span>
+        <span class="k-button k-flat"><span class="k-icon k-i-share"></span></span>
+    </div>
+</div>
+```
+
 ### Separators
 
-To include Card separators, use the `.k-hr` class.
+To include Card separators, use the `.k-card-separator` class.
 
 ```dojo
 <div class="k-card" style="width: 300px;">
@@ -184,7 +279,7 @@ To include Card separators, use the `.k-hr` class.
             <h6 class="k-card-subtitle">Card Subtitle</h6>
             <p>Some quick example text to build on the card title and make up the bulk of the card content.</p>
         </div>
-        <hr class="k-hr" />
+        <hr class="k-card-separator" />
         <div class="k-card-body">
             <h5 class="k-card-title">Card Title</h5>
             <h6 class="k-card-subtitle">Card Subtitle</h6>
@@ -193,6 +288,8 @@ To include Card separators, use the `.k-hr` class.
     </div>
 </div>
 ```
+
+To specify a vertical orientation for the separator add the `.k-card-separator-vertical` class to the separator element.
 
 ## Layout
 
@@ -322,6 +419,68 @@ To render Cards that are detached from one another on a single row, use the `.k-
             </div>
         </div>
     </div>
+```
+
+### Custom layout
+
+Positioning a horizontal flex container element inside the card could be achieved with the `.k-hbox` class:
+
+```
+<div class="k-card k-card-horizontal">
+    <div class="k-card-header">
+        <h5 class="k-card-title">Card Title</h5>
+        <h6 class="k-card-subtitle">Card Subtitle</h6>
+    </div>
+    <div class="k-hbox">
+        <div class="k-card-body">
+            <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <div class="k-card-actions k-card-actions-stretched k-card-actions-horizontal">
+            <span class="k-button k-flat">Action 1</span>
+            <span class="k-button k-flat k-primary">Action 2</span>
+        </div>
+    </div>
+</div>
+```
+
+Positioning a vertical flex container element inside the card could be achieved with the `.k-vbox` class:
+
+```
+<div class="k-card k-card-horizontal">
+    <div class="k-vbox">
+        <div class="k-card-header">
+            <h5 class="k-card-title">Card Title</h5>
+            <h6 class="k-card-subtitle">Card Subtitle</h6>
+        </div>
+        <div class="k-card-body">
+            <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <div class="k-card-actions k-card-actions-stretched k-card-actions-horizontal">
+            <span class="k-button k-flat">Action 1</span>
+            <span class="k-button k-flat k-primary">Action 2</span>
+        </div>
+    </div>
+</div>
+```
+
+### Orientation
+
+The Card content can be arranged vertically or horizontally through the `.k-card-vertical` and `.k-card-horizontal` classes:
+
+```
+<div class="k-card k-card-vertical k-text-center">
+    <div class="k-card-header">
+        <h5 class="k-card-title">Sofia</h5>
+        <h6 class="k-card-subtitle">Sunny</h6>
+    </div>
+    <div class="k-card-body">
+        <div>2&ordm;C</div>
+    </div>
+    <div class="k-card-actions k-card-actions-stretched k-card-actions-horizontal">
+        <button class="k-button k-flat">Action 1</button>
+        <button class="k-button k-primary k-flat">Action 2</button>
+    </div>
+</div>
 ```
 
 ## Styles

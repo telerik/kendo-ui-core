@@ -4832,7 +4832,7 @@ declare namespace kendo.ui {
     }
 
     interface GridScrollable {
-        virtual?: boolean;
+        virtual?: boolean|string;
         endless?: boolean;
     }
 
