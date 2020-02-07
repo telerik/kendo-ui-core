@@ -28,8 +28,6 @@ var __meta__ = { // jshint ignore:line
         LAST = "k-last",
         LINK = "k-link",
         LINKSELECTOR = "." + LINK,
-        ICONEXPAND = "k-panelbar-expand",
-        ICONCOLLAPSE = "k-panelbar-collapse",
         ERROR = "error",
         ITEM = ".k-item",
         GROUP = ".k-group",
@@ -1417,13 +1415,9 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (target.hasClass(LINK) || target.hasClass(ICONEXPAND) || target.hasClass(ICONCOLLAPSE)) {
-                e.preventDefault();
+            if (target.is(":kendoFocusable") && !target.hasClass(LINK)) {
+                return;
             }
-
-           if (target.is(":kendoFocusable") && !target.hasClass(LINK)) {
-               return;
-           }
 
             var link = target.closest(LINKSELECTOR),
                 item = link.closest(ITEM);
@@ -1443,8 +1437,9 @@ var __meta__ = { // jshint ignore:line
             isAnchor = href && (href.charAt(href.length - 1) == "#" || href.indexOf("#" + that.element[0].id + "-") != -1);
             prevent = !!(isAnchor || contents.length);
 
-            if (contents.data("animating")) {
-                return prevent;
+            if (contents.data("animating") && prevent) {
+                e.preventDefault();
+                return;
             }
 
             if (that._triggerEvent(SELECT, item)) {
@@ -1456,8 +1451,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (that.options.expandMode == SINGLE) {
-                if (that._collapseAllExpanded(item)) {
-                    return prevent;
+                if (that._collapseAllExpanded(item) && prevent) {
+                    e.preventDefault();
+                    return;
                 }
             }
 
@@ -1469,7 +1465,9 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            return prevent;
+            if (prevent) {
+                e.preventDefault();
+            }
         },
         _hasChildItems: function (item) {
             return (item.items && item.items.length > 0) || item.hasChildren;
