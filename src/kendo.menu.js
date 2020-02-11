@@ -96,8 +96,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         rendering = {
-            wrapperCssClass: function (group, item) {
-                var result = "k-item",
+            wrapperCssClass: function(group, item) {
+                var result = "k-item k-menu-item",
                     index = item.index;
 
                 if (item.enabled === false) {
@@ -110,7 +110,7 @@ var __meta__ = { // jshint ignore:line
                     result += " k-first";
                 }
 
-                if (index == group.length-1) {
+                if (index == group.length - 1) {
                     result += " k-last";
                 }
 
@@ -118,11 +118,11 @@ var __meta__ = { // jshint ignore:line
                     result += " " + item.cssClass;
                 }
 
-                if(item.attr && item.attr.hasOwnProperty("class")) {
+                if (item.attr && item.attr.hasOwnProperty("class")) {
                     result += " " + item.attr["class"];
                 }
 
-                if(item.selected) {
+                if (item.selected) {
                     result += " " + SELECTEDSTATE;
                 }
 
@@ -186,7 +186,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             arrowClass: function(item, group) {
-                var result = "k-icon";
+                var result = "k-menu-expand-arrow k-icon";
 
                 if (group.horizontal) {
                     result += " k-i-arrow-60-down";
@@ -242,24 +242,30 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function updateItemClasses (item) {
+    function updateItemClasses(item) {
         item = $(item);
 
-        item.addClass("k-item")
+        item.addClass("k-item k-menu-item")
             .children(IMG)
             .addClass(IMAGE);
+
         item
             .children("a")
             .addClass(LINK)
             .children(IMG)
             .addClass(IMAGE);
+
         item
             .filter(":not([disabled])")
             .addClass(DEFAULTSTATE);
+
         item
             .filter(".k-separator")
+            .removeClass("k-menu-item")
+            .addClass("k-menu-separator")
             .empty()
             .append("&nbsp;");
+
         item
             .filter("li[disabled]")
             .addClass(DISABLEDSTATE)
@@ -281,7 +287,7 @@ var __meta__ = { // jshint ignore:line
         updateFirstLast(item);
     }
 
-    function updateArrow (item) {
+    function updateArrow(item) {
         item = $(item);
 
         item.find("> .k-link > [class*=k-i-arrow-60]:not(.k-sprite)").remove();
@@ -292,23 +298,23 @@ var __meta__ = { // jshint ignore:line
                 var item = $(this),
                     arrowCssClass = getArrowCssClass(item);
 
-                item.append("<span class='k-icon" + arrowCssClass + " k-menu-expand-arrow'/>");
+                item.append("<span class='k-menu-expand-arrow k-icon " + arrowCssClass + "' />");
             });
     }
 
-    function getArrowCssClass (item) {
+    function getArrowCssClass(item) {
         var arrowCssClass,
             parent = item.parent().parent(),
             isRtl = kendo.support.isRtl(parent);
 
         if (parent.hasClass(MENU + "-horizontal")) {
-            arrowCssClass = " k-i-arrow-60-down";
+            arrowCssClass = "k-i-arrow-60-down";
         } else {
             if (isRtl) {
-                arrowCssClass = " k-i-arrow-60-left";
+                arrowCssClass = "k-i-arrow-60-left";
             }
             else {
-                arrowCssClass = " k-i-arrow-60-right";
+                arrowCssClass = "k-i-arrow-60-right";
             }
         }
         return arrowCssClass;
