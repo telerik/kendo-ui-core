@@ -578,5 +578,13 @@
 
             assert.equal(textbox.value(), 0.07);
         });
+
+        it("calling value caches the text for the input", function() {
+            var textbox = new NumericTextBox(input);
+
+            textbox.value(15)
+
+            assert.equal(textbox._oldText, "15");
+        });
     });
 }());

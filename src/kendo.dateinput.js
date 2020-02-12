@@ -52,7 +52,7 @@ var __meta__ = { // jshint ignore:line
                 that.wrapper = element.parent();
             } else {
                 that.wrapper = element.wrap("<span class='k-widget k-dateinput'></span>").parent();
-                that.wrapper.addClass(element[0].className);
+                that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
                 that.wrapper[0].style.cssText = element[0].style.cssText;
                 element.css({
                     width: "100%",

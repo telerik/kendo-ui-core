@@ -1258,6 +1258,7 @@ var __meta__ = { // jshint ignore:line
             that._focused = that.wrapper = wrapper
                 .addClass("k-widget k-dropdown")
                 .addClass(DOMelement.className)
+                .removeClass('input-validation-error')
                 .css("display", "")
                 .attr({
                     accesskey: element.attr("accesskey"),

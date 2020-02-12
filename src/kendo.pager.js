@@ -228,7 +228,7 @@ var __meta__ = { // jshint ignore:line
 
         options: {
             name: "Pager",
-            selectTemplate: '<li><span class="k-state-selected">#=text#</span></li>',
+            selectTemplate: '<li><span class="k-link k-state-selected">#=text#</span></li>',
             currentPageTemplate: '<li class="k-current-page"><span class="k-link k-pager-nav">#=text#</span></li>',
             linkTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             buttonCount: 10,

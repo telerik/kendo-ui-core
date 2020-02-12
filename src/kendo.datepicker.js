@@ -238,7 +238,9 @@ var __meta__ = { // jshint ignore:line
 
         current: function(date) {
             this._current = date;
-            this.calendar._focus(date);
+            if (this.calendar) {
+                this.calendar._focus(date);
+            }
         },
 
         value: function(value) {
@@ -714,7 +716,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             that.wrapper = wrapper.addClass("k-widget k-datepicker")
-                .addClass(element[0].className);
+                .addClass(element[0].className).removeClass('input-validation-error');
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },

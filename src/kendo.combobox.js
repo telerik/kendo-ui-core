@@ -1108,6 +1108,7 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = wrapper.addClass("k-widget k-combobox")
                 .addClass(element[0].className)
+                .removeClass('input-validation-error')
                 .css("display", "");
         },
 
