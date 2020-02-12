@@ -133,7 +133,7 @@ var __meta__ = { // jshint ignore:line
                      elements: that._text.get()
                  };
              });
-             
+
              kendo.notify(that);
          },
 
@@ -523,7 +523,7 @@ var __meta__ = { // jshint ignore:line
             } else if (key == keys.ENTER) {
                 that._change(that.element.val());
                 return;
-            } 
+            }
 
             if (key != keys.TAB) {
                 that._typing = true;
@@ -777,6 +777,7 @@ var __meta__ = { // jshint ignore:line
             DOMElement.style.width = "";
             that.wrapper = wrapper.addClass("k-widget k-numerictextbox")
                                   .addClass(DOMElement.className)
+                                  .removeClass('input-validation-error')
                                   .css("display", "");
 
             that._inputWrapper = $(wrapper[0].firstChild);

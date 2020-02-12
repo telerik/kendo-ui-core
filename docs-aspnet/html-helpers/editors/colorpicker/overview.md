@@ -98,7 +98,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI ColorPicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker) to control its behavior.
+To reference an existing Kendo UI ColorPicker instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ColorPicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker#methods) to control its behavior.
 
         // Place the following after the ColorPicker for {{ site.framework }} declaration.
         <script>

@@ -247,7 +247,7 @@ For a complete example on basic Gantt events, refer to the [demo on using the ev
 
 ## Referencing Existing Instances
 
-To reference an existing Gantt instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side Gantt API](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt) to control its behavior.
+To reference an existing Gantt instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side Gantt API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#methods) to control its behavior.
 
     // Place this after the Gantt for {{ site.framework }} declaration.
     <script>

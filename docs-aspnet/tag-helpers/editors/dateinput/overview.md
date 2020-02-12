@@ -70,7 +70,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput API](/api/dateinput) to control its behavior.
+To reference an existing Kendo UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
 
     // Place the following after the DateInput for ASP.NET Core declaration.
     <script>

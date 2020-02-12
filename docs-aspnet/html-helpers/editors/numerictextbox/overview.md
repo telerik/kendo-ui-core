@@ -61,6 +61,8 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 To get a reference to the NumericTextBox, always use the `id` attribute instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that represents the visual look of the helper and copies all non-`id` attributes including the class. When you use the class for referencing the NumericTextBox, this behavior causes unexpected results.
 
+Once a reference is established, use the [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox#methods) to control its behavior.
+
 The following example demonstrates how to get a reference to an existing instance.
 
 ```

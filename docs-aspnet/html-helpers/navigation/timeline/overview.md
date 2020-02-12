@@ -202,7 +202,7 @@ The following example demonstrates how to subscribe to events by using a templat
 
 ## Referencing Existing Instances
 
-To access an existing Timeline instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [client-side methods the widget exposes](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
+To access an existing Timeline instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
 
 ```
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()

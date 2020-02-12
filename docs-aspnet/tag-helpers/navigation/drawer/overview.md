@@ -71,6 +71,7 @@ The Drawer TagHelper configuration options are passed as strongly-typed attribut
 ## Referencing Existing Instances
 
 The following example demonstrates the basic configuration of the Drawer TagHelper and how to get the Drawer instance.
+To reference an existing Kendo UI Drawer instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Drawer client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer#methods) to control its behavior.
 
 ```TagHelper
     <kendo-drawer name="drawer" template-id="template" mode="push" position="left" min-height="330" swipe-to-open="true" on-item-click="onItemClick">

@@ -34,7 +34,7 @@ The following example demonstrates how to Initializing the RadialGauge by using 
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge API](/api/radialgauge#methods) to control its behavior.
+To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [RadialGauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
 
         // Place the following after the RadialGauge for {{ site.framework }} declaration.
         <script>

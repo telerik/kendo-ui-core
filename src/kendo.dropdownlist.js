@@ -185,7 +185,8 @@ var __meta__ = { // jshint ignore:line
             "dataBinding",
             "dataBound",
             "cascade",
-            "set"
+            "set",
+            "kendoKeydown"
         ],
 
         setOptions: function(options) {
@@ -661,7 +662,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper
                     .attr(TABINDEX, wrapper.data(TABINDEX))
                     .attr(ARIA_DISABLED, false)
-                    .on("keydown" + ns, proxy(that._keydown, that))
+                    .on("keydown" + ns, that, proxy(that._keydown, that))
                     .on(kendo.support.mousedown + ns, proxy(that._wrapperMousedown, that))
                     .on("paste" + ns, proxy(that._filterPaste, that));
 
@@ -1258,6 +1259,7 @@ var __meta__ = { // jshint ignore:line
             that._focused = that.wrapper = wrapper
                 .addClass("k-widget k-dropdown")
                 .addClass(DOMelement.className)
+                .removeClass('input-validation-error')
                 .css("display", "")
                 .attr({
                     accesskey: element.attr("accesskey"),

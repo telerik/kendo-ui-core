@@ -139,7 +139,7 @@ For an example on basic DropDownTree events, refer to the [demo on using the eve
 
 ## Referencing Existing Instances
 
-To reference an existing DropDownTree instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownTree client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree) to control its behavior.
+To reference an existing DropDownTree instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownTree client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI DropDownTree for {{ site.framework }} declaration.

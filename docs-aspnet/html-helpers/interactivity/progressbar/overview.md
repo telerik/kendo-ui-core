@@ -104,7 +104,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-The following example demonstrates how to get a reference to an existing Telerik UI ProgressBar instance. Once the reference is established, use the [ProgressBar API](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar) to control its behavior.
+The following example demonstrates how to get a reference to an existing Telerik UI ProgressBar instance. Once the reference is established, use the [ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar#methods) to control its behavior.
 
 ```Razor
     @(Html.Kendo().ProgressBar()

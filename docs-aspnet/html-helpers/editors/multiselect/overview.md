@@ -70,7 +70,7 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the MultiSelect HtmlHelper. To get a reference to an existing Telerik UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect API](/api/multiselect) to control its behavior.
+The following example demonstrates the basic configuration of the MultiSelect HtmlHelper. To get a reference to an existing Telerik UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#methods) to control its behavior.
 
 ```
 @(Html.Kendo().MultiSelect()

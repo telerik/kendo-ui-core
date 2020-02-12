@@ -44,7 +44,7 @@ The Barcode supports a set of [encoding types]({% slug encodings_aspnetcore_barc
 
 ## Referencing Existing Instances
 
-To reference an existing Barcode instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Barcode API](/api/barcode) to control its behavior.
+To reference an existing Barcode instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Barcode client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
       // Place the following after the declaration of the Barcode for {{ site.framework }}.
       <script>

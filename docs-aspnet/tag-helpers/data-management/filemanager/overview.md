@@ -102,7 +102,7 @@ The following example demonstrates initialization of the FileManager with a loca
 
 ## Referencing Existing Instances
 
-To refer to an existing Grid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [FileManager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager) to control its behavior.
+To refer to an existing Grid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [FileManager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager#methods) to control its behavior.
 
         var filemanager = $("#filemanager").data("kendoFileManager");
 

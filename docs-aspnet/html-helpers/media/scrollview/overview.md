@@ -146,7 +146,7 @@ For a complete example on basic ScrollView events, refer to the [demo on using t
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI ScrollView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [ScrollView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview#configuration) to control its behavior.
+To reference an existing Telerik UI ScrollView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [ScrollView client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI ScrollView for {{ site.framework }} declaration.

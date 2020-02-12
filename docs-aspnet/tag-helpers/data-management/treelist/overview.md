@@ -36,7 +36,7 @@ The following example demonstrates how to define the TreeList by using the TreeL
 
 ## Referencing Existing Instances
 
-To refer to an existing TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and pass `"kendoTreeList"` as an argument. Once a reference has been established, use the [API of the TreeList](/api/treelist) to control its behavior.
+To refer to an existing TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and pass `"kendoTreeList"` as an argument. Once a reference has been established, use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist#methods) to control its behavior.
 
 The following example demonstrates how to access an existing TreeList instance.
 

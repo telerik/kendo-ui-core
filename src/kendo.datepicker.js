@@ -716,7 +716,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             that.wrapper = wrapper.addClass("k-widget k-datepicker")
-                .addClass(element[0].className);
+                .addClass(element[0].className).removeClass('input-validation-error');
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },

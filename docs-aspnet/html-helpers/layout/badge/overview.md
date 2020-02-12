@@ -59,7 +59,7 @@ With the badge you can customize the content using templates.
 
 ## Referencing Existing Instances
 
-You can access an existing Button instance by using the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method which gets executed by the jQuery object of the originating element.
+You can access an existing Button instance by using the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method which gets executed by the jQuery object of the originating element. Once the reference is established, use the [Badge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge#methods) to control its behavior.
 
 ```
     <a class="k-button k-badge-overlay">

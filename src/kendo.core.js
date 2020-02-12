@@ -3640,6 +3640,23 @@ function pad(number, digits, end) {
         return events;
     };
 
+    kendo.keyDownHandler = function(e, widget) {
+        var events = widget._events.kendoKeydown;
+
+        if(!events){
+            return true;
+        }
+
+        events = events.slice();
+        e.sender = widget;
+        e.preventKendoKeydown = false;
+        for (var idx = 0, length = events.length; idx < length; idx++) {
+            events[idx].call(widget, e);
+        }
+
+        return !e.preventKendoKeydown;
+    };
+
     var on = $.fn.on;
 
     function kendoJQuery(selector, context) {
@@ -3710,6 +3727,19 @@ function pad(number, digits, end) {
                     {
                         bustClick: bustClick
                     });
+            }
+
+            if(arguments[0].indexOf("keydown") !== -1 && args[1] && args[1].options){
+                args[0] = events;
+                var widget = args[1];
+                var keyDownCallBack = args[args.length - 1];
+                args[args.length - 1]= function(e){
+                    if(kendo.keyDownHandler(e, widget)){
+                       return keyDownCallBack.apply(this, [e]);
+                    }
+                };
+                on.apply(that, args);
+                return that;
             }
 
             if (typeof callback === STRING) {
