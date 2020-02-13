@@ -37,7 +37,7 @@ The View-Model part of the MVVM is responsible for exposing the data objects fro
 
 ## Setting the data-* Options
 
-For more information on the naming convention setting the configuration options of the Kendo UI MVVM widgets, check the naming convention for the [set `data` options](http://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options).
+For more information on the naming convention setting the configuration options of the Kendo UI MVVM widgets, check the naming convention for the [set `data` options](https://docs.telerik.com/kendo-ui/intro/widget-basics/mvvm-initialization#setting-the-data-options).
 
 > The hybrid widgets and frameworks in Kendo UI are not included in the default list of initialized namespaces. You can initialize them explicitly by running `kendo.bind(element, viewModel, kendo.mobile.ui);`.
 
