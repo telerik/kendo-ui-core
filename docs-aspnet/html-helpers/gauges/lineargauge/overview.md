@@ -34,7 +34,7 @@ The following example demonstrates how to Initializing the LinearGauge by using 
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI LinearGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge API](/api/lineargauge) to control its behavior.
+To reference an existing Telerik UI LinearGauge instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [LinearGauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
 
         // Place the following after the LinearGauge for {{ site.framework }} declaration.
         <script>

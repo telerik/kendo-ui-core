@@ -68,7 +68,7 @@ To configure the PivotGrid for Ajax binding to an **Adventure Works** cube that 
 
 ## Referencing Existing Instances
 
-To reference an existing PivotGrid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [PivotGrid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfigurator) to control its behavior.
+To reference an existing PivotGrid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [PivotGrid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotconfigurator#methods) to control its behavior.
 
     var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
 

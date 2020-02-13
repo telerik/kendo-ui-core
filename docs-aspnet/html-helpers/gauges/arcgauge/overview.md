@@ -36,7 +36,7 @@ The ArcGauge represents a value on a circular arc.
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI ArcGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ArcGauge API](/api/arcgauge) to control its behavior.
+To reference an existing Telerik UI ArcGauge instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ArcGauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgaug#methodse) to control its behavior.
 
     // Place the following after your Telerik UI ArcGauge for {{ site.framework }} declaration.
     <script>

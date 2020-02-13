@@ -48,7 +48,7 @@ The QRCode supports a set of [encoding conventions]({% slug encoding_qrcode_aspn
 
 ## Referencing Existing Instances
 
-To reference an existing QRCode instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode API](/api/qrcode) to control its behavior.
+To reference an existing QRCode instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [QRCode client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
 
     // Place the following after the declaration of the QRCode for {{ site.framework }}.
     <script>

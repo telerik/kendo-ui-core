@@ -65,7 +65,7 @@ For a complete example on basic ListBox events, refer to the [demo on using the 
 
 ## Referencing Existing Instances
 
-To reference an existing  ListBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ListBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox) to control its behavior.
+To reference an existing  ListBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [ListBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/listbox#methods) to control its behavior.
 
 The following example demonstrates how to access an existing ListBox instance.
 

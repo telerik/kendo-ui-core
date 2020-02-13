@@ -114,7 +114,7 @@ For a complete example on basic MultiColumnComboBox events, refer to the [demo o
 
 ## Referencing Existing Instances
 
-To reference an existing MultiColumnComboBox instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiColumnComboBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox) to control its behavior.
+To reference an existing MultiColumnComboBox instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiColumnComboBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI MultiColumnComboBox for {{ site.framework }} declaration.

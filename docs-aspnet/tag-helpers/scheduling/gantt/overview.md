@@ -53,7 +53,7 @@ The following example demonstrates how to define the Gantt by using the Gantt Ta
 
 ## Basic Configuration
 
-With the attributes and inner tags you can define the columns, views, DataSource, messages, range and all other widget options available from the [API of the Gantt widget](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt).
+With the attributes and inner tags you can define the columns, views, DataSource, messages, range and all other widget options available from the [API of the Gantt widget](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt#methods).
 
     <kendo-gantt name="gantt" show-work-days="false" show-work-hours="false" snap="false" height="700">
         <tooltip visible="false" />

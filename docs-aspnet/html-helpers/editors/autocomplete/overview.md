@@ -130,7 +130,7 @@ For a complete example on basic AutoComplete events, refer to the [demo on using
 
 ## Referencing Existing Instances
 
-To reference an existing AutoComplete instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [AutoComplete client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete) to control its behavior.
+To reference an existing AutoComplete instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [AutoComplete client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI AutoComplete for {{ site.framework }} declaration.

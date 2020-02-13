@@ -72,7 +72,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [DatePicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker) to control its behavior.
+To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [DatePicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker#methods) to control its behavior.
 
         // Place the following after your Telerik UI DatePicker for {{ site.framework }} declaration.
         <script>

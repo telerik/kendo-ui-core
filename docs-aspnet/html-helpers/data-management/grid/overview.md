@@ -116,7 +116,7 @@ For more information on implementing specific scenarios, refer to the [**Knowled
 
 ## Referencing Existing Instances
 
-To refer to an existing Grid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) to control its behavior.
+To refer to an existing Grid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
 
         <script>
         $(function() {

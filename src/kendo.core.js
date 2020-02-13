@@ -4463,6 +4463,18 @@ function pad(number, digits, end) {
         });
     };
 
+    kendo.focusNextElement = function () {
+        if (document.activeElement) {
+            var focussable = $(":kendoFocusable");
+            var index = focussable.index(document.activeElement);
+
+            if(index > -1) {
+               var nextElement = focussable[index + 1] || focussable[0];
+               nextElement.focus();
+            }
+        }
+    };
+
     kendo.matchesMedia = function(mediaQuery) {
         var media = kendo._bootstrapToMedia(mediaQuery) || mediaQuery;
         return support.matchMedia && window.matchMedia(media).matches;

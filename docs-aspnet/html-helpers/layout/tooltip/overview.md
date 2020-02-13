@@ -60,7 +60,7 @@ For a complete example on basic Tooltip events, refer to the [demo on using the 
 
 ## Referencing Existing Instances
 
-To reference an existing Tooltip instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Tooltip API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip) to control its behavior.
+To reference an existing Tooltip instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Tooltip client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI Tooltip for {{ site.framework }} declaration.
