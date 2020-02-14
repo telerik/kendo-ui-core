@@ -4513,12 +4513,8 @@ function pad(number, digits, end) {
         var groups = Object.keys(fileTypeMap);
         var type = "file";
 
-        if (extension === undefined) {
-            return "";
-        }
-
-        if (extension === "") {
-            return "folder";
+        if (extension === undefined || !extension.length) {
+            return type;
         }
 
         for (var i = 0; i < groups.length; i += 1) {
