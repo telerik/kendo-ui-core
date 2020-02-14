@@ -10,7 +10,7 @@ position: 3
 
 The demo below demonstrates how to allow the user to change the theme of the application.
 
-To see the example, refer to the GitHub repo on how to [change the theme on the client]{% if site.core %}(https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Kendo.Examples.Mvc/Kendo.Examples.Mvc/Views/StylesAndLayout/ClientThemeChange.cshtml){% else %}(https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/styles-and-layout/ChangingThemesOnTheClient){% endif %}.
+To see the example, refer to the GitHub repo on how to [change the theme on the client]{% if site.core %}(https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/StylesAndLayout/ClientThemeChange.cshtml){% else %}(https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/styles-and-layout/ChangingThemesOnTheClient){% endif %}.
 
 ## See Also
 
