@@ -35,6 +35,7 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         KEYDOWN_NS = "keydown" + NS,
+        DISABLED = "k-state-disabled",
 
         browser = kendo.support.browser,
         isIE8 = browser.msie && browser.version < 9;
@@ -93,10 +94,9 @@ var __meta__ = { // jshint ignore:line
             if (arguments.length === 0) {
                 enable = true;
             }
-            $(".k-disabled-overlay", this.wrapper).remove();
-            if (!enable) {
-                this.wrapper.append("<div class='k-disabled-overlay'></div>");
-            }
+
+            this.wrapper.toggleClass(DISABLED, !enable);
+
             this._onEnable(enable);
         },
         _select: function(color, nohooks) {
