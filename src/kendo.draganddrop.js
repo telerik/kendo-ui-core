@@ -642,7 +642,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             if (kendo.support.touch) {
-                that.element.css('touch-action', 'none');
+                that.element.find(that.options.filter).css('touch-action', 'none');
             }
 
             that._afterEndHandler = proxy(that._afterEnd, that);
