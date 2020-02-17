@@ -2949,13 +2949,6 @@ td.k-group-cell,
     border-radius: 0;
 }
 
-.k-pager-numbers .k-state-selected {
-    border-color: @selected-text-color transparent transparent;
-    border-radius: 0;
-    .box-shadow(none);
-    color: @selected-text-color;
-}
-
 .k-pager-wrap .k-link {
     border-color: @secondary-background-color;
     cursor: pointer;
@@ -2964,6 +2957,14 @@ td.k-group-cell,
 .k-pager-wrap .k-link:hover {
     background-color: transparent;
     border-color: transparent;
+}
+
+.k-pager-numbers .k-state-selected,
+.k-pager-numbers .k-state-selected:hover {
+    border-color: @selected-text-color transparent transparent;
+    border-radius: 0;
+    .box-shadow(none);
+    color: @selected-text-color;
 }
 
 .k-scheduler-toolbar > ul li:first-child,
