@@ -3683,7 +3683,7 @@ declare namespace kendo.ui {
         getSize(): void;
         destroy(): void;
         setDataSource(dataSource: kendo.data.FileManagerDataSource): void;
-        
+
     }
 
     interface FileManagerBreadcrumb {
@@ -19542,9 +19542,9 @@ declare namespace kendo {
     namespace drawing {
         function align(elements: any, rect: kendo.geometry.Rect, alignment: string): void;
         function drawDOM(element: JQuery, options: any): JQueryPromise<any>;
-        function exportImage(group: kendo.drawing.Group, options: any): JQueryPromise<any>;
-        function exportPDF(group: kendo.drawing.Group, options: kendo.drawing.PDFOptions): JQueryPromise<any>;
-        function exportSVG(group: kendo.drawing.Group, options: any): JQueryPromise<any>;
+        function exportImage(group: kendo.drawing.Group, options?: any): JQueryPromise<any>;
+        function exportPDF(group: kendo.drawing.Group, options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
+        function exportSVG(group: kendo.drawing.Group, options?: any): JQueryPromise<any>;
         function fit(element: kendo.drawing.Element, rect: kendo.geometry.Rect): void;
         function stack(elements: any): void;
         function vAlign(elements: any, rect: kendo.geometry.Rect, alignment: string): void;
