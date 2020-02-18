@@ -1082,7 +1082,7 @@ var __meta__ = { // jshint ignore:line
 
                     that._toggleCloseVisibility();
                 }
-                else if (value === "") {
+                else if (value === "" && that._prev !== "") {
                     that._clearValue();
                     that.search("");
                 }

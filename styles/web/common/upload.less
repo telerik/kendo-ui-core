@@ -395,3 +395,28 @@ html .k-upload
 .k-rtl .k-file-extension-wrapper {
     margin-left: 14px;
 }
+
+.k-upload .k-action-buttons {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    clear: both;
+
+    .k-button {
+        flex: 1 1 auto;
+        margin: 0;
+    }
+
+    .k-button + .k-button {
+        margin: 0;
+    }
+}
+
+.k-no-flexbox .k-upload .k-action-buttons .k-button {
+    border-width: 0;
+}
+
+
+
+

@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2020.1.114
+// Type definitions for Kendo UI Professional v2020.1.219
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -3683,7 +3683,7 @@ declare namespace kendo.ui {
         getSize(): void;
         destroy(): void;
         setDataSource(dataSource: kendo.data.FileManagerDataSource): void;
-        
+
     }
 
     interface FileManagerBreadcrumb {
@@ -4832,7 +4832,7 @@ declare namespace kendo.ui {
     }
 
     interface GridScrollable {
-        virtual?: boolean;
+        virtual?: boolean|string;
         endless?: boolean;
     }
 
