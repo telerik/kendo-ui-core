@@ -260,9 +260,9 @@ Videos can be added through the `.k-card-media` class.
     </div>
     <span class="k-card-separator"></span>
     <div class="k-card-actions">
-        <span class="k-button k-flat"><span class="k-icon k-i-heart-outline"></span></span>
-        <span class="k-button k-flat"><span class="k-icon k-i-comment"></span></span>
-        <span class="k-button k-flat"><span class="k-icon k-i-share"></span></span>
+        <span class="k-button k-flat k-button-icon"><span class="k-icon k-i-heart-outline"></span></span>
+        <span class="k-button k-flat k-button-icon"><span class="k-icon k-i-comment"></span></span>
+        <span class="k-button k-flat k-button-icon"><span class="k-icon k-i-share"></span></span>
     </div>
 </div>
 ```
