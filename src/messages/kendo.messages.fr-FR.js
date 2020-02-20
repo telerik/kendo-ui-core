@@ -609,4 +609,14 @@ if (kendo.ui.ColorPicker) {
   });
 }
 
+/* Numeric text box messages */
+
+if (kendo.ui.NumericTextBox) {
+  kendo.ui.NumericTextBox.prototype.options =
+  $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
+    "upArrowText": "Augmenter la valeur",
+    "downArrowText": "Diminuer la valeur"
+  });
+}
+
 })(window.kendo.jQuery);
