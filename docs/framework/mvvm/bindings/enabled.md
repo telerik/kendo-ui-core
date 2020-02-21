@@ -15,7 +15,7 @@ The `enabled` binding supports only input HTML elements&mdash;`input`, `select`,
 
 Non-Boolean values, such as `0`, `null`, `undefined`, and `""`, are treated as `false` by the `enabled` binding. All other values are treated as `true`.
 
-The following example demonstrates how to use the `enabeled` binding. The `input` element is initially disabled because the value of the `isNameEnabled` field is `false`. When the user presses the button, the `input` is enabled because the value of the `isNameEnabled` field is set to `true`.
+The following example demonstrates how to use the `enabled` binding. The `input` element is initially disabled because the value of the `isNameEnabled` field is `false`. When the user presses the button, the `input` is enabled because the value of the `isNameEnabled` field is set to `true`.
 
     <div id="view">
         <input type="text" data-bind="value: name, enabled: isNameEnabled" />
