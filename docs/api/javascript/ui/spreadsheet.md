@@ -1457,7 +1457,7 @@ The [sheet](/api/javascript/spreadsheet/sheet) to set as active.
 
 #### Returns
 
-`kendo.spreadsheet.Sheet` - The active sheet.
+`kendo.spreadsheet.Sheet` - The active [sheet](/api/javascript/spreadsheet/sheet).
 
 #### Example - changing the active sheet
 
