@@ -363,8 +363,8 @@ Sets the field of the data item that provides the CSS class of the tab.
             dataTextField: "Name",
             dataSpriteCssClass: "CssClass",
             dataSource: [
-              { Name: "Tab1", dataSpriteCssClass: "class1" },
-              { Name: "Tab2", dataSpriteCssClass: "class2" }
+              { Name: "Tab1", CssClass: "class1" },
+              { Name: "Tab2", CssClass: "class2" }
             ]
         });
     </script>
