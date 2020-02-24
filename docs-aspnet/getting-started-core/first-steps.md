@@ -84,13 +84,21 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 
 	7.1 Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since the Microsoft project uses Bootstrap, you can use the Kendo UI SASS Bootstrap v4 theme to match it.
 
-	7.2 The Microsoft template comes with a jQuery script reference in the body. Find it and move it to the head.
+	7.2 The Microsoft ASP.NET Core Web Application template comes with a jQuery script reference at the end of _Layout.cshtml file. Find it and remove it. The Kendo UI script files required by UI for ASP.NET Core must be loaded in the `<head>` tag after the `jQuery` script. 
 
-	7.3 After `jQuery`, copy and paste the scripts from this snippet. Make sure that the versions match `Kendo.Mvc.dll`. For more information, refer to the article on [including client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+	7.3 Copy and paste the scripts from the snippet bellow to the `<head>` tag in the _Layout. The content of the `<head>` tag with the theme file and the script files included should look as shown in the snippet below. `kendo.all.min.js` and `kendo.aspnetmvc.min.js` script files have to be loaded after the `jquery.min.js` script. `jQuery` should be loaded only once in the `<head>` tag. Make sure there are no duplicate references elsewhere in the _Layout. 
 
-		<link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>   			
+		<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>@ViewData["Title"] - TelerikAspNetCoreApp</title>
+
+		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
+
+		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
+		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+		</head>   			
 
 1. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
