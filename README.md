@@ -25,7 +25,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Color Picker](http://demos.telerik.com/kendo-ui/colorpicker/index)   | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [DateInput](https://demos.telerik.com/kendo-ui/dateinput/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [DateRangePicker](http://demos.telerik.com/kendo-ui/daterangepicker/index)      | :x: | :white_check_mark: | :white_check_mark:           |
 | [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | :white_check_mark: | :white_check_mark: | :white_check_mark:        |
 | [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |

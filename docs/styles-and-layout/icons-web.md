@@ -478,9 +478,10 @@ fonts in fonts/
     <li><span class="k-icon k-i-parameter-float"></span> .k-i-parameter-float</li>
     <li><span class="k-icon k-i-parameter-integer"></span> .k-i-parameter-integer</li>
     <li><span class="k-icon k-i-parameter-string"></span> .k-i-parameter-string</li>
+    <li><span class="k-icon k-i-parameters-byte-array"></span> .k-i-parameters-byte-array</li>
+    <li><span class="k-icon k-i-parameters-unknown"></span> .k-i-parameters-unknown</li>
     <li><span class="k-icon k-i-toc-section-level"></span> .k-i-toc-section-level</li>
     <li><span class="k-icon k-i-inherited"></span> .k-i-inherited</li>
-
     <li><span class="k-icon k-i-file-video"></span> .k-i-file-video</li>
     <li><span class="k-icon k-i-file-audio"></span> .k-i-file-audio</li>
     <li><span class="k-icon k-i-file-image"></span> .k-i-file-image</li>
@@ -488,6 +489,8 @@ fonts in fonts/
     <li><span class="k-icon k-i-file-data"></span> .k-i-file-data</li>
     <li><span class="k-icon k-i-file-disc-image"></span> .k-i-file-disc-image</li>
     <li><span class="k-icon k-i-file-programming"></span> .k-i-file-programming</li>
+    <li><span class="k-icon k-i-file-error"></span> .k-i-file-error</li>
+    <li><span class="k-icon k-i-files-error"></span> .k-i-files-error</li>
 </ul>
 
 ### Images

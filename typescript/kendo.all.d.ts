@@ -313,7 +313,7 @@ declare namespace kendo {
         first(events: string[], handlers: { [eventName: string]: Function}): Observable;
 
         trigger(eventName: string, e?: any): boolean;
-        unbind(eventName: string, handler?: any): Observable;
+        unbind(eventName?: string, handler?: any): Observable;
     }
 
     interface ViewOptions {
@@ -757,6 +757,7 @@ declare namespace kendo.data {
         insert(index: number, model: kendo.data.SchedulerEvent): kendo.data.SchedulerEvent;
         insert(index: number, model: Object): kendo.data.SchedulerEvent;
         remove(model: kendo.data.SchedulerEvent): void;
+        expand(start: Date, end: Date): kendo.data.SchedulerEvent;
     }
 
     class GanttDataSource extends DataSource {
@@ -9703,6 +9704,7 @@ declare namespace kendo.ui {
     interface WindowAnimationClose {
         effects?: string;
         duration?: number;
+        reverse?: boolean;
     }
 
     interface WindowAnimationOpen {

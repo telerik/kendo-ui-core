@@ -2,7 +2,6 @@
 title: Overview
 page_title: jQuery Spreadsheet Documentation | Spreadsheet Globalization | Kendo UI
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn about the globalization options it supports."
-previous_url: /localization
 slug: globalization_kendoui_spreadsheet_widget
 position: 1
 ---

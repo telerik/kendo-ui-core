@@ -2,7 +2,6 @@
 title: Overview
 page_title: jQuery Grid Documentation | Grid Globalization | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn about the globalization options it supports."
-previous_url: /localization
 slug: globalization_kendoui_grid_widget
 position: 1
 ---

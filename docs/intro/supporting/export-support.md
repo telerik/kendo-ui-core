@@ -2,7 +2,6 @@
 title: Export Support
 page_title: Export Support | Support and Distribution | Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and learn about the versions of the Pako and JSZip libraries supported by the Kendo UI for jQuery and used for PDF and Excel export."
-previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites, /technical-requirements
 slug: export_support_kendoui
 position: 4
 ---
