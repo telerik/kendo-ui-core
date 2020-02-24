@@ -309,6 +309,15 @@
             assert.equal(lastSmallTick.attr("title"), 23);
         });
 
+
+        it("slider should handle inaccurate fraction calculations", function() {
+            var slider = newSlider({ min: 0, max: 1.2, smallStep: 0.2, largeStep: 0.4 }, $("<input />"));
+            var lastLargeTick = slider.wrapper.find(".k-tick-large:last");
+            assert.equal(lastLargeTick.text(), 1.2);
+            assert.isOk(lastLargeTick.is(".k-last"));
+            assert.isOk(!!lastLargeTick.width());
+        });
+
         it("slider should not modify input value with bg-BG culture", function() {
             kendo.culture("bg-BG");
             var slider = newSlider({}, $("<input value='5,5' />"));
