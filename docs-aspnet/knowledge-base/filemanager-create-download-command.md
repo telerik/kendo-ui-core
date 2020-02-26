@@ -106,4 +106,4 @@ On the server-side you will need to implement a server-side action to return the
 ## See Also
 
 * [Create custom Kendo UI Widget](https://docs.telerik.com/kendo-ui/intro/widget-basics/create-custom-kendo-widget)
-* [Create custom Kendo File Manager command]({% slug howto_create_custom_filemanager_command %})
+* [Create custom Kendo File Manager command](https://docs.telerik.com/kendo-ui/knowledge-base/filemanager-create-custom-command)
