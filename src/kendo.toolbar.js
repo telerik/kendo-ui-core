@@ -38,6 +38,8 @@ var __meta__ = { // jshint ignore:line
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
 
+        ARIA_DISABLED = "aria-disabled",
+
         ICON = "k-icon",
         ICON_PREFIX = "k-i-",
         BUTTON_ICON = "k-button-icon",
@@ -130,6 +132,8 @@ var __meta__ = { // jshint ignore:line
                     isEnabled = true;
                 }
                 this.element.toggleClass(STATE_DISABLED, !isEnabled);
+                this.element.attr(ARIA_DISABLED, !isEnabled);
+
                 this.options.enable = isEnabled;
             },
 
@@ -639,6 +643,7 @@ var __meta__ = { // jshint ignore:line
 
                 this.mainButton.enable(isEnabled);
                 this.element.toggleClass(STATE_DISABLED, !isEnabled);
+                this.element.attr(ARIA_DISABLED, !isEnabled);
                 this.options.enable = isEnabled;
             },
 

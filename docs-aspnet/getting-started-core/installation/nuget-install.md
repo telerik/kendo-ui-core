@@ -59,6 +59,8 @@ This section provides solutions for common issues you might encounter while usin
 
 After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your new password"` command.
 
+The password must contain only ASCII characters.
+
 ### The NuGet package takes too long to install or update on Visual Studio
 
 * Disable the auto-sync in the `_references.js` file by modifying the following `/// <autosync enabled="false" />` line.

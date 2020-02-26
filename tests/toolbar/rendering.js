@@ -89,6 +89,30 @@
             assert.isOk(button.hasClass("k-state-disabled"));
         });
 
+        it("by default the button has aria-disabled attribute set to false", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", id: "foo", text: "foo" }
+                ]
+            });
+
+            var button = container.find("#foo");
+
+            assert.equal(button.attr("aria-disabled"), "false");
+        });
+
+        it("button with enable: false receives aria-disabled attribute", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", id: "foo", text: "foo", enable: false }
+                ]
+            });
+
+            var button = container.find("#foo");
+
+            assert.equal(button.attr("aria-disabled"), "true");
+        });
+
         it("splitbutton with enable: false receives k-state-disabled class", function() {
             container.kendoToolBar({
                 items: [{
@@ -109,6 +133,25 @@
 
             assert.isOk(mainbutton.hasClass("k-state-disabled"));
             assert.isOk(splitbutton.hasClass("k-state-disabled"));
+        });
+
+        it("splitbutton with enable: false has aria-disabled attribute equal to true", function() {
+            container.kendoToolBar({
+                items: [{
+                    type: "splitButton",
+                    id: "foo",
+                    text: "foo",
+                    enable: false,
+                    menuButtons: [
+                        { id: "btn", text: "text" }
+                    ]
+                }
+                ]
+            });
+
+            var mainbutton = container.find("#foo");
+
+            assert.equal(mainbutton.attr("aria-disabled"), "true");
         });
 
         it("by default button does not have k-primary class", function() {

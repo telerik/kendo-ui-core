@@ -333,5 +333,49 @@
 
         multiselect.element.click();
     });
+
+    it("MultiSelect triggers deselect on tag remove in single tagMode", function(done) {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            deselect: function(e) {
+                assert.equal(e.dataItem, this.dataItems()[0]);
+                assert.equal(e.item[0], this.tagList.children().first()[0]);
+                done();
+            },
+            value: ["1"]
+        });
+
+        multiselect._clearValue();
+    });
+
+    it("MultiSelect triggers deselect for every item on tag remove in single tagMode", function() {
+        var callCount = 0;
+
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            deselect: function() {
+                callCount += 1;
+            },
+            value: ["0", "1"]
+        });
+
+        multiselect._clearValue();
+
+        assert.equal(callCount, 2);
+    });
+
+    it("MultiSelect does not allow tag remove if deselected is prevented in single tagMode", function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            deselect: function(e) {
+                e.preventDefault();
+            },
+            value: ["0", "1"]
+        });
+
+        multiselect._clearValue();
+
+        assert.equal(multiselect.value().length, 2);
+    });
     });
 }());
