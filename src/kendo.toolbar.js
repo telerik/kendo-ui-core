@@ -39,6 +39,7 @@ var __meta__ = { // jshint ignore:line
         PRIMARY = "k-primary",
 
         ARIA_DISABLED = "aria-disabled",
+        ARIA_PRESSED = "aria-pressed",
 
         ICON = "k-icon",
         ICON_PREFIX = "k-i-",
@@ -311,6 +312,10 @@ var __meta__ = { // jshint ignore:line
             select: function(selected) {
                 if (selected === undefined) {
                     selected = false;
+                }
+
+                if (this.options.togglable) {
+                    this.element.attr(ARIA_PRESSED, selected);
                 }
 
                 this.element.toggleClass(STATE_ACTIVE, selected);

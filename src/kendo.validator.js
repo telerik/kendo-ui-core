@@ -461,6 +461,16 @@ var __meta__ = { // jshint ignore:line
                 results.push(errors[error]);
             }
             return results;
+        },
+
+        setOptions: function(options) {
+            var currentOptions = kendo.deepExtend(this.options, options);
+
+            this.destroy();
+
+            this.init(this.element, currentOptions);
+
+            this._setEvents(currentOptions);
         }
     });
 

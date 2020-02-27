@@ -674,6 +674,20 @@
             assert.isOk(kendo.isFunction(overflowToggleHandler), "Toggle event handler is saved in the data of the overflowButton element");
         });
 
+        it("toggleButton receives aria-pressed attribute", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", togglable: true, text: "foo", selected: false },
+                    { type: "button", togglable: true, text: "bar", selected: true }
+                ]
+            });
+
+            var buttons = container.find(".k-toggle-button");
+
+            assert.equal(buttons.eq(0).attr("aria-pressed"), "false");
+            assert.equal(buttons.eq(1).attr("aria-pressed"), "true");
+        });
+
         /* BUTTON GROUP */
 
         it("renders ButtonGroup from JSON", function() {
@@ -993,6 +1007,24 @@
 
             var overflowButton = toolbar.popup.element.find("#btn2_overflow");
             assert.isOk(overflowButton.hasClass("k-group-end"));
+        });
+
+        it("ButtonGroup buttons receive aria-pressed attribute", function() {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "buttonGroup", buttons: [
+                            { id: "btn1", text: "Btn1", togglable: true, selected: false },
+                            { id: "btn2", text: "Btn2", togglable: true, selected: true }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var buttons = toolbar.element.find(".k-toggle-button");
+
+            assert.equal(buttons.eq(0).attr("aria-pressed"), "false");
+            assert.equal(buttons.eq(1).attr("aria-pressed"), "true");
         });
 
         /* SPLIT BUTTON */

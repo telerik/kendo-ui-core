@@ -245,6 +245,35 @@ Input element to be validated.
 
 `Boolean` `true` if all validation rules passed successfully.
 
+### setOptions
+
+Sets the options of the Validator. Use this method if you want to enable/disable a particular option dynamically.
+
+When `setOptions` is called, the Validator widget will be destroyed and recreated with the new options.
+
+#### Parameters
+
+##### options `Object`
+
+The configuration options to be set.
+
+#### Example - set sortable feature of the Grid to true
+
+    <div id="myform">
+        <input name="username" required /> <br />
+        <input name="location" required /> <br />
+
+        <button>Validate</button>
+    </div>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator().data("kendoValidator");
+
+        //update options
+        validator.setOptions({ validateOnBlur: false });
+    </script>
+
 ## Events
 
 ### validate
@@ -347,4 +376,4 @@ True if validation is passed, otherwise false.
         validatable.bind("validateInput", function(e) {
             console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
         });
-      </script>      
+      </script>

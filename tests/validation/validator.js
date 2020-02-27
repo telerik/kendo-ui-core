@@ -1675,5 +1675,27 @@
 
             validator.validate();
         });
+
+        it("setOptions updates options", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container);
+
+            validator.setOptions({
+                errorTemplate: "<span>#=message#</span>",
+                validateOnBlur: false,
+                messages: {
+                    custom: "Please enter valid value for my custom rule"
+                },
+                rules: {
+                    customRule1: function(input) { return false; }
+                }
+            });
+            var options = validator.options;
+
+            assert.equal(options.errorTemplate, "<span>#=message#</span>");
+            assert.equal(options.validateOnBlur, false);
+            assert.equal(options.messages.custom, "Please enter valid value for my custom rule");
+            assert.equal(options.rules.customRule1.length, 1);
+        });
     });
 }());
