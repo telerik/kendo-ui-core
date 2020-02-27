@@ -421,7 +421,7 @@ The supported operators are:
 * `"isempty"`
 * `"isnotempty"`
 
-The last five are supported only for string fields.
+The last eight are supported only for string fields.
 
 #### Example - set the filter operator
 
