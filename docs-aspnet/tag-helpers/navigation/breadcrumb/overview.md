@@ -12,7 +12,7 @@ The Telerik UI Breadcrumb tag helper for ASP.NET Core is a server-side wrapper f
 
 The Breadcrumb is an intuitive UI component that allows navigation within a folder structure or web page. It provides an easy way to navigate backwards by one or multiple steps.
 
-* [Demo page for the Breadcrumb](https://demos.telerik.com/aspnet-core/breadcrumb/tag-helpers)
+* [Demo page for the Breadcrumb](https://demos.telerik.com/aspnet-core/breadcrumb/tag-helper)
 
 ## Initializing the Breadcrumb
 

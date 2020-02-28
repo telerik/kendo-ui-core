@@ -3,7 +3,7 @@ title: Destroying Helpers
 page_title: Destroying Widgets
 description: "Get started with Telerik UI for ASP.NET Core and learn how to destroy the HTML and Tag Helpers."
 slug: destroyhelpers_core
-position: 2
+position: 3
 permalink: /getting-started/helper-basics/destroy
 ---
 
