@@ -12,16 +12,16 @@ The Preview Pane in the {{ site.product }} FileManager shows additional informat
 The preview pane visibility could be toggled by the Switch Tool in the FileManager Toolbar. By default, it shows the following information about the selected file or folder:
 
 * Thumbnail (with the name of the file/folder)
-* File extension 
+* File extension
 * File size
-* Date created 
+* Date created
 * Date modified
 
 The `MetaFields` object in the PreviewPane configuration, allows you to control which fields from the above-enumerated should be displayed. If you need to show only the Extension and Size information in the Preview Pane, the configuration would be as follows:
 
-       
+
         @(Html.Kendo().FileManager()
-                .Name("filemanager")               
+                .Name("filemanager")
                 .PreviewPane(p => p.MetaFields("size", "extension"))
                .....
         )
@@ -38,7 +38,7 @@ You can customize the Preview Pane layout by specifying a kendo Template. The Pa
 
 The following example demonstrates a singleFileTemplate declaration in the FileManager
 
-        @(Html.Kendo().FileManager().Name("filemanager")            
+        @(Html.Kendo().FileManager().Name("filemanager")
            .PreviewPane(p => p.SingleFileTemplateId("preview-template"))
             ......
         )
@@ -79,7 +79,7 @@ The following example demonstrates a singleFileTemplate declaration in the FileM
 ## See Also
 
 * [Overview of {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_overview %})
-* [Basic Usage of the {{ site.product }} FileManager (Demo)](https://demos.telerik.com/{{ site.product }}/filemanager/index)
+* [Basic Usage of the {{ site.product }} FileManager (Demo)](https://demos.telerik.com/aspnet-core/filemanager/index)
 * [Client API section](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager)
 * [Sort in {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_sort %})
 * [Toolbar Commands in {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_toolbar %})

@@ -1270,7 +1270,7 @@ populated at the time the template function is called, if the Grid uses remote b
                   dataValueField: "value"
                 });
               }
-            } 
+            }
           }
         }],
         filterable: { mode: "row"},
@@ -2480,7 +2480,7 @@ The text that is displayed in the column header cell. If not set the [field](col
 
 The width of the column. Numeric values are treated as pixels. The width option supports the fundamental measuring units. For instance:
 
-* `px` sets the width in pixels 
+* `px` sets the width in pixels
 * `cm` sets the width in centimeters
 * `mm` sets the width in millimeters
 * `%` sets the width relative to the grid's element width
@@ -6476,86 +6476,7 @@ Introduced in the Kendo UI 2017 R3 release.
       ],
       pageable: {
         pageSize: 5,
-		alwaysVisible: false
-      }
-    });
-    </script>
-
-### pageable.pageSize `Number`
-
-The number of data items which will be displayed in the grid. **This setting will not work if the Grid is assigned an already existing Kendo UI DataSource instance.**
-
-#### Example - set page size
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-      ],
-      pageable: {
-        pageSize: 2
-      }
-    });
-    </script>
-
-### pageable.previousNext `Boolean` *(default: true)*
-
-If set to `true` the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.
-
-#### Example - hide the first, previous, next, and last buttons
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-      ],
-      pageable: {
-        pageSize: 2,
-        previousNext: false
-      }
-    });
-    </script>
-
-### pageable.numeric `Boolean` *(default: true)*
-
-If set to `true` the pager will display buttons for navigating to specific pages. By default those buttons are displayed.
-
-Using `pageable.numeric` and [`pageable.input`](pageable.input) at the same time is not recommended.
-
-#### Example - hide the numeric pager buttons
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-      ],
-      pageable: {
-        pageSize: 2,
-        numeric: false
+        alwaysVisible: false
       }
     });
     </script>
@@ -6586,6 +6507,32 @@ The maximum number of buttons displayed in the numeric pager. The pager will dis
     });
     </script>
 
+### pageable.info `Boolean` *(default: true)*
+
+If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.
+
+##### Example - hide the paging information
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        info: false
+      }
+    });
+    </script>
+
 ### pageable.input `Boolean` *(default: false)*
 
 If set to `true` the pager will display an input element which allows the user to type a specific page number. By default the page input is not displayed.
@@ -6610,151 +6557,6 @@ Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same ti
       pageable: {
         pageSize: 2,
         input: true
-      }
-    });
-    </script>
-
-### pageable.pageSizes `Boolean|Array` *(default: false)*
-
-If set to `true` the pager will display a drop-down which allows the user to pick a page size.
-By default the page size drop-down is not displayed.
-
-Can be set to an array of predefined page sizes to override the default list.
-A special `all` value is supported. It sets the page size to the total number of records.
-
-If a `pageSize` setting is provided for the data source then this value will be selected initially.
-
-#### Example - show the page size DropDownList
-
-    <div id="grid"></div>
-    <script>
-      $("#grid").kendoGrid({
-        columns: [
-          { field: "productName" },
-          { field: "category" }
-        ],
-        dataSource: {
-          data: [
-            { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Water", category: "Beverages" },
-            { productName: "Juice", category: "Beverages" },
-            { productName: "Decaffeinated Coffee", category: "Beverages" },
-            { productName: "Iced Tea", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" },
-            { productName: "Eggs", category: "Food" },
-            { productName: "Bacon", category: "Food" },
-            { productName: "Chips", category: "Food" },
-            { productName: "Fish", category: "Food" }
-          ],
-          pageSize: 4
-        },
-        pageable: {
-          pageSizes: true
-        }
-      });
-    </script>
-
-#### Example - specify the page sizes as array
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: {
-        data: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-        ],
-        pageSize: 1
-      },
-      pageable: {
-        pageSizes: [2, 3, 4, "all"],
-        numeric: false
-      }
-    });
-    </script>
-
-### pageable.refresh `Boolean` *(default: false)*
-
-If set to `true` the pager will display the refresh button. Clicking the refresh button will refresh the grid. By default the refresh button is not displayed.
-
-#### Example - show the refresh button
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-      ],
-      pageable: {
-        pageSize: 2,
-        refresh: true
-      }
-    });
-    </script>
-
-### pageable.responsive `Boolean` *(default: true)*
-
-If set to `false` the pager will not be responsive. By default the pager is responsive.
-
-#### Example - show the responsive button
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-      ],
-      pageable: {
-        pageSize: 2,
-        responsive: false
-      }
-    });
-    </script>
-
-### pageable.info `Boolean` *(default: true)*
-
-If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.
-
-##### Example - hide the paging information
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category" }
-      ],
-      dataSource: [
-        { productName: "Tea", category: "Beverages" },
-        { productName: "Coffee", category: "Beverages" },
-        { productName: "Ham", category: "Food" },
-        { productName: "Bread", category: "Food" }
-      ],
-      pageable: {
-        pageSize: 2,
-        info: false
       }
     });
     </script>
@@ -7074,6 +6876,204 @@ The Tooltip of the ellipsis ("...") button, which appears when the number of pag
         messages: {
           morePages: "More pages"
         }
+      }
+    });
+    </script>
+
+### pageable.numeric `Boolean` *(default: true)*
+
+If set to `true` the pager will display buttons for navigating to specific pages. By default those buttons are displayed.
+
+Using `pageable.numeric` and [`pageable.input`](pageable.input) at the same time is not recommended.
+
+#### Example - hide the numeric pager buttons
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        numeric: false
+      }
+    });
+    </script>
+
+### pageable.pageSize `Number`
+
+The number of data items which will be displayed in the grid. **This setting will not work if the Grid is assigned an already existing Kendo UI DataSource instance.**
+
+#### Example - set page size
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2
+      }
+    });
+    </script>
+
+### pageable.pageSizes `Boolean|Array` *(default: false)*
+
+If set to `true` the pager will display a drop-down which allows the user to pick a page size.
+By default the page size drop-down is not displayed.
+
+Can be set to an array of predefined page sizes to override the default list.
+A special `all` value is supported. It sets the page size to the total number of records.
+
+If a `pageSize` setting is provided for the data source then this value will be selected initially.
+
+#### Example - show the page size DropDownList
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "productName" },
+          { field: "category" }
+        ],
+        dataSource: {
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Water", category: "Beverages" },
+            { productName: "Juice", category: "Beverages" },
+            { productName: "Decaffeinated Coffee", category: "Beverages" },
+            { productName: "Iced Tea", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" },
+            { productName: "Eggs", category: "Food" },
+            { productName: "Bacon", category: "Food" },
+            { productName: "Chips", category: "Food" },
+            { productName: "Fish", category: "Food" }
+          ],
+          pageSize: 4
+        },
+        pageable: {
+          pageSizes: true
+        }
+      });
+    </script>
+
+#### Example - specify the page sizes as array
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: {
+        data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+        ],
+        pageSize: 1
+      },
+      pageable: {
+        pageSizes: [2, 3, 4, "all"],
+        numeric: false
+      }
+    });
+    </script>
+
+### pageable.previousNext `Boolean` *(default: true)*
+
+If set to `true` the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.
+
+#### Example - hide the first, previous, next, and last buttons
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        previousNext: false
+      }
+    });
+    </script>
+
+### pageable.refresh `Boolean` *(default: false)*
+
+If set to `true` the pager will display the refresh button. Clicking the refresh button will refresh the grid. By default the refresh button is not displayed.
+
+#### Example - show the refresh button
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        refresh: true
+      }
+    });
+    </script>
+
+### pageable.responsive `Boolean` *(default: true)*
+
+If set to `false` the pager will not be responsive. By default the pager is responsive.
+
+#### Example - show the responsive button
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        responsive: false
       }
     });
     </script>
@@ -8623,7 +8623,7 @@ Cancels editing for the table row which is in edit mode. Reverts any changes mad
       });
       var grid = $("#grid").data("kendoGrid");
       grid.addRow();
-      
+
       setTimeout(function(){
         grid.cancelRow();
       }, 1000);
@@ -9527,9 +9527,9 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
       $("#btn").on("click", function(e){
         var rows = grid.select();
         var selectedIds = [];
-        
+
         $(rows).each(function(){
-          selectedIds.push($(this).attr("data-uid"))  
+          selectedIds.push($(this).attr("data-uid"))
         });
 
         console.log("Selected row Ids: " + selectedIds.join(", "));
@@ -10055,7 +10055,7 @@ The widget instance which fired the event.
     function grid_cellClose(e) {
         console.log(e.type);
     }
-    
+
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },

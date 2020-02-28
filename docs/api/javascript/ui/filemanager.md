@@ -318,6 +318,30 @@ Sets icon for the item. The icon should be one of the existing in the Kendo UI t
 ### toolbar.items.id `String`
 Specifies the ID of the button.
 
+### toolbar.click `Function`
+
+Fires when the user clicks a command button. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
+### toolbar.close `Function`
+
+Fires when the SplitButton's popup closes. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
+### toolbar.open `Function`
+
+Fires when the Split Button's popup opens. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
+### toolbar.toggle `Function`
+
+Fires when the user changes the checked state of a toggle button. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
+### toolbar.overflowClose `Function`
+
+Fires when the overflow popup container is about to close. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
+### toolbar.overflowOpen `Function`
+
+Fires when the overflow popup container is about to open. [Toolbar Events](/api/javascript/ui/toolbar#events).
+
 ### dialogs `Object`
 
 Specifies the composite Dialog widgets of the FileManager.
@@ -491,6 +515,26 @@ Specifies the spriteCssClass of the item.
 
 ### contextMenu.items.command `String`
 Specifies the command of the item.
+
+### contextMenu.close `Function`
+
+Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.open `Function`
+
+Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.activate `Function`
+
+Fires when a sub menu or the ContextMenu gets opened and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.deactivate `Function`
+
+Fires when a sub menu or the ContextMenu gets closed and its animation finished. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
+
+### contextMenu.select `Function`
+
+Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
 ### views `Object`
 
