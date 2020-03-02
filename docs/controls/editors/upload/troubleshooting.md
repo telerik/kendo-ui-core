@@ -19,7 +19,7 @@ This article provides solutions for common issues you may encounter while workin
 
 ## The Select button is partially visible and has no text
 
-The [Kendo UI Upload](http://demos.telerik.com/kendo-ui/upload/index) uses an opacity filter to overlay the default **Select** button of the file input. This filter is implemented as an ActiveX control in Internet Explorer version 8 and earlier. As such, it is subject to security settings and can be disabled. The following image demonstrates an affected component.
+The [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) uses an opacity filter to overlay the default **Select** button of the file input. This filter is implemented as an ActiveX control in Internet Explorer version 8 and earlier. As such, it is subject to security settings and can be disabled. The following image demonstrates an affected component.
 
 ![Upload ActiveX](upload-activex.png)
 
@@ -57,7 +57,7 @@ When a server error occurs, the complete server response is logged in the consol
 * Firefox&mdash;Install [Firebug](https://getfirebug.com) and enable the **Console** tab.
 * Chrome&mdash;Open the JavaScript console (`Ctrl`+`Shift`+`J`).
 * Safari&mdash;Enable the **Develop** menu from the **Preferences**/**Advanced** dialog. Open the error console from the **Develop** menu.
-* Any browser&mdash;Use a debugging proxy like [Fiddler](http://www.telerik.com/fiddler) or [Charles](http://www.charlesproxy.com/) to obtain the server response.
+* Any browser&mdash;Use a debugging proxy like [Fiddler](https://www.telerik.com/fiddler) or [Charles](http://www.charlesproxy.com/) to obtain the server response.
 
 ## See Also
 

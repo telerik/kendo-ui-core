@@ -11,9 +11,9 @@ position: 1
 
 The Dialog is a modal popup that brings information to the user.
 
-It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI for jQuery Window](http://www.telerik.com/kendo-ui/window) where the most prominent difference is the added functionality for actions and predefined dialogs.
+It also provides actions through its action buttons to prompt the user for input or to ask for a decision. The component can also contain more complex UI elements that require the focus of the user. The Dialog is a subset of the [Kendo UI for jQuery Window](https://www.telerik.com/kendo-ui/window) where the most prominent difference is the added functionality for actions and predefined dialogs.
 
-* [Demo page for the Dialog](http://demos.telerik.com/kendo-ui/dialog/index)
+* [Demo page for the Dialog](https://demos.telerik.com/kendo-ui/dialog/index)
 
 ## Initializing the Dialog
 
@@ -88,7 +88,7 @@ The following example demonstrates how to create a non-modal Dialog that contain
 
 ## Referencing Existing Instances
 
-To refer to an existing Dialog instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Dialog API](/api/javascript/ui/dialog) to control its behavior.
+To refer to an existing Dialog instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Dialog API](/api/javascript/ui/dialog) to control its behavior.
 
 The following example demonstrates how to access an existing Dialog instance.
 

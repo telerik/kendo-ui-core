@@ -35,5 +35,5 @@ For runnable examples on binding the PivotGrid to flat data, refer to the follow
 
 ## See Also
 
-* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)

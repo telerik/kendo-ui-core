@@ -13,12 +13,12 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Calendar](http://demos.telerik.com/kendo-ui/calendar/index) | jquery.js | |
+| [Calendar](https://demos.telerik.com/kendo-ui/calendar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.selectable.js | |
 | | kendo.calendar.js | |
-| [Gantt](http://demos.telerik.com/kendo-ui/gantt/index) | jquery.js | |
+| [Gantt](https://demos.telerik.com/kendo-ui/gantt/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
@@ -43,7 +43,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.sortable.js | |
 | | kendo.grid.js | |
 | | kendo.gantt.js | |
-| [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) | jquery.js | |
+| [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |

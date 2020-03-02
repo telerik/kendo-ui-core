@@ -12,7 +12,7 @@ The Chat allows the user to participate in chat sessions with other users or wit
 
 Chats provide support for default cards and actions, and enable the configuration of custom templates and custom components. They provide rich conversational experience that goes beyond the natural language understanding and personality of the chatbot. These features allow you to implement conversational UI in your applications by utilizing AI-powered frameworks that work with natural language processing either by following a predefined logical tree or for integrating P2P chat capabilities in the applications.
 
-* [Demo page for the Chat](http://demos.telerik.com/kendo-ui/chat/index)
+* [Demo page for the Chat](https://demos.telerik.com/kendo-ui/chat/index)
 
 ![Structure of the Chat](images/chat-structure-no-toolbar.png)
 
@@ -56,5 +56,5 @@ To initialize the Chat:
 
 ## See Also
 
-* [Basic Usage of the Chat (Demo)](http://demos.telerik.com/kendo-ui/chat/index)
+* [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

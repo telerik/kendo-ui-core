@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `editor` tag.
 
@@ -61,7 +61,7 @@ You can subscribe to all [events exposed by Kendo UI Editor](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Editor instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
+You are able to reference an existing Editor instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
 
 
 

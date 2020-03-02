@@ -1333,7 +1333,7 @@ The following list indicates the available tools. The tools which are part of a 
             toolbar: {
                 home: [
                     // for all available options, see the toolbar items configuration
-                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
+                    // https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar/configuration/items
                     {
                         type: "button",
                         text: "Custom",
@@ -1681,7 +1681,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/sp
     </script>
 
     <!-- Load JSZIP library to enable Excel export -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
 
 ### saveAsPDF
 
@@ -1725,7 +1725,7 @@ An `options` object with the same structure as the [`pdf`](/api/javascript/ui/sp
     </script>
 
     <!-- Load Pako library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
 ### sheetByName
 
@@ -2458,7 +2458,7 @@ If invoked, the Spreadsheet will not import the file.
 
 A promise that will be resolved when the import operation completes.
 
-The [progress handler](http://api.jquery.com/deferred.progress/) of the promise will be called periodically with the following arguments:
+The [progress handler](https://api.jquery.com/deferred.progress/) of the promise will be called periodically with the following arguments:
 * `sheet` - The current sheet. An instance of [`kendo.spreadsheet.Sheet`](/api/javascript/spreadsheet/sheet).
 * `progress` - A number if the range is from `0` to `1` which indicates the progress of the current import operation.
 

@@ -46,6 +46,6 @@ You can configure the ListBox messages for each toolbar command button. The mess
 
 ## See Also
 
-* [Basic Usage of the ListBox (Demo)](http://demos.telerik.com/kendo-ui/listbox/index)
+* [Basic Usage of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/index)
 * [Using the API of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/api)
 * [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)

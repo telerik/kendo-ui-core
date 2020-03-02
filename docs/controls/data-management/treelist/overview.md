@@ -138,7 +138,7 @@ The following example demonstrates how to subscribe to a TreeList event by using
 
 ## Referencing Existing Instances
 
-To refer to an existing TreeList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and pass `"kendoTreeList"` as an argument. Once a reference has been established, use the [API of the TreeList](/api/javascript/ui/treelist) to control its behavior.
+To refer to an existing TreeList instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method and pass `"kendoTreeList"` as an argument. Once a reference has been established, use the [API of the TreeList](/api/javascript/ui/treelist) to control its behavior.
 
 ```dojo
     <div id="treelist"></div>
@@ -163,6 +163,6 @@ To refer to an existing TreeList instance, use the [`jQuery.data()`](http://api.
 
 ## See Also
 
-* [Basic Usage of the TreeList (Demo)](http://demos.telerik.com/kendo-ui/treelist/index)
+* [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
 * [Using the API of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/api)
 * [TreeList JavaScript API Reference](/api/javascript/ui/treelist)

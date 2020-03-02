@@ -12,7 +12,7 @@ The hybrid Telerik UI ActionSheet HtmlHelper for ASP.NET MVC is a server-side wr
 
 The ActionSheet displays a set of choices related to a task the user initiates.
 
-* [Demo page for the ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index)
+* [Demo page for the ActionSheet](https://demos.telerik.com/kendo-ui/m/index#actionsheet/index)
 
 ## Basic Configuration
 

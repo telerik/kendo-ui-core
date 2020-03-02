@@ -12,18 +12,18 @@ You can set up the OLAP cube by using Microsoft SQL Server Analysis Services [SS
 
 ## Installing SSAS
 
-For more information on installing the [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx), refer to the [MSDN tutorial](http://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
+For more information on installing the [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx), refer to the [MSDN tutorial](https://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
 
 ## Defining the OLAP Cube
 
-For more information on creating, defining, and deploying the OLAP multidimensional cube, refer to the [MSDN multidimensional modelling tutorial](http://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx).
+For more information on creating, defining, and deploying the OLAP multidimensional cube, refer to the [MSDN multidimensional modelling tutorial](https://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx).
 
 ## Configuring the HTTP Access
 
 To enable the HTTP access to the SQL Server Analysis Services, use an `MSMDPUMP.ddl` ISAPI extension.
 
 * For more information on setting up the `MSMDPUMP.ddl` extension, refer to the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
-* For an online accessible OLAP service for testing purposes, use `http://demos.telerik.com/olap/msmdpump.dll`. The URL does not open directly in the browser.
+* For an online accessible OLAP service for testing purposes, use `https://demos.telerik.com/olap/msmdpump.dll`. The URL does not open directly in the browser.
 
 ## Enabling the Cross-Domain Access
 
@@ -37,7 +37,7 @@ The following sections demonstrate how to enable CORS on an [Internet Informatio
 
 To configure HTTP Response Headers, specify the following requirements:
 * The domains that will perform the data requests.
-* An [HTTP method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) through which the data will be transferred.
+* An [HTTP method](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) through which the data will be transferred.
 * The HTTP headers that can be used in the requests.
 * The user credentials that will be required if an authenticated access is used.
 
@@ -125,10 +125,10 @@ The following example demonstrates the list of settings that you have to apply.
 ### Accessing the Cube Securely
 
 To implement a secured access to the OLAP instance, use either of the following approaches:
-* Use a proxy service which communicates with the cube on a secured protocol. This proxy has to support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For more information, refer to [this forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll).
+* Use a proxy service which communicates with the cube on a secured protocol. This proxy has to support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For more information, refer to [this forum thread](https://www.telerik.com/forums/securing-access-to-msmdpump-dll).
 * Send the credentials with a request header even though the **Username** and **Password** will be visible on the client side (browser). For more information on passing credentials with request headers, refer to [this StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](/api/javascript/data/datasource/configuration/transport.read) object because they will be passed to the `$.ajax` method.
 
 ## See Also
 
-* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)

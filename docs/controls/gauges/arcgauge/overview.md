@@ -12,7 +12,7 @@ The ArcGauge represents a value on a circular arc.
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
-* [Demo page for the ArcGauge](http://demos.telerik.com/kendo-ui/arc-gauge/index)
+* [Demo page for the ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)
 
 ## Initializing the ArcGauge
 

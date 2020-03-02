@@ -32,10 +32,10 @@ How can I resize the Grid to match the visible column widths when hiding or show
 This approach prevents the appearance of white space in the widget when the sum of the widths of the visible columns is less than the initial width of the Grid.
 
 1. Store the initial width of the Grid in a variable.
-1. To call the method that performs the necessary calculations, use the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound), [`columnShow`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow), and [`columnHide`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) events.
+1. To call the method that performs the necessary calculations, use the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound), [`columnShow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnshow), and [`columnHide`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnhide) events.
 
 To access and loop through the columns, the `setGridWidth()` method:
-* Uses the [`columns`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-columns) field of the Grid.
+* Uses the [`columns`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#fields-columns) field of the Grid.
 * Calculates the sum of the visible column widths.
 * Adds the width of the vertical scrollbar when necessary.
 

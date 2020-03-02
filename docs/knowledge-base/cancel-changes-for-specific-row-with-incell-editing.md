@@ -59,11 +59,11 @@ The Kendo UI Grid does not provide a built-in solution for achieving this behavi
 
 For more details, refer to the following articles:
 
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/getbyuid](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/getbyuid)
-* [http://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/cancelchanges](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/cancelchanges)
-* [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/configuration/columns.command](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command)
+* [https://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/getbyuid](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/getbyuid)
+* [https://docs.telerik.com/kendo-ui/api/javascript/data/datasource\/methods/cancelchanges](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/cancelchanges)
+* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/configuration/columns.command](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.command)
 
-To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](http://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
+To resolve the resulting scroll-related issue which occurs after the refresh, [restore the scroll position by using a custom approach](https://docs.telerik.com/kendo-ui/controls/data-management/grid/appearance#restore-scroll-positions).
 
 ````dojo
 <div id="example">

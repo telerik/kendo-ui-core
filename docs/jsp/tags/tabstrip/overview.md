@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TabSt
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `tabstrip` tag.
 
@@ -86,7 +86,7 @@ You can subscribe to all [events exposed by Kendo UI TabStrip](/api/javascript/u
 
 ### Existing Instances
 
-You are able to reference an existing TabStrip instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
+You are able to reference an existing TabStrip instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
 
 
 

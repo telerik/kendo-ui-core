@@ -143,5 +143,5 @@ The following example demonstrates how to use all three options to customize the
 
 ## See Also
 
-* [Basic Usage of the Bullet Chart (Demo)](http://demos.telerik.com/kendo-ui/bullet-charts/index)
+* [Basic Usage of the Bullet Chart (Demo)](https://demos.telerik.com/kendo-ui/bullet-charts/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

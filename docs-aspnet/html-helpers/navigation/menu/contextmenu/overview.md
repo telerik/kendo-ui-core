@@ -65,7 +65,7 @@ The following example demonstrates the basic configuration of the ContextMenu Ht
     .Items(items =>
     {
         items.Add().Text("Item 1")
-            .ImageUrl(Url.Content("http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png"))
             .Items(children =>
             {
                 children.Add().Text("Top News");
@@ -75,7 +75,7 @@ The following example demonstrates the basic configuration of the ContextMenu Ht
                 children.Add().Text("Radio Records");
             });
         items.Add().Text("Item 2")
-            .ImageUrl(Url.Content("http://demos.telerik.com/kendo-ui/content/shared/icons/sports/golf.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/kendo-ui/content/shared/icons/sports/golf.png"))
             .Items(children =>
             {
                 children.Add().Text("Top News");
@@ -85,7 +85,7 @@ The following example demonstrates the basic configuration of the ContextMenu Ht
                 children.Add().Text("Radio Records");
             });
         items.Add().Text("Item 3")
-            .ImageUrl(Url.Content("http://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png"))
+            .ImageUrl(Url.Content("https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png"))
             .Items(children =>
             {
                 children.Add().Text("Top News");

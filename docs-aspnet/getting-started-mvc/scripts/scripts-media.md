@@ -13,7 +13,7 @@ The following table lists the individual script files for the Kendo UI Media wid
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [MediaPlayer](http://demos.telerik.com/kendo-ui/mediaplayer/index) | jquery.js | |
+| [MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
@@ -25,7 +25,7 @@ The following table lists the individual script files for the Kendo UI Media wid
 | | kendo.dropdownlist.js | |
 | | kendo.tooltip.js | |
 | | kendo.mediaplayer.js | |
-| [ScrollView](http://demos.telerik.com/kendo-ui/scrollview/index) | jquery.js | |
+| [ScrollView](https://demos.telerik.com/kendo-ui/scrollview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.data.js | |

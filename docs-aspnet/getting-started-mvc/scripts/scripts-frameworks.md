@@ -13,24 +13,24 @@ The following table lists the individual script files for the Kendo UI shared co
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [AngularJS Directives](http://docs.telerik.com/kendo-ui/AngularJS/introduction) | jquery.js | |
+| [AngularJS Directives](https://docs.telerik.com/kendo-ui/AngularJS/introduction) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.angular.js | |
 | [Core](https://github.com/telerik/kendo-ui-core) | jquery.js | |
 | | kendo.core.js | |
-| [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) | jquery.js | |
+| [Drawing API](https://demos.telerik.com/kendo-ui/drawing/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
 | | kendo.popup.js | |
 | | kendo.drawing.js | |
-| [Router](http://demos.telerik.com/kendo-ui/spa/index) | jquery.js | |
+| [Router](https://demos.telerik.com/kendo-ui/spa/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.router.js | |
-| [Touch](http://demos.telerik.com/kendo-ui/m/index#touchevents/mobile) | jquery.js | |
+| [Touch](https://demos.telerik.com/kendo-ui/m/index#touchevents/mobile) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.touch.js | |
-| [View](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) | jquery.js | |
+| [View](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.binder.js | |

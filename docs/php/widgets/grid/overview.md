@@ -113,7 +113,7 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI Grid instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Grid API](/api/javascript/ui/grid#methods) to control its behavior.
+You can reference the client-side Kendo UI Grid instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Grid API](/api/javascript/ui/grid#methods) to control its behavior.
 
 
 

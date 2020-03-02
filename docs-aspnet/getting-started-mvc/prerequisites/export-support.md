@@ -16,7 +16,7 @@ Telerik UI for ASP.NET MVC integrates the Pako and JSZip libraries to support th
 The [Pako Deflate library](https://nodeca.github.io/pako/#Deflate) enables the compression of the files that will be exported to PDF. To enable the PDF export, you need to load Pako in the specified page.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
 
 For more information on the available PDF export options by Kendo UI, refer to the articles on [PDF Export](https://docs.telerik.com/kendo-ui/framework/pdf/overview) and [PDF output by the Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/overview).
 
@@ -33,7 +33,7 @@ To take full advantage of the Excel export feature, download the [JSZip](http://
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
-    <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 
 JSZip is part of the Kendo UI distribution and is also available through the Kendo UI CDN.
 

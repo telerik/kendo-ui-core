@@ -92,4 +92,4 @@ Use an external input element as a search box. You can retrieve the string that 
       </script>
 ````
 
-For the complete implementation of the approach, refer to [this runnable example](http://dojo.telerik.com/EworIV/3).
+For the complete implementation of the approach, refer to [this runnable example](https://dojo.telerik.com/EworIV/3).

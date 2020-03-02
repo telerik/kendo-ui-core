@@ -11,11 +11,11 @@ position: 1
 
 ![The customer TreeView in the Kendo UI Sales Hub](images/kendo-saleshub-customer-treeview-screenshot.png)
 
-This article demonstrates how to create a [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html) on the server side.
+This article demonstrates how to create a [Kendo TreeView](https://demos.telerik.com/kendo-ui/web/treeview/index.html) on the server side.
 
-In the Sales Hub application, a [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html) is used to display all customers of a selling company. The Selling Company appears as a root node in the TreeView and the Customers for each Selling Company are grouped by the region in which the customer is located. So, the basic structure of the TreeView is: **Selling Company** > **Region** > **Customer Name**.
+In the Sales Hub application, a [Kendo TreeView](https://demos.telerik.com/kendo-ui/web/treeview/index.html) is used to display all customers of a selling company. The Selling Company appears as a root node in the TreeView and the Customers for each Selling Company are grouped by the region in which the customer is located. So, the basic structure of the TreeView is: **Selling Company** > **Region** > **Customer Name**.
 
-When a Customer is selected in the [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html), the **Orders** grid is updated to display only the Orders for the selected Customer. If you want to learn how the **Orders** grid is updated depending on the selected Customer, refer to the article on [filtering orders on the server side]({% slug filterordersonserver_saleshubtutorial_aspnetmvc %}).
+When a Customer is selected in the [Kendo TreeView](https://demos.telerik.com/kendo-ui/web/treeview/index.html), the **Orders** grid is updated to display only the Orders for the selected Customer. If you want to learn how the **Orders** grid is updated depending on the selected Customer, refer to the article on [filtering orders on the server side]({% slug filterordersonserver_saleshubtutorial_aspnetmvc %}).
 
 The Customer TreeView is located in `Views/Home/Index.cshtml`.
 

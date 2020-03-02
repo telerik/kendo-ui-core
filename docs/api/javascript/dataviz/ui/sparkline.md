@@ -5550,10 +5550,10 @@ The chart settings to update.
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the chart.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the chart.
 The returned string is a self-contained SVG document that can be used as is or
 converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/).
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/sparkline/methods/exportsvg), but will remain fully functional.
@@ -5607,7 +5607,7 @@ Returns a PNG image of the sparkline encoded as a [Data URL](https://developer.m
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);

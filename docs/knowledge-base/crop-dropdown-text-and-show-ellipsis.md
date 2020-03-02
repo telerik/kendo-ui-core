@@ -47,4 +47,4 @@ li.k-item {
 }
 ```
 
-For the full implementation, refer to [this Dojo example](http://dojo.telerik.com/IPOga).
+For the full implementation, refer to [this Dojo example](https://dojo.telerik.com/IPOga).

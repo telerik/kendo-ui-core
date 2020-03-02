@@ -22,7 +22,7 @@ All of the following series types that are supported by the StockChart are also 
 
 ![Stock Chart](stock-chart.png)
 
-* [Demo page for the StockChart](http://demos.telerik.com/kendo-ui/financial/index)
+* [Demo page for the StockChart](https://demos.telerik.com/kendo-ui/financial/index)
 
 ## Basic Configuration
 
@@ -92,5 +92,5 @@ The StockChart provides options for [binding it to data]({% slug databinding_ken
 
 ## See Also
 
-* [Basic Usage of the StockChart (Demo)](http://demos.telerik.com/kendo-ui/financial/index)
+* [Basic Usage of the StockChart (Demo)](https://demos.telerik.com/kendo-ui/financial/index)
 * [JavaScript API Reference of the StockChart](/api/javascript/dataviz/ui/stock-chart)

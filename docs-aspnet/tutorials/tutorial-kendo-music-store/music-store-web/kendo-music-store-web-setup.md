@@ -18,11 +18,11 @@ To set up the project, three steps must be applied:
 
 ## Add Kendo UI to Project
 
-Start by adding Kendo UI to the project. The Kendo UI distribution can be downloaded from [telerik.com](http://www.telerik.com/download/kendo-ui-complete), [referenced from the CDN](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service), or fetched with NuGet.
+Start by adding Kendo UI to the project. The Kendo UI distribution can be downloaded from [telerik.com](https://www.telerik.com/download/kendo-ui-complete), [referenced from the CDN](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service), or fetched with NuGet.
 
 ### Download Kendo UI
 
-The preferred method of getting Kendo UI is to browse to [telerik.com](http://www.telerik.com/download/kendo-ui) and download Kendo UI as a `.zip` file. Depending on whether you are using the Trial version or have purchased the full Commercial distribution, you have a `.zip` file that follows one of these directory structures:
+The preferred method of getting Kendo UI is to browse to [telerik.com](https://www.telerik.com/download/kendo-ui) and download Kendo UI as a `.zip` file. Depending on whether you are using the Trial version or have purchased the full Commercial distribution, you have a `.zip` file that follows one of these directory structures:
 
 ![The Kendo UI directory structure](images/kendo-commecrial-zip-layout.png)
 
@@ -30,7 +30,7 @@ The `\js` and `\styles` folders in the root of the `.zip` file contain the minif
 
 ### Fetch from CDN
 
-Kendo UI enables you to fetch it from a CDN instead of downloading its files. For more information and the CDN URLs, see [Use Kendo UI CDN Services](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
+Kendo UI enables you to fetch it from a CDN instead of downloading its files. For more information and the CDN URLs, see [Use Kendo UI CDN Services](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
 ### Fetch from NuGet
 

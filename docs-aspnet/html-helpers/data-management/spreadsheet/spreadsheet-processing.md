@@ -9,11 +9,11 @@ position: 10
 
 # Server-Side Processing
 
-To export huge datasets to Excel, you can use the [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, you can use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
-> The [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [{{ site.product }}]({% slug overview_aspnetmvc6_aspnetmvc %}) and are available for the Telerik UI Enterprise and DevCraft bundles.
+> The [Telerik Document Processing libraries](https://docs.telerik.com/devtools/document-processing/introduction#libraries) are distributed as part of the [{{ site.product }}]({% slug overview_aspnetmvc6_aspnetmvc %}) and are available for the Telerik UI Enterprise and DevCraft bundles.
 
-For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
+For examples on how to export Excel files, refer to the [RadSpreadProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
 TDP handles the data import, export, and processing from the following formats:
 

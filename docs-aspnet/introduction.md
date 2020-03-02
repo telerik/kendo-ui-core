@@ -28,8 +28,8 @@ The Kendo UI widgets:
 
 * Allow for a complete server-platform independence.
 * Provide full control over the placement of the initialization scripts.
-* Support the integration with the [MVVM](http://docs.telerik.com/kendo-ui/framework/mvvm/overview), [AngularJS](http://docs.telerik.com/kendo-ui/framework/AngularJS/introduction), and [Single-Page Application](http://docs.telerik.com/kendo-ui/framework/spa/overview) development patterns.
-* Support [Visual Studio IntelliSense](http://docs.telerik.com/kendo-ui/third-party/vs-intellisense) for the client-side API.
+* Support the integration with the [MVVM](https://docs.telerik.com/kendo-ui/framework/mvvm/overview), [AngularJS](https://docs.telerik.com/kendo-ui/framework/AngularJS/introduction), and [Single-Page Application](https://docs.telerik.com/kendo-ui/framework/spa/overview) development patterns.
+* Support [Visual Studio IntelliSense](https://docs.telerik.com/kendo-ui/third-party/vs-intellisense) for the client-side API.
 
 The {{ site.product_short }} helpers:
 

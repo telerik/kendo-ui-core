@@ -7,7 +7,7 @@ slug: howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox
 
 # Use Custom MVVM Binding to Set Model Value
 
-The following example demonstrates how to implement [a custom MVVM binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the unmasked value of the MaskedTextBox.
+The following example demonstrates how to implement [a custom MVVM binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the unmasked value of the MaskedTextBox.
 
 ```dojo
 <div id="example">

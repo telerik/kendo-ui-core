@@ -68,4 +68,4 @@ Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com
 
 ## See Also
 
-* [API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)

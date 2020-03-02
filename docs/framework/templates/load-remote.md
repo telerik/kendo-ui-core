@@ -11,7 +11,7 @@ position: 3
 
 This article demonstrates how to remove templates from HTML pages and manage them in external files, load external templates using Ajax, append loaded templates to a page, initialize an external template after it has loaded, and how to name and organize external template files in a project.
 
-Following these steps helps you create more maintainable and don't-repeat-yourself (DRY) JavaScript applications. The outlined pattern can also be seen live in this [Kendo UI Feed Reader demo](http://blogs.telerik.com/kendoui/posts/11-09-29/rss_feed_reader_built_with_kendo_ui_yql_amp_less).
+Following these steps helps you create more maintainable and don't-repeat-yourself (DRY) JavaScript applications. The outlined pattern can also be seen live in this [Kendo UI Feed Reader demo](https://www.telerik.com/blogs/rss-feed-reader-built-with-kendo-ui-yql-amp-less).
 
 In any sufficiently large project built with Kendo UI, there are likely to be many templates used throughout the application to format and present JavaScript data. As templates are added to a project, you need to make the decision about where the Kendo UI Templates are going to be defined and maintained.
 

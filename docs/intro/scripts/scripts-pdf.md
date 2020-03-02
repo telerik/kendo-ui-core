@@ -12,7 +12,7 @@ The following table lists the individual script files for the Kendo UI PDF expor
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [PDFViewer](http://demos.telerik.com/kendo-ui/pdfviewer/index) | jquery.js | |
+| [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |

@@ -77,4 +77,4 @@ Elements that you do not want to be exported can be hidden just before the expor
 	</script>
 ```
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/aGUTa).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/aGUTa).

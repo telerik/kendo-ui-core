@@ -28,7 +28,7 @@ The NumericTextBox supports the standards for providing accessible web content w
 
 ## label Element Support
 
-Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need additional implementation. For a runnable example, refer to [this demo](http://dojo.telerik.com/uSeho).
+Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need additional implementation. For a runnable example, refer to [this demo](https://dojo.telerik.com/uSeho).
 
 ## See Also
 

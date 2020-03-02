@@ -209,5 +209,5 @@ You can configure each axis to display bands with different colors for predefine
 
 ## See Also
 
-* [Basic Usage of the Sparkline (Demo)](http://demos.telerik.com/kendo-ui/sparklines/index)
+* [Basic Usage of the Sparkline (Demo)](https://demos.telerik.com/kendo-ui/sparklines/index)
 * [JavaScript API Reference of the Sparkline](/api/javascript/dataviz/ui/sparkline)

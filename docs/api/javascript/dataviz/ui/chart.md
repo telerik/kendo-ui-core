@@ -10343,8 +10343,8 @@ The error bars value.
 
 The following value types are supported:
 
-* "stderr" - the [standard error](http://en.wikipedia.org/wiki/Standard_error) of the series values will be used to calculate the point low and high value
-* "stddev(n)" - the [standard deviation](http://en.wikipedia.org/wiki/Standard_deviation) of the series values will be used to calculate the point low and high value. A number can be specified between the parentheses, that will be multiplied by the calculated standard deviation.
+* "stderr" - the [standard error](https://en.wikipedia.org/wiki/Standard_error) of the series values will be used to calculate the point low and high value
+* "stddev(n)" - the [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the series values will be used to calculate the point low and high value. A number can be specified between the parentheses, that will be multiplied by the calculated standard deviation.
 * "percentage(n)" - a percentage of the point value
 * A number that will be subtracted/added to the point value
 * An array that holds the low and high difference from the point value
@@ -33532,7 +33532,7 @@ The [configuration](#configuration) options with which the chart is initialized.
     </script>
 
 ### surface `kendo.drawing.Surface`
-The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kendo-ui/api/javascript/drawing).
+The drawing surface of the Chart. See [Drawing API](https://docs.telerik.com/kendo-ui/api/javascript/drawing).
 
 #### Example - bind to surface events
 
@@ -33548,7 +33548,7 @@ The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kend
         });
 
         function onShapeMouseEnter(e) {
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
+            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
             console.log(e);
         }
     </script>
@@ -33579,7 +33579,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 Exports the chart as an image.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -33642,7 +33642,7 @@ for more details.
 Exports the chart as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -33684,7 +33684,7 @@ Parameters for the exported PDF file.
 Exports the chart as an SVG document.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -34152,10 +34152,10 @@ The callback function which will be called for the points or the category value 
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the chart.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the chart.
 The returned string is a self-contained SVG document that can be used as is or
 converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/).
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg), but will remain fully functional.
@@ -34211,7 +34211,7 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);

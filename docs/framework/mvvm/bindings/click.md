@@ -43,11 +43,11 @@ The `click` binding is a shorthand for the [`events`](events) binding. The code 
 
 ## Accessing DOM Event Arguments
 
-The Kendo UI MVVM pattern supplies the DOM event argument wrapped in a jQuery [`Event` object](http://api.jquery.com/category/events/event-object/).
+The Kendo UI MVVM pattern supplies the DOM event argument wrapped in a jQuery [`Event` object](https://api.jquery.com/category/events/event-object/).
 
 ## Preventing DOM Event Bubbling
 
-To stop the event from bubbling up the DOM tree, use the [`stopPropagation`](http://api.jquery.com/event.stopPropagation/) method.
+To stop the event from bubbling up the DOM tree, use the [`stopPropagation`](https://api.jquery.com/event.stopPropagation/) method.
 
     <span data-bind="click: click">Click</span>
     <script>
@@ -63,7 +63,7 @@ To stop the event from bubbling up the DOM tree, use the [`stopPropagation`](htt
 ## Preventing Default Actions of DOM Events
 
 For some DOM elements, the `click` event has a default action&mdash;for example, navigate to another page or submit a form. To prevent the default action, use the
-[`preventDefault`](http://api.jquery.com/event.preventDefault/) method.
+[`preventDefault`](https://api.jquery.com/event.preventDefault/) method.
 
     <a href="http://example.com" data-bind="click: click">Click</span>
     <script>

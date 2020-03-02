@@ -12,7 +12,7 @@ The DateInput represents an input field that recognizes and formats scheduling v
 
 It provides separate sections for days, months, years, hours, and minutes, and also supports the customization of date and time formats.
 
-* [Demo page for the DateInput](http://demos.telerik.com/kendo-ui/dateinput/index)
+* [Demo page for the DateInput](https://demos.telerik.com/kendo-ui/dateinput/index)
 
 ## Basic Configuration
 

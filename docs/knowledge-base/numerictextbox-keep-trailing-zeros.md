@@ -31,7 +31,7 @@ How can I format the number in a NumericTextBox so that it shows four decimal pl
 
 ## Solution
 
-This functionality is not part of the built-in NumericTextBox settings but is already submitted as a feature request in the UserVoice forum. Popular requests get prioritized on the team's roadmap. To upvote the feature request, refer to [http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/6696197-numerictextbox-should-display-decimal-portion-even](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/6696197-numerictextbox-should-display-decimal-portion-even).
+This functionality is not part of the built-in NumericTextBox settings but is already submitted as a feature request in the UserVoice forum. Popular requests get prioritized on the team's roadmap. To upvote the feature request, refer to [https://feedback.telerik.com/kendo-jquery-ui/1359131-numerictextbox-should-display-decimal-portion-even-when-zero](https://feedback.telerik.com/kendo-jquery-ui/1359131-numerictextbox-should-display-decimal-portion-even-when-zero).
 
 ## Suggested Workaround
 

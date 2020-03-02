@@ -40,4 +40,4 @@ How can I create a custom Grid editor for the NumericTextBox in the editor?
 
 ## Solution
 
-For the full implementation of the solution, refer to [this Dojo](http://dojo.telerik.com/OSola).
+For the full implementation of the solution, refer to [this Dojo](https://dojo.telerik.com/OSola).

@@ -10,7 +10,7 @@ position: 1
 
 ## Kendo UI R2 2018
 
-As of the Kendo UI R2 2018 release, the sample application, which represents an offline version of the [Telerik UI for ASP.NET Core Demos](http://demos.telerik.com/aspnet-core), is only available for Visual Studio 2017. The Visual Studio 2015 version which contains the deprecated `project.json` base version is no longer distributed.
+As of the Kendo UI R2 2018 release, the sample application, which represents an offline version of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core), is only available for Visual Studio 2017. The Visual Studio 2015 version which contains the deprecated `project.json` base version is no longer distributed.
 
 ## Kendo UI R1 2018 SP1
 

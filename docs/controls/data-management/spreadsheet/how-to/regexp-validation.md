@@ -65,5 +65,5 @@ To work around this issue, use a `custom` validation type that allows you to pas
 
 ## See Also
 
-* [Basic Usage of the Spreadsheet (Demo)](http://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

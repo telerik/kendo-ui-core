@@ -207,7 +207,7 @@ The following example demonstrates how to subscribe to the `dataBound` and `data
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
+To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Scheduler client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control its behavior.
 
     // Place the following after your Telerik UI Scheduler for {{ site.framework }} declaration.
     <script>

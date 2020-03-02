@@ -112,7 +112,7 @@ The following example demonstrates how to construct a visual that uses two [Text
           labels: {
             visual: function(e) {
               // Layout text elements. See:
-              // http://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
+              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
               var layout = new kendo.drawing.Layout(e.rect, {
                 orientation: "horizontal",
 

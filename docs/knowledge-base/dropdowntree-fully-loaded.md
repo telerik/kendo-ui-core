@@ -90,4 +90,4 @@ How can I identify the last `DataBound` event in the DropDownTree so that I know
 
 ## See Also
 
-* [API Reference of the DropDownTree](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [API Reference of the DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)

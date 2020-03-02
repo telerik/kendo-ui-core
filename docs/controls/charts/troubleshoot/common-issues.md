@@ -131,7 +131,7 @@ The browser must support SVG as the below ones do:
 
 Such issues are typically caused by the different fonts that are used on screen and in the PDF. For display, the browser will substitute the selected font with whatever is provided by the system. During export, you will take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF will be displayed with a different font which leads to layout and encoding issues.
 
-**Solution** [Make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-custom). This means that the fonts have to be available as binary TTF files and registered for export which is demonstrated in the [PDF Export demo on Charts](http://demos.telerik.com/kendo-ui/pdf-export/index) as well.
+**Solution** [Make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-custom). This means that the fonts have to be available as binary TTF files and registered for export which is demonstrated in the [PDF Export demo on Charts](https://demos.telerik.com/kendo-ui/pdf-export/index) as well.
 
 The following example demonstrates how to embed fonts in exported PDF.
 

@@ -58,13 +58,13 @@ The email validation rule has been changed to match the [HTML5 specification sug
 
 **Scheduler**
 
-The widget will use the `,` separator for the `recurrenceException` values to conform the [RFC5545](http://tools.ietf.org/html/rfc5545#page-120) specs. More details can be found in this [forum thread](http://www.telerik.com/forums/breaking-change-recurrence-exceptions-delimiter-change).
+The widget will use the `,` separator for the `recurrenceException` values to conform the [RFC5545](http://tools.ietf.org/html/rfc5545#page-120) specs. More details can be found in this [forum thread](https://www.telerik.com/forums/breaking-change-recurrence-exceptions-delimiter-change).
 
 ## Kendo UI 2016 R2
 
 **Scheduler**
 
-The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method to clear the selection on `blur`.
+The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method to clear the selection on `blur`.
 
 ## Kendo UI 2016 Q1
 

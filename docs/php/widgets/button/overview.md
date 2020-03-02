@@ -54,7 +54,7 @@ The Button supports three settings that help configure icons&mdash;`icon`, `spri
 
 Background icons are applied via the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The difference between the two settings is that `icon` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite.
 
-For a list of available icon names, refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+For a list of available icon names, refer to the [Icons demo](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 #### The icon Property
 

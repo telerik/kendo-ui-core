@@ -13,30 +13,30 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Dialog](http://demos.telerik.com/kendo-ui/dialog/index) | jquery.js | |
+| [Dialog](https://demos.telerik.com/kendo-ui/dialog/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.dialog.js | |
-| [Notification](http://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
+| [Notification](https://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.notification.js | |
-| [Responsive Panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) | jquery.js | |
+| [Responsive Panel](https://demos.telerik.com/kendo-ui/responsive-panel/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.responsive-panel.js | |
-| [Splitter](http://demos.telerik.com/kendo-ui/splitter/index) | jquery.js | |
+| [Splitter](https://demos.telerik.com/kendo-ui/splitter/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.resizable.js | |
 | | kendo.splitter.js | |
-| [Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index) | jquery.js | |
+| [Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.tooltip.js | |
-| [Window](http://demos.telerik.com/kendo-ui/window/index) | jquery.js | |
+| [Window](https://demos.telerik.com/kendo-ui/window/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |

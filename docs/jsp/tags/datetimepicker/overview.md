@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `datetimepicker` tag.
 
@@ -61,7 +61,7 @@ You can subscribe to all [events exposed by Kendo UI DateTimePicker](/api/javasc
 
 ### Existing Instances
 
-You are able to reference an existing DateTimePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DateTimePicker API](/api/javascript/ui/datetimepicker#methods) to control its behavior.
+You are able to reference an existing DateTimePicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DateTimePicker API](/api/javascript/ui/datetimepicker#methods) to control its behavior.
 
 
 

@@ -13,7 +13,7 @@ The MultiSelect allows you to bind it to a grouped data source.
 
 To group the data, define a group `datasource` expression which uses a custom DataSource configuration, and specify the field by which the MultiSelect will be grouped.
 
-> The data source sorts the grouped data either in ascending or descending order. To persist a specific group order, use the [server grouping feature of Kendo UI for jQuery](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). To define the `serverGrouping` option, use the `ServerGrouping` method of the DataSource.
+> The data source sorts the grouped data either in ascending or descending order. To persist a specific group order, use the [server grouping feature of Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping). To define the `serverGrouping` option, use the `ServerGrouping` method of the DataSource.
 
 The following example demonstrates how to group the data in the MultiSelect by country.
 

@@ -12,7 +12,7 @@ The NumericTextBox converts an `<input>` element into a numeric, percentage, or 
 
 By default, the widget renders **Spin** buttons which increase or decrease the value with a predefined step.
 
-* [Demo page for the NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index) 
+* [Demo page for the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index) 
 
 ## Basic Usage
 

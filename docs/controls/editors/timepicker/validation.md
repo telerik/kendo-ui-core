@@ -14,7 +14,7 @@ This behavior is set because of the following reasons:
 - The TimePicker allows you to use different formats for time parsing. For more information, refer to the [`parseFormats`](/api/javascript/ui/timepicker/configuration/parseformats) option.
 - The TimePicker does not automatically update the typed text when the typed text is invalid. Such changes in the input value may lead to unexpected behavior.
 
-To validate the input value of the TimePicker on the client, use a client-validation framework such as the [Kendo UI Validator for jQuery](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview). In this way, you can provide an error message to end users which prompts them to do the right actions for them to resolve the issue. For more details, refer to the [demo on custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation).
+To validate the input value of the TimePicker on the client, use a client-validation framework such as the [Kendo UI Validator for jQuery](https://docs.telerik.com/kendo-ui/controls/editors/validator/overview). In this way, you can provide an error message to end users which prompts them to do the right actions for them to resolve the issue. For more details, refer to the [demo on custom validation](https://demos.telerik.com/kendo-ui/validator/custom-validation).
 
 ## See Also
 

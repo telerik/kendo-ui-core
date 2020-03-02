@@ -12,7 +12,7 @@ The Window displays content in a modal or non-modal HTML window.
 
 By default, the user can move, resize, and close a Window. Its content can also be defined either as static HTML or dynamically loaded with AJAX.
 
-* [Demo page for the Window](http://demos.telerik.com/kendo-ui/window/index) 
+* [Demo page for the Window](https://demos.telerik.com/kendo-ui/window/index) 
 
 ## Basic Usage
 
@@ -125,7 +125,7 @@ For a complete example on the basic Window events, refer to the [demo on using t
 
 ## Referencing Existing Instances
 
-To refer to an existing Window instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Window API](/api/javascript/ui/window) to control its behavior.
+To refer to an existing Window instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Window API](/api/javascript/ui/window) to control its behavior.
 
     var win = $("#window").data("kendoWindow");
 

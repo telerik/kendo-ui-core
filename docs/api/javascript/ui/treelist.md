@@ -174,7 +174,7 @@ Custom commands are supported by specifying the [`click`](/api/javascript/ui/tre
 
 > * Each custom command requires you to explicitly specify its [`name`](/api/javascript/ui/treelist/configuration/columns.command.name).
 > * A command column cannot be [`expandable`](/api/javascript/ui/treelist#configuration-columns.expandable).
-> * The built-in commands work only if editing is enabled through the [`editable`](/api/javascript/ui/treelist#configuration-editable) option and the DataSource of the TreeList is configured for [CRUD operations](http://docs.telerik.com/kendo-ui/framework/datasource/crud).
+> * The built-in commands work only if editing is enabled through the [`editable`](/api/javascript/ui/treelist#configuration-editable) option and the DataSource of the TreeList is configured for [CRUD operations](https://docs.telerik.com/kendo-ui/framework/datasource/crud).
 
 #### Example - setting the command as an array of strings
 
@@ -319,7 +319,7 @@ The CSS class that is applied to the icon span of the command button.
 
 ### columns.command.click `Function`
 
-The JavaScript function that is executed when the user clicks the command button. The function receives a [jQuery event](http://api.jquery.com/category/events/event-object/) as an argument. The function context that is available through the `this` keyword will be set to the TreeList instance.
+The JavaScript function that is executed when the user clicks the command button. The function receives a [jQuery event](https://api.jquery.com/category/events/event-object/) as an argument. The function context that is available through the `this` keyword will be set to the TreeList instance.
 
 #### Example - handling the click event of the custom command button
 
@@ -3165,7 +3165,7 @@ Defines the text of **Retry** message for the button which triggers the reloadin
 
 ### navigatable `Boolean` *(default: false)*
 
-If set to `true`, the user can navigate the widget with the keyboard. By default, keyboard navigation is disabled. For a runnable example, refer to the [demo on keyboard navigation in the TreeList](http://demos.telerik.com/kendo-ui/treelist/keyboard-navigation).
+If set to `true`, the user can navigate the widget with the keyboard. By default, keyboard navigation is disabled. For a runnable example, refer to the [demo on keyboard navigation in the TreeList](https://demos.telerik.com/kendo-ui/treelist/keyboard-navigation).
 
 #### Example - enabling keyboard navigation
 

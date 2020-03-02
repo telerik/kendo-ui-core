@@ -12,7 +12,7 @@ position: 6
 
 The NuGet package manager offers a number of Kendo UI packages. All official releases and service packs are available for registered users only.
 
-To use the private Telerik NuGet feed and install Kendo UI NuGet packages, refer to the article on [getting started with the Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install). After installing the packages, the content scripts and stylesheets are copied to your application as follows:
+To use the private Telerik NuGet feed and install Kendo UI NuGet packages, refer to the article on [getting started with the Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/getting-started/nuget-install). After installing the packages, the content scripts and stylesheets are copied to your application as follows:
 * `/Scripts/kendo/<version>/`&mdash;Contains the minified JavaScript files.
 * `/Content/kendo/<version>/`&mdash;Contains the minified CSS files and theme images.
 
@@ -21,7 +21,7 @@ The NuGet Feed provides the following packages related to the UI for ASP.NET MVC
 * `KendoUIProfessional.Trial`&mdash;Kendo UI Trial.
 * `KendoUICore`&mdash;Kendo UI Core.
 
-For more information on the Telerik<sup>®</sup> UI for ASP.NET MVC packages, refer to the article on [getting started with the UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install).
+For more information on the Telerik<sup>®</sup> UI for ASP.NET MVC packages, refer to the article on [getting started with the UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/getting-started/nuget-install).
 
 ## Next Steps
 

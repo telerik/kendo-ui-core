@@ -8,7 +8,7 @@ position: 1
 
 # Drawing DOM Elements
 
-The [Kendo UI Drawing library](http://demos.telerik.com/kendo-ui/drawing/index) supports the conversion of an existing page, or part of it, to drawing primitives.
+The [Kendo UI Drawing library](https://demos.telerik.com/kendo-ui/drawing/index) supports the conversion of an existing page, or part of it, to drawing primitives.
 
 This approach allows you to further process the content and export it in various formats such as Portable Document Format (PDF), Scalable Vector Graphics (SVG), and Portable Network Graphics (PNG) ones.
 

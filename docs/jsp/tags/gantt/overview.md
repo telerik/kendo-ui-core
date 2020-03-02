@@ -124,7 +124,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Declare a `gantt` tag. Configure the fields of its tasks and dependencies data source model.
 

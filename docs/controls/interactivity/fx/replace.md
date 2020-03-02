@@ -8,9 +8,9 @@ position: 4
 
 # Animated Transitions
 
-You can create complex animated transitions between two elements within a common container by using the [`replace` effect](http://demos.telerik.com/kendo-ui/fx/replace).
+You can create complex animated transitions between two elements within a common container by using the [`replace` effect](https://demos.telerik.com/kendo-ui/fx/replace).
 
-> Unlike the other available effects, `replace` relies on CSS classes to define the transition states of the two elements. The effect works only in [browsers which support transitions](http://caniuse.com/css-transitions).
+> Unlike the other available effects, `replace` relies on CSS classes to define the transition states of the two elements. The effect works only in [browsers which support transitions](https://caniuse.com/css-transitions).
 
 ## Getting Started
 
@@ -88,7 +88,7 @@ The following example demonstrates how to apply a faster `replace` effect transi
 
     <html>
         <head>
-            <link href="http://kendo.cdn.telerik.com/{version}/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+            <link href="https://kendo.cdn.telerik.com/{version}/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
             <style>
                 .k-fx-end .k-fx-next,
                 .k-fx-end .k-fx-current {
@@ -169,5 +169,5 @@ The following example demonstrates the Kendo UI multi-element iOS transition.
 
 ## See Also
 
-* [Basic Usage of FX (Demo)](http://demos.telerik.com/kendo-ui/fx/expand)
+* [Basic Usage of FX (Demo)](https://demos.telerik.com/kendo-ui/fx/expand)
 * [JavaScript API Reference of FX](/api/javascript/effects/common)

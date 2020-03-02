@@ -9,7 +9,7 @@ component: split-view
 
 # SplitView Overview
 
-The [Hybrid UI SplitView widget](http://demos.telerik.com/kendo-ui/m/index#splitview/index) is a tablet-specific view that consists of two or more mobile Pane widgets.
+The [Hybrid UI SplitView widget](https://demos.telerik.com/kendo-ui/m/index#splitview/index) is a tablet-specific view that consists of two or more mobile Pane widgets.
 
 ## Getting Started
 

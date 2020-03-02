@@ -36,7 +36,7 @@ The utilization of icon fonts in a user interface (UI) naturally succeeds the so
 Font icons demonstrate significant benefits such as:
 
 * [Improved scalability](#sizes)&mdash;While icon sprites are bitmap raster images and do not scale well, icon fonts use vector graphics, look perfect on retina displays, and make scaling as easy as setting the `font-size` configuration option.
-* [Improved design capabilities](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)&mdash;You can easily apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
+* [Improved design capabilities](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)&mdash;You can easily apply CSS effects on the fly by setting the [text color](#colors), shadow, or other options for different interaction states. For example, on `:hover`.
 * Improved browser support&mdash;Font icons are browser-agnostic and are supported by all modern browsers.
 * Reduced number of HTTP requests&mdash;To load an icon font, you need a maximum of a few HTTP requests.
 * Reduced file size&mdash;A 100KB file contains approximately 500 vector icons.

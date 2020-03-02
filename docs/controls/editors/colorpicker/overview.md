@@ -12,7 +12,7 @@ The ColorPicker is a drop-down list for selecting colors.
 
 It is designed to replace the HTML5 `<input type="color">` tag which is not widely supported in browsers.
 
-* [Demo page for the ColorPicker](http://demos.telerik.com/kendo-ui/colorpicker/index)
+* [Demo page for the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/index)
 
 ## Basic Configuration
 

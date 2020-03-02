@@ -10,7 +10,7 @@ position: 1
 
 The Breadcrumb is an intuitive UI component that allows navigation within a folder structure or web page. It provides an easy way to navigate backwards by one or multiple steps.
 
-* [Demo page for the Breadcrumb](http://demos.telerik.com/kendo-ui/breadcrumb/index) 
+* [Demo page for the Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/index) 
 
 ## Initializing the Breadcrumb
 

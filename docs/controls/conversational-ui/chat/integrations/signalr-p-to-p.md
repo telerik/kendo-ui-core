@@ -28,7 +28,7 @@ var chat = $("#chat").kendoChat({
     // and who are the clients that have to receive that message.
     user: {
         name: kendo.guid(),
-        iconUrl: "http://demos.telerik.com/kendo-ui/content/chat/avatar.png"
+        iconUrl: "https://demos.telerik.com/kendo-ui/content/chat/avatar.png"
     },
     // This will notify the SignallR Hub that the current client is typing.
     // The Hub, in turn, will notify all the other clients
@@ -196,5 +196,5 @@ var chat = $("#chat").kendoChat({
 
 ## See Also
 
-* [Basic Usage of the Chat (Demo)](http://demos.telerik.com/kendo-ui/chat/index)
+* [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

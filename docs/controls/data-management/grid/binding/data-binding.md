@@ -37,7 +37,7 @@ To configure the data source of the Grid:
 
 ### Supplying the Remote Endpoint
 
-Kendo UI provides a [data-binding framework](http://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid by defining the `dataSource` of the widget and supplying the remote endpoint.
+Kendo UI provides a [data-binding framework](https://demos.telerik.com/kendo-ui/datasource/index) that can be used inline with the Grid by defining the `dataSource` of the widget and supplying the remote endpoint.
 
 The following example demonstrates how to implement the suggested approach. In the example:
 

@@ -762,7 +762,7 @@ The target element for which the Tooltip is shown.
 
 ##### e.options `Object`
 
-The request options which will be set to [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/) or to the `iframe`.
+The request options which will be set to [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) or to the `iframe`.
 
 ### error
 
@@ -817,8 +817,8 @@ Fires when an AJAX request for content fails.
 
 ##### e.xhr `jqXHR`
 
-The XHR request object as returned by [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The XHR request object as returned by [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
 
 ##### e.status `String`
 
-The status of the request as returned by [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The status of the request as returned by [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).

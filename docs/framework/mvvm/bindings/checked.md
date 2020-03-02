@@ -13,7 +13,7 @@ The Kendo UI Checked (`checked`) binding checks or unchecks a checkbox (`<input 
 
 ## Using with Checkboxes
 
-The [Kendo UI MVVM](http://demos.telerik.com/kendo-ui/mvvm/index) displays a bound checkbox in `checked` state if the value from the View-Model is `true`. If the checkbox is checked by the end-user, the value from the View-Model is set to `true`. Unchecking the checkbox sets the value from the View-Model to `false`. Setting the value from the View-Model via code checks or unchecks the checkbox depending on the new value.
+The [Kendo UI MVVM](https://demos.telerik.com/kendo-ui/mvvm/index) displays a bound checkbox in `checked` state if the value from the View-Model is `true`. If the checkbox is checked by the end-user, the value from the View-Model is set to `true`. Unchecking the checkbox sets the value from the View-Model to `false`. Setting the value from the View-Model via code checks or unchecks the checkbox depending on the new value.
 
 The following example demonstrates how to use the `checked` binding with a checkbox. The checkbox is initially displayed as unchecked because the value of the `isChecked` field is `false`. If the user checks the checkbox, the `isChecked` field is set to `true`. Setting `isChecked` to `true` from code checks the checkbox. Setting `isChecked` to `false` unchecks it.
 
@@ -45,7 +45,7 @@ The following example demonstrates how to use the `checked` binding with a list 
 
 ## Using with Radio Buttons
 
-The [Kendo UI MVVM](http://demos.telerik.com/kendo-ui/mvvm/index) displays a radio button in `checked` state only if its `value` attribute is equal to the value from the View-Model. If the user checks a radio button, its `value` attribute updates the corresponding value from the View-Model. Updating the value from the View-Model via code checks the radio button whose `value` attribute is equal to the new value.
+The [Kendo UI MVVM](https://demos.telerik.com/kendo-ui/mvvm/index) displays a radio button in `checked` state only if its `value` attribute is equal to the value from the View-Model. If the user checks a radio button, its `value` attribute updates the corresponding value from the View-Model. Updating the value from the View-Model via code checks the radio button whose `value` attribute is equal to the new value.
 
 The following example demonstrates how to use the `checked` binding with a group of radio buttons. The second radio button is checked after calling `kendo.bind` because its `value` attribute (`"Green"`) is equal to the value of `selectedColor`. Checking another radio button, for example, `"Blue"`, updates `selectedColor` (to "Blue"). The `name` attribute of all radio buttons is the same.
 
@@ -64,7 +64,7 @@ The following example demonstrates how to use the `checked` binding with a group
 
 ## Using with Data-Type Attributes
 
-Checkbox inputs bound to an array and radio buttons also support [strong typing](http://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](value#strongly-typed-value-binding).
+Checkbox inputs bound to an array and radio buttons also support [strong typing](https://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](value#strongly-typed-value-binding).
 
 ```dojo
     <div id="view">

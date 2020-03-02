@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `menu` tag.
 
@@ -104,7 +104,7 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 ### Existing Instances
 
-You are able to reference an existing Menu instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
+You are able to reference an existing Menu instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
 
 
 

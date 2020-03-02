@@ -11,8 +11,8 @@ slug: signalr_datasource_with_server_filtering
 To see the example, refer to the project on how to [configure Scheduler SignalR DataSource to load events with server filtering](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-signalr-server-filtering) in ASP.NET MVC applications.
 
 The scenario adopted by the project considers the following aspects of the implementation:
-* You need to set the [`serverFiltering`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering) option of the DataSource in the Scheduler to `true`. This way, the widget automatically sends a `read` call to the local hub (service) upon each navigation which occurs in the Scheduler.
-* The project applies a [`parameterMap`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.parameterMap) function for the transport object of the DataSource. If a `read` action occurs, this function sends the start and end dates of the visible range of the Scheduler. If other actions occur, the function only sends the edited or the new data.
+* You need to set the [`serverFiltering`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering) option of the DataSource in the Scheduler to `true`. This way, the widget automatically sends a `read` call to the local hub (service) upon each navigation which occurs in the Scheduler.
+* The project applies a [`parameterMap`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.parameterMap) function for the transport object of the DataSource. If a `read` action occurs, this function sends the start and end dates of the visible range of the Scheduler. If other actions occur, the function only sends the edited or the new data.
 
     ```Setting-the-action
         function onMap(data, type) {
@@ -61,5 +61,5 @@ The scenario adopted by the project considers the following aspects of the imple
 ## See Also
 
 * [Basic Usage of the Scheduler HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/scheduler)
-* [SchedulerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+* [SchedulerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
 * [Scheduler Server-Side API](/api/scheduler)

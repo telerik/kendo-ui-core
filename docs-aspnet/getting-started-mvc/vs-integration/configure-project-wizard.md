@@ -29,7 +29,7 @@ The second page of the **Project Configuration Wizard** enables you to modify th
 
 - **Render Right-To-Left**&mdash;Updates the master page with the Right-to-left support class and adds CSS reference for RTL styles.
 - **Copy Global Resources**&mdash;Copies the localization files to `~/Scripts/kendo/{version}/cultures`.
-- **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](http://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
+- **Use CDN Support**&mdash;Enables or disables the [Kendo UI CDN support](https://docs.telerik.com/kendo-ui/intro/installation/cdn-service).
 
 ![Project settings configuration page of the Project Configuration Wizard](../../getting-started-mvc/vs-integration/images/configure_settings.png)
 

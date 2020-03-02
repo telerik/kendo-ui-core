@@ -75,7 +75,7 @@ Specifies whether the connectors should appear on hover.
 
 ### path `String`
 
-The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
+The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (https://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
 
 #### Example - declaring a custom path for the shape
 
@@ -407,7 +407,7 @@ The color in any of the following formats.
 
 | Format         | Description
 | ---            | --- | ---
-| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 

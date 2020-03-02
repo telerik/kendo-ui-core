@@ -4126,7 +4126,7 @@ The timezone which the scheduler will use to display the scheduler appointment d
 scheduler widget is bound to local array of events. It is advisable to specify a timezone if the scheduler is bound to a remote service.
 That way all users would see the same dates and times no matter their configured system timezone.
 
-The complete list of the supported timezones is available in the [List of IANA time zones](http://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
+The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
 > The **kendo.timezones.min.js** file must be included in order to use timezones other than "Etc/UTC".
 

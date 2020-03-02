@@ -12,7 +12,7 @@ The hybrid Telerik UI PopOver HtmlHelper for ASP.NET MVC is a server-side wrappe
 
 The PopOver represents a transient view which is displayed when the user taps on a navigational control or area on the screen. It can contain one or more mobile views to which the user can navigate.
 
-* [Demo page for the PopOver](http://demos.telerik.com/kendo-ui/m/index#popover/index)
+* [Demo page for the PopOver](https://demos.telerik.com/kendo-ui/m/index#popover/index)
 
 ## Basic Configuration
 
@@ -167,4 +167,4 @@ You can reference a hybrid PopOver instance by using the code from the following
 
 ## See Also
 
-* [Hybrid PopOverBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)
+* [Hybrid PopOverBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobilePopOverBuilder)

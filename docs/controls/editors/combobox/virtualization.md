@@ -8,7 +8,7 @@ position: 6
 
 # Virtualization
 
-The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index), and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) support UI and data virtualization.
+The [Kendo UI AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](https://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index), and the [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) support UI and data virtualization.
 
 Virtualization enables you to display large datasets by using a fixed amount of list items in the popup list of the ComboBox regardless of the dataset size. When the list is scrolled, the ComboBox reuses the existing items to display the relevant data instead of creating new ones.
 
@@ -192,7 +192,7 @@ $.ajax({
 })
 ```
 
-The Ajax method calls URLs similar to `http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661` and the result is `callback([413]) //the result is JSONP`.
+The Ajax method calls URLs similar to `https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661` and the result is `callback([413]) //the result is JSONP`.
 
 **Function implementation** The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 

@@ -20,7 +20,7 @@ To use the methods of the widgets, you have to obtain a reference to the specifi
 
 ### The jQuery data Method
 
-The Kendo UI widgets are jQuery plugins. A common way to get a reference to a widget instance is to use the [jQuery `data`](http://api.jquery.com/data/) method and pass the plugin name as a string.
+The Kendo UI widgets are jQuery plugins. A common way to get a reference to a widget instance is to use the [jQuery `data`](https://api.jquery.com/data/) method and pass the plugin name as a string.
 
 ```
     <p>Animal: <input id="animal" /></p>

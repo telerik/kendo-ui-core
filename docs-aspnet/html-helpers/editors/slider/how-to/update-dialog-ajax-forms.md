@@ -48,5 +48,5 @@ public ActionResult UpdateMyModel(MyModel model)
 
 * [Basic Usage by the Slider HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/slider)
 * [Using the API of the Slider HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/slider/api)
-* [SliderBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SliderBuilder)
+* [SliderBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/SliderBuilder)
 * [Slider Server-Side API](/api/slider)

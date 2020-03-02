@@ -37,5 +37,5 @@ To access the actual diagramming API, call the `data()` method.
 
 ## See Also
 
-* [Basic Usage of the Diagram (Demo)](http://demos.telerik.com/kendo-ui/diagram/index)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)

@@ -13,5 +13,5 @@ To see the example, refer to the project on how to [use hierarchy binding with t
 ## See Also
 
 * [Basic Usage of the PanelBar HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/panelbar)
-* [PanelBarBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
 * [PanelBar Server-Side API](/api/panelbar)

@@ -10,7 +10,7 @@ slug: howto_cerateviewmodelboundseries_chartaspnetmvc
 
 It is not always possible to know the series and model structure in advance. In such cases, build the series list dynamically and typically bind them to collections defined on the view model.
 
-> If you have a static model you want to split in multiple series based on a field value, refer to the demo on [binding to grouped data](http://demos.telerik.com/aspnet-mvc/bar-charts/grouped-data).
+> If you have a static model you want to split in multiple series based on a field value, refer to the demo on [binding to grouped data](https://demos.telerik.com/aspnet-mvc/bar-charts/grouped-data).
 
 A simple scenario might bind each series to an array of primitive values.
 

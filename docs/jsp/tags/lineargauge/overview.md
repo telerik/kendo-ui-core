@@ -41,7 +41,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ### Existing Instances
 
-You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
 
 
 

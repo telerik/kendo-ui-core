@@ -10,7 +10,7 @@ position: 5
 
 The Calendar enables the user to make a single, multiple, range-date, and week selections.
 
-For a runnable example on multiple selection, refer to [this demo](http://demos.telerik.com/kendo-ui/calendar/selection).
+For a runnable example on multiple selection, refer to [this demo](https://demos.telerik.com/kendo-ui/calendar/selection).
 
 ## Single Date Selection
 

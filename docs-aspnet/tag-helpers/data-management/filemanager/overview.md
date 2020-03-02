@@ -14,7 +14,7 @@ The FileManager is an Explorer-like component enabling you to manage files and f
 It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug taghelpers_grid_aspnetcore %}), [ListView]({% slug htmlhelpers_listview_aspnetcore %}), [TreeView]({% slug taghelpers_treeview_aspnetcore %}), [Toolbar]({% slug taghelpers_toolbar_aspnetcore %}), [Breadcrumb]({% slug taghelpers_breadcrumb_aspnetcore_overview %}).
 
 
-* [Demo page for the FileManager](http://demos.telerik.com/{{ site.platform }}/filemanager/tag-helper)
+* [Demo page for the FileManager](https://demos.telerik.com/{{ site.platform }}/filemanager/tag-helper)
 
 ## Initializing the Filter
 
@@ -124,7 +124,7 @@ Visit the [Client API section](https://docs.telerik.com/kendo-ui/api/javascript/
 
 ## See Also
 
-* [Basic Usage of the FileManager (Demo)](http://demos.telerik.com/{{ site.platform }}/filemanager/index)
+* [Basic Usage of the FileManager (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
 * [Binding Overview of the FileManager]({% slug taghelpers_filemanager_aspnetcore_binding_overview %})
 * [Globalization in {{ site.product }}]({% slug overview_globalization_core %})
 

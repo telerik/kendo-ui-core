@@ -61,7 +61,7 @@ The title of the Cancel button.
 
 ### result `Promise`
 
-`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+`Promise` a [jQuery promise instance](https://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](https://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
 
 * `done()` - when user has pressed the "OK" button and the **data** passed to the callback is the inputted text;
 * `fail()` - when user has pressed the "Cancel" button and the **data** passed to the callback is the inputted text.

@@ -12,7 +12,7 @@ The Tooltip displays a popup hint for a specific HTML element.
 
 Its content can be defined either as static text or loaded dynamically with AJAX. The Tooltip provides default configuration options such as relatively positioning it to the target, events for displaying the widget, auto-hiding behavior, setting its height and width.
 
-* [Demo page for the Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index)
+* [Demo page for the Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index)
 
 ## Initializing the Tooltip
 
@@ -61,7 +61,7 @@ The following example demonstrates how to initialize a Tooltip and configure its
 
 ## Referencing Existing Instances
 
-To refer to an existing Tooltip instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Tooltip API](/api/javascript/ui/tooltip) to control its behavior.
+To refer to an existing Tooltip instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Tooltip API](/api/javascript/ui/tooltip) to control its behavior.
 
 The following example demonstrates how to access an existing Tooltip instance.
 

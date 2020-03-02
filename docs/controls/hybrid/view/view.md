@@ -9,7 +9,7 @@ component: view
 
 # View Overview
 
-The [Hybrid UI View widget](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
+The [Hybrid UI View widget](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
 
 ## Getting Started
 

@@ -41,7 +41,7 @@ How can I use AngularJS directives to bind the Kendo UI Grid for jQuery to Teler
 
 ## Solution
 
-The following example demonstrates how to bind the [Grid](http://www.telerik.com/kendo-ui/grid) to the Kinvey Backend Services in an AngularJS application.
+The following example demonstrates how to bind the [Grid](https://www.telerik.com/kendo-ui/grid) to the Kinvey Backend Services in an AngularJS application.
 
 ```dojo
 <div id="example" ng-app="KendoDemos">

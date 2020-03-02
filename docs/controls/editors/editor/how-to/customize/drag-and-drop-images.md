@@ -10,7 +10,7 @@ slug: howto_drag_and_drop_images_editor
 
 The following example demonstrates how to drag and drop images in the Kendo UI Editor.
 
-As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](http://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
+As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](https://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
 
 ```dojo
   <style>
@@ -97,8 +97,8 @@ As an image source, the demo uses a TreeView. However, you can use any custom HT
         dataSource: {
           data: [
             {text: "Images", value: null, expanded: true, items: [
-              {text: "Telerik logo", value: "http://www.telerik.com/sfimages/default-source/logos/telerik-logo-reversed.png", spriteCssClass: "k-icon k-i-plus"},
-              {text: "Kendo UI Dojo logo", value: "http://trykendoui.telerik.com/images/logo.png", spriteCssClass: "k-icon k-i-plus"}
+              {text: "Telerik logo", value: "https://www.telerik.com/sfimages/default-source/logos/telerik-logo-reversed.png", spriteCssClass: "k-icon k-i-plus"},
+              {text: "Kendo UI Dojo logo", value: "https://dojo.telerik.com/images/logo.png", spriteCssClass: "k-icon k-i-plus"}
             ]}
           ]
         },

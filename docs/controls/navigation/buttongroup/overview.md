@@ -10,7 +10,7 @@ position: 1
 
 The ButtonGroup groups a series of buttons together on a single line.
 
-* [Demo page for the ButtonGroup](http://demos.telerik.com/kendo-ui/buttongroup/index)
+* [Demo page for the ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/index)
 
 ## Initializing the ButtonGroup
 

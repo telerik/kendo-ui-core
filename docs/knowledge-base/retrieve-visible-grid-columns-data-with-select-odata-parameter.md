@@ -105,4 +105,4 @@ How can I retrieve the columns data that is visible only from the remote service
 
 ## See Also
 
-* [API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

@@ -12,7 +12,7 @@ The TabStrip displays a collection of tabs with associated content.
 
 It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
 
-* [Demo page for the TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)
+* [Demo page for the TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/index)
 
 ## Initializing the TabStrip
 
@@ -61,7 +61,7 @@ The following example demonstrates how to initialize the TabStrip from a JSON `d
           dataSource:
           [{
             text: "Item 1",
-            url: "http://www.telerik.com"               // (Optional) Link URL if navigation is needed
+            url: "https://www.telerik.com"               // (Optional) Link URL if navigation is needed
           },
            {
              text: "Item 2",
@@ -73,7 +73,7 @@ The following example demonstrates how to initialize the TabStrip from a JSON `d
            },
            {
              text: "Item 4",
-             imageUrl: "http://www.telerik.com/test.jpg" // (Optional) Item image URL
+             imageUrl: "https://www.telerik.com/test.jpg" // (Optional) Item image URL
            },
            {
              text: "Item 5",

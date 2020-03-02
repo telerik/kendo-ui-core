@@ -90,7 +90,7 @@ You can subscribe to all [events exposed by Kendo UI Diagram](/api/javascript/da
 
 ### Existing Instances
 
-You are able to reference an existing Diagram instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Diagram API](/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
+You are able to reference an existing Diagram instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Diagram API](/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
 
 
 

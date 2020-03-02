@@ -32,7 +32,7 @@ res_type: kb
 
 ## Description
 
-When I use the checkbox styling [as shown in this demo](http://demos.telerik.com/kendo-ui/styling/checkboxes) and if I move the `input` element to the right of the `label` tag, the example stops working.
+When I use the checkbox styling [as shown in this demo](https://demos.telerik.com/kendo-ui/styling/checkboxes) and if I move the `input` element to the right of the `label` tag, the example stops working.
 
 How can I place move the `input` element to the right of the `label` tag in the Grid when I use checkbox styling?
 

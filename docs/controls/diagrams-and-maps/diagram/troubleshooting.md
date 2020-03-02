@@ -26,7 +26,7 @@ This article provides solutions for issues you might encounter while working wit
 
 Typically, such issues are caused by the different fonts that are used on screen and in the PDF. For display, the browser substitutes the selected font with whatever is provided by the system. During export, you take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF is displayed with a different font which leads to layout and encoding issues.
 
-**Solution** [Make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom), that is, the fonts have to be available as binary TTF files and registered for export. For a runnable example, refer to the [demo on PDF export in the Diagram](http://demos.telerik.com/kendo-ui/diagram/pdf-export).
+**Solution** [Make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom), that is, the fonts have to be available as binary TTF files and registered for export. For a runnable example, refer to the [demo on PDF export in the Diagram](https://demos.telerik.com/kendo-ui/diagram/pdf-export).
 
 ```dojo
 <button class='export-pdf k-button'>Save as PDF</button>
@@ -173,5 +173,5 @@ Typically, such issues are caused by the different fonts that are used on screen
 
 ## See Also
 
-* [Basic Usage of the Diagram (Demo)](http://demos.telerik.com/kendo-ui/diagram/index)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)

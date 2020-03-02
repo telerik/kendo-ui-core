@@ -27,7 +27,7 @@ How can I sort the values in a multiple select filter in a Kendo UI Grid for MVC
 
 By default, the data source of the Grid is used as is. However, you can still work around this issue.
 
-Provide a separate, [custom data source](http://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#initial-setup) which can be sorted in the desired sort order.
+Provide a separate, [custom data source](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#initial-setup) which can be sorted in the desired sort order.
 
 ```
 columns.Bound(p => p.Details).Filterable(ftb =>
@@ -48,4 +48,4 @@ columns.Bound(p => p.Details).Filterable(ftb =>
 
 ## See Also
 
-* [Sort FilterMenuInit() or FilterMenuOpen() in Grid](http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter)  
+* [Sort FilterMenuInit() or FilterMenuOpen() in Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter)  

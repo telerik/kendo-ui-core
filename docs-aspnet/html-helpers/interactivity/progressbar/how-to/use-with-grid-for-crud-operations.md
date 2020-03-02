@@ -12,5 +12,5 @@ To see the example, refer to the project on how to [use the Telerik UI ProgressB
 
 ## See Also
 
-* [ProgressBarBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
-* [GridBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [ProgressBarBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
+* [GridBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)

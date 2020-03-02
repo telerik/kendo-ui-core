@@ -33,7 +33,7 @@ How can I disable the `command.Edit()` or the `command.Destroy()` button?
 
 ## Solution
 
-Apply the logic on the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event and use jQuery.
+Apply the logic on the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event and use jQuery.
 
 1. Set the `k-state-disabled` class.
 1. Only on the disabled buttons, remove the `delete` and `edit` specific classes.

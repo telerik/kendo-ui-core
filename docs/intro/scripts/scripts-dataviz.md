@@ -12,7 +12,7 @@ The following table lists the individual script files for the Kendo UI Charts.&n
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Chart](http://demos.telerik.com/kendo-ui/chart-api/index) | jquery.js | |
+| [Chart](https://demos.telerik.com/kendo-ui/chart-api/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
@@ -23,7 +23,7 @@ The following table lists the individual script files for the Kendo UI Charts.&n
 | | kendo.dataviz.themes.js | |
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.dataviz.chart.js | |
-| [Sparkline](http://demos.telerik.com/kendo-ui/sparklines/index) | jquery.js | |
+| [Sparkline](https://demos.telerik.com/kendo-ui/sparklines/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
@@ -34,7 +34,7 @@ The following table lists the individual script files for the Kendo UI Charts.&n
 | | kendo.dataviz.themes.js | |
 | | kendo.dataviz.chart.js | |
 | | kendo.dataviz.sparkline.js | |
-| [StockChart](http://demos.telerik.com/kendo-ui/financial/index) | jquery.js | |
+| [StockChart](https://demos.telerik.com/kendo-ui/financial/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
@@ -45,7 +45,7 @@ The following table lists the individual script files for the Kendo UI Charts.&n
 | | kendo.dataviz.themes.js | |
 | | kendo.dataviz.chart.js | |
 | | kendo.dataviz.stockchart.js | |
-| [TreeMap](http://demos.telerik.com/kendo-ui/treemap/index) | jquery.js | |
+| [TreeMap](https://demos.telerik.com/kendo-ui/treemap/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |

@@ -12,5 +12,5 @@ To see the example, refer to the project on how to [use the Kendo UI ColorPicker
 
 ## See Also
 
-* [ColorPickerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
-* [GridBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [ColorPickerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
+* [GridBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)

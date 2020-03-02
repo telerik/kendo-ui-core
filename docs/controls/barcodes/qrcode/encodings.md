@@ -14,7 +14,7 @@ In many cases, the value of the QRCode is processed by the device in a special w
 
 ## URL
 
-To encode the text of a URL, for example, http://www.telerik.com/, encode the `http://www.telerik.com/` URL text in the QRCode. Include the `http://` protocol to ensure it is recognized as a URL.
+To encode the text of a URL, for example, https://www.telerik.com/, encode the `https://www.telerik.com/` URL text in the QRCode. Include the `http://` protocol to ensure it is recognized as a URL.
 
 ## Email Addresses
 
@@ -26,7 +26,7 @@ To encode a telephone number, use a telephone URI to ensure that the digits are 
 
 ## Contact Information
 
-To encode contact information as text, use the [vCard](http://en.wikipedia.org/wiki/VCard) format. This format is too verbose to use in 2D QRCodes whose information capacity is limited. It is not clear whether vCard is or has to be used to encode contact information. As a result, readers can open a new address book entry that is populated with the provided data and prompt the user to add a new contact.
+To encode contact information as text, use the [vCard](https://en.wikipedia.org/wiki/VCard) format. This format is too verbose to use in 2D QRCodes whose information capacity is limited. It is not clear whether vCard is or has to be used to encode contact information. As a result, readers can open a new address book entry that is populated with the provided data and prompt the user to add a new contact.
 
 ## SMS
 
@@ -38,5 +38,5 @@ To encode a point on the earth, including altitude, use a geo URI. For example, 
 
 ## See Also
 
-* [Basic Usage of the QRCode (Demo)](http://demos.telerik.com/kendo-ui/qrcode/index)
+* [Basic Usage of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/index)
 * [JavaScript API Reference of the QRCode](/api/javascript/dataviz/ui/qrcode)

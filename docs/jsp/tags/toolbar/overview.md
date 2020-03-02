@@ -74,7 +74,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `toolbar` tag and specify the widget controls.
 
@@ -109,7 +109,7 @@ You can subscribe to all [events exposed by Kendo UI ToolBar](/api/javascript/ui
 
 ### Existing Instances
 
-You are able to reference an existing ToolBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
+You are able to reference an existing ToolBar instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
 
 
 

@@ -145,4 +145,4 @@ Keep the DOM for the panels in the web storage.
     </script>
 ````
 
-For the complete implementation of this approach, refer to [this runnable example](http://dojo.telerik.com/ixono/7).
+For the complete implementation of this approach, refer to [this runnable example](https://dojo.telerik.com/ixono/7).

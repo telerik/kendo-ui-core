@@ -14,7 +14,7 @@ In many cases, the value of the QRCode is processed by the device in a special w
 
 ## URL
 
-To encode the text of a URL, for example, http://www.telerik.com/, encode the `http://www.telerik.com/` URL text in the QRCode. Include the `http://` protocol to ensure it is recognized as a URL.
+To encode the text of a URL, for example, https://www.telerik.com/, encode the `https://www.telerik.com/` URL text in the QRCode. Include the `http://` protocol to ensure it is recognized as a URL.
 
 ## Email Addresses
 

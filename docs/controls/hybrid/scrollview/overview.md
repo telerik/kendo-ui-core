@@ -14,7 +14,7 @@ The Hybrid Application by Kendo UI automatically initializes the mobile ScrollVi
 
 The Hybrid ScrollView supports two operation modes&mdash;standard and data-bound. The first one is suitable for displaying static content, while the second one provides remote data virtualization. If the ScrollView has a DataSource set during the initialization, it operates in a data-bound mode.
 
-* [Demo page for the Hybrid ScrollView](http://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
+* [Demo page for the Hybrid ScrollView](https://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
 
 ## Initializing the Hybrid ScrollView
 

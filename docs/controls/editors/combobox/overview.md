@@ -12,7 +12,7 @@ The ComboBox displays a list of values and allows for a single selection from th
 
 The widget enables the user to enter custom values through the keyboard and represents a richer version of the `<select>` element.
 
-* [Demo page for the ComboBox](http://demos.telerik.com/kendo-ui/combobox/index)
+* [Demo page for the ComboBox](https://demos.telerik.com/kendo-ui/combobox/index)
 
 ## Initializing the ComboBox
 
@@ -38,7 +38,7 @@ When you initialize the ComboBox, note the following specifics:
 
 ## Referencing Existing Instances
 
-To refer an existing ComboBox widget, use the [jQuery.data()](http://api.jquery.com/jQuery.data/) configuration option.
+To refer an existing ComboBox widget, use the [jQuery.data()](https://api.jquery.com/jQuery.data/) configuration option.
 
     <input id="comboBox" />
 

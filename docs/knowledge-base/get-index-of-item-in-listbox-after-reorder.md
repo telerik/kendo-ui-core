@@ -42,6 +42,6 @@ The ListBox does not provide a built-in solution for achieving this behavior. Ho
 
 The Kendo UI dataSource features the `indexOf` method but the data items are not automatically reordered in the dataSource after the reordering takes place. To retrieve the index of a specific ListBox data item, manually remove the item from its current and insert it in its desired position. When the indexes of the dataSource items match the order in the ListBox, then the `indexOf` method returns the correct index.
 
-For more information on the API settings, refer to the documentation on the [`insert`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/insert) and [`indexOf`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/indexof) methods.  
+For more information on the API settings, refer to the documentation on the [`insert`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/insert) and [`indexOf`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/indexof) methods.  
 
-For a working demo, refer to [this example](http://dojo.telerik.com/Edeco/4). Although the demo uses the jQuery version, the logic applies client-side methods and the implementation for the AngularJS version is similar.
+For a working demo, refer to [this example](https://dojo.telerik.com/Edeco/4). Although the demo uses the jQuery version, the logic applies client-side methods and the implementation for the AngularJS version is similar.

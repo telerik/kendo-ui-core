@@ -87,14 +87,14 @@ For brevity, the following demo does not include the configuration for the Data 
                   // if DropDownListwidget is found
                   if (categoryDropDownList) {
                     //use DropDownList API based on the model values to accomplish your bussiness requirement.
-                    //link: http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist
+                    //link: https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist
                     console.log("DropDownList", categoryDropDownList);
                   }
 
                   var priceNumericTextBox = container.find("[data-role=numerictextbox]").data("kendoNumericTextBox"); //find widget element and then the widget instance
                   if (priceNumericTextBox) {
                     //use NumericTextBox API
-                    //link: http://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox
+                    //link: https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox
                     console.log("NumericTextBox", priceNumericTextBox);
                   }
                 }

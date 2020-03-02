@@ -9,7 +9,7 @@ position: 2
 
 # Performance Issues
 
-This page provides tips and tricks on how to handle and improve the performance of the [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](http://demos.telerik.com/kendo-ui/).
+This page provides tips and tricks on how to handle and improve the performance of the [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](https://demos.telerik.com/kendo-ui/).
 
 ## Using Canvas Rendering
 

@@ -9,7 +9,7 @@ position: 5
 
 # Data Visualization Modes
 
-The [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](http://demos.telerik.com/kendo-ui/) widgets support the SVG and Canvas rendering targets.
+The [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](https://demos.telerik.com/kendo-ui/) widgets support the SVG and Canvas rendering targets.
 
 ## Mode Selection
 
@@ -37,7 +37,7 @@ You have to include at least one of the rendering modules which are available un
 For more information on adding only the functionalities you need in your project, refer to the articles on the [jQuery dependency]({% slug jquerysupport_kendoui %}) and [export libraries dependencies]({% slug export_support_kendoui %}).
 
 > * The Canvas and SVG modules are required by the [`imageDataURL`](/api/dataviz/chart#methods-imageDataURL) and [`svg`](/api/dataviz/chart#methods-svg) methods.
-> * The Custom Download Builder is located at http://www.telerik.com/download/custom-download and requires a login.
+> * The Custom Download Builder is located at https://www.telerik.com/download/custom-download and requires a login.
 
 ## Known Limitations
 

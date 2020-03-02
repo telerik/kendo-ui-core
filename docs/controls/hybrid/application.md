@@ -81,7 +81,7 @@ By default, all navigational widgets try to navigate to local views when tapped.
 
 
 
-    <a href="http://telerik.com/" data-role="button" data-rel="external">Visit KendoUI</a>
+    <a href="https://www.telerik.com/" data-role="button" data-rel="external">Visit KendoUI</a>
 
 ## Transitions
 
@@ -376,7 +376,7 @@ The example below demonstrates how to initialize a Kendo UI hybrid mobile applic
 <!--*-->
 > **Important**
 >
-> The Kendo UI application for mobile is a type of a [single page application](http://en.wikipedia.org/wiki/Single-page_application). This type of web applications fits on a single page to provide a more fluid user experience and native-like responsiveness. Forms post-backs, which cause page reloading, are in conflict with that approach. That said, forms post-backs that the .NET framework makes automatically should be avoided&mdash;in the mobile application all the dynamic content should be sent or retrieved via Ajax requests.
+> The Kendo UI application for mobile is a type of a [single page application](https://en.wikipedia.org/wiki/Single-page_application). This type of web applications fits on a single page to provide a more fluid user experience and native-like responsiveness. Forms post-backs, which cause page reloading, are in conflict with that approach. That said, forms post-backs that the .NET framework makes automatically should be avoided&mdash;in the mobile application all the dynamic content should be sent or retrieved via Ajax requests.
 
 ## See Also
 

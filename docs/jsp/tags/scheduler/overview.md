@@ -136,7 +136,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Declare a `scheduler` tag. Configure the fields of its data source model.
 
@@ -343,7 +343,7 @@ The example below demonstrates how to handle Scheduler events by setting a neste
 
 ### Existing Instances
 
-You are able to reference an existing Scheduler instance by using [`jQuery.data()`](http://api.jquery.com/jQuery.data/) and then passing `kendoScheduler` as an argument.
+You are able to reference an existing Scheduler instance by using [`jQuery.data()`](https://api.jquery.com/jQuery.data/) and then passing `kendoScheduler` as an argument.
 
 
 

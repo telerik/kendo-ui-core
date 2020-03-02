@@ -12,7 +12,7 @@ The hybrid Telerik UI TabStrip HtmlHelper for ASP.NET MVC is a server-side wrapp
 
 The TabStrip is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.
 
-* [Demo page for the TabStrip](http://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index)
+* [Demo page for the TabStrip](https://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index)
 
 ## Basic Configuration
 
@@ -158,4 +158,4 @@ You can reference a hybrid TabStrip instance by using the [`jQuery.data()`](http
 
 ## See Also
 
-* [Hybrid TabStripBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
+* [Hybrid TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)

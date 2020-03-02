@@ -27,15 +27,15 @@ The following example demonstrates how to add the localization script to a docum
 
 The following example demonstrates how to add the localization script to a document from the CDN.    
 
-    <script src="http://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.bg-BG.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.bg-BG.min.js"></script>
 
 > Currently, translations are not available for every language and some of the localization files may be incomplete. For more information on where to find the full list of available translations, refer to the [section on contributing]({% slug overview_localization_kendoui%}#contribution).
 
 ## Creating New Localization Files
 
-The localization script replaces the default messages in the widget prototype with their equivalent translations. The file has to be named by following the `kendo.messages.<language>.js` convention. A [language code identifier list](http://msdn.microsoft.com/en-us/library/cc233965.aspx) is available for free download from the Microsoft developer network website.
+The localization script replaces the default messages in the widget prototype with their equivalent translations. The file has to be named by following the `kendo.messages.<language>.js` convention. A [language code identifier list](https://msdn.microsoft.com/en-us/library/cc233965.aspx) is available for free download from the Microsoft developer network website.
 
 The following example demonstrates how to create a new localization file. The `kendo.messages.en-US.js` contains all widget messages and may be used as a reference when you create the new localization file&mdash;copy the file, rename it, and translate the messages.
 
@@ -59,7 +59,7 @@ The server-side wrappers (helpers) render some of the markup and the respective 
 
 ### Changing the Language at Runtime in AngularJS Applications
 
-For a runnable example on changing the culture, language, and messages in an AngularJS application, refer to [this code library](http://www.telerik.com/support/code-library/kendo-globalization-localization-with-angular-translate).
+For a runnable example on changing the culture, language, and messages in an AngularJS application, refer to [this code library](https://www.telerik.com/support/code-library/kendo-globalization-localization-with-angular-translate).
 
 ## Contribution
 

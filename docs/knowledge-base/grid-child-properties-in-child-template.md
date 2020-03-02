@@ -45,4 +45,4 @@ Escape sharp symbols that are not part of the current template scope. By design,
 
 * [Templates Overview](https://docs.telerik.com/kendo-ui/framework/templates/overview#templates-overview)
 * [Notes on Using Hash Literals within Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview#hash-literals)
-* [Detail Template Grid Demo](http://demos.telerik.com/aspnet-mvc/grid/detailtemplate)
+* [Detail Template Grid Demo](https://demos.telerik.com/aspnet-mvc/grid/detailtemplate)

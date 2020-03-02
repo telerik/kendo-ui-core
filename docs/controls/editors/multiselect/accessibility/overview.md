@@ -79,7 +79,7 @@ The MultiSelect supports the standards for providing accessible web content whic
 
 ## See Also
 
-* [Keyboard Navigation by the MultiSelect (Demo)](http://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+* [Keyboard Navigation by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/web/grid/navigation.html)
 * [Keyboard Navigation by the MultiSelect]({% slug keynav_multiselect %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

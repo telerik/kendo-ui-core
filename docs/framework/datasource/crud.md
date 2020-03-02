@@ -8,7 +8,7 @@ position: 5
 
 # CRUD Data Operations
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) fully supports CRUD (Create, Read, Update, Destroy) data operations.
+The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) fully supports CRUD (Create, Read, Update, Destroy) data operations.
 
 However, it must be combined with some user interface or another Kendo UI widget such as the Grid, ListView, etc. Though the examples below use the Grid as a sample, the configurations apply to any other widget or scenario.
 
@@ -515,7 +515,7 @@ The `destroy` action submits the data items that will be deleted or only their I
 
 If any of the `transport` actions (read, update, create, destroy) fails and errors occur, use either of the following approaches to handle them:
 
-* A standard error can be returned through an empty response and an [HTTP status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+* A standard error can be returned through an empty response and an [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 * A custom error can be returned with a `200` HTTP status code and an error message assigned to an `errors` field in the response or to any other field which is specified in [`schema.errors`](/api/javascript/data/datasource/configuration/schema.errors).
 
 > The two approaches cannot be combined, that is, custom errors can be provided only with a `200` HTTP status code.
@@ -639,7 +639,7 @@ dataSource.read().then(function(){
 
 ## Sample Projects and Examples
 
-* For the example on using remote CRUD operations with a Kendo UI Grid, refer to the [online Grid Editing demos](http://demos.telerik.com/kendo-ui/grid/editing-inline).
+* For the example on using remote CRUD operations with a Kendo UI Grid, refer to the [online Grid Editing demos](https://demos.telerik.com/kendo-ui/grid/editing-inline).
 * For the example on using remote CRUD operations in ASP.NET MVC, refer to [this GitHub page](https://github.com/telerik/kendo-examples-asp-net).
 * For a sample mobile application on OpenEdge integration that uses JSDO and a Kendo UI DataSource component to list and update records from an employee table, refer to [this GitHub page](https://github.com/CloudDataObject/sample-crud-app).
 

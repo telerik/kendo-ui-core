@@ -19,5 +19,5 @@ All inner members of the sorted dimension will be sorted with the same sort dime
 ## See Also
 
 * [Sorting a Dimension in the PivotGrid (Demo)]({% slug howto_sort_dimensions_pivotgrid %})
-* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)

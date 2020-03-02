@@ -183,4 +183,4 @@ You can reference a hybrid Layout instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid LayoutBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileLayoutBuilder)
+* [Hybrid LayoutBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileLayoutBuilder)

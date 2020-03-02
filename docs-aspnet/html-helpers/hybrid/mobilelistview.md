@@ -12,7 +12,7 @@ The hybrid Telerik UI ListView HtmlHelper for ASP.NET MVC is a server-side wrapp
 
 The ListView displays flat or grouped lists of items.
 
-* [Demo page for the ListView](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index)
+* [Demo page for the ListView](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index)
 
 ## Basic Configuration
 
@@ -248,4 +248,4 @@ You can reference a hybrid Layout instance by using the [`jQuery.data()`](http:/
     
 ## See Also
 
-* [Hybrid ListViewBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)
+* [Hybrid ListViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileListViewBuilder)

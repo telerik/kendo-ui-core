@@ -12,33 +12,33 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Button](http://demos.telerik.com/kendo-ui/button/index) | jquery.js | |
+| [Button](https://demos.telerik.com/kendo-ui/button/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.button.js | |
-| [Drawer](http://demos.telerik.com/kendo-ui/drawer/index) | jquery.js | |
+| [Drawer](https://demos.telerik.com/kendo-ui/drawer/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.drawer.js | |
-| [Menu](http://demos.telerik.com/kendo-ui/menu/index) | jquery.js | |
+| [Menu](https://demos.telerik.com/kendo-ui/menu/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.data.js | |
 | | kendo.data.odata.js | |
 | | kendo.menu.js | |
-| [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index) | jquery.js | |
+| [PanelBar](https://demos.telerik.com/kendo-ui/panelbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.data.odata.js | |
 | | kendo.panelbar.js | |
-| [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index) | jquery.js | |
+| [TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.tabstrip.js | |
-| [ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index) | jquery.js | |
+| [ToolBar](https://demos.telerik.com/kendo-ui/toolbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.toolbar.js | |
-| [TreeView](http://demos.telerik.com/kendo-ui/treeview/index) | jquery.js | |
+| [TreeView](https://demos.telerik.com/kendo-ui/treeview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | Drag & Drop feature (optional) |

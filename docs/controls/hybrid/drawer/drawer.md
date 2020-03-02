@@ -9,7 +9,7 @@ component: drawer
 
 # Drawer Overview
 
-The [Hybrid UI Drawer widget](http://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
+The [Hybrid UI Drawer widget](https://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
 
 ## Getting Started
 

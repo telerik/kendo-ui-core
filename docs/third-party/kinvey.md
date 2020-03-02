@@ -42,7 +42,7 @@ The following example demonstrates how to configure the `read` transport operati
 
 ## Configuring the Update Service
 
-The `update` service expects a `PUT` request that contains the id of the updated item as part of the URL. As a result, you need to programmatically add the id of the edited item to the URL on the `save` event of the widget&mdash;for example, on the [`save`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) event of the Grid.
+The `update` service expects a `PUT` request that contains the id of the updated item as part of the URL. As a result, you need to programmatically add the id of the edited item to the URL on the `save` event of the widget&mdash;for example, on the [`save`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/save) event of the Grid.
 
 The following example demonstrates how to configure the `update` transport operation and add the id of the data item.
 
@@ -67,7 +67,7 @@ The following example demonstrates how to configure the `update` transport opera
 
 ## Configuring the Create Service
 
-The `create` service defined by the DataSource transport creates a new item. If the `_id` of the item is not specified, the widget automatically generates and sends it as an empty string. As a result, you need to programmatically remove it from the request by using the [`parameterMap`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.parametermap) of the DataSource.
+The `create` service defined by the DataSource transport creates a new item. If the `_id` of the item is not specified, the widget automatically generates and sends it as an empty string. As a result, you need to programmatically remove it from the request by using the [`parameterMap`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.parametermap) of the DataSource.
 
 The following example demonstrates how to configure the `create` transport operation and remove the `_id` from the request.
 
@@ -93,7 +93,7 @@ The following example demonstrates how to configure the `create` transport opera
 
 ## Configuring the Destroy Service
 
-The `destroy` service submits the id of the data item that will be deleted and expects a `DELETE` request that contains the id of the item. As a result, you need to programmatically add the id of the edited item to the URL on the `remove` event of the widget&mdash;for example, on the [`remove`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/remove) event of the Grid.
+The `destroy` service submits the id of the data item that will be deleted and expects a `DELETE` request that contains the id of the item. As a result, you need to programmatically add the id of the edited item to the URL on the `remove` event of the widget&mdash;for example, on the [`remove`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/remove) event of the Grid.
 
 The following example demonstrates how to configure the `destroy` transport operation and add the id of the data item.
 

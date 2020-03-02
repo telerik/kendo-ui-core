@@ -94,7 +94,7 @@ Specifies the URL from which to load the content of a pane.
     </div>
     <script>
     $("#splitter").kendoSplitter({
-      panes: [ {}, { contentUrl: "http://www.telerik.com/" } ]
+      panes: [ {}, { contentUrl: "https://www.telerik.com/" } ]
     });
     </script>
 
@@ -213,7 +213,7 @@ Any data that is necessary to be sent to the server.
     var splitter = $("#splitter").data("kendoSplitter");
 
     // load a complete page in the last pane
-    splitter.ajaxRequest(".k-pane:last", "http://www.telerik.com");
+    splitter.ajaxRequest(".k-pane:last", "https://www.telerik.com");
 
     // load content into the pane with ID="pane1"
     splitter.ajaxRequest("#pane1", "/customer/profile", { id: 42 });
@@ -646,11 +646,11 @@ Triggered when the AJAX request that fetches a pane content has failed.
 
 ##### e.xhr `jqXHR`
 
-The XHR request object, as returned from [jQuery.ajax](http://api.jquery.com/jQuery.ajax/)
+The XHR request object, as returned from [jQuery.ajax](https://api.jquery.com/jQuery.ajax/)
 
 ##### e.status `String`
 
-The status of the request, as returned from [jQuery.ajax](http://api.jquery.com/jQuery.ajax/)
+The status of the request, as returned from [jQuery.ajax](https://api.jquery.com/jQuery.ajax/)
 
 #### Example - subscribe to the "error" event during initialization
 

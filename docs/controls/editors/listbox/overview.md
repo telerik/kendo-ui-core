@@ -12,7 +12,7 @@ The ListBox provides suggestions depending on the typed text and allows multiple
 
 The widget displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
-* [Demo page for the ListBox](http://demos.telerik.com/kendo-ui/listbox/index)
+* [Demo page for the ListBox](https://demos.telerik.com/kendo-ui/listbox/index)
 
 ## Initializing the ListBox
 
@@ -42,6 +42,6 @@ For more information, refer to the articles on:
 
 ## See Also
 
-* [Basic Usage of the ListBox (Demo)](http://demos.telerik.com/kendo-ui/listbox/index)
+* [Basic Usage of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/index)
 * [Using the API of the ListBox (Demo)](https://demos.telerik.com/kendo-ui/listbox/api)
 * [JavaScript API Reference of the ListBox](/api/javascript/ui/listbox)

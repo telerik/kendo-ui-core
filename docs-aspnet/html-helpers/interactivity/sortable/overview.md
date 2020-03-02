@@ -124,7 +124,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [Sortable client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
+To reference an existing Telerik UI Sortable instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once you have a reference to the widget, use the [Sortable client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/sortable#methods) to control its behavior.
 
 ```
     // Place the following after your Telerik UI Sortable for {{ site.framework }} declaration.

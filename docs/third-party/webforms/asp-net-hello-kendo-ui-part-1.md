@@ -11,7 +11,7 @@ position: 4
 
 ## Hello Kendo UI
 
-In this tutorial, you will work with the most complex of the Kendo UI widgets&mdash;the [Grid](http://demos.telerik.com/kendo-ui/web/grid/index.html), as well as one of Kendo UI core components&mdash;the [DataSource](http://demos.telerik.com/kendo-ui/web/datasource/index.html). It is essential to understand how these two work in your application and how they work together. You are going to create a grid and wire it up to an ASP.NET Web API service while doing some heavy server lifting along the way.
+In this tutorial, you will work with the most complex of the Kendo UI widgets&mdash;the [Grid](https://demos.telerik.com/kendo-ui/web/grid/index.html), as well as one of Kendo UI core components&mdash;the [DataSource](https://demos.telerik.com/kendo-ui/web/datasource/index.html). It is essential to understand how these two work in your application and how they work together. You are going to create a grid and wire it up to an ASP.NET Web API service while doing some heavy server lifting along the way.
 
 ## Screencast
 
@@ -33,7 +33,7 @@ When the document comes up, delete all of the unnecessary `DOCTYPE` declaration 
 
 ### Remove `<form>`
 
-The `<form>` tag in the page is what Web Forms uses to post any data in the page back to the server and then back again. By default, Web Forms pages post back to themselves. The server then takes this `form` data (any .NET controls in the page) and manipulates their values based on the methods you defined in the preceding code. There is a whole [page lifecycle](http://msdn.microsoft.com/en-us/library/ms178472.aspx) that goes into effect here. Since the current project is essentially building an [SPA](http://en.wikipedia.org/wiki/Single-page_application), you do not need this form.
+The `<form>` tag in the page is what Web Forms uses to post any data in the page back to the server and then back again. By default, Web Forms pages post back to themselves. The server then takes this `form` data (any .NET controls in the page) and manipulates their values based on the methods you defined in the preceding code. There is a whole [page lifecycle](https://msdn.microsoft.com/en-us/library/ms178472.aspx) that goes into effect here. Since the current project is essentially building an [SPA](https://en.wikipedia.org/wiki/Single-page_application), you do not need this form.
 
 Now that you removed the `form` tag, the server tag at the top of the page declaring the page language and preceding code is not necessary either. The project is using straight HTML here, so remove the `runat` attribute from the head, as demonstrated in the example below.
 
@@ -56,7 +56,7 @@ Add the open source Kendo UI version to your project by installing it from [NuGe
 
 > **Important**
 >
-> While you are free to install and try out Kendo UI Core, make sure you have a licensed copy before using any of the Kendo UI enterprise distributions, such as Kendo UI Professional, which includes data-management and editors widgets, such as the Grid, as well as Bar Chart, Gauges, etc. Click [here](http://www.telerik.com/purchase/kendo-ui) for more information on Kendo UI licensing.
+> While you are free to install and try out Kendo UI Core, make sure you have a licensed copy before using any of the Kendo UI enterprise distributions, such as Kendo UI Professional, which includes data-management and editors widgets, such as the Grid, as well as Bar Chart, Gauges, etc. Click [here](https://www.telerik.com/purchase/kendo-ui) for more information on Kendo UI licensing.
 
 Find more information on how to [host Kendo UI Professional in your project]({% slug getting_started_installation_kendoui %}##step-2-add-css-and-javascript-references).
 
@@ -113,7 +113,7 @@ Make a Grid by adding an empty `div` to the page with an id of `employeesGrid`. 
 
      <div id="employeesGrid"></div>
 
-Now turn this grid into a Kendo UI Grid using JavaScript. To do that, select the `div` by its ID with a jQuery selector and then call the `kendoGrid` function. Inside that function, create the [Kendo UI DataSource](http://demos.telerik.com/kendo-ui/web/datasource/index.html) for the grid and set its `read` endpoint to the `Get` method on the `EmployeesController`. The `Get` method simply specifies that the controller should respond to a `GET` HTTP request at the `api/employees` endpoint.
+Now turn this grid into a Kendo UI Grid using JavaScript. To do that, select the `div` by its ID with a jQuery selector and then call the `kendoGrid` function. Inside that function, create the [Kendo UI DataSource](https://demos.telerik.com/kendo-ui/web/datasource/index.html) for the grid and set its `read` endpoint to the `Get` method on the `EmployeesController`. The `Get` method simply specifies that the controller should respond to a `GET` HTTP request at the `api/employees` endpoint.
 
 
 
@@ -343,11 +343,11 @@ Download the full source for the project in this tutorial [from here](https://gi
 
 Build on this tutorial by gradually adding more advanced functionalities to this application and consider the information from these pages:
 
-* [Kendo UI Grid Demo](http://demos.telerik.com/kendo-ui/web/grid/index.html)
-* [Kendo UI DataSource Demo](http://demos.telerik.com/kendo-ui/web/datasource/index.html)
+* [Kendo UI Grid Demo](https://demos.telerik.com/kendo-ui/web/grid/index.html)
+* [Kendo UI DataSource Demo](https://demos.telerik.com/kendo-ui/web/datasource/index.html)
 * [More information on ASP.NET on GitHub](https://github.com/telerik/html5-dev-for-aspnet-devs)
-* [MSDN on Page Life Cycle](http://msdn.microsoft.com/en-us/library/ms178472.aspx)
-* [Wikipedia on Single-Page Applications](http://en.wikipedia.org/wiki/Single-page_application)
+* [MSDN on Page Life Cycle](https://msdn.microsoft.com/en-us/library/ms178472.aspx)
+* [Wikipedia on Single-Page Applications](https://en.wikipedia.org/wiki/Single-page_application)
 
 ## See Also
 

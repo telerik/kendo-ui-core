@@ -12,7 +12,7 @@ The hybrid Telerik UI Application HtmlHelper for ASP.NET MVC is a server-side wr
 
 The Application displays a set of choices related to a task the user initiates.
 
-* [Demo page for the Application](http://demos.telerik.com/kendo-ui/m/index#application/loadingpopup)
+* [Demo page for the Application](https://demos.telerik.com/kendo-ui/m/index#application/loadingpopup)
 
 ## Basic Configuration
 
@@ -254,4 +254,4 @@ You can reference a hybrid Application instance by using the code from the follo
 
 ## See Also
 
-* [Hybrid ApplicationBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)
+* [Hybrid ApplicationBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileApplicationBuilder)

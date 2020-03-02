@@ -59,13 +59,13 @@ The MultiSelect renders an `ID` attribute that is generated from the ID of the w
 
 ## Focusing
 
-Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
+Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](https://dojo.telerik.com/uSeho).
 
 ## Managing Scrollable Content
 
-By design, when the user adds an item that does not fit in the existing free space, the MultiSelect expands vertically. To limit the expansion and scrolling of the content, refer to the [demo on handling scrollable MultiSelect content](http://dojo.telerik.com/axeMa).
+By design, when the user adds an item that does not fit in the existing free space, the MultiSelect expands vertically. To limit the expansion and scrolling of the content, refer to the [demo on handling scrollable MultiSelect content](https://dojo.telerik.com/axeMa).
 
 ## See Also
 
-* [Handling the Scrollable Content in the MultiSelect (Demo)](http://dojo.telerik.com/axeMa)
+* [Handling the Scrollable Content in the MultiSelect (Demo)](https://dojo.telerik.com/axeMa)
 * [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

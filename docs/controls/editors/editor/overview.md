@@ -10,7 +10,7 @@ position: 1
 
 The Editor allows you to create rich textual content through a What-You-See-Is-What-You-Get (WYSIWYG) interface and generate widget value as an XHTML markup.
 
-* [Demo page for the Editor](http://demos.telerik.com/kendo-ui/editor/index)
+* [Demo page for the Editor](https://demos.telerik.com/kendo-ui/editor/index)
 
 ## Initializing the Editor
 

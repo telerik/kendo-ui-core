@@ -12,7 +12,7 @@ The hybrid Telerik UI View HtmlHelper for ASP.NET MVC is a server-side wrapper f
 
 The View represents a screen in the mobile Application.
 
-* [Demo page for the View](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index)
+* [Demo page for the View](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index)
 
 ## Basic Configuration
 
@@ -66,7 +66,7 @@ The View represents a screen in the mobile Application.
 
 ## Events
 
-You can subscribe to all hybrid View [events](http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#events).
+You can subscribe to all hybrid View [events](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -101,7 +101,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-You can reference a hybrid View instance by using the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid View client-side API](http://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
+You can reference a hybrid View instance by using the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid View client-side API](https://docs.telerik.com/kendo-ui/api/javascript/mobile/ui/view#methods) to control its behavior.
 
     @(Html.Kendo().MobileView()
             .Name("MobileView")
@@ -115,4 +115,4 @@ You can reference a hybrid View instance by using the [`jQuery.data()`](http://a
 
 ## See Also
 
-* [Hybrid TabStripBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
+* [Hybrid TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)

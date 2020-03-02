@@ -9,7 +9,7 @@ component: button-group
 
 # ButtonGroup Overview
 
-The [Hybrid UI ButtonGroup widget](http://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile) presents a linear set of grouped buttons.
+The [Hybrid UI ButtonGroup widget](https://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile) presents a linear set of grouped buttons.
 
 ## Getting Started
 

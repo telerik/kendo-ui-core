@@ -23,7 +23,7 @@ For more information on creating, defining, and deploying the OLAP multidimensio
 To enable the HTTP access to the SQL Server Analysis Services, use an `MSMDPUMP.ddl` ISAPI extension.
 
 * For more information on setting up the `MSMDPUMP.ddl` extension, refer to the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
-* For an online accessible OLAP service for testing purposes, use `http://demos.telerik.com/olap/msmdpump.dll`. The URL does not open directly in the browser.
+* For an online accessible OLAP service for testing purposes, use `https://demos.telerik.com/olap/msmdpump.dll`. The URL does not open directly in the browser.
 
 ## Enabling the Cross-Domain Access
 
@@ -125,8 +125,8 @@ The following example demonstrates the list of settings that you have to apply.
 ### Accessing the Cube Securely
 
 To implement a secured access to the OLAP instance, use either of the following approaches:
-* Use a proxy service which communicates with the cube on a secured protocol. This proxy has to support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For more information, refer to [this forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll).
-* Send the credentials with a request header even though the **Username** and **Password** will be visible on the client side (browser). For more information on passing credentials with request headers, refer to [this StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read) object because they will be passed to the `$.ajax` method.
+* Use a proxy service which communicates with the cube on a secured protocol. This proxy has to support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For more information, refer to [this forum thread](https://www.telerik.com/forums/securing-access-to-msmdpump-dll).
+* Send the credentials with a request header even though the **Username** and **Password** will be visible on the client side (browser). For more information on passing credentials with request headers, refer to [this StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read) object because they will be passed to the `$.ajax` method.
 
 ## See Also
 

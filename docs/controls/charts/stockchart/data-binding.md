@@ -70,7 +70,7 @@ The following example demonstrates how to define the main and the Navigator seri
 
 ## Single Data-Source Mode
 
-In the single data-source binding mode, the StockChart is set up with a single data source and that single Data Source instance is used for both the main and the **Navigator** panes. The single data-source binding mode is used for all series in the Chart including the **Navigator** pane. The Data Source is [fetched](/api/javascript/data/datasource/methods/fetch) once and is filtered internally by the Chart. No additional requests will be made unless the API methods of the Data Source are invoked. For a runnable example, refer to the [demo on the basic usage of the StockChart](http://demos.telerik.com/kendo-ui/financial/virtualization).
+In the single data-source binding mode, the StockChart is set up with a single data source and that single Data Source instance is used for both the main and the **Navigator** panes. The single data-source binding mode is used for all series in the Chart including the **Navigator** pane. The Data Source is [fetched](/api/javascript/data/datasource/methods/fetch) once and is filtered internally by the Chart. No additional requests will be made unless the API methods of the Data Source are invoked. For a runnable example, refer to the [demo on the basic usage of the StockChart](https://demos.telerik.com/kendo-ui/financial/virtualization).
 
 The following example demonstrates a StockChart in a single data-source binding mode.
 
@@ -116,7 +116,7 @@ The following example demonstrates a StockChart in a single data-source binding 
 
 ### Master and Navigator Data-Source Mode
 
-You can configure a second data source to load the **Navigator** data usually with reduced time resolution. This approach enables the filtering of the main data source and can be made more efficient. In the master and navigator data-source binding mode, the StockChart is set up with two data source instances&mdash;one for the main chart (master) and one for the **Navigator** pane (navigator). For a runnable example, refer to the [demo on virtualization](http://demos.telerik.com/kendo-ui/financial/virtualization).
+You can configure a second data source to load the **Navigator** data usually with reduced time resolution. This approach enables the filtering of the main data source and can be made more efficient. In the master and navigator data-source binding mode, the StockChart is set up with two data source instances&mdash;one for the main chart (master) and one for the **Navigator** pane (navigator). For a runnable example, refer to the [demo on virtualization](https://demos.telerik.com/kendo-ui/financial/virtualization).
 
 This mode is useful when the service is expected to provide views over the data with a different time resolution. The navigator can then load a low resolution preview while the main data source handles the detailed data.
 
@@ -211,5 +211,5 @@ The following example demonstrates a sample filter submitted by the StockChart f
 
 ## See Also
 
-* [Basic Usage of the StockChart (Demo)](http://demos.telerik.com/kendo-ui/financial/index)
+* [Basic Usage of the StockChart (Demo)](https://demos.telerik.com/kendo-ui/financial/index)
 * [JavaScript API Reference of the StockChart](/api/javascript/dataviz/ui/stock-chart)

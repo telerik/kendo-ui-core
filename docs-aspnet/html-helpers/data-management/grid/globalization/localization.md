@@ -30,7 +30,7 @@ To use the community-sources Resources files, override the executing context and
 
 1. Match the client-side culture. By including the Kendo UI culture scripts, the number formats, the week and month names, the date and time formats, and so on will match the server-side culture and prevent validation errors. The culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design.
 
-        <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
         <!-- include the call to the kendo.culture() method before any widgets are initialized -->
 
         <script>kendo.culture("fr-FR");</script>

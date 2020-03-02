@@ -12,7 +12,7 @@ position: 11
 
 ![kendo-manage-charts-screenshot](images/kendo-manage-charts-screenshot.png)
 
-When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management graphs which can be used to monitor the sales status of the store. This page uses [Kendo UI widgets rendering data visualization](http://demos.telerik.com/kendo-ui/dataviz/overview/index.html) to display the graphs.
+When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management graphs which can be used to monitor the sales status of the store. This page uses [Kendo UI widgets rendering data visualization](https://demos.telerik.com/kendo-ui/dataviz/overview/index.html) to display the graphs.
 
 This code is located in `Scripts/App/storemanager-graphs.js`.
 
@@ -20,7 +20,7 @@ This code is located in `Scripts/App/storemanager-graphs.js`.
 
 ## HTML Setup
 
-The page contains a date range selector that can be used to choose whether to view a day, week, month, or year of data. This selector is represented by a [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/web/listview/index.html). The main graph is represented by a [Kendo UI Chart widget](http://demos.telerik.com/kendo-ui/dataviz/overview/index.html).
+The page contains a date range selector that can be used to choose whether to view a day, week, month, or year of data. This selector is represented by a [Kendo UI ListView widget](https://demos.telerik.com/kendo-ui/web/listview/index.html). The main graph is represented by a [Kendo UI Chart widget](https://demos.telerik.com/kendo-ui/dataviz/overview/index.html).
 
 The following example demonstrates the HTML that is used.
 
@@ -105,7 +105,7 @@ Each series is defined by an object that contains the properties listed below:
 * The `name` property is the display name that will be shown in the legend of the chart, if the legend is displayed.
 * The `field` property is the name of the property on the data that contains the values you want to render on the chart.
 * The `color` property is the color used representing the series on the chart and in the legend.
-* The `tooltip` property defines what will be displayed if the user hovers over a data point or column. The format string follows the parameters for the [`kendo.format`](http://docs.telerik.com/kendo-ui/api/framework/kendo#format) function.
+* The `tooltip` property defines what will be displayed if the user hovers over a data point or column. The format string follows the parameters for the [`kendo.format`](https://docs.telerik.com/kendo-ui/api/framework/kendo#format) function.
 
 ### Define the Axis
 

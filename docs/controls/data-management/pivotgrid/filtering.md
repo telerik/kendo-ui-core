@@ -20,5 +20,5 @@ The filter descriptor is similar to [the filter option of the `kendo.data.DataSo
 ## See Also
 
 * [Filtering a Dimension in the PivotGrid]({% slug howto_filter_dimensions_pivotgrid %})
-* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)

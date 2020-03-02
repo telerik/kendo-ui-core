@@ -150,7 +150,7 @@ To avoid the default content styles which the previous examples demonstrates, re
 
 ## Setting Custom Styles
 
-You can also use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and inject those custom styles in an [Editor stylesheet](http://demos.telerik.com/kendo-ui/editor/styles). In such cases, you do not have to customize the Formatting tool of the Editor.
+You can also use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and inject those custom styles in an [Editor stylesheet](https://demos.telerik.com/kendo-ui/editor/styles). In such cases, you do not have to customize the Formatting tool of the Editor.
 
 ## See Also
 

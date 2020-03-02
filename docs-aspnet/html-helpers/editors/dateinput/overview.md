@@ -28,7 +28,7 @@ The following example demonstrates the basic configuration for the DateInput.
 
 ## Events
 
-You can subscribe to all DateInput [events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#events). For a complete example on basic DateInput events, refer to the [demo on using the events of the DateInput](https://demos.telerik.com/{{ site.platform }}/dateinput/events).
+You can subscribe to all DateInput [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#events). For a complete example on basic DateInput events, refer to the [demo on using the events of the DateInput](https://demos.telerik.com/{{ site.platform }}/dateinput/events).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
@@ -48,7 +48,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ## Referencing Existing Instances
 
-To reference an existing Telerik UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput client-side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
+To reference an existing Telerik UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.
 
         // Place the following after your Telerik UI DateInput for {{ site.framework }} declaration.
         <script>

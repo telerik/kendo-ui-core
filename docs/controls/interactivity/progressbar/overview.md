@@ -18,7 +18,7 @@ The widget provides the following types:
 
 The ProgressBar also supports horizontal and vertical orientation, reversed direction, minimum and maximum values, and animation duration.
 
-* [Demo page for the ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index)
+* [Demo page for the ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index)
 
 ## Basic Configuration
 
@@ -73,7 +73,7 @@ For a runnable example, refer to the [demo on using the events of the ProgressBa
 
 ## Referencing Existing Instances
 
-Make a reference to an existing ProgressBar instance through [`jQuery.data()`](http://api.jquery.com/jQuery.data/) and use the [ProgressBar API](/api/web/progressbar) to control its behavior.
+Make a reference to an existing ProgressBar instance through [`jQuery.data()`](https://api.jquery.com/jQuery.data/) and use the [ProgressBar API](/api/web/progressbar) to control its behavior.
 
 The following example demonstrates how to access an existing ProgressBar instance.
 

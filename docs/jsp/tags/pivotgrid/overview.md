@@ -13,13 +13,13 @@ The PivotGrid JSP tag is a server-side wrapper for the [Kendo UI PivotGrid](/api
 
 > **Important**
 >
-> The Kendo UI PivotGrid for JSP supports only Ajax data-binding to HTTP accessible OLAP cube. For more information on the OLAP concepts, refer to the article about the [fundamentals of the OLAP Cube]({%slug fundamentals_pivotgrid_widget %}), the [setup of an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}) or use Telerik OLAP service at `http://demos.telerik.com/olap/msmdpump.dll` (the URL does not open directly in the browser).
+> The Kendo UI PivotGrid for JSP supports only Ajax data-binding to HTTP accessible OLAP cube. For more information on the OLAP concepts, refer to the article about the [fundamentals of the OLAP Cube]({%slug fundamentals_pivotgrid_widget %}), the [setup of an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}) or use Telerik OLAP service at `https://demos.telerik.com/olap/msmdpump.dll` (the URL does not open directly in the browser).
 
 ## Getting Started
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for JSP to do Ajax binding to an **Adventure Works** cube hosted on `http://demos.telerik.com/olap/msmdpump.dll` (the URL does not open directly in the browser).
+Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for JSP to do Ajax binding to an **Adventure Works** cube hosted on `https://demos.telerik.com/olap/msmdpump.dll` (the URL does not open directly in the browser).
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
 
@@ -36,13 +36,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a reference to the OLAP service URL.
 
 
 
-        <c:url value="http://demos.telerik.com/olap/msmdpump.dll" var="transportReadUrl" />
+        <c:url value="https://demos.telerik.com/olap/msmdpump.dll" var="transportReadUrl" />
 
 **Step 5** Add a `pivotgrid` tag.
 
@@ -126,7 +126,7 @@ You can subscribe to all [events exposed by Kendo UI PivotGrid](/api/javascript/
 
 ### Existing Instances
 
-You are able to reference an existing PivotGrid instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [PivotGrid API](/api/javascript/ui/pivotgrid#methods) to control its behavior.
+You are able to reference an existing PivotGrid instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [PivotGrid API](/api/javascript/ui/pivotgrid#methods) to control its behavior.
 
 
 

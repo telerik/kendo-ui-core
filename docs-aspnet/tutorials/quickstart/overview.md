@@ -39,7 +39,7 @@ However, the Telerik UI for ASP.NET MVC wrappers provide additional capabilities
 ### Important Resources
 
 - [Documentation - Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
-- [API References - Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/api/)
+- [API References - Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/api/)
 - [Support](https://www.telerik.com/account/support-tickets/my-support-tickets)
 
 ## Next Steps

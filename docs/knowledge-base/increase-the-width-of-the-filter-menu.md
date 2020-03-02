@@ -62,7 +62,7 @@ Use CSS rules to expand the width of the container and the elements that are loc
 }
 ```
 
-On the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event, you can also set the width of the container per menu.  
+On the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event, you can also set the width of the container per menu.  
 
 ```dojo
 <div id="grid"></div>

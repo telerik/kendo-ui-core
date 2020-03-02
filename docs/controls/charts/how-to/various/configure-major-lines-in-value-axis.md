@@ -88,9 +88,9 @@ The API reference for the relevant methods and events that are used in the follo
             // Effective axis range is available in the render event
             //
             // See
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/getAxis
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/getAxis
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis
             var range = e.sender.getAxis("value").range();
             var majorUnit = range.max / 3;
             var axis = e.sender.options.valueAxis;

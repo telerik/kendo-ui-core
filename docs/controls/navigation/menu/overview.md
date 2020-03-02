@@ -12,7 +12,7 @@ The Menu displays hierarchical data as a multi-level menu.
 
 It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands. Items can be defined and initialized from HTML, or through the configuration options.
 
-* [Demo page for the Menu](http://demos.telerik.com/kendo-ui/menu/index)
+* [Demo page for the Menu](https://demos.telerik.com/kendo-ui/menu/index)
 
 ## Initializing the Menu
 
@@ -31,7 +31,7 @@ The following example demonstrates how to initialize the Menu by using HTML mark
                 <li><img src="Icons/contacts.gif" />Item with an Icon</li>
             </ul>
         </li>
-        <li><a href="http://www.google.com">Navigation Item</a></li>
+        <li><a href="https://www.google.com">Navigation Item</a></li>
         <li class="k-state-active">Active Item</li>
         <li>Template Item
             <div class="k-group k-content">
@@ -60,7 +60,7 @@ The following example demonstrates how to initialize the Menu by using a JSON `d
                     text: "Item 1",
                     cssClass: "myClass",                         // (Optional) Add a custom CSS class to the item.
                                                                  // Added 2012 Q3 SP1.
-                    url: "http://www.telerik.com"                // (Optional) Link a URL if you need navigation.
+                    url: "https://www.telerik.com"                // (Optional) Link a URL if you need navigation.
                 },
                 {
                     text: "<b>Item 2</b>",
@@ -69,7 +69,7 @@ The following example demonstrates how to initialize the Menu by using a JSON `d
                 },
                 {
                     text: "Item 3",
-                    imageUrl: "http://www.telerik.com/test.jpg", // (Optional) An item image URL.
+                    imageUrl: "https://www.telerik.com/test.jpg", // (Optional) An item image URL.
                     items: [{                                    // A sub-item collection.
                         text: "Sub Item 1"
                     },

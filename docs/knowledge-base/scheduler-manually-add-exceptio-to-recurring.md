@@ -74,5 +74,5 @@ How to manually add exception date for recurring event in the Kendo Scheduler us
 
 ## See Also
 
-* [Kendo Scheduler API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Kendo DatePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [Kendo Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Kendo DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)

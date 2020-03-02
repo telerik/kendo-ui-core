@@ -459,5 +459,5 @@ Apply either of the following approaches:
 
 ## See Also
 
- * [API Reference of the Kendo UI Spreadsheet for jQuery](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+ * [API Reference of the Kendo UI Spreadsheet for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
  * [`Range` API Reference](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)

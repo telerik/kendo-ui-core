@@ -22,7 +22,7 @@ To render row header caption fields as anchors, use the [`rowHeaderTemplate`](/a
 
     <script id="headerTemplate" type="text/x-kendo-tmpl">
         # if (!member.children.length && member.parentName === "ProductName") { #
-            <a href="http://www.telerik.cok">#: member.caption #</a>
+            <a href="https://www.telerik.com">#: member.caption #</a>
         # } else { #
             #: member.caption #
         # } #

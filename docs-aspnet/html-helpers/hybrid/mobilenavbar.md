@@ -12,7 +12,7 @@ The hybrid Telerik UI NavBar HtmlHelper for ASP.NET MVC is a server-side wrapper
 
 The NavBar displays an application navigation bar. It provides options for showing the current view title in the center and also for rendering additional left- and right-aligned controls such as **Back** buttons and so on.
 
-* [Demo page for the NavBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index)
+* [Demo page for the NavBar](https://demos.telerik.com/kendo-ui/m/index#navbar/index)
 
 ## Basic Configuration
 
@@ -119,4 +119,4 @@ You can reference a hybrid NavBar instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid NavBarBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileNavBarBuilder)
+* [Hybrid NavBarBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileNavBarBuilder)

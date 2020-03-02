@@ -16,7 +16,7 @@ This tutorial will walk you through the creation of RESTful services with ASP.NE
 - How to wire up a web page to a Web API Service
 - How to debug Web API Services
 
-This module will cover how to create a RESTful service with [ASP.NET Web API](http://www.asp.net/web-api), and how to consume that service in JSON format with jQuery. There is also a very quick primer on the concept of REST and JSON, as well as a good look at using the [IE F12 Developer Tools](http://msdn.microsoft.com/en-US/library/gg589512%28v=vs.85%29.aspx) to debug your application.
+This module will cover how to create a RESTful service with [ASP.NET Web API](https://www.asp.net/web-api), and how to consume that service in JSON format with jQuery. There is also a very quick primer on the concept of REST and JSON, as well as a good look at using the [IE F12 Developer Tools](https://msdn.microsoft.com/en-US/library/gg589512%28v=vs.85%29.aspx) to debug your application.
 
 All code used in this module can be downloaded from the [GitHub project course](https://github.com/telerik/html5-dev-for-aspnet-devs). Feel free to download the finished product, or follow the screencast or the written content.
 
@@ -30,9 +30,9 @@ In this tutorial, you are going to build a sample application which displays dat
 
 ## Quick Primer on REST and JSON
 
-[REST](http://en.wikipedia.org/wiki/Representational_state_transfer) stands for Representational State Transfer. It is a pattern for developing services which lets the HTTP requests describe what sort of action should be done, and what format the data should be in and it allows the server to indicate success or failure by using HTTP codes. Through applying this strategy, it is easy to construct very predictable URLs from web services so that consuming them becomes much easier. There is much more to REST than that short explanation, but this tutorial tries to stay as RESTful as possible.
+[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) stands for Representational State Transfer. It is a pattern for developing services which lets the HTTP requests describe what sort of action should be done, and what format the data should be in and it allows the server to indicate success or failure by using HTTP codes. Through applying this strategy, it is easy to construct very predictable URLs from web services so that consuming them becomes much easier. There is much more to REST than that short explanation, but this tutorial tries to stay as RESTful as possible.
 
-[JSON](http://www.json.org/) is an acronym that stands for JavaScript Object Notation. This is a way of [serializing](http://en.wikipedia.org/wiki/Serialization) data and objects into a very simple and easy to understand string representation. The JSON format is not only easily consumable by JavaScript, but is also much easier for humans to read and debug.
+[JSON](http://www.json.org/) is an acronym that stands for JavaScript Object Notation. This is a way of [serializing](https://en.wikipedia.org/wiki/Serialization) data and objects into a very simple and easy to understand string representation. The JSON format is not only easily consumable by JavaScript, but is also much easier for humans to read and debug.
 
 ## Create Sample Application
 
@@ -54,7 +54,7 @@ Before proceeding with this project, create some structure for the application t
 
 ### Create Data Access Layer
 
-The [Northwind Database project](http://www.microsoft.com/en-us/download/details.aspx) is going to be used for the purpose of this tutorial and [LINQ To SQL](http://msdn.microsoft.com/en-us/library/bb425822.aspx) is going to be applied as the Data Access layer because of its simplicity and ease of use. Make sure you install the [Northwind Database](http://www.microsoft.com/en-us/download/details.aspx) before proceeding.
+The [Northwind Database project](http://www.microsoft.com/en-us/download/details.aspx) is going to be used for the purpose of this tutorial and [LINQ To SQL](https://msdn.microsoft.com/en-us/library/bb425822.aspx) is going to be applied as the Data Access layer because of its simplicity and ease of use. Make sure you install the [Northwind Database](http://www.microsoft.com/en-us/download/details.aspx) before proceeding.
 
 Right-click the `Data` folder. Select **Add New Item** > **LINQ To SQL Classes**. Give the `dbml` file the name `NorthwindContext.dbml` Click **Add**. This will bring up the **LINQ To SQL** designer surface. Open the **Servers Explorer** window either from the left-hand side, or from the **View** menu. Expand the **Northwind** database and expand **Tables**. Drag the **Employees** table onto the design surface. Save the file.
 
@@ -70,7 +70,7 @@ Right-click the `Data` folder. Select **Add New Item** > **LINQ To SQL Classes**
 
 #### Install Web API
 
-Before the service that returns the data from the database can be created, make sure you install Web API from [NuGet](http://nuget.org/).
+Before the service that returns the data from the database can be created, make sure you install Web API from [NuGet](https://nuget.org/).
 
 Right-click the project and select **Add Library Package Reference**. When the dialogue comes up, click the **online** tab on the left-hand side and enter `aspnetwebapi` in the search box. Select **AspNetWebApi** from the search result and click the **Install** button. Accept the package dependencies and install those as well.
 
@@ -131,7 +131,7 @@ The example below demonstrates the LINQ query to select all employees.
     }
 
 <!--_-->
-Since Web API operates on convention over configuration, simply naming this method [Get](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) is enough to designate as the method that will respond to the HTTP GET.
+Since Web API operates on convention over configuration, simply naming this method [Get](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) is enough to designate as the method that will respond to the HTTP GET.
 
 **Figure 9: Returning a LINLINQ to the SQL object**
 
@@ -230,7 +230,7 @@ Press `F5` to run the application again. Navigate to the **api/employees** URL. 
 
 ### Get JSON Data With AJAX
 
-Now that data is being returned by the service, it is possible to use jQuery to call that service with [AJAX](http://en.wikipedia.org/wiki/Ajax_%28programming%29) and get the results in JSON format instead of XML. Once the data has been retrieved as JSON, it is much easier to work with it and create a user interface. For this demonstration, you are going to retrieve the list of employees and display each employee in an HTML table row.
+Now that data is being returned by the service, it is possible to use jQuery to call that service with [AJAX](https://en.wikipedia.org/wiki/Ajax_%28programming%29) and get the results in JSON format instead of XML. Once the data has been retrieved as JSON, it is much easier to work with it and create a user interface. For this demonstration, you are going to retrieve the list of employees and display each employee in an HTML table row.
 
 ### Add jQuery to Project
 
@@ -258,9 +258,9 @@ Below the `table` element that you just created, but before the closing `content
 
     </script>
 
-Inside the script block create a [jQuery `Document Ready`](http://api.jquery.com/ready/) function. This is the function that executes when the entire page has loaded, including all HTML, CSS, and included JavaScript files.
+Inside the script block create a [jQuery `Document Ready`](https://api.jquery.com/ready/) function. This is the function that executes when the entire page has loaded, including all HTML, CSS, and included JavaScript files.
 
-Inside the `Document Ready` function, select the HTML table with the `employees` id from the [DOM](http://en.wikipedia.org/wiki/Document_Object_Model) and assign it to a variable `$employees` call for later use. It is considered a good practice by some to prefix variables containing jQuery objects with a `$` so that you know that the variable represents a jQuery wrapped object when you see it later down in the code. The table is selected by its ID by using the jQuery ID Selector](http://api.jquery.com/id-selector/) (the number (`#`) sign).
+Inside the `Document Ready` function, select the HTML table with the `employees` id from the [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) and assign it to a variable `$employees` call for later use. It is considered a good practice by some to prefix variables containing jQuery objects with a `$` so that you know that the variable represents a jQuery wrapped object when you see it later down in the code. The table is selected by its ID by using the jQuery ID Selector](https://api.jquery.com/id-selector/) (the number (`#`) sign).
 
 The example below demonstrates how to select a table when the document is ready.
 
@@ -284,9 +284,9 @@ The example below demonstrates how to select a table when the document is ready.
 
 ### Make AJAX Calls
 
-[AJAX](http://en.wikipedia.org/wiki/Ajax_(programming) is an acronym that stands for Asynchronous JavaScript And XML. However, it has come to take on a much broader and less specific meaning. AJAX generally refers to the action of making a request to the server in the background and receiving a result. This is different from the typical browser request/response communication in that it happens without any visual indication that anything has taken place. It is absolutely silent unless the UI is built to show background requests. Additionally, XML is rarely used anymore for AJAX operations. It is most common now to use [JSON](http://www.json.org/), which is an incredibly simple form of serialization that is very easy to manipulate with JavaScript. Web API supports rendering in JSON with the new [System.Json](http://msdn.microsoft.com/en-us/library/system.json%28v=vs.95%29.aspx) library.
+[AJAX](https://en.wikipedia.org/wiki/Ajax_(programming) is an acronym that stands for Asynchronous JavaScript And XML. However, it has come to take on a much broader and less specific meaning. AJAX generally refers to the action of making a request to the server in the background and receiving a result. This is different from the typical browser request/response communication in that it happens without any visual indication that anything has taken place. It is absolutely silent unless the UI is built to show background requests. Additionally, XML is rarely used anymore for AJAX operations. It is most common now to use [JSON](http://www.json.org/), which is an incredibly simple form of serialization that is very easy to manipulate with JavaScript. Web API supports rendering in JSON with the new [System.Json](https://msdn.microsoft.com/en-us/library/system.json%28v=vs.95%29.aspx) library.
 
-One of the things that makes [jQuery](http://jquery.com/) so desirable, is that it makes AJAX very trivial for a developer to implement. To make an AJAX call to the Web API Employee service, use the jQuery [`.ajax()`](http://api.jquery.com/jQuery.ajax/) function. This function takes an object that contains the parameters for configuring the AJAX request. For the request to the `api/employees` endpoint, the configuration object needs you to specify the `url`, `contentType`, and `success` options.
+One of the things that makes [jQuery](https://jquery.com/) so desirable, is that it makes AJAX very trivial for a developer to implement. To make an AJAX call to the Web API Employee service, use the jQuery [`.ajax()`](https://api.jquery.com/jQuery.ajax/) function. This function takes an object that contains the parameters for configuring the AJAX request. For the request to the `api/employees` endpoint, the configuration object needs you to specify the `url`, `contentType`, and `success` options.
 
   * `url` - This option will be specified as the string `api/employees`. This URL is a relative path, so there is no need to specify the full URL.
   * `contentType` - Since it is much easier to work with JSON, the AJAX request needs to specify that the data should be in JSON format. This is done by setting the HTTP Header content type to `application/json`. When using jQuery, this is done simply by setting `contentType` to `json`.
@@ -333,7 +333,7 @@ The example below demonstrates how to make an AJAX call for employees data in JS
     </script>
 
 
-To put the data returned into the page, iterate over the results returned by the server. This is done using the jQuery [`.each()`](http://api.jquery.com/each/) function. As each item is iterated over, a new row is added to the `Employees` HTML table by using the [jQuery `append()`](http://api.jquery.com/append/) method. The table variable is used instead of selecting the table each time in the loop. Selecting an item once from the DOM and referencing it in a variable is better for performance and cuts down on code clutter.
+To put the data returned into the page, iterate over the results returned by the server. This is done using the jQuery [`.each()`](https://api.jquery.com/each/) function. As each item is iterated over, a new row is added to the `Employees` HTML table by using the [jQuery `append()`](https://api.jquery.com/append/) method. The table variable is used instead of selecting the table each time in the loop. Selecting an item once from the DOM and referencing it in a variable is better for performance and cuts down on code clutter.
 
 The example below demonstrates how to make an AJAX call fir the employees data in JSON format.
 
@@ -476,11 +476,11 @@ The example below demonstrates how to create a block of template HTML.
 
     </div>
 
-Inside of the `each()` loop, select the **templates** `div` by its id. Then use the [jQuery `.find()`](http://api.jquery.com/find/) method to select the row by its class. This will find the items in the children of the **templates** `div` with the specified selector. Once the table row is selected, call the [jQuery `clone()`](http://api.jquery.com/clone/) method. This will create a new object of the same type that was just selected (a table row), and store it in the variable.
+Inside of the `each()` loop, select the **templates** `div` by its id. Then use the [jQuery `.find()`](https://api.jquery.com/find/) method to select the row by its class. This will find the items in the children of the **templates** `div` with the specified selector. Once the table row is selected, call the [jQuery `clone()`](https://api.jquery.com/clone/) method. This will create a new object of the same type that was just selected (a table row), and store it in the variable.
 
-In jQuery this is called Chaining. This is when methods are called on methods because each method returns an object, allowing you to continue to call methods on the same line. Once the row template has been created, find the first and last name columns and set their [`.html()`](http://api.jquery.com/html/) with the first and last name from the returned JSON data. Then select the button by its class and add a `click` event.
+In jQuery this is called Chaining. This is when methods are called on methods because each method returns an object, allowing you to continue to call methods on the same line. Once the row template has been created, find the first and last name columns and set their [`.html()`](https://api.jquery.com/html/) with the first and last name from the returned JSON data. Then select the button by its class and add a `click` event.
 
-Inside the `click` event, create another `ajax()` method. The URL will be the same as the first `ajax()` method with the exception that the current item id is appended onto the end. This creates a RESTful URL. The `type` should be set to `delete`. In the `success` function, simply remove the item from the page by calling the [jQuery `.remove()`](http://api.jquery.com/remove/) function. This will reflect the database change in the user interface. Lastly, right before the closing bracket for the `each()` loop, append the row to the table.
+Inside the `click` event, create another `ajax()` method. The URL will be the same as the first `ajax()` method with the exception that the current item id is appended onto the end. This creates a RESTful URL. The `type` should be set to `delete`. In the `success` function, simply remove the item from the page by calling the [jQuery `.remove()`](https://api.jquery.com/remove/) function. This will reflect the database change in the user interface. Lastly, right before the closing bracket for the `each()` loop, append the row to the table.
 
 The example below demonstrates how to create a block of template HTML.
 

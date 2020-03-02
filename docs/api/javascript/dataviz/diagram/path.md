@@ -11,7 +11,7 @@ Represents a path.
 
 ### data `String`
 
-The SVG Path data. The format follows the standard [SVG format](http://www.w3.org/TR/SVG/paths.html#PathData).
+The SVG Path data. The format follows the standard [SVG format](https://www.w3.org/TR/SVG/paths.html#PathData).
 
 #### Example
 
@@ -149,7 +149,7 @@ The color in any of the following formats.
 
 | Format         | Description
 | ---            | --- | ---
-| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 

@@ -66,7 +66,7 @@ For more information on appearance and layout in Kendo UI, refer to [the article
 
 ## Automatic Implementation
 
-Your project might require you to trigger the RTL support automatically and not upon user interaction. In such cases, you can inspect the [`Accept-Language`](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4) HTTP header to determine if a user prefers an RTL language.
+Your project might require you to trigger the RTL support automatically and not upon user interaction. In such cases, you can inspect the [`Accept-Language`](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4) HTTP header to determine if a user prefers an RTL language.
 
 The `Accept-Language` header is provided with every HTTP request, and is typically exposed as a property on a request object in server-side frameworks. If you are using ASP.NET, for instance, you can access the `Accept-Language` header by calling `userLangs = Request.Headers["Accept-Language"];`.
 

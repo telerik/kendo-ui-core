@@ -16,7 +16,7 @@ To initiate Excel export by using code, call the [`saveAsExcel`](/api/javascript
 
 For more information, refer to the following resources:
 * [Configuring the export to Excel](/api/javascript/ui/pivotgrid/configuration/excel)
-* [Exporting the PivotGrid to Excel (demo)](http://demos.telerik.com/kendo-ui/pivotgrid/excel-export)
+* [Exporting the PivotGrid to Excel (demo)](https://demos.telerik.com/kendo-ui/pivotgrid/excel-export)
 
 ## Exporting the Content
 
@@ -69,7 +69,7 @@ Internet Explorer 10 and earlier and Safari do not support file saving. These br
 
 ## See Also
 
-* [Exporting the PivotGrid to Excel (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/excel-export)
+* [Exporting the PivotGrid to Excel (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/excel-export)
 * [Creating Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %})
 * [Saving Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
 * [kendo.ooxml.Workbook](/api/javascript/ooxml/workbook)

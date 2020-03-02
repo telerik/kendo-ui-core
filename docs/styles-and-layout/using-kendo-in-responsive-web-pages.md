@@ -19,18 +19,18 @@ Most Kendo UI widgets work and auto-resize when used in responsive web pages out
 
 The following list shows the widgets that do not auto-resize when their container is resized.
 
-* All [widgets for data visualization: Charts and Barcodes](http://demos.telerik.com/kendo-ui/)
-* [Hybrid ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index)
-* [Hybrid ListView](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index)
-* [Hybrid ScrollView](http://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
-* [Hybrid Switch](http://demos.telerik.com/kendo-ui/m/index#switch/mobile)
-* [Grid](http://demos.telerik.com/kendo-ui/grid/index)
-* [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index)
-* [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)
-* [Slider](http://demos.telerik.com/kendo-ui/slider/index)
-* [Splitter](http://demos.telerik.com/kendo-ui/splitter/index)
-* [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)
-* [Window](http://demos.telerik.com/kendo-ui/window/index)
+* All [widgets for data visualization: Charts and Barcodes](https://demos.telerik.com/kendo-ui/)
+* [Hybrid ActionSheet](https://demos.telerik.com/kendo-ui/m/index#actionsheet/index)
+* [Hybrid ListView](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index)
+* [Hybrid ScrollView](https://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
+* [Hybrid Switch](https://demos.telerik.com/kendo-ui/m/index#switch/mobile)
+* [Grid](https://demos.telerik.com/kendo-ui/grid/index)
+* [PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Slider](https://demos.telerik.com/kendo-ui/slider/index)
+* [Splitter](https://demos.telerik.com/kendo-ui/splitter/index)
+* [TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/index)
+* [Window](https://demos.telerik.com/kendo-ui/window/index)
 
 ## Auto-Resizing Widgets
 
@@ -103,7 +103,7 @@ The following example demonstrates how to use the `resize()` method and uses a `
 
 ## Media Queries
 
-Kendo UI uses media queries to enhance the behavior of the widgets on different form factors. Media queries, a part of the [CSS3 specification](http://www.w3.org/TR/css3-mediaqueries/), load different sets of styles to different devices and deliver improved and unified end-user experience.
+Kendo UI uses media queries to enhance the behavior of the widgets on different form factors. Media queries, a part of the [CSS3 specification](https://www.w3.org/TR/css3-mediaqueries/), load different sets of styles to different devices and deliver improved and unified end-user experience.
 
 The responsive styles of Kendo UI use the non-mobile first method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, written styles, e.g. under 480px breakpoint, are going to override the base styles on screens of max-width equal to 480px or less.
 
@@ -126,7 +126,7 @@ Responsive UI enhancements utilize media queries and include built-in UI enhance
 * Kendo UI Scheduler&mdash;Provides a mechanism to overflow its `view` selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios.
 * Kendo UI Responsive Panel&mdash;This is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its hamburger icon button is clicked.
 
-For live demos on all Kendo UI components, refer to the [Kendo UI demo page](http://demos.telerik.com/kendo-ui/).
+For live demos on all Kendo UI components, refer to the [Kendo UI demo page](https://demos.telerik.com/kendo-ui/).
 
 ## See Also
 

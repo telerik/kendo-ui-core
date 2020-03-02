@@ -570,5 +570,5 @@ The following example demonstrates how to get all flagged cells in the Spreadshe
 
 ## See Also
 
-* [Basic Usage of the Spreadsheet (Demo)](http://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

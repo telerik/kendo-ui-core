@@ -13,7 +13,7 @@ The NumericTextBox provides options for localizing its user interface by utilizi
 You can change the messages that are displayed in the NumericTextBox by including an additional messages script file in the document. For example, including the following script to the page will translate all messages to Bulgarian.
 
 ```
-    <script src="http://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.bg-BG.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.bg-BG.min.js"></script>
 ```
 
 ## See Also

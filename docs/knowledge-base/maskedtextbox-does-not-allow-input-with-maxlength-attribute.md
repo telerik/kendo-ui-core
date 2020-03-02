@@ -26,13 +26,13 @@ component: maskedtextbox
  
 ## Description
 
-How can I enter a chunk of text if the `maxlength` attribute on the input element of the MaskedTextBox is set to the same length as the mask? [This approach](http://dojo.telerik.com/@bubblemaster/eXEsi) worked in version 2017.1.223 and earlier.
+How can I enter a chunk of text if the `maxlength` attribute on the input element of the MaskedTextBox is set to the same length as the mask? [This approach](https://dojo.telerik.com/@bubblemaster/eXEsi) worked in version 2017.1.223 and earlier.
 
 ## Solution
 
 Remove the `minlength` attribute.
 
-As of the [Kendo UI R2 2017](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017) release, the mask restricts the length of the input value. The implementation of the MaskedTextBox is now able to work with the `input` event instead of `keypress`.
+As of the [Kendo UI R2 2017](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2017) release, the mask restricts the length of the input value. The implementation of the MaskedTextBox is now able to work with the `input` event instead of `keypress`.
 
 This updates that are implemented with the release improve customer experience because users can:
 * Use the widget on all browsers, including mobile windows and Android.

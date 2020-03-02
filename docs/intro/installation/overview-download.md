@@ -14,11 +14,11 @@ To start using Kendo UI, you need to [download the library](#downloading-the-lib
 
 Depending on your preferences and the requirements of your project, you can:
 
-* Download [Kendo UI for a Trial Period](http://www.telerik.com/download/kendo-ui).
-* Get your [Commercial License for Kendo UI Professional](http://www.telerik.com/purchase/kendo-ui).
-* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc).
-* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET JSP](http://www.telerik.com/purchase/jsp-ui).
-* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET PHP](http://www.telerik.com/purchase/php-ui).
+* Download [Kendo UI for a Trial Period](https://www.telerik.com/download/kendo-ui).
+* Get your [Commercial License for Kendo UI Professional](https://www.telerik.com/purchase/kendo-ui).
+* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC](https://www.telerik.com/purchase/aspnet-mvc).
+* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET JSP](https://www.telerik.com/purchase/jsp-ui).
+* Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET PHP](https://www.telerik.com/purchase/php-ui).
 * Use the [GitHub Open-Source License for Kendo UI Core](https://github.com/telerik/kendo-ui-core).
 
 Kendo UI for jQuery uses the [Bower web package manager](https://bower.io/) which handles frameworks, libraries, assets, and utilities. The library maintains the Kendo UI Core and the Kendo UI Professional Bower packages which provide all official releases, service packs, and internal Kendo UI for jQuery builds. For more information, refer to the article on [installing Kendo UI as a Bower package]({% slug kendoui_bower_packages_kendoui_installation %}).

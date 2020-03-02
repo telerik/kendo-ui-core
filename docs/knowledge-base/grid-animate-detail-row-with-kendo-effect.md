@@ -74,7 +74,7 @@ Use the `detailInit` event and custom CSS rules.
       dataSource: {
         type: "odata",
         transport: {
-          read: "http://demos.kendoui.com/service/Northwind.svc/Employees"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
         },
         pageSize: 5,
         serverPaging: true,
@@ -133,7 +133,7 @@ Use the `detailInit` event and custom CSS rules.
       dataSource: {
         type: "odata",
         transport: {
-          read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
         },
         serverPaging: true,
         serverSorting: true,

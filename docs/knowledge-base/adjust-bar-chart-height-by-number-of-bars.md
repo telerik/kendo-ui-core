@@ -99,7 +99,7 @@ To adjust the height of the Chart container:
     </script>
 ```
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/idiVu).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/idiVu).
 
 ## See Also
 

@@ -10,7 +10,7 @@ position: 10
 
 ![A screenshot of the Kendo UI Music Store management grid](images/kendo-manage-grid-screenshot.png)
 
-When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management grid which can be used to add, remove, or delete albums from the store. This page uses the [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/web/grid/index.html).
+When logged in the Music Store as an administrator, an additional button titled **Manage Store** is available in the upper-right corner. This opens the management grid which can be used to add, remove, or delete albums from the store. This page uses the [Kendo UI Grid widget](https://demos.telerik.com/kendo-ui/web/grid/index.html).
 
 This code is located in `Scripts/App/storemanager-index.js`.
 
@@ -161,7 +161,7 @@ The element is turned into a Grid widget when the page is loaded with JavaScript
 
 * The `sortable`, `groupable` and `filterable` properties indicate that sorting, grouping, and filtering will be enabled.
 * The `pageable` property indicates that the grid will support paging. The page size is defined on the DataSource and set to fifty items per page.
-* The `editable` property defines the grid editing style. This sample uses `inline` which lets one entire row be shifted into edit mode, then saved or cancelled. Other edit modes&mdash;`incell`, `inline`, or `popup`&mdash;can be seen in the [Kendo UI Grid demos](http://demos.telerik.com/kendo-ui/web/grid/editing.html).
+* The `editable` property defines the grid editing style. This sample uses `inline` which lets one entire row be shifted into edit mode, then saved or cancelled. Other edit modes&mdash;`incell`, `inline`, or `popup`&mdash;can be seen in the [Kendo UI Grid demos](https://demos.telerik.com/kendo-ui/web/grid/editing.html).
 * The `toolbar` property contains an array of commands to place along the top of the grid. This sample displays a **Create** button that can be used to add a new record.
 * The `dataSource` property is set to the data source defined above.
 * The `columns` property is an array of columns to be displayed. For more information, read through the section below.
@@ -186,7 +186,7 @@ Most of the properties defined for each column are optional. The ones used here 
 * The `template` property defines a custom template for the data displayed in the column. The examples use a custom template for the **Album Art** column to add an image tag and show the art.
 * The `editor` property defines a function to be used as a custom editor, displayed when the cell enters `edit` mode. This is discussed in details below.
 * The `filterable`, `sortable`, and `groupable` properties override the properties set on the grid. This can be used to mark individual columns as filterable, sortable, and groupable.
-* The `format` property defines a custom formatter to be used to display the cell data. This example uses `"{0:c}"` to format the **Price** column as currency. The format takes the same values as the [`kendo.format()`](http://docs.telerik.com/kendo-ui/api/framework/kendo#format) function.
+* The `format` property defines a custom formatter to be used to display the cell data. This example uses `"{0:c}"` to format the **Price** column as currency. The format takes the same values as the [`kendo.format()`](https://docs.telerik.com/kendo-ui/api/framework/kendo#format) function.
 * The `values` property sets a collection of key-value pair objects that are used as a foreign key to look up cell values. This is discussed in details below.
 
 ## Customization
@@ -214,7 +214,7 @@ The `options` parameter passed in to the editor function is the data that the ce
 
 The Album objects returned from the server contain the `GenreId` and the `ArtistId`, not the genre and artist names. It would look very strange to just display these IDs in the grid, since no one will know what `Genre 1` or `Artist 27` is. Instead, it is better to load all genre and artist names into a list of objects that can be used to map these IDs to their display names.
 
-In the Kendo UI Grid, this is called a [Foreign Key column](http://demos.telerik.com/kendo-ui/web/grid/foreignkeycolumn.html).
+In the Kendo UI Grid, this is called a [Foreign Key column](https://demos.telerik.com/kendo-ui/web/grid/foreignkeycolumn.html).
 
 The Music Store uses the jQuery `$.Deferred()` functionality to asynchronously load the lists of Genres and Albums from the server. Once they are retrieved, they are mapped to lists of objects that follow the format from the example below.
 
@@ -239,7 +239,7 @@ Using a Foreign Key column also changes the default editor behavior for the cell
 
 ### Upload Album Art
 
-Use another custom editor for the album art column. This one is a little more complicated than the artist name because you need to support the ability to upload new album art. To facilitate this, user the [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/web/upload/index.html).
+Use another custom editor for the album art column. This one is a little more complicated than the artist name because you need to support the ability to upload new album art. To facilitate this, user the [Kendo UI Upload widget](https://demos.telerik.com/kendo-ui/web/upload/index.html).
 
 A custom editor is defined for the column by specifying `editor: albumArtEditor` and the editor function.
 

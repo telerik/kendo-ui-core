@@ -13,17 +13,17 @@ The following table lists the individual script files for the Kendo UI widgets u
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Drag & drop](http://demos.telerik.com/kendo-ui/dragdrop/index) | jquery.js | |
+| [Drag & drop](https://demos.telerik.com/kendo-ui/dragdrop/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
-| [Effects](http://demos.telerik.com/kendo-ui/fx/expand) | jquery.js | |
+| [Effects](https://demos.telerik.com/kendo-ui/fx/expand) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
-| [ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index) | jquery.js | |
+| [ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.progressbar.js | |
-| [Sortable](http://demos.telerik.com/kendo-ui/sortable/index) | jquery.js | |
+| [Sortable](https://demos.telerik.com/kendo-ui/sortable/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |

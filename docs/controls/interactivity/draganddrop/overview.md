@@ -14,7 +14,7 @@ Kendo UI for jQuery provides options to handle drag-and-drop scenarios by combin
 
 `kendoDropTarget` creates the droppable zones and marks a DOM element as a drop target for the Draggable. The `DropTargetArea` enables you to create multiple `DropTarget` elements that are located in the area container which is a useful scenario when the `DropTarget` elements are added dynamically.
 
-* [Demo page for the Drag-and-Drop](http://demos.telerik.com/kendo-ui/dragdrop/index)
+* [Demo page for the Drag-and-Drop](https://demos.telerik.com/kendo-ui/dragdrop/index)
 
 ## Initializing the Drag-and-Drop
 

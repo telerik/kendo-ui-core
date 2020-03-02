@@ -12,7 +12,7 @@ The hybrid Telerik UI ScrollView HtmlHelper for ASP.NET MVC is a server-side wra
 
 The ScrollView enables the user to scroll the content that is wider than the screen of the device.
 
-* [Demo page for the ScrollView](http://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
+* [Demo page for the ScrollView](https://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
 
 ## Basic Configuration
 
@@ -171,4 +171,4 @@ You can reference a hybrid ScrollView instance by using the code from the follow
 
 ## See Also
 
-* [Hybrid ScrollViewBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileScrollViewBuilder)
+* [Hybrid ScrollViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileScrollViewBuilder)

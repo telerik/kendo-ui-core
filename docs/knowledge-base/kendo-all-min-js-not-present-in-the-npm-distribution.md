@@ -44,6 +44,6 @@ It is expected that the `kendo.all.min.js` file is missing from the NPM package 
 
 ## Solution
 
-For more details, refer to the article on [third-parties frameworks and utilities](http://docs.telerik.com/kendo-ui/third-party/webpack).
+For more details, refer to the article on [third-parties frameworks and utilities](https://docs.telerik.com/kendo-ui/third-party/webpack).
 
 For more information on Webpack integration, refer to [this GitHub demo](https://github.com/telerik/kendo-ui-npm-example). Even though the example uses Webpack version 1, you can use a similar approach in Webpack version 2.

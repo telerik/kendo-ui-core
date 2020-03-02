@@ -9,7 +9,7 @@ position: 2
 
 # Basic Usage
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in all web applications built with Kendo UI for jQuery.
+The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) plays a central role in all web applications built with Kendo UI for jQuery.
 
 The DataSource is an abstraction for using local data (arrays of JavaScript objects) or remote data (web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML). This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.
 
@@ -74,7 +74,7 @@ The following example demonstrates how to create a DataSource for data from anot
 
 The DataSource in the example is initialized to represent an in-memory cache of tweets from the search service for Twitter. This endpoint employs a [JSON](http://www.json.org/)-based endpoint contact that allows an input parameter `q` to denote a query string for the search service. Here, its value is provided by an input element on the page.
 
-Operations conducted by the DataSource against this remote endpoint are performed via [`jQuery.ajax()`](http://api.jquery.com/jQuery.ajax/) and therefore, are subject to the same security constraints as the ones enforced by the user agent. These security constraints also apply to [XHRs (XMLHttpRequests)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](https://en.wikipedia.org/wiki/JSONP).
+Operations conducted by the DataSource against this remote endpoint are performed via [`jQuery.ajax()`](https://api.jquery.com/jQuery.ajax/) and therefore, are subject to the same security constraints as the ones enforced by the user agent. These security constraints also apply to [XHRs (XMLHttpRequests)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
 ## Local Filtering
 

@@ -8,7 +8,7 @@ slug: bindtotelerikdataaccesstool_integration_kendoui
 
 # Telerik Data Access
 
-This article demonstrates how to leverage [Telerik Data Access](http://www.telerik.com/data-access) on the backend and let [Kendo UI](http://www.telerik.com/kendo-ui) take care of the user interface.
+This article demonstrates how to leverage [Telerik Data Access](https://www.telerik.com/data-access) on the backend and let [Kendo UI](https://www.telerik.com/kendo-ui) take care of the user interface.
 
 ## Setting Up the Project
 
@@ -22,7 +22,7 @@ When asked about the Data Access approach, select **Skip Creating a Telerik Data
 
 1. To build a Data Access data model, select **TELERIK** > **Telerik Data Access** > **Add Domain Model**, as shown below.
 
-    > If you do not have Telerik Data Access installed, you are able to get the trial edition on the [Free Trials page](http://www.telerik.com/download-trial-file.aspx?pid=638).
+    > If you do not have Telerik Data Access installed, you are able to get the trial edition on the [Free Trials page](https://www.telerik.com/download-trial-file.aspx?pid=638).
 
     ![Build The Model](../images/oa3.png)
 
@@ -66,7 +66,7 @@ Now configure the front end. Wire up the Orders to a Kendo UI Grid. Kendo UI is 
 
     RouteTable.Routes.IgnoreRoute("EntitiesModelService.svc/{*pathInfo}"); // specify the correct service path here
 
-1. Set up the Grid widget. For detailed information on how to configure data binding, visit the [Kendo UI live demo page](http://demos.telerik.com/kendo-ui/web/grid/index.html). Basically, use a `div` that is going to be applied as the container for the Grid and configure the widget in script.
+1. Set up the Grid widget. For detailed information on how to configure data binding, visit the [Kendo UI live demo page](https://demos.telerik.com/kendo-ui/web/grid/index.html). Basically, use a `div` that is going to be applied as the container for the Grid and configure the widget in script.
 
 The following example demonstrates some sample code you need.
 

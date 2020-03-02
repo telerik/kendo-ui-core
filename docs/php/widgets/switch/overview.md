@@ -79,7 +79,7 @@ The following example demonstrates how to subscribe to events by providing inlin
 
 ### Client-Side Instances
 
-You are able to reference an existing Switch instance through [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Switch API](/api/javascript/ui/switch) to control its behavior.
+You are able to reference an existing Switch instance through [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Switch API](/api/javascript/ui/switch) to control its behavior.
 
 
 

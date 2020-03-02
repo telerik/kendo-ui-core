@@ -14,9 +14,9 @@ As a result, each Grid is exported to a separate Excel sheet.
 
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and later. Earlier versions do not have the `ExcelExport` event exposed through the fluent API.
 
-For more information, refer to the article on how to [create Excel documents](http://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
+For more information, refer to the article on how to [create Excel documents](https://docs.telerik.com/kendo-ui/framework/excel/introduction#create-excel-document).
 
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)

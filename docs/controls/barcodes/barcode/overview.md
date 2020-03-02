@@ -10,9 +10,9 @@ position: 1
 
 The Barcode represents data in a machine-readable format.
 
-All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](http://www.w3.org/Graphics/SVG/).
+All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://www.w3.org/Graphics/SVG/).
 
-* [Demo page for the Barcode](http://demos.telerik.com/kendo-ui/barcode/index)
+* [Demo page for the Barcode](https://demos.telerik.com/kendo-ui/barcode/index)
 
 ## Basic Configuration
 
@@ -43,7 +43,7 @@ The Barcode supports a set of [encoding types]({% slug encodings_kendoui_barcode
 
 ## See Also
 
-* [Basic Usage of the Barcode (Demo)](http://demos.telerik.com/kendo-ui/barcode/index)
+* [Basic Usage of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/index)
 * [Using the API of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/api)
 * [Knowledge Base Section](/knowledge-base)
 * [JavaScript API Reference of the Barcode](/api/javascript/dataviz/ui/barcode)

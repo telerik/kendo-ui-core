@@ -106,4 +106,4 @@ The following example demonstrates how to display a toolbar above the pager and 
 ## See Also
 
 * [jQuery Documentation: .find()](https://api.jquery.com/find/)
-* [jQuery Documentation: .insertAfter()](http://api.jquery.com/insertafter/)
+* [jQuery Documentation: .insertAfter()](https://api.jquery.com/insertafter/)

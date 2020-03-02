@@ -84,4 +84,4 @@ The following example demonstrates how to add a mask to the Telerik UI DatePicke
 
 ## See Also
 
-* [DatePickerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder)
+* [DatePickerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder)

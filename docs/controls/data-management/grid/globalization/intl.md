@@ -44,7 +44,7 @@ The following example demonstrates how to create different time with an offset d
 
 ## Using UTC on Both Client and Server
 
-To display the date in a UTC timezone regardless of the user timezone, refer to the complete example on [setting the UTC timezone on both client and server](http://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/utc-time-on-both-server-and-client).
+To display the date in a UTC timezone regardless of the user timezone, refer to the complete example on [setting the UTC timezone on both client and server](https://docs.telerik.com/aspnet-mvc/helpers/grid/how-to/editing/utc-time-on-both-server-and-client).
 
 ## Allowing the User to Customize the Timezone
 

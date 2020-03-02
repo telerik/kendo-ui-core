@@ -37,7 +37,7 @@ Find the shape object from the data source of the map, then calculate the center
 
 
 The following example demonstrates the full implementation of the approach.
-[Run the sample in dojo](http://dojo.telerik.com/IVituK)
+[Run the sample in dojo](https://dojo.telerik.com/IVituK)
 ```
     <div id="example">
 

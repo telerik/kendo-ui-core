@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `numerictextbox` tag.
 
@@ -61,7 +61,7 @@ You can subscribe to all [events exposed by Kendo UI NumericTextBox](/api/javasc
 
 ### Existing Instances
 
-You are able to reference an existing NumericTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [NumericTextBox API](/api/javascript/ui/numerictextbox#methods) to control its behavior.
+You are able to reference an existing NumericTextBox instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [NumericTextBox API](/api/javascript/ui/numerictextbox#methods) to control its behavior.
 
 
 

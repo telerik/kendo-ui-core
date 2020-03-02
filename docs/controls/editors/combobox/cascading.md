@@ -8,7 +8,7 @@ position: 8
 
 # Cascading ComboBoxes
 
-The [cascading ComboBox](http://demos.telerik.com/kendo-ui/combobox/cascadingcombobox) is a series of two or more ComboBoxes in which each ComboBox is filtered according to the selected options in the previous ComboBox.
+The [cascading ComboBox](https://demos.telerik.com/kendo-ui/combobox/cascadingcombobox) is a series of two or more ComboBoxes in which each ComboBox is filtered according to the selected options in the previous ComboBox.
 
 ## Basic Configuration
 
@@ -70,8 +70,8 @@ The following example demonstrates how to initialize a cascading ComboBox.
 
 The MVVM [value]({% slug valuebinding_mvvm_kendoui %}) binding updates the `model` when a UI element triggers a `change` event. When widgets cascade, however, they do not raise a `change` event and the `model` is not updated.
 
-* For more information on using a synced `model` and implementing a [custom MVVM binding]({% slug custombinding_mvvm_kendoui %}) that will update the model accordingly, refer to [this demo](http://dojo.telerik.com/@ggkrustev/aSAlU).
-* For more information on the reason a widget does not trigger a `change` event, refer to [this GitHub discussion](http://github.com/telerik/kendo-ui-core/issues/661).
+* For more information on using a synced `model` and implementing a [custom MVVM binding]({% slug custombinding_mvvm_kendoui %}) that will update the model accordingly, refer to [this demo](https://dojo.telerik.com/@ggkrustev/aSAlU).
+* For more information on the reason a widget does not trigger a `change` event, refer to [this GitHub discussion](https://github.com/telerik/kendo-ui-core/issues/661).
 
 ## FAQ
 

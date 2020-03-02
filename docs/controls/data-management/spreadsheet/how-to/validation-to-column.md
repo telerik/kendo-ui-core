@@ -512,5 +512,5 @@ To apply the validation rule to the specific range, it uses the [`range.validati
 
 ## See Also
 
-* [Basic Usage of the Spreadsheet (Demo)](http://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

@@ -437,7 +437,7 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
 
     Since you have already bound the change event on the DataSource possibly once, make sure you unbind it if necessary. If this is not done, the widget retains a list of all bindings and executes the `refresh` function numerous times. Also, MVVM will be listening to the internal `_refreshHandler` function which is not yet defined. You need to point the internal `_refreshHandler` to your publicly exposed `refresh` method. First though, check and see if there is an existing connection between the public `refresh`, which is bound to the change event on the DataSource, and the internal `_refreshHandler`. If there is, remove just the binding to the `change` event. If there is no connection between your internal `_refreshHandler` and the public `refresh` function, you need to create it. This is done by the `$.proxy` jQuery method, which calls the public `refresh` with the correct context, which is the widget itself. Finally, rebind to the `change` event of the DataSource.
 
-    The following can be a bit confusing if you have not used the [`proxy`](http://api.jquery.com/jQuery.proxy/) jQuery function before, but all it is doing is saying that when the `_refreshHandler` is called, it should execute the public `refresh` widget function and inside that `refresh` function, this will be a reference to the widget itself, and not something else, such as window. Due to the fact that the the value of the keyword `this` is always changing in JavaScript, this is a good way to ensure that the scope is correct when the `refresh` function executes.
+    The following can be a bit confusing if you have not used the [`proxy`](https://api.jquery.com/jQuery.proxy/) jQuery function before, but all it is doing is saying that when the `_refreshHandler` is called, it should execute the public `refresh` widget function and inside that `refresh` function, this will be a reference to the widget itself, and not something else, such as window. Due to the fact that the the value of the keyword `this` is always changing in JavaScript, this is a good way to ensure that the scope is correct when the `refresh` function executes.
 
     	_dataSource: function() {
 
@@ -530,10 +530,10 @@ Kendo UI provides options for you to create your own widgets by inheriting from 
 
 ## Working with Value-Bound Widgets
 
-In order for a widget to support [`value` binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
+In order for a widget to support [`value` binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
 
 * Add a `value` method to the widget, which sets the current widget value and returns the current value if no arguments are passed.
-* [Trigger](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/trigger) the widget change event when the widget value is changed.
+* [Trigger](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/trigger) the widget change event when the widget value is changed.
 
 The following examples demonstrate how to create a simple input widget that selects the value on focus.
 

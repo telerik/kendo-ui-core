@@ -13,7 +13,7 @@ The Grid is a powerful control for displaying data in a tabular format.
 
 It provides options for executing data operations, such as paging, sorting, filtering, grouping, and editing, which determine the way the data is presented and manipulated. The Grid supports data binding to local and remote sets of data by using the Kendo UI for jQuery DataSource component.
 
-* [Demo page for the Grid](http://demos.telerik.com/kendo-ui/grid/index)
+* [Demo page for the Grid](https://demos.telerik.com/kendo-ui/grid/index)
 
 ## Advance Reading
 
@@ -170,7 +170,7 @@ For more information on implementing specific scenarios, refer to the [**Knowled
 
 To refer to an existing Grid instance:
 
-1. Use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
+1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
 1. Once a reference is established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
 
         var grid = $("#grid").data("kendoGrid");

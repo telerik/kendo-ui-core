@@ -105,4 +105,4 @@ function convertValues(value) {
 
 ## See Also
 
-* [Virtualization of the ComboBox](http://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization#data-and-ui-virtualization)
+* [Virtualization of the ComboBox](https://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization#data-and-ui-virtualization)

@@ -12,7 +12,7 @@ The Kendo UI FileManager is an Explorer-like component enabling you to manage fi
 
 It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug overview_kendoui_grid_widget %}), [ListView]({% slug overview_kendoui_listview_widget %}), [TreeView]({% slug overview_kendoui_treeview_widget %}), [Toolbar]({% slug overview_kendoui_toolbar_widget %}), [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}). 
 
-* [Demo page for the FileManager](http://demos.telerik.com/kendo-ui/filemanager/index)
+* [Demo page for the FileManager](https://demos.telerik.com/kendo-ui/filemanager/index)
 
 ## Initializing the FileManager
 
@@ -65,7 +65,7 @@ The following example demonstrates initialization of the FileManager with a loca
 
 To refer to an existing FileManager instance:
 
-1. Use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method.
+1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
 1. Once a reference is established, use the [FileManager API](/api/javascript/ui/filemanager) to control its behavior.
 
         var filemanager = $("#filemanager").data("kendoFileManager");

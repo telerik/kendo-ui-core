@@ -228,7 +228,7 @@ Specifies whether the model might have children and might be loaded. Applicable 
 
 ### schema.model.children `String|Object` *(default: "items")*
 
-The DataSource object or configuration for fetching the child nodes. Detailed explanation of how children are fetched is available in the [HierarchicalDataSource overview help topic](http://docs.telerik.com/kendo-ui/framework/hierarchicaldatasource/overview).
+The DataSource object or configuration for fetching the child nodes. Detailed explanation of how children are fetched is available in the [HierarchicalDataSource overview help topic](https://docs.telerik.com/kendo-ui/framework/hierarchicaldatasource/overview).
 
 > You cannot use "children" as a field name&mdash;the model has already a `children` property (the child data source).
 

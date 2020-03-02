@@ -12,11 +12,11 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Filter](http://demos.telerik.com/kendo-ui/filter/index) | jquery.js | |
+| [Filter](https://demos.telerik.com/kendo-ui/filter/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.buttongroup.js | |
 | | kendo.filter.js | |
-| [Grid](http://demos.telerik.com/kendo-ui/grid/index) | jquery.js | |
+| [Grid](https://demos.telerik.com/kendo-ui/grid/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.columnsorter.js | |
@@ -77,7 +77,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.progressbar.js | PDF export feature (optional) |
 | | kendo.grid.js | |
-| [ListView](http://demos.telerik.com/kendo-ui/listview/index) | jquery.js | |
+| [ListView](https://demos.telerik.com/kendo-ui/listview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | Editing feature (optional) |
@@ -92,7 +92,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.userevents.js | Selection feature (optional) |
 | | kendo.selectable.js | Selection feature (optional) |
 | | kendo.listview.js | |
-| [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index) | jquery.js | |
+| [PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.dom.js | |
 | | kendo.data.js | |
@@ -125,7 +125,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.fx.js | Mobile scroller feature (optional) |
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.pivotgrid.js | |
-| [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) | jquery.js | |
+| [Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.binder.js | |
@@ -153,7 +153,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.drawing.js | |
 | | kendo.pdf.js | |
 | | kendo.spreadsheet.js | |
-| [TreeList](http://demos.telerik.com/kendo-ui/treelist/index) | jquery.js | |
+| [TreeList](https://demos.telerik.com/kendo-ui/treelist/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.dom.js | |
 | | kendo.data.js | |

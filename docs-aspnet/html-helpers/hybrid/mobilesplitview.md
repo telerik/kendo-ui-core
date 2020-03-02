@@ -12,7 +12,7 @@ The hybrid Telerik UI SplitView HtmlHelper for ASP.NET MVC is a server-side wrap
 
 The SplitView represents a tablet-specific view that consists of two or more mobile Pane controls.
 
-* [Demo page for the SplitView](http://demos.telerik.com/kendo-ui/m/index#splitview/index)
+* [Demo page for the SplitView](https://demos.telerik.com/kendo-ui/m/index#splitview/index)
 
 ## Basic Configuration
 
@@ -189,4 +189,4 @@ You can reference a hybrid SplitView instance by using the [`jQuery.data()`](htt
 
 ## See Also
 
-* [Hybrid SplitViewBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
+* [Hybrid SplitViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)

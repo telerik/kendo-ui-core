@@ -9,10 +9,10 @@ position: 0
 
 # Upload Files from Grid Popup Editors
 
-To see the example, refer to the project on how to [upload files from a Grid popup editor](http://www.telerik.com/support/code-library/upload-in-grid-popup-editor).
+To see the example, refer to the project on how to [upload files from a Grid popup editor](https://www.telerik.com/support/code-library/upload-in-grid-popup-editor).
 
 ## See Also
 
 * [Basic Usage by the Upload HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/upload)
-* [UploadBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
+* [UploadBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/UploadBuilder)
 * [Upload Server-Side API](/api/upload)

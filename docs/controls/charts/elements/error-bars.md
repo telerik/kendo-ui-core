@@ -162,7 +162,7 @@ You can also set the difference of the point value as percentage by setting a st
 
 ### Setting Statistical Values
 
-The error bars support statistical calculations based on the series data. The supported types are the [standard error](http://en.wikipedia.org/wiki/Standard_error) and [population standard deviation](http://en.wikipedia.org/wiki/Standard_deviation). To specify that the standard error has to be used, set `"stderr"` as a value. To use standard deviation, set `"stddev"` with an optional number between parentheses appended at the end. The number will be multiplied by the calculated standard deviation value.
+The error bars support statistical calculations based on the series data. The supported types are the [standard error](https://en.wikipedia.org/wiki/Standard_error) and [population standard deviation](https://en.wikipedia.org/wiki/Standard_deviation). To specify that the standard error has to be used, set `"stderr"` as a value. To use standard deviation, set `"stddev"` with an optional number between parentheses appended at the end. The number will be multiplied by the calculated standard deviation value.
 
 The following example demonstrates how to use the standard error type.
 

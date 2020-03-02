@@ -68,4 +68,4 @@ Place a semi-transparent &lth;div&gth; element as an overlay over the entire HTM
 
 ## See Also
 
-* [Kendo UI Tooltip JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
+* [Kendo UI Tooltip JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)

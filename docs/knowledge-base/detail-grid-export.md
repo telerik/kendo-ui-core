@@ -188,7 +188,7 @@ The following example demonstrates how to export a detail Grid to Excel includin
   }
 
   function detailInit(e) {
-    // Initiallize a new jQuery Deferred http://api.jquery.com/jQuery.Deferred/
+    // Initiallize a new jQuery Deferred https://api.jquery.com/jQuery.Deferred/
     // var deferred = $.Deferred();
 
     // Get the index of the master row
@@ -322,7 +322,7 @@ The following example demonstrates how to export a detail Grid to Excel includin
   });
 
   function detailInit(e) {
-    // Initialize a new jQuery Deferred http://api.jquery.com/jQuery.Deferred/
+    // Initialize a new jQuery Deferred https://api.jquery.com/jQuery.Deferred/
     var deferred = $.Deferred();
 
     // Get the index of the master row.

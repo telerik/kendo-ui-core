@@ -8,9 +8,9 @@ slug: howto_renderexternalcontent_inshapes_diagram
 
 # Render External Content in Shapes
 
-The Diagram is rendered through the [Drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/overview).
+The Diagram is rendered through the [Drawing API](https://docs.telerik.com/kendo-ui/framework/drawing/overview).
 
-The shape visual templates allow you to override the rendering entirely as demonstrated in the [Basic Usage](http://demos.telerik.com/kendo-ui/diagram/index) demo. In addition to the manual drawing of the shapes, you can use the [HTML Drawing](/framework/drawing/dom-elements/overview) feature to convert existing document content into static drawings.
+The shape visual templates allow you to override the rendering entirely as demonstrated in the [Basic Usage](https://demos.telerik.com/kendo-ui/diagram/index) demo. In addition to the manual drawing of the shapes, you can use the [HTML Drawing](/framework/drawing/dom-elements/overview) feature to convert existing document content into static drawings.
 
 ```dojo
     <style>
@@ -113,7 +113,7 @@ The shape visual templates allow you to override the rendering entirely as demon
 
 ## See Also
 
-* [Basic Usage of the Diagram (Demo)](http://demos.telerik.com/kendo-ui/diagram/index)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})

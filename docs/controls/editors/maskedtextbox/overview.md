@@ -12,7 +12,7 @@ The MaskedTextBox enables a controlled text input that is based on a specific fo
 
 The widget enables you to define its value and mask value, and set custom mask rules, prompt characters, and culture names. Each mask can contain mask rules and mask literals. The mask literals are automatically entered for the user and cannot be removed. You can also use the MaskedTextBox predefined rules which specify the required or optional digit, letter, or character input.
 
-* [Demo page for the MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)
+* [Demo page for the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
 
 ## Initializing the MaskedTextBox
 

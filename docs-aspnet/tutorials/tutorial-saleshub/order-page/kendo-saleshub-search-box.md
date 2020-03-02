@@ -12,10 +12,10 @@ position: 3
 ![kendo-saleshub-search-box-screenshot](../images/kendo-saleshub-search-box-screenshot.png)
 
 The Search Box in SalesHub allows users to search for Orders based on their Order Number. It is
-implemented using a [Kendo AutoComplete](http://demos.telerik.com/kendo-ui/web/autocomplete/index.html)
+implemented using a [Kendo AutoComplete](https://demos.telerik.com/kendo-ui/web/autocomplete/index.html)
 that queries a remote service for search results based on what has been typed into the search
 box. The search results displayed in the dropdown are limited to the first 20 results, so
-the user can press enter and it will open a [Kendo Window](http://demos.telerik.com/kendo-ui/web/window/index.html)
+the user can press enter and it will open a [Kendo Window](https://demos.telerik.com/kendo-ui/web/window/index.html)
 that will display all of the search results.
 
 ![kendo-saleshub-search-results-screenshot](../images/kendo-saleshub-search-results-screenshot.png)
@@ -97,8 +97,8 @@ This event handler can be found in **Scripts/search.js**.
 ## Set Up the Search Results Window and Grid
 
 Since our AutoComplete only displays the first 20 results, we need a way of efficiently showing the user all of the results.
-To do this we create a [Kendo Window](http://demos.telerik.com/kendo-ui/web/window/index.html) that contains a
-[Kendo Grid](http://demos.telerik.com/kendo-ui/web/grid/index.html).
+To do this we create a [Kendo Window](https://demos.telerik.com/kendo-ui/web/window/index.html) that contains a
+[Kendo Grid](https://demos.telerik.com/kendo-ui/web/grid/index.html).
 
     @(Html.Kendo().Window()
         .Name("searchResultWindow")
@@ -155,7 +155,7 @@ the page first loads. We also specify the dimensions of the window.
         )
     </text>)
 
-Here we declare the contents of our window. Since we want a [Kendo Grid](http://demos.telerik.com/kendo-ui/web/grid/index.html)
+Here we declare the contents of our window. Since we want a [Kendo Grid](https://demos.telerik.com/kendo-ui/web/grid/index.html)
 inside of our window to display the search results, we use Razor's `@<text>` syntax to declare our grid. We also
 subscribe to the `change` event of the grid. The `change` event is fired when a user selects an item in the grid.
 This will be useful later when we need to redirect the user to the order that they select.
@@ -181,7 +181,7 @@ the enter key inside of the search box.
 To do this, we wait for the document to load, then we find the search textbox on the page using a jQuery selector. Once we find
 the textbox, we subscribe to its `keyup` event. Since we only want to open the window when the user presses the enter key, we
 check to see which key was pressed. If it was the enter key (`13`), we find the window that we create earlier and get the
-[Kendo Window](http://demos.telerik.com/kendo-ui/web/window/index.html) object off of it. Using the window object, we tell the window to
+[Kendo Window](https://demos.telerik.com/kendo-ui/web/window/index.html) object off of it. Using the window object, we tell the window to
 `center` itself and to `open`.
 
 Now that we've told the window to open, our event handler for the open event comes into play.

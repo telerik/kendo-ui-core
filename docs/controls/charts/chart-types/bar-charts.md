@@ -9,7 +9,7 @@ slug: bartypeofcharts_widget
 
 Bar Charts display data through horizontal or vertical bars whose lengths vary according to their value.
 
-* [Demo page for the Bar Chart](http://demos.telerik.com/kendo-ui/bar-charts/index)
+* [Demo page for the Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index)
 
 ## Getting Started
 
@@ -63,5 +63,5 @@ Setting the `type` property on the `series` object to `"bar"` renders horizontal
 
 ## See Also
 
-* [Basic Usage of the Bar Chart (Demo)](http://demos.telerik.com/kendo-ui/bar-charts/index)
+* [Basic Usage of the Bar Chart (Demo)](https://demos.telerik.com/kendo-ui/bar-charts/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

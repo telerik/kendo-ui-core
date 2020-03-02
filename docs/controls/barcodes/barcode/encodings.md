@@ -57,7 +57,7 @@ The following table lists the available symbologies and their specifications sup
            <td>optional (Mod. 43)</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Code_39#Full_ASCII_Code_39">Code39Extended</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_39#Full_ASCII_Code_39">Code39Extended</a></td>
            <td>ASCII (128 characters)</td>
            <td>variable</td>
            <td>optional (Mod. 43)</td>
@@ -69,37 +69,37 @@ The following table lists the available symbologies and their specifications sup
            <td>2 check digits</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Code_93">Code93Extended</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_93">Code93Extended</a></td>
            <td>ASCII(128 characters)</td>
            <td>variable</td>
            <td>2 check digits</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/International_Article_Number_(EAN)">EAN-13</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/International_Article_Number_(EAN)">EAN-13</a></td>
            <td>numeric [0..9]</td>
            <td>12 usable digits</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/EAN-8">EAN-8</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/EAN-8">EAN-8</a></td>
            <td>numeric [0..9]</td>
            <td>7 usable digits</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Universal_Product_Code">UPC-A</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Universal_Product_Code">UPC-A</a></td>
            <td>numeric [0..9]</td>
            <td>11 usable digits (first is always 0)</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Universal_Product_Code">UPC-E</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Universal_Product_Code">UPC-E</a></td>
            <td>numeric [0..9]</td>
            <td>6 usable digits (first is always 0)</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/POSTNET">POSTNET</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/POSTNET">POSTNET</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
@@ -112,7 +112,7 @@ The following table lists the available symbologies and their specifications sup
         </tr>
         <tr>
            <td><a href="https://en.wikipedia.org/wiki/Code_128">Code128</a></td>
-           <td>LATIN-1 (<a href="http://en.wikipedia.org/wiki/ISO/IEC_8859-1">ISO-8859-1</a>)</td>
+           <td>LATIN-1 (<a href="https://en.wikipedia.org/wiki/ISO/IEC_8859-1">ISO-8859-1</a>)</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
@@ -135,31 +135,31 @@ The following table lists the available symbologies and their specifications sup
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/GS1-128">GS1-128</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/GS1-128">GS1-128</a></td>
            <td>depending on Application Identifier</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod10</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod10</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod11</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod11</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod1010</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod1010</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod1110</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod1110</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
@@ -169,5 +169,5 @@ The following table lists the available symbologies and their specifications sup
 
 ## See Also
 
-* [Basic Usage of the Barcode (Demo)](http://demos.telerik.com/kendo-ui/barcode/index)
+* [Basic Usage of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/index)
 * [JavaScript API Reference of the Barcode](/api/javascript/dataviz/ui/barcode)

@@ -36,7 +36,7 @@ The features that the Cart Menu widget is intended to support are listed below:
 
 ### Boilerplate Custom Widget
 
-For more information on creating a custom widget, refer to Burke Holland's blog posts on [creating custom Kendo UI plugins](http://blogs.telerik.com/kendoui/posts/12-04-03/creating_custom_kendo_ui_plugins) and on [creating a DataSource-aware Kendo UI widget](http://blogs.telerik.com/kendoui/posts/12-04-10/creating_a_datasource_aware_kendo_ui_widget).
+For more information on creating a custom widget, refer to Burke Holland's blog posts on [creating custom Kendo UI plugins](https://www.telerik.com/blogs/creating-custom-kendo-ui-plugins) and on [creating a DataSource-aware Kendo UI widget](https://www.telerik.com/blogs/creating-a-datasource-aware-kendo-ui-widget).
 
 The JavaScript code for the Cart Menu widget is in the file `Scripts/App/kendo-cart-menu-widget.js`.
 
@@ -260,7 +260,7 @@ Each cart item displayed in the cart is displayed in a Kendo UI ListView widget 
 
 The second `<span>` element represents the **Remove** button, and has the following `css` classes:
 
-* The `k-icon` and `k-i-close` indicate that this element will be a Kendo UI icon and that the **Close** icon is to be displayed in this element. For more information on Kendo UI icons, refer to the [demo on styling and icons](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+* The `k-icon` and `k-i-close` indicate that this element will be a Kendo UI icon and that the **Close** icon is to be displayed in this element. For more information on Kendo UI icons, refer to the [demo on styling and icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 * The `k-delete-button` indicates that this is a **Delete** button. Within a ListView widget, elements of this special class automatically become a button that deletes the item from the bound DataSource.
 
 Note that no click event handler is defined for this element in the widget. The removal from the DataSource is wired up automatically by the ListView widget.

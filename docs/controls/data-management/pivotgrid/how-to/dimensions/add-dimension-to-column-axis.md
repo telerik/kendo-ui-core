@@ -8,7 +8,7 @@ slug: howto_add_dimension_column_axis_pivotgrid
 
 # Add Dimension to Column Axis
 
-The following example demonstrates how to use the [Kendo UI PivotGrid API](http://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid) to add a new dimension to the column axis of the widget.
+The following example demonstrates how to use the [Kendo UI PivotGrid API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pivotgrid) to add a new dimension to the column axis of the widget.
 
 ```dojo
 <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

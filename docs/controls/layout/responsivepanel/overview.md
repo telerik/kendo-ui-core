@@ -12,7 +12,7 @@ The Kendo UI ResponsivePanel allows you to hide part of a page content on small 
 
 > CSS3 media queries are supported in Internet Explorer 9 and later versions only.
 
-* [Demo page for the ResponsivePanel](http://demos.telerik.com/kendo-ui/responsive-panel/index)
+* [Demo page for the ResponsivePanel](https://demos.telerik.com/kendo-ui/responsive-panel/index)
 
 ## Basic Configuration
 

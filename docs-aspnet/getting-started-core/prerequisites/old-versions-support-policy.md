@@ -22,7 +22,7 @@ The support policy includes the way bug fixes, feature enhancements, and browser
 
 ## Bug Fixes
 
-Bugs in Telerik UI for ASP.NET Core helpers or the Kendo UI for jQuery widgets they wrap are fixed depending on the priority set by the product management and based on the [public Feedback portal](https://feedback.telerik.com/aspnet-core-ui), [support system](http://www.telerik.com/account/support-tickets/available-support-list.aspx), surveys, interviews, and other means at management discretion.
+Bugs in Telerik UI for ASP.NET Core helpers or the Kendo UI for jQuery widgets they wrap are fixed depending on the priority set by the product management and based on the [public Feedback portal](https://feedback.telerik.com/aspnet-core-ui), [support system](https://www.telerik.com/account/support-tickets/available-support-list.aspx), surveys, interviews, and other means at management discretion.
 
 Bug fixes are then implemented in the product by the Development team and later introduced in the first [official product release](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history). Internal (nightly) builds may also contain bug fixes before an official release is available and you can use them to keep developing your application. However, avoid promoting them to production.
 

@@ -12,7 +12,7 @@ The MediaPlayer enables you to create your own playlists and to enable or disabl
 
 ## Creating Playlists
 
-Players usually feature a different video based on user action. To implement your own **Playlist** structures, change the source of the MediaPlayer dynamically. For a runnable example, refer to the [demo on creating your own playlists in the MediaPlayer](http://demos.telerik.com/kendo-ui/mediaplayer/playlist) which uses the ListView to create a list that holds the videos right next to the MediaPlayer element.
+Players usually feature a different video based on user action. To implement your own **Playlist** structures, change the source of the MediaPlayer dynamically. For a runnable example, refer to the [demo on creating your own playlists in the MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/playlist) which uses the ListView to create a list that holds the videos right next to the MediaPlayer element.
 
 The following example demonstrates how to change the source of the MediaPlayer.
 

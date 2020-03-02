@@ -72,7 +72,7 @@ The following example demonstrates a Kendo UI PanelBar widget with `DataSource` 
         {
           text: "Item 1 (link)",
           cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-          url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
+          url: "https://www.telerik.com/kendo-ui/"                  // link URL if navigation is needed (optional)
         },
         {
           text: "<b>Item 2</b>",
@@ -148,7 +148,7 @@ The following example demonstrates a Kendo UI Menu widget with `DataSource` in A
             $scope.menuDataSource = [{
                 text: "Item 1 {{foo}}",
                 cssClass: "myClass",
-                url: "http://www.kendoui.com"
+                url: "https://www.telerik.com/kendo-ui"
             },
             {
                 text: "<b>Item 2</b>",

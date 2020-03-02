@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `window` tag.
 
@@ -70,7 +70,7 @@ You can subscribe to all [events exposed by Kendo UI Window](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Window instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
+You are able to reference an existing Window instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
 
 
 

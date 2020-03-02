@@ -78,5 +78,5 @@ How can I insert a Kendo UI DatePicker widget into the toolbar of the Kendo UI G
 
 ## See Also
 
-* [API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
-* [API Reference of the DatePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)

@@ -37,10 +37,10 @@ By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entiti
           )
       ```
 
-* If the Grid is `Ajax-bound`, use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview).
+* If the Grid is `Ajax-bound`, use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 {% else %}
 
-Use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](http://docs.telerik.com/kendo-ui/framework/templates/overview).
+Use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 
 {% endif %}
 
@@ -134,7 +134,7 @@ The following example demonstrates how to use a JavaScript function in the `Clie
 
 ## How can I use Kendo UI widgets inside Grid client column templates?
 
-The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound).
+The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound).
 
 The following example demonstrates how to add a Kendo UI Menu inside a Grid column template. Note that the Menu requires the Grid cells to allow overflowing, which is disabled by default.
 
@@ -176,7 +176,7 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
 
 ## How can I change the format of bound columns?
 
-Use the [`Format`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystemstring) method. The value should be a valid [`number`](http://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](http://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-date-formats) format.
+Use the [`Format`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystemstring) method. The value should be a valid [`number`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-number-formats) or [`date`](https://docs.telerik.com/kendo-ui/api/javascript/kendo#standard-date-formats) format.
 
 The following example demonstrates how to specify the format of a bound column.
 
@@ -184,7 +184,7 @@ The following example demonstrates how to specify the format of a bound column.
 
 ## How can I add Kendo UI icons to custom command buttons?
 
-A list of the available Kendo UI icons and their CSS classes is available in the [demo on styling and icons](http://demos.telerik.com/kendo-ui/styling/icons).
+A list of the available Kendo UI icons and their CSS classes is available in the [demo on styling and icons](https://demos.telerik.com/kendo-ui/styling/icons).
 
 The following example demonstrates how to add Kendo UI icons to custom command buttons.
 
@@ -233,7 +233,7 @@ The following example demonstrates how to send additional data in an Ajax-bound 
 
 ## How can I reload data in Ajax-bound Grids?
 
-Use the [`read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#read) method of the DataSource.
+Use the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#read) method of the DataSource.
 
 The following example demonstrates how to reload an Ajax-bound Grid.
 
@@ -298,7 +298,7 @@ The following example demonstrates how to avoid circular references.
 
 ## How can I handle errors in Ajax binding mode?
 
-Use the [`error`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#error) event of the DataSource. Apply the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
+Use the [`error`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#error) event of the DataSource. Apply the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
 
 The following example demonstrates how to handle errors in the Ajax binding mode.
 

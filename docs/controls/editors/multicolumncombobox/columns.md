@@ -58,6 +58,6 @@ The following example demonstrated how to set a specific width for the first col
 
 ## See Also
 
-* [Basic Usage of the MultiColumnComboBox (Demo)](http://demos.telerik.com/kendo-ui/multicolumncombobox/index)
+* [Basic Usage of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)
 * [Using the API of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/api)
 * [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)

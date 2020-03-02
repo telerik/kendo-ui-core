@@ -12,7 +12,7 @@ The Slider provides a rich input for selecting numeric values.
 
 The Slider can either present one handle and two opposing buttons for selecting a single numeric value, or two handlers for defining a range of numeric values. Unlike the HTML5 range input, the Slider enables the consistent experience across browsers and delivers rich API calls and event models. The Slider provides configuration options for customizing its behavior, for example, setting its minimum and maximum values, orientation, step, and tooltip format and placement.
 
-* [Demo page for the Slider](http://demos.telerik.com/kendo-ui/slider)
+* [Demo page for the Slider](https://demos.telerik.com/kendo-ui/slider)
 
 ## Initializing the Slider
 
@@ -44,7 +44,7 @@ The Slider provides [accessibility support]({% slug accessibility_kendoui_slider
 
 ## Referencing Existing Instances
 
-To reference an existing Slider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
+To reference an existing Slider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
 
     var slider = $("#slider").data("kendoSlider");
 

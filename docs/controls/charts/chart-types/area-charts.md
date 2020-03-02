@@ -9,7 +9,7 @@ slug: areacharts_widget
 
 Area Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
 
-* [Demo page for the Area Chart](http://demos.telerik.com/kendo-ui/area-charts/index)
+* [Demo page for the Area Chart](https://demos.telerik.com/kendo-ui/area-charts/index)
 
 ## Getting Started
 
@@ -74,5 +74,5 @@ The following image displays a smooth-line Area Chart.
 
 ## See Also
 
-* [Basic Usage of the Area Chart (Demo)](http://demos.telerik.com/kendo-ui/area-charts/index)
+* [Basic Usage of the Area Chart (Demo)](https://demos.telerik.com/kendo-ui/area-charts/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

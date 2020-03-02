@@ -17,7 +17,7 @@ A widget that is placed in the window or in a popup loses its connection to the 
 
 To work around this issue, use either of the following approaches:
 
-* Apply the [`appendTo`](http://docs.telerik.com/kendo-ui/api/javascript/ui/window/configuration/appendto) option to append the window to another HTML element which is part of the AngularJS application and scope.
+* Apply the [`appendTo`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/configuration/appendto) option to append the window to another HTML element which is part of the AngularJS application and scope.
 
     ```dojo
       <div id="example" ng-app="KendoDemos">

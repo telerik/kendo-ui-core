@@ -13,5 +13,5 @@ To see the example, refer to the project on how to [update AJAX forms with the v
 ## See Also
 
 * [Basic Usage of the Window HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mc/window)
-* [WindowBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
+* [WindowBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/WindowBuilder)
 * [Window Server-Side API](/api/window)

@@ -197,7 +197,7 @@ $.ajax({
 })
 ```
 
-The AJAX method calls URLs similar to `http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661`. The result is `callback([413]) //the result is JSONP`. The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
+The AJAX method calls URLs similar to `https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661`. The result is `callback([413]) //the result is JSONP`. The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 
 ### Mapping to Data Item Values
 

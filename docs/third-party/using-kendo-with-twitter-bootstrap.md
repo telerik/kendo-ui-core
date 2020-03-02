@@ -8,7 +8,7 @@ slug: twitterbootstrapintegration_integration_kendoui
 
 # Twitter Bootstrap
 
-The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) can be used seamlessly alongside [Twitter Bootstrap](http://getbootstrap.com/), as demonstrated in [this live demo](http://demos.telerik.com/kendo-ui/bootstrap) having its [source on GitHub](https://github.com/telerik/kendo-bootstrap-demo).
+The [Kendo UI widgets](https://demos.telerik.com/kendo-ui/) can be used seamlessly alongside [Twitter Bootstrap](http://getbootstrap.com/), as demonstrated in [this live demo](https://demos.telerik.com/kendo-ui/bootstrap) having its [source on GitHub](https://github.com/telerik/kendo-bootstrap-demo).
 
 ## Getting Started
 
@@ -19,12 +19,12 @@ To replicate the look and feel of Bootstrap in Kendo UI, follow the steps below:
 
 The following example demonstrates the necessary links to these stylesheets. Make sure you replace **VERSION** with the Kendo UI version that you want to use.
 
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.common-bootstrap.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/VERSION/styles/kendo.common-bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/VERSION/styles/kendo.bootstrap.min.css">
 
 While these files ensure that Kendo UI looks a lot like Bootstrap, it is not mandatory to use them. The default Kendo UI `common.css` and any other theme are going to style the widgets differently, but they will continue to function properly.
 
-Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder).
+Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder).
 
 ## Using Bootstrap Responsive Features
 
@@ -38,7 +38,7 @@ If you have customized the Bootstrap color scheme and need Kendo UI to match it,
 
 ### Option One
 
-1. Customize the Bootstrap theme of Kendo UI through the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html).
+1. Customize the Bootstrap theme of Kendo UI through the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder/web.html).
 2. Compile a custom version of the Kendo UI Bootstrap theme by using the Bootstrap Less file and an auxiliary file that Kendo UI provides, which maps Bootstrap Less variables to Kendo UI variables.
 
 This second option assumes that you are familiar with the process of [generating CSS files from Less files](http://lesscss.org/#getting-started).

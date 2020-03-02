@@ -9,7 +9,7 @@ component: mobile-tabstrip
 
 # TabStrip Overview
 
-The [Hybrid UI TabStrip widget](http://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index) is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons. The look of the Hybrid UI TabStrip changes depending on the user mobile device and operating system.
+The [Hybrid UI TabStrip widget](https://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index) is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons. The look of the Hybrid UI TabStrip changes depending on the user mobile device and operating system.
 
 ## Getting Started
 

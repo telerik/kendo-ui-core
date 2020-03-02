@@ -12,7 +12,7 @@ The Switch displays two exclusive choices.
 
 When initialized, the Switch renders the currently selected value. The Switch can be created from an `input` element of type `checkbox`. The default styling of the Switch widget for each of the [Sass-based Kendo UI for jQuery themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) can be modified to match the desired custom layout. For more information and examples, refer to the article on implementing a [custom layout for the Switch](https://github.com/telerik/kendo-themes/wiki/Change-the-Switch-Layout).
 
-* [Demo page for the Switch](http://demos.telerik.com/kendo-ui/switch)
+* [Demo page for the Switch](https://demos.telerik.com/kendo-ui/switch)
 
 ## Initializing the Switch
 
@@ -36,7 +36,7 @@ To initialize the Switch, use a jQuery selector.
 
 ## Referencing Existing Instances
 
-To reference an existing Switch instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
+To reference an existing Switch instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the API to control its behavior.
 
 ## See Also
 

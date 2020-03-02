@@ -62,4 +62,4 @@ To configure he half precision mode of the Rating, set the [`Precision`](https:/
 ## See Also
 
 * [Precision by the Rating HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/rating/precision)
-* [Server-Side API](http://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc/Rating)
+* [Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/rating)

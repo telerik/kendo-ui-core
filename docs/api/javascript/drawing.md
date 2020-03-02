@@ -51,7 +51,7 @@ Specifies how should the elements be aligned. The supported values are:
 ### drawDOM
 Converts the given DOM element to a [Drawing API](/framework/drawing/overview) scene.
 
-The operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 
 The promise will be resolved with the root [Group](/api/javascript/drawing/group) of the scene.
 
@@ -204,7 +204,7 @@ Exports a group of drawing elements as an image.
 
 The group will be positioned at [0, 0] in the exported image. It's dimensions will be used as default dimensions for the image.
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
@@ -316,7 +316,7 @@ Exports a group of drawing elements as a PDF file.
 
 The group will be positioned at [0, 0] in the exported file. It's dimensions will be used as default dimensions for the image.
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
@@ -357,7 +357,7 @@ Exports a group of drawing elements as an SVG document.
 
 The group will be positioned at [0, 0] in the exported file. It's dimensions will be used as default dimensions for the image.
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 

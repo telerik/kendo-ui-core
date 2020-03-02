@@ -36,8 +36,8 @@ The Editor uses BOM characters to correctly handle some ranges. If there is an i
 
 **Solution** To handle this behavior, refer to the following scenarios:
 
-1. If you observe the problem in the [online demos](http://demos.telerik.com/kendo-ui/editor), your browser might have enforced an encoding that is different from the UTF-8 one. This scenario is not supported.
-1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN (http://kendo.cdn.telerik.com/2014.2.716/js/kendo.all.min.js). If your page is now working correctly, your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the issue persists.
+1. If you observe the problem in the [online demos](https://demos.telerik.com/kendo-ui/editor), your browser might have enforced an encoding that is different from the UTF-8 one. This scenario is not supported.
+1. If the online demos behave properly, change the Kendo UI script references so they are loaded from the CDN (https://kendo.cdn.telerik.com/2014.2.716/js/kendo.all.min.js). If your page is now working correctly, your local script files are served with the wrong encoding, or are corrupted. Copy over the scripts (the files, not their content) from the official distribution, and see if the issue persists.
 1. If the problem is still visible on your page, and the scripts are loaded through the CDN, the page might be served with the wrong formatting. Verify that the page as well as its layout pages are saved and served in UTF-8.
 
 ## The popup Editor is read-only in Firefox
@@ -61,7 +61,7 @@ Image and table resizing inside `contenteditable` elements depends on the browse
 Another possible approach is to use the inline mode of the Editor, that is, to create the Editor from a `div` element.
 
 > * As of the R3 2016 release, resizing of table rows and columns has been implemented in the Editor. To resize a row or a column of the Editor, the user can drag the cell borders with the mouse.
-> * To resize an image or a table in versions prior to the R3 2016 release and in browsers that do not normally support it, such as Google Chrome 46, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
+> * To resize an image or a table in versions prior to the R3 2016 release and in browsers that do not normally support it, such as Google Chrome 46, implement a [custom Editor tool](https://demos.telerik.com/kendo-ui/editor/custom-tools).
 
 ## Back and forward browser buttons display raw HTML
 
